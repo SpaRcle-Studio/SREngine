@@ -12,17 +12,17 @@ in VS_OUT {
 uniform int bloom;
 uniform vec3 color;
 
+uniform int hasDiffuse;
+
 uniform sampler2D DiffuseMap;
 //uniform sampler2D NormalMap;
 //uniform sampler2D SpecularMap;
 
 void main(){
-    vec3 ambient = texture(DiffuseMap, fs_in.TexCoord).rgb * color;
-    //vec3 ambient = vec3(2.f, 2.f, 2.f) * color;
+    vec3 ambient = (hasDiffuse == 1 ? texture(DiffuseMap, fs_in.TexCoord).rgb : vec3(1.f,1.f,1.f)) * color;
     float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
 
     //vec3 result = vec3(abs(fs_in.FragPos.x), abs(fs_in.FragPos.y), abs(fs_in.FragPos.z)); //ambient;
-    //vec3 result = vec3(2.f, 2.f, 2.f) * color; //ambient;
     vec3 result = ambient; //ambient;
 
     if (bloom == 1) {

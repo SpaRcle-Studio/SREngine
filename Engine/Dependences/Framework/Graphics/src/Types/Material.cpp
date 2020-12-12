@@ -68,6 +68,11 @@ void Material::Use() noexcept {
     if (m_diffuse) {
         m_env->BindTexture(0, m_diffuse->GetID());
         m_mesh->m_shader->SetInt("DiffuseMap", 0);
+        m_mesh->m_shader->SetBool("hasDiffuse", true);
+    } else{
+        m_env->BindTexture(0, 0);
+        m_mesh->m_shader->SetInt("DiffuseMap", 0);
+        m_mesh->m_shader->SetBool("hasDiffuse", false);
     }
 }
 

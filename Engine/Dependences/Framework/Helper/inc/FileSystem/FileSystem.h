@@ -1,41 +1,32 @@
 //
-// Created by Kiper220 on 21.11.2020.
+// Created by Nikita on 16.11.2020.
 //
 
-#ifndef GAMEENGINE_FILESYSTEM_H
-#define GAMEENGINE_FILESYSTEM_H
+#ifndef HELPER_FILESYSTEM_H
+#define HELPER_FILESYSTEM_H
 
 #include <string>
 
-namespace Framework::Helper::FS {
+namespace Framework::Helper {
 class FileSystem {
 private:
-    /** \brief This constructor can call only in this class */
-    FileSystem() = delete;
+    FileSystem() {};
+    ~FileSystem() {};
+public:
+    static std::string GetDirToExeFromFullPath(std::string full_path);
 
-    /** \brief Copy protection \warning This constructor is delete */
-    FileSystem(const FileSystem &fileSystem) = delete;
+    static bool Delete(const char *file);
 
-    /** \brief Platform get application directory */
-    static std::string PlatformGetApplicationDirectory();
+    static bool FileExists(const char *file);
 
-        public:
-    /** \brief Initialize global filesystem variables */
-    static void Init();
+    static std::string GetPathToExe();
 
-    /** \brief Get string of application directory */
-    static const std::string &GetApplicationDirectory();
+    static char* Load(std::string path);
 
-    /** \brief Get information of file exists \return true if file exists, else false */
-    static bool FileExists(const std::string& filePath);
-
-    /** \brief Get information of directory exists \return true if file exists, else false */
-    static bool DirectoryExists(const std::string& filePath);
-
-        private:
-    inline static std::string g_applicationDirectory = "FUCK YOU. I EMPTY";
-
-};
+    static const char* FileMapView(std::string path);
+    static void UnmapFile(const char* str);
+    };
 }
 
-#endif //GAMEENGINE_FILESYSTEM_H
+
+#endif //HELPER_FILESYSTEM_H

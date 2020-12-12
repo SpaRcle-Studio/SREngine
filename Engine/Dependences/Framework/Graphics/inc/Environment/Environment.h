@@ -96,6 +96,7 @@ namespace Framework::Graphics {
         virtual bool CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers) = 0;
         virtual bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) = 0;
         virtual inline void BindFrameBuffer(unsigned int FBO) const noexcept = 0;
+        virtual inline void DeleteBuffer(unsigned int& FBO) = 0;
 
         // ============================= [ SHADER METHODS ] =============================
 
@@ -123,11 +124,13 @@ namespace Framework::Graphics {
         virtual bool FreeMesh(unsigned int VAO) noexcept = 0;
         virtual inline void DrawTriangles(unsigned int VAO, size_t count_vertices) noexcept = 0;
 
+        // ============================== [ TEXTURE METHODS ] ==============================
+
         virtual inline void BindTexture(unsigned int ID) const noexcept = 0;
         virtual inline void BindTexture(const unsigned char activeTexture, unsigned int ID) const noexcept = 0;
         virtual inline void SetActiveTexture(const unsigned char activeTexture) const noexcept = 0;
-        virtual inline void DeleteBuffer(unsigned int& FBO) = 0;
         virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) = 0;
+        virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) = 0;
     };
 }
 

@@ -6,6 +6,8 @@
 #include <Render/Camera.h>
 #include <iostream>
 
+#include <Lighting/Light.h>
+
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
     this->m_geometryShader->Use();
 

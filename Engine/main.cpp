@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <Debug.h>
-#include <FileSystem/OldFileSystem.h>
+#include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Types/Mesh.h>
 #include <Types/Texture.h>
@@ -24,9 +24,9 @@ using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 
 int main(){
-    Debug::Init(OldFileSystem::GetPathToExe(), true, Debug::Theme::Dark);
+    Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
-    ResourceManager::Init(OldFileSystem::GetPathToExe() + "/../../Resources");
+    ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
 
     ResourceManager::RegisterType("Mesh");
     ResourceManager::RegisterType("Texture");
@@ -76,7 +76,7 @@ int main(){
 
     Mesh* mesh  = Mesh::Load("cube.obj")[0];
     //Texture* texture = Texture::Load("default.png", false, TextureType::Diffuse, TextureFilter::NEAREST);
-    Texture* texture = Texture::Load("brickwall.jpg", false, TextureType::Diffuse, TextureFilter::NEAREST);
+    Texture* texture = Texture::Load("steel_cube.png", false, TextureType::Diffuse, TextureFilter::LINEAR);
     mesh->GetMaterial()->SetDiffuse(texture);
     mesh->GetMaterial()->SetBloom(true);
 
@@ -95,7 +95,8 @@ int main(){
                 //copy->OnRotate(Material::GetRandomColor() * 360.f);
                 //copy->OnScaled(Material::GetRandomColor()* 2.f);
                 render->RegisterMesh(copy);
-                copy->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
+                //copy->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
+                copy->GetMaterial()->SetColor({3,3,3});
             }
         }
     }

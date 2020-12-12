@@ -7,7 +7,7 @@
 #include <Types/Mesh.h>
 #include <Debug.h>
 #include <Environment/Vertex.h>
-#include <FileSystem/OldFileSystem.h>
+#include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/StringUtils.h>
 
@@ -31,7 +31,7 @@ namespace Framework::Graphics {
             m_temp_meshes.clear();
             Clear();
 
-            char* data = OldFileSystem::Load(m_file_name);
+            char* data = FileSystem::Load(m_file_name);
             if (!data) {
                 Debug::Error("ObjLoader::Load() : failed read file!");
                 m_mutex.unlock();

@@ -3,7 +3,7 @@
 //
 #define CRT_SECURE_NO_WARNINGS
 
-#include "../../inc/FileSystem/OldFileSystem.h"
+#include "../../inc/FileSystem/FileSystem.h"
 
 #include <cstdio>
 #include <Debug.h>
@@ -17,9 +17,9 @@
 
 using namespace Framework::Helper;
 
-bool Framework::Helper::OldFileSystem::Delete(const char *file) { return remove(file); }
+bool Framework::Helper::FileSystem::Delete(const char *file) { return remove(file); }
 
-bool Framework::Helper::OldFileSystem::FileExists(const char *file) {
+bool Framework::Helper::FileSystem::FileExists(const char *file) {
 #ifdef WIN32
     if (FILE* f = fopen(file, "r")) {
         fclose(f);
@@ -33,7 +33,7 @@ bool Framework::Helper::OldFileSystem::FileExists(const char *file) {
 #endif
 }
 
-std::string Framework::Helper::OldFileSystem::GetPathToExe() {
+std::string Framework::Helper::FileSystem::GetPathToExe() {
 #ifdef WIN32
     const std::size_t buf_len = 260;
     LPTSTR s = new TCHAR[buf_len];
@@ -45,7 +45,7 @@ std::string Framework::Helper::OldFileSystem::GetPathToExe() {
 #endif
 }
 
-std::string Framework::Helper::OldFileSystem::GetDirToExeFromFullPath(std::string full_path) {
+std::string Framework::Helper::FileSystem::GetDirToExeFromFullPath(std::string full_path) {
     size_t size = full_path.size();
 
     while (size > 0){
@@ -59,11 +59,11 @@ std::string Framework::Helper::OldFileSystem::GetDirToExeFromFullPath(std::strin
     return full_path;
 }
 
-void OldFileSystem::UnmapFile(const char *str) {
+void FileSystem::UnmapFile(const char *str) {
 
 }
 
-const char *OldFileSystem::FileMapView(std::string path) {
+const char *FileSystem::FileMapView(std::string path) {
     const char *data = nullptr;
 
 #ifdef WIN32
@@ -75,11 +75,11 @@ const char *OldFileSystem::FileMapView(std::string path) {
     return data;
 }
 
-char *OldFileSystem::Load(std::string path) {
+char *FileSystem::Load(std::string path) {
     //open file
     std::ifstream infile(path);
     if (!infile.is_open()) {
-        Debug::Error("OldFileSystem::Load() : failed open file!\n\tPath: "+path);
+        Debug::Error("FileSystem::Load() : failed open file!\n\tPath: "+path);
         return nullptr;
     }
 

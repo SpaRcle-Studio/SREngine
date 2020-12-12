@@ -3,7 +3,7 @@ set(HELPER_SRC
         #Debuger/Logger source code
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Debug.cpp
         #Resource Manager source code
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/FileSystem/OldFileSystem.cpp
+        ${FRAMEWORK_ROOT_DIR}/Helper/src/FileSystem/FileSystem.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/ResourceManager/ResourceManager.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/ResourceManager/IResource.cpp
         #Mathematical classes source code
@@ -22,17 +22,6 @@ set(HELPER_SRC
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Transform.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Scene.cpp
         )
-
-if(WIN32)
-    set(HELPER_SRC ${HELPER_SRC}
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/FileSystem/Windows/FileSystem.cpp)
-
-elseif(UNIX)
-    set(HELPER_SRC ${HELPER_SRC}
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/FileSystem/Linux/FileSystem.cpp)
-
-endif()
-
 
 set(HELPER_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Helper/inc

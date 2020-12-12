@@ -3,7 +3,7 @@
 //
 
 #include "../inc/Debug.h"
-#include "FileSystem/OldFileSystem.h"
+#include "FileSystem/FileSystem.h"
 #include <iostream>
 #include <ResourceManager/ResourceManager.h>
 
@@ -61,8 +61,8 @@ namespace Framework::Helper {
             InitColorTheme();
 
             g_log_path = log_path + "/log.txt";
-            if (OldFileSystem::FileExists(g_log_path.c_str()))
-                OldFileSystem::Delete(g_log_path.c_str());
+            if (FileSystem::FileExists(g_log_path.c_str()))
+                FileSystem::Delete(g_log_path.c_str());
             g_file.open(g_log_path);
 
             g_console = GetStdHandle(STD_OUTPUT_HANDLE);

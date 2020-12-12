@@ -425,3 +425,27 @@ unsigned int Framework::Graphics::OpenGL::CalculateTexture(
     return id;
 }
 
+unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) {
+    unsigned int cubemap = 0;
+
+    glGenTextures(1, &cubemap);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap);
+
+    for (unsigned char c = 0; c < 6; c++) {
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + c,
+                     0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, data[c]
+        );
+        delete data[c];
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+    return 0;
+}
+

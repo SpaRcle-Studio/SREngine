@@ -14,6 +14,7 @@
 namespace Framework::Graphics {
     using namespace Framework::Graphics::Types;
 
+    class Light;
     class Window;
     class Camera;
 
@@ -47,6 +48,8 @@ namespace Framework::Graphics {
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;
         Shader*                 m_skyboxShader                      = nullptr;
+
+        std::vector<Light*>     m_light                             = std::vector<Light*>();
     public:
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
         [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }

@@ -80,6 +80,7 @@ namespace Framework::Graphics {
 
         inline void SetBool(unsigned int ID, const std::string& name, bool v)       const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name.c_str()), 1, (int*)&v);
+            //glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)v);
         }
         inline void SetFloat(unsigned int ID, const std::string& name, float v)     const noexcept override {
             glUniform1fv(glGetUniformLocation(ID, name.c_str()), 1, &v);
@@ -211,6 +212,7 @@ namespace Framework::Graphics {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
         }
         unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) override;
+        unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) override;
     };
 }
 
