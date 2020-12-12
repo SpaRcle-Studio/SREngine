@@ -192,6 +192,8 @@ namespace Framework::Graphics {
             glBindVertexArray(0);
             return true;
         }
+        unsigned int CalculateSkybox() noexcept override;
+        void DrawSkybox(unsigned int VAO, unsigned int CubeMap) noexcept override;
 
         inline void DrawQuad(unsigned int VAO) noexcept override{
             glBindVertexArray(VAO);

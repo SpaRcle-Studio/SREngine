@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <Lighting/Light.h>
+#include <Types/Skybox.h>
 
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
     this->m_geometryShader->Use();
@@ -23,7 +24,15 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
 }
 
 bool Framework::Graphics::Render::DrawSkybox() noexcept {
-    return false;
+    if (m_skybox)
+    {
+        m_skyboxShader->Use();
+        m_currentCamera->UpdateShader(m_skyboxShader);
+        m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
+        m_skybox->Draw();
+    }
+
+    return true;
 }
 
 bool Framework::Graphics::Render::DrawTransparentGeometry() noexcept {
@@ -72,12 +81,12 @@ bool Framework::Graphics::Render::Init() {
             Debug::Error("Render::Init() : failed init geometry shader!");
             return false;
         }
-        /*
         if (!m_skyboxShader->Init()) {
             Debug::Error("Render::Init() : failed init skybox shader!");
             return false;
         }
-        if (!m_stencilShader->Init()) {
+
+        /*if (!m_stencilShader->Init()) {
             Debug::Error("Render::Init() : failed init stencil shader!");
             return false;
         }*/
@@ -212,4 +221,8 @@ Framework::Graphics::Render::Render() : m_env(Environment::Get()) {
     m_meshes.reserve(500 * 500);
     m_newMeshes.reserve(500);
     m_removeMeshes.reserve(500);
+}
+
+void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {
+    this->m_skybox = skybox;
 }

@@ -119,6 +119,8 @@ namespace Framework::Graphics {
 
         /** Vertex pos and texture cords */
         virtual inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept = 0;
+        virtual unsigned int CalculateSkybox() noexcept = 0;
+        virtual void DrawSkybox(unsigned int VAO, unsigned int CubeMap) noexcept = 0;
         virtual inline void DrawQuad(unsigned int VAO) noexcept = 0;
 
         virtual bool FreeMesh(unsigned int VAO) noexcept = 0;

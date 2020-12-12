@@ -37,7 +37,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
 
     for (unsigned char i = 0; i < 6; i++) {
         int w = 0, h = 0, comp = 0;
-        unsigned char* data = stbi_load(std::string(path + files[i] + "." + ext).c_str(), &w, &h, &comp, 4);
+        unsigned char* data = stbi_load(std::string(path + files[i] + "." + ext).c_str(), &w, &h, &comp, 3);
 
         if (!i) {
             W = w;
@@ -48,7 +48,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
         }
 
         if (!data) {
-            Helper::Debug::Error("Skybox::Load() : failed load \"" + name + "\" skybox!");
+            Helper::Debug::Error("Skybox::Load() : failed load \"" + name + "\" skybox!\n\tPath: "+path + files[i] + "." + ext);
             return nullptr;
         }
         sides[i] = data;
@@ -56,7 +56,50 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
 
     Skybox* skybox = new Skybox();
 
+    skybox->m_width = W;
+    skybox->m_height = H;
     skybox->m_data = sides;
 
     return skybox;
+}
+
+bool Framework::Graphics::Types::Skybox::Calculate() {
+    if (m_isCalculated) {
+        Helper::Debug::Error("Skybox::Calculate() : skybox already calculated!");
+        return false;
+    }
+
+    if (m_isDestroy) {
+        Helper::Debug::Error("Skybox::Calculate() : skybox is destroyed!");
+        return false;
+    }
+
+    m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data);
+
+    if (!m_cubeMap) {
+        Helper::Debug::Error("Skybox::Calculate() : failed calculate cube map!");
+        return false;
+    }
+
+    m_VAO = m_env->CalculateSkybox();
+
+    m_isCalculated = true;
+    return true;
+}
+
+void Framework::Graphics::Types::Skybox::AwaitDestroy() {
+
+}
+
+bool Framework::Graphics::Types::Skybox::Free() {
+    return false;
+}
+
+void Framework::Graphics::Types::Skybox::Draw() {
+    if (!m_isCalculated)
+        this->Calculate();
+
+    m_env->SetActiveTexture(0);
+
+    m_env->DrawSkybox(m_VAO, m_cubeMap);
 }

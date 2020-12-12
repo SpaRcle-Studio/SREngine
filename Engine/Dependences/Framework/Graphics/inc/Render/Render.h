@@ -11,6 +11,10 @@
 #include <mutex>
 #include <Environment/Environment.h>
 
+namespace Framework::Graphics::Types {
+    class Skybox;
+}
+
 namespace Framework::Graphics {
     using namespace Framework::Graphics::Types;
 
@@ -49,6 +53,8 @@ namespace Framework::Graphics {
         Shader*                 m_stencilShader                     = nullptr;
         Shader*                 m_skyboxShader                      = nullptr;
 
+        Skybox*                 m_skybox                            = nullptr;
+
         std::vector<Light*>     m_light                             = std::vector<Light*>();
     public:
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
@@ -59,6 +65,7 @@ namespace Framework::Graphics {
         inline bool IsRun() const noexcept { return m_isRun; }
         inline bool IsInit() const noexcept { return m_isInit; }
     public:
+        void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
     public:
         void RemoveMesh(Mesh* mesh);

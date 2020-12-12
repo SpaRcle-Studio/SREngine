@@ -51,6 +51,8 @@ namespace Framework::Graphics {
 
         glm::vec2 GetSize() { return m_cameraSize; }
         PostProcessing* GetPostProcessing() { return m_postProcessing; }
+
+        inline glm::vec3 GetGLPosition() const noexcept { return this->m_pos; }
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */

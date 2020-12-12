@@ -16,6 +16,7 @@
 #include <EntityComponentSystem/Scene.h>
 #include <EntityComponentSystem/GameObject.h>
 #include <EntityComponentSystem/Transform.h>
+#include <Types/Skybox.h>
 
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
@@ -74,6 +75,9 @@ int main(){
         Debug::System("All tests successfully completed!");
     }
 
+    Skybox* skybox = Skybox::Load("Sea", "jpg");
+    render->SetSkybox(skybox);
+
     Mesh* mesh  = Mesh::Load("cube.obj")[0];
     //Texture* texture = Texture::Load("default.png", false, TextureType::Diffuse, TextureFilter::NEAREST);
     Texture* texture = Texture::Load("steel_cube.png", false, TextureType::Diffuse, TextureFilter::LINEAR);
@@ -95,8 +99,8 @@ int main(){
                 //copy->OnRotate(Material::GetRandomColor() * 360.f);
                 //copy->OnScaled(Material::GetRandomColor()* 2.f);
                 render->RegisterMesh(copy);
-                //copy->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
-                copy->GetMaterial()->SetColor({3,3,3});
+                copy->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
+                //copy->GetMaterial()->SetColor({3,3,3});
             }
         }
     }
