@@ -11,6 +11,7 @@
 #include <functional>
 #include <glm/glm.hpp>
 #include <Environment/Vertex.h>
+#include <Environment/TextureFilters.h>
 
 namespace Framework::Graphics {
     struct Vertex;
@@ -124,7 +125,9 @@ namespace Framework::Graphics {
 
         virtual inline void BindTexture(unsigned int ID) const noexcept = 0;
         virtual inline void BindTexture(const unsigned char activeTexture, unsigned int ID) const noexcept = 0;
+        virtual inline void SetActiveTexture(const unsigned char activeTexture) const noexcept = 0;
         virtual inline void DeleteBuffer(unsigned int& FBO) = 0;
+        virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) = 0;
     };
 }
 

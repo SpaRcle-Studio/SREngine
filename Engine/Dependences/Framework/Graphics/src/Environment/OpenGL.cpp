@@ -354,3 +354,74 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBufferObject(
     return true;
 }
 
+unsigned int Framework::Graphics::OpenGL::CalculateTexture(
+        unsigned char *data, int format, unsigned int w, unsigned int h,
+        Framework::Graphics::TextureFilter filter, bool alpha
+) {
+    //glActiveTexture(GL_TEXTURE0);
+
+    unsigned int id;
+    glGenTextures(1, &id);
+
+    GLuint gl_filter = 0;
+    switch(filter){
+        case TextureFilter::NEAREST:
+            gl_filter = GL_NEAREST; break;
+        case TextureFilter::LINEAR:
+            gl_filter = GL_LINEAR; break;
+        case TextureFilter::NEAREST_MIPMAP_NEAREST:
+            gl_filter = GL_NEAREST_MIPMAP_NEAREST; break;
+        case TextureFilter::LINEAR_MIPMAP_NEAREST:
+            gl_filter = GL_LINEAR_MIPMAP_NEAREST; break;
+        case TextureFilter::NEAREST_MIPMAP_LINEAR:
+            gl_filter = GL_NEAREST_MIPMAP_LINEAR; break;
+        case TextureFilter::LINEAR_MIPMAP_LINEAR:
+            gl_filter = GL_LINEAR_MIPMAP_LINEAR; break;
+    }
+
+    Helper::Debug::Log("OpenGL::CalculateTexture() : calculating (ID "+std::to_string(id)+") texture...");
+
+    glBindTexture(GL_TEXTURE_2D, id);
+
+    GLuint compress = format == 4 ? GL_COMPRESSED_RGBA_S3TC_DXT5_EXT : GL_COMPRESSED_RGB_S3TC_DXT1_EXT; //GL_RGBA16F
+    glTexImage2D(GL_TEXTURE_2D, 0, compress, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gl_filter);
+
+    GLuint texParam = GL_CLAMP_TO_BORDER; // GL_REPEAT, GL_CLAMP_TO_BORDER
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParam); // we clamp to the edge as the blur filter would otherwise sample repeated texture values!
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParam);
+
+    /*
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParam);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParam);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gl_filter);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter);
+
+    //gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, m_image->m_width, m_image->m_height, m_image->m_format,
+    //	GL_UNSIGNED_BYTE, (unsigned int*)m_image->m_data);
+
+    if(!alpha)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_S3TC_DXT1_EXT, w, h,
+                     0, format, GL_UNSIGNED_BYTE, (unsigned int*)data);
+    else
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, w, h,
+                     0, format, GL_UNSIGNED_BYTE, (unsigned int*)data);
+
+
+       // GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT - black-white
+       // GL_COMPRESSED_RGB_S3TC_DXT1_EXT
+       // GL_COMPRESSED_RGBA_S3TC_DXT1_EXT
+       // GL_COMPRESSED_RGBA_S3TC_DXT3_EXT
+       // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // What it need?
+    */
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    return id;
+}
+

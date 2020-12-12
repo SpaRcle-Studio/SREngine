@@ -25,6 +25,7 @@ namespace Framework::Graphics::Types {
     class Material;
 
     class Mesh : public IResource, public Component {
+        friend class Material;
     public:
         /** \brief Default mesh constructor */
         Mesh(Shader* shader, Material* material, std::string name = "Unnamed");
@@ -46,6 +47,10 @@ namespace Framework::Graphics::Types {
             m_rotation = newValue;
             ReCalcModel();
         }
+        void OnScaled(glm::vec3 newValue)noexcept override{
+            m_scale = newValue;
+            ReCalcModel();
+        }
     public:
         /** \brief Free mesh pointer
          * \return bool */
@@ -63,11 +68,11 @@ namespace Framework::Graphics::Types {
 
         std::string                 m_geometry_name         = "Unnamed";
         Shader*                     m_shader                = nullptr;
-        Render*                     m_render                = nullptr;
+        //Render*                     m_render                = nullptr;
         Material*                   m_material              = nullptr;
 
         /** \brief Vertices OpenGL-context calculated */
-        bool                        m_isCalculated          = false;
+        volatile bool               m_isCalculated          = false;
 
         unsigned int                m_VAO                   = 0;
 
@@ -82,6 +87,13 @@ namespace Framework::Graphics::Types {
         bool Calculate();
     protected:
         void OnDestroyGameObject() noexcept override;
+    public:
+        inline void WaitCalculate() {
+            ret:
+            if (m_isCalculated)
+                return;
+            goto ret;
+        }
     public:
         glm::vec3				    m_position			= glm::vec3();
         glm::vec3					m_rotation			= glm::vec3();

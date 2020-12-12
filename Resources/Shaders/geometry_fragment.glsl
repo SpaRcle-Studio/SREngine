@@ -12,16 +12,18 @@ in VS_OUT {
 uniform int bloom;
 uniform vec3 color;
 
-//uniform sampler2D DiffuseMap;
+uniform sampler2D DiffuseMap;
 //uniform sampler2D NormalMap;
 //uniform sampler2D SpecularMap;
 
 void main(){
-    //vec3 ambient = texture(DiffuseMap, fs_in.TexCoord).rgb;
-    float alpha = 1.0; //texture(DiffuseMap, fs_in.TexCoord).a;
+    vec3 ambient = texture(DiffuseMap, fs_in.TexCoord).rgb * color;
+    //vec3 ambient = vec3(2.f, 2.f, 2.f) * color;
+    float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
 
     //vec3 result = vec3(abs(fs_in.FragPos.x), abs(fs_in.FragPos.y), abs(fs_in.FragPos.z)); //ambient;
-    vec3 result = vec3(2.f, 2.f, 2.f) * color; //ambient;
+    //vec3 result = vec3(2.f, 2.f, 2.f) * color; //ambient;
+    vec3 result = ambient; //ambient;
 
     if (bloom == 1) {
         float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));

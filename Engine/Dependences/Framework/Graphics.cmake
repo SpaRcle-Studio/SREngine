@@ -16,6 +16,11 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/Camera.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/PostProcessing.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/Light.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/DirectionalLight.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/Spotlight.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/PointLight.cpp
+
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Window/Window.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp

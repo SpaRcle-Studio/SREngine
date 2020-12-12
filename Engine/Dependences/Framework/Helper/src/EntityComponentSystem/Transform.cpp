@@ -68,13 +68,19 @@ void Framework::Helper::Transform::UpdateChild(Framework::Helper::Transform *par
 }
 
 glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
-    float dx = cos(m_rotation.x * M_PI / 45.f / 4.f);
-    float dy = cos(m_rotation.y * M_PI / 45.f / 4.f);
-    float dz = 0;
+    //float dx = cos(m_rotation.x * M_PI / 45.f / 4.f);
+    //float dy = cos(m_rotation.y * M_PI / 45.f / 4.f);
+    //float dz = 0;
+
+    glm::vec3 rad = {
+            m_rotation.x * M_PI / 45.f / 4.f,
+            m_rotation.y * M_PI / 45.f / 4.f,
+            m_rotation.z * M_PI / 45.f / 4.f
+    };
 
     return glm::vec3(
-            dir.x * dy,
-            dir.y * dx,
-            dir.z * dy
+            dir.x * cos(rad.y)                  - sin(rad.y) * dir.z * cos(rad.x),
+            dir.y * cos(rad.x)                  + sin(rad.x) * dir.z, // + sin(rad.x) * dir.y
+            dir.z * cos(rad.y) * cos(rad.x)     + sin(rad.y) * dir.x
             );
 }

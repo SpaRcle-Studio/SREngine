@@ -86,6 +86,7 @@ namespace Framework::Graphics {
         }
         inline void SetInt(unsigned int ID, const std::string& name, int v)         const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name.c_str()), 1, &v);
+            //glUniform1i(glGetUniformLocation(ID, name.c_str()), v);
         }
         inline void SetMat4(unsigned int ID, const std::string& name, glm::mat4 v)  const noexcept override {
             glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(v));
@@ -206,6 +207,10 @@ namespace Framework::Graphics {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
             glBindTexture(GL_TEXTURE_2D, ID);
         }
+        inline void SetActiveTexture(const unsigned char activeTexture) const noexcept override {
+            glActiveTexture(GL_TEXTURE0 + activeTexture);
+        }
+        unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) override;
     };
 }
 

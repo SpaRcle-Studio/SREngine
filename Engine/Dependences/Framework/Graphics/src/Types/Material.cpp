@@ -5,10 +5,14 @@
 #include <Debug.h>
 #include "Types/Material.h"
 #include <Types/Mesh.h>
+#include <Render/Shader.h>
 
 using namespace Framework::Graphics::Types;
 
 Material::Material(Texture *diffuse, Texture *normal, Texture *specular, Texture *glossiness) {
+    if (!m_env)
+        m_env = Environment::Get();
+
     if (diffuse){
         diffuse->AddUsePoint();
         this->m_diffuse = diffuse;
@@ -33,22 +37,37 @@ Material::Material(Texture *diffuse, Texture *normal, Texture *specular, Texture
 Material::~Material() {
     if (m_diffuse){
         m_diffuse->RemoveUsePoint();
+        if (!m_diffuse->GetCountUses() && m_diffuse->EnableAutoRemove())
+            m_diffuse->Destroy();
         m_diffuse = nullptr;
     }
 
     if (m_normal){
         m_normal->RemoveUsePoint();
+        if (!m_normal->GetCountUses() && m_normal->EnableAutoRemove())
+            m_normal->Destroy();
         m_normal = nullptr;
     }
 
     if (m_specular){
         m_specular->RemoveUsePoint();
+        if (!m_specular->GetCountUses() && m_specular->EnableAutoRemove())
+            m_specular->Destroy();
         m_specular = nullptr;
     }
 
     if (m_glossiness){
         m_glossiness->RemoveUsePoint();
+        if (!m_glossiness->GetCountUses() && m_glossiness->EnableAutoRemove())
+            m_glossiness->Destroy();
         m_glossiness = nullptr;
+    }
+}
+
+void Material::Use() noexcept {
+    if (m_diffuse) {
+        m_env->BindTexture(0, m_diffuse->GetID());
+        m_mesh->m_shader->SetInt("DiffuseMap", 0);
     }
 }
 
@@ -91,6 +110,7 @@ void Material::SetGlossiness(Texture *tex) {
     m_glossiness = tex;
 }
 
+/*
 Material*  Material::Copy() {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Material::Copy() : copy material...");
@@ -102,7 +122,7 @@ Material*  Material::Copy() {
     //copy->mesh - not copy!!!!
 
     return copy;
-}
+}*/
 
 bool Material::SetTransparent(bool value) {
     if (m_mesh->IsCalculated()) {
@@ -122,3 +142,4 @@ glm::vec3 Material::GetRandomColor() {
             (float)RandomNumber(0, 255) / 255.f
     };
 }
+

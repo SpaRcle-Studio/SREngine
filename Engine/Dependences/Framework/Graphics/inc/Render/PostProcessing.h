@@ -34,7 +34,7 @@ namespace Framework::Graphics {
         float                     m_exposure                    = 1.f;
         glm::vec3		          m_color_correction		    = { 1, 1, 1 };
         float                     m_bloomIntensity              = 1.f;
-        unsigned int              m_bloomAmount                 = 10;
+        volatile unsigned int     m_bloomAmount                 = 10;
     private:
         bool                      m_debugDisplayBloomMask       = false;
     private:
@@ -52,7 +52,7 @@ namespace Framework::Graphics {
         //unsigned int            m_BlurFBO                     = 0;
         //unsigned int            m_BlurColorBuffer             = 0;
 
-        bool                      m_bloom                       = true;
+        volatile bool             m_bloom                       = true;
 
         unsigned int              m_RBODepth                    = 0;
         unsigned int              m_HDRFrameBufferObject        = 0;

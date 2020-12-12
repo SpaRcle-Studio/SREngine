@@ -18,21 +18,25 @@ namespace Framework::Graphics::Types {
         Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
         ~Material();
     private:
-        bool        m_transparent  = false;
-        bool        m_bloom        = false;
+        inline static Environment*      m_env          = nullptr;
 
-        glm::vec3   m_color        = glm::vec3(1,1,1);
+        bool                            m_transparent  = false;
+        volatile bool                   m_bloom        = false;
 
-        Mesh*       m_mesh         = nullptr;
+        glm::vec3                       m_color        = glm::vec3(1,1,1);
 
-        Texture*    m_diffuse      = nullptr;
-        Texture*    m_normal       = nullptr;
-        Texture*    m_specular     = nullptr;
-        Texture*    m_glossiness   = nullptr;
+        Mesh*                           m_mesh         = nullptr;
+
+        Texture*                        m_diffuse      = nullptr;
+        Texture*                        m_normal       = nullptr;
+        Texture*                        m_specular     = nullptr;
+        Texture*                        m_glossiness   = nullptr;
     private:
         [[nodiscard]] static inline int RandomNumber(int a, int b) noexcept { return rand()%(b-a+1) + a; }
     public:
         static glm::vec3 GetRandomColor();
+    public:
+        void Use() noexcept;
     public:
         [[nodiscard]] inline bool IsTransparent() const noexcept { return m_transparent; };
         bool SetTransparent(bool value);
@@ -45,8 +49,6 @@ namespace Framework::Graphics::Types {
         void SetNormal(Texture* tex);
         void SetSpecular(Texture* tex);
         void SetGlossiness(Texture* tex);
-
-        Material* Copy();
     };
 }
 

@@ -74,16 +74,28 @@ int main(){
         Debug::System("All tests successfully completed!");
     }
 
-    auto meshes = Mesh::Load("cube.obj");
-    for (int x = -1; x < 100; x++) {
-        std::cout << x << std::endl;
+    Mesh* mesh  = Mesh::Load("cube.obj")[0];
+    //Texture* texture = Texture::Load("default.png", false, TextureType::Diffuse, TextureFilter::NEAREST);
+    Texture* texture = Texture::Load("brickwall.jpg", false, TextureType::Diffuse, TextureFilter::NEAREST);
+    mesh->GetMaterial()->SetDiffuse(texture);
+    mesh->GetMaterial()->SetBloom(true);
+
+    //* mesh2 = mesh->Copy();
+    //mesh2->GetMaterial()->SetBloom(true);
+    //mesh2->OnMove({5, 0, 0});
+
+    //render->RegisterMesh(mesh);
+    //render->RegisterMesh(mesh2);
+
+    for (int x = -1; x < 10; x++) {
         for (int y = -1; y < 10; y++) {
             for (int z = -1; z < 10; z++) {
-                Mesh* copy = meshes[0]->Copy();
-                copy->OnMove({5 * x, 5 * y, 5 * z});
+                Mesh* copy = mesh->Copy();
+                copy->OnMove(glm::vec3(5 * x, 5 * y, 5 * z));
+                //copy->OnRotate(Material::GetRandomColor() * 360.f);
+                //copy->OnScaled(Material::GetRandomColor()* 2.f);
                 render->RegisterMesh(copy);
-                copy->GetMaterial()->SetBloom(true);
-                copy->GetMaterial()->SetColor(Material::GetRandomColor());
+                copy->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
             }
         }
     }

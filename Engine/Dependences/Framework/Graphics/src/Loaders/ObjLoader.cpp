@@ -22,7 +22,7 @@ namespace Framework::Graphics {
 
         m_mutex.lock();
 
-        m_file_name = ResourceManager::GetResourcesFolder() + "/Models/"+path+".obj";
+        m_file_name = path; //ResourceManager::GetResourcesFolder() + "/Models/"+path+".obj";
 
         if (Debug::GetLevel() >= Debug::Level::High)
             Debug::Log("ObjLoader::Load() : loading \""+path+"\" obj model...");

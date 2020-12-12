@@ -22,6 +22,7 @@
 using namespace Framework::Graphics::Types;
 
 inline static std::map<unsigned int, unsigned long> VAO_usages = std::map<unsigned int, unsigned long>();
+inline static std::map<std::string, unsigned int> VAO_names = std::map<std::string, unsigned int>();
 
 Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::string name)
     : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh")
@@ -36,6 +37,8 @@ Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::
 
     if (!this->m_material)
         Debug::Warn("Mesh::Constructor() : material is nullptr! \n\tMesh name: "+m_geometry_name);
+
+    this->ReCalcModel();
 }
 
 Framework::Graphics::Types::Mesh::~Mesh() {
@@ -59,6 +62,8 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
 }
 
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string path) {
+    path = ResourceManager::GetResourcesFolder() + "/Models/"+path;
+
 #ifdef WIN32
     path = StringUtils::MakePath(path, true);
 #else
@@ -86,9 +91,9 @@ ret:
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
     if (ext == "obj"){
-        std::string file = path;
-        file.resize(path.size() - 4);
-        meshes = ObjLoader::Load(file);
+        //std::string file = path;
+        //file.resize(path.size() - 4);
+        meshes = ObjLoader::Load(path);
     } else if (ext == "fbx"){
         meshes = std::vector<Mesh *>();
     } else {
@@ -124,6 +129,25 @@ void Mesh::ReCalcModel() {
 bool Mesh::Calculate() {
     m_mutex.lock();
 
+    {
+        /*
+            Check exists pre-calculated meshes
+         */
+        unsigned int exists = VAO_names[m_resource_id];
+        if (exists) {
+            if (Debug::GetLevel() >= Debug::Level::High)
+                Debug::Log("Mesh::Calculate() : copy VAO...");
+
+            m_VAO = exists;
+
+            VAO_usages[m_VAO]++;
+            m_isCalculated = true;
+            m_mutex.unlock();
+
+            return true;
+        }
+    }
+
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Mesh::Calculate() : calculating \""+ m_geometry_name +"\"...");
 
@@ -135,6 +159,7 @@ bool Mesh::Calculate() {
     }
 
     VAO_usages[m_VAO]++;
+    VAO_names[m_resource_id] = m_VAO;
 
     m_isCalculated = true;
 
@@ -159,7 +184,22 @@ Mesh *Mesh::Copy() {
 
     m_mutex.lock();
 
-    Mesh* copy = new Mesh(this->m_shader, m_material->Copy(), this->m_geometry_name);
+    Material* mat = new Material(
+            m_material->m_diffuse,
+            m_material->m_normal,
+            m_material->m_specular,
+            m_material->m_glossiness
+        );
+
+    Mesh* copy = new Mesh(this->m_shader, mat, this->m_geometry_name);
+
+    {
+        mat->m_mesh         = copy;
+        mat->m_bloom        = m_material->m_bloom;
+        mat->m_transparent  = m_material->m_transparent;
+        mat->m_color        = m_material->m_color;
+    }
+
     copy->m_countVertices = m_countVertices;
     copy->m_position = m_position;
     copy->m_rotation = m_rotation;
@@ -171,8 +211,11 @@ Mesh *Mesh::Copy() {
         copy->m_vertices = m_vertices;
     }
     copy->m_isCalculated = m_isCalculated;
-    copy->m_render = m_render;
+    copy->m_autoRemove = m_autoRemove;
+    //copy->m_render = m_render;
     copy->m_modelMat = m_modelMat;
+
+    copy->m_resource_id = m_resource_id; // Fuck, I remember this
 
     m_mutex.unlock();
 
@@ -188,6 +231,8 @@ bool Mesh::Draw() {
     this->m_shader->SetMat4("modelMat", m_modelMat);
     this->m_shader->SetVec3("color", m_material->m_color);
     this->m_shader->SetInt("bloom", (int)m_material->m_bloom);
+
+    this->m_material->Use();
 
     this->m_env->DrawTriangles(m_VAO, m_countVertices);
 

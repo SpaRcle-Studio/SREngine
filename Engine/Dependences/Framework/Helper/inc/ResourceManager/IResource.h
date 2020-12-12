@@ -21,6 +21,8 @@ namespace Framework::Helper {
         /* free resource pointer */
         virtual bool Free() = 0;
     protected:
+        bool m_autoRemove = false;
+
         volatile bool m_isDestroy = false;
         /* Count uses current resource now */
         volatile unsigned long m_countUses = 0;
@@ -29,6 +31,8 @@ namespace Framework::Helper {
         const char *m_resource_name = "Unnamed";
         std::string m_resource_id = "NoID";
 
+    public:
+        inline bool EnableAutoRemove() const noexcept { return this->m_autoRemove; }
     public:
         /* Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy() = 0;
