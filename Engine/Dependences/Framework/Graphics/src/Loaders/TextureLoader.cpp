@@ -20,6 +20,7 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
     path = StringUtils::MakePath(path, false);
 #endif
 
+    if (Debug::GetLevel() >=Debug::Level::Medium)
     Debug::Log("TextureLoader::Load() : load \""+path+"\" texture...");
 
     Texture* texture = nullptr;

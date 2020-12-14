@@ -43,8 +43,8 @@ namespace Framework::Helper {
             Log, Info, Debug, Graph, Shader, Script, System, Warn, Error
         };
     private:
-        Debug() {};
-        ~Debug() {};
+        Debug() = delete;
+        ~Debug() = delete;
         Debug(Debug &) = delete;
     private:
         inline static Theme             g_theme                     = Theme::Light;

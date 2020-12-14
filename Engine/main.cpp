@@ -18,6 +18,8 @@
 #include <EntityComponentSystem/Transform.h>
 #include <Types/Skybox.h>
 
+#include "UnitTests/UnitTests.h"
+
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
 using namespace Framework::Helper::Types;
@@ -26,7 +28,7 @@ using namespace Framework::Graphics::Types;
 
 int main(){
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Full);
+    Debug::SetLevel(Debug::Level::Low);
     ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
 
     ResourceManager::RegisterType("Mesh");
@@ -72,6 +74,12 @@ int main(){
     if (window->Run()) {
         Debug::System("All systems successfully run!");
 
+        if (!TestProgram(window, render, scene)) {
+            Debug::Error("Failed testing program! Exit...");
+
+            return Debug::Stop();
+        }
+
         Debug::System("All tests successfully completed!");
     }
 
@@ -84,7 +92,6 @@ int main(){
 
     mesh->GetMaterial()->SetDiffuse(texture);
     mesh->GetMaterial()->SetBloom(true);
-    mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
 
     //GameObject* cube = scene->Instance("Cube");
     //{
@@ -96,20 +103,28 @@ int main(){
 
     //std::cout << cube->Save().dump(4) << std::endl;
 
-    /*
     for (int x = -1; x < 10; x++) {
         for (int y = -1; y < 10; y++) {
             for (int z = -1; z < 10; z++) {
-                Mesh* copy = mesh->Copy();
+                Mesh *copy = nullptr;
+                if (x == -1 && y == -1 && z == -1)
+                    copy = mesh;
+                else
+                    copy = mesh->Copy();
+
                 copy->OnMove(glm::vec3(5 * x, 5 * y, 5 * z));
                 //copy->OnRotate(Material::GetRandomColor() * 360.f);
                 //copy->OnScaled(Material::GetRandomColor()* 2.f);
-                render->RegisterMesh(copy);
                 copy->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
-                //copy->GetMaterial()->SetColor({3,3,3});
+
+                render->RegisterMesh(copy);
+
+                GameObject *cube = scene->Instance(
+                        "Cube " + std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(z));
+                cube->AddComponent(copy);
             }
         }
-    }*/
+    }
 
     while(!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
         //static float f = 0;
@@ -167,28 +182,46 @@ int main(){
 
 
         if (GetKeyDown(KeyCode::O)) {
-            if (mesh) {
-                mesh->Destroy();
-                mesh = nullptr;
-            }
+            //if (mesh) { mesh->Destroy();mesh = nullptr;}
         }
 
-        if (GetKey(KeyCode::L) && mesh) {
+        if (GetKey(KeyCode::L)) {
             //std::vector<Mesh *> meshes1 = Mesh::Load("cube.obj");
             //for (auto a : meshes1)
             //    a->Destroy();
 
-            GameObject* cube = scene->Instance("Cube");
-            {
-                Mesh* copy = mesh->Copy();
+            /*if (mesh) {
+                GameObject *cube = scene->Instance("Cube");
+                {
+                    Mesh *copy = mesh->Copy();
 
-                render->RegisterMesh(copy);
-                cube->AddComponent(copy);
-            }
-            scene->Destroy(cube);
+                    render->RegisterMesh(copy);
+                    cube->AddComponent(copy);
+                }
+                scene->Destroy(cube);
+            }*/
         }
 
-        if (GetKeyDown(KeyCode::T)) {
+        if (GetKey(KeyCode::T)) {
+            /*
+            Mesh *mesh = Mesh::Load("cube.obj")[0];
+            Texture *texture = Texture::Load("steel_cube.png", true, TextureType::Diffuse, TextureFilter::NEAREST);
+            render->RegisterTexture(texture);
+
+            mesh->GetMaterial()->SetDiffuse(texture);
+            mesh->GetMaterial()->SetBloom(true);
+            mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
+
+            GameObject* cube = scene->Instance("Cube");
+            {
+                render->RegisterMesh(mesh);
+                cube->AddComponent(mesh);
+            }
+
+            scene->Destroy(cube);
+            */
+
+            /*
             auto time = clock();
 
             std::vector<Mesh *> copy = Mesh::Load("monkey.obj");
@@ -218,6 +251,7 @@ int main(){
                 a->Destroy();
 
             std::cout << clock() - time << std::endl;
+             */
         }
 
         /*

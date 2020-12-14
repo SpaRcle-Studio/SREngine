@@ -215,6 +215,8 @@ void Framework::Graphics::Window::Thread() {
         this->m_env->SwapBuffers();
     }
 
+    Debug::Graph("Window::Thread() : exit from main cycle.");
+
     if (!this->m_render->Close()) {
         Debug::Error("Window::Thread() : failed close render!");
     }

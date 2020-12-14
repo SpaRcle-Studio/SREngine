@@ -7,6 +7,7 @@
 
 #include <string>
 #include <mutex>
+#include <Debug.h>
 // TODO: Make a comments
 
 namespace Framework::Helper {
@@ -43,7 +44,11 @@ namespace Framework::Helper {
         void AddUsePoint() { m_countUses++; }
 
         /* Remove one point from count uses current resource */
-        void RemoveUsePoint() { m_countUses--; }
+        void RemoveUsePoint() {
+            if (m_countUses == 0)
+                Debug::Error("IResource::RemoveUsePoint() : count use points is zero!");
+            m_countUses--;
+        }
 
         [[nodiscard]] unsigned int GetCountUses() const noexcept { return this->m_countUses; }
 
