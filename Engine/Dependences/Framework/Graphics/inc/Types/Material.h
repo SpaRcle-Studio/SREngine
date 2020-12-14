@@ -18,19 +18,21 @@ namespace Framework::Graphics::Types {
         Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
         ~Material();
     private:
-        inline static Environment*      m_env          = nullptr;
+        inline static Environment*      m_env               = nullptr;
 
-        bool                            m_transparent  = false;
-        volatile bool                   m_bloom        = false;
+        bool                            m_transparent       = false;
+        volatile bool                   m_bloom             = false;
 
-        glm::vec3                       m_color        = glm::vec3(1,1,1);
+        glm::vec4                       m_color             = glm::vec4(1,1,1,1);
 
-        Mesh*                           m_mesh         = nullptr;
+        Mesh*                           m_mesh              = nullptr;
 
-        Texture*                        m_diffuse      = nullptr;
-        Texture*                        m_normal       = nullptr;
-        Texture*                        m_specular     = nullptr;
-        Texture*                        m_glossiness   = nullptr;
+        volatile bool                   m_texturesIsFree    = false;
+
+        Texture*                        m_diffuse           = nullptr;
+        Texture*                        m_normal            = nullptr;
+        Texture*                        m_specular          = nullptr;
+        Texture*                        m_glossiness        = nullptr;
     private:
         [[nodiscard]] static inline int RandomNumber(int a, int b) noexcept { return rand()%(b-a+1) + a; }
     public:
@@ -43,7 +45,10 @@ namespace Framework::Graphics::Types {
         bool SetMesh(Mesh* mesh);
         inline void SetBloom(bool value) noexcept { this->m_bloom = value; };
 
-        inline void SetColor(glm::vec3 color) { this->m_color = color; }
+        inline void SetColor(glm::vec3 color) { this->m_color = {color,1}; }
+        inline void SetColor(glm::vec4 color) { this->m_color = color; }
+
+        bool FreeTextures();
 
         void SetDiffuse(Texture* tex);
         void SetNormal(Texture* tex);

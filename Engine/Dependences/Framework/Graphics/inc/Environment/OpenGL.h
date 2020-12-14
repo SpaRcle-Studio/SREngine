@@ -215,6 +215,9 @@ namespace Framework::Graphics {
         }
         unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) override;
         unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) override;
+        inline void DeleteTexture(unsigned int ID) noexcept override {
+            glDeleteTextures(1, &ID);
+        }
     };
 }
 

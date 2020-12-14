@@ -26,7 +26,7 @@ using namespace Framework::Graphics::Types;
 
 int main(){
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Low);
+    Debug::SetLevel(Debug::Level::Full);
     ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
 
     ResourceManager::RegisterType("Mesh");
@@ -75,22 +75,28 @@ int main(){
         Debug::System("All tests successfully completed!");
     }
 
-    Skybox* skybox = Skybox::Load("Sea", "jpg");
+    Skybox* skybox = Skybox::Load("Sea.jpg");
     render->SetSkybox(skybox);
 
-    Mesh* mesh  = Mesh::Load("cube.obj")[0];
-    //Texture* texture = Texture::Load("default.png", false, TextureType::Diffuse, TextureFilter::NEAREST);
-    Texture* texture = Texture::Load("steel_cube.png", false, TextureType::Diffuse, TextureFilter::LINEAR);
+    Mesh *mesh = Mesh::Load("cube.obj")[0];
+    Texture *texture = Texture::Load("steel_cube.png", true, TextureType::Diffuse, TextureFilter::NEAREST);
+    render->RegisterTexture(texture);
+
     mesh->GetMaterial()->SetDiffuse(texture);
     mesh->GetMaterial()->SetBloom(true);
+    mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 7.f);
 
-    //* mesh2 = mesh->Copy();
-    //mesh2->GetMaterial()->SetBloom(true);
-    //mesh2->OnMove({5, 0, 0});
+    //GameObject* cube = scene->Instance("Cube");
+    //{
+       // render->RegisterMesh(mesh);
+    //    cube->AddComponent(mesh);
+    //}
 
-    //render->RegisterMesh(mesh);
-    //render->RegisterMesh(mesh2);
+    //scene->Destroy(cube);
 
+    //std::cout << cube->Save().dump(4) << std::endl;
+
+    /*
     for (int x = -1; x < 10; x++) {
         for (int y = -1; y < 10; y++) {
             for (int z = -1; z < 10; z++) {
@@ -103,7 +109,7 @@ int main(){
                 //copy->GetMaterial()->SetColor({3,3,3});
             }
         }
-    }
+    }*/
 
     while(!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
         //static float f = 0;
@@ -160,10 +166,26 @@ int main(){
             camera->GetPostProcessing()->SetDisplayBloomMask(false);
 
 
-        if (GetKey(KeyCode::L)) {
-            std::vector<Mesh *> meshes1 = Mesh::Load("cube.obj");
-            for (auto a : meshes1)
-                a->Destroy();
+        if (GetKeyDown(KeyCode::O)) {
+            if (mesh) {
+                mesh->Destroy();
+                mesh = nullptr;
+            }
+        }
+
+        if (GetKey(KeyCode::L) && mesh) {
+            //std::vector<Mesh *> meshes1 = Mesh::Load("cube.obj");
+            //for (auto a : meshes1)
+            //    a->Destroy();
+
+            GameObject* cube = scene->Instance("Cube");
+            {
+                Mesh* copy = mesh->Copy();
+
+                render->RegisterMesh(copy);
+                cube->AddComponent(copy);
+            }
+            scene->Destroy(cube);
         }
 
         if (GetKeyDown(KeyCode::T)) {
@@ -198,6 +220,7 @@ int main(){
             std::cout << clock() - time << std::endl;
         }
 
+        /*
         if (GetKeyDown(KeyCode::O)) {
             auto time = clock();
 
@@ -221,12 +244,14 @@ int main(){
                 a->Destroy();
 
             std::cout << clock() - time << std::endl;
-        }
+        }*/
 
         if (GetKeyDown(KeyCode::I)){
-            window->RemoveCamera(camera);
-            camera->AwaitFree();
-            camera = nullptr;
+            if (camera) {
+                window->RemoveCamera(camera);
+                camera->AwaitFree();
+                camera = nullptr;
+            }
         }
 
         if (GetKeyDown(KeyCode::M)) {

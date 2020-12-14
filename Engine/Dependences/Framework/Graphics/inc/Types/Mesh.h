@@ -13,6 +13,7 @@
 #include <Environment/Environment.h>
 #include "Material.h"
 #include <EntityComponentSystem/Component.h>
+#include <Debug.h>
 
 namespace Framework::Graphics{
     class Render;
@@ -33,6 +34,9 @@ namespace Framework::Graphics::Types {
         /** \brief Default mesh destructor */
         ~Mesh();
     public:
+        inline void SetRender(Render* render) noexcept {
+            this->m_render = render;
+        };
         inline void SetVertexArray(std::vector<Vertex>& vertices) noexcept {
             this->m_isCalculated = false;
             this->m_countVertices = vertices.size();
@@ -55,6 +59,8 @@ namespace Framework::Graphics::Types {
         /** \brief Free mesh pointer
          * \return bool */
         bool Free() override {
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                Debug::Log("Mesh::Free() : free mesh memory...");
             delete this;
             return true;
         }
@@ -68,7 +74,7 @@ namespace Framework::Graphics::Types {
 
         std::string                 m_geometry_name         = "Unnamed";
         Shader*                     m_shader                = nullptr;
-        //Render*                     m_render                = nullptr;
+        Render*                     m_render                = nullptr;
         Material*                   m_material              = nullptr;
 
         /** \brief Vertices OpenGL-context calculated */
@@ -102,6 +108,9 @@ namespace Framework::Graphics::Types {
     public:
         // TODO: Repeat. Make a comments, please
         static std::vector<Mesh*> Load(std::string path);
+        static Mesh* LoadJson(std::string json_data, std::vector<Mesh*>* allMeshes = nullptr);
+
+        nlohmann::json Save() override;
 
         [[nodiscard]] size_t GetCountVertices() const noexcept { return m_countVertices; }
 

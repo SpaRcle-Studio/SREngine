@@ -6,6 +6,7 @@
 #define GAMEENGINE_TRANSFORM_H
 
 #include <glm/glm.hpp>
+#include <json/json.hpp>
 
 namespace Framework::Helper {
     class GameObject;
@@ -24,6 +25,8 @@ namespace Framework::Helper {
         void Translate(glm::vec3 val)   noexcept;
         void Rotate(glm::vec3 val)      noexcept;
         void Scaling(glm::vec3 val)     noexcept;
+    public:
+        nlohmann::json Save();
     public:
         inline static const glm::vec3 Right     = { 1, 0, 0 };
         inline static const glm::vec3 Up        = { 0, 1, 0 };

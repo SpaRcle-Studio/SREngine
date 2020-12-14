@@ -6,6 +6,7 @@
 #include "Types/Material.h"
 #include <Types/Mesh.h>
 #include <Render/Shader.h>
+#include <iostream>
 
 using namespace Framework::Graphics::Types;
 
@@ -35,31 +36,34 @@ Material::Material(Texture *diffuse, Texture *normal, Texture *specular, Texture
 }
 
 Material::~Material() {
+    if (!m_texturesIsFree)
+        Debug::Warn("Material::~Material() : textures is not free! Something went wrong... Memory leak possible...");
+
     if (m_diffuse){
-        m_diffuse->RemoveUsePoint();
-        if (!m_diffuse->GetCountUses() && m_diffuse->EnableAutoRemove())
-            m_diffuse->Destroy();
+        //m_diffuse->RemoveUsePoint();
+        //if (m_diffuse->GetCountUses() == 1 && m_diffuse->EnableAutoRemove())
+        //    m_diffuse->Destroy();
         m_diffuse = nullptr;
     }
 
     if (m_normal){
-        m_normal->RemoveUsePoint();
-        if (!m_normal->GetCountUses() && m_normal->EnableAutoRemove())
-            m_normal->Destroy();
+        //m_normal->RemoveUsePoint();
+        //if (m_normal->GetCountUses() == 1 && m_normal->EnableAutoRemove())
+        //    m_normal->Destroy();
         m_normal = nullptr;
     }
 
     if (m_specular){
-        m_specular->RemoveUsePoint();
-        if (!m_specular->GetCountUses() && m_specular->EnableAutoRemove())
-            m_specular->Destroy();
+        //m_specular->RemoveUsePoint();
+        //if (m_specular->GetCountUses() == 1 && m_specular->EnableAutoRemove())
+        //    m_specular->Destroy();
         m_specular = nullptr;
     }
 
     if (m_glossiness){
-        m_glossiness->RemoveUsePoint();
-        if (!m_glossiness->GetCountUses() && m_glossiness->EnableAutoRemove())
-            m_glossiness->Destroy();
+        //m_glossiness->RemoveUsePoint();
+        //if (m_glossiness->GetCountUses() == 1 && m_glossiness->EnableAutoRemove())
+        //    m_glossiness->Destroy();
         m_glossiness = nullptr;
     }
 }
@@ -146,5 +150,43 @@ glm::vec3 Material::GetRandomColor() {
             (float)RandomNumber(0, 255) / 255.f,
             (float)RandomNumber(0, 255) / 255.f
     };
+}
+
+bool Material::FreeTextures() {
+    if (m_texturesIsFree) {
+        Debug::Error("Material::FreeTextures() : textures already free! Something went wrong...");
+        return false;
+    }
+
+    if (Debug::GetLevel() >= Debug::Level::Medium)
+        Debug::Log("Material::FreeTextures() : free material textures...");
+
+    if (m_diffuse) {
+        m_diffuse->RemoveUsePoint();
+        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->EnableAutoRemove())
+            m_diffuse->Destroy();
+    }
+
+    if (m_normal) {
+        m_normal->RemoveUsePoint();
+        if (m_normal->GetCountUses() <= 1 && m_normal->EnableAutoRemove())
+            m_normal->Destroy();
+    }
+
+    if (m_specular) {
+        m_specular->RemoveUsePoint();
+        if (m_specular->GetCountUses() <= 1 && m_specular->EnableAutoRemove())
+            m_specular->Destroy();
+    }
+
+    if (m_glossiness) {
+        m_glossiness->RemoveUsePoint();
+        if (m_glossiness->GetCountUses() <= 1 && m_glossiness->EnableAutoRemove())
+            m_glossiness->Destroy();
+    }
+
+    this->m_texturesIsFree = true;
+
+    return true;
 }
 

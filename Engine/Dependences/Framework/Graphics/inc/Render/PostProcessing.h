@@ -71,6 +71,9 @@ namespace Framework::Graphics {
         Render*         m_render                                = nullptr;
         bool            m_isInit                                = false;
     public:
+        inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
+        inline float GetGamma() const noexcept { return m_gamma; }
+    public:
         inline void SetGamma(float gamma) noexcept { m_gamma = gamma; }
         inline void SetExposure(float exposure) noexcept { m_exposure = exposure; }
         inline void SetBloomAmount(unsigned int amount) noexcept { this->m_bloomAmount = amount; }

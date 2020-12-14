@@ -49,6 +49,9 @@ namespace Framework::Graphics {
         std::vector<Mesh*>      m_transparent_meshes                = std::vector<Mesh*>();
         volatile size_t         m_countTransparentMeshes            = 0;
 
+        volatile size_t         m_countTexturesToFree               = 0;
+        std::vector<Texture*>   m_textureToFree                     = std::vector<Texture*>();
+
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;
         Shader*                 m_skyboxShader                      = nullptr;
@@ -70,6 +73,9 @@ namespace Framework::Graphics {
     public:
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
+
+        void RegisterTexture(Texture* texture);
+        void FreeTexture(Texture* texture);
     public:
         bool Create(Window* window); //, Camera* camera
         /** \warning call only from window thread */

@@ -56,6 +56,10 @@ namespace Framework::Helper {
         if (Debug::GetLevel() >= Debug::Level::High)
             Debug::Log("ResourceManager::Destroy() : destroying \""+ std::string(resource->m_resource_name) +"\"");
 
+        //ret:
+        //if (g_grabbleNow)
+        //    goto ret;
+
         g_mutex.lock();
 
         g_resourcesToDestroy.push_back(resource);
@@ -97,9 +101,16 @@ namespace Framework::Helper {
             if (g_countResourcesToDestroy == 0)
                 continue;
 
+            //if (!g_mutex.try_lock())
+            //    continue;
+
             g_mutex.lock();
 
+            g_grabbleNow = true;
+
             for (size_t t = 0; t < g_resourcesToDestroy.size(); t++) {
+                //std::cout << g_resourcesToDestroy[t]->m_resource_name << " " << g_resourcesToDestroy[t]->m_countUses << std::endl;
+
                 if (g_resourcesToDestroy[t]->m_countUses == 0 && g_resourcesToDestroy[t]->m_isDestroy) {
                     if (Debug::GetLevel() >= Debug::Level::High)
                         Debug::Log("ResourceManager::GC() : free \"" +
@@ -111,6 +122,8 @@ namespace Framework::Helper {
                     // delete IResource
                     //g_destroy_functions[g_resourcesToDestroy[t]->m_resource_name](g_resourcesToDestroy[t]);
 
+                    //std::cout << g_resourcesToDestroy[t]->m_resource_id << " " << g_resourcesToDestroy[t]->m_countUses << " " << g_resourcesToDestroy[t]->m_isDestroy << std::endl;
+
                     // Free memory
                     g_resourcesToDestroy[t]->Free();
 
@@ -119,6 +132,11 @@ namespace Framework::Helper {
                     g_resourcesToDestroy.erase(g_resourcesToDestroy.begin() + t);
                 }
             }
+
+            if (Debug::GetLevel() >= Debug::Level::High && g_countResourcesToDestroy == 0)
+                Debug::Log("ResourceManager::GC() : complete garbage collection.");
+
+            g_grabbleNow = false;
 
             g_mutex.unlock();
         }
@@ -140,9 +158,25 @@ namespace Framework::Helper {
 
         for (auto a : g_resources){
             dump += "\n\t\"" + a.x + "\": " + std::to_string(a.y.size());
+            if (a.y.size() > 0)
+                if (a.y[0]->m_resource_name == "Texture")
+                {
+                    std::string textures;
+                    for (IResource* res : a.y){
+                        textures += "\n\t\tUses = "+std::to_string(res->GetCountUses());
+                    }
+                    dump+= textures;
+                }
         }
 
-        dump += "\n\tWait destroy:" + std::to_string(g_resourcesToDestroy.size());
+
+
+        std::string wait = "";
+        for (auto res : g_resourcesToDestroy) {
+            wait += "\n\t\t" + res->m_resource_id + "; uses = " +std::to_string(res->GetCountUses());
+        }
+
+        dump += "\n\tWait destroy:" + std::to_string(g_resourcesToDestroy.size()) + wait;
 
         dump += "\n=============================================================================";
         Debug::System(dump);

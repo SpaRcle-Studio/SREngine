@@ -56,6 +56,8 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
 
     this->m_isDestroy = true;
 
+    this->m_material->FreeTextures();
+
     Helper::ResourceManager::Destroy(this);
 
     return true;
@@ -127,6 +129,11 @@ void Mesh::ReCalcModel() {
 }
 
 bool Mesh::Calculate() {
+    if (!m_render){
+        Debug::Error("Mesh::Calculate() : mesh is not register in render!");
+        return false;
+    }
+
     m_mutex.lock();
 
     {
@@ -226,10 +233,11 @@ bool Mesh::Draw() {
     if (m_isDestroy) return false;
 
     if (!m_isCalculated)
-        this->Calculate();
+        if (!this->Calculate())
+            return false;
 
     this->m_shader->SetMat4("modelMat", m_modelMat);
-    this->m_shader->SetVec3("color", m_material->m_color);
+    this->m_shader->SetVec3("color", m_material->m_color); //TODO: change to vec4
     this->m_shader->SetInt("bloom", (int)m_material->m_bloom);
 
     this->m_material->Use();
@@ -254,7 +262,48 @@ bool Mesh::FreeVideoMemory() {
 }
 
 void Mesh::OnDestroyGameObject() noexcept {
-
+    this->Destroy();
+    if (!m_render)
+        Debug::Error("Mesh::OnDestroyGameObject() : render is not set! Something went wrong...");
+    else
+        m_render->RemoveMesh(this);
 }
 
+Mesh *Mesh::LoadJson(std::string json_data, std::vector<Mesh*>* allMeshes) {
+    nlohmann::json json = json_data;
 
+    std::vector<Mesh*> meshes = Load(json["Mesh"]["Path"]);
+    if (allMeshes)
+        *allMeshes = meshes;
+
+    return meshes[(unsigned long)std::atoi(((std::string)json["Mesh"]["ID"]).c_str())];
+}
+
+nlohmann::json Mesh::Save() {
+    nlohmann::json json;
+    json["Mesh"]["GeometryName"] = m_geometry_name;
+
+    size_t size = m_resource_id.size();
+
+    for (size_t t = size - 1; t > 0; t--){
+        if (m_resource_id[t] == '-'){
+            json["Mesh"]["Path"] = StringUtils::Resize(m_resource_id, t - 1);
+
+            std::string id = StringUtils::BackSubstring(m_resource_id, '-');
+            json["Mesh"]["ID"] = StringUtils::Resize(id, id.size() - 1);
+
+            json["Mesh"]["Material"]["Color"] = {
+                    this->m_material->m_color.r,
+                    this->m_material->m_color.g,
+                    this->m_material->m_color.b,
+                    this->m_material->m_color.a,
+            };
+
+            json["Mesh"]["Material"]["Transparent"] = m_material->m_transparent;
+
+            break;
+        }
+    }
+
+    return json;
+}

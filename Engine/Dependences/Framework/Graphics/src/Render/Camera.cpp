@@ -18,7 +18,7 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
         return;
     }
 
-    if (!m_isCaclucate)
+    if (!m_isCalculate)
         this->Calculate();
 
     if (m_needUpdate){
@@ -192,19 +192,19 @@ void Framework::Graphics::Camera::OnMove(glm::vec3 newValue) noexcept {
 
 void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
     this->m_cameraSize = {w, h};
-    m_projection = glm::perspective(glm::radians(45.f), float(w) / (float)h, 0.1f, 8000.0f);
+    m_projection = glm::perspective(glm::radians(45.f), float(w) / (float)h, m_near, m_far);
     m_needUpdate = true;
 }
 
 bool Framework::Graphics::Camera::Calculate() noexcept {
-    if (m_isCaclucate)
+    if (m_isCalculate)
         return false;
 
     Debug::Graph("Camera::Calculate() : calculating camera...");
 
     this->m_postProcessing->Init(m_window->GetRender());
     m_needUpdate = true;
-    m_isCaclucate = true;
+    m_isCalculate = true;
 
     return true;
 }
@@ -214,4 +214,19 @@ void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
         m_window->RemoveCamera(this);
     ret: if (m_isUse) goto ret;
     this->Free();
+}
+
+nlohmann::json Framework::Graphics::Camera::Save() {
+    nlohmann::json camera;
+    camera["Camera"]["Far"] = m_far;
+    camera["Camera"]["Near"] = m_near;
+
+    camera["Camera"]["PostProcessing"]["ColorCorrection"] = {
+            m_postProcessing->GetColorCorrection().r,
+            m_postProcessing->GetColorCorrection().g,
+            m_postProcessing->GetColorCorrection().b
+        };
+    camera["Camera"]["PostProcessing"]["Gamma"] = m_postProcessing->GetGamma();
+
+    return camera;
 }

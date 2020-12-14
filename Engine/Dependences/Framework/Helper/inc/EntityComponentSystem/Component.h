@@ -6,6 +6,7 @@
 #define GAMEENGINE_COMPONENT_H
 #include <glm/glm.hpp>
 #include <string>
+#include <json/json.hpp>
 
 namespace Framework::Helper {
     class GameObject;
@@ -15,8 +16,12 @@ namespace Framework::Helper {
         Component(std::string name);
         ~Component();
     public:
-        virtual bool Load(const std::string& data) { return false; }
-        virtual std::string Save() { return "Base component"; }
+        //virtual static Component* Load(const std::string& data) { return nullptr; }
+        virtual nlohmann::json Save() {
+            nlohmann::json json;
+            json["BaseComponent"] = { };
+            return json;
+        }
     protected:
         bool m_isActive = true;
         const std::string m_name = "Unknown";

@@ -17,8 +17,12 @@ Framework::Graphics::Types::Skybox::~Skybox() {
 
 }
 
-Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std::string name, std::string ext) {
+Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std::string name) {
+    std::string ext = StringUtils::GetExtensionFromFilePath(name);
+    name.resize(name.size() - ext.size());
+
     std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Skyboxes/"+name + "/";
+
 #ifdef WIN32
     path = Helper::StringUtils::MakePath(path, true);
 #else

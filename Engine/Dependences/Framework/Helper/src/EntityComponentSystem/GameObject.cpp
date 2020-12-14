@@ -59,7 +59,8 @@ void Framework::Helper::GameObject::Destroy() {
         return;
     }
 
-    Debug::Log("GameObject::Destroy() : destroying \""+m_name + "\" game object contains "+std::to_string(m_components.size())+" components...");
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Log("GameObject::Destroy() : destroying \""+m_name + "\" game object contains "+std::to_string(m_components.size())+" components...");
 
     m_mutex.lock();
 
@@ -90,3 +91,24 @@ void GameObject::UpdateComponentsScale() {
         component->OnScaled(m_transform->m_scale    + m_transform->m_parent_scale);
 
 }
+
+nlohmann::json GameObject::Save() {
+    nlohmann::json json;
+
+    json["GameObject"]["Name"] = m_name;
+    json["GameObject"]["Tag"] = m_tag;
+
+    std::vector<nlohmann::json> comps = { m_transform->Save() };
+
+    for (auto c : m_components)
+        comps.push_back(c->Save());
+
+    json["GameObject"]["Components"] = comps;
+
+    return json;
+}
+
+bool GameObject::AddChild(GameObject *child) {
+    return false;
+}
+

@@ -12,6 +12,7 @@
 
 namespace Framework::Graphics{
     class TextureLoader;
+    class Render;
 }
 
 namespace Framework::Graphics::Types {
@@ -35,13 +36,35 @@ namespace Framework::Graphics::Types {
 
         volatile bool                   m_isCalculate   = false;
 
+        Render*                         m_render        = nullptr;
+
         std::mutex                      m_mutex         = std::mutex();
         TextureType                     m_type          = TextureType::Unknown;
         TextureFilter                   m_filter        = TextureFilter::Unknown;
     private:
         bool Calculate();
     public:
+        void OnDestroyGameObject() noexcept;
+
+        void SetRender(Render* render);
+
+        [[nodiscard]] inline bool IsCalculated() const noexcept { return m_isCalculate; }
         unsigned int GetID() noexcept;
+
+        /* Call only from render pool events */
+        inline bool FreeVideoMemory() noexcept {
+            if (Debug::GetLevel() >= Debug::Level::High)
+                Debug::Log("Texture::FreeVideoMemory() : free texture video memory...");
+
+            if (!m_isCalculate){
+                Debug::Error("Texture::FreeVideoMemory() : texture is not calculated!");
+                return false;
+            }
+            else {
+                this->m_env->DeleteTexture(m_ID);
+                return true;
+            }
+        }
         //Texture* Copy();
     public:
         static Texture* Load(std::string path, bool autoRemove = false, TextureType type = TextureType::Diffuse, TextureFilter filter = TextureFilter::NEAREST);

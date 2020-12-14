@@ -46,6 +46,8 @@ namespace Framework::Graphics {
         void OnRotate(glm::vec3 newValue) noexcept override;
         void OnMove(glm::vec3 newValue) noexcept override;
     public:
+        nlohmann::json Save() override;
+
         inline bool IsUse() const noexcept { return this->m_isUse; }
         inline void SetUse(bool value) noexcept { this->m_isUse = value; }
 
@@ -62,7 +64,7 @@ namespace Framework::Graphics {
         bool Calculate() noexcept;
     private:
         volatile bool   m_isCreate          = false;
-        volatile bool   m_isCaclucate       = false;
+        volatile bool   m_isCalculate       = false;
         volatile bool   m_needUpdate        = false;
 
         PostProcessing* m_postProcessing    = nullptr;
@@ -71,6 +73,9 @@ namespace Framework::Graphics {
         glm::mat4		m_projection		= glm::mat4(0);
         glm::mat4		m_viewMat			= glm::mat4(0);
         glm::vec3		m_pos				= {0,0,0};
+
+        float           m_far               = 8000.f;
+        float           m_near              = 0.1f;
 
         glm::vec2       m_cameraSize        = glm::vec2(0,0);
 

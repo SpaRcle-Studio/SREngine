@@ -24,9 +24,14 @@ bool Framework::Helper::Scene::Destroy(Framework::Helper::GameObject *gameObject
     if (gameObject->m_scene != this)
         return false;
 
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Log("Scene::Destroy(GameObject*) : destroying \""+gameObject->m_name + "\" game object...");
+
     m_mutex.lock();
 
     m_gameObjects.erase(gameObject);
+
+    gameObject->Destroy();
 
     m_mutex.unlock();
 

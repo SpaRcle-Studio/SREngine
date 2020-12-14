@@ -84,3 +84,27 @@ glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
             dir.z * cos(rad.y) * cos(rad.x)     + sin(rad.y) * dir.x
             );
 }
+
+nlohmann::json Framework::Helper::Transform::Save() {
+    nlohmann::json json;
+
+    json["Transform"]["Position"] = {
+            m_position.x,
+            m_position.y,
+            m_position.z
+    };
+
+    json["Transform"]["Rotation"] = {
+            m_rotation.x,
+            m_rotation.y,
+            m_rotation.z
+    };
+
+    json["Transform"]["Scale"] = {
+            m_scale.x,
+            m_scale.y,
+            m_scale.z
+    };
+
+    return json;
+}

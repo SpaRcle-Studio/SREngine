@@ -17,6 +17,33 @@ namespace Framework::Helper {
         StringUtils(StringUtils&) = delete;
         ~StringUtils() = delete;
     public:
+        static inline std::string ReadTo(std::string str, const char c, int offset = 0) {
+            size_t size = str.size();
+            for (size_t t = 0; t < size; t++){
+                if (str[t] == c){
+                    str.resize(t + offset + 1);
+                    break;
+                }
+            }
+            return str;
+        }
+
+        static inline std::string Resize(std::string str, size_t newSize) noexcept {
+            str.resize(newSize);
+            return str;
+        }
+
+        static inline std::string BackSubstring(const std::string& str, char c){
+            std::string result;
+            for (size_t t = str.size() - 1; t > 0; t--){
+                if (str[t] == c)
+                    return result;
+                else
+                    result += str[t];
+            }
+            return "";
+        }
+
         static std::string GetExtensionFromFilePath(std::string path);
         static std::string Reverse(std::string str);
 

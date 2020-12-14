@@ -152,6 +152,7 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
         Debug::Log("Render::RegisterMesh() : register new \""+mesh->GetResourceID()+"\" mesh...");
 
     mesh->AddUsePoint();
+    mesh->SetRender(this);
     this->m_newMeshes.push_back(mesh);
     m_countNewMeshes++;
     m_mutex.unlock();
@@ -213,6 +214,22 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
         m_removeMeshes.clear();
     }
 
+    // Free textures
+    if (m_countTexturesToFree) {
+        for (m_t = 0; m_t < m_countTexturesToFree; m_t++) {
+            if (m_textureToFree[m_t]->IsCalculated()) {
+                m_textureToFree[m_t]->FreeVideoMemory();
+            }
+            else
+                Debug::Error("Render::PoolEvents() : texture is not calculated! Something went wrong...");
+
+            m_textureToFree[m_t]->RemoveUsePoint();
+        }
+
+        m_textureToFree.clear();
+        m_countTexturesToFree = 0;
+    }
+
     m_mutex.unlock();
 }
 
@@ -225,4 +242,24 @@ Framework::Graphics::Render::Render() : m_env(Environment::Get()) {
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {
     this->m_skybox = skybox;
+}
+
+void Framework::Graphics::Render::FreeTexture(Framework::Graphics::Types::Texture *texture) {
+    m_mutex.lock();
+
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Graph("Render::FreeTexture() : register texture to remove...");
+
+    m_textureToFree.push_back(texture);
+    m_countTexturesToFree++;
+
+    m_mutex.unlock();
+}
+
+void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Graph("Render::RegisterTexture() : register new texture...");
+
+    texture->AddUsePoint();
+    texture->SetRender(this);
 }

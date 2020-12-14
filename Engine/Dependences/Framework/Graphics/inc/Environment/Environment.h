@@ -133,6 +133,7 @@ namespace Framework::Graphics {
         virtual inline void SetActiveTexture(const unsigned char activeTexture) const noexcept = 0;
         virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) = 0;
         virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) = 0;
+        virtual inline void DeleteTexture(unsigned int ID) noexcept = 0;
     };
 }
 

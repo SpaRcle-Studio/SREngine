@@ -41,7 +41,7 @@ namespace Framework::Graphics::Types {
         void AwaitDestroy();
         bool Free();
     public:
-        static Skybox* Load(std::string name, std::string ext);
+        static Skybox* Load(std::string name);
     };
 }
 

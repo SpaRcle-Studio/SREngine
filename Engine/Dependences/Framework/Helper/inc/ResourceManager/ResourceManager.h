@@ -32,6 +32,8 @@ namespace Framework::Helper {
         inline static std::vector<IResource *> g_resourcesToDestroy = std::vector<IResource *>();
         volatile inline static size_t g_countResourcesToDestroy = 0;
 
+        static inline volatile bool g_grabbleNow = false;
+
         inline static Map<std::string, std::vector<IResource *>> g_resources = Map<std::string, std::vector<IResource *>>();
     private:
         inline static std::string g_resourcesFolder = "UnSelected";

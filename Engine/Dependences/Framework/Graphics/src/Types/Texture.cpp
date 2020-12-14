@@ -8,6 +8,7 @@
 #include <map>
 #include <Loaders/TextureLoader.h>
 #include <Debug.h>
+#include <Render/Render.h>
 
 inline static std::map<unsigned int, unsigned long> TexID_usages = std::map<unsigned int, unsigned long>();
 inline static std::map<std::string, unsigned int> TexID_names = std::map<std::string, unsigned int>();
@@ -26,7 +27,23 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     if (m_isDestroy)
         return false;
 
+    if (Debug::GetLevel() >= Debug::Level::Medium)
+        Debug::Log("Texture::Destroy() : destroying texture...");
+
     this->m_isDestroy = true;
+
+    /*
+        Проверяем, просчитана ли текстура, если просчитана,
+        регистрируем в рендере для освобождения видео-памяти, если нет, просто убираем
+        юз-поинт.
+        Может возникнуть такая ситуация, что текстура будет уничтожена еще до ее просчета,
+        это нормально, так как она не регистрируется в рендере в прямом смысле. Т-е она там не содержится.
+        Меш узнает о том, что текстура будет уничтожена, так как он сам и уничтожает материал, содержащий ее.
+    */
+    if (m_isCalculate) {
+        m_render->FreeTexture(this);
+    } else
+        this->RemoveUsePoint();
 
     Helper::ResourceManager::Destroy(this);
 
@@ -63,6 +80,14 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(s
 }
 
 bool Framework::Graphics::Types::Texture::Calculate() {
+    if (!m_data)
+        return false;
+
+    if (!m_render){
+        Debug::Error("Texture::Calculate() : this texture is not register in render!");
+        return false;
+    }
+
     if (m_isDestroy) {
         Debug::Error("Texture::Calculate() : texture is destroyed!");
         return false;
@@ -103,6 +128,15 @@ unsigned int Framework::Graphics::Types::Texture::GetID() noexcept {
         }
 
     return m_ID;
+}
+
+void Framework::Graphics::Types::Texture::OnDestroyGameObject() noexcept {
+    if (m_autoRemove && m_countUses == 1)
+        this->Destroy();
+}
+
+void Framework::Graphics::Types::Texture::SetRender(Framework::Graphics::Render *render) {
+    this->m_render = render;
 }
 
 /*

@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <mutex>
+#include <json/json.hpp>
 
 namespace Framework::Helper {
     class Transform;
@@ -24,15 +25,23 @@ namespace Framework::Helper {
         void UpdateComponentsRotation();
         void UpdateComponentsScale();
     private:
+        //void OnDestroyParent();
+
         void Destroy();
     public:
         Transform* GetTransform() noexcept { return this->m_transform; }
+    public:
+        nlohmann::json Save();
     public:
         /** \brief Get first needed component */
         Component* GetComponent(std::string name);
         std::vector<Component*> GetComponents(std::string name);
         bool AddComponent(Component* component);
+        bool AddChild(GameObject* child);
     private:
+        GameObject*                 m_parent        = nullptr;
+        std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
+
         bool                        m_isDestroy     = false;
 
         std::mutex                  m_mutex         = std::mutex();
@@ -40,7 +49,6 @@ namespace Framework::Helper {
         Scene*                      m_scene         = nullptr;
         Transform*                  m_transform     = nullptr;
 
-        std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
         std::vector<Component*>     m_components    = std::vector<Component*>();
 
         std::string                 m_name          = "Unnamed";
