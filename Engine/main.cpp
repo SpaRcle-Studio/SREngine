@@ -87,17 +87,22 @@ int main(){
     render->SetSkybox(skybox);
 
     Mesh *mesh = Mesh::Load("cube.obj")[0];
-    Texture *texture = Texture::Load("steel_cube.png", true, TextureType::Diffuse, TextureFilter::NEAREST);
+    Texture *texture = Texture::Load("steel_cube.png", true, TextureType::Diffuse, TextureFilter::LINEAR);
     render->RegisterTexture(texture);
 
     mesh->GetMaterial()->SetDiffuse(texture);
     mesh->GetMaterial()->SetBloom(true);
 
-    //GameObject* cube = scene->Instance("Cube");
-    //{
-       // render->RegisterMesh(mesh);
-    //    cube->AddComponent(mesh);
-    //}
+    /*
+    GameObject* cube = scene->Instance("Cube");
+    {
+        mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
+        render->RegisterMesh(mesh);
+        cube->AddComponent(mesh);
+    }
+
+    cube->GetTransform()->Translate(Transform::Forward * 5.f);
+    cube->GetTransform()->Translate(Transform::Right * 5.f);*/
 
     //scene->Destroy(cube);
 
@@ -127,11 +132,6 @@ int main(){
     }
 
     while(!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
-        //static float f = 0;
-        //f += 0.0005f;
-        //for (auto a : meshes)
-        //   a->OnRotate({0, f, 0});
-
         if (camera_gm) {
             static float y = 0;
             static float x = 0;
@@ -159,15 +159,15 @@ int main(){
 
             camera_gm->GetTransform()->SetRotation({y, x, z});
 
-            if (GetKey(KeyCode::A))
-                camera_gm->GetTransform()->Translate(-Transform::Right / 5000.f);
-            else if (GetKey(KeyCode::D))
+            if (GetKey(KeyCode::D))
                 camera_gm->GetTransform()->Translate(Transform::Right / 5000.f);
+            else if (GetKey(KeyCode::A))
+                camera_gm->GetTransform()->Translate(-Transform::Right / 5000.f);
 
             if (GetKey(KeyCode::W))
-                camera_gm->GetTransform()->Translate(-Transform::Forward / 5000.f);
-            else if (GetKey(KeyCode::S))
                 camera_gm->GetTransform()->Translate(Transform::Forward / 5000.f);
+            else if (GetKey(KeyCode::S))
+                camera_gm->GetTransform()->Translate(-Transform::Forward / 5000.f);
 
             if (GetKey(KeyCode::Space))
                 camera_gm->GetTransform()->Translate(Transform::Up / 5000.f);
@@ -175,11 +175,17 @@ int main(){
                 camera_gm->GetTransform()->Translate(-Transform::Up / 5000.f);
         }
 
-        if (GetKey(KeyCode::B))
-            camera->GetPostProcessing()->SetDisplayBloomMask(true);
-        else
-            camera->GetPostProcessing()->SetDisplayBloomMask(false);
+        if (camera_gm) {
+            if (GetKey(KeyCode::B))
+                camera->GetPostProcessing()->SetDisplayBloomMask(true);
+            else
+                camera->GetPostProcessing()->SetDisplayBloomMask(false);
 
+            if (GetKeyDown(KeyCode::I)){
+                scene->Destroy(camera_gm);
+                camera_gm = nullptr;
+            }
+        }
 
         if (GetKeyDown(KeyCode::O)) {
             //if (mesh) { mesh->Destroy();mesh = nullptr;}
@@ -279,14 +285,6 @@ int main(){
 
             std::cout << clock() - time << std::endl;
         }*/
-
-        if (GetKeyDown(KeyCode::I)){
-            if (camera) {
-                window->RemoveCamera(camera);
-                camera->AwaitFree();
-                camera = nullptr;
-            }
-        }
 
         if (GetKeyDown(KeyCode::M)) {
             ResourceManager::PrintMemoryDump();

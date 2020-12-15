@@ -115,7 +115,7 @@ void Mesh::ReCalcModel() {
 
     modelMat = glm::translate(modelMat, {
             //-m_position.z, m_position.y, -m_position.x
-            m_position.x, m_position.y, m_position.z
+            m_position.x, m_position.y, -m_position.z
              //0, -8, -25
     }); //
 

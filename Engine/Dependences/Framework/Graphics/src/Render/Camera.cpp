@@ -186,7 +186,11 @@ void Framework::Graphics::Camera::OnRotate(glm::vec3 newValue) noexcept {
 }
 
 void Framework::Graphics::Camera::OnMove(glm::vec3 newValue) noexcept {
-    this->m_pos = newValue;
+    this->m_pos = {
+            newValue.x,
+             newValue.y,
+            -newValue.z
+    };
     this->UpdateView();
 }
 
@@ -212,6 +216,7 @@ bool Framework::Graphics::Camera::Calculate() noexcept {
 void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
     if (m_isUse)
         m_window->RemoveCamera(this);
+    m_window = nullptr;
     ret: if (m_isUse) goto ret;
     this->Free();
 }

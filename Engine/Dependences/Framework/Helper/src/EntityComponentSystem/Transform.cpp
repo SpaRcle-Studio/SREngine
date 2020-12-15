@@ -79,9 +79,9 @@ glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
     };
 
     return glm::vec3(
-            dir.x * cos(rad.y)                  - sin(rad.y) * dir.z * cos(rad.x),
-            dir.y * cos(rad.x)                  + sin(rad.x) * dir.z, // + sin(rad.x) * dir.y
-            dir.z * cos(rad.y) * cos(rad.x)     + sin(rad.y) * dir.x
+            dir.x * cos(rad.y)                  + sin(rad.y) * dir.z * cos(rad.x),
+            dir.y * cos(rad.x)                  - sin(rad.x) * dir.z, // + sin(rad.x) * dir.y
+            dir.z * cos(rad.y) * cos(rad.x)     - sin(rad.y) * dir.x
             );
 }
 
