@@ -5,45 +5,44 @@
 #include <Math/Mathematics.h>
 #include "EntityComponentSystem/Transform.h"
 #include <EntityComponentSystem/GameObject.h>
+#include <map>
+#include <vector>
+#include <iostream>
 
 Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
-    this->m_parent = parent;
-}
-
-Framework::Helper::Transform::~Transform() {
-
+    this->m_gameObject = parent;
 }
 
 void Framework::Helper::Transform::SetPosition(glm::vec3 val) {
     m_position = val;
 
-    m_parent->UpdateComponentsPosition();
+    m_gameObject->UpdateComponentsPosition();
 
-    for (GameObject* gm : m_parent->m_children)
-        gm->m_transform->UpdateChild(this);
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildPosition(this);
+    }
 }
 
 void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
     m_rotation = val;
 
-    m_parent->UpdateComponentsRotation();
+    m_gameObject->UpdateComponentsRotation();
 
-    for (GameObject* gm : m_parent->m_children)
-        gm->m_transform->UpdateChild(this);
+    //for (auto gm : m_gameObject->m_children) {
+    //    gm.second->m_transform->UpdateChildRotation(this);
+    //}
 }
 
 void Framework::Helper::Transform::SetScale(glm::vec3 val) {
     m_scale = val;
 
-    m_parent->UpdateComponentsScale();
+    m_gameObject->UpdateComponentsScale();
 
-    for (GameObject* gm : m_parent->m_children)
-        gm->m_transform->UpdateChild(this);
+    //for (GameObject* gm : m_parent->m_children)
+    //    gm->m_transform->UpdateChild(this);
 }
 
 void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
-    // TODO: calculate direction
-
     val = LocalDirection(val);
 
     this->SetPosition(m_position + val);
@@ -57,15 +56,16 @@ void Framework::Helper::Transform::Scaling(glm::vec3 val) noexcept {
     this->SetScale(m_scale + val);
 }
 
-void Framework::Helper::Transform::UpdateChild(Framework::Helper::Transform *parent) {
-    this->m_parent_position = parent->m_position + parent->m_parent_position;
-    this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
-    this->m_parent_scale	= parent->m_scale    + parent->m_parent_scale;
 
-    this->m_parent->UpdateComponentsPosition();
-    this->m_parent->UpdateComponentsRotation();
-    this->m_parent->UpdateComponentsScale();
-}
+//void Framework::Helper::Transform::UpdateChild(Framework::Helper::Transform *parent) {
+  //  this->m_parent_position = parent->m_position + parent->m_parent_position;
+    //this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
+    //this->m_parent_scale	= parent->m_scale    + parent->m_parent_scale;
+
+ //   this->m_parent->UpdateComponentsPosition();
+    //this->m_parent->UpdateComponentsRotation();
+    //this->m_parent->UpdateComponentsScale();
+//}
 
 glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
     //float dx = cos(m_rotation.x * M_PI / 45.f / 4.f);
@@ -107,4 +107,26 @@ nlohmann::json Framework::Helper::Transform::Save() {
     };
 
     return json;
+}
+
+void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexcept {
+    this->m_parent_position = parent->m_position + parent->m_parent_position;
+
+    this->m_gameObject->UpdateComponentsPosition();
+
+    this->SetPosition(m_position);
+}
+
+void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent) noexcept {
+    //this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
+
+    //this->m_gameObject->UpdateComponentsRotation();
+}
+
+void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform *parent) noexcept {
+
+}
+
+void Framework::Helper::Transform::RotateAbout(glm::vec3 point, glm::vec3 angle) noexcept {
+
 }

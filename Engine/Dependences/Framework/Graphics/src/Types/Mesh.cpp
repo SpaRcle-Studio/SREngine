@@ -18,6 +18,7 @@
 #include <glm/matrix.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include <map>
+#include <glm/gtx/string_cast.hpp>
 
 using namespace Framework::Graphics::Types;
 
@@ -112,6 +113,8 @@ ret:
 
 void Mesh::ReCalcModel() {
     glm::mat4 modelMat = glm::mat4(1.0f);
+
+    //std::cout << glm::to_string(m_position) << std::endl;
 
     modelMat = glm::translate(modelMat, {
             //-m_position.z, m_position.y, -m_position.x

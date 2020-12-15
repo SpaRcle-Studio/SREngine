@@ -14,7 +14,7 @@ namespace Framework::Helper {
         friend class GameObject;
     private:
         Transform(GameObject* parent);
-        ~Transform();
+        ~Transform() = default;
     public:
         glm::vec3 LocalDirection(const glm::vec3& dir);
     public:
@@ -22,9 +22,11 @@ namespace Framework::Helper {
         void SetRotation(glm::vec3 val);
         void SetScale(glm::vec3 val);
 
-        void Translate(glm::vec3 val)   noexcept;
-        void Rotate(glm::vec3 val)      noexcept;
-        void Scaling(glm::vec3 val)     noexcept;
+        void Translate(glm::vec3 val = {0,0,0})   noexcept;
+        void Rotate(glm::vec3 val    = {0,0,0})   noexcept;
+        void Scaling(glm::vec3 val   = {0,0,0})   noexcept;
+
+        void RotateAbout(glm::vec3 point, glm::vec3 angle)    noexcept;
     public:
         nlohmann::json Save();
     public:
@@ -32,7 +34,11 @@ namespace Framework::Helper {
         inline static const glm::vec3 Up        = { 0, 1, 0 };
         inline static const glm::vec3 Forward   = { 0, 0, 1 };
     private:
-        void UpdateChild(Transform* parent);
+        //void UpdateChild(Transform* parent);
+
+        void UpdateChildPosition(Transform* parent) noexcept;
+        void UpdateChildRotation(Transform* parent) noexcept;
+        void UpdateChildScale(Transform* parent)    noexcept;
     private:
         glm::vec3       m_position              = { 0, 0, 0 };
         glm::vec3       m_rotation              = { 0, 0, 0 };
@@ -42,7 +48,7 @@ namespace Framework::Helper {
         glm::vec3       m_parent_rotation       = { 0, 0, 0 };
         glm::vec3       m_parent_scale          = { 0, 0, 0 };
 
-        GameObject*     m_parent                = nullptr;
+        GameObject*     m_gameObject            = nullptr;
     };
 }
 

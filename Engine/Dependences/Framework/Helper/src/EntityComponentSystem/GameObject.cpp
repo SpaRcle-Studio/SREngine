@@ -67,8 +67,8 @@ void Framework::Helper::GameObject::Destroy() {
     for (Component* component : m_components)
         component->OnDestroyGameObject();
 
-    for (GameObject* gm : m_children)
-        gm->Destroy();
+    for (auto gm : m_children)
+        gm.second->Destroy();
 
     m_mutex.unlock();
 
@@ -77,19 +77,17 @@ void Framework::Helper::GameObject::Destroy() {
 
 void GameObject::UpdateComponentsPosition() {
     for (Component* component : m_components)
-        component->OnMove(m_transform->m_position   + m_transform->m_parent_position);
+        component->OnMove(m_transform->m_position + m_transform->m_parent_position);
 }
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
         component->OnRotate(m_transform->m_rotation + m_transform->m_parent_rotation);
-
 }
 
 void GameObject::UpdateComponentsScale() {
     for (Component* component : m_components)
         component->OnScaled(m_transform->m_scale    + m_transform->m_parent_scale);
-
 }
 
 nlohmann::json GameObject::Save() {
@@ -109,6 +107,22 @@ nlohmann::json GameObject::Save() {
 }
 
 bool GameObject::AddChild(GameObject *child) {
-    return false;
+    auto find = m_children.find(child);
+    if (find!=m_children.end()){
+        Debug::Warn("GameObject::AddChild() : this child already exists in this game object!");
+        return false;
+    }
+
+    child->m_parent = this;
+
+    this->m_children.insert(std::make_pair(child, child));
+
+    /* Update child transforms with parent */
+
+    child->m_transform->UpdateChildPosition(this->m_transform);
+    //child->m_transform->Rotate();
+    //child->m_transform->Scaling();
+
+    return true;
 }
 

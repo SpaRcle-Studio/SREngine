@@ -26,7 +26,7 @@ using namespace Framework::Helper::Types;
 using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 
-int main(){
+int main() {
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
     ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
@@ -93,21 +93,44 @@ int main(){
     mesh->GetMaterial()->SetDiffuse(texture);
     mesh->GetMaterial()->SetBloom(true);
 
-    /*
-    GameObject* cube = scene->Instance("Cube");
+    {
+        GameObject* test = scene->Instance("CubeStatic");
+        {
+            Mesh* copy = mesh->Copy();
+            render->RegisterMesh(copy);
+            test->AddComponent(copy);
+        }
+
+        test->GetTransform()->Translate(Transform::Right * 5.f);
+    }
+
+    GameObject* cube1 = scene->Instance("Cube1");
     {
         mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
         render->RegisterMesh(mesh);
-        cube->AddComponent(mesh);
+        cube1->AddComponent(mesh);
     }
+    cube1->GetTransform()->Translate(Transform::Forward * 5.f);
 
-    cube->GetTransform()->Translate(Transform::Forward * 5.f);
-    cube->GetTransform()->Translate(Transform::Right * 5.f);*/
+    camera_gm->AddChild(cube1);
+
+
+    GameObject* cube2 = scene->Instance("Cube2");
+    {
+        Mesh* copy = mesh->Copy();
+        copy->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
+        render->RegisterMesh(copy);
+        cube2->AddComponent(copy);
+    }
+    cube2->GetTransform()->Translate(Transform::Right * -5.f + Transform::Up * 3.f);
+
+    cube1->AddChild(cube2);
 
     //scene->Destroy(cube);
 
     //std::cout << cube->Save().dump(4) << std::endl;
 
+    /*
     for (int x = -1; x < 10; x++) {
         for (int y = -1; y < 10; y++) {
             for (int z = -1; z < 10; z++) {
@@ -129,7 +152,7 @@ int main(){
                 cube->AddComponent(copy);
             }
         }
-    }
+    }*/
 
     while(!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
         if (camera_gm) {

@@ -69,7 +69,8 @@ bool Framework::Helper::Scene::Destroy() {
 
     auto element = m_gameObjects.begin();
     while(element != m_gameObjects.end()){
-        element->second->Destroy();
+        if (!element->second->m_parent)
+            element->second->Destroy();
         element++;
     }
 

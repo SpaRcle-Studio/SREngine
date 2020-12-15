@@ -9,6 +9,7 @@
 #include <vector>
 #include <mutex>
 #include <json/json.hpp>
+#include <map>
 
 namespace Framework::Helper {
     class Transform;
@@ -39,20 +40,22 @@ namespace Framework::Helper {
         bool AddComponent(Component* component);
         bool AddChild(GameObject* child);
     private:
-        GameObject*                 m_parent        = nullptr;
-        std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
+        //std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
 
-        bool                        m_isDestroy     = false;
+        GameObject*                             m_parent        = nullptr;
+        std::map<GameObject*, GameObject*>      m_children      = std::map<GameObject*, GameObject*>();
 
-        std::mutex                  m_mutex         = std::mutex();
+        bool                                    m_isDestroy     = false;
 
-        Scene*                      m_scene         = nullptr;
-        Transform*                  m_transform     = nullptr;
+        std::mutex                              m_mutex         = std::mutex();
 
-        std::vector<Component*>     m_components    = std::vector<Component*>();
+        Scene*                                  m_scene         = nullptr;
+        Transform*                              m_transform     = nullptr;
 
-        std::string                 m_name          = "Unnamed";
-        std::string                 m_tag           = "None";
+        std::vector<Component*>                 m_components    = std::vector<Component*>();
+
+        std::string                             m_name          = "Unnamed";
+        std::string                             m_tag           = "None";
     };
 }
 
