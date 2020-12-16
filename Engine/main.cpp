@@ -18,6 +18,8 @@
 #include <EntityComponentSystem/Transform.h>
 #include <Types/Skybox.h>
 
+#include <glm/gtx/string_cast.hpp>
+
 #include "UnitTests/UnitTests.h"
 
 using namespace Framework::Helper;
@@ -87,8 +89,12 @@ int main() {
     render->SetSkybox(skybox);
 
     Mesh *mesh = Mesh::Load("cube.obj")[0];
-    Texture *texture = Texture::Load("steel_cube.png", true, TextureType::Diffuse, TextureFilter::LINEAR);
+    Mesh *monkey = Mesh::Load("monkey.obj")[0];
+
+    Texture *texture  = Texture::Load("steel_cube.png", true, TextureType::Diffuse, TextureFilter::LINEAR);
+    //Texture *texture2 = Texture::Load("Cube_triangulate2.png", true, TextureType::Diffuse, TextureFilter::NEAREST);
     render->RegisterTexture(texture);
+    //render->RegisterTexture(texture2);
 
     mesh->GetMaterial()->SetDiffuse(texture);
     mesh->GetMaterial()->SetBloom(true);
@@ -101,7 +107,7 @@ int main() {
             test->AddComponent(copy);
         }
 
-        test->GetTransform()->Translate(Transform::Right * 5.f);
+        test->GetTransform()->Translate(Transform::right * 5.f);
     }
 
     GameObject* cube1 = scene->Instance("Cube1");
@@ -110,21 +116,24 @@ int main() {
         render->RegisterMesh(mesh);
         cube1->AddComponent(mesh);
     }
-    cube1->GetTransform()->Translate(Transform::Forward * 5.f);
+    cube1->GetTransform()->Translate(Transform::forward * 5.f);
 
     camera_gm->AddChild(cube1);
 
 
     GameObject* cube2 = scene->Instance("Cube2");
     {
-        Mesh* copy = mesh->Copy();
-        copy->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
-        render->RegisterMesh(copy);
-        cube2->AddComponent(copy);
+        //Mesh* copy = mesh->Copy();
+        monkey->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
+        monkey->GetMaterial()->SetDiffuse(texture);
+        render->RegisterMesh(monkey);
+        cube2->AddComponent(monkey);
     }
-    cube2->GetTransform()->Translate(Transform::Right * -5.f + Transform::Up * 3.f);
+    cube2->GetTransform()->Translate(Transform::right * -5.f + Transform::up * 3.f);
 
-    cube1->AddChild(cube2);
+    //cube2->GetTransform()->Rotate({ 0, 0, 45 });
+
+    //cube1->AddChild(cube2);
 
     //scene->Destroy(cube);
 
@@ -154,17 +163,48 @@ int main() {
         }
     }*/
 
+    Transform* transform = cube2->GetTransform();
+
     while(!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
+        //transform->LookAt(camera_gm->GetTransform()->GetPosition());
+        //transform->SetRotation(Transform::pitch * -90.f);
+        //transform->SetRotation(Transform::yaw * 45.f);
+       // transform->SetRotation(Transform::yaw * -90.f);
+
+        if (GetKeyDown(KeyCode::_1)) {
+            transform->Rotate(Transform::yaw * 45.f);
+        }else if (GetKeyDown(KeyCode::_2)) {
+            transform->Rotate(Transform::yaw * -45.f);
+        }
+
+        if (GetKeyDown(KeyCode::_3)) {
+            transform->Rotate(Transform::pitch * 45.f);
+        }else if (GetKeyDown(KeyCode::_4)) {
+            transform->Rotate(Transform::pitch * -45.f);
+        }
+
+        if (GetKeyDown(KeyCode::_5)) {
+            transform->Rotate(Transform::roll * 45.f);
+        }else if (GetKeyDown(KeyCode::_6)) {
+            transform->Rotate(Transform::roll * -45.f);
+        }
+
+        if (GetKeyDown(KeyCode::L)){
+            transform->SetPosition(transform->GetPosition() + transform->Right());
+            std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+            std::cout << glm::to_string(transform->GetRotation()) << std::endl;
+        }
+
         if (camera_gm) {
-            static float y = 0;
-            static float x = 0;
-            static float z = 0;
+            static float y = 0; static float old_x = 0.f;
+            static float x = 0; static float old_y = 0.f;
+            static float z = 0; static float old_z = 0.f;
             static glm::vec2 old_pos;
             static glm::vec2 pos;
             static bool  mouse = false;
 
-            if (GetKey(KeyCode::Q))         z += 0.001f;
-            else if (GetKey(KeyCode::E))    z -= 0.001f;
+            if (GetKey(KeyCode::E))         z += 0.001f;
+            else if (GetKey(KeyCode::Q))    z -= 0.001f;
 
             if (mouse) {
                 old_pos = Input::GetMousePos();
@@ -180,22 +220,43 @@ int main() {
                 old_pos = Input::GetMousePos();
             }
 
-            camera_gm->GetTransform()->SetRotation({y, x, z});
+            if (x != old_x || y != old_y || z != old_x) {
+                camera_gm->GetTransform()->SetRotation({y, x, z});
 
-            if (GetKey(KeyCode::D))
-                camera_gm->GetTransform()->Translate(Transform::Right / 5000.f);
+                old_x = x;
+                old_y = y;
+                old_z = z;
+            }
+
+            /*if (GetKey(KeyCode::D))
+                camera_gm->GetTransform()->Translate(Transform::right / 5000.f);
             else if (GetKey(KeyCode::A))
-                camera_gm->GetTransform()->Translate(-Transform::Right / 5000.f);
+                camera_gm->GetTransform()->Translate(-Transform::right / 5000.f);
 
             if (GetKey(KeyCode::W))
-                camera_gm->GetTransform()->Translate(Transform::Forward / 5000.f);
+                camera_gm->GetTransform()->Translate(Transform::forward / 5000.f);
             else if (GetKey(KeyCode::S))
-                camera_gm->GetTransform()->Translate(-Transform::Forward / 5000.f);
+                camera_gm->GetTransform()->Translate(-Transform::forward / 5000.f);
 
             if (GetKey(KeyCode::Space))
-                camera_gm->GetTransform()->Translate(Transform::Up / 5000.f);
+                camera_gm->GetTransform()->Translate(Transform::up / 5000.f);
             else if (GetKey(KeyCode::LShift))
-                camera_gm->GetTransform()->Translate(-Transform::Up / 5000.f);
+                camera_gm->GetTransform()->Translate(-Transform::up / 5000.f);*/
+
+            if (GetKey(KeyCode::D))
+                camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Right() / 5000.f);
+            else if (GetKey(KeyCode::A))
+                camera_gm->GetTransform()->Translate(-camera_gm->GetTransform()->Right() / 5000.f);
+
+            if (GetKey(KeyCode::W))
+                camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Forward() / 5000.f);
+            else if (GetKey(KeyCode::S))
+                camera_gm->GetTransform()->Translate(-camera_gm->GetTransform()->Forward() / 5000.f);
+
+            if (GetKey(KeyCode::Space))
+                camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Up() / 5000.f);
+            else if (GetKey(KeyCode::LShift))
+                camera_gm->GetTransform()->Translate(-camera_gm->GetTransform()->Up() / 5000.f);
         }
 
         if (camera_gm) {
@@ -214,12 +275,13 @@ int main() {
             //if (mesh) { mesh->Destroy();mesh = nullptr;}
         }
 
+        /*
         if (GetKey(KeyCode::L)) {
             //std::vector<Mesh *> meshes1 = Mesh::Load("cube.obj");
             //for (auto a : meshes1)
             //    a->Destroy();
 
-            /*if (mesh) {
+            if (mesh) {
                 GameObject *cube = scene->Instance("Cube");
                 {
                     Mesh *copy = mesh->Copy();
@@ -228,8 +290,8 @@ int main() {
                     cube->AddComponent(copy);
                 }
                 scene->Destroy(cube);
-            }*/
-        }
+            }
+        }*/
 
         if (GetKey(KeyCode::T)) {
             /*

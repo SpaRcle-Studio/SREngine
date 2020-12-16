@@ -82,12 +82,12 @@ void GameObject::UpdateComponentsPosition() {
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
-        component->OnRotate(m_transform->m_rotation + m_transform->m_parent_rotation);
+        component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
 }
 
 void GameObject::UpdateComponentsScale() {
     for (Component* component : m_components)
-        component->OnScaled(m_transform->m_scale    + m_transform->m_parent_scale);
+        component->OnScaled(m_transform->m_scale    + m_transform->m_parent_scale); // or multiple
 }
 
 nlohmann::json GameObject::Save() {

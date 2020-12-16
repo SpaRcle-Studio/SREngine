@@ -22,17 +22,31 @@ namespace Framework::Helper {
         void SetRotation(glm::vec3 val);
         void SetScale(glm::vec3 val);
 
-        void Translate(glm::vec3 val = {0,0,0})   noexcept;
-        void Rotate(glm::vec3 val    = {0,0,0})   noexcept;
-        void Scaling(glm::vec3 val   = {0,0,0})   noexcept;
+        [[nodiscard]] inline glm::vec3 GetPosition() const noexcept { return m_position; }
+        [[nodiscard]] inline glm::vec3 GetRotation() const noexcept { return m_rotation; }
 
-        void RotateAbout(glm::vec3 point, glm::vec3 angle)    noexcept;
+        glm::vec3 Forward() const noexcept;
+        glm::vec3 Right() const   noexcept;
+        glm::vec3 Up() const      noexcept;
+
+        void Translate(glm::vec3 val = {0,0,0})         noexcept;
+        void Rotate(glm::vec3 val    = {0,0,0})         noexcept;
+        void Scaling(glm::vec3 val   = {0,0,0})         noexcept;
+
+        void SetRotationAround(glm::vec3 point, glm::vec3 angle)    noexcept;
+        void RotateAround(glm::vec3 point, glm::vec3 angle)         noexcept;
+
+        void LookAt(glm::vec3 target);
     public:
         nlohmann::json Save();
     public:
-        inline static const glm::vec3 Right     = { 1, 0, 0 };
-        inline static const glm::vec3 Up        = { 0, 1, 0 };
-        inline static const glm::vec3 Forward   = { 0, 0, 1 };
+        inline static const glm::vec3 right     = { 1, 0, 0 };
+        inline static const glm::vec3 up        = { 0, 1, 0 };
+        inline static const glm::vec3 forward   = { 0, 0, 1 };
+
+        inline static const glm::vec3 pitch     = { 1, 0, 0 };
+        inline static const glm::vec3 yaw       = { 0, 1, 0 };
+        inline static const glm::vec3 roll      = { 0, 0, 1 };
     private:
         //void UpdateChild(Transform* parent);
 

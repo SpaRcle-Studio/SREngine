@@ -28,6 +28,58 @@ namespace detail
 	// http://www.opensource.apple.com/source/WebCore/WebCore-514/platform/graphics/transforms/TransformationMatrix.cpp
 	// Decomposes the mode matrix to translations,rotation scale components
 
+    template<typename T, qualifier Q>
+    GLM_FUNC_QUALIFIER qua<T, Q> getRotation(mat<4,4,T,Q> const& ModelMatrix)
+    {
+        qua<T, Q> Orientation;
+
+        mat<4, 4, T, Q> LocalMatrix(ModelMatrix);
+
+        for(length_t i = 0; i < 4; ++i)
+            for(length_t j = 0; j < 4; ++j)
+                LocalMatrix[i][j] /= LocalMatrix[3][3];
+
+        LocalMatrix[3] = vec<4, T, Q>(0, 0, 0, LocalMatrix[3].w);
+
+        vec<3, T, Q> Row[3], Pdum3;
+
+        // Now get scale and shear.
+        for(length_t i = 0; i < 3; ++i)
+            for(length_t j = 0; j < 3; ++j)
+                Row[i][j] = LocalMatrix[i][j];
+
+        int i, j, k = 0;
+        T root, trace = Row[0].x + Row[1].y + Row[2].z;
+        if(trace > static_cast<T>(0))
+        {
+            root = sqrt(trace + static_cast<T>(1.0));
+            Orientation.w = static_cast<T>(0.5) * root;
+            root = static_cast<T>(0.5) / root;
+            Orientation.x = root * (Row[1].z - Row[2].y);
+            Orientation.y = root * (Row[2].x - Row[0].z);
+            Orientation.z = root * (Row[0].y - Row[1].x);
+        } // End if > 0
+        else
+        {
+            static int Next[3] = {1, 2, 0};
+            i = 0;
+            if(Row[1].y > Row[0].x) i = 1;
+            if(Row[2].z > Row[i][i]) i = 2;
+            j = Next[i];
+            k = Next[j];
+
+            root = sqrt(Row[i][i] - Row[j][j] - Row[k][k] + static_cast<T>(1.0));
+
+            Orientation[i] = static_cast<T>(0.5) * root;
+            root = static_cast<T>(0.5) / root;
+            Orientation[j] = root * (Row[i][j] + Row[j][i]);
+            Orientation[k] = root * (Row[i][k] + Row[k][i]);
+            Orientation.w = root * (Row[j][k] - Row[k][j]);
+        } // End if <= 0
+
+        return Orientation;
+    }
+
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER bool decompose(mat<4, 4, T, Q> const& ModelMatrix, vec<3, T, Q> & Scale, qua<T, Q> & Orientation, vec<3, T, Q> & Translation, vec<3, T, Q> & Skew, vec<4, T, Q> & Perspective)
 	{

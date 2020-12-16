@@ -19,6 +19,7 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <map>
 #include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/euler_angles.hpp>
 
 using namespace Framework::Graphics::Types;
 
@@ -122,9 +123,23 @@ void Mesh::ReCalcModel() {
              //0, -8, -25
     }); //
 
+
+    /*
     modelMat = glm::rotate(modelMat, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
-    modelMat = glm::rotate(modelMat, glm::radians(m_rotation.y), glm::vec3(0, 1, 0));
+    //modelMat = glm::rotate(modelMat, glm::radians(m_rotation.y), glm::vec3(0, 1, 0));
+    modelMat = glm::rotate(modelMat, glm::radians(-m_rotation.y), glm::vec3(0, 1, 0));
     modelMat = glm::rotate(modelMat, glm::radians(m_rotation.z), glm::vec3(0, 0, 1));
+    */
+
+    /*glm::vec3 rad = glm::radians(m_rotation);
+
+    glm::mat4 rotMatrix = glm::eulerAngleXYZ(rad.x, -rad.y, rad.z);
+
+    modelMat *= rotMatrix;*/
+    //if (m_rotation != glm::vec3(0))
+
+    //glm::fquat q = glm::radians(m_rotation);
+    //modelMat *= q;
 
     modelMat = glm::scale(modelMat, m_scale);
 

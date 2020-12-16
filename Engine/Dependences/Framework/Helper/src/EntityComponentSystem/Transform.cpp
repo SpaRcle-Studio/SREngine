@@ -1,6 +1,7 @@
 //
 // Created by Nikita on 27.11.2020.
 //
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include <Math/Mathematics.h>
 #include "EntityComponentSystem/Transform.h"
@@ -8,6 +9,8 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 
 Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
     this->m_gameObject = parent;
@@ -28,9 +31,9 @@ void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
 
     m_gameObject->UpdateComponentsRotation();
 
-    //for (auto gm : m_gameObject->m_children) {
-    //    gm.second->m_transform->UpdateChildRotation(this);
-    //}
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildRotation(this);
+    }
 }
 
 void Framework::Helper::Transform::SetScale(glm::vec3 val) {
@@ -43,8 +46,7 @@ void Framework::Helper::Transform::SetScale(glm::vec3 val) {
 }
 
 void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
-    val = LocalDirection(val);
-
+    //val = LocalDirection(val);
     this->SetPosition(m_position + val);
 }
 
@@ -55,7 +57,6 @@ void Framework::Helper::Transform::Rotate(glm::vec3 val) noexcept {
 void Framework::Helper::Transform::Scaling(glm::vec3 val) noexcept {
     this->SetScale(m_scale + val);
 }
-
 
 //void Framework::Helper::Transform::UpdateChild(Framework::Helper::Transform *parent) {
   //  this->m_parent_position = parent->m_position + parent->m_parent_position;
@@ -68,10 +69,6 @@ void Framework::Helper::Transform::Scaling(glm::vec3 val) noexcept {
 //}
 
 glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
-    //float dx = cos(m_rotation.x * M_PI / 45.f / 4.f);
-    //float dy = cos(m_rotation.y * M_PI / 45.f / 4.f);
-    //float dz = 0;
-
     glm::vec3 rad = {
             m_rotation.x * M_PI / 45.f / 4.f,
             m_rotation.y * M_PI / 45.f / 4.f,
@@ -112,21 +109,129 @@ nlohmann::json Framework::Helper::Transform::Save() {
 void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexcept {
     this->m_parent_position = parent->m_position + parent->m_parent_position;
 
-    this->m_gameObject->UpdateComponentsPosition();
-
     this->SetPosition(m_position);
 }
 
 void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent) noexcept {
-    //this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
+    this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
 
-    //this->m_gameObject->UpdateComponentsRotation();
+    //this->SetRotation(m_rotation);
+    //this->RotateAround(m_parent_position, m_parent_rotation);
+    this->SetRotationAround(m_parent_position, m_parent_rotation);
 }
 
 void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform *parent) noexcept {
 
 }
 
-void Framework::Helper::Transform::RotateAbout(glm::vec3 point, glm::vec3 angle) noexcept {
+void Framework::Helper::Transform::SetRotationAround(glm::vec3 point, glm::vec3 newAngle) noexcept {
+    m_gameObject->UpdateComponentsRotation();
+    m_gameObject->UpdateComponentsPosition();
 
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildPosition(this);
+    }
+}
+
+void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
+    //this->m_rotation = angle;
+
+    //glm::vec3 delta = angle - m_rotation;
+
+    //m_rotation = angle;
+    //glm::vec3 rad = glm::radians(m_rotation);
+
+    /*{
+        glm::vec3 dir = glm::angleAxis((float) (glm::radians(delta.x)), glm::vec3(
+                1,
+                0,
+                0
+        )) * (m_position - point);
+
+        this->m_position = point + dir;
+    }*/
+
+    //m_rotation = angle;
+
+    m_gameObject->UpdateComponentsRotation();
+    m_gameObject->UpdateComponentsPosition();
+
+    //std::cout << glm::to_string(m_rotation) << std::endl;
+    //std::cout << glm::to_string(m_rotation) << std::endl;
+
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildPosition(this);
+    }
+}
+
+void Framework::Helper::Transform::LookAt(glm::vec3 target) {
+    glm::mat4 mat = glm::lookAt(m_position, target, {0,1,0});
+
+    /*glm::vec3 scale;
+    glm::quat rotation;
+    glm::vec3 translation;
+    glm::vec3 skew;
+    glm::vec4 perspective;
+    glm::decompose(mat, scale, rotation, translation, skew,perspective);*/
+
+    glm::vec3 deg = glm::degrees(glm::eulerAngles(glm::getRotation(mat)));
+    this->m_rotation = {
+        deg.x,
+        -deg.y,
+        -deg.z,
+    };
+
+    this->m_gameObject->UpdateComponentsRotation();
+
+    this->UpdateChildRotation(this);
+}
+
+// TODO: Clear next methods. They is finished and worked.
+
+glm::vec3 Framework::Helper::Transform::Forward() const noexcept {
+    glm::fquat rad = glm::radians(glm::vec3(
+            m_rotation.x,
+            m_rotation.y, //-m_rotation.y,
+            -m_rotation.z //-m_rotation.z
+    ));
+
+    glm::vec3 dir = rad * forward;
+
+    return {
+        dir.x,
+        dir.y,
+        dir.z // -dir.z
+    };
+}
+glm::vec3 Framework::Helper::Transform::Right() const noexcept {
+    glm::fquat rad = glm::radians(glm::vec3(
+            m_rotation.x,
+            m_rotation.y,
+            -m_rotation.z //-m_rotation.z
+    ));
+
+    glm::vec3 dir = rad * right;
+
+    return {
+            dir.x,
+            dir.y,
+            dir.z
+    };
+}
+glm::vec3 Framework::Helper::Transform::Up() const noexcept {
+    glm::fquat rad = glm::radians(glm::vec3(
+            m_rotation.x,
+            m_rotation.y,
+            -m_rotation.z //-m_rotation.z
+    ));
+
+    glm::vec3 dir = rad * up;
+
+    return {
+            dir.x,
+            dir.y,
+            dir.z
+    };
 }
