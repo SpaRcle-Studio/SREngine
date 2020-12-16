@@ -110,6 +110,7 @@ int main() {
         test->GetTransform()->Translate(Transform::right * 5.f);
     }
 
+    /*
     GameObject* cube1 = scene->Instance("Cube1");
     {
         mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
@@ -118,18 +119,19 @@ int main() {
     }
     cube1->GetTransform()->Translate(Transform::forward * 5.f);
 
-    camera_gm->AddChild(cube1);
+    camera_gm->AddChild(cube1);*/
 
 
-    GameObject* cube2 = scene->Instance("Cube2");
+    GameObject* MonkeyGM = scene->Instance("Monkey");
     {
         //Mesh* copy = mesh->Copy();
         monkey->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
         monkey->GetMaterial()->SetDiffuse(texture);
         render->RegisterMesh(monkey);
-        cube2->AddComponent(monkey);
+        MonkeyGM->AddComponent(monkey);
     }
-    cube2->GetTransform()->Translate(Transform::right * -5.f + Transform::up * 3.f);
+    //MonkeyGM->GetTransform()->Translate(Transform::right * -5.f + Transform::up * 3.f);
+    MonkeyGM->GetTransform()->Translate(Transform::forward * 10.f);
 
     //cube2->GetTransform()->Rotate({ 0, 0, 45 });
 
@@ -163,18 +165,19 @@ int main() {
         }
     }*/
 
-    Transform* transform = cube2->GetTransform();
+    Transform* transform = MonkeyGM->GetTransform();
+    //transform->SetPosition(Transform::forward * 5.f);
 
     while(!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
-        //transform->LookAt(camera_gm->GetTransform()->GetPosition());
+        transform->LookAt(camera_gm->GetTransform()->GetPosition());
         //transform->SetRotation(Transform::pitch * -90.f);
         //transform->SetRotation(Transform::yaw * 45.f);
        // transform->SetRotation(Transform::yaw * -90.f);
 
         if (GetKeyDown(KeyCode::_1)) {
-            transform->Rotate(Transform::yaw * 45.f);
-        }else if (GetKeyDown(KeyCode::_2)) {
             transform->Rotate(Transform::yaw * -45.f);
+        }else if (GetKeyDown(KeyCode::_2)) {
+            transform->Rotate(Transform::yaw * 45.f);
         }
 
         if (GetKeyDown(KeyCode::_3)) {
@@ -189,10 +192,26 @@ int main() {
             transform->Rotate(Transform::roll * -45.f);
         }
 
-        if (GetKeyDown(KeyCode::L)){
-            transform->SetPosition(transform->GetPosition() + transform->Right());
-            std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+        float dist = transform->Distance(camera_gm->GetTransform());
+        //if (dist > 5.f) {
+        //    transform->Translate(transform->Forward() * 0.0001f);
+        //}
+
+        if (GetKeyDown(KeyCode::_0)) {
+            //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+            //std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+
             std::cout << glm::to_string(transform->GetRotation()) << std::endl;
+            std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
+
+            //std::cout << dist << std::endl;
+        }
+
+        if (GetKeyDown(KeyCode::L)){
+            //transform->Translate(Transform::forward);
+            transform->Translate(transform->Forward());
+            //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+            //std::cout << glm::to_string(transform->GetRotation()) << std::endl;
         }
 
         if (camera_gm) {
@@ -228,30 +247,15 @@ int main() {
                 old_z = z;
             }
 
-            /*if (GetKey(KeyCode::D))
-                camera_gm->GetTransform()->Translate(Transform::right / 5000.f);
-            else if (GetKey(KeyCode::A))
-                camera_gm->GetTransform()->Translate(-Transform::right / 5000.f);
-
             if (GetKey(KeyCode::W))
-                camera_gm->GetTransform()->Translate(Transform::forward / 5000.f);
+                camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Forward() / 5000.f);
             else if (GetKey(KeyCode::S))
-                camera_gm->GetTransform()->Translate(-Transform::forward / 5000.f);
-
-            if (GetKey(KeyCode::Space))
-                camera_gm->GetTransform()->Translate(Transform::up / 5000.f);
-            else if (GetKey(KeyCode::LShift))
-                camera_gm->GetTransform()->Translate(-Transform::up / 5000.f);*/
+                camera_gm->GetTransform()->Translate(-camera_gm->GetTransform()->Forward() / 5000.f);
 
             if (GetKey(KeyCode::D))
                 camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Right() / 5000.f);
             else if (GetKey(KeyCode::A))
                 camera_gm->GetTransform()->Translate(-camera_gm->GetTransform()->Right() / 5000.f);
-
-            if (GetKey(KeyCode::W))
-                camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Forward() / 5000.f);
-            else if (GetKey(KeyCode::S))
-                camera_gm->GetTransform()->Translate(-camera_gm->GetTransform()->Forward() / 5000.f);
 
             if (GetKey(KeyCode::Space))
                 camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Up() / 5000.f);
@@ -384,6 +388,8 @@ int main() {
 
     scene->Destroy();
     scene->Free();
+
+    Sleep(100);
 
     window->Close();
 

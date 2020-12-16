@@ -114,7 +114,11 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
 
     );
 
-    m_viewMat = glm::translate(matrix, -m_pos);
+    m_viewMat = glm::translate(matrix, {
+        -m_pos.x,
+        -m_pos.y,
+        -m_pos.z
+    });
 
     //m_pitch * cos(m_roll)   +  m_yaw * sin(m_roll)    + m_roll * sin(m_yaw)
     //   * cos(m_roll)   + m_pitch * sin(m_roll)   + m_roll * sin(m_pitch)
@@ -187,7 +191,7 @@ void Framework::Graphics::Camera::OnRotate(glm::vec3 newValue) noexcept {
 
 void Framework::Graphics::Camera::OnMove(glm::vec3 newValue) noexcept {
     this->m_pos = {
-            newValue.x,
+             newValue.x,
              newValue.y,
             -newValue.z
     };

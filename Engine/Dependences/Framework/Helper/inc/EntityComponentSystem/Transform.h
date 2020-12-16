@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 #include <json/json.hpp>
+#include <glm/detail/type_quat.hpp>
 
 namespace Framework::Helper {
     class GameObject;
@@ -15,8 +16,8 @@ namespace Framework::Helper {
     private:
         Transform(GameObject* parent);
         ~Transform() = default;
-    public:
-        glm::vec3 LocalDirection(const glm::vec3& dir);
+    //public:
+    //   glm::vec3 LocalDirection(const glm::vec3& dir);
     public:
         void SetPosition(glm::vec3 val);
         void SetRotation(glm::vec3 val);
@@ -24,6 +25,16 @@ namespace Framework::Helper {
 
         [[nodiscard]] inline glm::vec3 GetPosition() const noexcept { return m_position; }
         [[nodiscard]] inline glm::vec3 GetRotation() const noexcept { return m_rotation; }
+
+        inline float Distance(Transform* transform) const noexcept {
+            //return glm::distance(m_position, transform->m_position);
+            glm::vec3 p2 = transform->m_position;
+            return sqrt(
+                pow(p2.x - m_position.x, 2) +
+                pow(p2.y - m_position.y, 2) +
+                pow(p2.z - m_position.z, 2)
+            );
+        }
 
         glm::vec3 Forward() const noexcept;
         glm::vec3 Right() const   noexcept;

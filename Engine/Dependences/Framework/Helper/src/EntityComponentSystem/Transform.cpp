@@ -51,6 +51,9 @@ void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
 }
 
 void Framework::Helper::Transform::Rotate(glm::vec3 val) noexcept {
+    //glm::fquat q = glm::radians(val);
+
+    //this->SetRotation(q * m_rotation);
     this->SetRotation(m_rotation + val);
 }
 
@@ -68,6 +71,7 @@ void Framework::Helper::Transform::Scaling(glm::vec3 val) noexcept {
     //this->m_parent->UpdateComponentsScale();
 //}
 
+/*
 glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
     glm::vec3 rad = {
             m_rotation.x * M_PI / 45.f / 4.f,
@@ -80,7 +84,7 @@ glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
             dir.y * cos(rad.x)                  - sin(rad.x) * dir.z, // + sin(rad.x) * dir.y
             dir.z * cos(rad.y) * cos(rad.x)     - sin(rad.y) * dir.x
             );
-}
+}*/
 
 nlohmann::json Framework::Helper::Transform::Save() {
     nlohmann::json json;
@@ -167,21 +171,22 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
 }
 
 void Framework::Helper::Transform::LookAt(glm::vec3 target) {
-    glm::mat4 mat = glm::lookAt(m_position, target, {0,1,0});
+    glm::mat4 mat = glm::lookAt({m_position.x, m_position.y, m_position.z}, target, {0,1,0});
 
-    /*glm::vec3 scale;
+    glm::mat4 transformation;
+    glm::vec3 scale;
     glm::quat rotation;
     glm::vec3 translation;
     glm::vec3 skew;
     glm::vec4 perspective;
-    glm::decompose(mat, scale, rotation, translation, skew,perspective);*/
+    glm::decompose(transformation, scale, rotation, translation, skew, perspective);
 
-    glm::vec3 deg = glm::degrees(glm::eulerAngles(glm::getRotation(mat)));
-    this->m_rotation = {
+    glm::vec3 deg = glm::degrees(glm::eulerAngles(rotation));
+    this->m_rotation = glm::vec3({
         deg.x,
-        -deg.y,
+        -deg.y + 180.f,
         -deg.z,
-    };
+    });
 
     this->m_gameObject->UpdateComponentsRotation();
 
