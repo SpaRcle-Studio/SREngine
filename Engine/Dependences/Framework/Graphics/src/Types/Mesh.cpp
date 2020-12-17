@@ -129,15 +129,23 @@ void Mesh::ReCalcModel() {
             -m_position.z
     });
 
-    modelMat = glm::rotate(modelMat, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
-    modelMat = glm::rotate(modelMat, glm::radians(-m_rotation.y + 180.f), glm::vec3(0, 1, 0));
-    modelMat = glm::rotate(modelMat, glm::radians(m_rotation.z), glm::vec3(0, 0, 1));
+    const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(
+            {
+                -m_rotation.x,
+                -m_rotation.y + 180.f,
+                m_rotation.z
+            }
+            ))));
+
+    //modelMat = glm::rotate(modelMat, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
+    //modelMat = glm::rotate(modelMat, glm::radians(-m_rotation.y + 180.f), glm::vec3(0, 1, 0));
+    //modelMat = glm::rotate(modelMat, glm::radians(m_rotation.z), glm::vec3(0, 0, 1));
 
     //glm::vec3 rad = glm::radians(m_rotation);
 
     //glm::mat4 rotMatrix = glm::eulerAngleXYZ(rad.x, rad.y, rad.z);
 
-    //modelMat *= rotMatrix;
+    modelMat *= rotationMatrix;
 
     //if (m_rotation != glm::vec3(0))
 

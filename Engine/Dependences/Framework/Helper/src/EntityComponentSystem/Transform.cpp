@@ -173,6 +173,8 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
 void Framework::Helper::Transform::LookAt(glm::vec3 target) {
     glm::mat4 mat = glm::lookAt({m_position.x, m_position.y, m_position.z}, target, {0,1,0});
 
+    mat = glm::inverse(mat); // if use quaternions in mesh calc model
+
     glm::mat4 transformation;
     glm::vec3 scale;
     glm::quat rotation;
@@ -184,9 +186,21 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
     glm::vec3 deg = glm::degrees(glm::eulerAngles(rotation));
     this->m_rotation = glm::vec3({
         deg.x,
-        -deg.y + 180.f,
-        -deg.z,
+        deg.y + 180.f,
+        deg.z,
     });
+
+//    this->m_rotation = glm::vec3({
+//         deg.x,
+//         -deg.y + 180.f,
+//         -deg.z,
+//     });
+
+
+    // Check nan
+    if (m_rotation.x != m_rotation.x) m_rotation.x = 0.f;
+    if (m_rotation.y != m_rotation.y) m_rotation.y = 0.f;
+    if (m_rotation.z != m_rotation.z) m_rotation.z = 0.f;
 
     this->m_gameObject->UpdateComponentsRotation();
 
@@ -195,35 +209,56 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
 
 // TODO: Clear next methods. They is finished and worked.
 
+float fun(glm::vec3 rot){
+    //if (abs(rot.z) >= 90.f ^ abs(rot.x) >= 90.f)
+
+    /*
+    if (rot.x >= 90.f && rot.z <= -90.f)
+        return 1.f;
+
+    if (rot.x <= -90.f && rot.z >= 90.f)
+        return 1.f;
+
+    if (rot.x <= -90.f && rot.z <= -90.f)
+        return 1.f;
+*/
+    //if (abs(rot.z) >= 90.f)
+    //    return -1.f;
+
+    return 1.f;
+}
+
 glm::vec3 Framework::Helper::Transform::Forward() const noexcept {
-    glm::fquat rad = glm::radians(glm::vec3(
-            m_rotation.x,
-            m_rotation.y, //-m_rotation.y,
-            -m_rotation.z //-m_rotation.z
-    ));
+    glm::vec3 rad = glm::radians(m_rotation);
 
-    glm::vec3 dir = rad * forward;
+    glm::fquat q = glm::vec3(
+            rad.x,
+            rad.y,
+            -rad.z
+    );
 
-    return {
+    glm::vec3 dir = q * forward;
+
+    return glm::vec3({
         dir.x,
         dir.y,
         dir.z // -dir.z
-    };
+    });
 }
 glm::vec3 Framework::Helper::Transform::Right() const noexcept {
     glm::fquat rad = glm::radians(glm::vec3(
             m_rotation.x,
             m_rotation.y,
-            -m_rotation.z //-m_rotation.z
+            -m_rotation.z
     ));
 
     glm::vec3 dir = rad * right;
 
-    return {
-            dir.x,
-            dir.y,
-            dir.z
-    };
+    return glm::vec3({
+         dir.x,
+         dir.y,
+         dir.z // -dir.z
+    });
 }
 glm::vec3 Framework::Helper::Transform::Up() const noexcept {
     glm::fquat rad = glm::radians(glm::vec3(
@@ -234,9 +269,9 @@ glm::vec3 Framework::Helper::Transform::Up() const noexcept {
 
     glm::vec3 dir = rad * up;
 
-    return {
-            dir.x,
-            dir.y,
-            dir.z
-    };
+    return glm::vec3({
+         dir.x,
+         dir.y,
+         dir.z // -dir.z
+    });
 }
