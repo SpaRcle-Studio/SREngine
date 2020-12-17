@@ -26,6 +26,13 @@ namespace Framework::Helper {
         [[nodiscard]] inline glm::vec3 GetPosition() const noexcept { return m_position; }
         [[nodiscard]] inline glm::vec3 GetRotation() const noexcept { return m_rotation; }
 
+        inline float Distance(glm::vec3 point) const noexcept {
+            return sqrt(
+                    pow(point.x - m_position.x, 2) +
+                    pow(point.y - m_position.y, 2) +
+                    pow(point.z - m_position.z, 2)
+            );
+        }
         inline float Distance(Transform* transform) const noexcept {
             //return glm::distance(m_position, transform->m_position);
             glm::vec3 p2 = transform->m_position;
@@ -44,8 +51,9 @@ namespace Framework::Helper {
         void Rotate(glm::vec3 val    = {0,0,0})         noexcept;
         void Scaling(glm::vec3 val   = {0,0,0})         noexcept;
 
-        void SetRotationAround(glm::vec3 point, glm::vec3 angle)    noexcept;
-        void RotateAround(glm::vec3 point, glm::vec3 angle)         noexcept;
+        //void SetRotationAround(glm::vec3 point, glm::vec3 angle)    noexcept;
+        //void RotateAround(glm::vec3 point, glm::vec3 angle)         noexcept;
+        void RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept;
 
         void LookAt(glm::vec3 target);
     public:

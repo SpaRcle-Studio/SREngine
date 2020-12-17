@@ -121,14 +121,17 @@ void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transf
 
     //this->SetRotation(m_rotation);
     //this->RotateAround(m_parent_position, m_parent_rotation);
-    this->SetRotationAround(m_parent_position, m_parent_rotation);
+    //this->SetRotationAround(m_parent_position, m_parent_rotation);
 }
 
 void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform *parent) noexcept {
 
 }
 
+/*
 void Framework::Helper::Transform::SetRotationAround(glm::vec3 point, glm::vec3 newAngle) noexcept {
+
+
     m_gameObject->UpdateComponentsRotation();
     m_gameObject->UpdateComponentsPosition();
 
@@ -136,17 +139,18 @@ void Framework::Helper::Transform::SetRotationAround(glm::vec3 point, glm::vec3 
         gm.second->m_transform->UpdateChildRotation(this);
         gm.second->m_transform->UpdateChildPosition(this);
     }
-}
+}*/
 
+/*
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
     //this->m_rotation = angle;
 
-    //glm::vec3 delta = angle - m_rotation;
+    glm::vec3 delta = angle - m_rotation;
 
     //m_rotation = angle;
     //glm::vec3 rad = glm::radians(m_rotation);
 
-    /*{
+    {
         glm::vec3 dir = glm::angleAxis((float) (glm::radians(delta.x)), glm::vec3(
                 1,
                 0,
@@ -154,7 +158,7 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
         )) * (m_position - point);
 
         this->m_position = point + dir;
-    }*/
+    }
 
     //m_rotation = angle;
 
@@ -168,7 +172,7 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
         gm.second->m_transform->UpdateChildRotation(this);
         gm.second->m_transform->UpdateChildPosition(this);
     }
-}
+}*/
 
 void Framework::Helper::Transform::LookAt(glm::vec3 target) {
     glm::mat4 mat = glm::lookAt({m_position.x, m_position.y, m_position.z}, target, {0,1,0});
@@ -208,25 +212,6 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
 }
 
 // TODO: Clear next methods. They is finished and worked.
-
-float fun(glm::vec3 rot){
-    //if (abs(rot.z) >= 90.f ^ abs(rot.x) >= 90.f)
-
-    /*
-    if (rot.x >= 90.f && rot.z <= -90.f)
-        return 1.f;
-
-    if (rot.x <= -90.f && rot.z >= 90.f)
-        return 1.f;
-
-    if (rot.x <= -90.f && rot.z <= -90.f)
-        return 1.f;
-*/
-    //if (abs(rot.z) >= 90.f)
-    //    return -1.f;
-
-    return 1.f;
-}
 
 glm::vec3 Framework::Helper::Transform::Forward() const noexcept {
     glm::vec3 rad = glm::radians(m_rotation);
@@ -274,4 +259,22 @@ glm::vec3 Framework::Helper::Transform::Up() const noexcept {
          dir.y,
          dir.z // -dir.z
     });
+}
+
+void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept {
+    //Vector3 vector3 = Quaternion.AngleAxis(angle, axis) * (position - point);
+    //this.position = point + vector3;
+
+    glm::vec3 vector3 = glm::angleAxis(angle, axis) * (m_position - point);
+    this->m_position = point + vector3;
+
+    //!===================================================
+
+    m_gameObject->UpdateComponentsRotation();
+    m_gameObject->UpdateComponentsPosition();
+
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildPosition(this);
+    }
 }
