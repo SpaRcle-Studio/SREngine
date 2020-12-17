@@ -97,6 +97,22 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     //glm::mat4 trans = glm::translate(glm::mat4(1), -m_pos);
     //this->m_viewMat = trans * view;
 
+
+    /*const glm::mat4 transMat = glm::translate(glm::mat4(1.f), {
+            -m_pos.x,
+            -m_pos.y,
+            -m_pos.z
+    });
+
+    const glm::mat4 rotationMat = mat4_cast(glm::quat(glm::vec3(
+            {
+                    m_pitch,
+                    -m_yaw + glm::radians(180.f),
+                    m_roll
+            }
+    )));
+    m_viewMat = rotationMat * transMat;*/
+
     glm::mat4 matrix(1.f);
 
     matrix = glm::rotate(matrix,

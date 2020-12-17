@@ -173,6 +173,8 @@ int main() {
         //transform->SetRotation(Transform::pitch * 90.f);
         // transform->SetRotation(Transform::yaw * -90.f);
 
+        //camera_gm->GetTransform()->LookAt(transform->GetPosition());
+
         if (GetKey(KeyCode::UpArrow)) {
             test->GetTransform()->Translate(test->GetTransform()->Forward() * 0.0005f);
         } else if (GetKey(KeyCode::DownArrow)) {
@@ -208,6 +210,7 @@ int main() {
 
         float dist = transform->Distance(camera_gm->GetTransform());
         if (dist > 5.f) {
+            //camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Forward() * 0.0005f);
             //transform->Translate(transform->Forward() * 0.0005f);
         }
 
@@ -216,7 +219,7 @@ int main() {
             //std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
 
             std::cout << glm::to_string(transform->GetRotation()) << std::endl;
-            //std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
+            std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
 
             //std::cout << dist << std::endl;
         }

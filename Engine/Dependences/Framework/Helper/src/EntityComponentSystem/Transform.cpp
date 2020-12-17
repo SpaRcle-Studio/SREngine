@@ -185,7 +185,7 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
 
     glm::vec3 deg = glm::degrees(glm::eulerAngles(rotation));
     this->m_rotation = glm::vec3({
-        deg.x,
+        -deg.x,
         deg.y + 180.f,
         deg.z,
     });

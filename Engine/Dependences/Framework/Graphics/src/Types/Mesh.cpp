@@ -131,9 +131,9 @@ void Mesh::ReCalcModel() {
 
     const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(
             {
-                -m_rotation.x,
+                m_rotation.x,
                 -m_rotation.y + 180.f,
-                m_rotation.z
+                -m_rotation.z
             }
             ))));
 
