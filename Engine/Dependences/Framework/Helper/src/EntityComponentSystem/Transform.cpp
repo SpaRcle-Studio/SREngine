@@ -189,7 +189,7 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
 
     glm::vec3 deg = glm::degrees(glm::eulerAngles(rotation));
     this->m_rotation = glm::vec3({
-        -deg.x,
+        deg.x,
         deg.y + 180.f,
         deg.z,
     });
@@ -217,7 +217,7 @@ glm::vec3 Framework::Helper::Transform::Forward() const noexcept {
     glm::vec3 rad = glm::radians(m_rotation);
 
     glm::fquat q = glm::vec3(
-            rad.x,
+            -rad.x,
             rad.y,
             -rad.z
     );
@@ -232,7 +232,7 @@ glm::vec3 Framework::Helper::Transform::Forward() const noexcept {
 }
 glm::vec3 Framework::Helper::Transform::Right() const noexcept {
     glm::fquat rad = glm::radians(glm::vec3(
-            m_rotation.x,
+            -m_rotation.x,
             m_rotation.y,
             -m_rotation.z
     ));
@@ -247,7 +247,7 @@ glm::vec3 Framework::Helper::Transform::Right() const noexcept {
 }
 glm::vec3 Framework::Helper::Transform::Up() const noexcept {
     glm::fquat rad = glm::radians(glm::vec3(
-            m_rotation.x,
+            -m_rotation.x,
             m_rotation.y,
             -m_rotation.z //-m_rotation.z
     ));

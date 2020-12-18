@@ -44,8 +44,8 @@ namespace Framework::Helper {
         }
 
         glm::vec3 Forward() const noexcept;
-        glm::vec3 Right() const   noexcept;
-        glm::vec3 Up() const      noexcept;
+        glm::vec3 Right()   const noexcept;
+        glm::vec3 Up()    const noexcept;
 
         void Translate(glm::vec3 val = {0,0,0})         noexcept;
         void Rotate(glm::vec3 val    = {0,0,0})         noexcept;
@@ -60,8 +60,12 @@ namespace Framework::Helper {
         nlohmann::json Save();
     public:
         inline static const glm::vec3 right     = { 1, 0, 0 };
-        inline static const glm::vec3 up        = { 0, 1, 0 };
         inline static const glm::vec3 forward   = { 0, 0, 1 };
+        inline static const glm::vec3 up        = { 0, 1, 0 };
+
+        inline static const glm::vec3 down      = {  0, -1,  0 };
+        inline static const glm::vec3 left      = { -1,  0,  0 };
+        inline static const glm::vec3 back      = {  0,  0, -1 };
 
         inline static const glm::vec3 pitch     = { 1, 0, 0 };
         inline static const glm::vec3 yaw       = { 0, 1, 0 };

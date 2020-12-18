@@ -165,23 +165,26 @@ int main() {
 
     Transform *transform = MonkeyGM->GetTransform();
     //transform->SetPosition(Transform::forward * 5.f);
-    transform->RotateAround(camera_gm->GetTransform()->GetPosition(), {1,0,0}, 90.f);
+    //transform->RotateAround(camera_gm->GetTransform()->GetPosition(), {1,0,0}, 90.f);
 
     while (!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
         //transform->LookAt(test->GetTransform()->GetPosition());
+        //transform->LookAt(camera_gm->GetTransform()->GetPosition());
         //transform->SetRotation(Transform::pitch * -90.f);
         //transform->SetRotation(Transform::pitch * 90.f);
         // transform->SetRotation(Transform::yaw * -90.f);
 
 
+        transform->RotateAround(camera_gm->GetTransform()->GetPosition(), {1,0,0}, 0.001f);
+
         //camera_gm->GetTransform()->LookAt(transform->GetPosition());
 
         if (GetKeyDown(KeyCode::_0)) {
-            //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
-            //std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+            std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+            std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
 
-            std::cout << glm::to_string(transform->GetRotation()) << std::endl;
-            std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
+            //std::cout << glm::to_string(transform->GetRotation()) << std::endl;
+            //std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
 
             //std::cout << dist << std::endl;
         }
@@ -230,12 +233,13 @@ int main() {
             transform->Translate(transform->Right() * 0.0005f);
         }
 
+        */
         if (GetKey(KeyCode::L)) {
             //transform->Translate(Transform::forward);
             transform->Translate(transform->Forward() * 0.0005f);
             //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
             //std::cout << glm::to_string(transform->GetRotation()) << std::endl;
-        }*/
+        }
 
         if (camera_gm) {
             static float y = 0;
@@ -257,7 +261,7 @@ int main() {
                 pos = Input::GetMousePos();
 
                 x += (float) (old_pos.x - pos.x) / 25.f;
-                y += (float) (old_pos.y - pos.y) / 25.f;
+                y -= (float) (old_pos.y - pos.y) / 25.f;
             } else {
                 mouse = true;
                 window->CentralizeCursor();
