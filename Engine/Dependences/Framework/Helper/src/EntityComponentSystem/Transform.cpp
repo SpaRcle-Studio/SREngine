@@ -262,10 +262,7 @@ glm::vec3 Framework::Helper::Transform::Up() const noexcept {
 }
 
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept {
-    //Vector3 vector3 = Quaternion.AngleAxis(angle, axis) * (position - point);
-    //this.position = point + vector3;
-
-    glm::vec3 vector3 = glm::angleAxis(angle, axis) * (m_position - point);
+    glm::vec3 vector3 = glm::angleAxis(glm::radians(angle), axis) * (m_position - point);
     this->m_position = point + vector3;
 
     //!===================================================
