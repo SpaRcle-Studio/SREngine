@@ -275,3 +275,30 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis,
         gm.second->m_transform->UpdateChildPosition(this);
     }
 }
+
+void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
+    glm::vec3 vector3;
+
+    if (angle.x != 0) {
+        vector3 = glm::angleAxis(glm::radians(angle.x), pitch) * (m_position - point);
+        this->m_position = point + vector3;
+    }
+    if (angle.y != 0) {
+        vector3 = glm::angleAxis(glm::radians(angle.y), yaw) * (m_position - point);
+        this->m_position = point + vector3;
+    }
+    if (angle.z != 0) {
+        vector3 = glm::angleAxis(glm::radians(angle.z), roll) * (m_position - point);
+        this->m_position = point + vector3;
+    }
+
+    //!===================================================
+
+    m_gameObject->UpdateComponentsRotation();
+    m_gameObject->UpdateComponentsPosition();
+
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildPosition(this);
+    }
+}

@@ -165,7 +165,8 @@ int main() {
 
     Transform *transform = MonkeyGM->GetTransform();
     //transform->SetPosition(Transform::forward * 5.f);
-    //transform->RotateAround(camera_gm->GetTransform()->GetPosition(), {1,0,0}, 90.f);
+
+    //transform->RotateAround(camera_gm->GetTransform(), {0,1,0}, -90.f);
 
     while (!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
         //transform->LookAt(test->GetTransform()->GetPosition());
@@ -174,8 +175,7 @@ int main() {
         //transform->SetRotation(Transform::pitch * 90.f);
         // transform->SetRotation(Transform::yaw * -90.f);
 
-
-        transform->RotateAround(camera_gm->GetTransform()->GetPosition(), {1,0,0}, 0.001f);
+        //transform->RotateAround(camera_gm->GetTransform(), {0.001f, 0.001f, 0});
 
         //camera_gm->GetTransform()->LookAt(transform->GetPosition());
 

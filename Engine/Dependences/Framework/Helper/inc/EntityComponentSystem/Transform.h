@@ -43,17 +43,26 @@ namespace Framework::Helper {
             );
         }
 
-        glm::vec3 Forward() const noexcept;
-        glm::vec3 Right()   const noexcept;
-        glm::vec3 Up()    const noexcept;
+        [[nodiscard]] glm::vec3 Forward() const noexcept;
+        [[nodiscard]] glm::vec3 Right()   const noexcept;
+        [[nodiscard]] glm::vec3 Up()      const noexcept;
 
-        void Translate(glm::vec3 val = {0,0,0})         noexcept;
-        void Rotate(glm::vec3 val    = {0,0,0})         noexcept;
-        void Scaling(glm::vec3 val   = {0,0,0})         noexcept;
+        void Translate(glm::vec3 val = {0,0,0}) noexcept;
+        void Rotate(glm::vec3 val    = {0,0,0}) noexcept;
+        void Scaling(glm::vec3 val   = {0,0,0}) noexcept;
 
         //void SetRotationAround(glm::vec3 point, glm::vec3 angle)    noexcept;
         //void RotateAround(glm::vec3 point, glm::vec3 angle)         noexcept;
+
         void RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept;
+        inline void RotateAround(Transform* transform, glm::vec3 axis, float angle) noexcept {
+            this->RotateAround(transform->m_position, axis, angle);
+        }
+
+        void RotateAround(glm::vec3 point, glm::vec3 angle) noexcept;
+        inline void RotateAround(Transform* transform, glm::vec3 angle) noexcept {
+            this->RotateAround(transform->m_position, angle);
+        }
 
         void LookAt(glm::vec3 target);
     public:
