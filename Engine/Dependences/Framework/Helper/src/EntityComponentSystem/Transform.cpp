@@ -17,7 +17,15 @@ Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
 }
 
 void Framework::Helper::Transform::SetPosition(glm::vec3 val) {
-    m_position = val;
+    m_globalPosition = val;
+
+    if (m_gameObject->m_parent) {
+        //m_localPosition = m_globalPosition - m_gameObject->m_transform->m_globalPosition;
+        m_localPosition = m_globalPosition - m_gameObject->m_parent->m_transform->m_globalPosition;
+        //m_localPosition = val;
+    }
+    else
+        m_localPosition = m_globalPosition;
 
     m_gameObject->UpdateComponentsPosition();
 
@@ -26,8 +34,31 @@ void Framework::Helper::Transform::SetPosition(glm::vec3 val) {
     }
 }
 
+/* С увеличением угла поворота повышается шанс ошибки float,
+ * потому его необходимо ограничить. Все равно он циклический. */
+glm::vec3 Lim360(glm::vec3 vec) noexcept {
+    int xi = (int)vec.x / 360;
+    int yi = (int)vec.y / 360;
+    int zi = (int)vec.z / 360;
+
+    float xf = vec.x - 360.f * (float)xi;
+    float yf = vec.y - 360.f * (float)yi;
+    float zf = vec.z - 360.f * (float)zi;
+
+    return {xf, yf, zf};
+}
+
 void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
-    m_rotation = val;
+    glm::vec3 delta = m_globalRotation;
+
+    m_globalRotation = Lim360(val);
+
+    delta = delta - m_globalRotation;
+
+    if (m_gameObject->m_parent)
+        m_localRotation = Lim360(m_globalRotation - m_gameObject->m_parent->m_transform->m_globalRotation);
+    else
+        m_localRotation = Lim360(m_globalRotation);
 
     m_gameObject->UpdateComponentsRotation();
 
@@ -37,59 +68,30 @@ void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
 }
 
 void Framework::Helper::Transform::SetScale(glm::vec3 val) {
-    m_scale = val;
-
-    m_gameObject->UpdateComponentsScale();
+    //!m_scale = val;
+    //!m_gameObject->UpdateComponentsScale();
 
     //for (GameObject* gm : m_parent->m_children)
     //    gm->m_transform->UpdateChild(this);
 }
 
 void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
-    //val = LocalDirection(val);
-    this->SetPosition(m_position + val);
+    this->SetPosition(m_globalPosition + val);
 }
 
-void Framework::Helper::Transform::Rotate(glm::vec3 val) noexcept {
-    //glm::fquat q = glm::radians(val);
-
-    //this->SetRotation(q * m_rotation);
-    this->SetRotation(m_rotation + val);
+void Framework::Helper::Transform::Rotate(glm::vec3 angle) noexcept {
+    //this->SetRotation((local ? m_localRotation : m_globalRotation) + angle);
+    this->SetRotation(m_globalRotation + angle);
 }
 
 void Framework::Helper::Transform::Scaling(glm::vec3 val) noexcept {
-    this->SetScale(m_scale + val);
+    //this->SetScale(m_scale + val);
 }
-
-//void Framework::Helper::Transform::UpdateChild(Framework::Helper::Transform *parent) {
-  //  this->m_parent_position = parent->m_position + parent->m_parent_position;
-    //this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
-    //this->m_parent_scale	= parent->m_scale    + parent->m_parent_scale;
-
- //   this->m_parent->UpdateComponentsPosition();
-    //this->m_parent->UpdateComponentsRotation();
-    //this->m_parent->UpdateComponentsScale();
-//}
-
-/*
-glm::vec3 Framework::Helper::Transform::LocalDirection(const glm::vec3 &dir) {
-    glm::vec3 rad = {
-            m_rotation.x * M_PI / 45.f / 4.f,
-            m_rotation.y * M_PI / 45.f / 4.f,
-            m_rotation.z * M_PI / 45.f / 4.f
-    };
-
-    return glm::vec3(
-            dir.x * cos(rad.y)                  + sin(rad.y) * dir.z * cos(rad.x),
-            dir.y * cos(rad.x)                  - sin(rad.x) * dir.z, // + sin(rad.x) * dir.y
-            dir.z * cos(rad.y) * cos(rad.x)     - sin(rad.y) * dir.x
-            );
-}*/
 
 nlohmann::json Framework::Helper::Transform::Save() {
     nlohmann::json json;
 
-    json["Transform"]["Position"] = {
+    /*json["Transform"]["Position"] = {
             m_position.x,
             m_position.y,
             m_position.z
@@ -105,19 +107,33 @@ nlohmann::json Framework::Helper::Transform::Save() {
             m_scale.x,
             m_scale.y,
             m_scale.z
-    };
+    };*/
 
     return json;
 }
 
 void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexcept {
-    this->m_parent_position = parent->m_position + parent->m_parent_position;
+    this->m_globalPosition = parent->m_globalPosition + m_localPosition;
 
-    this->SetPosition(m_position);
+    m_gameObject->UpdateComponentsPosition();
+
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildPosition(this);
+    }
 }
 
 void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent) noexcept {
-    this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
+    //this->m_globalRotation = Lim360(parent->m_globalRotation + m_localRotation);
+
+   // this->SetRotateAround(parent, parent->m_globalRotation);
+
+    //m_gameObject->UpdateComponentsRotation();
+
+    //for (auto gm : m_gameObject->m_children) {
+    //    gm.second->m_transform->UpdateChildRotation(this, {}); //TODO
+    //}
+
+    //!this->m_parent_rotation = parent->m_rotation + parent->m_parent_rotation;
 
     //this->SetRotation(m_rotation);
     //this->RotateAround(m_parent_position, m_parent_rotation);
@@ -128,142 +144,64 @@ void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform
 
 }
 
-/*
-void Framework::Helper::Transform::SetRotationAround(glm::vec3 point, glm::vec3 newAngle) noexcept {
-
-
-    m_gameObject->UpdateComponentsRotation();
-    m_gameObject->UpdateComponentsPosition();
-
-    for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this);
-        gm.second->m_transform->UpdateChildPosition(this);
-    }
-}*/
-
-/*
-void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
-    //this->m_rotation = angle;
-
-    glm::vec3 delta = angle - m_rotation;
-
-    //m_rotation = angle;
-    //glm::vec3 rad = glm::radians(m_rotation);
-
-    {
-        glm::vec3 dir = glm::angleAxis((float) (glm::radians(delta.x)), glm::vec3(
-                1,
-                0,
-                0
-        )) * (m_position - point);
-
-        this->m_position = point + dir;
-    }
-
-    //m_rotation = angle;
-
-    m_gameObject->UpdateComponentsRotation();
-    m_gameObject->UpdateComponentsPosition();
-
-    //std::cout << glm::to_string(m_rotation) << std::endl;
-    //std::cout << glm::to_string(m_rotation) << std::endl;
-
-    for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this);
-        gm.second->m_transform->UpdateChildPosition(this);
-    }
-}*/
-
 void Framework::Helper::Transform::LookAt(glm::vec3 target) {
-    glm::mat4 mat = glm::lookAt({m_position.x, m_position.y, m_position.z}, target, {0,1,0});
+    glm::mat4 mat = glm::lookAt(m_globalPosition, target, {0,1,0});
 
     mat = glm::inverse(mat); // if use quaternions in mesh calc model
 
-    glm::mat4 transformation;
-    glm::vec3 scale;
-    glm::quat rotation;
-    glm::vec3 translation;
-    glm::vec3 skew;
-    glm::vec4 perspective;
-    glm::decompose(transformation, scale, rotation, translation, skew, perspective);
+    glm::quat rotation = glm::getRotation(mat);
 
     glm::vec3 deg = glm::degrees(glm::eulerAngles(rotation));
-    this->m_rotation = glm::vec3({
-        deg.x,
+    glm::vec3 rotate = glm::vec3({
+        -deg.x,
         deg.y + 180.f,
         deg.z,
     });
 
-//    this->m_rotation = glm::vec3({
-//         deg.x,
-//         -deg.y + 180.f,
-//         -deg.z,
-//     });
-
-
     // Check nan
-    if (m_rotation.x != m_rotation.x) m_rotation.x = 0.f;
-    if (m_rotation.y != m_rotation.y) m_rotation.y = 0.f;
-    if (m_rotation.z != m_rotation.z) m_rotation.z = 0.f;
+    if (rotate.x != rotate.x) rotate.x = 0.f;
+    if (rotate.y != rotate.y) rotate.y = 0.f;
+    if (rotate.z != rotate.z) rotate.z = 0.f;
 
-    this->m_gameObject->UpdateComponentsRotation();
-
-    this->UpdateChildRotation(this);
+    this->SetRotation(rotate);
 }
 
 // TODO: Clear next methods. They is finished and worked.
 
-glm::vec3 Framework::Helper::Transform::Forward() const noexcept {
-    glm::vec3 rad = glm::radians(m_rotation);
-
-    glm::fquat q = glm::vec3(
-            -rad.x,
-            rad.y,
-            -rad.z
-    );
-
-    glm::vec3 dir = q * forward;
-
-    return glm::vec3({
-        dir.x,
-        dir.y,
-        dir.z // -dir.z
-    });
-}
-glm::vec3 Framework::Helper::Transform::Right() const noexcept {
-    glm::fquat rad = glm::radians(glm::vec3(
-            -m_rotation.x,
-            m_rotation.y,
-            -m_rotation.z
+glm::vec3 Framework::Helper::Transform::Forward(bool local) const noexcept {
+    const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
+    glm::fquat q = glm::radians(glm::vec3(
+        rot.x,
+        rot.y,
+        -rot.z
     ));
 
-    glm::vec3 dir = rad * right;
-
-    return glm::vec3({
-         dir.x,
-         dir.y,
-         dir.z // -dir.z
-    });
+    return q * forward;
 }
-glm::vec3 Framework::Helper::Transform::Up() const noexcept {
-    glm::fquat rad = glm::radians(glm::vec3(
-            -m_rotation.x,
-            m_rotation.y,
-            -m_rotation.z //-m_rotation.z
+glm::vec3 Framework::Helper::Transform::Right(bool local) const noexcept {
+    const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
+    glm::fquat q = glm::radians(glm::vec3(
+        rot.x,
+        rot.y,
+        -rot.z
     ));
 
-    glm::vec3 dir = rad * up;
+    return q * right;
+}
+glm::vec3 Framework::Helper::Transform::Up(bool local) const noexcept {
+    const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
+    glm::fquat q = glm::radians(glm::vec3(
+        rot.x,
+        rot.y,
+        -rot.z
+    ));
 
-    return glm::vec3({
-         dir.x,
-         dir.y,
-         dir.z // -dir.z
-    });
+    return q * up;
 }
 
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept {
-    glm::vec3 vector3 = glm::angleAxis(glm::radians(angle), axis) * (m_position - point);
-    this->m_position = point + vector3;
+    /*glm::vec3 vector3 = glm::angleAxis(glm::radians(angle), axis) * (m_globalPosition - point);
+    this->SetPosition(point + vector3);
 
     //!===================================================
 
@@ -273,32 +211,70 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis,
     for (auto gm : m_gameObject->m_children) {
         gm.second->m_transform->UpdateChildRotation(this);
         gm.second->m_transform->UpdateChildPosition(this);
-    }
+    }*/
+}
+
+float Magnitude(glm::vec3 vec){
+    return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
 }
 
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
     glm::vec3 vector3;
+    glm::vec3 pos = m_globalPosition;
 
     if (angle.x != 0) {
-        vector3 = glm::angleAxis(glm::radians(angle.x), pitch) * (m_position - point);
-        this->m_position = point + vector3;
+        vector3 = glm::angleAxis(glm::radians(angle.x), pitch) * (pos - point);
+        pos = point + vector3;
     }
     if (angle.y != 0) {
-        vector3 = glm::angleAxis(glm::radians(angle.y), yaw) * (m_position - point);
-        this->m_position = point + vector3;
+        vector3 = glm::angleAxis(glm::radians(angle.y), yaw) * (pos - point);
+        pos = point + vector3;
     }
     if (angle.z != 0) {
-        vector3 = glm::angleAxis(glm::radians(angle.z), roll) * (m_position - point);
-        this->m_position = point + vector3;
+        vector3 = glm::angleAxis(glm::radians(angle.z), -roll) * (pos - point);
+        pos = point + vector3;
     }
 
     //!===================================================
 
-    m_gameObject->UpdateComponentsRotation();
-    m_gameObject->UpdateComponentsPosition();
+    this->SetPosition(pos);
 
-    for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this);
-        gm.second->m_transform->UpdateChildPosition(this);
-    }
+    //this->Rotate(angle);
 }
+
+glm::vec3 Framework::Helper::Transform::Direction(glm::vec3 point) noexcept {
+    glm::vec3 heading = point - m_globalPosition;
+    float distance = Magnitude(heading);
+    return heading / distance;
+}
+
+void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
+    glm::vec3 vector3;
+    glm::vec3 pos = m_globalPosition;
+    glm::vec3 delta = angle - m_aroundRotation;
+
+    if (delta.x != 0) {
+        vector3 = glm::angleAxis(glm::radians(delta.x), pitch) * (pos - point);
+        pos = point + vector3;
+    }
+    if (delta.y != 0) {
+        vector3 = glm::angleAxis(glm::radians(delta.y), yaw) * (pos - point);
+        pos = point + vector3;
+    }
+    if (delta.z != 0) {
+        vector3 = glm::angleAxis(glm::radians(delta.z), -roll) * (pos - point);
+        pos = point + vector3;
+    }
+
+    //!===================================================
+
+    m_aroundRotation = angle;
+
+    this->SetPosition(pos);
+}
+
+void Framework::Helper::Transform::LookAt(Framework::Helper::GameObject *gameObject) noexcept {
+    this->LookAt(gameObject->m_transform->m_globalPosition);
+}
+
+

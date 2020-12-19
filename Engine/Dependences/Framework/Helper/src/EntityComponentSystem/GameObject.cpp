@@ -77,17 +77,20 @@ void Framework::Helper::GameObject::Destroy() {
 
 void GameObject::UpdateComponentsPosition() {
     for (Component* component : m_components)
-        component->OnMove(m_transform->m_position + m_transform->m_parent_position);
+        component->OnMove(m_transform->m_globalPosition);
+        //component->OnMove(m_transform->m_position + m_transform->m_parent_position);
 }
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
-        component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
+        component->OnRotate(m_transform->m_globalRotation);
+        //component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
 }
 
 void GameObject::UpdateComponentsScale() {
     for (Component* component : m_components)
-        component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
+        component->OnScaled(m_transform->m_globalScale); // or multiple
+        //component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
 }
 
 nlohmann::json GameObject::Save() {
@@ -120,8 +123,8 @@ bool GameObject::AddChild(GameObject *child) {
     /* Update child transforms with parent */
 
     child->m_transform->UpdateChildPosition(this->m_transform);
-    child->m_transform->UpdateChildRotation(this->m_transform);
-    child->m_transform->UpdateChildScale(this->m_transform);
+    //child->m_transform->UpdateChildRotation(this->m_transform);
+    //child->m_transform->UpdateChildScale(this->m_transform);
 
     //child->m_transform->Rotate();
     //child->m_transform->Scaling();

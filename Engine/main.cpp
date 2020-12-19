@@ -120,7 +120,6 @@ int main() {
 
     camera_gm->AddChild(cube1);*/
 
-
     GameObject *MonkeyGM = scene->Instance("Monkey");
     {
         //Mesh* copy = mesh->Copy();
@@ -129,13 +128,14 @@ int main() {
         render->RegisterMesh(monkey);
         MonkeyGM->AddComponent(monkey);
     }
-    //MonkeyGM->GetTransform()->Translate(Transform::right * -5.f + Transform::up * 3.f);
+
     MonkeyGM->GetTransform()->Translate(Transform::forward * 10.f);
+    MonkeyGM->GetTransform()->Rotate(Transform::yaw * 90.f);
 
     //cube2->GetTransform()->Rotate({ 0, 0, 45 });
     //cube1->AddChild(cube2);
 
-    //camera_gm->AddChild(MonkeyGM);
+    camera_gm->AddChild(MonkeyGM);
 
     //std::cout << cube->Save().dump(4) << std::endl;
 
@@ -166,27 +166,38 @@ int main() {
     Transform *transform = MonkeyGM->GetTransform();
     //transform->SetPosition(Transform::forward * 5.f);
 
-    //transform->RotateAround(camera_gm->GetTransform(), {0,1,0}, -90.f);
+    //transform->RotateAround(camera_gm->GetTransform(), {90,90,0});
 
     while (!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
-        //transform->LookAt(test->GetTransform()->GetPosition());
         //transform->LookAt(camera_gm->GetTransform()->GetPosition());
         //transform->SetRotation(Transform::pitch * -90.f);
         //transform->SetRotation(Transform::pitch * 90.f);
         // transform->SetRotation(Transform::yaw * -90.f);
 
-        //transform->RotateAround(camera_gm->GetTransform(), {0.001f, 0.001f, 0});
+        //transform->SetRotateAround(camera_gm->GetTransform(), {45, 180, 0});
 
-        //camera_gm->GetTransform()->LookAt(transform->GetPosition());
+        /*static glm::vec3 rot;
+
+
+        if (GetKeyDown(KeyCode::_9))
+            rot += glm::vec3(1, 1, 0);
+        if (GetKeyDown(KeyCode::_8))
+            rot -= glm::vec3(1, 1, 0);*/
 
         if (GetKeyDown(KeyCode::_0)) {
-            std::cout << glm::to_string(transform->GetPosition()) << std::endl;
-            std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+            std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
+            std::cout << glm::to_string(transform->GetAroundRotation()) << std::endl;
 
-            //std::cout << glm::to_string(transform->GetRotation()) << std::endl;
+            //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+            //std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+
+            //std::cout << glm::to_string(transform->GetPosition(true)) << std::endl;
+
+            //std::cout << glm::to_string(transform->Direction(camera_gm->GetTransform()->GetPosition()));
+
+            std::cout << "====================" << std::endl;
+
             //std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
-
-            //std::cout << dist << std::endl;
         }
 
         /*
@@ -223,17 +234,20 @@ int main() {
             transform->Rotate(Transform::roll * 45.f);
         }
 
-        float dist = transform->Distance(camera_gm->GetTransform());
-        if (dist > 5.f) {
-            //camera_gm->GetTransform()->Translate(camera_gm->GetTransform()->Forward() * 0.0005f);
-            //transform->Translate(transform->Forward() * 0.0005f);
-        }
+
 
         if (GetKey(KeyCode::P)) {
             transform->Translate(transform->Right() * 0.0005f);
         }
 
+
         */
+        transform->LookAt(test);
+        //float dist = transform->Distance(camera_gm->GetTransform());
+        //if (dist > 5.f) {
+            //transform->Translate(transform->Forward() * 0.0005f);
+        //}
+
         if (GetKey(KeyCode::L)) {
             //transform->Translate(Transform::forward);
             transform->Translate(transform->Forward() * 0.0005f);
@@ -261,7 +275,7 @@ int main() {
                 pos = Input::GetMousePos();
 
                 x += (float) (old_pos.x - pos.x) / 25.f;
-                y -= (float) (old_pos.y - pos.y) / 25.f;
+                y += (float) (old_pos.y - pos.y) / 25.f;
             } else {
                 mouse = true;
                 window->CentralizeCursor();
