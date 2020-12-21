@@ -54,3 +54,11 @@ bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
     stbi_image_free(data);
     return true;
 }
+
+Texture *Framework::Graphics::TextureLoader::GetDefaultTexture() noexcept {
+    return nullptr;
+}
+
+bool Framework::Graphics::TextureLoader::SetDefaultTexture(Texture *texture) noexcept {
+    return false;
+}

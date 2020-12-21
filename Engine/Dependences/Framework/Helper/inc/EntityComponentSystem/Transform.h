@@ -59,6 +59,15 @@ namespace Framework::Helper {
         //void SetRotationAround(glm::vec3 point, glm::vec3 angle)    noexcept;
         //void RotateAround(glm::vec3 point, glm::vec3 angle)         noexcept;
 
+        inline glm::quat Quaternion(bool local = false) noexcept{
+            glm::vec3 rot = local ? m_localRotation : m_globalRotation;
+            return glm::quat(glm::radians(glm::vec3(
+                    rot.x,
+                    rot.y,
+                    -rot.z
+            )));
+        }
+
         void RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept;
         inline void RotateAround(Transform* transform, glm::vec3 axis, float angle) noexcept {
             this->RotateAround(transform->m_globalPosition, axis, angle);
@@ -74,6 +83,7 @@ namespace Framework::Helper {
             this->RotateAround(transform->m_globalPosition, angle);
         }
 
+        glm::vec3 GetLookAt(glm::vec3 target, glm::vec3 axis) noexcept;
         void LookAt(GameObject* gameObject) noexcept;
         inline void LookAt(Transform* transform) noexcept{
             this->LookAt(transform->m_globalPosition);
@@ -116,7 +126,7 @@ namespace Framework::Helper {
         glm::vec3       m_globalRotation             = { 0, 0, 0 };
         glm::vec3       m_globalScale                = { 1, 1, 1 };
 
-        glm::vec3       m_aroundRotation;
+        glm::vec3       m_aroundRotation             = { 0, 0, 0 };
 
         GameObject*     m_gameObject            = nullptr;
     };

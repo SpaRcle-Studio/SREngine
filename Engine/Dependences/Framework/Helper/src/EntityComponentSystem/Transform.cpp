@@ -49,11 +49,7 @@ glm::vec3 Lim360(glm::vec3 vec) noexcept {
 }
 
 void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
-    glm::vec3 delta = m_globalRotation;
-
     m_globalRotation = Lim360(val);
-
-    delta = delta - m_globalRotation;
 
     if (m_gameObject->m_parent)
         m_localRotation = Lim360(m_globalRotation - m_gameObject->m_parent->m_transform->m_globalRotation);
@@ -68,11 +64,17 @@ void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
 }
 
 void Framework::Helper::Transform::SetScale(glm::vec3 val) {
-    //!m_scale = val;
-    //!m_gameObject->UpdateComponentsScale();
+    m_globalScale = val;
 
-    //for (GameObject* gm : m_parent->m_children)
-    //    gm->m_transform->UpdateChild(this);
+    if (m_gameObject->m_parent)
+        m_localScale = m_globalScale - m_gameObject->m_parent->m_transform->m_globalScale;
+    else
+        m_localScale = val;
+
+    m_gameObject->UpdateComponentsScale();
+
+    for (auto gm : m_gameObject->m_children)
+        gm.second->m_transform->UpdateChildScale(this);
 }
 
 void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
@@ -80,7 +82,6 @@ void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
 }
 
 void Framework::Helper::Transform::Rotate(glm::vec3 angle) noexcept {
-    //this->SetRotation((local ? m_localRotation : m_globalRotation) + angle);
     this->SetRotation(m_globalRotation + angle);
 }
 
@@ -125,7 +126,7 @@ void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexce
 void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent) noexcept {
     //this->m_globalRotation = Lim360(parent->m_globalRotation + m_localRotation);
 
-   // this->SetRotateAround(parent, parent->m_globalRotation);
+    this->SetRotateAround(parent, parent->m_globalRotation);
 
     //m_gameObject->UpdateComponentsRotation();
 
@@ -142,6 +143,29 @@ void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transf
 
 void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform *parent) noexcept {
 
+}
+
+
+glm::vec3 Framework::Helper::Transform::GetLookAt(glm::vec3 target, glm::vec3 axis) noexcept {
+    glm::mat4 mat = glm::lookAt(m_globalPosition, target, axis);
+
+    mat = glm::inverse(mat); // if use quaternions in mesh calc model
+
+    glm::quat rotation = glm::getRotation(mat);
+
+    glm::vec3 deg = glm::degrees(glm::eulerAngles(rotation));
+    glm::vec3 rotate = glm::vec3({
+                                         -deg.x,
+                                         deg.y + 180.f,
+                                         deg.z,
+                                 });
+
+    // Check nan
+    if (rotate.x != rotate.x) rotate.x = 0.f;
+    if (rotate.y != rotate.y) rotate.y = 0.f;
+    if (rotate.z != rotate.z) rotate.z = 0.f;
+
+    return rotate;
 }
 
 void Framework::Helper::Transform::LookAt(glm::vec3 target) {
@@ -162,6 +186,8 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
     if (rotate.x != rotate.x) rotate.x = 0.f;
     if (rotate.y != rotate.y) rotate.y = 0.f;
     if (rotate.z != rotate.z) rotate.z = 0.f;
+
+    //glm::vec3 rotate = this->GetLookAt(target, {0,1,0});
 
     this->SetRotation(rotate);
 }
@@ -214,13 +240,11 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis,
     }*/
 }
 
-float Magnitude(glm::vec3 vec){
-    return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
-}
-
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
-    glm::vec3 vector3;
-    glm::vec3 pos = m_globalPosition;
+    this->SetRotateAround(point, m_aroundRotation + angle);
+    //LookAt(point);
+
+    /*glm::vec3 vector3, pos = m_globalPosition;
 
     if (angle.x != 0) {
         vector3 = glm::angleAxis(glm::radians(angle.x), pitch) * (pos - point);
@@ -233,13 +257,43 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
     if (angle.z != 0) {
         vector3 = glm::angleAxis(glm::radians(angle.z), -roll) * (pos - point);
         pos = point + vector3;
-    }
+    }*/
+
+    //glm::mat transMat = glm::translate(glm::mat4(1), m_globalPosition);
+
+    //glm::vec3 rotation = m_globalRotation + angle;
+
+    /*glm::fquat q = glm::radians(glm::vec3(
+            rotation.x,
+            rotation.y,
+            -rotation.z
+    ));
+
+    glm::vec3 dir = q * (m_globalPosition - point);
+
+    glm::vec3 pos = point + dir;
+     */
+
+    //glm::mat4 rotateMat = glm::mat4_cast(q);
+
+    //transMat *= rotateMat;
+
+    //this->SetRotation(glm::degrees(glm::eulerAngles(glm::getRotation(transMat))));
+
+    //glm::quat q2 = glm::getRotation(transMat);
+
 
     //!===================================================
 
-    this->SetPosition(pos);
+    //this->SetRotation(rotation);
+
+    //this->SetPosition(pos);
 
     //this->Rotate(angle);
+}
+
+float Magnitude(glm::vec3 vec){
+    return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
 }
 
 glm::vec3 Framework::Helper::Transform::Direction(glm::vec3 point) noexcept {
@@ -249,28 +303,36 @@ glm::vec3 Framework::Helper::Transform::Direction(glm::vec3 point) noexcept {
 }
 
 void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
-    glm::vec3 vector3;
-    glm::vec3 pos = m_globalPosition;
-    glm::vec3 delta = angle - m_aroundRotation;
+    this->m_aroundRotation = angle;
 
-    if (delta.x != 0) {
-        vector3 = glm::angleAxis(glm::radians(delta.x), pitch) * (pos - point);
-        pos = point + vector3;
+    glm::fquat q = glm::radians(glm::vec3(
+            angle.x,
+            angle.y,
+            -angle.z
+    ));
+
+    float dist = this->Distance(point);
+
+    glm::vec3 dir = (q * forward) * dist;
+
+    this->SetPosition(point + dir);
+
+    ///===================================
+
+    glm::quat q_self = q;
+
+    //m_globalRotation = Lim360(m_aroundRotation + m_localRotation);
+    m_globalRotation = Lim360(glm::degrees(glm::eulerAngles(q_self)));
+
+    if (m_globalRotation.x != m_globalRotation.x) m_globalRotation.x = 0.f;
+    if (m_globalRotation.y != m_globalRotation.y) m_globalRotation.y = 0.f;
+    if (m_globalRotation.z != m_globalRotation.z) m_globalRotation.z = 0.f;
+
+    m_gameObject->UpdateComponentsRotation();
+
+    for (auto gm : m_gameObject->m_children) {
+        gm.second->m_transform->UpdateChildRotation(this);
     }
-    if (delta.y != 0) {
-        vector3 = glm::angleAxis(glm::radians(delta.y), yaw) * (pos - point);
-        pos = point + vector3;
-    }
-    if (delta.z != 0) {
-        vector3 = glm::angleAxis(glm::radians(delta.z), -roll) * (pos - point);
-        pos = point + vector3;
-    }
-
-    //!===================================================
-
-    m_aroundRotation = angle;
-
-    this->SetPosition(pos);
 }
 
 void Framework::Helper::Transform::LookAt(Framework::Helper::GameObject *gameObject) noexcept {

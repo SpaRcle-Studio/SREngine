@@ -13,9 +13,14 @@ namespace Framework::Graphics::Types{
 
 namespace Framework::Graphics {
     class TextureLoader {
+    public:
+        TextureLoader() = delete;
+        ~TextureLoader() = delete;
     private:
-        TextureLoader() { }
-        ~TextureLoader() { }
+        Types::Texture* g_default = nullptr;
+    public:
+        static Types::Texture* GetDefaultTexture()             noexcept;
+        static bool SetDefaultTexture(Types::Texture* texture) noexcept;
     public:
         static Types::Texture* Load(std::string path);
         static bool Free(unsigned char* data);

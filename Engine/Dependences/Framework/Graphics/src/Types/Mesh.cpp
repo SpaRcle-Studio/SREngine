@@ -133,7 +133,7 @@ void Mesh::ReCalcModel() {
             {
                 m_rotation.x,
                 -m_rotation.y + 180.f,
-                -m_rotation.z
+                m_rotation.z // SEE: change form -m_rotation.z
             }
             ))));
 

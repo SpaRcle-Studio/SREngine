@@ -52,7 +52,7 @@ namespace Framework::Helper {
         E = 69,
         F = 70,
         G = 71,
-        H = 71,
+        H = 72,
         I = 73,
         J = 74,
         K = 75,
@@ -124,8 +124,15 @@ namespace Framework::Helper {
             };
 #endif
         }
-
-        /* Need for debugging input system */
+        /* Need for debugging input system */ // TODO: NOT WORK
+        [[noreturn]]
+        static inline void PrintPressedKeys() noexcept {
+            while(true){
+                int k = GetKeyPressedId();
+                if (k != 0)
+                    std::cout << k << std::endl;
+            }
+        }
         static int GetKeyPressedId();
 
         static bool BaseGetKey(KeyCode key);

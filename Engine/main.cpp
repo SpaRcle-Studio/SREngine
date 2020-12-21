@@ -135,7 +135,7 @@ int main() {
     //cube2->GetTransform()->Rotate({ 0, 0, 45 });
     //cube1->AddChild(cube2);
 
-    camera_gm->AddChild(MonkeyGM);
+    //camera_gm->AddChild(MonkeyGM);
 
     //std::cout << cube->Save().dump(4) << std::endl;
 
@@ -173,23 +173,35 @@ int main() {
         //transform->SetRotation(Transform::pitch * -90.f);
         //transform->SetRotation(Transform::pitch * 90.f);
         // transform->SetRotation(Transform::yaw * -90.f);
+        static glm::vec3 rot;
 
-        //transform->SetRotateAround(camera_gm->GetTransform(), {45, 180, 0});
+        if (GetKey(KeyCode::LeftArrow))
+            rot += glm::vec3(0, -0.01, 0);
+        if (GetKey(KeyCode::RightArrow))
+            rot += glm::vec3(0, 0.01, 0);
 
-        /*static glm::vec3 rot;
+        if (GetKey(KeyCode::UpArrow))
+            rot += glm::vec3(-0.01, 0, 0);
+        if (GetKey(KeyCode::DownArrow))
+            rot += glm::vec3(0.01, 0, 0);
 
+        //if (rot != glm::vec3(0,0,0))
+         //   transform->RotateAround(camera_gm->GetTransform(), rot);
+        //transform->LookAt(camera_gm->GetTransform()->GetPosition());
+        //transform->SetRotation(rot);
+        //transform->Rotate(rot);
 
-        if (GetKeyDown(KeyCode::_9))
-            rot += glm::vec3(1, 1, 0);
-        if (GetKeyDown(KeyCode::_8))
-            rot -= glm::vec3(1, 1, 0);*/
+        //rot = {0,0,0};
+
+        //transform->SetRotateAround(camera_gm->GetTransform(), rot);
+        //transform->SetRotation(rot);
 
         if (GetKeyDown(KeyCode::_0)) {
             std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
-            std::cout << glm::to_string(transform->GetAroundRotation()) << std::endl;
+            std::cout << glm::to_string(transform->GetRotation()) << std::endl;
 
-            //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
-            //std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+            std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+            std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
 
             //std::cout << glm::to_string(transform->GetPosition(true)) << std::endl;
 
@@ -241,12 +253,12 @@ int main() {
         }
 
 
-        */
-        transform->LookAt(test);
-        //float dist = transform->Distance(camera_gm->GetTransform());
-        //if (dist > 5.f) {
-            //transform->Translate(transform->Forward() * 0.0005f);
-        //}
+
+        transform->LookAt(camera_gm);
+        float dist = transform->Distance(camera_gm->GetTransform());
+        if (dist > 5.f) {
+            transform->Translate(transform->Forward() * 0.0005f);
+        }*/
 
         if (GetKey(KeyCode::L)) {
             //transform->Translate(Transform::forward);
