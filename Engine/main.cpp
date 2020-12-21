@@ -135,7 +135,7 @@ int main() {
     //cube2->GetTransform()->Rotate({ 0, 0, 45 });
     //cube1->AddChild(cube2);
 
-    //camera_gm->AddChild(MonkeyGM);
+    camera_gm->AddChild(MonkeyGM);
 
     //std::cout << cube->Save().dump(4) << std::endl;
 

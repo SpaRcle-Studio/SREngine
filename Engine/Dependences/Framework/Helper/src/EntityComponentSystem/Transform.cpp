@@ -319,7 +319,7 @@ void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 an
 
     ///===================================
 
-    glm::quat q_self = q;
+    glm::quat q_self = q * glm::quat(glm::radians(m_localRotation));
 
     //m_globalRotation = Lim360(m_aroundRotation + m_localRotation);
     m_globalRotation = Lim360(glm::degrees(glm::eulerAngles(q_self)));
