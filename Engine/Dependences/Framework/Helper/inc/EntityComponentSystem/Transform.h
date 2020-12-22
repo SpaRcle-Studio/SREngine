@@ -9,6 +9,10 @@
 #include <json/json.hpp>
 #include <glm/detail/type_quat.hpp>
 
+#include <Math/Mathematics.h>
+
+
+
 namespace Framework::Helper {
     class GameObject;
     class Transform {
@@ -16,8 +20,6 @@ namespace Framework::Helper {
     private:
         Transform(GameObject* parent);
         ~Transform() = default;
-    //public:
-    //   glm::vec3 LocalDirection(const glm::vec3& dir);
     public:
         void SetPosition(glm::vec3 val);
         void SetRotation(glm::vec3 val);
@@ -55,9 +57,6 @@ namespace Framework::Helper {
             this->Rotate(axis* angle);
         }
         void Scaling(glm::vec3 val   = {0,0,0}) noexcept;
-
-        //void SetRotationAround(glm::vec3 point, glm::vec3 angle)    noexcept;
-        //void RotateAround(glm::vec3 point, glm::vec3 angle)         noexcept;
 
         inline glm::quat Quaternion(bool local = false) noexcept{
             glm::vec3 rot = local ? m_localRotation : m_globalRotation;
@@ -104,6 +103,10 @@ namespace Framework::Helper {
         inline static const glm::vec3 yaw       = { 0, 1, 0 };
         inline static const glm::vec3 roll      = { 0, 0, 1 };
     private:
+        void CheckNaN_Position() noexcept;
+        void CheckNaN_Rotation() noexcept;
+        void CheckNaN_Scale()    noexcept;
+    private:
         //void UpdateChild(Transform* parent);
 
         void UpdateChildPosition(Transform* parent) noexcept;
@@ -126,6 +129,7 @@ namespace Framework::Helper {
         glm::vec3       m_globalRotation             = { 0, 0, 0 };
         glm::vec3       m_globalScale                = { 1, 1, 1 };
 
+        glm::vec3       m_aroundDirection            = { 0, 0, 0 };
         glm::vec3       m_aroundRotation             = { 0, 0, 0 };
 
         GameObject*     m_gameObject            = nullptr;

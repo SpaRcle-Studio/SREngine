@@ -8,6 +8,8 @@
 
 #include <utility>
 #include <Debug.h>
+#include <iostream>
+#include <glm/gtx/string_cast.hpp>
 
 using namespace Framework::Helper;
 
@@ -122,7 +124,13 @@ bool GameObject::AddChild(GameObject *child) {
 
     /* Update child transforms with parent */
 
-    child->m_transform->UpdateChildPosition(this->m_transform);
+    {
+        child->m_transform->m_localPosition = child->m_transform->m_globalPosition - this->m_transform->m_globalPosition;
+        std::cout << glm::to_string(child->m_transform->m_localPosition) << std::endl;
+        child->UpdateComponentsPosition();
+        child->m_transform->UpdateChildPosition(this->m_transform);
+    }
+
     //child->m_transform->UpdateChildRotation(this->m_transform);
     //child->m_transform->UpdateChildScale(this->m_transform);
 

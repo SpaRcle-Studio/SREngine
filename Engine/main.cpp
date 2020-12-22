@@ -106,36 +106,35 @@ int main() {
         render->RegisterMesh(copy);
         test->AddComponent(copy);
     }
-
     test->GetTransform()->Translate(Transform::right * 5.f);
 
-    /*
     GameObject* cube1 = scene->Instance("Cube1");
     {
         mesh->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
         render->RegisterMesh(mesh);
         cube1->AddComponent(mesh);
     }
-    cube1->GetTransform()->Translate(Transform::forward * 5.f);
-
-    camera_gm->AddChild(cube1);*/
+    cube1->GetTransform()->Translate(Transform::forward * 10.f);
 
     GameObject *MonkeyGM = scene->Instance("Monkey");
     {
-        //Mesh* copy = mesh->Copy();
         monkey->GetMaterial()->SetColor(Material::GetRandomColor() * 6.f);
         monkey->GetMaterial()->SetDiffuse(texture);
         render->RegisterMesh(monkey);
         MonkeyGM->AddComponent(monkey);
     }
 
-    MonkeyGM->GetTransform()->Translate(Transform::forward * 10.f);
+    MonkeyGM->GetTransform()->Translate(Transform::left * 5.f + Transform::forward * 10.f);
     MonkeyGM->GetTransform()->Rotate(Transform::yaw * 90.f);
+
+    //cube1->AddChild(MonkeyGM);
+
+    //MonkeyGM->AddChild(cube1);
 
     //cube2->GetTransform()->Rotate({ 0, 0, 45 });
     //cube1->AddChild(cube2);
 
-    camera_gm->AddChild(MonkeyGM);
+    //camera_gm->AddChild(MonkeyGM);
 
     //std::cout << cube->Save().dump(4) << std::endl;
 
@@ -173,7 +172,7 @@ int main() {
         //transform->SetRotation(Transform::pitch * -90.f);
         //transform->SetRotation(Transform::pitch * 90.f);
         // transform->SetRotation(Transform::yaw * -90.f);
-        static glm::vec3 rot;
+        static glm::vec3 rot = glm::vec3(0,0,0);
 
         if (GetKey(KeyCode::LeftArrow))
             rot += glm::vec3(0, -0.01, 0);
@@ -185,23 +184,49 @@ int main() {
         if (GetKey(KeyCode::DownArrow))
             rot += glm::vec3(0.01, 0, 0);
 
+        if (GetKey(KeyCode::Minus))
+            rot += glm::vec3(0, 0, -0.01);
+        if (GetKey(KeyCode::Plus))
+            rot += glm::vec3(0, 0, 0.01);
+
+        {
+            static glm::vec3 around = glm::vec3();
+
+            MonkeyGM->GetTransform()->RotateAround(cube1->GetTransform()->GetPosition(), rot);
+
+            rot = {0,0,0};
+
+            //std::cout << glm::to_string(MonkeyGM->GetTransform()->GetRotation()) << std::endl;
+        }
+            //MonkeyGM->GetTransform()->Rotate(Transform::yaw * 45.f);
+
+        //MonkeyGM->GetTransform()->SetRotateAround(cube1->GetTransform()->GetPosition(), rot);
+
+        //MonkeyGM->GetTransform()->Rotate(rot);
+
+        //MonkeyGM->GetTransform()->SetRotateAround(cube1->GetTransform()->GetPosition(), rot);
+
         //if (rot != glm::vec3(0,0,0))
-         //   transform->RotateAround(camera_gm->GetTransform(), rot);
+        //transform->RotateAround(camera_gm->GetTransform(), rot);
         //transform->LookAt(camera_gm->GetTransform()->GetPosition());
         //transform->SetRotation(rot);
         //transform->Rotate(rot);
-
-        //rot = {0,0,0};
 
         //transform->SetRotateAround(camera_gm->GetTransform(), rot);
         //transform->SetRotation(rot);
 
         if (GetKeyDown(KeyCode::_0)) {
-            std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
+            //std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
             std::cout << glm::to_string(transform->GetRotation()) << std::endl;
+            std::cout << glm::to_string(transform->GetRotation(true)) << std::endl;
 
-            std::cout << glm::to_string(transform->GetPosition()) << std::endl;
-            std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+            //std::cout << glm::to_string(transform->GetPosition()) << std::endl;
+
+            //std::cout << glm::to_string(transform->GetPosition(true)) << std::endl;
+            //std::cout << glm::to_string(camera_gm->GetTransform()->GetPosition()) << std::endl;
+
+            //std::cout << glm::to_string(cube1->GetTransform()->GetPosition()) << std::endl;
+            //std::cout << glm::to_string(cube1->GetTransform()->GetPosition(true)) << std::endl;
 
             //std::cout << glm::to_string(transform->GetPosition(true)) << std::endl;
 
