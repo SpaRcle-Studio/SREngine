@@ -131,6 +131,8 @@ bool GameObject::AddChild(GameObject *child) {
         child->m_transform->UpdateChildPosition(this->m_transform);
     }
 
+    child->m_transform->m_childDefRotation = child->m_transform->GetNormalizedAngleOfPoint(m_transform->GetPosition());
+
     //child->m_transform->UpdateChildRotation(this->m_transform);
     //child->m_transform->UpdateChildScale(this->m_transform);
 

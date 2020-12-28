@@ -124,10 +124,11 @@ int main() {
         MonkeyGM->AddComponent(monkey);
     }
 
-    MonkeyGM->GetTransform()->Translate(Transform::left * 5.f + Transform::forward * 10.f);
-    MonkeyGM->GetTransform()->Rotate(Transform::yaw * 90.f);
+    //MonkeyGM->GetTransform()->Translate(Transform::forward * 15.f);
+    MonkeyGM->GetTransform()->Translate(Transform::left * 5.f + Transform::forward * 15.f);
+    //MonkeyGM->GetTransform()->Rotate(Transform::yaw * 90.f);
 
-    //cube1->AddChild(MonkeyGM);
+    cube1->AddChild(MonkeyGM);
 
     //MonkeyGM->AddChild(cube1);
 
@@ -167,6 +168,8 @@ int main() {
 
     //transform->RotateAround(camera_gm->GetTransform(), {90,90,0});
 
+
+
     while (!GetKeyDown(KeyCode::F) && window->IsWindowOpen() && window->IsRun()) {
         //transform->LookAt(camera_gm->GetTransform()->GetPosition());
         //transform->SetRotation(Transform::pitch * -90.f);
@@ -190,17 +193,13 @@ int main() {
             rot += glm::vec3(0, 0, 0.01);
 
         {
-            static glm::vec3 around = glm::vec3();
-
-            MonkeyGM->GetTransform()->RotateAround(cube1->GetTransform()->GetPosition(), rot);
+            cube1->GetTransform()->Rotate(rot);
+            //MonkeyGM->GetTransform()->SetRotateAround(cube1->GetTransform()->GetPosition(), rot);
 
             rot = {0,0,0};
-
-            //std::cout << glm::to_string(MonkeyGM->GetTransform()->GetRotation()) << std::endl;
         }
             //MonkeyGM->GetTransform()->Rotate(Transform::yaw * 45.f);
 
-        //MonkeyGM->GetTransform()->SetRotateAround(cube1->GetTransform()->GetPosition(), rot);
 
         //MonkeyGM->GetTransform()->Rotate(rot);
 
@@ -235,6 +234,22 @@ int main() {
             std::cout << "====================" << std::endl;
 
             //std::cout << glm::to_string(camera_gm->GetTransform()->GetRotation()) << std::endl;
+        }
+
+        if (GetKeyDown(KeyCode::_7))
+        {
+            //glm::quat q = transform->GetAngleOfPoint(cube1->GetTransform()->GetPosition());
+            //glm::vec3 angle = DEG3(glm::eulerAngles(q));
+            //std::cout << glm::to_string(angle) << std::endl;
+
+            static glm::vec3 def = transform->GetNormalizedAngleOfPoint(cube1->GetTransform()->GetPosition());
+            static glm::vec3 angle = glm::vec3();
+
+            //std::cout << glm::to_string(angle) << std::endl;
+
+            angle += glm::vec3(0, 45, 0);
+
+            transform->SetRotateAround(cube1->GetTransform(), def + angle);
         }
 
         /*

@@ -11,9 +11,17 @@
 
 #include <Math/Mathematics.h>
 
+#include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 
+#define RAD3(v) glm::vec3(RAD(v.x),RAD(v.y),RAD(v.z))
+#define DEG3(v) glm::vec3(DEG(v.x),DEG(v.y),DEG(v.z))
 
 namespace Framework::Helper {
+    enum class Location{
+        Left, Center, Right, Forward, Back, Up, Down
+    };
+
     class GameObject;
     class Transform {
         friend class GameObject;
@@ -27,9 +35,61 @@ namespace Framework::Helper {
 
         [[nodiscard]] inline glm::vec3 GetPosition(bool local = false) const noexcept { return local ? m_localPosition : m_globalPosition; }
         [[nodiscard]] inline glm::vec3 GetRotation(bool local = false) const noexcept { return local ? m_localRotation : m_globalRotation; }
-        [[nodiscard]] inline glm::vec3 GetAroundRotation() const noexcept { return m_aroundRotation; }
+        //[[nodiscard]] inline glm::vec3 GetAroundRotation() const noexcept { return m_aroundRotation; }
+
+        /* Left-Center-Right */
+        [[nodiscard]] inline Location GetGlobal_LCR_Location(glm::vec3 point) const noexcept {
+            if (point.x < m_globalPosition.x)
+                return Location::Left;
+            else if (point.x > m_globalPosition.x)
+                return Location::Right;
+            else
+                return Location::Center;
+        }
+
+        /* Forward-Center-Back */
+        [[nodiscard]] inline Location GetGlobal_FCB_Location(glm::vec3 point) const noexcept {
+            if (point.z < m_globalPosition.z)
+                return Location::Back;
+            else if (point.z > m_globalPosition.z)
+                return Location::Forward;
+            else
+                return Location::Center;
+        }
+
+        /*
+               Yaw
+         ==============
+         |F   -90    R|
+         |            |
+         | 0        0 |
+         |            |
+         |L    90    B|
+         ==============
+         */
+        glm::vec3 GetAngleOfPoint(glm::vec3 point) noexcept;
+
+        /*
+                Yaw
+         ================
+         |F      0     R|
+         |              |
+         | -90       90 |
+         |              |
+         |L     180    B|
+         ================
+         */
+        glm::vec3 GetNormalizedAngleOfPoint(glm::vec3 point) noexcept;
 
         glm::vec3 Direction(glm::vec3 point) noexcept;
+
+        inline static float Len(const glm::vec3& v) noexcept {
+            return sqrt(
+                    v.x * v.x +
+                    v.y * v.y +
+                    v.z * v.z
+                    );
+        }
 
         inline float Distance(glm::vec3 point) const noexcept {
             return sqrt(
@@ -110,7 +170,7 @@ namespace Framework::Helper {
         //void UpdateChild(Transform* parent);
 
         void UpdateChildPosition(Transform* parent) noexcept;
-        void UpdateChildRotation(Transform* parent) noexcept;
+        void UpdateChildRotation(Transform* parent, glm::vec3 delta) noexcept;
         void UpdateChildScale(Transform* parent)    noexcept;
     private:
         /*glm::vec3       m_position              = { 0, 0, 0 };
@@ -129,8 +189,7 @@ namespace Framework::Helper {
         glm::vec3       m_globalRotation             = { 0, 0, 0 };
         glm::vec3       m_globalScale                = { 1, 1, 1 };
 
-        glm::vec3       m_aroundDirection            = { 0, 0, 0 };
-        glm::vec3       m_aroundRotation             = { 0, 0, 0 };
+        glm::vec3       m_childDefRotation           = { 0, 0, 0 };
 
         GameObject*     m_gameObject            = nullptr;
     };

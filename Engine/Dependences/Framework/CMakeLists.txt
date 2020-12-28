@@ -13,11 +13,12 @@ include(Audio.cmake)
 include(Graphics.cmake)
 include(Helper.cmake)
 include(Physics.cmake)
+include(Scripting.cmake)
 
 find_package(OpenGL REQUIRED)
 
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC})
+add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
 target_link_libraries(Framework opengl32 glfw glew)
 if(WIN32)
     if(MSVC)
@@ -29,6 +30,6 @@ endif()
 
 # Устанавливаем директории
 target_include_directories(Framework
-        PUBLIC ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${HELPER_INC_PUBLIC} ${PHYSICS_INC_PUBLIC}
-        PRIVATE ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${HELPER_INC_PRIVATE} ${PHYSICS_INC_PRIVATE}
-        INSTANCE ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${HELPER_INC_INSTANCE} ${PHYSICS_INC_INSTANCE})
+        PUBLIC ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${HELPER_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC}
+        PRIVATE ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${HELPER_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE}
+        INSTANCE ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${HELPER_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE})

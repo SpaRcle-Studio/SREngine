@@ -9,11 +9,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
-#include <glm/gtx/string_cast.hpp>
-#include <glm/gtx/matrix_decompose.hpp>
-
-#define RAD3(v) glm::vec3(RAD(v.x),RAD(v.y),RAD(v.z))
-#define DEG3(v) glm::vec3(DEG(v.x),DEG(v.y),DEG(v.z))
+#include <Debug.h>
 
 Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
     this->m_gameObject = parent;
@@ -49,14 +45,17 @@ glm::vec3 Lim360(glm::vec3 vec) noexcept {
 }
 
 void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
+
     m_globalRotation = val;
+    //delta = m_globalRotation - delta;
+    glm::vec3 delta = m_globalRotation;
 
     m_localRotation = m_globalRotation;
 
     m_gameObject->UpdateComponentsRotation();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildRotation(this, delta);
     }
 }
 
@@ -142,7 +141,9 @@ void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexce
     }
 }
 
-void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent) noexcept {
+void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent, glm::vec3 delta) noexcept {
+    this->SetRotateAround(parent->m_globalPosition, m_childDefRotation + delta);
+
     //this->m_globalRotation = Lim360(parent->m_globalRotation + m_localRotation);
 
     //this->SetRotateAround(parent, parent->m_globalRotation);
@@ -276,7 +277,9 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
     const glm::quat q = RAD3(angle);
     const glm::quat self = RAD3(m_globalRotation);
 
+    glm::vec3 delta = m_globalRotation;
     this->m_globalRotation = DEG3(glm::eulerAngles(q * self));
+    delta = m_globalRotation - delta;
 
     this->m_localRotation = m_globalRotation;
 
@@ -286,7 +289,7 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildRotation(this, delta);
         gm.second->m_transform->UpdateChildPosition(this);
     }
 
@@ -332,7 +335,7 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
         m_gameObject->UpdateComponentsPosition();
 
         for (auto gm : m_gameObject->m_children) {
-            gm.second->m_transform->UpdateChildRotation(this);
+            gm.second->m_transform->UpdateChildRotation(this, delta);
             gm.second->m_transform->UpdateChildPosition(this);
         }
 
@@ -420,6 +423,11 @@ glm::vec3 Framework::Helper::Transform::Direction(glm::vec3 point) noexcept {
 }
 
 void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
+    if (angle == glm::vec3(0,0,0))
+        return;
+
+    //std::cout << glm::to_string(angle) << std::endl;
+
     glm::fquat q = glm::radians(glm::vec3(
             angle.x,
             angle.y,
@@ -441,10 +449,12 @@ void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 an
     }
 
     ///===================================
-
+    /*
     glm::quat q_self = q * glm::quat(glm::radians(m_localRotation));
 
     m_globalRotation = Lim360(glm::degrees(glm::eulerAngles(q_self)));
+*/
+    glm::vec3 delta = glm::vec3();
 
     CheckNaN_Position();
     CheckNaN_Rotation();
@@ -453,7 +463,7 @@ void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 an
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this);
+        gm.second->m_transform->UpdateChildRotation(this, delta);
         gm.second->m_transform->UpdateChildPosition(this);
     }
 }
@@ -476,6 +486,107 @@ void Framework::Helper::Transform::CheckNaN_Rotation() noexcept {
 
 void Framework::Helper::Transform::CheckNaN_Scale() noexcept {
 
+}
+
+glm::vec3 Framework::Helper::Transform::GetAngleOfPoint(glm::vec3 point) noexcept {
+    glm::vec3 D = Direction(point); // direction
+
+    float angle_H = asin(D.y);
+    float angle_P = asin(D.z);
+
+    return DEG3(glm::vec3(
+        angle_H,
+        angle_P,
+        0
+    ));
+
+    /*
+    glm::vec3 D = Direction(point); // direction
+
+    glm::vec3 U = Up(); // Up direction
+
+    float angle_H = atan2(D.y,D.x);
+    float angle_P = asin(D.z);
+
+    glm::vec3 W0 = glm::vec3( -D.y, D.x, 0 );
+    glm::vec3 U0 = W0 * D;
+
+    float f1 = glm::dot(W0,U);
+    float f2 = glm::dot(U0,U) / Len(W0) * Len(U0);
+
+    float angle_B = atan2(f1, f2);
+
+    return DEG3(glm::vec3(
+        angle_H,
+        angle_P,
+        0
+    ));
+
+     //////
+     *     glm::vec3 D = point - m_globalPosition;
+
+    D = glm::normalize(D);
+
+    float angle = atan2( D.x, D.z ); // Note: I expected atan2(z,x) but OP reported success with atan2(x,z) instead! Switch around if you see 90° off.
+    float qx = 0.f;
+    float qy = 1.f * sin( angle/2.f );
+    float qz = 0.f;
+    float qw = cos( angle/2.f );
+
+    return {
+        qx,
+        qy,
+        qz,
+        qw
+    };
+     */
+}
+
+glm::vec3 Framework::Helper::Transform::GetNormalizedAngleOfPoint(glm::vec3 point) noexcept {
+    Location locX = GetGlobal_LCR_Location(point);
+    Location locZ = GetGlobal_FCB_Location(point);
+
+    glm::vec3 angle = GetAngleOfPoint(point);
+
+    switch (locX) {
+        case Location::Right: // left
+            if (angle.y < 0)
+                angle.y = -(angle.y + 90.f);
+            else if (angle.y > 0)
+                angle.y = -angle.y - 90.f;
+            else
+                angle.y = -90.f;
+            break;
+        case Location::Left: // right
+            if (angle.y < 0)
+                angle.y = (angle.y + 90.f);
+            else if (angle.y > 0)
+                angle.y += 90.f;
+            else
+                angle.y = 90.f;
+            break;
+        case Location::Center:
+            // additional maths
+            switch (locZ) {
+                case Location::Forward: // back
+                    angle.y = 180.f;
+                    break;
+                case Location::Back: // forward
+                    angle.y = 0.f;
+                    break;
+                case Location::Center:
+                    angle.y = 0.f;
+                    Helper::Debug::Warn("Transform::GetNormalizedAngleOfPoint() : in center? TODO AND SEE!");
+                    // what?
+                    break;
+            }
+            break;
+        default:
+            Helper::Debug::Error("Transform::GetNormalizedAngleOfPoint() : [FATAL] location is not correct! Something went wrong...");
+            return glm::vec3();
+    }
+
+    return angle;
 }
 
 
