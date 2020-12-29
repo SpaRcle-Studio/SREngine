@@ -27,6 +27,8 @@ namespace Framework::Helper {
         const std::string m_name = "Unknown";
         GameObject* m_parent = nullptr;
     public:
+        inline Component* BaseComponent() noexcept { return this; }
+
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }
 
         virtual void OnRotate(glm::vec3 newValue) noexcept { };

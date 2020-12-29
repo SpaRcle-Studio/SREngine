@@ -104,10 +104,10 @@ bool Framework::Graphics::Window::Run() {
 
     Debug::Graph("Window::Run() : running window...");
 
-    ret: if (!m_render->IsRun() && !m_hasErrors) goto ret;
-    if (m_hasErrors) return false;
-
     this->m_isRun = true;
+
+ret: if (!m_render->IsRun() && !m_hasErrors) goto ret;
+    if (m_hasErrors) return false;
 
     Debug::Info("Window::Run() : window has been successfully running!");
 
@@ -156,14 +156,14 @@ void Framework::Graphics::Window::Thread() {
 
         }
 
+        waitRun:
+        if (!m_isRun && !m_isClose && !m_hasErrors) goto waitRun;
+
         if (!m_render->Run()) {
             Debug::Error("Window::Thread() : failed running render!");
             m_hasErrors = true;
             return;
         }
-
-        waitRun:
-        if (!m_isRun && !m_isClose && !m_hasErrors) goto waitRun;
     }
 
     {
@@ -308,4 +308,14 @@ void Framework::Graphics::Window::PoolEvents() {
 
         m_camerasMutex.unlock();
     }
+}
+
+bool Framework::Graphics::Window::Free() {
+    if (m_isClose) {
+        Debug::Info("Window::Free() : free window pointer...");
+        delete this;
+        return true;
+    }
+    else
+        return false;
 }

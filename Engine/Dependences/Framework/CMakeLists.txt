@@ -4,6 +4,9 @@ project(Framework)
 # Переменная дириктории исходного кода данного фреймворка
 set(FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
+add_subdirectory(Depends/external/lua)
+add_subdirectory(Depends/LuaBridge)
+
 add_subdirectory(Depends/inc/glm)
 add_subdirectory(Depends/glfw)
 add_subdirectory(Depends/glew/build/cmake)
@@ -16,10 +19,16 @@ include(Physics.cmake)
 include(Scripting.cmake)
 
 find_package(OpenGL REQUIRED)
+#find_package(PythonLibs REQUIRED)
+#find_package(Lua51 REQUIRED)
+
+#include_directories(${LUA_INCLUDE_DIR})
+
+#include_directories(${PYTHON_INCLUDE_DIRS})
 
 # Добавляем библиотеку фреймворка
 add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
-target_link_libraries(Framework opengl32 glfw glew)
+target_link_libraries(Framework opengl32 glfw glew lua) # lua
 if(WIN32)
     if(MSVC)
 

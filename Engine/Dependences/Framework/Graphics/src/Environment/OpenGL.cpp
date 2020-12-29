@@ -272,6 +272,11 @@ unsigned int Framework::Graphics::OpenGL::LinkShader(unsigned int *fragment, uns
 bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int &hdrFBO, std::vector<unsigned int>& colorBuffers) {
     bool isNew = !((bool)hdrFBO);
 
+    if (size.x == 0 || size.y == 0){
+        Helper::Debug::Error("OpenGL::CreateHDRFrameBufferObject() : frame buffer has incorrect size!");
+        return false;
+    }
+
     if (isNew){
         Helper::Debug::Log("OpenGL::CreateHDRFrameBufferObject() : creating new frame buffers...");
     }

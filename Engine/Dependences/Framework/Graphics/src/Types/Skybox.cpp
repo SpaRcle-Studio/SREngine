@@ -92,11 +92,11 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
 }
 
 void Framework::Graphics::Types::Skybox::AwaitDestroy() {
-
+//TODO
 }
 
 bool Framework::Graphics::Types::Skybox::Free() {
-    return false;
+    return false; //TODO
 }
 
 void Framework::Graphics::Types::Skybox::Draw() {

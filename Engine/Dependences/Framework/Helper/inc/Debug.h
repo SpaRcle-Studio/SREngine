@@ -40,7 +40,7 @@ namespace Framework::Helper {
             White = 15
         };
         enum class Type {
-            Log, Info, Debug, Graph, Shader, Script, System, Warn, Error
+            Log, Info, Debug, Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog
         };
     private:
         Debug() = delete;
@@ -75,6 +75,9 @@ namespace Framework::Helper {
         static void System(std::string msg) { Print(msg, Type::System); }
         static void Warn(std::string msg)   { Print(msg, Type::Warn);   }
         static void Error(std::string msg)  { Print(msg, Type::Error);  }
+
+        static void ScriptLog(std::string msg)  { Print(msg, Type::ScriptLog);  }
+        static void ScriptError(std::string msg)  { Print(msg, Type::ScriptError);  }
     };
 }
 

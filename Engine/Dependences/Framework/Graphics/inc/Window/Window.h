@@ -39,6 +39,8 @@ namespace Framework::Graphics {
             this->m_smoothSamples   = smoothSamples;
         }
     private:
+        ~Window() = default;
+    private:
         volatile bool           m_isCreate              = false;
         volatile bool           m_isInit                = false;
         volatile bool           m_isRun                 = false;
@@ -116,6 +118,7 @@ namespace Framework::Graphics {
         bool Init();
         bool Run();
         bool Close();
+        bool Free();
     };
 }
 
