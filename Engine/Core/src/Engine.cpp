@@ -6,6 +6,7 @@
 #include <Input/Input.h>
 #include <Types/Time.h>
 #include <Input/InputSystem.h>
+#include <EntityComponentSystem/Transform.h>
 
 Framework::Engine::Engine() {
     this->m_compiler = new Scripting::Compiler();
@@ -87,10 +88,53 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
 
         this->m_compiler->RegisterScriptClass([](lua_State* L){
             luabridge::getGlobalNamespace(L)
+                .beginNamespace("KeyCode")
+                    .addFunction("A", static_cast<int(*)()>([]() -> int { return (int)KeyCode::A; }))
+                    .addFunction("D", static_cast<int(*)()>([]() -> int { return (int)KeyCode::D; }))
+                    .addFunction("S", static_cast<int(*)()>([]() -> int { return (int)KeyCode::S; }))
+                    .addFunction("W", static_cast<int(*)()>([]() -> int { return (int)KeyCode::W; }))
+                .endNamespace();
+
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Helper::InputSystem>("Input")
+                        .addStaticFunction("GetKey", static_cast<bool(*)(int)>([](int k) -> bool {
+                            return Helper::InputSystem::IsPressed((KeyCode)k);
+                        }))
+                    .addStaticFunction("GetKeyDown", static_cast<bool(*)(int)>([](int k) -> bool {
+                        return Helper::InputSystem::IsDown((KeyCode)k);
+                    }))
+                    .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
+                        return Helper::InputSystem::IsUp((KeyCode)k);
+                    }))
+                    .endClass();
+        });
+
+        this->m_compiler->RegisterScriptClass([](lua_State* L){
+            luabridge::getGlobalNamespace(L)
                     .beginClass<Helper::Types::Time>("Time")
                     .addStaticFunction("DeltaTime", static_cast<float(*)()>([]() -> float {
                         return Helper::Types::Time::DeltaTime();
                     }))
+                    .endClass();
+        });
+
+        this->m_compiler->RegisterScriptClass([](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<glm::vec3>("Vector3")
+                            .addStaticFunction("New", static_cast<glm::vec3(*)()>([]() -> glm::vec3 {
+                                return glm::vec3();
+                            }))
+                            .addProperty("x", &glm::vec3::x)
+                            .addProperty("y", &glm::vec3::y)
+                            .addProperty("z", &glm::vec3::z)
+
+                            .addStaticFunction("Empty", static_cast<bool(*)(glm::vec3)>([](glm::vec3 v) -> bool {
+                                return (!v.x && !v.y && !v.z);
+                            }))
+
+                            .addStaticFunction("Sum", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
+                                return v1 + v2;
+                            }))
                     .endClass();
         });
 
@@ -125,8 +169,18 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
 
         this->m_compiler->RegisterScriptClass([](lua_State* L){
             luabridge::getGlobalNamespace(L)
+                    .beginClass<Helper::Transform>("Transform")
+                        .addFunction("Forward", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
+                        .addFunction("Up", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
+                        .addFunction("Right", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
+                    .endClass();
+        });
+
+        this->m_compiler->RegisterScriptClass([](lua_State* L){
+            luabridge::getGlobalNamespace(L)
                     .beginClass<Helper::GameObject>("GameObject")
-                            .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
+                    .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
+                            .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
                     .endClass();
         });
 
@@ -187,12 +241,6 @@ void Framework::Engine::Await() {
             Debug::System("Engine::Await() : ESC has been pressed.");
             break;
         }
-
-        if (InputSystem::IsDown(KeyCode::K))
-            Debug::Log("Down");
-
-        if (InputSystem::IsUp(KeyCode::K))
-            Debug::Log("Up");
 
         if (Helper::Types::Time::Begin()){
             m_compiler->FixedUpdateAll();

@@ -1,6 +1,6 @@
-local scene;
-local window;
-local camera;
+local scene;  -- Scene*
+local window; -- Window*
+local camera; -- GameObject*
 
 function Start ()
     Debug.Log("Main engine script has been started!");
@@ -19,9 +19,19 @@ function Start ()
 end;
 
 function Update()
-    --Debug.Log(String.FromFloat(Time.DeltaTime()));
+    local direction = Vector3.New();
+
+    if Input.GetKeyDown(KeyCode.W()) then
+        direction = Vector3.Sum(direction, camera:GetTransform():Forward());
+    end;
+
+    if (Vector3.Empty(direction) == false) then
+        Debug.Log(String.FromFloat(direction.x));
+        Debug.Log(String.FromFloat(direction.y));
+        Debug.Log(String.FromFloat(direction.z));
+    end;
 end;
 
 function FixedUpdate()
-
+    --Debug.Log(String.FromFloat(Time.DeltaTime()));
 end;
