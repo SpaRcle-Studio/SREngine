@@ -20,10 +20,10 @@ namespace Framework::Scripting {
         std::mutex                                                              m_mutex_register            = std::mutex();
         std::vector<Script*>                                                    m_scripts                   = std::vector<Script*>();
     public:
-        std::vector<std::function<void(lua_State* L)>> GetClasses(std::string libName) noexcept;
+        std::vector<std::function<void(lua_State* L)>> GetClasses(const std::string& libName) noexcept;
     public:
-        void RegisterScriptClass(std::string libName, std::function<void(lua_State *L)> fun);
-        Script* Load(std::string name, bool fromEngine = false);
+        void RegisterScriptClass(const std::string& libName, std::function<void(lua_State *L)> fun);
+        Script* Load(const std::string& name, bool fromEngine = false);
     public:
         void AwakeAll();
         void FixedUpdateAll();

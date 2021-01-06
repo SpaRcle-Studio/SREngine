@@ -6,6 +6,9 @@
 #define GAMEENGINE_TIME_H
 
 #include <ctime>
+#include <iostream>
+#include <ratio>
+#include <chrono>
 
 namespace Framework::Helper::Types {
     class Time {
@@ -16,21 +19,21 @@ namespace Framework::Helper::Types {
         ~Time() = delete;
 
     private:
-        inline static float num_fps_limit = 60.f;
-        inline static float fps_limit_timer = 0.f;
-        inline static float fps_lim = 1 / num_fps_limit;
-        inline static float frameDeltaTime;
+        inline static double num_fps_limit = 120.f;
+        inline static double fps_limit_timer = 0.f;
+        inline static double fps_lim = 1 / num_fps_limit;
+        inline static double frameDeltaTime;
         inline static int now = 0, then = 0;
     public:
         inline static void SetFPSLimit(int count) {
             num_fps_limit = (float)count;
         }
 
-        static float DeltaTime() { return frameDeltaTime; }
+        static double DeltaTime() { return frameDeltaTime; }
 
         static bool Begin() {
             now = clock();
-            frameDeltaTime = (float) (now - then) / 1000.f;
+            frameDeltaTime = (double) (now - then) / 1000.f;
             fps_limit_timer += frameDeltaTime;
 
             if (fps_limit_timer >= fps_lim) {

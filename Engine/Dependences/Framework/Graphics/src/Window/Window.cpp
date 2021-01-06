@@ -48,6 +48,8 @@ bool Framework::Graphics::Window::Create() {
                 //this->m_postProcessing->ReCalcFrameBuffers(*(int *) arg1, *(int *) arg2);
                 break;
             }
+            case Environment::WinEvents::Scroll:
+                break;
             case Environment::WinEvents::LeftClick:
                 break;
             case Environment::WinEvents::RightClick:

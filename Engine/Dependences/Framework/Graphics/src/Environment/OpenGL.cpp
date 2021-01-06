@@ -49,10 +49,8 @@ bool Framework::Graphics::OpenGL::SetContextCurrent() {
 }
 
 bool Framework::Graphics::OpenGL::Init() {
-
-
-        this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
-        glfwSwapInterval(0);
+    this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
+    glfwSwapInterval(0);
 
 
     glfwSetWindowFocusCallback(m_window, [](GLFWwindow* win, int focus) {
@@ -69,6 +67,13 @@ bool Framework::Graphics::OpenGL::Init() {
 
     glfwSetWindowPosCallback(m_window, [](GLFWwindow* win, int x, int y){
          g_callback(WinEvents::Move, win, &x, &y);
+    });
+
+    glfwSetScrollCallback(m_window, [](GLFWwindow* win, double xoffset, double yoffset){
+        for (const auto& a : g_scrollEvents)
+            a(xoffset, yoffset);
+
+        g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
     });
 
     Helper::Debug::Graph("OpenGL::Init() : initializing glew...");

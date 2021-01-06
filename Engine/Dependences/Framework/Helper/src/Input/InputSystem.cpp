@@ -5,14 +5,17 @@
 #include "Input/InputSystem.h"
 
 void Framework::Helper::InputSystem::Check() {
-    g_mouse_old = g_mouse;
-    g_mouse = Input::GetMousePos();
-
     if (!InputSystem::g_init) {
         for (auto &g_key : g_keys)
             g_key = State::UnPressed;
         g_init = true;
     }
+
+    g_mouseScroll = g_mouseScrollCurrent;
+    g_mouseScrollCurrent = glm::vec2(0,0);
+
+    g_mouse_old = g_mouse;
+    g_mouse = Input::GetMousePos();
 
     BYTE *arr = new BYTE[256];
 
@@ -70,4 +73,8 @@ bool Framework::Helper::InputSystem::IsPressed(Framework::Helper::KeyCode key) {
 
 glm::vec2 Framework::Helper::InputSystem::MouseDrag() {
     return g_mouse - g_mouse_old;
+}
+
+int Framework::Helper::InputSystem::GetMouseWheel() {
+    return g_mouseScroll.y;
 }

@@ -19,11 +19,12 @@ namespace Framework::Graphics {
     class Environment {
     public:
         enum class WinEvents{
-            Close, Move, Resize, LeftClick, RightClick, Focus
+            Close, Move, Resize, LeftClick, RightClick, Focus, Scroll
         };
     private:
         Environment(Environment&) = delete;
     protected:
+        inline static std::vector<std::function<void(double x, double y)>> g_scrollEvents = std::vector<std::function<void(double x, double y)>>();
         Types::WindowFormat* m_winFormat = nullptr;
         glm::vec2 m_screenSize = glm::vec2(0, 0);
     protected:
@@ -34,6 +35,10 @@ namespace Framework::Graphics {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
+        inline static void RegisterScrollEvent(std::function<void(double, double)> fun){
+            g_scrollEvents.push_back(fun);
+        }
+
         static bool Set(Environment* env) {
             if (g_environment != nullptr)
                 return false;

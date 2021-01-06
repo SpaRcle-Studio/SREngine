@@ -5,7 +5,7 @@
 #include "Compiler.h"
 #include <ResourceManager/ResourceManager.h>
 
-Framework::Scripting::Script *Framework::Scripting::Compiler::Load(std::string name, bool fromEngine) {
+Framework::Scripting::Script *Framework::Scripting::Compiler::Load(const std::string& name, bool fromEngine) {
     this->m_mutex_load.lock();
 
     std::string folder = fromEngine ? "Engine/" : "Game/";
@@ -48,13 +48,13 @@ Framework::Scripting::Script *Framework::Scripting::Compiler::Load(std::string n
     return script;
 }
 
-void Framework::Scripting::Compiler::RegisterScriptClass(std::string libName, std::function<void(lua_State *)> fun) {
+void Framework::Scripting::Compiler::RegisterScriptClass(const std::string& libName, std::function<void(lua_State *)> fun) {
     this->m_mutex_register.lock();
     this->m_libs[libName].push_back(fun);
     this->m_mutex_register.unlock();
 }
 
-std::vector<std::function<void(lua_State *L)>> Framework::Scripting::Compiler::GetClasses(std::string libName) noexcept {
+std::vector<std::function<void(lua_State *L)>> Framework::Scripting::Compiler::GetClasses(const std::string& libName) noexcept {
     this->m_mutex_register.lock();
 
     auto copy = this->m_libs.find(libName);

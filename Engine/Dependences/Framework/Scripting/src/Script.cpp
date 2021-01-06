@@ -31,7 +31,7 @@ namespace Framework::Scripting {
     }
 
     Script::~Script() {
-
+        //TODO!!!!
     }
 
     bool Script::Compile() {
@@ -100,7 +100,9 @@ namespace Framework::Scripting {
 
         r = lua_getglobal(L, "Update");
         if (lua_pcall(L, 0, 0, 0)) {
-            Helper::Debug::Error("Script::Update() : failed call \"Update()\" method at script!");
+            const char* stackTrace = lua_tostring(L, -1);
+
+            Helper::Debug::Error("Script::Update() : failed call \"Update()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
             return false;
         }
@@ -117,7 +119,9 @@ namespace Framework::Scripting {
 
         r = lua_getglobal(L, "FixedUpdate");
         if (lua_pcall(L, 0, 0, 0)) {
-            Helper::Debug::Error("Script::FixedUpdate() : failed call \"FixedUpdate()\" method at script!");
+            const char* stackTrace = lua_tostring(L, -1);
+
+            Helper::Debug::Error("Script::FixedUpdate() : failed call \"FixedUpdate()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
             return false;
         }

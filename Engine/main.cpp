@@ -9,6 +9,7 @@
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
 #include <EntityComponentSystem/Transform.h>
+#include <Input/Input.h>
 
 using namespace Framework;
 using namespace Framework::Scripting;
