@@ -36,6 +36,7 @@ namespace Framework {
         Helper::Scene*          m_scene                 = nullptr;
     public:
         inline Scene* GetScene() const noexcept { return m_scene; }
+        inline Scripting::Compiler* GetCompiler() const noexcept { return m_compiler; }
         inline Graphics::Window* GetWindow() const noexcept { return m_window; }
         inline bool IsRun() const noexcept { return m_isRun; }
     public:

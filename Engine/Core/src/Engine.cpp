@@ -65,7 +65,8 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
     }
 
     {
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // Debug
+        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<Debug>("Debug")
                         .addStaticFunction("Log", static_cast<void(*)(std::string)>([](std::string s) {
@@ -77,7 +78,8 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                     .endClass();
         });
 
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // String
+        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<std::string>("String")
                     .addStaticFunction("FromFloat", static_cast<std::string(*)(float)>([](float f) -> std::string {
@@ -86,13 +88,49 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                     .endClass();
         });
 
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // Time
+        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Helper::Types::Time>("Time")
+                    .addStaticFunction("DeltaTime", static_cast<float(*)()>([]() -> float {
+                        return Helper::Types::Time::DeltaTime();
+                    }))
+                    .endClass();
+        });
+
+        // Script
+        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<lua_State>("LuaState")
+                            .addStaticProperty("L", L, false)
+                    .endClass()
+
+                    //.addVariable("L", L, false)
+                    .beginClass<Scripting::Script>("Script")
+                    .addStaticFunction("ImportLib", static_cast<bool(*)(const std::string&, lua_State*)>([](const std::string& name, lua_State* L) -> bool {
+                        auto a = Engine::Get()->GetCompiler()->GetClasses(name);
+                        if (a.empty())
+                            return false;
+                        else
+                        {
+                            Debug::Script("Script(InternalCall) : importing \""+name+"\" library...");
+                            for (const auto& b : a)
+                                b(L);
+                        }
+                    }))
+                    .endClass();
+        });
+
+        // KeyCode and Input
+        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                 .beginNamespace("KeyCode")
-                    .addFunction("A", static_cast<int(*)()>([]() -> int { return (int)KeyCode::A; }))
-                    .addFunction("D", static_cast<int(*)()>([]() -> int { return (int)KeyCode::D; }))
-                    .addFunction("S", static_cast<int(*)()>([]() -> int { return (int)KeyCode::S; }))
-                    .addFunction("W", static_cast<int(*)()>([]() -> int { return (int)KeyCode::W; }))
+                    .addFunction("A",       static_cast<int(*)()>([]() -> int { return (int)KeyCode::A;          }))
+                    .addFunction("D",       static_cast<int(*)()>([]() -> int { return (int)KeyCode::D;          }))
+                    .addFunction("S",       static_cast<int(*)()>([]() -> int { return (int)KeyCode::S;          }))
+                    .addFunction("W",       static_cast<int(*)()>([]() -> int { return (int)KeyCode::W;          }))
+                    .addFunction("Space",   static_cast<int(*)()>([]() -> int { return (int)KeyCode::Space;      }))
+                    .addFunction("LShift",  static_cast<int(*)()>([]() -> int { return (int)KeyCode::LShift;     }))
                 .endNamespace();
 
             luabridge::getGlobalNamespace(L)
@@ -106,19 +144,14 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                     .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
                         return Helper::InputSystem::IsUp((KeyCode)k);
                     }))
+                    //.addStaticFunction("MouseDrag", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
+                        //return Helper::InputSystem::
+                    //}))
                     .endClass();
         });
 
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Types::Time>("Time")
-                    .addStaticFunction("DeltaTime", static_cast<float(*)()>([]() -> float {
-                        return Helper::Types::Time::DeltaTime();
-                    }))
-                    .endClass();
-        });
-
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // Vector3
+        this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<glm::vec3>("Vector3")
                             .addStaticFunction("New", static_cast<glm::vec3(*)()>([]() -> glm::vec3 {
@@ -131,20 +164,74 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                             .addStaticFunction("Empty", static_cast<bool(*)(glm::vec3)>([](glm::vec3 v) -> bool {
                                 return (!v.x && !v.y && !v.z);
                             }))
-
                             .addStaticFunction("Sum", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
                                 return v1 + v2;
+                            }))
+                            .addStaticFunction("Sub", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
+                                return v1 - v2;
+                            }))
+                            .addStaticFunction("FMul", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
+                                return v1 * f;
+                            }))
+                            .addStaticFunction("FDiv", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
+                                return v1 / f;
                             }))
                     .endClass();
         });
 
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // Transform
+        this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Helper::Transform>("Transform")
+                    .addFunction("Forward", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
+                    .addFunction("Up", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
+                    .addFunction("Right", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
+
+                    .addFunction("Translate", (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Translate)
+                    .endClass();
+        });
+
+        // Component
+        this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<Helper::Component>("Component")
                     .endClass();
         });
 
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // GameObject
+        this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Helper::GameObject>("GameObject")
+                    .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
+                    .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
+                    .endClass();
+        });
+
+        // Scene
+        this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Helper::Scene>("Scene")
+                    .addStaticFunction("Get", static_cast<Scene*(*)()>([]() -> Scene* {
+                        return Engine::Get()->GetScene();
+                    }))
+                    .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
+                    .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::Destroy)
+                    .endClass();
+        });
+
+        // Mesh
+        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Graphics::Mesh>("Mesh")
+                    .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(std::string name, unsigned int id)>([](std::string name, unsigned int id) -> Graphics::Mesh* {
+                        return Mesh::Load(std::move(name))[id];
+                    }))
+                    .addFunction("Base", (Helper::Component* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::BaseComponent)
+                    .endClass();
+        });
+
+        // Camera
+        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<Graphics::Camera>("Camera")
                         .addStaticFunction("New", static_cast<Graphics::Camera*(*)()>([]() -> Graphics::Camera* {
@@ -156,7 +243,19 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                     .endClass();
         });
 
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
+        // Render
+        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Graphics::Render>("Render")
+                    .addStaticFunction("Get", static_cast<Graphics::Render*(*)()>([]() -> Graphics::Render* {
+                        return Engine::Get()->GetWindow()->GetRender();
+                    }))
+                    .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
+                    .endClass();
+        });
+
+        // Window
+        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<Graphics::Window>("Window")
                         .addStaticFunction("Get", static_cast<Graphics::Window*(*)()>([]() -> Graphics::Window* {
@@ -164,34 +263,6 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                         }))
                         .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
                         .addFunction("RemoveCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::RemoveCamera)
-                    .endClass();
-        });
-
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Transform>("Transform")
-                        .addFunction("Forward", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
-                        .addFunction("Up", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
-                        .addFunction("Right", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
-                    .endClass();
-        });
-
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::GameObject>("GameObject")
-                    .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
-                            .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
-                    .endClass();
-        });
-
-        this->m_compiler->RegisterScriptClass([](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Scene>("Scene")
-                        .addStaticFunction("Get", static_cast<Scene*(*)()>([]() -> Scene* {
-                            return Engine::Get()->GetScene();
-                        }))
-                        .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
-                        .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::Destroy)
                     .endClass();
         });
     }
@@ -236,6 +307,10 @@ void Framework::Engine::Await() {
 
     while (true) {
         Helper::InputSystem::Check();
+
+        glm::vec2 drag = InputSystem::MouseDrag();
+        if (drag != glm::vec2(0,0))
+            std::cout << glm::to_string(drag) << std::endl;
 
         if (InputSystem::IsDown(KeyCode::Esc)) {
             Debug::System("Engine::Await() : ESC has been pressed.");

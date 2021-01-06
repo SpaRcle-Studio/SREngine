@@ -105,7 +105,13 @@ namespace Framework::Graphics {
             m_camerasMutex.unlock();
         }
 
-        inline Render* GetRender() { return m_render; }
+        inline Render* GetRender() {
+            if (!m_render) {
+                Debug::Error("Window::GetRender() : render is nullptr! Engine may be crash...");
+                return nullptr;
+            }
+            return m_render;
+        }
         inline bool IsRun() const noexcept { return m_isRun; }
         //inline glm::mat4& GetProjection() noexcept { return this->m_projection; }
     public:

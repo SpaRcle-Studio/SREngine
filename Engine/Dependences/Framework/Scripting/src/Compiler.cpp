@@ -48,20 +48,26 @@ Framework::Scripting::Script *Framework::Scripting::Compiler::Load(std::string n
     return script;
 }
 
-void Framework::Scripting::Compiler::RegisterScriptClass(std::function<void(lua_State *)> fun) {
+void Framework::Scripting::Compiler::RegisterScriptClass(std::string libName, std::function<void(lua_State *)> fun) {
     this->m_mutex_register.lock();
-    this->m_classes.push_back(fun);
+    this->m_libs[libName].push_back(fun);
     this->m_mutex_register.unlock();
 }
 
-std::vector<std::function<void(lua_State *L)>> Framework::Scripting::Compiler::GetClasses() noexcept {
+std::vector<std::function<void(lua_State *L)>> Framework::Scripting::Compiler::GetClasses(std::string libName) noexcept {
     this->m_mutex_register.lock();
 
-    auto copy = this->m_classes;
+    auto copy = this->m_libs.find(libName);
+    if (copy == m_libs.end())
+    {
+        Helper::Debug::Error("Compiler::GetClasses() : \""+libName+"\" not exists in compiler!");
+        this->m_mutex_register.unlock();
+        return std::vector<std::function<void(lua_State *L)>>();
+    }
 
     this->m_mutex_register.unlock();
 
-    return copy;
+    return copy->second;
 }
 
 void Framework::Scripting::Compiler::AwakeAll() {

@@ -4,21 +4,11 @@
 
 #include <Engine.h>
 
-#include <iostream>
 #include <Debug.h>
 #include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
-#include <Types/Mesh.h>
-#include <Types/Texture.h>
-#include <Input/Input.h>
-#include <Window/Window.h>
 #include <Environment/OpenGL.h>
-#include <Loaders/ObjLoader.h>
-#include <FileSystem/FileSystem.h>
-#include <EntityComponentSystem/Scene.h>
-#include <EntityComponentSystem/GameObject.h>
 #include <EntityComponentSystem/Transform.h>
-#include <Types/Skybox.h>
 
 using namespace Framework;
 using namespace Framework::Scripting;
@@ -30,7 +20,7 @@ using namespace Framework::Graphics::Types;
 
 int main() {
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Low);
+    Debug::SetLevel(Debug::Level::Full);
     ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
 
     // Register all resource types

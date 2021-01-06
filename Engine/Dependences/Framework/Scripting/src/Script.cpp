@@ -58,7 +58,7 @@ namespace Framework::Scripting {
             }
         } //?================ INIT LUA ================
 
-        for (auto& fun : this->m_compiler->GetClasses()){
+        for (auto& fun : this->m_compiler->GetClasses("Base")){
             fun(L);
         }
 
@@ -75,9 +75,15 @@ namespace Framework::Scripting {
     }
 
     bool Script::Start() {
+        if (m_status == Status::RuntimeError)
+            return false;
+
+
         r = lua_getglobal(L, "Start");
-        if (lua_pcall(L, 0, 0, 0)) {
-            Helper::Debug::Error("Script::Start() : failed call \"Start()\" method at script!");
+        if (lua_pcall(L, 0, 1, 0)) {
+            const char* stackTrace = lua_tostring(L, -1);
+
+            Helper::Debug::Error("Script::Start() : failed call \"Start()\" method at script! \n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
             return false;
         }
@@ -86,6 +92,9 @@ namespace Framework::Scripting {
     }
 
     bool Script::Update() {
+        if (m_status == Status::RuntimeError)
+            return false;
+
         if (!m_isStart)
             return Start();
 
@@ -100,6 +109,9 @@ namespace Framework::Scripting {
     }
 
     bool Script::FixedUpdate() {
+        if (m_status == Status::RuntimeError)
+            return false;
+
         if (!m_isStart)
             return Start();
 

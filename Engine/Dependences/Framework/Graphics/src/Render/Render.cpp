@@ -146,6 +146,11 @@ void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *m
 }
 
 void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh *mesh) {
+    if (!mesh){
+        Debug::Error("Render::RegisterMesh() : mesh is nullptr!");
+        return;
+    }
+
     m_mutex.lock();
 
     if (Debug::GetLevel() >= Debug::Level::High)

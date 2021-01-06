@@ -14,14 +14,15 @@
 namespace Framework::Scripting {
     class Compiler {
     private:
-        std::vector<std::function<void(lua_State* L)>>          m_classes                   = std::vector<std::function<void(lua_State* L)>>();
-        std::mutex                                              m_mutex_load                = std::mutex();
-        std::mutex                                              m_mutex_register            = std::mutex();
-        std::vector<Script*>                                    m_scripts                   = std::vector<Script*>();
+        //std::vector<std::function<void(lua_State* L)>>          m_classes                   = std::vector<std::function<void(lua_State* L)>>();
+        std::map<std::string, std::vector<std::function<void(lua_State* L)>>>   m_libs                      = std::map<std::string, std::vector<std::function<void(lua_State* L)>>>();
+        std::mutex                                                              m_mutex_load                = std::mutex();
+        std::mutex                                                              m_mutex_register            = std::mutex();
+        std::vector<Script*>                                                    m_scripts                   = std::vector<Script*>();
     public:
-        std::vector<std::function<void(lua_State* L)>> GetClasses() noexcept;
+        std::vector<std::function<void(lua_State* L)>> GetClasses(std::string libName) noexcept;
     public:
-        void RegisterScriptClass(std::function<void(lua_State *L)> fun);
+        void RegisterScriptClass(std::string libName, std::function<void(lua_State *L)> fun);
         Script* Load(std::string name, bool fromEngine = false);
     public:
         void AwakeAll();

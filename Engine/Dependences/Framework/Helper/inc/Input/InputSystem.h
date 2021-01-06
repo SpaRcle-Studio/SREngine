@@ -17,10 +17,15 @@ namespace Framework::Helper {
         InputSystem(InputSystem&) = delete;
         ~InputSystem() = delete;
     private:
+        inline static glm::vec2 g_mouse_old     = glm::vec2();
+        inline static glm::vec2 g_mouse         = glm::vec2();
+    private:
         inline static bool g_init = false;
         inline static State g_keys[256];
     public:
         static void Check();
+
+        static glm::vec2 MouseDrag();
 
         static bool IsDown(KeyCode key);
         static bool IsUp(KeyCode key);

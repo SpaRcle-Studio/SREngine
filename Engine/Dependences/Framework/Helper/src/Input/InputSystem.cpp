@@ -5,6 +5,9 @@
 #include "Input/InputSystem.h"
 
 void Framework::Helper::InputSystem::Check() {
+    g_mouse_old = g_mouse;
+    g_mouse = Input::GetMousePos();
+
     if (!InputSystem::g_init) {
         for (auto &g_key : g_keys)
             g_key = State::UnPressed;
@@ -63,4 +66,8 @@ bool Framework::Helper::InputSystem::IsUp(Framework::Helper::KeyCode key) {
 
 bool Framework::Helper::InputSystem::IsPressed(Framework::Helper::KeyCode key) {
     return (g_keys[(int)key] == State::Pressed || g_keys[(int)key] == State::Down);
+}
+
+glm::vec2 Framework::Helper::InputSystem::MouseDrag() {
+    return g_mouse - g_mouse_old;
 }
