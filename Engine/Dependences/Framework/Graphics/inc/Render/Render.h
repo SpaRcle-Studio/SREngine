@@ -82,6 +82,10 @@ namespace Framework::Graphics {
         void RegisterTexture(Texture* texture);
         void FreeTexture(Texture* texture);
     public:
+        [[nodiscard]] inline Window* GetWindow() const noexcept {
+            return m_window;
+        }
+    public:
         bool Create(Window* window); //, Camera* camera
         /** \warning call only from window thread */
         bool Init();

@@ -5,8 +5,10 @@
 #include "Window/Window.h"
 #include <Debug.h>
 #include <iostream>
-#include <glm\ext\matrix_clip_space.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
 #include <Input/Input.h>
+
+#include <GUI/Canvas.h>
 
 using namespace Framework::Helper;
 
@@ -18,19 +20,11 @@ bool Framework::Graphics::Window::Create() {
 
     Debug::Graph("Window::Create() : creating window...");
 
-    //this->m_postProcessing = new PostProcessing(m_render);
-
     if (!this->m_render->Create(this)){ //, m_camera
         Debug::Error("Window::Create() : failed create render!");
         m_hasErrors = true;
         return false;
     }
-
-    //if (!this->m_camera->Create(this)) {
-     //   Debug::Error("Window::Create() : failed create camera!");
-    //    m_hasErrors = true;
-    //    return false;
-    //}
 
     this->m_env->SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
         switch (event) {
@@ -56,7 +50,7 @@ bool Framework::Graphics::Window::Create() {
                 break;
             case Environment::WinEvents::Focus:
                 this->m_isWindowFocus = *(bool*)(arg1);
-                std::cout << "Focus: " << *(int*)(arg1) << std::endl;
+                std::cout << "Window focus state: " << *(int*)(arg1) << std::endl;
                 break;
         }
     });
@@ -223,8 +217,6 @@ void Framework::Graphics::Window::Thread() {
         Debug::Error("Window::Thread() : failed close render!");
     }
 
-    //this->m_postProcessing->Destroy();
-
     Debug::Info("Window::Thread() : stopping window thread...");
 
     this->m_isWindowClose = true;
@@ -247,6 +239,8 @@ bool Framework::Graphics::Window::InitEnvironment() {
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
     this->m_env->SetContextCurrent();
+
+    GUI::Canvas::Get()->Init();
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
     this->m_env->Init();

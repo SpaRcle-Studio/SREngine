@@ -69,266 +69,7 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
         }
     }
 
-    if (true)
-    {
-        // Debug
-        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Debug>("Debug")
-                        .addStaticFunction("Log", static_cast<void(*)(std::string)>([](std::string s) {
-                            Debug::ScriptLog(s);
-                        }))
-                        .addStaticFunction("Error", static_cast<void(*)(std::string)>([](std::string s) {
-                            Debug::ScriptError(s);
-                        }))
-                    .endClass();
-        });
-
-        // String
-        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<std::string>("String")
-                    .addStaticFunction("FromFloat", static_cast<std::string(*)(float)>([](float f) -> std::string {
-                        return std::to_string(f);
-                    }))
-                    .endClass();
-        });
-
-        // Time
-        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Types::Time>("Time")
-                    .addStaticFunction("DeltaTime", static_cast<double (*)()>([]() -> double {
-                        return Helper::Types::Time::DeltaTime();
-                    }))
-                    .endClass();
-        });
-
-        // Script
-        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<lua_State>("LuaState")
-                            .addStaticProperty("L", L, false)
-                    .endClass()
-                    .beginClass<Scripting::Script>("Script")
-                    .addStaticFunction("ImportLib", static_cast<bool(*)(const std::string&, lua_State*)>([](const std::string& name, lua_State* L) -> bool {
-                        auto a = Engine::Get()->GetCompiler()->GetClasses(name);
-                        if (a.empty())
-                            return false;
-                        else
-                        {
-                            Debug::Script("Script(InternalCall) : importing \""+name+"\" library...");
-                            for (const auto& b : a)
-                                b(L);
-                            return true;
-                        }
-                    }))
-                    .endClass();
-        });
-
-        // KeyCode and Input
-        this->m_compiler->RegisterScriptClass("Base", [](lua_State* L) {
-            static int MouseMiddle      = (int)KeyCode::MouseMiddle;
-            static int MouseLeft        = (int)KeyCode::MouseLeft;
-            static int MouseRight       = (int)KeyCode::MouseRight;
-            static int A                = (int)KeyCode::A;
-            static int D                = (int)KeyCode::D;
-            static int S                = (int)KeyCode::S;
-            static int W                = (int)KeyCode::W;
-            static int Space            = (int)KeyCode::Space;
-            static int LShift           = (int)KeyCode::LShift;
-
-            luabridge::getGlobalNamespace(L)
-                .beginNamespace("KeyCode")
-                    .addProperty("MouseMiddle",     &MouseMiddle,         false)
-                    .addProperty("MouseLeft",       &MouseLeft,           false)
-                    .addProperty("MouseRight",      &MouseRight,          false)
-                    .addProperty("A",               &A,                   false)
-                    .addProperty("D",               &D,                   false)
-                    .addProperty("S",               &S,                   false)
-                    .addProperty("W",               &W,                   false)
-                    .addProperty("Space",           &Space,               false)
-                    .addProperty("LShift",          &LShift,              false)
-                .endNamespace();
-
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::InputSystem>("Input")
-                        .addStaticFunction("GetKey", static_cast<bool(*)(int)>([](int k) -> bool {
-                            return Helper::InputSystem::IsPressed((KeyCode)k);
-                        }))
-                        .addStaticFunction("GetKeyDown", static_cast<bool(*)(int)>([](int k) -> bool {
-                            return Helper::InputSystem::IsDown((KeyCode)k);
-                        }))
-                        .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
-                            return Helper::InputSystem::IsUp((KeyCode)k);
-                        }))
-                        .addStaticFunction("GetMouseDrag", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
-                            return Helper::InputSystem::MouseDrag();
-                        }))
-                        .addStaticFunction("GetMouseWheel", static_cast<int(*)()>([]() -> int {
-                            return Helper::InputSystem::GetMouseWheel();
-                        }))
-                    .endClass();
-        });
-
-        // Vector3
-        this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<glm::vec3>("Vector3")
-                            .addStaticFunction("New", static_cast<glm::vec3(*)(float,float,float)>([](float x,float y,float z) -> glm::vec3 {
-                                return glm::vec3(x,y,z);
-                            }))
-                            .addProperty("x", &glm::vec3::x)
-                            .addProperty("y", &glm::vec3::y)
-                            .addProperty("z", &glm::vec3::z)
-
-                            .addStaticFunction("Empty", static_cast<bool(*)(glm::vec3)>([](glm::vec3 v) -> bool {
-                                return (!v.x && !v.y && !v.z);
-                            }))
-                            .addStaticFunction("Sum", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
-                                return v1 + v2;
-                            }))
-                            .addStaticFunction("Sub", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
-                                return v1 - v2;
-                            }))
-                            .addStaticFunction("FMul", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
-                                return v1 * f;
-                            }))
-                            .addStaticFunction("FDiv", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
-                                return v1 / f;
-                            }))
-                    .endClass();
-        });
-
-        // Vector2
-        this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<glm::vec2>("Vector2")
-                    .addStaticFunction("New", static_cast<glm::vec2(*)(float, float)>([](float x, float y) -> glm::vec2 {
-                        return glm::vec2(x, y);
-                    }))
-                    .addProperty("x", &glm::vec2::x)
-                    .addProperty("y", &glm::vec2::y)
-
-                    .addStaticFunction("Empty", static_cast<bool(*)(glm::vec2)>([](glm::vec2 v) -> bool {
-                        return (!v.x && !v.y);
-                    }))
-                    .addStaticFunction("Sum", static_cast<glm::vec2(*)(glm::vec2, glm::vec2)>([](glm::vec2 v1, glm::vec2 v2) -> glm::vec2 {
-                        return v1 + v2;
-                    }))
-                    .addStaticFunction("Sub", static_cast<glm::vec2(*)(glm::vec2, glm::vec2)>([](glm::vec2 v1, glm::vec2 v2) -> glm::vec2 {
-                        return v1 - v2;
-                    }))
-                    .addStaticFunction("FMul", static_cast<glm::vec2(*)(glm::vec2, float)>([](glm::vec2 v1, float f) -> glm::vec2 {
-                        return v1 * f;
-                    }))
-                    .addStaticFunction("FDiv", static_cast<glm::vec2(*)(glm::vec2, float)>([](glm::vec2 v1, float f) -> glm::vec2 {
-                        return v1 / f;
-                    }))
-                    .endClass();
-        });
-
-        // Transform
-        this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Transform>("Transform")
-                    .addFunction("Forward", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
-                    .addFunction("Up", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
-                    .addFunction("Right", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
-
-                    .addFunction("Translate", (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Translate)
-                    .addFunction("Rotate",    (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Rotate)
-                    .endClass();
-        });
-
-        // Component
-        this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Component>("Component")
-                    .endClass();
-        });
-
-        // GameObject
-        this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::GameObject>("GameObject")
-                        .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
-                        .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
-                    .endClass();
-        });
-
-        // Scene
-        this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Helper::Scene>("Scene")
-                    .addStaticFunction("Get", static_cast<Scene*(*)()>([]() -> Scene* {
-                        return Engine::Get()->GetScene();
-                    }))
-                    .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
-                    .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::Destroy)
-                    .endClass();
-        });
-
-        // Mesh
-        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Graphics::Mesh>("Mesh")
-                    .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(std::string name, unsigned int id)>([](std::string name, unsigned int id) -> Graphics::Mesh* {
-                        return Mesh::Load(std::move(name))[id];
-                    }))
-                    .addFunction("Base", (Helper::Component* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::BaseComponent)
-                    .endClass();
-        });
-
-        // Camera
-        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Graphics::Camera>("Camera")
-                        .addStaticFunction("New", static_cast<Graphics::Camera*(*)()>([]() -> Graphics::Camera* {
-                            return new Graphics::Camera();
-                        }))
-                        .addFunction("Free", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::Free)
-                        .addFunction("Base", (Helper::Component* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::BaseComponent)
-                        .addFunction("SetFrameSize", (void (Framework::Graphics::Camera::*)(unsigned int w, unsigned int h))&Graphics::Camera::UpdateProjection)
-                    .endClass();
-        });
-
-        // Skybox
-        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Graphics::Skybox>("Skybox")
-                        .addStaticFunction("Load", static_cast<Graphics::Skybox*(*)(std::string)>([](std::string name) -> Graphics::Skybox* {
-                            return Skybox::Load(std::move(name));
-                        }))
-                        .addFunction("Free", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::Free)
-                        .addFunction("AwaitDestroy", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::AwaitDestroy)
-                    .endClass();
-        });
-
-        // Render
-        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Graphics::Render>("Render")
-                    .addStaticFunction("Get", static_cast<Graphics::Render*(*)()>([]() -> Graphics::Render* {
-                        return Engine::Get()->GetWindow()->GetRender();
-                    }))
-                    .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
-                    .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
-                    .endClass();
-        });
-
-        // Window
-        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<Graphics::Window>("Window")
-                        .addStaticFunction("Get", static_cast<Graphics::Window*(*)()>([]() -> Graphics::Window* {
-                            return Engine::Get()->GetWindow();
-                        }))
-                        .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
-                        .addFunction("RemoveCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::RemoveCamera)
-                    .endClass();
-        });
-    }
+    this->RegisterLibraries();
 
     this->m_isInit = true;
 
@@ -359,12 +100,9 @@ bool Framework::Engine::Run() {
 }
 
 void Framework::Engine::Await() {
-    //Graphics::Types::Skybox* skybox = Graphics::Types::Skybox::Load("Sea.jpg");
-    //m_render->SetSkybox(skybox);
-
     Scripting::Script* engine = m_compiler->Load("engine", true);
 
-    while (true) {
+    while (m_window->IsWindowOpen()) {
         m_compiler->PoolEvents();
 
         Helper::InputSystem::Check();
@@ -396,4 +134,332 @@ bool Framework::Engine::Close() {
     }
 
     return false;
+}
+
+bool Framework::Engine::RegisterLibraries() {
+    Helper::Debug::Log("Engine::RegisterLibraries() : register all lua libraries...");
+
+    // Debug
+    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Debug>("Debug")
+                    .addStaticFunction("Log", static_cast<void(*)(std::string)>([](std::string s) {
+                        Debug::ScriptLog(s);
+                    }))
+                    .addStaticFunction("Error", static_cast<void(*)(std::string)>([](std::string s) {
+                        Debug::ScriptError(s);
+                    }))
+                .endClass();
+    });
+
+    // String
+    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<std::string>("String")
+                    .addStaticFunction("FromFloat", static_cast<std::string(*)(float)>([](float f) -> std::string {
+                        return std::to_string(f);
+                    }))
+                .endClass();
+    });
+
+    // Time
+    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Helper::Types::Time>("Time")
+                    .addStaticFunction("DeltaTime", static_cast<double (*)()>([]() -> double {
+                        return Helper::Types::Time::DeltaTime();
+                    }))
+                .endClass();
+    });
+
+    // Script
+    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<lua_State>("LuaState")
+                    .addStaticProperty("L", L, false)
+                    .endClass()
+                    .beginClass<Scripting::Script>("Script")
+                    .addStaticFunction("ImportLib", static_cast<bool(*)(const std::string&, lua_State*)>([](const std::string& name, lua_State* L) -> bool {
+                        auto a = Engine::Get()->GetCompiler()->GetClasses(name);
+                        if (a.empty())
+                            return false;
+                        else
+                        {
+                            Debug::Script("Script(InternalCall) : importing \""+name+"\" library...");
+                            for (const auto& b : a)
+                                b(L);
+                            return true;
+                        }
+                    }))
+                .endClass();
+    });
+
+    // KeyCode and Input
+    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L) {
+        static int MouseMiddle      = (int)KeyCode::MouseMiddle;
+        static int MouseLeft        = (int)KeyCode::MouseLeft;
+        static int MouseRight       = (int)KeyCode::MouseRight;
+        static int A                = (int)KeyCode::A;
+        static int D                = (int)KeyCode::D;
+        static int S                = (int)KeyCode::S;
+        static int W                = (int)KeyCode::W;
+        static int Space            = (int)KeyCode::Space;
+        static int LShift           = (int)KeyCode::LShift;
+
+        luabridge::getGlobalNamespace(L)
+                .beginNamespace("KeyCode")
+                    .addProperty("MouseMiddle",     &MouseMiddle,         false)
+                    .addProperty("MouseLeft",       &MouseLeft,           false)
+                    .addProperty("MouseRight",      &MouseRight,          false)
+                    .addProperty("A",               &A,                   false)
+                    .addProperty("D",               &D,                   false)
+                    .addProperty("S",               &S,                   false)
+                    .addProperty("W",               &W,                   false)
+                    .addProperty("Space",           &Space,               false)
+                    .addProperty("LShift",          &LShift,              false)
+                .endNamespace();
+
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Helper::InputSystem>("Input")
+                    .addStaticFunction("GetKey", static_cast<bool(*)(int)>([](int k) -> bool {
+                        return Helper::InputSystem::IsPressed((KeyCode)k);
+                    }))
+                    .addStaticFunction("GetKeyDown", static_cast<bool(*)(int)>([](int k) -> bool {
+                        return Helper::InputSystem::IsDown((KeyCode)k);
+                    }))
+                    .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
+                        return Helper::InputSystem::IsUp((KeyCode)k);
+                    }))
+                    .addStaticFunction("GetMouseDrag", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
+                        return Helper::InputSystem::MouseDrag();
+                    }))
+                    .addStaticFunction("GetMouseWheel", static_cast<int(*)()>([]() -> int {
+                        return Helper::InputSystem::GetMouseWheel();
+                    }))
+                .endClass();
+    });
+
+    // Vector3
+    this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<glm::vec3>("Vector3")
+                    .addStaticFunction("New", static_cast<glm::vec3(*)(float,float,float)>([](float x,float y,float z) -> glm::vec3 {
+                        return glm::vec3(x,y,z);
+                    }))
+                    .addProperty("x", &glm::vec3::x)
+                    .addProperty("y", &glm::vec3::y)
+                    .addProperty("z", &glm::vec3::z)
+
+                    .addStaticFunction("Empty", static_cast<bool(*)(glm::vec3)>([](glm::vec3 v) -> bool {
+                        return (!v.x && !v.y && !v.z);
+                    }))
+                    .addStaticFunction("Sum", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
+                        return v1 + v2;
+                    }))
+                    .addStaticFunction("Sub", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
+                        return v1 - v2;
+                    }))
+                    .addStaticFunction("FMul", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
+                        return v1 * f;
+                    }))
+                    .addStaticFunction("FDiv", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
+                        return v1 / f;
+                    }))
+                .endClass();
+    });
+
+    // Vector2
+    this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<glm::vec2>("Vector2")
+                    .addStaticFunction("New", static_cast<glm::vec2(*)(float, float)>([](float x, float y) -> glm::vec2 {
+                        return glm::vec2(x, y);
+                    }))
+                    .addProperty("x", &glm::vec2::x)
+                    .addProperty("y", &glm::vec2::y)
+
+                    .addStaticFunction("Empty", static_cast<bool(*)(glm::vec2)>([](glm::vec2 v) -> bool {
+                        return (!v.x && !v.y);
+                    }))
+                    .addStaticFunction("Sum", static_cast<glm::vec2(*)(glm::vec2, glm::vec2)>([](glm::vec2 v1, glm::vec2 v2) -> glm::vec2 {
+                        return v1 + v2;
+                    }))
+                    .addStaticFunction("Sub", static_cast<glm::vec2(*)(glm::vec2, glm::vec2)>([](glm::vec2 v1, glm::vec2 v2) -> glm::vec2 {
+                        return v1 - v2;
+                    }))
+                    .addStaticFunction("FMul", static_cast<glm::vec2(*)(glm::vec2, float)>([](glm::vec2 v1, float f) -> glm::vec2 {
+                        return v1 * f;
+                    }))
+                    .addStaticFunction("FDiv", static_cast<glm::vec2(*)(glm::vec2, float)>([](glm::vec2 v1, float f) -> glm::vec2 {
+                        return v1 / f;
+                    }))
+                .endClass();
+    });
+
+    // Transform
+    this->m_compiler->RegisterScriptClass("Math", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Helper::Transform>("Transform")
+                    .addFunction("Forward", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
+                    .addFunction("Up", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
+                    .addFunction("Right", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
+
+                    .addFunction("Translate", (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Translate)
+                    .addFunction("Rotate",    (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Rotate)
+                .endClass();
+    });
+
+    // Component
+    this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Helper::Component>("Component")
+                .endClass();
+    });
+
+    // GameObject
+    this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Helper::GameObject>("GameObject")
+                    .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
+                    .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
+                .endClass();
+    });
+
+    // Scene
+    this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Helper::Scene>("Scene")
+                    .addStaticFunction("Get", static_cast<Scene*(*)()>([]() -> Scene* {
+                        return Engine::Get()->GetScene();
+                    }))
+                    .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
+                    .addFunction("DestroyGM", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::DestroyGameObject)
+                    .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Destroy)
+                .endClass();
+    });
+
+    // Material
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Material>("Material")
+                    .addFunction("SetDiffuse", (void (Framework::Graphics::Material::*)(Graphics::Texture*))&Graphics::Material::SetDiffuse)
+                    .addFunction("SetBloom", (void (Framework::Graphics::Material::*)(bool value))&Graphics::Material::SetBloom)
+                    .addFunction("SetColor", (void (Framework::Graphics::Material::*)(glm::vec3))&Graphics::Material::SetColor)
+                .endClass();
+    });
+
+    // Mesh
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Mesh>("Mesh")
+                    .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(std::string name, unsigned int id)>([](std::string name, unsigned int id) -> Graphics::Mesh* {
+                        auto meshes = Mesh::Load(name);
+                        if (id >= meshes.size()) {
+                            Debug::ScriptError("Script(InternalError) : An error occurred while loading the \""+name+"\" model: \n\tIndex went out of model size. "+
+                                               std::to_string(id) + " >= "+std::to_string(meshes.size()));
+                            return nullptr;
+                        }
+                        return meshes[id];
+                    }))
+                    .addFunction("Base", (Helper::Component* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::BaseComponent)
+                    .addFunction("GetMaterial", (Graphics::Material* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::GetMaterial)
+                .endClass();
+    });
+
+    // PostProcessing
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L) {
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::PostProcessing>("PostProcessing")
+                    .addFunction("SetBloomIntensity", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetBloomIntensity)
+                    .addFunction("SetBloomAmount", (void (Framework::Graphics::PostProcessing::*)(int))&Graphics::PostProcessing::SetBloomAmount)
+                    .addFunction("SetBloom", (void (Framework::Graphics::PostProcessing::*)(bool))&Graphics::PostProcessing::SetBloom)
+                    .addFunction("SetGamma", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetGamma)
+                    .addFunction("SetExposure", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetExposure)
+                .endClass();
+    });
+
+    // Camera
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Camera>("Camera")
+                    .addStaticFunction("New", static_cast<Graphics::Camera*(*)()>([]() -> Graphics::Camera* {
+                        return new Graphics::Camera();
+                    }))
+                    .addFunction("GetPostProcessing", (Graphics::PostProcessing* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetPostProcessing)
+                    .addFunction("Free", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::Free)
+                    .addFunction("Base", (Helper::Component* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::BaseComponent)
+                    .addFunction("SetFrameSize", (void (Framework::Graphics::Camera::*)(unsigned int w, unsigned int h))&Graphics::Camera::UpdateProjection)
+                .endClass();
+    });
+
+    // Texture & TextureFilter & TextureType
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L) {
+        static int texTypeDiff      = (int)Graphics::TextureType::Diffuse;
+        static int texTypeNorm      = (int)Graphics::TextureType::Normal;
+        static int texTypeSpec      = (int)Graphics::TextureType::Specular;
+        static int texTypeGlos      = (int)Graphics::TextureType::Glossiness;
+        static int texTypeRoug      = (int)Graphics::TextureType::Roughness;
+
+        static int texFilterNear    = (int)Graphics::TextureFilter::NEAREST;
+        static int texFilterLine    = (int)Graphics::TextureFilter::LINEAR;
+
+        luabridge::getGlobalNamespace(L)
+                .beginNamespace("TextureType")
+                    .addProperty("Diffuse",     &texTypeDiff)
+                    .addProperty("Normal",      &texTypeNorm)
+                    .addProperty("Specular",    &texTypeSpec)
+                    .addProperty("Glossiness",  &texTypeGlos)
+                    .addProperty("Roughness",   &texTypeRoug)
+                .endNamespace()
+
+                .beginNamespace("TextureFilter")
+                    .addProperty("NEAREST",     &texFilterNear)
+                    .addProperty("LINEAR",      &texFilterLine)
+                .endNamespace()
+
+                .beginClass<Graphics::Texture>("Texture")
+                    .addStaticFunction("Load", static_cast<Graphics::Texture*(*)(std::string, bool, int, int)>([](std::string name, bool autoRemove, int type, int filter) -> Graphics::Texture* {
+                        return Texture::Load(name, autoRemove, (Graphics::TextureType)type, (Graphics::TextureFilter)filter);
+                    }))
+                .endClass();
+    });
+
+    // Skybox
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Skybox>("Skybox")
+                    .addStaticFunction("Load", static_cast<Graphics::Skybox*(*)(std::string)>([](std::string name) -> Graphics::Skybox* {
+                        return Skybox::Load(std::move(name));
+                    }))
+                    .addFunction("Free", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::Free)
+                    .addFunction("AwaitDestroy", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::AwaitDestroy)
+                .endClass();
+    });
+
+    // Render
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Render>("Render")
+                    .addStaticFunction("Get", static_cast<Graphics::Render*(*)()>([]() -> Graphics::Render* {
+                        return Engine::Get()->GetWindow()->GetRender();
+                    }))
+                    .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
+                    .addFunction("RegisterTexture", (void (Framework::Graphics::Render::*)(Graphics::Texture*))&Graphics::Render::RegisterTexture)
+                    .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
+                .endClass();
+    });
+
+    // Window
+    this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Window>("Window")
+                    .addStaticFunction("Get", static_cast<Graphics::Window*(*)()>([]() -> Graphics::Window* {
+                        return Engine::Get()->GetWindow();
+                    }))
+                    .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
+                    .addFunction("RemoveCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::RemoveCamera)
+                .endClass();
+    });
+
+    return true;
 }

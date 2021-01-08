@@ -22,7 +22,7 @@ Framework::Helper::GameObject *Framework::Helper::Scene::Instance(std::string na
     return gm;
 }
 
-bool Framework::Helper::Scene::Destroy(Framework::Helper::GameObject *gameObject) {
+bool Framework::Helper::Scene::DestroyGameObject(Framework::Helper::GameObject *gameObject) {
     if (gameObject->m_scene != this)
         return false;
 

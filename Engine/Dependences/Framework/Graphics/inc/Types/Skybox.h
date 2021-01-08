@@ -54,7 +54,7 @@ namespace Framework::Graphics::Types {
             this->m_render = render;
             return true;
         }
-        inline unsigned int GetCubeMap() noexcept { return m_cubeMap; }
+        inline unsigned int GetCubeMap() const noexcept { return m_cubeMap; }
         void Draw();
         bool AwaitDestroy();
         bool Free();

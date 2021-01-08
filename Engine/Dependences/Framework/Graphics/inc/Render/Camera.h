@@ -24,22 +24,8 @@ namespace Framework::Graphics {
     public:
         bool Create(Window* window);
 
-        inline void AwaitFree(){
-            ret: if (m_isUse)
-                goto ret;
-            this->Free();
-        }
-        inline bool Free(){
-            if (m_isUse){
-                Debug::Error("Camera::Free() : camera used now!");
-                return false;
-            }
-            else{
-                Debug::Log("Camera::Free() : free camera pointer...");
-                delete this;
-                return true;
-            }
-        }
+        void AwaitFree();
+        bool Free();
     protected:
         void OnDestroyGameObject() noexcept override;
     public:

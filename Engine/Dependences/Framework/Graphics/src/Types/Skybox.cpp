@@ -8,19 +8,18 @@
 #include <stbi/stb_image.h>
 #include <Debug.h>
 #include <Render/Render.h>
+#include <Window/Window.h>
 
 Framework::Graphics::Types::Skybox::Skybox() {
     this->m_env = Environment::Get();
     this->m_data.resize(6);
 }
 
-Framework::Graphics::Types::Skybox::~Skybox() {
-
-}
+Framework::Graphics::Types::Skybox::~Skybox() = default;
 
 Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std::string name) {
     std::string ext = StringUtils::GetExtensionFromFilePath(name);
-    name.resize(name.size() - ext.size());
+    name.resize(name.size() - ext.size() - 1);
 
     std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Skyboxes/"+name + "/";
 
@@ -61,9 +60,9 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
 
     Skybox* skybox = new Skybox();
 
-    skybox->m_width = W;
+    skybox->m_width  = W;
     skybox->m_height = H;
-    skybox->m_data = sides;
+    skybox->m_data   = sides;
 
     return skybox;
 }
@@ -102,7 +101,7 @@ bool Framework::Graphics::Types::Skybox::AwaitDestroy() {
     if (m_isCalculated) {
         this->m_render->RegisterSkyboxToRemove(this);
         ret:
-        if (!this->m_isVideoFree)
+        if (!this->m_isVideoFree && m_render->GetWindow()->IsWindowOpen())
             goto ret;
     }
 

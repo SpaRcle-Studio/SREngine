@@ -46,18 +46,6 @@ int main() {
 
     Scene* scene = Scene::New("New scene");
 
-    /*Camera *camera = new Camera();
-    {
-        camera->UpdateProjection(format.Width(), format.Height());
-
-        camera->GetPostProcessing()->SetBloom(true);
-        camera->GetPostProcessing()->SetBloomIntensity(3.5f);
-        camera->GetPostProcessing()->SetBloomAmount(10);
-        camera->GetPostProcessing()->SetGamma(0.9);
-        camera->GetPostProcessing()->SetExposure(1.0);
-        camera->SetActive(true);
-    }*/
-
     Engine *engine = Engine::Get();
 
     if(engine->Create(window, scene)){

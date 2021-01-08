@@ -23,13 +23,28 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Window/Window.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/Canvas.cpp
+
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
+
+        ############################################################
+
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/imgui.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/imgui_draw.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/imgui_widgets.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/imgui_tables.cpp
+
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_allegro5.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx9.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx10.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx11.cpp
         )
 
 set(GRAPHICS_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Graphics/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui
         )
 
 set(GRAPHICS_INC_PRIVATE

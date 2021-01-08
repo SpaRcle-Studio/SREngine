@@ -34,6 +34,8 @@ namespace Framework {
         Graphics::Window*       m_window                = nullptr;
         Graphics::Render*       m_render                = nullptr;
         Helper::Scene*          m_scene                 = nullptr;
+    private:
+        bool RegisterLibraries();
     public:
         inline Scene* GetScene() const noexcept { return m_scene; }
         inline Scripting::Compiler* GetCompiler() const noexcept { return m_compiler; }

@@ -30,7 +30,7 @@ namespace Framework::Helper {
         std::map<GameObject*, GameObject*> m_gameObjects;
     public:
         GameObject* Instance(std::string name);
-        bool Destroy(GameObject* gameObject);
+        bool DestroyGameObject(GameObject* gameObject);
     };
 }
 

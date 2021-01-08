@@ -237,7 +237,11 @@ void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
     if (m_isUse)
         m_window->RemoveCamera(this);
     m_window = nullptr;
-    ret: if (m_isUse) goto ret;
+    ret: if (m_isUse) {
+        if (m_window)
+            if (m_window->IsWindowOpen())
+                goto ret;
+    }
     this->Free();
 }
 
@@ -254,4 +258,26 @@ nlohmann::json Framework::Graphics::Camera::Save() {
     camera["Camera"]["PostProcessing"]["Gamma"] = m_postProcessing->GetGamma();
 
     return camera;
+}
+
+void Framework::Graphics::Camera::AwaitFree() {
+    ret:
+    if (m_isUse) {
+        if (m_window)
+            if (m_window->IsWindowOpen())
+                goto ret;
+    }
+    this->Free();
+}
+
+bool Framework::Graphics::Camera::Free() {
+    if (m_isUse && m_window && m_window->IsWindowOpen()) {
+        Debug::Error("Camera::Free() : camera used now!");
+        return false;
+    }
+    else{
+        Debug::Log("Camera::Free() : free camera pointer...");
+        delete this;
+        return true;
+    }
 }
