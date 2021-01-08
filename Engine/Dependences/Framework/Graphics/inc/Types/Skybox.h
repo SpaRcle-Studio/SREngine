@@ -19,6 +19,7 @@ namespace Framework::Graphics::Types {
         bool Calculate();
     private:
         Environment*                    m_env           = nullptr;
+        Render*                         m_render        = nullptr;
 
         unsigned int                    m_VAO           = 0;
         unsigned int                    m_cubeMap       = 0;
@@ -34,11 +35,28 @@ namespace Framework::Graphics::Types {
 
         bool                            m_isCalculated  = false;
         bool                            m_isDestroy     = false;
+        volatile bool                   m_isVideoFree   = false;
         bool                            m_isUse         = false;
     public:
+        /// WARNING: Call only from render!
+        bool FreeVideoMemory();
+
+        inline void SetIsVideoFree(bool value){
+            this->m_isVideoFree = value;
+        }
+
+        inline bool SetRender(Render* render){
+            if (m_render){
+                Debug::Error("Skybox::SetRender() : render already set!");
+                return false;
+            }
+
+            this->m_render = render;
+            return true;
+        }
         inline unsigned int GetCubeMap() noexcept { return m_cubeMap; }
         void Draw();
-        void AwaitDestroy();
+        bool AwaitDestroy();
         bool Free();
     public:
         static Skybox* Load(std::string name);

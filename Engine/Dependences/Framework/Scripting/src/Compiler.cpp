@@ -41,6 +41,7 @@ Framework::Scripting::Script *Framework::Scripting::Compiler::Load(const std::st
     }
     else {
         this->m_scripts.push_back(script);
+        m_countScripts++;
     }
 
     this->m_mutex_load.unlock();
@@ -90,4 +91,39 @@ void Framework::Scripting::Compiler::UpdateAll() {
         script->Update();
 
     m_mutex_load.unlock();
+}
+
+void Framework::Scripting::Compiler::DestroyScript(Framework::Scripting::Script *script) {
+    m_mutex_load.lock();
+
+    this->m_scriptsToDestroy.push_back(script);
+    this->m_countScriptsToDestroy++;
+
+    m_mutex_load.unlock();
+}
+
+void Framework::Scripting::Compiler::PoolEvents() {
+    m_mutex_load.lock();
+
+    if (m_countScriptsToDestroy) {
+        for (size_t t = 0; t < m_countScriptsToDestroy; t++){
+            this->Remove(m_scriptsToDestroy[t]);
+            if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                Helper::Debug::Log("Compiler::PoolEvents() : free script pointer...");
+            delete m_scriptsToDestroy[t];
+        }
+        this->m_scriptsToDestroy.clear();
+    }
+
+    m_mutex_load.unlock();
+}
+
+bool Framework::Scripting::Compiler::Remove(Framework::Scripting::Script *script) {
+    for(size_t t = 0; t < m_countScripts; t++)
+        if (m_scripts[t] == script) {
+            m_scripts.erase(m_scripts.begin() + t);
+            return true;
+        }
+
+    return false;
 }

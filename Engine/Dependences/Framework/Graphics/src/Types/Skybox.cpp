@@ -7,6 +7,7 @@
 #include <Utils/StringUtils.h>
 #include <stbi/stb_image.h>
 #include <Debug.h>
+#include <Render/Render.h>
 
 Framework::Graphics::Types::Skybox::Skybox() {
     this->m_env = Environment::Get();
@@ -91,12 +92,33 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
     return true;
 }
 
-void Framework::Graphics::Types::Skybox::AwaitDestroy() {
-//TODO
+bool Framework::Graphics::Types::Skybox::AwaitDestroy() {
+    if (m_isDestroy){
+        Debug::Error("Skybox::AwaitDestroy() : skybox already destroyed!");
+        return false;
+    } else
+        Debug::Log("Skybox::AwaitDestory() : destroying skybox...");
+
+    if (m_isCalculated) {
+        this->m_render->RegisterSkyboxToRemove(this);
+        ret:
+        if (!this->m_isVideoFree)
+            goto ret;
+    }
+
+    this->m_isDestroy = true;
+    return true;
 }
 
 bool Framework::Graphics::Types::Skybox::Free() {
-    return false; //TODO
+    if (m_isDestroy) {
+        Debug::Log("Skybox::Free() : free skybox pointer...");
+        delete this;
+        return true;
+    }else{
+        Debug::Error("Skybox::Free() : before freeing skybox memory, you need to destroy it!");
+        return false;
+    }
 }
 
 void Framework::Graphics::Types::Skybox::Draw() {
@@ -106,4 +128,20 @@ void Framework::Graphics::Types::Skybox::Draw() {
     m_env->SetActiveTexture(0);
 
     m_env->DrawSkybox(m_VAO, m_cubeMap);
+}
+
+bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
+    if (m_isVideoFree) {
+        Debug::Error("Skybox::FreeVideoMemory() : video memory already free!");
+        return false;
+    }
+
+    Debug::Log("Skybox::FreeVideoMemory() : free skybox video memory...");
+
+    if (m_VAO)
+        this->m_env->FreeMesh(m_VAO);
+    if (m_cubeMap)
+        this->m_env->FreeCubeMap(m_cubeMap);
+
+    return true;
 }

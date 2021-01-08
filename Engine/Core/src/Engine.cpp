@@ -156,18 +156,18 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                         .addStaticFunction("GetKey", static_cast<bool(*)(int)>([](int k) -> bool {
                             return Helper::InputSystem::IsPressed((KeyCode)k);
                         }))
-                    .addStaticFunction("GetKeyDown", static_cast<bool(*)(int)>([](int k) -> bool {
-                        return Helper::InputSystem::IsDown((KeyCode)k);
-                    }))
-                    .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
-                        return Helper::InputSystem::IsUp((KeyCode)k);
-                    }))
-                    .addStaticFunction("GetMouseDrag", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
-                        return Helper::InputSystem::MouseDrag();
-                    }))
-                    .addStaticFunction("GetMouseWheel", static_cast<int(*)()>([]() -> int {
-                        return Helper::InputSystem::GetMouseWheel();
-                    }))
+                        .addStaticFunction("GetKeyDown", static_cast<bool(*)(int)>([](int k) -> bool {
+                            return Helper::InputSystem::IsDown((KeyCode)k);
+                        }))
+                        .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
+                            return Helper::InputSystem::IsUp((KeyCode)k);
+                        }))
+                        .addStaticFunction("GetMouseDrag", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
+                            return Helper::InputSystem::MouseDrag();
+                        }))
+                        .addStaticFunction("GetMouseWheel", static_cast<int(*)()>([]() -> int {
+                            return Helper::InputSystem::GetMouseWheel();
+                        }))
                     .endClass();
         });
 
@@ -252,8 +252,8 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
         this->m_compiler->RegisterScriptClass("Engine", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
                     .beginClass<Helper::GameObject>("GameObject")
-                    .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
-                    .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
+                        .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
+                        .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
                     .endClass();
         });
 
@@ -293,6 +293,18 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                     .endClass();
         });
 
+        // Skybox
+        this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<Graphics::Skybox>("Skybox")
+                        .addStaticFunction("Load", static_cast<Graphics::Skybox*(*)(std::string)>([](std::string name) -> Graphics::Skybox* {
+                            return Skybox::Load(std::move(name));
+                        }))
+                        .addFunction("Free", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::Free)
+                        .addFunction("AwaitDestroy", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::AwaitDestroy)
+                    .endClass();
+        });
+
         // Render
         this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
             luabridge::getGlobalNamespace(L)
@@ -301,6 +313,7 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                         return Engine::Get()->GetWindow()->GetRender();
                     }))
                     .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
+                    .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
                     .endClass();
         });
 
@@ -346,16 +359,14 @@ bool Framework::Engine::Run() {
 }
 
 void Framework::Engine::Await() {
-    Graphics::Types::Skybox* skybox = Graphics::Types::Skybox::Load("Sea.jpg");
-    m_render->SetSkybox(skybox);
+    //Graphics::Types::Skybox* skybox = Graphics::Types::Skybox::Load("Sea.jpg");
+    //m_render->SetSkybox(skybox);
 
-    //Mesh *mesh = Mesh::Load("cube.obj")[0];
-    //mesh->OnMove({0,0,5});
-    //m_render->RegisterMesh(mesh);
-
-    m_compiler->Load("engine", true);
+    Scripting::Script* engine = m_compiler->Load("engine", true);
 
     while (true) {
+        m_compiler->PoolEvents();
+
         Helper::InputSystem::Check();
 
         if (InputSystem::IsDown(KeyCode::Esc)) {
@@ -371,6 +382,11 @@ void Framework::Engine::Await() {
 
         m_compiler->UpdateAll();
     }
+
+    engine->Close();
+    engine->Destroy();
+
+    m_compiler->PoolEvents();
 }
 
 bool Framework::Engine::Close() {

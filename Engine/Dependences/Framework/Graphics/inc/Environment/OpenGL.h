@@ -10,6 +10,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
+#include <Debug.h>
 
 namespace Framework::Graphics {
     class OpenGL : public Environment {
@@ -217,6 +218,11 @@ namespace Framework::Graphics {
         unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) override;
         inline void DeleteTexture(unsigned int ID) noexcept override {
             glDeleteTextures(1, &ID);
+        }
+        inline void FreeCubeMap(unsigned int ID) noexcept override{
+            Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
+            //glClearTexSubImage()
+            glDeleteTextures(6, &ID); // TODO: I don't know if this works
         }
     };
 }

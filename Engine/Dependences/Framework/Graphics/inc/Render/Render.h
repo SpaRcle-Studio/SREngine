@@ -52,6 +52,9 @@ namespace Framework::Graphics {
         volatile size_t         m_countTexturesToFree               = 0;
         std::vector<Texture*>   m_textureToFree                     = std::vector<Texture*>();
 
+        std::vector<Skybox*>    m_skyboxesToRemove                  = std::vector<Skybox*>();
+        volatile size_t         m_countSkyboxesToRemove             = 0;
+
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;
         Shader*                 m_skyboxShader                      = nullptr;
@@ -73,6 +76,8 @@ namespace Framework::Graphics {
     public:
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
+
+        void RegisterSkyboxToRemove(Skybox* skybox);
 
         void RegisterTexture(Texture* texture);
         void FreeTexture(Texture* texture);

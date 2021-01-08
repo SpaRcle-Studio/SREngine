@@ -6,7 +6,7 @@
 #include <Compiler.h>
 
 namespace Framework::Scripting {
-    Script::Script(const std::string &path, Compiler* compiler) : Helper::Component("Script") {
+    Script::Script(const std::string &path, Compiler* compiler) : Helper::Component("Script"), m_name(path) {
         this->m_compiler = compiler;
 
         L = luaL_newstate();
@@ -31,7 +31,7 @@ namespace Framework::Scripting {
     }
 
     Script::~Script() {
-        //TODO!!!!
+        // nothing
     }
 
     bool Script::Compile() {
@@ -125,6 +125,35 @@ namespace Framework::Scripting {
             this->m_status = Status::RuntimeError;
             return false;
         }
+        return true;
+    }
+
+    bool Script::Close() {
+        r = lua_getglobal(L, "Close");
+        if (lua_pcall(L, 0, 0, 0)) {
+            const char* stackTrace = lua_tostring(L, -1);
+
+            Helper::Debug::Error("Script::Close() : failed call \"Close()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
+            this->m_status = Status::RuntimeError;
+            return false;
+        }
+        return true;
+    }
+
+    bool Script::Destroy() {
+        if (m_isDestoy) {
+            Helper::Debug::Error("Script::Destroy() : script \""+m_name+"\" already destroyed!");
+            return false;
+        } else
+            Helper::Debug::Log("Script::Destroy() : destroying \""+m_name+"\" script...");
+
+        if (L)
+            lua_close(L);
+
+        this->m_compiler->DestroyScript(this);
+
+        this->m_isDestoy = true;
+
         return true;
     }
 }

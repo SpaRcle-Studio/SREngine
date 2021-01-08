@@ -27,6 +27,7 @@ namespace Framework::Graphics {
         inline static std::vector<std::function<void(double x, double y)>> g_scrollEvents = std::vector<std::function<void(double x, double y)>>();
         Types::WindowFormat* m_winFormat = nullptr;
         glm::vec2 m_screenSize = glm::vec2(0, 0);
+        static inline std::mutex g_mutex = std::mutex();
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -36,7 +37,9 @@ namespace Framework::Graphics {
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
         inline static void RegisterScrollEvent(std::function<void(double, double)> fun){
+            g_mutex.lock();
             g_scrollEvents.push_back(fun);
+            g_mutex.unlock();
         }
 
         static bool Set(Environment* env) {
@@ -134,11 +137,12 @@ namespace Framework::Graphics {
         // ============================== [ TEXTURE METHODS ] ==============================
 
         virtual inline void BindTexture(unsigned int ID) const noexcept = 0;
-        virtual inline void BindTexture(const unsigned char activeTexture, unsigned int ID) const noexcept = 0;
-        virtual inline void SetActiveTexture(const unsigned char activeTexture) const noexcept = 0;
+        virtual inline void BindTexture(unsigned char activeTexture, unsigned int ID) const noexcept = 0;
+        virtual inline void SetActiveTexture(unsigned char activeTexture) const noexcept = 0;
         virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) = 0;
         virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) = 0;
         virtual inline void DeleteTexture(unsigned int ID) noexcept = 0;
+        virtual inline void FreeCubeMap(unsigned int ID) noexcept = 0;
     };
 }
 

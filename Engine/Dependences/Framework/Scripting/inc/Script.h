@@ -31,17 +31,24 @@ namespace Framework::Scripting {
         ~Script();
         Script(const std::string &path, Compiler* compiler);
     private:
+        const std::string m_name = "Unknown";
+
         Status m_status = Status::Unknown;
         Compiler* m_compiler = nullptr;
 
         lua_State * L   = nullptr;
         int         r	= -1;
 
+        bool m_isDestoy = false;
         bool m_isStart  = false;
     public:
         bool Start();
         bool Update();
         bool FixedUpdate();
+        bool Close();
+
+        // After call script pointer will be free
+        bool Destroy();
 
         bool Compile();
         bool ReCompile();

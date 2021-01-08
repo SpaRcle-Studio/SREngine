@@ -2,17 +2,21 @@ local scene;  -- Scene*
 local window; -- Window*
 local camera; -- GameObject*
 local render; -- Render*
+local skybox; -- Skybox*
 
 function Start ()
     Debug.Log("Main engine script has been started!");
 
-    Script.ImportLib("Math", LuaState.L);
-    Script.ImportLib("Engine", LuaState.L);
+    Script.ImportLib("Math",     LuaState.L);
+    Script.ImportLib("Engine",   LuaState.L);
     Script.ImportLib("Graphics", LuaState.L);
 
     scene = Scene.Get();
     window = Window.Get();
     render = Render.Get();
+
+    skybox = Skybox.Load("Sea.jpg");
+    render:SetSkybox(skybox);
 
     camera = scene:Instance("SceneCamera");
 
@@ -30,9 +34,11 @@ function Start ()
         render:RegisterMesh(cubeMesh);
         cube:AddComponent(cubeMesh:Base());
         cube:GetTransform():Translate(Vector3.FMul(cube:GetTransform():Forward(), 8.0));
+
+    collectgarbage() -- collect memory
 end;
 
-function Update()
+function MouseUpdate()
     local dir = Input.GetMouseDrag();
 
     local wheel = Input.GetMouseWheel();
@@ -58,35 +64,21 @@ function Update()
     end;
 end;
 
-function Keyboard()
-    local direction = Vector3.New(0,0,0);
+function Update()
+    MouseUpdate();
 
-    if Input.GetKey(KeyCode.W) then
-        direction = Vector3.Sum(direction, camera:GetTransform():Forward());
-    end;
-    if Input.GetKey(KeyCode.S) then
-        direction = Vector3.Sub(direction, camera:GetTransform():Forward());
-    end;
-
-    if Input.GetKey(KeyCode.A) then
-        direction = Vector3.Sub(direction, camera:GetTransform():Right());
-    end;
-    if Input.GetKey(KeyCode.D) then
-        direction = Vector3.Sum(direction, camera:GetTransform():Right());
-    end;
-
-    if Input.GetKey(KeyCode.Space) then
-        direction = Vector3.Sum(direction, camera:GetTransform():Up());
-    end;
-    if Input.GetKey(KeyCode.LShift) then
-        direction = Vector3.Sub(direction, camera:GetTransform():Up());
-    end;
-
-    if (Vector3.Empty(direction) == false) then
-        camera:GetTransform():Translate(Vector3.FDiv(direction, 100.0));
-    end;
+    collectgarbage() -- collect memory
 end;
 
 function FixedUpdate()
 
+end;
+
+function Close()
+    Debug.Log("Close main engine script...");
+
+    skybox:AwaitDestroy();
+    skybox:Free();
+
+    collectgarbage() -- collect memory
 end;
