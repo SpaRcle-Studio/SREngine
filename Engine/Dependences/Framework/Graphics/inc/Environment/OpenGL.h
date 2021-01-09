@@ -23,6 +23,13 @@ namespace Framework::Graphics {
         GLFWmonitor*            m_monitor         = nullptr;
         const GLFWvidmode*      m_vidMode         = nullptr;
     public:
+        bool InitGUI() override;
+        bool StopGUI() override;
+
+        inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
+
+        unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) override;
+
         // ============================= [ WINDOW METHODS ] =============================
 
         bool MakeWindow(const char* winName, Types::WindowFormat* format, bool fullScreen) override;

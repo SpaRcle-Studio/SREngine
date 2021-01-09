@@ -6,11 +6,12 @@
 #define GAMEENGINE_CANVAS_H
 
 #include <Debug.h>
+#include <Environment/Environment.h>
 
 namespace Framework::Graphics::GUI {
     class Canvas {
     private:
-        Canvas() = default;
+        Canvas();
         ~Canvas() = default;
     public:
         static Canvas* Get() noexcept {
@@ -20,6 +21,7 @@ namespace Framework::Graphics::GUI {
             return canvas;
         }
     private:
+        Graphics::Environment* m_env = nullptr;
         bool m_isInit = false;
     public:
         // Call only after setting graphics context from Window.cpp

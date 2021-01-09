@@ -4,8 +4,13 @@
 
 #include "GUI/Canvas.h"
 
+#include <GL/glew.h>
 #include <imgui.h>
 #include <ResourceManager/ResourceManager.h>
+
+Framework::Graphics::GUI::Canvas::Canvas() : m_env(Graphics::Environment::Get()) {
+
+}
 
 bool Framework::Graphics::GUI::Canvas::Init() {
     Helper::Debug::Graph("Canvas::Init() : initializing canvas...");
@@ -14,22 +19,15 @@ bool Framework::Graphics::GUI::Canvas::Init() {
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-    {
-        ImFont* pFont = io.Fonts->AddFontFromFileTTF((Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf").c_str(), 12.0f);
-
-        unsigned char* pixels;
-        int width, height, bytes_per_pixels;
-        io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytes_per_pixels);
-        //GLuint id = loadTexture(pixels, width, height, 4);
-        //io.Fonts->SetTexID((void*)id);
-    }
+    // Set font
+    ImFont* pFont = io.Fonts->AddFontFromFileTTF((Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf").c_str(), 12.0f);
 
     //io.IniFilename = NULL;
     io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
     //io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    io.ConfigDockingWithShift = true;
+    io.ConfigDockingWithShift       = true;
     io.ConfigWindowsResizeFromEdges = true;
     //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -39,12 +37,19 @@ bool Framework::Graphics::GUI::Canvas::Init() {
     //ImGui::StyleColorsClassic();
 
     // Setup Platform/Renderer backends
-    //!ImGui_ImplGlfw_InitForOpenGL(m_glfw_window, true);
-    //!ImGui_ImplOpenGL3_Init("#version 130");
+    this->m_env->InitGUI();
 
     return true;
 }
 
 bool Framework::Graphics::GUI::Canvas::Stop() {
+    Helper::Debug::Graph("Canvas::Stop() : stopping canvas...");
+
+    this->m_env->StopGUI();
+
+    ImGui::DestroyContext();
+
     return false;
 }
+
+

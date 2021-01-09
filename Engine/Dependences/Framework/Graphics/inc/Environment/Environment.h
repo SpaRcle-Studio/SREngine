@@ -59,6 +59,13 @@ namespace Framework::Graphics {
                 return g_environment;
         }
     public:
+        virtual bool InitGUI() = 0;
+        virtual bool StopGUI() = 0;
+
+        virtual inline std::string GetPipeLineName() const noexcept = 0;
+
+        virtual unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) = 0;
+
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */

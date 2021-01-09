@@ -9,8 +9,8 @@ add_subdirectory(Depends/LuaBridge)
 
 add_subdirectory(Depends/imgui)
 add_subdirectory(Depends/inc/glm)
-add_subdirectory(Depends/glfw)
-add_subdirectory(Depends/glew/build/cmake)
+#add_subdirectory(Depends/glfw)
+#add_subdirectory(Depends/glew/build/cmake)
 
 # Включаем вспомогательные файлы
 include(Audio.cmake)

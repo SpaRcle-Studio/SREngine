@@ -213,6 +213,8 @@ void Framework::Graphics::Window::Thread() {
 
     Debug::Graph("Window::Thread() : exit from main cycle.");
 
+    GUI::Canvas::Get()->Stop();
+
     if (!this->m_render->Close()) {
         Debug::Error("Window::Thread() : failed close render!");
     }

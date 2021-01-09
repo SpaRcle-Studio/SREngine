@@ -11,7 +11,38 @@
 #include <Debug.h>
 #include <Utils/StringUtils.h>
 
+#include <imgui_impl_opengl3.h>
+#include <imgui_impl_glfw.h>
+
 using namespace Framework::Helper;
+
+unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, int w, int h, int components) {
+    GLuint textureID;
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glTexImage2D(GL_TEXTURE_2D, 0, components, w, h, 0, (components == 3) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    return (unsigned int)textureID;
+}
+
+bool Framework::Graphics::OpenGL::InitGUI() {
+    Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
+    ImGui_ImplGlfw_InitForOpenGL(this->m_window, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
+    return true;
+}
+
+bool Framework::Graphics::OpenGL::StopGUI() {
+    Debug::Graph("OpenGL::StopGUI() : stopping ImGUI library...");
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    return true;
+}
 
 bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples) {
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glfw...");
@@ -532,5 +563,6 @@ void Framework::Graphics::OpenGL::DrawSkybox(unsigned int VAO, unsigned int Cube
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDepthFunc(GL_LESS); // set depth function back to default
 }
+
 
 
