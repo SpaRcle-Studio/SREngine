@@ -8,6 +8,7 @@
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
+#include <GUI/Canvas.h>
 
 Framework::Engine::Engine() {
     this->m_compiler = new Scripting::Compiler();
@@ -173,12 +174,13 @@ bool Framework::Engine::RegisterLibraries() {
     });
 
     // Script
-    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
+    /*this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<lua_State>("LuaState")
                     .addStaticProperty("L", L, false)
-                    .endClass()
-                    .beginClass<Scripting::Script>("Script")
+                .endClass()
+
+                .beginClass<Scripting::Script>("Script")
                     .addStaticFunction("ImportLib", static_cast<bool(*)(const std::string&, lua_State*)>([](const std::string& name, lua_State* L) -> bool {
                         auto a = Engine::Get()->GetCompiler()->GetClasses(name);
                         if (a.empty())
@@ -191,8 +193,12 @@ bool Framework::Engine::RegisterLibraries() {
                             return true;
                         }
                     }))
+                    .addStaticFunction("Load", static_cast<Scripting::Script*(*)(const std::string&)>([](const std::string& name) -> Scripting::Script* {
+                        return Engine::Get()->GetCompiler()->Load(name);
+                    }))
+                    .addFunction("Call", (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
                 .endClass();
-    });
+    });*/
 
     // KeyCode and Input
     this->m_compiler->RegisterScriptClass("Base", [](lua_State* L) {
@@ -459,6 +465,16 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
                     .addFunction("RemoveCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::RemoveCamera)
                 .endClass();
+    });
+
+    // Canvas
+    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+            .beginClass<Graphics::GUI::Canvas>("Canvas")
+                    .addStaticFunction("Get", static_cast<Graphics::GUI::Canvas*(*)()>([]() -> Graphics::GUI::Canvas* {
+                        return Graphics::GUI::Canvas::Get();
+                    }))
+            .endClass();
     });
 
     return true;

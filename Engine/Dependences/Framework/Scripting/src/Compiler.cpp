@@ -15,31 +15,7 @@ Framework::Scripting::Script *Framework::Scripting::Compiler::Load(const std::st
 
     Script* script = new Script(path, this);
 
-    if (!script->Compile()) {
-        switch (script->m_status) {
-            case Script::Status::Unknown:
-                break;
-            case Script::Status::FileMissing:
-                Helper::Debug::Error("Compiler::Load() : file "+path + " is not exists!");
-                break;
-            case Script::Status::SuccessfullyLoad:
-                break;
-            case Script::Status::RuntimeError:
-                break;
-            case Script::Status::MemoryExhausted:
-                Helper::Debug::Error("Compiler::Load() : memory exhausted at "+path + " script!");
-                break;
-            case Script::Status::SyntaxError:
-                Helper::Debug::Error("Compiler::Load() : file "+path + " has syntax errors!");
-                break;
-            case Script::Status::UnexpectedError:
-                Helper::Debug::Error("Compiler::Load() : unexpected error at "+path + " script!");
-                break;
-            case Script::Status::Compiled:
-                break;
-        }
-    }
-    else {
+    if (Framework::Scripting::Compiler::Compile(script)) {
         this->m_scripts.push_back(script);
         m_countScripts++;
     }
@@ -104,6 +80,7 @@ void Framework::Scripting::Compiler::DestroyScript(Framework::Scripting::Script 
 
 void Framework::Scripting::Compiler::PoolEvents() {
     m_mutex_load.lock();
+    this->m_mutex_delayed.lock();
 
     if (m_countScriptsToDestroy) {
         for (size_t t = 0; t < m_countScriptsToDestroy; t++){
@@ -112,9 +89,24 @@ void Framework::Scripting::Compiler::PoolEvents() {
                 Helper::Debug::Log("Compiler::PoolEvents() : free script pointer...");
             delete m_scriptsToDestroy[t];
         }
+        m_countScriptsToDestroy = 0;
         this->m_scriptsToDestroy.clear();
     }
 
+    if (m_countDelayedLoadingScripts) {
+        for (size_t t = 0; t < m_countDelayedLoadingScripts; t++) {
+            if (Framework::Scripting::Compiler::Compile(m_delayedLoadingScripts[t])){
+                this->m_scripts.push_back(m_delayedLoadingScripts[t]);
+                m_countScripts++;
+            }else
+                Helper::Debug::Error("Compiler::PoolEvents() : failed delayed-compiling script!\n\tPath: "+ m_delayedLoadingScripts[t]->m_name);
+        }
+
+        m_delayedLoadingScripts.clear();
+        m_countDelayedLoadingScripts = 0;
+    }
+
+    this->m_mutex_delayed.unlock();
     m_mutex_load.unlock();
 }
 
@@ -126,4 +118,55 @@ bool Framework::Scripting::Compiler::Remove(Framework::Scripting::Script *script
         }
 
     return false;
+}
+
+Framework::Scripting::Script *Framework::Scripting::Compiler::DelayedLoad(const std::string &name, bool fromEngine) {
+    this->m_mutex_delayed.lock();
+
+    std::string folder = fromEngine ? "Engine/" : "Game/";
+    std::string path = Framework::Helper::ResourceManager::GetResourcesFolder() + "/Scripts/" + folder + name + ".lua";
+
+    Helper::Debug::Log("Compiler::DelayedLoad() : delayed loading "+path + " script...");
+
+    Script* delayed = new Script(path, this);
+
+    this->m_delayedLoadingScripts.push_back(delayed);
+    m_countDelayedLoadingScripts++;
+
+    this->m_mutex_delayed.unlock();
+
+    return delayed;
+}
+
+bool Framework::Scripting::Compiler::Compile(Framework::Scripting::Script *script) {
+    if (!script->Compile()) {
+        switch (script->m_status) {
+            //case Script::Status::Unknown:
+            //    break;
+            case Script::Status::FileMissing:
+                Helper::Debug::Error("Compiler::Compile() : file "+script->m_name + " is not exists!");
+                break;
+            //case Script::Status::SuccessfullyLoad:
+            //    break;
+            //case Script::Status::RuntimeError:
+            //    break;
+            case Script::Status::MemoryExhausted:
+                Helper::Debug::Error("Compiler::Compile() : memory exhausted at "+script->m_name + " script!");
+                break;
+            case Script::Status::SyntaxError:
+                Helper::Debug::Error("Compiler::Compile() : file "+script->m_name + " has syntax errors!");
+                break;
+            case Script::Status::UnexpectedError:
+                Helper::Debug::Error("Compiler::Compile() : unexpected error at "+script->m_name + " script!");
+                break;
+            default:
+                Helper::Debug::Error("Compiler::Compile() : unknown error at "+script->m_name + " script!");
+                break;
+            //case Script::Status::Compiled:
+            //    break;
+        }
+        return false;
+    }
+    else
+        return true;
 }

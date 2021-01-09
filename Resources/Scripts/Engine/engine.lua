@@ -1,9 +1,10 @@
-local scene;  -- Scene*
-local window; -- Window*
-local camera; -- GameObject*
-local render; -- Render*
-local skybox; -- Skybox*
-local cube;   -- GameObject*
+local scene;           -- Scene*
+local window;          -- Window*
+local camera;          -- GameObject*
+local render;          -- Render*
+local skybox;          -- Skybox*
+local cube;            -- GameObject*
+local editorGUIScript; -- Script*
 
 function LoadGeometry()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
@@ -40,19 +41,27 @@ function LoadCamera()
     collectgarbage() -- collect memory
 end;
 
-function Start ()
-    Debug.Log("Main engine script has been started!");
+function Init()
+    Debug.Log("Initializing main engine script...");
 
-    Script.ImportLib("Math",     LuaState.L);
-    Script.ImportLib("Engine",   LuaState.L);
-    Script.ImportLib("Graphics", LuaState.L);
+    Script.this:ImportLib("Math",     LuaState.L);
+    Script.this:ImportLib("Engine",   LuaState.L);
+    Script.this:ImportLib("Graphics", LuaState.L);
 
-    scene = Scene.Get();
+    editorGUIScript = Script.this:LoadScript("editor", true);
+
+    scene  = Scene.Get();
     window = Window.Get();
     render = Render.Get();
+end;
+
+function Start ()
+    Debug.Log("Starting main engine script...");
 
     skybox = Skybox.Load("Sea.jpg");
     render:SetSkybox(skybox);
+
+    editorGUIScript:Call("Initialize");
 
     --------------------------------------
 
@@ -92,10 +101,6 @@ function Update()
     MouseUpdate();
 
     collectgarbage() -- collect memory
-end;
-
-function FixedUpdate()
-
 end;
 
 function Close()

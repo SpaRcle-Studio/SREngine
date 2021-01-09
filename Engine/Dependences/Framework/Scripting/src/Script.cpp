@@ -7,6 +7,8 @@
 
 namespace Framework::Scripting {
     Script::Script(const std::string &path, Compiler* compiler) : Helper::Component("Script"), m_name(path) {
+        m_thisBridge.script = this;
+
         this->m_compiler = compiler;
 
         L = luaL_newstate();
@@ -31,12 +33,74 @@ namespace Framework::Scripting {
     }
 
     Script::~Script() {
-        // nothing
+        m_thisBridge.script = nullptr;
+    }
+
+    bool Script::Call(const std::string& funName) {
+        if (m_status == Status::RuntimeError)
+            return false;
+
+        if (m_status != Status::Compiled) {
+            Helper::Debug::Error("Script::Call() : failed call \""+funName+"()\" method at \""+m_name+"\" script!\n\tReason: script is not compiled!");
+            return false;
+        }
+
+        if (!m_isStart && m_hasStart)
+            return Start();
+
+        r = lua_getglobal(L, funName.c_str());
+        if (lua_pcall(L, 0, 0, 0)) {
+            const char* stackTrace = lua_tostring(L, -1);
+
+            Helper::Debug::Error("Script::Call() : failed call \""+funName+"()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
+            this->m_status = Status::RuntimeError;
+            return false;
+        }
+        return true;
+    }
+
+    bool Script::CallArgs(...) {
+        // TODO
+        return false;
+    }
+
+    void Script::CheckExistsFunctions() {
+        lua_Debug ar;
+
+        lua_getglobal(L, "Init");
+        lua_getinfo(L, ">S", &ar);
+        if (ar.linedefined != -1)
+            this->m_hasInit = true;
+
+        lua_getglobal(L, "Awake");
+        lua_getinfo(L, ">S", &ar);
+        if (ar.linedefined != -1)
+            this->m_hasAwake = true;
+
+        lua_getglobal(L, "Start");
+        lua_getinfo(L, ">S", &ar);
+        if (ar.linedefined != -1)
+            this->m_hasStart = true;
+
+        lua_getglobal(L, "Update");
+        lua_getinfo(L, ">S", &ar);
+        if (ar.linedefined != -1)
+            this->m_hasUpdate = true;
+
+        lua_getglobal(L, "FixedUpdate");
+        lua_getinfo(L, ">S", &ar);
+        if (ar.linedefined != -1)
+            this->m_hasFixedUpdate = true;
+
+        lua_getglobal(L, "Close");
+        lua_getinfo(L, ">S", &ar);
+        if (ar.linedefined != -1)
+            this->m_hasClose = true;
     }
 
     bool Script::Compile() {
         if (m_status != Status::SuccessfullyLoad){
-            Helper::Debug::Error("Script::Compile() : script was not loaded successfully!");
+            Helper::Debug::Error("Script::Compile() : script was not loaded successfully!\n\tPath: " + m_name);
             return false;
         }else
             Helper::Debug::Log("Script::Compile() : compiling script...");
@@ -62,12 +126,37 @@ namespace Framework::Scripting {
             fun(L);
         }
 
+        if (true){
+            //class This{
+            //public:
+            //    Script* script = nullptr;
+            //} _this;
+            //_this.script = this;
+
+            luabridge::getGlobalNamespace(L)
+                    .beginClass<lua_State>("LuaState")
+                        //.addStaticProperty("L", L, false)
+                    .endClass()
+
+                    .beginClass<Scripting::Script::This>("ScriptThisBridge")
+                            .addFunction("ImportLib", (bool (Scripting::Script::This::*)(const std::string&))&Scripting::Script::This::ImportLib)
+                            .addFunction("LoadScript", (Script* (Scripting::Script::This::*)(const std::string&, bool))&Scripting::Script::This::LoadScript)
+                    .endClass()
+
+                    .beginClass<Scripting::Script>("Script")
+                        .addStaticProperty("this", &m_thisBridge, false)
+                        .addFunction("Call", (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
+                    .endClass();
+        }
+
+        this->CheckExistsFunctions();
+
         this->m_status = Status::Compiled;
         return true;
     }
 
     bool Script::ReCompile() {
-        return false;
+        return false; //TODO
     }
 
     void Script::OnDestroyGameObject() noexcept {
@@ -75,9 +164,11 @@ namespace Framework::Scripting {
     }
 
     bool Script::Start() {
-        if (m_status == Status::RuntimeError)
-            return false;
+        if (m_status != Status::RuntimeError && m_hasInit && !m_isInit)
+            return Init();
 
+        if (m_status == Status::RuntimeError || !m_hasStart)
+            return false;
 
         r = lua_getglobal(L, "Start");
         if (lua_pcall(L, 0, 1, 0)) {
@@ -92,10 +183,10 @@ namespace Framework::Scripting {
     }
 
     bool Script::Update() {
-        if (m_status == Status::RuntimeError)
+        if (m_status == Status::RuntimeError || !m_hasUpdate)
             return false;
 
-        if (!m_isStart)
+        if (!m_isStart && m_hasStart)
             return Start();
 
         r = lua_getglobal(L, "Update");
@@ -111,10 +202,10 @@ namespace Framework::Scripting {
     }
 
     bool Script::FixedUpdate() {
-        if (m_status == Status::RuntimeError)
+        if (m_status == Status::RuntimeError || !m_hasFixedUpdate)
             return false;
 
-        if (!m_isStart)
+        if (!m_isStart && m_hasStart)
             return Start();
 
         r = lua_getglobal(L, "FixedUpdate");
@@ -129,6 +220,9 @@ namespace Framework::Scripting {
     }
 
     bool Script::Close() {
+        if (!m_hasClose)
+            return false;
+
         r = lua_getglobal(L, "Close");
         if (lua_pcall(L, 0, 0, 0)) {
             const char* stackTrace = lua_tostring(L, -1);
@@ -141,7 +235,7 @@ namespace Framework::Scripting {
     }
 
     bool Script::Destroy() {
-        if (m_isDestoy) {
+        if (m_isDestroy) {
             Helper::Debug::Error("Script::Destroy() : script \""+m_name+"\" already destroyed!");
             return false;
         } else
@@ -152,8 +246,45 @@ namespace Framework::Scripting {
 
         this->m_compiler->DestroyScript(this);
 
-        this->m_isDestoy = true;
+        this->m_isDestroy = true;
 
         return true;
+    }
+
+    bool Script::Init() {
+        if (m_status == Status::RuntimeError || !m_hasInit)
+            return false;
+
+        r = lua_getglobal(L, "Init");
+        if (lua_pcall(L, 0, 1, 0)) {
+            const char* stackTrace = lua_tostring(L, -1);
+
+            Helper::Debug::Error("Script::Init() : failed call \"Init()\" method at script! \n\tStack traceback: "+std::string(stackTrace));
+            this->m_status = Status::RuntimeError;
+            return false;
+        }
+        m_isInit = true;
+        return true;
+    }
+
+    bool Script::Awake() {
+        return false; //TODO
+    }
+
+    bool Script::ImportLibrary(const std::string &name) {
+        auto a = m_compiler->GetClasses(name);
+        if (a.empty())
+            return false;
+        else
+        {
+            Helper::Debug::Script("Script::ImportLibrary(InternalCall) : importing \""+name+"\" library...");
+            for (const auto& b : a)
+                b(L);
+            return true;
+        }
+    }
+
+    Script*  Script::This::LoadScript(const std::string &name, bool fromEngine) const {
+        return this->script->m_compiler->DelayedLoad(name, fromEngine);
     }
 }
