@@ -23,7 +23,7 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Window/Window.cpp
 
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/Canvas.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/ICanvas.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
 

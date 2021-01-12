@@ -8,6 +8,9 @@
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
+#include <GUI/ICanvas.h>
+
+#include <utility>
 #include <GUI/Canvas.h>
 
 Framework::Engine::Engine() {
@@ -129,10 +132,19 @@ void Framework::Engine::Await() {
 }
 
 bool Framework::Engine::Close() {
+    this->m_compiler->CloseAll();
+    this->m_compiler->DestroyAll();
+
+    this->m_compiler->PoolEvents();
+
     if (m_window->IsRun()) {
         this->m_window->Close();
         this->m_window->Free();
     }
+
+    this->m_compiler->PoolEvents();
+    Helper::Debug::Info("Engine::Close() : free compiler pointer...");
+    delete m_compiler;
 
     return false;
 }
@@ -145,10 +157,10 @@ bool Framework::Engine::RegisterLibraries() {
         luabridge::getGlobalNamespace(L)
                 .beginClass<Debug>("Debug")
                     .addStaticFunction("Log", static_cast<void(*)(std::string)>([](std::string s) {
-                        Debug::ScriptLog(s);
+                        Debug::ScriptLog(std::move(s));
                     }))
                     .addStaticFunction("Error", static_cast<void(*)(std::string)>([](std::string s) {
-                        Debug::ScriptError(s);
+                        Debug::ScriptError(std::move(s));
                     }))
                 .endClass();
     });
@@ -425,7 +437,7 @@ bool Framework::Engine::RegisterLibraries() {
 
                 .beginClass<Graphics::Texture>("Texture")
                     .addStaticFunction("Load", static_cast<Graphics::Texture*(*)(std::string, bool, int, int)>([](std::string name, bool autoRemove, int type, int filter) -> Graphics::Texture* {
-                        return Texture::Load(name, autoRemove, (Graphics::TextureType)type, (Graphics::TextureFilter)filter);
+                        return Texture::Load(std::move(name), autoRemove, (Graphics::TextureType)type, (Graphics::TextureFilter)filter);
                     }))
                 .endClass();
     });
@@ -464,15 +476,20 @@ bool Framework::Engine::RegisterLibraries() {
                     }))
                     .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
                     .addFunction("RemoveCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::RemoveCamera)
+                    .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)
                 .endClass();
     });
 
-    // Canvas
+    // ICanvas
     this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
-            .beginClass<Graphics::GUI::Canvas>("Canvas")
-                    .addStaticFunction("Get", static_cast<Graphics::GUI::Canvas*(*)()>([]() -> Graphics::GUI::Canvas* {
-                        return Graphics::GUI::Canvas::Get();
+            .beginClass<Graphics::GUI::ICanvas>("Canvas")
+                    //.addStaticFunction("Get", static_cast<Graphics::GUI::ICanvas*(*)()>([]() -> Graphics::GUI::ICanvas* {
+                    //    return Graphics::GUI::ICanvas::Get();
+                    //}))
+                    .addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(const std::string&, bool)>([](const std::string& luaScriptName, bool fromEditor) -> Graphics::GUI::ICanvas* {
+                        Scripting::Script* script = Engine::Get()->GetCompiler()->DelayedLoad(luaScriptName, fromEditor);
+                        return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
                     }))
             .endClass();
     });

@@ -62,6 +62,7 @@ namespace Framework::Scripting {
         bool        m_isInit           = false;
         bool        m_isAwake          = false;
         bool        m_isStart          = false;
+        bool        m_isClose          = false;
     private:
         void CheckExistsFunctions();
     public:

@@ -1,4 +1,3 @@
-local canvas; -- Canvas*
 
 function Inspector()
 
@@ -16,9 +15,9 @@ function Initialize()
     Script.this:ImportLib("Graphics", LuaState.L);
     Script.this:ImportLib("GUI",      LuaState.L);
 
-    canvas = Canvas.Get();
+    collectgarbage() -- collect memory
 end;
 
 function Close()
-
+    Debug.Log("Close engine editor GUI...");
 end;

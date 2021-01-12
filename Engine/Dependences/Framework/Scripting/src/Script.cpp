@@ -45,8 +45,8 @@ namespace Framework::Scripting {
             return false;
         }
 
-        if (!m_isStart && m_hasStart)
-            return Start();
+        //if (!m_isStart && m_hasStart)
+        //    return Start();
 
         r = lua_getglobal(L, funName.c_str());
         if (lua_pcall(L, 0, 0, 0)) {
@@ -103,7 +103,7 @@ namespace Framework::Scripting {
             Helper::Debug::Error("Script::Compile() : script was not loaded successfully!\n\tPath: " + m_name);
             return false;
         }else
-            Helper::Debug::Log("Script::Compile() : compiling script...");
+            Helper::Debug::Log("Script::Compile() : compiling script...\n\tPath: "+m_name);
 
         /* Незнамо зачем, но так надо (http://www.gamedev.ru/code/forum/?id=125829) */
         lua_pcall(L, 0, 0, 0);
@@ -145,7 +145,9 @@ namespace Framework::Scripting {
 
                     .beginClass<Scripting::Script>("Script")
                         .addStaticProperty("this", &m_thisBridge, false)
-                        .addFunction("Call", (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
+                        .addFunction("Call",    (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
+                        .addFunction("Close",   (bool (Scripting::Script::*)(void))&Scripting::Script::Close)
+                        .addFunction("Destroy", (bool (Scripting::Script::*)(void))&Scripting::Script::Destroy)
                     .endClass();
         }
 
@@ -188,6 +190,8 @@ namespace Framework::Scripting {
 
         if (!m_isStart && m_hasStart)
             return Start();
+        else if (!m_isInit && m_hasInit)
+            return Init();
 
         r = lua_getglobal(L, "Update");
         if (lua_pcall(L, 0, 0, 0)) {
@@ -207,6 +211,8 @@ namespace Framework::Scripting {
 
         if (!m_isStart && m_hasStart)
             return Start();
+        else if (!m_isInit && m_hasInit)
+            return Init();
 
         r = lua_getglobal(L, "FixedUpdate");
         if (lua_pcall(L, 0, 0, 0)) {
@@ -223,6 +229,11 @@ namespace Framework::Scripting {
         if (!m_hasClose)
             return false;
 
+        if (m_isClose){
+            Helper::Debug::Error("Script::Close() : script already destroyed!\n\tPath: \""+m_name+"\"");
+            return false;
+        }
+
         r = lua_getglobal(L, "Close");
         if (lua_pcall(L, 0, 0, 0)) {
             const char* stackTrace = lua_tostring(L, -1);
@@ -231,18 +242,25 @@ namespace Framework::Scripting {
             this->m_status = Status::RuntimeError;
             return false;
         }
+
+        this->m_isClose = true;
         return true;
     }
 
     bool Script::Destroy() {
+        if (!m_isClose)
+            Helper::Debug::Warn("Script::Destroy() : script is not closed!\n\tPath: \""+m_name+"\"");
+
         if (m_isDestroy) {
-            Helper::Debug::Error("Script::Destroy() : script \""+m_name+"\" already destroyed!");
+            Helper::Debug::Error("Script::Destroy() : script already destroyed!\n\tPath: \""+m_name+"\"");
             return false;
         } else
-            Helper::Debug::Log("Script::Destroy() : destroying \""+m_name+"\" script...");
+            Helper::Debug::Log("Script::Destroy() : destroying script...\n\tPath: \""+m_name+"\"");
 
-        if (L)
+        if (L) {
+            Helper::Debug::Log("Script::Destroy() : close lua state...");
             lua_close(L);
+        }
 
         this->m_compiler->DestroyScript(this);
 

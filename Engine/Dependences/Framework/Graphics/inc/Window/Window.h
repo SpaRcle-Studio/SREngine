@@ -13,6 +13,7 @@
 #include <Render/PostProcessing.h>
 #include <thread>
 #include <mutex>
+#include <functional>
 
 using namespace Framework::Graphics::Types;
 
@@ -23,7 +24,6 @@ namespace Framework::Graphics {
                 const char* win_name,
                 WindowFormat format,
                 Render* render,
-                //Camera* camera,
                 bool vsync,
                 bool fullScreen,
                 unsigned int smoothSamples
@@ -33,7 +33,6 @@ namespace Framework::Graphics {
             this->m_win_name        = win_name;
             this->m_format          = format;
             this->m_render          = render;
-            //this->m_camera          = camera;
             this->m_fullScreen      = fullScreen;
             this->m_vsync           = vsync;
             this->m_smoothSamples   = smoothSamples;
@@ -41,43 +40,45 @@ namespace Framework::Graphics {
     private:
         ~Window() = default;
     private:
-        volatile bool           m_isCreate              = false;
-        volatile bool           m_isInit                = false;
-        volatile bool           m_isRun                 = false;
-        volatile bool           m_isClose               = false;
+        volatile bool                                       m_isCreate              = false;
+        volatile bool                                       m_isInit                = false;
+        volatile bool                                       m_isRun                 = false;
+        volatile bool                                       m_isClose               = false;
 
-        volatile bool           m_hasErrors             = false;
-        volatile bool           m_isEnvInit             = false;
-        volatile bool           m_isWindowClose         = false;
+        volatile bool                                       m_hasErrors             = false;
+        volatile bool                                       m_isEnvInit             = false;
+        volatile bool                                       m_isWindowClose         = false;
 
-        volatile bool           m_isWindowFocus         = true;
+        volatile bool                                       m_isWindowFocus         = true;
     private:
-        std::thread             m_thread                = std::thread();
+        std::thread                                         m_thread                = std::thread();
 
-        Environment*            m_env                   = nullptr;
+        Environment*                                        m_env                   = nullptr;
 
-        const char*             m_win_name              = "Unnamed";
-        WindowFormat            m_format                = WindowFormat::Unknown;
-        unsigned int            m_smoothSamples         = 4;
+        const char*                                         m_win_name              = "Unnamed";
+        WindowFormat                                        m_format                = WindowFormat::Unknown;
+        unsigned int                                        m_smoothSamples         = 4;
 
-        Render*                 m_render                = nullptr;
-        //Camera*                 m_camera                = nullptr;
+        Render*                                             m_render                = nullptr;
 
+        std::mutex                                          m_camerasMutex          = std::mutex();
+        std::vector<Camera*>                                m_newCameras            = std::vector<Camera*>();
+        size_t                                              m_countNewCameras       = 0;
+        std::vector<Camera*>                                m_camerasToRemove       = std::vector<Camera*>();
+        size_t                                              m_countCamerasToRemove  = 0;
+        std::vector<Camera*>                                m_cameras               = std::vector<Camera*>();
+        size_t                                              m_countCameras          = 0;
 
-        std::mutex              m_camerasMutex          = std::mutex();
-        std::vector<Camera*>    m_newCameras            = std::vector<Camera*>();
-        size_t                  m_countNewCameras       = 0;
-        std::vector<Camera*>    m_camerasToRemove       = std::vector<Camera*>();
-        size_t                  m_countCamerasToRemove  = 0;
-        std::vector<Camera*>    m_cameras               = std::vector<Camera*>();
-        size_t                  m_countCameras          = 0;
+        //std::map<std::string, std::function<void(void)>>    m_contextFuncs          = std::map<std::string, std::function<void(void)>>();
+        //size_t                                              m_countContextFuncs     = 0;
+        //std::mutex                                          m_contexFuncsMutex      = std::mutex();
 
-        //PostProcessing*         m_postProcessing        = nullptr;
+        GUI::ICanvas*                                       m_canvas                = nullptr;
 
-        bool                    m_vsync                 = false;
-        bool                    m_fullScreen            = false;
+        bool                                                m_vsync                 = false;
+        bool                                                m_fullScreen            = false;
 
-        glm::vec2               m_windowPos             = { 0,0 };
+        glm::vec2                                           m_windowPos             = { 0, 0 };
     private:
         void PoolEvents();
         void Thread();
@@ -113,12 +114,16 @@ namespace Framework::Graphics {
             return m_render;
         }
         inline bool IsRun() const noexcept { return m_isRun; }
-        //inline glm::mat4& GetProjection() noexcept { return this->m_projection; }
     public:
         void CentralizeCursor() noexcept;
+
+        bool SetCanvas(GUI::ICanvas* canvas);
+
+        //bool AddFunctionAtContext(const std::string& funName, std::function<void(void)> fun);
+        //bool RemoveFunctionFromContext(const std::string& funName);
     public:
-        [[nodiscard]] inline bool IsWindowOpen() const noexcept { return !this->m_isWindowClose; }
-        [[nodiscard]] inline bool IsWindowFocus() const noexcept { return this->m_isWindowFocus; }
+        [[nodiscard]] inline bool IsWindowOpen()  const noexcept { return !this->m_isWindowClose; }
+        [[nodiscard]] inline bool IsWindowFocus() const noexcept { return this->m_isWindowFocus;  }
     public:
         bool Create();
         bool Init();

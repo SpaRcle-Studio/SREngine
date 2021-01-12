@@ -8,7 +8,9 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <Input/Input.h>
 
-#include <GUI/Canvas.h>
+//#include <GUI/ICanvas.h>
+
+#include <ResourceManager/ResourceManager.h>
 
 using namespace Framework::Helper;
 
@@ -20,7 +22,7 @@ bool Framework::Graphics::Window::Create() {
 
     Debug::Graph("Window::Create() : creating window...");
 
-    if (!this->m_render->Create(this)){ //, m_camera
+    if (!this->m_render->Create(this)){
         Debug::Error("Window::Create() : failed create render!");
         m_hasErrors = true;
         return false;
@@ -123,6 +125,9 @@ bool Framework::Graphics::Window::Close() {
 
     Debug::Graph("Window::Close() : close window...");
 
+    if (this->m_canvas)
+        this->m_canvas->Close();
+
     this->m_isRun   = false;
     this->m_isClose = true;
 
@@ -208,12 +213,15 @@ void Framework::Graphics::Window::Thread() {
             camera->GetPostProcessing()->End();
         }
 
+        if (m_canvas)
+            this->m_canvas->Draw();
+
         this->m_env->SwapBuffers();
     }
 
     Debug::Graph("Window::Thread() : exit from main cycle.");
 
-    GUI::Canvas::Get()->Stop();
+    m_env->StopGUI();
 
     if (!this->m_render->Close()) {
         Debug::Error("Window::Thread() : failed close render!");
@@ -242,7 +250,8 @@ bool Framework::Graphics::Window::InitEnvironment() {
     Debug::Graph("Window::InitEnvironment() : set context current...");
     this->m_env->SetContextCurrent();
 
-    GUI::Canvas::Get()->Init();
+    //GUI::ICanvas::Get()->Init();
+    this->m_env->InitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf");
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
     this->m_env->Init();
@@ -311,9 +320,64 @@ void Framework::Graphics::Window::PoolEvents() {
 bool Framework::Graphics::Window::Free() {
     if (m_isClose) {
         Debug::Info("Window::Free() : free window pointer...");
+
+        if (m_canvas)
+            this->m_canvas->Free();
+
         delete this;
         return true;
     }
     else
         return false;
 }
+
+bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *canvas) {
+    if (m_canvas){
+        Helper::Debug::Error("Window::SetCanvas() : canvas already setted!");
+        return false;
+    } else
+        Debug::Graph("Window::SetCanvas() : setting canvas...");
+
+    this->m_canvas = canvas;
+
+    return true;
+}
+
+/*
+bool Framework::Graphics::Window::AddFunctionAtContext(const std::string &funName, std::function<void(void)> fun) {
+    m_contexFuncsMutex.lock();
+
+    auto find = m_contextFuncs.find(funName);
+    if (find != m_contextFuncs.end()) {
+        Debug::Error("Window::AddFunctionAtContext() : function \""+funName+"\" already exists!");
+        m_contexFuncsMutex.unlock();
+        return false;
+    }
+
+    Debug::Graph("Window::AddFunctionAtContext() : register new function \""+funName+"\"...");
+
+    this->m_contextFuncs.insert(std::make_pair(funName, fun));
+    this->m_countContextFuncs++;
+
+    m_contexFuncsMutex.unlock();
+    return true;
+}
+
+bool Framework::Graphics::Window::RemoveFunctionFromContext(const std::string &funName) {
+    m_contexFuncsMutex.lock();
+
+    auto find = m_contextFuncs.find(funName);
+    if (find == m_contextFuncs.end()) {
+        Debug::Error("Window::RemoveFunctionFromContext() : function \""+funName+"\" is not exists!");
+        m_contexFuncsMutex.unlock();
+        return false;
+    }
+
+    Debug::Graph("Window::RemoveFunctionFromContext() : remove function \""+funName+"\"...");
+
+    m_countContextFuncs--;
+    m_contextFuncs.erase(find);
+
+    m_contexFuncsMutex.unlock();
+    return true;
+}*/

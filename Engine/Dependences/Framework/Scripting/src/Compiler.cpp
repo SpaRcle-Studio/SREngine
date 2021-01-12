@@ -70,15 +70,18 @@ void Framework::Scripting::Compiler::UpdateAll() {
 }
 
 void Framework::Scripting::Compiler::DestroyScript(Framework::Scripting::Script *script) {
-    m_mutex_load.lock();
+    Helper::Debug::Log("Compiler::DestroyScript() : register script to destroy...");
+
+    m_mutex_destroy.lock();
 
     this->m_scriptsToDestroy.push_back(script);
     this->m_countScriptsToDestroy++;
 
-    m_mutex_load.unlock();
+    m_mutex_destroy.unlock();
 }
 
 void Framework::Scripting::Compiler::PoolEvents() {
+    m_mutex_destroy.lock();
     m_mutex_load.lock();
     this->m_mutex_delayed.lock();
 
@@ -86,7 +89,7 @@ void Framework::Scripting::Compiler::PoolEvents() {
         for (size_t t = 0; t < m_countScriptsToDestroy; t++){
             this->Remove(m_scriptsToDestroy[t]);
             if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Helper::Debug::Log("Compiler::PoolEvents() : free script pointer...");
+                Helper::Debug::Log("Compiler::PoolEvents() : free script pointer...\n\tPath: \""+m_scriptsToDestroy[t]->m_name+"\"");
             delete m_scriptsToDestroy[t];
         }
         m_countScriptsToDestroy = 0;
@@ -106,6 +109,7 @@ void Framework::Scripting::Compiler::PoolEvents() {
         m_countDelayedLoadingScripts = 0;
     }
 
+    m_mutex_destroy.unlock();
     this->m_mutex_delayed.unlock();
     m_mutex_load.unlock();
 }
@@ -113,6 +117,7 @@ void Framework::Scripting::Compiler::PoolEvents() {
 bool Framework::Scripting::Compiler::Remove(Framework::Scripting::Script *script) {
     for(size_t t = 0; t < m_countScripts; t++)
         if (m_scripts[t] == script) {
+            m_countScripts--;
             m_scripts.erase(m_scripts.begin() + t);
             return true;
         }
@@ -169,4 +174,28 @@ bool Framework::Scripting::Compiler::Compile(Framework::Scripting::Script *scrip
     }
     else
         return true;
+}
+
+void Framework::Scripting::Compiler::CloseAll() {
+    Helper::Debug::Info("Compiler::CloseAll() : close "+std::to_string(this->m_countScripts) + " scripts...");
+    m_mutex_load.lock();
+    m_mutex_delayed.lock();
+
+    for (size_t t = 0; t < m_countScripts; t++)
+        m_scripts[t]->Close();
+
+    m_mutex_load.unlock();
+    m_mutex_delayed.unlock();
+}
+
+void Framework::Scripting::Compiler::DestroyAll() {
+    Helper::Debug::Info("Compiler::DestroyAll() : destroying "+std::to_string(this->m_countScripts) + " scripts...");
+    m_mutex_load.lock();
+    m_mutex_delayed.lock();
+
+    for (size_t t = 0; t < m_countScripts; t++)
+        m_scripts[t]->Destroy();
+
+    m_mutex_load.unlock();
+    m_mutex_delayed.unlock();
 }

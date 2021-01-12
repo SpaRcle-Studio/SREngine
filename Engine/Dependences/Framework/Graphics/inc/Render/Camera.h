@@ -9,6 +9,8 @@
 #include <EntityComponentSystem/Component.h>
 #include <Render/PostProcessing.h>
 #include <Debug.h>
+#include <functional>
+#include <GUI/ICanvas.h>
 
 using namespace Framework::Helper;
 
@@ -34,13 +36,13 @@ namespace Framework::Graphics {
     public:
         nlohmann::json Save() override;
 
-        inline bool IsUse() const noexcept { return this->m_isUse; }
+        [[nodiscard]] inline bool IsUse() const noexcept { return this->m_isUse; }
         inline void SetUse(bool value) noexcept { this->m_isUse = value; }
 
         glm::vec2 GetSize() { return m_cameraSize; }
         PostProcessing* GetPostProcessing() { return m_postProcessing; }
 
-        inline glm::vec3 GetGLPosition() const noexcept { return this->m_pos; }
+        [[nodiscard]] inline glm::vec3 GetGLPosition() const noexcept { return this->m_pos; }
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */
@@ -49,31 +51,33 @@ namespace Framework::Graphics {
         void UpdateView() noexcept;
         bool Calculate() noexcept;
     private:
-        volatile bool   m_isCreate          = false;
-        volatile bool   m_isCalculate       = false;
-        volatile bool   m_needUpdate        = false;
+        volatile bool               m_isCreate          = false;
+        volatile bool               m_isCalculate       = false;
+        volatile bool               m_needUpdate        = false;
 
-        PostProcessing* m_postProcessing    = nullptr;
+        PostProcessing*             m_postProcessing    = nullptr;
 
-        Window*			m_window			= nullptr;
-        glm::mat4		m_projection		= glm::mat4(0);
-        glm::mat4		m_viewMat			= glm::mat4(0);
-        glm::vec3		m_pos				= {0,0,0};
+        Window*			            m_window			= nullptr;
+        glm::mat4		            m_projection		= glm::mat4(0);
+        glm::mat4		            m_viewMat			= glm::mat4(0);
+        glm::vec3		            m_pos				= {0,0,0};
 
-        float           m_far               = 8000.f;
-        float           m_near              = 0.1f;
+        float                       m_far               = 8000.f;
+        float                       m_near              = 0.1f;
 
-        glm::vec2       m_cameraSize        = glm::vec2(0,0);
+        GUI::ICanvas*                m_canvas            = nullptr;
 
-        volatile bool   m_isUse             = false;
+        glm::vec2                   m_cameraSize        = glm::vec2(0,0);
 
-        volatile float	m_yaw				= 0;
-        volatile float	m_pitch				= 0;
-        volatile float	m_roll				= 0;
+        volatile bool               m_isUse             = false;
 
-        float			m_dxx				= 0;
-        float			m_dxz				= 0;
-        float			m_dyy				= 0;
+        volatile float	            m_yaw				= 0;
+        volatile float	            m_pitch				= 0;
+        volatile float	            m_roll				= 0;
+
+        float			            m_dxx				= 0;
+        float			            m_dxz				= 0;
+        float			            m_dyy				= 0;
     };
 }
 
