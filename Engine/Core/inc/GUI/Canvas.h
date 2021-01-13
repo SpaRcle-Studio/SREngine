@@ -12,6 +12,11 @@ namespace Framework {
     class Canvas : public Graphics::GUI::ICanvas {
     public:
         Canvas(Scripting::Script* script);
+    protected:
+        bool Init() override;
+    private:
+        bool                m_hasDraw = false;
+        Scripting::Script*  m_script  = nullptr;
     public:
         // Call only from camera or window
         bool Close() override;

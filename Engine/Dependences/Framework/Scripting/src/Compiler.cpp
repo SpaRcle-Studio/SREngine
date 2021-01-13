@@ -87,13 +87,21 @@ void Framework::Scripting::Compiler::PoolEvents() {
 
     if (m_countScriptsToDestroy) {
         for (size_t t = 0; t < m_countScriptsToDestroy; t++){
-            this->Remove(m_scriptsToDestroy[t]);
-            if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Helper::Debug::Log("Compiler::PoolEvents() : free script pointer...\n\tPath: \""+m_scriptsToDestroy[t]->m_name+"\"");
-            delete m_scriptsToDestroy[t];
+            // check uses script
+            if (m_scriptsToDestroy[t]->GetCountUses() == 0) {
+                // free script
+                this->Remove(m_scriptsToDestroy[t]);
+                if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                    Helper::Debug::Log("Compiler::PoolEvents() : free script pointer...\n\tPath: \""+m_scriptsToDestroy[t]->m_name+"\"");
+                delete m_scriptsToDestroy[t];
+
+                // remove "script to destroy" registration
+                m_countScriptsToDestroy--;
+                this->m_scriptsToDestroy.erase(this->m_scriptsToDestroy.begin()+t);
+            }
         }
-        m_countScriptsToDestroy = 0;
-        this->m_scriptsToDestroy.clear();
+        //m_countScriptsToDestroy = 0;
+        //this->m_scriptsToDestroy.clear();
     }
 
     if (m_countDelayedLoadingScripts) {
@@ -198,4 +206,19 @@ void Framework::Scripting::Compiler::DestroyAll() {
 
     m_mutex_load.unlock();
     m_mutex_delayed.unlock();
+}
+
+bool Framework::Scripting::Compiler::Free() {
+    Helper::Debug::Info("Compiler::Free() : free compiler pointer...");
+
+    if (m_countScripts == 0 && m_countDelayedLoadingScripts == 0 && m_countScriptsToDestroy == 0) {
+        delete this;
+        return true;
+    }
+    else{
+        Helper::Debug::Warn("Compiler::Free() : not all processes have been completed!\n\tCount scripts: "+std::to_string(m_countScripts)
+            + "\n\tCount delayed loading scripts: "+std::to_string(m_countDelayedLoadingScripts)+"\n\tCount scripts to destroy:"+std::to_string(m_countScriptsToDestroy));
+        delete this;
+        return false;
+    }
 }

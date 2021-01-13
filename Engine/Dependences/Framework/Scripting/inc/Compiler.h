@@ -14,6 +14,8 @@
 namespace Framework::Scripting {
     class Compiler {
     private:
+        ~Compiler() = default;
+    private:
         std::map<std::string, std::vector<std::function<void(lua_State* L)>>>   m_libs                           = std::map<std::string, std::vector<std::function<void(lua_State* L)>>>();
         std::mutex                                                              m_mutex_load                     = std::mutex();
         std::mutex                                                              m_mutex_destroy                  = std::mutex();
@@ -49,6 +51,8 @@ namespace Framework::Scripting {
 
         void CloseAll();
         void DestroyAll();
+
+        bool Free();
     };
 }
 

@@ -18,7 +18,7 @@ Framework::Engine::Engine() {
 }
 
 Framework::Engine::~Engine() {
-    delete m_compiler;
+
 }
 
 bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene) {
@@ -143,8 +143,9 @@ bool Framework::Engine::Close() {
     }
 
     this->m_compiler->PoolEvents();
-    Helper::Debug::Info("Engine::Close() : free compiler pointer...");
-    delete m_compiler;
+    this->m_compiler->Free();
+    //Helper::Debug::Info("Engine::Close() : free compiler pointer...");
+    //delete m_compiler;
 
     return false;
 }

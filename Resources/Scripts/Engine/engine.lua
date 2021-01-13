@@ -4,7 +4,6 @@ local camera;          -- GameObject*
 local render;          -- Render*
 local skybox;          -- Skybox*
 local cube;            -- GameObject*
---local editorGUIScript; -- Script*
 
 function LoadGeometry()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
@@ -44,10 +43,10 @@ end;
 function Init()
     Debug.Log("Initializing main engine script...");
 
-    Script.this:ImportLib("Math",     LuaState.L);
-    Script.this:ImportLib("Engine",   LuaState.L);
-    Script.this:ImportLib("Graphics", LuaState.L);
-    Script.this:ImportLib("GUI",      LuaState.L);
+    Script.this:ImportLib("Math");
+    Script.this:ImportLib("Engine");
+    Script.this:ImportLib("Graphics");
+    Script.this:ImportLib("GUI");
 
     --editorGUIScript = Script.this:LoadScript("editor", true);
 

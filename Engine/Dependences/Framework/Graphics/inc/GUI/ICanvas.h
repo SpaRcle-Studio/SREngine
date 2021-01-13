@@ -49,6 +49,10 @@ namespace Framework::Graphics::GUI {
     //public:
         //ICanvas(Graphics::Camera* camera);
         //ICanvas(Graphics::Window* window);
+    protected:
+        bool m_isInit = false;
+    protected:
+        virtual bool Init() = 0;
     public:
         // Call only from camera or window
         virtual bool Close() = 0;

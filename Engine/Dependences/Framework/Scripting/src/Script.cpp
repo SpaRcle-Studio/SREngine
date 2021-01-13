@@ -65,37 +65,12 @@ namespace Framework::Scripting {
     }
 
     void Script::CheckExistsFunctions() {
-        lua_Debug ar;
-
-        lua_getglobal(L, "Init");
-        lua_getinfo(L, ">S", &ar);
-        if (ar.linedefined != -1)
-            this->m_hasInit = true;
-
-        lua_getglobal(L, "Awake");
-        lua_getinfo(L, ">S", &ar);
-        if (ar.linedefined != -1)
-            this->m_hasAwake = true;
-
-        lua_getglobal(L, "Start");
-        lua_getinfo(L, ">S", &ar);
-        if (ar.linedefined != -1)
-            this->m_hasStart = true;
-
-        lua_getglobal(L, "Update");
-        lua_getinfo(L, ">S", &ar);
-        if (ar.linedefined != -1)
-            this->m_hasUpdate = true;
-
-        lua_getglobal(L, "FixedUpdate");
-        lua_getinfo(L, ">S", &ar);
-        if (ar.linedefined != -1)
-            this->m_hasFixedUpdate = true;
-
-        lua_getglobal(L, "Close");
-        lua_getinfo(L, ">S", &ar);
-        if (ar.linedefined != -1)
-            this->m_hasClose = true;
+        this->m_hasInit         = FunctionExists("Init");
+        this->m_hasAwake        = FunctionExists("Awake");
+        this->m_hasStart        = FunctionExists("Start");
+        this->m_hasUpdate       = FunctionExists("Update");
+        this->m_hasFixedUpdate  = FunctionExists("FixedUpdate");
+        this->m_hasClose        = FunctionExists("Close");
     }
 
     bool Script::Compile() {
@@ -300,6 +275,13 @@ namespace Framework::Scripting {
                 b(L);
             return true;
         }
+    }
+
+    bool Script::FunctionExists(const std::string &funName) noexcept {
+        lua_Debug ar;
+        lua_getglobal(L, funName.c_str());
+        lua_getinfo(L, ">S", &ar);
+        return ar.linedefined != -1;
     }
 
     Script*  Script::This::LoadScript(const std::string &name, bool fromEngine) const {

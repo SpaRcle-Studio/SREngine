@@ -7,15 +7,19 @@ function Hierarchy()
 
 end;
 
-function Initialize()
+function Init()
     Debug.Log("Initialize engine editor GUI...");
 
-    Script.this:ImportLib("Math",     LuaState.L);
-    Script.this:ImportLib("Engine",   LuaState.L);
-    Script.this:ImportLib("Graphics", LuaState.L);
-    Script.this:ImportLib("GUI",      LuaState.L);
+    Script.this:ImportLib("Math");
+    Script.this:ImportLib("Engine");
+    Script.this:ImportLib("Graphics");
+    Script.this:ImportLib("GUI");
 
     collectgarbage() -- collect memory
+end;
+
+function Draw()
+    --Debug.Log("Draw");
 end;
 
 function Close()

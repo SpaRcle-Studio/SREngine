@@ -33,7 +33,7 @@ namespace Framework::Scripting {
         };
 
         friend class Compiler;
-
+    public:
         enum class Status {
             Unknown, FileMissing, SuccessfullyLoad, RuntimeError, MemoryExhausted, SyntaxError, UnexpectedError, Compiled
         };
@@ -43,26 +43,29 @@ namespace Framework::Scripting {
     private:
         const std::string m_name = "Unknown";
 
-        This        m_thisBridge       = This();
+        This            m_thisBridge       = This();
 
-        Status      m_status           = Status::Unknown;
-        Compiler*   m_compiler         = nullptr;
+        Status          m_status           = Status::Unknown;
+        Compiler*       m_compiler         = nullptr;
 
-        lua_State * L                  = nullptr;
-        int         r	               = -1;
+        lua_State *     L                  = nullptr;
+        int             r	               = -1;
 
-        bool        m_hasInit          = false;
-        bool        m_hasAwake         = false;
-        bool        m_hasStart         = false;
-        bool        m_hasUpdate        = false;
-        bool        m_hasFixedUpdate   = false;
-        bool        m_hasClose         = false;
+        bool            m_hasInit          = false;
+        bool            m_hasAwake         = false;
+        bool            m_hasStart         = false;
+        bool            m_hasUpdate        = false;
+        bool            m_hasFixedUpdate   = false;
+        bool            m_hasClose         = false;
 
-        bool        m_isDestroy        = false;
-        bool        m_isInit           = false;
-        bool        m_isAwake          = false;
-        bool        m_isStart          = false;
-        bool        m_isClose          = false;
+        bool            m_isDestroy        = false;
+
+        bool            m_isInit           = false;
+        bool            m_isAwake          = false;
+        bool            m_isStart          = false;
+        bool            m_isClose          = false;
+
+        unsigned int    m_countUsePoints   = 0;
     private:
         void CheckExistsFunctions();
     public:
@@ -75,6 +78,39 @@ namespace Framework::Scripting {
         bool Update();
         bool FixedUpdate();
         bool Close();
+
+        [[nodiscard]] bool FunctionExists(const std::string& funName) noexcept;
+
+        [[nodiscard]] inline bool IsNeedInit() const noexcept {
+            return (m_hasInit && !m_isInit);
+        }
+
+        [[nodiscard]] inline bool IsNeedStart() const noexcept {
+            return (m_hasStart && !m_isStart);
+        }
+
+        [[nodiscard]] inline bool IsDestroy() const noexcept { return m_isDestroy; }
+        [[nodiscard]] inline Status GetStatus() const noexcept { return m_status; }
+
+        [[nodiscard]] inline unsigned int GetCountUses() const noexcept { return m_countUsePoints; }
+        inline bool AddUsePoint() noexcept {
+            if (m_isDestroy) {
+                Helper::Debug::Error("Script::AddUsePoint() : script is destroyed! Some thing went wrong...\n\tPath: "+m_name);
+                return false;
+            } else {
+                this->m_countUsePoints++;
+                return true;
+            }
+        }
+        inline bool RemoveUsePoint() noexcept {
+            if (m_countUsePoints == 0){
+                Helper::Debug::Error("Script::RemoveUsePoint() : count uses point is equal zero! Some thing went wrong...\n\tPath: "+m_name);
+                return false;
+            } else {
+                this->m_countUsePoints--;
+                return true;
+            }
+        }
 
         bool Call(const std::string& funName);
         bool CallArgs(...);

@@ -21,7 +21,7 @@ using namespace Framework::Graphics::Types;
 
 int main() {
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Full);
+    Debug::SetLevel(Debug::Level::Low);
     ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
 
     // Register all resource types
