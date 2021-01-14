@@ -42,7 +42,7 @@ namespace Framework::Helper {
         enum class Type {
             Log, Info, Debug, Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog
         };
-    private:
+    public:
         Debug() = delete;
         ~Debug() = delete;
         Debug(Debug &) = delete;

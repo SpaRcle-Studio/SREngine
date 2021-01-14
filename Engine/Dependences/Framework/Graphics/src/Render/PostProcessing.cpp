@@ -6,6 +6,7 @@
 
 #include <Debug.h>
 #include <Render/Render.h>
+#include <Render/Camera.h>
 
 using namespace Framework::Helper;
 
@@ -71,7 +72,10 @@ bool Framework::Graphics::PostProcessing::End() {
     if (m_bloom)
         this->BlurBloom();
 
-    m_env->BindFrameBuffer(0);
+    if (m_camera->IsDirectOutput())
+        m_env->BindFrameBuffer(0);
+    else
+        m_env->BindFrameBuffer(this->m_finalFBO);
 
     m_postProcessingShader->Use();
 
@@ -98,19 +102,28 @@ bool Framework::Graphics::PostProcessing::End() {
 
     m_env->DrawQuad(m_VAO);
 
+    if (!m_camera->IsDirectOutput())
+        m_env->BindFrameBuffer(0);
+
     return false;
 }
 
-Framework::Graphics::PostProcessing::PostProcessing() : m_env(Environment::Get()){
-
+Framework::Graphics::PostProcessing::PostProcessing(Camera* camera) : m_env(Environment::Get()){
+    this->m_camera = camera;
 }
 
 unsigned int Framework::Graphics::PostProcessing::GetFinally() noexcept {
-    return 0;
+    return m_finalColorBuffer;
 }
 
 bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
     //Debug::Log("PostProcessing::ReCalcFrameBuffers() : re-calc...");
+
+    std::vector<unsigned int> temp = { 0 };
+    if (!m_env->CreateHDRFrameBufferObject({w, h}, m_finalRBO, m_finalFBO, temp)) {
+        return false;
+    }
+    m_finalColorBuffer = temp[0];
 
     if (!m_env->CreateHDRFrameBufferObject({w, h}, m_RBODepth, m_HDRFrameBufferObject, m_ColorBuffers)) {
         return false;

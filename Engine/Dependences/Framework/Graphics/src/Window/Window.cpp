@@ -193,6 +193,8 @@ void Framework::Graphics::Window::Thread() {
 
         this->m_render->PoolEvents();
 
+        this->m_env->BeginDrawGUI();
+
         for (Camera* camera : m_cameras) {
             if (!camera->IsActive())
                 continue;
@@ -215,6 +217,8 @@ void Framework::Graphics::Window::Thread() {
 
         if (m_canvas)
             this->m_canvas->Draw();
+
+        this->m_env->EndDrawGUI();
 
         this->m_env->SwapBuffers();
     }
@@ -250,8 +254,11 @@ bool Framework::Graphics::Window::InitEnvironment() {
     Debug::Graph("Window::InitEnvironment() : set context current...");
     this->m_env->SetContextCurrent();
 
-    //GUI::ICanvas::Get()->Init();
-    this->m_env->InitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf");
+    {
+        this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf");
+        GUI::ICanvas::InitStyle();
+        this->m_env->InitGUI();
+    }
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
     this->m_env->Init();
@@ -298,20 +305,24 @@ void Framework::Graphics::Window::PoolEvents() {
         m_camerasMutex.unlock();
     }
 
-    if (m_countCamerasToRemove) {
+    if (m_countCamerasToDestroy) {
         m_camerasMutex.lock();
 
-        for (Camera* camera : m_camerasToRemove)
+        for (Camera* camera : m_camerasToDestroy)
             for (size_t t = 0; t < m_countCameras; t++) {
                 if (camera == m_cameras[t]) {
+                    if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                        Helper::Debug::Log("Window::PoolEvents() : remove camera...");
+
                     m_cameras.erase(m_cameras.begin() + t);
                     m_countCameras--;
-                    camera->SetUse(false);
+                    camera->Free();
+                    //camera->SetUse(false);
                 }
             }
 
-        m_camerasToRemove.clear();
-        m_countCamerasToRemove = 0;
+        m_camerasToDestroy.clear();
+        m_countCamerasToDestroy = 0;
 
         m_camerasMutex.unlock();
     }

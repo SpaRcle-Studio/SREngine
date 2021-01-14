@@ -36,12 +36,10 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
 }
 
 Framework::Graphics::Camera::Camera() : Component("Camera") {
-    this->m_postProcessing = new PostProcessing();
+    this->m_postProcessing = new PostProcessing(this);
 }
 
-Framework::Graphics::Camera::~Camera() {
-
-}
+Framework::Graphics::Camera::~Camera() = default;
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
     Debug::Graph("Camera::Create() : creating camera...");
@@ -234,15 +232,17 @@ bool Framework::Graphics::Camera::Calculate() noexcept {
 }
 
 void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
-    if (m_isUse)
-        m_window->RemoveCamera(this);
-    m_window = nullptr;
-    ret: if (m_isUse) {
+    //if (m_isUse)
+    if (m_window) {
+        m_window->DestroyCamera(this);
+        m_window = nullptr;
+    }
+    /*ret: if (m_isUse) {
         if (m_window)
             if (m_window->IsWindowOpen())
                 goto ret;
     }
-    this->Free();
+    this->Free();*/
 }
 
 nlohmann::json Framework::Graphics::Camera::Save() {
@@ -260,6 +260,7 @@ nlohmann::json Framework::Graphics::Camera::Save() {
     return camera;
 }
 
+/*
 void Framework::Graphics::Camera::AwaitFree() {
     ret:
     if (m_isUse) {
@@ -268,16 +269,18 @@ void Framework::Graphics::Camera::AwaitFree() {
                 goto ret;
     }
     this->Free();
-}
+}*/
 
 bool Framework::Graphics::Camera::Free() {
-    if (m_isUse && m_window && m_window->IsWindowOpen()) {
-        Debug::Error("Camera::Free() : camera used now!");
-        return false;
-    }
-    else{
+    ///if (m_isUse && m_window && m_window->IsWindowOpen()) {
+     //   Debug::Error("Camera::Free() : camera used now!");
+    //    return false;
+    //}
+    //else{
         Debug::Log("Camera::Free() : free camera pointer...");
+        this->m_postProcessing->Free();
         delete this;
         return true;
-    }
+   // }
 }
+

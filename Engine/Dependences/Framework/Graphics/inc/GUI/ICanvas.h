@@ -5,6 +5,9 @@
 #ifndef GAMEENGINE_ICANVAS_H
 #define GAMEENGINE_ICANVAS_H
 
+#include <GUI/DockSpace.h>
+#include <GUI/GUIWindow.h>
+
 #include <Debug.h>
 #include <Environment/Environment.h>
 
@@ -53,6 +56,8 @@ namespace Framework::Graphics::GUI {
         bool m_isInit = false;
     protected:
         virtual bool Init() = 0;
+    public:
+        static void InitStyle();
     public:
         // Call only from camera or window
         virtual bool Close() = 0;

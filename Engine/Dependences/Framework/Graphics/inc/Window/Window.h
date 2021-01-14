@@ -64,8 +64,8 @@ namespace Framework::Graphics {
         std::mutex                                          m_camerasMutex          = std::mutex();
         std::vector<Camera*>                                m_newCameras            = std::vector<Camera*>();
         size_t                                              m_countNewCameras       = 0;
-        std::vector<Camera*>                                m_camerasToRemove       = std::vector<Camera*>();
-        size_t                                              m_countCamerasToRemove  = 0;
+        std::vector<Camera*>                                m_camerasToDestroy      = std::vector<Camera*>();
+        size_t                                              m_countCamerasToDestroy = 0;
         std::vector<Camera*>                                m_cameras               = std::vector<Camera*>();
         size_t                                              m_countCameras          = 0;
 
@@ -88,12 +88,12 @@ namespace Framework::Graphics {
         inline void AddCamera(Camera* camera) {
             Debug::Log("Window::AddCamera() : register new camera...");
             m_camerasMutex.lock();
-            camera->SetUse(true);
+            //camera->SetUse(true);
             m_newCameras.push_back(camera);
             m_countNewCameras++;
             m_camerasMutex.unlock();
         } //TODO: mutex
-        inline void RemoveCamera(Camera* camera){
+        inline void DestroyCamera(Camera* camera){
             Debug::Log("Window::RemoveCamera() : register camera to remove...");
             if (!camera)
             {
@@ -101,8 +101,8 @@ namespace Framework::Graphics {
                 return;
             }
             m_camerasMutex.lock();
-            m_camerasToRemove.push_back(camera);
-            m_countCamerasToRemove++;
+            m_camerasToDestroy.push_back(camera);
+            m_countCamerasToDestroy++;
             m_camerasMutex.unlock();
         }
 

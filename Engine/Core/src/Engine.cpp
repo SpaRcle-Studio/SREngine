@@ -132,6 +132,8 @@ void Framework::Engine::Await() {
 }
 
 bool Framework::Engine::Close() {
+    Helper::Debug::Info("Engine::Close() : close game engine...");
+
     this->m_compiler->CloseAll();
     this->m_compiler->DestroyAll();
 
@@ -186,33 +188,6 @@ bool Framework::Engine::RegisterLibraries() {
                 .endClass();
     });
 
-    // Script
-    /*this->m_compiler->RegisterScriptClass("Base", [](lua_State* L){
-        luabridge::getGlobalNamespace(L)
-                .beginClass<lua_State>("LuaState")
-                    .addStaticProperty("L", L, false)
-                .endClass()
-
-                .beginClass<Scripting::Script>("Script")
-                    .addStaticFunction("ImportLib", static_cast<bool(*)(const std::string&, lua_State*)>([](const std::string& name, lua_State* L) -> bool {
-                        auto a = Engine::Get()->GetCompiler()->GetClasses(name);
-                        if (a.empty())
-                            return false;
-                        else
-                        {
-                            Debug::Script("Script(InternalCall) : importing \""+name+"\" library...");
-                            for (const auto& b : a)
-                                b(L);
-                            return true;
-                        }
-                    }))
-                    .addStaticFunction("Load", static_cast<Scripting::Script*(*)(const std::string&)>([](const std::string& name) -> Scripting::Script* {
-                        return Engine::Get()->GetCompiler()->Load(name);
-                    }))
-                    .addFunction("Call", (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
-                .endClass();
-    });*/
-
     // KeyCode and Input
     this->m_compiler->RegisterScriptClass("Base", [](lua_State* L) {
         static int MouseMiddle      = (int)KeyCode::MouseMiddle;
@@ -222,6 +197,7 @@ bool Framework::Engine::RegisterLibraries() {
         static int D                = (int)KeyCode::D;
         static int S                = (int)KeyCode::S;
         static int W                = (int)KeyCode::W;
+        static int P                = (int)KeyCode::P;
         static int Space            = (int)KeyCode::Space;
         static int LShift           = (int)KeyCode::LShift;
 
@@ -234,6 +210,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addProperty("D",               &D,                   false)
                     .addProperty("S",               &S,                   false)
                     .addProperty("W",               &W,                   false)
+                    .addProperty("P",               &P,                   false)
                     .addProperty("Space",           &Space,               false)
                     .addProperty("LShift",          &LShift,              false)
                 .endNamespace();
@@ -405,9 +382,11 @@ bool Framework::Engine::RegisterLibraries() {
                         return new Graphics::Camera();
                     }))
                     .addFunction("GetPostProcessing", (Graphics::PostProcessing* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetPostProcessing)
-                    .addFunction("Free", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::Free)
+                    //.addFunction("Free", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::Free)
                     .addFunction("Base", (Helper::Component* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::BaseComponent)
                     .addFunction("SetFrameSize", (void (Framework::Graphics::Camera::*)(unsigned int w, unsigned int h))&Graphics::Camera::UpdateProjection)
+                    .addFunction("SetDirectOutput", (void (Framework::Graphics::Camera::*)(bool value))&Graphics::Camera::SetDirectOutput)
+                    .addFunction("IsDirectOutput", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::IsDirectOutput)
                 .endClass();
     });
 
@@ -476,7 +455,7 @@ bool Framework::Engine::RegisterLibraries() {
                         return Engine::Get()->GetWindow();
                     }))
                     .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
-                    .addFunction("RemoveCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::RemoveCamera)
+                    .addFunction("DestroyCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::DestroyCamera)
                     .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)
                 .endClass();
     });
@@ -485,14 +464,55 @@ bool Framework::Engine::RegisterLibraries() {
     this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
             .beginClass<Graphics::GUI::ICanvas>("Canvas")
-                    //.addStaticFunction("Get", static_cast<Graphics::GUI::ICanvas*(*)()>([]() -> Graphics::GUI::ICanvas* {
-                    //    return Graphics::GUI::ICanvas::Get();
-                    //}))
                     .addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(const std::string&, bool)>([](const std::string& luaScriptName, bool fromEditor) -> Graphics::GUI::ICanvas* {
                         Scripting::Script* script = Engine::Get()->GetCompiler()->DelayedLoad(luaScriptName, fromEditor);
                         return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
                     }))
             .endClass();
+    });
+
+    // DockSpace
+    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::GUI::DockSpace>("DockSpace")
+                        .addStaticFunction("Begin", static_cast<void(*)()>([]() {
+                            Graphics::GUI::DockSpace::Begin();
+                        }))
+                .endClass();
+    });
+
+    /*// ImVec4
+    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<ImVec4>("ImVec4")
+                    .addStaticFunction("New", static_cast<ImVec4(*)(float,float,float,float)>([](float x,float y,float z,float w) -> ImVec4 {
+                        return ImVec4(x,y,z,w);
+                    }))
+                .endClass();
+    });
+
+    // ImGuiStyle
+    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<ImGuiStyle>("ImGuiStyle")
+                    .addStaticFunction("Get", static_cast<ImGuiStyle&(*)()>([]() -> ImGuiStyle& { return ImGui::GetStyle(); }))
+                    .addStaticFunction("GetColors", static_cast<ImVec4*(*)()>([]() -> ImVec4* {
+                        return ImGui::GetStyle().Colors;
+                    }))
+                .endClass();
+    });*/
+
+    // GUIWindow
+    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::GUI::GUIWindow>("GUIWindow")
+                    .addStaticFunction("Begin", static_cast<void(*)(const std::string&)>([](const std::string& winName) {
+                        Graphics::GUI::GUIWindow::Begin(winName);
+                    }))
+                    .addStaticFunction("End", static_cast<void(*)()>([]() {
+                        Graphics::GUI::GUIWindow::End();
+                    }))
+                .endClass();
     });
 
     return true;

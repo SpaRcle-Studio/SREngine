@@ -232,6 +232,8 @@ namespace Framework::Scripting {
         } else
             Helper::Debug::Log("Script::Destroy() : destroying script...\n\tPath: \""+m_name+"\"");
 
+        this->m_status = Status::Destroyed;
+
         if (L) {
             Helper::Debug::Log("Script::Destroy() : close lua state...");
             lua_close(L);

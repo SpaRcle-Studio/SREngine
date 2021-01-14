@@ -19,7 +19,11 @@ function Init()
 end;
 
 function Draw()
-    --Debug.Log("Draw");
+    DockSpace.Begin();
+
+    GUIWindow.Begin("Scene");
+
+    GUIWindow.End();
 end;
 
 function Close()

@@ -110,8 +110,9 @@ bool Framework::Graphics::Types::Skybox::AwaitDestroy() {
 }
 
 bool Framework::Graphics::Types::Skybox::Free() {
+    Debug::Log("Skybox::Free() : free skybox pointer...");
+
     if (m_isDestroy) {
-        Debug::Log("Skybox::Free() : free skybox pointer...");
         delete this;
         return true;
     }else{

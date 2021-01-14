@@ -23,8 +23,11 @@ namespace Framework::Graphics {
         GLFWmonitor*            m_monitor         = nullptr;
         const GLFWvidmode*      m_vidMode         = nullptr;
     public:
-        bool InitGUI(const std::string& fontPath) override;
+        bool PreInitGUI(const std::string& fontPath) override;
+        bool InitGUI() override;
         bool StopGUI() override;
+        void BeginDrawGUI() override;
+        void EndDrawGUI() override;
 
         inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
 

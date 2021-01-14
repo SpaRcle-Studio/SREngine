@@ -30,8 +30,8 @@ unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, i
     return (unsigned int)textureID;
 }
 
-bool Framework::Graphics::OpenGL::InitGUI(const std::string& fontPath) {
-    Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
+bool Framework::Graphics::OpenGL::PreInitGUI(const std::string& fontPath) {
+    Debug::Graph("OpenGL::InitGUI() : pre-initializing ImGUI library...");
 
     {
         IMGUI_CHECKVERSION();
@@ -53,13 +53,21 @@ bool Framework::Graphics::OpenGL::InitGUI(const std::string& fontPath) {
         //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
         //io.ConfigDockingWithShift = true;
         // Setup Dear ImGui style
-        ImGui::StyleColorsDark();
+        //ImGui::StyleColorsDark();
     }
+
+    return true;
+}
+
+bool Framework::Graphics::OpenGL::InitGUI() {
+    Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
 
     ImGui_ImplGlfw_InitForOpenGL(this->m_window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
+
     return true;
 }
+
 
 bool Framework::Graphics::OpenGL::StopGUI() {
     Debug::Graph("OpenGL::StopGUI() : stopping ImGUI library...");
@@ -588,6 +596,22 @@ void Framework::Graphics::OpenGL::DrawSkybox(unsigned int VAO, unsigned int Cube
     glBindTexture(GL_TEXTURE_CUBE_MAP, CubeMap);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDepthFunc(GL_LESS); // set depth function back to default
+}
+
+void Framework::Graphics::OpenGL::BeginDrawGUI() {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    ImGui::GetStyle().WindowRounding = 0.0f;
+}
+
+void Framework::Graphics::OpenGL::EndDrawGUI() {
+    ImGui::Render();
+    int display_w, display_h;
+    glfwGetFramebufferSize(this->m_window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 

@@ -7,9 +7,11 @@
 
 #include "Shader.h"
 #include <Environment/Environment.h>
+#include <Debug.h>
 
 namespace Framework::Graphics {
     class Render;
+    class Camera;
     /*
      How use?
 
@@ -25,10 +27,13 @@ namespace Framework::Graphics {
         ...swapBuffers
      }
      */
+    // TODO: add freeing video buffers!
     class PostProcessing {
         /** \brief vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates. */
+    private:
+        ~PostProcessing() = default;
     public:
-        PostProcessing();
+        PostProcessing(Camera* camera);
     private:
         float			          m_gamma					    = 0.8f;
         float                     m_exposure                    = 1.f;
@@ -48,11 +53,11 @@ namespace Framework::Graphics {
         unsigned int              m_VAO                         = 0;
         unsigned int              m_VBO                         = 0;
 
-        //unsigned int            m_BlurRBO                     = 0;
-        //unsigned int            m_BlurFBO                     = 0;
-        //unsigned int            m_BlurColorBuffer             = 0;
-
         volatile bool             m_bloom                       = true;
+
+        unsigned int              m_finalRBO                    = 0;
+        unsigned int              m_finalFBO                    = 0;
+        unsigned int              m_finalColorBuffer            = 0;
 
         unsigned int              m_RBODepth                    = 0;
         unsigned int              m_HDRFrameBufferObject        = 0;
@@ -68,11 +73,12 @@ namespace Framework::Graphics {
         Shader*         m_postProcessingShader                  = nullptr;
         Shader*         m_blurShader                            = nullptr;
 
+        Camera*         m_camera                                = nullptr;
         Render*         m_render                                = nullptr;
         bool            m_isInit                                = false;
     public:
-        inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
-        inline float GetGamma() const noexcept { return m_gamma; }
+        [[nodiscard]] inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
+        [[nodiscard]] inline float GetGamma() const noexcept { return m_gamma; }
     public:
         inline void SetGamma(float gamma) noexcept { m_gamma = gamma; }
         inline void SetExposure(float exposure) noexcept { m_exposure = exposure; }
@@ -85,6 +91,12 @@ namespace Framework::Graphics {
         /** \brief Init shader and set default values \warning Call only from window context \return bool */
         bool Init(Render* render);
         bool Destroy();
+
+        inline bool Free() noexcept {
+            Helper::Debug::Graph("PostProcessing::Free() : free post processing pointer...");
+            delete this;
+            return true;
+        }
 
         bool ReCalcFrameBuffers(int w, int h);
 

@@ -10,11 +10,15 @@ Framework::Canvas::Canvas(Scripting::Script* script) {
 }
 
 bool Framework::Canvas::Close() {
-    Helper::Debug::Log("Canvas::Close() : close canvas...");
+    Helper::Debug::Graph("Canvas::Close() : close canvas...");
 
-    if (m_script->IsDestroy())
+    if (m_script->IsDestroy()) {
+        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+            Helper::Debug::Log("Canvas::Close() : remove use point from script...");
         m_script->RemoveUsePoint();
+    }
     else{
+        Helper::Debug::Graph("Canvas::Close() : destroying canvas script...");
         m_script->RemoveUsePoint();
         m_script->Close();
         m_script->Destroy();
@@ -31,8 +35,11 @@ bool Framework::Canvas::Free() {
 
 void Framework::Canvas::Draw() {
     if (m_script->GetStatus() == Scripting::Script::Status::Compiled) {
-        if (!m_isInit)
+        if (!m_isInit) {
             this->Init();
+        }
+
+        //Framework::Canvas::ApplyStyle();
 
         if (m_hasDraw)
             m_script->Call("Draw");

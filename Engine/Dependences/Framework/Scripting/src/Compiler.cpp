@@ -123,6 +123,9 @@ void Framework::Scripting::Compiler::PoolEvents() {
 }
 
 bool Framework::Scripting::Compiler::Remove(Framework::Scripting::Script *script) {
+    if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        Helper::Debug::Log("Compiler::Remove() : remove script...\n\tPath: "+script->m_name);
+
     for(size_t t = 0; t < m_countScripts; t++)
         if (m_scripts[t] == script) {
             m_countScripts--;

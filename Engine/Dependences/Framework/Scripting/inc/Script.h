@@ -35,7 +35,7 @@ namespace Framework::Scripting {
         friend class Compiler;
     public:
         enum class Status {
-            Unknown, FileMissing, SuccessfullyLoad, RuntimeError, MemoryExhausted, SyntaxError, UnexpectedError, Compiled
+            Unknown, FileMissing, SuccessfullyLoad, RuntimeError, MemoryExhausted, SyntaxError, UnexpectedError, Compiled, Destroyed
         };
     private:
         ~Script();
@@ -108,6 +108,8 @@ namespace Framework::Scripting {
                 return false;
             } else {
                 this->m_countUsePoints--;
+                if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High && m_countUsePoints == 0)
+                    Helper::Debug::Log("Script::RemoveUsePoint() : now counts uses equal zero.");
                 return true;
             }
         }

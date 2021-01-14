@@ -237,6 +237,7 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
     if (m_countSkyboxesToRemove){
         for (m_t = 0; m_t < m_countSkyboxesToRemove; m_t++) {
+            Debug::Log("Render::PoolEvents() : free skybox video memory...");
             if (!m_skyboxesToRemove[m_t]->FreeVideoMemory())
                 Debug::Error("Render::PoolEvents() : failed free skybox video memory!");
             else

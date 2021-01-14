@@ -59,8 +59,11 @@ namespace Framework::Graphics {
                 return g_environment;
         }
     public:
-        virtual bool InitGUI(const std::string& fontPath) = 0;
+        virtual bool PreInitGUI(const std::string& fontPath) = 0;
+        virtual bool InitGUI() = 0;
         virtual bool StopGUI() = 0;
+        virtual void BeginDrawGUI() = 0;
+        virtual void EndDrawGUI() = 0;
 
         virtual inline std::string GetPipeLineName() const noexcept = 0;
 

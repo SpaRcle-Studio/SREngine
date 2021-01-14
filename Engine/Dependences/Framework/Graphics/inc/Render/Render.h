@@ -40,20 +40,20 @@ namespace Framework::Graphics {
         size_t                  m_t2                                = 0;
 
         std::vector<Mesh*>      m_newMeshes                         = std::vector<Mesh*>();
-        volatile size_t         m_countNewMeshes                    = 0;
+        size_t                  m_countNewMeshes                    = 0;
         std::vector<Mesh*>      m_removeMeshes                      = std::vector<Mesh*>();
-        volatile size_t         m_countMeshesToRemove               = 0;
+        size_t                  m_countMeshesToRemove               = 0;
 
         std::vector<Mesh*>      m_meshes                            = std::vector<Mesh*>();
-        volatile size_t         m_countMeshes                       = 0;
+        size_t                  m_countMeshes                       = 0;
         std::vector<Mesh*>      m_transparent_meshes                = std::vector<Mesh*>();
-        volatile size_t         m_countTransparentMeshes            = 0;
+        size_t                  m_countTransparentMeshes            = 0;
 
-        volatile size_t         m_countTexturesToFree               = 0;
+        size_t                  m_countTexturesToFree               = 0;
         std::vector<Texture*>   m_textureToFree                     = std::vector<Texture*>();
 
         std::vector<Skybox*>    m_skyboxesToRemove                  = std::vector<Skybox*>();
-        volatile size_t         m_countSkyboxesToRemove             = 0;
+        size_t                  m_countSkyboxesToRemove             = 0;
 
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;

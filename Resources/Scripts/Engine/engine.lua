@@ -4,6 +4,7 @@ local camera;          -- GameObject*
 local render;          -- Render*
 local skybox;          -- Skybox*
 local cube;            -- GameObject*
+local cameraComp       -- Camera*;
 
 function LoadGeometry()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
@@ -26,8 +27,10 @@ end;
 function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
-    local cameraComp = Camera.New();
+    cameraComp = Camera.New();
     cameraComp:SetFrameSize(1280, 720);
+
+    cameraComp:SetDirectOutput(false);
 
     cameraComp:GetPostProcessing():SetBloomIntensity(3.0);
     cameraComp:GetPostProcessing():SetBloomAmount(10);
@@ -104,6 +107,10 @@ end;
 function Update()
     MouseUpdate();
 
+    if (Input.GetKeyDown(KeyCode.P)) then
+        cameraComp:SetDirectOutput(not cameraComp:IsDirectOutput());
+    end;
+
     collectgarbage() -- collect memory
 end;
 
@@ -113,10 +120,14 @@ function Close()
     --editorGUIScript:Close();
     --editorGUIScript:Destroy();
 
-    scene:Destroy();
+    if (not (scene == nil)) then
+        scene:Destroy();
+    end;
 
-    skybox:AwaitDestroy();
-    skybox:Free();
+    if (not (skybox == nil)) then
+        skybox:AwaitDestroy();
+        skybox:Free();
+    end;
 
     collectgarbage() -- collect memory
 end;
