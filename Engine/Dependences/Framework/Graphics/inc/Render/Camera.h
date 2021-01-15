@@ -19,8 +19,8 @@ namespace Framework::Graphics {
 
     class Camera : public Component {
     private:
-        ~Camera();
     public:
+        ~Camera();
         Camera();
         void UpdateProjection(unsigned int w, unsigned int h);
 

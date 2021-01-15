@@ -392,6 +392,16 @@ bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, uns
         return false;
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    if (isNew){
+        std::string colorBfs = "\n\tColorBuffers: ";
+        for (size_t t = 0; t < colorBuffers.size(); t++)
+            colorBfs += std::to_string(colorBuffers[t]) + (t+1 == colorBuffers.size() ? "" : ",");
+
+        Debug::Log("OpenGL::CreateHDRFrameBufferObject() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
+            "\n\tHDR_FBO: "+std::to_string(hdrFBO) + colorBfs);
+    }
+
     return true;
 }
 
@@ -612,6 +622,62 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
     glfwGetFramebufferSize(this->m_window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigned int &rboDepth, unsigned int &hdrFBO, unsigned int &colorBuffer) {
+    bool isNew = !((bool)hdrFBO);
+
+    if (isNew)
+        Debug::Graph("OpenGL::CreateSingleHDRFrameBO() : creating new single frame buffer object...");
+
+    if (isNew)
+        glGenFramebuffers(1, &hdrFBO);
+
+    if (isNew)
+        glGenTextures(1, &colorBuffer);
+
+    glBindTexture(GL_TEXTURE_2D, colorBuffer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    //================================================================================================
+
+    if (colorBuffer && hdrFBO) {
+        glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+        // присоедиение текстуры к объекту текущего кадрового буфера
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
+    }
+    else {
+        Debug::Error("OpenGL::CreateSingleHDRFrameBO() : color buffer or FBO is not created!");
+        return false;
+    }
+
+    if (isNew)
+        glGenRenderbuffers(1, &rboDepth);
+
+    glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, size.x, size.y);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+
+    // finally check if framebuffer is complete
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        Debug::Error("OpenGL::CreateSingleHDRFrameBO() : frame buffer is not complete!");
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        return false;
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    if (isNew){
+        Debug::Log("OpenGL::CreateSingleHDRFrameBO() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
+                   "\n\tHDR_FBO: "+std::to_string(hdrFBO) + "\n\tColor buffer: "+std::to_string(colorBuffer));
+    }
+
+    return true;
 }
 
 

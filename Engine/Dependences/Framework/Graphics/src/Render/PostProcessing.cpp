@@ -74,8 +74,10 @@ bool Framework::Graphics::PostProcessing::End() {
 
     if (m_camera->IsDirectOutput())
         m_env->BindFrameBuffer(0);
-    else
+    else {
         m_env->BindFrameBuffer(this->m_finalFBO);
+        m_env->ClearBuffers();
+    }
 
     m_postProcessingShader->Use();
 
@@ -112,18 +114,12 @@ Framework::Graphics::PostProcessing::PostProcessing(Camera* camera) : m_env(Envi
     this->m_camera = camera;
 }
 
-unsigned int Framework::Graphics::PostProcessing::GetFinally() noexcept {
-    return m_finalColorBuffer;
-}
-
 bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
     //Debug::Log("PostProcessing::ReCalcFrameBuffers() : re-calc...");
 
-    std::vector<unsigned int> temp = { 0 };
-    if (!m_env->CreateHDRFrameBufferObject({w, h}, m_finalRBO, m_finalFBO, temp)) {
+    if (!m_env->CreateSingleHDRFrameBO({w, h}, m_finalRBO, m_finalFBO, m_finalColorBuffer)) {
         return false;
     }
-    m_finalColorBuffer = temp[0];
 
     if (!m_env->CreateHDRFrameBufferObject({w, h}, m_RBODepth, m_HDRFrameBufferObject, m_ColorBuffers)) {
         return false;

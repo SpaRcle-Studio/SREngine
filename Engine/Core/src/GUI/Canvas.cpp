@@ -39,8 +39,6 @@ void Framework::Canvas::Draw() {
             this->Init();
         }
 
-        //Framework::Canvas::ApplyStyle();
-
         if (m_hasDraw)
             m_script->Call("Draw");
     }

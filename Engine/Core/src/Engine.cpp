@@ -371,6 +371,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetBloom", (void (Framework::Graphics::PostProcessing::*)(bool))&Graphics::PostProcessing::SetBloom)
                     .addFunction("SetGamma", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetGamma)
                     .addFunction("SetExposure", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetExposure)
+                    .addFunction("GetFinallyTexID", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetFinally)
+                    .addFunction("GetColoredImage", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetColoredImage)
+                    .addFunction("GetBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBloomMask)
                 .endClass();
     });
 
@@ -387,7 +390,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetFrameSize", (void (Framework::Graphics::Camera::*)(unsigned int w, unsigned int h))&Graphics::Camera::UpdateProjection)
                     .addFunction("SetDirectOutput", (void (Framework::Graphics::Camera::*)(bool value))&Graphics::Camera::SetDirectOutput)
                     .addFunction("IsDirectOutput", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::IsDirectOutput)
+                    .addFunction("GetSize", (glm::vec2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
                 .endClass();
+        Scripting::Script::RegisterCasting<Graphics::Camera*>("Camera", L);
     });
 
     // Texture & TextureFilter & TextureType
@@ -464,8 +469,11 @@ bool Framework::Engine::RegisterLibraries() {
     this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
             .beginClass<Graphics::GUI::ICanvas>("Canvas")
-                    .addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(const std::string&, bool)>([](const std::string& luaScriptName, bool fromEditor) -> Graphics::GUI::ICanvas* {
-                        Scripting::Script* script = Engine::Get()->GetCompiler()->DelayedLoad(luaScriptName, fromEditor);
+                    //.addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(const std::string&, bool)>([](const std::string& luaScriptName, bool fromEditor) -> Graphics::GUI::ICanvas* {
+                    //    Scripting::Script* script = Engine::Get()->GetCompiler()->DelayedLoad(luaScriptName, fromEditor);
+                    //    return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
+                    //}))
+                    .addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(Scripting::Script*)>([](Scripting::Script*script) -> Graphics::GUI::ICanvas* {
                         return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
                     }))
             .endClass();
@@ -511,6 +519,19 @@ bool Framework::Engine::RegisterLibraries() {
                     }))
                     .addStaticFunction("End", static_cast<void(*)()>([]() {
                         Graphics::GUI::GUIWindow::End();
+                    }))
+                    .addStaticFunction("BeginChild", static_cast<void(*)(const std::string&)>([](const std::string& winName) {
+                        Graphics::GUI::GUIWindow::BeginChild(winName);
+                    }))
+                    .addStaticFunction("EndChild", static_cast<void(*)()>([]() {
+                        Graphics::GUI::GUIWindow::EndChild();
+                    }))
+                    .addStaticFunction("GetSize", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
+                        return Graphics::GUI::GUIWindow::GetWindowSize();
+                    }))
+                    .addStaticFunction("DrawTexture", static_cast<void(*)(glm::vec2, glm::vec2, unsigned int, bool)>(
+                            [](glm::vec2 winSize, glm::vec2 imgSize, unsigned int texID, bool center) {
+                        Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
                     }))
                 .endClass();
     });

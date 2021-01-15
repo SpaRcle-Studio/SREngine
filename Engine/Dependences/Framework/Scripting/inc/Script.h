@@ -14,6 +14,8 @@ extern "C" {
 
 #include <LuaBridge/LuaBridge.h>
 
+#include <stack>
+
 #include <functional>
 #include <string>
 #include <Debug.h>
@@ -30,6 +32,9 @@ namespace Framework::Scripting {
                 return this->script->ImportLibrary(name);
             }
             Script* LoadScript(const std::string& name, bool fromEngine) const;
+            //inline Script* GetPointer() const noexcept{
+            //    return script;
+            //}
         };
 
         friend class Compiler;
@@ -66,6 +71,8 @@ namespace Framework::Scripting {
         bool            m_isClose          = false;
 
         unsigned int    m_countUsePoints   = 0;
+
+        std::stack<void*> m_stack = std::stack<void*>();
     private:
         void CheckExistsFunctions();
     public:
@@ -78,6 +85,20 @@ namespace Framework::Scripting {
         bool Update();
         bool FixedUpdate();
         bool Close();
+
+        template<typename T> static inline void RegisterCasting(const std::string& className, lua_State*L){
+            luabridge::getGlobalNamespace(L)
+                    .beginNamespace("Stack")
+                    //.beginClass<Script>("Script")
+                        .addFunction(("Push"+className).c_str(), static_cast<void(*)(Script*, T)>([](Script*script, T type) {
+                            script->Push((void*)type);
+                        }))
+                        .addFunction(("Pop"+className).c_str(), static_cast<T(*)(Script::This*)>([](Script::This* aThis) -> T {
+                            return static_cast<T>(aThis->script->Pop());
+                        }))
+                    //.endClass();
+                    .endNamespace();
+        }
 
         [[nodiscard]] bool FunctionExists(const std::string& funName) noexcept;
 
@@ -115,7 +136,21 @@ namespace Framework::Scripting {
         }
 
         bool Call(const std::string& funName);
-        bool CallArgs(...);
+        inline void Push(void* data) {
+            //std::cout << data << std::endl;
+            m_stack.push(data);
+        }
+        void* Pop(){
+            void* value = m_stack.top();
+            m_stack.pop();
+            return value;
+        }
+        //inline bool CallArgs(const std::string& funName){
+        //    std::cout << "Call: " + funName + "\n";
+
+            //if (data1) std::cout << type1 << std::endl;
+           // if (data2) std::cout << type2 << std::endl;
+        //}
         //void* CallRet();
         //void* CallRetArgs(...);
 

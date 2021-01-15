@@ -111,6 +111,7 @@ namespace Framework::Graphics {
 
         virtual inline void SetCursorPosition(glm::vec2 pos) noexcept = 0;
 
+        virtual bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) = 0;
         virtual bool CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers) = 0;
         virtual bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) = 0;
         virtual inline void BindFrameBuffer(unsigned int FBO) const noexcept = 0;

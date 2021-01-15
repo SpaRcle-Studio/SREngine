@@ -59,11 +59,6 @@ namespace Framework::Scripting {
         return true;
     }
 
-    bool Script::CallArgs(...) {
-        // TODO
-        return false;
-    }
-
     void Script::CheckExistsFunctions() {
         this->m_hasInit         = FunctionExists("Init");
         this->m_hasAwake        = FunctionExists("Awake");
@@ -108,6 +103,7 @@ namespace Framework::Scripting {
             //} _this;
             //_this.script = this;
 
+
             luabridge::getGlobalNamespace(L)
                     .beginClass<lua_State>("LuaState")
                         //.addStaticProperty("L", L, false)
@@ -116,6 +112,7 @@ namespace Framework::Scripting {
                     .beginClass<Scripting::Script::This>("ScriptThisBridge")
                             .addFunction("ImportLib", (bool (Scripting::Script::This::*)(const std::string&))&Scripting::Script::This::ImportLib)
                             .addFunction("LoadScript", (Script* (Scripting::Script::This::*)(const std::string&, bool))&Scripting::Script::This::LoadScript)
+                           // .addFunction("GetPointer", (Script* (Scripting::Script::This::*)(void))&Scripting::Script::This::GetPointer)
                     .endClass()
 
                     .beginClass<Scripting::Script>("Script")
@@ -123,7 +120,17 @@ namespace Framework::Scripting {
                         .addFunction("Call",    (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
                         .addFunction("Close",   (bool (Scripting::Script::*)(void))&Scripting::Script::Close)
                         .addFunction("Destroy", (bool (Scripting::Script::*)(void))&Scripting::Script::Destroy)
+                        //.addFunction("CallArgs",    (bool (Scripting::Script::*)(const std::string&
+                         //       ))&Scripting::Script::CallArgs)
                     .endClass();
+
+            //Script::RegisterCasting<Script>("Script", L);
+            //luabridge::getGlobalNamespace(L)
+            //        .beginNamespace("Stack")
+             //           .addFunction("PushScript", static_cast<void(*)(Script*, int)>([](Script*script, int type) {
+            //                //script->Push((void*)&type);
+            //            }))
+             //       .endNamespace();
         }
 
         this->CheckExistsFunctions();
@@ -226,6 +233,9 @@ namespace Framework::Scripting {
         if (!m_isClose)
             Helper::Debug::Warn("Script::Destroy() : script is not closed!\n\tPath: \""+m_name+"\"");
 
+        if (!m_stack.empty())
+            Helper::Debug::Warn("Script::Destroy() : stack is not empty!\n\tPath: "+m_name+"\n\tCount elements: "+std::to_string(m_stack.size()));
+
         if (m_isDestroy) {
             Helper::Debug::Error("Script::Destroy() : script already destroyed!\n\tPath: \""+m_name+"\"");
             return false;
@@ -275,6 +285,7 @@ namespace Framework::Scripting {
             Helper::Debug::Script("Script::ImportLibrary(InternalCall) : importing \""+name+"\" library...");
             for (const auto& b : a)
                 b(L);
+
             return true;
         }
     }

@@ -1,3 +1,6 @@
+local sceneCamera;      -- Camera*
+local postProcessing;   -- PostProcessing*
+--local finallyTexture;   -- unsigned int
 
 function Inspector()
 
@@ -5,6 +8,12 @@ end;
 
 function Hierarchy()
 
+end;
+
+function SetCamera()
+    sceneCamera = Stack.PopCamera(Script.this);
+    postProcessing = sceneCamera:GetPostProcessing();
+    --finallyTexture = sceneCamera:GetPostProcessing():GetFinallyTexID();
 end;
 
 function Init()
@@ -21,9 +30,56 @@ end;
 function Draw()
     DockSpace.Begin();
 
-    GUIWindow.Begin("Scene");
+    if (not (sceneCamera == nil)) then
+        GUIWindow.Begin("Scene");
 
-    GUIWindow.End();
+        GUIWindow.BeginChild("Render");
+
+        GUIWindow.DrawTexture(
+            GUIWindow.GetSize(),
+            sceneCamera:GetSize(),
+            postProcessing:GetFinallyTexID(),
+            true
+        );
+
+        GUIWindow.EndChild();
+
+        GUIWindow.End();
+    end;
+
+    if (not (sceneCamera == nil)) then
+        GUIWindow.Begin("Bloom Mask");
+
+        GUIWindow.BeginChild("Render");
+
+        GUIWindow.DrawTexture(
+            GUIWindow.GetSize(),
+            sceneCamera:GetSize(),
+            postProcessing:GetBloomMask(),
+            true
+        );
+
+        GUIWindow.EndChild();
+
+        GUIWindow.End();
+    end;
+
+    if (not (sceneCamera == nil)) then
+        GUIWindow.Begin("Colored");
+
+        GUIWindow.BeginChild("Render");
+
+        GUIWindow.DrawTexture(
+            GUIWindow.GetSize(),
+            sceneCamera:GetSize(),
+            postProcessing:GetColoredImage(),
+            true
+        );
+
+        GUIWindow.EndChild();
+
+        GUIWindow.End();
+    end;
 end;
 
 function Close()

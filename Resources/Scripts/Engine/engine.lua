@@ -4,7 +4,8 @@ local camera;          -- GameObject*
 local render;          -- Render*
 local skybox;          -- Skybox*
 local cube;            -- GameObject*
-local cameraComp       -- Camera*;
+local cameraComp;      -- Camera*
+local editorGUIScript; -- Script*
 
 function LoadGeometry()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
@@ -51,13 +52,12 @@ function Init()
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
-    --editorGUIScript = Script.this:LoadScript("editor", true);
-
     scene  = Scene.Get();
     window = Window.Get();
     render = Render.Get();
 
-    window:SetCanvas(Canvas.Load("editor", true))
+    editorGUIScript = Script.this:LoadScript("editor", true);
+    window:SetCanvas(Canvas.Load(editorGUIScript))
 
     collectgarbage() -- collect memory
 end;
@@ -68,12 +68,18 @@ function Start ()
     skybox = Skybox.Load("Sea.jpg");
     render:SetSkybox(skybox);
 
-    --editorGUIScript:Call("Initialize");
-
     --------------------------------------
 
     LoadCamera();
     LoadGeometry();
+
+    -------------------------------------
+
+    Stack.PushCamera(editorGUIScript, cameraComp);
+    editorGUIScript:Call("SetCamera");
+
+    --Stack.PushCamera(Script.this, cameraComp);
+
 
     collectgarbage() -- collect memory
 end;

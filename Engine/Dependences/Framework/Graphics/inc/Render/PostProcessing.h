@@ -103,7 +103,15 @@ namespace Framework::Graphics {
         bool Begin();
         bool End();
 
-        unsigned int GetFinally() noexcept;
+        [[nodiscard]] inline unsigned int GetFinally() const noexcept {
+            return this->m_finalColorBuffer;
+        }
+        [[nodiscard]] inline unsigned int GetColoredImage() const noexcept {
+            return this->m_ColorBuffers[0];
+        }
+        [[nodiscard]] inline unsigned int GetBloomMask() const noexcept {
+            return this->m_ColorBuffers[1];
+        }
     };
 }
 

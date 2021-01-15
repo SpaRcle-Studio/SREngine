@@ -22,7 +22,10 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
         this->Calculate();
 
     if (m_needUpdate){
-        this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y);
+        if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
+            Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
+            return;
+        }
         m_needUpdate = false;
     }
 
