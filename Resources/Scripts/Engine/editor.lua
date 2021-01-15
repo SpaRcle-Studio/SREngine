@@ -95,6 +95,4 @@ end;
 
 function Close()
     Debug.Log("Close engine editor GUI...");
-
-    collectgarbage() -- collect memory
 end;
