@@ -52,8 +52,9 @@ namespace Framework::Graphics {
         size_t                  m_countTexturesToFree               = 0;
         std::vector<Texture*>   m_textureToFree                     = std::vector<Texture*>();
 
-        std::vector<Skybox*>    m_skyboxesToRemove                  = std::vector<Skybox*>();
-        size_t                  m_countSkyboxesToRemove             = 0;
+        //std::vector<Skybox*>    m_skyboxesToRemove                  = std::vector<Skybox*>();
+        //size_t                  m_countSkyboxesToRemove             = 0;
+        bool                    m_needDestroySkybox                 = false;
 
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;
@@ -77,7 +78,23 @@ namespace Framework::Graphics {
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
 
-        void RegisterSkyboxToRemove(Skybox* skybox);
+        //void RegisterSkyboxToRemove(Skybox* skybox);
+        inline bool DelayedDestroySkybox(){
+            if (!this->m_skybox){
+                Debug::Error("Render::DelayedDestroySkybox() : skybox already destroyed!");
+                return false;
+            }
+
+            if (m_needDestroySkybox){
+                Debug::Error("Render::DelayedDestroySkybox() : skybox already will bee destroyed!");
+                return false;
+            }
+
+            Debug::Graph("Render::DelayedDestroySkybox() : destroying skybox...");
+
+            this->m_needDestroySkybox = true;
+            return true;
+        }
 
         void RegisterTexture(Texture* texture);
         void FreeTexture(Texture* texture);

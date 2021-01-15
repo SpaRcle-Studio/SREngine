@@ -12,8 +12,13 @@ end;
 
 function SetCamera()
     sceneCamera = Stack.PopCamera(Script.this);
-    postProcessing = sceneCamera:GetPostProcessing();
+
+    if (not (sceneCamera == nil)) then
+        postProcessing = sceneCamera:GetPostProcessing();
+    end;
+
     --finallyTexture = sceneCamera:GetPostProcessing():GetFinallyTexID();
+    collectgarbage() -- collect memory
 end;
 
 function Init()
@@ -27,7 +32,7 @@ function Init()
     collectgarbage() -- collect memory
 end;
 
-function Draw()
+function Windows()
     DockSpace.Begin();
 
     if (not (sceneCamera == nil)) then
@@ -82,6 +87,14 @@ function Draw()
     end;
 end;
 
+function Draw()
+    Windows();
+
+    collectgarbage() -- collect memory
+end;
+
 function Close()
     Debug.Log("Close engine editor GUI...");
+
+    collectgarbage() -- collect memory
 end;

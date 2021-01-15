@@ -40,7 +40,7 @@ namespace Framework::Scripting {
         friend class Compiler;
     public:
         enum class Status {
-            Unknown, FileMissing, SuccessfullyLoad, RuntimeError, MemoryExhausted, SyntaxError, UnexpectedError, Compiled, Destroyed
+            Unknown, FileMissing, SuccessfullyLoad, RuntimeError, MemoryExhausted, SyntaxError, UnexpectedError, Compiled, Closed, Destroyed
         };
     private:
         ~Script();
@@ -75,6 +75,7 @@ namespace Framework::Scripting {
         std::stack<void*> m_stack = std::stack<void*>();
     private:
         void CheckExistsFunctions();
+        bool RegisterBaseTypes();
     public:
         // call only from lua
         bool ImportLibrary(const std::string& name);
@@ -116,7 +117,7 @@ namespace Framework::Scripting {
         [[nodiscard]] inline unsigned int GetCountUses() const noexcept { return m_countUsePoints; }
         inline bool AddUsePoint() noexcept {
             if (m_isDestroy) {
-                Helper::Debug::Error("Script::AddUsePoint() : script is destroyed! Some thing went wrong...\n\tPath: "+m_name);
+                Helper::Debug::Error("Script::AddUsePoint() : script is destroyed! Something went wrong...\n\tPath: "+m_name);
                 return false;
             } else {
                 this->m_countUsePoints++;
@@ -125,7 +126,7 @@ namespace Framework::Scripting {
         }
         inline bool RemoveUsePoint() noexcept {
             if (m_countUsePoints == 0){
-                Helper::Debug::Error("Script::RemoveUsePoint() : count uses point is equal zero! Some thing went wrong...\n\tPath: "+m_name);
+                Helper::Debug::Error("Script::RemoveUsePoint() : count uses point is equal zero! Something went wrong...\n\tPath: "+m_name);
                 return false;
             } else {
                 this->m_countUsePoints--;

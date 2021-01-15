@@ -341,6 +341,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetDiffuse", (void (Framework::Graphics::Material::*)(Graphics::Texture*))&Graphics::Material::SetDiffuse)
                     .addFunction("SetBloom", (void (Framework::Graphics::Material::*)(bool value))&Graphics::Material::SetBloom)
                     .addFunction("SetColor", (void (Framework::Graphics::Material::*)(glm::vec3))&Graphics::Material::SetColor)
+                    .addStaticFunction("RandomColor3", static_cast<glm::vec3(*)()>([]() -> glm::vec3 {
+                        return Graphics::Material::GetRandomColor();
+                    }))
                 .endClass();
     });
 
@@ -357,6 +360,7 @@ bool Framework::Engine::RegisterLibraries() {
                         }
                         return meshes[id];
                     }))
+                    .addFunction("Copy", (Framework::Graphics::Mesh* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::Copy)
                     .addFunction("Base", (Helper::Component* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::BaseComponent)
                     .addFunction("GetMaterial", (Graphics::Material* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::GetMaterial)
                 .endClass();

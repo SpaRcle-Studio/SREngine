@@ -37,6 +37,11 @@ namespace Framework::Scripting {
     }
 
     bool Script::Call(const std::string& funName) {
+        if (m_isClose){
+            Helper::Debug::Warn("Script::Call("+funName+") : script is close!\n\tPath: "+m_name);
+            return false;
+        }
+
         if (m_status == Status::RuntimeError)
             return false;
 
@@ -45,8 +50,10 @@ namespace Framework::Scripting {
             return false;
         }
 
-        //if (!m_isStart && m_hasStart)
-        //    return Start();
+        if (this->IsNeedInit())
+            this->Init();
+        if (this->IsNeedStart())
+            this->Start();
 
         r = lua_getglobal(L, funName.c_str());
         if (lua_pcall(L, 0, 0, 0)) {
@@ -96,43 +103,7 @@ namespace Framework::Scripting {
             fun(L);
         }
 
-        if (true){
-            //class This{
-            //public:
-            //    Script* script = nullptr;
-            //} _this;
-            //_this.script = this;
-
-
-            luabridge::getGlobalNamespace(L)
-                    .beginClass<lua_State>("LuaState")
-                        //.addStaticProperty("L", L, false)
-                    .endClass()
-
-                    .beginClass<Scripting::Script::This>("ScriptThisBridge")
-                            .addFunction("ImportLib", (bool (Scripting::Script::This::*)(const std::string&))&Scripting::Script::This::ImportLib)
-                            .addFunction("LoadScript", (Script* (Scripting::Script::This::*)(const std::string&, bool))&Scripting::Script::This::LoadScript)
-                           // .addFunction("GetPointer", (Script* (Scripting::Script::This::*)(void))&Scripting::Script::This::GetPointer)
-                    .endClass()
-
-                    .beginClass<Scripting::Script>("Script")
-                        .addStaticProperty("this", &m_thisBridge, false)
-                        .addFunction("Call",    (bool (Scripting::Script::*)(const std::string&))&Scripting::Script::Call)
-                        .addFunction("Close",   (bool (Scripting::Script::*)(void))&Scripting::Script::Close)
-                        .addFunction("Destroy", (bool (Scripting::Script::*)(void))&Scripting::Script::Destroy)
-                        //.addFunction("CallArgs",    (bool (Scripting::Script::*)(const std::string&
-                         //       ))&Scripting::Script::CallArgs)
-                    .endClass();
-
-            //Script::RegisterCasting<Script>("Script", L);
-            //luabridge::getGlobalNamespace(L)
-            //        .beginNamespace("Stack")
-             //           .addFunction("PushScript", static_cast<void(*)(Script*, int)>([](Script*script, int type) {
-            //                //script->Push((void*)&type);
-            //            }))
-             //       .endNamespace();
-        }
-
+        this->RegisterBaseTypes();
         this->CheckExistsFunctions();
 
         this->m_status = Status::Compiled;
@@ -225,6 +196,7 @@ namespace Framework::Scripting {
             return false;
         }
 
+        this->m_status = Status::Closed;
         this->m_isClose = true;
         return true;
     }
@@ -295,6 +267,34 @@ namespace Framework::Scripting {
         lua_getglobal(L, funName.c_str());
         lua_getinfo(L, ">S", &ar);
         return ar.linedefined != -1;
+    }
+
+    bool Script::RegisterBaseTypes() {
+        luabridge::getGlobalNamespace(L)
+                .beginClass<lua_State>("LuaState")
+                        //.addStaticProperty("L", L, false)
+                .endClass()
+
+                .beginClass<Scripting::Script::This>("ScriptThisBridge")
+                .addFunction("ImportLib", (bool (Scripting::Script::This::*)(
+                        const std::string &)) &Scripting::Script::This::ImportLib)
+                .addFunction("LoadScript", (Script *(Scripting::Script::This::*)(const std::string &,
+                                                                                 bool)) &Scripting::Script::This::LoadScript)
+                        // .addFunction("GetPointer", (Script* (Scripting::Script::This::*)(void))&Scripting::Script::This::GetPointer)
+                .endClass()
+
+                .beginClass<Scripting::Script>("Script")
+                .addStaticProperty("this", &m_thisBridge, false)
+                .addFunction("Call", (bool (Scripting::Script::*)(const std::string &)) &Scripting::Script::Call)
+                .addFunction("Close", (bool (Scripting::Script::*)(void)) &Scripting::Script::Close)
+                .addFunction("Destroy", (bool (Scripting::Script::*)(void)) &Scripting::Script::Destroy)
+                        //.addFunction("CallArgs",    (bool (Scripting::Script::*)(const std::string&
+                        //       ))&Scripting::Script::CallArgs)
+                .endClass();
+
+        Framework::Scripting::Script::RegisterCasting<bool>("Bool", L);
+
+        return true;
     }
 
     Script*  Script::This::LoadScript(const std::string &name, bool fromEngine) const {

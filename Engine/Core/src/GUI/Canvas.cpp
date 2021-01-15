@@ -10,7 +10,11 @@ Framework::Canvas::Canvas(Scripting::Script* script) {
 }
 
 bool Framework::Canvas::Close() {
+    m_mutex.lock();
+
     Helper::Debug::Graph("Canvas::Close() : close canvas...");
+
+    this->m_isClosed = true;
 
     if (m_script->IsDestroy()) {
         if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
@@ -24,6 +28,8 @@ bool Framework::Canvas::Close() {
         m_script->Destroy();
     }
 
+    m_mutex.unlock();
+
     return true;
 }
 
@@ -34,21 +40,39 @@ bool Framework::Canvas::Free() {
 }
 
 void Framework::Canvas::Draw() {
+    m_mutex.lock();
+
+    if (m_script->GetStatus() != Scripting::Script::Status::Compiled) {
+        m_mutex.unlock();
+        return;
+    }
+
+    if (m_isClosed){
+        Helper::Debug::Warn("Canvas::Draw() : canvas is closed!");
+        m_mutex.unlock();
+        return;
+    }
+
+    m_script->AddUsePoint();
+
     if (m_script->GetStatus() == Scripting::Script::Status::Compiled) {
         if (!m_isInit) {
             this->Init();
         }
 
-        if (m_hasDraw)
-            m_script->Call("Draw");
+        if (m_hasDraw) m_script->Call("Draw");
     }
+
+    m_script->RemoveUsePoint();
+
+    m_mutex.unlock();
 }
 
 bool Framework::Canvas::Init() {
-    if (m_script->IsNeedInit())
-        m_script->Init();
-    if (m_script->IsNeedStart())
-        m_script->Start();
+    //if (m_script->IsNeedInit())
+    //    m_script->Init();
+    //if (m_script->IsNeedStart())
+     //   m_script->Start();
 
     this->m_hasDraw = this->m_script->FunctionExists("Draw");
 

@@ -99,7 +99,7 @@ bool Framework::Graphics::Types::Skybox::AwaitDestroy() {
         Debug::Log("Skybox::AwaitDestory() : destroying skybox...");
 
     if (m_isCalculated) {
-        this->m_render->RegisterSkyboxToRemove(this);
+        this->m_render->DelayedDestroySkybox();
         ret:
         if (!this->m_isVideoFree && m_render->GetWindow()->IsWindowOpen())
             goto ret;
@@ -111,6 +111,10 @@ bool Framework::Graphics::Types::Skybox::AwaitDestroy() {
 
 bool Framework::Graphics::Types::Skybox::Free() {
     Debug::Log("Skybox::Free() : free skybox pointer...");
+
+    if (!m_isVideoFree){
+        Debug::Warn("Skybox::Free() : video memory is not free!");
+    }
 
     if (m_isDestroy) {
         delete this;

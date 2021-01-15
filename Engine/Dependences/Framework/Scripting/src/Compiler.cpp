@@ -70,7 +70,7 @@ void Framework::Scripting::Compiler::UpdateAll() {
 }
 
 void Framework::Scripting::Compiler::DestroyScript(Framework::Scripting::Script *script) {
-    Helper::Debug::Log("Compiler::DestroyScript() : register script to destroy...");
+    Helper::Debug::Log("Compiler::DestroyScript() : register script to destroy...\n\tPath: "+script->m_name);
 
     m_mutex_destroy.lock();
 

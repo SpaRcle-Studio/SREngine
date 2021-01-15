@@ -3,24 +3,36 @@ local window;          -- Window*
 local camera;          -- GameObject*
 local render;          -- Render*
 local skybox;          -- Skybox*
-local cube;            -- GameObject*
+--local cube;            -- GameObject*
 local cameraComp;      -- Camera*
 local editorGUIScript; -- Script*
 
 function LoadGeometry()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
+    local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    cube = scene:Instance("Cube");
-        local cubeMesh = Mesh.Load("cube.obj", 0);
-        render:RegisterMesh(cubeMesh);
+    for i = 0, 1000, 1 do
+        local cube = scene:Instance("Cube");
+        local mesh;
 
-        cubeMesh:GetMaterial():SetBloom(true);
-        cubeMesh:GetMaterial():SetDiffuse(texture);
-        cubeMesh:GetMaterial():SetColor(Vector3.New(6,4,4));
+        if (i == 0) then
+            mesh = cubeMesh;
+        else
+            mesh = cubeMesh:Copy();
+        end;
 
-        cube:AddComponent(cubeMesh:Base());
-        cube:GetTransform():Translate(Vector3.FMul(cube:GetTransform():Forward(), 8.0));
+        render:RegisterMesh(mesh);
+
+        mesh:GetMaterial():SetBloom(true);
+        mesh:GetMaterial():SetDiffuse(texture);
+        mesh:GetMaterial():SetColor(Vector3.FMul(Material.RandomColor3(), 6.0));
+
+        cube:AddComponent(mesh:Base());
+        cube:GetTransform():Translate(Vector3.FMul(cube:GetTransform():Forward(), 8.0 * (i + 1)));
+    end;
+
+
 
     collectgarbage() -- collect memory
 end;
@@ -126,13 +138,16 @@ function Close()
     --editorGUIScript:Close();
     --editorGUIScript:Destroy();
 
-    if (not (scene == nil)) then
-        scene:Destroy();
-    end;
+    Stack.PushCamera(editorGUIScript, nil);
+    editorGUIScript:Call("SetCamera"); -- TODO: TEMP SOLUTION!!!!
 
     if (not (skybox == nil)) then
         skybox:AwaitDestroy();
         skybox:Free();
+    end;
+
+    if (not (scene == nil)) then
+        scene:Destroy();
     end;
 
     collectgarbage() -- collect memory

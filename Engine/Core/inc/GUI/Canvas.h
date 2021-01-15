@@ -7,6 +7,7 @@
 
 #include <GUI/ICanvas.h>
 #include <Script.h>
+#include <mutex>
 
 namespace Framework {
     class Canvas : public Graphics::GUI::ICanvas {
@@ -15,8 +16,10 @@ namespace Framework {
     protected:
         bool Init() override;
     private:
+        bool                m_isClosed = false;
         bool                m_hasDraw = false;
         Scripting::Script*  m_script  = nullptr;
+        std::mutex          m_mutex = std::mutex();
     public:
         // Call only from camera or window
         bool Close() override;

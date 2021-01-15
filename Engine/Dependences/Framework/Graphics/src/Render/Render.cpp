@@ -235,7 +235,7 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
         m_countTexturesToFree = 0;
     }
 
-    if (m_countSkyboxesToRemove){
+    /*if (m_countSkyboxesToRemove){
         for (m_t = 0; m_t < m_countSkyboxesToRemove; m_t++) {
             Debug::Log("Render::PoolEvents() : free skybox video memory...");
             if (!m_skyboxesToRemove[m_t]->FreeVideoMemory())
@@ -246,6 +246,18 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
         m_skyboxesToRemove.clear();
         m_countSkyboxesToRemove = 0;
+        m_skybox = nullptr;
+    }*/
+    if (m_needDestroySkybox){
+        Debug::Log("Render::PoolEvents() : free skybox video memory...");
+        if (!m_skybox->FreeVideoMemory())
+            Debug::Error("Render::PoolEvents() : failed free skybox video memory!");
+        else
+            m_skybox->SetIsVideoFree(true);
+
+        m_skybox = nullptr;
+
+        m_needDestroySkybox = false;
     }
 
     m_mutex.unlock();
@@ -282,7 +294,7 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
     texture->AddUsePoint();
     texture->SetRender(this);
 }
-
+/*
 void Framework::Graphics::Render::RegisterSkyboxToRemove(Framework::Graphics::Types::Skybox *skybox) {
     m_mutex.lock();
 
@@ -293,3 +305,4 @@ void Framework::Graphics::Render::RegisterSkyboxToRemove(Framework::Graphics::Ty
 
     m_mutex.unlock();
 }
+*/

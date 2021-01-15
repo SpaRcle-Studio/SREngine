@@ -9,7 +9,8 @@
 #include <Debug.h>
 
 Framework::Helper::GameObject *Framework::Helper::Scene::Instance(std::string name) {
-    Debug::Log("Scene::Instance() : instance \""+name+"\" game object at \""+m_name+ "\" scene.");
+    if (Debug::GetLevel() >= Debug::Level::Medium)
+        Debug::Log("Scene::Instance() : instance \""+name+"\" game object at \""+m_name+ "\" scene.");
 
     GameObject* gm = new GameObject(this, std::move(name));
 
