@@ -55,6 +55,10 @@ namespace Framework::Graphics {
 
         volatile bool             m_bloom                       = true;
 
+        unsigned int              m_skyboxRBO                   = 0;
+        unsigned int              m_skyboxFBO                   = 0;
+        unsigned int              m_skyboxColorBuffer           = 0;
+
         unsigned int              m_finalRBO                    = 0;
         unsigned int              m_finalFBO                    = 0;
         unsigned int              m_finalColorBuffer            = 0;
@@ -100,6 +104,9 @@ namespace Framework::Graphics {
 
         bool ReCalcFrameBuffers(int w, int h);
 
+        void BeginSkybox();
+        void EndSkybox();
+
         bool Begin();
         bool End();
 
@@ -111,6 +118,9 @@ namespace Framework::Graphics {
         }
         [[nodiscard]] inline unsigned int GetBloomMask() const noexcept {
             return this->m_ColorBuffers[1];
+        }
+        [[nodiscard]] inline unsigned int GetBlurBloomMask() const noexcept {
+            return m_PingPongColorBuffers[0];
         }
     };
 }

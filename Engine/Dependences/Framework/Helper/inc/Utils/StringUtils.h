@@ -103,6 +103,11 @@ namespace Framework::Helper {
             }
             return nullptr;
         }
+
+        inline static bool Contains(const std::string& str, const std::string& word) noexcept {
+            return str.find(word) != std::string::npos;
+        }
+
         inline static float* SplitFloats(const char* source, char chr, unsigned short start, unsigned short count_floats) {
             auto*			floats			= new float[count_floats];
             unsigned char   found_floats	= 0;

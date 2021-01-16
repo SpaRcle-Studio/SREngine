@@ -1,6 +1,7 @@
 local sceneCamera;      -- Camera*
 local postProcessing;   -- PostProcessing*
---local finallyTexture;   -- unsigned int
+--local finallyTexture; -- unsigned int
+local enabled;          -- Bool
 
 function Inspector()
 
@@ -8,6 +9,10 @@ end;
 
 function Hierarchy()
 
+end;
+
+function Enabled()
+    enabled = Stack.PopBool(Script.this);
 end;
 
 function SetCamera()
@@ -29,6 +34,8 @@ function Init()
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
+    enabled = true;
+
     collectgarbage() -- collect memory
 end;
 
@@ -43,7 +50,7 @@ function Windows()
         GUIWindow.DrawTexture(
             GUIWindow.GetSize(),
             sceneCamera:GetSize(),
-            postProcessing:GetFinallyTexID(),
+            postProcessing:GetFinalTextureID(),
             true
         );
 
@@ -61,6 +68,41 @@ function Windows()
             GUIWindow.GetSize(),
             sceneCamera:GetSize(),
             postProcessing:GetBloomMask(),
+            true
+        );
+
+        GUIWindow.EndChild();
+
+        GUIWindow.End();
+    end;
+
+
+    if (not (sceneCamera == nil)) then
+        GUIWindow.Begin("Skybox");
+
+        GUIWindow.BeginChild("Render");
+
+        GUIWindow.DrawTexture(
+            GUIWindow.GetSize(),
+            sceneCamera:GetSize(),
+            3,
+            true
+        );
+
+        GUIWindow.EndChild();
+
+        GUIWindow.End();
+    end;
+
+    if (not (sceneCamera == nil)) then
+        GUIWindow.Begin("Blur Bloom Mask");
+
+        GUIWindow.BeginChild("Render");
+
+        GUIWindow.DrawTexture(
+            GUIWindow.GetSize(),
+            sceneCamera:GetSize(),
+            6,
             true
         );
 
@@ -88,7 +130,9 @@ function Windows()
 end;
 
 function Draw()
-    Windows();
+    if (enabled) then
+        Windows();
+    end;
 
     collectgarbage() -- collect memory
 end;

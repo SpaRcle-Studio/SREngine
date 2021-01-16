@@ -43,6 +43,11 @@ bool Framework::Graphics::PostProcessing::Begin() {
 }
 
 void Framework::Graphics::PostProcessing::BlurBloom() {
+    m_env->BindFrameBuffer(m_PingPongFrameBuffers[0]);
+    m_env->ClearBuffers();
+    m_env->BindFrameBuffer(m_PingPongFrameBuffers[1]);
+    m_env->ClearBuffers();
+
     m_env->BindFrameBuffer(0);
 
     m_horizontal = true; m_firstIteration = true;
@@ -94,8 +99,12 @@ bool Framework::Graphics::PostProcessing::End() {
         } else {
             m_env->BindTexture(0, m_ColorBuffers[0]);
             m_postProcessingShader->SetInt("scene", 0);
+
             m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
             m_postProcessingShader->SetInt("bloomBlur", 1);
+
+            m_env->BindTexture(2, m_skyboxColorBuffer);
+            m_postProcessingShader->SetInt("skybox", 2);
         }
     }else {
         m_env->BindTexture(0, m_ColorBuffers[0]);
@@ -121,6 +130,10 @@ bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
         return false;
     }
 
+    if (!m_env->CreateSingleHDRFrameBO({w, h}, m_skyboxRBO, m_skyboxFBO, m_skyboxColorBuffer)) {
+        return false;
+    }
+
     if (!m_env->CreateHDRFrameBufferObject({w, h}, m_RBODepth, m_HDRFrameBufferObject, m_ColorBuffers)) {
         return false;
     }
@@ -138,3 +151,15 @@ bool Framework::Graphics::PostProcessing::Destroy() {
 
     return false;
 }
+
+void Framework::Graphics::PostProcessing::BeginSkybox() {
+    m_env->BindFrameBuffer(this->m_skyboxFBO);
+    //m_env->BindFrameBuffer(this->m_finalFBO);
+    m_env->ClearBuffers();
+}
+
+void Framework::Graphics::PostProcessing::EndSkybox() {
+    m_env->BindFrameBuffer(0);
+}
+
+

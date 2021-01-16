@@ -47,7 +47,7 @@ function LoadCamera()
 
     cameraComp:GetPostProcessing():SetBloomIntensity(3.0);
     cameraComp:GetPostProcessing():SetBloomAmount(10);
-    cameraComp:GetPostProcessing():SetGamma(0.9);
+    cameraComp:GetPostProcessing():SetGamma(0.8);
 
     camera:AddComponent(cameraComp:Base());
 
@@ -126,7 +126,11 @@ function Update()
     MouseUpdate();
 
     if (Input.GetKeyDown(KeyCode.P)) then
-        cameraComp:SetDirectOutput(not cameraComp:IsDirectOutput());
+        local enabled = cameraComp:IsDirectOutput();
+        cameraComp:SetDirectOutput(not enabled);
+
+        Stack.PushBool(editorGUIScript, enabled);
+        editorGUIScript:Call("Enabled");
     end;
 
     collectgarbage() -- collect memory

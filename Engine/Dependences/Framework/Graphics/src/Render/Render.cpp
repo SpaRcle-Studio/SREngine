@@ -23,12 +23,21 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
     return true;
 }
 
-bool Framework::Graphics::Render::DrawSkybox() noexcept {
+void Framework::Graphics::Render::UpdateSkybox() noexcept {
     if (m_skybox)
     {
         m_skyboxShader->Use();
         m_currentCamera->UpdateShader(m_skyboxShader);
         m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
+    }
+}
+
+bool Framework::Graphics::Render::DrawSkybox() noexcept {
+    if (m_skybox)
+    {
+        //m_skyboxShader->Use();
+        //m_currentCamera->UpdateShader(m_skyboxShader);
+        //m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
         m_skybox->Draw();
     }
 
@@ -249,7 +258,7 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
         m_skybox = nullptr;
     }*/
     if (m_needDestroySkybox){
-        Debug::Log("Render::PoolEvents() : free skybox video memory...");
+        Debug::Graph("Render::PoolEvents() : free skybox video memory...");
         if (!m_skybox->FreeVideoMemory())
             Debug::Error("Render::PoolEvents() : failed free skybox video memory!");
         else
@@ -294,6 +303,8 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
     texture->AddUsePoint();
     texture->SetRender(this);
 }
+
+
 /*
 void Framework::Graphics::Render::RegisterSkyboxToRemove(Framework::Graphics::Types::Skybox *skybox) {
     m_mutex.lock();

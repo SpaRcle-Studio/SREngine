@@ -114,6 +114,7 @@ namespace Framework::Graphics {
         /** \brief Check all render events. For example: new meshes, remove old meshes */
         void PoolEvents()               noexcept;
         bool DrawGeometry()             noexcept;
+        void UpdateSkybox()             noexcept;
         bool DrawSkybox()               noexcept;
         bool DrawTransparentGeometry()  noexcept;
     };

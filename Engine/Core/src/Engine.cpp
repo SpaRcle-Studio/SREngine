@@ -375,9 +375,10 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetBloom", (void (Framework::Graphics::PostProcessing::*)(bool))&Graphics::PostProcessing::SetBloom)
                     .addFunction("SetGamma", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetGamma)
                     .addFunction("SetExposure", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetExposure)
-                    .addFunction("GetFinallyTexID", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetFinally)
+                    .addFunction("GetFinalTextureID", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetFinally)
                     .addFunction("GetColoredImage", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetColoredImage)
                     .addFunction("GetBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBloomMask)
+                    .addFunction("GetBlurBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBlurBloomMask)
                 .endClass();
     });
 

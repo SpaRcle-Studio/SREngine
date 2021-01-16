@@ -272,7 +272,7 @@ bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *
         //?===========================================[ ERRORS ]==============================================
         if (InfoLogLength != 0) {
             std::vector<char> VertexShaderErrorMessage(InfoLogLength);
-            glGetShaderInfoLog(*vertex, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+            glGetShaderInfoLog(*vertex, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
             if (VertexShaderErrorMessage.size() > 10)
                 Debug::Error("OpenGL::CompileShader : Failed compiling vertex shader!\n\tReason : " + std::string(VertexShaderErrorMessage.data()));
         }
@@ -282,7 +282,7 @@ bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *
     {
         // Компилируем фрагментный шейдер
         char const* FragmentSourcePointer = FragmentShaderCode.c_str();
-        glShaderSource(*fragment, 1, &FragmentSourcePointer, NULL);
+        glShaderSource(*fragment, 1, &FragmentSourcePointer, nullptr);
         glCompileShader(*fragment);
 
         // Устанавливаем параметры
@@ -292,9 +292,17 @@ bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *
         //?===========================================[ ERRORS ]==============================================
         if (InfoLogLength != 0) {
             std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
-            glGetShaderInfoLog(*fragment, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-            if (FragmentShaderErrorMessage.size() > 10)
-                Debug::Error("OpenGL::CompileShader : Failed compiling fragment shader!\n\tReason : " + std::string(FragmentShaderErrorMessage.data()));
+            glGetShaderInfoLog(*fragment, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
+            if (FragmentShaderErrorMessage.size() > 10) {
+                bool isError = StringUtils::Contains(std::string(FragmentShaderErrorMessage.data()), "error");
+
+                if (isError)
+                    Debug::Error("OpenGL::CompileShader() : Failed compiling fragment shader!\n\tReason : " +
+                                 std::string(FragmentShaderErrorMessage.data()));
+                else
+                    Debug::Warn("OpenGL::CompileShader() : There are warnings in the shader!\n\tReason: " +
+                                 std::string(FragmentShaderErrorMessage.data()));
+            }
         }
         //?===================================================================================================
     }
@@ -436,6 +444,19 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBufferObject(
     }
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    if (isNew){
+        std::string PingPongFBOBufs = "\n\tPingPongFBO: ";
+        for (size_t t = 0; t < pingpongFBO.size(); t++)
+            PingPongFBOBufs += std::to_string(pingpongFBO[t]) + (t+1 == pingpongFBO.size() ? "" : ",");
+
+        std::string PingPongColorBufs = "\n\tPingPongColorBuffers: ";
+        for (size_t t = 0; t < pingpongColorBuffers.size(); t++)
+            PingPongColorBufs += std::to_string(pingpongColorBuffers[t]) + (t+1 == pingpongColorBuffers.size() ? "" : ",");
+
+        Debug::Log("OpenGL::CreateHDRFrameBufferObject() : successful!"+PingPongFBOBufs+PingPongColorBufs);
+    }
+
     return true;
 }
 
@@ -637,7 +658,8 @@ bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigne
         glGenTextures(1, &colorBuffer);
 
     glBindTexture(GL_TEXTURE_2D, colorBuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, size.x, size.y, 0, GL_RGBA, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);

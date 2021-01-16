@@ -188,7 +188,7 @@ void Framework::Graphics::Window::Thread() {
 
         this->PoolEvents();
 
-        this->m_env->ClearColorBuffers(0.2, 0.2, 0.2, 1.0);
+        //this->m_env->ClearColorBuffers(0.2, 0.2, 0.2, 0.5);
         this->m_env->ClearBuffers();
 
         this->m_render->PoolEvents();
@@ -201,18 +201,29 @@ void Framework::Graphics::Window::Thread() {
 
             this->m_render->SetCurrentCamera(camera);
 
+            camera->GetPostProcessing()->BeginSkybox();
+            {
+                this->m_render->UpdateSkybox();
+                this->m_render->DrawSkybox();
+            }
+            camera->GetPostProcessing()->EndSkybox();
+
             camera->GetPostProcessing()->Begin();
             {
                 // some drawing code
                 // this is window context
 
-                this->m_render->DrawSkybox();
-
                 this->m_render->DrawGeometry();
+
+                //this->m_render->UpdateSkybox();
+                //this->m_render->DrawSkybox();
 
                 this->m_render->DrawTransparentGeometry();
             }
             camera->GetPostProcessing()->End();
+
+            //this->m_render->UpdateSkybox();
+            //this->m_render->DrawSkybox();
         }
 
         if (m_canvas)
