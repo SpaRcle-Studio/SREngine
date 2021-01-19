@@ -4,6 +4,7 @@
 
 #include "../inc/Script.h"
 #include <Compiler.h>
+#include <glm/glm.hpp>
 
 namespace Framework::Scripting {
     Script::Script(const std::string &path, Compiler* compiler) : Helper::Component("Script"), m_name(path) {
@@ -50,6 +51,14 @@ namespace Framework::Scripting {
             return false;
         }
 
+        if (m_callingNow){
+            Helper::Debug::Warn("Script::Call() : script already calling! Decline.\n\tPath: "+m_name);
+            return false;
+        } else
+            m_callingNow = true;
+
+        m_currentFunName = funName;
+
         if (this->IsNeedInit())
             this->Init();
         if (this->IsNeedStart())
@@ -61,8 +70,13 @@ namespace Framework::Scripting {
 
             Helper::Debug::Error("Script::Call() : failed call \""+funName+"()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
+            m_callingNow = false;
             return false;
         }
+        m_callingNow = false;
+
+        m_currentFunName = "Unnamed";
+
         return true;
     }
 
@@ -205,16 +219,23 @@ namespace Framework::Scripting {
         if (!m_isClose)
             Helper::Debug::Warn("Script::Destroy() : script is not closed!\n\tPath: \""+m_name+"\"");
 
+        this->m_status = Status::Destroyed;
+
         if (!m_stack.empty())
             Helper::Debug::Warn("Script::Destroy() : stack is not empty!\n\tPath: "+m_name+"\n\tCount elements: "+std::to_string(m_stack.size()));
+
+        if (m_callingNow) {
+            Helper::Debug::Error("Script::Destroy() : Script calling \""+m_currentFunName+"\" function now! Unresolved situation! Wait...\n\tPath: "+m_name);
+            ret:
+            if (m_callingNow)
+                goto ret;
+        }
 
         if (m_isDestroy) {
             Helper::Debug::Error("Script::Destroy() : script already destroyed!\n\tPath: \""+m_name+"\"");
             return false;
         } else
             Helper::Debug::Log("Script::Destroy() : destroying script...\n\tPath: \""+m_name+"\"");
-
-        this->m_status = Status::Destroyed;
 
         if (L) {
             Helper::Debug::Log("Script::Destroy() : close lua state...");
@@ -284,15 +305,16 @@ namespace Framework::Scripting {
                 .endClass()
 
                 .beginClass<Scripting::Script>("Script")
-                .addStaticProperty("this", &m_thisBridge, false)
-                .addFunction("Call", (bool (Scripting::Script::*)(const std::string &)) &Scripting::Script::Call)
-                .addFunction("Close", (bool (Scripting::Script::*)(void)) &Scripting::Script::Close)
-                .addFunction("Destroy", (bool (Scripting::Script::*)(void)) &Scripting::Script::Destroy)
-                        //.addFunction("CallArgs",    (bool (Scripting::Script::*)(const std::string&
-                        //       ))&Scripting::Script::CallArgs)
+                    .addStaticProperty("this", &m_thisBridge, false)
+                    .addFunction("Call", (bool (Scripting::Script::*)(const std::string &)) &Scripting::Script::Call)
+                    .addFunction("Close", (bool (Scripting::Script::*)(void)) &Scripting::Script::Close)
+                    .addFunction("Destroy", (bool (Scripting::Script::*)(void)) &Scripting::Script::Destroy)
+                            //.addFunction("CallArgs",    (bool (Scripting::Script::*)(const std::string&
+                            //       ))&Scripting::Script::CallArgs)
                 .endClass();
 
         Framework::Scripting::Script::RegisterCasting<bool>("Bool", L);
+        //Framework::Scripting::Script::RegisterCasting<int>("Int", L);
 
         return true;
     }

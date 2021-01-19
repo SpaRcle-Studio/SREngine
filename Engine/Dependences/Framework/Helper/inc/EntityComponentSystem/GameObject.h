@@ -34,16 +34,22 @@ namespace Framework::Helper {
     public:
         nlohmann::json Save();
     public:
+        void SetName(const std::string& name);
         /** \brief Get first needed component */
         Component* GetComponent(std::string name);
-        std::vector<Component*> GetComponents(std::string name);
+        std::vector<Component*> GetComponents(const std::string& name);
         bool AddComponent(Component* component);
         bool AddChild(GameObject* child);
+        [[nodiscard]] inline std::vector<GameObject*> GetChildren() const noexcept { return this->m_children; }
+        [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
+        [[nodiscard]] inline std::string GetName() const noexcept { return this->m_name; }
+        bool Contains(GameObject* child);
     private:
         //std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
 
         GameObject*                             m_parent        = nullptr;
-        std::map<GameObject*, GameObject*>      m_children      = std::map<GameObject*, GameObject*>();
+        //std::map<GameObject*, GameObject*>      m_children      = std::map<GameObject*, GameObject*>();
+        std::vector<GameObject*>                m_children      = std::vector<GameObject*>();
 
         bool                                    m_isDestroy     = false;
 

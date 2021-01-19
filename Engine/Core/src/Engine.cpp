@@ -175,6 +175,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addStaticFunction("FromFloat", static_cast<std::string(*)(float)>([](float f) -> std::string {
                         return std::to_string(f);
                     }))
+                    .addStaticFunction("FromBool", static_cast<std::string(*)(bool)>([](bool b) -> std::string {
+                        return b ? "true" : "false";
+                    }))
                 .endClass();
     });
 
@@ -198,6 +201,9 @@ bool Framework::Engine::RegisterLibraries() {
         static int S                = (int)KeyCode::S;
         static int W                = (int)KeyCode::W;
         static int P                = (int)KeyCode::P;
+        static int B                = (int)KeyCode::B;
+        static int E                = (int)KeyCode::E;
+        static int F                = (int)KeyCode::F;
         static int Space            = (int)KeyCode::Space;
         static int LShift           = (int)KeyCode::LShift;
 
@@ -211,6 +217,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addProperty("S",               &S,                   false)
                     .addProperty("W",               &W,                   false)
                     .addProperty("P",               &P,                   false)
+                    .addProperty("B",               &B,                   false)
+                    .addProperty("E",               &E,                   false)
+                    .addProperty("F",               &F,                   false)
                     .addProperty("Space",           &Space,               false)
                     .addProperty("LShift",          &LShift,              false)
                 .endNamespace();
@@ -318,6 +327,7 @@ bool Framework::Engine::RegisterLibraries() {
                 .beginClass<Helper::GameObject>("GameObject")
                     .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
                     .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
+                    .addFunction("AddChild", (bool (Framework::Helper::GameObject::*)(Helper::GameObject*))&Helper::GameObject::AddChild)
                 .endClass();
     });
 
@@ -331,6 +341,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
                     .addFunction("DestroyGM", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::DestroyGameObject)
                     .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Destroy)
+                    .addFunction("Print", (void (Framework::Helper::Scene::*)(void))&Helper::Scene::Print)
                 .endClass();
     });
 
@@ -373,6 +384,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetBloomIntensity", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetBloomIntensity)
                     .addFunction("SetBloomAmount", (void (Framework::Graphics::PostProcessing::*)(int))&Graphics::PostProcessing::SetBloomAmount)
                     .addFunction("SetBloom", (void (Framework::Graphics::PostProcessing::*)(bool))&Graphics::PostProcessing::SetBloom)
+                    .addFunction("GetBloomEnabled", (bool (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBloomEnabled)
                     .addFunction("SetGamma", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetGamma)
                     .addFunction("SetExposure", (void (Framework::Graphics::PostProcessing::*)(float))&Graphics::PostProcessing::SetExposure)
                     .addFunction("GetFinalTextureID", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetFinally)
@@ -396,6 +408,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetDirectOutput", (void (Framework::Graphics::Camera::*)(bool value))&Graphics::Camera::SetDirectOutput)
                     .addFunction("IsDirectOutput", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::IsDirectOutput)
                     .addFunction("GetSize", (glm::vec2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
+                    .addFunction("WaitCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitCalculate)
                 .endClass();
         Scripting::Script::RegisterCasting<Graphics::Camera*>("Camera", L);
     });
@@ -467,6 +480,8 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
                     .addFunction("DestroyCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::DestroyCamera)
                     .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)
+                    .addFunction("GetWindowSize", (glm::vec2 (Framework::Graphics::Window::*)(void))&Graphics::Window::GetWindowSize)
+                    .addFunction("SetGUIEnabled", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetGUIEnabled)
                 .endClass();
     });
 
@@ -537,6 +552,10 @@ bool Framework::Engine::RegisterLibraries() {
                     .addStaticFunction("DrawTexture", static_cast<void(*)(glm::vec2, glm::vec2, unsigned int, bool)>(
                             [](glm::vec2 winSize, glm::vec2 imgSize, unsigned int texID, bool center) {
                         Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
+                    }))
+                    .addStaticFunction("DrawHierarchy", static_cast<void(*)(Helper::Scene*)>([](Helper::Scene*scene) {
+                        bool isChanged = scene->IsChanged();
+
                     }))
                 .endClass();
     });

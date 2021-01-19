@@ -1,6 +1,7 @@
 //
 // Created by Nikita on 19.11.2020.
 //
+#include <easy/profiler.h>
 
 #include "Render/PostProcessing.h"
 
@@ -11,7 +12,7 @@
 using namespace Framework::Helper;
 
 bool Framework::Graphics::PostProcessing::Init(Render* render) {
-    if (m_isInit){
+    if (m_isInit) {
         Debug::Error("PostProcessing::Init() : post processing already initialize!");
         return false;
     }
@@ -43,10 +44,10 @@ bool Framework::Graphics::PostProcessing::Begin() {
 }
 
 void Framework::Graphics::PostProcessing::BlurBloom() {
-    m_env->BindFrameBuffer(m_PingPongFrameBuffers[0]);
-    m_env->ClearBuffers();
-    m_env->BindFrameBuffer(m_PingPongFrameBuffers[1]);
-    m_env->ClearBuffers();
+    //m_env->BindFrameBuffer(m_PingPongFrameBuffers[0]);
+    //m_env->ClearBuffers();
+    //m_env->BindFrameBuffer(m_PingPongFrameBuffers[1]);
+    //m_env->ClearBuffers();
 
     m_env->BindFrameBuffer(0);
 
@@ -74,8 +75,23 @@ void Framework::Graphics::PostProcessing::BlurBloom() {
 }
 
 bool Framework::Graphics::PostProcessing::End() {
-    if (m_bloom)
+    if (m_bloom){
         this->BlurBloom();
+        if (m_bloomClear)
+            m_bloomClear = false;
+    }
+    else if (!m_bloomClear) {
+        m_env->BindFrameBuffer(m_PingPongFrameBuffers[0]);
+        m_env->ClearColorBuffers(0,0,0,0);
+        m_env->ClearBuffers();
+        m_env->BindFrameBuffer(m_PingPongFrameBuffers[1]);
+        m_env->ClearColorBuffers(0,0,0,0);
+        m_env->ClearBuffers();
+
+        m_env->BindFrameBuffer(0);
+
+        m_bloomClear = true;
+    }
 
     if (m_camera->IsDirectOutput())
         m_env->BindFrameBuffer(0);
@@ -91,12 +107,12 @@ bool Framework::Graphics::PostProcessing::End() {
         m_postProcessingShader->SetFloat("exposure", m_exposure);
     }
 
-    if (m_bloom) {
-        if (m_debugDisplayBloomMask) {
-            m_postProcessingShader->SetInt("scene", 0);
-            m_env->BindTexture(1, m_ColorBuffers[1]);
-            m_postProcessingShader->SetInt("bloomBlur", 1);
-        } else {
+    /*if (m_bloom) {
+        //if (m_debugDisplayBloomMask) {
+        //    m_postProcessingShader->SetInt("scene", 0);
+        //    m_env->BindTexture(1, m_ColorBuffers[1]);
+        //    m_postProcessingShader->SetInt("bloomBlur", 1);
+        //} else {
             m_env->BindTexture(0, m_ColorBuffers[0]);
             m_postProcessingShader->SetInt("scene", 0);
 
@@ -105,11 +121,29 @@ bool Framework::Graphics::PostProcessing::End() {
 
             m_env->BindTexture(2, m_skyboxColorBuffer);
             m_postProcessingShader->SetInt("skybox", 2);
-        }
+        //}
     }else {
         m_env->BindTexture(0, m_ColorBuffers[0]);
         m_postProcessingShader->SetInt("scene", 0);
-    }
+
+        m_env->BindTexture(1, 0);
+        m_postProcessingShader->SetInt("bloomBlur", 1);
+
+        m_env->BindTexture(2, m_skyboxColorBuffer);
+        m_postProcessingShader->SetInt("skybox", 2);
+    }*/
+
+    m_env->BindTexture(0, m_ColorBuffers[0]);
+    m_postProcessingShader->SetInt("scene", 0);
+
+    if (m_bloom)
+        m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
+    else
+        m_env->BindTexture(1, 0);
+    m_postProcessingShader->SetInt("bloomBlur", 1);
+
+    m_env->BindTexture(2, m_skyboxColorBuffer);
+    m_postProcessingShader->SetInt("skybox", 2);
 
     m_env->DrawQuad(m_VAO);
 

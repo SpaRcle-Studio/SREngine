@@ -2,6 +2,8 @@
 // Created by Nikita on 18.11.2020.
 //
 
+#include <easy/profiler.h>
+
 #include "Window/Window.h"
 #include <Debug.h>
 #include <iostream>
@@ -184,16 +186,18 @@ void Framework::Graphics::Window::Thread() {
     }
 
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
+        if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Magenta); }
+
         this->m_env->PoolEvents();
 
         this->PoolEvents();
 
-        //this->m_env->ClearColorBuffers(0.2, 0.2, 0.2, 0.5);
         this->m_env->ClearBuffers();
 
         this->m_render->PoolEvents();
 
-        this->m_env->BeginDrawGUI();
+        if (m_GUIEnabled)
+            this->m_env->BeginDrawGUI();
 
         for (Camera* camera : m_cameras) {
             if (!camera->IsActive())
@@ -203,7 +207,6 @@ void Framework::Graphics::Window::Thread() {
 
             camera->GetPostProcessing()->BeginSkybox();
             {
-                this->m_render->UpdateSkybox();
                 this->m_render->DrawSkybox();
             }
             camera->GetPostProcessing()->EndSkybox();
@@ -215,21 +218,17 @@ void Framework::Graphics::Window::Thread() {
 
                 this->m_render->DrawGeometry();
 
-                //this->m_render->UpdateSkybox();
-                //this->m_render->DrawSkybox();
-
                 this->m_render->DrawTransparentGeometry();
             }
             camera->GetPostProcessing()->End();
-
-            //this->m_render->UpdateSkybox();
-            //this->m_render->DrawSkybox();
         }
 
-        if (m_canvas)
-            this->m_canvas->Draw();
+        if (m_GUIEnabled) {
+            if (m_canvas)
+                this->m_canvas->Draw();
 
-        this->m_env->EndDrawGUI();
+            this->m_env->EndDrawGUI();
+        }
 
         this->m_env->SwapBuffers();
     }
@@ -322,7 +321,7 @@ void Framework::Graphics::Window::PoolEvents() {
         for (Camera* camera : m_camerasToDestroy)
             for (size_t t = 0; t < m_countCameras; t++) {
                 if (camera == m_cameras[t]) {
-                    if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                    //if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                         Helper::Debug::Log("Window::PoolEvents() : remove camera...");
 
                     m_cameras.erase(m_cameras.begin() + t);

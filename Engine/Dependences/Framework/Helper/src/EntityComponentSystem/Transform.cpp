@@ -26,7 +26,8 @@ void Framework::Helper::Transform::SetPosition(glm::vec3 val) {
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildPosition(this);
+        //m.second->m_transform->UpdateChildPosition(this);
     }
 }
 
@@ -55,7 +56,8 @@ void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
     m_gameObject->UpdateComponentsRotation();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this, delta);
+        gm->m_transform->UpdateChildRotation(this, delta);
+        //gm.second->m_transform->UpdateChildRotation(this, delta);
     }
 }
 
@@ -71,7 +73,8 @@ void Framework::Helper::Transform::SetScale(glm::vec3 val) {
     m_gameObject->UpdateComponentsScale();
 
     for (auto gm : m_gameObject->m_children)
-        gm.second->m_transform->UpdateChildScale(this);
+        gm->m_transform->UpdateChildScale(this);
+        //gm.second->m_transform->UpdateChildScale(this);
 }
 
 void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
@@ -137,7 +140,8 @@ void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexce
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildPosition(this);
+        //gm.second->m_transform->UpdateChildPosition(this);
     }
 }
 
@@ -289,8 +293,10 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this, delta);
-        gm.second->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildRotation(this, delta);
+        gm->m_transform->UpdateChildPosition(this);
+        //gm.second->m_transform->UpdateChildRotation(this, delta);
+        //gm.second->m_transform->UpdateChildPosition(this);
     }
 
     if (false) {
@@ -335,8 +341,10 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
         m_gameObject->UpdateComponentsPosition();
 
         for (auto gm : m_gameObject->m_children) {
-            gm.second->m_transform->UpdateChildRotation(this, delta);
-            gm.second->m_transform->UpdateChildPosition(this);
+            gm->m_transform->UpdateChildRotation(this, delta);
+            gm->m_transform->UpdateChildPosition(this);
+            //gm.second->m_transform->UpdateChildRotation(this, delta);
+            //gm.second->m_transform->UpdateChildPosition(this);
         }
 
         ///===================================
@@ -463,8 +471,10 @@ void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 an
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm.second->m_transform->UpdateChildRotation(this, delta);
-        gm.second->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildRotation(this, delta);
+        gm->m_transform->UpdateChildPosition(this);
+        //gm.second->m_transform->UpdateChildRotation(this, delta);
+        //gm.second->m_transform->UpdateChildPosition(this);
     }
 }
 
@@ -576,7 +586,7 @@ glm::vec3 Framework::Helper::Transform::GetNormalizedAngleOfPoint(glm::vec3 poin
                     break;
                 case Location::Center:
                     angle.y = 0.f;
-                    Helper::Debug::Warn("Transform::GetNormalizedAngleOfPoint() : in center? TODO AND SEE!");
+                    //Helper::Debug::Warn("Transform::GetNormalizedAngleOfPoint() : in center? TODO AND SEE!");
                     // what?
                     break;
             }

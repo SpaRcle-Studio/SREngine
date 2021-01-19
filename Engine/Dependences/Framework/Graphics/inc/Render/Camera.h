@@ -48,6 +48,12 @@ namespace Framework::Graphics {
         PostProcessing* GetPostProcessing() { return m_postProcessing; }
 
         [[nodiscard]] inline glm::vec3 GetGLPosition() const noexcept { return this->m_pos; }
+        void WaitCalculate() const {
+            ret:
+            if (!m_isCalculate) {
+                goto ret;
+            }
+        }
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */

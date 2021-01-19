@@ -1,29 +1,37 @@
-local sceneCamera;      -- Camera*
-local postProcessing;   -- PostProcessing*
---local finallyTexture; -- unsigned int
-local enabled;          -- Bool
+local cameraSize;    -- Vector2
+local colored_id;    -- int
+local final_id;      -- int
+local bloom_id;      -- int
+local bloomBlur_id;  -- int
+local skybox_id;     -- int
+
+local enabled;       -- Bool
 
 function Inspector()
 
 end;
 
 function Hierarchy()
+    GUIWindow.Begin("Hierarchy");
 
+    GUIWindow.End();
 end;
 
 function Enabled()
     enabled = Stack.PopBool(Script.this);
 end;
 
-function SetCamera()
-    sceneCamera = Stack.PopCamera(Script.this);
+function SetIndices()
+    local camera = Stack.PopCamera(Script.this);
 
-    if (not (sceneCamera == nil)) then
-        postProcessing = sceneCamera:GetPostProcessing();
-    end;
+    cameraSize    = camera:GetSize();
+    final_id      = camera:GetPostProcessing():GetFinalTextureID();
+    colored_id    = camera:GetPostProcessing():GetColoredImage();
+    bloom_id      = camera:GetPostProcessing():GetBloomMask();
+    bloomBlur_id  = 6;--Stack.PopInt(Script.this);
+    skybox_id     = 3;--Stack.PopInt(Script.this);
 
-    --finallyTexture = sceneCamera:GetPostProcessing():GetFinallyTexID();
-    collectgarbage() -- collect memory
+    enabled = true;
 end;
 
 function Init()
@@ -34,103 +42,70 @@ function Init()
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
-    enabled = true;
-
     collectgarbage() -- collect memory
 end;
 
 function Windows()
-    DockSpace.Begin();
-
-    if (not (sceneCamera == nil)) then
-        GUIWindow.Begin("Scene");
-
-        GUIWindow.BeginChild("Render");
-
+    GUIWindow.Begin("Scene");
+    GUIWindow.BeginChild("Render");
         GUIWindow.DrawTexture(
             GUIWindow.GetSize(),
-            sceneCamera:GetSize(),
-            postProcessing:GetFinalTextureID(),
+            cameraSize,
+            final_id,
             true
         );
+    GUIWindow.EndChild();
+    GUIWindow.End();
 
-        GUIWindow.EndChild();
-
-        GUIWindow.End();
-    end;
-
-    if (not (sceneCamera == nil)) then
-        GUIWindow.Begin("Bloom Mask");
-
-        GUIWindow.BeginChild("Render");
-
+    GUIWindow.Begin("Bloom Mask");
+    GUIWindow.BeginChild("Render");
         GUIWindow.DrawTexture(
             GUIWindow.GetSize(),
-            sceneCamera:GetSize(),
-            postProcessing:GetBloomMask(),
+            cameraSize,
+            bloom_id,
             true
         );
+    GUIWindow.EndChild();
+    GUIWindow.End();
 
-        GUIWindow.EndChild();
-
-        GUIWindow.End();
-    end;
-
-
-    if (not (sceneCamera == nil)) then
-        GUIWindow.Begin("Skybox");
-
-        GUIWindow.BeginChild("Render");
-
+    GUIWindow.Begin("Skybox");
+    GUIWindow.BeginChild("Render");
         GUIWindow.DrawTexture(
             GUIWindow.GetSize(),
-            sceneCamera:GetSize(),
-            3,
+            cameraSize,
+            skybox_id,
             true
         );
+    GUIWindow.EndChild();
+    GUIWindow.End();
 
-        GUIWindow.EndChild();
-
-        GUIWindow.End();
-    end;
-
-    if (not (sceneCamera == nil)) then
-        GUIWindow.Begin("Blur Bloom Mask");
-
-        GUIWindow.BeginChild("Render");
-
+    GUIWindow.Begin("Blur Bloom Mask");
+    GUIWindow.BeginChild("Render");
         GUIWindow.DrawTexture(
             GUIWindow.GetSize(),
-            sceneCamera:GetSize(),
-            6,
+            cameraSize,
+            bloomBlur_id,
             true
         );
+    GUIWindow.EndChild();
+    GUIWindow.End();
 
-        GUIWindow.EndChild();
-
-        GUIWindow.End();
-    end;
-
-    if (not (sceneCamera == nil)) then
-        GUIWindow.Begin("Colored");
-
-        GUIWindow.BeginChild("Render");
-
+    GUIWindow.Begin("Colored");
+    GUIWindow.BeginChild("Render");
         GUIWindow.DrawTexture(
             GUIWindow.GetSize(),
-            sceneCamera:GetSize(),
-            postProcessing:GetColoredImage(),
+            cameraSize,
+            colored_id,
             true
         );
-
-        GUIWindow.EndChild();
-
-        GUIWindow.End();
-    end;
+    GUIWindow.EndChild();
+    GUIWindow.End();
 end;
 
 function Draw()
-    if (enabled) then
+    if (enabled == true) then
+        DockSpace.Begin();
+        Hierarchy();
         Windows();
     end;
 

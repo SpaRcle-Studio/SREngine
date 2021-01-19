@@ -14,8 +14,6 @@ uniform float gamma;
 
 void main()
 {
-
-
     //vec3 hdrColor = texture(scene, TexCoords).rgb;
     //hdrColor += texture(bloomBlur, TexCoords).rgb; // additive blending
 
@@ -41,8 +39,6 @@ void main()
     }
 
     hdrColor += texture(bloomBlur, TexCoords).rgb;
-
-    //hdrColor = skyboxColor + texture(bloomBlur, TexCoords).rgb;
 
     // tone mapping
     vec3 result = vec3(1.0) - exp(-hdrColor * exposure);

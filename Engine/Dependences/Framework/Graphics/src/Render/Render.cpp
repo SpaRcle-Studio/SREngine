@@ -1,7 +1,7 @@
 //
 // Created by Nikita on 17.11.2020.
 //
-
+#include <easy/profiler.h>
 #include "Render/Render.h"
 #include <Render/Camera.h>
 #include <iostream>
@@ -10,6 +10,11 @@
 #include <Types/Skybox.h>
 
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
+    if (Helper::Debug::Profile()) {
+        EASY_FUNCTION(profiler::colors::RichGreen);
+        EASY_NONSCOPED_BLOCK("Render: drawing geometry", profiler::colors::DarkCyan);
+    }
+
     this->m_geometryShader->Use();
 
     this->m_currentCamera->UpdateShader(m_geometryShader);
@@ -20,24 +25,20 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
 
     this->m_env->UseShader(0);
 
+    if (Helper::Debug::Profile())
+        EASY_END_BLOCK;
+
     return true;
 }
 
-void Framework::Graphics::Render::UpdateSkybox() noexcept {
+bool Framework::Graphics::Render::DrawSkybox() noexcept {
+    if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
+
     if (m_skybox)
     {
         m_skyboxShader->Use();
         m_currentCamera->UpdateShader(m_skyboxShader);
         m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
-    }
-}
-
-bool Framework::Graphics::Render::DrawSkybox() noexcept {
-    if (m_skybox)
-    {
-        //m_skyboxShader->Use();
-        //m_currentCamera->UpdateShader(m_skyboxShader);
-        //m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
         m_skybox->Draw();
     }
 

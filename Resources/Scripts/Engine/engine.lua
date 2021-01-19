@@ -3,36 +3,59 @@ local window;          -- Window*
 local camera;          -- GameObject*
 local render;          -- Render*
 local skybox;          -- Skybox*
---local cube;            -- GameObject*
 local cameraComp;      -- Camera*
 local editorGUIScript; -- Script*
+
+function CreateTreeScene()
+    local cube_1      = scene:Instance("cube_1");
+    local cube_2      = scene:Instance("cube_2");
+
+    local cube_1_1    = scene:Instance("cube_1_1");
+    cube_1:AddChild(cube_1_1);
+
+    local cube_1_2    = scene:Instance("cube_1_2");
+    cube_1:AddChild(cube_1_2);
+
+    local cube_1_2_1   = scene:Instance("cube_1_2_1");
+    cube_1_2:AddChild(cube_1_2_1);
+end;
 
 function LoadGeometry()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for i = 0, 1000, 1 do
-        local cube = scene:Instance("Cube");
-        local mesh;
+    for a = 0, 25, 1 do
+        for b = 0, 25, 1 do
+            for g = 0, 25, 1 do
+                local cube = scene:Instance("Cube");
+                local mesh;
 
-        if (i == 0) then
-            mesh = cubeMesh;
-        else
-            mesh = cubeMesh:Copy();
+                if (a == 0 and b == 0 and g == 0) then
+                    mesh = cubeMesh;
+                else
+                    mesh = cubeMesh:Copy();
+                end;
+
+                render:RegisterMesh(mesh);
+
+                mesh:GetMaterial():SetBloom(true);
+                mesh:GetMaterial():SetDiffuse(texture);
+                mesh:GetMaterial():SetColor(Vector3.FMul(Material.RandomColor3(), 6.0));
+
+                cube:AddComponent(mesh:Base());
+                cube:GetTransform():Translate(
+                    Vector3.Sum(
+                        Vector3.Sum(
+                            Vector3.FMul(cube:GetTransform():Forward(), 8.0 * (a + 1)),
+                            Vector3.FMul(cube:GetTransform():Right(), 8.0 * (b + 1))
+                        ),
+                        Vector3.FMul(cube:GetTransform():Up(), 8.0 * (g + 1))
+                    )
+                );
+            end;
         end;
-
-        render:RegisterMesh(mesh);
-
-        mesh:GetMaterial():SetBloom(true);
-        mesh:GetMaterial():SetDiffuse(texture);
-        mesh:GetMaterial():SetColor(Vector3.FMul(Material.RandomColor3(), 6.0));
-
-        cube:AddComponent(mesh:Base());
-        cube:GetTransform():Translate(Vector3.FMul(cube:GetTransform():Forward(), 8.0 * (i + 1)));
     end;
-
-
 
     collectgarbage() -- collect memory
 end;
@@ -41,10 +64,15 @@ function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
     cameraComp = Camera.New();
-    cameraComp:SetFrameSize(1280, 720);
+    --cameraComp:SetFrameSize(1280, 720);
+    --cameraComp:SetFrameSize(1600, 900);
+    local winSize = window:GetWindowSize();
+    cameraComp:SetFrameSize(winSize.x, winSize.y);
 
     cameraComp:SetDirectOutput(false);
+    window:SetGUIEnabled(true);
 
+    cameraComp:GetPostProcessing():SetBloom(true);
     cameraComp:GetPostProcessing():SetBloomIntensity(3.0);
     cameraComp:GetPostProcessing():SetBloomAmount(10);
     cameraComp:GetPostProcessing():SetGamma(0.8);
@@ -52,6 +80,8 @@ function LoadCamera()
     camera:AddComponent(cameraComp:Base());
 
     window:AddCamera(cameraComp);
+
+    cameraComp:WaitCalculate();
 
     collectgarbage() -- collect memory
 end;
@@ -84,14 +114,12 @@ function Start ()
 
     LoadCamera();
     LoadGeometry();
+    --CreateTreeScene();
 
     -------------------------------------
 
     Stack.PushCamera(editorGUIScript, cameraComp);
-    editorGUIScript:Call("SetCamera");
-
-    --Stack.PushCamera(Script.this, cameraComp);
-
+    editorGUIScript:Call("SetIndices");
 
     collectgarbage() -- collect memory
 end;
@@ -133,6 +161,15 @@ function Update()
         editorGUIScript:Call("Enabled");
     end;
 
+    if (Input.GetKeyDown(KeyCode.B)) then
+        local enabled = cameraComp:GetPostProcessing():GetBloomEnabled();
+        cameraComp:GetPostProcessing():SetBloom(not enabled);
+    end;
+
+    if (Input.GetKeyDown(KeyCode.F)) then
+        scene:Print();
+    end;
+
     collectgarbage() -- collect memory
 end;
 
@@ -142,8 +179,8 @@ function Close()
     --editorGUIScript:Close();
     --editorGUIScript:Destroy();
 
-    Stack.PushCamera(editorGUIScript, nil);
-    editorGUIScript:Call("SetCamera"); -- TODO: TEMP SOLUTION!!!!
+    --Stack.PushCamera(editorGUIScript, nil);
+    --editorGUIScript:Call("SetCamera"); -- TODO: TEMP SOLUTION!!!!
 
     if (not (skybox == nil)) then
         skybox:AwaitDestroy();

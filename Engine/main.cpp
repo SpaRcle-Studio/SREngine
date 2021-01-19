@@ -2,6 +2,9 @@
 // Created by Nikita on 29.12.2020.
 //
 
+
+#include <easy/profiler.h>
+
 #include <Engine.h>
 
 #include <Debug.h>
@@ -19,6 +22,8 @@ using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 
 int main() {
+    if (Helper::Debug::Profile()) EASY_PROFILER_ENABLE;
+
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
     ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
@@ -31,10 +36,10 @@ int main() {
 
     Environment::Set(new OpenGL());
 
-    Render *render = new Render();
+    auto *render = new Render();
 
-    WindowFormat format = WindowFormat::_1280_720;
-    Window *window = new Window(
+    WindowFormat format = WindowFormat::_1600_900;
+    auto *window = new Window(
             "SpaRcle Engine",
             format,
             render,
@@ -69,5 +74,9 @@ int main() {
     Debug::System("All systems successfully closed!");
 
     ResourceManager::Stop();
+
+    if (Helper::Debug::Profile())
+        profiler::dumpBlocksToFile("profile.prof");
+
     return Debug::Stop();
 }

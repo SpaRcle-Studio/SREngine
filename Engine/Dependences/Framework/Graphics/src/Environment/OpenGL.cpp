@@ -187,6 +187,10 @@ bool Framework::Graphics::OpenGL::IsWindowOpen() {
 }
 
 void Framework::Graphics::OpenGL::PoolEvents() {
+    if (Helper::Debug::Profile()) {
+        EASY_FUNCTION(profiler::colors::Green);
+    }
+
     glfwPollEvents();
 }
 

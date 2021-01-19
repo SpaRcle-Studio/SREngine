@@ -73,6 +73,8 @@ namespace Framework::Graphics {
         //size_t                                              m_countContextFuncs     = 0;
         //std::mutex                                          m_contexFuncsMutex      = std::mutex();
 
+        bool                                                m_GUIEnabled            = true;
+
         GUI::ICanvas*                                       m_canvas                = nullptr;
 
         bool                                                m_vsync                 = false;
@@ -116,7 +118,9 @@ namespace Framework::Graphics {
         inline bool IsRun() const noexcept { return m_isRun; }
     public:
         void CentralizeCursor() noexcept;
-
+        inline void SetGUIEnabled(bool value) noexcept {
+            this->m_GUIEnabled = value;
+        }
         bool SetCanvas(GUI::ICanvas* canvas);
 
         //bool AddFunctionAtContext(const std::string& funName, std::function<void(void)> fun);
@@ -124,6 +128,12 @@ namespace Framework::Graphics {
     public:
         [[nodiscard]] inline bool IsWindowOpen()  const noexcept { return !this->m_isWindowClose; }
         [[nodiscard]] inline bool IsWindowFocus() const noexcept { return this->m_isWindowFocus;  }
+        [[nodiscard]] inline glm::vec2 GetWindowSize() const noexcept {
+            return glm::vec2(
+                    m_format.Width(),
+                    m_format.Height()
+                );
+        }
     public:
         bool Create();
         bool Init();

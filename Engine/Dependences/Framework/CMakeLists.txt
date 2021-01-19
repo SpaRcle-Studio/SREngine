@@ -7,6 +7,7 @@ set(FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(Depends/external/lua)
 add_subdirectory(Depends/LuaBridge)
 
+add_subdirectory(Depends/easy_profiler)
 add_subdirectory(Depends/imgui)
 add_subdirectory(Depends/inc/glm)
 #add_subdirectory(Depends/glfw)
@@ -29,7 +30,7 @@ find_package(OpenGL REQUIRED)
 
 # Добавляем библиотеку фреймворка
 add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
-target_link_libraries(Framework opengl32 glfw glew lua imgui) # lua
+target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler) # lua
 if(WIN32)
     if(MSVC)
 

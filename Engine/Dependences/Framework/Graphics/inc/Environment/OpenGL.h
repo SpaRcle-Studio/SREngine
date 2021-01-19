@@ -4,7 +4,7 @@
 
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
-
+#include <easy/profiler.h>
 #include <Environment/Environment.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -47,7 +47,12 @@ namespace Framework::Graphics {
 
         inline void ClearBuffers() noexcept override { glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); }
         inline void ClearColorBuffers(float r, float g, float b, float a) noexcept override { glClearColor(r, g, b, a); }
-        inline void SwapBuffers() noexcept override  { glfwSwapBuffers(m_window); }
+        inline void SwapBuffers() noexcept override  {
+            if (Helper::Debug::Profile()) {
+                EASY_FUNCTION(profiler::colors::Red);
+            }
+            glfwSwapBuffers(m_window);
+        }
 
         void SetWindowSize(float ratio, unsigned int w, unsigned int h) override;
         void SetWindowPosition(int x, int y) override;
@@ -175,9 +180,13 @@ namespace Framework::Graphics {
         }
         bool FreeMesh(unsigned int VAO) noexcept override;
         inline void DrawTriangles(unsigned int VAO, size_t count_vertices) noexcept override {
+            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Green); }
+
             glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, count_vertices);
             glBindVertexArray(0);
+
+            //if (Helper::Debug::Profile()) { EASY_END_BLOCK; }
         }
         inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept override{
             static const float QuadVertices[] = {

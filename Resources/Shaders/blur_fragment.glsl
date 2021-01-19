@@ -48,7 +48,7 @@ void main()
    // if (result.rgb == vec3(0,0,0))
     //if (More(result.rgb, vec3(0.03,0.03,0.03)))
     //if (dot(result.rgb, vec3(0.2126, 0.7152, 0.0722)) > 0.075)
-        FragColor = vec4(result.rgb, 1);
+    FragColor = vec4(result.rgb, 1);
 
     //FragColor = result;
 }

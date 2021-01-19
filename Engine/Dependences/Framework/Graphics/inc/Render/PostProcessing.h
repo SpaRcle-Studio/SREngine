@@ -54,6 +54,7 @@ namespace Framework::Graphics {
         unsigned int              m_VBO                         = 0;
 
         volatile bool             m_bloom                       = true;
+        bool                      m_bloomClear                  = false;
 
         unsigned int              m_skyboxRBO                   = 0;
         unsigned int              m_skyboxFBO                   = 0;
@@ -83,6 +84,7 @@ namespace Framework::Graphics {
     public:
         [[nodiscard]] inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
         [[nodiscard]] inline float GetGamma() const noexcept { return m_gamma; }
+        [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom; }
     public:
         inline void SetGamma(float gamma) noexcept { m_gamma = gamma; }
         inline void SetExposure(float exposure) noexcept { m_exposure = exposure; }

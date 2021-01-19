@@ -56,11 +56,14 @@ namespace Framework::Helper {
         inline static std::string       g_log_path                  = "";
         inline static std::ofstream     g_file                      = std::ofstream();
         static inline Level             g_level                     = Level::Low;
+        static inline bool              g_profile                   = false;
     private:
         static inline void InitColorTheme();
 
         static void Print(std::string &msg, Type type);
     public:
+        [[nodiscard]]inline static bool Profile() noexcept { return g_profile; }
+
         inline static const Level GetLevel() noexcept { return g_level; }
         static const void SetLevel(Level level) { g_level = level; }
 

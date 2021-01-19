@@ -2,6 +2,8 @@
 // Created by Nikita on 17.11.2020.
 //
 
+#include <easy/profiler.h>
+
 #include "Types/Mesh.h"
 #include <ResourceManager/ResourceManager.h>
 #include <Render/Render.h>
@@ -261,6 +263,8 @@ Mesh *Mesh::Copy() {
 }
 
 bool Mesh::Draw() {
+    //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
+
     if (m_isDestroy) return false;
 
     if (!m_isCalculated)

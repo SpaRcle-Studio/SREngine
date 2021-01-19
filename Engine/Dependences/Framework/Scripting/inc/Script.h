@@ -72,6 +72,9 @@ namespace Framework::Scripting {
 
         unsigned int    m_countUsePoints   = 0;
 
+        bool            m_callingNow       = false;
+        std::string     m_currentFunName   = "Unidentified";
+
         std::stack<void*> m_stack = std::stack<void*>();
     private:
         void CheckExistsFunctions();
@@ -95,7 +98,7 @@ namespace Framework::Scripting {
                             script->Push((void*)type);
                         }))
                         .addFunction(("Pop"+className).c_str(), static_cast<T(*)(Script::This*)>([](Script::This* aThis) -> T {
-                            return static_cast<T>(aThis->script->Pop());
+                            return reinterpret_cast<T>(aThis->script->Pop());
                         }))
                     //.endClass();
                     .endNamespace();

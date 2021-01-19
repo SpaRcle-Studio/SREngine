@@ -10,6 +10,7 @@
 #include <Debug.h>
 #include <iostream>
 #include <glm/gtx/string_cast.hpp>
+#include <EntityComponentSystem/Scene.h>
 
 using namespace Framework::Helper;
 
@@ -51,7 +52,7 @@ Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(std::s
     return find;
 }
 
-std::vector<Component *> Framework::Helper::GameObject::GetComponents(std::string name) {
+std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std::string& name) {
     return std::vector<Component *>();
 }
 
@@ -70,7 +71,8 @@ void Framework::Helper::GameObject::Destroy() {
         component->OnDestroyGameObject();
 
     for (auto gm : m_children)
-        gm.second->Destroy();
+        gm->Destroy();
+        //gm.second->Destroy();
 
     m_mutex.unlock();
 
@@ -112,21 +114,23 @@ nlohmann::json GameObject::Save() {
 }
 
 bool GameObject::AddChild(GameObject *child) {
-    auto find = m_children.find(child);
-    if (find!=m_children.end()){
+    //!auto find = m_children.find(child);
+    //!if (find!=m_children.end()){
+    if (Contains(child)) {
         Debug::Warn("GameObject::AddChild() : this child already exists in this game object!");
         return false;
     }
 
     child->m_parent = this;
 
-    this->m_children.insert(std::make_pair(child, child));
+    //!this->m_children.insert(std::make_pair(child, child));
+    this->m_children.push_back(child);
 
     /* Update child transforms with parent */
 
     {
         child->m_transform->m_localPosition = child->m_transform->m_globalPosition - this->m_transform->m_globalPosition;
-        std::cout << glm::to_string(child->m_transform->m_localPosition) << std::endl;
+        //std::cout << glm::to_string(child->m_transform->m_localPosition) << std::endl;
         child->UpdateComponentsPosition();
         child->m_transform->UpdateChildPosition(this->m_transform);
     }
@@ -139,6 +143,21 @@ bool GameObject::AddChild(GameObject *child) {
     //child->m_transform->Rotate();
     //child->m_transform->Scaling();
 
+    this->m_scene->SetIsChanged(true);
+
     return true;
+}
+
+void GameObject::SetName(const std::string &name) {
+    this->m_name = name;
+    this->m_scene->SetIsChanged(true);
+}
+
+bool GameObject::Contains(GameObject *child) {
+    for (auto a : m_children){
+        if (a == child)
+            return true;
+    }
+    return false;
 }
 
