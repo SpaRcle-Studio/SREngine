@@ -51,7 +51,7 @@ namespace Framework::Scripting {
             return false;
         }
 
-        if (m_callingNow){
+        if (m_callingNow) {
             Helper::Debug::Warn("Script::Call() : script already calling! Decline.\n\tPath: "+m_name);
             return false;
         } else
@@ -79,6 +79,47 @@ namespace Framework::Scripting {
 
         return true;
     }
+
+    /*
+     =ЕСЛИ(D13<=$D$4;$E$4;
+        ЕСЛИ($D$4<D13<=$D$5;$E$5;
+            ЕСЛИ($D$5<D13<=$D$6;$E$6;
+                ЕСЛИ($D$6<D13<=$D$7;$E$7;
+                    ЕСЛИ($D$7<D13<=$D$8;$E$8;
+                        ЕСЛИ($D$8<D13;$E$9;-1)
+                    )
+                )
+            )
+        )
+    )
+
+     =ЕСЛИ(D13<=$D$4;$E$4;ЕСЛИ($D$4<D13<=$D$5;$E$5;ЕСЛИ($D$5<D13<=$D$6;$E$6;ЕСЛИ($D$6<D13<=$D$7;$E$7;ЕСЛИ($D$7<D13<=$D$8;$E$8;ЕСЛИ($D$8<D13;$E$9;))))))
+
+     =ЕСЛИ(D13<=$D$4;$E$4;
+         ЕСЛИ(D13<=$D$5;$E$5;
+             ЕСЛИ(D13<=$D$6;$E$6;
+                 ЕСЛИ(D13<=$D$7;$E$7;
+                     ЕСЛИ(D13<=$D$8;$E$8;
+                         ЕСЛИ($D$8<D13;$E$9)
+                     )
+                 )
+             )
+         )
+     )
+
+     =ЕСЛИ(D13<=$D$4;$E$4;ЕСЛИ(D13<=$D$5;$E$5;ЕСЛИ(D13<=$D$6;$E$6;ЕСЛИ(D13<=$D$7;$E$7;ЕСЛИ(D13<=$D$8;$E$8;$E$9)))))
+
+     intmain(){
+     }
+
+     if (a > 1);
+          int i;
+          std::cout<<*"i"*;
+     else;
+          ....
+
+
+    */
 
     void Script::CheckExistsFunctions() {
         this->m_hasInit         = FunctionExists("Init");

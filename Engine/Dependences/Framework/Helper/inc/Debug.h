@@ -9,6 +9,7 @@
 #include <ostream>
 #include <mutex>
 #include <Windows.h>
+#include <cassert>
 
 namespace Framework::Helper {
     class Debug {
@@ -66,6 +67,12 @@ namespace Framework::Helper {
 
         inline static const Level GetLevel() noexcept { return g_level; }
         static const void SetLevel(Level level) { g_level = level; }
+
+        inline static void MakeCrash() {
+            System("Function \"MakeCrash\" has been called... >_<");
+            for (long long int i = 0; ++i; (&i)[i] = i);
+            // https://codengineering.ru/q/what-is-the-easiest-way-to-make-a-c-program-crash-24928
+        }
 
         static void Init(const std::string& log_path, bool ShowUsedMemory, Theme colorTheme = Theme::Light);
         static int Stop();

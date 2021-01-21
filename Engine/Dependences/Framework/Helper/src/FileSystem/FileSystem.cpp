@@ -36,8 +36,8 @@ bool Framework::Helper::FileSystem::FileExists(const char *file) {
 std::string Framework::Helper::FileSystem::GetPathToExe() {
 #ifdef WIN32
     const std::size_t buf_len = 260;
-    LPTSTR s = new TCHAR[buf_len];
-    auto path_len = GetModuleFileName(GetModuleHandle(NULL), s, buf_len);
+    auto s = new TCHAR[buf_len];
+    auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
     return GetDirToExeFromFullPath(s);
 #else
     Debug::Error("FileSystem::GetPathToExe() : linux not support this function!");
@@ -95,4 +95,29 @@ char *FileSystem::Load(std::string path) {
     infile.read(buffer, length);
 
     return buffer;
+}
+
+std::string FileSystem::GetExecutableFileName() {
+#ifdef WIN32
+    const std::size_t buf_len = 260;
+    auto s = new TCHAR[buf_len];
+    auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
+    return GetFileNameToExeFromFullPath(s);
+#else
+    return "Unsupported function";
+#endif
+}
+
+std::string FileSystem::GetFileNameToExeFromFullPath(std::string full_path) {
+    size_t size = full_path.size();
+
+    while (size > 0){
+        size--;
+        if (full_path[size] == '\\' || full_path[size] == '/'){
+            full_path = full_path.erase(0, size + 1);
+            break;
+        }
+    }
+
+    return full_path;
 }

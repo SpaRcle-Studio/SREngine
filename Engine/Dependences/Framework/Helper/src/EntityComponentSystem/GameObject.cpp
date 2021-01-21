@@ -149,8 +149,15 @@ bool GameObject::AddChild(GameObject *child) {
 }
 
 void GameObject::SetName(const std::string &name) {
+    ret:
+    if (m_scene->GetCountUsesPoints() > 0)
+        goto ret;
+    else
+        m_scene->AddUsePoint();
+
     this->m_name = name;
-    this->m_scene->SetIsChanged(true);
+
+    m_scene->RemoveUsePoint();
 }
 
 bool GameObject::Contains(GameObject *child) {

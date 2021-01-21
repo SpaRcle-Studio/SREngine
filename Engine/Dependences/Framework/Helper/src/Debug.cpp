@@ -62,6 +62,10 @@ namespace Framework::Helper {
 
             InitColorTheme();
 
+            std::string successful = FileSystem::GetPathToExe() + "/successful";
+            if (FileSystem::FileExists(successful.c_str()))
+                FileSystem::Delete(successful.c_str());
+
             g_log_path = log_path + "/log.txt";
             if (FileSystem::FileExists(g_log_path.c_str()))
                 FileSystem::Delete(g_log_path.c_str());
@@ -79,6 +83,9 @@ namespace Framework::Helper {
             std::string msg = "Debugger has been stopped.";
             Print(msg, Type::Debug);
             g_file.close();
+
+            std::ofstream o("successful");
+            o.close();
 
             return 0;
         }

@@ -13,12 +13,14 @@ private:
     FileSystem() {};
     ~FileSystem() {};
 public:
+    static std::string GetFileNameToExeFromFullPath(std::string full_path);
     static std::string GetDirToExeFromFullPath(std::string full_path);
 
     static bool Delete(const char *file);
 
     static bool FileExists(const char *file);
 
+    static std::string GetExecutableFileName();
     static std::string GetPathToExe();
 
     static char* Load(std::string path);

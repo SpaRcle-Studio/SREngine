@@ -165,6 +165,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addStaticFunction("Error", static_cast<void(*)(std::string)>([](std::string s) {
                         Debug::ScriptError(std::move(s));
                     }))
+                    .addStaticFunction("MakeCrash", static_cast<void(*)()>([]() {
+                        Debug::MakeCrash();
+                    }))
                 .endClass();
     });
 
@@ -204,6 +207,7 @@ bool Framework::Engine::RegisterLibraries() {
         static int B                = (int)KeyCode::B;
         static int E                = (int)KeyCode::E;
         static int F                = (int)KeyCode::F;
+        static int C                = (int)KeyCode::C;
         static int Space            = (int)KeyCode::Space;
         static int LShift           = (int)KeyCode::LShift;
 
@@ -220,6 +224,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addProperty("B",               &B,                   false)
                     .addProperty("E",               &E,                   false)
                     .addProperty("F",               &F,                   false)
+                    .addProperty("C",               &C,                   false)
                     .addProperty("Space",           &Space,               false)
                     .addProperty("LShift",          &LShift,              false)
                 .endNamespace();
@@ -554,8 +559,15 @@ bool Framework::Engine::RegisterLibraries() {
                         Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
                     }))
                     .addStaticFunction("DrawHierarchy", static_cast<void(*)(Helper::Scene*)>([](Helper::Scene*scene) {
-                        bool isChanged = scene->IsChanged();
+                        ret:
+                        if (scene->GetCountUsesPoints() > 0)
+                            goto ret;
 
+                        scene->AddUsePoint();
+
+                        Helper::SceneTree tree = scene->GetTree();
+
+                        scene->RemoveUsePoint();
                     }))
                 .endClass();
     });

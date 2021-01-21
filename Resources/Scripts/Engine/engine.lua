@@ -170,6 +170,10 @@ function Update()
         scene:Print();
     end;
 
+    if (Input.GetKeyDown(KeyCode.C)) then
+        Debug.MakeCrash();
+    end;
+
     collectgarbage() -- collect memory
 end;
 

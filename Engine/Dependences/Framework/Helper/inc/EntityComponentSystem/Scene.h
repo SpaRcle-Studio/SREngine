@@ -19,7 +19,6 @@ namespace Framework::Helper {
     template<typename T> class Branch {
     private:
         ~Branch() {
-            //this->m_data = nullptr;
             for (auto a : m_branches)
                 a->Free();
         };
@@ -44,6 +43,8 @@ namespace Framework::Helper {
         std::vector<Branch<T>*> m_branches = std::vector<Branch<T>*>();
         T                       m_data     = nullptr;
     };
+
+    typedef Branch<GameObject*>* SceneTree;
 
     class GameObject;
     class Scene {
@@ -79,6 +80,8 @@ namespace Framework::Helper {
             return v;
         }
         Branch<GameObject*>* GetTree();
+
+        [[nodiscard]] inline unsigned int GetCountUsesPoints() const noexcept { return this->m_countUses; }
 
         inline void SetIsChanged(bool value) noexcept { this->m_hierarchyIsChanged = value; }
         [[nodiscard]] inline bool IsChanged() const noexcept { return this->m_hierarchyIsChanged; }

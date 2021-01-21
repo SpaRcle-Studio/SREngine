@@ -2,7 +2,6 @@
 // Created by Nikita on 29.12.2020.
 //
 
-
 #include <easy/profiler.h>
 
 #include <Engine.h>
@@ -22,6 +21,8 @@ using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 
 int main() {
+    ShellExecute(nullptr, "open", "EngineCrashHandler.exe", ("--log log.txt --target "+FileSystem::GetExecutableFileName()).c_str(), nullptr, SW_SHOWDEFAULT);
+
     if (Helper::Debug::Profile()) EASY_PROFILER_ENABLE;
 
     Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
@@ -38,7 +39,7 @@ int main() {
 
     auto *render = new Render();
 
-    WindowFormat format = WindowFormat::_1600_900;
+    WindowFormat format = WindowFormat::_1366_768;
     auto *window = new Window(
             "SpaRcle Engine",
             format,
