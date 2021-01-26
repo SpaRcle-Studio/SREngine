@@ -21,13 +21,18 @@ using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 
 int main() {
-    ShellExecute(nullptr, "open", "EngineCrashHandler.exe", ("--log log.txt --target "+FileSystem::GetExecutableFileName()).c_str(), nullptr, SW_SHOWDEFAULT);
-
     if (Helper::Debug::Profile()) EASY_PROFILER_ENABLE;
 
-    Debug::Init(FileSystem::GetPathToExe(), true, Debug::Theme::Dark);
+    std::string exe = FileSystem::GetPathToExe();
+
+    Debug::Init(exe, true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
-    ResourceManager::Init(FileSystem::GetPathToExe() + "/../../Resources");
+    ResourceManager::Init(exe + "/../../Resources");
+
+    ShellExecute(nullptr, "open", (ResourceManager::GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
+            ("--log log.txt --target "+FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
+            nullptr, SW_SHOWDEFAULT
+    );
 
     // Register all resource types
     {
