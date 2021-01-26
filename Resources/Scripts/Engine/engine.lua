@@ -25,9 +25,9 @@ function LoadGeometry()
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for a = 0, 25, 1 do
-        for b = 0, 25, 1 do
-            for g = 0, 25, 1 do
+    for a = 0, 2, 1 do
+        for b = 0, 2, 1 do
+            for g = 0, 2, 1 do
                 local cube = scene:Instance("Cube");
                 local mesh;
 
@@ -64,8 +64,6 @@ function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
     cameraComp = Camera.New();
-    --cameraComp:SetFrameSize(1280, 720);
-    --cameraComp:SetFrameSize(1600, 900);
     local winSize = window:GetWindowSize();
     cameraComp:SetFrameSize(winSize.x, winSize.y);
 
@@ -81,7 +79,7 @@ function LoadCamera()
 
     window:AddCamera(cameraComp);
 
-    cameraComp:WaitCalculate();
+    cameraComp:WaitBuffersCalculate();
 
     collectgarbage() -- collect memory
 end;
@@ -99,7 +97,7 @@ function Init()
     render = Render.Get();
 
     editorGUIScript = Script.this:LoadScript("editor", true);
-    window:SetCanvas(Canvas.Load(editorGUIScript))
+    window:SetCanvas(Canvas.Load(editorGUIScript));
 
     collectgarbage() -- collect memory
 end;
@@ -107,17 +105,21 @@ end;
 function Start ()
     Debug.Log("Starting main engine script...");
 
+    window:Resize(1600, 900);
+    window:CentralizeWindow();
+
     skybox = Skybox.Load("Sea.jpg");
     render:SetSkybox(skybox);
 
     --------------------------------------
 
     LoadCamera();
+    CreateTreeScene();
     LoadGeometry();
-    --CreateTreeScene();
 
     -------------------------------------
 
+    Stack.PushScene(editorGUIScript, scene);
     Stack.PushCamera(editorGUIScript, cameraComp);
     editorGUIScript:Call("SetIndices");
 
@@ -166,13 +168,8 @@ function Update()
         cameraComp:GetPostProcessing():SetBloom(not enabled);
     end;
 
-    if (Input.GetKeyDown(KeyCode.F)) then
-        scene:Print();
-    end;
-
-    if (Input.GetKeyDown(KeyCode.C)) then
-        Debug.MakeCrash();
-    end;
+    --if (Input.GetKeyDown(KeyCode.F)) then scene:Print(); end;
+    --if (Input.GetKeyDown(KeyCode.C)) then Debug.MakeCrash(); end;
 
     collectgarbage() -- collect memory
 end;
@@ -180,11 +177,8 @@ end;
 function Close()
     Debug.Log("Close main engine script...");
 
-    --editorGUIScript:Close();
-    --editorGUIScript:Destroy();
-
-    --Stack.PushCamera(editorGUIScript, nil);
-    --editorGUIScript:Call("SetCamera"); -- TODO: TEMP SOLUTION!!!!
+    Stack.PushBool(editorGUIScript, false);
+    editorGUIScript:Call("Enabled");
 
     if (not (skybox == nil)) then
         skybox:AwaitDestroy();
@@ -193,6 +187,7 @@ function Close()
 
     if (not (scene == nil)) then
         scene:Destroy();
+        scene:Free();
     end;
 
     collectgarbage() -- collect memory

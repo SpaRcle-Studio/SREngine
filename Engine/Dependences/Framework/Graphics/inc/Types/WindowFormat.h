@@ -59,11 +59,17 @@ namespace Framework::Graphics::Types {
     public:
         [[nodiscard]] Value GetValue() const noexcept { return value; }
 
+        inline void SetFreeValue(unsigned int w, unsigned int h) noexcept {
+            this->value = Free;
+            this->m_height = h;
+            this->m_width = w;
+        }
+
         [[nodiscard]] unsigned int Width() const noexcept { return m_width; }
         [[nodiscard]] unsigned int Height() const noexcept { return m_height; }
         [[nodiscard]] float GetRatio() const noexcept {
             if (value == Value::Free)
-                return 16.0 / 9.0;
+                return 16.0 / 9.0; // TODO: change
             else
                 return (float)m_width / (float)m_height;
         }

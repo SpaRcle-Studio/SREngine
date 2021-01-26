@@ -52,10 +52,12 @@ namespace Framework::Scripting {
         }
 
         if (m_callingNow) {
-            Helper::Debug::Warn("Script::Call() : script already calling! Decline.\n\tPath: "+m_name);
-            return false;
-        } else
-            m_callingNow = true;
+            Helper::Debug::Warn("Script::Call() : script already calling! Wait...\n\tPath: "+m_name);
+            ret:
+            if (m_callingNow)
+                goto ret;
+        }
+        m_callingNow = true;
 
         m_currentFunName = funName;
 

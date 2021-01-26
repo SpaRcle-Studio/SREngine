@@ -28,7 +28,11 @@ namespace Framework::Helper {
         };
         inline void AddChild(Branch<T>* child) {
             this->m_branches.push_back(child);
+            //m_hasBranches = true;
+            this->m_count++;
         }
+        [[nodiscard]] inline bool HasBranches() const noexcept { return m_count > 0; }
+        [[nodiscard]] inline unsigned long GetCountBranches() const noexcept { return m_count; }
     public:
         explicit Branch(T data) {
             this->m_data = data;
@@ -38,10 +42,13 @@ namespace Framework::Helper {
             this->m_parent->m_branches.push_back(this);
             this->m_data = data;
         }
+    private:
+        //bool                    m_hasBranches   = false;
+        unsigned long           m_count         = 0;
+        Branch<T>*              m_parent        = nullptr;
     public:
-        Branch<T>*              m_parent   = nullptr;
-        std::vector<Branch<T>*> m_branches = std::vector<Branch<T>*>();
-        T                       m_data     = nullptr;
+        std::vector<Branch<T>*> m_branches      = std::vector<Branch<T>*>();
+        T                       m_data          = nullptr;
     };
 
     typedef Branch<GameObject*>* SceneTree;
@@ -64,8 +71,12 @@ namespace Framework::Helper {
         std::map<GameObject*, GameObject*>  m_gameObjects          = std::map<GameObject*, GameObject*>();
         unsigned int                        m_countUses            = 0;
         Branch<GameObject*>*                m_tree                 = nullptr;
+
+        std::vector<GameObject*>            m_rootObjects          = std::vector<GameObject*>();
+        bool                                m_rootObjectsEmpty     = true;
     public:
         void Print();
+        [[nodiscard]] inline std::string GetName() const noexcept { return m_name; }
         inline std::vector<GameObject*> GetGameObjects() { // TODO: OPTIMIZE
             m_mutex.lock();
 
@@ -79,7 +90,9 @@ namespace Framework::Helper {
 
             return v;
         }
-        Branch<GameObject*>* GetTree();
+        //Branch<GameObject*>* GetTree();
+
+        std::vector<GameObject*>& GetRootGameObjects() noexcept;
 
         [[nodiscard]] inline unsigned int GetCountUsesPoints() const noexcept { return this->m_countUses; }
 

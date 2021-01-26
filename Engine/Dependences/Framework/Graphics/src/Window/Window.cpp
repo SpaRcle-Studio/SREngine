@@ -179,10 +179,12 @@ void Framework::Graphics::Window::Thread() {
         Debug::Log("Window::Thread() : screen size is " +
             std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
 
-        w = (int) (scr_size.x - (float)w) / 2;
-        h = (int) (scr_size.y - (float)h) / 2;
+        this->CentralizeWindow();
 
-        Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &w, &h);
+        //w = (int) (scr_size.x - (float)w) / 2;
+        //h = (int) (scr_size.y - (float)h) / 2;
+
+        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &w, &h);
     }
 
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
@@ -336,6 +338,20 @@ void Framework::Graphics::Window::PoolEvents() {
 
         m_camerasMutex.unlock();
     }
+
+    if (m_isNeedResize) {
+        unsigned int w = m_format.Width();
+        unsigned int h = m_format.Height();
+        Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
+        this->m_isNeedResize = false;
+    }
+
+    if (m_isNeedMove) {
+        unsigned int x = m_newWindowPos.x;
+        unsigned int y = m_newWindowPos.y;
+        Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &x, &y);
+        this->m_isNeedMove = false;
+    }
 }
 
 bool Framework::Graphics::Window::Free() {
@@ -362,6 +378,24 @@ bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *c
     this->m_canvas = canvas;
 
     return true;
+}
+
+void Framework::Graphics::Window::Resize(unsigned int w, unsigned int h) {
+    this->m_format.SetFreeValue(w, h);
+    this->m_isNeedResize = true;
+}
+
+void Framework::Graphics::Window::CentralizeWindow() {
+    glm::vec2 scr_size = m_env->GetScreenSize();
+
+    unsigned int w = m_format.Width();
+    unsigned int h = m_format.Height();
+
+    w = (int) (scr_size.x - (float)w) / 2;
+    h = (int) (scr_size.y - (float)h) / 2;
+
+    this->m_newWindowPos = { w, h };
+    this->m_isNeedMove = true;
 }
 
 /*

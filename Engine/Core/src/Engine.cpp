@@ -346,8 +346,10 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
                     .addFunction("DestroyGM", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::DestroyGameObject)
                     .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Destroy)
+                    .addFunction("Free", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Free)
                     .addFunction("Print", (void (Framework::Helper::Scene::*)(void))&Helper::Scene::Print)
                 .endClass();
+        Scripting::Script::RegisterCasting<Scene*>("Scene", L);
     });
 
     // Material
@@ -414,6 +416,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("IsDirectOutput", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::IsDirectOutput)
                     .addFunction("GetSize", (glm::vec2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
                     .addFunction("WaitCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitCalculate)
+                    .addFunction("WaitBuffersCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitBuffersCalculate)
                 .endClass();
         Scripting::Script::RegisterCasting<Graphics::Camera*>("Camera", L);
     });
@@ -487,6 +490,8 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)
                     .addFunction("GetWindowSize", (glm::vec2 (Framework::Graphics::Window::*)(void))&Graphics::Window::GetWindowSize)
                     .addFunction("SetGUIEnabled", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetGUIEnabled)
+                    .addFunction("Resize", (void (Framework::Graphics::Window::*)(unsigned int, unsigned int))&Graphics::Window::Resize)
+                    .addFunction("CentralizeWindow", (void (Framework::Graphics::Window::*)())&Graphics::Window::CentralizeWindow)
                 .endClass();
     });
 
@@ -565,7 +570,7 @@ bool Framework::Engine::RegisterLibraries() {
 
                         scene->AddUsePoint();
 
-                        Helper::SceneTree tree = scene->GetTree();
+                        Graphics::GUI::GUIWindow::DrawHierarchy(scene);
 
                         scene->RemoveUsePoint();
                     }))

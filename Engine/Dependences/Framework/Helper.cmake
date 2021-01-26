@@ -7,10 +7,10 @@ set(HELPER_SRC
         ${FRAMEWORK_ROOT_DIR}/Helper/src/ResourceManager/ResourceManager.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/ResourceManager/IResource.cpp
         #Mathematical classes source code
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Vector2.cpp
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Vector3.cpp
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Quaternion.cpp
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Matrix3x3.cpp
+        #${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Vector2.cpp
+        #${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Vector3.cpp
+        #${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Quaternion.cpp
+        #${FRAMEWORK_ROOT_DIR}/Helper/src/Math/Matrix3x3.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Types/String.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Types/Time.cpp

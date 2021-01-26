@@ -57,7 +57,9 @@ namespace Framework::Helper {
         inline static std::string       g_log_path                  = "";
         inline static std::ofstream     g_file                      = std::ofstream();
         static inline Level             g_level                     = Level::Low;
-        static inline bool              g_profile                   = false;
+        static inline bool              g_profile                   = true;
+        static inline size_t            g_countErrors               = 0;
+        static inline size_t            g_countWarnings             = 0;
     private:
         static inline void InitColorTheme();
 
@@ -83,8 +85,8 @@ namespace Framework::Helper {
         static void Shader(std::string msg) { Print(msg, Type::Shader); }
         static void Script(std::string msg) { Print(msg, Type::Script); }
         static void System(std::string msg) { Print(msg, Type::System); }
-        static void Warn(std::string msg)   { Print(msg, Type::Warn);   }
-        static void Error(std::string msg)  { Print(msg, Type::Error);  }
+        static void Warn(std::string msg)   { Print(msg, Type::Warn);   g_countWarnings++; }
+        static void Error(std::string msg)  { Print(msg, Type::Error);  g_countErrors++;   }
 
         static void ScriptLog(std::string msg)  { Print(msg, Type::ScriptLog);  }
         static void ScriptError(std::string msg)  { Print(msg, Type::ScriptError);  }

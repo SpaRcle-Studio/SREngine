@@ -27,6 +27,7 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
             return;
         }
         m_needUpdate = false;
+        this->m_isBuffCalculate = true;
     }
 
     shader->SetMat4("viewMat", this->m_viewMat);

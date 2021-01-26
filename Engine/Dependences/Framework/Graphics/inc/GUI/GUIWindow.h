@@ -9,13 +9,95 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <glm/glm.hpp>
+#include <EntityComponentSystem/Scene.h>
 
 namespace Framework::Graphics::GUI {
     class GUIWindow {
+    private:
+        inline static const ImGuiTreeNodeFlags g_node_flags_with_child    = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+        inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
     public:
         GUIWindow() = delete;
         ~GUIWindow() = delete;
+    private:
+        inline static void DrawChild(Helper::GameObject* root) noexcept {
+            unsigned long i = 0;
+
+            for (auto child : root->GetChildrenRef()) {
+                if (child->HasChildren()){
+                    bool open = ImGui::TreeNodeEx((void*)(intptr_t)i,
+                                                  g_node_flags_with_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                                  "%s", child->GetName().c_str()
+                    );
+
+                    if (open)
+                        DrawChild(child);
+                } else {
+                    ImGui::TreeNodeEx((void*)(intptr_t)i,
+                                    g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                    "%s", child->GetName().c_str()
+                    );
+                }
+
+                i++;
+            }
+
+            ImGui::TreePop();
+        }
     public:
+        inline static void DrawHierarchy(Helper::Scene* scene) noexcept {
+            auto root = scene->GetRootGameObjects();
+
+            unsigned long i = 0;
+
+            if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
+                ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
+
+                for (auto obj : root){
+                    if (obj->HasChildren()) {
+                        bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                          g_node_flags_with_child     | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                          "%s", obj->GetName().c_str());
+                        if (open)
+                            DrawChild(obj);
+                    } else {
+                        ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                          g_node_flags_without_child | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                          "%s", obj->GetName().c_str());
+                    }
+
+                    i++;
+                }
+
+                ImGui::TreePop();
+                ImGui::PopStyleVar();
+            }
+            /*Helper::SceneTree tree = scene->GetTree();
+
+            Helper::GameObject* obj = nullptr;
+
+            if (ImGui::TreeNode(scene->GetName().c_str())) {
+                ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
+
+                for (unsigned long i = 0; i < tree->GetCountBranches(); i++) {
+                    obj = tree->m_branches[i]->m_data;
+
+                    if (obj->HasChildren()) {
+                        ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                          g_node_flags_with_child     | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                          "%s", obj->GetName().c_str());
+                    } else {
+                        ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                           g_node_flags_without_child | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                          "%s", obj->GetName().c_str());
+                    }
+                }
+
+                ImGui::TreePop();
+                ImGui::PopStyleVar();
+            }*/
+        }
+
         static inline void Begin(const std::string& winName) noexcept {
             ImGui::Begin(winName.c_str());
         }

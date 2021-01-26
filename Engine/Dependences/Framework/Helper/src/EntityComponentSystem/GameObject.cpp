@@ -125,6 +125,7 @@ bool GameObject::AddChild(GameObject *child) {
 
     //!this->m_children.insert(std::make_pair(child, child));
     this->m_children.push_back(child);
+    this->m_countChild++;
 
     /* Update child transforms with parent */
 

@@ -11,7 +11,7 @@ namespace Framework::Helper {
         void Debug::Print(std::string &msg, Debug::Type type) {
             g_mutex.lock();
 
-            static std::string pref		= "";
+            static std::string pref		= "-";
             static ConsoleColor color	= ConsoleColor::Black;
 
             switch (type) {
@@ -30,9 +30,9 @@ namespace Framework::Helper {
             }
 
             if (Debug::g_showUseMemory) {
-                std::cout << '<' << ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
+                std::cout << '<' << (float)ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
                 if (g_file.is_open())
-                    g_file << '<' << ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
+                    g_file << '<' << (float)ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
             }
 
 
@@ -80,8 +80,15 @@ namespace Framework::Helper {
             Print(msg, Type::Debug);
         }
         int Debug::Stop() {
-            std::string msg = "Debugger has been stopped.";
-            Print(msg, Type::Debug);
+            if (!g_countErrors && !g_countWarnings) {
+                std::string msg = "Debugger has been stopped.";
+                Print(msg, Type::Debug);
+            }else{
+                std::string msg = "Debugger has been stopped with errors!\n"
+                                  "\tErrors count: "+std::to_string(g_countErrors)+
+                                  "\n\tWarnings count: "+std::to_string(g_countWarnings);
+                Print(msg, Type::Debug);
+            }
             g_file.close();
 
             std::ofstream o("successful");

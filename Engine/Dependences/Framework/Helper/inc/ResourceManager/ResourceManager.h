@@ -12,7 +12,6 @@
 #include "IResource.h"
 
 #include <Types/Map.h>
-//#include <Types/Vector.h>
 
 #include <vector>
 
@@ -27,6 +26,7 @@ namespace Framework::Helper {
     private:
         ResourceManager() = default;
         ~ResourceManager() = default;
+    public:
         ResourceManager(ResourceManager &) = delete;
     private:
         inline static std::vector<IResource *> g_resourcesToDestroy = std::vector<IResource *>();

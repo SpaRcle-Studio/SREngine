@@ -50,6 +50,9 @@ namespace Framework::Graphics {
         volatile bool                                       m_isWindowClose         = false;
 
         volatile bool                                       m_isWindowFocus         = true;
+
+        bool                                                m_isNeedResize          = false;
+        bool                                                m_isNeedMove            = false;
     private:
         std::thread                                         m_thread                = std::thread();
 
@@ -81,6 +84,7 @@ namespace Framework::Graphics {
         bool                                                m_fullScreen            = false;
 
         glm::vec2                                           m_windowPos             = { 0, 0 };
+        glm::vec2                                           m_newWindowPos          = { 0, 0 };
     private:
         void PoolEvents();
         void Thread();
@@ -117,6 +121,8 @@ namespace Framework::Graphics {
         }
         inline bool IsRun() const noexcept { return m_isRun; }
     public:
+        void CentralizeWindow();
+        void Resize(unsigned int w, unsigned int h);
         void CentralizeCursor() noexcept;
         inline void SetGUIEnabled(bool value) noexcept {
             this->m_GUIEnabled = value;

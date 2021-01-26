@@ -54,6 +54,12 @@ namespace Framework::Graphics {
                 goto ret;
             }
         }
+        void WaitBuffersCalculate() const {
+            ret:
+            if (!m_isBuffCalculate) {
+                goto ret;
+            }
+        }
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */
@@ -64,6 +70,7 @@ namespace Framework::Graphics {
     private:
         volatile bool               m_isCreate          = false;
         volatile bool               m_isCalculate       = false;
+        volatile bool               m_isBuffCalculate   = false;
         volatile bool               m_needUpdate        = false;
 
         bool                        m_isEnableDirectOut = false;

@@ -68,7 +68,10 @@ bool Framework::Helper::Scene::Destroy() {
     Debug::Log("Scene::Destroy() : destroying \""+m_name+"\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
 
     if (m_countUses) {
-        Helper::Debug::Warn("Scene::Destroy() : scene game objects now using at "+std::to_string(m_countUses)+" points!");
+        Helper::Debug::Error("Scene::Destroy() : scene game objects now using at "+std::to_string(m_countUses)+" points! Wait...");
+        ret:
+            if (m_countUses)
+                goto ret;
     }
 
     m_mutex.lock();
@@ -108,7 +111,7 @@ void pr(Framework::Helper::Branch<Framework::Helper::GameObject*>* tree, int dee
     }
 }
 void Framework::Helper::Scene::Print() {
-    Branch<GameObject*>* tree = this->GetTree();
+    /*Branch<GameObject*>* tree = this->GetTree();
 
     std::cout << std::endl;
 
@@ -117,9 +120,10 @@ void Framework::Helper::Scene::Print() {
             std::cout << a->m_data->GetName() + "\n";
             pr(a, 0);
         }
-    }
+    }*/
 }
 
+/*
 void req(Framework::Helper::Branch<Framework::Helper::GameObject*>* tree, Framework::Helper::GameObject* gameObject, int deep) {
     for (auto a : gameObject->GetChildren()) {
         //std::cout << std::string(deep + 1, '\t') << a->GetName() << std::endl;
@@ -147,48 +151,32 @@ Framework::Helper::Branch<Framework::Helper::GameObject *> *Framework::Helper::S
                 req(branch, a.second, 0);
             }
 
-        /*
-        auto child1 = new Branch<GameObject*>(nullptr);
-        m_tree->AddChild(child1);
-
-        auto child11 = new Branch<GameObject*>(nullptr);
-        child1->AddChild(child11);
-
-        auto child12 = new Branch<GameObject*>(nullptr);
-        child1->AddChild(child12);
-
-        auto child121 = new Branch<GameObject*>(nullptr);
-        child12->AddChild(child121);
-
-        auto child2 = new Branch<GameObject*>(nullptr);
-        m_tree->AddChild(child2);
-        */
-
-        /*std::stack<GameObject*> stack_gm;
-        std::stack<Branch<GameObject*>*> stack_br;
-
-        stack_br.push(m_tree);
-
-        for (auto& a : m_gameObjects) {
-            if (a.second->m_parent)
-                continue;
-            else {
-                stack_gm.push(a.second);
-
-                if (stack_gm.top()->m_children.empty()) {
-                    stack_br.top()->AddChild(new Branch<GameObject *>(stack_gm.top()));
-                    stack_gm.pop();
-                }
-                else {
-
-                }
-            }
-        }
-
-        stack_br.pop();*/
-
         m_mutex.unlock();
 
         return m_tree;
+    }
+}
+*/
+
+// Please, call from only one thread!
+std::vector<Framework::Helper::GameObject *>& Framework::Helper::Scene::GetRootGameObjects() noexcept {
+    if (!m_hierarchyIsChanged && !m_rootObjectsEmpty)
+        return this->m_rootObjects;
+    else {
+        m_mutex.lock();
+
+        if (!m_rootObjectsEmpty) {
+            m_rootObjects.clear();
+            m_rootObjects.reserve(2000); //TODO: change to count_gm * 25 / 100
+            m_rootObjectsEmpty = true;
+        }
+
+        for (auto& a : m_gameObjects)
+            if (!a.second->m_parent)
+                m_rootObjects.push_back(a.second);
+
+        m_rootObjectsEmpty = false;
+        m_mutex.unlock();
+        return m_rootObjects;
     }
 }
