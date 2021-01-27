@@ -11,6 +11,7 @@
 #include <Render/Render.h>
 #include <EntityComponentSystem/Scene.h>
 #include <Types/Skybox.h>
+#include <Events/EventManager.h>
 
 namespace Framework {
     class Engine {
@@ -29,6 +30,8 @@ namespace Framework {
         volatile bool           m_isInit                = false;
         volatile bool           m_isRun                 = false;
         volatile bool           m_isClose               = false;
+
+        volatile bool           m_exitEvent             = false;
     private:
         Scripting::Compiler*    m_compiler              = nullptr;
         Graphics::Window*       m_window                = nullptr;

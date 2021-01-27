@@ -114,11 +114,53 @@ function Windows()
     GUIWindow.End();
 end;
 
+function ToolBar()
+    if (GUIWindow.BeginMainMenuBar()) then
+        if (GUIWindow.BeginMenu("File")) then
+            if (GUIWindow.MenuItem("New scene")) then
+
+            end;
+
+            if (GUIWindow.MenuItem("Load scene")) then
+
+            end;
+
+            if (GUIWindow.MenuItem("Save scene")) then
+
+            end;
+
+            if (GUIWindow.MenuItem("Exit")) then
+                EventManager.Push(Event.Exit);
+            end;
+
+            GUIWindow.EndMenu();
+        end;
+
+        if (GUIWindow.BeginMenu("Config")) then
+
+            GUIWindow.EndMenu();
+        end;
+
+        if (GUIWindow.BeginMenu("Edit")) then
+
+            GUIWindow.EndMenu();
+        end;
+
+        if (GUIWindow.BeginMenu("GameObject")) then
+
+            GUIWindow.EndMenu();
+        end;
+
+        GUIWindow.EndMainMenuBar();
+    end;
+end;
+
 function Draw()
     if (enabled == true) then
         DockSpace.Begin();
         Hierarchy();
         Displayes();
+        ToolBar();
         Windows();
     end;
 

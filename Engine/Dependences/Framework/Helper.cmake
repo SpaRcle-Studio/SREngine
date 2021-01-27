@@ -20,6 +20,8 @@ set(HELPER_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Utils/StringUtils.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Helper/src/Events/EventManager.cpp
+
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/GameObject.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Component.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Transform.cpp

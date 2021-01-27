@@ -12,6 +12,7 @@
 
 #include <utility>
 #include <GUI/Canvas.h>
+#include <Events/EventManager.h>
 
 Framework::Engine::Engine() {
     this->m_compiler = new Scripting::Compiler();
@@ -61,6 +62,17 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
 
     Helper::Debug::Info("Engine::Init() : initializing game engine...");
 
+    Helper::EventManager::Subscribe([this](EventManager::Event event){
+        switch (event) {
+            case EventManager::Event::Exit:
+                this->m_exitEvent = true;
+                break;
+            case EventManager::Event::Fatal:
+                Debug::Error("Engine(event) : fatal error!"); // TODO
+                break;
+        }
+    });
+
     if (!this->m_window->Init()){
         Helper::Debug::Error("Engine::Init() : failed initialize window!");
         return false;
@@ -107,14 +119,20 @@ void Framework::Engine::Await() {
     Scripting::Script* engine = m_compiler->Load("engine", true);
 
     while (m_window->IsWindowOpen()) {
+        EventManager::PoolEvents();
+        if (m_exitEvent) {
+            Debug::System("The closing event was received!");
+            break;
+        }
+
         m_compiler->PoolEvents();
 
         Helper::InputSystem::Check();
 
-        if (InputSystem::IsDown(KeyCode::Esc)) {
-            Debug::System("Engine::Await() : ESC has been pressed.");
-            break;
-        }
+        //if (InputSystem::IsDown(KeyCode::Esc)) {
+        //    Debug::System("Engine::Await() : ESC has been pressed.");
+        //    break;
+        //}
 
         if (Helper::Types::Time::Begin()){
             m_compiler->FixedUpdateAll();
@@ -245,6 +263,22 @@ bool Framework::Engine::RegisterLibraries() {
                     }))
                     .addStaticFunction("GetMouseWheel", static_cast<int(*)()>([]() -> int {
                         return Helper::InputSystem::GetMouseWheel();
+                    }))
+                .endClass();
+    });
+
+    // EventManager
+    this->m_compiler->RegisterScriptClass("Base", [](lua_State* L) {
+        static int exit = (int)EventManager::Event::Exit;
+
+        luabridge::getGlobalNamespace(L)
+                .beginNamespace("Event")
+                    .addProperty("Exit", &exit, false)
+                .endNamespace()
+
+                .beginClass<Helper::EventManager>("EventManager")
+                    .addStaticFunction("Push", static_cast<void(*)(int)>([](int event) {
+                        EventManager::Push((EventManager::Event)event);
                     }))
                 .endClass();
     });
@@ -573,6 +607,22 @@ bool Framework::Engine::RegisterLibraries() {
                         Graphics::GUI::GUIWindow::DrawHierarchy(scene);
 
                         scene->RemoveUsePoint();
+                    }))
+                    //--------------------------------------------------------------------------------------------------
+                    .addStaticFunction("BeginMainMenuBar", static_cast<bool(*)()>([]() -> bool {
+                        return Graphics::GUI::GUIWindow::BeginMainMenuBar();
+                    }))
+                    .addStaticFunction("EndMainMenuBar", static_cast<void(*)()>([]() {
+                        Graphics::GUI::GUIWindow::EndMainMenuBar();
+                    }))
+                    .addStaticFunction("BeginMenu", static_cast<bool(*)(const std::string&)>([](const std::string& name) -> bool {
+                        return Graphics::GUI::GUIWindow::BeginMenu(name.c_str());
+                    }))
+                    .addStaticFunction("EndMenu", static_cast<void(*)()>([]() {
+                        Graphics::GUI::GUIWindow::EndMenu();
+                    }))
+                    .addStaticFunction("MenuItem", static_cast<bool(*)(const std::string&)>([](const std::string& name) -> bool {
+                        return Graphics::GUI::GUIWindow::MenuItem(name.c_str());
                     }))
                 .endClass();
     });

@@ -98,24 +98,32 @@ namespace Framework::Graphics::GUI {
             }*/
         }
 
-        static inline void Begin(const std::string& winName) noexcept {
+        inline static void Begin(const std::string& winName) noexcept {
             ImGui::Begin(winName.c_str());
         }
-        static inline void BeginChild(const std::string& winName) noexcept {
+        inline static void BeginChild(const std::string& winName) noexcept {
             ImGui::BeginChild(winName.c_str());
         }
 
-        static inline void End() noexcept {
+        inline static bool BeginMainMenuBar() noexcept { return ImGui::BeginMainMenuBar(); }
+        inline static void EndMainMenuBar() noexcept { ImGui::EndMainMenuBar(); }
+
+        inline static bool BeginMenu(const char* name) noexcept { return ImGui::BeginMenu(name); }
+        inline static void EndMenu() noexcept { ImGui::EndMenu(); }
+
+        inline static bool MenuItem(const char* name) noexcept { return ImGui::MenuItem(name); }
+
+        inline static void End() noexcept {
             ImGui::End();
         }
-        static inline void EndChild() noexcept {
+        inline static void EndChild() noexcept {
             ImGui::EndChild();
         }
-        static inline glm::vec2 GetWindowSize() {
+        inline static glm::vec2 GetWindowSize() {
             ImVec2 size = ImGui::GetWindowSize();
             return {size.x, size.y};
         }
-        static inline void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition = false)
+        inline static void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition = false)
         {
             ImGuiWindow* window = ImGui::GetCurrentWindow();
             if (window->SkipItems)
@@ -143,7 +151,7 @@ namespace Framework::Graphics::GUI {
                 window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
             }
         }
-        static inline void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, unsigned int tex, const bool centralize = true) {
+        inline static void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, unsigned int tex, const bool centralize = true) {
             const float dx = win_size.x / img_size.x;
             const float dy = win_size.y / img_size.y;
 

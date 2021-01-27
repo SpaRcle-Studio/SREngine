@@ -26,7 +26,7 @@ Framework::Helper::GameObject::~GameObject() {
     delete this->m_transform;
 }
 
-bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *component) {
+bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *component) {  // TODO: add security multi-threading
     if (this->m_isDestroy){
         Debug::Error("GameObject::AddComponent() : this \""+m_name+"\" game object is destroyed!");
         return false;
@@ -40,7 +40,7 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
     return true;
 }
 
-Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(std::string name) {
+Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(std::string name) {  // TODO: add security multi-threading
     Component* find = nullptr;
 
     m_mutex.lock();
@@ -52,7 +52,7 @@ Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(std::s
     return find;
 }
 
-std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std::string& name) {
+std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std::string& name) {  // TODO: add security multi-threading
     return std::vector<Component *>();
 }
 
@@ -97,7 +97,7 @@ void GameObject::UpdateComponentsScale() {
         //component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
 }
 
-nlohmann::json GameObject::Save() {
+nlohmann::json GameObject::Save() {  // TODO: add security multi-threading
     nlohmann::json json;
 
     json["GameObject"]["Name"] = m_name;
@@ -113,7 +113,7 @@ nlohmann::json GameObject::Save() {
     return json;
 }
 
-bool GameObject::AddChild(GameObject *child) {
+bool GameObject::AddChild(GameObject *child) { // TODO: add security multi-threading
     //!auto find = m_children.find(child);
     //!if (find!=m_children.end()){
     if (Contains(child)) {
@@ -161,7 +161,7 @@ void GameObject::SetName(const std::string &name) {
     m_scene->RemoveUsePoint();
 }
 
-bool GameObject::Contains(GameObject *child) {
+bool GameObject::Contains(GameObject *child) {  // TODO: add security multi-threading
     for (auto a : m_children){
         if (a == child)
             return true;
