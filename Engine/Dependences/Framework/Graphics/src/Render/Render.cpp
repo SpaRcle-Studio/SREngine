@@ -34,8 +34,7 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
 bool Framework::Graphics::Render::DrawSkybox() noexcept {
     if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
 
-    if (m_skybox)
-    {
+    if (m_skybox) {
         m_skyboxShader->Use();
         m_currentCamera->UpdateShader(m_skyboxShader);
         m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
@@ -43,6 +42,11 @@ bool Framework::Graphics::Render::DrawSkybox() noexcept {
     }
 
     return true;
+}
+
+void Framework::Graphics::Render::DrawGrid() noexcept {
+    if (this->m_grid)
+        this->m_grid->Draw();
 }
 
 bool Framework::Graphics::Render::DrawTransparentGeometry() noexcept {
@@ -64,9 +68,12 @@ bool Framework::Graphics::Render::Create(Window* window) { //, Camera* camera
         this->m_geometryShader = new Shader(this, "geometry");
         this->m_skyboxShader   = new Shader(this, "skybox");
         this->m_stencilShader  = new Shader(this, "stencil");
+        //this->m_gridShader     = new Shader(this, "grid");
 
         Shader::SetStandartGeometryShader(m_geometryShader);
     }
+
+    this->m_grid = EditorGrid::Create("grid", this);
 
     this->m_isCreate = true;
 
@@ -87,14 +94,14 @@ bool Framework::Graphics::Render::Init() {
     Debug::Graph("Render::Init() : initializing render...");
 
     {
-        if (!m_geometryShader->Init()) {
-            Debug::Error("Render::Init() : failed init geometry shader!");
-            return false;
-        }
-        if (!m_skyboxShader->Init()) {
-            Debug::Error("Render::Init() : failed init skybox shader!");
-            return false;
-        }
+        //if (!m_geometryShader->Init()) {
+        //    Debug::Error("Render::Init() : failed init geometry shader!");
+        //    return false;
+        //}
+        //if (!m_skyboxShader->Init()) {
+        //    Debug::Error("Render::Init() : failed init skybox shader!");
+        //    return false;
+        //}
 
         /*if (!m_stencilShader->Init()) {
             Debug::Error("Render::Init() : failed init stencil shader!");
@@ -137,6 +144,18 @@ bool Framework::Graphics::Render::Close() {
     }
 
     Debug::Graph("Render::Close() : close render...");
+
+    if (m_skyboxShader)
+        m_skyboxShader->Free();
+
+    if (m_geometryShader)
+        m_geometryShader->Free();
+
+    if (m_stencilShader)
+        m_stencilShader->Free();
+
+    if (this->m_grid)
+        m_grid->Free();
 
     m_isRun = false;
     m_isClose = true;
@@ -304,7 +323,6 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
     texture->AddUsePoint();
     texture->SetRender(this);
 }
-
 
 /*
 void Framework::Graphics::Render::RegisterSkyboxToRemove(Framework::Graphics::Types::Skybox *skybox) {

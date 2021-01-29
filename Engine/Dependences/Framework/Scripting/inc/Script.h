@@ -72,7 +72,8 @@ namespace Framework::Scripting {
 
         unsigned int    m_countUsePoints   = 0;
 
-        bool            m_callingNow       = false;
+        //bool            m_callingNow       = false;
+        std::mutex      m_mutex            = std::mutex();
         std::string     m_currentFunName   = "Unidentified";
 
         std::stack<void*> m_stack = std::stack<void*>();

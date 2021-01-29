@@ -10,6 +10,7 @@
 #include <vector>
 #include <mutex>
 #include <Environment/Environment.h>
+#include <Types/EditorGrid.h>
 
 namespace Framework::Graphics::Types {
     class Skybox;
@@ -59,21 +60,27 @@ namespace Framework::Graphics {
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;
         Shader*                 m_skyboxShader                      = nullptr;
+        //Shader*                 m_gridShader                        = nullptr;
+
+        EditorGrid*             m_grid                              = nullptr;
 
         Skybox*                 m_skybox                            = nullptr;
 
         std::vector<Light*>     m_light                             = std::vector<Light*>();
+
+        bool                    m_needSelectMeshes                  = false;
     public:
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
         [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }
         [[nodiscard]] size_t GetCountMeshes()             const noexcept { return m_countMeshes; }
         [[nodiscard]] size_t GetCountTransparentMeshes()  const noexcept { return m_countTransparentMeshes; }
     public:
-        inline bool IsRun() const noexcept { return m_isRun; }
-        inline bool IsInit() const noexcept { return m_isInit; }
+        [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
+        [[nodiscard]] inline bool IsInit() const noexcept { return m_isInit; }
     public:
         void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
+        [[nodiscard]] inline Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
     public:
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
@@ -115,6 +122,7 @@ namespace Framework::Graphics {
         void PoolEvents()               noexcept;
         bool DrawGeometry()             noexcept;
         bool DrawSkybox()               noexcept;
+        void DrawGrid()                 noexcept;
         bool DrawTransparentGeometry()  noexcept;
     };
 }

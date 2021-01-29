@@ -14,8 +14,11 @@ namespace Framework::Graphics {
     class Render;
 
     class Shader {
+    private:
+        ~Shader() = default;
     public:
         Shader(Render* render, const std::string& name);
+        Shader(Shader&) = delete;
     private:
         unsigned int                m_ID           = 0;
         unsigned int                m_fragment     = 0;
@@ -23,6 +26,8 @@ namespace Framework::Graphics {
 
         bool                        m_isLink       = false;
         bool                        m_isCompile    = false;
+        bool                        m_isError      = false;
+        bool                        m_isInit       = false;
     private:
         inline static Shader*       g_stdGeometry  = nullptr;
     private:
@@ -38,6 +43,8 @@ namespace Framework::Graphics {
     public:
         bool Use();
         bool Init();
+        ///\warning Call only from OpenGL context!
+        void Free();
     public:
         void SetBool(const std::string& name, bool v)       const noexcept;
         void SetFloat(const std::string& name, float v)     const noexcept;

@@ -5,6 +5,7 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Material.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/WindowFormat.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Skybox.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/EditorGrid.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ObjLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/FbxLoader.cpp

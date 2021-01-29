@@ -68,7 +68,8 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
                 this->m_exitEvent = true;
                 break;
             case EventManager::Event::Fatal:
-                Debug::Error("Engine(event) : fatal error!"); // TODO
+                Debug::Error("Engine::(EventManager) : a fatal error event has been detected!");
+                this->m_exitEvent = true;
                 break;
         }
     });

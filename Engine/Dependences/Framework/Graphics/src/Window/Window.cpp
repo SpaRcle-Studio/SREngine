@@ -198,39 +198,7 @@ void Framework::Graphics::Window::Thread() {
 
         this->m_render->PoolEvents();
 
-        if (m_GUIEnabled)
-            this->m_env->BeginDrawGUI();
-
-        for (Camera* camera : m_cameras) {
-            if (!camera->IsActive())
-                continue;
-
-            this->m_render->SetCurrentCamera(camera);
-
-            camera->GetPostProcessing()->BeginSkybox();
-            {
-                this->m_render->DrawSkybox();
-            }
-            camera->GetPostProcessing()->EndSkybox();
-
-            camera->GetPostProcessing()->Begin();
-            {
-                // some drawing code
-                // this is window context
-
-                this->m_render->DrawGeometry();
-
-                this->m_render->DrawTransparentGeometry();
-            }
-            camera->GetPostProcessing()->End();
-        }
-
-        if (m_GUIEnabled) {
-            if (m_canvas)
-                this->m_canvas->Draw();
-
-            this->m_env->EndDrawGUI();
-        }
+        this->Draw();
 
         this->m_env->SwapBuffers();
     }
@@ -290,7 +258,41 @@ bool Framework::Graphics::Window::InitEnvironment() {
 }
 
 void Framework::Graphics::Window::Draw() {
+    if (m_GUIEnabled)
+        this->m_env->BeginDrawGUI();
 
+    for (Camera* camera : m_cameras) {
+        if (!camera->IsActive())
+            continue;
+
+        this->m_render->SetCurrentCamera(camera);
+
+        camera->GetPostProcessing()->BeginSkybox();
+        {
+
+            this->m_render->DrawSkybox();
+            this->m_render->DrawGrid();
+        }
+        camera->GetPostProcessing()->EndSkybox();
+
+        camera->GetPostProcessing()->Begin();
+        {
+            // some drawing code
+            // this is window context
+
+            this->m_render->DrawGeometry();
+
+            this->m_render->DrawTransparentGeometry();
+        }
+        camera->GetPostProcessing()->End();
+    }
+
+    if (m_GUIEnabled) {
+        if (m_canvas)
+            this->m_canvas->Draw();
+
+        this->m_env->EndDrawGUI();
+    }
 }
 
 void Framework::Graphics::Window::CentralizeCursor() noexcept {

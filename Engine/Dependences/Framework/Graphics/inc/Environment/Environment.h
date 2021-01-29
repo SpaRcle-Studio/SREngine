@@ -121,7 +121,7 @@ namespace Framework::Graphics {
 
         virtual bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) = 0;
         virtual unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) = 0;
-
+        virtual inline void DeleteShader(unsigned int ID) = 0;
         virtual inline void UseShader(unsigned int ID) noexcept = 0;
 
         virtual inline void SetBool(unsigned int ID, const std::string& name, bool v)       const noexcept = 0;
@@ -134,6 +134,7 @@ namespace Framework::Graphics {
 
         // ============================== [ MESH METHODS ] ==============================
 
+        virtual inline bool CalculateEmptyVAO(unsigned int& VAO) noexcept = 0;
         virtual inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) noexcept = 0;
 
         /** Vertex pos and texture cords */
@@ -144,6 +145,7 @@ namespace Framework::Graphics {
 
         virtual bool FreeMesh(unsigned int VAO) noexcept = 0;
         virtual inline void DrawTriangles(unsigned int VAO, size_t count_vertices) noexcept = 0;
+        virtual inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) noexcept = 0;
 
         // ============================== [ TEXTURE METHODS ] ==============================
 

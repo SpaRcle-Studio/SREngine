@@ -102,9 +102,11 @@ function Init()
     collectgarbage() -- collect memory
 end;
 
-function Start ()
+function Start()
     Debug.Log("Starting main engine script...");
 
+    --window:Resize(3840, 2160);
+    --window:Resize(1920, 1080);
     window:Resize(1600, 900);
     window:CentralizeWindow();
 

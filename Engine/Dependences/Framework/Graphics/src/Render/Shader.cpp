@@ -46,6 +46,8 @@ bool Framework::Graphics::Shader::Init() {
         return false;
     }
 
+    this->m_isInit = true;
+
     return true;
 }
 
@@ -112,11 +114,31 @@ bool Framework::Graphics::Shader::SetStandartGeometryShader(Shader* shader) noex
 }
 
 bool Framework::Graphics::Shader::Use() {
-    if (!m_isLink)
+    if (m_isError)
         return false;
+
+    if (!m_isInit) {
+        if (!this->Init()) {
+            Debug::Error("Shader::Use() : failed initialize shader!");
+            this->m_isError = true;
+            return false;
+        }
+        this->m_isInit = true;
+    }
 
     m_env->UseShader(m_ID);
 
     return true;
+}
+
+void Framework::Graphics::Shader::Free() {
+    if (m_isInit) {
+        Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer and free video memory...");
+        m_env->DeleteShader(m_ID);
+    } else {
+        Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer...");
+    }
+
+    delete this;
 }
 

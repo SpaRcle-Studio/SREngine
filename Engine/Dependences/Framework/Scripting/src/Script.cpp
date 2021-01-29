@@ -35,6 +35,11 @@ namespace Framework::Scripting {
 
     Script::~Script() {
         m_thisBridge.script = nullptr;
+
+        if (L) {
+            Helper::Debug::Log("Script::~Script() : close lua state...\n\tPath: "+m_name);
+            lua_close(L);
+        }
     }
 
     bool Script::Call(const std::string& funName) {
@@ -51,13 +56,14 @@ namespace Framework::Scripting {
             return false;
         }
 
-        if (m_callingNow) {
-            Helper::Debug::Warn("Script::Call() : script already calling! Wait...\n\tPath: "+m_name);
-            ret:
-            if (m_callingNow)
-                goto ret;
-        }
-        m_callingNow = true;
+        m_mutex.lock();
+        //if (m_callingNow) {
+        //    Helper::Debug::Warn("Script::Call() : script already calling! Wait...\n\tPath: "+m_name);
+        //    ret:
+        //    if (m_callingNow)
+        //        goto ret;
+        //}
+        //m_callingNow = true;
 
         m_currentFunName = funName;
 
@@ -72,12 +78,15 @@ namespace Framework::Scripting {
 
             Helper::Debug::Error("Script::Call() : failed call \""+funName+"()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
-            m_callingNow = false;
+            //m_callingNow = false;
+            m_mutex.unlock();
             return false;
         }
-        m_callingNow = false;
+        //m_callingNow = false;
 
         m_currentFunName = "Unnamed";
+
+        m_mutex.unlock();
 
         return true;
     }
@@ -264,30 +273,29 @@ namespace Framework::Scripting {
 
         this->m_status = Status::Destroyed;
 
-        if (!m_stack.empty())
-            Helper::Debug::Warn("Script::Destroy() : stack is not empty!\n\tPath: "+m_name+"\n\tCount elements: "+std::to_string(m_stack.size()));
-
-        if (m_callingNow) {
-            Helper::Debug::Error("Script::Destroy() : Script calling \""+m_currentFunName+"\" function now! Unresolved situation! Wait...\n\tPath: "+m_name);
-            ret:
-            if (m_callingNow)
-                goto ret;
-        }
-
         if (m_isDestroy) {
             Helper::Debug::Error("Script::Destroy() : script already destroyed!\n\tPath: \""+m_name+"\"");
             return false;
         } else
             Helper::Debug::Log("Script::Destroy() : destroying script...\n\tPath: \""+m_name+"\"");
 
-        if (L) {
-            Helper::Debug::Log("Script::Destroy() : close lua state...");
-            lua_close(L);
-        }
+        m_mutex.lock();
+
+        this->m_isDestroy = true;
+
+        if (!m_stack.empty())
+            Helper::Debug::Warn("Script::Destroy() : stack is not empty!\n\tPath: "+m_name+"\n\tCount elements: "+std::to_string(m_stack.size()));
+
+        //if (m_callingNow) {
+         //   Helper::Debug::Error("Script::Destroy() : Script calling \""+m_currentFunName+"\" function now! Unresolved situation! Wait...\n\tPath: "+m_name);
+        //    ret:
+         //   if (m_callingNow)
+         //       goto ret;
+       // }
 
         this->m_compiler->DestroyScript(this);
 
-        this->m_isDestroy = true;
+        m_mutex.unlock();
 
         return true;
     }

@@ -93,6 +93,7 @@ namespace Framework::Graphics {
 
         bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) override;
         unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) override;
+        inline void DeleteShader(unsigned int ID) override { glDeleteProgram(ID); }
         inline void UseShader(unsigned int ID) noexcept override  { glUseProgram(ID); }
 
         inline void SetBool(unsigned int ID, const std::string& name, bool v)       const noexcept override {
@@ -119,6 +120,11 @@ namespace Framework::Graphics {
 
         // ============================== [ MESH METHODS ] ==============================
 
+        inline bool CalculateEmptyVAO(unsigned int& VAO) noexcept override {
+            glGenVertexArrays(1, &VAO);
+
+            return true;
+        }
         inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) noexcept override{
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
@@ -187,6 +193,16 @@ namespace Framework::Graphics {
             glBindVertexArray(0);
 
             //if (Helper::Debug::Profile()) { EASY_END_BLOCK; }
+        }
+        inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) noexcept override {
+            glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, IBO);
+            glDrawElements(
+                    GL_TRIANGLES,      // mode
+                    count,             // count
+                    GL_UNSIGNED_INT,   // type
+                    (void*)0           // element array buffer offset
+            );
+            glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, 0);
         }
         inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept override{
             static const float QuadVertices[] = {

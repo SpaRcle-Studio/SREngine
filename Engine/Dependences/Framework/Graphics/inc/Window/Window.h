@@ -14,6 +14,7 @@
 #include <thread>
 #include <mutex>
 #include <functional>
+#include <Types/EditorGrid.h>
 
 using namespace Framework::Graphics::Types;
 

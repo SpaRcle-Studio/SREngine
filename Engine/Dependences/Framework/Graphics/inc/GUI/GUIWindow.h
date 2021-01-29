@@ -26,16 +26,16 @@ namespace Framework::Graphics::GUI {
             for (auto child : root->GetChildrenRef()) {
                 if (child->HasChildren()){
                     bool open = ImGui::TreeNodeEx((void*)(intptr_t)i,
-                                                  g_node_flags_with_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                                  "%s", child->GetName().c_str()
+                            g_node_flags_with_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                            "%s", child->GetName().c_str()
                     );
 
                     if (open)
                         DrawChild(child);
                 } else {
                     ImGui::TreeNodeEx((void*)(intptr_t)i,
-                                    g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                    "%s", child->GetName().c_str()
+                            g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                            "%s", child->GetName().c_str()
                     );
                 }
 
