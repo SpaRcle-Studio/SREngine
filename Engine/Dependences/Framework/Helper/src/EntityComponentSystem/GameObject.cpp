@@ -169,3 +169,31 @@ bool GameObject::Contains(GameObject *child) {  // TODO: add security multi-thre
     return false;
 }
 
+void GameObject::SetSelect(bool value) {
+    if (value == m_isSelect)
+        return;
+    else {
+        m_isSelect = value;
+
+        if (m_isSelect)
+            m_scene->AddSelected(this);
+        else
+            m_scene->RemoveSelected(this);
+    }
+}
+
+std::string GameObject::GetName() const noexcept  { // TODO: UNSAFE
+    /*ret:
+    if (m_scene->GetCountUsesPoints() > 0)
+        goto ret;
+    else
+        m_scene->AddUsePoint();
+
+    std::string str = m_name;
+
+    m_scene->RemoveUsePoint();
+
+    return str;*/
+    return this->m_name;
+}
+

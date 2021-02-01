@@ -30,6 +30,7 @@ namespace Framework::Helper {
 
         void Destroy();
     public:
+        [[nodiscard]] Scene*     GetScene() const noexcept { return this->m_scene; }
         Transform* GetTransform() noexcept { return this->m_transform; }
     public:
         nlohmann::json Save();
@@ -43,10 +44,11 @@ namespace Framework::Helper {
         [[nodiscard]] inline std::vector<GameObject*> GetChildren() const noexcept { return this->m_children; }
         [[nodiscard]] inline std::vector<GameObject*>& GetChildrenRef() noexcept { return this->m_children; }
         [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
-        [[nodiscard]] inline std::string GetName() const noexcept { return this->m_name; }
+        [[nodiscard]] inline std::string GetName() const noexcept;
         [[nodiscard]] inline bool HasChildren() const noexcept { return m_countChild > 0; }
         [[nodiscard]] inline bool IsSelect() const noexcept { return this->m_isSelect; }
         bool Contains(GameObject* child);
+        void SetSelect(bool value);
     private:
         //std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
 

@@ -10,7 +10,11 @@ local scene;         -- Scene*
 local enabled;       -- Bool
 
 function Inspector()
+    GUIWindow.Begin("Inspector");
 
+    GUIWindow.DrawInspector(scene:GetSelected());
+
+    GUIWindow.End()
 end;
 
 function Hierarchy()
@@ -159,6 +163,7 @@ function Draw()
     if (enabled == true) then
         DockSpace.Begin();
         Hierarchy();
+        Inspector();
         Displayes();
         ToolBar();
         Windows();

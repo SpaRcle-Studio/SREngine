@@ -25,9 +25,9 @@ function LoadGeometry()
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for a = 0, 2, 1 do
-        for b = 0, 2, 1 do
-            for g = 0, 2, 1 do
+    for a = 0, 100, 1 do
+        for b = 0, 100, 1 do
+            for g = 0, 1, 1 do
                 local cube = scene:Instance("Cube");
                 local mesh;
 
@@ -107,6 +107,7 @@ function Start()
 
     --window:Resize(3840, 2160);
     --window:Resize(1920, 1080);
+    --window:Resize(4086, 900);
     window:Resize(1600, 900);
     window:CentralizeWindow();
 

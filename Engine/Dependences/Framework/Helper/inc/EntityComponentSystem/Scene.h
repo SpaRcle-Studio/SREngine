@@ -72,6 +72,10 @@ namespace Framework::Helper {
         unsigned int                        m_countUses            = 0;
         Branch<GameObject*>*                m_tree                 = nullptr;
 
+        std::vector<GameObject*>            m_selectedGameObjects  = std::vector<GameObject*>();
+        std::mutex                          m_selectedMutex        = std::mutex();
+        size_t                              m_countSelected        = 0;
+
         std::vector<GameObject*>            m_rootObjects          = std::vector<GameObject*>();
         bool                                m_rootObjectsEmpty     = true;
     public:
@@ -92,6 +96,7 @@ namespace Framework::Helper {
         }
         //Branch<GameObject*>* GetTree();
 
+
         std::vector<GameObject*>& GetRootGameObjects() noexcept;
 
         [[nodiscard]] inline unsigned int GetCountUsesPoints() const noexcept { return this->m_countUses; }
@@ -111,6 +116,52 @@ namespace Framework::Helper {
             m_countUses--;
 
             return true;
+        }
+    public:
+        [[nodiscard]] inline GameObject* GetSelected() const noexcept {
+            if (m_countSelected == 0 || m_countSelected > 1)
+                return nullptr;
+            else
+                return this->m_selectedGameObjects[0];
+        }
+        inline void UnselectAll() {
+            m_selectedMutex.lock();
+
+            for (auto a : m_selectedGameObjects)
+                a->m_isSelect = false;
+
+            this->m_countSelected = 0;
+            this->m_selectedGameObjects.clear();
+
+            m_selectedMutex.unlock();
+        }
+        inline bool RemoveSelected(GameObject* gameObject) {
+            m_selectedMutex.lock();
+
+            bool found = false;
+
+            for (size_t t = 0; t < m_selectedGameObjects.size(); t++)
+                if (gameObject == m_selectedGameObjects[t]){
+                    this->m_countSelected--;
+                    m_selectedGameObjects.erase(m_selectedGameObjects.begin() + t);
+                    found = true;
+                    break;
+                }
+
+            if (!found)
+                Helper::Debug::Error("Scene::RemoveSelected() : \""+gameObject->GetName() + "\" not found!");
+
+            m_selectedMutex.unlock();
+
+            return found;
+        }
+        inline void AddSelected(GameObject* gameObject) {
+            m_selectedMutex.lock();
+
+            this->m_selectedGameObjects.push_back(gameObject);
+            this->m_countSelected++;
+
+            m_selectedMutex.unlock();
         }
     public:
         GameObject* Instance(std::string name);

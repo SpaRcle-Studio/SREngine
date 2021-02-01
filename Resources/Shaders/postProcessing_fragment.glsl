@@ -12,8 +12,7 @@ uniform float gamma;
 
 //uniform vec3 ColorCorrection;
 
-void main()
-{
+void main() {
     //vec3 hdrColor = texture(scene, TexCoords).rgb;
     //hdrColor += texture(bloomBlur, TexCoords).rgb; // additive blending
 

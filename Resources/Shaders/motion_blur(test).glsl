@@ -37,3 +37,22 @@ void main()
     if (result != vec3(0,0,0))
         FragColor = vec4(result, 1);
 }
+vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
+    vec2 coord = fragPos3D.xz * scale;
+    vec2 derivative = fwidth(coord);
+    vec2 grid = abs(fract(coord - 0.5) - 0.5) / derivative;
+    float line = min(grid.x, grid.y);
+    float minimumz = min(derivative.y, 1);
+    float minimumx = min(derivative.x, 1);
+    vec4 color = vec4(0.2, 0.2, 0.2, 1.0 - min(line, 1.0));
+
+    // z axis
+    if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
+    color.z = 1.0;
+    else
+    // x axis
+    if(fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1 * minimumz)
+    color.x = 1.0;
+
+    return color;
+}

@@ -5,6 +5,7 @@
 #ifndef GAMEENGINE_GUIWINDOW_H
 #define GAMEENGINE_GUIWINDOW_H
 
+#include <Input/InputSystem.h>
 #include <Debug.h>
 #include <imgui.h>
 #include <imgui_internal.h>
@@ -16,10 +17,19 @@ namespace Framework::Graphics::GUI {
     private:
         inline static const ImGuiTreeNodeFlags g_node_flags_with_child    = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+        inline static bool m_shiftPressed = false;
     public:
         GUIWindow() = delete;
         ~GUIWindow() = delete;
     private:
+        inline static void CheckSelected(Helper::GameObject* gm) noexcept {
+            if (ImGui::IsItemClicked()) {
+                if (!m_shiftPressed)
+                    gm->GetScene()->UnselectAll();
+
+                gm->SetSelect(true);
+            }
+        }
         inline static void DrawChild(Helper::GameObject* root) noexcept {
             unsigned long i = 0;
 
@@ -30,6 +40,8 @@ namespace Framework::Graphics::GUI {
                             "%s", child->GetName().c_str()
                     );
 
+                    CheckSelected(child);
+
                     if (open)
                         DrawChild(child);
                 } else {
@@ -37,6 +49,8 @@ namespace Framework::Graphics::GUI {
                             g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
                             "%s", child->GetName().c_str()
                     );
+
+                    CheckSelected(child);
                 }
 
                 i++;
@@ -50,6 +64,8 @@ namespace Framework::Graphics::GUI {
 
             unsigned long i = 0;
 
+            GUIWindow::m_shiftPressed = Helper::InputSystem::IsPressed(Helper::KeyCode::LShift);
+
             if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
                 ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
 
@@ -58,12 +74,17 @@ namespace Framework::Graphics::GUI {
                         bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
                                           g_node_flags_with_child     | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
                                           "%s", obj->GetName().c_str());
+
+                        CheckSelected(obj);
+
                         if (open)
                             DrawChild(obj);
                     } else {
                         ImGui::TreeNodeEx((void *) (intptr_t) i,
                                           g_node_flags_without_child | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
                                           "%s", obj->GetName().c_str());
+
+                        CheckSelected(obj);
                     }
 
                     i++;

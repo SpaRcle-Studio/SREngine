@@ -18,9 +18,7 @@ Framework::Engine::Engine() {
     this->m_compiler = new Scripting::Compiler();
 }
 
-Framework::Engine::~Engine() {
-
-}
+Framework::Engine::~Engine() = default;
 
 bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene) {
     this->m_window = window;
@@ -379,6 +377,7 @@ bool Framework::Engine::RegisterLibraries() {
                         return Engine::Get()->GetScene();
                     }))
                     .addFunction("Instance", (GameObject* (Framework::Helper::Scene::*)(std::string))&Helper::Scene::Instance)
+                    .addFunction("GetSelected", (GameObject* (Framework::Helper::Scene::*)(void))&Helper::Scene::GetSelected)
                     .addFunction("DestroyGM", (bool (Framework::Helper::Scene::*)(GameObject*))&Helper::Scene::DestroyGameObject)
                     .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Destroy)
                     .addFunction("Free", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Free)
@@ -597,6 +596,20 @@ bool Framework::Engine::RegisterLibraries() {
                     .addStaticFunction("DrawTexture", static_cast<void(*)(glm::vec2, glm::vec2, unsigned int, bool)>(
                             [](glm::vec2 winSize, glm::vec2 imgSize, unsigned int texID, bool center) {
                         Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
+                    }))
+                    .addStaticFunction("DrawInspector", static_cast<void(*)(Helper::GameObject*)>([](Helper::GameObject*gm) {
+                        if (!gm)
+                            return;
+
+                        ret:
+                        if (gm->GetScene()->GetCountUsesPoints() > 0)
+                            goto ret;
+
+                        gm->GetScene()->AddUsePoint();
+
+
+
+                        gm->GetScene()->RemoveUsePoint();
                     }))
                     .addStaticFunction("DrawHierarchy", static_cast<void(*)(Helper::Scene*)>([](Helper::Scene*scene) {
                         ret:

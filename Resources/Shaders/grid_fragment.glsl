@@ -10,6 +10,28 @@ layout(location = 2) in vec3 farPoint; // farPoint calculated in vertex shader
 layout(location = 3) in mat4 fragView;
 layout(location = 7) in mat4 fragProj;
 
+vec4 axis(vec3 fragPos3D, float scale, bool drawAxis) {
+    vec2 coord = fragPos3D.xz * scale;
+    vec2 derivative = fwidth(coord);
+    vec2 grid = abs(fract(coord - 0.5) - 0.5) / derivative;
+    float line = min(grid.x, grid.y);
+    float minimumz = min(derivative.y, 1);
+    float minimumx = min(derivative.x, 1);
+    vec4 color = vec4(0.2, 0.2, 0.2, 1.0 - min(line, 1.0));
+
+    // z axis
+    if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
+    color.z = 1.0;
+    else
+    // x axis
+    if(fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1 * minimumz)
+    color.x = 1.0;
+    else
+    color.a = 0.0;
+
+    return color;
+}
+
 vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
     vec2 coord = fragPos3D.xz * scale;
     vec2 derivative = fwidth(coord);
@@ -18,12 +40,14 @@ vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
     float minimumz = min(derivative.y, 1);
     float minimumx = min(derivative.x, 1);
     vec4 color = vec4(0.2, 0.2, 0.2, 1.0 - min(line, 1.0));
+
     // z axis
     if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
-        color.z = 1.0;
+        color.a = 0.0;
+    else
     // x axis
     if(fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1 * minimumz)
-        color.x = 1.0;
+        color.a = 0.0;
 
     return color;
 }
@@ -49,6 +73,10 @@ void main() {
     float linearDepth = computeLinearDepth(fragPos3D);
     float fading = max(0, (0.5 - linearDepth));
 
-    FragColor = (grid(fragPos3D, 5, true) + grid(fragPos3D, 1, true))* float(t > 0); // adding multiple resolution for the grid
+    FragColor = (grid(fragPos3D, 0.1, true) + axis(fragPos3D, 10, true)) * float(t > 0); // adding multiple resolution for the grid
+
+    //FragColor = (axis(fragPos3D, 10, true)) * float(t > 0); // adding multiple resolution for the grid
+    //FragColor = (grid(fragPos3D, 1, true) + grid(fragPos3D, 0.1, true))* float(t > 0); // adding multiple resolution for the grid
+    //FragColor = (grid(fragPos3D, 0.1, true) + grid(fragPos3D, 0.1, true))* float(t > 0); // adding multiple resolution for the grid
     FragColor.a *= fading;
 }
