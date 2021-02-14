@@ -40,6 +40,14 @@ namespace Framework::Graphics {
         size_t                  m_t                                 = 0;
         size_t                  m_t2                                = 0;
 
+        // Selected meshes
+        size_t                  m_countNewSelectedMeshes            = 0;
+        std::vector<Mesh*>      m_newSelectedMeshes                 = std::vector<Mesh*>();
+        size_t                  m_countRemoveSelectedMeshes         = 0;
+        std::vector<Mesh*>      m_removeSelectedMeshes              = std::vector<Mesh*>();
+        size_t                  m_countSelectedMeshes               = 0;
+        std::vector<Mesh*>      m_selectedMeshes                    = std::vector<Mesh*>();
+
         std::vector<Mesh*>      m_newMeshes                         = std::vector<Mesh*>();
         size_t                  m_countNewMeshes                    = 0;
         std::vector<Mesh*>      m_removeMeshes                      = std::vector<Mesh*>();
@@ -59,7 +67,7 @@ namespace Framework::Graphics {
 
         Shader*                 m_geometryShader                    = nullptr;
         Shader*                 m_stencilShader                     = nullptr;
-        Shader*                 m_skyboxShader                      = nullptr;
+        //Shader*                 m_skyboxShader                      = nullptr;
         //Shader*                 m_gridShader                        = nullptr;
 
         EditorGrid*             m_grid                              = nullptr;
@@ -85,6 +93,9 @@ namespace Framework::Graphics {
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
 
+        void SelectMesh(Mesh* mesh);
+        void DeselectMesh(Mesh* mesh);
+
         //void RegisterSkyboxToRemove(Skybox* skybox);
         inline bool DelayedDestroySkybox(){
             if (!this->m_skybox){
@@ -106,9 +117,7 @@ namespace Framework::Graphics {
         void RegisterTexture(Texture* texture);
         void FreeTexture(Texture* texture);
     public:
-        [[nodiscard]] inline Window* GetWindow() const noexcept {
-            return m_window;
-        }
+        [[nodiscard]] inline Window* GetWindow() const noexcept { return m_window; }
     public:
         bool Create(Window* window); //, Camera* camera
         /** \warning call only from window thread */

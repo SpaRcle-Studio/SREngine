@@ -2,6 +2,7 @@
 
 layout (location = 0) out vec4 FragColor;
 layout (location = 1) out vec4 BrightColor;
+layout (location = 2) out vec4 DepthColor;
 
 in VS_OUT {
     vec3 FragPos;
@@ -18,23 +19,31 @@ uniform sampler2D DiffuseMap;
 //uniform sampler2D NormalMap;
 //uniform sampler2D SpecularMap;
 
+float zNear = 0.1;
+float zFar  = 100.0;
+
+float LinearizeDepth(float depth) {
+    // преобразуем обратно в NDC
+    float z = depth * 2.0 - 1.0;
+    return (2.0 * zNear * zFar) / (zFar + zNear - z * (zFar - zNear));
+}
+
 void main(){
     vec3 ambient = (hasDiffuse == 1 ? texture(DiffuseMap, fs_in.TexCoord).rgb : vec3(1.f,1.f,1.f)) * color;
     float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
 
-    //vec3 result = vec3(abs(fs_in.FragPos.x), abs(fs_in.FragPos.y), abs(fs_in.FragPos.z)); //ambient;
     vec3 result = ambient; //ambient;
 
     if (bloom == 1) {
         float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
-        if (brightness > 1.0){
+        if (brightness > 1.0)
             BrightColor = vec4(result, alpha);
-        }
         else
             BrightColor = vec4(0.0, 0.0, 0.0, 1.0);
-            //BrightColor = vec4(0.0, 0.0, 0.0, 0.0);
     } else
         BrightColor = vec4(0.0, 0.0, 0.0, 1.0);
+
+    DepthColor = vec4(vec3(LinearizeDepth(gl_FragCoord.z) / zFar), 1);
 
     FragColor = vec4(result, alpha);
 }

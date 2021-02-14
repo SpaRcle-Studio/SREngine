@@ -33,7 +33,7 @@ namespace Framework::Graphics {
     private:
         ~PostProcessing() = default;
     public:
-        PostProcessing(Camera* camera);
+        PostProcessing(Camera* camera, unsigned char countHDRBuffers);
     private:
         float			          m_gamma					    = 0.8f;
         float                     m_exposure                    = 1.f;
@@ -66,7 +66,8 @@ namespace Framework::Graphics {
 
         unsigned int              m_RBODepth                    = 0;
         unsigned int              m_HDRFrameBufferObject        = 0;
-        std::vector<unsigned int> m_ColorBuffers                = { 0, 0 };
+        std::vector<unsigned int> m_ColorBuffers                = { 0, 0, 0 };
+        unsigned char             m_countColorBuffers           = 3;
 
         std::vector<unsigned int> m_PingPongFrameBuffers        = { 0, 0 };
         std::vector<unsigned int> m_PingPongColorBuffers        = { 0, 0 };
@@ -121,8 +122,21 @@ namespace Framework::Graphics {
         [[nodiscard]] inline unsigned int GetBloomMask() const noexcept {
             return this->m_ColorBuffers[1];
         }
+        [[nodiscard]] inline unsigned int GetDepthBuffer() const noexcept {
+            return this->m_ColorBuffers[2];
+        }
         [[nodiscard]] inline unsigned int GetBlurBloomMask() const noexcept {
             return m_PingPongColorBuffers[0];
+        }
+        [[nodiscard]] inline unsigned int GetSkyboxColor() const noexcept {
+            return m_skyboxColorBuffer;
+        }
+        [[nodiscard]] inline unsigned int GetCustomColorBuffer(unsigned char id) const noexcept {
+            if (m_countColorBuffers <= id) {
+                Helper::Debug::Error("PostProcessing::GetCustomColorBuffer(): index error!");
+            }
+            else
+                return m_ColorBuffers[id];
         }
     };
 }

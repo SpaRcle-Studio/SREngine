@@ -133,6 +133,8 @@ namespace Framework::Graphics {
         //bool AddFunctionAtContext(const std::string& funName, std::function<void(void)> fun);
         //bool RemoveFunctionFromContext(const std::string& funName);
     public:
+        [[nodiscard]] inline bool IsFullScreen() const noexcept { return this->m_env->IsFullScreen(); }
+        inline void SetFullScreen(bool value) const noexcept { this->m_env->SetFullScreen(value); }
         [[nodiscard]] inline bool IsWindowOpen()  const noexcept { return !this->m_isWindowClose; }
         [[nodiscard]] inline bool IsWindowFocus() const noexcept { return this->m_isWindowFocus;  }
         [[nodiscard]] inline glm::vec2 GetWindowSize() const noexcept {

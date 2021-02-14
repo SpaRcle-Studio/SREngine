@@ -10,9 +10,11 @@
 #include <glm/glm.hpp>
 #include <algorithm>
 #include <vector>
+#include <locale>
 
 namespace Framework::Helper {
     class StringUtils {
+    public:
         StringUtils() = delete;
         StringUtils(StringUtils&) = delete;
         ~StringUtils() = delete;

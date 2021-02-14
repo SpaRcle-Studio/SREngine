@@ -35,10 +35,10 @@ bool Framework::Graphics::Render::DrawSkybox() noexcept {
     if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
 
     if (m_skybox) {
-        m_skyboxShader->Use();
-        m_currentCamera->UpdateShader(m_skyboxShader);
-        m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
-        m_skybox->Draw();
+        //m_skyboxShader->Use();
+        //m_currentCamera->UpdateShader(m_skyboxShader);
+        //m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
+        m_skybox->Draw(m_currentCamera);
     }
 
     return true;
@@ -66,7 +66,7 @@ bool Framework::Graphics::Render::Create(Window* window) { //, Camera* camera
 
     {
         this->m_geometryShader = new Shader(this, "geometry");
-        this->m_skyboxShader   = new Shader(this, "skybox");
+        //this->m_skyboxShader   = new Shader(this, "skybox");
         this->m_stencilShader  = new Shader(this, "stencil");
         //this->m_gridShader     = new Shader(this, "grid");
 
@@ -145,8 +145,8 @@ bool Framework::Graphics::Render::Close() {
 
     Debug::Graph("Render::Close() : close render...");
 
-    if (m_skyboxShader)
-        m_skyboxShader->Free();
+    //if (m_skyboxShader)
+     //   m_skyboxShader->Free();
 
     if (m_geometryShader)
         m_geometryShader->Free();
@@ -197,6 +197,32 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
     // Temp value
     static Mesh* temp = nullptr;
+
+    // New selected meshes
+    if (m_countNewSelectedMeshes) {
+        for (m_t = 0; m_t < m_countNewSelectedMeshes; m_t++)
+            m_selectedMeshes.push_back(m_newSelectedMeshes[m_t]);
+        m_countSelectedMeshes += m_countNewSelectedMeshes;
+
+        m_countNewSelectedMeshes = 0;
+        m_newSelectedMeshes.clear();
+    }
+
+    // Selected meshes to remove
+    if (m_countRemoveSelectedMeshes){
+        for (m_t = 0; m_t < m_countRemoveSelectedMeshes; m_t++) {
+            temp = m_removeSelectedMeshes[m_t];
+            for (m_t2 = 0; m_t2 < m_countSelectedMeshes; m_t2++)
+                if (temp == m_selectedMeshes[m_t2]){
+                    m_selectedMeshes.erase(m_selectedMeshes.begin() + m_t2);
+                    break;
+                }
+        }
+        m_countSelectedMeshes -= m_countRemoveSelectedMeshes;
+        m_countRemoveSelectedMeshes = 0;
+
+        m_removeSelectedMeshes.clear();
+    }
 
     // Check exists new meshes
     if (m_countNewMeshes) {
@@ -322,6 +348,30 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
 
     texture->AddUsePoint();
     texture->SetRender(this);
+}
+
+void Framework::Graphics::Render::SelectMesh(Framework::Graphics::Types::Mesh *mesh) {
+    m_mutex.lock();
+
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Graph("Render::SelectMesh() : select \""+ mesh->GetGeometryName() +"\"...");
+
+    this->m_newSelectedMeshes.push_back(mesh);
+    this->m_countNewSelectedMeshes++;
+
+    m_mutex.unlock();
+}
+
+void Framework::Graphics::Render::DeselectMesh(Framework::Graphics::Types::Mesh *mesh) {
+    m_mutex.lock();
+
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Graph("Render::DeselectMesh() : deselect \""+ mesh->GetGeometryName() +"\"...");
+
+    this->m_removeSelectedMeshes.push_back(mesh);
+    this->m_countRemoveSelectedMeshes++;
+
+    m_mutex.unlock();
 }
 
 /*

@@ -11,6 +11,16 @@
 
 using namespace Framework::Helper;
 
+Framework::Graphics::PostProcessing::PostProcessing(Camera* camera, unsigned char countHDRBuffers) : m_env(Environment::Get()){
+    this->m_camera = camera;
+    if (countHDRBuffers < 3){
+        Debug::Error("PostProcessing::Constructor(): count buffers is < 3! Skip arg.");
+    } else if (countHDRBuffers > 3) {
+        this->m_ColorBuffers = std::vector<unsigned int>(countHDRBuffers);
+        this->m_countColorBuffers = countHDRBuffers;
+    }
+}
+
 bool Framework::Graphics::PostProcessing::Init(Render* render) {
     if (m_isInit) {
         Debug::Error("PostProcessing::Init() : post processing already initialize!");
@@ -153,10 +163,6 @@ bool Framework::Graphics::PostProcessing::End() {
     return false;
 }
 
-Framework::Graphics::PostProcessing::PostProcessing(Camera* camera) : m_env(Environment::Get()){
-    this->m_camera = camera;
-}
-
 bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
     //Debug::Log("PostProcessing::ReCalcFrameBuffers() : re-calc...");
 
@@ -172,12 +178,8 @@ bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
         return false;
     }
 
-    if (!m_env->CreatePingPongFrameBufferObject({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers))
-    {
-        return false;
-    }
+    return m_env->CreatePingPongFrameBufferObject({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers);
 
-    return true;
 }
 
 bool Framework::Graphics::PostProcessing::Destroy() {

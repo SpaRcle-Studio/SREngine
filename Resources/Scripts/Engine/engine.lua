@@ -25,9 +25,9 @@ function LoadGeometry()
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for a = 0, 100, 1 do
-        for b = 0, 100, 1 do
-            for g = 0, 1, 1 do
+    for a = 0, 5, 1 do
+        for b = 0, 5, 1 do
+            for g = 0, 0, 1 do
                 local cube = scene:Instance("Cube");
                 local mesh;
 
@@ -63,7 +63,7 @@ end;
 function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
-    cameraComp = Camera.New();
+    cameraComp = Camera.New(3);
     local winSize = window:GetWindowSize();
     cameraComp:SetFrameSize(winSize.x, winSize.y);
 
@@ -107,11 +107,16 @@ function Start()
 
     --window:Resize(3840, 2160);
     --window:Resize(1920, 1080);
+    window:Resize(1680, 1050);
+    window:SetFullScreen(false);
     --window:Resize(4086, 900);
-    window:Resize(1600, 900);
+    --window:Resize(1600, 900);
     window:CentralizeWindow();
 
-    skybox = Skybox.Load("Sea.jpg");
+    skybox = Skybox.Load(
+        "Sea.jpg", -- images name
+        "skybox"   -- shader name
+    );
     render:SetSkybox(skybox);
 
     --------------------------------------

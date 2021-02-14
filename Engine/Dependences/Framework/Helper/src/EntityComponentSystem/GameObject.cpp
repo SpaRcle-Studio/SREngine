@@ -5,12 +5,12 @@
 #include <EntityComponentSystem/GameObject.h>
 #include <EntityComponentSystem/Transform.h>
 #include <EntityComponentSystem/Component.h>
+#include <EntityComponentSystem/Scene.h>
 
 #include <utility>
 #include <Debug.h>
 #include <iostream>
 #include <glm/gtx/string_cast.hpp>
-#include <EntityComponentSystem/Scene.h>
 
 using namespace Framework::Helper;
 
@@ -178,11 +178,11 @@ void GameObject::SetSelect(bool value) {
         if (m_isSelect)
             m_scene->AddSelected(this);
         else
-            m_scene->RemoveSelected(this);
+           m_scene->RemoveSelected(this);
     }
 }
 
-std::string GameObject::GetName() const noexcept  { // TODO: UNSAFE
+std::string GameObject::GetName() noexcept  { // TODO: UNSAFE
     /*ret:
     if (m_scene->GetCountUsesPoints() > 0)
         goto ret;
@@ -195,5 +195,17 @@ std::string GameObject::GetName() const noexcept  { // TODO: UNSAFE
 
     return str;*/
     return this->m_name;
+}
+
+std::vector<Component *> GameObject::GetComponents() { // TODO: MAYBE UNSAFE
+    std::vector<Component *> comps = std::vector<Component *>();
+
+    m_mutex.lock();
+
+    comps = m_components;
+
+    m_mutex.unlock();
+
+    return comps;
 }
 

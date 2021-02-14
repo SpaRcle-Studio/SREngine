@@ -39,12 +39,13 @@ namespace Framework::Helper {
         /** \brief Get first needed component */
         Component* GetComponent(std::string name);
         std::vector<Component*> GetComponents(const std::string& name);
+        std::vector<Component*> GetComponents();
         bool AddComponent(Component* component);
         bool AddChild(GameObject* child);
         [[nodiscard]] inline std::vector<GameObject*> GetChildren() const noexcept { return this->m_children; }
         [[nodiscard]] inline std::vector<GameObject*>& GetChildrenRef() noexcept { return this->m_children; }
         [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
-        [[nodiscard]] inline std::string GetName() const noexcept;
+        [[nodiscard]] std::string GetName() noexcept;
         [[nodiscard]] inline bool HasChildren() const noexcept { return m_countChild > 0; }
         [[nodiscard]] inline bool IsSelect() const noexcept { return this->m_isSelect; }
         bool Contains(GameObject* child);

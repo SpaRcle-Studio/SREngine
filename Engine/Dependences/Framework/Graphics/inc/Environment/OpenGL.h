@@ -7,10 +7,16 @@
 #include <easy/profiler.h>
 #include <Environment/Environment.h>
 #include <GL/glew.h>
+
+#define GLFW_EXPOSE_NATIVE_WIN32
+
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
+
 #include <glm/glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 #include <Debug.h>
+
 
 namespace Framework::Graphics {
     class OpenGL : public Environment {
@@ -66,7 +72,26 @@ namespace Framework::Graphics {
             return {0,0};
         }
 
+        [[nodiscard]] inline bool IsFullScreen() const noexcept override {
+            return glfwGetWindowMonitor(m_window) != nullptr;
+        }
+        inline void SetFullScreen(bool value) override {
+            if (IsFullScreen() == value)
+                return;
 
+            if (value) {
+                Helper::Debug::Graph("OpenGL::SetFullScreen(): enable full screen...");
+                const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+                // switch to full screen
+                glfwSetWindowMonitor(m_window, glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, 0 );
+            }
+            else {
+                Helper::Debug::Graph("OpenGL::SetFullScreen(): disable full screen...");
+
+                const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+                glfwSetWindowMonitor(m_window, NULL, 0, 0,  mode->width, mode->height, 0);
+            }
+        }
 
         void PoolEvents() override;
 

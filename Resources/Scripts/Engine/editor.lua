@@ -4,6 +4,7 @@ local final_id;      -- int
 local bloom_id;      -- int
 local bloomBlur_id;  -- int
 local skybox_id;     -- int
+local depth_id;      -- int
 
 local scene;         -- Scene*
 
@@ -39,7 +40,9 @@ function SetIndices()
     colored_id    = camera:GetPostProcessing():GetColoredImage();
     bloom_id      = camera:GetPostProcessing():GetBloomMask();
     bloomBlur_id  = camera:GetPostProcessing():GetBlurBloomMask();
-    skybox_id     = 3;--Stack.PopInt(Script.this);
+    --depth_id      = camera:GetPostProcessing():GetCustomColorBuffer(2);
+    depth_id      = camera:GetPostProcessing():GetDepthBuffer();
+    skybox_id     = camera:GetPostProcessing():GetSkyboxColor();
 
     enabled = true;
 end;
@@ -73,6 +76,17 @@ function Displayes()
         GUIWindow.GetSize(),
         cameraSize,
         bloom_id,
+        true
+    );
+    GUIWindow.EndChild();
+    GUIWindow.End();
+
+    GUIWindow.Begin("Depth buffer");
+    GUIWindow.BeginChild("Render");
+    GUIWindow.DrawTexture(
+        GUIWindow.GetSize(),
+        cameraSize,
+        depth_id,
         true
     );
     GUIWindow.EndChild();
@@ -137,6 +151,13 @@ function ToolBar()
                 EventManager.Push(Event.Exit);
             end;
 
+            GUIWindow.EndMenu();
+        end;
+
+        if (GUIWindow.BeginMenu("View")) then
+            if (GUIWindow.MenuItem("Switch fullscreen")) then
+                Window.Get():SetFullScreen(not Window.Get():IsFullScreen())
+            end;
             GUIWindow.EndMenu();
         end;
 

@@ -43,18 +43,19 @@ namespace Framework::Graphics::Types {
             this->m_vertices = vertices;
         }
     public:
-        void OnMove(glm::vec3 newValue)noexcept override{
+        void OnMove(glm::vec3 newValue) noexcept override{
             m_position = newValue;
             ReCalcModel();
         }
-        void OnRotate(glm::vec3 newValue)noexcept override{
+        void OnRotate(glm::vec3 newValue) noexcept override{
             m_rotation = newValue;
             ReCalcModel();
         }
-        void OnScaled(glm::vec3 newValue)noexcept override{
+        void OnScaled(glm::vec3 newValue) noexcept override{
             m_scale = newValue;
             ReCalcModel();
         }
+        void OnSelected(bool value) noexcept override;
     public:
         /** \brief Free mesh pointer
          * \return bool */
@@ -94,7 +95,7 @@ namespace Framework::Graphics::Types {
     protected:
         void OnDestroyGameObject() noexcept override;
     public:
-        inline void WaitCalculate() {
+        inline void WaitCalculate() const {
             ret:
             if (m_isCalculated)
                 return;
@@ -106,6 +107,7 @@ namespace Framework::Graphics::Types {
         glm::vec3					m_scale				= {1,1,1};
         glm::mat4					m_modelMat			= glm::mat4(0);
     public:
+        [[nodiscard]] std::string GetGeometryName() const noexcept { return this->m_geometry_name; }
         // TODO: Repeat. Make a comments, please
         static std::vector<Mesh*> Load(std::string path);
         static Mesh* LoadJson(std::string json_data, std::vector<Mesh*>* allMeshes = nullptr);

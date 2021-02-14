@@ -53,7 +53,7 @@ namespace Framework::Helper {
 
     typedef Branch<GameObject*>* SceneTree;
 
-    class GameObject;
+//    class GameObject;
     class Scene {
     private:
         Scene();
@@ -124,45 +124,9 @@ namespace Framework::Helper {
             else
                 return this->m_selectedGameObjects[0];
         }
-        inline void UnselectAll() {
-            m_selectedMutex.lock();
-
-            for (auto a : m_selectedGameObjects)
-                a->m_isSelect = false;
-
-            this->m_countSelected = 0;
-            this->m_selectedGameObjects.clear();
-
-            m_selectedMutex.unlock();
-        }
-        inline bool RemoveSelected(GameObject* gameObject) {
-            m_selectedMutex.lock();
-
-            bool found = false;
-
-            for (size_t t = 0; t < m_selectedGameObjects.size(); t++)
-                if (gameObject == m_selectedGameObjects[t]){
-                    this->m_countSelected--;
-                    m_selectedGameObjects.erase(m_selectedGameObjects.begin() + t);
-                    found = true;
-                    break;
-                }
-
-            if (!found)
-                Helper::Debug::Error("Scene::RemoveSelected() : \""+gameObject->GetName() + "\" not found!");
-
-            m_selectedMutex.unlock();
-
-            return found;
-        }
-        inline void AddSelected(GameObject* gameObject) {
-            m_selectedMutex.lock();
-
-            this->m_selectedGameObjects.push_back(gameObject);
-            this->m_countSelected++;
-
-            m_selectedMutex.unlock();
-        }
+        void UnselectAll();
+        bool RemoveSelected(GameObject* gameObject);
+        void AddSelected(GameObject* gameObject);
     public:
         GameObject* Instance(std::string name);
         bool DestroyGameObject(GameObject* gameObject);

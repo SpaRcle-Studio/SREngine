@@ -21,7 +21,7 @@ namespace Framework::Graphics {
     private:
     public:
         ~Camera();
-        Camera();
+        Camera(unsigned char countHDRBuffers = 2);
         void UpdateProjection(unsigned int w, unsigned int h);
 
         inline void SetDirectOutput(bool value) noexcept {

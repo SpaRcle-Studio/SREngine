@@ -342,3 +342,16 @@ nlohmann::json Mesh::Save() {
 
     return json;
 }
+
+void Mesh::OnSelected(bool value) noexcept {
+    if (value == this->IsSelected())
+        return;
+    else {
+        if (this->IsSelected())
+            this->m_render->DeselectMesh(this);
+        else
+            this->m_render->SelectMesh(this);
+    }
+
+    Component::OnSelected(value);
+}

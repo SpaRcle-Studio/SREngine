@@ -431,7 +431,10 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("GetFinalTextureID", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetFinally)
                     .addFunction("GetColoredImage", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetColoredImage)
                     .addFunction("GetBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBloomMask)
+                    .addFunction("GetCustomColorBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(unsigned char))&Graphics::PostProcessing::GetCustomColorBuffer)
                     .addFunction("GetBlurBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBlurBloomMask)
+                    .addFunction("GetSkyboxColor", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetSkyboxColor)
+                    .addFunction("GetDepthBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetDepthBuffer)
                 .endClass();
     });
 
@@ -439,8 +442,8 @@ bool Framework::Engine::RegisterLibraries() {
     this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Camera>("Camera")
-                    .addStaticFunction("New", static_cast<Graphics::Camera*(*)()>([]() -> Graphics::Camera* {
-                        return new Graphics::Camera();
+                    .addStaticFunction("New", static_cast<Graphics::Camera*(*)(unsigned int)>([](unsigned int countHDRBuffers) -> Graphics::Camera* {
+                        return new Graphics::Camera(countHDRBuffers);
                     }))
                     .addFunction("GetPostProcessing", (Graphics::PostProcessing* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetPostProcessing)
                     //.addFunction("Free", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::Free)
@@ -491,8 +494,8 @@ bool Framework::Engine::RegisterLibraries() {
     this->m_compiler->RegisterScriptClass("Graphics", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Skybox>("Skybox")
-                    .addStaticFunction("Load", static_cast<Graphics::Skybox*(*)(std::string)>([](std::string name) -> Graphics::Skybox* {
-                        return Skybox::Load(std::move(name));
+                    .addStaticFunction("Load", static_cast<Graphics::Skybox*(*)(std::string, std::string)>([](std::string name, std::string shaderName) -> Graphics::Skybox* {
+                        return Skybox::Load(std::move(name), std::move(shaderName));
                     }))
                     .addFunction("Free", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::Free)
                     .addFunction("AwaitDestroy", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::AwaitDestroy)
@@ -523,7 +526,9 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("DestroyCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::DestroyCamera)
                     .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)
                     .addFunction("GetWindowSize", (glm::vec2 (Framework::Graphics::Window::*)(void))&Graphics::Window::GetWindowSize)
+                    .addFunction("IsFullScreen", (bool (Framework::Graphics::Window::*)(void))&Graphics::Window::IsFullScreen)
                     .addFunction("SetGUIEnabled", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetGUIEnabled)
+                    .addFunction("SetFullScreen", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetFullScreen)
                     .addFunction("Resize", (void (Framework::Graphics::Window::*)(unsigned int, unsigned int))&Graphics::Window::Resize)
                     .addFunction("CentralizeWindow", (void (Framework::Graphics::Window::*)())&Graphics::Window::CentralizeWindow)
                 .endClass();

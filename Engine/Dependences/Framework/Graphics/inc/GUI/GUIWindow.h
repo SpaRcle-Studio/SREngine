@@ -10,7 +10,13 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <glm/glm.hpp>
-#include <EntityComponentSystem/Scene.h>
+//#include <EntityComponentSystem/Scene.h>
+//#include <EntityComponentSystem/GameObject.h>
+
+namespace Framework::Helper{
+    class Scene;
+    class GameObject;
+}
 
 namespace Framework::Graphics::GUI {
     class GUIWindow {
@@ -22,102 +28,16 @@ namespace Framework::Graphics::GUI {
         GUIWindow() = delete;
         ~GUIWindow() = delete;
     private:
-        inline static void CheckSelected(Helper::GameObject* gm) noexcept {
-            if (ImGui::IsItemClicked()) {
-                if (!m_shiftPressed)
-                    gm->GetScene()->UnselectAll();
-
-                gm->SetSelect(true);
-            }
+        inline static void CheckSelected(Helper::GameObject* gm) noexcept;
+        static void DrawChild(Helper::GameObject* root) noexcept;
+        static inline ImVec2 SumVec2(const ImVec2& v1, const ImVec2& v2){
+            return ImVec2(v1.x + v2.x, v1.y + v2.y);
         }
-        inline static void DrawChild(Helper::GameObject* root) noexcept {
-            unsigned long i = 0;
-
-            for (auto child : root->GetChildrenRef()) {
-                if (child->HasChildren()){
-                    bool open = ImGui::TreeNodeEx((void*)(intptr_t)i,
-                            g_node_flags_with_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                            "%s", child->GetName().c_str()
-                    );
-
-                    CheckSelected(child);
-
-                    if (open)
-                        DrawChild(child);
-                } else {
-                    ImGui::TreeNodeEx((void*)(intptr_t)i,
-                            g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                            "%s", child->GetName().c_str()
-                    );
-
-                    CheckSelected(child);
-                }
-
-                i++;
-            }
-
-            ImGui::TreePop();
+        static inline ImVec2 SubVec2(const ImVec2& v1, const ImVec2& v2){
+            return ImVec2(v1.x - v2.x, v1.y - v2.y);
         }
     public:
-        inline static void DrawHierarchy(Helper::Scene* scene) noexcept {
-            auto root = scene->GetRootGameObjects();
-
-            unsigned long i = 0;
-
-            GUIWindow::m_shiftPressed = Helper::InputSystem::IsPressed(Helper::KeyCode::LShift);
-
-            if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
-                ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
-
-                for (auto obj : root){
-                    if (obj->HasChildren()) {
-                        bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                          g_node_flags_with_child     | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", obj->GetName().c_str());
-
-                        CheckSelected(obj);
-
-                        if (open)
-                            DrawChild(obj);
-                    } else {
-                        ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                          g_node_flags_without_child | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", obj->GetName().c_str());
-
-                        CheckSelected(obj);
-                    }
-
-                    i++;
-                }
-
-                ImGui::TreePop();
-                ImGui::PopStyleVar();
-            }
-            /*Helper::SceneTree tree = scene->GetTree();
-
-            Helper::GameObject* obj = nullptr;
-
-            if (ImGui::TreeNode(scene->GetName().c_str())) {
-                ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
-
-                for (unsigned long i = 0; i < tree->GetCountBranches(); i++) {
-                    obj = tree->m_branches[i]->m_data;
-
-                    if (obj->HasChildren()) {
-                        ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                          g_node_flags_with_child     | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", obj->GetName().c_str());
-                    } else {
-                        ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                           g_node_flags_without_child | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", obj->GetName().c_str());
-                    }
-                }
-
-                ImGui::TreePop();
-                ImGui::PopStyleVar();
-            }*/
-        }
+        static void DrawHierarchy(Helper::Scene* scene) noexcept;
 
         inline static void Begin(const std::string& winName) noexcept {
             ImGui::Begin(winName.c_str());
@@ -150,9 +70,11 @@ namespace Framework::Graphics::GUI {
             if (window->SkipItems)
                 return;
 
-            ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
+            //ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
+            ImRect bb(window->DC.CursorPos, SumVec2(window->DC.CursorPos, size));
             if (border_col.w > 0.0f)
-                bb.Max += ImVec2(2, 2);
+                bb.Max = SumVec2(bb.Max, ImVec2(2, 2));
+                //bb.Max += ImVec2(2, 2);
 
             if (!imposition) {
                 ImGui::ItemSize(bb);
@@ -165,7 +87,8 @@ namespace Framework::Graphics::GUI {
             if (border_col.w > 0.0f)
             {
                 window->DrawList->AddRect(bb.Min, bb.Max, ImGui::GetColorU32(border_col), 0.0f);
-                window->DrawList->AddImage(user_texture_id, bb.Min + ImVec2(1, 1), bb.Max - ImVec2(1, 1), uv0, uv1, ImGui::GetColorU32(tint_col));
+                //window->DrawList->AddImage(user_texture_id, bb.Min + ImVec2(1, 1), bb.Max - ImVec2(1, 1), uv0, uv1, ImGui::GetColorU32(tint_col));
+                window->DrawList->AddImage(user_texture_id, SumVec2(bb.Min, ImVec2(1, 1)), SubVec2(bb.Max, ImVec2(1, 1)), uv0, uv1, ImGui::GetColorU32(tint_col));
             }
             else
             {

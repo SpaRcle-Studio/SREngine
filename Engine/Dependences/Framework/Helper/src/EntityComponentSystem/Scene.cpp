@@ -4,6 +4,7 @@
 
 #include "EntityComponentSystem/Scene.h"
 #include <EntityComponentSystem/GameObject.h>
+#include <EntityComponentSystem/Component.h>
 
 #include <utility>
 #include <Debug.h>
@@ -106,7 +107,7 @@ bool Framework::Helper::Scene::Free() {
 
 void pr(Framework::Helper::Branch<Framework::Helper::GameObject*>* tree, int deep){
     for (auto a : tree->m_branches) {
-        std::cout << std::string(deep + 1, '\t') << a->m_data->GetName() + "\n";
+//        std::cout << std::string(deep + 1, '\t') << a->m_data->GetName() + "\n";
         pr(a, deep + 1);
     }
 }
@@ -179,4 +180,63 @@ std::vector<Framework::Helper::GameObject *>& Framework::Helper::Scene::GetRootG
         m_mutex.unlock();
         return m_rootObjects;
     }
+}
+
+void Framework::Helper::Scene::AddSelected(Framework::Helper::GameObject *gameObject) {
+    m_selectedMutex.lock();
+
+    this->m_selectedGameObjects.push_back(gameObject);
+
+    auto components = gameObject->GetComponents();
+    for (Framework::Helper::Component* comp : components)
+        comp->OnSelected(true);
+
+    this->m_countSelected++;
+
+    m_selectedMutex.unlock();
+}
+
+bool Framework::Helper::Scene::RemoveSelected(Framework::Helper::GameObject *gameObject) {
+    m_selectedMutex.lock();
+
+    bool found = false;
+
+    auto components = gameObject->GetComponents();
+    for (Framework::Helper::Component* comp : components)
+        comp->OnSelected(false);
+
+    for (size_t t = 0; t < m_selectedGameObjects.size(); t++)
+        if (gameObject == m_selectedGameObjects[t]){
+            this->m_countSelected--;
+            m_selectedGameObjects.erase(m_selectedGameObjects.begin() + t);
+            found = true;
+            break;
+        }
+
+    if (!found)
+        Helper::Debug::Error("Scene::RemoveSelected() : \""+gameObject->GetName() + "\" not found!");
+    else {
+
+    }
+
+    m_selectedMutex.unlock();
+
+    return found;
+}
+
+void Framework::Helper::Scene::UnselectAll() {
+    m_selectedMutex.lock();
+
+    for (auto gameObject : m_selectedGameObjects) {
+        auto components = gameObject->GetComponents();
+        for (Framework::Helper::Component* comp : components)
+            comp->OnSelected(false);
+
+        gameObject->m_isSelect = false;
+    }
+
+    this->m_countSelected = 0;
+    this->m_selectedGameObjects.clear();
+
+    m_selectedMutex.unlock();
 }

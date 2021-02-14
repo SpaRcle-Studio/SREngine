@@ -187,6 +187,9 @@ void Framework::Graphics::Window::Thread() {
         //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &w, &h);
     }
 
+    //m_env->SetFullScreen(true);
+    //m_env->SetFullScreen(false);
+
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
         if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Magenta); }
 
@@ -269,7 +272,6 @@ void Framework::Graphics::Window::Draw() {
 
         camera->GetPostProcessing()->BeginSkybox();
         {
-
             this->m_render->DrawSkybox();
             this->m_render->DrawGrid();
         }
@@ -399,6 +401,7 @@ void Framework::Graphics::Window::CentralizeWindow() {
     this->m_newWindowPos = { w, h };
     this->m_isNeedMove = true;
 }
+
 
 /*
 bool Framework::Graphics::Window::AddFunctionAtContext(const std::string &funName, std::function<void(void)> fun) {

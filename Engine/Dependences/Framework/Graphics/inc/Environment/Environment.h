@@ -76,6 +76,9 @@ namespace Framework::Graphics {
 
         inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = callback; }
 
+        [[nodiscard]] virtual inline bool IsFullScreen() const noexcept = 0;
+        virtual inline void SetFullScreen(bool value) = 0;
+
         virtual bool PreInit(unsigned int smooth_samples) = 0;
 
         /* set current opengl/vulkan/directx context */

@@ -17,7 +17,7 @@ Framework::Graphics::Types::Skybox::Skybox() {
 
 Framework::Graphics::Types::Skybox::~Skybox() = default;
 
-Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std::string name) {
+Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std::string name, const std::string& shader_name) {
     std::string ext = StringUtils::GetExtensionFromFilePath(name);
     name.resize(name.size() - ext.size() - 1);
 
@@ -58,8 +58,9 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
         sides[i] = data;
     }
 
-    Skybox* skybox = new Skybox();
+    auto* skybox = new Skybox();
 
+    skybox->m_shaderName = shader_name;
     skybox->m_width  = W;
     skybox->m_height = H;
     skybox->m_data   = sides;
@@ -129,13 +130,34 @@ bool Framework::Graphics::Types::Skybox::Free() {
     }
 }
 
-void Framework::Graphics::Types::Skybox::Draw() {
+void Framework::Graphics::Types::Skybox::Draw(Camera* camera) {
     if (!m_isCalculated)
         this->Calculate();
+
+    if (!m_shader)
+        return;
+    else{
+        m_shader->Use();
+        camera->UpdateShader(m_shader);
+        m_shader->SetVec3("CamPos", camera->GetGLPosition());
+    }
 
     m_env->SetActiveTexture(0);
 
     m_env->DrawSkybox(m_VAO, m_cubeMap);
+}
+
+bool Framework::Graphics::Types::Skybox::SetRender(Render *render) {
+    if (m_render) {
+        Debug::Error("Skybox::SetRender() : render already set!");
+        return false;
+    }
+
+    this->m_render = render;
+
+    this->m_shader = new Shader(m_render, m_shaderName);
+
+    return true;
 }
 
 bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
@@ -145,6 +167,9 @@ bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
     }
 
     Debug::Log("Skybox::FreeVideoMemory() : free skybox video memory...");
+
+    if (m_shader)
+        m_shader->Free();
 
     if (m_VAO)
         this->m_env->FreeMesh(m_VAO);

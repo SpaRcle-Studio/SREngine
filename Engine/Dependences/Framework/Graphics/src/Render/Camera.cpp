@@ -34,13 +34,13 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
     shader->SetMat4("projMat", this->m_projection);
 
     /*
-     mat4x4((1.357995, 0.000000, 0.000000, 0.000000), (0.000000, 2.414213, 0.000000, 0.000000), (0.000000, 0.000000, -1.000025,
-           -1.000000), (0.000000, 0.000000, -0.200003, 0.000000))
+         mat4x4((1.357995, 0.000000, 0.000000, 0.000000), (0.000000, 2.414213, 0.000000, 0.000000), (0.000000, 0.000000, -1.000025,
+               -1.000000), (0.000000, 0.000000, -0.200003, 0.000000))
      */
 }
 
-Framework::Graphics::Camera::Camera() : Component("Camera") {
-    this->m_postProcessing = new PostProcessing(this);
+Framework::Graphics::Camera::Camera(unsigned char countHDRBuffers) : Component("Camera") {
+    this->m_postProcessing = new PostProcessing(this, countHDRBuffers);
 }
 
 Framework::Graphics::Camera::~Camera() = default;

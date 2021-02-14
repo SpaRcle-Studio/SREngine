@@ -10,6 +10,11 @@
 #include <Environment/Environment.h>
 #include <glm/glm.hpp>
 
+namespace Framework::Graphics {
+    class Camera;
+    class Shader;
+}
+
 namespace Framework::Graphics::Types {
     class Skybox {
     private:
@@ -37,6 +42,9 @@ namespace Framework::Graphics::Types {
         bool                            m_isDestroy     = false;
         volatile bool                   m_isVideoFree   = false;
         bool                            m_isUse         = false;
+
+        Shader*                         m_shader        = nullptr;
+        std::string                     m_shaderName    = "Unnamed";
     public:
         /// WARNING: Call only from render!
         bool FreeVideoMemory();
@@ -45,21 +53,13 @@ namespace Framework::Graphics::Types {
             this->m_isVideoFree = value;
         }
 
-        inline bool SetRender(Render* render){
-            if (m_render){
-                Debug::Error("Skybox::SetRender() : render already set!");
-                return false;
-            }
-
-            this->m_render = render;
-            return true;
-        }
-        inline unsigned int GetCubeMap() const noexcept { return m_cubeMap; }
-        void Draw();
+        bool SetRender(Render* render);
+        [[nodiscard]] inline unsigned int GetCubeMap() const noexcept { return m_cubeMap; }
+        void Draw(Camera* camera);
         bool AwaitDestroy();
         bool Free();
     public:
-        static Skybox* Load(std::string name);
+        static Skybox* Load(std::string name, const std::string& shader_name);
     };
 }
 

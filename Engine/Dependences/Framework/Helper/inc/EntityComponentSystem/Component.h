@@ -23,20 +23,25 @@ namespace Framework::Helper {
             return json;
         }
     protected:
-        bool m_isActive = true;
+        bool m_isSelected        = false;
+        bool m_isActive          = true;
         const std::string m_name = "Unknown";
-        GameObject* m_parent = nullptr;
+        GameObject* m_parent     = nullptr;
     public:
         inline Component* BaseComponent() noexcept { return this; }
 
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }
 
-        virtual void OnRotate(glm::vec3 newValue) noexcept { };
-        virtual void OnMove(glm::vec3 newValue) noexcept { };
-        virtual void OnScaled(glm::vec3 newValue) noexcept { };
+        virtual void OnRotate(glm::vec3 newValue)   noexcept { };
+        virtual void OnMove(glm::vec3 newValue)     noexcept { };
+        virtual void OnScaled(glm::vec3 newValue)   noexcept { };
+        virtual void OnSelected(bool value)         noexcept {
+            this->m_isSelected = value;
+        };
 
         inline void SetActive(bool v) { m_isActive = v; }
         [[nodiscard]] inline bool IsActive() const noexcept { return m_isActive; }
+        [[nodiscard]] inline bool IsSelected() const noexcept { return m_isSelected; }
     protected:
         virtual void OnDestroyGameObject() noexcept = 0;
     };
