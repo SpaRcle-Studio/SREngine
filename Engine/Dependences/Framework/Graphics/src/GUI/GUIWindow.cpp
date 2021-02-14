@@ -3,6 +3,7 @@
 //
 
 #include <GUI/GUIWindow.h>
+#include <EntityComponentSystem/Transform.h>
 #include <EntityComponentSystem/Scene.h>
 
 void Framework::Graphics::GUI::GUIWindow::DrawChild(Framework::Helper::GameObject *root) noexcept {
@@ -78,4 +79,26 @@ void Framework::Graphics::GUI::GUIWindow::CheckSelected(Framework::Helper::GameO
 
         gm->SetSelect(true);
     }
+}
+
+void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameObject *gameObject) noexcept {
+    //DrawTextOnCenter(gameObject->GetName());
+    //ImGui::Text(("Tag:  " + gameObject->GetTag()).c_str());
+
+    ImGui::Text("%s", ("Name: " + gameObject->GetName()).c_str());
+    ImGui::Separator();
+    DrawTextOnCenter("Transform");
+
+    glm::vec3 position = gameObject->GetTransform()->GetPosition();
+    glm::vec3 rotation = gameObject->GetTransform()->GetRotation();
+    glm::vec3 scale = gameObject->GetTransform()->GetScale();
+
+    if (ImGui::InputFloat3("Tr", &position[0]))
+        gameObject->GetTransform()->SetPosition(position);
+    if (ImGui::InputFloat3("Rt", &rotation[0]))
+        gameObject->GetTransform()->SetRotation(rotation);
+    if (ImGui::InputFloat3("Sc", &scale[0]))
+        gameObject->GetTransform()->SetScale(scale);
+
+    ImGui::TreePop();
 }

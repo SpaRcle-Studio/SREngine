@@ -158,6 +158,9 @@ bool Framework::Graphics::PostProcessing::End() {
     m_env->BindTexture(3, m_ColorBuffers[3]);
     m_postProcessingShader->SetInt("stencil", 3);
 
+    m_env->BindTexture(4, m_ColorBuffers[2]);
+    m_postProcessingShader->SetInt("depth", 4);
+
     m_env->DrawQuad(m_VAO);
 
     if (!m_camera->IsDirectOutput())

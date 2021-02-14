@@ -267,10 +267,6 @@ void Framework::Graphics::Window::Draw() {
 
         this->m_render->SetCurrentCamera(camera);
 
-        if (m_render->HasSelectedMeshes()){
-
-        }
-
         camera->GetPostProcessing()->BeginSkybox();
         {
             this->m_render->DrawSkybox();

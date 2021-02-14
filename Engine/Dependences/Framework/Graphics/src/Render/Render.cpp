@@ -198,7 +198,7 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
     // Temp value
     static Mesh* temp = nullptr;
 
-    // New selected meshes
+    /*// New selected meshes
     if (m_countNewSelectedMeshes) {
         for (m_t = 0; m_t < m_countNewSelectedMeshes; m_t++)
             m_selectedMeshes.push_back(m_newSelectedMeshes[m_t]);
@@ -222,7 +222,7 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
         m_countRemoveSelectedMeshes = 0;
 
         m_removeSelectedMeshes.clear();
-    }
+    }*/
 
     // Check exists new meshes
     if (m_countNewMeshes) {
@@ -350,6 +350,7 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
     texture->SetRender(this);
 }
 
+/*
 void Framework::Graphics::Render::SelectMesh(Framework::Graphics::Types::Mesh *mesh) {
     m_mutex.lock();
 
@@ -376,7 +377,7 @@ void Framework::Graphics::Render::DeselectMesh(Framework::Graphics::Types::Mesh 
 
 void Framework::Graphics::Render::DrawStencil() noexcept {
 
-}
+}*/
 
 /*
 void Framework::Graphics::Render::RegisterSkyboxToRemove(Framework::Graphics::Types::Skybox *skybox) {

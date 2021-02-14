@@ -40,13 +40,13 @@ namespace Framework::Graphics {
         size_t                  m_t                                 = 0;
         size_t                  m_t2                                = 0;
 
-        // Selected meshes
+        /*// Selected meshes
         size_t                  m_countNewSelectedMeshes            = 0;
         std::vector<Mesh*>      m_newSelectedMeshes                 = std::vector<Mesh*>();
         size_t                  m_countRemoveSelectedMeshes         = 0;
         std::vector<Mesh*>      m_removeSelectedMeshes              = std::vector<Mesh*>();
         size_t                  m_countSelectedMeshes               = 0;
-        std::vector<Mesh*>      m_selectedMeshes                    = std::vector<Mesh*>();
+        std::vector<Mesh*>      m_selectedMeshes                    = std::vector<Mesh*>();*/
 
         std::vector<Mesh*>      m_newMeshes                         = std::vector<Mesh*>();
         size_t                  m_countNewMeshes                    = 0;
@@ -89,13 +89,13 @@ namespace Framework::Graphics {
         void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
         [[nodiscard]] inline Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
-        [[nodiscard]] inline bool HasSelectedMeshes() const noexcept { return this->m_countSelectedMeshes != 0; }
+        //[[nodiscard]] inline bool HasSelectedMeshes() const noexcept { return this->m_countSelectedMeshes != 0; }
     public:
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
 
-        void SelectMesh(Mesh* mesh);
-        void DeselectMesh(Mesh* mesh);
+        //void SelectMesh(Mesh* mesh);
+        //void DeselectMesh(Mesh* mesh);
 
         //void RegisterSkyboxToRemove(Skybox* skybox);
         inline bool DelayedDestroySkybox(){
@@ -133,7 +133,7 @@ namespace Framework::Graphics {
         bool DrawGeometry()             noexcept;
         bool DrawSkybox()               noexcept;
         void DrawGrid()                 noexcept;
-        void DrawStencil()              noexcept;
+        //void DrawStencil()              noexcept;
         bool DrawTransparentGeometry()  noexcept;
     };
 }

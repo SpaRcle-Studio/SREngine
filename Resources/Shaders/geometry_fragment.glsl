@@ -21,13 +21,10 @@ uniform sampler2D DiffuseMap;
 //uniform sampler2D NormalMap;
 //uniform sampler2D SpecularMap;
 
-float zNear = 0.1;
-float zFar  = 100.0;
-
 float LinearizeDepth(float depth) {
     // преобразуем обратно в NDC
     float z = depth * 2.0 - 1.0;
-    return (2.0 * zNear * zFar) / (zFar + zNear - z * (zFar - zNear));
+    return (2.0 * 0.1 * 100.0) / (100.0 + 0.1 - z * (100.0 - 0.1));
 }
 
 void main(){
@@ -50,7 +47,7 @@ void main(){
     } else
         BrightColor = vec4(0.0, 0.0, 0.0, 1.0);
 
-    DepthColor = vec4(vec3(LinearizeDepth(gl_FragCoord.z) / zFar), 1);
+    DepthColor = vec4(vec3(LinearizeDepth(gl_FragCoord.z) / 100), 1);
 
     FragColor = vec4(result, alpha);
 }

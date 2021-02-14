@@ -38,6 +38,7 @@ namespace Framework::Graphics::GUI {
         }
     public:
         static void DrawHierarchy(Helper::Scene* scene) noexcept;
+        static void DrawInspector(Helper::GameObject* gameObject) noexcept;
 
         inline static void Begin(const std::string& winName) noexcept {
             ImGui::Begin(winName.c_str());
@@ -63,6 +64,15 @@ namespace Framework::Graphics::GUI {
         inline static glm::vec2 GetWindowSize() {
             ImVec2 size = ImGui::GetWindowSize();
             return {size.x, size.y};
+        }
+        inline static void DrawTextOnCenter(const std::string& text) {
+            float font_size = ImGui::GetFontSize() * text.size() / 2;
+            ImGui::SameLine(
+                    ImGui::GetWindowSize().x / 2 -
+                    font_size + (font_size / 2)
+            );
+
+            ImGui::Text("%s", text.c_str());
         }
         inline static void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition = false)
         {

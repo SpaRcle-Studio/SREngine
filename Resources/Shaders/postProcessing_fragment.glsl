@@ -7,11 +7,18 @@ uniform sampler2D scene;
 uniform sampler2D bloomBlur;
 uniform sampler2D skybox;
 uniform sampler2D stencil;
+uniform sampler2D depth;
 
 uniform float exposure;
 uniform float gamma;
 
 //uniform vec3 ColorCorrection;
+
+float LinearizeDepth(float depth) {
+    // преобразуем обратно в NDC
+    float z = depth * 2.0 - 1.0;
+    return (2.0 * 0.1 * 100.0) / (100.0 + 0.1 - z * (100.0 - 0.1));
+}
 
 void DrawStencil() {
     // outline thickness
@@ -50,8 +57,12 @@ void DrawStencilFast() {
                 if (i == 0 && j == 0)
                     continue;
 
-                if (texture(stencil, TexCoords + vec2(i, j) * size).a == 0)
-                    FragColor = vec4(vec3(1, 1, 1), 1.0f);
+                if (texture(stencil, TexCoords + vec2(i, j) * size).a == 0) {
+                    if (LinearizeDepth(gl_FragCoord.z) / 100 > texture(depth, TexCoords + vec2(i, j) * size).r)
+                        FragColor = vec4(vec3(1, 1, 1), 1.0f);
+                    else
+                        FragColor = vec4(vec3(1, 0, 0), 1.0f);
+                }
             }
         }
 

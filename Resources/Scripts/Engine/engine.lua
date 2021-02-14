@@ -25,8 +25,8 @@ function LoadGeometry()
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for a = 0, 100, 1 do
-        for b = 0, 100, 1 do
+    for a = 0, 4, 1 do
+        for b = 0, 4, 1 do
             for g = 0, 0, 1 do
                 local cube = scene:Instance("Cube");
                 local mesh;
@@ -72,7 +72,7 @@ function LoadCamera()
 
     cameraComp:GetPostProcessing():SetBloom(true);
     cameraComp:GetPostProcessing():SetBloomIntensity(2.0);
-    cameraComp:GetPostProcessing():SetBloomAmount(10);
+    cameraComp:GetPostProcessing():SetBloomAmount(5);
     cameraComp:GetPostProcessing():SetGamma(0.8);
 
     camera:AddComponent(cameraComp:Base());

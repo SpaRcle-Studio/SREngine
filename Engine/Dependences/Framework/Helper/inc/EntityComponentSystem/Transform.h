@@ -35,6 +35,7 @@ namespace Framework::Helper {
 
         [[nodiscard]] inline glm::vec3 GetPosition(bool local = false) const noexcept { return local ? m_localPosition : m_globalPosition; }
         [[nodiscard]] inline glm::vec3 GetRotation(bool local = false) const noexcept { return local ? m_localRotation : m_globalRotation; }
+        [[nodiscard]] inline glm::vec3 GetScale(bool local = false) const noexcept { return local ? m_localScale : m_globalScale; }
         //[[nodiscard]] inline glm::vec3 GetAroundRotation() const noexcept { return m_aroundRotation; }
 
         /* Left-Center-Right */
