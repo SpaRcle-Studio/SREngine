@@ -89,6 +89,7 @@ namespace Framework::Graphics {
         void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
         [[nodiscard]] inline Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
+        [[nodiscard]] inline bool HasSelectedMeshes() const noexcept { return this->m_countSelectedMeshes != 0; }
     public:
         void RemoveMesh(Mesh* mesh);
         void RegisterMesh(Mesh* mesh);
@@ -132,6 +133,7 @@ namespace Framework::Graphics {
         bool DrawGeometry()             noexcept;
         bool DrawSkybox()               noexcept;
         void DrawGrid()                 noexcept;
+        void DrawStencil()              noexcept;
         bool DrawTransparentGeometry()  noexcept;
     };
 }

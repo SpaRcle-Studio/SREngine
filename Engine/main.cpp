@@ -21,8 +21,6 @@ using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 
 int main() {
-    if (Helper::Debug::Profile()) EASY_PROFILER_ENABLE;
-
     std::string exe = FileSystem::GetPathToExe();
 
     Debug::Init(exe, true, Debug::Theme::Dark);

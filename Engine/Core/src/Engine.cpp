@@ -128,11 +128,6 @@ void Framework::Engine::Await() {
 
         Helper::InputSystem::Check();
 
-        //if (InputSystem::IsDown(KeyCode::Esc)) {
-        //    Debug::System("Engine::Await() : ESC has been pressed.");
-        //    break;
-        //}
-
         if (Helper::Types::Time::Begin()){
             m_compiler->FixedUpdateAll();
 
@@ -434,6 +429,7 @@ bool Framework::Engine::RegisterLibraries() {
                     .addFunction("GetCustomColorBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(unsigned char))&Graphics::PostProcessing::GetCustomColorBuffer)
                     .addFunction("GetBlurBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBlurBloomMask)
                     .addFunction("GetSkyboxColor", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetSkyboxColor)
+                    .addFunction("GetStencilBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetStencilBuffer)
                     .addFunction("GetDepthBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetDepthBuffer)
                 .endClass();
     });

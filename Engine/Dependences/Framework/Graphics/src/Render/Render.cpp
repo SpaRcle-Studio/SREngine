@@ -374,6 +374,10 @@ void Framework::Graphics::Render::DeselectMesh(Framework::Graphics::Types::Mesh 
     m_mutex.unlock();
 }
 
+void Framework::Graphics::Render::DrawStencil() noexcept {
+
+}
+
 /*
 void Framework::Graphics::Render::RegisterSkyboxToRemove(Framework::Graphics::Types::Skybox *skybox) {
     m_mutex.lock();

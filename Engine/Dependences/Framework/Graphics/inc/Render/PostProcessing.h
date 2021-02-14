@@ -66,8 +66,14 @@ namespace Framework::Graphics {
 
         unsigned int              m_RBODepth                    = 0;
         unsigned int              m_HDRFrameBufferObject        = 0;
-        std::vector<unsigned int> m_ColorBuffers                = { 0, 0, 0 };
-        unsigned char             m_countColorBuffers           = 3;
+        std::vector<unsigned int> m_ColorBuffers                = { 0, 0, 0, 0 };
+        unsigned char             m_countColorBuffers           = 4;
+        /*
+             1 - color
+             2 - bloom
+             3 - depth
+             4 - stencil
+         */
 
         std::vector<unsigned int> m_PingPongFrameBuffers        = { 0, 0 };
         std::vector<unsigned int> m_PingPongColorBuffers        = { 0, 0 };
@@ -107,30 +113,23 @@ namespace Framework::Graphics {
 
         bool ReCalcFrameBuffers(int w, int h);
 
+        void BeginStencil();
+        void EndStencil();
+
         void BeginSkybox();
         void EndSkybox();
 
         bool Begin();
         bool End();
 
-        [[nodiscard]] inline unsigned int GetFinally() const noexcept {
-            return this->m_finalColorBuffer;
-        }
-        [[nodiscard]] inline unsigned int GetColoredImage() const noexcept {
-            return this->m_ColorBuffers[0];
-        }
-        [[nodiscard]] inline unsigned int GetBloomMask() const noexcept {
-            return this->m_ColorBuffers[1];
-        }
-        [[nodiscard]] inline unsigned int GetDepthBuffer() const noexcept {
-            return this->m_ColorBuffers[2];
-        }
-        [[nodiscard]] inline unsigned int GetBlurBloomMask() const noexcept {
-            return m_PingPongColorBuffers[0];
-        }
-        [[nodiscard]] inline unsigned int GetSkyboxColor() const noexcept {
-            return m_skyboxColorBuffer;
-        }
+        [[nodiscard]] inline unsigned int GetFinally()          const noexcept { return this->m_finalColorBuffer; }
+        [[nodiscard]] inline unsigned int GetColoredImage()     const noexcept { return this->m_ColorBuffers[0]; }
+        [[nodiscard]] inline unsigned int GetBloomMask()        const noexcept { return this->m_ColorBuffers[1]; }
+        [[nodiscard]] inline unsigned int GetDepthBuffer()      const noexcept { return this->m_ColorBuffers[2]; }
+        [[nodiscard]] inline unsigned int GetBlurBloomMask()    const noexcept { return m_PingPongColorBuffers[0]; }
+        [[nodiscard]] inline unsigned int GetSkyboxColor()      const noexcept { return m_skyboxColorBuffer; }
+        [[nodiscard]] inline unsigned int GetStencilBuffer()    const noexcept { return m_ColorBuffers[3]; }
+
         [[nodiscard]] inline unsigned int GetCustomColorBuffer(unsigned char id) const noexcept {
             if (m_countColorBuffers <= id) {
                 Helper::Debug::Error("PostProcessing::GetCustomColorBuffer(): index error!");

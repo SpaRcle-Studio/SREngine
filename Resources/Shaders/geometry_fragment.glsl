@@ -3,6 +3,7 @@
 layout (location = 0) out vec4 FragColor;
 layout (location = 1) out vec4 BrightColor;
 layout (location = 2) out vec4 DepthColor;
+layout (location = 3) out vec4 StencilMask;
 
 in VS_OUT {
     vec3 FragPos;
@@ -10,6 +11,7 @@ in VS_OUT {
     vec3 Normal;
 } fs_in;
 
+uniform int selected;
 uniform int bloom;
 uniform vec3 color;
 
@@ -33,6 +35,11 @@ void main(){
     float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
 
     vec3 result = ambient; //ambient;
+
+    if (selected == 0)
+        StencilMask = vec4(0, 0, 0, 0);
+    else
+       StencilMask = vec4(1, 1, 1, 1);
 
     if (bloom == 1) {
         float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));

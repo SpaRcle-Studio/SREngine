@@ -13,9 +13,9 @@ using namespace Framework::Helper;
 
 Framework::Graphics::PostProcessing::PostProcessing(Camera* camera, unsigned char countHDRBuffers) : m_env(Environment::Get()){
     this->m_camera = camera;
-    if (countHDRBuffers < 3){
-        Debug::Error("PostProcessing::Constructor(): count buffers is < 3! Skip arg.");
-    } else if (countHDRBuffers > 3) {
+    if (countHDRBuffers < 4){
+        Debug::Error("PostProcessing::Constructor(): count buffers is < 4! Skip arg.");
+    } else if (countHDRBuffers > 4) {
         this->m_ColorBuffers = std::vector<unsigned int>(countHDRBuffers);
         this->m_countColorBuffers = countHDRBuffers;
     }
@@ -155,6 +155,9 @@ bool Framework::Graphics::PostProcessing::End() {
     m_env->BindTexture(2, m_skyboxColorBuffer);
     m_postProcessingShader->SetInt("skybox", 2);
 
+    m_env->BindTexture(3, m_ColorBuffers[3]);
+    m_postProcessingShader->SetInt("stencil", 3);
+
     m_env->DrawQuad(m_VAO);
 
     if (!m_camera->IsDirectOutput())
@@ -196,6 +199,14 @@ void Framework::Graphics::PostProcessing::BeginSkybox() {
 
 void Framework::Graphics::PostProcessing::EndSkybox() {
     m_env->BindFrameBuffer(0);
+}
+
+void Framework::Graphics::PostProcessing::BeginStencil() {
+
+}
+
+void Framework::Graphics::PostProcessing::EndStencil() {
+
 }
 
 

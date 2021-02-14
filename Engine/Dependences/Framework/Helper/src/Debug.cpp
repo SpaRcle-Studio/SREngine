@@ -6,6 +6,7 @@
 #include "FileSystem/FileSystem.h"
 #include <iostream>
 #include <ResourceManager/ResourceManager.h>
+#include <easy/profiler.h>
 
 namespace Framework::Helper {
         void Debug::Print(std::string &msg, Debug::Type type) {
@@ -53,6 +54,8 @@ namespace Framework::Helper {
         }
 
         void Debug::Init(const std::string& log_path, bool ShowUsedMemory, Theme colorTheme) {
+            if (Helper::Debug::Profile()) EASY_PROFILER_ENABLE;
+
             setlocale(LC_ALL, "rus");
             setlocale(LC_NUMERIC, "C");
 

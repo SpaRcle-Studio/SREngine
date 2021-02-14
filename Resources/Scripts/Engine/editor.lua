@@ -5,6 +5,7 @@ local bloom_id;      -- int
 local bloomBlur_id;  -- int
 local skybox_id;     -- int
 local depth_id;      -- int
+local stencil_id;    -- int
 
 local scene;         -- Scene*
 
@@ -43,6 +44,7 @@ function SetIndices()
     --depth_id      = camera:GetPostProcessing():GetCustomColorBuffer(2);
     depth_id      = camera:GetPostProcessing():GetDepthBuffer();
     skybox_id     = camera:GetPostProcessing():GetSkyboxColor();
+    stencil_id    = camera:GetPostProcessing():GetStencilBuffer();
 
     enabled = true;
 end;
@@ -87,6 +89,17 @@ function Displayes()
         GUIWindow.GetSize(),
         cameraSize,
         depth_id,
+        true
+    );
+    GUIWindow.EndChild();
+    GUIWindow.End();
+
+    GUIWindow.Begin("Stencil buffer");
+    GUIWindow.BeginChild("Render");
+    GUIWindow.DrawTexture(
+        GUIWindow.GetSize(),
+        cameraSize,
+        stencil_id,
         true
     );
     GUIWindow.EndChild();
@@ -156,7 +169,9 @@ function ToolBar()
 
         if (GUIWindow.BeginMenu("View")) then
             if (GUIWindow.MenuItem("Switch fullscreen")) then
-                Window.Get():SetFullScreen(not Window.Get():IsFullScreen())
+                --window:Resize(1920, 1080);
+                local will = not Window.Get():IsFullScreen();
+                Window.Get():SetFullScreen(will);
             end;
             GUIWindow.EndMenu();
         end;

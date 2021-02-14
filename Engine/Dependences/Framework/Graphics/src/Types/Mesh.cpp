@@ -274,6 +274,7 @@ bool Mesh::Draw() {
     this->m_shader->SetMat4("modelMat", m_modelMat);
     this->m_shader->SetVec3("color", m_material->m_color); //TODO: change to vec4
     this->m_shader->SetInt("bloom", (int)m_material->m_bloom);
+    this->m_shader->SetInt("selected", (int)this->m_isSelected);
 
     this->m_material->Use();
 

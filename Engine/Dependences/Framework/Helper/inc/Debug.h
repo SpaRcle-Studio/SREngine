@@ -57,7 +57,7 @@ namespace Framework::Helper {
         inline static std::string       g_log_path                  = "";
         inline static std::ofstream     g_file                      = std::ofstream();
         static inline Level             g_level                     = Level::Low;
-        static inline bool              g_profile                   = true;
+        static inline bool              g_profile                   = false;
         static inline size_t            g_countErrors               = 0;
         static inline size_t            g_countWarnings             = 0;
     private:
