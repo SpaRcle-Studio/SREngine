@@ -12,7 +12,7 @@ uniform sampler2D depth;
 uniform float exposure;
 uniform float gamma;
 
-//uniform vec3 ColorCorrection;
+uniform vec3 ColorCorrection;
 
 float LinearizeDepth(float depth) {
     // преобразуем обратно в NDC
@@ -99,9 +99,7 @@ void main() {
     // tone mapping
     vec3 result = vec3(1.0) - exp(-hdrColor * exposure);
 
-    //result.r *= ColorCorrection.r;
-    //result.g *= ColorCorrection.g;
-    //result.b *= ColorCorrection.b;
+    result *= ColorCorrection;
 
     // also gamma correct while we're at it
     result = pow(result, vec3(1.0 / gamma));

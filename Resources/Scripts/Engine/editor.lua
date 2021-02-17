@@ -8,6 +8,7 @@ local depth_id;      -- int
 local stencil_id;    -- int
 
 local scene;         -- Scene*
+local camera;        -- Camera*
 
 local enabled;       -- Bool
 
@@ -32,7 +33,7 @@ function Enabled()
 end;
 
 function SetIndices()
-    local camera  = Stack.PopCamera(Script.this);
+    camera        = Stack.PopCamera(Script.this);
 
     scene         = Stack.PopScene(Script.this);
 
@@ -60,18 +61,23 @@ function Init()
     collectgarbage() -- collect memory
 end;
 
-function Displayes()
+function DrawScene()
     GUIWindow.Begin("Scene");
-    GUIWindow.BeginChild("Render");
-    GUIWindow.DrawTexture(
-        GUIWindow.GetSize(),
-        cameraSize,
-        final_id,
-        true
-    );
-    GUIWindow.EndChild();
-    GUIWindow.End();
+        GUIWindow.BeginChild("Render");
 
+        GUIWindow.DrawTexture(
+            GUIWindow.GetSize(),
+            cameraSize,
+            final_id,
+            true
+        );
+        GUIWindow.DrawGuizmo(camera, scene:GetSelected(), cameraSize);
+
+        GUIWindow.EndChild();
+    GUIWindow.End();
+end
+
+function Displayes()
     GUIWindow.Begin("Bloom Mask");
     GUIWindow.BeginChild("Render");
     GUIWindow.DrawTexture(
@@ -203,6 +209,7 @@ function Draw()
         Displayes();
         ToolBar();
         Windows();
+        DrawScene();
     end;
 
     collectgarbage() -- collect memory

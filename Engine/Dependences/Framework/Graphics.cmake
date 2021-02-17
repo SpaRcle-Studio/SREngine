@@ -26,6 +26,7 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/ICanvas.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/GUIWindow.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/DockSpace.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
 

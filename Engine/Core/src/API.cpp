@@ -440,6 +440,10 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                         [](glm::vec2 winSize, glm::vec2 imgSize, unsigned int texID, bool center) {
                             Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
                         }))
+                .addStaticFunction("DrawGuizmo", static_cast<void(*)(Graphics::Camera*, Helper::GameObject*, glm::vec2)>(
+                        [](Graphics::Camera* camera,Helper::GameObject*gm, glm::vec2 cameraSize) {
+                    Graphics::GUI::GUIWindow::DrawGuizmo(camera, gm, cameraSize);
+                }))
                 .addStaticFunction("DrawInspector", static_cast<void(*)(Helper::GameObject*)>([](Helper::GameObject*gm) {
                     if (!gm)
                         return;

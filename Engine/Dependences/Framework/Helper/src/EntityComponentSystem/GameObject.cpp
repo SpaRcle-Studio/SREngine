@@ -79,6 +79,15 @@ void Framework::Helper::GameObject::Destroy() {
     m_isDestroy = true;
 }
 
+
+void GameObject::UpdateComponents() {
+    for (Component* component : m_components){
+        component->OnMove(m_transform->m_globalPosition);
+        component->OnRotate(m_transform->m_globalRotation);
+        component->OnScaled(m_transform->m_globalScale);
+    }
+}
+
 void GameObject::UpdateComponentsPosition() {
     for (Component* component : m_components)
         component->OnMove(m_transform->m_globalPosition);
@@ -209,3 +218,15 @@ std::vector<Component *> GameObject::GetComponents() { // TODO: MAYBE UNSAFE
     return comps;
 }
 
+void GameObject::SetNameFromInspector(const std::string &name) {
+    if (m_scene->GetCountUsesPoints() > 1) {
+        Debug::Error("GameObject::SetNameFromInspector(): count uses more 1, something went wrong...");
+        return;
+    }
+
+    m_scene->AddUsePoint();
+
+    this->m_name = name;
+
+    m_scene->RemoveUsePoint();
+}

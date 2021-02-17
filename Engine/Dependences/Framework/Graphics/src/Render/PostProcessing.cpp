@@ -115,6 +115,7 @@ bool Framework::Graphics::PostProcessing::End() {
     {
         m_postProcessingShader->SetFloat("gamma", m_gamma);
         m_postProcessingShader->SetFloat("exposure", m_exposure);
+        m_postProcessingShader->SetVec3("ColorCorrection", m_color_correction);
     }
 
     /*if (m_bloom) {

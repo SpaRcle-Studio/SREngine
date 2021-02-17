@@ -13,6 +13,7 @@
 
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
+#include <ImGuizmo.h>
 
 using namespace Framework::Helper;
 
@@ -637,6 +638,9 @@ void Framework::Graphics::OpenGL::BeginDrawGUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    ImGuizmo::BeginFrame();
+    ImGuizmo::Enable(true);
 
     ImGui::GetStyle().WindowRounding = 0.0f;
 }

@@ -395,7 +395,7 @@ void Framework::Graphics::Window::CentralizeWindow() {
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;
 
-    this->m_newWindowPos = { w, h };
+    this->m_newWindowPos = { w, h + 20 }; // TODO: SEE
     this->m_isNeedMove = true;
 }
 

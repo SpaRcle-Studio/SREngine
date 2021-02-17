@@ -90,13 +90,17 @@ namespace Framework::Graphics {
         bool            m_isInit                                = false;
     public:
         [[nodiscard]] inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
-        [[nodiscard]] inline float GetGamma() const noexcept { return m_gamma; }
-        [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom; }
+        [[nodiscard]] inline float GetGamma()               const noexcept { return m_gamma; }
+        [[nodiscard]] inline float GetExposure()            const noexcept { return m_exposure; }
+        [[nodiscard]] inline unsigned char GetBloomAmount() const noexcept { return m_bloomAmount; }
+        [[nodiscard]] inline float GetBloomIntensity()      const noexcept { return m_bloomIntensity; }
+        [[nodiscard]] inline bool GetBloomEnabled()         const noexcept { return this->m_bloom; }
     public:
-        inline void SetGamma(float gamma) noexcept { m_gamma = gamma; }
-        inline void SetExposure(float exposure) noexcept { m_exposure = exposure; }
-        inline void SetBloomAmount(unsigned int amount) noexcept { this->m_bloomAmount = amount; }
-        inline void SetBloomIntensity(float intensity) noexcept { this->m_bloomIntensity = intensity; }
+        inline void SetColorCorrection(glm::vec3 value)     noexcept { m_color_correction = value; }
+        inline void SetGamma(float gamma)                   noexcept { m_gamma = gamma; }
+        inline void SetExposure(float exposure)             noexcept { m_exposure = exposure; }
+        inline void SetBloomAmount(unsigned int amount)     noexcept { this->m_bloomAmount = amount; }
+        inline void SetBloomIntensity(float intensity)      noexcept { this->m_bloomIntensity = intensity; }
 
         inline void SetBloom(bool v) { this->m_bloom = v; }
         inline void SetDisplayBloomMask(bool value) noexcept { m_debugDisplayBloomMask = value; }

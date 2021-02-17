@@ -10,6 +10,7 @@
 #include <mutex>
 #include <json/json.hpp>
 #include <map>
+#include <glm/glm.hpp>
 
 namespace Framework::Helper {
     class Transform;
@@ -21,7 +22,8 @@ namespace Framework::Helper {
     private:
         GameObject(Scene* scene, std::string name, std::string tag = "Untagged");
         ~GameObject();
-    private:
+    public:
+        void UpdateComponents();
         void UpdateComponentsPosition();
         void UpdateComponentsRotation();
         void UpdateComponentsScale();
@@ -36,6 +38,7 @@ namespace Framework::Helper {
         nlohmann::json Save();
     public:
         void SetName(const std::string& name);
+        void SetNameFromInspector(const std::string& name);
         /** \brief Get first needed component */
         Component* GetComponent(std::string name);
         std::vector<Component*> GetComponents(const std::string& name);

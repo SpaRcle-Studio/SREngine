@@ -5,17 +5,25 @@
 #ifndef GAMEENGINE_GUIWINDOW_H
 #define GAMEENGINE_GUIWINDOW_H
 
+#define IMGUI_DEFINE_MATH_OPERATORS
+
 #include <Input/InputSystem.h>
 #include <Debug.h>
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <glm/glm.hpp>
+#include <ImGuizmo.h>
+
 //#include <EntityComponentSystem/Scene.h>
 //#include <EntityComponentSystem/GameObject.h>
 
 namespace Framework::Helper{
     class Scene;
     class GameObject;
+}
+
+namespace Framework::Graphics {
+        class Camera;
 }
 
 namespace Framework::Graphics::GUI {
@@ -28,6 +36,8 @@ namespace Framework::Graphics::GUI {
         GUIWindow() = delete;
         ~GUIWindow() = delete;
     private:
+        inline static ImGuizmo::OPERATION g_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
+
         inline static void CheckSelected(Helper::GameObject* gm) noexcept;
         static void DrawChild(Helper::GameObject* root) noexcept;
         static inline ImVec2 SumVec2(const ImVec2& v1, const ImVec2& v2){
@@ -39,6 +49,65 @@ namespace Framework::Graphics::GUI {
     public:
         static void DrawHierarchy(Helper::Scene* scene) noexcept;
         static void DrawInspector(Helper::GameObject* gameObject) noexcept;
+        static void DrawGuizmo(Graphics::Camera* camera, Helper::GameObject* gameObject, glm::vec2 cameraSize) noexcept;
+
+        inline static bool Vec4Null(const ImVec4& v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
+
+        inline static bool ButtonWithId(
+                const char* _id, const char* label, ImVec2 button_size = ImVec2(0, 0),
+                ImGuiButtonFlags flags = ImGuiButtonFlags_None, bool imposition = false, ImVec2 offset = ImVec2(0,0), ImVec4 color = ImVec4(0,0,0,0)
+        ) {
+            const bool has_color = !Vec4Null(color);
+
+            ImGuiWindow* window = ImGui::GetCurrentWindow();
+            if (window->SkipItems)
+                return false;
+
+            ImGuiContext& g = *GImGui;
+            const ImGuiStyle& style = g.Style;
+            const ImGuiID id = window->GetID(_id);
+            const ImVec2 label_size = ImGui::CalcTextSize(label, NULL, true);
+
+            ImVec2 pos = window->DC.CursorPos + offset;
+            if ((flags & ImGuiButtonFlags_AlignTextBaseLine) && style.FramePadding.y < window->DC.CurrLineTextBaseOffset) // Try to vertically align buttons that are smaller/have no padding so that text baseline matches (bit hacky, since it shouldn't be a flag)
+                pos.y += window->DC.CurrLineTextBaseOffset - style.FramePadding.y;
+            ImVec2 size = ImGui::CalcItemSize(button_size, label_size.x + style.FramePadding.x * 2.0f, label_size.y + style.FramePadding.y * 2.0f);
+
+            const ImRect bb(pos, pos + size);
+
+            if (has_color)
+                ImGui::PushStyleColor(ImGuiCol_Button, color);
+
+            if (!imposition)
+            {
+                ImGui::ItemSize(size, style.FramePadding.y);
+
+                if (!ImGui::ItemAdd(bb, id))
+                    return false;
+            }
+
+            if (window->DC.ItemFlags & ImGuiItemFlags_ButtonRepeat)
+                flags |= ImGuiButtonFlags_Repeat;
+            bool hovered, held;
+            bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, flags);
+
+            // Render
+            const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
+            ImGui::RenderNavHighlight(bb, id);
+            ImGui::RenderFrame(bb.Min, bb.Max, col, true, style.FrameRounding);
+            ImGui::RenderTextClipped(bb.Min + style.FramePadding, bb.Max - style.FramePadding, label, NULL, &label_size, style.ButtonTextAlign, &bb);
+
+            // Automatically close popups
+            //if (pressed && !(flags & ImGuiButtonFlags_DontClosePopups) && (window->Flags & ImGuiWindowFlags_Popup))
+            //    CloseCurrentPopup();
+
+            IMGUI_TEST_ENGINE_ITEM_INFO(id, label, window->DC.LastItemStatusFlags);
+
+            if (has_color)
+                ImGui::PopStyleColor();
+
+            return pressed;
+        }
 
         inline static void Begin(const std::string& winName) noexcept {
             ImGui::Begin(winName.c_str());

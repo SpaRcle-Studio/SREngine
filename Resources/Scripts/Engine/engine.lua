@@ -107,11 +107,12 @@ function Start()
 
     --window:Resize(3840, 2160);
     --window:Resize(1920, 1080);
-    window:Resize(1920, 1060);
+    --window:Resize(1920, 1060);
     --window:Resize(1680, 1050);
+    window:Resize(1600, 900);
+
     window:SetFullScreen(false);
     --window:Resize(4086, 900);
-    --window:Resize(1600, 900);
     window:CentralizeWindow();
 
     skybox = Skybox.Load(

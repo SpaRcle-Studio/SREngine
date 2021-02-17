@@ -33,6 +33,40 @@ namespace Framework::Helper {
         void SetRotation(glm::vec3 val);
         void SetScale(glm::vec3 val);
 
+        [[nodiscard]] inline glm::mat4 GetMatrix(bool local = true) const noexcept {
+            glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), {
+                    local ? m_localPosition.x  : m_globalPosition.x,
+                    local ? m_localPosition.y  : m_globalPosition.y,
+                    local ? -m_localPosition.z : -m_globalPosition.z
+            });
+
+            const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(
+                   local ? m_localRotation : m_globalRotation
+            ))));
+
+            modelMat *= rotationMatrix;
+
+            return glm::scale(modelMat, local ? m_localScale : m_globalScale);
+        }
+        inline void SetMatrix(glm::mat4 matrix) {
+            glm::vec3 scale;
+            glm::quat rotation;
+            glm::vec3 translation;
+
+            glm::vec3 skew;
+            glm::vec4 perspective;
+
+            glm::decompose(matrix, scale, rotation, translation, skew, perspective);
+
+            /*this->m_localPosition = translation;
+            this->m_localRotation = glm::eulerAngles(rotation);
+            this->m_localScale    = scale;*/
+
+            this->m_globalPosition = {translation.x, translation.y, -translation.z};
+            this->m_globalRotation = glm::eulerAngles(rotation);
+            this->m_localScale     = scale;
+        }
+
         [[nodiscard]] inline glm::vec3 GetPosition(bool local = false) const noexcept { return local ? m_localPosition : m_globalPosition; }
         [[nodiscard]] inline glm::vec3 GetRotation(bool local = false) const noexcept { return local ? m_localRotation : m_globalRotation; }
         [[nodiscard]] inline glm::vec3 GetScale(bool local = false) const noexcept { return local ? m_localScale : m_globalScale; }

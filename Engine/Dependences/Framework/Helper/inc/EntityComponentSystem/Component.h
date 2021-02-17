@@ -28,6 +28,7 @@ namespace Framework::Helper {
         const std::string m_name = "Unknown";
         GameObject* m_parent     = nullptr;
     public:
+        [[nodiscard]] inline std::string GetComponentName() const noexcept { return this->m_name; }
         inline Component* BaseComponent() noexcept { return this; }
 
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }
