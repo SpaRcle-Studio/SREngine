@@ -135,7 +135,7 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     m_viewMat = glm::translate(matrix, {
         -m_pos.x,
         -m_pos.y,
-        -m_pos.z
+        m_pos.z//-m_pos.z
     });
 
     //m_pitch * cos(m_roll)   +  m_yaw * sin(m_roll)    + m_roll * sin(m_yaw)

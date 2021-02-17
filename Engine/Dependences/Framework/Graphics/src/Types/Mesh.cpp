@@ -128,7 +128,7 @@ void Mesh::ReCalcModel() {
     modelMat = glm::translate(modelMat, {
             m_position.x,
             m_position.y,
-            -m_position.z
+            m_position.z //-m_position.z
     });
 
     const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(

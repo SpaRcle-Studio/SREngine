@@ -37,7 +37,7 @@ namespace Framework::Helper {
             glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), {
                     local ? m_localPosition.x  : m_globalPosition.x,
                     local ? m_localPosition.y  : m_globalPosition.y,
-                    local ? -m_localPosition.z : -m_globalPosition.z
+                    local ? -m_localPosition.z : m_globalPosition.z
             });
 
             const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(
@@ -62,9 +62,9 @@ namespace Framework::Helper {
             this->m_localRotation = glm::eulerAngles(rotation);
             this->m_localScale    = scale;*/
 
-            this->m_globalPosition = {translation.x, translation.y, -translation.z};
+            this->m_globalPosition = {translation.x, translation.y, translation.z};
             this->m_globalRotation = glm::eulerAngles(rotation);
-            this->m_localScale     = scale;
+            this->m_globalScale    = scale;
         }
 
         [[nodiscard]] inline glm::vec3 GetPosition(bool local = false) const noexcept { return local ? m_localPosition : m_globalPosition; }

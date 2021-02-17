@@ -14,6 +14,7 @@ void main()
     TexCoords.y = aPos.y;
     TexCoords.z = aPos.z;
 
-    vec4 pos = projMat * viewMat * vec4(aPos + CamPos, 1.0);
+    //vec4 pos = projMat * viewMat * vec4(aPos + CamPos, 1.0);
+    vec4 pos = projMat * viewMat * vec4(aPos + vec3(CamPos.x, CamPos.y, -CamPos.z), 1.0);
     gl_Position = pos.xyww;
 }  

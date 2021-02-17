@@ -220,32 +220,32 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
 glm::vec3 Framework::Helper::Transform::Forward(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
-        rot.x,
-        rot.y,
-        -rot.z
+        -rot.x, //rot.x,
+        -rot.y, //rot.y,
+        -rot.z  //-rot.z
     ));
 
-    return q * forward;
+    return q * -forward; // return q * -forward;
 }
 glm::vec3 Framework::Helper::Transform::Right(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
-        rot.x,
-        rot.y,
-        -rot.z
+        -rot.x, //rot.x,
+        -rot.y, //rot.y,
+        -rot.z //-rot.z
     ));
 
-    return q * right;
+    return q * -right; //return q * right;
 }
 glm::vec3 Framework::Helper::Transform::Up(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
-        rot.x,
-        rot.y,
-        -rot.z
+        -rot.x, // rot.x,
+        -rot.y, //rot.y,
+        -rot.z //-rot.z
     ));
 
-    return q * up;
+    return q * up; //return q * up;
 }
 
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept {

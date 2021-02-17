@@ -156,7 +156,8 @@ function MouseUpdate()
         camera:GetTransform():Translate(
             Vector3.Sum(
                 Vector3.FMul(up,    dir.y /  100.0),
-                Vector3.FMul(right, dir.x / -100.0)
+                Vector3.FMul(right, dir.x /  100.0)
+                --Vector3.FMul(right, dir.x / -100.0)
             )
         );
     end;
