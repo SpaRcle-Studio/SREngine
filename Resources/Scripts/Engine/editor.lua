@@ -9,8 +9,11 @@ local stencil_id;    -- int
 
 local scene;         -- Scene*
 local camera;        -- Camera*
+local window;        -- Window*
 
 local enabled;       -- Bool
+
+local mouseLeftPressed; -- Bool
 
 function Inspector()
     GUIWindow.Begin("Inspector");
@@ -58,6 +61,8 @@ function Init()
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
+    window = Window.Get();
+
     collectgarbage() -- collect memory
 end;
 
@@ -71,6 +76,23 @@ function DrawScene()
             final_id,
             true
         );
+        local mesh = window:PopAimedMesh();
+        if (mesh ~= nil) then
+            if (not Input.GetKey(KeyCode.LShift)) then
+                scene:UnselectAll();
+            end;
+            local gm = mesh:Base():GetParent():SetSelect(true);
+        end;
+
+        if (Input.GetKey(KeyCode.MouseLeft)) then
+            if (not mouseLeftPressed) then
+                mouseLeftPressed = true;
+                window:RequireAimedMesh(camera, GUIWindow.Get());
+            end;
+        else
+            mouseLeftPressed = false;
+        end;
+
         GUIWindow.DrawGuizmo(camera, scene:GetSelected(), cameraSize);
 
         GUIWindow.EndChild();

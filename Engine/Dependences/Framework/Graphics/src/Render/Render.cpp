@@ -8,6 +8,8 @@
 
 #include <Lighting/Light.h>
 #include <Types/Skybox.h>
+#include <Window/Window.h>
+#include <Utils/StringUtils.h>
 
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
     if (Helper::Debug::Profile()) {
@@ -67,7 +69,7 @@ bool Framework::Graphics::Render::Create(Window* window) { //, Camera* camera
     {
         this->m_geometryShader = new Shader(this, "geometry");
         //this->m_skyboxShader   = new Shader(this, "skybox");
-        this->m_stencilShader  = new Shader(this, "stencil");
+        this->m_flatGeometryShader  = new Shader(this, "flatGeometry");
         //this->m_gridShader     = new Shader(this, "grid");
 
         Shader::SetStandartGeometryShader(m_geometryShader);
@@ -151,8 +153,8 @@ bool Framework::Graphics::Render::Close() {
     if (m_geometryShader)
         m_geometryShader->Free();
 
-    if (m_stencilShader)
-        m_stencilShader->Free();
+    if (m_flatGeometryShader)
+        m_flatGeometryShader->Free();
 
     if (this->m_grid)
         m_grid->Free();
@@ -348,6 +350,28 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
 
     texture->AddUsePoint();
     texture->SetRender(this);
+}
+
+void Framework::Graphics::Render::DrawSingleColors() noexcept {
+    this->m_flatGeometryShader->Use();
+
+    this->m_currentCamera->UpdateShader(m_flatGeometryShader);
+
+    if (!m_colorBuffer)
+        this->m_colorBuffer = new ColorBuffer();
+
+    this->m_colorBuffer->InitNames(this->GetAbsoluteCountMeshes());
+
+    for (m_t = 0; m_t < m_countMeshes; m_t++){
+        this->m_flatGeometryShader->SetInt("id", (int)m_t);
+        this->m_flatGeometryShader->SetMat4("modelMat", m_meshes[m_t]->GetModelMatrix());
+
+        this->m_colorBuffer->LoadName(m_t, Helper::StringUtils::IntToColor(m_t + 1));
+
+        m_meshes[m_t]->SimpleDraw();
+    }
+
+    this->m_env->UseShader(0);
 }
 
 /*

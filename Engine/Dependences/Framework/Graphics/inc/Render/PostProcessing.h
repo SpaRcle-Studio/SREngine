@@ -134,6 +134,9 @@ namespace Framework::Graphics {
         [[nodiscard]] inline unsigned int GetSkyboxColor()      const noexcept { return m_skyboxColorBuffer; }
         [[nodiscard]] inline unsigned int GetStencilBuffer()    const noexcept { return m_ColorBuffers[3]; }
 
+        [[nodiscard]] inline unsigned int GetHDR_FBO()          const noexcept { return m_HDRFrameBufferObject; }
+
+
         [[nodiscard]] inline unsigned int GetCustomColorBuffer(unsigned char id) const noexcept {
             if (m_countColorBuffers <= id) {
                 Helper::Debug::Error("PostProcessing::GetCustomColorBuffer(): index error!");

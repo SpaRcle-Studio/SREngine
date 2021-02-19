@@ -63,6 +63,21 @@ namespace Framework::Graphics {
         void SetWindowSize(float ratio, unsigned int w, unsigned int h) override;
         void SetWindowPosition(int x, int y) override;
 
+        glm::vec2 GetMousePos() override {
+            double posx = 0.0, posy = 0.0;
+            glfwGetCursorPos(m_window, &posx, &posy);
+            return { posx, posy };
+        }
+        glm::vec3 GetPixelColor(glm::vec2 uPos) override {
+            unsigned char uColor[3] = { 0, 0, 0 };
+            glReadPixels(uPos.x, uPos.y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &uColor[0]);
+            return {
+                uColor[0],
+                uColor[1],
+                uColor[2]
+            };
+        }
+
         glm::vec2 GetWindowSize() noexcept override {
             glm::vec2 val;
             glfwGetWindowSize(m_window, (int*)&val.x, (int*)&val.y);

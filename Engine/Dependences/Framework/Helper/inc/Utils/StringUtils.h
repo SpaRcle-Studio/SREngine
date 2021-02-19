@@ -19,6 +19,14 @@ namespace Framework::Helper {
         StringUtils(StringUtils&) = delete;
         ~StringUtils() = delete;
     public:
+        inline static glm::vec3 IntToColor(size_t index) noexcept {
+            unsigned char r = ((index >> 16) & 0xFF);  // Extract the RR byte
+            unsigned char g = ((index >> 8) & 0xFF);   // Extract the GG byte
+            unsigned char b = ((index) & 0xFF);        // Extract the BB byte
+
+            return { r, g, b };
+        }
+
         static inline std::string ReadTo(std::string str, const char c, int offset = 0) {
             size_t size = str.size();
             for (size_t t = 0; t < size; t++){

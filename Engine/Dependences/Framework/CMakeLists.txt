@@ -32,7 +32,7 @@ find_package(OpenGL REQUIRED)
 #include_directories(${PYTHON_INCLUDE_DIRS})
 
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC} Graphics/inc/Render/FrameBuffer.h Graphics/inc/Render/FragShaderPart.h Graphics/src/GUI/GUIWindow.cpp Graphics/inc/GUI/FileBrowser.h Graphics/src/GUI/DockSpace.cpp)
+add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC} Graphics/inc/Render/FrameBuffer.h Graphics/inc/Render/FragShaderPart.h Graphics/src/GUI/GUIWindow.cpp Graphics/inc/GUI/FileBrowser.h Graphics/src/GUI/DockSpace.cpp Graphics/inc/Render/ColorBuffer.h)
 target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler) # lua
 if(WIN32)
     if(MSVC)

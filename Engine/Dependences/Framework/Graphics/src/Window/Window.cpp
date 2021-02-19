@@ -13,6 +13,8 @@
 //#include <GUI/ICanvas.h>
 
 #include <ResourceManager/ResourceManager.h>
+#include <glm/gtx/string_cast.hpp>
+#include <Utils/StringUtils.h>
 
 using namespace Framework::Helper;
 
@@ -257,6 +259,12 @@ bool Framework::Graphics::Window::InitEnvironment() {
     return true;
 }
 
+void Framework::Graphics::Window::FindAimedMesh() {
+    //this->m_render->SetCurrentCamera(m_aimedCameraTarget);
+
+    //this->m_env->ClearBuffers();
+}
+
 void Framework::Graphics::Window::Draw() {
     if (m_GUIEnabled)
         this->m_env->BeginDrawGUI();
@@ -284,6 +292,39 @@ void Framework::Graphics::Window::Draw() {
             this->m_render->DrawTransparentGeometry();
         }
         camera->GetPostProcessing()->End();
+
+        //!-----------------------------------------------------------------------------//
+
+        if (m_requireGetAimed && m_aimedCameraTarget == camera && m_aimedWindowTarget) {
+            //this->FindAimedMesh();
+            //if (!this->m_colorBuffer)
+            //    this->m_colorBuffer = new ColorBuffer();
+
+            //this->m_colorBuffer->InitNames(this->m_render->GetAbsoluteCountMeshes());
+
+            this->m_render->DrawSingleColors();
+
+            glm::vec2 pos = this->GetGlobalWindowMousePos(camera, m_aimedWindowTarget);
+            glm::vec3 color = this->m_env->GetPixelColor(pos);
+            //glm::u8vec3 uColor = { color.x, color.y, color.z };
+
+            this->m_env->ClearBuffers();
+
+            int id = this->m_render->GetColorBuffer()->GetSelectColorObject(color);
+
+            /*ImGui::Begin("Debug");
+            ImGui::Text("Mouse pos: %s", glm::to_string(pos).c_str());
+            ImGui::Text("ID: %s", std::to_string(id).c_str());
+            ImGui::Text("uColor: %s", glm::to_string(color).c_str());
+            //ImGui::Text("Color: %s", glm::to_string(uColor).c_str());
+            ImGui::ColorEdit3("Pick", &(color / 255.f)[0]);
+            ImGui::End();*/
+
+            if (id != -1)
+                this->m_aimedMesh = this->m_render->GetMesh(id);
+
+            m_requireGetAimed = false;
+        }
     }
 
     if (m_GUIEnabled) {
@@ -398,6 +439,38 @@ void Framework::Graphics::Window::CentralizeWindow() {
     this->m_newWindowPos = { w, h + 20 }; // TODO: SEE
     this->m_isNeedMove = true;
 }
+
+glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphics::Camera *camera, ImGuiWindow *win) {
+    glm::vec2 win_pos = { m_aimedWindowTarget->Pos.x, m_aimedWindowTarget->Pos.y };
+    glm::vec2 win_size = { m_aimedWindowTarget->Size.x, m_aimedWindowTarget->Size.y };
+    glm::vec2 window_size = this->GetWindowSize();
+    glm::vec2 img_size = camera->GetSize();
+
+    glm::vec2 pos = m_env->GetMousePos();
+
+    const float dx = win_size.x / img_size.x;
+    const float dy = win_size.y / img_size.y;
+
+    if (dy > dx)
+        img_size *= dx;
+    else
+        img_size *= dy;
+
+    // Вычисляем положение мыши в окне относительно изображения н окне интерфейса
+
+    pos -= win_pos;
+    pos *= window_size / win_size;
+
+    pos -= ((win_size - img_size) / 2.f) * window_size / win_size;
+    pos *= win_size / img_size;
+
+    pos.y = window_size.y - pos.y;
+
+    return pos;
+}
+
+
+
 
 
 /*

@@ -220,7 +220,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     //ImGuiIO& io = ImGui::GetIO();
     //ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
-    pos = pos + (win_size - img_size) / 2.f;
+    pos += (win_size - img_size) / 2.f;
     ImGuizmo::SetRect(pos.x, pos.y, img_size.x, img_size.y);
 
     glm::mat4 mat = gameObject->GetTransform()->GetMatrix(false);

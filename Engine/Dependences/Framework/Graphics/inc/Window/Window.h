@@ -15,6 +15,7 @@
 #include <mutex>
 #include <functional>
 #include <Types/EditorGrid.h>
+#include <Render/ColorBuffer.h>
 
 using namespace Framework::Graphics::Types;
 
@@ -79,6 +80,16 @@ namespace Framework::Graphics {
 
         bool                                                m_GUIEnabled            = true;
 
+        ImGuiWindow*                                        m_aimedWindowTarget     = nullptr;
+        Camera*                                             m_aimedCameraTarget     = nullptr;
+        Mesh*                                               m_aimedMesh             = nullptr;
+        bool                                                m_requireGetAimed       = false;
+        /*
+          0 - nothing
+          1 - in process
+          2 - complete
+         */
+
         GUI::ICanvas*                                       m_canvas                = nullptr;
 
         bool                                                m_vsync                 = false;
@@ -91,7 +102,11 @@ namespace Framework::Graphics {
         void Thread();
         bool InitEnvironment();
         void Draw();
+
+        void FindAimedMesh();
     public:
+       // [[nodiscard]] inline ColorBuffer* GetColorBuffer() const noexcept { return this->m_colorBuffer; }
+
         inline void AddCamera(Camera* camera) {
             Debug::Log("Window::AddCamera() : register new camera...");
             m_camerasMutex.lock();
@@ -120,7 +135,52 @@ namespace Framework::Graphics {
             }
             return m_render;
         }
-        inline bool IsRun() const noexcept { return m_isRun; }
+        [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
+
+        [[nodiscard]] Mesh* PopAimedMesh() noexcept {
+            if (m_aimedMesh) {
+                Mesh* aim = m_aimedMesh;
+                m_aimedMesh = nullptr;
+                return aim;
+            } else
+                return nullptr;
+        }
+        bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept {
+            if (this->m_requireGetAimed)
+                return false;
+
+            this->m_requireGetAimed = true;
+
+            this->m_aimedCameraTarget = camera;
+            this->m_aimedWindowTarget = window;
+            this->m_aimedMesh = nullptr;
+
+            return true;
+        }
+        /*[[nodiscard]] Mesh* GetLastAimed() const noexcept { return m_aimedMesh; }
+        [[nodiscard]] Mesh* AwaitGetAimed(Camera* camera,  ImGuiWindow* window) noexcept {
+            ret:
+            if (this->m_requireGetAimedStat != 0)
+                goto ret;
+
+            this->m_requireGetAimedStat = 1;
+
+            this->m_aimedCameraTarget = camera;
+            this->m_aimedWindowTarget = window;
+            this->m_aimedMesh = nullptr;
+
+            wait:
+            if (this->m_requireGetAimedStat != 2)
+                goto wait;
+
+            Mesh* aim = m_aimedMesh;
+
+            this->m_aimedCameraTarget = nullptr;
+            this->m_aimedWindowTarget = nullptr;
+            this->m_requireGetAimedStat = 0;
+
+            return aim;
+        }*/
     public:
         void CentralizeWindow();
         void Resize(unsigned int w, unsigned int h);
@@ -143,6 +203,7 @@ namespace Framework::Graphics {
                     m_format.Height()
                 );
         }
+        glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
     public:
         bool Create();
         bool Init();

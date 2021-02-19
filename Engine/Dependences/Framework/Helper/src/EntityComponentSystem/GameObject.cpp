@@ -34,6 +34,7 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
 
     m_mutex.lock();
 
+    component->SetParent(this);
     m_components.push_back(component);
 
     m_mutex.unlock();

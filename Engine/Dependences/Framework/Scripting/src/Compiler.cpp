@@ -120,6 +120,11 @@ void Framework::Scripting::Compiler::PoolEvents() {
     m_mutex_destroy.unlock();
     this->m_mutex_delayed.unlock();
     m_mutex_load.unlock();
+
+    for (Script* script : m_scripts) {
+        if (script->IsNeedStart())
+            script->Start();
+    }
 }
 
 bool Framework::Scripting::Compiler::Remove(Framework::Scripting::Script *script) {

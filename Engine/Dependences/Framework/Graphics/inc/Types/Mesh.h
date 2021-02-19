@@ -34,6 +34,7 @@ namespace Framework::Graphics::Types {
         /** \brief Default mesh destructor */
         ~Mesh();
     public:
+        inline glm::mat4 GetModelMatrix() const noexcept { return this->m_modelMat; }
         inline void SetRender(Render* render) noexcept {
             this->m_render = render;
         };
@@ -122,6 +123,7 @@ namespace Framework::Graphics::Types {
 
         Mesh* Copy();
 
+        bool SimpleDraw();
         bool Draw();
 
         /** \warning call only from render */

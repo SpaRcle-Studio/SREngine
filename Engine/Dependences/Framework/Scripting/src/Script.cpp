@@ -43,6 +43,10 @@ namespace Framework::Scripting {
     }
 
     bool Script::Call(const std::string& funName) {
+        //if ((!this->m_isInit && m_hasInit) || (!this->m_isStart && m_hasStart)){
+        //    return false;
+        //}
+
         if (m_isClose){
             Helper::Debug::Warn("Script::Call("+funName+") : script is close!\n\tPath: "+m_name);
             return false;
@@ -56,7 +60,7 @@ namespace Framework::Scripting {
             return false;
         }
 
-        m_mutex.lock();
+        //m_mutex.lock();
         //if (m_callingNow) {
         //    Helper::Debug::Warn("Script::Call() : script already calling! Wait...\n\tPath: "+m_name);
         //    ret:
@@ -79,14 +83,14 @@ namespace Framework::Scripting {
             Helper::Debug::Error("Script::Call() : failed call \""+funName+"()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
             //m_callingNow = false;
-            m_mutex.unlock();
+            //m_mutex.unlock();
             return false;
         }
         //m_callingNow = false;
 
         m_currentFunName = "Unnamed";
 
-        m_mutex.unlock();
+        //m_mutex.unlock();
 
         return true;
     }
@@ -191,26 +195,39 @@ namespace Framework::Scripting {
         if (m_status == Status::RuntimeError || !m_hasStart)
             return false;
 
+        //m_mutex.lock();
+
         r = lua_getglobal(L, "Start");
         if (lua_pcall(L, 0, 1, 0)) {
             const char* stackTrace = lua_tostring(L, -1);
 
             Helper::Debug::Error("Script::Start() : failed call \"Start()\" method at script! \n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
+
+            //m_mutex.unlock();
+
             return false;
         }
         m_isStart = true;
+
+        //m_mutex.unlock();
+
         return true;
     }
 
     bool Script::Update() {
+        if ((!this->m_isInit && m_hasInit) || (!this->m_isStart && m_hasStart))
+            return false;
+
         if (m_status == Status::RuntimeError || !m_hasUpdate)
             return false;
 
-        if (!m_isStart && m_hasStart)
-            return Start();
-        else if (!m_isInit && m_hasInit)
-            return Init();
+        //if (!m_isStart && m_hasStart)
+        //    return Start();
+       // else if (!m_isInit && m_hasInit)
+        //    return Init();
+
+        //m_mutex.lock();
 
         r = lua_getglobal(L, "Update");
         if (lua_pcall(L, 0, 0, 0)) {
@@ -218,20 +235,29 @@ namespace Framework::Scripting {
 
             Helper::Debug::Error("Script::Update() : failed call \"Update()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
+
+            //m_mutex.unlock();
+
             return false;
         }
+
+       // m_mutex.unlock();
 
         return true;
     }
 
     bool Script::FixedUpdate() {
-        if (m_status == Status::RuntimeError || !m_hasFixedUpdate)
+        if ((!this->m_isInit && m_hasInit) || (!this->m_isStart && m_hasStart))
             return false;
 
-        if (!m_isStart && m_hasStart)
-            return Start();
-        else if (!m_isInit && m_hasInit)
-            return Init();
+        if (m_status == Status::RuntimeError || !m_hasFixedUpdate)
+            return false;
+        //if (!m_isStart && m_hasStart)
+        //    return Start();
+        //else if (!m_isInit && m_hasInit)
+        //    return Init();
+
+       // m_mutex.lock();
 
         r = lua_getglobal(L, "FixedUpdate");
         if (lua_pcall(L, 0, 0, 0)) {
@@ -239,8 +265,14 @@ namespace Framework::Scripting {
 
             Helper::Debug::Error("Script::FixedUpdate() : failed call \"FixedUpdate()\" method at script!\n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
+
+           // m_mutex.unlock();
+
             return false;
         }
+
+       // m_mutex.unlock();
+
         return true;
     }
 
@@ -304,15 +336,23 @@ namespace Framework::Scripting {
         if (m_status == Status::RuntimeError || !m_hasInit)
             return false;
 
+        //m_mutex.lock();
+
         r = lua_getglobal(L, "Init");
         if (lua_pcall(L, 0, 1, 0)) {
             const char* stackTrace = lua_tostring(L, -1);
 
             Helper::Debug::Error("Script::Init() : failed call \"Init()\" method at script! \n\tStack traceback: "+std::string(stackTrace));
             this->m_status = Status::RuntimeError;
+
+           // m_mutex.unlock();
+
             return false;
         }
         m_isInit = true;
+
+       // m_mutex.unlock();
+
         return true;
     }
 

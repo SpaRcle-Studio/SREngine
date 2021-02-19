@@ -32,6 +32,7 @@ namespace Framework::Helper {
         inline Component* BaseComponent() noexcept { return this; }
 
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }
+        [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
 
         virtual void OnRotate(glm::vec3 newValue)   noexcept { };
         virtual void OnMove(glm::vec3 newValue)     noexcept { };

@@ -163,6 +163,10 @@ function MouseUpdate()
     end;
 end;
 
+function FixedUpdate()
+
+end;
+
 function Update()
     MouseUpdate();
 

@@ -356,3 +356,15 @@ void Mesh::OnSelected(bool value) noexcept {
 
     Component::OnSelected(value);
 }
+
+bool Mesh::SimpleDraw() {
+    if (m_isDestroy) return false;
+
+    if (!m_isCalculated)
+        if (!this->Calculate())
+            return false;
+
+    this->m_env->DrawTriangles(m_VAO, m_countVertices);
+
+    return true;
+}

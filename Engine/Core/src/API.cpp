@@ -193,6 +193,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     compiler->RegisterScriptClass("Engine", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Helper::Component>("Component")
+                        .addFunction("GetParent", (GameObject* (Helper::Component::*)(void))&Helper::Component::GetParent)
                 .endClass();
     });
 
@@ -203,6 +204,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("AddComponent", (bool (Framework::Helper::GameObject::*)(Helper::Component*))&Helper::GameObject::AddComponent)
                 .addFunction("GetTransform", (Helper::Transform* (Framework::Helper::GameObject::*)(void))&Helper::GameObject::GetTransform)
                 .addFunction("AddChild", (bool (Framework::Helper::GameObject::*)(Helper::GameObject*))&Helper::GameObject::AddChild)
+                .addFunction("SetSelect", (void (Framework::Helper::GameObject::*)(bool))&Helper::GameObject::SetSelect)
                 .endClass();
     });
 
@@ -219,6 +221,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("Destroy", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Destroy)
                 .addFunction("Free", (bool (Framework::Helper::Scene::*)(void))&Helper::Scene::Free)
                 .addFunction("Print", (void (Framework::Helper::Scene::*)(void))&Helper::Scene::Print)
+                .addFunction("UnselectAll", (void (Framework::Helper::Scene::*)(void))&Helper::Scene::UnselectAll)
                 .endClass();
         Scripting::Script::RegisterCasting<Scene*>("Scene", L);
     });
@@ -369,6 +372,8 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("SetFullScreen", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetFullScreen)
                 .addFunction("Resize", (void (Framework::Graphics::Window::*)(unsigned int, unsigned int))&Graphics::Window::Resize)
                 .addFunction("CentralizeWindow", (void (Framework::Graphics::Window::*)())&Graphics::Window::CentralizeWindow)
+                .addFunction("RequireAimedMesh", (bool (Framework::Graphics::Window::*)(Graphics::Camera*,ImGuiWindow*))&Graphics::Window::RequireAimedMesh)
+                .addFunction("PopAimedMesh", (Mesh* (Framework::Graphics::Window::*)(void))&Graphics::Window::PopAimedMesh)
                 .endClass();
     });
 
@@ -416,6 +421,14 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                     }))
                 .endClass();
     });*/
+
+    // ImGuiWindow
+    compiler->RegisterScriptClass("GUI", [](lua_State* L) {
+        luabridge::getGlobalNamespace(L)
+            .beginClass<ImGuiWindow>("ImGuiWindow")
+
+            .endClass();
+    });
 
     // GUIWindow
     compiler->RegisterScriptClass("GUI", [](lua_State* L){
@@ -484,6 +497,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 }))
                 .addStaticFunction("MenuItem", static_cast<bool(*)(const std::string&)>([](const std::string& name) -> bool {
                     return Graphics::GUI::GUIWindow::MenuItem(name.c_str());
+                }))
+                .addStaticFunction("Get", static_cast<ImGuiWindow*(*)()>([]() -> ImGuiWindow* {
+                    return ImGui::GetCurrentWindow();
                 }))
                 .endClass();
     });

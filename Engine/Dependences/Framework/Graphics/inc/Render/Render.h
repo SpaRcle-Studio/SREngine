@@ -11,6 +11,7 @@
 #include <mutex>
 #include <Environment/Environment.h>
 #include <Types/EditorGrid.h>
+#include <Render/ColorBuffer.h>
 
 namespace Framework::Graphics::Types {
     class Skybox;
@@ -66,18 +67,27 @@ namespace Framework::Graphics {
         bool                    m_needDestroySkybox                 = false;
 
         Shader*                 m_geometryShader                    = nullptr;
-        Shader*                 m_stencilShader                     = nullptr;
+        Shader*                 m_flatGeometryShader                = nullptr;
         //Shader*                 m_skyboxShader                      = nullptr;
         //Shader*                 m_gridShader                        = nullptr;
 
         EditorGrid*             m_grid                              = nullptr;
 
         Skybox*                 m_skybox                            = nullptr;
+        ColorBuffer*            m_colorBuffer                       = nullptr;
 
         std::vector<Light*>     m_light                             = std::vector<Light*>();
 
         bool                    m_needSelectMeshes                  = false;
     public:
+        [[nodiscard]] size_t GetAbsoluteCountMeshes()     const noexcept { return m_countMeshes + m_countTransparentMeshes; }
+        [[nodiscard]] Mesh* GetMesh(size_t absoluteID)    const noexcept { // TODO: See
+            if (absoluteID < m_countMeshes)
+                return this->m_meshes[absoluteID];
+            else
+                return this->m_transparent_meshes[absoluteID];
+        }
+
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
         [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }
         [[nodiscard]] size_t GetCountMeshes()             const noexcept { return m_countMeshes; }
@@ -86,6 +96,8 @@ namespace Framework::Graphics {
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
         [[nodiscard]] inline bool IsInit() const noexcept { return m_isInit; }
     public:
+        [[nodiscard]] inline ColorBuffer* GetColorBuffer() const noexcept { return this->m_colorBuffer; }
+
         void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
         [[nodiscard]] inline Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
@@ -133,7 +145,7 @@ namespace Framework::Graphics {
         bool DrawGeometry()             noexcept;
         bool DrawSkybox()               noexcept;
         void DrawGrid()                 noexcept;
-        //void DrawStencil()              noexcept;
+        void DrawSingleColors()         noexcept;
         bool DrawTransparentGeometry()  noexcept;
     };
 }
