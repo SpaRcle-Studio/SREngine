@@ -10,6 +10,7 @@
 #include <imgui_stdlib.h>
 #include <Render/Camera.h>
 #include <Render/PostProcessing.h>
+#include <Types/Mesh.h>
 
 #include <glm/gtc/type_ptr.inl>
 
@@ -124,12 +125,16 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
             PostProcessing* post = dynamic_cast<Camera*>(comp)->GetPostProcessing();
 
             float gamma = post->GetGamma();
-            if (ImGui::InputFloat("Gamma", &gamma))
+            if (ImGui::InputFloat("Gamma", &gamma, 0.05))
                 post->SetGamma(gamma);
 
             float exposure = post->GetExposure();
-            if (ImGui::InputFloat("Exposure", &exposure))
+            if (ImGui::InputFloat("Exposure", &exposure, 0.05))
                 post->SetExposure(exposure);
+
+            float saturation = post->GetSaturation();
+            if (ImGui::InputFloat("Saturation", &saturation, 0.05))
+                post->SetSaturation(saturation);
 
             glm::vec3 color = post->GetColorCorrection();
             if (ImGui::InputFloat3("Color correction", &color[0]))
@@ -144,8 +149,12 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
             ImGui::NewLine();
 
             float bloom_intensity = post->GetBloomIntensity();
-            if (ImGui::InputFloat("Bloom intensity", &bloom_intensity))
+            if (ImGui::InputFloat("Bloom intensity", &bloom_intensity, 0.1))
                 post->SetBloomIntensity(bloom_intensity);
+
+            color = post->GetBloomColor();
+            if (ImGui::InputFloat3("Bloom color", &color[0]))
+                post->SetBloomColor(color);
 
             int bloom_amount = post->GetBloomAmount();
             if (ImGui::InputInt("Bloom amount", &bloom_amount)) {
@@ -153,6 +162,25 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
                     bloom_amount = 1;
                 post->SetBloomAmount(bloom_amount);
             }
+        }
+        else if (name == "Mesh") {
+            auto* mesh = dynamic_cast<Graphics::Types::Mesh*>(comp);
+            auto* mat  = mesh->GetMaterial();
+
+            ImGui::Text("Geometry name: %s", mesh->GetGeometryName().c_str());
+            ImGui::Text("Vertices count: %zu", mesh->GetCountVertices());
+
+            ImGui::Separator();
+
+            DrawTextOnCenter("Material");
+
+            glm::vec3 color = mat->GetColor();
+            if (ImGui::InputFloat3("Color", &color[0]))
+                mat->SetColor(color);
+
+            bool enabled = mat->GetBloomEnabled();
+            if (ImGui::Checkbox("Bloom enabled", &enabled))
+                mat->SetBloom(enabled);
         }
     }
 }
@@ -217,6 +245,14 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
         g_currentGuizmoOperation = ImGuizmo::SCALE;
     }
 
+    if (ButtonWithId("engine_tool_mode", "L", sizeB, 0, true,
+                     ImVec2(space * 4 + sizeB.x * 3, space), g_currentGuizmoMode == ImGuizmo::LOCAL ? act : def)) {
+        if (g_currentGuizmoMode == ImGuizmo::LOCAL)
+            g_currentGuizmoMode = ImGuizmo::WORLD;
+        else
+            g_currentGuizmoMode = ImGuizmo::LOCAL;
+    }
+
     //ImGuiIO& io = ImGui::GetIO();
     //ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
@@ -228,7 +264,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
-            g_currentGuizmoOperation, ImGuizmo::LOCAL,
+            g_currentGuizmoOperation, g_currentGuizmoMode,
             &mat[0][0],
             NULL, NULL, NULL, NULL))
     {

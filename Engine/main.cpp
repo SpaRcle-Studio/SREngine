@@ -47,7 +47,7 @@ int main() {
             "SpaRcle Engine",
             format,
             render,
-            false,
+            true,
             false,
             4
     );

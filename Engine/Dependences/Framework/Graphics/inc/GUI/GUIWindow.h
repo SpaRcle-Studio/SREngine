@@ -37,6 +37,7 @@ namespace Framework::Graphics::GUI {
         ~GUIWindow() = delete;
     private:
         inline static ImGuizmo::OPERATION g_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
+        inline static ImGuizmo::MODE      g_currentGuizmoMode = ImGuizmo::MODE::LOCAL;
 
         inline static void CheckSelected(Helper::GameObject* gm) noexcept;
         static void DrawChild(Helper::GameObject* root) noexcept;

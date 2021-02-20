@@ -11,8 +11,10 @@ uniform sampler2D depth;
 
 uniform float exposure;
 uniform float gamma;
+uniform float saturation;
 
 uniform vec3 ColorCorrection;
+uniform vec3 BloomColor;
 
 float LinearizeDepth(float depth) {
     // преобразуем обратно в NDC
@@ -70,6 +72,14 @@ void DrawStencilFast() {
     }
 }
 
+vec3 czm_saturation(vec3 rgb, float adjustment)
+{
+    // Algorithm from Chapter 16 of OpenGL Shading Language
+    const vec3 W = vec3(0.2125, 0.7154, 0.0721);
+    vec3 intensity = vec3(dot(rgb, W));
+    return mix(intensity, rgb, adjustment);
+}
+
 void main() {
     //vec3 hdrColor = texture(scene, TexCoords).rgb;
     //hdrColor += texture(bloomBlur, TexCoords).rgb; // additive blending
@@ -85,7 +95,7 @@ void main() {
 
     vec3 hdrColor;
 
-    if (sceneColor == vec3(0,0,0)) {
+    if (sceneColor == vec3(0, 0, 0)) {
         hdrColor = skyboxColor;
     } else {
         hdrColor = sceneColor;
@@ -94,7 +104,9 @@ void main() {
             hdrColor = (hdrColor * alpha) + skyboxColor;
     }
 
-    hdrColor += texture(bloomBlur, TexCoords).rgb;
+    hdrColor += texture(bloomBlur, TexCoords).rgb * BloomColor;
+
+    hdrColor = czm_saturation(hdrColor, saturation);
 
     // tone mapping
     vec3 result = vec3(1.0) - exp(-hdrColor * exposure);

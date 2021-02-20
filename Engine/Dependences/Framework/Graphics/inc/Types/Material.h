@@ -44,9 +44,12 @@ namespace Framework::Graphics::Types {
         bool SetTransparent(bool value);
         bool SetMesh(Mesh* mesh);
         inline void SetBloom(bool value) noexcept { this->m_bloom = value; };
+        [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom; };
 
         inline void SetColor(glm::vec3 color) { this->m_color = {color,1}; }
         inline void SetColor(glm::vec4 color) { this->m_color = color; }
+
+        [[nodiscard]] inline glm::vec3 GetColor() const noexcept { return this->m_color; }
 
         bool FreeTextures();
 

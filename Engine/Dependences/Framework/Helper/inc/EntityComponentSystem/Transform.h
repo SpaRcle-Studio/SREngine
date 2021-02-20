@@ -37,11 +37,13 @@ namespace Framework::Helper {
             glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), {
                     local ? m_localPosition.x  : m_globalPosition.x,
                     local ? m_localPosition.y  : m_globalPosition.y,
-                    local ? -m_localPosition.z : m_globalPosition.z
+                    local ? m_localPosition.z : m_globalPosition.z
             });
 
+            glm::vec3 rot = local ? m_localRotation : m_globalRotation;
             const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(
-                   local ? m_localRotation : m_globalRotation
+                    { -rot.x, -rot.y, rot.z }
+                   // {0, 45,0}
             ))));
 
             modelMat *= rotationMatrix;
@@ -62,8 +64,9 @@ namespace Framework::Helper {
             this->m_localRotation = glm::eulerAngles(rotation);
             this->m_localScale    = scale;*/
 
+            glm::vec3 rot = glm::degrees(glm::eulerAngles(rotation));
             this->m_globalPosition = {translation.x, translation.y, translation.z};
-            this->m_globalRotation = glm::eulerAngles(rotation);
+            this->m_globalRotation = { -rot.x, -rot.y, rot.z };
             this->m_globalScale    = scale;
         }
 

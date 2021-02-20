@@ -124,12 +124,10 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     matrix = glm::rotate(matrix,
              m_yaw
             , {0, 1, 0}
-
     );
     matrix = glm::rotate(matrix,
              m_roll
             , {0, 0, 1}
-
     );
 
     m_viewMat = glm::translate(matrix, {

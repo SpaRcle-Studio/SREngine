@@ -37,7 +37,9 @@ namespace Framework::Graphics {
     private:
         float			          m_gamma					    = 0.8f;
         float                     m_exposure                    = 1.f;
+        float                     m_saturation                  = 1.f;
         glm::vec3		          m_color_correction		    = { 1, 1, 1 };
+        glm::vec3		          m_bloomColor           	    = { 1, 1, 1 };
         float                     m_bloomIntensity              = 1.f;
         volatile unsigned int     m_bloomAmount                 = 10;
     private:
@@ -90,14 +92,19 @@ namespace Framework::Graphics {
         bool            m_isInit                                = false;
     public:
         [[nodiscard]] inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
+        [[nodiscard]] inline glm::vec3 GetBloomColor() const noexcept { return m_bloomColor; }
+
         [[nodiscard]] inline float GetGamma()               const noexcept { return m_gamma; }
         [[nodiscard]] inline float GetExposure()            const noexcept { return m_exposure; }
+        [[nodiscard]] inline float GetSaturation()          const noexcept { return m_saturation; }
         [[nodiscard]] inline unsigned char GetBloomAmount() const noexcept { return m_bloomAmount; }
         [[nodiscard]] inline float GetBloomIntensity()      const noexcept { return m_bloomIntensity; }
         [[nodiscard]] inline bool GetBloomEnabled()         const noexcept { return this->m_bloom; }
     public:
         inline void SetColorCorrection(glm::vec3 value)     noexcept { m_color_correction = value; }
+        inline void SetBloomColor(glm::vec3 value)          noexcept { m_bloomColor = value; }
         inline void SetGamma(float gamma)                   noexcept { m_gamma = gamma; }
+        inline void SetSaturation(float gamma)              noexcept { m_saturation = gamma; }
         inline void SetExposure(float exposure)             noexcept { m_exposure = exposure; }
         inline void SetBloomAmount(unsigned int amount)     noexcept { this->m_bloomAmount = amount; }
         inline void SetBloomIntensity(float intensity)      noexcept { this->m_bloomIntensity = intensity; }

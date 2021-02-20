@@ -33,6 +33,9 @@ void main(){
 
     vec3 result = ambient; //ambient;
 
+    //float gray = dot(result.rgb, vec3(0.299, 0.587, 0.114));
+    //result -= result / vec3(gray); // interesting effect
+
     if (selected == 0)
         StencilMask = vec4(0, 0, 0, 0);
     else
