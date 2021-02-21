@@ -115,21 +115,6 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     return true;
 }
 
-unsigned int Framework::Graphics::Types::Texture::GetID() noexcept {
-    if (m_isDestroy) {
-        Debug::Error("Texture::GetID() : texture \""+m_resource_id+"\" is destroyed!");
-        return 0;
-    }
-
-    if (!m_isCalculate)
-        if (!Calculate()) {
-            Debug::Error("Texture::GetID() : failed calculating texture!");
-            return 0;
-        }
-
-    return m_ID;
-}
-
 void Framework::Graphics::Types::Texture::OnDestroyGameObject() noexcept {
     if (m_autoRemove && m_countUses == 1)
         this->Destroy();

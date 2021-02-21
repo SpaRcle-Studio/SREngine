@@ -11,15 +11,17 @@ out VS_OUT {
     vec3 Normal;
 } vs_out;
 
-uniform mat4 projMat;
-uniform mat4 viewMat;
+//uniform mat4 projMat;
+//uniform mat4 viewMat;
+uniform mat4 PVmat;
 uniform mat4 modelMat;
 
 void main() {
     vs_out.FragPos = vec3(modelMat * vec4(aPosition, 1.0));
     vs_out.TexCoord  = vec2(aTexCoord.x, 1 - aTexCoord.y); // flip the texture along the Y axis
 
-    gl_Position = projMat * viewMat * vec4(vs_out.FragPos, 1.0);
+    //gl_Position = projMat * viewMat * vec4(vs_out.FragPos, 1.0);
+    gl_Position = PVmat * vec4(vs_out.FragPos, 1.0);
 }
 
 /*b

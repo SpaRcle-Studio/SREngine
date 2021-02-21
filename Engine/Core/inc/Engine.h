@@ -12,6 +12,7 @@
 #include <EntityComponentSystem/Scene.h>
 #include <Types/Skybox.h>
 #include <Events/EventManager.h>
+#include <Types/Time.h>
 
 namespace Framework {
     class Engine {
@@ -37,13 +38,16 @@ namespace Framework {
         Graphics::Window*       m_window                = nullptr;
         Graphics::Render*       m_render                = nullptr;
         Helper::Scene*          m_scene                 = nullptr;
+
+        Helper::Types::Time*    m_time                  = nullptr;
     private:
         bool RegisterLibraries();
     public:
-        inline Scene* GetScene() const noexcept { return m_scene; }
-        inline Scripting::Compiler* GetCompiler() const noexcept { return m_compiler; }
-        inline Graphics::Window* GetWindow() const noexcept { return m_window; }
-        inline bool IsRun() const noexcept { return m_isRun; }
+        [[nodiscard]] inline Helper::Types::Time* GetTime() const noexcept { return this->m_time; }
+        [[nodiscard]] inline Scene* GetScene() const noexcept { return m_scene; }
+        [[nodiscard]] inline Scripting::Compiler* GetCompiler() const noexcept { return m_compiler; }
+        [[nodiscard]] inline Graphics::Window* GetWindow() const noexcept { return m_window; }
+        [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
     public:
         bool Create(Graphics::Window* window, Helper::Scene* scene);
         bool Init(Graphics::Camera* scene_camera);

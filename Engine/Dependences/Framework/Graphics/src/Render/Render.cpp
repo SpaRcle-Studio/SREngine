@@ -25,7 +25,7 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
         m_meshes[m_t]->Draw();
     }
 
-    this->m_env->UseShader(0);
+    //this->m_env->UseShader(0);
 
     if (Helper::Debug::Profile())
         EASY_END_BLOCK;
@@ -47,6 +47,9 @@ bool Framework::Graphics::Render::DrawSkybox() noexcept {
 }
 
 void Framework::Graphics::Render::DrawGrid() noexcept {
+    if (!m_gridEnabled)
+        return;
+
     if (this->m_grid)
         this->m_grid->Draw();
 }
@@ -195,8 +198,6 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
 }
 
 void Framework::Graphics::Render::PoolEvents() noexcept {
-    m_mutex.lock();
-
     // Temp value
     static Mesh* temp = nullptr;
 
@@ -228,6 +229,8 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
     // Check exists new meshes
     if (m_countNewMeshes) {
+        m_mutex.lock();
+
         for (m_t = 0; m_t < m_countNewMeshes; m_t++) {
             temp = m_newMeshes[m_t];
 
@@ -243,10 +246,14 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
         m_newMeshes.clear(); // Clear new meshes array
         m_countNewMeshes = 0;
+
+        m_mutex.unlock();
     }
 
     // Check meshes to remove from render
     if (m_countMeshesToRemove) {
+        m_mutex.lock();
+
         for (m_t = 0; m_t < m_countMeshesToRemove; m_t++) {
             temp = m_removeMeshes[m_t];
             if (temp->IsCalculated())
@@ -274,10 +281,14 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
         m_countMeshesToRemove = 0; // Clear meshes to remove array
         m_removeMeshes.clear();
+
+        m_mutex.unlock();
     }
 
     // Free textures
     if (m_countTexturesToFree) {
+        m_mutex.lock();
+
         for (m_t = 0; m_t < m_countTexturesToFree; m_t++) {
             if (m_textureToFree[m_t]->IsCalculated()) {
                 m_textureToFree[m_t]->FreeVideoMemory();
@@ -290,6 +301,8 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
 
         m_textureToFree.clear();
         m_countTexturesToFree = 0;
+
+        m_mutex.unlock();
     }
 
     /*if (m_countSkyboxesToRemove){
@@ -306,6 +319,8 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
         m_skybox = nullptr;
     }*/
     if (m_needDestroySkybox){
+        m_mutex.lock();
+
         Debug::Graph("Render::PoolEvents() : free skybox video memory...");
         if (!m_skybox->FreeVideoMemory())
             Debug::Error("Render::PoolEvents() : failed free skybox video memory!");
@@ -315,9 +330,9 @@ void Framework::Graphics::Render::PoolEvents() noexcept {
         m_skybox = nullptr;
 
         m_needDestroySkybox = false;
-    }
 
-    m_mutex.unlock();
+        m_mutex.unlock();
+    }
 }
 
 Framework::Graphics::Render::Render() : m_env(Environment::Get()) {

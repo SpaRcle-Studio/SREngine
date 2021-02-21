@@ -30,8 +30,9 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
         this->m_isBuffCalculate = true;
     }
 
-    shader->SetMat4("viewMat", this->m_viewMat);
-    shader->SetMat4("projMat", this->m_projection);
+    //shader->SetMat4("viewMat", this->m_viewMat);
+    //shader->SetMat4("projMat", this->m_projection);
+    shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
 
     /*
          mat4x4((1.357995, 0.000000, 0.000000, 0.000000), (0.000000, 2.414213, 0.000000, 0.000000), (0.000000, 0.000000, -1.000025,

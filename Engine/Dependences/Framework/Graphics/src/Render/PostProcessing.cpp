@@ -120,32 +120,6 @@ bool Framework::Graphics::PostProcessing::End() {
         m_postProcessingShader->SetVec3("BloomColor", m_bloomColor);
     }
 
-    /*if (m_bloom) {
-        //if (m_debugDisplayBloomMask) {
-        //    m_postProcessingShader->SetInt("scene", 0);
-        //    m_env->BindTexture(1, m_ColorBuffers[1]);
-        //    m_postProcessingShader->SetInt("bloomBlur", 1);
-        //} else {
-            m_env->BindTexture(0, m_ColorBuffers[0]);
-            m_postProcessingShader->SetInt("scene", 0);
-
-            m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
-            m_postProcessingShader->SetInt("bloomBlur", 1);
-
-            m_env->BindTexture(2, m_skyboxColorBuffer);
-            m_postProcessingShader->SetInt("skybox", 2);
-        //}
-    }else {
-        m_env->BindTexture(0, m_ColorBuffers[0]);
-        m_postProcessingShader->SetInt("scene", 0);
-
-        m_env->BindTexture(1, 0);
-        m_postProcessingShader->SetInt("bloomBlur", 1);
-
-        m_env->BindTexture(2, m_skyboxColorBuffer);
-        m_postProcessingShader->SetInt("skybox", 2);
-    }*/
-
     m_env->BindTexture(0, m_ColorBuffers[0]);
     m_postProcessingShader->SetInt("scene", 0);
 
@@ -163,7 +137,6 @@ bool Framework::Graphics::PostProcessing::End() {
 
     m_env->BindTexture(4, m_ColorBuffers[2]);
     m_postProcessingShader->SetInt("depth", 4);
-
     m_env->DrawQuad(m_VAO);
 
     if (!m_camera->IsDirectOutput())

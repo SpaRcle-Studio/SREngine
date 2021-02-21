@@ -16,6 +16,7 @@
 #include <functional>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
+#include <Types/Time.h>
 
 using namespace Framework::Graphics::Types;
 
@@ -57,6 +58,8 @@ namespace Framework::Graphics {
         bool                                                m_isNeedMove            = false;
     private:
         std::thread                                         m_thread                = std::thread();
+
+        Helper::Types::Time*                                m_time                  = nullptr;
 
         Environment*                                        m_env                   = nullptr;
 

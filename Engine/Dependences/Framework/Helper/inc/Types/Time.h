@@ -12,28 +12,35 @@
 
 namespace Framework::Helper::Types {
     class Time {
-        Time() = delete;
+    public:
+        Time() {
+            //this->num_fps_limit = 120.f;
+            //this->fps_lim = 1.f / num_fps_limit;
+            SetFPSLimit(120);
+        };
 
-        Time(Time &) = delete;
+        //Time(Time &) = delete;
 
-        ~Time() = delete;
+        ~Time() = default;
 
     private:
-        inline static double num_fps_limit = 120.f;
-        inline static double fps_limit_timer = 0.f;
-        inline static double fps_lim = 1 / num_fps_limit;
-        inline static double frameDeltaTime;
-        inline static int now = 0, then = 0;
+        volatile double num_fps_limit = 0.f;
+        double          fps_limit_timer = 0.f;
+        volatile double fps_lim = 0.f;
+        volatile double frameDeltaTime = 0.f;
+        volatile int    now = 0, then = 0;
     public:
-        inline static void SetFPSLimit(int count) {
+        inline void SetFPSLimit(int count) {
             num_fps_limit = (float)count;
+            fps_lim = 1.f / num_fps_limit * 1000000.f;
         }
 
-        static double DeltaTime() { return frameDeltaTime; }
+        [[nodiscard]] inline double DeltaTime() const { return frameDeltaTime; }
 
-        static bool Begin() {
+        inline bool Begin() {
             now = clock();
-            frameDeltaTime = (double) (now - then) / 1000.f;
+            //frameDeltaTime = ((double) (now - then)) / 1000.f;
+            frameDeltaTime = ((double) (now - then)) / 1000.f;
             fps_limit_timer += frameDeltaTime;
 
             if (fps_limit_timer >= fps_lim) {
@@ -43,7 +50,7 @@ namespace Framework::Helper::Types {
                 return false;
         }
 
-        static void End() {
+        inline void End() {
             then = now;
         }
     };

@@ -7,8 +7,7 @@
 #include "Types/Mesh.h"
 #include <ResourceManager/ResourceManager.h>
 #include <Render/Render.h>
-#include <Render/Shader.h>
-#include <Types/Material.h>
+
 #include <Utils/StringUtils.h>
 #include <Debug.h>
 #include <exception>
@@ -260,27 +259,6 @@ Mesh *Mesh::Copy() {
     m_mutex.unlock();
 
     return copy;
-}
-
-bool Mesh::Draw() {
-    //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
-
-    if (m_isDestroy) return false;
-
-    if (!m_isCalculated)
-        if (!this->Calculate())
-            return false;
-
-    this->m_shader->SetMat4("modelMat", m_modelMat);
-    this->m_shader->SetVec3("color", m_material->m_color); //TODO: change to vec4
-    this->m_shader->SetInt("bloom", (int)m_material->m_bloom);
-    this->m_shader->SetInt("selected", (int)this->m_isSelected);
-
-    this->m_material->Use();
-
-    this->m_env->DrawTriangles(m_VAO, m_countVertices);
-
-    return true;
 }
 
 bool Mesh::FreeVideoMemory() {

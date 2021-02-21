@@ -11,9 +11,10 @@ in VS_OUT {
     vec3 Normal;
 } fs_in;
 
-uniform int selected;
-uniform int bloom;
+//uniform int selected;
+//uniform int bloom;
 uniform vec3 color;
+uniform ivec2 config;
 
 uniform int hasDiffuse;
 
@@ -36,12 +37,12 @@ void main(){
     //float gray = dot(result.rgb, vec3(0.299, 0.587, 0.114));
     //result -= result / vec3(gray); // interesting effect
 
-    if (selected == 0)
+    if (config.y == 0)
         StencilMask = vec4(0, 0, 0, 0);
     else
        StencilMask = vec4(1, 1, 1, 1);
 
-    if (bloom == 1) {
+    if (config.x == 1) {
         float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
         if (brightness > 1.0)
             BrightColor = vec4(result, alpha);

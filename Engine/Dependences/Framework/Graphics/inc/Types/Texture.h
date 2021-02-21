@@ -49,7 +49,20 @@ namespace Framework::Graphics::Types {
         void SetRender(Render* render);
 
         [[nodiscard]] inline bool IsCalculated() const noexcept { return m_isCalculate; }
-        unsigned int GetID() noexcept;
+        [[nodiscard]] inline unsigned int GetID() noexcept {
+            if (m_isDestroy) {
+                Debug::Error("Texture::GetID() : texture \""+m_resource_id+"\" is destroyed!");
+                return 0;
+            }
+
+            if (!m_isCalculate)
+                if (!Calculate()) {
+                    Debug::Error("Texture::GetID() : failed calculating texture!");
+                    return 0;
+                }
+
+            return m_ID;
+        }
 
         /* Call only from render pool events */
         inline bool FreeVideoMemory() noexcept {

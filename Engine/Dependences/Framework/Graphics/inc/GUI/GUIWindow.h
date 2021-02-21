@@ -54,6 +54,22 @@ namespace Framework::Graphics::GUI {
 
         inline static bool Vec4Null(const ImVec4& v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
+        inline static bool SetGuizmoTool(unsigned char id) {
+            ImGuizmo::OPERATION op;
+            switch (id) {
+                case 1: op = ImGuizmo::OPERATION::TRANSLATE; break;
+                case 2: op = ImGuizmo::OPERATION::ROTATE;    break;
+                case 3: op = ImGuizmo::OPERATION::SCALE;     break;
+                default: return false;
+            }
+            if (op == g_currentGuizmoOperation)
+                return false;
+
+            g_currentGuizmoOperation = op;
+
+            return true;
+        }
+
         inline static bool ButtonWithId(
                 const char* _id, const char* label, ImVec2 button_size = ImVec2(0, 0),
                 ImGuiButtonFlags flags = ImGuiButtonFlags_None, bool imposition = false, ImVec2 offset = ImVec2(0,0), ImVec4 color = ImVec4(0,0,0,0)

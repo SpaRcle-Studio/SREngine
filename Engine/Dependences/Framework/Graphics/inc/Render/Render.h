@@ -72,6 +72,7 @@ namespace Framework::Graphics {
         //Shader*                 m_gridShader                        = nullptr;
 
         EditorGrid*             m_grid                              = nullptr;
+        bool                    m_gridEnabled                       = false;
 
         Skybox*                 m_skybox                            = nullptr;
         ColorBuffer*            m_colorBuffer                       = nullptr;
@@ -98,6 +99,7 @@ namespace Framework::Graphics {
     public:
         [[nodiscard]] inline ColorBuffer* GetColorBuffer() const noexcept { return this->m_colorBuffer; }
 
+        void SetGridEnabled(bool value) { this->m_gridEnabled = value; }
         void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
         [[nodiscard]] inline Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }

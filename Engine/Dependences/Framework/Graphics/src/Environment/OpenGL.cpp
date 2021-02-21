@@ -114,10 +114,9 @@ bool Framework::Graphics::OpenGL::SetContextCurrent() {
     return true;
 }
 
-bool Framework::Graphics::OpenGL::Init() {
+bool Framework::Graphics::OpenGL::Init(int swapInterval) {
     this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
-    glfwSwapInterval(0);
-
+    glfwSwapInterval(swapInterval);
 
     glfwSetWindowFocusCallback(m_window, [](GLFWwindow* win, int focus) {
         g_callback(WinEvents::Focus, win, &focus, nullptr);
@@ -625,7 +624,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateSkybox() noexcept {
     return VAO;
 }
 
-void Framework::Graphics::OpenGL::DrawSkybox(unsigned int VAO, unsigned int CubeMap) noexcept {
+void Framework::Graphics::OpenGL::DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) noexcept {
     glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
     // ... задание видовой и проекционной матриц
     glBindVertexArray(VAO);

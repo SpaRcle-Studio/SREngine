@@ -25,6 +25,8 @@ bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene) {
     this->m_window = window;
     this->m_render = window->GetRender();
 
+    this->m_time = new Helper::Types::Time();
+
     if (m_isCreate){
         Helper::Debug::Error("Engine::Create() : game engine already create!");
         return false;
@@ -129,10 +131,10 @@ void Framework::Engine::Await() {
 
         Helper::InputSystem::Check();
 
-        if (Helper::Types::Time::Begin()){
+        if (m_time->Begin()){
             m_compiler->FixedUpdateAll();
 
-            Helper::Types::Time::End();
+            m_time->End();
         }
 
         m_compiler->UpdateAll();
@@ -161,6 +163,9 @@ bool Framework::Engine::Close() {
     this->m_compiler->Free();
     //Helper::Debug::Info("Engine::Close() : free compiler pointer...");
     //delete m_compiler;
+
+    if (m_time)
+        delete m_time;
 
     return false;
 }

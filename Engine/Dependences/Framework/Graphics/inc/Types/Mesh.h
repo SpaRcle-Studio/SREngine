@@ -4,14 +4,14 @@
 
 #ifndef GAMEENGINE_MESH_H
 #define GAMEENGINE_MESH_H
-
+#include <Render/Shader.h>
+#include <Types/Material.h>
 #include <ResourceManager/IResource.h>
 #include <Environment/Vertex.h>
 #include <vector>
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
 #include <Environment/Environment.h>
-#include "Material.h"
 #include <EntityComponentSystem/Component.h>
 #include <Debug.h>
 
@@ -124,7 +124,27 @@ namespace Framework::Graphics::Types {
         Mesh* Copy();
 
         bool SimpleDraw();
-        bool Draw();
+        inline bool Draw() noexcept {
+            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
+
+            if (m_isDestroy) return false;
+
+            if (!m_isCalculated)
+                if (!this->Calculate())
+                    return false;
+
+            this->m_shader->SetMat4("modelMat", m_modelMat);
+            this->m_shader->SetVec3("color", m_material->m_color); //TODO: change to vec4
+            this->m_shader->SetIVec2("config", { (int)m_material->m_bloom, (int)this->m_isSelected });
+            //this->m_shader->SetInt("bloom", (int)m_material->m_bloom);
+            //this->m_shader->SetInt("selected", (int)this->m_isSelected);
+
+            this->m_material->Use();
+
+            this->m_env->DrawTriangles(m_VAO, m_countVertices);
+
+            return true;
+        }
 
         /** \warning call only from render */
         bool FreeVideoMemory();

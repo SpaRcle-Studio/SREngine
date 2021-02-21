@@ -25,8 +25,8 @@ function LoadGeometry()
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for a = 0, 4, 1 do
-        for b = 0, 4, 1 do
+    for a = 0, 100, 1 do
+        for b = 0, 100, 1 do
             for g = 0, 0, 1 do
                 local cube = scene:Instance("Cube");
                 local mesh;
@@ -107,7 +107,7 @@ function Start()
 
     --window:Resize(3840, 2160);
     --window:Resize(1920, 1080);
-    window:Resize(1920, 1060);
+    --window:Resize(1920, 1060);
     --window:Resize(1680, 1050);
     --window:Resize(1600, 900);
 
@@ -129,9 +129,16 @@ function Start()
 
     -------------------------------------
 
+    render:SetGridEnabled(false);
+
     Stack.PushScene(editorGUIScript, scene);
     Stack.PushCamera(editorGUIScript, cameraComp);
     editorGUIScript:Call("SetIndices");
+
+    --cameraComp:SetDirectOutput(true);
+    --window:SetGUIEnabled(false);
+    --Stack.PushBool(editorGUIScript, false);
+    --editorGUIScript:Call("Enabled");
 
     collectgarbage() -- collect memory
 end;
@@ -170,10 +177,22 @@ end;
 function Update()
     MouseUpdate();
 
+    if (Input.GetKeyDown(KeyCode.W)) then
+        GUIWindow.SetGuizmoTool(1);
+    else
+        if (Input.GetKeyDown(KeyCode.E)) then
+            GUIWindow.SetGuizmoTool(2);
+        else
+            if (Input.GetKeyDown(KeyCode.R)) then
+                GUIWindow.SetGuizmoTool(3);
+            end
+        end
+    end
+
     if (Input.GetKeyDown(KeyCode.P)) then
         local enabled = cameraComp:IsDirectOutput();
         cameraComp:SetDirectOutput(not enabled);
-
+        window:SetGUIEnabled(enabled);
         Stack.PushBool(editorGUIScript, enabled);
         editorGUIScript:Call("Enabled");
     end;

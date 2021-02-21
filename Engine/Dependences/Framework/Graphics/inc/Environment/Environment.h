@@ -84,7 +84,7 @@ namespace Framework::Graphics {
         /* set current opengl/vulkan/directx context */
         virtual bool SetContextCurrent() = 0;
 
-        virtual bool Init() = 0;
+        virtual bool Init(int swapInterval) = 0;
         virtual bool PostInit() = 0;
 
         virtual bool IsWindowOpen() = 0;
@@ -128,15 +128,16 @@ namespace Framework::Graphics {
         virtual bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) = 0;
         virtual unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) = 0;
         virtual inline void DeleteShader(unsigned int ID) = 0;
-        virtual inline void UseShader(unsigned int ID) noexcept = 0;
+        virtual inline void UseShader(const unsigned int&  ID) noexcept = 0;
 
-        virtual inline void SetBool(unsigned int ID, const std::string& name, bool v)       const noexcept = 0;
-        virtual inline void SetFloat(unsigned int ID, const std::string& name, float v)     const noexcept = 0;
-        virtual inline void SetInt(unsigned int ID, const std::string& name, int v)         const noexcept = 0;
-        virtual inline void SetMat4(unsigned int ID, const std::string& name, glm::mat4 v)  const noexcept = 0;
-        virtual inline void SetVec4(unsigned int ID, const std::string& name, glm::vec4 v)  const noexcept = 0;
-        virtual inline void SetVec3(unsigned int ID, const std::string& name, glm::vec3 v)  const noexcept = 0;
-        virtual inline void SetVec2(unsigned int ID, const std::string& name, glm::vec2 v)  const noexcept = 0;
+        virtual inline void SetBool(const unsigned int&  ID, const std::string& name, bool v)       const noexcept = 0;
+        virtual inline void SetFloat(const unsigned int&  ID, const std::string& name, float v)     const noexcept = 0;
+        virtual inline void SetInt(const unsigned int&  ID, const std::string& name, int v)         const noexcept = 0;
+        virtual inline void SetMat4(const unsigned int&  ID, const std::string& name, glm::mat4 v)  const noexcept = 0;
+        virtual inline void SetVec4(const unsigned int&  ID, const std::string& name, glm::vec4 v)  const noexcept = 0;
+        virtual inline void SetVec3(const unsigned int&  ID, const std::string& name, glm::vec3 v)  const noexcept = 0;
+        virtual inline void SetVec2(const unsigned int&  ID, const std::string& name, glm::vec2 v)  const noexcept = 0;
+        virtual inline void SetIVec2(const unsigned int&  ID, const std::string& name, glm::ivec2 v)  const noexcept = 0;
 
         // ============================== [ MESH METHODS ] ==============================
 
@@ -146,17 +147,17 @@ namespace Framework::Graphics {
         /** Vertex pos and texture cords */
         virtual inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept = 0;
         virtual unsigned int CalculateSkybox() noexcept = 0;
-        virtual void DrawSkybox(unsigned int VAO, unsigned int CubeMap) noexcept = 0;
-        virtual inline void DrawQuad(unsigned int VAO) noexcept = 0;
+        virtual void DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) noexcept = 0;
+        virtual inline void DrawQuad(const unsigned int&  VAO) noexcept = 0;
 
         virtual bool FreeMesh(unsigned int VAO) noexcept = 0;
-        virtual inline void DrawTriangles(unsigned int VAO, size_t count_vertices) noexcept = 0;
+        virtual inline void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) noexcept = 0;
         virtual inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) noexcept = 0;
 
         // ============================== [ TEXTURE METHODS ] ==============================
 
-        virtual inline void BindTexture(unsigned int ID) const noexcept = 0;
-        virtual inline void BindTexture(unsigned char activeTexture, unsigned int ID) const noexcept = 0;
+        virtual inline void BindTexture(const unsigned int&  ID) const noexcept = 0;
+        virtual inline void BindTexture(unsigned char activeTexture, const unsigned int&  ID) const noexcept = 0;
         virtual inline void SetActiveTexture(unsigned char activeTexture) const noexcept = 0;
         virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) = 0;
         virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) = 0;

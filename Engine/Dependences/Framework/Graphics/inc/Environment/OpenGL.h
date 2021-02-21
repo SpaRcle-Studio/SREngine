@@ -45,7 +45,7 @@ namespace Framework::Graphics {
 
         bool PreInit(unsigned int smooth_samples) override;
         bool SetContextCurrent() override;
-        bool Init() override;
+        bool Init(int swapInterval) override;
         bool PostInit() override;
 
         bool IsWindowOpen() override;
@@ -134,28 +134,29 @@ namespace Framework::Graphics {
         bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) override;
         unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) override;
         inline void DeleteShader(unsigned int ID) override { glDeleteProgram(ID); }
-        inline void UseShader(unsigned int ID) noexcept override  { glUseProgram(ID); }
+        inline void UseShader(const unsigned int& ID) noexcept override  { glUseProgram(ID); }
 
-        inline void SetBool(unsigned int ID, const std::string& name, bool v)       const noexcept override {
+        inline void SetBool(const unsigned int& ID, const std::string& name, bool v)       const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name.c_str()), 1, (int*)&v);
-            //glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)v);
         }
-        inline void SetFloat(unsigned int ID, const std::string& name, float v)     const noexcept override {
+        inline void SetFloat(const unsigned int& ID, const std::string& name, float v)     const noexcept override {
             glUniform1fv(glGetUniformLocation(ID, name.c_str()), 1, &v);
         }
-        inline void SetInt(unsigned int ID, const std::string& name, int v)         const noexcept override {
+        inline void SetInt(const unsigned int& ID, const std::string& name, int v)         const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name.c_str()), 1, &v);
-            //glUniform1i(glGetUniformLocation(ID, name.c_str()), v);
         }
-        inline void SetMat4(unsigned int ID, const std::string& name, glm::mat4 v)  const noexcept override {
+        inline void SetMat4(const unsigned int& ID, const std::string& name, glm::mat4 v)  const noexcept override {
             glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(v));
         }
-        inline void SetVec4(unsigned int ID, const std::string& name, glm::vec4 v)  const noexcept override {  }
-        inline void SetVec3(unsigned int ID, const std::string& name, glm::vec3 v)  const noexcept override {
+        inline void SetVec4(const unsigned int& ID, const std::string& name, glm::vec4 v)  const noexcept override {  }
+        inline void SetVec3(const unsigned int& ID, const std::string& name, glm::vec3 v)  const noexcept override {
             glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &v[0]);
         }
-        inline void SetVec2(unsigned int ID, const std::string& name, glm::vec2 v)  const noexcept override {
+        inline void SetVec2(const unsigned int& ID, const std::string& name, glm::vec2 v)  const noexcept override {
             glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &v[0]);
+        }
+        inline void SetIVec2(const unsigned int& ID, const std::string& name, glm::ivec2 v)  const noexcept override {
+            glUniform2iv(glGetUniformLocation(ID, name.c_str()), 1, &v[0]);
         }
 
         // ============================== [ MESH METHODS ] ==============================
@@ -225,12 +226,12 @@ namespace Framework::Graphics {
             return true;
         }
         bool FreeMesh(unsigned int VAO) noexcept override;
-        inline void DrawTriangles(unsigned int VAO, size_t count_vertices) noexcept override {
+        inline void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) noexcept override {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Green); }
 
             glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, count_vertices);
-            glBindVertexArray(0);
+            //glBindVertexArray(0);
 
             //if (Helper::Debug::Profile()) { EASY_END_BLOCK; }
         }
@@ -270,20 +271,20 @@ namespace Framework::Graphics {
             return true;
         }
         unsigned int CalculateSkybox() noexcept override;
-        void DrawSkybox(unsigned int VAO, unsigned int CubeMap) noexcept override;
+        void DrawSkybox(const unsigned int& VAO, unsigned int CubeMap) noexcept override;
 
-        inline void DrawQuad(unsigned int VAO) noexcept override{
+        inline void DrawQuad(const unsigned int& VAO) noexcept override{
             glBindVertexArray(VAO);
             //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             glDrawArrays(GL_TRIANGLES, 0, 6);
-            glBindVertexArray(0);
+            //glBindVertexArray(0);
         }
 
-        inline void BindTexture(unsigned int ID) const noexcept override {
+        inline void BindTexture(const unsigned int&  ID) const noexcept override {
             glBindTexture(GL_TEXTURE_2D, ID);
         }
 
-        inline void BindTexture(const unsigned char activeTexture, unsigned int ID) const noexcept override{
+        inline void BindTexture(const unsigned char activeTexture, const unsigned int&  ID) const noexcept override{
             glActiveTexture(GL_TEXTURE0 + activeTexture);
             glBindTexture(GL_TEXTURE_2D, ID);
         }

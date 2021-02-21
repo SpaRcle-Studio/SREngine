@@ -68,7 +68,7 @@ Material::~Material() {
     }
 }
 
-void Material::Use() noexcept {
+void Material::Use() const noexcept {
     if (m_diffuse) {
         m_env->BindTexture(0, m_diffuse->GetID());
         m_mesh->m_shader->SetInt("DiffuseMap", 0);
@@ -105,14 +105,14 @@ void Material::SetNormal(Texture *tex) {
     m_normal = tex;
 }
 
-void Material::SetSpecular(Texture *tex) {
+void Material::SetSpecular(Texture* tex) {
     tex->AddUsePoint();
     if (m_specular)
         m_specular->RemoveUsePoint();
     m_specular = tex;
 }
 
-void Material::SetGlossiness(Texture *tex) {
+void Material::SetGlossiness(Texture*tex) {
     tex->AddUsePoint();
     if (m_glossiness)
         m_glossiness->RemoveUsePoint();

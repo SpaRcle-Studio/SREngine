@@ -14,27 +14,6 @@ Framework::Graphics::Shader::Shader(Framework::Graphics::Render *render, const s
     this->m_name    = name;
 }
 
-void Framework::Graphics::Shader::SetBool(const std::string &name, bool v) const noexcept { m_env->SetBool(m_ID, name, v); }
-
-void Framework::Graphics::Shader::SetFloat(const std::string &name, float v) const noexcept {
-    m_env->SetFloat(m_ID, name, v);
-}
-
-void Framework::Graphics::Shader::SetInt(const std::string &name, int v) const noexcept { m_env->SetInt(m_ID, name, v); }
-void Framework::Graphics::Shader::SetMat4(const std::string &name, glm::mat4 v) const noexcept { m_env->SetMat4(m_ID, name, v); }
-
-void Framework::Graphics::Shader::SetVec4(const std::string &name, glm::vec4 v) const noexcept {
-
-}
-
-void Framework::Graphics::Shader::SetVec3(const std::string &name, glm::vec3 v) const noexcept {
-    m_env->SetVec3(m_ID, name, v);
-}
-
-void Framework::Graphics::Shader::SetVec2(const std::string &name, glm::vec2 v) const noexcept {
-
-}
-
 bool Framework::Graphics::Shader::Init() {
     if (!Compile()) {
         Debug::Error("Shader::Init() : failed compiling shader!");

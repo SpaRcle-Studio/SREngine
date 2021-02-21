@@ -8,6 +8,8 @@
 #include "Types/Texture.h"
 #include <glm/glm.hpp>
 
+#include <Render/Shader.h>
+
 namespace Framework::Graphics::Types {
     using namespace Helper;
 
@@ -38,7 +40,7 @@ namespace Framework::Graphics::Types {
     public:
         static glm::vec3 GetRandomColor();
     public:
-        void Use() noexcept;
+        void Use() const noexcept;
     public:
         [[nodiscard]] inline bool IsTransparent() const noexcept { return m_transparent; };
         bool SetTransparent(bool value);

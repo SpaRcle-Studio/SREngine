@@ -26,6 +26,9 @@ bool Framework::Graphics::Window::Create() {
 
     Debug::Graph("Window::Create() : creating window...");
 
+    this->m_time = new Helper::Types::Time();
+    this->m_time->SetFPSLimit(60);
+
     if (!this->m_render->Create(this)){
         Debug::Error("Window::Create() : failed create render!");
         m_hasErrors = true;
@@ -137,6 +140,9 @@ bool Framework::Graphics::Window::Close() {
 
     if (m_thread.joinable()) m_thread.join();
 
+    if (m_time)
+        delete m_time;
+
     return true;
 }
 
@@ -189,20 +195,38 @@ void Framework::Graphics::Window::Thread() {
         //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &w, &h);
     }
 
+    double deltaTime = 0;
+    unsigned int frames = 0;
+    double  frameRate = 30;
+
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
         if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Magenta); }
 
-        this->m_env->PoolEvents();
+        clock_t beginFrame = clock();
 
-        this->PoolEvents();
+        {
+            this->m_env->PoolEvents();
 
-        this->m_env->ClearBuffers();
+            this->PoolEvents();
 
-        this->m_render->PoolEvents();
+            this->m_env->ClearBuffers();
 
-        this->Draw();
+            this->m_render->PoolEvents();
 
-        this->m_env->SwapBuffers();
+            this->Draw();
+
+            this->m_env->SwapBuffers();
+        }
+
+        deltaTime += double(clock() - beginFrame) / (double)CLOCKS_PER_SEC;
+        frames++;
+
+        if(deltaTime > 1.0){ //every second
+            std::cout << "FPS: " << frames << std::endl;
+
+            frames = 0;
+            deltaTime = 0;
+        }
     }
 
     Debug::Graph("Window::Thread() : exit from main cycle.");
@@ -243,7 +267,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
-    this->m_env->Init();
+    this->m_env->Init(0);
 
     Debug::Graph("Window::InitEnvironment() : post-initializing environment...");
     this->m_env->PostInit();
@@ -344,7 +368,7 @@ void Framework::Graphics::Window::CentralizeCursor() noexcept {
 }
 
 void Framework::Graphics::Window::PoolEvents() {
-    if (m_countNewCameras) {
+    if (m_countNewCameras > 0) {
         m_camerasMutex.lock();
 
         for (size_t t = 0; t < m_countNewCameras; t++){
@@ -359,7 +383,7 @@ void Framework::Graphics::Window::PoolEvents() {
         m_camerasMutex.unlock();
     }
 
-    if (m_countCamerasToDestroy) {
+    if (m_countCamerasToDestroy > 0) {
         m_camerasMutex.lock();
 
         for (Camera* camera : m_camerasToDestroy)

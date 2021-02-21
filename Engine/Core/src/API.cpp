@@ -43,7 +43,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
         luabridge::getGlobalNamespace(L)
                 .beginClass<Helper::Types::Time>("Time")
                 .addStaticFunction("DeltaTime", static_cast<double (*)()>([]() -> double {
-                    return Helper::Types::Time::DeltaTime();
+                    return Engine::Get()->GetTime()->DeltaTime();
                 }))
                 .endClass();
     });
@@ -56,7 +56,10 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
         static int A                = (int)KeyCode::A;
         static int D                = (int)KeyCode::D;
         static int S                = (int)KeyCode::S;
+        static int Q                = (int)KeyCode::Q;
+        static int R                = (int)KeyCode::R;
         static int W                = (int)KeyCode::W;
+        static int T                = (int)KeyCode::T;
         static int P                = (int)KeyCode::P;
         static int B                = (int)KeyCode::B;
         static int E                = (int)KeyCode::E;
@@ -73,7 +76,10 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addProperty("A",               &A,                   false)
                 .addProperty("D",               &D,                   false)
                 .addProperty("S",               &S,                   false)
+                .addProperty("Q",               &Q,                   false)
                 .addProperty("W",               &W,                   false)
+                .addProperty("R",               &R,                   false)
+                .addProperty("T",               &T,                   false)
                 .addProperty("P",               &P,                   false)
                 .addProperty("B",               &B,                   false)
                 .addProperty("E",               &E,                   false)
@@ -350,6 +356,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addStaticFunction("Get", static_cast<Graphics::Render*(*)()>([]() -> Graphics::Render* {
                     return Engine::Get()->GetWindow()->GetRender();
                 }))
+                .addFunction("SetGridEnabled", (void (Framework::Graphics::Render::*)(bool))&Graphics::Render::SetGridEnabled)
                 .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
                 .addFunction("RegisterTexture", (void (Framework::Graphics::Render::*)(Graphics::Texture*))&Graphics::Render::RegisterTexture)
                 .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
@@ -452,6 +459,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addStaticFunction("DrawTexture", static_cast<void(*)(glm::vec2, glm::vec2, unsigned int, bool)>(
                         [](glm::vec2 winSize, glm::vec2 imgSize, unsigned int texID, bool center) {
                             Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
+                        }))
+                .addStaticFunction("SetGuizmoTool", static_cast<bool(*)(unsigned char)>([](unsigned char id) -> bool {
+                            return Graphics::GUI::GUIWindow::SetGuizmoTool(id);
                         }))
                 .addStaticFunction("DrawGuizmo", static_cast<void(*)(Graphics::Camera*, Helper::GameObject*, glm::vec2)>(
                         [](Graphics::Camera* camera,Helper::GameObject*gm, glm::vec2 cameraSize) {
