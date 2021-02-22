@@ -45,6 +45,18 @@ std::string Framework::Helper::FileSystem::GetPathToExe() {
 #endif
 }
 
+std::string Framework::Helper::FileSystem::GetFullPathToExe() {
+#ifdef WIN32
+    const std::size_t buf_len = 260;
+    auto s = new TCHAR[buf_len];
+    auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
+    return s;
+#else
+    Debug::Error("FileSystem::GetPathToExe() : linux not support this function!");
+    return "NoDirectory";
+#endif
+}
+
 std::string Framework::Helper::FileSystem::GetDirToExeFromFullPath(std::string full_path) {
     size_t size = full_path.size();
 
@@ -120,4 +132,9 @@ std::string FileSystem::GetFileNameToExeFromFullPath(std::string full_path) {
     }
 
     return full_path;
+}
+
+void FileSystem::Reload() {
+    std::string exe = GetFullPathToExe();
+    ShellExecute(NULL, "open", exe.c_str(), NULL, NULL, SW_SHOWDEFAULT);
 }

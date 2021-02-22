@@ -13,6 +13,7 @@
 #include <Types/Skybox.h>
 #include <Events/EventManager.h>
 #include <Types/Time.h>
+#include <FileSystem/FileSystem.h>
 
 namespace Framework {
     class Engine {
@@ -43,6 +44,11 @@ namespace Framework {
     private:
         bool RegisterLibraries();
     public:
+        static inline void Reload() {
+            Helper::FileSystem::Reload();
+            EventManager::Push(EventManager::Event::Exit);
+        }
+
         [[nodiscard]] inline Helper::Types::Time* GetTime() const noexcept { return this->m_time; }
         [[nodiscard]] inline Scene* GetScene() const noexcept { return m_scene; }
         [[nodiscard]] inline Scripting::Compiler* GetCompiler() const noexcept { return m_compiler; }

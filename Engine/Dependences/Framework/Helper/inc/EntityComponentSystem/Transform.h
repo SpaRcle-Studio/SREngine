@@ -29,9 +29,9 @@ namespace Framework::Helper {
         Transform(GameObject* parent);
         ~Transform() = default;
     public:
-        void SetPosition(glm::vec3 val);
-        void SetRotation(glm::vec3 val);
-        void SetScale(glm::vec3 val);
+        void SetPosition(glm::vec3 val, bool pivot = false);
+        void SetRotation(glm::vec3 val, bool pivot = false);
+        void SetScale(glm::vec3 val, bool pivot  = false);
 
         [[nodiscard]] glm::mat4 GetMatrix(bool local) const noexcept;
         void SetMatrix(glm::mat4 matrix, bool pivot) noexcept;
@@ -173,9 +173,9 @@ namespace Framework::Helper {
     private:
         //void UpdateChild(Transform* parent);
 
-        void UpdateChildPosition(Transform* parent) noexcept;
-        void UpdateChildRotation(Transform* parent, glm::vec3 delta) noexcept;
-        void UpdateChildScale(Transform* parent)    noexcept;
+        void UpdateChildPosition(const Transform* parent, glm::vec3 delta, const bool pivot = true) noexcept;
+        void UpdateChildRotation(const Transform* parent, glm::vec3 delta, const bool pivot = true) noexcept;
+        void UpdateChildScale(const Transform* parent,    glm::vec3 delta, const bool pivot = true) noexcept;
     private:
         /*glm::vec3     m_position              = { 0, 0, 0 };
         glm::vec3       m_rotation              = { 0, 0, 0 };
@@ -187,7 +187,7 @@ namespace Framework::Helper {
 
         glm::vec3       m_localPosition              = { 0, 0, 0 };
         glm::vec3       m_localRotation              = { 0, 0, 0 };
-        glm::vec3       m_localScale                 = { 0, 0, 0 };
+        glm::vec3       m_localScale                 = { 1, 1, 1 };
 
         glm::vec3       m_globalPosition             = { 0, 0, 0 };
         glm::vec3       m_globalRotation             = { 0, 0, 0 };

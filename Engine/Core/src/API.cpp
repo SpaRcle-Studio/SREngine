@@ -9,19 +9,32 @@
 #include <GUI/Canvas.h>
 
 void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
-// Debug
+    // Engine
+    compiler->RegisterScriptClass("Base", [](lua_State* L) {
+        luabridge::getGlobalNamespace(L)
+            .beginClass<Engine>("Engine")
+                    .addStaticFunction("Get", static_cast<Engine*(*)()>([]() {
+                        return Engine::Get();
+                    }))
+                    .addStaticFunction("Reload", static_cast<void(*)()>([]() {
+                        return Engine::Reload();
+                    }))
+            .endClass();
+    });
+
+    // Debug
     compiler->RegisterScriptClass("Base", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Debug>("Debug")
-                .addStaticFunction("Log", static_cast<void(*)(std::string)>([](std::string s) {
-                    Debug::ScriptLog(std::move(s));
-                }))
-                .addStaticFunction("Error", static_cast<void(*)(std::string)>([](std::string s) {
-                    Debug::ScriptError(std::move(s));
-                }))
-                .addStaticFunction("MakeCrash", static_cast<void(*)()>([]() {
-                    Debug::MakeCrash();
-                }))
+                    .addStaticFunction("Log", static_cast<void(*)(std::string)>([](std::string s) {
+                        Debug::ScriptLog(std::move(s));
+                    }))
+                    .addStaticFunction("Error", static_cast<void(*)(std::string)>([](std::string s) {
+                        Debug::ScriptError(std::move(s));
+                    }))
+                    .addStaticFunction("MakeCrash", static_cast<void(*)()>([]() {
+                        Debug::MakeCrash();
+                    }))
                 .endClass();
     });
 

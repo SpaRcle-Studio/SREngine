@@ -70,7 +70,6 @@ namespace Framework::Helper {
 
         // TODO: MAKE A FUCKING COMMENTS
         inline static std::string GetResourcesFolder() noexcept { return ResourceManager::g_resourcesFolder; }
-
     public:
         // TODO: PLEASE
         static void PrintMemoryDump();

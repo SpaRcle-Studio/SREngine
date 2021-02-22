@@ -10,12 +10,15 @@
 #include <vector>
 #include <iostream>
 #include <Debug.h>
+#include <imgui.h>
 
 Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
     this->m_gameObject = parent;
 }
 
-void Framework::Helper::Transform::SetPosition(glm::vec3 val) {
+void Framework::Helper::Transform::SetPosition(glm::vec3 val, bool pivot) {
+   // glm::vec3 delta = val - m_globalPosition;
+
     m_globalPosition = val;
 
     if (m_gameObject->m_parent)
@@ -26,8 +29,7 @@ void Framework::Helper::Transform::SetPosition(glm::vec3 val) {
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildPosition(this);
-        //m.second->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildPosition(this, glm::vec3(0,0,0), pivot);
     }
 }
 
@@ -45,7 +47,7 @@ glm::vec3 Lim360(glm::vec3 vec) noexcept {
     return {xf, yf, zf};
 }
 
-void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
+void Framework::Helper::Transform::SetRotation(glm::vec3 val, bool pivot) {
 
     m_globalRotation = val;
     //delta = m_globalRotation - delta;
@@ -56,25 +58,27 @@ void Framework::Helper::Transform::SetRotation(glm::vec3 val) {
     m_gameObject->UpdateComponentsRotation();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildRotation(this, delta);
+        //!gm->m_transform->UpdateChildRotation(this, delta , pivot); //, pivot!!!!!!
         //gm.second->m_transform->UpdateChildRotation(this, delta);
     }
 }
 
-void Framework::Helper::Transform::SetScale(glm::vec3 val) {
+void Framework::Helper::Transform::SetScale(glm::vec3 val, bool pivot) {
+    glm::vec3 delta = val / m_globalScale;
+
     m_globalScale = val;
 
     // TODO
     if (m_gameObject->m_parent)
-        m_localScale = m_globalScale - m_gameObject->m_parent->m_transform->m_globalScale;
+        m_localScale = m_globalScale / m_gameObject->m_parent->m_transform->m_globalScale;
     else
-        m_localScale = val;
+        m_localScale = m_globalScale;
 
     m_gameObject->UpdateComponentsScale();
 
-    for (auto gm : m_gameObject->m_children)
-        gm->m_transform->UpdateChildScale(this);
-        //gm.second->m_transform->UpdateChildScale(this);
+    for (auto gm : m_gameObject->m_children) {
+        gm->m_transform->UpdateChildScale(this, delta, pivot);
+    }
 }
 
 void Framework::Helper::Transform::Translate(glm::vec3 val) noexcept {
@@ -134,19 +138,21 @@ nlohmann::json Framework::Helper::Transform::Save() {
     return json;
 }
 
-void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexcept {
-    this->m_globalPosition = parent->m_globalPosition + m_localPosition;
-    //this->CheckNaN_Position();
+void Framework::Helper::Transform::UpdateChildPosition(const Transform* parent, glm::vec3 delta, const bool pivot) noexcept {
+    if (pivot)
+        this->m_globalPosition = parent->m_globalPosition + m_localPosition;
+    else
+        m_localPosition = m_globalPosition - parent->m_globalPosition;
 
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildPosition(this, glm::vec3(0,0,0), pivot);
     }
 }
 
-void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent, glm::vec3 delta) noexcept {
-    this->SetRotateAround(parent->m_globalPosition, m_childDefRotation + delta);
+void Framework::Helper::Transform::UpdateChildRotation(const Framework::Helper::Transform *parent, glm::vec3 delta, const bool pivot) noexcept {
+    //this->SetRotateAround(parent->m_globalPosition, m_childDefRotation + delta);
 
 
     //this->m_globalRotation = Lim360(parent->m_globalRotation + m_localRotation);
@@ -166,14 +172,54 @@ void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transf
     //this->SetRotationAround(m_parent_position, m_parent_rotation);
 }
 
-void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform *parent) noexcept {
-    this->m_globalScale = parent->m_globalScale + m_localScale;
+void Framework::Helper::Transform::UpdateChildScale(const Framework::Helper::Transform *parent, glm::vec3 delta, const bool pivot) noexcept {\
+    glm::vec3 deltaScale = m_globalScale;
+
+    if (pivot) {
+        /*// glm::vec3 newScale = ;
+        //glm::vec3 dS = newScale / m_globalScale;
+
+
+        //std::cout << glm::to_string(delta) << std::endl;
+
+        //this->m_globalPosition += dir * (1.f / dS);
+        //this->m_globalPosition = ((m_globalPosition * dS) - parent->m_globalPosition);
+        //this->m_globalPosition *= dS;
+        //glm::vec3 delta = m_globalPosition - parent->m_globalPosition;
+        //this->m_globalPosition -= m_localPosition * dS;
+        //this->m_globalPosition -= parent->m_globalPosition / dS;
+
+        //!this->m_globalPosition = (m_localPosition * parent->m_globalScale) + parent->m_globalPosition;
+        //this->m_globalPosition = ((m_localPosition + parent->m_globalPosition) * delta); //! See: parent->m_localScale
+
+        //glm::vec3 deltaPos = m_globalPosition;*/
+
+        this->m_globalScale = parent->m_globalScale * m_localScale;
+        deltaScale = m_globalScale / deltaScale;
+
+        this->m_globalPosition = ((m_localPosition) * delta) + parent->m_globalPosition; //! See: parent->m_localScale
+        this->m_localPosition = m_globalPosition - parent->m_globalPosition;
+
+        m_gameObject->UpdateComponentsPosition();
+
+        //for (auto gm : m_gameObject->m_children) {
+            //gm->m_transform->m_globalPosition = gm->m_parent->m_transform->m_globalPosition + gm->m_transform->m_localPosition;
+            //gm->m_transform->m_localPosition = gm->m_transform->m_globalPosition - gm->m_parent->m_transform->m_globalPosition;
+
+            //gm->UpdateComponentsPosition();
+
+            //gm->m_transform->UpdateChildPosition(this, glm::vec3(0, 0, 0), pivot);
+        //}
+    }
+
+    this->m_localScale = m_globalScale / parent->m_globalScale;
+
     //CheckNaN_Scale();
 
     m_gameObject->UpdateComponentsScale();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildScale(this);
+        gm->m_transform->UpdateChildScale(this, pivot ? deltaScale : glm::vec3(0,0,0), pivot);
     }
 }
 
@@ -233,14 +279,14 @@ glm::vec3 Framework::Helper::Transform::Forward(bool local) const noexcept {
         -rot.z  //-rot.z
     ));
 
-    return q * -forward; // return q * -forward;
+    return q * forward; // return q * -forward;
 }
 glm::vec3 Framework::Helper::Transform::Right(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
         rot.x, //rot.x,
         rot.y, //-rot.y, //rot.y,
-        -rot.z //-rot.z
+        -rot.z //-rot. z
     ));
 
     return q * -right; //return q * right;
@@ -271,7 +317,7 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 axis,
     }*/
 }
 
-//! COMPLETED
+//! NOT COMPLETED
 void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle) noexcept {
     if (angle == glm::vec3(0,0,0))
         return;
@@ -301,8 +347,8 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildRotation(this, delta);
-        gm->m_transform->UpdateChildPosition(this);
+        //!gm->m_transform->UpdateChildRotation(this, delta);
+        //gm->m_transform->UpdateChildPosition(this);
         //gm.second->m_transform->UpdateChildRotation(this, delta);
         //gm.second->m_transform->UpdateChildPosition(this);
     }
@@ -349,8 +395,8 @@ void Framework::Helper::Transform::RotateAround(glm::vec3 point, glm::vec3 angle
         m_gameObject->UpdateComponentsPosition();
 
         for (auto gm : m_gameObject->m_children) {
-            gm->m_transform->UpdateChildRotation(this, delta);
-            gm->m_transform->UpdateChildPosition(this);
+            //!gm->m_transform->UpdateChildRotation(this, delta);
+            //gm->m_transform->UpdateChildPosition(this);
             //gm.second->m_transform->UpdateChildRotation(this, delta);
             //gm.second->m_transform->UpdateChildPosition(this);
         }
@@ -479,8 +525,8 @@ void Framework::Helper::Transform::SetRotateAround(glm::vec3 point, glm::vec3 an
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildRotation(this, delta);
-        gm->m_transform->UpdateChildPosition(this);
+        //!gm->m_transform->UpdateChildRotation(this, delta);
+        //gm->m_transform->UpdateChildPosition(this);
         //gm.second->m_transform->UpdateChildRotation(this, delta);
         //gm.second->m_transform->UpdateChildPosition(this);
     }
@@ -632,18 +678,21 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 matrix, bool pivot) noexc
     glm::decompose(matrix, scale, rotation, translation, skew, perspective);
 
     glm::vec3 rot = glm::degrees(glm::eulerAngles(rotation));
+
+    glm::vec3 deltaScale = scale / m_globalScale;
+
     this->m_globalPosition = {translation.x, translation.y, translation.z};
-    this->m_globalRotation = { rot.x, rot.y, rot.z };
+    this->m_globalRotation = {rot.x, rot.y, rot.z};
     this->m_globalScale    = scale;
 
     if (!m_gameObject->m_parent) {
-        m_localScale    = m_globalScale;
-        m_localRotation = m_globalRotation;
         m_localPosition = m_globalPosition;
+        m_localRotation = m_globalRotation;
+        m_localScale    = m_globalScale;
     } else {
         m_localPosition = m_globalPosition - m_gameObject->m_parent->m_transform->m_globalPosition;
         m_localRotation = m_globalRotation - m_gameObject->m_parent->m_transform->m_globalRotation;
-        m_localScale    = m_globalScale    - m_gameObject->m_parent->m_transform->m_globalScale;
+        m_localScale    = m_globalScale    / m_gameObject->m_parent->m_transform->m_globalScale;
     }
 
     //!---------------------------------------------------------------------------------------------------------
@@ -651,8 +700,11 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 matrix, bool pivot) noexc
     m_gameObject->UpdateComponents();
 
     for (auto gm : m_gameObject->m_children) {
-        gm->m_transform->UpdateChildPosition(this);
-        gm->m_transform->UpdateChildScale(this);
+        if (deltaScale != glm::vec3(1,1,1))
+            gm->m_transform->UpdateChildScale(this, deltaScale, pivot);
+        else
+            gm->m_transform->UpdateChildPosition(this, glm::vec3(0,0,0), pivot);
+
         //gm->m_transform->UpdateChildRotation(this);
     }
 }

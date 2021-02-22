@@ -39,7 +39,7 @@ namespace Framework::Graphics::GUI {
     private:
         inline static ImGuizmo::OPERATION g_currentGuizmoOperation  = ImGuizmo::OPERATION::TRANSLATE;
         inline static ImGuizmo::MODE      g_currentGuizmoMode       = ImGuizmo::MODE::LOCAL;
-        inline static bool                g_currentGuizmoPivot      = false;
+        inline static bool                g_currentGuizmoPivot      = true;
         inline static bool                g_shiftPressed            = false;
 
         inline static void CheckSelected(Helper::GameObject* gm) noexcept;

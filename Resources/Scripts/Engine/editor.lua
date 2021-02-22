@@ -192,6 +192,10 @@ function ToolBar()
                 EventManager.Push(Event.Exit);
             end;
 
+            if (GUIWindow.MenuItem("Reload")) then
+                Engine.Reload();
+            end;
+
             GUIWindow.EndMenu();
         end;
 

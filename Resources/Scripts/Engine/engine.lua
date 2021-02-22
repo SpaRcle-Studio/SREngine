@@ -70,7 +70,6 @@ function HierarchyTest()
     local cube_parent = scene:Instance("Cube parent");
 
     render:RegisterMesh(mesh);
-
     mesh:GetMaterial():SetDiffuse(texture);
     mesh:GetMaterial():SetColor(Vector3.New(1, 2, 1));
 
@@ -91,7 +90,7 @@ function HierarchyTest()
 
     cube_child:AddComponent(mesh:Base());
     cube_child:GetTransform():Translate(
-        Vector3.FMul(cube_child:GetTransform():Forward(), 5.0)
+        Vector3.FMul(cube_child:GetTransform():Forward(), 2.0)
     );
 
     cube_parent:AddChild(cube_child);
@@ -105,13 +104,12 @@ function HierarchyTest()
     mesh = mesh:Copy();
 
     render:RegisterMesh(mesh);
-
     mesh:GetMaterial():SetDiffuse(texture);
     mesh:GetMaterial():SetColor(Vector3.New(1, 1, 2));
 
     cube_child2:AddComponent(mesh:Base());
     cube_child2:GetTransform():Translate(
-        Vector3.FMul(cube_child2:GetTransform():Forward(), 10.0)
+        Vector3.FMul(cube_child2:GetTransform():Forward(), 4.0)
     );
 
     cube_child:AddChild(cube_child2);
@@ -208,7 +206,7 @@ function MouseUpdate()
     local wheel = Input.GetMouseWheel();
     if (wheel ~= 0) then
         local forward = camera:GetTransform():Forward();
-        camera:GetTransform():Translate(Vector3.FMul(forward, wheel / 10.0));
+        camera:GetTransform():Translate(Vector3.FMul(forward, wheel / -10.0));
     end;
 
     if (Input.GetKey(KeyCode.MouseRight)) then

@@ -107,11 +107,11 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
     ImGui::Text("[Global]");
 
     if (ImGui::InputFloat3("G Tr", &position[0]))
-        gameObject->GetTransform()->SetPosition(position);
+        gameObject->GetTransform()->SetPosition(position, g_currentGuizmoPivot);
     if (ImGui::InputFloat3("G Rt", &rotation[0]))
-        gameObject->GetTransform()->SetRotation(rotation);
+        gameObject->GetTransform()->SetRotation(rotation, g_currentGuizmoPivot);
     if (ImGui::InputFloat3("G Sc", &scale[0]))
-        gameObject->GetTransform()->SetScale(scale);
+        gameObject->GetTransform()->SetScale(scale, g_currentGuizmoPivot);
 
     ImGui::Text("[Local]");
 

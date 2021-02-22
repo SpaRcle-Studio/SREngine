@@ -143,7 +143,7 @@ bool GameObject::AddChild(GameObject *child) { // TODO: add security multi-threa
         child->m_transform->m_localPosition = child->m_transform->m_globalPosition - this->m_transform->m_globalPosition;
         //std::cout << glm::to_string(child->m_transform->m_localPosition) << std::endl;
         child->UpdateComponentsPosition();
-        child->m_transform->UpdateChildPosition(this->m_transform);
+        child->m_transform->UpdateChildPosition(this->m_transform, glm::vec3(0,0,0)); //TODO!!!!!!!!!
     }
 
     child->m_transform->m_childDefRotation = child->m_transform->GetNormalizedAngleOfPoint(m_transform->GetPosition());

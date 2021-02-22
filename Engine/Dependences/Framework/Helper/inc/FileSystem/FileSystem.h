@@ -9,9 +9,9 @@
 
 namespace Framework::Helper {
 class FileSystem {
-private:
-    FileSystem() {};
-    ~FileSystem() {};
+public:
+    FileSystem() = delete;
+    ~FileSystem() = delete;
 public:
     static std::string GetFileNameToExeFromFullPath(std::string full_path);
     static std::string GetDirToExeFromFullPath(std::string full_path);
@@ -22,6 +22,8 @@ public:
 
     static std::string GetExecutableFileName();
     static std::string GetPathToExe();
+    static std::string GetFullPathToExe();
+    static void Reload();
 
     static char* Load(std::string path);
 
