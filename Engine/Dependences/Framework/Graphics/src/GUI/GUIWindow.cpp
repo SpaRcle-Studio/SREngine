@@ -49,7 +49,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::Scene
 
     unsigned long i = 0;
 
-    GUIWindow::m_shiftPressed = Helper::InputSystem::IsPressed(Helper::KeyCode::LShift);
+    GUIWindow::g_shiftPressed = Helper::InputSystem::IsPressed(Helper::KeyCode::LShift);
 
     if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
@@ -82,7 +82,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::Scene
 
 void Framework::Graphics::GUI::GUIWindow::CheckSelected(Framework::Helper::GameObject *gm) noexcept {
     if (ImGui::IsItemClicked()) {
-        if (!m_shiftPressed)
+        if (!g_shiftPressed)
             gm->GetScene()->UnselectAll();
 
         gm->SetSelect(true);
@@ -104,12 +104,24 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
     glm::vec3 rotation = gameObject->GetTransform()->GetRotation();
     glm::vec3 scale = gameObject->GetTransform()->GetScale();
 
-    if (ImGui::InputFloat3("Tr", &position[0]))
+    ImGui::Text("[Global]");
+
+    if (ImGui::InputFloat3("G Tr", &position[0]))
         gameObject->GetTransform()->SetPosition(position);
-    if (ImGui::InputFloat3("Rt", &rotation[0]))
+    if (ImGui::InputFloat3("G Rt", &rotation[0]))
         gameObject->GetTransform()->SetRotation(rotation);
-    if (ImGui::InputFloat3("Sc", &scale[0]))
+    if (ImGui::InputFloat3("G Sc", &scale[0]))
         gameObject->GetTransform()->SetScale(scale);
+
+    ImGui::Text("[Local]");
+
+    position = gameObject->GetTransform()->GetPosition(true);
+    rotation = gameObject->GetTransform()->GetRotation(true);
+    scale = gameObject->GetTransform()->GetScale(true);
+
+    ImGui::InputFloat3("L Tr", &position[0]);
+    ImGui::InputFloat3("L Rt", &rotation[0]);
+    ImGui::InputFloat3("L Sc", &scale[0]);
 
     std::vector<Framework::Helper::Component*> comps = gameObject->GetComponents();
     for (Framework::Helper::Component* comp : comps) {
@@ -246,11 +258,16 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     }
 
     if (ButtonWithId("engine_tool_mode", "L", sizeB, 0, true,
-                     ImVec2(space * 4 + sizeB.x * 3, space), g_currentGuizmoMode == ImGuizmo::LOCAL ? act : def)) {
+                     ImVec2(space * 5 + sizeB.x * 4, space), g_currentGuizmoMode == ImGuizmo::LOCAL ? act : def)) {
         if (g_currentGuizmoMode == ImGuizmo::LOCAL)
             g_currentGuizmoMode = ImGuizmo::WORLD;
         else
             g_currentGuizmoMode = ImGuizmo::LOCAL;
+    }
+
+    if (ButtonWithId("engine_tool_pivot", "P", sizeB, 0, true,
+                     ImVec2(space * 6 + sizeB.x * 5, space), g_currentGuizmoPivot ? act : def)) {
+        g_currentGuizmoPivot = !g_currentGuizmoPivot;
     }
 
     //ImGuiIO& io = ImGui::GetIO();
@@ -261,6 +278,9 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
 
     glm::mat4 mat = gameObject->GetTransform()->GetMatrix(false);
 
+    //glm::vec3 camPos = camera->GetGLPosition();
+    //ImGuizmo::SetCameraPos(camPos.x, camPos.y, -camPos.z);
+
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
@@ -268,9 +288,9 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             &mat[0][0],
             NULL, NULL, NULL, NULL))
     {
-        gameObject->GetTransform()->SetMatrix(mat);
+        gameObject->GetTransform()->SetMatrix(mat, g_currentGuizmoPivot);
 
-        gameObject->UpdateComponents();
+        //gameObject->UpdateComponents();
     }
 
 

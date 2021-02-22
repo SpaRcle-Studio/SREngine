@@ -22,7 +22,7 @@ namespace Framework::Helper {
     private:
         GameObject(Scene* scene, std::string name, std::string tag = "Untagged");
         ~GameObject();
-    public:
+    private:
         void UpdateComponents();
         void UpdateComponentsPosition();
         void UpdateComponentsRotation();

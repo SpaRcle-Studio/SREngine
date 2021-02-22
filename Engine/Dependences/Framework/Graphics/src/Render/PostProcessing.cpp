@@ -113,9 +113,10 @@ bool Framework::Graphics::PostProcessing::End() {
     m_postProcessingShader->Use();
 
     {
-        m_postProcessingShader->SetFloat("gamma", m_gamma);
-        m_postProcessingShader->SetFloat("exposure", m_exposure);
-        m_postProcessingShader->SetFloat("saturation", m_saturation);
+        //m_postProcessingShader->SetFloat("gamma", m_gamma);
+        //m_postProcessingShader->SetFloat("exposure", m_exposure);
+        //m_postProcessingShader->SetFloat("saturation", m_saturation);
+        m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
         m_postProcessingShader->SetVec3("ColorCorrection", m_color_correction);
         m_postProcessingShader->SetVec3("BloomColor", m_bloomColor);
     }
@@ -127,6 +128,7 @@ bool Framework::Graphics::PostProcessing::End() {
         m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
     else
         m_env->BindTexture(1, 0);
+
     m_postProcessingShader->SetInt("bloomBlur", 1);
 
     m_env->BindTexture(2, m_skyboxColorBuffer);

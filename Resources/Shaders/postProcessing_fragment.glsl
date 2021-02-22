@@ -9,9 +9,11 @@ uniform sampler2D skybox;
 uniform sampler2D stencil;
 uniform sampler2D depth;
 
-uniform float exposure;
-uniform float gamma;
-uniform float saturation;
+//uniform float exposure;
+//uniform float gamma;
+//uniform float saturation;
+
+uniform vec3 GammaExpSat;
 
 uniform vec3 ColorCorrection;
 uniform vec3 BloomColor;
@@ -106,15 +108,15 @@ void main() {
 
     hdrColor += texture(bloomBlur, TexCoords).rgb * BloomColor;
 
-    hdrColor = czm_saturation(hdrColor, saturation);
+    hdrColor = czm_saturation(hdrColor, GammaExpSat.z);
 
     // tone mapping
-    vec3 result = vec3(1.0) - exp(-hdrColor * exposure);
+    vec3 result = vec3(1.0) - exp(-hdrColor * GammaExpSat.y);
 
     result *= ColorCorrection;
 
     // also gamma correct while we're at it
-    result = pow(result, vec3(1.0 / gamma));
+    result = pow(result, vec3(1.0 / GammaExpSat.x));
     FragColor = vec4(result, 1);
 
     DrawStencilFast();

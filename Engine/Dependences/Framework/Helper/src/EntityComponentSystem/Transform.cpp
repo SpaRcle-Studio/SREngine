@@ -136,17 +136,18 @@ nlohmann::json Framework::Helper::Transform::Save() {
 
 void Framework::Helper::Transform::UpdateChildPosition(Transform* parent) noexcept {
     this->m_globalPosition = parent->m_globalPosition + m_localPosition;
+    //this->CheckNaN_Position();
 
     m_gameObject->UpdateComponentsPosition();
 
     for (auto gm : m_gameObject->m_children) {
         gm->m_transform->UpdateChildPosition(this);
-        //gm.second->m_transform->UpdateChildPosition(this);
     }
 }
 
 void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transform *parent, glm::vec3 delta) noexcept {
     this->SetRotateAround(parent->m_globalPosition, m_childDefRotation + delta);
+
 
     //this->m_globalRotation = Lim360(parent->m_globalRotation + m_localRotation);
 
@@ -166,7 +167,14 @@ void Framework::Helper::Transform::UpdateChildRotation(Framework::Helper::Transf
 }
 
 void Framework::Helper::Transform::UpdateChildScale(Framework::Helper::Transform *parent) noexcept {
+    this->m_globalScale = parent->m_globalScale + m_localScale;
+    //CheckNaN_Scale();
 
+    m_gameObject->UpdateComponentsScale();
+
+    for (auto gm : m_gameObject->m_children) {
+        gm->m_transform->UpdateChildScale(this);
+    }
 }
 
 glm::vec3 Framework::Helper::Transform::GetLookAt(glm::vec3 target, glm::vec3 axis) noexcept {
@@ -220,8 +228,8 @@ void Framework::Helper::Transform::LookAt(glm::vec3 target) {
 glm::vec3 Framework::Helper::Transform::Forward(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
-        -rot.x, //rot.x,
-        -rot.y, //rot.y,
+        rot.x, //rot.x,
+        rot.y, //rot.y,
         -rot.z  //-rot.z
     ));
 
@@ -230,8 +238,8 @@ glm::vec3 Framework::Helper::Transform::Forward(bool local) const noexcept {
 glm::vec3 Framework::Helper::Transform::Right(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
-        -rot.x, //rot.x,
-        -rot.y, //rot.y,
+        rot.x, //rot.x,
+        rot.y, //-rot.y, //rot.y,
         -rot.z //-rot.z
     ));
 
@@ -240,8 +248,8 @@ glm::vec3 Framework::Helper::Transform::Right(bool local) const noexcept {
 glm::vec3 Framework::Helper::Transform::Up(bool local) const noexcept {
     const glm::vec3 rot = local ? m_localRotation : m_globalRotation;
     glm::fquat q = glm::radians(glm::vec3(
-        -rot.x, // rot.x,
-        -rot.y, //rot.y,
+        rot.x, // rot.x,
+        rot.y, //rot.y,
         -rot.z //-rot.z
     ));
 
@@ -486,16 +494,30 @@ void Framework::Helper::Transform::CheckNaN_Position() noexcept {
     if (m_globalPosition.x != m_globalPosition.x) m_globalPosition.x = 0.f;
     if (m_globalPosition.y != m_globalPosition.y) m_globalPosition.y = 0.f;
     if (m_globalPosition.z != m_globalPosition.z) m_globalPosition.z = 0.f;
+
+    if (m_localPosition.x != m_localPosition.x) m_localPosition.x = 0.f;
+    if (m_localPosition.y != m_localPosition.y) m_localPosition.y = 0.f;
+    if (m_localPosition.z != m_localPosition.z) m_localPosition.z = 0.f;
 }
 
 void Framework::Helper::Transform::CheckNaN_Rotation() noexcept {
     if (m_globalRotation.x != m_globalRotation.x) m_globalRotation.x = 0.f;
     if (m_globalRotation.y != m_globalRotation.y) m_globalRotation.y = 0.f;
     if (m_globalRotation.z != m_globalRotation.z) m_globalRotation.z = 0.f;
+
+    if (m_localRotation.x != m_localRotation.x) m_localRotation.x = 0.f;
+    if (m_localRotation.y != m_localRotation.y) m_localRotation.y = 0.f;
+    if (m_localRotation.z != m_localRotation.z) m_localRotation.z = 0.f;
 }
 
 void Framework::Helper::Transform::CheckNaN_Scale() noexcept {
+    if (m_globalScale.x != m_globalScale.x) m_globalScale.x = 1.f;
+    if (m_globalScale.y != m_globalScale.y) m_globalScale.y = 1.f;
+    if (m_globalScale.z != m_globalScale.z) m_globalScale.z = 1.f;
 
+    if (m_localScale.x != m_localScale.x) m_localScale.x = 1.f;
+    if (m_localScale.y != m_localScale.y) m_localScale.y = 1.f;
+    if (m_localScale.z != m_localScale.z) m_localScale.z = 1.f;
 }
 
 glm::vec3 Framework::Helper::Transform::GetAngleOfPoint(glm::vec3 point) noexcept {
@@ -597,6 +619,62 @@ glm::vec3 Framework::Helper::Transform::GetNormalizedAngleOfPoint(glm::vec3 poin
     }
 
     return angle;
+}
+
+void Framework::Helper::Transform::SetMatrix(glm::mat4 matrix, bool pivot) noexcept  {
+    glm::vec3 scale;
+    glm::quat rotation;
+    glm::vec3 translation;
+
+    glm::vec3 skew;
+    glm::vec4 perspective;
+
+    glm::decompose(matrix, scale, rotation, translation, skew, perspective);
+
+    glm::vec3 rot = glm::degrees(glm::eulerAngles(rotation));
+    this->m_globalPosition = {translation.x, translation.y, translation.z};
+    this->m_globalRotation = { rot.x, rot.y, rot.z };
+    this->m_globalScale    = scale;
+
+    if (!m_gameObject->m_parent) {
+        m_localScale    = m_globalScale;
+        m_localRotation = m_globalRotation;
+        m_localPosition = m_globalPosition;
+    } else {
+        m_localPosition = m_globalPosition - m_gameObject->m_parent->m_transform->m_globalPosition;
+        m_localRotation = m_globalRotation - m_gameObject->m_parent->m_transform->m_globalRotation;
+        m_localScale    = m_globalScale    - m_gameObject->m_parent->m_transform->m_globalScale;
+    }
+
+    //!---------------------------------------------------------------------------------------------------------
+
+    m_gameObject->UpdateComponents();
+
+    for (auto gm : m_gameObject->m_children) {
+        gm->m_transform->UpdateChildPosition(this);
+        gm->m_transform->UpdateChildScale(this);
+        //gm->m_transform->UpdateChildRotation(this);
+    }
+}
+
+glm::mat4 Framework::Helper::Transform::GetMatrix(bool local) const noexcept  {
+    //bool local = m_gameObject->m_parent != nullptr;
+
+    glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), {
+            local ? m_localPosition.x : m_globalPosition.x,
+            local ? m_localPosition.y : m_globalPosition.y,
+            local ? m_localPosition.z : m_globalPosition.z
+    });
+
+    glm::vec3 rot = local ? m_localRotation : m_globalRotation;
+    const glm::mat4 rotationMatrix = mat4_cast(glm::quat(glm::radians(glm::vec3(
+            { rot.x, rot.y, rot.z }
+            // {0, 45,0}
+    ))));
+
+    modelMat *= rotationMatrix;
+
+    return glm::scale(modelMat, local ? m_localScale : m_globalScale);
 }
 
 

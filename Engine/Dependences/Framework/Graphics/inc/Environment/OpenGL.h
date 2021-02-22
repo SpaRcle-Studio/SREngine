@@ -136,27 +136,29 @@ namespace Framework::Graphics {
         inline void DeleteShader(unsigned int ID) override { glDeleteProgram(ID); }
         inline void UseShader(const unsigned int& ID) noexcept override  { glUseProgram(ID); }
 
-        inline void SetBool(const unsigned int& ID, const std::string& name, bool v)       const noexcept override {
-            glUniform1iv(glGetUniformLocation(ID, name.c_str()), 1, (int*)&v);
+        inline void SetBool(const unsigned int& ID, const char* name, bool v)       const noexcept override {
+            glUniform1iv(glGetUniformLocation(ID, name), 1, (int*)&v);
         }
-        inline void SetFloat(const unsigned int& ID, const std::string& name, float v)     const noexcept override {
-            glUniform1fv(glGetUniformLocation(ID, name.c_str()), 1, &v);
+        inline void SetFloat(const unsigned int& ID, const char* name, float v)     const noexcept override {
+            glUniform1fv(glGetUniformLocation(ID, name), 1, &v);
         }
-        inline void SetInt(const unsigned int& ID, const std::string& name, int v)         const noexcept override {
-            glUniform1iv(glGetUniformLocation(ID, name.c_str()), 1, &v);
+        inline void SetInt(const unsigned int& ID, const char* name, int v)         const noexcept override {
+            glUniform1iv(glGetUniformLocation(ID, name), 1, &v);
         }
-        inline void SetMat4(const unsigned int& ID, const std::string& name, glm::mat4 v)  const noexcept override {
-            glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(v));
+        inline void SetMat4(const unsigned int& ID, const char* name, glm::mat4 v)  const noexcept override {
+            glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, glm::value_ptr(v));
         }
-        inline void SetVec4(const unsigned int& ID, const std::string& name, glm::vec4 v)  const noexcept override {  }
-        inline void SetVec3(const unsigned int& ID, const std::string& name, glm::vec3 v)  const noexcept override {
-            glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &v[0]);
+        inline void SetVec4(const unsigned int& ID, const char* name, glm::vec4 v)  const noexcept override {
+            glUniform4fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetVec2(const unsigned int& ID, const std::string& name, glm::vec2 v)  const noexcept override {
-            glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &v[0]);
+        inline void SetVec3(const unsigned int& ID, const char* name, glm::vec3 v)  const noexcept override {
+            glUniform3fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetIVec2(const unsigned int& ID, const std::string& name, glm::ivec2 v)  const noexcept override {
-            glUniform2iv(glGetUniformLocation(ID, name.c_str()), 1, &v[0]);
+        inline void SetVec2(const unsigned int& ID, const char* name, glm::vec2 v)  const noexcept override {
+            glUniform2fv(glGetUniformLocation(ID, name), 1, &v[0]);
+        }
+        inline void SetIVec2(const unsigned int& ID, const char* name, glm::ivec2 v)  const noexcept override {
+            glUniform2iv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
 
         // ============================== [ MESH METHODS ] ==============================

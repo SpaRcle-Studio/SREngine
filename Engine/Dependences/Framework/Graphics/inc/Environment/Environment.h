@@ -130,14 +130,14 @@ namespace Framework::Graphics {
         virtual inline void DeleteShader(unsigned int ID) = 0;
         virtual inline void UseShader(const unsigned int&  ID) noexcept = 0;
 
-        virtual inline void SetBool(const unsigned int&  ID, const std::string& name, bool v)       const noexcept = 0;
-        virtual inline void SetFloat(const unsigned int&  ID, const std::string& name, float v)     const noexcept = 0;
-        virtual inline void SetInt(const unsigned int&  ID, const std::string& name, int v)         const noexcept = 0;
-        virtual inline void SetMat4(const unsigned int&  ID, const std::string& name, glm::mat4 v)  const noexcept = 0;
-        virtual inline void SetVec4(const unsigned int&  ID, const std::string& name, glm::vec4 v)  const noexcept = 0;
-        virtual inline void SetVec3(const unsigned int&  ID, const std::string& name, glm::vec3 v)  const noexcept = 0;
-        virtual inline void SetVec2(const unsigned int&  ID, const std::string& name, glm::vec2 v)  const noexcept = 0;
-        virtual inline void SetIVec2(const unsigned int&  ID, const std::string& name, glm::ivec2 v)  const noexcept = 0;
+        virtual inline void SetBool(const unsigned int&  ID, const char* name, bool v)       const noexcept = 0;
+        virtual inline void SetFloat(const unsigned int&  ID, const char* name, float v)     const noexcept = 0;
+        virtual inline void SetInt(const unsigned int&  ID, const char* name, int v)         const noexcept = 0;
+        virtual inline void SetMat4(const unsigned int&  ID, const char* name, glm::mat4 v)  const noexcept = 0;
+        virtual inline void SetVec4(const unsigned int&  ID, const char* name, glm::vec4 v)  const noexcept = 0;
+        virtual inline void SetVec3(const unsigned int&  ID, const char* name, glm::vec3 v)  const noexcept = 0;
+        virtual inline void SetVec2(const unsigned int&  ID, const char* name, glm::vec2 v)  const noexcept = 0;
+        virtual inline void SetIVec2(const unsigned int&  ID, const char* name, glm::ivec2 v)  const noexcept = 0;
 
         // ============================== [ MESH METHODS ] ==============================
 

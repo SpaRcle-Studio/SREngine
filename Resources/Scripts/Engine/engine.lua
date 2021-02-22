@@ -20,13 +20,13 @@ function CreateTreeScene()
     cube_1_2:AddChild(cube_1_2_1);
 end;
 
-function LoadGeometry()
+function GeometryTest()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
     local cubeMesh = Mesh.Load("cube.obj", 0);
     render:RegisterTexture(texture);
 
-    for a = 0, 100, 1 do
-        for b = 0, 100, 1 do
+    for a = 0, 50, 1 do
+        for b = 0, 50, 1 do
             for g = 0, 0, 1 do
                 local cube = scene:Instance("Cube");
                 local mesh;
@@ -59,6 +59,65 @@ function LoadGeometry()
 
     collectgarbage() -- collect memory
 end;
+
+function HierarchyTest()
+    local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
+    local mesh = Mesh.Load("cube.obj", 0);
+    render:RegisterTexture(texture);
+
+    -- first
+
+    local cube_parent = scene:Instance("Cube parent");
+
+    render:RegisterMesh(mesh);
+
+    mesh:GetMaterial():SetDiffuse(texture);
+    mesh:GetMaterial():SetColor(Vector3.New(1, 2, 1));
+
+    cube_parent:AddComponent(mesh:Base());
+
+    -- first
+
+    -- second
+
+    local cube_child = scene:Instance("Cube child");
+
+    mesh = mesh:Copy();
+
+    render:RegisterMesh(mesh);
+
+    mesh:GetMaterial():SetDiffuse(texture);
+    mesh:GetMaterial():SetColor(Vector3.New(2, 1, 1));
+
+    cube_child:AddComponent(mesh:Base());
+    cube_child:GetTransform():Translate(
+        Vector3.FMul(cube_child:GetTransform():Forward(), 5.0)
+    );
+
+    cube_parent:AddChild(cube_child);
+
+    -- second
+
+    -- third
+
+    local cube_child2 = scene:Instance("Cube child 2");
+
+    mesh = mesh:Copy();
+
+    render:RegisterMesh(mesh);
+
+    mesh:GetMaterial():SetDiffuse(texture);
+    mesh:GetMaterial():SetColor(Vector3.New(1, 1, 2));
+
+    cube_child2:AddComponent(mesh:Base());
+    cube_child2:GetTransform():Translate(
+        Vector3.FMul(cube_child2:GetTransform():Forward(), 10.0)
+    );
+
+    cube_child:AddChild(cube_child2);
+
+    -- third
+end
 
 function LoadCamera()
     camera = scene:Instance("SceneCamera");
@@ -109,7 +168,7 @@ function Start()
     --window:Resize(1920, 1080);
     --window:Resize(1920, 1060);
     --window:Resize(1680, 1050);
-    --window:Resize(1600, 900);
+    window:Resize(1600, 900);
 
     window:SetFullScreen(false);
     --window:Resize(4086, 900);
@@ -124,12 +183,12 @@ function Start()
     --------------------------------------
 
     LoadCamera();
-    CreateTreeScene();
-    LoadGeometry();
+    --CreateTreeScene();
+    HierarchyTest();
 
     -------------------------------------
 
-    render:SetGridEnabled(false);
+    render:SetGridEnabled(true);
 
     Stack.PushScene(editorGUIScript, scene);
     Stack.PushCamera(editorGUIScript, cameraComp);
@@ -153,7 +212,7 @@ function MouseUpdate()
     end;
 
     if (Input.GetKey(KeyCode.MouseRight)) then
-        camera:GetTransform():Rotate(Vector3.New(dir.y / 10.0, dir.x / 10.0, 0.0));
+        camera:GetTransform():Rotate(Vector3.New(dir.y / -10.0, dir.x / -10.0, 0.0));
     end;
 
     if (Input.GetKey(KeyCode.MouseMiddle)) then

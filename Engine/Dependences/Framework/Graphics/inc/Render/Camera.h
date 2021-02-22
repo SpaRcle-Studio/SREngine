@@ -46,7 +46,7 @@ namespace Framework::Graphics {
         //[[nodiscard]] inline bool IsUse() const noexcept { return this->m_isUse; }
         //inline void SetUse(bool value) noexcept { this->m_isUse = value; }
 
-        [[nodiscard]] inline glm::mat4 GetAlternativeView() const noexcept {
+        /*[[nodiscard]] inline glm::mat4 GetAlternativeView() const noexcept {
             glm::mat4 matrix(1.f);
 
             matrix = glm::rotate(matrix,
@@ -69,7 +69,7 @@ namespace Framework::Graphics {
                     -m_pos.y,
                     -m_pos.z
             });
-        }
+        }*/
         [[nodiscard]] inline glm::mat4 GetView() const noexcept { return this->m_viewMat; }
         [[nodiscard]] inline glm::mat4 GetProjection() const noexcept { return this->m_projection; }
         glm::vec2 GetSize() { return m_cameraSize; }

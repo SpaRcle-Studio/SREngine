@@ -31,13 +31,16 @@ namespace Framework::Graphics::GUI {
     private:
         inline static const ImGuiTreeNodeFlags g_node_flags_with_child    = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
-        inline static bool m_shiftPressed = false;
     public:
-        GUIWindow() = delete;
-        ~GUIWindow() = delete;
+        GUIWindow()                 = delete;
+        GUIWindow(const GUIWindow&) = delete;
+        GUIWindow(GUIWindow&)       = delete;
+        ~GUIWindow()                = delete;
     private:
-        inline static ImGuizmo::OPERATION g_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
-        inline static ImGuizmo::MODE      g_currentGuizmoMode = ImGuizmo::MODE::LOCAL;
+        inline static ImGuizmo::OPERATION g_currentGuizmoOperation  = ImGuizmo::OPERATION::TRANSLATE;
+        inline static ImGuizmo::MODE      g_currentGuizmoMode       = ImGuizmo::MODE::LOCAL;
+        inline static bool                g_currentGuizmoPivot      = false;
+        inline static bool                g_shiftPressed            = false;
 
         inline static void CheckSelected(Helper::GameObject* gm) noexcept;
         static void DrawChild(Helper::GameObject* root) noexcept;
@@ -151,12 +154,14 @@ namespace Framework::Graphics::GUI {
             ImVec2 size = ImGui::GetWindowSize();
             return {size.x, size.y};
         }
-        inline static void DrawTextOnCenter(const std::string& text) {
+        inline static void DrawTextOnCenter(const std::string& text, bool sameLine = true) {
             float font_size = ImGui::GetFontSize() * text.size() / 2;
-            ImGui::SameLine(
-                    ImGui::GetWindowSize().x / 2 -
-                    font_size + (font_size / 2)
-            );
+
+            if (sameLine)
+                ImGui::SameLine(
+         ImGui::GetWindowSize().x / 2 -
+                        font_size + (font_size / 2)
+                );
 
             ImGui::Text("%s", text.c_str());
         }

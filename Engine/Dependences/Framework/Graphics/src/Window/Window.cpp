@@ -267,7 +267,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
-    this->m_env->Init(0);
+    this->m_env->Init(m_vsync);
 
     Debug::Graph("Window::InitEnvironment() : post-initializing environment...");
     this->m_env->PostInit();

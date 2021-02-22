@@ -119,11 +119,11 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     glm::mat4 matrix(1.f);
 
     matrix = glm::rotate(matrix,
-             m_pitch
+             -m_pitch
             , {1, 0, 0}
         );
     matrix = glm::rotate(matrix,
-             m_yaw
+             -m_yaw //m_yaw
             , {0, 1, 0}
     );
     matrix = glm::rotate(matrix,
