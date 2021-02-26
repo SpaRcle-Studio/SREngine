@@ -60,6 +60,48 @@ function GeometryTest()
     collectgarbage() -- collect memory
 end;
 
+function RotationTest()
+    local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
+    --local texture = Texture.Load("brickwall.jpg", true, TextureType.Diffuse, TextureFilter.LINEAR);
+    local mesh = Mesh.Load("cube.obj", 0);
+    render:RegisterTexture(texture);
+
+    -- first
+
+    local cube_parent = scene:Instance("Cube parent");
+
+    render:RegisterMesh(mesh);
+    mesh:GetMaterial():SetDiffuse(texture);
+    mesh:GetMaterial():SetColor(Vector3.New(1, 2, 1));
+
+    cube_parent:AddComponent(mesh:Base());
+
+    -- first
+
+    -- second
+
+    local cube_child = scene:Instance("Cube child");
+
+    mesh = mesh:Copy();
+
+    render:RegisterMesh(mesh);
+
+    mesh:GetMaterial():SetDiffuse(texture);
+    mesh:GetMaterial():SetColor(Vector3.New(2, 1, 1));
+
+    cube_child:AddComponent(mesh:Base());
+    cube_child:GetTransform():Translate(
+        Vector3.FMul(cube_child:GetTransform():Forward(), 4.0)
+        --Vector3.FMul(cube_child:GetTransform():Right(), 4.0)
+    );
+
+    cube_parent:AddChild(cube_child);
+
+    --cube_parent:GetTransform():SetScale(Vector3.New(0.01, 0.01, 0.01), true);
+
+    -- second
+end
+
 function HierarchyTest()
     local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
     local mesh = Mesh.Load("cube.obj", 0);
@@ -183,6 +225,7 @@ function Start()
     LoadCamera();
     --CreateTreeScene();
     HierarchyTest();
+    --RotationTest();
 
     -------------------------------------
 

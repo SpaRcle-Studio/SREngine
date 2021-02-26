@@ -205,6 +205,8 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
                 .addFunction("Translate", (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Translate)
                 .addFunction("Rotate",    (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Rotate)
+
+                .addFunction("SetScale",    (void (Helper::Transform::*)(glm::vec3, bool))&Helper::Transform::SetScale)
                 .endClass();
     });
 

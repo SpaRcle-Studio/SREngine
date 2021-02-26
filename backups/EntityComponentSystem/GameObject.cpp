@@ -110,15 +110,15 @@ void GameObject::UpdateComponentsScale() {
 nlohmann::json GameObject::Save() {  // TODO: add security multi-threading
     nlohmann::json json;
 
-    //json["GameObject"]["Name"] = m_name;
-    //json["GameObject"]["Tag"] = m_tag;
+    json["GameObject"]["Name"] = m_name;
+    json["GameObject"]["Tag"] = m_tag;
 
-    //std::vector<nlohmann::json> comps = { m_transform->Save() };
+    std::vector<nlohmann::json> comps = { m_transform->Save() };
 
-    //for (auto c : m_components)
-    //    comps.push_back(c->Save());
+    for (auto c : m_components)
+        comps.push_back(c->Save());
 
-   // json["GameObject"]["Components"] = comps;
+    json["GameObject"]["Components"] = comps;
 
     return json;
 }

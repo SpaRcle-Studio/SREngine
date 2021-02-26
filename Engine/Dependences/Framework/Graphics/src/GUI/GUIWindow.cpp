@@ -242,18 +242,27 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     static const ImVec2 sizeB = { 30,25 };
     static const short space = 3;
 
+    static bool boundsAct = false;
+    static bool snapAct = true;
+    static float snap[3] = { 1.f, 1.f, 1.f };
+
     if (ButtonWithId("engine_tool_move", "M", sizeB, 0, true,
             ImVec2(space, space), g_currentGuizmoOperation == ImGuizmo::TRANSLATE ? act : def)) {
         g_currentGuizmoOperation = ImGuizmo::TRANSLATE;
+        boundsAct = false;
     }
 
     if (ButtonWithId("engine_tool_rotate", "R", sizeB, 0, true,
             ImVec2(space * 2 + sizeB.x, space), g_currentGuizmoOperation == ImGuizmo::ROTATE ? act : def)) {
         g_currentGuizmoOperation = ImGuizmo::ROTATE;
+        boundsAct = false;
     }
 
-    if (ButtonWithId("engine_tool_scale", "S", sizeB, 0, true,
+    if (ButtonWithId("engine_tool_scale", boundsAct ? "S+" : "S", sizeB, 0, true,
             ImVec2(space * 3 + sizeB.x * 2, space), g_currentGuizmoOperation == ImGuizmo::SCALE ? act : def)) {
+        if (g_currentGuizmoOperation == ImGuizmo::SCALE)
+            boundsAct = !boundsAct;
+
         g_currentGuizmoOperation = ImGuizmo::SCALE;
     }
 
@@ -276,20 +285,23 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     pos += (win_size - img_size) / 2.f;
     ImGuizmo::SetRect(pos.x, pos.y, img_size.x, img_size.y);
 
-    glm::mat4 mat = gameObject->GetTransform()->GetMatrix(false);
+    glm::mat4 mat = gameObject->GetTransform()->GetMatrix();
 
     //glm::vec3 camPos = camera->GetGLPosition();
     //ImGuizmo::SetCameraPos(camPos.x, camPos.y, -camPos.z);
 
+    static float bounds[] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
+    static float boundsSnap[] = { 0.1f, 0.1f, 0.1f };
+
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
-            g_currentGuizmoOperation, g_currentGuizmoMode,
+            boundsAct ? ImGuizmo::BOUNDS :  g_currentGuizmoOperation, g_currentGuizmoMode,
             &mat[0][0],
-            NULL, NULL, NULL, NULL))
+            nullptr, snapAct ? &snap[0] : nullptr, boundsAct ? bounds : nullptr, boundsSnap))
     {
         gameObject->GetTransform()->SetMatrix(mat, g_currentGuizmoPivot);
-
+        //std::cout << glm::to_string(mat) << std::endl;
         //gameObject->UpdateComponents();
     }
 

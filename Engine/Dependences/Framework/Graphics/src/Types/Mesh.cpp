@@ -106,7 +106,7 @@ ret:
         meshes = std::vector<Mesh*>();
     }
 
-    for (unsigned short i = 0; i < meshes.size(); i++) {
+    for (unsigned short i = 0; i < (unsigned short)meshes.size(); i++) {
         meshes[i]->m_resource_id = path + " - " + std::to_string(i);
     }
 

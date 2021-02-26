@@ -29,61 +29,23 @@ namespace Framework::Helper {
         Transform(GameObject* parent);
         ~Transform() = default;
     public:
+        void OnParentSet(Transform* parent) {
+            this->m_parent = parent;
+        }
+        void OnParentRemove(Transform* parent) {
+            m_parent = nullptr;
+        }
+
         void SetPosition(glm::vec3 val, bool pivot = false);
         void SetRotation(glm::vec3 val, bool pivot = false);
         void SetScale(glm::vec3 val, bool pivot  = false);
 
-        [[nodiscard]] glm::mat4 GetMatrix(bool local) const noexcept;
+        [[nodiscard]] glm::mat4 GetMatrix() const noexcept;
         void SetMatrix(glm::mat4 matrix, bool pivot) noexcept;
 
         [[nodiscard]] inline glm::vec3 GetPosition(bool local = false) const noexcept { return local ? m_localPosition : m_globalPosition; }
         [[nodiscard]] inline glm::vec3 GetRotation(bool local = false) const noexcept { return local ? m_localRotation : m_globalRotation; }
         [[nodiscard]] inline glm::vec3 GetScale(bool local = false) const noexcept { return local ? m_localScale : m_globalScale; }
-        //[[nodiscard]] inline glm::vec3 GetAroundRotation() const noexcept { return m_aroundRotation; }
-
-        /* Left-Center-Right */
-        [[nodiscard]] inline Location GetGlobal_LCR_Location(glm::vec3 point) const noexcept {
-            if (point.x < m_globalPosition.x)
-                return Location::Left;
-            else if (point.x > m_globalPosition.x)
-                return Location::Right;
-            else
-                return Location::Center;
-        }
-
-        /* Forward-Center-Back */
-        [[nodiscard]] inline Location GetGlobal_FCB_Location(glm::vec3 point) const noexcept {
-            if (point.z < m_globalPosition.z)
-                return Location::Back;
-            else if (point.z > m_globalPosition.z)
-                return Location::Forward;
-            else
-                return Location::Center;
-        }
-
-        /*
-               Yaw
-         ==============
-         |F   -90    R|
-         |            |
-         | 0        0 |
-         |            |
-         |L    90    B|
-         ==============
-         */
-        glm::vec3 GetAngleOfPoint(glm::vec3 point) noexcept;
-
-        /*
-                Yaw
-         ================
-         |F      0     R|
-         |              |
-         | -90       90 |
-         |              |
-         |L     180    B|
-         ================
-         */
-        glm::vec3 GetNormalizedAngleOfPoint(glm::vec3 point) noexcept;
 
         glm::vec3 Direction(glm::vec3 point) noexcept;
 
@@ -117,43 +79,12 @@ namespace Framework::Helper {
 
         void Translate(glm::vec3 val = {0,0,0}) noexcept;
         void Rotate(glm::vec3 angle    = {0,0,0}) noexcept;
-        inline void Rotate(glm::vec3 axis, float angle) noexcept {
-            this->Rotate(axis* angle);
-        }
-        void Scaling(glm::vec3 val   = {0,0,0}) noexcept;
-
-        inline glm::quat Quaternion(bool local = false) noexcept{
-            glm::vec3 rot = local ? m_localRotation : m_globalRotation;
-            return glm::quat(glm::radians(glm::vec3(
-                    rot.x,
-                    rot.y,
-                    -rot.z
-            )));
-        }
-
-        void RotateAround(glm::vec3 point, glm::vec3 axis, float angle) noexcept;
-        inline void RotateAround(Transform* transform, glm::vec3 axis, float angle) noexcept {
-            this->RotateAround(transform->m_globalPosition, axis, angle);
-        }
-
-        void SetRotateAround(glm::vec3 point, glm::vec3 angle) noexcept;
-        inline void SetRotateAround(Transform* point, glm::vec3 angle) noexcept{
-            this->SetRotateAround(point->m_globalPosition, angle);
-        }
-
-        void RotateAround(glm::vec3 point, glm::vec3 angle) noexcept;
-        inline void RotateAround(Transform* transform, glm::vec3 angle) noexcept {
-            this->RotateAround(transform->m_globalPosition, angle);
-        }
-
-        glm::vec3 GetLookAt(glm::vec3 target, glm::vec3 axis) noexcept;
-        void LookAt(GameObject* gameObject) noexcept;
-        inline void LookAt(Transform* transform) noexcept{
-            this->LookAt(transform->m_globalPosition);
-        }
-        void LookAt(glm::vec3 target);
     public:
-        nlohmann::json Save();
+        void UpdateLocalPosition();
+        void UpdateLocalScale();
+
+        void UpdateChildPosition(glm::vec3 delta, bool pivot);
+        void UpdateChildScale(glm::vec3 delta, bool pivot);
     public:
         inline static const glm::vec3 right     = { 1, 0, 0 };
         inline static const glm::vec3 forward   = { 0, 0, 1 };
@@ -167,24 +98,6 @@ namespace Framework::Helper {
         inline static const glm::vec3 yaw       = { 0, 1, 0 };
         inline static const glm::vec3 roll      = { 0, 0, 1 };
     private:
-        void CheckNaN_Position() noexcept;
-        void CheckNaN_Rotation() noexcept;
-        void CheckNaN_Scale()    noexcept;
-    private:
-        //void UpdateChild(Transform* parent);
-
-        void UpdateChildPosition(const Transform* parent, glm::vec3 delta, const bool pivot = true) noexcept;
-        void UpdateChildRotation(const Transform* parent, glm::vec3 delta, const bool pivot = true) noexcept;
-        void UpdateChildScale(const Transform* parent,    glm::vec3 delta, const bool pivot = true) noexcept;
-    private:
-        /*glm::vec3     m_position              = { 0, 0, 0 };
-        glm::vec3       m_rotation              = { 0, 0, 0 };
-        glm::vec3       m_scale                 = { 1, 1, 1 };
-
-        glm::vec3       m_parent_position            = { 0, 0, 0 };
-        glm::vec3       m_parent_rotation            = { 0, 0, 0 };
-        glm::vec3       m_parent_scale               = { 0, 0, 0 };*/
-
         glm::vec3       m_localPosition              = { 0, 0, 0 };
         glm::vec3       m_localRotation              = { 0, 0, 0 };
         glm::vec3       m_localScale                 = { 1, 1, 1 };
@@ -193,9 +106,8 @@ namespace Framework::Helper {
         glm::vec3       m_globalRotation             = { 0, 0, 0 };
         glm::vec3       m_globalScale                = { 1, 1, 1 };
 
-        glm::vec3       m_childDefRotation           = { 0, 0, 0 };
-
         GameObject*     m_gameObject                 = nullptr;
+        Transform*      m_parent                     = nullptr;
     };
 }
 
