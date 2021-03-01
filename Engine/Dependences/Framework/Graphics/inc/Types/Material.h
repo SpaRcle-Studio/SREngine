@@ -10,6 +10,8 @@
 
 #include <Render/Shader.h>
 
+#include <Math/Vector3.h>
+
 namespace Framework::Graphics::Types {
     using namespace Helper;
 
@@ -38,7 +40,7 @@ namespace Framework::Graphics::Types {
     private:
         [[nodiscard]] static inline int RandomNumber(int a, int b) noexcept { return rand()%(b-a+1) + a; }
     public:
-        static glm::vec3 GetRandomColor();
+        static Helper::Math::Vector3 GetRandomColor();
     public:
         void Use() const noexcept;
     public:
@@ -48,10 +50,10 @@ namespace Framework::Graphics::Types {
         inline void SetBloom(bool value) noexcept { this->m_bloom = value; };
         [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom; };
 
-        inline void SetColor(glm::vec3 color) { this->m_color = {color,1}; }
+        inline void SetColor(Helper::Math::Vector3 color) { this->m_color = {color.x, color.y, color.z, 1}; }
         inline void SetColor(glm::vec4 color) { this->m_color = color; }
 
-        [[nodiscard]] inline glm::vec3 GetColor() const noexcept { return this->m_color; }
+        [[nodiscard]] inline Helper::Math::Vector3 GetColor() const noexcept { return glm::vec3(this->m_color); }
 
         bool FreeTextures();
 

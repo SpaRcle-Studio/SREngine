@@ -7,6 +7,9 @@
 #include <Types/Time.h>
 #include <EntityComponentSystem/Transform.h>
 #include <GUI/Canvas.h>
+#include <Math/Vector3.h>
+
+using namespace Framework::Helper::Math;
 
 void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     // Engine
@@ -141,29 +144,28 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     // Vector3
     compiler->RegisterScriptClass("Math", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
-                .beginClass<glm::vec3>("Vector3")
-                .addStaticFunction("New", static_cast<glm::vec3(*)(float,float,float)>([](float x,float y,float z) -> glm::vec3 {
-                    return glm::vec3(x,y,z);
-                }))
-                .addProperty("x", &glm::vec3::x)
-                .addProperty("y", &glm::vec3::y)
-                .addProperty("z", &glm::vec3::z)
+                .beginClass<Vector3>("Vector3")
+                    .addStaticFunction("New", static_cast<Vector3(*)(float,float,float)>([](float x,float y,float z) -> Vector3 {
+                        return Vector3(x,y,z);
+                    }))
 
-                .addStaticFunction("Empty", static_cast<bool(*)(glm::vec3)>([](glm::vec3 v) -> bool {
-                    return (!v.x && !v.y && !v.z);
-                }))
-                .addStaticFunction("Sum", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
-                    return v1 + v2;
-                }))
-                .addStaticFunction("Sub", static_cast<glm::vec3(*)(glm::vec3, glm::vec3)>([](glm::vec3 v1, glm::vec3 v2) -> glm::vec3 {
-                    return v1 - v2;
-                }))
-                .addStaticFunction("FMul", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
-                    return v1 * f;
-                }))
-                .addStaticFunction("FDiv", static_cast<glm::vec3(*)(glm::vec3, float)>([](glm::vec3 v1, float f) -> glm::vec3 {
-                    return v1 / f;
-                }))
+                    .addProperty("x", &Vector3::x)
+                    .addProperty("y", &Vector3::y)
+                    .addProperty("z", &Vector3::z)
+
+                    .addFunction("Empty", (Vector3 (Math::Vector3::*)(void))&Helper::Math::Vector3::Empty)
+                    .addStaticFunction("Sum", static_cast<Vector3(*)(Vector3, Vector3)>([](Vector3 v1, Vector3 v2) -> Vector3 {
+                         return v1 + v2;
+                     }))
+                    .addStaticFunction("Sub", static_cast<Vector3(*)(Vector3, Vector3)>([](Vector3 v1, Vector3 v2) -> Vector3 {
+                        return v1 - v2;
+                    }))
+                    .addStaticFunction("FMul", static_cast<Vector3(*)(Vector3, float)>([](Vector3 v1, float f) -> Vector3 {
+                        return v1 * f;
+                    }))
+                    .addStaticFunction("FDiv", static_cast<Vector3(*)(Vector3, float)>([](Vector3 v1, float f) -> Vector3 {
+                        return v1 / f;
+                    }))
                 .endClass();
     });
 
@@ -199,14 +201,14 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     compiler->RegisterScriptClass("Math", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Helper::Transform>("Transform")
-                .addFunction("Forward", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
-                .addFunction("Up", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
-                .addFunction("Right", (glm::vec3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
+                .addFunction("Forward", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
+                .addFunction("Up", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
+                .addFunction("Right", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
 
-                .addFunction("Translate", (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Translate)
-                .addFunction("Rotate",    (void (Helper::Transform::*)(glm::vec3))&Helper::Transform::Rotate)
+                .addFunction("Translate", (void (Helper::Transform::*)(Vector3))&Helper::Transform::Translate)
+                .addFunction("Rotate",    (void (Helper::Transform::*)(Vector3))&Helper::Transform::Rotate)
 
-                .addFunction("SetScale",    (void (Helper::Transform::*)(glm::vec3, bool))&Helper::Transform::SetScale)
+                .addFunction("SetScale",    (void (Helper::Transform::*)(Vector3, bool))&Helper::Transform::SetScale)
                 .endClass();
     });
 
@@ -253,8 +255,8 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .beginClass<Graphics::Material>("Material")
                 .addFunction("SetDiffuse", (void (Framework::Graphics::Material::*)(Graphics::Texture*))&Graphics::Material::SetDiffuse)
                 .addFunction("SetBloom", (void (Framework::Graphics::Material::*)(bool value))&Graphics::Material::SetBloom)
-                .addFunction("SetColor", (void (Framework::Graphics::Material::*)(glm::vec3))&Graphics::Material::SetColor)
-                .addStaticFunction("RandomColor3", static_cast<glm::vec3(*)()>([]() -> glm::vec3 {
+                .addFunction("SetColor", (void (Framework::Graphics::Material::*)(Vector3))&Graphics::Material::SetColor)
+                .addStaticFunction("RandomColor3", static_cast<Vector3(*)()>([]() -> Vector3 {
                     return Graphics::Material::GetRandomColor();
                 }))
                 .endClass();
@@ -522,6 +524,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 }))
                 .addStaticFunction("MenuItem", static_cast<bool(*)(const std::string&)>([](const std::string& name) -> bool {
                     return Graphics::GUI::GUIWindow::MenuItem(name.c_str());
+                }))
+                .addStaticFunction("DebugWindow", static_cast<void(*)(void)>([](void) {
+                    Graphics::GUI::GUIWindow::DebugWindow();
                 }))
                 .addStaticFunction("Get", static_cast<ImGuiWindow*(*)()>([]() -> ImGuiWindow* {
                     return ImGui::GetCurrentWindow();

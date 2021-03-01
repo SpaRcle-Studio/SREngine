@@ -7,10 +7,10 @@
 
 #include <string>
 #include <Debug.h>
-#include <Math/Vector2.h>
+#include <glm/glm.hpp>
 
 namespace Framework::Graphics::Types {
-    using namespace Framework::Helper::Math;
+    //using namespace Framework::Helper::Math;
 
     class WindowFormat {
     public:
@@ -23,7 +23,7 @@ namespace Framework::Graphics::Types {
             _1600_900
         };
 
-        WindowFormat(const Vector2& size) : value(Value::Free) {
+        WindowFormat(const glm::vec2& size) : value(Value::Free) {
             this->m_width = (unsigned int)size.x;
             this->m_height = (unsigned int)size.y;
         }

@@ -144,7 +144,7 @@ bool Material::SetTransparent(bool value) {
     return true;
 }
 
-glm::vec3 Material::GetRandomColor() {
+Math::Vector3 Material::GetRandomColor() {
     return {
             (float)RandomNumber(0, 255) / 255.f,
             (float)RandomNumber(0, 255) / 255.f,

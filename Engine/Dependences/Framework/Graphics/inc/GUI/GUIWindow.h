@@ -51,6 +51,8 @@ namespace Framework::Graphics::GUI {
             return ImVec2(v1.x - v2.x, v1.y - v2.y);
         }
     public:
+        static void DebugWindow();
+
         static void DrawHierarchy(Helper::Scene* scene) noexcept;
         static void DrawInspector(Helper::GameObject* gameObject) noexcept;
         static void DrawGuizmo(Graphics::Camera* camera, Helper::GameObject* gameObject, glm::vec2 cameraSize) noexcept;

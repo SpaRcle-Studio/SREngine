@@ -12,6 +12,9 @@
 #include <iostream>
 #include <glm/gtx/string_cast.hpp>
 
+#include <Math/Vector3.h>
+#include <Math/Quaternion.h>
+
 using namespace Framework::Helper;
 
 Framework::Helper::GameObject::GameObject(Scene* scene, std::string name, std::string tag) {
@@ -83,27 +86,29 @@ void Framework::Helper::GameObject::Destroy() {
 
 void GameObject::UpdateComponents() {
     for (Component* component : m_components){
-        component->OnMove(m_transform->m_globalPosition);
-        component->OnRotate(m_transform->m_globalRotation);
-        component->OnScaled(m_transform->m_globalScale);
+        component->OnMove(m_transform->m_globalPosition.ToGLM());
+        //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation)));
+        component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
+        component->OnScaled(m_transform->m_globalScale.ToGLM());
     }
 }
 
 void GameObject::UpdateComponentsPosition() {
     for (Component* component : m_components)
-        component->OnMove(m_transform->m_globalPosition);
+        component->OnMove(m_transform->m_globalPosition.ToGLM());
         //component->OnMove(m_transform->m_position + m_transform->m_parent_position);
 }
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
-        component->OnRotate(m_transform->m_globalRotation);
+        component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
+        //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation);
         //component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
 }
 
 void GameObject::UpdateComponentsScale() {
     for (Component* component : m_components)
-        component->OnScaled(m_transform->m_globalScale); // or multiple
+        component->OnScaled(m_transform->m_globalScale.ToGLM()); // or multiple
         //component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
 }
 

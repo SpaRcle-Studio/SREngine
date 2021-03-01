@@ -14,10 +14,13 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
 
-#define RAD3(v) glm::vec3(RAD(v.x),RAD(v.y),RAD(v.z))
-#define DEG3(v) glm::vec3(DEG(v.x),DEG(v.y),DEG(v.z))
+#include <Math/Vector3.h>
+#include <Math/Quaternion.h>
+
 
 namespace Framework::Helper {
+    using namespace Framework::Helper::Math;
+
     enum class Location{
         Left, Center, Right, Forward, Back, Up, Down
     };
@@ -36,18 +39,49 @@ namespace Framework::Helper {
             m_parent = nullptr;
         }
 
-        void SetPosition(glm::vec3 val, bool pivot = false);
-        void SetRotation(glm::vec3 val, bool pivot = false);
-        void SetScale(glm::vec3 val, bool pivot  = false);
+        static glm::vec3 checkVec3Zero(const glm::vec3& v) {
+            glm::vec3 vec = v;
+            if (vec.x == 0)
+                vec.x += 0.001;
+            else if (vec.x == 90)
+                vec.x -= 0.001;
+
+            if (vec.y == 0)
+                vec.y += 0.001;
+            else if (vec.y == 90)
+                vec.y -= 0.001;
+
+            if (vec.z == 0)
+                vec.z += 0.001;
+            else if (vec.z == 90)
+                vec.z -= 0.001;
+
+            return vec;
+        }
+
+        void SetPosition(Vector3 val, bool pivot = false);
+        void SetRotation(const Quaternion& val, bool pivot = false);
+        void SetScale(Vector3 val, bool pivot  = false);
 
         [[nodiscard]] glm::mat4 GetMatrix() const noexcept;
         void SetMatrix(glm::mat4 matrix, bool pivot) noexcept;
 
-        [[nodiscard]] inline glm::vec3 GetPosition(bool local = false) const noexcept { return local ? m_localPosition : m_globalPosition; }
-        [[nodiscard]] inline glm::vec3 GetRotation(bool local = false) const noexcept { return local ? m_localRotation : m_globalRotation; }
-        [[nodiscard]] inline glm::vec3 GetScale(bool local = false) const noexcept { return local ? m_localScale : m_globalScale; }
+        [[nodiscard]] inline Vector3 GetPosition(bool local = false) const noexcept {
+            return local ? m_localPosition : m_globalPosition;
+            //glm::vec3 pos = glm::vec3();
+            //return glm::vec3();
+        }
+        [[nodiscard]] inline Vector3 GetRotation(bool local = false) const noexcept {
+           // return glm::degrees(glm::eulerAngles(local ? m_localRotation : m_globalRotation)); }
+            return (local ? m_localRotation : m_globalRotation).EulerAngle().Degrees();
+           // return glm::vec3();
+        }
+        [[nodiscard]] inline Vector3 GetScale(bool local = false) const noexcept {
+            return local ? m_localScale : m_globalScale;
+            //return glm::vec3();
+        }
 
-        glm::vec3 Direction(glm::vec3 point) noexcept;
+        /*glm::vec3 Direction(glm::vec3 point) noexcept;
 
         inline static float Len(const glm::vec3& v) noexcept {
             return sqrt(
@@ -71,22 +105,25 @@ namespace Framework::Helper {
                 pow(p2.y - m_globalPosition.y, 2) +
                 pow(p2.z - m_globalPosition.z, 2)
             );
-        }
+        }*/
 
-        [[nodiscard]] glm::vec3 Forward(bool local = false) const noexcept;
-        [[nodiscard]] glm::vec3 Right(bool local = false)   const noexcept;
-        [[nodiscard]] glm::vec3 Up(bool local = false)      const noexcept;
+        [[nodiscard]] Vector3 Forward(bool local = false) const noexcept;
+        [[nodiscard]] Vector3 Right(bool local = false)   const noexcept;
+        [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
 
-        void Translate(glm::vec3 val = {0,0,0}) noexcept;
-        void Rotate(glm::vec3 angle    = {0,0,0}) noexcept;
+        void Translate(Vector3 val) noexcept;
+        void Rotate(Vector3 angle) noexcept;
     public:
         void UpdateLocalPosition();
         void UpdateLocalScale();
+        void UpdateLocalRotation();
 
-        void UpdateChildPosition(glm::vec3 delta, bool pivot);
-        void UpdateChildScale(glm::vec3 delta, bool pivot);
+        void UpdateChildPosition(Vector3 delta, bool pivot);
+        void UpdateChildScale(Vector3 delta, bool pivot);
+        //void UpdateChildRotation(glm::vec3 delta, bool pivot);
+        void UpdateChildRotation(Vector3 delta, bool pivot);
     public:
-        inline static const glm::vec3 right     = { 1, 0, 0 };
+        /*inline static const glm::vec3 right     = { 1, 0, 0 };
         inline static const glm::vec3 forward   = { 0, 0, 1 };
         inline static const glm::vec3 up        = { 0, 1, 0 };
 
@@ -96,15 +133,31 @@ namespace Framework::Helper {
 
         inline static const glm::vec3 pitch     = { 1, 0, 0 };
         inline static const glm::vec3 yaw       = { 0, 1, 0 };
-        inline static const glm::vec3 roll      = { 0, 0, 1 };
+        inline static const glm::vec3 roll      = { 0, 0, 1 };*/
+
+        inline static const Vector3 right     = Vector3(1, 0, 0);
+        inline static const Vector3 forward   = Vector3(0, 0, 1 );
+        inline static const Vector3 up        = Vector3( 0, 1, 0 );
     private:
-        glm::vec3       m_localPosition              = { 0, 0, 0 };
+        Vector3         m_localPosition              = { 0, 0, 0 };
+        Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
+        //Vector3         m_localRotation              = { 0, 0, 0 };
+        Vector3         m_localScale                 = { 1, 1, 1 };
+
+        Vector3         m_globalPosition             = { 0, 0, 0 };
+        Quaternion      m_globalRotation             = Quaternion(Vector3(0,0,0));
+        //Vector3         m_globalRotation             = { 0, 0, 0 };
+        Vector3         m_globalScale                = { 1, 1, 1 };
+
+        /*glm::vec3       m_localPosition              = { 0, 0, 0 };
         glm::vec3       m_localRotation              = { 0, 0, 0 };
+        //glm::quat       m_localRotation              = glm::quat(glm::radians(glm::vec3(0,0,0)));
         glm::vec3       m_localScale                 = { 1, 1, 1 };
 
         glm::vec3       m_globalPosition             = { 0, 0, 0 };
         glm::vec3       m_globalRotation             = { 0, 0, 0 };
-        glm::vec3       m_globalScale                = { 1, 1, 1 };
+        //glm::quat       m_globalRotation             = glm::quat(glm::radians(glm::vec3(0,0,0)));
+        glm::vec3       m_globalScale                = { 1, 1, 1 };*/
 
         GameObject*     m_gameObject                 = nullptr;
         Transform*      m_parent                     = nullptr;

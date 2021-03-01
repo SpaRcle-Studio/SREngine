@@ -100,24 +100,30 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
     ImGui::Separator();
     DrawTextOnCenter("Transform");
 
-    glm::vec3 position = gameObject->GetTransform()->GetPosition();
-    glm::vec3 rotation = gameObject->GetTransform()->GetRotation();
-    glm::vec3 scale = gameObject->GetTransform()->GetScale();
+    auto position = gameObject->GetTransform()->GetPosition().ToGLM();
+    auto rotation = gameObject->GetTransform()->GetRotation().ToGLM();
+    auto scale = gameObject->GetTransform()->GetScale().ToGLM();
 
     ImGui::Text("[Global]");
 
-    if (ImGui::InputFloat3("G Tr", &position[0]))
+    if (ImGui::InputFloat3("G Tr", &position[0])) {
         gameObject->GetTransform()->SetPosition(position, g_currentGuizmoPivot);
-    if (ImGui::InputFloat3("G Rt", &rotation[0]))
-        gameObject->GetTransform()->SetRotation(rotation, g_currentGuizmoPivot);
-    if (ImGui::InputFloat3("G Sc", &scale[0]))
+    }
+    if (ImGui::InputFloat3("G Rt", &rotation[0])) {
+        //gameObject->GetTransform()->SetRotation(Vector3::FromGLM(rotation), g_currentGuizmoPivot);
+        //gameObject->GetTransform()->SetRotation(Quaternion(glm::quat(glm::radians(rotation))), g_currentGuizmoPivot);
+        //gameObject->GetTransform()->SetRotation(glm::radians(rotation), g_currentGuizmoPivot);
+        gameObject->GetTransform()->SetRotation(Vector3(rotation).Radians(), g_currentGuizmoPivot);
+    }
+    if (ImGui::InputFloat3("G Sc", &scale[0])) {
         gameObject->GetTransform()->SetScale(scale, g_currentGuizmoPivot);
+    }
 
     ImGui::Text("[Local]");
 
-    position = gameObject->GetTransform()->GetPosition(true);
-    rotation = gameObject->GetTransform()->GetRotation(true);
-    scale = gameObject->GetTransform()->GetScale(true);
+    position = gameObject->GetTransform()->GetPosition(true).ToGLM();
+    rotation = gameObject->GetTransform()->GetRotation(true).ToGLM();
+    scale = gameObject->GetTransform()->GetScale(true).ToGLM();
 
     ImGui::InputFloat3("L Tr", &position[0]);
     ImGui::InputFloat3("L Rt", &rotation[0]);
@@ -186,7 +192,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
 
             DrawTextOnCenter("Material");
 
-            glm::vec3 color = mat->GetColor();
+            glm::vec3 color = mat->GetColor().ToGLM();
             if (ImGui::InputFloat3("Color", &color[0]))
                 mat->SetColor(color);
 
@@ -241,10 +247,11 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     static const ImVec4 act = { 0.6, 0.6, 0.6, 0.85 };
     static const ImVec2 sizeB = { 30,25 };
     static const short space = 3;
+    static int snapValue = 100;
 
     static bool boundsAct = false;
     static bool snapAct = true;
-    static float snap[3] = { 1.f, 1.f, 1.f };
+    //static float snap[3] = { 1.f, 1.f, 1.f };
 
     if (ButtonWithId("engine_tool_move", "M", sizeB, 0, true,
             ImVec2(space, space), g_currentGuizmoOperation == ImGuizmo::TRANSLATE ? act : def)) {
@@ -279,6 +286,23 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
         g_currentGuizmoPivot = !g_currentGuizmoPivot;
     }
 
+    std::string snap_str = std::to_string(snapValue / 100.0);
+    snap_str.resize(4);
+    if (ButtonWithId("engine_tool_snap", (snap_str + "x").c_str(),
+            sizeB + ImVec2(5, 0), 0, true,
+                     ImVec2(space * 7 + sizeB.x * 6, space), snapAct ? act : def))
+    {
+        if (snapValue >= 400) {
+            snapValue = 25;
+            snapAct = false;
+        } else {
+            if (snapAct)
+                snapValue *= 2;
+            else
+                snapAct = true;
+        }
+    }
+
     //ImGuiIO& io = ImGui::GetIO();
     //ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
@@ -292,6 +316,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
 
     static float bounds[] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
     static float boundsSnap[] = { 0.1f, 0.1f, 0.1f };
+
+    glm::vec3 snap = glm::vec3(1,1,1) * ((float)snapValue / 100.f);
 
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
@@ -308,4 +334,15 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
 
 
     //ImGuizmo::ViewManipulate(cameraView, 10, ImVec2(0, 0), ImVec2(128, 128), 0x10101010);
+}
+
+void Framework::Graphics::GUI::GUIWindow::DebugWindow() {
+    static glm::vec3 vec = glm::vec3(0,0,0);
+    ImGui::InputFloat3("vec1", &vec[0]);
+
+    glm::vec3 euler =
+            Quaternion(glm::quat(glm::radians(vec)))
+            .EulerAngle().ToGLM();
+
+    ImGui::InputFloat3("vec2", &euler[0]);
 }

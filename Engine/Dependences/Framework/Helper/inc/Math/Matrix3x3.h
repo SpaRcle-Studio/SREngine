@@ -1,120 +1,93 @@
 //
-// Created by kiper220 on 16.05.2020.
+// Created by Nikita on 01.03.2021.
 //
 
+#ifndef GAMEENGINE_MATRIX3X3_H
+#define GAMEENGINE_MATRIX3X3_H
+
+#include <Math/Quaternion.h>
 #include <Math/Vector3.h>
 
-#ifndef EVOENGINE_Matrix3_H
-#define EVOENGINE_Matrix3_H
-
 namespace Framework::Helper::Math {
-class Matrix3x3 {
-public:
-    /**
-     * \brief Default zero constructor
-     */
-    Matrix3x3();
-    /**
-     * \brief Default set constructor
-     */
-    Matrix3x3(float m0, float m3, float m6, float m1, float m4, float m7, float m2, float m5, float m8);
-    /**
-     * \brief Default copy constructor
-     */
-    Matrix3x3(const Matrix3x3& matrix3x3);
+    class Matrix3x3 {
+    public:
+        Vector3 elements[3] = {
+                Vector3(1, 0, 0),
+                Vector3(0, 1, 0),
+                Vector3(0, 0, 1)
+        };
 
-    /**
-     * \brief Default copy operator
-     * \return this class reference
-     */
-    Matrix3x3& operator=(const Matrix3x3& matrix3x3);
+        _FORCE_INLINE_ const Vector3 &operator[](int axis) const {
+            return elements[axis];
+        }
+        _FORCE_INLINE_ Vector3 &operator[](int axis) {
+            return elements[axis];
+        }
 
-    /**
-     * \brief Matrix overload operator+(const Matrix3x3&)
-     * \arg Matrix3x3 - target;
-     * \return result of a mathematical operation
-     */
-    Matrix3x3 operator+(const Matrix3x3& matrix3x3) const;
-    /**
-     * \brief Matrix overload operator*(const Matrix3x&)
-     * \arg Matrix3 - target;
-     * \return result of a mathematical operation
-     */
-    Matrix3x3 operator*(const Matrix3x3& matrix3x3) const;
-    /**
-     * \brief Matrix overload operator*(float)
-     * \arg Matrix3 - target;
-     * \return result of a mathematical operation
-     */
-    Matrix3x3 operator*(float scalar) const;
-    /**
-     * \brief Matrix overload operator+(const Vector3&)
-     * \arg Matrix3 - target;
-     * \return result of a mathematical operation(Vector3)
-     */
-    Vector3 operator*(const Vector3& vector3) const;
+        _FORCE_INLINE_ void Set(double xx, double xy, double xz, double yx, double yy, double yz, double zx, double zy, double zz) {
+            elements[0][0] = xx;
+            elements[0][1] = xy;
+            elements[0][2] = xz;
+            elements[1][0] = yx;
+            elements[1][1] = yy;
+            elements[1][2] = yz;
+            elements[2][0] = zx;
+            elements[2][1] = zy;
+            elements[2][2] = zz;
+        }
+/*
+        Matrix3x3(const Quaternion &p_quat) {
+            SetQuaternion(p_quat);
+        }
 
-    /**
-     * \brief Matrix overload operator+=(const Matrix3&)
-     * \return this class reference
-     */
-    void operator+=(const Matrix3x3& matrix3X3);
-    /**
-     * \brief Matrix overload operator*=(const Matrix3x3&)
-     * \return this class reference
-     */
-    void operator*=(const Matrix3x3& matrix3X3);
-    /**
-     * \brief Matrix overload operator*=(float)
-     * \return this class reference
-     */
-    void operator*=(float scalar);
+        void SetQuaternion(const Quaternion &p_quat) {
+            double d = p_quat.lengthSquared();
+            double s = 2.0 / d;
+            double xs = p_quat.x * s, ys = p_quat.y * s, zs = p_quat.z * s;
+            double wx = p_quat.w * xs, wy = p_quat.w * ys, wz = p_quat.w * zs;
+            double xx = p_quat.x * xs, xy = p_quat.x * ys, xz = p_quat.x * zs;
+            double yy = p_quat.y * ys, yz = p_quat.y * zs, zz = p_quat.z * zs;
+            Set(1.0 - (yy + zz), xy - wz, xz + wy,
+                xy + wz, 1.0 - (xx + zz), yz - wx,
+                xz - wy, yz + wx, 1.0 - (xx + yy));
+        }*/
 
-    /**
-     * \brief Set matrix as identity matrix function
-     */
-    void setMatrixAsIdentityMatrix();
-    /**
-     * \brief Set matrix as inverse of given matrix function
-     */
-    void setMatrixAsInverseOfGivenMatrix(const Matrix3x3& matrix3x3);
-    /**
-     * \brief Get inverse of matrix(const)
-     */
-    Matrix3x3 getInverseOfMatrix() const;
-    /**
-     * \brief Get transpose of matrix(const)
-     */
-    Matrix3x3 getTransposeOfMatrix() const;
-    /**
-     * \brief Set matrix as transpose of given matrix(const Matrix&)
-     */
-    void setMatrixAsTransposeOfGivenMatrix(const Matrix3x3& matrix3x3);
-    /**
-     * \brief Transform vector by matrix(const Vector3&)(const)
-     */
-    Vector3 transformVectorByMatrix(const Vector3& vector3) const;
-    /**
-     * \brief Invert matrix()
-     */
-    void invertMatrix();
+        Vector3 GetEulerXYZ() const {
+            // Euler angles in XYZ convention.
+            // See https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix
+            //
+            // rot =  cy*cz          -cy*sz           sy
+            //        cz*sx*sy+cx*sz  cx*cz-sx*sy*sz -cy*sx
+            //       -cx*cz*sy+sx*sz  cz*sx+cx*sy*sz  cx*cy
 
-    /**
-     * \brief Overload operator String(const)
-     */
-    operator std::string() const;
-
-    /**
-     * \brief Standart destructor
-     */
-    ~Matrix3x3();
-
-    /**
-     * \brief Matrix Data
-     */
-    float matrixData[9] = {0.0};
-};
+            Vector3 euler;
+            double sy = elements[0][2];
+            if (sy < (1.0 - CMP_EPSILON)) {
+                if (sy > -(1.0 - CMP_EPSILON)) {
+                    // is this a pure Y rotation?
+                    if (elements[1][0] == 0.0 && elements[0][1] == 0.0 && elements[1][2] == 0 && elements[2][1] == 0 && elements[1][1] == 1) {
+                        // return the simplest form (human friendlier in editor and scripts)
+                        euler.x = 0;
+                        euler.y = atan2(elements[0][2], elements[0][0]);
+                        euler.z = 0;
+                    } else {
+                        euler.x = atan2(-elements[1][2], elements[2][2]);
+                        euler.y = asin(sy);
+                        euler.z = atan2(-elements[0][1], elements[0][0]);
+                    }
+                } else {
+                    euler.x = atan2(elements[2][1], elements[1][1]);
+                    euler.y = -Math_PI / 2.0;
+                    euler.z = 0.0;
+                }
+            } else {
+                euler.x = atan2(elements[2][1], elements[1][1]);
+                euler.y = Math_PI / 2.0;
+                euler.z = 0.0;
+            }
+            return euler;
+        }
+    };
 }
 
-
-#endif //EVOENGINE_Matrix3_H
+#endif //GAMEENGINE_MATRIX3X3_H

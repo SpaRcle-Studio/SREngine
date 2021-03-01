@@ -236,6 +236,7 @@ function Draw()
         ToolBar();
         Windows();
         DrawScene();
+        GUIWindow.DebugWindow();
     end;
 
     collectgarbage() -- collect memory

@@ -1,133 +1,80 @@
 //
-// Created by kiper220 on 16.05.2020.
+// Created by Nikita on 01.03.2021.
 //
-#ifndef EVOENGINE_QUATERNION_H
-#define EVOENGINE_QUATERNION_H
 
-#include <Math/Vector3.h>
+#ifndef GAMEENGINE_QUATERNION_H
+#define GAMEENGINE_QUATERNION_H
+
+#include <Math/Mathematics.h>
+#include <glm/glm.hpp>
+#include <glm/detail/type_quat.hpp>
+#include <limits>
+#include <algorithm>
+#include <glm/gtc/quaternion.hpp>
 
 namespace Framework::Helper::Math {
+    struct Vector3;
+    struct Vector2;
+
     class Quaternion {
+        friend struct Vector3;
+    private:
+        glm::quat self;
     public:
-        /**
-         * \brief Default zero constructor
-         */
-        Quaternion();
+        [[nodiscard]] inline glm::quat ToGLM() const {
+            return self;
+        }
 
-        /**
-         * \brief Default data constructor
-         */
-        Quaternion(float uS, const Vector3 &uV);
+       [[nodiscard]] Vector3 EulerAngle(bool degrees = true) const;
 
-        /**
-         * \brief Default copy constructor
-         */
-        Quaternion(const Quaternion &quaternion);
+        Quaternion(const Quaternion &p_q) {
+            this->self = p_q.self;
+        }
+        Quaternion(const Vector3 &p_euler);
+        Quaternion(const glm::quat &q) {
+            self = q;
+        }
 
-        /**
-         * \brief Default copy operator
-         */
-        Quaternion &operator=(const Quaternion &quaternion);
+        _FORCE_INLINE_ void operator+=(const Quaternion &p_q) {
+            self += p_q.self;
+        }
+        _FORCE_INLINE_ void operator-=(const Quaternion &p_q) {
+            self -= p_q.self;
+        }
+        _FORCE_INLINE_ void operator*=(const double &s){
+            self *= s;
+        }
+        _FORCE_INLINE_ void operator/=(const double &s) {
+            self *= 1.0 / s;
+        }
+        _FORCE_INLINE_ Quaternion operator+(const Quaternion &q2) const {
+            const Quaternion &q1 = *this;
+            return Quaternion(q1.self + q2.self);
+        }
+        _FORCE_INLINE_ Quaternion operator-(const Quaternion &q2) const {
+            const Quaternion &q1 = *this;
+            return Quaternion(q1.self - q2.self);
+        }
+        _FORCE_INLINE_ Quaternion operator-() const {
+            const Quaternion &q2 = *this;
+            return Quaternion(-q2.self);
+        }
+        _FORCE_INLINE_ Quaternion operator*(const double &s) const {
+            glm::quat q = self;
+            q *= s;
+            return Quaternion(q);
+        }
+        _FORCE_INLINE_ Quaternion operator/(const double &s) const {
+            glm::quat q = self;
+            q *= 1.0 / s;
+            return Quaternion(q);
+        }
 
-        /**
-         * \brief Default overload operator+(const Quaternion&)(const)
-         * \return result of a mathematical operation
-         */
-        Quaternion operator+(const Quaternion &quaternion) const;
-
-        /**
-         * \brief Default overload operator-(const Quaternion&)(const)
-         * \return result of a mathematical operation
-         */
-        Quaternion operator-(const Quaternion &quaternion) const;
-
-        /**
-         * \brief Default overload operator*(const Quaternion&)(const)
-         * \return result of a mathematical operation
-         */
-        Quaternion operator*(const Quaternion &quaternion) const;
-
-        /**
-         * \brief Default overload operator*(float)(const)
-         * \return result of a mathematical operation
-         */
-        Quaternion operator*(float value) const;
-
-        /**
-         * \brief Quaternion overload operator+=(const Quaternion&)
-         */
-        void operator+=(const Quaternion &quaternion);
-
-        /**
-         * \brief Quaternion overload operator-=(const Quaternion&)
-         */
-        void operator-=(const Quaternion &quaternion);
-
-        /**
-         * \brief Quaternion overload operator*=(const Quaternion&)
-         */
-        void operator*=(const Quaternion &quaternion);
-
-        /**
-         * \brief Quaternion overload operator*=(float)
-         */
-        void operator*=(float value);
-
-        /**
-         * \brief Quaternion multiply
-         * \arg quaternion - multiply target;
-         * \return Multiply result
-         */
-        Quaternion multiply(const Quaternion &quaternion) const;
-
-        /**
-         * \brief Quaternion norm
-         * \return Norm result
-         */
-        float norm() const;
-
-        /**
-         * \brief Quaternion normalize
-         */
-        void normalize();
-
-        /**
-         * \brief Quaternion convert to unit norm quaternion function
-         */
-        void convertToUnitNormQuaternion();
-
-        /**
-         * \brief Quaternion conjugate
-         * \return Conjugate result
-         */
-        Quaternion conjugate() const;
-
-        /**
-         * \brief Quaternion inverse
-         * \return Inverse result
-         */
-        Quaternion inverse() const;
-
-        /**
-         * \brief Overload operator String(const)
-         */
-        operator std::string();
-
-        /**
-         * \brief Standart destructor
-         */
-        ~Quaternion();
-
-        /**
-         * \brief Quaternion Data(s)
-         */
-        float s;
-        /**
-         * \brief Quaternion Data(v)
-         */
-        Vector3 v;
+        Vector3 operator*(const Vector3 &v) const;
+        Quaternion operator*(const Quaternion& rhs) const {
+            return Quaternion(self * rhs.self);
+        }
     };
 }
 
-
-#endif //EVOENGINE_QUATERNION_H
+#endif //GAMEENGINE_QUATERNION_H
