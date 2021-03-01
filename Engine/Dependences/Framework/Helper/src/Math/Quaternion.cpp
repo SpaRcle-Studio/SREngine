@@ -16,14 +16,14 @@ Framework::Helper::Math::Vector3 Framework::Helper::Math::Quaternion::EulerAngle
 Framework::Helper::Math::Quaternion::Quaternion(const Framework::Helper::Math::Vector3 &p_euler) {
     Vector3 v = p_euler;
 
-    if (v.x == 90) v.x -= 0.001;
+    /*if (v.x == 90) v.x -= 0.001;
     else if (v.x == 0) v.x += 0.001;
 
     if (v.y == 90) v.y -= 0.001;
     else if (v.y == 0) v.y += 0.001;
 
     if (v.z == 90) v.z -= 0.001;
-    else if (v.z == 0) v.z += 0.001;
+    else if (v.z == 0) v.z += 0.001;*/
 
     this->self = glm::radians(v.ToGLM());
     //this->self = p_euler.ToGLM();

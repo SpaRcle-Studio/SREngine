@@ -60,7 +60,7 @@ namespace Framework::Helper {
         }
 
         void SetPosition(Vector3 val, bool pivot = false);
-        void SetRotation(const Quaternion& val, bool pivot = false);
+        void SetRotation(const Vector3& val, bool pivot = false);
         void SetScale(Vector3 val, bool pivot  = false);
 
         [[nodiscard]] glm::mat4 GetMatrix() const noexcept;
@@ -73,7 +73,8 @@ namespace Framework::Helper {
         }
         [[nodiscard]] inline Vector3 GetRotation(bool local = false) const noexcept {
            // return glm::degrees(glm::eulerAngles(local ? m_localRotation : m_globalRotation)); }
-            return (local ? m_localRotation : m_globalRotation).EulerAngle().Degrees();
+           // return (local ? m_localRotation : m_globalRotation).EulerAngle().Degrees();
+            return (local ? m_localRotation : m_globalRotation);
            // return glm::vec3();
         }
         [[nodiscard]] inline Vector3 GetScale(bool local = false) const noexcept {
@@ -140,13 +141,13 @@ namespace Framework::Helper {
         inline static const Vector3 up        = Vector3( 0, 1, 0 );
     private:
         Vector3         m_localPosition              = { 0, 0, 0 };
-        Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
-        //Vector3         m_localRotation              = { 0, 0, 0 };
+        //Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
+        Vector3         m_localRotation              = { 0, 0, 0 };
         Vector3         m_localScale                 = { 1, 1, 1 };
 
         Vector3         m_globalPosition             = { 0, 0, 0 };
-        Quaternion      m_globalRotation             = Quaternion(Vector3(0,0,0));
-        //Vector3         m_globalRotation             = { 0, 0, 0 };
+        //Quaternion      m_globalRotation             = Quaternion(Vector3(0,0,0));
+        Vector3         m_globalRotation             = { 0, 0, 0 };
         Vector3         m_globalScale                = { 1, 1, 1 };
 
         /*glm::vec3       m_localPosition              = { 0, 0, 0 };

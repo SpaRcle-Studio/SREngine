@@ -88,7 +88,8 @@ void GameObject::UpdateComponents() {
     for (Component* component : m_components){
         component->OnMove(m_transform->m_globalPosition.ToGLM());
         //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation)));
-        component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
+        //component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
+        component->OnRotate(m_transform->m_globalRotation.ToGLM());
         component->OnScaled(m_transform->m_globalScale.ToGLM());
     }
 }
@@ -101,9 +102,11 @@ void GameObject::UpdateComponentsPosition() {
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
-        component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
+        //component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
+        component->OnRotate(m_transform->m_globalRotation.ToGLM());
         //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation);
         //component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
+
 }
 
 void GameObject::UpdateComponentsScale() {

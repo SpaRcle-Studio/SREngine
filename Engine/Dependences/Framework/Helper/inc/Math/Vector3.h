@@ -90,6 +90,22 @@ namespace Framework::Helper::Math {
             z = p_z;
         }
 
+        [[nodiscard]] double Distance(Vector3 point) const {
+            return sqrt(
+                    pow(point.x - x, 2) +
+                        pow(point.y - y, 2) +
+                        pow(point.z - z, 2)
+            );
+        }
+
+        Vector3 InverseAxis(unsigned char axis) const {
+            Vector3 v = *this;
+            v[axis] = -v[axis];
+            return v;
+        }
+
+        Quaternion ToQuat() const;
+
         _FORCE_INLINE_ const double &operator[](int p_axis) const {
             return coord[p_axis];
         }

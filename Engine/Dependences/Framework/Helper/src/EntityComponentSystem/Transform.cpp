@@ -27,9 +27,11 @@ void Framework::Helper::Transform::SetPosition(Vector3 val, bool pivot) {
         a->m_transform->UpdateChildPosition(delta, pivot);
 }
 
-void Framework::Helper::Transform::SetRotation(const Quaternion& val, bool pivot) {
+void Framework::Helper::Transform::SetRotation(const Vector3& euler, bool pivot) {
+    auto deltaRotate = m_globalRotation - euler;
+
     //glm::quat delta = glm::quat(glm::radians(m_globalRotation)) - glm::quat(glm::radians(val));
-    m_globalRotation = val;
+    m_globalRotation = euler;
 
     //std::cout << glm::to_string(glm::degrees(glm::eulerAngles(delta))) << std::endl;
 
@@ -37,8 +39,8 @@ void Framework::Helper::Transform::SetRotation(const Quaternion& val, bool pivot
 
     this->UpdateLocalRotation();
 
-   // for (auto a: m_gameObject->m_children)
-   //     a->m_transform->UpdateChildRotation(glm::vec3(0), pivot);
+   for (auto a: m_gameObject->m_children)
+       a->m_transform->UpdateChildRotation(deltaRotate, pivot);
 }
 
 void Framework::Helper::Transform::SetScale(Vector3 val, bool pivot) {
@@ -80,7 +82,8 @@ void Framework::Helper::Transform::Rotate(Vector3 angle) noexcept {
 
     //this->SetRotation(q);
 
-    this->SetRotation(m_globalRotation.EulerAngle() + angle.Radians());
+    this->SetRotation(m_globalRotation + angle);
+    //!this->SetRotation(m_globalRotation.EulerAngle() + angle.Radians());
     //this->SetRotation(m_globalRotation * Quaternion(angle.Radians()));
    //Vector3 vec3 = Vector3::FromGLM(angle).Radians();
    //Vector3 euler = m_globalRotation.EulerAngle();
@@ -96,15 +99,15 @@ void Framework::Helper::Transform::Rotate(Vector3 angle) noexcept {
 }
 
 Framework::Helper::Math::Vector3 Framework::Helper::Transform::Forward(bool local) const noexcept {
-    return m_globalRotation * forward;
+    return m_globalRotation.Radians().ToQuat() * forward;
 }
 Framework::Helper::Math::Vector3 Framework::Helper::Transform::Right(bool local) const noexcept {
     //return right.Rotate(m_globalRotation);
-    return m_globalRotation * right;
+    return m_globalRotation.Radians().ToQuat() * right;
 }
 Framework::Helper::Math::Vector3 Framework::Helper::Transform::Up(bool local) const noexcept {
     //return up.Rotate(m_globalRotation);
-    return m_globalRotation * up;
+    return m_globalRotation.Radians().ToQuat() * up;
 }
 
 //float Magnitude(glm::vec3 vec){
@@ -128,12 +131,12 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 matrix, bool pivot) noexc
 
     glm::decompose(matrix, scale, rotation, translation, skew, perspective);
 
-    auto euler = Quaternion(rotation).EulerAngle(false);
+    auto euler = Quaternion(rotation).EulerAngle(true).InverseAxis(2);
 
     //glm::vec3 deltaScale = scale / m_globalScale;
     Vector3 deltaScale = m_globalScale / scale;
-    Vector3 deltaPosition = m_globalPosition - translation;
-    //auto deltaRotate = m_globalRotation - euler;
+   // Vector3 deltaPosition = m_globalPosition - translation;
+    auto deltaRotate = m_globalRotation - euler;
 
     if (deltaScale != Vector3(1,1,1)) {
         this->SetPosition(Vector3(0,0,0));
@@ -145,12 +148,12 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 matrix, bool pivot) noexc
             a->m_transform->UpdateChildScale(deltaScale, pivot);
     }
 
-    //if (!deltaRotate.Empty()) {
+    if (!deltaRotate.Empty()) {
         this->m_globalRotation = euler;
         this->UpdateLocalRotation();
         for (auto a : this->m_gameObject->m_children)
-            a->m_transform->UpdateChildRotation(Vector3(0,0,0), pivot);
-    //}
+            a->m_transform->UpdateChildRotation(deltaRotate, pivot);
+    }
 
     this->SetPosition(translation);
     //this->m_globalPosition = translation;
@@ -170,8 +173,10 @@ glm::mat4 Framework::Helper::Transform::GetMatrix() const noexcept  {
     //glm::vec3 v = checkVec3Zero(m_globalRotation.EulerAngle().Degrees().ToGLM());
     //modelMat *= mat4_cast(glm::quat(glm::radians(v)));
 
-    glm::vec3 v = m_globalRotation.EulerAngle().ToGLM();
-    modelMat *= mat4_cast(glm::quat(v));
+    //glm::vec3 v = m_globalRotation.ToQuat().EulerAngle().ToGLM();
+    //modelMat *= mat4_cast(glm::quat(v));
+
+    modelMat *= mat4_cast(m_globalRotation.InverseAxis(2).ToQuat().ToGLM());
 
     return glm::scale(modelMat, m_globalScale.ToGLM());
 
@@ -207,6 +212,46 @@ void Framework::Helper::Transform::UpdateChildScale(Vector3 delta, bool pivot) {
 }
 
 void Framework::Helper::Transform::UpdateChildRotation(Vector3 delta, bool pivot) {
+    //this->m_globalRotation = Quaternion(m_parent->m_globalRotation.EulerAngle() + m_localRotation.EulerAngle());
+    //this->m_globalRotation = Quaternion(m_parent->m_globalRotation.EulerAngle() + m_localRotation.EulerAngle());
+    // this->m_globalRotation = Quaternion(m_globalRotation.EulerAngle() + Vector3(delta.x, -delta.y, delta.z));
+    //this->m_globalRotation = m_globalRotation * delta.ToQuat();
+    //this->m_globalRotation = (m_globalRotation).Rotate(m_globalRotation.Radians().ToQuat())  - delta;
+    //this->m_globalRotation = m_parent->m_globalRotation.Rotate(m_globalRotation.Radians().ToQuat());
+    //this->m_globalRotation = m_parent->m_globalRotation.Rotate(m_localRotation.ToQuat());
+    //this->m_globalRotation = (m_parent->m_globalRotation.ToQuat() * m_localRotation.ToQuat()).EulerAngle();
+
+    //Vector3 v = m_localRotation;
+    //this->m_globalRotation -= delta.Rotate(Vector3(0, 0, 0).ToQuat());
+
+    this->m_globalRotation = m_parent->m_globalRotation;
+
+    this->UpdateLocalRotation();
+
+    {
+        Vector3 point = m_parent->m_globalPosition;
+
+        Vector3 direction = -m_parent->Forward();
+        double dist = m_globalPosition.Distance(point);
+
+        m_globalPosition = point + direction * dist;
+
+        /*
+
+        Vector3 xy = Vector3(m_globalRotation.x, m_globalRotation.y, 0);
+
+        Vector3 dir = (xy.Radians().ToQuat() * forward) * dist;
+
+        m_globalPosition = point + dir;
+
+        this->UpdateLocalPosition();*/
+    }
+
+    this->m_gameObject->UpdateComponentsRotation();
+    this->m_gameObject->UpdateComponentsPosition();
+
+    //!===================================
+
     //glm::quat newRotate = glm::quat(glm::radians(m_parent->m_globalRotation)) * glm::quat(glm::radians(m_localRotation));
     //this->m_globalRotation = glm::degrees(glm::eulerAngles(newRotate));
 
@@ -262,6 +307,7 @@ void Framework::Helper::Transform::UpdateLocalScale() {
 void Framework::Helper::Transform::UpdateLocalRotation() {
     if (m_parent) {
         this->m_localRotation = m_globalRotation - m_parent->m_globalRotation;
+        //this->m_localRotation = Quaternion(m_globalRotation.EulerAngle() - m_parent->m_globalRotation.EulerAngle());
     } else
         m_localRotation = m_globalRotation;
 }

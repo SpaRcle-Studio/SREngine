@@ -113,7 +113,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
         //gameObject->GetTransform()->SetRotation(Vector3::FromGLM(rotation), g_currentGuizmoPivot);
         //gameObject->GetTransform()->SetRotation(Quaternion(glm::quat(glm::radians(rotation))), g_currentGuizmoPivot);
         //gameObject->GetTransform()->SetRotation(glm::radians(rotation), g_currentGuizmoPivot);
-        gameObject->GetTransform()->SetRotation(Vector3(rotation).Radians(), g_currentGuizmoPivot);
+        //gameObject->GetTransform()->SetRotation(Vector3(rotation).Radians(), g_currentGuizmoPivot);
+        gameObject->GetTransform()->SetRotation(rotation, g_currentGuizmoPivot);
     }
     if (ImGui::InputFloat3("G Sc", &scale[0])) {
         gameObject->GetTransform()->SetScale(scale, g_currentGuizmoPivot);
@@ -319,6 +320,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
 
     glm::vec3 snap = glm::vec3(1,1,1) * ((float)snapValue / 100.f);
 
+    float angle[3] = {0,0,0};
+
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
@@ -326,7 +329,12 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             &mat[0][0],
             nullptr, snapAct ? &snap[0] : nullptr, boundsAct ? bounds : nullptr, boundsSnap))
     {
-        gameObject->GetTransform()->SetMatrix(mat, g_currentGuizmoPivot);
+        //if (angle[0] == 0 && angle[1] == 0 && angle[2] == 0)
+            gameObject->GetTransform()->SetMatrix(mat, g_currentGuizmoPivot);
+        //else {
+        //    printf("%f %f %f\n", angle[0], angle[1], angle[2]);
+        //    gameObject->GetTransform()->Rotate(Vector3(angle[0], angle[1], angle[2]));
+        //}
         //std::cout << glm::to_string(mat) << std::endl;
         //gameObject->UpdateComponents();
     }

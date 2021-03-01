@@ -30,3 +30,7 @@ Framework::Helper::Math::Vector3 Framework::Helper::Math::Vector3::Rotate(const 
              + Cross(u, v) * 2.0f * s;
 }
 
+Framework::Helper::Math::Quaternion Framework::Helper::Math::Vector3::ToQuat() const {
+    return Quaternion(*this);
+}
+
