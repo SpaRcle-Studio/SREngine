@@ -24,9 +24,13 @@ namespace Framework::Helper::Math {
         [[nodiscard]] inline glm::quat ToGLM() const {
             return self;
         }
+        [[nodiscard]] inline glm::mat4 ToMat4x4GLM() const {
+            return mat4_cast(self);
+        }
 
        [[nodiscard]] Vector3 EulerAngle(bool degrees = true) const;
 
+        [[nodiscard]] Quaternion Rotate(const Vector3& v) const;
         Quaternion(const Quaternion &p_q) {
             this->self = p_q.self;
         }
@@ -34,6 +38,8 @@ namespace Framework::Helper::Math {
         Quaternion(const glm::quat &q) {
             self = q;
         }
+
+
 
         _FORCE_INLINE_ void operator+=(const Quaternion &p_q) {
             self += p_q.self;

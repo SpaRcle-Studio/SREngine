@@ -42,3 +42,12 @@ Framework::Helper::Math::Quaternion::operator*(const Framework::Helper::Math::Ve
     return q * v.ToGLM();
 }
 
+Framework::Helper::Math::Quaternion
+Framework::Helper::Math::Quaternion::Rotate(const Framework::Helper::Math::Vector3 &v) const {
+    if (v.Empty())
+        return *this;
+
+    glm::quat q = glm::rotate(self, 1.f, glm::radians(glm::vec3(v.x, v.y, v.z)));
+    return Framework::Helper::Math::Quaternion(q);
+}
+

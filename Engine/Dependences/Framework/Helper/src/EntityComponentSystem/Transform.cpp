@@ -12,6 +12,8 @@
 #include <Debug.h>
 #include <imgui.h>
 
+#include <Math/Matrix4x4.h>
+
 Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
     this->m_gameObject = parent;
 }
@@ -275,8 +277,6 @@ void Framework::Helper::Transform::UpdateChildRotation(Vector3 delta, bool pivot
 
     this->m_globalRotation = m_parent->m_globalRotation;
 
-    this->UpdateLocalRotation();
-
     {
         Vector3 point = m_parent->m_globalPosition;
         Vector3 defDir = -m_parent->Direction(m_defParentDir);
@@ -318,6 +318,39 @@ void Framework::Helper::Transform::UpdateChildRotation(Vector3 delta, bool pivot
 
         this->UpdateLocalPosition();*/
     }
+
+    //this->m_globalRotation = (m_globalRotation.Radians().ToQuat() - m_localRotation.Radians().ToQuat()).EulerAngle();
+    //this->m_globalRotation = (m_localRotation.Radians().ToQuat() * m_globalRotation.Radians().ToQuat()).EulerAngle();
+
+    //this->Rotate(m_localRotation);
+    //this->m_globalRotation = m_globalRotation + Vector3(0,0,90);
+    //this->m_globalRotation = m_globalRotation + m_localRotation;
+
+    //this->m_globalRotation = this->m_globalRotation.Radians().ToQuat().Rotate(Vector3(0,0,0)).EulerAngle();
+    //this->m_globalRotation = this->m_globalRotation.ToQuat().Rotate(Vector3(0,180,0)).EulerAngle();
+
+    glm::mat4 mat1 = glm::translate(glm::mat4(1), m_globalPosition.ToGLM());
+    mat1 *= mat4_cast(glm::quat(glm::radians(m_globalRotation.InverseAxis(2).ToGLM())));
+    mat1 = glm::scale(mat1, this->m_globalScale.ToGLM());
+
+    glm::mat4 mat = glm::translate(glm::mat4(1), m_globalPosition.ToGLM());
+    mat *= mat4_cast(glm::quat(glm::radians(glm::vec3(45,180,45))));
+    mat = glm::scale(mat, this->m_globalScale.ToGLM());
+
+    glm::vec3 scale;
+    glm::quat rotation;
+    glm::vec3 translation;
+
+    glm::vec3 skew;
+    glm::vec4 perspective;
+    glm::decompose(mat1 * mat, scale, rotation, translation, skew, perspective);
+
+    m_globalRotation = Quaternion(rotation).EulerAngle().InverseAxis(2);
+
+    //Matrix4x4 mat = Matrix4x4(m_globalPosition, m_globalRotation.ToQuat(), m_globalScale);
+    //this->m_globalRotation = mat.Rotate(Vector3(0,90,0)).GetQuat().EulerAngle();
+
+    this->UpdateLocalRotation();
 
     this->m_gameObject->UpdateComponentsRotation();
     this->m_gameObject->UpdateComponentsPosition();

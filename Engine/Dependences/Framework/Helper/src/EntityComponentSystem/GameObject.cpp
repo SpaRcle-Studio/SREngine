@@ -14,6 +14,7 @@
 
 #include <Math/Vector3.h>
 #include <Math/Quaternion.h>
+#include <Math/Matrix4x4.h>
 
 using namespace Framework::Helper;
 
@@ -87,13 +88,16 @@ void Framework::Helper::GameObject::Destroy() {
 
 
 void GameObject::UpdateComponents() {
-    for (Component* component : m_components){
+    /*for (Component* component : m_components){
         component->OnMove(m_transform->m_globalPosition.ToGLM());
         //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation)));
         //component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
         component->OnRotate(m_transform->m_globalRotation.ToGLM());
         component->OnScaled(m_transform->m_globalScale.ToGLM());
-    }
+    }*/
+    UpdateComponentsPosition();
+    UpdateComponentsRotation();
+    UpdateComponentsScale();
 }
 
 void GameObject::UpdateComponentsPosition() {
