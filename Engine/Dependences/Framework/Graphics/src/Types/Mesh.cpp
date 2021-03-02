@@ -147,7 +147,7 @@ void Mesh::ReCalcModel() {
 
     //glm::mat4 rotMatrix = glm::eulerAngleXYZ(rad.x, rad.y, rad.z);
 
-    rotationMatrix = glm::rotate(rotationMatrix,glm::radians(180.f), glm::vec3(0, 1, 0));
+    //!rotationMatrix = glm::rotate(rotationMatrix,glm::radians(180.f), glm::vec3(0, 1, 0));
 
     modelMat *= rotationMatrix;
 

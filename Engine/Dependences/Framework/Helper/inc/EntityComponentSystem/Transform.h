@@ -34,6 +34,7 @@ namespace Framework::Helper {
     public:
         void OnParentSet(Transform* parent) {
             this->m_parent = parent;
+            this->UpdateDefParentDir();
         }
         void OnParentRemove(Transform* parent) {
             m_parent = nullptr;
@@ -81,6 +82,9 @@ namespace Framework::Helper {
             return local ? m_localScale : m_globalScale;
             //return glm::vec3();
         }
+        [[nodiscard]] inline Vector3 GetParentDir() const noexcept {
+            return m_defParentDir;
+        }
 
         /*glm::vec3 Direction(glm::vec3 point) noexcept;
 
@@ -108,6 +112,7 @@ namespace Framework::Helper {
             );
         }*/
 
+        [[nodiscard]] Vector3 Direction(Vector3 preDir)   const noexcept;
         [[nodiscard]] Vector3 Forward(bool local = false) const noexcept;
         [[nodiscard]] Vector3 Right(bool local = false)   const noexcept;
         [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
@@ -118,6 +123,8 @@ namespace Framework::Helper {
         void UpdateLocalPosition();
         void UpdateLocalScale();
         void UpdateLocalRotation();
+
+        void UpdateDefParentDir();
 
         void UpdateChildPosition(Vector3 delta, bool pivot);
         void UpdateChildScale(Vector3 delta, bool pivot);
@@ -160,6 +167,7 @@ namespace Framework::Helper {
         //glm::quat       m_globalRotation             = glm::quat(glm::radians(glm::vec3(0,0,0)));
         glm::vec3       m_globalScale                = { 1, 1, 1 };*/
 
+        Vector3         m_defParentDir               = forward;
         GameObject*     m_gameObject                 = nullptr;
         Transform*      m_parent                     = nullptr;
     };

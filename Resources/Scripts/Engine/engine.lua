@@ -77,6 +77,10 @@ function RotationTest()
 
     cube_parent:AddComponent(mesh:Base());
 
+    --cube_parent:GetTransform():Translate(
+    --    Vector3.FMul(cube_parent:GetTransform():Forward(), 2.0)
+    --);
+
     -- first
 
     -- second
@@ -93,8 +97,9 @@ function RotationTest()
     cube_child:AddComponent(mesh:Base());
     cube_child:GetTransform():Translate(
         Vector3.FMul(cube_child:GetTransform():Forward(), 4.0)
-        --Vector3.FMul(cube_child:GetTransform():Right(), 4.0)
     );
+
+    --cube_child:GetTransform():Translate(Vector3.FMul(cube_child:GetTransform():Up(), 2.0));
 
     cube_parent:AddChild(cube_child);
 

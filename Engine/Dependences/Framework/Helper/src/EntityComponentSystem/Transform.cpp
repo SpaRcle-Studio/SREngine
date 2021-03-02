@@ -16,12 +16,33 @@ Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
     this->m_gameObject = parent;
 }
 
+void Framework::Helper::Transform::UpdateDefParentDir() {
+    if (m_parent) {
+        this->m_defParentDir = m_globalPosition.Direction(m_parent->m_globalPosition);
+
+       /*glm::vec3 rot = m_parent->m_globalRotation.Radians().ToQuat().EulerAngle().ToGLM();
+        glm::fquat q = glm::vec3(
+                rot.x,
+                rot.y,
+                rot.z
+        );
+
+        this->m_defParentDir =  q * m_defParentDir.ToGLM();*/
+
+        //this->m_defParentDir = m_parent->m_globalRotation.Radians().ToQuat() * m_defParentDir;
+        //this->m_defParentDir = this->m_defParentDir.Rotate(m_parent->m_globalRotation.Radians().ToQuat());
+    }
+}
+
 void Framework::Helper::Transform::SetPosition(Vector3 val, bool pivot) {
     auto delta = m_globalPosition - val;
     m_globalPosition = val;
-    m_gameObject->UpdateComponentsPosition();
 
     this->UpdateLocalPosition();
+
+    //this->UpdateDefParentDir();
+
+    m_gameObject->UpdateComponentsPosition();
 
     for (auto a: m_gameObject->m_children)
         a->m_transform->UpdateChildPosition(delta, pivot);
@@ -98,6 +119,11 @@ void Framework::Helper::Transform::Rotate(Vector3 angle) noexcept {
    // this->SetRotation(glm::degrees(glm::eulerAngles(m_globalRotation)) + angle);
 }
 
+
+Framework::Helper::Math::Vector3 Framework::Helper::Transform::Direction(Framework::Helper::Math::Vector3 preDir) const noexcept {
+    return m_globalRotation.Radians().ToQuat() * preDir;
+}
+
 Framework::Helper::Math::Vector3 Framework::Helper::Transform::Forward(bool local) const noexcept {
     return m_globalRotation.Radians().ToQuat() * forward;
 }
@@ -135,8 +161,14 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 matrix, bool pivot) noexc
 
     //glm::vec3 deltaScale = scale / m_globalScale;
     Vector3 deltaScale = m_globalScale / scale;
-   // Vector3 deltaPosition = m_globalPosition - translation;
+    Vector3 deltaPosition = m_globalPosition - translation;
     auto deltaRotate = m_globalRotation - euler;
+
+    //if (!deltaPosition.Empty() && m_parent) {
+        //this->UpdateDefParentDir();
+    //}
+        //this->m_defParentDir = m_globalPosition.Direction(m_parent->m_globalPosition);
+        //this->m_defParentDir = m_globalRotation.Radians().ToQuat() * m_globalPosition.Direction(m_parent->m_globalPosition);
 
     if (deltaScale != Vector3(1,1,1)) {
         this->SetPosition(Vector3(0,0,0));
@@ -201,6 +233,7 @@ void Framework::Helper::Transform::UpdateChildScale(Vector3 delta, bool pivot) {
     this->UpdateLocalScale();
 
     this->m_globalPosition /= delta;
+    this->UpdateChildRotation(Vector3(0,0,0), pivot);
 
     this->m_gameObject->UpdateComponentsPosition();
     this->m_gameObject->UpdateComponentsScale();
@@ -224,17 +257,56 @@ void Framework::Helper::Transform::UpdateChildRotation(Vector3 delta, bool pivot
     //Vector3 v = m_localRotation;
     //this->m_globalRotation -= delta.Rotate(Vector3(0, 0, 0).ToQuat());
 
+   /*
+
+    //Vector3 defDir = (m_parent->m_globalRotation + delta).Radians().ToQuat() * m_defParentDir;
+
+    //Vector3 defDir = -m_parent->Direction(m_defParentDir);
+    Vector3 origPos = (point - defDir);
+    Vector3 origDir =
+            (m_parent->m_globalRotation).Radians().ToQuat() *
+            origPos.Direction(m_globalPosition);
+    double origDist = origPos.Distance(m_globalPosition);*/
+
+    //Debug::Log(std::to_string(originPos.Distance(m_globalPosition)));
+    //Debug::Log((origDir).ToString());
+    //Debug::Log(originPos.ToString());
+    //(0.000000, 1.000000, -0.119535) fix needed
+
     this->m_globalRotation = m_parent->m_globalRotation;
 
     this->UpdateLocalRotation();
 
     {
         Vector3 point = m_parent->m_globalPosition;
+        Vector3 defDir = -m_parent->Direction(m_defParentDir);
+        //double dist = m_globalPosition.Distance(point); // некорректно когда объект сдвинут, нужно компенсировать!
 
-        Vector3 direction = -m_parent->Forward();
-        double dist = m_globalPosition.Distance(point);
+        //Vector3 newPos = point + defDir * dist;
+        Vector3 newPos = point + defDir;
+//180 90
+        //this->m_globalPosition = originPos;
 
-        m_globalPosition = point + direction * dist;
+        //!----------------------------------------------------------
+
+        //Vector3 offsetDir = originPos.Direction(m_globalPosition) + defDir;
+        //double offsetDist = originPos.Distance(m_globalPosition);
+
+        //Debug::Log(offsetDir.ToString() + std::to_string(offsetDist));
+
+        //Debug::Log((-Direction(origDir) * origDist).ToString());
+        //Debug::Log(origDir.ToString());
+
+        //this->m_globalPosition = originPos - (offsetDir * offsetDist);
+        //if (origDist > 0)
+        //    this->m_globalPosition = newPos - Direction(origDir);
+        //else
+        Vector3 local = Vector3(2,2,2);
+
+        this->m_globalPosition =
+                newPos +
+                Direction(local * m_parent->m_globalScale)// * m_parent->m_globalScale
+                - defDir;
 
         /*
 

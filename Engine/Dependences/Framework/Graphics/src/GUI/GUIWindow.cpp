@@ -130,6 +130,11 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
     ImGui::InputFloat3("L Rt", &rotation[0]);
     ImGui::InputFloat3("L Sc", &scale[0]);
 
+    ImGui::Text("[Parent direction]");
+
+    glm::vec3 p_dir = gameObject->GetTransform()->GetParentDir().ToGLM();
+    ImGui::InputFloat3("Dir", &p_dir[0]);
+
     std::vector<Framework::Helper::Component*> comps = gameObject->GetComponents();
     for (Framework::Helper::Component* comp : comps) {
         ImGui::Separator();

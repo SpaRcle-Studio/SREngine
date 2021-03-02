@@ -131,6 +131,8 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
             , {0, 0, 1}
     );
 
+    //matrix = glm::rotate(matrix,glm::radians(180.f), glm::vec3(0, 1, 0));
+
     m_viewMat = glm::translate(matrix, {
         -m_pos.x,
         -m_pos.y,

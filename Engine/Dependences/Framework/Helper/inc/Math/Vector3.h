@@ -98,13 +98,23 @@ namespace Framework::Helper::Math {
             );
         }
 
-        Vector3 InverseAxis(unsigned char axis) const {
+        static double Magnitude(Vector3 vec) {
+            return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+        }
+
+        [[nodiscard]] Vector3 Direction(Vector3 point) const noexcept {
+            Vector3 heading = point - (*this);
+            double distance = Magnitude(heading);
+            return heading / distance;
+        }
+
+        [[nodiscard]] Vector3 InverseAxis(unsigned char axis) const {
             Vector3 v = *this;
             v[axis] = -v[axis];
             return v;
         }
 
-        Quaternion ToQuat() const;
+        [[nodiscard]] Quaternion ToQuat() const;
 
         _FORCE_INLINE_ const double &operator[](int p_axis) const {
             return coord[p_axis];

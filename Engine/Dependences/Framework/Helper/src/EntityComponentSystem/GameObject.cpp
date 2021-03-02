@@ -40,6 +40,8 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
     component->SetParent(this);
     m_components.push_back(component);
 
+    UpdateComponents();
+
     m_mutex.unlock();
     return true;
 }
