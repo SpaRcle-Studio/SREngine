@@ -17,7 +17,6 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <Debug.h>
 
-
 namespace Framework::Graphics {
     class OpenGL : public Environment {
         OpenGL(OpenGL&) = delete;
@@ -62,6 +61,7 @@ namespace Framework::Graphics {
 
         void SetWindowSize(float ratio, unsigned int w, unsigned int h) override;
         void SetWindowPosition(int x, int y) override;
+        void SetDepthTestEnabled(bool value) override;
 
         glm::vec2 GetMousePos() override {
             double posx = 0.0, posy = 0.0;
@@ -76,6 +76,40 @@ namespace Framework::Graphics {
                 uColor[1],
                 uColor[2]
             };
+        }
+
+        // Dont work!
+        glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) override {
+            if (uPos.x >= size.x || uPos.y >= size.y || uPos.x <= 2 || uPos.y <= 2)
+                return glm::vec4();
+
+            //std::cout << uPos.x << " " << uPos.y << std::endl;
+
+            glBindTexture(GL_TEXTURE_2D, ID);
+
+            unsigned long bytes = (unsigned long)size.x * (unsigned long)size.y * 4;
+
+            auto *pixels = new float[bytes];
+            glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_FLOAT, pixels);
+
+            GLuint r, g, b, a; // or GLubyte r, g, b, a;
+
+            size_t x = uPos.x, y = uPos.y; // line and column of the pixel
+
+            size_t elmes_per_line = size.x * 4; // elements per line = 256 * "RGBA"
+
+            size_t row = y * elmes_per_line;
+            size_t col = x * 4;
+
+            r = pixels[row + col];
+            g = pixels[row + col + 1];
+            b = pixels[row + col + 2];
+            a = pixels[row + col + 3];
+
+            //printf("%i %i %i\n", r,g,b);
+
+            delete[] pixels;
+            return glm::vec4(r,g,b,a);
         }
 
         glm::vec2 GetWindowSize() noexcept override {

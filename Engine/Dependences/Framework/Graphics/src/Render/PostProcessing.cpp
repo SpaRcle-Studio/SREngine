@@ -182,12 +182,4 @@ void Framework::Graphics::PostProcessing::EndSkybox() {
     m_env->BindFrameBuffer(0);
 }
 
-void Framework::Graphics::PostProcessing::BeginStencil() {
-
-}
-
-void Framework::Graphics::PostProcessing::EndStencil() {
-
-}
-
 

@@ -42,6 +42,7 @@ namespace Framework::Helper::Math {
             AXIS_X,
             AXIS_Y,
             AXIS_Z,
+            NONE,
         };
 
         union {
@@ -108,13 +109,44 @@ namespace Framework::Helper::Math {
             return heading / distance;
         }
 
+        Vector3 Limits(int lim) const {
+            int xi = (int)x / lim;
+            int yi = (int)y / lim;
+            int zi = (int)z / lim;
+
+            double xd = x - lim * (double)xi;
+            double yd = y - lim * (double)yi;
+            double zd = z - lim * (double)zi;
+
+            return Vector3(xd, yd, zd);
+        }
+
+        [[nodiscard]] Vector3 Inverse() const {
+            return Vector3(-x, -y, -z);
+        }
+
         [[nodiscard]] Vector3 InverseAxis(unsigned char axis) const {
             Vector3 v = *this;
             v[axis] = -v[axis];
             return v;
         }
 
-        [[nodiscard]] Quaternion ToQuat() const;
+        [[nodiscard]] Vector3 Normalize() const {
+            double len = std::sqrt(x * x + y * y + z * z);
+
+            Vector3 vec3 = *this;
+
+            if (len != 0.)
+            {
+                vec3.x /= len;
+                vec3.y /= len;
+                vec3.z /= len;
+            }
+
+            return vec3;
+        }
+
+        [[nodiscard]] Quaternion ToQuat(bool inRads = false) const;
 
         _FORCE_INLINE_ const double &operator[](int p_axis) const {
             return coord[p_axis];

@@ -41,8 +41,8 @@ namespace Framework::Graphics {
         static void AddMesh();
         static void Clear();
         static void ProcessFace(char** elems);
-        static void ProcessLine(char* line);
-        static void ProcessFile(const char* data);
+        static bool ProcessLine(char* line);
+        static bool ProcessFile(const char* data);
     public:
         static std::vector<Mesh*> Load(std::string path);
     };

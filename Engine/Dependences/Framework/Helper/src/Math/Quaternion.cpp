@@ -5,6 +5,7 @@
 #include "Math/Quaternion.h"
 #include <Math/Vector3.h>
 #include <Math/Matrix3x3.h>
+#include <Math/Matrix4x4.h>
 
 Framework::Helper::Math::Vector3 Framework::Helper::Math::Quaternion::EulerAngle(bool degrees) const {
     if (degrees)
@@ -13,7 +14,7 @@ Framework::Helper::Math::Vector3 Framework::Helper::Math::Quaternion::EulerAngle
         return Vector3(glm::eulerAngles(self));
 }
 
-Framework::Helper::Math::Quaternion::Quaternion(const Framework::Helper::Math::Vector3 &p_euler) {
+Framework::Helper::Math::Quaternion::Quaternion(const Framework::Helper::Math::Vector3 &p_euler, bool inRads) {
     Vector3 v = p_euler;
 
     /*if (v.x == 90) v.x -= 0.001;
@@ -25,7 +26,10 @@ Framework::Helper::Math::Quaternion::Quaternion(const Framework::Helper::Math::V
     if (v.z == 90) v.z -= 0.001;
     else if (v.z == 0) v.z += 0.001;*/
 
-    this->self = glm::radians(v.ToGLM());
+    if (inRads)
+        this->self = p_euler.ToGLM();
+    else
+        this->self = glm::radians(v.ToGLM());
     //this->self = p_euler.ToGLM();
 }
 
@@ -49,5 +53,9 @@ Framework::Helper::Math::Quaternion::Rotate(const Framework::Helper::Math::Vecto
 
     glm::quat q = glm::rotate(self, 1.f, glm::radians(glm::vec3(v.x, v.y, v.z)));
     return Framework::Helper::Math::Quaternion(q);
+}
+
+Framework::Helper::Math::Matrix4x4 Framework::Helper::Math::Quaternion::ToMat4x4() const {
+    return Matrix4x4(mat4_cast(self));
 }
 

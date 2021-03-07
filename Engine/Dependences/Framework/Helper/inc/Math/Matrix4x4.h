@@ -31,8 +31,16 @@ namespace Framework::Helper::Math {
             this->self = mat;
         }
 
+        Matrix4x4 Inverse() const {
+            return glm::inverse(self);
+        }
+
         [[nodiscard]] Matrix4x4 Rotate(const Vector3& angle) const {
             return self * mat4_cast(angle.ToQuat().ToGLM());
+        }
+
+        [[nodiscard]] glm::mat4 ToGLM() const {
+            return self;
         }
 
         [[nodiscard]] Quaternion GetQuat() const {
@@ -46,6 +54,20 @@ namespace Framework::Helper::Math {
             glm::decompose(self, scale, rotation, translation, skew, perspective);
 
             return rotation;
+        }
+
+        Matrix4x4 operator*(Matrix4x4 mat) {
+            return Matrix4x4(this->self * mat.self);
+        }
+        Matrix4x4 operator/(Matrix4x4 mat) {
+            return Matrix4x4(this->self / mat.self);
+        }
+
+        Matrix4x4 operator+(Matrix4x4 mat) {
+            return Matrix4x4(this->self + mat.self);
+        }
+        Matrix4x4 operator-(Matrix4x4 mat) {
+            return Matrix4x4(this->self - mat.self);
         }
     };
 }

@@ -60,6 +60,8 @@ function GeometryTest()
     collectgarbage() -- collect memory
 end;
 
+local childRotateGM = nil;
+
 function RotationTest()
     --local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
     local texture = Texture.Load("brickwall.jpg", true, TextureType.Diffuse, TextureFilter.LINEAR);
@@ -102,6 +104,8 @@ function RotationTest()
     --cube_child:GetTransform():Translate(Vector3.FMul(cube_child:GetTransform():Up(), 2.0));
 
     cube_parent:AddChild(cube_child);
+
+    childRotateGM = cube_child;
 
     --cube_parent:GetTransform():SetScale(Vector3.New(0.01, 0.01, 0.01), true);
 
@@ -208,6 +212,28 @@ function Init()
     collectgarbage() -- collect memory
 end;
 
+function LoadTools()
+    local rings = Mesh.LoadAll("Engine/rings2.obj"); -- List<Mesh*>
+
+    --rings:Get(0):GetMaterial():SetColor(Vector3.New(1, 0, 0));
+    --rings:Get(1):GetMaterial():SetColor(Vector3.New(0, 1, 0));
+    --rings:Get(2):GetMaterial():SetColor(Vector3.New(0, 0, 1));
+
+    --rings:Get(0):GetMaterial():SetColor(Vector3.New(1, 0, 0));
+    --rings:Get(1):GetMaterial():SetColor(Vector3.New(0, 1, 0));
+    --rings:Get(2):GetMaterial():SetColor(Vector3.New(0, 0, 1));
+
+    Mesh.Inverse(rings);
+
+    --render:RegisterMeshes(rings);
+
+    render:GetManipulationTool():SetRings(
+        rings:Get(0),
+        rings:Get(1),
+        rings:Get(2)
+    );
+end;
+
 function Start()
     Debug.Log("Starting main engine script...");
 
@@ -233,6 +259,8 @@ function Start()
     --CreateTreeScene();
     --HierarchyTest();
     RotationTest();
+    --GeometryTest();
+    LoadTools();
 
     -------------------------------------
 
@@ -283,6 +311,10 @@ function FixedUpdate()
 end;
 
 function Update()
+    if (childRotateGM ~= nil) then
+        --childRotateGM:GetTransform():Rotate(Vector3.New(0.001, 0, 0), true);
+    end;
+
     MouseUpdate();
 
     if (Input.GetKeyDown(KeyCode.W)) then

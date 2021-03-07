@@ -15,6 +15,7 @@
 namespace Framework::Helper::Math {
     struct Vector3;
     struct Vector2;
+    class Matrix4x4;
 
     class Quaternion {
         friend struct Vector3;
@@ -24,6 +25,9 @@ namespace Framework::Helper::Math {
         [[nodiscard]] inline glm::quat ToGLM() const {
             return self;
         }
+
+        [[nodiscard]] Matrix4x4 ToMat4x4() const;
+
         [[nodiscard]] inline glm::mat4 ToMat4x4GLM() const {
             return mat4_cast(self);
         }
@@ -34,12 +38,14 @@ namespace Framework::Helper::Math {
         Quaternion(const Quaternion &p_q) {
             this->self = p_q.self;
         }
-        Quaternion(const Vector3 &p_euler);
+        Quaternion(const Vector3 &p_euler, bool inRads = false);
         Quaternion(const glm::quat &q) {
             self = q;
         }
 
-
+        Quaternion Inverse() const {
+            return glm::inverse(self);
+        }
 
         _FORCE_INLINE_ void operator+=(const Quaternion &p_q) {
             self += p_q.self;

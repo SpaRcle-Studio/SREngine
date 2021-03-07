@@ -143,7 +143,7 @@ bool Framework::Graphics::Render::Close() {
         return false;
     }
 
-    if (m_isClose){
+    if (m_isClose) {
         Debug::Error("Render::Close() : render already is closed");
         return false;
     }
@@ -151,7 +151,10 @@ bool Framework::Graphics::Render::Close() {
     Debug::Graph("Render::Close() : close render...");
 
     //if (m_skyboxShader)
-     //   m_skyboxShader->Free();
+    //   m_skyboxShader->Free();
+
+    this->m_manipulate->Destroy();
+    this->m_manipulate->Free();
 
     if (m_geometryShader)
         m_geometryShader->Free();
@@ -340,6 +343,8 @@ Framework::Graphics::Render::Render() : m_env(Environment::Get()) {
     m_meshes.reserve(500 * 500);
     m_newMeshes.reserve(500);
     m_removeMeshes.reserve(500);
+
+    this->m_manipulate = ManipulationTool::Create(this);
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {

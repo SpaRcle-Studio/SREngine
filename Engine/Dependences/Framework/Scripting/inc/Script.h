@@ -21,6 +21,8 @@ extern "C" {
 #include <Debug.h>
 #include <EntityComponentSystem/Component.h>
 
+#include <Types/List.h>
+
 namespace Framework::Scripting {
     class Compiler;
 
@@ -91,6 +93,12 @@ namespace Framework::Scripting {
         bool FixedUpdate();
         bool Close();
 
+        template<typename T> static inline void RegisterList(const std::string& className, lua_State*L){
+            luabridge::getGlobalNamespace(L)
+                .beginClass<Types::List<T>>((className + "List").c_str())
+                        .addFunction("Get", (T (Framework::Helper::Types::List<T>::*)(unsigned int))&Framework::Helper::Types::List<T>::Get)
+                .endClass();
+        }
         template<typename T> static inline void RegisterCasting(const std::string& className, lua_State*L){
             luabridge::getGlobalNamespace(L)
                     .beginNamespace("Stack")
