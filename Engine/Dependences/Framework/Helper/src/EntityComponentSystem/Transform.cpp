@@ -117,10 +117,14 @@ void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 a
     //if (m_parent)
     //    this->m_globalRotation = m_parent->m_globalRotation;
 
-    Matrix4x4 matGlobal = Matrix4x4(m_globalPosition, m_globalRotation.InverseAxis(2).ToQuat(), m_globalScale);
+    Matrix4x4 matLocal = Matrix4x4(m_globalPosition, m_localRotation.InverseAxis(2).ToQuat(), m_globalScale);
     Matrix4x4 rotate = Matrix4x4(m_globalPosition, (axis * angle).InverseAxis(2).ToQuat(), m_globalScale);
+    m_localRotation = (matLocal * rotate).GetQuat().EulerAngle().InverseAxis(2);
 
-    m_globalRotation = (matGlobal * rotate).GetQuat().EulerAngle().InverseAxis(2);
+    if (m_parent)
+        UpdateChildRotation(true);
+    else
+        this->m_globalRotation = m_localRotation;
 
     this->m_gameObject->UpdateComponentsRotation();
 
@@ -144,9 +148,9 @@ void Framework::Helper::Transform::Rotate(Vector3 angle, bool local) noexcept {
 
     //this->SetRotation(q);
 
-    if (!local)
+    //if (!local)
         this->SetRotation(m_globalRotation + angle);
-    else {
+    /*else {
         this->m_localRotation += angle;
         m_localRotation = m_localRotation.Limits(360);
 
@@ -162,7 +166,7 @@ void Framework::Helper::Transform::Rotate(Vector3 angle, bool local) noexcept {
             for (auto a: m_gameObject->m_children)
                 a->m_transform->UpdateChildRotation(true);
         }
-    }
+    }*/
     //!this->SetRotation(m_globalRotation.EulerAngle() + angle.Radians());
     //this->SetRotation(m_globalRotation * Quaternion(angle.Radians()));
    //Vector3 vec3 = Vector3::FromGLM(angle).Radians();
