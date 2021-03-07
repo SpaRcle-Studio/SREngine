@@ -709,5 +709,12 @@ bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigne
     return true;
 }
 
+void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
+    if (value)
+        glEnable(GL_DEPTH_TEST);
+    else
+        glDisable(GL_DEPTH_TEST);
+}
+
 
 

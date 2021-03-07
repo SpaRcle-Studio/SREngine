@@ -66,6 +66,30 @@ function Init()
     collectgarbage() -- collect memory
 end;
 
+function SelectOld()
+    local mesh = window:PopAimedMesh();
+    if (mesh ~= nil) then
+        if (mesh:Base():GetParent() ~= nil) then
+            if (not Input.GetKey(KeyCode.LShift)) then
+                scene:UnselectAll();
+            end;
+            local gm = mesh:Base():GetParent():SetSelect(true);
+        end;
+    end;
+
+    if (Input.GetKey(KeyCode.MouseLeft)) then
+        if (not mouseLeftPressed) then
+            mouseLeftPressed = true;
+            window:RequireAimedMesh(camera, GUIWindow.Get());
+        end;
+    else
+        mouseLeftPressed = false;
+    end;
+
+    GUIWindow.DrawGuizmo(camera, scene:GetSelected(), cameraSize);
+end;
+
+
 function DrawScene()
     GUIWindow.Begin("Scene");
         GUIWindow.BeginChild("Render");
@@ -77,11 +101,15 @@ function DrawScene()
             true
         );
         local mesh = window:PopAimedMesh();
+
         if (mesh ~= nil) then
-            if (not Input.GetKey(KeyCode.LShift)) then
-                scene:UnselectAll();
+            if (mesh:Base():GetParent() ~= nil) then
+                if (not Input.GetKey(KeyCode.LShift)) then
+                    scene:UnselectAll();
+                end;
+                --local gm = mesh:Base():GetParent():SetSelect(true);
+                mesh:Base():GetParent():SetSelect(true);
             end;
-            local gm = mesh:Base():GetParent():SetSelect(true);
         end;
 
         if (Input.GetKey(KeyCode.MouseLeft)) then
@@ -89,11 +117,20 @@ function DrawScene()
                 mouseLeftPressed = true;
                 window:RequireAimedMesh(camera, GUIWindow.Get());
             end;
+
+            local select = scene:GetSelected();
+            local axis = window:GetRender():GetManipulationTool():GetActiveAxis();
+            if (select ~= nil and axis ~= Axis.None) then
+                --local dir = Input.GetMouseDrag();
+                local rot = Vector3.FromAxis(axis, 1 / 10);
+                select:GetTransform():Rotate(rot, true);
+            end;
         else
+            window:GetRender():GetManipulationTool():Require(camera, GUIWindow.Get());
             mouseLeftPressed = false;
         end;
 
-        GUIWindow.DrawGuizmo(camera, scene:GetSelected(), cameraSize);
+        -----------------------------------------------------------
 
         GUIWindow.EndChild();
     GUIWindow.End();

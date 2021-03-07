@@ -156,7 +156,7 @@ void Mesh::ReCalcModel() {
     //glm::fquat q = glm::radians(m_rotation);
     //modelMat *= q;
 
-    modelMat = glm::scale(modelMat, m_scale);
+    modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
 
 
 
@@ -333,6 +333,11 @@ void Mesh::OnSelected(bool value) noexcept {
         //    this->m_render->DeselectMesh(this);
         //else
         //    this->m_render->SelectMesh(this);
+
+        if (value)
+            this->m_render->GetManipulationTool()->AddMesh(this);
+        else
+            this->m_render->GetManipulationTool()->RemoveMesh(this);
     }
 
     Component::OnSelected(value);
@@ -348,4 +353,20 @@ bool Mesh::SimpleDraw() {
     this->m_env->DrawTriangles(m_VAO, m_countVertices);
 
     return true;
+}
+
+void Mesh::SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale) {
+    this->m_position = pos;
+    this->m_rotation = rot;
+    this->m_scale    = scale;
+
+    glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), m_position);
+
+    modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
+            m_rotation.x,
+            m_rotation.y,
+            -m_rotation.z
+    ))));
+
+    this->m_modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
 }

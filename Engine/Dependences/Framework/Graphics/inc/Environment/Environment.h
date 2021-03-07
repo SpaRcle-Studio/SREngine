@@ -78,6 +78,7 @@ namespace Framework::Graphics {
 
         [[nodiscard]] virtual inline bool IsFullScreen() const noexcept = 0;
         virtual inline void SetFullScreen(bool value) = 0;
+        virtual void SetDepthTestEnabled(bool value) = 0;
 
         virtual bool PreInit(unsigned int smooth_samples) = 0;
 
@@ -101,6 +102,7 @@ namespace Framework::Graphics {
         inline glm::vec2 GetScreenSize() noexcept { return m_screenSize; }
 
         virtual glm::vec2 GetMousePos() = 0;
+        virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) = 0;
         virtual glm::vec3 GetPixelColor(glm::vec2 uPos) = 0;
 
         virtual glm::vec2 GetWindowSize() noexcept = 0;

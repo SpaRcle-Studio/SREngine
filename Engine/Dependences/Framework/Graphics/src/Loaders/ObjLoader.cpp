@@ -164,7 +164,7 @@ namespace Framework::Graphics {
         }*/
     }
 
-    void ObjLoader::ProcessLine(char *line) {
+    bool ObjLoader::ProcessLine(char *line) {
         m_line_number++;
 
         unsigned long len = StringUtils::FastStrLen(line);
@@ -201,6 +201,12 @@ namespace Framework::Graphics {
                     }
                     break;
                 case 'f': {
+                    if (StringUtils::MathCount(line, ' ') > 3)
+                    {
+                        Debug::Error("ObjLoader::ProcessLine() : model is not triangulate!");
+                        return false;
+                    }
+
                     char** elems = StringUtils::Split(line, ' ', 2, 3);
 
                     ProcessFace(elems);
@@ -214,9 +220,10 @@ namespace Framework::Graphics {
                 default: break;
             }
         }
+        return true;
     }
 
-    void ObjLoader::ProcessFile(const char *data) {
+    bool ObjLoader::ProcessFile(const char *data) {
         long len = strlen(data), count = 0, last = 0;
         long line_number = 0;
         for (int i = 0; i < len; i++) {
@@ -229,7 +236,11 @@ namespace Framework::Graphics {
                 strncat(line, data + last, i + 1 == len ? count : count - 1);
                 last = i + 1;
 
-                ProcessLine(line);
+                if (!ProcessLine(line))
+                {
+                    return false;
+                    delete[] line;
+                }
 
                 delete[] line;
 
@@ -237,5 +248,6 @@ namespace Framework::Graphics {
             }
         }
         AddMesh();
+        return true;
     }
 }

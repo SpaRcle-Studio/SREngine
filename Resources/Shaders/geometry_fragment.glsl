@@ -28,7 +28,7 @@ float LinearizeDepth(float depth) {
     return (2.0 * 0.1 * 100.0) / (100.0 + 0.1 - z * (100.0 - 0.1));
 }
 
-void main(){
+void main() {
     vec3 ambient = (hasDiffuse == 1 ? texture(DiffuseMap, fs_in.TexCoord).rgb : vec3(1.f,1.f,1.f)) * color;
     float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
 
@@ -39,8 +39,16 @@ void main(){
 
     if (config.y == 0)
         StencilMask = vec4(0, 0, 0, 0);
-    else
-       StencilMask = vec4(1, 1, 1, 1);
+    else {
+        if (config.y == 1)
+            StencilMask = vec4(1, 1, 1, 1);
+        else if (config.y == 2)
+            StencilMask = vec4(1, 0, 0, 1);
+        else if (config.y == 3)
+            StencilMask = vec4(0, 1, 0, 1);
+        else if (config.y == 4)
+            StencilMask = vec4(0, 0, 1, 1);
+    }
 
     if (config.x == 1) {
         float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));

@@ -127,7 +127,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
     scale = gameObject->GetTransform()->GetScale(true).ToGLM();
 
     ImGui::InputFloat3("L Tr", &position[0]);
-    ImGui::InputFloat3("L Rt", &rotation[0]);
+    if (ImGui::InputFloat3("L Rt", &rotation[0]))
+        gameObject->GetTransform()->SetLocalRotation(rotation);
     ImGui::InputFloat3("L Sc", &scale[0]);
 
     ImGui::Text("[Parent direction]");
@@ -231,27 +232,26 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
         matrix[i] = p3Source[i];
 */
 
-    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    ImGuiWindow *window = ImGui::GetCurrentWindow();
     if (!window || window->SkipItems)
         return;
 
-    glm::vec2 pos = { window->Pos.x, window->Pos.y };
-    glm::vec2 win_size = { window->Size.x, window->Size.y };
+    glm::vec2 pos = {window->Pos.x, window->Pos.y};
+    glm::vec2 win_size = {window->Size.x, window->Size.y};
 
     const float dx = win_size.x / img_size.x;
     const float dy = win_size.y / img_size.y;
 
     if (dx > dy)
         img_size *= dy;
+    else if (dy > dx)
+        img_size *= dx;
     else
-        if (dy > dx)
-            img_size *= dx;
-        else
-            img_size *= dy;
+        img_size *= dy;
 
-    static const ImVec4 def = { 0.1, 0.1, 0.1, 0.7 };
-    static const ImVec4 act = { 0.6, 0.6, 0.6, 0.85 };
-    static const ImVec2 sizeB = { 30,25 };
+    static const ImVec4 def = {0.1, 0.1, 0.1, 0.7};
+    static const ImVec4 act = {0.6, 0.6, 0.6, 0.85};
+    static const ImVec2 sizeB = {30, 25};
     static const short space = 3;
     static int snapValue = 100;
 
@@ -260,19 +260,19 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     //static float snap[3] = { 1.f, 1.f, 1.f };
 
     if (ButtonWithId("engine_tool_move", "M", sizeB, 0, true,
-            ImVec2(space, space), g_currentGuizmoOperation == ImGuizmo::TRANSLATE ? act : def)) {
+                     ImVec2(space, space), g_currentGuizmoOperation == ImGuizmo::TRANSLATE ? act : def)) {
         g_currentGuizmoOperation = ImGuizmo::TRANSLATE;
         boundsAct = false;
     }
 
     if (ButtonWithId("engine_tool_rotate", "R", sizeB, 0, true,
-            ImVec2(space * 2 + sizeB.x, space), g_currentGuizmoOperation == ImGuizmo::ROTATE ? act : def)) {
+                     ImVec2(space * 2 + sizeB.x, space), g_currentGuizmoOperation == ImGuizmo::ROTATE ? act : def)) {
         g_currentGuizmoOperation = ImGuizmo::ROTATE;
         boundsAct = false;
     }
 
     if (ButtonWithId("engine_tool_scale", boundsAct ? "S+" : "S", sizeB, 0, true,
-            ImVec2(space * 3 + sizeB.x * 2, space), g_currentGuizmoOperation == ImGuizmo::SCALE ? act : def)) {
+                     ImVec2(space * 3 + sizeB.x * 2, space), g_currentGuizmoOperation == ImGuizmo::SCALE ? act : def)) {
         if (g_currentGuizmoOperation == ImGuizmo::SCALE)
             boundsAct = !boundsAct;
 
@@ -295,9 +295,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     std::string snap_str = std::to_string(snapValue / 100.0);
     snap_str.resize(4);
     if (ButtonWithId("engine_tool_snap", (snap_str + "x").c_str(),
-            sizeB + ImVec2(5, 0), 0, true,
-                     ImVec2(space * 7 + sizeB.x * 6, space), snapAct ? act : def))
-    {
+                     sizeB + ImVec2(5, 0), 0, true,
+                     ImVec2(space * 7 + sizeB.x * 6, space), snapAct ? act : def)) {
         if (snapValue >= 400) {
             snapValue = 25;
             snapAct = false;
@@ -315,36 +314,30 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     pos += (win_size - img_size) / 2.f;
     ImGuizmo::SetRect(pos.x, pos.y, img_size.x, img_size.y);
 
-    glm::mat4 mat = gameObject->GetTransform()->GetMatrix();
 
     //glm::vec3 camPos = camera->GetGLPosition();
     //ImGuizmo::SetCameraPos(camPos.x, camPos.y, -camPos.z);
 
-    static float bounds[] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
-    static float boundsSnap[] = { 0.1f, 0.1f, 0.1f };
+    static float bounds[] = {-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f};
+    static float boundsSnap[] = {0.1f, 0.1f, 0.1f};
 
-    glm::vec3 snap = glm::vec3(1,1,1) * ((float)snapValue / 100.f);
+    glm::vec3 snap = glm::vec3(1, 1, 1) * ((float) snapValue / 100.f);
 
-    float angle[3] = {0,0,0};
+    //float angle[3] = {0,0,0};
+
+    glm::mat4 delta;
+
+    glm::mat4 mat = gameObject->GetTransform()->GetMatrix();
 
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
-            boundsAct ? ImGuizmo::BOUNDS :  g_currentGuizmoOperation, g_currentGuizmoMode,
+            boundsAct ? ImGuizmo::BOUNDS : g_currentGuizmoOperation, g_currentGuizmoMode,
             &mat[0][0],
-            nullptr, snapAct ? &snap[0] : nullptr, boundsAct ? bounds : nullptr, boundsSnap))
-    {
-        //if (angle[0] == 0 && angle[1] == 0 && angle[2] == 0)
-            gameObject->GetTransform()->SetMatrix(mat, g_currentGuizmoPivot);
-        //else {
-        //    printf("%f %f %f\n", angle[0], angle[1], angle[2]);
-        //    gameObject->GetTransform()->Rotate(Vector3(angle[0], angle[1], angle[2]));
-        //}
-        //std::cout << glm::to_string(mat) << std::endl;
-        //gameObject->UpdateComponents();
+            &delta[0][0], snapAct ? &snap[0] : nullptr, boundsAct ? bounds : nullptr, boundsSnap,
+            NULL)) {
+        gameObject->GetTransform()->SetMatrix(delta, mat, g_currentGuizmoPivot);
     }
-
-
 
     //ImGuizmo::ViewManipulate(cameraView, 10, ImVec2(0, 0), ImVec2(128, 128), 0x10101010);
 }
@@ -353,9 +346,11 @@ void Framework::Graphics::GUI::GUIWindow::DebugWindow() {
     static glm::vec3 vec = glm::vec3(0,0,0);
     ImGui::InputFloat3("vec1", &vec[0]);
 
-    glm::vec3 euler =
-            Quaternion(glm::quat(glm::radians(vec)))
-            .EulerAngle().ToGLM();
+    //glm::vec3 euler =
+    //        Quaternion(glm::quat(glm::radians(vec)))
+    //        .EulerAngle().ToGLM();
+
+    glm::vec3 euler = glm::degrees(glm::eulerAngles(glm::inverse(glm::quat(glm::radians(vec)))));
 
     ImGui::InputFloat3("vec2", &euler[0]);
 }

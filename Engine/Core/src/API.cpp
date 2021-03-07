@@ -9,6 +9,10 @@
 #include <GUI/Canvas.h>
 #include <Math/Vector3.h>
 
+#include <utility>
+#include <Types/List.h>
+#include <Types/ManipulationTool.h>
+
 using namespace Framework::Helper::Math;
 
 void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
@@ -143,10 +147,35 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
     // Vector3
     compiler->RegisterScriptClass("Math", [](lua_State* L){
+        static int NONEAxis = (int)Vector3::Axis::NONE;
+        static int XAxis    = (int)Vector3::Axis::AXIS_X;
+        static int YAxis    = (int)Vector3::Axis::AXIS_Y;
+        static int ZAxis    = (int)Vector3::Axis::AXIS_Z;
+
+        luabridge::getGlobalNamespace(L)
+                .beginNamespace("Axis")
+                .addProperty("None", &NONEAxis, false)
+                .addProperty("X", &XAxis, false)
+                .addProperty("Y", &YAxis, false)
+                .addProperty("Z", &ZAxis, false);
+
         luabridge::getGlobalNamespace(L)
                 .beginClass<Vector3>("Vector3")
                     .addStaticFunction("New", static_cast<Vector3(*)(float,float,float)>([](float x,float y,float z) -> Vector3 {
                         return Vector3(x,y,z);
+                    }))
+
+                    .addStaticFunction("FromAxis", static_cast<Vector3(*)(int,float)>([](int axis,float mul) -> Vector3 {
+                        switch ((Vector3::Axis)axis) {
+                            case Vector3::AXIS_X:
+                                return Vector3(mul, 0, 0);
+                            case Vector3::AXIS_Y:
+                                return Vector3(0, mul, 0);
+                            case Vector3::AXIS_Z:
+                                return Vector3(0, 0, mul);
+                            case Vector3::NONE:
+                                return Vector3();
+                        }
                     }))
 
                     .addProperty("x", &Vector3::x)
@@ -206,7 +235,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("Right", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
 
                 .addFunction("Translate", (void (Helper::Transform::*)(Vector3))&Helper::Transform::Translate)
-                .addFunction("Rotate",    (void (Helper::Transform::*)(Vector3))&Helper::Transform::Rotate)
+                .addFunction("Rotate",    (void (Helper::Transform::*)(Vector3, bool))&Helper::Transform::Rotate)
 
                 .addFunction("SetScale",    (void (Helper::Transform::*)(Vector3, bool))&Helper::Transform::SetScale)
                 .endClass();
@@ -217,6 +246,16 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
         luabridge::getGlobalNamespace(L)
                 .beginClass<Helper::Component>("Component")
                         .addFunction("GetParent", (GameObject* (Helper::Component::*)(void))&Helper::Component::GetParent)
+                .endClass();
+    });
+
+    // ManipulationTool
+    compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        luabridge::getGlobalNamespace(L)
+                .beginClass<Graphics::Types::ManipulationTool>("ManipulationTool")
+                    .addFunction("SetRings", (bool (Graphics::Types::ManipulationTool::*)(Mesh* x, Mesh* y, Mesh* z))&Graphics::Types::ManipulationTool::SetRings)
+                    .addFunction("GetActiveAxis", (int (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetActiveAxis)
+                    .addFunction("Require", (void (Graphics::Types::ManipulationTool::*)(Graphics::Camera*, ImGuiWindow*))&Graphics::Types::ManipulationTool::Require)
                 .endClass();
     });
 
@@ -264,20 +303,40 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
     // Mesh
     compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        Scripting::Script::RegisterList<Mesh*>("Mesh", L);
+
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Mesh>("Mesh")
-                .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(std::string name, unsigned int id)>([](std::string name, unsigned int id) -> Graphics::Mesh* {
-                    auto meshes = Mesh::Load(name);
-                    if (id >= meshes.size()) {
-                        Debug::ScriptError("Script(InternalError) : An error occurred while loading the \""+name+"\" model: \n\tIndex went out of model size. "+
-                                           std::to_string(id) + " >= "+std::to_string(meshes.size()));
-                        return nullptr;
-                    }
-                    return meshes[id];
-                }))
-                .addFunction("Copy", (Framework::Graphics::Mesh* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::Copy)
-                .addFunction("Base", (Helper::Component* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::BaseComponent)
-                .addFunction("GetMaterial", (Graphics::Material* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::GetMaterial)
+                    .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(std::string name, unsigned int id)>([](std::string name, unsigned int id) -> Graphics::Mesh* {
+                        auto meshes = Mesh::Load(name);
+                        if (id >= meshes.size()) {
+                            Debug::ScriptError("Script(InternalError) : An error occurred while loading the \""+name+"\" model: \n\tIndex went out of model size. "+
+                                               std::to_string(id) + " >= "+std::to_string(meshes.size()));
+                            return nullptr;
+                        }
+                        return meshes[id];
+                    }))
+                    //.addStaticFunction("LoadAll", static_cast<Helper::Types::List<Mesh*>(*)(std::string name)>([](std::string name) -> Helper::Types::List<Mesh*> {
+                    //    return Helper::Types::List<Mesh*>(Mesh::Load(std::move(name)));
+                    //}))
+
+                    .addStaticFunction("Inverse", static_cast<void(*)(Types::List<Mesh*>)>([](Types::List<Mesh*> meshes) {
+                        Mesh::Inverse(meshes);
+                    }))
+
+                    .addStaticFunction("LoadAll",
+                            static_cast<Helper::Types::List<Mesh*>(*)(std::string name)>([](std::string name) -> Helper::Types::List<Mesh*>
+                    {
+                                std::vector<Mesh*> meshes = Mesh::Load(std::move(name));
+                                Helper::Types::List<Mesh*> list = Helper::Types::List<Mesh*>(meshes);
+                                //std::cout << list.Size() << std::endl;
+                                return list;
+                    }))
+
+                    .addFunction("Copy", (Framework::Graphics::Mesh* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::Copy)
+                    .addFunction("Base", (Helper::Component* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::BaseComponent)
+                    //.addFunction("SetInverse", (void (Framework::Graphics::Mesh::*)(bool))&Graphics::Mesh::SetInverse)
+                    .addFunction("GetMaterial", (Graphics::Material* (Framework::Graphics::Mesh::*)(void))&Graphics::Mesh::GetMaterial)
                 .endClass();
     });
 
@@ -359,7 +418,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Skybox>("Skybox")
                 .addStaticFunction("Load", static_cast<Graphics::Skybox*(*)(std::string, std::string)>([](std::string name, std::string shaderName) -> Graphics::Skybox* {
-                    return Skybox::Load(std::move(name), std::move(shaderName));
+                    return Skybox::Load(std::move(name), shaderName);
                 }))
                 .addFunction("Free", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::Free)
                 .addFunction("AwaitDestroy", (bool (Framework::Graphics::Skybox::*)(void))&Graphics::Skybox::AwaitDestroy)
@@ -375,7 +434,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 }))
                 .addFunction("SetGridEnabled", (void (Framework::Graphics::Render::*)(bool))&Graphics::Render::SetGridEnabled)
                 .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
+                .addFunction("RegisterMeshes", (void (Framework::Graphics::Render::*)(Helper::Types::List<Graphics::Mesh*>))&Graphics::Render::RegisterMeshes)
                 .addFunction("RegisterTexture", (void (Framework::Graphics::Render::*)(Graphics::Texture*))&Graphics::Render::RegisterTexture)
+                .addFunction("GetManipulationTool", (Graphics::Types::ManipulationTool* (Framework::Graphics::Render::*)(void))&Graphics::Render::GetManipulationTool)
                 .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
                 .endClass();
     });
@@ -387,6 +448,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addStaticFunction("Get", static_cast<Graphics::Window*(*)()>([]() -> Graphics::Window* {
                     return Engine::Get()->GetWindow();
                 }))
+                .addFunction("GetRender", (Graphics::Render* (Framework::Graphics::Window::*)(void))&Graphics::Window::GetRender)
                 .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
                 .addFunction("DestroyCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::DestroyCamera)
                 .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)

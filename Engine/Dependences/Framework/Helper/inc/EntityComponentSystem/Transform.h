@@ -60,12 +60,18 @@ namespace Framework::Helper {
             return vec;
         }
 
+        void SetLocalPosition(Vector3 val, bool pivot = false);
+        void SetLocalRotation(Vector3 val, bool pivot = false);
+        void SetLocalScale(Vector3 val, bool pivot = false);
+
         void SetPosition(Vector3 val, bool pivot = false);
         void SetRotation(const Vector3& val, bool pivot = false);
         void SetScale(Vector3 val, bool pivot  = false);
 
-        [[nodiscard]] glm::mat4 GetMatrix() const noexcept;
-        void SetMatrix(glm::mat4 matrix, bool pivot) noexcept;
+        [[nodiscard]] inline bool HasParent() { return (bool)this->m_parent; }
+
+        [[nodiscard]] glm::mat4 GetMatrix(bool local = false) const noexcept;
+        void SetMatrix(glm::mat4 delta, glm::mat4 matrix, bool pivot) noexcept;
 
         [[nodiscard]] inline Vector3 GetPosition(bool local = false) const noexcept {
             return local ? m_localPosition : m_globalPosition;
@@ -118,18 +124,18 @@ namespace Framework::Helper {
         [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
 
         void Translate(Vector3 val) noexcept;
-        void Rotate(Vector3 angle) noexcept;
+        void Rotate(Vector3 angle, bool local = false) noexcept;
     public:
-        void UpdateLocalPosition();
-        void UpdateLocalScale();
-        void UpdateLocalRotation();
+        void UpdateLocalPosition(Vector3 delta);
+        void UpdateLocalScale(Vector3 delta);
+        void UpdateLocalRotation(Vector3 delta);
 
         void UpdateDefParentDir();
 
         void UpdateChildPosition(Vector3 delta, bool pivot);
         void UpdateChildScale(Vector3 delta, bool pivot);
         //void UpdateChildRotation(glm::vec3 delta, bool pivot);
-        void UpdateChildRotation(Vector3 delta, bool pivot);
+        void UpdateChildRotation(bool pivot);
     public:
         /*inline static const glm::vec3 right     = { 1, 0, 0 };
         inline static const glm::vec3 forward   = { 0, 0, 1 };
@@ -147,7 +153,7 @@ namespace Framework::Helper {
         inline static const Vector3 forward   = Vector3(0, 0, 1 );
         inline static const Vector3 up        = Vector3( 0, 1, 0 );
     private:
-        Vector3         m_localPosition              = { 0, 0, 0 };
+        Vector3         m_localPosition              = { 2, 2, 2 };
         //Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
         Vector3         m_localRotation              = { 0, 0, 0 };
         Vector3         m_localScale                 = { 1, 1, 1 };

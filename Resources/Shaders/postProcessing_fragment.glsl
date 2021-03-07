@@ -51,7 +51,10 @@ void DrawStencil() {
 
 void DrawStencilFast() {
     // and if one of the pixel-neighbor is white (we are on the border)
-    if (texture(stencil, TexCoords).a == 1) {
+    vec4 color = texture(stencil, TexCoords);
+
+    //if (color.a == 1) {
+    if (color == vec4(1,1,1,1)) {
         int w = 3;
 
         vec2 size = 1.0f / textureSize(stencil, 0);
