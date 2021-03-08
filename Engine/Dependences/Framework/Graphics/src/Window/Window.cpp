@@ -456,8 +456,8 @@ void Framework::Graphics::Window::CentralizeWindow() {
 glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphics::Camera *camera, ImGuiWindow *aimedWindowTarget) {
     glm::vec2 win_pos = { aimedWindowTarget->Pos.x, aimedWindowTarget->Pos.y };
     glm::vec2 win_size = { aimedWindowTarget->Size.x, aimedWindowTarget->Size.y };
-    glm::vec2 window_size = this->GetWindowSize();
-    glm::vec2 img_size = camera->GetSize();
+    glm::vec2 window_size = this->GetWindowSize().ToGLM();
+    glm::vec2 img_size = camera->GetSize().ToGLM();
 
     glm::vec2 pos = m_env->GetMousePos();
 
@@ -472,7 +472,7 @@ glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphi
     // Вычисляем положение мыши в окне относительно изображения н окне интерфейса
 
     pos -= win_pos;
-    pos *= window_size / win_size;
+    pos *= (window_size / win_size);
 
     pos -= ((win_size - img_size) / 2.f) * window_size / win_size;
     pos *= win_size / img_size;

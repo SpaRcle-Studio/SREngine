@@ -120,8 +120,11 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addStaticFunction("GetKeyUp", static_cast<bool(*)(int)>([](int k) -> bool {
                     return Helper::InputSystem::IsUp((KeyCode)k);
                 }))
-                .addStaticFunction("GetMouseDrag", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
+                .addStaticFunction("GetMouseDrag", static_cast<Math::Vector2(*)()>([]() -> Math::Vector2 {
                     return Helper::InputSystem::MouseDrag();
+                }))
+                .addStaticFunction("GetMousePos", static_cast<Vector2(*)()>([]() -> Vector2 {
+                    return Helper::Input::GetMousePos();
                 }))
                 .addStaticFunction("GetMouseWheel", static_cast<int(*)()>([]() -> int {
                     return Helper::InputSystem::GetMouseWheel();
@@ -201,27 +204,27 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     // Vector2
     compiler->RegisterScriptClass("Math", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
-                .beginClass<glm::vec2>("Vector2")
-                .addStaticFunction("New", static_cast<glm::vec2(*)(float, float)>([](float x, float y) -> glm::vec2 {
-                    return glm::vec2(x, y);
+                .beginClass<Math::Vector2>("Vector2")
+                .addStaticFunction("New", static_cast<Math::Vector2(*)(float, float)>([](float x, float y) -> Math::Vector2 {
+                    return Math::Vector2(x, y);
                 }))
-                .addProperty("x", &glm::vec2::x)
-                .addProperty("y", &glm::vec2::y)
+                .addProperty("x", &Math::Vector2::x)
+                .addProperty("y", &Math::Vector2::y)
 
-                .addStaticFunction("Empty", static_cast<bool(*)(glm::vec2)>([](glm::vec2 v) -> bool {
+                .addStaticFunction("Empty", static_cast<bool(*)(Math::Vector2)>([](Math::Vector2 v) -> bool {
                     return (!v.x && !v.y);
                 }))
-                .addStaticFunction("Sum", static_cast<glm::vec2(*)(glm::vec2, glm::vec2)>([](glm::vec2 v1, glm::vec2 v2) -> glm::vec2 {
+                .addStaticFunction("Sum", static_cast<Math::Vector2(*)(Math::Vector2, Math::Vector2)>([](Math::Vector2 v1, Math::Vector2 v2) -> Math::Vector2 {
                     return v1 + v2;
                 }))
-                .addStaticFunction("Sub", static_cast<glm::vec2(*)(glm::vec2, glm::vec2)>([](glm::vec2 v1, glm::vec2 v2) -> glm::vec2 {
+                .addStaticFunction("Sub", static_cast<Math::Vector2(*)(Math::Vector2, Math::Vector2)>([](Math::Vector2 v1, Math::Vector2 v2) -> Math::Vector2 {
                     return v1 - v2;
                 }))
-                .addStaticFunction("FMul", static_cast<glm::vec2(*)(glm::vec2, float)>([](glm::vec2 v1, float f) -> glm::vec2 {
-                    return v1 * f;
+                .addStaticFunction("FMul", static_cast<Math::Vector2(*)(Math::Vector2, float)>([](Math::Vector2 v1, float f) -> Math::Vector2 {
+                    return Math::Vector2(v1.x * f, v1.y * f);
                 }))
-                .addStaticFunction("FDiv", static_cast<glm::vec2(*)(glm::vec2, float)>([](glm::vec2 v1, float f) -> glm::vec2 {
-                    return v1 / f;
+                .addStaticFunction("FDiv", static_cast<Math::Vector2(*)(Math::Vector2, float)>([](Math::Vector2 v1, float f) -> Math::Vector2 {
+                    return Math::Vector2(v1.x / f, v1.y / f);
                 }))
                 .endClass();
     });
@@ -375,7 +378,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("SetFrameSize", (void (Framework::Graphics::Camera::*)(unsigned int w, unsigned int h))&Graphics::Camera::UpdateProjection)
                 .addFunction("SetDirectOutput", (void (Framework::Graphics::Camera::*)(bool value))&Graphics::Camera::SetDirectOutput)
                 .addFunction("IsDirectOutput", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::IsDirectOutput)
-                .addFunction("GetSize", (glm::vec2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
+                .addFunction("GetSize", (Math::Vector2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
                 .addFunction("WaitCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitCalculate)
                 .addFunction("WaitBuffersCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitBuffersCalculate)
                 .endClass();
@@ -453,7 +456,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("AddCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::AddCamera)
                 .addFunction("DestroyCamera", (void (Framework::Graphics::Window::*)(Graphics::Camera*))&Graphics::Window::DestroyCamera)
                 .addFunction("SetCanvas", (bool (Framework::Graphics::Window::*)(Graphics::GUI::ICanvas*))&Graphics::Window::SetCanvas)
-                .addFunction("GetWindowSize", (glm::vec2 (Framework::Graphics::Window::*)(void))&Graphics::Window::GetWindowSize)
+                .addFunction("GetWindowSize", (Math::Vector2 (Framework::Graphics::Window::*)(void))&Graphics::Window::GetWindowSize)
                 .addFunction("IsFullScreen", (bool (Framework::Graphics::Window::*)(void))&Graphics::Window::IsFullScreen)
                 .addFunction("SetGUIEnabled", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetGUIEnabled)
                 .addFunction("SetFullScreen", (void (Framework::Graphics::Window::*)(bool))&Graphics::Window::SetFullScreen)
@@ -533,19 +536,19 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addStaticFunction("EndChild", static_cast<void(*)()>([]() {
                     Graphics::GUI::GUIWindow::EndChild();
                 }))
-                .addStaticFunction("GetSize", static_cast<glm::vec2(*)()>([]() -> glm::vec2 {
+                .addStaticFunction("GetSize", static_cast<Math::Vector2(*)()>([]() -> Math::Vector2 {
                     return Graphics::GUI::GUIWindow::GetWindowSize();
                 }))
-                .addStaticFunction("DrawTexture", static_cast<void(*)(glm::vec2, glm::vec2, unsigned int, bool)>(
-                        [](glm::vec2 winSize, glm::vec2 imgSize, unsigned int texID, bool center) {
-                            Graphics::GUI::GUIWindow::DrawTexture(winSize, imgSize, texID, center);
+                .addStaticFunction("DrawTexture", static_cast<void(*)(Math::Vector2, Math::Vector2, unsigned int, bool)>(
+                        [](Math::Vector2 winSize, Math::Vector2 imgSize, unsigned int texID, bool center) {
+                            Graphics::GUI::GUIWindow::DrawTexture(winSize.ToGLM(), imgSize.ToGLM(), texID, center);
                         }))
                 .addStaticFunction("SetGuizmoTool", static_cast<bool(*)(unsigned char)>([](unsigned char id) -> bool {
                             return Graphics::GUI::GUIWindow::SetGuizmoTool(id);
                         }))
-                .addStaticFunction("DrawGuizmo", static_cast<void(*)(Graphics::Camera*, Helper::GameObject*, glm::vec2)>(
-                        [](Graphics::Camera* camera,Helper::GameObject*gm, glm::vec2 cameraSize) {
-                    Graphics::GUI::GUIWindow::DrawGuizmo(camera, gm, cameraSize);
+                .addStaticFunction("DrawGuizmo", static_cast<void(*)(Graphics::Camera*, Helper::GameObject*, Math::Vector2)>(
+                        [](Graphics::Camera* camera,Helper::GameObject*gm, Math::Vector2 cameraSize) {
+                    Graphics::GUI::GUIWindow::DrawGuizmo(camera, gm, cameraSize.ToGLM());
                 }))
                 .addStaticFunction("DrawInspector", static_cast<void(*)(Helper::GameObject*)>([](Helper::GameObject*gm) {
                     if (!gm)

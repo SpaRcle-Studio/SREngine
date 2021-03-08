@@ -17,6 +17,7 @@
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
 #include <Types/Time.h>
+#include <Math/Vector3.h>
 
 using namespace Framework::Graphics::Types;
 
@@ -200,8 +201,8 @@ namespace Framework::Graphics {
         inline void SetFullScreen(bool value) const noexcept { this->m_env->SetFullScreen(value); }
         [[nodiscard]] inline bool IsWindowOpen()  const noexcept { return !this->m_isWindowClose; }
         [[nodiscard]] inline bool IsWindowFocus() const noexcept { return this->m_isWindowFocus;  }
-        [[nodiscard]] inline glm::vec2 GetWindowSize() const noexcept {
-            return glm::vec2(
+        [[nodiscard]] inline Math::Vector2 GetWindowSize() const noexcept {
+            return Math::Vector2(
                     m_format.Width(),
                     m_format.Height()
                 );

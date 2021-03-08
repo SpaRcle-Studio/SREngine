@@ -174,8 +174,9 @@ function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
     cameraComp = Camera.New(4);
-    local winSize = window:GetWindowSize();
-    cameraComp:SetFrameSize(winSize.x, winSize.y);
+   -- local winSize = window:GetWindowSize();
+    --cameraComp:SetFrameSize(winSize.x, winSize.y);
+    cameraComp:SetFrameSize(1600, 900);
 
     cameraComp:SetDirectOutput(false);
     window:SetGUIEnabled(true);
@@ -257,8 +258,8 @@ function Start()
 
     LoadCamera();
     --CreateTreeScene();
-    --HierarchyTest();
-    RotationTest();
+    HierarchyTest();
+    --RotationTest();
     --GeometryTest();
     LoadTools();
 

@@ -13,6 +13,7 @@
 #include <GUI/ICanvas.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <Math/Vector3.h>
 
 using namespace Framework::Helper;
 
@@ -72,7 +73,7 @@ namespace Framework::Graphics {
         }*/
         [[nodiscard]] inline glm::mat4 GetView() const noexcept { return this->m_viewMat; }
         [[nodiscard]] inline glm::mat4 GetProjection() const noexcept { return this->m_projection; }
-        glm::vec2 GetSize() { return m_cameraSize; }
+        Math::Vector2 GetSize() { return m_cameraSize; }
         PostProcessing* GetPostProcessing() { return m_postProcessing; }
 
         [[nodiscard]] inline glm::vec3 GetGLPosition() const noexcept { return this->m_pos; }

@@ -23,6 +23,24 @@ namespace Framework::Helper::Math {
             double coord[2] = {0};
         };
 
+        _FORCE_INLINE_ Vector2 operator+(const Vector2 &p_v) const {
+            return Vector2(x + p_v.x, y + p_v.y); }
+        _FORCE_INLINE_ Vector2 operator-(const Vector2 &p_v) const {
+            return Vector2(x - p_v.x, y - p_v.y); }
+        _FORCE_INLINE_ Vector2 operator*(const Vector2 &p_v) const {
+            return Vector2(x * p_v.x, y * p_v.y); }
+        _FORCE_INLINE_ Vector2 operator/(const Vector2 &p_v) const {
+            return Vector2(x / p_v.x, y / p_v.y); }
+
+        _FORCE_INLINE_ Vector2(const glm::vec2& vec2) {
+            x = vec2.x;
+            y = vec2.y;
+        }
+
+        _FORCE_INLINE_ glm::vec2 ToGLM() const noexcept {
+            return {x,y};
+        }
+
         _FORCE_INLINE_ const double &operator[](int p_axis) const {
             return coord[p_axis];
         }

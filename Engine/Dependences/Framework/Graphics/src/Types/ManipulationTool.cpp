@@ -21,7 +21,7 @@ void ManipulationTool::Process() {
     glm::vec4 color = m_env->GetTexturePixel(
             pos,
             m_targetCamera->GetPostProcessing()->GetStencilBuffer(),
-            m_targetCamera->GetSize());
+            m_targetCamera->GetSize().ToGLM());
 
     if (color == glm::vec4(1,0,0,1))
         m_activeAxis = Vector3::AXIS_X;
@@ -65,17 +65,19 @@ void ManipulationTool::Draw() {
 
     this->CalculateCenter();
 
-    m_distance = (float)m_position.Distance(Vector3(m_targetCamera->GetGLPosition()).InverseAxis(2)) / 5.f;
-    if (m_distance > 5)
-        m_distance = 5;
+    m_distance = (float)m_position.Distance(Vector3(m_targetCamera->GetGLPosition()).InverseAxis(2)) / 4.f - 1;
+    if (m_distance < 1)
+        m_distance = 1;
+    //else if (m_distance > 5)
+    //    m_distance = 5;
 
     x->GetMaterial()->SetColor(m_activeAxis == Vector3::AXIS_X ? Vector3(2,1,1) : Vector3(1,0,0));
     y->GetMaterial()->SetColor(m_activeAxis == Vector3::AXIS_Y ? Vector3(1,2,1) : Vector3(0,1,0));
     z->GetMaterial()->SetColor(m_activeAxis == Vector3::AXIS_Z ? Vector3(1,1,2) : Vector3(0,0,1));
 
-    x->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), glm::vec3(1) * m_distance);
-    y->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), glm::vec3(1) * m_distance);
-    z->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), glm::vec3(1) * m_distance);
+    x->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), glm::vec3(1) * sqrt(m_distance));
+    y->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), glm::vec3(1) * sqrt(m_distance));
+    z->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), glm::vec3(1) * sqrt(m_distance));
 
     this->m_env->SetDepthTestEnabled(false);
 

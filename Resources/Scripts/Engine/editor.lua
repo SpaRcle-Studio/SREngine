@@ -14,6 +14,7 @@ local window;        -- Window*
 local enabled;       -- Bool
 
 local mouseLeftPressed; -- Bool
+local mousePos;         -- Vector2
 
 function Inspector()
     GUIWindow.Begin("Inspector");
@@ -115,15 +116,19 @@ function DrawScene()
         if (Input.GetKey(KeyCode.MouseLeft)) then
             if (not mouseLeftPressed) then
                 mouseLeftPressed = true;
+                mousePos = Input.GetMousePos();
                 window:RequireAimedMesh(camera, GUIWindow.Get());
             end;
 
             local select = scene:GetSelected();
             local axis = window:GetRender():GetManipulationTool():GetActiveAxis();
             if (select ~= nil and axis ~= Axis.None) then
-                --local dir = Input.GetMouseDrag();
+                local newPos = Input.GetMousePos();
+                local drag = Vector2.Sub(newPos, mousePos);
+                mousePos = newPos;
+
                 --local rot = Vector3.FromAxis(axis, 1 / 10);
-                select:GetTransform():RotateAxis(Vector3.FromAxis(axis,1), 1.0 / 5.0, true);
+                select:GetTransform():RotateAxis(Vector3.FromAxis(axis,1), drag.y / 5.0, true);
             end;
         else
             window:GetRender():GetManipulationTool():Require(camera, GUIWindow.Get());
