@@ -37,8 +37,11 @@ void Framework::Helper::Transform::UpdateDefParentDir() {
 }
 
 void Framework::Helper::Transform::SetLocalPosition(Framework::Helper::Math::Vector3 val, bool pivot) {
+    //Vector3 delta = val - m_localPosition;
     //this->m_localPosition = val;
 
+    //if (m_parent)
+    //    this->UpdateChildPosition(delta, pivot);
 }
 
 void Framework::Helper::Transform::SetLocalRotation(Framework::Helper::Math::Vector3 val, bool pivot) {
@@ -100,9 +103,24 @@ void Framework::Helper::Transform::SetScale(Vector3 val, bool pivot) {
     this->SetPosition(temp);
 }
 
-void Framework::Helper::Transform::Translate(Vector3 val) noexcept {
-    //this->SetPosition(m_localPosition + val);
-    this->SetPosition(m_globalPosition + val);
+void Framework::Helper::Transform::Translate(Vector3 val, bool local) noexcept {
+    if (local) {
+        m_localPosition += val;
+
+        if (!m_parent)
+            m_globalPosition += val;
+        else
+           this->UpdateChildRotation(true);
+
+        //this->UpdateChildPosition(Vector3(), true);
+
+        this->m_gameObject->UpdateComponentsPosition();
+
+        for (auto a: m_gameObject->m_children)
+            a->m_transform->UpdateChildPosition(-val, true);
+    }
+    else
+        this->SetPosition(m_globalPosition + val);
 }
 
 void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 axis, double angle, bool local) noexcept {
@@ -184,8 +202,11 @@ void Framework::Helper::Transform::Rotate(Vector3 angle, bool local) noexcept {
 }
 
 
-Framework::Helper::Math::Vector3 Framework::Helper::Transform::Direction(Framework::Helper::Math::Vector3 preDir) const noexcept {
-    return m_globalRotation.Radians().ToQuat() * preDir;
+Framework::Helper::Math::Vector3 Framework::Helper::Transform::Direction(Framework::Helper::Math::Vector3 preDir, bool local) const noexcept {
+    if (local)
+        return m_localRotation.Radians().ToQuat() * preDir;
+    else
+        return m_globalRotation.Radians().ToQuat() * preDir;
 }
 
 Framework::Helper::Math::Vector3 Framework::Helper::Transform::Forward(bool local) const noexcept {
@@ -359,36 +380,7 @@ void Framework::Helper::Transform::UpdateChildScale(Vector3 delta, bool pivot) {
 }
 
 void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
-    //this->m_globalRotation = Quaternion(m_parent->m_globalRotation.EulerAngle() + m_localRotation.EulerAngle());
-    //this->m_globalRotation = Quaternion(m_parent->m_globalRotation.EulerAngle() + m_localRotation.EulerAngle());
-    // this->m_globalRotation = Quaternion(m_globalRotation.EulerAngle() + Vector3(delta.x, -delta.y, delta.z));
-    //this->m_globalRotation = m_globalRotation * delta.ToQuat();
-    //this->m_globalRotation = (m_globalRotation).Rotate(m_globalRotation.Radians().ToQuat())  - delta;
-    //this->m_globalRotation = m_parent->m_globalRotation.Rotate(m_globalRotation.Radians().ToQuat());
-    //this->m_globalRotation = m_parent->m_globalRotation.Rotate(m_localRotation.ToQuat());
-    //this->m_globalRotation = (m_parent->m_globalRotation.ToQuat() * m_localRotation.ToQuat()).EulerAngle();
-
-    //Vector3 v = m_localRotation;
-    //this->m_globalRotation -= delta.Rotate(Vector3(0, 0, 0).ToQuat());
-
-   /*
-
-    //Vector3 defDir = (m_parent->m_globalRotation + delta).Radians().ToQuat() * m_defParentDir;
-
-    //Vector3 defDir = -m_parent->Direction(m_defParentDir);
-    Vector3 origPos = (point - defDir);
-    Vector3 origDir =
-            (m_parent->m_globalRotation).Radians().ToQuat() *
-            origPos.Direction(m_globalPosition);
-    double origDist = origPos.Distance(m_globalPosition);*/
-
-    //Debug::Log(std::to_string(originPos.Distance(m_globalPosition)));
-    //Debug::Log((origDir).ToString());
-    //Debug::Log(originPos.ToString());
-    //(0.000000, 1.000000, -0.119535) fix needed
-
     this->m_globalRotation = m_parent->m_globalRotation;
-
     {
         Vector3 point = m_parent->m_globalPosition;
         Vector3 defDir = -m_parent->Direction(m_defParentDir);
@@ -396,7 +388,6 @@ void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
 
         //Vector3 newPos = point + defDir * dist;
         Vector3 newPos = point + defDir;
-//180 90
         //this->m_globalPosition = originPos;
 
         //!----------------------------------------------------------

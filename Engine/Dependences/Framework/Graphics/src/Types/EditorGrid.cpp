@@ -54,7 +54,8 @@ void Framework::Graphics::EditorGrid::Free() {
     if (this->m_shader)
         this->m_shader->Free();
 
-    this->m_env->FreeMesh(VAO);
+    if (VAO)
+        this->m_env->FreeMesh(VAO);
 
     delete this;
 }

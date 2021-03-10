@@ -92,7 +92,7 @@ bool Framework::Graphics::Shader::SetStandartGeometryShader(Shader* shader) noex
     }
 }
 
-bool Framework::Graphics::Shader::Use() {
+bool Framework::Graphics::Shader::Use() noexcept {
     if (m_isError)
         return false;
 

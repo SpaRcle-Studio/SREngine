@@ -149,11 +149,14 @@ namespace Framework::Graphics {
         /** Vertex pos and texture cords */
         virtual inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept = 0;
         virtual unsigned int CalculateSkybox() noexcept = 0;
-        virtual void DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) noexcept = 0;
-        virtual inline void DrawQuad(const unsigned int&  VAO) noexcept = 0;
+        virtual void DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) const noexcept = 0;
+        virtual inline void DrawQuad(const unsigned int&  VAO) const noexcept = 0;
+
+        virtual inline void BindVAO(const unsigned int&  VAO) const noexcept = 0;
+        virtual inline void Draw6Triangles() const noexcept = 0;
 
         virtual bool FreeMesh(unsigned int VAO) noexcept = 0;
-        virtual inline void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) noexcept = 0;
+        virtual inline void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept = 0;
         virtual inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) noexcept = 0;
 
         // ============================== [ TEXTURE METHODS ] ==============================

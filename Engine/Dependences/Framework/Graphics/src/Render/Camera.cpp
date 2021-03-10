@@ -18,9 +18,6 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
         return;
     }
 
-    if (!m_isCalculate)
-        this->Calculate();
-
     if (m_needUpdate){
         if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
             Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
@@ -32,6 +29,7 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
 
     //shader->SetMat4("viewMat", this->m_viewMat);
     //shader->SetMat4("projMat", this->m_projection);
+    //shader->SetMat4("PVmat",  this->m_viewMat * this->m_projection);
     shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
 
     /*
@@ -56,6 +54,9 @@ bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
     this->m_window = window;
 
     this->UpdateView();
+
+    if (!m_isCalculate)
+        this->Calculate();
 
     this->m_isCreate = true;
 

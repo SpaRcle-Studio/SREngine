@@ -624,7 +624,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateSkybox() noexcept {
     return VAO;
 }
 
-void Framework::Graphics::OpenGL::DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) noexcept {
+void Framework::Graphics::OpenGL::DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) const noexcept {
     glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
     // ... задание видовой и проекционной матриц
     glBindVertexArray(VAO);

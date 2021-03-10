@@ -41,7 +41,7 @@ namespace Framework::Graphics {
         glm::vec3		          m_color_correction		    = { 1, 1, 1 };
         glm::vec3		          m_bloomColor           	    = { 1, 1, 1 };
         float                     m_bloomIntensity              = 1.f;
-        volatile unsigned int     m_bloomAmount                 = 10;
+        volatile unsigned char    m_bloomAmount                 = 6;
     private:
         bool                      m_debugDisplayBloomMask       = false;
     private:

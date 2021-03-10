@@ -34,7 +34,7 @@ namespace Framework::Graphics {
         void BeginDrawGUI() override;
         void EndDrawGUI() override;
 
-        inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
+        [[nodiscard]] inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
 
         unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) override;
 
@@ -262,7 +262,7 @@ namespace Framework::Graphics {
             return true;
         }
         bool FreeMesh(unsigned int VAO) noexcept override;
-        inline void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) noexcept override {
+        inline void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Green); }
 
             glBindVertexArray(VAO);
@@ -307,13 +307,20 @@ namespace Framework::Graphics {
             return true;
         }
         unsigned int CalculateSkybox() noexcept override;
-        void DrawSkybox(const unsigned int& VAO, unsigned int CubeMap) noexcept override;
+        void DrawSkybox(const unsigned int& VAO, unsigned int CubeMap) const noexcept override;
 
-        inline void DrawQuad(const unsigned int& VAO) noexcept override{
+        inline void DrawQuad(const unsigned int& VAO) const noexcept override{
             glBindVertexArray(VAO);
             //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             glDrawArrays(GL_TRIANGLES, 0, 6);
             //glBindVertexArray(0);
+        }
+
+        virtual inline void BindVAO(const unsigned int&  VAO) const noexcept override {
+            glBindVertexArray(VAO);
+        }
+        virtual inline void Draw6Triangles() const noexcept override {
+            glDrawArrays(GL_TRIANGLES, 0, 6);
         }
 
         inline void BindTexture(const unsigned int&  ID) const noexcept override {

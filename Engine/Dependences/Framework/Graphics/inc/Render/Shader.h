@@ -41,7 +41,7 @@ namespace Framework::Graphics {
         static Shader* GetStandartGeometryShader() noexcept;
         static bool SetStandartGeometryShader(Shader* shader) noexcept;
     public:
-        bool Use();
+        bool Use() noexcept;
         bool Init();
         ///\warning Call only from OpenGL context!
         void Free();

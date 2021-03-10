@@ -35,7 +35,7 @@ namespace Framework::Helper::Math {
             return glm::inverse(self);
         }
 
-        [[nodiscard]] Matrix4x4 Rotate(const Vector3& angle) const {
+        [[nodiscard]] Matrix4x4 Rotate(const Vector3& angle) const noexcept {
             return self * mat4_cast(angle.ToQuat().ToGLM());
         }
 
@@ -43,7 +43,23 @@ namespace Framework::Helper::Math {
             return self;
         }
 
-        [[nodiscard]] Quaternion GetQuat() const {
+        [[nodiscard]] Vector3 Translate(const Vector3& vec3) const noexcept {
+            return Matrix4x4(glm::translate(self, vec3.ToGLM())).GetTranslate();
+        }
+
+        [[nodiscard]] Vector3 GetTranslate() const noexcept {
+            glm::vec3 scale;
+            glm::quat rotation;
+            glm::vec3 translation;
+
+            glm::vec3 skew;
+            glm::vec4 perspective;
+
+            glm::decompose(self, scale, rotation, translation, skew, perspective);
+
+            return translation;
+        }
+        [[nodiscard]] Quaternion GetQuat() const noexcept {
             glm::vec3 scale;
             glm::quat rotation;
             glm::vec3 translation;

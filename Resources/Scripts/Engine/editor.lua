@@ -116,6 +116,8 @@ function DrawScene()
         if (Input.GetKey(KeyCode.MouseLeft)) then
             if (not mouseLeftPressed) then
                 mouseLeftPressed = true;
+                window:GetRender():GetManipulationTool():Require(camera, GUIWindow.Get());
+
                 mousePos = Input.GetMousePos();
                 window:RequireAimedMesh(camera, GUIWindow.Get());
             end;
@@ -127,12 +129,28 @@ function DrawScene()
                 local drag = Vector2.Sub(newPos, mousePos);
                 mousePos = newPos;
 
-                --local rot = Vector3.FromAxis(axis, 1 / 10);
-                select:GetTransform():RotateAxis(Vector3.FromAxis(axis,1), drag.y / 5.0, true);
+                local op = window:GetRender():GetManipulationTool():GetOperation();
+
+                if (op == Operation.Translate) then
+                    local dir = select:GetTransform():Direction(Vector3.FromAxis(axis,1), true);
+
+                    select:GetTransform():Translate(
+                        Vector3.FMul(dir, (-drag.y + drag.x) / 50.0),
+                        true
+                    );
+                else
+                    if (op == Operation.Rotate) then
+                        select:GetTransform():RotateAxis(Vector3.FromAxis(axis,1), (-drag.y + drag.x) / 10.0, true);
+                    end;
+                end;
+                --local dr = window:GetRender():GetManipulationTool():GetDrag(Input.GetMousePos());
             end;
         else
-            window:GetRender():GetManipulationTool():Require(camera, GUIWindow.Get());
-            mouseLeftPressed = false;
+            if (mouseLeftPressed == true) then
+                mouseLeftPressed = false;
+                --window:GetRender():GetManipulationTool():Clear();
+                window:GetRender():GetManipulationTool():DisableAxis();
+            end;
         end;
 
         -----------------------------------------------------------

@@ -150,10 +150,10 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
     // Vector3
     compiler->RegisterScriptClass("Math", [](lua_State* L){
-        static int NONEAxis = (int)Vector3::Axis::NONE;
-        static int XAxis    = (int)Vector3::Axis::AXIS_X;
-        static int YAxis    = (int)Vector3::Axis::AXIS_Y;
-        static int ZAxis    = (int)Vector3::Axis::AXIS_Z;
+        static int NONEAxis = (int)Axis::NONE;
+        static int XAxis    = (int)Axis::AXIS_X;
+        static int YAxis    = (int)Axis::AXIS_Y;
+        static int ZAxis    = (int)Axis::AXIS_Z;
 
         luabridge::getGlobalNamespace(L)
                 .beginNamespace("Axis")
@@ -169,14 +169,14 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                     }))
 
                     .addStaticFunction("FromAxis", static_cast<Vector3(*)(int,float)>([](int axis,float mul) -> Vector3 {
-                        switch ((Vector3::Axis)axis) {
-                            case Vector3::AXIS_X:
+                        switch ((Axis)axis) {
+                            case AXIS_X:
                                 return Vector3(mul, 0, 0);
-                            case Vector3::AXIS_Y:
+                            case AXIS_Y:
                                 return Vector3(0, mul, 0);
-                            case Vector3::AXIS_Z:
+                            case AXIS_Z:
                                 return Vector3(0, 0, mul);
-                            case Vector3::NONE:
+                            case NONE:
                                 return Vector3();
                         }
                     }))
@@ -236,8 +236,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("Forward", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Forward)
                 .addFunction("Up", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Up)
                 .addFunction("Right", (Vector3 (Framework::Helper::Transform::*)(void))&Helper::Transform::Right)
+                .addFunction("Direction", (Vector3 (Framework::Helper::Transform::*)(Vector3, bool))&Helper::Transform::Direction)
 
-                .addFunction("Translate", (void (Helper::Transform::*)(Vector3))&Helper::Transform::Translate)
+                .addFunction("Translate", (void (Helper::Transform::*)(Vector3, bool))&Helper::Transform::Translate)
                 .addFunction("Rotate",    (void (Helper::Transform::*)(Vector3, bool))&Helper::Transform::Rotate)
                 .addFunction("RotateAxis",    (void (Helper::Transform::*)(Vector3, double, bool))&Helper::Transform::RotateAxis)
 
@@ -255,11 +256,27 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
     // ManipulationTool
     compiler->RegisterScriptClass("Graphics", [](lua_State* L){
+        static unsigned int op_rotate = (int)Operation::Rotate;
+        static unsigned int op_translate = (int)Operation::Translate;
+        static unsigned int op_scale = (int)Operation::Scale;
+
+        luabridge::getGlobalNamespace(L)
+                .beginNamespace("Operation")
+                .addProperty("Rotate", &op_rotate, false)
+                .addProperty("Translate", &op_translate, false)
+                .addProperty("Scale", &op_scale, false);
+
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Types::ManipulationTool>("ManipulationTool")
-                    .addFunction("SetRings", (bool (Graphics::Types::ManipulationTool::*)(Mesh* x, Mesh* y, Mesh* z))&Graphics::Types::ManipulationTool::SetRings)
+                    .addFunction("SetRings", (bool (Graphics::Types::ManipulationTool::*)(Helper::Types::List<Mesh*>))&Graphics::Types::ManipulationTool::SetRings)
+                    .addFunction("SetArrows", (bool (Graphics::Types::ManipulationTool::*)(Helper::Types::List<Mesh*>))&Graphics::Types::ManipulationTool::SetArrows)
                     .addFunction("GetActiveAxis", (int (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetActiveAxis)
                     .addFunction("Require", (void (Graphics::Types::ManipulationTool::*)(Graphics::Camera*, ImGuiWindow*))&Graphics::Types::ManipulationTool::Require)
+                    .addFunction("Clear", (bool (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::Clear)
+                    .addFunction("GetOperation", (unsigned int (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetOperationInt)
+                    .addFunction("SetOperation", (void (Graphics::Types::ManipulationTool::*)(unsigned int))&Graphics::Types::ManipulationTool::SetOperationInt)
+                    .addFunction("DisableAxis", (void (Graphics::Types::ManipulationTool::*)())&Graphics::Types::ManipulationTool::DisableAxis)
+                    //.addFunction("GetDrag", (double (Graphics::Types::ManipulationTool::*)(const Vector2&))&Graphics::Types::ManipulationTool::GetDrag)
                 .endClass();
     });
 
@@ -381,6 +398,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("GetSize", (Math::Vector2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
                 .addFunction("WaitCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitCalculate)
                 .addFunction("WaitBuffersCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitBuffersCalculate)
+                .addFunction("WorldToScreenPoint", (Vector2 (Framework::Graphics::Camera::*)(Vector3))&Graphics::Camera::WorldToScreenPoint)
                 .endClass();
         Scripting::Script::RegisterCasting<Graphics::Camera*>("Camera", L);
     });

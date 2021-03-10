@@ -214,25 +214,15 @@ function Init()
 end;
 
 function LoadTools()
-    local rings = Mesh.LoadAll("Engine/rings2.obj"); -- List<Mesh*>
-
-    --rings:Get(0):GetMaterial():SetColor(Vector3.New(1, 0, 0));
-    --rings:Get(1):GetMaterial():SetColor(Vector3.New(0, 1, 0));
-    --rings:Get(2):GetMaterial():SetColor(Vector3.New(0, 0, 1));
-
-    --rings:Get(0):GetMaterial():SetColor(Vector3.New(1, 0, 0));
-    --rings:Get(1):GetMaterial():SetColor(Vector3.New(0, 1, 0));
-    --rings:Get(2):GetMaterial():SetColor(Vector3.New(0, 0, 1));
+    local rings = Mesh.LoadAll("Engine/ring 3.0.obj"); -- List<Mesh*>
+    local arrows = Mesh.LoadAll("Engine/arrows.obj");  -- List<Mesh*>
 
     Mesh.Inverse(rings);
 
-    --render:RegisterMeshes(rings);
+    --render:RegisterMeshes(arrows);
 
-    render:GetManipulationTool():SetRings(
-        rings:Get(0),
-        rings:Get(1),
-        rings:Get(2)
-    );
+    render:GetManipulationTool():SetRings(rings);
+    render:GetManipulationTool():SetArrows(arrows);
 end;
 
 function Start()
@@ -319,13 +309,15 @@ function Update()
     MouseUpdate();
 
     if (Input.GetKeyDown(KeyCode.W)) then
-        GUIWindow.SetGuizmoTool(1);
+        render:GetManipulationTool():SetOperation(Operation.Translate);
+        --GUIWindow.SetGuizmoTool(1);
     else
         if (Input.GetKeyDown(KeyCode.E)) then
-            GUIWindow.SetGuizmoTool(2);
+            render:GetManipulationTool():SetOperation(Operation.Rotate);
+            --GUIWindow.SetGuizmoTool(2);
         else
             if (Input.GetKeyDown(KeyCode.R)) then
-                GUIWindow.SetGuizmoTool(3);
+                --GUIWindow.SetGuizmoTool(3);
             end
         end
     end

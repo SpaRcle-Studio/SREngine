@@ -118,12 +118,12 @@ namespace Framework::Helper {
             );
         }*/
 
-        [[nodiscard]] Vector3 Direction(Vector3 preDir)   const noexcept;
+        [[nodiscard]] Vector3 Direction(Vector3 preDir, bool local = false)   const noexcept;
         [[nodiscard]] Vector3 Forward(bool local = false) const noexcept;
         [[nodiscard]] Vector3 Right(bool local = false)   const noexcept;
         [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
 
-        void Translate(Vector3 val) noexcept;
+        void Translate(Vector3 val, bool local = false) noexcept;
         void Rotate(Vector3 angle, bool local = false) noexcept;
         void RotateAxis(Vector3 axis, double angle, bool local = false) noexcept;
     public:

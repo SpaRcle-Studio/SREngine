@@ -14,6 +14,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <Math/Vector3.h>
+#include <Math/Matrix4x4.h>
 
 using namespace Framework::Helper;
 
@@ -43,6 +44,72 @@ namespace Framework::Graphics {
         void OnMove(glm::vec3 newValue) noexcept override;
     public:
         nlohmann::json Save() override;
+
+        Math::Vector2 WorldToScreenPoint(Math::Vector3 point3D) const noexcept {
+            Math::Matrix4x4 viewProjectionMatrix = m_projection * m_viewMat;
+            //transform world to clipping coordinates
+            point3D = viewProjectionMatrix.Translate(point3D);
+
+            int winX = (int)round(((point3D.x + 1) / 2.0) * m_cameraSize.x);
+            //we calculate -point3D.getY() because the screen Y axis is
+            //oriented top->down
+
+            int winY = (int)round(((1 - point3D.y) / 2.0) * m_cameraSize.y);
+            return Math::Vector2(winX, winY);
+        }
+
+        inline Math::Vector3 ScreenToWorldPoint(Math::Vector2 scr) const noexcept {
+            return Math::Vector3();
+
+            // NORMALISED DEVICE SPACE
+            //double x = 2.0 * 800 / m_cameraSize.x - 1;
+            //double y = 2.0 * 450 / m_cameraSize.y - 1;
+
+            /*scr = Math::Vector2(
+                    2.0 * scr.x / m_cameraSize.x - 1,
+                    2.0 * scr.y / m_cameraSize.y - 1
+                    );
+
+
+            Debug::Log(scr.ToString());
+
+            double x = scr.x;
+            double y = scr.y;
+
+            // HOMOGENEOUS SPACE
+            glm::vec4 screenPos = glm::vec4(x, -y, -1.0f, 1.0f);
+            // Projection/Eye Space
+            glm::mat4 ProjectView = m_projection * m_viewMat;
+            glm::mat4 viewProjectionInverse = inverse(ProjectView);
+            glm::vec4 worldPos = viewProjectionInverse * screenPos;
+            return glm::vec3(worldPos);*/
+
+            /*auto matInverse = Math::Matrix4x4(glm::inverse(this->m_viewMat *  this->m_projection));
+            return matInverse.GetTranslate(); // return screen resolution, lol*/
+
+            //auto matInverse = Math::Matrix4x4(glm::inverse(this->m_projection * this->m_viewMat));
+            //return matInverse.GetTranslate();
+
+            /*glm::mat4 matInverse = glm::inverse(this->m_viewMat *  this->m_projection); // see mul
+
+            float in[4];
+            float winZ = 1.0;
+
+            in[0]= (2.0f*((float)(scr.x-0)/(this->m_cameraSize.x-0)))-1.0f,
+                    in[1]=1.0f-(2.0f*((float)(scr.y-0)/(this->m_cameraSize.y-0)));
+            in[2]=2.0* winZ -1.0;
+            in[3]=1.0;
+
+            glm::vec4 pos = glm::vec4(in[0], in[1], in[2], in[3]) * matInverse;
+
+            pos.w = 1.0 / pos.w;
+
+            pos.x *= pos.w;
+            pos.y *= pos.w;
+            pos.z *= pos.w;
+
+            return glm::vec3(pos);*/
+        }
 
         //[[nodiscard]] inline bool IsUse() const noexcept { return this->m_isUse; }
         //inline void SetUse(bool value) noexcept { this->m_isUse = value; }

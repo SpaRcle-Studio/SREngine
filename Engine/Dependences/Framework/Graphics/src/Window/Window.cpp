@@ -322,19 +322,21 @@ void Framework::Graphics::Window::Draw() {
 
         //!-----------------------------------------------------------------------------//
 
-        if (m_requireGetAimed && m_aimedCameraTarget == camera && m_aimedWindowTarget) {
-            this->m_render->DrawSingleColors();
+        if (m_requireGetAimed) {
+            if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {
+                this->m_render->DrawSingleColors();
 
-            glm::vec2 pos = this->GetGlobalWindowMousePos(camera, m_aimedWindowTarget);
-            glm::vec3 color = this->m_env->GetPixelColor(pos);
+                glm::vec2 pos = this->GetGlobalWindowMousePos(camera, m_aimedWindowTarget);
+                glm::vec3 color = this->m_env->GetPixelColor(pos);
 
-            this->m_env->ClearBuffers();
+                this->m_env->ClearBuffers();
 
-            int id = this->m_render->GetColorBuffer()->GetSelectColorObject(color);
-            if (id != -1)
-                this->m_aimedMesh = this->m_render->GetMesh(id);
+                int id = this->m_render->GetColorBuffer()->GetSelectColorObject(color);
+                if (id != -1)
+                    this->m_aimedMesh = this->m_render->GetMesh(id);
 
-            m_requireGetAimed = false;
+                m_requireGetAimed = false;
+            }
         }
 
         this->m_render->GetManipulationTool()->Process();
