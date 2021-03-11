@@ -19,6 +19,8 @@ void ManipulationTool::Process() {
     if (!m_required || !m_isDraw)
         return;
 
+    this->m_oldMouseDist = 0;
+
     glm::vec2 pos = m_render->GetWindow()->GetGlobalWindowMousePos(m_targetCamera, m_targetWindow);
     glm::vec4 color = m_env->GetTexturePixel(
             pos,
@@ -33,6 +35,20 @@ void ManipulationTool::Process() {
         m_activeAxis = AXIS_Z;
     else
         m_activeAxis = NONE;
+
+    this->m_mouseNeedReCalc = true;
+
+    if (m_activeAxis == Axis::AXIS_X) {
+        m_Dirs[0] = m_targetCamera->WorldToScreenPoint(m_rotation.Radians().ToQuat() * Transform::right);
+        m_Dirs[1] = m_targetCamera->WorldToScreenPoint(m_rotation.Radians().ToQuat() * -Transform::right);
+
+        //Vector2 scrObjCenter = m_targetCamera->WorldToScreenPoint(m_position);
+        //Vector2 mouse = Vector2(pos.x, m_targetCamera->GetSize().y - pos.y);
+
+        //Debug::Log(m_Dirs[0].ToString());
+        //Debug::Log(mouse.ToString());
+        //Debug::Log(m_Dirs[1].ToString());
+    }
 
     //if (m_activeAxis == Axis::AXIS_X || m_activeAxis == Axis::AXIS_Z) {
     //    m_twoDirs[0] = m_targetCamera->WorldToScreenPoint(m_rotation.Radians().ToQuat() * Transform::up);// * 100.0;
@@ -54,6 +70,53 @@ void ManipulationTool::Process() {
     m_required = false;
 }
 
+bool ManipulationTool::SelectMeshes() {
+    switch (m_operation) {
+        case Operation::Translate:
+            if (!m_arrowX || !m_arrowY || !m_arrowZ)
+                return false;
+            x = m_arrowX;
+            y = m_arrowY;
+            z = m_arrowZ;
+            break;
+        case Operation::Rotate:
+            if (!m_ringX || !m_ringY || !m_ringZ)
+                return false;
+            x = m_ringX;
+            y = m_ringY;
+            z = m_ringZ;
+            break;
+        case Operation::Scale:
+            return false;
+            break;
+    }
+    return true;
+}
+
+void ManipulationTool::SimpleDraw(Shader* shader) {
+    if (!SelectMeshes() || !m_targetCamera || !m_targetWindow || m_countTargetMeshes == 0)
+        return;
+
+    m_meshesMutex.lock();
+
+    this->CalculateCenter();
+    this->m_env->SetDepthTestEnabled(false);
+
+    x->SetMatrix(m_position.ToGLM(), m_rotation.ToGLM(), Vector3(sqrt(m_distance)).ToGLM());
+    glm::mat4 model = x->GetModelMatrix();
+
+    shader->SetMat4("modelMat", model);
+    shader->SetInt("id", (int)10000000);
+
+    x->SimpleDraw();
+    y->SimpleDraw();
+    z->SimpleDraw();
+
+    this->m_env->SetDepthTestEnabled(true);
+
+    m_meshesMutex.unlock();
+}
+
 void ManipulationTool::Draw() {
     if (m_countTargetMeshes == 0)
         return;
@@ -61,30 +124,8 @@ void ManipulationTool::Draw() {
     if (!m_targetCamera)
         return;
 
-    Mesh
-        *x = nullptr,
-        *y = nullptr,
-        *z = nullptr;
-
-    switch (m_operation) {
-        case Operation::Translate:
-            if (!m_arrowX || !m_arrowY || !m_arrowZ)
-                return;
-            x = m_arrowX;
-            y = m_arrowY;
-            z = m_arrowZ;
-            break;
-        case Operation::Rotate:
-            if (!m_ringX || !m_ringY || !m_ringZ)
-                return;
-            x = m_ringX;
-            y = m_ringY;
-            z = m_ringZ;
-            break;
-        case Operation::Scale:
-            return;
-            break;
-    }
+    if (!SelectMeshes())
+        return;
 
     m_meshesMutex.lock();
 
@@ -116,61 +157,6 @@ void ManipulationTool::Draw() {
 }
 
 //bool ManipulationTool::SetRings(Mesh *_ringX, Mesh *_ringY, Mesh *_ringZ) {
-
-bool ManipulationTool::SetArrows(Helper::Types::List<Mesh *> meshes) {
-    if (meshes.Size() != 3) {
-        Debug::Error("ManipulateTool::SetArrows() : count meshes is not equals 3!");
-        return false;
-    }
-
-    this->m_arrowX = meshes[0];
-    this->m_arrowY = meshes[1];
-    this->m_arrowZ = meshes[2];
-
-    m_arrowX->SetRender(m_render);
-    m_arrowY->SetRender(m_render);
-    m_arrowZ->SetRender(m_render);
-
-    m_arrowX->SetToolID(1);
-    m_arrowY->SetToolID(2);
-    m_arrowZ->SetToolID(3);
-
-    m_ringX->AddUsePoint();
-    m_ringY->AddUsePoint();
-    m_ringZ->AddUsePoint();
-
-    return true;
-}
-
-
-bool ManipulationTool::SetRings(Helper::Types::List<Mesh*> meshes) {
-    if (meshes.Size() != 3) {
-        Debug::Error("ManipulateTool::SetRings() : count meshes is not equals 3!");
-        return false;
-    }
-
-    this->m_ringX = meshes[0];
-    this->m_ringY = meshes[1];
-    this->m_ringZ = meshes[2];
-
-    m_ringX->SetRender(m_render);
-    m_ringY->SetRender(m_render);
-    m_ringZ->SetRender(m_render);
-
-    m_ringX->SetToolID(1);
-    m_ringY->SetToolID(2);
-    m_ringZ->SetToolID(3);
-
-    //m_ringX->SetRender(m_render);
-    //m_ringY->SetRender(m_render);
-    //m_ringZ->SetRender(m_render);
-
-    m_ringX->AddUsePoint();
-    m_ringY->AddUsePoint();
-    m_ringZ->AddUsePoint();
-
-    return true;
-}
 
 ManipulationTool::ManipulationTool(Framework::Graphics::Render *render) : m_env(Environment::Get()) {
     this->m_render = render;
@@ -312,14 +298,77 @@ void ManipulationTool::DisableAxis() noexcept {
     //this->m_activeAxis = Math::Vector3::AXIS_X;
 }
 
-double ManipulationTool::GetDrag(const Vector2& newMousePos) {
-    //double dist1 = newMousePos.Distance(m_twoDirs[0]);
-    //double dist2 = newMousePos.Distance(m_twoDirs[1]);
+double ManipulationTool::GetDrag() {
+    Vector2 pos = m_render->GetWindow()->GetGlobalWindowMousePos(m_targetCamera, m_targetWindow);
+    pos.y = m_targetCamera->GetSize().y - pos.y;
+
+    double dist1 = pos.Distance(m_Dirs[0]);
+    double dist2 = pos.Distance(m_Dirs[1]);
 
     //printf("%f %f\n", dist1, dist2);
+    double drag = m_mouseNeedReCalc ? 0.0 : (dist1 - dist2) - m_oldMouseDist;
 
-    return 0;
+    m_mouseNeedReCalc = false;
+
+    m_oldMouseDist = dist1 - dist2;
+
+    if (drag != 0)
+        printf("%f\n", drag);
+
+    return drag;
 }
 
+bool ManipulationTool::SetArrows(Helper::Types::List<Mesh *> meshes) {
+    if (meshes.Size() != 3) {
+        Debug::Error("ManipulateTool::SetArrows() : count meshes is not equals 3!");
+        return false;
+    }
+
+    this->m_arrowX = meshes[0];
+    this->m_arrowY = meshes[1];
+    this->m_arrowZ = meshes[2];
+
+    m_arrowX->SetRender(m_render);
+    m_arrowY->SetRender(m_render);
+    m_arrowZ->SetRender(m_render);
+
+    m_arrowX->SetToolID(1);
+    m_arrowY->SetToolID(2);
+    m_arrowZ->SetToolID(3);
+
+    m_ringX->AddUsePoint();
+    m_ringY->AddUsePoint();
+    m_ringZ->AddUsePoint();
+
+    return true;
+}
+bool ManipulationTool::SetRings(Helper::Types::List<Mesh*> meshes) {
+    if (meshes.Size() != 3) {
+        Debug::Error("ManipulateTool::SetRings() : count meshes is not equals 3!");
+        return false;
+    }
+
+    this->m_ringX = meshes[0];
+    this->m_ringY = meshes[1];
+    this->m_ringZ = meshes[2];
+
+    m_ringX->SetRender(m_render);
+    m_ringY->SetRender(m_render);
+    m_ringZ->SetRender(m_render);
+
+    m_ringX->SetToolID(1);
+    m_ringY->SetToolID(2);
+    m_ringZ->SetToolID(3);
+
+    //m_ringX->SetRender(m_render);
+    //m_ringY->SetRender(m_render);
+    //m_ringZ->SetRender(m_render);
+
+    m_ringX->AddUsePoint();
+    m_ringY->AddUsePoint();
+    m_ringZ->AddUsePoint();
+
+    return true;
+}
 
 

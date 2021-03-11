@@ -391,6 +391,8 @@ void Framework::Graphics::Render::DrawSingleColors() noexcept {
         m_meshes[m_t]->SimpleDraw();
     }
 
+    //this->m_manipulate->SimpleDraw(m_flatGeometryShader);
+
     this->m_env->UseShader(0);
 }
 

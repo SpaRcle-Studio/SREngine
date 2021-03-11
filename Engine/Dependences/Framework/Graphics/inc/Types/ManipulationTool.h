@@ -67,16 +67,24 @@ namespace Framework::Graphics::Types {
         std::mutex m_meshesMutex            = std::mutex();
 
         //double m_dists[2] = { 0.0, 0.0 };
-       // Math::Vector2 m_twoDirs[2] = {
-        //        Math::Vector2(),
-        //        Math::Vector2()
-       // };
+        bool m_mouseNeedReCalc = true;
+        double m_oldMouseDist = 0.0;
+        Math::Vector2 m_Dirs[2] = {
+                Math::Vector2(), // +
+                Math::Vector2(), // -
+        };
+
+        Mesh
+            *x = nullptr,
+            *y = nullptr,
+            *z = nullptr;
     private:
+        bool SelectMeshes();
         void CalculateCenter();
     public:
         [[nodiscard]] inline unsigned int GetOperationInt() const noexcept { return (unsigned int)m_operation; }
         inline void SetOperationInt(unsigned int value) noexcept { this->m_operation = (Operation)value; }
-        double GetDrag(const Math::Vector2& newMousePos);
+        double GetDrag();
         inline void SetActiveAxis(const Math::Axis& axis) noexcept {this->m_activeAxis = axis; }
         void DisableAxis() noexcept;
         bool Clear();
@@ -104,6 +112,7 @@ namespace Framework::Graphics::Types {
         }
     public:
         void Draw();
+        void SimpleDraw(Shader* shader);
         void Process();
     };
 }

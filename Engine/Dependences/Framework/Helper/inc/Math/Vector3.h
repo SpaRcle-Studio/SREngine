@@ -90,6 +90,13 @@ namespace Framework::Helper::Math {
             double coord[3] = { 0 };
         };
 
+        double Max() const {
+            return x > y && x > z ? x : y > x && y > z ? y : z;
+        }
+        double Min() const {
+            return x < y && x < z ? x : y < x && y < z ? y : z;
+        }
+
         [[nodiscard]] inline bool Empty() const {
             return (x == 0 && y == 0 && z == 0);
         }
@@ -120,12 +127,26 @@ namespace Framework::Helper::Math {
             y = 0;
             z = 0;
         }
+        _FORCE_INLINE_ Vector3(const float* vec) {
+            x = (double)vec[0];
+            y = (double)vec[1];
+            z = (double)vec[2];
+        }
+        _FORCE_INLINE_ Vector3(const unsigned char* axis) {
+            x = (double)axis[0];
+            y = (double)axis[1];
+            z = (double)axis[2];
+        }
         _FORCE_INLINE_ Vector3(double p_x, double p_y, double p_z) {
             x = p_x;
             y = p_y;
             z = p_z;
         }
-
+        _FORCE_INLINE_ Vector3(double p) {
+            x = p;
+            y = p;
+            z = p;
+        }
         [[nodiscard]] double Distance(Vector3 point) const {
             return sqrt(
                     pow(point.x - x, 2) +

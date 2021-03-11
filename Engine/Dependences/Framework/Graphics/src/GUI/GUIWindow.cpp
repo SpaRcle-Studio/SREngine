@@ -308,15 +308,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
         }
     }
 
-    //ImGuiIO& io = ImGui::GetIO();
-    //ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
-
     pos += (win_size - img_size) / 2.f;
     ImGuizmo::SetRect(pos.x, pos.y, img_size.x, img_size.y);
-
-
-    //glm::vec3 camPos = camera->GetGLPosition();
-    //ImGuizmo::SetCameraPos(camPos.x, camPos.y, -camPos.z);
 
     static float bounds[] = {-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f};
     static float boundsSnap[] = {0.1f, 0.1f, 0.1f};
@@ -329,15 +322,61 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
 
     glm::mat4 mat = gameObject->GetTransform()->GetMatrix();
 
+    static float axis[3] = {0,0,0};
+
+    static float value = 0.0;
+    static float old_value = 0.0;
+
     if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
             boundsAct ? ImGuizmo::BOUNDS : g_currentGuizmoOperation, g_currentGuizmoMode,
             &mat[0][0],
-            &delta[0][0], snapAct ? &snap[0] : nullptr, boundsAct ? bounds : nullptr, boundsSnap,
-            NULL)) {
-        gameObject->GetTransform()->SetMatrix(delta, mat, g_currentGuizmoPivot);
+            &delta[0][0],  nullptr, nullptr, boundsSnap,
+            &value, &axis[0]))
+    {
+        if (g_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
+            if (abs((value - old_value)) < 1)
+                gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(2), (value - old_value) * 20.0, true);
+        } else if (g_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
+            gameObject->GetTransform()->Translate(gameObject->GetTransform()->Direction(Vector3(axis), true) * value, true);
+
+            //Matrix4x4 mat4x4 = delta;
+            //Vector3 trans = mat4x4.GetTranslate();
+
+            //gameObject->GetTransform()->DeltaTranslate(trans);
+
+                //Vector3 dir = parent->GetTransform()->GetRotation().Radians().ToQuat() * trans.Radians().InverseAxis(2);
+                //gameObject->GetTransform()->Translate(-dir, true);
+
+            //Matrix4x4 rotate = Matrix4x4(Vector3(0,0,0), gameObject->GetTransform()->GetRotation(), Vector3(1,1,1));
+
+            //gameObject->GetTransform()->Translate((mat4x4.Rotate(Vector3(0,90,0))).GetTranslate(), true);
+
+            //Matrix4x4 local = Matrix4x4(Vector3(0,0,0), gameObject->GetTransform()->GetRotation(true), Vector3(1,1,1));
+            //gameObject->GetTransform()->Translate((mat4x4 * local).GetTranslate(), true);
+
+            /*Vector3 tr = mat4x4.GetTranslate();
+
+            double max = tr.Max();
+            double min = tr.Min();
+
+            double val = abs(min) > max ? min : max;
+
+            //Vector3 dir = mat4x4.GetTranslate().Normalize();
+            if (val < 1) {
+                Vector3 translate = gameObject->GetTransform()->Direction(axis, true) * val;
+                //Vector3 translate = mat4x4.GetTranslate().Rotate(gameObject->GetTransform()->GetRotation());
+
+
+                gameObject->GetTransform()->Translate(translate, true);
+            }*/
+        }
+
+        //gameObject->GetTransform()->SetMatrix(delta, mat, g_currentGuizmoPivot);
     }
+
+    old_value = value;
 
     //ImGuizmo::ViewManipulate(cameraView, 10, ImVec2(0, 0), ImVec2(128, 128), 0x10101010);
 }

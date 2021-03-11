@@ -309,15 +309,15 @@ function Update()
     MouseUpdate();
 
     if (Input.GetKeyDown(KeyCode.W)) then
-        render:GetManipulationTool():SetOperation(Operation.Translate);
-        --GUIWindow.SetGuizmoTool(1);
+        --render:GetManipulationTool():SetOperation(Operation.Translate);
+        GUIWindow.SetGuizmoTool(1);
     else
         if (Input.GetKeyDown(KeyCode.E)) then
-            render:GetManipulationTool():SetOperation(Operation.Rotate);
-            --GUIWindow.SetGuizmoTool(2);
+            --render:GetManipulationTool():SetOperation(Operation.Rotate);
+            GUIWindow.SetGuizmoTool(2);
         else
             if (Input.GetKeyDown(KeyCode.R)) then
-                --GUIWindow.SetGuizmoTool(3);
+                GUIWindow.SetGuizmoTool(3);
             end
         end
     end

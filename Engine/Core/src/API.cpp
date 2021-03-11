@@ -276,7 +276,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                     .addFunction("GetOperation", (unsigned int (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetOperationInt)
                     .addFunction("SetOperation", (void (Graphics::Types::ManipulationTool::*)(unsigned int))&Graphics::Types::ManipulationTool::SetOperationInt)
                     .addFunction("DisableAxis", (void (Graphics::Types::ManipulationTool::*)())&Graphics::Types::ManipulationTool::DisableAxis)
-                    //.addFunction("GetDrag", (double (Graphics::Types::ManipulationTool::*)(const Vector2&))&Graphics::Types::ManipulationTool::GetDrag)
+                    .addFunction("GetDrag", (double (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetDrag)
                 .endClass();
     });
 

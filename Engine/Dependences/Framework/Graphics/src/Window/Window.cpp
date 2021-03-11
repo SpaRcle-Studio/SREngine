@@ -313,8 +313,8 @@ void Framework::Graphics::Window::Draw() {
 
             this->m_render->DrawGeometry();
 
-            if (camera == m_render->GetManipulationTool()->GetTargetCamera())
-                this->m_render->GetManipulationTool()->Draw();
+            //!if (camera == m_render->GetManipulationTool()->GetTargetCamera())
+            //!   this->m_render->GetManipulationTool()->Draw();
 
             this->m_render->DrawTransparentGeometry();
         }
@@ -339,7 +339,7 @@ void Framework::Graphics::Window::Draw() {
             }
         }
 
-        this->m_render->GetManipulationTool()->Process();
+        //!this->m_render->GetManipulationTool()->Process();
     }
 
     if (m_GUIEnabled) {

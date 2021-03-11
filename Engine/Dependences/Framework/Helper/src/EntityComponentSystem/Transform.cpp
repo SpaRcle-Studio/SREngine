@@ -103,6 +103,31 @@ void Framework::Helper::Transform::SetScale(Vector3 val, bool pivot) {
     this->SetPosition(temp);
 }
 
+void Framework::Helper::Transform::DeltaTranslate(Framework::Helper::Math::Vector3 delta) {
+    if (!m_parent)
+        this->Translate(delta, true);
+    else {
+        if (delta.Empty())
+            return;
+
+        Vector3 newPos = m_globalPosition + delta;
+
+        double dist = m_globalPosition.Distance(newPos);
+        Vector3 dir = m_globalPosition.Direction(newPos);
+
+        Vector3 trans = Direction(dir, false) * dist;
+
+        this->Translate(trans, true);
+
+        //m_localPosition += delta.Rotate(m_parent->GetRotation().ToQuat());
+
+        //this->UpdateChildRotation(true);
+
+        //this->m_gameObject->UpdateComponentsPosition();
+    }
+}
+
+
 void Framework::Helper::Transform::Translate(Vector3 val, bool local) noexcept {
     if (local) {
         m_localPosition += val;
@@ -331,7 +356,7 @@ glm::mat4 Framework::Helper::Transform::GetMatrix(bool local) const noexcept  {
 
 
 
-    /*if (local) {
+    if (local) {
         glm::mat4 localMat = glm::translate(glm::mat4(1.0f), m_globalPosition.ToGLM());
         //!localMat *= mat4_cast(m_globalRotation.InverseAxis(2).ToQuat().ToGLM());
         localMat *= mat4_cast(m_localRotation.InverseAxis(2).ToQuat().ToGLM());
@@ -340,12 +365,12 @@ glm::mat4 Framework::Helper::Transform::GetMatrix(bool local) const noexcept  {
         //localMat *= mat4_cast(glm::inverse(m_localRotation.InverseAxis(2).ToQuat(true).ToGLM()));
         localMat = glm::scale(localMat, m_globalScale.ToGLM());
         return localMat;
-    } else {*/
+    } else {
         glm::mat4 globalMat = glm::translate(glm::mat4(1.0f), m_globalPosition.ToGLM());
         globalMat *= mat4_cast(m_globalRotation.InverseAxis(2).ToQuat().ToGLM());
         globalMat =  glm::scale(globalMat, m_globalScale.ToGLM());
         return globalMat;
-    //}
+    }
 
     //return glm::mat4(1);
 }
@@ -410,6 +435,8 @@ void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
                 newPos +
                 Direction(m_localPosition * m_parent->m_globalScale)// * m_parent->m_globalScale
                 - defDir;
+
+        // Direction(m_localPosition * m_parent->m_globalScale) = m_globalPosition - newPos + defDir;
 
         /*
 
