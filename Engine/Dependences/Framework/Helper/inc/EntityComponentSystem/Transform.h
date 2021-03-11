@@ -32,10 +32,7 @@ namespace Framework::Helper {
         Transform(GameObject* parent);
         ~Transform() = default;
     public:
-        void OnParentSet(Transform* parent) {
-            this->m_parent = parent;
-            this->UpdateDefParentDir();
-        }
+        void OnParentSet(Transform* parent);
         void OnParentRemove(Transform* parent) {
             m_parent = nullptr;
         }
@@ -155,7 +152,7 @@ namespace Framework::Helper {
         inline static const Vector3 forward   = Vector3(0, 0, 1 );
         inline static const Vector3 up        = Vector3( 0, 1, 0 );
     private:
-        Vector3         m_localPosition              = { 2, 2, 2 };
+        Vector3         m_localPosition              = { 0, 0, 0 };
         //Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
         Vector3         m_localRotation              = { 0, 0, 0 };
         Vector3         m_localScale                 = { 1, 1, 1 };

@@ -408,11 +408,11 @@ void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
     this->m_globalRotation = m_parent->m_globalRotation;
     {
         Vector3 point = m_parent->m_globalPosition;
-        Vector3 defDir = -m_parent->Direction(m_defParentDir);
+        //!Vector3 defDir = -m_parent->Direction(m_defParentDir);
         //double dist = m_globalPosition.Distance(point); // некорректно когда объект сдвинут, нужно компенсировать!
 
         //Vector3 newPos = point + defDir * dist;
-        Vector3 newPos = point + defDir;
+        Vector3 newPos = point;//! + defDir;
         //this->m_globalPosition = originPos;
 
         //!----------------------------------------------------------
@@ -429,12 +429,14 @@ void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
         //if (origDist > 0)
         //    this->m_globalPosition = newPos - Direction(origDir);
         //else
-        ///Vector3 local = Vector3(2,2,2);
 
-        this->m_globalPosition =
-                newPos +
-                Direction(m_localPosition * m_parent->m_globalScale)// * m_parent->m_globalScale
-                - defDir;
+        if (m_localPosition.Empty())
+            this->m_globalPosition = newPos;//! - defDir;
+        else
+            this->m_globalPosition =
+                    newPos +
+                    Direction(m_localPosition * m_parent->m_globalScale)// * m_parent->m_globalScale
+                    ;//!- defDir;
 
         // Direction(m_localPosition * m_parent->m_globalScale) = m_globalPosition - newPos + defDir;
 
@@ -532,6 +534,12 @@ void Framework::Helper::Transform::UpdateLocalRotation(Vector3 delta) {
     //    this->m_localRotation = m_globalRotation - m_parent->m_globalRotation;
     //} else
     //    m_localRotation = m_globalRotation;
+}
+
+void Framework::Helper::Transform::OnParentSet(Framework::Helper::Transform *parent) {
+    this->m_parent = parent;
+    this->UpdateDefParentDir();
+    this->UpdateChildRotation(true);
 }
 
 

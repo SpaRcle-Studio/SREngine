@@ -160,6 +160,8 @@ namespace Framework::Helper::Math {
         }
 
         [[nodiscard]] Vector3 Direction(Vector3 point) const noexcept {
+            if (point == *this)
+                return Vector3();
             Vector3 heading = point - (*this);
             double distance = Magnitude(heading);
             return heading / distance;

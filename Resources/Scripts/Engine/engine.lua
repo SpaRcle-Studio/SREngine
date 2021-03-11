@@ -98,7 +98,7 @@ function RotationTest()
 
     cube_child:AddComponent(mesh:Base());
     cube_child:GetTransform():Translate(
-        Vector3.FMul(cube_child:GetTransform():Forward(), 4.0)
+        Vector3.FMul(cube_child:GetTransform():Forward(), 4.0), true
     );
 
     --cube_child:GetTransform():Translate(Vector3.FMul(cube_child:GetTransform():Up(), 2.0));
@@ -143,8 +143,12 @@ function HierarchyTest()
 
     cube_child:AddComponent(mesh:Base());
     cube_child:GetTransform():Translate(
-        Vector3.FMul(cube_child:GetTransform():Forward(), 2.0)
+        Vector3.FMul(cube_child:GetTransform():Right(), 2.0), true
     );
+    cube_child:GetTransform():Translate(
+        Vector3.FMul(cube_child:GetTransform():Forward(), 2.0), true
+    );
+
 
     cube_parent:AddChild(cube_child);
 
@@ -162,7 +166,7 @@ function HierarchyTest()
 
     cube_child2:AddComponent(mesh:Base());
     cube_child2:GetTransform():Translate(
-        Vector3.FMul(cube_child2:GetTransform():Forward(), 4.0)
+        Vector3.FMul(cube_child2:GetTransform():Right(), 2.0), true
     );
 
     cube_child:AddChild(cube_child2);

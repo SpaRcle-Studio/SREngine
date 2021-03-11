@@ -339,7 +339,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             if (abs((value - old_value)) < 1)
                 gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(2), (value - old_value) * 20.0, true);
         } else if (g_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
-            gameObject->GetTransform()->Translate(gameObject->GetTransform()->Direction(Vector3(axis), true) * value, true);
+            if (value < 1)
+                gameObject->GetTransform()->Translate(gameObject->GetTransform()->Direction(Vector3(axis), true) * value, true);
 
             //Matrix4x4 mat4x4 = delta;
             //Vector3 trans = mat4x4.GetTranslate();
