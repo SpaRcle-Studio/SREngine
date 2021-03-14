@@ -133,8 +133,8 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
 
     ImGui::Text("[Parent direction]");
 
-    glm::vec3 p_dir = gameObject->GetTransform()->GetParentDir().ToGLM();
-    ImGui::InputFloat3("Dir", &p_dir[0]);
+//    glm::vec3 p_dir = gameObject->GetTransform()->GetParentDir().ToGLM();
+ //   ImGui::InputFloat3("Dir", &p_dir[0]);
 
     std::vector<Framework::Helper::Component*> comps = gameObject->GetComponents();
     for (Framework::Helper::Component* comp : comps) {
@@ -339,9 +339,29 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             if (abs((value - old_value)) < 1)
                 gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(2), (value - old_value) * 20.0, true);
         } else if (g_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
-            if (value < 1)
-                gameObject->GetTransform()->Translate(gameObject->GetTransform()->Direction(Vector3(axis), true) * value, true);
+            if (value < 1) {
+                if (g_currentGuizmoMode == ImGuizmo::LOCAL)
+                    gameObject->GetTransform()->Translate(
+                            gameObject->GetTransform()->Direction(Vector3(axis), true) * value, true);
+                else {
+                    gameObject->GetTransform()->GlobalTranslate(axis, value);
 
+                    //Quaternion q = Vector3(24, 43, 56);
+                    //Vector3 v = q * Vector3(1, 0, 0);
+                    //Debug::Log(v.ToString());
+                    //Debug::Log((Quaternion(-Vector3(24, 43, 56)) * v).ToString());
+
+                    //Vector3 dir = gameObject->GetTransform()->Direction(axis, false);
+                    //gameObject->GetTransform()->Translate(dir * (value / 100.0), true);
+
+                    //if (!gameObject->GetParent())
+                    //    gameObject->GetTransform()->Translate(Vector3(axis) * value, true);
+                   // else {
+                        //Vector3 global = Vector3(axis);//.Rotate(gameObject->GetParent()->GetTransform()->GetRotation());
+                        //gameObject->GetTransform()->Translate(global * value, true);
+                   // }
+                }
+            }
             //Matrix4x4 mat4x4 = delta;
             //Vector3 trans = mat4x4.GetTranslate();
 

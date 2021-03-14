@@ -214,6 +214,16 @@ namespace Framework::Helper::Math {
             return coord[p_axis];
         }
 
+        inline Vector3 Replace(int from, int to) const noexcept {
+            return Vector3(
+                    x == from ? to : x,
+                    y == from ? to : y,
+                    z == from ? to : z);
+        }
+        inline Vector3 Abs() const noexcept {
+            return Vector3(abs(x), abs(y), abs(z));
+        }
+
         static inline double Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
         [[nodiscard]] double Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
 

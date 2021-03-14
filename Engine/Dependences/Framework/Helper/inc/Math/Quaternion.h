@@ -83,6 +83,7 @@ namespace Framework::Helper::Math {
         }
 
         Vector3 operator*(const Vector3 &v) const;
+        Vector3 operator/(const Vector3 &v) const;
         Quaternion operator*(const Quaternion& rhs) const {
             return Quaternion(self * rhs.self);
         }

@@ -59,3 +59,16 @@ Framework::Helper::Math::Matrix4x4 Framework::Helper::Math::Quaternion::ToMat4x4
     return Matrix4x4(mat4_cast(self));
 }
 
+Framework::Helper::Math::Vector3
+Framework::Helper::Math::Quaternion::operator/(const Framework::Helper::Math::Vector3 &v) const {
+    glm::vec3 rot = EulerAngle().ToGLM();
+
+    glm::fquat q = glm::vec3(1) / glm::vec3(
+            rot.x,
+            rot.y,
+            -rot.z
+    );
+
+    return q * v.ToGLM();
+}
+

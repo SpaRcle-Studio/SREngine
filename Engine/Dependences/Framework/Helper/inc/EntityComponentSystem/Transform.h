@@ -85,9 +85,9 @@ namespace Framework::Helper {
             return local ? m_localScale : m_globalScale;
             //return glm::vec3();
         }
-        [[nodiscard]] inline Vector3 GetParentDir() const noexcept {
-            return m_defParentDir;
-        }
+        //[[nodiscard]] inline Vector3 GetParentDir() const noexcept {
+         //   return //!m_defParentDir;
+        //}
 
         /*glm::vec3 Direction(glm::vec3 point) noexcept;
 
@@ -120,7 +120,8 @@ namespace Framework::Helper {
         [[nodiscard]] Vector3 Right(bool local = false)   const noexcept;
         [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
 
-        void DeltaTranslate(Vector3 delta);
+        //void DeltaTranslate(Vector3 delta);
+        void GlobalTranslate(Vector3 axis, double value);
         void Translate(Vector3 val, bool local = false) noexcept;
         void Rotate(Vector3 angle, bool local = false) noexcept;
         void RotateAxis(Vector3 axis, double angle, bool local = false) noexcept;
@@ -172,7 +173,7 @@ namespace Framework::Helper {
         //glm::quat       m_globalRotation             = glm::quat(glm::radians(glm::vec3(0,0,0)));
         glm::vec3       m_globalScale                = { 1, 1, 1 };*/
 
-        Vector3         m_defParentDir               = forward;
+        //!Vector3         m_defParentDir               = forward;
         GameObject*     m_gameObject                 = nullptr;
         Transform*      m_parent                     = nullptr;
     };
