@@ -3,7 +3,7 @@ local colored_id;    -- int
 local final_id;      -- int
 local bloom_id;      -- int
 local bloomBlur_id;  -- int
-local skybox_id;     -- int
+--local skybox_id;     -- int
 local depth_id;      -- int
 local stencil_id;    -- int
 
@@ -48,7 +48,7 @@ function SetIndices()
     bloomBlur_id  = camera:GetPostProcessing():GetBlurBloomMask();
     --depth_id      = camera:GetPostProcessing():GetCustomColorBuffer(2);
     depth_id      = camera:GetPostProcessing():GetDepthBuffer();
-    skybox_id     = camera:GetPostProcessing():GetSkyboxColor();
+    --skybox_id     = camera:GetPostProcessing():GetSkyboxColor();
     stencil_id    = camera:GetPostProcessing():GetStencilBuffer();
 
     enabled = true;
@@ -152,7 +152,8 @@ function Displayes()
     GUIWindow.DrawTexture(
         GUIWindow.GetSize(),
         cameraSize,
-        skybox_id,
+        --skybox_id,
+        camera:GetPostProcessing():GetSkyboxColor(),
         true
     );
     GUIWindow.EndChild();

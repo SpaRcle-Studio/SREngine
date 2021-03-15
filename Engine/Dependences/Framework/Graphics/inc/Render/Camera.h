@@ -27,6 +27,7 @@ namespace Framework::Graphics {
         ~Camera();
         Camera(unsigned char countHDRBuffers = 2);
         void UpdateProjection(unsigned int w, unsigned int h);
+        void UpdateProjection();
 
         inline void SetDirectOutput(bool value) noexcept {
             this->m_isEnableDirectOut = value;
@@ -43,6 +44,8 @@ namespace Framework::Graphics {
         void OnRotate(glm::vec3 newValue) noexcept override;
         void OnMove(glm::vec3 newValue) noexcept override;
     public:
+        bool DrawOnInspector() override;
+
         nlohmann::json Save() override;
 
         Math::Vector2 WorldToScreenPoint(Math::Vector3 point3D) const noexcept {
@@ -160,6 +163,7 @@ namespace Framework::Graphics {
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */
         void UpdateShader(Shader* shader) noexcept;
+        void UpdateShaderProjView(Shader* shader) noexcept;
     private:
         void UpdateView() noexcept;
         bool Calculate() noexcept;

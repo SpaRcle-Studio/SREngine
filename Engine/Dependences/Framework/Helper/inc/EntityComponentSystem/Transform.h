@@ -122,6 +122,8 @@ namespace Framework::Helper {
 
         //void DeltaTranslate(Vector3 delta);
         void GlobalTranslate(Vector3 axis, double value);
+        void GlobalRotateAxis(Vector3 axis, double value);
+
         void Translate(Vector3 val, bool local = false) noexcept;
         void Rotate(Vector3 angle, bool local = false) noexcept;
         void RotateAxis(Vector3 axis, double angle, bool local = false) noexcept;

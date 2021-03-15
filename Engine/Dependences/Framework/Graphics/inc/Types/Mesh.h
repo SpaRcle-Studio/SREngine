@@ -46,6 +46,8 @@ namespace Framework::Graphics::Types {
             this->m_vertices = vertices;
         }
     public:
+        bool DrawOnInspector() override;
+
         void SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale);
 
         void OnMove(glm::vec3 newValue) noexcept override{

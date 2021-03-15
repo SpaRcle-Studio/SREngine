@@ -13,6 +13,7 @@
 #include <Types/Mesh.h>
 
 #include <glm/gtc/type_ptr.inl>
+#include <GUI.h>
 
 void Framework::Graphics::GUI::GUIWindow::DrawChild(Framework::Helper::GameObject *root) noexcept {
     unsigned long i = 0;
@@ -98,7 +99,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
         gameObject->SetNameFromInspector(gm_name);
 
     ImGui::Separator();
-    DrawTextOnCenter("Transform");
+    Helper::GUI::DrawTextOnCenter("Transform");
 
     auto position = gameObject->GetTransform()->GetPosition().ToGLM();
     auto rotation = gameObject->GetTransform()->GetRotation().ToGLM();
@@ -138,74 +139,13 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
 
     std::vector<Framework::Helper::Component*> comps = gameObject->GetComponents();
     for (Framework::Helper::Component* comp : comps) {
-        ImGui::Separator();
         std::string name = comp->GetComponentName();
-        DrawTextOnCenter(name);
 
-        if (name == "Camera") {
-            ImGui::Separator();
+        if (ImGui::CollapsingHeader(name.c_str())) {
+            //ImGui::Separator();
+            //Helper::GUI::DrawTextOnCenter(name);
 
-            DrawTextOnCenter("PostProcessing");
-
-            PostProcessing* post = dynamic_cast<Camera*>(comp)->GetPostProcessing();
-
-            float gamma = post->GetGamma();
-            if (ImGui::InputFloat("Gamma", &gamma, 0.05))
-                post->SetGamma(gamma);
-
-            float exposure = post->GetExposure();
-            if (ImGui::InputFloat("Exposure", &exposure, 0.05))
-                post->SetExposure(exposure);
-
-            float saturation = post->GetSaturation();
-            if (ImGui::InputFloat("Saturation", &saturation, 0.05))
-                post->SetSaturation(saturation);
-
-            glm::vec3 color = post->GetColorCorrection();
-            if (ImGui::InputFloat3("Color correction", &color[0]))
-                post->SetColorCorrection(color);
-
-            ImGui::NewLine();
-
-            bool enabled = post->GetBloomEnabled();
-            if (ImGui::Checkbox("Bloom", &enabled))
-                post->SetBloom(enabled);
-
-            ImGui::NewLine();
-
-            float bloom_intensity = post->GetBloomIntensity();
-            if (ImGui::InputFloat("Bloom intensity", &bloom_intensity, 0.1))
-                post->SetBloomIntensity(bloom_intensity);
-
-            color = post->GetBloomColor();
-            if (ImGui::InputFloat3("Bloom color", &color[0]))
-                post->SetBloomColor(color);
-
-            int bloom_amount = post->GetBloomAmount();
-            if (ImGui::InputInt("Bloom amount", &bloom_amount)) {
-                if (bloom_amount == 0)
-                    bloom_amount = 1;
-                post->SetBloomAmount(bloom_amount);
-            }
-        }
-        else if (name == "Mesh") {
-            auto* mesh = dynamic_cast<Graphics::Types::Mesh*>(comp);
-            auto* mat  = mesh->GetMaterial();
-
-            ImGui::Text("Geometry name: %s", mesh->GetGeometryName().c_str());
-            ImGui::Text("Vertices count: %zu", mesh->GetCountVertices());
-
-            ImGui::Separator();
-
-            DrawTextOnCenter("Material");
-
-            glm::vec3 color = mat->GetColor().ToGLM();
-            if (ImGui::InputFloat3("Color", &color[0]))
-                mat->SetColor(color);
-
-            bool enabled = mat->GetBloomEnabled();
-            if (ImGui::Checkbox("Bloom enabled", &enabled))
-                mat->SetBloom(enabled);
+            comp->DrawOnInspector();
         }
     }
 }
@@ -336,8 +276,12 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             &value, &axis[0]))
     {
         if (g_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
-            if (abs((value - old_value)) < 1)
-                gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(2), (value - old_value) * 20.0, true);
+            if (abs((value - old_value)) < 1) {
+                if (g_currentGuizmoMode == ImGuizmo::LOCAL)
+                    gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(2), (value - old_value) * 20.0, true);
+                else
+                    gameObject->GetTransform()->GlobalRotateAxis(Vector3(axis).InverseAxis(2), (value - old_value) * 20.0);
+            }
         } else if (g_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
             if (value < 1) {
                 if (g_currentGuizmoMode == ImGuizmo::LOCAL)

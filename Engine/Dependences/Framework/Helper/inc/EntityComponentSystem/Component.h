@@ -28,6 +28,8 @@ namespace Framework::Helper {
         const std::string m_name = "Unknown";
         GameObject* m_parent     = nullptr;
     public:
+        virtual bool DrawOnInspector() { return false; }
+
         [[nodiscard]] inline std::string GetComponentName() const noexcept { return this->m_name; }
         inline Component* BaseComponent() noexcept { return this; }
 

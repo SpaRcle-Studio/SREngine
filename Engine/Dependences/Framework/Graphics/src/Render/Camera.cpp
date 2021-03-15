@@ -12,6 +12,27 @@
 #include <glm/gtx/string_cast.hpp>
 #include <Math/Mathematics.h>
 
+#include <GUI.h>
+
+void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shader *shader) noexcept {
+    if (!m_isCreate) {
+        Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
+        return;
+    }
+
+    if (m_needUpdate){
+        if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
+            Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
+            return;
+        }
+        m_needUpdate = false;
+        this->m_isBuffCalculate = true;
+    }
+
+    shader->SetMat4("viewMat", this->m_viewMat);
+    shader->SetMat4("projMat", this->m_projection);
+}
+
 void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shader) noexcept {
     if (!m_isCreate) {
         Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
@@ -218,6 +239,9 @@ void Framework::Graphics::Camera::OnMove(glm::vec3 newValue) noexcept {
     this->UpdateView();
 }
 
+void Framework::Graphics::Camera::UpdateProjection() {
+    m_projection = glm::perspective(glm::radians(45.f), float(m_cameraSize.x) / (float)m_cameraSize.y, m_near, m_far);
+}
 void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
     this->m_cameraSize = {w, h};
     m_projection = glm::perspective(glm::radians(45.f), float(w) / (float)h, m_near, m_far);
@@ -289,4 +313,58 @@ bool Framework::Graphics::Camera::Free() {
         return true;
    // }
 }
+
+bool Framework::Graphics::Camera::DrawOnInspector() {
+    if (ImGui::InputFloat("Far", &m_far, 50) || ImGui::InputFloat("Near", &m_near, 0.1))
+        this->UpdateProjection();
+
+    ImGui::Separator();
+
+    Helper::GUI::DrawTextOnCenter("PostProcessing");
+
+    PostProcessing* post = m_postProcessing;
+
+
+    float gamma = post->GetGamma();
+    if (ImGui::InputFloat("Gamma", &gamma, 0.05))
+        post->SetGamma(gamma);
+
+    float exposure = post->GetExposure();
+    if (ImGui::InputFloat("Exposure", &exposure, 0.05))
+        post->SetExposure(exposure);
+
+    float saturation = post->GetSaturation();
+    if (ImGui::InputFloat("Saturation", &saturation, 0.05))
+        post->SetSaturation(saturation);
+
+    glm::vec3 color = post->GetColorCorrection();
+    if (ImGui::InputFloat3("Color correction", &color[0]))
+        post->SetColorCorrection(color);
+
+    ImGui::NewLine();
+
+    bool enabled = post->GetBloomEnabled();
+    if (ImGui::Checkbox("Bloom", &enabled))
+        post->SetBloom(enabled);
+
+    ImGui::NewLine();
+
+    float bloom_intensity = post->GetBloomIntensity();
+    if (ImGui::InputFloat("Bloom intensity", &bloom_intensity, 0.1))
+        post->SetBloomIntensity(bloom_intensity);
+
+    color = post->GetBloomColor();
+    if (ImGui::InputFloat3("Bloom color", &color[0]))
+        post->SetBloomColor(color);
+
+    int bloom_amount = post->GetBloomAmount();
+    if (ImGui::InputInt("Bloom amount", &bloom_amount)) {
+        if (bloom_amount == 0)
+            bloom_amount = 1;
+        post->SetBloomAmount(bloom_amount);
+    }
+
+    return true;
+}
+
 

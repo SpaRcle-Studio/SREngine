@@ -35,6 +35,9 @@ namespace Framework::Helper::Math {
             return glm::inverse(self);
         }
 
+        [[nodiscard]] inline Matrix4x4 RotateAxis(const Vector3& axis, const double& angle) const noexcept {
+            return glm::rotate(self, glm::radians((float)angle), axis.ToGLM());
+        }
         [[nodiscard]] Matrix4x4 Rotate(const Vector3& angle) const noexcept {
             return self * mat4_cast(angle.ToQuat().ToGLM());
         }
@@ -75,6 +78,10 @@ namespace Framework::Helper::Math {
         Matrix4x4 operator*(Matrix4x4 mat) {
             return Matrix4x4(this->self * mat.self);
         }
+        void operator*=(const Matrix4x4& right) {
+            *this = *this * right;
+        }
+
         Matrix4x4 operator/(Matrix4x4 mat) {
             return Matrix4x4(this->self / mat.self);
         }

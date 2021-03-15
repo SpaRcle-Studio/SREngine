@@ -21,6 +21,9 @@
 #include <map>
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/euler_angles.hpp>
+#include <imgui.h>
+
+#include <GUI.h>
 
 using namespace Framework::Graphics::Types;
 
@@ -369,4 +372,25 @@ void Mesh::SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale) {
     ))));
 
     this->m_modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
+}
+
+bool Mesh::DrawOnInspector() {
+    auto* mat  = GetMaterial();
+
+    ImGui::Text("Geometry name: %s", GetGeometryName().c_str());
+    ImGui::Text("Vertices count: %zu", GetCountVertices());
+
+    ImGui::Separator();
+
+    Helper::GUI::DrawTextOnCenter("Material");
+
+    glm::vec3 color = mat->GetColor().ToGLM();
+    if (ImGui::InputFloat3("Color", &color[0]))
+        mat->SetColor(color);
+
+    bool enabled = mat->GetBloomEnabled();
+    if (ImGui::Checkbox("Bloom enabled", &enabled))
+        mat->SetBloom(enabled);
+
+    return true;
 }
