@@ -14,6 +14,7 @@
 
 #include <glm/gtc/type_ptr.inl>
 #include <GUI.h>
+#include <imgui_internal.h>
 
 void Framework::Graphics::GUI::GUIWindow::DrawChild(Framework::Helper::GameObject *root) noexcept {
     unsigned long i = 0;
@@ -135,19 +136,41 @@ void Framework::Graphics::GUI::GUIWindow::DrawInspector(Framework::Helper::GameO
     ImGui::Text("[Parent direction]");
 
 //    glm::vec3 p_dir = gameObject->GetTransform()->GetParentDir().ToGLM();
- //   ImGui::InputFloat3("Dir", &p_dir[0]);
+    //   ImGui::InputFloat3("Dir", &p_dir[0]);
 
-    std::vector<Framework::Helper::Component*> comps = gameObject->GetComponents();
-    for (Framework::Helper::Component* comp : comps) {
+    std::vector<Framework::Helper::Component *> comps = gameObject->GetComponents();
+    for (Framework::Helper::Component *comp : comps) {
         std::string name = comp->GetComponentName();
 
-        if (ImGui::CollapsingHeader(name.c_str())) {
-            //ImGui::Separator();
-            //Helper::GUI::DrawTextOnCenter(name);
-
+        if (ImGui::CollapsingHeader(name.c_str()))
             comp->DrawOnInspector();
-        }
     }
+
+    ImGui::Separator();
+
+    ImGui::InvisibleButton("void", ImVec2(ImGui::GetCurrentWindow()->Size.x, ImGui::GetCurrentWindow()->Size.y - ImGui::GetItemRectMin().y));
+
+    //std::vector<std::string> comp_names = {"Mesh", "Rigidbody", "Camera", "Script"};
+    if (ImGui::BeginPopupContextItem("InspectorMenu", 1)) {
+        if (ImGui::BeginMenu("Add component")) {
+            for (const auto& a : Component::GetComponentsNames()) {
+                if (ImGui::MenuItem(a.c_str()))
+                    gameObject->AddComponent(Component::CreateComponentOfName(a));
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndPopup();
+    }
+
+    //const float btn_width = 120;
+    //ImGui::SetCursorPosX((ImGui::GetWindowWidth()) / 2 - btn_width / 2);
+
+
+    //if (ImGui::Button("Add component", ImVec2(ImGui::GetWindowWidth() - 7.5f, 30))){
+    //int select = 0;
+
+    //ImGui::ListBox("Components", &select, comps.data(), comps.size(), 5);
+    //}
 }
 
 void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera *camera, GameObject *gameObject, glm::vec2 img_size) noexcept {

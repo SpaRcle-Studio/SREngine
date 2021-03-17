@@ -255,7 +255,7 @@ function Start()
     HierarchyTest();
     --RotationTest();
     --GeometryTest();
-    LoadTools();
+    --LoadTools();
 
     -------------------------------------
 

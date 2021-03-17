@@ -30,13 +30,19 @@ using namespace Framework::Graphics::Types;
 inline static std::map<unsigned int, unsigned long> VAO_usages = std::map<unsigned int, unsigned long>();
 inline static std::map<std::string, unsigned int> VAO_names = std::map<std::string, unsigned int>();
 
+Framework::Graphics::Types::Mesh::Mesh() : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh") {
+    this->m_shader = nullptr;
+    this->m_material = nullptr;
+    this->m_geometry_name = "Unsolved";
+}
+
 Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::string name)
     : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh")
     {
     this->m_shader = shader;
 
     if (!m_shader)
-        Debug::Error("Mesh::Constructor() : shader is nullptr!");
+        Debug::Warn("Mesh::Constructor() : shader is nullptr!");
 
     this->m_geometry_name = std::move(name);
     this->m_material = material;
@@ -60,9 +66,13 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     if (m_isDestroy)
         return false;
 
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Log("Mesh::Destroy() : destroy \""+m_geometry_name+"\"...");
+
     this->m_isDestroy = true;
 
-    this->m_material->FreeTextures();
+    if (m_material)
+        this->m_material->FreeTextures();
 
     Helper::ResourceManager::Destroy(this);
 
@@ -169,6 +179,16 @@ void Mesh::ReCalcModel() {
 bool Mesh::Calculate() {
     if (!m_render){
         Debug::Error("Mesh::Calculate() : mesh is not register in render!");
+        return false;
+    }
+
+    if (!m_shader){
+        Debug::Error("Mesh::Calculate() : mesh have not shader!");
+        return false;
+    }
+
+    if (!m_material){
+        Debug::Error("Mesh::Calculate() : mesh have not material!");
         return false;
     }
 
@@ -329,6 +349,9 @@ nlohmann::json Mesh::Save() {
 }
 
 void Mesh::OnSelected(bool value) noexcept {
+    //if (!m_render)
+    //   return;
+
     if (value == this->IsSelected())
         return;
     else {
@@ -337,10 +360,10 @@ void Mesh::OnSelected(bool value) noexcept {
         //else
         //    this->m_render->SelectMesh(this);
 
-        if (value)
+        /*if (value)
             this->m_render->GetManipulationTool()->AddMesh(this);
         else
-            this->m_render->GetManipulationTool()->RemoveMesh(this);
+            this->m_render->GetManipulationTool()->RemoveMesh(this);*/
     }
 
     Component::OnSelected(value);
@@ -375,22 +398,37 @@ void Mesh::SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale) {
 }
 
 bool Mesh::DrawOnInspector() {
-    auto* mat  = GetMaterial();
-
     ImGui::Text("Geometry name: %s", GetGeometryName().c_str());
     ImGui::Text("Vertices count: %zu", GetCountVertices());
+    ImGui::Text("VAO: %u", this->m_VAO);
+
+    if (!m_render)
+        ImGui::TextColored({1,0,0,1}, "Render is missing!");
 
     ImGui::Separator();
 
-    Helper::GUI::DrawTextOnCenter("Material");
+    if (m_material) {
+        Helper::GUI::DrawTextOnCenter("Material");
 
-    glm::vec3 color = mat->GetColor().ToGLM();
-    if (ImGui::InputFloat3("Color", &color[0]))
-        mat->SetColor(color);
+        glm::vec3 color = m_material->GetColor().ToGLM();
+        if (ImGui::InputFloat3("Color", &color[0]))
+            m_material->SetColor(color);
 
-    bool enabled = mat->GetBloomEnabled();
-    if (ImGui::Checkbox("Bloom enabled", &enabled))
-        mat->SetBloom(enabled);
+        bool enabled = m_material->GetBloomEnabled();
+        if (ImGui::Checkbox("Bloom enabled", &enabled))
+            m_material->SetBloom(enabled);
+    } else
+        Helper::GUI::DrawTextOnCenter("Material (missing)");
+
+    ImGui::Separator();
+
+    if (m_shader) {
+        Helper::GUI::DrawTextOnCenter("Shader");
+        ImGui::Text("Name: %s", m_shader->GetName().c_str());
+    } else
+        Helper::GUI::DrawTextOnCenter("Shader (missing)");
 
     return true;
 }
+
+

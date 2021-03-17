@@ -162,8 +162,12 @@ namespace Framework::Graphics {
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */
-        void UpdateShader(Shader* shader) noexcept;
+        void UpdateShader(const Shader* shader) noexcept;
         void UpdateShaderProjView(Shader* shader) noexcept;
+
+        void OnDestroyComponent() noexcept override {
+            Debug::Error("Camera::OnDestroyComponent() : TODO!");
+        }
     private:
         void UpdateView() noexcept;
         bool Calculate() noexcept;

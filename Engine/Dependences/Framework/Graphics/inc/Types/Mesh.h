@@ -31,6 +31,7 @@ namespace Framework::Graphics::Types {
     public:
         /** \brief Default mesh constructor */
         //Mesh() : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh") { }
+        Mesh();
         Mesh(Shader* shader, Material* material, std::string name = "Unnamed");
     private:
         /** \brief Default mesh destructor */
@@ -177,6 +178,10 @@ namespace Framework::Graphics::Types {
 
         /** \warning call only from render */
         bool FreeVideoMemory();
+
+        void OnDestroyComponent() noexcept override {
+            Debug::Error("Mesh::OnDestroyComponent() : TODO!");
+        }
     };
 }
 

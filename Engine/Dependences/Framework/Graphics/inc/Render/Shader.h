@@ -31,7 +31,7 @@ namespace Framework::Graphics {
     private:
         inline static Shader*       g_stdGeometry  = nullptr;
     private:
-        Environment*                m_env          = nullptr;
+        const Environment*          m_env          = nullptr;
         Render*                     m_render       = nullptr;
         std::string                 m_name         = "Unnamed";
     private:
@@ -41,19 +41,23 @@ namespace Framework::Graphics {
         static Shader* GetStandartGeometryShader() noexcept;
         static bool SetStandartGeometryShader(Shader* shader) noexcept;
     public:
+        [[nodiscard]] inline std::string GetName() const noexcept {
+            return m_name;
+        }
+    public:
         bool Use() noexcept;
         bool Init();
         ///\warning Call only from OpenGL context!
         void Free();
     public:
-        inline void SetBool(const char* name, bool v)         const noexcept { m_env->SetBool(m_ID, name, v); }
-        inline void SetFloat(const char* name, float v)       const noexcept { m_env->SetFloat(m_ID, name, v); }
-        inline void SetInt(const char* name, int v)           const noexcept { m_env->SetInt(m_ID, name, v); }
-        inline void SetMat4(const char* name, glm::mat4 v)    const noexcept { m_env->SetMat4(m_ID, name, v); }
-        inline void SetVec4(const char* name, glm::vec4 v)    const noexcept { m_env->SetVec4(m_ID, name, v); } // TODO
-        inline void SetVec3(const char* name, glm::vec3 v)    const noexcept { m_env->SetVec3(m_ID, name, v); }
-        inline void SetVec2(const char* name, glm::vec2 v)    const noexcept { m_env->SetVec2(m_ID, name, v); }
-        inline void SetIVec2(const char* name, glm::ivec2 v)  const noexcept { m_env->SetIVec2(m_ID, name, v); }
+        inline void SetBool(const char* name, const bool& v)         const noexcept { m_env->SetBool(m_ID, name, v); }
+        inline void SetFloat(const char* name, const float& v)       const noexcept { m_env->SetFloat(m_ID, name, v); }
+        inline void SetInt(const char* name, const int& v)           const noexcept { m_env->SetInt(m_ID, name, v); }
+        inline void SetMat4(const char* name, const glm::mat4& v)    const noexcept { m_env->SetMat4(m_ID, name, v); }
+        inline void SetVec4(const char* name,const glm::vec4& v)    const noexcept { m_env->SetVec4(m_ID, name, v); } // TODO
+        inline void SetVec3(const char* name,const glm::vec3& v)    const noexcept { m_env->SetVec3(m_ID, name, v); }
+        inline void SetVec2(const char* name,const glm::vec2& v)    const noexcept { m_env->SetVec2(m_ID, name, v); }
+        inline void SetIVec2(const char* name,const glm::ivec2& v)  const noexcept { m_env->SetIVec2(m_ID, name, v); }
     };
 }
 

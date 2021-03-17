@@ -93,10 +93,10 @@ bool Framework::Graphics::Shader::SetStandartGeometryShader(Shader* shader) noex
 }
 
 bool Framework::Graphics::Shader::Use() noexcept {
-    if (m_isError)
-        return false;
-
     if (!m_isInit) {
+        if (m_isError)
+            return false;
+
         if (!this->Init()) {
             Debug::Error("Shader::Use() : failed initialize shader!");
             this->m_isError = true;

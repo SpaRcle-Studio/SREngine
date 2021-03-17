@@ -34,9 +34,9 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
 }
 
 bool Framework::Graphics::Render::DrawSkybox() noexcept {
-    if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
+    //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
 
-    if (m_skybox) {
+    if (m_skybox && m_skyboxEnabled) {
         //m_skyboxShader->Use();
         //m_currentCamera->UpdateShader(m_skyboxShader);
         //m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
@@ -66,14 +66,11 @@ bool Framework::Graphics::Render::Create(Window* window) { //, Camera* camera
 
     Debug::Graph("Render::Create() : creating render...");
 
-    //this->m_camera = camera;
     this->m_window = window;
 
     {
         this->m_geometryShader = new Shader(this, "geometry");
-        //this->m_skyboxShader   = new Shader(this, "skybox");
         this->m_flatGeometryShader  = new Shader(this, "flatGeometry");
-        //this->m_gridShader     = new Shader(this, "grid");
 
         Shader::SetStandartGeometryShader(m_geometryShader);
     }
@@ -394,6 +391,23 @@ void Framework::Graphics::Render::DrawSingleColors() noexcept {
     //this->m_manipulate->SimpleDraw(m_flatGeometryShader);
 
     this->m_env->UseShader(0);
+}
+
+bool Framework::Graphics::Render::DrawSettingsPanel() {
+    if (!m_isRun)
+        return false;
+
+    ImGui::Begin("Render settings");
+
+    ImGui::Text("Count meshes: %zu", m_countMeshes);
+    ImGui::Text("Count transparent meshes: %zu", m_countTransparentMeshes);
+
+    ImGui::Checkbox("Grid", &m_gridEnabled);
+    ImGui::Checkbox("Skybox", &m_skyboxEnabled);
+
+    ImGui::End();
+
+    return true;
 }
 
 /*

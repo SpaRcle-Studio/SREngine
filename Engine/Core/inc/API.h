@@ -6,6 +6,7 @@
 #define GAMEENGINE_API_H
 
 #include <Compiler.h>
+#include <Editor.h>
 
 namespace Framework {
     class API{

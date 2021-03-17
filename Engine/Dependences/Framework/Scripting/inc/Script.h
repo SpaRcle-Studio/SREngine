@@ -22,6 +22,7 @@ extern "C" {
 #include <EntityComponentSystem/Component.h>
 
 #include <Types/List.h>
+#include <Debug.h>
 
 namespace Framework::Scripting {
     class Compiler;
@@ -172,8 +173,13 @@ namespace Framework::Scripting {
 
         bool Compile();
         bool ReCompile();
+
+        void OnDestroyComponent() noexcept override {
+            Helper::Debug::Error("Script::OnDestroyComponent() : TODO!");
+        }
     protected:
         void OnDestroyGameObject() noexcept override;
+
     };
 }
 

@@ -3,18 +3,18 @@ local colored_id;    -- int
 local final_id;      -- int
 local bloom_id;      -- int
 local bloomBlur_id;  -- int
---local skybox_id;     -- int
+local skybox_id;     -- int
 local depth_id;      -- int
 local stencil_id;    -- int
 
 local scene;         -- Scene*
 local camera;        -- Camera*
 local window;        -- Window*
+local render;        -- Render*
 
 local enabled;       -- Bool
 
 local mouseLeftPressed; -- Bool
---local mousePos;         -- Vector2
 
 function Inspector()
     GUIWindow.Begin("Inspector");
@@ -46,9 +46,8 @@ function SetIndices()
     colored_id    = camera:GetPostProcessing():GetColoredImage();
     bloom_id      = camera:GetPostProcessing():GetBloomMask();
     bloomBlur_id  = camera:GetPostProcessing():GetBlurBloomMask();
-    --depth_id      = camera:GetPostProcessing():GetCustomColorBuffer(2);
     depth_id      = camera:GetPostProcessing():GetDepthBuffer();
-    --skybox_id     = camera:GetPostProcessing():GetSkyboxColor();
+    skybox_id     = camera:GetPostProcessing():GetSkyboxColor();
     stencil_id    = camera:GetPostProcessing():GetStencilBuffer();
 
     enabled = true;
@@ -59,10 +58,12 @@ function Init()
 
     Script.this:ImportLib("Math");
     Script.this:ImportLib("Engine");
+    Script.this:ImportLib("Editor");
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
     window = Window.Get();
+    render = window:GetRender();
 
     collectgarbage() -- collect memory
 end;
@@ -152,8 +153,7 @@ function Displayes()
     GUIWindow.DrawTexture(
         GUIWindow.GetSize(),
         cameraSize,
-        --skybox_id,
-        camera:GetPostProcessing():GetSkyboxColor(),
+        skybox_id,
         true
     );
     GUIWindow.EndChild();
@@ -251,7 +251,10 @@ function Draw()
         ToolBar();
         Windows();
         DrawScene();
-        GUIWindow.DebugWindow();
+
+        if (render ~= nil) then
+            render:DrawSettingsPanel();
+        end;
     end;
 
     collectgarbage() -- collect memory

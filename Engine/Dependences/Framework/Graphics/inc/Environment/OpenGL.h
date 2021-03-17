@@ -144,31 +144,31 @@ namespace Framework::Graphics {
 
         void PoolEvents() override;
 
-        inline std::string GetVendor()   override { return std::string((char*)glGetString(GL_VENDOR));      }
-        inline std::string GetRenderer() override { return std::string((char*)glGetString(GL_RENDERER));    }
-        inline std::string GetVersion()  override { return std::string((char*)glGetString(GL_VERSION));     }
+        inline std::string GetVendor()  const noexcept override { return std::string((char*)glGetString(GL_VENDOR));      }
+        inline std::string GetRenderer()const noexcept override { return std::string((char*)glGetString(GL_RENDERER));    }
+        inline std::string GetVersion() const noexcept override { return std::string((char*)glGetString(GL_VERSION));     }
 
-        inline void SetCursorPosition(glm::vec2 pos) noexcept override {
+        inline void SetCursorPosition(glm::vec2 pos) const noexcept override {
             glfwSetCursorPos(m_window, pos.x, pos.y);
         }
 
-        bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) override;
-        bool CreateHDRFrameBufferObject(glm::vec2 size,unsigned int& rboDepth,  unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers) override;
-        bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) override;
+        bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) const noexcept override;
+        bool CreateHDRFrameBufferObject(glm::vec2 size,unsigned int& rboDepth,  unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept override;
+        bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept override;
 
         inline void BindFrameBuffer(unsigned int FBO) const noexcept override {
             glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         }
 
-        inline void DeleteBuffer(unsigned int& FBO) override {
+        inline void DeleteBuffer(unsigned int& FBO)const noexcept override {
         }
 
         // ============================= [ SHADER METHODS ] =============================
 
-        bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) override;
-        unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) override;
-        inline void DeleteShader(unsigned int ID) override { glDeleteProgram(ID); }
-        inline void UseShader(const unsigned int& ID) noexcept override  { glUseProgram(ID); }
+        bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) const noexcept override;
+        unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept override;
+        inline void DeleteShader(unsigned int ID) const noexcept override { glDeleteProgram(ID); }
+        inline void UseShader(const unsigned int& ID) const noexcept override  { glUseProgram(ID); }
 
         inline void SetBool(const unsigned int& ID, const char* name, bool v)       const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name), 1, (int*)&v);
@@ -179,30 +179,30 @@ namespace Framework::Graphics {
         inline void SetInt(const unsigned int& ID, const char* name, int v)         const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name), 1, &v);
         }
-        inline void SetMat4(const unsigned int& ID, const char* name, glm::mat4 v)  const noexcept override {
-            glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, glm::value_ptr(v));
+        inline void SetMat4(const unsigned int& ID, const char* name, const glm::mat4& v)  const noexcept override {
+            glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, &v[0][0]);
         }
-        inline void SetVec4(const unsigned int& ID, const char* name, glm::vec4 v)  const noexcept override {
+        inline void SetVec4(const unsigned int& ID, const char* name, const glm::vec4& v)  const noexcept override {
             glUniform4fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetVec3(const unsigned int& ID, const char* name, glm::vec3 v)  const noexcept override {
+        inline void SetVec3(const unsigned int& ID, const char* name, const glm::vec3& v)  const noexcept override {
             glUniform3fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetVec2(const unsigned int& ID, const char* name, glm::vec2 v)  const noexcept override {
+        inline void SetVec2(const unsigned int& ID, const char* name, const glm::vec2& v)  const noexcept override {
             glUniform2fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetIVec2(const unsigned int& ID, const char* name, glm::ivec2 v)  const noexcept override {
+        inline void SetIVec2(const unsigned int& ID, const char* name, const glm::ivec2& v)  const noexcept override {
             glUniform2iv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
 
         // ============================== [ MESH METHODS ] ==============================
 
-        inline bool CalculateEmptyVAO(unsigned int& VAO) noexcept override {
+        inline bool CalculateEmptyVAO(unsigned int& VAO) const noexcept override {
             glGenVertexArrays(1, &VAO);
 
             return true;
         }
-        inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) noexcept override{
+        inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept override{
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
 
@@ -261,7 +261,7 @@ namespace Framework::Graphics {
 
             return true;
         }
-        bool FreeMesh(unsigned int VAO) noexcept override;
+        bool FreeMesh(unsigned int VAO)const noexcept override;
         inline void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Green); }
 
@@ -271,7 +271,7 @@ namespace Framework::Graphics {
 
             //if (Helper::Debug::Profile()) { EASY_END_BLOCK; }
         }
-        inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) noexcept override {
+        inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept override {
             glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, IBO);
             glDrawElements(
                     GL_TRIANGLES,      // mode
@@ -281,7 +281,7 @@ namespace Framework::Graphics {
             );
             glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, 0);
         }
-        inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept override{
+        inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept override{
             static const float QuadVertices[] = {
                     // positions   // texCoords
                     -1.0f,  1.0f,  0.0f, 1.0f,
@@ -306,8 +306,15 @@ namespace Framework::Graphics {
             glBindVertexArray(0);
             return true;
         }
-        unsigned int CalculateSkybox() noexcept override;
-        void DrawSkybox(const unsigned int& VAO, unsigned int CubeMap) const noexcept override;
+        unsigned int CalculateSkybox() const  noexcept override;
+        inline void DrawSkybox(const unsigned int& VAO, const unsigned int& CubeMap) const noexcept override {
+            glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+            // ... задание видовой и проекционной матриц
+            glBindVertexArray(VAO);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, CubeMap);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+            glDepthFunc(GL_LESS); // set depth function back to default
+        }
 
         inline void DrawQuad(const unsigned int& VAO) const noexcept override{
             glBindVertexArray(VAO);
@@ -334,12 +341,12 @@ namespace Framework::Graphics {
         inline void SetActiveTexture(const unsigned char activeTexture) const noexcept override {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
         }
-        unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) override;
-        unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) override;
-        inline void DeleteTexture(unsigned int ID) noexcept override {
+        unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha)const noexcept override;
+        unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) const noexcept override;
+        inline void DeleteTexture(unsigned int ID) const  noexcept override {
             glDeleteTextures(1, &ID);
         }
-        inline void FreeCubeMap(unsigned int ID) noexcept override{
+        inline void FreeCubeMap(unsigned int ID)const noexcept override{
             Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
             //glClearTexSubImage()
             glDeleteTextures(6, &ID); // TODO: I don't know if this works

@@ -33,7 +33,7 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
     shader->SetMat4("projMat", this->m_projection);
 }
 
-void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shader) noexcept {
+void Framework::Graphics::Camera::UpdateShader(const Framework::Graphics::Shader *shader) noexcept {
     if (!m_isCreate) {
         Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
         return;
@@ -317,6 +317,9 @@ bool Framework::Graphics::Camera::Free() {
 bool Framework::Graphics::Camera::DrawOnInspector() {
     if (ImGui::InputFloat("Far", &m_far, 50) || ImGui::InputFloat("Near", &m_near, 0.1))
         this->UpdateProjection();
+
+    if (!m_window)
+        ImGui::TextColored({1,0,0,1}, "Window is missing!");
 
     ImGui::Separator();
 

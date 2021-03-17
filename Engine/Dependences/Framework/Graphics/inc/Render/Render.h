@@ -77,6 +77,7 @@ namespace Framework::Graphics {
 
         EditorGrid*                m_grid                              = nullptr;
         bool                       m_gridEnabled                       = false;
+        bool                       m_skyboxEnabled                     = true;
 
         Skybox*                    m_skybox                            = nullptr;
         ColorBuffer*               m_colorBuffer                       = nullptr;
@@ -87,6 +88,8 @@ namespace Framework::Graphics {
 
         Types::ManipulationTool*   m_manipulate                        = nullptr;
     public:
+        bool DrawSettingsPanel();
+
         [[nodiscard]] ManipulationTool* GetManipulationTool() const {
             return this->m_manipulate;
         }
@@ -125,7 +128,7 @@ namespace Framework::Graphics {
         //void DeselectMesh(Mesh* mesh);
 
         //void RegisterSkyboxToRemove(Skybox* skybox);
-        inline bool DelayedDestroySkybox(){
+        inline bool DelayedDestroySkybox() {
             if (!this->m_skybox){
                 Debug::Error("Render::DelayedDestroySkybox() : skybox already destroyed!");
                 return false;

@@ -50,7 +50,7 @@ namespace Framework::Helper {
     public:
         static IResource* Find(const std::string& Name, const std::string& ID);
 
-        static bool RegisterType(std::string type_name);
+        static bool RegisterType(const std::string& type_name);
 
         /** \warning Call only from IResource parents \brief Register resource in resource manager */
         static void RegisterResource(IResource *resource);

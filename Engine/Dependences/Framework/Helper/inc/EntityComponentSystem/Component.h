@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <string>
 #include <json/json.hpp>
+#include <mutex>
+#include <Debug.h>
 
 namespace Framework::Helper {
     class GameObject;
@@ -22,6 +24,62 @@ namespace Framework::Helper {
             json["BaseComponent"] = { };
             return json;
         }
+    public:
+        inline static Component* CreateComponentOfName(const std::string& name) {
+            Component* result = nullptr;
+            g_mutexCompList.lock();
+
+            auto find = g_compList.find(name);
+            if (find == g_compList.end())
+                Debug::Error("Component::CreateComponentOfName() : component \""+name+"\" is not exists!");
+            else
+                result = find->second();
+
+            g_mutexCompList.unlock();
+            return result;
+        }
+        inline static std::vector<std::string> GetComponentsNames() {
+            g_mutexCompList.lock();
+
+            if (g_listHasBeenChanged) {
+                g_compNames.clear();
+                for (auto &it : g_compList)
+                    g_compNames.push_back(it.first);
+                g_listHasBeenChanged = false;
+            }
+
+            auto names = g_compNames;
+
+            g_mutexCompList.unlock();
+
+            return names;
+        }
+        inline static bool RegisterComponent(const std::string& name, const std::function<Component*(void)>& constructor) {
+            g_mutexCompList.lock();
+
+            auto find = g_compList.find(name);
+            if (find == g_compList.end()) {
+                Debug::System("Component::RegisterComponent() : register \""+name+"\"...");
+                g_compList.insert(std::make_pair(name, constructor));
+                g_listHasBeenChanged = true;
+
+                g_mutexCompList.unlock();
+                return true;
+            }
+            else{
+                Debug::Error("Component::RegisterComponent() : component \""+name+"\" already registered!");
+
+                g_mutexCompList.unlock();
+                return false;
+            }
+        }
+    private:
+        inline static std::vector<std::string> g_compNames  = std::vector<std::string>();
+        inline static bool g_listHasBeenChanged             = false;
+        inline static std::mutex g_mutexCompList            = std::mutex();
+
+        inline static std::map<std::string, std::function<Component*(void)>> g_compList =
+                std::map<std::string, std::function<Component*(void)>>();
     protected:
         bool m_isSelected        = false;
         bool m_isActive          = true;
@@ -47,6 +105,7 @@ namespace Framework::Helper {
         [[nodiscard]] inline bool IsActive() const noexcept { return m_isActive; }
         [[nodiscard]] inline bool IsSelected() const noexcept { return m_isSelected; }
     protected:
+        virtual void OnDestroyComponent() noexcept = 0;
         virtual void OnDestroyGameObject() noexcept = 0;
     };
 }

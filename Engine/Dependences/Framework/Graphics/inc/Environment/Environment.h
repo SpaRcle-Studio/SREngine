@@ -111,63 +111,63 @@ namespace Framework::Graphics {
         virtual void SetWindowSize(float ratio, unsigned int w, unsigned int h) = 0;
         virtual void SetWindowPosition(int x, int y) = 0;
 
-        virtual void PoolEvents() = 0;
+        virtual void PoolEvents()  = 0;
 
-        virtual inline std::string GetVendor() = 0;
-        virtual inline std::string GetRenderer() = 0;
-        virtual inline std::string GetVersion() = 0;
+        virtual inline std::string GetVendor()const noexcept = 0;
+        virtual inline std::string GetRenderer() const noexcept= 0;
+        virtual inline std::string GetVersion()const noexcept = 0;
 
-        virtual inline void SetCursorPosition(glm::vec2 pos) noexcept = 0;
+        virtual inline void SetCursorPosition(glm::vec2 pos) const  noexcept = 0;
 
-        virtual bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) = 0;
-        virtual bool CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers) = 0;
-        virtual bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) = 0;
+        virtual bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) const noexcept= 0;
+        virtual bool CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept = 0;
+        virtual bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept= 0;
         virtual inline void BindFrameBuffer(unsigned int FBO) const noexcept = 0;
-        virtual inline void DeleteBuffer(unsigned int& FBO) = 0;
+        virtual inline void DeleteBuffer(unsigned int& FBO)const noexcept = 0;
 
         // ============================= [ SHADER METHODS ] =============================
 
-        virtual bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) = 0;
-        virtual unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) = 0;
-        virtual inline void DeleteShader(unsigned int ID) = 0;
-        virtual inline void UseShader(const unsigned int&  ID) noexcept = 0;
+        virtual bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex)const noexcept = 0;
+        virtual unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept = 0;
+        virtual inline void DeleteShader(unsigned int ID) const noexcept = 0;
+        virtual inline void UseShader(const unsigned int&  ID) const noexcept = 0;
 
         virtual inline void SetBool(const unsigned int&  ID, const char* name, bool v)       const noexcept = 0;
         virtual inline void SetFloat(const unsigned int&  ID, const char* name, float v)     const noexcept = 0;
         virtual inline void SetInt(const unsigned int&  ID, const char* name, int v)         const noexcept = 0;
-        virtual inline void SetMat4(const unsigned int&  ID, const char* name, glm::mat4 v)  const noexcept = 0;
-        virtual inline void SetVec4(const unsigned int&  ID, const char* name, glm::vec4 v)  const noexcept = 0;
-        virtual inline void SetVec3(const unsigned int&  ID, const char* name, glm::vec3 v)  const noexcept = 0;
-        virtual inline void SetVec2(const unsigned int&  ID, const char* name, glm::vec2 v)  const noexcept = 0;
-        virtual inline void SetIVec2(const unsigned int&  ID, const char* name, glm::ivec2 v)  const noexcept = 0;
+        virtual inline void SetMat4(const unsigned int&  ID, const char* name, const glm::mat4& v)  const noexcept = 0;
+        virtual inline void SetVec4(const unsigned int&  ID, const char* name, const glm::vec4& v)  const noexcept = 0;
+        virtual inline void SetVec3(const unsigned int&  ID, const char* name, const glm::vec3& v)  const noexcept = 0;
+        virtual inline void SetVec2(const unsigned int&  ID, const char* name, const glm::vec2& v)  const noexcept = 0;
+        virtual inline void SetIVec2(const unsigned int&  ID, const char* name, const glm::ivec2& v)  const noexcept = 0;
 
         // ============================== [ MESH METHODS ] ==============================
 
-        virtual inline bool CalculateEmptyVAO(unsigned int& VAO) noexcept = 0;
-        virtual inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) noexcept = 0;
+        virtual inline bool CalculateEmptyVAO(unsigned int& VAO) const noexcept = 0;
+        virtual inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept = 0;
 
         /** Vertex pos and texture cords */
-        virtual inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) noexcept = 0;
-        virtual unsigned int CalculateSkybox() noexcept = 0;
-        virtual void DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) const noexcept = 0;
+        virtual inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const  noexcept = 0;
+        virtual unsigned int CalculateSkybox() const noexcept = 0;
+        virtual inline void DrawSkybox(const unsigned int&  VAO, const unsigned int& CubeMap) const noexcept = 0;
         virtual inline void DrawQuad(const unsigned int&  VAO) const noexcept = 0;
 
         virtual inline void BindVAO(const unsigned int&  VAO) const noexcept = 0;
         virtual inline void Draw6Triangles() const noexcept = 0;
 
-        virtual bool FreeMesh(unsigned int VAO) noexcept = 0;
+        virtual bool FreeMesh(unsigned int VAO)const noexcept = 0;
         virtual inline void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept = 0;
-        virtual inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) noexcept = 0;
+        virtual inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept = 0;
 
         // ============================== [ TEXTURE METHODS ] ==============================
 
         virtual inline void BindTexture(const unsigned int&  ID) const noexcept = 0;
         virtual inline void BindTexture(unsigned char activeTexture, const unsigned int&  ID) const noexcept = 0;
         virtual inline void SetActiveTexture(unsigned char activeTexture) const noexcept = 0;
-        virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) = 0;
-        virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) = 0;
-        virtual inline void DeleteTexture(unsigned int ID) noexcept = 0;
-        virtual inline void FreeCubeMap(unsigned int ID) noexcept = 0;
+        virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) const noexcept = 0;
+        virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) const noexcept  = 0;
+        virtual inline void DeleteTexture(unsigned int ID) const noexcept = 0;
+        virtual inline void FreeCubeMap(unsigned int ID) const noexcept = 0;
     };
 }
 

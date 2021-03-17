@@ -148,6 +148,16 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .endClass();
     });
 
+    compiler->RegisterScriptClass("Editor", [](lua_State* L) {
+        luabridge::getGlobalNamespace(L)
+            .beginClass<Editor>("Editor")
+                .addStaticFunction("InstanceBaseGameObject", static_cast<bool(*)(const std::string&, Helper::Scene*, Graphics::Camera*)>(
+                        [](const std::string& name, Helper::Scene* scene, Graphics::Camera* camera) -> bool {
+                    return Editor::InstanceBaseGameObject(name, scene, camera);
+                }))
+            .endClass();
+    });
+
     // Vector3
     compiler->RegisterScriptClass("Math", [](lua_State* L){
         static int NONEAxis = (int)Axis::NONE;
@@ -460,6 +470,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("RegisterTexture", (void (Framework::Graphics::Render::*)(Graphics::Texture*))&Graphics::Render::RegisterTexture)
                 .addFunction("GetManipulationTool", (Graphics::Types::ManipulationTool* (Framework::Graphics::Render::*)(void))&Graphics::Render::GetManipulationTool)
                 .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
+                .addFunction("DrawSettingsPanel", (bool (Framework::Graphics::Render::*)(void))&Graphics::Render::DrawSettingsPanel)
                 .endClass();
     });
 

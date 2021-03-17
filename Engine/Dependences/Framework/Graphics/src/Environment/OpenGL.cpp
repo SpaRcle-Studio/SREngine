@@ -217,7 +217,7 @@ void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {
     glfwSetWindowPos(m_window, x, y);
 }
 
-bool Framework::Graphics::OpenGL::FreeMesh(unsigned int VAO) noexcept {
+bool Framework::Graphics::OpenGL::FreeMesh(unsigned int VAO)const noexcept {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
         Helper::Debug::Log("OpenGL::FreeMesh() : free mesh \""+std::to_string(VAO) + "\" VAO...");
 
@@ -230,7 +230,7 @@ bool Framework::Graphics::OpenGL::FreeMesh(unsigned int VAO) noexcept {
     }
 }
 
-bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *fragment, unsigned int *vertex) {
+bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *fragment, unsigned int *vertex) const noexcept {
     std::string vertex_path = path + "_vertex.glsl";
     std::string fragment_path = path + "_fragment.glsl";;
 
@@ -314,7 +314,7 @@ bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *
     return true;
 }
 
-unsigned int Framework::Graphics::OpenGL::LinkShader(unsigned int *fragment, unsigned int *vertex) {
+unsigned int Framework::Graphics::OpenGL::LinkShader(unsigned int *fragment, unsigned int *vertex) const noexcept {
     unsigned int ProgramID = glCreateProgram();
     glAttachShader(ProgramID, *vertex);
     glAttachShader(ProgramID, *fragment);
@@ -351,7 +351,7 @@ unsigned int Framework::Graphics::OpenGL::LinkShader(unsigned int *fragment, uns
     return ProgramID;
 }
 
-bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int &hdrFBO, std::vector<unsigned int>& colorBuffers) {
+bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int &hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept {
     bool isNew = !((bool)hdrFBO);
 
     if (size.x == 0 || size.y == 0){
@@ -420,7 +420,7 @@ bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, uns
 bool Framework::Graphics::OpenGL::CreatePingPongFrameBufferObject(
         glm::vec2 size,
         std::vector<unsigned int> &pingpongFBO,
-        std::vector<unsigned int>& pingpongColorBuffers)
+        std::vector<unsigned int>& pingpongColorBuffers) const noexcept
 {
     bool isNew = pingpongFBO[0] == 0;
 
@@ -467,7 +467,7 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBufferObject(
 unsigned int Framework::Graphics::OpenGL::CalculateTexture(
         unsigned char *data, int format, unsigned int w, unsigned int h,
         Framework::Graphics::TextureFilter filter, bool alpha
-) {
+)const noexcept {
     //glActiveTexture(GL_TEXTURE0);
 
     unsigned int id;
@@ -535,7 +535,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateTexture(
     return id;
 }
 
-unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) {
+unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data)const noexcept {
     unsigned int cubemap = 0;
 
     glGenTextures(1, &cubemap);
@@ -559,7 +559,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsig
     return cubemap;
 }
 
-unsigned int Framework::Graphics::OpenGL::CalculateSkybox() noexcept {
+unsigned int Framework::Graphics::OpenGL::CalculateSkybox() const noexcept {
     const float skyboxVertices[36 * 3] = {
             // positions
             -10.0f,  10.0f, -10.0f,
@@ -624,15 +624,6 @@ unsigned int Framework::Graphics::OpenGL::CalculateSkybox() noexcept {
     return VAO;
 }
 
-void Framework::Graphics::OpenGL::DrawSkybox(const unsigned int&  VAO, unsigned int CubeMap) const noexcept {
-    glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-    // ... задание видовой и проекционной матриц
-    glBindVertexArray(VAO);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, CubeMap);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDepthFunc(GL_LESS); // set depth function back to default
-}
-
 void Framework::Graphics::OpenGL::BeginDrawGUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -652,7 +643,7 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigned int &rboDepth, unsigned int &hdrFBO, unsigned int &colorBuffer) {
+bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigned int &rboDepth, unsigned int &hdrFBO, unsigned int &colorBuffer) const noexcept{
     bool isNew = !((bool)hdrFBO);
 
     if (isNew)

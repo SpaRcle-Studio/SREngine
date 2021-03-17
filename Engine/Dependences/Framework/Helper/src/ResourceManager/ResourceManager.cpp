@@ -70,7 +70,7 @@ namespace Framework::Helper {
         return true;
     }
 
-    bool ResourceManager::RegisterType(const std::string type_name) {
+    bool ResourceManager::RegisterType(const std::string& type_name) {
         Debug::Info("ResourceManager::RegisterType() : register new \""+std::string(type_name)+"\" type...");
         
         g_resources[type_name] = std::vector<IResource*>();

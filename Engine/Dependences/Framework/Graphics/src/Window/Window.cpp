@@ -289,60 +289,56 @@ void Framework::Graphics::Window::FindAimedMesh() {
     //this->m_env->ClearBuffers();
 }
 
+#define DrawToCamera(camera) \
+    this->m_render->SetCurrentCamera(camera); \
+    camera->GetPostProcessing()->BeginSkybox(); \
+    { \
+        this->m_render->DrawSkybox(); \
+        this->m_render->DrawGrid(); \
+    } \
+    camera->GetPostProcessing()->EndSkybox(); \
+    \
+    camera->GetPostProcessing()->Begin(); \
+    { \
+    this->m_render->DrawGeometry(); \
+    this->m_render->DrawTransparentGeometry(); \
+    } \
+    camera->GetPostProcessing()->End(); \
+    \
+    if (m_requireGetAimed) { \
+        if (m_aimedCameraTarget == camera && m_aimedWindowTarget) { \
+            this->m_render->DrawSingleColors(); \
+            \
+            glm::vec2 pos = this->GetGlobalWindowMousePos(camera, m_aimedWindowTarget);\
+            glm::vec3 color = this->m_env->GetPixelColor(pos);\
+            \
+            this->m_env->ClearBuffers();\
+            \
+            int id = this->m_render->GetColorBuffer()->GetSelectColorObject(color);\
+            if (id != -1)\
+                this->m_aimedMesh = this->m_render->GetMesh(id);\
+            \
+            m_requireGetAimed = false;\
+        }\
+    }\
+
 void Framework::Graphics::Window::Draw() {
-    if (m_GUIEnabled)
-        this->m_env->BeginDrawGUI();
+   // if (m_GUIEnabled)
 
-    for (Camera* camera : m_cameras) {
-        if (!camera->IsActive())
-            continue;
-
-        this->m_render->SetCurrentCamera(camera);
-
-        camera->GetPostProcessing()->BeginSkybox();
-        {
-            this->m_render->DrawSkybox();
-            this->m_render->DrawGrid();
-        }
-        camera->GetPostProcessing()->EndSkybox();
-
-        camera->GetPostProcessing()->Begin();
-        {
-            // some drawing code
-            // this is window context
-
-            this->m_render->DrawGeometry();
-
-            //!if (camera == m_render->GetManipulationTool()->GetTargetCamera())
-            //!   this->m_render->GetManipulationTool()->Draw();
-
-            this->m_render->DrawTransparentGeometry();
-        }
-        camera->GetPostProcessing()->End();
-
-        //!-----------------------------------------------------------------------------//
-
-        if (m_requireGetAimed) {
-            if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {
-                this->m_render->DrawSingleColors();
-
-                glm::vec2 pos = this->GetGlobalWindowMousePos(camera, m_aimedWindowTarget);
-                glm::vec3 color = this->m_env->GetPixelColor(pos);
-
-                this->m_env->ClearBuffers();
-
-                int id = this->m_render->GetColorBuffer()->GetSelectColorObject(color);
-                if (id != -1)
-                    this->m_aimedMesh = this->m_render->GetMesh(id);
-
-                m_requireGetAimed = false;
-            }
-        }
-
-        //!this->m_render->GetManipulationTool()->Process();
+    if (m_countCameras == 1) {
+        if (m_cameras[0]->IsActive())
+            DrawToCamera(m_cameras[0])
     }
+    else
+        for (Camera* camera : m_cameras) {
+            if (!camera->IsActive())
+                continue;
+            DrawToCamera(camera)
+        }
 
     if (m_GUIEnabled) {
+        this->m_env->BeginDrawGUI();
+
         if (m_canvas)
             this->m_canvas->Draw();
 

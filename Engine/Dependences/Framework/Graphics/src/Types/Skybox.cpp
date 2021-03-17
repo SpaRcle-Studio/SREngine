@@ -142,7 +142,7 @@ void Framework::Graphics::Types::Skybox::Draw(Camera* camera) {
         m_shader->SetVec3("CamPos", camera->GetGLPosition());
     }
 
-    m_env->SetActiveTexture(0);
+    //m_env->SetActiveTexture(0);
 
     m_env->DrawSkybox(m_VAO, m_cubeMap);
 }

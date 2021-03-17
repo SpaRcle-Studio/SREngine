@@ -12,6 +12,8 @@
 #include <Environment/OpenGL.h>
 #include <EntityComponentSystem/Transform.h>
 
+#include <Types/Rigidbody.h>
+
 using namespace Framework;
 using namespace Framework::Scripting;
 using namespace Framework::Helper;
@@ -19,12 +21,14 @@ using namespace Framework::Helper::Math;
 using namespace Framework::Helper::Types;
 using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
+using namespace Framework::Physics;
+using namespace Framework::Physics::Types;
 
 int main() {
     std::string exe = FileSystem::GetPathToExe();
 
     Debug::Init(exe, true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Low);
+    Debug::SetLevel(Debug::Level::Full);
     ResourceManager::Init(exe + "/../../Resources");
 
     ShellExecute(nullptr, "open", (ResourceManager::GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
@@ -36,6 +40,13 @@ int main() {
     {
         ResourceManager::RegisterType("Mesh");
         ResourceManager::RegisterType("Texture");
+    }
+
+    // Register all components
+    {
+        Component::RegisterComponent("Mesh", []() -> Component* { return new Mesh(); });
+        Component::RegisterComponent("Rigidbody", []() -> Rigidbody* { return new Rigidbody(); });
+        Component::RegisterComponent("Camera", []() -> Camera* { return new Camera(); });
     }
 
     Environment::Set(new OpenGL());
