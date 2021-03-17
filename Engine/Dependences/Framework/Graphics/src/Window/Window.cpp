@@ -323,7 +323,8 @@ void Framework::Graphics::Window::FindAimedMesh() {
     }\
 
 void Framework::Graphics::Window::Draw() {
-   // if (m_GUIEnabled)
+    //if (m_GUIEnabled)
+        //this->m_env->BeginDrawGUI();
 
     if (m_countCameras == 1) {
         if (m_cameras[0]->IsActive())

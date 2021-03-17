@@ -399,6 +399,8 @@ bool Framework::Graphics::Render::DrawSettingsPanel() {
 
     ImGui::Begin("Render settings");
 
+    ImGui::Text("Pipeline name: %s", m_env->GetPipeLineName().c_str());
+
     ImGui::Text("Count meshes: %zu", m_countMeshes);
     ImGui::Text("Count transparent meshes: %zu", m_countTransparentMeshes);
 
