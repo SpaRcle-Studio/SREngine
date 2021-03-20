@@ -15,6 +15,8 @@
 #include <imgui_impl_glfw.h>
 #include <ImGuizmo.h>
 
+#include <Environment/BasicWindow.h>
+
 using namespace Framework::Helper;
 
 unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, int w, int h, int components) {
@@ -80,6 +82,23 @@ bool Framework::Graphics::OpenGL::StopGUI() {
 }
 
 bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples) {
+    //void* hInst  = GetCurrentInstance();
+
+    //Debug::Graph("OpenGL::PreInit() : create basic window...");
+    //void* window = CreateBasicWindow(hInst);
+
+    //Debug::Graph("OpenGL::PreInit() : initialize basic window...");
+    //void* gldc   = GetDCFromBasicWindow(window);
+    //void* glrc   = InitBasicWindow(gldc);
+    //if (!glrc){
+   //     Helper::Debug::Error("OpenGL::PreInit() : failed initializing basic window!");
+   //     return false;
+   // }
+
+    //ShowBasicWindow(window, true);
+
+    //============================================================================
+
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glfw...");
 
     if (!glfwInit()) {
@@ -141,11 +160,15 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
         g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
     });
 
-    Helper::Debug::Graph("OpenGL::Init() : initializing glew...");
-
+    Helper::Debug::Graph("OpenGL::PreInit() : initializing glew...");
     glewExperimental = TRUE;
     if (glewInit() != GLEW_OK) {
-        Helper::Debug::Error("OpenGL::Init() : failed initializing glew!");
+        Helper::Debug::Error("OpenGL::PreInit() : failed initializing glew!");
+        return false;
+    }
+
+    if (wglewIsSupported("WGL_ARB_create_context") != 1) {
+        Helper::Debug::Error("OpenGL::PreInit() : wglew is not support!");
         return false;
     }
 
@@ -153,7 +176,6 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
 }
 
 bool Framework::Graphics::OpenGL::PostInit() {
-
     glEnable(GL_BLEND); // Прозрачность стекла
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
@@ -205,12 +227,6 @@ void Framework::Graphics::OpenGL::SetWindowSize(float ratio, unsigned int w, uns
 
     glfwSetWindowSize(m_window, w, h);
     glViewport(0, 0, w, h);// определ¤ем окно просмотра
-
-    //glMatrixMode(GL_PROJECTION);// используем матрицу проекции
-    //glLoadIdentity();// Reset матрицы
-    //glViewport(0, 0, w, h);// определ¤ем окно просмотра
-    //gluPerspective(45, ratio, 0.1, 8000);// установить корректную перспективу.
-    //glMatrixMode(GL_MODELVIEW);// вернутьс¤ к модели
 }
 
 void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {

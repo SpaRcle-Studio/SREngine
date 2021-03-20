@@ -7,6 +7,7 @@
 #include <easy/profiler.h>
 #include <Environment/Environment.h>
 #include <GL/glew.h>
+#include <GL/wglew.h>
 
 #define GLFW_EXPOSE_NATIVE_WIN32
 

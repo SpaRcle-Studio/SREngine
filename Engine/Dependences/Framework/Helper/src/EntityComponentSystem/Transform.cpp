@@ -185,62 +185,23 @@ void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 a
 }
 
 void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vector3 axis, double value) {
-    //Matrix4x4 mat = Matrix4x4(Vector3(0.0), m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1.0));
-    //Matrix4x4 rotate = Matrix4x4(Vector3(0.0), axis.InverseAxis(2).ToQuat() * value, Vector3(1.0));
-
-    //m_globalRotation = (mat * rotate).GetQuat().EulerAngle().InverseAxis(2);
-
     if (m_parent) {
-        {
-            Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(), Vector3(1,1,1));
-            Matrix4x4 mat = Matrix4x4(0.0, m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1,1,1));
-
-            Matrix4x4 parMat = Matrix4x4(0.0, m_parent->m_globalRotation.InverseAxis(2).ToQuat().Inverse(), 1.0);
-
-            m_globalRotation = ((rotate * mat)).GetQuat().EulerAngle().InverseAxis(2);
-
-            this->m_gameObject->UpdateComponentsRotation();
-            //this->UpdateChildRotation(true);
-        }
-        //Quaternion qPar = m_parent->m_globalRotation.InverseAxis(2).ToQuat();
-
-        //Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(),  1.0);
-        //Matrix4x4 matLocal = Matrix4x4(0.0, m_localRotation.InverseAxis(2).ToQuat(),  1.0);
-        //m_localRotation = (rotate * matLocal).GetQuat().EulerAngle().InverseAxis(2);
-        //this->UpdateChildRotation(true);
-
-        /*Matrix4x4 rotate = Matrix4x4(0.0, m_parent->m_globalRotation.InverseAxis(2).ToQuat().Inverse(), Vector3(1,1,1));
-        Matrix4x4 mat = Matrix4x4(0.0, Vector3(0,0,0).ToQuat(), Vector3(1,1,1));
-
-        Vector3 originGlobal = (mat * rotate).GetQuat().EulerAngle().InverseAxis(2);
-
-        //!!!!!!
-
+        Matrix4x4 matLocal = Matrix4x4(0.0, m_localRotation.InverseAxis(2).ToQuat(), 1.0);
         Matrix4x4 matGlobal = Matrix4x4(0.0, m_parent->m_globalRotation.InverseAxis(2).ToQuat(), 1.0);
-        Matrix4x4 matOrigin = Matrix4x4(0.0, originGlobal.InverseAxis(2).ToQuat(), 1.0);
+        Matrix4x4 invMatGlobal = Matrix4x4(0.0, m_parent->m_globalRotation.InverseAxis(2).ToQuat().Inverse(), 1.0);
 
-        Matrix4x4 matLocal  = Matrix4x4(0.0, m_localRotation.InverseAxis(2).ToQuat(), 1.0);*/
+        Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
 
+        matLocal = matGlobal * matLocal;
+        matLocal = rotate * matLocal;
+        matLocal = invMatGlobal * matLocal;
 
-        //this->m_gameObject->m_children[0]->m_transform->m_localRotation = origin;
-        //this->m_gameObject->m_children[0]->m_transform->UpdateChildRotation(true);
+        m_localRotation = matLocal.GetQuat().EulerAngle().InverseAxis(2);
 
-        /*Transform* child = this->m_gameObject->m_children[0]->m_transform;
-
-        {
-            Matrix4x4 matGlobal = Matrix4x4(0.0, this->m_globalRotation.InverseAxis(2).ToQuat(), 1.0);
-            Matrix4x4 matOrigin = Matrix4x4(0.0, origin.InverseAxis(2).ToQuat(), 1.0);
-
-            Matrix4x4 matLocal  = Matrix4x4(0.0, child->m_localRotation.InverseAxis(2).ToQuat(), 1.0);
-
-            child->m_globalRotation = ((matGlobal * matOrigin) * matLocal).GetQuat().EulerAngle().InverseAxis(2);
-
-            child->m_gameObject->UpdateComponentsRotation();
-        }*/
-    }
-    else {
-        Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(), Vector3(1,1,1));
-        Matrix4x4 matGlobal = Matrix4x4(0.0, m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1,1,1));
+        this->UpdateChildRotation(true);
+    } else {
+        Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
+        Matrix4x4 matGlobal = Matrix4x4(0.0, m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
         m_globalRotation = (rotate * matGlobal).GetQuat().EulerAngle().InverseAxis(2);
 
         this->m_gameObject->UpdateComponentsRotation();
