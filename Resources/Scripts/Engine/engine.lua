@@ -113,10 +113,10 @@ function RotationTest()
 end
 
 function HierarchyTest()
-    local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
-    --local texture = Texture.Load("brickwall.jpg", true, TextureType.Diffuse, TextureFilter.LINEAR);
-    local mesh = Mesh.Load("engine/cube.obj", 0);
-    --local mesh = Mesh.Load("monkey_low.obj", 0);
+    --local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
+    local texture = Texture.Load("brickwall.jpg", true, TextureType.Diffuse, TextureFilter.LINEAR);
+    --local mesh = Mesh.Load("engine/cube.obj", 0);
+    local mesh = Mesh.Load("monkey_low.obj", 0);
     render:RegisterTexture(texture);
 
     -- first
