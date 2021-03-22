@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.16)
+project(bullet3)
+
+set(BULLET3_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+include(LinearMath.cmake)
+include(BulletCollision.cmake)
+include(BulletDynamic.cmake)
+
+add_library(bullet3 STATIC ${LINEARMATH_SRC} ${BULLETCOLLISION_SRC} ${BULLETDYNAMIC_SRC})
+
+# Устанавливаем директории
+target_include_directories(bullet3
+        PUBLIC ${LINEARMATH_INC_PUBLIC} ${BULLETCOLLISION_INC_PUBLIC} ${BULLETDYNAMIC_INC_PUBLIC}
+        PRIVATE ${LINEARMATH_INC_PRIVATE} ${BULLETCOLLISION_INC_PRIVATE} ${BULLETDYNAMIC_INC_PRIVATE}
+        INSTANCE ${LINEARMATH_INC_INSTANCE} ${BULLETCOLLISION_INC_INSTANCE} ${BULLETDYNAMIC_INC_INSTANCE}
+        )
