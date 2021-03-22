@@ -51,7 +51,12 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
 bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
         Helper::Debug::Log("TextureLoader::Free() : free source image data...");
-    stbi_image_free(data);
+    if (data)
+        stbi_image_free(data);
+    else {
+        Helper::Debug::Error("TextureLoader::Free() : data is nullptr!");
+        return false;
+    }
     return true;
 }
 

@@ -141,6 +141,7 @@ namespace Framework::Graphics {
                     -m_pos.z
             });
         }*/
+        [[nodiscard]] inline glm::vec3 GetRotation() const noexcept { return { m_pitch, m_yaw, m_roll }; }
         [[nodiscard]] inline glm::mat4 GetView() const noexcept { return this->m_viewMat; }
         [[nodiscard]] inline glm::mat4 GetProjection() const noexcept { return this->m_projection; }
         Math::Vector2 GetSize() { return m_cameraSize; }

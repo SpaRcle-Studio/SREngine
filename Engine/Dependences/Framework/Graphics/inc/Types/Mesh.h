@@ -15,6 +15,7 @@
 #include <EntityComponentSystem/Component.h>
 #include <Debug.h>
 #include <Types/List.h>
+#include <macros.h>
 
 namespace Framework::Graphics{
     class Render;
@@ -38,10 +39,10 @@ namespace Framework::Graphics::Types {
         ~Mesh();
     public:
         [[nodiscard]] inline glm::mat4 GetModelMatrix() const noexcept { return this->m_modelMat; }
-        inline void SetRender(Render* render) noexcept {
+        SR_FORCE_INLINE void SetRender(Render* render) noexcept {
             this->m_render = render;
         };
-        inline void SetVertexArray(std::vector<Vertex>& vertices) noexcept {
+        SR_FORCE_INLINE void SetVertexArray(std::vector<Vertex>& vertices) noexcept {
             this->m_isCalculated = false;
             this->m_countVertices = vertices.size();
             this->m_vertices = vertices;
@@ -51,21 +52,21 @@ namespace Framework::Graphics::Types {
 
         void SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale);
 
-        void OnMove(glm::vec3 newValue) noexcept override{
+        SR_FORCE_INLINE void OnMove(glm::vec3 newValue) noexcept override{
             m_position = newValue;
             ReCalcModel();
         }
-        void OnRotate(glm::vec3 newValue) noexcept override{
+        SR_FORCE_INLINE void OnRotate(glm::vec3 newValue) noexcept override{
             m_rotation = newValue;
             ReCalcModel();
         }
-        void OnScaled(glm::vec3 newValue) noexcept override{
+        SR_FORCE_INLINE void OnScaled(glm::vec3 newValue) noexcept override{
             m_scale = newValue;
             ReCalcModel();
         }
         void OnSelected(bool value) noexcept override;
 
-        void SetInverse(bool value) noexcept {
+        SR_FORCE_INLINE void SetInverse(bool value) noexcept {
             this->m_inverse = value;
             ReCalcModel();
         }
@@ -73,7 +74,7 @@ namespace Framework::Graphics::Types {
             return this->m_inverse;
         }
 
-        static void Inverse(Helper::Types::List<Mesh*> meshes){
+        SR_FORCE_INLINE static void Inverse(Helper::Types::List<Mesh*> meshes){
             for (size_t t = 0; t < meshes.Size(); t++)
                 meshes[t]->SetInverse(!meshes[t]->GetInverse());
         }
@@ -119,7 +120,7 @@ namespace Framework::Graphics::Types {
     protected:
         void OnDestroyGameObject() noexcept override;
     public:
-        inline void WaitCalculate() const {
+        SR_FORCE_INLINE void WaitCalculate() const {
             ret:
             if (m_isCalculated)
                 return;
@@ -146,12 +147,20 @@ namespace Framework::Graphics::Types {
 
         Mesh* Copy();
 
-        inline void SetToolID(unsigned char ID) noexcept {
+        SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept {
             this->m_toolID = ID;
         }
 
+#define ConfigureShader(shader) \
+        shader->SetMat4("modelMat", m_modelMat); \
+        shader->SetVec3("color", m_material->m_color); \
+        shader->SetIVec2("config", { \
+            (int)m_material->m_bloom, \
+                    m_toolID == 0 ? (int)this->m_isSelected : (int)(m_toolID + 1) \
+        }); \
+
         bool SimpleDraw();
-        inline bool Draw() noexcept {
+        SR_FORCE_INLINE bool Draw() noexcept {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
 
             if (m_isDestroy) return false;
@@ -160,18 +169,39 @@ namespace Framework::Graphics::Types {
                 if (!this->Calculate())
                     return false;
 
-            this->m_shader->SetMat4("modelMat", m_modelMat);
-            this->m_shader->SetVec3("color", m_material->m_color); //TODO: change to vec4
-            this->m_shader->SetIVec2("config", {
-                (int)m_material->m_bloom,
-                m_toolID == 0 ? (int)this->m_isSelected : (int)(m_toolID + 1)
-            });
-            //this->m_shader->SetInt("bloom", (int)m_material->m_bloom);
-            //this->m_shader->SetInt("selected", (int)this->m_isSelected);
-
-            this->m_material->Use();
+            if (!m_shader) {
+                ConfigureShader(Shader::GetDefaultGeometryShader())
+                this->m_material->UseWithDefShader();
+            }
+            else {
+                ConfigureShader(m_shader)
+                this->m_material->Use();
+            }
 
             this->m_env->DrawTriangles(m_VAO, m_countVertices);
+
+            return true;
+        }
+
+        SR_FORCE_INLINE bool DrawWireFrame() noexcept {
+            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
+
+            if (m_isDestroy) return false;
+
+            if (!m_isCalculated)
+                if (!this->Calculate())
+                    return false;
+
+            if (!m_shader) {
+                ConfigureShader(Shader::GetDefaultGeometryShader())
+                this->m_material->UseWithDefShader();
+            }
+            else {
+                ConfigureShader(m_shader)
+                this->m_material->Use();
+            }
+
+            this->m_env->DrawLines(m_VAO, m_countVertices);
 
             return true;
         }

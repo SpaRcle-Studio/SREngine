@@ -234,7 +234,9 @@ function ToolBar()
         end;
 
         if (GUIWindow.BeginMenu("GameObject")) then
-
+            if (GUIWindow.MenuItem("Cube")) then
+                Editor.InstanceBaseGameObject("Engine/cube.obj", scene, camera);
+            end;
             GUIWindow.EndMenu();
         end;
 

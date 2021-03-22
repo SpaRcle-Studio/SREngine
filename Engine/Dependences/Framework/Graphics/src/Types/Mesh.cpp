@@ -41,8 +41,9 @@ Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::
     {
     this->m_shader = shader;
 
-    if (!m_shader)
-        Debug::Warn("Mesh::Constructor() : shader is nullptr!");
+    // use default shader
+    //if (!m_shader)
+    //    Debug::Warn("Mesh::Constructor() : shader is nullptr!");
 
     this->m_geometry_name = std::move(name);
     this->m_material = material;
@@ -183,8 +184,10 @@ bool Mesh::Calculate() {
     }
 
     if (!m_shader){
-        Debug::Error("Mesh::Calculate() : mesh have not shader!");
-        return false;
+        if (!Shader::GetDefaultGeometryShader()) {
+            Debug::Error("Mesh::Calculate() : mesh have not shader!");
+            return false;
+        }
     }
 
     if (!m_material){
@@ -425,8 +428,15 @@ bool Mesh::DrawOnInspector() {
     if (m_shader) {
         Helper::GUI::DrawTextOnCenter("Shader");
         ImGui::Text("Name: %s", m_shader->GetName().c_str());
-    } else
-        Helper::GUI::DrawTextOnCenter("Shader (missing)");
+    } else {
+        auto shader = Shader::GetDefaultGeometryShader();
+        if (!shader)
+            Helper::GUI::DrawTextOnCenter("Shader (default-missing)");
+        else {
+            Helper::GUI::DrawTextOnCenter("Shader (default)");
+            ImGui::Text("Name: %s", shader->GetName().c_str());
+        }
+    }
 
     return true;
 }

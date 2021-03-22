@@ -21,9 +21,11 @@ Framework::Engine::Engine() {
 
 Framework::Engine::~Engine() = default;
 
-bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene) {
+bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene, Physics::PhysEngine* physics) {
     this->m_window = window;
     this->m_render = window->GetRender();
+
+    this->m_physics = physics;
 
     this->m_time = new Helper::Types::Time();
 
@@ -36,6 +38,11 @@ bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene) {
 
     if (!this->m_window->Create()){
         Helper::Debug::Error("Engine::Create() : failed create window!");
+        return false;
+    }
+
+    if (!m_physics->Create()) {
+        Helper::Debug::Error("Engine::Create() : failed create physics engine!");
         return false;
     }
 

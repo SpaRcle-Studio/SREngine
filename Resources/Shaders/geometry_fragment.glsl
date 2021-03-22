@@ -1,4 +1,5 @@
-#version 330 core
+//#version 330 core
+#version 410 core
 
 layout (location = 0) out vec4 FragColor;
 layout (location = 1) out vec4 BrightColor;
@@ -10,6 +11,8 @@ in VS_OUT {
     vec2 TexCoord;
     vec3 Normal;
 } fs_in;
+
+//in float vertexID;
 
 //uniform int selected;
 //uniform int bloom;
@@ -61,5 +64,6 @@ void main() {
 
     DepthColor = vec4(vec3(LinearizeDepth(gl_FragCoord.z) / 100), 1);
 
-    FragColor = vec4(result, alpha);
+    //if (fract(vertexID) < 0.1)
+        FragColor = vec4(result, alpha);
 }

@@ -13,6 +13,7 @@
 #include <EntityComponentSystem/Transform.h>
 
 #include <Types/Rigidbody.h>
+#include <Core/PhysEngine.h>
 
 using namespace Framework;
 using namespace Framework::Scripting;
@@ -65,9 +66,11 @@ int main() {
 
     Scene* scene = Scene::New("New scene");
 
+    auto* physics = new PhysEngine();
+
     Engine *engine = Engine::Get();
 
-    if(engine->Create(window, scene)){
+    if(engine->Create(window, scene, physics)){
       if (engine->Init(nullptr)){
           if (engine->Run()){
 

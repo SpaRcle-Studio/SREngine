@@ -9,6 +9,7 @@
 #include <ResourceManager/IResource.h>
 #include <Environment/Environment.h>
 #include <Environment/TextureFilters.h>
+#include <macros.h>
 
 namespace Framework::Graphics{
     class TextureLoader;
@@ -48,8 +49,8 @@ namespace Framework::Graphics::Types {
 
         void SetRender(Render* render);
 
-        [[nodiscard]] inline bool IsCalculated() const noexcept { return m_isCalculate; }
-        [[nodiscard]] inline unsigned int GetID() noexcept {
+        [[nodiscard]] SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculate; }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetID() noexcept {
             if (m_isDestroy) {
                 Debug::Error("Texture::GetID() : texture \""+m_resource_id+"\" is destroyed!");
                 return 0;
@@ -65,7 +66,7 @@ namespace Framework::Graphics::Types {
         }
 
         /* Call only from render pool events */
-        inline bool FreeVideoMemory() noexcept {
+        SR_FORCE_INLINE bool FreeVideoMemory() noexcept {
             if (Debug::GetLevel() >= Debug::Level::High)
                 Debug::Log("Texture::FreeVideoMemory() : free texture video memory...");
 

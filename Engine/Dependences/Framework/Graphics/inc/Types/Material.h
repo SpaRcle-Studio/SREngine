@@ -11,6 +11,7 @@
 #include <Render/Shader.h>
 
 #include <Math/Vector3.h>
+#include <macros.h>
 
 namespace Framework::Graphics::Types {
     using namespace Helper;
@@ -42,6 +43,17 @@ namespace Framework::Graphics::Types {
     public:
         static Helper::Math::Vector3 GetRandomColor();
     public:
+        SR_FORCE_INLINE void UseWithDefShader() const noexcept {
+            if (m_diffuse) {
+                m_env->BindTexture(0, m_diffuse->GetID());
+                Shader::GetDefaultGeometryShader()->SetInt("DiffuseMap", 0);
+                Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", true);
+            } else{
+                m_env->BindTexture(0, 0);
+                Shader::GetDefaultGeometryShader()->SetInt("DiffuseMap", 0);
+                Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", false);
+            }
+        }
         void Use() const noexcept;
     public:
         [[nodiscard]] inline bool IsTransparent() const noexcept { return m_transparent; };
@@ -50,6 +62,7 @@ namespace Framework::Graphics::Types {
         inline void SetBloom(bool value) noexcept { this->m_bloom = value; };
         [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom; };
 
+        inline void SetColor(float r, float g, float b) { this->m_color = { r, g, b, 1}; }
         inline void SetColor(Helper::Math::Vector3 color) { this->m_color = {color.x, color.y, color.z, 1}; }
         inline void SetColor(glm::vec4 color) { this->m_color = color; }
 

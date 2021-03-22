@@ -51,9 +51,9 @@ namespace Framework::Graphics {
         bool IsWindowOpen() override;
         bool CloseWindow() override;
 
-        inline void ClearBuffers() noexcept override { glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); }
-        inline void ClearColorBuffers(float r, float g, float b, float a) noexcept override { glClearColor(r, g, b, a); }
-        inline void SwapBuffers() noexcept override  {
+        SR_FORCE_INLINE void ClearBuffers() noexcept override { glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); }
+        SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) noexcept override { glClearColor(r, g, b, a); }
+        SR_FORCE_INLINE void SwapBuffers() noexcept override  {
             if (Helper::Debug::Profile()) {
                 EASY_FUNCTION(profiler::colors::Red);
             }
@@ -125,7 +125,7 @@ namespace Framework::Graphics {
         [[nodiscard]] inline bool IsFullScreen() const noexcept override {
             return glfwGetWindowMonitor(m_window) != nullptr;
         }
-        inline void SetFullScreen(bool value) override {
+        SR_FORCE_INLINE void SetFullScreen(bool value) override {
             if (IsFullScreen() == value)
                 return;
 
@@ -145,11 +145,11 @@ namespace Framework::Graphics {
 
         void PoolEvents() override;
 
-        inline std::string GetVendor()  const noexcept override { return std::string((char*)glGetString(GL_VENDOR));      }
-        inline std::string GetRenderer()const noexcept override { return std::string((char*)glGetString(GL_RENDERER));    }
-        inline std::string GetVersion() const noexcept override { return std::string((char*)glGetString(GL_VERSION));     }
+        SR_FORCE_INLINE std::string GetVendor()  const noexcept override { return std::string((char*)glGetString(GL_VENDOR));      }
+        SR_FORCE_INLINE std::string GetRenderer()const noexcept override { return std::string((char*)glGetString(GL_RENDERER));    }
+        SR_FORCE_INLINE std::string GetVersion() const noexcept override { return std::string((char*)glGetString(GL_VERSION));     }
 
-        inline void SetCursorPosition(glm::vec2 pos) const noexcept override {
+        SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const noexcept override {
             glfwSetCursorPos(m_window, pos.x, pos.y);
         }
 
@@ -157,53 +157,65 @@ namespace Framework::Graphics {
         bool CreateHDRFrameBufferObject(glm::vec2 size,unsigned int& rboDepth,  unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept override;
         bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept override;
 
-        inline void BindFrameBuffer(unsigned int FBO) const noexcept override {
+        SR_FORCE_INLINE void BindFrameBuffer(unsigned int FBO) const noexcept override {
             glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         }
 
-        inline void DeleteBuffer(unsigned int& FBO)const noexcept override {
+        SR_FORCE_INLINE void DeleteBuffer(unsigned int& FBO)const noexcept override {
         }
 
         // ============================= [ SHADER METHODS ] =============================
 
         bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) const noexcept override;
         unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept override;
-        inline void DeleteShader(unsigned int ID) const noexcept override { glDeleteProgram(ID); }
-        inline void UseShader(const unsigned int& ID) const noexcept override  { glUseProgram(ID); }
+        SR_FORCE_INLINE void DeleteShader(unsigned int ID) const noexcept override { glDeleteProgram(ID); }
+        SR_FORCE_INLINE void UseShader(const unsigned int& ID) const noexcept override  { glUseProgram(ID); }
 
-        inline void SetBool(const unsigned int& ID, const char* name, bool v)       const noexcept override {
+        SR_FORCE_INLINE void SetBool(const unsigned int& ID, const char* name, bool v)       const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name), 1, (int*)&v);
         }
-        inline void SetFloat(const unsigned int& ID, const char* name, float v)     const noexcept override {
+        SR_FORCE_INLINE void SetFloat(const unsigned int& ID, const char* name, float v)     const noexcept override {
             glUniform1fv(glGetUniformLocation(ID, name), 1, &v);
         }
-        inline void SetInt(const unsigned int& ID, const char* name, int v)         const noexcept override {
+        SR_FORCE_INLINE void SetInt(const unsigned int& ID, const char* name, int v)         const noexcept override {
             glUniform1iv(glGetUniformLocation(ID, name), 1, &v);
         }
-        inline void SetMat4(const unsigned int& ID, const char* name, const glm::mat4& v)  const noexcept override {
+        SR_FORCE_INLINE void SetMat4(const unsigned int& ID, const char* name, const glm::mat4& v)  const noexcept override {
             glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, &v[0][0]);
         }
-        inline void SetVec4(const unsigned int& ID, const char* name, const glm::vec4& v)  const noexcept override {
+        SR_FORCE_INLINE void SetVec4(const unsigned int& ID, const char* name, const glm::vec4& v)  const noexcept override {
             glUniform4fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetVec3(const unsigned int& ID, const char* name, const glm::vec3& v)  const noexcept override {
+        SR_FORCE_INLINE void SetVec3(const unsigned int& ID, const char* name, const glm::vec3& v)  const noexcept override {
             glUniform3fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetVec2(const unsigned int& ID, const char* name, const glm::vec2& v)  const noexcept override {
+        SR_FORCE_INLINE void SetVec2(const unsigned int& ID, const char* name, const glm::vec2& v)  const noexcept override {
             glUniform2fv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
-        inline void SetIVec2(const unsigned int& ID, const char* name, const glm::ivec2& v)  const noexcept override {
+        SR_FORCE_INLINE void SetIVec2(const unsigned int& ID, const char* name, const glm::ivec2& v)  const noexcept override {
             glUniform2iv(glGetUniformLocation(ID, name), 1, &v[0]);
         }
 
         // ============================== [ MESH METHODS ] ==============================
 
-        inline bool CalculateEmptyVAO(unsigned int& VAO) const noexcept override {
+        SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept override {
+            if (enabled)
+                glEnable(GL_CULL_FACE); // Отсечение граней
+            else
+                glDisable(GL_CULL_FACE); // Отсечение граней
+        }
+        SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept override {
+            if (enabled)
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            else
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+        SR_FORCE_INLINE bool CalculateEmptyVAO(unsigned int& VAO) const noexcept override {
             glGenVertexArrays(1, &VAO);
 
             return true;
         }
-        inline bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept override{
+        SR_FORCE_INLINE bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept override{
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
 
@@ -263,16 +275,15 @@ namespace Framework::Graphics {
             return true;
         }
         bool FreeMesh(unsigned int VAO)const noexcept override;
-        inline void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
-            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Green); }
-
+        SR_FORCE_INLINE void DrawLines(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
+            glBindVertexArray(VAO);
+            glDrawArrays(GL_LINES, 0, count_vertices);
+        }
+        SR_FORCE_INLINE void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
             glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, count_vertices);
-            //glBindVertexArray(0);
-
-            //if (Helper::Debug::Profile()) { EASY_END_BLOCK; }
         }
-        inline void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept override {
+        SR_FORCE_INLINE void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept override {
             glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, IBO);
             glDrawElements(
                     GL_TRIANGLES,      // mode
@@ -282,7 +293,7 @@ namespace Framework::Graphics {
             );
             glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, 0);
         }
-        inline bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept override{
+        SR_FORCE_INLINE bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept override{
             static const float QuadVertices[] = {
                     // positions   // texCoords
                     -1.0f,  1.0f,  0.0f, 1.0f,
@@ -308,7 +319,7 @@ namespace Framework::Graphics {
             return true;
         }
         unsigned int CalculateSkybox() const  noexcept override;
-        inline void DrawSkybox(const unsigned int& VAO, const unsigned int& CubeMap) const noexcept override {
+        SR_FORCE_INLINE void DrawSkybox(const unsigned int& VAO, const unsigned int& CubeMap) const noexcept override {
             glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
             // ... задание видовой и проекционной матриц
             glBindVertexArray(VAO);
@@ -317,37 +328,37 @@ namespace Framework::Graphics {
             glDepthFunc(GL_LESS); // set depth function back to default
         }
 
-        inline void DrawQuad(const unsigned int& VAO) const noexcept override{
+        SR_FORCE_INLINE void DrawQuad(const unsigned int& VAO) const noexcept override{
             glBindVertexArray(VAO);
             //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             glDrawArrays(GL_TRIANGLES, 0, 6);
             //glBindVertexArray(0);
         }
 
-        virtual inline void BindVAO(const unsigned int&  VAO) const noexcept override {
+        SR_FORCE_INLINE void BindVAO(const unsigned int&  VAO) const noexcept override {
             glBindVertexArray(VAO);
         }
-        virtual inline void Draw6Triangles() const noexcept override {
+        SR_FORCE_INLINE void Draw6Triangles() const noexcept override {
             glDrawArrays(GL_TRIANGLES, 0, 6);
         }
 
-        inline void BindTexture(const unsigned int&  ID) const noexcept override {
+        SR_FORCE_INLINE void BindTexture(const unsigned int&  ID) const noexcept override {
             glBindTexture(GL_TEXTURE_2D, ID);
         }
 
-        inline void BindTexture(const unsigned char activeTexture, const unsigned int&  ID) const noexcept override{
+        SR_FORCE_INLINE void BindTexture(const unsigned char activeTexture, const unsigned int&  ID) const noexcept override{
             glActiveTexture(GL_TEXTURE0 + activeTexture);
             glBindTexture(GL_TEXTURE_2D, ID);
         }
-        inline void SetActiveTexture(const unsigned char activeTexture) const noexcept override {
+        SR_FORCE_INLINE void SetActiveTexture(const unsigned char activeTexture) const noexcept override {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
         }
         unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha)const noexcept override;
         unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) const noexcept override;
-        inline void DeleteTexture(unsigned int ID) const  noexcept override {
+        SR_FORCE_INLINE void DeleteTexture(unsigned int ID) const  noexcept override {
             glDeleteTextures(1, &ID);
         }
-        inline void FreeCubeMap(unsigned int ID)const noexcept override{
+        SR_FORCE_INLINE void FreeCubeMap(unsigned int ID)const noexcept override{
             Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
             //glClearTexSubImage()
             glDeleteTextures(6, &ID); // TODO: I don't know if this works

@@ -78,6 +78,7 @@ namespace Framework::Graphics {
         EditorGrid*                m_grid                              = nullptr;
         bool                       m_gridEnabled                       = false;
         bool                       m_skyboxEnabled                     = true;
+        bool                       m_wireFrame                         = false;
 
         Skybox*                    m_skybox                            = nullptr;
         ColorBuffer*               m_colorBuffer                       = nullptr;
@@ -112,6 +113,8 @@ namespace Framework::Graphics {
     public:
         [[nodiscard]] inline ColorBuffer* GetColorBuffer() const noexcept { return this->m_colorBuffer; }
 
+        SR_FORCE_INLINE void SetWireFrameEnabled(const bool& value) noexcept { this->m_wireFrame = value; }
+        [[nodiscard]] SR_FORCE_INLINE bool GetWireFrameEnabled() const noexcept { return this->m_wireFrame; }
         void SetGridEnabled(bool value) { this->m_gridEnabled = value; }
         void SetSkybox(Skybox* skybox);
         inline void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }

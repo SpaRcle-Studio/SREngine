@@ -121,17 +121,15 @@ namespace Framework::Helper {
         [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
 
         //void DeltaTranslate(Vector3 delta);
-        void GlobalTranslate(Vector3 axis, double value);
-        void GlobalRotateAxis(Vector3 axis, double value);
-
         void Translate(Vector3 val, bool local = false) noexcept;
+        void GlobalTranslate(Vector3 axis, double value);
+
         void Rotate(Vector3 angle, bool local = false) noexcept;
         void RotateAxis(Vector3 axis, double angle, bool local = false) noexcept;
-    public:
-        void UpdateLocalPosition(Vector3 delta);
-        void UpdateLocalScale(Vector3 delta);
-        void UpdateLocalRotation(Vector3 delta);
+        void GlobalRotateAxis(Vector3 axis, double value);
 
+        void Scaling(Vector3 val);
+    public:
         void UpdateDefParentDir();
 
         void UpdateChildPosition(Vector3 delta, bool pivot);
@@ -152,8 +150,8 @@ namespace Framework::Helper {
         inline static const glm::vec3 roll      = { 0, 0, 1 };*/
 
         inline static const Vector3 right     = Vector3(1, 0, 0);
-        inline static const Vector3 forward   = Vector3(0, 0, 1 );
-        inline static const Vector3 up        = Vector3( 0, 1, 0 );
+        inline static const Vector3 up        = Vector3(0, 1, 0);
+        inline static const Vector3 forward   = Vector3(0, 0, 1);
     private:
         Vector3         m_localPosition              = { 0, 0, 0 };
         //Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
@@ -164,16 +162,6 @@ namespace Framework::Helper {
         //Quaternion      m_globalRotation             = Quaternion(Vector3(0,0,0));
         Vector3         m_globalRotation             = { 0, 0, 0 };
         Vector3         m_globalScale                = { 1, 1, 1 };
-
-        /*glm::vec3       m_localPosition              = { 0, 0, 0 };
-        glm::vec3       m_localRotation              = { 0, 0, 0 };
-        //glm::quat       m_localRotation              = glm::quat(glm::radians(glm::vec3(0,0,0)));
-        glm::vec3       m_localScale                 = { 1, 1, 1 };
-
-        glm::vec3       m_globalPosition             = { 0, 0, 0 };
-        glm::vec3       m_globalRotation             = { 0, 0, 0 };
-        //glm::quat       m_globalRotation             = glm::quat(glm::radians(glm::vec3(0,0,0)));
-        glm::vec3       m_globalScale                = { 1, 1, 1 };*/
 
         //!Vector3         m_defParentDir               = forward;
         GameObject*     m_gameObject                 = nullptr;

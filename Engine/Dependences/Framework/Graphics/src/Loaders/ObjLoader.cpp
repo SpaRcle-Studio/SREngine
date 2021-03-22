@@ -57,7 +57,8 @@ namespace Framework::Graphics {
 
     void ObjLoader::AddMesh() {
         if (!m_temp_vertexes.empty()) {
-            Mesh* mesh = new Mesh(Shader::GetStandartGeometryShader(), new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
+            Mesh* mesh = new Mesh(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
+            //Mesh* mesh = new Mesh(Shader::GetDefaultGeometryShader(), new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
             mesh->GetMaterial()->SetMesh(mesh);
             mesh->SetVertexArray(m_temp_vertexes);
             m_temp_meshes.push_back(mesh);

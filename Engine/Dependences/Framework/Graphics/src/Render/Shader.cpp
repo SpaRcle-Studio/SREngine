@@ -74,13 +74,6 @@ bool Framework::Graphics::Shader::Link() {
     return true;
 }
 
-Framework::Graphics::Shader *Framework::Graphics::Shader::GetStandartGeometryShader() noexcept {
-    if (!g_stdGeometry)
-        Debug::Error("Shader::GetStandartGeometryShader() : shader is nullptr!");
-
-    return g_stdGeometry;
-}
-
 bool Framework::Graphics::Shader::SetStandartGeometryShader(Shader* shader) noexcept {
     if (g_stdGeometry) {
         Debug::Warn("Shader::SetStandartGeometryShader() : shader already set!");

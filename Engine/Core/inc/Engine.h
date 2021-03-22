@@ -14,6 +14,7 @@
 #include <Events/EventManager.h>
 #include <Types/Time.h>
 #include <FileSystem/FileSystem.h>
+#include <Core/PhysEngine.h>
 
 namespace Framework {
     class Engine {
@@ -41,6 +42,8 @@ namespace Framework {
         Helper::Scene*          m_scene                 = nullptr;
 
         Helper::Types::Time*    m_time                  = nullptr;
+
+        Physics::PhysEngine*    m_physics               = nullptr;
     private:
         bool RegisterLibraries();
     public:
@@ -55,7 +58,7 @@ namespace Framework {
         [[nodiscard]] inline Graphics::Window* GetWindow() const noexcept { return m_window; }
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
     public:
-        bool Create(Graphics::Window* window, Helper::Scene* scene);
+        bool Create(Graphics::Window* window, Helper::Scene* scene, Physics::PhysEngine* physics);
         bool Init(Graphics::Camera* scene_camera);
         bool Run();
         void Await();
