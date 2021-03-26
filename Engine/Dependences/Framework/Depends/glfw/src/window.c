@@ -491,11 +491,12 @@ GLFWAPI void glfwDestroyWindow(GLFWwindow* handle)
 
 GLFWAPI int glfwWindowShouldClose(GLFWwindow* handle)
 {
-    _GLFWwindow* window = (_GLFWwindow*) handle;
-    assert(window != NULL);
+    //_GLFWwindow* window = (_GLFWwindow*) handle;
+   // assert(window != NULL);
 
-    _GLFW_REQUIRE_INIT_OR_RETURN(0);
-    return window->shouldClose;
+   // _GLFW_REQUIRE_INIT_OR_RETURN(0);
+    //return window->shouldClose;
+    return ((_GLFWwindow*) handle)->shouldClose;
 }
 
 GLFWAPI void glfwSetWindowShouldClose(GLFWwindow* handle, int value)
@@ -1096,7 +1097,7 @@ GLFWAPI GLFWwindowcontentscalefun glfwSetWindowContentScaleCallback(GLFWwindow* 
 
 GLFWAPI void glfwPollEvents(void)
 {
-    _GLFW_REQUIRE_INIT();
+   // _GLFW_REQUIRE_INIT();
     _glfwPlatformPollEvents();
 }
 

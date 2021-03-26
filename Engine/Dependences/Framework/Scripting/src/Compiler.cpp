@@ -13,7 +13,7 @@ Framework::Scripting::Script *Framework::Scripting::Compiler::Load(const std::st
 
     Helper::Debug::Log("Compiler::Load() : loading "+path + " script...");
 
-    Script* script = new Script(path, this);
+    auto* script = new Script(path, this);
 
     if (Framework::Scripting::Compiler::Compile(script)) {
         this->m_scripts.push_back(script);

@@ -28,6 +28,8 @@
 //========================================================================
 
 #include "internal.h"
+//#include "vulkan.h"
+
 
 #include <assert.h>
 #include <string.h>
@@ -329,4 +331,3 @@ GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance,
 
     return _glfwPlatformCreateWindowSurface(instance, window, allocator, surface);
 }
-

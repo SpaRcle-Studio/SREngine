@@ -5,6 +5,57 @@
 #ifndef GAMEENGINE_BASICWINDOW_H
 #define GAMEENGINE_BASICWINDOW_H
 
+#include <macros.h>
+#include <functional>
+#include <utility>
+#include <string>
+
+namespace Framework::Graphics {
+    class BasicWindow {
+    protected:
+        BasicWindow() = default;
+        ~BasicWindow() = default;
+        BasicWindow(BasicWindow&) = default;
+        //BasicWindow(const BasicWindow&) = default;
+    protected:
+        std::function<void(BasicWindow*, int, int)> m_callback_resize;
+        std::function<void(BasicWindow*, int, int)> m_callback_move;
+        std::function<void(BasicWindow*, double, double)> m_callback_scroll;
+        std::function<void(BasicWindow*, int)> m_callback_focus;
+        std::function<void(BasicWindow*)> m_callback_close;
+
+        bool m_windowOpen = false;
+    public:
+        SR_FORCE_INLINE void SetCallbackResize(std::function<void(BasicWindow*, int, int)> fun) {
+            this->m_callback_resize = std::move(fun);
+        }
+        SR_FORCE_INLINE void SetCallbackMove(std::function<void(BasicWindow*, int, int)> fun) {
+            this->m_callback_move = std::move(fun);
+        }
+        SR_FORCE_INLINE void SetCallbackScroll(std::function<void(BasicWindow*, double, double)> fun) {
+            this->m_callback_scroll = std::move(fun);
+        }
+        SR_FORCE_INLINE void SetCallbackFocus(std::function<void(BasicWindow*, int)> fun) {
+            this->m_callback_focus = std::move(fun);
+        }
+        SR_FORCE_INLINE void SetCallbackClose(std::function<void(BasicWindow*)> fun) {
+            this->m_callback_close = std::move(fun);
+        }
+
+        virtual bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY) { return false; }
+    public:
+        virtual bool Destroy() { return false; }
+        virtual bool Free() { return false; }
+        virtual SR_FORCE_INLINE void PollEvents() const noexcept { };
+        virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { };
+        [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowOpen() const noexcept { return m_windowOpen; };
+        virtual SR_FORCE_INLINE bool MakeContextCurrent(const std::string& pipelineName) { return false; };
+    };
+}
+
+#endif //GAMEENGINE_BASICWINDOW_H
+
+/*
 namespace Framework::Graphics {
     bool MakeFakeWindow(void *winInstance, void *ref_hDC, void *ref_HWND, void *ref_hrc);
 
@@ -170,45 +221,7 @@ namespace Framework::Graphics {
 
         return (void*)hwnd;
 
-        /*WNDCLASSA window_class = {
-                .style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC,
-                .lpfnWndProc = (WNDPROC) WndProc,
-                .hInstance = (HINSTANCE)winInstance,
-                .hCursor = LoadCursor(nullptr, IDC_ARROW),
-                .hbrBackground = nullptr,
-                .lpszClassName = "WGL_fdjhsklf",
-        };
 
-        if (!RegisterClassA(&window_class))
-            return nullptr;
-
-        // Specify a desired width and height, then adjust the rect so the window's client area will be
-        // that size.
-        RECT rect = {
-                .right = 1024,
-                .bottom = 576,
-        };
-        DWORD window_style = WS_OVERLAPPEDWINDOW;
-        AdjustWindowRect(&rect, window_style, false);
-
-        HWND window = CreateWindowExA(
-                0,
-                window_class.lpszClassName,
-                "SpaRcle Engine",
-                window_style,
-                CW_USEDEFAULT,
-                CW_USEDEFAULT,
-                rect.right - rect.left,
-                rect.bottom - rect.top,
-                nullptr,
-                nullptr,
-                (HINSTANCE)winInstance,
-                nullptr);
-
-        if (!window)
-            return nullptr;
-
-        return window;*/
     }
 
     void DestroyWindow(void *hDC, void *hwnd, void* hrc){
@@ -325,6 +338,44 @@ namespace Framework::Graphics {
     }
 }
 
-#endif
+#endif*/
 
-#endif //GAMEENGINE_BASICWINDOW_H
+/*WNDCLASSA window_class = {
+        .style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC,
+        .lpfnWndProc = (WNDPROC) WndProc,
+        .hInstance = (HINSTANCE)winInstance,
+        .hCursor = LoadCursor(nullptr, IDC_ARROW),
+        .hbrBackground = nullptr,
+        .lpszClassName = "WGL_fdjhsklf",
+};
+
+if (!RegisterClassA(&window_class))
+    return nullptr;
+
+// Specify a desired width and height, then adjust the rect so the window's client area will be
+// that size.
+RECT rect = {
+        .right = 1024,
+        .bottom = 576,
+};
+DWORD window_style = WS_OVERLAPPEDWINDOW;
+AdjustWindowRect(&rect, window_style, false);
+
+HWND window = CreateWindowExA(
+        0,
+        window_class.lpszClassName,
+        "SpaRcle Engine",
+        window_style,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        rect.right - rect.left,
+        rect.bottom - rect.top,
+        nullptr,
+        nullptr,
+        (HINSTANCE)winInstance,
+        nullptr);
+
+if (!window)
+    return nullptr;
+
+return window;*/

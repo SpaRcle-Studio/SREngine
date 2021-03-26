@@ -211,7 +211,7 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
     m_mutex.unlock();
 }
 
-void Framework::Graphics::Render::PoolEvents() noexcept {
+void Framework::Graphics::Render::PollEvents() noexcept {
     // Temp value
     static Mesh* temp = nullptr;
 

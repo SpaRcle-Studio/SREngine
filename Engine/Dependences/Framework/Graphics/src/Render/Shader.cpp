@@ -25,6 +25,9 @@ bool Framework::Graphics::Shader::Init() {
         return false;
     }
 
+    std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
+    this->m_fields = m_env->GetShaderFields(m_ID, path);
+
     this->m_isInit = true;
 
     return true;

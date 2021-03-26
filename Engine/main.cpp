@@ -10,6 +10,7 @@
 #include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
+#include <Environment/Vulkan.h>
 #include <EntityComponentSystem/Transform.h>
 
 #include <Types/Rigidbody.h>
@@ -51,9 +52,11 @@ int main() {
     }
 
     Environment::Set(new OpenGL());
+    //Environment::Set(new Vulkan());
 
     auto *render = new Render();
 
+    //WindowFormat format = WindowFormat::_1600_900;
     WindowFormat format = WindowFormat::_1366_768;
     auto *window = new Window(
             "SpaRcle Engine",
@@ -61,7 +64,7 @@ int main() {
             render,
             false,
             false,
-            4
+            0
     );
 
     Scene* scene = Scene::New("New scene");

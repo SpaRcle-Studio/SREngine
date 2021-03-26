@@ -162,7 +162,7 @@ namespace Framework::Graphics {
         bool Close();
     public:
         /** \brief Check all render events. For example: new meshes, remove old meshes */
-        void PoolEvents()               noexcept;
+        void PollEvents()               noexcept;
         bool DrawGeometry()             noexcept;
         bool DrawSkybox()               noexcept;
         void DrawGrid()                 noexcept;

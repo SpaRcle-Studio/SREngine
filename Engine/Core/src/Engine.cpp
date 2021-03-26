@@ -125,7 +125,11 @@ bool Framework::Engine::Run() {
 }
 
 void Framework::Engine::Await() {
+    Debug::Info("Engine::Await() : load engine script...");
+
     Scripting::Script* engine = m_compiler->Load("engine", true);
+
+    Debug::Info("Engine::Await() : wait close engine...");
 
     while (m_window->IsWindowOpen()) {
         EventManager::PoolEvents();

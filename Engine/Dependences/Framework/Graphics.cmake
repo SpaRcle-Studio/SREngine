@@ -1,4 +1,6 @@
 
+find_package(Vulkan REQUIRED FATAL_ERROR)
+
 set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Mesh.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/ManipulationTool.cpp
@@ -30,6 +32,7 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/DockSpace.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan.cpp
 
         ############################################################
 
@@ -47,7 +50,10 @@ set(GRAPHICS_SRC
 set(GRAPHICS_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Graphics/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/inc
+
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
+        #${FRAMEWORK_ROOT_DIR}/Depends/vulkan/vulkan
+        ${Vulkan_INCLUDE_DIRS}
         #${FRAMEWORK_ROOT_DIR}/Depends/imgui
         )
 

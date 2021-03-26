@@ -18,6 +18,12 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <Debug.h>
 
+#ifdef WIN32
+    #include <wingdi.h>
+#endif
+
+//#define SR_OPENGL_USE_WINAPI
+
 namespace Framework::Graphics {
     class OpenGL : public Environment {
         OpenGL(OpenGL&) = delete;
@@ -25,14 +31,18 @@ namespace Framework::Graphics {
         OpenGL() = default;
         ~OpenGL() = default;
     private:
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
         GLFWwindow*             m_window          = nullptr;
         GLFWmonitor*            m_monitor         = nullptr;
         const GLFWvidmode*      m_vidMode         = nullptr;
+#endif
     public:
         bool PreInitGUI(const std::string& fontPath) override;
         bool InitGUI() override;
         bool StopGUI() override;
-        void BeginDrawGUI() override;
+        bool BeginDrawGUI() override;
         void EndDrawGUI() override;
 
         [[nodiscard]] inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
@@ -43,21 +53,30 @@ namespace Framework::Graphics {
 
         bool MakeWindow(const char* winName, Types::WindowFormat* format, bool fullScreen) override;
 
-        bool PreInit(unsigned int smooth_samples) override;
+        bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool SetContextCurrent() override;
         bool Init(int swapInterval) override;
         bool PostInit() override;
 
-        bool IsWindowOpen() override;
+        //bool IsWindowOpen() override;
+
+        [[nodiscard]] SR_FORCE_INLINE bool Framework::Graphics::OpenGL::IsWindowOpen() const noexcept override {
+#ifdef  SR_OPENGL_USE_WINAPI
+            return m_basicWindow->IsWindowOpen();
+#else
+            return !glfwWindowShouldClose(m_window);
+#endif
+        }
         bool CloseWindow() override;
 
-        SR_FORCE_INLINE void ClearBuffers() noexcept override { glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); }
-        SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) noexcept override { glClearColor(r, g, b, a); }
-        SR_FORCE_INLINE void SwapBuffers() noexcept override  {
-            if (Helper::Debug::Profile()) {
-                EASY_FUNCTION(profiler::colors::Red);
-            }
+        SR_FORCE_INLINE void ClearBuffers() const noexcept override { glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); }
+        SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const noexcept override { glClearColor(r, g, b, a); }
+        SR_FORCE_INLINE void SwapBuffers() const noexcept override  {
+#ifdef  SR_OPENGL_USE_WINAPI
+            this->m_basicWindow->SwapBuffers();
+#else
             glfwSwapBuffers(m_window);
+#endif
         }
 
         void SetWindowSize(float ratio, unsigned int w, unsigned int h) override;
@@ -66,7 +85,11 @@ namespace Framework::Graphics {
 
         glm::vec2 GetMousePos() override {
             double posx = 0.0, posy = 0.0;
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
             glfwGetCursorPos(m_window, &posx, &posy);
+#endif
             return { posx, posy };
         }
         glm::vec3 GetPixelColor(glm::vec2 uPos) override {
@@ -115,15 +138,20 @@ namespace Framework::Graphics {
 
         glm::vec2 GetWindowSize() noexcept override {
             glm::vec2 val;
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
             glfwGetWindowSize(m_window, (int*)&val.x, (int*)&val.y);
+#endif
             return val;
-        }
-        glm::vec2 GetWindowPosition() noexcept override {
-            return {0,0};
         }
 
         [[nodiscard]] inline bool IsFullScreen() const noexcept override {
+#ifdef  SR_OPENGL_USE_WINAPI
+            return false;
+#else
             return glfwGetWindowMonitor(m_window) != nullptr;
+#endif
         }
         SR_FORCE_INLINE void SetFullScreen(bool value) override {
             if (IsFullScreen() == value)
@@ -131,26 +159,43 @@ namespace Framework::Graphics {
 
             if (value) {
                 Helper::Debug::Graph("OpenGL::SetFullScreen(): enable full screen...");
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
                 const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
                 // switch to full screen
                 glfwSetWindowMonitor(m_window, glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, 0 );
+#endif
             }
             else {
                 Helper::Debug::Graph("OpenGL::SetFullScreen(): disable full screen...");
+#ifdef  SR_OPENGL_USE_WINAPI
 
+#else
                 const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
                 glfwSetWindowMonitor(m_window, NULL, 0, 0,  mode->width, mode->height, 0);
+#endif
             }
         }
 
-        void PoolEvents() override;
+        SR_FORCE_INLINE void PollEvents() const noexcept override {
+#ifdef  SR_OPENGL_USE_WINAPI
+            this->m_basicWindow->PollEvents();
+#else
+            glfwPollEvents();
+#endif
+        }
 
         SR_FORCE_INLINE std::string GetVendor()  const noexcept override { return std::string((char*)glGetString(GL_VENDOR));      }
         SR_FORCE_INLINE std::string GetRenderer()const noexcept override { return std::string((char*)glGetString(GL_RENDERER));    }
         SR_FORCE_INLINE std::string GetVersion() const noexcept override { return std::string((char*)glGetString(GL_VERSION));     }
 
         SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const noexcept override {
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
             glfwSetCursorPos(m_window, pos.x, pos.y);
+#endif
         }
 
         bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) const noexcept override;
@@ -166,6 +211,7 @@ namespace Framework::Graphics {
 
         // ============================= [ SHADER METHODS ] =============================
 
+        std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept override;
         bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) const noexcept override;
         unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept override;
         SR_FORCE_INLINE void DeleteShader(unsigned int ID) const noexcept override { glDeleteProgram(ID); }
@@ -194,6 +240,33 @@ namespace Framework::Graphics {
         }
         SR_FORCE_INLINE void SetIVec2(const unsigned int& ID, const char* name, const glm::ivec2& v)  const noexcept override {
             glUniform2iv(glGetUniformLocation(ID, name), 1, &v[0]);
+        }
+
+        // =============================================================================
+
+        SR_FORCE_INLINE void SetMat4OfLocation(const unsigned int& location, const glm::mat4x4& v) const noexcept override {
+            glUniformMatrix4fv(location, 1, GL_FALSE, &v[0][0]);
+        }
+        SR_FORCE_INLINE void SetVec4OfLocation(const unsigned int& location, const glm::vec4 & v)  const noexcept override {
+            glUniform4fv(location, 1, &v[0]);
+        }
+        SR_FORCE_INLINE void SetVec3OfLocation(const unsigned int& location, const glm::vec3 & v)  const noexcept override {
+            glUniform3fv(location, 1, &v[0]);
+        }
+        SR_FORCE_INLINE void SetVec2OfLocation(const unsigned int& location, const glm::vec2 & v)    const noexcept override {
+            glUniform2fv(location, 1, &v[0]);
+        }
+        SR_FORCE_INLINE void SetIVec2OfLocation(const unsigned int& location, const glm::ivec2 & v)  const noexcept override {
+            glUniform2iv(location, 1, &v[0]);
+        }
+        SR_FORCE_INLINE void SetBoolOfLocation(const unsigned int& location, bool v)                 const noexcept override {
+            glUniform1iv(location, 1, (int*)&v);
+        }
+        SR_FORCE_INLINE void SetFloatOfLocation(const unsigned int& location, float v)               const noexcept override {
+            glUniform1fv(location, 1, &v);
+        }
+        SR_FORCE_INLINE void SetIntOfLocation(const unsigned int& location, int v)                   const noexcept override {
+            glUniform1iv(location, 1, &v);
         }
 
         // ============================== [ MESH METHODS ] ==============================

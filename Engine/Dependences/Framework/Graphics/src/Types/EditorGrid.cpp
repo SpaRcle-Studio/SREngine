@@ -33,7 +33,7 @@ void Framework::Graphics::EditorGrid::Draw() {
         Camera *camera = m_render->GetCurrentCamera();
 
         camera->UpdateShaderProjView(m_shader);
-        m_shader->SetVec3("CamPos", camera->GetGLPosition());
+        //m_shader->SetVec3("CamPos", camera->GetGLPosition());
 
         if (VAO)
             this->m_env->DrawTriangles(VAO, 6);

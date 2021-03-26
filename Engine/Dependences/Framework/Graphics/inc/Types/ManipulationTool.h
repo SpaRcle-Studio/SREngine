@@ -8,7 +8,7 @@
 #include <Math/Vector3.h>
 #include <Math/Matrix4x4.h>
 
-#include <Types/Mesh.h>
+//#include <Types/Mesh.h>
 
 #include <Types/List.h>
 
@@ -27,6 +27,8 @@ namespace Framework::Graphics::Types {
         Translate, Rotate, Scale
     };
 
+    class Mesh;
+
     //! use only from window thread
     class ManipulationTool {
     private:
@@ -40,7 +42,7 @@ namespace Framework::Graphics::Types {
 
         Operation m_operation               = Operation::Translate;
 
-        Math::Axis m_activeAxis             = Math::Axis::NONE;
+        Helper::Math::Axis m_activeAxis     = Helper::Math::Axis::NONE;
 
         bool m_required                     = false;
         bool m_isDraw                       = false;
@@ -54,12 +56,12 @@ namespace Framework::Graphics::Types {
         Mesh* m_arrowY                      = nullptr;
         Mesh* m_arrowZ                      = nullptr;
 
-        Math::Vector3 m_posDrag             = Math::Vector3();
-        Math::Vector3 m_rotDrag             = Math::Vector3();
-        Math::Vector3 m_sclDrag             = Math::Vector3();
+        Helper::Math::Vector3 m_posDrag     = Helper::Math::Vector3();
+        Helper::Math::Vector3 m_rotDrag     = Helper::Math::Vector3();
+        Helper::Math::Vector3 m_sclDrag     = Helper::Math::Vector3();
 
-        Math::Vector3 m_position            = Math::Vector3();
-        Math::Vector3 m_rotation            = Math::Vector3();
+        Helper::Math::Vector3 m_position    = Helper::Math::Vector3();
+        Helper::Math::Vector3 m_rotation    = Helper::Math::Vector3();
         float m_distance                    = 0.f;
 
         size_t m_countTargetMeshes          = 0;
@@ -69,9 +71,9 @@ namespace Framework::Graphics::Types {
         //double m_dists[2] = { 0.0, 0.0 };
         bool m_mouseNeedReCalc = true;
         double m_oldMouseDist = 0.0;
-        Math::Vector2 m_Dirs[2] = {
-                Math::Vector2(), // +
-                Math::Vector2(), // -
+        Helper::Math::Vector2 m_Dirs[2] = {
+                Helper::Math::Vector2(), // +
+                Helper::Math::Vector2(), // -
         };
 
         Mesh
@@ -85,7 +87,7 @@ namespace Framework::Graphics::Types {
         [[nodiscard]] inline unsigned int GetOperationInt() const noexcept { return (unsigned int)m_operation; }
         inline void SetOperationInt(unsigned int value) noexcept { this->m_operation = (Operation)value; }
         double GetDrag();
-        inline void SetActiveAxis(const Math::Axis& axis) noexcept {this->m_activeAxis = axis; }
+        inline void SetActiveAxis(const Helper::Math::Axis& axis) noexcept {this->m_activeAxis = axis; }
         void DisableAxis() noexcept;
         bool Clear();
         bool AddMesh(Mesh* mesh);
@@ -107,7 +109,7 @@ namespace Framework::Graphics::Types {
             this->m_operation = op;
         }
     public:
-        [[nodiscard]] Math::Axis GetActiveAxis() const noexcept {
+        [[nodiscard]] Helper::Math::Axis GetActiveAxis() const noexcept {
             return m_activeAxis;
         }
     public:

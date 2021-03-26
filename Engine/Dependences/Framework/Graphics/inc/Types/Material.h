@@ -46,11 +46,11 @@ namespace Framework::Graphics::Types {
         SR_FORCE_INLINE void UseWithDefShader() const noexcept {
             if (m_diffuse) {
                 m_env->BindTexture(0, m_diffuse->GetID());
-                Shader::GetDefaultGeometryShader()->SetInt("DiffuseMap", 0);
+                Shader::GetDefaultGeometryShader()->SetInt("diffuseMap", 0);
                 Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", true);
             } else{
                 m_env->BindTexture(0, 0);
-                Shader::GetDefaultGeometryShader()->SetInt("DiffuseMap", 0);
+                Shader::GetDefaultGeometryShader()->SetInt("diffuseMap", 0);
                 Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", false);
             }
         }

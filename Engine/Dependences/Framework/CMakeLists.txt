@@ -28,6 +28,8 @@ include(Physics.cmake)
 include(Scripting.cmake)
 
 find_package(OpenGL REQUIRED)
+find_package(Vulkan REQUIRED FATAL_ERROR)
+
 #find_package(PythonLibs REQUIRED)
 #find_package(Lua51 REQUIRED)
 
@@ -35,9 +37,14 @@ find_package(OpenGL REQUIRED)
 
 #include_directories(${PYTHON_INCLUDE_DIRS})
 
+#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Depends/vulkan/lib/vulkan-1.lib
+#        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
+
+include_directories(${Vulkan_INCLUDE_DIRS})
+
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC} Helper/inc/macros.h)
-target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler bullet3)
+add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
+target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler bullet3 ${Vulkan_LIBRARY})
 if(WIN32)
     if(MSVC)
 

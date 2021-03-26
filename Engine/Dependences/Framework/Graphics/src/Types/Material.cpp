@@ -70,14 +70,14 @@ Material::~Material() {
 
 void Material::Use() const noexcept {
     if (m_diffuse) {
-        m_env->BindTexture(0, m_diffuse->GetID());
-        m_mesh->m_shader->SetInt("DiffuseMap", 0);
-        m_mesh->m_shader->SetBool("hasDiffuse", true);
-    } else{
-        m_env->BindTexture(0, 0);
-        m_mesh->m_shader->SetInt("DiffuseMap", 0);
-        m_mesh->m_shader->SetBool("hasDiffuse", false);
-    }
+        m_env->BindTexture(4, m_diffuse->GetID());
+        m_mesh->m_shader->SetInt("diffuseMap", 4);
+        //m_mesh->m_shader->SetBool("hasDiffuse", true);
+    } //else{
+        //m_env->BindTexture(1, 0);
+        //m_mesh->m_shader->SetInt("diffuseMap", 1);
+        //_mesh->m_shader->SetBool("hasDiffuse", false);
+    //}
 }
 
 bool Material::SetMesh(Mesh *mesh) {

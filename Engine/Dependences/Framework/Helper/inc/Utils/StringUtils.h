@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <vector>
 #include <locale>
+#include <macros.h>
 
 namespace Framework::Helper {
     class StringUtils {
@@ -25,6 +26,23 @@ namespace Framework::Helper {
             unsigned char b = ((index) & 0xFF);        // Extract the BB byte
 
             return { r, g, b };
+        }
+
+        static SR_FORCE_INLINE std::string BackRead(const std::string& str, const char c, const int offset = 0) {
+            std::string result = std::string();
+
+            size_t size = str.size();
+
+            for (size_t i = (size - 1) + offset; i > 0; i--) {
+                if (str[i] != c)
+                    result += str[i];
+                else
+                    break;
+            }
+
+            std::reverse(result.begin(), result.end());
+
+            return result;
         }
 
         static inline std::string ReadTo(std::string str, const char c, int offset = 0) {

@@ -102,7 +102,7 @@ namespace Framework::Graphics {
         glm::vec2                                           m_windowPos             = { 0, 0 };
         glm::vec2                                           m_newWindowPos          = { 0, 0 };
     private:
-        void PoolEvents();
+        void PollEvents();
         void Thread();
         bool InitEnvironment();
         void Draw();

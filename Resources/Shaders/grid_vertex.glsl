@@ -5,7 +5,6 @@
 
 uniform mat4 projMat;
 uniform mat4 viewMat;
-uniform vec3 CamPos;
 
 layout(location = 1) out vec3 nearPoint;
 layout(location = 2) out vec3 farPoint;

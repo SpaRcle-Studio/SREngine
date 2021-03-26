@@ -14,8 +14,7 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
 #include <ImGuizmo.h>
-
-#include <Environment/BasicWindow.h>
+#include <Environment/Win32Window.h>
 
 using namespace Framework::Helper;
 
@@ -65,8 +64,12 @@ bool Framework::Graphics::OpenGL::PreInitGUI(const std::string& fontPath) {
 bool Framework::Graphics::OpenGL::InitGUI() {
     Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
 
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
     ImGui_ImplGlfw_InitForOpenGL(this->m_window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
+#endif
 
     return true;
 }
@@ -81,7 +84,7 @@ bool Framework::Graphics::OpenGL::StopGUI() {
     return true;
 }
 
-bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples) {
+bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
     //void* hInst  = GetCurrentInstance();
 
     //Debug::Graph("OpenGL::PreInit() : create basic window...");
@@ -99,6 +102,10 @@ bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples) {
 
     //============================================================================
 
+
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glfw...");
 
     if (!glfwInit()) {
@@ -107,10 +114,14 @@ bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples) {
     }
 
     glfwWindowHint(GLFW_SAMPLES, (int)smooth_samples); // 4x сглаживание
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //glfwWindowHint(GLFW_SAMPLES, 0);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); //3
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5); //3
+    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+#endif
+
 
     return true;
 }
@@ -118,22 +129,38 @@ bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples) {
 bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, Types::WindowFormat* format, bool fullScreen) {
     this->m_winFormat = format;
 
+#ifdef  SR_OPENGL_USE_WINAPI
+    this->m_basicWindow = new Win32Window();
+    if (!this->m_basicWindow->Create(winName, 0, 0, format->Width(), format->Height())) {
+        Helper::Debug::Error("OpenGL::MakeWindow() : failed create window!");
+        return false;
+    } else
+        return true;
+#else
     m_monitor = glfwGetPrimaryMonitor();
     m_vidMode = glfwGetVideoMode(m_monitor);
 
     m_window = glfwCreateWindow((int)m_winFormat->Width(), (int)m_winFormat->Height(), winName, fullScreen ? m_monitor : nullptr, nullptr);
 
     return m_window != nullptr;
-
+#endif
 }
 
 bool Framework::Graphics::OpenGL::SetContextCurrent() {
-    glfwMakeContextCurrent(m_window);
+#ifdef  SR_OPENGL_USE_WINAPI
+    this->m_basicWindow->MakeContextCurrent(this->GetPipeLineName());
+#else
+    if (m_window)
+        glfwMakeContextCurrent(m_window);
+#endif
 
     return true;
 }
 
 bool Framework::Graphics::OpenGL::Init(int swapInterval) {
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
     this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
     glfwSwapInterval(swapInterval);
 
@@ -159,6 +186,7 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
 
         g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
     });
+#endif
 
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glew...");
     glewExperimental = TRUE;
@@ -200,21 +228,10 @@ bool Framework::Graphics::OpenGL::PostInit() {
 }
 
 bool Framework::Graphics::OpenGL::CloseWindow() {
-
     return true;
 }
 
-bool Framework::Graphics::OpenGL::IsWindowOpen() {
-    return !glfwWindowShouldClose(m_window);
-}
 
-void Framework::Graphics::OpenGL::PoolEvents() {
-    if (Helper::Debug::Profile()) {
-        EASY_FUNCTION(profiler::colors::Green);
-    }
-
-    glfwPollEvents();
-}
 
 void Framework::Graphics::OpenGL::SetWindowSize(float ratio, unsigned int w, unsigned int h) {
     if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
@@ -225,12 +242,21 @@ void Framework::Graphics::OpenGL::SetWindowSize(float ratio, unsigned int w, uns
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("OpenGL::SetWindowSize() : width = "+std::to_string(w) + "; height = "+ std::to_string(h));
 
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
     glfwSetWindowSize(m_window, w, h);
+#endif
+
     glViewport(0, 0, w, h);// определ¤ем окно просмотра
 }
 
 void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
     glfwSetWindowPos(m_window, x, y);
+#endif
 }
 
 bool Framework::Graphics::OpenGL::FreeMesh(unsigned int VAO)const noexcept {
@@ -244,6 +270,54 @@ bool Framework::Graphics::OpenGL::FreeMesh(unsigned int VAO)const noexcept {
         Helper::Debug::Error("OpenGL::FreeMesh() : VAO is zero! Something went wrong...");
         return false;
     }
+}
+
+std::vector<std::string> FindFields(const std::string& path) {
+    std::ifstream stream(path, std::ios::in);
+
+    auto fields = std::vector<std::string>();
+
+    if (stream.is_open()) {
+        std::string line;
+        while (getline(stream, line)) {
+            auto p = line.find("uniform");
+            if (p != -1) {
+                line = StringUtils::ReadTo(line, ';', p);
+                if (line.find("//") == -1) {
+                    line = StringUtils::BackRead(line, ' ', -1);
+                    //std::cout << line << std::endl;
+                    fields.push_back(line);
+                }
+            }
+        }
+        stream.close();
+    }
+
+    return fields;
+}
+
+std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields(const unsigned int& ID, const std::string &path) const noexcept {
+    auto v = FindFields(path + "_vertex.glsl");
+    auto f = FindFields(path + "_fragment.glsl");
+
+    v.insert(v.end(), f.begin(), f.end());
+
+    auto fields = std::map<std::string, unsigned int>();
+
+    for (const auto& field : v)
+        if (fields.find(field) == fields.end()) {
+            int location = glGetUniformLocation(ID, field.c_str());
+            if (location < 0)
+                Debug::Error("OpenGL::GetShaderFields() : field \""+field+"\" not found! ("+std::to_string(location)+") \n\tMay be this field is not using...");
+            else {
+                if (Debug::GetLevel() >= Debug::Level::High)
+                    Debug::Log("OpenGL::GetShaderFields() : add field \""+ field +"\"");
+
+                fields.insert(std::make_pair(field, location));
+            }
+        }
+
+    return fields;
 }
 
 bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *fragment, unsigned int *vertex) const noexcept {
@@ -640,7 +714,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateSkybox() const noexcept {
     return VAO;
 }
 
-void Framework::Graphics::OpenGL::BeginDrawGUI() {
+bool Framework::Graphics::OpenGL::BeginDrawGUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -649,12 +723,19 @@ void Framework::Graphics::OpenGL::BeginDrawGUI() {
     ImGuizmo::Enable(true);
 
     ImGui::GetStyle().WindowRounding = 0.0f;
+
+    return true;
 }
 
 void Framework::Graphics::OpenGL::EndDrawGUI() {
     ImGui::Render();
     int display_w, display_h;
+#ifdef  SR_OPENGL_USE_WINAPI
+
+#else
     glfwGetFramebufferSize(this->m_window, &display_w, &display_h);
+#endif
+
     glViewport(0, 0, display_w, display_h);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -722,6 +803,8 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
     else
         glDisable(GL_DEPTH_TEST);
 }
+
+
 
 
 

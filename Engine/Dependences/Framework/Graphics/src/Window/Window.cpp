@@ -205,13 +205,13 @@ void Framework::Graphics::Window::Thread() {
         clock_t beginFrame = clock();
 
         {
-            this->m_env->PoolEvents();
+            this->m_env->PollEvents();
 
-            this->PoolEvents();
+            this->PollEvents();
 
             this->m_env->ClearBuffers();
 
-            this->m_render->PoolEvents();
+            this->m_render->PollEvents();
 
             this->Draw();
 
@@ -246,8 +246,8 @@ bool Framework::Graphics::Window::InitEnvironment() {
     Debug::Graph("Window::InitEnvironment() : initializing render environment...");
 
     Debug::Graph("Window::InitEnvironment() : pre-initializing...");
-    if (!this->m_env->PreInit(m_smoothSamples)){
-        Debug::Graph("Window::InitEnvironment() : failed pre-initializing!");
+    if (!this->m_env->PreInit(m_smoothSamples, "SpaRcle Engine", "SREngine")){
+        Debug::Graph("Window::InitEnvironment() : failed pre-initializing environment!");
         return false;
     }
 
@@ -258,16 +258,22 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
-    this->m_env->SetContextCurrent();
-
-    {
-        this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf");
-        GUI::ICanvas::InitStyle();
-        this->m_env->InitGUI();
+    if (!this->m_env->SetContextCurrent()) {
+        Debug::Error("Window::InitEnvironment() : failed set context!");
+        return false;
     }
 
+    if (this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
+        GUI::ICanvas::InitStyle();
+        this->m_env->InitGUI();
+    } else
+        Debug::Error("Window::InitEnvironment() : failed pre-initializing GUI!");
+
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
-    this->m_env->Init(m_vsync);
+    if (!this->m_env->Init(m_vsync)) {
+        Debug::Error("Window::InitEnvironment() : failed initializing environment!");
+        return false;
+    }
 
     Debug::Graph("Window::InitEnvironment() : post-initializing environment...");
     this->m_env->PostInit();
@@ -327,8 +333,24 @@ void Framework::Graphics::Window::Draw() {
         //this->m_env->BeginDrawGUI();
 
     if (m_countCameras == 1) {
-        if (m_cameras[0]->IsActive())
+        if (m_cameras[0]->IsActive()) {
             DrawToCamera(m_cameras[0])
+
+           /* this->m_render->SetCurrentCamera(m_cameras[0]);
+            m_cameras[0]->GetPostProcessing()->BeginSkybox();
+            {
+                this->m_render->DrawSkybox();
+                this->m_render->DrawGrid();
+            }
+            m_cameras[0]->GetPostProcessing()->EndSkybox();
+
+            m_cameras[0]->GetPostProcessing()->Begin();
+            {
+            this->m_render->DrawGeometry();
+            this->m_render->DrawTransparentGeometry();
+            }
+            m_cameras[0]->GetPostProcessing()->End();*/
+        }
     }
     else
         for (Camera* camera : m_cameras) {
@@ -338,12 +360,12 @@ void Framework::Graphics::Window::Draw() {
         }
 
     if (m_GUIEnabled) {
-        this->m_env->BeginDrawGUI();
+        if (this->m_env->BeginDrawGUI()) {
+            if (m_canvas)
+                this->m_canvas->Draw();
 
-        if (m_canvas)
-            this->m_canvas->Draw();
-
-        this->m_env->EndDrawGUI();
+            this->m_env->EndDrawGUI();
+        }
     }
 }
 
@@ -355,7 +377,7 @@ void Framework::Graphics::Window::CentralizeCursor() noexcept {
     }
 }
 
-void Framework::Graphics::Window::PoolEvents() {
+void Framework::Graphics::Window::PollEvents() {
     if (m_countNewCameras > 0) {
         m_camerasMutex.lock();
 

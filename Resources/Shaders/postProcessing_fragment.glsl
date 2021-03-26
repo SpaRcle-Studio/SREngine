@@ -13,10 +13,9 @@ uniform sampler2D depth;
 //uniform float gamma;
 //uniform float saturation;
 
-uniform vec3 GammaExpSat;
-
-uniform vec3 ColorCorrection;
 uniform vec3 BloomColor;
+uniform vec3 GammaExpSat;
+uniform vec3 ColorCorrection;
 
 float LinearizeDepth(float depth) {
     // преобразуем обратно в NDC

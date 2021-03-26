@@ -19,7 +19,7 @@ in VS_OUT {
 uniform vec3 color;
 uniform ivec2 config;
 
-uniform int hasDiffuse;
+//uniform int hasDiffuse;
 
 uniform sampler2D DiffuseMap;
 //uniform sampler2D NormalMap;
@@ -32,7 +32,8 @@ float LinearizeDepth(float depth) {
 }
 
 void main() {
-    vec3 ambient = (hasDiffuse == 1 ? texture(DiffuseMap, fs_in.TexCoord).rgb : vec3(1.f,1.f,1.f)) * color;
+    //vec3 ambient = (hasDiffuse == 1 ? texture(DiffuseMap, fs_in.TexCoord).rgb : vec3(1.f,1.f,1.f)) * color;
+    vec3 ambient = texture(DiffuseMap, fs_in.TexCoord).rgb * color;
     float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
 
     vec3 result = ambient; //ambient;
