@@ -213,7 +213,7 @@ void Framework::Graphics::Window::Thread() {
 
             this->m_render->PollEvents();
 
-            this->Draw();
+            //this->Draw();
 
             this->m_env->SwapBuffers();
         }

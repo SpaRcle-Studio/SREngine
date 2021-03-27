@@ -41,6 +41,9 @@ namespace Framework::Graphics {
         HDC m_hDC = nullptr;
         HINSTANCE m_hInst = nullptr;
     public:
+        [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const noexcept { return m_hInst; }
+        [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const noexcept { return m_hWnd; }
+    public:
         bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY) override {
             this->m_hInst = GetModuleHandleA(nullptr);
 

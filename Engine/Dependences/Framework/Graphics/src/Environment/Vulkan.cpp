@@ -65,13 +65,39 @@ namespace Framework::Graphics{
     }
 
     bool Vulkan::MakeWindow(const char *winName, Types::WindowFormat *format, bool fullScreen) {
-        Helper::Debug::Graph("Vulkan::MakeWindow() : creating window..");
+        Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
 
         this->m_winFormat = format;
 
         this->m_basicWindow = new Win32Window();
         if (!this->m_basicWindow->Create(winName, 0, 0, format->Width(), format->Height())) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed create window!");
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : initializing window surface...");
+        this->m_vkSurface = VulkanTools::InitWindowSurface(m_vkInstance, m_basicWindow);
+        if (!m_vkSurface) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize window surface!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : creating device...");
+        this->m_device = VulkanTools::InitDevice(
+                this->m_vkInstance, this->m_vkSurface,
+                { VK_KHR_SWAPCHAIN_EXTENSION_NAME }, //VK_KHR_SURFACE_EXTENSION_NAME
+                { "VK_LAYER_KHRONOS_validation" }, //  VK_LAYER_LUNARG_standard_validation
+                false);
+        if (!m_device.IsReady()) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize device!");
+            Helper::Debug::Error("Vulkan::MakeWindow() : you need install Vulkan drivers on your PC!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : creating swapchain...");
+        this->m_swapchain = VulkanTools::InitSwapchain(m_device, m_vkSurface);
+        if (!m_swapchain.m_ready) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize swapchain!");
             return false;
         }
 
@@ -95,6 +121,18 @@ namespace Framework::Graphics{
 
             this->m_validationReportCallBack = VK_NULL_HANDLE;
             Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan validation report callback successfully destroyed!");
+        }
+
+        //!=============================================================================================================
+
+        VulkanTools::DeInitDevice(&this->m_device);
+        Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan device successfully destroyed!");
+
+        if (m_vkSurface == VK_NULL_HANDLE)
+            return false;
+        else {
+            VulkanTools::DeInitWindowSurface(m_vkInstance, &m_vkSurface);
+            Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan surface successfully destroyed!");
         }
 
         if (m_vkInstance == VK_NULL_HANDLE)
@@ -145,6 +183,7 @@ namespace Framework::Graphics{
                                          size_t location, int32_t code, const char *layerPrefix, const char *msg,
                                          void *userData)
     {
-        return 0;
+        Helper::Debug::Error("DebugVulkanCallback() : " + std::string(msg));
+        return VK_FALSE;
     }
 }

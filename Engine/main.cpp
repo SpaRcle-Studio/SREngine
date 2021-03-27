@@ -51,8 +51,8 @@ int main() {
         Component::RegisterComponent("Camera", []() -> Camera* { return new Camera(); });
     }
 
-    Environment::Set(new OpenGL());
-    //Environment::Set(new Vulkan());
+    //Environment::Set(new OpenGL());
+    Environment::Set(new Vulkan());
 
     auto *render = new Render();
 
@@ -85,10 +85,11 @@ int main() {
     } else
         Debug::Error("Failed creating game engine!");
 
-    Debug::System("All systems successfully run!");
+    if (engine->IsRun()) {
+        Debug::System("All systems successfully run!");
 
-    if (engine->IsRun())
         engine->Await(); // await close engine
+    }
 
     engine->Close();
 

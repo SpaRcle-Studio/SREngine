@@ -54,6 +54,10 @@ namespace Framework::Graphics {
 
         VkInstance                        m_vkInstance                  = VK_NULL_HANDLE;
         VkDebugReportCallbackEXT          m_validationReportCallBack    = VK_NULL_HANDLE;
+        VkSurfaceKHR                      m_vkSurface                   = VK_NULL_HANDLE;
+
+        VulkanTools::Swapchain            m_swapchain                   = {};
+        VulkanTools::Device               m_device                      = {};
     public:
         [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const noexcept override { return "Vulkan"; }
     public:
