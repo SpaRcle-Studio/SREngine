@@ -70,7 +70,7 @@ namespace Framework::Graphics{
         this->m_winFormat = format;
 
         this->m_basicWindow = new Win32Window();
-        if (!this->m_basicWindow->Create(winName, 0, 0, format->Width(), format->Height())) {
+        if (!this->m_basicWindow->Create(winName, 0, 0, format->Width(), format->Height(), fullScreen)) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
@@ -101,6 +101,63 @@ namespace Framework::Graphics{
             return false;
         }
 
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create image views...");
+        if (!VulkanTools::CreateImageViews(m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create image views!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create command pool...");
+        if (!VulkanTools::CreateCommandPool(&m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create command pool!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create semaphore...");
+        if (!VulkanTools::CreateVulkanSemaphore(m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create semaphore!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create depth stencil image...");
+        if (!VulkanTools::CreateDepthStencilImage(
+                &m_device,
+                &m_swapchain,
+                Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight())))
+        {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create depth stencil image!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : initialize render pass...");
+        this->m_vkRenderPass = VulkanTools::InitRenderPass(m_device, m_swapchain);
+        if (m_vkRenderPass == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to init render pass!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : creating frame buffers...");
+        this->m_vkFrameBuffers.resize(m_swapchain.m_swapchainImages.size());
+        for (unsigned __int32 i = 0; i < m_swapchain.m_swapchainImages.size(); ++i) {
+            m_vkFrameBuffers[i] = VulkanTools::CreateFrameBuffer(
+                    m_vkRenderPass,
+                    m_device,
+                    { m_swapchain.m_depthStencilImageView, m_swapchain.m_swapchainImageViews[i] },
+                    Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight()));
+
+            if (m_vkFrameBuffers[i] == VK_NULL_HANDLE) {
+                Helper::Debug::Error("Vulkan::MakeWindow() : failed to create frame buffer!");
+                return false;
+            }
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : initializing synchronization...");
+        this->m_swapchainImageAvailable = VulkanTools::InitSynchronizations(m_device);
+        if (this->m_swapchainImageAvailable == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize synchronization!");
+            return false;
+        }
+
         return true;
     }
 
@@ -124,6 +181,12 @@ namespace Framework::Graphics{
         }
 
         //!=============================================================================================================
+
+        VulkanTools::DeInitSynchronizations(m_device, &m_swapchainImageAvailable);
+        Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan synchronization successfully destroyed!");
+
+        VulkanTools::DeInitSwapchain(this->m_device, &this->m_swapchain);
+        Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan swapchain successfully destroyed!");
 
         VulkanTools::DeInitDevice(&this->m_device);
         Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan device successfully destroyed!");

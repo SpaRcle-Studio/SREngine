@@ -7,5 +7,4 @@
 
 #define SR_FORCE_INLINE __forceinline
 
-
 #endif //GAMEENGINE_MACROS_H

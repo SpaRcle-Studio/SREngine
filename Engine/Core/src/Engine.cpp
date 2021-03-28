@@ -127,7 +127,12 @@ bool Framework::Engine::Run() {
 void Framework::Engine::Await() {
     Debug::Info("Engine::Await() : load engine script...");
 
-    Scripting::Script* engine = m_compiler->Load("simpleEngine", true);
+    Scripting::Script* engine = nullptr;
+
+    if (Graphics::Environment::Get()->GetPipeLine() == Graphics::Environment::PipeLine::OpenGL)
+        engine = m_compiler->Load("engine", true);
+    else
+        engine = m_compiler->Load("simpleEngine", true);
 
     Debug::Info("Engine::Await() : wait close engine...");
 

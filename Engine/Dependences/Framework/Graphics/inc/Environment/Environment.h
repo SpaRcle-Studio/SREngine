@@ -22,6 +22,9 @@ namespace Framework::Graphics {
 
     class Environment {
     public:
+        enum class PipeLine {
+            Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12
+        };
         enum class WinEvents{
             Close, Move, Resize, LeftClick, RightClick, Focus, Scroll
         };
@@ -42,7 +45,8 @@ namespace Framework::Graphics {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
-        inline static void RegisterScrollEvent(std::function<void(double, double)> fun){
+        inline BasicWindow* GetBasicWindow() const { return m_basicWindow; }
+        inline static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
             g_scrollEvents.push_back(fun);
             g_mutex.unlock();
@@ -74,8 +78,11 @@ namespace Framework::Graphics {
         virtual bool StopGUI() { return false; }
         virtual bool BeginDrawGUI() { return false; }
         virtual void EndDrawGUI()   { }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport() const noexcept { return false; }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport() const noexcept { return false; }
 
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetPipeLineName() const noexcept = 0;
+        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept { return PipeLine::Unknown; }
 
         virtual unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 
@@ -103,6 +110,9 @@ namespace Framework::Graphics {
 
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { }
+        virtual SR_FORCE_INLINE void BeginRender() { }
+        virtual SR_FORCE_INLINE void EndRender() { }
+        virtual SR_FORCE_INLINE void TestDrawing() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) { return glm::vec4(0); }
@@ -136,9 +146,9 @@ namespace Framework::Graphics {
 
         // ============================= [ SHADER METHODS ] =============================
 
-        virtual std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept {
+        [[nodiscard]] virtual std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept {
             return std::map<std::string, unsigned int>(); }
-        virtual bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex)const noexcept { return false; }
+        virtual bool CompileShader(const std::string& path, unsigned int* fragment, unsigned int* vertex)const noexcept { return false; }
         virtual unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept { return -1; }
         virtual SR_FORCE_INLINE void DeleteShader(unsigned int ID) const noexcept { }
         virtual SR_FORCE_INLINE void UseShader(const unsigned int&  ID) const noexcept { }
@@ -170,7 +180,7 @@ namespace Framework::Graphics {
 
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept { return false; }
-        virtual unsigned int CalculateSkybox() const noexcept { return -1; }
+        [[nodiscard]] virtual unsigned int CalculateSkybox() const noexcept { return -1; }
         virtual SR_FORCE_INLINE void DrawSkybox(const unsigned int&  VAO, const unsigned int& CubeMap) const noexcept { }
         virtual SR_FORCE_INLINE void DrawQuad(const unsigned int&  VAO) const noexcept { }
 
@@ -188,7 +198,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void BindTexture(unsigned char activeTexture, const unsigned int&  ID) const noexcept { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const noexcept { }
         virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) const noexcept { return -1; }
-        virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) const noexcept { return -1; }
+        [[nodiscard]] virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
         virtual SR_FORCE_INLINE void DeleteTexture(unsigned int ID) const noexcept { }
         virtual SR_FORCE_INLINE void FreeCubeMap(unsigned int ID) const noexcept { }
     };

@@ -18,13 +18,19 @@ namespace Framework::Graphics {
         BasicWindow(BasicWindow&) = default;
         //BasicWindow(const BasicWindow&) = default;
     protected:
+        std::thread m_eventHandler = std::thread();
+
         std::function<void(BasicWindow*, int, int)> m_callback_resize;
         std::function<void(BasicWindow*, int, int)> m_callback_move;
         std::function<void(BasicWindow*, double, double)> m_callback_scroll;
         std::function<void(BasicWindow*, int)> m_callback_focus;
         std::function<void(BasicWindow*)> m_callback_close;
 
+        unsigned int m_width  = 0;
+        unsigned int m_height = 0;
+
         bool m_windowOpen = false;
+        bool m_eventHandlerIsRun = false;
     public:
         SR_FORCE_INLINE void SetCallbackResize(std::function<void(BasicWindow*, int, int)> fun) {
             this->m_callback_resize = std::move(fun);
@@ -42,7 +48,11 @@ namespace Framework::Graphics {
             this->m_callback_close = std::move(fun);
         }
 
-        virtual bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY) { return false; }
+        virtual bool RunEventHandler() { return false; }
+        virtual bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen) { return false; }
+    public:
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept { return m_width;  }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHeight() const noexcept { return m_height; }
     public:
         virtual bool Destroy() { return false; }
         virtual bool Free() { return false; }

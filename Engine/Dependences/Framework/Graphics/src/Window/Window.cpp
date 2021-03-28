@@ -179,13 +179,12 @@ void Framework::Graphics::Window::Thread() {
 
     {
         glm::vec2 scr_size = m_env->GetScreenSize();
+        Debug::Log("Window::Thread() : screen size is " +
+                   std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
 
         unsigned int w = m_format.Width();
         unsigned int h = m_format.Height();
         Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
-
-        Debug::Log("Window::Thread() : screen size is " +
-            std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
 
         this->CentralizeWindow();
 
@@ -199,23 +198,37 @@ void Framework::Graphics::Window::Thread() {
     unsigned int frames = 0;
     double  frameRate = 30;
 
-    while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
-        if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Magenta); }
+    // for optimization needed pipeline
+    const Environment::PipeLine pipeLine = m_env->GetPipeLine();
 
+    while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
         clock_t beginFrame = clock();
 
         {
-            this->m_env->PollEvents();
+            if (pipeLine == Environment::PipeLine::Vulkan) {
+                this->m_env->PollEvents();
+                this->PollEvents();
+                this->m_render->PollEvents();
 
-            this->PollEvents();
+                this->m_env->BeginRender();
 
-            this->m_env->ClearBuffers();
 
-            this->m_render->PollEvents();
 
-            //this->Draw();
+                this->m_env->EndRender();
+            }
+            else {
+                this->m_env->PollEvents();
 
-            this->m_env->SwapBuffers();
+                this->PollEvents();
+
+                this->m_env->ClearBuffers();
+
+                this->m_render->PollEvents();
+
+                this->Draw();
+
+                this->m_env->SwapBuffers();
+            }
         }
 
         deltaTime += double(clock() - beginFrame) / (double)CLOCKS_PER_SEC;
@@ -229,13 +242,16 @@ void Framework::Graphics::Window::Thread() {
         }
     }
 
-    Debug::Graph("Window::Thread() : exit from main cycle.");
+    Helper::Debug::Graph("Window::Thread() : exit from main cycle.");
 
-    m_env->StopGUI();
+    if (m_env->IsGUISupport())
+        m_env->StopGUI();
 
     if (!this->m_render->Close()) {
         Debug::Error("Window::Thread() : failed close render!");
     }
+
+    this->m_env->CloseWindow();
 
     Debug::Info("Window::Thread() : stopping window thread...");
 
@@ -263,11 +279,13 @@ bool Framework::Graphics::Window::InitEnvironment() {
         return false;
     }
 
-    if (this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
-        GUI::ICanvas::InitStyle();
-        this->m_env->InitGUI();
-    } else
-        Debug::Error("Window::InitEnvironment() : failed pre-initializing GUI!");
+    if (m_env->IsGUISupport()) {
+        if (this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
+            GUI::ICanvas::InitStyle();
+            this->m_env->InitGUI();
+        } else
+            Debug::Error("Window::InitEnvironment() : failed pre-initializing GUI!");
+    }
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
     if (!this->m_env->Init(m_vsync)) {
@@ -359,7 +377,7 @@ void Framework::Graphics::Window::Draw() {
             DrawToCamera(camera)
         }
 
-    if (m_GUIEnabled) {
+    if (m_GUIEnabled && m_env->IsGUISupport()) {
         if (this->m_env->BeginDrawGUI()) {
             if (m_canvas)
                 this->m_canvas->Draw();

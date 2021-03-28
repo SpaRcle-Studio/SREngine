@@ -8,18 +8,46 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <array>
 
 #include <vulkan/vulkan.h>
 
 namespace Framework::Graphics::VulkanTools {
-    struct QueueFamilyInfo {
-        int m_graphics = -1;
-        int m_present = -1;
-        int m_compute = -1;
-        int m_transfer = -1;
+    struct QueueUnit {
+        int           m_iQueueFamily = -1;             // индекс семейства очередей
+        VkQueue       m_hQueue       = VK_NULL_HANDLE; // очередь
+        VkCommandPool m_hCommandPool = VK_NULL_HANDLE; // коммандный пул
 
         [[nodiscard]] bool IsRenderingCompatible() const {
-            return m_graphics >= 0 && m_present >= 0;
+            return m_iQueueFamily >= 0;
+        }
+        [[nodiscard]] bool IsReady() const {
+            return m_iQueueFamily >= 0 && m_hQueue != VK_NULL_HANDLE && m_hCommandPool != VK_NULL_HANDLE;
+        }
+    };
+
+    struct Swapchain {
+        VkSurfaceFormatKHR            m_surfaceFormat                = {};
+        VkSwapchainKHR                m_vkSwapchainKhr               = VK_NULL_HANDLE;
+
+        std::vector <VkImage>         m_swapchainImages              = std::vector<VkImage>();
+        std::vector <VkImageView>     m_swapchainImageViews          = std::vector<VkImageView>();
+        unsigned __int32              m_activeSwapchainImageID       = UINT32_MAX;
+
+        VkImage                       m_depthStencilImage            = VK_NULL_HANDLE;
+        VkImageView                   m_depthStencilImageView        = VK_NULL_HANDLE;
+        VkFormat                      m_depthStencilFormat           = VK_FORMAT_UNDEFINED;
+        bool                          m_stencilAvailable             = false;
+        VkDeviceMemory                m_depthStencilImageMemory      = VK_NULL_HANDLE;
+
+        VkSemaphore                   m_vkSemaphoreImageAvailable    = VK_NULL_HANDLE;
+        VkSemaphore                   m_vkSemaphoreRenderingFinished = VK_NULL_HANDLE;
+
+        std::vector <VkCommandBuffer> m_commandBuffers               = std::vector<VkCommandBuffer>();
+        bool                          m_ready                        = false;
+
+        void DeInit() {
+
         }
     };
 
@@ -27,12 +55,7 @@ namespace Framework::Graphics::VulkanTools {
         VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
         VkDevice m_logicalDevice = VK_NULL_HANDLE;
 
-        QueueFamilyInfo m_queueFamilies = {};
-
-        struct {
-            VkQueue m_graphics = VK_NULL_HANDLE;
-            VkQueue m_present = VK_NULL_HANDLE;
-        } m_queues;
+        QueueUnit m_queue = {};
 
         [[nodiscard]] VkPhysicalDeviceProperties GetProperties() const {
             VkPhysicalDeviceProperties properties = {};
@@ -44,9 +67,7 @@ namespace Framework::Graphics::VulkanTools {
         [[nodiscard]] bool IsReady() const {
             return m_physicalDevice != VK_NULL_HANDLE &&
                    m_logicalDevice != VK_NULL_HANDLE &&
-                   m_queues.m_graphics != VK_NULL_HANDLE &&
-                   m_queues.m_present != VK_NULL_HANDLE &&
-                   this->m_queueFamilies.IsRenderingCompatible();
+                   m_queue.IsRenderingCompatible();
         }
 
         void DeInit() {
@@ -55,9 +76,7 @@ namespace Framework::Graphics::VulkanTools {
                 this->m_logicalDevice = VK_NULL_HANDLE;
             }
             this->m_logicalDevice = VK_NULL_HANDLE;
-            this->m_queues.m_graphics = VK_NULL_HANDLE;
-            this->m_queues.m_present = VK_NULL_HANDLE;
-            this->m_queueFamilies = {};
+            this->m_queue = {};
         }
     };
 
@@ -99,13 +118,6 @@ namespace Framework::Graphics::VulkanTools {
             }
             return false;
         }
-    };
-
-    struct Swapchain {
-        VkSwapchainKHR m_vkSwapchainKhr = VK_NULL_HANDLE;
-        std::vector <VkImage> m_swapchainImages = std::vector<VkImage>();
-        std::vector <VkCommandBuffer> m_commandBuffer = std::vector<VkCommandBuffer>();
-        bool m_ready = false;
     };
 }
 

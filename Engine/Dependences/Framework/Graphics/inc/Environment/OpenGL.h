@@ -44,8 +44,11 @@ namespace Framework::Graphics {
         bool StopGUI() override;
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
+        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport() const noexcept override { return true; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsDrawSupport() const noexcept override { return true; }
 
         [[nodiscard]] inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
+        [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept override { return PipeLine::OpenGL; }
 
         unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) override;
 
@@ -211,8 +214,8 @@ namespace Framework::Graphics {
 
         // ============================= [ SHADER METHODS ] =============================
 
-        std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept override;
-        bool CompileShader(std::string path, unsigned int* fragment, unsigned int* vertex) const noexcept override;
+        [[nodiscard]] std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept override;
+        bool CompileShader(const std::string& path, unsigned int* fragment, unsigned int* vertex) const noexcept override;
         unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept override;
         SR_FORCE_INLINE void DeleteShader(unsigned int ID) const noexcept override { glDeleteProgram(ID); }
         SR_FORCE_INLINE void UseShader(const unsigned int& ID) const noexcept override  { glUseProgram(ID); }
@@ -427,7 +430,7 @@ namespace Framework::Graphics {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
         }
         unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha)const noexcept override;
-        unsigned int CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data) const noexcept override;
+        [[nodiscard]] unsigned int CalculateCubeMap(unsigned int w, unsigned int h, const std::vector<unsigned char*>& data) const noexcept override;
         SR_FORCE_INLINE void DeleteTexture(unsigned int ID) const  noexcept override {
             glDeleteTextures(1, &ID);
         }

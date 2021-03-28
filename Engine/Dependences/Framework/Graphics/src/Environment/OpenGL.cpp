@@ -320,7 +320,7 @@ std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields
     return fields;
 }
 
-bool Framework::Graphics::OpenGL::CompileShader(std::string path, unsigned int *fragment, unsigned int *vertex) const noexcept {
+bool Framework::Graphics::OpenGL::CompileShader(const std::string& path, unsigned int *fragment, unsigned int *vertex) const noexcept {
     std::string vertex_path = path + "_vertex.glsl";
     std::string fragment_path = path + "_fragment.glsl";;
 
@@ -625,7 +625,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateTexture(
     return id;
 }
 
-unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsigned int h, std::vector<unsigned char*> data)const noexcept {
+unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsigned int h, const std::vector<unsigned char*>& data)const noexcept {
     unsigned int cubemap = 0;
 
     glGenTextures(1, &cubemap);

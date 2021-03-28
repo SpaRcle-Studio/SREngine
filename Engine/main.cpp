@@ -2,6 +2,12 @@
 // Created by Nikita on 29.12.2020.
 //
 
+#ifdef _DEBUG
+
+#else
+    #define SR_RELEASE
+#endif
+
 #include <easy/profiler.h>
 
 #include <Engine.h>
@@ -56,8 +62,8 @@ int main() {
 
     auto *render = new Render();
 
-    //WindowFormat format = WindowFormat::_1600_900;
-    WindowFormat format = WindowFormat::_1366_768;
+    WindowFormat format = WindowFormat::_1600_900;
+    //WindowFormat format = WindowFormat::_1366_768;
     auto *window = new Window(
             "SpaRcle Engine",
             format,

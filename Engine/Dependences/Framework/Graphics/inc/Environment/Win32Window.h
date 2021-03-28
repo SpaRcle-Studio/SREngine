@@ -44,7 +44,10 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const noexcept { return m_hInst; }
         [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const noexcept { return m_hWnd; }
     public:
-        bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY) override {
+        bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen) override {
+            this->m_width  = sizeX;
+            this->m_height = sizeY;
+
             this->m_hInst = GetModuleHandleA(nullptr);
 
             WNDCLASSEX wcex     = {};
@@ -67,8 +70,8 @@ namespace Framework::Graphics {
                     WS_OVERLAPPEDWINDOW,
                     CW_USEDEFAULT,
                     CW_USEDEFAULT,
-                    sizeX,
-                    sizeY,
+                    m_width,
+                    m_height,
                     nullptr,
                     nullptr,
                     m_hInst,
@@ -79,7 +82,31 @@ namespace Framework::Graphics {
 
             SetWindowLongPtr(m_hWnd, GWLP_USERDATA, (LONG_PTR)this);
 
+            if (fullscreen)
+            {
+                // Set new window style and size.
+                SetWindowLong(m_hWnd, GWL_STYLE,
+                              GetWindowLong(m_hWnd, GWL_STYLE) & ~(WS_CAPTION | WS_THICKFRAME));
+                SetWindowLong(m_hWnd, GWL_EXSTYLE,
+                              GetWindowLong(m_hWnd, GWL_EXSTYLE) & ~(WS_EX_DLGMODALFRAME |
+                                                              WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+
+                MONITORINFO monitor_info;
+                monitor_info.cbSize = sizeof(monitor_info);
+                GetMonitorInfo(MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTONEAREST),
+                               &monitor_info);
+                RECT rect(monitor_info.rcMonitor);
+
+                LONG width = rect.right - rect.left;
+                LONG height = rect.bottom - rect.top;
+
+                SetWindowPos(m_hWnd, NULL, 0, 0,
+                             width, height,
+                             SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
+            }
+
             ShowWindow(m_hWnd, SW_SHOWNORMAL);
+            //ShowWindow(m_hWnd, SW_SHOWMAXIMIZED);
             this->m_windowOpen = true;
 
             this->m_hDC = GetDC(m_hWnd);

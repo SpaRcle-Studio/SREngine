@@ -93,4 +93,11 @@ namespace Framework::Helper {
     };
 }
 
+#ifdef SR_RELEASE
+    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
+#else
+    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
+        if (fun != notEquals) Framework::Helper::Debug::Error(errorMsg)
+#endif
+
 #endif //HELPER_DEBUG_H
