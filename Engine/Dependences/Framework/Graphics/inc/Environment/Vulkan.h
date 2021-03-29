@@ -264,6 +264,8 @@ namespace Framework::Graphics {
             this->m_basicWindow->PollEvents();
         }
 
+        void SetWindowSize(unsigned int w, unsigned int h) override;
+
         //!===============================================[SHADERS]=====================================================
 
         [[nodiscard]] IShaderProgram* AllocShaderProgram() const noexcept override {

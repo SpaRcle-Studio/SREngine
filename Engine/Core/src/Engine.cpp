@@ -82,7 +82,7 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
         }
     });
 
-    if (!this->m_window->Init()){
+    if (!this->m_window->Init()) {
         Helper::Debug::Error("Engine::Init() : failed initialize window!");
         return false;
     } else {

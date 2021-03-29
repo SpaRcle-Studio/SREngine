@@ -354,21 +354,6 @@ void Framework::Graphics::Window::Draw() {
     if (m_countCameras == 1) {
         if (m_cameras[0]->IsActive()) {
             DrawToCamera(m_cameras[0])
-
-           /* this->m_render->SetCurrentCamera(m_cameras[0]);
-            m_cameras[0]->GetPostProcessing()->BeginSkybox();
-            {
-                this->m_render->DrawSkybox();
-                this->m_render->DrawGrid();
-            }
-            m_cameras[0]->GetPostProcessing()->EndSkybox();
-
-            m_cameras[0]->GetPostProcessing()->Begin();
-            {
-            this->m_render->DrawGeometry();
-            this->m_render->DrawTransparentGeometry();
-            }
-            m_cameras[0]->GetPostProcessing()->End();*/
         }
     }
     else

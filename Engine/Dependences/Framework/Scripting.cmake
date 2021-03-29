@@ -7,7 +7,7 @@ set(SCRIPTING_SRC
 
 set(SCRIPTING_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Scripting/inc
-        ${FRAMEWORK_ROOT_DIR}/Depends/external/lua/upstream
+        ${FRAMEWORK_ROOT_DIR}/Depends/lua/upstream
         ${FRAMEWORK_ROOT_DIR}/Depends/LuaBridge/Source
         )
 

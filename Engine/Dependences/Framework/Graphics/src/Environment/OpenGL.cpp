@@ -241,7 +241,8 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
     if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
         w = m_winFormat->Width();
         h = m_winFormat->Height();
-    }
+    } else
+        m_winFormat->SetFreeValue(w, h);
 
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("OpenGL::SetWindowSize() : width = "+std::to_string(w) + "; height = "+ std::to_string(h));

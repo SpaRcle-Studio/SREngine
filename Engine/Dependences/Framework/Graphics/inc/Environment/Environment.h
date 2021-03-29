@@ -59,7 +59,7 @@ namespace Framework::Graphics {
                 return true;
             }
         }
-        inline BasicWindow* GetBasicWindow() const { return m_basicWindow; }
+        [[nodiscard]] inline BasicWindow* GetBasicWindow() const { return m_basicWindow; }
         inline static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
             g_scrollEvents.push_back(fun);

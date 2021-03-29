@@ -124,6 +124,20 @@ namespace Framework::Graphics{
             return false;
         }
 
+        Helper::Debug::Graph("Vulkan::MakeWindow() : initialize render pass...");
+        this->m_vkRenderPass = VulkanTools::InitRenderPass(m_device, m_swapchain);
+        if (m_vkRenderPass == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to init render pass!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : initializing synchronization...");
+        this->m_swapchainImageAvailable = VulkanTools::InitSynchronizations(m_device);
+        if (this->m_swapchainImageAvailable == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize synchronization!");
+            return false;
+        }
+
         Helper::Debug::Graph("Vulkan::MakeWindow() : create depth stencil image...");
         if (!VulkanTools::CreateDepthStencilImage(
                 &m_device,
@@ -131,13 +145,6 @@ namespace Framework::Graphics{
                 Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight())))
         {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create depth stencil image!");
-            return false;
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : initialize render pass...");
-        this->m_vkRenderPass = VulkanTools::InitRenderPass(m_device, m_swapchain);
-        if (m_vkRenderPass == VK_NULL_HANDLE) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to init render pass!");
             return false;
         }
 
@@ -154,13 +161,6 @@ namespace Framework::Graphics{
                 Helper::Debug::Error("Vulkan::MakeWindow() : failed to create frame buffer!");
                 return false;
             }
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : initializing synchronization...");
-        this->m_swapchainImageAvailable = VulkanTools::InitSynchronizations(m_device);
-        if (this->m_swapchainImageAvailable == VK_NULL_HANDLE) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize synchronization!");
-            return false;
         }
 
         return true;
@@ -256,5 +256,18 @@ namespace Framework::Graphics{
         }
 
         return true;
+    }
+
+    void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
+        if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
+            w = m_winFormat->Width();
+            h = m_winFormat->Height();
+        } else
+            m_winFormat->SetFreeValue(w, h);
+
+        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+            Helper::Debug::Log("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
+
+
     }
 }

@@ -4,7 +4,7 @@ project(Framework)
 # Переменная дириктории исходного кода данного фреймворка
 set(FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_subdirectory(Depends/external/lua)
+add_subdirectory(Depends/lua)
 add_subdirectory(Depends/LuaBridge)
 
 add_subdirectory(Depends/easy_profiler)
