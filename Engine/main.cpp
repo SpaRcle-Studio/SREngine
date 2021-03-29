@@ -57,8 +57,8 @@ int main() {
         Component::RegisterComponent("Camera", []() -> Camera* { return new Camera(); });
     }
 
-    //Environment::Set(new OpenGL());
-    Environment::Set(new Vulkan());
+    Environment::Set(new OpenGL());
+    //Environment::Set(new Vulkan());
 
     auto *render = new Render();
 
