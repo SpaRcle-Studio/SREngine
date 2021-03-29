@@ -49,7 +49,11 @@ namespace Framework::Graphics {
         }
 
         virtual bool RunEventHandler() { return false; }
-        virtual bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen) { return false; }
+        virtual bool Create(
+                const char* name,
+                int posX, int posY,
+                unsigned int sizeX, unsigned int sizeY,
+                bool fullscreen, bool resizable) { return false; }
     public:
         [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept { return m_width;  }
         [[nodiscard]] SR_FORCE_INLINE unsigned int GetHeight() const noexcept { return m_height; }

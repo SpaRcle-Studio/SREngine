@@ -16,6 +16,7 @@
 #include <Environment/TextureFilters.h>
 #include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
+#include <Environment/IShaderProgram.h>
 
 namespace Framework::Graphics {
     struct Vertex;
@@ -45,6 +46,19 @@ namespace Framework::Graphics {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
+        glm::vec2 GetWindowSize() noexcept { return { m_winFormat->Width(), m_winFormat->Height() }; }
+        [[nodiscard]] Types::WindowFormat* GetWindowFormat() const noexcept {
+            return this->m_winFormat;
+        }
+        bool InitWindowFormat(const Types::WindowFormat& windowFormat) {
+            if (m_winFormat)
+                return false;
+            else {
+                this->m_winFormat = Types::WindowFormat::AllocMemory();
+                this->m_winFormat->SetFormat(windowFormat);
+                return true;
+            }
+        }
         inline BasicWindow* GetBasicWindow() const { return m_basicWindow; }
         inline static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -89,7 +103,7 @@ namespace Framework::Graphics {
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        virtual bool MakeWindow(const char* winName, Types::WindowFormat* format, bool fullScreen) { return false; }
+        virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable) { return false; }
 
         virtual bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) { return false; }
 
@@ -118,9 +132,7 @@ namespace Framework::Graphics {
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) { return glm::vec4(0); }
         virtual glm::vec3 GetPixelColor(glm::vec2 uPos) { return glm::vec3(0); }
 
-        virtual glm::vec2 GetWindowSize() noexcept { return glm::vec2(0); }
-
-        virtual void SetWindowSize(float ratio, unsigned int w, unsigned int h) {  }
+        virtual void SetWindowSize(unsigned int w, unsigned int h) {  }
         virtual void SetWindowPosition(int x, int y) { }
 
         virtual SR_FORCE_INLINE void PollEvents() const noexcept { }
@@ -148,28 +160,21 @@ namespace Framework::Graphics {
 
         [[nodiscard]] virtual std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept {
             return std::map<std::string, unsigned int>(); }
-        virtual bool CompileShader(const std::string& path, unsigned int* fragment, unsigned int* vertex)const noexcept { return false; }
-        virtual unsigned int LinkShader(unsigned int* fragment, unsigned int* vertex) const noexcept { return -1; }
-        virtual SR_FORCE_INLINE void DeleteShader(unsigned int ID) const noexcept { }
-        virtual SR_FORCE_INLINE void UseShader(const unsigned int&  ID) const noexcept { }
+        [[nodiscard]] virtual IShaderProgram* AllocShaderProgram() const noexcept { return nullptr; }
+        virtual void FreeShaderProgram(IShaderProgram* shaderProgram) const noexcept {  }
+        virtual bool CompileShader(const std::string& path, IShaderProgram* shaderProgram) const noexcept { return false; }
+        virtual bool LinkShader(IShaderProgram* shaderProgram) const noexcept { return false; }
+        virtual SR_FORCE_INLINE void DeleteShader(IShaderProgram* shaderProgram) const noexcept { }
+        virtual SR_FORCE_INLINE void UseShader(IShaderProgram* shaderProgram) const noexcept { }
 
-        virtual SR_FORCE_INLINE void SetBool(const unsigned int&  ID, const char* name, bool v)                 const noexcept { }
-        virtual SR_FORCE_INLINE void SetFloat(const unsigned int&  ID, const char* name, float v)               const noexcept { }
-        virtual SR_FORCE_INLINE void SetInt(const unsigned int&  ID, const char* name, int v)                   const noexcept { }
-        virtual SR_FORCE_INLINE void SetMat4(const unsigned int&  ID, const char* name, const glm::mat4& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec4(const unsigned int&  ID, const char* name, const glm::vec4& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec3(const unsigned int&  ID, const char* name, const glm::vec3& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec2(const unsigned int&  ID, const char* name, const glm::vec2& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetIVec2(const unsigned int&  ID, const char* name, const glm::ivec2& v)   const noexcept { }
-
-        virtual SR_FORCE_INLINE void SetMat4OfLocation(const unsigned int& location, const glm::mat4x4& v)      const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec4OfLocation(const unsigned int& location, const glm::vec4 & v)       const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec3OfLocation(const unsigned int& location, const glm::vec3 & v)       const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec2OfLocation(const unsigned int& location, const glm::vec2 & v)       const noexcept { }
-        virtual SR_FORCE_INLINE void SetIVec2OfLocation(const unsigned int& location, const glm::ivec2 & v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetBoolOfLocation(const unsigned int& location, bool v)                    const noexcept { }
-        virtual SR_FORCE_INLINE void SetFloatOfLocation(const unsigned int& location, float v)                  const noexcept { }
-        virtual SR_FORCE_INLINE void SetIntOfLocation(const unsigned int& location, int v)                      const noexcept { }
+        virtual SR_FORCE_INLINE void SetBool(IShaderProgram* shaderProgram, const char* name, bool v)                 const noexcept { }
+        virtual SR_FORCE_INLINE void SetFloat(IShaderProgram* shaderProgram, const char* name, float v)               const noexcept { }
+        virtual SR_FORCE_INLINE void SetInt(IShaderProgram* shaderProgram, const char* name, int v)                   const noexcept { }
+        virtual SR_FORCE_INLINE void SetMat4(IShaderProgram* shaderProgram, const char* name, const glm::mat4& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec4(IShaderProgram* shaderProgram, const char* name, const glm::vec4& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec3(IShaderProgram* shaderProgram, const char* name, const glm::vec3& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec2(IShaderProgram* shaderProgram, const char* name, const glm::vec2& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetIVec2(IShaderProgram* shaderProgram, const char* name, const glm::ivec2& v)   const noexcept { }
 
         // ============================== [ MESH METHODS ] ==============================
 

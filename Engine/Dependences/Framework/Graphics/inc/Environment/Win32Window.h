@@ -21,6 +21,16 @@ namespace Framework::Graphics {
     public:
         LRESULT CALLBACK realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             switch (msg) {
+                case (WM_SIZING): {
+                    //RECT rect;
+                    //GetClientRect(m_hWnd, &rect);
+                    //unsigned __int16 x = rect.right - rect.left;
+                    //unsigned __int16 y = rect.bottom - rect.top;
+
+                    //this->OnResize(m_width, m_height);
+
+                    return 0;
+                }
                 case(WM_DESTROY):
                     PostQuitMessage(NULL);
                     this->m_windowOpen = false;
@@ -30,6 +40,31 @@ namespace Framework::Graphics {
             }
         }
     private:
+        void OnResize(unsigned __int16 width, unsigned __int16 height) {
+            this->m_width = width;
+            this->m_height = height;
+
+            RECT rect;
+            GetClientRect(m_hWnd, &rect);
+
+            DWORD style = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_SIZEBOX | WS_MAXIMIZEBOX;
+            DWORD exStyle = WS_EX_APPWINDOW;
+
+            AdjustWindowRectEx(&rect, style, FALSE, exStyle);
+
+            SetWindowLong(m_hWnd, GWL_STYLE, style);
+            SetWindowLong(m_hWnd, GWL_EXSTYLE, exStyle);
+
+            SetWindowPos(m_hWnd, HWND_TOP, rect.left, rect.top,
+                         rect.right - rect.left, rect.bottom - rect.top,
+                         SWP_FRAMECHANGED);
+
+            ShowWindow(m_hWnd, SW_SHOW);
+            SetForegroundWindow(m_hWnd);
+            SetFocus(m_hWnd);
+            UpdateWindow(m_hWnd);
+        }
+
         static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             auto* me = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
             if (me)
@@ -44,7 +79,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const noexcept { return m_hInst; }
         [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const noexcept { return m_hWnd; }
     public:
-        bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen) override {
+        bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen, bool resizable) override {
             this->m_width  = sizeX;
             this->m_height = sizeY;
 
@@ -64,10 +99,10 @@ namespace Framework::Graphics {
             if (!RegisterClassEx(&wcex))
                 return false;
 
-            this->m_hWnd = CreateWindow(
+            this->m_hWnd = CreateWindowA(
                     TEXT("MyWndClass"),
                     name,
-                    WS_OVERLAPPEDWINDOW,
+                    resizable ? WS_OVERLAPPEDWINDOW : WS_OVERLAPPEDWINDOW  ^ WS_THICKFRAME,
                     CW_USEDEFAULT,
                     CW_USEDEFAULT,
                     m_width,

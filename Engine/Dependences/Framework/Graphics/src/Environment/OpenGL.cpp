@@ -15,6 +15,7 @@
 #include <imgui_impl_glfw.h>
 #include <ImGuizmo.h>
 #include <Environment/Win32Window.h>
+#include <ResourceManager/ResourceManager.h>
 
 using namespace Framework::Helper;
 
@@ -126,8 +127,11 @@ bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples, const std
     return true;
 }
 
-bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, Types::WindowFormat* format, bool fullScreen) {
-    this->m_winFormat = format;
+bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScreen, bool resizable) {
+    if (!this->m_winFormat) {
+        Helper::Debug::Error("OpenGL::MakeWindow() : format isn't initialized!");
+        return false;
+    }
 
 #ifdef  SR_OPENGL_USE_WINAPI
     this->m_basicWindow = new Win32Window();
@@ -233,7 +237,7 @@ bool Framework::Graphics::OpenGL::CloseWindow() {
 
 
 
-void Framework::Graphics::OpenGL::SetWindowSize(float ratio, unsigned int w, unsigned int h) {
+void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) {
     if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
         w = m_winFormat->Width();
         h = m_winFormat->Height();
@@ -320,16 +324,21 @@ std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields
     return fields;
 }
 
-bool Framework::Graphics::OpenGL::CompileShader(const std::string& path, unsigned int *fragment, unsigned int *vertex) const noexcept {
-    std::string vertex_path = path + "_vertex.glsl";
-    std::string fragment_path = path + "_fragment.glsl";;
+bool Framework::Graphics::OpenGL::CompileShader(const std::string& name, IShaderProgram* shaderProgram) const noexcept {
+    if (!shaderProgram)
+        return false;
+
+    std::string vertex_path   = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_vertex.glsl";
+    std::string fragment_path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_fragment.glsl";;
+
+    auto* glShader = reinterpret_cast<OpenGLShader*>(shaderProgram);
 
     int	  InfoLogLength	= 0;
     GLint Result		= GL_FALSE;
 
     //! создаем шейдеры
-    *vertex   =   glCreateShader(GL_VERTEX_SHADER);
-    *fragment =   glCreateShader(GL_FRAGMENT_SHADER);
+    glShader->m_vertex   = glCreateShader(GL_VERTEX_SHADER);
+    glShader->m_fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
     //! читаем вершинный шейдер из файла
     std::string VertexShaderCode;
@@ -356,17 +365,17 @@ bool Framework::Graphics::OpenGL::CompileShader(const std::string& path, unsigne
     {
         // Компилируем вершинный шейдер
         char const* VertexSourcePointer = VertexShaderCode.c_str();
-        glShaderSource(*vertex, 1, &VertexSourcePointer, NULL);
-        glCompileShader(*vertex);
+        glShaderSource(glShader->m_vertex, 1, &VertexSourcePointer, NULL);
+        glCompileShader(glShader->m_vertex);
 
         // Устанавливаем параметры
-        glGetShaderiv(*vertex, GL_COMPILE_STATUS, &Result);
-        glGetShaderiv(*vertex, GL_INFO_LOG_LENGTH, &InfoLogLength);
+        glGetShaderiv(glShader->m_vertex, GL_COMPILE_STATUS, &Result);
+        glGetShaderiv(glShader->m_vertex, GL_INFO_LOG_LENGTH, &InfoLogLength);
 
         //?===========================================[ ERRORS ]==============================================
         if (InfoLogLength != 0) {
             std::vector<char> VertexShaderErrorMessage(InfoLogLength);
-            glGetShaderInfoLog(*vertex, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
+            glGetShaderInfoLog(glShader->m_vertex, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
             if (VertexShaderErrorMessage.size() > 10)
                 Debug::Error("OpenGL::CompileShader : Failed compiling vertex shader!\n\tReason : " + std::string(VertexShaderErrorMessage.data()));
         }
@@ -376,17 +385,17 @@ bool Framework::Graphics::OpenGL::CompileShader(const std::string& path, unsigne
     {
         // Компилируем фрагментный шейдер
         char const* FragmentSourcePointer = FragmentShaderCode.c_str();
-        glShaderSource(*fragment, 1, &FragmentSourcePointer, nullptr);
-        glCompileShader(*fragment);
+        glShaderSource(glShader->m_fragment, 1, &FragmentSourcePointer, nullptr);
+        glCompileShader(glShader->m_fragment);
 
         // Устанавливаем параметры
-        glGetShaderiv(*fragment, GL_COMPILE_STATUS, &Result);
-        glGetShaderiv(*fragment, GL_INFO_LOG_LENGTH, &InfoLogLength);
+        glGetShaderiv(glShader->m_fragment, GL_COMPILE_STATUS, &Result);
+        glGetShaderiv(glShader->m_fragment, GL_INFO_LOG_LENGTH, &InfoLogLength);
 
         //?===========================================[ ERRORS ]==============================================
         if (InfoLogLength != 0) {
             std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
-            glGetShaderInfoLog(*fragment, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
+            glGetShaderInfoLog(glShader->m_fragment, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
             if (FragmentShaderErrorMessage.size() > 10) {
                 bool isError = StringUtils::Contains(std::string(FragmentShaderErrorMessage.data()), "error");
 
@@ -404,10 +413,15 @@ bool Framework::Graphics::OpenGL::CompileShader(const std::string& path, unsigne
     return true;
 }
 
-unsigned int Framework::Graphics::OpenGL::LinkShader(unsigned int *fragment, unsigned int *vertex) const noexcept {
+bool Framework::Graphics::OpenGL::LinkShader(IShaderProgram* shaderProgram) const noexcept {
+    if (!shaderProgram)
+        return false;
+
+    auto* glShader = reinterpret_cast<OpenGLShader*>(shaderProgram);
+
     unsigned int ProgramID = glCreateProgram();
-    glAttachShader(ProgramID, *vertex);
-    glAttachShader(ProgramID, *fragment);
+    glAttachShader(ProgramID, glShader->m_vertex);
+    glAttachShader(ProgramID, glShader->m_fragment);
     glLinkProgram(ProgramID);
 
     int	  InfoLogLength	= 0;
@@ -429,16 +443,20 @@ unsigned int Framework::Graphics::OpenGL::LinkShader(unsigned int *fragment, uns
             }
             else {
                 Debug::Error("OpenGL::LinkShader : Failed linking program! Reason : " + error);
-                return 0;
+                return false;
             }
         }
     }
     //?===================================================================================================
 
-    glDeleteShader(*vertex);
-    glDeleteShader(*fragment);
+    glDeleteShader(glShader->m_vertex);
+    glDeleteShader(glShader->m_fragment);
 
-    return ProgramID;
+    glShader->m_vertex    = 0;
+    glShader->m_fragment  = 0;
+    glShader->m_programID = ProgramID;
+
+    return true;
 }
 
 bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int &hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept {

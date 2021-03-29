@@ -3,6 +3,8 @@
 //
 
 #include <Environment/Vulkan.h>
+#include <ResourceManager/ResourceManager.h>
+#include <FileSystem/FileSystem.h>
 
 namespace Framework::Graphics{
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
@@ -64,13 +66,16 @@ namespace Framework::Graphics{
         return true;
     }
 
-    bool Vulkan::MakeWindow(const char *winName, Types::WindowFormat *format, bool fullScreen) {
+    bool Vulkan::MakeWindow(const char *winName, bool fullScreen, bool resizable) {
         Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
 
-        this->m_winFormat = format;
+        if (!this->m_winFormat) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : format isn't initialized!");
+            return false;
+        }
 
         this->m_basicWindow = new Win32Window();
-        if (!this->m_basicWindow->Create(winName, 0, 0, format->Width(), format->Height(), fullScreen)) {
+        if (!this->m_basicWindow->Create(winName, 0, 0, m_winFormat->Width(), m_winFormat->Height(), fullScreen, resizable)) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
@@ -213,31 +218,10 @@ namespace Framework::Graphics{
     bool Vulkan::Init(int swapInterval) {
         Helper::Debug::Graph("Vulkan::Init() : initializing vulkan...");
 
-        /*this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
-        glfwSwapInterval(swapInterval);
+        m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
 
-        glfwSetWindowFocusCallback(m_window, [](GLFWwindow* win, int focus) {
-            g_callback(WinEvents::Focus, win, &focus, nullptr);
-        });
-
-        glfwSetWindowSizeCallback(m_window, [](GLFWwindow* win, int w, int h) {
             g_callback(WinEvents::Resize, win, &w, &h);
         });
-
-        glfwSetWindowCloseCallback(m_window, (GLFWwindowclosefun)[](GLFWwindow* win) {
-            g_callback(WinEvents::Close, win, nullptr, nullptr);
-        });
-
-        glfwSetWindowPosCallback(m_window, [](GLFWwindow* win, int x, int y){
-            g_callback(WinEvents::Move, win, &x, &y);
-        });
-
-        glfwSetScrollCallback(m_window, [](GLFWwindow* win, double xoffset, double yoffset){
-            for (const auto& a : g_scrollEvents)
-                a(xoffset, yoffset);
-
-            g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
-        });*/
 
         return true;
     }
@@ -248,5 +232,29 @@ namespace Framework::Graphics{
     {
         Helper::Debug::Error("DebugVulkanCallback() : " + std::string(msg));
         return VK_FALSE;
+    }
+
+
+    bool Vulkan::CompileShader(const std::string &name, IShaderProgram *shaderProgram) const noexcept {
+        if (!shaderProgram)
+            return false;
+
+        std::string vertex_path   = Helper::ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_vertex.glsl";
+        std::string fragment_path = Helper::ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_fragment.glsl";;
+
+        std::string vertCode = Helper::FileSystem::ReadAllText(vertex_path);
+        std::string fragCode = Helper::FileSystem::ReadAllText(fragment_path);
+
+        auto* vkShader = reinterpret_cast<VulkanShader*>(shaderProgram);
+
+        vkShader->m_vertShaderModule = VulkanTools::CreateShader(m_device, vertCode);
+        vkShader->m_fragShaderModule = VulkanTools::CreateShader(m_device, fragCode);
+
+        if (!vkShader->IsReady()) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to compile \""+name + "\" shader!");
+            return false;
+        }
+
+        return true;
     }
 }

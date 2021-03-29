@@ -737,6 +737,26 @@ namespace Framework::Graphics::VulkanTools {
             *fence = VK_NULL_HANDLE;
         }
     }
+
+    static VkShaderModule CreateShader(const Device& device, const std::string& code) {
+        VkShaderModuleCreateInfo createInfo = {};
+        createInfo.sType                    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        createInfo.codeSize                 = code.size();
+        createInfo.pCode                    = reinterpret_cast<const uint32_t*>(code.data());
+
+        VkShaderModule shaderModule = {};
+        if (vkCreateShaderModule(device.m_logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+            Helper::Debug::Error("VulkanTools::CreateShader() : failed to create shader!");
+            return VK_NULL_HANDLE;
+        }
+        return shaderModule;
+    }
+    static void DestroyShader(const Device& device, VkShaderModule* shaderModule) {
+        if (*shaderModule != VK_NULL_HANDLE) {
+            vkDestroyShaderModule(device.m_logicalDevice, *shaderModule, nullptr);
+            *shaderModule = VK_NULL_HANDLE;
+        }
+    }
 }
 
 #endif //GAMEENGINE_VULKANTOOLS_H

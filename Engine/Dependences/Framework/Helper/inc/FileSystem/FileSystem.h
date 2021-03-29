@@ -25,6 +25,8 @@ public:
     static std::string GetFullPathToExe();
     static void Reload();
 
+    static std::string ReadAllText(const std::string& path);
+
     static char* Load(std::string path);
 
     static const char* FileMapView(std::string path);

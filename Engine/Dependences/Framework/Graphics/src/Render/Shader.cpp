@@ -25,8 +25,8 @@ bool Framework::Graphics::Shader::Init() {
         return false;
     }
 
-    std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
-    this->m_fields = m_env->GetShaderFields(m_ID, path);
+    //std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
+    //this->m_fields = m_env->GetShaderFields(m_ID, path);
 
     this->m_isInit = true;
 
@@ -39,11 +39,13 @@ bool Framework::Graphics::Shader::Compile() {
         Debug::Error("Shader::Compile() : shader already compile!");
         return false;
     }
-    std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
+    //std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
 
     Debug::Shader("Shader::Compile() : compiling \""+m_name+"\" shader...");
 
-    if (!m_env->CompileShader(path, &m_fragment, &m_vertex)){
+    this->m_shaderProgram = m_env->AllocShaderProgram();
+
+    if (!m_env->CompileShader(m_name, m_shaderProgram)){
         Debug::Error("Shader::Compile() : failed compile \""+m_name+"\" shader!");
         return false;
     }
@@ -66,8 +68,13 @@ bool Framework::Graphics::Shader::Link() {
 
     Debug::Shader("Shader::Link() : linking \""+this->m_name+"\" shader...");
 
-    m_ID = m_env->LinkShader(&m_fragment, &m_vertex);
+    /*m_ID = m_env->LinkShader(&m_fragment, &m_vertex);
     if (m_ID == 0){
+        Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
+        return false;
+    }*/
+
+    if (!m_env->LinkShader(m_shaderProgram)) {
         Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
         return false;
     }
@@ -101,7 +108,7 @@ bool Framework::Graphics::Shader::Use() noexcept {
         this->m_isInit = true;
     }
 
-    m_env->UseShader(m_ID);
+    m_env->UseShader(m_shaderProgram);
 
     return true;
 }
@@ -109,7 +116,9 @@ bool Framework::Graphics::Shader::Use() noexcept {
 void Framework::Graphics::Shader::Free() {
     if (m_isInit) {
         Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer and free video memory...");
-        m_env->DeleteShader(m_ID);
+        m_env->DeleteShader(m_shaderProgram);
+        m_env->FreeShaderProgram(m_shaderProgram);
+        this->m_shaderProgram = nullptr;
     } else {
         Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer...");
     }

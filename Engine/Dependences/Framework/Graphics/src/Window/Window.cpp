@@ -45,8 +45,9 @@ bool Framework::Graphics::Window::Create() {
                 this->m_env->SetWindowPosition(m_windowPos.x, m_windowPos.y);
                 break;
             case Environment::WinEvents::Resize: {
-                float ratio = m_format.GetRatio();
-                m_env->SetWindowSize(ratio, *(int *) arg1, *(int *) arg2);
+                //float ratio = m_format.GetRatio();
+                m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
+
                 //this->m_camera->UpdateProjection(ratio);
                 //this->m_postProcessing->ReCalcFrameBuffers(*(int *) arg1, *(int *) arg2);
                 break;
@@ -182,8 +183,8 @@ void Framework::Graphics::Window::Thread() {
         Debug::Log("Window::Thread() : screen size is " +
                    std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
 
-        unsigned int w = m_format.Width();
-        unsigned int h = m_format.Height();
+        unsigned int w = m_env->GetWindowFormat()->Width();
+        unsigned int h = m_env->GetWindowFormat()->Height();
         Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
 
         this->CentralizeWindow();
@@ -212,7 +213,7 @@ void Framework::Graphics::Window::Thread() {
 
                 this->m_env->BeginRender();
 
-
+                this->m_env->TestDrawing();
 
                 this->m_env->EndRender();
             }
@@ -268,7 +269,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     Debug::Graph("Window::InitEnvironment() : creating window...");
-    if (!this->m_env->MakeWindow(this->m_win_name, &m_format, m_fullScreen)) {
+    if (!this->m_env->MakeWindow(this->m_win_name, m_fullScreen, m_resizable)) {
         Debug::Error("Window::InitEnvironment() : failed creating window!");
         return false;
     }
@@ -389,7 +390,7 @@ void Framework::Graphics::Window::Draw() {
 
 void Framework::Graphics::Window::CentralizeCursor() noexcept {
     if (m_isRun) {
-        m_env->SetCursorPosition({m_format.Width() / 2, m_format.Height() / 2});
+        m_env->SetCursorPosition({ m_env->GetWindowFormat()->Width() / 2,  m_env->GetWindowFormat()->Height() / 2});
     }else{
         Debug::Error("Window::CentralizeCursor() : window is not run!");
     }
@@ -433,14 +434,14 @@ void Framework::Graphics::Window::PollEvents() {
         m_camerasMutex.unlock();
     }
 
-    if (m_isNeedResize) {
-        unsigned int w = m_format.Width();
-        unsigned int h = m_format.Height();
+    if (m_isNeedResize) { // TODO
+        unsigned int w =  m_env->GetWindowFormat()->Width();
+        unsigned int h =  m_env->GetWindowFormat()->Height();
         Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
         this->m_isNeedResize = false;
     }
 
-    if (m_isNeedMove) {
+    if (m_isNeedMove) { // TODO
         unsigned int x = m_newWindowPos.x;
         unsigned int y = m_newWindowPos.y;
         Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &x, &y);
@@ -475,15 +476,15 @@ bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *c
 }
 
 void Framework::Graphics::Window::Resize(unsigned int w, unsigned int h) {
-    this->m_format.SetFreeValue(w, h);
+    this->m_env->GetWindowFormat()->SetFreeValue(w, h);
     this->m_isNeedResize = true;
 }
 
 void Framework::Graphics::Window::CentralizeWindow() {
     glm::vec2 scr_size = m_env->GetScreenSize();
 
-    unsigned int w = m_format.Width();
-    unsigned int h = m_format.Height();
+    unsigned int w = m_env->GetWindowFormat()->Width();
+    unsigned int h = m_env->GetWindowFormat()->Height();
 
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;

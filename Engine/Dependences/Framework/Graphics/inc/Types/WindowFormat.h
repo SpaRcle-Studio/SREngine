@@ -23,17 +23,25 @@ namespace Framework::Graphics::Types {
             _1600_900
         };
 
-        WindowFormat(const glm::vec2& size) : value(Value::Free) {
-            this->m_width = (unsigned int)size.x;
-            this->m_height = (unsigned int)size.y;
+        [[nodiscard]] static WindowFormat* AllocMemory() {
+            return (WindowFormat*)malloc(sizeof(WindowFormat));
+        }
+        void FreeMemory() {
+            free(this);
         }
 
-        WindowFormat(Value v) : value(v) {
-            switch (value) {
+        //WindowFormat(const glm::vec2& size) : value(Value::Free) {
+        //    this->m_width = (unsigned int)size.x;
+        //    this->m_height = (unsigned int)size.y;
+       // }
+
+        void SetPreset(const Value& preset) {
+            this->value = preset;
+            switch (preset) {
                 case WindowFormat::Unknown:
                     break;
                 case Free:
-                    Helper::Debug::Error("WindowFormat : for setting \"free-size\" window use different constructor!");
+                    Helper::Debug::Error("WindowFormat::SetFormat() : for setting \"free-size\" window use different constructor!");
                     break;
                 case WindowFormat::_640_360:
                     this->m_width = 640;
@@ -52,9 +60,21 @@ namespace Framework::Graphics::Types {
                     this->m_height = 900;
                     break;
                 default:
-                    Helper::Debug::Error("WindowFormat : unknown type " + std::to_string((int)value) + "!");
+                    Helper::Debug::Error("WindowFormat::SetFormat() : unknown type " + std::to_string((int)value) + "!");
                     break;
             }
+        }
+        void SetFormat(const WindowFormat& windowFormat) {
+            if (windowFormat.value == Value::Free) {
+                this->m_height = windowFormat.m_height;
+                this->m_width  = windowFormat.m_width;
+                this->value    = Value::Free;
+            } else
+                this->SetPreset(windowFormat.value);
+        }
+
+        WindowFormat(Value v) {
+            this->SetPreset(v);
         }
     public:
         [[nodiscard]] Value GetValue() const noexcept { return value; }

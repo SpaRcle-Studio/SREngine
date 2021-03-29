@@ -25,6 +25,8 @@
 
 #include <Environment/Vulkan/VulkanTools.h>
 
+#include <Environment/Vulkan/VulkanShader.h>
+
 constexpr double CIRCLE_RAD		= M_PI * 2;
 constexpr double CIRCLE_THIRD	= CIRCLE_RAD / 3.0;
 constexpr double CIRCLE_THIRD_1	= 0;
@@ -88,7 +90,7 @@ namespace Framework::Graphics {
         bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool Init(int swapInterval) override;
 
-        bool MakeWindow(const char* winName, Types::WindowFormat* format, bool fullScreen) override;
+        bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
         bool CloseWindow() override;
         bool SetContextCurrent() override {
             return true;
@@ -153,12 +155,35 @@ namespace Framework::Graphics {
             presentInfoKhr.pImageIndices	  = &m_swapchain.m_activeSwapchainImageID;
             presentInfoKhr.pResults			  = &m_presentResult;
 
-            vkQueuePresentKHR(m_device.m_queue.m_hQueue, &presentInfoKhr);
-            if (m_presentResult != VK_SUCCESS)
-                Helper::Debug::Error("Vulkan::EndRender() : an exception has been occurred!");
+            switch (vkQueuePresentKHR(m_device.m_queue.m_hQueue, &presentInfoKhr)) {
+                case VK_SUCCESS: break;
+                case VK_ERROR_OUT_OF_HOST_MEMORY:
+                    Helper::Debug::Error("Vulkan::EndRender() : out of host memory!");
+                    break;
+                case VK_ERROR_OUT_OF_DEVICE_MEMORY:
+                    Helper::Debug::Error("Vulkan::EndRender() : out of device memory!");
+                    break;
+                case VK_ERROR_DEVICE_LOST:
+                    Helper::Debug::Error("Vulkan::EndRender() : device lost!");
+                    break;
+                case VK_ERROR_OUT_OF_DATE_KHR:
+                    Helper::Debug::Error("Vulkan::EndRender() : out of date KHR!");
+                    break;
+                case VK_ERROR_SURFACE_LOST_KHR:
+                    Helper::Debug::Error("Vulkan::EndRender() : surface lost KHR!");
+                    break;
+                case VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT:
+                    Helper::Debug::Error("Vulkan::EndRender() : ful screen exclusive mode lost KHR!");
+                    break;
+                default:
+                    Helper::Debug::Error("Vulkan::EndRender() : an exception has been occurred!");
+                    break;
+            };
         }
 
         SR_FORCE_INLINE void TestDrawing() override {
+            static VkClearColorValue color = { 1.0, 0.0, 0.0 };
+
             static float color_rotator = 0.0f;
             static VkSemaphore renderCompleteSemaphore = VK_NULL_HANDLE;
             if (renderCompleteSemaphore == VK_NULL_HANDLE) {
@@ -167,6 +192,13 @@ namespace Framework::Graphics {
                 vkCreateSemaphore(m_device.m_logicalDevice, &semaphoreCreateInfo, nullptr, &renderCompleteSemaphore);
                 this->m_waitSemaphores.push_back(renderCompleteSemaphore);
             }
+
+            VkImageSubresourceRange imageSubresourceRange = {};
+            imageSubresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+            imageSubresourceRange.baseMipLevel = 0;
+            imageSubresourceRange.levelCount = 1;
+            imageSubresourceRange.baseArrayLayer = 0;
+            imageSubresourceRange.layerCount = 1;
 
             // Record command buffer
             VkCommandBufferBeginInfo commandBufferBeginInfo = {};
@@ -177,33 +209,41 @@ namespace Framework::Graphics {
 
             vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
 
-            VkRect2D renderArea  = {};
-            renderArea.offset.x  = 0;
-            renderArea.offset.y	 = 0;
-            renderArea.extent	 = GetVulkanSurfaceSize();
+            vkCmdClearColorImage(
+                    commandBuffer,
+                    m_swapchain.m_swapchainImages[m_swapchain.m_activeSwapchainImageID],
+                    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                    &color, 1, &imageSubresourceRange);
 
-            color_rotator += 0.001;
+            if (false)
+            {
+                VkRect2D renderArea = {};
+                renderArea.offset.x = 0;
+                renderArea.offset.y = 0;
+                renderArea.extent = GetVulkanSurfaceSize();
 
-            std::array<VkClearValue, 2> clearValues = {};
-            clearValues[0].depthStencil.depth		= 0.0f;
-            clearValues[0].depthStencil.stencil	    = 0;
-            clearValues[1].color.float32[0]		    = std::sin(color_rotator + CIRCLE_THIRD_1) * 0.5 + 0.5;
-            clearValues[1].color.float32[1]		    = std::sin(color_rotator + CIRCLE_THIRD_2) * 0.5 + 0.5;
-            clearValues[1].color.float32[2]		    = std::sin(color_rotator + CIRCLE_THIRD_3) * 0.5 + 0.5;
-            clearValues[1].color.float32[3]		    = 1.0f;
+                color_rotator += 0.001;
 
-            VkRenderPassBeginInfo renderPassBeginInfo = {};
-            renderPassBeginInfo.sType				  = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-            renderPassBeginInfo.renderPass			  = m_vkRenderPass;
-            renderPassBeginInfo.framebuffer			  = GetVulkanActiveFramebuffer();
-            renderPassBeginInfo.renderArea			  = renderArea;
-            renderPassBeginInfo.clearValueCount		  = clearValues.size();
-            renderPassBeginInfo.pClearValues	      = clearValues.data();
+                std::array<VkClearValue, 2> clearValues = {};
+                clearValues[0].depthStencil.depth = 0.0f;
+                clearValues[0].depthStencil.stencil = 0;
+                clearValues[1].color.float32[0] = std::sin(color_rotator + CIRCLE_THIRD_1) * 0.5 + 0.5;
+                clearValues[1].color.float32[1] = std::sin(color_rotator + CIRCLE_THIRD_2) * 0.5 + 0.5;
+                clearValues[1].color.float32[2] = std::sin(color_rotator + CIRCLE_THIRD_3) * 0.5 + 0.5;
+                clearValues[1].color.float32[3] = 1.0f;
 
-            vkCmdBeginRenderPass(commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
+                VkRenderPassBeginInfo renderPassBeginInfo = {};
+                renderPassBeginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+                renderPassBeginInfo.renderPass = m_vkRenderPass;
+                renderPassBeginInfo.framebuffer = GetVulkanActiveFramebuffer();
+                renderPassBeginInfo.renderArea = renderArea;
+                renderPassBeginInfo.clearValueCount = clearValues.size();
+                renderPassBeginInfo.pClearValues = clearValues.data();
 
-            vkCmdEndRenderPass(commandBuffer);
+                vkCmdBeginRenderPass(commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
 
+                vkCmdEndRenderPass(commandBuffer);
+            }
             vkEndCommandBuffer(commandBuffer);
 
             // Submit command buffer
@@ -223,6 +263,24 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void PollEvents() const noexcept override {
             this->m_basicWindow->PollEvents();
         }
+
+        //!===============================================[SHADERS]=====================================================
+
+        [[nodiscard]] IShaderProgram* AllocShaderProgram() const noexcept override {
+            return (VulkanShader*)malloc(sizeof(VulkanShader));
+        }
+        SR_FORCE_INLINE void DeleteShader(IShaderProgram* shaderProgram) const noexcept override {
+            VulkanTools::DestroyShader(m_device, &((VulkanShader*)shaderProgram)->m_vertShaderModule);
+            VulkanTools::DestroyShader(m_device, &((VulkanShader*)shaderProgram)->m_fragShaderModule);
+        }
+        void FreeShaderProgram(IShaderProgram* shaderProgram) const noexcept override {
+            if (shaderProgram != nullptr)
+                free((VulkanShader*)shaderProgram);
+        }
+        bool CompileShader(const std::string& name, IShaderProgram* shaderProgram) const noexcept override;
+        bool LinkShader(IShaderProgram* shaderProgram) const noexcept override { return true; };
+
+        //!===============================================[SHADERS]=====================================================
     };
 }
 

@@ -30,16 +30,19 @@ namespace Framework::Graphics {
                 Render* render,
                 bool vsync,
                 bool fullScreen,
+                bool resizable,
                 unsigned int smoothSamples
                 )
                 : m_env(Environment::Get())
         {
+            this->m_env->InitWindowFormat(format);
+
             this->m_win_name        = win_name;
-            this->m_format          = format;
             this->m_render          = render;
             this->m_fullScreen      = fullScreen;
             this->m_vsync           = vsync;
             this->m_smoothSamples   = smoothSamples;
+            this->m_resizable       = resizable;
         }
     private:
         ~Window() = default;
@@ -65,7 +68,6 @@ namespace Framework::Graphics {
         Environment*                                        m_env                   = nullptr;
 
         const char*                                         m_win_name              = "Unnamed";
-        WindowFormat                                        m_format                = WindowFormat::Unknown;
         unsigned int                                        m_smoothSamples         = 4;
 
         Render*                                             m_render                = nullptr;
@@ -98,6 +100,7 @@ namespace Framework::Graphics {
 
         bool                                                m_vsync                 = false;
         bool                                                m_fullScreen            = false;
+        bool                                                m_resizable             = false;
 
         glm::vec2                                           m_windowPos             = { 0, 0 };
         glm::vec2                                           m_newWindowPos          = { 0, 0 };
@@ -202,10 +205,7 @@ namespace Framework::Graphics {
         [[nodiscard]] inline bool IsWindowOpen()  const noexcept { return !this->m_isWindowClose; }
         [[nodiscard]] inline bool IsWindowFocus() const noexcept { return this->m_isWindowFocus;  }
         [[nodiscard]] inline Math::Vector2 GetWindowSize() const noexcept {
-            return Math::Vector2(
-                    m_format.Width(),
-                    m_format.Height()
-                );
+            return m_env->GetWindowSize();
         }
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
     public:

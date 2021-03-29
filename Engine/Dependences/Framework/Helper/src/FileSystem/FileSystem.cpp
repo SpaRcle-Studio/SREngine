@@ -138,3 +138,15 @@ void FileSystem::Reload() {
     std::string exe = GetFullPathToExe();
     ShellExecute(NULL, "open", exe.c_str(), NULL, NULL, SW_SHOWDEFAULT);
 }
+
+std::string FileSystem::ReadAllText(const std::string &path) {
+    std::string data = std::string();
+    std::ifstream stream(path, std::ios::in);
+    if (stream.is_open()) {
+        std::string line;
+        while (getline(stream, line))
+            data += "\n" + line;
+        stream.close();
+    }
+    return data;
+}

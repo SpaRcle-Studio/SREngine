@@ -57,19 +57,18 @@ int main() {
         Component::RegisterComponent("Camera", []() -> Camera* { return new Camera(); });
     }
 
-    //Environment::Set(new OpenGL());
-    Environment::Set(new Vulkan());
+    Environment::Set(new OpenGL());
+    //Environment::Set(new Vulkan());
 
     auto *render = new Render();
 
-    WindowFormat format = WindowFormat::_1600_900;
-    //WindowFormat format = WindowFormat::_1366_768;
     auto *window = new Window(
             "SpaRcle Engine",
-            format,
+            WindowFormat::_1366_768,
             render,
             false,
             false,
+            true,
             0
     );
 
