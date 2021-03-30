@@ -22,10 +22,12 @@ namespace Framework::Graphics {
         LRESULT CALLBACK realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             switch (msg) {
                 case (WM_SIZING): {
-                    //RECT rect;
-                    //GetClientRect(m_hWnd, &rect);
-                    //unsigned __int16 x = rect.right - rect.left;
-                    //unsigned __int16 y = rect.bottom - rect.top;
+                    RECT rect;
+                    GetClientRect(m_hWnd, &rect);
+                    unsigned __int16 x = rect.right - rect.left;
+                    unsigned __int16 y = rect.bottom - rect.top;
+
+                    this->m_callback_resize(this, x, y);
 
                     //this->OnResize(m_width, m_height);
 

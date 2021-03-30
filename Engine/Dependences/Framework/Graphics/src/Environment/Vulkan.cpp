@@ -66,6 +66,41 @@ namespace Framework::Graphics{
         return true;
     }
 
+    bool Vulkan::CreateSwapchain() {
+        Helper::Debug::Graph("Vulkan::CreateSwapchain() : initializing swapchain...");
+        this->m_swapchain = VulkanTools::InitSwapchain(m_device, m_vkSurface);
+        if (!m_swapchain.m_ready) {
+            Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to initialize swapchain!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::CreateSwapchain() : create image views for swapchain...");
+        if (!VulkanTools::CreateImageViews(m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create image views!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::CreateSwapchain() : create command pool for swapchain...");
+        if (!VulkanTools::CreateCommandPool(&m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to create command pool!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::CreateSwapchain() : create semaphore for swapchain ...");
+        if (!VulkanTools::CreateVulkanSemaphore(m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to create semaphore!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::CreateSwapchain() : initializing synchronization for swapchain...");
+        if (!VulkanTools::InitSynchronizations(m_device, &m_swapchain)) {
+            Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to initialize synchronization!");
+            return false;
+        }
+
+        return true;
+    }
+
     bool Vulkan::MakeWindow(const char *winName, bool fullScreen, bool resizable) {
         Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
 
@@ -99,52 +134,24 @@ namespace Framework::Graphics{
             return false;
         }
 
-        Helper::Debug::Graph("Vulkan::MakeWindow() : creating swapchain...");
-        this->m_swapchain = VulkanTools::InitSwapchain(m_device, m_vkSurface);
-        if (!m_swapchain.m_ready) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize swapchain!");
-            return false;
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : create image views...");
-        if (!VulkanTools::CreateImageViews(m_device, &m_swapchain)) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create image views!");
-            return false;
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : create command pool...");
-        if (!VulkanTools::CreateCommandPool(&m_device, &m_swapchain)) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create command pool!");
-            return false;
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : create semaphore...");
-        if (!VulkanTools::CreateVulkanSemaphore(m_device, &m_swapchain)) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create semaphore!");
-            return false;
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : initialize render pass...");
-        this->m_vkRenderPass = VulkanTools::InitRenderPass(m_device, m_swapchain);
-        if (m_vkRenderPass == VK_NULL_HANDLE) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to init render pass!");
-            return false;
-        }
-
-        Helper::Debug::Graph("Vulkan::MakeWindow() : initializing synchronization...");
-        this->m_swapchainImageAvailable = VulkanTools::InitSynchronizations(m_device);
-        if (this->m_swapchainImageAvailable == VK_NULL_HANDLE) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize synchronization!");
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create create swapchain...");
+        if (!CreateSwapchain()) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create swapchain!");
             return false;
         }
 
         Helper::Debug::Graph("Vulkan::MakeWindow() : create depth stencil image...");
-        if (!VulkanTools::CreateDepthStencilImage(
-                &m_device,
-                &m_swapchain,
-                Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight())))
-        {
+        this->m_depthStencil = CreateDepthStencilImage(m_device,
+                Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight()));
+        if (!m_depthStencil.IsReady()) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create depth stencil image!");
+            return false;
+        }
+
+        /*!Helper::Debug::Graph("Vulkan::MakeWindow() : initialize render pass...");
+        this->m_vkRenderPass = VulkanTools::InitRenderPass(m_device, m_swapchain, m_depthStencil);
+        if (m_vkRenderPass == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to init render pass!");
             return false;
         }
 
@@ -154,14 +161,14 @@ namespace Framework::Graphics{
             m_vkFrameBuffers[i] = VulkanTools::CreateFrameBuffer(
                     m_vkRenderPass,
                     m_device,
-                    { m_swapchain.m_depthStencilImageView, m_swapchain.m_swapchainImageViews[i] },
+                    { m_depthStencil.m_depthStencilImageView, m_swapchain.m_swapchainImageViews[i] },
                     Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight()));
 
             if (m_vkFrameBuffers[i] == VK_NULL_HANDLE) {
                 Helper::Debug::Error("Vulkan::MakeWindow() : failed to create frame buffer!");
                 return false;
             }
-        }
+        }*/
 
         return true;
     }
@@ -187,29 +194,29 @@ namespace Framework::Graphics{
 
         //!=============================================================================================================
 
-        VulkanTools::DeInitSynchronizations(m_device, &m_swapchainImageAvailable);
-        Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan synchronization successfully destroyed!");
+        //VulkanTools::DeInitSynchronizations(m_device, &m_swapchainImageAvailable);
+        //Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan synchronization successfully destroyed!");
 
+        Helper::Debug::Graph("Vulkan::CloseWindow() : destroying vulkan swapchain...");
         VulkanTools::DeInitSwapchain(this->m_device, &this->m_swapchain);
-        Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan swapchain successfully destroyed!");
 
+        Helper::Debug::Graph("Vulkan::CloseWindow() : destroying vulkan device...!");
         VulkanTools::DeInitDevice(&this->m_device);
-        Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan device successfully destroyed!");
 
         if (m_vkSurface == VK_NULL_HANDLE)
             return false;
         else {
+            Helper::Debug::Graph("Vulkan::CloseWindow() : destroying vulkan surface...");
             VulkanTools::DeInitWindowSurface(m_vkInstance, &m_vkSurface);
-            Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan surface successfully destroyed!");
         }
 
         if (m_vkInstance == VK_NULL_HANDLE)
             return false;
         else {
+            Helper::Debug::Graph("Vulkan::CloseWindow() : destroying vulkan instance...!");
+
             vkDestroyInstance(m_vkInstance, nullptr);
             m_vkInstance = VK_NULL_HANDLE;
-
-            Helper::Debug::Graph("Vulkan::CloseWindow() : vulkan instance successfully destroyed!");
         }
 
         return true;
@@ -219,7 +226,6 @@ namespace Framework::Graphics{
         Helper::Debug::Graph("Vulkan::Init() : initializing vulkan...");
 
         m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
-
             g_callback(WinEvents::Resize, win, &w, &h);
         });
 
@@ -259,15 +265,30 @@ namespace Framework::Graphics{
     }
 
     void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
-        if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
-            w = m_winFormat->Width();
-            h = m_winFormat->Height();
-        } else
-            m_winFormat->SetFreeValue(w, h);
+        m_winFormat->SetFreeValue(w, h);
 
         if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
             Helper::Debug::Log("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
+    }
 
+    bool Vulkan::ReCreateAfterResize() {
+        if (m_depthStencil.IsReady()) {
+            VulkanTools::DestroyDepthStencilImage(m_device, &m_depthStencil);
+            this->m_depthStencil = VulkanTools::CreateDepthStencilImage(m_device,
+                    Helper::Math::Vector2(m_winFormat->Width(), m_winFormat->Height()));
 
+            if (!m_depthStencil.IsReady()) {
+                Helper::Debug::Error("Vulkan::SetWindowSize() : failed to re-create depth stencil image!");
+                return false;
+            }
+        }
+
+        if (m_swapchain.IsReady()) {
+            VulkanTools::DeInitSwapchain(m_device, &m_swapchain);
+            if (!CreateSwapchain())
+                return false;
+        }
+
+        return true;
     }
 }

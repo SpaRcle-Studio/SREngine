@@ -66,23 +66,26 @@ namespace Framework::Graphics {
         VkInstance                        m_vkInstance                  = VK_NULL_HANDLE;
         VkDebugReportCallbackEXT          m_validationReportCallBack    = VK_NULL_HANDLE;
         VkSurfaceKHR                      m_vkSurface                   = VK_NULL_HANDLE;
-        VkRenderPass                      m_vkRenderPass                = VK_NULL_HANDLE;
-        VkFence                           m_swapchainImageAvailable     = VK_NULL_HANDLE;
+        //!VkRenderPass                      m_vkRenderPass                = VK_NULL_HANDLE;
 
-        std::vector<VkFramebuffer>        m_vkFrameBuffers              = {};
+        //!std::vector<VkFramebuffer>        m_vkFrameBuffers              = {};
 
+        VulkanTools::DepthStencil         m_depthStencil                = {};
         VulkanTools::Swapchain            m_swapchain                   = {};
         VulkanTools::Device               m_device                      = {};
 
         std::vector<VkSemaphore>          m_waitSemaphores              = {};
         VkResult                          m_presentResult               = VkResult::VK_RESULT_MAX_ENUM;
     private:
-        [[nodiscard]] SR_FORCE_INLINE VkExtent2D GetVulkanSurfaceSize() const noexcept {
+        bool ReCreateAfterResize();
+        bool CreateSwapchain();
+
+        /*![[nodiscard]] SR_FORCE_INLINE VkExtent2D GetVulkanSurfaceSize() const noexcept {
             return { m_basicWindow->GetWidth(), m_basicWindow->GetHeight() };
         }
         [[nodiscard]] SR_FORCE_INLINE VkFramebuffer GetVulkanActiveFramebuffer() const noexcept {
             return m_vkFrameBuffers[m_swapchain.m_activeSwapchainImageID];
-        }
+        }*/
     public:
         [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const noexcept override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept override { return PipeLine::Vulkan; }
@@ -110,16 +113,16 @@ namespace Framework::Graphics {
                     m_swapchain.m_vkSwapchainKhr,
                     UINT64_MAX,
                     VK_NULL_HANDLE,
-                    m_swapchainImageAvailable,
+                    m_swapchain.m_swapchainImageAvailable,
                     &m_swapchain.m_activeSwapchainImageID), VK_SUCCESS, "Vulkan::BeginRender() : failed to acquire next image!");
 
             SR_CHECK_ERROR(
-                    vkWaitForFences(m_device.m_logicalDevice, 1, &m_swapchainImageAvailable, VK_TRUE, UINT64_MAX),
+                    vkWaitForFences(m_device.m_logicalDevice, 1, & m_swapchain.m_swapchainImageAvailable, VK_TRUE, UINT64_MAX),
                     VK_SUCCESS,
                     "Vulkan::BeginRender() : failed to wait for fences!");
 
             SR_CHECK_ERROR(
-                    vkResetFences(m_device.m_logicalDevice, 1, &m_swapchainImageAvailable),
+                    vkResetFences(m_device.m_logicalDevice, 1, & m_swapchain.m_swapchainImageAvailable),
                     VK_SUCCESS,
                     "Vulkan::BeginRender() : failed to reset fences!");
 
@@ -159,24 +162,36 @@ namespace Framework::Graphics {
                 case VK_SUCCESS: break;
                 case VK_ERROR_OUT_OF_HOST_MEMORY:
                     Helper::Debug::Error("Vulkan::EndRender() : out of host memory!");
+                    this->m_hasErrors = true;
                     break;
                 case VK_ERROR_OUT_OF_DEVICE_MEMORY:
                     Helper::Debug::Error("Vulkan::EndRender() : out of device memory!");
+                    this->m_hasErrors = true;
                     break;
                 case VK_ERROR_DEVICE_LOST:
                     Helper::Debug::Error("Vulkan::EndRender() : device lost!");
+                    this->m_hasErrors = true;
                     break;
                 case VK_ERROR_OUT_OF_DATE_KHR:
-                    Helper::Debug::Error("Vulkan::EndRender() : out of date KHR!");
+                    Helper::Debug::System("Vulkan::EndRender() : out of date KHR! Re-create vulkan...");
+                    if (m_basicWindow->IsWindowOpen()) {
+                        if (!this->ReCreateAfterResize()){
+                            Helper::Debug::Error("Vulkan::EndRender() : failed to re-create vulkan after window resizing!");
+                            this->m_hasErrors = true;
+                        }
+                    }
                     break;
                 case VK_ERROR_SURFACE_LOST_KHR:
                     Helper::Debug::Error("Vulkan::EndRender() : surface lost KHR!");
+                    this->m_hasErrors = true;
                     break;
                 case VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT:
                     Helper::Debug::Error("Vulkan::EndRender() : ful screen exclusive mode lost KHR!");
+                    this->m_hasErrors = true;
                     break;
                 default:
                     Helper::Debug::Error("Vulkan::EndRender() : an exception has been occurred!");
+                    this->m_hasErrors = true;
                     break;
             };
         }
@@ -215,35 +230,6 @@ namespace Framework::Graphics {
                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                     &color, 1, &imageSubresourceRange);
 
-            if (false)
-            {
-                VkRect2D renderArea = {};
-                renderArea.offset.x = 0;
-                renderArea.offset.y = 0;
-                renderArea.extent = GetVulkanSurfaceSize();
-
-                color_rotator += 0.001;
-
-                std::array<VkClearValue, 2> clearValues = {};
-                clearValues[0].depthStencil.depth = 0.0f;
-                clearValues[0].depthStencil.stencil = 0;
-                clearValues[1].color.float32[0] = std::sin(color_rotator + CIRCLE_THIRD_1) * 0.5 + 0.5;
-                clearValues[1].color.float32[1] = std::sin(color_rotator + CIRCLE_THIRD_2) * 0.5 + 0.5;
-                clearValues[1].color.float32[2] = std::sin(color_rotator + CIRCLE_THIRD_3) * 0.5 + 0.5;
-                clearValues[1].color.float32[3] = 1.0f;
-
-                VkRenderPassBeginInfo renderPassBeginInfo = {};
-                renderPassBeginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-                renderPassBeginInfo.renderPass = m_vkRenderPass;
-                renderPassBeginInfo.framebuffer = GetVulkanActiveFramebuffer();
-                renderPassBeginInfo.renderArea = renderArea;
-                renderPassBeginInfo.clearValueCount = clearValues.size();
-                renderPassBeginInfo.pClearValues = clearValues.data();
-
-                vkCmdBeginRenderPass(commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
-
-                vkCmdEndRenderPass(commandBuffer);
-            }
             vkEndCommandBuffer(commandBuffer);
 
             // Submit command buffer

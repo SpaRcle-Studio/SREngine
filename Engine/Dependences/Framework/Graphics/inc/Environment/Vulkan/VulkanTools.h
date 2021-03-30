@@ -266,7 +266,9 @@ namespace Framework::Graphics::VulkanTools {
 
         return true;
     }
-    static bool CreateDepthStencilImage(Device* device, Swapchain* swapchain, Helper::Math::Vector2 surfaceSize) {
+    static DepthStencil CreateDepthStencilImage(const Device& device, Helper::Math::Vector2 surfaceSize) {
+        DepthStencil depthStencil = {};
+
         static const std::vector<VkFormat> try_formats {
                 VK_FORMAT_D32_SFLOAT_S8_UINT,
                 VK_FORMAT_D24_UNORM_S8_UINT,
@@ -276,21 +278,21 @@ namespace Framework::Graphics::VulkanTools {
         };
         for (const auto& f : try_formats) {
             VkFormatProperties format_properties = {};
-            vkGetPhysicalDeviceFormatProperties(device->m_physicalDevice, f, &format_properties);
+            vkGetPhysicalDeviceFormatProperties(device.m_physicalDevice, f, &format_properties);
             if(format_properties.optimalTilingFeatures & VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) {
-                swapchain->m_depthStencilFormat = f;
+                depthStencil.m_depthStencilFormat = f;
                 break;
             }
         }
 
-        if (swapchain->m_depthStencilFormat == VK_FORMAT_UNDEFINED) {
+        if (depthStencil.m_depthStencilFormat == VK_FORMAT_UNDEFINED) {
             Helper::Debug::Error("VulkanTools::CreateDepthStencilImage() : depth stencil format not selected!");
-            return false;
+            return {};
         } else if (
-                swapchain->m_depthStencilFormat == VK_FORMAT_D32_SFLOAT_S8_UINT ||
-                swapchain->m_depthStencilFormat == VK_FORMAT_D24_UNORM_S8_UINT  ||
-                swapchain->m_depthStencilFormat == VK_FORMAT_D16_UNORM_S8_UINT ||
-                swapchain->m_depthStencilFormat == VK_FORMAT_S8_UINT ) swapchain->m_stencilAvailable = true;
+                depthStencil.m_depthStencilFormat == VK_FORMAT_D32_SFLOAT_S8_UINT ||
+                        depthStencil.m_depthStencilFormat == VK_FORMAT_D24_UNORM_S8_UINT  ||
+                        depthStencil.m_depthStencilFormat == VK_FORMAT_D16_UNORM_S8_UINT ||
+                        depthStencil.m_depthStencilFormat == VK_FORMAT_S8_UINT ) depthStencil.m_stencilAvailable = true;
 
         //!=============================================================================================================
 
@@ -298,7 +300,7 @@ namespace Framework::Graphics::VulkanTools {
         imageCreateInfo.sType                   = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
         imageCreateInfo.flags                   = 0;
         imageCreateInfo.imageType               = VK_IMAGE_TYPE_2D;
-        imageCreateInfo.format                  = swapchain->m_depthStencilFormat;
+        imageCreateInfo.format                  = depthStencil.m_depthStencilFormat;
         imageCreateInfo.extent.width            = surfaceSize.x;
         imageCreateInfo.extent.height           = surfaceSize.y;
         imageCreateInfo.extent.depth            = 1;
@@ -312,17 +314,17 @@ namespace Framework::Graphics::VulkanTools {
         imageCreateInfo.pQueueFamilyIndices     = nullptr;
         imageCreateInfo.initialLayout           = VK_IMAGE_LAYOUT_UNDEFINED;
 
-        if (vkCreateImage(device->m_logicalDevice, &imageCreateInfo, nullptr, &swapchain->m_depthStencilImage) != VK_SUCCESS) {
+        if (vkCreateImage(device.m_logicalDevice, &imageCreateInfo, nullptr, &depthStencil.m_depthStencilImage) != VK_SUCCESS) {
             Helper::Debug::Error("VulkanTools::CreateDepthStencilImage() : can't create depth stencil image!");
-            return false;
+            return {};
         }
 
 
         VkMemoryRequirements imageMemoryRequirements = {};
-        vkGetImageMemoryRequirements(device->m_logicalDevice, swapchain->m_depthStencilImage, &imageMemoryRequirements);
+        vkGetImageMemoryRequirements(device.m_logicalDevice, depthStencil.m_depthStencilImage, &imageMemoryRequirements);
 
         unsigned __int32 memoryIndex = FindMemoryTypeIndex(
-                GetDeviceMemoryProperties(device->m_physicalDevice),
+                GetDeviceMemoryProperties(device.m_physicalDevice),
                 imageMemoryRequirements, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
         VkMemoryAllocateInfo memoryAllocateInfo = {};
@@ -330,37 +332,47 @@ namespace Framework::Graphics::VulkanTools {
         memoryAllocateInfo.allocationSize		= imageMemoryRequirements.size;
         memoryAllocateInfo.memoryTypeIndex	    = memoryIndex;
 
-        if (vkAllocateMemory(device->m_logicalDevice, &memoryAllocateInfo, nullptr, &swapchain->m_depthStencilImageMemory) != VK_SUCCESS) {
+        if (vkAllocateMemory(device.m_logicalDevice, &memoryAllocateInfo, nullptr, &depthStencil.m_depthStencilImageMemory) != VK_SUCCESS) {
             Helper::Debug::Error("VulkanTools::CreateDepthStencilImage() : failed to allocate memory!");
-            return false;
+            return {};
         }
-        if (vkBindImageMemory(device->m_logicalDevice, swapchain->m_depthStencilImage, swapchain->m_depthStencilImageMemory, 0) != VK_SUCCESS) {
+        if (vkBindImageMemory(device.m_logicalDevice, depthStencil.m_depthStencilImage, depthStencil.m_depthStencilImageMemory, 0) != VK_SUCCESS) {
             Helper::Debug::Error("VulkanTools::CreateDepthStencilImage() : failed to bind memory!");
-            return false;
+            return {};
         }
 
         VkImageViewCreateInfo imageViewCreateInfo           = {};
         imageViewCreateInfo.sType				            = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-        imageViewCreateInfo.image				            = swapchain->m_depthStencilImage;
+        imageViewCreateInfo.image				            = depthStencil.m_depthStencilImage;
         imageViewCreateInfo.viewType				        = VK_IMAGE_VIEW_TYPE_2D;
-        imageViewCreateInfo.format				            = swapchain->m_depthStencilFormat;
+        imageViewCreateInfo.format				            = depthStencil.m_depthStencilFormat;
         imageViewCreateInfo.components.r			        = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageViewCreateInfo.components.g			        = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageViewCreateInfo.components.b			        = VK_COMPONENT_SWIZZLE_IDENTITY;
         imageViewCreateInfo.components.a			        = VK_COMPONENT_SWIZZLE_IDENTITY;
-        imageViewCreateInfo.subresourceRange.aspectMask		= VK_IMAGE_ASPECT_DEPTH_BIT | (swapchain->m_stencilAvailable ? VK_IMAGE_ASPECT_STENCIL_BIT : 0);
+        imageViewCreateInfo.subresourceRange.aspectMask		= VK_IMAGE_ASPECT_DEPTH_BIT | (depthStencil.m_stencilAvailable ? VK_IMAGE_ASPECT_STENCIL_BIT : 0);
         imageViewCreateInfo.subresourceRange.baseMipLevel	= 0;
         imageViewCreateInfo.subresourceRange.levelCount		= 1;
         imageViewCreateInfo.subresourceRange.baseArrayLayer	= 0;
         imageViewCreateInfo.subresourceRange.layerCount		= 1;
 
-        if (vkCreateImageView(device->m_logicalDevice, &imageViewCreateInfo, nullptr, &swapchain->m_depthStencilImageView) != VK_SUCCESS) {
+        if (vkCreateImageView(device.m_logicalDevice, &imageViewCreateInfo, nullptr, &depthStencil.m_depthStencilImageView) != VK_SUCCESS) {
             Helper::Debug::Error("VulkanTools::CreateDepthStencilImage() : failed to create image view!");
-            return false;
+            return {};
         }
 
-        return true;
+        return depthStencil;
     }
+    static void DestroyDepthStencilImage(const Device& device, DepthStencil* depthStencil) {
+        vkDestroyImageView(device.m_logicalDevice, depthStencil->m_depthStencilImageView, nullptr);
+        vkFreeMemory(device.m_logicalDevice, depthStencil->m_depthStencilImageMemory, nullptr);
+        vkDestroyImage(device.m_logicalDevice, depthStencil->m_depthStencilImage, nullptr);
+
+        depthStencil->m_depthStencilImageView   = VK_NULL_HANDLE;
+        depthStencil->m_depthStencilImageMemory = VK_NULL_HANDLE;
+        depthStencil->m_depthStencilImage       = VK_NULL_HANDLE;
+    }
+
     static bool CreateVulkanSemaphore(Device device, Swapchain* swapchain) {
         VkSemaphoreCreateInfo semaphoreCreateInfo = {};
         semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -622,17 +634,55 @@ namespace Framework::Graphics::VulkanTools {
         swapchain.m_ready = true;
         return swapchain;
     }
-    static void DeInitSwapchain(const Device device, Swapchain* swapchain) {
+    static void DeInitSwapchain(const Device& device, Swapchain* swapchain) {
         if (swapchain->m_vkSwapchainKhr != VK_NULL_HANDLE) {
+            /*Helper::Debug::Log("VulkanTools::DeInitSwapchain() : destroying swapchain images...");
+            if (!swapchain->m_swapchainImages.empty()) {
+                for (auto image : swapchain->m_swapchainImages)
+                    vkDestroyImage(device.m_logicalDevice, image, nullptr);
+                swapchain->m_swapchainImages.clear();
+            }*/
+
+            Helper::Debug::Log("VulkanTools::DeInitSwapchain() : destroying command buffers...");
+            if (!swapchain->m_commandBuffers.empty()) {
+                vkFreeCommandBuffers(
+                        device.m_logicalDevice,
+                        device.m_queue.m_hCommandPool,
+                        swapchain->m_commandBuffers.size(),
+                        swapchain->m_commandBuffers.data());
+            }
+
+            Helper::Debug::Log("VulkanTools::DeInitSwapchain() : destroying swapchain image views...");
+            if (!swapchain->m_swapchainImageViews.empty()) {
+                for (auto & image : swapchain->m_swapchainImageViews)
+                    vkDestroyImageView(device.m_logicalDevice, image, nullptr);
+                swapchain->m_swapchainImageViews.clear();
+                swapchain->m_activeSwapchainImageID = 0;
+            }
+
+            Helper::Debug::Log("VulkanTools::DeInitSwapchain() : destroying swapchain khr...");
             vkDestroySwapchainKHR(device.m_logicalDevice, swapchain->m_vkSwapchainKhr, nullptr);
             swapchain->m_vkSwapchainKhr = VK_NULL_HANDLE;
+
+            if (swapchain->m_vkSemaphoreRenderingFinished != VK_NULL_HANDLE)
+                vkDestroySemaphore(device.m_logicalDevice, swapchain->m_vkSemaphoreRenderingFinished, nullptr);
+
+            if (swapchain->m_vkSemaphoreImageAvailable != VK_NULL_HANDLE)
+                vkDestroySemaphore(device.m_logicalDevice, swapchain->m_vkSemaphoreImageAvailable, nullptr);
+
+            if (swapchain->m_swapchainImageAvailable != VK_NULL_HANDLE)
+                vkDestroyFence(device.m_logicalDevice, swapchain->m_swapchainImageAvailable, nullptr);
+
+            swapchain->m_surfaceFormat = {};
+
+            swapchain->m_ready = false;
         }
     }
 
-    static VkRenderPass InitRenderPass(const Device& device, const Swapchain& swapchain) {
+    static VkRenderPass InitRenderPass(const Device& device, const Swapchain& swapchain, const DepthStencil& depthStencil) {
         std::array<VkAttachmentDescription, 2> attachments = {};
         attachments[0].flags		    = 0;
-        attachments[0].format		    = swapchain.m_depthStencilFormat;
+        attachments[0].format		    = depthStencil.m_depthStencilFormat;
         attachments[0].samples		    = VK_SAMPLE_COUNT_1_BIT;
         attachments[0].loadOp		    = VK_ATTACHMENT_LOAD_OP_CLEAR;
         attachments[0].storeOp		    = VK_ATTACHMENT_STORE_OP_DONT_CARE;
@@ -718,25 +768,27 @@ namespace Framework::Graphics::VulkanTools {
     }
 
 
-    static VkFence InitSynchronizations(const Device& device) {
+    static bool InitSynchronizations(const Device& device, Swapchain* swapchain) {
         VkFenceCreateInfo fenceCreateInfo = {};
         fenceCreateInfo.sType			  = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
 
         VkFence fence = {};
         if (vkCreateFence(device.m_logicalDevice, &fenceCreateInfo, nullptr, &fence) != VK_SUCCESS) {
             Helper::Debug::Error("VulkanTools::InitSynchronizations() : failed to create fence!");
-            return VK_NULL_HANDLE;
+            return false;
         }
 
-        return fence;
+        swapchain->m_swapchainImageAvailable = fence;
+
+        return true;
     }
 
-    static void DeInitSynchronizations(const Device& device, VkFence* fence) {
-        if (*fence != VK_NULL_HANDLE) {
-            vkDestroyFence(device.m_logicalDevice, *fence, nullptr);
-            *fence = VK_NULL_HANDLE;
-        }
-    }
+    //static void DeInitSynchronizations(const Device& device, VkFence* fence) {
+    //    if (*fence != VK_NULL_HANDLE) {
+   //         vkDestroyFence(device.m_logicalDevice, *fence, nullptr);
+    //        *fence = VK_NULL_HANDLE;
+    //    }
+    //}
 
     static VkShaderModule CreateShader(const Device& device, const std::string& code) {
         VkShaderModuleCreateInfo createInfo = {};

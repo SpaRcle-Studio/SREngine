@@ -183,9 +183,9 @@ void Framework::Graphics::Window::Thread() {
         Debug::Log("Window::Thread() : screen size is " +
                    std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
 
-        unsigned int w = m_env->GetWindowFormat()->Width();
-        unsigned int h = m_env->GetWindowFormat()->Height();
-        Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
+        //unsigned int w = m_env->GetWindowFormat()->Width();
+        //unsigned int h = m_env->GetWindowFormat()->Height();
+        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
 
         this->CentralizeWindow();
 
@@ -202,7 +202,7 @@ void Framework::Graphics::Window::Thread() {
     // for optimization needed pipeline
     const Environment::PipeLine pipeLine = m_env->GetPipeLine();
 
-    while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen()) {
+    while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
         clock_t beginFrame = clock();
 
         {

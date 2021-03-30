@@ -26,6 +26,20 @@ namespace Framework::Graphics::VulkanTools {
         }
     };
 
+    struct DepthStencil {
+        VkImage                       m_depthStencilImage            = VK_NULL_HANDLE;
+        VkImageView                   m_depthStencilImageView        = VK_NULL_HANDLE;
+        VkFormat                      m_depthStencilFormat           = VK_FORMAT_UNDEFINED;
+        bool                          m_stencilAvailable             = false;
+        VkDeviceMemory                m_depthStencilImageMemory      = VK_NULL_HANDLE;
+
+        [[nodiscard]] bool IsReady() const noexcept {
+            return m_depthStencilImage != VK_NULL_HANDLE &&
+                m_depthStencilImageMemory != VK_NULL_HANDLE &&
+                m_depthStencilImageView != VK_NULL_HANDLE;
+        }
+    };
+
     struct Swapchain {
         VkSurfaceFormatKHR            m_surfaceFormat                = {};
         VkSwapchainKHR                m_vkSwapchainKhr               = VK_NULL_HANDLE;
@@ -34,20 +48,17 @@ namespace Framework::Graphics::VulkanTools {
         std::vector <VkImageView>     m_swapchainImageViews          = std::vector<VkImageView>();
         unsigned __int32              m_activeSwapchainImageID       = UINT32_MAX;
 
-        VkImage                       m_depthStencilImage            = VK_NULL_HANDLE;
-        VkImageView                   m_depthStencilImageView        = VK_NULL_HANDLE;
-        VkFormat                      m_depthStencilFormat           = VK_FORMAT_UNDEFINED;
-        bool                          m_stencilAvailable             = false;
-        VkDeviceMemory                m_depthStencilImageMemory      = VK_NULL_HANDLE;
-
         VkSemaphore                   m_vkSemaphoreImageAvailable    = VK_NULL_HANDLE;
         VkSemaphore                   m_vkSemaphoreRenderingFinished = VK_NULL_HANDLE;
+
+        VkFence                       m_swapchainImageAvailable      = VK_NULL_HANDLE;
+
 
         std::vector <VkCommandBuffer> m_commandBuffers               = std::vector<VkCommandBuffer>();
         bool                          m_ready                        = false;
 
-        void DeInit() {
-
+        [[nodiscard]] bool IsReady() const {
+            return m_ready;
         }
     };
 

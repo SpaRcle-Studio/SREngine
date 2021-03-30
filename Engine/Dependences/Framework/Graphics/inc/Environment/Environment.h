@@ -38,6 +38,7 @@ namespace Framework::Graphics {
         static inline std::mutex g_mutex = std::mutex();
 
         BasicWindow* m_basicWindow = nullptr;
+        bool m_hasErrors = false;
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -46,6 +47,7 @@ namespace Framework::Graphics {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
+        [[nodiscard]] SR_FORCE_INLINE bool HasErrors() const noexcept { return m_hasErrors; }
         glm::vec2 GetWindowSize() noexcept { return { m_winFormat->Width(), m_winFormat->Height() }; }
         [[nodiscard]] Types::WindowFormat* GetWindowFormat() const noexcept {
             return this->m_winFormat;
