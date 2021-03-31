@@ -1,3 +1,0 @@
-[submodule "Engine/Dependences/Framework/Depends/external/lua"]
-	path = Engine/Dependences/Framework/Depends/external/lua
-	url = https://github.com/lubgr/lua-cmake
