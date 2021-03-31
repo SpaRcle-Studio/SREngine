@@ -48,7 +48,6 @@ namespace Framework::Graphics {
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors() const noexcept { return m_hasErrors; }
-        glm::vec2 GetWindowSize() noexcept { return { m_winFormat->Width(), m_winFormat->Height() }; }
         [[nodiscard]] Types::WindowFormat* GetWindowFormat() const noexcept {
             return this->m_winFormat;
         }
@@ -108,6 +107,7 @@ namespace Framework::Graphics {
         virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable) { return false; }
 
         virtual bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) { return false; }
+        [[nodiscard]] virtual glm::vec2 GetWindowSize() const noexcept { return {0,0}; }
 
         /* set current opengl/vulkan/directx context */
         virtual bool SetContextCurrent() { return false; }

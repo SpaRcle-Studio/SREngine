@@ -225,6 +225,8 @@ namespace Framework::Graphics{
     bool Vulkan::Init(int swapInterval) {
         Helper::Debug::Graph("Vulkan::Init() : initializing vulkan...");
 
+        this->m_screenSize = m_basicWindow->GetScreenResolution(0).ToGLM();
+
         m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
             g_callback(WinEvents::Resize, win, &w, &h);
         });
@@ -265,20 +267,23 @@ namespace Framework::Graphics{
     }
 
     void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
-        m_winFormat->SetFreeValue(w, h);
-
         if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
             Helper::Debug::Log("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
+
+        this->m_basicWindow->Resize(w, h);
     }
 
     bool Vulkan::ReCreateAfterResize() {
+        auto size = Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight());
+
+        Helper::Debug::Log("Vulkan::ReCreateAfterResize() : new window size = " + size.ToString());
+
         if (m_depthStencil.IsReady()) {
             VulkanTools::DestroyDepthStencilImage(m_device, &m_depthStencil);
-            this->m_depthStencil = VulkanTools::CreateDepthStencilImage(m_device,
-                    Helper::Math::Vector2(m_winFormat->Width(), m_winFormat->Height()));
+            this->m_depthStencil = VulkanTools::CreateDepthStencilImage(m_device, size);
 
             if (!m_depthStencil.IsReady()) {
-                Helper::Debug::Error("Vulkan::SetWindowSize() : failed to re-create depth stencil image!");
+                Helper::Debug::Error("Vulkan::ReCreateAfterResize() : failed to re-create depth stencil image!");
                 return false;
             }
         }
@@ -290,5 +295,9 @@ namespace Framework::Graphics{
         }
 
         return true;
+    }
+
+    void Vulkan::SetWindowPosition(int x, int y) {
+        this->m_basicWindow->Move(x, y);
     }
 }

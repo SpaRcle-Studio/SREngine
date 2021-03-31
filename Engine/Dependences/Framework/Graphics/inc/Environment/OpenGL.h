@@ -88,6 +88,8 @@ namespace Framework::Graphics {
         void SetWindowPosition(int x, int y) override;
         void SetDepthTestEnabled(bool value) override;
 
+        [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override { return { this->m_winFormat->Width(), this->m_winFormat->Height() }; }
+
         glm::vec2 GetMousePos() override {
             double posx = 0.0, posy = 0.0;
 #ifdef  SR_OPENGL_USE_WINAPI

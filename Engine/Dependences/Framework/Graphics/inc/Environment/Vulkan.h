@@ -99,6 +99,10 @@ namespace Framework::Graphics {
             return true;
         }
 
+        [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override {
+            return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };
+        }
+
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen() const noexcept override {
              return m_basicWindow->IsWindowOpen();
         }
@@ -250,6 +254,7 @@ namespace Framework::Graphics {
             this->m_basicWindow->PollEvents();
         }
 
+        void SetWindowPosition(int x, int y) override;
         void SetWindowSize(unsigned int w, unsigned int h) override;
 
         //!===============================================[SHADERS]=====================================================

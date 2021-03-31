@@ -58,8 +58,8 @@ namespace Framework::Graphics {
 
         volatile bool                                       m_isWindowFocus         = true;
 
-        bool                                                m_isNeedResize          = false;
-        bool                                                m_isNeedMove            = false;
+        volatile bool                                       m_isNeedResize          = false;
+        volatile bool                                       m_isNeedMove            = false;
     private:
         std::thread                                         m_thread                = std::thread();
 
@@ -104,6 +104,7 @@ namespace Framework::Graphics {
 
         glm::vec2                                           m_windowPos             = { 0, 0 };
         glm::vec2                                           m_newWindowPos          = { 0, 0 };
+        glm::vec2                                           m_newWindowSize         = { 0, 0 };
     private:
         void PollEvents();
         void Thread();

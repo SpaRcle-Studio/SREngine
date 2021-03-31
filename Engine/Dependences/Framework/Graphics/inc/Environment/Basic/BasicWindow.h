@@ -9,6 +9,7 @@
 #include <functional>
 #include <utility>
 #include <string>
+#include <Math/Vector3.h>
 
 namespace Framework::Graphics {
     class BasicWindow {
@@ -29,6 +30,10 @@ namespace Framework::Graphics {
         unsigned int m_width  = 0;
         unsigned int m_height = 0;
 
+        unsigned int m_posX   = 0;
+        unsigned int m_posY   = 0;
+
+        bool m_maximize = false;
         bool m_windowOpen = false;
         bool m_eventHandlerIsRun = false;
     public:
@@ -55,9 +60,12 @@ namespace Framework::Graphics {
                 unsigned int sizeX, unsigned int sizeY,
                 bool fullscreen, bool resizable) { return false; }
     public:
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept { return m_width;  }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHeight() const noexcept { return m_height; }
+        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetWidth()  const noexcept { return 0; }
+        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetHeight() const noexcept { return 0; }
     public:
+        virtual Helper::Math::Vector2 GetScreenResolution(unsigned int monitorID) const noexcept { return {0,0}; }
+        virtual void Resize(unsigned int w, unsigned int h) { }
+        virtual void Move(int x, int y) { }
         virtual bool Destroy() { return false; }
         virtual bool Free() { return false; }
         virtual SR_FORCE_INLINE void PollEvents() const noexcept { };

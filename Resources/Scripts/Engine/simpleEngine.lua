@@ -28,9 +28,11 @@ function Start()
     Debug.Log("Starting main engine script...");
 
     --window:Resize(1600, 900);
+
+    window:CentralizeWindow();
+
     --window:SetFullScreen(false);
 
-    --window:CentralizeWindow();
 
     collectgarbage() -- collect memory
 end;

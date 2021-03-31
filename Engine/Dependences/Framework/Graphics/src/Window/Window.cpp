@@ -46,7 +46,7 @@ bool Framework::Graphics::Window::Create() {
                 break;
             case Environment::WinEvents::Resize: {
                 //float ratio = m_format.GetRatio();
-                m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
+                //m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
 
                 //this->m_camera->UpdateProjection(ratio);
                 //this->m_postProcessing->ReCalcFrameBuffers(*(int *) arg1, *(int *) arg2);
@@ -420,16 +420,25 @@ void Framework::Graphics::Window::PollEvents() {
     }
 
     if (m_isNeedResize) { // TODO
-        unsigned int w =  m_env->GetWindowFormat()->Width();
-        unsigned int h =  m_env->GetWindowFormat()->Height();
-        Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
+        //unsigned int w =  m_env->GetWindowFormat()->Width();
+        //unsigned int h =  m_env->GetWindowFormat()->Height();
+
+        unsigned int w = this->m_newWindowSize.x;
+        unsigned int h = this->m_newWindowSize.y;
+
+        m_env->SetWindowSize(w, h);
+
+        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
         this->m_isNeedResize = false;
     }
 
     if (m_isNeedMove) { // TODO
-        unsigned int x = m_newWindowPos.x;
-        unsigned int y = m_newWindowPos.y;
-        Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &x, &y);
+        int x = m_newWindowPos.x;
+        int y = m_newWindowPos.y;
+        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &x, &y);
+
+        m_env->SetWindowPosition(x, y);
+
         this->m_isNeedMove = false;
     }
 }
@@ -461,15 +470,20 @@ bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *c
 }
 
 void Framework::Graphics::Window::Resize(unsigned int w, unsigned int h) {
-    this->m_env->GetWindowFormat()->SetFreeValue(w, h);
+    //this->m_env->GetWindowFormat()->SetFreeValue(w, h);
+    this->m_newWindowSize = { w, h };
     this->m_isNeedResize = true;
 }
 
 void Framework::Graphics::Window::CentralizeWindow() {
+    ret:
+    if (m_isNeedResize)
+        goto ret;
+
     glm::vec2 scr_size = m_env->GetScreenSize();
 
-    unsigned int w = m_env->GetWindowFormat()->Width();
-    unsigned int h = m_env->GetWindowFormat()->Height();
+    unsigned int w = m_env->GetWindowSize().x;
+    unsigned int h = m_env->GetWindowSize().y;
 
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;

@@ -238,10 +238,10 @@ bool Framework::Graphics::OpenGL::CloseWindow() {
 
 
 void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) {
-    if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
-        w = m_winFormat->Width();
-        h = m_winFormat->Height();
-    } else
+    //if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
+    //    w = m_winFormat->Width();
+    //    h = m_winFormat->Height();
+   // } else
         m_winFormat->SetFreeValue(w, h);
 
     if (Debug::GetLevel() >= Debug::Level::High)

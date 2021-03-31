@@ -267,6 +267,8 @@ namespace Framework::Graphics::VulkanTools {
         return true;
     }
     static DepthStencil CreateDepthStencilImage(const Device& device, Helper::Math::Vector2 surfaceSize) {
+        Helper::Debug::Graph("VulkanTools::CreateDepthStencilImage() : create depth stencil...");
+
         DepthStencil depthStencil = {};
 
         static const std::vector<VkFormat> try_formats {
@@ -364,6 +366,8 @@ namespace Framework::Graphics::VulkanTools {
         return depthStencil;
     }
     static void DestroyDepthStencilImage(const Device& device, DepthStencil* depthStencil) {
+        Helper::Debug::Log("VulkanTools::DestroyDepthStencilImage() : destroying depth stencil...");
+
         vkDestroyImageView(device.m_logicalDevice, depthStencil->m_depthStencilImageView, nullptr);
         vkFreeMemory(device.m_logicalDevice, depthStencil->m_depthStencilImageMemory, nullptr);
         vkDestroyImage(device.m_logicalDevice, depthStencil->m_depthStencilImage, nullptr);
