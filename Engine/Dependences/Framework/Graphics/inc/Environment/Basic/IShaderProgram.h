@@ -6,6 +6,10 @@
 #define GAMEENGINE_ISHADERPROGRAM_H
 
 namespace Framework::Graphics {
+    enum class ShaderType {
+        Vertex, Fragment, Tesselation
+    };
+
     interface IShaderProgram {
         [[nodiscard]] virtual bool IsReady() const noexcept { return false; }
     };

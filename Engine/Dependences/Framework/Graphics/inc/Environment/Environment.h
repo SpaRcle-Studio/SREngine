@@ -16,7 +16,7 @@
 #include <Environment/TextureFilters.h>
 #include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
-#include <Environment/IShaderProgram.h>
+#include <Environment/Basic/IShaderProgram.h>
 
 namespace Framework::Graphics {
     struct Vertex;

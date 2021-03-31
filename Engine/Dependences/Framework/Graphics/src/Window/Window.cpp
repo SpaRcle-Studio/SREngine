@@ -213,7 +213,9 @@ void Framework::Graphics::Window::Thread() {
 
                 this->m_env->BeginRender();
 
-                this->m_env->TestDrawing();
+                this->m_env->ClearColorBuffers(0.3, 0.3, 0.3, 0);
+                //this->m_render->DrawGeometry();
+                //this->m_env->TestDrawing();
 
                 this->m_env->EndRender();
             }

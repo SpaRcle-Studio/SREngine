@@ -8,6 +8,7 @@
 
 local scene; -- Scene*
 local window; -- Window*
+local render; -- Render*
 
 function Init()
     Debug.Log("Initialize engine editor GUI...");
@@ -20,6 +21,7 @@ function Init()
 
     scene   = Scene.Get();
     window  = Window.Get();
+    render  = Render.Get();
 
     collectgarbage() -- collect memory
 end;
@@ -33,6 +35,8 @@ function Start()
 
     --window:SetFullScreen(false);
 
+    local mesh = Mesh.Load("engine/cube.obj", 0);
+    render:RegisterMesh(mesh);
 
     collectgarbage() -- collect memory
 end;

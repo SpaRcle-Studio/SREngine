@@ -225,6 +225,24 @@ namespace Framework::Graphics{
     bool Vulkan::Init(int swapInterval) {
         Helper::Debug::Graph("Vulkan::Init() : initializing vulkan...");
 
+        if (m_renderCompleteSemaphore == VK_NULL_HANDLE) { // TODO
+            VkSemaphoreCreateInfo semaphoreCreateInfo = {};
+            semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+            vkCreateSemaphore(m_device.m_logicalDevice, &semaphoreCreateInfo, nullptr, &m_renderCompleteSemaphore);
+            this->m_waitSemaphores.push_back(m_renderCompleteSemaphore);
+        }
+
+        Helper::Debug::Graph("Vulkan::Init() : init array for vertex buffers...");
+        {
+            g_VertexBuffers       = (VkBuffer*)malloc(sizeof(VkBuffer)             * g_maxCountVBOs);
+            g_VertexBuffersMemory = (VkDeviceMemory*)malloc(sizeof(VkDeviceMemory) * g_maxCountVBOs);
+
+            for (unsigned __int32 i = 0; i < g_maxCountVBOs; i++) {
+                g_VertexBuffers[i]       = VK_NULL_HANDLE;
+                g_VertexBuffersMemory[i] = VK_NULL_HANDLE;
+            }
+        }
+
         this->m_screenSize = m_basicWindow->GetScreenResolution(0).ToGLM();
 
         m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
@@ -253,14 +271,37 @@ namespace Framework::Graphics{
         std::string vertCode = Helper::FileSystem::ReadAllText(vertex_path);
         std::string fragCode = Helper::FileSystem::ReadAllText(fragment_path);
 
+        if (vertCode.empty() || fragCode.empty()) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to read shader code!");
+            return false;
+        }
+
         auto* vkShader = reinterpret_cast<VulkanShader*>(shaderProgram);
 
-        vkShader->m_vertShaderModule = VulkanTools::CreateShader(m_device, vertCode);
-        vkShader->m_fragShaderModule = VulkanTools::CreateShader(m_device, fragCode);
+        vkShader->m_vertShaderModule = VulkanTools::CreateShaderModule(m_device, vertCode);
+        vkShader->m_fragShaderModule = VulkanTools::CreateShaderModule(m_device, fragCode);
 
         if (!vkShader->IsReady()) {
             Helper::Debug::Error("Vulkan::CompileShader() : failed to compile \""+name + "\" shader!");
             return false;
+        }
+
+        VkPipelineShaderStageCreateInfo vertShaderStageInfo = {};
+        vertShaderStageInfo.sType   = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        vertShaderStageInfo.stage   = VK_SHADER_STAGE_VERTEX_BIT;
+        vertShaderStageInfo.module  = vkShader->m_vertShaderModule;
+        vertShaderStageInfo.pName   = "main";
+
+        VkPipelineShaderStageCreateInfo fragShaderStageInfo = {};
+        fragShaderStageInfo.sType   = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        fragShaderStageInfo.stage   = VK_SHADER_STAGE_FRAGMENT_BIT;
+        fragShaderStageInfo.module  = vkShader->m_fragShaderModule;
+        fragShaderStageInfo.pName   = "main";
+
+        vkShader->m_shaderStages = (VkPipelineShaderStageCreateInfo*)malloc(sizeof(VkPipelineShaderStageCreateInfo) * 2);
+        {
+            vkShader->m_shaderStages[0] = vertShaderStageInfo;
+            vkShader->m_shaderStages[1] = fragShaderStageInfo;
         }
 
         return true;

@@ -53,6 +53,10 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
+        inline static const unsigned __int32 g_maxCountVBOs        = 5000;
+        inline static VkBuffer*              g_VertexBuffers       = nullptr;
+        inline static VkDeviceMemory*        g_VertexBuffersMemory = nullptr;
+
         std::vector<const char*> m_extRequired = {
                 VK_KHR_SURFACE_EXTENSION_NAME,
                 VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
@@ -62,6 +66,8 @@ namespace Framework::Graphics {
             "VK_LAYER_LUNARG_standard_validation"
         };
 
+        VkSemaphore                       m_renderCompleteSemaphore     = VK_NULL_HANDLE;
+        VkCommandBuffer                   m_currentCommandBuffer        = VK_NULL_HANDLE;
 
         VkInstance                        m_vkInstance                  = VK_NULL_HANDLE;
         VkDebugReportCallbackEXT          m_validationReportCallBack    = VK_NULL_HANDLE;
@@ -120,38 +126,65 @@ namespace Framework::Graphics {
                     m_swapchain.m_swapchainImageAvailable,
                     &m_swapchain.m_activeSwapchainImageID), VK_SUCCESS, "Vulkan::BeginRender() : failed to acquire next image!");
 
-            SR_CHECK_ERROR(
-                    vkWaitForFences(m_device.m_logicalDevice, 1, & m_swapchain.m_swapchainImageAvailable, VK_TRUE, UINT64_MAX),
-                    VK_SUCCESS,
-                    "Vulkan::BeginRender() : failed to wait for fences!");
+            //SR_CHECK_ERROR(
+            //        vkWaitForFences(m_device.m_logicalDevice, 1, & m_swapchain.m_swapchainImageAvailable, VK_TRUE, UINT64_MAX),
+            //        VK_SUCCESS,
+            //        "Vulkan::BeginRender() : failed to wait for fences!");
 
-            SR_CHECK_ERROR(
-                    vkResetFences(m_device.m_logicalDevice, 1, & m_swapchain.m_swapchainImageAvailable),
-                    VK_SUCCESS,
-                    "Vulkan::BeginRender() : failed to reset fences!");
+            //SR_CHECK_ERROR(
+            //        vkResetFences(m_device.m_logicalDevice, 1, & m_swapchain.m_swapchainImageAvailable),
+            //        VK_SUCCESS,
+            //        "Vulkan::BeginRender() : failed to reset fences!");
 
-#ifdef SR_RELEASE
-            vkQueueWaitIdle(m_device.m_queue.m_hQueue);
-#else
-            switch (vkQueueWaitIdle(m_device.m_queue.m_hQueue)) {
-                case VK_SUCCESS:
-                    break;
-                case VK_ERROR_OUT_OF_HOST_MEMORY:
-                    Helper::Debug::Error("Vulkan::BeginRender() : failed to queue wait idle! Out of host memory.");
-                    break;
-                case VK_ERROR_OUT_OF_DEVICE_MEMORY:
-                    Helper::Debug::Error("Vulkan::BeginRender() : failed to queue wait idle! Out of device memory.");
-                    break;
-                case VK_ERROR_DEVICE_LOST:
-                    Helper::Debug::Error("Vulkan::BeginRender() : failed to queue wait idle! Device lost.");
-                    break;
-                default:
-                    break;
+            #ifdef SR_RELEASE
+                    vkQueueWaitIdle(m_device.m_queue.m_hQueue);
+            #else
+                    switch (vkQueueWaitIdle(m_device.m_queue.m_hQueue)) {
+                            case VK_SUCCESS:
+                                break;
+                            case VK_ERROR_OUT_OF_HOST_MEMORY:
+                                Helper::Debug::Error("Vulkan::BeginRender() : failed to queue wait idle! Out of host memory.");
+                                break;
+                            case VK_ERROR_OUT_OF_DEVICE_MEMORY:
+                                Helper::Debug::Error("Vulkan::BeginRender() : failed to queue wait idle! Out of device memory.");
+                                break;
+                            case VK_ERROR_DEVICE_LOST:
+                                Helper::Debug::Error("Vulkan::BeginRender() : failed to queue wait idle! Device lost.");
+                                break;
+                            default:
+                                break;
+                        }
+            #endif
+
+            {
+                // Record command buffer
+                VkCommandBufferBeginInfo commandBufferBeginInfo = {};
+                commandBufferBeginInfo.sType				    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+                commandBufferBeginInfo.flags				    = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+                m_currentCommandBuffer = m_swapchain.m_commandBuffers[0];
+
+                vkBeginCommandBuffer(m_currentCommandBuffer, &commandBufferBeginInfo);
             }
-#endif
         }
-        SR_FORCE_INLINE void EndRender() override {
-            this->m_presentResult = VkResult::VK_RESULT_MAX_ENUM;
+        SR_FORCE_INLINE void EndRender() override
+        {
+            {
+                vkEndCommandBuffer(m_currentCommandBuffer);
+
+                // Submit command buffer
+                VkSubmitInfo submitInfo             = {};
+                submitInfo.sType					= VK_STRUCTURE_TYPE_SUBMIT_INFO;
+                submitInfo.waitSemaphoreCount		= 0;
+                submitInfo.pWaitSemaphores			= nullptr;
+                submitInfo.pWaitDstStageMask		= nullptr;
+                submitInfo.commandBufferCount		= 1;
+                submitInfo.pCommandBuffers			= &m_currentCommandBuffer;
+                submitInfo.signalSemaphoreCount	    = 1;
+                submitInfo.pSignalSemaphores		= &m_renderCompleteSemaphore;
+
+                vkQueueSubmit(m_device.m_queue.m_hQueue, 1, &submitInfo, VK_NULL_HANDLE);
+            }
 
             VkPresentInfoKHR presentInfoKhr   = {};
             presentInfoKhr.sType			  = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
@@ -160,7 +193,6 @@ namespace Framework::Graphics {
             presentInfoKhr.swapchainCount	  = 1;
             presentInfoKhr.pSwapchains		  = &m_swapchain.m_vkSwapchainKhr;
             presentInfoKhr.pImageIndices	  = &m_swapchain.m_activeSwapchainImageID;
-            presentInfoKhr.pResults			  = &m_presentResult;
 
             switch (vkQueuePresentKHR(m_device.m_queue.m_hQueue, &presentInfoKhr)) {
                 case VK_SUCCESS: break;
@@ -200,17 +232,8 @@ namespace Framework::Graphics {
             };
         }
 
-        SR_FORCE_INLINE void TestDrawing() override {
-            static VkClearColorValue color = { 1.0, 0.0, 0.0 };
-
-            static float color_rotator = 0.0f;
-            static VkSemaphore renderCompleteSemaphore = VK_NULL_HANDLE;
-            if (renderCompleteSemaphore == VK_NULL_HANDLE) {
-                VkSemaphoreCreateInfo semaphoreCreateInfo = {};
-                semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
-                vkCreateSemaphore(m_device.m_logicalDevice, &semaphoreCreateInfo, nullptr, &renderCompleteSemaphore);
-                this->m_waitSemaphores.push_back(renderCompleteSemaphore);
-            }
+        SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const noexcept override {
+            static VkClearColorValue color = { r, g, b };
 
             VkImageSubresourceRange imageSubresourceRange = {};
             imageSubresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
@@ -219,35 +242,11 @@ namespace Framework::Graphics {
             imageSubresourceRange.baseArrayLayer = 0;
             imageSubresourceRange.layerCount = 1;
 
-            // Record command buffer
-            VkCommandBufferBeginInfo commandBufferBeginInfo = {};
-            commandBufferBeginInfo.sType				    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-            commandBufferBeginInfo.flags				    = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-            VkCommandBuffer commandBuffer = m_swapchain.m_commandBuffers[0];
-
-            vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
-
             vkCmdClearColorImage(
-                    commandBuffer,
+                    m_currentCommandBuffer,
                     m_swapchain.m_swapchainImages[m_swapchain.m_activeSwapchainImageID],
                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                     &color, 1, &imageSubresourceRange);
-
-            vkEndCommandBuffer(commandBuffer);
-
-            // Submit command buffer
-            VkSubmitInfo submitInfo             = {};
-            submitInfo.sType					= VK_STRUCTURE_TYPE_SUBMIT_INFO;
-            submitInfo.waitSemaphoreCount		= 0;
-            submitInfo.pWaitSemaphores			= nullptr;
-            submitInfo.pWaitDstStageMask		= nullptr;
-            submitInfo.commandBufferCount		= 1;
-            submitInfo.pCommandBuffers			= &commandBuffer;
-            submitInfo.signalSemaphoreCount	    = 1;
-            submitInfo.pSignalSemaphores		= &renderCompleteSemaphore;
-
-            vkQueueSubmit(m_device.m_queue.m_hQueue, 1, &submitInfo, VK_NULL_HANDLE);
         }
 
         SR_FORCE_INLINE void PollEvents() const noexcept override {
@@ -263,8 +262,13 @@ namespace Framework::Graphics {
             return (VulkanShader*)malloc(sizeof(VulkanShader));
         }
         SR_FORCE_INLINE void DeleteShader(IShaderProgram* shaderProgram) const noexcept override {
-            VulkanTools::DestroyShader(m_device, &((VulkanShader*)shaderProgram)->m_vertShaderModule);
-            VulkanTools::DestroyShader(m_device, &((VulkanShader*)shaderProgram)->m_fragShaderModule);
+            VulkanTools::DestroyShaderModule(m_device, &((VulkanShader*)shaderProgram)->m_vertShaderModule);
+            VulkanTools::DestroyShaderModule(m_device, &((VulkanShader*)shaderProgram)->m_fragShaderModule);
+
+            if (((VulkanShader*)shaderProgram)->m_shaderStages)
+                free(((VulkanShader*)shaderProgram)->m_shaderStages);
+
+            ((VulkanShader*)shaderProgram)->m_countStages = 0;
         }
         void FreeShaderProgram(IShaderProgram* shaderProgram) const noexcept override {
             if (shaderProgram != nullptr)
@@ -274,6 +278,71 @@ namespace Framework::Graphics {
         bool LinkShader(IShaderProgram* shaderProgram) const noexcept override { return true; };
 
         //!===============================================[SHADERS]=====================================================
+
+        //!================================================[MESH]=======================================================
+
+        SR_FORCE_INLINE bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t countVerts) const noexcept {
+            // find free cell in VBO array
+            for (unsigned __int32 i = 0; i < g_maxCountVBOs; i++)
+                if (g_VertexBuffers[i] == VK_NULL_HANDLE) {
+                    VkBufferCreateInfo bufferInfo = {};
+                    bufferInfo.sType              = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+                    bufferInfo.size               = sizeof(vertices[0]) * vertices.size();
+                    bufferInfo.usage              = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+                    bufferInfo.sharingMode        = VK_SHARING_MODE_EXCLUSIVE;
+
+                    if (vkCreateBuffer(m_device.m_logicalDevice, &bufferInfo, nullptr, &g_VertexBuffers[i]) != VK_SUCCESS) {
+                        Helper::Debug::Error("Vulkan::CalculateMesh() : failed to create vertex buffer!");
+                        return false;
+                    } // vkDestroyBuffer(device, vertexBuffer, nullptr);
+
+                    VkMemoryRequirements memRequirements;
+                    vkGetBufferMemoryRequirements(m_device.m_logicalDevice, g_VertexBuffers[i], &memRequirements);
+
+                    VkMemoryAllocateInfo allocInfo{};
+                    allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+                    allocInfo.allocationSize = memRequirements.size;
+                    allocInfo.memoryTypeIndex = VulkanTools::FindMemoryType(
+                            m_device.m_physicalDevice,
+                            memRequirements.memoryTypeBits,
+                            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+
+                    if (vkAllocateMemory(m_device.m_logicalDevice, &allocInfo, nullptr, &g_VertexBuffersMemory[i]) != VK_SUCCESS) {
+                        Helper::Debug::Error("Vulkan::CalculateMesh() : failed to allocate vertex buffer memory!");
+                        return false;
+                    } //  vkFreeMemory(device, vertexBufferMemory, nullptr);
+
+                    vkBindBufferMemory(m_device.m_logicalDevice, g_VertexBuffers[i], g_VertexBuffersMemory[i], 0);
+
+                    void* data;
+                    vkMapMemory(m_device.m_logicalDevice, g_VertexBuffersMemory[i], 0, bufferInfo.size, 0, &data);
+                    memcpy(data, vertices.data(), (size_t) bufferInfo.size);
+                    vkUnmapMemory(m_device.m_logicalDevice, g_VertexBuffersMemory[i]);
+
+                    { // Set VAO and VBO index
+                        VAO = i;
+                        VBO = i;
+                    }
+
+                    return true;
+                }
+
+            Helper::Debug::Error("Vulkan::CalculateMesh() : failed to find free cell in VBO array!");
+            return false;
+        }
+
+        SR_FORCE_INLINE void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
+            //std::cout << VAO << std::endl;
+            //std::cout << g_VertexBuffers[VAO] << std::endl;
+
+            VkBuffer vertexBuffers[] = { g_VertexBuffers[VAO] };
+            VkDeviceSize offsets[] = {0};
+            vkCmdBindVertexBuffers(m_currentCommandBuffer, 0, 1, vertexBuffers, offsets);
+
+            vkCmdDraw(m_currentCommandBuffer, count_vertices, 1, 0, 0);
+        }
+
+        //!================================================[MESH]=======================================================
     };
 }
 

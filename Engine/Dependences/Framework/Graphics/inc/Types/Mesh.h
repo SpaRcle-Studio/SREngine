@@ -160,6 +160,15 @@ namespace Framework::Graphics::Types {
         }); \
 
         bool SimpleDraw();
+        SR_FORCE_INLINE bool DrawVulkan() noexcept {
+            if (m_isDestroy) return false;
+
+            if (!m_isCalculated)
+                if (!this->Calculate())
+                    return false;
+
+            this->m_env->DrawTriangles(m_VAO, m_countVertices);
+        }
         SR_FORCE_INLINE bool Draw() noexcept {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
 

@@ -12,37 +12,42 @@
 #include <Utils/StringUtils.h>
 
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
-    //if (Helper::Debug::Profile()) {
-    //    EASY_FUNCTION(profiler::colors::RichGreen);
-    //    EASY_NONSCOPED_BLOCK("Render: drawing geometry", profiler::colors::DarkCyan);
-    //}
-
-    Shader::GetDefaultGeometryShader()->Use();
-    this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
-
-    //this->m_geometryShader->Use();
-    //this->m_currentCamera->UpdateShader(m_geometryShader);
-
-    if (m_wireFrame) {
-        this->m_env->SetDepthTestEnabled(false);
-        this->m_env->SetWireFrameEnabled(true);
-        this->m_env->SetCullFacingEnabled(false);
-
+    if (m_pipeLine == Environment::PipeLine::Vulkan) {
         for (m_t = 0; m_t < m_countMeshes; m_t++)
             m_meshes[m_t]->Draw();
-
-        this->m_env->SetWireFrameEnabled(false);
-        this->m_env->SetDepthTestEnabled(true);
-        this->m_env->SetCullFacingEnabled(true);
     } else {
-        for (m_t = 0; m_t < m_countMeshes; m_t++)
-            m_meshes[m_t]->Draw();
+        //if (Helper::Debug::Profile()) {
+        //    EASY_FUNCTION(profiler::colors::RichGreen);
+        //    EASY_NONSCOPED_BLOCK("Render: drawing geometry", profiler::colors::DarkCyan);
+        //}
+
+        Shader::GetDefaultGeometryShader()->Use();
+        this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
+
+        //this->m_geometryShader->Use();
+        //this->m_currentCamera->UpdateShader(m_geometryShader);
+
+        if (m_wireFrame) {
+            this->m_env->SetDepthTestEnabled(false);
+            this->m_env->SetWireFrameEnabled(true);
+            this->m_env->SetCullFacingEnabled(false);
+
+            for (m_t = 0; m_t < m_countMeshes; m_t++)
+                m_meshes[m_t]->Draw();
+
+            this->m_env->SetWireFrameEnabled(false);
+            this->m_env->SetDepthTestEnabled(true);
+            this->m_env->SetCullFacingEnabled(true);
+        } else {
+            for (m_t = 0; m_t < m_countMeshes; m_t++)
+                m_meshes[m_t]->Draw();
+        }
+
+        //this->m_env->UseShader(0);
+
+        //if (Helper::Debug::Profile())
+        //    EASY_END_BLOCK;
     }
-
-    //this->m_env->UseShader(0);
-
-    //if (Helper::Debug::Profile())
-    //    EASY_END_BLOCK;
 
     return true;
 }
@@ -349,7 +354,7 @@ void Framework::Graphics::Render::PollEvents() noexcept {
     }
 }
 
-Framework::Graphics::Render::Render() : m_env(Environment::Get()) {
+Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_env->GetPipeLine()) {
     //std::cout <<  m_meshes.capacity() << std::endl;
     m_meshes.reserve(500 * 500);
     m_newMeshes.reserve(500);

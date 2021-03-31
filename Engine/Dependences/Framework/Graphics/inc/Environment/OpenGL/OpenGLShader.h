@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_OPENGLSHADER_H
 #define GAMEENGINE_OPENGLSHADER_H
 
-#include <Environment/IShaderProgram.h>
+#include <Environment/Basic/IShaderProgram.h>
 
 namespace Framework::Graphics {
     struct OpenGLShader : public IShaderProgram {
