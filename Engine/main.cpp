@@ -64,7 +64,7 @@ int main() {
 
     auto *window = new Window(
             "SpaRcle Engine",
-            WindowFormat::_1366_768,
+            WindowFormat::_1600_900,
             render,
             false,
             false,

@@ -200,13 +200,13 @@ void Framework::Graphics::Window::Thread() {
     double  frameRate = 30;
 
     // for optimization needed pipeline
-    const Environment::PipeLine pipeLine = m_env->GetPipeLine();
+    const PipeLine pipeLine = m_env->GetPipeLine();
 
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
         clock_t beginFrame = clock();
 
         {
-            if (pipeLine == Environment::PipeLine::Vulkan) {
+            if (pipeLine == PipeLine::Vulkan) {
                 this->m_env->PollEvents();
                 this->PollEvents();
                 this->m_render->PollEvents();

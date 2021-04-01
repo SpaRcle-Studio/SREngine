@@ -12,7 +12,7 @@
 #include <Utils/StringUtils.h>
 
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
-    if (m_pipeLine == Environment::PipeLine::Vulkan) {
+    if (m_pipeLine == PipeLine::Vulkan) {
         for (m_t = 0; m_t < m_countMeshes; m_t++)
             m_meshes[m_t]->Draw();
     } else {

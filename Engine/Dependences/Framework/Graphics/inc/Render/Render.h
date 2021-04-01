@@ -89,7 +89,7 @@ namespace Framework::Graphics {
 
         Types::ManipulationTool*    m_manipulate                        = nullptr;
 
-        const Environment::PipeLine m_pipeLine                          = Environment::PipeLine::Unknown;
+        const PipeLine              m_pipeLine                          = PipeLine::Unknown;
     public:
         bool DrawSettingsPanel();
 

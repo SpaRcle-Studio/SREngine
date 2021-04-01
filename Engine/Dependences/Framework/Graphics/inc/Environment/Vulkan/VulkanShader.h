@@ -16,7 +16,7 @@ namespace Framework::Graphics {
         VkPipelineShaderStageCreateInfo* m_shaderStages = nullptr;
         unsigned __int8                  m_countStages = 0;
 
-        VkPipeline graphicsPipeline;
+        VkPipeline                       m_graphicsPipeline = VK_NULL_HANDLE;
 
         [[nodiscard]] bool IsReady() const noexcept override {
             return m_vertShaderModule != VK_NULL_HANDLE && m_fragShaderModule != VK_NULL_HANDLE;

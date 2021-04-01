@@ -16,6 +16,8 @@
 
 namespace Framework::Graphics::VulkanTools {
     static bool CreateCommandPool(Device* device, Swapchain* swapchain) {
+        Helper::Debug::Graph("VulkanTools::CreateCommandPool() : create command pool...");
+
         VkCommandPoolCreateInfo commandPoolCreateInfo = {};
         commandPoolCreateInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
         commandPoolCreateInfo.queueFamilyIndex        = device->m_queue.m_iQueueFamily;
@@ -380,7 +382,7 @@ namespace Framework::Graphics::VulkanTools {
         //Helper::Debug::Graph("VulkanTools::DeInitDevice() : device successfully destroyed!");
     }
 
-    static Swapchain InitSwapchain(Device device, VkSurfaceKHR surface) {
+    static Swapchain InitSwapchain(Device device, VkSurfaceKHR surface, const Helper::Math::Vector2& size) {
         VkSwapchainKHR swapchainKhr = {};
 
         SurfaceInfo si = GetSurfaceInfo(device.m_physicalDevice, surface);
@@ -412,13 +414,15 @@ namespace Framework::Graphics::VulkanTools {
         VkSurfaceCapabilitiesKHR surfaceCapabilitiesKhr = {};
         vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device.m_physicalDevice, surface, &surfaceCapabilitiesKhr);
 
+        VkExtent2D swapChainExtent = surfaceCapabilitiesKhr.currentExtent; // TODO:SEE!
+
         VkSwapchainCreateInfoKHR swapchainCreateInfoKhr = {};
         swapchainCreateInfoKhr.sType                    = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
         swapchainCreateInfoKhr.surface                  = surface;
         swapchainCreateInfoKhr.minImageCount            = surfaceCapabilitiesKhr.minImageCount < 3 ? surfaceCapabilitiesKhr.minImageCount : 3;
         swapchainCreateInfoKhr.imageFormat              = surfaceFormatKhr.format;
         swapchainCreateInfoKhr.imageColorSpace          = surfaceFormatKhr.colorSpace;
-        swapchainCreateInfoKhr.imageExtent              = surfaceCapabilitiesKhr.currentExtent;
+        swapchainCreateInfoKhr.imageExtent              = swapChainExtent;
         swapchainCreateInfoKhr.imageArrayLayers         = 1;
         swapchainCreateInfoKhr.imageUsage               = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
         swapchainCreateInfoKhr.imageSharingMode         = VK_SHARING_MODE_EXCLUSIVE;
@@ -436,8 +440,12 @@ namespace Framework::Graphics::VulkanTools {
         //!===============================================[Swapchain]===================================================
 
         Swapchain swapchain = {};
-        swapchain.m_vkSwapchainKhr = swapchainKhr;
-        swapchain.m_surfaceFormat  = surfaceFormatKhr;
+        swapchain.m_vkSwapchainKhr  = swapchainKhr;
+        swapchain.m_surfaceFormat   = surfaceFormatKhr;
+
+        swapchain.m_width = (int)size.x;
+        swapchain.m_height = (int)size.y;
+        swapchain.m_swapChainExtent = swapChainExtent;
 
         unsigned __int32 nImages = 0;
         vkGetSwapchainImagesKHR(device.m_logicalDevice, swapchainKhr, &nImages, nullptr);
@@ -605,6 +613,79 @@ namespace Framework::Graphics::VulkanTools {
     //        *fence = VK_NULL_HANDLE;
     //    }
     //}
+
+    static bool InitShader(
+            VulkanShader* shader,
+            const Device& device,
+            const Swapchain& swapchain)
+    {
+        std::vector<VkPipelineShaderStageCreateInfo> stages;
+
+        if (shader->m_vertShaderModule != VK_NULL_HANDLE) {
+            VkPipelineShaderStageCreateInfo vertShaderStageInfo = {};
+            vertShaderStageInfo.sType   = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+            vertShaderStageInfo.stage   = VK_SHADER_STAGE_VERTEX_BIT;
+            vertShaderStageInfo.module  = shader->m_vertShaderModule;
+            vertShaderStageInfo.pName   = "main";
+
+            stages.push_back(vertShaderStageInfo);
+        }
+
+        if (shader->m_vertShaderModule != VK_NULL_HANDLE) {
+            VkPipelineShaderStageCreateInfo fragShaderStageInfo = {};
+            fragShaderStageInfo.sType   = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+            fragShaderStageInfo.stage   = VK_SHADER_STAGE_FRAGMENT_BIT;
+            fragShaderStageInfo.module  = shader->m_fragShaderModule;
+            fragShaderStageInfo.pName   = "main";
+
+            stages.push_back(fragShaderStageInfo);
+        }
+
+        shader->m_countStages = stages.size();
+
+        shader->m_shaderStages = (VkPipelineShaderStageCreateInfo*)malloc(sizeof(VkPipelineShaderStageCreateInfo) * shader->m_countStages);
+        for (unsigned __int16 i = 0;  shader->m_countStages; i++)
+            shader->m_shaderStages[i] = stages[i];
+
+        VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+        vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+        vertexInputInfo.vertexBindingDescriptionCount = 0;
+        vertexInputInfo.pVertexBindingDescriptions = nullptr; // Optional
+        vertexInputInfo.vertexAttributeDescriptionCount = 0;
+        vertexInputInfo.pVertexAttributeDescriptions = nullptr; // Optional
+
+        VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+        inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+        inputAssembly.primitiveRestartEnable = VK_FALSE;
+
+        {
+            VkViewport viewport = {};
+            viewport.x = 0.0f;
+            viewport.y = 0.0f;
+            viewport.width = (float)swapchain.m_width;
+            viewport.height = (float)swapchain.m_height;
+            viewport.minDepth = 0.0f;
+            viewport.maxDepth = 1.0f;
+
+            VkRect2D scissor = {};
+            scissor.offset   = {0, 0};
+            scissor.extent   = swapchain.m_swapChainExtent;
+        }
+
+        VkGraphicsPipelineCreateInfo pipelineInfo{};
+        pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+        pipelineInfo.stageCount = 2;
+        pipelineInfo.pStages = shader->m_shaderStages;
+        pipelineInfo.pVertexInputState = &vertexInputInfo;
+        pipelineInfo.pInputAssemblyState = &inputAssembly;
+        //pipelineInfo.pViewportState = &viewportState;
+        //pipelineInfo.pRasterizationState = &rasterizer;
+        //pipelineInfo.pMultisampleState = &multisampling;
+        //pipelineInfo.pDepthStencilState = nullptr; // Optional
+        //pipelineInfo.pColorBlendState = &colorBlending;
+        //pipelineInfo.pDynamicState = nullptr; // Optional
+    }
 
     static VkShaderModule CreateShaderModule(const Device& device, const std::string& code) {
         VkShaderModuleCreateInfo createInfo = {};

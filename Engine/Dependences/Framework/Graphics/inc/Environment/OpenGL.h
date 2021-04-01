@@ -46,7 +46,9 @@ namespace Framework::Graphics {
         bool StopGUI() override;
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
-        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport() const noexcept override { return true; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport() const noexcept override {
+            return true;
+        }
         [[nodiscard]] SR_FORCE_INLINE bool IsDrawSupport() const noexcept override { return true; }
 
         [[nodiscard]] inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
@@ -74,7 +76,9 @@ namespace Framework::Graphics {
         }
         bool CloseWindow() override;
 
-        SR_FORCE_INLINE void ClearBuffers() const noexcept override { glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); }
+        SR_FORCE_INLINE void ClearBuffers() const noexcept override {
+            glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        }
         SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const noexcept override { glClearColor(r, g, b, a); }
         SR_FORCE_INLINE void SwapBuffers() const noexcept override  {
 #ifdef  SR_OPENGL_USE_WINAPI
@@ -88,7 +92,13 @@ namespace Framework::Graphics {
         void SetWindowPosition(int x, int y) override;
         void SetDepthTestEnabled(bool value) override;
 
-        [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override { return { this->m_winFormat->Width(), this->m_winFormat->Height() }; }
+        [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override {
+#ifdef  SR_OPENGL_USE_WINAPI
+            return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };
+#else
+            return { this->m_winFormat->Width(), this->m_winFormat->Height() };
+#endif
+        }
 
         glm::vec2 GetMousePos() override {
             double posx = 0.0, posy = 0.0;
@@ -155,7 +165,7 @@ namespace Framework::Graphics {
 
         [[nodiscard]] inline bool IsFullScreen() const noexcept override {
 #ifdef  SR_OPENGL_USE_WINAPI
-            return false;
+            return m_basicWindow->IsFullScreen();
 #else
             return glfwGetWindowMonitor(m_window) != nullptr;
 #endif

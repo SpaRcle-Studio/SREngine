@@ -44,6 +44,10 @@ namespace Framework::Graphics::VulkanTools {
         VkSurfaceFormatKHR            m_surfaceFormat                = {};
         VkSwapchainKHR                m_vkSwapchainKhr               = VK_NULL_HANDLE;
 
+        VkExtent2D                    m_swapChainExtent              = {};
+        int                           m_width                        = -1;
+        int                           m_height                       = -1;
+
         std::vector <VkImage>         m_swapchainImages              = std::vector<VkImage>();
         std::vector <VkImageView>     m_swapchainImageViews          = std::vector<VkImageView>();
         unsigned __int32              m_activeSwapchainImageID       = UINT32_MAX;
@@ -58,7 +62,7 @@ namespace Framework::Graphics::VulkanTools {
         bool                          m_ready                        = false;
 
         [[nodiscard]] bool IsReady() const {
-            return m_ready;
+            return m_ready && m_width >= 0 && m_height >= 0;
         }
     };
 

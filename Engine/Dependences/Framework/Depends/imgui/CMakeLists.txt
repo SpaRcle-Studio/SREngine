@@ -12,6 +12,7 @@ set(srcFiles
         #imgui_tables.cpp
         backends/imgui_impl_glfw.cpp
         backends/imgui_impl_opengl3.cpp
+        backends/imgui_impl_win32.cpp
         misc/cpp/imgui_stdlib.cpp
 
         Guizmo/ImGuizmo.cpp
@@ -26,6 +27,7 @@ set(publicHeaderFiles
         imstb_truetype.h
         backends/imgui_impl_glfw.h
         backends/imgui_impl_opengl3.h
+        backends/imgui_impl_win32.h
         misc/cpp/imgui_stdlib.h
 
         Guizmo/ImGuizmo.h

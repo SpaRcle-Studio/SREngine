@@ -129,7 +129,7 @@ void Framework::Engine::Await() {
 
     Scripting::Script* engine = nullptr;
 
-    if (Graphics::Environment::Get()->GetPipeLine() == Graphics::Environment::PipeLine::OpenGL)
+    if (Graphics::Environment::Get()->GetPipeLine() == Graphics::PipeLine::OpenGL)
         engine = m_compiler->Load("engine", true);
     else
         engine = m_compiler->Load("simpleEngine", true);

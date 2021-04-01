@@ -18,14 +18,13 @@
 #include <Environment/Basic/BasicWindow.h>
 #include <Environment/Basic/IShaderProgram.h>
 
+#include <Environment/PipeLine.h>
+
 namespace Framework::Graphics {
     struct Vertex;
 
     class Environment {
     public:
-        enum class PipeLine {
-            Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12
-        };
         enum class WinEvents{
             Close, Move, Resize, LeftClick, RightClick, Focus, Scroll
         };

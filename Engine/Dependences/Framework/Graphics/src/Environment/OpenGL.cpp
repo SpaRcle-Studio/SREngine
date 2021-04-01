@@ -66,7 +66,8 @@ bool Framework::Graphics::OpenGL::InitGUI() {
     Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
 
 #ifdef  SR_OPENGL_USE_WINAPI
-
+    this->m_basicWindow->InitGUI();
+    ImGui_ImplOpenGL3_Init("#version 130");
 #else
     ImGui_ImplGlfw_InitForOpenGL(this->m_window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
@@ -78,10 +79,19 @@ bool Framework::Graphics::OpenGL::InitGUI() {
 
 bool Framework::Graphics::OpenGL::StopGUI() {
     Debug::Graph("OpenGL::StopGUI() : stopping ImGUI library...");
+
+#ifdef  SR_OPENGL_USE_WINAPI
+    ImGui_ImplOpenGL3_Init();
+    this->m_basicWindow->InitGUI();
+
+    ImGui::DestroyContext();
+#else
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
 
     ImGui::DestroyContext();
+#endif
+
     return true;
 }
 
@@ -134,8 +144,12 @@ bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScree
     }
 
 #ifdef  SR_OPENGL_USE_WINAPI
-    this->m_basicWindow = new Win32Window();
-    if (!this->m_basicWindow->Create(winName, 0, 0, format->Width(), format->Height())) {
+    this->m_basicWindow = new Win32Window(this->GetPipeLine());
+    if (!this->m_basicWindow->Create(
+            winName, 0, 0,
+            (int)m_winFormat->Width(), (int)m_winFormat->Height(),
+            fullScreen, resizable))
+    {
         Helper::Debug::Error("OpenGL::MakeWindow() : failed create window!");
         return false;
     } else
@@ -152,7 +166,7 @@ bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScree
 
 bool Framework::Graphics::OpenGL::SetContextCurrent() {
 #ifdef  SR_OPENGL_USE_WINAPI
-    this->m_basicWindow->MakeContextCurrent(this->GetPipeLineName());
+    this->m_basicWindow->MakeContextCurrent();
 #else
     if (m_window)
         glfwMakeContextCurrent(m_window);
@@ -163,7 +177,7 @@ bool Framework::Graphics::OpenGL::SetContextCurrent() {
 
 bool Framework::Graphics::OpenGL::Init(int swapInterval) {
 #ifdef  SR_OPENGL_USE_WINAPI
-
+    this->m_basicWindow->SetSwapInterval(swapInterval);
 #else
     this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
     glfwSwapInterval(swapInterval);
@@ -191,6 +205,7 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
         g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
     });
 #endif
+
 
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glew...");
     glewExperimental = TRUE;
@@ -735,7 +750,12 @@ unsigned int Framework::Graphics::OpenGL::CalculateSkybox() const noexcept {
 
 bool Framework::Graphics::OpenGL::BeginDrawGUI() {
     ImGui_ImplOpenGL3_NewFrame();
+#ifdef  SR_OPENGL_USE_WINAPI
+    this->m_basicWindow->NextFrameGUI();
+#else
     ImGui_ImplGlfw_NewFrame();
+#endif
+
     ImGui::NewFrame();
 
     ImGuizmo::BeginFrame();
@@ -750,7 +770,8 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
     ImGui::Render();
     int display_w, display_h;
 #ifdef  SR_OPENGL_USE_WINAPI
-
+    display_w = m_basicWindow->GetWidth();
+    display_h = m_basicWindow->GetHeight();
 #else
     glfwGetFramebufferSize(this->m_window, &display_w, &display_h);
 #endif

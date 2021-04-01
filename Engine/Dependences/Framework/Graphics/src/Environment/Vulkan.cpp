@@ -68,7 +68,10 @@ namespace Framework::Graphics{
 
     bool Vulkan::CreateSwapchain() {
         Helper::Debug::Graph("Vulkan::CreateSwapchain() : initializing swapchain...");
-        this->m_swapchain = VulkanTools::InitSwapchain(m_device, m_vkSurface);
+        this->m_swapchain = VulkanTools::InitSwapchain(
+                m_device,
+                m_vkSurface,
+                Helper::Math::Vector2(m_basicWindow->GetWidth(), m_basicWindow->GetHeight()));
         if (!m_swapchain.m_ready) {
             Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to initialize swapchain!");
             return false;
@@ -109,7 +112,7 @@ namespace Framework::Graphics{
             return false;
         }
 
-        this->m_basicWindow = new Win32Window();
+        this->m_basicWindow = new Win32Window(this->GetPipeLine());
         if (!this->m_basicWindow->Create(winName, 0, 0, m_winFormat->Width(), m_winFormat->Height(), fullScreen, resizable)) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
             return false;
@@ -134,7 +137,7 @@ namespace Framework::Graphics{
             return false;
         }
 
-        Helper::Debug::Graph("Vulkan::MakeWindow() : create create swapchain...");
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create swapchain...");
         if (!CreateSwapchain()) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create swapchain!");
             return false;
@@ -281,27 +284,14 @@ namespace Framework::Graphics{
         vkShader->m_vertShaderModule = VulkanTools::CreateShaderModule(m_device, vertCode);
         vkShader->m_fragShaderModule = VulkanTools::CreateShaderModule(m_device, fragCode);
 
-        if (!vkShader->IsReady()) {
-            Helper::Debug::Error("Vulkan::CompileShader() : failed to compile \""+name + "\" shader!");
+        if (!VulkanTools::InitShader(vkShader, m_device, m_swapchain)) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to initialize \""+name + "\" shader!");
             return false;
         }
 
-        VkPipelineShaderStageCreateInfo vertShaderStageInfo = {};
-        vertShaderStageInfo.sType   = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        vertShaderStageInfo.stage   = VK_SHADER_STAGE_VERTEX_BIT;
-        vertShaderStageInfo.module  = vkShader->m_vertShaderModule;
-        vertShaderStageInfo.pName   = "main";
-
-        VkPipelineShaderStageCreateInfo fragShaderStageInfo = {};
-        fragShaderStageInfo.sType   = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        fragShaderStageInfo.stage   = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragShaderStageInfo.module  = vkShader->m_fragShaderModule;
-        fragShaderStageInfo.pName   = "main";
-
-        vkShader->m_shaderStages = (VkPipelineShaderStageCreateInfo*)malloc(sizeof(VkPipelineShaderStageCreateInfo) * 2);
-        {
-            vkShader->m_shaderStages[0] = vertShaderStageInfo;
-            vkShader->m_shaderStages[1] = fragShaderStageInfo;
+        if (!vkShader->IsReady()) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to compile \""+name + "\" shader!");
+            return false;
         }
 
         return true;

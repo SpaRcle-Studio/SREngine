@@ -11,6 +11,11 @@
 #include <Windows.h>
 #include <Utils/StringUtils.h>
 
+#include <imgui.h>
+#include <imgui_impl_win32.h>
+
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 namespace Framework::Graphics {
     static int GetBorderHeight(HWND hWnd) {
         RECT rcClient, rcWind;
@@ -26,7 +31,9 @@ namespace Framework::Graphics {
     private:
         ~Win32Window() = default;
     public:
-        Win32Window() = default;
+        Win32Window(PipeLine pipeLine) : BasicWindow(pipeLine) {
+
+        }
         Win32Window(Win32Window&) = delete;
         //Win32Window(const Win32Window&) = delete;
     private:
@@ -53,16 +60,15 @@ namespace Framework::Graphics {
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
-                case (WM_SYSCOMMAND): {
-                    //Helper::Debug::System(std::to_string(wParam));
-                    //if (wParam == SC_RESTORE || wParam == SC_MAXIMIZE || wParam == SC_MINIMIZE) {
-                    //    OnResized();
-                    //}
-                    //    Helper::Debug::System("Restore window");
-                    //    return 0;
-                    //} else
-                    return DefWindowProc(hwnd, msg, wParam, lParam);
-                }
+                /*case (WM_SIZE):{
+                    ImGui_ImplDX9_InvalidateDeviceObjects();
+                    g_d3dpp.BackBufferWidth = LOWORD(lParam);
+                    g_d3dpp.BackBufferHeight = HIWORD(lParam);
+                    HRESULT hr = g_pd3dDevice->Reset(&g_d3dpp);
+                    if (hr == D3DERR_INVALIDCALL)
+                        IM_ASSERT(0);
+                    ImGui_ImplDX9_CreateDeviceObjects();
+                }*/
                 case (WM_SIZING): {
                     OnResized();
                     return 0;
@@ -103,6 +109,9 @@ namespace Framework::Graphics {
         }*/
 
         static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+            if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+                return true;
+
             auto* me = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
             if (me)
                 return me->realWndProc(hWnd, message, wParam, lParam);
@@ -110,12 +119,17 @@ namespace Framework::Graphics {
         }
     private:
         HWND m_hWnd = nullptr;
-        HDC m_hDC = nullptr;
+        HDC m_hDC  = nullptr;
+        HGLRC m_hRC = nullptr;
         HINSTANCE m_hInst = nullptr;
     public:
         [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const noexcept { return m_hInst; }
         [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const noexcept { return m_hWnd; }
     public:
+        SR_FORCE_INLINE void SetSwapInterval(int interval) const noexcept {
+
+        }
+
         [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept override {
             //RECT rect;
             //GetWindowRect(m_hWnd, &rect);
@@ -127,7 +141,8 @@ namespace Framework::Graphics {
             //RECT rect;
             //GetWindowRect(m_hWnd, &rect);
             //return (rect.bottom - rect.top) - 8;// + 32;
-            return m_height - (m_maximize ? 16 : 7);
+            int h = (int)m_height - (m_maximize ? 16 : 7);
+            return h >= 0 ? h : 0;
         }
         Helper::Math::Vector2 GetScreenResolution(unsigned int monitorID) const noexcept override {
             RECT size;
@@ -182,7 +197,7 @@ namespace Framework::Graphics {
             this->m_hWnd = CreateWindowA(
                     TEXT("MyWndClass"),
                     name,
-                    resizable ? WS_OVERLAPPEDWINDOW : WS_OVERLAPPEDWINDOW  ^ WS_THICKFRAME,
+                    resizable ? WS_OVERLAPPEDWINDOW : WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME,
                     CW_USEDEFAULT,
                     CW_USEDEFAULT,
                     m_width,
@@ -242,42 +257,60 @@ namespace Framework::Graphics {
                 ::DispatchMessage(&msg);
             }
         }
-        SR_FORCE_INLINE bool MakeContextCurrent(const std::string& pipelineName) override {
-            if (pipelineName == "OpenGL") {
-                PIXELFORMATDESCRIPTOR pfd =
+        SR_FORCE_INLINE bool MakeContextCurrent() override {
+            if (m_pipeLine == PipeLine::OpenGL) {
+                static  PIXELFORMATDESCRIPTOR pfd=              // pfd Tells Windows How We Want Things To Be
                         {
-                                sizeof(PIXELFORMATDESCRIPTOR),
-                                1,
-                                PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
-                                PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
-                                32,                   // Colordepth of the framebuffer.
-                                0, 0, 0, 0, 0, 0,
-                                0,
-                                0,
-                                0,
-                                0, 0, 0, 0,
-                                24,                   // Number of bits for the depthbuffer
-                                8,                    // Number of bits for the stencilbuffer
-                                0,                    // Number of Aux buffers in the framebuffer.
-                                PFD_MAIN_PLANE,
-                                0,
-                                0, 0, 0
+                                sizeof(PIXELFORMATDESCRIPTOR),              // Size Of This Pixel Format Descriptor
+                                1,                                          // Version Number
+                                PFD_DRAW_TO_WINDOW |                        // Format Must Support Window
+                                PFD_SUPPORT_OPENGL |                        // Format Must Support OpenGL
+                                PFD_DOUBLEBUFFER,                           // Must Support Double Buffering
+                                PFD_TYPE_RGBA,                              // Request An RGBA Format
+                                24,                                         // Select Our Color Depth
+                                0, 0, 0, 0, 0, 0,                           // Color Bits Ignored
+                                0,                                          // No Alpha Buffer
+                                0,                                          // Shift Bit Ignored
+                                0,                                          // No Accumulation Buffer
+                                0, 0, 0, 0,                                 // Accumulation Bits Ignored
+                                16,                                         // 16Bit Z-Buffer (Depth Buffer)
+                                0,                                          // No Stencil Buffer
+                                0,                                          // No Auxiliary Buffer
+                                PFD_MAIN_PLANE,                             // Main Drawing Layer
+                                0,                                          // Reserved
+                                0, 0, 0                                     // Layer Masks Ignored
                         };
 
-                HDC ourWindowHandleToDeviceContext = GetDC(m_hWnd);
+                auto pixelFormat = ChoosePixelFormat(m_hDC, &pfd);
+                SetPixelFormat(m_hDC, pixelFormat, &pfd);
 
-                int  letWindowsChooseThisPixelFormat;
-                letWindowsChooseThisPixelFormat = ChoosePixelFormat(ourWindowHandleToDeviceContext, &pfd);
-                SetPixelFormat(ourWindowHandleToDeviceContext,letWindowsChooseThisPixelFormat, &pfd);
+                m_hRC = wglCreateContext(m_hDC);
 
-                HGLRC ourOpenGLRenderingContext = wglCreateContext(ourWindowHandleToDeviceContext);
-                wglMakeCurrent (ourWindowHandleToDeviceContext, ourOpenGLRenderingContext);
-
-                //Helper::Debug::Info("Win32Window::MakeContextCurrent() : OpenGL version: " + std::string((char*)glGetString(GL_VERSION)));
+                wglMakeCurrent(m_hDC, m_hRC);
 
                 return true;
             } else
                 return false;
+        }
+        SR_FORCE_INLINE void SetSwapInterval(int interval) noexcept  override {
+            if (m_pipeLine == PipeLine::OpenGL) {
+                typedef BOOL (APIENTRY * wglSwapIntervalEXT_Func)(int);
+                wglSwapIntervalEXT_Func wglSwapIntervalEXT =
+                wglSwapIntervalEXT_Func(wglGetProcAddress("wglSwapIntervalEXT"));
+                if(wglSwapIntervalEXT) wglSwapIntervalEXT(interval); // 1 - чтобы включить
+            }
+        }
+        bool InitGUI() override {
+            //Init Win32
+            ImGui_ImplWin32_Init(m_hWnd);
+            return true;
+        }
+        bool StopGUI() override {
+            ImGui_ImplWin32_Shutdown();
+            return true;
+        }
+        void NextFrameGUI() override {
+            ImGui_ImplWin32_NewFrame();
         }
     };
 }
