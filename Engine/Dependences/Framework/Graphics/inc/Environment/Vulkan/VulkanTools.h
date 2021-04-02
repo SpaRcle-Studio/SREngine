@@ -15,37 +15,43 @@
 #endif
 
 namespace Framework::Graphics::VulkanTools {
-    static bool CreateCommandPool(Device* device, Swapchain* swapchain) {
-        Helper::Debug::Graph("VulkanTools::CreateCommandPool() : create command pool...");
-
-        VkCommandPoolCreateInfo commandPoolCreateInfo = {};
-        commandPoolCreateInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-        commandPoolCreateInfo.queueFamilyIndex        = device->m_queue.m_iQueueFamily;
-
-        if (vkCreateCommandPool(device->m_logicalDevice, &commandPoolCreateInfo, nullptr, &device->m_queue.m_hCommandPool) != VK_SUCCESS) {
-            Helper::Debug::Error("VulkanTools::CreateCommandPool() : failed to create command pool!");
-            return false;
-        }
+    static bool CreateCommandBuffers(const Device& device, Swapchain* swapchain) {
+        Helper::Debug::Graph("VulkanTools::CreateCommandBuffers() : create command buffers...");
 
         swapchain->m_commandBuffers.resize(swapchain->m_swapchainImages.size());
 
         VkCommandBufferAllocateInfo commandBufferAllocateInfo = {};
         commandBufferAllocateInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-        commandBufferAllocateInfo.commandPool                 = device->m_queue.m_hCommandPool;
+        commandBufferAllocateInfo.commandPool                 = device.m_queue.m_hCommandPool;
         commandBufferAllocateInfo.level                       = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
         commandBufferAllocateInfo.commandBufferCount          = (unsigned __int32)swapchain->m_commandBuffers.size();
 
         if (vkAllocateCommandBuffers(
-                device->m_logicalDevice,
+                device.m_logicalDevice,
                 &commandBufferAllocateInfo,
                 swapchain->m_commandBuffers.data()) != VK_SUCCESS)
         {
-            Helper::Debug::Error("VulkanTools::CreateCommandPool() : failed to allocate command buffers!");
+            Helper::Debug::Error("VulkanTools::CreateCommandBuffers() : failed to allocate command buffers!");
             return false;
         }
 
         return true;
     }
+
+    static VkCommandPool CreateCommandPool(const Device& device) {
+        VkCommandPoolCreateInfo commandPoolCreateInfo = {};
+        commandPoolCreateInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+        commandPoolCreateInfo.queueFamilyIndex        = device.m_queue.m_iQueueFamily;
+
+        VkCommandPool commandPool = {};
+        if (vkCreateCommandPool(device.m_logicalDevice, &commandPoolCreateInfo, nullptr, &commandPool) != VK_SUCCESS) {
+            Helper::Debug::Error("VulkanTools::CreateCommandPool() : failed to create command pool!");
+            return VK_NULL_HANDLE;
+        }
+
+        return commandPool;
+    }
+
     static bool CreateImageViews(Device device, Swapchain* swapchain) {
         swapchain->m_swapchainImageViews.resize(swapchain->m_swapchainImages.size());
 

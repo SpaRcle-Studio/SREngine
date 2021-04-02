@@ -68,6 +68,7 @@ namespace Framework::Graphics{
 
     bool Vulkan::CreateSwapchain() {
         Helper::Debug::Graph("Vulkan::CreateSwapchain() : initializing swapchain...");
+
         this->m_swapchain = VulkanTools::InitSwapchain(
                 m_device,
                 m_vkSurface,
@@ -79,12 +80,12 @@ namespace Framework::Graphics{
 
         Helper::Debug::Graph("Vulkan::CreateSwapchain() : create image views for swapchain...");
         if (!VulkanTools::CreateImageViews(m_device, &m_swapchain)) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create image views!");
+            Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to create image views!");
             return false;
         }
 
-        Helper::Debug::Graph("Vulkan::CreateSwapchain() : create command pool for swapchain...");
-        if (!VulkanTools::CreateCommandPool(&m_device, &m_swapchain)) {
+        Helper::Debug::Graph("Vulkan::CreateSwapchain() : create command buffers for swapchain...");
+        if (!VulkanTools::CreateCommandBuffers(m_device, &m_swapchain)) {
             Helper::Debug::Error("Vulkan::CreateSwapchain() : failed to create command pool!");
             return false;
         }
@@ -134,6 +135,13 @@ namespace Framework::Graphics{
         if (!m_device.IsReady()) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to initialize device!");
             Helper::Debug::Error("Vulkan::MakeWindow() : you need install Vulkan drivers on your PC!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create command pool...");
+        m_device.m_queue.m_hCommandPool = VulkanTools::CreateCommandPool(m_device);
+        if (m_device.m_queue.m_hCommandPool == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create command pool!");
             return false;
         }
 
