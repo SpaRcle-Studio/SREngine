@@ -6,6 +6,7 @@
 #define HELPER_FILESYSTEM_H
 
 #include <string>
+#include <vector>
 
 namespace Framework::Helper {
 class FileSystem {
@@ -20,10 +21,14 @@ public:
 
     static bool FileExists(const char *file);
 
+    static bool CreatePath(const std::string& path);
     static std::string GetExecutableFileName();
     static std::string GetPathToExe();
     static std::string GetFullPathToExe();
+    static std::string GetDirFromPath(const std::string& path);
     static void Reload();
+
+    static std::vector<char> ReadBinary(const std::string& path);
 
     static std::string ReadAllText(const std::string& path);
 

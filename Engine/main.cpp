@@ -60,11 +60,13 @@ int main() {
     //Environment::Set(new OpenGL());
     Environment::Set(new Vulkan());
 
+    //Environment::Get()->SetPreferredDevice(1);
+
     auto *render = new Render();
 
     auto *window = new Window(
             "SpaRcle Engine",
-            WindowFormat::_1600_900,
+            WindowFormat::_1366_768,
             render,
             false,
             false,

@@ -8,7 +8,8 @@
 #include <Environment/Basic/IShaderProgram.h>
 
 namespace Framework::Graphics {
-    struct OpenGLShader : public IShaderProgram {
+    class OpenGLShader : public IShaderProgram {
+    public:
         unsigned __int32 m_programID = 0;
         unsigned __int32 m_fragment  = 0;
         unsigned __int32 m_vertex    = 0;

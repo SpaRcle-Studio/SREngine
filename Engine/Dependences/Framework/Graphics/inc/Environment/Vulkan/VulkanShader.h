@@ -9,7 +9,8 @@
 #include <Environment/Basic/IShaderProgram.h>
 
 namespace Framework::Graphics {
-    struct VulkanShader : public IShaderProgram {
+    class VulkanShader : public IShaderProgram {
+    public:
         VkShaderModule m_vertShaderModule = VK_NULL_HANDLE;
         VkShaderModule m_fragShaderModule = VK_NULL_HANDLE;
 
@@ -17,9 +18,12 @@ namespace Framework::Graphics {
         unsigned __int8                  m_countStages = 0;
 
         VkPipeline                       m_graphicsPipeline = VK_NULL_HANDLE;
+        VkPipelineLayout                 m_pipelineLayout   = VK_NULL_HANDLE;
 
-        [[nodiscard]] bool IsReady() const noexcept override {
-            return m_vertShaderModule != VK_NULL_HANDLE && m_fragShaderModule != VK_NULL_HANDLE;
+        [[nodiscard]] bool IsReady() const {
+            return m_vertShaderModule != VK_NULL_HANDLE &&
+                   m_fragShaderModule != VK_NULL_HANDLE &&
+                   m_graphicsPipeline != VK_NULL_HANDLE;
         }
     };
 }

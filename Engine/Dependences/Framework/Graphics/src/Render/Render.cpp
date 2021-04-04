@@ -13,19 +13,13 @@
 
 bool Framework::Graphics::Render::DrawGeometry() noexcept {
     if (m_pipeLine == PipeLine::Vulkan) {
-        for (m_t = 0; m_t < m_countMeshes; m_t++)
-            m_meshes[m_t]->Draw();
-    } else {
-        //if (Helper::Debug::Profile()) {
-        //    EASY_FUNCTION(profiler::colors::RichGreen);
-        //    EASY_NONSCOPED_BLOCK("Render: drawing geometry", profiler::colors::DarkCyan);
-        //}
-
+        Shader::GetDefaultGeometryShader()->Use();
+        //for (m_t = 0; m_t < m_countMeshes; m_t++)
+        //    m_meshes[m_t]->Draw();
+    }
+    else {
         Shader::GetDefaultGeometryShader()->Use();
         this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
-
-        //this->m_geometryShader->Use();
-        //this->m_currentCamera->UpdateShader(m_geometryShader);
 
         if (m_wireFrame) {
             this->m_env->SetDepthTestEnabled(false);
@@ -42,11 +36,6 @@ bool Framework::Graphics::Render::DrawGeometry() noexcept {
             for (m_t = 0; m_t < m_countMeshes; m_t++)
                 m_meshes[m_t]->Draw();
         }
-
-        //this->m_env->UseShader(0);
-
-        //if (Helper::Debug::Profile())
-        //    EASY_END_BLOCK;
     }
 
     return true;

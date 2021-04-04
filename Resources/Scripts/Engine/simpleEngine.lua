@@ -31,7 +31,7 @@ function Start()
 
     --window:Resize(1600, 900);
 
-    window:CentralizeWindow();
+    --window:CentralizeWindow();
 
     --window:SetFullScreen(false);
 

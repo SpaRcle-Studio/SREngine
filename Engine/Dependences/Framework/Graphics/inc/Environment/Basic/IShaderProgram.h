@@ -10,8 +10,8 @@ namespace Framework::Graphics {
         Vertex, Fragment, Tesselation
     };
 
-    interface IShaderProgram {
-        [[nodiscard]] virtual bool IsReady() const noexcept { return false; }
+    class IShaderProgram {
+
     };
 }
 

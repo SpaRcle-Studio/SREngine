@@ -197,10 +197,12 @@ void Framework::Graphics::Window::Thread() {
 
     double deltaTime = 0;
     unsigned int frames = 0;
-    double  frameRate = 30;
 
     // for optimization needed pipeline
     const PipeLine pipeLine = m_env->GetPipeLine();
+
+    //Shader::GetDefaultGeometryShader()->Use();
+   // this->m_env->TestDrawing();
 
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
         clock_t beginFrame = clock();
@@ -211,13 +213,13 @@ void Framework::Graphics::Window::Thread() {
                 this->PollEvents();
                 this->m_render->PollEvents();
 
-                this->m_env->BeginRender();
+                this->m_env->DrawFrame();
 
-                this->m_env->ClearColorBuffers(0.3, 0.3, 0.3, 0);
-                //this->m_render->DrawGeometry();
-                //this->m_env->TestDrawing();
+                //this->m_env->BeginRender();
 
-                this->m_env->EndRender();
+                //this->m_env->ClearColorBuffers(0.3, 0.3, 0.3, 0);
+
+                //this->m_env->EndRender();
             }
             else {
                 this->m_env->PollEvents();
@@ -238,7 +240,7 @@ void Framework::Graphics::Window::Thread() {
         frames++;
 
         if(deltaTime > 1.0){ //every second
-            std::cout << "FPS: " << frames << std::endl;
+            std::cout << "FPS: " << frames - 1 << std::endl;
 
             frames = 0;
             deltaTime = 0;

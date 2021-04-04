@@ -6,6 +6,7 @@
 #include "../../inc/FileSystem/FileSystem.h"
 
 #include <cstdio>
+#include <filesystem>
 #include <Debug.h>
 #include <Utils/StringUtils.h>
 
@@ -149,4 +150,41 @@ std::string FileSystem::ReadAllText(const std::string &path) {
         stream.close();
     }
     return data;
+}
+
+std::vector<char> FileSystem::ReadBinary(const std::string &path) {
+    /*std::ifstream ifd(path,  std::ios::binary |  std::ios::ate);
+    int size = ifd.tellg();
+    ifd.seekg(0,  std::ios::beg);
+    std::vector<char> buffer;
+    buffer.resize(size); // << resize not reserve
+    ifd.read(buffer.data(), size);*/
+
+    //std::ifstream input(path, std::ios::binary);
+    //std::vector<uint32_t> buffer(std::istreambuf_iterator<char>(input), {});
+
+    std::ifstream file(path, std::ios::ate | std::ios::binary);
+
+    if (!file.is_open()) {
+        Helper::Debug::Error("FileSystem::ReadBinary() : failed to open \""+path+"\"file!");
+        return std::vector<char>();
+    }
+
+    size_t fileSize = (size_t) file.tellg();
+    std::vector<char> buffer(fileSize);
+
+    file.seekg(0);
+    file.read(buffer.data(), fileSize);
+
+    file.close();
+
+    return buffer;
+}
+
+bool FileSystem::CreatePath(const std::string &path) {
+    return std::filesystem::create_directories(path.c_str());
+}
+
+std::string FileSystem::GetDirFromPath(const std::string &path) {
+    return path.substr(0, path.find_last_of("/\\"));
 }

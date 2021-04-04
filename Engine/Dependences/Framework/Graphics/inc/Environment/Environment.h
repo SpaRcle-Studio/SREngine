@@ -38,6 +38,8 @@ namespace Framework::Graphics {
 
         BasicWindow* m_basicWindow = nullptr;
         bool m_hasErrors = false;
+
+        __int16 m_preferredDevice = -1;
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -46,6 +48,9 @@ namespace Framework::Graphics {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
+        void SetPreferredDevice(unsigned __int16 id) {
+            m_preferredDevice = (__int16)id;
+        }
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors() const noexcept { return m_hasErrors; }
         [[nodiscard]] Types::WindowFormat* GetWindowFormat() const noexcept {
             return this->m_winFormat;
@@ -127,6 +132,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { }
         virtual SR_FORCE_INLINE void BeginRender() { }
         virtual SR_FORCE_INLINE void EndRender() { }
+        virtual SR_FORCE_INLINE void DrawFrame() { }
         virtual SR_FORCE_INLINE void TestDrawing() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }

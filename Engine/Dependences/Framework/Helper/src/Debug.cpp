@@ -15,6 +15,8 @@ namespace Framework::Helper {
             static std::string pref		= "-";
             static ConsoleColor color	= ConsoleColor::Black;
 
+            //operator ""     operator co_await       operator<=>      Type Des
+
             switch (type) {
                 case Debug::Type::Log:		    pref = "[Log] ";	        color = ConsoleColor::Cyan;				break;
                 case Debug::Type::Info: 	    pref = "[Info] ";	        color = ConsoleColor::Magenta;			break;
