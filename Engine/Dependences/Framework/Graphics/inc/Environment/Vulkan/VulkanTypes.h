@@ -19,6 +19,20 @@ namespace Framework::Graphics::VulkanTools {
         std::vector<VkPresentModeKHR> presentModes;
     };
 
+    struct Swapchain {
+        unsigned int m_width  = 0;
+        unsigned int m_height = 0;
+
+    };
+
+    struct Surface {
+        VkSurfaceKHR m_surf = VK_NULL_HANDLE;
+
+        bool m_ready = false;
+
+        operator VkSurfaceKHR() const { return m_surf; }
+    };
+
     struct QueueFamily {
         std::optional<uint32_t> m_iGraphicsFamily;
         std::optional<uint32_t> m_iPresentFamily;
@@ -35,6 +49,7 @@ namespace Framework::Graphics::VulkanTools {
         VkPhysicalDevice         m_physicalDevice = VK_NULL_HANDLE;
         VkDevice                 m_logicalDevice  = {};
         VulkanTools::QueueFamily m_queue          = {};
+        bool                     m_ready          = false;
 
         operator VkDevice() const { return m_logicalDevice; }
     };

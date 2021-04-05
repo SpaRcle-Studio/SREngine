@@ -10,8 +10,48 @@ namespace Framework::Graphics{
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
         Helper::Debug::Graph("Vulkan::PreInit() : init vulkan application...");
 
-        createInstance();
-        setupDebugMessenger();
+        Helper::Debug::Graph("Vulkan::PreInit() : check vulkan validation support...");
+        if (m_enableValidationLayers && !checkValidationLayerSupport()) {
+            Helper::Debug::Error("Vulkan::PreInit() : validation layers requested, but not available!");
+            return false;
+        }
+
+        VkApplicationInfo appInfo  = {};
+        appInfo.sType              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+        appInfo.pApplicationName   = appName.data();
+        appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+        appInfo.pEngineName        = engineName.data();
+        appInfo.engineVersion      = VK_MAKE_VERSION(1, 0, 0);
+        appInfo.apiVersion         = VK_API_VERSION_1_2;
+
+        auto extensions = getRequiredExtensions();
+
+        this->m_vkInstance = VulkanTools::CreateInstance(appInfo, extensions,
+                m_validationLayers, m_enableValidationLayers);
+
+        if (m_enableValidationLayers) {
+            this->m_debugMessenger = VulkanTools::SetupDebugMessenger(m_vkInstance);
+
+            /*{
+                VkDebugReportCallbackCreateInfoEXT debugReportCallbackCreateInfoExt = {};
+                debugReportCallbackCreateInfoExt.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
+                debugReportCallbackCreateInfoExt.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT;
+                debugReportCallbackCreateInfoExt.pfnCallback = DebugVulkanCallback;
+
+                auto vkCreateDebugReportCallbackEXT =
+                        (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(
+                                m_vkInstance, "vkCreateDebugReportCallbackEXT");
+
+                if (vkCreateDebugReportCallbackEXT(
+                        m_vkInstance,
+                        &debugReportCallbackCreateInfoExt,
+                        nullptr, &(this->m_validationReportCallBack)) != VK_SUCCESS) {
+                    Helper::Debug::Error("VulkanTools::CreateInstance() : failed create vulkan debug report callback info!");
+                    return false;
+                } else
+                    Helper::Debug::Graph("VulkanTools::CreateInstance() : successfully create vulkan debug report callback!");
+            }*/
+        }
 
         return true;
     }
@@ -30,11 +70,23 @@ namespace Framework::Graphics{
             return false;
         }
 
-        createSurface();
-        //pickPhysicalDevice();
-        this->m_device.m_physicalDevice = VulkanTools::PickPhysicalDevice(instance, surface, m_deviceExtensions);
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan surface...");
+        this->m_surface = VulkanTools::CreateSurface(m_vkInstance, m_basicWindow);
+        if (!m_surface.m_ready) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create surface!");
+            return false;
+        }
 
-        createLogicalDevice();
+        Helper::Debug::Graph("Vulkan::MakeWindow() : initialize vulkan device...");
+        this->m_device = VulkanTools::InitDevice(
+                m_vkInstance, m_surface,
+                m_deviceExtensions, m_validationLayers,
+                m_enableValidationLayers);
+        if(!m_device.m_ready) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create logical device!");
+            return false;
+        }
+
         createSwapChain();
         createImageViews();
         createRenderPass();

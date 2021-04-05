@@ -43,12 +43,6 @@ namespace Framework::Graphics {
             const char* msg,
             void* userData);
 
-    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) {
-        Helper::Debug::Error("debugCallback() : validation layer: " + std::string(pCallbackData->pMessage));
-
-        return VK_FALSE;
-    }
-
     class Vulkan : public Environment {
     public:
         Vulkan(Vulkan &) = delete;
@@ -69,10 +63,10 @@ namespace Framework::Graphics {
 #else
         const bool m_enableValidationLayers = true;
 #endif
-        VkInstance instance;
-        VkDebugUtilsMessengerEXT debugMessenger;
-        VkSurfaceKHR surface;
+        VkInstance m_vkInstance;
+        VkDebugUtilsMessengerEXT m_debugMessenger;
 
+        VulkanTools::Surface m_surface = {};
         VulkanTools::Device m_device = {};
 
         VkSwapchainKHR swapChain;
@@ -150,14 +144,6 @@ namespace Framework::Graphics {
             }
         }
     public:
-        void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
-            createInfo = {};
-            createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-            createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-            createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-            createInfo.pfnUserCallback = debugCallback;
-        }
-
         [[nodiscard]] std::vector<const char*> getRequiredExtensions() const {
             std::vector<const char*> extensions;
 
@@ -196,120 +182,8 @@ namespace Framework::Graphics {
             return true;
         }
 
-        void createInstance() {
-            if (m_enableValidationLayers && !checkValidationLayerSupport()) {
-                throw std::runtime_error("validation layers requested, but not available!");
-            }
-
-            VkApplicationInfo appInfo{};
-            appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-            appInfo.pApplicationName = "Hello Triangle";
-            appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-            appInfo.pEngineName = "No Engine";
-            appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-            appInfo.apiVersion = VK_API_VERSION_1_0;
-
-            VkInstanceCreateInfo createInfo{};
-            createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-            createInfo.pApplicationInfo = &appInfo;
-
-            auto extensions = getRequiredExtensions();
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
-            createInfo.ppEnabledExtensionNames = extensions.data();
-
-            VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
-            if (m_enableValidationLayers) {
-                createInfo.enabledLayerCount = static_cast<uint32_t>(m_validationLayers.size());
-                createInfo.ppEnabledLayerNames = m_validationLayers.data();
-
-                populateDebugMessengerCreateInfo(debugCreateInfo);
-                createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT * ) & debugCreateInfo;
-            } else {
-                createInfo.enabledLayerCount = 0;
-
-                createInfo.pNext = nullptr;
-            }
-
-            if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
-                throw std::runtime_error("failed to create instance!");
-            }
-        }
-
-        void setupDebugMessenger() {
-            if (!m_enableValidationLayers) return;
-
-            VkDebugUtilsMessengerCreateInfoEXT createInfo;
-            populateDebugMessengerCreateInfo(createInfo);
-
-            if (VulkanTools::CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
-                throw std::runtime_error("failed to set up debug messenger!");
-            }
-        }
-
-        void createSurface() {
-            auto* win32Window = dynamic_cast<Win32Window *>(m_basicWindow);
-
-            VkWin32SurfaceCreateInfoKHR win32SurfaceCreateInfoKhr;
-            win32SurfaceCreateInfoKhr.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
-            win32SurfaceCreateInfoKhr.hwnd = win32Window->GetHWND();
-            win32SurfaceCreateInfoKhr.hinstance = win32Window->GetHINSTANCE();
-            win32SurfaceCreateInfoKhr.flags = 0;
-            win32SurfaceCreateInfoKhr.pNext = nullptr;
-
-            auto vkCreateWin32SurfaceKHR =
-                    (PFN_vkCreateWin32SurfaceKHR)vkGetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR");
-
-            if (vkCreateWin32SurfaceKHR(instance, &win32SurfaceCreateInfoKhr, nullptr, &surface) != VK_SUCCESS)
-                throw std::runtime_error("failed to create surface!");
-        }
-
-        void createLogicalDevice() {
-            //VulkanTools::QueueFamily queue = findQueueFamilies(physicalDevice);
-            m_device.m_queue = VulkanTools::FindQueueFamilies(m_device.m_physicalDevice, surface);
-
-            std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-            std::set<uint32_t> uniqueQueueFamilies = { m_device.m_queue.m_iGraphicsFamily.value(), m_device.m_queue.m_iPresentFamily.value()};
-
-            float queuePriority = 1.0f;
-            for (uint32_t queueFamily : uniqueQueueFamilies) {
-                VkDeviceQueueCreateInfo queueCreateInfo{};
-                queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-                queueCreateInfo.queueFamilyIndex = queueFamily;
-                queueCreateInfo.queueCount = 1;
-                queueCreateInfo.pQueuePriorities = &queuePriority;
-                queueCreateInfos.push_back(queueCreateInfo);
-            }
-
-            VkPhysicalDeviceFeatures deviceFeatures{};
-
-            VkDeviceCreateInfo createInfo{};
-            createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-
-            createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
-            createInfo.pQueueCreateInfos = queueCreateInfos.data();
-
-            createInfo.pEnabledFeatures = &deviceFeatures;
-
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(m_deviceExtensions.size());
-            createInfo.ppEnabledExtensionNames = m_deviceExtensions.data();
-
-            if (m_enableValidationLayers) {
-                createInfo.enabledLayerCount = static_cast<uint32_t>(m_validationLayers.size());
-                createInfo.ppEnabledLayerNames = m_validationLayers.data();
-            } else {
-                createInfo.enabledLayerCount = 0;
-            }
-
-            if (vkCreateDevice(m_device.m_physicalDevice, &createInfo, nullptr, &m_device.m_logicalDevice) != VK_SUCCESS) {
-                throw std::runtime_error("failed to create logical device!");
-            }
-
-            vkGetDeviceQueue(m_device, m_device.m_queue.m_iGraphicsFamily.value(), 0, &m_device.m_queue.m_graphicsQueue);
-            vkGetDeviceQueue(m_device, m_device.m_queue.m_iPresentFamily.value(), 0, &m_device.m_queue.m_presentQueue);
-        }
-
         void createSwapChain() {
-            VulkanTools::SwapChainSupportDetails swapChainSupport = VulkanTools::QuerySwapChainSupport(m_device.m_physicalDevice, surface);
+            VulkanTools::SwapChainSupportDetails swapChainSupport = VulkanTools::QuerySwapChainSupport(m_device.m_physicalDevice, m_surface);
 
             VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
             VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
@@ -322,7 +196,7 @@ namespace Framework::Graphics {
 
             VkSwapchainCreateInfoKHR createInfo{};
             createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-            createInfo.surface = surface;
+            createInfo.surface = m_surface;
 
             createInfo.minImageCount = imageCount;
             createInfo.imageFormat = surfaceFormat.format;
