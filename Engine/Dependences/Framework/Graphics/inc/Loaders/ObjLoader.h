@@ -43,8 +43,12 @@ namespace Framework::Graphics {
         static void ProcessFace(char** elems);
         static bool ProcessLine(char* line);
         static bool ProcessFile(const char* data);
+
+        static bool ProcessFileIndices(const char* data);
+        static bool ProcessLineIndices(char* line);
     public:
-        static std::vector<Mesh*> Load(std::string path);
+        static std::vector<Mesh*> Load(const std::string& path);
+        static std::vector<Mesh*> LoadWithIndices(const std::string& path);
     };
 }
 

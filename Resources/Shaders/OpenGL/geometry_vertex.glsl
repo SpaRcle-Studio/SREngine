@@ -2,12 +2,14 @@
 
 layout (location = 0) in vec3 aPosition;
 layout (location = 1) in vec2 aTexCoord;
-layout (location = 2) in vec3 aNormal;
-layout (location = 3) in vec3 aTangent;
+layout (location = 2) in vec3 aColor;
+layout (location = 3) in vec3 aNormal;
+layout (location = 4) in vec3 aTangent;
 
 out VS_OUT {
     vec3 FragPos;
     vec2 TexCoord;
+    vec3 VColor;
     vec3 Normal;
 } vs_out;
 
@@ -20,7 +22,7 @@ void main() {
     //vertexID = float(gl_VertexID);
     //gl_Position = projMat * viewMat * vec4(vs_out.FragPos, 1.0);
 
-
+    vs_out.VColor = aColor;
     vs_out.FragPos = vec3(modelMat * vec4(aPosition, 1.0));
     vs_out.TexCoord  = vec2(aTexCoord.x, 1 - aTexCoord.y); // flip the texture along the Y axis
     gl_Position = PVmat * vec4(vs_out.FragPos, 1.0);

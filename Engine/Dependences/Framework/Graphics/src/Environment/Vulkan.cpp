@@ -87,14 +87,44 @@ namespace Framework::Graphics{
             return false;
         }
 
-        createSwapChain();
-        createImageViews();
-        createRenderPass();
-        createGraphicsPipeline();
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan swapchain...");
+        this->m_swapchain = VulkanTools::CreateSwapchain(m_device, m_surface, m_basicWindow);
+        if(!m_swapchain.m_ready) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create swapchain!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan render pass...");
+        this->m_renderPass = VulkanTools::CreateRenderPass(m_device, m_swapchain);
+        if (m_renderPass == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create render pass!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan synchronizations...");
+        this->m_sync = VulkanTools::CreateSync(m_device, m_swapchain);
+        if(!m_sync.m_ready) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create synchronizations!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan command pool...");
+        this->m_commandPool = VulkanTools::CreateCommandPool(m_device);
+        if (m_commandPool == VK_NULL_HANDLE) {
+            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create command pool!");
+            return false;
+        }
+
+        Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan image views for swapchain...");
+        this->m_swapchain.m_swapChainImageViews = VulkanTools::CreateImageViews(
+                m_device,
+                m_swapchain.m_swapChainImages,
+                m_swapchain.m_swapChainImageFormat);
         createFramebuffers();
-        createCommandPool();
+
+        createGraphicsPipeline();
+
         createCommandBuffers();
-        createSyncObjects();
 
         return true;
     }

@@ -204,6 +204,9 @@ void Framework::Graphics::Window::Thread() {
     //Shader::GetDefaultGeometryShader()->Use();
    // this->m_env->TestDrawing();
 
+    auto mesh = Mesh::Load("engine/plane.obj", true)[0];
+    mesh->PrintInfo();
+
     while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
         clock_t beginFrame = clock();
 

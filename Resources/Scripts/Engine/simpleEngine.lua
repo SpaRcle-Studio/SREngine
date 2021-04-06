@@ -35,8 +35,8 @@ function Start()
 
     --window:SetFullScreen(false);
 
-    local mesh = Mesh.Load("engine/cube.obj", 0);
-    render:RegisterMesh(mesh);
+    --local mesh = Mesh.Load("engine/cube.obj", 0);
+    --render:RegisterMesh(mesh);
 
     collectgarbage() -- collect memory
 end;

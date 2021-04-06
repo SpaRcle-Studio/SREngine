@@ -43,10 +43,17 @@ namespace Framework::Graphics::Types {
             this->m_render = render;
         };
         SR_FORCE_INLINE void SetVertexArray(std::vector<Vertex>& vertices) noexcept {
-            this->m_isCalculated = false;
+            this->m_isCalculated  = false;
             this->m_countVertices = vertices.size();
-            this->m_vertices = vertices;
+            this->m_vertices      = vertices;
         }
+
+        SR_FORCE_INLINE void SetIndexArray(std::vector<unsigned int>& indices) noexcept {
+            this->m_isCalculated = false;
+            this->m_countIndices = indices.size();
+            this->m_indices      = indices;
+        }
+
     public:
         bool DrawOnInspector() override;
 
@@ -109,7 +116,10 @@ namespace Framework::Graphics::Types {
         unsigned int                m_VAO                   = 0;
 
         std::vector<Vertex>			m_vertices				= std::vector<Vertex>();
+        std::vector<unsigned int>	m_indices				= std::vector<unsigned int>();
         size_t						m_countVertices		    = 0;
+        size_t						m_countIndices		    = 0;
+        bool                        m_useIndices            = false;
 
         std::vector<glm::mat4>      m_bonesTransforms       = std::vector<glm::mat4>();
     private:
@@ -132,9 +142,11 @@ namespace Framework::Graphics::Types {
         glm::vec3					m_scale				= {1,1,1};
         glm::mat4					m_modelMat			= glm::mat4(0);
     public:
+        void PrintInfo();
+
         [[nodiscard]] std::string GetGeometryName() const noexcept { return this->m_geometry_name; }
         // TODO: Repeat. Make a comments, please
-        static std::vector<Mesh*> Load(std::string path);
+        static std::vector<Mesh*> Load(std::string path, bool withIndices = false);
         static Mesh* LoadJson(std::string json_data, std::vector<Mesh*>* allMeshes = nullptr);
 
         nlohmann::json Save() override;

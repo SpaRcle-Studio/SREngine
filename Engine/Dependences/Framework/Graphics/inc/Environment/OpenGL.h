@@ -341,6 +341,15 @@ namespace Framework::Graphics {
                                       (void*)offsetof(Vertex, texCoords) // Сдвиг байт до соответствующего атрибута
                 );
 
+                //? Binding attrib color
+                glEnableVertexAttribArray(3);
+                glVertexAttribPointer(3,
+                                      3, // glm::vec3 - has 3 floats
+                                      GL_FLOAT, GL_FALSE,
+                                      sizeof(Vertex),
+                                      (void*)offsetof(Vertex, color) // Сдвиг байт до соответствующего атрибута
+                );
+
                 //? Binding attrib normal coordinates
                 glEnableVertexAttribArray(3);
                 glVertexAttribPointer(3,

@@ -11,13 +11,85 @@
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/StringUtils.h>
 
+#include <tinyobjloader/tiny_obj_loader.cc>
+
 #include <Render/Shader.h>
 #include <Types/Material.h>
 
 using namespace Framework::Helper;
 
 namespace Framework::Graphics {
-    std::vector<Mesh *> Framework::Graphics::ObjLoader::Load(std::string path) {
+    std::vector<Mesh *> ObjLoader::LoadWithIndices(const std::string &path) {
+        std::vector<Mesh*> meshes = std::vector<Mesh *>();
+        m_mutex.lock();
+
+        tinyobj::attrib_t attrib;
+        std::vector<tinyobj::shape_t> shapes;
+        std::vector<tinyobj::material_t> materials;
+        std::string warn, err;
+
+        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, path.c_str())) {
+            Helper::Debug::Error("ObjLoader::LoadWithIndices() : failed open file!\n\tWarn: " + warn + "\n\tError: " + err);
+            m_mutex.unlock();
+            return {};
+        }
+
+        for (const auto& shape : shapes) {
+            Mesh* mesh = new Mesh(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
+
+            auto vertices = std::vector<Vertex>();
+            auto indices = std::vector<unsigned int>();
+
+            std::unordered_map<Vertex, uint32_t> uniqueVertices{};
+
+            for (const auto& index : shape.mesh.indices) {
+                Vertex vertex = {};
+
+                vertex.position = {
+                        attrib.vertices[3 * index.vertex_index + 0],
+                        attrib.vertices[3 * index.vertex_index + 1],
+                        attrib.vertices[3 * index.vertex_index + 2]
+                };
+
+                vertex.texCoords = {
+                        //attrib.texcoords[2 * index.texcoord_index + 0],
+                        //attrib.texcoords[2 * index.texcoord_index + 1]
+
+                               attrib.texcoords[2 * index.texcoord_index + 0],
+                        1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
+                };
+
+                vertex.color = { 1.0f, 1.0f, 1.0f };
+
+                // TODO: CHECK CORRECTLY!
+                vertex.normal = {
+                        attrib.normals[3 * index.normal_index + 0],
+                        attrib.normals[3 * index.normal_index + 1],
+                        attrib.normals[3 * index.normal_index + 2]
+                };
+                vertex.tangent = { 0, 0, 0 };
+
+                //============================================
+
+                if (uniqueVertices.count(vertex) == 0) {
+                    uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
+                    vertices.push_back(vertex);
+                }
+
+                indices.push_back(uniqueVertices[vertex]);
+            }
+
+            mesh->SetVertexArray(vertices);
+            mesh->SetIndexArray(indices);
+
+            meshes.push_back(mesh);
+        }
+
+        m_mutex.unlock();
+        return meshes;
+    }
+
+    std::vector<Mesh *> Framework::Graphics::ObjLoader::Load(const std::string& path) {
         std::vector<Mesh*> meshes = std::vector<Mesh *>();
 
         m_mutex.lock();
@@ -115,9 +187,9 @@ namespace Framework::Graphics {
 
         switch (count) {
             case 1: // With texture
-                m_temp_vertexes.push_back({ { m_pos_vertex[face.x - 1.f] }, m_pos_texture[uv.x - 1.f], {0,0,0} }); //z
-                m_temp_vertexes.push_back({ { m_pos_vertex[face.y - 1.f] }, m_pos_texture[uv.y - 1.f], {0,0,0} }); //x
-                m_temp_vertexes.push_back({ { m_pos_vertex[face.z - 1.f] }, m_pos_texture[uv.z - 1.f], {0,0,0} }); //y
+                m_temp_vertexes.push_back({ { m_pos_vertex[face.x - 1.f] }, m_pos_texture[uv.x - 1.f], {1,1,1}, {0,0,0} }); //z
+                m_temp_vertexes.push_back({ { m_pos_vertex[face.y - 1.f] }, m_pos_texture[uv.y - 1.f], {1,1,1}, {0,0,0} }); //x
+                m_temp_vertexes.push_back({ { m_pos_vertex[face.z - 1.f] }, m_pos_texture[uv.z - 1.f], {1,1,1}, {0,0,0} }); //y
                 break;
             case 2: // With normal
             {
@@ -136,12 +208,15 @@ namespace Framework::Graphics {
 
                 m_temp_vertexes.push_back(
                         {{m_pos_vertex[face.x - 1.f]}, m_pos_texture[uv.x - 1.f], m_pos_normal[norm_index.x - 1],
+                         {1,1,1},
                          {tan_x, tan_y, tan_z}}); //z
                 m_temp_vertexes.push_back(
                         {{m_pos_vertex[face.y - 1.f]}, m_pos_texture[uv.y - 1.f], m_pos_normal[norm_index.y - 1],
+                         {1,1,1},
                          {tan_x, tan_y, tan_z}}); //x
                 m_temp_vertexes.push_back(
                         {{m_pos_vertex[face.z - 1.f]}, m_pos_texture[uv.z - 1.f], m_pos_normal[norm_index.z - 1],
+                         {1,1,1},
                          {tan_x, tan_y, tan_z}}); //y
                 break;
             }
@@ -251,4 +326,6 @@ namespace Framework::Graphics {
         AddMesh();
         return true;
     }
+
+
 }

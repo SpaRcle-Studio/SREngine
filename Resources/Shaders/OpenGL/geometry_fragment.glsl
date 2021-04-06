@@ -9,6 +9,7 @@ layout (location = 3) out vec4 StencilMask;
 in VS_OUT {
     vec3 FragPos;
     vec2 TexCoord;
+    vec3 VColor;
     vec3 Normal;
 } fs_in;
 
@@ -66,5 +67,5 @@ void main() {
     DepthColor = vec4(vec3(LinearizeDepth(gl_FragCoord.z) / 100), 1);
 
     //if (fract(vertexID) < 0.1)
-        FragColor = vec4(result, alpha);
+        FragColor = vec4(result, alpha);// * vec4(fs_in.VColor, 1);
 }

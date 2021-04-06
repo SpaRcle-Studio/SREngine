@@ -80,7 +80,7 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     return true;
 }
 
-std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string path) {
+std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string path, bool withIndices) {
     path = ResourceManager::GetResourcesFolder() + "/Models/"+path;
 
 #ifdef WIN32
@@ -110,9 +110,11 @@ ret:
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
     if (ext == "obj"){
-        //std::string file = path;
-        //file.resize(path.size() - 4);
-        meshes = ObjLoader::Load(path);
+        if (withIndices)
+            meshes = ObjLoader::LoadWithIndices(path);
+        else
+            meshes = ObjLoader::Load(path);
+
     } else if (ext == "fbx"){
         meshes = std::vector<Mesh *>();
     } else {
@@ -122,6 +124,7 @@ ret:
 
     for (unsigned short i = 0; i < (unsigned short)meshes.size(); i++) {
         meshes[i]->m_resource_id = path + " - " + std::to_string(i);
+        meshes[i]->m_useIndices = withIndices;
     }
 
     return meshes;
@@ -269,14 +272,18 @@ Mesh *Mesh::Copy() {
     }
 
     copy->m_countVertices = m_countVertices;
+    copy->m_countIndices  = m_countIndices;
+    copy->m_useIndices    = m_useIndices;
+
     copy->m_position = m_position;
     copy->m_rotation = m_rotation;
-    copy->m_scale = m_scale;
+    copy->m_scale    = m_scale;
     if (m_isCalculated) {
         VAO_usages[m_VAO]++;
         copy->m_VAO = m_VAO;
     }else{
         copy->m_vertices = m_vertices;
+        copy->m_indices  = m_indices;
     }
     copy->m_isCalculated = m_isCalculated;
     copy->m_autoRemove = m_autoRemove;
@@ -441,4 +448,15 @@ bool Mesh::DrawOnInspector() {
     return true;
 }
 
+void Mesh::PrintInfo() {
+    Helper::Debug::Info("Mesh::PrintInfo(): "
+                        "\n\tGeometry name: "  + m_geometry_name +
+                        "\n\tResource ID: "    + m_resource_id +
+                        "\n\tUse indices: "    + (m_useIndices ? "true" : "false") +
+                        "\n\tCount vertices: " + std::to_string(m_countVertices) +
+                        "\n\tCount indices: "  + std::to_string(m_countIndices) +
+                        "\n\tInverse: "        + (m_inverse ? "true" : "false") +
+                        "\n\tIs calculated: "  + (m_isCalculated ? "true" : "false") +
+                        "\n\tVAO: "            + std::to_string(m_VAO));
+}
 

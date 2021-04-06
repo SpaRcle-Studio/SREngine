@@ -7,11 +7,96 @@
 
 #include <Environment/Vulkan/VulkanTypes.h>
 
+#include <Environment/Basic/BasicWindow.h>
+
 #include <optional>
 #include <string>
 #include <set>
 
 namespace Framework::Graphics::VulkanTools {
+    static std::vector<VkImageView> CreateImageViews(const Device& device, const std::vector<VkImage>& images, const VkFormat& format) {
+        Helper::Debug::Graph("VulkanTools::CreateImageViews() : create " + std::to_string(images.size()) + " image views...");
+
+        std::vector<VkImageView> viewImages(images.size());
+
+        for (size_t i = 0; i < images.size(); i++) {
+            VkImageViewCreateInfo createInfo           = {};
+            createInfo.sType                           = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+            createInfo.image                           = images[i];
+            createInfo.viewType                        = VK_IMAGE_VIEW_TYPE_2D;
+            createInfo.format                          = format;
+            createInfo.components.r                    = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.components.g                    = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.components.b                    = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.components.a                    = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.subresourceRange.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+            createInfo.subresourceRange.baseMipLevel   = 0;
+            createInfo.subresourceRange.levelCount     = 1;
+            createInfo.subresourceRange.baseArrayLayer = 0;
+            createInfo.subresourceRange.layerCount     = 1;
+
+            if (vkCreateImageView(device, &createInfo, nullptr, &viewImages[i]) != VK_SUCCESS) {
+                Helper::Debug::Error("VulkanTools::CreateImageViews() : failed to create image views!");
+                return {};
+            }
+        }
+
+        return viewImages;
+    }
+
+    static VkShaderModule CreateShaderModule(const VulkanTools::Device& device, const std::vector<char>& code) {
+        Helper::Debug::Graph("VulkanTools::CreateShaderModule() : create vulkan shader module...");
+
+        VkShaderModuleCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        createInfo.codeSize = code.size();
+        createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+
+        VkShaderModule shaderModule;
+        if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+            Helper::Debug::Error("VulkanTools::CreateShaderModule() : failed to create shader module!");
+            return VK_NULL_HANDLE;
+        }
+
+        return shaderModule;
+    }
+
+    static VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
+        for (const auto& availableFormat : availableFormats) {
+            if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
+                return availableFormat;
+            }
+        }
+
+        return availableFormats[0];
+    }
+
+    static VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
+        for (const auto& availablePresentMode : availablePresentModes) {
+            if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+                return availablePresentMode;
+            }
+        }
+
+        return VK_PRESENT_MODE_FIFO_KHR;
+    }
+
+    static VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const BasicWindow* window) {
+        if (capabilities.currentExtent.width != UINT32_MAX) {
+            return capabilities.currentExtent;
+        } else {
+            VkExtent2D actualExtent = {
+                    static_cast<uint32_t>(window->GetWidth()),
+                    static_cast<uint32_t>(window->GetHeight())
+            };
+
+            actualExtent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
+            actualExtent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
+
+            return actualExtent;
+        }
+    }
+
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) {
         Helper::Debug::Log("debugCallback() : validation layer: " + std::string(pCallbackData->pMessage));
         return VK_FALSE;

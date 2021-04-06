@@ -19,10 +19,29 @@ namespace Framework::Graphics::VulkanTools {
         std::vector<VkPresentModeKHR> presentModes;
     };
 
+    struct Synchronization {
+        std::vector<VkSemaphore> m_imageAvailableSemaphores;
+        std::vector<VkSemaphore> m_renderFinishedSemaphores;
+        std::vector<VkFence>     m_inFlightFences;
+        std::vector<VkFence>     m_imagesInFlight;
+        size_t                   m_currentFrame = 0;
+
+        bool                     m_ready = false;
+    };
+
     struct Swapchain {
         unsigned int m_width  = 0;
         unsigned int m_height = 0;
+        bool         m_ready  = false;
 
+        VkSwapchainKHR             m_swapChain             = VK_NULL_HANDLE;
+        std::vector<VkImage>       m_swapChainImages;
+        VkFormat                   m_swapChainImageFormat;
+        VkExtent2D                 m_swapChainExtent;
+        std::vector<VkImageView>   m_swapChainImageViews;
+        std::vector<VkFramebuffer> m_swapChainFramebuffers;
+
+        operator VkSwapchainKHR() const { return m_swapChain; }
     };
 
     struct Surface {
