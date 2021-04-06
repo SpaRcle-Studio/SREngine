@@ -72,6 +72,7 @@ namespace Framework::Graphics {
 
         VulkanTools::Swapchain       m_swapchain      = {};
 
+        VkResult                     m_queuePresent   = VK_RESULT_MAX_ENUM;
         VkCommandPool                m_commandPool    = VK_NULL_HANDLE;
         VkRenderPass                 m_renderPass     = VK_NULL_HANDLE;
 
@@ -384,7 +385,9 @@ namespace Framework::Graphics {
             vkResetFences(m_device, 1, &m_sync.m_inFlightFences[m_sync.m_currentFrame]);
 
             if (vkQueueSubmit(m_device.m_queue.m_graphicsQueue, 1, &submitInfo, m_sync.m_inFlightFences[m_sync.m_currentFrame]) != VK_SUCCESS) {
-                throw std::runtime_error("failed to submit draw command buffer!");
+                Helper::Debug::Error("Vulkan::DrawFrame() : failed to submit draw command buffer!");
+                m_hasErrors = true;
+                return;
             }
 
             VkPresentInfoKHR presentInfo{};
@@ -393,13 +396,22 @@ namespace Framework::Graphics {
             presentInfo.waitSemaphoreCount = 1;
             presentInfo.pWaitSemaphores = signalSemaphores;
 
-            VkSwapchainKHR swapChains[] = { m_swapchain };
             presentInfo.swapchainCount = 1;
-            presentInfo.pSwapchains = swapChains;
+            presentInfo.pSwapchains = &m_swapchain.m_swapChain;
 
             presentInfo.pImageIndices = &imageIndex;
 
-            vkQueuePresentKHR(m_device.m_queue.m_presentQueue, &presentInfo);
+            m_queuePresent = vkQueuePresentKHR(m_device.m_queue.m_presentQueue, &presentInfo);
+            switch (m_queuePresent) {
+                case VK_SUCCESS: break;
+                case VK_ERROR_OUT_OF_DATE_KHR:
+                    Helper::Debug::System("Vulkan::DrawFrame() : out of date KHR.");
+                    break;
+                default:
+                    Helper::Debug::Error("Vulkan::DrawFrame() : an exception has been occurred!");
+                    m_hasErrors = true;
+                    break;
+            }
 
             m_sync.m_currentFrame = (m_sync.m_currentFrame + 1) % SR_MAX_FRAMES_IN_FLIGHT;
         }

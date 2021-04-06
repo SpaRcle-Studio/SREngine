@@ -202,29 +202,36 @@ void Framework::Graphics::Window::Thread() {
     const PipeLine pipeLine = m_env->GetPipeLine();
 
     //Shader::GetDefaultGeometryShader()->Use();
-   // this->m_env->TestDrawing();
+    // this->m_env->TestDrawing();
 
     auto mesh = Mesh::Load("engine/plane.obj", true)[0];
     mesh->PrintInfo();
 
-    while(m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
-        clock_t beginFrame = clock();
+    if (pipeLine == PipeLine::Vulkan) {
+        while (m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
+            clock_t beginFrame = clock();
 
-        {
-            if (pipeLine == PipeLine::Vulkan) {
+            {
                 this->m_env->PollEvents();
                 this->PollEvents();
                 this->m_render->PollEvents();
 
                 this->m_env->DrawFrame();
-
-                //this->m_env->BeginRender();
-
-                //this->m_env->ClearColorBuffers(0.3, 0.3, 0.3, 0);
-
-                //this->m_env->EndRender();
             }
-            else {
+
+            deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
+            frames++;
+
+            if (deltaTime > 1.0) { //every second
+                std::cout << "FPS: " << frames - 1 << std::endl;
+                frames = 0; deltaTime = 0; }
+        }
+    }
+    else {
+        while (m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
+            clock_t beginFrame = clock();
+
+            {
                 this->m_env->PollEvents();
 
                 this->PollEvents();
@@ -237,16 +244,13 @@ void Framework::Graphics::Window::Thread() {
 
                 this->m_env->SwapBuffers();
             }
-        }
 
-        deltaTime += double(clock() - beginFrame) / (double)CLOCKS_PER_SEC;
-        frames++;
+            deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
+            frames++;
 
-        if(deltaTime > 1.0){ //every second
-            std::cout << "FPS: " << frames - 1 << std::endl;
-
-            frames = 0;
-            deltaTime = 0;
+            if (deltaTime > 1.0) { //every second
+                std::cout << "FPS: " << frames - 1 << std::endl;
+                frames = 0; deltaTime = 0; }
         }
     }
 

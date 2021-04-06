@@ -17,6 +17,7 @@ namespace Framework::Graphics::Types {
         enum Value {
             Unknown,
             Free,
+            _480_480,
             _640_360,
             _1280_720,
             _1366_768,
@@ -42,6 +43,10 @@ namespace Framework::Graphics::Types {
                     break;
                 case Free:
                     Helper::Debug::Error("WindowFormat::SetFormat() : for setting \"free-size\" window use different constructor!");
+                    break;
+                case WindowFormat::_480_480:
+                    this->m_width = 480;
+                    this->m_height = 480;
                     break;
                 case WindowFormat::_640_360:
                     this->m_width = 640;

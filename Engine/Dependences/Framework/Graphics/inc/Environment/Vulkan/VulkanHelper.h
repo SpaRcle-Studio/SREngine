@@ -5,15 +5,101 @@
 #ifndef GAMEENGINE_VULKANHELPER_H
 #define GAMEENGINE_VULKANHELPER_H
 
-#include <Environment/Vulkan/VulkanTypes.h>
-
 #include <Environment/Basic/BasicWindow.h>
 
 #include <optional>
 #include <string>
 #include <set>
 
+#include <Environment/Vulkan/VulkanStaticMemory.h>
+
 namespace Framework::Graphics::VulkanTools {
+    static VkSampleCountFlagBits GetMaxUsableSampleCount(const Device& device) {
+        VkPhysicalDeviceProperties physicalDeviceProperties;
+        vkGetPhysicalDeviceProperties(device.m_physicalDevice, &physicalDeviceProperties);
+
+        VkSampleCountFlags counts = physicalDeviceProperties.limits.framebufferColorSampleCounts & physicalDeviceProperties.limits.framebufferDepthSampleCounts;
+        if (counts & VK_SAMPLE_COUNT_64_BIT) { return VK_SAMPLE_COUNT_64_BIT; }
+        if (counts & VK_SAMPLE_COUNT_32_BIT) { return VK_SAMPLE_COUNT_32_BIT; }
+        if (counts & VK_SAMPLE_COUNT_16_BIT) { return VK_SAMPLE_COUNT_16_BIT; }
+        if (counts & VK_SAMPLE_COUNT_8_BIT) { return VK_SAMPLE_COUNT_8_BIT; }
+        if (counts & VK_SAMPLE_COUNT_4_BIT) { return VK_SAMPLE_COUNT_4_BIT; }
+        if (counts & VK_SAMPLE_COUNT_2_BIT) { return VK_SAMPLE_COUNT_2_BIT; }
+
+        return VK_SAMPLE_COUNT_1_BIT;
+    }
+
+    static VkFormat FindSupportedFormat(const Device& device, const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features) {
+        for (VkFormat format : candidates) {
+            VkFormatProperties props;
+            vkGetPhysicalDeviceFormatProperties(device.m_physicalDevice, format, &props);
+
+            if (tiling == VK_IMAGE_TILING_OPTIMAL)
+                if (((props.linearTilingFeatures & features) == features) || ((props.optimalTilingFeatures & features) == features))
+                    return format;
+        }
+
+        Helper::Debug::Error("VulkanTools::FindSupportedFormat() : failed to find supported format!");
+        return VkFormat::VK_FORMAT_UNDEFINED;
+    }
+
+    static VkFormat FindDepthFormat(const Device& device) {
+        return FindSupportedFormat(device,
+                {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
+                VK_IMAGE_TILING_OPTIMAL,
+                VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+        );
+    }
+
+    static VulkanFBO* CreateFramebuffer(
+            const Device& device, const VkRenderPass& renderPass,
+            unsigned int width, unsigned int height,
+            const std::vector<FBOAttach>& attachReq,
+            Swapchain* swapchain)
+    {
+        Helper::Debug::Log("VulkanTools::CreateFramebuffer() : create vulkan framebuffer...");
+
+        std::vector<VkImageView> attachments = {};
+
+        {
+            if (swapchain)
+                attachments.insert(attachments.end(),
+                        swapchain->m_swapChainImageViews.begin(),
+                        swapchain->m_swapChainImageViews.end());
+
+            for (const auto& req : attachReq)
+                switch (req) {
+                    default:
+                        Helper::Debug::Error("VulkanTools::CreateFramebuffer() : unknown required attachment!");
+                        break;
+                }
+        }
+
+        VkFramebufferCreateInfo framebufferInfo = {};
+        framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+        framebufferInfo.renderPass              = renderPass;
+        framebufferInfo.attachmentCount         = attachments.size();
+        framebufferInfo.pAttachments            = attachments.data();
+        framebufferInfo.width                   = width;
+        framebufferInfo.height                  = height;
+        framebufferInfo.layers                  = 1;
+
+        VkFramebuffer framebuffer = {};
+        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &framebuffer) != VK_SUCCESS) {
+            Helper::Debug::Error("VulkanTools::CreateFramebuffer() : failed to create framebuffer!");
+            return nullptr;
+        }
+
+        long id = VulkanStaticMemory::GetFreeID<VulkanFBO>();
+        if (id < 0) {
+            Helper::Debug::Error("VulkanTools::CreateFramebuffer() : failed to allocate id for framebuffer!");
+            return nullptr;
+        }
+        auto *fbo = new VulkanFBO(framebuffer, attachReq, attachments, id, swapchain);
+
+        return fbo;
+    }
+
     static std::vector<VkImageView> CreateImageViews(const Device& device, const std::vector<VkImage>& images, const VkFormat& format) {
         Helper::Debug::Graph("VulkanTools::CreateImageViews() : create " + std::to_string(images.size()) + " image views...");
 

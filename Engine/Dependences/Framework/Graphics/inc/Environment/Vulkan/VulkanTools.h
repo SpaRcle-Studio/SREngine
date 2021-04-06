@@ -24,6 +24,49 @@ namespace Framework::Graphics::VulkanTools {
         return commandPool;
     }
 
+    static VulkanFBOGroup* CreateVulkanFBOGroup(const Device& device, const VkRenderPass& renderPass,
+                                                const VkCommandPool& commandPool,
+                                                unsigned int width, unsigned int height,
+                                                const std::vector<FBOAttach>& attachReq,
+                                                Swapchain* swapchain, const unsigned __int8 count)
+    {
+        Helper::Debug::Log("VulkanTools::CreateVulkanFBOGroup() : create vulkan FBO group...");
+
+        std::vector<VulkanFBO*> framebuffers = {};
+        for (__int8 i = 0; i < count; i++) {
+            auto fbo = VulkanTools::CreateFramebuffer(device, renderPass, width, height, attachReq, swapchain);
+            if (!fbo) {
+                Helper::Debug::Error("VulkanTools::CreateVulkanFBOGroup() : failed to create FBO group!");
+                return nullptr;
+            }
+            else
+                framebuffers.push_back(fbo);
+        }
+
+        std::vector<VkCommandBuffer> commandBuffers(count);
+        {
+            VkCommandBufferAllocateInfo allocInfo = {};
+            allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+            allocInfo.commandPool                 = commandPool;
+            allocInfo.level                       = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+            allocInfo.commandBufferCount          = (uint32_t)commandBuffers.size();
+
+            if (vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.data()) != VK_SUCCESS) {
+                Helper::Debug::Error("VulkanTools::CreateVulkanFBOGroup() : failed to allocate command buffers!");
+                return nullptr;
+            }
+        }
+
+        long id = VulkanTools::VulkanStaticMemory::GetFreeID<VulkanFBOGroup>();
+        if (id < 0) {
+            Helper::Debug::Error("VulkanTools::CreateVulkanFBOGroup() : failed to allocate id for framebuffer group!");
+            return nullptr;
+        }
+        auto fboGroup = new VulkanFBOGroup(count, framebuffers, commandBuffers, id);
+
+        return fboGroup;
+    }
+
     static Synchronization CreateSync(const Device& device, const Swapchain& swapchain) {
         Helper::Debug::Graph("VulkanTools::CreateSync() : create vulkan synchronizations...");
 

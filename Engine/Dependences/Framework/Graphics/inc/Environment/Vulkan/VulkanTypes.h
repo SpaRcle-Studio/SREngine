@@ -13,6 +13,106 @@
 #include <set>
 
 namespace Framework::Graphics::VulkanTools {
+    struct Swapchain {
+        unsigned int m_width  = 0;
+        unsigned int m_height = 0;
+        bool         m_ready  = false;
+
+        VkSwapchainKHR             m_swapChain             = VK_NULL_HANDLE;
+        std::vector<VkImage>       m_swapChainImages;
+        VkFormat                   m_swapChainImageFormat;
+        VkExtent2D                 m_swapChainExtent;
+        std::vector<VkImageView>   m_swapChainImageViews;
+        std::vector<VkFramebuffer> m_swapChainFramebuffers;
+
+        operator VkSwapchainKHR() const { return m_swapChain; }
+    };
+
+
+    enum class FBOAttach {
+        ColorRGB, ColorRGBA, Depth
+    };
+
+    //! \usage Don't use malloc/alloc/calloc/free! Use operator new and delete.
+    //! \warn Create only as pointer!
+    class VulkanFBO {
+    public:
+        /*! \Info
+            if pSwapchain != nullptr => frame buffer will be attach swapchain image views
+         */
+        VulkanFBO(const VkFramebuffer& fbo, const std::vector<FBOAttach>& attachReq,
+                const std::vector<VkImageView>& attachments,
+                unsigned long statMemID, Swapchain* pSwapchain = nullptr)
+        {
+            this->m_framebuffer = fbo;
+            this->m_attachReq   = attachReq;
+            this->m_attachments = attachments;
+            this->m_staticMemID = (long)statMemID;
+            this->m_pSwapchain  = pSwapchain;
+        }
+        VulkanFBO(VulkanFBO const &) = delete;
+        ~VulkanFBO() {
+            this->m_framebuffer = VK_NULL_HANDLE;
+            this->m_attachments.clear();
+            this->m_attachReq.clear();
+            this->m_staticMemID = -1;
+        }
+    public:
+        VkFramebuffer                m_framebuffer    = VK_NULL_HANDLE;
+        Swapchain*                   m_pSwapchain     = nullptr;
+
+        std::vector<FBOAttach>       m_attachReq      = {};
+
+        std::vector<VkImageView>     m_attachments    = {};
+        std::vector<VkImage>         m_images         = {};
+        std::vector<VkDeviceMemory>  m_imageMemories  = {};
+
+        long                         m_staticMemID    = -1;
+    public:
+        operator VkFramebuffer() const { return m_framebuffer; }
+    };
+
+    //! \usage Don't use malloc/alloc/calloc/free! Use operator new and delete.
+    //! \warn Create only as pointer!
+    class VulkanFBOGroup {
+    public:
+        VulkanFBOGroup(unsigned __int8 count,
+                const std::vector<VulkanFBO*>& FBOs,
+                const std::vector<VkCommandBuffer>& commandBuffers,
+                unsigned long staticMemID)
+        {
+            this->m_count          = count;
+            this->m_FBOs           = FBOs;
+            this->m_commandBuffers = commandBuffers;
+            this->m_staticMemID    = (long)staticMemID;
+        }
+        VulkanFBOGroup(VulkanFBOGroup const &) = delete;
+        ~VulkanFBOGroup() {
+            this->m_count = 0;
+            this->m_staticMemID = -1;
+            this->m_commandBuffers.clear();
+            this->m_FBOs.clear();
+        }
+    public:
+        unsigned __int8              m_count          = 0;
+        std::vector<VulkanFBO*>      m_FBOs           = {};
+
+        std::vector<VkCommandBuffer> m_commandBuffers = {};
+
+        long                         m_staticMemID    = -1;
+    };
+
+    class VulkanMesh {
+    public:
+        VkBuffer m_VBO            = VK_NULL_HANDLE;
+        VkDeviceMemory m_VBMemory = VK_NULL_HANDLE;
+
+        VkBuffer m_IBO            = VK_NULL_HANDLE;
+        VkDeviceMemory m_IBMemory = VK_NULL_HANDLE;
+    };
+
+    //!=================================================================================================================
+
     struct SwapChainSupportDetails {
         VkSurfaceCapabilitiesKHR capabilities;
         std::vector<VkSurfaceFormatKHR> formats;
@@ -27,21 +127,6 @@ namespace Framework::Graphics::VulkanTools {
         size_t                   m_currentFrame = 0;
 
         bool                     m_ready = false;
-    };
-
-    struct Swapchain {
-        unsigned int m_width  = 0;
-        unsigned int m_height = 0;
-        bool         m_ready  = false;
-
-        VkSwapchainKHR             m_swapChain             = VK_NULL_HANDLE;
-        std::vector<VkImage>       m_swapChainImages;
-        VkFormat                   m_swapChainImageFormat;
-        VkExtent2D                 m_swapChainExtent;
-        std::vector<VkImageView>   m_swapChainImageViews;
-        std::vector<VkFramebuffer> m_swapChainFramebuffers;
-
-        operator VkSwapchainKHR() const { return m_swapChain; }
     };
 
     struct Surface {

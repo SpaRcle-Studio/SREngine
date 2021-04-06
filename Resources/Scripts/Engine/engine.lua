@@ -244,7 +244,7 @@ function Start()
     window:CentralizeWindow();
 
     skybox = Skybox.Load(
-        "Sea.jpg", -- images name
+        "Room.jpg", -- images name
         "skybox"   -- shader name
     );
     render:SetSkybox(skybox);

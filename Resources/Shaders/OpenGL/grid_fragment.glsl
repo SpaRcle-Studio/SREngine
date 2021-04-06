@@ -1,7 +1,7 @@
 #version 410 core
 
 const float near = 0.01;
-const float far = 100;
+const float far = 50;
 
 layout(location = 0) out vec4 FragColor;
 layout(location = 1) in vec3 nearPoint; // nearPoint calculated in vertex shader

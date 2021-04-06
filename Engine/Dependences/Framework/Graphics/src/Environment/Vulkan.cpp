@@ -10,6 +10,11 @@ namespace Framework::Graphics{
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
         Helper::Debug::Graph("Vulkan::PreInit() : init vulkan application...");
 
+        VulkanTools::VulkanStaticMemory::Alloc(
+                60, // frame buffers
+                20 // frame buffer groups
+                );
+
         Helper::Debug::Graph("Vulkan::PreInit() : check vulkan validation support...");
         if (m_enableValidationLayers && !checkValidationLayerSupport()) {
             Helper::Debug::Error("Vulkan::PreInit() : validation layers requested, but not available!");
