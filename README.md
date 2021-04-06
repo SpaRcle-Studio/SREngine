@@ -2,11 +2,15 @@
 
 ## Used libraries
   * glm
-  * OpenGL / GLFW / GLEW
-  * Bullet
+  * OpenGL / GLFW / GLEW / glad
+  * Bullet3
   * easy_profiler
   * Lua / LuaBridge
   * ImGUI
+  * tinyobjloader
+  * stbi
+  * json
+  * Vulkan
 
 ## Exists systems
   * Math
