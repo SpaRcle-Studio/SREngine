@@ -23,7 +23,7 @@ namespace Framework::Graphics::VulkanTools {
         VkFormat                   m_swapChainImageFormat;
         VkExtent2D                 m_swapChainExtent;
         std::vector<VkImageView>   m_swapChainImageViews;
-        std::vector<VkFramebuffer> m_swapChainFramebuffers;
+        //std::vector<VkFramebuffer> m_swapChainFramebuffers;
 
         operator VkSwapchainKHR() const { return m_swapChain; }
     };
@@ -76,30 +76,33 @@ namespace Framework::Graphics::VulkanTools {
     //! \warn Create only as pointer!
     class VulkanFBOGroup {
     public:
-        VulkanFBOGroup(unsigned __int8 count,
+        VulkanFBOGroup(
                 const std::vector<VulkanFBO*>& FBOs,
                 const std::vector<VkCommandBuffer>& commandBuffers,
                 unsigned long staticMemID)
         {
-            this->m_count          = count;
             this->m_FBOs           = FBOs;
             this->m_commandBuffers = commandBuffers;
             this->m_staticMemID    = (long)staticMemID;
         }
         VulkanFBOGroup(VulkanFBOGroup const &) = delete;
         ~VulkanFBOGroup() {
-            this->m_count = 0;
             this->m_staticMemID = -1;
             this->m_commandBuffers.clear();
             this->m_FBOs.clear();
         }
     public:
-        unsigned __int8              m_count          = 0;
         std::vector<VulkanFBO*>      m_FBOs           = {};
-
         std::vector<VkCommandBuffer> m_commandBuffers = {};
 
         long                         m_staticMemID    = -1;
+    public:
+        [[nodiscard]] SR_FORCE_INLINE VkFramebuffer GetFramebuffer(const unsigned int& i) const noexcept {
+            return m_FBOs[i]->m_framebuffer;
+        }
+        [[nodiscard]] SR_FORCE_INLINE VkCommandBuffer GetCommandBuffer(const unsigned int& i) const noexcept {
+            return m_commandBuffers[i];
+        }
     };
 
     class VulkanMesh {
@@ -114,9 +117,9 @@ namespace Framework::Graphics::VulkanTools {
     //!=================================================================================================================
 
     struct SwapChainSupportDetails {
-        VkSurfaceCapabilitiesKHR capabilities;
-        std::vector<VkSurfaceFormatKHR> formats;
-        std::vector<VkPresentModeKHR> presentModes;
+        VkSurfaceCapabilitiesKHR        m_capabilities = {};
+        std::vector<VkSurfaceFormatKHR> m_formats      = {};
+        std::vector<VkPresentModeKHR>   m_presentModes = {};
     };
 
     struct Synchronization {

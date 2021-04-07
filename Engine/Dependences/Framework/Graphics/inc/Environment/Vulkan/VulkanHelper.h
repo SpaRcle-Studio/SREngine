@@ -55,17 +55,19 @@ namespace Framework::Graphics::VulkanTools {
             const Device& device, const VkRenderPass& renderPass,
             unsigned int width, unsigned int height,
             const std::vector<FBOAttach>& attachReq,
-            Swapchain* swapchain)
+            Swapchain* swapchain = nullptr, __int16 swapImgID = -1)
     {
         Helper::Debug::Log("VulkanTools::CreateFramebuffer() : create vulkan framebuffer...");
 
         std::vector<VkImageView> attachments = {};
 
         {
-            if (swapchain)
-                attachments.insert(attachments.end(),
-                        swapchain->m_swapChainImageViews.begin(),
-                        swapchain->m_swapChainImageViews.end());
+            if (swapchain && swapImgID >= 0) {
+                attachments.push_back(swapchain->m_swapChainImageViews[swapImgID]);
+            }
+            //    attachments.insert(attachments.end(),
+            //            swapchain->m_swapChainImageViews.begin(),
+             //           swapchain->m_swapChainImageViews.end());
 
             for (const auto& req : attachReq)
                 switch (req) {
@@ -73,6 +75,11 @@ namespace Framework::Graphics::VulkanTools {
                         Helper::Debug::Error("VulkanTools::CreateFramebuffer() : unknown required attachment!");
                         break;
                 }
+        }
+
+        if (attachments.empty()) {
+            Helper::Debug::Error("VulkanTools::CreateFramebuffer() : failed to create framebuffer! Attachments is empty!");
+            return nullptr;
         }
 
         VkFramebufferCreateInfo framebufferInfo = {};
@@ -291,22 +298,22 @@ namespace Framework::Graphics::VulkanTools {
     static VulkanTools::SwapChainSupportDetails QuerySwapChainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) {
         VulkanTools::SwapChainSupportDetails details;
 
-        vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
+        vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.m_capabilities);
 
         uint32_t formatCount;
         vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
 
         if (formatCount != 0) {
-            details.formats.resize(formatCount);
-            vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
+            details.m_formats.resize(formatCount);
+            vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.m_formats.data());
         }
 
         uint32_t presentModeCount;
         vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
 
         if (presentModeCount != 0) {
-            details.presentModes.resize(presentModeCount);
-            vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
+            details.m_presentModes.resize(presentModeCount);
+            vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.m_presentModes.data());
         }
 
         return details;
@@ -320,7 +327,7 @@ namespace Framework::Graphics::VulkanTools {
         bool swapChainAdequate = false;
         if (extensionsSupported) {
             VulkanTools::SwapChainSupportDetails swapChainSupport = QuerySwapChainSupport(device, surface);
-            swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
+            swapChainAdequate = !swapChainSupport.m_formats.empty() && !swapChainSupport.m_presentModes.empty();
         }
 
         return queue.isComplete() && extensionsSupported && swapChainAdequate;

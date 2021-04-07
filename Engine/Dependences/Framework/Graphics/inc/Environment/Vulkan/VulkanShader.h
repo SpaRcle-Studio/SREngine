@@ -14,11 +14,11 @@ namespace Framework::Graphics {
         VkShaderModule m_vertShaderModule = VK_NULL_HANDLE;
         VkShaderModule m_fragShaderModule = VK_NULL_HANDLE;
 
-        VkPipelineShaderStageCreateInfo* m_shaderStages = nullptr;
-        unsigned __int8                  m_countStages = 0;
+        VkPipelineShaderStageCreateInfo* m_shaderStages        = nullptr;
+        unsigned __int8                  m_countStages         = 0;
 
-        VkPipeline                       m_graphicsPipeline = VK_NULL_HANDLE;
-        VkPipelineLayout                 m_pipelineLayout   = VK_NULL_HANDLE;
+        VkPipeline                       m_graphicsPipeline    = VK_NULL_HANDLE;
+        VkPipelineLayout                 m_pipelineLayout      = VK_NULL_HANDLE;
 
         [[nodiscard]] bool IsReady() const {
             return m_vertShaderModule != VK_NULL_HANDLE &&

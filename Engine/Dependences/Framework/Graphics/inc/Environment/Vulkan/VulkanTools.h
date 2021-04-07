@@ -6,8 +6,38 @@
 #define GAMEENGINE_VULKANTOOLS_H
 
 #include <Environment/Vulkan/VulkanHelper.h>
+#include <Environment/Vulkan/VulkanShader.h>
+#include <Environment/Vulkan/VulkanUniform.h>
+#include <Environment/Vulkan/VulkanStaticVariables.h>
+
+#include <array>
 
 namespace Framework::Graphics::VulkanTools {
+    static VkDescriptorPool CreateDescriptorPool(const Device& device) {
+        Helper::Debug::Log("VulkanTools::CreateDescriptorPool() : create descriptor pool with " +
+                std::to_string(g_countSwapchainImages) + " max descriptors and sets...");
+
+        std::array<VkDescriptorPoolSize, 2> poolSizes = {};
+        poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        poolSizes[0].descriptorCount = static_cast<uint32_t>(g_countSwapchainImages);
+        poolSizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        poolSizes[1].descriptorCount = static_cast<uint32_t>(g_countSwapchainImages);
+
+        VkDescriptorPoolCreateInfo poolInfo{};
+        poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+        poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
+        poolInfo.pPoolSizes = poolSizes.data();
+        poolInfo.maxSets = static_cast<uint32_t>(g_countSwapchainImages);
+
+        VkDescriptorPool descriptorPool = {};
+        if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool) != VK_SUCCESS) {
+            Helper::Debug::Error("VulkanTools::CreateDescriptorPool() : failed to create descriptor pool!");
+            return VK_NULL_HANDLE;
+        }
+
+        return descriptorPool;
+    }
+
     static VkCommandPool CreateCommandPool(const Device& device) {
         Helper::Debug::Graph("VulkanTools::CreateCommandPool() : create vulkan command pool...");
 
@@ -28,13 +58,13 @@ namespace Framework::Graphics::VulkanTools {
                                                 const VkCommandPool& commandPool,
                                                 unsigned int width, unsigned int height,
                                                 const std::vector<FBOAttach>& attachReq,
-                                                Swapchain* swapchain, const unsigned __int8 count)
+                                                Swapchain* swapchain)
     {
         Helper::Debug::Log("VulkanTools::CreateVulkanFBOGroup() : create vulkan FBO group...");
 
         std::vector<VulkanFBO*> framebuffers = {};
-        for (__int8 i = 0; i < count; i++) {
-            auto fbo = VulkanTools::CreateFramebuffer(device, renderPass, width, height, attachReq, swapchain);
+        for (unsigned __int8 i = 0; i < (unsigned __int8)g_countSwapchainImages; i++) {
+            auto fbo = VulkanTools::CreateFramebuffer(device, renderPass, width, height, attachReq, swapchain, i);
             if (!fbo) {
                 Helper::Debug::Error("VulkanTools::CreateVulkanFBOGroup() : failed to create FBO group!");
                 return nullptr;
@@ -43,7 +73,7 @@ namespace Framework::Graphics::VulkanTools {
                 framebuffers.push_back(fbo);
         }
 
-        std::vector<VkCommandBuffer> commandBuffers(count);
+        std::vector<VkCommandBuffer> commandBuffers(g_countSwapchainImages);
         {
             VkCommandBufferAllocateInfo allocInfo = {};
             allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -62,20 +92,25 @@ namespace Framework::Graphics::VulkanTools {
             Helper::Debug::Error("VulkanTools::CreateVulkanFBOGroup() : failed to allocate id for framebuffer group!");
             return nullptr;
         }
-        auto fboGroup = new VulkanFBOGroup(count, framebuffers, commandBuffers, id);
+        auto fboGroup = new VulkanFBOGroup(framebuffers, commandBuffers, id);
 
         return fboGroup;
     }
 
-    static Synchronization CreateSync(const Device& device, const Swapchain& swapchain) {
+    static Synchronization CreateSync(const Device& device) {
         Helper::Debug::Graph("VulkanTools::CreateSync() : create vulkan synchronizations...");
+
+        if (g_countSwapchainImages == 0) {
+            Helper::Debug::Error("VulkanTools::CreateSync() : count swapchain images equals zero!");
+            return {};
+        }
 
         Synchronization sync = {};
 
         sync.m_imageAvailableSemaphores.resize(SR_MAX_FRAMES_IN_FLIGHT);
         sync.m_renderFinishedSemaphores.resize(SR_MAX_FRAMES_IN_FLIGHT);
         sync.m_inFlightFences.resize(SR_MAX_FRAMES_IN_FLIGHT);
-        sync.m_imagesInFlight.resize(swapchain.m_swapChainImages.size(), VK_NULL_HANDLE);
+        sync.m_imagesInFlight.resize(g_countSwapchainImages, VK_NULL_HANDLE);
 
         VkSemaphoreCreateInfo semaphoreInfo{};
         semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -204,28 +239,31 @@ namespace Framework::Graphics::VulkanTools {
 
         VulkanTools::SwapChainSupportDetails swapChainSupport = VulkanTools::QuerySwapChainSupport(device.m_physicalDevice, surface);
 
-        VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
-        VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
-        VkExtent2D extent = chooseSwapExtent(swapChainSupport.capabilities, window);
+        VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.m_formats);
+        VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.m_presentModes);
+        VkExtent2D extent = chooseSwapExtent(swapChainSupport.m_capabilities, window);
 
-        uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
-        if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount)
-            imageCount = swapChainSupport.capabilities.maxImageCount;
+        g_countSwapchainImages = swapChainSupport.m_capabilities.minImageCount + 1;
+        if (swapChainSupport.m_capabilities.maxImageCount > 0 && g_countSwapchainImages > swapChainSupport.m_capabilities.maxImageCount)
+            g_countSwapchainImages = swapChainSupport.m_capabilities.maxImageCount;
 
-        Helper::Debug::Graph("VulkanTools::Swapchain() : swapchain support " + std::to_string(imageCount) + " images.");
+        Helper::Debug::Graph("VulkanTools::Swapchain() : swapchain support " + std::to_string(g_countSwapchainImages) + " images.");
 
         VkSwapchainCreateInfoKHR createInfo = {};
         createInfo.sType            = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
         createInfo.surface          = surface;
 
-        createInfo.minImageCount    = imageCount;
+        createInfo.minImageCount    = g_countSwapchainImages;
         createInfo.imageFormat      = surfaceFormat.format;
         createInfo.imageColorSpace  = surfaceFormat.colorSpace;
         createInfo.imageExtent      = extent;
         createInfo.imageArrayLayers = 1;
         createInfo.imageUsage       = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-        uint32_t queueFamilyIndices[] = { device.m_queue.m_iGraphicsFamily.value(), device.m_queue.m_iPresentFamily.value()};
+        uint32_t queueFamilyIndices[] = {
+                device.m_queue.m_iGraphicsFamily.value(),
+                device.m_queue.m_iPresentFamily.value()
+        };
 
         if (device.m_queue.m_iGraphicsFamily != device.m_queue.m_iPresentFamily) {
             createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
@@ -234,7 +272,7 @@ namespace Framework::Graphics::VulkanTools {
         } else
             createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-        createInfo.preTransform   = swapChainSupport.capabilities.currentTransform;
+        createInfo.preTransform   = swapChainSupport.m_capabilities.currentTransform;
         createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
         createInfo.presentMode    = presentMode;
         createInfo.clipped        = VK_TRUE;
@@ -250,9 +288,16 @@ namespace Framework::Graphics::VulkanTools {
             return {};
         }
 
-        vkGetSwapchainImagesKHR(device, swapchain, &imageCount, nullptr);
-        swapchain.m_swapChainImages.resize(imageCount);
-        vkGetSwapchainImagesKHR(device, swapchain, &imageCount, swapchain.m_swapChainImages.data());
+        {
+            uint32_t imgCount = 0;
+            vkGetSwapchainImagesKHR(device, swapchain, &imgCount, nullptr);
+            if (imgCount != g_countSwapchainImages) {
+                Helper::Debug::Error("VulkanTools::Swapchain() : something went wrong...");
+                return {};
+            }
+        }
+        swapchain.m_swapChainImages.resize(g_countSwapchainImages);
+        vkGetSwapchainImagesKHR(device, swapchain, &g_countSwapchainImages, swapchain.m_swapChainImages.data());
 
         swapchain.m_swapChainImageFormat = surfaceFormat.format;
         swapchain.m_swapChainExtent      = extent;
