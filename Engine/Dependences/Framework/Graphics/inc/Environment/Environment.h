@@ -36,10 +36,11 @@ namespace Framework::Graphics {
         glm::vec2 m_screenSize = glm::vec2(0, 0);
         static inline std::mutex g_mutex = std::mutex();
 
-        BasicWindow* m_basicWindow = nullptr;
-        bool m_hasErrors = false;
+        BasicWindow*    m_basicWindow         = nullptr;
+        bool            m_hasErrors           = false;
 
-        __int16 m_preferredDevice = -1;
+        __int16         m_preferredDevice     = -1;
+        unsigned __int8 m_currentDrawingStage = 0;
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -105,6 +106,9 @@ namespace Framework::Graphics {
 
         virtual unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 
+        [[nodiscard]] virtual unsigned __int8 GetCountDrawRepeats() const noexcept { return 0; }
+        void SetDrawingStage(const unsigned __int8& stage) noexcept { this->m_currentDrawingStage = stage; }
+
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
@@ -156,7 +160,7 @@ namespace Framework::Graphics {
         virtual bool CreatePingPongFrameBufferObject(
                 glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept { return false; }
 
-        virtual SR_FORCE_INLINE void BindFrameBuffer(unsigned int FBO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept { }
         virtual SR_FORCE_INLINE void DeleteBuffer(unsigned int& FBO)const noexcept { }
 
         [[nodiscard]] virtual inline bool IsFullScreen() const noexcept { return false; }

@@ -83,12 +83,16 @@ namespace Framework::Graphics {
         VkPipeline graphicsPipeline;
 
         //std::vector<VkCommandBuffer> commandBuffers;
+    public: // Current states
+        VkFramebuffer   m_currentFramebuffer          = VK_NULL_HANDLE;
+        VkCommandBuffer m_currentCommandBuffer        = VK_NULL_HANDLE;
+        VkClearValue    m_currentClearColor           = { 0, 0, 0, 1 };
     public:
         [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const noexcept override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept override { return PipeLine::Vulkan; }
     public:
         [[nodiscard]] std::vector<const char*> getRequiredExtensions() const {
-            std::vector<const char*> extensions;
+            std::vector<const char *> extensions;
 
             extensions.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
             extensions.push_back(VK_KHR_WIN32_SURFACE_EXTENSION_NAME);
@@ -97,32 +101,6 @@ namespace Framework::Graphics {
                 extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 
             return extensions;
-        }
-
-
-        bool checkValidationLayerSupport() {
-            uint32_t layerCount;
-            vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-
-            std::vector<VkLayerProperties> availableLayers(layerCount);
-            vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-
-            for (const char* layerName : m_validationLayers) {
-                bool layerFound = false;
-
-                for (const auto& layerProperties : availableLayers) {
-                    if (strcmp(layerName, layerProperties.layerName) == 0) {
-                        layerFound = true;
-                        break;
-                    }
-                }
-
-                if (!layerFound) {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         void createGraphicsPipeline() {
@@ -305,6 +283,45 @@ namespace Framework::Graphics {
             return true;
         }
 
+        void SomeDraw() {
+            for (size_t i = 0; i < VulkanTools::VulkanStaticMemory::g_countSwapchainImages; i++) {
+                VkCommandBuffer commandBuffer = m_swapchainFBO->GetCommandBuffer(i);
+
+                VkCommandBufferBeginInfo beginInfo{};
+                beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+
+                if (vkBeginCommandBuffer(commandBuffer, &beginInfo) != VK_SUCCESS) {
+                    throw std::runtime_error("failed to begin recording command buffer!");
+                }
+
+                VkRenderPassBeginInfo renderPassInfo{};
+                renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+                renderPassInfo.renderPass = m_renderPass;
+                //renderPassInfo.framebuffer = m_swapchain.m_swapChainFramebuffers[i];
+                renderPassInfo.framebuffer = m_swapchainFBO->GetFramebuffer(i);
+                renderPassInfo.renderArea.offset = {0, 0};
+                renderPassInfo.renderArea.extent = m_swapchain.m_swapChainExtent;
+
+                renderPassInfo.clearValueCount = 1;
+                renderPassInfo.pClearValues = &m_currentClearColor;
+
+                vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+                vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+
+                vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+
+                vkCmdEndRenderPass(commandBuffer);
+
+                if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS) {
+                    throw std::runtime_error("failed to record command buffer!");
+                }
+            }
+        }
+
+        [[nodiscard]] unsigned __int8 GetCountDrawRepeats() const noexcept override {
+            return VulkanTools::VulkanStaticMemory::g_countSwapchainImages; }
+
         [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override {
             return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };
         }
@@ -325,6 +342,53 @@ namespace Framework::Graphics {
         void SetWindowSize(unsigned int w, unsigned int h) override;
 
         //!===============================================[SHADERS]=====================================================
+
+        /*! \warning if you use incorrect id, then engine will be crash */
+        SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
+            m_currentFramebuffer   = VulkanTools::VulkanStaticMemory::m_FBOGroups[FBO]->m_FBOs[m_currentDrawingStage]->m_framebuffer;
+            m_currentCommandBuffer = VulkanTools::VulkanStaticMemory::m_FBOGroups[FBO]->m_commandBuffers[m_currentDrawingStage];
+        }
+
+        SR_FORCE_INLINE void BeginRender() override {
+            VkCommandBufferBeginInfo beginInfo{};
+            beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+
+            if (vkBeginCommandBuffer(m_currentCommandBuffer, &beginInfo) != VK_SUCCESS) {
+                Helper::Debug::Error("Vulkan::BeginRender() : failed to begin recording command buffer!");
+                this->m_hasErrors = true;
+                return;
+            }
+
+            VkRenderPassBeginInfo renderPassInfo = {};
+            renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+            renderPassInfo.renderPass = m_renderPass;
+            renderPassInfo.framebuffer = m_currentFramebuffer;
+            renderPassInfo.renderArea.offset = {0, 0};
+            renderPassInfo.renderArea.extent = m_swapchain.m_swapChainExtent;
+
+            renderPassInfo.clearValueCount = 1;
+            renderPassInfo.pClearValues = &m_currentClearColor;
+
+            ///=========================
+
+            vkCmdBeginRenderPass(m_currentCommandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+            vkCmdBindPipeline(m_currentCommandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+        }
+        SR_FORCE_INLINE void EndRender() override {
+            vkCmdEndRenderPass(m_currentCommandBuffer);
+
+            if (vkEndCommandBuffer(m_currentCommandBuffer) != VK_SUCCESS) {
+                Helper::Debug::Error("Vulkan::EndRender() : failed to record command buffer!");
+                this->m_hasErrors = true;
+                return;
+            }
+        }
+
+        SR_FORCE_INLINE void TestDrawing() override {
+            vkCmdDraw(m_currentCommandBuffer, 3, 1, 0, 0);
+            //SomeDraw();
+        }
 
         SR_FORCE_INLINE void DrawFrame() override {
             vkWaitForFences(m_device, 1, &m_sync.m_inFlightFences[m_sync.m_currentFrame], VK_TRUE, UINT64_MAX);
@@ -386,9 +450,6 @@ namespace Framework::Graphics {
             }
 
             m_sync.m_currentFrame = (m_sync.m_currentFrame + 1) % SR_MAX_FRAMES_IN_FLIGHT;
-        }
-        SR_FORCE_INLINE void TestDrawing() override {
-
         }
     };
 }

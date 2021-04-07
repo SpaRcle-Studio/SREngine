@@ -219,7 +219,7 @@ namespace Framework::Graphics {
         bool CreateHDRFrameBufferObject(glm::vec2 size,unsigned int& rboDepth,  unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept override;
         bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept override;
 
-        SR_FORCE_INLINE void BindFrameBuffer(unsigned int FBO) const noexcept override {
+        SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
             glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         }
 

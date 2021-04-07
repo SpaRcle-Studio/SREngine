@@ -8,26 +8,25 @@
 #include <Environment/Vulkan/VulkanHelper.h>
 #include <Environment/Vulkan/VulkanShader.h>
 #include <Environment/Vulkan/VulkanUniform.h>
-#include <Environment/Vulkan/VulkanStaticVariables.h>
 
 #include <array>
 
 namespace Framework::Graphics::VulkanTools {
     static VkDescriptorPool CreateDescriptorPool(const Device& device) {
         Helper::Debug::Log("VulkanTools::CreateDescriptorPool() : create descriptor pool with " +
-                std::to_string(g_countSwapchainImages) + " max descriptors and sets...");
+                std::to_string(VulkanTools::VulkanStaticMemory::g_countSwapchainImages) + " max descriptors and sets...");
 
         std::array<VkDescriptorPoolSize, 2> poolSizes = {};
         poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        poolSizes[0].descriptorCount = static_cast<uint32_t>(g_countSwapchainImages);
+        poolSizes[0].descriptorCount = static_cast<uint32_t>(VulkanTools::VulkanStaticMemory::g_countSwapchainImages);
         poolSizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        poolSizes[1].descriptorCount = static_cast<uint32_t>(g_countSwapchainImages);
+        poolSizes[1].descriptorCount = static_cast<uint32_t>(VulkanTools::VulkanStaticMemory::g_countSwapchainImages);
 
         VkDescriptorPoolCreateInfo poolInfo{};
         poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
         poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
         poolInfo.pPoolSizes = poolSizes.data();
-        poolInfo.maxSets = static_cast<uint32_t>(g_countSwapchainImages);
+        poolInfo.maxSets = static_cast<uint32_t>(VulkanTools::VulkanStaticMemory::g_countSwapchainImages);
 
         VkDescriptorPool descriptorPool = {};
         if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool) != VK_SUCCESS) {
@@ -63,7 +62,7 @@ namespace Framework::Graphics::VulkanTools {
         Helper::Debug::Log("VulkanTools::CreateVulkanFBOGroup() : create vulkan FBO group...");
 
         std::vector<VulkanFBO*> framebuffers = {};
-        for (unsigned __int8 i = 0; i < (unsigned __int8)g_countSwapchainImages; i++) {
+        for (unsigned __int8 i = 0; i < (unsigned __int8)VulkanTools::VulkanStaticMemory::g_countSwapchainImages; i++) {
             auto fbo = VulkanTools::CreateFramebuffer(device, renderPass, width, height, attachReq, swapchain, i);
             if (!fbo) {
                 Helper::Debug::Error("VulkanTools::CreateVulkanFBOGroup() : failed to create FBO group!");
@@ -73,7 +72,7 @@ namespace Framework::Graphics::VulkanTools {
                 framebuffers.push_back(fbo);
         }
 
-        std::vector<VkCommandBuffer> commandBuffers(g_countSwapchainImages);
+        std::vector<VkCommandBuffer> commandBuffers(VulkanTools::VulkanStaticMemory::g_countSwapchainImages);
         {
             VkCommandBufferAllocateInfo allocInfo = {};
             allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -93,6 +92,7 @@ namespace Framework::Graphics::VulkanTools {
             return nullptr;
         }
         auto fboGroup = new VulkanFBOGroup(framebuffers, commandBuffers, id);
+        VulkanTools::VulkanStaticMemory::m_FBOGroups[id] = fboGroup;
 
         return fboGroup;
     }
@@ -100,7 +100,7 @@ namespace Framework::Graphics::VulkanTools {
     static Synchronization CreateSync(const Device& device) {
         Helper::Debug::Graph("VulkanTools::CreateSync() : create vulkan synchronizations...");
 
-        if (g_countSwapchainImages == 0) {
+        if (VulkanTools::VulkanStaticMemory::g_countSwapchainImages == 0) {
             Helper::Debug::Error("VulkanTools::CreateSync() : count swapchain images equals zero!");
             return {};
         }
@@ -110,7 +110,7 @@ namespace Framework::Graphics::VulkanTools {
         sync.m_imageAvailableSemaphores.resize(SR_MAX_FRAMES_IN_FLIGHT);
         sync.m_renderFinishedSemaphores.resize(SR_MAX_FRAMES_IN_FLIGHT);
         sync.m_inFlightFences.resize(SR_MAX_FRAMES_IN_FLIGHT);
-        sync.m_imagesInFlight.resize(g_countSwapchainImages, VK_NULL_HANDLE);
+        sync.m_imagesInFlight.resize(VulkanTools::VulkanStaticMemory::g_countSwapchainImages, VK_NULL_HANDLE);
 
         VkSemaphoreCreateInfo semaphoreInfo{};
         semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -243,17 +243,21 @@ namespace Framework::Graphics::VulkanTools {
         VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.m_presentModes);
         VkExtent2D extent = chooseSwapExtent(swapChainSupport.m_capabilities, window);
 
-        g_countSwapchainImages = swapChainSupport.m_capabilities.minImageCount + 1;
-        if (swapChainSupport.m_capabilities.maxImageCount > 0 && g_countSwapchainImages > swapChainSupport.m_capabilities.maxImageCount)
-            g_countSwapchainImages = swapChainSupport.m_capabilities.maxImageCount;
+        uint32_t imgCount = 0;
 
-        Helper::Debug::Graph("VulkanTools::Swapchain() : swapchain support " + std::to_string(g_countSwapchainImages) + " images.");
+        VulkanStaticMemory::g_countSwapchainImages = swapChainSupport.m_capabilities.minImageCount + 1;
+        if (swapChainSupport.m_capabilities.maxImageCount > 0 && VulkanStaticMemory::g_countSwapchainImages > swapChainSupport.m_capabilities.maxImageCount)
+            VulkanStaticMemory::g_countSwapchainImages = swapChainSupport.m_capabilities.maxImageCount;
+
+        imgCount = VulkanTools::VulkanStaticMemory::g_countSwapchainImages;
+
+        Helper::Debug::Graph("VulkanTools::Swapchain() : swapchain support " + std::to_string(VulkanTools::VulkanStaticMemory::g_countSwapchainImages) + " images.");
 
         VkSwapchainCreateInfoKHR createInfo = {};
         createInfo.sType            = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
         createInfo.surface          = surface;
 
-        createInfo.minImageCount    = g_countSwapchainImages;
+        createInfo.minImageCount    = imgCount;
         createInfo.imageFormat      = surfaceFormat.format;
         createInfo.imageColorSpace  = surfaceFormat.colorSpace;
         createInfo.imageExtent      = extent;
@@ -289,15 +293,17 @@ namespace Framework::Graphics::VulkanTools {
         }
 
         {
-            uint32_t imgCount = 0;
             vkGetSwapchainImagesKHR(device, swapchain, &imgCount, nullptr);
-            if (imgCount != g_countSwapchainImages) {
+            if (imgCount != VulkanTools::VulkanStaticMemory::g_countSwapchainImages) {
                 Helper::Debug::Error("VulkanTools::Swapchain() : something went wrong...");
                 return {};
             }
         }
-        swapchain.m_swapChainImages.resize(g_countSwapchainImages);
-        vkGetSwapchainImagesKHR(device, swapchain, &g_countSwapchainImages, swapchain.m_swapChainImages.data());
+        uint32_t count = VulkanStaticMemory::g_countSwapchainImages;
+        swapchain.m_swapChainImages.resize(VulkanStaticMemory::g_countSwapchainImages);
+        vkGetSwapchainImagesKHR(device, swapchain, &count, swapchain.m_swapChainImages.data());
+
+        //Helper::Debug::Graph("VulkanTools::Swapchain() : swapchain support " + std::to_string(g_countSwapchainImages) + " images.");
 
         swapchain.m_swapChainImageFormat = surfaceFormat.format;
         swapchain.m_swapChainExtent      = extent;

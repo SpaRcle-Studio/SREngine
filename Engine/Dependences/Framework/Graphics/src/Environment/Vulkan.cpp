@@ -5,7 +5,6 @@
 #include <Environment/Vulkan.h>
 #include <ResourceManager/ResourceManager.h>
 #include <FileSystem/FileSystem.h>
-#include <Environment/Vulkan/VulkanStaticVariables.h>
 
 namespace Framework::Graphics{
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
@@ -17,7 +16,7 @@ namespace Framework::Graphics{
                 );
 
         Helper::Debug::Graph("Vulkan::PreInit() : check vulkan validation support...");
-        if (m_enableValidationLayers && !checkValidationLayerSupport()) {
+        if (m_enableValidationLayers && !VulkanTools::CheckValidationLayerSupport(m_validationLayers)) {
             Helper::Debug::Error("Vulkan::PreInit() : validation layers requested, but not available!");
             return false;
         }
@@ -129,7 +128,6 @@ namespace Framework::Graphics{
         //createFramebuffers();
         //createCommandBuffers();
 
-
         Helper::Debug::Graph("Vulkan::MakeWindow() : create vulkan swapchain framebuffer...");
         this->m_swapchainFBO = VulkanTools::CreateVulkanFBOGroup(
                 m_device, m_renderPass, m_commandPool,
@@ -139,43 +137,8 @@ namespace Framework::Graphics{
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create swapchain framebuffer!");
             return false;
         }
-
         createGraphicsPipeline();
-
-        for (size_t i = 0; i < VulkanTools::g_countSwapchainImages; i++) {
-            VkCommandBuffer commandBuffer = m_swapchainFBO->GetCommandBuffer(i);
-
-            VkCommandBufferBeginInfo beginInfo{};
-            beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-
-            if (vkBeginCommandBuffer(commandBuffer, &beginInfo) != VK_SUCCESS) {
-                throw std::runtime_error("failed to begin recording command buffer!");
-            }
-
-            VkRenderPassBeginInfo renderPassInfo{};
-            renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-            renderPassInfo.renderPass = m_renderPass;
-            //renderPassInfo.framebuffer = m_swapchain.m_swapChainFramebuffers[i];
-            renderPassInfo.framebuffer = m_swapchainFBO->GetFramebuffer(i);
-            renderPassInfo.renderArea.offset = {0, 0};
-            renderPassInfo.renderArea.extent = m_swapchain.m_swapChainExtent;
-
-            VkClearValue clearColor = {0.0f, 0.0f, 0.0f, 1.0f};
-            renderPassInfo.clearValueCount = 1;
-            renderPassInfo.pClearValues = &clearColor;
-
-            vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
-            vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
-
-            vkCmdDraw(commandBuffer, 3, 1, 0, 0);
-
-            vkCmdEndRenderPass(commandBuffer);
-
-            if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS) {
-                throw std::runtime_error("failed to record command buffer!");
-            }
-        }
+        //this->SomeDraw();
 
         return true;
     }

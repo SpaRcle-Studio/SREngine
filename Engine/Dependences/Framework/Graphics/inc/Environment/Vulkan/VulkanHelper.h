@@ -14,6 +14,31 @@
 #include <Environment/Vulkan/VulkanStaticMemory.h>
 
 namespace Framework::Graphics::VulkanTools {
+    static bool CheckValidationLayerSupport(const std::vector<const char*>& validationLayers) {
+        uint32_t layerCount;
+        vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+        std::vector<VkLayerProperties> availableLayers(layerCount);
+        vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+
+        for (const char* layerName : validationLayers) {
+            bool layerFound = false;
+
+            for (const auto& layerProperties : availableLayers) {
+                if (strcmp(layerName, layerProperties.layerName) == 0) {
+                    layerFound = true;
+                    break;
+                }
+            }
+
+            if (!layerFound) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     static VkSampleCountFlagBits GetMaxUsableSampleCount(const Device& device) {
         VkPhysicalDeviceProperties physicalDeviceProperties;
         vkGetPhysicalDeviceProperties(device.m_physicalDevice, &physicalDeviceProperties);
@@ -103,6 +128,7 @@ namespace Framework::Graphics::VulkanTools {
             return nullptr;
         }
         auto *fbo = new VulkanFBO(framebuffer, attachReq, attachments, id, swapchain);
+        VulkanTools::VulkanStaticMemory::m_FBOs[id] = fbo;
 
         return fbo;
     }

@@ -15,12 +15,14 @@ namespace Framework::Graphics::VulkanTools {
         VulkanStaticMemory(VulkanStaticMemory const &) = delete;
         ~VulkanStaticMemory() = delete;
     private:
-        inline static bool              m_allocated          = false;
+        inline static bool              m_allocated           = false;
     public:
-        inline static uint64_t          m_maxCountFBOs       = 0;
-        inline static VulkanFBO**       m_FBOs               = nullptr;
+        inline static unsigned __int32 g_countSwapchainImages = 0;
 
-        inline static uint64_t          m_maxCountFBOGroups  = 0;
+        inline static uint64_t          m_maxCountFBOs        = 0;
+        inline static VulkanFBO**       m_FBOs                = nullptr;
+
+        inline static uint64_t          m_maxCountFBOGroups   = 0;
         inline static VulkanFBOGroup**  m_FBOGroups           = nullptr;
 
 
