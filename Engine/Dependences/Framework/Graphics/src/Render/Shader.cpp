@@ -43,9 +43,9 @@ bool Framework::Graphics::Shader::Compile() {
 
     Debug::Shader("Shader::Compile() : compiling \""+m_name+"\" shader...");
 
-    this->m_shaderProgram = m_env->AllocShaderProgram();
+    //this->m_shaderProgram = m_env->AllocShaderProgram();
 
-    if (!m_env->CompileShader(m_name, m_shaderProgram)){
+    if (!m_env->CompileShader(m_name, &m_shaderTempData)) {
         Debug::Error("Shader::Compile() : failed compile \""+m_name+"\" shader!");
         return false;
     }
@@ -74,7 +74,7 @@ bool Framework::Graphics::Shader::Link() {
         return false;
     }*/
 
-    if (!m_env->LinkShader(m_shaderProgram)) {
+    if (!m_env->LinkShader(&m_shaderProgram, &m_shaderTempData)) {
         Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
         return false;
     }
@@ -118,7 +118,7 @@ void Framework::Graphics::Shader::Free() {
         Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer and free video memory...");
         m_env->DeleteShader(m_shaderProgram);
         m_env->FreeShaderProgram(m_shaderProgram);
-        this->m_shaderProgram = nullptr;
+        this->m_shaderProgram = SR_NULL_SHADER;
     } else {
         Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer...");
     }

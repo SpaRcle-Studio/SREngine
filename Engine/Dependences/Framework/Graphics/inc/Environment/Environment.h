@@ -20,6 +20,9 @@
 
 #include <Environment/PipeLine.h>
 
+#define SR_SHADER_PROGRAM unsigned int
+#define SR_NULL_SHADER 0
+
 namespace Framework::Graphics {
     struct Vertex;
 
@@ -171,21 +174,21 @@ namespace Framework::Graphics {
 
         [[nodiscard]] virtual std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept {
             return std::map<std::string, unsigned int>(); }
-        [[nodiscard]] virtual IShaderProgram* AllocShaderProgram() const noexcept { return nullptr; }
-        virtual void FreeShaderProgram(IShaderProgram* shaderProgram) const noexcept {  }
-        virtual bool CompileShader(const std::string& path, IShaderProgram* shaderProgram) const noexcept { return false; }
-        virtual bool LinkShader(IShaderProgram* shaderProgram) const noexcept { return false; }
-        virtual SR_FORCE_INLINE void DeleteShader(IShaderProgram* shaderProgram) const noexcept { }
-        virtual SR_FORCE_INLINE void UseShader(IShaderProgram* shaderProgram) const noexcept { }
+        [[nodiscard]] virtual SR_SHADER_PROGRAM AllocShaderProgram() const noexcept { return SR_NULL_SHADER; }
+        virtual void FreeShaderProgram(SR_SHADER_PROGRAM shaderProgram) const noexcept {  }
+        virtual bool CompileShader(const std::string& path, void** shaderData) const noexcept { return false; }
+        virtual bool LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept { return false; }
+        virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
+        virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
 
-        virtual SR_FORCE_INLINE void SetBool(IShaderProgram* shaderProgram, const char* name, bool v)                 const noexcept { }
-        virtual SR_FORCE_INLINE void SetFloat(IShaderProgram* shaderProgram, const char* name, float v)               const noexcept { }
-        virtual SR_FORCE_INLINE void SetInt(IShaderProgram* shaderProgram, const char* name, int v)                   const noexcept { }
-        virtual SR_FORCE_INLINE void SetMat4(IShaderProgram* shaderProgram, const char* name, const glm::mat4& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec4(IShaderProgram* shaderProgram, const char* name, const glm::vec4& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec3(IShaderProgram* shaderProgram, const char* name, const glm::vec3& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec2(IShaderProgram* shaderProgram, const char* name, const glm::vec2& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetIVec2(IShaderProgram* shaderProgram, const char* name, const glm::ivec2& v)   const noexcept { }
+        virtual SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v)                 const noexcept { }
+        virtual SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v)               const noexcept { }
+        virtual SR_FORCE_INLINE void SetInt(SR_SHADER_PROGRAM shaderProgram, const char* name, int v)                   const noexcept { }
+        virtual SR_FORCE_INLINE void SetMat4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::mat4& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec4& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec3(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec3& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec2& v)     const noexcept { }
+        virtual SR_FORCE_INLINE void SetIVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::ivec2& v)   const noexcept { }
 
         // ============================== [ MESH METHODS ] ==============================
 

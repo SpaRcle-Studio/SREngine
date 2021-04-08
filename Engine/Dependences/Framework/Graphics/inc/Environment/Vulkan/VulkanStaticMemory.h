@@ -6,6 +6,7 @@
 #define GAMEENGINE_VULKANSTATICMEMORY_H
 
 #include <Environment/Vulkan/VulkanTypes.h>
+#include <Environment/Vulkan/VulkanShader.h>
 #include <type_traits>
 
 namespace Framework::Graphics::VulkanTools {
@@ -25,6 +26,8 @@ namespace Framework::Graphics::VulkanTools {
         inline static uint64_t          m_maxCountFBOGroups   = 0;
         inline static VulkanFBOGroup**  m_FBOGroups           = nullptr;
 
+        inline static uint64_t          m_maxCountShaders     = 0;
+        inline static VulkanShader**    m_shaders             = nullptr;
 
         //inline static uint64_t     m_maxCountImgViews   = 0;
         //inline static VkImageView* m_imgViews           = nullptr;
@@ -40,18 +43,18 @@ namespace Framework::Graphics::VulkanTools {
                     if (m_FBOGroups[i] == nullptr)
                         return i;
             }
-            //else if (std::is_same<T, VkImageView>::value) {
-            //    for (uint64_t i = 0; i < m_maxCountImgViews; i++)
-            //        if (m_imgViews[i] == nullptr)
-            //            return i;
-            //}
+            else if (std::is_same<T, VulkanShader>::value) {
+                for (uint64_t i = 0; i < m_maxCountShaders; i++)
+                    if (m_shaders[i] == nullptr)
+                        return i;
+            }
 
             Helper::Debug::Error("VulkanStaticMemory::GetFreeID() : failed find free ID for type \""+std::string(typeid(T).name())+"\"!");
 
             return -1;
         }
     public:
-        static bool Alloc(const uint64_t& maxCountFBOs, const uint64_t& maxCountFBOGroups) {
+        static bool Alloc(const uint64_t& maxCountFBOs, const uint64_t& maxCountFBOGroups, const uint64_t& maxCountShaders) {
             if (m_allocated) return false;
 
             Helper::Debug::System("VulkanStaticMemory::Alloc() : allocate all memory buffers...");
@@ -66,10 +69,10 @@ namespace Framework::Graphics::VulkanTools {
             for (uint64_t i = 0; i < m_maxCountFBOGroups; i++)
                 m_FBOGroups[i] = nullptr;
 
-            //m_maxCountImgViews = maxCountImgViews;
-            //m_imgViews = (VkImageView*)malloc(sizeof(VkImageView) * m_maxCountImgViews);
-            //for (uint64_t i = 0; i < m_maxCountImgViews; i++)
-            //    m_imgViews[i] = nullptr;
+            m_maxCountShaders = maxCountShaders;
+            m_shaders = (VulkanShader**)malloc(sizeof(VulkanShader) * m_maxCountShaders);
+            for (uint64_t i = 0; i < m_maxCountShaders; i++)
+                m_shaders[i] = nullptr;
 
             m_allocated = true;
             return true;

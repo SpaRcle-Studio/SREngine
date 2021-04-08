@@ -398,7 +398,7 @@ void Framework::Graphics::Render::DrawSingleColors() noexcept {
 
     //this->m_manipulate->SimpleDraw(m_flatGeometryShader);
 
-    this->m_env->UseShader(nullptr);
+    this->m_env->UseShader(SR_NULL_SHADER);
 }
 
 bool Framework::Graphics::Render::DrawSettingsPanel() {

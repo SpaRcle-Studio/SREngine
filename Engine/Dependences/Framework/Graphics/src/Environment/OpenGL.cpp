@@ -340,14 +340,16 @@ std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields
     return fields;
 }
 
-bool Framework::Graphics::OpenGL::CompileShader(const std::string& name, IShaderProgram* shaderProgram) const noexcept {
-    if (!shaderProgram)
-        return false;
+struct GLShaderData {
+    unsigned int m_vertex = 0;
+    unsigned int m_fragment = 0;
+};
 
+bool Framework::Graphics::OpenGL::CompileShader(const std::string& name, void** shaderData) const noexcept {
     std::string vertex_path   = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_vertex.glsl";
     std::string fragment_path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_fragment.glsl";;
 
-    auto* glShader = reinterpret_cast<OpenGLShader*>(shaderProgram);
+    auto* glShader = new GLShaderData();
 
     int	  InfoLogLength	= 0;
     GLint Result		= GL_FALSE;
@@ -426,14 +428,21 @@ bool Framework::Graphics::OpenGL::CompileShader(const std::string& name, IShader
         //?===================================================================================================
     }
 
+    *shaderData = (void*)glShader;
+
     return true;
 }
 
-bool Framework::Graphics::OpenGL::LinkShader(IShaderProgram* shaderProgram) const noexcept {
+bool Framework::Graphics::OpenGL::LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept {
     if (!shaderProgram)
         return false;
 
-    auto* glShader = reinterpret_cast<OpenGLShader*>(shaderProgram);
+    if (!shaderData) {
+        Helper::Debug::Error("OpenGL::LinkShader() : shader data is nullptr!");
+        return false;
+    }
+
+    auto* glShader = (GLShaderData*)(*shaderData);
 
     unsigned int ProgramID = glCreateProgram();
     glAttachShader(ProgramID, glShader->m_vertex);
@@ -470,7 +479,11 @@ bool Framework::Graphics::OpenGL::LinkShader(IShaderProgram* shaderProgram) cons
 
     glShader->m_vertex    = 0;
     glShader->m_fragment  = 0;
-    glShader->m_programID = ProgramID;
+
+    delete glShader;
+    *shaderData = nullptr;
+
+    *shaderProgram = ProgramID;
 
     return true;
 }

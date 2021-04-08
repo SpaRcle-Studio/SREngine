@@ -23,11 +23,12 @@ namespace Framework::Graphics {
         Shader(Render* render, const std::string& name);
         Shader(Shader&) = delete;
     private:
-        //unsigned int                        m_ID           = 0;
+        SR_SHADER_PROGRAM                   m_shaderProgram  = 0;
+        void*                               m_shaderTempData = nullptr;
         //unsigned int                        m_fragment     = 0;
         //unsigned int                        m_vertex       = 0;
 
-        IShaderProgram*                     m_shaderProgram = nullptr;
+        //IShaderProgram*                     m_shaderProgram = nullptr;
 
         bool                                m_isLink        = false;
         bool                                m_isCompile     = false;

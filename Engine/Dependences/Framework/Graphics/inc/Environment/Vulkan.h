@@ -283,7 +283,7 @@ namespace Framework::Graphics {
             return true;
         }
 
-        void SomeDraw() {
+        void SomeDraw() { //! not using
             for (size_t i = 0; i < VulkanTools::VulkanStaticMemory::g_countSwapchainImages; i++) {
                 VkCommandBuffer commandBuffer = m_swapchainFBO->GetCommandBuffer(i);
 
@@ -342,6 +342,9 @@ namespace Framework::Graphics {
         void SetWindowSize(unsigned int w, unsigned int h) override;
 
         //!===============================================[SHADERS]=====================================================
+
+        bool CompileShader(const std::string& path, void** shaderData) const noexcept override;
+        bool LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept override;
 
         /*! \warning if you use incorrect id, then engine will be crash */
         SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {

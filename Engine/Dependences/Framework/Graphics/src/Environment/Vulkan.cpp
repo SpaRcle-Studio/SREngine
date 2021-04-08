@@ -12,7 +12,8 @@ namespace Framework::Graphics{
 
         VulkanTools::VulkanStaticMemory::Alloc(
                 60, // frame buffers
-                20 // frame buffer groups
+                20, // frame buffer groups
+                10  // shader programs
                 );
 
         Helper::Debug::Graph("Vulkan::PreInit() : check vulkan validation support...");
@@ -178,5 +179,68 @@ namespace Framework::Graphics{
 
     void Vulkan::SetWindowPosition(int x, int y) {
         this->m_basicWindow->Move(x, y);
+    }
+
+    struct VkShaderData {
+        VkShaderModule m_vertex   = VK_NULL_HANDLE;
+        VkShaderModule m_fragment = VK_NULL_HANDLE;
+    };
+
+    bool Vulkan::CompileShader(const std::string &path, void **shaderData) const noexcept {
+        std::string vertex_path   = Helper::ResourceManager::GetResourcesFolder()
+                                    + "\\Shaders\\" + GetPipeLineName() + "\\" + path + ".vert";
+        std::string fragment_path = Helper::ResourceManager::GetResourcesFolder()
+                                    + "\\Shaders\\" + GetPipeLineName() + "\\" + path + ".frag";
+
+        std::string cache = Helper::ResourceManager::GetResourcesFolder() + R"(\Cache\Shaders\)";
+
+        std::string vert_output = cache + path + ".vert.spv";
+        std::string frag_output = cache + path + ".frag.spv";
+
+        Helper::FileSystem::CreatePath(Helper::FileSystem::GetDirFromPath(vert_output));
+        Helper::FileSystem::CreatePath(Helper::FileSystem::GetDirFromPath(frag_output));
+
+        Helper::Debug::Shader("Vulkan::CompileShader() : compile source code...");
+
+        system(("glslc " + vertex_path   + " -o " + vert_output).c_str());
+        system(("glslc " + fragment_path + " -o " + frag_output).c_str());
+        //! TODO: Add check file exists and delete old shader file
+
+        //!=============================================================================================================
+
+        auto vertShaderCode = Helper::FileSystem::ReadBinary(vert_output);
+        auto fragShaderCode = Helper::FileSystem::ReadBinary(frag_output);
+
+        VkShaderData* vkShaderData = new VkShaderData();
+
+        vkShaderData->m_vertex   = CreateShaderModule(m_device, vertShaderCode);
+        vkShaderData->m_fragment = CreateShaderModule(m_device, fragShaderCode);
+
+        *shaderData = (void*)vkShaderData;
+
+        return true;
+    }
+
+    bool Vulkan::LinkShader(unsigned int *shaderProgram, void **shaderData) const noexcept {
+        if (!shaderProgram) {
+            Helper::Debug::Error("Vulkan::LinkShader() : shader program ref is nullptr!");
+            return false;
+        }
+
+        if (!shaderData) {
+            Helper::Debug::Error("Vulkan::LinkShader() : shader data ref is nullptr!");
+            return false;
+        }
+
+        VkShaderData* vkShaderData = (VkShaderData*)(*shaderData);
+
+        {
+
+        }
+
+        delete vkShaderData;
+        *shaderData = nullptr;
+
+        return true;
     }
 }

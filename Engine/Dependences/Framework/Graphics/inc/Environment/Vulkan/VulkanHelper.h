@@ -14,6 +14,58 @@
 #include <Environment/Vulkan/VulkanStaticMemory.h>
 
 namespace Framework::Graphics::VulkanTools {
+    static VkPipelineMultisampleStateCreateInfo CreateMultisampling() {
+        Helper::Debug::Graph("VulkanTools::CreateMultisampling() : create vulkan multisampling...");
+
+        VkPipelineMultisampleStateCreateInfo multisampling = {};
+        multisampling.sType                = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+        multisampling.sampleShadingEnable  = VK_FALSE;
+        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+        return multisampling;
+    }
+
+    static VkPipelineRasterizationStateCreateInfo CreateRasterizer() {
+        Helper::Debug::Graph("VulkanTools::CreateRasterizer() : create vulkan rasterizer...");
+
+        VkPipelineRasterizationStateCreateInfo rasterizer = {};
+        rasterizer.sType                                  = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+        rasterizer.depthClampEnable                       = VK_FALSE;
+        rasterizer.rasterizerDiscardEnable                = VK_FALSE;
+        rasterizer.polygonMode                            = VK_POLYGON_MODE_FILL;
+        rasterizer.lineWidth                              = 1.0f;
+        rasterizer.cullMode                               = VK_CULL_MODE_BACK_BIT;
+        rasterizer.frontFace                              = VK_FRONT_FACE_CLOCKWISE;
+        rasterizer.depthBiasEnable                        = VK_FALSE;
+
+        return rasterizer;
+    }
+
+    static VkPipelineColorBlendStateCreateInfo CreateColorBlending() {
+        Helper::Debug::Graph("VulkanTools::CreateColorBlending() : create vulkan color blending...");
+
+        VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
+        colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT |
+                                              VK_COLOR_COMPONENT_G_BIT |
+                                              VK_COLOR_COMPONENT_B_BIT |
+                                              VK_COLOR_COMPONENT_A_BIT;
+
+        colorBlendAttachment.blendEnable    = VK_FALSE;
+
+        VkPipelineColorBlendStateCreateInfo colorBlending = {};
+        colorBlending.sType             = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+        colorBlending.logicOpEnable     = VK_FALSE;
+        colorBlending.logicOp           = VK_LOGIC_OP_COPY;
+        colorBlending.attachmentCount   = 1;
+        colorBlending.pAttachments      = &colorBlendAttachment;
+        colorBlending.blendConstants[0] = 0.0f;
+        colorBlending.blendConstants[1] = 0.0f;
+        colorBlending.blendConstants[2] = 0.0f;
+        colorBlending.blendConstants[3] = 0.0f;
+
+        return colorBlending;
+    }
+
     static bool CheckValidationLayerSupport(const std::vector<const char*>& validationLayers) {
         uint32_t layerCount;
         vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
@@ -164,14 +216,14 @@ namespace Framework::Graphics::VulkanTools {
     }
 
     static VkShaderModule CreateShaderModule(const VulkanTools::Device& device, const std::vector<char>& code) {
-        Helper::Debug::Graph("VulkanTools::CreateShaderModule() : create vulkan shader module...");
+        Helper::Debug::Shader("VulkanTools::CreateShaderModule() : create vulkan shader module...");
 
-        VkShaderModuleCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        VkShaderModuleCreateInfo createInfo = {};
+        createInfo.sType    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = code.size();
-        createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+        createInfo.pCode    = reinterpret_cast<const uint32_t*>(code.data());
 
-        VkShaderModule shaderModule;
+        VkShaderModule shaderModule = {};
         if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
             Helper::Debug::Error("VulkanTools::CreateShaderModule() : failed to create shader module!");
             return VK_NULL_HANDLE;
@@ -180,7 +232,7 @@ namespace Framework::Graphics::VulkanTools {
         return shaderModule;
     }
 
-    static VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
+    static VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
         for (const auto& availableFormat : availableFormats) {
             if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
                 return availableFormat;
@@ -190,7 +242,7 @@ namespace Framework::Graphics::VulkanTools {
         return availableFormats[0];
     }
 
-    static VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
+    static VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
         for (const auto& availablePresentMode : availablePresentModes) {
             if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
                 return availablePresentMode;
@@ -200,7 +252,7 @@ namespace Framework::Graphics::VulkanTools {
         return VK_PRESENT_MODE_FIFO_KHR;
     }
 
-    static VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const BasicWindow* window) {
+    static VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const BasicWindow* window) {
         if (capabilities.currentExtent.width != UINT32_MAX) {
             return capabilities.currentExtent;
         } else {

@@ -12,6 +12,10 @@
 #include <array>
 
 namespace Framework::Graphics::VulkanTools {
+    static VulkanShader* CreateShader() {
+        return nullptr;
+    }
+
     static VkDescriptorPool CreateDescriptorPool(const Device& device) {
         Helper::Debug::Log("VulkanTools::CreateDescriptorPool() : create descriptor pool with " +
                 std::to_string(VulkanTools::VulkanStaticMemory::g_countSwapchainImages) + " max descriptors and sets...");
@@ -190,16 +194,16 @@ namespace Framework::Graphics::VulkanTools {
 
         VkInstance instance = {};
 
-        VkInstanceCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+        VkInstanceCreateInfo createInfo = {};
+        createInfo.sType            = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
         createInfo.pApplicationInfo = &appInfo;
 
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(reqExts.size());
+        createInfo.enabledExtensionCount   = static_cast<uint32_t>(reqExts.size());
         createInfo.ppEnabledExtensionNames = reqExts.data();
 
-        VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
+        VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo = {};
         if (enableValidLayers) {
-            createInfo.enabledLayerCount = static_cast<uint32_t>(validLayers.size());
+            createInfo.enabledLayerCount   = static_cast<uint32_t>(validLayers.size());
             createInfo.ppEnabledLayerNames = validLayers.data();
 
             PopulateDebugMessengerCreateInfo(debugCreateInfo);
@@ -221,7 +225,7 @@ namespace Framework::Graphics::VulkanTools {
     static VkDebugUtilsMessengerEXT SetupDebugMessenger(const VkInstance& instance) {
         Helper::Debug::Graph("VulkanTools::SetupDebugMessenger() : create debug messenger...");
 
-        VkDebugUtilsMessengerCreateInfoEXT createInfo;
+        VkDebugUtilsMessengerCreateInfoEXT createInfo = {};
         PopulateDebugMessengerCreateInfo(createInfo);
 
         VkDebugUtilsMessengerEXT debugMessenger = {};
@@ -239,9 +243,9 @@ namespace Framework::Graphics::VulkanTools {
 
         VulkanTools::SwapChainSupportDetails swapChainSupport = VulkanTools::QuerySwapChainSupport(device.m_physicalDevice, surface);
 
-        VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.m_formats);
-        VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.m_presentModes);
-        VkExtent2D extent = chooseSwapExtent(swapChainSupport.m_capabilities, window);
+        VkSurfaceFormatKHR surfaceFormat = ChooseSwapSurfaceFormat(swapChainSupport.m_formats);
+        VkPresentModeKHR presentMode     = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
+        VkExtent2D extent                = ChooseSwapExtent(swapChainSupport.m_capabilities, window);
 
         uint32_t imgCount = 0;
 

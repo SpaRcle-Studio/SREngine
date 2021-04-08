@@ -10,9 +10,8 @@ namespace Framework::Graphics {
         Vertex, Fragment, Tesselation
     };
 
-    class IShaderProgram {
-
-    };
+    //class IShaderProgram {
+    //};
 }
 
 #endif //GAMEENGINE_ISHADERPROGRAM_H

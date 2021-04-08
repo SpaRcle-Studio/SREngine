@@ -18,8 +18,6 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <Debug.h>
 
-#include <Environment/OpenGL/OpenGLShader.h>
-
 #ifdef WIN32
     #include <wingdi.h>
 #endif
@@ -229,62 +227,73 @@ namespace Framework::Graphics {
         // ============================= [ SHADER METHODS ] =============================
 
         [[nodiscard]] std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept override;
-        [[nodiscard]] IShaderProgram* AllocShaderProgram() const noexcept override {
-            return (OpenGLShader*)malloc(sizeof(OpenGLShader));
+        [[nodiscard]] SR_SHADER_PROGRAM AllocShaderProgram() const noexcept override {
+            //return (OpenGLShader*)malloc(sizeof(OpenGLShader));
+            return SR_NULL;
         }
-        void FreeShaderProgram(IShaderProgram* shaderProgram) const noexcept override {
-            if (shaderProgram != nullptr)
-                free((OpenGLShader*)shaderProgram);
+        void FreeShaderProgram(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
+            //if (shaderProgram != nullptr)
+            //    free((OpenGLShader*)shaderProgram);
         }
-        bool CompileShader(const std::string& path, IShaderProgram* shaderProgram) const noexcept override;
-        bool LinkShader(IShaderProgram* shaderProgram) const noexcept override;
-        SR_FORCE_INLINE void DeleteShader(IShaderProgram* shaderProgram) const noexcept override {
-            glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
-            reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID = 0;
+        bool CompileShader(const std::string& path, void** shaderData) const noexcept override;
+        bool LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept override;
+        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
+            //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
+            glDeleteProgram(shaderProgram);
+            //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID = 0;
         }
-        SR_FORCE_INLINE void UseShader(IShaderProgram* shaderProgram) const noexcept override {
+        SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
             if (shaderProgram)
-                glUseProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
+                glUseProgram(shaderProgram);
+                //glUseProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
         }
 
-        SR_FORCE_INLINE void SetBool(IShaderProgram* shaderProgram, const char* name, bool v)               const noexcept override {
+        SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v)               const noexcept override {
             glUniform1iv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, (int*)&v);
         }
-        SR_FORCE_INLINE void SetFloat(IShaderProgram* shaderProgram, const char* name, float v)             const noexcept override {
+        SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v)             const noexcept override {
             glUniform1fv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, &v);
         }
-        SR_FORCE_INLINE void SetInt(IShaderProgram* shaderProgram, const char* name, int v)                 const noexcept override {
+        SR_FORCE_INLINE void SetInt(SR_SHADER_PROGRAM shaderProgram, const char* name, int v)                 const noexcept override {
             glUniform1iv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, &v);
         }
-        SR_FORCE_INLINE void SetMat4(IShaderProgram* shaderProgram, const char* name, const glm::mat4& v)   const noexcept override {
+        SR_FORCE_INLINE void SetMat4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::mat4& v)   const noexcept override {
             glUniformMatrix4fv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, GL_FALSE, &v[0][0]);
         }
-        SR_FORCE_INLINE void SetVec4(IShaderProgram* shaderProgram, const char* name, const glm::vec4& v)   const noexcept override {
+        SR_FORCE_INLINE void SetVec4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec4& v)   const noexcept override {
             glUniform4fv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, &v[0]);
         }
-        SR_FORCE_INLINE void SetVec3(IShaderProgram* shaderProgram, const char* name, const glm::vec3& v)   const noexcept override {
+        SR_FORCE_INLINE void SetVec3(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec3& v)   const noexcept override {
             glUniform3fv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, &v[0]);
         }
-        SR_FORCE_INLINE void SetVec2(IShaderProgram* shaderProgram, const char* name, const glm::vec2& v)   const noexcept override {
+        SR_FORCE_INLINE void SetVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec2& v)   const noexcept override {
             glUniform2fv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, &v[0]);
         }
-        SR_FORCE_INLINE void SetIVec2(IShaderProgram* shaderProgram, const char* name, const glm::ivec2& v) const noexcept override {
+        SR_FORCE_INLINE void SetIVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::ivec2& v) const noexcept override {
             glUniform2iv(glGetUniformLocation(
-                    reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID,
+                    shaderProgram,
                     name), 1, &v[0]);
         }
 
