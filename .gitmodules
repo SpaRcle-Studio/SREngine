@@ -1,0 +1,3 @@
+[submodule "Engine/Dependences/Framework/Depends/EvoVulkan"]
+    path = Engine/Dependences/Framework/Depends/EvoVulkan
+    url = https://github.com/Monika0000/EvoVulkan
