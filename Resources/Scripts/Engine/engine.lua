@@ -116,7 +116,7 @@ function HierarchyTest()
     --local texture = Texture.Load("steel_cube.png", true, TextureType.Diffuse, TextureFilter.LINEAR);
     local texture = Texture.Load("brickwall.jpg", true, TextureType.Diffuse, TextureFilter.LINEAR);
     --local mesh = Mesh.Load("engine/cube.obj", 0);
-    local mesh = Mesh.Load("monkey_low.obj", 0);
+    local mesh = Mesh.Load("skybox3.obj", 0);
     render:RegisterTexture(texture);
 
     -- first
@@ -244,7 +244,7 @@ function Start()
     window:CentralizeWindow();
 
     skybox = Skybox.Load(
-        "Room.jpg", -- images name
+        "Sea.jpg", -- images name
         "skybox"   -- shader name
     );
     render:SetSkybox(skybox);
@@ -280,12 +280,12 @@ function MouseUpdate()
     local wheel = Input.GetMouseWheel();
     if (wheel ~= 0) then
         local forward = camera:GetTransform():Forward();
-        camera:GetTransform():Translate(Vector3.FMul(forward, wheel / -10.0));
+        camera:GetTransform():Translate(Vector3.FMul(forward, wheel / -10.0), false);
     end;
 
     if (Input.GetKey(KeyCode.MouseRight)) then
         --camera:GetTransform():Rotate(Vector3.New(dir.y / -10.0, dir.x / -10.0, 0.0));
-        camera:GetTransform():Rotate(Vector3.New(dir.y / -10.0, dir.x / -10.0, 0.0));
+        camera:GetTransform():Rotate(Vector3.New(dir.y / -10.0, dir.x / -10.0, 0.0), false);
     end;
 
     if (Input.GetKey(KeyCode.MouseMiddle)) then
@@ -297,7 +297,8 @@ function MouseUpdate()
                 Vector3.FMul(up,    dir.y /  100.0),
                 Vector3.FMul(right, dir.x /  -100.0)
                 --Vector3.FMul(right, dir.x / -100.0)
-            )
+            ),
+            false
         );
     end;
 end;
@@ -306,13 +307,7 @@ function FixedUpdate()
 
 end;
 
-function Update()
-    if (childRotateGM ~= nil) then
-        --childRotateGM:GetTransform():Rotate(Vector3.New(0.001, 0, 0), true);
-    end;
-
-    MouseUpdate();
-
+function KeysUpdate()
     if (Input.GetKeyDown(KeyCode.W)) then
         --render:GetManipulationTool():SetOperation(Operation.Translate);
         GUIWindow.SetGuizmoTool(1);
@@ -342,6 +337,12 @@ function Update()
 
     --if (Input.GetKeyDown(KeyCode.F)) then scene:Print(); end;
     --if (Input.GetKeyDown(KeyCode.C)) then Debug.MakeCrash(); end;
+end
+
+function Update()
+    MouseUpdate();
+
+    KeysUpdate();
 
     collectgarbage() -- collect memory
 end;

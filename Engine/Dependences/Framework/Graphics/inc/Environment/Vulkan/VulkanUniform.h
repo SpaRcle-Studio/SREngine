@@ -5,6 +5,8 @@
 #ifndef GAMEENGINE_VULKANUNIFORM_H
 #define GAMEENGINE_VULKANUNIFORM_H
 
+#include <glm/glm.hpp>
+
 namespace Framework::Graphics::VulkanTools {
     struct UniformTransformation {
         alignas(16) glm::mat4 model;

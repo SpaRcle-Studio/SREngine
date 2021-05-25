@@ -202,20 +202,6 @@ void Framework::Graphics::Window::Thread() {
     const PipeLine pipeLine = m_env->GetPipeLine();
 
     if (pipeLine == PipeLine::Vulkan) {
-        auto mesh = Mesh::Load("engine/plane.obj", true)[0];
-        mesh->PrintInfo();
-
-        for (unsigned __int8 i = 0; i < m_env->GetCountDrawRepeats(); i++) {
-            m_env->SetDrawingStage(i);
-            m_env->BindFrameBuffer(0);
-
-            m_env->BeginRender();
-
-            m_env->TestDrawing();
-
-            m_env->EndRender();
-        }
-
         while (m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
             clock_t beginFrame = clock();
 

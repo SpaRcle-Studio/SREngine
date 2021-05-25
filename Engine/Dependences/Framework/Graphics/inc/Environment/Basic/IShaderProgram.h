@@ -6,9 +6,9 @@
 #define GAMEENGINE_ISHADERPROGRAM_H
 
 namespace Framework::Graphics {
-    enum class ShaderType {
-        Vertex, Fragment, Tesselation
-    };
+    //enum class ShaderType {
+    //    Vertex, Fragment, Tesselation
+    //};
 
     //class IShaderProgram {
     //};

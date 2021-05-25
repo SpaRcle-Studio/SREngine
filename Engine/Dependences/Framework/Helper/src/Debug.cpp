@@ -18,18 +18,20 @@ namespace Framework::Helper {
             //operator ""     operator co_await       operator<=>      Type Des
 
             switch (type) {
-                case Debug::Type::Log:		    pref = "[Log] ";	        color = ConsoleColor::Cyan;				break;
-                case Debug::Type::Info: 	    pref = "[Info] ";	        color = ConsoleColor::Magenta;			break;
-                case Debug::Type::Debug:	    pref = "[Debug] ";	        color = ConsoleColor::Blue;				break;
-                case Debug::Type::Graph:	    pref = "[Graph] ";	        color = ConsoleColor::Green;			break;
-                case Debug::Type::Shader:	    pref = "[Shader] ";	        color = ConsoleColor::LightCyan;		break;
-                case Debug::Type::Script:	    pref = "[Script] ";	        color = ConsoleColor::Brown;			break;
-                case Debug::Type::System:	    pref = "[System] ";	        color = ConsoleColor::LightBlue;		break;
-                case Debug::Type::Warn:	        pref = "[Warn] ";	        color = ConsoleColor::Yellow;			break;
-                case Debug::Type::Error:	    pref = "[Error] ";	        color = ConsoleColor::LightRed;			break;
-                case Debug::Type::ScriptError:	pref = "[ScriptError] ";	color = ConsoleColor::LightRed;			break;
-                case Debug::Type::ScriptLog:	pref = "[ScriptLog] ";	    color = ConsoleColor::LightCyan;		break;
-                default:					    pref = "[Unk] ";	        color = ConsoleColor::Black;			break;
+                case Debug::Type::Log:		    pref = "[Log] ";	        color = ConsoleColor::Cyan;		      break;
+                case Debug::Type::VulkanLog:	pref = "[VulkanLog] ";	    color = ConsoleColor::DarkGray;       break;
+                case Debug::Type::Info: 	    pref = "[Info] ";	        color = ConsoleColor::Magenta;	      break;
+                case Debug::Type::Debug:	    pref = "[Debug] ";	        color = ConsoleColor::Blue;		      break;
+                case Debug::Type::Graph:	    pref = "[Graph] ";	        color = ConsoleColor::Green;	      break;
+                case Debug::Type::Vulkan:	    pref = "[Vulkan] ";	        color = ConsoleColor::DarkGray;       break;
+                case Debug::Type::Shader:	    pref = "[Shader] ";	        color = ConsoleColor::LightCyan;      break;
+                case Debug::Type::Script:	    pref = "[Script] ";	        color = ConsoleColor::Brown;	      break;
+                case Debug::Type::System:	    pref = "[System] ";	        color = ConsoleColor::LightBlue;      break;
+                case Debug::Type::Warn:	        pref = "[Warn] ";	        color = ConsoleColor::Yellow;	      break;
+                case Debug::Type::Error:	    pref = "[Error] ";	        color = ConsoleColor::LightRed;	      break;
+                case Debug::Type::ScriptError:	pref = "[ScriptError] ";	color = ConsoleColor::LightRed;	      break;
+                case Debug::Type::ScriptLog:	pref = "[ScriptLog] ";	    color = ConsoleColor::LightCyan;      break;
+                default:					    pref = "[Unk] ";	        color = ConsoleColor::Black;	      break;
             }
 
             if (Debug::g_showUseMemory) {

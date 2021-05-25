@@ -116,9 +116,9 @@ namespace Framework::Helper {
         }*/
 
         [[nodiscard]] Vector3 Direction(Vector3 preDir, bool local = false)   const noexcept;
-        [[nodiscard]] Vector3 Forward(bool local = false) const noexcept;
-        [[nodiscard]] Vector3 Right(bool local = false)   const noexcept;
-        [[nodiscard]] Vector3 Up(bool local = false)      const noexcept;
+        [[nodiscard]] Vector3 Forward() const noexcept;
+        [[nodiscard]] Vector3 Right()   const noexcept;
+        [[nodiscard]] Vector3 Up()      const noexcept;
 
         //void DeltaTranslate(Vector3 delta);
         void Translate(Vector3 val, bool local = false) noexcept;

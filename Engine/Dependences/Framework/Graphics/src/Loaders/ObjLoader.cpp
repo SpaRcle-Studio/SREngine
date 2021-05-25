@@ -185,7 +185,14 @@ namespace Framework::Graphics {
             delete[] indexes_3;
         }
 
+        count = m_pos_texture.empty() ? 0 : count;
+
         switch (count) {
+            case 0:
+                m_temp_vertexes.push_back({ { m_pos_vertex[face.x - 1.f] }, {0, 0}, {1,1,1}, {0,0,0} }); //z
+                m_temp_vertexes.push_back({ { m_pos_vertex[face.y - 1.f] }, {0, 0}, {1,1,1}, {0,0,0} }); //x
+                m_temp_vertexes.push_back({ { m_pos_vertex[face.z - 1.f] }, {0, 0}, {1,1,1}, {0,0,0} }); //y
+                break;
             case 1: // With texture
                 m_temp_vertexes.push_back({ { m_pos_vertex[face.x - 1.f] }, m_pos_texture[uv.x - 1.f], {1,1,1}, {0,0,0} }); //z
                 m_temp_vertexes.push_back({ { m_pos_vertex[face.y - 1.f] }, m_pos_texture[uv.y - 1.f], {1,1,1}, {0,0,0} }); //x

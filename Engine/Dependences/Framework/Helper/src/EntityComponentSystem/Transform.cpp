@@ -273,14 +273,14 @@ Framework::Helper::Math::Vector3 Framework::Helper::Transform::Direction(Framewo
         return m_globalRotation.Radians().ToQuat() * preDir;
 }
 
-Framework::Helper::Math::Vector3 Framework::Helper::Transform::Forward(bool local) const noexcept {
+Framework::Helper::Math::Vector3 Framework::Helper::Transform::Forward() const noexcept {
     return m_globalRotation.Radians().ToQuat() * forward;
 }
-Framework::Helper::Math::Vector3 Framework::Helper::Transform::Right(bool local) const noexcept {
+Framework::Helper::Math::Vector3 Framework::Helper::Transform::Right() const noexcept {
     //return right.Rotate(m_globalRotation);
     return m_globalRotation.Radians().ToQuat() * right;
 }
-Framework::Helper::Math::Vector3 Framework::Helper::Transform::Up(bool local) const noexcept {
+Framework::Helper::Math::Vector3 Framework::Helper::Transform::Up() const noexcept {
     //return up.Rotate(m_globalRotation);
     return m_globalRotation.Radians().ToQuat() * up;
 }

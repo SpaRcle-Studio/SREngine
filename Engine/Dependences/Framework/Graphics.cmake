@@ -50,6 +50,7 @@ set(GRAPHICS_SRC
 set(GRAPHICS_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Graphics/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/inc
+        ${FRAMEWORK_ROOT_DIR}/Depends/EvoVulkan/Core/inc
 
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
         #${FRAMEWORK_ROOT_DIR}/Depends/vulkan/vulkan
@@ -64,3 +65,4 @@ set(GRAPHICS_INC_PRIVATE
 set(GRAPHICS_INC_INSTANCE
 
         )
+

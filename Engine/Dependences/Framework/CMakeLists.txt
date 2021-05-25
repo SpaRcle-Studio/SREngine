@@ -12,6 +12,7 @@ add_subdirectory(Depends/imgui)
 add_subdirectory(Depends/inc/glm)
 
 add_subdirectory(Depends/bullet3)
+add_subdirectory(Depends/EvoVulkan/Core)
 
 #include(Depends/bullet3/UseBullet.cmake)
 
@@ -44,12 +45,12 @@ include_directories(${Vulkan_INCLUDE_DIRS})
 
 # Добавляем библиотеку фреймворка
 add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
-target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler bullet3 ${Vulkan_LIBRARY})
+target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler bullet3 ${Vulkan_LIBRARY} EvoVulkanCore)
 if(WIN32)
     if(MSVC)
 
     else()
-        target_link_libraries(Framework -lpsapi opengl32 glfw glew)
+        target_link_libraries(Framework -lpsapi opengl32 glfw glew EvoVulkanCore)
     endif()
 endif()
 

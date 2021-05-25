@@ -41,7 +41,7 @@ namespace Framework::Helper {
             White = 15
         };
         enum class Type {
-            Log, Info, Debug, Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog
+            Log, Info, Debug, Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog, Vulkan, VulkanLog
         };
     public:
         Debug() = delete;
@@ -79,14 +79,16 @@ namespace Framework::Helper {
         static void Init(const std::string& log_path, bool ShowUsedMemory, Theme colorTheme = Theme::Light);
         static int Stop();
     public:
-        static void Log(std::string msg)    { Print(msg, Type::Log);    }
-        static void Info(std::string msg)   { Print(msg, Type::Info);   }
-        static void Graph(std::string msg)  { Print(msg, Type::Graph);  }
-        static void Shader(std::string msg) { Print(msg, Type::Shader); }
-        static void Script(std::string msg) { Print(msg, Type::Script); }
-        static void System(std::string msg) { Print(msg, Type::System); }
-        static void Warn(std::string msg)   { Print(msg, Type::Warn);   g_countWarnings++; }
-        static void Error(std::string msg)  { Print(msg, Type::Error);  g_countErrors++;   }
+        static void Log(std::string msg)       { Print(msg, Type::Log);       }
+        static void VulkanLog(std::string msg) { Print(msg, Type::VulkanLog); }
+        static void Info(std::string msg)      { Print(msg, Type::Info);      }
+        static void Graph(std::string msg)     { Print(msg, Type::Graph);     }
+        static void Vulkan(std::string msg)    { Print(msg, Type::Vulkan);     }
+        static void Shader(std::string msg)    { Print(msg, Type::Shader);    }
+        static void Script(std::string msg)    { Print(msg, Type::Script);    }
+        static void System(std::string msg)    { Print(msg, Type::System);    }
+        static void Warn(std::string msg)      { Print(msg, Type::Warn);   g_countWarnings++; }
+        static void Error(std::string msg)     { Print(msg, Type::Error);  g_countErrors++;   }
 
         static void ScriptLog(std::string msg)  { Print(msg, Type::ScriptLog);  }
         static void ScriptError(std::string msg)  { Print(msg, Type::ScriptError);  }
