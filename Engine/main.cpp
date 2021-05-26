@@ -2,6 +2,10 @@
 // Created by Nikita on 29.12.2020.
 //
 
+#ifdef WIN32
+    #define VK_USE_PLATFORM_WIN32_KHR
+#endif
+
 #ifdef _DEBUG
 
 #else

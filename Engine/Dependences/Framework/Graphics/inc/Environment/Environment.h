@@ -137,10 +137,7 @@ namespace Framework::Graphics {
 
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { }
-        virtual SR_FORCE_INLINE void BeginRender() { }
-        virtual SR_FORCE_INLINE void EndRender() { }
         virtual SR_FORCE_INLINE void DrawFrame() { }
-        virtual SR_FORCE_INLINE void TestDrawing() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) { return glm::vec4(0); }

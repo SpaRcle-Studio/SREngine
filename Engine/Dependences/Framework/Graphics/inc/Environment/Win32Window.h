@@ -36,19 +36,10 @@ namespace Framework::Graphics {
         }
         Win32Window(Win32Window&) = delete;
         //Win32Window(const Win32Window&) = delete;
-    private:
-        void OnResized() {
-            RECT rect;
-            GetClientRect(m_hWnd, &rect);
-            this->m_width  = rect.right  - rect.left;
-            this->m_height = rect.bottom - rect.top;
-
-            this->m_callback_resize(this, GetWidth(), GetHeight());
-        }
     public:
         LRESULT CALLBACK realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             switch (msg) {
-                case (WM_WINDOWPOSCHANGED): {
+                /*case (WM_WINDOWPOSCHANGED): {
                     auto winPos = reinterpret_cast<PWINDOWPOS>(lParam);
                     //Helper::Debug::System(std::to_string(winPos->cx));
                     //Helper::Debug::System(std::to_string(winPos->cy));
@@ -59,7 +50,7 @@ namespace Framework::Graphics {
                     this->m_maximize = styles & WS_MAXIMIZE;
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
-                }
+                }*/
                 /*case (WM_SIZE):{
                     ImGui_ImplDX9_InvalidateDeviceObjects();
                     g_d3dpp.BackBufferWidth = LOWORD(lParam);
@@ -69,10 +60,44 @@ namespace Framework::Graphics {
                         IM_ASSERT(0);
                     ImGui_ImplDX9_CreateDeviceObjects();
                 }*/
-                case (WM_SIZING): {
+                /*case (WM_SIZING): {
                     OnResized();
                     return 0;
+                }*/
+                case (WM_WINDOWPOSCHANGED): {
+                    DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
+                    this->m_maximize = styles & WS_MAXIMIZE;
+
+                    return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
+                case WM_SIZE: {
+                    if ((wParam != SIZE_MINIMIZED)) {
+                        if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
+                            //Helper::Debug::Log("Win32Window::CallBack() : resize...");
+
+                            m_realWidth = LOWORD(lParam);
+                            m_realHeight = HIWORD(lParam);
+                            this->m_callback_resize(this, GetRealWidth(), GetRealHeight());
+                        }
+                    } else {
+                        m_realWidth = 0;
+                        m_realHeight = 0;
+                        this->m_callback_resize(this, GetRealWidth(), GetRealHeight());
+                    }
+                    return DefWindowProc(hwnd, msg, wParam, lParam);
+                }
+
+                /*case WM_SIZE: {
+                    if ((wParam != SIZE_MINIMIZED)) {
+                        if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
+                            this->m_realWidth = LOWORD(lParam);
+                            this->m_realHeight = HIWORD(lParam);
+                            //OnResized();
+                        }
+                    }
+                    break;
+                }*/
+
                 case(WM_DESTROY):
                     PostQuitMessage(NULL);
                     this->m_windowOpen = false;
@@ -82,7 +107,18 @@ namespace Framework::Graphics {
             }
         }
     private:
+        void Move(int x, int y) override {
+            if (m_maximize)
+                return;
 
+            RECT rect;
+            GetWindowRect(m_hWnd, &rect);
+
+            //! Я ненавижу ебаный WinAPI!!!!!!!!!!!!!!
+            MoveWindow(m_hWnd, x - 16 / 2, y - (31 - 12),
+                       (rect.right  - rect.left),
+                       (rect.bottom - rect.top), FALSE);
+        }
         /*void OnResize(unsigned __int16 width, unsigned __int16 height) {
             this->m_width = width;
             this->m_height = height;
@@ -108,6 +144,20 @@ namespace Framework::Graphics {
             UpdateWindow(m_hWnd);
         }*/
 
+        void Resize(unsigned int w, unsigned int h) override {
+            /*auto scr = GetScreenResolution(0);
+
+            w += 16;
+            h += 7;
+
+            int x = scr.x / 2 - w / 2;
+            int y = scr.y / 2 - h / 2;
+
+            SetWindowPos(m_hWnd, nullptr, x, y + 4, (int)w, (int)h, 0);*/
+
+            Helper::Debug::Error("Win32Window::Resize() : todo!");
+        }
+
         static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
                 return true;
@@ -130,20 +180,12 @@ namespace Framework::Graphics {
 
         }
 
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept override {
-            //RECT rect;
-            //GetWindowRect(m_hWnd, &rect);
-            //return (rect.right - rect.left) - 16;
-            return m_width - 16;
-        }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHeight() const noexcept override {
-            //td::cout << GetBorderHeight(m_hWnd) << std::endl;
-            //RECT rect;
-            //GetWindowRect(m_hWnd, &rect);
-            //return (rect.bottom - rect.top) - 8;// + 32;
-            int h = (int)m_height - (m_maximize ? 16 : 7);
-            return h >= 0 ? h : 0;
-        }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetRealWidth()  const noexcept override { return m_realWidth;  }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetRealHeight() const noexcept override { return m_realHeight; }
+
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept override { return m_width;  }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHeight() const noexcept override { return m_height; }
+
         Helper::Math::Vector2 GetScreenResolution(unsigned int monitorID) const noexcept override {
             RECT size;
             SystemParametersInfo(SPI_GETWORKAREA, 0, &size, 0);
@@ -151,35 +193,14 @@ namespace Framework::Graphics {
 
             return { (double)size.right, (double) size.bottom };
         }
-        void Resize(unsigned int w, unsigned int h) override {
-            auto scr = GetScreenResolution(0);
 
-            w += 16;
-            h += 7;
-
-            int x = scr.x / 2 - w / 2;
-            int y = scr.y / 2 - h / 2;
-
-            SetWindowPos(m_hWnd, nullptr, x, y + 4, (int)w, (int)h, 0);
-        }
-        void Move(int x, int y) override {
-            if (m_maximize)
-                return;
-
-            RECT rect;
-            GetWindowRect(m_hWnd, &rect);
-
-            //! Я ненавижу ебаный WinAPI!!!!!!!!!!!!!!
-            MoveWindow(m_hWnd, x - 16 / 2, y - (31 - 12),
-                       (rect.right  - rect.left),
-                       (rect.bottom - rect.top), FALSE);
-        }
         bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen, bool resizable) override {
-            this->m_width  = sizeX;
-            this->m_height = sizeY;
+            this->m_realWidth  = sizeX;
+            this->m_realHeight = sizeY;
 
             this->m_hInst = GetModuleHandleA(nullptr);
 
+            /*
             WNDCLASSEX wcex     = {};
             wcex.cbSize         = sizeof(WNDCLASSEX);
             wcex.style          = CS_HREDRAW | CS_VREDRAW;
@@ -239,8 +260,65 @@ namespace Framework::Graphics {
 
             ShowWindow(m_hWnd, SW_SHOWNORMAL);
             //ShowWindow(m_hWnd, SW_SHOWMAXIMIZED);
-            this->m_windowOpen = true;
+             */
 
+            WNDCLASSEX wndClass;
+
+            wndClass.cbSize = sizeof(WNDCLASSEX);
+            wndClass.style = CS_HREDRAW | CS_VREDRAW;
+            wndClass.lpfnWndProc = WndProc;
+            wndClass.cbClsExtra = 0;
+            wndClass.cbWndExtra = 0;
+            wndClass.hInstance = m_hInst;
+            wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+            wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+            wndClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+            wndClass.lpszMenuName = NULL;
+            wndClass.lpszClassName = "SREngineWinClass";
+            wndClass.hIconSm = LoadIcon(NULL, IDI_WINLOGO);
+
+            if (!RegisterClassEx(&wndClass))
+                return false;
+
+            DWORD dwExStyle; dwExStyle = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;
+            DWORD dwStyle;   dwStyle = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+
+            {
+                RECT windowRect;
+                windowRect.left = 0L;
+                windowRect.top = 0L;
+                windowRect.right = sizeX;
+                windowRect.bottom = sizeY;
+
+                AdjustWindowRectEx(&windowRect, dwStyle, FALSE, dwExStyle);
+
+                this->m_width  = windowRect.right - windowRect.left;
+                this->m_height = windowRect.bottom - windowRect.top;
+            }
+
+            m_hWnd = CreateWindowEx(0,
+                                    "SREngineWinClass",
+                                    name,
+                                    dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+                                    0,
+                                    0,
+                                    m_width,
+                                    m_height,
+                                    NULL,
+                                    NULL,
+                                    m_hInst,
+                                    NULL);
+
+            if (!this->m_hWnd)
+                return false;
+
+            SetWindowLongPtr(m_hWnd, GWLP_USERDATA, (LONG_PTR)this);
+
+            ShowWindow(m_hWnd, SW_SHOW);
+            SetForegroundWindow(m_hWnd);
+            SetFocus(m_hWnd);
+
+            this->m_windowOpen = true;
             this->m_hDC = GetDC(m_hWnd);
 
             return true;

@@ -28,13 +28,59 @@
 
 namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
+    protected:
+        void Render() override {
+            if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
+                this->m_hasErrors = !this->ResizeWindow();
+
+            m_submitInfo.commandBufferCount = 1;
+            m_submitInfo.pCommandBuffers    = &m_drawCmdBuffs[m_currentBuffer];
+
+            // Submit to queue
+            auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);
+            if (result != VK_SUCCESS) {
+                VK_ERROR("renderFunction() : failed to queue submit!");
+                return;
+            }
+
+            if (this->SubmitFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
+                this->m_hasErrors = !this->ResizeWindow();
+        }
     public:
         bool OnResize() override {
+            vkQueueWaitIdle(m_device->GetGraphicsQueue());
+            vkDeviceWaitIdle(*m_device);
+
             return true;
         }
 
         bool BuildCmdBuffers() override {
+            VkCommandBufferBeginInfo cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
+
+            VkClearValue clearValues[2] {
+                    { .color = {{0.5f, 0.5f, 0.5f, 1.0f}} },
+                    { .depthStencil = { 1.0f, 0 } }
+            };
+
+            auto renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(
+                    m_swapchain->GetSurfaceWidth(), m_swapchain->GetSurfaceHeight(), m_renderPass.m_self,
+                    VK_NULL_HANDLE, &clearValues[0], 2);
+
+            for (int i = 0; i < 3; i++) {
+                renderPassBI.framebuffer = m_frameBuffers[i];
+
+                vkBeginCommandBuffer(m_drawCmdBuffs[i], &cmdBufInfo);
+                vkCmdBeginRenderPass(m_drawCmdBuffs[i], &renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+
+                vkCmdEndRenderPass(m_drawCmdBuffs[i]);
+                vkEndCommandBuffer(m_drawCmdBuffs[i]);
+            }
+
             return true;
+        }
+
+        bool OnComplete() override {
+            return BuildCmdBuffers();
         }
 
         bool Destroy() override {
@@ -57,14 +103,19 @@ namespace Framework::Graphics {
 
         const std::vector<const char*> m_instanceExtensions = {
                 VK_KHR_SURFACE_EXTENSION_NAME,
-                VK_KHR_WIN32_SURFACE_EXTENSION_NAME
+#ifdef WIN32
+                VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
+#endif
+#ifndef SR_RELEASE
+                VK_EXT_DEBUG_UTILS_EXTENSION_NAME
+#endif
         };
 
         const std::vector<const char*> m_deviceExtensions = {
                 VK_KHR_SWAPCHAIN_EXTENSION_NAME
         };
 
-#ifdef NDEBUG
+#ifdef SR_RELEASE
         const bool m_enableValidationLayers = false;
 #else
         const bool m_enableValidationLayers = true;
@@ -75,10 +126,17 @@ namespace Framework::Graphics {
     public:
         bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool Init(int swapInterval) override;
+        bool PostInit() override;
+
+        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const noexcept override { return this->m_kernel->GetDevice()->GetName(); }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const noexcept override { return "Vulkan"; }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const noexcept override { return "VK_API_VERSION_1_2"; }
 
         bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
+
+        SR_FORCE_INLINE void DrawFrame() override { this->m_kernel->NextFrame(); }
 
         [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override {
             return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };

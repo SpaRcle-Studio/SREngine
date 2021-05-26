@@ -36,6 +36,9 @@ namespace Framework::Graphics {
         unsigned int m_width  = 0;
         unsigned int m_height = 0;
 
+        unsigned int m_realWidth  = 0;
+        unsigned int m_realHeight = 0;
+
         unsigned int m_posX   = 0;
         unsigned int m_posY   = 0;
 
@@ -66,6 +69,9 @@ namespace Framework::Graphics {
                 unsigned int sizeX, unsigned int sizeY,
                 bool fullscreen, bool resizable) { return false; }
     public:
+        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetRealWidth()  const noexcept { return 0; }
+        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetRealHeight() const noexcept { return 0; }
+
         [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetWidth()  const noexcept { return 0; }
         [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetHeight() const noexcept { return 0; }
     public:
