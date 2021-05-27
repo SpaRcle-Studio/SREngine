@@ -10,7 +10,7 @@
   * tinyobjloader
   * stbi
   * json
-  * Vulkan
+  * EvoVulkan
 
 ## Exists systems
   * Math
