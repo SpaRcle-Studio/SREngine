@@ -26,6 +26,9 @@
 #include <Types/Rigidbody.h>
 #include <Core/PhysEngine.h>
 
+#include <Render/Implementations/OpenGLRender.h>
+#include <Render/Implementations/VulkanRender.h>
+
 using namespace Framework;
 using namespace Framework::Scripting;
 using namespace Framework::Helper;
@@ -56,9 +59,9 @@ int main() {
 
     // Register all components
     {
-        Component::RegisterComponent("Mesh", []() -> Component* { return new Mesh(); });
+        Component::RegisterComponent("Mesh",      []() -> Component* { return new Mesh();      });
         Component::RegisterComponent("Rigidbody", []() -> Rigidbody* { return new Rigidbody(); });
-        Component::RegisterComponent("Camera", []() -> Camera* { return new Camera(); });
+        Component::RegisterComponent("Camera",    []() -> Camera*    { return new Camera();    });
     }
 
     //Environment::Set(new OpenGL());
@@ -66,7 +69,15 @@ int main() {
 
     //Environment::Get()->SetPreferredDevice(1);
 
-    auto *render = new Render();
+    Render *render = nullptr;
+    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
+        render = new Impl::OpenGLRender();
+    else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan) {
+        render = new Impl::VulkanRender();
+    } else {
+        Helper::Debug::Error("FATAL: render is not support this pipeline!");
+        return -1000;
+    }
 
     auto *window = new Window(
             "SpaRcle Engine",

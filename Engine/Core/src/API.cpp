@@ -338,7 +338,16 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Mesh>("Mesh")
-                    .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(std::string name, unsigned int id)>([](std::string name, unsigned int id) -> Graphics::Mesh* {
+                    .addStaticFunction("LoadWithIndices", static_cast<Graphics::Mesh*(*)(const std::string& name, unsigned int id)>([](const std::string& name, unsigned int id) -> Graphics::Mesh* {
+                        auto meshes = Mesh::Load(name, true);
+                        if (id >= meshes.size()) {
+                            Debug::ScriptError("Script(InternalError) : An error occurred while loading the \""+name+"\" model: \n\tIndex went out of model size. "+
+                                               std::to_string(id) + " >= "+std::to_string(meshes.size()));
+                            return nullptr;
+                        }
+                        return meshes[id];
+                    }))
+                    .addStaticFunction("Load", static_cast<Graphics::Mesh*(*)(const std::string& name, unsigned int id)>([](const std::string& name, unsigned int id) -> Graphics::Mesh* {
                         auto meshes = Mesh::Load(name);
                         if (id >= meshes.size()) {
                             Debug::ScriptError("Script(InternalError) : An error occurred while loading the \""+name+"\" model: \n\tIndex went out of model size. "+

@@ -24,6 +24,8 @@
 #include <ResourceManager/ResourceManager.h>
 #include <FileSystem/FileSystem.h>
 
+#include <Environment/Vulkan/VulkanMemory.h>
+
 #include <EvoVulkan/VulkanKernel.h>
 
 namespace Framework::Graphics {
@@ -122,7 +124,7 @@ namespace Framework::Graphics {
 #endif
     public:
         [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const noexcept override { return "Vulkan"; }
-        [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()     const noexcept override { return PipeLine::Vulkan; }
     public:
         bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool Init(int swapInterval) override;
@@ -131,27 +133,28 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const noexcept override { return this->m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const noexcept override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const noexcept override { return "VK_API_VERSION_1_2"; }
+        [[nodiscard]] glm::vec2 GetWindowSize()                 const noexcept override { return { this->m_basicWindow->GetRealWidth(), this->m_basicWindow->GetRealHeight() }; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const noexcept override { return m_basicWindow->IsWindowOpen(); }
 
         bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
 
         SR_FORCE_INLINE void DrawFrame() override { this->m_kernel->NextFrame(); }
-
-        [[nodiscard]] glm::vec2 GetWindowSize() const noexcept override {
-            return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };
-        }
-
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen() const noexcept override {
-             return m_basicWindow->IsWindowOpen();
-        }
-
-        SR_FORCE_INLINE void PollEvents() const noexcept override {
-            this->m_basicWindow->PollEvents();
-        }
+        SR_FORCE_INLINE void PollEvents() const noexcept override { this->m_basicWindow->PollEvents(); }
 
         void SetWindowPosition(int x, int y) override;
         void SetWindowSize(unsigned int w, unsigned int h) override;
+    public:
+        SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
+
+
+            return false;
+        }
+        SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)  const noexcept override {
+            return false;
+        }
+
     };
 }
 

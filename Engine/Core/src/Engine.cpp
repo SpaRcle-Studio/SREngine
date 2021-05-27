@@ -147,6 +147,11 @@ void Framework::Engine::Await() {
 
         Helper::InputSystem::Check();
 
+        if (InputSystem::IsDown(KeyCode::BackSpace)) {
+            Debug::System("The closing key was pressed!");
+            break;
+        }
+
         if (m_time->Begin()){
             m_compiler->FixedUpdateAll();
 

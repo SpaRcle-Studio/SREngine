@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local scene; -- Scene*
+local scene;  -- Scene*
 local window; -- Window*
 local render; -- Render*
 
@@ -29,14 +29,14 @@ end;
 function Start()
     Debug.Log("Starting main engine script...");
 
-    --window:Resize(1600, 900);
+    window:Resize(480, 480);
+    window:CentralizeWindow();
 
-    --window:CentralizeWindow();
+    local mesh = Mesh.LoadWithIndices("engine/cube.obj", 0);
+    render:RegisterMesh(mesh);
 
-    --window:SetFullScreen(false);
-
-    --local mesh = Mesh.Load("engine/cube.obj", 0);
-    --render:RegisterMesh(mesh);
+    local cube = scene:Instance("Cube");
+    cube:AddComponent(mesh:Base());
 
     collectgarbage() -- collect memory
 end;

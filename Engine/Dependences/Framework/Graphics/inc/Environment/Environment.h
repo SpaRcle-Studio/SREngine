@@ -44,6 +44,8 @@ namespace Framework::Graphics {
 
         __int16         m_preferredDevice     = -1;
         unsigned __int8 m_currentDrawingStage = 0;
+
+        bool            m_needReBuild         = true;
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -52,13 +54,18 @@ namespace Framework::Graphics {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
-        void SetPreferredDevice(unsigned __int16 id) {
-            m_preferredDevice = (__int16)id;
-        }
-        [[nodiscard]] SR_FORCE_INLINE bool HasErrors() const noexcept { return m_hasErrors; }
-        [[nodiscard]] Types::WindowFormat* GetWindowFormat() const noexcept {
-            return this->m_winFormat;
-        }
+        void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
+        void SetBuildState(const bool& isBuild)      { m_needReBuild = !isBuild;        }
+
+        [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()           const noexcept { return m_needReBuild;     }
+        [[nodiscard]] SR_FORCE_INLINE bool HasErrors()               const noexcept { return m_hasErrors;       }
+        [[nodiscard]] Types::WindowFormat* GetWindowFormat()         const noexcept { return this->m_winFormat; }
+        [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()  const noexcept { return m_basicWindow;     }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec2 GetScreenSize()      const noexcept { return m_screenSize;      }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()    const noexcept { return false;             }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()   const noexcept { return false;             }
+        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept { return PipeLine::Unknown; }
+
         bool InitWindowFormat(const Types::WindowFormat& windowFormat) {
             if (m_winFormat)
                 return false;
@@ -68,8 +75,8 @@ namespace Framework::Graphics {
                 return true;
             }
         }
-        [[nodiscard]] inline BasicWindow* GetBasicWindow() const { return m_basicWindow; }
-        inline static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
+
+        SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
             g_scrollEvents.push_back(fun);
             g_mutex.unlock();
@@ -93,19 +100,14 @@ namespace Framework::Graphics {
         }
 
         inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = std::move(callback); }
-
-        [[nodiscard]] SR_FORCE_INLINE glm::vec2 GetScreenSize() const noexcept { return m_screenSize; }
     public:
         virtual bool PreInitGUI(const std::string& fontPath) { return false; };
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }
         virtual bool BeginDrawGUI() { return false; }
         virtual void EndDrawGUI()   { }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport() const noexcept { return false; }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport() const noexcept { return false; }
 
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetPipeLineName() const noexcept = 0;
-        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept { return PipeLine::Unknown; }
 
         virtual unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 
@@ -192,7 +194,10 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(unsigned int& VAO) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateUBO(unsigned int& IBO, uint32_t uboSize)    const noexcept { return false; }
 
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept { return false; }
@@ -200,7 +205,10 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void DrawSkybox(const unsigned int&  VAO, const unsigned int& CubeMap) const noexcept { }
         virtual SR_FORCE_INLINE void DrawQuad(const unsigned int&  VAO) const noexcept { }
 
-        virtual SR_FORCE_INLINE void BindVAO(const unsigned int&  VAO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindVAO(const unsigned int& VAO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindUBO(const unsigned int& UBO) const noexcept { }
         virtual SR_FORCE_INLINE void Draw6Triangles() const noexcept { }
 
         virtual bool FreeMesh(unsigned int VAO) const noexcept { return false; }

@@ -70,27 +70,27 @@ namespace Framework::Graphics{
         auto window = m_basicWindow;
 
         auto createSurf = [window](const VkInstance& instance) -> VkSurfaceKHR {
-//#ifdef VK_USE_PLATFORM_WIN32_KHR
-            //if (window->GetType() == BasicWindow::Type::Win32) {
+#ifdef WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
+            if (window->GetType() == BasicWindow::Type::Win32) {
                 VkWin32SurfaceCreateInfoKHR surfaceInfo = {};
                 surfaceInfo.sType     = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
-                surfaceInfo.pNext     = NULL;
+                surfaceInfo.pNext     = nullptr;
                 surfaceInfo.flags     = 0;
                 surfaceInfo.hinstance = dynamic_cast<Win32Window *>(window)->GetHINSTANCE();
                 surfaceInfo.hwnd      = dynamic_cast<Win32Window *>(window)->GetHWND();
 
                 VkSurfaceKHR surface = VK_NULL_HANDLE;
-                VkResult result = vkCreateWin32SurfaceKHR(instance, &surfaceInfo, NULL, &surface);
+                VkResult result = vkCreateWin32SurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
                 if (result != VK_SUCCESS)
                     return VK_NULL_HANDLE;
                 else
                     return surface;
-            //}
-           // else {
-            //    Helper::Debug::Error("Vulkan::Init() : window is not support this architecture!");
-            //    return VK_NULL_HANDLE;
-            //}
-//#endif
+            }
+            else {
+                Helper::Debug::Error("Vulkan::Init() : window is not support this architecture!");
+                return VK_NULL_HANDLE;
+            }
+#endif
         };
 
         if (!m_kernel->Init(createSurf, m_deviceExtensions, true, swapInterval > 0)) {

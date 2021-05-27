@@ -210,6 +210,15 @@ void Framework::Graphics::Window::Thread() {
                 this->PollEvents();
                 this->m_render->PollEvents();
 
+                if (m_env->IsNeedReBuild()) {
+                    this->m_render->DrawGeometry();
+                    this->m_render->DrawSkybox();
+
+                    m_env->SetBuildState(true);
+
+                    continue;
+                }
+
                 this->m_env->DrawFrame();
             }
 

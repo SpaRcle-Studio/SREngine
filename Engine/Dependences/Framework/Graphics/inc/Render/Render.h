@@ -29,14 +29,16 @@ namespace Framework::Graphics {
     class Camera;
 
     class Render {
-    public:
+    protected:
         Render();
-    private:
+    public:
+        Render(const Render&) = delete;
+    protected:
         volatile bool               m_isCreate                          = false;
         volatile bool               m_isInit                            = false;
         volatile bool               m_isRun                             = false;
         volatile bool               m_isClose                           = false;
-    private:
+    protected:
         Environment*                m_env                               = nullptr;
 
         Window*                     m_window                            = nullptr;
@@ -91,8 +93,6 @@ namespace Framework::Graphics {
 
         const PipeLine              m_pipeLine                          = PipeLine::Unknown;
     public:
-        bool DrawSettingsPanel();
-
         [[nodiscard]] ManipulationTool* GetManipulationTool() const {
             return this->m_manipulate;
         }
@@ -165,13 +165,13 @@ namespace Framework::Graphics {
     public:
         /** \brief Check all render events. For example: new meshes, remove old meshes */
         void PollEvents()               noexcept;
-        bool DrawGeometry()             noexcept;
-        bool DrawSkybox()               noexcept;
-        void DrawGrid()                 noexcept;
-        void DrawSingleColors()         noexcept;
-        bool DrawTransparentGeometry()  noexcept;
-
-
+    public:
+        virtual bool DrawGeometry()             noexcept = 0;
+        virtual bool DrawSkybox()               noexcept = 0;
+        virtual void DrawGrid()                 noexcept = 0;
+        virtual void DrawSingleColors()         noexcept = 0;
+        virtual bool DrawTransparentGeometry()  noexcept = 0;
+        virtual bool DrawSettingsPanel()        noexcept = 0;
     };
 }
 

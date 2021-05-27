@@ -31,7 +31,7 @@ namespace Framework::Graphics {
     private:
         ~Win32Window() = default;
     public:
-        Win32Window(PipeLine pipeLine) : BasicWindow(pipeLine) {
+        Win32Window(PipeLine pipeLine) : BasicWindow(pipeLine, Type::Win32) {
 
         }
         Win32Window(Win32Window&) = delete;
@@ -115,7 +115,8 @@ namespace Framework::Graphics {
             GetWindowRect(m_hWnd, &rect);
 
             //! Я ненавижу ебаный WinAPI!!!!!!!!!!!!!!
-            MoveWindow(m_hWnd, x - 16 / 2, y - (31 - 12),
+            //MoveWindow(m_hWnd, x - 16 / 2, y - (31 - 12),
+            MoveWindow(m_hWnd, x - (16 / 2) - 1, y - (39 - 4),
                        (rect.right  - rect.left),
                        (rect.bottom - rect.top), FALSE);
         }
@@ -155,7 +156,20 @@ namespace Framework::Graphics {
 
             SetWindowPos(m_hWnd, nullptr, x, y + 4, (int)w, (int)h, 0);*/
 
-            Helper::Debug::Error("Win32Window::Resize() : todo!");
+            //Helper::Debug::Error("Win32Window::Resize() : todo!");
+
+            RECT rec;
+            rec.left = 0L;
+            rec.top = 0L;
+            rec.right = w + 8;
+            rec.bottom = h;
+
+            AdjustWindowRectEx(&rec, m_dwStyle, FALSE, m_dwExStyle);
+
+            this->m_width  = rec.right  - rec.left;
+            this->m_height = rec.bottom - rec.top;
+
+            SetWindowPos(m_hWnd, NULL, rec.left, rec.top, rec.right, rec.bottom, SWP_NOMOVE);
         }
 
         static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -172,6 +186,8 @@ namespace Framework::Graphics {
         HDC m_hDC  = nullptr;
         HGLRC m_hRC = nullptr;
         HINSTANCE m_hInst = nullptr;
+        DWORD     m_dwExStyle = NULL;
+        DWORD     m_dwStyle   = NULL;
     public:
         [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const noexcept { return m_hInst; }
         [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const noexcept { return m_hWnd; }
@@ -200,68 +216,6 @@ namespace Framework::Graphics {
 
             this->m_hInst = GetModuleHandleA(nullptr);
 
-            /*
-            WNDCLASSEX wcex     = {};
-            wcex.cbSize         = sizeof(WNDCLASSEX);
-            wcex.style          = CS_HREDRAW | CS_VREDRAW;
-            wcex.lpfnWndProc    = WndProc;
-            wcex.hInstance      = m_hInst;
-            wcex.hIcon          = LoadIcon(m_hInst, MAKEINTRESOURCE(IDI_APPLICATION));
-            wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-            wcex.hCursor        = LoadCursor(NULL, IDC_ARROW);
-            wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW + 1);
-            wcex.lpszClassName  = TEXT("MyWndClass");
-
-            if (!RegisterClassEx(&wcex))
-                return false;
-
-            this->m_hWnd = CreateWindowA(
-                    TEXT("MyWndClass"),
-                    name,
-                    resizable ? WS_OVERLAPPEDWINDOW : WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME,
-                    CW_USEDEFAULT,
-                    CW_USEDEFAULT,
-                    m_width,
-                    m_height,
-                    nullptr,
-                    nullptr,
-                    m_hInst,
-                    nullptr);
-
-            if (!this->m_hWnd)
-                return false;
-
-            this->Resize(m_width, m_height);
-
-            SetWindowLongPtr(m_hWnd, GWLP_USERDATA, (LONG_PTR)this);
-
-            if (fullscreen)
-            {
-                // Set new window style and size.
-                SetWindowLong(m_hWnd, GWL_STYLE,
-                              GetWindowLong(m_hWnd, GWL_STYLE) & ~(WS_CAPTION | WS_THICKFRAME));
-                SetWindowLong(m_hWnd, GWL_EXSTYLE,
-                              GetWindowLong(m_hWnd, GWL_EXSTYLE) & ~(WS_EX_DLGMODALFRAME |
-                                                              WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
-
-                MONITORINFO monitor_info;
-                monitor_info.cbSize = sizeof(monitor_info);
-                GetMonitorInfo(MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTONEAREST),
-                               &monitor_info);
-                RECT rect(monitor_info.rcMonitor);
-
-                LONG width = rect.right - rect.left;
-                LONG height = rect.bottom - rect.top;
-
-                SetWindowPos(m_hWnd, NULL, 0, 0,
-                             width, height,
-                             SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
-            }
-
-            ShowWindow(m_hWnd, SW_SHOWNORMAL);
-            //ShowWindow(m_hWnd, SW_SHOWMAXIMIZED);
-             */
-
             WNDCLASSEX wndClass;
 
             wndClass.cbSize = sizeof(WNDCLASSEX);
@@ -280,8 +234,8 @@ namespace Framework::Graphics {
             if (!RegisterClassEx(&wndClass))
                 return false;
 
-            DWORD dwExStyle; dwExStyle = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;
-            DWORD dwStyle;   dwStyle = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+            m_dwExStyle = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;
+            m_dwStyle = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
 
             {
                 RECT windowRect;
@@ -290,7 +244,7 @@ namespace Framework::Graphics {
                 windowRect.right = sizeX;
                 windowRect.bottom = sizeY;
 
-                AdjustWindowRectEx(&windowRect, dwStyle, FALSE, dwExStyle);
+                AdjustWindowRectEx(&windowRect, m_dwStyle, FALSE, m_dwExStyle);
 
                 this->m_width  = windowRect.right - windowRect.left;
                 this->m_height = windowRect.bottom - windowRect.top;
@@ -299,7 +253,7 @@ namespace Framework::Graphics {
             m_hWnd = CreateWindowEx(0,
                                     "SREngineWinClass",
                                     name,
-                                    dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+                                    m_dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
                                     0,
                                     0,
                                     m_width,

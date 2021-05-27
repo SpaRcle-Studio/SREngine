@@ -113,7 +113,9 @@ namespace Framework::Graphics::Types {
         volatile bool               m_isCalculated          = false;
         unsigned char               m_toolID                = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
-        unsigned int                m_VAO                   = 0;
+        int                         m_VAO                   = -1;
+        int                         m_VBO                   = -1;
+        int                         m_IBO                   = -1;
 
         std::vector<Vertex>			m_vertices				= std::vector<Vertex>();
         std::vector<unsigned int>	m_indices				= std::vector<unsigned int>();

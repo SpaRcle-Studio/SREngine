@@ -222,8 +222,7 @@ bool Mesh::Calculate() {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Mesh::Calculate() : calculating \""+ m_geometry_name +"\"...");
 
-    unsigned int VBO = 0;
-    if (!this->m_env->CalculateMesh(VBO, m_VAO, m_vertices, m_countVertices)) {
+    if (!this->m_env->CalculateVAO(reinterpret_cast<unsigned int &>(m_VAO), m_vertices, m_countVertices)) {
         Debug::Error("Mesh::Calculate() : failed calculate \"" + m_geometry_name + "\" mesh!");
         m_mutex.unlock();
         return false;

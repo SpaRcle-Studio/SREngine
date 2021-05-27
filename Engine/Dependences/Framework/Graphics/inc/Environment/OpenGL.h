@@ -316,9 +316,11 @@ namespace Framework::Graphics {
 
             return true;
         }
-        SR_FORCE_INLINE bool CalculateMesh(unsigned int& VBO, unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept override{
+        SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept override{
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
+
+            unsigned int VBO = 0;
 
             glGenVertexArrays(1, (GLuint*)&VAO);
             glGenBuffers(1, (GLuint*)&VBO);
