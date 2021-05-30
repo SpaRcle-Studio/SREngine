@@ -244,7 +244,9 @@ namespace Framework::Graphics {
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions = {}) const noexcept override;
+                const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
+                SRShaderCreateInfo shaderCreateInfo = {}) const noexcept override;
         SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
             //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
             glDeleteProgram(shaderProgram);

@@ -11,7 +11,7 @@
 #include <Window/Window.h>
 #include <Utils/StringUtils.h>
 
-bool Framework::Graphics::Render::Create(Window* window) { //, Camera* camera
+bool Framework::Graphics::Render::Create(Window* window) {
     if (m_isCreate){
         Debug::Error("Render::Create() : render already create!");
         return false;
@@ -22,7 +22,18 @@ bool Framework::Graphics::Render::Create(Window* window) { //, Camera* camera
     this->m_window = window;
 
     {
-        this->m_geometryShader      = new Shader(this, "engine/geometry");
+        this->m_geometryShader = new Shader(this, "engine/geometry");
+        this->m_geometryShader->SetVertex(
+                { Vertices::Model3DVertex::GetDescription() },
+                Vertices::Model3DVertex::GetAttributes());
+        this->m_geometryShader->SetCreateInfo({
+            .polygonMode  = PolygonMode::Fill,
+            .cullMode     = CullMode::Back,
+            .depthCompare = DepthCompare::LessOrEqual,
+            .blendEnabled = true,
+            .depthEnabled = true
+        });
+
         this->m_flatGeometryShader  = new Shader(this, "engine/flatGeometry");
 
         Shader::SetStandardGeometryShader(m_geometryShader);
@@ -47,22 +58,6 @@ bool Framework::Graphics::Render::Init() {
     }
 
     Debug::Graph("Render::Init() : initializing render...");
-
-    {
-        //if (!m_geometryShader->Init()) {
-        //    Debug::Error("Render::Init() : failed init geometry shader!");
-        //    return false;
-        //}
-        //if (!m_skyboxShader->Init()) {
-        //    Debug::Error("Render::Init() : failed init skybox shader!");
-        //    return false;
-        //}
-
-        /*if (!m_stencilShader->Init()) {
-            Debug::Error("Render::Init() : failed init stencil shader!");
-            return false;
-        }*/
-    }
 
     m_isInit = true;
 

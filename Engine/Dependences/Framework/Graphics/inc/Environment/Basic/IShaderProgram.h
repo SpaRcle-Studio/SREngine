@@ -9,16 +9,30 @@
 #include <Utils/StringUtils.h>
 
 namespace Framework::Graphics {
-    enum class ShaderType {
-        Unknown, Vertex, Fragment, Tesselation
+    enum class ShaderType    { Unknown, Vertex, Fragment, Tesselation };
+    enum class LayoutBinding { Unknown, Uniform, Sampler2D            };
+    enum class PolygonMode   { Fill, Line, Point                      };
+    enum class CullMode      { None, Front, Back, FrontAndBack        };
+
+    enum class DepthCompare  {
+        Never,
+        Less,
+        Equal,
+        LessOrEqual,
+        Greater,
+        NotEqual,
+        GreaterOrEqual,
+        Always
     };
 
-    enum class LayoutBinding {
-        Unknown, Uniform, Sampler2D
-    };
+    struct SRShaderCreateInfo {
+        PolygonMode  polygonMode;
+        CullMode     cullMode;
+        DepthCompare depthCompare;
 
-    //class IShaderProgram {
-    //};
+        bool blendEnabled;
+        bool depthEnabled;
+    };
 
     static LayoutBinding GetBindingType(const std::string& line) {
         if (Helper::StringUtils::Contains(line, "uniform"))

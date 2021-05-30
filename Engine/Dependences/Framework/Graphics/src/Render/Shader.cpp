@@ -71,9 +71,12 @@ bool Framework::Graphics::Shader::Link() {
 
     Debug::Shader("Shader::Link() : linking \""+this->m_name+"\" shader...");
 
-    auto verDescrs = Vertices::Model3DVertex::GetDescription();
-
-    if (!m_env->LinkShader(&m_shaderProgram, &m_shaderTempData, verDescrs)) {
+    if (!m_env->LinkShader(
+            &m_shaderProgram,
+            &m_shaderTempData,
+            this->m_verticesDescription,
+            this->m_verticesAttributes,
+            this->m_shaderCreateInfo)) {
         Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
         return false;
     }
@@ -125,8 +128,27 @@ void Framework::Graphics::Shader::Free() {
     delete this;
 }
 
-bool Framework::Graphics::Shader::SetVertexDescriptions(
-        const std::vector<std::pair<Vertices::Attribute, size_t>> &descriptions) {
-    return false;
+bool Framework::Graphics::Shader::SetVertex(
+        const std::vector<SR_VERTEX_DESCRIPTION>& descriptions,
+        const std::vector<std::pair<Vertices::Attribute, size_t>> &attributes) {
+    if (m_isInit) {
+        Helper::Debug::Error("Shader::SetVertexDescriptions() : shader already initialized!");
+        return false;
+    } else {
+        this->m_verticesDescription = descriptions;
+        this->m_verticesAttributes  = attributes;
+    }
+
+    return true;
+}
+
+bool Framework::Graphics::Shader::SetCreateInfo(Framework::Graphics::SRShaderCreateInfo shaderCreateInfo) {
+    if (m_isInit) {
+        Helper::Debug::Error("Shader::SetCreateInfo() : shader already initialized!");
+        return false;
+    } else
+        this->m_shaderCreateInfo = shaderCreateInfo;
+
+    return true;
 }
 

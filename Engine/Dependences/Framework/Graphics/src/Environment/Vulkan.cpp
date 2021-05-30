@@ -28,19 +28,19 @@ namespace Framework::Graphics{
             }
         }
 
-        static std::vector<VkVertexInputAttributeDescription> AbstractDescriptionsToVkDescriptions(
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& descriptions)
+        static std::vector<VkVertexInputAttributeDescription> AbstractAttributesToVkAttributes(
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& attributes)
         {
             auto vkDescrs = std::vector<VkVertexInputAttributeDescription>();
 
-            for (uint32_t i = 0; i < descriptions.size(); i++) {
-                auto format = AttributeToVkFormat(descriptions[i].first);
+            for (uint32_t i = 0; i < attributes.size(); i++) {
+                auto format = AttributeToVkFormat(attributes[i].first);
                 if (format == VK_FORMAT_UNDEFINED) {
                     Helper::Debug::Error("VulkanTools::AbstractDescriptionsToVkDescriptions() : unknown attribute!");
                     return { };
                 }
 
-                vkDescrs.emplace_back(EvoVulkan::Tools::Initializers::VertexInputAttributeDescription(0, i, format, descriptions[i].second));
+                vkDescrs.emplace_back(EvoVulkan::Tools::Initializers::VertexInputAttributeDescription(0, i, format, attributes[i].second));
             }
 
             return vkDescrs;
@@ -53,6 +53,36 @@ namespace Framework::Graphics{
             for (const auto& a : modules)
                 abstract.emplace_back(std::pair(a.first, VkShaderStageToShaderType(a.second)));
             return abstract;
+        }
+
+        static VkPolygonMode AbstractPolygonModeToVk(PolygonMode polygonMode) {
+            switch (polygonMode) {
+                case PolygonMode::Fill:  return VK_POLYGON_MODE_FILL;
+                case PolygonMode::Line:  return VK_POLYGON_MODE_LINE;
+                case PolygonMode::Point: return VK_POLYGON_MODE_POINT;
+            }
+        }
+
+        static VkCullModeFlagBits AbstractCullModeToVk(CullMode cullMode) {
+            switch (cullMode) {
+                case CullMode::None:         return VK_CULL_MODE_NONE;
+                case CullMode::Front:        return VK_CULL_MODE_FRONT_BIT;
+                case CullMode::Back:         return VK_CULL_MODE_BACK_BIT;
+                case CullMode::FrontAndBack: return VK_CULL_MODE_FRONT_AND_BACK;
+            }
+        }
+
+        static VkCompareOp AbstractDepthOpToVk(DepthCompare depthCompare) {
+            switch (depthCompare) {
+                case DepthCompare::Never:          return VK_COMPARE_OP_NEVER;
+                case DepthCompare::Less:           return VK_COMPARE_OP_LESS;
+                case DepthCompare::Equal:          return VK_COMPARE_OP_EQUAL;
+                case DepthCompare::LessOrEqual:    return VK_COMPARE_OP_LESS_OR_EQUAL;
+                case DepthCompare::Greater:        return VK_COMPARE_OP_GREATER;
+                case DepthCompare::NotEqual:       return VK_COMPARE_OP_NOT_EQUAL;
+                case DepthCompare::GreaterOrEqual: return VK_COMPARE_OP_GREATER_OR_EQUAL;
+                case DepthCompare::Always:         return VK_COMPARE_OP_ALWAYS;
+            }
         }
     }
 
@@ -290,7 +320,9 @@ namespace Framework::Graphics{
     bool Vulkan::LinkShader(
             unsigned int *shaderProgram,
             void **shaderData,
-            const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions) const noexcept
+            const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
+            const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
+            SRShaderCreateInfo shaderCreateInfo) const noexcept
     {
         if (!shaderData) {
             Helper::Debug::Error("Vulkan::LinkShader() : shader data is nullptr!");
@@ -302,9 +334,29 @@ namespace Framework::Graphics{
             return false;
         }
 
-        auto vkVertexDescriptions = VulkanTools::AbstractDescriptionsToVkDescriptions(vertexDescriptions);
-        if (vkVertexDescriptions.size() != vertexDescriptions.size()) {
+        auto vkVertexDescriptions = std::vector<VkVertexInputBindingDescription>(vertexDescriptions.size());
+        auto vkVertexAttributes   = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
+        if (vkVertexAttributes.size() != vertexAttributes.size()) {
             Helper::Debug::Error("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
+            delete dynamicID;
+            return false;
+        }
+
+        if (!m_memory->m_ShaderPrograms[*dynamicID]->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
+            Helper::Debug::Error("Vulkan::LinkShader() : failed to set vertex descriptions!");
+            delete dynamicID;
+            return false;
+        }
+
+        if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
+                VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
+                VulkanTools::AbstractCullModeToVk(shaderCreateInfo.cullMode),
+                VulkanTools::AbstractDepthOpToVk(shaderCreateInfo.depthCompare),
+                shaderCreateInfo.blendEnabled,
+                shaderCreateInfo.depthEnabled))
+        {
+            Helper::Debug::Error("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
+            delete dynamicID;
             return false;
         }
 

@@ -99,7 +99,7 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
-        VulkanTools::MemoryManager*           m_memory = nullptr;
+        VulkanTools::MemoryManager*    m_memory = nullptr;
         EvoVulkan::Core::VulkanKernel* m_kernel = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
@@ -158,7 +158,14 @@ namespace Framework::Graphics {
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions) const noexcept override;
+                const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
+                SRShaderCreateInfo shaderCreateInfo = {}) const noexcept override;
+
+        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
+            if (!m_memory->FreeShaderProgram(shaderProgram))
+                Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
+        }
     public:
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
             return false;

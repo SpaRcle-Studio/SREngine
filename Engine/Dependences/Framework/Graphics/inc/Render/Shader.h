@@ -25,25 +25,24 @@ namespace Framework::Graphics {
         Shader(Render* render, const std::string& name);
         Shader(Shader&) = delete;
     private:
-        SR_SHADER_PROGRAM                   m_shaderProgram  = 0;
-        void*                               m_shaderTempData = nullptr;
-        //unsigned int                        m_fragment     = 0;
-        //unsigned int                        m_vertex       = 0;
+        SR_SHADER_PROGRAM                                   m_shaderProgram       = 0;
+        void*                                               m_shaderTempData      = nullptr;
 
-        //IShaderProgram*                     m_shaderProgram = nullptr;
+        bool                                                m_isLink              = false;
+        bool                                                m_isCompile           = false;
+        bool                                                m_isError             = false;
+        bool                                                m_isInit              = false;
+    private:
+        inline static Shader*                               g_stdGeometry         = nullptr;
 
-        bool                                m_isLink        = false;
-        bool                                m_isCompile     = false;
-        bool                                m_isError       = false;
-        bool                                m_isInit        = false;
+        SRShaderCreateInfo                                  m_shaderCreateInfo    = {};
+        std::vector<std::pair<Vertices::Attribute, size_t>> m_verticesAttributes  = {};
+        std::vector<SR_VERTEX_DESCRIPTION>                  m_verticesDescription = {};
     private:
-        inline static Shader*               g_stdGeometry   = nullptr;
-        std::map<std::string, unsigned int> m_fields        = std::map<std::string, unsigned int>();
-    private:
-        const Environment*                  m_env           = nullptr;
-        Render*                             m_render        = nullptr;
-        std::string                         m_name          = "Unnamed";
-        std::string                         m_path          = "Unknown";
+        const Environment*                                  m_env                 = nullptr;
+        Render*                                             m_render              = nullptr;
+        std::string                                         m_name                = "Unnamed";
+        std::string                                         m_path                = "Unknown";
     private:
         bool Init();
         bool Link();
@@ -62,7 +61,10 @@ namespace Framework::Graphics {
         bool Use() noexcept;
         ///\warning Call only from OpenGL context!
         void Free();
-        bool SetVertexDescriptions(const std::vector<std::pair<Vertices::Attribute, size_t>>& descriptions);
+        bool SetVertex(
+                const std::vector<SR_VERTEX_DESCRIPTION>& descriptions,
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& attributes);
+        bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
     public:
         SR_FORCE_INLINE void SetBool(const char* name, const bool& v)         const noexcept {
             //m_env->SetBoolOfLocation(this->m_fields.find(name)->second, v);

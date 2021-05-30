@@ -191,7 +191,9 @@ namespace Framework::Graphics {
         virtual bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions = {}) const noexcept { return false; }
+                const std::vector<size_t>& vertexDescriptions = {},
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
+                SRShaderCreateInfo shaderCreateInfo = {}) const noexcept { return false; }
         virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
 

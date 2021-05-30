@@ -64,6 +64,26 @@ namespace Framework::Graphics::VulkanTools {
             return memory;
         }
     public:
+        bool FreeShaderProgram(uint32_t ID) {
+            if (ID >= m_countShaderPrograms) {
+                Helper::Debug::Error("MemoryManager::FreeShaderProgram() : list index out of range!");
+                return false;
+            }
+
+            EvoVulkan::Complexes::Shader* shader = this->m_ShaderPrograms[ID];
+            if (!shader) {
+                Helper::Debug::Error("MemoryManager::FreeShaderProgram() : shader program is not exists!");
+                return false;
+            }
+
+            shader->Destroy();
+            shader->Free();
+
+            this->m_ShaderPrograms[ID] = nullptr;
+
+            return true;
+        }
+    public:
         int32_t AllocateUBO(uint32_t UBOSize) {
             for (uint32_t i = 0; i < m_countUBO; i++) {
                 if (m_UBOs[i] == nullptr) {

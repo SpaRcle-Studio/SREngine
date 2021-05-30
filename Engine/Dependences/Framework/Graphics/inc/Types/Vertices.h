@@ -10,6 +10,8 @@
 #include <string>
 #include <macros.h>
 
+#define SR_VERTEX_DESCRIPTION size_t
+
 namespace Framework::Graphics::Vertices {
     enum class Attribute {
         FLOAT_R32G32B32A32,
@@ -23,7 +25,11 @@ namespace Framework::Graphics::Vertices {
         glm::vec3 norm;
         glm::vec3 tang;
 
-        static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetDescription() {
+        static SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
+            return sizeof(Model3DVertex);
+        }
+
+        static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
             descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(Model3DVertex, pos)));
@@ -33,12 +39,23 @@ namespace Framework::Graphics::Vertices {
 
             return descriptions;
         }
+
+        bool operator==(const Model3DVertex& other) const {
+            return pos      == other.pos
+                   && uv    == other.uv
+                   && norm  == other.norm
+                   && tang  == other.tang;
+        }
     };
 
     struct SkyboxVertex {
         glm::vec3 pos;
 
-        static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetDescription() {
+        static SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
+            return sizeof(SkyboxVertex);
+        }
+
+        static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
             descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkyboxVertex, pos)));

@@ -445,7 +445,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
 bool Framework::Graphics::OpenGL::LinkShader(
         SR_SHADER_PROGRAM* shaderProgram,
         void** shaderData,
-        const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions) const noexcept
+        const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
+        const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
+        SRShaderCreateInfo shaderCreateInfo) const noexcept
 {
     if (!shaderProgram)
         return false;
