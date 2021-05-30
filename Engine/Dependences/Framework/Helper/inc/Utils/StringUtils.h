@@ -28,6 +28,46 @@ namespace Framework::Helper {
             return { r, g, b };
         }
 
+        static SR_FORCE_INLINE std::string GetDirToFileFromFullPath(std::string full_path) {
+            size_t size = full_path.size();
+
+            while (size > 0){
+                size--;
+                if (full_path[size] == '\\' || full_path[size] == '/')
+                    break;
+            }
+
+            full_path.resize(size);
+
+            return full_path;
+        }
+
+
+        static SR_FORCE_INLINE std::string GetDirFromPath(const std::string &path) {
+            return path.substr(0, path.find_last_of("/\\"));
+        }
+
+        static SR_FORCE_INLINE int32_t IndexOf(const std::string& str, const char& symbol) {
+            for (uint32_t i = 0; i < str.size(); i++)
+                if (str[i] == symbol)
+                    return (int32_t)i;
+            return -1;
+        }
+
+        static SR_FORCE_INLINE std::string GetFileNameFromFullPath(std::string full_path) {
+            size_t size = full_path.size();
+
+            while (size > 0){
+                size--;
+                if (full_path[size] == '\\' || full_path[size] == '/'){
+                    full_path = full_path.erase(0, size + 1);
+                    break;
+                }
+            }
+
+            return full_path;
+        }
+
         static SR_FORCE_INLINE std::string BackRead(const std::string& str, const char c, const int offset = 0) {
             std::string result = std::string();
 
@@ -44,6 +84,8 @@ namespace Framework::Helper {
 
             return result;
         }
+
+        static std::string ReadFrom(const std::string& str, const char& c, uint32_t start);
 
         static inline std::string ReadTo(std::string str, const char c, int offset = 0) {
             size_t size = str.size();

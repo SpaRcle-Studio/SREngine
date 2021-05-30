@@ -81,6 +81,7 @@ int main() {
 
     auto *window = new Window(
             "SpaRcle Engine",
+            "icon.ico",
             WindowFormat::_480_480,
             render,
             false,

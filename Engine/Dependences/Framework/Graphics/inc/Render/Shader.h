@@ -13,6 +13,8 @@
 #include <Debug.h>
 #include <macros.h>
 
+#include <Types/Vertices.h>
+
 namespace Framework::Graphics {
     class Render;
 
@@ -43,6 +45,7 @@ namespace Framework::Graphics {
         std::string                         m_name          = "Unnamed";
         std::string                         m_path          = "Unknown";
     private:
+        bool Init();
         bool Link();
         bool Compile();
     public:
@@ -52,14 +55,14 @@ namespace Framework::Graphics {
 
             return g_stdGeometry;
         }
-        static bool SetStandartGeometryShader(Shader* shader) noexcept;
+        static bool SetStandardGeometryShader(Shader* shader) noexcept;
     public:
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
     public:
         bool Use() noexcept;
-        bool Init();
         ///\warning Call only from OpenGL context!
         void Free();
+        bool SetVertexDescriptions(const std::vector<std::pair<Vertices::Attribute, size_t>>& descriptions);
     public:
         SR_FORCE_INLINE void SetBool(const char* name, const bool& v)         const noexcept {
             //m_env->SetBoolOfLocation(this->m_fields.find(name)->second, v);

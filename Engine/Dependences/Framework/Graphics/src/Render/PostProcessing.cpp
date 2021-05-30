@@ -32,11 +32,11 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
     Debug::Graph("PostProcessing::Init() : initializing post processing...");
 
     {
-        this->m_postProcessingShader = new Shader(m_render, "postProcessing");
-        this->m_postProcessingShader->Init();
+        this->m_postProcessingShader = new Shader(m_render, "engine/postProcessing");
+        //this->m_postProcessingShader->Init();
 
-        this->m_blurShader = new Shader(m_render, "blur");
-        this->m_blurShader->Init();
+        this->m_blurShader = new Shader(m_render, "engine/blur");
+        //this->m_blurShader->Init();
     }
 
     m_env->CalculateQuad(m_VBO, m_VAO);

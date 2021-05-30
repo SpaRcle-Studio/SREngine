@@ -345,7 +345,16 @@ struct GLShaderData {
     unsigned int m_fragment = 0;
 };
 
-bool Framework::Graphics::OpenGL::CompileShader(const std::string& name, void** shaderData) const noexcept {
+bool Framework::Graphics::OpenGL::CompileShader(
+        const std::string& name,
+        int32_t FBO,
+        void** shaderData,
+        const std::vector<uint64_t>& uniformSizes) const noexcept {
+    if (FBO >= 0) {
+        Helper::Debug::Error("OpenGL::CompileShader() : opengl dont use FBO for shaders!");
+        return false;
+    }
+
     std::string vertex_path   = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_vertex.glsl";
     std::string fragment_path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_fragment.glsl";;
 
@@ -433,7 +442,11 @@ bool Framework::Graphics::OpenGL::CompileShader(const std::string& name, void** 
     return true;
 }
 
-bool Framework::Graphics::OpenGL::LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept {
+bool Framework::Graphics::OpenGL::LinkShader(
+        SR_SHADER_PROGRAM* shaderProgram,
+        void** shaderData,
+        const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions) const noexcept
+{
     if (!shaderProgram)
         return false;
 

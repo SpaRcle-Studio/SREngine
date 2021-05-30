@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 
 namespace Framework::Helper {
 class FileSystem {
@@ -14,9 +15,6 @@ public:
     FileSystem() = delete;
     ~FileSystem() = delete;
 public:
-    static std::string GetFileNameToExeFromFullPath(std::string full_path);
-    static std::string GetDirToExeFromFullPath(std::string full_path);
-
     static bool Delete(const char *file);
 
     static bool FileExists(const char *file);
@@ -25,8 +23,20 @@ public:
     static std::string GetExecutableFileName();
     static std::string GetPathToExe();
     static std::string GetFullPathToExe();
-    static std::string GetDirFromPath(const std::string& path);
     static void Reload();
+
+    static std::vector<std::string> ReadAllLines(const std::string& path) {
+        std::ifstream file(path);
+        std::vector<std::string> lines = { };
+        while (true){
+            std::string line;
+            std::getline(file,line);
+            if (!file.good())
+                break;
+            lines.push_back(line);
+        }
+        return lines;
+    }
 
     static std::vector<char> ReadBinary(const std::string& path);
 

@@ -18,6 +18,10 @@ namespace Framework::Graphics::Impl {
         }
 
         bool DrawGeometry() noexcept override {
+            m_env->BindFrameBuffer(0);
+
+            Shader::GetDefaultGeometryShader()->Use();
+
             return true;
         }
 

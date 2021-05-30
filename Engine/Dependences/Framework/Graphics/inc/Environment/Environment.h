@@ -19,12 +19,15 @@
 #include <Environment/Basic/IShaderProgram.h>
 
 #include <Environment/PipeLine.h>
+#include <Types/Vertices.h>
 
 #define SR_SHADER_PROGRAM unsigned int
 #define SR_NULL_SHADER 0
 
 namespace Framework::Graphics {
     struct Vertex;
+
+    //enum class RenderBufferType { Small, Normal, Large };
 
     class Environment {
     public:
@@ -44,8 +47,9 @@ namespace Framework::Graphics {
 
         __int16         m_preferredDevice     = -1;
         unsigned __int8 m_currentDrawingStage = 0;
+        uint32_t        m_currentFBO          = 0;
 
-        bool            m_needReBuild         = true;
+        bool            m_needReBuild         = false;
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -57,6 +61,7 @@ namespace Framework::Graphics {
         void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
         void SetBuildState(const bool& isBuild)      { m_needReBuild = !isBuild;        }
 
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()       const noexcept { return m_currentFBO;      }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()           const noexcept { return m_needReBuild;     }
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors()               const noexcept { return m_hasErrors;       }
         [[nodiscard]] Types::WindowFormat* GetWindowFormat()         const noexcept { return this->m_winFormat; }
@@ -83,8 +88,10 @@ namespace Framework::Graphics {
         }
 
         static bool Set(Environment* env) {
-            if (g_environment != nullptr)
+            if (g_environment != nullptr) {
+                Helper::Debug::Error("Environment::Set() : environment already set!");
                 return false;
+            }
             else {
                 g_environment = env;
                 return true;
@@ -118,6 +125,7 @@ namespace Framework::Graphics {
 
         /* create window instance */
         virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable) { return false; }
+        virtual void SetWindowIcon(const char* path) {  }
 
         virtual bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) { return false; }
         [[nodiscard]] virtual glm::vec2 GetWindowSize() const noexcept { return {0,0}; }
@@ -175,8 +183,15 @@ namespace Framework::Graphics {
             return std::map<std::string, unsigned int>(); }
         [[nodiscard]] virtual SR_SHADER_PROGRAM AllocShaderProgram() const noexcept { return SR_NULL_SHADER; }
         virtual void FreeShaderProgram(SR_SHADER_PROGRAM shaderProgram) const noexcept {  }
-        virtual bool CompileShader(const std::string& path, void** shaderData) const noexcept { return false; }
-        virtual bool LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept { return false; }
+        virtual bool CompileShader(
+                const std::string& path,
+                int32_t FBO,
+                void** shaderData,
+                const std::vector<uint64_t>& uniformSizes = {}) const noexcept { return false; }
+        virtual bool LinkShader(
+                SR_SHADER_PROGRAM* shaderProgram,
+                void** shaderData,
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions = {}) const noexcept { return false; }
         virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
 

@@ -5,11 +5,67 @@
 #include <Environment/Vulkan.h>
 #include <ResourceManager/ResourceManager.h>
 #include <FileSystem/FileSystem.h>
+#include <Types/Vertices.h>
 
 namespace Framework::Graphics{
+    namespace VulkanTools {
+        static VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
+            switch (attr) {
+                case Vertices::Attribute::FLOAT_R32G32B32A32: return VK_FORMAT_R32G32B32A32_SFLOAT;
+                case Vertices::Attribute::FLOAT_R32G32B32:    return VK_FORMAT_R32G32B32_SFLOAT;
+                case Vertices::Attribute::FLOAT_R32G32:       return VK_FORMAT_R32G32_SFLOAT;
+                default:                                      return VK_FORMAT_UNDEFINED;
+            }
+        }
+
+        static ShaderType VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
+            switch (stage) {
+                case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderType::Fragment;
+                case VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT:   return ShaderType::Vertex;
+                default:
+                    Helper::Debug::Error("VulkanTools::VkShaderStageToShaderType() : unknown stage!");
+                    return ShaderType::Unknown;
+            }
+        }
+
+        static std::vector<VkVertexInputAttributeDescription> AbstractDescriptionsToVkDescriptions(
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& descriptions)
+        {
+            auto vkDescrs = std::vector<VkVertexInputAttributeDescription>();
+
+            for (uint32_t i = 0; i < descriptions.size(); i++) {
+                auto format = AttributeToVkFormat(descriptions[i].first);
+                if (format == VK_FORMAT_UNDEFINED) {
+                    Helper::Debug::Error("VulkanTools::AbstractDescriptionsToVkDescriptions() : unknown attribute!");
+                    return { };
+                }
+
+                vkDescrs.emplace_back(EvoVulkan::Tools::Initializers::VertexInputAttributeDescription(0, i, format, descriptions[i].second));
+            }
+
+            return vkDescrs;
+        }
+
+        static std::vector<std::pair<std::string, ShaderType>> VkModulesToAbstractModules(
+                const std::vector<std::pair<std::string, VkShaderStageFlagBits>>& modules)
+        {
+            auto abstract = std::vector<std::pair<std::string, ShaderType>>();
+            for (const auto& a : modules)
+                abstract.emplace_back(std::pair(a.first, VkShaderStageToShaderType(a.second)));
+            return abstract;
+        }
+    }
+
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
         this->m_kernel = new SRVulkan();
         Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
+
+        Helper::Debug::Info("Vulkan::PreInit() : create vulkan memory manager...");
+        this->m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
+        if (!m_memory) {
+            Helper::Debug::Error("Vulkan::PreInit() : failed to create vulkan memory manager!");
+            return false;
+        }
 
         if (m_enableValidationLayers)
             m_kernel->SetValidationLayersEnabled(true);
@@ -122,6 +178,137 @@ namespace Framework::Graphics{
             return false;
         }
 
+        return true;
+    }
+
+    bool Vulkan::CompileShader(
+            const std::string &path,
+            int32_t FBO,
+            void **shaderData,
+            const std::vector<uint64_t>& uniformSizes) const noexcept
+    {
+        if (FBO < 0) {
+            Helper::Debug::Error("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
+            return false;
+        }
+
+        EvoVulkan::Types::RenderPass renderPass = {};
+        if (FBO == 0)
+            renderPass = m_kernel->GetRenderPass();
+        else {
+            auto fbo = m_memory->m_FBOs[FBO - 1];
+            if (!fbo) {
+                Helper::Debug::Error("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
+                return false;
+            }
+
+            renderPass = fbo->GetRenderPass();
+        }
+
+        if (!renderPass.Ready()) {
+            Helper::Debug::Error("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
+            return false;
+        }
+
+        int32_t ID = m_memory->AllocateShaderProgram(renderPass);
+        if (ID < 0) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to allocate shader program ID!");
+            return false;
+        } else {
+            int* dynamicID = new int();
+            *dynamicID = ID;
+            *shaderData = reinterpret_cast<void*>(dynamicID);
+        }
+
+        std::string sharedShaderModule = Helper::ResourceManager::GetResourcesFolder()
+                .append("\\Shaders\\")
+                .append(GetPipeLineName())
+                .append("\\")
+                .append(path);
+
+        std::string pathToShaderModules = Helper::StringUtils::GetDirToFileFromFullPath(sharedShaderModule);
+        std::string shaderName = Helper::StringUtils::GetFileNameFromFullPath(path);
+
+        std::vector<std::pair<std::string, VkShaderStageFlagBits>> modules = {};
+        {
+            std::string shaderModule = pathToShaderModules + "\\" + shaderName;
+
+            if (Helper::FileSystem::FileExists(std::string(shaderModule + ".vert").c_str()))
+                modules.emplace_back(std::pair(shaderName + ".vert", VK_SHADER_STAGE_VERTEX_BIT));
+
+            if (Helper::FileSystem::FileExists(std::string(shaderModule + ".frag").c_str()))
+                modules.emplace_back(std::pair(shaderName + ".frag", VK_SHADER_STAGE_FRAGMENT_BIT));
+        }
+
+        bool errors = false;
+        std::vector<std::pair<LayoutBinding, ShaderType>> bindings =
+                Graphics::AnalyseShader(VulkanTools::VkModulesToAbstractModules(modules), pathToShaderModules, &errors);
+        if (errors) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to analyse shader!");
+            return false;
+        }
+
+        std::vector<VkDescriptorSetLayoutBinding> descriptorLayoutBindings = {};
+        {
+            VkDescriptorType      type  = VK_DESCRIPTOR_TYPE_MAX_ENUM;
+            VkShaderStageFlagBits stage = VK_SHADER_STAGE_ALL;
+
+            for (uint32_t i = 0; i < bindings.size(); i++) {
+                switch (bindings[i].first) {
+                    case LayoutBinding::Sampler2D : type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
+                    case LayoutBinding::Uniform:    type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;         break;
+                    default:
+                        Helper::Debug::Error("Vulkan::CompileShader() : unknown binding type!");
+                        return false;
+                }
+
+                switch (bindings[i].second) {
+                    case ShaderType::Vertex:   stage = VK_SHADER_STAGE_VERTEX_BIT;   break;
+                    case ShaderType::Fragment: stage = VK_SHADER_STAGE_FRAGMENT_BIT; break;
+                    default:
+                        Helper::Debug::Error("Vulkan::CompileShader() : unknown binding stage!");
+                        return false;
+                }
+
+                descriptorLayoutBindings.emplace_back(EvoVulkan::Tools::Initializers::DescriptorSetLayoutBinding(type, stage, i));
+            }
+        }
+
+        if (!m_memory->m_ShaderPrograms[ID]->Load(
+                pathToShaderModules,
+                Helper::ResourceManager::GetResourcesFolder() + "\\Cache\\Shaders",
+                modules,
+                descriptorLayoutBindings,
+                uniformSizes)) {
+            Helper::Debug::Error("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
+            return false;
+        }
+
+        return true;
+    }
+
+    bool Vulkan::LinkShader(
+            unsigned int *shaderProgram,
+            void **shaderData,
+            const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions) const noexcept
+    {
+        if (!shaderData) {
+            Helper::Debug::Error("Vulkan::LinkShader() : shader data is nullptr!");
+            return false;
+        }
+        int* dynamicID = reinterpret_cast<int*>(*shaderData);
+        if (!dynamicID) {
+            Helper::Debug::Error("Vulkan::LinkShader() : dynamic ID is nullptr!");
+            return false;
+        }
+
+        auto vkVertexDescriptions = VulkanTools::AbstractDescriptionsToVkDescriptions(vertexDescriptions);
+        if (vkVertexDescriptions.size() != vertexDescriptions.size()) {
+            Helper::Debug::Error("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
+            return false;
+        }
+
+        delete dynamicID;
         return true;
     }
 }

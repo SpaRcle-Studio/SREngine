@@ -39,15 +39,18 @@ bool Framework::Graphics::Shader::Compile() {
         Debug::Error("Shader::Compile() : shader already compile!");
         return false;
     }
-    //std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
-
     Debug::Shader("Shader::Compile() : compiling \""+m_name+"\" shader...");
 
-    //this->m_shaderProgram = m_env->AllocShaderProgram();
-
-    if (!m_env->CompileShader(m_name, &m_shaderTempData)) {
-        Debug::Error("Shader::Compile() : failed compile \""+m_name+"\" shader!");
-        return false;
+    if (this->m_env->GetPipeLine() == PipeLine::OpenGL) {
+        if (!m_env->CompileShader(m_name, -1, &m_shaderTempData)) {
+            Debug::Error("Shader::Compile() : failed compile opengl \"" + m_name + "\" shader!");
+            return false;
+        }
+    } else {
+        if (!m_env->CompileShader(m_name, m_env->GetCurrentFBO(), &m_shaderTempData)) {
+            Debug::Error("Shader::Compile() : failed compile \"" + m_name + "\" shader!");
+            return false;
+        }
     }
 
     m_isCompile = true;
@@ -68,13 +71,9 @@ bool Framework::Graphics::Shader::Link() {
 
     Debug::Shader("Shader::Link() : linking \""+this->m_name+"\" shader...");
 
-    /*m_ID = m_env->LinkShader(&m_fragment, &m_vertex);
-    if (m_ID == 0){
-        Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
-        return false;
-    }*/
+    auto verDescrs = Vertices::Model3DVertex::GetDescription();
 
-    if (!m_env->LinkShader(&m_shaderProgram, &m_shaderTempData)) {
+    if (!m_env->LinkShader(&m_shaderProgram, &m_shaderTempData, verDescrs)) {
         Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
         return false;
     }
@@ -84,9 +83,9 @@ bool Framework::Graphics::Shader::Link() {
     return true;
 }
 
-bool Framework::Graphics::Shader::SetStandartGeometryShader(Shader* shader) noexcept {
+bool Framework::Graphics::Shader::SetStandardGeometryShader(Shader* shader) noexcept {
     if (g_stdGeometry) {
-        Debug::Warn("Shader::SetStandartGeometryShader() : shader already set!");
+        Debug::Warn("Shader::SetStandardGeometryShader() : shader already set!");
         return false;
     }
     else {
@@ -124,5 +123,10 @@ void Framework::Graphics::Shader::Free() {
     }
 
     delete this;
+}
+
+bool Framework::Graphics::Shader::SetVertexDescriptions(
+        const std::vector<std::pair<Vertices::Attribute, size_t>> &descriptions) {
+    return false;
 }
 

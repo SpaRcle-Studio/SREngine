@@ -53,6 +53,8 @@ namespace Framework::Graphics {
             vkQueueWaitIdle(m_device->GetGraphicsQueue());
             vkDeviceWaitIdle(*m_device);
 
+            Environment::Get()->SetBuildState(false);
+
             return true;
         }
 
@@ -97,6 +99,7 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
+        VulkanTools::MemoryManager*           m_memory = nullptr;
         EvoVulkan::Core::VulkanKernel* m_kernel = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
@@ -137,6 +140,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const noexcept override { return m_basicWindow->IsWindowOpen(); }
 
         bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
+        void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
 
@@ -145,16 +149,26 @@ namespace Framework::Graphics {
 
         void SetWindowPosition(int x, int y) override;
         void SetWindowSize(unsigned int w, unsigned int h) override;
+
+        bool CompileShader(
+                const std::string& path,
+                int32_t FBO,
+                void** shaderData,
+                const std::vector<uint64_t>& uniformSizes = {}) const noexcept override;
+        bool LinkShader(
+                SR_SHADER_PROGRAM* shaderProgram,
+                void** shaderData,
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions) const noexcept override;
     public:
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
-
-
             return false;
         }
         SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)  const noexcept override {
             return false;
         }
-
+        SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
+            this->m_currentFBO = FBO;
+        }
     };
 }
 

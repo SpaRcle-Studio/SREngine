@@ -6,14 +6,22 @@
 #define GAMEENGINE_VULKANMEMORY_H
 
 #include <EvoVulkan/Types/VulkanBuffer.h>
+#include <EvoVulkan/Complexes/Framebuffer.h>
 #include <EvoVulkan/VulkanKernel.h>
+#include <Debug.h>
+#include <EvoVulkan/Complexes/Shader.h>
 
 namespace Framework::Graphics::VulkanTools {
-    class Memory {
+    class MemoryManager {
+    public:
+        MemoryManager(const MemoryManager&) = delete;
+    private:
+        MemoryManager()  = default;
+        ~MemoryManager() = default;
     private:
         bool                           m_isInit = false;
         EvoVulkan::Core::VulkanKernel* m_kernel = nullptr;
-    public:
+    private:
         bool Initialize(EvoVulkan::Core::VulkanKernel* kernel) {
             if (m_isInit) {
                 return false;
@@ -33,10 +41,29 @@ namespace Framework::Graphics::VulkanTools {
             for (uint32_t i = 0; i < m_countIBO; i++)
                 m_IBOs[i] = nullptr;
 
+            this->m_FBOs = (EvoVulkan::Complexes::FrameBuffer**)malloc(sizeof(EvoVulkan::Complexes::FrameBuffer) * m_countFBO);
+            for (uint32_t i = 0; i < m_countFBO; i++)
+                m_FBOs[i] = nullptr;
+
+            this->m_ShaderPrograms = (EvoVulkan::Complexes::Shader**)malloc(sizeof(EvoVulkan::Complexes::Shader) * m_countShaderPrograms);
+            for (uint32_t i = 0; i < m_countShaderPrograms; i++)
+                m_ShaderPrograms[i] = nullptr;
+
             m_isInit = true;
             return true;
         }
+    public:
+        static MemoryManager* Create(EvoVulkan::Core::VulkanKernel* kernel) {
+            auto memory = new MemoryManager();
 
+            if (!memory->Initialize(kernel)) {
+                Helper::Debug::Error("MemoryManager::Create() : failed to initialize memory!");
+                return nullptr;
+            }
+
+            return memory;
+        }
+    public:
         int32_t AllocateUBO(uint32_t UBOSize) {
             for (uint32_t i = 0; i < m_countUBO; i++) {
                 if (m_UBOs[i] == nullptr) {
@@ -84,14 +111,33 @@ namespace Framework::Graphics::VulkanTools {
 
             return -1;
         }
-    public:
-        uint32_t                   m_countUBO = 10000;
-        uint32_t                   m_countVBO = 1000;
-        uint32_t                   m_countIBO = 1000;
 
-        EvoVulkan::Types::Buffer** m_UBOs     = nullptr;
-        EvoVulkan::Types::Buffer** m_IBOs     = nullptr;
-        EvoVulkan::Types::Buffer** m_VBOs     = nullptr;
+        int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass) {
+            for (uint32_t i = 0; i < m_countShaderPrograms; i++) {
+                if (m_ShaderPrograms[i] == nullptr) {
+                    m_ShaderPrograms[i] = new EvoVulkan::Complexes::Shader(
+                            m_kernel->GetDevice(),
+                            renderPass,
+                            m_kernel->GetPipelineCache());
+
+                    return (int32_t)i;
+                }
+            }
+
+            return -1;
+        }
+    public:
+        uint32_t                            m_countUBO            = 10000;
+        uint32_t                            m_countVBO            = 1000;
+        uint32_t                            m_countIBO            = 1000;
+        uint32_t                            m_countFBO            = 15;
+        uint32_t                            m_countShaderPrograms = 50;
+
+        EvoVulkan::Complexes::FrameBuffer** m_FBOs                = nullptr;
+        EvoVulkan::Types::Buffer**          m_UBOs                = nullptr;
+        EvoVulkan::Types::Buffer**          m_IBOs                = nullptr;
+        EvoVulkan::Types::Buffer**          m_VBOs                = nullptr;
+        EvoVulkan::Complexes::Shader**      m_ShaderPrograms      = nullptr;
     };
 }
 

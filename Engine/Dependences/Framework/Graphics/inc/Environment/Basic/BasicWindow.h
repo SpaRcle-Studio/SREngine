@@ -89,6 +89,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { };
         [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowOpen() const noexcept { return m_windowOpen; };
         virtual SR_FORCE_INLINE bool MakeContextCurrent() { return false; };
+        virtual void SetIcon(const char* path) { }
         virtual SR_FORCE_INLINE void SetSwapInterval(int interval) noexcept {}
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }

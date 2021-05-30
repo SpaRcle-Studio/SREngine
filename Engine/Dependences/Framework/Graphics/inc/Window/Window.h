@@ -26,6 +26,7 @@ namespace Framework::Graphics {
     public:
         Window(
                 const char* win_name,
+                const char* icoPath,
                 WindowFormat format,
                 Render* render,
                 bool vsync,
@@ -38,6 +39,7 @@ namespace Framework::Graphics {
             this->m_env->InitWindowFormat(format);
 
             this->m_win_name        = win_name;
+            this->m_icoPath         = icoPath;
             this->m_render          = render;
             this->m_fullScreen      = fullScreen;
             this->m_vsync           = vsync;
@@ -68,6 +70,7 @@ namespace Framework::Graphics {
         Environment*                                        m_env                   = nullptr;
 
         const char*                                         m_win_name              = "Unnamed";
+        const char*                                         m_icoPath               = "Unknown";
         unsigned int                                        m_smoothSamples         = 4;
 
         Render*                                             m_render                = nullptr;

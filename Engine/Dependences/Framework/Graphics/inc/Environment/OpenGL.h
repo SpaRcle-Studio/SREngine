@@ -218,6 +218,7 @@ namespace Framework::Graphics {
         bool CreatePingPongFrameBufferObject(glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept override;
 
         SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
+            this->m_currentFBO = FBO;
             glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         }
 
@@ -235,8 +236,15 @@ namespace Framework::Graphics {
             //if (shaderProgram != nullptr)
             //    free((OpenGLShader*)shaderProgram);
         }
-        bool CompileShader(const std::string& path, void** shaderData) const noexcept override;
-        bool LinkShader(SR_SHADER_PROGRAM* shaderProgram, void** shaderData) const noexcept override;
+        bool CompileShader(
+                const std::string& path,
+                int32_t FBO,
+                void** shaderData,
+                const std::vector<uint64_t>& uniformSizes = {}) const noexcept override;
+        bool LinkShader(
+                SR_SHADER_PROGRAM* shaderProgram,
+                void** shaderData,
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexDescriptions = {}) const noexcept override;
         SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
             //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
             glDeleteProgram(shaderProgram);

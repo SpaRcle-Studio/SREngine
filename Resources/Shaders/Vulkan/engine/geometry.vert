@@ -21,7 +21,15 @@ vec3 colors[3] = vec3[](
     vec3(0.0, 0.0, 1.0)
 );
 
+layout (binding = 0) uniform UniformBuffer {
+    mat4 projection;
+    mat4 view;
+    mat4 model;
+} ubo;
+
+#extension GL_ARB_separate_shader_objects : enable
+
 void main() {
-    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+    gl_Position = ubo.projection * ubo.model * ubo.view * vec4(positions[gl_VertexIndex], 0.0, 1.0);
     fragColor = colors[gl_VertexIndex];
 }

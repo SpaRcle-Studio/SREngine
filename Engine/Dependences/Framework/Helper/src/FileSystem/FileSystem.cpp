@@ -14,6 +14,7 @@
 #include <Windows.h>
 #endif
 
+#include <Utils/StringUtils.h>
 #include <Debug.h>
 
 using namespace Framework::Helper;
@@ -39,7 +40,7 @@ std::string Framework::Helper::FileSystem::GetPathToExe() {
     const std::size_t buf_len = 260;
     auto s = new TCHAR[buf_len];
     auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
-    return GetDirToExeFromFullPath(s);
+    return StringUtils::GetDirToFileFromFullPath(s);
 #else
     Debug::Error("FileSystem::GetPathToExe() : linux not support this function!");
     return "NoDirectory";
@@ -56,20 +57,6 @@ std::string Framework::Helper::FileSystem::GetFullPathToExe() {
     Debug::Error("FileSystem::GetPathToExe() : linux not support this function!");
     return "NoDirectory";
 #endif
-}
-
-std::string Framework::Helper::FileSystem::GetDirToExeFromFullPath(std::string full_path) {
-    size_t size = full_path.size();
-
-    while (size > 0){
-        size--;
-        if (full_path[size] == '\\' || full_path[size] == '/')
-            break;
-    }
-
-    full_path.resize(size);
-
-    return full_path;
 }
 
 void FileSystem::UnmapFile(const char *str) {
@@ -115,24 +102,10 @@ std::string FileSystem::GetExecutableFileName() {
     const std::size_t buf_len = 260;
     auto s = new TCHAR[buf_len];
     auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
-    return GetFileNameToExeFromFullPath(s);
+    return StringUtils::GetFileNameFromFullPath(s);
 #else
     return "Unsupported function";
 #endif
-}
-
-std::string FileSystem::GetFileNameToExeFromFullPath(std::string full_path) {
-    size_t size = full_path.size();
-
-    while (size > 0){
-        size--;
-        if (full_path[size] == '\\' || full_path[size] == '/'){
-            full_path = full_path.erase(0, size + 1);
-            break;
-        }
-    }
-
-    return full_path;
 }
 
 void FileSystem::Reload() {
@@ -185,6 +158,3 @@ bool FileSystem::CreatePath(const std::string &path) {
     return std::filesystem::create_directories(path.c_str());
 }
 
-std::string FileSystem::GetDirFromPath(const std::string &path) {
-    return path.substr(0, path.find_last_of("/\\"));
-}

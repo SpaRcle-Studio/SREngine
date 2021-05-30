@@ -141,16 +141,15 @@ void Framework::Engine::Await() {
         if (m_exitEvent) {
             Debug::System("The closing event was received!");
             break;
+        } else if (InputSystem::IsDown(KeyCode::BackSpace)) {
+            Debug::System("The closing key was pressed!");
+            break;
         }
+
 
         m_compiler->PoolEvents();
 
         Helper::InputSystem::Check();
-
-        if (InputSystem::IsDown(KeyCode::BackSpace)) {
-            Debug::System("The closing key was pressed!");
-            break;
-        }
 
         if (m_time->Begin()){
             m_compiler->FixedUpdateAll();

@@ -210,6 +210,18 @@ namespace Framework::Graphics {
             return { (double)size.right, (double) size.bottom };
         }
 
+        void SetIcon(const char* path) override {
+            Helper::Debug::Log("Win32Window::SetIcon() : set icon... \n\tPath: " + std::string(path));
+
+            HICON hWindowIcon    = NULL;
+            HICON hWindowIconBig = NULL;
+
+            hWindowIcon    = (HICON)LoadImage(NULL, path, IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
+            hWindowIconBig = (HICON)LoadImage(NULL, path, IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+            SendMessage(m_hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hWindowIcon);
+            SendMessage(m_hWnd, WM_SETICON, ICON_BIG, (LPARAM)hWindowIconBig);
+        }
+
         bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen, bool resizable) override {
             this->m_realWidth  = sizeX;
             this->m_realHeight = sizeY;

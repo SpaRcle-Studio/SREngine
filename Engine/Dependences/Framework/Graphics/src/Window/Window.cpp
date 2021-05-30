@@ -211,6 +211,8 @@ void Framework::Graphics::Window::Thread() {
                 this->m_render->PollEvents();
 
                 if (m_env->IsNeedReBuild()) {
+                    Helper::Debug::Info("Window::Thread() : re-build render...");
+
                     this->m_render->DrawGeometry();
                     this->m_render->DrawSkybox();
 
@@ -287,6 +289,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
         Debug::Error("Window::InitEnvironment() : failed creating window!");
         return false;
     }
+    this->m_env->SetWindowIcon(std::string(Helper::ResourceManager::GetResourcesFolder().append("/Textures/").append(m_icoPath)).c_str());
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
     if (!this->m_env->SetContextCurrent()) {

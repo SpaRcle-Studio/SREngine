@@ -34,11 +34,11 @@ namespace Framework::Helper {
     }
 
     glm::vec2 StringUtils::MakeVec2FromString(const char *source, char chr, unsigned short start) {
-        glm::vec2		position = glm::vec3();
-        unsigned char   found_floats = 0;
+        glm::vec2 position = glm::vec3();
+        unsigned char found_floats = 0;
 
-        unsigned short	count = 0;
-        unsigned short	found = start;
+        unsigned short count = 0;
+        unsigned short found = start;
 
         static short t = 0;
         static short len = 0;
@@ -52,24 +52,25 @@ namespace Framework::Helper {
                 if (found_floats == 2)
                     return position;
 
-                char* temp = new char[count + 1]; strcpy(temp, "");
+                char *temp = new char[count + 1];
+                strcpy(temp, "");
 
                 strncat(temp, source + found, count);
-                position[found_floats] = (float)atof(temp);
+                position[found_floats] = (float) atof(temp);
                 found_floats++;
 
                 delete[] temp;
 
                 return position;
-            }
-            else if (source[t] == chr) {
+            } else if (source[t] == chr) {
                 if (found_floats == 2) //if (found_floats + 1 == 2) - bug
                     return position;
 
-                char* temp = new char[count + 1]; strcpy(temp, "");
+                char *temp = new char[count + 1];
+                strcpy(temp, "");
 
                 strncat(temp, source + found, count - 1);
-                position[found_floats] = (float)atof(temp);
+                position[found_floats] = (float) atof(temp);
                 found_floats++;
 
                 delete[] temp;
@@ -80,15 +81,16 @@ namespace Framework::Helper {
         }
         return position;
     }
+
     glm::vec3 StringUtils::MakeVec3FromString(const char *source, char chr, unsigned short start) {
-        glm::vec3		position		= glm::vec3();
-        unsigned char   found_floats	= 0;
+        glm::vec3 position = glm::vec3();
+        unsigned char found_floats = 0;
 
-        unsigned short	count			= 0;
-        unsigned short	found			= start;
+        unsigned short count = 0;
+        unsigned short found = start;
 
-        static short t					= 0;
-        static short len				= 0;
+        static short t = 0;
+        static short len = 0;
 
         len = FastStrLen(source);
 
@@ -99,24 +101,25 @@ namespace Framework::Helper {
                 if (found_floats == 3)
                     return position;
 
-                char* temp = new char[count + 1]; strcpy(temp, "");
+                char *temp = new char[count + 1];
+                strcpy(temp, "");
 
                 strncat(temp, source + found, count);
-                position[found_floats] = (float)atof(temp);
+                position[found_floats] = (float) atof(temp);
                 found_floats++;
 
                 delete[] temp;
 
                 return position;
-            }
-            else if (source[t] == chr) {
+            } else if (source[t] == chr) {
                 if (found_floats + 1 == 3)
                     return position;
 
-                char* temp = new char[count + 1]; strcpy(temp, "");
+                char *temp = new char[count + 1];
+                strcpy(temp, "");
 
                 strncat(temp, source + found, count - 1);
-                position[found_floats] = (float)atof(temp);
+                position[found_floats] = (float) atof(temp);
                 found_floats++;
 
                 delete[] temp;
@@ -126,5 +129,18 @@ namespace Framework::Helper {
             }
         }
         return position;
+    }
+
+    std::string StringUtils::ReadFrom(const std::string &str, const char &c, uint32_t start) {
+        if (start >= str.size())
+            return std::string();
+
+        std::string newStr = str.substr(start, str.size() - 1);
+
+        int32_t to = IndexOf(newStr, c);
+        if (to <= 0)
+            return std::string();
+
+        return newStr.substr(0, to);
     }
 }

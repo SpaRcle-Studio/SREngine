@@ -245,7 +245,7 @@ function Start()
 
     skybox = Skybox.Load(
         "Sea.jpg", -- images name
-        "skybox"   -- shader name
+        "engine/skybox"   -- shader name
     );
     render:SetSkybox(skybox);
 
