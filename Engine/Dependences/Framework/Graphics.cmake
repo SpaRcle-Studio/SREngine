@@ -3,7 +3,6 @@ find_package(Vulkan REQUIRED FATAL_ERROR)
 
 set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Mesh.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/ManipulationTool.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Texture.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Material.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/WindowFormat.cpp

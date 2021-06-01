@@ -1,0 +1,8 @@
+//
+// Created by Nikita on 01.06.2021.
+//
+
+#ifndef GAMEENGINE_SKINNEDMESH_H
+#define GAMEENGINE_SKINNEDMESH_H
+
+#endif //GAMEENGINE_SKINNEDMESH_H

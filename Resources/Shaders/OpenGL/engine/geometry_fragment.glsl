@@ -9,7 +9,7 @@ layout (location = 3) out vec4 StencilMask;
 in VS_OUT {
     vec3 FragPos;
     vec2 TexCoord;
-    vec3 VColor;
+    //vec3 VColor;
     vec3 Normal;
 } fs_in;
 

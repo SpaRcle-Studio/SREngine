@@ -27,9 +27,6 @@
 
 using namespace Framework::Graphics::Types;
 
-inline static std::map<unsigned int, unsigned long> VAO_usages = std::map<unsigned int, unsigned long>();
-inline static std::map<std::string, unsigned int> VAO_names = std::map<std::string, unsigned int>();
-
 Framework::Graphics::Types::Mesh::Mesh() : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh") {
     this->m_shader = nullptr;
     this->m_material = nullptr;
@@ -178,122 +175,6 @@ void Mesh::ReCalcModel() {
 
 
     this->m_modelMat = modelMat;
-}
-
-bool Mesh::Calculate() {
-    if (!m_render){
-        Debug::Error("Mesh::Calculate() : mesh is not register in render!");
-        return false;
-    }
-
-    if (!m_shader){
-        if (!Shader::GetDefaultGeometryShader()) {
-            Debug::Error("Mesh::Calculate() : mesh have not shader!");
-            return false;
-        }
-    }
-
-    if (!m_material){
-        Debug::Error("Mesh::Calculate() : mesh have not material!");
-        return false;
-    }
-
-    m_mutex.lock();
-
-    {
-        /*
-            Check exists pre-calculated meshes
-         */
-        unsigned int exists = VAO_names[m_resource_id];
-        if (exists) {
-            if (Debug::GetLevel() >= Debug::Level::High)
-                Debug::Log("Mesh::Calculate() : copy VAO...");
-
-            m_VAO = exists;
-
-            VAO_usages[m_VAO]++;
-            m_isCalculated = true;
-            m_mutex.unlock();
-
-            return true;
-        }
-    }
-
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh::Calculate() : calculating \""+ m_geometry_name +"\"...");
-
-    if (!this->m_env->CalculateVAO(reinterpret_cast<unsigned int &>(m_VAO), m_vertices, m_countVertices)) {
-        Debug::Error("Mesh::Calculate() : failed calculate \"" + m_geometry_name + "\" mesh!");
-        m_mutex.unlock();
-        return false;
-    }
-
-    VAO_usages[m_VAO]++;
-    VAO_names[m_resource_id] = m_VAO;
-
-    m_isCalculated = true;
-
-    m_mutex.unlock();
-
-    return true;
-}
-
-Mesh *Mesh::Copy() {
-    if (m_isDestroy) {
-        Debug::Error("Mesh::Copy() : mesh already destroyed!");
-        return nullptr;
-    }
-
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh::Copy() : copy \""+m_resource_id+ "\" mesh...");
-
-    if (!m_material){
-        Debug::Error("Mesh::Copy() : material is nullptr! Something went wrong...");
-        return nullptr;
-    }
-
-    m_mutex.lock();
-
-    Material* mat = new Material(
-            m_material->m_diffuse,
-            m_material->m_normal,
-            m_material->m_specular,
-            m_material->m_glossiness
-        );
-
-    Mesh* copy = new Mesh(this->m_shader, mat, this->m_geometry_name);
-
-    {
-        mat->m_mesh         = copy;
-        mat->m_bloom        = m_material->m_bloom;
-        mat->m_transparent  = m_material->m_transparent;
-        mat->m_color        = m_material->m_color;
-    }
-
-    copy->m_countVertices = m_countVertices;
-    copy->m_countIndices  = m_countIndices;
-    copy->m_useIndices    = m_useIndices;
-
-    copy->m_position = m_position;
-    copy->m_rotation = m_rotation;
-    copy->m_scale    = m_scale;
-    if (m_isCalculated) {
-        VAO_usages[m_VAO]++;
-        copy->m_VAO = m_VAO;
-    }else{
-        copy->m_vertices = m_vertices;
-        copy->m_indices  = m_indices;
-    }
-    copy->m_isCalculated = m_isCalculated;
-    copy->m_autoRemove = m_autoRemove;
-    //copy->m_render = m_render;
-    copy->m_modelMat = m_modelMat;
-
-    copy->m_resource_id = m_resource_id; // Fuck, I remember this
-
-    m_mutex.unlock();
-
-    return copy;
 }
 
 bool Mesh::FreeVideoMemory() {

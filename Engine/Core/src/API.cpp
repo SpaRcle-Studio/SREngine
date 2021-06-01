@@ -11,7 +11,6 @@
 
 #include <utility>
 #include <Types/List.h>
-#include <Types/ManipulationTool.h>
 
 using namespace Framework::Helper::Math;
 
@@ -264,32 +263,6 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .endClass();
     });
 
-    // ManipulationTool
-    compiler->RegisterScriptClass("Graphics", [](lua_State* L){
-        static unsigned int op_rotate = (int)Operation::Rotate;
-        static unsigned int op_translate = (int)Operation::Translate;
-        static unsigned int op_scale = (int)Operation::Scale;
-
-        luabridge::getGlobalNamespace(L)
-                .beginNamespace("Operation")
-                .addProperty("Rotate", &op_rotate, false)
-                .addProperty("Translate", &op_translate, false)
-                .addProperty("Scale", &op_scale, false);
-
-        luabridge::getGlobalNamespace(L)
-                .beginClass<Graphics::Types::ManipulationTool>("ManipulationTool")
-                    .addFunction("SetRings", (bool (Graphics::Types::ManipulationTool::*)(Helper::Types::List<Mesh*>))&Graphics::Types::ManipulationTool::SetRings)
-                    .addFunction("SetArrows", (bool (Graphics::Types::ManipulationTool::*)(Helper::Types::List<Mesh*>))&Graphics::Types::ManipulationTool::SetArrows)
-                    .addFunction("GetActiveAxis", (int (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetActiveAxis)
-                    .addFunction("Require", (void (Graphics::Types::ManipulationTool::*)(Graphics::Camera*, ImGuiWindow*))&Graphics::Types::ManipulationTool::Require)
-                    .addFunction("Clear", (bool (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::Clear)
-                    .addFunction("GetOperation", (unsigned int (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetOperationInt)
-                    .addFunction("SetOperation", (void (Graphics::Types::ManipulationTool::*)(unsigned int))&Graphics::Types::ManipulationTool::SetOperationInt)
-                    .addFunction("DisableAxis", (void (Graphics::Types::ManipulationTool::*)())&Graphics::Types::ManipulationTool::DisableAxis)
-                    .addFunction("GetDrag", (double (Graphics::Types::ManipulationTool::*)(void))&Graphics::Types::ManipulationTool::GetDrag)
-                .endClass();
-    });
-
     // GameObject
     compiler->RegisterScriptClass("Engine", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
@@ -477,7 +450,6 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("RegisterMesh", (void (Framework::Graphics::Render::*)(Graphics::Mesh*))&Graphics::Render::RegisterMesh)
                 .addFunction("RegisterMeshes", (void (Framework::Graphics::Render::*)(Helper::Types::List<Graphics::Mesh*>))&Graphics::Render::RegisterMeshes)
                 .addFunction("RegisterTexture", (void (Framework::Graphics::Render::*)(Graphics::Texture*))&Graphics::Render::RegisterTexture)
-                .addFunction("GetManipulationTool", (Graphics::Types::ManipulationTool* (Framework::Graphics::Render::*)(void))&Graphics::Render::GetManipulationTool)
                 .addFunction("SetSkybox", (void (Framework::Graphics::Render::*)(Graphics::Skybox*))&Graphics::Render::SetSkybox)
                 .addFunction("DrawSettingsPanel", (bool (Framework::Graphics::Render::*)(void))&Graphics::Render::DrawSettingsPanel)
                 .endClass();

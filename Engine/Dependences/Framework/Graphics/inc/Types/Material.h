@@ -17,8 +17,10 @@ namespace Framework::Graphics::Types {
     using namespace Helper;
 
     class Mesh;
+    class Mesh3D;
     class Material {
         friend class Mesh;
+        friend class Mesh3D;
     public:
         Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
         ~Material();

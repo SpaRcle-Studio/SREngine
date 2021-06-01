@@ -15,8 +15,6 @@
 #include <Types/List.h>
 #include <iostream>
 
-#include "Types/ManipulationTool.h"
-
 namespace Framework::Graphics::Types {
     class Skybox;
 }
@@ -89,14 +87,8 @@ namespace Framework::Graphics {
 
         bool                        m_needSelectMeshes                  = false;
 
-        Types::ManipulationTool*    m_manipulate                        = nullptr;
-
         const PipeLine              m_pipeLine                          = PipeLine::Unknown;
     public:
-        [[nodiscard]] ManipulationTool* GetManipulationTool() const {
-            return this->m_manipulate;
-        }
-
         [[nodiscard]] size_t GetAbsoluteCountMeshes()     const noexcept { return m_countMeshes + m_countTransparentMeshes; }
         [[nodiscard]] Mesh* GetMesh(size_t absoluteID)    const noexcept { // TODO: See
             if (absoluteID < m_countMeshes)

@@ -24,6 +24,7 @@
 #include <EntityComponentSystem/Transform.h>
 
 #include <Types/Rigidbody.h>
+#include <Types/Geometry/Mesh3D.h>
 #include <Core/PhysEngine.h>
 
 #include <Render/Implementations/OpenGLRender.h>
@@ -59,13 +60,14 @@ int main() {
 
     // Register all components
     {
-        Component::RegisterComponent("Mesh",      []() -> Component* { return new Mesh();      });
-        Component::RegisterComponent("Rigidbody", []() -> Rigidbody* { return new Rigidbody(); });
-        Component::RegisterComponent("Camera",    []() -> Camera*    { return new Camera();    });
+        //Component::RegisterComponent("SkinnedMesh",      []() -> Component* { return new Mesh3D();    });
+        Component::RegisterComponent("Mesh3D",             []() -> Component* { return new Mesh3D();    });
+        Component::RegisterComponent("Rigidbody",          []() -> Rigidbody* { return new Rigidbody(); });
+        Component::RegisterComponent("Camera",             []() -> Camera*    { return new Camera();    });
     }
 
-    //Environment::Set(new OpenGL());
-    Environment::Set(new Vulkan());
+    Environment::Set(new OpenGL());
+    //Environment::Set(new Vulkan());
 
     //Environment::Get()->SetPreferredDevice(1);
 

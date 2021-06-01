@@ -24,8 +24,8 @@ bool Framework::Graphics::Render::Create(Window* window) {
     {
         this->m_geometryShader = new Shader(this, "engine/geometry");
         this->m_geometryShader->SetVertex(
-                { Vertices::Model3DVertex::GetDescription() },
-                Vertices::Model3DVertex::GetAttributes());
+                { Vertices::Mesh3DVertex::GetDescription() },
+                Vertices::Mesh3DVertex::GetAttributes());
         this->m_geometryShader->SetCreateInfo({
             .polygonMode  = PolygonMode::Fill,
             .cullMode     = CullMode::Back,
@@ -100,9 +100,6 @@ bool Framework::Graphics::Render::Close() {
 
     //if (m_skyboxShader)
     //   m_skyboxShader->Free();
-
-    this->m_manipulate->Destroy();
-    this->m_manipulate->Free();
 
     if (m_geometryShader)
         m_geometryShader->Free();
@@ -256,8 +253,6 @@ Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_
     m_meshes.reserve(500 * 500);
     m_newMeshes.reserve(500);
     m_removeMeshes.reserve(500);
-
-    this->m_manipulate = ManipulationTool::Create(this);
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {

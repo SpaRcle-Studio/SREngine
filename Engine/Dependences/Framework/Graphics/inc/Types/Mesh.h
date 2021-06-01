@@ -23,18 +23,25 @@ namespace Framework::Graphics{
 }
 
 namespace Framework::Graphics::Types {
+    inline static std::map<unsigned int, unsigned long> VAO_usages = std::map<unsigned int, unsigned long>();
+    inline static std::map<std::string, unsigned int>   VAO_names = std::map<std::string, unsigned int>();
+
+    inline static std::map<uint32_t, unsigned long> VBO_usages = std::map<unsigned int, unsigned long>();
+    inline static std::map<uint32_t, unsigned long> IBO_usages = std::map<unsigned int, unsigned long>();
+    inline static std::map<std::string, std::pair<uint32_t, uint32_t>> VBOandIBO_names = std::map<std::string, std::pair<uint32_t, uint32_t>>();
+
     using namespace Helper;
 
     class Material;
 
     class Mesh : public IResource, public Component {
         friend class Material;
-    public:
+    protected:
         /** \brief Default mesh constructor */
         //Mesh() : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh") { }
         Mesh();
         Mesh(Shader* shader, Material* material, std::string name = "Unnamed");
-    private:
+    protected:
         /** \brief Default mesh destructor */
         ~Mesh();
     public:
@@ -42,12 +49,6 @@ namespace Framework::Graphics::Types {
         SR_FORCE_INLINE void SetRender(Render* render) noexcept {
             this->m_render = render;
         };
-        SR_FORCE_INLINE void SetVertexArray(std::vector<Vertex>& vertices) noexcept {
-            this->m_isCalculated  = false;
-            this->m_countVertices = vertices.size();
-            this->m_vertices      = vertices;
-        }
-
         SR_FORCE_INLINE void SetIndexArray(std::vector<unsigned int>& indices) noexcept {
             this->m_isCalculated = false;
             this->m_countIndices = indices.size();
@@ -88,16 +89,16 @@ namespace Framework::Graphics::Types {
     public:
         /** \brief Free mesh pointer
          * \return bool */
-        bool Free() override {
+        /*bool Free() override {
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Debug::Log("Mesh::Free() : free mesh memory...");
             delete this;
             return true;
-        }
+        }*/
         /** \brief Set mesh to destroy in res manager
         * \return bool */
         bool Destroy() override;
-    private:
+    protected:
         bool                        m_inverse               = false;
 
         Environment*                m_env                   = nullptr;
@@ -117,18 +118,15 @@ namespace Framework::Graphics::Types {
         int                         m_VBO                   = -1;
         int                         m_IBO                   = -1;
 
-        std::vector<Vertex>			m_vertices				= std::vector<Vertex>();
         std::vector<unsigned int>	m_indices				= std::vector<unsigned int>();
         size_t						m_countVertices		    = 0;
         size_t						m_countIndices		    = 0;
         bool                        m_useIndices            = false;
-
-        std::vector<glm::mat4>      m_bonesTransforms       = std::vector<glm::mat4>();
     private:
         /** \brief Re-calc mesh space-transform matrix */
         void ReCalcModel();
         /** \brief Re-calc mesh space-transform matrix */
-        bool Calculate();
+        virtual bool Calculate() = 0;
     protected:
         void OnDestroyGameObject() noexcept override;
     public:
@@ -159,7 +157,7 @@ namespace Framework::Graphics::Types {
 
         [[nodiscard]] inline bool IsCalculated() const noexcept { return m_isCalculated; }
 
-        Mesh* Copy();
+        virtual Mesh* Copy() = 0;
 
         SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept {
             this->m_toolID = ID;

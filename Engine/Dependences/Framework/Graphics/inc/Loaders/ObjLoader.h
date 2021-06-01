@@ -15,7 +15,9 @@ namespace Framework::Graphics::Types{
 }
 
 namespace Framework::Graphics {
-    struct Vertex;
+    namespace Vertices {
+        struct Mesh3DVertex;
+    }
 
     using namespace Types;
     class ObjLoader {
@@ -25,7 +27,7 @@ namespace Framework::Graphics {
     private:
         inline static std::vector<Mesh*>			m_temp_meshes		= std::vector<Mesh*>();
 
-        inline static std::vector<Vertex>			m_temp_vertexes     = std::vector<Vertex>();
+        inline static std::vector<Vertices::Mesh3DVertex> m_temp_vertexes = std::vector<Vertices::Mesh3DVertex>();
         inline static std::vector<unsigned int>		m_temp_indices		= std::vector<unsigned int>();
 
         inline static std::vector<glm::vec3>		m_pos_vertex		= std::vector<glm::vec3>();

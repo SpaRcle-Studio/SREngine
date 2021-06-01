@@ -84,7 +84,8 @@ namespace Framework::Graphics {
         }
 
         bool OnComplete() override {
-            return BuildCmdBuffers();
+            //return BuildCmdBuffers();
+            return true;
         }
 
         bool Destroy() override {

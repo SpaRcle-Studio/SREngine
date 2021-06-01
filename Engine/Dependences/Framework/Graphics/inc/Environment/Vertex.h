@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
 
+/*
 namespace Framework::Graphics {
     struct Vertex{
         glm::vec3 position;
@@ -53,6 +54,7 @@ namespace std {
         }
     };
 }
+*/
 
 /*
     int boneID1;

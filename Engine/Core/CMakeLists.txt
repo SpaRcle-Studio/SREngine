@@ -7,7 +7,6 @@ add_library(Core STATIC
         ${CORE_ROOT_DIR}/src/API.cpp
         ${CORE_ROOT_DIR}/src/Engine.cpp
         ${CORE_ROOT_DIR}/src/GUI/Canvas.cpp
-        #${CORE_ROOT_DIR}/src/GUI/ManipulationTool.cpp
         )
 
 target_link_libraries(Core Framework)

@@ -12,7 +12,7 @@
 #include <Types/WindowFormat.h>
 #include <functional>
 #include <glm/glm.hpp>
-#include <Environment/Vertex.h>
+//#include <Environment/Vertex.h>
 #include <Environment/TextureFilters.h>
 #include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
@@ -25,7 +25,9 @@
 #define SR_NULL_SHADER 0
 
 namespace Framework::Graphics {
-    struct Vertex;
+    namespace Vertices {
+        struct Mesh3DVertex;
+    }
 
     enum class RenderBuffGroup { Kernel, Small, Normal, Large };
 
@@ -227,7 +229,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(unsigned int& VAO) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateUBO(unsigned int& IBO, uint32_t uboSize)    const noexcept { return false; }

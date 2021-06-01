@@ -326,7 +326,7 @@ namespace Framework::Graphics {
 
             return true;
         }
-        SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertex>& vertices, size_t count_verts) const noexcept override{
+        SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept override{
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
 
@@ -342,7 +342,7 @@ namespace Framework::Graphics {
                 //? Binding vertex array
                 glBufferData(
                         GL_ARRAY_BUFFER,
-                        count_verts * sizeof(Vertex),
+                        count_verts * sizeof(Vertices::Mesh3DVertex),
                         &vertices[0],
                         GL_STATIC_DRAW
                 );
@@ -352,41 +352,41 @@ namespace Framework::Graphics {
                 glVertexAttribPointer(0,
                                       3, // glm::vec3 - has 3 floats
                                       GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertex), (void*)0);
+                                      sizeof(Vertices::Mesh3DVertex), (void*)0);
 
                 //? Binding attrib texture coordinates
                 glEnableVertexAttribArray(1);
                 glVertexAttribPointer(1,
                                       2, // glm::vec2 - has 2 floats
-                                      GL_FLOAT, GL_FALSE, sizeof(Vertex),
-                                      (void*)offsetof(Vertex, texCoords) // Сдвиг байт до соответствующего атрибута
+                                      GL_FLOAT, GL_FALSE, sizeof(Vertices::Mesh3DVertex),
+                                      (void*)offsetof(Vertices::Mesh3DVertex, uv) // Сдвиг байт до соответствующего атрибута
                 );
 
                 //? Binding attrib color
-                glEnableVertexAttribArray(3);
-                glVertexAttribPointer(3,
-                                      3, // glm::vec3 - has 3 floats
-                                      GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertex),
-                                      (void*)offsetof(Vertex, color) // Сдвиг байт до соответствующего атрибута
-                );
+                //glEnableVertexAttribArray(3);
+                //glVertexAttribPointer(3,
+                //                      3, // glm::vec3 - has 3 floats
+                //                      GL_FLOAT, GL_FALSE,
+                //                      sizeof(Vertex),
+                //                      (void*)offsetof(Vertex, color) // Сдвиг байт до соответствующего атрибута
+                //);
 
                 //? Binding attrib normal coordinates
-                glEnableVertexAttribArray(3);
-                glVertexAttribPointer(3,
+                glEnableVertexAttribArray(2);
+                glVertexAttribPointer(2,
                                       3, // glm::vec3 - has 3 floats
                                       GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertex),
-                                      (void*)offsetof(Vertex, normal) // Сдвиг байт до соответствующего атрибута
+                                      sizeof(Vertices::Mesh3DVertex),
+                                      (void*)offsetof(Vertices::Mesh3DVertex, norm) // Сдвиг байт до соответствующего атрибута
                 );
 
                 //? Binding attrib tangent coordinates
-                glEnableVertexAttribArray(4);
-                glVertexAttribPointer(4,
+                glEnableVertexAttribArray(3);
+                glVertexAttribPointer(3,
                                       3, // glm::vec3 - has 3 floats
                                       GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertex),
-                                      (void*)offsetof(Vertex, tangent) // Сдвиг байт до соответствующего атрибута
+                                      sizeof(Vertices::Mesh3DVertex),
+                                      (void*)offsetof(Vertices::Mesh3DVertex, tang) // Сдвиг байт до соответствующего атрибута
                 );
 
             }

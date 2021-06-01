@@ -4,7 +4,7 @@
 
 #include "Loaders/ObjLoader.h"
 
-#include <Types/Mesh.h>
+#include <Types/Geometry/Mesh3D.h>
 #include <Debug.h>
 #include <Environment/Vertex.h>
 #include <FileSystem/FileSystem.h>
@@ -35,23 +35,23 @@ namespace Framework::Graphics {
         }
 
         for (const auto& shape : shapes) {
-            Mesh* mesh = new Mesh(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
+            Mesh3D* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
 
-            auto vertices = std::vector<Vertex>();
+            auto vertices = std::vector<Vertices::Mesh3DVertex>();
             auto indices = std::vector<unsigned int>();
 
-            std::unordered_map<Vertex, uint32_t> uniqueVertices{};
+            std::unordered_map<Vertices::Mesh3DVertex, uint32_t> uniqueVertices{};
 
             for (const auto& index : shape.mesh.indices) {
-                Vertex vertex = {};
+                Vertices::Mesh3DVertex vertex = {};
 
-                vertex.position = {
+                vertex.pos = {
                         attrib.vertices[3 * index.vertex_index + 0],
                         attrib.vertices[3 * index.vertex_index + 1],
                         attrib.vertices[3 * index.vertex_index + 2]
                 };
 
-                vertex.texCoords = {
+                vertex.uv = {
                         //attrib.texcoords[2 * index.texcoord_index + 0],
                         //attrib.texcoords[2 * index.texcoord_index + 1]
 
@@ -59,15 +59,15 @@ namespace Framework::Graphics {
                         1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
                 };
 
-                vertex.color = { 1.0f, 1.0f, 1.0f };
+                //vertex.color = { 1.0f, 1.0f, 1.0f };
 
                 // TODO: CHECK CORRECTLY!
-                vertex.normal = {
+                vertex.norm = {
                         attrib.normals[3 * index.normal_index + 0],
                         attrib.normals[3 * index.normal_index + 1],
                         attrib.normals[3 * index.normal_index + 2]
                 };
-                vertex.tangent = { 0, 0, 0 };
+                vertex.tang = { 0, 0, 0 };
 
                 //============================================
 
@@ -129,7 +129,7 @@ namespace Framework::Graphics {
 
     void ObjLoader::AddMesh() {
         if (!m_temp_vertexes.empty()) {
-            Mesh* mesh = new Mesh(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
+            Mesh3D* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
             //Mesh* mesh = new Mesh(Shader::GetDefaultGeometryShader(), new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
             mesh->GetMaterial()->SetMesh(mesh);
             mesh->SetVertexArray(m_temp_vertexes);
@@ -215,15 +215,15 @@ namespace Framework::Graphics {
 
                 m_temp_vertexes.push_back(
                         {{m_pos_vertex[face.x - 1.f]}, m_pos_texture[uv.x - 1.f], m_pos_normal[norm_index.x - 1],
-                         {1,1,1},
+                         //{1,1,1},
                          {tan_x, tan_y, tan_z}}); //z
                 m_temp_vertexes.push_back(
                         {{m_pos_vertex[face.y - 1.f]}, m_pos_texture[uv.y - 1.f], m_pos_normal[norm_index.y - 1],
-                         {1,1,1},
+                         //{1,1,1},
                          {tan_x, tan_y, tan_z}}); //x
                 m_temp_vertexes.push_back(
                         {{m_pos_vertex[face.z - 1.f]}, m_pos_texture[uv.z - 1.f], m_pos_normal[norm_index.z - 1],
-                         {1,1,1},
+                        // {1,1,1},
                          {tan_x, tan_y, tan_z}}); //y
                 break;
             }
