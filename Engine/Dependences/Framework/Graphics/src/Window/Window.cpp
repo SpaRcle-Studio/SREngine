@@ -201,6 +201,8 @@ void Framework::Graphics::Window::Thread() {
     // for optimization needed pipeline
     const PipeLine pipeLine = m_env->GetPipeLine();
 
+    this->m_env->SetBuildState(false);
+
     if (pipeLine == PipeLine::Vulkan) {
         while (m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
             clock_t beginFrame = clock();

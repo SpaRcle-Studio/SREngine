@@ -39,7 +39,7 @@ namespace Framework::Graphics {
         std::vector<std::pair<Vertices::Attribute, size_t>> m_verticesAttributes  = {};
         std::vector<SR_VERTEX_DESCRIPTION>                  m_verticesDescription = {};
     private:
-        const Environment*                                  m_env                 = nullptr;
+        Environment*                                        m_env                 = nullptr;
         Render*                                             m_render              = nullptr;
         std::string                                         m_name                = "Unnamed";
         std::string                                         m_path                = "Unknown";
@@ -49,8 +49,10 @@ namespace Framework::Graphics {
         bool Compile();
     public:
         [[nodiscard]] SR_FORCE_INLINE static Shader* GetDefaultGeometryShader() noexcept {
-            //if (!g_stdGeometry)
-            //    Helper::Debug::Error("Shader::GetDefaultGeometryShader() : shader is nullptr!");
+#ifndef SR_RELEASE
+            if (!g_stdGeometry)
+                Helper::Debug::Error("Shader::GetDefaultGeometryShader() : shader is nullptr!");
+#endif
 
             return g_stdGeometry;
         }

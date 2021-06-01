@@ -247,12 +247,12 @@ namespace Framework::Graphics {
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept override;
-        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
+        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
             glDeleteProgram(shaderProgram);
             //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID = 0;
         }
-        SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
+        SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             if (shaderProgram)
                 glUseProgram(shaderProgram);
                 //glUseProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);

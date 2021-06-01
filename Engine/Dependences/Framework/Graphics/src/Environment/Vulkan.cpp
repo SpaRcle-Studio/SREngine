@@ -100,6 +100,11 @@ namespace Framework::Graphics{
         if (m_enableValidationLayers)
             m_kernel->SetValidationLayersEnabled(true);
 
+        this->m_viewport     = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
+        this->m_scissor      = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
+        this->m_cmdBufInfo   = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
+        this->m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
+
         EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(msg); };
         EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);      };
         EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::Error(msg);     };

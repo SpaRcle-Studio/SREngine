@@ -59,7 +59,7 @@ namespace Framework::Graphics {
         }
 
         bool BuildCmdBuffers() override {
-            VkCommandBufferBeginInfo cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
+            /*VkCommandBufferBeginInfo cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
 
             VkClearValue clearValues[2] {
                     { .color = {{0.5f, 0.5f, 0.5f, 1.0f}} },
@@ -79,7 +79,7 @@ namespace Framework::Graphics {
                 vkCmdEndRenderPass(m_drawCmdBuffs[i]);
                 vkEndCommandBuffer(m_drawCmdBuffs[i]);
             }
-
+            */
             return true;
         }
 
@@ -99,8 +99,18 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
-        VulkanTools::MemoryManager*    m_memory = nullptr;
-        EvoVulkan::Core::VulkanKernel* m_kernel = nullptr;
+        VkViewport                     m_viewport      = { };
+        VkRect2D                       m_scissor       = { };
+
+        std::vector<VkClearValue>      m_clearValues   = { };
+        VkRenderPassBeginInfo          m_renderPassBI  = { };
+
+        EvoVulkan::Complexes::Shader*  m_currentShader = nullptr;
+
+        VkCommandBufferBeginInfo       m_cmdBufInfo    = { };
+
+        VulkanTools::MemoryManager*    m_memory        = nullptr;
+        EvoVulkan::Core::VulkanKernel* m_kernel        = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
                 "VK_LAYER_KHRONOS_validation"
@@ -126,8 +136,9 @@ namespace Framework::Graphics {
         const bool m_enableValidationLayers = true;
 #endif
     public:
-        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const noexcept override { return "Vulkan"; }
-        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()     const noexcept override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName()   const noexcept override { return "Vulkan";         }
+        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const noexcept override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const noexcept override { return m_kernel->GetCountBuildIterations(); }
     public:
         bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool Init(int swapInterval) override;
@@ -143,6 +154,51 @@ namespace Framework::Graphics {
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
+        void SetViewport(int32_t width, int32_t height) override {
+            if (m_currentFBO == 0) {
+                this->m_viewport = this->m_kernel->GetViewport();
+                vkCmdSetViewport(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], 0, 1, &m_viewport);
+            } else {
+                Helper::Debug::Error("Vulkan::SetViewport() : TODO!");
+            }
+        }
+        void SetScissor(int32_t width, int32_t height) override {
+            if (m_currentFBO == 0) {
+                this->m_scissor = this->m_kernel->GetScissor();
+                vkCmdSetScissor(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], 0, 1, &m_scissor);
+            } else {
+                Helper::Debug::Error("Vulkan::SetScissor() : TODO!");
+            }
+        }
+
+        SR_FORCE_INLINE void BeginRender() override {
+            if (m_currentFBO == 0) {
+                vkBeginCommandBuffer(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], &m_cmdBufInfo);
+                vkCmdBeginRenderPass(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+            } else {
+
+            }
+        }
+        SR_FORCE_INLINE void EndRender() override {
+            if (m_currentFBO == 0) {
+                vkCmdEndRenderPass(m_kernel->m_drawCmdBuffs[m_currentBuildIteration]);
+                vkEndCommandBuffer(m_kernel->m_drawCmdBuffs[m_currentBuildIteration]);
+            } else {
+
+            }
+        }
+
+        /**
+         \Vulkan Clear next frame buffer usage
+         */
+        SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) noexcept override {
+            this->m_clearValues.resize(colorCount + 1);
+            for (uint8_t i = 0; i < colorCount; i++)
+                m_clearValues[i] = { .color = {{ r, g, b, a }} };
+            m_clearValues[colorCount] = { .depthStencil = { depth, 0 } };
+            this->m_renderPassBI.clearValueCount = colorCount + 1;
+            this->m_renderPassBI.pClearValues    = m_clearValues.data();
+        }
 
         SR_FORCE_INLINE void DrawFrame() override { this->m_kernel->NextFrame(); }
         SR_FORCE_INLINE void PollEvents() const noexcept override { this->m_basicWindow->PollEvents(); }
@@ -162,7 +218,26 @@ namespace Framework::Graphics {
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept override;
 
-        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
+        SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
+            if (shaderProgram >= m_memory->m_countShaderPrograms) {
+                Helper::Debug::Error("Vulkan::UseShader() : index out of range!");
+                return;
+            }
+
+            this->m_currentShader = m_memory->m_ShaderPrograms[shaderProgram];
+
+            if (!m_currentShader) {
+                Helper::Debug::Error("Vulkan::UseShader() : shader is nullptr!");
+                return;
+            }
+
+            if (m_currentFBO == 0)
+                this->m_currentShader->Bind(this->m_kernel->m_drawCmdBuffs[m_currentBuildIteration]);
+            else
+                Helper::Debug::Error("Vulkan::UseShader() : TODO!");
+        }
+
+        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             if (!m_memory->FreeShaderProgram(shaderProgram))
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
         }
@@ -174,6 +249,14 @@ namespace Framework::Graphics {
             return false;
         }
         SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
+            if (FBO == 0) {
+                this->m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
+                this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass().m_self;
+                this->m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
+            } else {
+                Helper::Debug::Error("Vulkan::BindFrameBuffer() : TODO!");
+            }
+
             this->m_currentFBO = FBO;
         }
     };

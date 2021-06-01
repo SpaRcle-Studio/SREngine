@@ -27,7 +27,7 @@
 namespace Framework::Graphics {
     struct Vertex;
 
-    //enum class RenderBufferType { Small, Normal, Large };
+    enum class RenderBuffGroup { Kernel, Small, Normal, Large };
 
     class Environment {
     public:
@@ -42,14 +42,14 @@ namespace Framework::Graphics {
         glm::vec2 m_screenSize = glm::vec2(0, 0);
         static inline std::mutex g_mutex = std::mutex();
 
-        BasicWindow*    m_basicWindow         = nullptr;
-        bool            m_hasErrors           = false;
+        BasicWindow*    m_basicWindow           = nullptr;
+        bool            m_hasErrors             = false;
 
-        __int16         m_preferredDevice     = -1;
-        unsigned __int8 m_currentDrawingStage = 0;
-        uint32_t        m_currentFBO          = 0;
+        __int16         m_preferredDevice       = -1;
+        unsigned __int8 m_currentBuildIteration = 0;
+        uint32_t        m_currentFBO            = 0;
 
-        bool            m_needReBuild         = false;
+        bool            m_needReBuild           = false;
     protected:
         Environment() = default;
         ~Environment() = default;
@@ -61,15 +61,20 @@ namespace Framework::Graphics {
         void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
         void SetBuildState(const bool& isBuild)      { m_needReBuild = !isBuild;        }
 
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()       const noexcept { return m_currentFBO;      }
-        [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()           const noexcept { return m_needReBuild;     }
-        [[nodiscard]] SR_FORCE_INLINE bool HasErrors()               const noexcept { return m_hasErrors;       }
-        [[nodiscard]] Types::WindowFormat* GetWindowFormat()         const noexcept { return this->m_winFormat; }
-        [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()  const noexcept { return m_basicWindow;     }
-        [[nodiscard]] SR_FORCE_INLINE glm::vec2 GetScreenSize()      const noexcept { return m_screenSize;      }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()    const noexcept { return false;             }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()   const noexcept { return false;             }
-        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept { return PipeLine::Unknown; }
+        /// \warning Could be the cause of a critical error
+        void SetBuildIteration(const uint8_t& iter)  { m_currentBuildIteration = iter;  }
+
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const noexcept { return m_currentFBO;      }
+
+        [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const noexcept { return 1;                 }
+        [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const noexcept { return m_needReBuild;     }
+        [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const noexcept { return m_hasErrors;       }
+        [[nodiscard]] Types::WindowFormat* GetWindowFormat()               const noexcept { return this->m_winFormat; }
+        [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const noexcept { return m_basicWindow;     }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec2 GetScreenSize()            const noexcept { return m_screenSize;      }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()          const noexcept { return false;             }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const noexcept { return false;             }
+        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const noexcept { return PipeLine::Unknown; }
 
         bool InitWindowFormat(const Types::WindowFormat& windowFormat) {
             if (m_winFormat)
@@ -118,8 +123,7 @@ namespace Framework::Graphics {
 
         virtual unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 
-        [[nodiscard]] virtual unsigned __int8 GetCountDrawRepeats() const noexcept { return 0; }
-        void SetDrawingStage(const unsigned __int8& stage) noexcept { this->m_currentDrawingStage = stage; }
+        //void SetDrawingStage(const unsigned __int8& stage) noexcept { this->m_currentDrawingStage = stage; }
 
         // ============================= [ WINDOW METHODS ] =============================
 
@@ -144,10 +148,13 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void ClearBuffers() const noexcept { }
 
         virtual SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const noexcept { }
+        virtual SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) noexcept { }
 
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { }
         virtual SR_FORCE_INLINE void DrawFrame() { }
+        virtual SR_FORCE_INLINE void BeginRender() { }
+        virtual SR_FORCE_INLINE void EndRender() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) { return glm::vec4(0); }
@@ -155,6 +162,15 @@ namespace Framework::Graphics {
 
         virtual void SetWindowSize(unsigned int w, unsigned int h) {  }
         virtual void SetWindowPosition(int x, int y) { }
+
+        /**
+         * \if w and h = -1 then use auto
+         */
+        virtual void SetViewport(int32_t width = -1, int32_t height = -1) { }
+        /**
+        * \if w and h = -1 then use auto
+        */
+        virtual void SetScissor(int32_t width = -1, int32_t height = -1) { }
 
         virtual SR_FORCE_INLINE void PollEvents() const noexcept { }
 
@@ -194,8 +210,8 @@ namespace Framework::Graphics {
                 const std::vector<size_t>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept { return false; }
-        virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
-        virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) const noexcept { }
+        virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
+        virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
 
         virtual SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v)                 const noexcept { }
         virtual SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v)               const noexcept { }
