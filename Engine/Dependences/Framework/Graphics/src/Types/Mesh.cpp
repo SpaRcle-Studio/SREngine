@@ -177,20 +177,6 @@ void Mesh::ReCalcModel() {
     this->m_modelMat = modelMat;
 }
 
-bool Mesh::FreeVideoMemory() {
-    if (m_VAO > 0) {
-        VAO_usages[m_VAO]--;
-        if (VAO_usages[m_VAO] == 0)
-            m_env->FreeMesh(m_VAO);
-        m_isCalculated = false;
-        return true;
-    }
-    else {
-        Debug::Error("Mesh:FreeVideoMemory() : VAO is zero! Something went wrong...");
-        return false;
-    }
-}
-
 void Mesh::OnDestroyGameObject() noexcept {
     this->Destroy();
     if (!m_render)

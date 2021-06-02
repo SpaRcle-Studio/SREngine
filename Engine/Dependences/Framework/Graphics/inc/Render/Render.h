@@ -69,6 +69,7 @@ namespace Framework::Graphics {
         //std::vector<Skybox*>        m_skyboxesToRemove                  = std::vector<Skybox*>();
         //size_t                      m_countSkyboxesToRemove             = 0;
         bool                        m_needDestroySkybox                 = false;
+        bool                        m_needSelectMeshes                  = false;
 
         Shader*                     m_geometryShader                    = nullptr;
         Shader*                     m_flatGeometryShader                = nullptr;
@@ -84,8 +85,6 @@ namespace Framework::Graphics {
         ColorBuffer*                m_colorBuffer                       = nullptr;
 
         std::vector<Light*>         m_light                             = std::vector<Light*>();
-
-        bool                        m_needSelectMeshes                  = false;
 
         const PipeLine              m_pipeLine                          = PipeLine::Unknown;
     public:

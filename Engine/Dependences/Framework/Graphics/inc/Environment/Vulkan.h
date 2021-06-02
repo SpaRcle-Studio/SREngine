@@ -106,6 +106,7 @@ namespace Framework::Graphics {
         std::vector<VkClearValue>      m_clearValues   = { };
         VkRenderPassBeginInfo          m_renderPassBI  = { };
 
+        VkCommandBuffer                m_currentCmd    = VK_NULL_HANDLE;
         EvoVulkan::Complexes::Shader*  m_currentShader = nullptr;
 
         VkCommandBufferBeginInfo       m_cmdBufInfo    = { };
@@ -156,37 +157,31 @@ namespace Framework::Graphics {
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
         void SetViewport(int32_t width, int32_t height) override {
-            if (m_currentFBO == 0) {
+            if (m_currentFBO == 0)
                 this->m_viewport = this->m_kernel->GetViewport();
-                vkCmdSetViewport(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], 0, 1, &m_viewport);
-            } else {
+            else {
                 Helper::Debug::Error("Vulkan::SetViewport() : TODO!");
             }
+
+            vkCmdSetViewport(m_currentCmd, 0, 1, &m_viewport);
         }
         void SetScissor(int32_t width, int32_t height) override {
-            if (m_currentFBO == 0) {
+            if (m_currentFBO == 0)
                 this->m_scissor = this->m_kernel->GetScissor();
-                vkCmdSetScissor(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], 0, 1, &m_scissor);
-            } else {
+            else {
                 Helper::Debug::Error("Vulkan::SetScissor() : TODO!");
             }
+
+            vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
         }
 
         SR_FORCE_INLINE void BeginRender() override {
-            if (m_currentFBO == 0) {
-                vkBeginCommandBuffer(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], &m_cmdBufInfo);
-                vkCmdBeginRenderPass(m_kernel->m_drawCmdBuffs[m_currentBuildIteration], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
-            } else {
-
-            }
+            vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
+            vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
         }
         SR_FORCE_INLINE void EndRender() override {
-            if (m_currentFBO == 0) {
-                vkCmdEndRenderPass(m_kernel->m_drawCmdBuffs[m_currentBuildIteration]);
-                vkEndCommandBuffer(m_kernel->m_drawCmdBuffs[m_currentBuildIteration]);
-            } else {
-
-            }
+            vkCmdEndRenderPass(m_currentCmd);
+            vkEndCommandBuffer(m_currentCmd);
         }
 
         /**
@@ -232,10 +227,7 @@ namespace Framework::Graphics {
                 return;
             }
 
-            if (m_currentFBO == 0)
-                this->m_currentShader->Bind(this->m_kernel->m_drawCmdBuffs[m_currentBuildIteration]);
-            else
-                Helper::Debug::Error("Vulkan::UseShader() : TODO!");
+            this->m_currentShader->Bind(this->m_currentCmd);
         }
 
         SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
@@ -244,22 +236,38 @@ namespace Framework::Graphics {
         }
     public:
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
-            return false;
+            auto id = this->m_memory->AllocateVBO(vertSize * count, vertices);
+            if (id >= 0) {
+                VBO = id;
+                return true;
+            }
+            else
+                return false;
         }
         SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)  const noexcept override {
-            return false;
+            auto id = this->m_memory->AllocateIBO(indxSize * count, indices);
+            if (id >= 0) {
+                IBO = id;
+                return true;
+            }
+            else
+                return false;
         }
         SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
             if (FBO == 0) {
                 this->m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
                 this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass().m_self;
                 this->m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
+                this->m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
             } else {
                 Helper::Debug::Error("Vulkan::BindFrameBuffer() : TODO!");
             }
 
             this->m_currentFBO = FBO;
         }
+
+        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override { return this->m_memory->FreeIBO(ID); }
     };
 }
 

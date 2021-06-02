@@ -23,13 +23,6 @@ namespace Framework::Graphics{
 }
 
 namespace Framework::Graphics::Types {
-    inline static std::map<unsigned int, unsigned long> VAO_usages = std::map<unsigned int, unsigned long>();
-    inline static std::map<std::string, unsigned int>   VAO_names = std::map<std::string, unsigned int>();
-
-    inline static std::map<uint32_t, unsigned long> VBO_usages = std::map<unsigned int, unsigned long>();
-    inline static std::map<uint32_t, unsigned long> IBO_usages = std::map<unsigned int, unsigned long>();
-    inline static std::map<std::string, std::pair<uint32_t, uint32_t>> VBOandIBO_names = std::map<std::string, std::pair<uint32_t, uint32_t>>();
-
     using namespace Helper;
 
     class Material;
@@ -111,6 +104,7 @@ namespace Framework::Graphics::Types {
         Material*                   m_material              = nullptr;
 
         /** \brief Vertices OpenGL-context calculated */
+        volatile bool               m_hasErrors             = false;
         volatile bool               m_isCalculated          = false;
         unsigned char               m_toolID                = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
@@ -172,16 +166,10 @@ namespace Framework::Graphics::Types {
         }); \
 
         bool SimpleDraw();
-        SR_FORCE_INLINE bool DrawVulkan() noexcept {
-            if (m_isDestroy) return false;
 
-            if (!m_isCalculated)
-                if (!this->Calculate())
-                    return false;
+        virtual SR_FORCE_INLINE void DrawVulkan() noexcept = 0;
 
-            this->m_env->DrawTriangles(m_VAO, m_countVertices);
-        }
-        SR_FORCE_INLINE bool Draw() noexcept {
+        SR_FORCE_INLINE bool DrawOpenGL() noexcept {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
 
             if (m_isDestroy) return false;
@@ -228,7 +216,7 @@ namespace Framework::Graphics::Types {
         }
 
         /** \warning call only from render */
-        bool FreeVideoMemory();
+        virtual bool FreeVideoMemory() = 0;
 
         void OnDestroyComponent() noexcept override {
             Debug::Error("Mesh::OnDestroyComponent() : TODO!");

@@ -93,11 +93,6 @@ namespace Framework::Graphics {
         Camera*                                             m_aimedCameraTarget     = nullptr;
         Mesh*                                               m_aimedMesh             = nullptr;
         bool                                                m_requireGetAimed       = false;
-        /*
-          0 - nothing
-          1 - in process
-          2 - complete
-         */
 
         GUI::ICanvas*                                       m_canvas                = nullptr;
 

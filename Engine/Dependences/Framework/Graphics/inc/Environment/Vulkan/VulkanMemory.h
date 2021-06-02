@@ -64,20 +64,60 @@ namespace Framework::Graphics::VulkanTools {
             return memory;
         }
     public:
-        bool FreeShaderProgram(uint32_t ID) {
+        [[nodiscard]] bool FreeVBO(uint32_t ID) const {
+            if (ID >= m_countVBO) {
+                Helper::Debug::Error("MemoryManager::FreeVBO() : list index out of range!");
+                return false;
+            }
+
+            auto* memory = this->m_VBOs[ID];
+            if (!memory) {
+                Helper::Debug::Error("MemoryManager::FreeVBO() : VBO is not exists!");
+                return false;
+            }
+
+            memory->Destroy();
+            memory->Free();
+
+            this->m_VBOs[ID] = nullptr;
+
+            return true;
+        }
+
+        [[nodiscard]] bool FreeIBO(uint32_t ID) const {
+            if (ID >= m_countIBO) {
+                Helper::Debug::Error("MemoryManager::FreeIBO() : list index out of range!");
+                return false;
+            }
+
+            auto* memory = this->m_IBOs[ID];
+            if (!memory) {
+                Helper::Debug::Error("MemoryManager::FreeIBO() : IBO is not exists!");
+                return false;
+            }
+
+            memory->Destroy();
+            memory->Free();
+
+            this->m_IBOs[ID] = nullptr;
+
+            return true;
+        }
+
+        [[nodiscard]] bool FreeShaderProgram(uint32_t ID) const {
             if (ID >= m_countShaderPrograms) {
                 Helper::Debug::Error("MemoryManager::FreeShaderProgram() : list index out of range!");
                 return false;
             }
 
-            EvoVulkan::Complexes::Shader* shader = this->m_ShaderPrograms[ID];
-            if (!shader) {
+            auto* memory = this->m_ShaderPrograms[ID];
+            if (!memory) {
                 Helper::Debug::Error("MemoryManager::FreeShaderProgram() : shader program is not exists!");
                 return false;
             }
 
-            shader->Destroy();
-            shader->Free();
+            memory->Destroy();
+            memory->Free();
 
             this->m_ShaderPrograms[ID] = nullptr;
 

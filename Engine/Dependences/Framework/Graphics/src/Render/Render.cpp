@@ -124,6 +124,7 @@ void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *m
 
     this->m_removeMeshes.push_back(mesh);
     m_countMeshesToRemove++;
+
     m_mutex.unlock();
 }
 void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh *mesh) {
@@ -167,6 +168,7 @@ void Framework::Graphics::Render::PollEvents() noexcept {
 
         m_newMeshes.clear(); // Clear new meshes array
         m_countNewMeshes = 0;
+
         this->m_env->SetBuildState(false);
 
         m_mutex.unlock();
@@ -203,6 +205,7 @@ void Framework::Graphics::Render::PollEvents() noexcept {
 
         m_countMeshesToRemove = 0; // Clear meshes to remove array
         m_removeMeshes.clear();
+
         this->m_env->SetBuildState(false);
 
         m_mutex.unlock();
@@ -224,6 +227,7 @@ void Framework::Graphics::Render::PollEvents() noexcept {
 
         m_textureToFree.clear();
         m_countTexturesToFree = 0;
+
         this->m_env->SetBuildState(false);
 
         m_mutex.unlock();
@@ -256,6 +260,11 @@ Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {
+    if (m_skybox) {
+        Helper::Debug::Error("Render::SetSkybox() : skybox already exists!");
+        return;
+    }
+
     skybox->SetRender(this);
     this->m_skybox = skybox;
     this->m_env->SetBuildState(false);

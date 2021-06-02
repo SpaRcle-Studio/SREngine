@@ -260,6 +260,8 @@ namespace Framework::Graphics {
         [[nodiscard]] virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
         virtual SR_FORCE_INLINE void DeleteTexture(unsigned int ID) const noexcept { }
         virtual SR_FORCE_INLINE void FreeCubeMap(unsigned int ID) const noexcept { }
+        [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept { return false; }
+        [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept { return false; }
     };
 }
 

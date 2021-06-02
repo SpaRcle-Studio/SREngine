@@ -26,9 +26,12 @@ namespace Framework::Graphics::Impl {
                 m_env->BindFrameBuffer(0);
 
                 m_env->BeginRender();
+                {
+                    Shader::GetDefaultGeometryShader()->Use();
 
-                //Shader::GetDefaultGeometryShader()->Use();
-
+                    for (m_t = 0; m_t < m_countMeshes; m_t++)
+                        m_meshes[m_t]->DrawVulkan();
+                }
                 m_env->EndRender();
             }
 

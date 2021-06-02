@@ -64,14 +64,14 @@ namespace Framework::Graphics::Impl {
                 this->m_env->SetCullFacingEnabled(false);
 
                 for (m_t = 0; m_t < m_countMeshes; m_t++)
-                    m_meshes[m_t]->Draw();
+                    m_meshes[m_t]->DrawOpenGL();
 
                 this->m_env->SetWireFrameEnabled(false);
                 this->m_env->SetDepthTestEnabled(true);
                 this->m_env->SetCullFacingEnabled(true);
             } else {
                 for (m_t = 0; m_t < m_countMeshes; m_t++)
-                    m_meshes[m_t]->Draw();
+                    m_meshes[m_t]->DrawOpenGL();
             }
 
             return true;
