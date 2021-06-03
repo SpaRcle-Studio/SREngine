@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <string>
 #include <json/json.hpp>
+#include <macros.h>
 #include <mutex>
 #include <Debug.h>
 
@@ -82,7 +83,12 @@ namespace Framework::Helper {
                 std::map<std::string, std::function<Component*(void)>>();
     protected:
         bool m_isSelected        = false;
+
+        // Задается игровым объектом/движком, когда необходимо принудительно отключить
         bool m_isActive          = true;
+        // Задается скриптами и пользователем через инспектор
+        bool m_isEnabled         = true;
+
         const std::string m_name = "Unknown";
         GameObject* m_parent     = nullptr;
     public:
@@ -100,10 +106,14 @@ namespace Framework::Helper {
         virtual void OnSelected(bool value)         noexcept {
             this->m_isSelected = value;
         };
+        virtual void OnReady(bool ready) { }
 
-        inline void SetActive(bool v) { m_isActive = v; }
-        [[nodiscard]] inline bool IsActive() const noexcept { return m_isActive; }
-        [[nodiscard]] inline bool IsSelected() const noexcept { return m_isSelected; }
+        void SetActive(bool v)  noexcept { this->m_isActive = v;  this->OnReady(IsReady()); }
+        void SetEnabled(bool v) noexcept { this->m_isEnabled = v; this->OnReady(IsReady()); }
+
+        [[nodiscard]] inline bool IsActive()         const noexcept { return m_isActive;                }
+        [[nodiscard]] inline bool IsSelected()       const noexcept { return m_isSelected;              }
+        [[nodiscard]] SR_FORCE_INLINE bool IsReady() const noexcept { return m_isActive && m_isEnabled; }
     protected:
         virtual void OnDestroyComponent() noexcept = 0;
         virtual void OnDestroyGameObject() noexcept = 0;

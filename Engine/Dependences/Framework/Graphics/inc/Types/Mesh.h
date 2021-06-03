@@ -123,6 +123,9 @@ namespace Framework::Graphics::Types {
         virtual bool Calculate() = 0;
     protected:
         void OnDestroyGameObject() noexcept override;
+        void OnReady(bool ready) override {
+            this->m_env->SetBuildState(false);
+        }
     public:
         SR_FORCE_INLINE void WaitCalculate() const {
             ret:

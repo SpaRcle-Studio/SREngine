@@ -23,11 +23,17 @@ namespace Framework::Graphics::Types {
         std::vector<Vertices::Mesh3DVertex> m_vertices = std::vector<Vertices::Mesh3DVertex>();
     public:
         SR_FORCE_INLINE void DrawVulkan() noexcept override {
-            if (m_isDestroy) return;
+            if (!this->IsReady() || m_isDestroy) return;
 
             if (!m_isCalculated)
                 if (m_hasErrors || !this->Calculate())
                     return;
+
+            this->m_env->BindVBO(m_VBO);
+            this->m_env->BindIBO(m_IBO);
+
+            this->m_env->DrawIndices(this->m_countIndices);
+            //this->m_env->Draw(3);
         }
 
         Mesh* Copy() override;

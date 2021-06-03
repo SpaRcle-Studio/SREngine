@@ -371,13 +371,13 @@ void Framework::Graphics::Window::Draw() {
         //this->m_env->BeginDrawGUI();
 
     if (m_countCameras == 1) {
-        if (m_cameras[0]->IsActive()) {
+        if (m_cameras[0]->IsReady()) {
             DrawToCamera(m_cameras[0])
         }
     }
     else
         for (Camera* camera : m_cameras) {
-            if (!camera->IsActive())
+            if (!camera->IsReady())
                 continue;
             DrawToCamera(camera)
         }

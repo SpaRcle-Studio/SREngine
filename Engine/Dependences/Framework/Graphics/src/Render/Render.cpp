@@ -28,7 +28,7 @@ bool Framework::Graphics::Render::Create(Window* window) {
                 Vertices::Mesh3DVertex::GetAttributes());
         this->m_geometryShader->SetCreateInfo({
             .polygonMode  = PolygonMode::Fill,
-            .cullMode     = CullMode::Back,
+            .cullMode     = CullMode::None,
             .depthCompare = DepthCompare::LessOrEqual,
             .blendEnabled = true,
             .depthEnabled = true

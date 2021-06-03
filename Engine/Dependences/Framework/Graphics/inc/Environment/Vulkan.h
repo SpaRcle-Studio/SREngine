@@ -100,6 +100,8 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
+        VkDeviceSize                   m_offsets[1]    = {0};
+
         VkViewport                     m_viewport      = { };
         VkRect2D                       m_scissor       = { };
 
@@ -235,6 +237,13 @@ namespace Framework::Graphics {
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
         }
     public:
+        SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
+            vkCmdDrawIndexed(m_currentCmd, countIndices, 1, 0, 0, 0);
+        }
+        SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept override {
+            vkCmdDraw(m_currentCmd, countVerts, 1, 0, 0);
+        }
+
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
             auto id = this->m_memory->AllocateVBO(vertSize * count, vertices);
             if (id >= 0) {
@@ -264,6 +273,14 @@ namespace Framework::Graphics {
             }
 
             this->m_currentFBO = FBO;
+        }
+
+        SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const noexcept override {
+            vkCmdBindVertexBuffers(m_currentCmd, 0, 1, &m_memory->m_VBOs[VBO]->m_buffer, m_offsets);
+        }
+        SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const noexcept override {
+            // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
+            vkCmdBindIndexBuffer(m_currentCmd, m_memory->m_IBOs[IBO]->m_buffer, 0, VK_INDEX_TYPE_UINT32);
         }
 
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }

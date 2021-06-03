@@ -250,6 +250,8 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
         virtual SR_FORCE_INLINE void DrawLines(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
         virtual SR_FORCE_INLINE void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept { }
+        virtual SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept { }
 
         // ============================== [ TEXTURE METHODS ] ==============================
 

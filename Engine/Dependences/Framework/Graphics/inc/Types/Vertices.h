@@ -12,15 +12,51 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 #define SR_VERTEX_DESCRIPTION size_t
 
 namespace Framework::Graphics::Vertices {
+    static std::string format(const char *fmt, ...)
+    {
+        va_list args;
+        va_start(args, fmt);
+        std::vector<char> v(1024);
+        while (true)
+        {
+            va_list args2;
+            va_copy(args2, args);
+            int res = vsnprintf(v.data(), v.size(), fmt, args2);
+            if ((res >= 0) && (res < static_cast<int>(v.size())))
+            {
+                va_end(args);
+                va_end(args2);
+                return std::string(v.data());
+            }
+            size_t size;
+            if (res < 0)
+                size = v.size() * 2;
+            else
+                size = static_cast<size_t>(res) + 1;
+            v.clear();
+            v.resize(size);
+            va_end(args2);
+        }
+    }
+
     enum class Attribute {
         FLOAT_R32G32B32A32,
         FLOAT_R32G32B32,
         FLOAT_R32G32,
     };
+
+    static std::string ToString(const glm::vec3& vec3) {
+        return format("{ %f, %f, %f }", vec3.x, vec3.y, vec3.z);
+    }
+
+    static std::string ToString(const glm::vec2& vec2) {
+        return format("{ %f, %f }", vec2.x, vec2.y);
+    }
 
     struct Mesh3DVertex {
         glm::vec3 pos;
@@ -49,7 +85,29 @@ namespace Framework::Graphics::Vertices {
                    && norm  == other.norm
                    && tang  == other.tang;
         }
+
+        [[nodiscard]] std::string ToString() const {
+            return "{ " + Vertices::ToString(pos) + ", " + Vertices::ToString(uv) + " }";
+        }
     };
+
+    static std::string ToString(const std::vector<uint32_t>& indices) {
+        std::string str = std::to_string(indices.size()) + " indices: \n";
+        for (uint32_t i = 0; i < indices.size() - 1; i++)
+            str += std::to_string(indices[i]) + ", ";
+        if (!indices.empty())
+            str += std::to_string(indices[indices.size() - 1]);
+        return str;
+    }
+
+    static std::string ToString(const std::vector<Mesh3DVertex>& vertices) {
+        std::string str = std::to_string(vertices.size()) + " vertices: \n";
+        for (uint32_t i = 0; i < vertices.size() - 1; i++)
+            str += vertices[i].ToString() + ",\n";
+        if (!vertices.empty())
+            str += vertices[vertices.size() - 1].ToString();
+        return str;
+    }
 
     struct SkyboxVertex {
         glm::vec3 pos;

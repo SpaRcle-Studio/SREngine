@@ -161,6 +161,11 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
         m_pos.z//-m_pos.z
     });
 
+   // std::cout << glm::to_string(m_viewMat) << std::endl;
+   // std::cout << glm::to_string(m_projection) << std::endl;
+
+    //std::cout << std::endl;
+
     //m_pitch * cos(m_roll)   +  m_yaw * sin(m_roll)    + m_roll * sin(m_yaw)
     //   * cos(m_roll)   + m_pitch * sin(m_roll)   + m_roll * sin(m_pitch)
 

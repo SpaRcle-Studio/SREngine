@@ -27,6 +27,9 @@ namespace Framework::Graphics::Impl {
 
                 m_env->BeginRender();
                 {
+                    this->m_env->SetViewport();
+                    this->m_env->SetScissor();
+
                     Shader::GetDefaultGeometryShader()->Use();
 
                     for (m_t = 0; m_t < m_countMeshes; m_t++)

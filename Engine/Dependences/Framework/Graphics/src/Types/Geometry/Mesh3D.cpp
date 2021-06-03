@@ -31,6 +31,9 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
         return false;
     }
 
+    //std::cout << Vertices::ToString(m_indices) << std::endl;
+    //std::cout << Vertices::ToString(m_vertices) << std::endl;
+
     m_mutex.lock();
 
     {

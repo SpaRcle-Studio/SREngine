@@ -18,6 +18,15 @@ namespace Framework::Graphics{
             }
         }
 
+        static std::vector<VkVertexInputBindingDescription> AbstractVertexDescriptionsToVk(const std::vector<SR_VERTEX_DESCRIPTION>& descriptions) {
+            auto vkDescriptions = std::vector<VkVertexInputBindingDescription>();
+
+            for (uint32_t i = 0; i < descriptions.size(); i++)
+                vkDescriptions.push_back(EvoVulkan::Tools::Initializers::VertexInputBindingDescription(i, descriptions[i], VK_VERTEX_INPUT_RATE_VERTEX));
+
+            return vkDescriptions;
+        }
+
         static ShaderType VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
             switch (stage) {
                 case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderType::Fragment;
@@ -339,7 +348,8 @@ namespace Framework::Graphics{
             return false;
         }
 
-        auto vkVertexDescriptions = std::vector<VkVertexInputBindingDescription>(vertexDescriptions.size());
+        //auto vkVertexDescriptions = std::vector<VkVertexInputBindingDescription>(vertexDescriptions.size());
+        auto vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
         auto vkVertexAttributes   = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
         if (vkVertexAttributes.size() != vertexAttributes.size()) {
             Helper::Debug::Error("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
