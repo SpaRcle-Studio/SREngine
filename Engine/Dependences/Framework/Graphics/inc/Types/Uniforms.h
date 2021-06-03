@@ -8,9 +8,12 @@
 #include <glm/glm.hpp>
 
 namespace Framework::Graphics {
-    struct Model3DUniform {
+    struct Mesh3DSharedUBO {
         glm::mat4 proj;
         glm::mat4 view;
+    };
+
+    struct Mesh3DUBO {
         glm::mat4 model;
     };
 }
