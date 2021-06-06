@@ -29,11 +29,7 @@ namespace Framework::Graphics::Types {
                 if (m_hasErrors || !this->Calculate())
                     return;
 
-            this->m_env->BindVBO(m_VBO);
-            this->m_env->BindIBO(m_IBO);
-
             this->m_env->DrawIndices(this->m_countIndices);
-            //this->m_env->Draw(3);
         }
 
         Mesh* Copy() override;

@@ -208,7 +208,8 @@ namespace Framework::Graphics {
                 const std::string& path,
                 int32_t FBO,
                 void** shaderData,
-                const std::vector<uint64_t>& uniformSizes = {}) const noexcept override;
+                const std::vector<uint64_t>& uniformSizes
+                ) const noexcept override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,

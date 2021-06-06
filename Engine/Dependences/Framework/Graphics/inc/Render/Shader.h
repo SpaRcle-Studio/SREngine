@@ -14,6 +14,7 @@
 #include <macros.h>
 
 #include <Types/Vertices.h>
+#include <Types/Uniforms.h>
 
 namespace Framework::Graphics {
     class Render;
@@ -38,6 +39,7 @@ namespace Framework::Graphics {
         SRShaderCreateInfo                                  m_shaderCreateInfo    = {};
         std::vector<std::pair<Vertices::Attribute, size_t>> m_verticesAttributes  = {};
         std::vector<SR_VERTEX_DESCRIPTION>                  m_verticesDescription = {};
+        std::vector<std::pair<UBOType, uint64_t>>           m_uniformsInfo        = {};
     private:
         Environment*                                        m_env                 = nullptr;
         Render*                                             m_render              = nullptr;
@@ -53,7 +55,6 @@ namespace Framework::Graphics {
             if (!g_stdGeometry)
                 Helper::Debug::Error("Shader::GetDefaultGeometryShader() : shader is nullptr!");
 #endif
-
             return g_stdGeometry;
         }
         static bool SetStandardGeometryShader(Shader* shader) noexcept;
@@ -66,8 +67,18 @@ namespace Framework::Graphics {
         bool SetVertex(
                 const std::vector<SR_VERTEX_DESCRIPTION>& descriptions,
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& attributes);
+
+        /*
+         * 1 - type
+         * 2 - size
+         */
+        bool SetUniforms(const std::vector<std::pair<UBOType, uint64_t>>& uniforms);
         bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
     public:
+        SR_FORCE_INLINE void SetUBO(const uint32_t& binding, void* data) {
+
+        }
+
         SR_FORCE_INLINE void SetBool(const char* name, const bool& v)         const noexcept {
             //m_env->SetBoolOfLocation(this->m_fields.find(name)->second, v);
             //m_env->SetBool(m_ID, name, v);

@@ -14,6 +14,8 @@
 #include <imgui.h>
 #include <imgui_impl_win32.h>
 
+#include <Events/EventManager.h>
+
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace Framework::Graphics {
@@ -64,6 +66,11 @@ namespace Framework::Graphics {
                     OnResized();
                     return 0;
                 }*/
+                case WM_CLOSE: {
+                    Helper::Debug::System("Win32Window::CallBack() : WM_CLOSE event has been received!");
+                    Helper::EventManager::Push(Helper::EventManager::Event::Exit);
+                    return 0;
+                }
                 case (WM_WINDOWPOSCHANGED): {
                     DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
                     this->m_maximize = styles & WS_MAXIMIZE;

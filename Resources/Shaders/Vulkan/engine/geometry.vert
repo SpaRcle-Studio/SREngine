@@ -7,7 +7,7 @@ layout (location = 3) in vec3 inTang;
 
 layout (location = 0) out vec3 outUV;
 
-layout (binding = 0) uniform SharedUBO {
+layout (binding = 0) uniform ProjViewUBO {
     mat4 proj;
     mat4 view;
 } sharedUBO;

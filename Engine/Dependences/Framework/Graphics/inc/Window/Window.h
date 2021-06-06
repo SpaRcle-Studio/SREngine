@@ -109,6 +109,7 @@ namespace Framework::Graphics {
         bool InitEnvironment();
         void Draw();
 
+        void DrawToCamera(Framework::Graphics::Camera* camera);
         void FindAimedMesh();
     public:
        // [[nodiscard]] inline ColorBuffer* GetColorBuffer() const noexcept { return this->m_colorBuffer; }

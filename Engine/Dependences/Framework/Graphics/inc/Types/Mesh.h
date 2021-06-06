@@ -139,6 +139,24 @@ namespace Framework::Graphics::Types {
         glm::vec3					m_scale				= {1,1,1};
         glm::mat4					m_modelMat			= glm::mat4(0);
     public:
+        [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVAO() const noexcept { return (uint32_t)m_VAO; }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVBO() const noexcept { return (uint32_t)m_VBO; }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }
+
+        int32_t GetVAO() {
+            if (!m_isCalculated)
+                if (!Calculate())
+                    return -1;
+            return m_VAO;
+        }
+
+        int32_t GetVBO() {
+            if (!m_isCalculated)
+                if (!Calculate())
+                    return -1;
+            return m_VBO;
+        }
+
         void PrintInfo();
 
         [[nodiscard]] std::string GetGeometryName() const noexcept { return this->m_geometry_name; }
@@ -190,7 +208,8 @@ namespace Framework::Graphics::Types {
                 this->m_material->Use();
             }
 
-            this->m_env->DrawTriangles(m_VAO, m_countVertices);
+            //this->m_env->DrawTriangles(m_VAO, m_countVertices);
+            this->m_env->DrawTriangles(m_countVertices);
 
             return true;
         }

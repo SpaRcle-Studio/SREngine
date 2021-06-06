@@ -47,7 +47,11 @@ bool Framework::Graphics::Shader::Compile() {
             return false;
         }
     } else {
-        if (!m_env->CompileShader(m_name, m_env->GetCurrentFBO(), &m_shaderTempData)) {
+        auto sizes = std::vector<uint64_t>();
+        for (auto info : m_uniformsInfo)
+            sizes.push_back(info.second);
+
+        if (!m_env->CompileShader(m_name, m_env->GetCurrentFBO(), &m_shaderTempData, sizes)) {
             Debug::Error("Shader::Compile() : failed compile \"" + m_name + "\" shader!");
             return false;
         }
@@ -148,6 +152,16 @@ bool Framework::Graphics::Shader::SetCreateInfo(Framework::Graphics::SRShaderCre
         return false;
     } else
         this->m_shaderCreateInfo = shaderCreateInfo;
+
+    return true;
+}
+
+bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<UBOType, uint64_t>> &uniforms) {
+    if (m_isInit) {
+        Helper::Debug::Error("Shader::SetUniforms() : shader already initialized!");
+        return false;
+    } else
+        this->m_uniformsInfo = uniforms;
 
     return true;
 }

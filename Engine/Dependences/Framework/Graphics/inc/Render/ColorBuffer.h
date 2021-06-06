@@ -11,7 +11,7 @@
 namespace Framework::Graphics {
     class ColorBuffer {
         struct cbInfo_t {
-            int Name;
+            size_t Name;
             glm::u8vec3 Color; // uint8 => 0 - 255 (unsigned char)
         };
     public:
@@ -37,19 +37,25 @@ namespace Framework::Graphics {
             Names[next].Color = color;
             next++;
         }
+
+        static inline bool Eq(const char a, const char b) {
+            return abs(a - b) < 2;
+        }
+
         //static inline bool CheckColor(glm::u8vec3& one, const unsigned char* two) noexcept {
         static inline bool CheckColor(glm::u8vec3& one, glm::u8vec3& two) noexcept {
             //return one.x == two[0] && one.y == two[1] && one.z == two[2];
             return one.x == two.x && one.y == two.y && one.z == two.z;
+            //return Eq(one.x, two.x) && Eq(one.y, two.y) && Eq(one.z, two.z);
         }
         //inline int GetSelectColorObject(unsigned char* pixel) noexcept {
-        inline int GetSelectColorObject(glm::u8vec3 pixel) noexcept {
+        inline size_t GetSelectColorObject(glm::u8vec3 pixel) noexcept {
             if (pixel != glm::u8vec3(0,0,0))
                 for (int i = 0; i < next; i++) {
                     if (CheckColor(Names[i].Color, pixel))
                         return Names[i].Name;
                 }
-            return -1;
+            return std::numeric_limits<size_t>::max();
         }
     };
 }

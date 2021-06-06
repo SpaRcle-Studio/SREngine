@@ -26,6 +26,10 @@ bool Framework::Graphics::Render::Create(Window* window) {
         this->m_geometryShader->SetVertex(
                 { Vertices::Mesh3DVertex::GetDescription() },
                 Vertices::Mesh3DVertex::GetAttributes());
+        this->m_geometryShader->SetUniforms({
+            { UBOType::Shared, sizeof(ProjViewUBO) },
+            { UBOType::Common, sizeof(Mesh3DUBO)   }
+        });
         this->m_geometryShader->SetCreateInfo({
             .polygonMode  = PolygonMode::Fill,
             .cullMode     = CullMode::None,
@@ -92,7 +96,7 @@ bool Framework::Graphics::Render::Close() {
     }
 
     auto data = std::string();
-    data.append("\n\tMeshes           : " + std::to_string(m_countMeshes));
+    //data.append("\n\tMeshes           : " + std::to_string(m_countMeshes));
     data.append("\n\tT meshes         : " + std::to_string(m_countTransparentMeshes));
     data.append("\n\tNew meshes       : " + std::to_string(m_countNewMeshes));
     data.append("\n\tMeshes to remove : " + std::to_string(m_countMeshesToRemove));
@@ -161,8 +165,25 @@ void Framework::Graphics::Render::PollEvents() noexcept {
                 m_transparent_meshes.push_back(temp);
                 m_countTransparentMeshes++;
             } else {
-                m_meshes.push_back(temp);
-                m_countMeshes++;
+                auto id = m_env->GetPipeLine() == PipeLine::OpenGL ? temp->GetVAO() : temp->GetVBO();
+                if (id < 0) {
+                    Helper::Debug::Error("Render::PollEvents() : failed get mesh id!");
+                    return;
+                }
+
+                {
+                    auto find = this->m_meshGroups.find(id);
+                    if (find == m_meshGroups.end())
+                        m_meshGroups[id] = {temp};
+                    else
+                        find->second.push_back(temp);
+
+                    m_countMeshesInGroups[id]++;
+                    m_totalCountMeshesInGroups++;
+                }
+
+                //m_meshes.push_back(temp);
+               // m_countMeshes++;
             }
         }
 
@@ -193,13 +214,43 @@ void Framework::Graphics::Render::PollEvents() noexcept {
                         break;
                     }
             } else {
-                for (m_t2 = 0; m_t2 < m_countMeshes; m_t2++)
-                    if (m_meshes[m_t2] == temp) {
-                        m_countMeshes--;
-                        m_meshes.erase(m_meshes.begin() + m_t2);
+                auto id = m_env->GetPipeLine() == PipeLine::OpenGL ? temp->GetVAO() : temp->GetVBO();
+                if (id < 0) {
+                    Helper::Debug::Error("Render::PollEvents() : failed get mesh id to remove!");
+                    return;
+                }
+
+                auto find = this->m_meshGroups.find(id);
+                if (find == m_meshGroups.end()) {
+                    Helper::Debug::Error("Render::PollEvents() : mesh group to remove mesh not found!");
+                    return;
+                }
+
+                auto& meshes = find->second;
+                for (m_t2 = 0; m_t2 < m_countMeshesInGroups[id]; m_t2++) {
+                    if (meshes[m_t2] == temp) {
+                        // TODO: may be check is zero count and remove?
+                        m_countMeshesInGroups[id]--;
+                        m_totalCountMeshesInGroups--;
+
+                        meshes.erase(meshes.begin() + m_t2);
                         temp->RemoveUsePoint();
+
+                        if (m_countMeshesInGroups[id] == 0) {
+                            m_meshGroups.erase(id);
+                            m_countMeshesInGroups.erase(id);
+                        }
                         break;
                     }
+                }
+
+                //for (m_t2 = 0; m_t2 < m_countMeshes; m_t2++)
+                 //   if (m_meshes[m_t2] == temp) {
+                 //       m_countMeshes--;
+                 //       m_meshes.erase(m_meshes.begin() + m_t2);
+                 //       temp->RemoveUsePoint();
+                 //       break;
+                  //  }
             }
         }
 
@@ -254,7 +305,7 @@ void Framework::Graphics::Render::PollEvents() noexcept {
 
 Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_env->GetPipeLine()) {
     //std::cout <<  m_meshes.capacity() << std::endl;
-    m_meshes.reserve(500 * 500);
+    //!!!!!!!!!m_meshes.reserve(500 * 500);
     m_newMeshes.reserve(500);
     m_removeMeshes.reserve(500);
 }
@@ -287,6 +338,19 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
 
     texture->AddUsePoint();
     texture->SetRender(this);
+}
+
+Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
+    // TODO: See
+    if (absoluteID < m_totalCountMeshesInGroups) {
+        for (auto const& [key, val] : m_meshGroups) {
+            if (absoluteID < m_countMeshesInGroups[key]) {
+                return val[abs(int32_t(m_totalCountMeshesInGroups - m_countMeshesInGroups[key]) - (int32_t)absoluteID)]; // TODO: can be reason crash!
+            } else continue;
+        }
+    }
+    else
+        return this->m_transparent_meshes[absoluteID];
 }
 
 /*

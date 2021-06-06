@@ -32,73 +32,84 @@ namespace Framework::Graphics {
     public:
         Render(const Render&) = delete;
     protected:
-        volatile bool               m_isCreate                          = false;
-        volatile bool               m_isInit                            = false;
-        volatile bool               m_isRun                             = false;
-        volatile bool               m_isClose                           = false;
+        volatile bool                           m_isCreate                          = false;
+        volatile bool                           m_isInit                            = false;
+        volatile bool                           m_isRun                             = false;
+        volatile bool                           m_isClose                           = false;
     protected:
-        Environment*                m_env                               = nullptr;
+        Environment*                            m_env                               = nullptr;
 
-        Window*                     m_window                            = nullptr;
-        Camera*                     m_currentCamera                     = nullptr;
-        std::mutex                  m_mutex                             = std::mutex();
-        size_t                      m_t                                 = 0;
-        size_t                      m_t2                                = 0;
+        Window*                                 m_window                            = nullptr;
+        Camera*                                 m_currentCamera                     = nullptr;
+        std::mutex                              m_mutex                             = std::mutex();
+        size_t                                  m_t                                 = 0;
+        size_t                                  m_t2                                = 0;
 
         /*// Selected meshes
-        size_t                      m_countNewSelectedMeshes            = 0;
-        std::vector<Mesh*>          m_newSelectedMeshes                 = std::vector<Mesh*>();
-        size_t                      m_countRemoveSelectedMeshes         = 0;
-        std::vector<Mesh*>          m_removeSelectedMeshes              = std::vector<Mesh*>();
-        size_t                      m_countSelectedMeshes               = 0;
-        std::vector<Mesh*>          m_selectedMeshes                    = std::vector<Mesh*>();*/
+        size_t                                  m_countNewSelectedMeshes            = 0;
+        std::vector<Mesh*>                      m_newSelectedMeshes                 = std::vector<Mesh*>();
+        size_t                                  m_countRemoveSelectedMeshes         = 0;
+        std::vector<Mesh*>                      m_removeSelectedMeshes              = std::vector<Mesh*>();
+        size_t                                  m_countSelectedMeshes               = 0;
+        std::vector<Mesh*>                      m_selectedMeshes                    = std::vector<Mesh*>();*/
 
-        std::vector<Mesh*>          m_newMeshes                         = std::vector<Mesh*>();
-        size_t                      m_countNewMeshes                    = 0;
-        std::vector<Mesh*>          m_removeMeshes                      = std::vector<Mesh*>();
-        size_t                      m_countMeshesToRemove               = 0;
+        std::vector<Mesh*>                      m_newMeshes                         = std::vector<Mesh*>();
+        size_t                                  m_countNewMeshes                    = 0;
+        std::vector<Mesh*>                      m_removeMeshes                      = std::vector<Mesh*>();
+        size_t                                  m_countMeshesToRemove               = 0;
 
-        std::vector<Mesh*>          m_meshes                            = std::vector<Mesh*>();
-        size_t                      m_countMeshes                       = 0;
-        std::vector<Mesh*>          m_transparent_meshes                = std::vector<Mesh*>();
-        size_t                      m_countTransparentMeshes            = 0;
+        //std::vector<Mesh*>                    m_meshes                            = std::vector<Mesh*>();
+        //size_t                                m_countMeshes                       = 0;
+        std::map<uint32_t, std::vector<Mesh*>>  m_meshGroups                        = std::map<uint32_t, std::vector<Mesh*>>();
+        std::map<uint32_t, uint32_t>            m_countMeshesInGroups               = std::map<uint32_t, uint32_t>();
+        uint32_t                                m_totalCountMeshesInGroups          = 0;
 
-        size_t                      m_countTexturesToFree               = 0;
-        std::vector<Texture*>       m_textureToFree                     = std::vector<Texture*>();
+        std::vector<Mesh*>                      m_transparent_meshes                = std::vector<Mesh*>();
+        size_t                                  m_countTransparentMeshes            = 0;
 
-        //std::vector<Skybox*>        m_skyboxesToRemove                  = std::vector<Skybox*>();
-        //size_t                      m_countSkyboxesToRemove             = 0;
-        bool                        m_needDestroySkybox                 = false;
-        bool                        m_needSelectMeshes                  = false;
+        size_t                                  m_countTexturesToFree               = 0;
+        std::vector<Texture*>                   m_textureToFree                     = std::vector<Texture*>();
 
-        Shader*                     m_geometryShader                    = nullptr;
-        Shader*                     m_flatGeometryShader                = nullptr;
-        //Shader*                     m_skyboxShader                      = nullptr;
-        //Shader*                     m_gridShader                        = nullptr;
+        //std::vector<Skybox*>                    m_skyboxesToRemove                  = std::vector<Skybox*>();
+        //size_t                                  m_countSkyboxesToRemove             = 0;
+        bool                                    m_needDestroySkybox                 = false;
+        bool                                    m_needSelectMeshes                  = false;
 
-        EditorGrid*                 m_grid                              = nullptr;
-        bool                        m_gridEnabled                       = false;
-        bool                        m_skyboxEnabled                     = true;
-        bool                        m_wireFrame                         = false;
+        Shader*                                 m_geometryShader                    = nullptr;
+        Shader*                                 m_flatGeometryShader                = nullptr;
+        //Shader*                                 m_skyboxShader                      = nullptr;
+        //Shader*                                 m_gridShader                        = nullptr;
 
-        Skybox*                     m_skybox                            = nullptr;
-        ColorBuffer*                m_colorBuffer                       = nullptr;
+        EditorGrid*                             m_grid                              = nullptr;
+        bool                                    m_gridEnabled                       = false;
+        bool                                    m_skyboxEnabled                     = true;
+        bool                                    m_wireFrame                         = false;
 
-        std::vector<Light*>         m_light                             = std::vector<Light*>();
+        Skybox*                                 m_skybox                            = nullptr;
+        ColorBuffer*                            m_colorBuffer                       = nullptr;
 
-        const PipeLine              m_pipeLine                          = PipeLine::Unknown;
+        std::vector<Light*>                     m_light                             = std::vector<Light*>();
+
+        const PipeLine                          m_pipeLine                          = PipeLine::Unknown;
     public:
-        [[nodiscard]] size_t GetAbsoluteCountMeshes()     const noexcept { return m_countMeshes + m_countTransparentMeshes; }
+        [[nodiscard]] size_t GetAbsoluteCountMeshes() const noexcept { return m_totalCountMeshesInGroups + m_countTransparentMeshes; }
+        /*[[nodiscard]] size_t GetAbsoluteCountMeshes()     const noexcept { return m_countMeshes + m_countTransparentMeshes; }
         [[nodiscard]] Mesh* GetMesh(size_t absoluteID)    const noexcept { // TODO: See
             if (absoluteID < m_countMeshes)
                 return this->m_meshes[absoluteID];
             else
                 return this->m_transparent_meshes[absoluteID];
-        }
+        }*/
+        //[[nodiscard]] Mesh* FindMesh(size_t absoluteID)    const noexcept { // TODO: See
+        //
+        //}
+
+        [[nodiscard]] Mesh* GetMesh(size_t absoluteID) noexcept;
+
 
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
         [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }
-        [[nodiscard]] size_t GetCountMeshes()             const noexcept { return m_countMeshes; }
+        //[[nodiscard]] size_t GetCountMeshes()             const noexcept { return m_countMeshes; }
         [[nodiscard]] size_t GetCountTransparentMeshes()  const noexcept { return m_countTransparentMeshes; }
     public:
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }

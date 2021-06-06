@@ -8,7 +8,11 @@
 #include <glm/glm.hpp>
 
 namespace Framework::Graphics {
-    struct Mesh3DSharedUBO {
+    enum class UBOType {
+        Common, Shared
+    };
+
+    struct ProjViewUBO {
         glm::mat4 proj;
         glm::mat4 view;
     };

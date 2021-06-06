@@ -205,7 +205,8 @@ namespace Framework::Graphics {
                 const std::string& path,
                 int32_t FBO,
                 void** shaderData,
-                const std::vector<uint64_t>& uniformSizes = {}) const noexcept { return false; }
+                const std::vector<uint64_t>& uniformSizes = {}
+                ) const noexcept { return false; }
         virtual bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -248,6 +249,7 @@ namespace Framework::Graphics {
 
         virtual bool FreeMesh(unsigned int VAO) const noexcept { return false; }
         virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int& count_vertices) const noexcept { }
         virtual SR_FORCE_INLINE void DrawLines(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
         virtual SR_FORCE_INLINE void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept { }
         virtual SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept { }

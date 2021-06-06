@@ -349,7 +349,8 @@ bool Framework::Graphics::OpenGL::CompileShader(
         const std::string& name,
         int32_t FBO,
         void** shaderData,
-        const std::vector<uint64_t>& uniformSizes) const noexcept {
+        const std::vector<uint64_t>& uniformSizes
+        ) const noexcept {
     if (FBO >= 0) {
         Helper::Debug::Error("OpenGL::CompileShader() : opengl dont use FBO for shaders!");
         return false;

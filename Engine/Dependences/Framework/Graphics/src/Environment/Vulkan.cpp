@@ -229,7 +229,8 @@ namespace Framework::Graphics{
             const std::string &path,
             int32_t FBO,
             void **shaderData,
-            const std::vector<uint64_t>& uniformSizes) const noexcept
+            const std::vector<uint64_t>& uniformSizes
+            ) const noexcept
     {
         if (FBO < 0) {
             Helper::Debug::Error("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
@@ -323,7 +324,8 @@ namespace Framework::Graphics{
                 Helper::ResourceManager::GetResourcesFolder() + "\\Cache\\Shaders",
                 modules,
                 descriptorLayoutBindings,
-                uniformSizes)) {
+                uniformSizes
+                )) {
             Helper::Debug::Error("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
             return false;
         }

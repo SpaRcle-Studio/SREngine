@@ -18,7 +18,7 @@ namespace Framework::Graphics::Impl {
             if (!m_colorBuffer)
                 this->m_colorBuffer = new ColorBuffer();
 
-            this->m_colorBuffer->InitNames(this->GetAbsoluteCountMeshes());
+            /*this->m_colorBuffer->InitNames(this->GetAbsoluteCountMeshes());
 
             for (m_t = 0; m_t < m_countMeshes; m_t++){
                 this->m_flatGeometryShader->SetInt("id", (int)m_t);
@@ -27,9 +27,24 @@ namespace Framework::Graphics::Impl {
                 this->m_colorBuffer->LoadName(m_t, Helper::StringUtils::IntToColor(m_t + 1));
 
                 m_meshes[m_t]->SimpleDraw();
-            }
+            }*/
 
-            //this->m_manipulate->SimpleDraw(m_flatGeometryShader);
+            this->m_colorBuffer->InitNames(this->GetAbsoluteCountMeshes());
+
+            uint32_t id = 0;
+
+            for (auto const& [key, val] : m_meshGroups) {
+                for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++) {
+                    this->m_flatGeometryShader->SetInt("id", (int) id);
+                    this->m_flatGeometryShader->SetMat4("modelMat", val[m_t]->GetModelMatrix());
+
+                    this->m_colorBuffer->LoadName(m_t, Helper::StringUtils::IntToColor(id + 1));
+
+                    val[m_t]->SimpleDraw();
+
+                    id++;
+                }
+            }
 
             this->m_env->UseShader(SR_NULL_SHADER);
         }
@@ -42,7 +57,7 @@ namespace Framework::Graphics::Impl {
 
             ImGui::Text("Pipeline name: %s", m_env->GetPipeLineName().c_str());
 
-            ImGui::Text("Count meshes: %zu", m_countMeshes);
+            //!!!ImGui::Text("Count meshes: %zu", m_countMeshes);
             ImGui::Text("Count transparent meshes: %zu", m_countTransparentMeshes);
 
             ImGui::Checkbox("Grid", &m_gridEnabled);
@@ -63,15 +78,27 @@ namespace Framework::Graphics::Impl {
                 this->m_env->SetWireFrameEnabled(true);
                 this->m_env->SetCullFacingEnabled(false);
 
-                for (m_t = 0; m_t < m_countMeshes; m_t++)
-                    m_meshes[m_t]->DrawOpenGL();
+                for (auto const& [key, val] : m_meshGroups) {
+                    m_env->BindVAO(key);
+                    for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++)
+                        val[m_t]->DrawOpenGL();
+                }
+
+                //for (m_t = 0; m_t < m_countMeshes; m_t++)
+                //    m_meshes[m_t]->DrawOpenGL();
 
                 this->m_env->SetWireFrameEnabled(false);
                 this->m_env->SetDepthTestEnabled(true);
                 this->m_env->SetCullFacingEnabled(true);
             } else {
-                for (m_t = 0; m_t < m_countMeshes; m_t++)
-                    m_meshes[m_t]->DrawOpenGL();
+               //for (m_t = 0; m_t < m_countMeshes; m_t++)
+                //    m_meshes[m_t]->DrawOpenGL();
+
+                for (auto const& [key, val] : m_meshGroups) {
+                    m_env->BindVAO(key);
+                    for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++)
+                        val[m_t]->DrawOpenGL();
+                }
             }
 
             return true;

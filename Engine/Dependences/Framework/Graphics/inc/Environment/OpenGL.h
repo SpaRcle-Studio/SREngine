@@ -240,7 +240,8 @@ namespace Framework::Graphics {
                 const std::string& path,
                 int32_t FBO,
                 void** shaderData,
-                const std::vector<uint64_t>& uniformSizes = {}) const noexcept override;
+                const std::vector<uint64_t>& uniformSizes
+                ) const noexcept override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -401,6 +402,11 @@ namespace Framework::Graphics {
             glBindVertexArray(VAO);
             glDrawArrays(GL_LINES, 0, count_vertices);
         }
+
+        virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int& count_vertices) const noexcept {
+            glDrawArrays(GL_TRIANGLES, 0, count_vertices);
+        }
+
         SR_FORCE_INLINE void DrawTriangles(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
             glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, count_vertices);
