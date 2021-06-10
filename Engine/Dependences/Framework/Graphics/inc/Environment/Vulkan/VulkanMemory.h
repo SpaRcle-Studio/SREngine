@@ -115,7 +115,25 @@ namespace Framework::Graphics::VulkanTools {
 
             return true;
         }
+        [[nodiscard]] bool FreeUBO(uint32_t ID) const {
+            if (ID >= m_countUBO) {
+                Helper::Debug::Error("MemoryManager::FreeUBO() : list index out of range!");
+                return false;
+            }
 
+            auto* memory = this->m_UBOs[ID];
+            if (!memory) {
+                Helper::Debug::Error("MemoryManager::FreeUBO() : uniform buffer object is not exists!");
+                return false;
+            }
+
+            memory->Destroy();
+            memory->Free();
+
+            this->m_UBOs[ID] = nullptr;
+
+            return true;
+        }
         [[nodiscard]] bool FreeIBO(uint32_t ID) const {
             if (ID >= m_countIBO) {
                 Helper::Debug::Error("MemoryManager::FreeIBO() : list index out of range!");

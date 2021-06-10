@@ -38,6 +38,12 @@ namespace Framework::Graphics::Impl {
 
                         for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++)
                             val[m_t]->DrawVulkan();
+
+                        {
+                            // test code
+                            Mesh3DUBO ubo = { glm::mat4(1) };
+                            this->m_env->UpdateUBO(val[0]->FastGetUBO(), &ubo, sizeof(Mesh3DUBO));
+                        }
                     }
                 }
                 m_env->EndRender();

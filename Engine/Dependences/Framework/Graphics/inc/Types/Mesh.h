@@ -112,6 +112,7 @@ namespace Framework::Graphics::Types {
         int                         m_VAO                   = -1;
         int                         m_VBO                   = -1;
         int                         m_IBO                   = -1;
+        int32_t                     m_UBO                   = -1;
 
         std::vector<unsigned int>	m_indices				= std::vector<unsigned int>();
         size_t						m_countVertices		    = 0;
@@ -143,6 +144,7 @@ namespace Framework::Graphics::Types {
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVAO() const noexcept { return (uint32_t)m_VAO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVBO() const noexcept { return (uint32_t)m_VBO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }
+        [[nodiscard]] SR_FORCE_INLINE int32_t  FastGetUBO() const noexcept { return m_UBO;           }
 
         int32_t GetVAO() {
             if (m_isDestroy)

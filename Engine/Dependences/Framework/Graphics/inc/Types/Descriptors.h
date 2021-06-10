@@ -7,7 +7,7 @@
 
 namespace Framework::Graphics {
     enum class DescriptorType {
-        Uniform
+        Unknown, Uniform, CombinedImage
     };
 }
 

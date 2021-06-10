@@ -25,8 +25,25 @@ bool Framework::Graphics::Shader::Init() {
         return false;
     }
 
-    //std::string path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + m_name;
-    //this->m_fields = m_env->GetShaderFields(m_ID, path);
+    {
+        std::vector<uint64_t> sizes = {};
+        for (auto uniform : m_uniformsInfo)
+            if (uniform.first.second == UBOType::Shared)
+                sizes.push_back(uniform.second);
+
+        this->m_countSharedUniforms = sizes.size();
+
+        if (!sizes.empty()) {
+            this->m_sharedUniforms = (int32_t *) malloc(sizeof(int32_t) * sizes.size());
+            for (uint32_t i = 0; i < sizes.size(); i++) {
+                 this->m_sharedUniforms[i] = this->m_env->AllocateUBO(sizes[i]);
+                 if (this->m_sharedUniforms[i] < 0) {
+                     Helper::Debug::Error("Shader::Init() : failed to allocate uniform buffer object!");
+                     return false;
+                 }
+            }
+        }
+    }
 
     this->m_isInit = true;
 
@@ -114,6 +131,7 @@ bool Framework::Graphics::Shader::Use() noexcept {
         this->m_isInit = true;
     }
 
+    g_currentShader = this;
     m_env->UseShader(m_shaderProgram);
 
     return true;
@@ -125,6 +143,14 @@ void Framework::Graphics::Shader::Free() {
         m_env->DeleteShader(m_shaderProgram);
         m_env->FreeShaderProgram(m_shaderProgram);
         this->m_shaderProgram = SR_NULL_SHADER;
+
+        if (m_sharedUniforms) {
+            for (uint32_t i = 0; i < m_countSharedUniforms; i++)
+                if (!this->m_env->FreeUBO(this->m_sharedUniforms[i]))
+                    Helper::Debug::Error("Shader::Free() : failed to free uniform buffer object!");
+            free(m_sharedUniforms);
+            this->m_countSharedUniforms = 0;
+        }
     } else {
         Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer...");
     }
@@ -156,7 +182,7 @@ bool Framework::Graphics::Shader::SetCreateInfo(Framework::Graphics::SRShaderCre
     return true;
 }
 
-bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<UBOType, uint64_t>> &uniforms) {
+bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> &uniforms) {
     if (m_isInit) {
         Helper::Debug::Error("Shader::SetUniforms() : shader already initialized!");
         return false;

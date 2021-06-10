@@ -231,15 +231,28 @@ namespace Framework::Graphics {
 
         // ============================== [ MESH METHODS ] ==============================
 
+        [[nodiscard]] virtual SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const noexcept { return -1; }
+
         virtual SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) { return false; }
         virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return -2; }
+        //virtual SR_FORCE_INLINE void SetDescriptorSetBindingsSize(const uint32_t& size) { }
+        virtual SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) { }
+
+        virtual SR_FORCE_INLINE void UpdateUBO(const uint32_t& UBO, void* data, const uint64_t& uboSize) { }
+
+        /*
+         *   0 - type
+         *   1 - bind
+         *   2 - uniform id / texture id
+         */
+        virtual SR_FORCE_INLINE void UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) { }
+
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(unsigned int& VAO) const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateUBO(unsigned int& IBO, uint32_t uboSize)    const noexcept { return false; }
         //virtual SR_FORCE_INLINE
 
         /** Vertex pos and texture cords */
@@ -273,6 +286,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void FreeCubeMap(unsigned int ID) const noexcept { }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept { return false; }
+        [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept { return false; }
     };
 }
 

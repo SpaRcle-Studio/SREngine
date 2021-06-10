@@ -27,9 +27,19 @@ bool Framework::Graphics::Render::Create(Window* window) {
                 { Vertices::Mesh3DVertex::GetDescription() },
                 Vertices::Mesh3DVertex::GetAttributes());
         this->m_geometryShader->SetUniforms({
-            { UBOType::Shared, sizeof(ProjViewUBO) },
-            { UBOType::Common, sizeof(Mesh3DUBO)   }
+            { { 0, UBOType::Common }, sizeof(Mesh3DUBO)   }, // binding 0 - mesh   (model mat)
+            { { 5, UBOType::Shared }, sizeof(ProjViewUBO) }, // binding 1 - shader (view & proj mat)
         });
+        /*
+                         descriptor write
+           [descriptor]       [bind]      [data]
+                0               0       model uniform
+                0               1       diffuse
+                0               2       normal
+                0               3       specular
+                0               4       glossiness
+                1               5       view & proj uniform
+         */
         this->m_geometryShader->SetCreateInfo({
             .polygonMode  = PolygonMode::Fill,
             .cullMode     = CullMode::None,
@@ -363,6 +373,8 @@ Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
     }
     else
         return this->m_transparent_meshes[absoluteID];
+
+    return nullptr;
 }
 
 /*

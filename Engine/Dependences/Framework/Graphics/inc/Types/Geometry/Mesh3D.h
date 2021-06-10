@@ -32,11 +32,24 @@ namespace Framework::Graphics::Types {
                     this->m_hasErrors = true;
                     return;
                 }
+
+                this->m_UBO = m_env->AllocateUBO(sizeof(Mesh3DUBO));
+                if (m_UBO < 0) {
+                    Helper::Debug::Error("Mesh3D::Calculate() : failed to allocate uniform buffer object!");
+                    return;
+                }
+
+                this->m_env->UpdateDescriptorSets(m_descriptorSet, {
+                        { DescriptorType::Uniform, { 0, m_UBO                                 } },
+                        { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
+                });
             }
 
             if (!m_isCalculated)
                 if (m_hasErrors || !this->Calculate())
                     return;
+
+            this->m_env->BindDescriptorSet(m_descriptorSet);
 
             this->m_env->DrawIndices(this->m_countIndices);
         }

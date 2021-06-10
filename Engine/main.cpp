@@ -81,7 +81,7 @@ int main() {
         return -1000;
     }
 
-    auto *window = new Window(
+    auto window = new Window(
             "SpaRcle Engine",
             "icon.ico",
             WindowFormat::_480_480,
@@ -92,11 +92,11 @@ int main() {
             0
     );
 
-    Scene* scene = Scene::New("New scene");
+    auto scene = Scene::New("New scene");
 
-    auto* physics = new PhysEngine();
+    auto physics = new PhysEngine();
 
-    Engine *engine = Engine::Get();
+    auto engine = Engine::Get();
 
     if(engine->Create(window, scene, physics)) {
       if (engine->Init(nullptr)){

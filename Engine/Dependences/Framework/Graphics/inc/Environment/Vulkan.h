@@ -28,6 +28,8 @@
 
 #include <Environment/Vulkan/AbstractCasts.h>
 #include <EvoVulkan/VulkanKernel.h>
+#include <EvoVulkan/Tools/VulkanInsert.h>
+#include <EvoVulkan/Tools/VulkanInitializers.h>
 
 namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
@@ -101,21 +103,28 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
-        VkDeviceSize                   m_offsets[1]    = {0};
+        VkDeviceSize                   m_offsets[1]      = {0};
 
-        VkViewport                     m_viewport      = { };
-        VkRect2D                       m_scissor       = { };
+        VkViewport                     m_viewport        = { };
+        VkRect2D                       m_scissor         = { };
 
-        std::vector<VkClearValue>      m_clearValues   = { };
-        VkRenderPassBeginInfo          m_renderPassBI  = { };
+        std::vector<VkClearValue>      m_clearValues     = { };
+        VkRenderPassBeginInfo          m_renderPassBI    = { };
 
-        VkCommandBuffer                m_currentCmd    = VK_NULL_HANDLE;
-        EvoVulkan::Complexes::Shader*  m_currentShader = nullptr;
+        VkCommandBuffer                m_currentCmd      = VK_NULL_HANDLE;
+        EvoVulkan::Complexes::Shader*  m_currentShader   = nullptr;
+        VkPipelineLayout               m_currentLayout   = VK_NULL_HANDLE;
 
-        VkCommandBufferBeginInfo       m_cmdBufInfo    = { };
+        //! Descriptor sets in that moment, for render meshes
+        //VkDescriptorSet*               m_descriptorSets = nullptr;
+        //uint32_t                       m_countDescrSets = 0;
 
-        VulkanTools::MemoryManager*    m_memory        = nullptr;
-        EvoVulkan::Core::VulkanKernel* m_kernel        = nullptr;
+        VkDescriptorSet                m_currentDesrSets = VK_NULL_HANDLE;
+
+        VkCommandBufferBeginInfo       m_cmdBufInfo      = { };
+
+        VulkanTools::MemoryManager*    m_memory          = nullptr;
+        EvoVulkan::Core::VulkanKernel* m_kernel          = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
                 "VK_LAYER_KHRONOS_validation"
@@ -225,12 +234,12 @@ namespace Framework::Graphics {
             }
 
             this->m_currentShaderID = (int)shaderProgram;
-            this->m_currentShader = m_memory->m_ShaderPrograms[shaderProgram];
-
+            this->m_currentShader   = m_memory->m_ShaderPrograms[shaderProgram];
             if (!m_currentShader) {
                 Helper::Debug::Error("Vulkan::UseShader() : shader is nullptr!");
                 return;
             }
+            this->m_currentLayout = m_currentShader->GetPipelineLayout();
 
             this->m_currentShader->Bind(this->m_currentCmd);
         }
@@ -239,16 +248,55 @@ namespace Framework::Graphics {
             if (!m_memory->FreeShaderProgram(shaderProgram))
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
         }
-        virtual SR_FORCE_INLINE void UnUseShader() {
-            this->m_currentShader = nullptr;
+        SR_FORCE_INLINE void UnUseShader() override {
+            this->m_currentShader   = nullptr;
             this->m_currentShaderID = -1;
+            this->m_currentLayout   = VK_NULL_HANDLE;
         }
     public:
         SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
+            //if (m_countDescrSets > 0)
+            //    vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, m_countDescrSets, m_descriptorSets, 0, NULL);
+
+            if (m_currentDesrSets != VK_NULL_HANDLE)
+                vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
+
             vkCmdDrawIndexed(m_currentCmd, countIndices, 1, 0, 0, 0);
         }
         SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept override {
             vkCmdDraw(m_currentCmd, countVerts, 1, 0, 0);
+        }
+
+        [[nodiscard]] SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const noexcept override {
+            auto id = this->m_memory->AllocateUBO(uboSize);
+            if (id < 0) {
+                Helper::Debug::Error("Vulkan::AllocateUBO() : failed to allocate uniform buffer object!");
+                return -1;
+            } else
+                return id;
+        }
+
+        SR_FORCE_INLINE void UpdateUBO(const uint32_t& UBO, void* data, const uint64_t& uboSize) override {
+            m_memory->m_UBOs[UBO]->CopyToDevice(data, uboSize);
+        }
+
+        SR_FORCE_INLINE void UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) override {
+            std::vector<VkWriteDescriptorSet> writeDescriptorSets = {};
+            for (const auto& value : updateValues) {
+                switch (value.first) {
+                    case DescriptorType::Uniform:
+                        writeDescriptorSets.emplace_back(EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                                this->m_memory->m_descriptorSets[descriptorSet].m_self,
+                                VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+                                value.second.first,
+                                &m_memory->m_UBOs[value.second.second]->m_descriptor));
+                        break;
+                    default:
+                        Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : unknown type!");
+                        return;
+                }
+            }
+            vkUpdateDescriptorSets(*m_kernel->GetDevice(), writeDescriptorSets.size(), writeDescriptorSets.data(), 0, NULL);
         }
 
         SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) override {
@@ -277,6 +325,11 @@ namespace Framework::Graphics {
                     return -1;
                 }
             }
+        }
+
+        SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) override { //const uint32_t& binding,
+            //this->m_descriptorSets[binding] = m_memory->m_descriptorSets[descriptorSet].m_self;
+            this->m_currentDesrSets = m_memory->m_descriptorSets[descriptorSet].m_self;
         }
 
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
@@ -320,6 +373,7 @@ namespace Framework::Graphics {
 
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override { return this->m_memory->FreeIBO(ID); }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept override { return this->m_memory->FreeUBO(ID); }
     };
 }
 

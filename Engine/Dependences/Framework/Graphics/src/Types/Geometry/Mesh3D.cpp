@@ -167,13 +167,11 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
         copy->m_VAO = m_VAO;
         copy->m_VBO = m_VBO;
         copy->m_IBO = m_IBO;
+        copy->m_UBO = -1;
     }else{
         copy->m_vertices = m_vertices;
         copy->m_indices  = m_indices;
     }
-
-    //! Auto alloc in constructor (for Vulkan)
-    //! copy->m_descriptorSet
 
     copy->m_resource_id   = m_resource_id;
 
@@ -231,8 +229,20 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
         if (m_descriptorSet >= 0) {
             this->m_env->FreeDescriptorSet(m_descriptorSet);
             this->m_descriptorSet = -5;
-        } else {
+        }
+        else {
             Debug::Error("Mesh:FreeVideoMemory() : descriptor set is not exists! Something went wrong...");
+            return false;
+        }
+
+        if (m_UBO >= 0) {
+            if (!this->m_env->FreeUBO(m_UBO)) {
+                Helper::Debug::Error("Mesh3D::FreeVideoMemory() : failed to free uniform buffer object!");
+                return false;
+            }
+        }
+        else {
+            Debug::Error("Mesh:FreeVideoMemory() : uniform buffer object is not exists! Something went wrong...");
             return false;
         }
 
