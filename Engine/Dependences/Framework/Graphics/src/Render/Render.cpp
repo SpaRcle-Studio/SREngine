@@ -1,7 +1,7 @@
 //
 // Created by Nikita on 17.11.2020.
 //
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 #include "Render/Render.h"
 #include <Render/Camera.h>
 #include <iostream>
@@ -149,7 +149,7 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
     m_mutex.unlock();
 }
 
-void Framework::Graphics::Render::PollEvents() noexcept {
+void Framework::Graphics::Render::PollEvents() {
     // Temp value
     static Mesh* temp = nullptr;
 
@@ -168,6 +168,10 @@ void Framework::Graphics::Render::PollEvents() noexcept {
                 auto id = m_env->GetPipeLine() == PipeLine::OpenGL ? temp->GetVAO() : temp->GetVBO();
                 if (id < 0) {
                     Helper::Debug::Error("Render::PollEvents() : failed get mesh id!");
+                    m_countNewMeshes = 0;
+                    m_newMeshes.clear();
+                    this->m_env->SetBuildState(false);
+                    m_mutex.unlock();
                     return;
                 }
 
@@ -217,12 +221,20 @@ void Framework::Graphics::Render::PollEvents() noexcept {
                 auto id = m_env->GetPipeLine() == PipeLine::OpenGL ? temp->GetVAO() : temp->GetVBO();
                 if (id < 0) {
                     Helper::Debug::Error("Render::PollEvents() : failed get mesh id to remove!");
+                    m_countMeshesToRemove = 0;
+                    m_removeMeshes.clear();
+                    this->m_env->SetBuildState(false);
+                    m_mutex.unlock();
                     return;
                 }
 
                 auto find = this->m_meshGroups.find(id);
                 if (find == m_meshGroups.end()) {
                     Helper::Debug::Error("Render::PollEvents() : mesh group to remove mesh not found!");
+                    m_countMeshesToRemove = 0;
+                    m_removeMeshes.clear();
+                    this->m_env->SetBuildState(false);
+                    m_mutex.unlock();
                     return;
                 }
 

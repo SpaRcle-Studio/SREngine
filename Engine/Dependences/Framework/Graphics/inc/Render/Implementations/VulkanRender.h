@@ -17,7 +17,7 @@ namespace Framework::Graphics::Impl {
             return true;
         }
 
-        bool DrawGeometry() noexcept override {
+        bool DrawGeometry() override {
             this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
 
             for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
@@ -43,10 +43,12 @@ namespace Framework::Graphics::Impl {
                 m_env->EndRender();
             }
 
+            this->m_env->UnUseShader();
+
             return true;
         }
 
-        bool DrawSkybox() noexcept override {
+        bool DrawSkybox() override {
 
             return true;
         }

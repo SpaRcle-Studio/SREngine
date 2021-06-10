@@ -166,10 +166,11 @@ namespace Framework::Graphics {
         bool Close();
     public:
         /** \brief Check all render events. For example: new meshes, remove old meshes */
-        void PollEvents()               noexcept;
+        void PollEvents();
     public:
-        virtual bool DrawGeometry()             noexcept = 0;
-        virtual bool DrawSkybox()               noexcept = 0;
+        virtual bool DrawGeometry() = 0;
+        virtual bool DrawSkybox()   = 0;
+    public:
         virtual void DrawGrid()                 noexcept = 0;
         virtual void DrawSingleColors()         noexcept = 0;
         virtual bool DrawTransparentGeometry()  noexcept = 0;

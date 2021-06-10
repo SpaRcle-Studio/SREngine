@@ -2,7 +2,7 @@
 // Created by Nikita on 18.11.2020.
 //
 
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 
 #include "Window/Window.h"
 #include <Debug.h>
@@ -282,7 +282,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
 
     Debug::Graph("Window::InitEnvironment() : pre-initializing...");
     if (!this->m_env->PreInit(m_smoothSamples, "SpaRcle Engine", "SREngine")){
-        Debug::Graph("Window::InitEnvironment() : failed pre-initializing environment!");
+        Debug::Error("Window::InitEnvironment() : failed pre-initializing environment!");
         return false;
     }
 

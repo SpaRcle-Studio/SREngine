@@ -14,6 +14,11 @@ inline static std::map<uint32_t, unsigned long> IBO_usages = std::map<unsigned i
 inline static std::map<std::string, std::pair<uint32_t, uint32_t>> VBOandIBO_names = std::map<std::string, std::pair<uint32_t, uint32_t>>();
 
 bool Framework::Graphics::Types::Mesh3D::Calculate()  {
+    if (m_VAO > 0 || m_VBO >= 0 || m_IBO >= 0) {
+        this->m_isCalculated = true;
+        return true;
+    }
+
     if (!m_render){
         Debug::Error("Mesh3D::Calculate() : mesh is not register in render!");
         return false;
@@ -33,6 +38,9 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
 
     //std::cout << Vertices::ToString(m_indices) << std::endl;
     //std::cout << Vertices::ToString(m_vertices) << std::endl;
+
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Log("Mesh3D::Calculate() : calculating \""+ m_geometry_name +"\"...");
 
     m_mutex.lock();
 
@@ -71,9 +79,6 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
             }
         }
     }
-
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh3D::Calculate() : calculating \""+ m_geometry_name +"\"...");
 
     if (m_env->GetPipeLine() == PipeLine::OpenGL) {
         if (!this->m_env->CalculateVAO(reinterpret_cast<unsigned int &>(m_VAO), m_vertices, m_countVertices)) {
@@ -130,14 +135,14 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
 
     m_mutex.lock();
 
-    Material* mat = new Material(
+    auto* mat = new Material(
             m_material->m_diffuse,
             m_material->m_normal,
             m_material->m_specular,
             m_material->m_glossiness
     );
 
-    Mesh3D* copy = new Mesh3D(this->m_shader, mat, this->m_geometry_name);
+    auto* copy = new Mesh3D(this->m_shader, mat, this->m_geometry_name);
 
     {
         mat->m_mesh         = copy;
@@ -167,11 +172,15 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
         copy->m_indices  = m_indices;
     }
 
-    copy->m_isCalculated = m_isCalculated;
-    copy->m_autoRemove = m_autoRemove;
-    copy->m_modelMat = m_modelMat;
+    //! Auto alloc in constructor (for Vulkan)
+    //! copy->m_descriptorSet
 
-    copy->m_resource_id = m_resource_id;
+    copy->m_resource_id   = m_resource_id;
+
+    copy->m_isCalculated  = false;
+    //copy->m_isCalculated  = m_isCalculated;
+    copy->m_autoRemove    = m_autoRemove;
+    copy->m_modelMat      = m_modelMat;
 
     m_mutex.unlock();
 
@@ -216,6 +225,14 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
         }
         else {
             Debug::Error("Mesh:FreeVideoMemory() : IBO is not exists! Something went wrong...");
+            return false;
+        }
+
+        if (m_descriptorSet >= 0) {
+            this->m_env->FreeDescriptorSet(m_descriptorSet);
+            this->m_descriptorSet = -5;
+        } else {
+            Debug::Error("Mesh:FreeVideoMemory() : descriptor set is not exists! Something went wrong...");
             return false;
         }
 

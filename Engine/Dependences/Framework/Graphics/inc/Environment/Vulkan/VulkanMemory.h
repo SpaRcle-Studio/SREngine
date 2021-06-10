@@ -10,6 +10,7 @@
 #include <EvoVulkan/VulkanKernel.h>
 #include <Debug.h>
 #include <EvoVulkan/Complexes/Shader.h>
+#include <EvoVulkan/DescriptorManager.h>
 
 namespace Framework::Graphics::VulkanTools {
     class MemoryManager {
@@ -28,6 +29,11 @@ namespace Framework::Graphics::VulkanTools {
             }
 
             this->m_kernel = kernel;
+            this->m_descriptorManager = m_kernel->GetDescriptorManager();
+            if (!m_descriptorManager) {
+                Helper::Debug::Error("MemoryManager::Initialize() : failed to get descriptor manager!");
+                return false;
+            }
 
             this->m_UBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer) * m_countUBO);
             for (uint32_t i = 0; i < m_countUBO; i++)
@@ -49,6 +55,10 @@ namespace Framework::Graphics::VulkanTools {
             for (uint32_t i = 0; i < m_countShaderPrograms; i++)
                 m_ShaderPrograms[i] = nullptr;
 
+            this->m_descriptorSets = (EvoVulkan::Core::DescriptorSet*)malloc(sizeof(EvoVulkan::Core::DescriptorSet) * m_countDescriptorSets);
+            for (uint32_t i = 0; i < m_countDescriptorSets; i++)
+                m_descriptorSets[i] = { VK_NULL_HANDLE, VK_NULL_HANDLE };
+
             m_isInit = true;
             return true;
         }
@@ -64,6 +74,28 @@ namespace Framework::Graphics::VulkanTools {
             return memory;
         }
     public:
+        [[nodiscard]] bool FreeDescriptorSet(uint32_t ID) const {
+            if (ID >= m_countDescriptorSets) {
+                Helper::Debug::Error("MemoryManager::FreeDescriptorSet() : list index out of range!");
+                return false;
+            }
+
+            auto memory = this->m_descriptorSets[ID];
+            if (memory.m_self == VK_NULL_HANDLE) {
+                Helper::Debug::Error("MemoryManager::FreeDescriptorSet() : descriptor set is not exists!");
+                return false;
+            }
+
+            if (!m_descriptorManager->FreeDescriptorSet(memory)){
+                Helper::Debug::Error("MemoryManager::FreeDescriptorSet() : failed free descriptor set!");
+                return false;
+            }
+
+            this->m_descriptorSets[ID] = { VK_NULL_HANDLE, VK_NULL_HANDLE };
+
+            return true;
+        }
+
         [[nodiscard]] bool FreeVBO(uint32_t ID) const {
             if (ID >= m_countVBO) {
                 Helper::Debug::Error("MemoryManager::FreeVBO() : list index out of range!");
@@ -124,7 +156,7 @@ namespace Framework::Graphics::VulkanTools {
             return true;
         }
     public:
-        int32_t AllocateUBO(uint32_t UBOSize) {
+        [[nodiscard]] int32_t AllocateUBO(uint32_t UBOSize) const {
             for (uint32_t i = 0; i < m_countUBO; i++) {
                 if (m_UBOs[i] == nullptr) {
                     m_UBOs[i] = EvoVulkan::Types::Buffer::Create(
@@ -137,10 +169,37 @@ namespace Framework::Graphics::VulkanTools {
                 }
             }
 
+            Helper::Debug::Error("MemoryManager::AllocateUBO() : overflow uniform buffer objects buffer!");
+
             return -1;
         }
 
-        int32_t AllocateVBO(uint32_t buffSize, void* data) {
+        [[nodiscard]] int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType>& types) const {
+            if (shaderProgram >= m_countShaderPrograms) {
+                Helper::Debug::Error("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
+                return -1;
+            }
+
+            for (uint32_t i = 0; i < m_countDescriptorSets; i++) {
+                if (m_descriptorSets[i].m_self == VK_NULL_HANDLE) {
+                    m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSets(
+                            m_ShaderPrograms[shaderProgram]->GetDescriptorSetLayout(),
+                            types);
+                    if (m_descriptorSets->m_self == VK_NULL_HANDLE) {
+                        Helper::Debug::Error("MemoryManager::AllocateDescriptorSet() : failed allocate descriptor set! Something went wrong...");
+                        return -1;
+                    }
+
+                    return (int32_t)i;
+                }
+            }
+
+            Helper::Debug::Error("MemoryManager::AllocateDescriptorSet() : overflow descriptor sets buffer!");
+
+            return -1;
+        }
+
+        [[nodiscard]] int32_t AllocateVBO(uint32_t buffSize, void* data) const {
             for (uint32_t i = 0; i < m_countVBO; i++) {
                 if (m_VBOs[i] == nullptr) {
                     m_VBOs[i] = EvoVulkan::Types::Buffer::Create(
@@ -152,6 +211,8 @@ namespace Framework::Graphics::VulkanTools {
                     return (int32_t)i;
                 }
             }
+
+            Helper::Debug::Error("MemoryManager::AllocateVBO() : overflow vertex buffer objects buffer!");
 
             return -1;
         }
@@ -169,6 +230,8 @@ namespace Framework::Graphics::VulkanTools {
                 }
             }
 
+            Helper::Debug::Error("MemoryManager::AllocateIBO() : overflow index buffer objects buffer!");
+
             return -1;
         }
 
@@ -184,20 +247,26 @@ namespace Framework::Graphics::VulkanTools {
                 }
             }
 
+            Helper::Debug::Error("MemoryManager::AllocateShaderProgram() : overflow shader programs buffer!");
+
             return -1;
         }
     public:
+        EvoVulkan::Core::DescriptorManager* m_descriptorManager   = nullptr;
+
         uint32_t                            m_countUBO            = 10000;
         uint32_t                            m_countVBO            = 1000;
         uint32_t                            m_countIBO            = 1000;
         uint32_t                            m_countFBO            = 15;
         uint32_t                            m_countShaderPrograms = 50;
+        uint32_t                            m_countDescriptorSets = 10000;
 
-        EvoVulkan::Complexes::FrameBuffer** m_FBOs                = nullptr;
         EvoVulkan::Types::Buffer**          m_UBOs                = nullptr;
-        EvoVulkan::Types::Buffer**          m_IBOs                = nullptr;
         EvoVulkan::Types::Buffer**          m_VBOs                = nullptr;
+        EvoVulkan::Types::Buffer**          m_IBOs                = nullptr;
+        EvoVulkan::Complexes::FrameBuffer** m_FBOs                = nullptr;
         EvoVulkan::Complexes::Shader**      m_ShaderPrograms      = nullptr;
+        EvoVulkan::Core::DescriptorSet*     m_descriptorSets      = nullptr;
     };
 }
 

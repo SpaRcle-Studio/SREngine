@@ -1,7 +1,7 @@
 //
 // Created by Nikita on 19.11.2020.
 //
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 
 #include "Render/PostProcessing.h"
 

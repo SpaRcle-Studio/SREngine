@@ -108,6 +108,7 @@ namespace Framework::Graphics::Types {
         volatile bool               m_isCalculated          = false;
         unsigned char               m_toolID                = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
+        int                         m_descriptorSet         = -1;
         int                         m_VAO                   = -1;
         int                         m_VBO                   = -1;
         int                         m_IBO                   = -1;
@@ -144,6 +145,9 @@ namespace Framework::Graphics::Types {
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }
 
         int32_t GetVAO() {
+            if (m_isDestroy)
+                return m_VAO;
+
             if (!m_isCalculated)
                 if (!Calculate())
                     return -1;
@@ -151,6 +155,9 @@ namespace Framework::Graphics::Types {
         }
 
         int32_t GetVBO() {
+            if (m_isDestroy)
+                return m_VBO;
+
             if (!m_isCalculated)
                 if (!Calculate())
                     return -1;
@@ -188,7 +195,7 @@ namespace Framework::Graphics::Types {
 
         bool SimpleDraw();
 
-        virtual SR_FORCE_INLINE void DrawVulkan() noexcept = 0;
+        virtual SR_FORCE_INLINE void DrawVulkan() = 0;
 
         SR_FORCE_INLINE bool DrawOpenGL() noexcept {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }

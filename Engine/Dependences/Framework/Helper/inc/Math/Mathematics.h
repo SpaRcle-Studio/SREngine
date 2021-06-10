@@ -15,7 +15,7 @@
 //#define _FORCE_INLINE_ __attribute__((always_inline))
 //#define _ALWAYS_INLINE_ inline __attribute__((always_inline))
 
-#define _FORCE_INLINE_ inline
+#define _FORCE_INLINE_ __forceinline
 #define _ALWAYS_INLINE_ inline
 
 #define DegreesToRad(angle) angle*M_PI/180

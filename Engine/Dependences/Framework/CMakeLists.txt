@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 project(Framework)
 
+set(CMAKE_CXX_STANDARD 20)
+
 # Переменная дириктории исходного кода данного фреймворка
 set(FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(Depends/lua)
 add_subdirectory(Depends/LuaBridge)
 
-add_subdirectory(Depends/easy_profiler)
+#add_subdirectory(Depends/easy_profiler)
 add_subdirectory(Depends/imgui)
 add_subdirectory(Depends/inc/glm)
 
@@ -44,8 +46,11 @@ find_package(Vulkan REQUIRED FATAL_ERROR)
 include_directories(${Vulkan_INCLUDE_DIRS})
 
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
-target_link_libraries(Framework opengl32 glfw glew lua imgui easy_profiler bullet3 ${Vulkan_LIBRARY} EvoVulkanCore)
+add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC} Graphics/inc/Types/Descriptors.h)
+
+#target_compile_features(Framework INTERFACE cxx_std_20)
+
+target_link_libraries(Framework opengl32 glfw glew lua imgui bullet3 ${Vulkan_LIBRARY} EvoVulkanCore) #easy_profiler
 if(WIN32)
     if(MSVC)
 

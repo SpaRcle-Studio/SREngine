@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_VULKAN_H
 #define GAMEENGINE_VULKAN_H
 
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 #include <Environment/Environment.h>
 
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -26,6 +26,7 @@
 
 #include <Environment/Vulkan/VulkanMemory.h>
 
+#include <Environment/Vulkan/AbstractCasts.h>
 #include <EvoVulkan/VulkanKernel.h>
 
 namespace Framework::Graphics {
@@ -223,6 +224,7 @@ namespace Framework::Graphics {
                 return;
             }
 
+            this->m_currentShaderID = (int)shaderProgram;
             this->m_currentShader = m_memory->m_ShaderPrograms[shaderProgram];
 
             if (!m_currentShader) {
@@ -237,12 +239,44 @@ namespace Framework::Graphics {
             if (!m_memory->FreeShaderProgram(shaderProgram))
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
         }
+        virtual SR_FORCE_INLINE void UnUseShader() {
+            this->m_currentShader = nullptr;
+            this->m_currentShaderID = -1;
+        }
     public:
         SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
             vkCmdDrawIndexed(m_currentCmd, countIndices, 1, 0, 0, 0);
         }
         SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept override {
             vkCmdDraw(m_currentCmd, countVerts, 1, 0, 0);
+        }
+
+        SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) override {
+            Helper::Debug::Graph("Vulkan::FreeDescriptorSet() : free descriptor set...");
+
+            if (!this->m_memory->FreeDescriptorSet(descriptorSet)) {
+                Helper::Debug::Error("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
+                return false;
+            } else
+                return true;
+        }
+        SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) override {
+            Helper::Debug::Graph("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
+
+            auto vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
+            if (vkTypes.size() != types.size()) {
+                Helper::Debug::Error("Vulkan::AllocDescriptorSet() : failed to cast abstract descriptor types to vulkan descriptor types!");
+                return -3;
+            } else {
+                auto id = this->m_memory->AllocateDescriptorSet(m_currentShaderID, vkTypes);
+                if (id >= 0) {
+                    return id;
+                }
+                else {
+                    Helper::Debug::Error("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
+                    return -1;
+                }
+            }
         }
 
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {

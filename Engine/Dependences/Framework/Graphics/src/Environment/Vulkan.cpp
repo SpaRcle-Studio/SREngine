@@ -96,15 +96,13 @@ namespace Framework::Graphics{
     }
 
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
+        EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(msg); };
+        EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);      };
+        EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::Error(msg);     };
+        EvoVulkan::Tools::VkDebug::Graph = [](const std::string& msg) { Helper::Debug::Vulkan(msg);    };
+
         this->m_kernel = new SRVulkan();
         Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
-
-        Helper::Debug::Info("Vulkan::PreInit() : create vulkan memory manager...");
-        this->m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
-        if (!m_memory) {
-            Helper::Debug::Error("Vulkan::PreInit() : failed to create vulkan memory manager!");
-            return false;
-        }
 
         if (m_enableValidationLayers)
             m_kernel->SetValidationLayersEnabled(true);
@@ -113,11 +111,6 @@ namespace Framework::Graphics{
         this->m_scissor      = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
         this->m_cmdBufInfo   = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
         this->m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
-
-        EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(msg); };
-        EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);      };
-        EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::Error(msg);     };
-        EvoVulkan::Tools::VkDebug::Graph = [](const std::string& msg) { Helper::Debug::Vulkan(msg);    };
 
         if (!this->m_kernel->PreInit(appName, engineName, m_instanceExtensions, m_validationLayers)) {
             Helper::Debug::Error("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
@@ -195,6 +188,13 @@ namespace Framework::Graphics{
 
         if (!m_kernel->Init(createSurf, m_deviceExtensions, true, swapInterval > 0)) {
             Helper::Debug::Error("Vulkan::Init() : failed to initialize Evo Vulkan kernel!");
+            return false;
+        }
+
+        Helper::Debug::Info("Vulkan::Init() : create vulkan memory manager...");
+        this->m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
+        if (!m_memory) {
+            Helper::Debug::Error("Vulkan::Init() : failed to create vulkan memory manager!");
             return false;
         }
 

@@ -2,7 +2,7 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 
 #include "Types/Mesh.h"
 #include <ResourceManager/ResourceManager.h>
@@ -24,6 +24,7 @@
 #include <imgui.h>
 
 #include <GUI.h>
+#include <Types/Descriptors.h>
 
 using namespace Framework::Graphics::Types;
 

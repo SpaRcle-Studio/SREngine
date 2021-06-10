@@ -4,7 +4,7 @@
 
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 #include <Environment/Environment.h>
 #include <GL/glew.h>
 #include <GL/wglew.h>

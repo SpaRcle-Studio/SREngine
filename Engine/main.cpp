@@ -12,7 +12,7 @@
     #define SR_RELEASE
 #endif
 
-#include <easy/profiler.h>
+//#include <easy/profiler.h>
 
 #include <Engine.h>
 
@@ -122,8 +122,8 @@ int main() {
 
     ResourceManager::Stop();
 
-    if (Helper::Debug::Profile())
-        profiler::dumpBlocksToFile("profile.prof");
+    //if (Helper::Debug::Profile())
+    //    profiler::dumpBlocksToFile("profile.prof");
 
     return Debug::Stop();
 }

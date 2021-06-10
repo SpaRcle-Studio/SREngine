@@ -69,7 +69,7 @@ namespace Framework::Graphics::Impl {
             return true;
         }
 
-        bool DrawGeometry() noexcept override {
+        bool DrawGeometry() override {
             Shader::GetDefaultGeometryShader()->Use();
             this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
 
@@ -104,7 +104,7 @@ namespace Framework::Graphics::Impl {
             return true;
         }
 
-        bool DrawSkybox() noexcept override {
+        bool DrawSkybox() override {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
 
             if (m_skybox && m_skyboxEnabled) {

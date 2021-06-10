@@ -20,6 +20,8 @@
 
 #include <Environment/PipeLine.h>
 #include <Types/Vertices.h>
+#include <Types/Descriptors.h>
+#include <set>
 
 #define SR_SHADER_PROGRAM unsigned int
 #define SR_NULL_SHADER 0
@@ -47,6 +49,7 @@ namespace Framework::Graphics {
         BasicWindow*    m_basicWindow           = nullptr;
         bool            m_hasErrors             = false;
 
+        int             m_currentShaderID       = -1;
         __int16         m_preferredDevice       = -1;
         unsigned __int8 m_currentBuildIteration = 0;
         uint32_t        m_currentFBO            = 0;
@@ -215,6 +218,7 @@ namespace Framework::Graphics {
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept { return false; }
         virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
+        virtual SR_FORCE_INLINE void UnUseShader() { }
 
         virtual SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v)                 const noexcept { }
         virtual SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v)               const noexcept { }
@@ -227,6 +231,8 @@ namespace Framework::Graphics {
 
         // ============================== [ MESH METHODS ] ==============================
 
+        virtual SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) { return false; }
+        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return -2; }
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(unsigned int& VAO) const noexcept { return false; }
@@ -234,6 +240,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
         virtual SR_FORCE_INLINE bool CalculateUBO(unsigned int& IBO, uint32_t uboSize)    const noexcept { return false; }
+        //virtual SR_FORCE_INLINE
 
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept { return false; }

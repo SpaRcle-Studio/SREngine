@@ -22,8 +22,17 @@ namespace Framework::Graphics::Types {
     private:
         std::vector<Vertices::Mesh3DVertex> m_vertices = std::vector<Vertices::Mesh3DVertex>();
     public:
-        SR_FORCE_INLINE void DrawVulkan() noexcept override {
+        SR_FORCE_INLINE void DrawVulkan() override {
             if (!this->IsReady() || m_isDestroy) return;
+
+            if (m_descriptorSet < 0) {
+                this->m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform });
+                if (m_descriptorSet < 0) {
+                    Helper::Debug::Error("Mesh3D::Calculate() : failed to calculate descriptor set!");
+                    this->m_hasErrors = true;
+                    return;
+                }
+            }
 
             if (!m_isCalculated)
                 if (m_hasErrors || !this->Calculate())
