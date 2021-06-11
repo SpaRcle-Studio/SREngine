@@ -45,6 +45,12 @@ bool Framework::Graphics::Window::Create() {
                 this->m_env->SetWindowPosition(m_windowPos.x, m_windowPos.y);
                 break;
             case Environment::WinEvents::Resize: {
+                std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
+                for (auto camera : m_cameras) {
+                    if (camera->IsAllowUpdateProjection())
+                        camera->UpdateProjection(size.first, size.second);
+                }
+
                 //float ratio = m_format.GetRatio();
                 //m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
 
@@ -178,21 +184,11 @@ void Framework::Graphics::Window::Thread() {
         }
     }
 
-    {
+    { // centralize window and print default size
         glm::vec2 scr_size = m_env->GetScreenSize();
         Debug::Log("Window::Thread() : screen size is " +
-                   std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
-
-        //unsigned int w = m_env->GetWindowFormat()->Width();
-        //unsigned int h = m_env->GetWindowFormat()->Height();
-        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
-
+            std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
         this->CentralizeWindow();
-
-        //w = (int) (scr_size.x - (float)w) / 2;
-        //h = (int) (scr_size.y - (float)h) / 2;
-
-        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &w, &h);
     }
 
     double deltaTime = 0;
@@ -212,15 +208,21 @@ void Framework::Graphics::Window::Thread() {
                 this->PollEvents();
                 this->m_render->PollEvents();
 
-                if (m_env->IsNeedReBuild()) {
-                    Helper::Debug::Info("Window::Thread() : re-build render...");
+                if (m_env->IsNeedReBuild())
+                {
+                    if (!m_cameras.empty()) {
+                        m_render->SetCurrentCamera(m_cameras[0]);
 
-                    this->m_render->DrawGeometry();
-                    this->m_render->DrawSkybox();
+                        Helper::Debug::Info("Window::Thread() : re-build render...");
 
-                    m_env->SetBuildState(true);
+                        this->m_render->DrawGeometry();
+                        this->m_render->DrawSkybox();
 
+                        m_env->SetBuildState(true);
+                    }
                     continue;
+                } else {
+                    this->m_render->UpdateGeometry();
                 }
 
                 this->m_env->DrawFrame();
@@ -413,6 +415,7 @@ void Framework::Graphics::Window::PollEvents() {
         m_newCameras.clear();
         m_countNewCameras = 0;
 
+        m_render->SetCurrentCamera(nullptr);
         m_camerasMutex.unlock();
     }
 
@@ -435,6 +438,7 @@ void Framework::Graphics::Window::PollEvents() {
         m_camerasToDestroy.clear();
         m_countCamerasToDestroy = 0;
 
+        m_render->SetCurrentCamera(nullptr);
         m_camerasMutex.unlock();
     }
 

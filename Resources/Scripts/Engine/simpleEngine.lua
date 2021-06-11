@@ -6,9 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local scene;  -- Scene*
-local window; -- Window*
-local render; -- Render*
+local scene;      -- Scene*
+local window;     -- Window*
+local render;     -- Render*
+
+local camera;     -- GameObject*
+local cameraComp; -- Camera*
 
 function Init()
     Debug.Log("Initialize engine editor GUI...");
@@ -26,10 +29,21 @@ function Init()
     collectgarbage() -- collect memory
 end;
 
+function LoadCamera()
+    camera = scene:Instance("SceneCamera");
+
+    cameraComp = Camera.New(0);
+    cameraComp:SetFrameSize(848, 480);
+    camera:AddComponent(cameraComp:Base());
+    window:AddCamera(cameraComp);
+
+    collectgarbage() -- collect memory
+end;
+
 function Start()
     Debug.Log("Starting main engine script...");
 
-    window:Resize(480, 480);
+    window:Resize(848, 480);
     window:CentralizeWindow();
 
     local mesh = Mesh.LoadWithIndices("engine/cube.obj", 0);
@@ -37,6 +51,10 @@ function Start()
 
     local cube = scene:Instance("Cube");
     cube:AddComponent(mesh:Base());
+
+    ---------------------
+
+    LoadCamera();
 
     collectgarbage() -- collect memory
 end;

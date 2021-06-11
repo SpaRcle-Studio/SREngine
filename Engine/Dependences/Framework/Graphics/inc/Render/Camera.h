@@ -15,6 +15,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <Math/Vector3.h>
 #include <Math/Matrix4x4.h>
+#include <Types/Uniforms.h>
 
 using namespace Framework::Helper;
 
@@ -35,8 +36,6 @@ namespace Framework::Graphics {
         [[nodiscard]] inline bool IsDirectOutput() const noexcept { return m_isEnableDirectOut; }
     public:
         bool Create(Window* window);
-
-        //void AwaitFree();
         bool Free();
     protected:
         void OnDestroyGameObject() noexcept override;
@@ -48,6 +47,7 @@ namespace Framework::Graphics {
 
         nlohmann::json Save() override;
 
+        ///TODO: it is work?
         Math::Vector2 WorldToScreenPoint(Math::Vector3 point3D) const noexcept {
             Math::Matrix4x4 viewProjectionMatrix = m_projection * m_viewMat;
             //transform world to clipping coordinates
@@ -141,6 +141,9 @@ namespace Framework::Graphics {
                     -m_pos.z
             });
         }*/
+
+        [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj; }
+
         [[nodiscard]] inline glm::vec3 GetRotation() const noexcept { return { m_pitch, m_yaw, m_roll }; }
         [[nodiscard]] inline glm::mat4 GetView() const noexcept { return this->m_viewMat; }
         [[nodiscard]] inline glm::mat4 GetProjection() const noexcept { return this->m_projection; }
@@ -181,11 +184,17 @@ namespace Framework::Graphics {
         bool                        m_isEnableDirectOut = false;
 
         PostProcessing*             m_postProcessing    = nullptr;
+        Environment*                m_env               = nullptr;
+        const PipeLine              m_pipeline          = PipeLine::Unknown;
 
         Window*			            m_window			= nullptr;
         glm::mat4		            m_projection		= glm::mat4(0);
         glm::mat4		            m_viewMat			= glm::mat4(0);
         glm::vec3		            m_pos				= {0,0,0};
+
+        ProjViewUBO                 m_ubo               = {};
+
+        bool                        m_allowUpdateProj   = true;
 
         float                       m_far               = 8000.f;
         float                       m_near              = 0.1f;
@@ -193,8 +202,6 @@ namespace Framework::Graphics {
         GUI::ICanvas*               m_canvas            = nullptr;
 
         glm::vec2                   m_cameraSize        = glm::vec2(0,0);
-
-        //volatile bool               m_isUse             = false;
 
         volatile float	            m_yaw				= 0;
         volatile float	            m_pitch				= 0;

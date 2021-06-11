@@ -168,6 +168,8 @@ namespace Framework::Graphics {
         /** \brief Check all render events. For example: new meshes, remove old meshes */
         void PollEvents();
     public:
+        virtual void UpdateGeometry() { }
+
         virtual bool DrawGeometry() = 0;
         virtual bool DrawSkybox()   = 0;
     public:

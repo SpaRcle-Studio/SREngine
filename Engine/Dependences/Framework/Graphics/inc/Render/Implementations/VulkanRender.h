@@ -17,6 +17,11 @@ namespace Framework::Graphics::Impl {
             return true;
         }
 
+        void UpdateGeometry() override {
+            if (m_currentCamera)
+                this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
+        }
+
         bool DrawGeometry() override {
             this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
 
@@ -42,6 +47,7 @@ namespace Framework::Graphics::Impl {
                         {
                             // test code
                             Mesh3DUBO ubo = { glm::mat4(1) };
+                            //ubo.model = glm::rotate(ubo.model, glm::radians(45.f), glm::vec3(1.0, 1.0, 1.0));
                             this->m_env->UpdateUBO(val[0]->FastGetUBO(), &ubo, sizeof(Mesh3DUBO));
                         }
                     }

@@ -77,8 +77,9 @@ namespace Framework::Graphics {
     public:
         //[[nodiscard]] SR_FORCE_INLINE int32_t GetSharedDescriptorSet(uint32_t id) const noexcept { return m_sharedDescriptorSets[id]; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
-        [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(uint32_t index) const { return m_sharedUniforms[index]; }
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const { return m_sharedUniforms[index]; }
     public:
+        [[nodiscard]] SR_FORCE_INLINE bool Complete() const { return m_isInit; }
         bool Use() noexcept;
         ///\warning Call only from OpenGL context!
         void Free();

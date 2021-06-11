@@ -13,9 +13,10 @@ using namespace Framework::Helper;
 
 Framework::Graphics::PostProcessing::PostProcessing(Camera* camera, unsigned char countHDRBuffers) : m_env(Environment::Get()){
     this->m_camera = camera;
-    if (countHDRBuffers < 4){
-        Debug::Error("PostProcessing::Constructor(): count buffers is < 4! Skip arg.");
-    } else if (countHDRBuffers > 4) {
+    //if (countHDRBuffers < 4){
+    //    Debug::Error("PostProcessing::Constructor(): count buffers is < 4! Skip arg.");
+    //} else
+    if (countHDRBuffers > 4) {
         this->m_ColorBuffers = std::vector<unsigned int>(countHDRBuffers);
         this->m_countColorBuffers = countHDRBuffers;
     }
@@ -149,19 +150,26 @@ bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
     //Debug::Log("PostProcessing::ReCalcFrameBuffers() : re-calc...");
 
     if (!m_env->CreateSingleHDRFrameBO({w, h}, m_finalRBO, m_finalFBO, m_finalColorBuffer)) {
+        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single HDR frame buffer object!");
         return false;
     }
 
     if (!m_env->CreateSingleHDRFrameBO({w, h}, m_skyboxRBO, m_skyboxFBO, m_skyboxColorBuffer)) {
+        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single HDR frame buffer object!");
         return false;
     }
 
     if (!m_env->CreateHDRFrameBufferObject({w, h}, m_RBODepth, m_HDRFrameBufferObject, m_ColorBuffers)) {
+        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create HDR frame buffer object!");
         return false;
     }
 
-    return m_env->CreatePingPongFrameBufferObject({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers);
+    if (!m_env->CreatePingPongFrameBufferObject({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
+        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
+        return false;
+    }
 
+    return true;
 }
 
 bool Framework::Graphics::PostProcessing::Destroy() { // TODO

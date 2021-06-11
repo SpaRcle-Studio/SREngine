@@ -39,19 +39,25 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
         return;
     }
 
-    if (m_needUpdate){
-        if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
-            Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
-            return;
-        }
-        m_needUpdate = false;
-        this->m_isBuffCalculate = true;
-    }
+    if (!shader->Complete())
+        return;
 
-    //shader->SetMat4("viewMat", this->m_viewMat);
-    //shader->SetMat4("projMat", this->m_projection);
-    //shader->SetMat4("PVmat",  this->m_viewMat * this->m_projection);
-    shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
+    if (m_pipeline == PipeLine::OpenGL) {
+        if (m_needUpdate){
+            if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
+                Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
+                return;
+            }
+            m_needUpdate = false;
+            this->m_isBuffCalculate = true;
+        }
+
+        shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
+    } else {
+        m_ubo.view = this->m_viewMat;
+        m_ubo.proj = this->m_projection;
+        this->m_env->UpdateUBO(shader->GetUBO(0), &m_ubo, sizeof(ProjViewUBO));
+    }
 
     /*
          mat4x4((1.357995, 0.000000, 0.000000, 0.000000), (0.000000, 2.414213, 0.000000, 0.000000), (0.000000, 0.000000, -1.000025,
@@ -59,7 +65,11 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
      */
 }
 
-Framework::Graphics::Camera::Camera(unsigned char countHDRBuffers) : Component("Camera") {
+Framework::Graphics::Camera::Camera(unsigned char countHDRBuffers) :
+    Component("Camera"),
+    m_env(Environment::Get()),
+    m_pipeline(m_env->GetPipeLine())
+{
     this->m_postProcessing = new PostProcessing(this, countHDRBuffers);
 }
 
@@ -84,6 +94,7 @@ bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
     return true;
 }
 
+/*
 static inline glm::mat4 Mat4FromQuat(glm::quat & q) {
     glm::mat4 M;
     M[0][0] = 1.0f - 2.0f * (q.y * q.y + q.z * q.z);
@@ -106,38 +117,9 @@ static inline glm::mat4 Mat4FromQuat(glm::quat & q) {
     M[3][2] = 0;
     M[3][3] = 1.0f;
     return M;
-}
-
-bool inverse(int angle){
-    angle = abs(angle % 360);
-    return angle >= 90 && angle <= 270;
-}
+}*/
 
 void Framework::Graphics::Camera::UpdateView() noexcept {
-    //float camX = sin(m_yaw)   * cos(m_roll)  +  tan(m_pitch) * sin(m_roll);
-    //float camY = tan(m_pitch) * cos(m_roll)  +  sin(m_yaw)   * sin(m_roll);
-
-    //glm::quat q(glm::vec3(m_yaw, m_pitch, m_roll));
-    //glm::mat4 view = Mat4FromQuat(q);
-    //glm::mat4 trans = glm::translate(glm::mat4(1), -m_pos);
-    //this->m_viewMat = trans * view;
-
-
-    /*const glm::mat4 transMat = glm::translate(glm::mat4(1.f), {
-            -m_pos.x,
-            -m_pos.y,
-            -m_pos.z
-    });
-
-    const glm::mat4 rotationMat = mat4_cast(glm::quat(glm::vec3(
-            {
-                    m_pitch,
-                    -m_yaw + glm::radians(180.f),
-                    m_roll
-            }
-    )));
-    m_viewMat = rotationMat * transMat;*/
-
     glm::mat4 matrix(1.f);
 
     matrix = glm::rotate(matrix,
@@ -153,79 +135,12 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
             , {0, 0, 1}
     );
 
-    //matrix = glm::rotate(matrix,glm::radians(180.f), glm::vec3(0, 1, 0));
-
     m_viewMat = glm::translate(matrix, {
         -m_pos.x,
         -m_pos.y,
         m_pos.z//-m_pos.z
     });
-
-   // std::cout << glm::to_string(m_viewMat) << std::endl;
-   // std::cout << glm::to_string(m_projection) << std::endl;
-
-    //std::cout << std::endl;
-
-    //m_pitch * cos(m_roll)   +  m_yaw * sin(m_roll)    + m_roll * sin(m_yaw)
-    //   * cos(m_roll)   + m_pitch * sin(m_roll)   + m_roll * sin(m_pitch)
-
-    /*
-    float posx = m_pos.x;
-    float posy = m_pos.y;
-    float posz = m_pos.z;
-
-    float camX = sin(m_yaw);
-    float camY = tan(m_pitch);
-    float camZ = cos(m_yaw);
-
-    //std::cout << camX << " " << camY << " " << camZ << std::endl;
-
-    const float eye_radius = 1.f / 100.f; // most correctly
-
-    glm::vec3 eyes = {
-            camX,
-            sin(m_pitch),
-            cos(m_pitch) * camZ
-    };
-
-    glm::mat4 view = glm::lookAt(
-            {
-                    //glm::vec3(camX, camY, camZ) * eye_radius + glm::vec3(posx, posy, posz)
-                    eyes * eye_radius + glm::vec3(posx, posy, posz)
-            },
-            {posx, posy, posz},
-            glm::vec3(0, 1, 0)
-    );
-
-    //glm::mat4 roll = glm::rotate(glm::mat4(1), m_roll, glm::vec3(0, 0, 1));
-
-    //std::cout << m_pitch / M_PI * 45.f * 4.f << std::endl;
-    //std::cout << inverse((int)glm::degrees(m_pitch)) << std::endl;
-    glm::mat4 roll = glm::rotate(glm::mat4(1), m_roll + glm::radians(180.f) * float(inverse((int)glm::degrees(m_pitch))), glm::vec3(0, 0, 1));
-
-    //float(((int(glm::degrees(m_pitch)) / 90) % 2) == 1)
-    //roll = glm::rotate(glm::mat4(1), glm::radians(180.f) * (float)(int(glm::degrees(m_pitch)) / 180), glm::vec3(0, 0, 1));
-
-    m_viewMat = roll * view;
-    */
-
-    /*glm::mat4 cam = glm::rotate(glm::mat4(1.0), m_yaw, glm::vec3(1, 0, 0));
-    cam = glm::rotate(cam, m_pitch, glm::vec3(0, 1, 0));
-    cam = glm::rotate(cam, m_roll, glm::vec3(0, 0, 1));
-
-    glm::mat4 camMove = glm::translate(glm::mat4(1.0), m_pos);
-
-    this->m_viewMat = camMove * glm::inverse(cam);*/
 }
-
-/*glm::quat p(0, glm::vec3(0, 0, 1));
-glm::vec3 axis = { 1, 0, 0 };
-axis = glm::normalize(axis);
-glm::quat q(m_pitch, axis);
-q = glm::normalize(q);
-glm::quat inv = glm::inverse(q);
-glm::quat yaw_q = (q * p * inv);
-glm::vec3 yaw(yaw_q.x, yaw_q.y, yaw_q.z);*/
 
 void Framework::Graphics::Camera::OnRotate(glm::vec3 newValue) noexcept {
     this->m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
@@ -245,11 +160,11 @@ void Framework::Graphics::Camera::OnMove(glm::vec3 newValue) noexcept {
 }
 
 void Framework::Graphics::Camera::UpdateProjection() {
-    m_projection = glm::perspective(glm::radians(45.f), float(m_cameraSize.x) / (float)m_cameraSize.y, m_near, m_far);
+    m_projection = glm::perspective(glm::radians(45.f), (float)m_cameraSize.x / (float)m_cameraSize.y, m_near, m_far);
 }
 void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
     this->m_cameraSize = {w, h};
-    m_projection = glm::perspective(glm::radians(45.f), float(w) / (float)h, m_near, m_far);
+    m_projection = glm::perspective(glm::radians(45.f), (float)w / (float)h, m_near, m_far);
     m_needUpdate = true;
 }
 
@@ -267,17 +182,10 @@ bool Framework::Graphics::Camera::Calculate() noexcept {
 }
 
 void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
-    //if (m_isUse)
     if (m_window) {
         m_window->DestroyCamera(this);
         m_window = nullptr;
     }
-    /*ret: if (m_isUse) {
-        if (m_window)
-            if (m_window->IsWindowOpen())
-                goto ret;
-    }
-    this->Free();*/
 }
 
 nlohmann::json Framework::Graphics::Camera::Save() {
@@ -294,17 +202,6 @@ nlohmann::json Framework::Graphics::Camera::Save() {
 
     return camera;
 }
-
-/*
-void Framework::Graphics::Camera::AwaitFree() {
-    ret:
-    if (m_isUse) {
-        if (m_window)
-            if (m_window->IsWindowOpen())
-                goto ret;
-    }
-    this->Free();
-}*/
 
 bool Framework::Graphics::Camera::Free() {
     ///if (m_isUse && m_window && m_window->IsWindowOpen()) {
