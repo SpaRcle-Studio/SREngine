@@ -30,6 +30,7 @@
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
 #include <EvoVulkan/Tools/VulkanInitializers.h>
+#include <EvoVulkan/Tools/VulkanConverter.h>
 
 namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
@@ -44,7 +45,7 @@ namespace Framework::Graphics {
             // Submit to queue
             auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);
             if (result != VK_SUCCESS) {
-                VK_ERROR("renderFunction() : failed to queue submit!");
+                VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
                 return;
             }
 
