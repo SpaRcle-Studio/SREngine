@@ -330,12 +330,6 @@ bool Framework::Graphics::Window::InitEnvironment() {
     return true;
 }
 
-void Framework::Graphics::Window::FindAimedMesh() {
-    //this->m_render->SetCurrentCamera(m_aimedCameraTarget);
-
-    //this->m_env->ClearBuffers();
-}
-
 void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* camera) {
     m_render->SetCurrentCamera(camera);
     camera->GetPostProcessing()->BeginSkybox();
@@ -544,3 +538,48 @@ glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphi
 
     return pos;
 }
+
+bool Framework::Graphics::Window::RequireAimedMesh(Framework::Graphics::Camera *camera, ImGuiWindow *window) noexcept  {
+    if (this->m_requireGetAimed)
+        return false;
+
+    this->m_requireGetAimed = true;
+
+    this->m_aimedCameraTarget = camera;
+    this->m_aimedWindowTarget = window;
+    this->m_aimedMesh = nullptr;
+
+    return true;
+}
+
+Framework::Graphics::Types::Mesh *Framework::Graphics::Window::PopAimedMesh() noexcept  {
+    if (m_aimedMesh) {
+        Types::Mesh* aim = m_aimedMesh;
+        m_aimedMesh = nullptr;
+        return aim;
+    } else
+        return nullptr;
+}
+
+void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *camera) {
+    Debug::Log("Window::RemoveCamera() : register camera to remove...");
+    if (!camera)
+    {
+        Debug::Error("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
+        return;
+    }
+    m_camerasMutex.lock();
+    m_camerasToDestroy.push_back(camera);
+    m_countCamerasToDestroy++;
+    m_camerasMutex.unlock();
+}
+
+void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)  {
+    Debug::Log("Window::AddCamera() : register new camera...");
+    m_camerasMutex.lock();
+    //camera->SetUse(true);
+    m_newCameras.push_back(camera);
+    m_countNewCameras++;
+    m_camerasMutex.unlock();
+} //TODO: mutex
+

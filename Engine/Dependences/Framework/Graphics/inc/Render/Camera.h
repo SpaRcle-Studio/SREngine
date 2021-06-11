@@ -30,9 +30,7 @@ namespace Framework::Graphics {
         void UpdateProjection(unsigned int w, unsigned int h);
         void UpdateProjection();
 
-        inline void SetDirectOutput(bool value) noexcept {
-            this->m_isEnableDirectOut = value;
-        }
+        SR_FORCE_INLINE void SetDirectOutput(bool value) noexcept { this->m_isEnableDirectOut = value; }
         [[nodiscard]] inline bool IsDirectOutput() const noexcept { return m_isEnableDirectOut; }
     public:
         bool Create(Window* window);
@@ -176,40 +174,39 @@ namespace Framework::Graphics {
         void UpdateView() noexcept;
         bool Calculate() noexcept;
     private:
-        volatile bool               m_isCreate          = false;
-        volatile bool               m_isCalculate       = false;
-        volatile bool               m_isBuffCalculate   = false;
-        volatile bool               m_needUpdate        = false;
+        volatile bool   m_isCreate          = false;
+        volatile bool   m_isCalculate       = false;
+        volatile bool   m_isBuffCalculate   = false;
+        volatile bool   m_needUpdate        = false;
 
-        bool                        m_isEnableDirectOut = false;
+        volatile float  m_yaw               = 0;
+        volatile float  m_pitch             = 0;
+        volatile float  m_roll              = 0;
+    private:
+        PostProcessing* m_postProcessing    = nullptr;
+        Environment*    m_env               = nullptr;
+        const PipeLine  m_pipeline          = PipeLine::Unknown;
 
-        PostProcessing*             m_postProcessing    = nullptr;
-        Environment*                m_env               = nullptr;
-        const PipeLine              m_pipeline          = PipeLine::Unknown;
+        Window*		    m_window	     	= nullptr;
+        glm::mat4	    m_projection        = glm::mat4(0);
+        glm::mat4	    m_viewMat           = glm::mat4(0);
+        glm::vec3	    m_pos               = {0,0,0};
 
-        Window*			            m_window			= nullptr;
-        glm::mat4		            m_projection		= glm::mat4(0);
-        glm::mat4		            m_viewMat			= glm::mat4(0);
-        glm::vec3		            m_pos				= {0,0,0};
+        ProjViewUBO     m_ubo               = {};
 
-        ProjViewUBO                 m_ubo               = {};
+        bool            m_isEnableDirectOut = false;
+        bool            m_allowUpdateProj   = true;
 
-        bool                        m_allowUpdateProj   = true;
+        float           m_far               = 8000.f;
+        float           m_near              = 0.1f;
 
-        float                       m_far               = 8000.f;
-        float                       m_near              = 0.1f;
+        GUI::ICanvas*   m_canvas            = nullptr;
 
-        GUI::ICanvas*               m_canvas            = nullptr;
+        glm::vec2       m_cameraSize        = glm::vec2(0,0);
 
-        glm::vec2                   m_cameraSize        = glm::vec2(0,0);
-
-        volatile float	            m_yaw				= 0;
-        volatile float	            m_pitch				= 0;
-        volatile float	            m_roll				= 0;
-
-        float			            m_dxx				= 0;
-        float			            m_dxz				= 0;
-        float			            m_dyy				= 0;
+        float		    m_dxx               = 0;
+        float		    m_dxz               = 0;
+        float		    m_dyy               = 0;
     };
 }
 

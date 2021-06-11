@@ -21,33 +21,30 @@ namespace Framework::Graphics {
 
     using namespace Types;
     class ObjLoader {
-        ObjLoader()             = delete;
-        ObjLoader(ObjLoader&)   = delete;
-        ~ObjLoader()            = delete;
+        ObjLoader()           = delete;
+        ObjLoader(ObjLoader&) = delete;
+        ~ObjLoader()          = delete;
     private:
-        inline static std::vector<Mesh*>			m_temp_meshes		= std::vector<Mesh*>();
+        inline static std::vector<Mesh*>			      m_temp_meshes	    = std::vector<Mesh*>();
 
-        inline static std::vector<Vertices::Mesh3DVertex> m_temp_vertexes = std::vector<Vertices::Mesh3DVertex>();
-        inline static std::vector<unsigned int>		m_temp_indices		= std::vector<unsigned int>();
+        inline static std::vector<Vertices::Mesh3DVertex> m_temp_vertexes   = std::vector<Vertices::Mesh3DVertex>();
+        inline static std::vector<unsigned int>		      m_temp_indices    = std::vector<unsigned int>();
 
-        inline static std::vector<glm::vec3>		m_pos_vertex		= std::vector<glm::vec3>();
-        inline static std::vector<glm::vec2>		m_pos_texture		= std::vector<glm::vec2>();
-        inline static std::vector<glm::vec3>		m_pos_normal		= std::vector<glm::vec3>();
+        inline static std::vector<glm::vec3>		      m_pos_vertex		= std::vector<glm::vec3>();
+        inline static std::vector<glm::vec2>		      m_pos_texture		= std::vector<glm::vec2>();
+        inline static std::vector<glm::vec3>		      m_pos_normal		= std::vector<glm::vec3>();
     private:
-        inline static unsigned long long			m_line_number		= 0;
-        inline static std::string					m_current_object	= "";
+        inline static unsigned long long			      m_line_number		= 0;
+        inline static std::string					      m_current_object	= "";
 
-        inline static std::mutex                    m_mutex             = std::mutex();
-        inline static std::string					m_file_name			= "";
+        inline static std::mutex                          m_mutex           = std::mutex();
+        inline static std::string					      m_file_name       = "";
     private:
         static void AddMesh();
         static void Clear();
         static void ProcessFace(char** elems);
         static bool ProcessLine(char* line);
         static bool ProcessFile(const char* data);
-
-        static bool ProcessFileIndices(const char* data);
-        static bool ProcessLineIndices(char* line);
     public:
         static std::vector<Mesh*> Load(const std::string& path);
         static std::vector<Mesh*> LoadWithIndices(const std::string& path);

@@ -94,6 +94,14 @@ namespace Framework::Graphics {
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
 
+                case WM_MOUSEWHEEL: {
+                    auto wheel = GET_WHEEL_DELTA_WPARAM(wParam);
+
+                    this->m_callback_scroll(this, 0.0, (double)wheel / 10.0);
+
+                    return DefWindowProc(hwnd, msg, wParam, lParam);
+                }
+
                 /*case WM_SIZE: {
                     if ((wParam != SIZE_MINIMIZED)) {
                         if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {

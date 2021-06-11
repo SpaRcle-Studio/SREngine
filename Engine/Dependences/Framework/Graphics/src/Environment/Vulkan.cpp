@@ -135,6 +135,13 @@ namespace Framework::Graphics{
             g_callback(WinEvents::Resize, win, &w, &h);
         });
 
+        m_basicWindow->SetCallbackScroll([this](BasicWindow* win, double xoffset, double yoffset) {
+            for (const auto &a : g_scrollEvents)
+                a(xoffset, yoffset);
+
+            g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
+        });
+
         if (!this->m_basicWindow->Create(winName, 0, 0, m_winFormat->Width(), m_winFormat->Height(), fullScreen, resizable)) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
             return false;

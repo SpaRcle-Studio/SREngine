@@ -4,18 +4,22 @@
 
 #ifndef GAMEENGINE_MESH_H
 #define GAMEENGINE_MESH_H
+
+#include <vector>
+#include <macros.h>
+
+#include <Debug.h>
+
+#include <glm/mat4x4.hpp>
+#include <glm/vec3.hpp>
+
 #include <Render/Shader.h>
 #include <Types/Material.h>
 #include <ResourceManager/IResource.h>
 #include <Environment/Vertex.h>
-#include <vector>
-#include <glm/mat4x4.hpp>
-#include <glm/vec3.hpp>
 #include <Environment/Environment.h>
 #include <EntityComponentSystem/Component.h>
-#include <Debug.h>
 #include <Types/List.h>
-#include <macros.h>
 
 namespace Framework::Graphics{
     class Render;
@@ -31,14 +35,13 @@ namespace Framework::Graphics::Types {
         friend class Material;
     protected:
         /** \brief Default mesh constructor */
-        //Mesh() : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh") { }
         Mesh();
         Mesh(Shader* shader, Material* material, std::string name = "Unnamed");
     protected:
         /** \brief Default mesh destructor */
         ~Mesh();
     public:
-        [[nodiscard]] inline glm::mat4 GetModelMatrix() const noexcept { return this->m_modelMat; }
+        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetModelMatrix() const noexcept { return this->m_modelMat; }
         SR_FORCE_INLINE void SetRender(Render* render) noexcept {
             this->m_render = render;
         };
@@ -47,7 +50,6 @@ namespace Framework::Graphics::Types {
             this->m_countIndices = indices.size();
             this->m_indices      = indices;
         }
-
     public:
         bool DrawOnInspector() override;
 
@@ -71,53 +73,44 @@ namespace Framework::Graphics::Types {
             this->m_inverse = value;
             ReCalcModel();
         }
-        [[nodiscard]] bool GetInverse() const noexcept {
-            return this->m_inverse;
-        }
+        [[nodiscard]] SR_FORCE_INLINE bool GetInverse() const noexcept { return this->m_inverse; }
 
         SR_FORCE_INLINE static void Inverse(Helper::Types::List<Mesh*> meshes){
             for (size_t t = 0; t < meshes.Size(); t++)
                 meshes[t]->SetInverse(!meshes[t]->GetInverse());
         }
     public:
-        /** \brief Free mesh pointer
-         * \return bool */
-        /*bool Free() override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Debug::Log("Mesh::Free() : free mesh memory...");
-            delete this;
-            return true;
-        }*/
         /** \brief Set mesh to destroy in res manager
         * \return bool */
         bool Destroy() override;
     protected:
-        bool                        m_inverse               = false;
+        bool                        m_inverse           = false;
 
-        Environment*                m_env                   = nullptr;
+        Environment*                m_env               = nullptr;
+        PipeLine                    m_pipeline          = PipeLine::Unknown;
 
-        std::mutex                  m_mutex                 = std::mutex();
+        std::mutex                  m_mutex             = std::mutex();
 
-        std::string                 m_geometry_name         = "Unnamed";
-        Shader*                     m_shader                = nullptr;
-        Render*                     m_render                = nullptr;
-        Material*                   m_material              = nullptr;
+        std::string                 m_geometry_name     = "Unnamed";
+        Shader*                     m_shader            = nullptr;
+        Render*                     m_render            = nullptr;
+        Material*                   m_material          = nullptr;
 
         /** \brief Vertices OpenGL-context calculated */
-        volatile bool               m_hasErrors             = false;
-        volatile bool               m_isCalculated          = false;
-        unsigned char               m_toolID                = 0; // 0 - none, 1 - x, 2 - y, 3 - z
+        volatile bool               m_hasErrors         = false;
+        volatile bool               m_isCalculated      = false;
+        unsigned char               m_toolID            = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
-        int                         m_descriptorSet         = -1;
-        int                         m_VAO                   = -1;
-        int                         m_VBO                   = -1;
-        int                         m_IBO                   = -1;
-        int32_t                     m_UBO                   = -1;
+        int                         m_descriptorSet     = -1;
+        int                         m_VAO               = -1;
+        int                         m_VBO               = -1;
+        int                         m_IBO               = -1;
+        int32_t                     m_UBO               = -1;
 
-        std::vector<unsigned int>	m_indices				= std::vector<unsigned int>();
-        size_t						m_countVertices		    = 0;
-        size_t						m_countIndices		    = 0;
-        bool                        m_useIndices            = false;
+        std::vector<uint32_t>	    m_indices           = std::vector<uint32_t>();
+        size_t						m_countVertices	    = 0;
+        size_t						m_countIndices	    = 0;
+        bool                        m_useIndices        = false;
     private:
         /** \brief Re-calc mesh space-transform matrix */
         void ReCalcModel();
@@ -136,17 +129,17 @@ namespace Framework::Graphics::Types {
             goto ret;
         }
     public:
-        glm::vec3				    m_position			= glm::vec3();
-        glm::vec3					m_rotation			= glm::vec3();
-        glm::vec3					m_scale				= {1,1,1};
-        glm::mat4					m_modelMat			= glm::mat4(0);
+        glm::vec3 m_position = glm::vec3();
+        glm::vec3 m_rotation = glm::vec3();
+        glm::vec3 m_scale    = { 1, 1, 1 };
+        glm::mat4 m_modelMat = glm::mat4(0);
     public:
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVAO() const noexcept { return (uint32_t)m_VAO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVBO() const noexcept { return (uint32_t)m_VBO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }
         [[nodiscard]] SR_FORCE_INLINE int32_t  FastGetUBO() const noexcept { return m_UBO;           }
 
-        int32_t GetVAO() {
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetVAO() {
             if (m_isDestroy)
                 return m_VAO;
 
@@ -156,7 +149,7 @@ namespace Framework::Graphics::Types {
             return m_VAO;
         }
 
-        int32_t GetVBO() {
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetVBO() {
             if (m_isDestroy)
                 return m_VBO;
 
@@ -175,17 +168,13 @@ namespace Framework::Graphics::Types {
 
         nlohmann::json Save() override;
 
-        [[nodiscard]] size_t GetCountVertices() const noexcept { return m_countVertices; }
-
-        [[nodiscard]] inline Material* GetMaterial() const noexcept { return this->m_material; }
-
-        [[nodiscard]] inline bool IsCalculated() const noexcept { return m_isCalculated; }
+        [[nodiscard]] SR_FORCE_INLINE size_t GetCountVertices() const noexcept { return m_countVertices;  }
+        [[nodiscard]] SR_FORCE_INLINE Material* GetMaterial()   const noexcept { return this->m_material; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsCalculated()       const noexcept { return m_isCalculated;   }
 
         virtual Mesh* Copy() = 0;
 
-        SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept {
-            this->m_toolID = ID;
-        }
+        SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept { this->m_toolID = ID; }
 
 #define ConfigureShader(shader) \
         shader->SetMat4("modelMat", m_modelMat); \
@@ -200,8 +189,6 @@ namespace Framework::Graphics::Types {
         virtual SR_FORCE_INLINE void DrawVulkan() = 0;
 
         SR_FORCE_INLINE bool DrawOpenGL() noexcept {
-            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
-
             if (m_isDestroy) return false;
 
             if (!m_isCalculated)
@@ -217,15 +204,12 @@ namespace Framework::Graphics::Types {
                 this->m_material->Use();
             }
 
-            //this->m_env->DrawTriangles(m_VAO, m_countVertices);
             this->m_env->DrawTriangles(m_countVertices);
 
             return true;
         }
 
         SR_FORCE_INLINE bool DrawWireFrame() noexcept {
-            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Indigo); }
-
             if (m_isDestroy) return false;
 
             if (!m_isCalculated)

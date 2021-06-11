@@ -5,19 +5,17 @@
 #ifndef GAMEENGINE_MATERIAL_H
 #define GAMEENGINE_MATERIAL_H
 
-#include "Types/Texture.h"
-#include <glm/glm.hpp>
-
+#include <Types/Texture.h>
 #include <Render/Shader.h>
-
 #include <Math/Vector3.h>
+
+#include <glm/glm.hpp>
 #include <macros.h>
 
 namespace Framework::Graphics::Types {
-    using namespace Helper;
-
     class Mesh;
     class Mesh3D;
+
     class Material {
         friend class Mesh;
         friend class Mesh3D;
@@ -25,21 +23,21 @@ namespace Framework::Graphics::Types {
         Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
         ~Material();
     private:
-        inline static Environment*      m_env               = nullptr;
+        inline static Environment* m_env            = nullptr;
 
-        bool                            m_transparent       = false;
-        volatile bool                   m_bloom             = false;
+        bool                       m_transparent    = false;
+        volatile bool              m_bloom          = false;
 
-        glm::vec4                       m_color             = glm::vec4(1,1,1,1);
+        glm::vec4                  m_color          = glm::vec4(1,1,1,1);
 
-        Mesh*                           m_mesh              = nullptr;
+        Mesh*                      m_mesh           = nullptr;
 
-        volatile bool                   m_texturesIsFree    = false;
+        volatile bool              m_texturesIsFree = false;
 
-        Texture*                        m_diffuse           = nullptr;
-        Texture*                        m_normal            = nullptr;
-        Texture*                        m_specular          = nullptr;
-        Texture*                        m_glossiness        = nullptr;
+        Texture*                   m_diffuse        = nullptr;
+        Texture*                   m_normal         = nullptr;
+        Texture*                   m_specular       = nullptr;
+        Texture*                   m_glossiness     = nullptr;
     private:
         [[nodiscard]] static inline int RandomNumber(int a, int b) noexcept { return rand()%(b-a+1) + a; }
     public:
@@ -58,15 +56,16 @@ namespace Framework::Graphics::Types {
         }
         void Use() const noexcept;
     public:
-        [[nodiscard]] inline bool IsTransparent() const noexcept { return m_transparent; };
         bool SetTransparent(bool value);
         bool SetMesh(Mesh* mesh);
-        inline void SetBloom(bool value) noexcept { this->m_bloom = value; };
-        [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom; };
 
-        inline void SetColor(float r, float g, float b) { this->m_color = { r, g, b, 1}; }
+        inline void SetBloom(bool value)                  noexcept { this->m_bloom = value; };
+        [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom;  };
+        [[nodiscard]] inline bool IsTransparent()   const noexcept { return m_transparent;  };
+
+        inline void SetColor(float r, float g, float b)   { this->m_color = { r, g, b, 1};                  }
         inline void SetColor(Helper::Math::Vector3 color) { this->m_color = {color.x, color.y, color.z, 1}; }
-        inline void SetColor(glm::vec4 color) { this->m_color = color; }
+        inline void SetColor(glm::vec4 color)             { this->m_color = color;                          }
 
         [[nodiscard]] inline Helper::Math::Vector3 GetColor() const noexcept { return glm::vec3(this->m_color); }
 

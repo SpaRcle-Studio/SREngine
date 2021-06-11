@@ -14,7 +14,7 @@ namespace Framework::Graphics::Types{
 namespace Framework::Graphics {
     class TextureLoader {
     public:
-        TextureLoader() = delete;
+        TextureLoader()  = delete;
         ~TextureLoader() = delete;
     private:
         Types::Texture* g_default = nullptr;

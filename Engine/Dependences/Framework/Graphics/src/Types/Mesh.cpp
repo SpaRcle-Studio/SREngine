@@ -29,19 +29,17 @@
 using namespace Framework::Graphics::Types;
 
 Framework::Graphics::Types::Mesh::Mesh() : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh") {
-    this->m_shader = nullptr;
-    this->m_material = nullptr;
+    this->m_shader        = nullptr;
+    this->m_material      = nullptr;
     this->m_geometry_name = "Unsolved";
+    this->m_pipeline      = this->m_env->GetPipeLine();
 }
 
 Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::string name)
     : IResource("Mesh"), m_env(Environment::Get()), Component("Mesh")
-    {
-    this->m_shader = shader;
-
-    // use default shader
-    //if (!m_shader)
-    //    Debug::Warn("Mesh::Constructor() : shader is nullptr!");
+{
+    this->m_pipeline = this->m_env->GetPipeLine();
+    this->m_shader   = shader;
 
     this->m_geometry_name = std::move(name);
     this->m_material = material;
@@ -131,14 +129,6 @@ ret:
 void Mesh::ReCalcModel() {
     glm::mat4 modelMat = glm::mat4(1.0f);
 
-    //std::cout << glm::to_string(m_position) << std::endl;
-
-    /*modelMat = glm::translate(modelMat, {
-            //-m_position.z, m_position.y, -m_position.x
-            m_position.x, m_position.y, -m_position.z
-             //0, -8, -25
-    }); // */
-
     modelMat = glm::translate(modelMat, {
             m_position.x,
             m_position.y,
@@ -147,33 +137,13 @@ void Mesh::ReCalcModel() {
 
     modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
             {
-                m_rotation.x,//-m_rotation.x,
-                m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
-                -m_rotation.z // SEE: change form -m_rotation.z
+                    m_rotation.x,//-m_rotation.x,
+                    m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
+                    -m_rotation.z // SEE: change form -m_rotation.z
             }
-            ))));
-
-    //modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(0,90,0))));
-
-
-    //modelMat = glm::rotate(modelMat, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
-    //modelMat = glm::rotate(modelMat, glm::radians(-m_rotation.y + 180.f), glm::vec3(0, 1, 0));
-    //modelMat = glm::rotate(modelMat, glm::radians(m_rotation.z), glm::vec3(0, 0, 1));
-
-    //glm::vec3 rad = glm::radians(m_rotation);
-
-    //glm::mat4 rotMatrix = glm::eulerAngleXYZ(rad.x, rad.y, rad.z);
-
-    //!rotationMatrix = glm::rotate(rotationMatrix,glm::radians(180.f), glm::vec3(0, 1, 0));
-
-    //if (m_rotation != glm::vec3(0))
-
-    //glm::fquat q = glm::radians(m_rotation);
-    //modelMat *= q;
+    ))));
 
     modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
-
-
 
     this->m_modelMat = modelMat;
 }

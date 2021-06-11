@@ -13,6 +13,7 @@
 #include <Types/List.h>
 
 using namespace Framework::Helper::Math;
+using namespace Framework::Graphics::Types;
 
 void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     // Engine

@@ -1,15 +1,14 @@
 //
 // Created by Nikita on 17.11.2020.
 //
-//#include <easy/profiler.h>
-#include "Render/Render.h"
-#include <Render/Camera.h>
+
 #include <iostream>
 
+#include <Render/Render.h>
+#include <Render/Camera.h>
 #include <Lighting/Light.h>
 #include <Types/Skybox.h>
 #include <Window/Window.h>
-#include <Utils/StringUtils.h>
 
 bool Framework::Graphics::Render::Create(Window* window) {
     if (m_isCreate){
@@ -42,13 +41,13 @@ bool Framework::Graphics::Render::Create(Window* window) {
          */
         this->m_geometryShader->SetCreateInfo({
             .polygonMode  = PolygonMode::Fill,
-            .cullMode     = CullMode::None,
+            .cullMode     = CullMode::Back,
             .depthCompare = DepthCompare::LessOrEqual,
             .blendEnabled = true,
             .depthEnabled = true
         });
 
-        this->m_flatGeometryShader  = new Shader(this, "engine/flatGeometry");
+        this->m_flatGeometryShader = new Shader(this, "engine/flatGeometry");
 
         Shader::SetStandardGeometryShader(m_geometryShader);
     }
@@ -106,14 +105,10 @@ bool Framework::Graphics::Render::Close() {
     }
 
     auto data = std::string();
-    //data.append("\n\tMeshes           : " + std::to_string(m_countMeshes));
     data.append("\n\tT meshes         : " + std::to_string(m_countTransparentMeshes));
     data.append("\n\tNew meshes       : " + std::to_string(m_countNewMeshes));
     data.append("\n\tMeshes to remove : " + std::to_string(m_countMeshesToRemove));
     Debug::Graph("Render::Close() : close render..." + data);
-
-    //if (m_skyboxShader)
-    //   m_skyboxShader->Free();
 
     if (m_geometryShader)
         m_geometryShader->Free();
@@ -195,9 +190,6 @@ void Framework::Graphics::Render::PollEvents() {
                     m_countMeshesInGroups[id]++;
                     m_totalCountMeshesInGroups++;
                 }
-
-                //m_meshes.push_back(temp);
-               // m_countMeshes++;
             }
         }
 
@@ -265,14 +257,6 @@ void Framework::Graphics::Render::PollEvents() {
                         break;
                     }
                 }
-
-                //for (m_t2 = 0; m_t2 < m_countMeshes; m_t2++)
-                 //   if (m_meshes[m_t2] == temp) {
-                 //       m_countMeshes--;
-                 //       m_meshes.erase(m_meshes.begin() + m_t2);
-                 //       temp->RemoveUsePoint();
-                 //       break;
-                  //  }
             }
         }
 
@@ -354,7 +338,7 @@ void Framework::Graphics::Render::FreeTexture(Framework::Graphics::Types::Textur
 
     m_mutex.unlock();
 }
-void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
+void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Graph("Render::RegisterTexture() : register new texture...");
 
@@ -362,7 +346,7 @@ void Framework::Graphics::Render::RegisterTexture(Texture * texture) {
     texture->SetRender(this);
 }
 
-Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
+Framework::Graphics::Types::Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
     // TODO: See
     if (absoluteID < m_totalCountMeshesInGroups) {
         for (auto const& [key, val] : m_meshGroups) {
@@ -377,32 +361,19 @@ Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
     return nullptr;
 }
 
-/*
-void Framework::Graphics::Render::SelectMesh(Framework::Graphics::Types::Mesh *mesh) {
-    m_mutex.lock();
+bool Framework::Graphics::Render::DelayedDestroySkybox()  {
+    if (!this->m_skybox){
+        Debug::Error("Render::DelayedDestroySkybox() : skybox already destroyed!");
+        return false;
+    }
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Graph("Render::SelectMesh() : select \""+ mesh->GetGeometryName() +"\"...");
+    if (m_needDestroySkybox){
+        Debug::Error("Render::DelayedDestroySkybox() : skybox already will bee destroyed!");
+        return false;
+    }
 
-    this->m_newSelectedMeshes.push_back(mesh);
-    this->m_countNewSelectedMeshes++;
+    Debug::Graph("Render::DelayedDestroySkybox() : destroying skybox...");
 
-    m_mutex.unlock();
+    this->m_needDestroySkybox = true;
+    return true;
 }
-
-void Framework::Graphics::Render::DeselectMesh(Framework::Graphics::Types::Mesh *mesh) {
-    m_mutex.lock();
-
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Graph("Render::DeselectMesh() : deselect \""+ mesh->GetGeometryName() +"\"...");
-
-    this->m_removeSelectedMeshes.push_back(mesh);
-    this->m_countRemoveSelectedMeshes++;
-
-    m_mutex.unlock();
-}
-
-void Framework::Graphics::Render::DrawStencil() noexcept {
-
-}*/
-

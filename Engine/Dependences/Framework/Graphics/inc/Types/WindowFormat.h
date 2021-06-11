@@ -10,8 +10,6 @@
 #include <glm/glm.hpp>
 
 namespace Framework::Graphics::Types {
-    //using namespace Framework::Helper::Math;
-
     class WindowFormat {
     public:
         enum Value {
@@ -27,14 +25,6 @@ namespace Framework::Graphics::Types {
         [[nodiscard]] static WindowFormat* AllocMemory() {
             return (WindowFormat*)malloc(sizeof(WindowFormat));
         }
-        void FreeMemory() {
-            free(this);
-        }
-
-        //WindowFormat(const glm::vec2& size) : value(Value::Free) {
-        //    this->m_width = (unsigned int)size.x;
-        //    this->m_height = (unsigned int)size.y;
-       // }
 
         void SetPreset(const Value& preset) {
             this->value = preset;

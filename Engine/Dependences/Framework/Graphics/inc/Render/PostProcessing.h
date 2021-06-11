@@ -12,8 +12,9 @@
 namespace Framework::Graphics {
     class Render;
     class Camera;
+
     /*
-     How use?
+     How use? (OpenGL)
 
      void Draw() {
         ...clear buffers
@@ -25,51 +26,47 @@ namespace Framework::Graphics {
         postProcessing->End();
 
         ...swapBuffers
-     }
      */
+
     // TODO: add freeing video buffers!
     class PostProcessing {
-        /** \brief vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates. */
     private:
         ~PostProcessing() = default;
     public:
+        PostProcessing(const PostProcessing&) = delete;
         PostProcessing(Camera* camera, unsigned char countHDRBuffers);
     private:
-        float			          m_gamma					    = 0.8f;
-        float                     m_exposure                    = 1.f;
-        float                     m_saturation                  = 1.f;
-        glm::vec3		          m_color_correction		    = { 1, 1, 1 };
-        glm::vec3		          m_bloomColor           	    = { 1, 1, 1 };
-        float                     m_bloomIntensity              = 1.f;
-        volatile unsigned char    m_bloomAmount                 = 6;
+        float			      m_gamma                 = 0.8f;
+        float                 m_exposure              = 1.f;
+        float                 m_saturation            = 1.f;
+        glm::vec3		      m_color_correction      = { 1, 1, 1 };
+        glm::vec3		      m_bloomColor            = { 1, 1, 1 };
+        float                 m_bloomIntensity        = 1.f;
+        volatile uint8_t      m_bloomAmount           = 6;
     private:
-        bool                      m_debugDisplayBloomMask       = false;
+        bool                  m_debugDisplayBloomMask = false;
+
+        volatile bool         m_bloom                 = true;
+        bool                  m_bloomClear            = false;
     private:
-        //unsigned int	m_screen_pp_texture		                = 0;
-        //unsigned int	m_pp_FBO				                = 0;
-        //unsigned int	m_pp_RBO				                = 0;
+        bool                  m_horizontal            = false;
+        bool                  m_firstIteration        = false;
 
-        bool                      m_horizontal                  = false;
-        bool                      m_firstIteration              = false;
+        uint32_t              m_VAO                   = 0;
+        uint32_t              m_VBO                   = 0;
 
-        unsigned int              m_VAO                         = 0;
-        unsigned int              m_VBO                         = 0;
+        uint32_t              m_skyboxRBO             = 0;
+        uint32_t              m_skyboxFBO             = 0;
+        uint32_t              m_skyboxColorBuffer     = 0;
 
-        volatile bool             m_bloom                       = true;
-        bool                      m_bloomClear                  = false;
+        uint32_t              m_finalRBO              = 0;
+        uint32_t              m_finalFBO              = 0;
+        uint32_t              m_finalColorBuffer      = 0;
 
-        unsigned int              m_skyboxRBO                   = 0;
-        unsigned int              m_skyboxFBO                   = 0;
-        unsigned int              m_skyboxColorBuffer           = 0;
-
-        unsigned int              m_finalRBO                    = 0;
-        unsigned int              m_finalFBO                    = 0;
-        unsigned int              m_finalColorBuffer            = 0;
-
-        unsigned int              m_RBODepth                    = 0;
-        unsigned int              m_HDRFrameBufferObject        = 0;
-        std::vector<unsigned int> m_ColorBuffers                = { 0, 0, 0, 0 };
-        unsigned char             m_countColorBuffers           = 4;
+        uint32_t              m_RBODepth              = 0;
+        uint32_t              m_HDRFrameBufferObject  = 0;
+        std::vector<uint32_t> m_ColorBuffers          = { 0, 0, 0, 0 };
+        uint8_t               m_countColorBuffers     = 4;
         /*
              1 - color
              2 - bloom
@@ -77,46 +74,46 @@ namespace Framework::Graphics {
              4 - stencil
          */
 
-        std::vector<unsigned int> m_PingPongFrameBuffers        = { 0, 0 };
-        std::vector<unsigned int> m_PingPongColorBuffers        = { 0, 0 };
+        std::vector<uint32_t> m_PingPongFrameBuffers  = { 0, 0 };
+        std::vector<uint32_t> m_PingPongColorBuffers  = { 0, 0 };
+    private:
+        Environment*          m_env                   = nullptr;
+
+        Shader*               m_postProcessingShader  = nullptr;
+        Shader*               m_blurShader            = nullptr;
+
+        Camera*               m_camera                = nullptr;
+        Render*               m_render                = nullptr;
+        bool                  m_isInit                = false;
     private:
         void BlurBloom();
-    private:
-        Environment*    m_env                                   = nullptr;
-
-        Shader*         m_postProcessingShader                  = nullptr;
-        Shader*         m_blurShader                            = nullptr;
-
-        Camera*         m_camera                                = nullptr;
-        Render*         m_render                                = nullptr;
-        bool            m_isInit                                = false;
     public:
-        [[nodiscard]] inline glm::vec3 GetColorCorrection() const noexcept { return m_color_correction; }
-        [[nodiscard]] inline glm::vec3 GetBloomColor() const noexcept { return m_bloomColor; }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetColorCorrection() const noexcept { return m_color_correction;    }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetBloomColor()      const noexcept { return m_bloomColor;          }
 
-        [[nodiscard]] inline float GetGamma()               const noexcept { return m_gamma; }
-        [[nodiscard]] inline float GetExposure()            const noexcept { return m_exposure; }
-        [[nodiscard]] inline float GetSaturation()          const noexcept { return m_saturation; }
-        [[nodiscard]] inline unsigned char GetBloomAmount() const noexcept { return m_bloomAmount; }
-        [[nodiscard]] inline float GetBloomIntensity()      const noexcept { return m_bloomIntensity; }
-        [[nodiscard]] inline bool GetBloomEnabled()         const noexcept { return this->m_bloom; }
+        [[nodiscard]] SR_FORCE_INLINE float GetGamma()               const noexcept { return m_gamma;               }
+        [[nodiscard]] SR_FORCE_INLINE float GetExposure()            const noexcept { return m_exposure;            }
+        [[nodiscard]] SR_FORCE_INLINE float GetSaturation()          const noexcept { return m_saturation;          }
+        [[nodiscard]] SR_FORCE_INLINE unsigned char GetBloomAmount() const noexcept { return m_bloomAmount;         }
+        [[nodiscard]] SR_FORCE_INLINE float GetBloomIntensity()      const noexcept { return m_bloomIntensity;      }
+        [[nodiscard]] SR_FORCE_INLINE bool GetBloomEnabled()         const noexcept { return this->m_bloom;         }
     public:
-        inline void SetColorCorrection(glm::vec3 value)     noexcept { m_color_correction = value; }
-        inline void SetBloomColor(glm::vec3 value)          noexcept { m_bloomColor = value; }
-        inline void SetGamma(float gamma)                   noexcept { m_gamma = gamma; }
-        inline void SetSaturation(float gamma)              noexcept { m_saturation = gamma; }
-        inline void SetExposure(float exposure)             noexcept { m_exposure = exposure; }
-        inline void SetBloomAmount(unsigned int amount)     noexcept { this->m_bloomAmount = amount; }
-        inline void SetBloomIntensity(float intensity)      noexcept { this->m_bloomIntensity = intensity; }
+        SR_FORCE_INLINE void SetColorCorrection(glm::vec3 value)     noexcept { m_color_correction     = value;     }
+        SR_FORCE_INLINE void SetBloomColor(glm::vec3 value)          noexcept { m_bloomColor           = value;     }
+        SR_FORCE_INLINE void SetGamma(float gamma)                   noexcept { m_gamma                = gamma;     }
+        SR_FORCE_INLINE void SetSaturation(float gamma)              noexcept { m_saturation           = gamma;     }
+        SR_FORCE_INLINE void SetExposure(float exposure)             noexcept { m_exposure             = exposure;  }
+        SR_FORCE_INLINE void SetBloomAmount(unsigned int amount)     noexcept { this->m_bloomAmount    = amount;    }
+        SR_FORCE_INLINE void SetBloomIntensity(float intensity)      noexcept { this->m_bloomIntensity = intensity; }
 
-        inline void SetBloom(bool v) { this->m_bloom = v; }
-        inline void SetDisplayBloomMask(bool value) noexcept { m_debugDisplayBloomMask = value; }
+        SR_FORCE_INLINE void SetBloom(bool v)                        noexcept { this->m_bloom = v;                  }
+        SR_FORCE_INLINE void SetDisplayBloomMask(bool value)         noexcept { m_debugDisplayBloomMask = value;    }
     public:
         /** \brief Init shader and set default values \warning Call only from window context \return bool */
         bool Init(Render* render);
         bool Destroy();
 
-        inline bool Free() noexcept {
+        SR_FORCE_INLINE bool Free() noexcept {
             Helper::Debug::Graph("PostProcessing::Free() : free post processing pointer...");
             delete this;
             return true;
@@ -130,17 +127,17 @@ namespace Framework::Graphics {
         bool Begin();
         bool End();
 
-        [[nodiscard]] inline unsigned int GetFinally()          const noexcept { return this->m_finalColorBuffer; }
-        [[nodiscard]] inline unsigned int GetColoredImage()     const noexcept { return this->m_ColorBuffers[0]; }
-        [[nodiscard]] inline unsigned int GetBloomMask()        const noexcept { return this->m_ColorBuffers[1]; }
-        [[nodiscard]] inline unsigned int GetDepthBuffer()      const noexcept { return this->m_ColorBuffers[2]; }
-        [[nodiscard]] inline unsigned int GetBlurBloomMask()    const noexcept { return m_PingPongColorBuffers[0]; }
-        [[nodiscard]] inline unsigned int GetSkyboxColor()      const noexcept { return m_skyboxColorBuffer; }
-        [[nodiscard]] inline unsigned int GetStencilBuffer()    const noexcept { return m_ColorBuffers[3]; }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetFinally()       const noexcept { return this->m_finalColorBuffer;  }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetColoredImage()  const noexcept { return this->m_ColorBuffers[0];   }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetBloomMask()     const noexcept { return this->m_ColorBuffers[1];   }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetDepthBuffer()   const noexcept { return this->m_ColorBuffers[2];   }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetBlurBloomMask() const noexcept { return m_PingPongColorBuffers[0]; }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetSkyboxColor()   const noexcept { return m_skyboxColorBuffer;       }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetStencilBuffer() const noexcept { return m_ColorBuffers[3];         }
 
-        [[nodiscard]] inline unsigned int GetHDR_FBO()          const noexcept { return m_HDRFrameBufferObject; }
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHDR_FBO()       const noexcept { return m_HDRFrameBufferObject;    }
 
-        [[nodiscard]] inline unsigned int GetCustomColorBuffer(unsigned char id) const noexcept {
+        [[nodiscard]] SR_FORCE_INLINE unsigned int GetCustomColorBuffer(unsigned char id) const noexcept {
             if (m_countColorBuffers <= id) {
                 Helper::Debug::Error("PostProcessing::GetCustomColorBuffer(): index error!");
             }

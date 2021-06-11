@@ -18,7 +18,6 @@ function Init()
 
     Script.this:ImportLib("Math");
     Script.this:ImportLib("Engine");
-    Script.this:ImportLib("Editor");
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
@@ -59,12 +58,41 @@ function Start()
     collectgarbage() -- collect memory
 end;
 
+function MouseUpdate()
+    local dir = Input.GetMouseDrag();
+
+    local wheel = Input.GetMouseWheel();
+    if (wheel ~= 0) then
+        local forward = camera:GetTransform():Forward();
+        camera:GetTransform():Translate(Vector3.FMul(forward, wheel / -10.0), false);
+    end;
+
+    if (Input.GetKey(KeyCode.MouseRight)) then
+        camera:GetTransform():Rotate(Vector3.New(dir.y / -10.0, dir.x / -10.0, 0.0), false);
+    end;
+
+    if (Input.GetKey(KeyCode.MouseMiddle)) then
+        local right = camera:GetTransform():Right();
+        local up    = camera:GetTransform():Up();
+
+        camera:GetTransform():Translate(
+            Vector3.Sum(
+                Vector3.FMul(up,    dir.y /  100.0),
+                Vector3.FMul(right, dir.x /  -100.0)
+            ),
+            false
+        );
+    end;
+end;
+
 function FixedUpdate()
 
 end;
 
 function Update()
+    MouseUpdate();
 
+    collectgarbage() -- collect memory
 end;
 
 function Close()

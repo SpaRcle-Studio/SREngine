@@ -122,24 +122,46 @@ static inline glm::mat4 Mat4FromQuat(glm::quat & q) {
 void Framework::Graphics::Camera::UpdateView() noexcept {
     glm::mat4 matrix(1.f);
 
-    matrix = glm::rotate(matrix,
-             -m_pitch
-            , {1, 0, 0}
+    if (m_pipeline == PipeLine::OpenGL) {
+        matrix = glm::rotate(matrix,
+                -m_pitch,
+                {1, 0, 0}
         );
-    matrix = glm::rotate(matrix,
-             -m_yaw //m_yaw
-            , {0, 1, 0}
-    );
-    matrix = glm::rotate(matrix,
-             m_roll
-            , {0, 0, 1}
-    );
+        matrix = glm::rotate(matrix,
+                -m_yaw //m_yaw
+                , {0, 1, 0}
+        );
+        matrix = glm::rotate(matrix,
+                m_roll,
+                {0, 0, 1}
+        );
 
-    m_viewMat = glm::translate(matrix, {
-        -m_pos.x,
-        -m_pos.y,
-        m_pos.z//-m_pos.z
-    });
+        m_viewMat = glm::translate(matrix, {
+                -m_pos.x,
+                -m_pos.y,
+                m_pos.z//-m_pos.z
+        });
+    }
+    else {
+        matrix = glm::rotate(matrix,
+                m_pitch,
+                {1, 0, 0}
+        );
+        matrix = glm::rotate(matrix,
+                -m_yaw //m_yaw
+                , {0, 1, 0}
+        );
+        matrix = glm::rotate(matrix,
+                m_roll,
+                {0, 0, 1}
+        );
+
+        m_viewMat = glm::translate(matrix, {
+                -m_pos.x,
+                m_pos.y,
+                m_pos.z//-m_pos.z
+        });
+    }
 }
 
 void Framework::Graphics::Camera::OnRotate(glm::vec3 newValue) noexcept {

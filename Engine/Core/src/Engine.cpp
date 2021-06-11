@@ -146,7 +146,6 @@ void Framework::Engine::Await() {
             break;
         }
 
-
         m_compiler->PoolEvents();
 
         Helper::InputSystem::Check();

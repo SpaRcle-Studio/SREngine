@@ -17,6 +17,16 @@
 #include <Types/Uniforms.h>
 
 namespace Framework::Graphics {
+    /*
+       0 - binding
+       1 - type
+       2 - ubo size
+    */
+    typedef std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> UBOInfos;
+
+    typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
+    typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
+
     class Render;
 
     class Shader {
@@ -26,36 +36,30 @@ namespace Framework::Graphics {
         Shader(Render* render, const std::string& name);
         Shader(Shader&) = delete;
     private:
-        SR_SHADER_PROGRAM                                               m_shaderProgram        = 0;
-        void*                                                           m_shaderTempData       = nullptr;
+        SR_SHADER_PROGRAM     m_shaderProgram        = 0;
+        void*                 m_shaderTempData       = nullptr;
 
-        bool                                                            m_isLink               = false;
-        bool                                                            m_isCompile            = false;
-        bool                                                            m_isError              = false;
-        bool                                                            m_isInit               = false;
+        bool                  m_isLink               = false;
+        bool                  m_isCompile            = false;
+        bool                  m_isError              = false;
+        bool                  m_isInit               = false;
     private:
-        inline static Shader*                                           g_currentShader        = nullptr;
-        inline static Shader*                                           g_stdGeometry          = nullptr;
+        inline static Shader* g_currentShader        = nullptr;
+        inline static Shader* g_stdGeometry          = nullptr;
     private: // For vulkan
-        SRShaderCreateInfo                                              m_shaderCreateInfo     = {};
-        std::vector<std::pair<Vertices::Attribute, size_t>>             m_verticesAttributes   = {};
-        std::vector<SR_VERTEX_DESCRIPTION>                              m_verticesDescription  = {};
+        SRShaderCreateInfo    m_shaderCreateInfo     = {};
+        VertexAttributes      m_verticesAttributes   = {};
+        VertexDescriptions    m_verticesDescription  = {};
 
-        //int32_t*                                                      m_sharedDescriptorSets = nullptr;
-        int32_t*                                                        m_sharedUniforms       = nullptr;
-        uint32_t                                                        m_countSharedUniforms  = 0;
+        int32_t*              m_sharedUniforms       = nullptr;
+        uint32_t              m_countSharedUniforms  = 0;
 
-        /*
-            0 - binding
-            1 - type
-            2 - ubo size
-         */
-        std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>>  m_uniformsInfo        = {};
+        UBOInfos              m_uniformsInfo         = {};
     private:
-        Environment*                                                    m_env                 = nullptr;
-        Render*                                                         m_render              = nullptr;
-        std::string                                                     m_name                = "Unnamed";
-        std::string                                                     m_path                = "Unknown";
+        Environment*          m_env                  = nullptr;
+        Render*               m_render               = nullptr;
+        std::string           m_name                 = "Unnamed";
+        std::string           m_path                 = "Unknown";
     private:
         bool Init();
         bool Link();
@@ -75,7 +79,6 @@ namespace Framework::Graphics {
         }
         static bool SetStandardGeometryShader(Shader* shader) noexcept;
     public:
-        //[[nodiscard]] SR_FORCE_INLINE int32_t GetSharedDescriptorSet(uint32_t id) const noexcept { return m_sharedDescriptorSets[id]; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const { return m_sharedUniforms[index]; }
     public:
