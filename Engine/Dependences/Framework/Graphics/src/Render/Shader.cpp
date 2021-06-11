@@ -25,6 +25,7 @@ bool Framework::Graphics::Shader::Init() {
         return false;
     }
 
+    if (m_env->GetPipeLine() == PipeLine::Vulkan)
     {
         std::vector<uint64_t> sizes = {};
         for (auto uniform : m_uniformsInfo)

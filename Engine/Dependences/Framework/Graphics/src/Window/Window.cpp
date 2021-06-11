@@ -46,10 +46,11 @@ bool Framework::Graphics::Window::Create() {
                 break;
             case Environment::WinEvents::Resize: {
                 std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
-                for (auto camera : m_cameras) {
-                    if (camera->IsAllowUpdateProjection())
-                        camera->UpdateProjection(size.first, size.second);
-                }
+                if (size.first > 0 && size.second > 0)
+                    for (auto camera : m_cameras) {
+                        if (camera->IsAllowUpdateProjection())
+                            camera->UpdateProjection(size.first, size.second);
+                    }
 
                 //float ratio = m_format.GetRatio();
                 //m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
