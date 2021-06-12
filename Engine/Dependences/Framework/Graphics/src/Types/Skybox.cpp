@@ -172,8 +172,11 @@ bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
         m_shader->Free();
 
     if (m_VAO)
-        this->m_env->FreeMesh(m_VAO);
+        if (!this->m_env->FreeVAO(m_VAO))
+            Helper::Debug::Error("Skybox::FreeVideoMemory() : failed to free VAO!");
+
     if (m_cubeMap)
+
         this->m_env->FreeCubeMap(m_cubeMap);
 
     return true;

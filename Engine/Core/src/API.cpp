@@ -379,8 +379,8 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     compiler->RegisterScriptClass("Graphics", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::Camera>("Camera")
-                .addStaticFunction("New", static_cast<Graphics::Camera*(*)(unsigned int)>([](unsigned int countHDRBuffers) -> Graphics::Camera* {
-                    return new Graphics::Camera(countHDRBuffers);
+                .addStaticFunction("New", static_cast<Graphics::Camera*(*)()>([]() -> Graphics::Camera* {
+                    return Graphics::Camera::Allocate();
                 }))
                 .addFunction("GetPostProcessing", (Graphics::PostProcessing* (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetPostProcessing)
                         //.addFunction("Free", (bool (Framework::Graphics::Camera::*)(void))&Graphics::Camera::Free)
@@ -391,7 +391,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("GetSize", (Math::Vector2 (Framework::Graphics::Camera::*)(void))&Graphics::Camera::GetSize)
                 .addFunction("WaitCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitCalculate)
                 .addFunction("WaitBuffersCalculate", (void (Framework::Graphics::Camera::*)(void))&Graphics::Camera::WaitBuffersCalculate)
-                .addFunction("WorldToScreenPoint", (Vector2 (Framework::Graphics::Camera::*)(Vector3))&Graphics::Camera::WorldToScreenPoint)
+                //.addFunction("WorldToScreenPoint", (Vector2 (Framework::Graphics::Camera::*)(Vector3))&Graphics::Camera::WorldToScreenPoint)
                 .endClass();
         Scripting::Script::RegisterCasting<Graphics::Camera*>("Camera", L);
     });

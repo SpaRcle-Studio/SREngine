@@ -190,7 +190,11 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
         if (m_VAO > 0) {
             VAO_usages[m_VAO]--;
             if (VAO_usages[m_VAO] == 0)
-                m_env->FreeMesh(m_VAO);
+                if (!m_env->FreeVAO(m_VAO)) {
+                    Helper::Debug::Error("Mesh3D::FreeVideoMemory() : failed to free VAO!");
+                    m_isCalculated = false;
+                    return false;
+                }
             m_isCalculated = false;
             return true;
         } else {

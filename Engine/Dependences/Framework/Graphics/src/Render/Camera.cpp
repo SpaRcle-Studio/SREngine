@@ -2,15 +2,10 @@
 // Created by Nikita on 18.11.2020.
 //
 
-#include "Render/Camera.h"
-#include "Window/Window.h"
+#include <Render/Camera.h>
+#include <Window/Window.h>
 #include <Debug.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <iostream>
 #include <string>
-#include <glm/gtx/string_cast.hpp>
-#include <Math/Mathematics.h>
 
 #include <GUI.h>
 
@@ -21,7 +16,7 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
     }
 
     if (m_needUpdate){
-        if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
+        if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)){
             Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
             return;
         }
@@ -44,7 +39,7 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
 
     if (m_pipeline == PipeLine::OpenGL) {
         if (m_needUpdate){
-            if (!this->m_postProcessing->ReCalcFrameBuffers(m_cameraSize.x, m_cameraSize.y)){
+            if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)){
                 Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
                 return;
             }
@@ -58,22 +53,7 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
         m_ubo.proj = this->m_projection;
         this->m_env->UpdateUBO(shader->GetUBO(0), &m_ubo, sizeof(ProjViewUBO));
     }
-
-    /*
-         mat4x4((1.357995, 0.000000, 0.000000, 0.000000), (0.000000, 2.414213, 0.000000, 0.000000), (0.000000, 0.000000, -1.000025,
-               -1.000000), (0.000000, 0.000000, -0.200003, 0.000000))
-     */
 }
-
-Framework::Graphics::Camera::Camera(unsigned char countHDRBuffers) :
-    Component("Camera"),
-    m_env(Environment::Get()),
-    m_pipeline(m_env->GetPipeLine())
-{
-    this->m_postProcessing = new PostProcessing(this, countHDRBuffers);
-}
-
-Framework::Graphics::Camera::~Camera() = default;
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
     Debug::Graph("Camera::Create() : creating camera...");
@@ -123,18 +103,9 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     glm::mat4 matrix(1.f);
 
     if (m_pipeline == PipeLine::OpenGL) {
-        matrix = glm::rotate(matrix,
-                -m_pitch,
-                {1, 0, 0}
-        );
-        matrix = glm::rotate(matrix,
-                -m_yaw //m_yaw
-                , {0, 1, 0}
-        );
-        matrix = glm::rotate(matrix,
-                m_roll,
-                {0, 0, 1}
-        );
+        matrix = glm::rotate(matrix, -m_pitch, { 1, 0, 0 });
+        matrix = glm::rotate(matrix, -m_yaw,   { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_roll,   { 0, 0, 1 });
 
         m_viewMat = glm::translate(matrix, {
                 -m_pos.x,
@@ -143,18 +114,9 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
         });
     }
     else {
-        matrix = glm::rotate(matrix,
-                m_pitch,
-                {1, 0, 0}
-        );
-        matrix = glm::rotate(matrix,
-                -m_yaw //m_yaw
-                , {0, 1, 0}
-        );
-        matrix = glm::rotate(matrix,
-                m_roll,
-                {0, 0, 1}
-        );
+        matrix = glm::rotate(matrix, m_pitch, { 1, 0, 0 });
+        matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_roll,  { 0, 0, 1 });
 
         m_viewMat = glm::translate(matrix, {
                 -m_pos.x,
@@ -292,6 +254,16 @@ bool Framework::Graphics::Camera::DrawOnInspector() {
     }
 
     return true;
+}
+
+Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate() {
+    auto camera = new Camera();
+    camera->m_postProcessing = PostProcessing::Allocate(camera);
+    if (!camera->m_postProcessing) {
+        Debug::Error("Camera::Allocate() : failed to allocate post processing!");
+        return nullptr;
+    }
+    return camera;
 }
 
 

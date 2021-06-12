@@ -57,7 +57,8 @@ void Framework::Graphics::EditorGrid::Free() {
         this->m_shader->Free();
 
     if (VAO)
-        this->m_env->FreeMesh(VAO);
+        if (!this->m_env->FreeVAO(VAO))
+            Helper::Debug::Error("EditorGrid::Free() : failed to free VAO!");
 
     delete this;
 }

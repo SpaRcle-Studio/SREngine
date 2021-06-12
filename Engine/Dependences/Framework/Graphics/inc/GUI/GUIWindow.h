@@ -188,33 +188,7 @@ namespace Framework::Graphics::GUI {
                 window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
             }
         }
-        inline static void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, unsigned int tex, const bool centralize = true) {
-            const float dx = win_size.x / img_size.x;
-            const float dy = win_size.y / img_size.y;
-
-            if (dx > dy)
-                img_size *= dy;
-            else
-                if (dy > dx)
-                    img_size *= dx;
-                else
-                    img_size *= dy;
-
-            // Because I use the texture from OpenGL, I need to invert the V from the UV.
-
-            if (centralize) {
-                ImVec2 initialCursorPos = ImGui::GetCursorPos();
-                glm::vec2 res = (win_size - img_size) * 0.5f;
-                ImVec2 centralizedCursorPos = {res.x,res.y};
-                centralizedCursorPos = ImClamp(centralizedCursorPos, initialCursorPos, centralizedCursorPos);
-                ImGui::SetCursorPos(centralizedCursorPos);
-            }
-
-            //unsigned int* id = new unsigned int(tex);
-            //(ImTextureID)static_cast<void*>(&tex)
-            //DrawImage((ImTextureID)static_cast<void*>(&tex), ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true); // interesting bug
-            DrawImage(reinterpret_cast<void*>(tex), ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true);
-        }
+        static void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, unsigned int tex, const bool centralize = true);
     };
 }
 

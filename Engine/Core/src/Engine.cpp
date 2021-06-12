@@ -138,11 +138,9 @@ void Framework::Engine::Await() {
 
     while (m_window->IsWindowOpen()) {
         EventManager::PoolEvents();
+
         if (m_exitEvent) {
             Debug::System("The closing event was received!");
-            break;
-        } else if (InputSystem::IsDown(KeyCode::BackSpace)) {
-            Debug::System("The closing key was pressed!");
             break;
         }
 

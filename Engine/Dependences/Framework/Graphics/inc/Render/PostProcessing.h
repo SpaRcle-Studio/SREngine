@@ -9,6 +9,8 @@
 #include <Environment/Environment.h>
 #include <Debug.h>
 
+#include <Render/FrameBuffer.h>
+
 namespace Framework::Graphics {
     class Render;
     class Camera;
@@ -30,12 +32,12 @@ namespace Framework::Graphics {
 
     // TODO: add freeing video buffers!
     class PostProcessing {
-    private:
-        ~PostProcessing() = default;
+    protected:
+        virtual ~PostProcessing() { };
+        PostProcessing(Camera* camera);
     public:
         PostProcessing(const PostProcessing&) = delete;
-        PostProcessing(Camera* camera, unsigned char countHDRBuffers);
-    private:
+    protected:
         float			      m_gamma                 = 0.8f;
         float                 m_exposure              = 1.f;
         float                 m_saturation            = 1.f;
@@ -43,17 +45,14 @@ namespace Framework::Graphics {
         glm::vec3		      m_bloomColor            = { 1, 1, 1 };
         float                 m_bloomIntensity        = 1.f;
         volatile uint8_t      m_bloomAmount           = 6;
-    private:
+    protected:
         bool                  m_debugDisplayBloomMask = false;
 
         volatile bool         m_bloom                 = true;
         bool                  m_bloomClear            = false;
-    private:
+    protected:
         bool                  m_horizontal            = false;
         bool                  m_firstIteration        = false;
-
-        uint32_t              m_VAO                   = 0;
-        uint32_t              m_VBO                   = 0;
 
         uint32_t              m_skyboxRBO             = 0;
         uint32_t              m_skyboxFBO             = 0;
@@ -76,7 +75,7 @@ namespace Framework::Graphics {
 
         std::vector<uint32_t> m_PingPongFrameBuffers  = { 0, 0 };
         std::vector<uint32_t> m_PingPongColorBuffers  = { 0, 0 };
-    private:
+    protected:
         Environment*          m_env                   = nullptr;
 
         Shader*               m_postProcessingShader  = nullptr;
@@ -85,8 +84,8 @@ namespace Framework::Graphics {
         Camera*               m_camera                = nullptr;
         Render*               m_render                = nullptr;
         bool                  m_isInit                = false;
-    private:
-        void BlurBloom();
+    public:
+        static PostProcessing* Allocate(Camera* camera);
     public:
         [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetColorCorrection() const noexcept { return m_color_correction;    }
         [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetBloomColor()      const noexcept { return m_bloomColor;          }
@@ -111,33 +110,27 @@ namespace Framework::Graphics {
     public:
         /** \brief Init shader and set default values \warning Call only from window context \return bool */
         bool Init(Render* render);
-        bool Destroy();
 
-        SR_FORCE_INLINE bool Free() noexcept {
-            Helper::Debug::Graph("PostProcessing::Free() : free post processing pointer...");
-            delete this;
-            return true;
-        }
+        virtual bool Destroy();
 
-        bool ReCalcFrameBuffers(int w, int h);
+        virtual bool Free() = 0;
+        virtual bool OnResize(uint32_t w, uint32_t h) = 0;
 
-        void BeginSkybox();
-        void EndSkybox();
+        virtual void BeginSkybox()   = 0;
+        virtual void EndSkybox()     = 0;
 
-        bool Begin();
-        bool End();
+        virtual void BeginGeometry() = 0;
+        virtual void EndGeometry()   = 0;
+    public:
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetFinally()       const noexcept { return this->m_finalColorBuffer;  }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetColoredImage()  const noexcept { return this->m_ColorBuffers[0];   }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetBloomMask()     const noexcept { return this->m_ColorBuffers[1];   }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetDepthBuffer()   const noexcept { return this->m_ColorBuffers[2];   }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetBlurBloomMask() const noexcept { return m_PingPongColorBuffers[0]; }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetSkyboxColor()   const noexcept { return m_skyboxColorBuffer;       }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetStencilBuffer() const noexcept { return m_ColorBuffers[3];         }
 
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetFinally()       const noexcept { return this->m_finalColorBuffer;  }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetColoredImage()  const noexcept { return this->m_ColorBuffers[0];   }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetBloomMask()     const noexcept { return this->m_ColorBuffers[1];   }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetDepthBuffer()   const noexcept { return this->m_ColorBuffers[2];   }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetBlurBloomMask() const noexcept { return m_PingPongColorBuffers[0]; }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetSkyboxColor()   const noexcept { return m_skyboxColorBuffer;       }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetStencilBuffer() const noexcept { return m_ColorBuffers[3];         }
-
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHDR_FBO()       const noexcept { return m_HDRFrameBufferObject;    }
-
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetCustomColorBuffer(unsigned char id) const noexcept {
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCustomColorBuffer(unsigned char id) const noexcept {
             if (m_countColorBuffers <= id) {
                 Helper::Debug::Error("PostProcessing::GetCustomColorBuffer(): index error!");
             }

@@ -18,17 +18,6 @@ namespace Framework::Graphics::Impl {
             if (!m_colorBuffer)
                 this->m_colorBuffer = new ColorBuffer();
 
-            /*this->m_colorBuffer->InitNames(this->GetAbsoluteCountMeshes());
-
-            for (m_t = 0; m_t < m_countMeshes; m_t++){
-                this->m_flatGeometryShader->SetInt("id", (int)m_t);
-                this->m_flatGeometryShader->SetMat4("modelMat", m_meshes[m_t]->GetModelMatrix());
-
-                this->m_colorBuffer->LoadName(m_t, Helper::StringUtils::IntToColor(m_t + 1));
-
-                m_meshes[m_t]->SimpleDraw();
-            }*/
-
             this->m_colorBuffer->InitNames(this->GetAbsoluteCountMeshes());
 
             uint32_t id = 0;

@@ -112,6 +112,8 @@ namespace Framework::Graphics{
         this->m_cmdBufInfo   = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
         this->m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
 
+        this->m_kernel->SetMultisampling(smooth_samples);
+
         if (!this->m_kernel->PreInit(appName, engineName, m_instanceExtensions, m_validationLayers)) {
             Helper::Debug::Error("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
             return false;

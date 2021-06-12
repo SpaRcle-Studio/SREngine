@@ -279,15 +279,15 @@ void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {
 #endif
 }
 
-bool Framework::Graphics::OpenGL::FreeMesh(unsigned int VAO)const noexcept {
+bool Framework::Graphics::OpenGL::FreeVAO(unsigned int VAO)const noexcept {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("OpenGL::FreeMesh() : free mesh \""+std::to_string(VAO) + "\" VAO...");
+        Helper::Debug::Log("OpenGL::FreeVAO() : free mesh \""+std::to_string(VAO) + "\" VAO...");
 
     if (VAO) {
         glDeleteVertexArrays(1, &VAO);
         return true;
     }else{
-        Helper::Debug::Error("OpenGL::FreeMesh() : VAO is zero! Something went wrong...");
+        Helper::Debug::Error("OpenGL::FreeVAO() : VAO is zero! Something went wrong...");
         return false;
     }
 }
@@ -404,8 +404,11 @@ bool Framework::Graphics::OpenGL::CompileShader(
         if (InfoLogLength != 0) {
             std::vector<char> VertexShaderErrorMessage(InfoLogLength);
             glGetShaderInfoLog(glShader->m_vertex, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
-            if (VertexShaderErrorMessage.size() > 10)
-                Debug::Error("OpenGL::CompileShader : Failed compiling vertex shader!\n\tReason : " + std::string(VertexShaderErrorMessage.data()));
+            if (VertexShaderErrorMessage.size() > 10) {
+                Debug::Error("OpenGL::CompileShader : Failed compiling vertex shader!\n\tReason : " +
+                             std::string(VertexShaderErrorMessage.data()));
+                return false;
+            }
         }
         //?===================================================================================================
     }
@@ -427,9 +430,11 @@ bool Framework::Graphics::OpenGL::CompileShader(
             if (FragmentShaderErrorMessage.size() > 10) {
                 bool isError = StringUtils::Contains(std::string(FragmentShaderErrorMessage.data()), "error");
 
-                if (isError)
+                if (isError) {
                     Debug::Error("OpenGL::CompileShader() : Failed compiling fragment shader!\n\tReason : " +
                                  std::string(FragmentShaderErrorMessage.data()));
+                    return false;
+                }
                 else
                     Debug::Warn("OpenGL::CompileShader() : There are warnings in the shader!\n\tReason: " +
                                  std::string(FragmentShaderErrorMessage.data()));

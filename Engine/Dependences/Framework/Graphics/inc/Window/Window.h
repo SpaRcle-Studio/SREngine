@@ -101,7 +101,6 @@ namespace Framework::Graphics {
         void PollEvents();
         void Thread();
         bool InitEnvironment();
-        void Draw();
 
         void DrawToCamera(Framework::Graphics::Camera* camera);
     public:

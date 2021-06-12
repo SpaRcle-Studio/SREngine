@@ -82,20 +82,10 @@ namespace Framework::Graphics {
 
         const PipeLine                m_pipeLine                 = PipeLine::Unknown;
     public:
+        static Render* Allocate();
+    public:
         [[nodiscard]] size_t GetAbsoluteCountMeshes() const noexcept { return m_totalCountMeshesInGroups + m_countTransparentMeshes; }
-        /*[[nodiscard]] size_t GetAbsoluteCountMeshes()     const noexcept { return m_countMeshes + m_countTransparentMeshes; }
-        [[nodiscard]] Mesh* GetMesh(size_t absoluteID)    const noexcept { // TODO: See
-            if (absoluteID < m_countMeshes)
-                return this->m_meshes[absoluteID];
-            else
-                return this->m_transparent_meshes[absoluteID];
-        }*/
-        //[[nodiscard]] Mesh* FindMesh(size_t absoluteID)    const noexcept { // TODO: See
-        //
-        //}
-
         [[nodiscard]] Types::Mesh* GetMesh(size_t absoluteID) noexcept;
-
 
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
         [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }

@@ -24,16 +24,19 @@ namespace Framework::Graphics {
 
     class Camera : public Component {
     private:
+        ~Camera() = default;
+        Camera() : Component("Camera"), m_env(Environment::Get()), m_pipeline(m_env->GetPipeLine()) { }
     public:
-        ~Camera();
-        Camera(unsigned char countHDRBuffers = 2);
         void UpdateProjection(unsigned int w, unsigned int h);
         void UpdateProjection();
 
         SR_FORCE_INLINE void SetDirectOutput(bool value) noexcept { this->m_isEnableDirectOut = value; }
-        [[nodiscard]] inline bool IsDirectOutput() const noexcept { return m_isEnableDirectOut; }
+    public:
+        static Camera* Allocate();
     public:
         bool Create(Window* window);
+
+        /// \warning Call only from window class!
         bool Free();
     protected:
         void OnDestroyGameObject() noexcept override;
@@ -45,122 +48,27 @@ namespace Framework::Graphics {
 
         nlohmann::json Save() override;
 
-        ///TODO: it is work?
-        Math::Vector2 WorldToScreenPoint(Math::Vector3 point3D) const noexcept {
-            Math::Matrix4x4 viewProjectionMatrix = m_projection * m_viewMat;
-            //transform world to clipping coordinates
-            point3D = viewProjectionMatrix.Translate(point3D);
-
-            int winX = (int)round(((point3D.x + 1) / 2.0) * m_cameraSize.x);
-            //we calculate -point3D.getY() because the screen Y axis is
-            //oriented top->down
-
-            int winY = (int)round(((1 - point3D.y) / 2.0) * m_cameraSize.y);
-            return Math::Vector2(winX, winY);
-        }
-
-        inline Math::Vector3 ScreenToWorldPoint(Math::Vector2 scr) const noexcept {
-            return Math::Vector3();
-
-            // NORMALISED DEVICE SPACE
-            //double x = 2.0 * 800 / m_cameraSize.x - 1;
-            //double y = 2.0 * 450 / m_cameraSize.y - 1;
-
-            /*scr = Math::Vector2(
-                    2.0 * scr.x / m_cameraSize.x - 1,
-                    2.0 * scr.y / m_cameraSize.y - 1
-                    );
-
-
-            Debug::Log(scr.ToString());
-
-            double x = scr.x;
-            double y = scr.y;
-
-            // HOMOGENEOUS SPACE
-            glm::vec4 screenPos = glm::vec4(x, -y, -1.0f, 1.0f);
-            // Projection/Eye Space
-            glm::mat4 ProjectView = m_projection * m_viewMat;
-            glm::mat4 viewProjectionInverse = inverse(ProjectView);
-            glm::vec4 worldPos = viewProjectionInverse * screenPos;
-            return glm::vec3(worldPos);*/
-
-            /*auto matInverse = Math::Matrix4x4(glm::inverse(this->m_viewMat *  this->m_projection));
-            return matInverse.GetTranslate(); // return screen resolution, lol*/
-
-            //auto matInverse = Math::Matrix4x4(glm::inverse(this->m_projection * this->m_viewMat));
-            //return matInverse.GetTranslate();
-
-            /*glm::mat4 matInverse = glm::inverse(this->m_viewMat *  this->m_projection); // see mul
-
-            float in[4];
-            float winZ = 1.0;
-
-            in[0]= (2.0f*((float)(scr.x-0)/(this->m_cameraSize.x-0)))-1.0f,
-                    in[1]=1.0f-(2.0f*((float)(scr.y-0)/(this->m_cameraSize.y-0)));
-            in[2]=2.0* winZ -1.0;
-            in[3]=1.0;
-
-            glm::vec4 pos = glm::vec4(in[0], in[1], in[2], in[3]) * matInverse;
-
-            pos.w = 1.0 / pos.w;
-
-            pos.x *= pos.w;
-            pos.y *= pos.w;
-            pos.z *= pos.w;
-
-            return glm::vec3(pos);*/
-        }
-
-        //[[nodiscard]] inline bool IsUse() const noexcept { return this->m_isUse; }
-        //inline void SetUse(bool value) noexcept { this->m_isUse = value; }
-
-        /*[[nodiscard]] inline glm::mat4 GetAlternativeView() const noexcept {
-            glm::mat4 matrix(1.f);
-
-            matrix = glm::rotate(matrix,
-                                 m_pitch
-                    , {1, 0, 0}
-            );
-            matrix = glm::rotate(matrix,
-                                 m_yaw
-                    , {0, 1, 0}
-
-            );
-            matrix = glm::rotate(matrix,
-                                 m_roll
-                    , {0, 0, 1}
-
-            );
-
-            return glm::translate(matrix, {
-                    -m_pos.x,
-                    -m_pos.y,
-                    -m_pos.z
-            });
-        }*/
-
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj; }
 
-        [[nodiscard]] inline glm::vec3 GetRotation() const noexcept { return { m_pitch, m_yaw, m_roll }; }
-        [[nodiscard]] inline glm::mat4 GetView() const noexcept { return this->m_viewMat; }
-        [[nodiscard]] inline glm::mat4 GetProjection() const noexcept { return this->m_projection; }
-        Math::Vector2 GetSize() { return m_cameraSize; }
-        PostProcessing* GetPostProcessing() { return m_postProcessing; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const noexcept  { return m_isEnableDirectOut;        }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetRotation()   const noexcept  { return { m_pitch, m_yaw, m_roll }; }
+        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetView()       const noexcept  { return this->m_viewMat;            }
+        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetProjection() const noexcept  { return this->m_projection;         }
+        [[nodiscard]] SR_FORCE_INLINE Math::Vector2 GetSize()   const noexcept  { return m_cameraSize;               }
+        [[nodiscard]] SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;           }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetGLPosition() const noexcept  { return this->m_pos;                }
 
-        [[nodiscard]] inline glm::vec3 GetGLPosition() const noexcept { return this->m_pos; }
         void WaitCalculate() const {
             ret:
-            if (!m_isCalculate) {
+            if (!m_isCalculate)
                 goto ret;
-            }
         }
         void WaitBuffersCalculate() const {
             ret:
-            if (!m_isBuffCalculate) {
+            if (!m_isBuffCalculate)
                 goto ret;
-            }
         }
+
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */
@@ -203,10 +111,6 @@ namespace Framework::Graphics {
         GUI::ICanvas*   m_canvas            = nullptr;
 
         glm::vec2       m_cameraSize        = glm::vec2(0,0);
-
-        float		    m_dxx               = 0;
-        float		    m_dxz               = 0;
-        float		    m_dyy               = 0;
     };
 }
 

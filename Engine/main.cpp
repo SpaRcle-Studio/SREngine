@@ -60,23 +60,17 @@ int main() {
 
     // Register all components
     {
-        //Component::RegisterComponent("SkinnedMesh",      []() -> Component* { return new Mesh3D();    });
-        Component::RegisterComponent("Mesh3D",             []() -> Component* { return new Mesh3D();    });
-        Component::RegisterComponent("Rigidbody",          []() -> Rigidbody* { return new Rigidbody(); });
-        Component::RegisterComponent("Camera",             []() -> Camera*    { return new Camera();    });
+        //Component::RegisterComponent("SkinnedMesh",      []() -> Component* { return new Mesh3D();       });
+        Component::RegisterComponent("Mesh3D",             []() -> Component* { return new Mesh3D();       });
+        Component::RegisterComponent("Rigidbody",          []() -> Rigidbody* { return new Rigidbody();    });
+        Component::RegisterComponent("Camera",             []() -> Camera*    { return Camera::Allocate(); });
     }
 
     //Environment::Set(new OpenGL());
     Environment::Set(new Vulkan());
 
-    //Environment::Get()->SetPreferredDevice(1);
-
-    Render *render = nullptr;
-    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
-        render = new Impl::OpenGLRender();
-    else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan) {
-        render = new Impl::VulkanRender();
-    } else {
+    Render* render = Render::Allocate();
+    if (!render) {
         Helper::Debug::Error("FATAL: render is not support this pipeline!");
         return -1000;
     }
@@ -89,7 +83,7 @@ int main() {
             false,
             false,
             true,
-            0
+            8
     );
 
     auto scene = Scene::New("New scene");
@@ -121,9 +115,6 @@ int main() {
     Debug::System("All systems successfully closed!");
 
     ResourceManager::Stop();
-
-    //if (Helper::Debug::Profile())
-    //    profiler::dumpBlocksToFile("profile.prof");
 
     return Debug::Stop();
 }

@@ -201,10 +201,15 @@ namespace Framework::Graphics {
          \Vulkan Clear next frame buffer usage
          */
         SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) noexcept override {
+            colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
+
             this->m_clearValues.resize(colorCount + 1);
+
             for (uint8_t i = 0; i < colorCount; i++)
                 m_clearValues[i] = { .color = {{ r, g, b, a }} };
+
             m_clearValues[colorCount] = { .depthStencil = { depth, 0 } };
+
             this->m_renderPassBI.clearValueCount = colorCount + 1;
             this->m_renderPassBI.pClearValues    = m_clearValues.data();
         }
@@ -224,9 +229,9 @@ namespace Framework::Graphics {
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
-                const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
-                SRShaderCreateInfo shaderCreateInfo = {}) const noexcept override;
+                const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
+                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
+                SRShaderCreateInfo shaderCreateInfo) const noexcept override;
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             if (shaderProgram >= m_memory->m_countShaderPrograms) {

@@ -397,7 +397,7 @@ namespace Framework::Graphics {
 
             return true;
         }
-        bool FreeMesh(unsigned int VAO)const noexcept override;
+        [[nodiscard]] bool FreeVAO(unsigned int VAO)const noexcept override;
         SR_FORCE_INLINE void DrawLines(const unsigned int& VAO, const unsigned int& count_vertices) const noexcept override {
             glBindVertexArray(VAO);
             glDrawArrays(GL_LINES, 0, count_vertices);
@@ -454,6 +454,26 @@ namespace Framework::Graphics {
             glBindTexture(GL_TEXTURE_CUBE_MAP, CubeMap);
             glDrawArrays(GL_TRIANGLES, 0, 36);
             glDepthFunc(GL_LESS); // set depth function back to default
+        }
+
+        SR_FORCE_INLINE void Draw(const uint32_t& vertCount) const noexcept override {
+            glDrawArrays(GL_TRIANGLES, 0, vertCount);
+        }
+
+        SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
+            static GLfloat pVerts[]= {-0.5f,  0.0f, 0.0f,
+                                      -0.25f,-0.4f, 0.0f,
+                                      0.0f,  0.0f, 0.0f,
+                                      0.25f,-0.4f, 0.0f,
+                                      0.5f,  0.0f, 0.0f};
+
+            static GLushort pInds[] =
+                    { 0,1,2 , 1,3,2 , 2,3,4 };
+
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3,GL_FLOAT,0,pVerts);
+
+            glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_SHORT, pInds);
         }
 
         SR_FORCE_INLINE void DrawQuad(const unsigned int& VAO) const noexcept override{

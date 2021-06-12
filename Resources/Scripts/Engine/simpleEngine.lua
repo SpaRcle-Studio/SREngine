@@ -31,7 +31,7 @@ end;
 function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
-    cameraComp = Camera.New(0);
+    cameraComp = Camera.New();
     cameraComp:SetFrameSize(848, 480);
     camera:AddComponent(cameraComp:Base());
     window:AddCamera(cameraComp);

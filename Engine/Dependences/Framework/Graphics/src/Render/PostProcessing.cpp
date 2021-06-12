@@ -1,7 +1,6 @@
 //
 // Created by Nikita on 19.11.2020.
 //
-//#include <easy/profiler.h>
 
 #include "Render/PostProcessing.h"
 
@@ -9,17 +8,21 @@
 #include <Render/Render.h>
 #include <Render/Camera.h>
 
-using namespace Framework::Helper;
+#include <Render/Implementations/OpenGLPostProcessing.h>
+#include <Render/Implementations/VulkanPostProcessing.h>
 
-Framework::Graphics::PostProcessing::PostProcessing(Camera* camera, unsigned char countHDRBuffers) : m_env(Environment::Get()){
+Framework::Graphics::PostProcessing::PostProcessing(Camera* camera) : m_env(Environment::Get()){
     this->m_camera = camera;
-    //if (countHDRBuffers < 4){
-    //    Debug::Error("PostProcessing::Constructor(): count buffers is < 4! Skip arg.");
-    //} else
-    if (countHDRBuffers > 4) {
-        this->m_ColorBuffers = std::vector<unsigned int>(countHDRBuffers);
-        this->m_countColorBuffers = countHDRBuffers;
-    }
+}
+
+Framework::Graphics::PostProcessing* Framework::Graphics::PostProcessing::Allocate(Framework::Graphics::Camera *camera) {
+    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
+        return new OpenGLPostProcessing(camera);
+    else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan)
+        return new VulkanPostProcessing(camera);
+
+    Helper::Debug::Error("PostProcessing::Allocate() : implementation not found!");
+    return nullptr;
 }
 
 bool Framework::Graphics::PostProcessing::Init(Render* render) {
@@ -34,158 +37,17 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
 
     {
         this->m_postProcessingShader = new Shader(m_render, "engine/postProcessing");
-        //this->m_postProcessingShader->Init();
-
-        this->m_blurShader = new Shader(m_render, "engine/blur");
-        //this->m_blurShader->Init();
+        this->m_blurShader           = new Shader(m_render, "engine/blur");
     }
-
-    m_env->CalculateQuad(m_VBO, m_VAO);
 
     m_isInit = true;
 
     return true;
 }
 
-bool Framework::Graphics::PostProcessing::Begin() {
-    if (m_HDRFrameBufferObject) {
-        m_env->BindFrameBuffer(m_HDRFrameBufferObject);
-        m_env->ClearBuffers();
-        return true;
-    }
-
-    return false;
-}
-
-void Framework::Graphics::PostProcessing::BlurBloom() {
-    if (!m_blurShader)
-        return;
-
-    m_env->BindFrameBuffer(0);
-
-    m_horizontal = true; m_firstIteration = true;
-
-    m_blurShader->Use();
-    m_blurShader->SetFloat("BloomIntensity", m_bloomIntensity);
-
-    m_env->BindVAO(m_VAO);
-
-    for (unsigned char i = 0; i < m_bloomAmount; i++) {
-        m_env->BindFrameBuffer(m_PingPongFrameBuffers[m_horizontal]);
-
-        m_blurShader->SetBool("horizontal", m_horizontal);
-
-        m_env->BindTexture(0, m_firstIteration ? m_ColorBuffers[1] : m_PingPongColorBuffers[!m_horizontal]);
-        m_blurShader->SetInt("image", 0);
-        //m_env->DrawQuad(m_VAO);
-        m_env->Draw6Triangles();
-
-        m_horizontal = !m_horizontal;
-        if (m_firstIteration)
-            m_firstIteration = false;
-    }
-}
-
-bool Framework::Graphics::PostProcessing::End() {
-    if (m_bloom){
-        this->BlurBloom();
-        if (m_bloomClear)
-            m_bloomClear = false;
-    }
-    else if (!m_bloomClear) {
-        m_env->BindFrameBuffer(m_PingPongFrameBuffers[0]);
-        m_env->ClearColorBuffers(0,0,0,0);
-        m_env->ClearBuffers();
-        m_env->BindFrameBuffer(m_PingPongFrameBuffers[1]);
-        m_env->ClearColorBuffers(0,0,0,0);
-        m_env->ClearBuffers();
-
-        m_env->BindFrameBuffer(0);
-
-        m_bloomClear = true;
-    }
-
-    if (m_camera->IsDirectOutput())
-        m_env->BindFrameBuffer(0);
-    else {
-        m_env->BindFrameBuffer(this->m_finalFBO);
-        m_env->ClearBuffers();
-    }
-
-    m_postProcessingShader->Use();
-
-    {
-        m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
-        m_postProcessingShader->SetVec3("ColorCorrection", m_color_correction);
-    }
-
-    m_env->BindTexture(0, m_ColorBuffers[0]);
-    m_postProcessingShader->SetInt("scene", 0);
-
-    if (m_bloom) { // SEE: POSSIBLE BUGS
-        m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
-
-        m_postProcessingShader->SetInt("bloomBlur", 1);
-
-        m_postProcessingShader->SetVec3("BloomColor", m_bloomColor);
-    }
-
-    m_env->BindTexture(2, m_skyboxColorBuffer);
-    m_postProcessingShader->SetInt("skybox", 2);
-
-    m_env->BindTexture(3, m_ColorBuffers[3]);
-    m_postProcessingShader->SetInt("stencil", 3);
-
-    m_env->BindTexture(4, m_ColorBuffers[2]);
-    m_postProcessingShader->SetInt("depth", 4);
-    m_env->DrawQuad(m_VAO);
-
-    if (!m_camera->IsDirectOutput())
-        m_env->BindFrameBuffer(0);
-
-    return false;
-}
-
-bool Framework::Graphics::PostProcessing::ReCalcFrameBuffers(int w, int h) {
-    //Debug::Log("PostProcessing::ReCalcFrameBuffers() : re-calc...");
-
-    if (!m_env->CreateSingleHDRFrameBO({w, h}, m_finalRBO, m_finalFBO, m_finalColorBuffer)) {
-        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single HDR frame buffer object!");
-        return false;
-    }
-
-    if (!m_env->CreateSingleHDRFrameBO({w, h}, m_skyboxRBO, m_skyboxFBO, m_skyboxColorBuffer)) {
-        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single HDR frame buffer object!");
-        return false;
-    }
-
-    if (!m_env->CreateHDRFrameBufferObject({w, h}, m_RBODepth, m_HDRFrameBufferObject, m_ColorBuffers)) {
-        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create HDR frame buffer object!");
-        return false;
-    }
-
-    if (!m_env->CreatePingPongFrameBufferObject({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
-        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
-        return false;
-    }
-
-    return true;
-}
-
 bool Framework::Graphics::PostProcessing::Destroy() { // TODO
-    Debug::Graph("PostProcessing::Destroy() : destroying post processing...");
+    Helper::Debug::Graph("PostProcessing::Destroy() : destroying post processing...");
 
     return false;
 }
-
-void Framework::Graphics::PostProcessing::BeginSkybox() {
-    m_env->BindFrameBuffer(this->m_skyboxFBO);
-    //m_env->BindFrameBuffer(this->m_finalFBO);
-    m_env->ClearBuffers();
-}
-
-void Framework::Graphics::PostProcessing::EndSkybox() {
-    m_env->BindFrameBuffer(0);
-}
-
 

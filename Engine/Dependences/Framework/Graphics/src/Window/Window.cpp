@@ -250,7 +250,28 @@ void Framework::Graphics::Window::Thread() {
 
                 this->m_render->PollEvents();
 
-                this->Draw();
+                {
+                    if (m_countCameras == 1) {
+                        if (m_cameras[0]->IsReady()) {
+                            DrawToCamera(m_cameras[0]);
+                        }
+                    }
+                    else
+                        for (Camera* camera : m_cameras) {
+                            if (!camera->IsReady())
+                                continue;
+                            DrawToCamera(camera);
+                        }
+
+                    if (m_GUIEnabled && m_env->IsGUISupport()) {
+                        if (this->m_env->BeginDrawGUI()) {
+                            if (m_canvas)
+                                this->m_canvas->Draw();
+
+                            this->m_env->EndDrawGUI();
+                        }
+                    }
+                }
 
                 this->m_env->SwapBuffers();
             }
@@ -339,12 +360,12 @@ void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* came
     }
     camera->GetPostProcessing()->EndSkybox();
 
-    camera->GetPostProcessing()->Begin();
+    camera->GetPostProcessing()->BeginGeometry();
     {
-    m_render->DrawGeometry();
-    m_render->DrawTransparentGeometry();
+        m_render->DrawGeometry();
+        m_render->DrawTransparentGeometry();
     }
-    camera->GetPostProcessing()->End();
+    camera->GetPostProcessing()->EndGeometry();
 
     if (m_requireGetAimed) {
         if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {
@@ -359,32 +380,6 @@ void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* came
             if (id != std::numeric_limits<size_t>::max())
                 this->m_aimedMesh = this->m_render->GetMesh(id);
             m_requireGetAimed = false;
-        }
-    }
-}
-
-void Framework::Graphics::Window::Draw() {
-    //if (m_GUIEnabled)
-        //this->m_env->BeginDrawGUI();
-
-    if (m_countCameras == 1) {
-        if (m_cameras[0]->IsReady()) {
-            DrawToCamera(m_cameras[0]);
-        }
-    }
-    else
-        for (Camera* camera : m_cameras) {
-            if (!camera->IsReady())
-                continue;
-            DrawToCamera(camera);
-        }
-
-    if (m_GUIEnabled && m_env->IsGUISupport()) {
-        if (this->m_env->BeginDrawGUI()) {
-            if (m_canvas)
-                this->m_canvas->Draw();
-
-            this->m_env->EndDrawGUI();
         }
     }
 }
@@ -488,7 +483,6 @@ bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *c
 }
 
 void Framework::Graphics::Window::Resize(unsigned int w, unsigned int h) {
-    //this->m_env->GetWindowFormat()->SetFreeValue(w, h);
     this->m_newWindowSize = { w, h };
     this->m_isNeedResize = true;
 }
@@ -583,3 +577,4 @@ void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)
     m_camerasMutex.unlock();
 } //TODO: mutex
 
+                                                           

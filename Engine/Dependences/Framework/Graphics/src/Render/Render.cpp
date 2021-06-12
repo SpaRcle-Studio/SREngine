@@ -10,6 +10,9 @@
 #include <Types/Skybox.h>
 #include <Window/Window.h>
 
+#include <Render/Implementations/VulkanRender.h>
+#include <Render/Implementations/OpenGLRender.h>
+
 bool Framework::Graphics::Render::Create(Window* window) {
     if (m_isCreate){
         Debug::Error("Render::Create() : render already create!");
@@ -376,4 +379,13 @@ bool Framework::Graphics::Render::DelayedDestroySkybox()  {
 
     this->m_needDestroySkybox = true;
     return true;
+}
+
+Framework::Graphics::Render *Framework::Graphics::Render::Allocate() {
+    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
+        return new Impl::OpenGLRender();
+    else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan) {
+        return new Impl::VulkanRender();
+    } else
+        return nullptr;
 }

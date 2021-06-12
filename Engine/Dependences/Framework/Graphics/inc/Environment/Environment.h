@@ -116,7 +116,7 @@ namespace Framework::Graphics {
                 return g_environment;
         }
 
-        inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = std::move(callback); }
+        static inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = std::move(callback); }
     public:
         virtual bool PreInitGUI(const std::string& fontPath) { return false; };
         virtual bool InitGUI() { return false; }
@@ -179,9 +179,9 @@ namespace Framework::Graphics {
 
         virtual SR_FORCE_INLINE void PollEvents() const noexcept { }
 
-        [[nodiscard]] virtual SR_FORCE_INLINE std::string GetVendor() const noexcept { return "None"; }
+        [[nodiscard]] virtual SR_FORCE_INLINE std::string GetVendor()   const noexcept { return "None"; }
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetRenderer() const noexcept { return "None"; }
-        [[nodiscard]] virtual SR_FORCE_INLINE std::string GetVersion() const noexcept { return "None"; }
+        [[nodiscard]] virtual SR_FORCE_INLINE std::string GetVersion()  const noexcept { return "None"; }
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const noexcept { }
 
@@ -220,14 +220,14 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
         virtual SR_FORCE_INLINE void UnUseShader() { }
 
-        virtual SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v)                 const noexcept { }
-        virtual SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v)               const noexcept { }
-        virtual SR_FORCE_INLINE void SetInt(SR_SHADER_PROGRAM shaderProgram, const char* name, int v)                   const noexcept { }
-        virtual SR_FORCE_INLINE void SetMat4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::mat4& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec4& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec3(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec3& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec2& v)     const noexcept { }
-        virtual SR_FORCE_INLINE void SetIVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::ivec2& v)   const noexcept { }
+        virtual SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v)               const noexcept { }
+        virtual SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v)             const noexcept { }
+        virtual SR_FORCE_INLINE void SetInt(SR_SHADER_PROGRAM shaderProgram, const char* name, int v)                 const noexcept { }
+        virtual SR_FORCE_INLINE void SetMat4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::mat4& v)   const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec4& v)   const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec3(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec3& v)   const noexcept { }
+        virtual SR_FORCE_INLINE void SetVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec2& v)   const noexcept { }
+        virtual SR_FORCE_INLINE void SetIVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::ivec2& v) const noexcept { }
 
         // ============================== [ MESH METHODS ] ==============================
 
@@ -258,8 +258,6 @@ namespace Framework::Graphics {
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept { return false; }
         [[nodiscard]] virtual unsigned int CalculateSkybox() const noexcept { return -1; }
-        virtual SR_FORCE_INLINE void DrawSkybox(const unsigned int&  VAO, const unsigned int& CubeMap) const noexcept { }
-        virtual SR_FORCE_INLINE void DrawQuad(const unsigned int&  VAO) const noexcept { }
 
         virtual SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const noexcept { }
         virtual SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const noexcept { }
@@ -267,7 +265,8 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void BindUBO(const unsigned int& UBO) const noexcept { }
         virtual SR_FORCE_INLINE void Draw6Triangles() const noexcept { }
 
-        virtual bool FreeMesh(unsigned int VAO) const noexcept { return false; }
+        virtual SR_FORCE_INLINE void DrawSkybox(const unsigned int&  VAO, const unsigned int& CubeMap) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawQuad(const unsigned int&  VAO) const noexcept { }
         virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
         virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int& count_vertices) const noexcept { }
         virtual SR_FORCE_INLINE void DrawLines(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
@@ -287,6 +286,7 @@ namespace Framework::Graphics {
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept { return false; }
+        [[nodiscard]] virtual bool FreeVAO(unsigned int VAO) const noexcept { return false; }
     };
 }
 

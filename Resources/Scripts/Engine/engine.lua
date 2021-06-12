@@ -178,7 +178,7 @@ end
 function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
-    cameraComp = Camera.New(4);
+    cameraComp = Camera.New();
    -- local winSize = window:GetWindowSize();
     --cameraComp:SetFrameSize(winSize.x, winSize.y);
     cameraComp:SetFrameSize(1600, 900);
