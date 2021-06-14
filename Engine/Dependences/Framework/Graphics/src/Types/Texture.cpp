@@ -50,8 +50,8 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     return true;
 }
 
-Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(std::string path, bool autoRemove, TextureType type, TextureFilter filter) {
-    path = ResourceManager::GetResourcesFolder() + "/Textures/"+path;
+Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(const std::string& localPath, bool autoRemove, TextureType type, TextureFilter filter) {
+    std::string path = ResourceManager::GetResourcesFolder() + "/Textures/"+ localPath;
 
 #ifdef WIN32
     path = Helper::StringUtils::MakePath(path, true);
@@ -60,7 +60,7 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(s
 #endif
     Texture* texture = nullptr;
 
-    IResource* find = ResourceManager::Find("Texture", path);
+    IResource* find = ResourceManager::Find("Texture", localPath);
     if (find) {
         //texture = ((Texture*)(find))->Copy();
         texture = ((Texture*)(find));
@@ -69,8 +69,11 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(s
             Debug::Warn("Texture::Load() : copy values do not match load values.");
         }
     } else {
+        if (Debug::GetLevel() >= Debug::Level::Medium)
+            Debug::Log("Texture::Load : load \""+localPath+"\" texture...");
+
         texture = TextureLoader::Load(path);
-        texture->m_resource_id = path;
+        texture->m_resource_id = localPath;
         texture->m_autoRemove = autoRemove;
         texture->m_type = type;
         texture->m_filter = filter;

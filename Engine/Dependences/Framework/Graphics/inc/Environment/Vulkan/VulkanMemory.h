@@ -10,6 +10,7 @@
 #include <EvoVulkan/VulkanKernel.h>
 #include <Debug.h>
 #include <EvoVulkan/Complexes/Shader.h>
+#include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
 
 namespace Framework::Graphics::VulkanTools {
@@ -35,23 +36,23 @@ namespace Framework::Graphics::VulkanTools {
                 return false;
             }
 
-            this->m_UBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer) * m_countUBO);
+            this->m_UBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer*) * m_countUBO);
             for (uint32_t i = 0; i < m_countUBO; i++)
                 m_UBOs[i] = nullptr;
 
-            this->m_VBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer) * m_countVBO);
+            this->m_VBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer*) * m_countVBO);
             for (uint32_t i = 0; i < m_countVBO; i++)
                 m_VBOs[i] = nullptr;
 
-            this->m_IBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer) * m_countIBO);
+            this->m_IBOs = (EvoVulkan::Types::Buffer**)malloc(sizeof(EvoVulkan::Types::Buffer*) * m_countIBO);
             for (uint32_t i = 0; i < m_countIBO; i++)
                 m_IBOs[i] = nullptr;
 
-            this->m_FBOs = (EvoVulkan::Complexes::FrameBuffer**)malloc(sizeof(EvoVulkan::Complexes::FrameBuffer) * m_countFBO);
+            this->m_FBOs = (EvoVulkan::Complexes::FrameBuffer**)malloc(sizeof(EvoVulkan::Complexes::FrameBuffer*) * m_countFBO);
             for (uint32_t i = 0; i < m_countFBO; i++)
                 m_FBOs[i] = nullptr;
 
-            this->m_ShaderPrograms = (EvoVulkan::Complexes::Shader**)malloc(sizeof(EvoVulkan::Complexes::Shader) * m_countShaderPrograms);
+            this->m_ShaderPrograms = (EvoVulkan::Complexes::Shader**)malloc(sizeof(EvoVulkan::Complexes::Shader*) * m_countShaderPrograms);
             for (uint32_t i = 0; i < m_countShaderPrograms; i++)
                 m_ShaderPrograms[i] = nullptr;
 
@@ -59,8 +60,19 @@ namespace Framework::Graphics::VulkanTools {
             for (uint32_t i = 0; i < m_countDescriptorSets; i++)
                 m_descriptorSets[i] = { VK_NULL_HANDLE, VK_NULL_HANDLE };
 
+            this->m_textures = (EvoVulkan::Types::Texture**)malloc(sizeof(EvoVulkan::Types::Texture*) * m_countTextures);
+            for (uint32_t i = 0; i < m_countTextures; i++)
+                m_textures[i] = nullptr;
+
             m_isInit = true;
             return true;
+        }
+    private:
+        [[nodiscard]] int32_t FindFreeTextureIndex() const {
+            for (uint32_t i = 0; i < m_countTextures; i++)
+                if (m_textures[i] == nullptr)
+                    return (int32_t)i;
+            return -1;
         }
     public:
         static MemoryManager* Create(EvoVulkan::Core::VulkanKernel* kernel) {
@@ -153,6 +165,25 @@ namespace Framework::Graphics::VulkanTools {
 
             return true;
         }
+        [[nodiscard]] bool FreeFBO(uint32_t ID) const {
+            if (ID >= m_countFBO) {
+                Helper::Debug::Error("MemoryManager::FreeFBO() : list index out of range!");
+                return false;
+            }
+
+            auto* memory = this->m_FBOs[ID];
+            if (!memory) {
+                Helper::Debug::Error("MemoryManager::FreeFBO() : frame buffer object is not exists!");
+                return false;
+            }
+
+            memory->Destroy();
+            memory->Free();
+
+            this->m_FBOs[ID] = nullptr;
+
+            return true;
+        }
 
         [[nodiscard]] bool FreeShaderProgram(uint32_t ID) const {
             if (ID >= m_countShaderPrograms) {
@@ -170,6 +201,26 @@ namespace Framework::Graphics::VulkanTools {
             memory->Free();
 
             this->m_ShaderPrograms[ID] = nullptr;
+
+            return true;
+        }
+
+        [[nodiscard]] bool FreeTexture(uint32_t ID) const {
+            if (ID >= m_countTextures) {
+                Helper::Debug::Error("MemoryManager::FreeTexture() : list index out of range!");
+                return false;
+            }
+
+            auto* memory = this->m_textures[ID];
+            if (!memory) {
+                Helper::Debug::Error("MemoryManager::FreeTexture() : texture is not exists!");
+                return false;
+            }
+
+            memory->Destroy(); // if can't destroy (FBO attachment) will be skipped
+            memory->Free();
+
+            this->m_textures[ID] = nullptr;
 
             return true;
         }
@@ -235,7 +286,7 @@ namespace Framework::Graphics::VulkanTools {
             return -1;
         }
 
-        int32_t AllocateIBO(uint32_t buffSize, void* data) {
+        [[nodiscard]] int32_t AllocateIBO(uint32_t buffSize, void* data) {
             for (uint32_t i = 0; i < m_countIBO; i++) {
                 if (m_IBOs[i] == nullptr) {
                     m_IBOs[i] = EvoVulkan::Types::Buffer::Create(
@@ -253,7 +304,7 @@ namespace Framework::Graphics::VulkanTools {
             return -1;
         }
 
-        int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass) {
+        [[nodiscard]] int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass) {
             for (uint32_t i = 0; i < m_countShaderPrograms; i++) {
                 if (m_ShaderPrograms[i] == nullptr) {
                     m_ShaderPrograms[i] = new EvoVulkan::Complexes::Shader(
@@ -269,6 +320,50 @@ namespace Framework::Graphics::VulkanTools {
 
             return -1;
         }
+
+        [[nodiscard]] int32_t AllocateFBO(
+                uint32_t w, uint32_t h,
+                const std::vector<VkFormat>& inputColorAttachments,
+                std::vector<int32_t>& outputColorAttachments,
+                int32_t& depth)
+        {
+            if (inputColorAttachments.size() != outputColorAttachments.size())
+                Helper::Debug::Warn("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
+
+            outputColorAttachments.clear();
+
+            for (uint32_t i = 0; i < m_countFBO; i++)
+                if (m_FBOs[i] == nullptr) {
+                    m_FBOs[i] = EvoVulkan::Complexes::FrameBuffer::Create(
+                            m_kernel->GetDevice(),
+                            m_kernel->GetSwapchain(),
+                            m_kernel->GetCmdPool(),
+                            inputColorAttachments,
+                            w, h);
+
+                    if (m_FBOs[i] == nullptr) {
+                        Helper::Debug::Error("MemoryManager::AllocateFBO() : failed to create Evo Vulkan frame buffer object!");
+                        return -1;
+                    }
+
+                    for (auto texture : m_FBOs[i]->AllocateColorTextureReferences()) {
+                        int32_t id = this->FindFreeTextureIndex();
+                        if (id < 0) {
+                            Helper::Debug::Error("MemoryManager::AllocateFBO() : failed to allocate index for FBO attachment!");
+                            return -1;
+                        } else {
+                            m_textures[id] = texture;
+                            outputColorAttachments.push_back(id);
+                        }
+                    }
+
+                    //TODO: depth buffer!
+
+                    return (int32_t)i;
+                }
+
+            return -1;
+        }
     public:
         EvoVulkan::Core::DescriptorManager* m_descriptorManager   = nullptr;
 
@@ -278,6 +373,7 @@ namespace Framework::Graphics::VulkanTools {
         uint32_t                            m_countFBO            = 15;
         uint32_t                            m_countShaderPrograms = 50;
         uint32_t                            m_countDescriptorSets = 10000;
+        uint32_t                            m_countTextures       = 1000;
 
         EvoVulkan::Types::Buffer**          m_UBOs                = nullptr;
         EvoVulkan::Types::Buffer**          m_VBOs                = nullptr;
@@ -285,6 +381,7 @@ namespace Framework::Graphics::VulkanTools {
         EvoVulkan::Complexes::FrameBuffer** m_FBOs                = nullptr;
         EvoVulkan::Complexes::Shader**      m_ShaderPrograms      = nullptr;
         EvoVulkan::Core::DescriptorSet*     m_descriptorSets      = nullptr;
+        EvoVulkan::Types::Texture**         m_textures            = nullptr;
     };
 }
 

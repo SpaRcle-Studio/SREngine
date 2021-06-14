@@ -22,8 +22,8 @@ namespace Framework::Graphics::Impl {
 
             uint32_t id = 0;
 
-            for (auto const& [key, val] : m_meshGroups) {
-                for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++) {
+            for (auto const& [key, val] : m_geometry.m_groups) {
+                for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++) {
                     this->m_flatGeometryShader->SetInt("id", (int) id);
                     this->m_flatGeometryShader->SetMat4("modelMat", val[m_t]->GetModelMatrix());
 
@@ -47,7 +47,7 @@ namespace Framework::Graphics::Impl {
             ImGui::Text("Pipeline name: %s", m_env->GetPipeLineName().c_str());
 
             //!!!ImGui::Text("Count meshes: %zu", m_countMeshes);
-            ImGui::Text("Count transparent meshes: %zu", m_countTransparentMeshes);
+            ImGui::Text("Count transparent meshes: %zu", m_transparentGeometry.m_total);
 
             ImGui::Checkbox("Grid", &m_gridEnabled);
             ImGui::Checkbox("Skybox", &m_skyboxEnabled);
@@ -67,25 +67,19 @@ namespace Framework::Graphics::Impl {
                 this->m_env->SetWireFrameEnabled(true);
                 this->m_env->SetCullFacingEnabled(false);
 
-                for (auto const& [key, val] : m_meshGroups) {
+                for (auto const& [key, val] : m_geometry.m_groups) {
                     m_env->BindVAO(key);
-                    for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++)
+                    for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
                         val[m_t]->DrawOpenGL();
                 }
-
-                //for (m_t = 0; m_t < m_countMeshes; m_t++)
-                //    m_meshes[m_t]->DrawOpenGL();
 
                 this->m_env->SetWireFrameEnabled(false);
                 this->m_env->SetDepthTestEnabled(true);
                 this->m_env->SetCullFacingEnabled(true);
             } else {
-               //for (m_t = 0; m_t < m_countMeshes; m_t++)
-                //    m_meshes[m_t]->DrawOpenGL();
-
-                for (auto const& [key, val] : m_meshGroups) {
+                for (auto const& [key, val] : m_geometry.m_groups) {
                     m_env->BindVAO(key);
-                    for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++)
+                    for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
                         val[m_t]->DrawOpenGL();
                 }
             }

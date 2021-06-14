@@ -26,11 +26,11 @@ bool Framework::Graphics::Render::Create(Window* window) {
     {
         this->m_geometryShader = new Shader(this, "engine/geometry");
         this->m_geometryShader->SetVertex(
-                { Vertices::Mesh3DVertex::GetDescription() },
+                {Vertices::Mesh3DVertex::GetDescription()},
                 Vertices::Mesh3DVertex::GetAttributes());
         this->m_geometryShader->SetUniforms({
-            { { 0, UBOType::Common }, sizeof(Mesh3DUBO)   }, // binding 0 - mesh   (model mat)
-            { { 5, UBOType::Shared }, sizeof(ProjViewUBO) }, // binding 1 - shader (view & proj mat)
+                {{0, UBOType::Common}, sizeof(Mesh3DUBO)}, // binding 0 - mesh   (model mat)
+                {{5, UBOType::Shared}, sizeof(ProjViewUBO)}, // binding 1 - shader (view & proj mat)
         });
         /*
                          descriptor write
@@ -43,17 +43,32 @@ bool Framework::Graphics::Render::Create(Window* window) {
                 1               5       view & proj uniform
          */
         this->m_geometryShader->SetCreateInfo({
-            .polygonMode  = PolygonMode::Fill,
-            .cullMode     = CullMode::Back,
-            .depthCompare = DepthCompare::LessOrEqual,
-            .blendEnabled = true,
-            .depthEnabled = true
+              .polygonMode  = PolygonMode::Fill,
+              .cullMode     = CullMode::Back,
+              .depthCompare = DepthCompare::LessOrEqual,
+              .blendEnabled = true,
+              .depthWrite   = true,
+              .depthTest    = true
         });
 
-        this->m_flatGeometryShader = new Shader(this, "engine/flatGeometry");
 
         Shader::SetStandardGeometryShader(m_geometryShader);
     }
+
+    {
+        this->m_transparentShader = new Shader(this, "engine/transparent");
+        this->m_transparentShader->CopyVertexAndUniformsInfo(m_geometryShader);
+        this->m_transparentShader->SetCreateInfo({
+             .polygonMode  = PolygonMode::Fill,
+             .cullMode     = CullMode::Back,
+             .depthCompare = DepthCompare::LessOrEqual,
+             .blendEnabled = true,
+             .depthWrite   = false,
+             .depthTest    = true
+        });
+    }
+
+    this->m_flatGeometryShader = new Shader(this, "engine/flatGeometry");
 
     this->m_grid = EditorGrid::Create("engine/grid", this);
 
@@ -108,13 +123,16 @@ bool Framework::Graphics::Render::Close() {
     }
 
     auto data = std::string();
-    data.append("\n\tT meshes         : " + std::to_string(m_countTransparentMeshes));
+    data.append("\n\tT meshes         : " + std::to_string(m_geometry.m_total));
     data.append("\n\tNew meshes       : " + std::to_string(m_countNewMeshes));
     data.append("\n\tMeshes to remove : " + std::to_string(m_countMeshesToRemove));
     Debug::Graph("Render::Close() : close render..." + data);
 
     if (m_geometryShader)
         m_geometryShader->Free();
+
+    if (m_transparentShader)
+        m_transparentShader->Free();
 
     if (m_flatGeometryShader)
         m_flatGeometryShader->Free();
@@ -169,31 +187,14 @@ void Framework::Graphics::Render::PollEvents() {
             temp = m_newMeshes[m_t];
 
             // Add mesh to transparent meshes array or usual mesh array
+
             if (temp->GetMaterial()->IsTransparent()) {
-                m_transparent_meshes.push_back(temp);
-                m_countTransparentMeshes++;
-            } else {
-                auto id = m_env->GetPipeLine() == PipeLine::OpenGL ? temp->GetVAO() : temp->GetVBO();
-                if (id < 0) {
-                    Helper::Debug::Error("Render::PollEvents() : failed get mesh id!");
-                    m_countNewMeshes = 0;
-                    m_newMeshes.clear();
-                    this->m_env->SetBuildState(false);
-                    m_mutex.unlock();
-                    return;
-                }
+                if (!m_transparentGeometry.Add(temp))
+                    Helper::Debug::Error("Render::PollEvents() : failed to add transparent mesh to cluster!");
+            } else
+                if (!m_geometry.Add(temp))
+                    Helper::Debug::Error("Render::PollEvents() : failed to add mesh to cluster!");
 
-                {
-                    auto find = this->m_meshGroups.find(id);
-                    if (find == m_meshGroups.end())
-                        m_meshGroups[id] = {temp};
-                    else
-                        find->second.push_back(temp);
-
-                    m_countMeshesInGroups[id]++;
-                    m_totalCountMeshesInGroups++;
-                }
-            }
         }
 
         m_newMeshes.clear(); // Clear new meshes array
@@ -214,53 +215,14 @@ void Framework::Graphics::Render::PollEvents() {
                 temp->FreeVideoMemory();
 
             // Remove mesh from transparent meshes array or usual mesh array
+
             if (temp->GetMaterial()->IsTransparent()) {
-                for (m_t2 = 0; m_t2 < m_countTransparentMeshes; m_t2++)
-                    if (m_transparent_meshes[m_t2] == temp) {
-                        m_countTransparentMeshes--;
-                        m_transparent_meshes.erase(m_transparent_meshes.begin() + m_t2);
-                        temp->RemoveUsePoint();
-                        break;
-                    }
-            } else {
-                auto id = m_env->GetPipeLine() == PipeLine::OpenGL ? temp->GetVAO() : temp->GetVBO();
-                if (id < 0) {
-                    Helper::Debug::Error("Render::PollEvents() : failed get mesh id to remove!");
-                    m_countMeshesToRemove = 0;
-                    m_removeMeshes.clear();
-                    this->m_env->SetBuildState(false);
-                    m_mutex.unlock();
-                    return;
-                }
-
-                auto find = this->m_meshGroups.find(id);
-                if (find == m_meshGroups.end()) {
-                    Helper::Debug::Error("Render::PollEvents() : mesh group to remove mesh not found!");
-                    m_countMeshesToRemove = 0;
-                    m_removeMeshes.clear();
-                    this->m_env->SetBuildState(false);
-                    m_mutex.unlock();
-                    return;
-                }
-
-                auto& meshes = find->second;
-                for (m_t2 = 0; m_t2 < m_countMeshesInGroups[id]; m_t2++) {
-                    if (meshes[m_t2] == temp) {
-                        // TODO: may be check is zero count and remove?
-                        m_countMeshesInGroups[id]--;
-                        m_totalCountMeshesInGroups--;
-
-                        meshes.erase(meshes.begin() + m_t2);
-                        temp->RemoveUsePoint();
-
-                        if (m_countMeshesInGroups[id] == 0) {
-                            m_meshGroups.erase(id);
-                            m_countMeshesInGroups.erase(id);
-                        }
-                        break;
-                    }
-                }
+                if (!m_transparentGeometry.Remove(temp))
+                    Helper::Debug::Error("Render::PollEvents() : failed to remove transparent geometry mesh!");
             }
+            else
+                if (!m_geometry.Remove(temp))
+                    Helper::Debug::Error("Render::PollEvents() : failed to remove geometry mesh!");
         }
 
         m_countMeshesToRemove = 0; // Clear meshes to remove array
@@ -351,15 +313,19 @@ void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
 
 Framework::Graphics::Types::Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
     // TODO: See
-    if (absoluteID < m_totalCountMeshesInGroups) {
-        for (auto const& [key, val] : m_meshGroups) {
-            if (absoluteID < m_countMeshesInGroups[key]) {
-                return val[abs(int32_t(m_totalCountMeshesInGroups - m_countMeshesInGroups[key]) - (int32_t)absoluteID)]; // TODO: can be reason crash!
+    if (absoluteID < m_geometry.m_total) {
+        for (auto const& [key, val] : m_geometry.m_groups) {
+            if (absoluteID < m_geometry.m_counters[key]) {
+                return val[abs(int32_t(m_geometry.m_total - m_geometry.m_counters[key]) - (int32_t)absoluteID)]; // TODO: can be reason crash!
             } else continue;
         }
     }
-    else
-        return this->m_transparent_meshes[absoluteID];
+    else {
+        //return this->m_transparent_meshes[absoluteID];
+        Helper::Debug::Error("Render::GetMesh() : TODO!");
+        // TODO!
+        return nullptr;
+    }
 
     return nullptr;
 }

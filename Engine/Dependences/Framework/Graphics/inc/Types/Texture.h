@@ -75,13 +75,12 @@ namespace Framework::Graphics::Types {
                 return false;
             }
             else {
-                this->m_env->DeleteTexture(m_ID);
-                return true;
+                return this->m_env->FreeTexture(m_ID);
             }
         }
         //Texture* Copy();
     public:
-        static Texture* Load(std::string path, bool autoRemove = false, TextureType type = TextureType::Diffuse, TextureFilter filter = TextureFilter::NEAREST);
+        static Texture* Load(const std::string& path, bool autoRemove = false, TextureType type = TextureType::Diffuse, TextureFilter filter = TextureFilter::NEAREST);
     public:
         bool Free() override {
             delete this;

@@ -59,6 +59,11 @@ namespace Framework::Graphics {
 
             Environment::Get()->SetBuildState(false);
 
+            uint32_t w = m_width;
+            uint32_t h = m_height;
+
+            Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
+
             return true;
         }
 
@@ -250,6 +255,8 @@ namespace Framework::Graphics {
             this->m_currentShader->Bind(this->m_currentCmd);
         }
 
+        bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
+
         SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             if (!m_memory->FreeShaderProgram(shaderProgram))
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
@@ -380,6 +387,9 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override { return this->m_memory->FreeIBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept override { return this->m_memory->FreeUBO(ID); }
+
+        [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept;
+        [[nodiscard]] bool FreeFBO(uint32_t FBO) const noexcept override;
     };
 }
 

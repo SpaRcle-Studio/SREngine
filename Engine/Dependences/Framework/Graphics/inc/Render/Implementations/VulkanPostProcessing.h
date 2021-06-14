@@ -19,19 +19,17 @@ namespace Framework::Graphics {
 
         void BeginSkybox() override {}
         void EndSkybox() override {}
+
+        void Complete() override { }
     public:
         bool Free() override {
-            Helper::Debug::Graph("OpenGLPostProcessing::Free() : free post processing pointer...");
+            Helper::Debug::Graph("VulkanPostProcessing::Free() : free post processing pointer...");
             delete this;
             return true;
         }
 
         bool Destroy() override {
             return PostProcessing::Destroy();
-        }
-
-        bool OnResize(uint32_t w, uint32_t h) override {
-            return true;
         }
     };
 }

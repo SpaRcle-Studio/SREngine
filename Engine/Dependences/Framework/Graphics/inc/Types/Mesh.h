@@ -85,6 +85,7 @@ namespace Framework::Graphics::Types {
         bool Destroy() override;
     protected:
         bool                        m_inverse           = false;
+        bool                        m_matHasBeenUpdated = false;
 
         Environment*                m_env               = nullptr;
         PipeLine                    m_pipeline          = PipeLine::Unknown;
@@ -111,10 +112,10 @@ namespace Framework::Graphics::Types {
         size_t						m_countVertices	    = 0;
         size_t						m_countIndices	    = 0;
         bool                        m_useIndices        = false;
+    protected:
+         /** \brief Re-calc mesh space-transform matrix */
+         virtual void ReCalcModel() { }
     private:
-        /** \brief Re-calc mesh space-transform matrix */
-        void ReCalcModel();
-        /** \brief Re-calc mesh space-transform matrix */
         virtual bool Calculate() = 0;
     protected:
         void OnDestroyGameObject() noexcept override;

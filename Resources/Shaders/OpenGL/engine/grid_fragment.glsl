@@ -1,9 +1,10 @@
-#version 410 core
+#version 450
 
 const float near = 0.01;
 const float far = 50;
 
-layout(location = 0) out vec4 FragColor;
+layout(location = 4) out vec4 FragColor;
+
 layout(location = 1) in vec3 nearPoint; // nearPoint calculated in vertex shader
 layout(location = 2) in vec3 farPoint; // farPoint calculated in vertex shader
 
@@ -73,7 +74,7 @@ void main() {
     float linearDepth = computeLinearDepth(fragPos3D);
     float fading = max(0, (0.5 - linearDepth));
 
-    FragColor = (grid(fragPos3D, 0.1, true) + axis(fragPos3D, 10, true)) * float(t > 0); // adding multiple resolution for the grid
+    FragColor = ((grid(fragPos3D, 0.1, true) + axis(fragPos3D, 10, true)) * float(t > 0)); // adding multiple resolution for the grid
 
     //FragColor = (axis(fragPos3D, 10, true)) * float(t > 0); // adding multiple resolution for the grid
     //FragColor = (grid(fragPos3D, 1, true) + grid(fragPos3D, 0.1, true))* float(t > 0); // adding multiple resolution for the grid

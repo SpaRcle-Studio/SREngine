@@ -20,9 +20,6 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
     path = StringUtils::MakePath(path, false);
 #endif
 
-    if (Debug::GetLevel() >=Debug::Level::Medium)
-    Debug::Log("TextureLoader::Load() : load \""+path+"\" texture...");
-
     Texture* texture = nullptr;
 
     {
@@ -43,7 +40,7 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
         texture->m_format = numComponents;
     }
 
-    texture->m_resource_id = path;
+    //texture->m_resource_id = path;
 
     return texture;
 }

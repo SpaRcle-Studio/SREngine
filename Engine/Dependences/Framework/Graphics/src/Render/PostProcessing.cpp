@@ -37,7 +37,16 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
 
     {
         this->m_postProcessingShader = new Shader(m_render, "engine/postProcessing");
-        this->m_blurShader           = new Shader(m_render, "engine/blur");
+        this->m_postProcessingShader->SetCreateInfo({
+            .polygonMode  = PolygonMode::Fill,
+            .cullMode     = CullMode::Back,
+            .depthCompare = DepthCompare::LessOrEqual,
+            .blendEnabled = true,
+            .depthWrite   = false,
+            .depthTest    = false
+        });
+
+        this->m_blurShader = new Shader(m_render, "engine/blur");
     }
 
     m_isInit = true;
@@ -45,9 +54,24 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
     return true;
 }
 
-bool Framework::Graphics::PostProcessing::Destroy() { // TODO
+bool Framework::Graphics::PostProcessing::Destroy() {
     Helper::Debug::Graph("PostProcessing::Destroy() : destroying post processing...");
 
-    return false;
+    if (!m_isInit)
+        return false;
+
+    if (!m_env->FreeFBO(m_frameBuffer) || !m_env->FreeTextures(m_colors.data(), m_colors.size())) {
+        Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
+        return false;
+    }
+
+    return true;
+}
+
+bool Framework::Graphics::PostProcessing::OnResize(uint32_t w, uint32_t h) {
+    if (!m_env->CreateFrameBuffer({w, h}, m_depth, m_frameBuffer, m_colors)) {
+        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create frame buffer object!");
+        return false;
+    }
 }
 

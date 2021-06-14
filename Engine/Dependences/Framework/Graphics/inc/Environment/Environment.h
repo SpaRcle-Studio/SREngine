@@ -23,7 +23,7 @@
 #include <Types/Descriptors.h>
 #include <set>
 
-#define SR_SHADER_PROGRAM unsigned int
+#define SR_SHADER_PROGRAM uint32_t
 #define SR_NULL_SHADER 0
 
 namespace Framework::Graphics {
@@ -126,7 +126,7 @@ namespace Framework::Graphics {
 
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetPipeLineName() const noexcept = 0;
 
-        virtual unsigned int CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
+        virtual uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 
         //void SetDrawingStage(const unsigned __int8& stage) noexcept { this->m_currentDrawingStage = stage; }
 
@@ -136,7 +136,7 @@ namespace Framework::Graphics {
         virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable) { return false; }
         virtual void SetWindowIcon(const char* path) {  }
 
-        virtual bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) { return false; }
+        virtual bool PreInit(uint32_t smooth_samples, const std::string& appName, const std::string& engineName) { return false; }
         [[nodiscard]] virtual glm::vec2 GetWindowSize() const noexcept { return {0,0}; }
 
         /* set current opengl/vulkan/directx context */
@@ -162,10 +162,10 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void EndRender() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
-        virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, unsigned int ID, glm::vec2 size) { return glm::vec4(0); }
+        virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, uint32_t ID, glm::vec2 size) { return glm::vec4(0); }
         virtual glm::vec3 GetPixelColor(glm::vec2 uPos) { return glm::vec3(0); }
 
-        virtual void SetWindowSize(unsigned int w, unsigned int h) {  }
+        virtual void SetWindowSize(uint32_t w, uint32_t h) {  }
         virtual void SetWindowPosition(int x, int y) { }
 
         /**
@@ -185,14 +185,12 @@ namespace Framework::Graphics {
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const noexcept { }
 
-        virtual bool CreateSingleHDRFrameBO(glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, unsigned int& colorBuffer) const noexcept { return false; }
-        virtual bool CreateHDRFrameBufferObject(
-                glm::vec2 size, unsigned int& rboDepth, unsigned int& hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept { return false;}
-        virtual bool CreatePingPongFrameBufferObject(
-                glm::vec2 size,std::vector<unsigned int> & pingpongFBO, std::vector<unsigned int>& pingpongColorBuffers) const noexcept { return false; }
+        virtual bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) { return false; }
+        virtual bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) const noexcept { return false; }
+        virtual bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const noexcept { return false; }
 
-        virtual SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept { }
-        virtual SR_FORCE_INLINE void DeleteBuffer(unsigned int& FBO)const noexcept { }
+        virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) noexcept { }
+        virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const noexcept { }
 
         [[nodiscard]] virtual inline bool IsFullScreen() const noexcept { return false; }
         virtual SR_FORCE_INLINE void SetFullScreen(bool value) {  }
@@ -200,8 +198,8 @@ namespace Framework::Graphics {
 
         // ============================= [ SHADER METHODS ] =============================
 
-        [[nodiscard]] virtual std::map<std::string, unsigned int> GetShaderFields(const unsigned int& ID, const std::string& path) const noexcept {
-            return std::map<std::string, unsigned int>(); }
+        [[nodiscard]] virtual std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const noexcept {
+            return std::map<std::string, uint32_t>(); }
         [[nodiscard]] virtual SR_SHADER_PROGRAM AllocShaderProgram() const noexcept { return SR_NULL_SHADER; }
         virtual void FreeShaderProgram(SR_SHADER_PROGRAM shaderProgram) const noexcept {  }
         virtual bool CompileShader(
@@ -249,44 +247,47 @@ namespace Framework::Graphics {
 
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
-        virtual SR_FORCE_INLINE bool CalculateEmptyVAO(unsigned int& VAO) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVAO(unsigned int& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVAO(uint32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVBO(uint32_t& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateIBO(uint32_t& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
         //virtual SR_FORCE_INLINE
 
         /** Vertex pos and texture cords */
-        virtual SR_FORCE_INLINE bool CalculateQuad(unsigned int& VBO, unsigned int& VAO) const noexcept { return false; }
-        [[nodiscard]] virtual unsigned int CalculateSkybox() const noexcept { return -1; }
+        virtual SR_FORCE_INLINE bool CalculateQuad(uint32_t& VBO, uint32_t& VAO) const noexcept { return false; }
+        [[nodiscard]] virtual uint32_t CalculateSkybox() const noexcept { return -1; }
 
-        virtual SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const noexcept { }
-        virtual SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const noexcept { }
-        virtual SR_FORCE_INLINE void BindVAO(const unsigned int& VAO) const noexcept { }
-        virtual SR_FORCE_INLINE void BindUBO(const unsigned int& UBO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) const noexcept { }
+        virtual SR_FORCE_INLINE void BindUBO(const uint32_t& UBO) const noexcept { }
         virtual SR_FORCE_INLINE void Draw6Triangles() const noexcept { }
 
-        virtual SR_FORCE_INLINE void DrawSkybox(const unsigned int&  VAO, const unsigned int& CubeMap) const noexcept { }
-        virtual SR_FORCE_INLINE void DrawQuad(const unsigned int&  VAO) const noexcept { }
-        virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
-        virtual SR_FORCE_INLINE void DrawTriangles(const unsigned int& count_vertices) const noexcept { }
-        virtual SR_FORCE_INLINE void DrawLines(const unsigned int&  VAO, const unsigned int& count_vertices) const noexcept { }
-        virtual SR_FORCE_INLINE void DrawInstancedVertices(unsigned int VAO, unsigned int IBO, unsigned int count) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawSkybox(const uint32_t&  VAO, const uint32_t& CubeMap) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawQuad(const uint32_t&  VAO) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawTriangles(const uint32_t&  VAO, const uint32_t& count_vertices) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawTriangles(const uint32_t& count_vertices) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawLines(const uint32_t&  VAO, const uint32_t& count_vertices) const noexcept { }
+        virtual SR_FORCE_INLINE void DrawInstancedVertices(uint32_t VAO, uint32_t IBO, uint32_t count) const noexcept { }
         virtual SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept { }
         virtual SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept { }
 
         // ============================== [ TEXTURE METHODS ] ==============================
 
-        virtual SR_FORCE_INLINE void BindTexture(const unsigned int&  ID) const noexcept { }
-        virtual SR_FORCE_INLINE void BindTexture(unsigned char activeTexture, const unsigned int&  ID) const noexcept { }
+        virtual SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const noexcept { }
+        virtual SR_FORCE_INLINE void BindTexture(unsigned char activeTexture, const uint32_t&  ID) const noexcept { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const noexcept { }
-        virtual unsigned int CalculateTexture(unsigned char* data, int format, unsigned int w, unsigned int h, TextureFilter filter, bool alpha) const noexcept { return -1; }
-        [[nodiscard]] virtual unsigned int CalculateCubeMap(unsigned int w, unsigned int h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
-        virtual SR_FORCE_INLINE void DeleteTexture(unsigned int ID) const noexcept { }
-        virtual SR_FORCE_INLINE void FreeCubeMap(unsigned int ID) const noexcept { }
+        virtual uint32_t CalculateTexture(unsigned char* data, int format, uint32_t w, uint32_t h, TextureFilter filter, bool alpha) const noexcept { return -1; }
+        [[nodiscard]] virtual uint32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
+        virtual SR_FORCE_INLINE void FreeCubeMap(uint32_t ID) const noexcept { }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept { return false; }
-        [[nodiscard]] virtual bool FreeVAO(unsigned int VAO) const noexcept { return false; }
+        [[nodiscard]] virtual bool FreeVAO(uint32_t VAO) const noexcept { return false; }
+        [[nodiscard]] virtual bool FreeFBO(uint32_t FBO) const noexcept { return false; }
+        [[nodiscard]] virtual bool FreeRBO(uint32_t RBO) const noexcept { return false; }
+        [[nodiscard]] virtual bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept { return false; }
+        [[nodiscard]] virtual bool FreeTexture(uint32_t ID) const noexcept { return false; }
     };
 }
 

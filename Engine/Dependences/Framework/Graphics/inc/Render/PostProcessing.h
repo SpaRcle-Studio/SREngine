@@ -5,11 +5,9 @@
 #ifndef GAMEENGINE_POSTPROCESSING_H
 #define GAMEENGINE_POSTPROCESSING_H
 
-#include "Shader.h"
+#include <Render/Shader.h>
 #include <Environment/Environment.h>
 #include <Debug.h>
-
-#include <Render/FrameBuffer.h>
 
 namespace Framework::Graphics {
     class Render;
@@ -33,7 +31,7 @@ namespace Framework::Graphics {
     // TODO: add freeing video buffers!
     class PostProcessing {
     protected:
-        virtual ~PostProcessing() { };
+        virtual ~PostProcessing() = default;;
         PostProcessing(Camera* camera);
     public:
         PostProcessing(const PostProcessing&) = delete;
@@ -46,35 +44,29 @@ namespace Framework::Graphics {
         float                 m_bloomIntensity        = 1.f;
         volatile uint8_t      m_bloomAmount           = 6;
     protected:
-        bool                  m_debugDisplayBloomMask = false;
-
         volatile bool         m_bloom                 = true;
         bool                  m_bloomClear            = false;
     protected:
         bool                  m_horizontal            = false;
         bool                  m_firstIteration        = false;
 
-        uint32_t              m_skyboxRBO             = 0;
-        uint32_t              m_skyboxFBO             = 0;
-        uint32_t              m_skyboxColorBuffer     = 0;
+        int32_t               m_finalDepth            = -1;
+        int32_t               m_finalFBO              = -1;
+        int32_t               m_finalColorBuffer      = -1;
 
-        uint32_t              m_finalRBO              = 0;
-        uint32_t              m_finalFBO              = 0;
-        uint32_t              m_finalColorBuffer      = 0;
-
-        uint32_t              m_RBODepth              = 0;
-        uint32_t              m_HDRFrameBufferObject  = 0;
-        std::vector<uint32_t> m_ColorBuffers          = { 0, 0, 0, 0 };
-        uint8_t               m_countColorBuffers     = 4;
         /*
-             1 - color
-             2 - bloom
-             3 - depth
-             4 - stencil
+         *  0 - geometry color
+         *  1 - bright color
+         *  2 - depth color
+         *  3 - stencil mask
+         *  4 - skybox color
          */
+        std::vector<int32_t>  m_colors                = { -1, -1, -1, -1, -1 };
+        int32_t               m_depth                 = -1;
+        int32_t               m_frameBuffer           = -1;
 
-        std::vector<uint32_t> m_PingPongFrameBuffers  = { 0, 0 };
-        std::vector<uint32_t> m_PingPongColorBuffers  = { 0, 0 };
+        std::vector<int32_t>  m_PingPongFrameBuffers  = { -1, -1 };
+        std::vector<int32_t>  m_PingPongColorBuffers  = { -1, -1 };
     protected:
         Environment*          m_env                   = nullptr;
 
@@ -106,37 +98,31 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void SetBloomIntensity(float intensity)      noexcept { this->m_bloomIntensity = intensity; }
 
         SR_FORCE_INLINE void SetBloom(bool v)                        noexcept { this->m_bloom = v;                  }
-        SR_FORCE_INLINE void SetDisplayBloomMask(bool value)         noexcept { m_debugDisplayBloomMask = value;    }
     public:
         /** \brief Init shader and set default values \warning Call only from window context \return bool */
-        bool Init(Render* render);
+        virtual bool Init(Render* render);
 
         virtual bool Destroy();
 
         virtual bool Free() = 0;
-        virtual bool OnResize(uint32_t w, uint32_t h) = 0;
+        virtual bool OnResize(uint32_t w, uint32_t h);
 
         virtual void BeginSkybox()   = 0;
         virtual void EndSkybox()     = 0;
 
         virtual void BeginGeometry() = 0;
         virtual void EndGeometry()   = 0;
+
+        virtual void Complete()      = 0;
     public:
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetFinally()       const noexcept { return this->m_finalColorBuffer;  }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetColoredImage()  const noexcept { return this->m_ColorBuffers[0];   }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetBloomMask()     const noexcept { return this->m_ColorBuffers[1];   }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetDepthBuffer()   const noexcept { return this->m_ColorBuffers[2];   }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetColoredImage()  const noexcept { return this->m_colors[0];   }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetBloomMask()     const noexcept { return this->m_colors[1];   }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetDepthBuffer()   const noexcept { return this->m_colors[2];   }
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetBlurBloomMask() const noexcept { return m_PingPongColorBuffers[0]; }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetSkyboxColor()   const noexcept { return m_skyboxColorBuffer;       }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetStencilBuffer() const noexcept { return m_ColorBuffers[3];         }
-
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCustomColorBuffer(unsigned char id) const noexcept {
-            if (m_countColorBuffers <= id) {
-                Helper::Debug::Error("PostProcessing::GetCustomColorBuffer(): index error!");
-            }
-            else
-                return m_ColorBuffers[id];
-        }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetSkyboxColor()   const noexcept { return m_colors[4];         }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetStencilBuffer() const noexcept { return m_colors[3];         }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCustomColorBuffer(uint8_t id) const noexcept { return m_colors[id]; }
     };
 }
 

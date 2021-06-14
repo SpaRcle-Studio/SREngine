@@ -15,12 +15,25 @@ namespace Framework::Graphics {
         OpenGLPostProcessing(Camera* camera) : PostProcessing(camera) { }
     public:
         void BeginGeometry() override {
-            if (m_HDRFrameBufferObject) {
-                m_env->BindFrameBuffer(m_HDRFrameBufferObject);
+            if (m_frameBuffer) {
+                m_env->BindFrameBuffer(m_frameBuffer);
+                m_env->ClearColorBuffers(0,0,0,0);
                 m_env->ClearBuffers();
             }
         }
         void EndGeometry() override{
+            m_env->BindFrameBuffer(0);
+        }
+
+        void BeginSkybox() override {
+            m_env->BindFrameBuffer(m_frameBuffer);
+        }
+
+        void EndSkybox() override {
+            m_env->BindFrameBuffer(0);
+        }
+
+        void Complete() override {
             if (m_bloom){
                 this->BlurBloom();
                 if (m_bloomClear)
@@ -53,7 +66,7 @@ namespace Framework::Graphics {
                 m_postProcessingShader->SetVec3("ColorCorrection", m_color_correction);
             }
 
-            m_env->BindTexture(0, m_ColorBuffers[0]);
+            m_env->BindTexture(0, m_colors[0]);
             m_postProcessingShader->SetInt("scene", 0);
 
             if (m_bloom) { // SEE: POSSIBLE BUGS
@@ -64,27 +77,18 @@ namespace Framework::Graphics {
                 m_postProcessingShader->SetVec3("BloomColor", m_bloomColor);
             }
 
-            m_env->BindTexture(2, m_skyboxColorBuffer);
+            m_env->BindTexture(2, m_colors[4]);
             m_postProcessingShader->SetInt("skybox", 2);
 
-            m_env->BindTexture(3, m_ColorBuffers[3]);
+            m_env->BindTexture(3, m_colors[3]);
             m_postProcessingShader->SetInt("stencil", 3);
 
-            m_env->BindTexture(4, m_ColorBuffers[2]);
+            m_env->BindTexture(4, m_colors[2]);
             m_postProcessingShader->SetInt("depth", 4);
             m_env->Draw(3);
 
             if (!m_camera->IsDirectOutput())
                 m_env->BindFrameBuffer(0);
-        }
-
-        void BeginSkybox() override {
-            m_env->BindFrameBuffer(this->m_skyboxFBO);
-            m_env->ClearBuffers();
-        }
-
-        void EndSkybox() override {
-            m_env->BindFrameBuffer(0);
         }
     private:
         void BlurBloom() {
@@ -104,7 +108,7 @@ namespace Framework::Graphics {
 
                 m_blurShader->SetBool("horizontal", m_horizontal);
 
-                m_env->BindTexture(0, m_firstIteration ? m_ColorBuffers[1] : m_PingPongColorBuffers[!m_horizontal]);
+                m_env->BindTexture(0, m_firstIteration ? m_colors[1] : m_PingPongColorBuffers[!m_horizontal]);
                 m_blurShader->SetInt("image", 0);
                 m_env->Draw(3);
 
@@ -120,31 +124,35 @@ namespace Framework::Graphics {
             return true;
         }
         bool Destroy() override {
+            if (!m_isInit)
+                return false;
+
+            if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
+                Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy final framebuffer!");
+                return false;
+            }
+
+            if (!m_env->FreeRBO(m_depth))
+                return false;
+
+            if (!m_env->FreeRBO(m_finalDepth))
+                return false;
+
             return PostProcessing::Destroy();
         }
 
         bool OnResize(uint32_t w, uint32_t h) override {
-            if (!m_env->CreateSingleHDRFrameBO({w, h}, m_finalRBO, m_finalFBO, m_finalColorBuffer)) {
-                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single HDR frame buffer object!");
+            if (!m_env->CreateSingleFrameBuffer({w, h}, m_finalDepth, m_finalFBO, m_finalColorBuffer)) {
+                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single frame buffer object!");
                 return false;
             }
 
-            if (!m_env->CreateSingleHDRFrameBO({w, h}, m_skyboxRBO, m_skyboxFBO, m_skyboxColorBuffer)) {
-                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single HDR frame buffer object!");
-                return false;
-            }
-
-            if (!m_env->CreateHDRFrameBufferObject({w, h}, m_RBODepth, m_HDRFrameBufferObject, m_ColorBuffers)) {
-                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create HDR frame buffer object!");
-                return false;
-            }
-
-            if (!m_env->CreatePingPongFrameBufferObject({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
+            if (!m_env->CreatePingPongFrameBuffer({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
                 Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
                 return false;
             }
 
-            return true;
+            return PostProcessing::OnResize(w, h);
         }
     };
 }

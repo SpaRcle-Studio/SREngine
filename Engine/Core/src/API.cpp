@@ -367,7 +367,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .addFunction("GetFinalTextureID", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetFinally)
                 .addFunction("GetColoredImage", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetColoredImage)
                 .addFunction("GetBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBloomMask)
-                .addFunction("GetCustomColorBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(unsigned char))&Graphics::PostProcessing::GetCustomColorBuffer)
+                .addFunction("GetCustomColorBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(uint8_t))&Graphics::PostProcessing::GetCustomColorBuffer)
                 .addFunction("GetBlurBloomMask", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetBlurBloomMask)
                 .addFunction("GetSkyboxColor", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetSkyboxColor)
                 .addFunction("GetStencilBuffer", (unsigned int (Framework::Graphics::PostProcessing::*)(void))&Graphics::PostProcessing::GetStencilBuffer)
@@ -422,8 +422,8 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .endNamespace()
 
                 .beginClass<Graphics::Texture>("Texture")
-                .addStaticFunction("Load", static_cast<Graphics::Texture*(*)(std::string, bool, int, int)>([](std::string name, bool autoRemove, int type, int filter) -> Graphics::Texture* {
-                    return Texture::Load(std::move(name), autoRemove, (Graphics::TextureType)type, (Graphics::TextureFilter)filter);
+                .addStaticFunction("Load", static_cast<Graphics::Texture*(*)(const std::string&, bool, int, int)>([](const std::string& name, bool autoRemove, int type, int filter) -> Graphics::Texture* {
+                    return Texture::Load(name, autoRemove, (Graphics::TextureType)type, (Graphics::TextureFilter)filter);
                 }))
                 .endClass();
     });

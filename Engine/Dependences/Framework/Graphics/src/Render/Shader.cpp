@@ -193,3 +193,14 @@ bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<std::p
     return true;
 }
 
+void Framework::Graphics::Shader::CopyVertexAndUniformsInfo(const Framework::Graphics::Shader *source) {
+    if (m_isInit) {
+        Helper::Debug::Error("Shader::CopyVertexAndUniformsInfo() : shader already initialized!");
+        return;
+    }
+
+    this->m_verticesAttributes  = source->m_verticesAttributes;
+    this->m_verticesDescription = source->m_verticesDescription;
+    this->m_uniformsInfo        = source->m_uniformsInfo;
+}
+

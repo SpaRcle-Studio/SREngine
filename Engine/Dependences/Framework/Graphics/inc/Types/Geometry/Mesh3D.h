@@ -9,6 +9,7 @@
 #include <Types/Vertices.h>
 
 #include <utility>
+#include <Types/Uniforms.h>
 
 namespace Framework::Graphics::Types {
     class Mesh3D : public Mesh {
@@ -21,6 +22,8 @@ namespace Framework::Graphics::Types {
         }
     private:
         std::vector<Vertices::Mesh3DVertex> m_vertices = std::vector<Vertices::Mesh3DVertex>();
+    private:
+        void ReCalcModel() override;
     public:
         SR_FORCE_INLINE void DrawVulkan() override {
             if (!this->IsReady() || m_isDestroy) return;
@@ -43,6 +46,8 @@ namespace Framework::Graphics::Types {
                         { DescriptorType::Uniform, { 0, m_UBO                                 } },
                         { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
                 });
+
+                Mesh3DUBO ubo = { m_modelMat }; m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3DUBO));
             }
 
             if (!m_isCalculated)

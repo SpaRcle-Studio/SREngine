@@ -31,7 +31,8 @@ namespace Framework::Graphics {
         DepthCompare depthCompare;
 
         bool blendEnabled;
-        bool depthEnabled;
+        bool depthWrite;
+        bool depthTest;
     };
 
     static LayoutBinding GetBindingType(const std::string& line) {

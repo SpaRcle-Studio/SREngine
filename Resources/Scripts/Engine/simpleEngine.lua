@@ -32,6 +32,7 @@ function LoadCamera()
     camera = scene:Instance("SceneCamera");
 
     cameraComp = Camera.New();
+    cameraComp:SetDirectOutput(true);
     cameraComp:SetFrameSize(848, 480);
     camera:AddComponent(cameraComp:Base());
     window:AddCamera(cameraComp);
@@ -48,8 +49,17 @@ function Start()
     local mesh = Mesh.LoadWithIndices("engine/cube.obj", 0);
     render:RegisterMesh(mesh);
 
-    local cube = scene:Instance("Cube");
-    cube:AddComponent(mesh:Base());
+    local cube1 = scene:Instance("Cube");
+    cube1:AddComponent(mesh:Base());
+    cube1:GetTransform():Translate(
+        Vector3.FMul(cube1:GetTransform():Forward(), 4.0), true
+    );
+    ---------------------
+
+    local mesh2 = mesh:Copy();
+    render:RegisterMesh(mesh2);
+
+    scene:Instance("Cube2"):AddComponent(mesh2:Base());
 
     ---------------------
 

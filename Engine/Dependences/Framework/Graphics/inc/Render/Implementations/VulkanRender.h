@@ -18,8 +18,10 @@ namespace Framework::Graphics::Impl {
         }
 
         void UpdateGeometry() override {
-            if (m_currentCamera)
+            if (m_currentCamera) {
                 this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
+                this->m_currentCamera->UpdateShader(m_transparentShader);
+            }
         }
 
         bool DrawGeometry() override {
@@ -35,21 +37,15 @@ namespace Framework::Graphics::Impl {
                     this->m_env->SetViewport();
                     this->m_env->SetScissor();
 
-                    Shader::GetDefaultGeometryShader()->Use();
+                    //Shader::GetDefaultGeometryShader()->Use();
+                    m_transparentShader->Use();
 
-                    for (auto const& [key, val] : m_meshGroups) {
+                    for (auto const& [key, val] : m_geometry.m_groups) {
                         this->m_env->BindVBO(val[0]->FastGetVBO());
                         this->m_env->BindIBO(val[0]->FastGetIBO());
 
-                        for (m_t = 0; m_t < m_countMeshesInGroups[key]; m_t++)
+                        for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
                             val[m_t]->DrawVulkan();
-
-                        {
-                            // test code
-                            Mesh3DUBO ubo = { glm::mat4(1) };
-                            //ubo.model = glm::rotate(ubo.model, glm::radians(45.f), glm::vec3(1.0, 1.0, 1.0));
-                            this->m_env->UpdateUBO(val[0]->FastGetUBO(), &ubo, sizeof(Mesh3DUBO));
-                        }
                     }
                 }
                 m_env->EndRender();
@@ -65,12 +61,12 @@ namespace Framework::Graphics::Impl {
             return true;
         }
 
-        void DrawGrid() noexcept override {
-
-        }
-
         bool DrawTransparentGeometry() noexcept override {
             return false;
+        }
+
+        void DrawGrid() noexcept override {
+
         }
     };
 }

@@ -76,8 +76,8 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     return true;
 }
 
-std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string path, bool withIndices) {
-    path = ResourceManager::GetResourcesFolder() + "/Models/"+path;
+std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string localPath, bool withIndices) {
+    std::string path = ResourceManager::GetResourcesFolder() + "/Models/"+localPath;
 
 #ifdef WIN32
     path = StringUtils::MakePath(path, true);
@@ -88,7 +88,7 @@ std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string path, boo
 
     unsigned int counter = 0;
 ret:
-    IResource* find = ResourceManager::Find("Mesh", path + " - "+ std::to_string(counter));
+    IResource* find = ResourceManager::Find("Mesh", localPath + " - "+ std::to_string(counter));
     if (find) {
         Mesh* copy = ((Mesh*)(find))->Copy();
         if (!copy) {
@@ -119,33 +119,11 @@ ret:
     }
 
     for (unsigned short i = 0; i < (unsigned short)meshes.size(); i++) {
-        meshes[i]->m_resource_id = path + " - " + std::to_string(i);
+        meshes[i]->m_resource_id = localPath + " - " + std::to_string(i);
         meshes[i]->m_useIndices = withIndices;
     }
 
     return meshes;
-}
-
-void Mesh::ReCalcModel() {
-    glm::mat4 modelMat = glm::mat4(1.0f);
-
-    modelMat = glm::translate(modelMat, {
-            m_position.x,
-            m_position.y,
-            m_position.z //-m_position.z
-    });
-
-    modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
-            {
-                    m_rotation.x,//-m_rotation.x,
-                    m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
-                    -m_rotation.z // SEE: change form -m_rotation.z
-            }
-    ))));
-
-    modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
-
-    this->m_modelMat = modelMat;
 }
 
 void Mesh::OnDestroyGameObject() noexcept {

@@ -31,7 +31,6 @@ namespace Framework::Helper {
         /** \brief This is resource name. \example Mesh, Texture, Audio... */
         const char *m_resource_name = "Unnamed";
         std::string m_resource_id = "NoID";
-
     public:
         inline bool EnableAutoRemove() const noexcept { return this->m_autoRemove; }
     public:

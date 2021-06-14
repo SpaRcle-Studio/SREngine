@@ -254,3 +254,30 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
         return true;
     }
 }
+
+void Framework::Graphics::Types::Mesh3D::ReCalcModel() {
+    glm::mat4 modelMat = glm::mat4(1.0f);
+
+    modelMat = glm::translate(modelMat, {
+            m_position.x,
+            m_position.y,
+            m_position.z //-m_position.z
+    });
+
+    modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
+            {
+                    m_rotation.x,//-m_rotation.x,
+                    m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
+                    -m_rotation.z // SEE: change form -m_rotation.z
+            }
+    ))));
+
+    modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
+
+    this->m_modelMat = modelMat;
+
+    if (m_UBO >= 0) {
+        Mesh3DUBO ubo = { m_modelMat };
+        m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3DUBO));
+    }
+}

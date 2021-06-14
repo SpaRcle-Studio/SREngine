@@ -21,6 +21,67 @@ namespace Framework::Graphics::Types {
 
 namespace Framework::Graphics {
     typedef std::map<uint32_t, std::vector<Types::Mesh*>> MeshGroups;
+    typedef std::map<uint32_t, uint32_t> MeshGroupCounters;
+
+    struct MeshCluster {
+        MeshGroups        m_groups;
+        MeshGroupCounters m_counters;
+        uint32_t          m_total;
+
+        inline bool Add(Types::Mesh* mesh) {
+            int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
+            if (groupID < 0) {
+                Helper::Debug::Error("MeshCluster::Add() : failed get mesh group id to add mesh!");
+                return false;
+            }
+
+            auto find = this->m_groups.find(groupID);
+            if (find == m_groups.end())
+                m_groups[groupID] = {mesh};
+            else
+                find->second.push_back(mesh);
+
+            m_counters[groupID]++;
+            m_total++;
+
+            return true;
+        }
+
+        inline bool Remove(Types::Mesh* mesh) {
+            int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
+            if (groupID < 0) {
+                Helper::Debug::Error("MeshCluster::Remove() : failed get mesh group id to remove mesh!");
+                return false;
+            }
+
+            auto find = m_groups.find(groupID);
+            if (find == m_groups.end()) {
+                Helper::Debug::Error("MeshCluster::Remove() : mesh group to remove mesh not found!");
+                return false;
+            }
+
+            auto& meshes = find->second;
+            for (uint32_t i = 0; i < m_counters[groupID]; i++) {
+                if (meshes[i] == mesh) {
+                    m_counters[groupID]--;
+                    m_total--;
+
+                    meshes.erase(meshes.begin() + i);
+                    mesh->RemoveUsePoint();
+
+                    if (m_counters[groupID] == 0) {
+                        m_groups.erase(groupID);
+                        m_counters.erase(groupID);
+                    }
+                    return true;
+                }
+            }
+
+            Helper::Debug::Error("MeshCluster::Remove() : mesh not found!");
+
+            return false;
+        }
+    };
 
     using namespace Framework::Graphics::Types;
 
@@ -52,12 +113,8 @@ namespace Framework::Graphics {
         std::vector<Types::Mesh*>     m_removeMeshes             = std::vector<Mesh*>();
         size_t                        m_countMeshesToRemove      = 0;
 
-        MeshGroups                    m_meshGroups               = MeshGroups();
-        std::map<uint32_t, uint32_t>  m_countMeshesInGroups      = std::map<uint32_t, uint32_t>();
-        uint32_t                      m_totalCountMeshesInGroups = 0;
-
-        std::vector<Types::Mesh*>     m_transparent_meshes       = std::vector<Types::Mesh*>();
-        size_t                        m_countTransparentMeshes   = 0;
+        MeshCluster                   m_geometry                 = { };
+        MeshCluster                   m_transparentGeometry      = { };
 
         size_t                        m_countTexturesToFree      = 0;
         std::vector<Types::Texture*>  m_textureToFree            = std::vector<Types::Texture*>();
@@ -66,6 +123,7 @@ namespace Framework::Graphics {
         bool                          m_needSelectMeshes         = false;
 
         Shader*                       m_geometryShader           = nullptr;
+        Shader*                       m_transparentShader        = nullptr;
         Shader*                       m_flatGeometryShader       = nullptr;
         //Shader*                     m_skyboxShader             = nullptr;
         //Shader*                     m_gridShader               = nullptr;
@@ -84,12 +142,12 @@ namespace Framework::Graphics {
     public:
         static Render* Allocate();
     public:
-        [[nodiscard]] size_t GetAbsoluteCountMeshes() const noexcept { return m_totalCountMeshesInGroups + m_countTransparentMeshes; }
+        [[nodiscard]] size_t GetAbsoluteCountMeshes() const noexcept { return m_geometry.m_total + m_transparentGeometry.m_total; }
         [[nodiscard]] Types::Mesh* GetMesh(size_t absoluteID) noexcept;
 
         [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
         [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }
-        [[nodiscard]] size_t GetCountTransparentMeshes()  const noexcept { return m_countTransparentMeshes; }
+        [[nodiscard]] size_t GetCountTransparentMeshes()  const noexcept { return m_transparentGeometry.m_total; }
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsRun() const noexcept { return m_isRun; }
         [[nodiscard]] SR_FORCE_INLINE bool IsInit() const noexcept { return m_isInit; }

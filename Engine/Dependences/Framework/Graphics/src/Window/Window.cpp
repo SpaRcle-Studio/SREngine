@@ -49,7 +49,8 @@ bool Framework::Graphics::Window::Create() {
                 if (size.first > 0 && size.second > 0)
                     for (auto camera : m_cameras) {
                         if (camera->IsAllowUpdateProjection())
-                            camera->UpdateProjection(size.first, size.second);
+                            if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput())
+                                camera->UpdateProjection(size.first, size.second);
                     }
 
                 //float ratio = m_format.GetRatio();
@@ -217,6 +218,7 @@ void Framework::Graphics::Window::Thread() {
                         Helper::Debug::Info("Window::Thread() : re-build render...");
 
                         this->m_render->DrawGeometry();
+                        this->m_render->DrawTransparentGeometry();
                         this->m_render->DrawSkybox();
 
                         m_env->SetBuildState(true);
@@ -353,12 +355,6 @@ bool Framework::Graphics::Window::InitEnvironment() {
 
 void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* camera) {
     m_render->SetCurrentCamera(camera);
-    camera->GetPostProcessing()->BeginSkybox();
-    {
-        m_render->DrawSkybox();
-        m_render->DrawGrid();
-    }
-    camera->GetPostProcessing()->EndSkybox();
 
     camera->GetPostProcessing()->BeginGeometry();
     {
@@ -366,6 +362,15 @@ void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* came
         m_render->DrawTransparentGeometry();
     }
     camera->GetPostProcessing()->EndGeometry();
+
+    camera->GetPostProcessing()->BeginSkybox();
+    {
+        m_render->DrawSkybox();
+        m_render->DrawGrid();
+    }
+    camera->GetPostProcessing()->EndSkybox();
+
+    camera->GetPostProcessing()->Complete();
 
     if (m_requireGetAimed) {
         if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {

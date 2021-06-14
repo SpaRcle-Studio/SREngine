@@ -250,8 +250,6 @@ bool Framework::Graphics::OpenGL::CloseWindow() {
     return true;
 }
 
-
-
 void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) {
     //if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
     //    w = m_winFormat->Width();
@@ -509,25 +507,25 @@ bool Framework::Graphics::OpenGL::LinkShader(
     return true;
 }
 
-bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, unsigned int& rboDepth, unsigned int &hdrFBO, std::vector<unsigned int>& colorBuffers)const noexcept {
-    bool isNew = !((bool)hdrFBO);
+bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t &hdrFBO, std::vector<int32_t>& colorBuffers) {
+    bool isNew = hdrFBO <= 0;//!((bool)hdrFBO);
 
     if (size.x == 0 || size.y == 0){
-        Helper::Debug::Error("OpenGL::CreateHDRFrameBufferObject() : frame buffer has incorrect size!");
+        Helper::Debug::Error("OpenGL::CreateFrameBuffer() : frame buffer has incorrect size!");
         return false;
     }
 
     if (isNew){
-        Helper::Debug::Log("OpenGL::CreateHDRFrameBufferObject() : creating new frame buffers...");
+        Helper::Debug::Log("OpenGL::CreateFrameBuffer() : creating new frame buffers...");
     }
 
     if (isNew)
-        glGenFramebuffers(1, &hdrFBO);
+        glGenFramebuffers(1, reinterpret_cast<GLuint *>(&hdrFBO));
     glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
     // create n floating point color buffers (1 for normal rendering, other for brightness threshold values)
 
     if (isNew)
-        glGenTextures(colorBuffers.size(), colorBuffers.data());
+        glGenTextures(colorBuffers.size(), reinterpret_cast<GLuint *>(colorBuffers.data()));
 
     for (unsigned int i = 0; i < colorBuffers.size(); i++)
     {
@@ -542,7 +540,7 @@ bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, uns
     }
     // create and attach depth buffer (renderbuffer)
     if (isNew)
-        glGenRenderbuffers(1, &rboDepth);
+        glGenRenderbuffers(1, reinterpret_cast<GLuint *>(&rboDepth));
     glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, size.x, size.y);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
@@ -557,7 +555,7 @@ bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, uns
 
     // finally check if framebuffer is complete
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        Debug::Error("OpenGL::CreateHDRFrameBufferObject() : frame buffer is not complete!");
+        Debug::Error("OpenGL::CreateFrameBuffer() : frame buffer is not complete!");
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         return false;
     }
@@ -568,24 +566,24 @@ bool Framework::Graphics::OpenGL::CreateHDRFrameBufferObject(glm::vec2 size, uns
         for (size_t t = 0; t < colorBuffers.size(); t++)
             colorBfs += std::to_string(colorBuffers[t]) + (t+1 == colorBuffers.size() ? "" : ",");
 
-        Debug::Log("OpenGL::CreateHDRFrameBufferObject() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
+        Debug::Log("OpenGL::CreateFrameBuffer() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
             "\n\tHDR_FBO: "+std::to_string(hdrFBO) + colorBfs);
     }
 
     return true;
 }
 
-bool Framework::Graphics::OpenGL::CreatePingPongFrameBufferObject(
+bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
         glm::vec2 size,
-        std::vector<unsigned int> &pingpongFBO,
-        std::vector<unsigned int>& pingpongColorBuffers) const noexcept
+        std::vector<int32_t> &pingpongFBO,
+        std::vector<int32_t>& pingpongColorBuffers) const noexcept
 {
-    bool isNew = pingpongFBO[0] == 0;
+    bool isNew = pingpongFBO[0] <= 0;
 
     if (isNew) {
-        Debug::Log("OpenGL::CreatePingPongFrameBufferObject() : creating ping-pong frame buffers...");
-        glGenFramebuffers(pingpongFBO.size(), pingpongFBO.data());
-        glGenTextures(pingpongColorBuffers.size(), pingpongColorBuffers.data());
+        Debug::Log("OpenGL::CreatePingPongFrameBuffer() : creating ping-pong frame buffers...");
+        glGenFramebuffers(pingpongFBO.size(), reinterpret_cast<GLuint *>(pingpongFBO.data()));
+        glGenTextures(pingpongColorBuffers.size(), reinterpret_cast<GLuint *>(pingpongColorBuffers.data()));
     }
 
     for (unsigned int i = 0; i < pingpongFBO.size(); i++)
@@ -814,17 +812,17 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigned int &rboDepth, unsigned int &hdrFBO, unsigned int &colorBuffer) const noexcept{
-    bool isNew = !((bool)hdrFBO);
+bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &hdrFBO, int32_t &colorBuffer) const noexcept{
+    bool isNew = hdrFBO <= 0; //!((bool)hdrFBO);
 
     if (isNew)
-        Debug::Graph("OpenGL::CreateSingleHDRFrameBO() : creating new single frame buffer object...");
+        Debug::Graph("OpenGL::CreateSingleFrameBuffer() : creating new single frame buffer object...");
 
     if (isNew)
-        glGenFramebuffers(1, &hdrFBO);
+        glGenFramebuffers(1, reinterpret_cast<GLuint *>(&hdrFBO));
 
     if (isNew)
-        glGenTextures(1, &colorBuffer);
+        glGenTextures(1, reinterpret_cast<GLuint *>(&colorBuffer));
 
     glBindTexture(GL_TEXTURE_2D, colorBuffer);
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
@@ -841,12 +839,12 @@ bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigne
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
     }
     else {
-        Debug::Error("OpenGL::CreateSingleHDRFrameBO() : color buffer or FBO is not created!");
+        Debug::Error("OpenGL::CreateSingleFrameBuffer() : color buffer or FBO is not created!");
         return false;
     }
 
     if (isNew)
-        glGenRenderbuffers(1, &rboDepth);
+        glGenRenderbuffers(1, reinterpret_cast<GLuint *>(&rboDepth));
 
     glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, size.x, size.y);
@@ -856,7 +854,7 @@ bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigne
 
     // finally check if framebuffer is complete
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        Debug::Error("OpenGL::CreateSingleHDRFrameBO() : frame buffer is not complete!");
+        Debug::Error("OpenGL::CreateSingleFrameBuffer() : frame buffer is not complete!");
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         return false;
     }
@@ -864,7 +862,7 @@ bool Framework::Graphics::OpenGL::CreateSingleHDRFrameBO(glm::vec2 size, unsigne
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     if (isNew){
-        Debug::Log("OpenGL::CreateSingleHDRFrameBO() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
+        Debug::Log("OpenGL::CreateSingleFrameBuffer() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
                    "\n\tHDR_FBO: "+std::to_string(hdrFBO) + "\n\tColor buffer: "+std::to_string(colorBuffer));
     }
 
@@ -878,6 +876,17 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
         glDisable(GL_DEPTH_TEST);
 }
 
+[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTexture(uint32_t ID) const noexcept  {
+    glDeleteTextures(1, &ID);
+    return true;
+}
+
+[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTextures(int32_t *IDs, uint32_t count) const noexcept {
+    if (count == 0 || !IDs)
+        return false;
+    glDeleteTextures(count, reinterpret_cast<const GLuint *>(IDs));
+    return true;
+}
 
 
 

@@ -49,7 +49,6 @@ namespace Framework::Graphics {
         nlohmann::json Save() override;
 
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj; }
-
         [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const noexcept  { return m_isEnableDirectOut;        }
         [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetRotation()   const noexcept  { return { m_pitch, m_yaw, m_roll }; }
         [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetView()       const noexcept  { return this->m_viewMat;            }
@@ -100,13 +99,13 @@ namespace Framework::Graphics {
         glm::mat4	    m_viewMat           = glm::mat4(0);
         glm::vec3	    m_pos               = {0,0,0};
 
-        ProjViewUBO     m_ubo               = {};
+        ProjViewUBO     m_ubo               = { };
 
         bool            m_isEnableDirectOut = false;
         bool            m_allowUpdateProj   = true;
 
         float           m_far               = 8000.f;
-        float           m_near              = 0.1f;
+        float           m_near              = 0.01f;
 
         GUI::ICanvas*   m_canvas            = nullptr;
 

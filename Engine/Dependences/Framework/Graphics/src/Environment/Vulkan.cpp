@@ -134,7 +134,7 @@ namespace Framework::Graphics{
 
         m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
             m_kernel->SetSize(w, h);
-            g_callback(WinEvents::Resize, win, &w, &h);
+            //g_callback(WinEvents::Resize, win, &w, &h);
         });
 
         m_basicWindow->SetCallbackScroll([this](BasicWindow* win, double xoffset, double yoffset) {
@@ -379,7 +379,8 @@ namespace Framework::Graphics{
                 VulkanTools::AbstractCullModeToVk(shaderCreateInfo.cullMode),
                 VulkanTools::AbstractDepthOpToVk(shaderCreateInfo.depthCompare),
                 shaderCreateInfo.blendEnabled,
-                shaderCreateInfo.depthEnabled))
+                shaderCreateInfo.depthWrite,
+                shaderCreateInfo.depthTest))
         {
             Helper::Debug::Error("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;
@@ -388,5 +389,51 @@ namespace Framework::Graphics{
 
         delete dynamicID;
         return true;
+    }
+
+    bool Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
+        if (FBO >= 0) {
+            Helper::Debug::Warn("Vulkan::CreateFrameBuffer() : TODO!");
+            return true;
+        }
+
+        std::vector<VkFormat> formats = {};
+        for (uint32_t i = 0; i < colorBuffers.size(); i++)
+            formats.emplace_back(VK_FORMAT_R32G32B32A32_SFLOAT);
+
+        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, rboDepth);
+        if (FBO < 0) {
+            Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
+            return false;
+        }
+
+        // TODO: Depth color!
+
+        return true;
+    }
+
+    [[nodiscard]] bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const noexcept {
+        if (!IDs) {
+            Helper::Debug::Error("Vulkan::FreeTextures() : texture IDs is nullptr!");
+            return false;
+        }
+
+        for (uint32_t i = 0; i < count; i++) {
+            if (IDs[i] < 0) {
+                Helper::Debug::Error("Vulkan::FreeTextures() : texture ID less zero!");
+                return false;
+            }
+
+            if (!m_memory->FreeTexture((uint32_t)IDs[i])) {
+                Helper::Debug::Error("Vulkan::FreeTextures() : failed to free texture!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const noexcept {
+        return this->m_memory->FreeFBO(FBO);
     }
 }

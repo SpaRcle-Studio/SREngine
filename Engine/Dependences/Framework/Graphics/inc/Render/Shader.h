@@ -97,6 +97,8 @@ namespace Framework::Graphics {
          */
         bool SetUniforms(const std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>>& uniforms);
         bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
+
+        void CopyVertexAndUniformsInfo(const Shader* source);
     public:
         SR_FORCE_INLINE void SetUBO(const uint32_t& binding, void* data) {
 

@@ -37,16 +37,16 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
     if (!shader->Complete())
         return;
 
-    if (m_pipeline == PipeLine::OpenGL) {
-        if (m_needUpdate){
-            if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)){
-                Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
-                return;
-            }
-            m_needUpdate = false;
-            this->m_isBuffCalculate = true;
+    if (m_needUpdate){
+        if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)){
+            Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
+            return;
         }
+        m_needUpdate = false;
+        this->m_isBuffCalculate = true;
+    }
 
+    if (m_pipeline == PipeLine::OpenGL) {
         shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
     } else {
         m_ubo.view = this->m_viewMat;
@@ -188,16 +188,11 @@ nlohmann::json Framework::Graphics::Camera::Save() {
 }
 
 bool Framework::Graphics::Camera::Free() {
-    ///if (m_isUse && m_window && m_window->IsWindowOpen()) {
-     //   Debug::Error("Camera::Free() : camera used now!");
-    //    return false;
-    //}
-    //else{
-        Debug::Log("Camera::Free() : free camera pointer...");
-        this->m_postProcessing->Free();
-        delete this;
-        return true;
-   // }
+    Debug::Graph("Camera::Free() : free camera pointer...");
+    this->m_postProcessing->Destroy();
+    this->m_postProcessing->Free();
+    delete this;
+    return true;
 }
 
 bool Framework::Graphics::Camera::DrawOnInspector() {
