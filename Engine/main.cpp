@@ -60,7 +60,7 @@ int main() {
 
     // Register all components
     {
-        //Component::RegisterComponent("SkinnedMesh",      []() -> Component* { return new Mesh3D();       });
+        //Component::RegisterComponent("SkinnedMesh",      []() -> Component* { return new SkinnedMesh();  });
         Component::RegisterComponent("Mesh3D",             []() -> Component* { return new Mesh3D();       });
         Component::RegisterComponent("Rigidbody",          []() -> Rigidbody* { return new Rigidbody();    });
         Component::RegisterComponent("Camera",             []() -> Camera*    { return Camera::Allocate(); });

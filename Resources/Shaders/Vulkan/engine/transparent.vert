@@ -14,8 +14,11 @@ layout (binding = 1) uniform ProjViewUBO {
     mat4 view;
 } sharedUBO;
 
+layout (location = 0) out vec3 outPos;
+
 #extension GL_ARB_separate_shader_objects : enable
 
 void main() {
+    outPos = inNorm;
     gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vec4(inPos, 1.0);
 }

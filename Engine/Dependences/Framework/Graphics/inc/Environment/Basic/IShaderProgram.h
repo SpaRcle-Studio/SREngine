@@ -36,11 +36,13 @@ namespace Framework::Graphics {
     };
 
     static LayoutBinding GetBindingType(const std::string& line) {
-        if (Helper::StringUtils::Contains(line, "uniform"))
-            return LayoutBinding::Uniform;
+        //! first check sampler, after that check uniform
 
         if (Helper::StringUtils::Contains(line, "sampler2D"))
             return LayoutBinding::Sampler2D;
+
+        if (Helper::StringUtils::Contains(line, "uniform"))
+            return LayoutBinding::Uniform;
 
         return LayoutBinding::Unknown;
     }

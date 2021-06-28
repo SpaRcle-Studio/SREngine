@@ -50,6 +50,7 @@ namespace Framework::Graphics {
 
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj; }
         [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const noexcept  { return m_isEnableDirectOut;        }
+        [[nodiscard]] SR_FORCE_INLINE bool IsNeedUpdate()       const noexcept  { return m_needUpdate;               }
         [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetRotation()   const noexcept  { return { m_pitch, m_yaw, m_roll }; }
         [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetView()       const noexcept  { return this->m_viewMat;            }
         [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetProjection() const noexcept  { return this->m_projection;         }
@@ -73,6 +74,8 @@ namespace Framework::Graphics {
          \warning Call after shader use, and before draw. */
         void UpdateShader(Shader* shader) noexcept;
         void UpdateShaderProjView(Shader* shader) noexcept;
+
+        bool CompleteResize();
 
         void OnDestroyComponent() noexcept override {
             Debug::Error("Camera::OnDestroyComponent() : TODO!");

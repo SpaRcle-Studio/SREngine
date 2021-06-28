@@ -54,7 +54,8 @@ namespace Framework::Graphics::Types {
                 Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", false);
             }
         }
-        void Use() const noexcept;
+        void UseVulkan();
+        void UseOpenGL() const noexcept;
     public:
         bool SetTransparent(bool value);
         bool SetMesh(Mesh* mesh);

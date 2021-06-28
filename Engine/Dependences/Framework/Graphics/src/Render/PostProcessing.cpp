@@ -69,9 +69,13 @@ bool Framework::Graphics::PostProcessing::Destroy() {
 }
 
 bool Framework::Graphics::PostProcessing::OnResize(uint32_t w, uint32_t h) {
+    Helper::Debug::Graph("PostProcessing::OnResize() : re-create frame buffers...");
+
     if (!m_env->CreateFrameBuffer({w, h}, m_depth, m_frameBuffer, m_colors)) {
         Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create frame buffer object!");
         return false;
     }
+
+    return true;
 }
 

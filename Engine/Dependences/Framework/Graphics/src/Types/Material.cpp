@@ -68,7 +68,7 @@ Material::~Material() {
     }
 }
 
-void Material::Use() const noexcept {
+void Material::UseOpenGL() const noexcept {
     if (m_diffuse) {
         m_env->BindTexture(4, m_diffuse->GetID());
         m_mesh->m_shader->SetInt("diffuseMap", 4);
@@ -78,6 +78,18 @@ void Material::Use() const noexcept {
         //m_mesh->m_shader->SetInt("diffuseMap", 1);
         //_mesh->m_shader->SetBool("hasDiffuse", false);
     //}
+}
+
+void Material::UseVulkan() {
+    /*
+     *   0 - model
+     *   1 - view/proj
+     *   2 - diffuse
+     */
+
+    if (m_diffuse) {
+        m_env->BindTexture(2, m_diffuse->GetID());
+    }
 }
 
 bool Material::SetMesh(Mesh *mesh) {

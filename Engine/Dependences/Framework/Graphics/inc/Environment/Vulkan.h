@@ -160,6 +160,8 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const noexcept override { return PipeLine::Vulkan; }
         [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const noexcept override { return m_kernel->GetCountBuildIterations(); }
     public:
+        uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
+
         bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool Init(int swapInterval) override;
         bool PostInit() override;
@@ -344,6 +346,14 @@ namespace Framework::Graphics {
             //this->m_descriptorSets[binding] = m_memory->m_descriptorSets[descriptorSet].m_self;
             this->m_currentDesrSets = m_memory->m_descriptorSets[descriptorSet].m_self;
         }
+        int32_t CalculateTexture(
+                uint8_t* data,
+                TextureFormat format,
+                uint32_t w, uint32_t h,
+                TextureFilter filter,
+                TextureCompression compression,
+                uint8_t mipLevels,
+                bool alpha) const noexcept override;
 
         SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
             auto id = this->m_memory->AllocateVBO(vertSize * count, vertices);
@@ -383,12 +393,40 @@ namespace Framework::Graphics {
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
             vkCmdBindIndexBuffer(m_currentCmd, m_memory->m_IBOs[IBO]->m_buffer, 0, VK_INDEX_TYPE_UINT32);
         }
+        SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t& ID) const noexcept override {
+            if (ID >= m_memory->m_countTextures) {
+                Helper::Debug::Error("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
+                return;
+            }
+
+            if (!m_memory->m_textures[ID]) {
+                Helper::Debug::Error("Vulkan::BindTexture() : texture is not exists!");
+                return;
+            }
+
+            auto descriptorSet = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                    m_memory->m_descriptorSets[m_currentDescID].m_self,
+                    VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, activeTexture,
+                    m_memory->m_textures[ID]->GetDescriptorRef());
+
+            vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
+        }
 
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override { return this->m_memory->FreeIBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept override { return this->m_memory->FreeUBO(ID); }
 
-        [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept;
+        [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept override;
+
+        [[nodiscard]] bool FreeTexture(uint32_t ID) const noexcept override {
+            if (!m_memory->FreeTexture((uint32_t)ID)) {
+                Helper::Debug::Error("Vulkan::FreeTexture() : failed to free texture!");
+                return false;
+            }
+
+            return true;
+        }
+
         [[nodiscard]] bool FreeFBO(uint32_t FBO) const noexcept override;
     };
 }

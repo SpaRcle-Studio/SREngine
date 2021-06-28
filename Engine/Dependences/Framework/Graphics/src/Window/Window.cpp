@@ -49,8 +49,9 @@ bool Framework::Graphics::Window::Create() {
                 if (size.first > 0 && size.second > 0)
                     for (auto camera : m_cameras) {
                         if (camera->IsAllowUpdateProjection())
-                            if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput())
+                            if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
                                 camera->UpdateProjection(size.first, size.second);
+                            }
                     }
 
                 //float ratio = m_format.GetRatio();

@@ -8,7 +8,7 @@
 #include <mutex>
 #include <ResourceManager/IResource.h>
 #include <Environment/Environment.h>
-#include <Environment/TextureFilters.h>
+#include <Environment/TextureEnums.h>
 #include <macros.h>
 
 namespace Framework::Graphics{
@@ -24,24 +24,30 @@ namespace Framework::Graphics::Types {
         Texture();
         ~Texture();
     private:
-        inline static Environment*      m_env           = nullptr;
+        inline static Environment* m_env           = nullptr;
 
-        unsigned int                    m_ID            = 0;
+        int32_t                    m_ID            = 0;
 
-        unsigned int                    m_width         = 0;
-        unsigned int                    m_height        = 0;
+        uint32_t                   m_width         = 0;
+        uint32_t                   m_height        = 0;
 
-        int                             m_format        = 0;
+        TextureFormat              m_format        = TextureFormat::Unknown;
+        TextureCompression         m_compression   = TextureCompression::None;
 
-        unsigned char*                  m_data          = nullptr;
+        uint8_t                    m_mipLevels     = 0;
 
-        volatile bool                   m_isCalculate   = false;
+        bool                       m_alpha         = false;
 
-        Render*                         m_render        = nullptr;
+        unsigned char*             m_data          = nullptr;
 
-        std::mutex                      m_mutex         = std::mutex();
-        TextureType                     m_type          = TextureType::Unknown;
-        TextureFilter                   m_filter        = TextureFilter::Unknown;
+        volatile bool              m_isCalculate   = false;
+        bool                       m_hasErrors     = false;
+
+        Render*                    m_render        = nullptr;
+
+        std::mutex                 m_mutex         = std::mutex();
+        TextureType                m_type          = TextureType::Unknown;
+        TextureFilter              m_filter        = TextureFilter::Unknown;
     private:
         bool Calculate();
     public:
@@ -50,16 +56,16 @@ namespace Framework::Graphics::Types {
         void SetRender(Render* render);
 
         [[nodiscard]] SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculate; }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetID() noexcept {
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetID() noexcept {
             if (m_isDestroy) {
                 Debug::Error("Texture::GetID() : texture \""+m_resource_id+"\" is destroyed!");
-                return 0;
+                return -1;
             }
 
             if (!m_isCalculate)
                 if (!Calculate()) {
                     Debug::Error("Texture::GetID() : failed calculating texture!");
-                    return 0;
+                    return -1;
                 }
 
             return m_ID;
@@ -80,7 +86,14 @@ namespace Framework::Graphics::Types {
         }
         //Texture* Copy();
     public:
-        static Texture* Load(const std::string& path, bool autoRemove = false, TextureType type = TextureType::Diffuse, TextureFilter filter = TextureFilter::NEAREST);
+        static Texture* Load(
+                const std::string& path,
+                TextureFormat format,
+                bool autoRemove = false,
+                TextureType type = TextureType::Diffuse,
+                TextureFilter filter = TextureFilter::NEAREST,
+                TextureCompression compression = TextureCompression::None,
+                uint8_t mipLevels = 1);
     public:
         bool Free() override {
             delete this;

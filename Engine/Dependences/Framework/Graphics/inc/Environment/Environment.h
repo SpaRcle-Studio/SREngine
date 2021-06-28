@@ -13,7 +13,7 @@
 #include <functional>
 #include <glm/glm.hpp>
 //#include <Environment/Vertex.h>
-#include <Environment/TextureFilters.h>
+#include <Environment/TextureEnums.h>
 #include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
 #include <Environment/Basic/IShaderProgram.h>
@@ -49,6 +49,7 @@ namespace Framework::Graphics {
         BasicWindow*    m_basicWindow           = nullptr;
         bool            m_hasErrors             = false;
 
+        int32_t         m_currentDescID         = -1;
         int             m_currentShaderID       = -1;
         __int16         m_preferredDevice       = -1;
         unsigned __int8 m_currentBuildIteration = 0;
@@ -67,7 +68,10 @@ namespace Framework::Graphics {
         void SetBuildState(const bool& isBuild)      { m_needReBuild = !isBuild;        }
 
         /// \warning Could be the cause of a critical error
-        void SetBuildIteration(const uint8_t& iter)  { m_currentBuildIteration = iter;  }
+        void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
+        void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
+
+        virtual uint64_t GetVRAMUsage() { return 0; }
 
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const noexcept { return m_currentFBO;      }
 
@@ -275,11 +279,11 @@ namespace Framework::Graphics {
         // ============================== [ TEXTURE METHODS ] ==============================
 
         virtual SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const noexcept { }
-        virtual SR_FORCE_INLINE void BindTexture(unsigned char activeTexture, const uint32_t&  ID) const noexcept { }
+        virtual SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t&  ID) const noexcept { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const noexcept { }
-        virtual uint32_t CalculateTexture(unsigned char* data, int format, uint32_t w, uint32_t h, TextureFilter filter, bool alpha) const noexcept { return -1; }
-        [[nodiscard]] virtual uint32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
         virtual SR_FORCE_INLINE void FreeCubeMap(uint32_t ID) const noexcept { }
+
+        [[nodiscard]] virtual uint32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept { return false; }
@@ -288,6 +292,20 @@ namespace Framework::Graphics {
         [[nodiscard]] virtual bool FreeRBO(uint32_t RBO) const noexcept { return false; }
         [[nodiscard]] virtual bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept { return false; }
         [[nodiscard]] virtual bool FreeTexture(uint32_t ID) const noexcept { return false; }
+
+        /* mipLevels :
+              0 - auto
+              1 - without
+              2,3,4,5...
+         */
+        virtual int32_t CalculateTexture(
+                uint8_t * data,
+                TextureFormat format,
+                uint32_t w, uint32_t h,
+                TextureFilter filter,
+                TextureCompression compression,
+                uint8_t mipLevels,
+                bool alpha) const noexcept { return -1; }
     };
 }
 

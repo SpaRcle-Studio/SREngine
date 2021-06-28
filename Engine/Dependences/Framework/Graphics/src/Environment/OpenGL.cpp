@@ -620,10 +620,15 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
     return true;
 }
 
-unsigned int Framework::Graphics::OpenGL::CalculateTexture(
-        unsigned char *data, int format, unsigned int w, unsigned int h,
-        Framework::Graphics::TextureFilter filter, bool alpha
-)const noexcept {
+int32_t Framework::Graphics::OpenGL::CalculateTexture(
+        uint8_t *data,
+        TextureFormat format,
+        uint32_t w, uint32_t h,
+        Framework::Graphics::TextureFilter filter,
+        TextureCompression compression,
+        uint8_t mipLevels,
+        bool alpha
+) const noexcept {
     //glActiveTexture(GL_TEXTURE0);
 
     unsigned int id;
@@ -649,7 +654,8 @@ unsigned int Framework::Graphics::OpenGL::CalculateTexture(
 
     glBindTexture(GL_TEXTURE_2D, id);
 
-    GLuint compress = format == 4 ? GL_COMPRESSED_RGBA_S3TC_DXT5_EXT : GL_COMPRESSED_RGB_S3TC_DXT1_EXT; //GL_RGBA16F
+    // TODO: use alpha or format == 4 ?????????
+    GLuint compress = alpha ? GL_COMPRESSED_RGBA_S3TC_DXT5_EXT : GL_COMPRESSED_RGB_S3TC_DXT1_EXT; //GL_RGBA16F
     glTexImage2D(GL_TEXTURE_2D, 0, compress, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter);

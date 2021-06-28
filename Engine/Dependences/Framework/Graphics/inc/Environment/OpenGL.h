@@ -494,14 +494,21 @@ namespace Framework::Graphics {
             glBindTexture(GL_TEXTURE_2D, ID);
         }
 
-        SR_FORCE_INLINE void BindTexture(const unsigned char activeTexture, const uint32_t&  ID) const noexcept override{
+        SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t&  ID) const noexcept override {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
             glBindTexture(GL_TEXTURE_2D, ID);
         }
         SR_FORCE_INLINE void SetActiveTexture(const unsigned char activeTexture) const noexcept override {
             glActiveTexture(GL_TEXTURE0 + activeTexture);
         }
-        uint32_t CalculateTexture(unsigned char* data, int format, uint32_t w, uint32_t h, TextureFilter filter, bool alpha)const noexcept override;
+        int32_t CalculateTexture(
+                uint8_t* data,
+                TextureFormat format,
+                uint32_t w, uint32_t h,
+                TextureFilter filter,
+                TextureCompression compression,
+                uint8_t mipLevels,
+                bool alpha) const noexcept override;
         [[nodiscard]] uint32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::vector<unsigned char*>& data) const noexcept override;
         SR_FORCE_INLINE void FreeCubeMap(uint32_t ID)const noexcept override{
             Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");

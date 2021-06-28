@@ -11,17 +11,15 @@
 
 void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shader *shader) noexcept {
     if (!m_isCreate) {
-        Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
+        Debug::Warn("Camera::UpdateShaderProjView() : camera is not create! Something went wrong...");
         return;
     }
 
-    if (m_needUpdate){
-        if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)){
-            Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
+    if (m_needUpdate) {
+        if (!CompleteResize()) {
+            Debug::Error("Camera::UpdateShaderProjView() : failed to complete resize!");
             return;
         }
-        m_needUpdate = false;
-        this->m_isBuffCalculate = true;
     }
 
     shader->SetMat4("viewMat", this->m_viewMat);
@@ -37,13 +35,11 @@ void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shad
     if (!shader->Complete())
         return;
 
-    if (m_needUpdate){
-        if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)){
-            Debug::Error("Camera::UpdateShader() : failed recalculated frame buffers!");
+    if (m_needUpdate) {
+        if (!CompleteResize()) {
+            Debug::Error("Camera::UpdateShader() : failed to complete resize!");
             return;
         }
-        m_needUpdate = false;
-        this->m_isBuffCalculate = true;
     }
 
     if (m_pipeline == PipeLine::OpenGL) {
@@ -259,6 +255,18 @@ Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate() {
         return nullptr;
     }
     return camera;
+}
+
+bool Framework::Graphics::Camera::CompleteResize() {
+    if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)) {
+        Debug::Error("Camera::CompleteResize() : failed recalculated frame buffers!");
+        return false;
+    }
+
+    m_needUpdate = false;
+    this->m_isBuffCalculate = true;
+
+    return true;
 }
 
 

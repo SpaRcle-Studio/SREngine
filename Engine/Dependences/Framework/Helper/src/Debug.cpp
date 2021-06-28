@@ -30,6 +30,7 @@ namespace Framework::Helper {
                 case Debug::Type::Warn:	        pref = "[Warn] ";	        color = ConsoleColor::Yellow;	      break;
                 case Debug::Type::Error:	    pref = "[Error] ";	        color = ConsoleColor::LightRed;	      break;
                 case Debug::Type::ScriptError:	pref = "[ScriptError] ";	color = ConsoleColor::LightRed;	      break;
+                case Debug::Type::VulkanError:	pref = "[VulkanError] ";	color = ConsoleColor::LightRed;	      break;
                 case Debug::Type::ScriptLog:	pref = "[ScriptLog] ";	    color = ConsoleColor::LightCyan;      break;
                 default:					    pref = "[Unk] ";	        color = ConsoleColor::Black;	      break;
             }

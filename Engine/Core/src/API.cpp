@@ -398,32 +398,70 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
 
     // Texture & TextureFilter & TextureType
     compiler->RegisterScriptClass("Graphics", [](lua_State* L) {
-        static int texTypeDiff      = (int)Graphics::TextureType::Diffuse;
-        static int texTypeNorm      = (int)Graphics::TextureType::Normal;
-        static int texTypeSpec      = (int)Graphics::TextureType::Specular;
-        static int texTypeGlos      = (int)Graphics::TextureType::Glossiness;
-        static int texTypeRoug      = (int)Graphics::TextureType::Roughness;
+        static int texTypeDiff          = (int)Graphics::TextureType::Diffuse;
+        static int texTypeNorm          = (int)Graphics::TextureType::Normal;
+        static int texTypeSpec          = (int)Graphics::TextureType::Specular;
+        static int texTypeGlos          = (int)Graphics::TextureType::Glossiness;
+        static int texTypeRoug          = (int)Graphics::TextureType::Roughness;
 
-        static int texFilterNear    = (int)Graphics::TextureFilter::NEAREST;
-        static int texFilterLine    = (int)Graphics::TextureFilter::LINEAR;
+        static int texFilterNear        = (int)Graphics::TextureFilter::NEAREST;
+        static int texFilterLine        = (int)Graphics::TextureFilter::LINEAR;
+
+        static int texFormatRGBA8_SRGB  = (int)Graphics::TextureFormat::RGBA8_SRGB;
+        static int texFormatRGBA8_UNORM = (int)Graphics::TextureFormat::RGBA8_UNORM;
+
+        static int texCompNone = (int)Graphics::TextureCompression::None;
+        static int texCompBC1 = (int)Graphics::TextureCompression::BC1;
+        static int texCompBC2 = (int)Graphics::TextureCompression::BC2;
+        static int texCompBC3 = (int)Graphics::TextureCompression::BC3;
+        static int texCompBC4 = (int)Graphics::TextureCompression::BC4;
+        static int texCompBC5 = (int)Graphics::TextureCompression::BC5;
+        static int texCompBC6 = (int)Graphics::TextureCompression::BC6;
+        static int texCompBC7 = (int)Graphics::TextureCompression::BC7;
 
         luabridge::getGlobalNamespace(L)
                 .beginNamespace("TextureType")
-                .addProperty("Diffuse",     &texTypeDiff)
-                .addProperty("Normal",      &texTypeNorm)
-                .addProperty("Specular",    &texTypeSpec)
-                .addProperty("Glossiness",  &texTypeGlos)
-                .addProperty("Roughness",   &texTypeRoug)
+                    .addProperty("Diffuse",     &texTypeDiff)
+                    .addProperty("Normal",      &texTypeNorm)
+                    .addProperty("Specular",    &texTypeSpec)
+                    .addProperty("Glossiness",  &texTypeGlos)
+                    .addProperty("Roughness",   &texTypeRoug)
                 .endNamespace()
 
                 .beginNamespace("TextureFilter")
-                .addProperty("NEAREST",     &texFilterNear)
-                .addProperty("LINEAR",      &texFilterLine)
+                    .addProperty("NEAREST",     &texFilterNear)
+                    .addProperty("LINEAR",      &texFilterLine)
                 .endNamespace()
 
+                .beginNamespace("TextureFormat")
+                    .addProperty("RGBA8_SRGB",  &texFormatRGBA8_SRGB)
+                    .addProperty("RGBA8_UNORM", &texFormatRGBA8_UNORM)
+                .endNamespace()
+
+                .beginNamespace("TextureComp")
+                    .addProperty("None", &texCompNone)
+                    .addProperty("BC1", &texCompBC1)
+                    .addProperty("BC2", &texCompBC2)
+                    .addProperty("BC3", &texCompBC3)
+                    .addProperty("BC4", &texCompBC4)
+                    .addProperty("BC5", &texCompBC5)
+                    .addProperty("BC6", &texCompBC6)
+                    .addProperty("BC7", &texCompBC7)
+                .endNamespace()
+
+
                 .beginClass<Graphics::Texture>("Texture")
-                .addStaticFunction("Load", static_cast<Graphics::Texture*(*)(const std::string&, bool, int, int)>([](const std::string& name, bool autoRemove, int type, int filter) -> Graphics::Texture* {
-                    return Texture::Load(name, autoRemove, (Graphics::TextureType)type, (Graphics::TextureFilter)filter);
+                .addStaticFunction("Load", static_cast<Graphics::Texture*(*)(
+                        const std::string&, int, bool, int, int, int)>([](
+                        const std::string& name, int format, bool autoRemove, int type, int filter, int compression) -> Graphics::Texture*
+                {
+                    return Texture::Load(
+                            name,
+                            static_cast<Graphics::TextureFormat>(format),
+                            autoRemove,
+                            (Graphics::TextureType)type,
+                            (Graphics::TextureFilter)filter,
+                            static_cast<Graphics::TextureCompression>(compression));
                 }))
                 .endClass();
     });

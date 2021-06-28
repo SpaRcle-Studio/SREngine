@@ -40,28 +40,36 @@ function LoadCamera()
     collectgarbage() -- collect memory
 end;
 
+
+--local mesh2 = mesh:Copy();
+--render:RegisterMesh(mesh2);
+--local cube2 = scene:Instance("Cube2");
+--cube2:AddComponent(mesh2:Base());
+--cube2:GetTransform():Translate(Vector3.FMul(cube2:GetTransform():Forward(), 8.0), true);
+--cube2:GetTransform():Rotate(Vector3.New(0, -90, 0), false);
+
+--local mesh3 = mesh:Copy()
+--render:RegisterMesh(mesh3);
+--scene:Instance("Cube3"):AddComponent(mesh3:Base());
+
+
 function Start()
     Debug.Log("Starting main engine script...");
 
     window:Resize(848, 480);
     window:CentralizeWindow();
 
+    local texture = Texture.Load("brickwall2.jpg", TextureFormat.RGBA8_SRGB, true, TextureType.Diffuse, TextureFilter.LINEAR, TextureComp.None);
+    render:RegisterTexture(texture);
+
     local mesh = Mesh.LoadWithIndices("engine/cube.obj", 0);
+    mesh:GetMaterial():SetDiffuse(texture);
     render:RegisterMesh(mesh);
 
     local cube1 = scene:Instance("Cube");
     cube1:AddComponent(mesh:Base());
-    cube1:GetTransform():Translate(
-        Vector3.FMul(cube1:GetTransform():Forward(), 4.0), true
-    );
-    ---------------------
-
-    local mesh2 = mesh:Copy();
-    render:RegisterMesh(mesh2);
-
-    scene:Instance("Cube2"):AddComponent(mesh2:Base());
-
-    ---------------------
+    --cube1:GetTransform():Translate(Vector3.FMul(cube1:GetTransform():Forward(), 4.0), true);
+    --cube1:GetTransform():Rotate(Vector3.New(45, 45, 45), false);
 
     LoadCamera();
 

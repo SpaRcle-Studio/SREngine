@@ -12,6 +12,7 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ObjLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/FbxLoader.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureCompressor.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ImageLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureLoader.cpp
 
@@ -33,6 +34,7 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanMemory.cpp
 
         ############################################################
 
@@ -51,6 +53,7 @@ set(GRAPHICS_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Graphics/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/EvoVulkan/Core/inc
+        ${FRAMEWORK_ROOT_DIR}/Depends/cmp_core/source
 
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
         #${FRAMEWORK_ROOT_DIR}/Depends/vulkan/vulkan

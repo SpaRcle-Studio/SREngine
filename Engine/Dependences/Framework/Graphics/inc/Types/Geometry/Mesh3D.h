@@ -48,6 +48,11 @@ namespace Framework::Graphics::Types {
                 });
 
                 Mesh3DUBO ubo = { m_modelMat }; m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3DUBO));
+
+                //!==========================
+
+                this->m_env->SetDescriptorID(m_descriptorSet);
+                this->m_material->UseVulkan();
             }
 
             if (!m_isCalculated)

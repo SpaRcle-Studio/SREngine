@@ -37,8 +37,8 @@ namespace Framework::Graphics::Impl {
                     this->m_env->SetViewport();
                     this->m_env->SetScissor();
 
-                    //Shader::GetDefaultGeometryShader()->Use();
-                    m_transparentShader->Use();
+                    Shader::GetDefaultGeometryShader()->Use();
+                    //m_transparentShader->Use();
 
                     for (auto const& [key, val] : m_geometry.m_groups) {
                         this->m_env->BindVBO(val[0]->FastGetVBO());

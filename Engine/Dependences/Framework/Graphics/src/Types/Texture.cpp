@@ -50,7 +50,15 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     return true;
 }
 
-Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(const std::string& localPath, bool autoRemove, TextureType type, TextureFilter filter) {
+Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
+        const std::string& localPath,
+        TextureFormat format,
+        bool autoRemove,
+        TextureType type,
+        TextureFilter filter,
+        TextureCompression compression,
+        uint8_t mipLevels)
+{
     std::string path = ResourceManager::GetResourcesFolder() + "/Textures/"+ localPath;
 
 #ifdef WIN32
@@ -77,6 +85,9 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(c
         texture->m_autoRemove = autoRemove;
         texture->m_type = type;
         texture->m_filter = filter;
+        texture->m_format = format;
+        texture->m_compression = compression;
+        texture->m_mipLevels = mipLevels;
     }
 
     return texture;
@@ -104,11 +115,11 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Texture::Calculate() : calculating \""+ m_resource_id +"\" texture...");
 
-    m_ID = m_env->CalculateTexture(m_data, m_format, m_width, m_height, m_filter, m_format == 4);
-    if (!m_ID){
+    m_ID = m_env->CalculateTexture(m_data, m_format, m_width, m_height, m_filter, m_compression, m_mipLevels, m_alpha);
+    if (m_ID < 0) { // TODO: vulkan can be return 0 as correct value
         Debug::Error("Texture::Calculate() : failed calculate texture!");
         return false;
-    }else{
+    } else {
         TextureLoader::Free(m_data);
         m_data = nullptr;
     }

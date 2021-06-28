@@ -202,7 +202,7 @@ namespace Framework::Graphics::Types {
             }
             else {
                 ConfigureShader(m_shader)
-                this->m_material->Use();
+                this->m_material->UseOpenGL();
             }
 
             this->m_env->DrawTriangles(m_countVertices);
@@ -223,7 +223,7 @@ namespace Framework::Graphics::Types {
             }
             else {
                 ConfigureShader(m_shader)
-                this->m_material->Use();
+                this->m_material->UseOpenGL();
             }
 
             this->m_env->DrawLines(m_VAO, m_countVertices);

@@ -18,6 +18,29 @@ namespace Framework::Graphics{
             }
         }
 
+        static VkFilter AbstractTextureFilterToVkFilter(const TextureFilter& filter) {
+            switch (filter) {
+                case TextureFilter::NEAREST: return VK_FILTER_NEAREST;
+                case TextureFilter::LINEAR:  return VK_FILTER_LINEAR;
+
+                case TextureFilter::NEAREST_MIPMAP_NEAREST:
+                case TextureFilter::LINEAR_MIPMAP_NEAREST:
+                case TextureFilter::NEAREST_MIPMAP_LINEAR:
+                case TextureFilter::LINEAR_MIPMAP_LINEAR:
+                case TextureFilter::Unknown:
+                    return VK_FILTER_MAX_ENUM;
+            }
+        }
+
+        static VkFormat AbstractTextureFormatToVkFormat(const TextureFormat& format, bool alpha) {
+            switch (format) {
+                case TextureFormat::Unknown:      return VK_FORMAT_MAX_ENUM;
+                case TextureFormat::RGBA8_UNORM:  return alpha ? VK_FORMAT_R8G8B8A8_UNORM     : VK_FORMAT_R8G8B8_UNORM;
+                case TextureFormat::RGBA16_UNORM: return alpha ? VK_FORMAT_R16G16B16A16_UNORM : VK_FORMAT_R16G16B16_UNORM;
+                case TextureFormat::RGBA8_SRGB:   return alpha ? VK_FORMAT_R8G8B8A8_SRGB      : VK_FORMAT_R8G8B8_SRGB;
+            }
+        }
+
         static std::vector<VkVertexInputBindingDescription> AbstractVertexDescriptionsToVk(const std::vector<SR_VERTEX_DESCRIPTION>& descriptions) {
             auto vkDescriptions = std::vector<VkVertexInputBindingDescription>();
 
@@ -95,11 +118,13 @@ namespace Framework::Graphics{
         }
     }
 
+#define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
+
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
-        EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(msg); };
-        EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);      };
-        EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::Error(msg);     };
-        EvoVulkan::Tools::VkDebug::Graph = [](const std::string& msg) { Helper::Debug::Vulkan(msg);    };
+        EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(SR_VRAM   + msg); };
+        EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
+        EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Graph = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
 
         this->m_kernel = new SRVulkan();
         Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
@@ -393,13 +418,15 @@ namespace Framework::Graphics{
 
     bool Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
         if (FBO >= 0) {
-            Helper::Debug::Warn("Vulkan::CreateFrameBuffer() : TODO!");
+            if (!this->m_memory->ReAllocateFBO(FBO, size.x, size.y, colorBuffers, rboDepth)) {
+                Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
+            }
             return true;
         }
 
         std::vector<VkFormat> formats = {};
         for (uint32_t i = 0; i < colorBuffers.size(); i++)
-            formats.emplace_back(VK_FORMAT_R32G32B32A32_SFLOAT);
+            formats.emplace_back(VK_FORMAT_R8G8B8A8_UNORM);
 
         FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, rboDepth);
         if (FBO < 0) {
@@ -435,5 +462,30 @@ namespace Framework::Graphics{
 
     [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const noexcept {
         return this->m_memory->FreeFBO(FBO);
+    }
+
+    int32_t Vulkan::CalculateTexture(
+            uint8_t* data,
+            TextureFormat format,
+            uint32_t w,
+            uint32_t h,
+            TextureFilter filter,
+            TextureCompression compression,
+            uint8_t mipLevels,
+            bool alpha // unused
+    ) const noexcept {
+        auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format, true /* alpha */);
+
+        auto ID = this->m_memory->AllocateTexture(
+                data, w, h, vkFormat,
+                VulkanTools::AbstractTextureFilterToVkFilter(filter),
+                compression, mipLevels);
+
+        if (ID < 0) {
+            Helper::Debug::Error("Vulkan::CalculateTexture() : failed to allocate texture!");
+            return -1;
+        }
+
+        return ID;
     }
 }

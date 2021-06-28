@@ -25,7 +25,7 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
     {
         int width, height, numComponents;
 
-        unsigned char* imgData = stbi_load(path.c_str(), &width, &height, &numComponents, 4);
+        unsigned char* imgData = stbi_load(path.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
 
         if (!imgData) {
             Helper::Debug::Error("TextureLoader::Load() : can not load \""+path + "\" file!");
@@ -37,7 +37,7 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
         texture->m_height = height;
         texture->m_width  = width;
         texture->m_data   = imgData;
-        texture->m_format = numComponents;
+        texture->m_alpha  = numComponents == 4;
     }
 
     //texture->m_resource_id = path;

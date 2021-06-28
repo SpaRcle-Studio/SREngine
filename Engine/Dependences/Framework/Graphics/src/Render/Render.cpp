@@ -29,7 +29,7 @@ bool Framework::Graphics::Render::Create(Window* window) {
                 {Vertices::Mesh3DVertex::GetDescription()},
                 Vertices::Mesh3DVertex::GetAttributes());
         this->m_geometryShader->SetUniforms({
-                {{0, UBOType::Common}, sizeof(Mesh3DUBO)}, // binding 0 - mesh   (model mat)
+                {{0, UBOType::Common}, sizeof(Mesh3DUBO)},   // binding 0 - mesh   (model mat)
                 {{5, UBOType::Shared}, sizeof(ProjViewUBO)}, // binding 1 - shader (view & proj mat)
         });
         /*
