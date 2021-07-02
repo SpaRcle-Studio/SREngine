@@ -4,7 +4,7 @@
 
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
-//#include <easy/profiler.h>
+
 #include <Environment/Environment.h>
 #include <GL/glew.h>
 #include <GL/wglew.h>
@@ -28,7 +28,7 @@ namespace Framework::Graphics {
     class OpenGL : public Environment {
         OpenGL(OpenGL&) = delete;
     public:
-        OpenGL() = default;
+        OpenGL()  = default;
         ~OpenGL() = default;
     private:
 #ifdef  SR_OPENGL_USE_WINAPI
@@ -39,17 +39,14 @@ namespace Framework::Graphics {
         const GLFWvidmode*      m_vidMode         = nullptr;
 #endif
     public:
-        bool PreInitGUI(const std::string& fontPath) override;
         bool InitGUI() override;
         bool StopGUI() override;
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
-        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport() const noexcept override {
-            return true;
-        }
+        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()  const noexcept override { return true; }
         [[nodiscard]] SR_FORCE_INLINE bool IsDrawSupport() const noexcept override { return true; }
 
-        [[nodiscard]] inline std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
+        [[nodiscard]] inline std::string GetPipeLineName()   const noexcept override { return "OpenGL"; }
         [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept override { return PipeLine::OpenGL; }
 
         uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) override;

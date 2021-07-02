@@ -13,7 +13,7 @@
 #include <functional>
 #include <glm/glm.hpp>
 //#include <Environment/Vertex.h>
-#include <Environment/TextureEnums.h>
+#include <Environment/TextureHelper.h>
 #include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
 #include <Environment/Basic/IShaderProgram.h>
@@ -57,7 +57,7 @@ namespace Framework::Graphics {
 
         bool            m_needReBuild           = false;
     protected:
-        Environment() = default;
+        Environment()  = default;
         ~Environment() = default;
     private:
         inline static Environment* g_environment = nullptr;
@@ -85,15 +85,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const noexcept { return false;             }
         [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const noexcept { return PipeLine::Unknown; }
 
-        bool InitWindowFormat(const Types::WindowFormat& windowFormat) {
-            if (m_winFormat)
-                return false;
-            else {
-                this->m_winFormat = Types::WindowFormat::AllocMemory();
-                this->m_winFormat->SetFormat(windowFormat);
-                return true;
-            }
-        }
+        bool InitWindowFormat(const Types::WindowFormat& windowFormat);
 
         SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -122,7 +114,7 @@ namespace Framework::Graphics {
 
         static inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = std::move(callback); }
     public:
-        virtual bool PreInitGUI(const std::string& fontPath) { return false; };
+        virtual bool PreInitGUI(const std::string& fontPath);
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }
         virtual bool BeginDrawGUI() { return false; }

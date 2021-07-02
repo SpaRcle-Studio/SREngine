@@ -176,7 +176,7 @@ namespace Framework::Helper {
             wait += "\n\t\t" + res->m_resource_id + "; uses = " +std::to_string(res->GetCountUses());
         }
 
-        dump += "\n\tWait destroy:" + std::to_string(g_resourcesToDestroy.size()) + wait;
+        dump += "\n\tWait destroy: " + std::to_string(g_resourcesToDestroy.size()) + wait;
 
         dump += "\n=============================================================================";
         Debug::System(dump);

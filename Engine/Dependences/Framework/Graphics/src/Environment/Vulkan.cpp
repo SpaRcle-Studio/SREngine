@@ -3,128 +3,18 @@
 //
 
 #include <Environment/Vulkan.h>
-#include <ResourceManager/ResourceManager.h>
-#include <FileSystem/FileSystem.h>
-#include <Types/Vertices.h>
+#include <imgui_impl_vulkan.h>
 
 namespace Framework::Graphics{
-    namespace VulkanTools {
-        static VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
-            switch (attr) {
-                case Vertices::Attribute::FLOAT_R32G32B32A32: return VK_FORMAT_R32G32B32A32_SFLOAT;
-                case Vertices::Attribute::FLOAT_R32G32B32:    return VK_FORMAT_R32G32B32_SFLOAT;
-                case Vertices::Attribute::FLOAT_R32G32:       return VK_FORMAT_R32G32_SFLOAT;
-                default:                                      return VK_FORMAT_UNDEFINED;
-            }
-        }
-
-        static VkFilter AbstractTextureFilterToVkFilter(const TextureFilter& filter) {
-            switch (filter) {
-                case TextureFilter::NEAREST: return VK_FILTER_NEAREST;
-                case TextureFilter::LINEAR:  return VK_FILTER_LINEAR;
-
-                case TextureFilter::NEAREST_MIPMAP_NEAREST:
-                case TextureFilter::LINEAR_MIPMAP_NEAREST:
-                case TextureFilter::NEAREST_MIPMAP_LINEAR:
-                case TextureFilter::LINEAR_MIPMAP_LINEAR:
-                case TextureFilter::Unknown:
-                    return VK_FILTER_MAX_ENUM;
-            }
-        }
-
-        static VkFormat AbstractTextureFormatToVkFormat(const TextureFormat& format, bool alpha) {
-            switch (format) {
-                case TextureFormat::Unknown:      return VK_FORMAT_MAX_ENUM;
-                case TextureFormat::RGBA8_UNORM:  return alpha ? VK_FORMAT_R8G8B8A8_UNORM     : VK_FORMAT_R8G8B8_UNORM;
-                case TextureFormat::RGBA16_UNORM: return alpha ? VK_FORMAT_R16G16B16A16_UNORM : VK_FORMAT_R16G16B16_UNORM;
-                case TextureFormat::RGBA8_SRGB:   return alpha ? VK_FORMAT_R8G8B8A8_SRGB      : VK_FORMAT_R8G8B8_SRGB;
-            }
-        }
-
-        static std::vector<VkVertexInputBindingDescription> AbstractVertexDescriptionsToVk(const std::vector<SR_VERTEX_DESCRIPTION>& descriptions) {
-            auto vkDescriptions = std::vector<VkVertexInputBindingDescription>();
-
-            for (uint32_t i = 0; i < descriptions.size(); i++)
-                vkDescriptions.push_back(EvoVulkan::Tools::Initializers::VertexInputBindingDescription(i, descriptions[i], VK_VERTEX_INPUT_RATE_VERTEX));
-
-            return vkDescriptions;
-        }
-
-        static ShaderType VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
-            switch (stage) {
-                case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderType::Fragment;
-                case VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT:   return ShaderType::Vertex;
-                default:
-                    Helper::Debug::Error("VulkanTools::VkShaderStageToShaderType() : unknown stage!");
-                    return ShaderType::Unknown;
-            }
-        }
-
-        static std::vector<VkVertexInputAttributeDescription> AbstractAttributesToVkAttributes(
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& attributes)
-        {
-            auto vkDescrs = std::vector<VkVertexInputAttributeDescription>();
-
-            for (uint32_t i = 0; i < attributes.size(); i++) {
-                auto format = AttributeToVkFormat(attributes[i].first);
-                if (format == VK_FORMAT_UNDEFINED) {
-                    Helper::Debug::Error("VulkanTools::AbstractDescriptionsToVkDescriptions() : unknown attribute!");
-                    return { };
-                }
-
-                vkDescrs.emplace_back(EvoVulkan::Tools::Initializers::VertexInputAttributeDescription(0, i, format, attributes[i].second));
-            }
-
-            return vkDescrs;
-        }
-
-        static std::vector<std::pair<std::string, ShaderType>> VkModulesToAbstractModules(
-                const std::vector<std::pair<std::string, VkShaderStageFlagBits>>& modules)
-        {
-            auto abstract = std::vector<std::pair<std::string, ShaderType>>();
-            for (const auto& a : modules)
-                abstract.emplace_back(std::pair(a.first, VkShaderStageToShaderType(a.second)));
-            return abstract;
-        }
-
-        static VkPolygonMode AbstractPolygonModeToVk(PolygonMode polygonMode) {
-            switch (polygonMode) {
-                case PolygonMode::Fill:  return VK_POLYGON_MODE_FILL;
-                case PolygonMode::Line:  return VK_POLYGON_MODE_LINE;
-                case PolygonMode::Point: return VK_POLYGON_MODE_POINT;
-            }
-        }
-
-        static VkCullModeFlagBits AbstractCullModeToVk(CullMode cullMode) {
-            switch (cullMode) {
-                case CullMode::None:         return VK_CULL_MODE_NONE;
-                case CullMode::Front:        return VK_CULL_MODE_FRONT_BIT;
-                case CullMode::Back:         return VK_CULL_MODE_BACK_BIT;
-                case CullMode::FrontAndBack: return VK_CULL_MODE_FRONT_AND_BACK;
-            }
-        }
-
-        static VkCompareOp AbstractDepthOpToVk(DepthCompare depthCompare) {
-            switch (depthCompare) {
-                case DepthCompare::Never:          return VK_COMPARE_OP_NEVER;
-                case DepthCompare::Less:           return VK_COMPARE_OP_LESS;
-                case DepthCompare::Equal:          return VK_COMPARE_OP_EQUAL;
-                case DepthCompare::LessOrEqual:    return VK_COMPARE_OP_LESS_OR_EQUAL;
-                case DepthCompare::Greater:        return VK_COMPARE_OP_GREATER;
-                case DepthCompare::NotEqual:       return VK_COMPARE_OP_NOT_EQUAL;
-                case DepthCompare::GreaterOrEqual: return VK_COMPARE_OP_GREATER_OR_EQUAL;
-                case DepthCompare::Always:         return VK_COMPARE_OP_ALWAYS;
-            }
-        }
-    }
-
-#define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
+    #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
     bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
         EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(SR_VRAM   + msg); };
         EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
         EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Graph = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
+
+        this->m_imgui = new VulkanTypes::VkImGUI();
 
         this->m_kernel = new SRVulkan();
         Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
@@ -475,11 +365,44 @@ namespace Framework::Graphics{
             bool alpha // unused
     ) const noexcept {
         auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format, true /* alpha */);
+        if (vkFormat == VK_FORMAT_MAX_ENUM) {
+            Helper::Debug::Error("Vulkan::CalculateTexture() : unsupported format!");
+            return -1;
+        }
+
+        if (compression != TextureCompression::None) {
+            vkFormat = VulkanTools::AbstractTextureCompToVkFormat(compression, vkFormat);
+            if (vkFormat == VK_FORMAT_MAX_ENUM) {
+                Helper::Debug::Error("Vulkan::CalculateTexture() : unsupported format with compression!");
+                return -1;
+            }
+
+            if (auto sz = MakeGoodSizes(w, h); sz != std::pair(w, h)) {
+                data = ResizeToLess(w, h, sz.first, sz.second, data);
+                w = sz.first;
+                h = sz.second;
+            }
+
+            if (data == nullptr || w == 0 || h == 0) {
+                Helper::Debug::Error("Vulkan::CalculateTexture() : failed to reconstruct image!");
+                return -1;
+            }
+
+            Helper::Debug::Log("Vulkan::CalculateTexture() : compress " + std::to_string(w * h * 4 / 1024 / 1024) + "MB source image...");
+
+            if (data = Compress(w, h, data, compression); data == nullptr) {
+                Helper::Debug::Error("Vulkan::CalculateTexture() : failed to compress image!");
+                return -1;
+            }
+        }
 
         auto ID = this->m_memory->AllocateTexture(
                 data, w, h, vkFormat,
                 VulkanTools::AbstractTextureFilterToVkFilter(filter),
                 compression, mipLevels);
+
+        if (compression != TextureCompression::None)
+            free(data); //! free compressed data. Original data isn't will free
 
         if (ID < 0) {
             Helper::Debug::Error("Vulkan::CalculateTexture() : failed to allocate texture!");
@@ -487,5 +410,86 @@ namespace Framework::Graphics{
         }
 
         return ID;
+    }
+
+    bool Vulkan::InitGUI() {
+        Helper::Debug::Graph("Vulkan::InitGUI() : initializing ImGUI library...");
+
+        if (!m_kernel->GetDevice()) {
+            Helper::Debug::Error("Vulkan::InitGUI() : device is nullptr!");
+            return false;
+        }
+
+        this->m_basicWindow->InitGUI();
+
+        if (!m_imgui->Init(m_kernel)) {
+            Helper::Debug::Error("Vulkan::Init() : failed to init imgui!");
+            return false;
+        }
+
+        return true;
+    }
+
+    bool Vulkan::StopGUI() {
+        EVSafeFreeObject(m_imgui) else {
+            Helper::Debug::Error("Vulkan::StopGUI() : failed to destroy vulkan imgui!");
+            return false;
+        }
+
+        return Environment::StopGUI();
+    }
+
+    bool Vulkan::BeginDrawGUI() {
+        return Environment::BeginDrawGUI();
+    }
+
+    void Vulkan::EndDrawGUI() {
+        Environment::EndDrawGUI();
+    }
+
+    //!-----------------------------------------------------------------------------------------------------------------
+
+    bool SRVulkan::OnResize()  {
+        vkQueueWaitIdle(m_device->GetGraphicsQueue());
+        vkDeviceWaitIdle(*m_device);
+
+        Environment::Get()->SetBuildState(false);
+
+        uint32_t w = m_width;
+        uint32_t h = m_height;
+
+        Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
+        dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->ReSize(w, h);
+
+        return true;
+    }
+
+    void SRVulkan::Render()  {
+        ImGui_ImplVulkan_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
+        ImGui::ShowDemoWindow();
+        ImGui::Render();
+
+        //!------------
+
+        if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
+            this->m_hasErrors = !this->ResizeWindow();
+
+        m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
+        m_submitCmdBuffs[1] = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->Render(m_currentBuffer);
+
+        m_submitInfo.commandBufferCount = 2;
+        m_submitInfo.pCommandBuffers    = m_submitCmdBuffs;//&m_drawCmdBuffs[m_currentBuffer];
+
+        // Submit to queue
+        auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);
+        if (result != VK_SUCCESS) {
+            VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+            return;
+        }
+
+        if (this->SubmitFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
+            this->m_hasErrors = !this->ResizeWindow();
     }
 }

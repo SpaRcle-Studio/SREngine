@@ -94,8 +94,6 @@ function DrawScene()
         if (Input.GetKey(KeyCode.MouseLeft)) then
             if (not mouseLeftPressed) then
                 mouseLeftPressed = true;
-                --window:GetRender():GetManipulationTool():Require(camera, GUIWindow.Get());
-                --mousePos = Input.GetMousePos();
                 window:RequireAimedMesh(camera, GUIWindow.Get());
             end;
 
@@ -103,8 +101,6 @@ function DrawScene()
         else
             if (mouseLeftPressed == true) then
                 mouseLeftPressed = false;
-                --window:GetRender():GetManipulationTool():Clear();
-                --window:GetRender():GetManipulationTool():DisableAxis();
             end;
         end;
 

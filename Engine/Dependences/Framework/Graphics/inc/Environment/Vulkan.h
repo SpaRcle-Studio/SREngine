@@ -32,74 +32,30 @@
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
 
+#include <Environment/Vulkan/VulkanImGUI.h>
+
+#include <imgui_impl_vulkan.h>
+
 namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
-        void Render() override {
-            if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
-                this->m_hasErrors = !this->ResizeWindow();
-
-            m_submitInfo.commandBufferCount = 1;
-            m_submitInfo.pCommandBuffers    = &m_drawCmdBuffs[m_currentBuffer];
-
-            // Submit to queue
-            auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);
-            if (result != VK_SUCCESS) {
-                VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
-                return;
-            }
-
-            if (this->SubmitFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
-                this->m_hasErrors = !this->ResizeWindow();
-        }
+        void Render() override;
     public:
-        bool OnResize() override {
-            vkQueueWaitIdle(m_device->GetGraphicsQueue());
-            vkDeviceWaitIdle(*m_device);
-
-            Environment::Get()->SetBuildState(false);
-
-            uint32_t w = m_width;
-            uint32_t h = m_height;
-
-            Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
-
-            return true;
-        }
+        bool OnResize() override;
 
         bool BuildCmdBuffers() override {
-            /*VkCommandBufferBeginInfo cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
-
-            VkClearValue clearValues[2] {
-                    { .color = {{0.5f, 0.5f, 0.5f, 1.0f}} },
-                    { .depthStencil = { 1.0f, 0 } }
-            };
-
-            auto renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(
-                    m_swapchain->GetSurfaceWidth(), m_swapchain->GetSurfaceHeight(), m_renderPass.m_self,
-                    VK_NULL_HANDLE, &clearValues[0], 2);
-
-            for (int i = 0; i < 3; i++) {
-                renderPassBI.framebuffer = m_frameBuffers[i];
-
-                vkBeginCommandBuffer(m_drawCmdBuffs[i], &cmdBufInfo);
-                vkCmdBeginRenderPass(m_drawCmdBuffs[i], &renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
-
-                vkCmdEndRenderPass(m_drawCmdBuffs[i]);
-                vkEndCommandBuffer(m_drawCmdBuffs[i]);
-            }
-            */
             return true;
         }
 
         bool OnComplete() override {
-            //return BuildCmdBuffers();
             return true;
         }
 
         bool Destroy() override {
             return EvoVulkan::Core::VulkanKernel::Destroy();
         }
+    private:
+        VkCommandBuffer m_submitCmdBuffs[2] = {0};
     };
 
     class Vulkan : public Environment {
@@ -109,28 +65,27 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
-        VkDeviceSize                   m_offsets[1]      = {0};
+        VkDeviceSize                     m_offsets[1]        = {0};
 
-        VkViewport                     m_viewport        = { };
-        VkRect2D                       m_scissor         = { };
+        VkViewport                       m_viewport          = { };
+        VkRect2D                         m_scissor           = { };
 
-        std::vector<VkClearValue>      m_clearValues     = { };
-        VkRenderPassBeginInfo          m_renderPassBI    = { };
+        std::vector<VkClearValue>        m_clearValues       = { };
+        VkRenderPassBeginInfo            m_renderPassBI      = { };
 
-        VkCommandBuffer                m_currentCmd      = VK_NULL_HANDLE;
-        EvoVulkan::Complexes::Shader*  m_currentShader   = nullptr;
-        VkPipelineLayout               m_currentLayout   = VK_NULL_HANDLE;
+        VkCommandBuffer                  m_currentCmd        = VK_NULL_HANDLE;
+        EvoVulkan::Complexes::Shader*    m_currentShader     = nullptr;
+        VkPipelineLayout                 m_currentLayout     = VK_NULL_HANDLE;
+
+        VulkanTypes::VkImGUI*            m_imgui             = nullptr;
 
         //! Descriptor sets in that moment, for render meshes
-        //VkDescriptorSet*               m_descriptorSets = nullptr;
-        //uint32_t                       m_countDescrSets = 0;
+        VkDescriptorSet                  m_currentDesrSets   = VK_NULL_HANDLE;
 
-        VkDescriptorSet                m_currentDesrSets = VK_NULL_HANDLE;
+        VkCommandBufferBeginInfo         m_cmdBufInfo        = { };
 
-        VkCommandBufferBeginInfo       m_cmdBufInfo      = { };
-
-        VulkanTools::MemoryManager*    m_memory          = nullptr;
-        EvoVulkan::Core::VulkanKernel* m_kernel          = nullptr;
+        VulkanTools::MemoryManager*      m_memory            = nullptr;
+        EvoVulkan::Core::VulkanKernel*   m_kernel            = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
                 "VK_LAYER_KHRONOS_validation"
@@ -160,12 +115,20 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const noexcept override { return PipeLine::Vulkan; }
         [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const noexcept override { return m_kernel->GetCountBuildIterations(); }
     public:
+        VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
+    public:
         uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
 
         bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
         bool Init(int swapInterval) override;
         bool PostInit() override;
 
+        bool InitGUI() override;
+        bool StopGUI() override;
+        bool BeginDrawGUI() override;
+        void EndDrawGUI() override;
+
+        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const noexcept override { return true; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const noexcept override { return this->m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const noexcept override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const noexcept override { return "VK_API_VERSION_1_2"; }

@@ -8,7 +8,7 @@
 #include <mutex>
 #include <ResourceManager/IResource.h>
 #include <Environment/Environment.h>
-#include <Environment/TextureEnums.h>
+#include <Environment/TextureHelper.h>
 #include <macros.h>
 
 namespace Framework::Graphics{

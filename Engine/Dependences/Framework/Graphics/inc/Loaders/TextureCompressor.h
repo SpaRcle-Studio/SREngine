@@ -7,7 +7,7 @@
 
 #include <cstdint>
 
-#include <Environment/TextureEnums.h>
+#include <Environment/TextureHelper.h>
 
 namespace Framework::Graphics {
     class TextureCompressor {

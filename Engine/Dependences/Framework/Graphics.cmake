@@ -32,9 +32,12 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/GUIWindow.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/DockSpace.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Environment.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/TextureHelper.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanMemory.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanImGUI.cpp
 
         ############################################################
 

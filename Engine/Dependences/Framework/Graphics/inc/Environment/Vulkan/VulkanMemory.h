@@ -12,7 +12,7 @@
 #include <EvoVulkan/Complexes/Shader.h>
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
-#include <Environment/TextureEnums.h>
+#include <Environment/TextureHelper.h>
 
 namespace Framework::Graphics::VulkanTools {
     class MemoryManager {

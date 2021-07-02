@@ -66,8 +66,8 @@ int main() {
         Component::RegisterComponent("Camera",             []() -> Camera*    { return Camera::Allocate(); });
     }
 
-    //Environment::Set(new OpenGL());
-    Environment::Set(new Vulkan());
+    Environment::Set(new OpenGL());
+    //Environment::Set(new Vulkan());
 
     Render* render = Render::Allocate();
     if (!render) {
@@ -83,7 +83,7 @@ int main() {
             false,
             false,
             true,
-            8
+            2
     );
 
     auto scene = Scene::New("New scene");

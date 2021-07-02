@@ -520,13 +520,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
     compiler->RegisterScriptClass("GUI", [](lua_State* L){
         luabridge::getGlobalNamespace(L)
                 .beginClass<Graphics::GUI::ICanvas>("Canvas")
-                        //.addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(const std::string&, bool)>([](const std::string& luaScriptName, bool fromEditor) -> Graphics::GUI::ICanvas* {
-                        //    Scripting::Script* script = Engine::Get()->GetCompiler()->DelayedLoad(luaScriptName, fromEditor);
-                        //    return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
-                        //}))
-                .addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(Scripting::Script*)>([](Scripting::Script*script) -> Graphics::GUI::ICanvas* {
-                    return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
-                }))
+                    .addStaticFunction("Load", static_cast<Graphics::GUI::ICanvas*(*)(Scripting::Script*)>([](Scripting::Script*script) -> Graphics::GUI::ICanvas* {
+                        return (Graphics::GUI::ICanvas*)(new Framework::Canvas(script));
+                    }))
                 .endClass();
     });
 
@@ -540,26 +536,6 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 .endClass();
     });
 
-    /*// ImVec4
-    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
-        luabridge::getGlobalNamespace(L)
-                .beginClass<ImVec4>("ImVec4")
-                    .addStaticFunction("New", static_cast<ImVec4(*)(float,float,float,float)>([](float x,float y,float z,float w) -> ImVec4 {
-                        return ImVec4(x,y,z,w);
-                    }))
-                .endClass();
-    });
-
-    // ImGuiStyle
-    this->m_compiler->RegisterScriptClass("GUI", [](lua_State* L){
-        luabridge::getGlobalNamespace(L)
-                .beginClass<ImGuiStyle>("ImGuiStyle")
-                    .addStaticFunction("Get", static_cast<ImGuiStyle&(*)()>([]() -> ImGuiStyle& { return ImGui::GetStyle(); }))
-                    .addStaticFunction("GetColors", static_cast<ImVec4*(*)()>([]() -> ImVec4* {
-                        return ImGui::GetStyle().Colors;
-                    }))
-                .endClass();
-    });*/
 
     // ImGuiWindow
     compiler->RegisterScriptClass("GUI", [](lua_State* L) {

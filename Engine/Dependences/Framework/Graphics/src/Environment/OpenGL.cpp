@@ -33,35 +33,6 @@ unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, i
     return (unsigned int)textureID;
 }
 
-bool Framework::Graphics::OpenGL::PreInitGUI(const std::string& fontPath) {
-    Debug::Graph("OpenGL::InitGUI() : pre-initializing ImGUI library...");
-
-    {
-        IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-        // Set font
-        //ImFont* pFont = io.Fonts->AddFontFromFileTTF((Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf").c_str(), 12.0f);
-        ImFont* pFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 12.0f);
-
-        //io.IniFilename = NULL;
-        io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
-        //io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-        io.ConfigDockingWithShift       = true;
-        io.ConfigWindowsResizeFromEdges = true;
-        //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-        //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-        //io.ConfigDockingWithShift = true;
-        // Setup Dear ImGui style
-        //ImGui::StyleColorsDark();
-    }
-
-    return true;
-}
-
 bool Framework::Graphics::OpenGL::InitGUI() {
     Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
 

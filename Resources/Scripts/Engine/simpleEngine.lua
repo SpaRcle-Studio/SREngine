@@ -21,9 +21,9 @@ function Init()
     Script.this:ImportLib("Graphics");
     Script.this:ImportLib("GUI");
 
-    scene   = Scene.Get();
-    window  = Window.Get();
-    render  = Render.Get();
+    scene  = Scene.Get();
+    window = Window.Get();
+    render = Render.Get();
 
     collectgarbage() -- collect memory
 end;

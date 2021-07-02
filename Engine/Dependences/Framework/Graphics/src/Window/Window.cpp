@@ -326,14 +326,6 @@ bool Framework::Graphics::Window::InitEnvironment() {
         return false;
     }
 
-    if (m_env->IsGUISupport()) {
-        if (this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
-            GUI::ICanvas::InitStyle();
-            this->m_env->InitGUI();
-        } else
-            Debug::Error("Window::InitEnvironment() : failed pre-initializing GUI!");
-    }
-
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
     if (!this->m_env->Init(m_vsync)) {
         Debug::Error("Window::InitEnvironment() : failed initializing environment!");
@@ -347,6 +339,14 @@ bool Framework::Graphics::Window::InitEnvironment() {
         Debug::Log("Window::InitEnvironment() : vendor is "   + m_env->GetVendor());
         Debug::Log("Window::InitEnvironment() : renderer is " + m_env->GetRenderer());
         Debug::Log("Window::InitEnvironment() : version is "  + m_env->GetVersion());
+    }
+
+    if (m_env->IsGUISupport()) {
+        if (this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
+            GUI::ICanvas::InitStyle();
+            this->m_env->InitGUI();
+        } else
+            Debug::Error("Window::InitEnvironment() : failed pre-initializing GUI!");
     }
 
     m_isEnvInit = true;

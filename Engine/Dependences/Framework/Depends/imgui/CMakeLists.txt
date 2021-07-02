@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(imgui-cmake)
 
+find_package(Vulkan REQUIRED FATAL_ERROR)
+
 add_subdirectory(./../glfw glfw_build)
 add_subdirectory(./../glew/build/cmake glew_build)
 
@@ -12,6 +14,7 @@ set(srcFiles
         #imgui_tables.cpp
         backends/imgui_impl_glfw.cpp
         backends/imgui_impl_opengl3.cpp
+        backends/imgui_impl_vulkan.cpp
         backends/imgui_impl_win32.cpp
         misc/cpp/imgui_stdlib.cpp
 
@@ -27,6 +30,7 @@ set(publicHeaderFiles
         imstb_truetype.h
         backends/imgui_impl_glfw.h
         backends/imgui_impl_opengl3.h
+        backends/imgui_impl_vulkan.h
         backends/imgui_impl_win32.h
         misc/cpp/imgui_stdlib.h
 
@@ -43,11 +47,12 @@ find_package(OpenGL REQUIRED)
 add_library(imgui STATIC
         ${srcFiles})
 
-target_link_libraries(imgui opengl32 glew glfw)
+target_link_libraries(imgui opengl32 glew glfw ${Vulkan_LIBRARY})
 
 target_include_directories(imgui
         PUBLIC
         ${includeDir}
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
+        ${Vulkan_INCLUDE_DIRS}
         )
 
