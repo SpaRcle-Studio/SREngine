@@ -60,6 +60,14 @@ namespace Framework::Graphics {
     }
 
     uint8_t* Compress(uint32_t w, uint32_t h, uint8_t* pixels, Framework::Graphics::TextureCompression method);
+
+    struct InternalTexture {
+        void*    m_data;
+        uint32_t m_width;
+        uint32_t m_height;
+
+        [[nodiscard]] bool Ready() const { return m_data && m_width && m_height; }
+    };
 }
 
 #endif //GAMEENGINE_TEXTUREHELPER_H

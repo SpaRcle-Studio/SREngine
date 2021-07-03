@@ -218,15 +218,46 @@ void Framework::Graphics::Window::Thread() {
 
                         Helper::Debug::Info("Window::Thread() : re-build render...");
 
+                        if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
+                            //this->m_render->DrawTransparentGeometry();
+
+                            m_cameras[0]->GetPostProcessing()->EndGeometry();
+                        }
+
                         this->m_render->DrawGeometry();
-                        this->m_render->DrawTransparentGeometry();
-                        this->m_render->DrawSkybox();
+
+                        //this->m_render->DrawSkybox();
 
                         m_env->SetBuildState(true);
                     }
                     continue;
                 } else {
                     this->m_render->UpdateGeometry();
+                }
+
+                if (m_GUIEnabled && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
+                    if (this->m_env->BeginDrawGUI()) {
+                        //if (m_canvas)
+                        //    this->m_canvas->Draw();
+
+                        if (ImGui::Begin("Texture")) {
+                            ImGui::BeginChild("Texture 1");
+
+                            auto texture = m_env->GetTexture(0);
+                            if (texture.Ready()) {
+                                static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
+
+                                GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
+                                                            { texture.m_width, texture.m_height },
+                                                            m_env->GetDescriptorSetFromDTDSet(imTex), true);
+                            }
+
+                            ImGui::EndChild();
+                            ImGui::End();
+                        }
+
+                        this->m_env->EndDrawGUI();
+                    }
                 }
 
                 this->m_env->DrawFrame();

@@ -82,6 +82,12 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
             return false;
         }
 
+        ret:
+        if (m_textures[oldColorAttachments[i]]->GetSeed() == textures[i]->GetSeed()) {
+            textures[i]->RandomizeSeed();
+            goto ret;
+        }
+
         m_textures[oldColorAttachments[i]]->Free();
         m_textures[oldColorAttachments[i]] = textures[i];
     }
@@ -358,5 +364,75 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
     Helper::Debug::Error("MemoryManager::AllocateTexture() : overflow textures buffer!");
 
     return -1;
+}
+
+#define SR_SAFE_FREE(memory) if (memory) { free(memory); memory = nullptr; }
+
+void Framework::Graphics::VulkanTools::MemoryManager::Free() {
+    SR_SAFE_FREE(m_dynamicTextureDescSets)
+    SR_SAFE_FREE(m_ShaderPrograms)
+    SR_SAFE_FREE(m_descriptorSets)
+    SR_SAFE_FREE(m_textures)
+    SR_SAFE_FREE(m_FBOs)
+    SR_SAFE_FREE(m_VBOs)
+    SR_SAFE_FREE(m_IBOs)
+    SR_SAFE_FREE(m_UBOs)
+
+    delete this;
+}
+
+int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDynamicTextureDescriptorSet(VkDescriptorSetLayout layout, uint32_t textureID) {
+    if (auto texture = m_textures[textureID]; texture) {
+        auto id = this->FindFreeDynamicTextureDescriptorSetIndex();
+        if (id < 0) {
+            Helper::Debug::Error("MemoryManager::AllocateDynamicTextureDescriptorSet() : overflow dynamic texture descriptor sets buffer!");
+            return -1;
+        }
+
+        static const std::set<VkDescriptorType> type = { VkDescriptorType::VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER };
+        auto descriptorSet = this->m_descriptorManager->AllocateDescriptorSets(layout, type);
+
+        auto writer = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                descriptorSet,
+                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                0, texture->GetDescriptorRef());
+        vkUpdateDescriptorSets(*m_device, 1, &writer, 0, nullptr);
+
+        m_dynamicTextureDescSets[id] = VulkanTypes::DynamicTextureDescriptorSet {
+                .m_textureID   = (int32_t)textureID,
+                .m_descriptor  = descriptorSet,
+                .m_textureSeed = texture->GetSeed(),
+        };
+
+        return id;
+    } else {
+        Helper::Debug::Error("MemoryManager::AllocateTextureDescriptorSet() : texture isn't exists!");
+        return -1;
+    }
+}
+
+VkDescriptorSet Framework::Graphics::VulkanTools::MemoryManager::GetDynamicTextureDescriptorSet(uint32_t id) {
+    auto descriptor = m_dynamicTextureDescSets[id];
+    if (!descriptor) {
+        Helper::Debug::Error("MemoryManager::GetDynamicTextureDescriptorSet() : descriptor set is nullptr!");
+        return VK_NULL_HANDLE;
+    }
+
+    if (auto texture = m_textures[descriptor.m_textureID]; texture) {
+        if (texture->GetSeed() == descriptor.m_textureSeed)
+            goto ex;
+
+        m_dynamicTextureDescSets[id].m_textureSeed = texture->GetSeed();
+
+        auto writer = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                descriptor, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                0, texture->GetDescriptorRef());
+        vkUpdateDescriptorSets(*m_device, 1, &writer, 0, nullptr);
+    } else {
+        Helper::Debug::Error("MemoryManager::GetDynamicTextureDescriptorSet() : texture isn't exists!");
+        return VK_NULL_HANDLE;
+    }
+
+    ex: return descriptor;
 }
 

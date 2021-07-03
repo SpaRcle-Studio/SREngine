@@ -13,6 +13,8 @@ local render;     -- Render*
 local camera;     -- GameObject*
 local cameraComp; -- Camera*
 
+local editorGUIScript; -- Script*
+
 function Init()
     Debug.Log("Initialize engine editor GUI...");
 
@@ -24,6 +26,9 @@ function Init()
     scene  = Scene.Get();
     window = Window.Get();
     render = Render.Get();
+
+    editorGUIScript = Script.this:LoadScript("editor", true);
+    window:SetCanvas(Canvas.Load(editorGUIScript));
 
     collectgarbage() -- collect memory
 end;
@@ -52,7 +57,6 @@ end;
 --render:RegisterMesh(mesh3);
 --scene:Instance("Cube3"):AddComponent(mesh3:Base());
 
-
 function Start()
     Debug.Log("Starting main engine script...");
 
@@ -72,6 +76,13 @@ function Start()
     --cube1:GetTransform():Rotate(Vector3.New(45, 45, 45), false);
 
     LoadCamera();
+
+    Stack.PushScene(editorGUIScript, scene);
+    Stack.PushCamera(editorGUIScript, cameraComp);
+    editorGUIScript:Call("SetIndices");
+
+    Stack.PushBool(editorGUIScript, false);
+    editorGUIScript:Call("Enabled");
 
     collectgarbage() -- collect memory
 end;
@@ -115,6 +126,9 @@ end;
 
 function Close()
     Debug.Log("Close main engine script...");
+
+    --Stack.PushBool(editorGUIScript, false);
+    --editorGUIScript:Call("Enabled");
 
     if (not (scene == nil)) then
         scene:Destroy();

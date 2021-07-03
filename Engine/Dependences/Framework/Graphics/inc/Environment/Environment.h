@@ -70,11 +70,11 @@ namespace Framework::Graphics {
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
         void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
+        void SetCurrentShaderID(const int32_t& id)  { m_currentShaderID = id;           }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
 
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const noexcept { return m_currentFBO;      }
-
         [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const noexcept { return 1;                 }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const noexcept { return m_needReBuild;     }
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const noexcept { return m_hasErrors;       }
@@ -120,6 +120,13 @@ namespace Framework::Graphics {
         virtual bool BeginDrawGUI() { return false; }
         virtual void EndDrawGUI()   { }
 
+        [[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
+        [[nodiscard]] virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
+        [[nodiscard]] virtual void* GetDescriptorSet(uint32_t id) const { return nullptr; }
+
+        /// Get descriptor set from dynamic texture descriptor set
+        [[nodiscard]] virtual void* GetDescriptorSetFromDTDSet(uint32_t id) const { return nullptr; }
+
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetPipeLineName() const noexcept = 0;
 
         virtual uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
@@ -141,12 +148,13 @@ namespace Framework::Graphics {
         virtual bool Init(int swapInterval) { return false; }
         virtual bool PostInit() { return false; }
 
-        [[nodiscard]]  virtual SR_FORCE_INLINE bool IsWindowOpen() const noexcept { return false; }
+        [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowOpen() const noexcept { return false; }
+        [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowCollapsed() const noexcept { return false; }
         virtual bool CloseWindow() { return false; }
         [[nodiscard]] virtual void* GetHWND() const { return nullptr; }
 
         /* clear depth/stencil/color buffers */
-        virtual SR_FORCE_INLINE void ClearBuffers() const noexcept { }
+        virtual SR_FORCE_INLINE void ClearBuffers() noexcept { }
 
         virtual SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const noexcept { }
         virtual SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) noexcept { }
@@ -229,6 +237,7 @@ namespace Framework::Graphics {
 
         virtual SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) { return false; }
         virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return -2; }
+        virtual SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) { return -2; }
         //virtual SR_FORCE_INLINE void SetDescriptorSetBindingsSize(const uint32_t& size) { }
         virtual SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) { }
 

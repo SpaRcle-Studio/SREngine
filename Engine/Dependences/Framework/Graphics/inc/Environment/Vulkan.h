@@ -116,6 +116,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const noexcept override { return m_kernel->GetCountBuildIterations(); }
     public:
         VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
+        VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
     public:
         uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
 
@@ -128,12 +129,18 @@ namespace Framework::Graphics {
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
 
+        [[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
+        [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
+        [[nodiscard]] void* GetDescriptorSet(uint32_t id) const override;
+        [[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
+
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const noexcept override { return true; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const noexcept override { return this->m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const noexcept override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const noexcept override { return "VK_API_VERSION_1_2"; }
         [[nodiscard]] glm::vec2 GetWindowSize()                 const noexcept override { return { this->m_basicWindow->GetRealWidth(), this->m_basicWindow->GetRealHeight() }; }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const noexcept override { return m_basicWindow->IsWindowOpen(); }
+        [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const noexcept override { return m_basicWindow->IsCollapsed(); }
 
         bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
@@ -170,6 +177,19 @@ namespace Framework::Graphics {
         /**
          \Vulkan Clear next frame buffer usage
          */
+
+        SR_FORCE_INLINE void ClearBuffers() noexcept override {
+            if (m_currentFBO < 0) {
+                Helper::Debug::Error("Vulkan::ClearBuffers() : frame buffer isn't attached!");
+                return;
+            } else if (m_currentFBO > 0) {
+                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBO]->GetCountClearValues();
+                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBO]->GetClearValues();
+            } else {
+
+            }
+        }
+
         SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) noexcept override {
             colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
 
@@ -304,6 +324,33 @@ namespace Framework::Graphics {
                 }
             }
         }
+        SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) override {
+            if (!m_memory->m_textures[textureID]) {
+                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : texture is not exists!");
+                return -1;
+            }
+
+            if (m_currentShaderID < 0) {
+                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : shader is not attached!");
+                return -1;
+            }
+
+            const std::set<DescriptorType> types = { DescriptorType::CombinedImage };
+            int32_t descriptorSetID = this->m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
+            if (descriptorSetID < 0) {
+                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
+                return -1;
+            }
+
+            auto descriptorSet = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                    m_memory->m_descriptorSets[descriptorSetID].m_self,
+                    VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 0,
+                    m_memory->m_textures[textureID]->GetDescriptorRef());
+
+            vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
+
+            return descriptorSetID;
+        }
 
         SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) override { //const uint32_t& binding,
             //this->m_descriptorSets[binding] = m_memory->m_descriptorSets[descriptorSet].m_self;
@@ -336,14 +383,28 @@ namespace Framework::Graphics {
             else
                 return false;
         }
-        SR_FORCE_INLINE void BindFrameBuffer(const unsigned int& FBO) noexcept override {
+        SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) noexcept override {
             if (FBO == 0) {
                 this->m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
-                this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass().m_self;
+                this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass();
                 this->m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
                 this->m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
             } else {
-                Helper::Debug::Error("Vulkan::BindFrameBuffer() : TODO!");
+                if (FBO == UINT32_MAX) {
+                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
+                    return;
+                }
+
+                auto framebuffer = m_memory->m_FBOs[FBO];
+                if (!framebuffer) {
+                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer object isn't exists!");
+                    return;
+                }
+
+                this->m_renderPassBI.framebuffer = *framebuffer;
+                this->m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
+                this->m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
+                this->m_currentCmd               = framebuffer->GetCmd();
             }
 
             this->m_currentFBO = FBO;

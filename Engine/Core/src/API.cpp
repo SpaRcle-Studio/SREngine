@@ -566,7 +566,7 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                 }))
                 .addStaticFunction("DrawTexture", static_cast<void(*)(Math::Vector2, Math::Vector2, unsigned int, bool)>(
                         [](Math::Vector2 winSize, Math::Vector2 imgSize, unsigned int texID, bool center) {
-                            Graphics::GUI::GUIWindow::DrawTexture(winSize.ToGLM(), imgSize.ToGLM(), texID, center);
+                            Graphics::GUI::GUIWindow::DrawTexture(winSize.ToGLM(), imgSize.ToGLM(), reinterpret_cast<void*>(texID), center);
                         }))
                 .addStaticFunction("SetGuizmoTool", static_cast<bool(*)(unsigned char)>([](unsigned char id) -> bool {
                             return Graphics::GUI::GUIWindow::SetGuizmoTool(id);
@@ -590,6 +590,9 @@ void Framework::API::Register(Framework::Scripting::Compiler *compiler) {
                     gm->GetScene()->RemoveUsePoint();
                 }))
                 .addStaticFunction("DrawHierarchy", static_cast<void(*)(Helper::Scene*)>([](Helper::Scene*scene) {
+                    if (!scene)
+                        return;
+
                     ret:
                     if (scene->GetCountUsesPoints() > 0)
                         goto ret;

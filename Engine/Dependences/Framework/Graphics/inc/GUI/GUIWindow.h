@@ -188,7 +188,7 @@ namespace Framework::Graphics::GUI {
                 window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
             }
         }
-        static void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, unsigned int tex, const bool centralize = true);
+        static void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, void* tex, const bool centralize = true);
     };
 }
 

@@ -5,7 +5,7 @@
 //  [X] Renderer: Support for large meshes (64k+ vertices) with 16-bit indices.
 // Missing features:
 //  [ ] Platform: Multi-viewport / platform windows.
-//  [ ] Renderer: User texture binding. Changes of ImTextureID aren't supported by this backend! See https://github.com/ocornut/imgui/pull/914
+// In this binding, ImTextureID is used to store a 'VkDescriptorSet' texture identifier. Read the FAQ about ImTextureID in imgui.cpp.
 
 // You can copy and use unmodified imgui_impl_* files in your project. See examples/ folder for examples of using this.
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
@@ -36,6 +36,7 @@ struct ImGui_ImplVulkan_InitInfo
     VkQueue             Queue;
     VkPipelineCache     PipelineCache;
     VkDescriptorPool    DescriptorPool;
+    uint32_t            Subpass;
     uint32_t            MinImageCount;          // >= 2
     uint32_t            ImageCount;             // >= MinImageCount
     VkSampleCountFlagBits        MSAASamples;   // >= VK_SAMPLE_COUNT_1_BIT
@@ -44,6 +45,7 @@ struct ImGui_ImplVulkan_InitInfo
 };
 
 // Called by user code
+IMGUI_IMPL_API VkDescriptorSetLayout ImGui_ImplVulkan_GetDescriptorSetLayout();
 IMGUI_IMPL_API bool     ImGui_ImplVulkan_Init(ImGui_ImplVulkan_InitInfo* info, VkRenderPass render_pass);
 IMGUI_IMPL_API void     ImGui_ImplVulkan_Shutdown();
 IMGUI_IMPL_API void     ImGui_ImplVulkan_NewFrame();
@@ -51,6 +53,7 @@ IMGUI_IMPL_API void     ImGui_ImplVulkan_RenderDrawData(ImDrawData* draw_data, V
 IMGUI_IMPL_API bool     ImGui_ImplVulkan_CreateFontsTexture(VkCommandBuffer command_buffer);
 IMGUI_IMPL_API void     ImGui_ImplVulkan_DestroyFontUploadObjects();
 IMGUI_IMPL_API void     ImGui_ImplVulkan_SetMinImageCount(uint32_t min_image_count); // To override MinImageCount after initialization (e.g. if swap chain is recreated)
+IMGUI_IMPL_API ImTextureID  ImGui_ImplVulkan_AddTexture(VkDescriptorImageInfo descriptor_image_info);
 
 
 //-------------------------------------------------------------------------

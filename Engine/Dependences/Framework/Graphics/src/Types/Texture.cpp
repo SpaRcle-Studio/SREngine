@@ -120,6 +120,8 @@ bool Framework::Graphics::Types::Texture::Calculate() {
         Debug::Error("Texture::Calculate() : failed calculate texture!");
         return false;
     } else {
+        if (Debug::GetLevel() >= Debug::Level::High)
+            Debug::Log("Texture::Calculate() : texture \""+ m_resource_id +"\" has " + std::to_string(m_ID) + " ID.");
         TextureLoader::Free(m_data);
         m_data = nullptr;
     }

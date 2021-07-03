@@ -13,6 +13,7 @@
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
 #include <Environment/TextureHelper.h>
+#include <Environment/Vulkan/DynamicTextureDescriptorSet.h>
 
 namespace Framework::Graphics::VulkanTools {
     class MemoryManager {
@@ -68,6 +69,10 @@ namespace Framework::Graphics::VulkanTools {
             for (uint32_t i = 0; i < m_countTextures; i++)
                 m_textures[i] = nullptr;
 
+            this->m_dynamicTextureDescSets = (VulkanTypes::DynamicTextureDescriptorSet*)malloc(sizeof(VulkanTypes::DynamicTextureDescriptorSet) * m_countDynamicTexDescSets);
+            for (uint32_t i = 0; i < m_countDynamicTexDescSets; i++)
+                m_dynamicTextureDescSets[i] = { -1, VK_NULL_HANDLE };
+
             m_isInit = true;
             return true;
         }
@@ -75,6 +80,13 @@ namespace Framework::Graphics::VulkanTools {
         [[nodiscard]] int32_t FindFreeTextureIndex() const {
             for (uint32_t i = 0; i < m_countTextures; i++)
                 if (m_textures[i] == nullptr)
+                    return (int32_t)i;
+            return -1;
+        }
+
+        [[nodiscard]] int32_t FindFreeDynamicTextureDescriptorSetIndex() const {
+            for (uint32_t i = 0; i < m_countDynamicTexDescSets; i++)
+                if (m_dynamicTextureDescSets[i].m_descriptor == VK_NULL_HANDLE)
                     return (int32_t)i;
             return -1;
         }
@@ -89,6 +101,7 @@ namespace Framework::Graphics::VulkanTools {
 
             return memory;
         }
+        void Free();
     public:
         [[nodiscard]] bool FreeDescriptorSet(uint32_t ID) const;
 
@@ -129,26 +142,32 @@ namespace Framework::Graphics::VulkanTools {
                 VkFilter filter,
                 TextureCompression compression,
                 uint8_t mipLevels);
+
+        [[nodiscard]] int32_t AllocateDynamicTextureDescriptorSet(VkDescriptorSetLayout layout, uint32_t textureID);
     public:
-        EvoVulkan::Core::DescriptorManager* m_descriptorManager   = nullptr;
-        EvoVulkan::Types::Device*           m_device              = nullptr;
-        EvoVulkan::Types::CmdPool*          m_pool                = nullptr;
+        [[nodiscard]] VkDescriptorSet GetDynamicTextureDescriptorSet(uint32_t id);
+    public:
+        EvoVulkan::Core::DescriptorManager*       m_descriptorManager       = nullptr;
+        EvoVulkan::Types::Device*                 m_device                  = nullptr;
+        EvoVulkan::Types::CmdPool*                m_pool                    = nullptr;
 
-        uint32_t                            m_countUBO            = 10000;
-        uint32_t                            m_countVBO            = 1000;
-        uint32_t                            m_countIBO            = 1000;
-        uint32_t                            m_countFBO            = 15;
-        uint32_t                            m_countShaderPrograms = 50;
-        uint32_t                            m_countDescriptorSets = 10000;
-        uint32_t                            m_countTextures       = 1000;
+        uint32_t                                  m_countUBO                = 10000;
+        uint32_t                                  m_countVBO                = 1000;
+        uint32_t                                  m_countIBO                = 1000;
+        uint32_t                                  m_countFBO                = 15;
+        uint32_t                                  m_countShaderPrograms     = 50;
+        uint32_t                                  m_countDescriptorSets     = 10000;
+        uint32_t                                  m_countTextures           = 1000;
+        uint32_t                                  m_countDynamicTexDescSets = 100;
 
-        EvoVulkan::Types::Buffer**          m_UBOs                = nullptr;
-        EvoVulkan::Types::Buffer**          m_VBOs                = nullptr;
-        EvoVulkan::Types::Buffer**          m_IBOs                = nullptr;
-        EvoVulkan::Complexes::FrameBuffer** m_FBOs                = nullptr;
-        EvoVulkan::Complexes::Shader**      m_ShaderPrograms      = nullptr;
-        EvoVulkan::Core::DescriptorSet*     m_descriptorSets      = nullptr;
-        EvoVulkan::Types::Texture**         m_textures            = nullptr;
+        EvoVulkan::Types::Buffer**                m_UBOs                    = nullptr;
+        EvoVulkan::Types::Buffer**                m_VBOs                    = nullptr;
+        EvoVulkan::Types::Buffer**                m_IBOs                    = nullptr;
+        EvoVulkan::Complexes::FrameBuffer**       m_FBOs                    = nullptr;
+        EvoVulkan::Complexes::Shader**            m_ShaderPrograms          = nullptr;
+        EvoVulkan::Core::DescriptorSet*           m_descriptorSets          = nullptr;
+        EvoVulkan::Types::Texture**               m_textures                = nullptr;
+        VulkanTypes::DynamicTextureDescriptorSet* m_dynamicTextureDescSets  = nullptr;
     };
 }
 

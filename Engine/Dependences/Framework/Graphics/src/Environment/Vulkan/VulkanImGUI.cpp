@@ -45,6 +45,8 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
     }
 
     // Setup Platform/Renderer bindings
+    uint32_t images = m_swapchain->GetCountImages();
+
     ImGui_ImplVulkan_InitInfo init_info = {
             .Instance       = kernel->GetInstance(),
             .PhysicalDevice = *kernel->GetDevice(),
@@ -53,8 +55,9 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
             .Queue          = kernel->GetDevice()->GetGraphicsQueue(),
             .PipelineCache  = kernel->GetPipelineCache(),
             .DescriptorPool = *m_pool,
-            .MinImageCount  = m_swapchain->GetCountImages(),
-            .ImageCount     = m_swapchain->GetCountImages(),
+            .Subpass        = 0,
+            .MinImageCount  = images,
+            .ImageCount     = images,
             .MSAASamples    = kernel->GetDevice()->GetMSAASamples(),
             .Allocator      = nullptr,
             //TODO: .CheckVkResultFn = ...

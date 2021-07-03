@@ -110,7 +110,7 @@ namespace Framework::Graphics {
         virtual void BeginSkybox()   = 0;
         virtual void EndSkybox()     = 0;
 
-        virtual void BeginGeometry() = 0;
+        virtual bool BeginGeometry() = 0;
         virtual void EndGeometry()   = 0;
 
         virtual void Complete()      = 0;

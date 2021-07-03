@@ -349,7 +349,7 @@ void Framework::Graphics::GUI::GUIWindow::DebugWindow() {
     ImGui::InputFloat3("vec2", &euler[0]);
 }
 
-void Framework::Graphics::GUI::GUIWindow::DrawTexture(glm::vec2 win_size, glm::vec2 img_size, unsigned int tex,
+void Framework::Graphics::GUI::GUIWindow::DrawTexture(glm::vec2 win_size, glm::vec2 img_size, void* tex,
                                                       const bool centralize)  {
     const float dx = win_size.x / img_size.x;
     const float dy = win_size.y / img_size.y;
@@ -375,5 +375,5 @@ void Framework::Graphics::GUI::GUIWindow::DrawTexture(glm::vec2 win_size, glm::v
     //unsigned int* id = new unsigned int(tex);
     //(ImTextureID)static_cast<void*>(&tex)
     //DrawImage((ImTextureID)static_cast<void*>(&tex), ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true); // interesting bug
-    DrawImage(reinterpret_cast<void*>(tex), ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true);
+    DrawImage(tex, ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true);
 }

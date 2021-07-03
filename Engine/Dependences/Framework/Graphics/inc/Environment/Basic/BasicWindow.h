@@ -45,6 +45,7 @@ namespace Framework::Graphics {
         unsigned int m_posX   = 0;
         unsigned int m_posY   = 0;
 
+        bool m_collapsed = false;
         bool m_maximize = false;
         bool m_windowOpen = false;
         bool m_eventHandlerIsRun = false;
@@ -88,15 +89,14 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void PollEvents() const noexcept { };
         virtual SR_FORCE_INLINE void SwapBuffers() const noexcept { };
         [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowOpen() const noexcept { return m_windowOpen; };
+        [[nodiscard]] virtual SR_FORCE_INLINE bool IsCollapsed() const noexcept { return m_collapsed; };
         virtual SR_FORCE_INLINE bool MakeContextCurrent() { return false; };
         virtual void SetIcon(const char* path) { }
         virtual SR_FORCE_INLINE void SetSwapInterval(int interval) noexcept {}
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }
         virtual void NextFrameGUI() {  }
-        virtual bool IsFullScreen() {
-            return false;
-        }
+        virtual bool IsFullScreen() { return false; }
     };
 }
 

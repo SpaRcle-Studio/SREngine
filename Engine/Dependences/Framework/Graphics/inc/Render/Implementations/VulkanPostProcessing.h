@@ -14,8 +14,17 @@ namespace Framework::Graphics {
     public:
         VulkanPostProcessing(Camera *camera) : PostProcessing(camera) {}
     public:
-        void BeginGeometry() override {}
-        void EndGeometry() override {}
+        bool BeginGeometry() override {
+            if (m_frameBuffer >= 0) {
+                m_env->BindFrameBuffer(m_frameBuffer);
+                m_env->ClearBuffers();
+                return true;
+            } else
+                return false;
+        }
+        void EndGeometry() override {
+            m_env->BindFrameBuffer(0);
+        }
 
         void BeginSkybox() override {}
         void EndSkybox() override {}

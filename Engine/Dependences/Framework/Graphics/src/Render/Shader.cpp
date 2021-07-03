@@ -203,4 +203,3 @@ void Framework::Graphics::Shader::CopyVertexAndUniformsInfo(const Framework::Gra
     this->m_verticesDescription = source->m_verticesDescription;
     this->m_uniformsInfo        = source->m_uniformsInfo;
 }
-

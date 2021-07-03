@@ -14,12 +14,14 @@ namespace Framework::Graphics {
     public:
         OpenGLPostProcessing(Camera* camera) : PostProcessing(camera) { }
     public:
-        void BeginGeometry() override {
+        bool BeginGeometry() override {
             if (m_frameBuffer) {
                 m_env->BindFrameBuffer(m_frameBuffer);
                 m_env->ClearColorBuffers(0,0,0,0);
                 m_env->ClearBuffers();
-            }
+                return true;
+            } else
+                return false;
         }
         void EndGeometry() override{
             m_env->BindFrameBuffer(0);

@@ -26,6 +26,9 @@ namespace Framework {
         inline static bool InstanceBaseGameObject(const std::string &meshName,
                                                   Framework::Helper::Scene *scene,
                                                   Framework::Graphics::Camera *camera) {
+            if (!scene || !camera)
+                return false;
+
             auto meshes = Graphics::Types::Mesh::Load(meshName);
             if (meshes.size() != 1) {
                 Debug::Error("Editor::InstanceBaseGameObject() : failed load \""+meshName+"\" mesh!");

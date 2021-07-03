@@ -78,6 +78,11 @@ namespace Framework::Graphics{
                 return false;
             }
 
+        if (m_memory) {
+            m_memory->Free();
+            m_memory = nullptr;
+        }
+
         return true;
     }
 
@@ -440,11 +445,42 @@ namespace Framework::Graphics{
     }
 
     bool Vulkan::BeginDrawGUI() {
-        return Environment::BeginDrawGUI();
+        ImGui_ImplVulkan_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
+
+        return true;
     }
 
     void Vulkan::EndDrawGUI() {
-        Environment::EndDrawGUI();
+        ImGui::Render();
+    }
+
+    InternalTexture Vulkan::GetTexture(uint32_t id) const {
+        auto texture = m_memory->m_textures[id];
+        if (!texture)
+            return {};
+        return {
+                .m_data   = reinterpret_cast<void*>(texture->GetImageView()),
+                .m_width  = texture->GetWidth(),
+                .m_height = texture->GetHeight()
+        };
+    }
+
+    int32_t Vulkan::GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const {
+        auto descriptorSet = m_memory->AllocateDynamicTextureDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout(), textureID);
+        if (descriptorSet < 0) {
+            Helper::Debug::Error("Vulkan::GetImGuiTextureDescriptorFromTexture() : failed to allocate dynamic texture descriptor set!");
+            return -1;
+        }
+        else
+            return descriptorSet;
+    }
+
+    void *Vulkan::GetDescriptorSet(uint32_t id) const { return reinterpret_cast<void*>(m_memory->m_descriptorSets[id].m_self); }
+
+    void *Vulkan::GetDescriptorSetFromDTDSet(uint32_t id) const {
+        return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
     }
 
     //!-----------------------------------------------------------------------------------------------------------------
@@ -465,14 +501,6 @@ namespace Framework::Graphics{
     }
 
     void SRVulkan::Render()  {
-        ImGui_ImplVulkan_NewFrame();
-        ImGui_ImplWin32_NewFrame();
-        ImGui::NewFrame();
-        ImGui::ShowDemoWindow();
-        ImGui::Render();
-
-        //!------------
-
         if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
             this->m_hasErrors = !this->ResizeWindow();
 

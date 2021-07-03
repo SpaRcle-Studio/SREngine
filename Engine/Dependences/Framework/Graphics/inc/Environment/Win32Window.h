@@ -91,6 +91,9 @@ namespace Framework::Graphics {
                         m_realHeight = 0;
                         this->m_callback_resize(this, GetRealWidth(), GetRealHeight());
                     }
+
+                    m_collapsed = m_realWidth == 0 || m_realHeight == 0;
+
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
 

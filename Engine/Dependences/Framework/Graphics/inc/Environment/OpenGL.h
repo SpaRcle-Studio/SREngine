@@ -71,7 +71,7 @@ namespace Framework::Graphics {
         }
         bool CloseWindow() override;
 
-        SR_FORCE_INLINE void ClearBuffers() const noexcept override {
+        SR_FORCE_INLINE void ClearBuffers() noexcept override {
             glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         }
         SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const noexcept override { glClearColor(r, g, b, a); }
