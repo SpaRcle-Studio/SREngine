@@ -25,30 +25,14 @@ namespace Framework::Graphics::Impl {
         }
 
         bool DrawGeometry() override {
-            this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+            Shader::GetDefaultGeometryShader()->Use();
 
-            for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
-                m_env->SetBuildIteration(i);
+            for (auto const& [key, val] : m_geometry.m_groups) {
+                this->m_env->BindVBO(val[0]->FastGetVBO());
+                this->m_env->BindIBO(val[0]->FastGetIBO());
 
-                m_env->BindFrameBuffer(0);
-
-                m_env->BeginRender();
-                {
-                    this->m_env->SetViewport();
-                    this->m_env->SetScissor();
-
-                    Shader::GetDefaultGeometryShader()->Use();
-                    //m_transparentShader->Use();
-
-                    for (auto const& [key, val] : m_geometry.m_groups) {
-                        this->m_env->BindVBO(val[0]->FastGetVBO());
-                        this->m_env->BindIBO(val[0]->FastGetIBO());
-
-                        for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
-                            val[m_t]->DrawVulkan();
-                    }
-                }
-                m_env->EndRender();
+                for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
+                    val[m_t]->DrawVulkan();
             }
 
             this->m_env->UnUseShader();

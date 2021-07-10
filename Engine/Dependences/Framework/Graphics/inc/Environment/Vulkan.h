@@ -65,27 +65,28 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
-        VkDeviceSize                     m_offsets[1]        = {0};
+        VkDeviceSize                       m_offsets[1]         = {0};
 
-        VkViewport                       m_viewport          = { };
-        VkRect2D                         m_scissor           = { };
+        VkViewport                         m_viewport           = { };
+        VkRect2D                           m_scissor            = { };
 
-        std::vector<VkClearValue>        m_clearValues       = { };
-        VkRenderPassBeginInfo            m_renderPassBI      = { };
+        std::vector<VkClearValue>          m_clearValues        = { };
+        VkRenderPassBeginInfo              m_renderPassBI       = { };
 
-        VkCommandBuffer                  m_currentCmd        = VK_NULL_HANDLE;
-        EvoVulkan::Complexes::Shader*    m_currentShader     = nullptr;
-        VkPipelineLayout                 m_currentLayout     = VK_NULL_HANDLE;
+        EvoVulkan::Complexes::FrameBuffer* m_currentFramebuffer = nullptr;
+        VkCommandBuffer                    m_currentCmd         = VK_NULL_HANDLE;
+        EvoVulkan::Complexes::Shader*      m_currentShader      = nullptr;
+        VkPipelineLayout                   m_currentLayout      = VK_NULL_HANDLE;
 
-        VulkanTypes::VkImGUI*            m_imgui             = nullptr;
+        VulkanTypes::VkImGUI*              m_imgui              = nullptr;
 
         //! Descriptor sets in that moment, for render meshes
-        VkDescriptorSet                  m_currentDesrSets   = VK_NULL_HANDLE;
+        VkDescriptorSet                    m_currentDesrSets    = VK_NULL_HANDLE;
 
-        VkCommandBufferBeginInfo         m_cmdBufInfo        = { };
+        VkCommandBufferBeginInfo           m_cmdBufInfo         = { };
 
-        VulkanTools::MemoryManager*      m_memory            = nullptr;
-        EvoVulkan::Core::VulkanKernel*   m_kernel            = nullptr;
+        VulkanTools::MemoryManager*        m_memory             = nullptr;
+        EvoVulkan::Core::VulkanKernel*     m_kernel             = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
                 "VK_LAYER_KHRONOS_validation"
@@ -147,20 +148,18 @@ namespace Framework::Graphics {
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
         void SetViewport(int32_t width, int32_t height) override {
-            if (m_currentFBO == 0)
+            if (m_currentFBOid == 0)
                 this->m_viewport = this->m_kernel->GetViewport();
-            else {
-                Helper::Debug::Error("Vulkan::SetViewport() : TODO!");
-            }
+            else if (m_currentFramebuffer)
+                m_viewport = m_currentFramebuffer->GetViewport();
 
             vkCmdSetViewport(m_currentCmd, 0, 1, &m_viewport);
         }
         void SetScissor(int32_t width, int32_t height) override {
-            if (m_currentFBO == 0)
+            if (m_currentFBOid == 0)
                 this->m_scissor = this->m_kernel->GetScissor();
-            else {
-                Helper::Debug::Error("Vulkan::SetScissor() : TODO!");
-            }
+            else if (m_currentFramebuffer)
+                this->m_scissor = m_currentFramebuffer->GetScissor();
 
             vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
         }
@@ -179,12 +178,12 @@ namespace Framework::Graphics {
          */
 
         SR_FORCE_INLINE void ClearBuffers() noexcept override {
-            if (m_currentFBO < 0) {
+            if (m_currentFBOid < 0) {
                 Helper::Debug::Error("Vulkan::ClearBuffers() : frame buffer isn't attached!");
                 return;
-            } else if (m_currentFBO > 0) {
-                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBO]->GetCountClearValues();
-                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBO]->GetClearValues();
+            } else if (m_currentFBOid > 0) {
+                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid]->GetCountClearValues();
+                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid]->GetClearValues();
             } else {
 
             }
@@ -389,6 +388,8 @@ namespace Framework::Graphics {
                 this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass();
                 this->m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
                 this->m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
+
+                this->m_currentFramebuffer = nullptr;
             } else {
                 if (FBO == UINT32_MAX) {
                     Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
@@ -405,9 +406,11 @@ namespace Framework::Graphics {
                 this->m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
                 this->m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
                 this->m_currentCmd               = framebuffer->GetCmd();
+
+                this->m_currentFramebuffer       = framebuffer;
             }
 
-            this->m_currentFBO = FBO;
+            this->m_currentFBOid = FBO;
         }
 
         SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const noexcept override {

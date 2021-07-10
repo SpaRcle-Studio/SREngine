@@ -215,7 +215,7 @@ namespace Framework::Graphics {
         bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const noexcept override;
 
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) noexcept override {
-            this->m_currentFBO = FBO;
+            this->m_currentFBOid = FBO;
             glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         }
 

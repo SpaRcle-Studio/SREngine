@@ -49,11 +49,11 @@ namespace Framework::Graphics {
         BasicWindow*    m_basicWindow           = nullptr;
         bool            m_hasErrors             = false;
 
+        int32_t         m_currentFBOid          = -1;
         int32_t         m_currentDescID         = -1;
         int             m_currentShaderID       = -1;
         __int16         m_preferredDevice       = -1;
         unsigned __int8 m_currentBuildIteration = 0;
-        uint32_t        m_currentFBO            = 0;
 
         bool            m_needReBuild           = false;
     protected:
@@ -74,7 +74,7 @@ namespace Framework::Graphics {
 
         virtual uint64_t GetVRAMUsage() { return 0; }
 
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const noexcept { return m_currentFBO;      }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const noexcept { return m_currentFBOid;    }
         [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const noexcept { return 1;                 }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const noexcept { return m_needReBuild;     }
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const noexcept { return m_hasErrors;       }

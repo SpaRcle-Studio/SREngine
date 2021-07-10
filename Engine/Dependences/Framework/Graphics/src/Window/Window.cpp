@@ -220,11 +220,28 @@ void Framework::Graphics::Window::Thread() {
 
                         if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
                             //this->m_render->DrawTransparentGeometry();
-
+                            //this->m_render->DrawGeometry();
                             m_cameras[0]->GetPostProcessing()->EndGeometry();
                         }
 
-                        this->m_render->DrawGeometry();
+                        {
+                            this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+
+                            for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
+                                m_env->SetBuildIteration(i);
+
+                                m_env->BindFrameBuffer(0);
+
+                                m_env->BeginRender();
+                                {
+                                    this->m_env->SetViewport();
+                                    this->m_env->SetScissor();
+
+                                    this->m_render->DrawGeometry();
+                                }
+                                m_env->EndRender();
+                            }
+                        }
 
                         //this->m_render->DrawSkybox();
 
