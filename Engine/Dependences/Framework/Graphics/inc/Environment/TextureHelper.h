@@ -28,14 +28,14 @@ namespace Framework::Graphics {
     }
 
     enum class TextureType {
-        Unknown, Diffuse, Normal, Specular, Roughness, Glossiness
+        Unknown = 0, Diffuse = 1, Normal = 2, Specular = 3, Roughness = 4, Glossiness = 5
     };
     enum class TextureFilter {
-        Unknown, NEAREST, LINEAR, NEAREST_MIPMAP_NEAREST,
-        LINEAR_MIPMAP_NEAREST, NEAREST_MIPMAP_LINEAR, LINEAR_MIPMAP_LINEAR
+        Unknown = 0, NEAREST = 1, LINEAR = 2, NEAREST_MIPMAP_NEAREST = 3,
+        LINEAR_MIPMAP_NEAREST = 4, NEAREST_MIPMAP_LINEAR = 5, LINEAR_MIPMAP_LINEAR = 6
     };
     enum class TextureCompression {
-        None, BC1, BC2, BC3, BC4, BC5, BC6, BC7
+        None = 0, BC1 = 1, BC2 = 2, BC3 = 3, BC4 = 4, BC5 = 5, BC6 = 6, BC7 = 7
     };
 
     inline static uint32_t Find4(uint32_t i) {

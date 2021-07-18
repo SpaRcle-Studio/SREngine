@@ -6,7 +6,6 @@
 #define GAMEENGINE_ENGINE_H
 
 #include <Debug.h>
-#include <Compiler.h>
 #include <Window/Window.h>
 #include <Render/Render.h>
 #include <EntityComponentSystem/Scene.h>
@@ -16,8 +15,11 @@
 #include <FileSystem/FileSystem.h>
 #include <Core/PhysEngine.h>
 
+#include <EvoScriptAPI.h>
+
 namespace Framework {
     class Engine {
+        friend class API;
     private:
         Engine();
         ~Engine();
@@ -52,14 +54,24 @@ namespace Framework {
             EventManager::Push(EventManager::Event::Exit);
         }
 
+        bool SetScene(Scene* scene) { // TODO: add thread security!
+            if (scene == m_scene) {
+                Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
+                return false;
+            } else {
+                this->m_scene = scene;
+                return true;
+            }
+        }
+
         [[nodiscard]] inline Helper::Types::Time* GetTime() const noexcept { return this->m_time; }
         [[nodiscard]] inline Scene* GetScene() const noexcept { return m_scene; }
-        [[nodiscard]] inline Scripting::Compiler* GetCompiler() const noexcept { return m_compiler; }
         [[nodiscard]] inline Graphics::Window* GetWindow() const noexcept { return m_window; }
+        [[nodiscard]] inline Graphics::Render* GetRender() const noexcept { return m_render; }
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
     public:
-        bool Create(Graphics::Window* window, Helper::Scene* scene, Physics::PhysEngine* physics);
-        bool Init(Graphics::Camera* scene_camera);
+        bool Create(Graphics::Window* window, Physics::PhysEngine* physics);
+        bool Init();
         bool Run();
         void Await();
         bool Close();

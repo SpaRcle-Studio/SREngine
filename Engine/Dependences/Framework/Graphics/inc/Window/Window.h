@@ -69,17 +69,17 @@ namespace Framework::Graphics {
 
         const char*           m_win_name              = "Unnamed";
         const char*           m_icoPath               = "Unknown";
-        unsigned int          m_smoothSamples         = 4;
+        uint8_t               m_smoothSamples         = 4;
 
         Render*               m_render                = nullptr;
 
         std::mutex            m_camerasMutex          = std::mutex();
         std::vector<Camera*>  m_newCameras            = std::vector<Camera*>();
-        size_t                m_countNewCameras       = 0;
+        uint32_t              m_countNewCameras       = 0;
         std::vector<Camera*>  m_camerasToDestroy      = std::vector<Camera*>();
-        size_t                m_countCamerasToDestroy = 0;
+        uint32_t              m_countCamerasToDestroy = 0;
         std::vector<Camera*>  m_cameras               = std::vector<Camera*>();
-        size_t                m_countCameras          = 0;
+        uint32_t              m_countCameras          = 0;
 
         bool                  m_GUIEnabled            = true;
 
@@ -94,9 +94,9 @@ namespace Framework::Graphics {
         bool                  m_fullScreen            = false;
         bool                  m_resizable             = false;
 
-        glm::vec2             m_windowPos             = { 0, 0 };
-        glm::vec2             m_newWindowPos          = { 0, 0 };
-        glm::vec2             m_newWindowSize         = { 0, 0 };
+        Math::Vector2         m_windowPos             = { 0, 0 };
+        Math::Vector2         m_newWindowPos          = { 0, 0 };
+        Math::Vector2         m_newWindowSize         = { 0, 0 };
     private:
         void PollEvents();
         void Thread();
@@ -120,9 +120,12 @@ namespace Framework::Graphics {
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
     public:
         void CentralizeWindow();
-        void Resize(unsigned int w, unsigned int h);
+        void Resize(uint32_t w, uint32_t h);
         void CentralizeCursor() noexcept;
-        SR_FORCE_INLINE void SetGUIEnabled(bool value) noexcept { this->m_GUIEnabled = value; }
+        SR_FORCE_INLINE void SetGUIEnabled(bool value) noexcept {
+            this->m_env->SetGUIEnabled(value);
+            this->m_GUIEnabled = value;
+        }
         bool SetCanvas(GUI::ICanvas* canvas);
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsFullScreen()           const noexcept { return this->m_env->IsFullScreen(); }

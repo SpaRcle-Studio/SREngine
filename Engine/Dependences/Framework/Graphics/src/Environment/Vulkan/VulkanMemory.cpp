@@ -205,7 +205,7 @@ bool Framework::Graphics::VulkanTools::MemoryManager::FreeShaderProgram(uint32_t
 
     auto* memory = this->m_ShaderPrograms[ID];
     if (!memory) {
-        Helper::Debug::Error("MemoryManager::FreeShaderProgram() : shader program is not exists!");
+        Helper::Debug::Error("MemoryManager::FreeShaderProgram() : shader program is not exists! (" + std::to_string(ID) + ")");
         return false;
     }
 
@@ -337,6 +337,32 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateShaderProgram(E
 }
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
+        std::array<uint8_t *, 6> pixels,
+        uint32_t w,
+        uint32_t h,
+        VkFormat format,
+        VkFilter filter,
+        uint8_t mipLevels)
+{
+
+    for (uint32_t i = 0; i < m_countTextures; i++)
+        if (m_textures[i] == nullptr) {
+            m_textures[i] = EvoVulkan::Types::Texture::LoadCubeMap(m_device, m_pool, format, w, h, pixels, mipLevels);
+
+            if (!m_textures[i]) {
+                Helper::Debug::Error("MemoryManager::AllocateTexture() : failed to load Evo Vulkan texture!");
+                return -1;
+            }
+
+            return (int32_t)i;
+        }
+
+    Helper::Debug::Error("MemoryManager::AllocateTexture() : overflow textures buffer!");
+    return -1;
+}
+
+
+int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
     uint8_t *pixels, uint32_t w, uint32_t h,
     VkFormat format,
     VkFilter filter,
@@ -435,4 +461,3 @@ VkDescriptorSet Framework::Graphics::VulkanTools::MemoryManager::GetDynamicTextu
 
     ex: return descriptor;
 }
-

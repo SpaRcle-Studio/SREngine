@@ -47,13 +47,15 @@ Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::
     if (!this->m_material)
         Debug::Warn("Mesh::Constructor() : material is nullptr! \n\tMesh name: "+m_geometry_name);
 
-    this->ReCalcModel();
+    //TODO: this->ReCalcModel();
 }
 
 Framework::Graphics::Types::Mesh::~Mesh() {
     if (!m_material){
         Debug::Error("Mesh::~Mesh() : material is nullptr! Something went wrong...");
     } else{
+        if (Debug::GetLevel() >= Debug::Level::High)
+            Debug::Log("Mesh::~Mesh() : free material pointer...");
         delete m_material;
         m_material = nullptr;
     }
@@ -76,7 +78,7 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     return true;
 }
 
-std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(std::string localPath, bool withIndices) {
+std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath) {
     std::string path = ResourceManager::GetResourcesFolder() + "/Models/"+localPath;
 
 #ifdef WIN32
@@ -102,6 +104,8 @@ ret:
     } else
         if (counter > 0)
             return meshes;
+
+    bool withIndices = Environment::Get()->GetPipeLine() == PipeLine::Vulkan;
 
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
@@ -134,16 +138,7 @@ void Mesh::OnDestroyGameObject() noexcept {
         m_render->RemoveMesh(this);
 }
 
-Mesh *Mesh::LoadJson(std::string json_data, std::vector<Mesh*>* allMeshes) {
-    nlohmann::json json = json_data;
-
-    std::vector<Mesh*> meshes = Load(json["Mesh"]["Path"]);
-    if (allMeshes)
-        *allMeshes = meshes;
-
-    return meshes[(unsigned long)std::atoi(((std::string)json["Mesh"]["ID"]).c_str())];
-}
-
+/*
 nlohmann::json Mesh::Save() {
     nlohmann::json json;
     json["Mesh"]["GeometryName"] = m_geometry_name;
@@ -171,7 +166,7 @@ nlohmann::json Mesh::Save() {
     }
 
     return json;
-}
+}*/
 
 void Mesh::OnSelected(bool value) noexcept {
     //if (!m_render)
@@ -204,22 +199,6 @@ bool Mesh::SimpleDraw() {
     this->m_env->DrawTriangles(m_VAO, m_countVertices);
 
     return true;
-}
-
-void Mesh::SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale) {
-    this->m_position = pos;
-    this->m_rotation = rot;
-    this->m_scale    = scale;
-
-    glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), m_position);
-
-    modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
-            m_rotation.x,
-            m_rotation.y,
-            -m_rotation.z
-    ))));
-
-    this->m_modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
 }
 
 bool Mesh::DrawOnInspector() {
@@ -263,6 +242,7 @@ bool Mesh::DrawOnInspector() {
     return true;
 }
 
+/*
 void Mesh::PrintInfo() {
     Helper::Debug::Info("Mesh::PrintInfo(): "
                         "\n\tGeometry name: "  + m_geometry_name +
@@ -273,5 +253,5 @@ void Mesh::PrintInfo() {
                         "\n\tInverse: "        + (m_inverse ? "true" : "false") +
                         "\n\tIs calculated: "  + (m_isCalculated ? "true" : "false") +
                         "\n\tVAO: "            + std::to_string(m_VAO));
-}
+}*/
 

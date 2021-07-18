@@ -31,7 +31,7 @@
 #include <Render/Implementations/VulkanRender.h>
 
 using namespace Framework;
-using namespace Framework::Scripting;
+//using namespace Framework::Scripting;
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
 using namespace Framework::Helper::Types;
@@ -86,14 +86,12 @@ int main() {
             2
     );
 
-    auto scene = Scene::New("New scene");
-
     auto physics = new PhysEngine();
 
     auto engine = Engine::Get();
 
-    if(engine->Create(window, scene, physics)) {
-      if (engine->Init(nullptr)){
+    if(engine->Create(window, physics)) {
+      if (engine->Init()){
           if (engine->Run()){
 
           }

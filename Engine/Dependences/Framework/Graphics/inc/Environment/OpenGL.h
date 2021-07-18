@@ -229,10 +229,6 @@ namespace Framework::Graphics {
             //return (OpenGLShader*)malloc(sizeof(OpenGLShader));
             return SR_NULL;
         }
-        void FreeShaderProgram(SR_SHADER_PROGRAM shaderProgram) const noexcept override {
-            //if (shaderProgram != nullptr)
-            //    free((OpenGLShader*)shaderProgram);
-        }
         bool CompileShader(
                 const std::string& path,
                 int32_t FBO,
@@ -245,9 +241,10 @@ namespace Framework::Graphics {
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept override;
-        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
+        SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
             glDeleteProgram(shaderProgram);
+            return true;
             //reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID = 0;
         }
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
@@ -324,7 +321,7 @@ namespace Framework::Graphics {
 
             return true;
         }
-        SR_FORCE_INLINE bool CalculateVAO(uint32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept override{
+        SR_FORCE_INLINE bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept override{
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
 
@@ -506,11 +503,12 @@ namespace Framework::Graphics {
                 TextureCompression compression,
                 uint8_t mipLevels,
                 bool alpha) const noexcept override;
-        [[nodiscard]] uint32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::vector<unsigned char*>& data) const noexcept override;
-        SR_FORCE_INLINE void FreeCubeMap(uint32_t ID)const noexcept override{
+        [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) override;
+        SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override{
             Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
             //glClearTexSubImage()
-            glDeleteTextures(6, &ID); // TODO: I don't know if this works
+            glDeleteTextures(6, reinterpret_cast<const GLuint *>(&ID)); // TODO: I don't know if this works
+            return true;
         }
         [[nodiscard]] bool FreeFBO(uint32_t FBO) const noexcept override {
             glDeleteFramebuffers(1, &FBO);

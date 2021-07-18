@@ -200,10 +200,10 @@ namespace Framework::Graphics {
             return DefWindowProc(hWnd, message, wParam, lParam);
         }
     private:
-        HWND m_hWnd = nullptr;
-        HDC m_hDC  = nullptr;
-        HGLRC m_hRC = nullptr;
-        HINSTANCE m_hInst = nullptr;
+        HWND      m_hWnd      = nullptr;
+        HDC       m_hDC       = nullptr;
+        HGLRC     m_hRC       = nullptr;
+        HINSTANCE m_hInst     = nullptr;
         DWORD     m_dwExStyle = NULL;
         DWORD     m_dwStyle   = NULL;
     public:

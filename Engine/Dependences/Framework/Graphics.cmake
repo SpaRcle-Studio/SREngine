@@ -12,7 +12,6 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ObjLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/FbxLoader.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureCompressor.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ImageLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureLoader.cpp
 

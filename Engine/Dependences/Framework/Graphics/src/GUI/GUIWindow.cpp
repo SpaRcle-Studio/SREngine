@@ -51,7 +51,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::Scene
 
     unsigned long i = 0;
 
-    GUIWindow::g_shiftPressed = Helper::InputSystem::IsPressed(Helper::KeyCode::LShift);
+    GUIWindow::g_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
 
     if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
@@ -314,7 +314,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             if (value < 1) {
                 if (g_currentGuizmoMode == ImGuizmo::LOCAL)
                     gameObject->GetTransform()->Translate(
-                            gameObject->GetTransform()->Direction(Vector3(axis), true) * value, true);
+                            gameObject->GetTransform()->Direction(Vector3(axis), true) * value);
                     //gameObject->GetTransform()->Translate(
                     //        gameObject->GetTransform()->Direction(Vector3(1,0,0), true) * 0.01, true);
                 else

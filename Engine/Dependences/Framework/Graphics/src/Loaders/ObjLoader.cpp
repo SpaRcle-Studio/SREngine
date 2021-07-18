@@ -6,15 +6,10 @@
 
 #include <Types/Geometry/Mesh3D.h>
 #include <Debug.h>
-#include <Environment/Vertex.h>
-#include <FileSystem/FileSystem.h>
+#include <typeinfo>
 #include <ResourceManager/ResourceManager.h>
-#include <Utils/StringUtils.h>
 
 #include <tinyobjloader/tiny_obj_loader.cc>
-
-#include <Render/Shader.h>
-#include <Types/Material.h>
 
 using namespace Framework::Helper;
 
@@ -38,7 +33,7 @@ namespace Framework::Graphics {
             Mesh3D* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
 
             auto vertices = std::vector<Vertices::Mesh3DVertex>();
-            auto indices = std::vector<unsigned int>();
+            auto indices = std::vector<uint32_t>();
 
             std::unordered_map<Vertices::Mesh3DVertex, uint32_t> uniqueVertices{};
 
@@ -51,22 +46,25 @@ namespace Framework::Graphics {
                         attrib.vertices[3 * index.vertex_index + 2]
                 };
 
-                vertex.uv = {
-                        //attrib.texcoords[2 * index.texcoord_index + 0],
-                        //attrib.texcoords[2 * index.texcoord_index + 1]
+                if (!attrib.texcoords.empty()) {
+                    vertex.uv = {
+                            //attrib.texcoords[2 * index.texcoord_index + 0],
+                            //attrib.texcoords[2 * index.texcoord_index + 1]
 
-                               attrib.texcoords[2 * index.texcoord_index + 0],
-                        1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
-                };
+                            attrib.texcoords[2 * index.texcoord_index + 0],
+                            1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
+                    };
+                }
 
-                //vertex.color = { 1.0f, 1.0f, 1.0f };
+                if (!attrib.normals.empty()) {
+                    // TODO: CHECK CORRECTLY!
+                    vertex.norm = {
+                            attrib.normals[3 * index.normal_index + 0],
+                            attrib.normals[3 * index.normal_index + 1],
+                            attrib.normals[3 * index.normal_index + 2]
+                    };
+                }
 
-                // TODO: CHECK CORRECTLY!
-                vertex.norm = {
-                        attrib.normals[3 * index.normal_index + 0],
-                        attrib.normals[3 * index.normal_index + 1],
-                        attrib.normals[3 * index.normal_index + 2]
-                };
                 vertex.tang = { 0, 0, 0 };
 
                 //============================================
@@ -333,6 +331,4 @@ namespace Framework::Graphics {
         AddMesh();
         return true;
     }
-
-
 }

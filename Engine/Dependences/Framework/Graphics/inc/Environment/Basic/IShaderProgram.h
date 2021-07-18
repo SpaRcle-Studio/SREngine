@@ -41,6 +41,9 @@ namespace Framework::Graphics {
         if (Helper::StringUtils::Contains(line, "sampler2D"))
             return LayoutBinding::Sampler2D;
 
+        if (Helper::StringUtils::Contains(line, "samplerCube"))
+            return LayoutBinding::Sampler2D;
+
         if (Helper::StringUtils::Contains(line, "uniform"))
             return LayoutBinding::Uniform;
 

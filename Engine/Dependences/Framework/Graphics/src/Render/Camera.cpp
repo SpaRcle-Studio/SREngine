@@ -22,33 +22,8 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
         }
     }
 
-    shader->SetMat4("viewMat", this->m_viewMat);
+    shader->SetMat4("viewMat", this->m_viewTranslateMat);
     shader->SetMat4("projMat", this->m_projection);
-}
-
-void Framework::Graphics::Camera::UpdateShader(Framework::Graphics::Shader *shader) noexcept {
-    if (!m_isCreate) {
-        Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
-        return;
-    }
-
-    if (!shader->Complete())
-        return;
-
-    if (m_needUpdate) {
-        if (!CompleteResize()) {
-            Debug::Error("Camera::UpdateShader() : failed to complete resize!");
-            return;
-        }
-    }
-
-    if (m_pipeline == PipeLine::OpenGL) {
-        shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
-    } else {
-        m_ubo.view = this->m_viewMat;
-        m_ubo.proj = this->m_projection;
-        this->m_env->UpdateUBO(shader->GetUBO(0), &m_ubo, sizeof(ProjViewUBO));
-    }
 }
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
@@ -110,19 +85,21 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
         });
     }
     else {
-        matrix = glm::rotate(matrix, m_pitch, { 1, 0, 0 });
-        matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_pitch + float(180.f * 3.14 / 45.f / 4.f), { 1, 0, 0 });
+        matrix = glm::rotate(matrix, m_yaw + float(180.f * 3.14 / 45.f / 4.f),  { 0, 1, 0 });
         matrix = glm::rotate(matrix, m_roll,  { 0, 0, 1 });
 
-        m_viewMat = glm::translate(matrix, {
-                -m_pos.x,
-                m_pos.y,
+        m_viewMat = matrix;
+
+        m_viewTranslateMat = glm::translate(matrix, {
+                m_pos.x,
+                -m_pos.y,
                 m_pos.z//-m_pos.z
         });
     }
 }
 
-void Framework::Graphics::Camera::OnRotate(glm::vec3 newValue) noexcept {
+void Framework::Graphics::Camera::OnRotate(Math::Vector3 newValue) noexcept {
     this->m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
     this->m_pitch = float(newValue.x * 3.14 / 45.f / 4.f);
     this->m_roll  = float(newValue.z * 3.14 / 45.f / 4.f);
@@ -130,7 +107,7 @@ void Framework::Graphics::Camera::OnRotate(glm::vec3 newValue) noexcept {
     this->UpdateView();
 }
 
-void Framework::Graphics::Camera::OnMove(glm::vec3 newValue) noexcept {
+void Framework::Graphics::Camera::OnMove(Math::Vector3 newValue) noexcept {
     this->m_pos = {
              newValue.x,
              newValue.y,
@@ -143,7 +120,7 @@ void Framework::Graphics::Camera::UpdateProjection() {
     m_projection = glm::perspective(glm::radians(45.f), (float)m_cameraSize.x / (float)m_cameraSize.y, m_near, m_far);
 }
 void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
-    this->m_cameraSize = {w, h};
+    this->m_cameraSize = { (float)w, (float)h };
     m_projection = glm::perspective(glm::radians(45.f), (float)w / (float)h, m_near, m_far);
     m_needUpdate = true;
 }
@@ -168,6 +145,7 @@ void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
     }
 }
 
+/*
 nlohmann::json Framework::Graphics::Camera::Save() {
     nlohmann::json camera;
     camera["Camera"]["Far"] = m_far;
@@ -181,7 +159,7 @@ nlohmann::json Framework::Graphics::Camera::Save() {
     camera["Camera"]["PostProcessing"]["Gamma"] = m_postProcessing->GetGamma();
 
     return camera;
-}
+}*/
 
 bool Framework::Graphics::Camera::Free() {
     Debug::Graph("Camera::Free() : free camera pointer...");
@@ -247,9 +225,10 @@ bool Framework::Graphics::Camera::DrawOnInspector() {
     return true;
 }
 
-Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate() {
+Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate(uint32_t width, uint32_t height) {
     auto camera = new Camera();
     camera->m_postProcessing = PostProcessing::Allocate(camera);
+    camera->m_cameraSize = { (float)width, (float)height };
     if (!camera->m_postProcessing) {
         Debug::Error("Camera::Allocate() : failed to allocate post processing!");
         return nullptr;
@@ -258,6 +237,13 @@ Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate() {
 }
 
 bool Framework::Graphics::Camera::CompleteResize() {
+    if (m_cameraSize.x <= 0 || m_cameraSize.y <= 0) {
+        Helper::Debug::Error("Camera::CompleteResize() : camera width or height equals or less zero!");
+        return false;
+    }
+
+    this->UpdateProjection();
+
     if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)) {
         Debug::Error("Camera::CompleteResize() : failed recalculated frame buffers!");
         return false;

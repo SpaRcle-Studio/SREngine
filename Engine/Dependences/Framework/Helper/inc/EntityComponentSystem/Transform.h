@@ -17,7 +17,6 @@
 #include <Math/Vector3.h>
 #include <Math/Quaternion.h>
 
-
 namespace Framework::Helper {
     using namespace Framework::Helper::Math;
 
@@ -121,10 +120,10 @@ namespace Framework::Helper {
         [[nodiscard]] Vector3 Up()      const noexcept;
 
         //void DeltaTranslate(Vector3 delta);
-        void Translate(Vector3 val, bool local = false) noexcept;
+        void Translate(Vector3 val) noexcept;
         void GlobalTranslate(Vector3 axis, double value);
 
-        void Rotate(Vector3 angle, bool local = false) noexcept;
+        void Rotate(Vector3 angle) noexcept;
         void RotateAxis(Vector3 axis, double angle, bool local = false) noexcept;
         void GlobalRotateAxis(Vector3 axis, double value);
 
@@ -137,29 +136,15 @@ namespace Framework::Helper {
         //void UpdateChildRotation(glm::vec3 delta, bool pivot);
         void UpdateChildRotation(bool pivot);
     public:
-        /*inline static const glm::vec3 right     = { 1, 0, 0 };
-        inline static const glm::vec3 forward   = { 0, 0, 1 };
-        inline static const glm::vec3 up        = { 0, 1, 0 };
-
-        inline static const glm::vec3 down      = {  0, -1,  0 };
-        inline static const glm::vec3 left      = { -1,  0,  0 };
-        inline static const glm::vec3 back      = {  0,  0, -1 };
-
-        inline static const glm::vec3 pitch     = { 1, 0, 0 };
-        inline static const glm::vec3 yaw       = { 0, 1, 0 };
-        inline static const glm::vec3 roll      = { 0, 0, 1 };*/
-
         inline static const Vector3 right     = Vector3(1, 0, 0);
         inline static const Vector3 up        = Vector3(0, 1, 0);
         inline static const Vector3 forward   = Vector3(0, 0, 1);
     private:
         Vector3         m_localPosition              = { 0, 0, 0 };
-        //Quaternion      m_localRotation              = Quaternion(Vector3(0,0,0));
         Vector3         m_localRotation              = { 0, 0, 0 };
         Vector3         m_localScale                 = { 1, 1, 1 };
 
         Vector3         m_globalPosition             = { 0, 0, 0 };
-        //Quaternion      m_globalRotation             = Quaternion(Vector3(0,0,0));
         Vector3         m_globalRotation             = { 0, 0, 0 };
         Vector3         m_globalScale                = { 1, 1, 1 };
 

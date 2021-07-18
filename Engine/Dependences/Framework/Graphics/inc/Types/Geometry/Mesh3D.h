@@ -28,17 +28,15 @@ namespace Framework::Graphics::Types {
         SR_FORCE_INLINE void DrawVulkan() override {
             if (!this->IsReady() || m_isDestroy) return;
 
+            if (!m_isCalculated)
+                if (m_hasErrors || !this->Calculate())
+                    return;
+
             if (m_descriptorSet < 0) {
                 this->m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform });
                 if (m_descriptorSet < 0) {
                     Helper::Debug::Error("Mesh3D::Calculate() : failed to calculate descriptor set!");
                     this->m_hasErrors = true;
-                    return;
-                }
-
-                this->m_UBO = m_env->AllocateUBO(sizeof(Mesh3DUBO));
-                if (m_UBO < 0) {
-                    Helper::Debug::Error("Mesh3D::Calculate() : failed to allocate uniform buffer object!");
                     return;
                 }
 
@@ -55,10 +53,6 @@ namespace Framework::Graphics::Types {
                 this->m_material->UseVulkan();
             }
 
-            if (!m_isCalculated)
-                if (m_hasErrors || !this->Calculate())
-                    return;
-
             this->m_env->BindDescriptorSet(m_descriptorSet);
 
             this->m_env->DrawIndices(this->m_countIndices);
@@ -72,11 +66,10 @@ namespace Framework::Graphics::Types {
             this->m_vertices      = vertices;
         }
 
-        bool Free() override {
+        void Free() override {
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
                 Debug::Log("Mesh3D::Free() : free mesh memory...");
             delete this;
-            return true;
         }
 
         bool Calculate() override;

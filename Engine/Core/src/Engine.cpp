@@ -3,7 +3,6 @@
 //
 
 #include "../inc/Engine.h"
-#include <Input/Input.h>
 #include <Types/Time.h>
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
@@ -11,17 +10,17 @@
 #include <GUI/ICanvas.h>
 
 #include <utility>
+#include <chrono>
 #include <GUI/Canvas.h>
 #include <Events/EventManager.h>
-#include <API.h>
 
 Framework::Engine::Engine() {
-    this->m_compiler = new Scripting::Compiler();
+    this->m_compiler = new Scripting::EvoCompiler();
 }
 
 Framework::Engine::~Engine() = default;
 
-bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene, Physics::PhysEngine* physics) {
+bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* physics) {
     this->m_window = window;
     this->m_render = window->GetRender();
 
@@ -47,24 +46,22 @@ bool Framework::Engine::Create(Graphics::Window* window, Helper::Scene* scene, P
     }
 
     Graphics::Environment::RegisterScrollEvent([](double x, double y){
-        InputSystem::SetMouseScroll(x, y);
+        Input::SetMouseScroll(x, y);
     });
-
-    this->m_scene = scene;
 
     this->m_isCreate = true;
 
     return true;
 }
 
-bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
+bool Framework::Engine::Init() {
     if (!m_isCreate) {
         Debug::Error("Engine::Init() : engine is not create!");
         return false;
     }
 
     if (m_isInit) {
-        Debug::Error("Engine::Init() : engine already initialize!");
+        Debug::Error("Engine::Init() : engine is already initialize!");
         return false;
     }
 
@@ -83,15 +80,13 @@ bool Framework::Engine::Init(Graphics::Camera* scene_camera) {
     });
 
     if (!this->m_window->Init()) {
-        Helper::Debug::Error("Engine::Init() : failed initialize window!");
+        Helper::Debug::Error("Engine::Init() : failed to initialize window!");
         return false;
-    } else {
-        if (scene_camera) {
-            m_window->AddCamera(scene_camera);
+    }
 
-            GameObject *camera = m_scene->Instance("SceneCamera");
-            camera->AddComponent(scene_camera);
-        }
+    if (!m_compiler || !m_compiler->Init()) {
+        Helper::Debug::Error("Engine::Init() : failed to initialize compiler!");
+        return false;
     }
 
     this->RegisterLibraries();
@@ -127,70 +122,104 @@ bool Framework::Engine::Run() {
 void Framework::Engine::Await() {
     Debug::Info("Engine::Await() : load engine script...");
 
-    Scripting::Script* engine = nullptr;
+    Scripting::Script* engine = Scripting::Script::Allocate(
+            "SpaRcle Engine", "Engine/Engine", m_compiler,
+            Scripting::ScriptType::EvoScript);
 
-    if (Graphics::Environment::Get()->GetPipeLine() == Graphics::PipeLine::OpenGL)
-        engine = m_compiler->Load("engine", true);
-    else
-        engine = m_compiler->Load("simpleEngine", true);
+    if (!engine->Compile()) {
+        Helper::Debug::Error("Engine::Await() : failed to load engine script!");
+        return;
+    }
+
+    //if (Graphics::Environment::Get()->GetPipeLine() == Graphics::PipeLine::OpenGL)
+    //    engine = m_compiler->Load("engine", true);
+    //else
+    //    engine = m_compiler->Load("simpleEngine", true);
 
     Debug::Info("Engine::Await() : wait close engine...");
 
+    const float updateFrequency = (1.f / 60.f) * 1000.f;
+    float accumulator = updateFrequency;
+    using clock = std::chrono::high_resolution_clock;
+    auto timeStart = clock::now();
+
     while (m_window->IsWindowOpen()) {
+        auto deltaTime = clock::now() - timeStart;
+        timeStart = clock::now();
+
         EventManager::PoolEvents();
 
-        if (m_exitEvent) {
-            Debug::System("The closing event was received!");
+        if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::Enter)) {
+            Debug::System("The closing key combination was be detected!");
             break;
         }
 
-        m_compiler->PoolEvents();
-
-        Helper::InputSystem::Check();
-
-        if (m_time->Begin()){
-            m_compiler->FixedUpdateAll();
-
-            m_time->End();
+        if (m_exitEvent) {
+            Debug::System("The closing event was be received!");
+            break;
         }
 
+
+        if (accumulator >= updateFrequency)
+            while (accumulator >= updateFrequency) {
+                Helper::Input::Check();
+                m_compiler->FixedUpdateAll();
+                accumulator -= updateFrequency;
+            }
+
+        //if (m_time->Begin()){
+        //    m_compiler->FixedUpdateAll();
+        //    m_time->End();
+        //}
+
         m_compiler->UpdateAll();
+
+        accumulator += (float)deltaTime.count() / 1000000.f;
     }
 
     engine->Close();
     engine->Destroy();
+    engine->Free();
 
-    m_compiler->PoolEvents();
+    //m_compiler->PoolEvents();
 }
 
 bool Framework::Engine::Close() {
     Helper::Debug::Info("Engine::Close() : close game engine...");
 
-    this->m_compiler->CloseAll();
-    this->m_compiler->DestroyAll();
+    //this->m_compiler->CloseAll();
+    //this->m_compiler->DestroyAll();
 
-    this->m_compiler->PoolEvents();
+    //this->m_compiler->PoolEvents();
 
-    if (m_window->IsRun()) {
-        this->m_window->Close();
-        this->m_window->Free();
+    if (m_window && m_window->IsRun()) {
+        m_window->Close();
+        m_window->Free();
+        m_window = nullptr;
     }
 
-    this->m_compiler->PoolEvents();
-    this->m_compiler->Free();
-    //Helper::Debug::Info("Engine::Close() : free compiler pointer...");
-    //delete m_compiler;
+    //this->m_compiler->PoolEvents();
 
-    if (m_time)
+    if (m_compiler) {
+        Helper::Debug::Info("Engine::Close() : destroy compiler...");
+        m_compiler->Destroy();
+        m_compiler->Free();
+        m_compiler = nullptr;
+    }
+
+    if (m_time) {
+        Helper::Debug::Info("Engine::Close() : destroy time...");
         delete m_time;
+        m_time = nullptr;
+    }
 
     return false;
 }
 
 bool Framework::Engine::RegisterLibraries() {
-    Helper::Debug::Log("Engine::RegisterLibraries() : register all lua libraries...");
+    Helper::Debug::Log("Engine::RegisterLibraries() : register all libraries...");
 
-    API::Register(m_compiler);
+    API::RegisterEvoScriptClasses(dynamic_cast<Scripting::EvoCompiler*>(m_compiler));
 
     return true;
 }

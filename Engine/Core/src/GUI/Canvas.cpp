@@ -4,10 +4,12 @@
 
 #include "GUI/Canvas.h"
 
-Framework::Canvas::Canvas(Scripting::Script* script) {
-    script->AddUsePoint();
-    this->m_script = script;
-}
+#include <map>
+
+//Framework::Canvas::Canvas(Scripting::Script* script) {
+//    script->AddUsePoint();
+//    this->m_script = script;
+//}
 
 bool Framework::Canvas::Close() {
     m_mutex.lock();
@@ -16,7 +18,7 @@ bool Framework::Canvas::Close() {
 
     this->m_isClosed = true;
 
-    if (m_script->IsDestroy()) {
+    /*if (m_script->IsDestroy()) {
         if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
             Helper::Debug::Log("Canvas::Close() : remove use point from script...");
         m_script->RemoveUsePoint();
@@ -26,7 +28,7 @@ bool Framework::Canvas::Close() {
         m_script->RemoveUsePoint();
         m_script->Close();
         m_script->Destroy();
-    }
+    }*/
 
     m_mutex.unlock();
 
@@ -42,7 +44,7 @@ bool Framework::Canvas::Free() {
 void Framework::Canvas::Draw() {
     m_mutex.lock();
 
-    if (m_script->GetStatus() != Scripting::Script::Status::Compiled) {
+    /*if (m_script->GetStatus() != Scripting::Script::Status::Compiled) {
         m_mutex.unlock();
         return;
     }
@@ -63,18 +65,13 @@ void Framework::Canvas::Draw() {
         if (m_hasDraw) m_script->Call("Draw");
     }
 
-    m_script->RemoveUsePoint();
+    m_script->RemoveUsePoint();*/
 
     m_mutex.unlock();
 }
 
 bool Framework::Canvas::Init() {
-    //if (m_script->IsNeedInit())
-    //    m_script->Init();
-    //if (m_script->IsNeedStart())
-     //   m_script->Start();
-
-    this->m_hasDraw = this->m_script->FunctionExists("Draw");
+    //this->m_hasDraw = this->m_script->FunctionExists("Draw");
 
     this->m_isInit = true;
 

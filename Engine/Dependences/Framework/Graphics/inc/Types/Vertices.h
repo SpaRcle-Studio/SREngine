@@ -116,6 +116,10 @@ namespace Framework::Graphics::Vertices {
             return sizeof(SkyboxVertex);
         }
 
+        bool operator==(const SkyboxVertex& other) const {
+            return pos == other.pos;
+        }
+
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
@@ -138,9 +142,16 @@ namespace std {
             std::size_t res = 0;
             hash_combine<glm::vec3>(res, vertex.pos);
             hash_combine<glm::vec2>(res, vertex.uv);
-            //hash_combine<glm::vec3>(res, vertex.color);
             hash_combine<glm::vec3>(res, vertex.norm);
             hash_combine<glm::vec3>(res, vertex.tang);
+            return res;
+        }
+    };
+
+    template<> struct std::hash<Framework::Graphics::Vertices::SkyboxVertex> {
+        size_t operator()(Framework::Graphics::Vertices::SkyboxVertex const& vertex) const {
+            std::size_t res = 0;
+            hash_combine<glm::vec3>(res, vertex.pos);
             return res;
         }
     };

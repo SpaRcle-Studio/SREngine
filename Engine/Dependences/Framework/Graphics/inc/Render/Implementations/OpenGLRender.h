@@ -13,7 +13,7 @@ namespace Framework::Graphics::Impl {
         void DrawSingleColors() noexcept override {
             this->m_flatGeometryShader->Use();
 
-            this->m_currentCamera->UpdateShader(m_flatGeometryShader);
+            this->m_currentCamera->UpdateShader<ProjViewUBO>(m_flatGeometryShader);
 
             if (!m_colorBuffer)
                 this->m_colorBuffer = new ColorBuffer();
@@ -23,13 +23,13 @@ namespace Framework::Graphics::Impl {
             uint32_t id = 0;
 
             for (auto const& [key, val] : m_geometry.m_groups) {
-                for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++) {
+                for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++) {
                     this->m_flatGeometryShader->SetInt("id", (int) id);
-                    this->m_flatGeometryShader->SetMat4("modelMat", val[m_t]->GetModelMatrix());
+                    this->m_flatGeometryShader->SetMat4("modelMat", val[i]->GetModelMatrix());
 
-                    this->m_colorBuffer->LoadName(m_t, Helper::StringUtils::IntToColor(id + 1));
+                    this->m_colorBuffer->LoadName(i, Helper::StringUtils::IntToColor(id + 1));
 
-                    val[m_t]->SimpleDraw();
+                    val[i]->SimpleDraw();
 
                     id++;
                 }
@@ -60,7 +60,7 @@ namespace Framework::Graphics::Impl {
 
         bool DrawGeometry() override {
             Shader::GetDefaultGeometryShader()->Use();
-            this->m_currentCamera->UpdateShader(Shader::GetDefaultGeometryShader());
+            this->m_currentCamera->UpdateShader<ProjViewUBO>(Shader::GetDefaultGeometryShader());
 
             if (m_wireFrame) {
                 this->m_env->SetDepthTestEnabled(false);
@@ -69,8 +69,8 @@ namespace Framework::Graphics::Impl {
 
                 for (auto const& [key, val] : m_geometry.m_groups) {
                     m_env->BindVAO(key);
-                    for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
-                        val[m_t]->DrawOpenGL();
+                    for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
+                        val[i]->DrawOpenGL();
                 }
 
                 this->m_env->SetWireFrameEnabled(false);
@@ -79,8 +79,8 @@ namespace Framework::Graphics::Impl {
             } else {
                 for (auto const& [key, val] : m_geometry.m_groups) {
                     m_env->BindVAO(key);
-                    for (m_t = 0; m_t < m_geometry.m_counters[key]; m_t++)
-                        val[m_t]->DrawOpenGL();
+                    for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
+                        val[i]->DrawOpenGL();
                 }
             }
 
@@ -91,10 +91,11 @@ namespace Framework::Graphics::Impl {
             //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
 
             if (m_skybox && m_skyboxEnabled) {
-                //m_skyboxShader->Use();
-                //m_currentCamera->UpdateShader(m_skyboxShader);
-                //m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
-                m_skybox->Draw(m_currentCamera);
+                m_skyboxShader->Use();
+                m_currentCamera->UpdateShader<SkyboxUBO>(m_skyboxShader);
+                m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
+
+                m_skybox->DrawOpenGL();
             }
 
             return true;

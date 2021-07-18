@@ -12,6 +12,10 @@ namespace Framework::Graphics {
         Common, Shared
     };
 
+    struct SkyboxUBO {
+        glm::mat4 PVMat;
+    };
+
     struct ProjViewUBO {
         glm::mat4 proj;
         glm::mat4 view;

@@ -4,8 +4,8 @@
 
 #include "Input/InputSystem.h"
 
-void Framework::Helper::InputSystem::Check() {
-    if (!InputSystem::g_init) {
+void Framework::Helper::Input::Check() {
+    if (!Input::g_init) {
         for (auto &g_key : g_keys)
             g_key = State::UnPressed;
         g_init = true;
@@ -15,15 +15,17 @@ void Framework::Helper::InputSystem::Check() {
     g_mouseScrollCurrent = glm::vec2(0,0);
 
     g_mouse_old = g_mouse;
-    g_mouse = Input::GetMousePos();
+    g_mouse = Helper::GetMousePos();
 
-    BYTE *arr = new BYTE[256];
+    if (!g_arr) {
+        g_arr = new BYTE[256];
+        memset(g_arr, 0, sizeof(256));
+    }
 
-    memset(arr, 0, sizeof(256));
     GetKeyState(0);
-    if (GetKeyboardState(arr)) {
+    if (GetKeyboardState(g_arr)) {
         for (int i = 0; i < 256; i++)
-            if (arr[i] >> 7 != 0) {
+            if (g_arr[i] >> 7 != 0) {
                 switch (g_keys[i]) {
                     case State::UnPressed:
                         g_keys[i] = State::Down;
@@ -56,25 +58,25 @@ void Framework::Helper::InputSystem::Check() {
             }
     }
 
-    delete[] arr;
+    //delete[] arr;
 }
 
-bool Framework::Helper::InputSystem::IsDown(Framework::Helper::KeyCode key) {
+bool Framework::Helper::Input::GetKeyDown(Framework::Helper::KeyCode key) {
     return g_keys[(int)key] == State::Down;
 }
 
-bool Framework::Helper::InputSystem::IsUp(Framework::Helper::KeyCode key) {
+bool Framework::Helper::Input::GetKeyUp(Framework::Helper::KeyCode key) {
     return g_keys[(int)key] == State::Up;
 }
 
-bool Framework::Helper::InputSystem::IsPressed(Framework::Helper::KeyCode key) {
+bool Framework::Helper::Input::GetKey(KeyCode key) {
     return (g_keys[(int)key] == State::Pressed || g_keys[(int)key] == State::Down);
 }
 
-glm::vec2 Framework::Helper::InputSystem::MouseDrag() {
+Framework::Helper::Math::Vector2 Framework::Helper::Input::GetMouseDrag() {
     return g_mouse - g_mouse_old;
 }
 
-int Framework::Helper::InputSystem::GetMouseWheel() {
+int Framework::Helper::Input::GetMouseWheel() {
     return g_mouseScroll.y;
 }

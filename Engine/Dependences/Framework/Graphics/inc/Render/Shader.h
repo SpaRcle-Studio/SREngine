@@ -36,7 +36,7 @@ namespace Framework::Graphics {
         Shader(Render* render, const std::string& name);
         Shader(Shader&) = delete;
     private:
-        SR_SHADER_PROGRAM     m_shaderProgram        = 0;
+        SR_SHADER_PROGRAM     m_shaderProgram        = SR_NULL_SHADER;
         void*                 m_shaderTempData       = nullptr;
 
         bool                  m_isLink               = false;

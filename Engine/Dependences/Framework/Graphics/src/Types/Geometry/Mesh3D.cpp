@@ -62,6 +62,12 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
             }
         }
         else {
+            this->m_UBO = m_env->AllocateUBO(sizeof(Mesh3DUBO));
+            if (m_UBO < 0) {
+                Helper::Debug::Error("Mesh3D::Calculate() : failed to allocate uniform buffer object!");
+                return false;
+            }
+
             auto exists = VBOandIBO_names.find(m_resource_id);
             if (exists != VBOandIBO_names.end()) {
                 if (Debug::GetLevel() >= Debug::Level::High)
@@ -81,7 +87,7 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     }
 
     if (m_env->GetPipeLine() == PipeLine::OpenGL) {
-        if (!this->m_env->CalculateVAO(reinterpret_cast<unsigned int &>(m_VAO), m_vertices, m_countVertices)) {
+        if (!this->m_env->CalculateVAO(m_VAO, m_vertices, m_countVertices)) {
             Debug::Error("Mesh3D::Calculate() : failed calculate \"" + m_geometry_name + "\" mesh!");
             m_mutex.unlock();
             return false;
@@ -91,14 +97,14 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
         VAO_names[m_resource_id] = m_VAO;
     }
     else {
-        if (!this->m_env->CalculateVBO(reinterpret_cast<unsigned int &>(m_VBO), m_vertices.data(), sizeof(Vertices::Mesh3DVertex), m_countVertices)) {
+        if (!this->m_env->CalculateVBO(m_VBO, m_vertices.data(), sizeof(Vertices::Mesh3DVertex), m_countVertices)) {
             Debug::Error("Mesh3D::Calculate() : failed calculate VBO \"" + m_geometry_name + "\" mesh!");
             this->m_hasErrors = true;
             m_mutex.unlock();
             return false;
         }
 
-        if (!this->m_env->CalculateIBO(reinterpret_cast<unsigned int &>(m_IBO), m_indices.data(), sizeof(uint32_t), m_countIndices)) {
+        if (!this->m_env->CalculateIBO(m_IBO, m_indices.data(), sizeof(uint32_t), m_countIndices)) {
             Debug::Error("Mesh3D::Calculate() : failed calculate IBO \"" + m_geometry_name + "\" mesh!");
             this->m_hasErrors = true;
             m_mutex.unlock();
@@ -272,7 +278,7 @@ void Framework::Graphics::Types::Mesh3D::ReCalcModel() {
             }
     ))));
 
-    modelMat = glm::scale(modelMat, m_inverse ? -m_scale : m_scale);
+    modelMat = glm::scale(modelMat, m_inverse ? -m_scale.ToGLM() : m_scale.ToGLM());
 
     this->m_modelMat = modelMat;
 

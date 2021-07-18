@@ -127,6 +127,7 @@ namespace Framework::Graphics {
 
         bool InitGUI() override;
         bool StopGUI() override;
+        void SetGUIEnabled(bool enabled) override { m_kernel->SetGUIEnabled(enabled); }
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
 
@@ -241,9 +242,12 @@ namespace Framework::Graphics {
 
         bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
 
-        SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
-            if (!m_memory->FreeShaderProgram(shaderProgram))
+        SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
+            if (!m_memory->FreeShaderProgram(shaderProgram)) {
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
+                return false;
+            } else
+                return true;
         }
         SR_FORCE_INLINE void UnUseShader() override {
             this->m_currentShader   = nullptr;
@@ -364,7 +368,7 @@ namespace Framework::Graphics {
                 uint8_t mipLevels,
                 bool alpha) const noexcept override;
 
-        SR_FORCE_INLINE bool CalculateVBO(unsigned int& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
+        SR_FORCE_INLINE bool CalculateVBO(int32_t& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
             auto id = this->m_memory->AllocateVBO(vertSize * count, vertices);
             if (id >= 0) {
                 VBO = id;
@@ -373,7 +377,7 @@ namespace Framework::Graphics {
             else
                 return false;
         }
-        SR_FORCE_INLINE bool CalculateIBO(unsigned int& IBO, void* indices, uint32_t indxSize, size_t count)  const noexcept override {
+        SR_FORCE_INLINE bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count)  const noexcept override {
             auto id = this->m_memory->AllocateIBO(indxSize * count, indices);
             if (id >= 0) {
                 IBO = id;
@@ -381,6 +385,13 @@ namespace Framework::Graphics {
             }
             else
                 return false;
+        }
+        [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) override {
+            if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1); id < 0) {
+                Helper::Debug::Error("Vulkan::CalculateCubeMap() : failed to allocate texture!");
+                return -1;
+            } else
+                return id;
         }
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) noexcept override {
             if (FBO == 0) {
@@ -442,6 +453,14 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override { return this->m_memory->FreeIBO(ID); }
         [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept override { return this->m_memory->FreeUBO(ID); }
+
+        SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override {
+            if (!m_memory->FreeTexture((uint32_t)ID)) {
+                Helper::Debug::Error("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(ID) + ")");
+                return false;
+            } else
+                return true;
+        }
 
         [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept override;
 

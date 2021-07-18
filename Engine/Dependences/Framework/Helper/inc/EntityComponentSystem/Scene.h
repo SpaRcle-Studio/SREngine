@@ -14,72 +14,33 @@
 #include "GameObject.h"
 #include <Debug.h>
 #include <stack>
+#include <set>
 
 namespace Framework::Helper {
-    template<typename T> class Branch {
-    private:
-        ~Branch() {
-            for (auto a : m_branches)
-                a->Free();
-        };
-    public:
-        inline void Free() {
-            delete this;
-        };
-        inline void AddChild(Branch<T>* child) {
-            this->m_branches.push_back(child);
-            //m_hasBranches = true;
-            this->m_count++;
-        }
-        [[nodiscard]] inline bool HasBranches() const noexcept { return m_count > 0; }
-        [[nodiscard]] inline unsigned long GetCountBranches() const noexcept { return m_count; }
-    public:
-        explicit Branch(T data) {
-            this->m_data = data;
-        };
-        Branch(T data, Branch<T>* parent) {
-            this->m_parent = parent;
-            this->m_parent->m_branches.push_back(this);
-            this->m_data = data;
-        }
-    private:
-        //bool                    m_hasBranches   = false;
-        unsigned long           m_count         = 0;
-        Branch<T>*              m_parent        = nullptr;
-    public:
-        std::vector<Branch<T>*> m_branches      = std::vector<Branch<T>*>();
-        T                       m_data          = nullptr;
-    };
-
-    typedef Branch<GameObject*>* SceneTree;
-
-//    class GameObject;
     class Scene {
     private:
-        Scene();
-        ~Scene();
+        Scene()  = default;
+        ~Scene() = default;
     public:
-        static Scene* New(std::string name);
+        static Scene* New(const std::string& name);
         static Scene* Load(const std::string& name);
         bool Destroy();
         bool Free();
     private:
-        bool                                m_hierarchyIsChanged   = false;
-        bool                                m_isDestroy            = false;
-        std::mutex                          m_mutex                = std::mutex();
-        std::string                         m_name                 = "Unnamed";
-        std::map<GameObject*, GameObject*>  m_gameObjects          = std::map<GameObject*, GameObject*>();
-        unsigned int                        m_countUses            = 0;
-        Branch<GameObject*>*                m_tree                 = nullptr;
+        bool                     m_hierarchyIsChanged   = false;
+        bool                     m_isDestroy            = false;
+        std::mutex               m_mutex                = std::mutex();
+        std::string              m_name                 = "Unnamed";
+        std::set<GameObject*>    m_gameObjects          = std::set<GameObject*>();
+        uint32_t                 m_countUses            = 0;
 
-        std::vector<GameObject*>            m_selectedGameObjects  = std::vector<GameObject*>();
-        std::mutex                          m_selectedMutex        = std::mutex();
-        size_t                              m_countSelected        = 0;
+        std::vector<GameObject*> m_selectedGameObjects  = std::vector<GameObject*>();
+        std::mutex               m_selectedMutex        = std::mutex();
+        uint32_t                 m_countSelected        = 0;
 
-        std::vector<GameObject*>            m_rootObjects          = std::vector<GameObject*>();
-        bool                                m_rootObjectsEmpty     = true;
+        std::vector<GameObject*> m_rootObjects          = std::vector<GameObject*>();
+        bool                     m_rootObjectsEmpty     = true;
     public:
-        void Print();
         [[nodiscard]] inline std::string GetName() const noexcept { return m_name; }
         inline std::vector<GameObject*> GetGameObjects() { // TODO: OPTIMIZE
             m_mutex.lock();
@@ -88,18 +49,16 @@ namespace Framework::Helper {
             v.reserve(m_gameObjects.size());
 
             for (auto& a : m_gameObjects)
-                v.push_back(a.second);
+                v.push_back(a);
 
             m_mutex.unlock();
 
             return v;
         }
-        //Branch<GameObject*>* GetTree();
-
 
         std::vector<GameObject*>& GetRootGameObjects() noexcept;
 
-        [[nodiscard]] inline unsigned int GetCountUsesPoints() const noexcept { return this->m_countUses; }
+        [[nodiscard]] inline uint32_t GetCountUsesPoints() const noexcept { return this->m_countUses; }
 
         inline void SetIsChanged(bool value) noexcept { this->m_hierarchyIsChanged = value; }
         [[nodiscard]] inline bool IsChanged() const noexcept { return this->m_hierarchyIsChanged; }
@@ -118,18 +77,19 @@ namespace Framework::Helper {
             return true;
         }
     public:
-        [[nodiscard]] inline GameObject* GetSelected() const noexcept {
-            if (m_countSelected == 0 || m_countSelected > 1)
-                return nullptr;
+        [[nodiscard]] inline std::vector<GameObject*> GetSelected() const noexcept {
+            if (m_countSelected == 0)
+                return { };
             else
-                return this->m_selectedGameObjects[0];
+                return this->m_selectedGameObjects;
         }
         void UnselectAll();
         bool RemoveSelected(GameObject* gameObject);
         void AddSelected(GameObject* gameObject);
     public:
-        GameObject* Instance(std::string name);
-        bool DestroyGameObject(GameObject* gameObject);
+        GameObject* Instance(const std::string& name);
+        //bool RemoveGameObject(const GameObject* gameObject);
+        //bool DestroyGameObject(GameObject* gameObject);
     };
 }
 

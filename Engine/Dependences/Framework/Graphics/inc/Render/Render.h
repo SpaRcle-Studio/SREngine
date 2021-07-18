@@ -20,13 +20,13 @@ namespace Framework::Graphics::Types {
 }
 
 namespace Framework::Graphics {
-    typedef std::map<uint32_t, std::vector<Types::Mesh*>> MeshGroups;
-    typedef std::map<uint32_t, uint32_t> MeshGroupCounters;
+    typedef std::map<uint32_t, std::vector<Types::Mesh*>> MeshGroups;   // sizeof = 24
+    typedef std::map<uint32_t, uint32_t> MeshGroupCounters;             // sizeof = 24
 
-    struct MeshCluster {
-        MeshGroups        m_groups;
-        MeshGroupCounters m_counters;
-        uint32_t          m_total;
+    struct MeshCluster { // sizeof = 52 without methods
+        MeshGroups        m_groups   = MeshGroups();        // sizeof = 24
+        MeshGroupCounters m_counters = MeshGroupCounters(); // sizeof = 24
+        uint32_t          m_total    = 0;    // sizeof = 4
 
         inline bool Add(Types::Mesh* mesh) {
             int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
@@ -105,38 +105,29 @@ namespace Framework::Graphics {
         Window*                       m_window                   = nullptr;
         Camera*                       m_currentCamera            = nullptr;
         std::mutex                    m_mutex                    = std::mutex();
-        size_t                        m_t                        = 0;
-        size_t                        m_t2                       = 0;
 
         std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Mesh*>();
-        size_t                        m_countNewMeshes           = 0;
         std::vector<Types::Mesh*>     m_removeMeshes             = std::vector<Mesh*>();
-        size_t                        m_countMeshesToRemove      = 0;
+        std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
+        std::vector<Skybox*>          m_skyboxesToFreeVidMem     = std::vector<Skybox*>();
 
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };
 
-        size_t                        m_countTexturesToFree      = 0;
-        std::vector<Types::Texture*>  m_textureToFree            = std::vector<Types::Texture*>();
-
-        bool                          m_needDestroySkybox        = false;
-        bool                          m_needSelectMeshes         = false;
+        Types::Skybox*                m_newSkybox                = nullptr;
+        Types::Skybox*                m_skybox                   = nullptr;
 
         Shader*                       m_geometryShader           = nullptr;
         Shader*                       m_transparentShader        = nullptr;
         Shader*                       m_flatGeometryShader       = nullptr;
-        //Shader*                     m_skyboxShader             = nullptr;
-        //Shader*                     m_gridShader               = nullptr;
+        Shader*                       m_skyboxShader             = nullptr;
 
+        ColorBuffer*                  m_colorBuffer              = nullptr;
         EditorGrid*                   m_grid                     = nullptr;
+
         bool                          m_gridEnabled              = false;
         bool                          m_skyboxEnabled            = true;
         bool                          m_wireFrame                = false;
-
-        Types::Skybox*                m_skybox                   = nullptr;
-        ColorBuffer*                  m_colorBuffer              = nullptr;
-
-        std::vector<Light*>           m_light                    = std::vector<Light*>();
 
         const PipeLine                m_pipeLine                 = PipeLine::Unknown;
     public:
@@ -145,8 +136,6 @@ namespace Framework::Graphics {
         [[nodiscard]] size_t GetAbsoluteCountMeshes() const noexcept { return m_geometry.m_total + m_transparentGeometry.m_total; }
         [[nodiscard]] Types::Mesh* GetMesh(size_t absoluteID) noexcept;
 
-        [[nodiscard]] size_t GetCountMeshesToRemove()     const noexcept { return m_countMeshesToRemove; }
-        [[nodiscard]] size_t GetCountNewMeshes()          const noexcept { return m_countNewMeshes; }
         [[nodiscard]] size_t GetCountTransparentMeshes()  const noexcept { return m_transparentGeometry.m_total; }
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsRun() const noexcept { return m_isRun; }
@@ -157,7 +146,6 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void SetWireFrameEnabled(const bool& value) noexcept { this->m_wireFrame = value; }
         [[nodiscard]] SR_FORCE_INLINE bool GetWireFrameEnabled() const noexcept { return this->m_wireFrame; }
         SR_FORCE_INLINE void SetGridEnabled(bool value) { this->m_gridEnabled = value; }
-        void SetSkybox(Skybox* skybox);
         SR_FORCE_INLINE void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
         [[nodiscard]] SR_FORCE_INLINE Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
     public:
@@ -167,7 +155,12 @@ namespace Framework::Graphics {
             for (size_t i = 0; i < meshes.Size(); i++)
                 this->RegisterMesh(meshes[i]);
         }
-        bool DelayedDestroySkybox();
+
+        /** \brief Can get a nullptr value for removing skybox */
+        void SetSkybox(Skybox* skybox);
+        bool FreeSkyboxMemory(Skybox* skybox);
+        [[nodiscard]] Skybox* GetSkybox() const { return m_skybox; }
+
         void RegisterTexture(Types::Texture* texture);
         void FreeTexture(Types::Texture* texture);
     public:
@@ -184,7 +177,7 @@ namespace Framework::Graphics {
         /** \brief Check all render events. For example: new meshes, remove old meshes */
         void PollEvents();
     public:
-        virtual void UpdateGeometry() { }
+        virtual void UpdateUBOs() { }
 
         virtual bool DrawGeometry() = 0;
         virtual bool DrawSkybox()   = 0;

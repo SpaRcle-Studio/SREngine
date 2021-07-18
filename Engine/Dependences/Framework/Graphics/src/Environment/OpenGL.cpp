@@ -668,15 +668,15 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
     return id;
 }
 
-unsigned int Framework::Graphics::OpenGL::CalculateCubeMap(unsigned int w, unsigned int h, const std::vector<unsigned char*>& data)const noexcept {
-    unsigned int cubemap = 0;
+int32_t Framework::Graphics::OpenGL::CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) {
+    uint32_t cubemap = 0;
 
     glGenTextures(1, &cubemap);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap);
 
     for (unsigned char c = 0; c < 6; c++) {
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + c,
-                     0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, data[c]
+                     0, GL_RGB, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data[c]
         );
         delete data[c];
     }

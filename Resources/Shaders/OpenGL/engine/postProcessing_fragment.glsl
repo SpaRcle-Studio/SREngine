@@ -93,19 +93,18 @@ void main() {
     //if (alpha > 1)
     //    alpha = 1;
 
-    vec3 sceneColor  = texture(scene,     TexCoords).rgb;
+    vec4 sceneColor  = texture(scene,     TexCoords);
     vec3 skyboxColor = texture(skybox,    TexCoords).rgb;
     vec3 bloomColor  = texture(bloomBlur, TexCoords).rgb;
 
     vec3 hdrColor;
 
-    if (sceneColor == vec3(0, 0, 0)) {
+    if (sceneColor.rgb == vec3(0, 0, 0)) {
         hdrColor = skyboxColor;
     } else {
-        hdrColor = sceneColor;
-        float alpha = texture(scene, TexCoords).a;
-        if (alpha != 1)
-            hdrColor = (hdrColor * alpha) + skyboxColor;
+        hdrColor = sceneColor.rgb;
+        if (sceneColor.a != 1)
+            hdrColor = (hdrColor * sceneColor.a) + skyboxColor;
     }
 
     hdrColor += texture(bloomBlur, TexCoords).rgb * BloomColor;

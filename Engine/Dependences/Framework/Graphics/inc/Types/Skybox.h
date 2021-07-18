@@ -7,6 +7,7 @@
 
 #include <Types/Texture.h>
 #include <vector>
+#include <array>
 #include <Environment/Environment.h>
 #include <glm/glm.hpp>
 
@@ -23,43 +24,39 @@ namespace Framework::Graphics::Types {
     private:
         bool Calculate();
     private:
-        Environment*                    m_env           = nullptr;
-        Render*                         m_render        = nullptr;
+        Environment*            m_env            = nullptr;
+        Render*                 m_render         = nullptr;
 
-        unsigned int                    m_VAO           = 0;
-        unsigned int                    m_cubeMap       = 0;
+        int32_t                 m_VAO            = -1;
+        int32_t                 m_VBO            = -1;
+        int32_t                 m_IBO            = -1;
+        int32_t                 m_descriptorSet  = -1;
+        int32_t                 m_cubeMap        = -1;
 
-        std::string                     m_name          = "Unnamed";
+        uint32_t                m_width          = 0;
+        uint32_t                m_height         = 0;
 
-        unsigned int                    m_width         = 0;
-        unsigned int                    m_height        = 0;
+        std::array<uint8_t*, 6> m_data           = std::array<uint8_t*, 6>();
 
-        glm::vec3                       m_position      = {0,0,0};
+        bool                    m_isCalculated   = false;
+        bool                    m_hasErrors      = false;
+        volatile bool           m_isVideoMemFree = false;
 
-        std::vector<unsigned char*>     m_data          = std::vector<unsigned char*>();
-
-        bool                            m_isCalculated  = false;
-        bool                            m_isDestroy     = false;
-        volatile bool                   m_isVideoFree   = false;
-        bool                            m_isUse         = false;
-
-        Shader*                         m_shader        = nullptr;
-        std::string                     m_shaderName    = "Unnamed";
+        std::string             m_name           = "Unnamed";
+    public:
+        [[nodiscard]] std::string GetName() const { return m_name; }
     public:
         /// WARNING: Call only from render!
         bool FreeVideoMemory();
 
-        inline void SetIsVideoFree(bool value){
-            this->m_isVideoFree = value;
-        }
-
         bool SetRender(Render* render);
-        [[nodiscard]] inline unsigned int GetCubeMap() const noexcept { return m_cubeMap; }
-        void Draw(Camera* camera);
-        bool AwaitDestroy();
+        void DrawOpenGL();
+        void DrawVulkan();
+
+        bool AwaitFreeVideoMemory();
         bool Free();
     public:
-        static Skybox* Load(std::string name, const std::string& shader_name);
+        static Skybox* Load(const std::string& name);
     };
 }
 

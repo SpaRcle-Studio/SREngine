@@ -16,13 +16,19 @@
 #include <Math/Vector3.h>
 #include <Math/Matrix4x4.h>
 #include <Types/Uniforms.h>
+#include <Events/EventManager.h>
 
 using namespace Framework::Helper;
+
+namespace Framework {
+    class API;
+};
 
 namespace Framework::Graphics {
     class Window;
 
     class Camera : public Component {
+        friend class ::Framework::API;
     private:
         ~Camera() = default;
         Camera() : Component("Camera"), m_env(Environment::Get()), m_pipeline(m_env->GetPipeLine()) { }
@@ -32,7 +38,7 @@ namespace Framework::Graphics {
 
         SR_FORCE_INLINE void SetDirectOutput(bool value) noexcept { this->m_isEnableDirectOut = value; }
     public:
-        static Camera* Allocate();
+        static Camera* Allocate(uint32_t width = 0, uint32_t height = 0);
     public:
         bool Create(Window* window);
 
@@ -41,22 +47,20 @@ namespace Framework::Graphics {
     protected:
         void OnDestroyGameObject() noexcept override;
     public:
-        void OnRotate(glm::vec3 newValue) noexcept override;
-        void OnMove(glm::vec3 newValue) noexcept override;
+        void OnRotate(Math::Vector3 newValue) noexcept override;
+        void OnMove(Math::Vector3 newValue) noexcept override;
     public:
         bool DrawOnInspector() override;
 
-        nlohmann::json Save() override;
-
-        [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj;      }
         [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const noexcept  { return m_isEnableDirectOut;        }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedUpdate()       const noexcept  { return m_needUpdate;               }
         [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetRotation()   const noexcept  { return { m_pitch, m_yaw, m_roll }; }
-        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetView()       const noexcept  { return this->m_viewMat;            }
+        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetView()       const noexcept  { return this->m_viewTranslateMat;   }
         [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetProjection() const noexcept  { return this->m_projection;         }
         [[nodiscard]] SR_FORCE_INLINE Math::Vector2 GetSize()   const noexcept  { return m_cameraSize;               }
         [[nodiscard]] SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;           }
-        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetGLPosition() const noexcept  { return this->m_pos;                }
+        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetGLPosition() const noexcept  { return this->m_pos.ToGLM();        }
 
         void WaitCalculate() const {
             ret:
@@ -72,7 +76,38 @@ namespace Framework::Graphics {
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */
-        void UpdateShader(Shader* shader) noexcept;
+        template <typename T> void UpdateShader(Shader* shader) noexcept {
+            if (!m_isCreate) {
+                Helper::Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
+                return;
+            }
+
+            if (!shader->Complete())
+                return;
+
+            if (m_needUpdate) {
+                if (!CompleteResize()) {
+                    Helper::Debug::Error("Camera::UpdateShader() : failed to complete resize! Push exit event...");
+                    Helper::EventManager::Push(EventManager::Event::Fatal);
+                    return;
+                }
+            }
+
+            if (m_pipeline == PipeLine::OpenGL) {
+                shader->SetMat4("PVmat", this->m_projection * this->m_viewTranslateMat);
+            } else {
+                if (typeid(T) == typeid(ProjViewUBO)) {
+                    ProjViewUBO ubo = {};
+                    ubo.view = this->m_viewTranslateMat;
+                    ubo.proj = this->m_projection;
+                    m_env->UpdateUBO(shader->GetUBO(0), &ubo, sizeof(ProjViewUBO));
+                } else if (typeid(T) == typeid(SkyboxUBO)) {
+                    SkyboxUBO ubo = {};
+                    ubo.PVMat = m_projection * m_viewMat;
+                    m_env->UpdateUBO(shader->GetUBO(0), &ubo, sizeof(SkyboxUBO));
+                }
+            }
+        }
         void UpdateShaderProjView(Shader* shader) noexcept;
 
         bool CompleteResize();
@@ -99,10 +134,9 @@ namespace Framework::Graphics {
 
         Window*		    m_window	     	= nullptr;
         glm::mat4	    m_projection        = glm::mat4(0);
+        glm::mat4	    m_viewTranslateMat  = glm::mat4(0);
         glm::mat4	    m_viewMat           = glm::mat4(0);
-        glm::vec3	    m_pos               = {0,0,0};
-
-        ProjViewUBO     m_ubo               = { };
+        Math::Vector3	m_pos               = { 0, 0, 0 };
 
         bool            m_isEnableDirectOut = false;
         bool            m_allowUpdateProj   = true;
@@ -112,7 +146,7 @@ namespace Framework::Graphics {
 
         GUI::ICanvas*   m_canvas            = nullptr;
 
-        glm::vec2       m_cameraSize        = glm::vec2(0,0);
+        Math::Vector2   m_cameraSize        = { 0, 0 };
     };
 }
 

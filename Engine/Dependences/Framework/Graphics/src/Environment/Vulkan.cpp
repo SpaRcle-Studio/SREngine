@@ -229,8 +229,8 @@ namespace Framework::Graphics{
 
             for (uint32_t i = 0; i < bindings.size(); i++) {
                 switch (bindings[i].first) {
-                    case LayoutBinding::Sampler2D : type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
-                    case LayoutBinding::Uniform:    type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;         break;
+                    case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
+                    case LayoutBinding::Uniform:   type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;         break;
                     default:
                         Helper::Debug::Error("Vulkan::CompileShader() : unknown binding type!");
                         return false;
@@ -263,7 +263,7 @@ namespace Framework::Graphics{
     }
 
     bool Vulkan::LinkShader(
-            unsigned int *shaderProgram,
+            SR_SHADER_PROGRAM *shaderProgram,
             void **shaderData,
             const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
             const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
@@ -307,11 +307,18 @@ namespace Framework::Graphics{
             return false;
         }
 
+        *shaderProgram = *dynamicID;
+
         delete dynamicID;
         return true;
     }
 
     bool Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
+        if (size.x == 0 || size.y == 0) {
+            Helper::Debug::Error("Vulkan::CreateFrameBuffer() : width or height equals zero!");
+            return false;
+        }
+
         if (FBO >= 0) {
             if (!this->m_memory->ReAllocateFBO(FBO, size.x, size.y, colorBuffers, rboDepth)) {
                 Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
@@ -395,7 +402,7 @@ namespace Framework::Graphics{
 
             Helper::Debug::Log("Vulkan::CalculateTexture() : compress " + std::to_string(w * h * 4 / 1024 / 1024) + "MB source image...");
 
-            if (data = Compress(w, h, data, compression); data == nullptr) {
+            if (data = Graphics::Compress(w, h, data, compression); data == nullptr) {
                 Helper::Debug::Error("Vulkan::CalculateTexture() : failed to compress image!");
                 return -1;
             }
@@ -505,10 +512,14 @@ namespace Framework::Graphics{
             this->m_hasErrors = !this->ResizeWindow();
 
         m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
-        m_submitCmdBuffs[1] = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->Render(m_currentBuffer);
+        if (m_GUIEnabled) {
+            m_submitCmdBuffs[1] =
+                    dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->Render(m_currentBuffer);
+            m_submitInfo.commandBufferCount = 2;
+        } else
+            m_submitInfo.commandBufferCount = 1;
 
-        m_submitInfo.commandBufferCount = 2;
-        m_submitInfo.pCommandBuffers    = m_submitCmdBuffs;//&m_drawCmdBuffs[m_currentBuffer];
+        m_submitInfo.pCommandBuffers = m_submitCmdBuffs;//&m_drawCmdBuffs[m_currentBuffer];
 
         // Submit to queue
         auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);

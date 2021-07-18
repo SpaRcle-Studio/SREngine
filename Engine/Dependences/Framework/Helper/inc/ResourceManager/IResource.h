@@ -10,17 +10,22 @@
 #include <Debug.h>
 // TODO: Make a comments
 
+namespace Framework {
+    class API;
+}
+
 namespace Framework::Helper {
     class ResourceManager;
 
     class IResource {
         friend class ResourceManager;
+        friend class ::Framework::API;
     protected:
         IResource(const char *res_name);
         ~IResource() = default;
     protected:
         /* free resource pointer */
-        virtual bool Free() = 0;
+        virtual void Free() = 0;
     protected:
         bool m_autoRemove = false;
 
@@ -32,7 +37,7 @@ namespace Framework::Helper {
         const char *m_resource_name = "Unnamed";
         std::string m_resource_id = "NoID";
     public:
-        inline bool EnableAutoRemove() const noexcept { return this->m_autoRemove; }
+        [[nodiscard]] inline bool IsEnabledAutoRemove() const noexcept { return this->m_autoRemove; }
     public:
         /* Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy() = 0;

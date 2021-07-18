@@ -26,6 +26,10 @@ namespace Framework::Graphics{
     class Shader;
 }
 
+namespace Framework {
+    class API;
+}
+
 namespace Framework::Graphics::Types {
     using namespace Helper;
 
@@ -33,6 +37,7 @@ namespace Framework::Graphics::Types {
 
     class Mesh : public IResource, public Component {
         friend class Material;
+        friend class ::Framework::API;
     protected:
         /** \brief Default mesh constructor */
         Mesh();
@@ -41,11 +46,13 @@ namespace Framework::Graphics::Types {
         /** \brief Default mesh destructor */
         ~Mesh();
     public:
+        static std::vector<Mesh*> Load(const std::string& path);
+    public:
         [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetModelMatrix() const noexcept { return this->m_modelMat; }
         SR_FORCE_INLINE void SetRender(Render* render) noexcept {
             this->m_render = render;
         };
-        SR_FORCE_INLINE void SetIndexArray(std::vector<unsigned int>& indices) noexcept {
+        SR_FORCE_INLINE void SetIndexArray(std::vector<uint32_t>& indices) noexcept {
             this->m_isCalculated = false;
             this->m_countIndices = indices.size();
             this->m_indices      = indices;
@@ -53,18 +60,16 @@ namespace Framework::Graphics::Types {
     public:
         bool DrawOnInspector() override;
 
-        void SetMatrix(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale);
-
-        SR_FORCE_INLINE void OnMove(glm::vec3 newValue) noexcept override{
-            m_position = newValue;
+        SR_FORCE_INLINE void OnMove(Math::Vector3 newValue) noexcept override{
+            m_position = newValue.ToGLM();
             ReCalcModel();
         }
-        SR_FORCE_INLINE void OnRotate(glm::vec3 newValue) noexcept override{
-            m_rotation = newValue;
+        SR_FORCE_INLINE void OnRotate(Math::Vector3 newValue) noexcept override{
+            m_rotation = newValue.ToGLM();
             ReCalcModel();
         }
-        SR_FORCE_INLINE void OnScaled(glm::vec3 newValue) noexcept override{
-            m_scale = newValue;
+        SR_FORCE_INLINE void OnScaled(Math::Vector3 newValue) noexcept override{
+            m_scale = newValue.ToGLM();
             ReCalcModel();
         }
         void OnSelected(bool value) noexcept override;
@@ -83,9 +88,14 @@ namespace Framework::Graphics::Types {
         /** \brief Set mesh to destroy in res manager
         * \return bool */
         bool Destroy() override;
+        /*virtual void Free() override {
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                Debug::Log("Mesh::Free() : free mesh memory...");
+            delete this;
+        }*/
     protected:
         bool                        m_inverse           = false;
-        bool                        m_matHasBeenUpdated = false;
+        //bool                        m_matHasBeenUpdated = false;
 
         Environment*                m_env               = nullptr;
         PipeLine                    m_pipeline          = PipeLine::Unknown;
@@ -100,21 +110,21 @@ namespace Framework::Graphics::Types {
         /** \brief Vertices OpenGL-context calculated */
         volatile bool               m_hasErrors         = false;
         volatile bool               m_isCalculated      = false;
-        unsigned char               m_toolID            = 0; // 0 - none, 1 - x, 2 - y, 3 - z
+        //unsigned char               m_toolID            = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
-        int                         m_descriptorSet     = -1;
-        int                         m_VAO               = -1;
-        int                         m_VBO               = -1;
-        int                         m_IBO               = -1;
+        int32_t                     m_descriptorSet     = -1;
+        int32_t                     m_VAO               = -1;
+        int32_t                     m_VBO               = -1;
+        int32_t                     m_IBO               = -1;
         int32_t                     m_UBO               = -1;
 
         std::vector<uint32_t>	    m_indices           = std::vector<uint32_t>();
-        size_t						m_countVertices	    = 0;
-        size_t						m_countIndices	    = 0;
+        uint32_t 					m_countVertices	    = 0;
+        uint32_t					m_countIndices	    = 0;
         bool                        m_useIndices        = false;
     protected:
          /** \brief Re-calc mesh space-transform matrix */
-         virtual void ReCalcModel() { }
+        virtual void ReCalcModel() { }
     private:
         virtual bool Calculate() = 0;
     protected:
@@ -130,9 +140,9 @@ namespace Framework::Graphics::Types {
             goto ret;
         }
     public:
-        glm::vec3 m_position = glm::vec3();
-        glm::vec3 m_rotation = glm::vec3();
-        glm::vec3 m_scale    = { 1, 1, 1 };
+        Math::Vector3 m_position = glm::vec3();
+        Math::Vector3 m_rotation = glm::vec3();
+        Math::Vector3 m_scale    = { 1, 1, 1 };
         glm::mat4 m_modelMat = glm::mat4(0);
     public:
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVAO() const noexcept { return (uint32_t)m_VAO; }
@@ -149,7 +159,6 @@ namespace Framework::Graphics::Types {
                     return -1;
             return m_VAO;
         }
-
         [[nodiscard]] SR_FORCE_INLINE int32_t GetVBO() {
             if (m_isDestroy)
                 return m_VBO;
@@ -160,30 +169,25 @@ namespace Framework::Graphics::Types {
             return m_VBO;
         }
 
-        void PrintInfo();
-
         [[nodiscard]] std::string GetGeometryName() const noexcept { return this->m_geometry_name; }
-        // TODO: Repeat. Make a comments, please
-        static std::vector<Mesh*> Load(std::string path, bool withIndices = false);
-        static Mesh* LoadJson(std::string json_data, std::vector<Mesh*>* allMeshes = nullptr);
 
-        nlohmann::json Save() override;
-
-        [[nodiscard]] SR_FORCE_INLINE size_t GetCountVertices() const noexcept { return m_countVertices;  }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCountVertices() const noexcept { return m_countVertices;  }
         [[nodiscard]] SR_FORCE_INLINE Material* GetMaterial()   const noexcept { return this->m_material; }
         [[nodiscard]] SR_FORCE_INLINE bool IsCalculated()       const noexcept { return m_isCalculated;   }
 
         virtual Mesh* Copy() = 0;
 
-        SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept { this->m_toolID = ID; }
+        //SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept { this->m_toolID = ID; }
 
 #define ConfigureShader(shader) \
         shader->SetMat4("modelMat", m_modelMat); \
         shader->SetVec3("color", m_material->m_color); \
-        shader->SetIVec2("config", { \
-            (int)m_material->m_bloom, \
-                    m_toolID == 0 ? (int)this->m_isSelected : (int)(m_toolID + 1) \
-        }); \
+        shader->SetIVec2("config", { (int)m_material->m_bloom, (int)this->m_isSelected }); \
+
+        //shader->SetIVec2("config", { \
+            //(int)m_material->m_bloom, \
+            //        m_toolID == 0 ? (int)this->m_isSelected : (int)(m_toolID + 1) \
+        //}); \
 
         bool SimpleDraw();
 

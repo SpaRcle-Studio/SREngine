@@ -4,27 +4,33 @@
 
 #ifndef GAMEENGINE_COMPONENT_H
 #define GAMEENGINE_COMPONENT_H
-#include <glm/glm.hpp>
+
+#include <Math/Vector3.h>
 #include <string>
 #include <json/json.hpp>
 #include <macros.h>
 #include <mutex>
 #include <Debug.h>
 
+namespace Framework {
+    class API;
+}
+
 namespace Framework::Helper {
     class GameObject;
     class Component {
         friend class GameObject;
+        friend class Framework::API;
     public:
         Component(std::string name);
         ~Component();
     public:
         //virtual static Component* Load(const std::string& data) { return nullptr; }
-        virtual nlohmann::json Save() {
+        /*virtual nlohmann::json Save() {
             nlohmann::json json;
             json["BaseComponent"] = { };
             return json;
-        }
+        }*/
     public:
         inline static Component* CreateComponentOfName(const std::string& name) {
             Component* result = nullptr;
@@ -100,12 +106,10 @@ namespace Framework::Helper {
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }
         [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
 
-        virtual void OnRotate(glm::vec3 newValue)   noexcept { };
-        virtual void OnMove(glm::vec3 newValue)     noexcept { };
-        virtual void OnScaled(glm::vec3 newValue)   noexcept { };
-        virtual void OnSelected(bool value)         noexcept {
-            this->m_isSelected = value;
-        };
+        virtual void OnRotate(Math::Vector3 newValue) noexcept { };
+        virtual void OnMove(Math::Vector3 newValue)   noexcept { };
+        virtual void OnScaled(Math::Vector3 newValue) noexcept { };
+        virtual void OnSelected(bool value) noexcept { this->m_isSelected = value; };
         virtual void OnReady(bool ready) { }
 
         void SetActive(bool v)  noexcept { this->m_isActive = v;  this->OnReady(IsReady()); }

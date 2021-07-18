@@ -8,6 +8,7 @@
 #include <Debug.h>
 #include <utility>
 #include <vector>
+#include <array>
 #include <map>
 #include <Types/WindowFormat.h>
 #include <functional>
@@ -23,8 +24,8 @@
 #include <Types/Descriptors.h>
 #include <set>
 
-#define SR_SHADER_PROGRAM uint32_t
-#define SR_NULL_SHADER 0
+#define SR_SHADER_PROGRAM int32_t
+#define SR_NULL_SHADER -1
 
 namespace Framework::Graphics {
     namespace Vertices {
@@ -115,6 +116,7 @@ namespace Framework::Graphics {
         static inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = std::move(callback); }
     public:
         virtual bool PreInitGUI(const std::string& fontPath);
+        virtual void SetGUIEnabled(bool enabled) { }
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }
         virtual bool BeginDrawGUI() { return false; }
@@ -205,7 +207,6 @@ namespace Framework::Graphics {
         [[nodiscard]] virtual std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const noexcept {
             return std::map<std::string, uint32_t>(); }
         [[nodiscard]] virtual SR_SHADER_PROGRAM AllocShaderProgram() const noexcept { return SR_NULL_SHADER; }
-        virtual void FreeShaderProgram(SR_SHADER_PROGRAM shaderProgram) const noexcept {  }
         virtual bool CompileShader(
                 const std::string& path,
                 int32_t FBO,
@@ -218,7 +219,7 @@ namespace Framework::Graphics {
                 const std::vector<size_t>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept { return false; }
-        virtual SR_FORCE_INLINE void DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
+        virtual SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept { return false; }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
         virtual SR_FORCE_INLINE void UnUseShader() { }
 
@@ -253,9 +254,9 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVAO(uint32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVBO(uint32_t& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateIBO(uint32_t& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateVBO(int32_t& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
         //virtual SR_FORCE_INLINE
 
         /** Vertex pos and texture cords */
@@ -282,9 +283,9 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const noexcept { }
         virtual SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t&  ID) const noexcept { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const noexcept { }
-        virtual SR_FORCE_INLINE void FreeCubeMap(uint32_t ID) const noexcept { }
+        virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) { return false; }
 
-        [[nodiscard]] virtual uint32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::vector<unsigned char*>& data) const noexcept { return -1; }
+        [[nodiscard]] virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) { return -1; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept { return false; }

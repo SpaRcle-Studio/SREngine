@@ -8,20 +8,23 @@
 #include <stbi/stb_image.h>
 #include <Debug.h>
 #include <Render/Render.h>
+#include <Types/Vertices.h>
 #include <Window/Window.h>
+#include <Loaders/ObjLoader.h>
 
 Framework::Graphics::Types::Skybox::Skybox() {
     this->m_env = Environment::Get();
-    this->m_data.resize(6);
 }
 
 Framework::Graphics::Types::Skybox::~Skybox() = default;
 
-Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std::string name, const std::string& shader_name) {
-    std::string ext = StringUtils::GetExtensionFromFilePath(name);
-    name.resize(name.size() - ext.size() - 1);
+Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(const std::string& name) {
+    std::string skyboxName = name;
 
-    std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Skyboxes/"+name + "/";
+    std::string ext = StringUtils::GetExtensionFromFilePath(skyboxName);
+    skyboxName.resize(skyboxName.size() - ext.size() - 1);
+
+    std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Skyboxes/" +skyboxName + "/";
 
 #ifdef WIN32
     path = Helper::StringUtils::MakePath(path, true);
@@ -29,19 +32,16 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
     path = Helper::StringUtils::MakePath(path, false);
 #endif
 
-    Helper::Debug::Log("Skybox::Load() : loading \""+name+"\" skybox...");
+    Helper::Debug::Log("Skybox::Load() : loading \""+skyboxName+"\" skybox...");
 
-    std::vector<unsigned char*> sides = {
-            nullptr, nullptr, nullptr,
-            nullptr, nullptr, nullptr
-    };
+    std::array<uint8_t*, 6> sides = { };
     static const std::string files[6]{ "right", "left", "top", "bottom", "front", "back" };
 
     int W, H, C;
 
     for (unsigned char i = 0; i < 6; i++) {
         int w = 0, h = 0, comp = 0;
-        unsigned char* data = stbi_load(std::string(path + files[i] + "." + ext).c_str(), &w, &h, &comp, 3);
+        unsigned char* data = stbi_load(std::string(path + files[i] + "." + ext).c_str(), &w, &h, &comp, STBI_rgb_alpha);
 
         if (!i) {
             W = w;
@@ -52,7 +52,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
         }
 
         if (!data) {
-            Helper::Debug::Error("Skybox::Load() : failed load \"" + name + "\" skybox!\n\tPath: "+path + files[i] + "." + ext);
+            Helper::Debug::Error("Skybox::Load() : failed load \"" + skyboxName + "\" skybox!\n\tPath: " + path + files[i] + "." + ext);
             return nullptr;
         }
         sides[i] = data;
@@ -60,7 +60,6 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(std
 
     auto* skybox = new Skybox();
 
-    skybox->m_shaderName = shader_name;
     skybox->m_width  = W;
     skybox->m_height = H;
     skybox->m_data   = sides;
@@ -74,39 +73,38 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
         return false;
     }
 
-    if (m_isDestroy) {
-        Helper::Debug::Error("Skybox::Calculate() : skybox is destroyed!");
-        return false;
-    }
-
-    m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data);
-
-    if (!m_cubeMap) {
+    if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data); m_cubeMap < 0) {
         Helper::Debug::Error("Skybox::Calculate() : failed calculate cube map!");
+        this->m_hasErrors = true;
         return false;
     }
 
-    m_VAO = m_env->CalculateSkybox();
+    if (m_env->GetPipeLine() == PipeLine::Vulkan) {
+        const std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Models/Engine/skybox.obj";
+        auto skyboxObj = Graphics::ObjLoader::LoadSourceWithIndices<Vertices::SkyboxVertex>(path);
+        if (skyboxObj.size() != 1) {
+            Helper::Debug::Error("Skybox::Calculate() : failed to load skybox model!");
+            this->m_hasErrors = true;
+            return false;
+        }
+
+        auto& [indices, vertices] = skyboxObj[0];
+
+        if (!m_env->CalculateVBO(m_VBO, vertices.data(), sizeof(Vertices::SkyboxVertex), vertices.size())) {
+            Helper::Debug::Error("Skybox::Calculate() : failed to calculate VBO!");
+            this->m_hasErrors = true;
+            return false;
+        }
+
+        if (!m_env->CalculateIBO(m_IBO, indices.data(), sizeof(uint32_t), indices.size())) {
+            Helper::Debug::Error("Skybox::Calculate() : failed to calculate IBO!");
+            this->m_hasErrors = true;
+            return false;
+        }
+    } else
+        m_VAO = m_env->CalculateSkybox();
 
     m_isCalculated = true;
-    return true;
-}
-
-bool Framework::Graphics::Types::Skybox::AwaitDestroy() {
-    if (m_isDestroy){
-        Debug::Error("Skybox::AwaitDestroy() : skybox already destroyed!");
-        return false;
-    } else
-        Debug::Log("Skybox::AwaitDestory() : destroying skybox...");
-
-    if (m_isCalculated) {
-        this->m_render->DelayedDestroySkybox();
-        ret:
-        if (!this->m_isVideoFree && m_render->GetWindow()->IsWindowOpen())
-            goto ret;
-    }
-
-    this->m_isDestroy = true;
     return true;
 }
 
@@ -114,37 +112,59 @@ bool Framework::Graphics::Types::Skybox::Free() {
     Debug::Log("Skybox::Free() : free skybox pointer...");
 
     if (m_isCalculated)
-        if (!m_isVideoFree) {
-            if (m_render->GetWindow()->IsWindowOpen())
-                Debug::Warn("Skybox::Free() : video memory is not free!");
+        if (!m_isVideoMemFree) {
+            if (m_render->GetWindow()->IsWindowOpen()) {
+                Debug::Error("Skybox::Free() : video memory is not free!");
+                return false;
+            }
             else
                 Debug::Warn("Skybox::Free() : video memory is not free! Window is closed.");
         }
 
-    if (m_isDestroy) {
-        delete this;
-        return true;
-    }else{
-        Debug::Error("Skybox::Free() : before freeing skybox memory, you need to destroy it!");
-        return false;
-    }
+    delete this;
+    return true;
 }
 
-void Framework::Graphics::Types::Skybox::Draw(Camera* camera) {
+void Framework::Graphics::Types::Skybox::DrawOpenGL() {
     if (!m_isCalculated)
-        this->Calculate();
-
-    if (!m_shader)
-        return;
-    else{
-        m_shader->Use();
-        camera->UpdateShader(m_shader);
-        m_shader->SetVec3("CamPos", camera->GetGLPosition());
-    }
-
-    //m_env->SetActiveTexture(0);
+        if (m_hasErrors || !this->Calculate())
+            return;
 
     m_env->DrawSkybox(m_VAO, m_cubeMap);
+}
+
+void Framework::Graphics::Types::Skybox::DrawVulkan() {
+    if (m_hasErrors)
+        return;
+
+    if (!m_isCalculated) {
+        if (!this->Calculate())
+            return;
+        else if (m_descriptorSet < 0) {
+            if (this->m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
+                Helper::Debug::Error("Skybox::DrawVulkan() : failed to calculate descriptor set!");
+                this->m_hasErrors = true;
+                return;
+            } else {
+                this->m_env->UpdateDescriptorSets(m_descriptorSet, {
+                        { DescriptorType::Uniform, { 0, Shader::GetCurrentShader()->GetUBO(0) } },
+                });
+
+                this->m_env->SetDescriptorID(m_descriptorSet);
+                /*
+                 * 0 - view/proj
+                 * 1 - cube map
+                */
+                this->m_env->BindTexture(1, m_cubeMap);
+            }
+        }
+    }
+
+    m_env->BindVBO(m_VBO);
+    m_env->BindIBO(m_IBO);
+    m_env->BindDescriptorSet(m_descriptorSet);
+
+    m_env->DrawIndices(36);
 }
 
 bool Framework::Graphics::Types::Skybox::SetRender(Render *render) {
@@ -155,29 +175,73 @@ bool Framework::Graphics::Types::Skybox::SetRender(Render *render) {
 
     this->m_render = render;
 
-    this->m_shader = new Shader(m_render, m_shaderName);
-
     return true;
 }
 
 bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
-    if (m_isVideoFree) {
-        Debug::Error("Skybox::FreeVideoMemory() : video memory already free!");
+    if (m_isVideoMemFree) {
+        Debug::Error("Skybox::FreeVideoMemory() : video memory already is freed!");
         return false;
     }
 
     Debug::Log("Skybox::FreeVideoMemory() : free skybox video memory...");
 
-    if (m_shader)
-        m_shader->Free();
-
-    if (m_VAO)
+    if (m_VAO != -1) {
         if (!this->m_env->FreeVAO(m_VAO))
             Helper::Debug::Error("Skybox::FreeVideoMemory() : failed to free VAO!");
+        m_VAO = -1;
+    }
 
-    if (m_cubeMap)
+    if (m_VBO != -1) {
+        if (!m_env->FreeVBO(m_VBO))
+            Helper::Debug::Error("Skybox::FreeVideoMemory() : failed to free VBO!");
+        m_VBO = -1;
+    }
 
+    if (m_IBO != -1) {
+        if (!m_env->FreeIBO(m_IBO))
+            Helper::Debug::Error("Skybox::FreeVideoMemory() : failed to free IBO!");
+        m_IBO = -1;
+    }
+
+    if (m_cubeMap != -1) {
         this->m_env->FreeCubeMap(m_cubeMap);
+        this->m_cubeMap = -1;
+    }
+
+    if (m_descriptorSet >= 0) {
+        this->m_env->FreeDescriptorSet(m_descriptorSet);
+        this->m_descriptorSet = -1;
+    }
+
+    this->m_isCalculated = false;
+    this->m_isVideoMemFree = true;
+
+    return true;
+}
+
+bool Framework::Graphics::Types::Skybox::AwaitFreeVideoMemory() {
+    if (m_isVideoMemFree) {
+        Helper::Debug::Error("Skybox::AwaitFreeVideoMemory() : video memory is already freed!");
+        return false;
+    }
+
+    if (!m_isCalculated) {
+        Helper::Debug::Error("Skybox::AwaitFreeVideoMemory() : skybox isn't calculated!");
+        return false;
+    }
+
+    if (!m_env->IsWindowOpen()) {
+        Helper::Debug::Error("Skybox::AwaitFreeVideoMemory() : window has been closed!");
+        return false;
+    }
+
+    if (m_render)
+        m_render->FreeSkyboxMemory(this);
+
+    ret:
+    if (m_isVideoMemFree)
+        goto ret;
 
     return true;
 }

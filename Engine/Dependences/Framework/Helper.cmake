@@ -15,7 +15,6 @@ set(HELPER_SRC
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Types/String.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Types/Time.cpp
         #Input classes source code
-        ${FRAMEWORK_ROOT_DIR}/Helper/src/Input/Input.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Input/InputSystem.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Utils/StringUtils.cpp

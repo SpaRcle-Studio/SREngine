@@ -141,8 +141,8 @@ bool Framework::Graphics::Shader::Use() noexcept {
 void Framework::Graphics::Shader::Free() {
     if (m_isInit) {
         Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer and free video memory...");
-        m_env->DeleteShader(m_shaderProgram);
-        m_env->FreeShaderProgram(m_shaderProgram);
+        if (!m_env->DeleteShader(m_shaderProgram))
+            Helper::Debug::Error("Shader::Free() : failed to free video memory! Name: " + this->m_name);
         this->m_shaderProgram = SR_NULL_SHADER;
 
         if (m_sharedUniforms) {

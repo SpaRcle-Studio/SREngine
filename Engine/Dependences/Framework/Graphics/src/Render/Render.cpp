@@ -23,6 +23,7 @@ bool Framework::Graphics::Render::Create(Window* window) {
 
     this->m_window = window;
 
+    // geometry shader
     {
         this->m_geometryShader = new Shader(this, "engine/geometry");
         this->m_geometryShader->SetVertex(
@@ -55,6 +56,7 @@ bool Framework::Graphics::Render::Create(Window* window) {
         Shader::SetStandardGeometryShader(m_geometryShader);
     }
 
+    // transparent shader
     {
         this->m_transparentShader = new Shader(this, "engine/transparent");
         this->m_transparentShader->CopyVertexAndUniformsInfo(m_geometryShader);
@@ -67,6 +69,32 @@ bool Framework::Graphics::Render::Create(Window* window) {
              .depthTest    = true
         });
     }
+
+    // skybox shader
+    {
+        this->m_skyboxShader = new Shader(this, "engine/skybox");
+        this->m_skyboxShader->SetVertex(
+                {Vertices::SkyboxVertex::GetDescription()},
+                Vertices::SkyboxVertex::GetAttributes());
+        this->m_skyboxShader->SetUniforms({
+                {{0, UBOType::Shared}, sizeof(ProjViewUBO)}, // binding 0 - proj & view
+        });
+        /*
+                         descriptor write
+           [descriptor]       [bind]      [data]
+                0               0       view & proj uniform
+                0               1       cube map
+         */
+        this->m_skyboxShader->SetCreateInfo({
+              .polygonMode  = PolygonMode::Fill,
+              .cullMode     = CullMode::Back,
+              .depthCompare = DepthCompare::LessOrEqual,
+              .blendEnabled = true,
+              .depthWrite   = true,
+              .depthTest    = true
+        });
+    }
+
 
     this->m_flatGeometryShader = new Shader(this, "engine/flatGeometry");
 
@@ -124,8 +152,8 @@ bool Framework::Graphics::Render::Close() {
 
     auto data = std::string();
     data.append("\n\tT meshes         : " + std::to_string(m_geometry.m_total));
-    data.append("\n\tNew meshes       : " + std::to_string(m_countNewMeshes));
-    data.append("\n\tMeshes to remove : " + std::to_string(m_countMeshesToRemove));
+    data.append("\n\tNew meshes       : " + std::to_string(m_newMeshes.size()));
+    data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
     Debug::Graph("Render::Close() : close render..." + data);
 
     if (m_geometryShader)
@@ -137,8 +165,20 @@ bool Framework::Graphics::Render::Close() {
     if (m_flatGeometryShader)
         m_flatGeometryShader->Free();
 
+    if (m_skyboxShader)
+        m_skyboxShader->Free();
+
     if (this->m_grid)
         m_grid->Free();
+
+    if (m_skybox) {
+        if (m_env->IsWindowOpen())
+            m_skybox->FreeVideoMemory();
+        else
+            Helper::Debug::Warn("Render::Close() : window is close, can't free skybox video memory!");
+        m_skybox->Free();
+        m_skybox = nullptr;
+    }
 
     m_isRun = false;
     m_isClose = true;
@@ -153,7 +193,6 @@ void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *m
         Debug::Log("Render::RemoveMesh() : register \""+mesh->GetResourceID()+"\" mesh to remove...");
 
     this->m_removeMeshes.push_back(mesh);
-    m_countMeshesToRemove++;
 
     m_mutex.unlock();
 }
@@ -171,61 +210,52 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
     mesh->AddUsePoint();
     mesh->SetRender(this);
     this->m_newMeshes.push_back(mesh);
-    m_countNewMeshes++;
     m_mutex.unlock();
 }
 
 void Framework::Graphics::Render::PollEvents() {
-    // Temp value
-    static Mesh* temp = nullptr;
-
-    // Check exists new meshes
-    if (m_countNewMeshes) {
+    //! Check exists new meshes
+    if (!m_newMeshes.empty()) {
         m_mutex.lock();
 
-        for (m_t = 0; m_t < m_countNewMeshes; m_t++) {
-            temp = m_newMeshes[m_t];
-
+        for (auto & m_newMesh : m_newMeshes) {
             // Add mesh to transparent meshes array or usual mesh array
 
-            if (temp->GetMaterial()->IsTransparent()) {
-                if (!m_transparentGeometry.Add(temp))
+            if (m_newMesh->GetMaterial()->IsTransparent()) {
+                if (!m_transparentGeometry.Add(m_newMesh))
                     Helper::Debug::Error("Render::PollEvents() : failed to add transparent mesh to cluster!");
             } else
-                if (!m_geometry.Add(temp))
+                if (!m_geometry.Add(m_newMesh))
                     Helper::Debug::Error("Render::PollEvents() : failed to add mesh to cluster!");
 
         }
 
         m_newMeshes.clear(); // Clear new meshes array
-        m_countNewMeshes = 0;
 
         this->m_env->SetBuildState(false);
 
         m_mutex.unlock();
     }
 
-    // Check meshes to remove from render
-    if (m_countMeshesToRemove) {
+    //! Check meshes to remove from render
+    if (!m_removeMeshes.empty()) {
         m_mutex.lock();
 
-        for (m_t = 0; m_t < m_countMeshesToRemove; m_t++) {
-            temp = m_removeMeshes[m_t];
-            if (temp->IsCalculated())
-                temp->FreeVideoMemory();
+        for (auto & m_removeMesh : m_removeMeshes) {
+            if (m_removeMesh->IsCalculated())
+                m_removeMesh->FreeVideoMemory();
 
             // Remove mesh from transparent meshes array or usual mesh array
 
-            if (temp->GetMaterial()->IsTransparent()) {
-                if (!m_transparentGeometry.Remove(temp))
+            if (m_removeMesh->GetMaterial()->IsTransparent()) {
+                if (!m_transparentGeometry.Remove(m_removeMesh))
                     Helper::Debug::Error("Render::PollEvents() : failed to remove transparent geometry mesh!");
             }
             else
-                if (!m_geometry.Remove(temp))
+                if (!m_geometry.Remove(m_removeMesh))
                     Helper::Debug::Error("Render::PollEvents() : failed to remove geometry mesh!");
         }
 
-        m_countMeshesToRemove = 0; // Clear meshes to remove array
         m_removeMeshes.clear();
 
         this->m_env->SetBuildState(false);
@@ -233,44 +263,51 @@ void Framework::Graphics::Render::PollEvents() {
         m_mutex.unlock();
     }
 
-    // Free textures
-    if (m_countTexturesToFree) {
+    //! Free textures
+    if (!m_texturesToFree.empty()) {
         m_mutex.lock();
 
-        for (m_t = 0; m_t < m_countTexturesToFree; m_t++) {
-            if (m_textureToFree[m_t]->IsCalculated()) {
-                m_textureToFree[m_t]->FreeVideoMemory();
-            }
+        for (auto& textureToFree : m_texturesToFree) {
+            if (textureToFree->IsCalculated())
+                textureToFree->FreeVideoMemory();
             else
                 Debug::Error("Render::PoolEvents() : texture is not calculated! Something went wrong...");
 
-            m_textureToFree[m_t]->RemoveUsePoint();
+            textureToFree->RemoveUsePoint();
         }
 
-        m_textureToFree.clear();
-        m_countTexturesToFree = 0;
+        m_texturesToFree.clear();
 
         this->m_env->SetBuildState(false);
 
         m_mutex.unlock();
     }
 
-    // If need destroy skybox
-    if (m_needDestroySkybox){
+    //! Free skyboxes
+    if (!m_skyboxesToFreeVidMem.empty()) {
         m_mutex.lock();
 
-        Debug::Graph("Render::PoolEvents() : free skybox video memory...");
-        if (!m_skybox->FreeVideoMemory())
-            Debug::Error("Render::PoolEvents() : failed free skybox video memory!");
-        else
-            m_skybox->SetIsVideoFree(true);
+        Debug::Graph("Render::PoolEvents() : free skyboxes video memory...");
+        for (auto skybox : m_skyboxesToFreeVidMem) {
+            if (skybox == m_skybox)
+                m_skybox = nullptr;
 
-        m_skybox = nullptr;
-        m_needDestroySkybox = false;
+            if (skybox == m_newSkybox) {
+                Debug::Warn("Render::PoolEvents() : skybox installed as new but marked for removal!");
+                m_newSkybox = nullptr;
+            }
 
-        this->m_env->SetBuildState(false);
+            if (!skybox->FreeVideoMemory())
+                Debug::Error("Render::PoolEvents() : failed to free skybox video memory!");
+        }
+        m_skyboxesToFreeVidMem.clear();
 
         m_mutex.unlock();
+    }
+
+    //! Set new skybox
+    if (m_newSkybox != m_skybox) {
+        m_skybox = m_newSkybox;
     }
 }
 
@@ -282,14 +319,16 @@ Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {
-    if (m_skybox) {
-        Helper::Debug::Error("Render::SetSkybox() : skybox already exists!");
-        return;
-    }
+    if (skybox)
+        Helper::Debug::Log("Render::SetSkybox() : set new \"" + skybox->GetName() + "\" skybox...");
+    else
+        Helper::Debug::Log("Render::SetSkybox() : set a nullptr skybox...");
 
     skybox->SetRender(this);
-    this->m_skybox = skybox;
-    this->m_env->SetBuildState(false);
+    if (m_skybox != skybox) {
+        m_newSkybox = skybox;
+        this->m_env->SetBuildState(false);
+    }
 }
 
 void Framework::Graphics::Render::FreeTexture(Framework::Graphics::Types::Texture *texture) {
@@ -298,8 +337,7 @@ void Framework::Graphics::Render::FreeTexture(Framework::Graphics::Types::Textur
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Graph("Render::FreeTexture() : register texture to remove...");
 
-    m_textureToFree.push_back(texture);
-    m_countTexturesToFree++;
+    m_texturesToFree.push_back(texture);
 
     m_mutex.unlock();
 }
@@ -330,20 +368,10 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Render::GetMesh(size_t ab
     return nullptr;
 }
 
-bool Framework::Graphics::Render::DelayedDestroySkybox()  {
-    if (!this->m_skybox){
-        Debug::Error("Render::DelayedDestroySkybox() : skybox already destroyed!");
-        return false;
-    }
-
-    if (m_needDestroySkybox){
-        Debug::Error("Render::DelayedDestroySkybox() : skybox already will bee destroyed!");
-        return false;
-    }
-
-    Debug::Graph("Render::DelayedDestroySkybox() : destroying skybox...");
-
-    this->m_needDestroySkybox = true;
+bool Framework::Graphics::Render::FreeSkyboxMemory(Skybox* skybox) {
+    m_mutex.lock();
+    this->m_skyboxesToFreeVidMem.emplace_back(skybox);
+    m_mutex.unlock();
     return true;
 }
 

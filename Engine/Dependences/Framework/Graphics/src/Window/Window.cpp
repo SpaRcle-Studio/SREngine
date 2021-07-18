@@ -7,8 +7,6 @@
 #include "Window/Window.h"
 #include <Debug.h>
 #include <iostream>
-#include <glm/ext/matrix_clip_space.hpp>
-#include <Input/Input.h>
 
 //#include <GUI/ICanvas.h>
 
@@ -35,15 +33,17 @@ bool Framework::Graphics::Window::Create() {
         return false;
     }
 
-    this->m_env->SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
+    Framework::Graphics::Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
         switch (event) {
             case Environment::WinEvents::Close:
                 Debug::System("Window event: close window...");
                 break;
-            case Environment::WinEvents::Move:
-                this->m_windowPos = {*(int *) arg1, *(int *) arg2};
-                this->m_env->SetWindowPosition(m_windowPos.x, m_windowPos.y);
+            case Environment::WinEvents::Move: {
+                int size[2] = {*(int *) arg1, *(int *) arg2};
+                this->m_windowPos = { (float)size[0], (float)size[1] };
+                this->m_env->SetWindowPosition((int)m_windowPos.x, (int)m_windowPos.y);
                 break;
+            }
             case Environment::WinEvents::Resize: {
                 std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
                 if (size.first > 0 && size.second > 0)
@@ -238,6 +238,7 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetScissor();
 
                                     this->m_render->DrawGeometry();
+                                    this->m_render->DrawSkybox();
                                 }
                                 m_env->EndRender();
                             }
@@ -249,7 +250,7 @@ void Framework::Graphics::Window::Thread() {
                     }
                     continue;
                 } else {
-                    this->m_render->UpdateGeometry();
+                    this->m_render->UpdateUBOs();
                 }
 
                 if (m_GUIEnabled && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
@@ -260,14 +261,14 @@ void Framework::Graphics::Window::Thread() {
                         if (ImGui::Begin("Texture")) {
                             ImGui::BeginChild("Texture 1");
 
-                            auto texture = m_env->GetTexture(0);
+                            /*auto texture = m_env->GetTexture(0);
                             if (texture.Ready()) {
                                 static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
 
                                 GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
                                                             { texture.m_width, texture.m_height },
                                                             m_env->GetDescriptorSetFromDTDSet(imTex), true);
-                            }
+                            }*/
 
                             ImGui::EndChild();
                             ImGui::End();
@@ -490,18 +491,15 @@ void Framework::Graphics::Window::PollEvents() {
         //unsigned int w =  m_env->GetWindowFormat()->Width();
         //unsigned int h =  m_env->GetWindowFormat()->Height();
 
-        unsigned int w = this->m_newWindowSize.x;
-        unsigned int h = this->m_newWindowSize.y;
-
-        m_env->SetWindowSize(w, h);
+        m_env->SetWindowSize((uint32_t)m_newWindowSize.x, (uint32_t)m_newWindowSize.y);
 
         //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
         this->m_isNeedResize = false;
     }
 
     if (m_isNeedMove) { // TODO
-        int x = m_newWindowPos.x;
-        int y = m_newWindowPos.y;
+        int x = (int)m_newWindowPos.x;
+        int y = (int)m_newWindowPos.y;
         //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &x, &y);
 
         m_env->SetWindowPosition(x, y);
@@ -536,8 +534,8 @@ bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *c
     return true;
 }
 
-void Framework::Graphics::Window::Resize(unsigned int w, unsigned int h) {
-    this->m_newWindowSize = { w, h };
+void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
+    this->m_newWindowSize = { (float)w, (float)h };
     this->m_isNeedResize = true;
 }
 
@@ -554,7 +552,7 @@ void Framework::Graphics::Window::CentralizeWindow() {
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;
 
-    this->m_newWindowPos = { w, h + 20 }; // TODO: SEE
+    this->m_newWindowPos = { (float)w, (float)(h + 20) }; // TODO: SEE
     this->m_isNeedMove = true;
 }
 

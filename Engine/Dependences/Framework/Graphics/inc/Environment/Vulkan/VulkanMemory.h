@@ -143,6 +143,14 @@ namespace Framework::Graphics::VulkanTools {
                 TextureCompression compression,
                 uint8_t mipLevels);
 
+        [[nodiscard]] int32_t AllocateTexture(
+                std::array<uint8_t*, 6> pixels,
+                uint32_t w,
+                uint32_t h,
+                VkFormat format,
+                VkFilter filter,
+                uint8_t mipLevels);
+
         [[nodiscard]] int32_t AllocateDynamicTextureDescriptorSet(VkDescriptorSetLayout layout, uint32_t textureID);
     public:
         [[nodiscard]] VkDescriptorSet GetDynamicTextureDescriptorSet(uint32_t id);

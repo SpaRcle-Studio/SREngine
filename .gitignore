@@ -12,3 +12,5 @@ cmake-build-debug
 .idea
 _deps
 /cmake-build-release/
+/Resources/Cache/
+/Resources/Scripts/Libraries/Standard/

@@ -175,25 +175,25 @@ bool Material::FreeTextures() {
 
     if (m_diffuse) {
         m_diffuse->RemoveUsePoint();
-        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->EnableAutoRemove())
+        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->IsEnabledAutoRemove())
             m_diffuse->Destroy();
     }
 
     if (m_normal) {
         m_normal->RemoveUsePoint();
-        if (m_normal->GetCountUses() <= 1 && m_normal->EnableAutoRemove())
+        if (m_normal->GetCountUses() <= 1 && m_normal->IsEnabledAutoRemove())
             m_normal->Destroy();
     }
 
     if (m_specular) {
         m_specular->RemoveUsePoint();
-        if (m_specular->GetCountUses() <= 1 && m_specular->EnableAutoRemove())
+        if (m_specular->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
             m_specular->Destroy();
     }
 
     if (m_glossiness) {
         m_glossiness->RemoveUsePoint();
-        if (m_glossiness->GetCountUses() <= 1 && m_glossiness->EnableAutoRemove())
+        if (m_glossiness->GetCountUses() <= 1 && m_glossiness->IsEnabledAutoRemove())
             m_glossiness->Destroy();
     }
 

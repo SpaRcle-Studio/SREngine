@@ -126,7 +126,7 @@ void Framework::Helper::Transform::DeltaTranslate(Framework::Helper::Math::Vecto
 
 void Framework::Helper::Transform::GlobalTranslate(Vector3 axis, double value) {
     if (!m_parent)
-        this->Translate(axis * value, true);
+        this->Translate(axis * value);
     else {
         Matrix4x4 rotate = Matrix4x4(m_globalPosition, m_parent->m_globalRotation.InverseAxis(2).ToQuat().Inverse(), Vector3(1,1,1));
         Matrix4x4 mat = Matrix4x4(m_globalPosition, Vector3(0,0,0).ToQuat(), Vector3(1,1,1));
@@ -139,10 +139,10 @@ void Framework::Helper::Transform::GlobalTranslate(Vector3 axis, double value) {
     }
 }
 
-void Framework::Helper::Transform::Translate(Vector3 val, bool local) noexcept {
+void Framework::Helper::Transform::Translate(Vector3 val) noexcept {
     val /= m_globalScale;
 
-    if (local) {
+    //if (local) {
         m_localPosition += val;
 
         if (!m_parent) {
@@ -155,9 +155,8 @@ void Framework::Helper::Transform::Translate(Vector3 val, bool local) noexcept {
         }
         else
            this->UpdateChildRotation(true);
-    }
-    else
-        this->SetPosition(m_globalPosition + val);
+    //} else
+    //    this->SetPosition(m_globalPosition + val);
 }
 
 void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 axis, double angle, bool local) noexcept {
@@ -210,7 +209,7 @@ void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vec
     }
 }
 
-void Framework::Helper::Transform::Rotate(Vector3 angle, bool local) noexcept {
+void Framework::Helper::Transform::Rotate(Vector3 angle) noexcept {
     if (angle == Vector3(0,0,0))
         return;
 

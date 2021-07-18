@@ -12,6 +12,10 @@
 #include <map>
 #include <glm/glm.hpp>
 
+namespace Framework {
+    class API;
+}
+
 namespace Framework::Helper {
     class Transform;
     class Scene;
@@ -19,6 +23,7 @@ namespace Framework::Helper {
     class GameObject {
         friend class Scene;
         friend class Transform;
+        friend class ::Framework::API;
     private:
         GameObject(Scene* scene, std::string name, std::string tag = "Untagged");
         ~GameObject();
@@ -28,14 +33,10 @@ namespace Framework::Helper {
         void UpdateComponentsRotation();
         void UpdateComponentsScale();
     private:
-        //void OnDestroyParent();
-
         void Destroy();
     public:
-        [[nodiscard]] Scene*     GetScene() const noexcept { return this->m_scene; }
+        [[nodiscard]] Scene* GetScene() const noexcept { return this->m_scene; }
         Transform* GetTransform() noexcept { return this->m_transform; }
-    public:
-        nlohmann::json Save();
     public:
         void SetParent(GameObject* gm);
         void RemoveParent(GameObject* gm);
@@ -57,25 +58,22 @@ namespace Framework::Helper {
         bool Contains(GameObject* child);
         void SetSelect(bool value);
     private:
-        //std::vector<GameObject*>    m_children      = std::vector<GameObject*>();
+        bool                     m_isSelect      = false;
+        GameObject*              m_parent        = nullptr;
+        std::vector<GameObject*> m_children      = std::vector<GameObject*>();
+        uint32_t                 m_countChild    = 0;
 
-        bool                                    m_isSelect      = false;
-        GameObject*                             m_parent        = nullptr;
-        //std::map<GameObject*, GameObject*>      m_children      = std::map<GameObject*, GameObject*>();
-        std::vector<GameObject*>                m_children      = std::vector<GameObject*>();
-        unsigned int                            m_countChild    = 0;
+        bool                     m_isDestroy     = false;
 
-        bool                                    m_isDestroy     = false;
+        std::mutex               m_mutex         = std::mutex();
 
-        std::mutex                              m_mutex         = std::mutex();
+        Scene*                   m_scene         = nullptr;
+        Transform*               m_transform     = nullptr;
 
-        Scene*                                  m_scene         = nullptr;
-        Transform*                              m_transform     = nullptr;
+        std::vector<Component*>  m_components    = std::vector<Component*>();
 
-        std::vector<Component*>                 m_components    = std::vector<Component*>();
-
-        std::string                             m_name          = "Unnamed";
-        std::string                             m_tag           = "None";
+        std::string              m_name          = "Unnamed";
+        std::string              m_tag           = "None";
     };
 }
 

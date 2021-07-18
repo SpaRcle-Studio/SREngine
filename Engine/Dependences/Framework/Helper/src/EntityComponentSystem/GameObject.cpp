@@ -63,7 +63,7 @@ std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std:
     return std::vector<Component *>();
 }
 
-void Framework::Helper::GameObject::Destroy() {
+void Framework::Helper::GameObject::Destroy() { // TODO: remove from scene!
     if (m_isDestroy){
         Helper::Debug::Error("GameObject::Destroy() : \"" +m_name + "\" game object already destroyed!");
         return;
@@ -79,7 +79,6 @@ void Framework::Helper::GameObject::Destroy() {
 
     for (auto gm : m_children)
         gm->Destroy();
-        //gm.second->Destroy();
 
     m_mutex.unlock();
 
@@ -102,14 +101,14 @@ void GameObject::UpdateComponents() {
 
 void GameObject::UpdateComponentsPosition() {
     for (Component* component : m_components)
-        component->OnMove(m_transform->m_globalPosition.ToGLM());
+        component->OnMove(m_transform->m_globalPosition);
         //component->OnMove(m_transform->m_position + m_transform->m_parent_position);
 }
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
         //component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
-        component->OnRotate(m_transform->m_globalRotation.ToGLM());
+        component->OnRotate(m_transform->m_globalRotation);
         //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation);
         //component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
 
@@ -119,22 +118,6 @@ void GameObject::UpdateComponentsScale() {
     for (Component* component : m_components)
         component->OnScaled(m_transform->m_globalScale.ToGLM()); // or multiple
         //component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
-}
-
-nlohmann::json GameObject::Save() {  // TODO: add security multi-threading
-    nlohmann::json json;
-
-    //json["GameObject"]["Name"] = m_name;
-    //json["GameObject"]["Tag"] = m_tag;
-
-    //std::vector<nlohmann::json> comps = { m_transform->Save() };
-
-    //for (auto c : m_components)
-    //    comps.push_back(c->Save());
-
-   // json["GameObject"]["Components"] = comps;
-
-    return json;
 }
 
 bool GameObject::AddChild(GameObject *child) { // TODO: add security multi-threading
