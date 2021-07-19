@@ -5,11 +5,11 @@
   * OpenGL / GLFW / GLEW / glad
   * Bullet3
   * easy_profiler
-  * Lua / LuaBridge
   * ImGUI
   * tinyobjloader
   * stbi
   * json
+  * EvoScript
   * EvoVulkan
 
 ## Exists systems
@@ -23,6 +23,7 @@
       * GUI 
       * OBJ-loader
       * Texturing
+        * Compressing BC1-BC7
       * Shaders
       * Materials
       * PostProcessing
@@ -32,7 +33,6 @@
   * Physics
       * Rigidbody (Base component)
   * Scripting
-      * Base lua-api
   * Audio
   * ECS
       * Scene 
