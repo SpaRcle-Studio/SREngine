@@ -33,7 +33,6 @@
   * Physics
       * Rigidbody (Base component)
   * Scripting
-      * Base lua-api
   * Audio
   * ECS
       * Scene 
