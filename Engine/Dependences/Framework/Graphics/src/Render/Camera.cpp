@@ -78,7 +78,9 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
         matrix = glm::rotate(matrix, -m_yaw,   { 0, 1, 0 });
         matrix = glm::rotate(matrix, m_roll,   { 0, 0, 1 });
 
-        m_viewMat = glm::translate(matrix, {
+        m_viewMat = matrix;
+
+        m_viewTranslateMat = glm::translate(matrix, {
                 -m_pos.x,
                 -m_pos.y,
                 m_pos.z//-m_pos.z

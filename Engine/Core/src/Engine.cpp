@@ -7,15 +7,14 @@
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
-#include <GUI/ICanvas.h>
+#include <EditorGUI.h>
 
 #include <utility>
 #include <chrono>
-#include <GUI/Canvas.h>
 #include <Events/EventManager.h>
 
 Framework::Engine::Engine() {
-    this->m_compiler = new Scripting::EvoCompiler();
+
 }
 
 Framework::Engine::~Engine() = default;
@@ -26,7 +25,8 @@ bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* ph
 
     this->m_physics = physics;
 
-    this->m_time = new Helper::Types::Time();
+    this->m_time     = new Helper::Types::Time();
+    this->m_compiler = new Scripting::EvoCompiler();
 
     if (m_isCreate){
         Helper::Debug::Error("Engine::Create() : game engine already create!");
@@ -35,7 +35,7 @@ bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* ph
 
     Helper::Debug::Info("Engine::Create() : creating game engine...");
 
-    if (!this->m_window->Create()){
+    if (!this->m_window->Create(new EditorGUI(m_compiler))){
         Helper::Debug::Error("Engine::Create() : failed create window!");
         return false;
     }
@@ -79,13 +79,13 @@ bool Framework::Engine::Init() {
         }
     });
 
-    if (!this->m_window->Init()) {
-        Helper::Debug::Error("Engine::Init() : failed to initialize window!");
+    if (!m_compiler || !m_compiler->Init()) {
+        Helper::Debug::Error("Engine::Init() : failed to initialize compiler!");
         return false;
     }
 
-    if (!m_compiler || !m_compiler->Init()) {
-        Helper::Debug::Error("Engine::Init() : failed to initialize compiler!");
+    if (!this->m_window->Init()) {
+        Helper::Debug::Error("Engine::Init() : failed to initialize window!");
         return false;
     }
 
@@ -131,11 +131,6 @@ void Framework::Engine::Await() {
         return;
     }
 
-    //if (Graphics::Environment::Get()->GetPipeLine() == Graphics::PipeLine::OpenGL)
-    //    engine = m_compiler->Load("engine", true);
-    //else
-    //    engine = m_compiler->Load("simpleEngine", true);
-
     Debug::Info("Engine::Await() : wait close engine...");
 
     const float updateFrequency = (1.f / 60.f) * 1000.f;
@@ -148,6 +143,7 @@ void Framework::Engine::Await() {
         timeStart = clock::now();
 
         EventManager::PoolEvents();
+        m_compiler->PollEvents();
 
         if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::Enter)) {
             Debug::System("The closing key combination was be detected!");
@@ -178,10 +174,7 @@ void Framework::Engine::Await() {
     }
 
     engine->Close();
-    engine->Destroy();
-    engine->Free();
-
-    //m_compiler->PoolEvents();
+    engine->DelayedDestroyAndFree();
 }
 
 bool Framework::Engine::Close() {
@@ -198,9 +191,8 @@ bool Framework::Engine::Close() {
         m_window = nullptr;
     }
 
-    //this->m_compiler->PoolEvents();
-
     if (m_compiler) {
+        this->m_compiler->PollEvents();
         Helper::Debug::Info("Engine::Close() : destroy compiler...");
         m_compiler->Destroy();
         m_compiler->Free();

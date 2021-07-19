@@ -9,32 +9,47 @@
 #include <ratio>
 #include <chrono>
 
-bool Framework::Scripting::EvoScriptImpl::Destroy() {
+bool Framework::Scripting::EvoScriptImpl::AwaitDestroy() {
+    Helper::Debug::Log("EvoScriptImpl::AwaitDestroy() : await destroy \"" + m_name + "\" script...");
+
     this->m_compiler->RemoveScript(this);
+ret:
+    if (m_compiler->Contains(this))
+        goto ret;
+
+    m_isDestroy = true;
+
     return true;
 }
 
 void Framework::Scripting::EvoScriptImpl::Awake() {
+    if (m_isDestroy)
+        return;
+
     this->m_script->Awake();
 }
 
 void Framework::Scripting::EvoScriptImpl::Start() {
+    if (m_isDestroy)
+        return;
+
     this->m_script->Start();
     this->m_isStart = true;
 }
 
 void Framework::Scripting::EvoScriptImpl::Close() {
+    if (m_isDestroy)
+        return;
+
     this->m_script->Close();
 }
 
 void Framework::Scripting::EvoScriptImpl::Update() {
+    if (m_isDestroy)
+        return;
+
     if (!m_isStart)
         this->Start();
-
-    //auto timeNow = std::chrono::high_resolution_clock::now();
-    //std::chrono::duration<double, std::milli> time_span = timeNow - m_lastUpd;
-    //this->m_script->Update(time_span.count());
-    //this->m_lastUpd = timeNow;
 
     using clock = std::chrono::high_resolution_clock;
     auto delta_time = clock::now() - m_lastUpd;
@@ -43,9 +58,21 @@ void Framework::Scripting::EvoScriptImpl::Update() {
 }
 
 void Framework::Scripting::EvoScriptImpl::FixedUpdate() {
+    if (m_isDestroy)
+        return;
+
     if (!m_isStart)
         this->Start();
     this->m_script->FixedUpdate();
+}
+
+void Framework::Scripting::EvoScriptImpl::OnGUI() {
+    if (m_isDestroy)
+        return;
+
+    if (!m_isStart)
+        this->Start();
+    m_script->OnGUI();
 }
 
 bool Framework::Scripting::EvoScriptImpl::Compile() {
@@ -63,3 +90,12 @@ bool Framework::Scripting::EvoScriptImpl::Compile() {
 
     return true;
 }
+
+bool Framework::Scripting::EvoScriptImpl::DelayedDestroyAndFree() {
+    this->m_needFreeAfterDestroy = true;
+    this->m_compiler->RemoveScript(this);
+    this->m_isDestroy = true;
+
+    return true;
+}
+

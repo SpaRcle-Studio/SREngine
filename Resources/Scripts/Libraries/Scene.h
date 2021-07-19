@@ -1,10 +1,11 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_SCENE_H
 #define EVOSCRIPTLIB_SCENE_H
 
+#include "GameObject.h"
 #include "Standard/Addresses.h"
 #include "map"
 #include "mutex"
@@ -12,8 +13,6 @@
 #include "stdint.h"
 #include "string"
 #include "vector"
-
-class GameObject;
 
 class Scene {
 private:
@@ -101,8 +100,14 @@ public:
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
-	static Scene* New(const std::string& arg0) {
+	GameObject* FindByComponent(const std::string& arg0) {
 		void* voidPtr = g_methodPointers[30];
+		typedef GameObject* (Scene::*ClassPtr)(const std::string& arg0);
+		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
+		return (*this.*origPtr)(arg0);
+	}
+	static Scene* New(const std::string& arg0) {
+		void* voidPtr = g_methodPointers[31];
 		typedef Scene* (*ClassPtr)(const std::string& arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0);

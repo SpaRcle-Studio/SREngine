@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_MATERIAL_H
@@ -24,25 +24,25 @@ private:
 	Texture* m_glossiness;
 public:
 	void SetDiffuse(Texture* arg0) {
-		void* voidPtr = g_methodPointers[105];
-		typedef void (Material::*ClassPtr)(Texture* arg0);
-		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
-		return (*this.*origPtr)(arg0);
-	}
-	void SetNormal(Texture* arg0) {
-		void* voidPtr = g_methodPointers[106];
-		typedef void (Material::*ClassPtr)(Texture* arg0);
-		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
-		return (*this.*origPtr)(arg0);
-	}
-	void SetSpecular(Texture* arg0) {
 		void* voidPtr = g_methodPointers[107];
 		typedef void (Material::*ClassPtr)(Texture* arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
-	void SetGlossiness(Texture* arg0) {
+	void SetNormal(Texture* arg0) {
 		void* voidPtr = g_methodPointers[108];
+		typedef void (Material::*ClassPtr)(Texture* arg0);
+		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
+		return (*this.*origPtr)(arg0);
+	}
+	void SetSpecular(Texture* arg0) {
+		void* voidPtr = g_methodPointers[109];
+		typedef void (Material::*ClassPtr)(Texture* arg0);
+		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
+		return (*this.*origPtr)(arg0);
+	}
+	void SetGlossiness(Texture* arg0) {
+		void* voidPtr = g_methodPointers[110];
 		typedef void (Material::*ClassPtr)(Texture* arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);

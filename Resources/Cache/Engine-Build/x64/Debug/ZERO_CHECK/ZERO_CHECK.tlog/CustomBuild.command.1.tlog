@@ -1,0 +1,10 @@
+^J:\C++\GAMEENGINE\RESOURCES\CACHE\ENGINE-BUILD\CMAKEFILES\4BFB87788DF8C2C41D928D93196FA2ED\GENERATE.STAMP.RULE
+setlocal
+C:\OpenCV\CMake\bin\cmake.exe -SJ:/C++/GameEngine/Resources/Scripts/Engine/Engine-Source -BJ:/C++/GameEngine/Resources/Cache/Engine-Build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file J:/C++/GameEngine/Resources/Cache/Engine-Build/Engine.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

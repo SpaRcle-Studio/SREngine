@@ -6,6 +6,8 @@
 #include <ResourceManager/ResourceManager.h>
 
 bool Framework::Scripting::EvoCompiler::Init() {
+    Helper::Debug::Info("EvoCompiler::Init() : initialization of the compiler...");
+
     EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { Helper::Debug::Error(msg); };
     EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { Helper::Debug::Log(msg);   };
     EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);  };

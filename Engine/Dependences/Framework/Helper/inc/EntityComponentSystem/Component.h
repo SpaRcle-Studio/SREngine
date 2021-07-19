@@ -100,7 +100,7 @@ namespace Framework::Helper {
     public:
         virtual bool DrawOnInspector() { return false; }
 
-        [[nodiscard]] inline std::string GetComponentName() const noexcept { return this->m_name; }
+        [[nodiscard]] inline std::string GetComponentName() const noexcept { return this->m_name; } // TODO: maybe unsafe
         inline Component* BaseComponent() noexcept { return this; }
 
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }

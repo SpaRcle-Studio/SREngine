@@ -13,6 +13,8 @@
 #include <Render/PostProcessing.h>
 #include <thread>
 #include <mutex>
+#include <imgui.h> // TODO: remove
+#include <imgui_internal.h> // TODO: remove
 #include <functional>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
@@ -123,10 +125,14 @@ namespace Framework::Graphics {
         void Resize(uint32_t w, uint32_t h);
         void CentralizeCursor() noexcept;
         SR_FORCE_INLINE void SetGUIEnabled(bool value) noexcept {
+            if (value)
+                Helper::Debug::Log("Window::SetGUIEnabled() : enable gui...");
+            else
+                Helper::Debug::Log("Window::SetGUIEnabled() : disable gui...");
+
             this->m_env->SetGUIEnabled(value);
             this->m_GUIEnabled = value;
         }
-        bool SetCanvas(GUI::ICanvas* canvas);
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsFullScreen()           const noexcept { return this->m_env->IsFullScreen(); }
         SR_FORCE_INLINE void SetFullScreen(bool value)              const noexcept { this->m_env->SetFullScreen(value);  }
@@ -134,7 +140,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowFocus()          const noexcept { return this->m_isWindowFocus;       }
         [[nodiscard]] SR_FORCE_INLINE Math::Vector2 GetWindowSize() const noexcept { return m_env->GetWindowSize();      }
     public:
-        bool Create();
+        bool Create(GUI::ICanvas* canvas);
         bool Init();
         bool Run();
         bool Close();

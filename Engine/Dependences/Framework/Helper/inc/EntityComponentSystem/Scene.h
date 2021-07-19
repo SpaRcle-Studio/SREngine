@@ -87,6 +87,7 @@ namespace Framework::Helper {
         bool RemoveSelected(GameObject* gameObject);
         void AddSelected(GameObject* gameObject);
     public:
+        GameObject* FindByComponent(const std::string& name);
         GameObject* Instance(const std::string& name);
         //bool RemoveGameObject(const GameObject* gameObject);
         //bool DestroyGameObject(GameObject* gameObject);

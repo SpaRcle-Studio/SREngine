@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_WINDOW_H
@@ -55,25 +55,25 @@ private:
 	Vector2 m_newWindowSize;
 public:
 	void AddCamera(Camera* arg0) {
-		void* voidPtr = g_methodPointers[77];
+		void* voidPtr = g_methodPointers[79];
 		typedef void (Window::*ClassPtr)(Camera* arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	void Resize(uint32_t arg0, uint32_t arg1) {
-		void* voidPtr = g_methodPointers[78];
+		void* voidPtr = g_methodPointers[80];
 		typedef void (Window::*ClassPtr)(uint32_t arg0, uint32_t arg1);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0, arg1);
 	}
 	void CentralizeWindow() {
-		void* voidPtr = g_methodPointers[79];
+		void* voidPtr = g_methodPointers[81];
 		typedef void (Window::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void SetGUIEnabled(bool arg0) {
-		void* voidPtr = g_methodPointers[80];
+		void* voidPtr = g_methodPointers[82];
 		typedef void (Window::*ClassPtr)(bool arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);

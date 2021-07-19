@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_INPUT_H
@@ -15,31 +15,31 @@ enum class KeyCode {
 class Input {
 public:
 	static int GetMouseWheel() {
-		void* voidPtr = g_methodPointers[96];
+		void* voidPtr = g_methodPointers[98];
 		typedef int (*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)();
 	}
 	static Vector2 GetMouseDrag() {
-		void* voidPtr = g_methodPointers[97];
+		void* voidPtr = g_methodPointers[99];
 		typedef Vector2 (*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)();
 	}
 	static bool GetKey(KeyCode arg0) {
-		void* voidPtr = g_methodPointers[98];
+		void* voidPtr = g_methodPointers[100];
 		typedef bool (*ClassPtr)(KeyCode arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0);
 	}
 	static bool GetKeyDown(KeyCode arg0) {
-		void* voidPtr = g_methodPointers[99];
+		void* voidPtr = g_methodPointers[101];
 		typedef bool (*ClassPtr)(KeyCode arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0);
 	}
 	static bool GetKeyUp(KeyCode arg0) {
-		void* voidPtr = g_methodPointers[100];
+		void* voidPtr = g_methodPointers[102];
 		typedef bool (*ClassPtr)(KeyCode arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0);

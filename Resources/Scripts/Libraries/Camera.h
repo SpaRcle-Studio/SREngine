@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_CAMERA_H
@@ -38,44 +38,44 @@ private:
 	Vector2 m_cameraSize;
 public:
 	static Camera* Allocate(uint32_t arg0, uint32_t arg1) {
-		void* voidPtr = g_methodPointers[70];
+		void* voidPtr = g_methodPointers[72];
 		typedef Camera* (*ClassPtr)(uint32_t arg0, uint32_t arg1);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0, arg1);
 	}
 	void SetDirectOutput(bool arg0) {
-		void* voidPtr = g_methodPointers[71];
+		void* voidPtr = g_methodPointers[73];
 		typedef void (Component::*ClassPtr)(bool arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 private:
 	void OnDestroyGameObject() override {
-		void* voidPtr = g_methodPointers[72];
+		void* voidPtr = g_methodPointers[74];
 		typedef void (Component::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void OnRotate(Vector3 arg0) override {
-		void* voidPtr = g_methodPointers[73];
+		void* voidPtr = g_methodPointers[75];
 		typedef void (Component::*ClassPtr)(Vector3 arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	void OnMove(Vector3 arg0) override {
-		void* voidPtr = g_methodPointers[74];
+		void* voidPtr = g_methodPointers[76];
 		typedef void (Component::*ClassPtr)(Vector3 arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	bool DrawOnInspector() override {
-		void* voidPtr = g_methodPointers[75];
+		void* voidPtr = g_methodPointers[77];
 		typedef bool (Component::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void OnDestroyComponent() override {
-		void* voidPtr = g_methodPointers[76];
+		void* voidPtr = g_methodPointers[78];
 		typedef void (Component::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();

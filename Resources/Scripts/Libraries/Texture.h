@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_TEXTURE_H
@@ -45,20 +45,20 @@ private:
 	TextureFilter m_filter;
 private:
 	bool Destroy() override {
-		void* voidPtr = g_methodPointers[102];
+		void* voidPtr = g_methodPointers[104];
 		typedef bool (IResource::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void Free() override {
-		void* voidPtr = g_methodPointers[103];
+		void* voidPtr = g_methodPointers[105];
 		typedef void (IResource::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 public:
 	static Texture* Load(const std::string& arg0, TextureFormat arg1, bool arg2, TextureType arg3, TextureFilter arg4, TextureCompression arg5, uint8_t arg6) {
-		void* voidPtr = g_methodPointers[104];
+		void* voidPtr = g_methodPointers[106];
 		typedef Texture* (*ClassPtr)(const std::string& arg0, TextureFormat arg1, bool arg2, TextureType arg3, TextureFilter arg4, TextureCompression arg5, uint8_t arg6);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0, arg1, arg2, arg3, arg4, arg5, arg6);

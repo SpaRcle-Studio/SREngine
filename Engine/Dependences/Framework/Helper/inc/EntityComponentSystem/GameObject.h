@@ -43,7 +43,7 @@ namespace Framework::Helper {
         void SetName(const std::string& name);
         void SetNameFromInspector(const std::string& name);
         /** \brief Get first needed component */
-        Component* GetComponent(std::string name);
+        Component* GetComponent(const std::string& name);
         std::vector<Component*> GetComponents(const std::string& name);
         std::vector<Component*> GetComponents();
         bool AddComponent(Component* component);
@@ -56,6 +56,7 @@ namespace Framework::Helper {
         [[nodiscard]] inline bool HasChildren() const noexcept { return m_countChild > 0; }
         [[nodiscard]] inline bool IsSelect() const noexcept { return this->m_isSelect; }
         bool Contains(GameObject* child);
+        bool ContainsComponent(const std::string& name);
         void SetSelect(bool value);
     private:
         bool                     m_isSelect      = false;

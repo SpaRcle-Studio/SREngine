@@ -3,7 +3,7 @@
 //
 
 #include <vector>
-#include <GUI/GUIWindow.h>
+#include <GUI/old/GUIWindow.h>
 #include <EntityComponentSystem/Transform.h>
 #include <EntityComponentSystem/Scene.h>
 #include <EntityComponentSystem/Component.h>

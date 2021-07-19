@@ -6,7 +6,7 @@ set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_library(Core STATIC
         ${CORE_ROOT_DIR}/src/EvoScriptAPI.cpp
         ${CORE_ROOT_DIR}/src/Engine.cpp
-        ${CORE_ROOT_DIR}/src/GUI/Canvas.cpp
+        ${CORE_ROOT_DIR}/src/EditorGUI.cpp
         )
 
 target_link_libraries(Core Framework)

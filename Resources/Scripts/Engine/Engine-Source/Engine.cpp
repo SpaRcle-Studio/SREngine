@@ -15,8 +15,6 @@
 #include <iostream>
 #include <ctime>
 
-#define EXTERN extern "C" __declspec(dllexport)
-
 GameObject* g_camera = nullptr;
 Scene*      g_scene  = nullptr;
 Skybox*     g_skybox = nullptr;
@@ -31,7 +29,7 @@ EXTERN void Start() {
     engine->SetScene(g_scene);
 
     Window* window = engine->GetWindow();
-    window->SetGUIEnabled(false);
+    window->SetGUIEnabled(true);
     window->Resize(848, 480);
     window->CentralizeWindow();
 

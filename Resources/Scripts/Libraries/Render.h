@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_RENDER_H
@@ -55,61 +55,61 @@ private:
 	int32_t m_pipeLine;
 public:
 	virtual void UpdateUBOs() {
-		void* voidPtr = g_methodPointers[81];
+		void* voidPtr = g_methodPointers[83];
 		typedef void (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	virtual bool DrawGeometry() {
-		void* voidPtr = g_methodPointers[82];
+		void* voidPtr = g_methodPointers[84];
 		typedef bool (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	virtual bool DrawSkybox() {
-		void* voidPtr = g_methodPointers[83];
+		void* voidPtr = g_methodPointers[85];
 		typedef bool (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	virtual void DrawGrid() {
-		void* voidPtr = g_methodPointers[84];
+		void* voidPtr = g_methodPointers[86];
 		typedef void (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	virtual void DrawSingleColors() {
-		void* voidPtr = g_methodPointers[85];
+		void* voidPtr = g_methodPointers[87];
 		typedef void (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	virtual bool DrawTransparentGeometry() {
-		void* voidPtr = g_methodPointers[86];
+		void* voidPtr = g_methodPointers[88];
 		typedef bool (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	virtual bool DrawSettingsPanel() {
-		void* voidPtr = g_methodPointers[87];
+		void* voidPtr = g_methodPointers[89];
 		typedef bool (Render::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void SetSkybox(Skybox* arg0) {
-		void* voidPtr = g_methodPointers[88];
+		void* voidPtr = g_methodPointers[90];
 		typedef void (Render::*ClassPtr)(Skybox* arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	void RegisterMesh(Mesh* arg0) {
-		void* voidPtr = g_methodPointers[89];
+		void* voidPtr = g_methodPointers[91];
 		typedef void (Render::*ClassPtr)(Mesh* arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	void RegisterTexture(Texture* arg0) {
-		void* voidPtr = g_methodPointers[90];
+		void* voidPtr = g_methodPointers[92];
 		typedef void (Render::*ClassPtr)(Texture* arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);

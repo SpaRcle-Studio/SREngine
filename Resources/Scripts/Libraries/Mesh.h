@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_MESH_H
@@ -43,73 +43,73 @@ protected:
 	_64byte m_modelMat;
 public:
 	static std::vector<Mesh*> Load(const std::string& arg0) {
-		void* voidPtr = g_methodPointers[47];
+		void* voidPtr = g_methodPointers[48];
 		typedef std::vector<Mesh*> (*ClassPtr)(const std::string& arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*origPtr)(arg0);
 	}
 	bool DrawOnInspector() override {
-		void* voidPtr = g_methodPointers[48];
+		void* voidPtr = g_methodPointers[49];
 		typedef bool (Component::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void OnMove(Vector3 arg0) override {
-		void* voidPtr = g_methodPointers[49];
-		typedef void (Component::*ClassPtr)(Vector3 arg0);
-		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
-		return (*this.*origPtr)(arg0);
-	}
-	void OnRotate(Vector3 arg0) override {
 		void* voidPtr = g_methodPointers[50];
 		typedef void (Component::*ClassPtr)(Vector3 arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
-	void OnScaled(Vector3 arg0) override {
+	void OnRotate(Vector3 arg0) override {
 		void* voidPtr = g_methodPointers[51];
 		typedef void (Component::*ClassPtr)(Vector3 arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
-	void OnSelected(bool arg0) override {
+	void OnScaled(Vector3 arg0) override {
 		void* voidPtr = g_methodPointers[52];
+		typedef void (Component::*ClassPtr)(Vector3 arg0);
+		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
+		return (*this.*origPtr)(arg0);
+	}
+	void OnSelected(bool arg0) override {
+		void* voidPtr = g_methodPointers[53];
 		typedef void (Component::*ClassPtr)(bool arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	bool Destroy() override {
-		void* voidPtr = g_methodPointers[53];
+		void* voidPtr = g_methodPointers[54];
 		typedef bool (IResource::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void OnDestroyGameObject() override {
-		void* voidPtr = g_methodPointers[54];
+		void* voidPtr = g_methodPointers[55];
 		typedef void (Component::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void OnReady(bool arg0) override {
-		void* voidPtr = g_methodPointers[55];
+		void* voidPtr = g_methodPointers[56];
 		typedef void (Component::*ClassPtr)(bool arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	void WaitCalculate() {
-		void* voidPtr = g_methodPointers[56];
+		void* voidPtr = g_methodPointers[57];
 		typedef void (IResource::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	Material* GetMaterial() {
-		void* voidPtr = g_methodPointers[57];
+		void* voidPtr = g_methodPointers[58];
 		typedef Material* (IResource::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
 	void OnDestroyComponent() override {
-		void* voidPtr = g_methodPointers[58];
+		void* voidPtr = g_methodPointers[59];
 		typedef void (Component::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();

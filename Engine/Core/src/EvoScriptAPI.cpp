@@ -12,11 +12,13 @@
 
 #include <Debug.h>
 #include <ResourceManager/ResourceManager.h>
+#include <GUI/GUISystem.h>
 
 namespace Framework {
     using namespace Helper::Math;
     using namespace Helper::Types;
     using namespace Graphics;
+    using namespace Graphics::GUI;
     using namespace Physics;
 
     void API::RegisterEvoScriptClasses(Scripting::EvoCompiler* compiler)  {
@@ -38,6 +40,7 @@ namespace Framework {
         RegisterSkybox(generator);
         RegisterTexture(generator);
         RegisterMaterial(generator);
+        RegisterGUISystem(generator);
 
         generator->Save(Helper::ResourceManager::GetResourcesFolder() + "/Scripts/Libraries/");
     }
@@ -101,7 +104,7 @@ namespace Framework {
                 { "uint32_t",                 "m_countSelected",       EvoScript::Private },
                 { "std::vector<GameObject*>", "m_rootObjects",         EvoScript::Private },
                 { "bool",                     "m_rootObjectsEmpty",    EvoScript::Private },
-        }, { "map", "string", "mutex", "vector", "stdint.h", "set" });
+        }, { "map", "string", "mutex", "vector", "stdint.h", "set", "GameObject.h" });
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Destroy, bool, ())
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Free, bool, ())
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetName, std::string, () const)
@@ -117,10 +120,9 @@ namespace Framework {
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, RemoveSelected, bool, (GameObject*))
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, AddSelected, void, (GameObject*))
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Instance,  GameObject*, (const std::string&))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, FindByComponent,  GameObject*, (const std::string&))
 
         ESRegisterStaticMethod(Helper::, EvoScript::Public, generator, Scene, New, Scene*, (const std::string&))
-
-        generator->AddIncompleteType("GameObject", "Scene");
     }
 
     void API::RegisterUtils(EvoScript::AddressTableGen *generator) {
@@ -284,6 +286,7 @@ namespace Framework {
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, AddComponent, bool, (Component*))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetTransform, Transform*, ())
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetComponent, Component*, (const std::string&))
 
         generator->AddIncompleteType("Scene", "GameObject");
     }
@@ -611,6 +614,17 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetGlossiness, void, (Texture*))
 
         generator->AddIncompleteType("Mesh", "Material");
+    }
+
+    void API::RegisterGUISystem(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("GUISystem", "GUISystem", { });
+        ESRegisterStaticMethod(GUI::, EvoScript::Public, generator, GUISystem, Get, GUISystem*, ())
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginDockSpace, void, ())
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndDockSpace, void, ())
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginWindow, bool, (const char*))
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndWindow, void, ())
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, (const char*))
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndChildWindow, void, ())
     }
 }
 

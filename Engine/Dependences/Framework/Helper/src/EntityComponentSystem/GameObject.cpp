@@ -47,12 +47,16 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
     return true;
 }
 
-Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(std::string name) {  // TODO: add security multi-threading
+Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const std::string& name) {  // TODO: add security multi-threading
     Component* find = nullptr;
 
     m_mutex.lock();
 
-    // TODO
+    for (auto component : m_components)
+        if (component->GetComponentName() == name) {
+            find = component;
+            break;
+        }
 
     m_mutex.unlock();
 
@@ -239,4 +243,17 @@ void GameObject::SetParent(GameObject *gm)  {
 void GameObject::RemoveParent(GameObject *gm) {
     this->m_transform->OnParentRemove(gm->m_transform);
     this->m_parent = nullptr;
+}
+
+bool GameObject::ContainsComponent(const std::string &name) {
+    m_mutex.lock();
+
+    for (auto comp : m_components)
+        if (comp->GetComponentName() == name) {
+            m_mutex.unlock();
+            return true;
+        }
+
+    m_mutex.unlock();
+    return false;
 }

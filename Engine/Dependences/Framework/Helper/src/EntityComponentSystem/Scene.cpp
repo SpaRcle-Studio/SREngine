@@ -190,6 +190,22 @@ void Framework::Helper::Scene::UnselectAll() {
     m_selectedMutex.unlock();
 }
 
+Framework::Helper::GameObject *Framework::Helper::Scene::FindByComponent(const std::string &name) {
+    GameObject* find = nullptr;
+
+    m_mutex.lock();
+
+    for (auto gm : m_gameObjects)
+        if (gm->ContainsComponent(name)) {
+            find = gm;
+            break;
+        }
+
+    m_mutex.unlock();
+
+    return find;
+}
+
 //bool Framework::Helper::Scene::RemoveGameObject(const GameObject* gameObject) {
 //    return false; // TODO!
 //}

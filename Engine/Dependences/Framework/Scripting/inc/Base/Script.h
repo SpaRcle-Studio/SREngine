@@ -9,6 +9,7 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
+#include <Debug.h>
 
 namespace Framework::Scripting {
     typedef std::chrono::high_resolution_clock::time_point Time;
@@ -30,22 +31,39 @@ namespace Framework::Scripting {
     public:
         Script(const Script&) = delete;
     protected:
-        Compiler*   m_compiler = nullptr;
-        std::string m_name     = "None";
-        std::string m_path     = "None";
-        Time        m_lastUpd  = {};
+        Compiler*   m_compiler             = nullptr;
+        std::string m_name                 = "None";
+        std::string m_path                 = "None";
+        Time        m_lastUpd              = {};
 
-        bool        m_isStart  = false;
+        bool        m_isStart              = false;
+        bool        m_isDestroy            = false;
+        bool        m_needFreeAfterDestroy = false;
     public:
-        virtual void Free()    = 0;
-        virtual bool Destroy() = 0;
-        virtual bool Compile() = 0;
+        virtual void ForcedFree()            = 0;
+        virtual bool AwaitDestroy()          = 0;
+        virtual bool Compile()               = 0;
+        virtual bool DelayedDestroyAndFree() = 0;
+    public:
+        void Free() {
+            if (m_needFreeAfterDestroy) {
+                Helper::Debug::Error("Script::Free() : script will be automatically free after destroy!");
+                return;
+            }
+
+            this->ForcedFree();
+        }
+
+        [[nodiscard]] bool IsNeedFreeAfterDestroy() const {
+            return m_needFreeAfterDestroy;
+        }
     public:
         virtual void Awake()       = 0;
         virtual void Start()       = 0;
         virtual void Close()       = 0;
         virtual void Update()      = 0;
         virtual void FixedUpdate() = 0;
+        virtual void OnGUI()       = 0;
     public:
         static Scripting::Script* Allocate(
                 const std::string& name,

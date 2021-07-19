@@ -19,14 +19,20 @@ namespace Framework::Scripting {
     public:
         Compiler(const Compiler&) = delete;
     protected:
-        std::set<Script*> m_scripts = {};
-        std::mutex        m_mutex   = std::mutex();
+        std::set<Script*> m_scripts        = {};
+        std::mutex        m_useMutex       = std::mutex();
+
+        std::set<Script*> m_scriptsToAdd   = {};
+        std::set<Script*> m_scriptsToDel   = {};
+        std::mutex        m_operationMutex = std::mutex();
     public:
         void UpdateAll();
         void FixedUpdateAll();
     public:
         void RegisterScript(Script* script);
         void RemoveScript(Script* script);
+        void PollEvents();
+        bool Contains(Script* script);
     public:
         virtual bool Init()    = 0;
         virtual bool Destroy() = 0;

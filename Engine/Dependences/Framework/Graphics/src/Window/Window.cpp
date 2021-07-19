@@ -16,7 +16,7 @@
 
 using namespace Framework::Helper;
 
-bool Framework::Graphics::Window::Create() {
+bool Framework::Graphics::Window::Create(GUI::ICanvas* canvas) {
     if (m_isCreate) {
         Debug::Error("Window::Create() : window already create!");
         return false;
@@ -24,6 +24,7 @@ bool Framework::Graphics::Window::Create() {
 
     Debug::Graph("Window::Create() : creating window...");
 
+    this->m_canvas = canvas;
     this->m_time = new Helper::Types::Time();
     this->m_time->SetFPSLimit(60);
 
@@ -142,8 +143,11 @@ bool Framework::Graphics::Window::Close() {
 
     Debug::Graph("Window::Close() : close window...");
 
-    if (this->m_canvas)
-        this->m_canvas->Close();
+    if (this->m_canvas) {
+        this->m_canvas->Destroy();
+        this->m_canvas->Free();
+        this->m_canvas = nullptr;
+    }
 
     this->m_isRun   = false;
     this->m_isClose = true;
@@ -255,24 +259,24 @@ void Framework::Graphics::Window::Thread() {
 
                 if (m_GUIEnabled && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
                     if (this->m_env->BeginDrawGUI()) {
-                        //if (m_canvas)
-                        //    this->m_canvas->Draw();
+                        if (m_canvas)
+                            this->m_canvas->Draw();
 
-                        if (ImGui::Begin("Texture")) {
+                        /*if (ImGui::Begin("Texture")) {
                             ImGui::BeginChild("Texture 1");
 
-                            /*auto texture = m_env->GetTexture(0);
-                            if (texture.Ready()) {
-                                static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
+                            //auto texture = m_env->GetTexture(0);
+                            //if (texture.Ready()) {
+                            //    static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
 
-                                GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
-                                                            { texture.m_width, texture.m_height },
-                                                            m_env->GetDescriptorSetFromDTDSet(imTex), true);
-                            }*/
+                                //GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
+                                                            //{ texture.m_width, texture.m_height },
+                                                            //m_env->GetDescriptorSetFromDTDSet(imTex), true);
+                            //}
 
                             ImGui::EndChild();
                             ImGui::End();
-                        }
+                        }*/
 
                         this->m_env->EndDrawGUI();
                     }
@@ -512,9 +516,6 @@ bool Framework::Graphics::Window::Free() {
     if (m_isClose) {
         Debug::Info("Window::Free() : free window pointer...");
 
-        if (m_canvas)
-            this->m_canvas->Free();
-
         delete this;
         return true;
     }
@@ -522,24 +523,15 @@ bool Framework::Graphics::Window::Free() {
         return false;
 }
 
-bool Framework::Graphics::Window::SetCanvas(Framework::Graphics::GUI::ICanvas *canvas) {
-    if (m_canvas){
-        Helper::Debug::Error("Window::SetCanvas() : canvas already setted!");
-        return false;
-    } else
-        Debug::Graph("Window::SetCanvas() : setting canvas...");
-
-    this->m_canvas = canvas;
-
-    return true;
-}
-
 void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
+    Helper::Debug::Log("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
     this->m_newWindowSize = { (float)w, (float)h };
     this->m_isNeedResize = true;
 }
 
 void Framework::Graphics::Window::CentralizeWindow() {
+    Helper::Debug::Log("Window::CentralizeWindow() : wait centralize window...");
+
     ret:
     if (m_isNeedResize)
         goto ret;

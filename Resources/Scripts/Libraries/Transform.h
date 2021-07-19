@@ -1,5 +1,5 @@
 //
-// Created by Evo Script code generator on Sun Jul 18 20:07:39 2021 | Author - Monika
+// Created by Evo Script code generator on Mon Jul 19 20:12:25 2021 | Author - Monika
 //
 
 #ifndef EVOSCRIPTLIB_TRANSFORM_H
@@ -22,31 +22,31 @@ private:
 	Transform* m_parent;
 public:
 	Vector3 Forward() {
-		void* voidPtr = g_methodPointers[91];
-		typedef Vector3 (Transform::*ClassPtr)();
-		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
-		return (*this.*origPtr)();
-	}
-	Vector3 Right() {
-		void* voidPtr = g_methodPointers[92];
-		typedef Vector3 (Transform::*ClassPtr)();
-		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
-		return (*this.*origPtr)();
-	}
-	Vector3 Up() {
 		void* voidPtr = g_methodPointers[93];
 		typedef Vector3 (Transform::*ClassPtr)();
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)();
 	}
-	void Translate(Vector3 arg0) {
+	Vector3 Right() {
 		void* voidPtr = g_methodPointers[94];
+		typedef Vector3 (Transform::*ClassPtr)();
+		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
+		return (*this.*origPtr)();
+	}
+	Vector3 Up() {
+		void* voidPtr = g_methodPointers[95];
+		typedef Vector3 (Transform::*ClassPtr)();
+		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
+		return (*this.*origPtr)();
+	}
+	void Translate(Vector3 arg0) {
+		void* voidPtr = g_methodPointers[96];
 		typedef void (Transform::*ClassPtr)(Vector3 arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);
 	}
 	void Rotate(Vector3 arg0) {
-		void* voidPtr = g_methodPointers[95];
+		void* voidPtr = g_methodPointers[97];
 		typedef void (Transform::*ClassPtr)(Vector3 arg0);
 		auto origPtr = *reinterpret_cast<ClassPtr*>(&voidPtr);
 		return (*this.*origPtr)(arg0);

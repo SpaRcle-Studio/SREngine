@@ -20,9 +20,12 @@ namespace Framework::Scripting {
         ~EvoScriptImpl() override = default;
         EvoScriptImpl(const EvoScriptImpl&) = delete;
     public:
-        void Free() override { delete this; }
-        bool Destroy() override;
+        void ForcedFree() override {
+            delete this;
+        }
+        bool AwaitDestroy() override;
         bool Compile() override;
+        bool DelayedDestroyAndFree() override;
     private:
         EvoScript::Script* m_script = nullptr;
     public:
@@ -31,6 +34,7 @@ namespace Framework::Scripting {
         void Close() override;
         void Update() override;
         void FixedUpdate() override;
+        void OnGUI() override;
     };
 }
 

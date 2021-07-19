@@ -5,7 +5,7 @@
 
 #include <imgui.h>
 #include <imgui_internal.h>
-#include <GUI/DockSpace.h>
+#include <GUI/old/DockSpace.h>
 
 void Framework::Graphics::GUI::DockSpace::Begin() {
     const float toolbarSize = 0;
