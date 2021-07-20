@@ -49,7 +49,8 @@ namespace Framework::Graphics::Types {
 
                 //!==========================
 
-                this->m_env->SetDescriptorID(m_descriptorSet);
+                //this->m_env->SetDescriptorID(m_descriptorSet);
+                m_env->BindDescriptorSet(m_descriptorSet);
                 this->m_material->UseVulkan();
             }
 

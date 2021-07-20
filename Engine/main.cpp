@@ -12,12 +12,9 @@
     #define SR_RELEASE
 #endif
 
-//#include <easy/profiler.h>
-
 #include <Engine.h>
 
 #include <Debug.h>
-#include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
 #include <Environment/Vulkan.h>
@@ -25,13 +22,8 @@
 
 #include <Types/Rigidbody.h>
 #include <Types/Geometry/Mesh3D.h>
-#include <Core/PhysEngine.h>
-
-#include <Render/Implementations/OpenGLRender.h>
-#include <Render/Implementations/VulkanRender.h>
 
 using namespace Framework;
-//using namespace Framework::Scripting;
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
 using namespace Framework::Helper::Types;
@@ -47,10 +39,12 @@ int main() {
     Debug::SetLevel(Debug::Level::Full);
     ResourceManager::Init(exe + "/../../Resources");
 
+#ifdef WIN32
     ShellExecute(nullptr, "open", (ResourceManager::GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
             ("--log log.txt --target "+FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
             nullptr, SW_SHOWDEFAULT
     );
+#endif
 
     // Register all resource types
     {
@@ -66,12 +60,28 @@ int main() {
         Component::RegisterComponent("Camera",             []() -> Camera*    { return Camera::Allocate(); });
     }
 
-    //Environment::Set(new OpenGL());
-    Environment::Set(new Vulkan());
+    if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")
+        Environment::Set(new OpenGL());
+    else if (env == "Vulkan")
+        Environment::Set(new Vulkan());
+    else if (env.empty()) {
+        Helper::Debug::Error("System error: file \"Resources/Configs/Environment.config\" does not exist!\n\t"
+                             "Please, create it and write the name of the environment there!");
+        ResourceManager::Stop();
+        Debug::Stop();
+        return -1500;
+    } else {
+        Helper::Debug::Error("System error: unknown environment! \"" + env + "\" does not support!");
+        ResourceManager::Stop();
+        Debug::Stop();
+        return -2000;
+    }
 
     Render* render = Render::Allocate();
     if (!render) {
         Helper::Debug::Error("FATAL: render is not support this pipeline!");
+        ResourceManager::Stop();
+        Debug::Stop();
         return -1000;
     }
 

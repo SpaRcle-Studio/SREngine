@@ -66,11 +66,13 @@ namespace Framework::Graphics {
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
         void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
-        void SetBuildState(const bool& isBuild)      { m_needReBuild = !isBuild;        }
+        virtual void SetBuildState(const bool& isBuild) {
+            m_needReBuild = !isBuild;
+        }
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
-        void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
+        //void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
         void SetCurrentShaderID(const int32_t& id)  { m_currentShaderID = id;           }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
@@ -155,6 +157,7 @@ namespace Framework::Graphics {
         virtual bool CloseWindow() { return false; }
         [[nodiscard]] virtual void* GetHWND() const { return nullptr; }
 
+        virtual SR_FORCE_INLINE void ClearFramebuffersQueue() { }
         /* clear depth/stencil/color buffers */
         virtual SR_FORCE_INLINE void ClearBuffers() noexcept { }
 

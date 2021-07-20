@@ -29,7 +29,7 @@ EXTERN void Start() {
     engine->SetScene(g_scene);
 
     Window* window = engine->GetWindow();
-    window->SetGUIEnabled(true);
+    window->SetGUIEnabled(false);
     window->Resize(848, 480);
     window->CentralizeWindow();
 

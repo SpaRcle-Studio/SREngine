@@ -65,28 +65,29 @@ namespace Framework::Graphics {
         Vulkan() = default;
         ~Vulkan() = default;
     private:
-        VkDeviceSize                       m_offsets[1]         = {0};
+        VkDeviceSize                                    m_offsets[1]         = {0};
 
-        VkViewport                         m_viewport           = { };
-        VkRect2D                           m_scissor            = { };
+        VkViewport                                      m_viewport           = { };
+        VkRect2D                                        m_scissor            = { };
 
-        std::vector<VkClearValue>          m_clearValues        = { };
-        VkRenderPassBeginInfo              m_renderPassBI       = { };
+        std::vector<VkClearValue>                       m_clearValues        = { };
+        VkRenderPassBeginInfo                           m_renderPassBI       = { };
 
-        EvoVulkan::Complexes::FrameBuffer* m_currentFramebuffer = nullptr;
-        VkCommandBuffer                    m_currentCmd         = VK_NULL_HANDLE;
-        EvoVulkan::Complexes::Shader*      m_currentShader      = nullptr;
-        VkPipelineLayout                   m_currentLayout      = VK_NULL_HANDLE;
+        std::vector<EvoVulkan::Complexes::FrameBuffer*> m_framebuffersQueue  = {};
+        EvoVulkan::Complexes::FrameBuffer*              m_currentFramebuffer = nullptr;
+        VkCommandBuffer                                 m_currentCmd         = VK_NULL_HANDLE;
+        EvoVulkan::Complexes::Shader*                   m_currentShader      = nullptr;
+        VkPipelineLayout                                m_currentLayout      = VK_NULL_HANDLE;
 
-        VulkanTypes::VkImGUI*              m_imgui              = nullptr;
+        VulkanTypes::VkImGUI*                           m_imgui              = nullptr;
 
         //! Descriptor sets in that moment, for render meshes
-        VkDescriptorSet                    m_currentDesrSets    = VK_NULL_HANDLE;
+        VkDescriptorSet                                 m_currentDesrSets    = VK_NULL_HANDLE;
 
-        VkCommandBufferBeginInfo           m_cmdBufInfo         = { };
+        VkCommandBufferBeginInfo                        m_cmdBufInfo         = { };
 
-        VulkanTools::MemoryManager*        m_memory             = nullptr;
-        EvoVulkan::Core::VulkanKernel*     m_kernel             = nullptr;
+        VulkanTools::MemoryManager*                     m_memory             = nullptr;
+        EvoVulkan::Core::VulkanKernel*                  m_kernel             = nullptr;
     private:
         const std::vector<const char*> m_validationLayers = {
                 "VK_LAYER_KHRONOS_validation"
@@ -116,8 +117,8 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const noexcept override { return PipeLine::Vulkan; }
         [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const noexcept override { return m_kernel->GetCountBuildIterations(); }
     public:
-        VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
-        VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
+        [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
+        [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
     public:
         uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
 
@@ -135,6 +136,12 @@ namespace Framework::Graphics {
         [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
         [[nodiscard]] void* GetDescriptorSet(uint32_t id) const override;
         [[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
+
+        void SetBuildState(const bool& isBuild) override {
+            if (isBuild)
+                this->m_kernel->SetFramebuffersQueue(m_framebuffersQueue);
+            Environment::SetBuildState(isBuild);
+        }
 
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const noexcept override { return true; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const noexcept override { return this->m_kernel->GetDevice()->GetName(); }
@@ -174,19 +181,20 @@ namespace Framework::Graphics {
             vkEndCommandBuffer(m_currentCmd);
         }
 
-        /**
-         \Vulkan Clear next frame buffer usage
-         */
+        SR_FORCE_INLINE void ClearFramebuffersQueue() override {
+            m_framebuffersQueue.clear();
+        }
 
+        /** \Vulkan Clear next frame buffer usage */
         SR_FORCE_INLINE void ClearBuffers() noexcept override {
             if (m_currentFBOid < 0) {
                 Helper::Debug::Error("Vulkan::ClearBuffers() : frame buffer isn't attached!");
                 return;
             } else if (m_currentFBOid > 0) {
-                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid]->GetCountClearValues();
-                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid]->GetClearValues();
+                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid - 1]->GetCountClearValues();
+                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
             } else {
-
+                Helper::Debug::Error("Vulkan::ClearBuffers() : TODO!");
             }
         }
 
@@ -204,7 +212,9 @@ namespace Framework::Graphics {
             this->m_renderPassBI.pClearValues    = m_clearValues.data();
         }
 
-        SR_FORCE_INLINE void DrawFrame() override { this->m_kernel->NextFrame(); }
+        SR_FORCE_INLINE void DrawFrame() override {
+            this->m_kernel->NextFrame();
+        }
         SR_FORCE_INLINE void PollEvents() const noexcept override { this->m_basicWindow->PollEvents(); }
 
         void SetWindowPosition(int x, int y) override;
@@ -256,15 +266,15 @@ namespace Framework::Graphics {
         }
     public:
         SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
-            //if (m_countDescrSets > 0)
-            //    vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, m_countDescrSets, m_descriptorSets, 0, NULL);
-
             if (m_currentDesrSets != VK_NULL_HANDLE)
                 vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
 
             vkCmdDrawIndexed(m_currentCmd, countIndices, 1, 0, 0, 0);
         }
         SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept override {
+            if (m_currentDesrSets != VK_NULL_HANDLE)
+                vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
+
             vkCmdDraw(m_currentCmd, countVerts, 1, 0, 0);
         }
 
@@ -357,6 +367,7 @@ namespace Framework::Graphics {
 
         SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) override { //const uint32_t& binding,
             //this->m_descriptorSets[binding] = m_memory->m_descriptorSets[descriptorSet].m_self;
+            m_currentDescID = descriptorSet;
             this->m_currentDesrSets = m_memory->m_descriptorSets[descriptorSet].m_self;
         }
         int32_t CalculateTexture(
@@ -403,15 +414,23 @@ namespace Framework::Graphics {
                 this->m_currentFramebuffer = nullptr;
             } else {
                 if (FBO == UINT32_MAX) {
-                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
+                    Helper::Debug::Error(
+                            "Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
                     return;
                 }
 
-                auto framebuffer = m_memory->m_FBOs[FBO];
+                auto framebuffer = m_memory->m_FBOs[FBO - 1];
                 if (!framebuffer) {
-                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer object isn't exists!");
+                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer object don't exist!");
                     return;
                 }
+
+                for (auto fbo : m_framebuffersQueue)
+                    if (fbo == framebuffer) {
+                        Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
+                        return;
+                    }
+                m_framebuffersQueue.push_back(framebuffer);
 
                 this->m_renderPassBI.framebuffer = *framebuffer;
                 this->m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
@@ -437,7 +456,9 @@ namespace Framework::Graphics {
                 return;
             }
 
-            if (!m_memory->m_textures[ID]) {
+            EvoVulkan::Types::Texture* texture = m_memory->m_textures[ID];
+
+            if (!texture) {
                 Helper::Debug::Error("Vulkan::BindTexture() : texture is not exists!");
                 return;
             }
@@ -445,7 +466,7 @@ namespace Framework::Graphics {
             auto descriptorSet = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
                     m_memory->m_descriptorSets[m_currentDescID].m_self,
                     VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, activeTexture,
-                    m_memory->m_textures[ID]->GetDescriptorRef());
+                    texture->GetDescriptorRef());
 
             vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
         }

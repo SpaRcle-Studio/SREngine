@@ -118,8 +118,15 @@ std::string FileSystem::ReadAllText(const std::string &path) {
     std::ifstream stream(path, std::ios::in);
     if (stream.is_open()) {
         std::string line;
-        while (getline(stream, line))
-            data += "\n" + line;
+        bool first = false;
+        while (getline(stream, line)) {
+            if (!first) {
+                first = true;
+                data += line;
+            }
+            else
+                data += "\n" + line;
+        }
         stream.close();
     }
     return data;

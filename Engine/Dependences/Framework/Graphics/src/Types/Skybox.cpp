@@ -150,7 +150,8 @@ void Framework::Graphics::Types::Skybox::DrawVulkan() {
                         { DescriptorType::Uniform, { 0, Shader::GetCurrentShader()->GetUBO(0) } },
                 });
 
-                this->m_env->SetDescriptorID(m_descriptorSet);
+                //this->m_env->SetDescriptorID(m_descriptorSet);
+                m_env->BindDescriptorSet(m_descriptorSet);
                 /*
                  * 0 - view/proj
                  * 1 - cube map

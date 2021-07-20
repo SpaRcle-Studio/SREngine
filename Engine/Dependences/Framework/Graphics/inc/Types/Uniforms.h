@@ -24,6 +24,11 @@ namespace Framework::Graphics {
     struct Mesh3DUBO {
         glm::mat4 model;
     };
+
+    struct PostProcessingUBO {
+        float gamma;
+        float saturation;
+    };
 }
 
 #endif //GAMEENGINE_UNIFORMS_H

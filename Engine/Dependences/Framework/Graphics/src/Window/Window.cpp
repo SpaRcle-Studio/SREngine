@@ -154,8 +154,10 @@ bool Framework::Graphics::Window::Close() {
 
     if (m_thread.joinable()) m_thread.join();
 
-    if (m_time)
+    if (m_time) {
         delete m_time;
+        m_time = nullptr;
+    }
 
     return true;
 }
@@ -218,13 +220,20 @@ void Framework::Graphics::Window::Thread() {
                 if (m_env->IsNeedReBuild())
                 {
                     if (!m_cameras.empty()) {
+                        m_env->ClearFramebuffersQueue();
+
                         m_render->SetCurrentCamera(m_cameras[0]);
 
                         Helper::Debug::Info("Window::Thread() : re-build render...");
 
                         if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
-                            //this->m_render->DrawTransparentGeometry();
-                            //this->m_render->DrawGeometry();
+                            m_env->BeginRender();
+                            {
+                                this->m_env->SetViewport();
+                                this->m_env->SetScissor();
+                            }
+                            m_env->EndRender();
+
                             m_cameras[0]->GetPostProcessing()->EndGeometry();
                         }
 
@@ -243,6 +252,8 @@ void Framework::Graphics::Window::Thread() {
 
                                     this->m_render->DrawGeometry();
                                     this->m_render->DrawSkybox();
+
+                                    //this->m_cameras[0]->GetPostProcessing()->Complete();
                                 }
                                 m_env->EndRender();
                             }
@@ -253,7 +264,8 @@ void Framework::Graphics::Window::Thread() {
                         m_env->SetBuildState(true);
                     }
                     continue;
-                } else {
+                }
+                else {
                     this->m_render->UpdateUBOs();
                 }
 
@@ -457,14 +469,18 @@ void Framework::Graphics::Window::PollEvents() {
 
         for (size_t t = 0; t < m_countNewCameras; t++){
             m_newCameras[t]->Create(this);
-            m_cameras.push_back(m_newCameras[t]);
-            m_countCameras++;
+            if (m_newCameras[t]->CompleteResize()) {
+                m_cameras.push_back(m_newCameras[t]);
+                m_countCameras++;
+            } else
+                Helper::Debug::Error("Window::PollEvents() : failed to complete resize camera!");
         }
 
         m_newCameras.clear();
         m_countNewCameras = 0;
 
         m_render->SetCurrentCamera(nullptr);
+        m_env->SetBuildState(false);
         m_camerasMutex.unlock();
     }
 
@@ -488,6 +504,7 @@ void Framework::Graphics::Window::PollEvents() {
         m_countCamerasToDestroy = 0;
 
         m_render->SetCurrentCamera(nullptr);
+        m_env->SetBuildState(false);
         m_camerasMutex.unlock();
     }
 

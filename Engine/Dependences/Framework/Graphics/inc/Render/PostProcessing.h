@@ -67,6 +67,9 @@ namespace Framework::Graphics {
 
         std::vector<int32_t>  m_PingPongFrameBuffers  = { -1, -1 };
         std::vector<int32_t>  m_PingPongColorBuffers  = { -1, -1 };
+
+        int32_t               m_descriptorSet         = -1;
+        int32_t               m_ubo                   = -1;
     protected:
         Environment*          m_env                   = nullptr;
 

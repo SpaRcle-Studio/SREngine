@@ -319,8 +319,13 @@ namespace Framework::Graphics{
             return false;
         }
 
-        if (FBO >= 0) {
-            if (!this->m_memory->ReAllocateFBO(FBO, size.x, size.y, colorBuffers, rboDepth)) {
+        if (FBO == 0) {
+            Helper::Debug::Error("Vulkan::CreateFrameBuffer() : zero frame buffer are default frame buffer!");
+            return false;
+        }
+
+        if (FBO > 0) {
+            if (!this->m_memory->ReAllocateFBO(FBO - 1 , size.x, size.y, colorBuffers, rboDepth)) {
                 Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             return true;
@@ -330,8 +335,8 @@ namespace Framework::Graphics{
         for (uint32_t i = 0; i < colorBuffers.size(); i++)
             formats.emplace_back(VK_FORMAT_R8G8B8A8_UNORM);
 
-        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, rboDepth);
-        if (FBO < 0) {
+        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, rboDepth) + 1;
+        if (FBO <= 0) {
             Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
             return false;
         }
@@ -363,7 +368,7 @@ namespace Framework::Graphics{
     }
 
     [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const noexcept {
-        return this->m_memory->FreeFBO(FBO);
+        return this->m_memory->FreeFBO(FBO - 1);
     }
 
     int32_t Vulkan::CalculateTexture(
@@ -520,7 +525,7 @@ namespace Framework::Graphics{
             m_submitInfo.commandBufferCount = 1;
 
         m_submitInfo.pCommandBuffers = m_submitCmdBuffs;//&m_drawCmdBuffs[m_currentBuffer];
-
+        m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;
         // Submit to queue
         auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);
         if (result != VK_SUCCESS) {

@@ -45,6 +45,9 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
             .depthWrite   = false,
             .depthTest    = false
         });
+        this->m_postProcessingShader->SetUniforms({
+            {{0, UBOType::Common}, sizeof(PostProcessingUBO)},
+        });
 
         this->m_blurShader = new Shader(m_render, "engine/blur");
     }
@@ -60,10 +63,11 @@ bool Framework::Graphics::PostProcessing::Destroy() {
     if (!m_isInit)
         return false;
 
-    if (!m_env->FreeFBO(m_frameBuffer) || !m_env->FreeTextures(m_colors.data(), m_colors.size())) {
-        Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
-        return false;
-    }
+    if (m_frameBuffer != -1)
+        if (!m_env->FreeFBO(m_frameBuffer) || !m_env->FreeTextures(m_colors.data(), m_colors.size())) {
+            Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
+            return false;
+        }
 
     return true;
 }
