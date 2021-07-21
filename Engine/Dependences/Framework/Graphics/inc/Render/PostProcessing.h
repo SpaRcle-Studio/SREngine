@@ -117,6 +117,7 @@ namespace Framework::Graphics {
         virtual void EndGeometry()   = 0;
 
         virtual void Complete()      = 0;
+        virtual void Draw() { };
     public:
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetFinally()       const noexcept { return this->m_finalColorBuffer;  }
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetColoredImage()  const noexcept { return this->m_colors[0];   }

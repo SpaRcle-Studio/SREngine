@@ -79,7 +79,21 @@ namespace Framework::Graphics {
         }
         static bool SetStandardGeometryShader(Shader* shader) noexcept;
     public:
-        [[nodiscard]] SR_FORCE_INLINE int32_t GetID() const { return m_shaderProgram; }
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetID() {
+            if (!m_isInit) {
+                if (m_isError)
+                    return false;
+
+                if (!this->Init()) {
+                    Helper::Debug::Error("Shader::GetID() : failed initialize shader!");
+                    this->m_isError = true;
+                    return -1;
+                }
+                this->m_isInit = true;
+            }
+
+            return m_shaderProgram;
+        }
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const { return m_sharedUniforms[index]; }
     public:

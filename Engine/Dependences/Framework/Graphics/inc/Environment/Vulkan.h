@@ -327,6 +327,11 @@ namespace Framework::Graphics {
                 Helper::Debug::Error("Vulkan::AllocDescriptorSet() : failed to cast abstract descriptor types to vulkan descriptor types!");
                 return -3;
             } else {
+                if (m_currentShaderID < 0) {
+                    Helper::Debug::Error("Vulkan::AllocDescriptorSet() : shader program do not set!");
+                    return -1;
+                }
+
                 auto id = this->m_memory->AllocateDescriptorSet(m_currentShaderID, vkTypes);
                 if (id >= 0) {
                     return id;

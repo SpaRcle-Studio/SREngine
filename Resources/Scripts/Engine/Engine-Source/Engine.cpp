@@ -30,7 +30,7 @@ EXTERN void Start() {
 
     Window* window = engine->GetWindow();
     window->SetGUIEnabled(false);
-    window->Resize(848, 480);
+    //window->Resize(848, 480);
     window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");

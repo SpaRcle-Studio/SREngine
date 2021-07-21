@@ -516,6 +516,12 @@ namespace Framework::Graphics{
         if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
             this->m_hasErrors = !this->ResizeWindow();
 
+        for (auto submitInfo : m_framebuffersQueue)
+            if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+                VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+                return;
+            }
+
         m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
         if (m_GUIEnabled) {
             m_submitCmdBuffs[1] =
@@ -524,11 +530,17 @@ namespace Framework::Graphics{
         } else
             m_submitInfo.commandBufferCount = 1;
 
-        m_submitInfo.pCommandBuffers = m_submitCmdBuffs;//&m_drawCmdBuffs[m_currentBuffer];
+        m_submitInfo.waitSemaphoreCount = 1;
+        if (m_waitSemaphore)
+            m_submitInfo.pWaitSemaphores = &m_waitSemaphore;
+        else
+            m_submitInfo.pWaitSemaphores = &m_syncs.m_presentComplete;
+
+        m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
         m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;
+
         // Submit to queue
-        auto result = vkQueueSubmit(m_device->m_familyQueues->m_graphicsQueue, 1, &m_submitInfo, VK_NULL_HANDLE);
-        if (result != VK_SUCCESS) {
+        if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
             return;
         }

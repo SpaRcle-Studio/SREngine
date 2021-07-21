@@ -32,7 +32,7 @@ namespace Framework::Graphics {
         void EndSkybox() override {}
 
         void Complete() override {
-            m_postProcessingShader->Use();
+            m_env->SetCurrentShaderID(m_postProcessingShader->GetID());
 
             if (m_descriptorSet == -1) {
                 m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform});
@@ -45,19 +45,23 @@ namespace Framework::Graphics {
                 });
 
                 PostProcessingUBO ubo = { 1.f, 1.f }; m_env->UpdateUBO(m_ubo, &ubo, sizeof(PostProcessingUBO));
+            }
 
-                m_env->BindDescriptorSet(m_descriptorSet);
-                //this->m_env->SetDescriptorID(m_descriptorSet);
-                /*
+            /*
                  *  0 - post processing uniform
                  *  1 - geometry sampler
                  *  2 - skybox sampler
-                 */
-                this->m_env->BindTexture(1, 0);
-            }
+           */
+            m_env->BindDescriptorSet(m_descriptorSet);
+            this->m_env->BindTexture(1, 0);
+
+            m_env->UnUseShader();
+        }
+
+        void Draw() override {
+            m_postProcessingShader->Use();
 
             m_env->BindDescriptorSet(m_descriptorSet);
-
             m_env->Draw(3);
 
             m_env->UnUseShader();

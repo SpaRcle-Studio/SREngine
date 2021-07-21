@@ -75,61 +75,10 @@ namespace Framework::Graphics::GUI {
             return true;
         }
 
-        inline static bool ButtonWithId(
+        static bool ButtonWithId(
                 const char* _id, const char* label, ImVec2 button_size = ImVec2(0, 0),
                 ImGuiButtonFlags flags = ImGuiButtonFlags_None, bool imposition = false, ImVec2 offset = ImVec2(0,0), ImVec4 color = ImVec4(0,0,0,0)
-        ) {
-            const bool has_color = !Vec4Null(color);
-
-            ImGuiWindow* window = ImGui::GetCurrentWindow();
-            if (window->SkipItems)
-                return false;
-
-            ImGuiContext& g = *GImGui;
-            const ImGuiStyle& style = g.Style;
-            const ImGuiID id = window->GetID(_id);
-            const ImVec2 label_size = ImGui::CalcTextSize(label, NULL, true);
-
-            ImVec2 pos = window->DC.CursorPos + offset;
-            if ((flags & ImGuiButtonFlags_AlignTextBaseLine) && style.FramePadding.y < window->DC.CurrLineTextBaseOffset) // Try to vertically align buttons that are smaller/have no padding so that text baseline matches (bit hacky, since it shouldn't be a flag)
-                pos.y += window->DC.CurrLineTextBaseOffset - style.FramePadding.y;
-            ImVec2 size = ImGui::CalcItemSize(button_size, label_size.x + style.FramePadding.x * 2.0f, label_size.y + style.FramePadding.y * 2.0f);
-
-            const ImRect bb(pos, pos + size);
-
-            if (has_color)
-                ImGui::PushStyleColor(ImGuiCol_Button, color);
-
-            if (!imposition)
-            {
-                ImGui::ItemSize(size, style.FramePadding.y);
-
-                if (!ImGui::ItemAdd(bb, id))
-                    return false;
-            }
-
-            if (window->DC.ItemFlags & ImGuiItemFlags_ButtonRepeat)
-                flags |= ImGuiButtonFlags_Repeat;
-            bool hovered, held;
-            bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, flags);
-
-            // Render
-            const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
-            ImGui::RenderNavHighlight(bb, id);
-            ImGui::RenderFrame(bb.Min, bb.Max, col, true, style.FrameRounding);
-            ImGui::RenderTextClipped(bb.Min + style.FramePadding, bb.Max - style.FramePadding, label, NULL, &label_size, style.ButtonTextAlign, &bb);
-
-            // Automatically close popups
-            //if (pressed && !(flags & ImGuiButtonFlags_DontClosePopups) && (window->Flags & ImGuiWindowFlags_Popup))
-            //    CloseCurrentPopup();
-
-            IMGUI_TEST_ENGINE_ITEM_INFO(id, label, window->DC.LastItemStatusFlags);
-
-            if (has_color)
-                ImGui::PopStyleColor();
-
-            return pressed;
-        }
+        );
 
         inline static void Begin(const std::string& winName) noexcept {
             ImGui::Begin(winName.c_str());

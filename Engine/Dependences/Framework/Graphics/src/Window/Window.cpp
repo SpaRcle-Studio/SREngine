@@ -10,6 +10,8 @@
 
 //#include <GUI/ICanvas.h>
 
+#include <GUI/old/GUIWindow.h>
+
 #include <ResourceManager/ResourceManager.h>
 #include <glm/gtx/string_cast.hpp>
 #include <Utils/StringUtils.h>
@@ -53,6 +55,7 @@ bool Framework::Graphics::Window::Create(GUI::ICanvas* canvas) {
                             if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
                                 camera->UpdateProjection(size.first, size.second);
                             }
+                        camera->CompleteResize();
                     }
 
                 //float ratio = m_format.GetRatio();
@@ -231,6 +234,9 @@ void Framework::Graphics::Window::Thread() {
                             {
                                 this->m_env->SetViewport();
                                 this->m_env->SetScissor();
+
+                                this->m_render->DrawSkybox();
+                                this->m_render->DrawGeometry();
                             }
                             m_env->EndRender();
 
@@ -239,6 +245,7 @@ void Framework::Graphics::Window::Thread() {
 
                         {
                             this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+                            this->m_cameras[0]->GetPostProcessing()->Complete();
 
                             for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
                                 m_env->SetBuildIteration(i);
@@ -250,10 +257,7 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetViewport();
                                     this->m_env->SetScissor();
 
-                                    this->m_render->DrawGeometry();
-                                    this->m_render->DrawSkybox();
-
-                                    //this->m_cameras[0]->GetPostProcessing()->Complete();
+                                    this->m_cameras[0]->GetPostProcessing()->Draw();
                                 }
                                 m_env->EndRender();
                             }
@@ -274,20 +278,20 @@ void Framework::Graphics::Window::Thread() {
                         if (m_canvas)
                             this->m_canvas->Draw();
 
-                        /*if (ImGui::Begin("Texture")) {
-                            ImGui::BeginChild("Texture 1");
+                        /*auto texture = m_env->GetTexture(0);
+                        if (texture.Ready()) {
+                            if (ImGui::Begin("Texture")) {
+                                ImGui::BeginChild("Texture 1");
 
-                            //auto texture = m_env->GetTexture(0);
-                            //if (texture.Ready()) {
-                            //    static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
+                                static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
 
-                                //GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
-                                                            //{ texture.m_width, texture.m_height },
-                                                            //m_env->GetDescriptorSetFromDTDSet(imTex), true);
-                            //}
+                                GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
+                                                            { texture.m_width, texture.m_height },
+                                                            m_env->GetDescriptorSetFromDTDSet(imTex), true);
 
-                            ImGui::EndChild();
-                            ImGui::End();
+                                ImGui::EndChild();
+                                ImGui::End();
+                            }
                         }*/
 
                         this->m_env->EndDrawGUI();

@@ -11,9 +11,5 @@ layout (binding = 0) uniform PostProcessingUBO {
 layout (binding = 1) uniform sampler2D GeometryMap;
 
 void main() {
-    //vec4 color = texture(GeometryMap, inUV);
-    //if (color.a == 0)
-    //    outColor = vec4(1, 0, 0, 1);
-    //else
-    outColor = vec4(0, 1, 0, 1);
+    outColor = vec4(texture(GeometryMap, inUV).rgb * vec3(1.3, 1, 1), 1.0);
 }
