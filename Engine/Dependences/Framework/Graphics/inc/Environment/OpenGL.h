@@ -62,7 +62,7 @@ namespace Framework::Graphics {
 
         //bool IsWindowOpen() override;
 
-        [[nodiscard]] SR_FORCE_INLINE bool Framework::Graphics::OpenGL::IsWindowOpen() const noexcept override {
+        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen() const noexcept override {
 #ifdef  SR_OPENGL_USE_WINAPI
             return m_basicWindow->IsWindowOpen();
 #else
@@ -210,7 +210,7 @@ namespace Framework::Graphics {
 #endif
         }
 
-        bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& hdrFBO, int32_t& colorBuffer) const noexcept override;
+        bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& hdrFBO, int32_t& colorBuffer) override;
         bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
         bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const noexcept override;
 

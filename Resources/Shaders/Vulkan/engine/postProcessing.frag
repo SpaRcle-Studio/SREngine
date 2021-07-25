@@ -9,7 +9,8 @@ layout (binding = 0) uniform PostProcessingUBO {
 } ubo;
 
 layout (binding = 1) uniform sampler2D GeometryMap;
+layout (binding = 2) uniform sampler2D SkyboxMap;
 
 void main() {
-    outColor = vec4(texture(GeometryMap, inUV).rgb * vec3(1.3, 1, 1), 1.0);
+    outColor = vec4(texture(GeometryMap, inUV).rgb + texture(SkyboxMap, inUV).rgb, 1.0);
 }

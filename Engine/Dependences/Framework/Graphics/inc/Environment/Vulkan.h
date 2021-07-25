@@ -251,6 +251,14 @@ namespace Framework::Graphics {
         }
 
         bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
+        bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
+            std::vector<int32_t> color = { colorBuffer };
+            bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
+            if (!result)
+                Helper::Debug::Error("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
+            colorBuffer = color[0];
+            return result;
+        }
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
@@ -295,13 +303,16 @@ namespace Framework::Graphics {
             std::vector<VkWriteDescriptorSet> writeDescriptorSets = {};
             for (const auto& value : updateValues) {
                 switch (value.first) {
-                    case DescriptorType::Uniform:
+                    case DescriptorType::Uniform: {
+                        auto vkDescriptorSet = this->m_memory->m_descriptorSets[descriptorSet].m_self;
+                        auto vkUBODescriptor = &m_memory->m_UBOs[value.second.second]->m_descriptor;
                         writeDescriptorSets.emplace_back(EvoVulkan::Tools::Initializers::WriteDescriptorSet(
-                                this->m_memory->m_descriptorSets[descriptorSet].m_self,
+                                vkDescriptorSet,
                                 VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
                                 value.second.first,
-                                &m_memory->m_UBOs[value.second.second]->m_descriptor));
+                                vkUBODescriptor));
                         break;
+                    }
                     default:
                         Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : unknown type!");
                         return;
@@ -311,7 +322,8 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) override {
-            Helper::Debug::Graph("Vulkan::FreeDescriptorSet() : free descriptor set...");
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Full)
+                Helper::Debug::Graph("Vulkan::FreeDescriptorSet() : free descriptor set...");
 
             if (!this->m_memory->FreeDescriptorSet(descriptorSet)) {
                 Helper::Debug::Error("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
@@ -320,7 +332,8 @@ namespace Framework::Graphics {
                 return true;
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) override {
-            Helper::Debug::Graph("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Full)
+                Helper::Debug::Graph("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
 
             auto vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
             if (vkTypes.size() != types.size()) {

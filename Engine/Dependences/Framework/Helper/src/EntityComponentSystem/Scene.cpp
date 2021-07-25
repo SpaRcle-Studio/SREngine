@@ -10,7 +10,7 @@
 #include <Debug.h>
 
 Framework::Helper::GameObject *Framework::Helper::Scene::Instance(const std::string& name) {
-    if (Debug::GetLevel() >= Debug::Level::Medium)
+    if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Scene::Instance() : instance \""+name+"\" game object at \""+m_name+ "\" scene.");
 
     auto* gm = new GameObject(this, name);

@@ -14,18 +14,18 @@ namespace Framework::Helper::Math {
     public:
         union {
             struct {
-                double x;
-                double y;
-                double z;
+                Unit x;
+                Unit y;
+                Unit z;
             };
 
-            double coord[3] = { 0 };
+            Unit coord[3] = { 0 };
         };
 
-        double Max() const {
+        [[nodiscard]] Unit Max() const {
             return x > y && x > z ? x : y > x && y > z ? y : z;
         }
-        double Min() const {
+        [[nodiscard]] Unit Min() const {
             return x < y && x < z ? x : y < x && y < z ? y : z;
         }
 
@@ -34,10 +34,10 @@ namespace Framework::Helper::Math {
         }
 
         [[nodiscard]] inline Vector3 Radians() const noexcept {
-            return { RAD(x), RAD(y), RAD(z) };
+            return { static_cast<Unit>(RAD(x)), static_cast<Unit>(RAD(y)), static_cast<Unit>(RAD(z)) };
         }
         [[nodiscard]] inline Vector3 Degrees() const noexcept {
-            return { DEG(x), DEG(y), DEG(z) };
+            return { static_cast<Unit>(DEG(x)), static_cast<Unit>(DEG(y)), static_cast<Unit>(DEG(z)) };
         }
 
          Vector3(glm::vec3 v) {
@@ -50,33 +50,32 @@ namespace Framework::Helper::Math {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
         }
 
-        //Vector3(const Quaternion& q);
         _FORCE_INLINE_ Vector3() {
             x = 0;
             y = 0;
             z = 0;
         }
         _FORCE_INLINE_ Vector3(const float* vec) {
-            x = (double)vec[0];
-            y = (double)vec[1];
-            z = (double)vec[2];
+            x = (Unit)vec[0];
+            y = (Unit)vec[1];
+            z = (Unit)vec[2];
         }
         _FORCE_INLINE_ Vector3(const unsigned char* axis) {
-            x = (double)axis[0];
-            y = (double)axis[1];
-            z = (double)axis[2];
+            x = (Unit)axis[0];
+            y = (Unit)axis[1];
+            z = (Unit)axis[2];
         }
-        _FORCE_INLINE_ Vector3(double p_x, double p_y, double p_z) {
+        _FORCE_INLINE_ Vector3(Unit p_x, Unit p_y, Unit p_z) {
             x = p_x;
             y = p_y;
             z = p_z;
         }
-        _FORCE_INLINE_ Vector3(double p) {
+        _FORCE_INLINE_ Vector3(Unit p) {
             x = p;
             y = p;
             z = p;
         }
-        [[nodiscard]] double Distance(Vector3 point) const {
+        [[nodiscard]] Unit Distance(Vector3 point) const {
             return sqrt(
                     pow(point.x - x, 2) +
                         pow(point.y - y, 2) +
@@ -84,7 +83,7 @@ namespace Framework::Helper::Math {
             );
         }
 
-        static double Magnitude(Vector3 vec) {
+        static Unit Magnitude(Vector3 vec) {
             return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
         }
 
@@ -92,7 +91,7 @@ namespace Framework::Helper::Math {
             if (point == *this)
                 return Vector3();
             Vector3 heading = point - (*this);
-            double distance = Magnitude(heading);
+            Unit distance = Magnitude(heading);
             return heading / distance;
         }
 
@@ -101,9 +100,9 @@ namespace Framework::Helper::Math {
             int yi = (int)y / lim;
             int zi = (int)z / lim;
 
-            double xd = x - lim * (double)xi;
-            double yd = y - lim * (double)yi;
-            double zd = z - lim * (double)zi;
+            Unit xd = x - lim * (Unit)xi;
+            Unit yd = y - lim * (Unit)yi;
+            Unit zd = z - lim * (Unit)zi;
 
             return Vector3(xd, yd, zd);
         }
@@ -119,7 +118,7 @@ namespace Framework::Helper::Math {
         }
 
         [[nodiscard]] Vector3 Normalize() const {
-            double len = std::sqrt(x * x + y * y + z * z);
+            Unit len = std::sqrt(x * x + y * y + z * z);
 
             Vector3 vec3 = *this;
 
@@ -135,11 +134,11 @@ namespace Framework::Helper::Math {
 
         [[nodiscard]] Quaternion ToQuat(bool inRads = false) const;
 
-        _FORCE_INLINE_ const double &operator[](int p_axis) const {
+        _FORCE_INLINE_ const Unit &operator[](int p_axis) const {
             return coord[p_axis];
         }
 
-        _FORCE_INLINE_ double &operator[](int p_axis) {
+        _FORCE_INLINE_ Unit &operator[](int p_axis) {
             return coord[p_axis];
         }
 
@@ -153,8 +152,8 @@ namespace Framework::Helper::Math {
             return Vector3(abs(x), abs(y), abs(z));
         }
 
-        static inline double Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
-        [[nodiscard]] double Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
+        static inline Unit Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
+        [[nodiscard]] Unit Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
 
         [[nodiscard]] inline Vector3 Cross(const Vector3 &p_b) const {
             Vector3 ret(
@@ -211,22 +210,22 @@ namespace Framework::Helper::Math {
             return Vector3(x / p_v.x, y / p_v.y, z / p_v.z);
         }
 
-        _FORCE_INLINE_ Vector3 &operator*=(double p_scalar) {
+        _FORCE_INLINE_ Vector3 &operator*=(Unit p_scalar) {
             x *= p_scalar;
             y *= p_scalar;
             z *= p_scalar;
             return *this;
         }
-        _FORCE_INLINE_ Vector3 operator*(double p_scalar) const {
+        _FORCE_INLINE_ Vector3 operator*(Unit p_scalar) const {
             return Vector3(x * p_scalar, y * p_scalar, z * p_scalar);
         }
-        _FORCE_INLINE_ Vector3 &operator/=(double p_scalar) {
+        _FORCE_INLINE_ Vector3 &operator/=(Unit p_scalar) {
             x /= p_scalar;
             y /= p_scalar;
             z /= p_scalar;
             return *this;
         }
-        _FORCE_INLINE_ Vector3 operator/(double p_scalar) const {
+        _FORCE_INLINE_ Vector3 operator/(Unit p_scalar) const {
             return Vector3(x / p_scalar, y / p_scalar, z / p_scalar);
         }
 

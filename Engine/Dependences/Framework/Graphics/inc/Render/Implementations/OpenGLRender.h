@@ -93,7 +93,6 @@ namespace Framework::Graphics::Impl {
             if (m_skybox && m_skyboxEnabled) {
                 m_skyboxShader->Use();
                 m_currentCamera->UpdateShader<SkyboxUBO>(m_skyboxShader);
-                m_skyboxShader->SetVec3("CamPos", m_currentCamera->GetGLPosition());
 
                 m_skybox->DrawOpenGL();
             }

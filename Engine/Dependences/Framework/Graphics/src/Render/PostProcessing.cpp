@@ -1,12 +1,15 @@
 //
 // Created by Nikita on 19.11.2020.
 //
+#include <Environment/Environment.h>
 
 #include "Render/PostProcessing.h"
 
 #include <Debug.h>
 #include <Render/Render.h>
 #include <Render/Camera.h>
+
+#include <Debug.h>
 
 #include <Render/Implementations/OpenGLPostProcessing.h>
 #include <Render/Implementations/VulkanPostProcessing.h>
@@ -45,6 +48,11 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
             .depthWrite   = false,
             .depthTest    = false
         });
+        /*
+         *  0 - ubo
+         *  1 - geometry
+         *  2 - skybox
+         */
         this->m_postProcessingShader->SetUniforms({
             {{0, UBOType::Common}, sizeof(PostProcessingUBO)},
         });
@@ -69,14 +77,25 @@ bool Framework::Graphics::PostProcessing::Destroy() {
             return false;
         }
 
+    if (m_finalFBO != -1)
+        if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
+            Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
+            return false;
+        }
+
     return true;
 }
 
 bool Framework::Graphics::PostProcessing::OnResize(uint32_t w, uint32_t h) {
     Helper::Debug::Graph("PostProcessing::OnResize() : re-create frame buffers...");
 
+    if (!m_env->CreateSingleFrameBuffer({w, h}, m_finalDepth, m_finalFBO, m_finalColorBuffer)) {
+        Helper::Debug::Error("PostProcessing::OnResize() : failed to create single frame buffer object!");
+        return false;
+    }
+
     if (!m_env->CreateFrameBuffer({w, h}, m_depth, m_frameBuffer, m_colors)) {
-        Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create frame buffer object!");
+        Helper::Debug::Error("PostProcessing::OnResize() : failed to create frame buffer object!");
         return false;
     }
 

@@ -13,6 +13,9 @@ namespace Framework::Graphics {
         ~OpenGLPostProcessing() override = default;
     public:
         OpenGLPostProcessing(Camera* camera) : PostProcessing(camera) { }
+    private:
+        std::vector<int32_t> m_PingPongFrameBuffers  = { -1, -1 };
+        std::vector<int32_t> m_PingPongColorBuffers  = { -1, -1 };
     public:
         bool BeginGeometry() override {
             if (m_frameBuffer) {
@@ -65,7 +68,7 @@ namespace Framework::Graphics {
 
             {
                 m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
-                m_postProcessingShader->SetVec3("ColorCorrection", m_color_correction);
+                m_postProcessingShader->SetVec3("ColorCorrection", m_colorCorrection.ToGLM());
             }
 
             m_env->BindTexture(0, m_colors[0]);
@@ -76,7 +79,7 @@ namespace Framework::Graphics {
 
                 m_postProcessingShader->SetInt("bloomBlur", 1);
 
-                m_postProcessingShader->SetVec3("BloomColor", m_bloomColor);
+                m_postProcessingShader->SetVec3("BloomColor", m_bloomColor.ToGLM());
             }
 
             m_env->BindTexture(2, m_colors[4]);
@@ -144,11 +147,6 @@ namespace Framework::Graphics {
         }
 
         bool OnResize(uint32_t w, uint32_t h) override {
-            if (!m_env->CreateSingleFrameBuffer({w, h}, m_finalDepth, m_finalFBO, m_finalColorBuffer)) {
-                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create single frame buffer object!");
-                return false;
-            }
-
             if (!m_env->CreatePingPongFrameBuffer({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
                 Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
                 return false;

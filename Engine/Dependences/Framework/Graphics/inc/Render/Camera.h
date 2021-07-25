@@ -94,14 +94,17 @@ namespace Framework::Graphics {
             }
 
             if (m_pipeline == PipeLine::OpenGL) {
-                shader->SetMat4("PVmat", this->m_projection * this->m_viewTranslateMat);
+                if constexpr (std::is_same<T, ProjViewUBO>::value)
+                    shader->SetMat4("PVmat", this->m_projection * this->m_viewTranslateMat);
+                else if constexpr (std::is_same<T, SkyboxUBO>::value)
+                    shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
             } else {
-                if (typeid(T) == typeid(ProjViewUBO)) {
+                if constexpr (std::is_same<T, ProjViewUBO>::value) {
                     ProjViewUBO ubo = {};
                     ubo.view = this->m_viewTranslateMat;
                     ubo.proj = this->m_projection;
                     m_env->UpdateUBO(shader->GetUBO(0), &ubo, sizeof(ProjViewUBO));
-                } else if (typeid(T) == typeid(SkyboxUBO)) {
+                } else if constexpr (std::is_same<T, SkyboxUBO>::value) {
                     SkyboxUBO ubo = {};
                     ubo.PVMat = m_projection * m_viewMat;
                     m_env->UpdateUBO(shader->GetUBO(0), &ubo, sizeof(SkyboxUBO));

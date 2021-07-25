@@ -219,7 +219,11 @@ namespace Framework::Helper::Types {
             iterator tmp = new type[_size];
             if(tmp == nullptr) exit(11);
 
+#ifdef min
+            size_t t = min(this->_size, _size);
+#else
             size_t t = std::min(this->_size, _size);
+#endif
 
             for(size_t i = 0; i < t; i++)
                 tmp[i] = this->_array[i];

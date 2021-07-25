@@ -36,14 +36,14 @@ namespace Framework::Graphics {
         std::function<void(BasicWindow*, int)> m_callback_focus;
         std::function<void(BasicWindow*)> m_callback_close;
 
-        unsigned int m_width  = 0;
-        unsigned int m_height = 0;
+        uint32_t m_width  = 0;
+        uint32_t m_height = 0;
 
-        unsigned int m_realWidth  = 0;
-        unsigned int m_realHeight = 0;
+        uint32_t m_realWidth  = 0;
+        uint32_t m_realHeight = 0;
 
-        unsigned int m_posX   = 0;
-        unsigned int m_posY   = 0;
+        unsigned int m_posX   = 0; // TODO: unsigned?
+        unsigned int m_posY   = 0; // TODO: unsigned?
 
         bool m_collapsed = false;
         bool m_maximize = false;
@@ -69,19 +69,19 @@ namespace Framework::Graphics {
         virtual bool RunEventHandler() { return false; }
         virtual bool Create(
                 const char* name,
-                int posX, int posY,
-                unsigned int sizeX, unsigned int sizeY,
+                int32_t posX, int32_t posY,
+                uint32_t sizeX, uint32_t sizeY,
                 bool fullscreen, bool resizable) { return false; }
     public:
         [[nodiscard]] SR_FORCE_INLINE Type GetType() const noexcept { return m_type; }
 
-        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetRealWidth()  const noexcept { return 0; }
-        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetRealHeight() const noexcept { return 0; }
+        [[nodiscard]] virtual SR_FORCE_INLINE uint32_t GetRealWidth()  const noexcept { return 0; }
+        [[nodiscard]] virtual SR_FORCE_INLINE uint32_t GetRealHeight() const noexcept { return 0; }
 
-        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetWidth()  const noexcept { return 0; }
-        [[nodiscard]] virtual SR_FORCE_INLINE unsigned int GetHeight() const noexcept { return 0; }
+        [[nodiscard]] virtual SR_FORCE_INLINE uint32_t GetWidth()  const noexcept { return 0; }
+        [[nodiscard]] virtual SR_FORCE_INLINE uint32_t GetHeight() const noexcept { return 0; }
     public:
-        virtual Helper::Math::Vector2 GetScreenResolution(unsigned int monitorID) const noexcept { return {0,0}; }
+        [[nodiscard]] virtual Helper::Math::Vector2 GetScreenResolution(uint32_t monitorID) const noexcept { return {0,0}; }
         virtual void Resize(unsigned int w, unsigned int h) { }
         virtual void Move(int x, int y) { }
         virtual bool Destroy() { return false; }

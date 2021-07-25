@@ -195,7 +195,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const noexcept { }
 
         virtual bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) { return false; }
-        virtual bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) const noexcept { return false; }
+        virtual bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) { return false; }
         virtual bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const noexcept { return false; }
 
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) noexcept { }

@@ -30,7 +30,7 @@ EXTERN void Start() {
 
     Window* window = engine->GetWindow();
     window->SetGUIEnabled(false);
-    //window->Resize(848, 480);
+    window->Resize(848, 480);
     window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
@@ -42,12 +42,19 @@ EXTERN void Start() {
     render->RegisterTexture(texture);
 
     Mesh* mesh = Mesh::Load("engine/cube.obj")[0];
-    render->RegisterMesh(mesh);
-    mesh->WaitCalculate();
-    mesh->GetMaterial()->SetDiffuse(texture);
-    GameObject* cube = g_scene->Instance("Cube");
-    cube->AddComponent(mesh);
-    cube->GetTransform()->Translate(-cube->GetTransform()->Forward() * 4.f);
+    for (uint32_t i = 0; i < 10; i++) {
+        for (uint32_t j = 0; j < 10; j++) {
+            if (i != 0 && j != 0)
+                mesh = mesh->Copy();
+
+            render->RegisterMesh(mesh);
+            mesh->WaitCalculate();
+            mesh->GetMaterial()->SetDiffuse(texture);
+            GameObject *cube = g_scene->Instance("Cube");
+            cube->AddComponent(mesh);
+            cube->GetTransform()->Translate(cube->GetTransform()->Forward() * 4.f * i + cube->GetTransform()->Right() * 4.f * j);
+        }
+    }
 
     Camera* camera = Camera::Allocate(848, 480);
     camera->SetDirectOutput(true);
@@ -57,8 +64,8 @@ EXTERN void Start() {
 }
 
 void CameraMove(float dt) {
-    auto dir = Input::GetMouseDrag() * dt * -1.0;
-    auto wheel = Input::GetMouseWheel() * dt * -1.0;
+    auto dir = Input::GetMouseDrag() * dt;
+    auto wheel = Input::GetMouseWheel() * dt;
 
     if (wheel != 0) {
         auto forward = g_camera->GetTransform()->Forward();
@@ -74,7 +81,7 @@ void CameraMove(float dt) {
         auto up = g_camera->GetTransform()->Up() * dt;
 
         g_camera->GetTransform()->Translate(
-                (up * dir.y * -1.0) + (right * dir.x)
+                (up * dir.y) + (right * -dir.x)
         );
     }
 }

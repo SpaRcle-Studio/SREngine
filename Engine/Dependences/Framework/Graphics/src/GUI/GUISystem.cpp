@@ -56,3 +56,68 @@ void Framework::Graphics::GUI::GUISystem::EndChildWindow() {
     ImGui::EndChild();
 }
 
+void Framework::Graphics::GUI::GUISystem::DrawTexture(
+    Framework::Helper::Math::Vector2 winSize,
+    Framework::Helper::Math::Vector2 texSize, uint32_t id,
+    bool centralize)
+{
+    const auto dx = winSize.x / texSize.x;
+    const auto dy = winSize.y / texSize.y;
+
+    if (dy > dx)
+        texSize *= (Helper::Math::Unit)dx;
+    else
+        texSize *= (Helper::Math::Unit)dy;
+
+    // Because I use the texture from OpenGL, I need to invert the V from the UV.
+
+    if (centralize) {
+        ImVec2 initialCursorPos = ImGui::GetCursorPos();
+        auto res = (winSize - texSize) * 0.5f;
+        ImVec2 centralizedCursorPos = { (float)res.x, (float)res.y };
+        centralizedCursorPos = ImClamp(centralizedCursorPos, initialCursorPos, centralizedCursorPos);
+        ImGui::SetCursorPos(centralizedCursorPos);
+    }
+
+    if (m_pipeLine == PipeLine::OpenGL)
+        DrawImage(reinterpret_cast<ImTextureID>(id), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
+    else {
+        if (auto find = m_descriptors.find(id); find == m_descriptors.end()) {
+            auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(id);
+            m_descriptors[id] = m_env->GetDescriptorSetFromDTDSet(imTex);
+        }
+
+        DrawImage(m_descriptors[id], ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+    }
+}
+
+void Framework::Graphics::GUI::GUISystem::DrawImage(
+    ImTextureID user_texture_id,
+    const ImVec2& size,
+    const ImVec2& uv0,
+    const ImVec2& uv1,
+    const ImVec4& tint_col,
+    const ImVec4& border_col,
+    bool imposition)
+{
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+        return;
+
+    ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
+    if (border_col.w > 0.0f)
+        bb.Max = bb.Max + ImVec2(2, 2);
+
+    if (!imposition) {
+        ImGui::ItemSize(bb);
+        if (!ImGui::ItemAdd(bb, 0))
+            return;
+    }
+
+    if (border_col.w > 0.0f) {
+        window->DrawList->AddRect(bb.Min, bb.Max, ImGui::GetColorU32(border_col), 0.0f);
+        window->DrawList->AddImage(user_texture_id, bb.Min + ImVec2(1, 1), bb.Max - ImVec2(1, 1), uv0, uv1, ImGui::GetColorU32(tint_col));
+    }
+    else
+        window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
+}

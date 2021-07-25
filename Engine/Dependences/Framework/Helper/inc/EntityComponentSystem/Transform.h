@@ -136,9 +136,9 @@ namespace Framework::Helper {
         //void UpdateChildRotation(glm::vec3 delta, bool pivot);
         void UpdateChildRotation(bool pivot);
     public:
-        inline static const Vector3 right     = Vector3(1, 0, 0);
-        inline static const Vector3 up        = Vector3(0, 1, 0);
-        inline static const Vector3 forward   = Vector3(0, 0, 1);
+        inline static const Vector3 right   = Vector3(1, 0, 0);
+        inline static const Vector3 up      = Vector3(0, 1, 0);
+        inline static const Vector3 forward = Vector3(0, 0, 1);
     private:
         Vector3         m_localPosition              = { 0, 0, 0 };
         Vector3         m_localRotation              = { 0, 0, 0 };

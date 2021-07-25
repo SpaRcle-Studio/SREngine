@@ -74,29 +74,29 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     glm::mat4 matrix(1.f);
 
     if (m_pipeline == PipeLine::OpenGL) {
-        matrix = glm::rotate(matrix, -m_pitch, { 1, 0, 0 });
-        matrix = glm::rotate(matrix, -m_yaw,   { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_pitch, { 1, 0, 0 });
+        matrix = glm::rotate(matrix, m_yaw + float(180.f * 3.14 / 45.f / 4.f), { 0, 1, 0 });
         matrix = glm::rotate(matrix, m_roll,   { 0, 0, 1 });
-
-        m_viewMat = matrix;
-
-        m_viewTranslateMat = glm::translate(matrix, {
-                -m_pos.x,
-                -m_pos.y,
-                m_pos.z//-m_pos.z
-        });
-    }
-    else {
-        matrix = glm::rotate(matrix, m_pitch + float(180.f * 3.14 / 45.f / 4.f), { 1, 0, 0 });
-        matrix = glm::rotate(matrix, m_yaw + float(180.f * 3.14 / 45.f / 4.f),  { 0, 1, 0 });
-        matrix = glm::rotate(matrix, m_roll,  { 0, 0, 1 });
 
         m_viewMat = matrix;
 
         m_viewTranslateMat = glm::translate(matrix, {
                 m_pos.x,
                 -m_pos.y,
-                m_pos.z//-m_pos.z
+                -m_pos.z//-m_pos.z
+        });
+    }
+    else {
+        matrix = glm::rotate(matrix, -m_pitch + float(180.f * 3.14 / 45.f / 4.f), { 1, 0, 0 });
+        matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_roll,  { 0, 0, 1 });
+
+        m_viewMat = matrix;
+
+        m_viewTranslateMat = glm::translate(matrix, {
+                -m_pos.x,
+                -m_pos.y,
+                -m_pos.z//-m_pos.z
         });
     }
 }
@@ -110,11 +110,7 @@ void Framework::Graphics::Camera::OnRotate(Math::Vector3 newValue) noexcept {
 }
 
 void Framework::Graphics::Camera::OnMove(Math::Vector3 newValue) noexcept {
-    this->m_pos = {
-             newValue.x,
-             newValue.y,
-            -newValue.z
-    };
+    this->m_pos = newValue;
     this->UpdateView();
 }
 
@@ -197,8 +193,8 @@ bool Framework::Graphics::Camera::DrawOnInspector() {
     if (ImGui::InputFloat("Saturation", &saturation, 0.05))
         post->SetSaturation(saturation);
 
-    glm::vec3 color = post->GetColorCorrection();
-    if (ImGui::InputFloat3("Color correction", &color[0]))
+    auto color = post->GetColorCorrection();
+    if (ImGui::InputFloat3("Color correction", reinterpret_cast<float*>(&color[0]))) // TODO: maybe unsafe
         post->SetColorCorrection(color);
 
     ImGui::NewLine();
@@ -214,7 +210,7 @@ bool Framework::Graphics::Camera::DrawOnInspector() {
         post->SetBloomIntensity(bloom_intensity);
 
     color = post->GetBloomColor();
-    if (ImGui::InputFloat3("Bloom color", &color[0]))
+    if (ImGui::InputFloat3("Bloom color", reinterpret_cast<float*>(&color[0]))) // TODO: maybe unsafe
         post->SetBloomColor(color);
 
     int bloom_amount = post->GetBloomAmount();

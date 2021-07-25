@@ -60,6 +60,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(con
 
     auto* skybox = new Skybox();
 
+    skybox->m_name   = skyboxName;
     skybox->m_width  = W;
     skybox->m_height = H;
     skybox->m_data   = sides;

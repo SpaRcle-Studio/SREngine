@@ -104,30 +104,42 @@ bool Material::SetMesh(Mesh *mesh) {
 }
 
 void Material::SetDiffuse(Texture * tex) {
-    tex->AddUsePoint();
+    if (tex)
+        tex->AddUsePoint();
+
     if (m_diffuse)
         m_diffuse->RemoveUsePoint();
+
     m_diffuse = tex;
 }
 
 void Material::SetNormal(Texture *tex) {
-    tex->AddUsePoint();
+    if (tex)
+        tex->AddUsePoint();
+
     if (m_normal)
         m_normal->RemoveUsePoint();
+
     m_normal = tex;
 }
 
 void Material::SetSpecular(Texture* tex) {
-    tex->AddUsePoint();
+    if (tex)
+        tex->AddUsePoint();
+
     if (m_specular)
         m_specular->RemoveUsePoint();
+
     m_specular = tex;
 }
 
 void Material::SetGlossiness(Texture*tex) {
-    tex->AddUsePoint();
+    if (tex)
+        tex->AddUsePoint();
+
     if (m_glossiness)
         m_glossiness->RemoveUsePoint();
+
     m_glossiness = tex;
 }
 
@@ -170,7 +182,7 @@ bool Material::FreeTextures() {
         return false;
     }
 
-    if (Debug::GetLevel() >= Debug::Level::Medium)
+    if (Debug::GetLevel() >= Debug::Level::Full)
         Debug::Log("Material::FreeTextures() : free material textures...");
 
     if (m_diffuse) {

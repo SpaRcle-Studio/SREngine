@@ -33,11 +33,14 @@ namespace Framework::Graphics::Types {
                     return;
 
             if (m_descriptorSet < 0) {
-                this->m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform });
-                if (m_descriptorSet < 0) {
-                    Helper::Debug::Error("Mesh3D::Calculate() : failed to calculate descriptor set!");
-                    this->m_hasErrors = true;
-                    return;
+                if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
+                    Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
+                    m_hasErrors = true; return;
+                }
+
+                if (m_UBO = m_env->AllocateUBO(sizeof(Mesh3DUBO)); m_UBO < 0) {
+                    Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
+                    m_hasErrors = true; return;
                 }
 
                 this->m_env->UpdateDescriptorSets(m_descriptorSet, {
@@ -49,7 +52,6 @@ namespace Framework::Graphics::Types {
 
                 //!==========================
 
-                //this->m_env->SetDescriptorID(m_descriptorSet);
                 m_env->BindDescriptorSet(m_descriptorSet);
                 this->m_material->UseVulkan();
             }

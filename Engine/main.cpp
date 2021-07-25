@@ -36,7 +36,7 @@ int main() {
     std::string exe = FileSystem::GetPathToExe();
 
     Debug::Init(exe, true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Full);
+    Debug::SetLevel(Debug::Level::Medium);
     ResourceManager::Init(exe + "/../../Resources");
 
 #ifdef WIN32

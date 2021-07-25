@@ -375,7 +375,9 @@ void Framework::Graphics::GUI::GUIWindow::DrawTexture(glm::vec2 win_size, glm::v
     //unsigned int* id = new unsigned int(tex);
     //(ImTextureID)static_cast<void*>(&tex)
     //DrawImage((ImTextureID)static_cast<void*>(&tex), ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true); // interesting bug
-    DrawImage(tex, ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true);
+
+    //OPENGL DrawImage(tex, ImVec2(img_size.x, img_size.y), ImVec2(0, 1), ImVec2(1, 0), { 1,1,1,1 }, { 0,0,0,0 }, true);
+    DrawImage(tex, ImVec2(img_size.x, img_size.y), ImVec2(-1, 0), ImVec2(0, 1), { 1,1,1,1 }, { 0,0,0,0 }, true);
 }
 
 bool Framework::Graphics::GUI::GUIWindow::ButtonWithId(const char *_id, const char *label, ImVec2 button_size,

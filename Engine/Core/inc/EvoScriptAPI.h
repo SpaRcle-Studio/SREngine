@@ -36,6 +36,7 @@ namespace Framework {
         static void RegisterTexture(EvoScript::AddressTableGen* generator);
         static void RegisterMaterial(EvoScript::AddressTableGen* generator);
         static void RegisterGUISystem(EvoScript::AddressTableGen* generator);
+        static void RegisterPostProcessing(EvoScript::AddressTableGen* generator);
     };
 }
 

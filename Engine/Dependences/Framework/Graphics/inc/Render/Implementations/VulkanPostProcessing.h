@@ -53,7 +53,8 @@ namespace Framework::Graphics {
                  *  2 - skybox sampler
            */
             m_env->BindDescriptorSet(m_descriptorSet);
-            this->m_env->BindTexture(1, 0);
+            this->m_env->BindTexture(1, m_colors[0]);
+            this->m_env->BindTexture(2, m_colors[1]);
 
             m_env->UnUseShader();
         }

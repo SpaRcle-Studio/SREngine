@@ -220,8 +220,7 @@ void Framework::Graphics::Window::Thread() {
                 this->PollEvents();
                 this->m_render->PollEvents();
 
-                if (m_env->IsNeedReBuild())
-                {
+                if (m_env->IsNeedReBuild()) {
                     if (!m_cameras.empty()) {
                         m_env->ClearFramebuffersQueue();
 
@@ -235,8 +234,8 @@ void Framework::Graphics::Window::Thread() {
                                 this->m_env->SetViewport();
                                 this->m_env->SetScissor();
 
-                                this->m_render->DrawSkybox();
                                 this->m_render->DrawGeometry();
+                                this->m_render->DrawSkybox();
                             }
                             m_env->EndRender();
 
@@ -245,7 +244,24 @@ void Framework::Graphics::Window::Thread() {
 
                         {
                             this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
-                            this->m_cameras[0]->GetPostProcessing()->Complete();
+
+                            if (!m_cameras[0]->IsDirectOutput()) {
+                                m_env->BindFrameBuffer(m_cameras[0]->GetPostProcessing()->GetFinalFBO());
+                                m_env->ClearBuffers();
+
+                                this->m_cameras[0]->GetPostProcessing()->Complete();
+
+                                m_env->BeginRender();
+                                {
+                                    this->m_env->SetViewport();
+                                    this->m_env->SetScissor();
+
+                                    //! Должна вызываться в том же кадровом буфере, что и Complete
+                                    this->m_cameras[0]->GetPostProcessing()->Draw();
+                                }
+                                m_env->EndRender();
+                            } else
+                                this->m_cameras[0]->GetPostProcessing()->Complete();
 
                             for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
                                 m_env->SetBuildIteration(i);
@@ -257,42 +273,24 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetViewport();
                                     this->m_env->SetScissor();
 
-                                    this->m_cameras[0]->GetPostProcessing()->Draw();
+                                    if (m_cameras[0]->IsDirectOutput())
+                                        this->m_cameras[0]->GetPostProcessing()->Draw();
                                 }
                                 m_env->EndRender();
                             }
                         }
 
-                        //this->m_render->DrawSkybox();
-
                         m_env->SetBuildState(true);
                     }
                     continue;
                 }
-                else {
+                else
                     this->m_render->UpdateUBOs();
-                }
 
                 if (m_GUIEnabled && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
                     if (this->m_env->BeginDrawGUI()) {
                         if (m_canvas)
                             this->m_canvas->Draw();
-
-                        /*auto texture = m_env->GetTexture(0);
-                        if (texture.Ready()) {
-                            if (ImGui::Begin("Texture")) {
-                                ImGui::BeginChild("Texture 1");
-
-                                static auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(0);
-
-                                GUI::GUIWindow::DrawTexture(GUI::GUIWindow::GetWindowSize(),
-                                                            { texture.m_width, texture.m_height },
-                                                            m_env->GetDescriptorSetFromDTDSet(imTex), true);
-
-                                ImGui::EndChild();
-                                ImGui::End();
-                            }
-                        }*/
 
                         this->m_env->EndDrawGUI();
                     }

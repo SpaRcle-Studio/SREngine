@@ -62,12 +62,6 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
             }
         }
         else {
-            this->m_UBO = m_env->AllocateUBO(sizeof(Mesh3DUBO));
-            if (m_UBO < 0) {
-                Helper::Debug::Error("Mesh3D::Calculate() : failed to allocate uniform buffer object!");
-                return false;
-            }
-
             auto exists = VBOandIBO_names.find(m_resource_id);
             if (exists != VBOandIBO_names.end()) {
                 if (Debug::GetLevel() >= Debug::Level::High)
@@ -112,9 +106,9 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
         }
 
         VBOandIBO_names[m_resource_id] = std::pair((uint32_t)m_VBO, (uint32_t)m_IBO);
-        int i = VBO_usages[m_VBO];
+        //int i = VBO_usages[m_VBO];
         VBO_usages[(uint32_t)m_VBO]++;
-        int i2 = VBO_usages[m_VBO];
+        //int i2 = VBO_usages[m_VBO];
         IBO_usages[(uint32_t)m_IBO]++;
     }
 
@@ -131,7 +125,7 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
         return nullptr;
     }
 
-    if (Debug::GetLevel() >= Debug::Level::High)
+    if (Debug::GetLevel() >= Debug::Level::Full)
         Debug::Log("Mesh3D::Copy() : copy \""+m_resource_id+ "\" mesh...");
 
     if (!m_material){
@@ -174,6 +168,7 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
         copy->m_VBO = m_VBO;
         copy->m_IBO = m_IBO;
         copy->m_UBO = -1;
+        copy->m_descriptorSet = -1;
     }else{
         copy->m_vertices = m_vertices;
         copy->m_indices  = m_indices;
@@ -181,8 +176,8 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
 
     copy->m_resource_id   = m_resource_id;
 
-    copy->m_isCalculated  = false;
-    //copy->m_isCalculated  = m_isCalculated;
+    //!? copy->m_isCalculated  = false;
+    copy->m_isCalculated  = m_isCalculated;
     copy->m_autoRemove    = m_autoRemove;
     copy->m_modelMat      = m_modelMat;
 
@@ -264,11 +259,19 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
 void Framework::Graphics::Types::Mesh3D::ReCalcModel() {
     glm::mat4 modelMat = glm::mat4(1.0f);
 
-    modelMat = glm::translate(modelMat, {
-            m_position.x,
-            m_position.y,
-            m_position.z //-m_position.z
-    });
+    if (m_pipeline == PipeLine::OpenGL) {
+        modelMat = glm::translate(modelMat, {
+                -m_position.x,
+                m_position.y,
+                m_position.z //-m_position.z
+        });
+    } else {
+        modelMat = glm::translate(modelMat, {
+                m_position.x,
+                m_position.y,
+                m_position.z
+        });
+    }
 
     modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
             {

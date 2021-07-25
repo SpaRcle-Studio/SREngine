@@ -41,6 +41,7 @@ namespace Framework {
         RegisterTexture(generator);
         RegisterMaterial(generator);
         RegisterGUISystem(generator);
+        RegisterPostProcessing(generator);
 
         generator->Save(Helper::ResourceManager::GetResourcesFolder() + "/Scripts/Libraries/");
     }
@@ -243,7 +244,8 @@ namespace Framework {
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, WaitCalculate, void, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetMaterial, Material*, () const)
-        
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh*, ())
+
         /*ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetVAO, uint32_t, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetVBO, uint32_t, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetIBO, uint32_t, () const)
@@ -293,35 +295,36 @@ namespace Framework {
 
     void API::RegisterCamera(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Camera", "Camera", {
-                { "volatile bool",  "m_isCreate",          EvoScript::Private },
-                { "volatile bool",  "m_isCalculate",       EvoScript::Private },
-                { "volatile bool",  "m_isBuffCalculate",   EvoScript::Private },
-                { "volatile bool",  "m_needUpdate",        EvoScript::Private },
-                { "volatile float", "m_yaw",               EvoScript::Private },
-                { "volatile float", "m_pitch",             EvoScript::Private },
-                { "volatile float", "m_roll",              EvoScript::Private },
-                { "void*",          "m_postProcessing",    EvoScript::Private },
-                { "void*",          "m_env",               EvoScript::Private },
-                { "int",            "m_pipeline",          EvoScript::Private },
-                { "void*",          "m_window",            EvoScript::Private },
-                { "_64byte",        "m_projection",        EvoScript::Private },
-                { "_64byte",        "m_viewTranslateMat",  EvoScript::Private },
-                { "_64byte",        "m_viewMat",           EvoScript::Private },
-                { "Vector3",        "m_pos",               EvoScript::Private },
-                { "_128byte",       "m_ubo",               EvoScript::Private },
-                { "bool",           "m_isEnableDirectOut", EvoScript::Private },
-                { "bool",           "m_allowUpdateProj",   EvoScript::Private },
-                { "float",          "m_far",               EvoScript::Private },
-                { "float",          "m_near",              EvoScript::Private },
-                { "void*",          "m_canvas",            EvoScript::Private },
-                { "Vector2",        "m_cameraSize",        EvoScript::Private },
-        }, { "Math/Vector3.h", "Math/Vector2.h", "Utils.h", "Component.h", "stdint.h" }, {
+                { "volatile bool",   "m_isCreate",          EvoScript::Private },
+                { "volatile bool",   "m_isCalculate",       EvoScript::Private },
+                { "volatile bool",   "m_isBuffCalculate",   EvoScript::Private },
+                { "volatile bool",   "m_needUpdate",        EvoScript::Private },
+                { "volatile float",  "m_yaw",               EvoScript::Private },
+                { "volatile float",  "m_pitch",             EvoScript::Private },
+                { "volatile float",  "m_roll",              EvoScript::Private },
+                { "PostProcessing*", "m_postProcessing",    EvoScript::Private },
+                { "void*",           "m_env",               EvoScript::Private },
+                { "int",             "m_pipeline",          EvoScript::Private },
+                { "void*",           "m_window",            EvoScript::Private },
+                { "_64byte",         "m_projection",        EvoScript::Private },
+                { "_64byte",         "m_viewTranslateMat",  EvoScript::Private },
+                { "_64byte",         "m_viewMat",           EvoScript::Private },
+                { "Vector3",         "m_pos",               EvoScript::Private },
+                { "_128byte",        "m_ubo",               EvoScript::Private },
+                { "bool",            "m_isEnableDirectOut", EvoScript::Private },
+                { "bool",            "m_allowUpdateProj",   EvoScript::Private },
+                { "float",           "m_far",               EvoScript::Private },
+                { "float",           "m_near",              EvoScript::Private },
+                { "void*",           "m_canvas",            EvoScript::Private },
+                { "Vector2",         "m_cameraSize",        EvoScript::Private },
+        }, { "Math/Vector3.h", "Math/Vector2.h", "Utils.h", "Component.h", "PostProcessing.h" }, {
                 { "Component", EvoScript::Public }
         });
 
         ESRegisterStaticMethod(Graphics::, EvoScript::Public, generator, Camera, Allocate, Camera*, (uint32_t, uint32_t))
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, SetDirectOutput, void, (bool))
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, GetPostProcessing, PostProcessing*, () const)
 
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnDestroyGameObject, void, (), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnRotate, void, (Vector3), "Component")
@@ -617,7 +620,11 @@ namespace Framework {
     }
 
     void API::RegisterGUISystem(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("GUISystem", "GUISystem", { });
+        generator->RegisterNewClass("GUISystem", "GUISystem", {
+                { "void*",                      "m_env",         EvoScript::Private },
+                { "int32_t",                    "m_pipeLine",    EvoScript::Private },
+                { "std::map<uint32_t, void*>", "m_descriptors", EvoScript::Private },
+        }, { "cstdint", "Math/Vector2.h", "map" });
         ESRegisterStaticMethod(GUI::, EvoScript::Public, generator, GUISystem, Get, GUISystem*, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginDockSpace, void, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndDockSpace, void, ())
@@ -625,6 +632,62 @@ namespace Framework {
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndWindow, void, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, (const char*))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndChildWindow, void, ())
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawTexture, void, (Vector2, Vector2, uint32_t, bool))
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, GetWindowSize, Vector2, () const)
+    }
+
+    void API::RegisterPostProcessing(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("PostProcessing", "PostProcessing", {
+                { "float",                "m_gamma",                 EvoScript::Protected },
+                { "float",                "m_exposure",              EvoScript::Protected },
+                { "float",                "m_saturation",            EvoScript::Protected },
+                { "Vector3",              "m_colorCorrection",       EvoScript::Protected },
+                { "Vector3",              "m_bloomColor",            EvoScript::Protected },
+                { "float",                "m_bloomIntensity",        EvoScript::Protected },
+                { "volatile uint8_t",     "m_bloomAmount",           EvoScript::Protected },
+
+                { "volatile bool",        "m_bloom",                 EvoScript::Protected },
+                { "bool",                 "m_bloomClear",            EvoScript::Protected },
+
+                { "bool",                 "m_horizontal",            EvoScript::Protected },
+                { "bool",                 "m_firstIteration",        EvoScript::Protected },
+
+                { "int32_t",              "m_finalDepth",            EvoScript::Protected },
+                { "int32_t",              "m_finalFBO",              EvoScript::Protected },
+                { "int32_t",              "m_finalColorBuffer",      EvoScript::Protected },
+
+                { "std::vector<int32_t>", "m_colors",                EvoScript::Protected },
+                { "int32_t",              "m_depth",                 EvoScript::Protected },
+                { "int32_t",              "m_frameBuffer",           EvoScript::Protected },
+
+                { "int32_t",               "m_descriptorSet",        EvoScript::Protected },
+                { "int32_t",               "m_ubo",                  EvoScript::Protected },
+
+                { "void*",                 "m_env",                  EvoScript::Protected },
+                { "Shader*",               "m_postProcessingShader", EvoScript::Protected },
+                { "Shader*",               "m_blurShader",           EvoScript::Protected },
+
+                { "Camera*",               "m_camera",               EvoScript::Protected },
+                { "Render*",               "m_render",               EvoScript::Protected },
+                { "bool",                  "m_isInit",               EvoScript::Protected },
+        }, { "cstdint", "Math/Vector3.h", "vector" });
+
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, Init, bool, (Render*))
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, Destroy, bool, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, Free, bool, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, OnResize, bool, (uint32_t, uint32_t))
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, BeginSkybox, void, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, EndSkybox, void, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, BeginGeometry, bool, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, EndGeometry, void, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, Complete, void, ())
+        ESRegisterVirtualMethod(Graphics::, EvoScript::Private, generator, PostProcessing, Draw, void, ())
+
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, PostProcessing, GetFinally, uint32_t, () const)
+
+        generator->AddIncompleteType("Shader", "PostProcessing");
+        generator->AddIncompleteType("Camera", "PostProcessing");
+        generator->AddIncompleteType("Render", "PostProcessing");
     }
 }
 

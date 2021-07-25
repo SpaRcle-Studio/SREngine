@@ -204,7 +204,7 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
 
     m_mutex.lock();
 
-    if (Debug::GetLevel() >= Debug::Level::High)
+    if (Debug::GetLevel() >= Debug::Level::Full)
         Debug::Log("Render::RegisterMesh() : register new \""+mesh->GetResourceID()+"\" mesh...");
 
     mesh->AddUsePoint();

@@ -789,7 +789,7 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &hdrFBO, int32_t &colorBuffer) const noexcept{
+bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &hdrFBO, int32_t &colorBuffer) {
     bool isNew = hdrFBO <= 0; //!((bool)hdrFBO);
 
     if (isNew)

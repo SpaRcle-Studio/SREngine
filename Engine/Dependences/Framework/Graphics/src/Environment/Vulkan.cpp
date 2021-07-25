@@ -516,7 +516,7 @@ namespace Framework::Graphics{
         if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
             this->m_hasErrors = !this->ResizeWindow();
 
-        for (auto submitInfo : m_framebuffersQueue)
+        for (const auto& submitInfo : m_framebuffersQueue)
             if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
                 return;

@@ -17,4 +17,6 @@
 
 #define _FORCE_INLINE_ __forceinline
 
+typedef double Unit;
+
 #endif //EVOSCRIPTLIB_MATH_H

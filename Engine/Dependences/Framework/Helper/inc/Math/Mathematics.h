@@ -43,7 +43,9 @@
 #include <cmath>
 
 namespace Framework::Helper::Math {
-    static _ALWAYS_INLINE_ bool is_equal_approx(double a, double b) noexcept {
+    typedef double Unit; //! can broken render
+
+    static _ALWAYS_INLINE_ bool is_equal_approx(Unit a, Unit b) noexcept {
         // Check for exact equality first, required to handle "infinity" values.
         if (a == b) {
             return true;
@@ -55,7 +57,7 @@ namespace Framework::Helper::Math {
         }
         return abs(a - b) < tolerance;
     }
-    static _ALWAYS_INLINE_ bool is_equal_approx(double a, double b, double tolerance) {
+    static _ALWAYS_INLINE_ bool is_equal_approx(Unit a, Unit b, Unit tolerance) {
         // Check for exact equality first, required to handle "infinity" values.
         if (a == b) {
             return true;

@@ -15,6 +15,7 @@
 #include <imgui_impl_win32.h>
 
 #include <Events/EventManager.h>
+#include <Math/Mathematics.h>
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -163,7 +164,7 @@ namespace Framework::Graphics {
             UpdateWindow(m_hWnd);
         }*/
 
-        void Resize(unsigned int w, unsigned int h) override {
+        void Resize(uint32_t w, uint32_t h) override {
             /*auto scr = GetScreenResolution(0);
 
             w += 16;
@@ -214,18 +215,18 @@ namespace Framework::Graphics {
 
         }
 
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetRealWidth()  const noexcept override { return m_realWidth;  }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetRealHeight() const noexcept override { return m_realHeight; }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetRealWidth()  const noexcept override { return m_realWidth;  }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetRealHeight() const noexcept override { return m_realHeight; }
 
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetWidth()  const noexcept override { return m_width;  }
-        [[nodiscard]] SR_FORCE_INLINE unsigned int GetHeight() const noexcept override { return m_height; }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetWidth()  const noexcept override { return m_width;  }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetHeight() const noexcept override { return m_height; }
 
-        Helper::Math::Vector2 GetScreenResolution(unsigned int monitorID) const noexcept override {
+        [[nodiscard]] Helper::Math::Vector2 GetScreenResolution(uint32_t monitorID) const noexcept override {
             RECT size;
             SystemParametersInfo(SPI_GETWORKAREA, 0, &size, 0);
-            //GetDeviceCaps(m_hDC, 0);
 
-            return { (double)size.right, (double) size.bottom };
+            return { static_cast<Helper::Math::Unit>(size.right),
+                     static_cast<Helper::Math::Unit>(size.bottom) };
         }
 
         void SetIcon(const char* path) override {
@@ -240,7 +241,7 @@ namespace Framework::Graphics {
             SendMessage(m_hWnd, WM_SETICON, ICON_BIG, (LPARAM)hWindowIconBig);
         }
 
-        bool Create(const char* name, int posX, int posY, unsigned int sizeX, unsigned int sizeY, bool fullscreen, bool resizable) override {
+        bool Create(const char* name, int32_t posX, int32_t posY, uint32_t sizeX, uint32_t sizeY, bool fullscreen, bool resizable) override {
             this->m_realWidth  = sizeX;
             this->m_realHeight = sizeY;
 

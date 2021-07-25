@@ -97,7 +97,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const { return m_sharedUniforms[index]; }
     public:
-        [[nodiscard]] SR_FORCE_INLINE bool Complete() const { return m_isInit; }
+        [[nodiscard]] SR_FORCE_INLINE bool Complete() const noexcept { return m_isInit; }
         bool Use() noexcept;
         ///\warning Call only from OpenGL context!
         void Free();

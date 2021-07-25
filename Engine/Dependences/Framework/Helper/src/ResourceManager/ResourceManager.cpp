@@ -143,7 +143,7 @@ namespace Framework::Helper {
     }
 
     void ResourceManager::RegisterResource(IResource *resource) {
-        if (Debug::GetLevel() >= Debug::Level::High)
+        if (Debug::GetLevel() >= Debug::Level::Full)
             Debug::Log("ResourceManager::RegisterResource() : add new \""+std::string(resource->GetResourceName())+"\" resource."); //\n\tResource IDd: "+resource->m_resource_id
 
         g_mutex.lock();

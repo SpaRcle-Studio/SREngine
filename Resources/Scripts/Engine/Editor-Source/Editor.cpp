@@ -9,7 +9,10 @@
 #include "../../Libraries/Scene.h"
 
 GUISystem* gui = nullptr;
-Camera* camera = nullptr;
+
+int32_t geometryTexID = -1;
+int32_t skyboxTexID   = -1;
+int32_t completeTexID = -1;
 
 EXTERN void Start() {
     gui = GUISystem::Get();
@@ -20,12 +23,17 @@ EXTERN void OnGUI() {
 
     if (auto scene = Engine::Get()->GetScene(); scene) {
         if (gui->BeginWindow("Scene")) {
-            if (!camera) {
-                if (auto gm = scene->FindByComponent("Camera"); gm)
-                    camera = (Camera*)gm->GetComponent("Camera");
-            } else {
-
-            }
+            if (completeTexID < 0) {
+                if (auto gm = scene->FindByComponent("Camera"); gm) {
+                    Camera *camera = (Camera *)gm->GetComponent("Camera");
+                    completeTexID = camera->GetPostProcessing()->GetFinally();
+                }
+            } else
+                if (gui->BeginChildWindow("Texture")) {
+                    auto winSize = gui->GetWindowSize();
+                    gui->DrawTexture(winSize, Vector2(400, 400), completeTexID, true);
+                    gui->EndChildWindow();
+                }
 
             gui->EndWindow();
         }

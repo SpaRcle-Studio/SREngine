@@ -21,42 +21,38 @@ namespace Framework::Helper::Math {
     public:
         union {
             struct {
-                double x;
-                double y;
+                Unit x;
+                Unit y;
             };
 
-            double coord[2] = {0};
+            Unit coord[2] = {0};
         };
 
-        [[nodiscard]] double Distance(const Vector2 &vec) const noexcept {
+        [[nodiscard]] Unit Distance(const Vector2 &vec) const noexcept {
             return sqrt(pow(vec.x - x, 2) + pow(vec.y - y, 2));
         }
 
-        inline Vector2 operator*(const double &scalar) noexcept {
+        inline Vector2 operator*(const Unit &scalar) const noexcept {
             return Vector2(x * scalar, y * scalar);
         }
 
-        _FORCE_INLINE_ Vector2
-
-        operator+(const Vector2 &p_v) const {
+        _FORCE_INLINE_ Vector2 operator+(const Vector2 &p_v) const {
             return Vector2(x + p_v.x, y + p_v.y);
         }
 
-        _FORCE_INLINE_ Vector2
-
-        operator-(const Vector2 &p_v) const {
+        _FORCE_INLINE_ Vector2 operator-(const Vector2 &p_v) const {
             return Vector2(x - p_v.x, y - p_v.y);
         }
 
-        _FORCE_INLINE_ Vector2
+        _FORCE_INLINE_ Vector2 operator*=(const Unit& value) const {
+            return Vector2(x * value, y * value);
+        }
 
-        operator*(const Vector2 &p_v) const {
+        _FORCE_INLINE_ Vector2 operator*(const Vector2 &p_v) const {
             return Vector2(x * p_v.x, y * p_v.y);
         }
 
-        _FORCE_INLINE_ Vector2
-
-        operator/(const Vector2 &p_v) const {
+        _FORCE_INLINE_ Vector2 operator/(const Vector2 &p_v) const {
             return Vector2(x / p_v.x, y / p_v.y);
         }
 
@@ -74,15 +70,15 @@ namespace Framework::Helper::Math {
             return {x, y};
         }
 
-        _FORCE_INLINE_ const double &operator[](int p_axis) const {
+        _FORCE_INLINE_ const Unit &operator[](int p_axis) const {
             return coord[p_axis];
         }
 
-        _FORCE_INLINE_ double &operator[](int p_axis) {
+        _FORCE_INLINE_ Unit &operator[](int p_axis) {
             return coord[p_axis];
         }
 
-        _FORCE_INLINE_ Vector2(double p_x, double p_y) {
+        _FORCE_INLINE_ Vector2(Unit p_x, Unit p_y) {
             x = p_x;
             y = p_y;
         }

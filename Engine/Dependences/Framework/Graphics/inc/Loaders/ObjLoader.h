@@ -11,6 +11,7 @@
 #include <utility>
 #include <map>
 #include <iomanip>
+#include <Debug.h>
 #include <glm/glm.hpp>
 #include <Types/Vertices.h>
 #include <tinyobjloader/tiny_obj_loader.h>
