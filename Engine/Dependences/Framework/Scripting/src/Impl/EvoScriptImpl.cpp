@@ -72,6 +72,7 @@ void Framework::Scripting::EvoScriptImpl::OnGUI() {
 
     if (!m_isStart)
         this->Start();
+
     m_script->OnGUI();
 }
 

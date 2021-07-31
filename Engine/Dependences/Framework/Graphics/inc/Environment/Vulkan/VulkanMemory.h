@@ -69,9 +69,9 @@ namespace Framework::Graphics::VulkanTools {
             for (uint32_t i = 0; i < m_countTextures; i++)
                 m_textures[i] = nullptr;
 
-            this->m_dynamicTextureDescSets = (VulkanTypes::DynamicTextureDescriptorSet*)malloc(sizeof(VulkanTypes::DynamicTextureDescriptorSet) * m_countDynamicTexDescSets);
-            for (uint32_t i = 0; i < m_countDynamicTexDescSets; i++)
-                m_dynamicTextureDescSets[i] = { -1, VK_NULL_HANDLE };
+            //this->m_dynamicTextureDescSets = (VulkanTypes::DynamicTextureDescriptorSet*)malloc(sizeof(VulkanTypes::DynamicTextureDescriptorSet) * m_countDynamicTexDescSets);
+            //for (uint32_t i = 0; i < m_countDynamicTexDescSets; i++)
+            //    m_dynamicTextureDescSets[i] = { -1, VK_NULL_HANDLE };
 
             m_isInit = true;
             return true;
@@ -84,12 +84,12 @@ namespace Framework::Graphics::VulkanTools {
             return -1;
         }
 
-        [[nodiscard]] int32_t FindFreeDynamicTextureDescriptorSetIndex() const {
+        /*[[nodiscard]] int32_t FindFreeDynamicTextureDescriptorSetIndex() const {
             for (uint32_t i = 0; i < m_countDynamicTexDescSets; i++)
                 if (m_dynamicTextureDescSets[i].m_descriptor == VK_NULL_HANDLE)
                     return (int32_t)i;
             return -1;
-        }
+        }*/
     public:
         static MemoryManager* Create(EvoVulkan::Core::VulkanKernel* kernel) {
             auto memory = new MemoryManager();
@@ -151,9 +151,9 @@ namespace Framework::Graphics::VulkanTools {
                 VkFilter filter,
                 uint8_t mipLevels);
 
-        [[nodiscard]] int32_t AllocateDynamicTextureDescriptorSet(VkDescriptorSetLayout layout, uint32_t textureID);
-    public:
-        [[nodiscard]] VkDescriptorSet GetDynamicTextureDescriptorSet(uint32_t id);
+        //[[nodiscard]] int32_t AllocateDynamicTextureDescriptorSet(VkDescriptorSetLayout layout, uint32_t textureID);
+    //public:
+        //[[nodiscard]] VkDescriptorSet GetDynamicTextureDescriptorSet(uint32_t id);
     public:
         EvoVulkan::Core::DescriptorManager*       m_descriptorManager       = nullptr;
         EvoVulkan::Types::Device*                 m_device                  = nullptr;
@@ -175,7 +175,7 @@ namespace Framework::Graphics::VulkanTools {
         EvoVulkan::Complexes::Shader**            m_ShaderPrograms          = nullptr;
         EvoVulkan::Core::DescriptorSet*           m_descriptorSets          = nullptr;
         EvoVulkan::Types::Texture**               m_textures                = nullptr;
-        VulkanTypes::DynamicTextureDescriptorSet* m_dynamicTextureDescSets  = nullptr;
+        //VulkanTypes::DynamicTextureDescriptorSet* m_dynamicTextureDescSets  = nullptr;
     };
 }
 

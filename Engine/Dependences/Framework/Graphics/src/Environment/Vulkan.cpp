@@ -8,7 +8,12 @@
 namespace Framework::Graphics{
     #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
-    bool Vulkan::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
+    bool Vulkan::PreInit(
+            unsigned int smooth_samples,
+            const std::string& appName,
+            const std::string& engineName,
+            const std::string& glslc)
+    {
         EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(SR_VRAM   + msg); };
         EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
         EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
@@ -29,7 +34,13 @@ namespace Framework::Graphics{
 
         this->m_kernel->SetMultisampling(smooth_samples);
 
-        if (!this->m_kernel->PreInit(appName, engineName, m_instanceExtensions, m_validationLayers)) {
+        if (!this->m_kernel->PreInit(
+                appName,
+                engineName,
+                glslc,
+                m_instanceExtensions,
+                m_validationLayers))
+        {
             Helper::Debug::Error("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
             return false;
         }
@@ -479,7 +490,7 @@ namespace Framework::Graphics{
         };
     }
 
-    int32_t Vulkan::GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const {
+    /*int32_t Vulkan::GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const {
         auto descriptorSet = m_memory->AllocateDynamicTextureDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout(), textureID);
         if (descriptorSet < 0) {
             Helper::Debug::Error("Vulkan::GetImGuiTextureDescriptorFromTexture() : failed to allocate dynamic texture descriptor set!");
@@ -493,6 +504,28 @@ namespace Framework::Graphics{
 
     void *Vulkan::GetDescriptorSetFromDTDSet(uint32_t id) const {
         return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
+    }*/
+
+    bool Vulkan::CalculateVBO(int32_t &VBO, void *vertices, Vertices::Type type, size_t count)  {
+        auto size = Vertices::GetVertexSize(type);
+        auto id = this->m_memory->AllocateVBO(size * count, vertices);
+        if (id >= 0) {
+            VBO = id;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    bool Vulkan::CalculateIBO(int32_t &IBO, void *indices, uint32_t indxSize, size_t count, int32_t VBO) {
+        // ignore VBO
+        auto id = this->m_memory->AllocateIBO(indxSize * count, indices);
+        if (id >= 0) {
+            IBO = id;
+            return true;
+        }
+        else
+            return false;
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

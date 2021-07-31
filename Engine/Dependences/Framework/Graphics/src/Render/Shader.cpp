@@ -59,8 +59,10 @@ bool Framework::Graphics::Shader::Compile() {
     }
     Debug::Shader("Shader::Compile() : compiling \""+m_name+"\" shader...");
 
+    m_fbo = m_env->GetCurrentFBO();
+
     if (this->m_env->GetPipeLine() == PipeLine::OpenGL) {
-        if (!m_env->CompileShader(m_name, -1, &m_shaderTempData)) {
+        if (!m_env->CompileShader(m_name, m_fbo, &m_shaderTempData)) {
             Debug::Error("Shader::Compile() : failed compile opengl \"" + m_name + "\" shader!");
             return false;
         }
@@ -69,7 +71,7 @@ bool Framework::Graphics::Shader::Compile() {
         for (auto info : m_uniformsInfo)
             sizes.push_back(info.second);
 
-        if (!m_env->CompileShader(m_name, m_env->GetCurrentFBO(), &m_shaderTempData, sizes)) {
+        if (!m_env->CompileShader(m_name, m_fbo, &m_shaderTempData, sizes)) {
             Debug::Error("Shader::Compile() : failed compile \"" + m_name + "\" shader!");
             return false;
         }
@@ -125,11 +127,21 @@ bool Framework::Graphics::Shader::Use() noexcept {
             return false;
 
         if (!this->Init()) {
-            Debug::Error("Shader::Use() : failed initialize shader!");
+            Debug::Error("Shader::Use() : failed to initialize shader!");
             this->m_isError = true;
             return false;
         }
         this->m_isInit = true;
+    }
+
+    if (m_fbo != m_env->GetCurrentFBO()) {
+        Helper::Debug::Info("Shader::Use() : re-create \"" + m_name +  "\" shader...");
+        if (!m_env->ReCreateShader(m_shaderProgram)) {
+            Debug::Error("Shader::Use() : failed to re-create shader!");
+            this->m_isError = true;
+            return false;
+        } else
+            m_fbo = m_env->GetCurrentFBO();
     }
 
     g_currentShader = this;
@@ -203,3 +215,4 @@ void Framework::Graphics::Shader::CopyVertexAndUniformsInfo(const Framework::Gra
     this->m_verticesDescription = source->m_verticesDescription;
     this->m_uniformsInfo        = source->m_uniformsInfo;
 }
+

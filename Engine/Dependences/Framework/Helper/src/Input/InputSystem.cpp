@@ -80,3 +80,17 @@ Framework::Helper::Math::Vector2 Framework::Helper::Input::GetMouseDrag() {
 int Framework::Helper::Input::GetMouseWheel() {
     return g_mouseScroll.y;
 }
+
+int Framework::Helper::Input::DebugKey() {
+    if (!g_arr) {
+        g_arr = new BYTE[256];
+        memset(g_arr, 0, sizeof(256));
+    }
+
+    GetKeyState(0);
+    if (GetKeyboardState(g_arr))
+        for (int i = 0; i < 256; i++)
+            if (g_arr[i] >> 7 != 0)
+                return i;
+    return -1;
+}

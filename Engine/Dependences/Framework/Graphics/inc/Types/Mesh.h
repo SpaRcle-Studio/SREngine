@@ -16,7 +16,10 @@
 #include <Render/Shader.h>
 #include <Types/Material.h>
 #include <ResourceManager/IResource.h>
-#include <Environment/Vertex.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtx/hash.hpp>
+
 #include <Environment/Environment.h>
 #include <EntityComponentSystem/Component.h>
 #include <Types/List.h>
@@ -113,7 +116,6 @@ namespace Framework::Graphics::Types {
         //unsigned char               m_toolID            = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
         int32_t                     m_descriptorSet     = -1;
-        int32_t                     m_VAO               = -1;
         int32_t                     m_VBO               = -1;
         int32_t                     m_IBO               = -1;
         int32_t                     m_UBO               = -1;
@@ -145,20 +147,10 @@ namespace Framework::Graphics::Types {
         Math::Vector3 m_scale    = { 1, 1, 1 };
         glm::mat4 m_modelMat = glm::mat4(0);
     public:
-        [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVAO() const noexcept { return (uint32_t)m_VAO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVBO() const noexcept { return (uint32_t)m_VBO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }
         [[nodiscard]] SR_FORCE_INLINE int32_t  FastGetUBO() const noexcept { return m_UBO;           }
 
-        [[nodiscard]] SR_FORCE_INLINE int32_t GetVAO() {
-            if (m_isDestroy)
-                return m_VAO;
-
-            if (!m_isCalculated)
-                if (!Calculate())
-                    return -1;
-            return m_VAO;
-        }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetVBO() {
             if (m_isDestroy)
                 return m_VBO;
@@ -209,7 +201,7 @@ namespace Framework::Graphics::Types {
                 this->m_material->UseOpenGL();
             }
 
-            this->m_env->DrawTriangles(m_countVertices);
+            this->m_env->DrawTriangles(m_countIndices);
 
             return true;
         }
@@ -230,7 +222,7 @@ namespace Framework::Graphics::Types {
                 this->m_material->UseOpenGL();
             }
 
-            this->m_env->DrawLines(m_VAO, m_countVertices);
+            //this->m_env->DrawLines(m_VAO, m_countVertices);
 
             return true;
         }

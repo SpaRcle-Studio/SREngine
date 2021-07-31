@@ -72,7 +72,7 @@ namespace Framework {
                 { "Scene*",        "m_scene",     EvoScript::Private },
                 { "void*",         "m_time",      EvoScript::Private },
                 { "void*",         "m_physics",   EvoScript::Private },
-        }, { });
+        }, { "Window.h" });
         ESRegisterStaticMethod(Framework::, EvoScript::Public, generator, Engine, Get, Engine*, ())
         ESRegisterMethod(Framework::,       EvoScript::Private, generator, Engine, RegisterLibraries, bool, ())
         ESRegisterStaticMethod(Framework::, EvoScript::Public, generator, Engine, Reload, void, ())
@@ -89,7 +89,6 @@ namespace Framework {
         generator->AddIncompleteType("Scene", "Engine");
         generator->AddIncompleteType("Render", "Engine");
         generator->AddIncompleteType("Camera", "Engine");
-        generator->AddIncompleteType("Window", "Engine");
     }
 
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {
@@ -197,7 +196,6 @@ namespace Framework {
                 { "volatile bool",         "m_hasErrors",     EvoScript::Protected },
                 { "volatile bool",         "m_isCalculated",  EvoScript::Protected },
                 { "int32_t",               "m_descriptorSet", EvoScript::Protected },
-                { "int32_t",               "m_VAO",           EvoScript::Protected },
                 { "int32_t",               "m_VBO",           EvoScript::Protected },
                 { "int32_t",               "m_IBO",           EvoScript::Protected },
                 { "int32_t",               "m_UBO",           EvoScript::Protected },
@@ -245,6 +243,7 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, WaitCalculate, void, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetMaterial, Material*, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh*, ())
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetGeometryName, std::string, () const)
 
         /*ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetVAO, uint32_t, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetVBO, uint32_t, () const)
@@ -325,6 +324,7 @@ namespace Framework {
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, SetDirectOutput, void, (bool))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, GetPostProcessing, PostProcessing*, () const)
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, IsDirectOutput, bool, () const)
 
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnDestroyGameObject, void, (), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnRotate, void, (Vector3), "Component")
@@ -439,6 +439,8 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Window, Resize, void, (uint32_t, uint32_t))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Window, CentralizeWindow, void, ())
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Window, SetGUIEnabled, void, (bool))
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Window, GetWindowSize, Vector2, () const)
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Window, IsGUIEnabled, bool, () const)
 
         generator->AddIncompleteType("Camera", "Window");
         generator->AddIncompleteType("Mesh", "Window");
@@ -516,6 +518,18 @@ namespace Framework {
                 { "X", 88 },
                 { "Y", 89 },
                 { "Z", 90 },
+                { "F1", 112 },
+                { "F2", 113 },
+                { "F3", 114 },
+                { "F4", 115 },
+                { "F5", 116 },
+                { "F6", 117 },
+                { "F7", 118 },
+                { "F8", 119 },
+                { "F9", 120 },
+                { "F10", 121 },
+                { "F11", 122 },
+                { "F12", 123 },
         });
     }
 

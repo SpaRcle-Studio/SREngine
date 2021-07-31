@@ -17,6 +17,11 @@
 #include <Environment/Win32Window.h>
 #include <ResourceManager/ResourceManager.h>
 
+#define OpenGLSetVertexAttribPointer(id, count, vertex, offset) \
+    glEnableVertexAttribArray(id); \
+    glVertexAttribPointer(id, count, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offset); \
+
+
 using namespace Framework::Helper;
 
 unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, int w, int h, int components) {
@@ -66,25 +71,11 @@ bool Framework::Graphics::OpenGL::StopGUI() {
     return true;
 }
 
-bool Framework::Graphics::OpenGL::PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) {
-    //void* hInst  = GetCurrentInstance();
-
-    //Debug::Graph("OpenGL::PreInit() : create basic window...");
-    //void* window = CreateBasicWindow(hInst);
-
-    //Debug::Graph("OpenGL::PreInit() : initialize basic window...");
-    //void* gldc   = GetDCFromBasicWindow(window);
-    //void* glrc   = InitBasicWindow(gldc);
-    //if (!glrc){
-   //     Helper::Debug::Error("OpenGL::PreInit() : failed initializing basic window!");
-   //     return false;
-   // }
-
-    //ShowBasicWindow(window, true);
-
-    //============================================================================
-
-
+bool Framework::Graphics::OpenGL::PreInit(
+        unsigned int smooth_samples,
+        const std::string& appName,
+        const std::string& engineName,
+        const std::string& glslc) {
 #ifdef  SR_OPENGL_USE_WINAPI
 
 #else
@@ -255,7 +246,7 @@ bool Framework::Graphics::OpenGL::FreeVAO(unsigned int VAO)const noexcept {
     if (VAO) {
         glDeleteVertexArrays(1, &VAO);
         return true;
-    }else{
+    } else {
         Helper::Debug::Error("OpenGL::FreeVAO() : VAO is zero! Something went wrong...");
         return false;
     }
@@ -319,12 +310,8 @@ bool Framework::Graphics::OpenGL::CompileShader(
         int32_t FBO,
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes
-        ) const noexcept {
-    if (FBO >= 0) {
-        Helper::Debug::Error("OpenGL::CompileShader() : opengl dont use FBO for shaders!");
-        return false;
-    }
-
+        ) const noexcept
+{
     std::string vertex_path   = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_vertex.glsl";
     std::string fragment_path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_fragment.glsl";;
 
@@ -862,6 +849,151 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
     if (count == 0 || !IDs)
         return false;
     glDeleteTextures(count, reinterpret_cast<const GLuint *>(IDs));
+    return true;
+}
+
+bool Framework::Graphics::OpenGL::CalculateVAO(
+        int32_t &VAO,
+        std::vector<Vertices::Mesh3DVertex> &vertices,
+        size_t count_verts)
+{
+    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        Helper::Debug::Log("OpenGL::CalculateVAO() : calculating " + std::to_string(vertices.size()) + " vertices...");
+
+    uint32_t VBO = 0;
+
+    glGenVertexArrays(1, (GLuint*)&VAO);
+    glGenBuffers(1, (GLuint*)&VBO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    {
+        //? Binding vertex array
+        glBufferData(
+                GL_ARRAY_BUFFER,
+                count_verts * sizeof(Vertices::Mesh3DVertex),
+                &vertices[0],
+                GL_STATIC_DRAW
+        );
+
+        //? Binding attrib vertex coordinates
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0,
+                              3, // glm::vec3 - has 3 floats
+                              GL_FLOAT, GL_FALSE,
+                              sizeof(Vertices::Mesh3DVertex), (void*)0);
+
+        //? Binding attrib texture coordinates
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1,
+                              2, // glm::vec2 - has 2 floats
+                              GL_FLOAT, GL_FALSE, sizeof(Vertices::Mesh3DVertex),
+                              (void*)offsetof(Vertices::Mesh3DVertex, uv) // Сдвиг байт до соответствующего атрибута
+        );
+
+        //? Binding attrib color
+        //glEnableVertexAttribArray(3);
+        //glVertexAttribPointer(3,
+        //                      3, // glm::vec3 - has 3 floats
+        //                      GL_FLOAT, GL_FALSE,
+        //                      sizeof(Vertex),
+        //                      (void*)offsetof(Vertex, color) // Сдвиг байт до соответствующего атрибута
+        //);
+
+        //? Binding attrib normal coordinates
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2,
+                              3, // glm::vec3 - has 3 floats
+                              GL_FLOAT, GL_FALSE,
+                              sizeof(Vertices::Mesh3DVertex),
+                              (void*)offsetof(Vertices::Mesh3DVertex, norm) // Сдвиг байт до соответствующего атрибута
+        );
+
+        //? Binding attrib tangent coordinates
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3,
+                              3, // glm::vec3 - has 3 floats
+                              GL_FLOAT, GL_FALSE,
+                              sizeof(Vertices::Mesh3DVertex),
+                              (void*)offsetof(Vertices::Mesh3DVertex, tang) // Сдвиг байт до соответствующего атрибута
+        );
+
+    }
+
+    glBindVertexArray(0);
+    glDeleteBuffers(1, &VBO);
+
+    return true;
+}
+
+bool Framework::Graphics::OpenGL::CalculateVBO(
+    int32_t &VBO,
+    void *vertices,
+    Framework::Graphics::Vertices::Type type,
+    size_t count)
+{
+    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        Helper::Debug::Log("OpenGL::CalculateVBO() : calculating " + std::to_string(count) + " vertices...");
+
+    uint32_t _vbo = 0;
+    uint32_t _vao = 0;
+
+    int32_t vertexSize = Vertices::GetVertexSize(type);
+
+    glGenVertexArrays(1, (GLuint*)&_vao);
+    glGenBuffers(1, (GLuint*)&_vbo);
+
+    glBindVertexArray(_vao);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+
+    glBufferData(GL_ARRAY_BUFFER, count * vertexSize, vertices, GL_STATIC_DRAW);
+
+    switch (type) {
+        case Vertices::Type::Mesh3DVertex:
+            OpenGLSetVertexAttribPointer(0, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, pos))
+            OpenGLSetVertexAttribPointer(1, 2, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, uv))
+            OpenGLSetVertexAttribPointer(2, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, norm))
+            OpenGLSetVertexAttribPointer(3, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, tang))
+            break;
+        case Vertices::Type::SkyboxVertex:
+            Helper::Debug::Error("OpenGL::CalculateVBO() : opengl isn't supported skybox vertices!");
+            return false;
+        default:
+            Helper::Debug::Error("OpenGL::CalculateVBO() : unknown vertex type!");
+            return false;
+    }
+
+    glBindVertexArray(0);
+    glDeleteBuffers(1, &_vbo);
+
+    VBO = _vao;
+    return true;
+}
+
+bool Framework::Graphics::OpenGL::CalculateIBO(
+    int32_t &IBO,
+    void *indices,
+    uint32_t indxSize,
+    size_t count,
+    int32_t VBO)
+{
+    if (VBO <= 0) {
+        Helper::Debug::Error("OpenGL::CalculateIBO() : to calculate the IBO, OpenGL needs a VBO (VAO)!");
+        return false;
+    }
+
+    GLuint EBO;
+    glGenBuffers(1, &EBO);
+
+    glBindVertexArray(VBO); // VAO
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indxSize, indices, GL_STATIC_DRAW);
+    }
+    glBindVertexArray(0);
+
+    IBO = EBO;
     return true;
 }
 

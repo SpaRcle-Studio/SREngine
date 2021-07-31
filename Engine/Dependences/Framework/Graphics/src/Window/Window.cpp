@@ -52,9 +52,9 @@ bool Framework::Graphics::Window::Create(GUI::ICanvas* canvas) {
                 if (size.first > 0 && size.second > 0)
                     for (auto camera : m_cameras) {
                         if (camera->IsAllowUpdateProjection())
-                            if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
+                        //    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
                                 camera->UpdateProjection(size.first, size.second);
-                            }
+                        //    }
                         camera->CompleteResize();
                     }
 
@@ -220,6 +220,9 @@ void Framework::Graphics::Window::Thread() {
                 this->PollEvents();
                 this->m_render->PollEvents();
 
+                for (auto camera : m_cameras)
+                    camera->PoolEvents();
+
                 if (m_env->IsNeedReBuild()) {
                     if (!m_cameras.empty()) {
                         m_env->ClearFramebuffersQueue();
@@ -287,7 +290,7 @@ void Framework::Graphics::Window::Thread() {
                 else
                     this->m_render->UpdateUBOs();
 
-                if (m_GUIEnabled && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
+                if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
                     if (this->m_env->BeginDrawGUI()) {
                         if (m_canvas)
                             this->m_canvas->Draw();
@@ -313,12 +316,13 @@ void Framework::Graphics::Window::Thread() {
 
             {
                 this->m_env->PollEvents();
-
+                this->m_render->PollEvents();
                 this->PollEvents();
 
-                this->m_env->ClearBuffers();
+                for (auto camera : m_cameras)
+                    camera->PoolEvents();
 
-                this->m_render->PollEvents();
+                this->m_env->ClearBuffers();
 
                 {
                     if (m_countCameras == 1) {
@@ -333,7 +337,7 @@ void Framework::Graphics::Window::Thread() {
                             DrawToCamera(camera);
                         }
 
-                    if (m_GUIEnabled && m_env->IsGUISupport()) {
+                    if (IsGUIEnabled() && m_env->IsGUISupport()) {
                         if (this->m_env->BeginDrawGUI()) {
                             if (m_canvas)
                                 this->m_canvas->Draw();
@@ -375,7 +379,11 @@ bool Framework::Graphics::Window::InitEnvironment() {
     Debug::Graph("Window::InitEnvironment() : initializing render environment...");
 
     Debug::Graph("Window::InitEnvironment() : pre-initializing...");
-    if (!this->m_env->PreInit(m_smoothSamples, "SpaRcle Engine", "SREngine")){
+    if (!this->m_env->PreInit(
+            m_smoothSamples,
+            "SpaRcle Engine",
+            "SREngine",
+            ResourceManager::GetResourcesFolder() + "/Utilities/glslc.exe")){
         Debug::Error("Window::InitEnvironment() : failed pre-initializing environment!");
         return false;
     }
@@ -466,6 +474,10 @@ void Framework::Graphics::Window::CentralizeCursor() noexcept {
 }
 
 void Framework::Graphics::Window::PollEvents() {
+    // change gui enabled
+    if (m_GUIEnabled.first != m_GUIEnabled.second)
+        m_GUIEnabled.first = m_GUIEnabled.second;
+
     if (m_countNewCameras > 0) {
         m_camerasMutex.lock();
 

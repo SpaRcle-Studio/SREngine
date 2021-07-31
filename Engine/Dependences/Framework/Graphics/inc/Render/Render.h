@@ -29,7 +29,8 @@ namespace Framework::Graphics {
         uint32_t          m_total    = 0;    // sizeof = 4
 
         inline bool Add(Types::Mesh* mesh) {
-            int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
+            //int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
+            int32_t groupID = mesh->GetVBO();
             if (groupID < 0) {
                 Helper::Debug::Error("MeshCluster::Add() : failed get mesh group id to add mesh!");
                 return false;
@@ -48,7 +49,8 @@ namespace Framework::Graphics {
         }
 
         inline bool Remove(Types::Mesh* mesh) {
-            int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
+            //int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
+            int32_t groupID = mesh->GetVBO();
             if (groupID < 0) {
                 Helper::Debug::Error("MeshCluster::Remove() : failed get mesh group id to remove mesh!");
                 return false;
@@ -146,7 +148,7 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void SetWireFrameEnabled(const bool& value) noexcept { this->m_wireFrame = value; }
         [[nodiscard]] SR_FORCE_INLINE bool GetWireFrameEnabled() const noexcept { return this->m_wireFrame; }
         SR_FORCE_INLINE void SetGridEnabled(bool value) { this->m_gridEnabled = value; }
-        SR_FORCE_INLINE void SetCurrentCamera(Camera* camera) noexcept { m_currentCamera = camera; }
+        void SetCurrentCamera(Camera* camera) noexcept;
         [[nodiscard]] SR_FORCE_INLINE Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
     public:
         void RemoveMesh(Types::Mesh* mesh);

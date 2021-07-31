@@ -16,6 +16,7 @@ add_subdirectory(Depends/inc/glm)
 add_subdirectory(Depends/bullet3)
 add_subdirectory(Depends/EvoVulkan/Core)
 add_subdirectory(Depends/EvoScript/Core)
+add_subdirectory(Depends/FbxLoader)
 add_subdirectory(Depends/cmp_core)
 
 #include(Depends/bullet3/UseBullet.cmake)
@@ -52,7 +53,7 @@ add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSIC
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 
-target_link_libraries(Framework opengl32 glfw glew lua imgui bullet3 ${Vulkan_LIBRARY} EvoVulkanCore EvoScriptCore CMP_Core) #easy_profiler
+target_link_libraries(Framework opengl32 glfw glew lua imgui bullet3 ${Vulkan_LIBRARY} EvoVulkanCore EvoScriptCore CMP_Core FbxLoader) #easy_profiler
 if(WIN32)
     if(MSVC)
 

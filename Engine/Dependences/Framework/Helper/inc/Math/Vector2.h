@@ -44,8 +44,18 @@ namespace Framework::Helper::Math {
             return Vector2(x - p_v.x, y - p_v.y);
         }
 
-        _FORCE_INLINE_ Vector2 operator*=(const Unit& value) const {
-            return Vector2(x * value, y * value);
+        _FORCE_INLINE_ Vector2 operator*=(const Unit& value) {
+            this->x *= value;
+            this->y *= value;
+            return *this;
+        }
+
+        _FORCE_INLINE_ bool operator==(const Vector2 &p_v) const {
+            return x == p_v.x && y == p_v.y;
+        }
+
+        _FORCE_INLINE_ bool operator!=(const Vector2 &p_v) const {
+            return x != p_v.x || y != p_v.y;
         }
 
         _FORCE_INLINE_ Vector2 operator*(const Vector2 &p_v) const {

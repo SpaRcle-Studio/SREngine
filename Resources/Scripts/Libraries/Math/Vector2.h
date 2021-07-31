@@ -33,9 +33,7 @@ public:
         return Vector2(x * scalar, y * scalar);
     }
 
-    _FORCE_INLINE_ Vector2
-
-    operator+(const Vector2 &p_v) const {
+    _FORCE_INLINE_ Vector2 operator+(const Vector2 &p_v) const {
         return Vector2(x + p_v.x, y + p_v.y);
     }
 

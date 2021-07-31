@@ -18,6 +18,7 @@
 GameObject* g_camera = nullptr;
 Scene*      g_scene  = nullptr;
 Skybox*     g_skybox = nullptr;
+Window*     g_window = nullptr;
 
 EXTERN void Awake() {
 
@@ -28,22 +29,41 @@ EXTERN void Start() {
     g_scene = Scene::New("New scene");
     engine->SetScene(g_scene);
 
-    Window* window = engine->GetWindow();
-    window->SetGUIEnabled(false);
-    window->Resize(848, 480);
-    window->CentralizeWindow();
+    g_window = engine->GetWindow();
+    g_window->SetGUIEnabled(false);
+    g_window->Resize(848, 480);
+    g_window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
 
     Render* render = engine->GetRender();
     render->SetSkybox(g_skybox);
 
-    Texture* texture = Texture::Load("brickwall2.jpg", TextureFormat::RGBA8_SRGB, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
-    render->RegisterTexture(texture);
+    auto body = Texture::Load("Miku_Bodytex_DM.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
+    auto face = Texture::Load("Miku_Facetex_A.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
+    render->RegisterTexture(body);
+    render->RegisterTexture(face);
 
-    Mesh* mesh = Mesh::Load("engine/cube.obj")[0];
-    for (uint32_t i = 0; i < 10; i++) {
-        for (uint32_t j = 0; j < 10; j++) {
+    std::vector<Texture*> textures = {
+        body, body, face, face, body, body
+    };
+
+    auto fbx_meshes = Mesh::Load("Miku.fbx");
+
+    for (uint32_t i = 0; i < 6; i++) {
+        Mesh* mesh = fbx_meshes[i];
+        Texture* texture = textures[i];
+
+        render->RegisterMesh(mesh);
+        mesh->WaitCalculate();
+        mesh->GetMaterial()->SetDiffuse(texture);
+        GameObject *cube = g_scene->Instance(mesh->GetGeometryName());
+        cube->AddComponent(mesh);
+    }
+
+    /*Mesh* mesh = Mesh::Load("engine/cube.obj")[0];
+    for (uint32_t i = 0; i < 1; i++) {
+        for (uint32_t j = 0; j < 1; j++) {
             if (i != 0 && j != 0)
                 mesh = mesh->Copy();
 
@@ -54,11 +74,11 @@ EXTERN void Start() {
             cube->AddComponent(mesh);
             cube->GetTransform()->Translate(cube->GetTransform()->Forward() * 4.f * i + cube->GetTransform()->Right() * 4.f * j);
         }
-    }
+    }*/
 
     Camera* camera = Camera::Allocate(848, 480);
     camera->SetDirectOutput(true);
-    window->AddCamera(camera);
+    g_window->AddCamera(camera);
     g_camera = g_scene->Instance("Camera");
     g_camera->AddComponent(camera);
 }
@@ -98,6 +118,12 @@ EXTERN void FixedUpdate() {
     if (deltaTime > 1.0) { //every second
         Debug::ScriptLog("FixedUpdate | " + std::to_string(frames) + " frames");
         frames = 0; deltaTime = 0; }
+
+    if (Input::GetKeyDown(KeyCode::F2)) {
+        auto camera = (Camera*)g_camera->GetComponent("Camera");
+        camera->SetDirectOutput(!camera->IsDirectOutput());
+        g_window->SetGUIEnabled(!g_window->IsGUIEnabled());
+    }
 
     CameraMove(0.1f);
 }

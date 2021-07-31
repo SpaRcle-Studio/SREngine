@@ -82,12 +82,7 @@ void Framework::Graphics::GUI::GUISystem::DrawTexture(
     if (m_pipeLine == PipeLine::OpenGL)
         DrawImage(reinterpret_cast<ImTextureID>(id), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
-        if (auto find = m_descriptors.find(id); find == m_descriptors.end()) {
-            auto imTex = m_env->GetImGuiTextureDescriptorFromTexture(id);
-            m_descriptors[id] = m_env->GetDescriptorSetFromDTDSet(imTex);
-        }
-
-        DrawImage(m_descriptors[id], ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+        DrawImage(m_env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
 }
 

@@ -9,6 +9,7 @@
 #include "../../Libraries/Scene.h"
 
 GUISystem* gui = nullptr;
+Window* window = nullptr;
 
 int32_t geometryTexID = -1;
 int32_t skyboxTexID   = -1;
@@ -16,6 +17,8 @@ int32_t completeTexID = -1;
 
 EXTERN void Start() {
     gui = GUISystem::Get();
+    Engine* engine = Engine::Get();
+    window = engine->GetWindow();
 }
 
 EXTERN void OnGUI() {
@@ -31,7 +34,7 @@ EXTERN void OnGUI() {
             } else
                 if (gui->BeginChildWindow("Texture")) {
                     auto winSize = gui->GetWindowSize();
-                    gui->DrawTexture(winSize, Vector2(400, 400), completeTexID, true);
+                    gui->DrawTexture(winSize, window->GetWindowSize(), completeTexID, true);
                     gui->EndChildWindow();
                 }
 

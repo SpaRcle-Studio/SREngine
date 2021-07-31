@@ -55,7 +55,12 @@ namespace Framework::Graphics {
 
         bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
 
-        bool PreInit(uint32_t smooth_samples, const std::string& appName, const std::string& engineName) override;
+        bool PreInit(
+                uint32_t smooth_samples,
+                const std::string& appName,
+                const std::string& engineName,
+                const std::string& glslc) override;
+
         bool SetContextCurrent() override;
         bool Init(int swapInterval) override;
         bool PostInit() override;
@@ -224,6 +229,7 @@ namespace Framework::Graphics {
 
         // ============================= [ SHADER METHODS ] =============================
 
+        SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override { return true; }
         [[nodiscard]] std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const noexcept override;
         [[nodiscard]] SR_SHADER_PROGRAM AllocShaderProgram() const noexcept override {
             //return (OpenGLShader*)malloc(sizeof(OpenGLShader));
@@ -321,80 +327,32 @@ namespace Framework::Graphics {
 
             return true;
         }
-        SR_FORCE_INLINE bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept override{
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Helper::Debug::Log("OpenGL::CalculateMesh() : calculating " + std::to_string(vertices.size()) + " vertices...");
-
-            uint32_t VBO = 0;
-
-            glGenVertexArrays(1, (GLuint*)&VAO);
-            glGenBuffers(1, (GLuint*)&VBO);
-
-            glBindVertexArray(VAO);
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-            {
-                //? Binding vertex array
-                glBufferData(
-                        GL_ARRAY_BUFFER,
-                        count_verts * sizeof(Vertices::Mesh3DVertex),
-                        &vertices[0],
-                        GL_STATIC_DRAW
-                );
-
-                //? Binding attrib vertex coordinates
-                glEnableVertexAttribArray(0);
-                glVertexAttribPointer(0,
-                                      3, // glm::vec3 - has 3 floats
-                                      GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertices::Mesh3DVertex), (void*)0);
-
-                //? Binding attrib texture coordinates
-                glEnableVertexAttribArray(1);
-                glVertexAttribPointer(1,
-                                      2, // glm::vec2 - has 2 floats
-                                      GL_FLOAT, GL_FALSE, sizeof(Vertices::Mesh3DVertex),
-                                      (void*)offsetof(Vertices::Mesh3DVertex, uv) // Сдвиг байт до соответствующего атрибута
-                );
-
-                //? Binding attrib color
-                //glEnableVertexAttribArray(3);
-                //glVertexAttribPointer(3,
-                //                      3, // glm::vec3 - has 3 floats
-                //                      GL_FLOAT, GL_FALSE,
-                //                      sizeof(Vertex),
-                //                      (void*)offsetof(Vertex, color) // Сдвиг байт до соответствующего атрибута
-                //);
-
-                //? Binding attrib normal coordinates
-                glEnableVertexAttribArray(2);
-                glVertexAttribPointer(2,
-                                      3, // glm::vec3 - has 3 floats
-                                      GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertices::Mesh3DVertex),
-                                      (void*)offsetof(Vertices::Mesh3DVertex, norm) // Сдвиг байт до соответствующего атрибута
-                );
-
-                //? Binding attrib tangent coordinates
-                glEnableVertexAttribArray(3);
-                glVertexAttribPointer(3,
-                                      3, // glm::vec3 - has 3 floats
-                                      GL_FLOAT, GL_FALSE,
-                                      sizeof(Vertices::Mesh3DVertex),
-                                      (void*)offsetof(Vertices::Mesh3DVertex, tang) // Сдвиг байт до соответствующего атрибута
-                );
-
-            }
-
-            glBindVertexArray(0);
-            glDeleteBuffers(1, &VBO);
-
-            return true;
-        }
-        [[nodiscard]] bool FreeVAO(uint32_t VAO)const noexcept override;
+        /*
+            В OpenGL не используется в чистом виде VBO, OpenGL работает с VAO, но для универсальности
+            здесь под VBO будет скрываться VAO
+         */
+        bool CalculateVBO(int32_t& VBO, void* vertices, Vertices::Type type, size_t count) override;
+        bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count, int32_t VBO = -1) override;
+        bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) override;
+        [[nodiscard]] bool FreeVAO(uint32_t VAO) const noexcept override;
         SR_FORCE_INLINE void DrawLines(const uint32_t& VAO, const uint32_t& count_vertices) const noexcept override {
             glBindVertexArray(VAO);
             glDrawArrays(GL_LINES, 0, count_vertices);
+        }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override {
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                Helper::Debug::Log("OpenGL::FreeVBO() : free VBO \"" + std::to_string(ID) + "\" VAO...");
+
+            if (ID > 0) {
+                glDeleteVertexArrays(1, &ID); // VAO
+                return true;
+            } else {
+                Helper::Debug::Error("OpenGL::FreeVBO() : VBO (VAO) is zero! Something went wrong...");
+                return false;
+            }
+        }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override {
+            return true; // nothing
         }
 
         SR_FORCE_INLINE void DrawTriangles(const uint32_t& count_vertices) const noexcept override {
@@ -455,19 +413,9 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
-            static GLfloat pVerts[]= {-0.5f,  0.0f, 0.0f,
-                                      -0.25f,-0.4f, 0.0f,
-                                      0.0f,  0.0f, 0.0f,
-                                      0.25f,-0.4f, 0.0f,
-                                      0.5f,  0.0f, 0.0f};
+            GLuint indices[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-            static GLushort pInds[] =
-                    { 0,1,2 , 1,3,2 , 2,3,4 };
-
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glVertexPointer(3,GL_FLOAT,0,pVerts);
-
-            glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_SHORT, pInds);
+            glDrawElements(GL_TRIANGLES, 8, GL_UNSIGNED_INT, indices);
         }
 
         SR_FORCE_INLINE void DrawQuad(const uint32_t& VAO) const noexcept override{
@@ -477,9 +425,18 @@ namespace Framework::Graphics {
             //glBindVertexArray(0);
         }
 
-        SR_FORCE_INLINE void BindVAO(const uint32_t&  VAO) const noexcept override {
+        SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) const noexcept override {
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO); // EBO
+        }
+
+        SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) const noexcept override {
             glBindVertexArray(VAO);
         }
+
+        SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) const noexcept override {
+            glBindVertexArray(VBO); // VAO
+        }
+
         SR_FORCE_INLINE void Draw6Triangles() const noexcept override {
             glDrawArrays(GL_TRIANGLES, 0, 6);
         }

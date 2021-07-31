@@ -28,7 +28,6 @@ namespace Framework::Graphics::GUI {
     private:
         Environment*              m_env          = nullptr;
         const PipeLine            m_pipeLine     = PipeLine::Unknown;
-        std::map<uint32_t, void*> m_descriptors = {};
     private:
         static void DrawImage(
                 ImTextureID user_texture_id,

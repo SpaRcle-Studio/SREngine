@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <macros.h>
+#include <variant>
 
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
@@ -128,6 +129,22 @@ namespace Framework::Graphics::Vertices {
             return descriptions;
         }
     };
+
+    enum class Type {
+        Mesh3DVertex, SkyboxVertex
+    };
+
+    static uint32_t GetVertexSize(Type type) {
+        switch (type) {
+            case Type::Mesh3DVertex:
+                return sizeof(Mesh3DVertex);
+            case Type::SkyboxVertex:
+                return sizeof(SkyboxVertex);
+            default:
+                Helper::Debug::Error("Vertices::GetVertexSize() : unknown type!");
+                return 0;
+        }
+    }
 }
 
 

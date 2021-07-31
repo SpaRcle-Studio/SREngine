@@ -79,6 +79,18 @@ namespace Framework::Helper {
         X = 88,
         Y = 89,
         Z = 90,
+        F1 = 112,
+        F2 = 113,
+        F3 = 114,
+        F4 = 115,
+        F5 = 116,
+        F6 = 117,
+        F7 = 118,
+        F8 = 119,
+        F9 = 120,
+        F10 = 121,
+        F11 = 122,
+        F12 = 123,
         Plus = 187, Minus = 189,
         Dot = 190,
         Tilde = 192,
@@ -124,6 +136,8 @@ namespace Framework::Helper {
         static Math::Vector2 GetMouseDrag();
 
         static int GetMouseWheel();
+
+        static int DebugKey();
 
         static bool GetKeyDown(KeyCode key);
         static bool GetKeyUp(KeyCode key);

@@ -383,3 +383,7 @@ Framework::Graphics::Render *Framework::Graphics::Render::Allocate() {
     } else
         return nullptr;
 }
+
+void Framework::Graphics::Render::SetCurrentCamera(Framework::Graphics::Camera *camera) noexcept  {
+    m_currentCamera = camera;
+}

@@ -253,4 +253,15 @@ bool Framework::Graphics::Camera::CompleteResize() {
     return true;
 }
 
+void Framework::Graphics::Camera::PoolEvents()  {
+    /*if (!m_isEnableDirectOut.first && m_isEnableDirectOut.second)
+        if (auto size = m_window->GetWindowSize(); size != m_cameraSize) {
+            this->UpdateProjection(size.x, size.y);
+            this->CompleteResize();
+            m_env->SetBuildState(false);
+        }*/
+
+    m_isEnableDirectOut.first = m_isEnableDirectOut.second;
+}
+
 

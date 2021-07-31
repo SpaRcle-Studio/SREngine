@@ -22,6 +22,7 @@
 
 #include <Types/Rigidbody.h>
 #include <Types/Geometry/Mesh3D.h>
+#include <Input/InputSystem.h>
 
 using namespace Framework;
 using namespace Framework::Helper;
@@ -33,8 +34,12 @@ using namespace Framework::Physics;
 using namespace Framework::Physics::Types;
 
 int main() {
-    std::string exe = FileSystem::GetPathToExe();
+    if constexpr (sizeof(size_t) != 8) {
+        std::cerr << "The engine only supports 64-bit systems!\n";
+        return -1;
+    }
 
+    std::string exe = FileSystem::GetPathToExe();
     Debug::Init(exe, true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Medium);
     ResourceManager::Init(exe + "/../../Resources");

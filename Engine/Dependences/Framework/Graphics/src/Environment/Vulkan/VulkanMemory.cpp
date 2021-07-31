@@ -19,6 +19,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
         if (m_FBOs[i] == nullptr) {
             m_FBOs[i] = EvoVulkan::Complexes::FrameBuffer::Create(
                     m_kernel->GetDevice(),
+                    m_kernel->GetDescriptorManager(),
                     m_kernel->GetSwapchain(),
                     m_kernel->GetCmdPool(),
                     inputColorAttachments,
@@ -88,6 +89,7 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
             goto ret;
         }
 
+        m_textures[oldColorAttachments[i]]->Destroy();
         m_textures[oldColorAttachments[i]]->Free();
         m_textures[oldColorAttachments[i]] = textures[i];
     }
@@ -372,11 +374,11 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
     for (uint32_t i = 0; i < m_countTextures; i++) {
         if (m_textures[i] == nullptr) {
             if (mipLevels == 0)
-                m_textures[i] = EvoVulkan::Types::Texture::LoadAutoMip(m_device, m_pool, pixels, format, w, h, filter);
+                m_textures[i] = EvoVulkan::Types::Texture::LoadAutoMip(m_device, m_descriptorManager, m_pool, pixels, format, w, h, filter);
             else if (mipLevels == 1)
-                m_textures[i] = EvoVulkan::Types::Texture::LoadWithoutMip(m_device, m_pool, pixels, format, w, h, filter);
+                m_textures[i] = EvoVulkan::Types::Texture::LoadWithoutMip(m_device, m_descriptorManager, m_pool, pixels, format, w, h, filter);
             else
-                m_textures[i] = EvoVulkan::Types::Texture::Load(m_device, m_pool, pixels, format, w, h, mipLevels, filter);
+                m_textures[i] = EvoVulkan::Types::Texture::Load(m_device, m_descriptorManager, m_pool, pixels, format, w, h, mipLevels, filter);
 
             if (!m_textures[i]) {
                 Helper::Debug::Error("MemoryManager::AllocateTexture() : failed to load Evo Vulkan texture!");
@@ -395,7 +397,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
 #define SR_SAFE_FREE(memory) if (memory) { free(memory); memory = nullptr; }
 
 void Framework::Graphics::VulkanTools::MemoryManager::Free() {
-    SR_SAFE_FREE(m_dynamicTextureDescSets)
+    //SR_SAFE_FREE(m_dynamicTextureDescSets)
     SR_SAFE_FREE(m_ShaderPrograms)
     SR_SAFE_FREE(m_descriptorSets)
     SR_SAFE_FREE(m_textures)
@@ -407,6 +409,7 @@ void Framework::Graphics::VulkanTools::MemoryManager::Free() {
     delete this;
 }
 
+/*
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDynamicTextureDescriptorSet(VkDescriptorSetLayout layout, uint32_t textureID) {
     if (auto texture = m_textures[textureID]; texture) {
         auto id = this->FindFreeDynamicTextureDescriptorSetIndex();
@@ -435,8 +438,9 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDynamicTextureD
         Helper::Debug::Error("MemoryManager::AllocateTextureDescriptorSet() : texture isn't exists!");
         return -1;
     }
-}
+}*/
 
+/*
 VkDescriptorSet Framework::Graphics::VulkanTools::MemoryManager::GetDynamicTextureDescriptorSet(uint32_t id) {
     auto descriptor = m_dynamicTextureDescSets[id];
     if (!descriptor) {
@@ -460,4 +464,4 @@ VkDescriptorSet Framework::Graphics::VulkanTools::MemoryManager::GetDynamicTextu
     }
 
     ex: return descriptor;
-}
+}*/

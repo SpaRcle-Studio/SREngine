@@ -53,6 +53,7 @@ namespace Framework::Graphics {
 
         int32_t*              m_sharedUniforms       = nullptr;
         uint32_t              m_countSharedUniforms  = 0;
+        int32_t               m_fbo                  = -1;
 
         UBOInfos              m_uniformsInfo         = {};
     private:

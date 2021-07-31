@@ -11,7 +11,6 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/EditorGrid.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ObjLoader.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/FbxLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ImageLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureLoader.cpp
 
@@ -59,6 +58,7 @@ set(GRAPHICS_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Depends/cmp_core/source
 
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
+        ${FRAMEWORK_ROOT_DIR}/Depends/FbxLoader/inc
         #${FRAMEWORK_ROOT_DIR}/Depends/vulkan/vulkan
         ${Vulkan_INCLUDE_DIRS}
         #${FRAMEWORK_ROOT_DIR}/Depends/imgui

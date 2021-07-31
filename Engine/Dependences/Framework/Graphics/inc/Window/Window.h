@@ -83,7 +83,8 @@ namespace Framework::Graphics {
         std::vector<Camera*>  m_cameras               = std::vector<Camera*>();
         uint32_t              m_countCameras          = 0;
 
-        bool                  m_GUIEnabled            = true;
+        /* 1 - current, 2 - new */
+        std::pair<bool, bool> m_GUIEnabled            = { false, false };
 
         ImGuiWindow*          m_aimedWindowTarget     = nullptr;
         Camera*               m_aimedCameraTarget     = nullptr;
@@ -117,6 +118,7 @@ namespace Framework::Graphics {
             return m_render;
         }
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
+        [[nodiscard]] inline bool IsGUIEnabled() const noexcept { return m_GUIEnabled.first; }
         [[nodiscard]] Mesh* PopAimedMesh() noexcept;
         [[nodiscard]] bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept;
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
@@ -124,14 +126,16 @@ namespace Framework::Graphics {
         void CentralizeWindow();
         void Resize(uint32_t w, uint32_t h);
         void CentralizeCursor() noexcept;
+
         SR_FORCE_INLINE void SetGUIEnabled(bool value) noexcept {
             if (value)
                 Helper::Debug::Log("Window::SetGUIEnabled() : enable gui...");
             else
                 Helper::Debug::Log("Window::SetGUIEnabled() : disable gui...");
 
+            m_env->SetBuildState(false);
             this->m_env->SetGUIEnabled(value);
-            this->m_GUIEnabled = value;
+            this->m_GUIEnabled.second = value;
         }
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsFullScreen()           const noexcept { return this->m_env->IsFullScreen(); }

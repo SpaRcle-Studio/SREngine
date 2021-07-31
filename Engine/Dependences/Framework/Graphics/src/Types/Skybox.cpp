@@ -91,7 +91,7 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
 
         auto& [indices, vertices] = skyboxObj[0];
 
-        if (!m_env->CalculateVBO(m_VBO, vertices.data(), sizeof(Vertices::SkyboxVertex), vertices.size())) {
+        if (!m_env->CalculateVBO(m_VBO, vertices.data(), Vertices::Type::SkyboxVertex, vertices.size())) {
             Helper::Debug::Error("Skybox::Calculate() : failed to calculate VBO!");
             this->m_hasErrors = true;
             return false;

@@ -2,29 +2,22 @@
 // Created by Nikita on 17.11.2020.
 //
 
-//#include <easy/profiler.h>
-
 #include "Types/Mesh.h"
 #include <ResourceManager/ResourceManager.h>
 #include <Render/Render.h>
 
-#include <Utils/StringUtils.h>
 #include <Debug.h>
 #include <exception>
 
 #include <Loaders/ObjLoader.h>
 
-#include <utility>
-#include <glm/vec3.hpp>
-#include <glm/matrix.hpp>
-#include <glm/gtx/euler_angles.hpp>
-#include <map>
-#include <glm/gtx/string_cast.hpp>
-#include <glm/gtx/euler_angles.hpp>
 #include <imgui.h>
 
 #include <GUI.h>
-#include <Types/Descriptors.h>
+#include <FbxLoader/Loader.h>
+
+#include <Types/Geometry/Mesh3D.h>
+#include <Types/Geometry/SkinnedMesh.h>
 
 using namespace Framework::Graphics::Types;
 
@@ -109,14 +102,34 @@ ret:
 
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
-    if (ext == "obj"){
+    if (ext == "obj") {
         if (withIndices)
             meshes = ObjLoader::LoadWithIndices(path);
         else
             meshes = ObjLoader::Load(path);
+    } else if (ext == "fbx") {
+        if (!FbxLoader::Debug::IsInit())
+            FbxLoader::Debug::Init([](const std::string& msg) { Helper::Debug::Error(msg); });
 
-    } else if (ext == "fbx"){
-        meshes = std::vector<Mesh *>();
+        auto fbx = FbxLoader::Loader::Load(
+                Helper::ResourceManager::GetResourcesFolder() + "/Utilities/FbxFormatConverter.exe",
+                Helper::ResourceManager::GetResourcesFolder() + "/Cache/",
+                Helper::ResourceManager::GetResourcesFolder() + "/Models/",
+                localPath,
+                withIndices);
+
+        for (auto shape : fbx.GetShapes()) {
+            auto* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
+            mesh->SetIndexArray(shape.indices);
+            auto vertices = std::vector<Vertices::Mesh3DVertex>();
+            for (auto vertex : shape.vertices)
+                vertices.emplace_back(Vertices::Mesh3DVertex {
+                    .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
+                    .uv  = { vertex.uv.x, vertex.uv.y },
+                }); // TODO
+            mesh->SetVertexArray(vertices);
+            meshes.emplace_back(mesh);
+        }
     } else {
         Helper::Debug::Error("Mesh::Load() : unknown \""+ext+"\" format!");
         meshes = std::vector<Mesh*>();
@@ -196,7 +209,7 @@ bool Mesh::SimpleDraw() {
         if (!this->Calculate())
             return false;
 
-    this->m_env->DrawTriangles(m_VAO, m_countVertices);
+    //this->m_env->DrawTriangles(m_VAO, m_countVertices);
 
     return true;
 }
@@ -204,7 +217,6 @@ bool Mesh::SimpleDraw() {
 bool Mesh::DrawOnInspector() {
     ImGui::Text("Geometry name: %s", GetGeometryName().c_str());
     ImGui::Text("Vertices count: %zu", GetCountVertices());
-    ImGui::Text("VAO: %u", this->m_VAO);
 
     if (!m_render)
         ImGui::TextColored({1,0,0,1}, "Render is missing!");

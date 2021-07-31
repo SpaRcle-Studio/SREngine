@@ -122,7 +122,12 @@ namespace Framework::Graphics {
     public:
         uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
 
-        bool PreInit(unsigned int smooth_samples, const std::string& appName, const std::string& engineName) override;
+        bool PreInit(
+                unsigned int smooth_samples,
+                const std::string& appName,
+                const std::string& engineName,
+                const std::string& glslc) override;
+
         bool Init(int swapInterval) override;
         bool PostInit() override;
 
@@ -132,10 +137,22 @@ namespace Framework::Graphics {
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
 
-        [[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
+        //[[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
         [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
-        [[nodiscard]] void* GetDescriptorSet(uint32_t id) const override;
-        [[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
+        [[nodiscard]] void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const override {
+            if (!imgui) {
+                Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : todo!");
+                return nullptr;
+            }
+
+            if (auto texture = m_memory->m_textures[id])
+                return texture->GetDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout());
+            else {
+                Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
+                return nullptr;
+            }
+        }
+        //[[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
 
         void SetBuildState(const bool& isBuild) override {
             if (isBuild)
@@ -219,6 +236,28 @@ namespace Framework::Graphics {
 
         void SetWindowPosition(int x, int y) override;
         void SetWindowSize(unsigned int w, unsigned int h) override;
+
+        SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override {
+            if (auto shader = m_memory->m_ShaderPrograms[shaderProgram]) {
+                if (m_currentFBOid < 0) {
+                    Helper::Debug::Error("Vulkan::ReCreateShader() : frame buffer does not attached!");
+                    return false;
+                }
+
+                if (auto renderPass = (m_currentFBOid == 0 ? m_kernel->GetRenderPass() : m_memory->m_FBOs[m_currentFBOid - 1]->GetRenderPass())) {
+                    if (!shader->ReCreatePipeLine(renderPass)) {
+                        Helper::Debug::Error("Vulkan::ReCreateShader() : failed to re-create pipeLine!");
+                        return true;
+                    }
+                } else {
+                    Helper::Debug::Error("Vulkan::ReCreateShader() : failed to get render pass!");
+                    return false;
+                }
+            } else {
+                Helper::Debug::Error("Vulkan::ReCreateShader() : shader isn't exists!");
+                return false;
+            }
+        }
 
         bool CompileShader(
                 const std::string& path,
@@ -397,24 +436,8 @@ namespace Framework::Graphics {
                 uint8_t mipLevels,
                 bool alpha) const noexcept override;
 
-        SR_FORCE_INLINE bool CalculateVBO(int32_t& VBO, void* vertices, uint32_t vertSize, size_t count) const noexcept override {
-            auto id = this->m_memory->AllocateVBO(vertSize * count, vertices);
-            if (id >= 0) {
-                VBO = id;
-                return true;
-            }
-            else
-                return false;
-        }
-        SR_FORCE_INLINE bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count)  const noexcept override {
-            auto id = this->m_memory->AllocateIBO(indxSize * count, indices);
-            if (id >= 0) {
-                IBO = id;
-                return true;
-            }
-            else
-                return false;
-        }
+        bool CalculateVBO(int32_t& VBO, void* vertices, Vertices::Type type, size_t count) override;
+        bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) override {
             if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1); id < 0) {
                 Helper::Debug::Error("Vulkan::CalculateCubeMap() : failed to allocate texture!");

@@ -24,7 +24,7 @@ void main() {
 
     //vs_out.VColor = aColor;
     vs_out.FragPos = vec3(modelMat * vec4(aPosition, 1.0));
-    vs_out.TexCoord  = vec2(aTexCoord.x, 1 - aTexCoord.y); // flip the texture along the Y axis
+    vs_out.TexCoord  = vec2(aTexCoord.x, aTexCoord.y); // flip the texture along the Y axis
     gl_Position = PVmat * vec4(vs_out.FragPos, 1.0);
 }
 

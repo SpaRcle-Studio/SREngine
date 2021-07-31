@@ -13,7 +13,6 @@
 #include <Types/WindowFormat.h>
 #include <functional>
 #include <glm/glm.hpp>
-//#include <Environment/Vertex.h>
 #include <Environment/TextureHelper.h>
 #include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
@@ -124,12 +123,12 @@ namespace Framework::Graphics {
         virtual bool BeginDrawGUI() { return false; }
         virtual void EndDrawGUI()   { }
 
-        [[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
+        //[[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
         [[nodiscard]] virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
-        [[nodiscard]] virtual void* GetDescriptorSet(uint32_t id) const { return nullptr; }
+        [[nodiscard]] virtual void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
 
         /// Get descriptor set from dynamic texture descriptor set
-        [[nodiscard]] virtual void* GetDescriptorSetFromDTDSet(uint32_t id) const { return nullptr; }
+       // [[nodiscard]] virtual void* GetDescriptorSetFromDTDSet(uint32_t id) const { return nullptr; }
 
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetPipeLineName() const noexcept = 0;
 
@@ -143,7 +142,12 @@ namespace Framework::Graphics {
         virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable) { return false; }
         virtual void SetWindowIcon(const char* path) {  }
 
-        virtual bool PreInit(uint32_t smooth_samples, const std::string& appName, const std::string& engineName) { return false; }
+        virtual bool PreInit(
+                uint32_t smooth_samples,
+                const std::string& appName,
+                const std::string& engineName,
+                const std::string& glslc) { return false; }
+
         [[nodiscard]] virtual glm::vec2 GetWindowSize() const noexcept { return {0,0}; }
 
         /* set current opengl/vulkan/directx context */
@@ -222,6 +226,7 @@ namespace Framework::Graphics {
                 const std::vector<size_t>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
                 SRShaderCreateInfo shaderCreateInfo = {}) const noexcept { return false; }
+        virtual SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) { return false; }
         virtual SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept { return false; }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept { }
         virtual SR_FORCE_INLINE void UnUseShader() { }
@@ -257,10 +262,9 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateVBO(int32_t& VBO, void* vertices, uint32_t vertSize, size_t count)   const noexcept { return false; }
-        virtual SR_FORCE_INLINE bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count)    const noexcept { return false; }
-        //virtual SR_FORCE_INLINE
+        virtual bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) { return false; }
+        virtual bool CalculateVBO(int32_t& VBO, void* vertices, Vertices::Type type, size_t count) { return false; }
+        virtual bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count, int32_t VBO = -1) { return false; }
 
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(uint32_t& VBO, uint32_t& VAO) const noexcept { return false; }
