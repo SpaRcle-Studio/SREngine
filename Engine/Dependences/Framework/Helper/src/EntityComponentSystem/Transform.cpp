@@ -14,8 +14,10 @@
 
 #include <Math/Matrix4x4.h>
 
-Framework::Helper::Transform::Transform(Framework::Helper::GameObject *parent) {
+Framework::Helper::Transform::Transform(GameObject* parent) {
     this->m_gameObject = parent;
+    this->m_globalRotation = Math::cmp_epsilon_v3;
+    this->m_localRotation  = Math::cmp_epsilon_v3;
 }
 
 void Framework::Helper::Transform::UpdateDefParentDir() {
@@ -42,13 +44,35 @@ void Framework::Helper::Transform::SetLocalPosition(Framework::Helper::Math::Vec
 
     //if (m_parent)
     //    this->UpdateChildPosition(delta, pivot);
+
+    Vector3 delta = m_localPosition - val;
+    this->m_localPosition = val;
+
+    if (m_parent)
+        this->UpdateChildPosition(delta);
+    else {
+        this->m_globalPosition = val;
+
+        m_gameObject->UpdateComponentsPosition();
+
+        for (const auto& child: m_gameObject->m_children)
+            child->m_transform->UpdateChildPosition(delta);
+    }
 }
 
 void Framework::Helper::Transform::SetLocalRotation(Framework::Helper::Math::Vector3 val, bool pivot) {
-    this->m_localRotation = val;
+    this->m_localRotation = Vector3::FixEulerAngles(val);
 
     if (m_parent)
-        this->UpdateChildRotation(pivot);
+        this->UpdateChildRotation();
+    else {
+        this->m_globalRotation = m_localRotation;
+
+        m_gameObject->UpdateComponentsRotation();
+
+        for (const auto& child: m_gameObject->m_children)
+            child->m_transform->UpdateChildRotation();
+    }
 }
 
 void Framework::Helper::Transform::SetLocalScale(Framework::Helper::Math::Vector3 val, bool pivot) {
@@ -66,7 +90,7 @@ void Framework::Helper::Transform::SetPosition(Vector3 val, bool pivot) {
     m_gameObject->UpdateComponentsPosition();
 
     for (auto a: m_gameObject->m_children)
-        a->m_transform->UpdateChildPosition(delta, pivot);
+        a->m_transform->UpdateChildPosition(delta);
 }
 
 void Framework::Helper::Transform::SetRotation(const Vector3& euler, bool pivot) {
@@ -82,7 +106,7 @@ void Framework::Helper::Transform::SetRotation(const Vector3& euler, bool pivot)
     //!this->UpdateLocalRotation(deltaRotate);
 
    for (auto a: m_gameObject->m_children)
-       a->m_transform->UpdateChildRotation(pivot);
+       a->m_transform->UpdateChildRotation();
 }
 
 void Framework::Helper::Transform::SetScale(Vector3 val, bool pivot) {
@@ -95,7 +119,7 @@ void Framework::Helper::Transform::SetScale(Vector3 val, bool pivot) {
     this->SetPosition(Vector3(0,0,0));
 
     for (auto a: m_gameObject->m_children)
-        a->m_transform->UpdateChildScale(delta, pivot);
+        a->m_transform->UpdateChildScale(delta);
 
     this->SetPosition(temp);
 }
@@ -135,7 +159,7 @@ void Framework::Helper::Transform::GlobalTranslate(Vector3 axis, double value) {
         Vector3 dir = origin.Radians().ToQuat() * axis;
         m_localPosition += (dir * value) / m_parent->m_globalScale;
 
-        this->UpdateChildRotation(true);
+        this->UpdateChildRotation();
     }
 }
 
@@ -150,11 +174,11 @@ void Framework::Helper::Transform::Translate(Vector3 val) noexcept {
 
             this->m_gameObject->UpdateComponentsPosition();
 
-            for (auto a: m_gameObject->m_children)
-                a->m_transform->UpdateChildPosition(-val, true);
+            for (const auto& a: m_gameObject->m_children)
+                a->m_transform->UpdateChildPosition(-val);
         }
         else
-           this->UpdateChildRotation(true);
+           this->UpdateChildRotation();
     //} else
     //    this->SetPosition(m_globalPosition + val);
 }
@@ -167,7 +191,7 @@ void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 a
         m_localRotation = (matLocal * rotate).GetQuat().EulerAngle().InverseAxis(2);
 
         if (m_parent)
-            UpdateChildRotation(true);
+            UpdateChildRotation();
         else
             this->m_globalRotation = m_localRotation;
     }
@@ -179,7 +203,7 @@ void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 a
     this->m_gameObject->UpdateComponentsRotation();
 
     for (auto a: m_gameObject->m_children)
-        a->m_transform->UpdateChildRotation(true);
+        a->m_transform->UpdateChildRotation();
 }
 
 void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vector3 axis, double value) {
@@ -196,7 +220,7 @@ void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vec
 
         m_localRotation = matLocal.GetQuat().EulerAngle().InverseAxis(2);
 
-        this->UpdateChildRotation(true);
+        this->UpdateChildRotation();
     } else {
         Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
         Matrix4x4 matGlobal = Matrix4x4(0.0, m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
@@ -205,7 +229,7 @@ void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vec
         this->m_gameObject->UpdateComponentsRotation();
 
         for (auto a: m_gameObject->m_children)
-            a->m_transform->UpdateChildRotation(true);
+            a->m_transform->UpdateChildRotation();
     }
 }
 
@@ -320,7 +344,7 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 delta, glm::mat4 matrix, 
 
 
         this->m_localRotation = matDelta.GetQuat().EulerAngle().InverseAxis(2);
-        this->UpdateChildRotation(pivot);
+        this->UpdateChildRotation();
 
         //Debug::Log(Matrix4x4(delta).GetQuat().EulerAngle().InverseAxis(2).ToString());
 
@@ -359,7 +383,7 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 delta, glm::mat4 matrix, 
         //!this->UpdateLocalScale(deltaScale);
 
         for (auto a : this->m_gameObject->m_children)
-            a->m_transform->UpdateChildScale(deltaScale, pivot);
+            a->m_transform->UpdateChildScale(deltaScale);
     }
 
 
@@ -367,7 +391,7 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 delta, glm::mat4 matrix, 
         this->m_globalRotation = euler;
         //!this->UpdateLocalRotation(deltaRotate);
         for (auto a : this->m_gameObject->m_children)
-            a->m_transform->UpdateChildRotation(pivot);
+            a->m_transform->UpdateChildRotation();
     }
 
     this->SetPosition(translation);
@@ -413,7 +437,7 @@ glm::mat4 Framework::Helper::Transform::GetMatrix(bool local) const noexcept  {
     //return glm::mat4(1);
 }
 
-void Framework::Helper::Transform::UpdateChildPosition(Vector3 delta, bool pivot) {
+void Framework::Helper::Transform::UpdateChildPosition(Vector3 delta) {
     m_globalPosition -= delta;
 
     //!this->UpdateLocalPosition();
@@ -421,17 +445,17 @@ void Framework::Helper::Transform::UpdateChildPosition(Vector3 delta, bool pivot
     this->m_gameObject->UpdateComponentsPosition();
 
     for (auto a : m_gameObject->m_children)
-        a->m_transform->UpdateChildPosition(delta, pivot);
+        a->m_transform->UpdateChildPosition(delta);
 }
 
-void Framework::Helper::Transform::UpdateChildScale(Vector3 delta, bool pivot) {
+void Framework::Helper::Transform::UpdateChildScale(Vector3 delta) {
     auto newScale = m_parent->m_globalScale * m_localScale;
     this->m_globalScale = newScale;
 
     //!this->UpdateLocalScale();
 
     this->m_globalPosition /= delta;
-    this->UpdateChildRotation(pivot);
+    this->UpdateChildRotation();
 
     this->m_gameObject->UpdateComponentsPosition();
     this->m_gameObject->UpdateComponentsScale();
@@ -439,10 +463,10 @@ void Framework::Helper::Transform::UpdateChildScale(Vector3 delta, bool pivot) {
     //!this->UpdateLocalPosition();
 
     for (auto a : m_gameObject->m_children)
-        a->m_transform->UpdateChildScale(delta, pivot);
+        a->m_transform->UpdateChildScale(delta);
 }
 
-void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
+void Framework::Helper::Transform::UpdateChildRotation() {
     this->m_globalRotation = m_parent->m_globalRotation;
     {
         Vector3 point = m_parent->m_globalPosition;
@@ -486,7 +510,7 @@ void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
     this->m_gameObject->UpdateComponentsPosition();
 
     for (auto a : m_gameObject->m_children)
-        a->m_transform->UpdateChildRotation(pivot);
+        a->m_transform->UpdateChildRotation();
 
     //!===================================
 
@@ -508,7 +532,7 @@ void Framework::Helper::Transform::UpdateChildRotation(bool pivot) {
 void Framework::Helper::Transform::OnParentSet(Framework::Helper::Transform *parent) {
     this->m_parent = parent;
     this->UpdateDefParentDir();
-    this->UpdateChildRotation(true);
+    this->UpdateChildRotation();
 }
 
 void Framework::Helper::Transform::Scaling(Framework::Helper::Math::Vector3 val) {
@@ -516,10 +540,10 @@ void Framework::Helper::Transform::Scaling(Framework::Helper::Math::Vector3 val)
 
     if (m_parent) { // local
         m_localScale += val;
-        this->UpdateChildRotation(true);
+        this->UpdateChildRotation();
         auto delta = m_localScale / val;
 
-        this->UpdateChildScale(delta, true);
+        this->UpdateChildScale(delta);
     }
     else { // global
         this->SetScale(m_globalScale + val, true);

@@ -17,6 +17,8 @@
 #include <Math/Vector3.h>
 #include <Math/Quaternion.h>
 
+#include <Types/SafePointer.h>
+
 namespace Framework::Helper {
     using namespace Framework::Helper::Math;
 
@@ -131,26 +133,26 @@ namespace Framework::Helper {
     public:
         void UpdateDefParentDir();
 
-        void UpdateChildPosition(Vector3 delta, bool pivot);
-        void UpdateChildScale(Vector3 delta, bool pivot);
+        void UpdateChildPosition(Vector3 delta);
+        void UpdateChildScale(Vector3 delta);
         //void UpdateChildRotation(glm::vec3 delta, bool pivot);
-        void UpdateChildRotation(bool pivot);
+        void UpdateChildRotation();
     public:
         inline static const Vector3 right   = Vector3(1, 0, 0);
         inline static const Vector3 up      = Vector3(0, 1, 0);
         inline static const Vector3 forward = Vector3(0, 0, 1);
     private:
-        Vector3         m_localPosition              = { 0, 0, 0 };
-        Vector3         m_localRotation              = { 0, 0, 0 };
-        Vector3         m_localScale                 = { 1, 1, 1 };
+        Vector3                    m_localPosition              = { 0, 0, 0 };
+        Vector3                    m_localRotation              = { 0, 0, 0 };
+        Vector3                    m_localScale                 = { 1, 1, 1 };
 
-        Vector3         m_globalPosition             = { 0, 0, 0 };
-        Vector3         m_globalRotation             = { 0, 0, 0 };
-        Vector3         m_globalScale                = { 1, 1, 1 };
+        Vector3                    m_globalPosition             = { 0, 0, 0 };
+        Vector3                    m_globalRotation             = { 0, 0, 0 };
+        Vector3                    m_globalScale                = { 1, 1, 1 };
 
         //!Vector3         m_defParentDir               = forward;
-        GameObject*     m_gameObject                 = nullptr;
-        Transform*      m_parent                     = nullptr;
+        GameObject*                m_gameObject                 = nullptr;
+        Transform*                 m_parent                     = nullptr;
     };
 }
 

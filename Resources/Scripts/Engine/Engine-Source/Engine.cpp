@@ -15,8 +15,9 @@
 #include <iostream>
 #include <ctime>
 
-GameObject* g_camera = nullptr;
-Scene*      g_scene  = nullptr;
+SafePtr<Scene> g_scene;
+SafePtr<GameObject> g_camera;
+
 Skybox*     g_skybox = nullptr;
 Window*     g_window = nullptr;
 
@@ -29,9 +30,12 @@ EXTERN void Start() {
     g_scene = Scene::New("New scene");
     engine->SetScene(g_scene);
 
+    Vector2 size = { 1366, 768 };
+
     g_window = engine->GetWindow();
     g_window->SetGUIEnabled(false);
-    g_window->Resize(848, 480);
+    //g_window->Resize(848, 480);
+    g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
@@ -50,6 +54,8 @@ EXTERN void Start() {
 
     auto fbx_meshes = Mesh::Load("Miku.fbx");
 
+    auto miku = g_scene->Instance("Miku");
+
     for (uint32_t i = 0; i < 6; i++) {
         Mesh* mesh = fbx_meshes[i];
         Texture* texture = textures[i];
@@ -57,8 +63,10 @@ EXTERN void Start() {
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->GetMaterial()->SetDiffuse(texture);
-        GameObject *cube = g_scene->Instance(mesh->GetGeometryName());
+        auto cube = g_scene->Instance(mesh->GetGeometryName());
         cube->AddComponent(mesh);
+
+        miku->AddChild(cube);
     }
 
     /*Mesh* mesh = Mesh::Load("engine/cube.obj")[0];
@@ -76,7 +84,8 @@ EXTERN void Start() {
         }
     }*/
 
-    Camera* camera = Camera::Allocate(848, 480);
+
+    Camera* camera = Camera::Allocate(size.x, size.y);
     camera->SetDirectOutput(true);
     g_window->AddCamera(camera);
     g_camera = g_scene->Instance("Camera");
@@ -133,8 +142,10 @@ EXTERN void Update(float dt) {
 }
 
 EXTERN void Close() {
-    if (g_scene) {
+    g_scene.Lock();
+    g_scene.Free([](Scene* scene) {
         g_scene->Destroy();
         g_scene->Free();
-    }
+    });
+    g_scene.Unlock();
 }

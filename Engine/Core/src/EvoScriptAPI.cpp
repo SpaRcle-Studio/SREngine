@@ -61,27 +61,27 @@ namespace Framework {
 
     void API::RegisterEngine(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Engine", "Engine", {
-                { "volatile bool", "m_isCreate",  EvoScript::Private },
-                { "volatile bool", "m_isInit",    EvoScript::Private },
-                { "volatile bool", "m_isRun",     EvoScript::Private },
-                { "volatile bool", "m_isClose",   EvoScript::Private },
-                { "volatile bool", "m_exitEvent", EvoScript::Private },
-                { "void*",         "m_compiler",  EvoScript::Private },
-                { "Window*",       "m_window",    EvoScript::Private },
-                { "void*",         "m_render",    EvoScript::Private },
-                { "Scene*",        "m_scene",     EvoScript::Private },
-                { "void*",         "m_time",      EvoScript::Private },
-                { "void*",         "m_physics",   EvoScript::Private },
-        }, { "Window.h" });
+                { "volatile bool",  "m_isCreate",  EvoScript::Private },
+                { "volatile bool",  "m_isInit",    EvoScript::Private },
+                { "volatile bool",  "m_isRun",     EvoScript::Private },
+                { "volatile bool",  "m_isClose",   EvoScript::Private },
+                { "volatile bool",  "m_exitEvent", EvoScript::Private },
+                { "void*",          "m_compiler",  EvoScript::Private },
+                { "Window*",        "m_window",    EvoScript::Private },
+                { "void*",          "m_render",    EvoScript::Private },
+                { "SafePtr<Scene>", "m_scene",     EvoScript::Private },
+                { "void*",          "m_time",      EvoScript::Private },
+                { "void*",          "m_physics",   EvoScript::Private },
+        }, { "Window.h", "Types/SafePointer.h" });
         ESRegisterStaticMethod(Framework::, EvoScript::Public, generator, Engine, Get, Engine*, ())
         ESRegisterMethod(Framework::,       EvoScript::Private, generator, Engine, RegisterLibraries, bool, ())
         ESRegisterStaticMethod(Framework::, EvoScript::Public, generator, Engine, Reload, void, ())
         ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, GetTime, Time*, () const)
         ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, GetWindow, Window*, () const)
         ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, GetRender, Render*, () const)
-        ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, GetScene, Scene*, () const)
+        ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, GetScene, SafePtr<Scene>, () const)
         ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, IsRun, bool, () const)
-        ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, SetScene, bool, (Scene*))
+        ESRegisterMethod(Framework::,       EvoScript::Public, generator, Engine, SetScene, bool, (const SafePtr<Scene>&))
 
         generator->RegisterTypedef("Time", "Engine", "void");
         generator->RegisterTypedef("PhysEngine", "Engine", "void");
@@ -92,37 +92,46 @@ namespace Framework {
     }
 
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("HierarchyElem", "Scene", {
+                { "SafePtr<GameObject>",        "m_reference",   EvoScript::Private },
+                { "std::string",                "m_displayName", EvoScript::Private },
+                { "std::vector<HierarchyElem>", "m_children",    EvoScript::Private },
+        });
+
         generator->RegisterNewClass("Scene", "Scene", {
-                { "bool",                     "m_hierarchyIsChanged",  EvoScript::Private },
-                { "bool",                     "m_isDestroy",           EvoScript::Private },
-                { "std::mutex",               "m_mutex",               EvoScript::Private },
-                { "std::string",              "m_name",                EvoScript::Private },
-                { "std::set<GameObject*>",    "m_gameObjects",         EvoScript::Private },
-                { "uint32_t",                 "m_countUses",           EvoScript::Private },
-                { "std::vector<GameObject*>", "m_selectedGameObjects", EvoScript::Private },
-                { "std::mutex",               "m_selectedMutex",       EvoScript::Private },
-                { "uint32_t",                 "m_countSelected",       EvoScript::Private },
-                { "std::vector<GameObject*>", "m_rootObjects",         EvoScript::Private },
-                { "bool",                     "m_rootObjectsEmpty",    EvoScript::Private },
-        }, { "map", "string", "mutex", "vector", "stdint.h", "set", "GameObject.h" });
+                { "SafePtr<Scene>",                   "m_this",                EvoScript::Private },
+
+                { "bool",                             "m_isDestroy",           EvoScript::Private },
+
+                { "std::mutex",                       "m_mutex",               EvoScript::Private },
+                { "std::mutex",                       "m_displayListMutex",    EvoScript::Private },
+                { "std::mutex",                       "m_selectedMutex",       EvoScript::Private },
+
+                { "std::string",                      "m_name",                EvoScript::Private },
+                { "std::set<SafePtr<GameObject>>",    "m_gameObjects",         EvoScript::Private },
+
+                { "std::vector<SafePtr<GameObject>>", "m_selectedGameObjects", EvoScript::Private },
+
+                { "std::vector<SafePtr<GameObject>>", "m_rootObjects",         EvoScript::Private },
+                { "std::vector<HierarchyElem>",       "m_displayList",         EvoScript::Private },
+                { "bool",                             "m_displayListEnabled",  EvoScript::Private },
+        }, { "map", "string", "mutex", "vector", "stdint.h", "set", "GameObject.h", "Types/SafePointer.h" });
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Destroy, bool, ())
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Free, bool, ())
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetName, std::string, () const)
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetGameObjects, std::vector<GameObject*>, ())
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetRootGameObjects, std::vector<GameObject*>&, ())
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetGameObjects, std::vector<SafePtr<GameObject>>, ())
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetRootGameObjects, std::vector<SafePtr<GameObject>>&, ())
         //ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetCountUsesPoints, uint32_t, () const)
         //ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, SetIsChanged, void, (bool))
         //ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, IsChanged, bool, () const)
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, AddUsePoint, void, ())
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, RemoveUsePoint, bool, ())
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetSelected, std::vector<GameObject*>, () const)
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, GetSelected, SafePtr<GameObject>, ())
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, UnselectAll, void, ())
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, RemoveSelected, bool, (GameObject*))
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, AddSelected, void, (GameObject*))
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Instance,  GameObject*, (const std::string&))
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, FindByComponent,  GameObject*, (const std::string&))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, RemoveSelected, bool, (const SafePtr<GameObject>&))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, AddSelected, void, (const SafePtr<GameObject>&))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, Instance, SafePtr<GameObject>, (const std::string&))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Scene, FindByComponent,  SafePtr<GameObject>, (const std::string&))
 
-        ESRegisterStaticMethod(Helper::, EvoScript::Public, generator, Scene, New, Scene*, (const std::string&))
+        ESRegisterStaticMethod(Helper::, EvoScript::Public, generator, Scene, New, SafePtr<Scene>, (const std::string&))
     }
 
     void API::RegisterUtils(EvoScript::AddressTableGen *generator) {
@@ -272,20 +281,22 @@ namespace Framework {
 
     void API::RegisterGameObject(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("GameObject", "GameObject", {
-                { "bool",                     "m_isSelect",   EvoScript::Private },
-                { "GameObject*",              "m_parent",     EvoScript::Private },
-                { "std::vector<GameObject*>", "m_children",   EvoScript::Private },
-                { "uint32_t",                 "m_countChild", EvoScript::Private },
-                { "bool",                     "m_isDestroy",  EvoScript::Private },
-                { "std::mutex",               "m_mutex",      EvoScript::Private },
-                { "Scene*",                   "m_scene",      EvoScript::Private },
-                { "Transform*",               "m_transform",  EvoScript::Private },
-                { "std::vector<Component*>",  "m_components", EvoScript::Private },
-                { "std::string",              "m_name",       EvoScript::Private },
-                { "std::string",              "m_tag",        EvoScript::Private },
-        }, { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Transform.h" });
+                { "SafePtr<GameObject>",              "m_this",   EvoScript::Private },
+                { "bool",                             "m_isSelect",   EvoScript::Private },
+                { "GameObject*",                      "m_parent",     EvoScript::Private },
+                { "std::vector<SafePtr<GameObject>>", "m_children",   EvoScript::Private },
+                { "uint32_t",                         "m_countChild", EvoScript::Private },
+                { "bool",                             "m_isDestroy",  EvoScript::Private },
+                { "std::mutex",                       "m_mutex",      EvoScript::Private },
+                { "Scene*",                           "m_scene",      EvoScript::Private },
+                { "Transform*",                       "m_transform",  EvoScript::Private },
+                { "std::vector<Component*>",          "m_components", EvoScript::Private },
+                { "std::string",                      "m_name",       EvoScript::Private },
+                { "std::string",                      "m_tag",        EvoScript::Private },
+        }, { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Transform.h", "Types/SafePointer.h" });
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, AddComponent, bool, (Component*))
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, AddChild, bool, (const SafePtr<GameObject>&))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetTransform, Transform*, ())
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetComponent, Component*, (const std::string&))
 
@@ -638,7 +649,7 @@ namespace Framework {
                 { "void*",                      "m_env",         EvoScript::Private },
                 { "int32_t",                    "m_pipeLine",    EvoScript::Private },
                 { "std::map<uint32_t, void*>", "m_descriptors", EvoScript::Private },
-        }, { "cstdint", "Math/Vector2.h", "map" });
+        }, { "cstdint", "Math/Vector2.h", "map", "Scene.h" });
         ESRegisterStaticMethod(GUI::, EvoScript::Public, generator, GUISystem, Get, GUISystem*, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginDockSpace, void, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndDockSpace, void, ())
@@ -647,6 +658,8 @@ namespace Framework {
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, (const char*))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndChildWindow, void, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawTexture, void, (Vector2, Vector2, uint32_t, bool))
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawHierarchy, void, (SafePtr<Scene>))
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawInspector, void, (SafePtr<Scene>))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, GetWindowSize, Vector2, () const)
     }
 

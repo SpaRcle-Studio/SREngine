@@ -15,6 +15,8 @@
 #include <FileSystem/FileSystem.h>
 #include <Core/PhysEngine.h>
 
+#include <Types/SafePointer.h>
+
 #include <EvoScriptAPI.h>
 
 namespace Framework {
@@ -41,7 +43,7 @@ namespace Framework {
         Scripting::Compiler*    m_compiler              = nullptr;
         Graphics::Window*       m_window                = nullptr;
         Graphics::Render*       m_render                = nullptr;
-        Helper::Scene*          m_scene                 = nullptr;
+        Types::SafePtr<Scene>   m_scene                 = Types::SafePtr<Scene>(nullptr);
 
         Helper::Types::Time*    m_time                  = nullptr;
 
@@ -54,7 +56,7 @@ namespace Framework {
             EventManager::Push(EventManager::Event::Exit);
         }
 
-        bool SetScene(Scene* scene) { // TODO: add thread security!
+        bool SetScene(const Types::SafePtr<Scene>& scene) { // TODO: add thread security!
             if (scene == m_scene) {
                 Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
                 return false;
@@ -65,7 +67,7 @@ namespace Framework {
         }
 
         [[nodiscard]] inline Helper::Types::Time* GetTime() const noexcept { return this->m_time; }
-        [[nodiscard]] inline Scene* GetScene() const noexcept { return m_scene; }
+        [[nodiscard]] inline Types::SafePtr<Scene> GetScene() const noexcept { return m_scene; }
         [[nodiscard]] inline Graphics::Window* GetWindow() const noexcept { return m_window; }
         [[nodiscard]] inline Graphics::Render* GetRender() const noexcept { return m_render; }
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }

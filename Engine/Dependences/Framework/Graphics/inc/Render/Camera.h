@@ -51,6 +51,7 @@ namespace Framework::Graphics {
     public:
         void OnRotate(Math::Vector3 newValue) noexcept override;
         void OnMove(Math::Vector3 newValue) noexcept override;
+        void OnReady(bool ready) override;
     public:
         bool DrawOnInspector() override;
 

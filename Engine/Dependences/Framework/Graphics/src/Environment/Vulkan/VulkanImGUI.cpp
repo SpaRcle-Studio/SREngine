@@ -204,7 +204,11 @@ VkCommandBuffer Framework::Graphics::VulkanTypes::VkImGUI::Render(uint32_t frame
     m_renderPassBI.framebuffer = m_frameBuffs[frame];
     vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
-    ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_cmdBuffs[frame]);
+    if (auto drawData = ImGui::GetDrawData())
+        ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+    else
+        VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+
     vkCmdEndRenderPass(m_cmdBuffs[frame]);
     vkEndCommandBuffer(m_cmdBuffs[frame]);
 

@@ -6,8 +6,10 @@
 
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <imgui_stdlib.h>
 
 #include <GUI/GUISystem.h>
+#include <Input/InputSystem.h>
 
 void Framework::Graphics::GUI::GUISystem::BeginDockSpace() {
     const float toolbarSize = 0;
@@ -115,4 +117,156 @@ void Framework::Graphics::GUI::GUISystem::DrawImage(
     }
     else
         window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
+}
+
+void Framework::Graphics::GUI::GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
+    m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
+
+    if (scene.LockIfValid()) {
+        unsigned long i = 0;
+
+        if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
+
+            scene->ForEachRootObjects([&i, this](Helper::Types::SafePtr<Helper::GameObject> gm) {
+                if (gm->HasChildren()) {
+                    bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                                  g_node_flags_with_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                                  "%s", gm->GetName().c_str());
+                    CheckSelected(gm);
+
+                    if (open)
+                        this->DrawChild(gm);
+                } else {
+                    ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                      g_node_flags_without_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                      "%s", gm->GetName().c_str());
+
+                    CheckSelected(gm);
+                }
+                i++;
+            });
+            ImGui::TreePop();
+            ImGui::PopStyleVar();
+        }
+
+        scene.Unlock();
+    }
+}
+
+void Framework::Graphics::GUI::GUISystem::DrawChild(Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> root) {
+    unsigned long i = 0;
+
+    root->ForEachChild([&i, this](Helper::Types::SafePtr<Helper::GameObject> child){
+        if (child->HasChildren()) {
+            bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                          g_node_flags_with_child |
+                                          (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                          "%s", child->GetName().c_str()
+            );
+
+            CheckSelected(child);
+
+            if (open)
+                DrawChild(child);
+        } else {
+            ImGui::TreeNodeEx((void *) (intptr_t) i,
+                              g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                              "%s", child->GetName().c_str()
+            );
+
+            CheckSelected(child);
+        }
+
+        i++;
+    });
+
+    ImGui::TreePop();
+}
+
+void Framework::Graphics::GUI::GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
+    Helper::Types::SafePtr<Helper::GameObject> gameObject;
+    if (scene.LockIfValid()) {
+        gameObject = scene->GetSelected();
+        scene.Unlock();
+    }
+
+    if (gameObject.LockIfValid()) {
+        if (bool v = gameObject->IsActive(); ImGui::Checkbox("Enabled", &v))
+            gameObject->SetActive(v);
+
+        std::string gm_name = gameObject->GetName();
+        if (ImGui::InputText("Name", &gm_name))
+            gameObject->SetNameFromInspector(gm_name);
+
+        ImGui::Separator();
+        DrawTextOnCenter("Transform");
+
+        auto position = gameObject->GetTransform()->GetPosition().ToGLM();
+        auto rotation = gameObject->GetTransform()->GetRotation().ToGLM();
+        auto scale    = gameObject->GetTransform()->GetScale().ToGLM();
+
+        ImGui::Text("[Global]");
+
+        if (ImGui::InputFloat3("G Tr", &position[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
+            gameObject->GetTransform()->SetPosition(position);
+
+        if (ImGui::InputFloat3("G Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
+            gameObject->GetTransform()->SetRotation(rotation);
+
+        if (ImGui::InputFloat3("G Sc", &scale[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
+            gameObject->GetTransform()->SetScale(scale);
+
+        ImGui::Text("[Local]");
+
+        position = gameObject->GetTransform()->GetPosition(true).ToGLM();
+        rotation = gameObject->GetTransform()->GetRotation(true).ToGLM();
+        scale    = gameObject->GetTransform()->GetScale(true).ToGLM();
+
+        if (ImGui::InputFloat3("L Tr", &position[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            gameObject->GetTransform()->SetLocalPosition(position);
+
+        if (ImGui::InputFloat3("L Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            gameObject->GetTransform()->SetLocalRotation(rotation);
+
+        if (ImGui::InputFloat3("L Sc", &scale[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            gameObject->GetTransform()->SetLocalScale(position);
+
+        /*
+        ImGui::Text("[Parent direction]");
+
+        std::vector<Framework::Helper::Component *> comps = gameObject->GetComponents();
+        for (Framework::Helper::Component *comp : comps) {
+            std::string name = comp->GetComponentName();
+
+            if (ImGui::CollapsingHeader(name.c_str()))
+                comp->DrawOnInspector();
+        }
+
+        ImGui::Separator();
+
+        ImGui::InvisibleButton("void", ImVec2(ImGui::GetCurrentWindow()->Size.x, ImGui::GetCurrentWindow()->Size.y - ImGui::GetItemRectMin().y));
+
+        if (ImGui::BeginPopupContextItem("InspectorMenu", 1)) {
+            if (ImGui::BeginMenu("Add component")) {
+                for (const auto& a : Component::GetComponentsNames()) {
+                    if (ImGui::MenuItem(a.c_str()))
+                        gameObject->AddComponent(Component::CreateComponentOfName(a));
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndPopup();
+        }*/
+
+        gameObject.Unlock();
+    }
+}
+
+void Framework::Graphics::GUI::GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) {
+    if (ImGui::IsItemClicked()) {
+        if (!m_shiftPressed && gm->GetScene().Valid())
+            gm->GetScene()->UnselectAll();
+
+        gm->SetSelect(true);
+    }
 }

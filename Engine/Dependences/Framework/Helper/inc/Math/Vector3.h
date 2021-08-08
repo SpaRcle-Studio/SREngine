@@ -273,7 +273,16 @@ namespace Framework::Helper::Math {
         [[nodiscard]] inline glm::vec3 ToGLM() const noexcept {
             return glm::vec3(x,y,z);
         }
+
+        inline static Vector3 FixEulerAngles(const Vector3& vec3) {
+            return Vector3(
+                    vec3.x > 0 ? vec3.x - (Unit)CMP_BIG_EPSILON : vec3.x + (Unit)CMP_BIG_EPSILON,
+                    vec3.y > 0 ? vec3.y - (Unit)CMP_BIG_EPSILON : vec3.y + (Unit)CMP_BIG_EPSILON,
+                    vec3.z > 0 ? vec3.z - (Unit)CMP_BIG_EPSILON : vec3.z + (Unit)CMP_BIG_EPSILON);
+        }
     };
+
+    static inline const Vector3 cmp_epsilon_v3 = Vector3((Unit)CMP_EPSILON, (Unit)CMP_EPSILON, (Unit)CMP_EPSILON);
 }
 
 #endif //GAMEENGINE_VECTOR3_H

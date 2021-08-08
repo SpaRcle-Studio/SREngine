@@ -210,21 +210,29 @@ void Framework::Graphics::Types::Mesh3D::ReCalcModel() {
                 m_position.y,
                 m_position.z //-m_position.z
         });
+
+        modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
+                {
+                        m_rotation.x,//-m_rotation.x,
+                        -m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
+                        m_rotation.z // SEE: change form -m_rotation.z
+                }
+        ))));
     } else {
         modelMat = glm::translate(modelMat, {
                 m_position.x,
                 m_position.y,
                 m_position.z
         });
-    }
 
-    modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
-            {
-                    m_rotation.x,//-m_rotation.x,
-                    m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
-                    -m_rotation.z // SEE: change form -m_rotation.z
-            }
-    ))));
+        modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3(
+                {
+                        m_rotation.x,//-m_rotation.x,
+                        m_rotation.y,// + 180.f, //-m_rotation.y + 180.f,
+                        -m_rotation.z // SEE: change form -m_rotation.z
+                }
+        ))));
+    }
 
     modelMat = glm::scale(modelMat, m_inverse ? -m_scale.ToGLM() : m_scale.ToGLM());
 

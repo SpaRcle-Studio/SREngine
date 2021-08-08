@@ -18,16 +18,12 @@
 
 using namespace Framework::Helper;
 
-Framework::Helper::GameObject::GameObject(Scene* scene, std::string name, std::string tag) {
-    m_name = std::move(name);
-    m_tag = std::move(tag);
+Framework::Helper::GameObject::GameObject(const Types::SafePtr<Scene>& scene, std::string name, std::string tag) {
+    m_name  = std::move(name);
+    m_tag   = std::move(tag);
     m_scene = scene;
 
     m_transform = new Transform(this);
-}
-
-Framework::Helper::GameObject::~GameObject() {
-    delete this->m_transform;
 }
 
 bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *component) {  // TODO: add security multi-threading
@@ -47,7 +43,7 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
     return true;
 }
 
-Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const std::string& name) {  // TODO: add security multi-threading
+Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const std::string& name) {
     Component* find = nullptr;
 
     m_mutex.lock();
@@ -67,7 +63,7 @@ std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std:
     return std::vector<Component *>();
 }
 
-void Framework::Helper::GameObject::Destroy() { // TODO: remove from scene!
+void Framework::Helper::GameObject::DestroyFromScene() {
     if (m_isDestroy){
         Helper::Debug::Error("GameObject::Destroy() : \"" +m_name + "\" game object already destroyed!");
         return;
@@ -81,8 +77,8 @@ void Framework::Helper::GameObject::Destroy() { // TODO: remove from scene!
     for (Component* component : m_components)
         component->OnDestroyGameObject();
 
-    for (auto gm : m_children)
-        gm->Destroy();
+    for (const auto& gm : m_children)
+        gm->DestroyFromScene();
 
     m_mutex.unlock();
 
@@ -124,7 +120,7 @@ void GameObject::UpdateComponentsScale() {
         //component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
 }
 
-bool GameObject::AddChild(GameObject *child) { // TODO: add security multi-threading
+bool GameObject::AddChild(const Types::SafePtr<GameObject>& child) { // TODO: add security multi-threading
     //!auto find = m_children.find(child);
     //!if (find!=m_children.end()){
     if (Contains(child)) {
@@ -139,43 +135,20 @@ bool GameObject::AddChild(GameObject *child) { // TODO: add security multi-threa
     this->m_children.push_back(child);
     this->m_countChild++;
 
-    /* Update child transforms with parent */
+    /* TODO: Update child transforms with parent */
 
-    //TODO
-    {
-        //!child->m_transform->m_localPosition = child->m_transform->m_globalPosition - this->m_transform->m_globalPosition;
-        //std::cout << glm::to_string(child->m_transform->m_localPosition) << std::endl;
-        //!child->UpdateComponentsPosition();
-        //!child->m_transform->UpdateChildPosition(this->m_transform, glm::vec3(0,0,0)); //TODO!!!!!!!!!
-    }
-
-    //child->m_transform->m_childDefRotation = child->m_transform->GetNormalizedAngleOfPoint(m_transform->GetPosition());
-
-    //child->m_transform->UpdateChildRotation(this->m_transform);
-    //child->m_transform->UpdateChildScale(this->m_transform);
-
-    //child->m_transform->Rotate();
-    //child->m_transform->Scaling();
-
-    this->m_scene->SetIsChanged(true);
+    this->m_scene->OnGameObjectNameChanged();
 
     return true;
 }
 
 void GameObject::SetName(const std::string &name) {
-    ret:
-    if (m_scene->GetCountUsesPoints() > 0)
-        goto ret;
-    else
-        m_scene->AddUsePoint();
-
     this->m_name = name;
-
-    m_scene->RemoveUsePoint();
+    this->m_scene->OnGameObjectNameChanged();
 }
 
-bool GameObject::Contains(GameObject *child) {  // TODO: add security multi-threading
-    for (auto a : m_children){
+bool GameObject::Contains(const Types::SafePtr<GameObject>& child) {  // TODO: add security multi-threading
+    for (const auto& a : m_children){
         if (a == child)
             return true;
     }
@@ -189,60 +162,46 @@ void GameObject::SetSelect(bool value) {
         m_isSelect = value;
 
         if (m_isSelect)
-            m_scene->AddSelected(this);
+            m_scene->AddSelected(m_this);
         else
-           m_scene->RemoveSelected(this);
+           m_scene->RemoveSelected(m_this);
     }
 }
 
 std::string GameObject::GetName() noexcept  { // TODO: UNSAFE
-    /*ret:
-    if (m_scene->GetCountUsesPoints() > 0)
-        goto ret;
-    else
-        m_scene->AddUsePoint();
-
-    std::string str = m_name;
-
-    m_scene->RemoveUsePoint();
-
-    return str;*/
     return this->m_name;
 }
 
 std::vector<Component *> GameObject::GetComponents() { // TODO: MAYBE UNSAFE
     std::vector<Component *> comps = std::vector<Component *>();
 
-    m_mutex.lock();
+    //m_mutex.lock();
 
     comps = m_components;
 
-    m_mutex.unlock();
+    //m_mutex.unlock();
 
     return comps;
 }
 
 void GameObject::SetNameFromInspector(const std::string &name) {
-    if (m_scene->GetCountUsesPoints() > 1) {
-        Debug::Error("GameObject::SetNameFromInspector(): count uses more 1, something went wrong...");
-        return;
-    }
-
-    m_scene->AddUsePoint();
-
     this->m_name = name;
 
-    m_scene->RemoveUsePoint();
+    this->m_scene->OnGameObjectNameChanged();
 }
 
 void GameObject::SetParent(GameObject *gm)  {
     this->m_parent = gm;
     this->m_transform->OnParentSet(gm->m_transform);
+
+    this->m_scene->OnGameObjectNameChanged();
 }
 
 void GameObject::RemoveParent(GameObject *gm) {
     this->m_transform->OnParentRemove(gm->m_transform);
     this->m_parent = nullptr;
+
+    this->m_scene->OnGameObjectNameChanged();
 }
 
 bool GameObject::ContainsComponent(const std::string &name) {
@@ -256,4 +215,64 @@ bool GameObject::ContainsComponent(const std::string &name) {
 
     m_mutex.unlock();
     return false;
+}
+
+void GameObject::Free() {
+    delete this;
+}
+
+GameObject::~GameObject() {
+    delete m_transform;
+}
+
+void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
+    m_mutex.lock();
+
+    for (auto child : m_children)
+        if (child.LockIfValid()) {
+            fun(child);
+            child.Unlock();
+        }
+
+    m_mutex.unlock();
+}
+
+void GameObject::SetActive(bool value) {
+    if (value != m_isActive)
+        m_isActive = value;
+    else
+        return;
+
+    m_mutex.lock();
+
+    for (auto child : m_children)
+        if (child.LockIfValid()) {
+            child->OnPrentSetActive(value);
+            child.Unlock();
+        }
+
+    UpdateComponentsEnabled();
+
+    m_mutex.unlock();
+}
+
+void GameObject::OnPrentSetActive(bool value) {
+    m_mutex.lock();
+
+    m_isParentActive = value;
+
+    for (auto child : m_children)
+        if (child.LockIfValid()) {
+            child->OnPrentSetActive(value);
+            child.Unlock();
+        }
+
+    UpdateComponentsEnabled();
+
+    m_mutex.unlock();
+}
+
+void GameObject::UpdateComponentsEnabled() {
+    for (auto comp : m_components)
+        comp->SetActive(m_isParentActive && m_isActive);
 }

@@ -12,6 +12,8 @@
 #include <map>
 #include <glm/glm.hpp>
 
+#include <Types/SafePointer.h>
+
 namespace Framework {
     class API;
 }
@@ -25,7 +27,7 @@ namespace Framework::Helper {
         friend class Transform;
         friend class ::Framework::API;
     private:
-        GameObject(Scene* scene, std::string name, std::string tag = "Untagged");
+        GameObject(const Types::SafePtr<Scene>& scene, std::string name, std::string tag = "Untagged");
         ~GameObject();
     private:
         void UpdateComponents();
@@ -33,11 +35,16 @@ namespace Framework::Helper {
         void UpdateComponentsRotation();
         void UpdateComponentsScale();
     private:
-        void Destroy();
+        void DestroyFromScene();
+        void Free();
     public:
-        [[nodiscard]] Scene* GetScene() const noexcept { return this->m_scene; }
+        [[nodiscard]] Types::SafePtr<Scene> GetScene() const noexcept { return this->m_scene; }
         Transform* GetTransform() noexcept { return this->m_transform; }
     public:
+        void SetThis(const Types::SafePtr<GameObject>& _this) {
+            m_this = _this;
+        }
+        void ForEachChild(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetParent(GameObject* gm);
         void RemoveParent(GameObject* gm);
         void SetName(const std::string& name);
@@ -47,34 +54,44 @@ namespace Framework::Helper {
         std::vector<Component*> GetComponents(const std::string& name);
         std::vector<Component*> GetComponents();
         bool AddComponent(Component* component);
-        bool AddChild(GameObject* child);
+        bool AddChild(const Types::SafePtr<GameObject>& child);
         //TODO: Add remove child
-        [[nodiscard]] inline std::vector<GameObject*> GetChildren() const noexcept { return this->m_children; }
-        [[nodiscard]] inline std::vector<GameObject*>& GetChildrenRef() noexcept { return this->m_children; }
-        [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
+        [[nodiscard]] inline std::vector<Types::SafePtr<GameObject>> GetChildren() const noexcept { return this->m_children; }
+        [[nodiscard]] inline std::vector<Types::SafePtr<GameObject>>& GetChildrenRef() noexcept { return this->m_children; }
+        [[nodiscard]] GameObject* GetParent() const noexcept { return this->m_parent; }
         [[nodiscard]] std::string GetName() noexcept;
         [[nodiscard]] inline bool HasChildren() const noexcept { return m_countChild > 0; }
         [[nodiscard]] inline bool IsSelect() const noexcept { return this->m_isSelect; }
-        bool Contains(GameObject* child);
+        bool Contains(const Types::SafePtr<GameObject>& child);
         bool ContainsComponent(const std::string& name);
+        [[nodiscard]] bool IsActive() const { return m_isActive && m_isParentActive; }
         void SetSelect(bool value);
+        void SetActive(bool value);
     private:
-        bool                     m_isSelect      = false;
-        GameObject*              m_parent        = nullptr;
-        std::vector<GameObject*> m_children      = std::vector<GameObject*>();
-        uint32_t                 m_countChild    = 0;
+        void OnPrentSetActive(bool value);
+        void UpdateComponentsEnabled();
+    private:
+        Types::SafePtr<GameObject>              m_this           = Types::SafePtr<GameObject>();
 
-        bool                     m_isDestroy     = false;
+        bool                                    m_isActive       = true;
+        bool                                    m_isParentActive = true;
 
-        std::mutex               m_mutex         = std::mutex();
+        bool                                    m_isSelect       = false;
+        GameObject*                             m_parent         = nullptr;
+        std::vector<Types::SafePtr<GameObject>> m_children       = std::vector<Types::SafePtr<GameObject>>();
+        uint32_t                                m_countChild     = 0;
 
-        Scene*                   m_scene         = nullptr;
-        Transform*               m_transform     = nullptr;
+        bool                                    m_isDestroy      = false;
 
-        std::vector<Component*>  m_components    = std::vector<Component*>();
+        std::mutex                              m_mutex          = std::mutex();
 
-        std::string              m_name          = "Unnamed";
-        std::string              m_tag           = "None";
+        Types::SafePtr<Scene>                   m_scene          = Types::SafePtr<Scene>();
+        Transform*                              m_transform      = nullptr;
+
+        std::vector<Component*>                 m_components     = std::vector<Component*>();
+
+        std::string                             m_name           = "Unnamed";
+        std::string                             m_tag            = "None";
     };
 }
 

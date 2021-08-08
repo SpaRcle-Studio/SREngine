@@ -19,7 +19,8 @@
 void Framework::Graphics::GUI::GUIWindow::DrawChild(Framework::Helper::GameObject *root) noexcept {
     unsigned long i = 0;
 
-    for (Helper::GameObject* child : root->GetChildrenRef()) {
+    /*
+    for (auto child : root->GetChildrenRef()) {
         if (child->HasChildren()) {
             bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
                                           g_node_flags_with_child |
@@ -44,11 +45,13 @@ void Framework::Graphics::GUI::GUIWindow::DrawChild(Framework::Helper::GameObjec
     }
 
     ImGui::TreePop();
+     */
 }
 
 void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::Scene *scene) noexcept {
     auto root = scene->GetRootGameObjects();
 
+    /*
     unsigned long i = 0;
 
     GUIWindow::g_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
@@ -56,7 +59,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::Scene
     if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
 
-        for (Helper::GameObject* obj : root){
+        for (auto obj : root){
             if (obj->HasChildren()) {
                 bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
                                               g_node_flags_with_child     | (obj->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
@@ -79,7 +82,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::Scene
 
         ImGui::TreePop();
         ImGui::PopStyleVar();
-    }
+    }*/
 }
 
 void Framework::Graphics::GUI::GUIWindow::CheckSelected(Framework::Helper::GameObject *gm) noexcept {

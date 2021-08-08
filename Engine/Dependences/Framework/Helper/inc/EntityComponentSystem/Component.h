@@ -11,6 +11,7 @@
 #include <macros.h>
 #include <mutex>
 #include <Debug.h>
+#include <Types/SafePointer.h>
 
 namespace Framework {
     class API;
@@ -88,15 +89,15 @@ namespace Framework::Helper {
         inline static std::map<std::string, std::function<Component*(void)>> g_compList =
                 std::map<std::string, std::function<Component*(void)>>();
     protected:
-        bool m_isSelected        = false;
+        bool m_isSelected          = false;
 
         // Задается игровым объектом/движком, когда необходимо принудительно отключить
-        bool m_isActive          = true;
+        bool m_isActive            = true;
         // Задается скриптами и пользователем через инспектор
-        bool m_isEnabled         = true;
+        bool m_isEnabled           = true;
 
-        const std::string m_name = "Unknown";
-        GameObject* m_parent     = nullptr;
+        const std::string m_name   = "Unknown";
+        GameObject*       m_parent = nullptr;
     public:
         virtual bool DrawOnInspector() { return false; }
 

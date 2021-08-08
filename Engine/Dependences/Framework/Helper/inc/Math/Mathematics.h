@@ -22,6 +22,7 @@
 #define RadToDegrees(angle) angle*180/M_PI
 
 #define CMP_EPSILON 0.00001
+#define CMP_BIG_EPSILON 0.001
 #define CMP_EPSILON2 (CMP_EPSILON * CMP_EPSILON)
 #define UNIT_EPSILON 0.00001
 

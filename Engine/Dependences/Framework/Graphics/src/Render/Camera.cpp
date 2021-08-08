@@ -264,4 +264,8 @@ void Framework::Graphics::Camera::PoolEvents()  {
     m_isEnableDirectOut.first = m_isEnableDirectOut.second;
 }
 
+void Framework::Graphics::Camera::OnReady(bool ready) {
+    this->m_env->SetBuildState(false);
+}
+
 

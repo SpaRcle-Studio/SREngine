@@ -101,7 +101,7 @@ namespace Framework::Graphics {
                 case WM_MOUSEWHEEL: {
                     auto wheel = GET_WHEEL_DELTA_WPARAM(wParam);
 
-                    this->m_callback_scroll(this, 0.0, (double)wheel / 10.0);
+                    this->m_callback_scroll(this, 0.0, (double)wheel / 22.0 / 5.0);
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }

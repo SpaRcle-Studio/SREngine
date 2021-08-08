@@ -231,18 +231,20 @@ void Framework::Graphics::Window::Thread() {
 
                         Helper::Debug::Info("Window::Thread() : re-build render...");
 
-                        if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
-                            m_env->BeginRender();
-                            {
-                                this->m_env->SetViewport();
-                                this->m_env->SetScissor();
+                        if (m_cameras[0]->IsReady()) {
+                            if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
+                                m_env->BeginRender();
+                                {
+                                    this->m_env->SetViewport();
+                                    this->m_env->SetScissor();
 
-                                this->m_render->DrawGeometry();
-                                this->m_render->DrawSkybox();
+                                    this->m_render->DrawGeometry();
+                                    this->m_render->DrawSkybox();
+                                }
+                                m_env->EndRender();
+
+                                m_cameras[0]->GetPostProcessing()->EndGeometry();
                             }
-                            m_env->EndRender();
-
-                            m_cameras[0]->GetPostProcessing()->EndGeometry();
                         }
 
                         {

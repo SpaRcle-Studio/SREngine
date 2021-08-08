@@ -15,37 +15,57 @@
 #include <Debug.h>
 #include <stack>
 #include <set>
+#include <Types/SafePointer.h>
 
 namespace Framework::Helper {
     class Scene {
     private:
-        Scene()  = default;
+        Scene(const std::string& name) {
+            m_name = name;
+        }
         ~Scene() = default;
     public:
-        static Scene* New(const std::string& name);
-        static Scene* Load(const std::string& name);
+        static Types::SafePtr<Scene> New(const std::string& name);
+        static Types::SafePtr<Scene> Load(const std::string& name);
         bool Destroy();
         bool Free();
     private:
-        bool                     m_hierarchyIsChanged   = false;
-        bool                     m_isDestroy            = false;
-        std::mutex               m_mutex                = std::mutex();
-        std::string              m_name                 = "Unnamed";
-        std::set<GameObject*>    m_gameObjects          = std::set<GameObject*>();
-        uint32_t                 m_countUses            = 0;
+        Types::SafePtr<Scene>                   m_this                = Types::SafePtr<Scene>();
 
-        std::vector<GameObject*> m_selectedGameObjects  = std::vector<GameObject*>();
-        std::mutex               m_selectedMutex        = std::mutex();
-        uint32_t                 m_countSelected        = 0;
+        bool                                    m_isDestroy           = false;
+        bool                                    m_isHierarchyChanged  = false;
 
-        std::vector<GameObject*> m_rootObjects          = std::vector<GameObject*>();
-        bool                     m_rootObjectsEmpty     = true;
+        std::mutex                              m_mutex               = std::mutex();
+        std::mutex                              m_displayListMutex    = std::mutex();
+        std::mutex                              m_selectedMutex       = std::mutex();
+
+        std::string                             m_name                = "Unnamed";
+        std::set<Types::SafePtr<GameObject>>    m_gameObjects         = std::set<Types::SafePtr<GameObject>>();
+
+        std::set<Types::SafePtr<GameObject>>    m_selectedGameObjects = std::set<Types::SafePtr<GameObject>>();
+
+        std::vector<Types::SafePtr<GameObject>> m_rootObjects         = std::vector<Types::SafePtr<GameObject>>();
+        bool                                    m_displayListEnabled  = true;
     public:
+        void SetThis(const Types::SafePtr<Scene>& _this) {
+            m_this = _this;
+        }
+        Types::SafePtr<GameObject> GetSelected() {
+            if (auto size = m_selectedGameObjects.size(); size == 0 || size > 1)
+                return Types::SafePtr<GameObject>();
+            else {
+                m_selectedMutex.lock();
+                auto gameObject = *m_selectedGameObjects.begin();
+                m_selectedMutex.unlock();
+                return gameObject;
+            }
+        }
+        void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         [[nodiscard]] inline std::string GetName() const noexcept { return m_name; }
-        inline std::vector<GameObject*> GetGameObjects() { // TODO: OPTIMIZE
+        inline std::vector<Types::SafePtr<GameObject>> GetGameObjects() { // TODO: OPTIMIZE
             m_mutex.lock();
 
-            std::vector<GameObject*> v = std::vector<GameObject*>();
+            auto v = std::vector<Types::SafePtr<GameObject>>();
             v.reserve(m_gameObjects.size());
 
             for (auto& a : m_gameObjects)
@@ -56,39 +76,15 @@ namespace Framework::Helper {
             return v;
         }
 
-        std::vector<GameObject*>& GetRootGameObjects() noexcept;
-
-        [[nodiscard]] inline uint32_t GetCountUsesPoints() const noexcept { return this->m_countUses; }
-
-        inline void SetIsChanged(bool value) noexcept { this->m_hierarchyIsChanged = value; }
-        [[nodiscard]] inline bool IsChanged() const noexcept { return this->m_hierarchyIsChanged; }
-
-        inline void AddUsePoint() noexcept {
-            m_countUses++;
-        }
-        inline bool RemoveUsePoint() noexcept {
-            if (m_countUses == 0) {
-                Helper::Debug::Error("Scene::RemoveUsePoint() : count uses points is equal zero! Something went wrong...");
-                return false;
-            }
-
-            m_countUses--;
-
-            return true;
-        }
+        std::vector<Types::SafePtr<GameObject>>& GetRootGameObjects() noexcept;
     public:
-        [[nodiscard]] inline std::vector<GameObject*> GetSelected() const noexcept {
-            if (m_countSelected == 0)
-                return { };
-            else
-                return this->m_selectedGameObjects;
-        }
         void UnselectAll();
-        bool RemoveSelected(GameObject* gameObject);
-        void AddSelected(GameObject* gameObject);
+        bool RemoveSelected(const Types::SafePtr<GameObject>& gameObject);
+        void AddSelected(const Types::SafePtr<GameObject>& gameObject);
+        void OnGameObjectNameChanged();
     public:
-        GameObject* FindByComponent(const std::string& name);
-        GameObject* Instance(const std::string& name);
+        Types::SafePtr<GameObject> FindByComponent(const std::string& name);
+        Types::SafePtr<GameObject> Instance(const std::string& name);
         //bool RemoveGameObject(const GameObject* gameObject);
         //bool DestroyGameObject(GameObject* gameObject);
     };

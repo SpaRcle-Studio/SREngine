@@ -146,12 +146,12 @@ void Framework::Engine::Await() {
         m_compiler->PollEvents();
 
         if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::Enter)) {
-            Debug::System("The closing key combination was be detected!");
+            Debug::System("The closing key combination have been detected!");
             break;
         }
 
         if (m_exitEvent) {
-            Debug::System("The closing event was be received!");
+            Debug::System("The closing event have been received!");
             break;
         }
 
