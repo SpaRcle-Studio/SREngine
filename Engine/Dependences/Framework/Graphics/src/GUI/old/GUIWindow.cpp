@@ -286,7 +286,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
 
     glm::mat4 delta;
 
-    glm::mat4 mat = gameObject->GetTransform()->GetMatrix();
+    glm::mat4 mat = gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL);
 
     static float axis[3] = {0,0,0};
 
@@ -295,7 +295,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     static float old_rotate = 0.0;
     static float old_scale = 0.0;
 
-    if (ImGuizmo::Manipulate(
+    /*if (ImGuizmo::Manipulate(
             &camera->GetView()[0][0],
             &camera->GetProjection()[0][0],
             boundsAct ? ImGuizmo::BOUNDS : g_currentGuizmoOperation, g_currentGuizmoMode,
@@ -333,7 +333,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             old_scale = value;
         }
     }
-
+    */
     old_rotate = value;
 
     //ImGuizmo::ViewManipulate(cameraView, 10, ImVec2(0, 0), ImVec2(128, 128), 0x10101010);

@@ -11,6 +11,7 @@
 #include "../../Libraries/Window.h"
 #include "../../Libraries/Render.h"
 #include "../../Libraries/Input.h"
+#include "../../Libraries/GUISystem.h"
 
 #include <iostream>
 #include <ctime>
@@ -18,30 +19,44 @@
 SafePtr<Scene> g_scene;
 SafePtr<GameObject> g_camera;
 
-Skybox*     g_skybox = nullptr;
-Window*     g_window = nullptr;
+Skybox* g_skybox = nullptr;
+Window* g_window = nullptr;
 
 EXTERN void Awake() {
 
 }
 
-EXTERN void Start() {
-    Engine* engine = Engine::Get();
-    g_scene = Scene::New("New scene");
-    engine->SetScene(g_scene);
+void LoadTsumi() {
+    Render* render = Engine::Get()->GetRender();
 
-    Vector2 size = { 1366, 768 };
+    auto hair = Texture::Load("Tsumi/hair.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
+    //auto face = Texture::Load("Tsumi/face.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
+    render->RegisterTexture(hair);
+    //render->RegisterTexture(face);
 
-    g_window = engine->GetWindow();
-    g_window->SetGUIEnabled(false);
-    //g_window->Resize(848, 480);
-    g_window->Resize(size.x, size.y);
-    g_window->CentralizeWindow();
+    std::vector<Texture*> textures = {
+            hair,
+    };
 
-    g_skybox = Skybox::Load("Sea.jpg");
+    auto fbx_meshes = Mesh::Load("Tsumi.fbx");
+    auto tsumi = g_scene->Instance("Tsumi");
 
-    Render* render = engine->GetRender();
-    render->SetSkybox(g_skybox);
+    for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+        Mesh* mesh = fbx_meshes[i];
+        Texture* texture = textures[0];
+
+        render->RegisterMesh(mesh);
+        mesh->WaitCalculate();
+        mesh->GetMaterial()->SetDiffuse(texture);
+        auto object = g_scene->Instance(mesh->GetGeometryName());
+        object->AddComponent(mesh);
+
+        tsumi->AddChild(object);
+    }
+}
+
+void LoadMiku() {
+    Render* render = Engine::Get()->GetRender();
 
     auto body = Texture::Load("Miku_Bodytex_DM.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
     auto face = Texture::Load("Miku_Facetex_A.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
@@ -49,7 +64,7 @@ EXTERN void Start() {
     render->RegisterTexture(face);
 
     std::vector<Texture*> textures = {
-        body, body, face, face, body, body
+            body, body, face, face, body, body
     };
 
     auto fbx_meshes = Mesh::Load("Miku.fbx");
@@ -68,22 +83,26 @@ EXTERN void Start() {
 
         miku->AddChild(cube);
     }
+}
 
-    /*Mesh* mesh = Mesh::Load("engine/cube.obj")[0];
-    for (uint32_t i = 0; i < 1; i++) {
-        for (uint32_t j = 0; j < 1; j++) {
-            if (i != 0 && j != 0)
-                mesh = mesh->Copy();
+EXTERN void Start() {
+    Engine* engine = Engine::Get();
+    g_scene = Scene::New("New scene");
+    engine->SetScene(g_scene);
 
-            render->RegisterMesh(mesh);
-            mesh->WaitCalculate();
-            mesh->GetMaterial()->SetDiffuse(texture);
-            GameObject *cube = g_scene->Instance("Cube");
-            cube->AddComponent(mesh);
-            cube->GetTransform()->Translate(cube->GetTransform()->Forward() * 4.f * i + cube->GetTransform()->Right() * 4.f * j);
-        }
-    }*/
+    Vector2 size = { 1366, 768 }; // 848, 480
 
+    g_window = engine->GetWindow();
+    g_window->SetGUIEnabled(false);
+    g_window->Resize(size.x, size.y);
+    g_window->CentralizeWindow();
+
+    g_skybox = Skybox::Load("Sea.jpg");
+
+    Render* render = engine->GetRender();
+    render->SetSkybox(g_skybox);
+
+    LoadMiku();
 
     Camera* camera = Camera::Allocate(size.x, size.y);
     camera->SetDirectOutput(true);
@@ -115,6 +134,15 @@ void CameraMove(float dt) {
     }
 }
 
+void KeyCombinations() {
+    if (Input::GetKey(KeyCode::Q))
+        GUISystem::Get()->SetGuizmoTool(0);
+    else if (Input::GetKey(KeyCode::W))
+        GUISystem::Get()->SetGuizmoTool(1);
+    else if (Input::GetKey(KeyCode::E))
+        GUISystem::Get()->SetGuizmoTool(2);
+}
+
 double deltaTime = 0;
 unsigned int frames = 0;
 clock_t beginFrame;
@@ -135,6 +163,7 @@ EXTERN void FixedUpdate() {
     }
 
     CameraMove(0.1f);
+    KeyCombinations();
 }
 
 EXTERN void Update(float dt) {

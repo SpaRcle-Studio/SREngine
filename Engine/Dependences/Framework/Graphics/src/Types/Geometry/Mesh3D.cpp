@@ -62,7 +62,8 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
         this->m_hasErrors = true;
         m_mutex.unlock();
         return false;
-    }
+    } else
+        m_barycenter = Vertices::Barycenter(m_vertices);
 
     if (!this->m_env->CalculateIBO(m_IBO, m_indices.data(), sizeof(uint32_t), m_countIndices, m_VBO)) {
         Debug::Error("Mesh3D::Calculate() : failed calculate IBO \"" + m_geometry_name + "\" mesh!");
@@ -108,19 +109,20 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
     auto* copy = new Mesh3D(this->m_shader, mat, this->m_geometry_name);
 
     {
-        mat->m_mesh         = copy;
-        mat->m_bloom        = m_material->m_bloom;
-        mat->m_transparent  = m_material->m_transparent;
-        mat->m_color        = m_material->m_color;
+        mat->m_mesh        = copy;
+        mat->m_bloom       = m_material->m_bloom;
+        mat->m_transparent = m_material->m_transparent;
+        mat->m_color       = m_material->m_color;
     }
 
     copy->m_countVertices = m_countVertices;
     copy->m_countIndices  = m_countIndices;
     copy->m_useIndices    = m_useIndices;
 
-    copy->m_position = m_position;
-    copy->m_rotation = m_rotation;
-    copy->m_scale    = m_scale;
+    copy->m_barycenter = m_barycenter;
+    copy->m_position   = m_position;
+    copy->m_rotation   = m_rotation;
+    copy->m_scale      = m_scale;
 
     if (m_isCalculated) {
         if (m_VBO != -1) VBO_usages[m_VBO]++;
@@ -130,7 +132,7 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
         copy->m_IBO = m_IBO;
         copy->m_UBO = -1;
         copy->m_descriptorSet = -1;
-    }else{
+    } else {
         copy->m_vertices = m_vertices;
         copy->m_indices  = m_indices;
     }

@@ -6,6 +6,7 @@
 #define GAMEENGINE_VECTOR3_H
 
 #include <Math/Vector2.h>
+#include <Utils/GraphUtils.h>
 
 namespace Framework::Helper::Math {
     class Quaternion;
@@ -40,7 +41,23 @@ namespace Framework::Helper::Math {
             return { static_cast<Unit>(DEG(x)), static_cast<Unit>(DEG(y)), static_cast<Unit>(DEG(z)) };
         }
 
-         Vector3(glm::vec3 v) {
+        Vector3 ConvertAxis(Helper::Graph::PipeLine from, Helper::Graph::PipeLine to) const {
+            auto vector = *this;
+
+            if (from != to)
+                switch (from) {
+                    case Graph::PipeLine::OpenGL:
+                        break;
+                    case Graph::PipeLine::Vulkan:
+                        break;
+                    case Graph::PipeLine::DirectX:
+                        break;
+                }
+
+            return vector;
+        }
+
+        Vector3(glm::vec3 v) {
             x = v.x;
             y = v.y;
             z = v.z;

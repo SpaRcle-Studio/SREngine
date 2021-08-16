@@ -202,7 +202,7 @@ void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 a
 
     this->m_gameObject->UpdateComponentsRotation();
 
-    for (auto a: m_gameObject->m_children)
+    for (const auto& a: m_gameObject->m_children)
         a->m_transform->UpdateChildRotation();
 }
 
@@ -224,11 +224,11 @@ void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vec
     } else {
         Matrix4x4 rotate = Matrix4x4(0.0, (axis * value).InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
         Matrix4x4 matGlobal = Matrix4x4(0.0, m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1, 1, 1));
-        m_globalRotation = (rotate * matGlobal).GetQuat().EulerAngle().InverseAxis(2);
+        m_localRotation = m_globalRotation = (rotate * matGlobal).GetQuat().EulerAngle().InverseAxis(2);
 
         this->m_gameObject->UpdateComponentsRotation();
 
-        for (auto a: m_gameObject->m_children)
+        for (const auto& a: m_gameObject->m_children)
             a->m_transform->UpdateChildRotation();
     }
 }
@@ -408,33 +408,24 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 delta, glm::mat4 matrix, 
     //}
 }
 
-glm::mat4 Framework::Helper::Transform::GetMatrix(bool local) const noexcept  {
-
-    //glm::vec3 v = checkVec3Zero(m_globalRotation.EulerAngle().Degrees().ToGLM());
-    //modelMat *= mat4_cast(glm::quat(glm::radians(v)));
-
-    //glm::vec3 v = m_globalRotation.ToQuat().EulerAngle().ToGLM();
-    //modelMat *= mat4_cast(glm::quat(v));
-
-
-
-    if (local) {
-        glm::mat4 localMat = glm::translate(glm::mat4(1.0f), m_globalPosition.ToGLM());
-        //!localMat *= mat4_cast(m_globalRotation.InverseAxis(2).ToQuat().ToGLM());
-        localMat *= mat4_cast(m_localRotation.InverseAxis(2).ToQuat().ToGLM());
-        //localMat *= mat4_cast(glm::inverse(m_localRotation.ToQuat().ToGLM()));
-        //localMat *= mat4_cast(glm::inverse(m_localRotation.InverseAxis(2).Degrees().ToQuat().ToGLM()));
-        //localMat *= mat4_cast(glm::inverse(m_localRotation.InverseAxis(2).ToQuat(true).ToGLM()));
-        localMat = glm::scale(localMat, glm::vec3(1));
-        return localMat;
-    } else {
-        glm::mat4 globalMat = glm::translate(glm::mat4(1.0f), m_globalPosition.ToGLM());
-        globalMat *= mat4_cast(m_globalRotation.InverseAxis(2).ToQuat().ToGLM());
-        globalMat =  glm::scale(globalMat, glm::vec3(1));
-        return globalMat;
+glm::mat4 Framework::Helper::Transform::GetMatrix(Helper::Graph::PipeLine pipeLine, bool local) const noexcept {
+    switch (pipeLine) {
+        case Graph::PipeLine::OpenGL:
+            if (local) {
+                glm::mat4 localMat = glm::translate(glm::mat4(1.0f), m_globalPosition.InverseAxis(0).ToGLM());
+                localMat *= mat4_cast(m_localRotation.InverseAxis(1).ToQuat().ToGLM());
+                localMat = glm::scale(localMat, glm::vec3(1));
+                return localMat;
+            } else {
+                glm::mat4 globalMat = glm::translate(glm::mat4(1.0f), m_globalPosition.InverseAxis(0).ToGLM());
+                globalMat *= mat4_cast(m_globalRotation.InverseAxis(1).ToQuat().ToGLM());
+                globalMat = glm::scale(globalMat, glm::vec3(1));
+                return globalMat;
+            }
+        case Graph::PipeLine::Vulkan:
+        case Graph::PipeLine::DirectX:
+            return glm::mat4(1);
     }
-
-    //return glm::mat4(1);
 }
 
 void Framework::Helper::Transform::UpdateChildPosition(Vector3 delta) {

@@ -195,23 +195,31 @@ namespace Framework {
 
         generator->RegisterNewClass("Mesh", "Mesh", {
                 { "bool",                  "m_inverse",       EvoScript::Protected },
+
                 { "void*",                 "m_env",           EvoScript::Protected }, // TODO
                 { "int",                   "m_pipeline",      EvoScript::Protected },
+
                 { "std::mutex",            "m_mutex",         EvoScript::Protected },
+
                 { "std::string",           "m_geometry_name", EvoScript::Protected },
                 { "void*",                 "m_shader",        EvoScript::Protected },
                 { "void*",                 "m_render",        EvoScript::Protected },
                 { "Material*",             "m_material",      EvoScript::Protected },
+
                 { "volatile bool",         "m_hasErrors",     EvoScript::Protected },
                 { "volatile bool",         "m_isCalculated",  EvoScript::Protected },
+
                 { "int32_t",               "m_descriptorSet", EvoScript::Protected },
                 { "int32_t",               "m_VBO",           EvoScript::Protected },
                 { "int32_t",               "m_IBO",           EvoScript::Protected },
                 { "int32_t",               "m_UBO",           EvoScript::Protected },
+
                 { "std::vector<uint32_t>", "m_indices",       EvoScript::Protected },
                 { "uint32_t",              "m_countVertices", EvoScript::Protected },
                 { "uint32_t",              "m_countIndices",  EvoScript::Protected },
                 { "bool",                  "m_useIndices",    EvoScript::Protected },
+
+                { "Vector3",               "m_barycenter",    EvoScript::Protected },
                 { "Vector3",               "m_position",      EvoScript::Protected },
                 { "Vector3",               "m_rotation",      EvoScript::Protected },
                 { "Vector3",               "m_scale",         EvoScript::Protected },
@@ -645,11 +653,11 @@ namespace Framework {
     }
 
     void API::RegisterGUISystem(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("GUISystem", "GUISystem", {
+        generator->RegisterNewClass("GUISystem", "GUISystem", { // TODO
                 { "void*",                      "m_env",         EvoScript::Private },
                 { "int32_t",                    "m_pipeLine",    EvoScript::Private },
                 { "std::map<uint32_t, void*>", "m_descriptors", EvoScript::Private },
-        }, { "cstdint", "Math/Vector2.h", "map", "Scene.h" });
+        }, { "cstdint", "Math/Vector2.h", "map", "Scene.h", "Camera.h", "GameObject.h" });
         ESRegisterStaticMethod(GUI::, EvoScript::Public, generator, GUISystem, Get, GUISystem*, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginDockSpace, void, ())
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, EndDockSpace, void, ())
@@ -661,6 +669,9 @@ namespace Framework {
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawHierarchy, void, (SafePtr<Scene>))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawInspector, void, (SafePtr<Scene>))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, GetWindowSize, Vector2, () const)
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawGuizmoTools, void, ())
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, SetGuizmoTool, void, (uint8_t))
+        ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawGuizmo, void, (Camera*, SafePtr<GameObject>))
     }
 
     void API::RegisterPostProcessing(EvoScript::AddressTableGen *generator) {

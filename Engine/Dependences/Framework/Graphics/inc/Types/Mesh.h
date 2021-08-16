@@ -98,7 +98,6 @@ namespace Framework::Graphics::Types {
         }*/
     protected:
         bool                        m_inverse           = false;
-        //bool                        m_matHasBeenUpdated = false;
 
         Environment*                m_env               = nullptr;
         PipeLine                    m_pipeline          = PipeLine::Unknown;
@@ -113,7 +112,6 @@ namespace Framework::Graphics::Types {
         /** \brief Vertices OpenGL-context calculated */
         volatile bool               m_hasErrors         = false;
         volatile bool               m_isCalculated      = false;
-        //unsigned char               m_toolID            = 0; // 0 - none, 1 - x, 2 - y, 3 - z
 
         int32_t                     m_descriptorSet     = -1;
         int32_t                     m_VBO               = -1;
@@ -142,10 +140,11 @@ namespace Framework::Graphics::Types {
             goto ret;
         }
     public:
-        Math::Vector3 m_position = glm::vec3();
-        Math::Vector3 m_rotation = glm::vec3();
-        Math::Vector3 m_scale    = { 1, 1, 1 };
-        glm::mat4 m_modelMat = glm::mat4(0);
+        Math::Vector3 m_barycenter = glm::vec3();
+        Math::Vector3 m_position   = glm::vec3();
+        Math::Vector3 m_rotation   = glm::vec3();
+        Math::Vector3 m_scale      = { 1, 1, 1 };
+        glm::mat4     m_modelMat   = glm::mat4(0);
     public:
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVBO() const noexcept { return (uint32_t)m_VBO; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }

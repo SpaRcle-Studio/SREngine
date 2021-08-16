@@ -4,6 +4,7 @@
 
 #include <Environment/Vulkan.h>
 #include <imgui_impl_vulkan.h>
+#include <ImGuizmo.h>
 
 namespace Framework::Graphics{
     #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
@@ -471,6 +472,9 @@ namespace Framework::Graphics{
         ImGui_ImplVulkan_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
+
+        ImGuizmo::BeginFrame();
+        ImGuizmo::Enable(true);
 
         return true;
     }

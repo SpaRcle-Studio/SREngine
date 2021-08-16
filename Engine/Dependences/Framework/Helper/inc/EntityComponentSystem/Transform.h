@@ -19,6 +19,8 @@
 
 #include <Types/SafePointer.h>
 
+#include <Utils/GraphUtils.h>
+
 namespace Framework::Helper {
     using namespace Framework::Helper::Math;
 
@@ -68,7 +70,7 @@ namespace Framework::Helper {
 
         [[nodiscard]] inline bool HasParent() { return (bool)this->m_parent; }
 
-        [[nodiscard]] glm::mat4 GetMatrix(bool local = false) const noexcept;
+        [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, bool local = false) const noexcept;
         void SetMatrix(glm::mat4 delta, glm::mat4 matrix, bool pivot) noexcept;
 
         [[nodiscard]] inline Vector3 GetPosition(bool local = false) const noexcept {

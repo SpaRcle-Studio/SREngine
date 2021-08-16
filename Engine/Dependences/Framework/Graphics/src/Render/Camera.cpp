@@ -87,7 +87,7 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
         });
     }
     else {
-        matrix = glm::rotate(matrix, -m_pitch + float(180.f * 3.14 / 45.f / 4.f), { 1, 0, 0 });
+        matrix = glm::rotate(matrix, -m_pitch + float(M_PI), { 1, 0, 0 });
         matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
         matrix = glm::rotate(matrix, m_roll,  { 0, 0, 1 });
 
@@ -266,6 +266,26 @@ void Framework::Graphics::Camera::PoolEvents()  {
 
 void Framework::Graphics::Camera::OnReady(bool ready) {
     this->m_env->SetBuildState(false);
+}
+
+glm::mat4 Framework::Graphics::Camera::GetImGuizmoView() const noexcept {
+    auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
+    matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
+    matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
+
+    return glm::translate(matrix, {
+            m_pos.x,
+            -m_pos.y,
+            -m_pos.z
+    });
+}
+
+glm::mat4 Framework::Graphics::Camera::GetTranslationMatrix() const noexcept {
+    return glm::translate(glm::mat4(1), {
+            m_pos.x,
+            -m_pos.y,
+            -m_pos.z
+    });
 }
 
 

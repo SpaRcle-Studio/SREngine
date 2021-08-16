@@ -49,7 +49,7 @@ find_package(Vulkan REQUIRED FATAL_ERROR)
 include_directories(${Vulkan_INCLUDE_DIRS})
 
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
+add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC} Helper/inc/Utils/GraphUtils.h)
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 

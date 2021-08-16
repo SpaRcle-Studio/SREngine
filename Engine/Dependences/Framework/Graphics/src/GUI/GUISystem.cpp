@@ -270,3 +270,221 @@ void Framework::Graphics::GUI::GUISystem::CheckSelected(const Helper::Types::Saf
         gm->SetSelect(true);
     }
 }
+
+void Framework::Graphics::GUI::GUISystem::DrawGuizmoTools() {
+    static bool snapAct = true;
+
+    if (ButtonWithId("engine_tool_move", "M", m_sizeB, 0, true,
+                     ImVec2(m_space, m_space), m_currentGuizmoOperation == ImGuizmo::TRANSLATE ? m_act : m_def)) {
+        m_currentGuizmoOperation = ImGuizmo::TRANSLATE;
+        m_boundsAct = false;
+    }
+
+    if (ButtonWithId("engine_tool_rotate", "R", m_sizeB, 0, true,
+                     ImVec2(m_space * 2 + m_sizeB.x, m_space),
+                     m_currentGuizmoOperation == ImGuizmo::ROTATE ? m_act : m_def)) {
+        m_currentGuizmoOperation = ImGuizmo::ROTATE;
+        m_boundsAct = false;
+    }
+
+    if (ButtonWithId("engine_tool_scale", m_boundsAct ? "S+" : "S", m_sizeB, 0, true,
+                     ImVec2(m_space * 3 + m_sizeB.x * 2, m_space),
+                     m_currentGuizmoOperation == ImGuizmo::SCALE ? m_act : m_def)) {
+        if (m_currentGuizmoOperation == ImGuizmo::SCALE)
+            m_boundsAct = !m_boundsAct;
+
+        m_currentGuizmoOperation = ImGuizmo::SCALE;
+    }
+
+    if (ButtonWithId("engine_tool_mode", "L", m_sizeB, 0, true,
+                     ImVec2(m_space * 5 + m_sizeB.x * 4, m_space), m_currentGuizmoMode == ImGuizmo::LOCAL ? m_act : m_def)) {
+        if (m_currentGuizmoMode == ImGuizmo::LOCAL)
+            m_currentGuizmoMode = ImGuizmo::WORLD;
+        else
+            m_currentGuizmoMode = ImGuizmo::LOCAL;
+    }
+
+    if (ButtonWithId("engine_tool_pivot", "P", m_sizeB, 0, true,
+                     ImVec2(m_space * 6 + m_sizeB.x * 5, m_space), m_currentGuizmoPivot ? m_act : m_def)) {
+        m_currentGuizmoPivot = !m_currentGuizmoPivot;
+    }
+
+    std::string snap_str = std::to_string(m_snapValue / 100.0);
+    snap_str.resize(4);
+    if (ButtonWithId("engine_tool_snap", (snap_str + "x").c_str(),
+                     m_sizeB + ImVec2(5, 0), 0, true,
+                     ImVec2(m_space * 7 + m_sizeB.x * 6, m_space), snapAct ? m_act : m_def)) {
+        if (m_snapValue >= 400) {
+            m_snapValue = 25;
+            snapAct = false;
+        } else {
+            if (snapAct)
+                m_snapValue *= 2;
+            else
+                snapAct = true;
+        }
+    }
+}
+
+void Framework::Graphics::GUI::GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
+    if (!camera)
+        return;
+
+    if (gameObject.LockIfValid()) {
+        ImGuiWindow *window = ImGui::GetCurrentWindow();
+        if (!window || window->SkipItems)
+            return;
+
+        Math::Vector2 img_size = camera->GetSize();
+
+        Math::Vector2 pos = {window->Pos.x, window->Pos.y};
+        Math::Vector2 win_size = {window->Size.x, window->Size.y};
+
+        const Helper::Math::Unit dx = win_size.x / img_size.x;
+        const Helper::Math::Unit dy = win_size.y / img_size.y;
+
+        if (dx > dy)
+            img_size *= dy;
+        else if (dy > dx)
+            img_size *= dx;
+        else
+            img_size *= dy;
+
+        //pos += (win_size - img_size); pos /= 2.f;
+        //ImGuizmo::SetRect(pos.x, pos.y, img_size.x, img_size.y);
+
+        static float bounds[] = {-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f};
+        static float boundsSnap[] = {0.1f, 0.1f, 0.1f};
+
+        glm::vec3 snap = glm::vec3(1, 1, 1) * ((float) m_snapValue / 100.f);
+
+        glm::mat4 delta;
+
+        glm::mat4 mat = gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL);
+
+        static float axis[3] = {0, 0, 0};
+        static float value = 0.0;
+        static float old_rotate = 0.0;
+        static float old_scale = 0.0;
+
+        ImGuizmo::SetRect(
+                (float)(ImGui::GetWindowPos().x + (win_size.x - img_size.x) / 2.f),
+                (float)(ImGui::GetWindowPos().y + (win_size.y - img_size.y) / 2.f),
+                img_size.x,
+                img_size.y);
+
+        /*ImGuizmo::DrawGrid(
+                &camera->GetImGuizmoView()[0][0],
+                &camera->GetProjection()[0][0],
+                &mat[0][0],
+                10.f);*/
+
+        if (ImGuizmo::Manipulate(
+                &camera->GetImGuizmoView()[0][0],
+                &camera->GetProjection()[0][0],
+                m_boundsAct ? ImGuizmo::BOUNDS : m_currentGuizmoOperation, m_currentGuizmoMode,
+                &mat[0][0],
+                &delta[0][0], nullptr, nullptr, boundsSnap,
+                &value, &axis[0])) {
+            if (m_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
+                if (abs((value - old_rotate)) < 1) {
+                    if (m_currentGuizmoMode == ImGuizmo::LOCAL)
+                        gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(1),
+                                                               (value - old_rotate) * 20.0,
+                                                               true);
+                    else
+                        gameObject->GetTransform()->GlobalRotateAxis(Vector3(axis).InverseAxis(1),
+                                                                     (value - old_rotate) * 20.0);
+                }
+            } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
+                if (value < 1) {
+                    if (m_currentGuizmoMode == ImGuizmo::LOCAL)
+                        gameObject->GetTransform()->Translate(
+                                gameObject->GetTransform()->Direction(Vector3(axis).InverseAxis(0), true) * value);
+                    else
+                        gameObject->GetTransform()->GlobalTranslate(Vector3(axis).InverseAxis(0), value);
+                }
+            } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::SCALE) {
+                if (value == 0)
+                    old_scale = 0;
+
+                if (m_currentGuizmoMode == ImGuizmo::MODE::LOCAL)
+                    gameObject->GetTransform()->Scaling(Vector3(axis) * (value - old_scale));
+
+                old_scale = value;
+            }
+        }
+
+        old_rotate = value;
+
+        gameObject.Unlock();
+    }
+}
+
+bool Framework::Graphics::GUI::GUISystem::ButtonWithId(
+    const char *_id,
+    const char *label,
+    ImVec2 button_size,
+    ImGuiButtonFlags flags,
+    bool imposition,
+    ImVec2 offset,
+    ImVec4 color)
+{
+    const bool has_color = !Vec4Null(color);
+
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+        return false;
+
+    ImGuiContext& g = *GImGui;
+    const ImGuiStyle& style = g.Style;
+    const ImGuiID id = window->GetID(_id);
+    const ImVec2 label_size = ImGui::CalcTextSize(label, NULL, true);
+
+    ImVec2 pos = window->DC.CursorPos + offset;
+    if ((flags & ImGuiButtonFlags_AlignTextBaseLine) && style.FramePadding.y < window->DC.CurrLineTextBaseOffset) // Try to vertically align buttons that are smaller/have no padding so that text baseline matches (bit hacky, since it shouldn't be a flag)
+        pos.y += window->DC.CurrLineTextBaseOffset - style.FramePadding.y;
+    ImVec2 size = ImGui::CalcItemSize(button_size, label_size.x + style.FramePadding.x * 2.0f, label_size.y + style.FramePadding.y * 2.0f);
+
+    const ImRect bb(pos, pos + size);
+
+    if (has_color)
+        ImGui::PushStyleColor(ImGuiCol_Button, color);
+
+    if (!imposition)
+    {
+        ImGui::ItemSize(size, style.FramePadding.y);
+
+        if (!ImGui::ItemAdd(bb, id))
+            return false;
+    }
+
+    if (window->DC.ItemFlags & ImGuiItemFlags_ButtonRepeat)
+        flags |= ImGuiButtonFlags_Repeat;
+    bool hovered, held;
+    bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, flags);
+
+    // Render
+    const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
+    ImGui::RenderNavHighlight(bb, id);
+    ImGui::RenderFrame(bb.Min, bb.Max, col, true, style.FrameRounding);
+    ImGui::RenderTextClipped(bb.Min + style.FramePadding, bb.Max - style.FramePadding, label, NULL, &label_size, style.ButtonTextAlign, &bb);
+
+    IMGUI_TEST_ENGINE_ITEM_INFO(id, label, window->DC.LastItemStatusFlags);
+
+    if (has_color)
+        ImGui::PopStyleColor();
+
+    return pressed;
+}
+
+void Framework::Graphics::GUI::GUISystem::SetGuizmoTool(uint8_t toolId) {
+    switch (toolId) {
+        case 0: m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE; break;
+        case 1: m_currentGuizmoOperation = ImGuizmo::OPERATION::ROTATE;    break;
+        case 2: m_currentGuizmoOperation = ImGuizmo::OPERATION::SCALE;     break;
+        default:
+            Helper::Debug::Error("GUISystem::SetGuizmoTool() : unknown tool id!");
+            return;
+    }
+}

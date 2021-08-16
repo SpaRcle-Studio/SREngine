@@ -93,6 +93,18 @@ namespace Framework::Helper::Math {
             y = p_y;
         }
 
+        _FORCE_INLINE_ Vector2 &operator/=(Unit p_scalar) {
+            x /= p_scalar;
+            y /= p_scalar;
+            return *this;
+        }
+
+        _FORCE_INLINE_ Vector2 &operator+=(Vector2 v) {
+            x += v.x;
+            y += v.y;
+            return *this;
+        }
+
         std::string ToString() {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
         }

@@ -15,6 +15,8 @@
 #include <glm/gtx/hash.hpp>
 #include <glm/gtx/string_cast.hpp>
 
+#include <Math/Vector3.h>
+
 #define SR_VERTEX_DESCRIPTION size_t
 
 namespace Framework::Graphics::Vertices {
@@ -144,6 +146,14 @@ namespace Framework::Graphics::Vertices {
                 Helper::Debug::Error("Vertices::GetVertexSize() : unknown type!");
                 return 0;
         }
+    }
+
+    template<typename V> Helper::Math::Vector3 Barycenter(const std::vector<V>& vertices) {
+        auto x = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.x; return sum; }();
+        auto y = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.y; return sum; }();
+        auto z = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.z; return sum; }();
+
+        return Helper::Math::Vector3(x, y, z) / vertices.size();
     }
 }
 

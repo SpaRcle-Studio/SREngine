@@ -38,6 +38,12 @@ EXTERN void OnGUI() {
                 if (camera->IsReady() && gui->BeginChildWindow("Texture")) {
                     auto winSize = gui->GetWindowSize();
                     gui->DrawTexture(winSize, window->GetWindowSize(), completeTexID, true);
+
+                    if (camera)
+                        gui->DrawGuizmo(camera, scene->GetSelected());
+
+                    gui->DrawGuizmoTools();
+
                     gui->EndChildWindow();
                 }
 

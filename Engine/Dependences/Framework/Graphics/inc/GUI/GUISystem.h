@@ -11,9 +11,13 @@
 #include <Environment/Environment.h>
 #include <EntityComponentSystem/Scene.h>
 #include <EntityComponentSystem/Transform.h>
+#include <Render/Camera.h>
+#include <ImGuizmo.h>
 
 namespace Framework::Graphics::GUI {
     class GUISystem {
+    private:
+        inline static bool Vec4Null(const ImVec4& v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
     private:
         inline static const ImGuiTreeNodeFlags g_node_flags_with_child    = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
@@ -31,9 +35,21 @@ namespace Framework::Graphics::GUI {
             return guiSystem;
         }
     private:
+        inline static const ImVec2 m_sizeB = { 30, 25 };
+        inline static const short  m_space = 3;
+        inline static const ImVec4 m_def = {0.1, 0.1, 0.1, 0.7};
+        inline static const ImVec4 m_act = {0.6, 0.6, 0.6, 0.85};
+
+        int m_snapValue = 100;
+    private:
         Environment*   m_env          = nullptr;
         const PipeLine m_pipeLine     = PipeLine::Unknown;
         bool           m_shiftPressed = false;
+        bool           m_boundsAct    = false;
+
+        ImGuizmo::OPERATION m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
+        ImGuizmo::MODE      m_currentGuizmoMode      = ImGuizmo::MODE::LOCAL;
+        bool                m_currentGuizmoPivot     = true;
     private:
         static void DrawImage(
                 ImTextureID user_texture_id,
@@ -44,6 +60,17 @@ namespace Framework::Graphics::GUI {
                 const ImVec4& border_col,
                 bool imposition = false);
     public:
+        bool ButtonWithId(
+                const char* _id,
+                const char* label,
+                ImVec2 button_size = ImVec2(0, 0),
+                ImGuiButtonFlags flags = ImGuiButtonFlags_None,
+                bool imposition = false,
+                ImVec2 offset = ImVec2(0,0),
+                ImVec4 color = ImVec4(0,0,0,0));
+
+        void SetGuizmoTool(uint8_t toolId);
+
         static void DrawTextOnCenter(const std::string& text, bool sameLine = true) {
             float font_size = ImGui::GetFontSize() * text.size() / 2;
 
@@ -67,6 +94,8 @@ namespace Framework::Graphics::GUI {
             return { (Helper::Math::Unit)size.x, (Helper::Math::Unit)size.y };
         }
         void DrawTexture(Helper::Math::Vector2 winSize, Helper::Math::Vector2 texSize, uint32_t id, bool centralize);
+        void DrawGuizmo(Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
+        void DrawGuizmoTools();
         void BeginDockSpace();
         void EndDockSpace();
         bool BeginWindow(const char* name);

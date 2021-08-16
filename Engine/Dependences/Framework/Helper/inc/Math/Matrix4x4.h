@@ -13,6 +13,13 @@
 namespace Framework::Helper::Math {
     class Matrix4x4 {
     public:
+        static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0) {
+            auto matrix = glm::rotate(glm::mat4(1), (float)pitch, { 1, 0, 0 });
+            matrix = glm::rotate(matrix,            (float)yaw,   { 0, 1, 0 });
+            matrix = glm::rotate(matrix,            (float)roll,  { 0, 0, 1 });
+            return glm::translate(matrix, { 0, 0, 0 });
+        }
+
         glm::mat4 self = glm::mat4(1);
 
         Matrix4x4(const Vector3& translate, const Quaternion& rotation, const Vector3& scale){
@@ -46,8 +53,12 @@ namespace Framework::Helper::Math {
             return self;
         }
 
-        [[nodiscard]] Vector3 Translate(const Vector3& vec3) const noexcept {
-            return Matrix4x4(glm::translate(self, vec3.ToGLM())).GetTranslate();
+        //[[nodiscard]] Vector3 TranslateVec3(const Vector3& vec3) const noexcept {
+        //    return Matrix4x4(glm::translate(self, vec3.ToGLM())).GetTranslate();
+        //}
+
+        [[nodiscard]] Matrix4x4 Translate(const Vector3& vec3) const noexcept {
+            return Matrix4x4(glm::translate(self, vec3.ToGLM()));
         }
 
         [[nodiscard]] Vector3 GetTranslate() const noexcept {
