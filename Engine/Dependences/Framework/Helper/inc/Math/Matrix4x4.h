@@ -34,6 +34,10 @@ namespace Framework::Helper::Math {
             self = glm::scale(self, scale.ToGLM());
         }
 
+        Matrix4x4(const Unit& scalar) {
+            this->self = glm::mat4((float)scalar);
+        }
+
         Matrix4x4(const glm::mat4& mat) {
             this->self = mat;
         }

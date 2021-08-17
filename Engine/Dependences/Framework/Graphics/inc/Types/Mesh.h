@@ -62,7 +62,7 @@ namespace Framework::Graphics::Types {
         }
     public:
         bool DrawOnInspector() override;
-
+        Math::Vector3 GetBarycenter() const override;
         SR_FORCE_INLINE void OnMove(Math::Vector3 newValue) noexcept override{
             m_position = newValue.ToGLM();
             ReCalcModel();
@@ -91,11 +91,6 @@ namespace Framework::Graphics::Types {
         /** \brief Set mesh to destroy in res manager
         * \return bool */
         bool Destroy() override;
-        /*virtual void Free() override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Debug::Log("Mesh::Free() : free mesh memory...");
-            delete this;
-        }*/
     protected:
         bool                        m_inverse           = false;
 
@@ -168,17 +163,11 @@ namespace Framework::Graphics::Types {
 
         virtual Mesh* Copy() = 0;
 
-        //SR_FORCE_INLINE void SetToolID(unsigned char ID) noexcept { this->m_toolID = ID; }
 
 #define ConfigureShader(shader) \
         shader->SetMat4("modelMat", m_modelMat); \
         shader->SetVec3("color", m_material->m_color); \
         shader->SetIVec2("config", { (int)m_material->m_bloom, (int)this->m_isSelected }); \
-
-        //shader->SetIVec2("config", { \
-            //(int)m_material->m_bloom, \
-            //        m_toolID == 0 ? (int)this->m_isSelected : (int)(m_toolID + 1) \
-        //}); \
 
         bool SimpleDraw();
 

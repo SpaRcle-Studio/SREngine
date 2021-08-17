@@ -208,8 +208,8 @@ void Framework::Graphics::GUI::GUISystem::DrawInspector(Framework::Helper::Types
 
         ImGui::Text("[Global]");
 
-        if (ImGui::InputFloat3("G Tr", &position[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
-            gameObject->GetTransform()->SetPosition(position);
+        if (ImGui::InputFloat3("G Tr", &position[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            gameObject->GetTransform()->SetGlobalPosition(position);
 
         if (ImGui::InputFloat3("G Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
             gameObject->GetTransform()->SetRotation(rotation);
@@ -277,21 +277,21 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmoTools() {
     if (ButtonWithId("engine_tool_move", "M", m_sizeB, 0, true,
                      ImVec2(m_space, m_space), m_currentGuizmoOperation == ImGuizmo::TRANSLATE ? m_act : m_def)) {
         m_currentGuizmoOperation = ImGuizmo::TRANSLATE;
-        m_boundsAct = false;
+        m_boundsActive = false;
     }
 
     if (ButtonWithId("engine_tool_rotate", "R", m_sizeB, 0, true,
                      ImVec2(m_space * 2 + m_sizeB.x, m_space),
                      m_currentGuizmoOperation == ImGuizmo::ROTATE ? m_act : m_def)) {
         m_currentGuizmoOperation = ImGuizmo::ROTATE;
-        m_boundsAct = false;
+        m_boundsActive = false;
     }
 
-    if (ButtonWithId("engine_tool_scale", m_boundsAct ? "S+" : "S", m_sizeB, 0, true,
+    if (ButtonWithId("engine_tool_scale", m_boundsActive ? "S+" : "S", m_sizeB, 0, true,
                      ImVec2(m_space * 3 + m_sizeB.x * 2, m_space),
                      m_currentGuizmoOperation == ImGuizmo::SCALE ? m_act : m_def)) {
         if (m_currentGuizmoOperation == ImGuizmo::SCALE)
-            m_boundsAct = !m_boundsAct;
+            m_boundsActive = !m_boundsActive;
 
         m_currentGuizmoOperation = ImGuizmo::SCALE;
     }
@@ -304,9 +304,9 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmoTools() {
             m_currentGuizmoMode = ImGuizmo::LOCAL;
     }
 
-    if (ButtonWithId("engine_tool_pivot", "P", m_sizeB, 0, true,
-                     ImVec2(m_space * 6 + m_sizeB.x * 5, m_space), m_currentGuizmoPivot ? m_act : m_def)) {
-        m_currentGuizmoPivot = !m_currentGuizmoPivot;
+    if (ButtonWithId("engine_tool_center", "C", m_sizeB, 0, true,
+                     ImVec2(m_space * 6 + m_sizeB.x * 5, m_space), m_centerActive ? m_act : m_def)) {
+        m_centerActive = !m_centerActive;
     }
 
     std::string snap_str = std::to_string(m_snapValue / 100.0);
@@ -360,7 +360,13 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmo(Framework::Graphics::Camera
 
         glm::mat4 delta;
 
-        glm::mat4 mat = gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL);
+        auto barycenter = gameObject->GetBarycenter();
+
+        glm::mat4 mat = [=]() -> auto {
+            if (m_centerActive && !barycenter.IsInfinity())
+                return gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL, barycenter);
+            return gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL);
+        }();
 
         static float axis[3] = {0, 0, 0};
         static float value = 0.0;
@@ -373,28 +379,27 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmo(Framework::Graphics::Camera
                 img_size.x,
                 img_size.y);
 
-        /*ImGuizmo::DrawGrid(
-                &camera->GetImGuizmoView()[0][0],
-                &camera->GetProjection()[0][0],
-                &mat[0][0],
-                10.f);*/
-
         if (ImGuizmo::Manipulate(
                 &camera->GetImGuizmoView()[0][0],
                 &camera->GetProjection()[0][0],
-                m_boundsAct ? ImGuizmo::BOUNDS : m_currentGuizmoOperation, m_currentGuizmoMode,
+                m_boundsActive ? ImGuizmo::BOUNDS : m_currentGuizmoOperation, m_currentGuizmoMode,
                 &mat[0][0],
                 &delta[0][0], nullptr, nullptr, boundsSnap,
                 &value, &axis[0])) {
             if (m_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
                 if (abs((value - old_rotate)) < 1) {
-                    if (m_currentGuizmoMode == ImGuizmo::LOCAL)
-                        gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(1),
-                                                               (value - old_rotate) * 20.0,
-                                                               true);
-                    else
-                        gameObject->GetTransform()->GlobalRotateAxis(Vector3(axis).InverseAxis(1),
-                                                                     (value - old_rotate) * 20.0);
+                    if (m_centerActive && !barycenter.IsInfinity()) {
+                        gameObject->GetTransform()->RotateAround(
+                                barycenter,
+                                Vector3(axis).InverseAxis(1),
+                                (value - old_rotate) * 20.0,
+                                m_currentGuizmoMode == ImGuizmo::LOCAL);
+                    } else {
+                        if (m_currentGuizmoMode == ImGuizmo::LOCAL)
+                            gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
+                        else
+                            gameObject->GetTransform()->GlobalRotateAxis(Vector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
+                    }
                 }
             } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
                 if (value < 1) {
@@ -402,7 +407,7 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmo(Framework::Graphics::Camera
                         gameObject->GetTransform()->Translate(
                                 gameObject->GetTransform()->Direction(Vector3(axis).InverseAxis(0), true) * value);
                     else
-                        gameObject->GetTransform()->GlobalTranslate(Vector3(axis).InverseAxis(0), value);
+                        gameObject->GetTransform()->GlobalTranslate(Vector3(axis).InverseAxis(0) * value);
                 }
             } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::SCALE) {
                 if (value == 0)

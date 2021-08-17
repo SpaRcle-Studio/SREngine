@@ -38,13 +38,7 @@ void Framework::Helper::Transform::UpdateDefParentDir() {
     }
 }
 
-void Framework::Helper::Transform::SetLocalPosition(Framework::Helper::Math::Vector3 val, bool pivot) {
-    //Vector3 delta = val - m_localPosition;
-    //this->m_localPosition = val;
-
-    //if (m_parent)
-    //    this->UpdateChildPosition(delta, pivot);
-
+void Framework::Helper::Transform::SetLocalPosition(Framework::Helper::Math::Vector3 val) {
     Vector3 delta = m_localPosition - val;
     this->m_localPosition = val;
 
@@ -60,7 +54,7 @@ void Framework::Helper::Transform::SetLocalPosition(Framework::Helper::Math::Vec
     }
 }
 
-void Framework::Helper::Transform::SetLocalRotation(Framework::Helper::Math::Vector3 val, bool pivot) {
+void Framework::Helper::Transform::SetLocalRotation(Framework::Helper::Math::Vector3 val) {
     this->m_localRotation = Vector3::FixEulerAngles(val);
 
     if (m_parent)
@@ -75,11 +69,13 @@ void Framework::Helper::Transform::SetLocalRotation(Framework::Helper::Math::Vec
     }
 }
 
-void Framework::Helper::Transform::SetLocalScale(Framework::Helper::Math::Vector3 val, bool pivot) {
+void Framework::Helper::Transform::SetLocalScale(Framework::Helper::Math::Vector3 val) {
     //this->m_localScale = val;
 }
 
-void Framework::Helper::Transform::SetPosition(Vector3 val, bool pivot) {
+void Framework::Helper::Transform::SetPosition(Vector3 val, bool pivot) { // Todo: check working
+    Helper::Debug::Error("Transform::SetPosition() : it is not work! Use SetGlobalPosition or SetLocalPosition!");
+
     auto delta = m_globalPosition - val;
     m_globalPosition = val;
 
@@ -89,7 +85,7 @@ void Framework::Helper::Transform::SetPosition(Vector3 val, bool pivot) {
 
     m_gameObject->UpdateComponentsPosition();
 
-    for (auto a: m_gameObject->m_children)
+    for (const auto& a: m_gameObject->m_children)
         a->m_transform->UpdateChildPosition(delta);
 }
 
@@ -123,30 +119,21 @@ void Framework::Helper::Transform::SetScale(Vector3 val, bool pivot) {
 
     this->SetPosition(temp);
 }
-/*
-void Framework::Helper::Transform::DeltaTranslate(Framework::Helper::Math::Vector3 delta) {
-    if (!m_parent)
-        this->Translate(delta, true);
-    else {
-        if (delta.Empty())
-            return;
 
-        Vector3 newPos = m_globalPosition + delta;
+void Framework::Helper::Transform::SetGlobalPosition(Framework::Helper::Math::Vector3 position) {
+    if (!m_parent) {
+        Vector3 delta = m_globalPosition - position;
+        m_globalPosition = m_localPosition = position;
 
-        double dist = m_globalPosition.Distance(newPos);
-        Vector3 dir = m_globalPosition.Direction(newPos);
-
-        Vector3 trans = Direction(dir, false) * dist;
-
-        this->Translate(trans, true);
-
-        //m_localPosition += delta.Rotate(m_parent->GetRotation().ToQuat());
-
-        //this->UpdateChildRotation(true);
-
-        //this->m_gameObject->UpdateComponentsPosition();
+        this->m_gameObject->UpdateComponentsPosition();
+        for (const auto& a: m_gameObject->m_children)
+            a->m_transform->UpdateChildPosition(delta);
+    } else {
+        // TODO: optimize
+        GlobalTranslate(-m_globalPosition);
+        GlobalTranslate(position);
     }
-}*/
+}
 
 void Framework::Helper::Transform::GlobalTranslate(Vector3 axis, double value) {
     if (!m_parent)
@@ -158,6 +145,21 @@ void Framework::Helper::Transform::GlobalTranslate(Vector3 axis, double value) {
         Vector3 origin = (mat * rotate).GetQuat().EulerAngle().InverseAxis(2);
         Vector3 dir = origin.Radians().ToQuat() * axis;
         m_localPosition += (dir * value) / m_parent->m_globalScale;
+
+        this->UpdateChildRotation();
+    }
+}
+
+void Framework::Helper::Transform::GlobalTranslate(Framework::Helper::Math::Vector3 value) {
+    if (!m_parent)
+        this->Translate(value);
+    else {
+        Matrix4x4 rotate = Matrix4x4(m_globalPosition, m_parent->m_globalRotation.InverseAxis(2).ToQuat().Inverse(), Vector3(1,1,1));
+        Matrix4x4 mat = Matrix4x4(m_globalPosition, Vector3(0,0,0).ToQuat(), Vector3(1,1,1));
+
+        Vector3 origin = (mat * rotate).GetQuat().EulerAngle().InverseAxis(2);
+        auto preDir = origin.Radians().ToQuat();
+        m_localPosition += (preDir * value) / m_parent->m_globalScale;
 
         this->UpdateChildRotation();
     }
@@ -183,27 +185,21 @@ void Framework::Helper::Transform::Translate(Vector3 val) noexcept {
     //    this->SetPosition(m_globalPosition + val);
 }
 
-void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 axis, double angle, bool local) noexcept {
+void Framework::Helper::Transform::RotateAxis(Framework::Helper::Math::Vector3 axis, double angle) noexcept {
     Matrix4x4 rotate = Matrix4x4(m_globalPosition, (axis * angle).InverseAxis(2).ToQuat(), Vector3(1,1,1));
+    Matrix4x4 matLocal = Matrix4x4(m_globalPosition, m_localRotation.InverseAxis(2).ToQuat(), Vector3(1,1,1));
+    m_localRotation = (matLocal * rotate).GetQuat().EulerAngle().InverseAxis(2);
 
-    if (local) {
-        Matrix4x4 matLocal = Matrix4x4(m_globalPosition, m_localRotation.InverseAxis(2).ToQuat(), Vector3(1,1,1));
-        m_localRotation = (matLocal * rotate).GetQuat().EulerAngle().InverseAxis(2);
-
-        if (m_parent)
-            UpdateChildRotation();
-        else
-            this->m_globalRotation = m_localRotation;
-    }
+    if (m_parent)
+        UpdateChildRotation();
     else {
-        Matrix4x4 matGlobal = Matrix4x4(m_globalPosition, m_globalRotation.InverseAxis(2).ToQuat(), Vector3(1,1,1));
-        m_globalRotation = (matGlobal * rotate).GetQuat().EulerAngle().InverseAxis(2);
+        this->m_globalRotation = m_localRotation;
+
+        this->m_gameObject->UpdateComponentsRotation();
+
+        for (const auto& a: m_gameObject->m_children)
+            a->m_transform->UpdateChildRotation();
     }
-
-    this->m_gameObject->UpdateComponentsRotation();
-
-    for (const auto& a: m_gameObject->m_children)
-        a->m_transform->UpdateChildRotation();
 }
 
 void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vector3 axis, double value) {
@@ -231,6 +227,26 @@ void Framework::Helper::Transform::GlobalRotateAxis(Framework::Helper::Math::Vec
         for (const auto& a: m_gameObject->m_children)
             a->m_transform->UpdateChildRotation();
     }
+}
+
+void Framework::Helper::Transform::RotateAround(Vector3 point, Vector3 axis, Unit angle, bool local) noexcept {
+    if (local) {
+        auto q = m_globalRotation.InverseAxis(1).ToQuat();
+        axis = axis.InverseAxis(1).Rotate(q).InverseAxis(1);
+
+        this->GlobalRotateAxis(axis, angle);
+    }
+    else
+        this->GlobalRotateAxis(axis, angle);
+
+    Vector3 worldPos = m_globalPosition;
+
+    Quaternion q = Quaternion(axis.Radians() * angle);
+    Vector3 dif = worldPos - point;
+    dif = q * dif;
+    worldPos = point + dif;
+
+    this->SetGlobalPosition(worldPos);
 }
 
 void Framework::Helper::Transform::Rotate(Vector3 angle) noexcept {
@@ -408,24 +424,33 @@ void Framework::Helper::Transform::SetMatrix(glm::mat4 delta, glm::mat4 matrix, 
     //}
 }
 
-glm::mat4 Framework::Helper::Transform::GetMatrix(Helper::Graph::PipeLine pipeLine, bool local) const noexcept {
+glm::mat4 Framework::Helper::Transform::GetMatrix(Helper::Graph::PipeLine pipeLine, Vector3 position, bool local) const noexcept {
     switch (pipeLine) {
-        case Graph::PipeLine::OpenGL:
+        case Graph::PipeLine::OpenGL: {
             if (local) {
-                glm::mat4 localMat = glm::translate(glm::mat4(1.0f), m_globalPosition.InverseAxis(0).ToGLM());
+                glm::mat4 localMat = glm::translate(glm::mat4(1.0f), position.InverseAxis(0).ToGLM());
                 localMat *= mat4_cast(m_localRotation.InverseAxis(1).ToQuat().ToGLM());
                 localMat = glm::scale(localMat, glm::vec3(1));
                 return localMat;
             } else {
-                glm::mat4 globalMat = glm::translate(glm::mat4(1.0f), m_globalPosition.InverseAxis(0).ToGLM());
+                glm::mat4 globalMat = glm::translate(glm::mat4(1.0f), position.InverseAxis(0).ToGLM());
                 globalMat *= mat4_cast(m_globalRotation.InverseAxis(1).ToQuat().ToGLM());
                 globalMat = glm::scale(globalMat, glm::vec3(1));
                 return globalMat;
             }
+        }
         case Graph::PipeLine::Vulkan:
         case Graph::PipeLine::DirectX:
+        default:
             return glm::mat4(1);
     }
+}
+
+glm::mat4 Framework::Helper::Transform::GetMatrix(Helper::Graph::PipeLine pipeLine, bool local) const noexcept {
+    if (local)
+        return GetMatrix(pipeLine, m_localPosition, local);
+    else
+        return GetMatrix(pipeLine, m_globalPosition, local);
 }
 
 void Framework::Helper::Transform::UpdateChildPosition(Vector3 delta) {
@@ -435,7 +460,7 @@ void Framework::Helper::Transform::UpdateChildPosition(Vector3 delta) {
 
     this->m_gameObject->UpdateComponentsPosition();
 
-    for (auto a : m_gameObject->m_children)
+    for (const auto& a : m_gameObject->m_children)
         a->m_transform->UpdateChildPosition(delta);
 }
 
@@ -453,7 +478,7 @@ void Framework::Helper::Transform::UpdateChildScale(Vector3 delta) {
 
     //!this->UpdateLocalPosition();
 
-    for (auto a : m_gameObject->m_children)
+    for (const auto& a : m_gameObject->m_children)
         a->m_transform->UpdateChildScale(delta);
 }
 
@@ -540,7 +565,6 @@ void Framework::Helper::Transform::Scaling(Framework::Helper::Math::Vector3 val)
         this->SetScale(m_globalScale + val, true);
     }
 }
-
 
 
 

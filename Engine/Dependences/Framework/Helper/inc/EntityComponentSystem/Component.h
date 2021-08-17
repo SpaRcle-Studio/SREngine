@@ -99,14 +99,14 @@ namespace Framework::Helper {
         const std::string m_name   = "Unknown";
         GameObject*       m_parent = nullptr;
     public:
-        virtual bool DrawOnInspector() { return false; }
+        [[nodiscard]] inline std::string GetComponentName() const noexcept { return this->m_name; }
 
-        [[nodiscard]] inline std::string GetComponentName() const noexcept { return this->m_name; } // TODO: maybe unsafe
         inline Component* BaseComponent() noexcept { return this; }
-
         inline void SetParent(GameObject* parent) noexcept { this->m_parent = parent; }
         [[nodiscard]] inline GameObject* GetParent() const noexcept { return this->m_parent; }
 
+        virtual bool DrawOnInspector() { return false; }
+        virtual Math::Vector3 GetBarycenter() const { return Math::InfinityV3; }
         virtual void OnRotate(Math::Vector3 newValue) noexcept { };
         virtual void OnMove(Math::Vector3 newValue)   noexcept { };
         virtual void OnScaled(Math::Vector3 newValue) noexcept { };

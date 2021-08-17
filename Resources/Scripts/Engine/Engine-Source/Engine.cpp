@@ -18,6 +18,7 @@
 
 SafePtr<Scene> g_scene;
 SafePtr<GameObject> g_camera;
+SafePtr<GameObject> g_miku;
 
 Skybox* g_skybox = nullptr;
 Window* g_window = nullptr;
@@ -55,6 +56,34 @@ void LoadTsumi() {
     }
 }
 
+void LoadCubes() {
+    Render* render = Engine::Get()->GetRender();
+    auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
+    auto mesh = Mesh::Load("engine/cube.obj")[0];
+    render->RegisterTexture(texture);
+
+    auto cube = g_scene->Instance("Cube");
+    render->RegisterMesh(mesh);
+    mesh->WaitCalculate();
+    mesh->GetMaterial()->SetDiffuse(texture);
+    cube->AddComponent(mesh);
+    cube->GetTransform()->Translate(Vector3(4, 0, 0));
+
+    for (uint32_t i = 1; i <= 4; i++) {
+        mesh = mesh->Copy();
+        render->RegisterMesh(mesh);
+        mesh->WaitCalculate();
+        mesh->GetMaterial()->SetDiffuse(texture);
+
+        auto newCube = g_scene->Instance("Cube");
+        newCube->AddComponent(mesh);
+        cube->AddChild(newCube);
+        cube = newCube;
+
+        cube->GetTransform()->Translate(Vector3(2, 0, 0));
+    }
+}
+
 void LoadMiku() {
     Render* render = Engine::Get()->GetRender();
 
@@ -69,7 +98,7 @@ void LoadMiku() {
 
     auto fbx_meshes = Mesh::Load("Miku.fbx");
 
-    auto miku = g_scene->Instance("Miku");
+    g_miku = g_scene->Instance("Miku");
 
     for (uint32_t i = 0; i < 6; i++) {
         Mesh* mesh = fbx_meshes[i];
@@ -81,7 +110,7 @@ void LoadMiku() {
         auto cube = g_scene->Instance(mesh->GetGeometryName());
         cube->AddComponent(mesh);
 
-        miku->AddChild(cube);
+        g_miku->AddChild(cube);
     }
 }
 
@@ -103,6 +132,7 @@ EXTERN void Start() {
     render->SetSkybox(g_skybox);
 
     LoadMiku();
+    LoadCubes();
 
     Camera* camera = Camera::Allocate(size.x, size.y);
     camera->SetDirectOutput(true);
@@ -164,6 +194,8 @@ EXTERN void FixedUpdate() {
 
     CameraMove(0.1f);
     KeyCombinations();
+
+    //g_miku->GetTransform()->RotateAround(g_miku->GetBarycenter(), Vector3(1, 1, 0), 0.2);
 }
 
 EXTERN void Update(float dt) {

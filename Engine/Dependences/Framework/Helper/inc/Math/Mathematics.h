@@ -9,8 +9,8 @@
     #define M_PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
 #endif
 
-#define RAD(x) x*M_PI/180.0
-#define DEG(x) x/M_PI*180.0
+#define RAD(x) (x*M_PI/180.0)
+#define DEG(x) (x/M_PI*180.0)
 
 //#define _FORCE_INLINE_ __attribute__((always_inline))
 //#define _ALWAYS_INLINE_ inline __attribute__((always_inline))
@@ -45,6 +45,7 @@
 
 namespace Framework::Helper::Math {
     typedef double Unit; //! can broken render
+    inline static const Unit UnitMAX = DBL_MAX;
 
     static _ALWAYS_INLINE_ bool is_equal_approx(Unit a, Unit b) noexcept {
         // Check for exact equality first, required to handle "infinity" values.

@@ -46,14 +46,19 @@ namespace Framework::Graphics {
 
         /// \warning Call only from window class!
         bool Free();
-    protected:
-        void OnDestroyGameObject() noexcept override;
     public:
+        bool DrawOnInspector() override;
+
         void OnRotate(Math::Vector3 newValue) noexcept override;
         void OnMove(Math::Vector3 newValue) noexcept override;
         void OnReady(bool ready) override;
+
+    protected:
+        void OnDestroyComponent() noexcept override {
+            Debug::Error("Camera::OnDestroyComponent() : TODO!");
+        }
+        void OnDestroyGameObject() noexcept override;
     public:
-        bool DrawOnInspector() override;
 
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj;       }
         [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const noexcept  { return m_isEnableDirectOut.first;   }
@@ -121,10 +126,6 @@ namespace Framework::Graphics {
         void UpdateShaderProjView(Shader* shader) noexcept;
 
         bool CompleteResize();
-
-        void OnDestroyComponent() noexcept override {
-            Debug::Error("Camera::OnDestroyComponent() : TODO!");
-        }
 
         void PoolEvents();
     private:

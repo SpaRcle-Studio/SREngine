@@ -16,6 +16,8 @@
 #include <GUI.h>
 #include <FbxLoader/Loader.h>
 
+#include <Math/Matrix4x4.h>
+
 #include <Types/Geometry/Mesh3D.h>
 #include <Types/Geometry/SkinnedMesh.h>
 
@@ -252,6 +254,17 @@ bool Mesh::DrawOnInspector() {
     }
 
     return true;
+}
+
+Math::Vector3 Mesh::GetBarycenter() const {
+    if (m_pipeline == PipeLine::OpenGL) {
+        return Math::Matrix4x4(1).GetTranslate();
+    } else {
+        auto baryMat = Math::Matrix4x4(m_barycenter, Math::Vector3(), 1.0);
+        auto rotateMat = Math::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
+
+        return (rotateMat * baryMat).GetTranslate();
+    }
 }
 
 /*

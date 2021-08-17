@@ -151,20 +151,27 @@ namespace Framework {
                 { "const std::string", "m_name",        EvoScript::Protected },
                 { "GameObject*",       "m_parent",      EvoScript::Protected },
         }, { "Math/Vector3.h", "string" });
-        ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, DrawOnInspector, bool, ())
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, GetComponentName, std::string, () const)
+
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, BaseComponent, Component*, ())
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, SetParent, void, (GameObject*))
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, GetParent, GameObject*, () const)
+
+        ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, DrawOnInspector, bool, ())
+        ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, GetBarycenter, Vector3, () const)
         ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, OnRotate, void, (Vector3))
         ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, OnMove, void, (Vector3))
         ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, OnScaled, void, (Vector3))
         ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, OnSelected, void, (bool))
         ESRegisterVirtualMethod(Helper::, EvoScript::Public, generator, Component, OnReady, void, (bool))
+
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, SetActive, void, (bool))
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, SetEnabled, void, (bool))
+
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, IsActive, bool, () const)
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, IsSelected, bool, () const)
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Component, IsReady, bool, () const)
+
         ESRegisterVirtualMethod(Helper::, EvoScript::Protected, generator, Component, OnDestroyComponent, void, ())
         ESRegisterVirtualMethod(Helper::, EvoScript::Protected, generator, Component, OnDestroyGameObject, void, ())
 
@@ -230,29 +237,14 @@ namespace Framework {
 
         ESRegisterStaticMethod(Graphics::, EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, (const std::string&))
 
-        /*{
-            glm::mat4 (Mesh::*_ptr)() const = &Mesh::GetModelMatrix;
-            void* pp = *reinterpret_cast<void**>(&_ptr);
-            generator->RegisterMethod(pp, "Mesh", "GetModelMatrix", "_64byte", {}, EvoScript::Normal, "", EvoScript::Public);
-        }*/
-
-        //ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, SetRender, void, (Render*))
-        //ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, SetIndexArray, void, (std::vector<uint32_t>&))
-
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, DrawOnInspector, bool, (), "Component")
+        ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, GetBarycenter, Vector3, () const, "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnMove, void, (Vector3), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnRotate, void, (Vector3), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnScaled, void, (Vector3), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnSelected, void, (bool), "Component")
 
-        //ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, SetInverse, void, (bool))
-        //ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetInverse, bool, () const)
-
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, Destroy, bool, (), "IResource")
-        //ESRegisterVirtualOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, Free, void, (), "IResource")
-
-        //ESRegisterVirtualMethod(Graphics::, EvoScript::Public, generator, Mesh, ReCalcModel, void, ())
-        //ESRegisterVirtualMethod(Graphics::, EvoScript::Public, generator, Mesh, Calculate, bool, ())
 
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnDestroyGameObject, void, (), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnReady, void, (bool), "Component")
@@ -261,26 +253,6 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetMaterial, Material*, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh*, ())
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetGeometryName, std::string, () const)
-
-        /*ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetVAO, uint32_t, () const)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetVBO, uint32_t, () const)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetIBO, uint32_t, () const)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, FastGetUBO, int32_t , () const)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetVAO, int32_t, ())
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetVBO, int32_t, ())
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetGeometryName, std::string, () const)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetCountVertices, uint32_t, () const)
-
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, IsCalculated, bool, () const)
-
-        ESRegisterVirtualMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh*, ())
-
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, SimpleDraw, bool, ())
-        ESRegisterVirtualMethod(Graphics::, EvoScript::Public, generator, Mesh, DrawVulkan, void, ())
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, DrawOpenGL, bool, ())
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, DrawWireFrame, bool, ())
-
-        ESRegisterVirtualMethod(Graphics::, EvoScript::Public, generator, Mesh, FreeVideoMemory, bool, ())*/
 
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnDestroyComponent, void, (), "Component")
 
@@ -307,6 +279,7 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, AddChild, bool, (const SafePtr<GameObject>&))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetTransform, Transform*, ())
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetComponent, Component*, (const std::string&))
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetBarycenter, Vector3, ())
 
         generator->AddIncompleteType("Scene", "GameObject");
     }
@@ -345,11 +318,16 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, GetPostProcessing, PostProcessing*, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Camera, IsDirectOutput, bool, () const)
 
-        ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnDestroyGameObject, void, (), "Component")
+        ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, DrawOnInspector, bool, (), "Component")
+        //ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, GetBarycenter, Vector3, () const, "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnRotate, void, (Vector3), "Component")
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnMove, void, (Vector3), "Component")
-        ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, DrawOnInspector, bool, (), "Component")
+        //ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnScaled, void, (Vector3), "Component")
+        //ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnSelected, void, (bool), "Component")
+        ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Camera, OnReady, void, (bool), "Component")
+
         ESRegisterOverrideMethod(Graphics::, EvoScript::Private, generator, Camera, OnDestroyComponent, void, (), "Component")
+        ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Camera, OnDestroyGameObject, void, (), "Component")
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
@@ -470,9 +448,11 @@ namespace Framework {
                 { "Vector3",     "m_localPosition",  EvoScript::Private },
                 { "Vector3",     "m_localRotation",  EvoScript::Private },
                 { "Vector3",     "m_localScale",     EvoScript::Private },
+
                 { "Vector3",     "m_globalPosition", EvoScript::Private },
                 { "Vector3",     "m_globalRotation", EvoScript::Private },
                 { "Vector3",     "m_globalScale",    EvoScript::Private },
+
                 { "GameObject*", "m_gameObject",     EvoScript::Private },
                 { "Transform*",  "m_parent",         EvoScript::Private },
         }, { "Math/Vector3.h" });
@@ -482,6 +462,8 @@ namespace Framework {
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Transform, Up, Vector3, () const)
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Transform, Translate, void, (Vector3))
         ESRegisterMethod(Helper::, EvoScript::Public, generator, Transform, Rotate, void, (Vector3))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Transform, Scaling, void, (Vector3))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, Transform, RotateAround, void, (Vector3, Vector3, Unit, bool))
 
         generator->AddIncompleteType("GameObject", "Transform");
     }

@@ -34,6 +34,10 @@ namespace Framework::Helper::Math {
             return (x == 0 && y == 0 && z == 0);
         }
 
+        [[nodiscard]] inline bool IsInfinity() const {
+            return (x == UnitMAX && y == UnitMAX && z == UnitMAX);
+        }
+
         [[nodiscard]] inline Vector3 Radians() const noexcept {
             return { static_cast<Unit>(RAD(x)), static_cast<Unit>(RAD(y)), static_cast<Unit>(RAD(z)) };
         }
@@ -299,7 +303,8 @@ namespace Framework::Helper::Math {
         }
     };
 
-    static inline const Vector3 cmp_epsilon_v3 = Vector3((Unit)CMP_EPSILON, (Unit)CMP_EPSILON, (Unit)CMP_EPSILON);
+    inline static const Vector3 InfinityV3 = { UnitMAX, UnitMAX, UnitMAX };
+    inline static const Vector3 cmp_epsilon_v3 = Vector3((Unit)CMP_EPSILON, (Unit)CMP_EPSILON, (Unit)CMP_EPSILON);
 }
 
 #endif //GAMEENGINE_VECTOR3_H

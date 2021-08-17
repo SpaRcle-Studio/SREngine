@@ -45,11 +45,11 @@ namespace Framework::Graphics::GUI {
         Environment*   m_env          = nullptr;
         const PipeLine m_pipeLine     = PipeLine::Unknown;
         bool           m_shiftPressed = false;
-        bool           m_boundsAct    = false;
+        bool           m_boundsActive = false;
+        bool           m_centerActive = false;
 
         ImGuizmo::OPERATION m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE      m_currentGuizmoMode      = ImGuizmo::MODE::LOCAL;
-        bool                m_currentGuizmoPivot     = true;
     private:
         static void DrawImage(
                 ImTextureID user_texture_id,

@@ -565,14 +565,13 @@ void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
 void Framework::Graphics::Window::CentralizeWindow() {
     Helper::Debug::Log("Window::CentralizeWindow() : wait centralize window...");
 
-    ret:
-    if (m_isNeedResize)
-        goto ret;
+    //ret: if (m_isNeedResize)
+    //    goto ret;
 
     glm::vec2 scr_size = m_env->GetScreenSize();
 
-    unsigned int w = m_env->GetWindowSize().x;
-    unsigned int h = m_env->GetWindowSize().y;
+    uint32_t w = m_isNeedResize ? (uint32_t)m_newWindowSize.x : (uint32_t)m_env->GetWindowSize().x;
+    uint32_t h = m_isNeedResize ? (uint32_t)m_newWindowSize.y : (uint32_t)m_env->GetWindowSize().y;
 
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;

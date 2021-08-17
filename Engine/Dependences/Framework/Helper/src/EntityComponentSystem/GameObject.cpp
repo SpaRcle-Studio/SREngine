@@ -276,3 +276,28 @@ void GameObject::UpdateComponentsEnabled() {
     for (auto comp : m_components)
         comp->SetActive(m_isParentActive && m_isActive);
 }
+
+Math::Vector3 GameObject::GetBarycenter() {
+    auto barycenter = Math::Vector3();
+    uint32_t count = 0;
+
+    m_mutex.lock();
+
+    for (auto comp : m_components)
+        if (auto br = comp->GetBarycenter(); !br.IsInfinity()) {
+            barycenter += br;
+            count++;
+        }
+
+    m_mutex.unlock();
+
+    if (count == 0)
+        return Math::InfinityV3;
+    else {
+        barycenter /= count;
+        if (!m_parent)
+            return barycenter;
+        else
+            return barycenter + m_transform->m_globalPosition;
+    }
+}

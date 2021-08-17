@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 
 #include <Types/SafePointer.h>
+#include <Math/Vector3.h>
 
 namespace Framework {
     class API;
@@ -41,6 +42,8 @@ namespace Framework::Helper {
         [[nodiscard]] Types::SafePtr<Scene> GetScene() const noexcept { return this->m_scene; }
         Transform* GetTransform() noexcept { return this->m_transform; }
     public:
+        Math::Vector3 GetBarycenter();
+
         void SetThis(const Types::SafePtr<GameObject>& _this) {
             m_this = _this;
         }

@@ -36,33 +36,11 @@ namespace Framework::Helper {
         ~Transform() = default;
     public:
         void OnParentSet(Transform* parent);
-        void OnParentRemove(Transform* parent) {
-            m_parent = nullptr;
-        }
+        void OnParentRemove(Transform* parent) { m_parent = nullptr; }
 
-        static glm::vec3 checkVec3Zero(const glm::vec3& v) {
-            glm::vec3 vec = v;
-            if (vec.x == 0)
-                vec.x += 0.001;
-            else if (vec.x == 90)
-                vec.x -= 0.001;
-
-            if (vec.y == 0)
-                vec.y += 0.001;
-            else if (vec.y == 90)
-                vec.y -= 0.001;
-
-            if (vec.z == 0)
-                vec.z += 0.001;
-            else if (vec.z == 90)
-                vec.z -= 0.001;
-
-            return vec;
-        }
-
-        void SetLocalPosition(Vector3 val, bool pivot = false);
-        void SetLocalRotation(Vector3 val, bool pivot = false);
-        void SetLocalScale(Vector3 val, bool pivot = false);
+        void SetLocalPosition(Vector3 val);
+        void SetLocalRotation(Vector3 val);
+        void SetLocalScale(Vector3 val);
 
         void SetPosition(Vector3 val, bool pivot = false);
         void SetRotation(const Vector3& val, bool pivot = false);
@@ -71,30 +49,21 @@ namespace Framework::Helper {
         [[nodiscard]] inline bool HasParent() { return (bool)this->m_parent; }
 
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, bool local = false) const noexcept;
+        [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, Vector3 position, bool local = false) const noexcept;
+
         void SetMatrix(glm::mat4 delta, glm::mat4 matrix, bool pivot) noexcept;
 
         [[nodiscard]] inline Vector3 GetPosition(bool local = false) const noexcept {
             return local ? m_localPosition : m_globalPosition;
-            //glm::vec3 pos = glm::vec3();
-            //return glm::vec3();
         }
         [[nodiscard]] inline Vector3 GetRotation(bool local = false) const noexcept {
-           // return glm::degrees(glm::eulerAngles(local ? m_localRotation : m_globalRotation)); }
-           // return (local ? m_localRotation : m_globalRotation).EulerAngle().Degrees();
             return (local ? m_localRotation : m_globalRotation);
-           // return glm::vec3();
         }
         [[nodiscard]] inline Vector3 GetScale(bool local = false) const noexcept {
             return local ? m_localScale : m_globalScale;
-            //return glm::vec3();
         }
-        //[[nodiscard]] inline Vector3 GetParentDir() const noexcept {
-         //   return //!m_defParentDir;
-        //}
 
-        /*glm::vec3 Direction(glm::vec3 point) noexcept;
-
-        inline static float Len(const glm::vec3& v) noexcept {
+        /*inline static float Len(const glm::vec3& v) noexcept {
             return sqrt(
                     v.x * v.x +
                     v.y * v.y +
@@ -123,21 +92,23 @@ namespace Framework::Helper {
         [[nodiscard]] Vector3 Right()   const noexcept;
         [[nodiscard]] Vector3 Up()      const noexcept;
 
-        //void DeltaTranslate(Vector3 delta);
+        void SetGlobalPosition(Vector3 position);
+
         void Translate(Vector3 val) noexcept;
         void GlobalTranslate(Vector3 axis, double value);
+        void GlobalTranslate(Vector3 value);
 
+        void RotateAround(Vector3 point, Vector3 axis, Unit angle, bool local = true) noexcept;
         void Rotate(Vector3 angle) noexcept;
-        void RotateAxis(Vector3 axis, double angle, bool local = false) noexcept;
+        void RotateAxis(Vector3 axis, double angle) noexcept;
         void GlobalRotateAxis(Vector3 axis, double value);
 
         void Scaling(Vector3 val);
-    public:
+    private:
         void UpdateDefParentDir();
 
         void UpdateChildPosition(Vector3 delta);
         void UpdateChildScale(Vector3 delta);
-        //void UpdateChildRotation(glm::vec3 delta, bool pivot);
         void UpdateChildRotation();
     public:
         inline static const Vector3 right   = Vector3(1, 0, 0);
@@ -152,7 +123,6 @@ namespace Framework::Helper {
         Vector3                    m_globalRotation             = { 0, 0, 0 };
         Vector3                    m_globalScale                = { 1, 1, 1 };
 
-        //!Vector3         m_defParentDir               = forward;
         GameObject*                m_gameObject                 = nullptr;
         Transform*                 m_parent                     = nullptr;
     };
