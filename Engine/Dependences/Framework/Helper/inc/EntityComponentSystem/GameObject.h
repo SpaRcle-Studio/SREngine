@@ -43,6 +43,7 @@ namespace Framework::Helper {
         Transform* GetTransform() noexcept { return this->m_transform; }
     public:
         Math::Vector3 GetBarycenter();
+        Math::Vector3 GetHierarchyBarycenter();
 
         void SetThis(const Types::SafePtr<GameObject>& _this) {
             m_this = _this;

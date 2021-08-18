@@ -83,7 +83,7 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     return true;
 }
 
-Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() {
+Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() const {
     if (m_isDestroy) {
         Debug::Error("Mesh3D::Copy() : mesh already destroyed!");
         return nullptr;
@@ -177,14 +177,11 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
         return false;
     }
 
+    //! the set of descriptors and the uniform buffer are allocated at the first drawing call.
     if (m_pipeline == PipeLine::Vulkan) {
         if (m_descriptorSet >= 0) {
             this->m_env->FreeDescriptorSet(m_descriptorSet);
             this->m_descriptorSet = -5;
-        }
-        else {
-            Debug::Error("Mesh:FreeVideoMemory() : descriptor set is not exists! Something went wrong...");
-            return false;
         }
 
         if (m_UBO >= 0) {
@@ -192,10 +189,6 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
                 Helper::Debug::Error("Mesh3D::FreeVideoMemory() : failed to free uniform buffer object!");
                 return false;
             }
-        }
-        else {
-            Debug::Error("Mesh:FreeVideoMemory() : uniform buffer object is not exists! Something went wrong...");
-            return false;
         }
     }
 

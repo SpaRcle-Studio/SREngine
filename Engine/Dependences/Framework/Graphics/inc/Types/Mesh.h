@@ -97,7 +97,7 @@ namespace Framework::Graphics::Types {
         Environment*                m_env               = nullptr;
         PipeLine                    m_pipeline          = PipeLine::Unknown;
 
-        std::mutex                  m_mutex             = std::mutex();
+        mutable std::mutex          m_mutex             = std::mutex();
 
         std::string                 m_geometry_name     = "Unnamed";
         Shader*                     m_shader            = nullptr;
@@ -161,8 +161,7 @@ namespace Framework::Graphics::Types {
         [[nodiscard]] SR_FORCE_INLINE Material* GetMaterial()   const noexcept { return this->m_material; }
         [[nodiscard]] SR_FORCE_INLINE bool IsCalculated()       const noexcept { return m_isCalculated;   }
 
-        virtual Mesh* Copy() = 0;
-
+        virtual Mesh* Copy() const = 0;
 
 #define ConfigureShader(shader) \
         shader->SetMat4("modelMat", m_modelMat); \

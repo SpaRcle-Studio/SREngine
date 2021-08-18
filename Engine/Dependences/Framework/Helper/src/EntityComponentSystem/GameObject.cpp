@@ -301,3 +301,22 @@ Math::Vector3 GameObject::GetBarycenter() {
             return barycenter + m_transform->m_globalPosition;
     }
 }
+
+Math::Vector3 GameObject::GetHierarchyBarycenter() {
+    auto barycenter = Vector3((Unit)0);
+    uint32_t count = 0;
+
+    if (auto self = this->GetBarycenter(); !self.IsInfinity()) {
+        barycenter += self;
+        count++;
+    }
+
+    ForEachChild([=](const Types::SafePtr<GameObject>& child) mutable {
+        if (auto self = this->GetBarycenter(); !self.IsInfinity()) {
+            barycenter += self;
+            count++;
+        }
+    });
+
+    return count == 0 ? Math::InfinityV3 : barycenter / count;
+}

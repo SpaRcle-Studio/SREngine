@@ -54,7 +54,7 @@ bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* ph
     return true;
 }
 
-bool Framework::Engine::Init() {
+bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
     if (!m_isCreate) {
         Debug::Error("Engine::Init() : engine is not create!");
         return false;
@@ -78,6 +78,8 @@ bool Framework::Engine::Init() {
                 break;
         }
     });
+
+    m_scriptType = mainScriptType;
 
     if (!m_compiler || !m_compiler->Init()) {
         Helper::Debug::Error("Engine::Init() : failed to initialize compiler!");
@@ -110,7 +112,12 @@ bool Framework::Engine::Run() {
     Helper::Debug::Info("Engine::Run() : running game engine...");
 
     if (!this->m_window->Run()){
-        Helper::Debug::Error("Engine::Run() : failed ran window!");
+        Helper::Debug::Error("Engine::Run() : failed to ran window!");
+        return false;
+    }
+
+    if (!this->LoadMainScript()) {
+        Helper::Debug::Error("Engine::Run() : failed to load main script!");
         return false;
     }
 
@@ -120,17 +127,6 @@ bool Framework::Engine::Run() {
 }
 
 void Framework::Engine::Await() {
-    Debug::Info("Engine::Await() : load engine script...");
-
-    Scripting::Script* engine = Scripting::Script::Allocate(
-            "SpaRcle Engine", "Engine/Engine", m_compiler,
-            Scripting::ScriptType::EvoScript);
-
-    if (!engine->Compile()) {
-        Helper::Debug::Error("Engine::Await() : failed to load engine script!");
-        return;
-    }
-
     Debug::Info("Engine::Await() : wait close engine...");
 
     const float updateFrequency = (1.f / 60.f) * 1000.f;
@@ -173,17 +169,12 @@ void Framework::Engine::Await() {
         accumulator += (float)deltaTime.count() / 1000000.f;
     }
 
-    engine->Close();
-    engine->DelayedDestroyAndFree();
+    m_mainScript->Close();
+    m_mainScript->DelayedDestroyAndFree();
 }
 
 bool Framework::Engine::Close() {
     Helper::Debug::Info("Engine::Close() : close game engine...");
-
-    //this->m_compiler->CloseAll();
-    //this->m_compiler->DestroyAll();
-
-    //this->m_compiler->PoolEvents();
 
     if (m_window && m_window->IsRun()) {
         m_window->Close();
@@ -214,4 +205,29 @@ bool Framework::Engine::RegisterLibraries() {
     API::RegisterEvoScriptClasses(dynamic_cast<Scripting::EvoCompiler*>(m_compiler));
 
     return true;
+}
+
+bool Framework::Engine::LoadMainScript() {
+    Debug::Info("Engine::LoadMainScript() : loading the main engine script...");
+
+    std::string scriptName;
+    switch (m_scriptType) {
+        case MainScriptType::Engine:    scriptName = "Engine/Engine"; break;
+        case MainScriptType::Benchmark: scriptName = "Engine/Benchmark"; break;
+        case MainScriptType::Game:
+        case MainScriptType::None:
+        default:
+            Helper::Debug::Error("Engine::LoadMainScript() : unknown script type!");
+            return false;
+    }
+
+    m_mainScript = Scripting::Script::Allocate(
+            "SpaRcle Engine", scriptName, m_compiler,
+            Scripting::ScriptType::EvoScript);
+
+    if (!m_mainScript->Compile()) {
+        Helper::Debug::Error("Engine::LoadMainScript() : failed to load main engine script!");
+        return false;
+    } else
+        return true;
 }

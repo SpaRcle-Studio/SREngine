@@ -206,7 +206,7 @@ namespace Framework {
                 { "void*",                 "m_env",           EvoScript::Protected }, // TODO
                 { "int",                   "m_pipeline",      EvoScript::Protected },
 
-                { "std::mutex",            "m_mutex",         EvoScript::Protected },
+                { "mutable std::mutex",    "m_mutex",         EvoScript::Protected },
 
                 { "std::string",           "m_geometry_name", EvoScript::Protected },
                 { "void*",                 "m_shader",        EvoScript::Protected },
@@ -251,7 +251,7 @@ namespace Framework {
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, WaitCalculate, void, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetMaterial, Material*, () const)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh*, ())
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh*, () const)
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, GetGeometryName, std::string, () const)
 
         ESRegisterOverrideMethod(Graphics::, EvoScript::Public, generator, Mesh, OnDestroyComponent, void, (), "Component")

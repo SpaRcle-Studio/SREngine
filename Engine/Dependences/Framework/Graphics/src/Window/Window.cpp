@@ -506,13 +506,12 @@ void Framework::Graphics::Window::PollEvents() {
         for (Camera* camera : m_camerasToDestroy)
             for (size_t t = 0; t < m_countCameras; t++) {
                 if (camera == m_cameras[t]) {
-                    //if(Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                    if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low)
                         Helper::Debug::Log("Window::PoolEvents() : remove camera...");
 
                     m_cameras.erase(m_cameras.begin() + t);
                     m_countCameras--;
                     camera->Free();
-                    //camera->SetUse(false);
                 }
             }
 
@@ -632,9 +631,10 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Window::PopAimedMesh() no
 }
 
 void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *camera) {
-    Debug::Log("Window::RemoveCamera() : register camera to remove...");
-    if (!camera)
-    {
+    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None)
+        Debug::Log("Window::RemoveCamera() : register camera to remove...");
+
+    if (!camera) {
         Debug::Error("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
         return;
     }
@@ -645,12 +645,15 @@ void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *cam
 }
 
 void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)  {
-    Debug::Log("Window::AddCamera() : register new camera...");
+    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None)
+        Debug::Log("Window::AddCamera() : register new camera...");
+
     m_camerasMutex.lock();
-    //camera->SetUse(true);
+
     m_newCameras.push_back(camera);
     m_countNewCameras++;
+
     m_camerasMutex.unlock();
-} //TODO: mutex
+}
 
                                                            

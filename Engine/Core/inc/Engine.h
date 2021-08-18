@@ -26,6 +26,10 @@ namespace Framework {
         Engine();
         ~Engine();
     public:
+        enum class MainScriptType {
+            None, Engine, Game, Benchmark
+        };
+    public:
         inline static Engine* Get() {
             static Engine* engine = nullptr;
             if (!engine)
@@ -40,6 +44,9 @@ namespace Framework {
 
         volatile bool           m_exitEvent             = false;
     private:
+        Engine::MainScriptType  m_scriptType            = MainScriptType::None;
+        Scripting::Script*      m_mainScript            = nullptr;
+
         Scripting::Compiler*    m_compiler              = nullptr;
         Graphics::Window*       m_window                = nullptr;
         Graphics::Render*       m_render                = nullptr;
@@ -50,6 +57,7 @@ namespace Framework {
         Physics::PhysEngine*    m_physics               = nullptr;
     private:
         bool RegisterLibraries();
+        bool LoadMainScript();
     public:
         static inline void Reload() {
             Helper::FileSystem::Reload();
@@ -57,7 +65,7 @@ namespace Framework {
         }
 
         bool SetScene(const Types::SafePtr<Scene>& scene) { // TODO: add thread security!
-            if (scene == m_scene) {
+            if (m_scene.Valid() && scene == m_scene) {
                 Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
                 return false;
             } else {
@@ -73,7 +81,7 @@ namespace Framework {
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
     public:
         bool Create(Graphics::Window* window, Physics::PhysEngine* physics);
-        bool Init();
+        bool Init(Engine::MainScriptType mainScriptType);
         bool Run();
         void Await();
         bool Close();

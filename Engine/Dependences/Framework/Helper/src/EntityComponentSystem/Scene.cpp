@@ -26,7 +26,9 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
 }
 
 Framework::Helper::Types::SafePtr<Framework::Helper::Scene> Framework::Helper::Scene::New(const std::string& name) {
-    Debug::Log("Scene::New() : creating new scene...");
+    if (Debug::GetLevel() > Debug::Level::None)
+        Debug::Log("Scene::New() : creating new scene...");
+
     Types::SafePtr<Scene> scene;
     scene = new Scene(name);
     scene->SetThis(scene);
@@ -44,7 +46,8 @@ bool Framework::Helper::Scene::Destroy() {
         return false;
     }
 
-    Debug::Log("Scene::Destroy() : destroying \""+m_name+"\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
+    if (Debug::GetLevel() > Debug::Level::None)
+        Debug::Log("Scene::Destroy() : destroying \""+m_name+"\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
 
     m_mutex.lock();
 
@@ -77,7 +80,8 @@ bool Framework::Helper::Scene::Free() {
         return false;
     }
 
-    Debug::Log("Scene::Free() : free \""+m_name+"\" scene pointer...");
+    if (Debug::GetLevel() > Debug::Level::None)
+        Debug::Log("Scene::Free() : free \""+m_name+"\" scene pointer...");
 
     delete this;
     return true;

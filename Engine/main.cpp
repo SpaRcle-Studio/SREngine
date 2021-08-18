@@ -106,7 +106,7 @@ int main() {
     auto engine = Engine::Get();
 
     if(engine->Create(window, physics)) {
-      if (engine->Init()){
+      if (engine->Init(Engine::MainScriptType::Engine)){
           if (engine->Run()){
 
           }

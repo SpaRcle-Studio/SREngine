@@ -61,7 +61,7 @@ namespace Framework::Graphics::Types {
             this->m_env->DrawIndices(this->m_countIndices);
         }
 
-        Mesh* Copy() override;
+        Mesh* Copy() const override;
 
         SR_FORCE_INLINE void SetVertexArray(const std::vector<Vertices::Mesh3DVertex>& vertices) noexcept {
             this->m_isCalculated  = false;
