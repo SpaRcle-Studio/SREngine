@@ -1,5 +1,19 @@
 # SpaRcle Engine
 
+## Supported compilers
+- [x] MSVC
+- [x] MinGW
+- [ ] Cygwin
+- [ ] Clang
+- [ ] GCC
+
+## Supported platforms
+- [x] Windows 10
+- [ ] Ubuntu
+- [ ] Arch
+- [ ] Redhat
+- [ ] Android
+
 ## Used libraries
   * glm
   * OpenGL / GLFW / GLEW / glad
