@@ -439,8 +439,8 @@ bool Framework::Graphics::OpenGL::LinkShader(
         glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
         std::string error = StringUtils::FromCharVector(ProgramErrorMessage);
         if (!error.empty()) {
-            size_t index = error.find("error");
-            if (index == 18446744073709551615) {
+            auto index = error.find("error");
+            if (index == std::string::npos) {
                 Debug::Warn("OpenGL::LinkShader : Warning linking program! Reason : " + error);
             }
             else {
@@ -980,6 +980,11 @@ bool Framework::Graphics::OpenGL::CalculateIBO(
 {
     if (VBO <= 0) {
         Helper::Debug::Error("OpenGL::CalculateIBO() : to calculate the IBO, OpenGL needs a VBO (VAO)!");
+        return false;
+    }
+
+    if (count == 0 || !indices) {
+        Helper::Debug::Error("OpenGL::CalculateIBO() : count indices is zero or indices is nullptr!");
         return false;
     }
 

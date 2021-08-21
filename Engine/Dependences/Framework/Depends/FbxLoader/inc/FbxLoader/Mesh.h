@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <cctype>
+#include <math.h>
 #include "Debug.h"
 
 namespace FbxLoader {
@@ -112,7 +113,7 @@ namespace FbxLoader {
 }
 
 namespace std {
-    template <> struct std::hash<FbxLoader::vec3> {
+    template <> struct hash<FbxLoader::vec3> {
         std::size_t operator()(const FbxLoader::vec3& v) const {
             std::size_t res = 0;
             FbxLoader::hash_combine(res, v.x);
@@ -122,7 +123,7 @@ namespace std {
         }
     };
 
-    template <> struct std::hash<FbxLoader::vec2> {
+    template <> struct hash<FbxLoader::vec2> {
         std::size_t operator()(const FbxLoader::vec2& v) const {
             std::size_t res = 0;
             FbxLoader::hash_combine(res, v.x);
@@ -131,7 +132,7 @@ namespace std {
         }
     };
 
-    template <> struct std::hash<FbxLoader::Vertex> {
+    template <> struct hash<FbxLoader::Vertex> {
         std::size_t operator()(const FbxLoader::Vertex& v) const {
             std::size_t result = 0;
             FbxLoader::hash_combine(result, v.pos);

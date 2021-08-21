@@ -9,6 +9,7 @@
 #include <functional>
 #include <utility>
 #include <string>
+#include <thread>
 #include <Math/Vector3.h>
 
 #include <Environment/PipeLine.h>

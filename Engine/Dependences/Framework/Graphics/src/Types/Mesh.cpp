@@ -122,7 +122,10 @@ ret:
 
         for (auto shape : fbx.GetShapes()) {
             auto* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
-            mesh->SetIndexArray(shape.indices);
+
+            if (withIndices)
+                mesh->SetIndexArray(shape.indices);
+
             auto vertices = std::vector<Vertices::Mesh3DVertex>();
             for (auto vertex : shape.vertices)
                 vertices.emplace_back(Vertices::Mesh3DVertex {
@@ -257,14 +260,10 @@ bool Mesh::DrawOnInspector() {
 }
 
 Math::Vector3 Mesh::GetBarycenter() const {
-    if (m_pipeline == PipeLine::OpenGL) {
-        return Math::Matrix4x4(1).GetTranslate();
-    } else {
-        auto baryMat = Math::Matrix4x4(m_barycenter, Math::Vector3(), 1.0);
-        auto rotateMat = Math::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
+    auto baryMat = Math::Matrix4x4(m_barycenter, Math::Vector3(), 1.0);
+    auto rotateMat = Math::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
 
-        return (rotateMat * baryMat).GetTranslate();
-    }
+    return (rotateMat * baryMat).GetTranslate();
 }
 
 /*

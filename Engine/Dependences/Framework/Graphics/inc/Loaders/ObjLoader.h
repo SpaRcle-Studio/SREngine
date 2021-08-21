@@ -16,6 +16,7 @@
 #include <Types/Vertices.h>
 #include <tinyobjloader/tiny_obj_loader.h>
 
+/*
 namespace static_if_detail {
     struct identity {
         template<typename T>
@@ -52,7 +53,7 @@ static_if_detail::statement<Cond> static_if(F const& f){
     static_if_detail::statement<Cond> if_;
     if_.then(f);
     return if_;
-}
+}*/
 
 namespace Framework::Graphics::Types{
     class Mesh;
@@ -121,7 +122,7 @@ namespace Framework::Graphics {
                             attrib.vertices[3 * index.vertex_index + 2]
                     };
 
-                    static_if<std::is_same<Vertices::Mesh3DVertex, T>::value>([&](auto f){
+                    if constexpr (std::is_same<Vertices::Mesh3DVertex, T>::value) {
                         vertex.uv = {
                                 attrib.texcoords[2 * index.texcoord_index + 0],
                                 1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
@@ -135,7 +136,7 @@ namespace Framework::Graphics {
                         };
 
                         vertex.tang = { 0, 0, 0 };
-                    });
+                    };
 
                     if (uniqueVertices.count(vertex) == 0) {
                         uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());

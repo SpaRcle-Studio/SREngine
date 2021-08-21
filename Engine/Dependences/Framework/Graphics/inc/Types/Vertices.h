@@ -164,7 +164,7 @@ namespace std {
         s^= h(v) + 0x9e3779b9 + (s<< 6) + (s>> 2);
     }
 
-    template<> struct std::hash<Framework::Graphics::Vertices::Mesh3DVertex> {
+    template<> struct hash<Framework::Graphics::Vertices::Mesh3DVertex> {
         size_t operator()(Framework::Graphics::Vertices::Mesh3DVertex const& vertex) const {
             std::size_t res = 0;
             hash_combine<glm::vec3>(res, vertex.pos);
@@ -175,7 +175,7 @@ namespace std {
         }
     };
 
-    template<> struct std::hash<Framework::Graphics::Vertices::SkyboxVertex> {
+    template<> struct hash<Framework::Graphics::Vertices::SkyboxVertex> {
         size_t operator()(Framework::Graphics::Vertices::SkyboxVertex const& vertex) const {
             std::size_t res = 0;
             hash_combine<glm::vec3>(res, vertex.pos);

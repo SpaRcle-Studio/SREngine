@@ -655,5 +655,3 @@ void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)
 
     m_camerasMutex.unlock();
 }
-
-                                                           

@@ -10,6 +10,8 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Skybox.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/EditorGrid.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Animations/Bone.cpp
+
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ObjLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ImageLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureLoader.cpp

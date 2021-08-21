@@ -63,6 +63,7 @@ int main() {
         Component::RegisterComponent("Mesh3D",             []() -> Component* { return new Mesh3D();       });
         Component::RegisterComponent("Rigidbody",          []() -> Rigidbody* { return new Rigidbody();    });
         Component::RegisterComponent("Camera",             []() -> Camera*    { return Camera::Allocate(); });
+        //Component::RegisterComponent("Bone",               []() -> Camera*    { return Camera::Allocate(); });
     }
 
     if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")

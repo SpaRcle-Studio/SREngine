@@ -42,10 +42,11 @@
 #define DEG3(v) glm::vec3(DEG(v.x),DEG(v.y),DEG(v.z))
 
 #include <cmath>
+#include <float.h>
 
 namespace Framework::Helper::Math {
     typedef double Unit; //! can broken render
-    inline static const Unit UnitMAX = DBL_MAX;
+    const Unit UnitMAX = DBL_MAX;
 
     static _ALWAYS_INLINE_ bool is_equal_approx(Unit a, Unit b) noexcept {
         // Check for exact equality first, required to handle "infinity" values.

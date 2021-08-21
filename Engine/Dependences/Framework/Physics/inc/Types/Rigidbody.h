@@ -14,15 +14,14 @@ namespace Framework::Physics::Types {
     class Rigidbody : public Component {
     public:
         Rigidbody();
-        ~Rigidbody() {
-
-        }
+    private:
+        ~Rigidbody() = default;
     protected:
         void OnDestroyGameObject() noexcept override {
-
+            delete this;
         }
-        void OnDestroyComponent() noexcept override {
-            Debug::Error("Rigidbody::OnDestroyComponent() : TODO!");
+        void OnRemoveComponent() noexcept override {
+            OnRemoveComponent();
         }
     };
 }

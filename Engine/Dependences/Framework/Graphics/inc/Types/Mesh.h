@@ -127,6 +127,7 @@ namespace Framework::Graphics::Types {
         void OnReady(bool ready) override {
             this->m_env->SetBuildState(false);
         }
+        void OnAttachComponent() override { }
     public:
         SR_FORCE_INLINE void WaitCalculate() const {
             ret:
@@ -188,7 +189,12 @@ namespace Framework::Graphics::Types {
                 this->m_material->UseOpenGL();
             }
 
-            this->m_env->DrawTriangles(m_countIndices);
+            if (!m_useIndices)
+                this->m_env->DrawTriangles(m_countVertices);
+            else {
+                Helper::Debug::Error("Mesh::DrawOpenGL() : isn't support indices!");
+                return false;
+            }
 
             return true;
         }
@@ -217,8 +223,8 @@ namespace Framework::Graphics::Types {
         /** \warning call only from render */
         virtual bool FreeVideoMemory() = 0;
 
-        void OnDestroyComponent() noexcept override {
-            Debug::Error("Mesh::OnDestroyComponent() : TODO!");
+        void OnRemoveComponent() noexcept override {
+            this->OnDestroyGameObject();
         }
     };
 }

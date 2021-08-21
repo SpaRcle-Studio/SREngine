@@ -118,7 +118,7 @@ namespace Framework::Graphics {
                 }*/
 
                 case(WM_DESTROY):
-                    PostQuitMessage(NULL);
+                    PostQuitMessage(0);
                     this->m_windowOpen = false;
                     return 0;
                 default:
@@ -205,8 +205,8 @@ namespace Framework::Graphics {
         HDC       m_hDC       = nullptr;
         HGLRC     m_hRC       = nullptr;
         HINSTANCE m_hInst     = nullptr;
-        DWORD     m_dwExStyle = NULL;
-        DWORD     m_dwStyle   = NULL;
+        DWORD     m_dwExStyle = 0;
+        DWORD     m_dwStyle   = 0;
     public:
         [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const noexcept { return m_hInst; }
         [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const noexcept { return m_hWnd; }
@@ -313,8 +313,8 @@ namespace Framework::Graphics {
         }
         SR_FORCE_INLINE void PollEvents() const noexcept override {
             MSG msg = {};
-            while (::PeekMessage(&msg, NULL, NULL, NULL, PM_NOREMOVE)) {
-                if (!::GetMessage(&msg, NULL, NULL, NULL))
+            while (::PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE)) {
+                if (!::GetMessage(&msg, nullptr, 0, 0))
                     break;
                 ::TranslateMessage(&msg);
                 ::DispatchMessage(&msg);

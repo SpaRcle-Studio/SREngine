@@ -35,6 +35,7 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
     m_mutex.lock();
 
     component->SetParent(this);
+    component->OnAttachComponent();
     m_components.push_back(component);
 
     UpdateComponents();
@@ -319,4 +320,13 @@ Math::Vector3 GameObject::GetHierarchyBarycenter() {
     });
 
     return count == 0 ? Math::InfinityV3 : barycenter / count;
+}
+
+void GameObject::ForEachComponent(const std::function<void(Component*)> &fun) {
+    m_mutex.lock();
+
+    for (auto component : m_components)
+        fun(component);
+
+    m_mutex.unlock();
 }

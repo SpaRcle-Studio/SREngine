@@ -25,6 +25,7 @@ bool Framework::Physics::PhysEngine::Create() {
     // default gravity
     this->m_dynamicWorld->setGravity(btVector3(0, -10, 0));
 
+    /*
     btMotionState* state = new btDefaultMotionState(btTransform(
             btQuaternion(), // rotation
             btVector3()     // position
@@ -32,7 +33,7 @@ bool Framework::Physics::PhysEngine::Create() {
 
     btCollisionShape* shape = new btBoxShape(btVector3(1,1,1));
 
-    btRigidBody* rigidbody = new btRigidBody(1.f, state, shape);
+    btRigidBody* rigidbody = new btRigidBody(1.f, state, shape);*/
 
     return true;
 }

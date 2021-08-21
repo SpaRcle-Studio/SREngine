@@ -324,17 +324,6 @@ Framework::Helper::Math::Vector3 Framework::Helper::Transform::Up() const noexce
     return m_globalRotation.Radians().ToQuat() * up;
 }
 
-//float Magnitude(glm::vec3 vec){
-//    return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
-//}
-
-//glm::vec3 Framework::Helper::Transform::Direction(glm::vec3 point) noexcept {
-    //glm::vec3 heading = point - m_globalPosition;
-    //float distance = Magnitude(heading);
-    //if (std::isnan(distance))
-   //     return glm::vec3(0,0,0);
-   // return heading / distance;
-//}
 void Framework::Helper::Transform::SetMatrix(glm::mat4 delta, glm::mat4 matrix, bool pivot) noexcept  {
     glm::vec3 scale;
     glm::quat rotation;

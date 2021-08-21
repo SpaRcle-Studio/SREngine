@@ -184,6 +184,13 @@ void Framework::Graphics::GUI::GUISystem::DrawChild(Framework::Helper::Types::Sa
     ImGui::TreePop();
 }
 
+void Framework::Graphics::GUI::GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject) {
+    gameObject->ForEachComponent([](Component* component) {
+        if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
+            component->DrawOnInspector();
+    });
+}
+
 void Framework::Graphics::GUI::GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
     Helper::Types::SafePtr<Helper::GameObject> gameObject;
     if (scene.LockIfValid()) {
@@ -231,6 +238,8 @@ void Framework::Graphics::GUI::GUISystem::DrawInspector(Framework::Helper::Types
 
         if (ImGui::InputFloat3("L Sc", &scale[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
             gameObject->GetTransform()->SetLocalScale(position);
+
+        this->DrawComponents(gameObject);
 
         /*
         ImGui::Text("[Parent direction]");

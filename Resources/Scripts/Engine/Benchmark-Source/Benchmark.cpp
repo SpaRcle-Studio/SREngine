@@ -93,8 +93,8 @@ EXTERN void FixedUpdate() {
     Debug::Script("Run benchmark iteration...");
 
     CreateScene();
-    CreateCamera();
-    FullScene();
+    //CreateCamera();
+    //FullScene();
     FreeScene();
 
     Debug::Script("End benchmark iteration.");

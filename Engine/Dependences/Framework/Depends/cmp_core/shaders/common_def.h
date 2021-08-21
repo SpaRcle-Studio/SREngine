@@ -30,6 +30,10 @@
 #ifndef _COMMON_DEFINITIONS_H
 #define _COMMON_DEFINITIONS_H
 
+#ifdef __MINGW32__
+    #pragma GCC diagnostic ignored "-Wattributes"
+#endif
+
 #ifdef __linux__
 #ifndef _LINUX
 #define _LINUX
@@ -54,6 +58,8 @@
 //#define USE_ASPM_CODE
 #include <cmath>
 #endif
+
+#include <cstring>
 
 // Proxy ISPC compiler (Warning! Not all ASPM features will be available : expect build errors for specialized ASPM code!
 #ifdef ISPC

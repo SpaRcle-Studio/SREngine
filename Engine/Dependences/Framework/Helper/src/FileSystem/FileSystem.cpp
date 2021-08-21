@@ -6,7 +6,6 @@
 #include "../../inc/FileSystem/FileSystem.h"
 
 #include <cstdio>
-#include <filesystem>
 #include <Debug.h>
 #include <Utils/StringUtils.h>
 
@@ -16,6 +15,7 @@
 
 #include <Utils/StringUtils.h>
 #include <Debug.h>
+#include <direct.h>
 
 using namespace Framework::Helper;
 
@@ -162,6 +162,10 @@ std::vector<char> FileSystem::ReadBinary(const std::string &path) {
 }
 
 bool FileSystem::CreatePath(const std::string &path) {
-    return std::filesystem::create_directories(path.c_str());
+#ifdef __MINGW64__
+    return mkdir(path.c_str());
+#else
+    return _mkdir(path.c_str());
+#endif
 }
 

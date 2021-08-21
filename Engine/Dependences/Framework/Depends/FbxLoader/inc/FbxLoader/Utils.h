@@ -9,12 +9,16 @@
 
 #include <string>
 #include <vector>
-#include <experimental/filesystem> // or #include <filesystem> for C++17 and up
 #include <fstream>
+
+#ifdef __MINGW64__
+    #include <dirent.h>
+#else
+    #include <direct.h>
+#endif
+
 #include <sys/stat.h>
 #include <sstream>
-
-namespace fs = std::experimental::filesystem;
 
 namespace FbxLoader::Tools {
     static std::string Replace(std::string str, const std::string& from, const std::string& to) {
@@ -69,7 +73,11 @@ namespace FbxLoader::Tools {
     }
 
     static bool CreateFolder(const std::string& directory) {
-        return fs::create_directory(directory);
+#ifdef __MINGW64__
+        return mkdir(directory.c_str());
+#else
+        return _mkdir(directory.c_str());
+#endif
     }
 
     inline static std::string Read(const std::string& str, uint32_t count) {

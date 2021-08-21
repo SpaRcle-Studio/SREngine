@@ -223,7 +223,7 @@ namespace Framework::Graphics {
             for (uint8_t i = 0; i < colorCount; i++)
                 m_clearValues[i] = { .color = {{ r, g, b, a }} };
 
-            m_clearValues[colorCount] = { .depthStencil = { depth, 0 } };
+            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
 
             this->m_renderPassBI.clearValueCount = colorCount + 1;
             this->m_renderPassBI.pClearValues    = m_clearValues.data();
@@ -257,6 +257,8 @@ namespace Framework::Graphics {
                 Helper::Debug::Error("Vulkan::ReCreateShader() : shader isn't exists!");
                 return false;
             }
+
+            return true;
         }
 
         bool CompileShader(

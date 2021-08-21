@@ -106,8 +106,8 @@ namespace glm
 
 	/// Return e constant.
 	/// @see gtc_constants
-	template<typename genType>
-	GLM_FUNC_DECL GLM_CONSTEXPR genType e();
+	//template<typename genType>
+	//GLM_FUNC_DECL GLM_CONSTEXPR genType e();
 
 	/// Return Euler's constant.
 	/// @see gtc_constants

@@ -98,11 +98,11 @@ namespace glm
 		return genType(1.17741002251547469);
 	}
 
-	template<typename genType>
-	GLM_FUNC_QUALIFIER GLM_CONSTEXPR genType e()
-	{
-		return genType(2.71828182845904523536);
-	}
+	//template<typename genType>
+	//GLM_FUNC_QUALIFIER GLM_CONSTEXPR genType e()
+	//{
+	//	return genType(2.71828182845904523536);
+	//}
 
 	template<typename genType>
 	GLM_FUNC_QUALIFIER GLM_CONSTEXPR genType euler()

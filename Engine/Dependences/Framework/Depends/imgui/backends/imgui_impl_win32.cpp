@@ -220,6 +220,7 @@ static void ImGui_ImplWin32_UpdateMousePos()
                 io.MouseHoveredViewport = viewport->ID;
 }
 
+/*
 // Gamepad navigation mapping
 static void ImGui_ImplWin32_UpdateGamepads()
 {
@@ -267,7 +268,7 @@ static void ImGui_ImplWin32_UpdateGamepads()
         #undef MAP_ANALOG
     }
 #endif // #ifndef IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
-}
+}*/
 
 static BOOL CALLBACK ImGui_ImplWin32_UpdateMonitors_EnumFunc(HMONITOR monitor, HDC, LPRECT, LPARAM)
 {
@@ -333,7 +334,7 @@ void    ImGui_ImplWin32_NewFrame()
     }
 
     // Update game controllers (if enabled and available)
-    ImGui_ImplWin32_UpdateGamepads();
+    //ImGui_ImplWin32_UpdateGamepads();
 }
 
 // Allow compilation with old Windows SDK. MinGW doesn't have default _WIN32_WINNT/WINVER versions.

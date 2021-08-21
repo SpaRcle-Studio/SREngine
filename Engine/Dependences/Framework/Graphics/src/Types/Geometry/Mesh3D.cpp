@@ -65,16 +65,19 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     } else
         m_barycenter = Vertices::Barycenter(m_vertices);
 
-    if (!this->m_env->CalculateIBO(m_IBO, m_indices.data(), sizeof(uint32_t), m_countIndices, m_VBO)) {
-        Debug::Error("Mesh3D::Calculate() : failed calculate IBO \"" + m_geometry_name + "\" mesh!");
-        this->m_hasErrors = true;
-        m_mutex.unlock();
-        return false;
-    }
+    if (m_useIndices)
+        if (!this->m_env->CalculateIBO(m_IBO, m_indices.data(), sizeof(uint32_t), m_countIndices, m_VBO)) {
+            Debug::Error("Mesh3D::Calculate() : failed calculate IBO \"" + m_geometry_name + "\" mesh!");
+            this->m_hasErrors = true;
+            m_mutex.unlock();
+            return false;
+        }
 
     VBOandIBO_names[m_resource_id] = std::pair((uint32_t)m_VBO, (uint32_t)m_IBO);
     VBO_usages[(uint32_t)m_VBO]++;
-    IBO_usages[(uint32_t)m_IBO]++;
+
+    if (m_useIndices)
+        IBO_usages[(uint32_t)m_IBO]++;
 
     m_isCalculated = true;
 
@@ -172,7 +175,7 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
                 return false;
             }
     }
-    else {
+    else if (m_useIndices){
         Debug::Error("Mesh:FreeVideoMemory() : IBO is not exists! Something went wrong...");
         return false;
     }

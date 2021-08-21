@@ -51,6 +51,7 @@ namespace Framework::Graphics::GUI {
         ImGuizmo::OPERATION m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE      m_currentGuizmoMode      = ImGuizmo::MODE::LOCAL;
     private:
+        void DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject);
         static void DrawImage(
                 ImTextureID user_texture_id,
                 const ImVec2& size,

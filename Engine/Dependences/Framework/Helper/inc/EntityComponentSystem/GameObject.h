@@ -48,6 +48,7 @@ namespace Framework::Helper {
         void SetThis(const Types::SafePtr<GameObject>& _this) {
             m_this = _this;
         }
+        void ForEachComponent(const std::function<void(Component*)>& fun);
         void ForEachChild(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetParent(GameObject* gm);
         void RemoveParent(GameObject* gm);
