@@ -79,10 +79,10 @@ namespace Framework::Graphics::Types {
         /* Call only from render pool events */
         SR_FORCE_INLINE bool FreeVideoMemory() noexcept {
             if (Debug::GetLevel() >= Debug::Level::High)
-                Debug::Log("Texture::FreeVideoMemory() : free texture video memory...");
+                Debug::Log("Texture::FreeVideoMemory() : free \"" + std::string(m_resource_name) + "\" texture video memory...");
 
             if (!m_isCalculate) {
-                Debug::Error("Texture::FreeVideoMemory() : texture is not calculated!");
+                Debug::Error("Texture::FreeVideoMemory() : texture \"" + std::string(m_resource_name) + "\" is not calculated!");
                 return false;
             }
             else

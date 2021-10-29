@@ -17,7 +17,9 @@ public:
 public:
     static bool Delete(const char *file);
 
-    static bool FileExists(const char *file);
+    static bool FileExists(const std::string& path);
+
+    static std::string SaveFileDialog(const std::string& path, const std::string& filter);
 
     static bool CreatePath(const std::string& path);
     static std::string GetExecutableFileName();

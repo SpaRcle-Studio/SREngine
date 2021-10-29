@@ -9,7 +9,7 @@
 #include <Base/Script.h>
 #include <Base/Compiler.h>
 
-namespace Framework {
+namespace Framework::Core::GUI {
     class EditorGUI : public Graphics::GUI::ICanvas {
     public:
         EditorGUI(Scripting::Compiler* compiler) {

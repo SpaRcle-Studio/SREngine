@@ -8,5 +8,4 @@ layout (location = 1) out vec4 outColor;
 
 void main() {
     outColor = texture(cubeMapTexture, UV);
-    //outColor = vec4(UV, 1);
 }

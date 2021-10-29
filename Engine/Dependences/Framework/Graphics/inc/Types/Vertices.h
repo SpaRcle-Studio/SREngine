@@ -16,6 +16,7 @@
 #include <glm/gtx/string_cast.hpp>
 
 #include <Math/Vector3.h>
+#include <Utils/Enumerations.h>
 
 #define SR_VERTEX_DESCRIPTION size_t
 
@@ -48,9 +49,19 @@ namespace Framework::Graphics::Vertices {
     }
 
     enum class Attribute {
-        FLOAT_R32G32B32A32,
-        FLOAT_R32G32B32,
-        FLOAT_R32G32,
+        Unknown            = 0,
+
+        FLOAT_R32G32B32A32 = 1 << 0,
+        FLOAT_R32G32B32    = 1 << 1,
+        FLOAT_R32G32       = 1 << 2,
+
+        INT_R32G32B32A32   = 1 << 3,
+        INT_R32G32B32      = 1 << 4,
+        INT_R32G32         = 1 << 5,
+
+        VECTOR4            = FLOAT_R32G32B32A32 | INT_R32G32B32A32,
+        VECTOR3            = FLOAT_R32G32B32 | INT_R32G32B32,
+        VECTOR2            = FLOAT_R32G32 | INT_R32G32,
     };
 
     static std::string ToString(const glm::vec3& vec3) {
@@ -67,7 +78,7 @@ namespace Framework::Graphics::Vertices {
         glm::vec3 norm;
         glm::vec3 tang;
 
-        static SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
+        static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(Mesh3DVertex);
         }
 
@@ -132,9 +143,11 @@ namespace Framework::Graphics::Vertices {
         }
     };
 
-    enum class Type {
-        Mesh3DVertex, SkyboxVertex
-    };
+    SR_ENUM_CLASS(Type,
+        Unknown,
+        Mesh3DVertex,
+        SkyboxVertex
+    )
 
     static uint32_t GetVertexSize(Type type) {
         switch (type) {
@@ -155,8 +168,30 @@ namespace Framework::Graphics::Vertices {
 
         return Helper::Math::Vector3(x, y, z) / vertices.size();
     }
-}
 
+    struct VertexInfo {
+        std::vector<SR_VERTEX_DESCRIPTION> m_descriptions;
+        std::vector<std::pair<Vertices::Attribute, size_t>> m_attributes;
+    };
+
+    static VertexInfo GetVertexInfo(Type type) {
+        VertexInfo info = {};
+        switch (type) {
+            case Type::Mesh3DVertex:
+                info.m_attributes = Mesh3DVertex::GetAttributes();
+                info.m_descriptions = { Mesh3DVertex::GetDescription() };
+                break;
+            case Type::SkyboxVertex:
+                info.m_attributes = SkyboxVertex::GetAttributes();
+                info.m_descriptions = { SkyboxVertex::GetDescription() };
+                break;;
+            default:
+                Helper::Debug::Error("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int)type));
+                break;
+        }
+        return info;
+    }
+}
 
 namespace std {
     template <class T> static inline void hash_combine(std::size_t & s, const T & v) {

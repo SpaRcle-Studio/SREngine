@@ -20,9 +20,13 @@ namespace Framework::Graphics::Impl {
         void UpdateUBOs() override {
             if (m_currentCamera) {
                 this->m_currentCamera->UpdateShader<ProjViewUBO>(Shader::GetDefaultGeometryShader());
-                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_transparentShader);
-                this->m_currentCamera->UpdateShader<SkyboxUBO>(m_skyboxShader);
+                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::Transparent]);
+                this->m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
             }
+        }
+
+        bool DrawDebugWireframe() override {
+            return true;
         }
 
         bool DrawGeometry() override {
@@ -32,8 +36,8 @@ namespace Framework::Graphics::Impl {
                 this->m_env->BindVBO(val[0]->FastGetVBO());
                 this->m_env->BindIBO(val[0]->FastGetIBO());
 
-                for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
-                    val[i]->DrawVulkan();
+                for (const auto& mesh : val)
+                    mesh->DrawVulkan();
             }
 
             this->m_env->UnUseShader();
@@ -42,10 +46,10 @@ namespace Framework::Graphics::Impl {
         }
 
         bool DrawSkybox() override {
-            if (m_skybox && m_skyboxEnabled) {
-                m_skyboxShader->Use();
+            if (m_skybox.m_current && m_skyboxEnabled) {
+                m_shaders[Shader::StandardID::Skybox]->Use();
 
-                m_skybox->DrawVulkan();
+                m_skybox.m_current->DrawVulkan();
 
                 m_env->UnUseShader();
             }

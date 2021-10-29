@@ -11,22 +11,25 @@
 #include <vector>
 #include <map>
 #include <mutex>
+#include <macros.h>
 #include "GameObject.h"
 #include <Debug.h>
 #include <stack>
 #include <set>
 #include <Types/SafePointer.h>
+#include <Types/StringAtom.h>
 
 namespace Framework::Helper {
     class Scene {
     private:
-        Scene(const std::string& name) {
+        explicit Scene(const std::string& name) {
             m_name = name;
         }
         ~Scene() = default;
     public:
         static Types::SafePtr<Scene> New(const std::string& name);
         static Types::SafePtr<Scene> Load(const std::string& name);
+        bool Save(const std::string& folder);
         bool Destroy();
         bool Free();
     private:
@@ -35,11 +38,11 @@ namespace Framework::Helper {
         bool                                    m_isDestroy           = false;
         bool                                    m_isHierarchyChanged  = false;
 
-        std::mutex                              m_mutex               = std::mutex();
+        std::recursive_mutex                    m_mutex               = std::recursive_mutex();
         std::mutex                              m_displayListMutex    = std::mutex();
         std::mutex                              m_selectedMutex       = std::mutex();
 
-        std::string                             m_name                = "Unnamed";
+        StringAtom                              m_name                = "Unnamed";
         std::set<Types::SafePtr<GameObject>>    m_gameObjects         = std::set<Types::SafePtr<GameObject>>();
 
         std::set<Types::SafePtr<GameObject>>    m_selectedGameObjects = std::set<Types::SafePtr<GameObject>>();
@@ -61,7 +64,10 @@ namespace Framework::Helper {
             }
         }
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
-        [[nodiscard]] inline std::string GetName() const noexcept { return m_name; }
+
+        [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
+        SR_FORCE_INLINE void SetName(const std::string& name) { m_name = name; }
+
         inline std::vector<Types::SafePtr<GameObject>> GetGameObjects() { // TODO: OPTIMIZE
             m_mutex.lock();
 

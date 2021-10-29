@@ -7,11 +7,14 @@
 
 #include <string>
 #include <cstring>
+#include <map>
 #include <glm/glm.hpp>
 #include <algorithm>
 #include <vector>
 #include <locale>
 #include <macros.h>
+
+#define SR_INVALID_STR -1
 
 namespace Framework::Helper {
     class StringUtils {
@@ -51,7 +54,7 @@ namespace Framework::Helper {
             for (uint32_t i = 0; i < str.size(); i++)
                 if (str[i] == symbol)
                     return (int32_t)i;
-            return -1;
+            return SR_INVALID_STR;
         }
 
         static SR_FORCE_INLINE std::string GetFileNameFromFullPath(std::string full_path) {
@@ -66,6 +69,19 @@ namespace Framework::Helper {
             }
 
             return full_path;
+        }
+
+        static std::string RemoveCharsFromString(std::string source, const std::string& charsToRemove) {
+            for (char i : charsToRemove) {
+                source.erase(remove(source.begin(), source.end(), i), source.end());
+            }
+            return source;
+        }
+
+        static std::string GetBetween(const std::string& source, const std::string& begin, const std::string& end) {
+            auto first = source.find(begin);
+            auto last = source.find(end);
+            return source.substr(first, last - first);
         }
 
         static SR_FORCE_INLINE std::string BackRead(const std::string& str, const char c, const int offset = 0) {
@@ -86,6 +102,19 @@ namespace Framework::Helper {
         }
 
         static std::string ReadFrom(const std::string& str, const char& c, uint32_t start);
+
+        static int32_t FindClosest(const std::string& str, const std::string& characters) {
+            int32_t pos = SR_INVALID_STR;
+
+            for (char c : characters) {
+                auto find = str.find(c);
+                if (find != std::string::npos)
+                    if (pos == -1 || find < pos)
+                        pos = find;
+            }
+
+            return pos;
+        }
 
         static inline std::string ReadTo(std::string str, const char c, int offset = 0) {
             size_t size = str.size();
@@ -128,6 +157,19 @@ namespace Framework::Helper {
             }
             return len;
         }
+
+        inline static std::pair<std::string, std::string> SplitTwo(std::string source, const std::string& delimiter) {
+            std::pair<std::string, std::string> result = {};
+            auto pos = source.find(delimiter);
+
+            result.first = source.substr(0, pos);
+            source.erase(0, pos + delimiter.length());
+            result.second = source;
+
+            return result;
+        }
+
+        static std::vector<std::string> Split(std::string source, const std::string& delimiter);
 
         inline static char** Split(const char* source, char chr, unsigned short start, unsigned short count_strs) {
             char** strs = new char*[count_strs];
@@ -257,8 +299,8 @@ namespace Framework::Helper {
             return str;
         }
         inline static std::string MakePath(std::string str, bool toLower = true) noexcept {
-            str = ReplaceAll(str, "\\\\", "\\");
-            str = ReplaceAll(str, "/", "\\");
+            str = ReplaceAll(str, "\\\\", "/");
+            str = ReplaceAll(str, "\\", "/");
             if (toLower) str = ToLower(str);
             return str;
         }
@@ -274,7 +316,6 @@ namespace Framework::Helper {
             return wc;
         }
 #endif
-
     };
 }
 

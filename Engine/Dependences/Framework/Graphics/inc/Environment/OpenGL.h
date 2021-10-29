@@ -46,7 +46,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()  const noexcept override { return true; }
         [[nodiscard]] SR_FORCE_INLINE bool IsDrawSupport() const noexcept override { return true; }
 
-        [[nodiscard]] inline std::string GetPipeLineName()   const noexcept override { return "OpenGL"; }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const noexcept override { return "OpenGL"; }
         [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const noexcept override { return PipeLine::OpenGL; }
 
         uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) override;

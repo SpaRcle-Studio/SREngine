@@ -156,40 +156,28 @@ void Mesh::OnDestroyGameObject() noexcept {
         m_render->RemoveMesh(this);
 }
 
-/*
-nlohmann::json Mesh::Save() {
-    nlohmann::json json;
-    json["Mesh"]["GeometryName"] = m_geometry_name;
+bool Mesh::IsCanCalculate() {
+    if (!m_render){
+        Debug::Error("Mesh::IsCanCalculate() : mesh is not register in render!");
+        return false;
+    }
 
-    size_t size = m_resource_id.size();
-
-    for (size_t t = size - 1; t > 0; t--){
-        if (m_resource_id[t] == '-'){
-            json["Mesh"]["Path"] = StringUtils::Resize(m_resource_id, t - 1);
-
-            std::string id = StringUtils::BackSubstring(m_resource_id, '-');
-            json["Mesh"]["ID"] = StringUtils::Resize(id, id.size() - 1);
-
-            json["Mesh"]["Material"]["Color"] = {
-                    this->m_material->m_color.r,
-                    this->m_material->m_color.g,
-                    this->m_material->m_color.b,
-                    this->m_material->m_color.a,
-            };
-
-            json["Mesh"]["Material"]["Transparent"] = m_material->m_transparent;
-
-            break;
+    if (!m_shader) {
+        if (!Shader::GetDefaultGeometryShader()) {
+            Debug::Error("Mesh::IsCanCalculate() : mesh have not shader!");
+            return false;
         }
     }
 
-    return json;
-}*/
+    if (!m_material){
+        Debug::Error("Mesh::IsCanCalculate() : mesh have not material!");
+        return false;
+    }
+
+    return true;
+}
 
 void Mesh::OnSelected(bool value) noexcept {
-    //if (!m_render)
-    //   return;
-
     if (value == this->IsSelected())
         return;
     else {
@@ -265,17 +253,3 @@ Math::Vector3 Mesh::GetBarycenter() const {
 
     return (rotateMat * baryMat).GetTranslate();
 }
-
-/*
-void Mesh::PrintInfo() {
-    Helper::Debug::Info("Mesh::PrintInfo(): "
-                        "\n\tGeometry name: "  + m_geometry_name +
-                        "\n\tResource ID: "    + m_resource_id +
-                        "\n\tUse indices: "    + (m_useIndices ? "true" : "false") +
-                        "\n\tCount vertices: " + std::to_string(m_countVertices) +
-                        "\n\tCount indices: "  + std::to_string(m_countIndices) +
-                        "\n\tInverse: "        + (m_inverse ? "true" : "false") +
-                        "\n\tIs calculated: "  + (m_isCalculated ? "true" : "false") +
-                        "\n\tVAO: "            + std::to_string(m_VAO));
-}*/
-

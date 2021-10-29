@@ -206,29 +206,32 @@ namespace Framework::Graphics{
             *shaderData = reinterpret_cast<void*>(dynamicID);
         }
 
-        std::string sharedShaderModule = Helper::ResourceManager::GetResourcesFolder()
-                .append("\\Shaders\\")
-                .append(GetPipeLineName())
-                .append("\\")
-                .append(path);
+        std::string shadersPath = Helper::ResourceManager::GetResourcesFolder() + "/Shaders/";
 
-        std::string pathToShaderModules = Helper::StringUtils::GetDirToFileFromFullPath(sharedShaderModule);
-        std::string shaderName = Helper::StringUtils::GetFileNameFromFullPath(path);
+        std::string vertex_path = shadersPath + "Common/" + path + ".vert";
+        std::string fragment_path = shadersPath + "Common/" + path + ".frag";
 
-        std::vector<std::pair<std::string, VkShaderStageFlagBits>> modules = {};
         {
-            std::string shaderModule = pathToShaderModules + "\\" + shaderName;
+            if (!Helper::FileSystem::FileExists(vertex_path))
+                vertex_path = shadersPath + GetPipeLineName() + "/" + path + ".vert";
 
-            if (Helper::FileSystem::FileExists(std::string(shaderModule + ".vert").c_str()))
-                modules.emplace_back(std::pair(shaderName + ".vert", VK_SHADER_STAGE_VERTEX_BIT));
+            if (!Helper::FileSystem::FileExists(fragment_path))
+                fragment_path = shadersPath + GetPipeLineName() + "/" + path + ".frag";;
+        }
 
-            if (Helper::FileSystem::FileExists(std::string(shaderModule + ".frag").c_str()))
-                modules.emplace_back(std::pair(shaderName + ".frag", VK_SHADER_STAGE_FRAGMENT_BIT));
+        std::vector<SourceShader> modules = {};
+        {
+            std::string shaderName = Helper::StringUtils::GetFileNameFromFullPath(path);
+
+            if (Helper::FileSystem::FileExists(vertex_path))
+                modules.emplace_back(SourceShader(shaderName + ".vert", vertex_path, ShaderType::Vertex));
+
+            if (Helper::FileSystem::FileExists(fragment_path))
+                modules.emplace_back(SourceShader(shaderName + ".frag", fragment_path, ShaderType::Fragment));
         }
 
         bool errors = false;
-        std::vector<std::pair<LayoutBinding, ShaderType>> bindings =
-                Graphics::AnalyseShader(VulkanTools::VkModulesToAbstractModules(modules), pathToShaderModules, &errors);
+        std::vector<std::pair<LayoutBinding, ShaderType>> bindings = Graphics::AnalyseShader(modules, &errors);
         if (errors) {
             Helper::Debug::Error("Vulkan::CompileShader() : failed to analyse shader!");
             return false;
@@ -260,10 +263,15 @@ namespace Framework::Graphics{
             }
         }
 
+        std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
+        for (const auto& module : modules) {
+            VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_type);
+            vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_name, module.m_path, stage));
+        }
+
         if (!m_memory->m_ShaderPrograms[ID]->Load(
-                pathToShaderModules,
                 Helper::ResourceManager::GetResourcesFolder() + "\\Cache\\Shaders",
-                modules,
+                vkModules,
                 descriptorLayoutBindings,
                 uniformSizes
                 )) {

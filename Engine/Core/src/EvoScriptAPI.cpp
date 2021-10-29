@@ -15,6 +15,7 @@
 #include <GUI/GUISystem.h>
 
 namespace Framework {
+    using namespace Core::GUI;
     using namespace Helper::Math;
     using namespace Helper::Types;
     using namespace Graphics;
@@ -42,6 +43,7 @@ namespace Framework {
         RegisterMaterial(generator);
         RegisterGUISystem(generator);
         RegisterPostProcessing(generator);
+        RegisterISavable(generator);
 
         generator->Save(Helper::ResourceManager::GetResourcesFolder() + "/Scripts/Libraries/");
     }
@@ -269,19 +271,25 @@ namespace Framework {
                 { "std::vector<SafePtr<GameObject>>", "m_children",   EvoScript::Private },
                 { "uint32_t",                         "m_countChild", EvoScript::Private },
                 { "bool",                             "m_isDestroy",  EvoScript::Private },
-                { "std::mutex",                       "m_mutex",      EvoScript::Private },
+                { "std::recursive_mutex",             "m_mutex",      EvoScript::Private },
                 { "Scene*",                           "m_scene",      EvoScript::Private },
                 { "Transform*",                       "m_transform",  EvoScript::Private },
                 { "std::vector<Component*>",          "m_components", EvoScript::Private },
                 { "std::string",                      "m_name",       EvoScript::Private },
                 { "std::string",                      "m_tag",        EvoScript::Private },
-        }, { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Transform.h", "Types/SafePointer.h" });
+        }, { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Transform.h", "Types/SafePointer.h", "ISavable.h" },
+        { { "ISavable", EvoScript::Public } });
 
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
-        ESRegisterMethodArg0(Graphics::, EvoScript::Public, generator, GameObject, GetTransform, Transform*)
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethodArg0(Graphics::, EvoScript::Public, generator, GameObject, GetBarycenter, Vector3)
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
+        ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, GameObject, GetTransform, Transform*)
+        ESRegisterMethod(Helper::, EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, GameObject, GetBarycenter, Vector3)
+
+        using namespace Xml;
+
+        ESRegisterMethodOverrideArg0(Helper::, EvoScript::Public, generator, GameObject, Save, Document)
+        ESRegisterMethodOverride(Helper::, EvoScript::Public, generator, GameObject, Load, bool, ESArg1(const Document& xml), ESArg1(xml))
 
         generator->AddIncompleteType("Scene", "GameObject");
     }
@@ -340,51 +348,51 @@ namespace Framework {
                 { "uint32_t",                               "m_total",           EvoScript::Private },
         });
 
+        const std::string renderSkybox = "[" + std::to_string(sizeof(RenderSkybox)) + "]";
+
         generator->RegisterNewClass("Render", "Render", {
-                { "volatile bool",        "m_isCreate",             EvoScript::Private },
-                { "volatile bool",        "m_isInit",               EvoScript::Private },
-                { "volatile bool",        "m_isRun",                EvoScript::Private },
-                { "volatile bool",        "m_isClose",              EvoScript::Private },
+                { "volatile bool",        "m_isCreate",               EvoScript::Private },
+                { "volatile bool",        "m_isInit",                 EvoScript::Private },
+                { "volatile bool",        "m_isRun",                  EvoScript::Private },
+                { "volatile bool",        "m_isClose",                EvoScript::Private },
 
-                { "void*",                "m_env",                  EvoScript::Private },
+                { "void*",                "m_env",                    EvoScript::Private },
 
-                { "Window*",              "m_window",               EvoScript::Private },
-                { "Camera*",              "m_currentCamera",        EvoScript::Private },
-                { "std::mutex",           "m_mutex",                EvoScript::Private },
+                { "Window*",              "m_window",                 EvoScript::Private },
+                { "Camera*",              "m_currentCamera",          EvoScript::Private },
+                { "std::mutex",           "m_mutex",                  EvoScript::Private },
 
-                { "std::vector<Mesh*>",   "m_newMeshes",            EvoScript::Private },
-                { "std::vector<Mesh*>",   "m_removeMeshes",         EvoScript::Private },
-                { "std::vector<void*>",   "m_textureToFree",        EvoScript::Private },
-                { "std::vector<Skybox*>", "m_skyboxesToFreeVidMem", EvoScript::Private },
+                { "std::vector<Mesh*>",   "m_newMeshes",              EvoScript::Private },
+                { "std::vector<Mesh*>",   "m_removeMeshes",           EvoScript::Private },
+                { "std::vector<void*>",   "m_textureToFree",          EvoScript::Private },
+                { "std::vector<Skybox*>", "m_skyboxesToFreeVidMem",   EvoScript::Private },
 
-                { "MeshCluster",           "m_geometry",            EvoScript::Private },
-                { "MeshCluster",           "m_transparentGeometry", EvoScript::Private },
+                { "MeshCluster",           "m_geometry",              EvoScript::Private },
+                { "MeshCluster",           "m_transparentGeometry",   EvoScript::Private },
+                { "MeshCluster",           "m_wireframeGeometry",     EvoScript::Private },
 
-                { "Skybox*",               "m_newSkybox",           EvoScript::Private },
-                { "Skybox*",               "m_skybox",              EvoScript::Private },
+                { "char",                  "m_skybox" + renderSkybox, EvoScript::Private },
 
-                { "void*",                 "m_geometryShader",      EvoScript::Private },
-                { "void*",                 "m_transparentShader",   EvoScript::Private },
-                { "void*",                 "m_flatGeometryShader",  EvoScript::Private },
-                { "void*",                 "m_skyboxShader",        EvoScript::Private },
+                { "std::vector<void*>",    "m_shaders",               EvoScript::Private },
 
-                { "void*",                 "m_grid",                EvoScript::Private },
-                { "void*",                 "m_colorBuffer",         EvoScript::Private },
+                { "void*",                 "m_grid",                  EvoScript::Private },
+                { "void*",                 "m_colorBuffer",           EvoScript::Private },
 
-                { "bool",                  "m_gridEnabled",         EvoScript::Private },
-                { "bool",                  "m_skyboxEnabled",       EvoScript::Private },
-                { "bool",                  "m_wireFrame",           EvoScript::Private },
+                { "bool",                  "m_gridEnabled",           EvoScript::Private },
+                { "bool",                  "m_skyboxEnabled",         EvoScript::Private },
+                { "bool",                  "m_wireFrame",             EvoScript::Private },
 
-                { "int32_t",               "m_pipeLine",            EvoScript::Private },
+                { "int32_t",               "m_pipeLine",              EvoScript::Private },
         }, { "vector", "mutex", "Utils.h", "stdint.h", "map", "Skybox.h", "Texture.h" });
 
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, UpdateUBOs, void)
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, DrawGeometry, bool)
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, DrawSkybox, bool)
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, DrawGrid, void)
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, DrawSingleColors, void)
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, DrawTransparentGeometry, bool)
-        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Public, generator, Render, DrawSettingsPanel, bool)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, UpdateUBOs, void)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawGeometry, bool)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawDebugWireframe, bool)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawSkybox, bool)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawGrid, void)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawSingleColors, void)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawTransparentGeometry, bool)
+        ESRegisterMethodVirtualArg0(Graphics::, EvoScript::Private, generator, Render, DrawSettingsPanel, bool)
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Render, SetSkybox, void, ESArg1(Skybox* skybox), ESArg1(skybox))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Render, RegisterMesh, void, ESArg1(Mesh* mesh), ESArg1(mesh))
@@ -645,6 +653,8 @@ namespace Framework {
                 { "std::map<uint32_t, void*>", "m_descriptors", EvoScript::Private },
         }, { "cstdint", "Math/Vector2.h", "map", "Scene.h", "Camera.h", "GameObject.h" });
         ESRegisterStaticMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, Get, GUISystem*)
+        ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, BeginMenuBar, bool)
+        ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, EndMenuBar, void)
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, BeginDockSpace, void)
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, EndDockSpace, void)
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, BeginWindow, bool, ESArg1(const char* name), ESArg1(name))
@@ -712,6 +722,21 @@ namespace Framework {
         generator->AddIncompleteType("Shader", "PostProcessing");
         generator->AddIncompleteType("Camera", "PostProcessing");
         generator->AddIncompleteType("Render", "PostProcessing");
+    }
+
+    void API::RegisterISavable(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("Document", "ISavable", {
+                { "char", "b[" + std::to_string(sizeof(Xml::Document)) + "]", EvoScript::Public }
+        });
+
+        generator->RegisterNewClass("ISavable", "ISavable", {
+                { "char", "b[" + std::to_string(sizeof(ISavable)) + "]", EvoScript::Public }
+        });
+
+        using namespace Xml;
+
+        ESRegisterMethodVirtualArg0(Helper::, EvoScript::Protected, generator, ISavable, Save, Document)
+        ESRegisterMethodVirtual(Helper::, EvoScript::Protected, generator, ISavable, Load, bool, ESArg1(const Document& xml), ESArg1(xml))
     }
 }
 

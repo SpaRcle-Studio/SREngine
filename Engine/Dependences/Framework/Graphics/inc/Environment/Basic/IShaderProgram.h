@@ -7,14 +7,16 @@
 
 #include <FileSystem/FileSystem.h>
 #include <Utils/StringUtils.h>
+#include <Utils/Enumerations.h>
 
 namespace Framework::Graphics {
-    enum class ShaderType    { Unknown, Vertex, Fragment, Tesselation };
-    enum class LayoutBinding { Unknown, Uniform, Sampler2D            };
-    enum class PolygonMode   { Fill, Line, Point                      };
-    enum class CullMode      { None, Front, Back, FrontAndBack        };
+    SR_ENUM_CLASS(ShaderType, Unknown, Vertex, Fragment, Tesselation)
+    SR_ENUM_CLASS(LayoutBinding, Unknown, Uniform, Sampler2D)
+    SR_ENUM_CLASS(PolygonMode, Unknown, Fill, Line, Point)
+    SR_ENUM_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
 
-    enum class DepthCompare  {
+    SR_ENUM_CLASS(DepthCompare,
+        Unknown,
         Never,
         Less,
         Equal,
@@ -22,8 +24,7 @@ namespace Framework::Graphics {
         Greater,
         NotEqual,
         GreaterOrEqual,
-        Always
-    };
+        Always)
 
     struct SRShaderCreateInfo {
         PolygonMode  polygonMode;
@@ -50,9 +51,20 @@ namespace Framework::Graphics {
         return LayoutBinding::Unknown;
     }
 
+    struct SourceShader {
+        std::string m_name;
+        std::string m_path;
+        ShaderType  m_type;
+
+        SourceShader(const std::string& name, const std::string& path, ShaderType type) {
+            m_name = name;
+            m_path = path;
+            m_type = type;
+        }
+    };
+
     static std::vector<std::pair<LayoutBinding, ShaderType>> AnalyseShader(
-            const std::vector<std::pair<std::string, ShaderType>>& modules,
-            const std::string& pathToModules, bool* errors)
+            const std::vector<SourceShader>& modules, bool* errors)
     {
         if (!errors) {
             Helper::Debug::Error("Graphics::AnalyseShader() : errors flag pointer is nullptr! You are stupid!");
@@ -65,10 +77,10 @@ namespace Framework::Graphics {
         auto bindings = std::vector<std::pair<LayoutBinding, ShaderType>>();
 
         std::vector<std::string> lines = { };
-        for (const std::pair<std::string, ShaderType>& module : modules) {
-            lines = Helper::FileSystem::ReadAllLines(pathToModules + "\\" + module.first);
+        for (const auto& module : modules) {
+            lines = Helper::FileSystem::ReadAllLines(module.m_path);
             if (lines.empty()) {
-                Helper::Debug::Error("Graphics::AnalyseShader() : failed read module! \n\tName: " + module.first);
+                Helper::Debug::Error("Graphics::AnalyseShader() : failed read module! \n\tName: " + module.m_name);
                 *errors = true;
                 return { };
             }
@@ -93,7 +105,7 @@ namespace Framework::Graphics {
                     if (loc + 1 > bindings.size())
                         bindings.resize(loc + 1);
 
-                    bindings[loc] = std::pair(GetBindingType(line), module.second);
+                    bindings[loc] = std::pair(GetBindingType(line), module.m_type);
                     if (bindings[loc].first == LayoutBinding::Unknown) {
                         Helper::Debug::Error("Graphics::AnalyseShader() : unknown location! \n\tLine: " + line);
                         *errors = true;

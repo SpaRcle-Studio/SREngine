@@ -16,12 +16,20 @@ bool Framework::Scripting::EvoCompiler::Init() {
     this->m_pathToScripts = Framework::Helper::ResourceManager::GetResourcesFolder() + "/Scripts/";
 
     std::string config = Helper::ResourceManager::GetResourcesFolder() + "/Configs/EvoScriptGenerator.config";
+
+    const std::string warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
+
+#ifdef __MINGW64__
+    if (config.find("Visual Studio") != std::string::npos) Helper::Debug::Warn(warnMsg);
+#endif
+
     std::ifstream ifs(config);
     if (!ifs.is_open()) {
         Helper::Debug::Error("EvoCompiler::Init() : failed to read config file! \n\tPath: " + config);
         return false;
     } else {
         std::string generator((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        Helper::Debug::Info("EvoCompiler::Init() : use \"" + generator + "\" generator...");
         this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::GetResourcesFolder() + "/Cache");
         this->m_generator = new EvoScript::AddressTableGen();
     }

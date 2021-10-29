@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Scene Name="scene">
+	<Settings>
+		<Chunks>
+			<x_size value="100" />
+			<y_size value="500" />
+			<z_size value="100" />
+			<width value="50" />
+		</Chunks>
+		<Region />
+	</Settings>
+</Scene>

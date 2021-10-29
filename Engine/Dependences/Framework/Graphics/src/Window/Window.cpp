@@ -8,11 +8,8 @@
 #include <Debug.h>
 #include <iostream>
 
-//#include <GUI/ICanvas.h>
-
-#include <GUI/old/GUIWindow.h>
-
 #include <ResourceManager/ResourceManager.h>
+#include <Memory/MeshManager.h>
 #include <glm/gtx/string_cast.hpp>
 #include <Utils/StringUtils.h>
 
@@ -111,7 +108,7 @@ bool Framework::Graphics::Window::Init() {
 }
 
 bool Framework::Graphics::Window::Run() {
-    if (!m_isInit){
+    if (!m_isInit) {
         Debug::Error("Window::Run() : window is not initialized!");
         return false;
     }
@@ -371,6 +368,8 @@ void Framework::Graphics::Window::Thread() {
     }
 
     this->m_env->CloseWindow();
+
+    Memory::MeshManager::Destroy();
 
     Debug::Info("Window::Thread() : stopping window thread...");
 

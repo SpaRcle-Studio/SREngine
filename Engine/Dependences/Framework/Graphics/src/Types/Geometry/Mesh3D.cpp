@@ -4,89 +4,96 @@
 
 #include <Types/Geometry/Mesh3D.h>
 
+#include <Memory/MeshManager.h>
+
 // TODO: UNSAFE SHIT!
 
-inline static std::map<uint32_t, unsigned long> VBO_usages = std::map<unsigned int, unsigned long>();
-inline static std::map<uint32_t, unsigned long> IBO_usages = std::map<unsigned int, unsigned long>();
-inline static std::map<std::string, std::pair<uint32_t, uint32_t>> VBOandIBO_names = std::map<std::string, std::pair<uint32_t, uint32_t>>();
+struct VidMemInfo {
+    uint32_t m_usages;
+    uint32_t m_vidId;
+};
+
+typedef std::map<std::string, VidMemInfo> VideoResources;
+
+inline static VideoResources VBOs = VideoResources();
+inline static VideoResources IBOs = VideoResources();
 
 bool Framework::Graphics::Types::Mesh3D::Calculate()  {
-    if (m_VBO >= 0 || m_IBO >= 0) {
+    const std::lock_guard<std::mutex> locker(m_mutex);
+
+    if ((m_VBO >= 0 || m_IBO >= 0) && !m_hasErrors) {
         this->m_isCalculated = true;
         return true;
     }
 
-    if (!m_render){
-        Debug::Error("Mesh3D::Calculate() : mesh is not register in render!");
+    if (!IsCanCalculate())
         return false;
-    }
-
-    if (!m_shader){
-        if (!Shader::GetDefaultGeometryShader()) {
-            Debug::Error("Mesh3D::Calculate() : mesh have not shader!");
-            return false;
-        }
-    }
-
-    if (!m_material){
-        Debug::Error("Mesh3D::Calculate() : mesh have not material!");
-        return false;
-    }
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh3D::Calculate() : calculating \""+ m_geometry_name +"\"...");
+        Debug::Log("Mesh3D::Calculate() : calculating \"" + m_geometry_name + "\"...");
 
-    m_mutex.lock();
+    /*if (auto VBO = Memory::MeshManager::Instance().Find<Mesh3D>(m_resource_id, Memory::MeshManager::VBO))
+        m_VBO = static_cast<int32_t>(VBO->Copy());
+    else {
 
-    {
-        /* Check exists pre-calculated meshes */
-        auto exists = VBOandIBO_names.find(m_resource_id);
-        if (exists != VBOandIBO_names.end()) {
-            if (Debug::GetLevel() >= Debug::Level::High)
-                Debug::Log("Mesh3D::Calculate() : copy VBO and IBO...");
-
-            m_VBO = (int)exists->second.first;
-            m_IBO = (int)exists->second.second;
-
-            VBO_usages[m_VBO]++;
-            IBO_usages[m_IBO]++;
-            m_isCalculated = true;
-            m_mutex.unlock();
-
-            return true;
-        }
     }
 
-    if (!this->m_env->CalculateVBO(m_VBO, m_vertices.data(), Vertices::Type::Mesh3DVertex, m_countVertices)) {
-        Debug::Error("Mesh3D::Calculate() : failed calculate VBO \"" + m_geometry_name + "\" mesh!");
-        this->m_hasErrors = true;
-        m_mutex.unlock();
-        return false;
-    } else
-        m_barycenter = Vertices::Barycenter(m_vertices);
+    if (m_useIndices) {
+        if (auto IBO = Memory::MeshManager::Instance().Find<Mesh3D>(m_resource_id, Memory::MeshManager::IBO))
+            m_IBO = static_cast<int32_t>(IBO->Copy());
+        else {
 
-    if (m_useIndices)
+        }
+    }*/
+
+    /* Check exists pre-calculated meshes */
+    {
+        if (auto exists = VBOs.find(m_resource_id); exists != VBOs.end()) {
+            if (Debug::GetLevel() >= Debug::Level::High)
+                Debug::Log("Mesh3D::Calculate() : copy VBO...");
+
+            m_VBO = (int)exists->second.m_vidId;
+            exists->second.m_usages++;
+        }
+
+        if (m_useIndices)
+            if (auto exists = IBOs.find(m_resource_id); exists != IBOs.end()) {
+                if (Debug::GetLevel() >= Debug::Level::High)
+                    Debug::Log("Mesh3D::Calculate() : copy IBO...");
+
+                m_IBO = (int)exists->second.m_vidId;
+                exists->second.m_usages++;
+            }
+    }
+
+    if (m_VBO < 0) {
+        if (!this->m_env->CalculateVBO(m_VBO, m_vertices.data(), Vertices::Type::Mesh3DVertex, m_countVertices)) {
+            Debug::Error("Mesh3D::Calculate() : failed calculate VBO \"" + m_geometry_name + "\" mesh!");
+            this->m_hasErrors = true;
+            return false;
+        }
+
+        m_barycenter = Vertices::Barycenter(m_vertices);
+        VBOs[m_resource_id] = VidMemInfo{ .m_usages = 1, .m_vidId = (uint32_t)m_VBO };
+    }
+
+    if (m_useIndices && m_IBO < 0) {
         if (!this->m_env->CalculateIBO(m_IBO, m_indices.data(), sizeof(uint32_t), m_countIndices, m_VBO)) {
             Debug::Error("Mesh3D::Calculate() : failed calculate IBO \"" + m_geometry_name + "\" mesh!");
             this->m_hasErrors = true;
-            m_mutex.unlock();
             return false;
         }
 
-    VBOandIBO_names[m_resource_id] = std::pair((uint32_t)m_VBO, (uint32_t)m_IBO);
-    VBO_usages[(uint32_t)m_VBO]++;
-
-    if (m_useIndices)
-        IBO_usages[(uint32_t)m_IBO]++;
+        IBOs[m_resource_id] = VidMemInfo{ .m_usages = 1, .m_vidId = (uint32_t)m_IBO };
+    }
 
     m_isCalculated = true;
-
-    m_mutex.unlock();
-
     return true;
 }
 
 Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() const {
+    const std::lock_guard<std::mutex> locker(m_mutex);
+
     if (m_isDestroy) {
         Debug::Error("Mesh3D::Copy() : mesh already destroyed!");
         return nullptr;
@@ -99,8 +106,6 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() con
         Debug::Error("Mesh3D::Copy() : material is nullptr! Something went wrong...");
         return nullptr;
     }
-
-    m_mutex.lock();
 
     auto* mat = new Material(
             m_material->m_diffuse,
@@ -128,8 +133,8 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() con
     copy->m_scale      = m_scale;
 
     if (m_isCalculated) {
-        if (m_VBO != -1) VBO_usages[m_VBO]++;
-        if (m_IBO != -1) IBO_usages[m_IBO]++;
+        if (m_VBO != -1) VBOs[m_resource_id].m_usages++;
+        if (m_IBO != -1) IBOs[m_resource_id].m_usages++;
 
         copy->m_VBO = m_VBO;
         copy->m_IBO = m_IBO;
@@ -142,25 +147,25 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy() con
 
     copy->m_resource_id   = m_resource_id;
 
-    //!? copy->m_isCalculated  = false;
     copy->m_isCalculated  = m_isCalculated;
     copy->m_autoRemove    = m_autoRemove;
     copy->m_modelMat      = m_modelMat;
-
-    m_mutex.unlock();
 
     return copy;
 }
 
 bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
+    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        Helper::Debug::Log("Mesh3D::FreeVideoMemory() : free \"" + m_geometry_name + "\" mesh video memory...");
+
     if (m_VBO >= 0) {
-        int i = VBO_usages[m_VBO];
-        VBO_usages[m_VBO]--;
-        if (VBO_usages[m_VBO] == 0)
+        if (VBOs[m_resource_id].m_usages--; VBOs[m_resource_id].m_usages == 0) {
             if (!m_env->FreeVBO(m_VBO)) {
                 Debug::Error("Mesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
                 return false;
-            }
+            } else
+                VBOs.erase(m_resource_id);
+        }
     }
     else {
         Debug::Error("Mesh:FreeVideoMemory() : VBO is not exists! Something went wrong...");
@@ -168,12 +173,13 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     }
 
     if (m_IBO >= 0) {
-        IBO_usages[m_IBO]--;
-        if (IBO_usages[m_IBO] == 0)
+        if (IBOs[m_resource_id].m_usages--; IBOs[m_resource_id].m_usages == 0) {
             if (!m_env->FreeIBO(m_IBO)) {
                 Debug::Error("Mesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
                 return false;
-            }
+            } else
+                IBOs.erase(m_resource_id);
+        }
     }
     else if (m_useIndices){
         Debug::Error("Mesh:FreeVideoMemory() : IBO is not exists! Something went wrong...");
@@ -196,6 +202,7 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     }
 
     this->m_isCalculated = false;
+
     return true;
 }
 
@@ -237,7 +244,7 @@ void Framework::Graphics::Types::Mesh3D::ReCalcModel() {
     this->m_modelMat = modelMat;
 
     if (m_UBO >= 0) {
-        Mesh3DUBO ubo = { m_modelMat };
-        m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3DUBO));
+        Mesh3dUBO ubo = { m_modelMat };
+        m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
     }
 }

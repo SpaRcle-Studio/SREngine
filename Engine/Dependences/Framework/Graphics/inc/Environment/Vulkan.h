@@ -146,7 +146,7 @@ namespace Framework::Graphics {
             }
 
             if (auto texture = m_memory->m_textures[id])
-                return texture->GetDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout());
+                return reinterpret_cast<void*>(texture->GetDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout()).m_self);
             else {
                 Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
                 return nullptr;
@@ -337,6 +337,12 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void UpdateUBO(const uint32_t& UBO, void* data, const uint64_t& uboSize) override {
+            if (UBO >= m_memory->m_countUBO) { // TODO: add check debug/release
+                Helper::Debug::Error("Vulkan::UpdateUBO() : uniform index out of range! \n\tCount uniforms: " +
+                                     std::to_string(m_memory->m_countUBO) + "\n\tIndex: " + std::to_string(UBO));
+                return;
+            }
+
             m_memory->m_UBOs[UBO]->CopyToDevice(data, uboSize);
         }
 
@@ -346,6 +352,11 @@ namespace Framework::Graphics {
                 switch (value.first) {
                     case DescriptorType::Uniform: {
                         auto vkDescriptorSet = this->m_memory->m_descriptorSets[descriptorSet].m_self;
+                        if (value.second.second >= m_memory->m_countUBO) {
+                            Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: " +
+                                                 std::to_string(m_memory->m_countUBO) + "\n\tIndex: " + std::to_string(value.second.second));
+                            return;
+                        }
                         auto vkUBODescriptor = &m_memory->m_UBOs[value.second.second]->m_descriptor;
                         writeDescriptorSets.emplace_back(EvoVulkan::Tools::Initializers::WriteDescriptorSet(
                                 vkDescriptorSet,

@@ -2,6 +2,7 @@
 set(HELPER_SRC
         #Debuger/Logger source code
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Debug.cpp
+        ${FRAMEWORK_ROOT_DIR}/Helper/src/Xml.cpp
         #Resource Manager source code
         ${FRAMEWORK_ROOT_DIR}/Helper/src/FileSystem/FileSystem.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/ResourceManager/ResourceManager.cpp
@@ -25,10 +26,12 @@ set(HELPER_SRC
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Component.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Transform.cpp
         ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/Scene.cpp
+        ${FRAMEWORK_ROOT_DIR}/Helper/src/EntityComponentSystem/ISavable.cpp
         )
 
 set(HELPER_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Helper/inc
+        ${FRAMEWORK_ROOT_DIR}/Depends/pugixml
         )
 
 set(HELPER_INC_PRIVATE)

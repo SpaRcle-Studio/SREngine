@@ -13,6 +13,8 @@
 #include <Render/Implementations/VulkanRender.h>
 #include <Render/Implementations/OpenGLRender.h>
 
+#include <Render/ShaderGenerator.h>
+
 bool Framework::Graphics::Render::Create(Window* window) {
     if (m_isCreate){
         Debug::Error("Render::Create() : render already create!");
@@ -23,80 +25,14 @@ bool Framework::Graphics::Render::Create(Window* window) {
 
     this->m_window = window;
 
-    // geometry shader
-    {
-        this->m_geometryShader = new Shader(this, "engine/geometry");
-        this->m_geometryShader->SetVertex(
-                {Vertices::Mesh3DVertex::GetDescription()},
-                Vertices::Mesh3DVertex::GetAttributes());
-        this->m_geometryShader->SetUniforms({
-                {{0, UBOType::Common}, sizeof(Mesh3DUBO)},   // binding 0 - mesh   (model mat)
-                {{5, UBOType::Shared}, sizeof(ProjViewUBO)}, // binding 1 - shader (view & proj mat)
-        });
-        /*
-                         descriptor write
-           [descriptor]       [bind]      [data]
-                0               0       model uniform
-                0               1       diffuse
-                0               2       normal
-                0               3       specular
-                0               4       glossiness
-                1               5       view & proj uniform
-         */
-        this->m_geometryShader->SetCreateInfo({
-              .polygonMode  = PolygonMode::Fill,
-              .cullMode     = CullMode::Back,
-              .depthCompare = DepthCompare::LessOrEqual,
-              .blendEnabled = true,
-              .depthWrite   = true,
-              .depthTest    = true
-        });
+    Codegen::ShaderGenerator::Instance()->Generate("geometry", "", Shader::Flags::Diffuse | Shader::Flags::Normal | Shader::Flags::GBuffer);
 
+    this->InsertShader(Shader::StandardID::Geometry, Shader::Load(this, "geometry"));
+    this->InsertShader(Shader::StandardID::Transparent, Shader::Load(this, "transparent"));
+    this->InsertShader(Shader::StandardID::Skybox, Shader::Load(this, "skybox"));
+    this->InsertShader(Shader::StandardID::DebugWireframe, Shader::Load(this, "debugWireframe"));
 
-        Shader::SetStandardGeometryShader(m_geometryShader);
-    }
-
-    // transparent shader
-    {
-        this->m_transparentShader = new Shader(this, "engine/transparent");
-        this->m_transparentShader->CopyVertexAndUniformsInfo(m_geometryShader);
-        this->m_transparentShader->SetCreateInfo({
-             .polygonMode  = PolygonMode::Fill,
-             .cullMode     = CullMode::Back,
-             .depthCompare = DepthCompare::LessOrEqual,
-             .blendEnabled = true,
-             .depthWrite   = false,
-             .depthTest    = true
-        });
-    }
-
-    // skybox shader
-    {
-        this->m_skyboxShader = new Shader(this, "engine/skybox");
-        this->m_skyboxShader->SetVertex(
-                {Vertices::SkyboxVertex::GetDescription()},
-                Vertices::SkyboxVertex::GetAttributes());
-        this->m_skyboxShader->SetUniforms({
-                {{0, UBOType::Shared}, sizeof(ProjViewUBO)}, // binding 0 - proj & view
-        });
-        /*
-                         descriptor write
-           [descriptor]       [bind]      [data]
-                0               0       view & proj uniform
-                0               1       cube map
-         */
-        this->m_skyboxShader->SetCreateInfo({
-              .polygonMode  = PolygonMode::Fill,
-              .cullMode     = CullMode::Back,
-              .depthCompare = DepthCompare::LessOrEqual,
-              .blendEnabled = true,
-              .depthWrite   = true,
-              .depthTest    = true
-        });
-    }
-
-
-    this->m_flatGeometryShader = new Shader(this, "engine/flatGeometry");
+    Shader::SetStandardGeometryShader(m_shaders[Shader::StandardID::Geometry]);
 
     this->m_grid = EditorGrid::Create("engine/grid", this);
 
@@ -156,28 +92,23 @@ bool Framework::Graphics::Render::Close() {
     data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
     Debug::Graph("Render::Close() : close render..." + data);
 
-    if (m_geometryShader)
-        m_geometryShader->Free();
-
-    if (m_transparentShader)
-        m_transparentShader->Free();
-
-    if (m_flatGeometryShader)
-        m_flatGeometryShader->Free();
-
-    if (m_skyboxShader)
-        m_skyboxShader->Free();
+    for (auto& shader : m_shaders) {
+        if (shader) {
+            shader->Free();
+            shader = nullptr;
+        }
+    }
 
     if (this->m_grid)
         m_grid->Free();
 
-    if (m_skybox) {
+    if (m_skybox.m_current) {
         if (m_env->IsWindowOpen())
-            m_skybox->FreeVideoMemory();
+            m_skybox.m_current->FreeVideoMemory();
         else
             Helper::Debug::Warn("Render::Close() : window is close, can't free skybox video memory!");
-        m_skybox->Free();
-        m_skybox = nullptr;
+        m_skybox.m_current->Free();
+        m_skybox.m_current = nullptr;
     }
 
     m_isRun = false;
@@ -187,14 +118,12 @@ bool Framework::Graphics::Render::Close() {
 }
 
 void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *mesh) {
-    m_mutex.lock();
+    const std::lock_guard<std::mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Render::RemoveMesh() : register \""+mesh->GetResourceID()+"\" mesh to remove...");
+        Debug::Log("Render::RemoveMesh() : register \"" + mesh->GetResourceID() + "\" mesh to remove...");
 
-    this->m_removeMeshes.push_back(mesh);
-
-    m_mutex.unlock();
+    this->m_removeMeshes.emplace_back(mesh);
 }
 void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh *mesh) {
     if (!mesh){
@@ -202,15 +131,14 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
         return;
     }
 
-    m_mutex.lock();
+    const std::lock_guard<std::mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::Full)
         Debug::Log("Render::RegisterMesh() : register new \""+mesh->GetResourceID()+"\" mesh...");
 
     mesh->AddUsePoint();
     mesh->SetRender(this);
-    this->m_newMeshes.push_back(mesh);
-    m_mutex.unlock();
+    this->m_newMeshes.emplace_back(mesh);
 }
 
 void Framework::Graphics::Render::PollEvents() {
@@ -289,12 +217,12 @@ void Framework::Graphics::Render::PollEvents() {
 
         Debug::Graph("Render::PoolEvents() : free skyboxes video memory...");
         for (auto skybox : m_skyboxesToFreeVidMem) {
-            if (skybox == m_skybox)
-                m_skybox = nullptr;
+            if (skybox == m_skybox.m_current)
+                m_skybox.m_current = nullptr;
 
-            if (skybox == m_newSkybox) {
+            if (skybox == m_skybox.m_new) {
                 Debug::Warn("Render::PoolEvents() : skybox installed as new but marked for removal!");
-                m_newSkybox = nullptr;
+                m_skybox.m_new = nullptr;
             }
 
             if (!skybox->FreeVideoMemory())
@@ -306,8 +234,8 @@ void Framework::Graphics::Render::PollEvents() {
     }
 
     //! Set new skybox
-    if (m_newSkybox != m_skybox) {
-        m_skybox = m_newSkybox;
+    if (m_skybox.m_new != m_skybox.m_current) {
+        m_skybox.m_current = m_skybox.m_new;
     }
 }
 
@@ -325,8 +253,8 @@ void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *
         Helper::Debug::Log("Render::SetSkybox() : set a nullptr skybox...");
 
     skybox->SetRender(this);
-    if (m_skybox != skybox) {
-        m_newSkybox = skybox;
+    if (m_skybox.m_current != skybox) {
+        m_skybox.m_new = skybox;
         this->m_env->SetBuildState(false);
     }
 }
@@ -386,4 +314,18 @@ Framework::Graphics::Render *Framework::Graphics::Render::Allocate() {
 
 void Framework::Graphics::Render::SetCurrentCamera(Framework::Graphics::Camera *camera) noexcept  {
     m_currentCamera = camera;
+}
+
+bool Framework::Graphics::Render::InsertShader(uint32_t id, Shader* shader) {
+    if (id >= m_shaders.size())
+        m_shaders.resize(id + 1);
+
+    if (m_shaders[id]) {
+        Helper::Debug::Error("Render::InsertShader() : the specified place is already occupied! \n\tID: " + std::to_string(id));
+        return false;
+    }
+
+    m_shaders[id] = shader;
+
+    return true;
 }

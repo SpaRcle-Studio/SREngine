@@ -32,7 +32,7 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
         return false;
     }
 
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     component->SetParent(this);
     component->OnAttachComponent();
@@ -40,22 +40,19 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
 
     UpdateComponents();
 
-    m_mutex.unlock();
     return true;
 }
 
 Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const std::string& name) {
     Component* find = nullptr;
 
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto component : m_components)
         if (component->GetComponentName() == name) {
             find = component;
             break;
         }
-
-    m_mutex.unlock();
 
     return find;
 }
@@ -73,15 +70,13 @@ void Framework::Helper::GameObject::DestroyFromScene() {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("GameObject::Destroy() : destroying \""+m_name + "\" game object contains "+std::to_string(m_components.size())+" components...");
 
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (Component* component : m_components)
         component->OnDestroyGameObject();
 
     for (const auto& gm : m_children)
         gm->DestroyFromScene();
-
-    m_mutex.unlock();
 
     m_isDestroy = true;
 }
@@ -169,20 +164,16 @@ void GameObject::SetSelect(bool value) {
     }
 }
 
-std::string GameObject::GetName() noexcept  { // TODO: UNSAFE
+std::string GameObject::GetName() noexcept  {
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
+
     return this->m_name;
 }
 
-std::vector<Component *> GameObject::GetComponents() { // TODO: MAYBE UNSAFE
-    std::vector<Component *> comps = std::vector<Component *>();
+std::vector<Component *> GameObject::GetComponents() {
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
-    //m_mutex.lock();
-
-    comps = m_components;
-
-    //m_mutex.unlock();
-
-    return comps;
+    return m_components;
 }
 
 void GameObject::SetNameFromInspector(const std::string &name) {
@@ -206,15 +197,13 @@ void GameObject::RemoveParent(GameObject *gm) {
 }
 
 bool GameObject::ContainsComponent(const std::string &name) {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto comp : m_components)
         if (comp->GetComponentName() == name) {
-            m_mutex.unlock();
             return true;
         }
 
-    m_mutex.unlock();
     return false;
 }
 
@@ -227,15 +216,13 @@ GameObject::~GameObject() {
 }
 
 void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto child : m_children)
         if (child.LockIfValid()) {
             fun(child);
             child.Unlock();
         }
-
-    m_mutex.unlock();
 }
 
 void GameObject::SetActive(bool value) {
@@ -244,7 +231,7 @@ void GameObject::SetActive(bool value) {
     else
         return;
 
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto child : m_children)
         if (child.LockIfValid()) {
@@ -253,12 +240,10 @@ void GameObject::SetActive(bool value) {
         }
 
     UpdateComponentsEnabled();
-
-    m_mutex.unlock();
 }
 
 void GameObject::OnPrentSetActive(bool value) {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     m_isParentActive = value;
 
@@ -269,8 +254,6 @@ void GameObject::OnPrentSetActive(bool value) {
         }
 
     UpdateComponentsEnabled();
-
-    m_mutex.unlock();
 }
 
 void GameObject::UpdateComponentsEnabled() {
@@ -279,18 +262,16 @@ void GameObject::UpdateComponentsEnabled() {
 }
 
 Math::Vector3 GameObject::GetBarycenter() {
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
+
     auto barycenter = Math::Vector3();
     uint32_t count = 0;
-
-    m_mutex.lock();
 
     for (auto comp : m_components)
         if (auto br = comp->GetBarycenter(); !br.IsInfinity()) {
             barycenter += br;
             count++;
         }
-
-    m_mutex.unlock();
 
     if (count == 0)
         return Math::InfinityV3;
@@ -322,11 +303,33 @@ Math::Vector3 GameObject::GetHierarchyBarycenter() {
     return count == 0 ? Math::InfinityV3 : barycenter / count;
 }
 
-void GameObject::ForEachComponent(const std::function<void(Component*)> &fun) {
-    m_mutex.lock();
+void GameObject::ForEachComponent(const std::function<bool(Component*)> &fun) {
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto component : m_components)
-        fun(component);
+        if (!fun(component))
+            break;
+}
 
-    m_mutex.unlock();
+bool GameObject::RemoveComponent(Component *component) {
+    std::lock_guard<std::recursive_mutex> locker(m_mutex);
+
+    for (auto it = m_components.begin(); it != m_components.end(); it++)
+        if (*it == component) {
+            component->OnRemoveComponent();
+            m_components.erase(it);
+            return true;
+        }
+
+    Helper::Debug::Error("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+
+    return false;
+}
+
+Framework::Helper::Xml::Document GameObject::Save() {
+    return Xml::Document::Empty();
+}
+
+bool GameObject::Load(const Xml::Document &xml) {
+    return false;
 }

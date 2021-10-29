@@ -12,14 +12,18 @@ set(GRAPHICS_SRC
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Animations/Bone.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Memory/MeshManager.cpp
+
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ObjLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/ImageLoader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Loaders/TextureLoader.cpp
 
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/ShaderGenerator.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/Render.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/Shader.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/Camera.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/PostProcessing.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/ColorBuffer.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/Light.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/DirectionalLight.cpp
@@ -29,7 +33,6 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Window/Window.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/ICanvas.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/GUISystem.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/old/GUIWindow.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/old/DockSpace.cpp
 

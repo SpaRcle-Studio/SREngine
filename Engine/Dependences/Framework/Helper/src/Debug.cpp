@@ -99,7 +99,7 @@ namespace Framework::Helper {
             }
             g_file.close();
 
-            std::ofstream o("successful");
+            std::ofstream o(FileSystem::GetPathToExe() + "/successful");
             o.close();
 
             return 0;

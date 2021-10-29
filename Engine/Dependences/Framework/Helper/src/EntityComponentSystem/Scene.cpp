@@ -10,9 +10,9 @@
 
 Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::Scene::Instance(const std::string& name) {
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Scene::Instance() : instance \""+name+"\" game object at \""+m_name+ "\" scene.");
+        Debug::Log("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
 
-    Types::SafePtr <GameObject> gm;
+    Types::SafePtr<GameObject> gm;
     gm = new GameObject(m_this, name);
     gm->SetThis(gm);
 
@@ -42,12 +42,12 @@ Framework::Helper::Types::SafePtr<Framework::Helper::Scene> Framework::Helper::S
 
 bool Framework::Helper::Scene::Destroy() {
     if (m_isDestroy) {
-        Debug::Error("Scene::Destroy() : scene \""+m_name+"\" already destroyed!");
+        Debug::Error("Scene::Destroy() : scene \"" + std::string(m_name) + "\" already destroyed!");
         return false;
     }
 
     if (Debug::GetLevel() > Debug::Level::None)
-        Debug::Log("Scene::Destroy() : destroying \""+m_name+"\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
+        Debug::Log("Scene::Destroy() : destroying \"" + std::string(m_name) + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
 
     m_mutex.lock();
 
@@ -76,36 +76,27 @@ bool Framework::Helper::Scene::Destroy() {
 
 bool Framework::Helper::Scene::Free() {
     if (!this->m_isDestroy) {
-        Debug::Error("Scene::Free() : scene \""+m_name+"\" is not destroyed!");
+        Debug::Error("Scene::Free() : scene \"" + std::string(m_name) + "\" is not destroyed!");
         return false;
     }
 
     if (Debug::GetLevel() > Debug::Level::None)
-        Debug::Log("Scene::Free() : free \""+m_name+"\" scene pointer...");
+        Debug::Log("Scene::Free() : free \"" + std::string(m_name) + "\" scene pointer...");
 
     delete this;
     return true;
 }
 
-// Please, call from only one thread!
 std::vector<Framework::Helper::Types::SafePtr<Framework::Helper::GameObject>>& Framework::Helper::Scene::GetRootGameObjects() noexcept {
-    if (!m_rootObjects.empty())
-        return this->m_rootObjects;
-    else {
-        m_mutex.lock();
+    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (!m_rootObjects.empty()) {
-            m_rootObjects.clear();
-            m_rootObjects.reserve(2000); //TODO: change to count_gm * 25 / 100
-        }
+    m_rootObjects.clear();
 
-        for (auto& a : m_gameObjects)
-            if (!a->GetParent())
-                m_rootObjects.push_back(a);
+    for (const auto& gm : m_gameObjects)
+        if (!gm->GetParent())
+            m_rootObjects.push_back(gm);
 
-        m_mutex.unlock();
-        return m_rootObjects;
-    }
+    return m_rootObjects;
 }
 
 void Framework::Helper::Scene::AddSelected(const Types::SafePtr<GameObject>& gameObject) {
@@ -175,7 +166,7 @@ void Framework::Helper::Scene::OnGameObjectNameChanged() {
 }
 
 void Framework::Helper::Scene::ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
-    m_mutex.lock();
+    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     for (auto gm : m_gameObjects)
         if (gm.LockIfValid()) {
@@ -183,6 +174,27 @@ void Framework::Helper::Scene::ForEachRootObjects(const std::function<void(Types
                 fun(gm);
             gm.Unlock();
         }
-
-    m_mutex.unlock();
 }
+
+bool Framework::Helper::Scene::Save(const std::string& folder) {
+    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    auto xml = Xml::Document::New();
+    if (auto root = xml.Root().AppendChild("Scene"); root.Valid()) {
+        root.AppendAttribute("Name", std::string(m_name).c_str());
+        auto settings = root.AppendChild("Settings"); {
+            auto chunk = settings.AppendChild("Chunks"); {
+                chunk.AppendChild("x_size").AppendAttribute("value", 100.f);
+                chunk.AppendChild("y_size").AppendAttribute("value", 500.f);
+                chunk.AppendChild("z_size").AppendAttribute("value", 100.f);
+            }
+
+            auto region = settings.AppendChild("Region"); {
+                region.AppendChild("width").AppendAttribute("value", 50);
+            }
+        }
+    }
+
+    return xml.Save(folder + "/" + std::string(m_name) + ".scene");
+}
+

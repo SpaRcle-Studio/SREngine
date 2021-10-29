@@ -41,6 +41,14 @@ namespace Framework::Graphics::Types {
     class Mesh : public IResource, public Component {
         friend class Material;
         friend class ::Framework::API;
+    public:
+        enum class Flags {
+            None     = 0,
+            Triangle = 1 << 0,
+            Lineal   = 1 << 2,
+            Points   = 1 << 3,
+            Skinned  = 1 << 4
+        };
     protected:
         /** \brief Default mesh constructor */
         Mesh();
@@ -123,11 +131,15 @@ namespace Framework::Graphics::Types {
     private:
         virtual bool Calculate() = 0;
     protected:
+        bool IsCanCalculate();
+    protected:
         void OnDestroyGameObject() noexcept override;
         void OnReady(bool ready) override {
             this->m_env->SetBuildState(false);
         }
-        void OnAttachComponent() override { }
+        void OnAttachComponent() override {
+            // TODO: make virtual and override in Mesh3D
+        }
     public:
         SR_FORCE_INLINE void WaitCalculate() const {
             ret:

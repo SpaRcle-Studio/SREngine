@@ -15,6 +15,8 @@
 #include <Types/SafePointer.h>
 #include <Math/Vector3.h>
 
+#include <EntityComponentSystem/ISavable.h>
+
 namespace Framework {
     class API;
 }
@@ -23,7 +25,7 @@ namespace Framework::Helper {
     class Transform;
     class Scene;
     class Component;
-    class GameObject {
+    class GameObject : public ISavable {
         friend class Scene;
         friend class Transform;
         friend class ::Framework::API;
@@ -39,6 +41,9 @@ namespace Framework::Helper {
         void DestroyFromScene();
         void Free();
     public:
+        Xml::Document Save() override;
+        bool Load(const Xml::Document& xml) override;
+    public:
         [[nodiscard]] Types::SafePtr<Scene> GetScene() const noexcept { return this->m_scene; }
         Transform* GetTransform() noexcept { return this->m_transform; }
     public:
@@ -48,7 +53,7 @@ namespace Framework::Helper {
         void SetThis(const Types::SafePtr<GameObject>& _this) {
             m_this = _this;
         }
-        void ForEachComponent(const std::function<void(Component*)>& fun);
+        void ForEachComponent(const std::function<bool(Component*)>& fun);
         void ForEachChild(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetParent(GameObject* gm);
         void RemoveParent(GameObject* gm);
@@ -59,6 +64,7 @@ namespace Framework::Helper {
         std::vector<Component*> GetComponents(const std::string& name);
         std::vector<Component*> GetComponents();
         bool AddComponent(Component* component);
+        bool RemoveComponent(Component* component);
         bool AddChild(const Types::SafePtr<GameObject>& child);
         //TODO: Add remove child
         [[nodiscard]] inline std::vector<Types::SafePtr<GameObject>> GetChildren() const noexcept { return this->m_children; }
@@ -81,6 +87,8 @@ namespace Framework::Helper {
         bool                                    m_isActive       = true;
         bool                                    m_isParentActive = true;
 
+        bool                                    m_isPrefab       = false;
+
         bool                                    m_isSelect       = false;
         GameObject*                             m_parent         = nullptr;
         std::vector<Types::SafePtr<GameObject>> m_children       = std::vector<Types::SafePtr<GameObject>>();
@@ -88,7 +96,7 @@ namespace Framework::Helper {
 
         bool                                    m_isDestroy      = false;
 
-        std::mutex                              m_mutex          = std::mutex();
+        std::recursive_mutex                    m_mutex          = std::recursive_mutex();
 
         Types::SafePtr<Scene>                   m_scene          = Types::SafePtr<Scene>();
         Transform*                              m_transform      = nullptr;

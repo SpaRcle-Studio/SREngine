@@ -6,12 +6,6 @@
     #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
-#ifdef _DEBUG
-
-#else
-    #define SR_RELEASE
-#endif
-
 #include <Engine.h>
 
 #include <Debug.h>
@@ -22,14 +16,19 @@
 
 #include <Types/Rigidbody.h>
 #include <Types/Geometry/Mesh3D.h>
+#include <Animations/Bone.h>
 #include <Input/InputSystem.h>
 
 using namespace Framework;
+
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
 using namespace Framework::Helper::Types;
+
 using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
+using namespace Framework::Graphics::Animations;
+
 using namespace Framework::Physics;
 using namespace Framework::Physics::Types;
 
@@ -41,7 +40,7 @@ int main() {
 
     std::string exe = FileSystem::GetPathToExe();
     Debug::Init(exe, true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::Medium);
+    Debug::SetLevel(Debug::Level::High);
     ResourceManager::Init(exe + "/../../Resources");
 
 #ifdef WIN32
@@ -59,11 +58,15 @@ int main() {
 
     // Register all components
     {
-        //Component::RegisterComponent("SkinnedMesh",      []() -> Component* { return new SkinnedMesh();  });
-        Component::RegisterComponent("Mesh3D",             []() -> Component* { return new Mesh3D();       });
-        Component::RegisterComponent("Rigidbody",          []() -> Rigidbody* { return new Rigidbody();    });
-        Component::RegisterComponent("Camera",             []() -> Camera*    { return Camera::Allocate(); });
-        //Component::RegisterComponent("Bone",               []() -> Camera*    { return Camera::Allocate(); });
+        //Component::RegisterComponent("SkinnedMesh", []() -> Component* { return new SkinnedMesh();  });
+        Component::RegisterComponent("Mesh3D",        []() -> Mesh3D*    { return new Mesh3D();       });
+        Component::RegisterComponent("Rigidbody",     []() -> Rigidbody* { return new Rigidbody();    });
+        Component::RegisterComponent("Camera",        []() -> Camera*    { return Camera::Allocate(); });
+        Component::RegisterComponent("Bone",          []() -> Bone*      { return new Bone();         });
+
+        Component::RegisterEvents("Bone", [](Component* bone){
+            dynamic_cast<Bone*>(bone)->SetRender(Engine::Get()->GetRender());
+        });
     }
 
     if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")

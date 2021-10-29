@@ -3,3 +3,7 @@
 //
 
 #include <Animations/Bone.h>
+
+Framework::Graphics::Animations::Bone::Bone() : Helper::Component("Bone") {
+
+}

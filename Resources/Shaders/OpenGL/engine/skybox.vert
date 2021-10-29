@@ -1,12 +1,12 @@
-#version 330 core
+#version 450
 
 layout (location = 0) in vec3 aPos;
 
-out vec3 TexCoords;
+layout (location = 0) out vec3 UV;
 
 uniform mat4 PVmat;
 
 void main() {
-    TexCoords = aPos;
+    UV = aPos;
     gl_Position = (PVmat * vec4(aPos, 1.0)).xyww;
 }

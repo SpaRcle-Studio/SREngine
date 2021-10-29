@@ -143,4 +143,18 @@ namespace Framework::Helper {
 
         return newStr.substr(0, to);
     }
+
+    std::vector<std::string> StringUtils::Split(std::string source, const std::string &delimiter)  {
+        size_t pos = 0;
+        std::vector<std::string> tokens = {};
+        while ((pos = source.find(delimiter)) != std::string::npos) {
+            tokens.emplace_back(source.substr(0, pos));
+            source.erase(0, pos + delimiter.length());
+        }
+
+        if (!source.empty())
+            tokens.emplace_back(source);
+
+        return tokens;
+    }
 }

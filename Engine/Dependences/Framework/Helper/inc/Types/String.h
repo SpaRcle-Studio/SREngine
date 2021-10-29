@@ -38,6 +38,12 @@ namespace Framework::Helper { namespace Types{
          * */
         String(const char* string);
 
+         /**
+         * \brief Standart String destructor
+         * \arg string - target string;
+         * */
+        ~String();
+
         /**
          * \brief String overload operator of copy
          * \arg string - target string;
@@ -346,18 +352,18 @@ namespace Framework::Helper { namespace Types{
          * \brief String wrest method
          * \arg _start - new string start;
          * */
-        String Wrest(size_t _start) const;
+        [[nodiscard]] String Wrest(size_t _start) const;
         /**
          * \brief String wrest method
          * \arg _start - new string start;
          * \arg _end - new string end;
          * */
-        String Wrest(size_t _start, size_t _end) const;
+        [[nodiscard]] String Wrest(size_t _start, size_t _end) const;
         /**
          * \brief String size method
          * \return Size of String
          * */
-        size_t Size() const;
+        [[nodiscard]] size_t Size() const;
 
         /**
          * \brief String clear method
@@ -368,19 +374,13 @@ namespace Framework::Helper { namespace Types{
          * \brief String is empty
          * \return is empty
          * */
-        bool IsEmpty() const;
+        [[nodiscard]] bool IsEmpty() const;
 
         /**
          * \brief String overload operator(const char*)
          * \arg string - target string;
          * */
-        operator const char*() const;
-
-        /**
-         * \brief Standart String destructor
-         * \arg string - target string;
-         * */
-        ~String();
+        explicit operator const char*() const;
     private:
         char* str;
     };

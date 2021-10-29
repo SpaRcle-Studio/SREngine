@@ -19,21 +19,21 @@ public:
         Unit coord[3] = { 0 };
     };
 
-    [[nodiscard]] Unit Max() const {
+    Unit Max() const {
         return x > y && x > z ? x : y > x && y > z ? y : z;
     }
-    [[nodiscard]] Unit Min() const {
+    Unit Min() const {
         return x < y && x < z ? x : y < x && y < z ? y : z;
     }
 
-    [[nodiscard]] inline bool Empty() const {
+    inline bool Empty() const {
         return (x == 0 && y == 0 && z == 0);
     }
 
-    [[nodiscard]] inline Vector3 Radians() const noexcept {
+    inline Vector3 Radians() const noexcept {
         return { static_cast<Unit>(RAD(x)), static_cast<Unit>(RAD(y)), static_cast<Unit>(RAD(z)) };
     }
-    [[nodiscard]] inline Vector3 Degrees() const noexcept {
+    inline Vector3 Degrees() const noexcept {
         return { static_cast<Unit>(DEG(x)), static_cast<Unit>(DEG(y)), static_cast<Unit>(DEG(z)) };
     }
 
@@ -66,7 +66,7 @@ public:
         y = p;
         z = p;
     }
-    [[nodiscard]] Unit Distance(Vector3 point) const {
+    Unit Distance(Vector3 point) const {
         return sqrt(
                 pow(point.x - x, 2) +
                 pow(point.y - y, 2) +
@@ -78,7 +78,7 @@ public:
         return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
     }
 
-    [[nodiscard]] Vector3 Direction(Vector3 point) const noexcept {
+    Vector3 Direction(Vector3 point) const noexcept {
         if (point == *this)
             return Vector3();
         Vector3 heading = point - (*this);
@@ -98,17 +98,17 @@ public:
         return Vector3(xd, yd, zd);
     }
 
-    [[nodiscard]] Vector3 Inverse() const {
+    Vector3 Inverse() const {
         return Vector3(-x, -y, -z);
     }
 
-    [[nodiscard]] Vector3 InverseAxis(unsigned char axis) const {
+    Vector3 InverseAxis(unsigned char axis) const {
         Vector3 v = *this;
         v[axis] = -v[axis];
         return v;
     }
 
-    [[nodiscard]] Vector3 Normalize() const {
+    Vector3 Normalize() const {
         Unit len = std::sqrt(x * x + y * y + z * z);
 
         Vector3 vec3 = *this;
@@ -142,9 +142,9 @@ public:
     }
 
     static inline Unit Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
-    [[nodiscard]] Unit Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
+    Unit Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
 
-    [[nodiscard]] inline Vector3 Cross(const Vector3 &p_b) const {
+    inline Vector3 Cross(const Vector3 &p_b) const {
         Vector3 ret(
                 (y * p_b.z) - (z * p_b.y),
                 (z * p_b.x) - (x * p_b.z),

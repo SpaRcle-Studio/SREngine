@@ -17,6 +17,8 @@
 #include <Types/Uniforms.h>
 
 namespace Framework::Graphics {
+    typedef int ShaderFlags;
+
     /*
        0 - binding
        1 - type
@@ -35,6 +37,24 @@ namespace Framework::Graphics {
     public:
         Shader(Render* render, const std::string& name);
         Shader(Shader&) = delete;
+    public:
+        typedef enum {
+            Geometry = 0,
+            Skybox = 1,
+            Transparent = 2,
+            DebugWireframe = 3,
+        } StandardID;
+        typedef enum {
+            None         = 0,
+            Diffuse      = 1 << 0,
+            Normal       = 1 << 1,
+            Specular     = 1 << 2,
+            Glossiness   = 1 << 3,
+            Alpha        = 1 << 4,
+            ForwardLight = 1 << 5,
+            GBuffer      = 1 << 6,
+            MAX = Diffuse | Normal | Specular | Glossiness | Alpha | ForwardLight | GBuffer
+        } Flags;
     private:
         SR_SHADER_PROGRAM     m_shaderProgram        = SR_NULL_SHADER;
         void*                 m_shaderTempData       = nullptr;
@@ -71,6 +91,13 @@ namespace Framework::Graphics {
             Environment::Get()->UnUseShader();
             g_currentShader = nullptr;
         }
+
+        /**
+         * шейдер будет загружен в соответствии с данными в /Shaders/CreateInfo.xml
+         * name - уникальное имя этого шейдера из конфига
+         * */
+        static Shader* Load(Render* render, const std::string& name);
+
         [[nodiscard]] SR_FORCE_INLINE static Shader* GetDefaultGeometryShader() noexcept {
         #ifndef SR_RELEASE
             if (!g_stdGeometry)
@@ -96,7 +123,14 @@ namespace Framework::Graphics {
             return m_shaderProgram;
         }
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
-        [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const { return m_sharedUniforms[index]; }
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const {
+            if (index >= m_countSharedUniforms) {
+                Helper::Debug::Error("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +
+                    std::to_string(m_countSharedUniforms) + "\n\tIndex: " + std::to_string(index));
+                return -1;
+            }
+            return m_sharedUniforms[index];
+        }
     public:
         [[nodiscard]] SR_FORCE_INLINE bool Complete() const noexcept { return m_isInit; }
         bool Use() noexcept;
@@ -155,6 +189,23 @@ namespace Framework::Graphics {
             m_env->SetIVec2(this->m_shaderProgram, name, v);
         }
     };
+
+    static std::string ShaderFlagsToString(Shader::Flags flags) {
+        switch (flags) {
+            case Shader::Flags::None:         return "None";
+            case Shader::Flags::Diffuse:      return "Diffuse";
+            case Shader::Flags::Normal:       return "Normal";
+            case Shader::Flags::Specular:     return "Specular";
+            case Shader::Flags::Glossiness:   return "Glossiness";
+            case Shader::Flags::Alpha:        return "Alpha";
+            case Shader::Flags::ForwardLight: return "ForwardLight";
+            case Shader::Flags::GBuffer:      return "GBuffer";
+            case Shader::Flags::MAX:          return "Max";
+            default:
+                Helper::Debug::Error("Graphics::ShaderFlagsToString() : unknown flag!");
+                return std::string();
+        }
+    }
 }
 
 #endif //GAMEENGINE_SHADER_H

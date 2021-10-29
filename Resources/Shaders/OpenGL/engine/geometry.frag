@@ -6,25 +6,11 @@ layout (location = 1) out vec4 BrightColor;
 layout (location = 2) out vec4 DepthColor;
 layout (location = 3) out vec4 StencilMask;
 
-in VS_OUT {
-    vec3 FragPos;
-    vec2 TexCoord;
-    //vec3 VColor;
-    vec3 Normal;
-} fs_in;
+layout (location = 0) in vec2 TexCoord;
 
-//in float vertexID;
-
-//uniform int selected;
-//uniform int bloom;
 uniform vec3 color;
 uniform ivec2 config;
-
-//uniform int hasDiffuse;
-
 uniform sampler2D DiffuseMap;
-//uniform sampler2D NormalMap;
-//uniform sampler2D SpecularMap;
 
 float LinearizeDepth(float depth) {
     // преобразуем обратно в NDC
@@ -34,8 +20,8 @@ float LinearizeDepth(float depth) {
 
 void main() {
     //vec3 ambient = (hasDiffuse == 1 ? texture(DiffuseMap, fs_in.TexCoord).rgb : vec3(1.f,1.f,1.f)) * color;
-    vec3 ambient = texture(DiffuseMap, fs_in.TexCoord).rgb * color;
-    float alpha = texture(DiffuseMap, fs_in.TexCoord).a;
+    vec3 ambient = texture(DiffuseMap, TexCoord).rgb * color;
+    float alpha = texture(DiffuseMap, TexCoord).a;
 
     vec3 result = ambient; //ambient;
 

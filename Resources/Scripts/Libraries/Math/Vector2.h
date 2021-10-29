@@ -25,7 +25,7 @@ public:
         Unit coord[2] = {0};
     };
 
-    [[nodiscard]] Unit Distance(const Vector2 &vec) const noexcept {
+    Unit Distance(const Vector2 &vec) const noexcept {
         return sqrt(pow(vec.x - x, 2) + pow(vec.y - y, 2));
     }
 

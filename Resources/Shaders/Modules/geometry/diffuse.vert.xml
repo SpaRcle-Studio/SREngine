@@ -1,0 +1,29 @@
+<module name="diffuse" type="vertex">
+    <extensions>
+        <GL_ARB_separate_shader_objects value="enable"/>
+    </extensions>
+    <attrubutes>
+        <attribute layout="0" type="vec3" name="inPos"/>
+        <attribute layout="1" type="vec2" name="inUV"/>
+        <attribute layout="2" type="vec3" name="inNorm"/>
+        <attribute layout="3" type="vec3" name="inTang"/>
+    </attrubutes>
+    <uniforms>
+        <uniform binding="0" type="MeshUBO" name="meshUBO">
+            <type name="mat4" var="model"/>
+        </uniform>
+        <uniform binding="1" type="SharedUBO" name="sharedUBO">
+            <type name="mat4" var="proj"/>
+            <type name="mat4" var="view"/>
+        </uniform>
+    </uniforms>
+    <layouts>
+        <TexCoord type="vec2" location="0" IO="output"/>
+    </layouts>
+    <segments priority="0">
+        <segment code="
+            TextCoord = inUV;
+            gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vec4(inPos, 1.0);">
+        </segment>
+    </segments>
+</module>

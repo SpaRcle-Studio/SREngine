@@ -85,6 +85,12 @@ namespace Framework::Graphics {
         }
     };
 
+    // first - current, second - new
+    struct RenderSkybox {
+        Types::Skybox* m_current;
+        Types::Skybox* m_new;
+    };
+
     using namespace Framework::Graphics::Types;
 
     class Light;
@@ -115,14 +121,11 @@ namespace Framework::Graphics {
 
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };
+        MeshCluster                   m_wireframeGeometry        = { };
 
-        Types::Skybox*                m_newSkybox                = nullptr;
-        Types::Skybox*                m_skybox                   = nullptr;
+        RenderSkybox                  m_skybox                   = { nullptr, nullptr };
 
-        Shader*                       m_geometryShader           = nullptr;
-        Shader*                       m_transparentShader        = nullptr;
-        Shader*                       m_flatGeometryShader       = nullptr;
-        Shader*                       m_skyboxShader             = nullptr;
+        std::vector<Shader*>          m_shaders                  = {};
 
         ColorBuffer*                  m_colorBuffer              = nullptr;
         EditorGrid*                   m_grid                     = nullptr;
@@ -158,10 +161,12 @@ namespace Framework::Graphics {
                 this->RegisterMesh(meshes[i]);
         }
 
+        bool InsertShader(uint32_t id, Shader* shader);
+
         /** \brief Can get a nullptr value for removing skybox */
         void SetSkybox(Skybox* skybox);
         bool FreeSkyboxMemory(Skybox* skybox);
-        [[nodiscard]] Skybox* GetSkybox() const { return m_skybox; }
+        [[nodiscard]] Skybox* GetSkybox() const { return m_skybox.m_current; }
 
         void RegisterTexture(Types::Texture* texture);
         void FreeTexture(Types::Texture* texture);
@@ -182,6 +187,7 @@ namespace Framework::Graphics {
         virtual void UpdateUBOs() { }
 
         virtual bool DrawGeometry() = 0;
+        virtual bool DrawDebugWireframe() = 0;
         virtual bool DrawSkybox()   = 0;
     public:
         virtual void DrawGrid()                 noexcept = 0;

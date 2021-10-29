@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Scene Name="some_scene">
+	<GameObjects>
+		<GameObject Name="Miku" />
+		<GameObject Name="Cube" />
+		<GameObject Name="Camera" />
+	</GameObjects>
+</Scene>

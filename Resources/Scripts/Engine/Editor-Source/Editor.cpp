@@ -64,6 +64,10 @@ EXTERN void OnGUI() {
     if (gui->BeginWindow("Assets")) {
         gui->EndWindow();
     }
+
+    if (gui->BeginMenuBar()) {
+        gui->EndMenuBar();
+    }
 }
 
 EXTERN void Close() {

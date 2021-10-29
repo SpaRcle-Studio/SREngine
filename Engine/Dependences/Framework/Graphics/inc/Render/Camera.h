@@ -52,7 +52,9 @@ namespace Framework::Graphics {
         void OnRotate(Math::Vector3 newValue) noexcept override;
         void OnMove(Math::Vector3 newValue) noexcept override;
         void OnReady(bool ready) override;
-        void OnAttachComponent() override { }
+        void OnAttachComponent() override {
+            Component::OnAttachComponent();
+        }
     protected:
         void OnRemoveComponent() noexcept override {
             OnDestroyGameObject();

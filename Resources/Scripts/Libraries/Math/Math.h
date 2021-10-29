@@ -15,7 +15,8 @@
 #define RAD(x) x * M_PI / 180.0
 #define DEG(x) x / M_PI * 180.0
 
-#define _FORCE_INLINE_ __forceinline
+//#define _FORCE_INLINE_ __forceinline
+#define _FORCE_INLINE_ inline
 
 typedef double Unit;
 

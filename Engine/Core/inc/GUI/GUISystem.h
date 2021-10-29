@@ -13,8 +13,9 @@
 #include <EntityComponentSystem/Transform.h>
 #include <Render/Camera.h>
 #include <ImGuizmo.h>
+#include <imgui.h>
 
-namespace Framework::Graphics::GUI {
+namespace Framework::Core::GUI {
     class GUISystem {
     private:
         inline static bool Vec4Null(const ImVec4& v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
@@ -22,8 +23,8 @@ namespace Framework::Graphics::GUI {
         inline static const ImGuiTreeNodeFlags g_node_flags_with_child    = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
     private:
-        GUISystem() : m_pipeLine(Environment::Get()->GetPipeLine()) {
-            m_env = Environment::Get();
+        GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetPipeLine()) {
+            m_env = Graphics::Environment::Get();
         }
         GUISystem(const GUISystem&) = default;
         ~GUISystem() = default;
@@ -42,15 +43,16 @@ namespace Framework::Graphics::GUI {
 
         int m_snapValue = 100;
     private:
-        Environment*   m_env          = nullptr;
-        const PipeLine m_pipeLine     = PipeLine::Unknown;
-        bool           m_shiftPressed = false;
-        bool           m_boundsActive = false;
-        bool           m_centerActive = false;
+        Graphics::Environment*   m_env          = nullptr;
+        const Graphics::PipeLine m_pipeLine     = Graphics::PipeLine::Unknown;
+        bool                     m_shiftPressed = false;
+        bool                     m_boundsActive = false;
+        bool                     m_centerActive = false;
 
         ImGuizmo::OPERATION m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE      m_currentGuizmoMode      = ImGuizmo::MODE::LOCAL;
     private:
+        bool CollapsingHeader(const char* label, ImGuiTreeNodeFlags flags = 0);
         void DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject);
         static void DrawImage(
                 ImTextureID user_texture_id,
@@ -90,12 +92,12 @@ namespace Framework::Graphics::GUI {
 
         void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm);
 
-        Helper::Math::Vector2 GetWindowSize() const {
+        [[nodiscard]] Helper::Math::Vector2 GetWindowSize() const {
             ImVec2 size = ImGui::GetWindowSize();
             return { (Helper::Math::Unit)size.x, (Helper::Math::Unit)size.y };
         }
         void DrawTexture(Helper::Math::Vector2 winSize, Helper::Math::Vector2 texSize, uint32_t id, bool centralize);
-        void DrawGuizmo(Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
+        void DrawGuizmo(Graphics::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
         void DrawGuizmoTools();
         void BeginDockSpace();
         void EndDockSpace();
@@ -103,6 +105,8 @@ namespace Framework::Graphics::GUI {
         void EndWindow();
         bool BeginChildWindow(const char* name);
         void EndChildWindow();
+        bool BeginMenuBar();
+        void EndMenuBar();
     };
 }
 

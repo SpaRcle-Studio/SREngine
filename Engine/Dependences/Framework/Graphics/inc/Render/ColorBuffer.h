@@ -49,14 +49,7 @@ namespace Framework::Graphics {
             //return Eq(one.x, two.x) && Eq(one.y, two.y) && Eq(one.z, two.z);
         }
         //inline int GetSelectColorObject(unsigned char* pixel) noexcept {
-        inline size_t GetSelectColorObject(glm::u8vec3 pixel) noexcept {
-            if (pixel != glm::u8vec3(0,0,0))
-                for (int i = 0; i < next; i++) {
-                    if (CheckColor(Names[i].Color, pixel))
-                        return Names[i].Name;
-                }
-            return std::numeric_limits<size_t>::max();
-        }
+        size_t GetSelectColorObject(glm::u8vec3 pixel) noexcept;
     };
 }
 

@@ -11,7 +11,13 @@
 #include <GUI/GUISystem.h>
 #include <Input/InputSystem.h>
 
-void Framework::Graphics::GUI::GUISystem::BeginDockSpace() {
+#include <Events/EventManager.h>
+#include <ResourceManager/ResourceManager.h>
+#include <Engine.h>
+
+using namespace Framework::Core::GUI;
+
+void GUISystem::BeginDockSpace() {
     const float toolbarSize = 0;
 
     ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -38,27 +44,27 @@ void Framework::Graphics::GUI::GUISystem::BeginDockSpace() {
     ImGui::PopStyleVar(3);
 }
 
-void Framework::Graphics::GUI::GUISystem::EndDockSpace() {
+void GUISystem::EndDockSpace() {
 
 }
 
-bool Framework::Graphics::GUI::GUISystem::BeginWindow(const char* name) {
+bool GUISystem::BeginWindow(const char* name) {
     return ImGui::Begin(name);
 }
 
-void Framework::Graphics::GUI::GUISystem::EndWindow() {
+void GUISystem::EndWindow() {
     ImGui::End();
 }
 
-bool Framework::Graphics::GUI::GUISystem::BeginChildWindow(const char* name) {
+bool GUISystem::BeginChildWindow(const char* name) {
     return ImGui::BeginChild(name);
 }
 
-void Framework::Graphics::GUI::GUISystem::EndChildWindow() {
+void GUISystem::EndChildWindow() {
     ImGui::EndChild();
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawTexture(
+void GUISystem::DrawTexture(
     Framework::Helper::Math::Vector2 winSize,
     Framework::Helper::Math::Vector2 texSize, uint32_t id,
     bool centralize)
@@ -81,14 +87,14 @@ void Framework::Graphics::GUI::GUISystem::DrawTexture(
         ImGui::SetCursorPos(centralizedCursorPos);
     }
 
-    if (m_pipeLine == PipeLine::OpenGL)
+    if (m_pipeLine == Graphics::PipeLine::OpenGL)
         DrawImage(reinterpret_cast<ImTextureID>(id), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
         DrawImage(m_env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawImage(
+void GUISystem::DrawImage(
     ImTextureID user_texture_id,
     const ImVec2& size,
     const ImVec2& uv0,
@@ -119,7 +125,7 @@ void Framework::Graphics::GUI::GUISystem::DrawImage(
         window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
+void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
     m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
 
     if (scene.LockIfValid()) {
@@ -154,7 +160,7 @@ void Framework::Graphics::GUI::GUISystem::DrawHierarchy(Framework::Helper::Types
     }
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawChild(Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> root) {
+void GUISystem::DrawChild(Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> root) {
     unsigned long i = 0;
 
     root->ForEachChild([&i, this](Helper::Types::SafePtr<Helper::GameObject> child){
@@ -184,14 +190,58 @@ void Framework::Graphics::GUI::GUISystem::DrawChild(Framework::Helper::Types::Sa
     ImGui::TreePop();
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject) {
-    gameObject->ForEachComponent([](Component* component) {
+bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+        return false;
+
+    ImGuiID id = window->GetID(label);
+    flags |= ImGuiTreeNodeFlags_CollapsingHeader;
+    flags |= ImGuiTreeNodeFlags_AllowItemOverlap | ImGuiTreeNodeFlags_ClipLabelForTrailingButton;
+    bool is_open = ImGui::TreeNodeBehavior(id, flags, label);
+
+    return is_open;
+}
+
+void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject) {
+    if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
+        if (ImGui::BeginMenu("Add component")) {
+            for (const auto &a : Component::GetComponentsNames()) {
+                if (ImGui::MenuItem(a.c_str())) {
+                    gameObject->AddComponent(Component::CreateComponentOfName(a));
+                    break;
+                }
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndPopup();
+    }
+
+    gameObject->ForEachComponent([gameObject, this](Component* component) -> bool {
+        if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
+            if (ImGui::BeginMenu("Remove component")) {
+                if (ImGui::MenuItem(component->GetComponentName().c_str())) {
+                    gameObject->RemoveComponent(component);
+                    goto exit;
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndPopup();
+        }
+
         if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
             component->DrawOnInspector();
+
+        return true;
+
+        exit:
+            ImGui::EndMenu();
+            ImGui::EndPopup();
+            return false;
     });
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
+void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
     Helper::Types::SafePtr<Helper::GameObject> gameObject;
     if (scene.LockIfValid()) {
         gameObject = scene->GetSelected();
@@ -271,7 +321,7 @@ void Framework::Graphics::GUI::GUISystem::DrawInspector(Framework::Helper::Types
     }
 }
 
-void Framework::Graphics::GUI::GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) {
+void GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) {
     if (ImGui::IsItemClicked()) {
         if (!m_shiftPressed && gm->GetScene().Valid())
             gm->GetScene()->UnselectAll();
@@ -280,7 +330,7 @@ void Framework::Graphics::GUI::GUISystem::CheckSelected(const Helper::Types::Saf
     }
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawGuizmoTools() {
+void GUISystem::DrawGuizmoTools() {
     static bool snapAct = true;
 
     if (ButtonWithId("engine_tool_move", "M", m_sizeB, 0, true,
@@ -335,7 +385,7 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmoTools() {
     }
 }
 
-void Framework::Graphics::GUI::GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
+void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
     if (!camera)
         return;
 
@@ -435,7 +485,7 @@ void Framework::Graphics::GUI::GUISystem::DrawGuizmo(Framework::Graphics::Camera
     }
 }
 
-bool Framework::Graphics::GUI::GUISystem::ButtonWithId(
+bool GUISystem::ButtonWithId(
     const char *_id,
     const char *label,
     ImVec2 button_size,
@@ -492,7 +542,7 @@ bool Framework::Graphics::GUI::GUISystem::ButtonWithId(
     return pressed;
 }
 
-void Framework::Graphics::GUI::GUISystem::SetGuizmoTool(uint8_t toolId) {
+void GUISystem::SetGuizmoTool(uint8_t toolId) {
     switch (toolId) {
         case 0: m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE; break;
         case 1: m_currentGuizmoOperation = ImGuizmo::OPERATION::ROTATE;    break;
@@ -502,3 +552,56 @@ void Framework::Graphics::GUI::GUISystem::SetGuizmoTool(uint8_t toolId) {
             return;
     }
 }
+
+bool GUISystem::BeginMenuBar() {
+    if (ImGui::BeginMainMenuBar()) {
+        if (ImGui::BeginMenu("File")) {
+            if (ImGui::MenuItem("New scene")) {
+
+            }
+
+            if (ImGui::MenuItem("Load scene")) {
+
+            }
+
+            if (ImGui::MenuItem("Save scene")) {
+                if (auto scene = Engine::Get()->GetScene(); scene.LockIfValid()) {
+                    auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::GetResourcesFolder() + "/Scenes/", false);
+                    if (auto path = FileSystem::SaveFileDialog(scenesPath, "Scene Files(*.scene)"); !path.empty()) {
+                        auto sceneName = StringUtils::GetFileNameFromFullPath(path);
+                        auto folder = StringUtils::GetDirToFileFromFullPath(path);
+
+                        scene->SetName(sceneName);
+
+                        if (scene->Save(folder)) {
+                            Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
+                        } else {
+                            Helper::Debug::Error("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
+                        }
+                    }
+                    scene.Unlock();
+                } else {
+                    Helper::Debug::Warn("GUISystem::BeginMenuBar() : scene isn't valid!");
+                }
+            }
+
+            if (ImGui::MenuItem("Close scene")) {
+
+            }
+
+            if (ImGui::MenuItem("Exit")) {
+                EventManager::Push(Helper::EventManager::Event::Exit);
+            }
+
+            ImGui::EndMenu();
+        }
+        return true;
+    } else
+        return false;
+}
+
+void GUISystem::EndMenuBar() {
+    ImGui::EndMainMenuBar();
+}
+
+

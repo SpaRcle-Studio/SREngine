@@ -43,6 +43,16 @@ namespace Framework::Graphics::VulkanTools {
         return vkDescriptions;
     }
 
+    static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderType type) {
+        switch (type) {
+            case ShaderType::Fragment: return VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT;
+            case ShaderType::Vertex:   return VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT;
+            default:
+                Helper::Debug::Error("VulkanTools::VkShaderShaderTypeToStage() : unknown type!");
+                return VkShaderStageFlagBits::VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
+        }
+    }
+
     static SR_FORCE_INLINE ShaderType VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
         switch (stage) {
             case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderType::Fragment;

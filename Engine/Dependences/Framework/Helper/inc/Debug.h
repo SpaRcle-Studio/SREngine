@@ -5,6 +5,12 @@
 #ifndef HELPER_DEBUG_H
 #define HELPER_DEBUG_H
 
+#ifdef _DEBUG
+
+#else
+    #define SR_RELEASE
+#endif
+
 #include <fstream>
 #include <ostream>
 #include <mutex>

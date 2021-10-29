@@ -4,6 +4,7 @@
 
 #include "Render/Shader.h"
 #include <Debug.h>
+#include <Xml.h>
 #include <Environment/Environment.h>
 #include <ResourceManager/ResourceManager.h>
 
@@ -50,7 +51,6 @@ bool Framework::Graphics::Shader::Init() {
 
     return true;
 }
-
 
 bool Framework::Graphics::Shader::Compile() {
     if (m_isCompile) {
@@ -214,5 +214,105 @@ void Framework::Graphics::Shader::CopyVertexAndUniformsInfo(const Framework::Gra
     this->m_verticesAttributes  = source->m_verticesAttributes;
     this->m_verticesDescription = source->m_verticesDescription;
     this->m_uniformsInfo        = source->m_uniformsInfo;
+}
+
+Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, const std::string &name) {
+    Helper::Debug::Log("Shader::Load() : load \"" + name + "\" shader...");
+
+    std::vector<Xml::Node> shaders = {};
+
+    auto findShader = [&shaders](const std::string& name) -> Xml::Node {
+        for (const auto &shaderXml : shaders)
+            if (shaderXml.GetAttribute("name").ToString() == name)
+                return shaderXml;
+        return Xml::Node::Empty();
+    };
+
+    typedef std::function<Xml::Node(const Xml::Node& node, const std::string& attribName)> getInheritNodeFun;
+    getInheritNodeFun getInheritNode = [findShader, name, &getInheritNode](const Xml::Node& node, const std::string& nodeName) -> Xml::Node {
+        if (auto targetNode = node.GetNode(nodeName)) {
+            if (auto inherit = targetNode.GetAttribute("inherit")) {
+                if (auto inheritShader = findShader(inherit.ToString()))
+                    return getInheritNode(inheritShader, nodeName);
+                else
+                    Helper::Debug::Error("Shader::Load() [getInheritAttrib] : \"" + inherit.ToString() +
+                                         "\" inherit shader not found! \n\tShader name: " + name);
+            } else
+                return targetNode;
+        }
+        return Xml::Node::Empty();
+    };
+
+    auto vertexParser = [=](Shader* shader, const Xml::Node& node) {
+        if (auto vertex = getInheritNode(node, "Vertex")) {
+            auto [descr, attrib] = Vertices::GetVertexInfo(Vertices::StringToEnumType(vertex.GetAttribute("value").ToString()));
+            shader->SetVertex(descr, attrib);
+        }
+    };
+
+    auto uniformParsers = [=](Shader* shader, const Xml::Node& node) {
+        if (auto xmlUniforms = getInheritNode(node, "Uniforms")) {
+            std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> uniforms = {};
+            // 0 - binding
+            // 1 - type
+            // 2 - ubo siz
+            for (const auto& uniform : xmlUniforms.GetNodes()) {
+                uniforms.emplace_back(std::pair(
+                        std::pair(
+                            (uint32_t)uniform.GetAttribute("binding").ToInt(),
+                            StringToEnumUBOType(uniform.GetAttribute("type").ToString())),
+                        (uint64_t)GetUniformSize(uniform.GetAttribute("UBO").ToString())));
+            }
+            shader->SetUniforms(uniforms);
+        }
+    };
+
+    auto infoParser = [=](Shader* shader, const Xml::Node& node) {
+        SRShaderCreateInfo createInfo = {};
+        if (auto info = getInheritNode(node, "Info")) {
+            if (auto value = info.GetNode("PolygonMode"))
+                createInfo.polygonMode = StringToEnumPolygonMode(value.GetAttribute("value").ToString());
+
+            if (auto value = info.GetNode("CullMode"))
+                createInfo.cullMode = StringToEnumCullMode(value.GetAttribute("value").ToString());
+
+            if (auto value = info.GetNode("DepthCompare"))
+                createInfo.depthCompare = StringToEnumDepthCompare(value.GetAttribute("value").ToString());
+
+            if (auto value = info.GetNode("DepthWrite"))
+                createInfo.depthWrite = value.GetAttribute("value").ToBool();
+
+            if (auto value = info.GetNode("DepthTest"))
+                createInfo.depthTest = value.GetAttribute("value").ToBool();
+        }
+        shader->SetCreateInfo(createInfo);
+    };
+
+    auto shaderParser = [=](const Xml::Node& node) -> Shader* {
+        if (auto path = node.GetAttribute("path"); path.Valid()) {
+            auto shader = new Shader(render, path.ToString()); {
+                vertexParser(shader, node);
+                uniformParsers(shader, node);
+                infoParser(shader, node);
+            }
+            return shader;
+        } else
+            return nullptr;
+    };
+
+    auto createInfoPath = Helper::StringUtils::MakePath(Helper::ResourceManager::GetResourcesFolder() + "/Shaders/CreateInfo.xml");
+    if (FileSystem::FileExists(createInfoPath)) {
+        auto xml = Helper::Xml::Document::Load(createInfoPath);
+        shaders = xml.Root().GetNode("Shaders").GetNodes();
+        if (auto shaderXml = findShader(name)) {
+            auto shader = shaderParser(shaderXml);
+            if (!shader)
+                Helper::Debug::Error("Shader::Load() : failed to load \"" + name + "\" shader!");
+            return shader;
+        }
+    } else
+        Helper::Debug::Error("Shader::Load() : create info file not found! \n\tPath: " + createInfoPath);
+
+    return nullptr;
 }
 

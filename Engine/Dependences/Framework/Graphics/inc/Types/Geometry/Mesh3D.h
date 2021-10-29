@@ -38,7 +38,7 @@ namespace Framework::Graphics::Types {
                     m_hasErrors = true; return;
                 }
 
-                if (m_UBO = m_env->AllocateUBO(sizeof(Mesh3DUBO)); m_UBO < 0) {
+                if (m_UBO = m_env->AllocateUBO(sizeof(Mesh3dUBO)); m_UBO < 0) {
                     Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
                     m_hasErrors = true; return;
                 }
@@ -48,7 +48,7 @@ namespace Framework::Graphics::Types {
                         { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
                 });
 
-                Mesh3DUBO ubo = { m_modelMat }; m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3DUBO));
+                Mesh3dUBO ubo = { m_modelMat }; m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
 
                 //!==========================
 

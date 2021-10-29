@@ -10,7 +10,7 @@
 #include <Utils/StringUtils.h>
 
 #ifdef WIN32
-#include <Windows.h>
+    #include <Windows.h>
 #endif
 
 #include <Utils/StringUtils.h>
@@ -21,9 +21,9 @@ using namespace Framework::Helper;
 
 bool Framework::Helper::FileSystem::Delete(const char *file) { return remove(file); }
 
-bool Framework::Helper::FileSystem::FileExists(const char *file) {
+bool Framework::Helper::FileSystem::FileExists(const std::string& path) {
 #ifdef WIN32
-    if (FILE* f = fopen(file, "r")) {
+    if (FILE* f = fopen(path.c_str(), "r")) {
         fclose(f);
         return true;
     }
@@ -167,5 +167,44 @@ bool FileSystem::CreatePath(const std::string &path) {
 #else
     return _mkdir(path.c_str());
 #endif
+}
+
+std::string FileSystem::SaveFileDialog(const std::string &path, const std::string &filter) {
+#ifdef WIN32
+    auto newPath = StringUtils::ReplaceAll(path, "/", "\\");
+
+    OPENFILENAME ofn;          // common dialog box structure
+
+    char buf[255] = "\0";
+    char cCustomFilter[256] = "\0\0";
+    int nFilterIndex = 0;
+    ofn.lStructSize = sizeof(OPENFILENAME);
+    ofn.hwndOwner = NULL;
+    ofn.hInstance = NULL;//GetModuleHandle(NULL);
+    ofn.lpstrFilter = filter.c_str();
+    ofn.lpstrCustomFilter = cCustomFilter;
+    ofn.nMaxCustFilter = 256;
+    ofn.nFilterIndex = nFilterIndex;
+    ofn.lpstrFile = buf;
+    ofn.nMaxFile = 255;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.lpstrTitle = 0;
+    ofn.Flags = OFN_FILEMUSTEXIST;
+    ofn.nFileOffset = 0;
+    ofn.nFileExtension = 0;
+    ofn.lpstrDefExt = NULL;
+    ofn.lCustData = NULL;
+    ofn.lpfnHook = NULL;
+    ofn.lpTemplateName = NULL;
+    ofn.lpstrInitialDir = newPath.c_str();
+
+    if (GetSaveFileNameA(&ofn)) {
+        return buf;
+    }
+#else
+#endif
+    return std::string();
 }
 

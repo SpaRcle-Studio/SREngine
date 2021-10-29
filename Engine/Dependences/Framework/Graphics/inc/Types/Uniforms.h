@@ -6,11 +6,13 @@
 #define GAMEENGINE_UNIFORMS_H
 
 #include <glm/glm.hpp>
+#include <map>
+#include <Utils/Enumerations.h>
 
 namespace Framework::Graphics {
-    enum class UBOType {
+    SR_ENUM_CLASS(UBOType,
         Common, Shared
-    };
+    )
 
     struct SkyboxUBO {
         glm::mat4 PVMat;
@@ -21,7 +23,7 @@ namespace Framework::Graphics {
         glm::mat4 view;
     };
 
-    struct Mesh3DUBO {
+    struct Mesh3dUBO {
         glm::mat4 model;
     };
 
@@ -29,6 +31,19 @@ namespace Framework::Graphics {
         float gamma;
         float saturation;
     };
+
+    static uint64_t GetUniformSize(const std::string& name) {
+        static const std::map<std::string, uint64_t> uniformSizes = {
+                {"SkyboxUBO",         sizeof(SkyboxUBO)},
+                {"ProjViewUBO",       sizeof(ProjViewUBO)},
+                {"Mesh3dUBO",         sizeof(Mesh3dUBO)},
+                {"PostProcessingUBO", sizeof(PostProcessingUBO)},
+        };
+        if (auto find = uniformSizes.find(name); find != uniformSizes.end())
+            return find->second;
+        else
+            return 0;
+    }
 }
 
 #endif //GAMEENGINE_UNIFORMS_H

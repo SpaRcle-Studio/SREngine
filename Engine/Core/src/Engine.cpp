@@ -7,7 +7,7 @@
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
-#include <EditorGUI.h>
+#include <GUI/EditorGUI.h>
 
 #include <utility>
 #include <chrono>
@@ -35,7 +35,7 @@ bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* ph
 
     Helper::Debug::Info("Engine::Create() : creating game engine...");
 
-    if (!this->m_window->Create(new EditorGUI(m_compiler))){
+    if (!this->m_window->Create(new Core::GUI::EditorGUI(m_compiler))){
         Helper::Debug::Error("Engine::Create() : failed create window!");
         return false;
     }

@@ -312,8 +312,16 @@ bool Framework::Graphics::OpenGL::CompileShader(
         const std::vector<uint64_t>& uniformSizes
         ) const noexcept
 {
-    std::string vertex_path   = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_vertex.glsl";
-    std::string fragment_path = ResourceManager::GetResourcesFolder() + "\\Shaders\\" + GetPipeLineName() + "\\" + name + "_fragment.glsl";;
+    std::string shadersPath = ResourceManager::GetResourcesFolder() + "/Shaders/";
+
+    std::string vertex_path = shadersPath + "Common/" + name + ".vert";
+    std::string fragment_path = shadersPath + "Common/" + name + ".frag";
+
+    if (!Helper::FileSystem::FileExists(vertex_path))
+        vertex_path = shadersPath + GetPipeLineName() + "/" + name + ".vert";
+
+    if (!Helper::FileSystem::FileExists(fragment_path))
+        fragment_path = shadersPath + GetPipeLineName() + "/" + name + ".frag";;
 
     auto* glShader = new GLShaderData();
 
@@ -328,9 +336,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
     std::string VertexShaderCode;
     std::ifstream VertexShaderStream(vertex_path, std::ios::in);
     if (VertexShaderStream.is_open()) {
-        std::string Line = "";
-        while (getline(VertexShaderStream, Line))
-            VertexShaderCode += "\n" + Line;
+        std::string line;
+        while (getline(VertexShaderStream, line))
+            VertexShaderCode += "\n" + line;
         VertexShaderStream.close();
     }
 
@@ -338,9 +346,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
     std::string FragmentShaderCode;
     std::ifstream FragmentShaderStream(fragment_path, std::ios::in);
     if (FragmentShaderStream.is_open()) {
-        std::string Line = "";
-        while (getline(FragmentShaderStream, Line))
-            FragmentShaderCode += "\n" + Line;
+        std::string line;
+        while (getline(FragmentShaderStream, line))
+            FragmentShaderCode += "\n" + line;
         FragmentShaderStream.close();
     }
 

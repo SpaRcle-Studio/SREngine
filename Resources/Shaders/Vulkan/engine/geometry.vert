@@ -5,7 +5,7 @@ layout (location = 1) in vec2 inUV;
 layout (location = 2) in vec3 inNorm;
 layout (location = 3) in vec3 inTang;
 
-layout (location = 0) out vec2 outUV;
+layout (location = 0) out vec2 TexCoord;
 
 layout (binding = 0) uniform MeshUBO {
     mat4 model;
@@ -19,7 +19,6 @@ layout (binding = 1) uniform ProjViewUBO {
 #extension GL_ARB_separate_shader_objects : enable
 
 void main() {
-    outUV = inUV;
-
+    TexCoord = inUV;
     gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vec4(inPos, 1.0);
 }

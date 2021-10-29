@@ -3,9 +3,11 @@
 //
 
 #include <Debug.h>
-#include "../inc/EditorGUI.h"
+#include "GUI/EditorGUI.h"
 
-bool Framework::EditorGUI::Init() {
+using namespace Framework::Core::GUI;
+
+bool EditorGUI::Init() {
     if (m_isInit) {
         Helper::Debug::Error("EditorGUI::Init() : editor gui is already initialized!");
         return false;
@@ -30,7 +32,7 @@ bool Framework::EditorGUI::Init() {
     return true;
 }
 
-bool Framework::EditorGUI::Destroy() {
+bool EditorGUI::Destroy() {
     if (m_compiler)
         m_compiler = nullptr;
 
@@ -45,11 +47,11 @@ bool Framework::EditorGUI::Destroy() {
     return true;
 }
 
-void Framework::EditorGUI::Free() {
+void EditorGUI::Free() {
     delete this;
 }
 
-void Framework::EditorGUI::Draw() {
+void EditorGUI::Draw() {
     if (m_hasErrors)
         return;
 
