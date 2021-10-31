@@ -68,7 +68,7 @@ Material::~Material() {
     }
 }
 
-void Material::UseOpenGL() const noexcept {
+void Material::UseOpenGL() const {
     if (m_diffuse) {
         m_env->BindTexture(4, m_diffuse->GetID());
         m_mesh->m_shader->SetInt("diffuseMap", 4);
@@ -168,14 +168,6 @@ bool Material::SetTransparent(bool value) {
     return true;
 }
 
-Math::Vector3 Material::GetRandomColor() {
-    return {
-            (float)RandomNumber(0, 255) / 255.f,
-            (float)RandomNumber(0, 255) / 255.f,
-            (float)RandomNumber(0, 255) / 255.f
-    };
-}
-
 bool Material::FreeTextures() {
     if (m_texturesIsFree) {
         Debug::Error("Material::FreeTextures() : textures already free! Something went wrong...");
@@ -212,5 +204,15 @@ bool Material::FreeTextures() {
     this->m_texturesIsFree = true;
 
     return true;
+}
+
+Material *Material::Copy() {
+    auto mat = new Material(m_diffuse, m_normal, m_specular, m_glossiness);
+
+    mat->m_bloom = m_bloom;
+    mat->m_color = m_color;
+    mat->m_transparent = m_transparent;
+
+    return mat;
 }
 

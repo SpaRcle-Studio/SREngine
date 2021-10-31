@@ -110,9 +110,9 @@ bool Framework::Graphics::Shader::Link() {
     return true;
 }
 
-bool Framework::Graphics::Shader::SetStandardGeometryShader(Shader* shader) noexcept {
+bool Framework::Graphics::Shader::SetDefaultGeometryShader(Shader* shader) {
     if (g_stdGeometry) {
-        Debug::Warn("Shader::SetStandardGeometryShader() : shader already set!");
+        Debug::Warn("Shader::SetDefaultGeometryShader() : shader already set!");
         return false;
     }
     else {

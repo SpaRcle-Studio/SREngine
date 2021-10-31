@@ -29,6 +29,11 @@ namespace Framework::Graphics::Memory {
     }
 
     bool MeshManager::RegisterImpl(const std::string &resourceId, MeshManager::MemoryType memType, uint32_t id) {
+    #ifndef SR_RELEASE
+        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+            Helper::Debug::Log("MeshManager::RegisterImpl() : register resource \"" + resourceId + "\"");
+    #endif
+
         switch (memType) {
             case MeshManager::MemoryType::VBO: {
                 m_VBOs[resourceId] = VidMemInfo(id, memType);
@@ -43,32 +48,42 @@ namespace Framework::Graphics::Memory {
         }
     }
 
-    bool MeshManager::FreeImpl(VideoResourcesIter iter, MeshManager::MemoryType memType) {
-        if (auto memory = iter.value()->second; memory.m_usages == 1) {
+    MeshManager::FreeResult MeshManager::FreeImpl(VideoResourcesIter iter, MeshManager::MemoryType memType) {
+        if (auto& memory = iter.value()->second; memory.m_usages == 1) {
+        #ifndef SR_RELEASE
+            const std::string resourceId = iter.value()->first;
+        #endif
             switch (memType) {
-                case VBO:
-                    m_VBOs.erase(iter.value());
-                    return true;
-                case IBO:
-                    m_IBOs.erase(iter.value());
-                    return true;
+                case VBO: m_VBOs.erase(iter.value());
+                    goto skip;
+                case IBO: m_IBOs.erase(iter.value());
+                skip:
+                #ifndef SR_RELEASE
+                    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+                        Helper::Debug::Log("MeshManager::FreeImpl() : free resource \"" + resourceId + "\"");
+                #endif
+                    return FreeResult::Freed;
                 case Unknown:
                 default:
                     Helper::Debug::Error("MeshManager::FreeImpl() : unknown type!");
-                    return false;
+                    return FreeResult::UnknownMem;
             }
         } else {
             memory.m_usages--;
-            return true;
+            return FreeResult::EndUse;
         }
     }
 
     void MeshManager::OnSingletonDestroy() {
         if (!m_VBOs.empty())
-            Helper::Debug::Warn("MeshManager::OnSingletonDestroy() : VBOs isn't empty! Memory leak possible.");
+            Helper::Debug::Warn(Helper::Format("MeshManager::OnSingletonDestroy() : "
+                                               "VBOs isn't empty! \n\tCount = %i \n\t"
+                                               "Memory leak possible.", m_VBOs.size()));
 
         if (!m_IBOs.empty())
-            Helper::Debug::Warn("MeshManager::OnSingletonDestroy() : IBOs isn't empty! Memory leak possible.");
+            Helper::Debug::Warn(Helper::Format("MeshManager::OnSingletonDestroy() : "
+                                               "IBOs isn't empty! \n\tCount = %i \n\t"
+                                               "Memory leak possible.", m_IBOs.size()));
 
         m_VBOs.clear();
         m_IBOs.clear();

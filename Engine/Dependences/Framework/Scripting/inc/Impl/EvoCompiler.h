@@ -10,6 +10,7 @@
 #include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
 #include <EvoScript/Compilation/AddressTableGen.h>
+#include <EvoScript/Compilation/Casting.h>
 
 namespace Framework::Scripting {
     class EvoCompiler : public Compiler {
@@ -21,8 +22,10 @@ namespace Framework::Scripting {
     private:
         EvoScript::Compiler*        m_compiler      = nullptr;
         EvoScript::AddressTableGen* m_generator     = nullptr;
+        EvoScript::CastingGen*      m_casting       = nullptr;
         std::string                 m_pathToScripts = "None";
     public:
+        [[nodiscard]] EvoScript::CastingGen*      GetCasting()           const { return m_casting;   }
         [[nodiscard]] EvoScript::AddressTableGen* GetGenerator()         const { return m_generator; }
         [[nodiscard]] EvoScript::Compiler*        GetEvoScriptCompiler() const { return m_compiler;  }
     public:

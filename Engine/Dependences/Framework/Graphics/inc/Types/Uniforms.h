@@ -27,6 +27,11 @@ namespace Framework::Graphics {
         glm::mat4 model;
     };
 
+    struct WireframeUBO {
+        glm::mat4 model;
+        glm::vec4 color;
+    };
+
     struct PostProcessingUBO {
         float gamma;
         float saturation;
@@ -37,6 +42,7 @@ namespace Framework::Graphics {
                 {"SkyboxUBO",         sizeof(SkyboxUBO)},
                 {"ProjViewUBO",       sizeof(ProjViewUBO)},
                 {"Mesh3dUBO",         sizeof(Mesh3dUBO)},
+                {"WireframeUBO",      sizeof(WireframeUBO)},
                 {"PostProcessingUBO", sizeof(PostProcessingUBO)},
         };
         if (auto find = uniformSizes.find(name); find != uniformSizes.end())

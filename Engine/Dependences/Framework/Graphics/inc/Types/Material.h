@@ -20,6 +20,7 @@ namespace Framework::Graphics::Types {
         friend class Mesh;
         friend class Mesh3D;
     public:
+        Material() = default;
         Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
         ~Material();
     private:
@@ -28,7 +29,7 @@ namespace Framework::Graphics::Types {
         bool                       m_transparent    = false;
         volatile bool              m_bloom          = false;
 
-        glm::vec4                  m_color          = glm::vec4(1,1,1,1);
+        glm::vec4                  m_color          = glm::vec4(1, 1, 1, 1);
 
         Mesh*                      m_mesh           = nullptr;
 
@@ -39,9 +40,7 @@ namespace Framework::Graphics::Types {
         Texture*                   m_specular       = nullptr;
         Texture*                   m_glossiness     = nullptr;
     private:
-        [[nodiscard]] static inline int RandomNumber(int a, int b) noexcept { return rand()%(b-a+1) + a; }
-    public:
-        static Helper::Math::Vector3 GetRandomColor();
+
     public:
         SR_FORCE_INLINE void UseWithDefShader() const noexcept {
             if (m_diffuse) {
@@ -55,20 +54,21 @@ namespace Framework::Graphics::Types {
             }
         }
         void UseVulkan();
-        void UseOpenGL() const noexcept;
+        void UseOpenGL() const;
     public:
+        Material* Copy();
         bool SetTransparent(bool value);
         bool SetMesh(Mesh* mesh);
 
-        inline void SetBloom(bool value)                  noexcept { this->m_bloom = value; };
-        [[nodiscard]] inline bool GetBloomEnabled() const noexcept { return this->m_bloom;  };
-        [[nodiscard]] inline bool IsTransparent()   const noexcept { return m_transparent;  };
+        void SetBloom(bool value) { this->m_bloom = value; };
+        [[nodiscard]] bool GetBloomEnabled() const { return this->m_bloom;  };
+        [[nodiscard]] bool IsTransparent() const { return m_transparent;  };
 
-        inline void SetColor(float r, float g, float b)   { this->m_color = { r, g, b, 1};                  }
-        inline void SetColor(Helper::Math::Vector3 color) { this->m_color = {color.x, color.y, color.z, 1}; }
-        inline void SetColor(glm::vec4 color)             { this->m_color = color;                          }
+        void SetColor(float r, float g, float b)   { this->m_color = { r, g, b, 1};                  }
+        void SetColor(Helper::Math::Vector3 color) { this->m_color = {color.x, color.y, color.z, 1}; }
+        void SetColor(glm::vec4 color)             { this->m_color = color;                          }
 
-        [[nodiscard]] inline Helper::Math::Vector3 GetColor() const noexcept { return glm::vec3(this->m_color); }
+        [[nodiscard]] Helper::Math::Vector3 GetColor() const { return glm::vec3(this->m_color); }
 
         bool FreeTextures();
 

@@ -91,13 +91,13 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
 
         auto& [indices, vertices] = skyboxObj[0];
 
-        if (!m_env->CalculateVBO(m_VBO, vertices.data(), Vertices::Type::SkyboxVertex, vertices.size())) {
+        if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SkyboxVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
             Helper::Debug::Error("Skybox::Calculate() : failed to calculate VBO!");
             this->m_hasErrors = true;
             return false;
         }
 
-        if (!m_env->CalculateIBO(m_IBO, indices.data(), sizeof(uint32_t), indices.size())) {
+        if (m_IBO = m_env->CalculateIBO(indices.data(), sizeof(uint32_t), indices.size()); m_IBO == SR_ID_INVALID) {
             Helper::Debug::Error("Skybox::Calculate() : failed to calculate IBO!");
             this->m_hasErrors = true;
             return false;

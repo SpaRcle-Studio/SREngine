@@ -449,8 +449,8 @@ namespace Framework::Graphics {
                 uint8_t mipLevels,
                 bool alpha) const noexcept override;
 
-        bool CalculateVBO(int32_t& VBO, void* vertices, Vertices::Type type, size_t count) override;
-        bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
+        int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
+        int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) override {
             if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1); id < 0) {
                 Helper::Debug::Error("Vulkan::CalculateCubeMap() : failed to allocate texture!");

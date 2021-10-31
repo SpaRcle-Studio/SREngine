@@ -109,8 +109,6 @@ namespace Framework::Helper {
             g_grabbleNow = true;
 
             for (size_t t = 0; t < g_resourcesToDestroy.size(); t++) {
-                //std::cout << g_resourcesToDestroy[t]->m_resource_name << " " << g_resourcesToDestroy[t]->m_countUses << std::endl;
-
                 if (g_resourcesToDestroy[t]->m_countUses == 0 && g_resourcesToDestroy[t]->m_isDestroy) {
                     if (Debug::GetLevel() >= Debug::Level::High)
                         Debug::Log("ResourceManager::GC() : free \"" +
@@ -119,16 +117,11 @@ namespace Framework::Helper {
                     // erase IResource from resources
                     ResourceManager::Remove(g_resourcesToDestroy[t]);
 
-                    // delete IResource
-                    //g_destroy_functions[g_resourcesToDestroy[t]->m_resource_name](g_resourcesToDestroy[t]);
-
-                    //std::cout << g_resourcesToDestroy[t]->m_resource_id << " " << g_resourcesToDestroy[t]->m_countUses << " " << g_resourcesToDestroy[t]->m_isDestroy << std::endl;
-
                     // Free memory
-                    g_resourcesToDestroy[t]->Free();
+                    delete g_resourcesToDestroy[t];
 
                     // remove "resources to destroy"
-                    g_countResourcesToDestroy--;
+                    g_countResourcesToDestroy = g_countResourcesToDestroy - 1;
                     g_resourcesToDestroy.erase(g_resourcesToDestroy.begin() + t);
                 }
             }
@@ -156,13 +149,12 @@ namespace Framework::Helper {
     void ResourceManager::PrintMemoryDump() {
         std::string dump = "\n================================ MEMORY DUMP ================================";
 
-        for (auto a : g_resources){
-            dump += "\n\t\"" + a.x + "\": " + std::to_string(a.y.size());
-            if (a.y.size() > 0)
-                if (a.y[0]->m_resource_name == "Texture")
-                {
+        for (const auto& resource : g_resources){
+            dump += "\n\t\"" + resource.x + "\": " + std::to_string(resource.y.size());
+            if (!resource.y.empty())
+                if (strcmp(resource.y[0]->m_resource_name, "Texture") == 0) {
                     std::string textures;
-                    for (IResource* res : a.y){
+                    for (IResource* res : resource.y){
                         textures += "\n\t\tUses = "+std::to_string(res->GetCountUses());
                     }
                     dump+= textures;
@@ -171,7 +163,7 @@ namespace Framework::Helper {
 
 
 
-        std::string wait = "";
+        std::string wait;
         for (auto res : g_resourcesToDestroy) {
             wait += "\n\t\t" + res->m_resource_id + "; uses = " +std::to_string(res->GetCountUses());
         }

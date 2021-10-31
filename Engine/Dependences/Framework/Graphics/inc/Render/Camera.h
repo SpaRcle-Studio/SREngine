@@ -49,17 +49,17 @@ namespace Framework::Graphics {
     public:
         bool DrawOnInspector() override;
 
-        void OnRotate(Math::Vector3 newValue) noexcept override;
-        void OnMove(Math::Vector3 newValue) noexcept override;
+        void OnRotate(const Math::Vector3& newValue) override;
+        void OnMove(const Math::Vector3& newValue) override;
         void OnReady(bool ready) override;
         void OnAttachComponent() override {
             Component::OnAttachComponent();
         }
     protected:
-        void OnRemoveComponent() noexcept override {
+        void OnRemoveComponent() override {
             OnDestroyGameObject();
         }
-        void OnDestroyGameObject() noexcept override;
+        void OnDestroyGameObject() override;
     public:
 
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const noexcept { return m_allowUpdateProj;       }

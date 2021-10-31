@@ -195,7 +195,7 @@ std::string FileSystem::SaveFileDialog(const std::string &path, const std::strin
     ofn.nFileOffset = 0;
     ofn.nFileExtension = 0;
     ofn.lpstrDefExt = NULL;
-    ofn.lCustData = NULL;
+    ofn.lCustData = 0;
     ofn.lpfnHook = NULL;
     ofn.lpTemplateName = NULL;
     ofn.lpstrInitialDir = newPath.c_str();

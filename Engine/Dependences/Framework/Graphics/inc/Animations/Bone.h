@@ -22,29 +22,29 @@ namespace Framework::Graphics::Animations {
         void SetRender(Render* render) {
             if (m_mesh) {
                 Helper::Debug::Error("Bone::SetRender() : render is already set!");
-            } else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj"); !meshes.empty()) {
+            } else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", MeshType::Static); !meshes.empty()) {
                 m_mesh = meshes[0];
                 render->RegisterMesh(m_mesh);
             } else {
                 Helper::Debug::Error("Bone::SetRender() : failed to load mesh!");
             }
         }
-        void OnMove(Math::Vector3 value) noexcept override {
+        void OnMove(const Math::Vector3& value) override {
             if (m_mesh)
                 m_mesh->OnMove(value);
         }
-        void OnRotate(Math::Vector3 value) noexcept override {
+        void OnRotate(const Math::Vector3& value) override {
             if (m_mesh)
                 m_mesh->OnRotate(value);
         }
-        void OnScaled(Math::Vector3 value) noexcept override {
+        void OnScaled(const Math::Vector3& value) override {
             if (m_mesh)
                 m_mesh->OnScaled(value);
         }
-        void OnDestroyGameObject() noexcept override {
+        void OnDestroyGameObject() override {
             delete this;
         }
-        void OnRemoveComponent() noexcept override {
+        void OnRemoveComponent() override {
             if (m_mesh)
                 m_mesh->OnRemoveComponent();
 

@@ -28,7 +28,7 @@ namespace Framework::Helper {
         Component(std::string name);
         ~Component();
     public:
-        inline static Component* CreateComponentOfName(const std::string& name) {
+        static Component* CreateComponentOfName(const std::string& name) {
             const std::lock_guard<std::mutex> lock(g_mutex);
 
             auto find = g_compList.find(name);
@@ -39,7 +39,7 @@ namespace Framework::Helper {
             else
                 return find->second();
         }
-        inline static std::vector<std::string> GetComponentsNames() {
+        static std::vector<std::string> GetComponentsNames() {
             const std::lock_guard<std::mutex> lock(g_mutex);
             return g_names;
         }
@@ -98,10 +98,10 @@ namespace Framework::Helper {
 
         virtual bool DrawOnInspector() { return false; }
         virtual Math::Vector3 GetBarycenter() const { return Math::InfinityV3; }
-        virtual void OnRotate(Math::Vector3 newValue) noexcept { };
-        virtual void OnMove(Math::Vector3 newValue)   noexcept { };
-        virtual void OnScaled(Math::Vector3 newValue) noexcept { };
-        virtual void OnSelected(bool value) noexcept { this->m_isSelected = value; };
+        virtual void OnRotate(const Math::Vector3& newValue) { };
+        virtual void OnMove(const Math::Vector3& newValue) { };
+        virtual void OnScaled(const Math::Vector3& newValue) { };
+        virtual void OnSelected(bool value) { this->m_isSelected = value; };
         virtual void OnReady(bool ready) { }
         virtual void OnAttachComponent() {
             const std::lock_guard<std::mutex> lock(g_mutex);
@@ -109,15 +109,15 @@ namespace Framework::Helper {
                 event->second(this);
         }
 
-        void SetActive(bool v)  noexcept { this->m_isActive = v;  this->OnReady(IsReady()); }
-        void SetEnabled(bool v) noexcept { this->m_isEnabled = v; this->OnReady(IsReady()); }
+        void SetActive(bool v) { this->m_isActive = v;  this->OnReady(IsReady()); }
+        void SetEnabled(bool v) { this->m_isEnabled = v; this->OnReady(IsReady()); }
 
         [[nodiscard]] inline bool IsActive()         const noexcept { return m_isActive;                }
         [[nodiscard]] inline bool IsSelected()       const noexcept { return m_isSelected;              }
         [[nodiscard]] SR_FORCE_INLINE bool IsReady() const noexcept { return m_isActive && m_isEnabled; }
     protected:
-        virtual void OnRemoveComponent() noexcept = 0;
-        virtual void OnDestroyGameObject() noexcept = 0;
+        virtual void OnRemoveComponent() = 0;
+        virtual void OnDestroyGameObject() = 0;
     };
 }
 

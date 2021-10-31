@@ -17,37 +17,11 @@
 
 #include <Math/Vector3.h>
 #include <Utils/Enumerations.h>
+#include <Utils/StringFormat.h>
 
 #define SR_VERTEX_DESCRIPTION size_t
 
 namespace Framework::Graphics::Vertices {
-    static std::string format(const char *fmt, ...)
-    {
-        va_list args;
-        va_start(args, fmt);
-        std::vector<char> v(1024);
-        while (true)
-        {
-            va_list args2;
-            va_copy(args2, args);
-            int res = vsnprintf(v.data(), v.size(), fmt, args2);
-            if ((res >= 0) && (res < static_cast<int>(v.size())))
-            {
-                va_end(args);
-                va_end(args2);
-                return std::string(v.data());
-            }
-            size_t size;
-            if (res < 0)
-                size = v.size() * 2;
-            else
-                size = static_cast<size_t>(res) + 1;
-            v.clear();
-            v.resize(size);
-            va_end(args2);
-        }
-    }
-
     enum class Attribute {
         Unknown            = 0,
 
@@ -65,11 +39,11 @@ namespace Framework::Graphics::Vertices {
     };
 
     static std::string ToString(const glm::vec3& vec3) {
-        return format("{ %f, %f, %f }", vec3.x, vec3.y, vec3.z);
+        return Helper::Format("{ %f, %f, %f }", vec3.x, vec3.y, vec3.z);
     }
 
     static std::string ToString(const glm::vec2& vec2) {
-        return format("{ %f, %f }", vec2.x, vec2.y);
+        return Helper::Format("{ %f, %f }", vec2.x, vec2.y);
     }
 
     struct Mesh3DVertex {
@@ -104,6 +78,7 @@ namespace Framework::Graphics::Vertices {
             return "{ " + Vertices::ToString(pos) + ", " + Vertices::ToString(uv) + " }";
         }
     };
+    typedef std::vector<Mesh3DVertex> Mesh3DVertices;
 
     static std::string ToString(const std::vector<uint32_t>& indices) {
         std::string str = std::to_string(indices.size()) + " indices: \n";
@@ -142,6 +117,7 @@ namespace Framework::Graphics::Vertices {
             return descriptions;
         }
     };
+    typedef std::vector<SkyboxVertex> SkyboxVertices;
 
     SR_ENUM_CLASS(Type,
         Unknown,

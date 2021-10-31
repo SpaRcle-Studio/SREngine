@@ -5,75 +5,32 @@
 #ifndef GAMEENGINE_MESH3D_H
 #define GAMEENGINE_MESH3D_H
 
-#include <Types/Mesh.h>
+#include <Types/Geometry/IndexedMesh.h>
+#include <Types/Geometry/VertexMesh.h>
 #include <Types/Vertices.h>
 
 #include <utility>
 #include <Types/Uniforms.h>
 
 namespace Framework::Graphics::Types {
-    class Mesh3D : public Mesh {
+    class Mesh3D : public IndexedMesh {
     public:
-        Mesh3D(Shader* shader, Material* material, std::string name = "Unnamed") : Mesh(shader, material, std::move(name)) {
+        Mesh3D(Shader* shader, Material* material, std::string name = "Unnamed")
+            : IndexedMesh(shader, material, std::move(name)) { };
 
-        }
-        Mesh3D() : Mesh(nullptr, nullptr, "Unnamed")  {
-
-        }
+        Mesh3D()
+            : IndexedMesh(nullptr, nullptr, "Unnamed")  { };
+    protected:
+        ~Mesh3D() override = default;
     private:
-        std::vector<Vertices::Mesh3DVertex> m_vertices = std::vector<Vertices::Mesh3DVertex>();
-    private:
-        void ReCalcModel() override;
+        Vertices::Mesh3DVertices m_vertices = Vertices::Mesh3DVertices();
     public:
-        SR_FORCE_INLINE void DrawVulkan() override {
-            if (!this->IsReady() || m_isDestroy) return;
+        void DrawVulkan() override;
+        void DrawOpenGL() override;
 
-            if (!m_isCalculated)
-                if (m_hasErrors || !this->Calculate())
-                    return;
+        Mesh* Copy(Mesh* mesh) const override;
 
-            if (m_descriptorSet < 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
-                    Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true; return;
-                }
-
-                if (m_UBO = m_env->AllocateUBO(sizeof(Mesh3dUBO)); m_UBO < 0) {
-                    Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
-                    m_hasErrors = true; return;
-                }
-
-                this->m_env->UpdateDescriptorSets(m_descriptorSet, {
-                        { DescriptorType::Uniform, { 0, m_UBO                                 } },
-                        { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
-                });
-
-                Mesh3dUBO ubo = { m_modelMat }; m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
-
-                //!==========================
-
-                m_env->BindDescriptorSet(m_descriptorSet);
-                this->m_material->UseVulkan();
-            }
-
-            this->m_env->BindDescriptorSet(m_descriptorSet);
-
-            this->m_env->DrawIndices(this->m_countIndices);
-        }
-
-        Mesh* Copy() const override;
-
-        SR_FORCE_INLINE void SetVertexArray(const std::vector<Vertices::Mesh3DVertex>& vertices) noexcept {
-            this->m_isCalculated  = false;
-            this->m_countVertices = vertices.size();
-            this->m_vertices      = vertices;
-        }
-
-        void Free() override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Debug::Log("Mesh3D::Free() : free mesh memory...");
-            delete this;
-        }
+        void SetVertexArray(const std::any& vertices) override;
 
         bool Calculate() override;
 

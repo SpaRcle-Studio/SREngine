@@ -27,7 +27,7 @@ namespace Framework::Graphics::Types {
         friend class ::Framework::API;
     private:
         Texture();
-        ~Texture();
+        ~Texture() override;
     private:
         inline static Environment* m_env         = nullptr;
 
@@ -56,7 +56,7 @@ namespace Framework::Graphics::Types {
     private:
         bool Calculate();
     public:
-        void OnDestroyGameObject() noexcept;
+        void OnDestroyGameObject();
 
         void SetRender(Render* render);
 
@@ -98,7 +98,6 @@ namespace Framework::Graphics::Types {
                 TextureCompression compression = TextureCompression::None,
                 uint8_t mipLevels = 1);
     public:
-        void Free() override { delete this; }
         bool Destroy() override;
     };
 }

@@ -12,6 +12,7 @@
 #include "../../Libraries/Render.h"
 #include "../../Libraries/Input.h"
 #include "../../Libraries/GUISystem.h"
+#include "../../Libraries/Casts.h"
 
 #include <iostream>
 #include <ctime>
@@ -39,7 +40,7 @@ void LoadTsumi() {
             hair,
     };
 
-    auto fbx_meshes = Mesh::Load("Tsumi.fbx");
+    auto fbx_meshes = Mesh::Load("Tsumi.fbx", MeshType::Static);
     auto tsumi = g_scene->Instance("Tsumi");
 
     for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
@@ -50,7 +51,7 @@ void LoadTsumi() {
         mesh->WaitCalculate();
         mesh->GetMaterial()->SetDiffuse(texture);
         auto object = g_scene->Instance(mesh->GetGeometryName());
-        object->AddComponent(mesh);
+        object->AddComponent(DynamicCastMeshToComponent(mesh));
 
         tsumi->AddChild(object);
     }
@@ -59,24 +60,24 @@ void LoadTsumi() {
 void LoadCubes() {
     Render* render = Engine::Get()->GetRender();
     auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
-    auto mesh = Mesh::Load("engine/cube.obj")[0];
+    auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
     render->RegisterTexture(texture);
 
     auto cube = g_scene->Instance("Cube");
     render->RegisterMesh(mesh);
     mesh->WaitCalculate();
     mesh->GetMaterial()->SetDiffuse(texture);
-    cube->AddComponent(mesh);
+    cube->AddComponent(DynamicCastMeshToComponent(mesh));
     cube->GetTransform()->Translate(Vector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
-        mesh = mesh->Copy();
+        mesh = mesh->Copy(nullptr);
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->GetMaterial()->SetDiffuse(texture);
 
         auto newCube = g_scene->Instance("Cube");
-        newCube->AddComponent(mesh);
+        newCube->AddComponent(DynamicCastMeshToComponent(mesh));
         cube->AddChild(newCube);
         cube = newCube;
 
@@ -96,19 +97,18 @@ void LoadMiku() {
             body, body, face, face, body, body
     };
 
-    auto fbx_meshes = Mesh::Load("Miku.fbx");
+    auto fbx_meshes = Mesh::Load("Miku.fbx", MeshType::Static);
 
     g_miku = g_scene->Instance("Miku");
 
     for (uint32_t i = 0; i < 6; i++) {
         Mesh* mesh = fbx_meshes[i];
         Texture* texture = textures[i];
-
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->GetMaterial()->SetDiffuse(texture);
         auto cube = g_scene->Instance(mesh->GetGeometryName());
-        cube->AddComponent(mesh);
+        cube->AddComponent(DynamicCastMeshToComponent(mesh));
 
         g_miku->AddChild(cube);
     }
@@ -138,7 +138,7 @@ EXTERN void Start() {
     camera->SetDirectOutput(true);
     g_window->AddCamera(camera);
     g_camera = g_scene->Instance("Camera");
-    g_camera->AddComponent(camera);
+    g_camera->AddComponent(DynamicCastCameraToComponent(camera));
 }
 
 void CameraMove(float dt) {

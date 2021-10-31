@@ -53,9 +53,8 @@
     <Shader path="editor/debugWireframe" name="debugWireframe">
         <Vertex inherit="skybox"/>
         <Uniforms>
-            <Uniform binding="0" type="Common" UBO="Mesh3dUBO" />
-            <Uniform binding="1" type="Common" UBO="ColorRGB" />
-            <Uniform binding="2" type="Shared" UBO="ProjViewUBO" />
+            <Uniform binding="0" type="Common" UBO="WireframeUBO" />
+            <Uniform binding="1" type="Shared" UBO="ProjViewUBO" />
         </Uniforms>
         <Info>
             <PolygonMode value="Line"/>

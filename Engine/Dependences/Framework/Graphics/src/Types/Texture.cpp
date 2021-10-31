@@ -131,7 +131,7 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     return true;
 }
 
-void Framework::Graphics::Types::Texture::OnDestroyGameObject() noexcept {
+void Framework::Graphics::Types::Texture::OnDestroyGameObject() {
     if (m_autoRemove && m_countUses == 1)
         this->Destroy();
 }

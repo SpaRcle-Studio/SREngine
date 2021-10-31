@@ -33,8 +33,8 @@ namespace Framework::Graphics::Impl {
             Shader::GetDefaultGeometryShader()->Use();
 
             for (auto const& [key, val] : m_geometry.m_groups) {
-                this->m_env->BindVBO(val[0]->FastGetVBO());
-                this->m_env->BindIBO(val[0]->FastGetIBO());
+                this->m_env->BindVBO(val[0]->GetVBO<true>());
+                this->m_env->BindIBO(val[0]->GetIBO<true>());
 
                 for (const auto& mesh : val)
                     mesh->DrawVulkan();

@@ -43,6 +43,7 @@ namespace Framework::Graphics {
             Skybox = 1,
             Transparent = 2,
             DebugWireframe = 3,
+            Grid = 4,
         } StandardID;
         typedef enum {
             None         = 0,
@@ -98,14 +99,14 @@ namespace Framework::Graphics {
          * */
         static Shader* Load(Render* render, const std::string& name);
 
-        [[nodiscard]] SR_FORCE_INLINE static Shader* GetDefaultGeometryShader() noexcept {
+        [[nodiscard]] SR_FORCE_INLINE static Shader* GetDefaultGeometryShader() {
         #ifndef SR_RELEASE
             if (!g_stdGeometry)
                 Helper::Debug::Error("Shader::GetDefaultGeometryShader() : shader is nullptr!");
         #endif
             return g_stdGeometry;
         }
-        static bool SetStandardGeometryShader(Shader* shader) noexcept;
+        static bool SetDefaultGeometryShader(Shader* shader);
     public:
         [[nodiscard]] SR_FORCE_INLINE int32_t GetID() {
             if (!m_isInit) {

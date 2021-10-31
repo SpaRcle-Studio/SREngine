@@ -34,7 +34,7 @@ namespace Framework::Graphics::Codegen {
         std::string m_name;
 
         [[nodiscard]] std::string ToCode() const {
-            return Vertices::format("layout (location {}) in {} {};", m_layout, m_type.c_str(), m_name.c_str());
+            return Helper::Format("layout (location {}) in {} {};", m_layout, m_type.c_str(), m_name.c_str());
         }
     };
 
@@ -45,7 +45,7 @@ namespace Framework::Graphics::Codegen {
         std::string m_IO;
 
         [[nodiscard]] std::string ToCode() const {
-            return Vertices::format("layout (location = {}) {} {} {};", m_location, m_IO.c_str(), m_type.c_str(), m_name.c_str());
+            return Helper::Format("layout (location = {}) {} {} {};", m_location, m_IO.c_str(), m_type.c_str(), m_name.c_str());
         }
     };
 

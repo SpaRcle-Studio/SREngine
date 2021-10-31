@@ -3,6 +3,9 @@ find_package(Vulkan REQUIRED FATAL_ERROR)
 
 set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/Mesh3D.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/DebugWireframeMesh.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/IndexedMesh.cpp
+
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Mesh.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Texture.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Material.cpp
@@ -24,6 +27,7 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/Camera.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/PostProcessing.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/ColorBuffer.cpp
+        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Render/MeshCluster.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/Light.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Lighting/DirectionalLight.cpp

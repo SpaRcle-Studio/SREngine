@@ -3,6 +3,7 @@
 //
 
 #include <Environment/Vulkan/VulkanMemory.h>
+#include <Environment/PipeLine.h>
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
         uint32_t w, uint32_t h,
@@ -300,7 +301,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t bu
 
     Helper::Debug::Error("MemoryManager::AllocateVBO() : overflow vertex buffer objects buffer!");
 
-    return -1;
+    return SR_ID_INVALID;
 }
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t buffSize, void *data)  {
@@ -318,7 +319,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t bu
 
     Helper::Debug::Error("MemoryManager::AllocateIBO() : overflow index buffer objects buffer!");
 
-    return -1;
+    return SR_ID_INVALID;
 }
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass)  {

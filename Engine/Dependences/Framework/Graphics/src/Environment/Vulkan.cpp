@@ -518,26 +518,22 @@ namespace Framework::Graphics{
         return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
     }*/
 
-    bool Vulkan::CalculateVBO(int32_t &VBO, void *vertices, Vertices::Type type, size_t count)  {
+    int32_t Vulkan::CalculateVBO(void *vertices, Vertices::Type type, size_t count)  {
         auto size = Vertices::GetVertexSize(type);
-        auto id = this->m_memory->AllocateVBO(size * count, vertices);
-        if (id >= 0) {
-            VBO = id;
-            return true;
+        if (auto id = this->m_memory->AllocateVBO(size * count, vertices); id >= 0) {
+            return id;
         }
         else
-            return false;
+            return SR_ID_INVALID;
     }
 
-    bool Vulkan::CalculateIBO(int32_t &IBO, void *indices, uint32_t indxSize, size_t count, int32_t VBO) {
+    int32_t Vulkan::CalculateIBO(void *indices, uint32_t indxSize, size_t count, int32_t VBO) {
         // ignore VBO
-        auto id = this->m_memory->AllocateIBO(indxSize * count, indices);
-        if (id >= 0) {
-            IBO = id;
-            return true;
+        if (auto id = this->m_memory->AllocateIBO(indxSize * count, indices); id >= 0) {
+            return id;
         }
         else
-            return false;
+            return SR_ID_INVALID;
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

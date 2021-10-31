@@ -22,16 +22,13 @@ namespace Framework::Helper {
         friend class ::Framework::API;
     protected:
         IResource(const char *res_name);
-        ~IResource() = default;
-    protected:
-        /* free resource pointer */
-        virtual void Free() = 0;
+         virtual~IResource() = default;
     protected:
         bool m_autoRemove = false;
 
         volatile bool m_isDestroy = false;
         /* Count uses current resource now */
-        volatile unsigned long m_countUses = 0;
+        volatile uint64_t m_countUses = 0;
 
         /** \brief This is resource name. \example Mesh, Texture, Audio... */
         const char *m_resource_name = "Unnamed";

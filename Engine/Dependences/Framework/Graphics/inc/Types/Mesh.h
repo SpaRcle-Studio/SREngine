@@ -8,17 +8,14 @@
 #include <vector>
 #include <macros.h>
 
-#include <Debug.h>
-
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/hash.hpp>
 
 #include <Render/Shader.h>
 #include <Types/Material.h>
 #include <ResourceManager/IResource.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtx/hash.hpp>
 
 #include <Environment/Environment.h>
 #include <EntityComponentSystem/Component.h>
@@ -38,206 +35,108 @@ namespace Framework::Graphics::Types {
 
     class Material;
 
+    enum class MeshFeatures {
+        None     = 0,
+        Vertices = 1 << 0,
+        Indices  = 1 << 1,
+        Skinning = 1 << 2
+    };
+
+    SR_ENUM_CLASS(MeshType,
+        Unknown = 0,
+        Static = 1,
+        Wireframe = 2,
+        Skinned = 3,
+    )
+
     class Mesh : public IResource, public Component {
         friend class Material;
         friend class ::Framework::API;
-    public:
-        enum class Flags {
-            None     = 0,
-            Triangle = 1 << 0,
-            Lineal   = 1 << 2,
-            Points   = 1 << 3,
-            Skinned  = 1 << 4
-        };
     protected:
-        /** \brief Default mesh constructor */
         Mesh();
         Mesh(Shader* shader, Material* material, std::string name = "Unnamed");
     protected:
-        /** \brief Default mesh destructor */
-        ~Mesh();
-    public:
-        static std::vector<Mesh*> Load(const std::string& path);
-    public:
-        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetModelMatrix() const noexcept { return this->m_modelMat; }
-        SR_FORCE_INLINE void SetRender(Render* render) noexcept {
-            this->m_render = render;
-        };
-        SR_FORCE_INLINE void SetIndexArray(std::vector<uint32_t>& indices) noexcept {
-            this->m_isCalculated = false;
-            this->m_countIndices = indices.size();
-            this->m_indices      = indices;
-        }
-    public:
-        bool DrawOnInspector() override;
-        Math::Vector3 GetBarycenter() const override;
-        SR_FORCE_INLINE void OnMove(Math::Vector3 newValue) noexcept override{
-            m_position = newValue.ToGLM();
-            ReCalcModel();
-        }
-        SR_FORCE_INLINE void OnRotate(Math::Vector3 newValue) noexcept override{
-            m_rotation = newValue.ToGLM();
-            ReCalcModel();
-        }
-        SR_FORCE_INLINE void OnScaled(Math::Vector3 newValue) noexcept override{
-            m_scale = newValue.ToGLM();
-            ReCalcModel();
-        }
-        void OnSelected(bool value) noexcept override;
+        ~Mesh() override;
+    protected:
+        bool                         m_inverse           = false;
 
-        SR_FORCE_INLINE void SetInverse(bool value) noexcept {
-            this->m_inverse = value;
-            ReCalcModel();
-        }
-        [[nodiscard]] SR_FORCE_INLINE bool GetInverse() const noexcept { return this->m_inverse; }
+        Environment*                 m_env               = nullptr;
+        const PipeLine               m_pipeline          = PipeLine::Unknown;
 
-        SR_FORCE_INLINE static void Inverse(Helper::Types::List<Mesh*> meshes){
-            for (size_t t = 0; t < meshes.Size(); t++)
-                meshes[t]->SetInverse(!meshes[t]->GetInverse());
-        }
+        mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
+
+        std::string                  m_geometry_name     = "Unnamed";
+        Shader*                      m_shader            = nullptr;
+        Render*                      m_render            = nullptr;
+        Material*                    m_material          = nullptr;
+
+        volatile bool                m_hasErrors         = false;
+        volatile bool                m_isCalculated      = false;
+
+        int32_t                      m_descriptorSet     = SR_ID_INVALID;
+        int32_t                      m_UBO               = SR_ID_INVALID;
+    public:
+        Math::Vector3                m_barycenter = glm::vec3();
+        Math::Vector3                m_position   = glm::vec3();
+        Math::Vector3                m_rotation   = glm::vec3();
+        Math::Vector3                m_scale      = { 1, 1, 1 };
+        glm::mat4                    m_modelMat   = glm::mat4(0);
+    public:
+        static Mesh* Allocate(MeshType type);
+        static std::vector<Mesh*> Load(const std::string& path, MeshType type);
     public:
         /** \brief Set mesh to destroy in res manager
         * \return bool */
         bool Destroy() override;
     protected:
-        bool                        m_inverse           = false;
-
-        Environment*                m_env               = nullptr;
-        PipeLine                    m_pipeline          = PipeLine::Unknown;
-
-        mutable std::mutex          m_mutex             = std::mutex();
-
-        std::string                 m_geometry_name     = "Unnamed";
-        Shader*                     m_shader            = nullptr;
-        Render*                     m_render            = nullptr;
-        Material*                   m_material          = nullptr;
-
-        /** \brief Vertices OpenGL-context calculated */
-        volatile bool               m_hasErrors         = false;
-        volatile bool               m_isCalculated      = false;
-
-        int32_t                     m_descriptorSet     = -1;
-        int32_t                     m_VBO               = -1;
-        int32_t                     m_IBO               = -1;
-        int32_t                     m_UBO               = -1;
-
-        std::vector<uint32_t>	    m_indices           = std::vector<uint32_t>();
-        uint32_t 					m_countVertices	    = 0;
-        uint32_t					m_countIndices	    = 0;
-        bool                        m_useIndices        = false;
-    protected:
          /** \brief Re-calc mesh space-transform matrix */
-        virtual void ReCalcModel() { }
-    private:
-        virtual bool Calculate() = 0;
+        virtual void ReCalcModel();
+        virtual bool Calculate();
+    public:
+        virtual Mesh* Copy(Mesh* mesh = nullptr) const;
+
+        virtual void DrawVulkan() = 0;
+        virtual void DrawOpenGL() = 0;
+
+        /** \warning call only from render */
+        virtual bool FreeVideoMemory();
     protected:
-        bool IsCanCalculate();
-    protected:
-        void OnDestroyGameObject() noexcept override;
+        bool DrawOnInspector() override;
+        Math::Vector3 GetBarycenter() const override;
+    public:
+        SR_FORCE_INLINE void OnMove(const Math::Vector3& newValue) override {
+            m_position = newValue.ToGLM();
+            ReCalcModel();
+        }
+        SR_FORCE_INLINE void OnRotate(const Math::Vector3& newValue) override{
+            m_rotation = newValue.ToGLM();
+            ReCalcModel();
+        }
+        SR_FORCE_INLINE void OnScaled(const Math::Vector3& newValue) override{
+            m_scale = newValue.ToGLM();
+            ReCalcModel();
+        }
+        void OnSelected(bool value) override;
+        void OnDestroyGameObject() override;
+        void OnRemoveComponent() override {
+            this->OnDestroyGameObject();
+        }
         void OnReady(bool ready) override {
             this->m_env->SetBuildState(false);
         }
-        void OnAttachComponent() override {
-            // TODO: make virtual and override in Mesh3D
-        }
+        void OnAttachComponent() override { }
     public:
-        SR_FORCE_INLINE void WaitCalculate() const {
-            ret:
-            if (m_isCalculated)
-                return;
-            goto ret;
-        }
-    public:
-        Math::Vector3 m_barycenter = glm::vec3();
-        Math::Vector3 m_position   = glm::vec3();
-        Math::Vector3 m_rotation   = glm::vec3();
-        Math::Vector3 m_scale      = { 1, 1, 1 };
-        glm::mat4     m_modelMat   = glm::mat4(0);
-    public:
-        [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetVBO() const noexcept { return (uint32_t)m_VBO; }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t FastGetIBO() const noexcept { return (uint32_t)m_IBO; }
-        [[nodiscard]] SR_FORCE_INLINE int32_t  FastGetUBO() const noexcept { return m_UBO;           }
+        void WaitCalculate() const;
+        bool IsCanCalculate() const;
 
-        [[nodiscard]] SR_FORCE_INLINE int32_t GetVBO() {
-            if (m_isDestroy)
-                return m_VBO;
+        [[nodiscard]] std::string GetGeometryName() const { return this->m_geometry_name; }
+        [[nodiscard]] Shader* GetShader()           const { return this->m_shader; }
+        [[nodiscard]] Material* GetMaterial()       const { return this->m_material; }
+        [[nodiscard]] bool IsCalculated()           const { return m_isCalculated; }
+        [[nodiscard]] bool GetInverse()             const { return this->m_inverse; }
 
-            if (!m_isCalculated)
-                if (!Calculate())
-                    return -1;
-            return m_VBO;
-        }
-
-        [[nodiscard]] std::string GetGeometryName() const noexcept { return this->m_geometry_name; }
-
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCountVertices() const noexcept { return m_countVertices;  }
-        [[nodiscard]] SR_FORCE_INLINE Material* GetMaterial()   const noexcept { return this->m_material; }
-        [[nodiscard]] SR_FORCE_INLINE bool IsCalculated()       const noexcept { return m_isCalculated;   }
-
-        virtual Mesh* Copy() const = 0;
-
-#define ConfigureShader(shader) \
-        shader->SetMat4("modelMat", m_modelMat); \
-        shader->SetVec3("color", m_material->m_color); \
-        shader->SetIVec2("config", { (int)m_material->m_bloom, (int)this->m_isSelected }); \
-
-        bool SimpleDraw();
-
-        virtual SR_FORCE_INLINE void DrawVulkan() = 0;
-
-        SR_FORCE_INLINE bool DrawOpenGL() noexcept {
-            if (m_isDestroy) return false;
-
-            if (!m_isCalculated)
-                if (!this->Calculate())
-                    return false;
-
-            if (!m_shader) {
-                ConfigureShader(Shader::GetDefaultGeometryShader())
-                this->m_material->UseWithDefShader();
-            }
-            else {
-                ConfigureShader(m_shader)
-                this->m_material->UseOpenGL();
-            }
-
-            if (!m_useIndices)
-                this->m_env->DrawTriangles(m_countVertices);
-            else {
-                Helper::Debug::Error("Mesh::DrawOpenGL() : isn't support indices!");
-                return false;
-            }
-
-            return true;
-        }
-
-        SR_FORCE_INLINE bool DrawWireFrame() noexcept {
-            if (m_isDestroy) return false;
-
-            if (!m_isCalculated)
-                if (!this->Calculate())
-                    return false;
-
-            if (!m_shader) {
-                ConfigureShader(Shader::GetDefaultGeometryShader())
-                this->m_material->UseWithDefShader();
-            }
-            else {
-                ConfigureShader(m_shader)
-                this->m_material->UseOpenGL();
-            }
-
-            //this->m_env->DrawLines(m_VAO, m_countVertices);
-
-            return true;
-        }
-
-        /** \warning call only from render */
-        virtual bool FreeVideoMemory() = 0;
-
-        void OnRemoveComponent() noexcept override {
-            this->OnDestroyGameObject();
-        }
+        void SetRender(Render* render) { this->m_render = render; };
+        void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
     };
 }
 

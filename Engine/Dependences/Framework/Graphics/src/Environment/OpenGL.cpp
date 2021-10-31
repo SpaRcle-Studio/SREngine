@@ -860,14 +860,14 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
     return true;
 }
 
-bool Framework::Graphics::OpenGL::CalculateVAO(
-        int32_t &VAO,
+int32_t Framework::Graphics::OpenGL::CalculateVAO(
         std::vector<Vertices::Mesh3DVertex> &vertices,
         size_t count_verts)
 {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
         Helper::Debug::Log("OpenGL::CalculateVAO() : calculating " + std::to_string(vertices.size()) + " vertices...");
 
+    int32_t VAO = 0;
     uint32_t VBO = 0;
 
     glGenVertexArrays(1, (GLuint*)&VAO);
@@ -900,15 +900,6 @@ bool Framework::Graphics::OpenGL::CalculateVAO(
                               (void*)offsetof(Vertices::Mesh3DVertex, uv) // Сдвиг байт до соответствующего атрибута
         );
 
-        //? Binding attrib color
-        //glEnableVertexAttribArray(3);
-        //glVertexAttribPointer(3,
-        //                      3, // glm::vec3 - has 3 floats
-        //                      GL_FLOAT, GL_FALSE,
-        //                      sizeof(Vertex),
-        //                      (void*)offsetof(Vertex, color) // Сдвиг байт до соответствующего атрибута
-        //);
-
         //? Binding attrib normal coordinates
         glEnableVertexAttribArray(2);
         glVertexAttribPointer(2,
@@ -932,11 +923,10 @@ bool Framework::Graphics::OpenGL::CalculateVAO(
     glBindVertexArray(0);
     glDeleteBuffers(1, &VBO);
 
-    return true;
+    return VAO;
 }
 
-bool Framework::Graphics::OpenGL::CalculateVBO(
-    int32_t &VBO,
+int32_t Framework::Graphics::OpenGL::CalculateVBO(
     void *vertices,
     Framework::Graphics::Vertices::Type type,
     size_t count)
@@ -966,21 +956,19 @@ bool Framework::Graphics::OpenGL::CalculateVBO(
             break;
         case Vertices::Type::SkyboxVertex:
             Helper::Debug::Error("OpenGL::CalculateVBO() : opengl isn't supported skybox vertices!");
-            return false;
+            return SR_ID_INVALID;
         default:
             Helper::Debug::Error("OpenGL::CalculateVBO() : unknown vertex type!");
-            return false;
+            return SR_ID_INVALID;
     }
 
     glBindVertexArray(0);
     glDeleteBuffers(1, &_vbo);
 
-    VBO = _vao;
-    return true;
+    return _vao; // it's normal
 }
 
-bool Framework::Graphics::OpenGL::CalculateIBO(
-    int32_t &IBO,
+int32_t Framework::Graphics::OpenGL::CalculateIBO(
     void *indices,
     uint32_t indxSize,
     size_t count,
@@ -988,12 +976,12 @@ bool Framework::Graphics::OpenGL::CalculateIBO(
 {
     if (VBO <= 0) {
         Helper::Debug::Error("OpenGL::CalculateIBO() : to calculate the IBO, OpenGL needs a VBO (VAO)!");
-        return false;
+        return SR_ID_INVALID;
     }
 
     if (count == 0 || !indices) {
         Helper::Debug::Error("OpenGL::CalculateIBO() : count indices is zero or indices is nullptr!");
-        return false;
+        return SR_ID_INVALID;
     }
 
     GLuint EBO;
@@ -1006,8 +994,7 @@ bool Framework::Graphics::OpenGL::CalculateIBO(
     }
     glBindVertexArray(0);
 
-    IBO = EBO;
-    return true;
+    return EBO;
 }
 
 

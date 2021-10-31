@@ -66,29 +66,12 @@ namespace Framework::Graphics::Impl {
             Shader::GetDefaultGeometryShader()->Use();
             this->m_currentCamera->UpdateShader<ProjViewUBO>(Shader::GetDefaultGeometryShader());
 
-            /*if (m_wireFrame) {
-                this->m_env->SetDepthTestEnabled(false);
-                this->m_env->SetWireFrameEnabled(true);
-                this->m_env->SetCullFacingEnabled(false);
+            for (auto const& [key, val] : m_geometry.m_groups) {
+                this->m_env->BindVBO(val[0]->GetVBO<true>());
+                this->m_env->BindIBO(val[0]->GetIBO<true>());
 
-                for (auto const& [key, val] : m_geometry.m_groups) {
-                    m_env->BindVAO(key);
-                    for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
-                        val[i]->DrawOpenGL();
-                }
-
-                this->m_env->SetWireFrameEnabled(false);
-                this->m_env->SetDepthTestEnabled(true);
-                this->m_env->SetCullFacingEnabled(true);
-            } else
-            */{
-                for (auto const& [key, val] : m_geometry.m_groups) {
-                    this->m_env->BindVBO(val[0]->FastGetVBO());
-                    this->m_env->BindIBO(val[0]->FastGetIBO());
-
-                    for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
-                        val[i]->DrawOpenGL();
-                }
+                for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
+                    val[i]->DrawOpenGL();
             }
 
             return true;

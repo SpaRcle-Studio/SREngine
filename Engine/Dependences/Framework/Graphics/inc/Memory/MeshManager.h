@@ -10,6 +10,7 @@
 #include <mutex>
 #include <optional>
 #include <Types/Vertices.h>
+#include <Environment/PipeLine.h>
 
 namespace Framework::Graphics {
     namespace Types {
@@ -20,6 +21,10 @@ namespace Framework::Graphics {
         class MeshManager : public Helper::Singleton<MeshManager> {
             friend class Singleton<MeshManager>;
         public:
+            enum class FreeResult {
+                Unknown, Freed, EndUse, NotFound, UnknownMem
+            };
+
             enum MemoryType {
                 Unknown, VBO, IBO
             };
@@ -49,12 +54,12 @@ namespace Framework::Graphics {
         private:
             VideoResourcesIter FindImpl(const std::string& resourceID, MemoryType memType);
             bool RegisterImpl(const std::string& resourceId, MemoryType memType, uint32_t id);
-            bool FreeImpl(VideoResourcesIter iter, MemoryType memType);
+            FreeResult FreeImpl(VideoResourcesIter iter, MemoryType memType);
         private:
             void OnSingletonDestroy() override;
         private:
-            template<typename MeshType> VideoResourcesIter Find(const std::string& resourceID, MemoryType type) {
-                if (type == MemoryType::VBO) {
+            template<typename MeshType, MemoryType type> VideoResourcesIter Find(const std::string& resourceID) {
+                if constexpr (type == MemoryType::VBO) {
                     auto vertexType = GetVertexType<MeshType>();
                     return this->FindImpl(resourceID + Vertices::EnumTypeToString(vertexType), type);
                 } else
@@ -74,39 +79,40 @@ namespace Framework::Graphics {
                 return vertexType;
             }
         public:
-            template<typename MeshType> bool Register(const std::string& resourceID, MemoryType type, uint32_t id) {
+            template<typename MeshType, MemoryType type> bool Register(const std::string& resourceID, uint32_t id) {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
-                if (Find<MeshType>(resourceID, type).has_value()) {
+                if (Find<MeshType, type>(resourceID).has_value()) {
                     Helper::Debug::Error("MeshManager::Register() : memory already registered!");
                     return false;
                 }
 
-                if (type == MemoryType::VBO) {
+                if constexpr (type == MemoryType::VBO) {
                     auto vertexType = GetVertexType<MeshType>();
                     return this->RegisterImpl(resourceID + Vertices::EnumTypeToString(vertexType), type, id);
                 } else
                     return this->RegisterImpl(resourceID, type, id);
             }
 
-            template<typename MeshType> bool Free(const std::string& resourceID, MemoryType type) {
+            template<typename MeshType, MemoryType type> FreeResult Free(const std::string& resourceID) {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
-                if (auto iter = Find<MeshType>(resourceID, type); !iter.has_value()) {
-                    Helper::Debug::Error("MeshManager::Register() : memory isn't registered!");
-                    return false;
+                if (auto iter = Find<MeshType, type>(resourceID); !iter.has_value()) {
+                    Helper::Debug::Error("MeshManager::Register() : memory isn't registered! "
+                                         "\n\tResource id: " + resourceID);
+                    return FreeResult::NotFound;
                 } else
                     return this->FreeImpl(iter, type);
             }
 
-            template<typename MeshType> int32_t CopyIfExists(const std::string& resourceID, MemoryType type) {
+            template<typename MeshType, MemoryType type> int32_t CopyIfExists(const std::string& resourceID) {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
-                if (auto memory = Find<MeshType>(resourceID)) {
-                    return memory->Copy();
+                if (auto memory = Find<MeshType, type>(resourceID); memory.has_value()) {
+                    return memory.value()->second.Copy();
                 }
 
-                return -1;
+                return SR_ID_INVALID;
             }
         };
     }

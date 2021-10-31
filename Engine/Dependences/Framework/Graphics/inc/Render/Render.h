@@ -15,76 +15,15 @@
 #include <Types/List.h>
 #include <iostream>
 
+#include <Render/MeshCluster.h>
+
+#include <Types/Geometry/IndexedMesh.h>
+
 namespace Framework::Graphics::Types {
     class Skybox;
 }
 
 namespace Framework::Graphics {
-    typedef std::map<uint32_t, std::vector<Types::Mesh*>> MeshGroups;   // sizeof = 24
-    typedef std::map<uint32_t, uint32_t> MeshGroupCounters;             // sizeof = 24
-
-    struct MeshCluster { // sizeof = 52 without methods
-        MeshGroups        m_groups   = MeshGroups();        // sizeof = 24
-        MeshGroupCounters m_counters = MeshGroupCounters(); // sizeof = 24
-        uint32_t          m_total    = 0;    // sizeof = 4
-
-        inline bool Add(Types::Mesh* mesh) {
-            //int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
-            int32_t groupID = mesh->GetVBO();
-            if (groupID < 0) {
-                Helper::Debug::Error("MeshCluster::Add() : failed get mesh group id to add mesh!");
-                return false;
-            }
-
-            auto find = this->m_groups.find(groupID);
-            if (find == m_groups.end())
-                m_groups[groupID] = {mesh};
-            else
-                find->second.push_back(mesh);
-
-            m_counters[groupID]++;
-            m_total++;
-
-            return true;
-        }
-
-        inline bool Remove(Types::Mesh* mesh) {
-            //int32_t groupID =  Environment::Get()->GetPipeLine() == PipeLine::OpenGL ? mesh->GetVAO() : mesh->GetVBO();
-            int32_t groupID = mesh->GetVBO();
-            if (groupID < 0) {
-                Helper::Debug::Error("MeshCluster::Remove() : failed get mesh group id to remove mesh!");
-                return false;
-            }
-
-            auto find = m_groups.find(groupID);
-            if (find == m_groups.end()) {
-                Helper::Debug::Error("MeshCluster::Remove() : mesh group to remove mesh not found!");
-                return false;
-            }
-
-            auto& meshes = find->second;
-            for (uint32_t i = 0; i < m_counters[groupID]; i++) {
-                if (meshes[i] == mesh) {
-                    m_counters[groupID]--;
-                    m_total--;
-
-                    meshes.erase(meshes.begin() + i);
-                    mesh->RemoveUsePoint();
-
-                    if (m_counters[groupID] == 0) {
-                        m_groups.erase(groupID);
-                        m_counters.erase(groupID);
-                    }
-                    return true;
-                }
-            }
-
-            Helper::Debug::Error("MeshCluster::Remove() : mesh not found!");
-
-            return false;
-        }
-    };
-
     // first - current, second - new
     struct RenderSkybox {
         Types::Skybox* m_current;

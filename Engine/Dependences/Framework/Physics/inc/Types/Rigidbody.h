@@ -17,10 +17,10 @@ namespace Framework::Physics::Types {
     private:
         ~Rigidbody() = default;
     protected:
-        void OnDestroyGameObject() noexcept override {
+        void OnDestroyGameObject() override {
             delete this;
         }
-        void OnRemoveComponent() noexcept override {
+        void OnRemoveComponent() override {
             OnRemoveComponent();
         }
     };

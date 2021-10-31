@@ -262,9 +262,9 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const noexcept { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const noexcept { return false; }
-        virtual bool CalculateVAO(int32_t& VAO, std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) { return false; }
-        virtual bool CalculateVBO(int32_t& VBO, void* vertices, Vertices::Type type, size_t count) { return false; }
-        virtual bool CalculateIBO(int32_t& IBO, void* indices, uint32_t indxSize, size_t count, int32_t VBO = -1) { return false; }
+        virtual int32_t CalculateVAO(std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) { return SR_ID_INVALID; }
+        virtual int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) { return SR_ID_INVALID; }
+        virtual int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO = -1) { return SR_ID_INVALID; }
 
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(uint32_t& VBO, uint32_t& VAO) const noexcept { return false; }

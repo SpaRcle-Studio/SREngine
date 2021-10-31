@@ -25,14 +25,14 @@ bool Framework::Graphics::Render::Create(Window* window) {
 
     this->m_window = window;
 
-    Codegen::ShaderGenerator::Instance()->Generate("geometry", "", Shader::Flags::Diffuse | Shader::Flags::Normal | Shader::Flags::GBuffer);
+    //Codegen::ShaderGenerator::Instance()->Generate("geometry", "", Shader::Flags::Diffuse | Shader::Flags::Normal | Shader::Flags::GBuffer);
 
     this->InsertShader(Shader::StandardID::Geometry, Shader::Load(this, "geometry"));
     this->InsertShader(Shader::StandardID::Transparent, Shader::Load(this, "transparent"));
     this->InsertShader(Shader::StandardID::Skybox, Shader::Load(this, "skybox"));
     this->InsertShader(Shader::StandardID::DebugWireframe, Shader::Load(this, "debugWireframe"));
 
-    Shader::SetStandardGeometryShader(m_shaders[Shader::StandardID::Geometry]);
+    Shader::SetDefaultGeometryShader(m_shaders[Shader::StandardID::Geometry]);
 
     this->m_grid = EditorGrid::Create("engine/grid", this);
 
@@ -305,9 +305,9 @@ bool Framework::Graphics::Render::FreeSkyboxMemory(Skybox* skybox) {
 
 Framework::Graphics::Render *Framework::Graphics::Render::Allocate() {
     if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
-        return new Impl::OpenGLRender();
+        return static_cast<Render *>(new Impl::OpenGLRender());
     else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan) {
-        return new Impl::VulkanRender();
+        return static_cast<Render *>(new Impl::VulkanRender());
     } else
         return nullptr;
 }

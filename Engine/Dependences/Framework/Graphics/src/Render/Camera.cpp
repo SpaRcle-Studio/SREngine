@@ -101,7 +101,7 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     }
 }
 
-void Framework::Graphics::Camera::OnRotate(Math::Vector3 newValue) noexcept {
+void Framework::Graphics::Camera::OnRotate(const Math::Vector3& newValue) {
     this->m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
     this->m_pitch = float(newValue.x * 3.14 / 45.f / 4.f);
     this->m_roll  = float(newValue.z * 3.14 / 45.f / 4.f);
@@ -109,7 +109,7 @@ void Framework::Graphics::Camera::OnRotate(Math::Vector3 newValue) noexcept {
     this->UpdateView();
 }
 
-void Framework::Graphics::Camera::OnMove(Math::Vector3 newValue) noexcept {
+void Framework::Graphics::Camera::OnMove(const Math::Vector3& newValue) {
     this->m_pos = newValue;
     this->UpdateView();
 }
@@ -136,7 +136,7 @@ bool Framework::Graphics::Camera::Calculate() noexcept {
     return true;
 }
 
-void Framework::Graphics::Camera::OnDestroyGameObject() noexcept {
+void Framework::Graphics::Camera::OnDestroyGameObject() {
     if (m_window) {
         m_window->DestroyCamera(this);
         m_window = nullptr;

@@ -32,6 +32,7 @@ bool Framework::Scripting::EvoCompiler::Init() {
         Helper::Debug::Info("EvoCompiler::Init() : use \"" + generator + "\" generator...");
         this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::GetResourcesFolder() + "/Cache");
         this->m_generator = new EvoScript::AddressTableGen();
+        this->m_casting = new EvoScript::CastingGen(m_generator);
     }
 
     return true;

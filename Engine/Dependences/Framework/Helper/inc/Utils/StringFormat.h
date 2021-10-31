@@ -5,8 +5,10 @@
 #ifndef GAMEENGINE_STRINGFORMAT_H
 #define GAMEENGINE_STRINGFORMAT_H
 
+#include <string>
+
 namespace Framework::Helper {
-    std::string Format(const char* fmt, ...) {
+    static std::string Format(const char* fmt, ...) {
         va_list args;
         va_start(args, fmt);
         std::vector<char> v(1024);
