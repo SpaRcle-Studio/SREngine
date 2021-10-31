@@ -12,8 +12,8 @@ namespace Framework::Graphics::Types {
     class VertexMesh : public Mesh {
     protected:
         ~VertexMesh() override = default;
-        VertexMesh(Shader* shader, Material* material, std::string name = "Unnamed")
-            : Mesh(shader, material, std::move(name)) { };
+        explicit VertexMesh(const std::string& name = "UnnamedVertexMesh")
+            : Mesh(name) { };
     protected:
         int32_t  m_VBO = SR_ID_INVALID;
         uint32_t m_countVertices = 0;
@@ -23,7 +23,13 @@ namespace Framework::Graphics::Types {
         virtual void SetVertexArray(const std::any& vertices) = 0;
 
         Mesh* Copy(Mesh* mesh) const override {
-            return Mesh::Copy(mesh);
+            if (auto vertex = dynamic_cast<VertexMesh*>(mesh)) {
+                vertex->m_countVertices = m_countVertices;
+                return Mesh::Copy(vertex);
+            } else {
+                Helper::Debug::Error("VertexMesh::Copy() : bad cast!");
+                return nullptr;
+            }
         }
 
         bool Calculate() override {
@@ -31,25 +37,13 @@ namespace Framework::Graphics::Types {
         }
     };
 
-    /*
-    int32_t Mesh::GetVBO(bool fast)  {
-        if (fast)
-            return m_VBO;
-
-        if (m_isDestroy) // TODO: what?
-            return m_VBO;
-
-        if (!m_isCalculated)
-            if (!Calculate())
-                return -1;
-
-        return m_VBO;
-    }*/
-
     template<bool fast> int32_t VertexMesh::GetVBO() {
         if constexpr (fast) {
             return m_VBO;
         } else {
+            //if (m_isDestroy) // TODO: what?
+            //    return m_VBO;
+
             if (!m_isCalculated && !Calculate())
                 return SR_ID_INVALID;
 

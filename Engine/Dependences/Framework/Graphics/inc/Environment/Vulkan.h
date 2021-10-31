@@ -113,9 +113,9 @@ namespace Framework::Graphics {
         const bool m_enableValidationLayers = true;
 #endif
     public:
-        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName()   const noexcept override { return "Vulkan";         }
-        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const noexcept override { return PipeLine::Vulkan; }
-        [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const noexcept override { return m_kernel->GetCountBuildIterations(); }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName()   const override { return "Vulkan";         }
+        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
     public:
         [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
         [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
@@ -160,13 +160,13 @@ namespace Framework::Graphics {
             Environment::SetBuildState(isBuild);
         }
 
-        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const noexcept override { return true; }
-        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const noexcept override { return this->m_kernel->GetDevice()->GetName(); }
-        [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const noexcept override { return "Vulkan"; }
-        [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const noexcept override { return "VK_API_VERSION_1_2"; }
-        [[nodiscard]] glm::vec2 GetWindowSize()                 const noexcept override { return { this->m_basicWindow->GetRealWidth(), this->m_basicWindow->GetRealHeight() }; }
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const noexcept override { return m_basicWindow->IsWindowOpen(); }
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const noexcept override { return m_basicWindow->IsCollapsed(); }
+        [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const override { return true; }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return this->m_kernel->GetDevice()->GetName(); }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const override { return "Vulkan"; }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
+        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { this->m_basicWindow->GetRealWidth(), this->m_basicWindow->GetRealHeight() }; }
+        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
+        [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
 
         bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
@@ -203,7 +203,7 @@ namespace Framework::Graphics {
         }
 
         /** \Vulkan Clear next frame buffer usage */
-        SR_FORCE_INLINE void ClearBuffers() noexcept override {
+        SR_FORCE_INLINE void ClearBuffers() override {
             if (m_currentFBOid < 0) {
                 Helper::Debug::Error("Vulkan::ClearBuffers() : frame buffer isn't attached!");
                 return;
@@ -215,7 +215,7 @@ namespace Framework::Graphics {
             }
         }
 
-        SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) noexcept override {
+        SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override {
             colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
 
             this->m_clearValues.resize(colorCount + 1);
@@ -232,7 +232,7 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void DrawFrame() override {
             this->m_kernel->NextFrame();
         }
-        SR_FORCE_INLINE void PollEvents() const noexcept override { this->m_basicWindow->PollEvents(); }
+        SR_FORCE_INLINE void PollEvents() const override { this->m_basicWindow->PollEvents(); }
 
         void SetWindowPosition(int x, int y) override;
         void SetWindowSize(unsigned int w, unsigned int h) override;
@@ -266,15 +266,15 @@ namespace Framework::Graphics {
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes
-                ) const noexcept override;
+                ) const override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-                SRShaderCreateInfo shaderCreateInfo) const noexcept override;
+                SRShaderCreateInfo shaderCreateInfo) const override;
 
-        SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
+        SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (shaderProgram >= m_memory->m_countShaderPrograms) {
                 Helper::Debug::Error("Vulkan::UseShader() : index out of range!");
                 return;
@@ -301,7 +301,7 @@ namespace Framework::Graphics {
             return result;
         }
 
-        SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) noexcept override {
+        SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
                 Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
                 return false;
@@ -314,20 +314,20 @@ namespace Framework::Graphics {
             this->m_currentLayout   = VK_NULL_HANDLE;
         }
     public:
-        SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const noexcept override {
+        SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const override {
             if (m_currentDesrSets != VK_NULL_HANDLE)
                 vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
 
             vkCmdDrawIndexed(m_currentCmd, countIndices, 1, 0, 0, 0);
         }
-        SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const noexcept override {
+        SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const override {
             if (m_currentDesrSets != VK_NULL_HANDLE)
                 vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
 
             vkCmdDraw(m_currentCmd, countVerts, 1, 0, 0);
         }
 
-        [[nodiscard]] SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const noexcept override {
+        [[nodiscard]] SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const override {
             auto id = this->m_memory->AllocateUBO(uboSize);
             if (id < 0) {
                 Helper::Debug::Error("Vulkan::AllocateUBO() : failed to allocate uniform buffer object!");
@@ -447,7 +447,7 @@ namespace Framework::Graphics {
                 TextureFilter filter,
                 TextureCompression compression,
                 uint8_t mipLevels,
-                bool alpha) const noexcept override;
+                bool alpha) const override;
 
         int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
@@ -458,7 +458,7 @@ namespace Framework::Graphics {
             } else
                 return id;
         }
-        SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) noexcept override {
+        SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
             if (FBO == 0) {
                 this->m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
                 this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass();
@@ -497,14 +497,14 @@ namespace Framework::Graphics {
             this->m_currentFBOid = FBO;
         }
 
-        SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const noexcept override {
+        SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const override {
             vkCmdBindVertexBuffers(m_currentCmd, 0, 1, &m_memory->m_VBOs[VBO]->m_buffer, m_offsets);
         }
-        SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const noexcept override {
+        SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const override {
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
             vkCmdBindIndexBuffer(m_currentCmd, m_memory->m_IBOs[IBO]->m_buffer, 0, VK_INDEX_TYPE_UINT32);
         }
-        SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t& ID) const noexcept override {
+        SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t& ID) const override {
             if (ID >= m_memory->m_countTextures) {
                 Helper::Debug::Error("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
                 return;
@@ -525,9 +525,9 @@ namespace Framework::Graphics {
             vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
         }
 
-        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const noexcept override { return this->m_memory->FreeVBO(ID); }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const noexcept override { return this->m_memory->FreeIBO(ID); }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const noexcept override { return this->m_memory->FreeUBO(ID); }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const override { return this->m_memory->FreeVBO(ID); }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const override { return this->m_memory->FreeIBO(ID); }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const override { return this->m_memory->FreeUBO(ID); }
 
         SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override {
             if (!m_memory->FreeTexture((uint32_t)ID)) {
@@ -537,9 +537,9 @@ namespace Framework::Graphics {
                 return true;
         }
 
-        [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const noexcept override;
+        [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const override;
 
-        [[nodiscard]] bool FreeTexture(uint32_t ID) const noexcept override {
+        [[nodiscard]] bool FreeTexture(uint32_t ID) const override {
             if (!m_memory->FreeTexture((uint32_t)ID)) {
                 Helper::Debug::Error("Vulkan::FreeTexture() : failed to free texture!");
                 return false;
@@ -548,7 +548,7 @@ namespace Framework::Graphics {
             return true;
         }
 
-        [[nodiscard]] bool FreeFBO(uint32_t FBO) const noexcept override;
+        [[nodiscard]] bool FreeFBO(uint32_t FBO) const override;
     };
 }
 

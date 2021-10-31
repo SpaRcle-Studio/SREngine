@@ -13,9 +13,9 @@ bool Framework::Scripting::EvoCompiler::Init() {
     EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);  };
     EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { Helper::Debug::Info(msg);  };
 
-    this->m_pathToScripts = Framework::Helper::ResourceManager::GetResourcesFolder() + "/Scripts/";
+    this->m_pathToScripts = Framework::Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/";
 
-    std::string config = Helper::ResourceManager::GetResourcesFolder() + "/Configs/EvoScriptGenerator.config";
+    std::string config = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Configs/EvoScriptGenerator.config";
 
     const std::string warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
 
@@ -30,7 +30,7 @@ bool Framework::Scripting::EvoCompiler::Init() {
     } else {
         std::string generator((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
         Helper::Debug::Info("EvoCompiler::Init() : use \"" + generator + "\" generator...");
-        this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::GetResourcesFolder() + "/Cache");
+        this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::Instance().GetResourcesFolder() + "/Cache");
         this->m_generator = new EvoScript::AddressTableGen();
         this->m_casting = new EvoScript::CastingGen(m_generator);
     }

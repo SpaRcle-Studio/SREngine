@@ -20,27 +20,24 @@ namespace Framework::Graphics::Types {
         friend class Mesh;
         friend class Mesh3D;
     public:
-        Material() = default;
+        Material() : Material(nullptr, nullptr, nullptr, nullptr) { }
         Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
+    private:
         ~Material();
     private:
-        inline static Environment* m_env            = nullptr;
+        const Environment*         m_env            = nullptr;
 
         bool                       m_transparent    = false;
         volatile bool              m_bloom          = false;
 
         glm::vec4                  m_color          = glm::vec4(1, 1, 1, 1);
 
-        Mesh*                      m_mesh           = nullptr;
-
-        volatile bool              m_texturesIsFree = false;
-
         Texture*                   m_diffuse        = nullptr;
         Texture*                   m_normal         = nullptr;
         Texture*                   m_specular       = nullptr;
         Texture*                   m_glossiness     = nullptr;
     private:
-
+        bool FreeTextures();
     public:
         SR_FORCE_INLINE void UseWithDefShader() const noexcept {
             if (m_diffuse) {
@@ -58,7 +55,6 @@ namespace Framework::Graphics::Types {
     public:
         Material* Copy();
         bool SetTransparent(bool value);
-        bool SetMesh(Mesh* mesh);
 
         void SetBloom(bool value) { this->m_bloom = value; };
         [[nodiscard]] bool GetBloomEnabled() const { return this->m_bloom;  };
@@ -69,8 +65,6 @@ namespace Framework::Graphics::Types {
         void SetColor(glm::vec4 color)             { this->m_color = color;                          }
 
         [[nodiscard]] Helper::Math::Vector3 GetColor() const { return glm::vec3(this->m_color); }
-
-        bool FreeTextures();
 
         void SetDiffuse(Texture* tex);
         void SetNormal(Texture* tex);

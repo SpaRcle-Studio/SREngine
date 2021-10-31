@@ -41,10 +41,10 @@ int main() {
     std::string exe = FileSystem::GetPathToExe();
     Debug::Init(exe, true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::High);
-    ResourceManager::Init(exe + "/../../Resources");
+    ResourceManager::Instance().Init(exe + "/../../Resources");
 
 #ifdef WIN32
-    ShellExecute(nullptr, "open", (ResourceManager::GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
+    ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
             ("--log log.txt --target "+FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
             nullptr, SW_SHOWDEFAULT
     );
@@ -52,8 +52,8 @@ int main() {
 
     // Register all resource types
     {
-        ResourceManager::RegisterType("Mesh");
-        ResourceManager::RegisterType("Texture");
+        ResourceManager::Instance().RegisterType("Mesh");
+        ResourceManager::Instance().RegisterType("Texture");
     }
 
     // Register all components
@@ -69,19 +69,19 @@ int main() {
         });
     }
 
-    if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")
+    if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")
         Environment::Set(new OpenGL());
     else if (env == "Vulkan")
         Environment::Set(new Vulkan());
     else if (env.empty()) {
         Helper::Debug::Error("System error: file \"Resources/Configs/Environment.config\" does not exist!\n\t"
                              "Please, create it and write the name of the environment there!");
-        ResourceManager::Stop();
+        ResourceManager::Instance().Stop();
         Debug::Stop();
         return -1500;
     } else {
         Helper::Debug::Error("System error: unknown environment! \"" + env + "\" does not support!");
-        ResourceManager::Stop();
+        ResourceManager::Instance().Stop();
         Debug::Stop();
         return -2000;
     }
@@ -89,7 +89,7 @@ int main() {
     Render* render = Render::Allocate();
     if (!render) {
         Helper::Debug::Error("FATAL: render is not support this pipeline!");
-        ResourceManager::Stop();
+        ResourceManager::Instance().Stop();
         Debug::Stop();
         return -1000;
     }
@@ -131,7 +131,7 @@ int main() {
 
     Debug::System("All systems successfully closed!");
 
-    ResourceManager::Stop();
+    ResourceManager::Instance().Stop();
 
     return Debug::Stop();
 }

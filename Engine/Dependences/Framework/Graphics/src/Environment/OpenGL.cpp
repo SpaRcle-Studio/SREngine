@@ -239,7 +239,7 @@ void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {
 #endif
 }
 
-bool Framework::Graphics::OpenGL::FreeVAO(unsigned int VAO)const noexcept {
+bool Framework::Graphics::OpenGL::FreeVAO(unsigned int VAO) const {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
         Helper::Debug::Log("OpenGL::FreeVAO() : free mesh \""+std::to_string(VAO) + "\" VAO...");
 
@@ -276,7 +276,7 @@ std::vector<std::string> FindFields(const std::string& path) {
     return fields;
 }
 
-std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields(const unsigned int& ID, const std::string &path) const noexcept {
+std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields(const unsigned int& ID, const std::string &path) const {
     auto v = FindFields(path + "_vertex.glsl");
     auto f = FindFields(path + "_fragment.glsl");
 
@@ -310,9 +310,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
         int32_t FBO,
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes
-        ) const noexcept
+        ) const
 {
-    std::string shadersPath = ResourceManager::GetResourcesFolder() + "/Shaders/";
+    std::string shadersPath = ResourceManager::Instance().GetResourcesFolder() + "/Shaders/";
 
     std::string vertex_path = shadersPath + "Common/" + name + ".vert";
     std::string fragment_path = shadersPath + "Common/" + name + ".frag";
@@ -417,7 +417,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
         void** shaderData,
         const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
         const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-        SRShaderCreateInfo shaderCreateInfo) const noexcept
+        SRShaderCreateInfo shaderCreateInfo) const
 {
     if (!shaderProgram)
         return false;
@@ -542,7 +542,7 @@ bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rbo
 bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
         glm::vec2 size,
         std::vector<int32_t> &pingpongFBO,
-        std::vector<int32_t>& pingpongColorBuffers) const noexcept
+        std::vector<int32_t>& pingpongColorBuffers) const
 {
     bool isNew = pingpongFBO[0] <= 0;
 
@@ -594,9 +594,7 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
         TextureCompression compression,
         uint8_t mipLevels,
         bool alpha
-) const noexcept {
-    //glActiveTexture(GL_TEXTURE0);
-
+) const {
     unsigned int id;
     glGenTextures(1, &id);
 
@@ -614,6 +612,8 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
             gl_filter = GL_NEAREST_MIPMAP_LINEAR; break;
         case TextureFilter::LINEAR_MIPMAP_LINEAR:
             gl_filter = GL_LINEAR_MIPMAP_LINEAR; break;
+        case TextureFilter::Unknown:
+            break; // TODO
     }
 
     Helper::Debug::Log("OpenGL::CalculateTexture() : calculating (ID "+std::to_string(id)+") texture...");
@@ -687,7 +687,7 @@ int32_t Framework::Graphics::OpenGL::CalculateCubeMap(uint32_t w, uint32_t h, co
     return cubemap;
 }
 
-unsigned int Framework::Graphics::OpenGL::CalculateSkybox() const noexcept {
+unsigned int Framework::Graphics::OpenGL::CalculateSkybox() const {
     const float skyboxVertices[36 * 3] = {
             // positions
             -10.0f,  10.0f, -10.0f,
@@ -848,12 +848,12 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
         glDisable(GL_DEPTH_TEST);
 }
 
-[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTexture(uint32_t ID) const noexcept  {
+[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTexture(uint32_t ID) const  {
     glDeleteTextures(1, &ID);
     return true;
 }
 
-[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTextures(int32_t *IDs, uint32_t count) const noexcept {
+[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTextures(int32_t *IDs, uint32_t count) const {
     if (count == 0 || !IDs)
         return false;
     glDeleteTextures(count, reinterpret_cast<const GLuint *>(IDs));

@@ -20,7 +20,7 @@
 #include <Debug.h>
 
 namespace Framework::Helper {
-    unsigned long long ResourceManager::GetUsedMemoryLoad() noexcept {
+    uint64_t ResourceManager::GetUsedMemoryLoad() noexcept {
         PROCESS_MEMORY_COUNTERS pmc;
         BOOL result = GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS *) &pmc, sizeof(pmc));
         if (result)
@@ -29,13 +29,13 @@ namespace Framework::Helper {
             return -1;
     }
 
-    bool ResourceManager::Init(std::string resourcesFolder) {
+    bool ResourceManager::Init(const std::string& resourcesFolder) {
         Debug::Info("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
 
-        ResourceManager::g_resourcesFolder = resourcesFolder;
-        ResourceManager::g_isInit = true;
+        m_resourcesFolder = resourcesFolder;
+        m_isInit = true;
 
-        g_thread = std::thread(ResourceManager::GC);
+        m_thread = std::thread(&ResourceManager::GC, this);
 
         return true;
     }
@@ -43,11 +43,12 @@ namespace Framework::Helper {
     bool ResourceManager::Stop() {
         Debug::Info("ResourceManager::Stop() : stopping resource manager...");
 
+        m_isInit = false;
+
+        if (m_thread.joinable())
+            m_thread.join();
+
         PrintMemoryDump();
-
-        ResourceManager::g_isInit = false;
-
-        if (g_thread.joinable()) g_thread.join();
 
         return true;
     }
@@ -56,16 +57,10 @@ namespace Framework::Helper {
         if (Debug::GetLevel() >= Debug::Level::High)
             Debug::Log("ResourceManager::Destroy() : destroying \""+ std::string(resource->m_resource_name) +"\"");
 
-        //ret:
-        //if (g_grabbleNow)
-        //    goto ret;
+        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        g_mutex.lock();
-
-        g_resourcesToDestroy.push_back(resource);
-        g_countResourcesToDestroy++;
-
-        g_mutex.unlock();
+        m_resourcesToDestroy.push_back(resource);
+        m_countResourcesToDestroy++;
 
         return true;
     }
@@ -73,65 +68,56 @@ namespace Framework::Helper {
     bool ResourceManager::RegisterType(const std::string& type_name) {
         Debug::Info("ResourceManager::RegisterType() : register new \""+std::string(type_name)+"\" type...");
         
-        g_resources[type_name] = std::vector<IResource*>();
-        g_resources[type_name].reserve(500 * 500);
+        m_resources[type_name] = std::vector<IResource*>();
+        m_resources[type_name].reserve(500 * 500);
 
         return true;
     }
 
     void ResourceManager::Remove(IResource *resource) {
         std::vector<IResource*> res;
-        if (g_resources.GetOnly(resource->m_resource_name, &res)) {
+        if (m_resources.GetOnly(resource->m_resource_name, &res)) {
             size_t size = res.size();
             for (size_t t = 0; t < size; t++){
                 if (res[t] == resource) {
-                    g_resources[resource->m_resource_name].erase(g_resources[resource->m_resource_name].begin() + t);
+                    m_resources[resource->m_resource_name].erase(m_resources[resource->m_resource_name].begin() + t);
                     break;
                 }
             }
         }
         else {
-            Debug::Error(
-                    "ResourceManager::Remove() : unknown resource! Name: " + std::string(resource->m_resource_name));
+            Debug::Error("ResourceManager::Remove() : unknown resource! Name: " + std::string(resource->m_resource_name));
         }
     }
 
     void ResourceManager::GC() {
-        while(g_isInit){
-            if (g_countResourcesToDestroy == 0)
+        while(m_isInit){
+            if (m_countResourcesToDestroy == 0)
                 continue;
 
-            //if (!g_mutex.try_lock())
-            //    continue;
+            const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-            g_mutex.lock();
+            for (auto resourceIt = m_resourcesToDestroy.begin(); resourceIt != m_resourcesToDestroy.end(); ++resourceIt) {
+                auto resource = *resourceIt;
 
-            g_grabbleNow = true;
+                if (resource->m_countUses > 0 || !resource->m_isDestroy)
+                    continue;
 
-            for (size_t t = 0; t < g_resourcesToDestroy.size(); t++) {
-                if (g_resourcesToDestroy[t]->m_countUses == 0 && g_resourcesToDestroy[t]->m_isDestroy) {
-                    if (Debug::GetLevel() >= Debug::Level::High)
-                        Debug::Log("ResourceManager::GC() : free \"" +
-                                   std::string(g_resourcesToDestroy[t]->m_resource_name) + "\" resource");
+                if (Debug::GetLevel() >= Debug::Level::High)
+                    Debug::Log("ResourceManager::GC() : free \"" + std::string(resource->m_resource_name) + "\" resource");
 
-                    // erase IResource from resources
-                    ResourceManager::Remove(g_resourcesToDestroy[t]);
+                this->Remove(resource);
 
-                    // Free memory
-                    delete g_resourcesToDestroy[t];
+                m_countResourcesToDestroy--;
+                m_resourcesToDestroy.erase(resourceIt);
 
-                    // remove "resources to destroy"
-                    g_countResourcesToDestroy = g_countResourcesToDestroy - 1;
-                    g_resourcesToDestroy.erase(g_resourcesToDestroy.begin() + t);
-                }
+                delete resource;
+
+                break;
             }
 
-            if (Debug::GetLevel() >= Debug::Level::High && g_countResourcesToDestroy == 0)
+            if (Debug::GetLevel() >= Debug::Level::High && m_countResourcesToDestroy == 0)
                 Debug::Log("ResourceManager::GC() : complete garbage collection.");
-
-            g_grabbleNow = false;
-
-            g_mutex.unlock();
         }
     }
 
@@ -139,17 +125,17 @@ namespace Framework::Helper {
         if (Debug::GetLevel() >= Debug::Level::Full)
             Debug::Log("ResourceManager::RegisterResource() : add new \""+std::string(resource->GetResourceName())+"\" resource."); //\n\tResource IDd: "+resource->m_resource_id
 
-        g_mutex.lock();
+        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        g_resources[resource->m_resource_name].push_back(resource);
-
-        g_mutex.unlock();
+        m_resources[resource->m_resource_name].push_back(resource);
     }
 
     void ResourceManager::PrintMemoryDump() {
+        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
         std::string dump = "\n================================ MEMORY DUMP ================================";
 
-        for (const auto& resource : g_resources){
+        for (const auto& resource : m_resources){
             dump += "\n\t\"" + resource.x + "\": " + std::to_string(resource.y.size());
             if (!resource.y.empty())
                 if (strcmp(resource.y[0]->m_resource_name, "Texture") == 0) {
@@ -164,30 +150,27 @@ namespace Framework::Helper {
 
 
         std::string wait;
-        for (auto res : g_resourcesToDestroy) {
+        for (auto res : m_resourcesToDestroy) {
             wait += "\n\t\t" + res->m_resource_id + "; uses = " +std::to_string(res->GetCountUses());
         }
 
-        dump += "\n\tWait destroy: " + std::to_string(g_resourcesToDestroy.size()) + wait;
+        dump += "\n\tWait destroy: " + std::to_string(m_resourcesToDestroy.size()) + wait;
 
         dump += "\n=============================================================================";
         Debug::System(dump);
     }
 
     IResource *ResourceManager::Find(const std::string& Name, const std::string& ID) {
-        IResource* res = nullptr;
+        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        g_mutex.lock();
-
-        for (auto find : g_resources[Name])
+        for (auto find : m_resources[Name])
             if (find->m_resource_id == ID && !find->m_isDestroy)
-            {
-                res = find;
-                break;
-            }
+                return find;
 
-        g_mutex.unlock();
+        return nullptr;
+    }
 
-        return res;
+    void ResourceManager::Synchronize() {
+        while (m_countResourcesToDestroy > 0);
     }
 }

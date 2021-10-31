@@ -15,8 +15,8 @@ namespace Framework::Graphics::Types {
     class IndexedMesh : public VertexMesh {
     protected:
         ~IndexedMesh() override = default;
-        IndexedMesh(Shader* shader, Material* material, std::string name = "Unnamed")
-            : VertexMesh(shader, material, std::move(name)) { };
+        explicit IndexedMesh(const std::string& name = "UnnamedIndexedMesh")
+            : VertexMesh(name) { };
     protected:
         int32_t               m_IBO          = SR_ID_INVALID;
         std::vector<uint32_t> m_indices      = std::vector<uint32_t>();
@@ -27,7 +27,7 @@ namespace Framework::Graphics::Types {
 
         Mesh* Copy(Mesh* mesh) const override;
 
-        void SetIndexArray(std::vector<uint32_t>& indices) {
+        void SetIndexArray(const std::vector<uint32_t>& indices) {
             this->m_countIndices = indices.size();
             this->m_indices      = indices;
             this->m_isCalculated = false;

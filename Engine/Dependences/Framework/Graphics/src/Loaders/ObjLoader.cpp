@@ -30,7 +30,8 @@ namespace Framework::Graphics {
         }
 
         for (const auto& shape : shapes) {
-            Mesh3D* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
+            Mesh3D* mesh = new Mesh3D(shape.name);
+            mesh->SetMaterial(new Material());
 
             auto vertices = std::vector<Vertices::Mesh3DVertex>();
             auto indices = std::vector<uint32_t>();
@@ -127,9 +128,8 @@ namespace Framework::Graphics {
 
     void ObjLoader::AddMesh() {
         if (!m_temp_vertexes.empty()) {
-            Mesh3D* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
-            //Mesh* mesh = new Mesh(Shader::GetDefaultGeometryShader(), new Material(nullptr, nullptr, nullptr, nullptr), ObjLoader::m_current_object);
-            mesh->GetMaterial()->SetMesh(mesh);
+            Mesh3D* mesh = new Mesh3D(ObjLoader::m_current_object);
+            mesh->SetMaterial(new Material());
             mesh->SetVertexArray(m_temp_vertexes);
             m_temp_meshes.push_back(mesh);
         }

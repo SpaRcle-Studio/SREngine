@@ -53,9 +53,7 @@ namespace Framework::Graphics::Types {
         friend class Material;
         friend class ::Framework::API;
     protected:
-        Mesh();
-        Mesh(Shader* shader, Material* material, std::string name = "Unnamed");
-    protected:
+        Mesh(const std::string& name = "Unnamed");
         ~Mesh() override;
     protected:
         bool                         m_inverse           = false;
@@ -93,7 +91,7 @@ namespace Framework::Graphics::Types {
         virtual void ReCalcModel();
         virtual bool Calculate();
     public:
-        virtual Mesh* Copy(Mesh* mesh = nullptr) const;
+        virtual Mesh* Copy(Mesh* destination) const;
 
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
@@ -137,6 +135,9 @@ namespace Framework::Graphics::Types {
 
         void SetRender(Render* render) { this->m_render = render; };
         void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
+
+        void SetMaterial(Material* material);
+        void SetShader(Shader* shader);
     };
 }
 

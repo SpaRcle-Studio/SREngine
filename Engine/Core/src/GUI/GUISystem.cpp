@@ -566,7 +566,7 @@ bool GUISystem::BeginMenuBar() {
 
             if (ImGui::MenuItem("Save scene")) {
                 if (auto scene = Engine::Get()->GetScene(); scene.LockIfValid()) {
-                    auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::GetResourcesFolder() + "/Scenes/", false);
+                    auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scenes/", false);
                     if (auto path = FileSystem::SaveFileDialog(scenesPath, "Scene Files(*.scene)"); !path.empty()) {
                         auto sceneName = StringUtils::GetFileNameFromFullPath(path);
                         auto folder = StringUtils::GetDirToFileFromFullPath(path);

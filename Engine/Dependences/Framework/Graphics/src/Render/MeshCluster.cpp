@@ -4,7 +4,6 @@
 
 #include <Render/MeshCluster.h>
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/Geometry/VertexMesh.h>
 #include <Debug.h>
 
 bool Framework::Graphics::MeshCluster::Remove(Framework::Graphics::Types::Mesh *mesh)  {

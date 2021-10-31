@@ -131,14 +131,14 @@ EXTERN void Start() {
     Render* render = engine->GetRender();
     render->SetSkybox(g_skybox);
 
-    LoadMiku();
-    LoadCubes();
-
     Camera* camera = Camera::Allocate(size.x, size.y);
     camera->SetDirectOutput(true);
     g_window->AddCamera(camera);
     g_camera = g_scene->Instance("Camera");
     g_camera->AddComponent(DynamicCastCameraToComponent(camera));
+
+    LoadMiku();
+    LoadCubes();
 }
 
 void CameraMove(float dt) {

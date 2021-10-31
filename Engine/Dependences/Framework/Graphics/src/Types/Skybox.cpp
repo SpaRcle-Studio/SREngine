@@ -24,7 +24,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(con
     std::string ext = StringUtils::GetExtensionFromFilePath(skyboxName);
     skyboxName.resize(skyboxName.size() - ext.size() - 1);
 
-    std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Skyboxes/" +skyboxName + "/";
+    std::string path = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Skyboxes/" +skyboxName + "/";
 
 #ifdef WIN32
     path = Helper::StringUtils::MakePath(path, true);
@@ -81,7 +81,7 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
     }
 
     if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-        const std::string path = Helper::ResourceManager::GetResourcesFolder() + "/Models/Engine/skybox.obj";
+        const std::string path = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Models/Engine/skybox.obj";
         auto skyboxObj = Graphics::ObjLoader::LoadSourceWithIndices<Vertices::SkyboxVertex>(path);
         if (skyboxObj.size() != 1) {
             Helper::Debug::Error("Skybox::Calculate() : failed to load skybox model!");

@@ -75,6 +75,7 @@ namespace Framework::Graphics {
 
         Render*               m_render                = nullptr;
 
+        // TODO: TO_REFACTORING
         std::mutex            m_camerasMutex          = std::mutex();
         std::vector<Camera*>  m_newCameras            = std::vector<Camera*>();
         uint32_t              m_countNewCameras       = 0;
@@ -109,6 +110,7 @@ namespace Framework::Graphics {
     public:
         void AddCamera(Camera* camera);
         void DestroyCamera(Camera* camera);
+        uint32_t GetCountCameras() const { return m_countCameras; }
 
         [[nodiscard]] SR_FORCE_INLINE Render* GetRender() {
             if (!m_render) {
@@ -117,8 +119,8 @@ namespace Framework::Graphics {
             }
             return m_render;
         }
-        [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
-        [[nodiscard]] inline bool IsGUIEnabled() const noexcept { return m_GUIEnabled.first; }
+        [[nodiscard]] bool IsRun() const noexcept { return m_isRun; }
+        [[nodiscard]] bool IsGUIEnabled() const noexcept { return m_GUIEnabled.first; }
         [[nodiscard]] Mesh* PopAimedMesh() noexcept;
         [[nodiscard]] bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept;
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);

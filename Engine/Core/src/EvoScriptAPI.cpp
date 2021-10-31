@@ -49,8 +49,8 @@ namespace Framework {
 
         RegisterCasts(casts);
 
-        generator->Save(Helper::ResourceManager::GetResourcesFolder() + "/Scripts/Libraries/");
-        casts->Save(Helper::ResourceManager::GetResourcesFolder() + "/Scripts/Libraries/");
+        generator->Save(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/Libraries/");
+        casts->Save(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/Libraries/");
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {

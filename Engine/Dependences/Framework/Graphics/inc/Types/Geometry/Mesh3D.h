@@ -15,11 +15,8 @@
 namespace Framework::Graphics::Types {
     class Mesh3D : public IndexedMesh {
     public:
-        Mesh3D(Shader* shader, Material* material, std::string name = "Unnamed")
-            : IndexedMesh(shader, material, std::move(name)) { };
-
-        Mesh3D()
-            : IndexedMesh(nullptr, nullptr, "Unnamed")  { };
+        explicit Mesh3D(const std::string& name = "UnnamedMesh3D")
+            : IndexedMesh(name) { };
     protected:
         ~Mesh3D() override = default;
     private:

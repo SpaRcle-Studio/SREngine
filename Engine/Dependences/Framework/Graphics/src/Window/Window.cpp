@@ -360,6 +360,15 @@ void Framework::Graphics::Window::Thread() {
 
     Helper::Debug::Graph("Window::Thread() : exit from main cycle.");
 
+    Helper::Debug::Graph("Window::Thread() : synchronizing resources...");
+    /* Делаем 10 попыток синхронизации, чтобы все графические ресурсы успели уничтожиться
+     * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
+     * после уничтожения потока */
+    for (uint8_t i = 0; i < 10; ++i) {
+        this->PollEvents();
+        ResourceManager::Instance().Synchronize();
+    }
+
     if (m_env->IsGUISupport())
         m_env->StopGUI();
 
@@ -384,7 +393,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
             m_smoothSamples,
             "SpaRcle Engine",
             "SREngine",
-            ResourceManager::GetResourcesFolder() + "/Utilities/glslc.exe")){
+            ResourceManager::Instance().GetResourcesFolder() + "/Utilities/glslc.exe")){
         Debug::Error("Window::InitEnvironment() : failed pre-initializing environment!");
         return false;
     }
@@ -394,7 +403,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
         Debug::Error("Window::InitEnvironment() : failed creating window!");
         return false;
     }
-    this->m_env->SetWindowIcon(std::string(Helper::ResourceManager::GetResourcesFolder().append("/Textures/").append(m_icoPath)).c_str());
+    this->m_env->SetWindowIcon(std::string(Helper::ResourceManager::Instance().GetResourcesFolder().append("/Textures/").append(m_icoPath)).c_str());
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
     if (!this->m_env->SetContextCurrent()) {
@@ -418,7 +427,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     if (m_env->IsGUISupport()) {
-        if (this->m_env->PreInitGUI(Helper::ResourceManager::GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
+        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
             GUI::ICanvas::InitStyle();
             this->m_env->InitGUI();
         } else

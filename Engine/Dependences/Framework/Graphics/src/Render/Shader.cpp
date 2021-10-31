@@ -300,7 +300,7 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
             return nullptr;
     };
 
-    auto createInfoPath = Helper::StringUtils::MakePath(Helper::ResourceManager::GetResourcesFolder() + "/Shaders/CreateInfo.xml");
+    auto createInfoPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Shaders/CreateInfo.xml");
     if (FileSystem::FileExists(createInfoPath)) {
         auto xml = Helper::Xml::Document::Load(createInfoPath);
         shaders = xml.Root().GetNode("Shaders").GetNodes();

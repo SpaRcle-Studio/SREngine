@@ -45,7 +45,7 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     } else
         this->RemoveUsePoint();
 
-    Helper::ResourceManager::Destroy(this);
+    Helper::ResourceManager::Instance().Destroy(this);
 
     return true;
 }
@@ -59,24 +59,23 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
         TextureCompression compression,
         uint8_t mipLevels)
 {
-    std::string path = ResourceManager::GetResourcesFolder() + "/Textures/"+ localPath;
+    auto path = ResourceManager::Instance().GetResourcesFolder() + "/Textures/"+ localPath;
+    path = Helper::StringUtils::MakePath(path, SR_WIN32_BOOL);
 
-#ifdef WIN32
-    path = Helper::StringUtils::MakePath(path, true);
-#else
-    path = StringUtils::MakePath(path, false);
-#endif
-    Texture* texture = nullptr;
+    Texture* texture;
 
-    IResource* find = ResourceManager::Find("Texture", localPath);
-    if (find) {
-        //texture = ((Texture*)(find))->Copy();
+    if (IResource* find = ResourceManager::Instance().Find("Texture", localPath)) {
         texture = ((Texture*)(find));
 
-        if (texture->m_autoRemove != autoRemove || texture->m_type != type || texture->m_filter != filter){
+        if (texture->m_autoRemove != autoRemove
+        || texture->m_mipLevels   != mipLevels
+        || texture->m_type        != type
+        || texture->m_filter      != filter
+        || texture->m_compression != compression
+        || texture->m_filter      != filter)
             Debug::Warn("Texture::Load() : copy values do not match load values.");
-        }
-    } else {
+    }
+    else {
         if (Debug::GetLevel() >= Debug::Level::Medium)
             Debug::Log("Texture::Load : load \""+localPath+"\" texture...");
 
@@ -138,6 +137,18 @@ void Framework::Graphics::Types::Texture::OnDestroyGameObject() {
 
 void Framework::Graphics::Types::Texture::SetRender(Framework::Graphics::Render *render) {
     this->m_render = render;
+}
+
+bool Framework::Graphics::Types::Texture::FreeVideoMemory()  {
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Log("Texture::FreeVideoMemory() : free \"" + std::string(m_resource_name) + "\" texture video memory...");
+
+    if (!m_isCalculate) {
+        Debug::Error("Texture::FreeVideoMemory() : texture \"" + std::string(m_resource_name) + "\" is not calculated!");
+        return false;
+    }
+    else
+        return Framework::Graphics::Types::Texture::m_env->FreeTexture(m_ID);
 }
 
 /*

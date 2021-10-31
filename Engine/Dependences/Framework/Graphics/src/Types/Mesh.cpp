@@ -22,29 +22,19 @@
 #include <Types/Geometry/SkinnedMesh.h>
 #include <Memory/MeshManager.h>
 
+#include <Window/Window.h>
+
 using namespace Framework::Graphics::Types;
 
-Framework::Graphics::Types::Mesh::Mesh()
+Framework::Graphics::Types::Mesh::Mesh(const std::string& name)
     : IResource("Mesh")
     , m_env(Environment::Get())
     , Component("Mesh")
     , m_pipeline(Environment::Get()->GetPipeLine())
 {
-    this->m_shader        = nullptr;
-    this->m_material      = nullptr;
-    this->m_geometry_name = "Unsolved";
-}
-
-Framework::Graphics::Types::Mesh::Mesh(Shader* shader, Material* material, std::string name)
-    : IResource("Mesh")
-    , m_env(Environment::Get())
-    , Component("Mesh")
-    , m_pipeline(Environment::Get()->GetPipeLine())
-{
-    this->m_shader   = shader;
-
-    this->m_geometry_name = std::move(name);
-    this->m_material = material;
+    this->m_shader = nullptr;
+    this->m_material = nullptr;
+    this->m_geometry_name = name;
 }
 
 Framework::Graphics::Types::Mesh::~Mesh() {
@@ -53,6 +43,7 @@ Framework::Graphics::Types::Mesh::~Mesh() {
     } else{
         if (Debug::GetLevel() >= Debug::Level::High)
             Debug::Log("Mesh::~Mesh() : free material pointer...");
+
         delete m_material;
         m_material = nullptr;
     }
@@ -70,7 +61,7 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     if (m_material)
         this->m_material->FreeTextures();
 
-    Helper::ResourceManager::Destroy(this);
+    Helper::ResourceManager::Instance().Destroy(this);
 
     return true;
 }
@@ -92,7 +83,7 @@ Mesh *Mesh::Allocate(MeshType type) {
 }
 
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath, MeshType type) {
-    std::string path = ResourceManager::GetResourcesFolder() + "/Models/" + localPath;
+    std::string path = ResourceManager::Instance().GetResourcesFolder() + "/Models/" + localPath;
 
     path = StringUtils::MakePath(path, SR_WIN32_BOOL);
 
@@ -100,14 +91,14 @@ std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& lo
 
     uint32_t counter = 0;
 ret:
-    if (IResource* find = ResourceManager::Find("Mesh", localPath + " - "+ std::to_string(counter))) {
+    if (IResource* find = ResourceManager::Instance().Find("Mesh", localPath + " - "+ std::to_string(counter))) {
         if (Mesh* copy = ((Mesh*)(find))->Copy(nullptr)) {
             meshes.push_back(copy);
             counter++;
             goto ret;
         } else {
             Debug::Error("Mesh::Load() : [FATAL] An unforeseen situation has arisen, apparently, it is necessary to work out this piece of code...");
-            throw "This should never happen.";
+            throw std::exception("This should never happen.");
         }
     }
     else if (counter > 0)
@@ -127,15 +118,18 @@ ret:
         if (!FbxLoader::Debug::IsInit())
             FbxLoader::Debug::Init([](const std::string& msg) { Helper::Debug::Error(msg); });
 
+        const auto resFolder = Helper::ResourceManager::Instance().GetResourcesFolder();
+
         auto fbx = FbxLoader::Loader::Load(
-                Helper::ResourceManager::GetResourcesFolder() + "/Utilities/FbxFormatConverter.exe",
-                Helper::ResourceManager::GetResourcesFolder() + "/Cache/",
-                Helper::ResourceManager::GetResourcesFolder() + "/Models/",
+                resFolder + "/Utilities/FbxFormatConverter.exe",
+                resFolder + "/Cache/",
+                resFolder + "/Models/",
                 localPath,
                 withIndices);
 
-        for (auto shape : fbx.GetShapes()) {
-            auto* mesh = new Mesh3D(nullptr, new Material(nullptr, nullptr, nullptr, nullptr), shape.name);
+        for (const auto& shape : fbx.GetShapes()) {
+            auto* mesh = new Mesh3D(shape.name);
+            mesh->SetMaterial(new Material());
 
             if (withIndices)
                 mesh->SetIndexArray(shape.indices);
@@ -258,10 +252,11 @@ Mesh *Mesh::Copy(Mesh *mesh) const {
     if (Debug::GetLevel() >= Debug::Level::Full)
         Debug::Log("Mesh::Copy() : copy \"" + m_resource_id + "\" mesh...");
 
+    // TODO: in feature mesh will be resource
     auto material = m_material ? m_material->Copy() : new Material();
-    m_material->m_mesh = mesh;
 
-    mesh->m_material = material;
+    mesh->SetMaterial(material);
+    mesh->SetShader(m_shader);
 
     mesh->m_barycenter = m_barycenter;
     mesh->m_position   = m_position;
@@ -320,6 +315,12 @@ void Mesh::ReCalcModel() {
 
 void Mesh::WaitCalculate() const  {
     ret:
+    if (!m_render || m_render->GetWindow()->GetCountCameras() == 0) {
+        Helper::Debug::Error("Mesh::WaitCalculate() : There is no destination render or camera!"
+                             " The geometry will never be calculated.");
+        return;
+    }
+
     if (m_isCalculated)
         return;
     goto ret;
@@ -328,4 +329,15 @@ void Mesh::WaitCalculate() const  {
 bool Mesh::Calculate()  {
     m_isCalculated = true;
     return true;
+}
+
+void Mesh::SetMaterial(Material *material) {
+    m_material = material;
+}
+
+void Mesh::SetShader(Framework::Graphics::Shader *shader) {
+    if (m_isCalculated) {
+        Environment::Get()->SetBuildState(false);
+        m_isCalculated = false;
+    }
 }

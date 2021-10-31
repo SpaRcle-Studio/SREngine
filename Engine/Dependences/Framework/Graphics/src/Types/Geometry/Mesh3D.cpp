@@ -41,7 +41,7 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
 Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy(Mesh* mesh) const {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
-    Mesh3D* mesh3D = dynamic_cast<Mesh3D *>(mesh ? mesh : new Mesh3D(this->m_shader, nullptr, this->m_geometry_name));
+    Mesh3D* mesh3D = dynamic_cast<Mesh3D *>(mesh ? mesh : new Mesh3D(m_geometry_name));
     mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
 
     if (mesh3D->IsCalculated()) {

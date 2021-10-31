@@ -16,7 +16,7 @@ namespace Framework::Scripting {
     class EvoScriptImpl : public Scripting::Script {
     public:
         EvoScriptImpl(Compiler* compiler, const std::string& name, const std::string& path)
-            : Script(compiler, name, Helper::ResourceManager::GetResourcesFolder() + "/Scripts/" + path) { }
+            : Script(compiler, name, Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/" + path) { }
         ~EvoScriptImpl() override = default;
         EvoScriptImpl(const EvoScriptImpl&) = delete;
     public:

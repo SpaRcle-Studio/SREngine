@@ -23,7 +23,7 @@ namespace Framework::Helper {
         static T* m_instance;
 
         Singleton() { m_instance = static_cast <T*> (this); };
-        ~Singleton() = default;
+        virtual ~Singleton() = default;
 
         virtual void OnSingletonDestroy() { }
     };

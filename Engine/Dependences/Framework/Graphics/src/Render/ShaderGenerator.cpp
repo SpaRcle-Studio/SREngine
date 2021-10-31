@@ -12,7 +12,7 @@ bool Framework::Graphics::Codegen::ShaderGenerator::Generate(
         const std::string &dist,
         Framework::Graphics::ShaderFlags flags)
 {
-    std::string modulesFolder = Framework::Helper::ResourceManager::GetResourcesFolder() + "/Shaders/Modules/" + name + "/";
+    std::string modulesFolder = Framework::Helper::ResourceManager::Instance().GetResourcesFolder() + "/Shaders/Modules/" + name + "/";
 
     bool lighting = false;
     auto defines  = std::vector<std::string>();

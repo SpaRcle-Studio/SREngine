@@ -171,7 +171,7 @@ namespace Framework::Graphics{
             int32_t FBO,
             void **shaderData,
             const std::vector<uint64_t>& uniformSizes
-            ) const noexcept
+            ) const
     {
         if (FBO < 0) {
             Helper::Debug::Error("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
@@ -206,7 +206,7 @@ namespace Framework::Graphics{
             *shaderData = reinterpret_cast<void*>(dynamicID);
         }
 
-        std::string shadersPath = Helper::ResourceManager::GetResourcesFolder() + "/Shaders/";
+        std::string shadersPath = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Shaders/";
 
         std::string vertex_path = shadersPath + "Common/" + path + ".vert";
         std::string fragment_path = shadersPath + "Common/" + path + ".frag";
@@ -270,7 +270,7 @@ namespace Framework::Graphics{
         }
 
         if (!m_memory->m_ShaderPrograms[ID]->Load(
-                Helper::ResourceManager::GetResourcesFolder() + "\\Cache\\Shaders",
+                Helper::ResourceManager::Instance().GetResourcesFolder() + "\\Cache\\Shaders",
                 vkModules,
                 descriptorLayoutBindings,
                 uniformSizes
@@ -287,7 +287,7 @@ namespace Framework::Graphics{
             void **shaderData,
             const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
             const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-            SRShaderCreateInfo shaderCreateInfo) const noexcept
+            SRShaderCreateInfo shaderCreateInfo) const
     {
         if (!shaderData) {
             Helper::Debug::Error("Vulkan::LinkShader() : shader data is nullptr!");
@@ -366,7 +366,7 @@ namespace Framework::Graphics{
         return true;
     }
 
-    [[nodiscard]] bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const noexcept {
+    [[nodiscard]] bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const {
         if (!IDs) {
             Helper::Debug::Error("Vulkan::FreeTextures() : texture IDs is nullptr!");
             return false;
@@ -387,7 +387,7 @@ namespace Framework::Graphics{
         return true;
     }
 
-    [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const noexcept {
+    [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const {
         return this->m_memory->FreeFBO(FBO - 1);
     }
 
@@ -400,7 +400,7 @@ namespace Framework::Graphics{
             TextureCompression compression,
             uint8_t mipLevels,
             bool alpha // unused
-    ) const noexcept {
+    ) const {
         auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format, true /* alpha */);
         if (vkFormat == VK_FORMAT_MAX_ENUM) {
             Helper::Debug::Error("Vulkan::CalculateTexture() : unsupported format!");
