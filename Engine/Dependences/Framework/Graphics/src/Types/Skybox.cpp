@@ -97,7 +97,7 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
             return false;
         }
 
-        if (m_IBO = m_env->CalculateIBO(indices.data(), sizeof(uint32_t), indices.size()); m_IBO == SR_ID_INVALID) {
+        if (m_IBO = m_env->CalculateIBO(indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID); m_IBO == SR_ID_INVALID) {
             Helper::Debug::Error("Skybox::Calculate() : failed to calculate IBO!");
             this->m_hasErrors = true;
             return false;

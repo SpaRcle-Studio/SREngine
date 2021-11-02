@@ -26,6 +26,10 @@ namespace Framework::Graphics::Impl {
         }
 
         bool DrawDebugWireframe() override {
+            m_shaders[Shader::StandardID::DebugWireframe]->Use();
+
+            this->m_env->UnUseShader();
+
             return true;
         }
 

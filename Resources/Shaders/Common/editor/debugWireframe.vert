@@ -9,7 +9,7 @@ layout (binding = 0) uniform WireframeUBO {
     vec4 color;
 } wireframeUBO;
 
-layout (binding = 2) uniform ProjViewUBO {
+layout (binding = 1) uniform ProjViewUBO {
     mat4 proj;
     mat4 view;
 } sharedUBO;
@@ -18,5 +18,5 @@ layout (binding = 2) uniform ProjViewUBO {
 
 void main() {
     rgbaColor = wireframeUBO.color;
-    gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vec4(inPos, 1.0);
+    gl_Position = sharedUBO.proj * sharedUBO.view * wireframeUBO.model * vec4(inPos, 1.0);
 }

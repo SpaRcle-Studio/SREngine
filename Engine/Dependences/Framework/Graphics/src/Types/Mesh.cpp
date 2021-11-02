@@ -20,6 +20,7 @@
 
 #include <Types/Geometry/Mesh3D.h>
 #include <Types/Geometry/SkinnedMesh.h>
+#include <Types/Geometry/DebugWireframeMesh.h>
 #include <Memory/MeshManager.h>
 
 #include <Window/Window.h>
@@ -34,7 +35,7 @@ Framework::Graphics::Types::Mesh::Mesh(const std::string& name)
 {
     this->m_shader = nullptr;
     this->m_material = nullptr;
-    this->m_geometry_name = name;
+    this->m_geometryName = name;
 }
 
 Framework::Graphics::Types::Mesh::~Mesh() {
@@ -54,7 +55,7 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
         return false;
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh::Destroy() : destroy \""+m_geometry_name+"\"...");
+        Debug::Log("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
 
     this->m_isDestroy = true;
 
@@ -68,8 +69,7 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
 
 Mesh *Mesh::Allocate(MeshType type) {
     switch (type) {
-        case MeshType::Static:
-            break;
+        case MeshType::Static: return new Mesh3D();
         case MeshType::Wireframe:
             break;
         case MeshType::Skinned:

@@ -7,6 +7,7 @@
 
 #include <any>
 #include <Types/Mesh.h>
+#include <Memory/MeshManager.h>
 
 namespace Framework::Graphics::Types {
     class VertexMesh : public Mesh {
@@ -22,8 +23,8 @@ namespace Framework::Graphics::Types {
     protected:
         virtual void SetVertexArray(const std::any& vertices) = 0;
 
-        Mesh* Copy(Mesh* mesh) const override {
-            if (auto vertex = dynamic_cast<VertexMesh*>(mesh)) {
+        Mesh* Copy(Mesh* destination) const override {
+            if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {
                 vertex->m_countVertices = m_countVertices;
                 return Mesh::Copy(vertex);
             } else {
@@ -35,6 +36,11 @@ namespace Framework::Graphics::Types {
         bool Calculate() override {
             return Mesh::Calculate();
         }
+
+    protected:
+        template<Vertices::Type type> bool CalculateVBO(void* data);
+        template<Vertices::Type type> bool FreeVBO();
+
     };
 
     template<bool fast> int32_t VertexMesh::GetVBO() {
@@ -49,6 +55,34 @@ namespace Framework::Graphics::Types {
 
             return m_VBO;
         }
+    }
+
+    template<Vertices::Type type> bool VertexMesh::CalculateVBO(void* data) {
+        using namespace Memory;
+
+        if (m_VBO = MeshManager::Instance().CopyIfExists<type, MeshManager::VBO>(m_resource_id); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = this->m_env->CalculateVBO(data, type, m_countVertices); m_VBO == SR_ID_INVALID) {
+                Debug::Error("Mesh3D::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
+                this->m_hasErrors = true;
+                return false;
+            } else
+                return Memory::MeshManager::Instance().Register<type, Memory::MeshManager::VBO>(m_resource_id, m_VBO);
+        }
+
+        return true;
+    }
+
+    template<Vertices::Type type> bool VertexMesh::FreeVBO() {
+        using namespace Memory;
+
+        if (MeshManager::Instance().Free<type, MeshManager::VBO>(m_resource_id) == MeshManager::FreeResult::Freed) {
+            if (!m_env->FreeVBO(m_VBO)) {
+                Debug::Error("Mesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 

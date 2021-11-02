@@ -22,18 +22,12 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
         return false;
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh3D::Calculate() : calculating \"" + m_geometry_name + "\"...");
+        Debug::Log("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
 
     m_barycenter = Vertices::Barycenter(m_vertices);
 
-    if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<Mesh3D, Memory::MeshManager::VBO>(m_resource_id); m_VBO == SR_ID_INVALID) {
-        if (m_VBO = this->m_env->CalculateVBO(m_vertices.data(), Vertices::Type::Mesh3DVertex, m_countVertices); m_VBO == SR_ID_INVALID) {
-            Debug::Error("Mesh3D::Calculate() : failed calculate VBO \"" + m_geometry_name + "\" mesh!");
-            this->m_hasErrors = true;
-            return false;
-        } else
-            Memory::MeshManager::Instance().Register<Mesh3D, Memory::MeshManager::VBO>(m_resource_id, m_VBO);
-    }
+    if (!CalculateVBO<Vertices::Type::Mesh3DVertex>(m_vertices.data()))
+        return false;
 
     return IndexedMesh::Calculate();
 }
@@ -41,34 +35,30 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
 Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy(Mesh* mesh) const {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
-    Mesh3D* mesh3D = dynamic_cast<Mesh3D *>(mesh ? mesh : new Mesh3D(m_geometry_name));
+    auto* mesh3D = dynamic_cast<Mesh3D *>(mesh ? mesh : new Mesh3D(m_geometryName));
     mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
 
-    if (mesh3D->IsCalculated()) {
-        mesh3D->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Mesh3D, Memory::MeshManager::VBO>(m_resource_id);
+    if (mesh3D->IsCalculated())
+        mesh3D->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(m_resource_id);
+    else
         mesh3D->m_vertices = m_vertices;
-    }
 
     return mesh3D;
 }
 
 bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("Mesh3D::FreeVideoMemory() : free \"" + m_geometry_name + "\" mesh video memory...");
+        Helper::Debug::Log("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
 
-    using namespace Memory;
-
-    if (MeshManager::Instance().Free<Mesh3D, MeshManager::VBO>(m_resource_id) == MeshManager::FreeResult::Freed) {
-        if (!m_env->FreeVBO(m_VBO))
-            Debug::Error("Mesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
-    }
+    if (!FreeVBO<Vertices::Type::Mesh3DVertex>())
+        return false;
 
     return IndexedMesh::FreeVideoMemory();
 }
 
 void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices) {
     try {
-        auto mesh3DVertices = std::any_cast<Vertices::Mesh3DVertices>(vertices);
+        auto mesh3DVertices   = std::any_cast<Vertices::Mesh3DVertices>(vertices);
         this->m_countVertices = mesh3DVertices.size();
         this->m_vertices      = mesh3DVertices;
         this->m_isCalculated  = false;

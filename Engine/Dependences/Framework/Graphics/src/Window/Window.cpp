@@ -236,6 +236,7 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetScissor();
 
                                     this->m_render->DrawGeometry();
+                                    this->m_render->DrawDebugWireframe();
                                     this->m_render->DrawSkybox();
                                 }
                                 m_env->EndRender();
@@ -360,7 +361,7 @@ void Framework::Graphics::Window::Thread() {
 
     Helper::Debug::Graph("Window::Thread() : exit from main cycle.");
 
-    Helper::Debug::Graph("Window::Thread() : synchronizing resources...");
+    Helper::Debug::System("Window::Thread() : synchronizing resources...");
     /* Делаем 10 попыток синхронизации, чтобы все графические ресурсы успели уничтожиться
      * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
      * после уничтожения потока */
@@ -531,22 +532,13 @@ void Framework::Graphics::Window::PollEvents() {
         m_camerasMutex.unlock();
     }
 
-    if (m_isNeedResize) { // TODO
-        //unsigned int w =  m_env->GetWindowFormat()->Width();
-        //unsigned int h =  m_env->GetWindowFormat()->Height();
-
+    if (m_isNeedResize) {
         m_env->SetWindowSize((uint32_t)m_newWindowSize.x, (uint32_t)m_newWindowSize.y);
-
-        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Resize, nullptr, &w, &h);
         this->m_isNeedResize = false;
     }
 
-    if (m_isNeedMove) { // TODO
-        int x = (int)m_newWindowPos.x;
-        int y = (int)m_newWindowPos.y;
-        //Framework::Graphics::Environment::g_callback(Environment::WinEvents::Move, nullptr, &x, &y);
-
-        m_env->SetWindowPosition(x, y);
+    if (m_isNeedMove) {
+        m_env->SetWindowPosition((int)m_newWindowPos.x, (int)m_newWindowPos.y);
 
         this->m_isNeedMove = false;
     }

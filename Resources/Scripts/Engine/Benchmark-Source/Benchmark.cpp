@@ -11,6 +11,7 @@
 #include "../../Libraries/Window.h"
 #include "../../Libraries/Render.h"
 #include "../../Libraries/Input.h"
+#include "../../Libraries/Casts.h"
 
 #include <iostream>
 #include <ctime>
@@ -31,30 +32,30 @@ void CreateCamera() {
     camera->SetDirectOutput(true);
     g_window->AddCamera(camera);
     auto gm = g_scene->Instance("Camera");
-    gm->AddComponent(camera);
+    gm->AddComponent(DynamicCastCameraToComponent(camera));
 }
 
 void FullScene() {
     Render* render = Engine::Get()->GetRender();
     auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
-    auto mesh = Mesh::Load("engine/cube.obj")[0];
+    auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
     render->RegisterTexture(texture);
 
     auto cube = g_scene->Instance("Cube");
     render->RegisterMesh(mesh);
     mesh->WaitCalculate();
     mesh->GetMaterial()->SetDiffuse(texture);
-    cube->AddComponent(mesh);
+    cube->AddComponent(DynamicCastMeshToComponent(mesh));
     cube->GetTransform()->Translate(Vector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
-        mesh = mesh->Copy();
+        mesh = mesh->Copy(nullptr);
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->GetMaterial()->SetDiffuse(texture);
 
         auto newCube = g_scene->Instance("Cube");
-        newCube->AddComponent(mesh);
+        newCube->AddComponent(DynamicCastMeshToComponent(mesh));
         cube->AddChild(newCube);
         cube = newCube;
 

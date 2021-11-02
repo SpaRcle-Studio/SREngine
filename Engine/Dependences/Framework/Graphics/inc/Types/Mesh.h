@@ -53,7 +53,7 @@ namespace Framework::Graphics::Types {
         friend class Material;
         friend class ::Framework::API;
     protected:
-        Mesh(const std::string& name = "Unnamed");
+        explicit Mesh(const std::string& name = "Unnamed");
         ~Mesh() override;
     protected:
         bool                         m_inverse           = false;
@@ -63,7 +63,7 @@ namespace Framework::Graphics::Types {
 
         mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
 
-        std::string                  m_geometry_name     = "Unnamed";
+        std::string                  m_geometryName     = "Unnamed";
         Shader*                      m_shader            = nullptr;
         Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
@@ -127,7 +127,7 @@ namespace Framework::Graphics::Types {
         void WaitCalculate() const;
         bool IsCanCalculate() const;
 
-        [[nodiscard]] std::string GetGeometryName() const { return this->m_geometry_name; }
+        [[nodiscard]] std::string GetGeometryName() const { return this->m_geometryName; }
         [[nodiscard]] Shader* GetShader()           const { return this->m_shader; }
         [[nodiscard]] Material* GetMaterial()       const { return this->m_material; }
         [[nodiscard]] bool IsCalculated()           const { return m_isCalculated; }
@@ -135,7 +135,7 @@ namespace Framework::Graphics::Types {
 
         void SetRender(Render* render) { this->m_render = render; };
         void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
-
+        void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetShader(Shader* shader);
     };

@@ -11,7 +11,7 @@
 
 namespace Framework::Graphics {
     SR_ENUM_CLASS(ShaderType, Unknown, Vertex, Fragment, Tesselation)
-    SR_ENUM_CLASS(LayoutBinding, Unknown, Uniform, Sampler2D)
+    SR_ENUM_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
     SR_ENUM_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
 
@@ -101,7 +101,7 @@ namespace Framework::Graphics {
                         return { };
                     }
 
-                    uint32_t loc = atoi(location.c_str());
+                    uint32_t loc = std::atoll(location.c_str());
                     if (loc + 1 > bindings.size())
                         bindings.resize(loc + 1);
 
@@ -115,6 +115,15 @@ namespace Framework::Graphics {
                 }
             }
         }
+
+        // error correction
+        for (uint32_t i = 0; i < static_cast<uint32_t>(bindings.size()); ++i)
+            if (bindings[i].second == ShaderType::Unknown || bindings[i].first == LayoutBinding::Unknown) {
+                Helper::Debug::Error("IShaderProgram::AnalyseShader() : incorrect bindings! Missing " + std::to_string(i) + " binding!");
+                *errors = true;
+                return { };
+            }
+
         return bindings;
     }
 }

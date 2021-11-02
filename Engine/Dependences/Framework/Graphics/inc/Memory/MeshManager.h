@@ -50,7 +50,7 @@ namespace Framework::Graphics {
             std::mutex m_mutex;
         private:
             MeshManager() = default;
-            ~MeshManager() = default;
+            ~MeshManager() override = default;
         private:
             VideoResourcesIter FindImpl(const std::string& resourceID, MemoryType memType);
             bool RegisterImpl(const std::string& resourceId, MemoryType memType, uint32_t id);
@@ -58,57 +58,42 @@ namespace Framework::Graphics {
         private:
             void OnSingletonDestroy() override;
         private:
-            template<typename MeshType, MemoryType type> VideoResourcesIter Find(const std::string& resourceID) {
-                if constexpr (type == MemoryType::VBO) {
-                    auto vertexType = GetVertexType<MeshType>();
-                    return this->FindImpl(resourceID + Vertices::EnumTypeToString(vertexType), type);
+            template<Vertices::Type vertexType, MemoryType memType> VideoResourcesIter Find(const std::string& resourceID) {
+                if constexpr (memType == MemoryType::VBO) {
+                    return this->FindImpl(resourceID + Vertices::EnumTypeToString(vertexType), memType);
                 } else
-                    return this->FindImpl(resourceID, type);
-            }
-
-            template<typename MeshType> Vertices::Type GetVertexType() {
-                struct someType {};
-
-                Vertices::Type vertexType = Vertices::Type::Unknown;
-
-                if constexpr (std::is_same_v<MeshType, Types::Mesh3D>)
-                    vertexType = Vertices::Type::Mesh3DVertex;
-                else
-                    static_assert(std::is_same_v<MeshType, someType>, "MeshManager::GetVertexType() : unknown mesh!");
-
-                return vertexType;
+                    return this->FindImpl(resourceID, memType);
             }
         public:
-            template<typename MeshType, MemoryType type> bool Register(const std::string& resourceID, uint32_t id) {
+            template<Vertices::Type vertexType, MemoryType memType> bool Register(const std::string& resourceID, uint32_t id) {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
-                if (Find<MeshType, type>(resourceID).has_value()) {
+                if (Find<vertexType, memType>(resourceID).has_value()) {
                     Helper::Debug::Error("MeshManager::Register() : memory already registered!");
                     return false;
                 }
 
-                if constexpr (type == MemoryType::VBO) {
-                    auto vertexType = GetVertexType<MeshType>();
-                    return this->RegisterImpl(resourceID + Vertices::EnumTypeToString(vertexType), type, id);
+                if constexpr (memType == MemoryType::VBO) {
+                    return this->RegisterImpl(resourceID + Vertices::EnumTypeToString(vertexType), memType, id);
                 } else
-                    return this->RegisterImpl(resourceID, type, id);
+                    return this->RegisterImpl(resourceID, memType, id);
             }
 
-            template<typename MeshType, MemoryType type> FreeResult Free(const std::string& resourceID) {
+            template<Vertices::Type vertexType, MemoryType memType> FreeResult Free(const std::string& resourceID) {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
-                if (auto iter = Find<MeshType, type>(resourceID); !iter.has_value()) {
+                if (auto iter = Find<vertexType, memType>(resourceID); !iter.has_value()) {
                     Helper::Debug::Error("MeshManager::Register() : memory isn't registered! "
                                          "\n\tResource id: " + resourceID);
                     return FreeResult::NotFound;
                 } else
-                    return this->FreeImpl(iter, type);
+                    return this->FreeImpl(iter, memType);
             }
 
-            template<typename MeshType, MemoryType type> int32_t CopyIfExists(const std::string& resourceID) {
+            template<Vertices::Type vertexType, MemoryType memType> int32_t CopyIfExists(const std::string& resourceID) {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
-                if (auto memory = Find<MeshType, type>(resourceID); memory.has_value()) {
+                if (auto memory = Find<vertexType, memType>(resourceID); memory.has_value()) {
                     return memory.value()->second.Copy();
                 }
 
