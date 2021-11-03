@@ -299,7 +299,6 @@ namespace Framework::Graphics{
             return false;
         }
 
-        //auto vkVertexDescriptions = std::vector<VkVertexInputBindingDescription>(vertexDescriptions.size());
         auto vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
         auto vkVertexAttributes   = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
         if (vkVertexAttributes.size() != vertexAttributes.size()) {

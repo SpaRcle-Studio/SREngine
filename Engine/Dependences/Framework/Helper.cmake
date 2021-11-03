@@ -19,6 +19,7 @@ set(HELPER_SRC
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Input/InputSystem.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Utils/StringUtils.cpp
+        ${FRAMEWORK_ROOT_DIR}/Helper/src/Utils/Stacktrace.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Helper/src/Events/EventManager.cpp
 
