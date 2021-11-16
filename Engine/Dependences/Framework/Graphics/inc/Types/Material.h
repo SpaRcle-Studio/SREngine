@@ -25,6 +25,8 @@ namespace Framework::Graphics::Types {
     private:
         ~Material();
     private:
+        std::vector<Mesh*>         m_subscriptions  = {};
+
         const Environment*         m_env            = nullptr;
 
         bool                       m_transparent    = false;
@@ -39,17 +41,6 @@ namespace Framework::Graphics::Types {
     private:
         bool FreeTextures();
     public:
-        SR_FORCE_INLINE void UseWithDefShader() const noexcept {
-            if (m_diffuse) {
-                m_env->BindTexture(0, m_diffuse->GetID());
-                Shader::GetDefaultGeometryShader()->SetInt("diffuseMap", 0);
-                Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", true);
-            } else{
-                m_env->BindTexture(0, 0);
-                Shader::GetDefaultGeometryShader()->SetInt("diffuseMap", 0);
-                Shader::GetDefaultGeometryShader()->SetBool("hasDiffuse", false);
-            }
-        }
         void UseVulkan();
         void UseOpenGL() const;
     public:
@@ -64,7 +55,7 @@ namespace Framework::Graphics::Types {
         void SetColor(Helper::Math::Vector3 color) { this->m_color = {color.x, color.y, color.z, 1}; }
         void SetColor(glm::vec4 color)             { this->m_color = color;                          }
 
-        [[nodiscard]] Helper::Math::Vector3 GetColor() const { return glm::vec3(this->m_color); }
+        [[nodiscard]] glm::vec4 GetColor() const { return this->m_color; }
 
         void SetDiffuse(Texture* tex);
         void SetNormal(Texture* tex);

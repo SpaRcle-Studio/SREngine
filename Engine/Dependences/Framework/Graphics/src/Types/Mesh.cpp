@@ -22,6 +22,7 @@
 #include <Types/Geometry/SkinnedMesh.h>
 #include <Types/Geometry/DebugWireframeMesh.h>
 #include <Memory/MeshManager.h>
+#include <Memory/MeshAllocator.h>
 
 #include <Window/Window.h>
 
@@ -67,21 +68,6 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     return true;
 }
 
-Mesh *Mesh::Allocate(MeshType type) {
-    switch (type) {
-        case MeshType::Static: return new Mesh3D();
-        case MeshType::Wireframe:
-            break;
-        case MeshType::Skinned:
-            break;
-        case MeshType::Unknown:
-        default:
-            return nullptr;
-    }
-
-    return nullptr;
-}
-
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath, MeshType type) {
     std::string path = ResourceManager::Instance().GetResourcesFolder() + "/Models/" + localPath;
 
@@ -91,7 +77,8 @@ std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& lo
 
     uint32_t counter = 0;
 ret:
-    if (IResource* find = ResourceManager::Instance().Find("Mesh", localPath + " - "+ std::to_string(counter))) {
+    const std::string resId = localPath + " - "+ std::to_string(counter) + " " + EnumMeshTypeToString(type);
+    if (IResource* find = ResourceManager::Instance().Find("Mesh", resId)) {
         if (Mesh* copy = ((Mesh*)(find))->Copy(nullptr)) {
             meshes.push_back(copy);
             counter++;
@@ -109,12 +96,11 @@ ret:
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
     if (ext == "obj") {
-        if (withIndices)
-            meshes = ObjLoader::LoadWithIndices(path);
-        else
-            meshes = ObjLoader::Load(path);
+        meshes = ObjLoader::Load(path, withIndices, type);
     }
     else if (ext == "fbx") {
+        SRAssert(type == MeshType::Static)
+
         if (!FbxLoader::Debug::IsInit())
             FbxLoader::Debug::Init([](const std::string& msg) { Helper::Debug::Error(msg); });
 
@@ -128,7 +114,8 @@ ret:
                 withIndices);
 
         for (const auto& shape : fbx.GetShapes()) {
-            auto* mesh = new Mesh3D(shape.name);
+            auto* mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
+            mesh->SetGeometryName(shape.name);
             mesh->SetMaterial(new Material());
 
             if (withIndices)
@@ -149,7 +136,7 @@ ret:
     }
 
     for (uint32_t i = 0; i < static_cast<uint32_t>(meshes.size()); i++) {
-        meshes[i]->m_resource_id = localPath + " - " + std::to_string(i);
+        meshes[i]->m_resource_id = localPath + " - " + std::to_string(i) + " " + EnumMeshTypeToString(type);
     }
 
     return meshes;
@@ -170,10 +157,8 @@ bool Mesh::IsCanCalculate() const {
     }
 
     if (!m_shader) {
-        if (!Shader::GetDefaultGeometryShader()) {
-            Debug::Error("Mesh::IsCanCalculate() : mesh have not shader!");
-            return false;
-        }
+        Debug::Error("Mesh::IsCanCalculate() : mesh have not shader!");
+        return false;
     }
 
     if (!m_material){
@@ -203,7 +188,7 @@ bool Mesh::DrawOnInspector() {
     if (m_material) {
         Helper::GUI::DrawTextOnCenter("Material");
 
-        glm::vec3 color = m_material->GetColor().ToGLM();
+        glm::vec3 color = m_material->GetColor();
         if (ImGui::InputFloat3("Color", &color[0]))
             m_material->SetColor(color);
 
@@ -219,13 +204,7 @@ bool Mesh::DrawOnInspector() {
         Helper::GUI::DrawTextOnCenter("Shader");
         ImGui::Text("Name: %s", m_shader->GetName().c_str());
     } else {
-        auto shader = Shader::GetDefaultGeometryShader();
-        if (!shader)
-            Helper::GUI::DrawTextOnCenter("Shader (default-missing)");
-        else {
-            Helper::GUI::DrawTextOnCenter("Shader (default)");
-            ImGui::Text("Name: %s", shader->GetName().c_str());
-        }
+        Helper::GUI::DrawTextOnCenter("Shader (missing)");
     }
 
     return true;
@@ -253,10 +232,10 @@ Mesh *Mesh::Copy(Mesh *mesh) const {
         Debug::Log("Mesh::Copy() : copy \"" + m_resource_id + "\" mesh...");
 
     // TODO: in feature mesh will be resource
-    auto material = m_material ? m_material->Copy() : new Material();
+    //auto material = m_material ? m_material->Copy() : new Material();
 
-    mesh->SetMaterial(material);
-    mesh->SetShader(m_shader);
+    mesh->SetMaterial(new Material());
+    mesh->SetShader(nullptr);
 
     mesh->m_barycenter = m_barycenter;
     mesh->m_position   = m_position;
@@ -307,10 +286,7 @@ void Mesh::ReCalcModel() {
 
     this->m_modelMat = modelMat;
 
-    if (m_UBO >= 0) {
-        Mesh3dUBO ubo = { m_modelMat };
-        m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
-    }
+    this->UpdateUBO();
 }
 
 void Mesh::WaitCalculate() const  {
@@ -332,6 +308,9 @@ bool Mesh::Calculate()  {
 }
 
 void Mesh::SetMaterial(Material *material) {
+    if (m_material) {
+        Helper::Debug::Warn("Mesh::SetMaterial() : material already exists! Memory leak possible...");
+    }
     m_material = material;
 }
 
@@ -340,4 +319,5 @@ void Mesh::SetShader(Framework::Graphics::Shader *shader) {
         Environment::Get()->SetBuildState(false);
         m_isCalculated = false;
     }
+    m_shader = shader;
 }

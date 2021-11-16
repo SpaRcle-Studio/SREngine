@@ -92,7 +92,7 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan()  {
                 { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
         });
 
-        Mesh3dUBO ubo = { m_modelMat }; m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
+        UpdateUBO();
 
         //!==========================
 
@@ -109,17 +109,18 @@ void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
     if (m_isDestroy || (!m_isCalculated && !this->Calculate()))
         return;
 
-    if (!m_shader) {
-        ConfigureShader(Shader::GetDefaultGeometryShader())
-        this->m_material->UseWithDefShader();
-    }
-    else {
-        ConfigureShader(m_shader)
-        this->m_material->UseOpenGL();
-    }
+    ConfigureShader(m_shader)
+    this->m_material->UseOpenGL();
 
     if (!m_useIndices)
         this->m_env->DrawTriangles(m_countVertices);
     else
         Helper::Debug::Error("Mesh::DrawOpenGL() : isn't support indices!");
+}
+
+void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
+    if (m_UBO >= 0) {
+        Mesh3dUBO ubo = { m_modelMat };
+        m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
+    }
 }

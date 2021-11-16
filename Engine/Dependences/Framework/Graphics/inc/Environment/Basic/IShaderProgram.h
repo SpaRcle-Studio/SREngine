@@ -14,6 +14,19 @@ namespace Framework::Graphics {
     SR_ENUM_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
     SR_ENUM_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
+    SR_ENUM_CLASS(PrimitiveTopology,
+            Unknown,
+            PointList,
+            LineList,
+            LineStrip,
+            TriangleList,
+            TriangleStrip,
+            TriangleFan,
+            LineListWithAdjacency,
+            LineStripWithAdjacency,
+            TriangleListWithAdjacency,
+            TriangleStripWithAdjacency,
+            PathList)
 
     SR_ENUM_CLASS(DepthCompare,
         Unknown,
@@ -27,13 +40,21 @@ namespace Framework::Graphics {
         Always)
 
     struct SRShaderCreateInfo {
-        PolygonMode  polygonMode;
-        CullMode     cullMode;
-        DepthCompare depthCompare;
+        PolygonMode       polygonMode       = PolygonMode::Unknown;
+        CullMode          cullMode          = CullMode::Unknown;
+        DepthCompare      depthCompare      = DepthCompare::Unknown;
+        PrimitiveTopology primitiveTopology = PrimitiveTopology::Unknown;
 
-        bool blendEnabled;
-        bool depthWrite;
-        bool depthTest;
+        bool blendEnabled = false;
+        bool depthWrite   = false;
+        bool depthTest    = false;
+
+        [[nodiscard]] bool Validate() const {
+            return polygonMode       != PolygonMode::Unknown
+                   && cullMode          != CullMode::Unknown
+                   && depthCompare      != DepthCompare::Unknown
+                   && primitiveTopology != PrimitiveTopology::Unknown;
+        }
     };
 
     static LayoutBinding GetBindingType(const std::string& line) {

@@ -319,7 +319,8 @@ namespace Framework::Graphics{
                 VulkanTools::AbstractDepthOpToVk(shaderCreateInfo.depthCompare),
                 shaderCreateInfo.blendEnabled,
                 shaderCreateInfo.depthWrite,
-                shaderCreateInfo.depthTest))
+                shaderCreateInfo.depthTest,
+                VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology)))
         {
             Helper::Debug::Error("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;

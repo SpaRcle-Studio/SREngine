@@ -89,7 +89,7 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
             return false;
         }
 
-        auto& [indices, vertices] = skyboxObj[0];
+        auto& [name, indices, vertices] = skyboxObj[0];
 
         if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SkyboxVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
             Helper::Debug::Error("Skybox::Calculate() : failed to calculate VBO!");

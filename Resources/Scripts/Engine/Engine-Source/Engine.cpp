@@ -57,10 +57,27 @@ void LoadTsumi() {
     }
 }
 
+void LoadWireframe() {
+    Render* render = Engine::Get()->GetRender();
+
+    auto mesh = Mesh::Load("engine/cubeWireframe.obj", MeshType::Wireframe)[0];
+
+    mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::DebugWireframe)));
+    mesh->GetMaterial()->SetColor(0.0, 1.0, 0.0);
+
+    auto cube = g_scene->Instance("Wireframe");
+    render->RegisterMesh(mesh);
+    mesh->WaitCalculate();
+    cube->AddComponent(DynamicCastMeshToComponent(mesh));
+}
+
 void LoadCubes() {
     Render* render = Engine::Get()->GetRender();
     auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
     auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
+
+    mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+
     render->RegisterTexture(texture);
 
     auto cube = g_scene->Instance("Cube");
@@ -72,9 +89,11 @@ void LoadCubes() {
 
     for (uint32_t i = 1; i <= 4; i++) {
         mesh = mesh->Copy(nullptr);
+        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+        mesh->GetMaterial()->SetDiffuse(texture);
+
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
-        mesh->GetMaterial()->SetDiffuse(texture);
 
         auto newCube = g_scene->Instance("Cube");
         newCube->AddComponent(DynamicCastMeshToComponent(mesh));
@@ -103,6 +122,9 @@ void LoadMiku() {
 
     for (uint32_t i = 0; i < 6; i++) {
         Mesh* mesh = fbx_meshes[i];
+
+        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+
         Texture* texture = textures[i];
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
@@ -139,6 +161,7 @@ EXTERN void Start() {
 
     LoadMiku();
     LoadCubes();
+    LoadWireframe();
 }
 
 void CameraMove(float dt) {

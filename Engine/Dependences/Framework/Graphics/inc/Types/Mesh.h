@@ -80,7 +80,6 @@ namespace Framework::Graphics::Types {
         Math::Vector3                m_scale      = { 1, 1, 1 };
         glm::mat4                    m_modelMat   = glm::mat4(0);
     public:
-        static Mesh* Allocate(MeshType type);
         static std::vector<Mesh*> Load(const std::string& path, MeshType type);
     public:
         /** \brief Set mesh to destroy in res manager
@@ -95,6 +94,7 @@ namespace Framework::Graphics::Types {
 
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
+        virtual void UpdateUBO() = 0;
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();

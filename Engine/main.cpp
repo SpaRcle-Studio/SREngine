@@ -18,6 +18,7 @@
 #include <Types/Geometry/Mesh3D.h>
 #include <Animations/Bone.h>
 #include <Input/InputSystem.h>
+#include <Memory/MeshAllocator.h>
 
 using namespace Framework;
 
@@ -59,10 +60,10 @@ int main() {
     // Register all components
     {
         //Component::RegisterComponent("SkinnedMesh", []() -> Component* { return new SkinnedMesh();  });
-        Component::RegisterComponent("Mesh3D",        []() -> Mesh3D*    { return new Mesh3D();       });
-        Component::RegisterComponent("Rigidbody",     []() -> Rigidbody* { return new Rigidbody();    });
-        Component::RegisterComponent("Camera",        []() -> Camera*    { return Camera::Allocate(); });
-        Component::RegisterComponent("Bone",          []() -> Bone*      { return new Bone();         });
+        Component::RegisterComponent("Mesh3D",        []() -> Mesh3D*    { return Memory::MeshAllocator::Allocate<Mesh3D>(); });
+        Component::RegisterComponent("Rigidbody",     []() -> Rigidbody* { return new Rigidbody();                           });
+        Component::RegisterComponent("Camera",        []() -> Camera*    { return Camera::Allocate();                        });
+        Component::RegisterComponent("Bone",          []() -> Bone*      { return new Bone();                                });
 
         Component::RegisterEvents("Bone", [](Component* bone){
             dynamic_cast<Bone*>(bone)->SetRender(Engine::Get()->GetRender());

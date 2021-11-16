@@ -30,6 +30,7 @@ namespace Framework {
         static void RegisterRender(EvoScript::AddressTableGen* generator);
         static void RegisterUtils(EvoScript::AddressTableGen* generator);
         static void RegisterWindow(EvoScript::AddressTableGen* generator);
+        static void RegisterShader(EvoScript::AddressTableGen* generator);
         static void RegisterTransform(EvoScript::AddressTableGen* generator);
         static void RegisterInput(EvoScript::AddressTableGen* generator);
         static void RegisterSkybox(EvoScript::AddressTableGen* generator);

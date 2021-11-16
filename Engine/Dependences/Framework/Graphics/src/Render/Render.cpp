@@ -32,8 +32,6 @@ bool Framework::Graphics::Render::Create(Window* window) {
     this->InsertShader(Shader::StandardID::Skybox, Shader::Load(this, "skybox"));
     this->InsertShader(Shader::StandardID::DebugWireframe, Shader::Load(this, "debugWireframe"));
 
-    Shader::SetDefaultGeometryShader(m_shaders[Shader::StandardID::Geometry]);
-
     this->m_grid = EditorGrid::Create("engine/grid", this);
 
     this->m_isCreate = true;
@@ -87,7 +85,6 @@ bool Framework::Graphics::Render::Close() {
     }
 
     auto data = std::string();
-    data.append("\n\tT meshes         : " + std::to_string(m_geometry.m_total));
     data.append("\n\tNew meshes       : " + std::to_string(m_newMeshes.size()));
     data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
     Debug::Graph("Render::Close() : close render..." + data);
@@ -224,13 +221,13 @@ void Framework::Graphics::Render::PollEvents() {
 }
 
 Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_env->GetPipeLine()) {
-    //std::cout <<  m_meshes.capacity() << std::endl;
-    //!!!!!!!!!m_meshes.reserve(500 * 500);
     m_newMeshes.reserve(500);
     m_removeMeshes.reserve(500);
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     if (skybox)
         Helper::Debug::Log("Render::SetSkybox() : set new \"" + skybox->GetName() + "\" skybox...");
     else
@@ -244,16 +241,16 @@ void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *
 }
 
 void Framework::Graphics::Render::FreeTexture(Framework::Graphics::Types::Texture *texture) {
-    m_mutex.lock();
+    std::lock_guard<std::mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Graph("Render::FreeTexture() : register texture to remove...");
 
     m_texturesToFree.push_back(texture);
-
-    m_mutex.unlock();
 }
 void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Graph("Render::RegisterTexture() : register new texture...");
 
@@ -261,29 +258,11 @@ void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
     texture->SetRender(this);
 }
 
-Framework::Graphics::Types::Mesh *Framework::Graphics::Render::GetMesh(size_t absoluteID) noexcept {
-    // TODO: See
-    if (absoluteID < m_geometry.m_total) {
-        for (auto const& [key, val] : m_geometry.m_groups) {
-            if (absoluteID < m_geometry.m_counters[key]) {
-                return val[abs(int32_t(m_geometry.m_total - m_geometry.m_counters[key]) - (int32_t)absoluteID)]; // TODO: can be reason crash!
-            } else continue;
-        }
-    }
-    else {
-        //return this->m_transparent_meshes[absoluteID];
-        Helper::Debug::Error("Render::GetMesh() : TODO!");
-        // TODO!
-        return nullptr;
-    }
-
-    return nullptr;
-}
-
 bool Framework::Graphics::Render::FreeSkyboxMemory(Skybox* skybox) {
-    m_mutex.lock();
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     this->m_skyboxesToFreeVidMem.emplace_back(skybox);
-    m_mutex.unlock();
+
     return true;
 }
 
@@ -301,6 +280,8 @@ void Framework::Graphics::Render::SetCurrentCamera(Framework::Graphics::Camera *
 }
 
 bool Framework::Graphics::Render::InsertShader(uint32_t id, Shader* shader) {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     if (id >= m_shaders.size())
         m_shaders.resize(id + 1);
 
@@ -312,4 +293,13 @@ bool Framework::Graphics::Render::InsertShader(uint32_t id, Shader* shader) {
     m_shaders[id] = shader;
 
     return true;
+}
+
+Framework::Graphics::Shader *Framework::Graphics::Render::FindShader(uint32_t id) const {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    if (m_shaders.size() <= id || !m_shaders[id])
+        return nullptr;
+
+    return m_shaders[id];
 }

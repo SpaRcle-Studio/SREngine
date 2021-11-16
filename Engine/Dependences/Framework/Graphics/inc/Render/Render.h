@@ -51,8 +51,9 @@ namespace Framework::Graphics {
 
         Window*                       m_window                   = nullptr;
         Camera*                       m_currentCamera            = nullptr;
-        std::mutex                    m_mutex                    = std::mutex();
+        mutable std::mutex            m_mutex                    = std::mutex();
 
+        // TO_REFACTORING
         std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Mesh*>();
         std::vector<Types::Mesh*>     m_removeMeshes             = std::vector<Mesh*>();
         std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
@@ -60,7 +61,6 @@ namespace Framework::Graphics {
 
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };
-        MeshCluster                   m_wireframeGeometry        = { };
 
         RenderSkybox                  m_skybox                   = { nullptr, nullptr };
 
@@ -76,11 +76,6 @@ namespace Framework::Graphics {
         const PipeLine                m_pipeLine                 = PipeLine::Unknown;
     public:
         static Render* Allocate();
-    public:
-        [[nodiscard]] size_t GetAbsoluteCountMeshes() const noexcept { return m_geometry.m_total + m_transparentGeometry.m_total; }
-        [[nodiscard]] Types::Mesh* GetMesh(size_t absoluteID) noexcept;
-
-        [[nodiscard]] size_t GetCountTransparentMeshes()  const noexcept { return m_transparentGeometry.m_total; }
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsRun() const noexcept { return m_isRun; }
         [[nodiscard]] SR_FORCE_INLINE bool IsInit() const noexcept { return m_isInit; }
@@ -101,6 +96,7 @@ namespace Framework::Graphics {
         }
 
         bool InsertShader(uint32_t id, Shader* shader);
+        Shader* FindShader(uint32_t id) const;
 
         /** \brief Can get a nullptr value for removing skybox */
         void SetSkybox(Skybox* skybox);
@@ -125,14 +121,13 @@ namespace Framework::Graphics {
     public:
         virtual void UpdateUBOs() { }
 
-        virtual bool DrawGeometry() = 0;
-        virtual bool DrawDebugWireframe() = 0;
-        virtual bool DrawSkybox()   = 0;
+        virtual void DrawGeometry()       = 0;
+        virtual void DrawSkybox()         = 0;
     public:
-        virtual void DrawGrid()                 noexcept = 0;
-        virtual void DrawSingleColors()         noexcept = 0;
-        virtual bool DrawTransparentGeometry()  noexcept = 0;
-        virtual bool DrawSettingsPanel()        noexcept = 0;
+        virtual void DrawGrid()                 = 0;
+        virtual void DrawSingleColors()         = 0;
+        virtual void DrawTransparentGeometry()  = 0;
+        virtual void DrawSettingsPanel()        = 0;
     };
 }
 

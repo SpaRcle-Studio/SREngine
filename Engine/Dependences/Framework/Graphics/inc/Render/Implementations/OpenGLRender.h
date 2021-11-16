@@ -10,7 +10,7 @@
 namespace Framework::Graphics::Impl {
     class OpenGLRender : public Render {
     public:
-        void DrawSingleColors() noexcept override {
+        void DrawSingleColors() override {
             /*this->m_flatGeometryShader->Use();
 
             this->m_currentCamera->UpdateShader<ProjViewUBO>(m_flatGeometryShader);
@@ -38,59 +38,37 @@ namespace Framework::Graphics::Impl {
             this->m_env->UseShader(SR_NULL_SHADER);*/
         }
 
-        bool DrawSettingsPanel() noexcept override {
+        void DrawSettingsPanel() override {
             if (!m_isRun)
-                return false;
+                return;
 
             ImGui::Begin("Render settings");
 
             ImGui::Text("Pipeline name: %s", m_env->GetPipeLineName().c_str());
-
-            //!!!ImGui::Text("Count meshes: %zu", m_countMeshes);
-            ImGui::Text("Count transparent meshes: %u", m_transparentGeometry.m_total);
 
             ImGui::Checkbox("Grid", &m_gridEnabled);
             ImGui::Checkbox("Skybox", &m_skyboxEnabled);
             ImGui::Checkbox("WireFrame", &m_wireFrame);
 
             ImGui::End();
-
-            return true;
         }
 
-        bool DrawDebugWireframe() override {
-            return true;
+        void DrawGeometry() override {
+            SRDrawMeshCluster(m_geometry, OpenGL, {
+                this->m_currentCamera->UpdateShader<ProjViewUBO>(shader);
+            })
         }
 
-        bool DrawGeometry() override {
-            Shader::GetDefaultGeometryShader()->Use();
-            this->m_currentCamera->UpdateShader<ProjViewUBO>(Shader::GetDefaultGeometryShader());
-
-            for (auto const& [key, val] : m_geometry.m_groups) {
-                this->m_env->BindVBO(val[0]->GetVBO<true>());
-                this->m_env->BindIBO(val[0]->GetIBO<true>());
-
-                for (uint32_t i = 0; i < m_geometry.m_counters[key]; i++)
-                    val[i]->DrawOpenGL();
-            }
-
-            return true;
-        }
-
-        bool DrawSkybox() override {
-            //if (Helper::Debug::Profile()) { EASY_FUNCTION(profiler::colors::Coral); }
-
+        void DrawSkybox() override {
             if (m_skybox.m_current && m_skyboxEnabled) {
                 m_shaders[Shader::StandardID::Skybox]->Use();
                 m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
 
                 m_skybox.m_current->DrawOpenGL();
             }
-
-            return true;
         }
 
-        void DrawGrid() noexcept override {
+        void DrawGrid() override {
             if (!m_gridEnabled)
                 return;
 
@@ -98,8 +76,8 @@ namespace Framework::Graphics::Impl {
                 this->m_grid->Draw();
         }
 
-        bool DrawTransparentGeometry() noexcept override {
-            return false;
+        void DrawTransparentGeometry() override {
+
         }
     };
 }

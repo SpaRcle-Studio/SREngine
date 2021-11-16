@@ -44,6 +44,7 @@ namespace Framework::Graphics {
             Transparent = 2,
             DebugWireframe = 3,
             Grid = 4,
+            Custom = 0xffff,
         } StandardID;
         typedef enum {
             None         = 0,
@@ -66,7 +67,6 @@ namespace Framework::Graphics {
         bool                  m_isInit               = false;
     private:
         inline static Shader* g_currentShader        = nullptr;
-        inline static Shader* g_stdGeometry          = nullptr;
     private: // For vulkan
         SRShaderCreateInfo    m_shaderCreateInfo     = {};
         VertexAttributes      m_verticesAttributes   = {};
@@ -98,15 +98,6 @@ namespace Framework::Graphics {
          * name - уникальное имя этого шейдера из конфига
          * */
         static Shader* Load(Render* render, const std::string& name);
-
-        [[nodiscard]] SR_FORCE_INLINE static Shader* GetDefaultGeometryShader() {
-        #ifndef SR_RELEASE
-            if (!g_stdGeometry)
-                Helper::Debug::Error("Shader::GetDefaultGeometryShader() : shader is nullptr!");
-        #endif
-            return g_stdGeometry;
-        }
-        static bool SetDefaultGeometryShader(Shader* shader);
     public:
         [[nodiscard]] SR_FORCE_INLINE int32_t GetID() {
             if (!m_isInit) {

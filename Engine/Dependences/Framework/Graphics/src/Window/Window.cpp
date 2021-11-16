@@ -236,7 +236,6 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetScissor();
 
                                     this->m_render->DrawGeometry();
-                                    this->m_render->DrawDebugWireframe();
                                     this->m_render->DrawSkybox();
                                 }
                                 m_env->EndRender();
@@ -459,6 +458,7 @@ void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* came
 
     camera->GetPostProcessing()->Complete();
 
+    /*
     if (m_requireGetAimed) {
         if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {
             m_render->DrawSingleColors();
@@ -473,7 +473,7 @@ void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* came
                 this->m_aimedMesh = this->m_render->GetMesh(id);
             m_requireGetAimed = false;
         }
-    }
+    }*/
 }
 
 void Framework::Graphics::Window::CentralizeCursor() noexcept {

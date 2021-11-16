@@ -1,14 +1,8 @@
 //
-// Created by Nikita on 17.11.2020.
+// Created by Monika on 15.11.2021.
 //
 
 #ifndef GAMEENGINE_FBXLOADER_H
 #define GAMEENGINE_FBXLOADER_H
-
-namespace Framework::Graphics {
-    class FbxLoader {
-
-    };
-}
 
 #endif //GAMEENGINE_FBXLOADER_H

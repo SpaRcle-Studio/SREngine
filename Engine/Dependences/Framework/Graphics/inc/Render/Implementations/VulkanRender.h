@@ -7,49 +7,51 @@
 
 #include <Render/Render.h>
 
+#include <Types/Skybox.h>
+#include <Render/Camera.h>
+
 namespace Framework::Graphics::Impl {
     class VulkanRender : public Render {
-        void DrawSingleColors() noexcept override {
+        void DrawSingleColors() override {
 
         }
 
-        bool DrawSettingsPanel() noexcept override {
-            return true;
+        void DrawSettingsPanel() override {
+
         }
 
         void UpdateUBOs() override {
             if (m_currentCamera) {
-                this->m_currentCamera->UpdateShader<ProjViewUBO>(Shader::GetDefaultGeometryShader());
+                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::DebugWireframe]);
+                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::Geometry]);
                 this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::Transparent]);
                 this->m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
             }
         }
 
-        bool DrawDebugWireframe() override {
-            m_shaders[Shader::StandardID::DebugWireframe]->Use();
+        void DrawGeometry() override {
+            //SRDrawMeshCluster(m_geometry, Vulkan, ;)
 
-            this->m_env->UnUseShader();
+            static Environment* env = Environment::Get();
 
-            return true;
-        }
+            for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
+                if (shader) shader->Use();
+                else
+                    continue;
 
-        bool DrawGeometry() override {
-            Shader::GetDefaultGeometryShader()->Use();
+                for (auto const& [key, meshGroup] : subCluster.m_groups) {
+                    env->BindVBO(meshGroup[0]->GetVBO<true>());
+                    env->BindIBO(meshGroup[0]->GetIBO<true>());
 
-            for (auto const& [key, val] : m_geometry.m_groups) {
-                this->m_env->BindVBO(val[0]->GetVBO<true>());
-                this->m_env->BindIBO(val[0]->GetIBO<true>());
+                    for (const auto &mesh : meshGroup)
+                        mesh->DrawVulkan();
+                }
 
-                for (const auto& mesh : val)
-                    mesh->DrawVulkan();
+                env->UnUseShader();
             }
-
-            this->m_env->UnUseShader();
-
-            return true;
         }
 
-        bool DrawSkybox() override {
+        void DrawSkybox() override {
             if (m_skybox.m_current && m_skyboxEnabled) {
                 m_shaders[Shader::StandardID::Skybox]->Use();
 
@@ -57,15 +59,13 @@ namespace Framework::Graphics::Impl {
 
                 m_env->UnUseShader();
             }
-
-            return true;
         }
 
-        bool DrawTransparentGeometry() noexcept override {
-            return false;
+        void DrawTransparentGeometry() override {
+
         }
 
-        void DrawGrid() noexcept override {
+        void DrawGrid() override {
 
         }
     };

@@ -39,23 +39,7 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
     Debug::Graph("PostProcessing::Init() : initializing post processing...");
 
     {
-        this->m_postProcessingShader = new Shader(m_render, "engine/postProcessing");
-        this->m_postProcessingShader->SetCreateInfo({
-            .polygonMode  = PolygonMode::Fill,
-            .cullMode     = CullMode::Back,
-            .depthCompare = DepthCompare::LessOrEqual,
-            .blendEnabled = true,
-            .depthWrite   = false,
-            .depthTest    = false
-        });
-        /*
-         *  0 - ubo
-         *  1 - geometry
-         *  2 - skybox
-         */
-        this->m_postProcessingShader->SetUniforms({
-            {{0, UBOType::Common}, sizeof(PostProcessingUBO)},
-        });
+        this->m_postProcessingShader = Shader::Load(m_render, "postProcessing");
 
         this->m_blurShader = new Shader(m_render, "engine/blur");
     }

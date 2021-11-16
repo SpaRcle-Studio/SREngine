@@ -20,8 +20,10 @@ namespace Framework::Graphics::Types {
         uint32_t m_countVertices = 0;
     public:
         template<bool fast> [[nodiscard]] int32_t GetVBO();
-    protected:
+
         virtual void SetVertexArray(const std::any& vertices) = 0;
+
+    protected:
 
         Mesh* Copy(Mesh* destination) const override {
             if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {
@@ -60,9 +62,13 @@ namespace Framework::Graphics::Types {
     template<Vertices::Type type> bool VertexMesh::CalculateVBO(void* data) {
         using namespace Memory;
 
+        if (m_countVertices == 0 || !data) {
+            Debug::Error("VertexMesh::Calculate() : invalid vertices!");
+        }
+
         if (m_VBO = MeshManager::Instance().CopyIfExists<type, MeshManager::VBO>(m_resource_id); m_VBO == SR_ID_INVALID) {
             if (m_VBO = this->m_env->CalculateVBO(data, type, m_countVertices); m_VBO == SR_ID_INVALID) {
-                Debug::Error("Mesh3D::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
+                Debug::Error("VertexMesh::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
                 this->m_hasErrors = true;
                 return false;
             } else
@@ -77,7 +83,7 @@ namespace Framework::Graphics::Types {
 
         if (MeshManager::Instance().Free<type, MeshManager::VBO>(m_resource_id) == MeshManager::FreeResult::Freed) {
             if (!m_env->FreeVBO(m_VBO)) {
-                Debug::Error("Mesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
+                Debug::Error("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
                 return false;
             }
         }

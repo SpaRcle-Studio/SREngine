@@ -34,6 +34,7 @@ namespace Framework {
         RegisterResourceManager(generator);
         RegisterGameObject(generator);
         RegisterCamera(generator);
+        RegisterShader(generator);
         RegisterWindow(generator);
         RegisterRender(generator);
         RegisterTransform(generator);
@@ -106,11 +107,7 @@ namespace Framework {
     }
 
     void API::RegisterUtils(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("_64byte", "Utils", { "vector","string", "vector", "stdint.h",  });
 
-        generator->RegisterNewClass("_128byte", "Utils");
-        generator->RegisterNewClass("_52byte", "Utils");
-        generator->RegisterNewClass("_16byte", "Utils");
     }
 
     void API::RegisterComponent(EvoScript::AddressTableGen *generator) {
@@ -183,6 +180,8 @@ namespace Framework {
         ESRegisterMethodArg0(Graphics::, EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
         ESRegisterMethodArg0(Graphics::, EvoScript::Public, generator, Mesh, GetMaterial, Material*)
 
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, SetShader, void, ESArg1(Shader* shader), ESArg1(shader))
+
         generator->AddIncompleteType("Render", "Mesh");
     }
 
@@ -227,22 +226,10 @@ namespace Framework {
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
-        const std::string meshCluster = "[" + std::to_string(sizeof(MeshCluster)) + "]";
-
-        generator->RegisterNewClass("MeshCluster", "Render");
-
-        const std::string renderSkybox = "[" + std::to_string(sizeof(RenderSkybox)) + "]";
-
         generator->RegisterNewClass("Render", "Render",
-                { "vector", "mutex", "Utils.h", "stdint.h", "map", "Skybox.h", "Texture.h" });
+                { "vector", "mutex", "Utils.h", "stdint.h", "map", "Skybox.h", "Texture.h", "Shader.h" });
 
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawGeometry, bool)
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawDebugWireframe, bool)
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawSkybox, bool)
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawGrid, void)
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawSingleColors, void)
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawTransparentGeometry, bool)
-        ESRegisterMethodArg0(Graphics::, EvoScript::Private, generator, Render, DrawSettingsPanel, bool)
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Render, FindShader, Shader*, ESArg1(uint32_t id), ESArg1(id))
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Render, SetSkybox, void, ESArg1(Skybox* skybox), ESArg1(skybox))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Render, RegisterMesh, void, ESArg1(Mesh* mesh), ESArg1(mesh))
@@ -403,6 +390,7 @@ namespace Framework {
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetNormal, void, ESArg1(Texture* texture), ESArg1(texture))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetSpecular, void, ESArg1(Texture* texture), ESArg1(texture))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetGlossiness, void, ESArg1(Texture* texture), ESArg1(texture))
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetColor, void, ESArg3(float r, float g, float b), ESArg3(r, g, b))
 
         generator->AddIncompleteType("Mesh", "Material");
     }
@@ -461,6 +449,18 @@ namespace Framework {
     void API::RegisterCasts(EvoScript::CastingGen *generator) {
         ESRegisterDynamicCast(generator, Graphics::, Mesh, Helper::, Component)
         ESRegisterDynamicCast(generator, Graphics::, Camera, Helper::, Component)
+    }
+
+    void API::RegisterShader(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("Shader", "Shader");
+
+        generator->RegisterEnum("StandardID", "Shader", true, {
+                { "Geometry",       Shader::StandardID::Geometry       },
+                { "Skybox",         Shader::StandardID::Skybox         },
+                { "Transparent",    Shader::StandardID::Transparent    },
+                { "DebugWireframe", Shader::StandardID::DebugWireframe },
+                { "Grid",           Shader::StandardID::Grid           },
+        });
     }
 }
 

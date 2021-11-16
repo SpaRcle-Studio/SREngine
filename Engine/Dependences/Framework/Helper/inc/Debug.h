@@ -116,7 +116,7 @@ namespace Framework::Helper {
     #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ") \
         .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
 
-    #define SRAssert2(expr, msg) { if (!expr) Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
+    #define SRAssert2(expr, msg) { if (!(expr)) Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
     #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.");
 #endif
 

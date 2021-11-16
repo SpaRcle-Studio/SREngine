@@ -12,15 +12,28 @@
 #include <utility>
 #include <Types/Uniforms.h>
 
+namespace Framework::Graphics::Memory {
+    class MeshAllocator;
+}
+
 namespace Framework::Graphics::Types {
     class Mesh3D : public IndexedMesh {
-    public:
+        friend class Memory::MeshAllocator;
+    private:
         explicit Mesh3D(const std::string& name = "UnnamedMesh3D")
             : IndexedMesh(name) { };
     protected:
         ~Mesh3D() override = default;
+
+    public:
+        typedef Vertices::Mesh3DVertex VertexType;
+
     private:
-        Vertices::Mesh3DVertices m_vertices = Vertices::Mesh3DVertices();
+        std::vector<VertexType> m_vertices = std::vector<VertexType>();
+
+    protected:
+        void UpdateUBO() override;
+
     public:
         void DrawVulkan() override;
         void DrawOpenGL() override;

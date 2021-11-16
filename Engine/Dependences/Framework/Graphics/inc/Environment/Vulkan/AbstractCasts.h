@@ -90,11 +90,32 @@ namespace Framework::Graphics::VulkanTools {
         return abstract;
     }
 
+    static SR_FORCE_INLINE VkPrimitiveTopology AbstractPrimitiveTopologyToVk(PrimitiveTopology primitiveTopology) {
+        switch (primitiveTopology) {
+            case PrimitiveTopology::PointList: return VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
+            case PrimitiveTopology::LineList: return VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
+            case PrimitiveTopology::LineStrip: return VK_PRIMITIVE_TOPOLOGY_LINE_STRIP;
+            case PrimitiveTopology::TriangleList: return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+            case PrimitiveTopology::TriangleStrip: return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
+            case PrimitiveTopology::TriangleFan: return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN;
+            case PrimitiveTopology::LineListWithAdjacency: return VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
+            case PrimitiveTopology::LineStripWithAdjacency: return VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY;
+            case PrimitiveTopology::TriangleListWithAdjacency: return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY;
+            case PrimitiveTopology::TriangleStripWithAdjacency: return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY;
+            case PrimitiveTopology::PathList: return VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
+            case PrimitiveTopology::Unknown:
+                break;
+        }
+        return VkPrimitiveTopology::VK_PRIMITIVE_TOPOLOGY_MAX_ENUM;
+    }
+
     static SR_FORCE_INLINE VkPolygonMode AbstractPolygonModeToVk(PolygonMode polygonMode) {
         switch (polygonMode) {
             case PolygonMode::Fill:  return VK_POLYGON_MODE_FILL;
             case PolygonMode::Line:  return VK_POLYGON_MODE_LINE;
             case PolygonMode::Point: return VK_POLYGON_MODE_POINT;
+            case PolygonMode::Unknown:
+                break;
         }
         return VkPolygonMode::VK_POLYGON_MODE_MAX_ENUM;
     }
@@ -105,6 +126,8 @@ namespace Framework::Graphics::VulkanTools {
             case CullMode::Front:        return VK_CULL_MODE_FRONT_BIT;
             case CullMode::Back:         return VK_CULL_MODE_BACK_BIT;
             case CullMode::FrontAndBack: return VK_CULL_MODE_FRONT_AND_BACK;
+            case CullMode::Unknown:
+                break;
         }
         return VkCullModeFlagBits::VK_CULL_MODE_FLAG_BITS_MAX_ENUM;
     }
@@ -119,6 +142,8 @@ namespace Framework::Graphics::VulkanTools {
             case DepthCompare::NotEqual:       return VK_COMPARE_OP_NOT_EQUAL;
             case DepthCompare::GreaterOrEqual: return VK_COMPARE_OP_GREATER_OR_EQUAL;
             case DepthCompare::Always:         return VK_COMPARE_OP_ALWAYS;
+            case DepthCompare::Unknown:
+                break;
         }
         return VkCompareOp::VK_COMPARE_OP_MAX_ENUM;
     }

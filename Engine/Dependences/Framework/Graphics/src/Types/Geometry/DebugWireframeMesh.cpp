@@ -18,6 +18,38 @@ Framework::Graphics::Types::Mesh* Framework::Graphics::Types::DebugWireframeMesh
     return wireFramed;
 }
 
+void  Framework::Graphics::Types::DebugWireframeMesh::DrawVulkan() {
+    if (!this->IsReady() || m_isDestroy)
+        return;
+
+    if (!m_isCalculated)
+        if (m_hasErrors || !this->Calculate())
+            return;
+
+    if (m_descriptorSet < 0) {
+        if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
+            Helper::Debug::Error("DebugWireframeMesh::DrawVulkan() : failed to calculate descriptor set!");
+            m_hasErrors = true; return;
+        }
+
+        if (m_UBO = m_env->AllocateUBO(sizeof(WireframeUBO)); m_UBO < 0) {
+            Helper::Debug::Error("DebugWireframeMesh::DrawVulkan() : failed to allocate uniform buffer object!");
+            m_hasErrors = true; return;
+        }
+
+        this->m_env->UpdateDescriptorSets(m_descriptorSet, {
+                { DescriptorType::Uniform, { 0, m_UBO                                 } },
+                { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
+        });
+
+        UpdateUBO();
+    }
+
+    this->m_env->BindDescriptorSet(m_descriptorSet);
+
+    this->m_env->DrawIndices(this->m_countIndices);
+}
+
 bool Framework::Graphics::Types::DebugWireframeMesh::Calculate() {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
@@ -61,5 +93,12 @@ void Framework::Graphics::Types::DebugWireframeMesh::SetVertexArray(const std::a
     catch (const std::bad_any_cast& e) {
         Helper::Debug::Error("DebugWireframeMesh::SetVertexArray() : "
                              "failed to cast any to vertices! \n\tMessage: " + std::string(e.what()));
+    }
+}
+
+void Framework::Graphics::Types::DebugWireframeMesh::UpdateUBO() {
+    if (m_UBO >= 0) {
+        WireframeUBO ubo = { m_modelMat, m_material->GetColor() };
+        m_env->UpdateUBO(m_UBO, &ubo, sizeof(WireframeUBO));
     }
 }

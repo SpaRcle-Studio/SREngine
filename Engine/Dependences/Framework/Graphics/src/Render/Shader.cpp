@@ -110,17 +110,6 @@ bool Framework::Graphics::Shader::Link() {
     return true;
 }
 
-bool Framework::Graphics::Shader::SetDefaultGeometryShader(Shader* shader) {
-    if (g_stdGeometry) {
-        Debug::Warn("Shader::SetDefaultGeometryShader() : shader already set!");
-        return false;
-    }
-    else {
-        g_stdGeometry = shader;
-        return true;
-    }
-}
-
 bool Framework::Graphics::Shader::Use() noexcept {
     if (!m_isInit) {
         if (m_isError)
@@ -192,7 +181,7 @@ bool Framework::Graphics::Shader::SetCreateInfo(Framework::Graphics::SRShaderCre
     } else
         this->m_shaderCreateInfo = shaderCreateInfo;
 
-    return true;
+    return m_shaderCreateInfo.Validate();
 }
 
 bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> &uniforms) {
@@ -268,7 +257,7 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
     };
 
     auto infoParser = [=](Shader* shader, const Xml::Node& node) {
-        SRShaderCreateInfo createInfo = {};
+        auto createInfo = SRShaderCreateInfo();
         if (auto info = getInheritNode(node, "Info")) {
             if (auto value = info.GetNode("PolygonMode"))
                 createInfo.polygonMode = StringToEnumPolygonMode(value.GetAttribute("value").ToString());
@@ -279,13 +268,16 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
             if (auto value = info.GetNode("DepthCompare"))
                 createInfo.depthCompare = StringToEnumDepthCompare(value.GetAttribute("value").ToString());
 
+            if (auto value = info.GetNode("PrimitiveTopology"))
+                createInfo.primitiveTopology = StringToEnumPrimitiveTopology(value.GetAttribute("value").ToString());
+
             if (auto value = info.GetNode("DepthWrite"))
                 createInfo.depthWrite = value.GetAttribute("value").ToBool();
 
             if (auto value = info.GetNode("DepthTest"))
                 createInfo.depthTest = value.GetAttribute("value").ToBool();
         }
-        shader->SetCreateInfo(createInfo);
+        SRAssert2(shader->SetCreateInfo(createInfo), "Failed to validate shader create info!");
     };
 
     auto shaderParser = [=](const Xml::Node& node) -> Shader* {
@@ -309,7 +301,8 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
             if (!shader)
                 Helper::Debug::Error("Shader::Load() : failed to load \"" + name + "\" shader!");
             return shader;
-        }
+        } else
+            Helper::Debug::Error("Shader::Load() : shader \"" + name + "\" have not config!");
     } else
         Helper::Debug::Error("Shader::Load() : create info file not found! \n\tPath: " + createInfoPath);
 
