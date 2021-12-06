@@ -1,7 +1,0 @@
-[submodule "Engine/Core/Dependences/Framework/Depends/EvoVulkan"]
-    path = Engine/Core/Dependences/Framework/Depends/EvoVulkan
-    url = https://github.com/Monika0000/EvoVulkan
-
-[submodule "Engine/Core/Dependences/Framework/Depends/pugixml"]
-    path = Engine/Core/Dependences/Framework/Depends/pugixml
-    url = https://github.com/zeux/pugixml
