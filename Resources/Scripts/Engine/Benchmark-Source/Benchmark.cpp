@@ -24,7 +24,7 @@ SafePtr<Scene> g_scene;
 
 void CreateScene() {
     g_scene = Scene::New("New scene");
-    Engine::Get()->SetScene(g_scene);
+    Engine::Instance().SetScene(g_scene);
 }
 
 void CreateCamera() {
@@ -36,7 +36,7 @@ void CreateCamera() {
 }
 
 void FullScene() {
-    Render* render = Engine::Get()->GetRender();
+    Render* render = Engine::Instance().GetRender();
     auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
     auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
     render->RegisterTexture(texture);
@@ -46,7 +46,7 @@ void FullScene() {
     mesh->WaitCalculate();
     mesh->GetMaterial()->SetDiffuse(texture);
     cube->AddComponent(DynamicCastMeshToComponent(mesh));
-    cube->GetTransform()->Translate(Vector3(4, 0, 0));
+    cube->GetTransform()->Translate(FVector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
         mesh = mesh->Copy(nullptr);
@@ -59,7 +59,7 @@ void FullScene() {
         cube->AddChild(newCube);
         cube = newCube;
 
-        cube->GetTransform()->Translate(Vector3(2, 0, 0));
+        cube->GetTransform()->Translate(FVector3(2, 0, 0));
     }
 }
 
@@ -77,16 +77,16 @@ EXTERN void Awake() {
 }
 
 EXTERN void Start() {
-    Engine* engine = Engine::Get();
+    auto&& engine = Engine::Instance();
 
-    g_window = engine->GetWindow();
+    g_window = engine.GetWindow();
     g_window->SetGUIEnabled(false);
     g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
 
-    Render* render = engine->GetRender();
+    Render* render = engine.GetRender();
     render->SetSkybox(g_skybox);
 }
 

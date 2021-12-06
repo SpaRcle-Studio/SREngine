@@ -29,7 +29,7 @@ EXTERN void Awake() {
 }
 
 void LoadTsumi() {
-    Render* render = Engine::Get()->GetRender();
+    Render* render = Engine::Instance().GetRender();
 
     auto hair = Texture::Load("Tsumi/hair.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
     //auto face = Texture::Load("Tsumi/face.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
@@ -58,7 +58,7 @@ void LoadTsumi() {
 }
 
 void LoadWireframe() {
-    Render* render = Engine::Get()->GetRender();
+    Render* render = Engine::Instance().GetRender();
 
     auto mesh = Mesh::Load("engine/cubeWireframe.obj", MeshType::Wireframe)[0];
 
@@ -72,7 +72,7 @@ void LoadWireframe() {
 }
 
 void LoadCubes() {
-    Render* render = Engine::Get()->GetRender();
+    Render* render = Engine::Instance().GetRender();
     auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
     auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
 
@@ -85,7 +85,7 @@ void LoadCubes() {
     mesh->WaitCalculate();
     mesh->GetMaterial()->SetDiffuse(texture);
     cube->AddComponent(DynamicCastMeshToComponent(mesh));
-    cube->GetTransform()->Translate(Vector3(4, 0, 0));
+    cube->GetTransform()->Translate(FVector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
         mesh = mesh->Copy(nullptr);
@@ -100,12 +100,12 @@ void LoadCubes() {
         cube->AddChild(newCube);
         cube = newCube;
 
-        cube->GetTransform()->Translate(Vector3(2, 0, 0));
+        cube->GetTransform()->Translate(FVector3(2, 0, 0));
     }
 }
 
 void LoadMiku() {
-    Render* render = Engine::Get()->GetRender();
+    Render* render = Engine::Instance().GetRender();
 
     auto body = Texture::Load("Miku_Bodytex_DM.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
     auto face = Texture::Load("Miku_Facetex_A.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
@@ -137,20 +137,20 @@ void LoadMiku() {
 }
 
 EXTERN void Start() {
-    Engine* engine = Engine::Get();
+    auto&& engine = Engine::Instance();
     g_scene = Scene::New("New scene");
-    engine->SetScene(g_scene);
+    engine.SetScene(g_scene);
 
     Vector2 size = { 1366, 768 }; // 848, 480
 
-    g_window = engine->GetWindow();
+    g_window = engine.GetWindow();
     g_window->SetGUIEnabled(false);
     g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
 
-    Render* render = engine->GetRender();
+    Render* render = engine.GetRender();
     render->SetSkybox(g_skybox);
 
     Camera* camera = Camera::Allocate(size.x, size.y);
@@ -159,31 +159,37 @@ EXTERN void Start() {
     g_camera = g_scene->Instance("Camera");
     g_camera->AddComponent(DynamicCastCameraToComponent(camera));
 
+    g_scene->SetObserver(g_camera);
+
     LoadMiku();
     LoadCubes();
-    LoadWireframe();
 }
 
 void CameraMove(float dt) {
-    auto dir = Input::GetMouseDrag() * dt;
-    auto wheel = Input::GetMouseWheel() * dt;
+    if (g_camera.LockIfValid()) {
+        auto dir = Input::GetMouseDrag() * dt;
+        auto wheel = Input::GetMouseWheel() * dt;
 
-    if (wheel != 0) {
-        auto forward = g_camera->GetTransform()->Forward();
-        g_camera->GetTransform()->Translate(forward * wheel);
-    }
+        if (wheel != 0) {
+            auto forward = g_camera->GetTransform()->Forward();
+            g_camera->GetTransform()->Translate(forward * wheel);
+        }
 
-    if (Input::GetKey(KeyCode::MouseRight)) {
-        g_camera->GetTransform()->Rotate(Vector3(dir.y, dir.x, 0.0));
-    }
+        if (Input::GetKey(KeyCode::MouseRight)) {
+            g_camera->GetTransform()->Rotate(FVector3(dir.y, dir.x, 0.0));
+        }
 
-    if (Input::GetKey(KeyCode::MouseMiddle)) {
-        auto right = g_camera->GetTransform()->Right() * dt;
-        auto up = g_camera->GetTransform()->Up() * dt;
+        if (Input::GetKey(KeyCode::MouseMiddle)) {
 
-        g_camera->GetTransform()->Translate(
-                (up * dir.y) + (right * -dir.x)
-        );
+            auto right = g_camera->GetTransform()->Right() * dt;
+            auto up = g_camera->GetTransform()->Up() * dt;
+
+            g_camera->GetTransform()->Translate(
+                    (up * dir.y) + (right * -dir.x)
+            );
+        }
+
+        g_camera.Unlock();
     }
 }
 
@@ -210,15 +216,16 @@ EXTERN void FixedUpdate() {
         frames = 0; deltaTime = 0; }
 
     if (Input::GetKeyDown(KeyCode::F2)) {
-        auto camera = (Camera*)g_camera->GetComponent("Camera");
-        camera->SetDirectOutput(!camera->IsDirectOutput());
-        g_window->SetGUIEnabled(!g_window->IsGUIEnabled());
+        if (g_camera.LockIfValid()) {
+            auto camera = (Camera *) g_camera->GetComponent("Camera");
+            camera->SetDirectOutput(!camera->IsDirectOutput());
+            g_window->SetGUIEnabled(!g_window->IsGUIEnabled());
+            g_camera.Unlock();
+        }
     }
 
     CameraMove(0.1f);
     KeyCombinations();
-
-    //g_miku->GetTransform()->RotateAround(g_miku->GetBarycenter(), Vector3(1, 1, 0), 0.2);
 }
 
 EXTERN void Update(float dt) {

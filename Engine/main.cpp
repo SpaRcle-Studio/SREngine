@@ -2,7 +2,7 @@
 // Created by Nikita on 29.12.2020.
 //
 
-#ifdef WIN32
+#ifdef SR_WIN32
     #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
@@ -19,12 +19,19 @@
 #include <Animations/Bone.h>
 #include <Input/InputSystem.h>
 #include <Memory/MeshAllocator.h>
+#include <World/VisualChunk.h>
+#include <World/VisualRegion.h>
+#include <Utils/CmdOptions.h>
 
 using namespace Framework;
+
+using namespace Framework::Core;
+using namespace Framework::Core::World;
 
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
 using namespace Framework::Helper::Types;
+using namespace Framework::Helper::World;
 
 using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
@@ -33,7 +40,7 @@ using namespace Framework::Graphics::Animations;
 using namespace Framework::Physics;
 using namespace Framework::Physics::Types;
 
-int main() {
+int main(int argc, char **argv) {
     if constexpr (sizeof(size_t) != 8) {
         std::cerr << "The engine only supports 64-bit systems!\n";
         return -1;
@@ -41,8 +48,12 @@ int main() {
 
     std::string exe = FileSystem::GetPathToExe();
     Debug::Init(exe, true, Debug::Theme::Dark);
-    Debug::SetLevel(Debug::Level::High);
-    ResourceManager::Instance().Init(exe + "/../../Resources");
+    Debug::SetLevel(Debug::Level::Low);
+
+    if (auto folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty())
+        ResourceManager::Instance().Init(exe + "/../../Resources");
+    else
+        ResourceManager::Instance().Init(folder);
 
 #ifdef WIN32
     ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
@@ -66,8 +77,11 @@ int main() {
         Component::RegisterComponent("Bone",          []() -> Bone*      { return new Bone();                                });
 
         Component::RegisterEvents("Bone", [](Component* bone){
-            dynamic_cast<Bone*>(bone)->SetRender(Engine::Get()->GetRender());
+            dynamic_cast<Bone*>(bone)->SetRender(Engine::Instance().GetRender());
         });
+
+        Chunk::SetAllocator([](SRChunkAllocArgs)   -> Chunk*  { return new VisualChunk(SRChunkAllocVArgs);   });
+        Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
     }
 
     if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")
@@ -108,11 +122,11 @@ int main() {
 
     auto physics = new PhysEngine();
 
-    auto engine = Engine::Get();
+    auto&& engine = Engine::Instance();
 
-    if(engine->Create(window, physics)) {
-      if (engine->Init(Engine::MainScriptType::Engine)){
-          if (engine->Run()){
+    if(engine.Create(window, physics)) {
+      if (engine.Init(Engine::MainScriptType::Engine)){
+          if (engine.Run()){
 
           }
           else
@@ -122,13 +136,14 @@ int main() {
     } else
         Debug::Error("Failed creating game engine!");
 
-    if (engine->IsRun()) {
+    if (engine.IsRun()) {
         Debug::System("All systems successfully run!");
 
-        engine->Await(); // await close engine
+        engine.Await(); // await close engine
     }
 
-    engine->Close();
+    engine.Close();
+    Framework::Engine::Destroy();
 
     Debug::System("All systems successfully closed!");
 

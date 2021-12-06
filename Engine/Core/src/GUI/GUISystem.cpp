@@ -65,17 +65,17 @@ void GUISystem::EndChildWindow() {
 }
 
 void GUISystem::DrawTexture(
-    Framework::Helper::Math::Vector2 winSize,
-    Framework::Helper::Math::Vector2 texSize, uint32_t id,
+    Framework::Helper::Math::IVector2 winSize,
+    Framework::Helper::Math::IVector2 texSize, uint32_t id,
     bool centralize)
 {
-    const auto dx = winSize.x / texSize.x;
-    const auto dy = winSize.y / texSize.y;
+    const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
+    const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
 
     if (dy > dx)
-        texSize *= (Helper::Math::Unit)dx;
+        texSize *= dx;
     else
-        texSize *= (Helper::Math::Unit)dy;
+        texSize *= dy;
 
     // Because I use the texture from OpenGL, I need to invert the V from the UV.
 
@@ -125,7 +125,7 @@ void GUISystem::DrawImage(
         window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
 }
 
-void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
+void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
     m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
 
     if (scene.LockIfValid()) {
@@ -241,7 +241,7 @@ void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObj
     });
 }
 
-void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::Scene> scene) {
+void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
     Helper::Types::SafePtr<Helper::GameObject> gameObject;
     if (scene.LockIfValid()) {
         gameObject = scene->GetSelected();
@@ -385,6 +385,32 @@ void GUISystem::DrawGuizmoTools() {
     }
 }
 
+void GUISystem::DrawWorldEdit(Types::SafePtr<Helper::World::Scene> scene) {
+    if (scene.LockIfValid()) {
+        const auto&& observer = scene->GetObserver();
+        const auto offset = observer.m_offset;
+
+        ImGui::Separator();
+        DrawTextOnCenter("Current");
+
+        ImGui::InputFloat3("Chunk", &observer.m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
+        ImGui::InputFloat2("Region", &observer.m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
+
+        ImGui::Separator();
+        DrawTextOnCenter("Offset");
+
+        auto chunkOffset = offset.m_chunk.ToGLM();
+        if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            scene->SetWorldOffset(World::Offset(offset.m_region, chunkOffset));
+
+        auto regionOffset = offset.m_region.ToGLM();
+        if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
+            scene->SetWorldOffset(World::Offset(regionOffset, offset.m_chunk));
+
+        scene.Unlock();
+    }
+}
+
 void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
     if (!camera)
         return;
@@ -394,23 +420,17 @@ void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::S
         if (!window || window->SkipItems)
             return;
 
-        Math::Vector2 img_size = camera->GetSize();
+        auto img_size = camera->GetSize();
 
-        Math::Vector2 pos = {window->Pos.x, window->Pos.y};
-        Math::Vector2 win_size = {window->Size.x, window->Size.y};
+        auto win_size = Math::FVector2(window->Size.x, window->Size.y);
 
         const Helper::Math::Unit dx = win_size.x / img_size.x;
         const Helper::Math::Unit dy = win_size.y / img_size.y;
 
-        if (dx > dy)
-            img_size *= dy;
-        else if (dy > dx)
+        if (dy > dx)
             img_size *= dx;
         else
             img_size *= dy;
-
-        //pos += (win_size - img_size); pos /= 2.f;
-        //ImGuizmo::SetRect(pos.x, pos.y, img_size.x, img_size.y);
 
         static float bounds[] = {-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f};
         static float boundsSnap[] = {0.1f, 0.1f, 0.1f};
@@ -450,30 +470,30 @@ void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::S
                     if (m_centerActive && !barycenter.IsInfinity()) {
                         gameObject->GetTransform()->RotateAround(
                                 barycenter,
-                                Vector3(axis).InverseAxis(1),
+                                FVector3(axis).InverseAxis(1),
                                 (value - old_rotate) * 20.0,
                                 m_currentGuizmoMode == ImGuizmo::LOCAL);
                     } else {
                         if (m_currentGuizmoMode == ImGuizmo::LOCAL)
-                            gameObject->GetTransform()->RotateAxis(Vector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
+                            gameObject->GetTransform()->RotateAxis(FVector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
                         else
-                            gameObject->GetTransform()->GlobalRotateAxis(Vector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
+                            gameObject->GetTransform()->GlobalRotateAxis(FVector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
                     }
                 }
             } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
                 if (value < 1) {
                     if (m_currentGuizmoMode == ImGuizmo::LOCAL)
                         gameObject->GetTransform()->Translate(
-                                gameObject->GetTransform()->Direction(Vector3(axis).InverseAxis(0), true) * value);
+                                gameObject->GetTransform()->Direction(FVector3(axis).InverseAxis(0), true) * value);
                     else
-                        gameObject->GetTransform()->GlobalTranslate(Vector3(axis).InverseAxis(0) * value);
+                        gameObject->GetTransform()->GlobalTranslate(FVector3(axis).InverseAxis(0) * value);
                 }
             } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::SCALE) {
                 if (value == 0)
                     old_scale = 0;
 
                 if (m_currentGuizmoMode == ImGuizmo::MODE::LOCAL)
-                    gameObject->GetTransform()->Scaling(Vector3(axis) * (value - old_scale));
+                    gameObject->GetTransform()->Scaling(FVector3(axis) * (value - old_scale));
 
                 old_scale = value;
             }
@@ -565,7 +585,7 @@ bool GUISystem::BeginMenuBar() {
             }
 
             if (ImGui::MenuItem("Save scene")) {
-                if (auto scene = Engine::Get()->GetScene(); scene.LockIfValid()) {
+                if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
                     auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scenes/", false);
                     if (auto path = FileSystem::SaveFileDialog(scenesPath, "Scene Files(*.scene)"); !path.empty()) {
                         auto sceneName = StringUtils::GetFileNameFromFullPath(path);
@@ -586,7 +606,7 @@ bool GUISystem::BeginMenuBar() {
             }
 
             if (ImGui::MenuItem("Close scene")) {
-
+                Engine::Instance().CloseScene();
             }
 
             if (ImGui::MenuItem("Exit")) {

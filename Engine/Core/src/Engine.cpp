@@ -4,6 +4,7 @@
 
 #include "../inc/Engine.h"
 #include <Types/Time.h>
+#include <Types/Timer.h>
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
@@ -121,6 +122,19 @@ bool Framework::Engine::Run() {
         return false;
     }
 
+    Helper::Debug::Info("Engine::Run() : running world thread...");
+
+    m_worldThread = new Types::Thread([this]() {
+        auto timer = Types::Timer(1.0 / 3.0);
+
+        while(m_isRun) {
+            if (timer.Update() && m_scene.LockIfValid()) {
+                m_scene->Update(timer.GetDeltaTime());
+                m_scene.Unlock();
+            }
+        }
+    });
+
     this->m_isRun = true;
 
     return true;
@@ -129,12 +143,12 @@ bool Framework::Engine::Run() {
 void Framework::Engine::Await() {
     Debug::Info("Engine::Await() : wait close engine...");
 
-    const float updateFrequency = (1.f / 60.f) * 1000.f;
+    const float updateFrequency = (1.f / 60.f) * CLOCKS_PER_SEC;
     float accumulator = updateFrequency;
     using clock = std::chrono::high_resolution_clock;
     auto timeStart = clock::now();
 
-    while (m_window->IsWindowOpen()) {
+    while (m_isRun) {
         auto deltaTime = clock::now() - timeStart;
         timeStart = clock::now();
 
@@ -151,22 +165,18 @@ void Framework::Engine::Await() {
             break;
         }
 
-
-        if (accumulator >= updateFrequency)
+        /// fixed update
+        if (accumulator >= updateFrequency) {
             while (accumulator >= updateFrequency) {
                 Helper::Input::Check();
                 m_compiler->FixedUpdateAll();
                 accumulator -= updateFrequency;
             }
-
-        //if (m_time->Begin()){
-        //    m_compiler->FixedUpdateAll();
-        //    m_time->End();
-        //}
+        }
 
         m_compiler->UpdateAll();
 
-        accumulator += (float)deltaTime.count() / 1000000.f;
+        accumulator += (float)deltaTime.count() / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
     }
 
     m_mainScript->Close();
@@ -175,6 +185,8 @@ void Framework::Engine::Await() {
 
 bool Framework::Engine::Close() {
     Helper::Debug::Info("Engine::Close() : close game engine...");
+
+    m_isRun = false;
 
     if (m_window && m_window->IsRun()) {
         m_window->Close();
@@ -196,7 +208,13 @@ bool Framework::Engine::Close() {
         m_time = nullptr;
     }
 
-    return false;
+    if (m_worldThread) {
+        Helper::Debug::Info("Engine::Close() : destroy world thread...");
+        m_worldThread->TryJoin();
+        delete m_worldThread;
+    }
+
+    return true;
 }
 
 bool Framework::Engine::RegisterLibraries() {
@@ -230,4 +248,17 @@ bool Framework::Engine::LoadMainScript() {
         return false;
     } else
         return true;
+}
+
+bool Framework::Engine::CloseScene() {
+    if (m_scene.LockIfValid()) {
+        bool ans = m_scene.Free([](World::Scene* scene) {
+            scene->Destroy();
+            scene->Free();
+        });
+        m_scene.Unlock();
+        return ans;
+    }
+    else
+        return false;
 }

@@ -9,6 +9,7 @@
 #include <functional>
 #include <string>
 #include <atomic>
+#include <unordered_set>
 
 template<typename T>
 class SafePtr {
@@ -28,6 +29,8 @@ public:
     void Lock();
     void Unlock();
 
+    bool LockIfValid();
+
     void* GetRawPtr() const { return (void*)m_ptr; }
     bool Valid() { return *m_valid; }
     bool Free(const std::function<void(T *ptr)> &freeFun);
@@ -38,11 +41,22 @@ private:
     bool*                  m_valid;
 };
 
+template<typename T> bool SafePtr<T>::LockIfValid() {
+    Lock();
+
+    if (*m_valid)
+        return true;
+
+    Unlock();
+
+    return false;
+}
+
 template<typename T>
 SafePtr<T>::SafePtr(T *ptr) {
     m_ptr = ptr;
     m_count = new std::atomic<uint32_t>(1);
-    m_valid = new bool(true);
+    m_valid = new bool(m_ptr);
     m_lock = new std::atomic<bool>(false);
 }
 
@@ -143,5 +157,22 @@ template<typename T>
 void SafePtr<T>::Unlock() {
     m_lock->store(false, std::memory_order_release);
 }
+
+namespace std {
+    template<typename T> struct hash<SafePtr<T>> {
+        size_t operator()(SafePtr<T> const& ptr) const {
+            return std::hash<void*>()(ptr.GetRawPtr());
+        }
+    };
+
+    template <typename T> struct less<SafePtr<T>> {
+        bool operator()(const SafePtr<T> &lhs, const SafePtr<T> &rhs) const {
+            void* a = lhs.GetRawPtr();
+            void* b = rhs.GetRawPtr();
+            return a < b;
+        }
+    };
+}
+
 
 #endif //SMARTPOINTER_SAFEPOINTER_H

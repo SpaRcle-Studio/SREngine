@@ -9,7 +9,7 @@
 #include <map>
 #include <Math/Vector2.h>
 #include <Environment/Environment.h>
-#include <EntityComponentSystem/Scene.h>
+#include <World/Scene.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Render/Camera.h>
 #include <ImGuizmo.h>
@@ -36,6 +36,7 @@ namespace Framework::Core::GUI {
             return guiSystem;
         }
     private:
+        // TODO: rename or make comments
         inline static const ImVec2 m_sizeB = { 30, 25 };
         inline static const short  m_space = 3;
         inline static const ImVec4 m_def = {0.1, 0.1, 0.1, 0.7};
@@ -87,16 +88,17 @@ namespace Framework::Core::GUI {
         }
 
         void DrawChild(Helper::Types::SafePtr<Helper::GameObject> root);
-        void DrawHierarchy(Helper::Types::SafePtr<Helper::Scene> scene);
-        void DrawInspector(Helper::Types::SafePtr<Helper::Scene> scene);
+        void DrawHierarchy(Helper::Types::SafePtr<Helper::World::Scene> scene);
+        void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
+        void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
 
         void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm);
 
-        [[nodiscard]] Helper::Math::Vector2 GetWindowSize() const {
+        [[nodiscard]] Helper::Math::IVector2 GetWindowSize() const {
             ImVec2 size = ImGui::GetWindowSize();
-            return { (Helper::Math::Unit)size.x, (Helper::Math::Unit)size.y };
+            return { (int32_t)size.x, (int32_t)size.y };
         }
-        void DrawTexture(Helper::Math::Vector2 winSize, Helper::Math::Vector2 texSize, uint32_t id, bool centralize);
+        void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmo(Graphics::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
         void DrawGuizmoTools();
         void BeginDockSpace();

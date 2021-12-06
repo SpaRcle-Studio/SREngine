@@ -8,7 +8,7 @@
 #include <Debug.h>
 #include <Window/Window.h>
 #include <Render/Render.h>
-#include <EntityComponentSystem/Scene.h>
+#include <World/Scene.h>
 #include <Types/Skybox.h>
 #include <Events/EventManager.h>
 #include <Types/Time.h>
@@ -18,9 +18,11 @@
 #include <Types/SafePointer.h>
 
 #include <EvoScriptAPI.h>
+#include <Types/Thread.h>
 
 namespace Framework {
-    class Engine {
+    class Engine : public Singleton<Engine> {
+        friend class Singleton<Engine>;
         friend class API;
     private:
         Engine();
@@ -29,42 +31,38 @@ namespace Framework {
         enum class MainScriptType {
             None, Engine, Game, Benchmark
         };
-    public:
-        inline static Engine* Get() {
-            static Engine* engine = nullptr;
-            if (!engine)
-                engine = new Engine();
-            return engine;
-        }
     private:
-        volatile bool           m_isCreate              = false;
-        volatile bool           m_isInit                = false;
-        volatile bool           m_isRun                 = false;
-        volatile bool           m_isClose               = false;
+        std::atomic<bool>            m_isCreate    = false;
+        std::atomic<bool>            m_isInit      = false;
+        std::atomic<bool>            m_isRun       = false;
+        std::atomic<bool>            m_isClose     = false;
 
-        volatile bool           m_exitEvent             = false;
+        std::atomic<bool>            m_exitEvent   = false;
     private:
-        Engine::MainScriptType  m_scriptType            = MainScriptType::None;
-        Scripting::Script*      m_mainScript            = nullptr;
+        Engine::MainScriptType       m_scriptType  = MainScriptType::None;
+        Scripting::Script*           m_mainScript  = nullptr;
 
-        Scripting::Compiler*    m_compiler              = nullptr;
-        Graphics::Window*       m_window                = nullptr;
-        Graphics::Render*       m_render                = nullptr;
-        Types::SafePtr<Scene>   m_scene                 = Types::SafePtr<Scene>(nullptr);
+        Scripting::Compiler*         m_compiler    = nullptr;
+        Graphics::Window*            m_window      = nullptr;
+        Graphics::Render*            m_render      = nullptr;
+        Types::SafePtr<World::Scene> m_scene       = Types::SafePtr<World::Scene>(nullptr);
 
-        Helper::Types::Time*    m_time                  = nullptr;
+        Helper::Types::Time*         m_time        = nullptr;
+        Helper::Types::Thread*       m_worldThread = nullptr;
 
-        Physics::PhysEngine*    m_physics               = nullptr;
+        Physics::PhysEngine*         m_physics     = nullptr;
     private:
         bool RegisterLibraries();
         bool LoadMainScript();
     public:
-        static inline void Reload() {
+        static void Reload() {
             Helper::FileSystem::Reload();
             EventManager::Push(EventManager::Event::Exit);
         }
 
-        bool SetScene(const Types::SafePtr<Scene>& scene) { // TODO: add thread security!
+        bool CloseScene();
+
+        bool SetScene(const Types::SafePtr<World::Scene>& scene) { // TODO: add thread security!
             if (m_scene.Valid() && scene == m_scene) {
                 Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
                 return false;
@@ -75,7 +73,7 @@ namespace Framework {
         }
 
         [[nodiscard]] inline Helper::Types::Time* GetTime() const noexcept { return this->m_time; }
-        [[nodiscard]] inline Types::SafePtr<Scene> GetScene() const noexcept { return m_scene; }
+        [[nodiscard]] inline Types::SafePtr<World::Scene> GetScene() const noexcept { return m_scene; }
         [[nodiscard]] inline Graphics::Window* GetWindow() const noexcept { return m_window; }
         [[nodiscard]] inline Graphics::Render* GetRender() const noexcept { return m_render; }
         [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }

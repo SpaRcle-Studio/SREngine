@@ -20,14 +20,14 @@ int32_t completeTexID = -1;
 
 EXTERN void Start() {
     gui = GUISystem::Get();
-    Engine* engine = Engine::Get();
-    window = engine->GetWindow();
+    auto&& engine = Engine::Instance();
+    window = engine.GetWindow();
 }
 
 EXTERN void OnGUI() {
     gui->BeginDockSpace();
 
-    if (SafePtr<Scene> scene = Engine::Get()->GetScene(); scene.Valid()) {
+    if (SafePtr<Scene> scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
         if (gui->BeginWindow("Scene")) {
             if (completeTexID < 0) {
                 if (SafePtr<GameObject> gm = scene->FindByComponent("Camera"); gm.Valid()) {
@@ -49,15 +49,21 @@ EXTERN void OnGUI() {
 
             gui->EndWindow();
         }
+        scene.Unlock();
     }
 
     if (gui->BeginWindow("Inspector")) {
-        gui->DrawInspector(Engine::Get()->GetScene());
+        gui->DrawInspector(Engine::Instance().GetScene());
+        gui->EndWindow();
+    }
+
+    if (gui->BeginWindow("World edit")) {
+        gui->DrawWorldEdit(Engine::Instance().GetScene());
         gui->EndWindow();
     }
 
     if (gui->BeginWindow("Hierarchy")) {
-        gui->DrawHierarchy(Engine::Get()->GetScene());
+        gui->DrawHierarchy(Engine::Instance().GetScene());
         gui->EndWindow();
     }
 
