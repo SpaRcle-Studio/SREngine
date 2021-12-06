@@ -1,0 +1,9 @@
+[submodule "Engine/Core/Dependences/Framework/Depends/EvoScript"]
+	path = Engine/Core/Dependences/Framework/Depends/EvoScript
+	url = https://github.com/Monika0000/EvoScript.git
+[submodule "Engine/Core/Dependences/Framework/Depends/EvoVulkan"]
+	path = Engine/Core/Dependences/Framework/Depends/EvoVulkan
+	url = https://github.com/Monika0000/EvoVulkan.git
+[submodule "Engine/Core/Dependences/Framework/Depends/pugixml"]
+	path = Engine/Core/Dependences/Framework/Depends/pugixml
+	url = https://github.com/zeux/pugixml.git
