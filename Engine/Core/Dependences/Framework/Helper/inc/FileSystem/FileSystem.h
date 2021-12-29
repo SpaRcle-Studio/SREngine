@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <FileSystem/Path.h>
 
 namespace Framework::Helper {
 class FileSystem {
@@ -24,6 +25,8 @@ public:
     static bool CreatePath(const std::string& path);
     static std::string GetExecutableFileName();
     static std::string GetPathToExe();
+    static std::string GetFullPath(const std::string& path);
+    static std::string NormalizePath(const std::string& path);
     static std::string GetFullPathToExe();
     static void Reload();
 
@@ -48,7 +51,10 @@ public:
 
     static const char* FileMapView(std::string path);
     static void UnmapFile(const char* str);
-    };
+
+    static std::vector<Path> GetFilesInDir(const std::string& path);
+    static std::vector<Path> GetDirectoriesInDir(const std::string& path);
+};
 }
 
 

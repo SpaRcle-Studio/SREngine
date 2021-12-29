@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_ENVIRONMENT_H
 #define GAMEENGINE_ENVIRONMENT_H
 
-#include <Debug.h>
+#include <GUI.h>
 #include <utility>
 #include <vector>
 #include <array>
@@ -27,6 +27,9 @@
 #define SR_NULL_SHADER -1
 
 namespace Framework::Graphics {
+    typedef ImGuiContext* GUIContext;
+    typedef ImFont* Font;
+
     namespace Vertices {
         struct Mesh3DVertex;
     }
@@ -43,11 +46,14 @@ namespace Framework::Graphics {
     protected:
         inline static std::vector<std::function<void(double x, double y)>> g_scrollEvents = std::vector<std::function<void(double x, double y)>>();
         Types::WindowFormat* m_winFormat = nullptr;
-        glm::vec2 m_screenSize = glm::vec2(0, 0);
         static inline std::mutex g_mutex = std::mutex();
+
+        GUIContext      m_guiContext            = nullptr;
+        Font            m_iconFont              = nullptr;
 
         BasicWindow*    m_basicWindow           = nullptr;
         bool            m_hasErrors             = false;
+        bool            m_guiEnabled            = false;
 
         int32_t         m_currentFBOid          = -1;
         int32_t         m_currentDescID         = -1;
@@ -69,12 +75,17 @@ namespace Framework::Graphics {
             m_needReBuild = !isBuild;
         }
 
+        [[nodiscard]] Font GetIconFont() const { return m_iconFont; }
+        [[nodiscard]] GUIContext GetGUIContext() const { return m_guiContext; }
+        [[nodiscard]] bool IsGUIEnabled() const { return m_guiEnabled; }
+
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
         //void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
         void SetCurrentShaderID(const int32_t& id)  { m_currentShaderID = id;           }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
+        virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }
 
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;    }
         [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                 }
@@ -82,7 +93,6 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;       }
         [[nodiscard]] Types::WindowFormat* GetWindowFormat()               const { return this->m_winFormat; }
         [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;     }
-        [[nodiscard]] SR_FORCE_INLINE glm::vec2 GetScreenSize()            const { return m_screenSize;      }
         [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;             }
         [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;             }
         [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown; }
@@ -130,14 +140,14 @@ namespace Framework::Graphics {
         /// Get descriptor set from dynamic texture descriptor set
        // [[nodiscard]] virtual void* GetDescriptorSetFromDTDSet(uint32_t id) const { return nullptr; }
 
-        [[nodiscard]] virtual SR_FORCE_INLINE std::string GetPipeLineName() const = 0;
+        [[nodiscard]] virtual std::string GetPipeLineName() const = 0;
 
         virtual uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable) { return false; }
+        virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
         virtual void SetWindowIcon(const char* path) {  }
 
         virtual bool PreInit(

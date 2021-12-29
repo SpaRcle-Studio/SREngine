@@ -3,18 +3,27 @@
 //
 
 #include <Environment/Environment.h>
-
-#include <imgui.h>
+#include <GUI.h>
+#include <GUI/Icons.h>
+#include <ResourceManager/ResourceManager.h>
 
 bool Framework::Graphics::Environment::PreInitGUI(const std::string &fontPath) {
     Helper::Debug::Graph("Environment::InitGUI() : pre-initializing ImGUI library...");
 
     {
         //IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
+        m_guiContext = ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
 
         ImFont* pFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 12.0f);
+
+        ImFontConfig config;
+        config.MergeMode = false;
+        config.GlyphMinAdvanceX = 13.0f;
+        static const ImWchar icon_ranges[] = { SR_ICON_MIN, SR_ICON_MAX, 0 };
+        m_iconFont = ImGui::GetIO().Fonts->AddFontFromFileTTF(
+                (Helper::ResourceManager::Instance().GetResourcesFolder() + "\\Fonts\\fa-solid-900.ttf").c_str(),
+                40.0f, &config, icon_ranges);
 
         //io.IniFilename = NULL;
         io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;

@@ -37,6 +37,8 @@ namespace Framework::Helper {
         Debug::Info("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
 
         m_resourcesFolder = resourcesFolder;
+        m_resourcesFolder.Normalize();
+
         m_isInit = true;
 
         m_thread = std::thread(&ResourceManager::GC, this);

@@ -73,8 +73,8 @@ void LoadWireframe() {
 
 void LoadCubes() {
     Render* render = Engine::Instance().GetRender();
-    auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
-    auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
+    auto texture = Texture::Load("Engine/default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
+    auto mesh = Mesh::Load("Engine/cube.obj", MeshType::Static)[0];
 
     mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
 
@@ -141,11 +141,13 @@ EXTERN void Start() {
     g_scene = Scene::New("New scene");
     engine.SetScene(g_scene);
 
-    Vector2 size = { 1366, 768 }; // 848, 480
+    //Vector2 size = { 1366, 768 }; // 848, 480
+    //Vector2 size = { 1366, 768 }; // 848, 480
+    Vector2 size = { 1600, 900 }; // 848, 480
 
     g_window = engine.GetWindow();
     g_window->SetGUIEnabled(false);
-    g_window->Resize(size.x, size.y);
+    //g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
@@ -195,11 +197,11 @@ void CameraMove(float dt) {
 
 void KeyCombinations() {
     if (Input::GetKey(KeyCode::Q))
-        GUISystem::Get()->SetGuizmoTool(0);
+        GUISystem::Instance().SetGuizmoTool(0);
     else if (Input::GetKey(KeyCode::W))
-        GUISystem::Get()->SetGuizmoTool(1);
+        GUISystem::Instance().SetGuizmoTool(1);
     else if (Input::GetKey(KeyCode::E))
-        GUISystem::Get()->SetGuizmoTool(2);
+        GUISystem::Instance().SetGuizmoTool(2);
 }
 
 double deltaTime = 0;

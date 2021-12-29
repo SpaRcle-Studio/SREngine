@@ -37,8 +37,8 @@ void CreateCamera() {
 
 void FullScene() {
     Render* render = Engine::Instance().GetRender();
-    auto texture = Texture::Load("default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
-    auto mesh = Mesh::Load("engine/cube.obj", MeshType::Static)[0];
+    auto texture = Texture::Load("Engine/default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
+    auto mesh = Mesh::Load("Engine/cube.obj", MeshType::Static)[0];
     render->RegisterTexture(texture);
 
     auto cube = g_scene->Instance("Cube");

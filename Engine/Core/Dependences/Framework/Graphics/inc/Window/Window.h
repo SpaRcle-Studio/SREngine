@@ -7,14 +7,13 @@
 
 #include <Types/WindowFormat.h>
 
+#include <GUI.h>
 #include <Render/Render.h>
 #include <Render/Camera.h>
 #include <Environment/Environment.h>
 #include <Render/PostProcessing.h>
 #include <thread>
 #include <mutex>
-#include <imgui.h> // TODO: remove
-#include <imgui_internal.h> // TODO: remove
 #include <functional>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
@@ -32,6 +31,7 @@ namespace Framework::Graphics {
                 bool vsync,
                 bool fullScreen,
                 bool resizable,
+                bool headerEnabled,
                 unsigned int smoothSamples
                 )
                 : m_env(Environment::Get())
@@ -45,6 +45,7 @@ namespace Framework::Graphics {
             this->m_vsync           = vsync;
             this->m_smoothSamples   = smoothSamples;
             this->m_resizable       = resizable;
+            this->m_headerEnabled   = headerEnabled;
         }
     private:
         ~Window() = default;
@@ -76,6 +77,8 @@ namespace Framework::Graphics {
         Render*               m_render                = nullptr;
 
         // TODO: TO_REFACTORING
+        std::mutex            m_mutex                 = std::mutex();
+
         std::mutex            m_camerasMutex          = std::mutex();
         std::vector<Camera*>  m_newCameras            = std::vector<Camera*>();
         uint32_t              m_countNewCameras       = 0;
@@ -97,6 +100,7 @@ namespace Framework::Graphics {
         bool                  m_vsync                 = false;
         bool                  m_fullScreen            = false;
         bool                  m_resizable             = false;
+        bool                  m_headerEnabled         = false;
 
         Math::IVector2        m_windowPos             = { 0, 0 };
         Math::IVector2        m_newWindowPos          = { 0, 0 };
@@ -120,7 +124,7 @@ namespace Framework::Graphics {
             return m_render;
         }
         [[nodiscard]] bool IsRun() const noexcept { return m_isRun; }
-        [[nodiscard]] bool IsGUIEnabled() const noexcept { return m_GUIEnabled.first; }
+        [[nodiscard]] bool IsGUIEnabled() const { return m_GUIEnabled.first; }
         [[nodiscard]] Mesh* PopAimedMesh() noexcept;
         [[nodiscard]] bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept;
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
@@ -129,14 +133,13 @@ namespace Framework::Graphics {
         void Resize(uint32_t w, uint32_t h);
         void CentralizeCursor() noexcept;
 
+        void SetCanvas(GUI::ICanvas* canvas) { m_canvas = canvas; }
         SR_FORCE_INLINE void SetGUIEnabled(bool value) noexcept {
             if (value)
                 Helper::Debug::Log("Window::SetGUIEnabled() : enable gui...");
             else
                 Helper::Debug::Log("Window::SetGUIEnabled() : disable gui...");
 
-            m_env->SetBuildState(false);
-            this->m_env->SetGUIEnabled(value);
             this->m_GUIEnabled.second = value;
         }
     public:
@@ -146,7 +149,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowFocus()           const { return this->m_isWindowFocus;       }
         [[nodiscard]] SR_FORCE_INLINE Math::IVector2 GetWindowSize() const { return m_env->GetWindowSize();      }
     public:
-        bool Create(GUI::ICanvas* canvas);
+        bool Create();
         bool Init();
         bool Run();
         bool Close();

@@ -3,10 +3,31 @@
 //
 
 #include <Environment/Vulkan.h>
-#include <imgui_impl_vulkan.h>
-#include <ImGuizmo.h>
+#include <GUI.h>
+
+#ifdef SR_WIN32
+    #include <vulkan/vulkan_win32.h>
+#endif
 
 namespace Framework::Graphics{
+    const std::vector<const char*> Vulkan::m_validationLayers = {
+            "VK_LAYER_KHRONOS_validation"
+    };
+
+    const std::vector<const char*> Vulkan::m_instanceExtensions = {
+            VK_KHR_SURFACE_EXTENSION_NAME,
+        #ifdef SR_WIN32
+            VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
+        #endif
+        #ifndef SR_RELEASE
+            VK_EXT_DEBUG_UTILS_EXTENSION_NAME
+        #endif
+    };
+
+    const std::vector<const char*> Vulkan::m_deviceExtensions = {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME
+    };
+
     #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
     bool Vulkan::PreInit(
@@ -15,10 +36,11 @@ namespace Framework::Graphics{
             const std::string& engineName,
             const std::string& glslc)
     {
-        EvoVulkan::Tools::VkDebug::Log   = [](const std::string& msg) { Helper::Debug::VulkanLog(SR_VRAM   + msg); };
-        EvoVulkan::Tools::VkDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
-        EvoVulkan::Tools::VkDebug::Error = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Graph = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
+        EvoVulkan::Tools::VkDebug::Log    = [](const std::string& msg) { Helper::Debug::VulkanLog(SR_VRAM   + msg); };
+        EvoVulkan::Tools::VkDebug::Warn   = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
+        EvoVulkan::Tools::VkDebug::Error  = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Graph  = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
+        EvoVulkan::Tools::VkDebug::Assert = [](const std::string& msg) { Helper::Debug::Assert(SR_VRAM      + msg); };
 
         this->m_imgui = new VulkanTypes::VkImGUI();
 
@@ -49,7 +71,7 @@ namespace Framework::Graphics{
         return true;
     }
 
-    bool Vulkan::MakeWindow(const char *winName, bool fullScreen, bool resizable) {
+    bool Vulkan::MakeWindow(const char *winName, bool fullScreen, bool resizable, bool headerEnabled) {
         Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
 
         if (!this->m_winFormat) {
@@ -61,7 +83,6 @@ namespace Framework::Graphics{
 
         m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
             m_kernel->SetSize(w, h);
-            //g_callback(WinEvents::Resize, win, &w, &h);
         });
 
         m_basicWindow->SetCallbackScroll([this](BasicWindow* win, double xoffset, double yoffset) {
@@ -76,7 +97,9 @@ namespace Framework::Graphics{
             return false;
         }
 
-        this->m_kernel->SetSize(m_basicWindow->GetRealWidth(), m_basicWindow->GetRealHeight());
+        m_basicWindow->SetHeaderEnabled(headerEnabled);
+
+        this->m_kernel->SetSize(m_basicWindow->GetSurfaceWidth(), m_basicWindow->GetSurfaceHeight());
 
         return true;
     }
@@ -104,7 +127,7 @@ namespace Framework::Graphics{
         auto window = m_basicWindow;
 
         auto createSurf = [window](const VkInstance& instance) -> VkSurfaceKHR {
-#ifdef WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
+#ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
             if (window->GetType() == BasicWindow::Type::Win32) {
                 VkWin32SurfaceCreateInfoKHR surfaceInfo = {};
                 surfaceInfo.sType     = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
@@ -138,8 +161,6 @@ namespace Framework::Graphics{
             Helper::Debug::Error("Vulkan::Init() : failed to create vulkan memory manager!");
             return false;
         }
-
-        this->m_screenSize = m_basicWindow->GetScreenResolution(0).ToGLM();
 
         return true;
     }
@@ -536,6 +557,10 @@ namespace Framework::Graphics{
             return SR_ID_INVALID;
     }
 
+    Helper::Math::IVector2 Vulkan::GetScreenSize() const {
+        return m_basicWindow->GetScreenResolution();
+    }
+
     //!-----------------------------------------------------------------------------------------------------------------
 
     bool SRVulkan::OnResize()  {
@@ -553,14 +578,17 @@ namespace Framework::Graphics{
         return true;
     }
 
-    void SRVulkan::Render()  {
+    EvoVulkan::Core::RenderResult SRVulkan::Render()  {
         if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
-            this->m_hasErrors = !this->ResizeWindow();
+            this->m_hasErrors |= !this->ResizeWindow();
+
+        if (m_hasErrors)
+            return EvoVulkan::Core::RenderResult::Fatal;
 
         for (const auto& submitInfo : m_framebuffersQueue)
             if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
-                return;
+                return EvoVulkan::Core::RenderResult::Error;
             }
 
         m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
@@ -583,10 +611,26 @@ namespace Framework::Graphics{
         // Submit to queue
         if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
-            return;
+            return EvoVulkan::Core::RenderResult::Error;
         }
 
-        if (this->SubmitFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
-            this->m_hasErrors = !this->ResizeWindow();
+        switch (this->SubmitFrame()) {
+            case EvoVulkan::Core::FrameResult::Success:
+                return EvoVulkan::Core::RenderResult::Success;
+            case EvoVulkan::Core::FrameResult::Error:
+                return EvoVulkan::Core::RenderResult::Error;
+            case EvoVulkan::Core::FrameResult::OutOfDate: {
+                this->m_hasErrors |= !this->ResizeWindow();
+                if (m_hasErrors)
+                    return EvoVulkan::Core::RenderResult::Fatal;
+                else
+                    return EvoVulkan::Core::RenderResult::Success;
+            }
+            case EvoVulkan::Core::FrameResult::DeviceLost:
+                return EvoVulkan::Core::RenderResult::Fatal;
+            default:
+                SRAssertOnce(false);
+                return EvoVulkan::Core::RenderResult::Fatal;
+        }
     }
 }

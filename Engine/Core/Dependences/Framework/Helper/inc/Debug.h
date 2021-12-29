@@ -78,6 +78,8 @@ namespace Framework::Helper {
         static Level GetLevel() { return g_level; }
         static void SetLevel(Level level) { g_level = level; }
 
+        static bool IsRunningUnderDebugger();
+
         static void MakeCrash() {
             System("Function \"MakeCrash\" has been called... >_<");
             for (long long int i = 0; ++i; (&i)[i] = i);
@@ -109,6 +111,7 @@ namespace Framework::Helper {
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
     #define SRAssert2(expr, msg) { expr; }
     #define SRAssert(expr) { expr; }
+    #define SRAssert1(expr) SRAssert(expr)
 #else
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
         if (fun != notEquals) Framework::Helper::Debug::Error(errorMsg)
@@ -116,8 +119,20 @@ namespace Framework::Helper {
     #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ") \
         .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
 
-    #define SRAssert2(expr, msg) { if (!(expr)) Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
+    #define SRAssert2(expr, msg) { if (!(expr)) Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
+
+    #define SRAssert2Once(expr, msg) {                     \
+        static volatile bool g_generated_asserted = false; \
+        if (!g_generated_asserted) {                       \
+            SRAssert2(expr, msg)                           \
+            g_generated_asserted = true;                   \
+        }                                                  \
+    }                                                      \
+
+    #define SRAssert1(expr) SRAssert2(expr, #expr);
+
     #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.");
+    #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.");
 #endif
 
 #endif //HELPER_DEBUG_H

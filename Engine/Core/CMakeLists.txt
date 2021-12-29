@@ -10,6 +10,7 @@ add_library(Core STATIC
         ${CORE_ROOT_DIR}/src/EvoScriptAPI.cpp
         ${CORE_ROOT_DIR}/src/Engine.cpp
         ${CORE_ROOT_DIR}/src/World/VisualChunk.cpp
+        ${CORE_ROOT_DIR}/src/GUI/FileBrowser.cpp
         ${CORE_ROOT_DIR}/src/GUI/EditorGUI.cpp
         ${CORE_ROOT_DIR}/src/GUI/GUISystem.cpp
         ${CORE_ROOT_DIR}/src/World/VisualRegion.cpp)

@@ -10,7 +10,6 @@
 #include <vector>
 #include <iostream>
 #include <Debug.h>
-#include <imgui.h>
 
 #include <Math/Matrix4x4.h>
 

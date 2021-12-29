@@ -43,17 +43,20 @@ namespace Framework::Graphics {
         bool StopGUI() override;
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
+
+        Helper::Math::IVector2 GetScreenSize() const override;
+
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()  const override { return true; }
         [[nodiscard]] SR_FORCE_INLINE bool IsDrawSupport() const override { return true; }
 
-        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName() const override { return "OpenGL"; }
+        [[nodiscard]] std::string GetPipeLineName() const override { return "OpenGL"; }
         [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const override { return PipeLine::OpenGL; }
 
         uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) override;
 
         // ============================= [ WINDOW METHODS ] =============================
 
-        bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
+        bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) override;
 
         bool PreInit(
                 uint32_t smooth_samples,

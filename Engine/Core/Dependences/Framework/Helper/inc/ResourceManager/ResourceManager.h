@@ -6,12 +6,14 @@
 #define HELPER_RESOURCEMANAGER_H
 
 #include <string>
+#include <fstream>
 #include <functional>
 #include <mutex>
 #include <unordered_map>
 #include <thread>
 
 #include "IResource.h"
+#include <FileSystem/Path.h>
 #include <Utils/Singleton.h>
 
 #include <vector>
@@ -38,7 +40,7 @@ namespace Framework::Helper {
         std::atomic<uint64_t> m_countResourcesToDestroy = 0;
 
     private:
-        std::string m_resourcesFolder = "UnSelected";
+        Path m_resourcesFolder = "";
         bool m_isInit = false;
         std::recursive_mutex m_mutex = std::recursive_mutex();
         std::thread m_thread = std::thread();

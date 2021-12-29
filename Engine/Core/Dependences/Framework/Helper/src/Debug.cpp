@@ -2,7 +2,7 @@
 // Created by Nikita on 16.11.2020.
 //
 
-#include "../inc/Debug.h"
+#include "Debug.h"
 #include "FileSystem/FileSystem.h"
 #include <iostream>
 #include <ResourceManager/ResourceManager.h>
@@ -40,7 +40,6 @@ namespace Framework::Helper {
                 g_file << '<' << (float)ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
         }
 
-
         DWORD bg_color = g_theme == Theme::Light ? (WORD)(((int)ConsoleColor::LightGray << 4)) : (WORD)(((int)ConsoleColor::Black << 4));
 
         SetConsoleTextAttribute(Debug::g_console, (bg_color | (int)color));
@@ -58,8 +57,8 @@ namespace Framework::Helper {
         if (g_file.is_open())
             g_file << msg << std::endl;
 
-        if (type == Debug::Type::Assert) {
-        #ifdef SR_MSVC
+        if (type == Debug::Type::Assert && IsRunningUnderDebugger()) {
+        #if defined(SR_WIN32) and defined(SR_MSVC)
             __debugbreak();
         #endif
         }
@@ -70,6 +69,7 @@ namespace Framework::Helper {
 
         setlocale(LC_ALL, "rus");
         setlocale(LC_NUMERIC, "C");
+        //setlocale(LC_ALL, "en_US.UTF-8");
 
         srand(time(NULL));
 
@@ -117,5 +117,13 @@ namespace Framework::Helper {
             if (g_theme == Theme::Light)
                 system("color 70");
         g_ColorThemeIsEnabled = true;
+    }
+
+    bool Debug::IsRunningUnderDebugger() {
+#if defined(SR_WIN32) and defined(SR_MSVC)
+        return ::IsDebuggerPresent() == TRUE;
+#else
+        return false;
+#endif
     }
 }

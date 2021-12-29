@@ -1,10 +1,8 @@
 //
 // Created by Monika on 14.02.2021.
 //
-#define IMGUI_DEFINE_MATH_OPERATORS
 
-#include <imgui.h>
-#include <imgui_internal.h>
+
 #include <GUI/old/DockSpace.h>
 
 void Framework::Graphics::GUI::DockSpace::Begin() {

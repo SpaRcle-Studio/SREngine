@@ -10,16 +10,37 @@
 #include <iostream>
 #include <Windows.h>
 #include <Utils/StringUtils.h>
-
-#include <imgui.h>
-#include <imgui_impl_win32.h>
+#include <Utils/WindowsUtils.h>
 
 #include <Events/EventManager.h>
 #include <Math/Mathematics.h>
 
+#define BORDERWIDTH  5
+#define BORDERSIZE BORDERWIDTH * 2
+#define TITLEBARWIDTH  30
+
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace Framework::Graphics {
+    const int32_t g_hiddenHeaderHeight = 39;
+    const int32_t g_headerHeight = TITLEBARWIDTH;// 31;
+
+    enum class StyleState {
+        Wait, Changing, Changed
+    };
+
+    static int32_t AbsHeightToWin32(int32_t value, bool headerEnabled) {
+        //if (headerEnabled) {
+            return value - TITLEBARWIDTH;
+        //}
+
+        //return value - 39;
+    }
+
+    //static int32_t Win32HeightToAbs(int32_t value) {
+    //    return value + 31;
+    //}
+
     static int GetBorderHeight(HWND hWnd) {
         RECT rcClient, rcWind;
         GetClientRect(hWnd, &rcClient);
@@ -34,9 +55,8 @@ namespace Framework::Graphics {
     private:
         ~Win32Window() = default;
     public:
-        Win32Window(PipeLine pipeLine) : BasicWindow(pipeLine, Type::Win32) {
-
-        }
+        Win32Window(PipeLine pipeLine)
+            : BasicWindow(pipeLine, Type::Win32) { }
         Win32Window(Win32Window&) = delete;
         //Win32Window(const Win32Window&) = delete;
     public:
@@ -67,6 +87,57 @@ namespace Framework::Graphics {
                     OnResized();
                     return 0;
                 }*/
+                /*case WM_SIZE: {
+                if ((wParam != SIZE_MINIMIZED)) {
+                    if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
+                        this->m_realWidth = LOWORD(lParam);
+                        this->m_realHeight = HIWORD(lParam);
+                        //OnResized();
+                    }
+                }
+                break;
+            }*/
+                case WM_NCHITTEST: {
+                    auto point = POINT { LOWORD(lParam), HIWORD(lParam) };
+
+                    // Convert screen coordinates into client
+                    if (!ScreenToClient(m_hWnd, &point)) {
+                        SRAssertOnce(false)
+                        return 0;
+                    }
+
+                    RECT rect;
+                    if(!GetClientRect(hwnd, &rect)) {
+                        SRAssertOnce(false)
+                        return 0;
+                    }
+
+                    rect.top -= 8; // делаем проверку выше на 8 пикселей для удобства
+
+                    int width = rect.right - rect.left;
+                    int height = rect.bottom - rect.top;
+
+                    // Decide what result message should have
+                    if ((std::abs(rect.left + width - point.x) < BORDERSIZE) && (std::abs(rect.top + height - point.y) < BORDERSIZE))
+                        return HTBOTTOMRIGHT;
+                    else if ((std::abs(rect.left - point.x) < BORDERSIZE) && (std::abs(rect.top + height - point.y) < BORDERSIZE))
+                        return HTBOTTOMLEFT;
+                    else if ((std::abs(rect.left + width - point.x) < BORDERSIZE) && (std::abs(rect.top - point.y) < BORDERSIZE))
+                        return HTTOPRIGHT;
+                    else if ((std::abs(rect.left - point.x) < BORDERSIZE) && (std::abs(rect.top - point.y) < BORDERSIZE))
+                        return HTTOPLEFT;
+                    else if (std::abs(rect.left - point.x) < BORDERSIZE)
+                        return HTLEFT;
+                    else if (std::abs(rect.top - point.y) < BORDERSIZE)
+                        return HTTOP;
+                    else if (std::abs(rect.left + width - point.x) < BORDERSIZE)
+                        return HTRIGHT;
+                    else if (std::abs(rect.top + height - point.y) < BORDERSIZE)
+                        return HTBOTTOM;
+                    else {
+                        return DefWindowProc(hwnd, msg, wParam, lParam);
+                    }
+                }
                 case WM_CLOSE: {
                     Helper::Debug::System("Win32Window::CallBack() : WM_CLOSE event has been received!");
                     Helper::EventManager::Push(Helper::EventManager::Event::Exit);
@@ -79,25 +150,33 @@ namespace Framework::Graphics {
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
                 case WM_SIZE: {
-                    if ((wParam != SIZE_MINIMIZED)) {
-                        if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
-                            //Helper::Debug::Log("Win32Window::CallBack() : resize...");
-
-                            m_realWidth = LOWORD(lParam);
-                            m_realHeight = HIWORD(lParam);
-                            this->m_callback_resize(this, GetRealWidth(), GetRealHeight());
-                        }
-                    } else {
-                        m_realWidth = 0;
-                        m_realHeight = 0;
-                        this->m_callback_resize(this, GetRealWidth(), GetRealHeight());
+                    switch (wParam) {
+                        case SIZE_MINIMIZED: m_state = WindowState::Collapsed; break;
+                        case SIZE_MAXIMIZED: m_state = WindowState::Maximized; break;
+                        case SIZE_RESTORED:  m_state = WindowState::Default;   break;
+                        default:
+                            break;
                     }
 
-                    m_collapsed = m_realWidth == 0 || m_realHeight == 0;
+                    if ((wParam != SIZE_MINIMIZED)) {
+                        if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
+                            m_surfaceWidth = LOWORD(lParam);
+                            m_surfaceHeight = HIWORD(lParam);
+
+                            m_resizeReason = ResizeReason::None;
+
+                            this->m_callback_resize(this, GetSurfaceWidth(), GetSurfaceHeight());
+                        }
+                    } else {
+                        m_surfaceWidth = 0;
+                        m_surfaceHeight = 0;
+                        this->m_callback_resize(this, GetSurfaceWidth(), GetSurfaceHeight());
+                    }
+
+                    m_collapsed = m_surfaceWidth == 0 || m_surfaceHeight == 0;
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
-
                 case WM_MOUSEWHEEL: {
                     auto wheel = GET_WHEEL_DELTA_WPARAM(wParam);
 
@@ -105,19 +184,10 @@ namespace Framework::Graphics {
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
-
-                /*case WM_SIZE: {
-                    if ((wParam != SIZE_MINIMIZED)) {
-                        if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
-                            this->m_realWidth = LOWORD(lParam);
-                            this->m_realHeight = HIWORD(lParam);
-                            //OnResized();
-                        }
-                    }
-                    break;
-                }*/
-
-                case(WM_DESTROY):
+                case WM_STYLECHANGING:
+                case WM_STYLECHANGED:
+                    return DefWindowProc(hwnd, msg, wParam, lParam);
+                case WM_DESTROY:
                     PostQuitMessage(0);
                     this->m_windowOpen = false;
                     return 0;
@@ -126,6 +196,18 @@ namespace Framework::Graphics {
             }
         }
     private:
+        [[nodiscard]] Helper::Math::IVector2 GetPosition() const override {
+            HWND hWndParent = GetParent(m_hWnd);
+            POINT p = {0};
+
+            int32_t offsetY = m_headerEnabled ? (31) : 0;
+            int32_t offsetX = m_headerEnabled ? ((16 / 2)) : 0;
+
+            MapWindowPoints(m_hWnd, hWndParent, &p, 1);
+
+            return Helper::Math::IVector2(p.x, p.y + offsetY);
+        }
+
         void Move(int x, int y) override {
             if (m_maximize)
                 return;
@@ -135,78 +217,113 @@ namespace Framework::Graphics {
 
             //! Я ненавижу ебаный WinAPI!!!!!!!!!!!!!!
             //MoveWindow(m_hWnd, x - 16 / 2, y - (31 - 12),
-            MoveWindow(m_hWnd, x - (16 / 2) - 1, y - (39 - 4),
+            //MoveWindow(m_hWnd, x - (16 / 2) - 1, y - (39 - 4),
+
+            //int32_t offsetY = m_headerEnabled ? (39 - 4) : 0;
+            //int32_t offsetX = m_headerEnabled ? ((16 / 2) - 1) : 0;
+
+            int32_t offsetX = m_headerEnabled ? 8 : 0;
+            //int32_t offsetY = m_headerEnabled ? 0 : 0;
+
+            MoveWindow(m_hWnd, x - offsetX, y,
                        (rect.right  - rect.left),
                        (rect.bottom - rect.top), FALSE);
         }
-        /*void OnResize(unsigned __int16 width, unsigned __int16 height) {
-            this->m_width = width;
-            this->m_height = height;
 
-            RECT rect;
-            GetClientRect(m_hWnd, &rect);
+        void Maximize() override {
+            ShowWindow(m_hWnd, SW_MAXIMIZE);
+        }
 
-            DWORD style = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_SIZEBOX | WS_MAXIMIZEBOX;
-            DWORD exStyle = WS_EX_APPWINDOW;
+        void Restore() override {
+            ShowWindow(m_hWnd, SW_RESTORE);
+        }
 
-            AdjustWindowRectEx(&rect, style, FALSE, exStyle);
+        void Collapse() override {
+            ShowWindow(m_hWnd, SW_MINIMIZE);
+        }
 
-            SetWindowLong(m_hWnd, GWL_STYLE, style);
-            SetWindowLong(m_hWnd, GWL_EXSTYLE, exStyle);
-
-            SetWindowPos(m_hWnd, HWND_TOP, rect.left, rect.top,
-                         rect.right - rect.left, rect.bottom - rect.top,
-                         SWP_FRAMECHANGED);
-
+        void Expand() override {
             ShowWindow(m_hWnd, SW_SHOW);
-            SetForegroundWindow(m_hWnd);
-            SetFocus(m_hWnd);
+        }
+
+        void SetHeaderEnabled(bool enable) override {
+            if (m_headerEnabled == enable) {
+                return;
+            }
+
+            m_headerEnabled = enable;
+
+            // костыль, чтобы окно всегда получало событие WM_SIZE, не зависимо от того,
+            // изменился ли размер, иначе будет deadlock
+            SendMessage(m_hWnd, WM_SIZE, 0, 0);
+
+            if (m_headerEnabled) {
+                m_dwStyle |= WS_CAPTION;
+                m_dwStyle |= WS_SIZEBOX;
+                m_dwStyle |= WS_SYSMENU;
+            } else {
+                m_dwStyle &= ~WS_CAPTION;
+                m_dwStyle &= ~WS_SIZEBOX;
+                m_dwStyle &= ~WS_SYSMENU;
+            }
+
+            SetWindowLong(m_hWnd, GWL_STYLE, m_dwStyle);
+            ShowWindow(m_hWnd, 1);
             UpdateWindow(m_hWnd);
-        }*/
+
+            Resize(m_absWidth, m_absHeight);
+            Centralize();
+        }
+
+        void Centralize() override {
+            auto screenSize = this->GetScreenResolution();
+
+            auto posX = (screenSize.x / 2 - m_absWidth / 2);
+            auto posY = (screenSize.y / 2 - m_absHeight / 2);
+
+            this->Move(posX, posY);
+        }
 
         void Resize(uint32_t w, uint32_t h) override {
-            /*auto scr = GetScreenResolution(0);
+            Helper::Debug::Log(Helper::Format("Win32Window::Resize() : set new sizes %ux%u", w, h));
 
-            w += 16;
-            h += 7;
+            RECT newRect = RECT {
+                .left = 0L,
+                .top = 0,
+                .right = static_cast<LONG>(m_headerEnabled ? w + 8 : w /* + 7 */),
+                .bottom = static_cast<LONG>(h /* + 1 */)
+            };
 
-            int x = scr.x / 2 - w / 2;
-            int y = scr.y / 2 - h / 2;
+            AdjustWindowRectEx(&newRect, m_dwStyle, FALSE, m_dwExStyle);
 
-            SetWindowPos(m_hWnd, nullptr, x, y + 4, (int)w, (int)h, 0);*/
+            //this->m_width  = (rec.right - rec.left);
+            //this->m_height = rec.bottom - rec.top;
 
-            //Helper::Debug::Error("Win32Window::Resize() : todo!");
+            m_resizeReason = ResizeReason::AppResize;
 
-            RECT rec;
-            rec.left = 0L;
-            rec.top = 0L;
-            rec.right = w + 8;
-            rec.bottom = h;
-
-            AdjustWindowRectEx(&rec, m_dwStyle, FALSE, m_dwExStyle);
-
-            this->m_width  = rec.right  - rec.left;
-            this->m_height = rec.bottom - rec.top;
-
-            SetWindowPos(m_hWnd, NULL, rec.left, rec.top, rec.right, rec.bottom, SWP_NOMOVE);
+            if (!SetWindowPos(m_hWnd, NULL, newRect.left, newRect.top, newRect.right, newRect.bottom, SWP_NOMOVE)) {
+                SRAssert(false);
+            }
+            UpdateWindow(m_hWnd);
         }
 
         static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
                 return true;
 
-            auto* me = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
-            if (me)
+            if (auto* me = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA)))
                 return me->realWndProc(hWnd, message, wParam, lParam);
+
             return DefWindowProc(hWnd, message, wParam, lParam);
         }
     private:
-        HWND      m_hWnd      = nullptr;
-        HDC       m_hDC       = nullptr;
-        HGLRC     m_hRC       = nullptr;
-        HINSTANCE m_hInst     = nullptr;
-        DWORD     m_dwExStyle = 0;
-        DWORD     m_dwStyle   = 0;
+        HWND                    m_hWnd       = nullptr;
+        HDC                     m_hDC        = nullptr;
+        HGLRC                   m_hRC        = nullptr;
+        HINSTANCE               m_hInst      = nullptr;
+        DWORD                   m_dwExStyle  = 0;
+        DWORD                   m_dwStyle    = 0;
+        std::atomic<StyleState> m_styleState = StyleState::Changed;
     public:
         [[nodiscard]] SR_FORCE_INLINE HINSTANCE GetHINSTANCE() const { return m_hInst; }
         [[nodiscard]] SR_FORCE_INLINE HWND GetHWND() const { return m_hWnd; }
@@ -215,18 +332,49 @@ namespace Framework::Graphics {
 
         }
 
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetRealWidth()  const override { return m_realWidth;  }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetRealHeight() const override { return m_realHeight; }
+        [[nodiscard]] uint32_t GetSurfaceWidth()  const override {
+            return m_surfaceWidth;
+        }
+        [[nodiscard]] uint32_t GetSurfaceHeight() const override {
+            return m_surfaceHeight;
+        }
 
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetWidth()  const override { return m_width;  }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetHeight() const override { return m_height; }
+        [[nodiscard]] Helper::Math::IVector2 GetSize() const override {
+            RECT rcClient, rcWind;
+            POINT ptDiff;
+            GetClientRect(m_hWnd, &rcClient);
+            GetWindowRect(m_hWnd, &rcWind);
+            ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
+            ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
 
-        [[nodiscard]] Helper::Math::IVector2 GetScreenResolution(uint32_t monitorID) const override {
-            RECT size;
-            SystemParametersInfo(SPI_GETWORKAREA, 0, &size, 0);
+            //MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
 
-            return { static_cast<int32_t>(size.right),
-                     static_cast<int32_t>(size.bottom) };
+            return Helper::Math::IVector2(1600, 900);
+        }
+
+        [[nodiscard]] uint32_t GetWidth()  const override {
+            return GetSize().x;
+        }
+        [[nodiscard]] uint32_t GetHeight() const override {
+            return GetSize().y;
+        }
+
+        [[nodiscard]] Helper::Math::IVector2 GetScreenResolution() const override {
+            //RECT size;
+            //SystemParametersInfo(SPI_GETWORKAREA, 0, &size, 0);
+            //return { static_cast<int32_t>(size.right), static_cast<int32_t>(size.bottom) };
+
+            auto const hMonitor { ::MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTONULL) };
+
+            MONITORINFOEXW monInfo;
+            monInfo.cbSize = sizeof(monInfo);
+            if (!GetMonitorInfoW(hMonitor, &monInfo))
+                return {}; // Error
+
+            auto width = std::abs(monInfo.rcMonitor.left - monInfo.rcMonitor.right);
+            auto height = std::abs(monInfo.rcMonitor.top  - monInfo.rcMonitor.bottom);
+
+            return Helper::Math::IVector2(width, height);
         }
 
         void SetIcon(const char* path) override {
@@ -242,10 +390,12 @@ namespace Framework::Graphics {
         }
 
         bool Create(const char* name, int32_t posX, int32_t posY, uint32_t sizeX, uint32_t sizeY, bool fullscreen, bool resizable) override {
-            this->m_realWidth  = sizeX;
-            this->m_realHeight = sizeY;
-
             this->m_hInst = GetModuleHandleA(nullptr);
+
+            m_absWidth = sizeX;
+            m_absHeight = sizeY;
+
+            sizeY = AbsHeightToWin32(sizeY, m_headerEnabled);
 
             WNDCLASSEX wndClass;
 
@@ -277,22 +427,24 @@ namespace Framework::Graphics {
 
                 AdjustWindowRectEx(&windowRect, m_dwStyle, FALSE, m_dwExStyle);
 
-                this->m_width  = windowRect.right - windowRect.left;
-                this->m_height = windowRect.bottom - windowRect.top;
-            }
+                auto width = windowRect.right - windowRect.left;
+                auto height = windowRect.bottom - windowRect.top;
 
-            m_hWnd = CreateWindowEx(0,
-                                    "SREngineWinClass",
-                                    name,
-                                    m_dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
-                                    0,
-                                    0,
-                                    m_width,
-                                    m_height,
-                                    NULL,
-                                    NULL,
-                                    m_hInst,
-                                    NULL);
+                m_resizeReason = ResizeReason::WndCreate;
+
+                m_hWnd = CreateWindowEx(
+                        0, "SREngineWinClass",
+                        name,
+                        m_dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+                        0, 0,
+                        width,
+                        height,
+                        nullptr,
+                        nullptr,
+                        m_hInst,
+                        nullptr
+                );
+            }
 
             if (!this->m_hWnd)
                 return false;

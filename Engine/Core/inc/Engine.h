@@ -14,6 +14,7 @@
 #include <Types/Time.h>
 #include <FileSystem/FileSystem.h>
 #include <Core/PhysEngine.h>
+#include <GUI/EditorGUI.h>
 
 #include <Types/SafePointer.h>
 
@@ -50,6 +51,7 @@ namespace Framework {
         Helper::Types::Time*         m_time        = nullptr;
         Helper::Types::Thread*       m_worldThread = nullptr;
 
+        Core::GUI::EditorGUI*        m_editor      = nullptr;
         Physics::PhysEngine*         m_physics     = nullptr;
     private:
         bool RegisterLibraries();
@@ -72,11 +74,12 @@ namespace Framework {
             }
         }
 
-        [[nodiscard]] inline Helper::Types::Time* GetTime() const noexcept { return this->m_time; }
-        [[nodiscard]] inline Types::SafePtr<World::Scene> GetScene() const noexcept { return m_scene; }
-        [[nodiscard]] inline Graphics::Window* GetWindow() const noexcept { return m_window; }
-        [[nodiscard]] inline Graphics::Render* GetRender() const noexcept { return m_render; }
-        [[nodiscard]] inline bool IsRun() const noexcept { return m_isRun; }
+        [[nodiscard]] inline Helper::Types::Time* GetTime() const { return this->m_time; }
+        [[nodiscard]] inline Types::SafePtr<World::Scene> GetScene() const { return m_scene; }
+        [[nodiscard]] inline Graphics::Window* GetWindow() const { return m_window; }
+        [[nodiscard]] inline Graphics::Render* GetRender() const { return m_render; }
+        [[nodiscard]] inline bool IsRun() const { return m_isRun; }
+        [[nodiscard]] inline Core::GUI::EditorGUI* GetEditor() const { return m_editor; }
     public:
         bool Create(Graphics::Window* window, Physics::PhysEngine* physics);
         bool Init(Engine::MainScriptType mainScriptType);

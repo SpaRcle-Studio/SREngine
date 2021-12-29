@@ -4,6 +4,8 @@
 
 #include <Debug.h>
 #include "GUI/EditorGUI.h"
+#include <GUI/FileBrowser.h>
+#include <ResourceManager/ResourceManager.h>
 
 using namespace Framework::Core::GUI;
 
@@ -18,6 +20,10 @@ bool EditorGUI::Init() {
         Helper::Debug::Error("EditorGUI::Init() : compiler is nullptr!");
         return false;
     }
+
+    m_fileBrowser = new FileBrowser();
+
+    m_fileBrowser->SetFolder(Helper::ResourceManager::Instance().GetResourcesFolder());
 
     this->m_script = Scripting::Script::Allocate(
             "SpaRcle Editor", "Engine/Editor",
@@ -48,6 +54,11 @@ bool EditorGUI::Destroy() {
 }
 
 void EditorGUI::Free() {
+    if (m_fileBrowser) {
+        delete m_fileBrowser;
+        m_fileBrowser = nullptr;
+    }
+
     delete this;
 }
 

@@ -20,12 +20,18 @@ namespace Framework::Helper::World {
 
         Offset() : Offset({ 0, 0 }, { 0, 0, 0 }) { }
 
+        [[nodiscard]] bool Empty() const { return m_region.Empty() && m_chunk.Empty(); }
+
         _FORCE_INLINE_ bool operator==(const Offset &p_v) const {
             return m_chunk == p_v.m_chunk && m_region == p_v.m_region;
         }
 
         _FORCE_INLINE_ bool operator!=(const Offset &p_v) const {
             return m_chunk != p_v.m_chunk || m_region != p_v.m_region;
+        }
+
+        _FORCE_INLINE_ Offset operator-(const Offset &p_v) const {
+            return Offset(m_region - p_v.m_region, m_chunk - p_v.m_chunk);
         }
 
         Math::IVector2 m_region;

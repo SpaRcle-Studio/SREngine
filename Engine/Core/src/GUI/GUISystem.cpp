@@ -2,20 +2,94 @@
 // Created by Nikita on 19.07.2021.
 //
 
-#define IMGUI_DEFINE_MATH_OPERATORS
-
-#include <imgui.h>
-#include <imgui_internal.h>
-#include <imgui_stdlib.h>
-
 #include <GUI/GUISystem.h>
+#include <GUI/FileBrowser.h>
 #include <Input/InputSystem.h>
-
-#include <Events/EventManager.h>
+#include <GUI.h>
+#include <string>
 #include <ResourceManager/ResourceManager.h>
 #include <Engine.h>
+#include <World/Chunk.h>
+
+namespace Framework::Core {
+    inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
+
+    inline static const ImGuiTreeNodeFlags g_node_flags_with_child = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+    inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+}
+
+#define SR_BEGIN_RIGHT_ALIGNMENT() {                                    \
+    const float generatedItemSpacing = ImGui::GetStyle().ItemSpacing.x; \
+    float generatedPos = 0;                                             \
+
+#define SR_END_RIGHT_ALIGNMENT() }
+
+#define SR_RIGHT_BUTTON(name, label, _true, _false) {                         \
+        static float generated_##name##ButtonWidth = 100.0f;                  \
+        generatedPos += generated_##name##ButtonWidth + generatedItemSpacing; \
+        ImGui::SameLine(ImGui::GetWindowWidth() - generatedPos);              \
+        if (ImGui::SmallButton(label)) { _true } else { _false }              \
+        generated_##name##ButtonWidth = ImGui::GetItemRectSize().x;           \
+    }                                                                         \
 
 using namespace Framework::Core::GUI;
+
+/*
+bool HY_ImGui_BeginMainStatusBar()
+{
+    ImGuiContext& g = *GImGui;
+    ImGuiViewportP* viewport = g.Viewports[0];
+    ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainStatusBar");
+
+    // For the main menu bar, which cannot be moved, we honor g.Style.DisplaySafeAreaPadding to ensure text can be visible on a TV set.
+    g.NextWindowData.MenuBarOffsetMinVal = ImVec2(g.Style.DisplaySafeAreaPadding.x, ImMax(g.Style.DisplaySafeAreaPadding.y - g.Style.FramePadding.y, 0.0f));
+
+    // Get our rectangle at the top of the work area
+    //__debugbreak();
+    if (menu_bar_window == NULL || menu_bar_window->BeginCount == 0)
+    {
+        // Set window position
+        // We don't attempt to calculate our height ahead, as it depends on the per-viewport font size. However menu-bar will affect the minimum window size so we'll get the right height.
+        ImVec2 menu_bar_pos = viewport->Pos + viewport->CurrWorkOffsetMin;
+        ImVec2 menu_bar_size = ImVec2(viewport->Size.x - viewport->CurrWorkOffsetMin.x + viewport->CurrWorkOffsetMax.x, 1.0f);
+        ImGui::SetNextWindowPos(menu_bar_pos);
+        ImGui::SetNextWindowSize(menu_bar_size);
+    }
+
+    // Create window
+    ImGui::SetNextWindowViewport(viewport->ID); // Enforce viewport so we don't create our own viewport when ImGuiConfigFlags_ViewportsNoMerge is set.
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 0));    // Lift normal size constraint, however the presence of a menu-bar will give us the minimum height we want.
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
+    bool is_open = ImGui::Begin("##MainStatusBar", NULL, window_flags) && ImGui::BeginMenuBar();
+    ImGui::PopStyleVar(2);
+
+    // Report our size into work area (for next frame) using actual window size
+    menu_bar_window = ImGui::GetCurrentWindow();
+    if (menu_bar_window->BeginCount == 1)
+        viewport->CurrWorkOffsetMin.y += menu_bar_window->Size.y;
+
+    g.NextWindowData.MenuBarOffsetMinVal = ImVec2(0.0f, 0.0f);
+    if (!is_open)
+    {
+        ImGui::End();
+        return false;
+    }
+    return true; //-V1020
+}
+void HY_ImGui_EndMainStatusBar()
+{
+    ImGui::EndMenuBar();
+
+    // When the user has left the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
+    // FIXME: With this strategy we won't be able to restore a NULL focus.
+    ImGuiContext& g = *GImGui;
+    if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
+        ImGui::FocusTopMostWindowUnderOne(g.NavWindow, NULL);
+
+    ImGui::End();
+}
+*/
 
 void GUISystem::BeginDockSpace() {
     const float toolbarSize = 0;
@@ -24,17 +98,87 @@ void GUISystem::BeginDockSpace() {
     ImGui::SetNextWindowPos(viewport->Pos + ImVec2(0, toolbarSize));
     ImGui::SetNextWindowSize(viewport->Size - ImVec2(0, toolbarSize));
     ImGui::SetNextWindowViewport(viewport->ID);
-    ImGuiWindowFlags window_flags = 0
+
+    ImGuiWindowFlags window_flags = 0 | ImGuiWindowFlags_NoCollapse
                                     | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking
-                                    | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse
+                                    | ImGuiWindowFlags_NoTitleBar
                                     | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
                                     | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-    ImGui::Begin("Master DockSpace", nullptr, window_flags);
-    ImGuiID dockMain = ImGui::GetID("MyDockspace");
+
+    const char* winName = "SpaRcle Engine";
+    ImGui::Begin(winName, nullptr, window_flags);
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    ImGuiID dockMain = ImGui::GetID("Dockspace");
+
+    auto context = Graphics::Environment::Get()->GetGUIContext();
+
+    if (ImGui::BeginMainMenuBar()) {
+        ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainMenuBar");
+
+        static bool beginDrag = false;
+        if (!beginDrag)
+            beginDrag = menu_bar_window->Rect().Contains(ImGui::GetMousePos()) && ImGui::IsMouseDragging(ImGuiMouseButton_Left);
+        else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+            beginDrag = false;
+
+        if (beginDrag) {
+            auto drag = ImGui::GetMouseDragDelta();
+            auto pos = Graphics::Environment::Get()->GetBasicWindow()->GetPosition();
+
+            pos.x += drag.x;
+            pos.y += drag.y;
+
+            Graphics::Environment::Get()->GetBasicWindow()->Move(pos.x, pos.y);
+        }
+
+        ImGui::Text("%s", winName);
+        ImGui::Text(" | ");
+
+        BeginMenuBar();
+        EndMenuBar();
+
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+
+        auto pWindow = m_env->GetBasicWindow();
+
+        SR_BEGIN_RIGHT_ALIGNMENT()
+            SR_RIGHT_BUTTON(close, "×", {
+                EventManager::Push(EventManager::Event::Exit);
+            }, {})
+
+            if (pWindow->GetState() == Graphics::WindowState::Default)
+                SR_RIGHT_BUTTON(maximize, "[ ]", { pWindow->Maximize(); }, {})
+            else  if (pWindow->GetState() == Graphics::WindowState::Maximized)
+                SR_RIGHT_BUTTON(restore, "[=]", { pWindow->Restore(); }, {})
+
+            SR_RIGHT_BUTTON(minimize, "_", {
+                pWindow->Collapse();
+            }, {})
+        SR_END_RIGHT_ALIGNMENT()
+
+        ImGui::PopStyleVar();
+
+        {
+            ImGui::EndMenuBar();
+
+            // When the user has left the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
+            // FIXME: With this strategy we won't be able to restore a NULL focus.
+            ImGuiContext& g = *GImGui;
+            if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
+                ImGui::FocusTopMostWindowUnderOne(g.NavWindow, NULL);
+
+            ImGui::End();
+        }
+    }
+
+    float button_sz = context->FontSize * 0.5f;
+    //if (ImGui::CloseButton(window->GetID(winName), ImVec2(window->DC.LastItemRect.Max.x - context->Style.FramePadding.x - button_sz, window->DC.LastItemRect.Min.y + context->Style.FramePadding.y + button_sz))) {
+
+    //}
 
     // Save off menu bar height for later.
     //float menuBarHeight = ImGui::GetCurrentWindow()->MenuBarHeight();
@@ -134,7 +278,7 @@ void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helpe
         if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
             ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
 
-            scene->ForEachRootObjects([&i, this](Helper::Types::SafePtr<Helper::GameObject> gm) {
+            scene->ForEachRootObjects([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& gm) {
                 if (gm->HasChildren()) {
                     bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
                                                   g_node_flags_with_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
@@ -160,10 +304,10 @@ void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helpe
     }
 }
 
-void GUISystem::DrawChild(Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> root) {
+void GUISystem::DrawChild(const Framework::Helper::Types::SafePtr<Framework::Helper::GameObject>& root) {
     unsigned long i = 0;
 
-    root->ForEachChild([&i, this](Helper::Types::SafePtr<Helper::GameObject> child){
+    root->ForEachChild([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& child){
         if (child->HasChildren()) {
             bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
                                           g_node_flags_with_child |
@@ -331,56 +475,59 @@ void GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& 
 }
 
 void GUISystem::DrawGuizmoTools() {
-    static bool snapAct = true;
+    static const ImVec2 g_sizeB = { 30, 25 };
+    static const short  g_space = 3;
+    static const ImVec4 g_def = {0.1, 0.1, 0.1, 0.7};
+    static const ImVec4 g_act = {0.6, 0.6, 0.6, 0.85};
 
-    if (ButtonWithId("engine_tool_move", "M", m_sizeB, 0, true,
-                     ImVec2(m_space, m_space), m_currentGuizmoOperation == ImGuizmo::TRANSLATE ? m_act : m_def)) {
+    if (ButtonWithId("engine_tool_move", "M", g_sizeB, 0, true,
+                     ImVec2(g_space, g_space), m_currentGuizmoOperation == ImGuizmo::TRANSLATE ? g_act : g_def)) {
         m_currentGuizmoOperation = ImGuizmo::TRANSLATE;
         m_boundsActive = false;
     }
 
-    if (ButtonWithId("engine_tool_rotate", "R", m_sizeB, 0, true,
-                     ImVec2(m_space * 2 + m_sizeB.x, m_space),
-                     m_currentGuizmoOperation == ImGuizmo::ROTATE ? m_act : m_def)) {
+    if (ButtonWithId("engine_tool_rotate", "R", g_sizeB, 0, true,
+                     ImVec2(g_space * 2 + g_sizeB.x, g_space),
+                     m_currentGuizmoOperation == ImGuizmo::ROTATE ? g_act : g_def)) {
         m_currentGuizmoOperation = ImGuizmo::ROTATE;
         m_boundsActive = false;
     }
 
-    if (ButtonWithId("engine_tool_scale", m_boundsActive ? "S+" : "S", m_sizeB, 0, true,
-                     ImVec2(m_space * 3 + m_sizeB.x * 2, m_space),
-                     m_currentGuizmoOperation == ImGuizmo::SCALE ? m_act : m_def)) {
+    if (ButtonWithId("engine_tool_scale", m_boundsActive ? "S+" : "S", g_sizeB, 0, true,
+                     ImVec2(g_space * 3 + g_sizeB.x * 2, g_space),
+                     m_currentGuizmoOperation == ImGuizmo::SCALE ? g_act : g_def)) {
         if (m_currentGuizmoOperation == ImGuizmo::SCALE)
             m_boundsActive = !m_boundsActive;
 
         m_currentGuizmoOperation = ImGuizmo::SCALE;
     }
 
-    if (ButtonWithId("engine_tool_mode", "L", m_sizeB, 0, true,
-                     ImVec2(m_space * 5 + m_sizeB.x * 4, m_space), m_currentGuizmoMode == ImGuizmo::LOCAL ? m_act : m_def)) {
+    if (ButtonWithId("engine_tool_mode", "L", g_sizeB, 0, true,
+                     ImVec2(g_space * 5 + g_sizeB.x * 4, g_space), m_currentGuizmoMode == ImGuizmo::LOCAL ? g_act : g_def)) {
         if (m_currentGuizmoMode == ImGuizmo::LOCAL)
             m_currentGuizmoMode = ImGuizmo::WORLD;
         else
             m_currentGuizmoMode = ImGuizmo::LOCAL;
     }
 
-    if (ButtonWithId("engine_tool_center", "C", m_sizeB, 0, true,
-                     ImVec2(m_space * 6 + m_sizeB.x * 5, m_space), m_centerActive ? m_act : m_def)) {
+    if (ButtonWithId("engine_tool_center", "C", g_sizeB, 0, true,
+                     ImVec2(g_space * 6 + g_sizeB.x * 5, g_space), m_centerActive ? g_act : g_def)) {
         m_centerActive = !m_centerActive;
     }
 
     std::string snap_str = std::to_string(m_snapValue / 100.0);
     snap_str.resize(4);
     if (ButtonWithId("engine_tool_snap", (snap_str + "x").c_str(),
-                     m_sizeB + ImVec2(5, 0), 0, true,
-                     ImVec2(m_space * 7 + m_sizeB.x * 6, m_space), snapAct ? m_act : m_def)) {
+                     g_sizeB + ImVec2(5, 0), 0, true,
+                     ImVec2(g_space * 7 + g_sizeB.x * 6, g_space), m_snapActive ? g_act : g_def)) {
         if (m_snapValue >= 400) {
             m_snapValue = 25;
-            snapAct = false;
+            m_snapActive = false;
         } else {
-            if (snapAct)
+            if (m_snapActive)
                 m_snapValue *= 2;
             else
-                snapAct = true;
+                m_snapActive = true;
         }
     }
 }
@@ -406,6 +553,12 @@ void GUISystem::DrawWorldEdit(Types::SafePtr<Helper::World::Scene> scene) {
         auto regionOffset = offset.m_region.ToGLM();
         if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
             scene->SetWorldOffset(World::Offset(regionOffset, offset.m_chunk));
+
+        if (auto&& chunk = scene->GetCurrentChunk()) {
+            ImGui::Separator();
+            auto size = static_cast<int32_t>(chunk->GetContainerSize());
+            ImGui::InputInt("Container size", &size, 0, 0,ImGuiInputTextFlags_ReadOnly);
+        }
 
         scene.Unlock();
     }
@@ -543,8 +696,9 @@ bool GUISystem::ButtonWithId(
             return false;
     }
 
-    if (window->DC.ItemFlags & ImGuiItemFlags_ButtonRepeat)
+    if (window->Flags & ImGuiItemFlags_ButtonRepeat)
         flags |= ImGuiButtonFlags_Repeat;
+
     bool hovered, held;
     bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, flags);
 
@@ -574,54 +728,65 @@ void GUISystem::SetGuizmoTool(uint8_t toolId) {
 }
 
 bool GUISystem::BeginMenuBar() {
-    if (ImGui::BeginMainMenuBar()) {
-        if (ImGui::BeginMenu("File")) {
-            if (ImGui::MenuItem("New scene")) {
+    //if (ImGui::BeginMainMenuBar()) {
+    if (ImGui::BeginMenu("File")) {
+        if (ImGui::MenuItem("New scene")) {
 
-            }
-
-            if (ImGui::MenuItem("Load scene")) {
-
-            }
-
-            if (ImGui::MenuItem("Save scene")) {
-                if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
-                    auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scenes/", false);
-                    if (auto path = FileSystem::SaveFileDialog(scenesPath, "Scene Files(*.scene)"); !path.empty()) {
-                        auto sceneName = StringUtils::GetFileNameFromFullPath(path);
-                        auto folder = StringUtils::GetDirToFileFromFullPath(path);
-
-                        scene->SetName(sceneName);
-
-                        if (scene->Save(folder)) {
-                            Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
-                        } else {
-                            Helper::Debug::Error("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
-                        }
-                    }
-                    scene.Unlock();
-                } else {
-                    Helper::Debug::Warn("GUISystem::BeginMenuBar() : scene isn't valid!");
-                }
-            }
-
-            if (ImGui::MenuItem("Close scene")) {
-                Engine::Instance().CloseScene();
-            }
-
-            if (ImGui::MenuItem("Exit")) {
-                EventManager::Push(Helper::EventManager::Event::Exit);
-            }
-
-            ImGui::EndMenu();
         }
-        return true;
-    } else
-        return false;
+
+        if (ImGui::MenuItem("Load scene")) {
+
+        }
+
+        if (ImGui::MenuItem("Save scene")) {
+            if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+                auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scenes/", false);
+                if (auto path = FileSystem::SaveFileDialog(scenesPath, "Scene Files(*.scene)"); !path.empty()) {
+                    auto sceneName = StringUtils::GetFileNameFromFullPath(path);
+                    auto folder = StringUtils::GetDirToFileFromFullPath(path);
+
+                    scene->SetName(sceneName);
+
+                    if (scene->Save(folder)) {
+                        Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
+                    } else {
+                        Helper::Debug::Error("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
+                    }
+                }
+                scene.Unlock();
+            } else {
+                Helper::Debug::Warn("GUISystem::BeginMenuBar() : scene isn't valid!");
+            }
+        }
+
+        if (ImGui::MenuItem("Close scene")) {
+            Engine::Instance().CloseScene();
+        }
+
+        if (ImGui::MenuItem("Exit")) {
+            EventManager::Push(Helper::EventManager::Event::Exit);
+        }
+
+        ImGui::EndMenu();
+    }
+
+    if (ImGui::BeginMenu("Editor")) {
+        ImGui::EndMenu();
+    }
+
+    if (ImGui::BeginMenu("About")) {
+        ImGui::EndMenu();
+    }
+
+    return true;
+    //} else
+   //     return false;
 }
 
 void GUISystem::EndMenuBar() {
-    ImGui::EndMainMenuBar();
+    //ImGui::EndMainMenuBar();
 }
 
-
+void GUISystem::DrawFileBrowser() {
+    Engine::Instance().GetEditor()->GetFileBrowser()->Draw();
+}

@@ -2,7 +2,10 @@
 find_package(Vulkan REQUIRED FATAL_ERROR)
 
 set(GRAPHICS_SRC
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/Mesh3D.cpp
+        ${FRAMEWORK_ROOT_DIR}/Unity/Graphics.cxx
+        ${FRAMEWORK_ROOT_DIR}/Unity/ImGUI.cxx
+
+        #[[{FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/Mesh3D.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/DebugWireframeMesh.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Geometry/IndexedMesh.cpp
 
@@ -13,7 +16,7 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/Skybox.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Types/EditorGrid.cpp
 
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Animations/Bone.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Animations/Bone.cpp
 
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/Memory/MeshManager.cpp
 
@@ -40,12 +43,12 @@ set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/old/GUIWindow.cpp
         ${FRAMEWORK_ROOT_DIR}/Graphics/src/GUI/old/DockSpace.cpp
 
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Environment.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/TextureHelper.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanMemory.cpp
-        ${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanImGUI.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Environment.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/TextureHelper.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/OpenGL.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanMemory.cpp
+        #${FRAMEWORK_ROOT_DIR}/Graphics/src/Environment/Vulkan/VulkanImGUI.cpp
 
         ############################################################
 
@@ -57,7 +60,7 @@ set(GRAPHICS_SRC
         #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_allegro5.cpp
         #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx9.cpp
         #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx10.cpp
-        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx11.cpp
+        #${FRAMEWORK_ROOT_DIR}/Depends/imgui/backebds/imgui_impl_dx11.cpp]]
         )
 
 set(GRAPHICS_INC_PUBLIC

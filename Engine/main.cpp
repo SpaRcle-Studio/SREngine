@@ -2,13 +2,11 @@
 // Created by Nikita on 29.12.2020.
 //
 
-#ifdef SR_WIN32
-    #define VK_USE_PLATFORM_WIN32_KHR
-#endif
+#include <macros.h>
+#include <Debug.h>
 
 #include <Engine.h>
 
-#include <Debug.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
 #include <Environment/Vulkan.h>
@@ -55,7 +53,7 @@ int main(int argc, char **argv) {
     else
         ResourceManager::Instance().Init(folder);
 
-#ifdef WIN32
+#ifdef SR_WIN32
     ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
             ("--log log.txt --target "+FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
             nullptr, SW_SHOWDEFAULT
@@ -111,12 +109,13 @@ int main(int argc, char **argv) {
 
     auto window = new Window(
             "SpaRcle Engine",
-            "icon.ico",
-            WindowFormat::_480_480,
+            "Engine/icon.ico",
+            WindowFormat::_1366_768,
             render,
-            false,
-            false,
-            true,
+            false, // vsync
+            false, // fullscreen
+            true,  // resizable
+            true,  // header enabled
             2
     );
 

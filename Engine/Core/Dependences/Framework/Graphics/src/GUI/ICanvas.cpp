@@ -3,7 +3,7 @@
 //
 
 #include "GUI/ICanvas.h"
-#include <imgui.h>
+#include <GUI.h>
 
 void Style_1(){
     ImGuiStyle& style = ImGui::GetStyle();
@@ -64,7 +64,7 @@ void Style_1(){
     //colors[ImGuiCol_::ImGuiCol_CloseButtonActive]      = ImVec4(0.98, 0.39, 0.36, 1.00);
     colors[ImGuiCol_::ImGuiCol_PlotHistogram]          = ImVec4(0.90, 0.70, 0.00, 1.00);
     colors[ImGuiCol_::ImGuiCol_PlotHistogramHovered]   = ImVec4(1.00, 0.60, 0.00, 1.00);
-    colors[ImGuiCol_::ImGuiCol_ModalWindowDarkening]   = ImVec4(0.80, 0.80, 0.80, 0.35);
+    //colors[ImGuiCol_::ImGuiCol_ModalWindowDarkening]   = ImVec4(0.80, 0.80, 0.80, 0.35);
 }
 
 void Style_2(){
@@ -244,4 +244,7 @@ void Style_3(){
 
 void Framework::Graphics::GUI::ICanvas::InitStyle() {
     Style_2();
+
+    const static std::string iniPath = ResourceManager::Instance().GetResourcesFolder() + "/Configs/ImGuiEditor.config";
+    ImGui::GetIO().IniFilename = iniPath.c_str();
 }

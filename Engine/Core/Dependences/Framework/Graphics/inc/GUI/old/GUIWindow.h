@@ -5,6 +5,7 @@
 #ifndef GAMEENGINE_GUIWINDOW_H
 #define GAMEENGINE_GUIWINDOW_H
 
+/*
 #define IMGUI_DEFINE_MATH_OPERATORS
 
 #include <Input/InputSystem.h>
@@ -141,6 +142,6 @@ namespace Framework::Graphics::GUI {
         }
         static void DrawTexture(glm::vec2 win_size, glm::vec2 img_size, void* tex, const bool centralize = true);
     };
-}
+}*/
 
 #endif //GAMEENGINE_GUIWINDOW_H

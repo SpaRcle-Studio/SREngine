@@ -11,16 +11,13 @@
 #include <Debug.h>
 #include <Utils/StringUtils.h>
 
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_glfw.h>
-#include <ImGuizmo.h>
+#include <GUI.h>
 #include <Environment/Win32Window.h>
 #include <ResourceManager/ResourceManager.h>
 
 #define OpenGLSetVertexAttribPointer(id, count, vertex, offset) \
     glEnableVertexAttribArray(id); \
     glVertexAttribPointer(id, count, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offset); \
-
 
 using namespace Framework::Helper;
 
@@ -99,7 +96,7 @@ bool Framework::Graphics::OpenGL::PreInit(
     return true;
 }
 
-bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScreen, bool resizable) {
+bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) {
     if (!this->m_winFormat) {
         Helper::Debug::Error("OpenGL::MakeWindow() : format isn't initialized!");
         return false;
@@ -141,7 +138,6 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
 #ifdef  SR_OPENGL_USE_WINAPI
     this->m_basicWindow->SetSwapInterval(swapInterval);
 #else
-    this->m_screenSize = { this->m_vidMode->width, this->m_vidMode->height };
     glfwSwapInterval(swapInterval);
 
     glfwSetWindowFocusCallback(m_window, [](GLFWwindow* win, int focus) {
@@ -995,6 +991,10 @@ int32_t Framework::Graphics::OpenGL::CalculateIBO(
     glBindVertexArray(0);
 
     return EBO;
+}
+
+Math::IVector2 Framework::Graphics::OpenGL::GetScreenSize() const {
+    return Math::IVector2(this->m_vidMode->width, this->m_vidMode->height);
 }
 
 

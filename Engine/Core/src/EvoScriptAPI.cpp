@@ -164,7 +164,7 @@ namespace Framework {
         });
 
         generator->RegisterNewClass("Mesh", "Mesh", {
-            "ResourceManager.h", "Component.h", "mutex", "Math/Vector3.h", "Utils.h", "Material.h"
+            "ResourceManager.h", "Component.h", "mutex", "Math/Vector3.h", "Material.h"
         }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
 
         ESRegisterStaticMethod(Graphics::, EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
@@ -208,7 +208,7 @@ namespace Framework {
 
     void API::RegisterCamera(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Camera", "Camera",
-                { "Math/Vector3.h", "Math/Vector2.h", "Utils.h", "Component.h", "PostProcessing.h" }, {
+                { "Math/Vector3.h", "Math/Vector2.h", "Component.h", "PostProcessing.h" }, {
                 { "Component", EvoScript::Public }
         });
 
@@ -229,7 +229,7 @@ namespace Framework {
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Render", "Render",
-                { "vector", "mutex", "Utils.h", "stdint.h", "map", "Skybox.h", "Texture.h", "Shader.h" });
+                { "vector", "mutex", "stdint.h", "map", "Skybox.h", "Texture.h", "Shader.h" });
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Render, FindShader, Shader*, ESArg1(uint32_t id), ESArg1(id))
 
@@ -386,7 +386,7 @@ namespace Framework {
     }
 
     void API::RegisterMaterial(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("Material", "Material", { "Utils.h", "Texture.h" });
+        generator->RegisterNewClass("Material", "Material", { "Texture.h" });
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetDiffuse, void, ESArg1(Texture* texture), ESArg1(texture))
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Material, SetNormal, void, ESArg1(Texture* texture), ESArg1(texture))
@@ -399,7 +399,7 @@ namespace Framework {
 
     void API::RegisterGUISystem(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("GUISystem", "GUISystem", { "cstdint", "Math/Vector2.h", "map", "Scene.h", "Camera.h", "GameObject.h" });
-        ESRegisterStaticMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, Get, GUISystem*)
+        ESRegisterStaticMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, Instance, GUISystem&)
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, BeginMenuBar, bool)
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, EndMenuBar, void)
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, BeginDockSpace, void)
@@ -410,6 +410,7 @@ namespace Framework {
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, EndChildWindow, void)
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawTexture, void, ESArg4(IVector2 win, IVector2 img, uint32_t id, bool center), ESArg4(win, img, id, center))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawHierarchy, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
+        ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, DrawFileBrowser, void)
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawWorldEdit, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(GUI::, EvoScript::Public, generator, GUISystem, DrawInspector, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethodArg0(GUI::, EvoScript::Public, generator, GUISystem, GetWindowSize, IVector2)

@@ -5,21 +5,22 @@
 #ifndef GAMEENGINE_VULKAN_H
 #define GAMEENGINE_VULKAN_H
 
-//#include <easy/profiler.h>
-#include <Environment/Environment.h>
+#define VK_PROTOTYPES
 
-#define GLFW_EXPOSE_NATIVE_WIN32
+#include <macros.h>
+
+#ifdef SR_WIN32
+    #define GLFW_EXPOSE_NATIVE_WIN32
+    #define VK_USE_PLATFORM_WIN32_KHR
+    #include <vulkan/vulkan.h>
+    #include <Environment/Win32Window.h>
+#endif
+
+#include <Environment/Environment.h>
 
 #include <glm/glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 #include <Debug.h>
-
-#define VK_PROTOTYPES
-
-#ifdef WIN32
-    #define VK_USE_PLATFORM_WIN32_KHR
-    #include <Environment/Win32Window.h>
-#endif
 
 #include <ResourceManager/ResourceManager.h>
 #include <FileSystem/FileSystem.h>
@@ -34,12 +35,10 @@
 
 #include <Environment/Vulkan/VulkanImGUI.h>
 
-#include <imgui_impl_vulkan.h>
-
 namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
-        void Render() override;
+        EvoVulkan::Core::RenderResult Render() override;
     public:
         bool OnResize() override;
 
@@ -89,23 +88,9 @@ namespace Framework::Graphics {
         VulkanTools::MemoryManager*                     m_memory             = nullptr;
         EvoVulkan::Core::VulkanKernel*                  m_kernel             = nullptr;
     private:
-        const std::vector<const char*> m_validationLayers = {
-                "VK_LAYER_KHRONOS_validation"
-        };
-
-        const std::vector<const char*> m_instanceExtensions = {
-                VK_KHR_SURFACE_EXTENSION_NAME,
-#ifdef WIN32
-                VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
-#endif
-#ifndef SR_RELEASE
-                VK_EXT_DEBUG_UTILS_EXTENSION_NAME
-#endif
-        };
-
-        const std::vector<const char*> m_deviceExtensions = {
-                VK_KHR_SWAPCHAIN_EXTENSION_NAME
-        };
+        static const std::vector<const char*> m_validationLayers;
+        static const std::vector<const char*> m_instanceExtensions;
+        static const std::vector<const char*> m_deviceExtensions;
 
 #ifdef SR_RELEASE
         const bool m_enableValidationLayers = false;
@@ -113,11 +98,10 @@ namespace Framework::Graphics {
         const bool m_enableValidationLayers = true;
 #endif
     public:
-        [[nodiscard]] SR_FORCE_INLINE std::string GetPipeLineName()   const override { return "Vulkan";         }
         [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const override { return PipeLine::Vulkan; }
         [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
-    public:
         [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
+        [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
         [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
     public:
         uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
@@ -133,9 +117,15 @@ namespace Framework::Graphics {
 
         bool InitGUI() override;
         bool StopGUI() override;
-        void SetGUIEnabled(bool enabled) override { m_kernel->SetGUIEnabled(enabled); }
+        void SetGUIEnabled(bool enabled) override {
+            m_kernel->SetGUIEnabled(enabled);
+            m_guiEnabled = enabled;
+            m_basicWindow->SetHeaderEnabled(!enabled);
+        }
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
+
+        Helper::Math::IVector2 GetScreenSize() const override;
 
         //[[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
         [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
@@ -145,8 +135,12 @@ namespace Framework::Graphics {
                 return nullptr;
             }
 
-            if (auto texture = m_memory->m_textures[id])
-                return reinterpret_cast<void*>(texture->GetDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout()).m_self);
+            if (auto texture = m_memory->m_textures[id]) {
+                //auto backend = ImGui_ImplVulkan_GetBackendData();
+                //backend->VulkanInitInfo.De
+
+                return reinterpret_cast<void *>(texture->GetDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout()).m_self);
+            }
             else {
                 Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
                 return nullptr;
@@ -164,11 +158,11 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return this->m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
-        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { this->m_basicWindow->GetRealWidth(), this->m_basicWindow->GetRealHeight() }; }
+        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { this->m_basicWindow->GetSurfaceWidth(), this->m_basicWindow->GetSurfaceHeight() }; }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
 
-        bool MakeWindow(const char* winName, bool fullScreen, bool resizable) override;
+        bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
@@ -230,7 +224,10 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void DrawFrame() override {
-            this->m_kernel->NextFrame();
+            if (this->m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
+                Helper::EventManager::Push(EventManager::Event::Fatal);
+                m_hasErrors = true;
+            }
         }
         SR_FORCE_INLINE void PollEvents() const override { this->m_basicWindow->PollEvents(); }
 

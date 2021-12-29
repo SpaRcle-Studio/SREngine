@@ -500,7 +500,7 @@ namespace Framework::Helper { namespace Types{
     char& String::operator [](size_t position){
         static char NULL_CHAR = '\0';
         if(this->str == nullptr) return NULL_CHAR;
-        return this->str[std::min(position, strlen(this->str) - 1)];
+        return this->str[SR_MIN(position, strlen(this->str) - 1)];
     }
 
     void String::Set(const String& string) {

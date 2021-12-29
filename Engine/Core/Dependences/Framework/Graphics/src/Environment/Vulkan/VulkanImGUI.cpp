@@ -3,9 +3,7 @@
 //
 
 #include <Environment/Vulkan/VulkanImGUI.h>
-
-#include <Debug.h>
-#include <imgui_impl_vulkan.h>
+#include <GUI.h>
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKernel* kernel) {
     Helper::Debug::Info("VkImGUI::Init() : initializing vulkan imgui...");

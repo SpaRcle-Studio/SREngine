@@ -10,7 +10,6 @@
 
 #include "../../Libraries/Types/SafePointer.h"
 
-GUISystem* gui = nullptr;
 Window* window = nullptr;
 Camera* camera = nullptr;
 
@@ -19,60 +18,58 @@ int32_t skyboxTexID   = -1;
 int32_t completeTexID = -1;
 
 EXTERN void Start() {
-    gui = GUISystem::Get();
     auto&& engine = Engine::Instance();
     window = engine.GetWindow();
 }
 
 EXTERN void OnGUI() {
-    gui->BeginDockSpace();
+    GUISystem& gui = GUISystem::Instance();
+
+    gui.BeginDockSpace();
 
     if (SafePtr<Scene> scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
-        if (gui->BeginWindow("Scene")) {
+        if (gui.BeginWindow("Scene")) {
             if (completeTexID < 0) {
                 if (SafePtr<GameObject> gm = scene->FindByComponent("Camera"); gm.Valid()) {
                     camera = (Camera *)gm->GetComponent("Camera");
                     completeTexID = camera->GetPostProcessing()->GetFinally();
                 }
             } else
-                if (camera->IsReady() && gui->BeginChildWindow("Texture")) {
-                    auto winSize = gui->GetWindowSize();
-                    gui->DrawTexture(winSize, window->GetWindowSize(), completeTexID, true);
+                if (camera->IsReady() && gui.BeginChildWindow("Texture")) {
+                    auto winSize = gui.GetWindowSize();
+                    gui.DrawTexture(winSize, window->GetWindowSize(), completeTexID, true);
 
                     if (camera)
-                        gui->DrawGuizmo(camera, scene->GetSelected());
+                        gui.DrawGuizmo(camera, scene->GetSelected());
 
-                    gui->DrawGuizmoTools();
+                    gui.DrawGuizmoTools();
 
-                    gui->EndChildWindow();
+                    gui.EndChildWindow();
                 }
 
-            gui->EndWindow();
+            gui.EndWindow();
         }
         scene.Unlock();
     }
 
-    if (gui->BeginWindow("Inspector")) {
-        gui->DrawInspector(Engine::Instance().GetScene());
-        gui->EndWindow();
+    if (gui.BeginWindow("Inspector")) {
+        gui.DrawInspector(Engine::Instance().GetScene());
+        gui.EndWindow();
     }
 
-    if (gui->BeginWindow("World edit")) {
-        gui->DrawWorldEdit(Engine::Instance().GetScene());
-        gui->EndWindow();
+    if (gui.BeginWindow("World edit")) {
+        gui.DrawWorldEdit(Engine::Instance().GetScene());
+        gui.EndWindow();
     }
 
-    if (gui->BeginWindow("Hierarchy")) {
-        gui->DrawHierarchy(Engine::Instance().GetScene());
-        gui->EndWindow();
+    if (gui.BeginWindow("Hierarchy")) {
+        gui.DrawHierarchy(Engine::Instance().GetScene());
+        gui.EndWindow();
     }
 
-    if (gui->BeginWindow("Assets")) {
-        gui->EndWindow();
-    }
-
-    if (gui->BeginMenuBar()) {
-        gui->EndMenuBar();
+    if (gui.BeginWindow("Assets")) {
+        gui.DrawFileBrowser();
+        gui.EndWindow();
     }
 }
 

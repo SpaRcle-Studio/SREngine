@@ -12,46 +12,31 @@
 #include <World/Scene.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Render/Camera.h>
-#include <ImGuizmo.h>
-#include <imgui.h>
+#include <GUI.h>
+#include <Utils/Singleton.h>
 
 namespace Framework::Core::GUI {
-    class GUISystem {
-    private:
-        inline static bool Vec4Null(const ImVec4& v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
-    private:
-        inline static const ImGuiTreeNodeFlags g_node_flags_with_child    = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        inline static const ImGuiTreeNodeFlags g_node_flags_without_child = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+    class GUISystem : public Singleton<GUISystem> {
+        friend class Singleton<GUISystem>;
     private:
         GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetPipeLine()) {
             m_env = Graphics::Environment::Get();
         }
         GUISystem(const GUISystem&) = default;
         ~GUISystem() = default;
-    public:
-        static GUISystem* Get() {
-            static GUISystem* guiSystem = nullptr;
-            if (!guiSystem)
-                guiSystem = new GUISystem();
-            return guiSystem;
-        }
-    private:
-        // TODO: rename or make comments
-        inline static const ImVec2 m_sizeB = { 30, 25 };
-        inline static const short  m_space = 3;
-        inline static const ImVec4 m_def = {0.1, 0.1, 0.1, 0.7};
-        inline static const ImVec4 m_act = {0.6, 0.6, 0.6, 0.85};
 
-        int m_snapValue = 100;
     private:
+        int32_t                  m_snapValue    = 100;
         Graphics::Environment*   m_env          = nullptr;
         const Graphics::PipeLine m_pipeLine     = Graphics::PipeLine::Unknown;
         bool                     m_shiftPressed = false;
         bool                     m_boundsActive = false;
         bool                     m_centerActive = false;
+        bool                     m_snapActive   = false;
 
         ImGuizmo::OPERATION m_currentGuizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE      m_currentGuizmoMode      = ImGuizmo::MODE::LOCAL;
+
     private:
         bool CollapsingHeader(const char* label, ImGuiTreeNodeFlags flags = 0);
         void DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject);
@@ -75,6 +60,40 @@ namespace Framework::Core::GUI {
 
         void SetGuizmoTool(uint8_t toolId);
 
+        static inline int ImTextCharToUtf8(char* buf, int buf_size, unsigned int c) {
+            if (c < 0x80)
+            {
+                buf[0] = (char)c;
+                return 1;
+            }
+            if (c < 0x800)
+            {
+                if (buf_size < 2) return 0;
+                buf[0] = (char)(0xc0 + (c >> 6));
+                buf[1] = (char)(0x80 + (c & 0x3f));
+                return 2;
+            }
+            if (c < 0x10000)
+            {
+                if (buf_size < 3) return 0;
+                buf[0] = (char)(0xe0 + (c >> 12));
+                buf[1] = (char)(0x80 + ((c >> 6) & 0x3f));
+                buf[2] = (char)(0x80 + ((c ) & 0x3f));
+                return 3;
+            }
+            if (c <= 0x10FFFF)
+            {
+                if (buf_size < 4) return 0;
+                buf[0] = (char)(0xf0 + (c >> 18));
+                buf[1] = (char)(0x80 + ((c >> 12) & 0x3f));
+                buf[2] = (char)(0x80 + ((c >> 6) & 0x3f));
+                buf[3] = (char)(0x80 + ((c ) & 0x3f));
+                return 4;
+            }
+            // Invalid code point, the max unicode is 0x10FFFF
+            return 0;
+        }
+
         static void DrawTextOnCenter(const std::string& text, bool sameLine = true) {
             float font_size = ImGui::GetFontSize() * text.size() / 2;
 
@@ -87,10 +106,11 @@ namespace Framework::Core::GUI {
             ImGui::Text("%s", text.c_str());
         }
 
-        void DrawChild(Helper::Types::SafePtr<Helper::GameObject> root);
+        void DrawChild(const Helper::Types::SafePtr<Helper::GameObject>& root);
         void DrawHierarchy(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
+        void DrawFileBrowser();
 
         void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm);
 

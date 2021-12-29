@@ -8,7 +8,7 @@
 //#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 //#include <btBulletDynamicsCommon.h>
 
-#include <btBulletDynamicsCommon.h>
+//#include <btBulletDynamicsCommon.h>
 
 namespace Framework::Physics {
     class PhysEngine {
@@ -17,11 +17,11 @@ namespace Framework::Physics {
     private:
         ~PhysEngine() = default;
     private:
-        btDefaultCollisionConfiguration*        m_collisionConf         = nullptr;
-        btCollisionDispatcher*                  m_dispatcher            = nullptr;
-        btBroadphaseInterface*                  m_overlappingPairCache  = nullptr;
-        btSequentialImpulseConstraintSolver*    m_solver                = nullptr;
-        btDiscreteDynamicsWorld*                m_dynamicWorld          = nullptr;
+        //btDefaultCollisionConfiguration*        m_collisionConf         = nullptr;
+        //btCollisionDispatcher*                  m_dispatcher            = nullptr;
+        //btBroadphaseInterface*                  m_overlappingPairCache  = nullptr;
+        //btSequentialImpulseConstraintSolver*    m_solver                = nullptr;
+        //btDiscreteDynamicsWorld*                m_dynamicWorld          = nullptr;
 
         bool m_isCreate = false;
         bool m_isInit   = false;

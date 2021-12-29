@@ -14,8 +14,11 @@ void Region::Update(float_t dt) {
 }
 
 Chunk* Region::GetChunk(const Framework::Helper::Math::IVector3 &position) {
-    if (auto&& it = m_loadedChunks.find(position); it == m_loadedChunks.end())
-        return m_loadedChunks[position] = Chunk::Allocate(this, position, m_chunkSize);
+    if (auto&& it = m_loadedChunks.find(position); it == m_loadedChunks.end()) {
+        auto chunk = m_loadedChunks[position] = Chunk::Allocate(this, position, m_chunkSize);
+        chunk->SetOffset(m_offset);
+        return chunk;
+    }
     else
         return it->second;
 }
@@ -74,4 +77,20 @@ Framework::Helper::Math::IVector2 Region::GetWorldPosition() const {
     if (position.y < 0) ++position.y;
 
     return position * m_width;
+}
+
+Chunk *Region::At(const Helper::Math::IVector3& position) const {
+    return m_loadedChunks.at(position);
+}
+
+Chunk *Region::Find(const Framework::Helper::Math::IVector3 &position) const {
+    if (const auto& pIt = m_loadedChunks.find(position); pIt == m_loadedChunks.end())
+        return nullptr;
+    else
+        return pIt->second;
+}
+
+void Region::ApplyOffset() {
+    for (auto&& [key, pChunk] : m_loadedChunks)
+        pChunk->ApplyOffset();
 }

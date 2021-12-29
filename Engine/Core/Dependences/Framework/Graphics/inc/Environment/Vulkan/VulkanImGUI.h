@@ -7,6 +7,8 @@
 
 #include <EvoVulkan/VulkanKernel.h>
 
+#include <GUI.h>
+
 #include <EvoVulkan/DescriptorManager.h>
 #include <EvoVulkan/Types/RenderPass.h>
 

@@ -11,8 +11,6 @@
 
 #include <Loaders/ObjLoader.h>
 
-#include <imgui.h>
-
 #include <GUI.h>
 #include <FbxLoader/Loader.h>
 

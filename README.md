@@ -18,7 +18,6 @@
   * glm
   * OpenGL / GLFW / GLEW / glad
   * Bullet3
-  * easy_profiler
   * ImGUI
   * tinyobjloader
   * stbi

@@ -5,6 +5,10 @@
 #ifndef GAMEENGINE_VECTORUTILS_H
 #define GAMEENGINE_VECTORUTILS_H
 
+#include <vector>
+#include <cctype>
+#include <functional>
+
 namespace Framework::Helper {
     class VectorUtils {
     public:
@@ -20,6 +24,30 @@ namespace Framework::Helper {
             return AB;
         }
     };
+
+    namespace Utils {
+        template<typename T, typename U>
+        bool ForEach(const std::function<bool(T& type, const uint32_t& index)> &fn, std::vector<U>& vector) {
+            uint32_t index = 0;
+            for (T& folder : vector) {
+                if (!fn(folder, index))
+                    return false;
+                ++index;
+            }
+            return true;
+        }
+
+        template<typename T, typename U>
+        bool ForEach(const std::function<bool(const T& type, const uint32_t& index)> &fn, const std::vector<U>& vector) {
+            uint32_t index = 0;
+            for (const T& folder : vector) {
+                if (!fn(folder, index))
+                    return false;
+                ++index;
+            }
+            return true;
+        }
+    }
 }
 
 #endif //GAMEENGINE_VECTORUTILS_H

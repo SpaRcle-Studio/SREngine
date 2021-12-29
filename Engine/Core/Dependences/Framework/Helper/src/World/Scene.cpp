@@ -5,6 +5,7 @@
 #include "World/Scene.h"
 #include <EntityComponentSystem/Component.h>
 #include <EntityComponentSystem/Transform.h>
+#include <EntityComponentSystem/GameObject.h>
 
 #include <World/Region.h>
 #include <World/Chunk.h>
@@ -222,9 +223,11 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
 }
 
 void Framework::Helper::World::Scene::Update(float_t dt) {
-    if (m_observer.m_target.LockIfValid()) {
-        const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
+    const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
+    const auto regSize = Math::IVector2(m_regionWidth);
+    const auto regSize2 = Math::IVector2(m_regionWidth - 1);
 
+    if (m_observer.m_target.LockIfValid()) {
         auto position = m_observer.m_target->GetTransform()->GetPosition().Singular(chunkSize.Cast<Math::Unit>());
 
         auto&& lastChunk = m_observer.m_lastChunk;
@@ -234,15 +237,11 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
 
         auto chunk = AddOffset(IVector3(position / chunkSize), -m_observer.m_offset.m_chunk);
 
-        if (lastChunk != chunk)
-        {
+        if (lastChunk != chunk) {
             if (m_regions.find(lastRegion) != m_regions.end())
                 m_regions.at(lastRegion)->GetChunk(m_observer.m_chunk)->OnExit();
 
             m_observer.SetChunk(chunk);
-
-            const auto regSize = Math::IVector2(m_regionWidth);
-            const auto regSize2 = Math::IVector2(m_regionWidth - 1);
 
             auto region = AddOffset(chunk.XZ().Singular(regSize2) / regSize, -m_observer.m_offset.m_region);
 
@@ -251,29 +250,50 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
                 SRAssert(!m_observer.m_region.HasZero());
             }
 
-            if (m_regions.find(m_observer.m_region) == m_regions.end())
-                m_regions.insert(std::pair(m_observer.m_region, Region::Allocate(m_regionWidth, m_chunkSize, m_observer.m_region)));
-
-            if (auto &&regionIt = m_regions.at(m_observer.m_region)) {
-                regionIt->SetOffset(m_observer.m_offset);
-                regionIt->GetChunk(m_observer.m_chunk)->SetOffset(m_observer.m_offset);
-
-
-                regionIt->GetChunk(m_observer.m_chunk)->OnEnter();
+            if (m_regions.find(m_observer.m_region) == m_regions.end()) {
+                auto pRegion = Region::Allocate(m_regionWidth, m_chunkSize, m_observer.m_region);
+                pRegion->SetOffset(m_observer.m_offset);
+                m_regions.insert(std::pair(m_observer.m_region, pRegion));
             }
+
+            if (auto &&regionIt = m_regions.at(m_observer.m_region))
+                regionIt->GetChunk(m_observer.m_chunk)->OnEnter();
 
             lastRegion = region;
             lastChunk = chunk;
         }
+    }
+
+    for (const GameObject::Ptr& gameObject : this->GetRootGameObjects()) {
+        auto position = //AddOffset(
+                Math::IVector3(gameObject->GetTransform()->GetPosition().Singular(chunkSize.Cast<Math::Unit>())) / chunkSize;//,
+       //         -m_observer.m_offset.m_chunk
+       // );
+
+        //auto region = AddOffset(position.XZ().Singular(regSize2) / regSize, -m_observer.m_offset.m_region);
+        auto region = position.XZ().Singular(regSize2) / regSize;
+        position -= Math::IVector3::XZ(region.Singular(-1)) * m_regionWidth;
+
+        if (m_regions.find(region) == m_regions.end())
+            m_regions.insert(std::pair(region, Region::Allocate(m_regionWidth, m_chunkSize, region)));
+
+        auto&& chunk = m_regions.at(region)->GetChunk(position);
+
+        if (auto&& pair = m_gameObjectPairs.find(gameObject); pair != m_gameObjectPairs.end()) {
+            if (pair->second != chunk) {
+                pair->second->Erase(gameObject);
+                pair->second = nullptr;
+            }
+        }
+
+        chunk->Insert(gameObject);
+        m_gameObjectPairs[gameObject] = chunk;
     }
 }
 
 Framework::Helper::World::Scene::Scene(const std::string &name) : m_name(name) {
     m_chunkSize = Math::IVector2(5, 20);
     m_regionWidth = 6;
-
-    m_observer.m_chunk = m_observer.m_lastChunk = Math::IVector3(-1, -1, -1);
-    m_observer.m_region = m_observer.m_lastRegion = Math::IVector2(-1, -1);
 
     m_observer.SetWorldMetrics(m_chunkSize, m_regionWidth);
 }
@@ -282,6 +302,15 @@ void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::Wo
     const auto region = (offset.m_chunk / static_cast<int32_t>(m_regionWidth)).ZeroAxis(Math::AXIS_Y);
     m_observer.m_offset = World::Offset(offset.m_region + region.XZ(), offset.m_chunk - region * m_regionWidth);
 
-    for (auto&& [key, pRegion] : m_regions)
+    for (auto&& [key, pRegion] : m_regions) {
         pRegion->SetOffset(m_observer.m_offset);
+        pRegion->ApplyOffset();
+    }
+}
+
+Framework::Helper::World::Chunk *Framework::Helper::World::Scene::GetCurrentChunk() const {
+    Chunk* chunk = nullptr;
+    if (const auto& region = m_regions.find(m_observer.m_region); region != m_regions.end())
+        chunk = region->second->Find(m_observer.m_chunk);
+    return chunk;
 }

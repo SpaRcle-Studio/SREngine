@@ -12,5 +12,6 @@ layout (binding = 1) uniform sampler2D GeometryMap;
 layout (binding = 2) uniform sampler2D SkyboxMap;
 
 void main() {
+    //outColor = vec4(gl_FragCoord.x, gl_FragCoord.y, gl_FragCoord.z, 1);
     outColor = vec4(texture(GeometryMap, inUV).rgb + texture(SkyboxMap, inUV).rgb, 1.0);
 }

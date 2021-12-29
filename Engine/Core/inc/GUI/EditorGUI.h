@@ -10,22 +10,33 @@
 #include <Base/Compiler.h>
 
 namespace Framework::Core::GUI {
+    class FileBrowser;
+
     class EditorGUI : public Graphics::GUI::ICanvas {
     public:
-        EditorGUI(Scripting::Compiler* compiler) {
-            m_compiler = compiler;
-        }
+        explicit EditorGUI(Scripting::Compiler* compiler)
+            : m_compiler(compiler) { }
+
     private:
-        Scripting::Compiler* m_compiler = nullptr;
-        Scripting::Script*   m_script   = nullptr;
+        ~EditorGUI() = default;
+
     private:
         bool Init() override;
+
     public:
         bool Destroy() override;
         void Free() override;
 
+        [[nodiscard]] FileBrowser* GetFileBrowser() const { return m_fileBrowser; }
+
         // Call only from window
         void Draw() override;
+
+    private:
+        Scripting::Compiler* m_compiler    = nullptr;
+        Scripting::Script*   m_script      = nullptr;
+        FileBrowser*         m_fileBrowser = nullptr;
+
     };
 }
 

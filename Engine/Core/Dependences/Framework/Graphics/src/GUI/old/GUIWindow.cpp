@@ -1,7 +1,7 @@
 //
 // Created by Monika on 14.02.2021.
 //
-
+/*
 #include <vector>
 #include <GUI/old/GUIWindow.h>
 #include <EntityComponentSystem/Transform.h>
@@ -17,41 +17,39 @@
 #include <imgui_internal.h>
 
 void Framework::Graphics::GUI::GUIWindow::DrawChild(Framework::Helper::GameObject *root) noexcept {
-    unsigned long i = 0;
+  unsigned long i = 0;
 
-    /*
-    for (auto child : root->GetChildrenRef()) {
-        if (child->HasChildren()) {
-            bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                          g_node_flags_with_child |
-                                          (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", child->GetName().c_str()
-            );
+  /*or (auto child : root->GetChildrenRef()) {
+      if (child->HasChildren()) {
+          bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
+                                        g_node_flags_with_child |
+                                        (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                                        "%s", child->GetName().c_str()
+          );
 
-            CheckSelected(child);
+          CheckSelected(child);
 
-            if (open)
-                DrawChild(child);
-        } else {
-            ImGui::TreeNodeEx((void *) (intptr_t) i,
-                              g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                              "%s", child->GetName().c_str()
-            );
+          if (open)
+              DrawChild(child);
+      } else {
+          ImGui::TreeNodeEx((void *) (intptr_t) i,
+                            g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                            "%s", child->GetName().c_str()
+          );
 
-            CheckSelected(child);
-        }
+          CheckSelected(child);
+      }
 
-        i++;
-    }
+      i++;
+  }
 
-    ImGui::TreePop();
-     */
+  ImGui::TreePop();
+
 }
 
 void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::World::Scene *scene) noexcept {
     auto root = scene->GetRootGameObjects();
 
-    /*
     unsigned long i = 0;
 
     GUIWindow::g_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
@@ -82,7 +80,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawHierarchy(Framework::Helper::World
 
         ImGui::TreePop();
         ImGui::PopStyleVar();
-    }*/
+    }
 }
 
 void Framework::Graphics::GUI::GUIWindow::CheckSelected(Framework::Helper::GameObject *gm) noexcept {
@@ -196,7 +194,6 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
     float matrix[16] = {0.f};
     for (int i = 0; i < 16; ++i)
         matrix[i] = p3Source[i];
-*/
 
     ImGuiWindow *window = ImGui::GetCurrentWindow();
     if (!window || window->SkipItems)
@@ -333,7 +330,7 @@ void Framework::Graphics::GUI::GUIWindow::DrawGuizmo(Framework::Graphics::Camera
             old_scale = value;
         }
     }
-    */
+
     old_rotate = value;
 
     //ImGuizmo::ViewManipulate(cameraView, 10, ImVec2(0, 0), ImVec2(128, 128), 0x10101010);
@@ -436,4 +433,4 @@ bool Framework::Graphics::GUI::GUIWindow::ButtonWithId(const char *_id, const ch
         ImGui::PopStyleColor();
 
     return pressed;
-}
+}*/

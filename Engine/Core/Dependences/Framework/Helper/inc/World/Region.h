@@ -46,10 +46,15 @@ namespace Framework::Helper {
             virtual bool Unload();
             virtual void OnEnter();
             virtual void OnExit();
+
             virtual void SetOffset(const World::Offset& offset);
+            virtual void ApplyOffset();
 
         public:
             Chunk* GetChunk(const Math::IVector3& position);
+            [[nodiscard]] Chunk* At(const Math::IVector3& position) const;
+            [[nodiscard]] Chunk* Find(const Math::IVector3& position) const;
+            [[nodiscard]] uint32_t GetWidth() const { return m_width; }
 
         public:
             static void SetAllocator(const Allocator& allocator);

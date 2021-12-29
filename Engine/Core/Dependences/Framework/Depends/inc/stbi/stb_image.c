@@ -83,15 +83,15 @@
 #include <stdarg.h>
 
 #ifndef _MSC_VER
-   #ifdef __cplusplus
-   #define stbi_inline inline
-   #else
-   #define stbi_inline
-   #endif
+    #ifdef __cplusplus
+    #define stbi_inline inline
+    #else
+    #define stbi_inline
+    #endif
 #else
-   #define stbi_inline __forceinline
+    #define stbi_inline __forceinline
+    #pragma warning (disable: 4312)
 #endif
-
 
 // implementation:
 typedef unsigned char  uint8;

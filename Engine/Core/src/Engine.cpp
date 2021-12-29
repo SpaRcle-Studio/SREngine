@@ -36,10 +36,12 @@ bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* ph
 
     Helper::Debug::Info("Engine::Create() : creating game engine...");
 
-    if (!this->m_window->Create(new Core::GUI::EditorGUI(m_compiler))){
+    if (!this->m_window->Create()){
         Helper::Debug::Error("Engine::Create() : failed create window!");
         return false;
     }
+
+    m_window->SetCanvas(m_editor = new Core::GUI::EditorGUI(m_compiler));
 
     if (!m_physics->Create()) {
         Helper::Debug::Error("Engine::Create() : failed create physics engine!");
@@ -192,6 +194,12 @@ bool Framework::Engine::Close() {
         m_window->Close();
         m_window->Free();
         m_window = nullptr;
+    }
+
+    if (m_editor) {
+        m_editor->Destroy();
+        m_editor->Free();
+        m_editor = nullptr;
     }
 
     if (m_compiler) {

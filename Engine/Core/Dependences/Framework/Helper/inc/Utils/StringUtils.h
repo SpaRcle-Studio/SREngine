@@ -298,7 +298,7 @@ namespace Framework::Helper {
                 t = tolower(t);
             return str;
         }
-        inline static std::string MakePath(std::string str, bool toLower = true) noexcept {
+        inline static std::string MakePath(std::string str, bool toLower = false) noexcept {
             str = ReplaceAll(str, "\\\\", "/");
             str = ReplaceAll(str, "\\", "/");
             if (toLower) str = ToLower(str);

@@ -9,8 +9,12 @@
     #define M_PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
 #endif
 
-#define RAD(x) (x*M_PI/180.0)
-#define DEG(x) (x/M_PI*180.0)
+#ifndef SR_PI
+    #define SR_PI M_PI
+#endif
+
+#define RAD(x) (x * SR_PI / 180.0)
+#define DEG(x) (x / SR_PI * 180.0)
 
 //#define _FORCE_INLINE_ __attribute__((always_inline))
 //#define _ALWAYS_INLINE_ inline __attribute__((always_inline))
@@ -38,8 +42,11 @@
 #define Math_INF INFINITY
 #define Math_NAN NAN
 
-#define RAD3(v) glm::vec3(RAD(v.x),RAD(v.y),RAD(v.z))
-#define DEG3(v) glm::vec3(DEG(v.x),DEG(v.y),DEG(v.z))
+#define SR_MAX(a, b) (a > b ? a : b)
+#define SR_MIN(a, b) (a < b ? a : b)
+
+#define RAD3(v) glm::vec3(RAD(v.x), RAD(v.y), RAD(v.z))
+#define DEG3(v) glm::vec3(DEG(v.x), DEG(v.y), DEG(v.z))
 
 #include <cmath>
 #include <cfloat>

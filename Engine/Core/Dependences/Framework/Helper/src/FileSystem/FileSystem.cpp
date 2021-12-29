@@ -3,19 +3,22 @@
 //
 #define CRT_SECURE_NO_WARNINGS
 
-#include "../../inc/FileSystem/FileSystem.h"
+#include <FileSystem/FileSystem.h>
 
+#include <macros.h>
 #include <cstdio>
 #include <Debug.h>
 #include <Utils/StringUtils.h>
 
-#ifdef WIN32
+#ifdef SR_WIN32
     #include <Windows.h>
+    #include <tchar.h>
 #endif
 
 #include <Utils/StringUtils.h>
 #include <Debug.h>
 #include <direct.h>
+#include <FileSystem/Path.h>
 
 using namespace Framework::Helper;
 
@@ -36,7 +39,7 @@ bool Framework::Helper::FileSystem::FileExists(const std::string& path) {
 }
 
 std::string Framework::Helper::FileSystem::GetPathToExe() {
-#ifdef WIN32
+#ifdef SR_WIN32
     const std::size_t buf_len = 260;
     auto s = new TCHAR[buf_len];
     auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
@@ -48,7 +51,7 @@ std::string Framework::Helper::FileSystem::GetPathToExe() {
 }
 
 std::string Framework::Helper::FileSystem::GetFullPathToExe() {
-#ifdef WIN32
+#ifdef SR_WIN32
     const std::size_t buf_len = 260;
     auto s = new TCHAR[buf_len];
     auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
@@ -98,7 +101,7 @@ char *FileSystem::Load(std::string path) {
 }
 
 std::string FileSystem::GetExecutableFileName() {
-#ifdef WIN32
+#ifdef SR_WIN32
     const std::size_t buf_len = 260;
     auto s = new TCHAR[buf_len];
     auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
@@ -206,5 +209,78 @@ std::string FileSystem::SaveFileDialog(const std::string &path, const std::strin
 #else
 #endif
     return std::string();
+}
+
+std::string FileSystem::GetFullPath(const std::string& path) {
+#ifdef SR_WIN32
+    char fullFilename[MAX_PATH];
+    GetFullPathName(path.c_str(), MAX_PATH, fullFilename, nullptr);
+    return std::string(fullFilename);
+#else
+    return std::string();
+#endif
+}
+
+std::string FileSystem::NormalizePath(const std::string &path) {
+    auto newPath = StringUtils::MakePath(path);
+
+    do {
+        auto pos = newPath.find("/..");
+        if (pos == std::string::npos)
+            break;
+
+        auto splash = newPath.rfind('/', pos - 1);
+        if (splash == std::string::npos)
+            break;
+
+        newPath = newPath.erase(splash + 1, (pos - splash) + 3);
+    } while(true);
+
+    return newPath;
+}
+
+std::vector<Path> FileSystem::GetFilesInDir(const std::string& path) {
+    std::vector<Path> files;
+#ifdef SR_WIN32
+    std::string search_path = path + "/*.*";
+    WIN32_FIND_DATA fd;
+    HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+    if(hFind != INVALID_HANDLE_VALUE) {
+        do {
+            // read all (real) files in current folder
+            // , delete '!' read other 2 default folder . and ..
+            if (!(static_cast<unsigned>(fd.dwFileAttributes) & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY))) {
+                files.emplace_back(path + "/" + std::string(fd.cFileName));
+            }
+        } while(::FindNextFile(hFind, &fd));
+
+        ::FindClose(hFind);
+    }
+#endif
+    return files;
+}
+
+std::vector<Path> FileSystem::GetDirectoriesInDir(const std::string &path) {
+    std::vector<Path> folders;
+#ifdef SR_WIN32
+    std::string search_path = path + "/*.*";
+    WIN32_FIND_DATA fd;
+    HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+    if(hFind != INVALID_HANDLE_VALUE) {
+        do {
+            // read all (real) files in current folder
+            // , delete '!' read other 2 default folder . and ..
+            if ((fd.dwFileAttributes & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY))) {
+                const auto filename = std::string(fd.cFileName);
+                const auto folder = path + "/" + filename;
+                if (filename != "." && filename != ".." && !filename.empty())
+                    folders.emplace_back(folder);
+            }
+        } while(::FindNextFile(hFind, &fd));
+
+        ::FindClose(hFind);
+    }
+#endif
+    return folders;
 }
 

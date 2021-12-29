@@ -15,7 +15,7 @@
 
 using namespace Framework::Helper;
 
-bool Framework::Graphics::Window::Create(GUI::ICanvas* canvas) {
+bool Framework::Graphics::Window::Create() {
     if (m_isCreate) {
         Debug::Error("Window::Create() : window already create!");
         return false;
@@ -23,7 +23,6 @@ bool Framework::Graphics::Window::Create(GUI::ICanvas* canvas) {
 
     Debug::Graph("Window::Create() : creating window...");
 
-    this->m_canvas = canvas;
     this->m_time = new Helper::Types::Time();
     this->m_time->SetFPSLimit(60);
 
@@ -143,12 +142,6 @@ bool Framework::Graphics::Window::Close() {
 
     Debug::Graph("Window::Close() : close window...");
 
-    if (this->m_canvas) {
-        this->m_canvas->Destroy();
-        this->m_canvas->Free();
-        this->m_canvas = nullptr;
-    }
-
     this->m_isRun   = false;
     this->m_isClose = true;
 
@@ -194,14 +187,13 @@ void Framework::Graphics::Window::Thread() {
     }
 
     { // centralize window and print default size
-        glm::vec2 scr_size = m_env->GetScreenSize();
+        auto scr_size = m_env->GetScreenSize();
         Debug::Log("Window::Thread() : screen size is " +
             std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
-        this->CentralizeWindow();
     }
 
     double deltaTime = 0;
-    unsigned int frames = 0;
+    uint32_t frames = 0;
 
     // for optimization needed pipeline
     const PipeLine pipeLine = m_env->GetPipeLine();
@@ -394,26 +386,26 @@ bool Framework::Graphics::Window::InitEnvironment() {
             "SpaRcle Engine",
             "SREngine",
             ResourceManager::Instance().GetResourcesFolder() + "/Utilities/glslc.exe")){
-        Debug::Error("Window::InitEnvironment() : failed pre-initializing environment!");
+        Debug::Error("Window::InitEnvironment() : failed to pre-initializing environment!");
         return false;
     }
 
     Debug::Graph("Window::InitEnvironment() : creating window...");
-    if (!this->m_env->MakeWindow(this->m_win_name, m_fullScreen, m_resizable)) {
-        Debug::Error("Window::InitEnvironment() : failed creating window!");
+    if (!this->m_env->MakeWindow(this->m_win_name, m_fullScreen, m_resizable, m_headerEnabled)) {
+        Debug::Error("Window::InitEnvironment() : failed to creating window!");
         return false;
     }
     this->m_env->SetWindowIcon(std::string(Helper::ResourceManager::Instance().GetResourcesFolder().append("/Textures/").append(m_icoPath)).c_str());
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
     if (!this->m_env->SetContextCurrent()) {
-        Debug::Error("Window::InitEnvironment() : failed set context!");
+        Debug::Error("Window::InitEnvironment() : failed to set context!");
         return false;
     }
 
     Debug::Graph("Window::InitEnvironment() : initializing environment...");
     if (!this->m_env->Init(m_vsync)) {
-        Debug::Error("Window::InitEnvironment() : failed initializing environment!");
+        Debug::Error("Window::InitEnvironment() : failed to initializing environment!");
         return false;
     }
 
@@ -431,7 +423,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
             GUI::ICanvas::InitStyle();
             this->m_env->InitGUI();
         } else
-            Debug::Error("Window::InitEnvironment() : failed pre-initializing GUI!");
+            Debug::Error("Window::InitEnvironment() : failed to pre-initializing GUI!");
     }
 
     m_isEnvInit = true;
@@ -486,8 +478,11 @@ void Framework::Graphics::Window::CentralizeCursor() noexcept {
 
 void Framework::Graphics::Window::PollEvents() {
     // change gui enabled
-    if (m_GUIEnabled.first != m_GUIEnabled.second)
+    if (m_GUIEnabled.first != m_GUIEnabled.second) {
+        m_env->SetBuildState(false);
+        this->m_env->SetGUIEnabled(m_GUIEnabled.second);
         m_GUIEnabled.first = m_GUIEnabled.second;
+    }
 
     if (m_countNewCameras > 0) {
         std::lock_guard<std::mutex> lock(m_camerasMutex);
@@ -534,11 +529,16 @@ void Framework::Graphics::Window::PollEvents() {
     }
 
     if (m_isNeedResize) {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         m_env->SetWindowSize((uint32_t)m_newWindowSize.x, (uint32_t)m_newWindowSize.y);
         this->m_isNeedResize = false;
+        m_newWindowSize = { 0, 0 };
     }
 
     if (m_isNeedMove) {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         m_env->SetWindowPosition((int)m_newWindowPos.x, (int)m_newWindowPos.y);
 
         this->m_isNeedMove = false;
@@ -557,26 +557,27 @@ bool Framework::Graphics::Window::Free() {
 }
 
 void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     Helper::Debug::Log("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
     this->m_newWindowSize = { (int32_t)w, (int32_t)h };
     this->m_isNeedResize = true;
 }
 
 void Framework::Graphics::Window::CentralizeWindow() {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     Helper::Debug::Log("Window::CentralizeWindow() : wait centralize window...");
 
-    //ret: if (m_isNeedResize)
-    //    goto ret;
+    auto scr_size = m_env->GetScreenSize();
 
-    glm::vec2 scr_size = m_env->GetScreenSize();
-
-    uint32_t w = m_isNeedResize ? (uint32_t)m_newWindowSize.x : (uint32_t)m_env->GetWindowSize().x;
-    uint32_t h = m_isNeedResize ? (uint32_t)m_newWindowSize.y : (uint32_t)m_env->GetWindowSize().y;
+    auto w = m_isNeedResize ? m_newWindowSize.x : m_env->GetBasicWindow()->GetWidth();
+    auto h = m_isNeedResize ? m_newWindowSize.y : m_env->GetBasicWindow()->GetHeight();
 
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;
 
-    this->m_newWindowPos = { (int32_t)w, (int32_t)(h + 20) }; // TODO: SEE
+    this->m_newWindowPos = { (int32_t)w, (int32_t)h };
     this->m_isNeedMove = true;
 }
 

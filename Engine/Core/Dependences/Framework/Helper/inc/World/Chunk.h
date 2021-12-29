@@ -38,12 +38,20 @@ namespace Framework::Helper {
             static bool Belongs(const Math::IVector3& position, const Math::IVector2& size, const Math::FVector3& point);
 
         public:
+            bool Clear();
+            void Insert(const GameObject::Ptr& ptr);
+            void Erase(const GameObject::Ptr& ptr);
+            uint32_t GetContainerSize() const;
+
+        public:
             virtual void OnEnter();
             virtual void OnExit();
             virtual void Update(float_t dt);
             virtual bool Access(const Math::FVector3& point);
             virtual bool Belongs(const Math::FVector3& point);
             virtual bool Unload();
+
+            virtual bool ApplyOffset();
             virtual void SetOffset(const World::Offset& offset);
 
         private:
@@ -61,6 +69,7 @@ namespace Framework::Helper {
             Math::IVector3 m_position;
 
             World::Offset m_offset;
+            World::Offset m_delta;
         };
     }
 }

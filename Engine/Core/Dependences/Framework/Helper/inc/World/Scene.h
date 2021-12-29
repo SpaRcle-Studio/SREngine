@@ -23,7 +23,9 @@
 
 namespace Framework::Helper::World {
     class Region;
+    class Chunk;
 
+    typedef std::unordered_map<GameObject::Ptr, Chunk*> GameObjectPairs;
     typedef std::unordered_set<GameObject::Ptr> GameObjects;
     typedef std::unordered_map<Math::IVector2, Region*> Regions;
 
@@ -50,6 +52,7 @@ namespace Framework::Helper::World {
 
         StringAtom                   m_name                = "Unnamed";
 
+        GameObjectPairs              m_gameObjectPairs     = GameObjectPairs();
         GameObjects                  m_gameObjects         = GameObjects();
         GameObjects                  m_selectedGameObjects = GameObjects();
         GameObjects                  m_rootObjects         = GameObjects();
@@ -65,6 +68,7 @@ namespace Framework::Helper::World {
         }
         void SetObserver(const GameObject::Ptr& observer) { m_observer.m_target = observer; }
         [[nodiscard]] Observer GetObserver() const { return m_observer; }
+        Chunk* GetCurrentChunk() const;
         void SetWorldOffset(const World::Offset& offset);
         Types::SafePtr<GameObject> GetSelected() const;
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
