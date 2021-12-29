@@ -181,8 +181,8 @@ namespace ImGuizmo
    }
 
    template <typename T> T Clamp(T x, T y, T z) { return ((x < y) ? y : ((x > z) ? z : x)); }
-   template <typename T> T max(T x, T y) { return (x > y) ? x : y; }
-   template <typename T> T min(T x, T y) { return (x < y) ? x : y; }
+   //template <typename T> T max(T x, T y) { return (x > y) ? x : y; }
+   //template <typename T> T min(T x, T y) { return (x < y) ? x : y; }
    template <typename T> bool IsWithin(T x, T y, T z) { return (x >= y) && (x <= z); }
 
    struct matrix_t;
@@ -1010,13 +1010,13 @@ namespace ImGuizmo
       gContext.mReversed = (far.z/far.w) < 0.f;*/
 
       //!---
-       vec_t near, far;
-       near.Transform(makeVect(0, 0, 1.f, 1.f), gContext.mProjectionMat);
-       far.Transform(makeVect(0, 0, 2.f, 1.f), gContext.mProjectionMat);
+       vec_t zNear, zFar;
+       zNear.Transform(makeVect(0, 0, 1.f, 1.f), gContext.mProjectionMat);
+       zFar.Transform(makeVect(0, 0, 2.f, 1.f), gContext.mProjectionMat);
        //near.Transform(makeVect(0, 0, -1.f, 1.f), gContext.mProjectionMat);
        //far.Transform(makeVect(0, 0, -2.f, 1.f), gContext.mProjectionMat);
 
-       gContext.mReversed = (near.z/near.w) > (far.z / far.w);
+       gContext.mReversed = (zNear.z / zNear.w) > (zFar.z / zFar.w);
        //!---
 
       // compute scale from the size of camera right vector projected on screen at the matrix position
@@ -1550,7 +1550,11 @@ namespace ImGuizmo
             }
             float boundDistance = sqrtf(ImLengthSqr(worldBound1 - worldBound2));
             int stepCount = (int)(boundDistance / 10.f);
+#ifdef _MSVC_LANG
             stepCount = min(stepCount, 1000);
+#else
+            stepCount = fmin(stepCount, 1000);
+#endif
             float stepLength = 1.f / (float)stepCount;
             for (int j = 0; j < stepCount; j++)
             {
@@ -2065,11 +2069,18 @@ namespace ImGuizmo
 
                gContext.mRotationAngle = ratio;
                g_activeAxis = axisIndex;
-
+#ifdef _MSVC_LANG
                gContext.mScale[axisIndex] = max(ratio, 0.001f);
+#else
+               gContext.mScale[axisIndex] = fmax(ratio, 0.001f);
+#endif
            } else {
                float scaleDelta = (io.MousePos.x - gContext.mSaveMousePosx) * 0.01f;
+#ifdef _MSVC_LANG
                gContext.mScale.Set(max(1.f + scaleDelta, 0.001f));
+#else
+               gContext.mScale.Set(fmax(1.f + scaleDelta, 0.001f));
+#endif
            }
 
            // snap
@@ -2080,7 +2091,11 @@ namespace ImGuizmo
 
            // no 0 allowed
            for (int i = 0; i < 3; i++)
+#ifdef _MSVC_LANG
                gContext.mScale[i] = max(gContext.mScale[i], 0.001f);
+#else
+               gContext.mScale[i] = fmax(gContext.mScale[i], 0.001f);
+#endif
 
            if (gContext.mScaleLast != gContext.mScale) {
                modified = true;

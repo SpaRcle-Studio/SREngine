@@ -60,12 +60,13 @@
 
 // Win32 Data
 static HWND                 g_hWnd = NULL;
-static INT64                g_Time = 0;
 static INT64                g_TicksPerSecond = 0;
 static ImGuiMouseCursor     g_LastMouseCursor = ImGuiMouseCursor_COUNT;
 static bool                 g_HasGamepad = false;
 static bool                 g_WantUpdateHasGamepad = true;
-static bool                 g_WantUpdateMonitors = true;
+
+static INT64                g_Win32Time = 0;
+static bool                 g_Win32WantUpdateMonitors = true;
 
 // Forward Declarations
 static void ImGui_ImplWin32_InitPlatformInterface();
@@ -77,7 +78,7 @@ bool    ImGui_ImplWin32_Init(void* hwnd)
 {
     if (!::QueryPerformanceFrequency((LARGE_INTEGER*)&g_TicksPerSecond))
         return false;
-    if (!::QueryPerformanceCounter((LARGE_INTEGER*)&g_Time))
+    if (!::QueryPerformanceCounter((LARGE_INTEGER*)&g_Win32Time))
         return false;
 
     // Setup backend capabilities flags
@@ -294,7 +295,7 @@ static void ImGui_ImplWin32_UpdateMonitors()
 {
     ImGui::GetPlatformIO().Monitors.resize(0);
     ::EnumDisplayMonitors(NULL, NULL, ImGui_ImplWin32_UpdateMonitors_EnumFunc, NULL);
-    g_WantUpdateMonitors = false;
+    g_Win32WantUpdateMonitors = false;
 }
 
 void    ImGui_ImplWin32_NewFrame()
@@ -306,14 +307,14 @@ void    ImGui_ImplWin32_NewFrame()
     RECT rect;
     ::GetClientRect(g_hWnd, &rect);
     io.DisplaySize = ImVec2((float)(rect.right - rect.left), (float)(rect.bottom - rect.top));
-    if (g_WantUpdateMonitors)
+    if (g_Win32WantUpdateMonitors)
         ImGui_ImplWin32_UpdateMonitors();
 
     // Setup time step
     INT64 current_time;
     ::QueryPerformanceCounter((LARGE_INTEGER*)&current_time);
-    io.DeltaTime = (float)(current_time - g_Time) / g_TicksPerSecond;
-    g_Time = current_time;
+    io.DeltaTime = (float)(current_time - g_Win32Time) / g_TicksPerSecond;
+    g_Win32Time = current_time;
 
     // Read keyboard modifiers inputs
     io.KeyCtrl = (::GetKeyState(VK_CONTROL) & 0x8000) != 0;
@@ -425,7 +426,7 @@ IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARA
             g_WantUpdateHasGamepad = true;
         return 0;
     case WM_DISPLAYCHANGE:
-        g_WantUpdateMonitors = true;
+        g_Win32WantUpdateMonitors = true;
         return 0;
     }
     return 0;
@@ -479,7 +480,7 @@ typedef DPI_AWARENESS_CONTEXT(WINAPI* PFN_SetThreadDpiAwarenessContext)(DPI_AWAR
 void ImGui_ImplWin32_EnableDpiAwareness()
 {
     // Make sure monitors will be updated with latest correct scaling
-    g_WantUpdateMonitors = true;
+    g_Win32WantUpdateMonitors = true;
 
     // if (IsWindows10OrGreater()) // This needs a manifest to succeed. Instead we try to grab the function pointer!
     {
