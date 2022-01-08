@@ -26,41 +26,49 @@
   * EvoVulkan
 
 ## Exists systems
+  * Types
+      * Thread - обертка над стандартным классом, с некоторыми дополнениями
+      * SafePtr - универсальный умный указатель, обеспечивает сохранность данных в многопоточной среде
+      * Singleton
   * Math
       * Quaternion
       * Vector3
       * Vector2
       * Matrix4x4
   * Graphics
-      * Mesh render
+      * Mesh-cluster
       * GUI 
       * OBJ-loader
+      * FBX-loader
       * Texturing
-        * Compressing BC1-BC7
+        * Compressing BC1-BC7 (Only Vulkan)
       * Shaders
       * Materials
       * PostProcessing
-        * Saturation
-        * Bloom (Slow)
-        * Color correction (Base)
-  * Physics
+        * Saturation (Only OpenGL)
+        * Bloom (Slow) (Only OpenGL)
+        * Color correction (Base) (Only OpenGL)
+  * Physics (Не начато)
       * Rigidbody (Base component)
-  * Scripting
-  * Audio
-  * ECS
+  * Scripting (Полностью сделано через EvoScript)
+  * Audio (Не начато)
+  * World
       * Scene 
-      * GameObject
+      * GameObject (Используется частично паттерн ECS)
          * Transform
          * Hierarchy-transformation (80%)
-      * Component
-  * Input system
+         * Component
+      * Chunk-System - чанковая система, которая разбивает мир на чанки и регионы, позволяя удаляться на огромные расстояния от центра мира без каких либо артефактов, производя для этого "сдвиги"
+  * Input system (Только стандартый ввод Windows)
   * Memory management
+      * ResourceManager
       * IResource - interface for control resource units
   * Debug and logging
  
 ## Editor
-  * Grid
+  * Grid (Only OpenGL)
   * Manipulation tools
   * Inspector 
-  * Hierarchy (70%)
-  * Render settings
+  * Hierarchy
+  * Asset explorer
+  * World edit
