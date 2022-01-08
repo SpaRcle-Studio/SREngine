@@ -16,9 +16,12 @@ namespace Framework::Scripting {
     class EvoScriptImpl : public Scripting::Script {
     public:
         EvoScriptImpl(Compiler* compiler, const std::string& name, const std::string& path)
-            : Script(compiler, name, Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/" + path) { }
-        ~EvoScriptImpl() override = default;
+            : Script(compiler, name, Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scripts/").Concat(path))
+        { }
+
         EvoScriptImpl(const EvoScriptImpl&) = delete;
+        ~EvoScriptImpl() override = default;
+
     public:
         void ForcedFree() override {
             delete this;
@@ -26,8 +29,7 @@ namespace Framework::Scripting {
         bool AwaitDestroy() override;
         bool Compile() override;
         bool DelayedDestroyAndFree() override;
-    private:
-        EvoScript::Script* m_script = nullptr;
+
     public:
         void Awake() override;
         void Start() override;
@@ -35,6 +37,10 @@ namespace Framework::Scripting {
         void Update() override;
         void FixedUpdate() override;
         void OnGUI() override;
+
+    private:
+        EvoScript::Script* m_script = nullptr;
+
     };
 }
 

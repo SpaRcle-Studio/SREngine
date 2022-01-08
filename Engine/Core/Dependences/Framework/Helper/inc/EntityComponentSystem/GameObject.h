@@ -28,7 +28,8 @@ namespace Framework::Helper {
 
     class Transform;
     class Component;
-    class GameObject : public ISavable {
+
+    class GameObject : public Types::SafePtr<GameObject> {
         friend class World::Scene;
         friend class Transform;
         friend class ::Framework::API;
@@ -46,18 +47,12 @@ namespace Framework::Helper {
         void DestroyFromScene();
         void Free();
     public:
-        Xml::Document Save() override;
-        bool Load(const Xml::Document& xml) override;
-    public:
         [[nodiscard]] Types::SafePtr<World::Scene> GetScene() const noexcept { return this->m_scene; }
-        Transform* GetTransform() const { return this->m_transform; }
+        [[nodiscard]] Transform* GetTransform() const { return this->m_transform; }
     public:
         Math::FVector3 GetBarycenter();
         Math::FVector3 GetHierarchyBarycenter();
 
-        void SetThis(const Types::SafePtr<GameObject>& _this) {
-            m_this = _this;
-        }
         void ForEachComponent(const std::function<bool(Component*)>& fun);
         void ForEachChild(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetParent(GameObject* gm);
@@ -87,8 +82,6 @@ namespace Framework::Helper {
         void OnPrentSetActive(bool value);
         void UpdateComponentsEnabled();
     private:
-        Types::SafePtr<GameObject>              m_this           = Types::SafePtr<GameObject>();
-
         bool                                    m_isActive       = true;
         bool                                    m_isParentActive = true;
 

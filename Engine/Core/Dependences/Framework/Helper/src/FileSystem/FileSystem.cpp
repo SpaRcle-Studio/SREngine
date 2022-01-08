@@ -33,7 +33,7 @@ bool Framework::Helper::FileSystem::FileExists(const std::string& path) {
     else
         return false;
 #else
-    Debug::Error("FileSystem::FileExists() : linux not support this function!");
+    Debug::Error("FileSystem::FileExists() : engine not support this function!");
     return false;
 #endif
 }
@@ -242,7 +242,7 @@ std::string FileSystem::NormalizePath(const std::string &path) {
 std::vector<Path> FileSystem::GetFilesInDir(const std::string& path) {
     std::vector<Path> files;
 #ifdef SR_WIN32
-    std::string search_path = path + "/*.*";
+    const std::string search_path = path + "/*.*";
     WIN32_FIND_DATA fd;
     HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
     if(hFind != INVALID_HANDLE_VALUE) {
@@ -263,7 +263,7 @@ std::vector<Path> FileSystem::GetFilesInDir(const std::string& path) {
 std::vector<Path> FileSystem::GetDirectoriesInDir(const std::string &path) {
     std::vector<Path> folders;
 #ifdef SR_WIN32
-    std::string search_path = path + "/*.*";
+    const std::string search_path = path + "/*.*";
     WIN32_FIND_DATA fd;
     HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
     if(hFind != INVALID_HANDLE_VALUE) {
@@ -282,5 +282,38 @@ std::vector<Path> FileSystem::GetDirectoriesInDir(const std::string &path) {
     }
 #endif
     return folders;
+}
+
+std::vector<Path> FileSystem::GetAllInDir(const std::string &path) {
+    std::vector<Path> folders;
+#ifdef SR_WIN32
+    const std::string search_path = path + "/*.*";
+    WIN32_FIND_DATA fd;
+    HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+    if(hFind != INVALID_HANDLE_VALUE) {
+        do {
+            const auto filename = std::string(fd.cFileName);
+            if (filename != "." && filename != ".." && !filename.empty())
+                folders.emplace_back(path + "/" + filename);
+        }
+        while(::FindNextFile(hFind, &fd));
+
+        ::FindClose(hFind);
+    }
+#endif
+    return folders;
+}
+
+bool FileSystem::FolderExists(const std::string &path) {
+#ifdef SR_WIN32
+    DWORD ftyp = GetFileAttributesA(path.c_str());
+    if (ftyp == INVALID_FILE_ATTRIBUTES)
+        return false;  //something is wrong with your path!
+
+    if (ftyp & FILE_ATTRIBUTE_DIRECTORY)
+        return true;   // this is a directory!
+#endif
+
+    return false; // this is not a directory!
 }
 

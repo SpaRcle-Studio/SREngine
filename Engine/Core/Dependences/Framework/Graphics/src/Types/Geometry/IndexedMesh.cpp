@@ -5,13 +5,13 @@
 #include <Types/Geometry/IndexedMesh.h>
 
 namespace Framework::Graphics::Types {
-    Mesh *IndexedMesh::Copy(Mesh *mesh) const {
-        if (!mesh) {
-            Helper::Debug::Error("IndexedMesh::Copy() : mesh in nullptr!");
+    IResource *IndexedMesh::Copy(IResource *destination) const {
+        if (!destination) {
+            Helper::Debug::Error("IndexedMesh::Copy() : destination in nullptr!");
             return nullptr;
         }
 
-        auto indexed = dynamic_cast<IndexedMesh *>(mesh);
+        auto indexed = dynamic_cast<IndexedMesh *>(destination);
         if (!indexed) {
             Helper::Debug::Error("IndexedMesh::Copy() : bad cast!");
             return nullptr;
@@ -19,7 +19,7 @@ namespace Framework::Graphics::Types {
 
         if (IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            indexed->m_IBO = manager.CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(m_resource_id);
+            indexed->m_IBO = manager.CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId());
         } else
             indexed->m_indices = m_indices;
 
@@ -33,13 +33,18 @@ namespace Framework::Graphics::Types {
         if (!m_useIndices)
             return true;
 
-        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(m_resource_id); m_IBO == SR_ID_INVALID) {
+        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
+            if (m_countIndices == 0 || m_indices.empty()) {
+                Debug::Error("IndexedMesh::Calculate() : invalid indices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
+                return false;
+            }
+
             if (m_IBO = this->m_env->CalculateIBO(m_indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
                 Debug::Error("IndexedMesh::Calculate() : failed calculate IBO \"" + m_geometryName + "\" mesh!");
                 this->m_hasErrors = true;
                 return false;
             } else
-                Memory::MeshManager::Instance().Register<Vertices::Type::Unknown, Memory::MeshManager::IBO>(m_resource_id, m_IBO);
+                Memory::MeshManager::Instance().Register<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId(), m_IBO);
         }
 
         return VertexMesh::Calculate();
@@ -48,7 +53,7 @@ namespace Framework::Graphics::Types {
     bool IndexedMesh::FreeVideoMemory() {
         using namespace Memory;
         auto &&manager = Memory::MeshManager::Instance();
-        if (m_useIndices && manager.Free<Vertices::Type::Unknown, MeshManager::IBO>(m_resource_id) == MeshManager::FreeResult::Freed) {
+        if (m_useIndices && manager.Free<Vertices::Type::Unknown, MeshManager::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!Environment::Get()->FreeIBO(m_IBO))
                 Debug::Error("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
         }

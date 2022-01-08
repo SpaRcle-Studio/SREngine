@@ -50,26 +50,22 @@ Framework::Graphics::Types::Mesh::~Mesh() {
 }
 
 bool Framework::Graphics::Types::Mesh::Destroy() {
-    if (m_isDestroy)
+    if (IsDestroy())
         return false;
 
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
-
-    this->m_isDestroy = true;
 
     if (m_material)
         this->m_material->FreeTextures();
 
     Helper::ResourceManager::Instance().Destroy(this);
 
-    return true;
+    return IResource::Destroy();
 }
 
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath, MeshType type) {
-    std::string path = ResourceManager::Instance().GetResourcesFolder() + "/Models/" + localPath;
-
-    path = StringUtils::MakePath(path, SR_WIN32_BOOL);
+    auto path = ResourceManager::Instance().GetResourcesFolder().Concat("/Models/").Concat(localPath);
 
     std::vector<Mesh*> meshes = std::vector<Mesh*>();
 
@@ -77,8 +73,8 @@ std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& lo
 ret:
     const std::string resId = localPath + " - "+ std::to_string(counter) + " " + EnumMeshTypeToString(type);
     if (IResource* find = ResourceManager::Instance().Find("Mesh", resId)) {
-        if (Mesh* copy = ((Mesh*)(find))->Copy(nullptr)) {
-            meshes.push_back(copy);
+        if (IResource* copy = ((Mesh*)(find))->Copy(nullptr)) {
+            meshes.push_back((Mesh*)copy);
             counter++;
             goto ret;
         } else {
@@ -96,7 +92,7 @@ ret:
         meshes = ObjLoader::Load(path, withIndices, type);
     }
     else if (ext == "fbx") {
-        SRAssert(type == MeshType::Static)
+        SRAssert(type == MeshType::Static);
 
         if (!FbxLoader::Debug::IsInit())
             FbxLoader::Debug::Init([](const std::string& msg) { Helper::Debug::Error(msg); });
@@ -104,9 +100,9 @@ ret:
         const auto resFolder = Helper::ResourceManager::Instance().GetResourcesFolder();
 
         auto fbx = FbxLoader::Loader::Load(
-                resFolder + "/Utilities/FbxFormatConverter.exe",
-                resFolder + "/Cache/",
-                resFolder + "/Models/",
+                resFolder.Concat("/Utilities/FbxFormatConverter.exe"),
+                resFolder.Concat("/Cache/"),
+                resFolder.Concat("/Models/"),
                 localPath,
                 withIndices);
 
@@ -128,12 +124,12 @@ ret:
             meshes.emplace_back(mesh);
         }
     } else {
-        Helper::Debug::Error("Mesh::Load() : unknown \""+ext+"\" format!");
+        Helper::Debug::Error("Mesh::Load() : unknown \"" + ext + "\" format!");
         meshes = std::vector<Mesh*>();
     }
 
-    for (uint32_t i = 0; i < static_cast<uint32_t>(meshes.size()); i++) {
-        meshes[i]->m_resource_id = localPath + " - " + std::to_string(i) + " " + EnumMeshTypeToString(type);
+    for (uint32_t i = 0; i < static_cast<uint32_t>(meshes.size()); ++i) {
+        meshes[i]->SetId(localPath + " - " + std::to_string(i) + " " + EnumMeshTypeToString(type));
     }
 
     return meshes;
@@ -214,19 +210,20 @@ Math::FVector3 Mesh::GetBarycenter() const {
     return (rotateMat * baryMat).GetTranslate();
 }
 
-Mesh *Mesh::Copy(Mesh *mesh) const {
-    if (m_isDestroy) {
+IResource *Mesh::Copy(IResource* destination) const {
+    if (IsDestroy()) {
         Debug::Error("Mesh::Copy() : mesh already destroyed!");
         return nullptr;
     }
 
+    Mesh* mesh = dynamic_cast<Mesh*>(destination);
     if (!mesh) {
         Debug::Error("Mesh::Copy() : impossible to copy basic mesh!");
         return nullptr;
     }
 
     if (Debug::GetLevel() >= Debug::Level::Full)
-        Debug::Log("Mesh::Copy() : copy \"" + m_resource_id + "\" mesh...");
+        Debug::Log("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
 
     // TODO: in feature mesh will be resource
     //auto material = m_material ? m_material->Copy() : new Material();
@@ -239,13 +236,10 @@ Mesh *Mesh::Copy(Mesh *mesh) const {
     mesh->m_rotation   = m_rotation;
     mesh->m_scale      = m_scale;
 
-    mesh->m_resource_id   = m_resource_id;
-
     mesh->m_isCalculated  = m_isCalculated;
-    mesh->m_autoRemove    = m_autoRemove;
     mesh->m_modelMat      = m_modelMat;
 
-    return mesh;
+    return Helper::IResource::Copy(mesh);
 }
 
 bool Mesh::FreeVideoMemory() {
@@ -289,13 +283,14 @@ void Mesh::ReCalcModel() {
 void Mesh::WaitCalculate() const  {
     ret:
     if (!m_render || m_render->GetWindow()->GetCountCameras() == 0) {
-        Helper::Debug::Error("Mesh::WaitCalculate() : There is no destination render or camera!"
-                             " The geometry will never be calculated.");
+        SRAssert2(false, Helper::Format("Mesh::WaitCalculate() : There is no destination render or camera!"
+                             " The geometry will never be calculated. \nName: %s", m_geometryName.c_str()).c_str());
         return;
     }
 
     if (m_isCalculated)
         return;
+
     goto ret;
 }
 

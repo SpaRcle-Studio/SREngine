@@ -305,19 +305,18 @@ bool Framework::Graphics::OpenGL::CompileShader(
         const std::string& name,
         int32_t FBO,
         void** shaderData,
-        const std::vector<uint64_t>& uniformSizes
-        ) const
+        const std::vector<uint64_t>& uniformSizes) const
 {
-    std::string shadersPath = ResourceManager::Instance().GetResourcesFolder() + "/Shaders/";
+    auto shadersPath = ResourceManager::Instance().GetResourcesFolder().Concat("/Shaders/");
 
-    std::string vertex_path = shadersPath + "Common/" + name + ".vert";
-    std::string fragment_path = shadersPath + "Common/" + name + ".frag";
+    auto vertexPath = shadersPath.Concat("Common/").Concat(name).Concat(".vert");
+    auto fragmentPath = shadersPath.Concat("Common/").Concat(name).Concat(".frag");
 
-    if (!Helper::FileSystem::FileExists(vertex_path))
-        vertex_path = shadersPath + GetPipeLineName() + "/" + name + ".vert";
+    if (!Helper::FileSystem::FileExists(vertexPath))
+        vertexPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(name).Concat(".vert");
 
-    if (!Helper::FileSystem::FileExists(fragment_path))
-        fragment_path = shadersPath + GetPipeLineName() + "/" + name + ".frag";;
+    if (!Helper::FileSystem::FileExists(fragmentPath))
+        fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(name).Concat(".frag");
 
     auto* glShader = new GLShaderData();
 
@@ -330,7 +329,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
 
     //! читаем вершинный шейдер из файла
     std::string VertexShaderCode;
-    std::ifstream VertexShaderStream(vertex_path, std::ios::in);
+    std::ifstream VertexShaderStream(vertexPath, std::ios::in);
     if (VertexShaderStream.is_open()) {
         std::string line;
         while (getline(VertexShaderStream, line))
@@ -340,7 +339,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
 
     //! читаем фрагментный шейдер из файла
     std::string FragmentShaderCode;
-    std::ifstream FragmentShaderStream(fragment_path, std::ios::in);
+    std::ifstream FragmentShaderStream(fragmentPath, std::ios::in);
     if (FragmentShaderStream.is_open()) {
         std::string line;
         while (getline(FragmentShaderStream, line))

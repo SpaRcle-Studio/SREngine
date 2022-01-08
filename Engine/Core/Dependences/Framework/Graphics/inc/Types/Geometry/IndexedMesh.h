@@ -25,7 +25,7 @@ namespace Framework::Graphics::Types {
     public:
         template<bool fast> [[nodiscard]] int32_t GetIBO();
 
-        Mesh* Copy(Mesh* mesh) const override;
+        IResource* Copy(IResource* destination) const override;
 
         void SetIndexArray(const std::vector<uint32_t>& indices) {
             this->m_countIndices = indices.size();

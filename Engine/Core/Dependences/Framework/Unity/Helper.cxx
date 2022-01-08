@@ -19,6 +19,9 @@
 #include "../Helper/src/ResourceManager/IResource.cpp"
 #include "../Helper/src/ResourceManager/ResourceManager.cpp"
 
+#include "../Helper/src/CommandManager/ICommand.cpp"
+#include "../Helper/src/CommandManager/CmdManager.cpp"
+
 #include "../Helper/src/Types/String.cpp"
 #include "../Helper/src/Types/Time.cpp"
 

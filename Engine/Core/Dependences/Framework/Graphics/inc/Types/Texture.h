@@ -62,8 +62,8 @@ namespace Framework::Graphics::Types {
 
         [[nodiscard]] SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculate; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetID() noexcept {
-            if (m_isDestroy) {
-                Debug::Error("Texture::GetID() : texture \""+m_resource_id+"\" is destroyed!");
+            if (IsDestroy()) {
+                Debug::Error("Texture::GetID() : texture \"" + GetResourceId() + "\" is destroyed!");
                 return -1;
             }
 

@@ -535,13 +535,13 @@ void GUISystem::DrawGuizmoTools() {
 void GUISystem::DrawWorldEdit(Types::SafePtr<Helper::World::Scene> scene) {
     if (scene.LockIfValid()) {
         const auto&& observer = scene->GetObserver();
-        const auto offset = observer.m_offset;
+        const auto offset = observer->m_offset;
 
         ImGui::Separator();
         DrawTextOnCenter("Current");
 
-        ImGui::InputFloat3("Chunk", &observer.m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
-        ImGui::InputFloat2("Region", &observer.m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
+        ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
+        ImGui::InputFloat2("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
 
         ImGui::Separator();
         DrawTextOnCenter("Offset");
@@ -557,7 +557,7 @@ void GUISystem::DrawWorldEdit(Types::SafePtr<Helper::World::Scene> scene) {
         if (auto&& chunk = scene->GetCurrentChunk()) {
             ImGui::Separator();
             auto size = static_cast<int32_t>(chunk->GetContainerSize());
-            ImGui::InputInt("Container size", &size, 0, 0,ImGuiInputTextFlags_ReadOnly);
+            ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
         }
 
         scene.Unlock();
@@ -740,10 +740,10 @@ bool GUISystem::BeginMenuBar() {
 
         if (ImGui::MenuItem("Save scene")) {
             if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
-                auto scenesPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scenes/", false);
-                if (auto path = FileSystem::SaveFileDialog(scenesPath, "Scene Files(*.scene)"); !path.empty()) {
-                    auto sceneName = StringUtils::GetFileNameFromFullPath(path);
-                    auto folder = StringUtils::GetDirToFileFromFullPath(path);
+                const auto scenesPath = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scenes/");
+                if (auto path = FileSystem::SaveFileDialog(scenesPath.ToString(), "Scene Files(*.scene)"); !path.empty()) {
+                    const auto sceneName = StringUtils::GetFileNameFromFullPath(path);
+                    const auto folder = StringUtils::GetDirToFileFromFullPath(path);
 
                     scene->SetName(sceneName);
 

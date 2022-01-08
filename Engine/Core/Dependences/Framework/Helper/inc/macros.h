@@ -5,6 +5,9 @@
 #ifndef GAMEENGINE_MACROS_H
 #define GAMEENGINE_MACROS_H
 
+#pragma warning(disable: 4553)
+#pragma warning(disable: 4552)
+
 #define SR_USE_IMGUI
 
 #ifdef _MSVC_LANG
@@ -19,13 +22,17 @@
     #define SR_MINGW
 #endif
 
-#if (!defined(NDEBUG) && defined(SR_MSVC)) || (!defined(NDEBUG) && defined(SR_MINGW))
+/// если использовать только один из, то Debug будет определяться,
+/// но может возникнуть ситуация, что в разных частях движка будут неправильно работать макросы.
+/// Привет, Visual Studio
+#if defined(NDEBUG) || defined(_DEBUG)
     #define SR_DEBUG
 #else
     #define SR_RELEASE
 #endif
 
 #define SR_FORCE_INLINE __forceinline
+#define SR_INLINE inline
 #define SR_NULL 0
 
 #ifndef SR_USE_GLFW3

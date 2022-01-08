@@ -28,8 +28,9 @@ namespace Framework::Core::World {
 
     private:
         void SetVisible(bool value);
+        void UpdateFacesPos();
 
-    public:
+        void ApplyOffset() override;
         void OnEnter() override;
         void OnExit() override;
         bool Unload() override;

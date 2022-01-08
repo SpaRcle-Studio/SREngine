@@ -127,7 +127,7 @@ bool Framework::Engine::Run() {
     Helper::Debug::Info("Engine::Run() : running world thread...");
 
     m_worldThread = new Types::Thread([this]() {
-        auto timer = Types::Timer(1.0 / 3.0);
+        auto timer = Types::Timer(1.0);
 
         while(m_isRun) {
             if (timer.Update() && m_scene.LockIfValid()) {
@@ -157,13 +157,13 @@ void Framework::Engine::Await() {
         EventManager::PoolEvents();
         m_compiler->PollEvents();
 
-        if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::Enter)) {
-            Debug::System("The closing key combination have been detected!");
-            break;
+        if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
+            Debug::System("Engine::Await() : The closing key combination have been detected!");
+            m_exitEvent = true;
         }
 
         if (m_exitEvent) {
-            Debug::System("The closing event have been received!");
+            Debug::System("Engine::Await() : The closing event have been received!");
             break;
         }
 
@@ -180,6 +180,13 @@ void Framework::Engine::Await() {
 
         accumulator += (float)deltaTime.count() / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
     }
+
+    if (m_window->IsGUIEnabled()) {
+        m_window->SetGUIEnabled(false);
+        Helper::Debug::System("Engine::Await() : disable editor gui...");
+    }
+
+    Helper::Debug::System("Engine::Await() : Stopping main engine script...");
 
     m_mainScript->Close();
     m_mainScript->DelayedDestroyAndFree();

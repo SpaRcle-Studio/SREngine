@@ -13,7 +13,7 @@
 #include <ResourceManager/ResourceManager.h>
 
 void Framework::Core::GUI::FileBrowser::SetFolder(const Helper::Path &path) {
-    SRAssert((m_root = path).IsDir())
+    SRAssert((m_root = path).IsDir());
 }
 
 void Framework::Core::GUI::FileBrowser::Draw(const Framework::Helper::Path &root) {
@@ -25,19 +25,19 @@ void Framework::Core::GUI::FileBrowser::Draw(const Framework::Helper::Path &root
     const auto& folders = root.GetFolders();
 
     Helper::Utils::ForEach<const Helper::Path&>([this](auto path, auto index) -> bool {
-        const bool selected = m_selected == path.GetHash();
+        const bool selected = m_selectedDir.GetHash() == path.GetHash();
 
         if (path.GetFolders().empty()) {
             ImGui::TreeNodeEx((void *)(intptr_t)index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s", path.GetBaseName().c_str());
 
             if (ImGui::IsItemClicked())
-                m_selected = path.GetHash();
+                m_selectedDir = path;
         }
         else {
             bool open = ImGui::TreeNodeEx((void *)(intptr_t)index, selected ? SELECTED_WITH_CHILD : WITH_CHILD, "%s", path.GetBaseName().c_str());
 
             if (ImGui::IsItemClicked())
-                m_selected = path.GetHash();
+                m_selectedDir = path;
 
             if (open) {
                 Draw(path);
@@ -73,21 +73,24 @@ void Framework::Core::GUI::FileBrowser::Draw() {
     auto wndSize = ImGui::GetWindowSize();
 
     uint32_t index = 1;
-    for (const auto& file : SR_ICONS) {
+    for (const auto& path : m_selectedDir.GetAll()) {
         ++index;
 
         ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
-        ImGui::Button(file, ImVec2(50, 50));
+        if (path.IsDir())
+            ImGui::Button(SR_ICON_FOLDER, ImVec2(50, 50));
+        else
+            ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
 
         if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
             ImGui::SameLine();
         else
             index = 1;
 
-        ImGui::PopStyleVar();
         ImGui::PopFont();
+        ImGui::PopStyleVar();
     }
 
     ImGui::EndChild();
@@ -99,6 +102,4 @@ void Framework::Core::GUI::FileBrowser::Draw() {
     ImGui::EndGroup();
 }
 
-Framework::Core::GUI::FileBrowser::FileBrowser()
-    : m_selected(SIZE_MAX)
-{ }
+Framework::Core::GUI::FileBrowser::FileBrowser() = default;

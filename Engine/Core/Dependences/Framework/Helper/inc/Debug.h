@@ -5,10 +5,11 @@
 #ifndef HELPER_DEBUG_H
 #define HELPER_DEBUG_H
 
+#include <macros.h>
 #include <fstream>
 #include <ostream>
 #include <mutex>
-#include <macros.h>
+#include <string>
 #include <cassert>
 
 #ifdef SR_WIN32
@@ -109,30 +110,56 @@ namespace Framework::Helper {
 
 #ifdef SR_RELEASE
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
-    #define SRAssert2(expr, msg) { expr; }
-    #define SRAssert(expr) { expr; }
+    #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); }
+    #define SRAssert(expr) { [[maybe_unused]] const bool expression = !(expr); }
     #define SRAssert1(expr) SRAssert(expr)
-#else
-    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
-        if (fun != notEquals) Framework::Helper::Debug::Error(errorMsg)
+#endif
 
-    #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ") \
+#ifdef SR_DEBUG
+    #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
         .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
 
-    #define SRAssert2(expr, msg) { if (!(expr)) Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
+    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
+        if (fun != notEquals) Framework::Helper::Debug::Error(errorMsg)
+    /*
+    _ACRTIMP void __cdecl _wassert(
+        _In_z_ wchar_t const* _Message,
+        _In_z_ wchar_t const* _File,
+        _In_   unsigned       _Line
+        );
 
-    #define SRAssert2Once(expr, msg) {                     \
+    #define assert(expression) (void)(                                                       \
+            (!!(expression)) ||                                                              \
+            (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0) \
+        )
+     */
+
+    //#define SRAssert2(expr, msg) static_cast<void>(                              \
+    //    (!!(expr)) || (Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)), 0) \
+    //)                                                                            \
+
+    //#define SRAssert2(expr, msg) { if (!(expr)) Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
+
+    #define SRAssert2(expr, msg) {                                  \
+        const volatile bool expression = !(expr);                   \
+        if (expression) {                                           \
+            Framework::Helper::Debug::Assert (SR_MAKE_ASSERT(msg)); \
+        }                                                           \
+    }                                                               \
+
+    #define SRAssert1(expr) SRAssert2(expr, #expr)
+    #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
+#endif
+
+#define SRAssert2Once(expr, msg) {                         \
         static volatile bool g_generated_asserted = false; \
         if (!g_generated_asserted) {                       \
-            SRAssert2(expr, msg)                           \
+            SRAssert2(expr, msg);                          \
             g_generated_asserted = true;                   \
         }                                                  \
     }                                                      \
 
-    #define SRAssert1(expr) SRAssert2(expr, #expr);
+#define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
 
-    #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.");
-    #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.");
-#endif
 
 #endif //HELPER_DEBUG_H

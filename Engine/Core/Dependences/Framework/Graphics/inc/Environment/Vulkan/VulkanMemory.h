@@ -63,7 +63,7 @@ namespace Framework::Graphics::VulkanTools {
 
             this->m_descriptorSets = (EvoVulkan::Core::DescriptorSet*)malloc(sizeof(EvoVulkan::Core::DescriptorSet) * m_countDescriptorSets);
             for (uint32_t i = 0; i < m_countDescriptorSets; i++)
-                m_descriptorSets[i] = { VK_NULL_HANDLE, VK_NULL_HANDLE };
+                m_descriptorSets[i] = EvoVulkan::Core::DescriptorSet();
 
             this->m_textures = (EvoVulkan::Types::Texture**)malloc(sizeof(EvoVulkan::Types::Texture*) * m_countTextures);
             for (uint32_t i = 0; i < m_countTextures; i++)

@@ -9,6 +9,7 @@
 #include <Types/Mesh.h>
 #include <vector>
 #include <mutex>
+#include <queue>
 #include <Environment/Environment.h>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
@@ -55,7 +56,7 @@ namespace Framework::Graphics {
 
         // TO_REFACTORING
         std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Mesh*>();
-        std::vector<Types::Mesh*>     m_removeMeshes             = std::vector<Mesh*>();
+        std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Mesh*>();
         std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
         std::vector<Skybox*>          m_skyboxesToFreeVidMem     = std::vector<Skybox*>();
 

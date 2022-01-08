@@ -10,8 +10,7 @@
 #include <vector>
 #include <cmath>
 
-namespace Framework::Helper {
-    namespace Xml {
+namespace Framework::Helper::Xml {
         class Node;
         class Attribute;
 
@@ -19,6 +18,11 @@ namespace Framework::Helper {
 
         class Attribute {
         public:
+            Attribute()
+                : m_attribute()
+                , m_valid(false)
+            { }
+
             explicit Attribute(const pugi::xml_attribute &attribute) {
                 m_attribute = attribute;
                 m_valid = !m_attribute.empty();
@@ -32,7 +36,7 @@ namespace Framework::Helper {
                 if (m_valid)
                     return true;
                 else {
-                    Helper::Debug::Error(msg);
+                    SRAssert2(false, msg);
                     g_xml_last_error = -1;
                     return false;
                 }
@@ -48,31 +52,27 @@ namespace Framework::Helper {
             }
 
             [[nodiscard]] std::string ToString() const;
-
             [[nodiscard]] int32_t ToInt() const;
+            [[nodiscard]] float_t ToFloat() const;
+            [[nodiscard]] bool ToBool() const;
 
-            [[nodiscard]] int32_t ToFloat() const;
-
-            [[nodiscard]] int32_t ToBool() const;
+            [[nodiscard]] std::string ToString(const std::string& def) const;
+            [[nodiscard]] int32_t ToInt(int32_t def) const;
+            [[nodiscard]] float_t ToFloat(float_t def) const;
+            [[nodiscard]] bool ToBool(bool def) const;
         };
 
         class Node {
             friend class Document;
 
-        private:
-            Node() {
-                m_node = {};
-                m_valid = false;
-            }
+        public:
+            Node();
 
             explicit Node(const pugi::xml_node &node) {
                 m_node = node;
                 m_valid = !node.empty();
             }
 
-        private:
-            pugi::xml_node m_node;
-            bool m_valid;
         public:
             static Node Empty() {
                 return Node();
@@ -88,7 +88,7 @@ namespace Framework::Helper {
 
             [[nodiscard]] std::string Name() const {
                 if (!m_valid) {
-                    Helper::Debug::Error("Node::Name() : node is not valid!");
+                    SRAssert2(false,"Node::Name() : node is not valid!");
                     g_xml_last_error = -4;
                     return {};
                 }
@@ -97,41 +97,25 @@ namespace Framework::Helper {
             }
 
             [[nodiscard]] Attribute GetAttribute(const std::string &name) const {
+                if (!m_valid) {
+                    SRAssert2(false,"Node::GetAttribute() : node is not valid!");
+                    g_xml_last_error = -4;
+                    return Attribute();
+                }
+
                 return Attribute(m_node.attribute(name.c_str()));
             }
 
-            [[nodiscard]] std::vector<Node> GetNodes(const std::string &name) const {
-                if (!m_valid) {
-                    Helper::Debug::Error("Node::GetNodes() : node is not valid!");
-                    g_xml_last_error = -2;
-                    return {};
-                }
-
-                auto nodes = std::vector<Node>();
-                for (const auto child : m_node.children())
-                    if (std::string(child.name()) == name)
-                        nodes.emplace_back(Node(child));
-
-                return nodes;
+            [[nodiscard]] Attribute TryGetAttribute(const std::string &name) const {
+                return m_valid ? Attribute(m_node.attribute(name.c_str())) : Attribute();
             }
 
-            [[nodiscard]] std::vector<Node> GetNodes() const {
-                if (!m_valid) {
-                    Helper::Debug::Error("Node::GetNodes() : node is not valid!");
-                    g_xml_last_error = -2;
-                    return {};
-                }
-
-                auto nodes = std::vector<Node>();
-                for (const auto child : m_node.children())
-                    nodes.emplace_back(Node(child));
-
-                return nodes;
-            }
+            [[nodiscard]] std::vector<Node> GetNodes(const std::string &name) const;
+            [[nodiscard]] std::vector<Node> GetNodes() const;
 
             template<typename T> bool AppendAttribute(const std::string &name, const T& value)  {
                 if (!m_valid) {
-                    Helper::Debug::Error("Node::AddAttribute() : node is not valid!");
+                    SRAssert2(false,"Node::AddAttribute() : node is not valid!");
                     g_xml_last_error = -2;
                     return false;
                 }
@@ -145,25 +129,26 @@ namespace Framework::Helper {
             }
 
 
-            Node AppendChild(const std::string& name) {
-                if (!m_valid) {
-                    Helper::Debug::Error("Node::AppendChild() : node is not valid!");
-                    g_xml_last_error = -2;
-                    return Node();
-                }
+            Node AppendChild(const std::string& name);
 
-                return Node(m_node.append_child(name.c_str()));
+            [[nodiscard]] Node TryGetNode(const std::string &name) const {
+                return m_valid ? Node(m_node.child(name.c_str())) : Node();
             }
 
             [[nodiscard]] Node GetNode(const std::string &name) const {
                 if (!m_valid) {
-                    Helper::Debug::Error("Node::GetNode() : node is not valid!");
+                    SRAssert2(false, "Node::GetNode() : node is not valid!");
                     g_xml_last_error = -2;
                     return Node();
                 }
 
                 return Node(m_node.child(name.c_str()));
             }
+
+        private:
+            pugi::xml_node m_node;
+            bool m_valid;
+
         };
 
         class Document {
@@ -205,6 +190,5 @@ namespace Framework::Helper {
             [[nodiscard]] bool Valid() const { return m_valid; }
         };
     }
-}
 
 #endif //GAMEENGINE_XML_H

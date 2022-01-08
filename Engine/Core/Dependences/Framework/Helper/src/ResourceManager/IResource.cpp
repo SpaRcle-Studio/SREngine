@@ -7,9 +7,8 @@
 
 using namespace Framework::Helper;
 
-IResource::IResource(const char *res_name) : m_resource_name(res_name) {
+IResource::IResource(const char *res_name) : m_resourceName(res_name) {
     m_lifetime = ResourceManager::ResourceLifeTime;
-    ResourceManager::Instance().RegisterResource(this);
 }
 
 bool IResource::ForceDestroy() {
@@ -21,4 +20,30 @@ bool IResource::ForceDestroy() {
     m_force = true;
 
     return this->Destroy();
+}
+
+void IResource::SetId(const std::string &id) {
+    if (m_resourceId == "NoID") {
+        m_resourceId = id;
+        ResourceManager::Instance().RegisterResource(this);
+    } else {
+        SRAssert2(false, "Double set resource id!");
+    }
+}
+
+IResource *IResource::Copy(IResource* destination) const {
+    destination->m_autoRemove = m_autoRemove;
+    destination->SetId(m_resourceId);
+
+    return destination;
+}
+
+bool IResource::Destroy() {
+    SRAssert(!m_isDestroy);
+    m_isDestroy = true;
+    return true;
+}
+
+bool IResource::IsValid() const {
+    return m_resourceId != "NoID" && !m_resourceId.empty() && std::string(m_resourceName) != "Unnamed";
 }

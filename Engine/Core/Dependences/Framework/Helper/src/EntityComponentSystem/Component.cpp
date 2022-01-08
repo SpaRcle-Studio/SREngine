@@ -5,10 +5,8 @@
 #include "EntityComponentSystem/Component.h"
 #include <EntityComponentSystem/GameObject.h>
 
-Framework::Helper::Component::Component(const std::string name) : m_name(name)  {
+Framework::Helper::Component::Component(const std::string& name)
+    : m_name(name)
+{ }
 
-}
-
-Framework::Helper::Component::~Component() {
-
-}
+Framework::Helper::Component::~Component() = default;

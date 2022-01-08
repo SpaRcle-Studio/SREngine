@@ -24,6 +24,11 @@ SafePtr<GameObject> g_miku;
 Skybox* g_skybox = nullptr;
 Window* g_window = nullptr;
 
+double deltaTime = 0;
+unsigned int frames = 0;
+clock_t beginFrame;
+FVector3 velocity;
+
 EXTERN void Awake() {
 
 }
@@ -88,7 +93,7 @@ void LoadCubes() {
     cube->GetTransform()->Translate(FVector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
-        mesh = mesh->Copy(nullptr);
+        mesh = (Mesh*)mesh->Copy(nullptr);
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
         mesh->GetMaterial()->SetDiffuse(texture);
 
@@ -168,10 +173,10 @@ EXTERN void Start() {
 }
 
 void CameraMove(float dt) {
-    if (g_camera.LockIfValid()) {
-        auto dir = Input::GetMouseDrag() * dt;
-        auto wheel = Input::GetMouseWheel() * dt;
+    auto dir = Input::GetMouseDrag() * dt;
+    auto wheel = Input::GetMouseWheel() * dt;
 
+    if (g_camera.LockIfValid()) {
         if (wheel != 0) {
             auto forward = g_camera->GetTransform()->Forward();
             g_camera->GetTransform()->Translate(forward * wheel);
@@ -204,10 +209,6 @@ void KeyCombinations() {
         GUISystem::Instance().SetGuizmoTool(2);
 }
 
-double deltaTime = 0;
-unsigned int frames = 0;
-clock_t beginFrame;
-
 EXTERN void FixedUpdate() {
     deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
     frames++;
@@ -235,10 +236,11 @@ EXTERN void Update(float dt) {
 }
 
 EXTERN void Close() {
-    g_scene.Lock();
-    g_scene.Free([](Scene* scene) {
-        g_scene->Destroy();
-        g_scene->Free();
-    });
-    g_scene.Unlock();
+    if (g_scene.LockIfValid()) {
+        g_scene.Free([](Scene *scene) {
+            g_scene->Destroy();
+            g_scene->Free();
+        });
+        g_scene.Unlock();
+    }
 }

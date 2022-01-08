@@ -27,16 +27,11 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
 
         const auto size = Math::FVector2(m_width) * m_chunkSize.x;
 
-        auto fPos = Helper::World::AddOffset(m_position.Cast<Math::Unit>(), m_offset.m_region);
-        fPos = fPos * size + (size / 2);
-        fPos = fPos.DeSingular(size);
-
-        fPos += m_offset.m_chunk.XZ() * m_chunkSize.x;
+        UpdateFacesPos();
 
         m_mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
         m_mesh->GetMaterial()->SetColor(1.0, 0.0, 0.0);
         render->RegisterMesh(m_mesh);
-        m_mesh->OnMove(Math::FVector3(fPos.x, static_cast<Math::Unit>(0.01), fPos.y));
 
         m_mesh->OnScaled(Math::FVector3(size.x / 2, 1, size.y / 2));
     }
@@ -51,4 +46,23 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
 bool Framework::Core::World::VisualRegion::Unload() {
     SetVisible(false);
     return Region::Unload();
+}
+
+void Framework::Core::World::VisualRegion::UpdateFacesPos() {
+    if (m_mesh) {
+        const auto size = Math::FVector2(m_width) * m_chunkSize.x;
+        const Helper::World::Offset offset = m_observer->m_offset;
+
+        auto fPos = Helper::World::AddOffset(m_position.Cast<Math::Unit>(), offset.m_region);
+        fPos = fPos * size + (size / 2);
+        fPos = fPos.DeSingular(size);
+
+        fPos += offset.m_chunk.XZ() * m_chunkSize.x;
+        m_mesh->OnMove(Math::FVector3(fPos.x, static_cast<Math::Unit>(0.01), fPos.y));
+    }
+}
+
+void Framework::Core::World::VisualRegion::ApplyOffset() {
+    UpdateFacesPos();
+    Region::ApplyOffset();
 }

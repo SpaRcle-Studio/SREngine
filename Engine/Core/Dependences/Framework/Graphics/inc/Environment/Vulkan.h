@@ -151,7 +151,7 @@ namespace Framework::Graphics {
         void SetBuildState(const bool& isBuild) override {
             if (isBuild)
                 this->m_kernel->SetFramebuffersQueue(m_framebuffersQueue);
-            Environment::SetBuildState(isBuild);
+            m_needReBuild = !isBuild;
         }
 
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const override { return true; }

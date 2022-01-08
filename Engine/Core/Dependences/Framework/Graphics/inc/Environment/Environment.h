@@ -71,9 +71,7 @@ namespace Framework::Graphics {
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
         void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
-        virtual void SetBuildState(const bool& isBuild) {
-            m_needReBuild = !isBuild;
-        }
+        virtual void SetBuildState(const bool& isBuild) { }
 
         [[nodiscard]] Font GetIconFont() const { return m_iconFont; }
         [[nodiscard]] GUIContext GetGUIContext() const { return m_guiContext; }

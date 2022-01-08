@@ -28,6 +28,26 @@ namespace Framework::Helper::Math {
             T coord[2] = { 0 };
         };
 
+        _FORCE_INLINE_ Vector2() {
+            x = 0;
+            y = 0;
+        }
+
+        _FORCE_INLINE_ Vector2(T p_x, T p_y) {
+            x = p_x;
+            y = p_y;
+        }
+
+        _FORCE_INLINE_ Vector2(T p) {
+            x = p;
+            y = p;
+        }
+
+        _FORCE_INLINE_ Vector2(const glm::vec2 &vec2) {
+            x = static_cast<T>(vec2.x);
+            y = static_cast<T>(vec2.y);
+        }
+
         template<typename U> [[nodiscard]] Vector2<U> Cast() const { return Vector2<U>(
                     static_cast<U>(x),
                     static_cast<U>(y)
@@ -55,6 +75,18 @@ namespace Framework::Helper::Math {
 
         _FORCE_INLINE_ Vector2 operator-() const { return Vector2(-x, -y); }
         _FORCE_INLINE_ Vector2 operator+() const { return *this; }
+
+        _FORCE_INLINE_ bool operator<=(const Vector2 &p_v) const { return x <= p_v.x && y <= p_v.y; }
+        _FORCE_INLINE_ bool operator>=(const Vector2 &p_v) const { return x >= p_v.x && y >= p_v.y; }
+        _FORCE_INLINE_ bool operator<(const Vector2 &p_v) const { return x < p_v.x && y < p_v.y; }
+        _FORCE_INLINE_ bool operator>(const Vector2 &p_v) const { return x > p_v.x && y > p_v.y; }
+
+        _FORCE_INLINE_ bool operator>(T p_scalar) const { return *this > Vector2<T>(p_scalar); }
+        _FORCE_INLINE_ bool operator<(T p_scalar) const { return *this < Vector2<T>(p_scalar); }
+        _FORCE_INLINE_ bool operator>=(T p_scalar) const { return *this >= Vector2<T>(p_scalar); }
+        _FORCE_INLINE_ bool operator<=(T p_scalar) const { return *this <= Vector2<T>(p_scalar); }
+        _FORCE_INLINE_ bool operator==(T p_scalar) const { return *this == Vector2<T>(p_scalar); }
+        _FORCE_INLINE_ bool operator!=(T p_scalar) const { return *this != Vector2<T>(p_scalar); }
 
         template<typename U> _FORCE_INLINE_ Vector2 operator*(const U &scalar) const noexcept {
             return Vector2(x * scalar, y * scalar);
@@ -112,21 +144,6 @@ namespace Framework::Helper::Math {
             return *this;
         }
 
-        _FORCE_INLINE_ Vector2() {
-            x = 0;
-            y = 0;
-        }
-
-        _FORCE_INLINE_ Vector2(T p) {
-            x = p;
-            y = p;
-        }
-
-        _FORCE_INLINE_ Vector2(const glm::vec2 &vec2) {
-            x = static_cast<T>(vec2.x);
-            y = static_cast<T>(vec2.y);
-        }
-
         [[nodiscard]] _FORCE_INLINE_ bool Empty() const {
             return x == 0 && y == 0;
         }
@@ -147,12 +164,7 @@ namespace Framework::Helper::Math {
             return coord[p_axis];
         }
 
-        _FORCE_INLINE_ Vector2(T p_x, T p_y) {
-            x = p_x;
-            y = p_y;
-        }
-
-        std::string ToString() {
+        [[nodiscard]] std::string ToString() const {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
         }
     };

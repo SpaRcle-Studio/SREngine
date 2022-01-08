@@ -54,6 +54,9 @@ public:
 
     static std::vector<Path> GetFilesInDir(const std::string& path);
     static std::vector<Path> GetDirectoriesInDir(const std::string& path);
+    static std::vector<Path> GetAllInDir(const std::string& path);
+
+    static bool FolderExists(const std::string &path);
 };
 }
 

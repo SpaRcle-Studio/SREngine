@@ -11,20 +11,20 @@ using namespace Framework::Helper::World;
 Chunk::Allocator Chunk::g_allocator = Chunk::Allocator();
 
 Chunk::Chunk(SRChunkAllocArgs)
-    : m_region(region)
+    : m_loadState(LoadState::Unload)
+    , m_observer(observer)
+    , m_region(region)
     , m_position(position)
     , m_size(size)
     , m_lifetime(0.f)
 {
-    SRAssert(!m_position.HasZero())
+    SRAssert(m_observer);
+    SRAssert(m_region);
+    SRAssert(!m_position.HasZero());
 }
 
 void Chunk::Update(float_t dt) {
     m_lifetime -= dt;
-
-    if (m_lifetime <= 0) {
-
-    }
 }
 
 bool Chunk::Belongs(const Math::FVector3 &point) {
@@ -36,11 +36,13 @@ bool Chunk::Belongs(const Math::FVector3 &point) {
         point.x <= xMax && point.y <= yMax && point.z <= zMax;
 }
 
-bool Chunk::Access(const Math::FVector3 &point) {
-    return false;
+bool Chunk::Access() {
+    m_lifetime = 2.f;
+    return true;
 }
 
 bool Chunk::Unload() {
+    m_loadState = LoadState::Unload;
     return true;
 }
 
@@ -77,11 +79,6 @@ bool Chunk::Belongs(const Framework::Helper::Math::IVector3 &position,
            point.x <= xMax && point.y <= yMax && point.z <= zMax;
 }
 
-void Chunk::SetOffset(const World::Offset& offset) {
-    m_delta = offset - m_offset;
-    m_offset = offset;
-}
-
 bool Chunk::Clear() {
     if (m_container.empty())
         return false;
@@ -104,18 +101,11 @@ uint32_t Chunk::GetContainerSize() const {
 }
 
 bool Chunk::ApplyOffset() {
-    if (m_container.empty() || m_delta.Empty())
-        return false;
+    return true;
+}
 
-    auto fOffset = ((Helper::Math::IVector3::XZ(m_delta.m_region) * m_region->GetWidth()) + m_delta.m_chunk).Cast<Math::Unit>();
-
-    fOffset.x *= m_size.x;
-    fOffset.y *= m_size.y;
-    fOffset.z *= m_size.x;
-
-    for (auto& object : m_container)
-        object->GetTransform()->GlobalTranslate(fOffset);
-
+bool Chunk::Load() {
+    m_loadState = LoadState::Loaded;
     return true;
 }
 

@@ -38,7 +38,7 @@ namespace Framework::Graphics::Types {
         void DrawVulkan() override;
         void DrawOpenGL() override;
 
-        Mesh* Copy(Mesh* mesh) const override;
+        IResource* Copy(IResource* destination) const override;
 
         void SetVertexArray(const std::any& vertices) override;
 

@@ -125,7 +125,7 @@ namespace Framework::Helper::Math {
             return { static_cast<T>(DEG(x)), static_cast<T>(DEG(y)), static_cast<T>(DEG(z)) };
         }
 
-        std::string ToString(){
+        [[nodiscard]] std::string ToString() const {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
         }
 
@@ -194,6 +194,10 @@ namespace Framework::Helper::Math {
 
         _FORCE_INLINE_ T &operator[](int p_axis) {
             return coord[p_axis];
+        }
+
+        [[nodiscard]] _FORCE_INLINE_ T Length() const {
+            return static_cast<T>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
         }
 
         [[nodiscard]] Vector3 Replace(int from, int to) const {
@@ -292,47 +296,23 @@ namespace Framework::Helper::Math {
             return Vector3(x / p_scalar, y / p_scalar, z / p_scalar);
         }
 
+        template<typename U> _FORCE_INLINE_ bool operator>(U p_scalar) const { return *this > Vector3<U>(p_scalar); }
+        template<typename U> _FORCE_INLINE_ bool operator<(U p_scalar) const { return *this < Vector3<U>(p_scalar); }
+        template<typename U> _FORCE_INLINE_ bool operator>=(U p_scalar) const { return *this >= Vector3<U>(p_scalar); }
+        template<typename U> _FORCE_INLINE_ bool operator<=(U p_scalar) const { return *this <= Vector3<U>(p_scalar); }
+        template<typename U> _FORCE_INLINE_ bool operator==(U p_scalar) const { return *this == Vector3<U>(p_scalar); }
+        template<typename U> _FORCE_INLINE_ bool operator!=(U p_scalar) const { return *this != Vector3<U>(p_scalar); }
+
         _FORCE_INLINE_ Vector3 operator-() const { return Vector3(-x, -y, -z); }
         _FORCE_INLINE_ Vector3 operator+() const { return *this; }
 
         _FORCE_INLINE_ bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
-        _FORCE_INLINE_ bool operator!=(const Vector3 &p_v) const {return x != p_v.x || y != p_v.y || z != p_v.z; }
-        _FORCE_INLINE_ bool operator<(const Vector3 &p_v) const {
-            if (x == p_v.x) {
-                if (y == p_v.y) {
-                    return z < p_v.z;
-                }
-                return y < p_v.y;
-            }
-            return x < p_v.x;
-        }
-        _FORCE_INLINE_ bool operator<=(const Vector3 &p_v) const {
-            if (x == p_v.x) {
-                if (y == p_v.y) {
-                    return z > p_v.z;
-                }
-                return y > p_v.y;
-            }
-            return x > p_v.x;
-        }
-        _FORCE_INLINE_ bool operator>(const Vector3 &p_v) const {
-            if (x == p_v.x) {
-                if (y == p_v.y) {
-                    return z <= p_v.z;
-                }
-                return y < p_v.y;
-            }
-            return x < p_v.x;
-        }
-        _FORCE_INLINE_ bool operator>=(const Vector3 &p_v) const {
-            if (x == p_v.x) {
-                if (y == p_v.y) {
-                    return z >= p_v.z;
-                }
-                return y > p_v.y;
-            }
-            return x > p_v.x;
-        }
+        _FORCE_INLINE_ bool operator!=(const Vector3 &p_v) const { return x != p_v.x || y != p_v.y || z != p_v.z; }
+
+        _FORCE_INLINE_ bool operator<=(const Vector3 &p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
+        _FORCE_INLINE_ bool operator>=(const Vector3 &p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
+        _FORCE_INLINE_ bool operator<(const Vector3 &p_v) const { return x < p_v.x && y < p_v.y && z < p_v.z; }
+        _FORCE_INLINE_ bool operator>(const Vector3 &p_v) const { return x > p_v.x && y > p_v.y && z > p_v.z; }
 
     public:
         [[nodiscard]] glm::vec3 ToGLM() const noexcept {
@@ -341,6 +321,7 @@ namespace Framework::Helper::Math {
         static Unit Magnitude(Vector3 vec) {
             return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
         }
+
         static T Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
         static Vector3 Cross(const Vector3 &p_a, const Vector3 &p_b) {
             Vector3 ret(

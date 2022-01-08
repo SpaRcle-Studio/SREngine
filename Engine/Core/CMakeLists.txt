@@ -13,6 +13,7 @@ add_library(Core STATIC
         ${CORE_ROOT_DIR}/src/GUI/FileBrowser.cpp
         ${CORE_ROOT_DIR}/src/GUI/EditorGUI.cpp
         ${CORE_ROOT_DIR}/src/GUI/GUISystem.cpp
+        ${CORE_ROOT_DIR}/src/EngineCommands.cpp
         ${CORE_ROOT_DIR}/src/World/VisualRegion.cpp)
 
 target_link_libraries(Core Framework)

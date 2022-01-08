@@ -29,22 +29,66 @@ namespace Framework::Helper::World {
     typedef std::unordered_set<GameObject::Ptr> GameObjects;
     typedef std::unordered_map<Math::IVector2, Region*> Regions;
 
-    class Scene {
+    class Scene : public Types::SafePtr<Scene> {
     public:
         typedef Types::SafePtr<Scene> Ptr;
-    private:
+        typedef std::function<Scene*(const std::string& name)> Allocator;
+
+    protected:
         explicit Scene(const std::string& name);
-        ~Scene() = default;
+        virtual ~Scene() = default;
+
     public:
         static Types::SafePtr<Scene> New(const std::string& name);
         static Types::SafePtr<Scene> Load(const std::string& name);
+        static void SetAllocator(const Allocator& allocator) { g_allocator = allocator; }
+
         bool Save(const std::string& folder);
         bool Destroy();
         bool Free();
         void Update(float_t dt);
-    private:
-        Types::SafePtr<Scene>        m_this                = Types::SafePtr<Scene>();
 
+    public:
+        virtual void BeginSync() = 0;
+        virtual void EndSync() = 0;
+        virtual bool TrySync() = 0;
+
+        void SetObserver(const GameObject::Ptr& observer) { m_observer->m_target = observer; }
+
+        [[nodiscard]] Observer* GetObserver() const { return m_observer; }
+        Chunk* GetCurrentChunk() const;
+        void SetWorldOffset(const World::Offset& offset);
+        Types::SafePtr<GameObject> GetSelected() const;
+        void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
+
+        [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
+        SR_FORCE_INLINE void SetName(const std::string& name) { m_name = name; }
+
+        GameObjects GetGameObjects();
+        GameObjects& GetRootGameObjects();
+
+        GameObject::Ptr FindByComponent(const std::string& name);
+        GameObject::Ptr Instance(const std::string& name);
+
+    public:
+        void UnselectAll();
+        bool RemoveSelected(const Types::SafePtr<GameObject>& gameObject);
+        void AddSelected(const Types::SafePtr<GameObject>& gameObject);
+
+        void OnChanged();
+
+    private:
+        void CheckShift(const Math::IVector3& chunk);
+        void UpdateContainers();
+        void UpdateScope();
+        bool ReloadConfig();
+
+    private:
+        SR_INLINE static Allocator   g_allocator           = Allocator();
+
+        bool                         m_updateContainer     = false;
+        bool                         m_shiftEnabled        = false;
+        bool                         m_scopeEnabled        = false;
         bool                         m_isDestroy           = false;
         std::atomic<bool>            m_isHierarchyChanged  = false;
 
@@ -61,32 +105,8 @@ namespace Framework::Helper::World {
         Math::IVector2               m_chunkSize           = Math::IVector2(0, 0);
         uint32_t                     m_regionWidth         = 0;
 
-        Observer                     m_observer            = Observer();
-    public:
-        void SetThis(const Types::SafePtr<Scene>& _this) {
-            m_this = _this;
-        }
-        void SetObserver(const GameObject::Ptr& observer) { m_observer.m_target = observer; }
-        [[nodiscard]] Observer GetObserver() const { return m_observer; }
-        Chunk* GetCurrentChunk() const;
-        void SetWorldOffset(const World::Offset& offset);
-        Types::SafePtr<GameObject> GetSelected() const;
-        void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
+        Observer*                    m_observer            = nullptr;
 
-        [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
-        SR_FORCE_INLINE void SetName(const std::string& name) { m_name = name; }
-
-        GameObjects GetGameObjects();
-        GameObjects& GetRootGameObjects();
-    public:
-        void UnselectAll();
-        bool RemoveSelected(const Types::SafePtr<GameObject>& gameObject);
-        void AddSelected(const Types::SafePtr<GameObject>& gameObject);
-    public:
-        void OnChanged();
-    public:
-        GameObject::Ptr FindByComponent(const std::string& name);
-        GameObject::Ptr Instance(const std::string& name);
     };
 }
 

@@ -22,7 +22,7 @@ bool Framework::Graphics::Environment::PreInitGUI(const std::string &fontPath) {
         config.GlyphMinAdvanceX = 13.0f;
         static const ImWchar icon_ranges[] = { SR_ICON_MIN, SR_ICON_MAX, 0 };
         m_iconFont = ImGui::GetIO().Fonts->AddFontFromFileTTF(
-                (Helper::ResourceManager::Instance().GetResourcesFolder() + "\\Fonts\\fa-solid-900.ttf").c_str(),
+                (Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Fonts/fa-solid-900.ttf")).CStr(),
                 40.0f, &config, icon_ranges);
 
         //io.IniFilename = NULL;

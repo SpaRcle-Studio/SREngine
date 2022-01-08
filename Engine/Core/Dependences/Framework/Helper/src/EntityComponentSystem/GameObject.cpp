@@ -18,7 +18,9 @@
 
 using namespace Framework::Helper;
 
-Framework::Helper::GameObject::GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag) {
+Framework::Helper::GameObject::GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag)
+    : Types::SafePtr<GameObject>(this)
+{
     m_name  = std::move(name);
     m_tag   = std::move(tag);
     m_scene = scene;
@@ -68,7 +70,7 @@ void Framework::Helper::GameObject::DestroyFromScene() {
     }
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("GameObject::Destroy() : destroying \""+m_name + "\" game object contains "+std::to_string(m_components.size())+" components...");
+        Debug::Log("GameObject::Destroy() : destroying \""+m_name + "\" game object contains " + std::to_string(m_components.size()) + " components...");
 
     std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
@@ -158,9 +160,9 @@ void GameObject::SetSelect(bool value) {
         m_isSelect = value;
 
         if (m_isSelect)
-            m_scene->AddSelected(m_this);
+            m_scene->AddSelected(*this);
         else
-           m_scene->RemoveSelected(m_this);
+           m_scene->RemoveSelected(*this);
     }
 }
 
@@ -320,13 +322,5 @@ bool GameObject::RemoveComponent(Component *component) {
 
     Helper::Debug::Error("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
 
-    return false;
-}
-
-Framework::Helper::Xml::Document GameObject::Save() {
-    return Xml::Document::Empty();
-}
-
-bool GameObject::Load(const Xml::Document &xml) {
     return false;
 }

@@ -32,7 +32,7 @@ namespace Framework::Helper {
     class Transform {
         friend class GameObject;
     private:
-        Transform(GameObject* parent);
+        explicit Transform(GameObject* parent);
         ~Transform() = default;
     public:
         void OnParentSet(Transform* parent);

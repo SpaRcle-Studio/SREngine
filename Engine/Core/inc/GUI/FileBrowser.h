@@ -25,7 +25,7 @@ namespace Framework::Core::GUI {
 
     private:
         Helper::Path m_root;
-        Hash m_selected;
+        Helper::Path m_selectedDir;
 
     };
 }

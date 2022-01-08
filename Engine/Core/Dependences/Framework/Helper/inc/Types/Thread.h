@@ -14,6 +14,10 @@
 namespace Framework::Helper::Types {
     class Thread {
     public:
+        Thread()
+            : m_thread(std::thread())
+        { }
+
         explicit Thread(std::thread thread)
             : m_thread(std::move(thread))
         { }
@@ -21,6 +25,15 @@ namespace Framework::Helper::Types {
         explicit Thread(const std::function<void()>& fn)
                 : m_thread(fn)
         { }
+
+        Thread(Thread&& thread)  noexcept {
+            m_thread.swap(thread.m_thread);
+        }
+
+        Thread& operator=(Thread&& thread) noexcept {
+            m_thread.swap(thread.m_thread);
+            return *this;
+        }
 
         ~Thread() {
             SRAssert(!Joinable());
@@ -34,6 +47,13 @@ namespace Framework::Helper::Types {
                 Join();
         }
         void Detach() { m_thread.detach(); }
+
+        static void Sleep(uint64_t milliseconds) {
+        #ifdef SR_WIN32
+            #include <Windows.h>
+            ::Sleep(static_cast<DWORD>(milliseconds));
+        #endif
+        }
 
     private:
         std::thread m_thread;

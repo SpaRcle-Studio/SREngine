@@ -115,7 +115,7 @@ bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t
         return false;
     }
 
-    this->m_descriptorSets[ID] = { VK_NULL_HANDLE, VK_NULL_HANDLE };
+    this->m_descriptorSets[ID] = EvoVulkan::Core::DescriptorSet();
 
     return true;
 }

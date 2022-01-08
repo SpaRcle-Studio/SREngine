@@ -51,8 +51,8 @@ namespace Framework {
 
         RegisterCasts(casts);
 
-        generator->Save(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/Libraries/");
-        casts->Save(Helper::ResourceManager::Instance().GetResourcesFolder() + "/Scripts/Libraries/");
+        generator->Save(Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scripts/Libraries/"));
+        casts->Save(Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scripts/Libraries/"));
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {
@@ -91,7 +91,12 @@ namespace Framework {
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("HierarchyElem", "Scene");
 
-        generator->RegisterNewClass("Scene", "Scene", { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "GameObject.h", "Types/SafePointer.h" });
+        generator->RegisterNewClass(
+                "Scene", "Scene",
+                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "GameObject.h", "Types/SafePointer.h" },
+                { {"SafePtr<Scene>", EvoScript::Public } }
+        );
+
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, Scene, Destroy, bool)
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, Scene, Free, bool)
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, Scene, GetName, std::string)
@@ -150,7 +155,7 @@ namespace Framework {
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, IResource, RemoveUsePoint, void)
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, IResource, GetCountUses, unsigned int)
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, IResource, GetResourceName, const char*)
-        ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, IResource, GetResourceID, std::string)
+        ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, IResource, GetResourceId, std::string)
     }
 
     void API::RegisterMesh(EvoScript::AddressTableGen *generator) {
@@ -170,7 +175,7 @@ namespace Framework {
         ESRegisterStaticMethod(Graphics::, EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
         ESRegisterMethodArg0(Graphics::, EvoScript::Public, generator, Mesh, Destroy, bool) // IResource
-        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, Mesh* const, ESArg1(Mesh* dest), ESArg1(dest))
+        ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, Copy, IResource* const, ESArg1(IResource* dest), ESArg1(dest))
 
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(Graphics::, EvoScript::Public, generator, Mesh, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
@@ -190,7 +195,7 @@ namespace Framework {
     void API::RegisterGameObject(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("GameObject", "GameObject",
                 { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Transform.h", "Types/SafePointer.h", "ISavable.h" },
-        { { "ISavable", EvoScript::Public } });
+        { { "SafePtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(Helper::, EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
         ESRegisterMethod(Helper::, EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
@@ -199,9 +204,6 @@ namespace Framework {
         ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
 
         using namespace Xml;
-
-        ESRegisterMethodArg0(Helper::, EvoScript::Public, generator, GameObject, Save, Document)
-        ESRegisterMethod(Helper::, EvoScript::Public, generator, GameObject, Load, bool, ESArg1(const Document& xml), ESArg1(xml))
 
         generator->AddIncompleteType("Scene", "GameObject");
     }

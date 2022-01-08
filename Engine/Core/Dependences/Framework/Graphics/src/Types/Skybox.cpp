@@ -24,13 +24,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(con
     std::string ext = StringUtils::GetExtensionFromFilePath(skyboxName);
     skyboxName.resize(skyboxName.size() - ext.size() - 1);
 
-    std::string path = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Skyboxes/" +skyboxName + "/";
-
-#ifdef WIN32
-    path = Helper::StringUtils::MakePath(path, true);
-#else
-    path = Helper::StringUtils::MakePath(path, false);
-#endif
+    const auto path = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Skyboxes/").Concat(skyboxName).Concat("/");
 
     Helper::Debug::Log("Skybox::Load() : loading \""+skyboxName+"\" skybox...");
 
@@ -40,19 +34,21 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(con
     int W, H, C;
 
     for (unsigned char i = 0; i < 6; i++) {
+        const auto file = path.Concat(files[i]).Concat(".").Concat(ext);
+
         int w = 0, h = 0, comp = 0;
-        unsigned char* data = stbi_load(std::string(path + files[i] + "." + ext).c_str(), &w, &h, &comp, STBI_rgb_alpha);
+        unsigned char* data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);
 
         if (!i) {
             W = w;
             H = h;
             C = comp;
         } else if (h != H || w != W || C != comp) {
-            Helper::Debug::Warn("Skybox::Load() : \""+name+"\" skybox has different sizes!");
+            Helper::Debug::Warn("Skybox::Load() : \"" + name + "\" skybox has different sizes!");
         }
 
         if (!data) {
-            Helper::Debug::Error("Skybox::Load() : failed load \"" + skyboxName + "\" skybox!\n\tPath: " + path + files[i] + "." + ext);
+            Helper::Debug::Error("Skybox::Load() : failed load \"" + skyboxName + "\" skybox!\n\tPath: " + file.ToString());
             return nullptr;
         }
         sides[i] = data;
@@ -81,8 +77,8 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
     }
 
     if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-        const std::string path = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Models/Engine/skybox.obj";
-        auto skyboxObj = Graphics::ObjLoader::LoadSourceWithIndices<Vertices::SkyboxVertex>(path);
+        const auto path = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Models/Engine/skybox.obj");
+        auto skyboxObj = Graphics::ObjLoader::LoadSourceWithIndices<Vertices::SkyboxVertex>(path.ToString());
         if (skyboxObj.size() != 1) {
             Helper::Debug::Error("Skybox::Calculate() : failed to load skybox model!");
             this->m_hasErrors = true;

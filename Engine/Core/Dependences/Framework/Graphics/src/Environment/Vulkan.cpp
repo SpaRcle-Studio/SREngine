@@ -166,7 +166,7 @@ namespace Framework::Graphics{
     }
 
     void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Low)
             Helper::Debug::Log("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
 
         this->m_basicWindow->Resize(w, h);
@@ -227,28 +227,33 @@ namespace Framework::Graphics{
             *shaderData = reinterpret_cast<void*>(dynamicID);
         }
 
-        std::string shadersPath = Helper::ResourceManager::Instance().GetResourcesFolder() + "/Shaders/";
+        auto shadersPath = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Shaders/");
 
-        std::string vertex_path = shadersPath + "Common/" + path + ".vert";
-        std::string fragment_path = shadersPath + "Common/" + path + ".frag";
+        auto vertexPath = shadersPath.Concat("Common/").Concat(path).Concat(".vert");
+        auto fragmentPath = shadersPath.Concat("Common/").Concat(path).Concat(".frag");
 
         {
-            if (!Helper::FileSystem::FileExists(vertex_path))
-                vertex_path = shadersPath + GetPipeLineName() + "/" + path + ".vert";
+            if (!vertexPath.Exists())
+                vertexPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(path).Concat(".vert");
 
-            if (!Helper::FileSystem::FileExists(fragment_path))
-                fragment_path = shadersPath + GetPipeLineName() + "/" + path + ".frag";;
+            if (!fragmentPath.Exists())
+                fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(path).Concat(".frag");
         }
 
         std::vector<SourceShader> modules = {};
         {
-            std::string shaderName = Helper::StringUtils::GetFileNameFromFullPath(path);
+            auto shaderName = Helper::StringUtils::GetFileNameFromFullPath(path);
 
-            if (Helper::FileSystem::FileExists(vertex_path))
-                modules.emplace_back(SourceShader(shaderName + ".vert", vertex_path, ShaderType::Vertex));
+            if (vertexPath.Exists())
+                modules.emplace_back(SourceShader(shaderName + ".vert", vertexPath, ShaderType::Vertex));
 
-            if (Helper::FileSystem::FileExists(fragment_path))
-                modules.emplace_back(SourceShader(shaderName + ".frag", fragment_path, ShaderType::Fragment));
+            if (fragmentPath.Exists())
+                modules.emplace_back(SourceShader(shaderName + ".frag", fragmentPath, ShaderType::Fragment));
+        }
+
+        if (modules.empty()) {
+            SRAssert2(false, "No shader modules were found!");
+            return false;
         }
 
         bool errors = false;
@@ -291,7 +296,7 @@ namespace Framework::Graphics{
         }
 
         if (!m_memory->m_ShaderPrograms[ID]->Load(
-                Helper::ResourceManager::Instance().GetResourcesFolder() + "\\Cache\\Shaders",
+                Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Cache/Shaders"),
                 vkModules,
                 descriptorLayoutBindings,
                 uniformSizes
@@ -489,12 +494,14 @@ namespace Framework::Graphics{
     }
 
     bool Vulkan::StopGUI() {
+        Helper::Debug::Vulkan("Vulkan::StopGUI() : stopping gui...");
+
         EVSafeFreeObject(m_imgui) else {
             Helper::Debug::Error("Vulkan::StopGUI() : failed to destroy vulkan imgui!");
             return false;
         }
 
-        return Environment::StopGUI();
+        return true;
     }
 
     bool Vulkan::BeginDrawGUI() {
@@ -628,9 +635,10 @@ namespace Framework::Graphics{
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
                 return EvoVulkan::Core::RenderResult::Fatal;
-            default:
+            default: {
                 SRAssertOnce(false);
                 return EvoVulkan::Core::RenderResult::Fatal;
+            }
         }
     }
 }

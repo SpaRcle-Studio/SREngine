@@ -15,6 +15,7 @@
 #include <Types/Rigidbody.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <Animations/Bone.h>
+#include <World/World.h>
 #include <Input/InputSystem.h>
 #include <Memory/MeshAllocator.h>
 #include <World/VisualChunk.h>
@@ -38,6 +39,23 @@ using namespace Framework::Graphics::Animations;
 using namespace Framework::Physics;
 using namespace Framework::Physics::Types;
 
+/*
+        +---------------+       +----+          +----+       +---------------+            +----------------+
+        |               |       \     \        /     /       |               |           /                 |
+        |               |        \     \      /     /        |               |          /                  |
+        |      +--------+         \     \    /     /         |      +--------+         /         +---------+
+        |      |                   \     \  /     /          |      |                 /        /
+        |      +--------+           \     \/     /           |      +--------+       |        /
+        |               |            \          /            |               |       |       |
+        |               |            /          \            |               |       |       |
+        |      +--------+           /     /\     \           |      +--------+       |        \
+        |      |                   /     /  \     \          |      |                 \        \
+        |      +--------+         /     /    \     \         |      +--------+         \        +---------+
+        |               |        /     /      \     \        |               |          \                 |
+        |               |       /     /        \     \       |               |           \                |
+        +---------------+       +----+          +-----+      +---------------+            +---------------+
+ */
+
 int main(int argc, char **argv) {
     if constexpr (sizeof(size_t) != 8) {
         std::cerr << "The engine only supports 64-bit systems!\n";
@@ -54,7 +72,7 @@ int main(int argc, char **argv) {
         ResourceManager::Instance().Init(folder);
 
 #ifdef SR_WIN32
-    ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResourcesFolder() + "\\Utilities\\EngineCrashHandler.exe").c_str(),
+    ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResourcesFolder().Concat("/Utilities/EngineCrashHandler.exe").CStr()),
             ("--log log.txt --target "+FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
             nullptr, SW_SHOWDEFAULT
     );
@@ -78,11 +96,12 @@ int main(int argc, char **argv) {
             dynamic_cast<Bone*>(bone)->SetRender(Engine::Instance().GetRender());
         });
 
-        Chunk::SetAllocator([](SRChunkAllocArgs)   -> Chunk*  { return new VisualChunk(SRChunkAllocVArgs);   });
+        Chunk::SetAllocator([](SRChunkAllocArgs)   -> Chunk*  { return new VisualChunk(SRChunkAllocVArgs); });
         Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
+        Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
     }
 
-    if (auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResourcesFolder() + "/Configs/Environment.config"); env == "OpenGL")
+    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResourcesFolder().Concat("/Configs/Environment.config")); env == "OpenGL")
         Environment::Set(new OpenGL());
     else if (env == "Vulkan")
         Environment::Set(new Vulkan());

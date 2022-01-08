@@ -39,7 +39,7 @@ namespace Framework::Graphics::Types {
 
         }
 
-        Mesh* Copy(Mesh* mesh) const override;
+        IResource* Copy(IResource* destination) const override;
 
         void SetVertexArray(const std::any& vertices) override;
 

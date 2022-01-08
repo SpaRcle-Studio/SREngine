@@ -74,7 +74,7 @@ namespace Framework::Graphics::Types {
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;
     public:
-        Math::FVector3               m_barycenter        = Math::FVector3();
+        Math::FVector3               m_barycenter        = Math::FVector3(Math::UnitMAX);
         Math::FVector3               m_position          = Math::FVector3();
         Math::FVector3               m_rotation          = Math::FVector3();
         Math::FVector3               m_scale             = Math::FVector3(1, 1, 1);
@@ -90,7 +90,7 @@ namespace Framework::Graphics::Types {
         virtual void ReCalcModel();
         virtual bool Calculate();
     public:
-        virtual Mesh* Copy(Mesh* destination) const;
+        IResource* Copy(IResource* destination) const override;
 
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;

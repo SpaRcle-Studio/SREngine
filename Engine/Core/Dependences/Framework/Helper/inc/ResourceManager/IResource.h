@@ -7,7 +7,7 @@
 
 #include <string>
 #include <mutex>
-#include <math.h>
+#include <cmath>
 #include <atomic>
 #include <Debug.h>
 
@@ -23,36 +23,21 @@ namespace Framework::Helper {
         friend class ::Framework::API;
 
     protected:
-        explicit IResource(const char *res_name);
+        explicit IResource(const char* name);
 
         virtual ~IResource() = default;
 
-    private:
-        float_t m_lifetime = 0;
-        std::atomic<bool> m_force = false;
-
-    protected:
-        bool m_autoRemove = false;
-
-        std::atomic<bool> m_isDestroy = false;
-        /* Count uses current resource now */
-        std::atomic<uint64_t> m_countUses = 0;
-
-        /** \brief This is resource name. \example Mesh, Texture, Audio... */
-        const char *m_resource_name = "Unnamed";
-        std::string m_resource_id = "NoID";
-
     public:
-        [[nodiscard]] bool IsEnabledAutoRemove() const { return this->m_autoRemove; }
-
-    public:
-        /* Call only once | Register resource to destroy in resource manager */
-        virtual bool Destroy() = 0;
-        bool ForceDestroy();
-
+        [[nodiscard]] bool IsValid() const;
         [[nodiscard]] bool IsDestroy() const { return m_isDestroy; }
         [[nodiscard]] bool IsForce() const { return m_force; }
         [[nodiscard]] bool IsAlive() const { return m_lifetime > 0; }
+        [[nodiscard]] bool IsEnabledAutoRemove() const { return this->m_autoRemove; }
+        [[nodiscard]] uint32_t GetCountUses() const { return this->m_countUses; }
+        [[nodiscard]] const char *GetResourceName() const { return this->m_resourceName; }
+        [[nodiscard]] std::string GetResourceId() const { return this->m_resourceId; }
+
+        [[nodiscard]] virtual IResource* Copy(IResource* destination) const;
 
         /* Add one point to count uses current resource */
         void AddUsePoint() { m_countUses++; }
@@ -64,11 +49,26 @@ namespace Framework::Helper {
             m_countUses--;
         }
 
-        [[nodiscard]] uint32_t GetCountUses() const { return this->m_countUses; }
+        /* Call only once | Register resource to destroy in resource manager */
+        virtual bool Destroy();
+        bool ForceDestroy();
+        void SetId(const std::string& id);
+        void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }
 
-        [[nodiscard]] const char *GetResourceName() const { return this->m_resource_name; }
+    protected:
+        /** \brief This is resource name. \example Mesh, Texture, Audio... */
+        const char *m_resourceName = "Unnamed";
 
-        [[nodiscard]] std::string GetResourceID() const { return this->m_resource_id; }
+    private:
+        float_t m_lifetime = 0;
+        std::atomic<bool> m_force = false;
+        std::string m_resourceId = "NoID";
+        bool m_autoRemove = false;
+
+        std::atomic<bool> m_isDestroy = false;
+        /* Count uses current resource now */
+        std::atomic<uint64_t> m_countUses = 0;
+
     };
 }
 

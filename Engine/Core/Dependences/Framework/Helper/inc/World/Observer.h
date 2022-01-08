@@ -7,6 +7,7 @@
 
 #include <Types/SafePointer.h>
 #include <Math/Vector3.h>
+#include <Utils/StringFormat.h>
 
 namespace Framework::Helper {
     class GameObject;
@@ -19,6 +20,10 @@ namespace Framework::Helper::World {
                 , m_chunk(chunk) { }
 
         Offset() : Offset({ 0, 0 }, { 0, 0, 0 }) { }
+
+        [[nodiscard]] std::string ToString() const {
+            return Helper::Format("{ Region: %s, Chunk: %s }", m_region.ToString().c_str(), m_chunk.ToString().c_str());
+        }
 
         [[nodiscard]] bool Empty() const { return m_region.Empty() && m_chunk.Empty(); }
 
@@ -38,15 +43,23 @@ namespace Framework::Helper::World {
         Math::IVector3 m_chunk;
     };
 
-    struct Observer {
+    class Observer {
     public:
-        void SetChunk(const Math::IVector3& chunk);
-        void Move(const Math::IVector2& region);
+        Observer();
+
+    public:
+        void SetChunk(Math::IVector3 chunk);
+        void Move(const Math::IVector2& value);
         void SetWorldMetrics(const Math::IVector2& chunkSize, int32_t regionWidth);
+        void SetScope(int32_t value) { m_scope = value; }
+        void SetShiftDist(int32_t value) { m_shiftDistance = value; }
+        Offset MathNeighbour(const Math::IVector3& offset);
 
     public:
         Math::IVector2 m_chunkSize;
         int32_t m_regionWidth;
+        int32_t m_shiftDistance;
+        int32_t m_scope;
 
         Math::IVector2 m_region;
         Math::IVector2 m_lastRegion;
@@ -59,6 +72,8 @@ namespace Framework::Helper::World {
         Types::SafePtr<Helper::GameObject> m_target;
     };
 
+    Math::IVector3 MakeChunk(const Math::IVector3& rawChunkPos, int32_t width);
+    Math::Unit AddOffset(const Math::Unit& value, const Math::Unit& offset);
     Math::FVector3 AddOffset(const Math::FVector3& chunk, const Math::FVector3& offset);
     Math::IVector3 AddOffset(const Math::IVector3& chunk, const Math::IVector3& offset);
     Math::IVector2 AddOffset(const Math::IVector2& region, const Math::IVector2& offset);

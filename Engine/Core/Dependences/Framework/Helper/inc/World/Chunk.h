@@ -18,9 +18,10 @@ namespace Framework::Helper {
         class Scene;
         class Region;
         class Chunk;
+        class Observer;
 
-        #define SRChunkAllocArgs Helper::World::Region* region, const Framework::Helper::Math::IVector3& position, const Framework::Helper::Math::IVector2& size
-        #define SRChunkAllocVArgs region, position, size
+        #define SRChunkAllocArgs Framework::Helper::World::Observer* observer, Framework::Helper::World::Region* region, const Framework::Helper::Math::IVector3& position, const Framework::Helper::Math::IVector2& size
+        #define SRChunkAllocVArgs observer, region, position, size
 
         class Chunk {
         protected:
@@ -28,6 +29,10 @@ namespace Framework::Helper {
 
         public:
             virtual ~Chunk();
+
+            enum class LoadState {
+                Loaded, Unload, Preload
+            };
 
         public:
             typedef std::function<Chunk*(SRChunkAllocArgs)> Allocator;
@@ -41,35 +46,38 @@ namespace Framework::Helper {
             bool Clear();
             void Insert(const GameObject::Ptr& ptr);
             void Erase(const GameObject::Ptr& ptr);
-            uint32_t GetContainerSize() const;
+
+            [[nodiscard]] uint32_t GetContainerSize() const;
+            [[nodiscard]] LoadState GetState() const { return m_loadState; }
+            [[nodiscard]] bool IsAlive() const { return m_lifetime > 0; }
+            [[nodiscard]] Math::IVector3 GetPosition() const { return m_position; }
 
         public:
             virtual void OnEnter();
             virtual void OnExit();
             virtual void Update(float_t dt);
-            virtual bool Access(const Math::FVector3& point);
+            virtual bool Access();
             virtual bool Belongs(const Math::FVector3& point);
             virtual bool Unload();
+            virtual bool Load();
 
             virtual bool ApplyOffset();
-            virtual void SetOffset(const World::Offset& offset);
 
         private:
             static Allocator g_allocator;
 
         protected:
+            LoadState m_loadState;
+
+            Observer* m_observer;
             Region* m_region;
 
             std::unordered_set<GameObject::Ptr> m_container;
-            Types::SafePtr<World::Scene> m_scene;
 
             float_t m_lifetime;
 
             Math::IVector2 m_size;
             Math::IVector3 m_position;
-
-            World::Offset m_offset;
-            World::Offset m_delta;
         };
     }
 }

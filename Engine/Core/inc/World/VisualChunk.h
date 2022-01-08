@@ -23,16 +23,21 @@ namespace Framework::Core::World {
         ~VisualChunk() override = default;
 
     private:
-        Graphics::Types::DebugWireframeMesh* m_mesh = nullptr;
+        std::array<Graphics::Types::DebugWireframeMesh*, 2> m_meshes = { nullptr, nullptr };
 
     private:
-        void SetVisible(bool value);
+        void SetFacesVisible(bool value);
+        void SetLoadVisible(bool value);
+        void UpdateFacesPos();
+        void UpdateLoadPos();
 
-    public:
-        void Update(float_t dt) override;
+        bool ApplyOffset() override;
         void OnExit() override;
         void OnEnter() override;
         bool Unload() override;
+        bool Load() override;
+
+        void Update(float_t dt) override;
 
     };
 }

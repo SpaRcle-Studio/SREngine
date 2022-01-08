@@ -118,9 +118,9 @@ void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *m
     const std::lock_guard<std::mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Render::RemoveMesh() : register \"" + mesh->GetResourceID() + "\" mesh to remove...");
+        Debug::Log("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
 
-    this->m_removeMeshes.emplace_back(mesh);
+    this->m_removeMeshes.push(mesh);
 }
 void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh *mesh) {
     if (!mesh){
@@ -131,7 +131,7 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
     const std::lock_guard<std::mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::Full)
-        Debug::Log("Render::RegisterMesh() : register new \""+mesh->GetResourceID()+"\" mesh...");
+        Debug::Log("Render::RegisterMesh() : register new \"" + mesh->GetResourceId() + "\" mesh...");
 
     mesh->AddUsePoint();
     mesh->SetRender(this);
@@ -140,16 +140,16 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
 
 void Framework::Graphics::Render::PollEvents() {
     std::lock_guard<std::mutex> lock(m_mutex);
+    bool needRebuild = false;
 
     //! Check exists new meshes
     if (!m_newMeshes.empty()) {
-        for (auto & m_newMesh : m_newMeshes) {
+        for (auto &m_newMesh : m_newMeshes) {
             // Add mesh to transparent meshes array or usual mesh array
 
             if (m_newMesh->GetMaterial()->IsTransparent()) {
                 SRAssert(m_transparentGeometry.Add(m_newMesh))
-            }
-            else {
+            } else {
                 SRAssert(m_geometry.Add(m_newMesh))
             }
         }
@@ -160,24 +160,21 @@ void Framework::Graphics::Render::PollEvents() {
     }
 
     //! Check meshes to remove from render
-    if (!m_removeMeshes.empty()) {
-        for (auto & m_removeMesh : m_removeMeshes) {
-            if (m_removeMesh->IsCalculated())
-                m_removeMesh->FreeVideoMemory();
+    while (!m_removeMeshes.empty()) {
+        const auto &mesh = m_removeMeshes.front();
+        if (mesh->IsCalculated())
+            mesh->FreeVideoMemory();
 
-            // Remove mesh from transparent meshes array or usual mesh array
+        // Remove mesh from transparent meshes array or usual mesh array
 
-            if (m_removeMesh->GetMaterial()->IsTransparent()) {
-                SRAssert(m_transparentGeometry.Remove(m_removeMesh))
-            }
-            else {
-                SRAssert(m_geometry.Remove(m_removeMesh))
-            }
+        if (mesh->GetMaterial()->IsTransparent()) {
+            SRAssert(m_transparentGeometry.Remove(mesh))
+        } else {
+            SRAssert(m_geometry.Remove(mesh))
         }
 
-        m_removeMeshes.clear();
-
-        this->m_env->SetBuildState(false);
+        needRebuild = true;
+        m_removeMeshes.pop();
     }
 
     //! Free textures
@@ -218,11 +215,13 @@ void Framework::Graphics::Render::PollEvents() {
     if (m_skybox.m_new != m_skybox.m_current) {
         m_skybox.m_current = m_skybox.m_new;
     }
+
+    if (needRebuild)
+        this->m_env->SetBuildState(false);
 }
 
 Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_env->GetPipeLine()) {
     m_newMeshes.reserve(500);
-    m_removeMeshes.reserve(500);
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {

@@ -57,7 +57,8 @@ namespace Framework::Helper {
         if (g_file.is_open())
             g_file << msg << std::endl;
 
-        if (type == Debug::Type::Assert && IsRunningUnderDebugger()) {
+        volatile static bool enableBreakPoints = true;
+        if (type == Debug::Type::Assert && IsRunningUnderDebugger() && enableBreakPoints) {
         #if defined(SR_WIN32) and defined(SR_MSVC)
             __debugbreak();
         #endif

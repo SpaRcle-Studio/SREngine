@@ -20,6 +20,7 @@
 
 #include <EvoScriptAPI.h>
 #include <Types/Thread.h>
+#include <EngineCommands.h>
 
 namespace Framework {
     class Engine : public Singleton<Engine> {

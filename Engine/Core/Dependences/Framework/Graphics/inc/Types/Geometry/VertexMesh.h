@@ -25,7 +25,7 @@ namespace Framework::Graphics::Types {
 
     protected:
 
-        Mesh* Copy(Mesh* destination) const override {
+        IResource* Copy(IResource* destination) const override {
             if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {
                 vertex->m_countVertices = m_countVertices;
                 return Mesh::Copy(vertex);
@@ -62,17 +62,19 @@ namespace Framework::Graphics::Types {
     template<Vertices::Type type> bool VertexMesh::CalculateVBO(void* data) {
         using namespace Memory;
 
-        if (m_countVertices == 0 || !data) {
-            Debug::Error("VertexMesh::Calculate() : invalid vertices!");
-        }
+        if (m_VBO = MeshManager::Instance().CopyIfExists<type, MeshManager::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
+            if (m_countVertices == 0 || !data) {
+                Debug::Error("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
+                return false;
+            }
 
-        if (m_VBO = MeshManager::Instance().CopyIfExists<type, MeshManager::VBO>(m_resource_id); m_VBO == SR_ID_INVALID) {
             if (m_VBO = this->m_env->CalculateVBO(data, type, m_countVertices); m_VBO == SR_ID_INVALID) {
                 Debug::Error("VertexMesh::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
                 this->m_hasErrors = true;
                 return false;
-            } else
-                return Memory::MeshManager::Instance().Register<type, Memory::MeshManager::VBO>(m_resource_id, m_VBO);
+            } else {
+                return Memory::MeshManager::Instance().Register<type, Memory::MeshManager::VBO>(GetResourceId(), m_VBO);
+            }
         }
 
         return true;
@@ -81,7 +83,7 @@ namespace Framework::Graphics::Types {
     template<Vertices::Type type> bool VertexMesh::FreeVBO() {
         using namespace Memory;
 
-        if (MeshManager::Instance().Free<type, MeshManager::VBO>(m_resource_id) == MeshManager::FreeResult::Freed) {
+        if (MeshManager::Instance().Free<type, MeshManager::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!m_env->FreeVBO(m_VBO)) {
                 Debug::Error("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
                 return false;

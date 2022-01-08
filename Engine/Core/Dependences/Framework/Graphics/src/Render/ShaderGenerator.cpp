@@ -6,13 +6,14 @@
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/VectorUtils.h>
 #include <Xml.h>
+#include <FileSystem/Path.h>
 
 bool Framework::Graphics::Codegen::ShaderGenerator::Generate(
         const std::string &name,
         const std::string &dist,
         Framework::Graphics::ShaderFlags flags)
 {
-    std::string modulesFolder = Framework::Helper::ResourceManager::Instance().GetResourcesFolder() + "/Shaders/Modules/" + name + "/";
+    auto modulesFolder = Framework::Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Shaders/Modules/").Concat(name).Concat("/");
 
     bool lighting = false;
     auto defines  = std::vector<std::string>();
@@ -30,13 +31,13 @@ bool Framework::Graphics::Codegen::ShaderGenerator::Generate(
     }
 
     if (flags & Shader::Flags::Diffuse)
-        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder + "diffuse"));
+        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder.Concat("diffuse")));
     if (flags & Shader::Flags::Normal)
-        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder + "normal"));
+        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder.Concat("normal")));
     if (flags & Shader::Flags::Specular)
-        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder + "specular"));
+        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder.Concat("specular")));
     if (flags & Shader::Flags::Glossiness)
-        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder + "glossiness"));
+        modules = Helper::VectorUtils::Combine(modules, LoadModules(modulesFolder.Concat("glossiness")));
 
     if (auto fragment_module = LinkModules(modules, "fragment", defines); fragment_module.has_value()) {
         std::cout << fragment_module.value().ToCode() << std::endl;

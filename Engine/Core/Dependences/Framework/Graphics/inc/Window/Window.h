@@ -78,6 +78,7 @@ namespace Framework::Graphics {
 
         // TODO: TO_REFACTORING
         std::mutex            m_mutex                 = std::mutex();
+        std::mutex            m_drawMutex             = std::mutex();
 
         std::mutex            m_camerasMutex          = std::mutex();
         std::vector<Camera*>  m_newCameras            = std::vector<Camera*>();
@@ -112,6 +113,11 @@ namespace Framework::Graphics {
 
         void DrawToCamera(Framework::Graphics::Camera* camera);
     public:
+        void BeginSync();
+        void EndSync();
+        bool TrySync();
+        [[nodiscard]] bool IsAlive() const;
+
         void AddCamera(Camera* camera);
         void DestroyCamera(Camera* camera);
         [[nodiscard]] uint32_t GetCountCameras() const { return m_countCameras; }

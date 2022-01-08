@@ -4,14 +4,14 @@
 
 #include <Types/Geometry/DebugWireframeMesh.h>
 
-Framework::Graphics::Types::Mesh* Framework::Graphics::Types::DebugWireframeMesh::Copy(Framework::Graphics::Types::Mesh *mesh) const {
+Framework::Helper::IResource* Framework::Graphics::Types::DebugWireframeMesh::Copy(IResource* destination) const {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
-    auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(mesh ? mesh : new DebugWireframeMesh(this->m_geometryName));
+    auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh(this->m_geometryName));
     wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::Copy(wireFramed));
 
     if (wireFramed->IsCalculated())
-        wireFramed->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::SkyboxVertex, Memory::MeshManager::VBO>(m_resource_id);
+        wireFramed->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::SkyboxVertex, Memory::MeshManager::VBO>(GetResourceId());
     else
         wireFramed->m_vertices = m_vertices;
 
@@ -19,7 +19,7 @@ Framework::Graphics::Types::Mesh* Framework::Graphics::Types::DebugWireframeMesh
 }
 
 void  Framework::Graphics::Types::DebugWireframeMesh::DrawVulkan() {
-    if (!this->IsReady() || m_isDestroy)
+    if (!IsReady() || IsDestroy())
         return;
 
     if (!m_isCalculated)
@@ -65,7 +65,9 @@ bool Framework::Graphics::Types::DebugWireframeMesh::Calculate() {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("DebugWireframeMesh::Calculate() : calculating \"" + m_geometryName + "\"...");
 
-    m_barycenter = Vertices::Barycenter(m_vertices);
+    if (!m_vertices.empty())
+        m_barycenter = Vertices::Barycenter(m_vertices);
+    SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
 
     if (!CalculateVBO<Vertices::Type::SkyboxVertex>(m_vertices.data()))
         return false;

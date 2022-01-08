@@ -13,6 +13,8 @@
     #define SR_PI M_PI
 #endif
 
+#define SR_POW(value) (value * value)
+
 #define RAD(x) (x * SR_PI / 180.0)
 #define DEG(x) (x / SR_PI * 180.0)
 

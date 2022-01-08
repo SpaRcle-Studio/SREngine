@@ -25,7 +25,7 @@ namespace Framework::Helper {
         friend class GameObject;
         friend class Framework::API;
     public:
-        Component(std::string name);
+        explicit Component(const std::string& name);
         ~Component();
     public:
         static Component* CreateComponentOfName(const std::string& name) {

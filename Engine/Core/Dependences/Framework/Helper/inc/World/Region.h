@@ -17,16 +17,18 @@ namespace Framework::Helper {
         class Chunk;
         class Scene;
         class Region;
+        class Observer;
 
         typedef std::unordered_map<Math::IVector3, Chunk*> Chunks;
 
-        #define SRRegionAllocArgs uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector2& position
-        #define SRRegionAllocVArgs width, chunkSize, position
+        #define SRRegionAllocArgs Framework::Helper::World::Observer* observer, uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector2& position
+        #define SRRegionAllocVArgs observer, width, chunkSize, position
 
         class Region {
         protected:
             explicit Region(SRRegionAllocArgs)
-                : m_width(width)
+                : m_observer(observer)
+                , m_width(width)
                 , m_chunkSize(chunkSize)
                 , m_position(position)
             { }
@@ -35,28 +37,27 @@ namespace Framework::Helper {
             virtual ~Region();
 
         public:
-            typedef std::function<Region*(SRRegionAllocArgs)> Allocator;
-
-        public:
-            [[nodiscard]] Math::IVector2 GetPosition() const { return m_position; }
-            [[nodiscard]] Math::IVector2 GetWorldPosition() const;
-
-        public:
             virtual void Update(float_t dt);
             virtual bool Unload();
             virtual void OnEnter();
             virtual void OnExit();
 
-            virtual void SetOffset(const World::Offset& offset);
             virtual void ApplyOffset();
 
         public:
             Chunk* GetChunk(const Math::IVector3& position);
+            Chunk* GetChunk(const Math::FVector3& position);
+
             [[nodiscard]] Chunk* At(const Math::IVector3& position) const;
             [[nodiscard]] Chunk* Find(const Math::IVector3& position) const;
             [[nodiscard]] uint32_t GetWidth() const { return m_width; }
+            [[nodiscard]] bool IsAlive() const { return !m_loadedChunks.empty(); }
+            [[nodiscard]] Math::IVector2 GetPosition() const { return m_position; }
+            [[nodiscard]] Math::IVector2 GetWorldPosition() const;
 
         public:
+            typedef std::function<Region*(SRRegionAllocArgs)> Allocator;
+
             static void SetAllocator(const Allocator& allocator);
             static Region* Allocate(SRRegionAllocArgs);
 
@@ -64,11 +65,12 @@ namespace Framework::Helper {
             static Allocator g_allocator;
 
         protected:
+            Observer* m_observer;
             Chunks m_loadedChunks;
             uint32_t m_width;
             Math::IVector2 m_chunkSize;
             Math::IVector2 m_position;
-            World::Offset m_offset;
+
         };
     }
 }

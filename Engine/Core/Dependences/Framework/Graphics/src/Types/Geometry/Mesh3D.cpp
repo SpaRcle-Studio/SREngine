@@ -24,7 +24,9 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
 
-    m_barycenter = Vertices::Barycenter(m_vertices);
+    if (!m_vertices.empty())
+        m_barycenter = Vertices::Barycenter(m_vertices);
+    SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
 
     if (!CalculateVBO<Vertices::Type::Mesh3DVertex>(m_vertices.data()))
         return false;
@@ -32,14 +34,14 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     return IndexedMesh::Calculate();
 }
 
-Framework::Graphics::Types::Mesh *Framework::Graphics::Types::Mesh3D::Copy(Mesh* mesh) const {
+Framework::Helper::IResource* Framework::Graphics::Types::Mesh3D::Copy(IResource* destination) const {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
-    auto* mesh3D = dynamic_cast<Mesh3D *>(mesh ? mesh : new Mesh3D(m_geometryName));
+    auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D(m_geometryName));
     mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
 
     if (mesh3D->IsCalculated())
-        mesh3D->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(m_resource_id);
+        mesh3D->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(GetResourceId());
     else
         mesh3D->m_vertices = m_vertices;
 
@@ -69,7 +71,7 @@ void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices
 }
 
 void Framework::Graphics::Types::Mesh3D::DrawVulkan()  {
-    if (!this->IsReady() || m_isDestroy)
+    if (!IsReady() || IsDestroy())
         return;
 
     if (!m_isCalculated)
@@ -106,7 +108,7 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan()  {
 }
 
 void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
-    if (m_isDestroy || (!m_isCalculated && !this->Calculate()))
+    if (IsDestroy() || (!m_isCalculated && !Calculate()))
         return;
 
     ConfigureShader(m_shader)

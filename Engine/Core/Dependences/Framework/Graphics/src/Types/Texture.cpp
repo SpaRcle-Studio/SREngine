@@ -24,13 +24,12 @@ Framework::Graphics::Types::Texture::~Texture() {
 }
 
 bool Framework::Graphics::Types::Texture::Destroy() {
-    if (m_isDestroy)
+    if (IsDestroy()) {
         return false;
+    }
 
     if (Debug::GetLevel() >= Debug::Level::Medium)
         Debug::Log("Texture::Destroy() : destroying texture...");
-
-    this->m_isDestroy = true;
 
     /*
         Проверяем, просчитана ли текстура, если просчитана,
@@ -47,7 +46,7 @@ bool Framework::Graphics::Types::Texture::Destroy() {
 
     Helper::ResourceManager::Instance().Destroy(this);
 
-    return true;
+    return IResource::Destroy();
 }
 
 Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
@@ -59,15 +58,14 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
         TextureCompression compression,
         uint8_t mipLevels)
 {
-    auto path = ResourceManager::Instance().GetResourcesFolder() + "/Textures/"+ localPath;
-    path = Helper::StringUtils::MakePath(path, SR_WIN32_BOOL);
+    const auto path = ResourceManager::Instance().GetResourcesFolder().Concat("/Textures/").Concat(localPath);
 
-    Texture* texture;
+    Texture* texture = nullptr;
 
     if (IResource* find = ResourceManager::Instance().Find("Texture", localPath)) {
         texture = ((Texture*)(find));
 
-        if (texture->m_autoRemove != autoRemove
+        if (texture->IsEnabledAutoRemove() != autoRemove
         || texture->m_mipLevels   != mipLevels
         || texture->m_type        != type
         || texture->m_filter      != filter
@@ -79,14 +77,15 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
         if (Debug::GetLevel() >= Debug::Level::Medium)
             Debug::Log("Texture::Load : load \""+localPath+"\" texture...");
 
-        texture = TextureLoader::Load(path);
-        texture->m_resource_id = localPath;
-        texture->m_autoRemove = autoRemove;
+        texture = TextureLoader::Load(path.ToString());
         texture->m_type = type;
         texture->m_filter = filter;
         texture->m_format = format;
         texture->m_compression = compression;
         texture->m_mipLevels = mipLevels;
+
+        texture->SetAutoRemoveEnabled(autoRemove);
+        texture->SetId(localPath);
     }
 
     return texture;
@@ -101,7 +100,7 @@ bool Framework::Graphics::Types::Texture::Calculate() {
         return false;
     }
 
-    if (m_isDestroy) {
+    if (IsDestroy()) {
         Debug::Error("Texture::Calculate() : texture is destroyed!");
         return false;
     }
@@ -112,7 +111,7 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     }
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Texture::Calculate() : calculating \""+ m_resource_id +"\" texture...");
+        Debug::Log("Texture::Calculate() : calculating \"" + GetResourceId() + "\" texture...");
 
     m_ID = m_env->CalculateTexture(m_data, m_format, m_width, m_height, m_filter, m_compression, m_mipLevels, m_alpha);
     if (m_ID < 0) { // TODO: vulkan can be return 0 as correct value
@@ -120,7 +119,7 @@ bool Framework::Graphics::Types::Texture::Calculate() {
         return false;
     } else {
         if (Debug::GetLevel() >= Debug::Level::High)
-            Debug::Log("Texture::Calculate() : texture \""+ m_resource_id +"\" has " + std::to_string(m_ID) + " ID.");
+            Debug::Log("Texture::Calculate() : texture \"" + GetResourceId() + "\" has " + std::to_string(m_ID) + " id.");
         TextureLoader::Free(m_data);
         m_data = nullptr;
     }
@@ -131,7 +130,7 @@ bool Framework::Graphics::Types::Texture::Calculate() {
 }
 
 void Framework::Graphics::Types::Texture::OnDestroyGameObject() {
-    if (m_autoRemove && m_countUses == 1)
+    if (IsEnabledAutoRemove() && GetCountUses() == 1)
         this->Destroy();
 }
 
@@ -141,25 +140,12 @@ void Framework::Graphics::Types::Texture::SetRender(Framework::Graphics::Render 
 
 bool Framework::Graphics::Types::Texture::FreeVideoMemory()  {
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Texture::FreeVideoMemory() : free \"" + std::string(m_resource_name) + "\" texture video memory...");
+        Debug::Log("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
 
     if (!m_isCalculate) {
-        Debug::Error("Texture::FreeVideoMemory() : texture \"" + std::string(m_resource_name) + "\" is not calculated!");
+        Debug::Error("Texture::FreeVideoMemory() : texture \"" + std::string(GetResourceName()) + "\" is not calculated!");
         return false;
     }
     else
         return Framework::Graphics::Types::Texture::m_env->FreeTexture(m_ID);
 }
-
-/*
-Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Copy() {
-    if (m_isDestroy) {
-        Debug::Error("Texture::Copy() : texture already destroyed!");
-        return nullptr;
-    }
-
-    //Texture*
-
-    return nullptr;
-}*/
-

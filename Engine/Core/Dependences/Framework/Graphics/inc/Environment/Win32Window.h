@@ -102,13 +102,13 @@ namespace Framework::Graphics {
 
                     // Convert screen coordinates into client
                     if (!ScreenToClient(m_hWnd, &point)) {
-                        SRAssertOnce(false)
+                        SRAssertOnce(false);
                         return 0;
                     }
 
                     RECT rect;
                     if(!GetClientRect(hwnd, &rect)) {
-                        SRAssertOnce(false)
+                        SRAssertOnce(false);
                         return 0;
                     }
 

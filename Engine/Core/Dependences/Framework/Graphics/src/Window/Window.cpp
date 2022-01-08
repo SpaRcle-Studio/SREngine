@@ -12,6 +12,7 @@
 #include <Memory/MeshManager.h>
 #include <glm/gtx/string_cast.hpp>
 #include <Utils/StringUtils.h>
+#include <Input/InputSystem.h>
 
 using namespace Framework::Helper;
 
@@ -177,7 +178,8 @@ void Framework::Graphics::Window::Thread() {
         }
 
         waitRun:
-        if (!m_isRun && !m_isClose && !m_hasErrors) goto waitRun;
+        if (!m_isRun && !m_isClose && !m_hasErrors)
+            goto waitRun;
 
         if (!m_render->Run()) {
             Debug::Error("Window::Thread() : failed running render!");
@@ -186,11 +188,7 @@ void Framework::Graphics::Window::Thread() {
         }
     }
 
-    { // centralize window and print default size
-        auto scr_size = m_env->GetScreenSize();
-        Debug::Log("Window::Thread() : screen size is " +
-            std::to_string((int) scr_size.x) + "x" + std::to_string((int) scr_size.y));
-    }
+    Debug::Log("Window::Thread() : screen size is " + m_env->GetScreenSize().ToString());
 
     double deltaTime = 0;
     uint32_t frames = 0;
@@ -201,13 +199,24 @@ void Framework::Graphics::Window::Thread() {
     this->m_env->SetBuildState(false);
 
     if (pipeLine == PipeLine::Vulkan) {
-        while (m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
+        while (IsAlive()) {
             clock_t beginFrame = clock();
 
             {
                 this->m_env->PollEvents();
                 this->PollEvents();
                 this->m_render->PollEvents();
+
+                if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
+                    if (this->m_env->BeginDrawGUI()) {
+                        if (m_canvas)
+                            this->m_canvas->Draw();
+
+                        this->m_env->EndDrawGUI();
+                    }
+                }
+
+                BeginSync();
 
                 for (auto camera : m_cameras)
                     camera->PoolEvents();
@@ -276,21 +285,15 @@ void Framework::Graphics::Window::Thread() {
 
                         m_env->SetBuildState(true);
                     }
+                    EndSync();
                     continue;
                 }
                 else
                     this->m_render->UpdateUBOs();
 
-                if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
-                    if (this->m_env->BeginDrawGUI()) {
-                        if (m_canvas)
-                            this->m_canvas->Draw();
-
-                        this->m_env->EndDrawGUI();
-                    }
-                }
-
                 this->m_env->DrawFrame();
+
+                EndSync();
             }
 
             deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
@@ -302,7 +305,7 @@ void Framework::Graphics::Window::Thread() {
         }
     }
     else {
-        while (m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors()) {
+        while (IsAlive()) {
             clock_t beginFrame = clock();
 
             {
@@ -323,8 +326,9 @@ void Framework::Graphics::Window::Thread() {
                     }
                     else
                         for (Camera* camera : m_cameras) {
-                            if (!camera->IsReady())
+                            if (!camera->IsReady()) {
                                 continue;
+                            }
                             DrawToCamera(camera);
                         }
 
@@ -352,17 +356,24 @@ void Framework::Graphics::Window::Thread() {
 
     Helper::Debug::Graph("Window::Thread() : exit from main cycle.");
 
+    if (m_env->IsGUISupport()) {
+        m_env->StopGUI();
+        Helper::Debug::Graph("Window::Thread() : complete stopping gui!");
+    }
+
     Helper::Debug::System("Window::Thread() : synchronizing resources...");
-    /* Делаем 10 попыток синхронизации, чтобы все графические ресурсы успели уничтожиться
+
+    /*! Делаем 10 попыток синхронизации, чтобы все вложенные графические ресурсы успели уничтожиться
      * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
-     * после уничтожения потока */
-    for (uint8_t i = 0; i < 10; ++i) {
+     * после уничтожения контекстного потока */
+    for (uint8_t i = 1; i <= 10; ++i) {
+        Helper::Debug::System("Window::Thread() : synchronizing resources (step " + std::to_string(i) +" / 10)");
         this->PollEvents();
+        this->m_render->PollEvents();
         ResourceManager::Instance().Synchronize(true);
     }
 
-    if (m_env->IsGUISupport())
-        m_env->StopGUI();
+    Helper::Debug::System("Window::Thread() : complete synchronizing!");
 
     if (!this->m_render->Close()) {
         Debug::Error("Window::Thread() : failed close render!");
@@ -385,7 +396,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
             m_smoothSamples,
             "SpaRcle Engine",
             "SREngine",
-            ResourceManager::Instance().GetResourcesFolder() + "/Utilities/glslc.exe")){
+            ResourceManager::Instance().GetResourcesFolder().Concat("/Utilities/glslc.exe"))){
         Debug::Error("Window::InitEnvironment() : failed to pre-initializing environment!");
         return false;
     }
@@ -395,7 +406,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
         Debug::Error("Window::InitEnvironment() : failed to creating window!");
         return false;
     }
-    this->m_env->SetWindowIcon(std::string(Helper::ResourceManager::Instance().GetResourcesFolder().append("/Textures/").append(m_icoPath)).c_str());
+    this->m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Textures/").Concat(m_icoPath).CStr());
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
     if (!this->m_env->SetContextCurrent()) {
@@ -419,7 +430,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     if (m_env->IsGUISupport()) {
-        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResourcesFolder() + "\\Fonts\\CalibriL.ttf")) {
+        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Fonts/CalibriL.ttf"))) {
             GUI::ICanvas::InitStyle();
             this->m_env->InitGUI();
         } else
@@ -516,8 +527,7 @@ void Framework::Graphics::Window::PollEvents() {
                     m_countCameras--;
                     camera->Free();
 
-                    if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low)
-                        Helper::Debug::Log("Window::PoolEvents() : the camera has been successfully released!");
+                    Helper::Debug::Log("Window::PoolEvents() : the camera has been successfully released!");
                 }
             }
 
@@ -656,4 +666,30 @@ void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)
     m_countNewCameras++;
 
     m_camerasMutex.unlock();
+}
+
+void Framework::Graphics::Window::BeginSync() {
+    m_drawMutex.lock();
+}
+
+void Framework::Graphics::Window::EndSync() {
+    m_drawMutex.unlock();
+}
+
+bool Framework::Graphics::Window::TrySync() {
+    if (!IsAlive())
+        return false;
+
+    try {
+        BeginSync();
+        return true;
+    } catch (const std::exception& exception) {
+
+    }
+
+    return false;
+}
+
+bool Framework::Graphics::Window::IsAlive() const {
+    return m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors();
 }
