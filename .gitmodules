@@ -6,4 +6,4 @@
 	url = https://github.com/zeux/pugixml.git
 [submodule "Engine/Core/Dependences/Framework/Depends/EvoVulkan"]
 	path = Engine/Core/Dependences/Framework/Depends/EvoVulkan
-	url = https://github.com/Monika0000/EvoVulkan.git
+	url = https://github.com/Monika0000/EvoVulkan
