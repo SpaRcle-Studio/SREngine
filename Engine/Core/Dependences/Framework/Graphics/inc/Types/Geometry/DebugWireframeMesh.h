@@ -15,10 +15,12 @@ namespace Framework::Graphics::Memory {
 }
 
 namespace Framework::Graphics::Types {
-    class DebugWireframeMesh : public IndexedMesh {
+    class DebugWireframeMesh final : public IndexedMesh {
         friend class Memory::MeshAllocator;
     private:
-        explicit DebugWireframeMesh(const std::string& name = "Unnamed") : IndexedMesh(name) { }
+        explicit DebugWireframeMesh(const std::string& name = "Unnamed")
+            : IndexedMesh(MeshType::Wireframe, name)
+        { }
 
     protected:
         ~DebugWireframeMesh() override = default;

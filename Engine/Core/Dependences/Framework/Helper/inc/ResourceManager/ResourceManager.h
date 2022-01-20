@@ -105,6 +105,9 @@ namespace Framework::Helper {
         void Synchronize(bool force);
         IResource* Find(const std::string& Name, const std::string& ID);
         [[nodiscard]] bool IsLastResource(IResource* resource);
+        [[nodiscard]] Path GetResPath() const { return m_resourcesFolder; }
+        [[nodiscard]] Path GetCachePath() const { return m_resourcesFolder.Concat("/Cache"); }
+        [[nodiscard]] Path GetConfigPath() const { return m_resourcesFolder.Concat("/Configs"); }
 
         bool RegisterType(const std::string& type_name);
 
@@ -123,7 +126,7 @@ namespace Framework::Helper {
         /** \brief Get current application memory usage of bytes */
         static uint64_t GetUsedMemoryLoad();
 
-        Path GetResourcesFolder() { return m_resourcesFolder; }
+        [[deprecated("Replaced by GetResPath")]] Path GetResourcesFolder() { return m_resourcesFolder; }
 
     public:
         void PrintMemoryDump();

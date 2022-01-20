@@ -114,7 +114,7 @@ namespace Framework::Graphics {
 
             return m_shaderProgram;
         }
-        [[nodiscard]] SR_FORCE_INLINE std::string GetName() const noexcept { return m_name; }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const {
             if (index >= m_countSharedUniforms) {
                 Helper::Debug::Error("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +

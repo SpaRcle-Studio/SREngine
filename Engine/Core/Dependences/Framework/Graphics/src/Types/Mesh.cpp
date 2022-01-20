@@ -26,10 +26,11 @@
 
 using namespace Framework::Graphics::Types;
 
-Framework::Graphics::Types::Mesh::Mesh(const std::string& name)
+Framework::Graphics::Types::Mesh::Mesh(MeshType type, const std::string& name)
     : IResource("Mesh")
-    , m_env(Environment::Get())
     , Component("Mesh")
+    , m_env(Environment::Get())
+    , m_type(type)
     , m_pipeline(Environment::Get()->GetPipeLine())
 {
     this->m_shader = nullptr;
@@ -65,7 +66,7 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
 }
 
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath, MeshType type) {
-    auto path = ResourceManager::Instance().GetResourcesFolder().Concat("/Models/").Concat(localPath);
+    auto path = ResourceManager::Instance().GetResPath().Concat("/Models/").Concat(localPath);
 
     std::vector<Mesh*> meshes = std::vector<Mesh*>();
 
@@ -97,7 +98,7 @@ ret:
         if (!FbxLoader::Debug::IsInit())
             FbxLoader::Debug::Init([](const std::string& msg) { Helper::Debug::Error(msg); });
 
-        const auto resFolder = Helper::ResourceManager::Instance().GetResourcesFolder();
+        const auto resFolder = Helper::ResourceManager::Instance().GetResPath();
 
         auto fbx = FbxLoader::Loader::Load(
                 resFolder.Concat("/Utilities/FbxFormatConverter.exe"),

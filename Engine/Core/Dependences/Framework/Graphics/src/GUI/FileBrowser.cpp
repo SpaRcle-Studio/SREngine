@@ -3,7 +3,6 @@
 //
 
 #include <GUI/FileBrowser.h>
-#include <GUI/GUISystem.h>
 #include <FileSystem/Path.h>
 #include <Utils/VectorUtils.h>
 
@@ -12,11 +11,14 @@
 #include <GUI/Icons.h>
 #include <ResourceManager/ResourceManager.h>
 
-void Framework::Core::GUI::FileBrowser::SetFolder(const Helper::Path &path) {
+using namespace SR_GRAPH_NS::GUI;
+using namespace SR_UTILS_NS;
+
+void FileBrowser::SetFolder(const Path &path) {
     SRAssert((m_root = path).IsDir());
 }
 
-void Framework::Core::GUI::FileBrowser::Draw(const Framework::Helper::Path &root) {
+void FileBrowser::Draw(const Path &root) {
     const ImGuiTreeNodeFlags WITH_CHILD = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
     const ImGuiTreeNodeFlags SELECTED_WITH_CHILD = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_Selected;
     const ImGuiTreeNodeFlags WITHOUT_CHILD = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
@@ -24,7 +26,7 @@ void Framework::Core::GUI::FileBrowser::Draw(const Framework::Helper::Path &root
 
     const auto& folders = root.GetFolders();
 
-    Helper::Utils::ForEach<const Helper::Path&>([this](auto path, auto index) -> bool {
+    Helper::Utils::ForEach<const Helper::Path&>([=, this](auto path, auto index) -> bool {
         const bool selected = m_selectedDir.GetHash() == path.GetHash();
 
         if (path.GetFolders().empty()) {
@@ -49,7 +51,7 @@ void Framework::Core::GUI::FileBrowser::Draw(const Framework::Helper::Path &root
     }, folders);
 }
 
-void Framework::Core::GUI::FileBrowser::Draw() {
+void FileBrowser::Draw() {
     // left
 
     ImGui::BeginChild("left pane", ImVec2(250, 0), true);
@@ -102,4 +104,4 @@ void Framework::Core::GUI::FileBrowser::Draw() {
     ImGui::EndGroup();
 }
 
-Framework::Core::GUI::FileBrowser::FileBrowser() = default;
+FileBrowser::FileBrowser() = default;

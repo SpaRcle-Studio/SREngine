@@ -12,19 +12,18 @@
 namespace Framework::Graphics::Types {
     class VertexMesh : public Mesh {
     protected:
+        explicit VertexMesh(MeshType type, const std::string& name = "UnnamedVertexMesh")
+            : Mesh(type, name)
+        { }
+
         ~VertexMesh() override = default;
-        explicit VertexMesh(const std::string& name = "UnnamedVertexMesh")
-            : Mesh(name) { };
-    protected:
-        int32_t  m_VBO = SR_ID_INVALID;
-        uint32_t m_countVertices = 0;
+
     public:
         template<bool fast> [[nodiscard]] int32_t GetVBO();
 
         virtual void SetVertexArray(const std::any& vertices) = 0;
 
     protected:
-
         IResource* Copy(IResource* destination) const override {
             if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {
                 vertex->m_countVertices = m_countVertices;
@@ -42,6 +41,10 @@ namespace Framework::Graphics::Types {
     protected:
         template<Vertices::Type type> bool CalculateVBO(void* data);
         template<Vertices::Type type> bool FreeVBO();
+
+    protected:
+        int32_t  m_VBO = SR_ID_INVALID;
+        uint32_t m_countVertices = 0;
 
     };
 

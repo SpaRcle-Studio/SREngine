@@ -4,7 +4,6 @@
 
 #include <FileSystem/Path.h>
 #include <FileSystem/FileSystem.h>
-
 #include <utility>
 
 namespace Framework::Helper {
@@ -33,7 +32,7 @@ namespace Framework::Helper {
     }
 
     Path Path::Normalize() {
-        m_path = FileSystem::NormalizePath(m_path);
+        NormalizeSelf();
         return *this;
     }
 
@@ -70,7 +69,7 @@ namespace Framework::Helper {
     }
 
     void Path::Update() {
-        Normalize();
+        NormalizeSelf();
 
         m_type = GetType();
 
@@ -113,6 +112,7 @@ namespace Framework::Helper {
     }
 
     Path::Type Path::GetType() const {
+#if defined(SR_MSVC)
         struct stat s{};
         if(stat(m_path.c_str(), &s) == 0) {
             if (s.st_mode & S_IFDIR) {
@@ -123,6 +123,16 @@ namespace Framework::Helper {
         }
 
         return Type::Undefined;
+#elif defined(SR_WIN32)
+        DWORD attrib = GetFileAttributes(m_path.c_str());
+
+        if ((attrib & FILE_ATTRIBUTE_DIRECTORY) != 0)
+            return Type::Folder;
+
+        return Type::File;
+#else
+        return Type::Undefined;
+#endif
     }
 
     Path Path::Concat(const Path &path) const {
@@ -140,6 +150,10 @@ namespace Framework::Helper {
             case Type::Undefined:
                 return false;
         }
+    }
+
+    void Path::NormalizeSelf() {
+        m_path = FileSystem::NormalizePath(m_path);
     }
 
     Path& Path::operator=(const Path& path) = default;

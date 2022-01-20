@@ -111,6 +111,7 @@ namespace Framework::Core::GUI {
         void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawFileBrowser();
+        void DrawVisualScriptEditor();
 
         void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm);
 

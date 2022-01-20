@@ -31,3 +31,10 @@
 #ifdef SR_USE_IMGUIZMO
     #include "../Depends/ImGuizmo/ImGuizmo.cpp"
 #endif
+
+#ifdef SR_USE_IMGUI_NODE_EDITOR
+    #include "../Depends/imgui-node-editor/imgui_node_editor_api.cpp"
+    #include "../Depends/imgui-node-editor/imgui_node_editor.cpp"
+    #include "../Depends/imgui-node-editor/imgui_canvas.cpp"
+    #include "../Depends/imgui-node-editor/crude_json.cpp"
+#endif

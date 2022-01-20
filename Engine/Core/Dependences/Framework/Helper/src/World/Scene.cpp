@@ -17,8 +17,6 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
 
-    std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     Types::SafePtr<GameObject> gm = *(new GameObject(*this, name));
 
     m_gameObjects.insert(gm);
@@ -51,8 +49,6 @@ bool Framework::Helper::World::Scene::Destroy() {
         return false;
     }
 
-    std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     if (Debug::GetLevel() > Debug::Level::None)
         Debug::Log("Scene::Destroy() : unload " + std::to_string(m_regions.size()) + " regions...");
 
@@ -66,21 +62,24 @@ bool Framework::Helper::World::Scene::Destroy() {
         Debug::Log("Scene::Destroy() : destroying \"" + std::string(m_name) + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
     }
 
-    for (auto gameObject : m_gameObjects) {
-        if (!gameObject->GetParent()) {
-            gameObject.Lock();
+    for (auto gameObject : GetRootGameObjects()) {
+        gameObject.Lock();
 
-            gameObject.Free([](GameObject* gm){
-                gm->DestroyFromScene();
-                gm->Free();
-            });
+        gameObject.Free([](GameObject* gm) {
+            gm->Destroy(GameObject::DestroyBy::Scene);
+            gm->Free();
+        });
 
-            gameObject.Unlock();
-        }
+        gameObject.Unlock();
     }
-    m_gameObjects.clear();
 
-    this->m_isDestroy = true;
+    if (!m_gameObjects.empty()) {
+        Helper::Debug::Warn(Format("Scene::Destroy() : after destroying the root objects, "
+                                   "there are %i objects left!", m_gameObjects.size()));
+        m_gameObjects.clear();
+    }
+
+    m_isDestroy = true;
     m_isHierarchyChanged = true;
 
     if (Debug::GetLevel() > Debug::Level::None)
@@ -90,7 +89,7 @@ bool Framework::Helper::World::Scene::Destroy() {
 }
 
 bool Framework::Helper::World::Scene::Free() {
-    if (!this->m_isDestroy) {
+    if (!m_isDestroy) {
         Debug::Error("Scene::Free() : scene \"" + std::string(m_name) + "\" is not destroyed!");
         return false;
     }
@@ -108,15 +107,13 @@ bool Framework::Helper::World::Scene::Free() {
 }
 
 Framework::Helper::World::GameObjects& Framework::Helper::World::Scene::GetRootGameObjects() {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     if (!m_isHierarchyChanged)
         return m_rootObjects;
 
     m_rootObjects.clear();
 
     for (const auto& gm : m_gameObjects)
-        if (!gm->GetParent())
+        if (!gm->GetParent().Valid())
             m_rootObjects.insert(gm);
 
     m_isHierarchyChanged = false;
@@ -125,8 +122,6 @@ Framework::Helper::World::GameObjects& Framework::Helper::World::Scene::GetRootG
 }
 
 void Framework::Helper::World::Scene::AddSelected(const Types::SafePtr<GameObject>& gameObject) {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     this->m_selectedGameObjects.insert(gameObject);
 
     auto components = gameObject->GetComponents();
@@ -135,8 +130,6 @@ void Framework::Helper::World::Scene::AddSelected(const Types::SafePtr<GameObjec
 }
 
 bool Framework::Helper::World::Scene::RemoveSelected(const GameObject::Ptr& gameObject) {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     auto components = gameObject->GetComponents();
     for (Framework::Helper::Component* comp : components) // TODO: unsafe
         comp->OnSelected(false);
@@ -151,8 +144,6 @@ bool Framework::Helper::World::Scene::RemoveSelected(const GameObject::Ptr& game
 }
 
 void Framework::Helper::World::Scene::UnselectAll() {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     for (const auto& gameObject : m_selectedGameObjects) {
         auto components = gameObject->GetComponents(); //TODO: double lock?
         for (Framework::Helper::Component* comp : components)
@@ -165,8 +156,6 @@ void Framework::Helper::World::Scene::UnselectAll() {
 }
 
 Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::World::Scene::FindByComponent(const std::string &name) {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     for (const auto& gm : m_gameObjects)
         if (gm->ContainsComponent(name))
             return gm;
@@ -175,25 +164,19 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
 }
 
 void Framework::Helper::World::Scene::OnChanged() {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     m_isHierarchyChanged = true;
 }
 
 void Framework::Helper::World::Scene::ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-    for (auto gm : m_gameObjects)
+    for (auto gm : GetRootGameObjects()) {
         if (gm.LockIfValid()) {
-            if (!gm->GetParent())
-                fun(gm);
+            fun(gm);
             gm.Unlock();
         }
+    }
 }
 
 bool Framework::Helper::World::Scene::Save(const std::string& folder) {
-    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     auto xml = Xml::Document::New();
     if (auto root = xml.Root().AppendChild("Scene"); root.Valid()) {
         root.AppendAttribute("Name", std::string(m_name).c_str());
@@ -208,14 +191,17 @@ bool Framework::Helper::World::Scene::Save(const std::string& folder) {
                 region.AppendChild("width").AppendAttribute("value", 50);
             }
         }
+
+        auto gameObjects = root.AppendChild("GameObjects");
+        for (const auto& gameObject : GetRootGameObjects()) {
+            gameObjects.AppendChild(gameObject->Save().DocumentElement());
+        }
     }
 
     return xml.Save(folder + "/" + std::string(m_name) + ".scene");
 }
 
 Framework::Helper::World::GameObjects Framework::Helper::World::Scene::GetGameObjects()  {
-    std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     auto v = GameObjects();
     v.reserve(m_gameObjects.size());
 
@@ -226,7 +212,6 @@ Framework::Helper::World::GameObjects Framework::Helper::World::Scene::GetGameOb
 }
 
 Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::World::Scene::GetSelected() const  {
-    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     if (auto size = m_selectedGameObjects.size(); size == 0 || size > 1)
         return Types::SafePtr<GameObject>();
     else {
@@ -236,7 +221,8 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
 }
 
 void Framework::Helper::World::Scene::Update(float_t dt) {
-    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+    if (!m_observer->m_target.Valid())
+        return;
 
     const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
     const auto regSize = Math::IVector2(m_regionWidth);
@@ -315,8 +301,6 @@ Framework::Helper::World::Scene::Scene(const std::string &name)
 }
 
 void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::World::Offset &offset) {
-    std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
     const auto prevOffset = m_observer->m_offset;
     const auto region = (offset.m_chunk / static_cast<int32_t>(m_regionWidth)).ZeroAxis(Math::AXIS_Y);
     m_observer->m_offset = World::Offset(offset.m_region + region.XZ(), offset.m_chunk - region * m_regionWidth);
@@ -424,7 +408,7 @@ void Scene::UpdateContainers() {
 }
 
 bool Scene::ReloadConfig() {
-    const std::string path = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Configs/World.config");
+    const std::string path = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/World.config");
 
     if (auto xml = Helper::Xml::Document::Load(path); xml.Valid()) {
         const auto& configs = xml.Root().GetNode("Configs");
@@ -449,6 +433,12 @@ bool Scene::ReloadConfig() {
         Helper::Debug::Error("Scene::Scene() : file not found! Path: " + path);
         return false;
     }
+}
+
+bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
+    m_gameObjects.erase(gameObject);
+    OnChanged();
+    return true;
 }
 
 

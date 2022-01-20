@@ -9,7 +9,13 @@
 #include "../Graphics/src/Environment/TextureHelper.cpp"
 #include "../Graphics/src/Environment/Vulkan.cpp"
 
+#include "../Graphics/src/GUI/Link.cpp"
 #include "../Graphics/src/GUI/ICanvas.cpp"
+#include "../Graphics/src/GUI/Node.cpp"
+#include "../Graphics/src/GUI/Icons.cpp"
+#include "../Graphics/src/GUI/NodeManager.cpp"
+#include "../Graphics/src/GUI/Pin.cpp"
+#include "../Graphics/src/GUI/FileBrowser.cpp"
 
 #include "../Graphics/src/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Lighting/Light.cpp"

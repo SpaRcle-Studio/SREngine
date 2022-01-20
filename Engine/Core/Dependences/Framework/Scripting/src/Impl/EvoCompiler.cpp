@@ -13,15 +13,11 @@ bool Framework::Scripting::EvoCompiler::Init() {
     EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);  };
     EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { Helper::Debug::Info(msg);  };
 
-    this->m_pathToScripts = Framework::Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scripts/");
+    this->m_pathToScripts = Framework::Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/");
 
-    auto config = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Configs/EvoScriptGenerator.config");
+    auto config = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/EvoScriptGenerator.config");
 
     const std::string warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
-
-#ifdef __MINGW64__
-    if (config.find("Visual Studio") != std::string::npos) Helper::Debug::Warn(warnMsg);
-#endif
 
     std::ifstream ifs(config);
     if (!ifs.is_open()) {
@@ -29,8 +25,14 @@ bool Framework::Scripting::EvoCompiler::Init() {
         return false;
     } else {
         std::string generator((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+
+    #ifdef __MINGW64__
+        if (generator.find("Visual Studio") != std::string::npos)
+            Helper::Debug::Warn(warnMsg);
+    #endif
+
         Helper::Debug::Info("EvoCompiler::Init() : use \"" + generator + "\" generator...");
-        this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Cache"));
+        this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::Instance().GetResPath().Concat("/Cache"));
         this->m_generator = new EvoScript::AddressTableGen();
         this->m_casting = new EvoScript::CastingGen(m_generator);
     }

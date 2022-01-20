@@ -27,11 +27,18 @@ namespace Framework {
 namespace Framework::Graphics {
     class Window;
 
+    /// TO_REFACTORING
     class Camera : public Component {
         friend class ::Framework::API;
     private:
-        ~Camera() = default;
-        Camera() : Component("Camera"), m_env(Environment::Get()), m_pipeline(m_env->GetPipeLine()) { }
+        Camera()
+            : Component("Camera")
+            , m_env(Environment::Get())
+            , m_pipeline(m_env->GetPipeLine())
+        { }
+
+        ~Camera() override = default;
+
     public:
         void UpdateProjection(unsigned int w, unsigned int h);
         void UpdateProjection();

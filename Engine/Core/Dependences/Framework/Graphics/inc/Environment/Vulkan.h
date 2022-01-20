@@ -225,7 +225,7 @@ namespace Framework::Graphics {
 
         SR_FORCE_INLINE void DrawFrame() override {
             if (this->m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
-                Helper::EventManager::Push(EventManager::Event::Fatal);
+                Helper::EventManager::Push(Helper::EventManager::Event::Fatal);
                 m_hasErrors = true;
             }
         }

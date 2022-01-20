@@ -110,9 +110,16 @@ namespace Framework::Helper {
 
 #ifdef SR_RELEASE
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
-    #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); }
-    #define SRAssert(expr) { [[maybe_unused]] const bool expression = !(expr); }
+    #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
+    #define SRAssert(expr) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
     #define SRAssert1(expr) SRAssert(expr)
+
+    #define SRVerifyFalse2(expr, msg) {                                      \
+            [[maybe_unused]] const volatile bool verify_expression = (expr); \
+        }                                                                    \
+
+    #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "")
+
 #endif
 
 #ifdef SR_DEBUG
@@ -149,6 +156,14 @@ namespace Framework::Helper {
 
     #define SRAssert1(expr) SRAssert2(expr, #expr)
     #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
+
+    #define SRVerifyFalse2(expr, msg) {                 \
+        const volatile bool verify_expression = (expr); \
+        SRAssert2(verify_expression, msg)               \
+    }                                                   \
+
+    #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
+
 #endif
 
 #define SRAssert2Once(expr, msg) {                         \

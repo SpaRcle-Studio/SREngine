@@ -58,7 +58,7 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
         TextureCompression compression,
         uint8_t mipLevels)
 {
-    const auto path = ResourceManager::Instance().GetResourcesFolder().Concat("/Textures/").Concat(localPath);
+    const auto path = ResourceManager::Instance().GetResPath().Concat("/Textures/").Concat(localPath);
 
     Texture* texture = nullptr;
 

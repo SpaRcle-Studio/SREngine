@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Features>
+   <Common>
+       <ChunkSystem Value="true"/>
+       <CrashHandler Value="true"/>
+   </Common>
+</Features>

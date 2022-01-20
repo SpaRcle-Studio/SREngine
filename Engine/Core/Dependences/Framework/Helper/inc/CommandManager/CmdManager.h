@@ -8,6 +8,7 @@
 #include <string>
 #include <mutex>
 #include <queue>
+#include <list>
 #include <functional>
 #include <unordered_map>
 
@@ -18,25 +19,50 @@ namespace Framework::Helper {
     typedef std::function<ICommand*(void)> CmdAllocator;
     typedef std::unordered_map<std::string, CmdAllocator> CmdAllocators;
 
+    enum class SyncType {
+        Sync, Async, Force
+    };
+
     class CmdManager {
+    private:
+        enum class CmdType {
+            Redo, Undo
+        };
+
+        struct Cmd {
+            ICommand* m_cmd;
+            CmdType m_type;
+        };
+
     public:
         CmdManager() = default;
         ~CmdManager() = default;
-
-        enum class SyncType {
-            Sync, Async, Force
-        };
 
     public:
         [[nodiscard]] ICommand* MakeCommand(const std::string& id) const;
         bool MakeAndExecute(const std::string& id, SyncType sync);
         bool Execute(ICommand* cmd, SyncType sync);
-        void RegisterCommand(const std::string& id, const CmdAllocator& allocator);
+        bool Cancel();
+        bool RegisterCommand(const std::string& id, const CmdAllocator& allocator);
+
+        bool Run();
+        bool Close();
 
     private:
-        std::queue<ICommand*> m_commands;
+        bool Execute(ICommand* cmd);
+        bool Cancel(ICommand* cmd);
+        bool DoCmd(const Cmd& cmd);
+
+    private:
+        std::queue<Cmd> m_commands;
+        std::vector<ICommand*> m_history;
+        uint32_t m_historyPC = UINT32_MAX;
+        uint32_t m_maxHistorySize = 0;
+
         CmdAllocators m_allocators;
         std::mutex m_mutex;
+        Types::Thread m_thread;
+        std::atomic<bool> m_isRun;
 
     };
 }

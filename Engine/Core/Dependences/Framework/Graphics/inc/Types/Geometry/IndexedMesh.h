@@ -15,13 +15,10 @@ namespace Framework::Graphics::Types {
     class IndexedMesh : public VertexMesh {
     protected:
         ~IndexedMesh() override = default;
-        explicit IndexedMesh(const std::string& name = "UnnamedIndexedMesh")
-            : VertexMesh(name) { };
-    protected:
-        int32_t               m_IBO          = SR_ID_INVALID;
-        std::vector<uint32_t> m_indices      = std::vector<uint32_t>();
-        uint32_t              m_countIndices = 0;
-        bool                  m_useIndices   = false;
+        explicit IndexedMesh(MeshType type, const std::string& name = "UnnamedIndexedMesh")
+            : VertexMesh(type, name)
+        { }
+
     public:
         template<bool fast> [[nodiscard]] int32_t GetIBO();
 
@@ -36,6 +33,13 @@ namespace Framework::Graphics::Types {
 
         bool Calculate() override;
         bool FreeVideoMemory() override;
+
+    protected:
+        int32_t               m_IBO          = SR_ID_INVALID;
+        std::vector<uint32_t> m_indices      = std::vector<uint32_t>();
+        uint32_t              m_countIndices = 0;
+        bool                  m_useIndices   = false;
+
     };
 
     template<bool fast> int32_t IndexedMesh::GetIBO() {

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Blueprints>
+    <Multiply Name="X" Type="Simple">
+        <Color r="100" g="200" b="100" a="255"/>
+        <Inputs>
+            <!--<Pin Name="$NoDisplay($Format(Value%i, index))" Type="Numeric" Repeat="True"/>-->
+            <Pin Name=" " Type="Numeric" />
+            <Pin Name=" " Type="Numeric" />
+            <Pin Name=" " Type="Numeric" />
+        </Inputs>
+        <Outputs>
+            <!--<Pin Name="Result" Type="Numeric"/>-->
+            <Pin Name=" " Type="Numeric"/>
+        </Outputs>
+        <Code Source="Value0 $Repeat(* $Format(Value%i, index))"/>
+    </Multiply>
+</Blueprints>

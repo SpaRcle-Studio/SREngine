@@ -7,8 +7,9 @@
 
 #include <FileSystem/Path.h>
 #include <string>
+#include <macros.h>
 
-namespace Framework::Core::GUI {
+namespace SR_GRAPH_NS::GUI {
     class FileBrowser {
         using Hash = std::size_t;
     public:

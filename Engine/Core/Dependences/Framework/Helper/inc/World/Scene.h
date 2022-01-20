@@ -72,6 +72,7 @@ namespace Framework::Helper::World {
 
     public:
         void UnselectAll();
+        bool Remove(const Types::SafePtr<GameObject>& gameObject);
         bool RemoveSelected(const Types::SafePtr<GameObject>& gameObject);
         void AddSelected(const Types::SafePtr<GameObject>& gameObject);
 
@@ -91,8 +92,6 @@ namespace Framework::Helper::World {
         bool                         m_scopeEnabled        = false;
         bool                         m_isDestroy           = false;
         std::atomic<bool>            m_isHierarchyChanged  = false;
-
-        mutable std::recursive_mutex m_mutex               = std::recursive_mutex();
 
         StringAtom                   m_name                = "Unnamed";
 

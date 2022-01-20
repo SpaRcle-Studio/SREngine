@@ -2,32 +2,36 @@
 // Created by Nikita on 29.12.2020.
 //
 
-#include "../inc/Engine.h"
+#include <Engine.h>
 #include <Types/Time.h>
 #include <Types/Timer.h>
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
 #include <GUI/EditorGUI.h>
+#include <Events/EventManager.h>
+#include <Utils/Features.h>
+
+#include <Render/Render.h>
+#include <Window/Window.h>
+
+#include <World/Scene.h>
 
 #include <utility>
 #include <chrono>
-#include <Events/EventManager.h>
 
-Framework::Engine::Engine() {
-
-}
-
+Framework::Engine::Engine() = default;
 Framework::Engine::~Engine() = default;
 
-bool Framework::Engine::Create(Graphics::Window* window, Physics::PhysEngine* physics) {
+bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine* physics) {
     this->m_window = window;
     this->m_render = window->GetRender();
 
     this->m_physics = physics;
 
-    this->m_time     = new Helper::Types::Time();
-    this->m_compiler = new Scripting::EvoCompiler();
+    this->m_time       = new Helper::Types::Time();
+    this->m_compiler   = new Scripting::EvoCompiler();
+    this->m_cmdManager = new Helper::CmdManager();
 
     if (m_isCreate){
         Helper::Debug::Error("Engine::Create() : game engine already create!");
@@ -124,18 +128,30 @@ bool Framework::Engine::Run() {
         return false;
     }
 
+    if (!Core::Commands::RegisterEngineCommands()) {
+        Helper::Debug::Error("Engine::Run() : errors were detected during the registration of commands!");
+        return false;
+    }
+
+    if (!m_cmdManager->Run()) {
+        Helper::Debug::Error("Engine::Run() : failed to ran command manager!");
+        return false;
+    }
+
     Helper::Debug::Info("Engine::Run() : running world thread...");
 
-    m_worldThread = new Types::Thread([this]() {
-        auto timer = Types::Timer(1.0);
+    if (Helper::Features::Instance().Enabled("ChunkSystem")) {
+        m_worldThread = new Helper::Types::Thread([this]() {
+            auto timer = Helper::Types::Timer(1.0);
 
-        while(m_isRun) {
-            if (timer.Update() && m_scene.LockIfValid()) {
-                m_scene->Update(timer.GetDeltaTime());
-                m_scene.Unlock();
+            while (m_isRun) {
+                if (timer.Update() && m_scene.LockIfValid()) {
+                    m_scene->Update(timer.GetDeltaTime());
+                    m_scene.Unlock();
+                }
             }
-        }
-    });
+        });
+    }
 
     this->m_isRun = true;
 
@@ -157,23 +173,25 @@ void Framework::Engine::Await() {
         EventManager::PoolEvents();
         m_compiler->PollEvents();
 
-        if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
-            Debug::System("Engine::Await() : The closing key combination have been detected!");
-            m_exitEvent = true;
+        /// fixed update
+        if (accumulator >= updateFrequency) {
+            while (accumulator >= updateFrequency) {
+                Helper::Input::Check();
+
+                if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
+                    Debug::System("Engine::Await() : The closing key combination have been detected!");
+                    m_exitEvent = true;
+                    break;
+                }
+
+                m_compiler->FixedUpdateAll();
+                accumulator -= updateFrequency;
+            }
         }
 
         if (m_exitEvent) {
             Debug::System("Engine::Await() : The closing event have been received!");
             break;
-        }
-
-        /// fixed update
-        if (accumulator >= updateFrequency) {
-            while (accumulator >= updateFrequency) {
-                Helper::Input::Check();
-                m_compiler->FixedUpdateAll();
-                accumulator -= updateFrequency;
-            }
         }
 
         m_compiler->UpdateAll();
@@ -196,6 +214,12 @@ bool Framework::Engine::Close() {
     Helper::Debug::Info("Engine::Close() : close game engine...");
 
     m_isRun = false;
+
+    if (m_cmdManager) {
+        m_cmdManager->Close();
+        delete m_cmdManager;
+        m_cmdManager = nullptr;
+    }
 
     if (m_window && m_window->IsRun()) {
         m_window->Close();
@@ -266,14 +290,24 @@ bool Framework::Engine::LoadMainScript() {
 }
 
 bool Framework::Engine::CloseScene() {
-    if (m_scene.LockIfValid()) {
-        bool ans = m_scene.Free([](World::Scene* scene) {
-            scene->Destroy();
-            scene->Free();
-        });
-        m_scene.Unlock();
-        return ans;
-    }
-    else
+    return m_scene.AutoFree([](World::Scene* scene) {
+        scene->Destroy();
+        scene->Free();
+    });
+}
+
+bool Framework::Engine::SetScene(const Helper::Types::SafePtr<World::Scene> &scene)  {
+    // TODO: add thread security!
+    if (m_scene.Valid() && scene == m_scene) {
+        Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
         return false;
+    } else {
+        this->m_scene = scene;
+        return true;
+    }
+}
+
+void Framework::Engine::Reload() {
+    Helper::FileSystem::Reload();
+    EventManager::Push(EventManager::Event::Exit);
 }

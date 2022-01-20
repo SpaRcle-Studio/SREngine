@@ -26,6 +26,16 @@ Framework::Helper::GameObject::GameObject(const Types::SafePtr<World::Scene>& sc
     m_scene = scene;
 
     m_transform = new Transform(this);
+
+    UpdateEntityPath();
+}
+
+GameObject::~GameObject() {
+    delete m_transform;
+}
+
+void GameObject::Free() {
+    delete this;
 }
 
 bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *component) {  // TODO: add security multi-threading
@@ -33,8 +43,6 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
         Debug::Error("GameObject::AddComponent() : this \""+m_name+"\" game object is destroyed!");
         return false;
     }
-
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     component->SetParent(this);
     component->OnAttachComponent();
@@ -47,8 +55,6 @@ bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *c
 
 Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const std::string& name) {
     Component* find = nullptr;
-
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto component : m_components)
         if (component->GetComponentName() == name) {
@@ -63,26 +69,52 @@ std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std:
     return std::vector<Component *>();
 }
 
-void Framework::Helper::GameObject::DestroyFromScene() {
-    if (m_isDestroy){
-        Helper::Debug::Error("GameObject::Destroy() : \"" +m_name + "\" game object already destroyed!");
+void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
+    if (m_isDestroy) {
+        Helper::Debug::Error("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
         return;
     }
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("GameObject::Destroy() : destroying \""+m_name + "\" game object contains " + std::to_string(m_components.size()) + " components...");
+#ifdef SR_DEBUG
+    if (!IsLocked())
+        Helper::Debug::Warn("GameObject::Destroy() : game object \"" + GetName()
+                            + "\" is not locked, crash or memory corruption possible!");
 
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
+    if (Debug::GetLevel() >= Debug::Level::High)
+        Debug::Log("GameObject::Destroy() : destroying \"" + m_name + "\" game object contains " + std::to_string(m_components.size()) + " components...");
+#endif
+
+    if (m_scene.RecursiveLockIfValid()) {
+        if (by == DestroyBy::Other && m_parent.LockIfValid()) {
+            m_parent->RemoveChild(*this);
+            m_parent.Unlock();
+        }
+
+        m_scene->Remove(*this);
+
+        m_scene.Unlock();
+    }
 
     for (Component* component : m_components)
         component->OnDestroyGameObject();
+    m_components.clear();
 
-    for (const auto& gm : m_children)
-        gm->DestroyFromScene();
+    for (GameObject::Ptr gameObject : m_children) {
+        if (gameObject.LockIfValid()) {
+            gameObject.Free([](GameObject* gm) {
+                gm->Destroy(DestroyBy::GameObject);
+                gm->Free();
+            });
+            gameObject.Unlock();
+        }
+    }
+    m_children.clear();
 
     m_isDestroy = true;
-}
 
+    if (by == DestroyBy::Other)
+        Free();
+}
 
 void GameObject::UpdateComponents() {
     /*for (Component* component : m_components){
@@ -127,11 +159,10 @@ bool GameObject::AddChild(const Types::SafePtr<GameObject>& child) { // TODO: ad
     }
 
     //child->m_parent = this;
-    child->SetParent(this);
+    child->SetParent(*this);
 
     //!this->m_children.insert(std::make_pair(child, child));
-    this->m_children.push_back(child);
-    this->m_countChild++;
+    this->m_children.insert(child);
 
     /* TODO: Update child transforms with parent */
 
@@ -166,15 +197,11 @@ void GameObject::SetSelect(bool value) {
     }
 }
 
-std::string GameObject::GetName() noexcept  {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
+std::string GameObject::GetName() const {
     return this->m_name;
 }
 
 std::vector<Component *> GameObject::GetComponents() {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
     return m_components;
 }
 
@@ -183,21 +210,34 @@ void GameObject::SetNameFromInspector(const std::string &name) {
     this->m_scene->OnChanged();
 }
 
-void GameObject::SetParent(GameObject *gm)  {
-    this->m_parent = gm;
-    this->m_transform->OnParentSet(gm->m_transform);
-    this->m_scene->OnChanged();
+void GameObject::SetParent(const GameObject::Ptr& parent) {
+    if (parent == m_parent) {
+        return;
+    }
+
+    m_parent = parent;
+
+    if (m_parent.Valid()) {
+        m_transform->OnParentSet(m_parent->m_transform);
+    }
+    else
+        m_transform->OnParentSet(nullptr);
+
+    UpdateEntityPath();
+
+    m_scene->OnChanged();
 }
 
-void GameObject::RemoveParent(GameObject *gm) {
-    this->m_transform->OnParentRemove(gm->m_transform);
-    this->m_parent = nullptr;
-    this->m_scene->OnChanged();
+void GameObject::RemoveChild(const GameObject::Ptr& ptr) {
+    if (!IsChild(ptr)) {
+        SRAssert2(false, Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
+        return;
+    }
+
+    m_children.erase(ptr);
 }
 
 bool GameObject::ContainsComponent(const std::string &name) {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
     for (auto comp : m_components)
         if (comp->GetComponentName() == name) {
             return true;
@@ -206,22 +246,13 @@ bool GameObject::ContainsComponent(const std::string &name) {
     return false;
 }
 
-void GameObject::Free() {
-    delete this;
-}
-
-GameObject::~GameObject() {
-    delete m_transform;
-}
-
 void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
-    for (auto child : m_children)
+    for (auto child : m_children) {
         if (child.LockIfValid()) {
             fun(child);
             child.Unlock();
         }
+    }
 }
 
 void GameObject::SetActive(bool value) {
@@ -229,8 +260,6 @@ void GameObject::SetActive(bool value) {
         m_isActive = value;
     else
         return;
-
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
     for (auto child : m_children)
         if (child.LockIfValid()) {
@@ -242,8 +271,6 @@ void GameObject::SetActive(bool value) {
 }
 
 void GameObject::OnPrentSetActive(bool value) {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
     m_isParentActive = value;
 
     for (auto child : m_children)
@@ -261,8 +288,6 @@ void GameObject::UpdateComponentsEnabled() {
 }
 
 Math::FVector3 GameObject::GetBarycenter() {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
     auto barycenter = Math::FVector3();
     uint32_t count = 0;
 
@@ -276,7 +301,7 @@ Math::FVector3 GameObject::GetBarycenter() {
         return Math::InfinityFV3;
     else {
         barycenter /= count;
-        if (!m_parent)
+        if (!m_parent.Valid())
             return barycenter;
         else
             return barycenter + m_transform->m_globalPosition;
@@ -303,16 +328,12 @@ Math::FVector3 GameObject::GetHierarchyBarycenter() {
 }
 
 void GameObject::ForEachComponent(const std::function<bool(Component*)> &fun) {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
     for (auto component : m_components)
         if (!fun(component))
             break;
 }
 
 bool GameObject::RemoveComponent(Component *component) {
-    std::lock_guard<std::recursive_mutex> locker(m_mutex);
-
     for (auto it = m_components.begin(); it != m_components.end(); it++)
         if (*it == component) {
             component->OnRemoveComponent();
@@ -324,3 +345,47 @@ bool GameObject::RemoveComponent(Component *component) {
 
     return false;
 }
+
+Xml::Document GameObject::Save() const {
+    auto doc = Xml::Document::New();
+    auto root = doc.Root().AppendChild("GameObject");
+
+    root.AppendAttribute("Name", m_name.c_str());
+    root.AppendAttribute("Tag", m_tag.c_str());
+    root.AppendAttribute("Enabled", IsEnabled());
+
+    root.AppendChild(m_transform->Save().DocumentElement());
+
+    if (!m_components.empty()) {
+        auto components = root.AppendChild("Components");
+        for (const auto &comp : m_components) {
+            components.AppendChild(comp->Save().DocumentElement());
+        }
+    }
+
+    if (!m_children.empty()) {
+        auto children = root.AppendChild("Children");
+        for (const auto &child : m_children)
+            children.AppendChild(child->Save().DocumentElement());
+    }
+
+    return doc;
+}
+
+void GameObject::UpdateEntityPath() {
+    GameObject::Ptr current = *this;
+    EntityPath path;
+
+    do {
+        path.ConcatBack(current->GetEntityId());
+        current = current->m_parent;
+    }
+    while(current.Valid());
+
+    SetEntityPath(path);
+}
+
+bool GameObject::IsChild(const GameObject::Ptr &child) {
+    return m_children.count(child) == 1;
+}
+

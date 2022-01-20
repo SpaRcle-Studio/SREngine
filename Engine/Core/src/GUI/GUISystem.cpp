@@ -4,12 +4,14 @@
 
 #include <GUI/GUISystem.h>
 #include <GUI/FileBrowser.h>
+#include <GUI/VisualScriptEditor.h>
 #include <Input/InputSystem.h>
 #include <GUI.h>
 #include <string>
 #include <ResourceManager/ResourceManager.h>
 #include <Engine.h>
 #include <World/Chunk.h>
+#include <EngineCommands.h>
 
 namespace Framework::Core {
     inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
@@ -119,13 +121,16 @@ void GUISystem::BeginDockSpace() {
     if (ImGui::BeginMainMenuBar()) {
         ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainMenuBar");
 
-        static bool beginDrag = false;
-        if (!beginDrag)
-            beginDrag = menu_bar_window->Rect().Contains(ImGui::GetMousePos()) && ImGui::IsMouseDragging(ImGuiMouseButton_Left);
-        else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left))
-            beginDrag = false;
+        enum class Click {
+            None, Drag, Miss
+        } static click;
 
-        if (beginDrag) {
+        if (click == Click::None && ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+            click = menu_bar_window->Rect().Contains(ImGui::GetMousePos()) ? Click::Drag : Click::Miss;
+        else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+            click = Click::None;
+
+        if (click == Click::Drag) {
             auto drag = ImGui::GetMouseDragDelta();
             auto pos = Graphics::Environment::Get()->GetBasicWindow()->GetPosition();
 
@@ -300,6 +305,13 @@ void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helpe
             ImGui::PopStyleVar();
         }
 
+        auto&& selected = scene->GetSelected();
+        if (ImGui::Button("Delete") && selected.LockIfValid()) {
+            auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+            selected.Unlock();
+        }
+
         scene.Unlock();
     }
 }
@@ -387,6 +399,7 @@ void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObj
 
 void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
     Helper::Types::SafePtr<Helper::GameObject> gameObject;
+
     if (scene.LockIfValid()) {
         gameObject = scene->GetSelected();
         scene.Unlock();
@@ -399,6 +412,9 @@ void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helpe
         std::string gm_name = gameObject->GetName();
         if (ImGui::InputText("Name", &gm_name))
             gameObject->SetNameFromInspector(gm_name);
+
+        ImGui::Text("Entity id: %llu", gameObject->GetEntityId());
+        //ImGui::Text("Entity path: %s", gameObject->GetEntityPath().CStr());
 
         ImGui::Separator();
         DrawTextOnCenter("Transform");
@@ -435,8 +451,7 @@ void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helpe
 
         this->DrawComponents(gameObject);
 
-        /*
-        ImGui::Text("[Parent direction]");
+        /*ImGui::Text("[Parent direction]");
 
         std::vector<Framework::Helper::Component *> comps = gameObject->GetComponents();
         for (Framework::Helper::Component *comp : comps) {
@@ -740,7 +755,7 @@ bool GUISystem::BeginMenuBar() {
 
         if (ImGui::MenuItem("Save scene")) {
             if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
-                const auto scenesPath = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scenes/");
+                const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
                 if (auto path = FileSystem::SaveFileDialog(scenesPath.ToString(), "Scene Files(*.scene)"); !path.empty()) {
                     const auto sceneName = StringUtils::GetFileNameFromFullPath(path);
                     const auto folder = StringUtils::GetDirToFileFromFullPath(path);
@@ -789,4 +804,8 @@ void GUISystem::EndMenuBar() {
 
 void GUISystem::DrawFileBrowser() {
     Engine::Instance().GetEditor()->GetFileBrowser()->Draw();
+}
+
+void GUISystem::DrawVisualScriptEditor() {
+    Engine::Instance().GetEditor()->GetVisualScriptEditor()->Draw();
 }

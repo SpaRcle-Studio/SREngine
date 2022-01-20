@@ -33,6 +33,34 @@ EXTERN void Awake() {
 
 }
 
+void LoadYuri() {
+    Render* render = Engine::Instance().GetRender();
+
+    auto fbx_meshes = Mesh::Load("Yuri.fbx", MeshType::Static);
+    auto yuri = g_scene->Instance("Yuri");
+
+    auto texture = Texture::Load("Engine/default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
+
+    std::vector<Texture*> textures = {
+            texture,
+    };
+
+    for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+        Mesh* mesh = fbx_meshes[i];
+        Texture* texture = textures[0];
+
+        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+
+        render->RegisterMesh(mesh);
+        mesh->WaitCalculate();
+        mesh->GetMaterial()->SetDiffuse(texture);
+        auto object = g_scene->Instance(mesh->GetGeometryName());
+        object->AddComponent(DynamicCastMeshToComponent(mesh));
+
+        yuri->AddChild(object);
+    }
+}
+
 void LoadTsumi() {
     Render* render = Engine::Instance().GetRender();
 
@@ -48,6 +76,7 @@ void LoadTsumi() {
     auto fbx_meshes = Mesh::Load("Tsumi.fbx", MeshType::Static);
     auto tsumi = g_scene->Instance("Tsumi");
 
+    if (false)
     for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
         Mesh* mesh = fbx_meshes[i];
         Texture* texture = textures[0];
@@ -169,6 +198,7 @@ EXTERN void Start() {
     g_scene->SetObserver(g_camera);
 
     LoadMiku();
+    //LoadYuri();
     LoadCubes();
 }
 

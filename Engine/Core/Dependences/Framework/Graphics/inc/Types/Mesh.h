@@ -53,32 +53,9 @@ namespace Framework::Graphics::Types {
         friend class Material;
         friend class ::Framework::API;
     protected:
-        explicit Mesh(const std::string& name = "Unnamed");
+        explicit Mesh(MeshType type, const std::string& name = "Unnamed");
         ~Mesh() override;
-    protected:
-        bool                         m_inverse           = false;
 
-        Environment*                 m_env               = nullptr;
-        const PipeLine               m_pipeline          = PipeLine::Unknown;
-
-        mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
-
-        std::string                  m_geometryName     = "Unnamed";
-        Shader*                      m_shader            = nullptr;
-        Render*                      m_render            = nullptr;
-        Material*                    m_material          = nullptr;
-
-        volatile bool                m_hasErrors         = false;
-        volatile bool                m_isCalculated      = false;
-
-        int32_t                      m_descriptorSet     = SR_ID_INVALID;
-        int32_t                      m_UBO               = SR_ID_INVALID;
-    public:
-        Math::FVector3               m_barycenter        = Math::FVector3(Math::UnitMAX);
-        Math::FVector3               m_position          = Math::FVector3();
-        Math::FVector3               m_rotation          = Math::FVector3();
-        Math::FVector3               m_scale             = Math::FVector3(1, 1, 1);
-        glm::mat4                    m_modelMat          = glm::mat4(0);
     public:
         static std::vector<Mesh*> Load(const std::string& path, MeshType type);
     public:
@@ -127,17 +104,46 @@ namespace Framework::Graphics::Types {
         void WaitCalculate() const;
         bool IsCanCalculate() const;
 
-        [[nodiscard]] std::string GetGeometryName() const { return this->m_geometryName; }
-        [[nodiscard]] Shader* GetShader()           const { return this->m_shader; }
-        [[nodiscard]] Material* GetMaterial()       const { return this->m_material; }
+        [[nodiscard]] std::string GetGeometryName() const { return m_geometryName; }
+        [[nodiscard]] Shader* GetShader()           const { return m_shader; }
+        [[nodiscard]] Material* GetMaterial()       const { return m_material; }
         [[nodiscard]] bool IsCalculated()           const { return m_isCalculated; }
-        [[nodiscard]] bool GetInverse()             const { return this->m_inverse; }
+        [[nodiscard]] bool IsInverse()              const { return m_inverse; }
+        [[nodiscard]] bool IsRegistered()           const { return m_render; }
 
         void SetRender(Render* render) { this->m_render = render; };
         void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetShader(Shader* shader);
+
+    public:
+        Math::FVector3               m_barycenter        = Math::FVector3(Math::UnitMAX);
+        Math::FVector3               m_position          = Math::FVector3();
+        Math::FVector3               m_rotation          = Math::FVector3();
+        Math::FVector3               m_scale             = Math::FVector3(1, 1, 1);
+        glm::mat4                    m_modelMat          = glm::mat4(0);
+
+    protected:
+        bool                         m_inverse           = false;
+
+        Environment*                 m_env               = nullptr;
+        const PipeLine               m_pipeline          = PipeLine::Unknown;
+        const MeshType               m_type              = MeshType::Unknown;
+
+        mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
+
+        std::string                  m_geometryName     = "Unnamed";
+        Shader*                      m_shader            = nullptr;
+        Render*                      m_render            = nullptr;
+        Material*                    m_material          = nullptr;
+
+        volatile bool                m_hasErrors         = false;
+        volatile bool                m_isCalculated      = false;
+
+        int32_t                      m_descriptorSet     = SR_ID_INVALID;
+        int32_t                      m_UBO               = SR_ID_INVALID;
+
     };
 }
 

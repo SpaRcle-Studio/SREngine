@@ -16,6 +16,7 @@ namespace Framework::Graphics::Types {
     class Mesh;
     class Mesh3D;
 
+    /// TO_REFACTORING (need make as resource)
     class Material {
         friend class Mesh;
         friend class Mesh3D;

@@ -91,6 +91,21 @@ std::vector<Xml::Node> Xml::Node::GetNodes() const  {
     return nodes;
 }
 
+std::vector<Xml::Node> Xml::Node::TryGetNodes(const std::string &name) const {
+    if (Valid())
+        return GetNodes(name);
+
+    return std::vector<Node>();
+}
+
+std::vector<Xml::Node> Xml::Node::TryGetNodes() const {
+    if (Valid())
+        return GetNodes();
+
+    return std::vector<Node>();
+}
+
+
 std::vector<Xml::Node> Xml::Node::GetNodes(const std::string &name) const  {
     if (!m_valid) {
         SRAssert2(false,"Node::GetNodes() : node is not valid!");
@@ -105,4 +120,9 @@ std::vector<Xml::Node> Xml::Node::GetNodes(const std::string &name) const  {
 
     return nodes;
 }
+
+Xml::Node Xml::Node::AppendChild(const Xml::Node& node) {
+    return Xml::Node(m_node.append_copy(node.m_node));
+}
+
 

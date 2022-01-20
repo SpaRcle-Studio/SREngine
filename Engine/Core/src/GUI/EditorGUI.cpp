@@ -3,11 +3,14 @@
 //
 
 #include <Debug.h>
-#include "GUI/EditorGUI.h"
-#include <GUI/FileBrowser.h>
 #include <ResourceManager/ResourceManager.h>
 
-using namespace Framework::Core::GUI;
+#include <GUI/EditorGUI.h>
+#include <GUI/FileBrowser.h>
+#include <GUI/VisualScriptEditor.h>
+
+using namespace SR_CORE_NS::GUI;
+using namespace SR_GRAPH_NS::GUI;
 
 bool EditorGUI::Init() {
     if (m_isInit) {
@@ -22,8 +25,9 @@ bool EditorGUI::Init() {
     }
 
     m_fileBrowser = new FileBrowser();
+    m_scriptEditor = new VisualScriptEditor();
 
-    m_fileBrowser->SetFolder(Helper::ResourceManager::Instance().GetResourcesFolder());
+    m_fileBrowser->SetFolder(Helper::ResourceManager::Instance().GetResPath());
 
     this->m_script = Scripting::Script::Allocate(
             "SpaRcle Editor", "Engine/Editor",
@@ -54,10 +58,8 @@ bool EditorGUI::Destroy() {
 }
 
 void EditorGUI::Free() {
-    if (m_fileBrowser) {
-        delete m_fileBrowser;
-        m_fileBrowser = nullptr;
-    }
+    SR_SAFE_DELETE_PTR(m_fileBrowser);
+    SR_SAFE_DELETE_PTR(m_scriptEditor);
 
     delete this;
 }

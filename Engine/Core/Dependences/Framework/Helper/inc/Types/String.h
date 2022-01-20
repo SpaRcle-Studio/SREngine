@@ -9,7 +9,7 @@
 
 // TODO: Check, refactoring and add exception processing
 
-namespace Framework::Helper { namespace Types{
+namespace Framework::Helper::Types{
     /**
  *
  * \brief Red Template Library String class
@@ -384,6 +384,6 @@ namespace Framework::Helper { namespace Types{
     private:
         char* str;
     };
-} }
+}
 
 #endif //GAME_STRING_H

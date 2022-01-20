@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<VisualScriptEditor>
+    <BlueprintRefs>
+        <Ref Value="/Scripts/Blueprints/Cpp.xml"/>
+        <Ref Value="/Scripts/Blueprints/Events.xml"/>
+        <Ref Value="/Scripts/Blueprints/Math.xml"/>
+    </BlueprintRefs>
+</VisualScriptEditor>

@@ -12,6 +12,7 @@
 #include <mutex>
 #include <Debug.h>
 #include <Types/SafePointer.h>
+#include <EntityComponentSystem/EntityManager.h>
 
 namespace Framework {
     class API;
@@ -19,14 +20,15 @@ namespace Framework {
 
 namespace Framework::Helper {
     class GameObject;
-    class Component {
+    class Component : public Entity {
         typedef std::function<void(Component*)> Event;
 
         friend class GameObject;
         friend class Framework::API;
     public:
         explicit Component(const std::string& name);
-        ~Component();
+        ~Component() override;
+
     public:
         static Component* CreateComponentOfName(const std::string& name) {
             const std::lock_guard<std::mutex> lock(g_mutex);
@@ -112,9 +114,11 @@ namespace Framework::Helper {
         void SetActive(bool v) { this->m_isActive = v;  this->OnReady(IsReady()); }
         void SetEnabled(bool v) { this->m_isEnabled = v; this->OnReady(IsReady()); }
 
-        [[nodiscard]] inline bool IsActive()         const noexcept { return m_isActive;                }
-        [[nodiscard]] inline bool IsSelected()       const noexcept { return m_isSelected;              }
-        [[nodiscard]] SR_FORCE_INLINE bool IsReady() const noexcept { return m_isActive && m_isEnabled; }
+        [[nodiscard]] SR_INLINE bool IsEnabled()  const { return m_isEnabled;               }
+        [[nodiscard]] SR_INLINE bool IsActive()   const { return m_isActive;                }
+        [[nodiscard]] SR_INLINE bool IsSelected() const { return m_isSelected;              }
+        [[nodiscard]] SR_INLINE bool IsReady()    const { return m_isActive && m_isEnabled; }
+
     protected:
         virtual void OnRemoveComponent() = 0;
         virtual void OnDestroyGameObject() = 0;

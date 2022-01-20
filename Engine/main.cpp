@@ -21,6 +21,8 @@
 #include <World/VisualChunk.h>
 #include <World/VisualRegion.h>
 #include <Utils/CmdOptions.h>
+#include <Utils/Features.h>
+#include <GUI/NodeManager.h>
 
 using namespace Framework;
 
@@ -71,12 +73,17 @@ int main(int argc, char **argv) {
     else
         ResourceManager::Instance().Init(folder);
 
+    Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
+
+    if (Features::Instance().Enabled("CrashHandler")) {
 #ifdef SR_WIN32
-    ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResourcesFolder().Concat("/Utilities/EngineCrashHandler.exe").CStr()),
-            ("--log log.txt --target "+FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
-            nullptr, SW_SHOWDEFAULT
-    );
+        ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
+                "/Utilities/EngineCrashHandler.exe").CStr()),
+                     ("--log log.txt --target " + FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
+                     nullptr, SW_SHOWDEFAULT
+        );
 #endif
+    }
 
     // Register all resource types
     {
@@ -101,7 +108,7 @@ int main(int argc, char **argv) {
         Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
     }
 
-    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResourcesFolder().Concat("/Configs/Environment.config")); env == "OpenGL")
+    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResPath().Concat("/Configs/Environment.config")); env == "OpenGL")
         Environment::Set(new OpenGL());
     else if (env == "Vulkan")
         Environment::Set(new Vulkan());
@@ -161,7 +168,10 @@ int main(int argc, char **argv) {
     }
 
     engine.Close();
+
+    Framework::Helper::EntityManager::Destroy();
     Framework::Engine::Destroy();
+    Framework::Graphics::GUI::NodeManager::Destroy();
 
     Debug::System("All systems successfully closed!");
 

@@ -126,3 +126,22 @@ void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
     }
 }
+
+Xml::Document Mesh3D::Save() const {
+    auto doc = Xml::Document::New();
+    auto root = doc.Root().AppendChild("Mesh");
+
+    root.AppendAttribute("Type", EnumMeshTypeToString(m_type).c_str());
+
+    auto settings = root.AppendChild("Settings");
+    {
+        settings.AppendChild("Id").AppendAttribute("Value", GetResourceId().c_str());
+        settings.AppendChild("Enabled").AppendAttribute("Value", IsEnabled());
+        settings.AppendChild("Inverse").AppendAttribute("Value", IsInverse());
+
+        if (m_shader)
+            settings.AppendChild("Shader").AppendAttribute("Value", m_shader->GetName().c_str());
+    }
+
+    return doc;
+}

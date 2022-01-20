@@ -9,10 +9,14 @@
 #include <Base/Script.h>
 #include <Base/Compiler.h>
 
-namespace Framework::Core::GUI {
+namespace SR_GRAPH_NS::GUI {
     class FileBrowser;
+}
 
-    class EditorGUI : public Graphics::GUI::ICanvas {
+namespace Framework::Core::GUI {
+    class VisualScriptEditor;
+
+    class EditorGUI : public SR_GRAPH_NS::GUI::ICanvas {
     public:
         explicit EditorGUI(Scripting::Compiler* compiler)
             : m_compiler(compiler) { }
@@ -27,15 +31,17 @@ namespace Framework::Core::GUI {
         bool Destroy() override;
         void Free() override;
 
-        [[nodiscard]] FileBrowser* GetFileBrowser() const { return m_fileBrowser; }
+        [[nodiscard]] SR_GRAPH_NS::GUI::FileBrowser* GetFileBrowser() const { return m_fileBrowser; }
+        [[nodiscard]] VisualScriptEditor* GetVisualScriptEditor() const { return m_scriptEditor; }
 
         // Call only from window
         void Draw() override;
 
     private:
-        Scripting::Compiler* m_compiler    = nullptr;
-        Scripting::Script*   m_script      = nullptr;
-        FileBrowser*         m_fileBrowser = nullptr;
+        Scripting::Compiler*           m_compiler     = nullptr;
+        Scripting::Script*             m_script       = nullptr;
+        VisualScriptEditor*            m_scriptEditor = nullptr;
+        SR_GRAPH_NS::GUI::FileBrowser* m_fileBrowser  = nullptr;
 
     };
 }

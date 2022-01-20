@@ -128,6 +128,11 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
         return;
     }
 
+    if (!mesh->GetShader()) {
+        Debug::Error("Render::RegisterMesh() : mesh have not shadder! \n\tResource Id: " + mesh->GetResourceId());
+        return;
+    }
+
     const std::lock_guard<std::mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::Full)

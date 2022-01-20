@@ -307,7 +307,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes) const
 {
-    auto shadersPath = ResourceManager::Instance().GetResourcesFolder().Concat("/Shaders/");
+    auto shadersPath = ResourceManager::Instance().GetResPath().Concat("/Shaders/");
 
     auto vertexPath = shadersPath.Concat("Common/").Concat(name).Concat(".vert");
     auto fragmentPath = shadersPath.Concat("Common/").Concat(name).Concat(".frag");

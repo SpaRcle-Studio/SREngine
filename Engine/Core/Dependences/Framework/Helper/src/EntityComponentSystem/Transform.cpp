@@ -534,9 +534,13 @@ void Framework::Helper::Transform::UpdateChildRotation() {
 }
 
 void Framework::Helper::Transform::OnParentSet(Framework::Helper::Transform *parent) {
-    this->m_parent = parent;
-    this->UpdateDefParentDir();
-    this->UpdateChildRotation();
+    if ((m_parent = parent)) {
+        UpdateDefParentDir();
+        UpdateChildRotation();
+    }
+    else {
+        /// TODO!
+    }
 }
 
 void Framework::Helper::Transform::Scaling(Framework::Helper::Math::FVector3 val) {
@@ -552,6 +556,32 @@ void Framework::Helper::Transform::Scaling(Framework::Helper::Math::FVector3 val
     else { // global
         this->SetScale(m_globalScale + val, true);
     }
+}
+
+Framework::Helper::Xml::Document Framework::Helper::Transform::Save() const {
+    auto doc = Xml::Document::New();
+    auto root = doc.Root().AppendChild("Transform");
+
+    const auto& position = GetPosition();
+    const auto& rotation = GetRotation();
+    const auto& scale    = GetScale();
+
+    root.AppendChild("Position")
+            .NAppendAttribute("X", position.x)
+            .NAppendAttribute("Y", position.y)
+            .NAppendAttribute("Z", position.z);
+
+    root.AppendChild("Rotation")
+            .NAppendAttribute("X", rotation.x)
+            .NAppendAttribute("Y", rotation.y)
+            .NAppendAttribute("Z", rotation.z);
+
+    root.AppendChild("Scale")
+            .NAppendAttribute("X", scale.x)
+            .NAppendAttribute("Y", scale.y)
+            .NAppendAttribute("Z", scale.z);
+
+    return doc;
 }
 
 

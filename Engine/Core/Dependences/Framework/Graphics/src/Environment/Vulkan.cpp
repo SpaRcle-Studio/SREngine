@@ -227,7 +227,7 @@ namespace Framework::Graphics{
             *shaderData = reinterpret_cast<void*>(dynamicID);
         }
 
-        auto shadersPath = Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Shaders/");
+        auto shadersPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Shaders/");
 
         auto vertexPath = shadersPath.Concat("Common/").Concat(path).Concat(".vert");
         auto fragmentPath = shadersPath.Concat("Common/").Concat(path).Concat(".frag");
@@ -296,7 +296,7 @@ namespace Framework::Graphics{
         }
 
         if (!m_memory->m_ShaderPrograms[ID]->Load(
-                Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Cache/Shaders"),
+                Helper::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
                 vkModules,
                 descriptorLayoutBindings,
                 uniformSizes

@@ -245,6 +245,6 @@ void Style_3(){
 void Framework::Graphics::GUI::ICanvas::InitStyle() {
     Style_2();
 
-    const static auto iniPath = ResourceManager::Instance().GetResourcesFolder().Concat("/Configs/ImGuiEditor.config");
+    const static auto iniPath = ResourceManager::Instance().GetResPath().Concat("/Configs/ImGuiEditor.config");
     ImGui::GetIO().IniFilename = iniPath.CStr();
 }

@@ -8,6 +8,7 @@
 #include <vector>
 #include <cctype>
 #include <functional>
+#include <Utils/StringFormat.h>
 
 namespace Framework::Helper {
     class VectorUtils {
@@ -22,6 +23,18 @@ namespace Framework::Helper {
             AB.insert(AB.end(), A.begin(), A.end());
             AB.insert(AB.end(), B.begin(), B.end());
             return AB;
+        }
+
+        template<typename A, typename B> static std::vector<B> Cast(const std::vector<A>& source) {
+            std::vector<B> result;
+
+            if constexpr (std::is_same_v<A, std::string>) {
+                for (const auto& src : source)
+                    result.emplace_back(LexicalCast<B>(src));
+            } else
+                static_assert("Unsupported type!");
+
+            return result;
         }
     };
 

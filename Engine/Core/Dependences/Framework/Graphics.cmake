@@ -1,5 +1,10 @@
 
-find_package(Vulkan REQUIRED FATAL_ERROR)
+if (CYGWIN)
+    #include_directories("$ENV{VULKAN_SDK}/Include")
+else()
+    include_directories(${Vulkan_INCLUDE_DIRS})
+    find_package(Vulkan REQUIRED FATAL_ERROR)
+endif()
 
 set(GRAPHICS_SRC
         ${FRAMEWORK_ROOT_DIR}/Unity/Graphics.cxx
@@ -72,9 +77,8 @@ set(GRAPHICS_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
         ${FRAMEWORK_ROOT_DIR}/Depends/FbxLoader/inc
         ${FRAMEWORK_ROOT_DIR}/Depends/tinyobjloader/inc
-        #${FRAMEWORK_ROOT_DIR}/Depends/vulkan/vulkan
+
         ${Vulkan_INCLUDE_DIRS}
-        #${FRAMEWORK_ROOT_DIR}/Depends/imgui
         )
 
 set(GRAPHICS_INC_PRIVATE

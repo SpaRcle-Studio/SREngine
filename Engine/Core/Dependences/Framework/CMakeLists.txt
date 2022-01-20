@@ -10,6 +10,7 @@ set(FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(IMGUI_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui)
 set(IMGUIZMO_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/ImGuizmo)
+set(IMGUI_NODE_EDITOR_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui-node-editor)
 
 # Включаем вспомогательные файлы
 include(Audio.cmake)
@@ -41,7 +42,7 @@ add_subdirectory(Depends/tinyobjloader)
 #add_subdirectory(Depends/glew/build/cmake)
 
 find_package(OpenGL REQUIRED)
-find_package(Vulkan REQUIRED FATAL_ERROR)
+#find_package(Vulkan REQUIRED FATAL_ERROR)
 
 #find_package(PythonLibs REQUIRED)
 #find_package(Lua51 REQUIRED)
@@ -53,17 +54,22 @@ find_package(Vulkan REQUIRED FATAL_ERROR)
 #file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Depends/vulkan/lib/vulkan-1.lib
 #        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
 
-include_directories(${Vulkan_INCLUDE_DIRS})
-
 # Добавляем библиотеку фреймворка
 add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 
-target_link_libraries(Framework
-        opengl32 glfw glew TinyObjLoader
-        ${Vulkan_LIBRARY} EvoVulkanCore
-        EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
+if (CYGWIN)
+    target_link_libraries(Framework
+            opengl32 glfw glew TinyObjLoader
+            "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkanCore
+            EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
+else()
+    target_link_libraries(Framework
+            opengl32 glfw glew TinyObjLoader
+            ${Vulkan_LIBRARY} EvoVulkanCore
+            EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
+endif()
 
 if(WIN32)
     if(MSVC)
@@ -78,6 +84,8 @@ endif()
 
 # Устанавливаем директории
 target_include_directories(Framework
-        PUBLIC ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${HELPER_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC} ${IMGUI_ROOT_DIR} ${IMGUIZMO_ROOT_DIR}
+        PUBLIC
+            ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${HELPER_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC}
+            ${IMGUI_ROOT_DIR} ${IMGUIZMO_ROOT_DIR} ${IMGUI_NODE_EDITOR_ROOT_DIR}
         PRIVATE ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${HELPER_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE}
         INSTANCE ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${HELPER_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE})

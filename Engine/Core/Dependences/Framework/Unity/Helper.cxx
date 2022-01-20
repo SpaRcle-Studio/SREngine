@@ -4,6 +4,7 @@
 #include "../Helper/src/EntityComponentSystem/GameObject.cpp"
 #include "../Helper/src/EntityComponentSystem/ISavable.cpp"
 #include "../Helper/src/EntityComponentSystem/Transform.cpp"
+#include "../Helper/src/EntityComponentSystem/EntityManager.cpp"
 
 #include "../Helper/src/Events/EventManager.cpp"
 
@@ -24,11 +25,11 @@
 
 #include "../Helper/src/Types/String.cpp"
 #include "../Helper/src/Types/Time.cpp"
-
 #include "../Helper/src/Types/Time.cpp"
 
 #include "../Helper/src/Utils/Stacktrace.cpp"
 #include "../Helper/src/Utils/StringUtils.cpp"
+#include "../Helper/src/Utils/Features.cpp"
 
 #include "../Helper/src/World/Chunk.cpp"
 #include "../Helper/src/World/Observer.cpp"

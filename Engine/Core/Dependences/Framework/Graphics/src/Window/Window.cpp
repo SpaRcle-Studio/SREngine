@@ -396,7 +396,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
             m_smoothSamples,
             "SpaRcle Engine",
             "SREngine",
-            ResourceManager::Instance().GetResourcesFolder().Concat("/Utilities/glslc.exe"))){
+            ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe"))){
         Debug::Error("Window::InitEnvironment() : failed to pre-initializing environment!");
         return false;
     }
@@ -406,7 +406,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
         Debug::Error("Window::InitEnvironment() : failed to creating window!");
         return false;
     }
-    this->m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Textures/").Concat(m_icoPath).CStr());
+    this->m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetResPath().Concat("/Textures/").Concat(m_icoPath).CStr());
 
     Debug::Graph("Window::InitEnvironment() : set context current...");
     if (!this->m_env->SetContextCurrent()) {
@@ -430,7 +430,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     if (m_env->IsGUISupport()) {
-        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Fonts/CalibriL.ttf"))) {
+        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("/Fonts/CalibriL.ttf"))) {
             GUI::ICanvas::InitStyle();
             this->m_env->InitGUI();
         } else

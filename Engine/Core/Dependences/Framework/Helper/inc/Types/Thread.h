@@ -42,9 +42,13 @@ namespace Framework::Helper::Types {
     public:
         [[nodiscard]] bool Joinable() const { return m_thread.joinable(); }
         void Join() { m_thread.join(); }
-        void TryJoin() {
-            if (Joinable())
+        bool TryJoin() {
+            if (Joinable()) {
                 Join();
+                return true;
+            }
+
+            return false;
         }
         void Detach() { m_thread.detach(); }
 

@@ -6,8 +6,23 @@
 #define GAMEENGINE_STRINGFORMAT_H
 
 #include <string>
+#include <cstdarg>
 
 namespace Framework::Helper {
+    /// Warning: unsafe
+    template<typename T> T LexicalCast(const std::string& str) {
+        if constexpr (std::is_same_v<T, int32_t>)
+            return std::stoi(str);
+        if constexpr (std::is_same_v<T, int64_t>)
+            return std::stoll(str);
+        if constexpr (std::is_same_v<T, uint32_t>)
+            return std::stoi(str);
+        if constexpr (std::is_same_v<T, uint64_t>)
+            return std::stoll(str);
+        else
+            static_assert("Unsupported type!");
+    }
+
     static std::string Format(const char* fmt, ...) {
         va_list args;
         va_start(args, fmt);

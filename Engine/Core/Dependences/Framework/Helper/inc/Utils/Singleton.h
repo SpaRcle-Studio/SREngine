@@ -12,8 +12,9 @@ namespace Framework::Helper {
     template<typename T>
     class Singleton {
     public:
-        static T& Instance();
         static void Destroy();
+
+        static T& Instance();
 
     private:
         Singleton(Singleton const&) = default;

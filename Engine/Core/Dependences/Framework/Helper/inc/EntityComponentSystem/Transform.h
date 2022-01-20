@@ -18,6 +18,7 @@
 #include <Math/Quaternion.h>
 
 #include <Types/SafePointer.h>
+#include <EntityComponentSystem/ISavable.h>
 
 #include <Utils/GraphUtils.h>
 
@@ -29,14 +30,13 @@ namespace Framework::Helper {
     };
 
     class GameObject;
-    class Transform {
+    class Transform : public ISavable {
         friend class GameObject;
     private:
         explicit Transform(GameObject* parent);
-        ~Transform() = default;
+        ~Transform() override = default;
     public:
         void OnParentSet(Transform* parent);
-        void OnParentRemove(Transform* parent) { m_parent = nullptr; }
 
         void SetLocalPosition(FVector3 val);
         void SetLocalRotation(FVector3 val);
@@ -47,6 +47,7 @@ namespace Framework::Helper {
         void SetScale(FVector3 val, bool pivot  = false);
 
         [[nodiscard]] inline bool HasParent() { return (bool)this->m_parent; }
+        [[nodiscard]] Xml::Document Save() const override;
 
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, bool local = false) const noexcept;
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, FVector3 position, bool local = false) const noexcept;
@@ -114,6 +115,7 @@ namespace Framework::Helper {
         inline static const FVector3 right   = FVector3(1, 0, 0);
         inline static const FVector3 up      = FVector3(0, 1, 0);
         inline static const FVector3 forward = FVector3(0, 0, 1);
+
     private:
         FVector3                     m_localPosition              = { 0, 0, 0 };
         FVector3                     m_localRotation              = { 0, 0, 0 };

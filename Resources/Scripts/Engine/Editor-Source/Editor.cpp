@@ -71,6 +71,11 @@ EXTERN void OnGUI() {
         gui.DrawFileBrowser();
         gui.EndWindow();
     }
+
+    if (gui.BeginWindow("Evo Script Editor")) {
+        gui.DrawVisualScriptEditor();
+        gui.EndWindow();
+    }
 }
 
 EXTERN void Close() {
