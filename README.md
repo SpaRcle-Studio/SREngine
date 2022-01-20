@@ -18,12 +18,14 @@
   * glm
   * OpenGL / GLFW / GLEW / glad
   * Bullet3
-  * ImGUI
-  * tinyobjloader
+  * [ImGUI](https://github.com/ocornut/imgui)
+  * [ImGuizmo](https://github.com/CedricGuillemet/ImGuizmo)
+  * [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
+  * [imgui-node-editor](https://github.com/thedmd/imgui-node-editor)
   * stbi
   * json
-  * EvoScript
-  * EvoVulkan
+  * [EvoScript](https://github.com/Monika0000/EvoScript)
+  * [EvoVulkan](https://github.com/Monika0000/EvoVulkan)
 
 ## Exists systems
   * Types
@@ -36,6 +38,7 @@
       * Vector2
       * Matrix4x4
   * Graphics
+      * Node editor
       * Mesh-cluster
       * GUI 
       * OBJ-loader
@@ -64,6 +67,7 @@
       * ResourceManager
       * IResource - interface for control resource units
   * Debug and logging
+  * Command Manager
  
 ## Editor
   * Grid (Only OpenGL)
@@ -72,3 +76,4 @@
   * Hierarchy
   * Asset explorer
   * World edit
+  * Visual Evo Script
