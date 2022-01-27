@@ -113,6 +113,7 @@ namespace Framework::Helper {
     #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
     #define SRAssert(expr) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
     #define SRAssert1(expr) SRAssert(expr)
+    #define SR_SAFE_PTR_ASSERT(expr, msg)
 
     #define SRVerifyFalse2(expr, msg) {                                      \
             [[maybe_unused]] const volatile bool verify_expression = (expr); \
@@ -163,6 +164,7 @@ namespace Framework::Helper {
     }                                                   \
 
     #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
+    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr<%s>] %s \n\tPtr: %p", typeid(T).name(), msg, (void *) m_ptr));
 
 #endif
 
@@ -175,6 +177,5 @@ namespace Framework::Helper {
     }                                                      \
 
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
-
 
 #endif //HELPER_DEBUG_H

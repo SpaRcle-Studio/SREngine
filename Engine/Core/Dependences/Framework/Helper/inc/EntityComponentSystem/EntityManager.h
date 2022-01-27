@@ -28,13 +28,17 @@ namespace Framework::Helper {
 
     class EntityPath {
     public:
-       explicit EntityPath(std::list<EntityId> path)
+        explicit EntityPath(std::list<EntityId> path)
             : m_path(std::move(path))
         { }
 
         EntityPath()
             : EntityPath(std::list<EntityId>())
         { }
+
+        ~EntityPath() {
+            m_path.clear();
+        }
 
         explicit EntityPath(const EntityId& id)
             : EntityPath()

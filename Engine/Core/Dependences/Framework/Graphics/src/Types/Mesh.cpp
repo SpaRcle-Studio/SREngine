@@ -27,7 +27,7 @@
 using namespace Framework::Graphics::Types;
 
 Framework::Graphics::Types::Mesh::Mesh(MeshType type, const std::string& name)
-    : IResource("Mesh")
+    : IResource(typeid(Mesh).name())
     , Component("Mesh")
     , m_env(Environment::Get())
     , m_type(type)
@@ -39,13 +39,8 @@ Framework::Graphics::Types::Mesh::Mesh(MeshType type, const std::string& name)
 }
 
 Framework::Graphics::Types::Mesh::~Mesh() {
-    if (!m_material){
-        Debug::Error("Mesh::~Mesh() : material is nullptr! Something went wrong...");
-    } else{
-        if (Debug::GetLevel() >= Debug::Level::High)
-            Debug::Log("Mesh::~Mesh() : free material pointer...");
-
-        delete m_material;
+    if (m_material) {
+        m_material->UnSubscribe(this);
         m_material = nullptr;
     }
 }
@@ -56,9 +51,6 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
 
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
-
-    if (m_material)
-        this->m_material->FreeTextures();
 
     Helper::ResourceManager::Instance().Destroy(this);
 
@@ -73,7 +65,7 @@ std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& lo
     uint32_t counter = 0;
 ret:
     const std::string resId = localPath + " - "+ std::to_string(counter) + " " + EnumMeshTypeToString(type);
-    if (IResource* find = ResourceManager::Instance().Find("Mesh", resId)) {
+    if (IResource* find = ResourceManager::Instance().Find<Mesh>(resId)) {
         if (IResource* copy = ((Mesh*)(find))->Copy(nullptr)) {
             meshes.push_back((Mesh*)copy);
             counter++;
@@ -110,7 +102,7 @@ ret:
         for (const auto& shape : fbx.GetShapes()) {
             auto* mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
             mesh->SetGeometryName(shape.name);
-            mesh->SetMaterial(new Material());
+            mesh->SetMaterial(Material::GetDefault());
 
             if (withIndices)
                 mesh->SetIndexArray(shape.indices);
@@ -226,16 +218,14 @@ IResource *Mesh::Copy(IResource* destination) const {
     if (Debug::GetLevel() >= Debug::Level::Full)
         Debug::Log("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
 
-    // TODO: in feature mesh will be resource
-    //auto material = m_material ? m_material->Copy() : new Material();
-
-    mesh->SetMaterial(new Material());
+    mesh->SetMaterial(m_material);
     mesh->SetShader(nullptr);
 
     mesh->m_barycenter = m_barycenter;
     mesh->m_position   = m_position;
     mesh->m_rotation   = m_rotation;
     mesh->m_scale      = m_scale;
+    mesh->m_skew       = m_skew;
 
     mesh->m_isCalculated  = m_isCalculated;
     mesh->m_modelMat      = m_modelMat;
@@ -264,13 +254,14 @@ bool Mesh::FreeVideoMemory() {
 }
 
 void Mesh::ReCalcModel() {
-    glm::mat4 modelMat = glm::mat4(1.0f);
+    glm::mat4 modelMat = glm::mat4(1); //glm::scale(glm::mat4(1), m_skew.ToGLM());
 
     if (m_pipeline == PipeLine::OpenGL) {
-        modelMat = glm::translate(modelMat, { -m_position.x, m_position.y, m_position.z });
+        modelMat = glm::translate(glm::mat4(1), { -m_position.x, m_position.y, m_position.z }) * modelMat;
         modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3({ m_rotation.x, -m_rotation.y, m_rotation.z } ))));
-    } else {
-        modelMat = glm::translate(modelMat, { m_position.x, m_position.y, m_position.z});
+    }
+    else {
+        modelMat = glm::translate(glm::mat4(1), { m_position.x, m_position.y, m_position.z}) * modelMat;
         modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3({ m_rotation.x, m_rotation.y, -m_rotation.z } ))));
     }
 
@@ -301,10 +292,19 @@ bool Mesh::Calculate()  {
 }
 
 void Mesh::SetMaterial(Material *material) {
-    if (m_material) {
-        Helper::Debug::Warn("Mesh::SetMaterial() : material already exists! Memory leak possible...");
-    }
-    m_material = material;
+    if (m_material)
+        m_material->UnSubscribe(this);
+
+    if ((m_material = material))
+        m_material->Subscribe(this);
+    else
+        Helper::Debug::Warn("Mesh::SetMaterial() : the material is nullptr!");
+
+    if (m_material && m_render)
+        m_material->Register(m_render);
+
+    if (m_isCalculated)
+        Environment::Get()->SetBuildState(false);
 }
 
 void Mesh::SetShader(Framework::Graphics::Shader *shader) {
@@ -313,4 +313,24 @@ void Mesh::SetShader(Framework::Graphics::Shader *shader) {
         m_isCalculated = false;
     }
     m_shader = shader;
+}
+
+void Mesh::OnMove(const Math::FVector3 &newValue) {
+    m_position = newValue;
+    ReCalcModel();
+}
+
+void Mesh::OnRotate(const Math::FVector3 &newValue) {
+    m_rotation = newValue;
+    ReCalcModel();
+}
+
+void Mesh::OnScaled(const Math::FVector3 &newValue) {
+    m_scale = newValue;
+    ReCalcModel();
+}
+
+void Mesh::OnSkewed(const Math::FVector3 &newValue) {
+    m_skew = newValue;
+    ReCalcModel();
 }

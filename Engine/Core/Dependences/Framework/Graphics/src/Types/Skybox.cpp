@@ -24,7 +24,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(con
     std::string ext = StringUtils::GetExtensionFromFilePath(skyboxName);
     skyboxName.resize(skyboxName.size() - ext.size() - 1);
 
-    const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("/Skyboxes/").Concat(skyboxName).Concat("/");
+    const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("Skyboxes").Concat(skyboxName);
 
     Helper::Debug::Log("Skybox::Load() : loading \""+skyboxName+"\" skybox...");
 
@@ -34,7 +34,7 @@ Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(con
     int W, H, C;
 
     for (unsigned char i = 0; i < 6; i++) {
-        const auto file = path.Concat(files[i]).Concat(".").Concat(ext);
+        const auto file = path.Concat(files[i]).ConcatExt(ext);
 
         int w = 0, h = 0, comp = 0;
         unsigned char* data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);

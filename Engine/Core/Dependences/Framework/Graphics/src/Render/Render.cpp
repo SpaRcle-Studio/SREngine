@@ -122,14 +122,13 @@ void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *m
 
     this->m_removeMeshes.push(mesh);
 }
+
 void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh *mesh) {
-    if (!mesh){
-        Debug::Error("Render::RegisterMesh() : mesh is nullptr!");
-        return;
-    }
+    SRAssert(mesh);
+    SRAssert(mesh->GetMaterial());
 
     if (!mesh->GetShader()) {
-        Debug::Error("Render::RegisterMesh() : mesh have not shadder! \n\tResource Id: " + mesh->GetResourceId());
+        Debug::Error("Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
         return;
     }
 
@@ -149,13 +148,13 @@ void Framework::Graphics::Render::PollEvents() {
 
     //! Check exists new meshes
     if (!m_newMeshes.empty()) {
-        for (auto &m_newMesh : m_newMeshes) {
+        for (auto mesh : m_newMeshes) {
             // Add mesh to transparent meshes array or usual mesh array
 
-            if (m_newMesh->GetMaterial()->IsTransparent()) {
-                SRAssert(m_transparentGeometry.Add(m_newMesh))
+            if (mesh->GetMaterial()->IsTransparent()) {
+                SRAssert(m_transparentGeometry.Add(mesh))
             } else {
-                SRAssert(m_geometry.Add(m_newMesh))
+                SRAssert(m_geometry.Add(mesh))
             }
         }
 
@@ -195,7 +194,7 @@ void Framework::Graphics::Render::PollEvents() {
 
         m_texturesToFree.clear();
 
-        this->m_env->SetBuildState(false);
+        needRebuild = true;
     }
 
     //! Free skyboxes

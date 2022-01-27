@@ -34,6 +34,7 @@ namespace Framework::Core::Commands {
 
     private:
         Framework::Helper::EntityPath m_path;
+        SR_XML_NS::Document m_backup;
 
     };
 

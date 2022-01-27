@@ -34,6 +34,7 @@ void IResource::SetId(const std::string &id) {
 IResource *IResource::Copy(IResource* destination) const {
     destination->m_autoRemove = m_autoRemove;
     destination->SetId(m_resourceId);
+    destination->SetReadOnly(m_readOnly);
 
     return destination;
 }

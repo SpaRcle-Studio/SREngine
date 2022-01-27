@@ -9,6 +9,8 @@
 #include <pugixml.hpp>
 #include <vector>
 #include <cmath>
+#include <FileSystem/Path.h>
+#include <Math/Vector4.h>
 
 namespace Framework::Helper::Xml {
     class Node;
@@ -117,6 +119,10 @@ namespace Framework::Helper::Xml {
             return m_valid ? Attribute(m_node.attribute(name.c_str())) : Attribute();
         }
 
+        [[nodiscard]] bool HasAttribute(const std::string &name) const {
+            return m_valid ? !m_node.attribute(name.c_str()).empty() : false;
+        }
+
         [[nodiscard]] std::vector<Node> TryGetNodes() const;
         [[nodiscard]] std::vector<Node> TryGetNodes(const std::string &name) const;
         [[nodiscard]] std::vector<Node> GetNodes(const std::string &name) const;
@@ -178,7 +184,7 @@ namespace Framework::Helper::Xml {
     };
 
     class Document {
-    private:
+    public:
         Document() {
             m_document = {};
             m_valid = false;
@@ -202,6 +208,7 @@ namespace Framework::Helper::Xml {
         }
 
         static Document Load(const std::string &path);
+        static Document Load(const Helper::Path &path);
 
         static int32_t GetLastError() {
             auto last = Xml::g_xml_last_error;
@@ -214,6 +221,8 @@ namespace Framework::Helper::Xml {
             return m_document.save_file(path.c_str());
         }
 
+        [[nodiscard]] std::string Dump() const;
+
         [[nodiscard]] Node Root() const {
             return Node(m_document.root());
         }
@@ -224,6 +233,23 @@ namespace Framework::Helper::Xml {
 
         [[nodiscard]] bool Valid() const { return m_valid; }
     };
+
+    static Helper::Math::FColor NodeToColor(const Xml::Node& node) {
+        return Math::FColor(
+                node.TryGetAttribute("r").ToFloat(0.f) / 255.f,
+                node.TryGetAttribute("g").ToFloat(0.f) / 255.f,
+                node.TryGetAttribute("b").ToFloat(0.f) / 255.f,
+                node.TryGetAttribute("a").ToFloat(0.f) / 255.f
+        );
+    }
+
+    static void AppendColorNode(Xml::Node& node, const Math::FColor& color) {
+        node.AppendChild("Color")
+            .NAppendAttribute("r", color.r * 255.f)
+            .NAppendAttribute("g", color.g * 255.f)
+            .NAppendAttribute("b", color.b * 255.f)
+            .NAppendAttribute("a", color.a * 255.f);
+    }
 }
 
 #endif //GAMEENGINE_XML_H

@@ -61,7 +61,7 @@ void Framework::Core::World::VisualChunk::SetFacesVisible(bool value) {
         UpdateFacesPos();
 
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
-        mesh->GetMaterial()->SetColor(0.0, 1.0, 0.0);
+        mesh->SetMaterial(Material::Load("Engine/Colors/green.mat"));
         render->RegisterMesh(mesh);
         mesh->OnScaled(Math::FVector3(m_size.x, m_size.y, m_size.x) / 2);
     }
@@ -82,7 +82,7 @@ void Framework::Core::World::VisualChunk::SetLoadVisible(bool value) {
         UpdateLoadPos();
 
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
-        mesh->GetMaterial()->SetColor(1.0, 1.0, 0.0);
+        mesh->SetMaterial(Material::Load("Engine/Colors/yellow.mat"));
         render->RegisterMesh(mesh);
         mesh->OnScaled(Math::FVector3(m_size.x, m_size.y, m_size.x) / 2);
     }

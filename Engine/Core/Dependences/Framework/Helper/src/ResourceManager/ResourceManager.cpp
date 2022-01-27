@@ -75,7 +75,7 @@ namespace Framework::Helper {
 
     void ResourceManager::Remove(IResource *resource) {
         SRAssert(resource->IsValid());
-        auto&& resourcesGroup = m_resources.at(resource->m_resourceName);
+            auto&& resourcesGroup = m_resources.at(resource->m_resourceName);
         resourcesGroup.Remove(resource);
     }
 
@@ -117,9 +117,15 @@ namespace Framework::Helper {
 
                 this->Remove(resource);
 
-                resourceIt = m_resourcesToDestroy.erase(resourceIt);
+                {
+                    /// так как некоторые ресурсы рекурсивно уничтожают дочерныие ресурсы при вызове деструктора, например материал,
+                    /// то он добавит в m_resourcesToDestroy новый элемент (в этом же потоке), соответственно любой итератор
+                    /// инвалидируется, и здесь может потенциально случиться краш, поэтому этот порядок нужно строго союлюдать
 
-                delete resource;
+                    m_resourcesToDestroy.erase(resourceIt);
+                    delete resource;
+                    resourceIt = m_resourcesToDestroy.begin();
+                }
             }
 
             if (Debug::GetLevel() >= Debug::Level::High && m_destroyIsEmpty) {
@@ -136,7 +142,14 @@ namespace Framework::Helper {
 
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        m_resources[resource->m_resourceName].Add(resource);
+    #if defined(SR_DEBUG)
+        if (m_resources.count(resource->m_resourceName) == 0) {
+            SRAssert2(false, "Unknown resource type!");
+            return;
+        }
+    #endif
+
+        m_resources.at(resource->m_resourceName).Add(resource);
     }
 
     void ResourceManager::PrintMemoryDump() {
@@ -170,6 +183,13 @@ namespace Framework::Helper {
 
     IResource *ResourceManager::Find(const std::string& Name, const std::string& ID) {
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    #if defined(SR_DEBUG)
+        if (m_resources.count(Name) == 0) {
+            SRAssert2(false, "Unknown resource type!");
+            return nullptr;
+        }
+    #endif
 
         IResource* pResource = m_resources.at(Name).Find(ID);
 

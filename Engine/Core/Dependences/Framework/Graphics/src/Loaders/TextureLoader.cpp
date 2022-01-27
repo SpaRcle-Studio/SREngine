@@ -37,7 +37,7 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
         texture->m_height = height;
         texture->m_width  = width;
         texture->m_data   = imgData;
-        texture->m_alpha  = numComponents == 4;
+        texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
     }
 
     //texture->m_resource_id = path;

@@ -89,6 +89,7 @@ namespace Framework::Helper {
         void UpdateComponentsPosition();
         void UpdateComponentsRotation();
         void UpdateComponentsScale();
+        void UpdateComponentsSkew();
 
         void Free();
         void OnPrentSetActive(bool value);

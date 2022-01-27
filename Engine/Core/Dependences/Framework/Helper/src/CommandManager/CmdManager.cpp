@@ -52,7 +52,7 @@ namespace SR_UTILS_NS {
         if (m_history.empty() || m_historyPC == UINT32_MAX)
             return false;
 
-        SRAssert(m_historyPC >= m_history.size());
+        SRAssert(m_historyPC < m_history.size());
 
         return Cancel(m_history[m_historyPC]);
     }

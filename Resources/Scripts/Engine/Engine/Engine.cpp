@@ -33,6 +33,7 @@ EXTERN void Awake() {
 
 }
 
+/*
 void LoadYuri() {
     Render* render = Engine::Instance().GetRender();
 
@@ -103,28 +104,23 @@ void LoadWireframe() {
     render->RegisterMesh(mesh);
     mesh->WaitCalculate();
     cube->AddComponent(DynamicCastMeshToComponent(mesh));
-}
+}*/
 
 void LoadCubes() {
     Render* render = Engine::Instance().GetRender();
-    auto texture = Texture::Load("Engine/default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
     auto mesh = Mesh::Load("Engine/cube.obj", MeshType::Static)[0];
 
     mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
 
-    render->RegisterTexture(texture);
-
     auto cube = g_scene->Instance("Cube");
     render->RegisterMesh(mesh);
     mesh->WaitCalculate();
-    mesh->GetMaterial()->SetDiffuse(texture);
     cube->AddComponent(DynamicCastMeshToComponent(mesh));
     cube->GetTransform()->Translate(FVector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
         mesh = (Mesh*)mesh->Copy(nullptr);
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
-        mesh->GetMaterial()->SetDiffuse(texture);
 
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
@@ -141,17 +137,14 @@ void LoadCubes() {
 void LoadMiku() {
     Render* render = Engine::Instance().GetRender();
 
-    auto body = Texture::Load("Miku_Bodytex_DM.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
-    auto face = Texture::Load("Miku_Facetex_A.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::LINEAR, TextureCompression::None, 1);
-    render->RegisterTexture(body);
-    render->RegisterTexture(face);
+    Material* body = Material::Load("Game/miku_body.mat");
+    Material* face = Material::Load("Game/miku_face.mat");
 
-    std::vector<Texture*> textures = {
+    std::vector<Material*> materials = {
             body, body, face, face, body, body
     };
 
     auto fbx_meshes = Mesh::Load("Miku.fbx", MeshType::Static);
-
     g_miku = g_scene->Instance("Miku");
 
     for (uint32_t i = 0; i < 6; i++) {
@@ -159,10 +152,11 @@ void LoadMiku() {
 
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
 
-        Texture* texture = textures[i];
         render->RegisterMesh(mesh);
+        mesh->SetMaterial(materials[i]);
+
         mesh->WaitCalculate();
-        mesh->GetMaterial()->SetDiffuse(texture);
+
         auto cube = g_scene->Instance(mesh->GetGeometryName());
         cube->AddComponent(DynamicCastMeshToComponent(mesh));
 

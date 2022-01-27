@@ -103,13 +103,24 @@ namespace Framework::Helper {
 
     public:
         void Synchronize(bool force);
-        IResource* Find(const std::string& Name, const std::string& ID);
         [[nodiscard]] bool IsLastResource(IResource* resource);
         [[nodiscard]] Path GetResPath() const { return m_resourcesFolder; }
         [[nodiscard]] Path GetCachePath() const { return m_resourcesFolder.Concat("/Cache"); }
         [[nodiscard]] Path GetConfigPath() const { return m_resourcesFolder.Concat("/Configs"); }
+        [[nodiscard]] Path GetMaterialsPath() const { return m_resourcesFolder.Concat("/Materials"); }
+        [[nodiscard]] Path GetTexturesPath() const { return m_resourcesFolder.Concat("/Textures"); }
+
+        IResource* Find(const std::string& Name, const std::string& ID);
+
+        template<typename T> IResource* Find(const std::string& ID) {
+            return Find(typeid(T).name(), ID);
+        }
 
         bool RegisterType(const std::string& type_name);
+
+        template<typename T> bool RegisterType() {
+            return RegisterType(typeid(T).name());
+        }
 
         /** \warning Call only from IResource parents \brief Register resource in resource manager */
         void RegisterResource(IResource *resource);

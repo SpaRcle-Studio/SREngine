@@ -45,6 +45,8 @@ namespace Framework {
 
         generator->Save(Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/Libraries/"));
         casts->Save(Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/Libraries/"));
+
+        compiler->GetEvoScriptCompiler()->SetApiVersion(generator->GetApiVersion());
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {
@@ -105,7 +107,6 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetGameObjects, std::unordered_set<SafePtr<GameObject>>)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetRootGameObjects, std::unordered_set<SafePtr<GameObject>>&)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetSelected, SafePtr<GameObject>)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, UnselectAll, void)
         ESRegisterMethod(EvoScript::Public, generator, Scene, SetObserver, void, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
         ESRegisterMethod(EvoScript::Public, generator, Scene, RemoveSelected, bool, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
         ESRegisterMethod(EvoScript::Public, generator, Scene, AddSelected, void, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
@@ -188,6 +189,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Mesh, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, OnSelected, void, ESArg1(bool v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, SetShader, void, ESArg1(Shader* shader), ESArg1(shader))
+        ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, WaitCalculate, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, IsCanCalculate, bool)
@@ -392,9 +394,7 @@ namespace Framework {
                 { "mutex", "stdint.h", "ResourceManager.h", "string" },
                 {{ "IResource", EvoScript::Public } });
         ESRegisterMethodArg0(EvoScript::Private, generator, Texture, Destroy, bool) // IResource
-        ESRegisterStaticMethod(EvoScript::Public, generator, Texture, Load, Texture*,
-                ESArg7(const std::string& path, TextureFormat format, bool autoRemove, TextureType type, TextureFilter filter, TextureCompression compress, uint8_t mip),
-                ESArg7(path, format, autoRemove, type, filter, compress, mip))
+        ESRegisterStaticMethod(EvoScript::Public, generator, Texture, Load, Texture*, ESArg1(const std::string& name), ESArg1(name));
     }
 
     void API::RegisterMaterial(EvoScript::AddressTableGen *generator) {
@@ -405,6 +405,8 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Material, SetSpecular, void, ESArg1(Texture* texture), ESArg1(texture))
         ESRegisterMethod(EvoScript::Public, generator, Material, SetGlossiness, void, ESArg1(Texture* texture), ESArg1(texture))
         ESRegisterMethod(EvoScript::Public, generator, Material, SetColor, void, ESArg3(float r, float g, float b), ESArg3(r, g, b))
+        ESRegisterMethod(EvoScript::Public, generator, Material, Register, bool, ESArg1(Render* render), ESArg1(render))
+        ESRegisterStaticMethod(EvoScript::Public, generator, Material, Load, Material*, ESArg1(const std::string& name), ESArg1(name))
 
         generator->AddIncompleteType("Mesh", "Material");
     }

@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<VisualScriptEditor>
+<Configs>
+    <!--<Generator Value="MinGW Makefiles"/>-->
+    <Generator Value="Visual Studio 16 2019"/>
     <BlueprintRefs>
         <Ref Value="/Scripts/Blueprints/Cpp.xml"/>
         <Ref Value="/Scripts/Blueprints/Events.xml"/>
         <Ref Value="/Scripts/Blueprints/Math.xml"/>
     </BlueprintRefs>
-</VisualScriptEditor>
+</Configs>

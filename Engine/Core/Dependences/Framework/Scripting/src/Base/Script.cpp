@@ -8,10 +8,10 @@
 
 Framework::Scripting::Script* Framework::Scripting::Script::Allocate(
         const std::string &name,
-        const std::string &path,
         Compiler *compiler,
         ScriptType type)
 {
+    const auto path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Scripts").Concat(name);
     switch (type) {
         case ScriptType::EvoScript:
             return new EvoScriptImpl(compiler, name, path);

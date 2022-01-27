@@ -18,11 +18,6 @@
 #include <Debug.h>
 
 namespace Framework::Helper::Types {
-    #define SR_SAFE_PTR_ASSERT(expr, msg)                                                                                  \
-        if (!(expr)) {                                                                                                     \
-            fprintf(stderr, "[SafePtr<%s>] %s\n\tLine: %i\n\tPtr: %p\n", typeid(T).name(), msg, __LINE__, (void *) m_ptr); \
-        }                                                                                                                  \
-
     template<typename T> class SafePtr {
     public:
         explicit SafePtr(T *ptr);

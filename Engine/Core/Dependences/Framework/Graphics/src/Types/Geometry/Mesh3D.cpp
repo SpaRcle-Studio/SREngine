@@ -70,7 +70,7 @@ void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices
     }
 }
 
-void Framework::Graphics::Types::Mesh3D::DrawVulkan()  {
+void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
     if (!IsReady() || IsDestroy())
         return;
 
@@ -111,13 +111,13 @@ void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
     if (IsDestroy() || (!m_isCalculated && !Calculate()))
         return;
 
-    ConfigureShader(m_shader)
+    //TODO: ConfigureShader(m_shader)
     this->m_material->UseOpenGL();
 
     if (!m_useIndices)
         this->m_env->DrawTriangles(m_countVertices);
     else
-        Helper::Debug::Error("Mesh::DrawOpenGL() : isn't support indices!");
+        SRAssert2Once(false, "Mesh::DrawOpenGL() : isn't support indices!");
 }
 
 void Framework::Graphics::Types::Mesh3D::UpdateUBO() {

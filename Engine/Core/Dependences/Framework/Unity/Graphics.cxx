@@ -27,6 +27,7 @@
 #include "../Graphics/src/Loaders/ObjLoader.cpp"
 #include "../Graphics/src/Loaders/TextureLoader.cpp"
 
+#include "../Graphics/src/Memory/TextureConfigs.cpp"
 #include "../Graphics/src/Memory/MeshManager.cpp"
 
 #include "../Graphics/src/Render/Camera.cpp"

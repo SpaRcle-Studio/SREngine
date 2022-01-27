@@ -3,6 +3,7 @@
 //
 
 #include "Xml.h"
+#include <iostream>
 
 using namespace Framework::Helper;
 
@@ -60,6 +61,20 @@ Framework::Helper::Xml::Document Framework::Helper::Xml::Document::Load(const st
         Xml::g_xml_last_error = -3;
     }
     return xml;
+}
+
+std::string Xml::Document::Dump() const {
+    if (!Valid())
+        return std::string();
+
+    std::ostringstream stream;
+    m_document.save(stream, PUGIXML_TEXT("    "));
+
+    return stream.str();
+}
+
+Xml::Document Xml::Document::Load(const Helper::Path &path) {
+    return Load(path.ToString());
 }
 
 Framework::Helper::Xml::Node::Node()

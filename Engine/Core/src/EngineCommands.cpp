@@ -26,7 +26,8 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 
     GameObject::Ptr& ptr = ptrRaw->GetThis();
 
-    return ptr.AutoFree([](GameObject* ptr) {
+    return ptr.AutoFree([this](GameObject* ptr) {
+        m_backup = ptr->Save();
         ptr->Destroy();
     });
 }
@@ -34,7 +35,22 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 bool Framework::Core::Commands::GameObjectDelete::Undo() {
     auto&& scene = Engine::Instance().GetScene();
 
-    return false;
+    if (m_backup.Valid() && scene.LockIfValid()) {
+        Helper::Debug::Log(m_backup.Dump());
+
+        const auto gameObjectXml = m_backup.Root().GetNode("GameObject");
+
+        const auto tag = gameObjectXml.TryGetAttribute("Tag").ToString("Untagged");
+        const auto enabled = gameObjectXml.TryGetAttribute("Enabled").ToBool(true);
+
+        auto ptr = scene->Instance(gameObjectXml.GetAttribute("Name").ToString());
+        ptr->GetTransform()->Load(gameObjectXml.GetNode("Transform"));
+
+        scene.Unlock();
+        return true;
+    }
+    else
+        return false;
 }
 
 Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const Helper::Types::SafePtr<Helper::GameObject> &ptr) {

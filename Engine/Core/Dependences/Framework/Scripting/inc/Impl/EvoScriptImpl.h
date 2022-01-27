@@ -15,8 +15,8 @@ namespace Framework::Scripting {
 
     class EvoScriptImpl : public Scripting::Script {
     public:
-        EvoScriptImpl(Compiler* compiler, const std::string& name, const std::string& path)
-            : Script(compiler, name, Helper::ResourceManager::Instance().GetResourcesFolder().Concat("/Scripts/").Concat(path))
+        EvoScriptImpl(Compiler* compiler, const std::string& name, const Helper::Path& path)
+            : Script(compiler, name, path.ToString())
         { }
 
         EvoScriptImpl(const EvoScriptImpl&) = delete;

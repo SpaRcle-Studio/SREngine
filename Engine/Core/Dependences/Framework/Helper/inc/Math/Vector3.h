@@ -316,7 +316,7 @@ namespace Framework::Helper::Math {
 
     public:
         [[nodiscard]] glm::vec3 ToGLM() const noexcept {
-            return glm::vec3(x,y,z);
+            return glm::vec3(x, y, z);
         }
         static Unit Magnitude(Vector3 vec) {
             return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));

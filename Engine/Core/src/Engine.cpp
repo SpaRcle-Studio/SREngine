@@ -93,8 +93,13 @@ bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
         return false;
     }
 
-    if (!this->m_window->Init()) {
+    if (!m_window->Init()) {
         Helper::Debug::Error("Engine::Init() : failed to initialize window!");
+        return false;
+    }
+
+    if (!Graphics::Material::InitDefault(m_window->GetRender())) {
+        Helper::Debug::Error("Engine::Init() : failed to initialize default material!");
         return false;
     }
 
@@ -178,6 +183,10 @@ void Framework::Engine::Await() {
             while (accumulator >= updateFrequency) {
                 Helper::Input::Check();
 
+                if (Input::GetKey(KeyCode::Ctrl) && Input::GetKeyDown(KeyCode::Z)) {
+                    m_cmdManager->Cancel();
+                }
+
                 if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
                     Debug::System("Engine::Await() : The closing key combination have been detected!");
                     m_exitEvent = true;
@@ -221,7 +230,23 @@ bool Framework::Engine::Close() {
         m_cmdManager = nullptr;
     }
 
+    if (m_worldThread) {
+        Helper::Debug::Info("Engine::Close() : destroy world thread...");
+        m_worldThread->TryJoin();
+        delete m_worldThread;
+    }
+
+    if (m_compiler) {
+        this->m_compiler->PollEvents();
+        Helper::Debug::Info("Engine::Close() : destroy compiler...");
+        m_compiler->Destroy();
+        m_compiler->Free();
+        m_compiler = nullptr;
+    }
+
     if (m_window && m_window->IsRun()) {
+        Material::FreeDefault();
+
         m_window->Close();
         m_window->Free();
         m_window = nullptr;
@@ -233,24 +258,10 @@ bool Framework::Engine::Close() {
         m_editor = nullptr;
     }
 
-    if (m_compiler) {
-        this->m_compiler->PollEvents();
-        Helper::Debug::Info("Engine::Close() : destroy compiler...");
-        m_compiler->Destroy();
-        m_compiler->Free();
-        m_compiler = nullptr;
-    }
-
     if (m_time) {
         Helper::Debug::Info("Engine::Close() : destroy time...");
         delete m_time;
         m_time = nullptr;
-    }
-
-    if (m_worldThread) {
-        Helper::Debug::Info("Engine::Close() : destroy world thread...");
-        m_worldThread->TryJoin();
-        delete m_worldThread;
     }
 
     return true;
@@ -278,9 +289,7 @@ bool Framework::Engine::LoadMainScript() {
             return false;
     }
 
-    m_mainScript = Scripting::Script::Allocate(
-            "SpaRcle Engine", scriptName, m_compiler,
-            Scripting::ScriptType::EvoScript);
+    m_mainScript = Scripting::Script::Allocate(scriptName, m_compiler, Scripting::ScriptType::EvoScript);
 
     if (!m_mainScript->Compile()) {
         Helper::Debug::Error("Engine::LoadMainScript() : failed to load main engine script!");

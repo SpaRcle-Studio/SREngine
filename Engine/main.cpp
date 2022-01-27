@@ -87,8 +87,9 @@ int main(int argc, char **argv) {
 
     // Register all resource types
     {
-        ResourceManager::Instance().RegisterType("Mesh");
-        ResourceManager::Instance().RegisterType("Texture");
+        ResourceManager::Instance().RegisterType<Mesh>();
+        ResourceManager::Instance().RegisterType<Texture>();
+        ResourceManager::Instance().RegisterType<Material>();
     }
 
     // Register all components

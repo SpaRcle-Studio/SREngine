@@ -8,16 +8,17 @@
 #include <cstdint>
 #include <utility>
 #include <string>
+#include <Utils/Enumerations.h>
 
 namespace Framework::Graphics {
-    enum class TextureFormat {
+    SR_ENUM_CLASS(TextureFormat,
         Unknown      = 0,
 
         RGBA8_UNORM  = 10000,
         RGBA16_UNORM = 10001,
 
         RGBA8_SRGB   = 20000,
-    };
+    );
 
     inline static bool IsSRGB(TextureFormat f) {
         return f >= TextureFormat::RGBA8_SRGB || f <= TextureFormat::RGBA8_SRGB;
@@ -27,16 +28,18 @@ namespace Framework::Graphics {
         return f >= TextureFormat::RGBA8_UNORM || f <= TextureFormat::RGBA16_UNORM;
     }
 
-    enum class TextureType {
-        Unknown = 0, Diffuse = 1, Normal = 2, Specular = 3, Roughness = 4, Glossiness = 5
-    };
-    enum class TextureFilter {
+    SR_ENUM_CLASS(TextureType,
+        Unknown, Diffuse, Normal, Specular, Roughness, Glossiness
+    );
+
+    SR_ENUM_CLASS(TextureFilter,
         Unknown = 0, NEAREST = 1, LINEAR = 2, NEAREST_MIPMAP_NEAREST = 3,
         LINEAR_MIPMAP_NEAREST = 4, NEAREST_MIPMAP_LINEAR = 5, LINEAR_MIPMAP_LINEAR = 6
-    };
-    enum class TextureCompression {
+    );
+
+    SR_ENUM_CLASS(TextureCompression,
         None = 0, BC1 = 1, BC2 = 2, BC3 = 3, BC4 = 4, BC5 = 5, BC6 = 6, BC7 = 7
-    };
+    );
 
     inline static uint32_t Find4(uint32_t i) {
         if (i % 4 == 0)

@@ -44,10 +44,13 @@ namespace Framework::Helper {
 
         void SetPosition(FVector3 val, bool pivot = false);
         void SetRotation(const FVector3& val, bool pivot = false);
-        void SetScale(FVector3 val, bool pivot  = false);
+        void SetScale(FVector3 val);
+        void SetSkew(FVector3 val);
 
-        [[nodiscard]] inline bool HasParent() { return (bool)this->m_parent; }
+        [[nodiscard]] SR_FORCE_INLINE bool HasParent() { return (bool)this->m_parent; }
+
         [[nodiscard]] Xml::Document Save() const override;
+        bool Load(const Xml::Node& xml) override;
 
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, bool local = false) const noexcept;
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, FVector3 position, bool local = false) const noexcept;
@@ -63,6 +66,7 @@ namespace Framework::Helper {
         [[nodiscard]] FVector3 GetScale(bool local = false) const {
             return local ? m_localScale : m_globalScale;
         }
+        [[nodiscard]] FVector3 GetSkew() const { return m_skew; }
 
         /*inline static float Len(const glm::vec3& v) noexcept {
             return sqrt(
@@ -104,12 +108,12 @@ namespace Framework::Helper {
         void RotateAxis(FVector3 axis, double angle) noexcept;
         void GlobalRotateAxis(FVector3 axis, double value);
 
+        void Scale(FVector3 val);
         void Scaling(FVector3 val);
     private:
-        void UpdateDefParentDir();
-
         void UpdateChildPosition(FVector3 delta);
         void UpdateChildScale(FVector3 delta);
+        void UpdateChildSkew(FVector3 delta);
         void UpdateChildRotation();
     public:
         inline static const FVector3 right   = FVector3(1, 0, 0);
@@ -125,8 +129,11 @@ namespace Framework::Helper {
         FVector3                     m_globalRotation             = { 0, 0, 0 };
         FVector3                     m_globalScale                = { 1, 1, 1 };
 
+        FVector3                     m_skew                       = { 1, 1, 1 };
+
         GameObject*                  m_gameObject                 = nullptr;
         Transform*                   m_parent                     = nullptr;
+
     };
 }
 

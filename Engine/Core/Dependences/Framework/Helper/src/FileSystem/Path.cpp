@@ -136,6 +136,9 @@ namespace Framework::Helper {
     }
 
     Path Path::Concat(const Path &path) const {
+        if ((!m_path.empty() && m_path.back() != '/') || (!path.Empty() && path.m_path[0] != '/'))
+            return m_path + "/" + path.m_path;
+
         return m_path + path.m_path;
     }
 
@@ -154,6 +157,20 @@ namespace Framework::Helper {
 
     void Path::NormalizeSelf() {
         m_path = FileSystem::NormalizePath(m_path);
+    }
+
+    bool Path::Empty() const {
+        return m_path.empty();
+    }
+
+    Path Path::ConcatExt(const std::string& ext) const {
+        if (ext.empty())
+            return *this;
+
+        if (ext[0] == '.')
+            return m_path + ext;
+
+        return m_path + "." + ext;
     }
 
     Path& Path::operator=(const Path& path) = default;

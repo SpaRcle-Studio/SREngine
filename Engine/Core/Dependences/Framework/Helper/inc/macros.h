@@ -28,7 +28,7 @@
 /// #if defined(NDEBUG) || defined(_DEBUG)
 
 #if defined(SR_MSVC)
-    #if defined(_DEBUG)
+    #if !defined(NDEBUG)
         #define SR_DEBUG
     #else
         #define SR_RELEASE

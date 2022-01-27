@@ -23,11 +23,11 @@ namespace Framework::Scripting {
         EvoScript::Compiler*        m_compiler      = nullptr;
         EvoScript::AddressTableGen* m_generator     = nullptr;
         EvoScript::CastingGen*      m_casting       = nullptr;
-        std::string                 m_pathToScripts = "None";
     public:
         [[nodiscard]] EvoScript::CastingGen*      GetCasting()           const { return m_casting;   }
         [[nodiscard]] EvoScript::AddressTableGen* GetGenerator()         const { return m_generator; }
         [[nodiscard]] EvoScript::Compiler*        GetEvoScriptCompiler() const { return m_compiler;  }
+
     public:
         bool Init() override;
 

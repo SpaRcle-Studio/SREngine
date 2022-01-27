@@ -422,6 +422,7 @@ void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helpe
         auto position = gameObject->GetTransform()->GetPosition().ToGLM();
         auto rotation = gameObject->GetTransform()->GetRotation().ToGLM();
         auto scale    = gameObject->GetTransform()->GetScale().ToGLM();
+        auto skew     = gameObject->GetTransform()->GetSkew().ToGLM();
 
         ImGui::Text("[Global]");
 
@@ -448,6 +449,9 @@ void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helpe
 
         if (ImGui::InputFloat3("L Sc", &scale[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
             gameObject->GetTransform()->SetLocalScale(position);
+
+        if (ImGui::InputFloat3("L Sw", &skew[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            gameObject->GetTransform()->SetSkew(skew);
 
         this->DrawComponents(gameObject);
 
@@ -480,10 +484,10 @@ void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helpe
     }
 }
 
-void GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) {
+void GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) const {
     if (ImGui::IsItemClicked()) {
         if (!m_shiftPressed && gm->GetScene().Valid())
-            gm->GetScene()->UnselectAll();
+            gm->GetScene()->DeSelectAll();
 
         gm->SetSelect(true);
     }

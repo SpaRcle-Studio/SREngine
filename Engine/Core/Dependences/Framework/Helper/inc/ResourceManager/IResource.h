@@ -29,6 +29,8 @@ namespace Framework::Helper {
 
     public:
         [[nodiscard]] bool IsValid() const;
+        [[nodiscard]] bool IsLoaded() const { return m_loaded; }
+        [[nodiscard]] bool IsReadOnly() const { return m_readOnly; }
         [[nodiscard]] bool IsDestroy() const { return m_isDestroy; }
         [[nodiscard]] bool IsForce() const { return m_force; }
         [[nodiscard]] bool IsAlive() const { return m_lifetime > 0; }
@@ -39,19 +41,35 @@ namespace Framework::Helper {
 
         [[nodiscard]] virtual IResource* Copy(IResource* destination) const;
 
-        /* Add one point to count uses current resource */
+        /** Add one point to count uses current resource */
         void AddUsePoint() { m_countUses++; }
 
-        /* Remove one point from count uses current resource */
+        /** Remove one point from count uses current resource */
         void RemoveUsePoint() {
-            if (m_countUses == 0)
-                Debug::Error("IResource::RemoveUsePoint() : count use points is zero!");
+            SRAssert2(m_countUses > 0, "count use points is zero!");
             m_countUses--;
         }
 
-        /* Call only once | Register resource to destroy in resource manager */
+        virtual bool Unload() {
+            if (m_loaded) {
+                m_loaded = false;
+                return true;
+            }
+            return false;
+        }
+
+        virtual bool Load() {
+            if (!m_loaded) {
+                m_loaded = true;
+                return true;
+            }
+            return false;
+        }
+
+        /** Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy();
         bool ForceDestroy();
+        void SetReadOnly(bool value) { m_readOnly = value; }
         void SetId(const std::string& id);
         void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }
 
@@ -62,6 +80,8 @@ namespace Framework::Helper {
     private:
         float_t m_lifetime = 0;
         std::atomic<bool> m_force = false;
+        std::atomic<bool> m_readOnly = false;
+        std::atomic<bool> m_loaded = true;
         std::string m_resourceId = "NoID";
         bool m_autoRemove = false;
 

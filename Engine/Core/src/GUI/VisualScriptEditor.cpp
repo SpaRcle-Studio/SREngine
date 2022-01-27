@@ -110,12 +110,12 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
     Helper::Debug::Log("VisualScriptEditor::LoadConfig() : loading config...");
 
     const auto& resManager = Helper::ResourceManager::Instance();
-    const auto path = resManager.GetConfigPath().Concat("/VisualScriptEditor.xml");
+    const auto path = resManager.GetConfigPath().Concat("/EvoScript.xml");
     const std::string strPath = path.ToString();
 
     if (Helper::FileSystem::FileExists(strPath)) {
         auto xml = SR_XML_NS::Document::Load(strPath);
-        for (const SR_XML_NS::Node& blueprintPath : xml.Root().GetNode("VisualScriptEditor").GetNode("BlueprintRefs").GetNodes()) {
+        for (const SR_XML_NS::Node& blueprintPath : xml.Root().GetNode("Configs").GetNode("BlueprintRefs").GetNodes()) {
             auto nodes = Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToString()));
             for (auto&& node : nodes) {
                 RegisterBlueprint(node);

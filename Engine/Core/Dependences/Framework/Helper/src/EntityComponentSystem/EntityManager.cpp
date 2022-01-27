@@ -120,6 +120,12 @@ complete:
 
 void EntityManager::Unregister(const EntityId &id) {
     std::lock_guard<Mutex> lock(m_mutex);
+
+    if (m_entities.count(id) == 0) {
+        SRAssert(false);
+        return;
+    }
+
     m_entities.erase(id);
 }
 

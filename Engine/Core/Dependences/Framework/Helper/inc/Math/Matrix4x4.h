@@ -73,6 +73,20 @@ namespace Framework::Helper::Math {
 
             return FVector3(translation);
         }
+
+        [[nodiscard]] FVector3 GetScale() const {
+            glm::vec3 scale;
+            glm::quat rotation;
+            glm::vec3 translation;
+
+            glm::vec3 skew;
+            glm::vec4 perspective;
+
+            glm::decompose(self, scale, rotation, translation, skew, perspective);
+
+            return FVector3(scale);
+        }
+
         [[nodiscard]] Quaternion GetQuat() const {
             glm::vec3 scale;
             glm::quat rotation;

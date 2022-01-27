@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<Textures>
+    <Texture Path="Engine/default.png" Filter="NEAREST" />
+</Textures>

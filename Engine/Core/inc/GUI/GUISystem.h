@@ -113,7 +113,7 @@ namespace Framework::Core::GUI {
         void DrawFileBrowser();
         void DrawVisualScriptEditor();
 
-        void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm);
+        void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) const;
 
         [[nodiscard]] Helper::Math::IVector2 GetWindowSize() const {
             ImVec2 size = ImGui::GetWindowSize();

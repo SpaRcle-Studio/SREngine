@@ -39,7 +39,7 @@ void GameObject::Free() {
 }
 
 bool Framework::Helper::GameObject::AddComponent(Framework::Helper::Component *component) {  // TODO: add security multi-threading
-    if (this->m_isDestroy){
+    if (this->m_isDestroy) {
         Debug::Error("GameObject::AddComponent() : this \""+m_name+"\" game object is destroyed!");
         return false;
     }
@@ -100,13 +100,10 @@ void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
     m_components.clear();
 
     for (GameObject::Ptr gameObject : m_children) {
-        if (gameObject.LockIfValid()) {
-            gameObject.Free([](GameObject* gm) {
-                gm->Destroy(DestroyBy::GameObject);
-                gm->Free();
-            });
-            gameObject.Unlock();
-        }
+        gameObject.AutoFree([](GameObject* gm) {
+            gm->Destroy(DestroyBy::GameObject);
+            gm->Free();
+        });
     }
     m_children.clear();
 
@@ -127,6 +124,7 @@ void GameObject::UpdateComponents() {
     UpdateComponentsPosition();
     UpdateComponentsRotation();
     UpdateComponentsScale();
+    UpdateComponentsSkew();
 }
 
 void GameObject::UpdateComponentsPosition() {
@@ -187,14 +185,11 @@ bool GameObject::Contains(const Types::SafePtr<GameObject>& child) {  // TODO: a
 void GameObject::SetSelect(bool value) {
     if (value == m_isSelect)
         return;
-    else {
-        m_isSelect = value;
 
-        if (m_isSelect)
-            m_scene->AddSelected(*this);
-        else
-           m_scene->RemoveSelected(*this);
-    }
+    if ((m_isSelect = value))
+        m_scene->AddSelected(*this);
+    else
+       m_scene->RemoveSelected(*this);
 }
 
 std::string GameObject::GetName() const {
@@ -387,5 +382,10 @@ void GameObject::UpdateEntityPath() {
 
 bool GameObject::IsChild(const GameObject::Ptr &child) {
     return m_children.count(child) == 1;
+}
+
+void GameObject::UpdateComponentsSkew() {
+    for (auto&& comp : m_components)
+        comp->OnSkewed(m_transform->m_skew);
 }
 

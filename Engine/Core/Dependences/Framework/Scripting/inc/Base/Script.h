@@ -67,7 +67,6 @@ namespace Framework::Scripting {
     public:
         static Scripting::Script* Allocate(
                 const std::string& name,
-                const std::string& path,
                 Compiler* compiler,
                 ScriptType type);
     };

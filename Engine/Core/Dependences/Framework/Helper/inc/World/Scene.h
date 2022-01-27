@@ -71,7 +71,7 @@ namespace Framework::Helper::World {
         GameObject::Ptr Instance(const std::string& name);
 
     public:
-        void UnselectAll();
+        void DeSelectAll();
         bool Remove(const Types::SafePtr<GameObject>& gameObject);
         bool RemoveSelected(const Types::SafePtr<GameObject>& gameObject);
         void AddSelected(const Types::SafePtr<GameObject>& gameObject);

@@ -143,13 +143,17 @@ bool Framework::Helper::World::Scene::RemoveSelected(const GameObject::Ptr& game
     }
 }
 
-void Framework::Helper::World::Scene::UnselectAll() {
-    for (const auto& gameObject : m_selectedGameObjects) {
-        auto components = gameObject->GetComponents(); //TODO: double lock?
-        for (Framework::Helper::Component* comp : components)
-            comp->OnSelected(false);
+void Framework::Helper::World::Scene::DeSelectAll() {
+    for (auto gameObject : m_selectedGameObjects) {
+        if (gameObject.RecursiveLockIfValid()) {
+            auto components = gameObject->GetComponents();
+            for (auto comp : components)
+                comp->OnSelected(false);
 
-        gameObject->m_isSelect = false;
+            gameObject->m_isSelect = false;
+
+            gameObject.Unlock();
+        }
     }
 
     this->m_selectedGameObjects.clear();
@@ -408,7 +412,7 @@ void Scene::UpdateContainers() {
 }
 
 bool Scene::ReloadConfig() {
-    const std::string path = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/World.config");
+    const std::string path = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/World.xml");
 
     if (auto xml = Helper::Xml::Document::Load(path); xml.Valid()) {
         const auto& configs = xml.Root().GetNode("Configs");
@@ -436,8 +440,12 @@ bool Scene::ReloadConfig() {
 }
 
 bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
+    if (m_selectedGameObjects.count(gameObject))
+        m_selectedGameObjects.erase(gameObject);
+
     m_gameObjects.erase(gameObject);
     OnChanged();
+
     return true;
 }
 

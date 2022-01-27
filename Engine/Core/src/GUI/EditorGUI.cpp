@@ -29,9 +29,7 @@ bool EditorGUI::Init() {
 
     m_fileBrowser->SetFolder(Helper::ResourceManager::Instance().GetResPath());
 
-    this->m_script = Scripting::Script::Allocate(
-            "SpaRcle Editor", "Engine/Editor",
-            m_compiler, Scripting::ScriptType::EvoScript);
+    this->m_script = Scripting::Script::Allocate("Engine/Editor", m_compiler, Scripting::ScriptType::EvoScript);
     if (!m_script || !m_script->Compile()) {
         Helper::Debug::Error("EditorGUI::Init() : failed to allocate/compile script!");
         return false;

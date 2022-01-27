@@ -227,17 +227,17 @@ namespace Framework::Graphics{
             *shaderData = reinterpret_cast<void*>(dynamicID);
         }
 
-        auto shadersPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Shaders/");
+        auto shadersPath = Helper::ResourceManager::Instance().GetResPath().Concat("Shaders");
 
-        auto vertexPath = shadersPath.Concat("Common/").Concat(path).Concat(".vert");
-        auto fragmentPath = shadersPath.Concat("Common/").Concat(path).Concat(".frag");
+        auto vertexPath = shadersPath.Concat("Common").Concat(path).ConcatExt(".vert");
+        auto fragmentPath = shadersPath.Concat("Common").Concat(path).ConcatExt(".frag");
 
         {
             if (!vertexPath.Exists())
-                vertexPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(path).Concat(".vert");
+                vertexPath = shadersPath.Concat(GetPipeLineName()).Concat(path).ConcatExt(".vert");
 
             if (!fragmentPath.Exists())
-                fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(path).Concat(".frag");
+                fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat(path).ConcatExt(".frag");
         }
 
         std::vector<SourceShader> modules = {};

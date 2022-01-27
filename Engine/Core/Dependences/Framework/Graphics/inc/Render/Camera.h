@@ -34,16 +34,16 @@ namespace Framework::Graphics {
         Camera()
             : Component("Camera")
             , m_env(Environment::Get())
-            , m_pipeline(m_env->GetPipeLine())
+            , m_pipeline(Environment::Get()->GetPipeLine())
         { }
 
         ~Camera() override = default;
 
     public:
-        void UpdateProjection(unsigned int w, unsigned int h);
+        void UpdateProjection(uint32_t w, uint32_t h);
         void UpdateProjection();
 
-        SR_FORCE_INLINE void SetDirectOutput(bool value) noexcept {
+        SR_FORCE_INLINE void SetDirectOutput(bool value) {
             this->m_isEnableDirectOut.second = value;
         }
     public:
@@ -59,16 +59,8 @@ namespace Framework::Graphics {
         void OnRotate(const Math::FVector3& newValue) override;
         void OnMove(const Math::FVector3& newValue) override;
         void OnReady(bool ready) override;
-        void OnAttachComponent() override {
-            Component::OnAttachComponent();
-        }
-    protected:
-        void OnRemoveComponent() override {
-            OnDestroyGameObject();
-        }
-        void OnDestroyGameObject() override;
+        void OnAttachComponent() override;
     public:
-
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;       }
         [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const { return m_isEnableDirectOut.first;   }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedUpdate()       const { return m_needUpdate;                }
@@ -83,16 +75,10 @@ namespace Framework::Graphics {
         [[nodiscard]] glm::mat4 GetImGuizmoView() const noexcept;
         [[nodiscard]] glm::mat4 GetTranslationMatrix() const noexcept;
 
-        void WaitCalculate() const {
-            ret:
-            if (!m_isCalculate)
-                goto ret;
-        }
-        void WaitBuffersCalculate() const {
-            ret:
-            if (!m_isBuffCalculate)
-                goto ret;
-        }
+        void WaitCalculate() const;
+        void WaitBuffersCalculate() const;
+        bool CompleteResize();
+        void PoolEvents();
 
         /**
          \brief Update shader parameters: proj-mat and view-mat.
@@ -133,42 +119,40 @@ namespace Framework::Graphics {
             }
         }
         void UpdateShaderProjView(Shader* shader) noexcept;
-
-        bool CompleteResize();
-
-        void PoolEvents();
     private:
         void UpdateView() noexcept;
         bool Calculate() noexcept;
-    private:
-        volatile bool         m_isCreate          = false;
-        volatile bool         m_isCalculate       = false;
-        volatile bool         m_isBuffCalculate   = false;
-        volatile bool         m_needUpdate        = false;
+        void OnRemoveComponent() override;
+        void OnDestroyGameObject() override;
 
-        volatile float        m_yaw               = 0;
-        volatile float        m_pitch             = 0;
-        volatile float        m_roll              = 0;
     private:
-        PostProcessing*       m_postProcessing    = nullptr;
-        Environment*          m_env               = nullptr;
+        std::atomic<bool>     m_isCreate          = false;
+        std::atomic<bool>     m_isCalculate       = false;
+        std::atomic<bool>     m_isBuffCalculate   = false;
+        std::atomic<bool>     m_needUpdate        = false;
+
+        volatile float_t      m_yaw               = 0;
+        volatile float_t      m_pitch             = 0;
+        volatile float_t      m_roll              = 0;
+        volatile float_t      m_far               = 8000.f;
+        volatile float_t      m_near              = 0.01f;
+
         const PipeLine        m_pipeline          = PipeLine::Unknown;
 
+        GUI::ICanvas*         m_canvas            = nullptr;
         Window*		          m_window	     	  = nullptr;
+        Environment*          m_env               = nullptr;
+        PostProcessing*       m_postProcessing    = nullptr;
+
         glm::mat4	          m_projection        = glm::mat4(0);
         glm::mat4	          m_viewTranslateMat  = glm::mat4(0);
         glm::mat4	          m_viewMat           = glm::mat4(0);
-        Math::FVector3	      m_pos               = { 0, 0, 0 };
 
         // 1 - current, 2 - new
         std::pair<bool, bool> m_isEnableDirectOut = { false, false };
-        bool                  m_allowUpdateProj   = true;
+        std::atomic<bool>     m_allowUpdateProj   = true;
 
-        float                 m_far               = 8000.f;
-        float                 m_near              = 0.01f;
-
-        GUI::ICanvas*         m_canvas            = nullptr;
-
+        Math::FVector3	      m_pos               = { 0, 0, 0 };
         Math::IVector2        m_cameraSize        = { 0, 0 };
     };
 }

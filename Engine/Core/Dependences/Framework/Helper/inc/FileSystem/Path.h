@@ -34,8 +34,10 @@ namespace Framework::Helper {
         [[nodiscard]] const char* CStr() const;
 
         [[nodiscard]] Path Concat(const Path& path) const;
+        [[nodiscard]] Path ConcatExt(const std::string& ext) const;
 
         [[nodiscard]] bool Valid() const;
+        [[nodiscard]] bool Empty() const;
         [[nodiscard]] bool Exists() const;
 
         [[nodiscard]] Type GetType() const;

@@ -77,4 +77,13 @@
     SR_ENUM_TO_STRING(enumName)                                                                  \
     SR_ENUM_FROM_STRING(enumName)                                                                \
 
+/// --------------------------------------------------------------------------------------------------------------------
+
+namespace Framework::Helper {
+    SR_ENUM_CLASS(BoolExt,
+                  None  = -1,
+                  False = 0,
+                  True  = 1);
+}
+
 #endif //GAMEENGINE_ENUMERATIONS_H

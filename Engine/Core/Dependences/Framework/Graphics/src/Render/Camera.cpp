@@ -45,31 +45,6 @@ bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
     return true;
 }
 
-/*
-static inline glm::mat4 Mat4FromQuat(glm::quat & q) {
-    glm::mat4 M;
-    M[0][0] = 1.0f - 2.0f * (q.y * q.y + q.z * q.z);
-    M[0][1] = 2.0f * (q.x * q.y + q.z * q.w);
-    M[0][2] = 2.0f * (q.x * q.z - q.y * q.w);
-    M[0][3] = 0.0f;
-
-    M[1][0] = 2.0f * (q.x * q.y - q.z * q.w);
-    M[1][1] = 1.0f - 2.0f * (q.x * q.x + q.z * q.z);
-    M[1][2] = 2.0f * (q.z * q.y + q.x * q.w);
-    M[1][3] = 0.0f;
-
-    M[2][0] = 2.0f * (q.x * q.z + q.y * q.w);
-    M[2][1] = 2.0f * (q.y * q.z - q.x * q.w);
-    M[2][2] = 1.0f - 2.0f * (q.x * q.x + q.y * q.y);
-    M[2][3] = 0.0f;
-
-    M[3][0] = 0;
-    M[3][1] = 0;
-    M[3][2] = 0;
-    M[3][3] = 1.0f;
-    return M;
-}*/
-
 void Framework::Graphics::Camera::UpdateView() noexcept {
     glm::mat4 matrix(1.f);
 
@@ -143,22 +118,6 @@ void Framework::Graphics::Camera::OnDestroyGameObject() {
     }
 }
 
-/*
-nlohmann::json Framework::Graphics::Camera::Save() {
-    nlohmann::json camera;
-    camera["Camera"]["Far"] = m_far;
-    camera["Camera"]["Near"] = m_near;
-
-    camera["Camera"]["PostProcessing"]["ColorCorrection"] = {
-            m_postProcessing->GetColorCorrection().r,
-            m_postProcessing->GetColorCorrection().g,
-            m_postProcessing->GetColorCorrection().b
-        };
-    camera["Camera"]["PostProcessing"]["Gamma"] = m_postProcessing->GetGamma();
-
-    return camera;
-}*/
-
 bool Framework::Graphics::Camera::Free() {
     Debug::Graph("Camera::Free() : free camera pointer...");
     this->m_postProcessing->Destroy();
@@ -168,8 +127,14 @@ bool Framework::Graphics::Camera::Free() {
 }
 
 bool Framework::Graphics::Camera::DrawOnInspector() {
-    if (ImGui::InputFloat("Far", &m_far, 50) || ImGui::InputFloat("Near", &m_near, 0.1))
+    float_t cameraFar  = m_far;
+    float_t cameraNear = m_near;
+
+    if (ImGui::InputFloat("Far", &cameraFar, 50) || ImGui::InputFloat("Near", &cameraNear, 0.1)) {
+        m_far  = cameraFar;
+        m_near = cameraNear;
         this->UpdateProjection();
+    }
 
     if (!m_window)
         ImGui::TextColored({1,0,0,1}, "Window is missing!");
@@ -254,13 +219,6 @@ bool Framework::Graphics::Camera::CompleteResize() {
 }
 
 void Framework::Graphics::Camera::PoolEvents()  {
-    /*if (!m_isEnableDirectOut.first && m_isEnableDirectOut.second)
-        if (auto size = m_window->GetWindowSize(); size != m_cameraSize) {
-            this->UpdateProjection(size.x, size.y);
-            this->CompleteResize();
-            m_env->SetBuildState(false);
-        }*/
-
     m_isEnableDirectOut.first = m_isEnableDirectOut.second;
 }
 
@@ -286,6 +244,26 @@ glm::mat4 Framework::Graphics::Camera::GetTranslationMatrix() const noexcept {
             -m_pos.y,
             -m_pos.z
     });
+}
+
+void Framework::Graphics::Camera::WaitBuffersCalculate() const {
+    ret:
+    if (!m_isBuffCalculate)
+        goto ret;
+}
+
+void Framework::Graphics::Camera::WaitCalculate() const  {
+    ret:
+    if (!m_isCalculate)
+        goto ret;
+}
+
+void Framework::Graphics::Camera::OnRemoveComponent() {
+    OnDestroyGameObject();
+}
+
+void Framework::Graphics::Camera::OnAttachComponent() {
+    Component::OnAttachComponent();
 }
 
 

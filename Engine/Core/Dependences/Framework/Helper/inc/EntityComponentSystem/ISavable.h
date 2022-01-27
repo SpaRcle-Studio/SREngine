@@ -24,6 +24,7 @@ namespace Framework::Helper {
 
     public:
         [[nodiscard]] virtual Xml::Document Save() const { return Xml::Document::New(); }
+        virtual bool Load(const Xml::Node& xml) { return false; }
 
     };
 }

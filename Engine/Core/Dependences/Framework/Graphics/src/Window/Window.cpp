@@ -363,15 +363,27 @@ void Framework::Graphics::Window::Thread() {
 
     Helper::Debug::System("Window::Thread() : synchronizing resources...");
 
-    /*! Делаем 10 попыток синхронизации, чтобы все вложенные графические ресурсы успели уничтожиться
+    /** Делаем 10 попыток синхронизации, чтобы все вложенные графические ресурсы успели уничтожиться
      * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
      * после уничтожения контекстного потока */
-    for (uint8_t i = 1; i <= 10; ++i) {
-        Helper::Debug::System("Window::Thread() : synchronizing resources (step " + std::to_string(i) +" / 10)");
+    std::atomic<bool> syncComplete(false);
+    auto thread = Helper::Types::Thread([&syncComplete]() {
+        const uint32_t maxSync = 10;
+        for (uint8_t i = 1; i <= maxSync; ++i) {
+            Helper::Debug::System("Window::Thread() : synchronizing resources (step " + std::to_string(i) + " / " + std::to_string(maxSync) + ")");
+            ResourceManager::Instance().Synchronize(true);
+        }
+        syncComplete = true;
+    });
+
+    /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
+     * то они могут ожидать пока графический поток уберет метку использования с них */
+    while (!syncComplete) {
         this->PollEvents();
         this->m_render->PollEvents();
-        ResourceManager::Instance().Synchronize(true);
     }
+
+    thread.TryJoin();
 
     Helper::Debug::System("Window::Thread() : complete synchronizing!");
 
@@ -394,8 +406,8 @@ bool Framework::Graphics::Window::InitEnvironment() {
     Debug::Graph("Window::InitEnvironment() : pre-initializing...");
     if (!this->m_env->PreInit(
             m_smoothSamples,
-            "SpaRcle Engine",
-            "SREngine",
+            "SpaRcle Engine", /// App name
+            "SREngine",       /// Engine name
             ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe"))){
         Debug::Error("Window::InitEnvironment() : failed to pre-initializing environment!");
         return false;

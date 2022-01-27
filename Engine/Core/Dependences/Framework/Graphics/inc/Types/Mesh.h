@@ -79,18 +79,11 @@ namespace Framework::Graphics::Types {
         bool DrawOnInspector() override;
         Math::FVector3 GetBarycenter() const override;
     public:
-        SR_FORCE_INLINE void OnMove(const Math::FVector3& newValue) override {
-            m_position = newValue;
-            ReCalcModel();
-        }
-        SR_FORCE_INLINE void OnRotate(const Math::FVector3& newValue) override {
-            m_rotation = newValue;
-            ReCalcModel();
-        }
-        SR_FORCE_INLINE void OnScaled(const Math::FVector3& newValue) override {
-            m_scale = newValue;
-            ReCalcModel();
-        }
+        void OnMove(const Math::FVector3& newValue) override;
+        void OnRotate(const Math::FVector3& newValue) override;
+        void OnScaled(const Math::FVector3& newValue) override;
+        void OnSkewed(const Math::FVector3& newValue) override;
+
         void OnSelected(bool value) override;
         void OnDestroyGameObject() override;
         void OnRemoveComponent() override {
@@ -121,7 +114,8 @@ namespace Framework::Graphics::Types {
         Math::FVector3               m_barycenter        = Math::FVector3(Math::UnitMAX);
         Math::FVector3               m_position          = Math::FVector3();
         Math::FVector3               m_rotation          = Math::FVector3();
-        Math::FVector3               m_scale             = Math::FVector3(1, 1, 1);
+        Math::FVector3               m_skew              = Math::FVector3(1);
+        Math::FVector3               m_scale             = Math::FVector3(1);
         glm::mat4                    m_modelMat          = glm::mat4(0);
 
     protected:

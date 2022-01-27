@@ -110,7 +110,7 @@ namespace Framework::Graphics {
             for (const auto [name, indices, vertices] : shapes) {
                 auto *mesh = Memory::MeshAllocator::Allocate<T>();
                 mesh->SetGeometryName(name);
-                mesh->SetMaterial(new Types::Material());
+                mesh->SetMaterial(Material::GetDefault());
 
                 if (withIndices) {
                     mesh->SetVertexArray(vertices);

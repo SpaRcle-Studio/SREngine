@@ -3,7 +3,11 @@
 //
 
 #include "Impl/EvoCompiler.h"
+
 #include <ResourceManager/ResourceManager.h>
+#include <FileSystem/FileSystem.h>
+#include <FileSystem/Path.h>
+#include <Xml.h>
 
 bool Framework::Scripting::EvoCompiler::Init() {
     Helper::Debug::Info("EvoCompiler::Init() : initialization of the compiler...");
@@ -13,18 +17,17 @@ bool Framework::Scripting::EvoCompiler::Init() {
     EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);  };
     EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { Helper::Debug::Info(msg);  };
 
-    this->m_pathToScripts = Framework::Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/");
+    const auto configPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/EvoScript.xml");
+    const auto warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
 
-    auto config = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/EvoScriptGenerator.config");
+    if (configPath.Exists()) {
+        auto xml = SR_XML_NS::Document::Load(configPath);
+        const auto generator = xml.Root().GetNode("Configs").GetNode("Generator").GetAttribute("Value").ToString();
 
-    const std::string warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
-
-    std::ifstream ifs(config);
-    if (!ifs.is_open()) {
-        Helper::Debug::Error("EvoCompiler::Init() : failed to read config file! \n\tPath: " + config.ToString());
-        return false;
-    } else {
-        std::string generator((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        if (generator.empty()) {
+            Helper::Debug::Error("EvoCompiler::Init() : invalid generator!");
+            return false;
+        }
 
     #ifdef __MINGW64__
         if (generator.find("Visual Studio") != std::string::npos)
@@ -32,10 +35,19 @@ bool Framework::Scripting::EvoCompiler::Init() {
     #endif
 
         Helper::Debug::Info("EvoCompiler::Init() : use \"" + generator + "\" generator...");
-        this->m_compiler  = EvoScript::Compiler::Create(generator, Helper::ResourceManager::Instance().GetResPath().Concat("/Cache"));
+
         this->m_generator = new EvoScript::AddressTableGen();
         this->m_casting = new EvoScript::CastingGen(m_generator);
-    }
 
-    return true;
+        this->m_compiler  = EvoScript::Compiler::Create(
+                generator,
+                Helper::ResourceManager::Instance().GetResPath().Concat("Cache/Scripting")
+        );
+
+        return true;
+    }
+    else
+        Helper::Debug::Error("EvoCompiler::Init() : config file not found! \n\tPath: " + configPath.ToString());
+
+    return false;
 }
