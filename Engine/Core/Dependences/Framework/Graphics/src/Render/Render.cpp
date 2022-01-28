@@ -306,3 +306,18 @@ Framework::Graphics::Shader *Framework::Graphics::Render::FindShader(uint32_t id
 
     return m_shaders[id];
 }
+
+void Framework::Graphics::Render::Synchronize() {
+    bool empty;
+
+ret:
+    {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        empty = m_newMeshes.empty() && m_removeMeshes.empty() && m_texturesToFree.empty() && m_skyboxesToFreeVidMem.empty();
+    }
+
+    if (!empty) {
+        Helper::Types::Thread::Sleep(50);
+        goto ret;
+    }
+}

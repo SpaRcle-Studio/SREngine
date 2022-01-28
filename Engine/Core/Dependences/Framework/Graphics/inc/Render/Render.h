@@ -89,6 +89,7 @@ namespace Framework::Graphics {
         void SetCurrentCamera(Camera* camera) noexcept;
         [[nodiscard]] SR_FORCE_INLINE Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
     public:
+        void Synchronize();
         void RemoveMesh(Types::Mesh* mesh);
         void RegisterMesh(Types::Mesh* mesh);
         void RegisterMeshes(const Helper::Types::List<Types::Mesh*>& meshes) {

@@ -13,6 +13,7 @@
 #include <glm/gtx/string_cast.hpp>
 #include <Utils/StringUtils.h>
 #include <Input/InputSystem.h>
+#include <Types/Semaphore.h>
 
 using namespace Framework::Helper;
 
@@ -100,7 +101,13 @@ bool Framework::Graphics::Window::Init() {
     }
 
     ret: if (!m_render->IsInit() && !m_hasErrors) goto ret;
-    if (m_hasErrors) return false;
+    if (m_hasErrors)
+        return false;
+
+    if (!Graphics::Material::InitDefault(GetRender())) {
+        Helper::Debug::Error("Window::Init() : failed to initialize default material!");
+        return false;
+    }
 
     m_isInit = true;
 
@@ -131,7 +138,7 @@ ret: if (!m_render->IsRun() && !m_hasErrors) goto ret;
 }
 
 bool Framework::Graphics::Window::Close() {
-    if (!m_isRun){
+    if (!m_isRun) {
         Debug::Error("Window::Close() : window is not running!");
         return false;
     }
@@ -143,8 +150,8 @@ bool Framework::Graphics::Window::Close() {
 
     Debug::Graph("Window::Close() : close window...");
 
-    this->m_isRun   = false;
-    this->m_isClose = true;
+    m_isRun   = false;
+    m_isClose = true;
 
     if (m_thread.joinable()) m_thread.join();
 
@@ -361,34 +368,12 @@ void Framework::Graphics::Window::Thread() {
         Helper::Debug::Graph("Window::Thread() : complete stopping gui!");
     }
 
-    Helper::Debug::System("Window::Thread() : synchronizing resources...");
-
-    /** Делаем 10 попыток синхронизации, чтобы все вложенные графические ресурсы успели уничтожиться
-     * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
-     * после уничтожения контекстного потока */
-    std::atomic<bool> syncComplete(false);
-    auto thread = Helper::Types::Thread([&syncComplete]() {
-        const uint32_t maxSync = 10;
-        for (uint8_t i = 1; i <= maxSync; ++i) {
-            Helper::Debug::System("Window::Thread() : synchronizing resources (step " + std::to_string(i) + " / " + std::to_string(maxSync) + ")");
-            ResourceManager::Instance().Synchronize(true);
-        }
-        syncComplete = true;
-    });
-
-    /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
-     * то они могут ожидать пока графический поток уберет метку использования с них */
-    while (!syncComplete) {
-        this->PollEvents();
-        this->m_render->PollEvents();
+    if (!SyncFreeResources()) {
+        Debug::Error("Window::Thread() : failed to free resources!");
     }
 
-    thread.TryJoin();
-
-    Helper::Debug::System("Window::Thread() : complete synchronizing!");
-
     if (!this->m_render->Close()) {
-        Debug::Error("Window::Thread() : failed close render!");
+        Debug::Error("Window::Thread() : failed to close render!");
     }
 
     this->m_env->CloseWindow();
@@ -704,4 +689,47 @@ bool Framework::Graphics::Window::TrySync() {
 
 bool Framework::Graphics::Window::IsAlive() const {
     return m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors();
+}
+
+bool Framework::Graphics::Window::SyncFreeResources() {
+    Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources...");
+
+    /** Делаем 10 попыток синхронизации, чтобы все вложенные графические ресурсы успели уничтожиться
+     * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
+     * после уничтожения контекстного потока */
+    std::atomic<bool> syncComplete(false);
+    Helper::Types::SignalSemaphore semaphore;
+
+    auto thread = Helper::Types::Thread([&syncComplete, &semaphore, this]() {
+        const uint32_t maxSync = 10;
+        for (uint8_t i = 1; i <= maxSync; ++i) {
+            Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(i) + " / " + std::to_string(maxSync) + ")");
+
+            semaphore.Wait();
+
+            if (auto material = Material::GetDefault(); material && material->GetCountUses() == 1)
+                Material::FreeDefault();
+
+            ResourceManager::Instance().Synchronize(true);
+        }
+
+        if (Material::GetDefault())
+            Helper::Debug::Warn("Window::SyncFreeResources() : default material was not be freed!");
+
+        syncComplete = true;
+    });
+
+    /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
+     * то они могут ожидать пока графический поток уберет метку использования с них */
+    while (!syncComplete) {
+        PollEvents();
+        m_render->PollEvents();
+        semaphore.Signal();
+    }
+
+    thread.TryJoin();
+
+    Helper::Debug::System("Window::SyncFreeResources() : complete synchronizing!");
+
+    return true;
 }

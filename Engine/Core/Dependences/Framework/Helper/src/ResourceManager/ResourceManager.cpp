@@ -47,6 +47,8 @@ namespace Framework::Helper {
 
         Synchronize(true);
 
+        Debug::Info("ResourceManager::Stop() : stopping thread...");
+
         m_thread.TryJoin();
 
         PrintMemoryDump();

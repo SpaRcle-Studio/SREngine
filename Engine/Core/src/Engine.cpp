@@ -98,11 +98,6 @@ bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
         return false;
     }
 
-    if (!Graphics::Material::InitDefault(m_window->GetRender())) {
-        Helper::Debug::Error("Engine::Init() : failed to initialize default material!");
-        return false;
-    }
-
     this->RegisterLibraries();
 
     this->m_isInit = true;
@@ -236,26 +231,26 @@ bool Framework::Engine::Close() {
         delete m_worldThread;
     }
 
+    if (m_window && m_window->IsRun()) {
+        m_window->Close();
+        m_window->Free();
+        m_window = nullptr;
+    }
+
+    /// должен освобождаться перед компилятором,
+    /// так как может содержать скрипты
+    if (m_editor) {
+        m_editor->Destroy();
+        m_editor->Free();
+        m_editor = nullptr;
+    }
+
     if (m_compiler) {
         this->m_compiler->PollEvents();
         Helper::Debug::Info("Engine::Close() : destroy compiler...");
         m_compiler->Destroy();
         m_compiler->Free();
         m_compiler = nullptr;
-    }
-
-    if (m_window && m_window->IsRun()) {
-        Material::FreeDefault();
-
-        m_window->Close();
-        m_window->Free();
-        m_window = nullptr;
-    }
-
-    if (m_editor) {
-        m_editor->Destroy();
-        m_editor->Free();
-        m_editor = nullptr;
     }
 
     if (m_time) {

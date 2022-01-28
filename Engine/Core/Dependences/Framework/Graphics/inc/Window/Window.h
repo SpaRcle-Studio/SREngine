@@ -110,6 +110,7 @@ namespace Framework::Graphics {
         void PollEvents();
         void Thread();
         bool InitEnvironment();
+        bool SyncFreeResources();
 
         void DrawToCamera(Framework::Graphics::Camera* camera);
     public:

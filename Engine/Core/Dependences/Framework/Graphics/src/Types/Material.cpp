@@ -204,7 +204,7 @@ bool Material::FreeDefault() {
             return true;
         }
         else {
-            Helper::Debug::Error("Material::FreeDefault() : the material is still in use!");
+            SRAssert2(false, Helper::Format("Material::FreeDefault() : the material is still in use! Count uses: %i", m_default->GetCountUses()).c_str());
             return false;
         }
     }
