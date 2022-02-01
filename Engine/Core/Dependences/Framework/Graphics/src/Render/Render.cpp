@@ -184,12 +184,14 @@ void Framework::Graphics::Render::PollEvents() {
     //! Free textures
     if (!m_texturesToFree.empty()) {
         for (auto& textureToFree : m_texturesToFree) {
+            Helper::Debug::Graph("Render::PoolEvents() : free texture \"" + textureToFree->GetName() + "\"");
             if (textureToFree->IsCalculated())
                 textureToFree->FreeVideoMemory();
             else
                 Debug::Error("Render::PoolEvents() : texture is not calculated! Something went wrong...");
 
             textureToFree->RemoveUsePoint();
+            m_textures.erase(textureToFree);
         }
 
         m_texturesToFree.clear();
@@ -259,6 +261,7 @@ void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
 
     texture->AddUsePoint();
     texture->SetRender(this);
+    m_textures.insert(texture);
 }
 
 bool Framework::Graphics::Render::FreeSkyboxMemory(Skybox* skybox) {
@@ -320,4 +323,16 @@ ret:
         Helper::Types::Thread::Sleep(50);
         goto ret;
     }
+}
+
+bool Framework::Graphics::Render::IsClean() {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    return m_newMeshes.empty() &&
+           m_removeMeshes.empty() &&
+           m_texturesToFree.empty() &&
+           m_textures.empty() &&
+           m_transparentGeometry.Empty() &&
+           m_geometry.Empty() &&
+           m_skyboxesToFreeVidMem.empty();
 }

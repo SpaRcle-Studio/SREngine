@@ -152,10 +152,10 @@ Material::Material()
 { }
 
 Material *Material::Load(const std::string &name) {
-    if (auto resource = ResourceManager::Instance().Find<Material>(name))
+    if (auto resource = ResourceManager::Instance().Find<Material>(name + ".mat"))
         return dynamic_cast<Material*>(resource);
 
-    if (auto doc = Xml::Document::Load(ResourceManager::Instance().GetMaterialsPath().Concat(name)); doc.Valid()) {
+    if (auto doc = Xml::Document::Load(ResourceManager::Instance().GetMaterialsPath().Concat(name).ConcatExt("mat")); doc.Valid()) {
         auto matXml = doc.Root().GetNode("Material");
 
         auto material = new Material();
@@ -173,7 +173,7 @@ Material *Material::Load(const std::string &name) {
         return material;
     }
 
-    Helper::Debug::Error("Material::Load() : file not found! Path: " + name);
+    Helper::Debug::Error("Material::Load() : file not found! Path: " + name + ".mat");
     return nullptr;
 }
 
@@ -183,7 +183,7 @@ Material *Material::GetDefault() {
 
 bool Material::InitDefault(Render* render) {
     if (!m_default) {
-        if ((m_default = Material::Load("Engine/default.mat")))
+        if ((m_default = Material::Load("Engine/default")))
             m_default->AddUsePoint();
 
         return m_default->Register(render);

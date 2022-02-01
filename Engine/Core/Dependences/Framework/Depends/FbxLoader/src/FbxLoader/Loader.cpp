@@ -5,6 +5,8 @@
 #include <FbxLoader/Loader.h>
 #include <FbxLoader/Utils.h>
 #include <FbxLoader/Parser.h>
+#include <FbxLoader/MD5Hash.h>
+#include <unordered_set>
 
 FbxLoader::Fbx FbxLoader::Loader::Load(
     const std::string& converter,
@@ -16,17 +18,31 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
     if (!Debug::IsInit())
         return {};
 
-    std::string name  = Tools::BackReadTo(path, 'c');
-    std::string dir   = Tools::ReadToLast(path, '/', 1);
-    std::string ascii = Tools::FixPath(cache + "fbx_ascii/" + dir);
-    Tools::CreatePath(ascii);
+    const std::string name      = Tools::BackReadTo(path, '/');
+    const std::string dir       = Tools::ReadToLast(path, '/', 1);
+    const std::string ascii     = Tools::FixPath(cache + "/fbx_ascii/" + dir);
+    const std::string model     = models + "/" + path;
+    const std::string hashPath  = ascii + name + ".hash";
+    const std::string cacheFile = ascii + name + ".cache";
 
-    system((converter + " -c " + models + path + " -o " + ascii + name + " -ascii").c_str());
+    const std::string hash = Tools::GetHash(model);
+
+    if (Tools::FileExists(hashPath) && Tools::LoadHash(hashPath) == hash) {
+        Fbx fbx;
+        fbx.LoadFrom(cacheFile);
+        return fbx;
+    }
+    else {
+        Tools::CreatePath(ascii);
+        system((converter + " -c " + model + " -o " + ascii + name + " -ascii").c_str());
+        Tools::SaveHash(hashPath, hash);
+    }
 
     if (auto text = Tools::ReadAllText(ascii + name); text.empty()) {
-        FBX_ERROR("FbxLoader::Load() : failed to read file!");
+        FBX_ERROR("FbxLoader::Load() : failed to read file! \n\tPath: " + ascii + name);
         return {};
-    } else if (auto nodes = Parser::Parse(text); nodes) {
+    }
+    else if (auto nodes = Parser::Parse(text); nodes) {
         Fbx fbx = {};
 
         if (fbx.objects = GetObjects(nodes); !fbx.objects.Ready()) {
@@ -40,7 +56,17 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
                 if (!OptimizeGeometry(&geometry))
                     FBX_ERROR("FbxLoader::Load() : failed to optimize \"" + geometry.name + "\" geometry!");
 
+        if (!fbx.objects.geometries.empty()) {
+            const auto source = fbx.objects.geometries; /// copy
+            fbx.objects.geometries.clear();
+            for (const auto& src : source)
+                for (const auto& geometry : SplitByMaterials(src))
+                    fbx.objects.geometries.emplace_back(geometry);
+        }
+
         delete nodes;
+
+        fbx.SaveTo(cacheFile);
 
         return fbx;
     } else {
@@ -76,11 +102,15 @@ FbxLoader::Objects FbxLoader::Loader::GetObjects(FbxLoader::Parser::Node *node) 
                         FBX_ERROR("FbxLoader::GetObjects() : failed parse indices!");
                         return {};
                     }
+
                     if (geometry.vertices = GetVertices(object, geometry.indices); geometry.vertices.empty()) {
                         FBX_ERROR("FbxLoader::GetObjects() : failed parse vertices!");
                         return {};
                     }
-                } else {
+
+                    geometry.materials = GetMaterials(object);
+                }
+                else {
                     FBX_ERROR("FbxLoader::GetObjects() : failed to get indices!");
                     return {};
                 }
@@ -156,3 +186,82 @@ bool FbxLoader::Loader::OptimizeGeometry(FbxLoader::Geometry *geometry) {
 
     return true;
 }
+
+std::vector<FbxLoader::Material> FbxLoader::Loader::GetMaterials(FbxLoader::Parser::Node *object) {
+    std::vector<Material> materials;
+
+    auto materials_node = [object]() -> Parser::Node* {
+        if (auto v = object->Find("LayerElementMaterial"); v) return v->Find("Materials")->Get2SubNode(); return nullptr;
+    }();
+
+    if (!materials_node)
+        return {};
+
+    std::istringstream ss(materials_node->value);
+    std::string value;
+    Material material;
+
+    uint32_t last = 0;
+    uint32_t counter = 0;
+    while (getline(ss, value, ',')) {
+        auto id = static_cast<uint32_t>(std::stoi(value));
+
+        if (id != last) {
+            last = id;
+            material.second = counter - 1;
+
+            materials.emplace_back(material);
+
+            material.first = counter;
+        }
+
+        ++counter;
+    }
+
+    material.second = counter - 1;
+    materials.emplace_back(material);
+
+    return materials;
+}
+
+std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(const Geometry& geometry) {
+    if (geometry.materials.size() <= 1)
+        return { geometry };
+
+    std::vector<Geometry> geometries;
+
+    uint32_t materialIndex= 0;
+    for (const auto& material : geometry.materials) {
+        Geometry newGeometry;
+
+        newGeometry.materials = { material };
+        newGeometry.name = geometry.name + " (" + std::to_string(materialIndex++) + ")";
+        newGeometry.type = geometry.type;
+        newGeometry.id   = geometry.id;
+
+        std::vector<Vertex> vertices;
+        std::unordered_map<Vertex, uint32_t> unique;
+        uint32_t index = 0;
+
+        for (auto vertexIndex : std::vector<uint32_t>(
+                geometry.indices.begin() + material.first * 3,
+                geometry.indices.begin() + material.second * 3))
+        {
+            auto&& vertex = geometry.vertices[vertexIndex];
+
+            if (unique.count(vertex) == 0) {
+                unique[vertex] = static_cast<uint32_t>(vertices.size());
+                vertices.push_back(vertex);
+            }
+
+            newGeometry.indices.push_back(unique[vertex]);
+        }
+
+        newGeometry.vertices = vertices;
+
+        geometries.emplace_back(newGeometry);
+    }
+
+    return geometries;
+}
+

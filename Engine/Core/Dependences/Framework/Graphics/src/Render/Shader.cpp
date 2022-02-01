@@ -63,7 +63,7 @@ bool Framework::Graphics::Shader::Compile() {
 
     if (this->m_env->GetPipeLine() == PipeLine::OpenGL) {
         if (!m_env->CompileShader(m_name, m_fbo, &m_shaderTempData)) {
-            Debug::Error("Shader::Compile() : failed compile opengl \"" + m_name + "\" shader!");
+            Debug::Error("Shader::Compile() : failed to compile opengl \"" + m_name + "\" shader!");
             return false;
         }
     } else {
@@ -72,7 +72,7 @@ bool Framework::Graphics::Shader::Compile() {
             sizes.push_back(info.second);
 
         if (!m_env->CompileShader(m_name, m_fbo, &m_shaderTempData, sizes)) {
-            Debug::Error("Shader::Compile() : failed compile \"" + m_name + "\" shader!");
+            Debug::Error("Shader::Compile() : failed to compile \"" + m_name + "\" shader!");
             return false;
         }
     }

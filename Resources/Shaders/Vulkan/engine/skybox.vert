@@ -10,5 +10,6 @@ layout (binding = 0) uniform SkyboxUBO {
 
 void main() {
     UV = inPos;
-    gl_Position = (sharedOBO.PVMat * vec4(inPos, 1.0)).xyww;
+    vec4 vPos = vec4(-inPos.x, inPos.y, inPos.z, 1.0);
+    gl_Position = (sharedOBO.PVMat * vPos).xyww;
 }

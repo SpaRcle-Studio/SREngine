@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(FbxLoader STATIC
         src/FbxLoader/Loader.cpp
         src/FbxLoader/Parser.cpp
+        src/FbxLoader/Fbx.cpp
         )
 
 target_include_directories(FbxLoader PUBLIC inc)

@@ -81,6 +81,10 @@ namespace Framework::Helper {
 
         static bool IsRunningUnderDebugger();
 
+        static void Terminate() {
+            System("Function \"Terminate\" has been called... >_<");
+            terminate();
+        }
         static void MakeCrash() {
             System("Function \"MakeCrash\" has been called... >_<");
             for (long long int i = 0; ++i; (&i)[i] = i);

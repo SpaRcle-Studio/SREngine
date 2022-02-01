@@ -76,9 +76,11 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
         return false;
     }
 
+    const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("/Models/Engine/skybox.obj");
+
     if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-        const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("/Models/Engine/skybox.obj");
         auto skyboxObj = Graphics::ObjLoader::LoadSourceWithIndices<Vertices::SkyboxVertex>(path.ToString());
+
         if (skyboxObj.size() != 1) {
             Helper::Debug::Error("Skybox::Calculate() : failed to load skybox model!");
             this->m_hasErrors = true;
@@ -98,8 +100,20 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
             this->m_hasErrors = true;
             return false;
         }
-    } else
-        m_VAO = m_env->CalculateSkybox();
+    }
+    else {
+        auto obj = Graphics::ObjLoader::LoadSource<Vertices::SkyboxVertex>(path.ToString());
+        if (obj.empty()) {
+            Helper::Debug::Error("Skybox::Calculate() : failed to load obj mesh! Path: " + path.ToString());
+            return false;
+        }
+
+        if (m_VBO = m_env->CalculateVBO(obj[0].data(), Vertices::Type::SkyboxVertex, obj[0].size()); m_VBO == SR_ID_INVALID) {
+            Helper::Debug::Error("Skybox::Calculate() : failed to calculate VBO!");
+            this->m_hasErrors = true;
+            return false;
+        }
+    }
 
     m_isCalculated = true;
     return true;

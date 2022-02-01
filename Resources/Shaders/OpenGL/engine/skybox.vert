@@ -8,5 +8,6 @@ uniform mat4 PVmat;
 
 void main() {
     UV = aPos;
-    gl_Position = (PVmat * vec4(aPos, 1.0)).xyww;
+    vec4 vPos = vec4(-aPos.x, aPos.y, aPos.z, 1.0);
+    gl_Position = (PVmat * vPos).xyww;
 }

@@ -64,14 +64,15 @@ std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& lo
 
     uint32_t counter = 0;
 ret:
-    const std::string resId = localPath + " - "+ std::to_string(counter) + " " + EnumMeshTypeToString(type);
-    if (IResource* find = ResourceManager::Instance().Find<Mesh>(resId)) {
+    const auto id = localPath + " - "+ std::to_string(counter) + " " + EnumMeshTypeToString(type);
+    if (IResource* find = ResourceManager::Instance().Find<Mesh>(id)) {
         if (IResource* copy = ((Mesh*)(find))->Copy(nullptr)) {
             meshes.push_back((Mesh*)copy);
             counter++;
             goto ret;
-        } else {
-            Debug::Error("Mesh::Load() : [FATAL] An unforeseen situation has arisen, apparently, it is necessary to work out this piece of code...");
+        }
+        else {
+            SRAssert2(false, "Mesh::Load() : [FATAL] An unforeseen situation has arisen, apparently, it is necessary to work out this piece of code...");
         }
     }
     else if (counter > 0)
@@ -93,11 +94,16 @@ ret:
         const auto resFolder = Helper::ResourceManager::Instance().GetResPath();
 
         auto fbx = FbxLoader::Loader::Load(
-                resFolder.Concat("/Utilities/FbxFormatConverter.exe"),
-                resFolder.Concat("/Cache/"),
-                resFolder.Concat("/Models/"),
+                resFolder.Concat("Utilities/FbxFormatConverter.exe"),
+                resFolder.Concat("Cache"),
+                resFolder.Concat("Models"),
                 localPath,
                 withIndices);
+
+        if (fbx.GetShapes().empty()) {
+            Helper::Debug::Error("Mesh::Load() : file not found! \n\tPath: " + localPath);
+            return {};
+        }
 
         for (const auto& shape : fbx.GetShapes()) {
             auto* mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
@@ -137,7 +143,7 @@ void Mesh::OnDestroyGameObject() {
 }
 
 bool Mesh::IsCanCalculate() const {
-    if (!m_render){
+    if (!m_render) {
         Debug::Error("Mesh::IsCanCalculate() : mesh is not register in render!");
         return false;
     }

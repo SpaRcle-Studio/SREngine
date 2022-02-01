@@ -307,16 +307,16 @@ bool Framework::Graphics::OpenGL::CompileShader(
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes) const
 {
-    auto shadersPath = ResourceManager::Instance().GetResPath().Concat("/Shaders/");
+    auto shadersPath = ResourceManager::Instance().GetResPath().Concat("Shaders");
 
-    auto vertexPath = shadersPath.Concat("Common/").Concat(name).Concat(".vert");
-    auto fragmentPath = shadersPath.Concat("Common/").Concat(name).Concat(".frag");
+    auto vertexPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".vert");
+    auto fragmentPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".frag");
 
     if (!Helper::FileSystem::FileExists(vertexPath))
-        vertexPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(name).Concat(".vert");
+        vertexPath = shadersPath.Concat(GetPipeLineName()).Concat(name).ConcatExt(".vert");
 
     if (!Helper::FileSystem::FileExists(fragmentPath))
-        fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat("/").Concat(name).Concat(".frag");
+        fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat(name).ConcatExt(".frag");
 
     auto* glShader = new GLShaderData();
 
@@ -335,6 +335,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
         while (getline(VertexShaderStream, line))
             VertexShaderCode += "\n" + line;
         VertexShaderStream.close();
+    } else {
+        Helper::Debug::Error("OpenGL::CompileShader() : failed to read vertex shader! \n\tPath: " + vertexPath.ToString());
+        return false;
     }
 
     //! читаем фрагментный шейдер из файла
@@ -345,6 +348,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
         while (getline(FragmentShaderStream, line))
             FragmentShaderCode += "\n" + line;
         FragmentShaderStream.close();
+    } else {
+        Helper::Debug::Error("OpenGL::CompileShader() : failed to read fragment shader! \n\tPath: " + fragmentPath.ToString());
+        return false;
     }
 
     std::string error;
@@ -448,6 +454,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
             }
             else {
                 Debug::Error("OpenGL::LinkShader : Failed linking program! Reason : " + error);
+                SRAssert(false);
                 return false;
             }
         }
@@ -950,8 +957,8 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
             OpenGLSetVertexAttribPointer(3, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, tang))
             break;
         case Vertices::Type::SkyboxVertex:
-            Helper::Debug::Error("OpenGL::CalculateVBO() : opengl isn't supported skybox vertices!");
-            return SR_ID_INVALID;
+            OpenGLSetVertexAttribPointer(0, 3, Vertices::SkyboxVertex, offsetof(Vertices::SkyboxVertex, pos))
+            break;
         default:
             Helper::Debug::Error("OpenGL::CalculateVBO() : unknown vertex type!");
             return SR_ID_INVALID;

@@ -6,7 +6,7 @@
 
 #define ConfigureShader(shader) \
             shader->SetMat4("modelMat", m_modelMat); \
-            shader->SetVec3("color", m_material->m_color); \
+            shader->SetVec3("color", m_material->m_color.ToGLM()); \
             shader->SetIVec2("config", { (int)m_material->m_bloom, (int)this->m_isSelected }); \
 
 bool Framework::Graphics::Types::Mesh3D::Calculate()  {
@@ -111,7 +111,7 @@ void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
     if (IsDestroy() || (!m_isCalculated && !Calculate()))
         return;
 
-    //TODO: ConfigureShader(m_shader)
+    ConfigureShader(m_shader)
     this->m_material->UseOpenGL();
 
     if (!m_useIndices)

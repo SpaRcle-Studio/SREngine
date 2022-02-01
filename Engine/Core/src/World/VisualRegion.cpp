@@ -30,7 +30,7 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
         UpdateFacesPos();
 
         m_mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
-        m_mesh->SetMaterial(Material::Load("Engine/Colors/red.mat"));
+        m_mesh->SetMaterial(Material::Load("Engine/Colors/red"));
         render->RegisterMesh(m_mesh);
 
         m_mesh->OnScaled(Math::FVector3(size.x / 2, 1, size.y / 2));

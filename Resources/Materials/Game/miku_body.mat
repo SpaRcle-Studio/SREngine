@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <Material>
-    <Diffuse Path="Game/Miku_Bodytex_DM.png"/>
+    <Diffuse Path="Game/Miku/Miku_Bodytex_DM.png"/>
 </Material>

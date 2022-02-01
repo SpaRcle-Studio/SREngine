@@ -34,33 +34,6 @@ EXTERN void Awake() {
 }
 
 /*
-void LoadYuri() {
-    Render* render = Engine::Instance().GetRender();
-
-    auto fbx_meshes = Mesh::Load("Yuri.fbx", MeshType::Static);
-    auto yuri = g_scene->Instance("Yuri");
-
-    auto texture = Texture::Load("Engine/default.png", TextureFormat::RGBA8_UNORM, true, TextureType::Diffuse, TextureFilter::NEAREST, TextureCompression::None, 1);
-
-    std::vector<Texture*> textures = {
-            texture,
-    };
-
-    for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
-        Mesh* mesh = fbx_meshes[i];
-        Texture* texture = textures[0];
-
-        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
-
-        render->RegisterMesh(mesh);
-        mesh->WaitCalculate();
-        mesh->GetMaterial()->SetDiffuse(texture);
-        auto object = g_scene->Instance(mesh->GetGeometryName());
-        object->AddComponent(DynamicCastMeshToComponent(mesh));
-
-        yuri->AddChild(object);
-    }
-}
 
 void LoadTsumi() {
     Render* render = Engine::Instance().GetRender();
@@ -134,17 +107,45 @@ void LoadCubes() {
     }
 }
 
+void LoadNemesis() {
+    Render* render = Engine::Instance().GetRender();
+
+    std::vector<Material*> materials = {
+        Material::Load("Game/body_nemesis"),
+        Material::Load("Game/face_nemesis"),
+        Material::Load("Game/hair_nemesis")
+    };
+
+    auto fbx_meshes = Mesh::Load("Game/Nemesis.fbx", MeshType::Static);
+    auto character = g_scene->Instance("Nemesis");
+
+    for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+        Mesh* mesh = fbx_meshes[i];
+
+        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+
+        render->RegisterMesh(mesh);
+        mesh->WaitCalculate();
+        mesh->SetMaterial(materials[i]);
+        auto object = g_scene->Instance(mesh->GetGeometryName());
+        object->AddComponent(DynamicCastMeshToComponent(mesh));
+
+        character->AddChild(object);
+    }
+    character->GetTransform()->Rotate(FVector3(-90, 0, 0));
+}
+
 void LoadMiku() {
     Render* render = Engine::Instance().GetRender();
 
-    Material* body = Material::Load("Game/miku_body.mat");
-    Material* face = Material::Load("Game/miku_face.mat");
+    Material* body = Material::Load("Game/miku_body");
+    Material* face = Material::Load("Game/miku_face");
 
     std::vector<Material*> materials = {
             body, body, face, face, body, body
     };
 
-    auto fbx_meshes = Mesh::Load("Miku.fbx", MeshType::Static);
+    auto fbx_meshes = Mesh::Load("Game/Miku.fbx", MeshType::Static);
     g_miku = g_scene->Instance("Miku");
 
     for (uint32_t i = 0; i < 6; i++) {
@@ -167,13 +168,16 @@ void LoadMiku() {
 EXTERN void Start() {
     auto&& engine = Engine::Instance();
     g_scene = Scene::New("New scene");
+    g_window = engine.GetWindow();
+
     engine.SetScene(g_scene);
 
     //Vector2 size = { 1366, 768 }; // 848, 480
     //Vector2 size = { 1366, 768 }; // 848, 480
-    Vector2 size = { 1600, 900 }; // 848, 480
+    //Vector2 size = { 1600, 900 }; // 848, 480
 
-    g_window = engine.GetWindow();
+
+    Vector2 size = g_window->GetWindowSize();
     g_window->SetGUIEnabled(false);
     //g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
@@ -191,8 +195,8 @@ EXTERN void Start() {
 
     g_scene->SetObserver(g_camera);
 
-    LoadMiku();
-    //LoadYuri();
+    //LoadMiku();
+    LoadNemesis();
     LoadCubes();
 }
 

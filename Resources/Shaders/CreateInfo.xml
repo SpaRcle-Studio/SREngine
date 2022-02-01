@@ -59,10 +59,10 @@
         </Uniforms>
         <Info>
             <PolygonMode value="Fill"/>
-            <CullMode value="Back"/>
+            <CullMode value="None"/>
             <DepthCompare value="LessOrEqual"/>
             <PrimitiveTopology value="TriangleList"/>
-            <BlendEnabled value="true"/>
+            <BlendEnabled value="false"/>
             <DepthWrite value="false"/>
             <DepthTest value="false"/>
         </Info>

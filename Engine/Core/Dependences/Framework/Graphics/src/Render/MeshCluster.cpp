@@ -90,3 +90,7 @@ bool Framework::Graphics::MeshCluster::Remove(Framework::Graphics::Types::Mesh *
     }
 }
 
+bool Framework::Graphics::MeshCluster::Empty() {
+    return m_subClusters.empty();
+}
+

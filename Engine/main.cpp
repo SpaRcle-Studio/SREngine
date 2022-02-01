@@ -156,11 +156,11 @@ int main(int argc, char **argv) {
 
           }
           else
-              Debug::Error("Failed running game engine!");
+              Debug::Error("Failed to running game engine!");
       } else
-          Debug::Error("Failed initializing game engine!");
+          Debug::Error("Failed to initializing game engine!");
     } else
-        Debug::Error("Failed creating game engine!");
+        Debug::Error("Failed to creating game engine!");
 
     if (engine.IsRun()) {
         Debug::System("All systems successfully run!");

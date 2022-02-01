@@ -339,6 +339,13 @@ namespace Framework::Graphics{
             return false;
         }
 
+        /** Так как геометрия грузится отзеркаленная по оси X, то она выворачивается наизнанку,
+         * соответственно, нужно изменить отсечения полигонов на обратный */
+        if (shaderCreateInfo.cullMode == CullMode::Back)
+            shaderCreateInfo.cullMode = CullMode::Front;
+        else if (shaderCreateInfo.cullMode == CullMode::Front)
+            shaderCreateInfo.cullMode = CullMode::Back;
+
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
                 VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
                 VulkanTools::AbstractCullModeToVk(shaderCreateInfo.cullMode),

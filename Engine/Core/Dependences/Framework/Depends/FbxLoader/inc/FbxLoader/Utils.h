@@ -19,8 +19,119 @@
 
 #include <sys/stat.h>
 #include <sstream>
+#include <FbxLoader/MD5Hash.h>
 
 namespace FbxLoader::Tools {
+    template<typename T> static void SaveValue(std::ofstream& file, const T& value) {
+        file.write((const char*)&value, sizeof(T));
+    }
+
+    template<typename T> static T LoadValue(std::ifstream& file) {
+        T value;
+        file.read((char*)&value, sizeof(T));
+        return value;
+    }
+
+    static void SaveString(std::ofstream& file, const std::string& str) {
+        const int32_t size = str.size();
+        file.write((const char*)&size, sizeof(int32_t));
+        file.write((const char*)&str[0], size * sizeof(char));
+    }
+
+    template<typename T, typename U> void SavePair(std::ofstream& file, const std::pair<T, U>& pair) {
+        SaveValue(file, pair.first);
+        SaveValue(file, pair.second);
+    }
+
+    template<typename T, typename U> std::pair<T, U> LoadPair(std::ifstream& file) {
+        std::pair<T, U> pair;
+        pair.first = LoadValue<T>(file);
+        pair.second = LoadValue<U>(file);
+        return pair;
+    }
+
+    static std::string LoadString(std::ifstream& file) {
+        std::string str;
+        int size;
+        file.read((char*)&size, sizeof(int32_t));
+        str.resize(size);
+        file.read((char*)&str[0], size * sizeof(char));
+        return str;
+    }
+
+    template<typename T> static void SaveComplexVector(std::ofstream& file, const std::vector<T>& vec) {
+        SaveValue(file, static_cast<uint32_t>(vec.size()));
+        for (const auto& value : vec)
+            value.Save(file);
+    }
+
+    template<typename T> static std::vector<T> LoadComplexVector(std::ifstream& file) {
+        const auto size = LoadValue<uint32_t>(file);
+        std::vector<T> result;
+        result.resize(size);
+        for (uint32_t i = 0; i < size; ++i)
+            result[i].Load(file);
+        return result;
+    }
+
+    template<typename T, typename U> static std::vector<std::pair<T, U>> LoadVectorOfPairs(std::ifstream& file) {
+        const auto size = LoadValue<uint32_t>(file);
+        std::vector<std::pair<T, U>> result;
+        result.resize(size);
+        for (uint32_t i = 0; i < size; ++i)
+            result[i] = LoadPair<T, U>(file);
+        return result;
+    }
+
+    template<typename T> static void SaveVector(std::ofstream& file, const std::vector<T>& vec) {
+        SaveValue(file, static_cast<uint32_t>(vec.size()));
+        file.write((const char*)&vec[0], vec.size() * sizeof(T));
+    }
+
+    template<typename T, typename U> static void SaveVectorOfPairs(std::ofstream& file, const std::vector<std::pair<T, U>>& vec) {
+        SaveValue(file, static_cast<uint32_t>(vec.size()));
+        for (const auto& value : vec)
+            SavePair<T, U>(file, value);
+    }
+
+    template<typename T> static std::vector<T> LoadVector(std::ifstream& file) {
+        std::vector<T> result;
+
+        auto size = LoadValue<uint32_t>(file);
+        result.resize(size);
+        file.read((char*)&result[0], size * sizeof(T));
+
+        return result;
+    }
+
+    static std::string GetHash(const std::string& path) {
+        MD5 md5;
+        return md5.digestFile(const_cast<char*>(path.c_str()));
+    }
+
+    static std::string LoadHash(const std::string& path) {
+        std::ifstream file(path);
+        if (!file.is_open())
+            return std::string();
+
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+
+        file.close();
+        return buffer.str();
+    }
+
+    static bool SaveHash(const std::string& path, const std::string& hash) {
+        std::ofstream file(path);
+        if (!file.is_open())
+            return false;
+
+        file << hash;
+
+        file.close();
+        return true;
+    }
+
     static std::string Replace(std::string str, const std::string& from, const std::string& to) {
         ret:
         size_t start_pos = str.find(from);

@@ -25,6 +25,8 @@ namespace Framework::Graphics::Types {
 }
 
 namespace Framework::Graphics {
+    // TODO: to refactoring
+
     // first - current, second - new
     struct RenderSkybox {
         Types::Skybox* m_current;
@@ -59,6 +61,7 @@ namespace Framework::Graphics {
         std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Mesh*>();
         std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
         std::vector<Skybox*>          m_skyboxesToFreeVidMem     = std::vector<Skybox*>();
+        std::unordered_set<Texture*>  m_textures                 = std::unordered_set<Texture*>();
 
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };
@@ -90,6 +93,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
     public:
         void Synchronize();
+        bool IsClean();
         void RemoveMesh(Types::Mesh* mesh);
         void RegisterMesh(Types::Mesh* mesh);
         void RegisterMeshes(const Helper::Types::List<Types::Mesh*>& meshes) {

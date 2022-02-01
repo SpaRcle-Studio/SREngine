@@ -102,6 +102,23 @@ namespace Framework::Graphics {
             return source;
         }
 
+        template<typename T> std::vector<std::vector<T>> LoadSource(const std::string& path) {
+            auto shapes = LoadSourceWithIndices<T>(path);
+
+            std::vector<std::vector<T>> nonIndexedShapes;
+
+            for (const auto [name, indices, vertices] : shapes) {
+                auto rawVertices = std::vector<T>();
+
+                for (const auto& index : indices)
+                    rawVertices.emplace_back(vertices[index]);
+
+                nonIndexedShapes.emplace_back(rawVertices);
+            }
+
+            return nonIndexedShapes;
+        }
+
         template<typename T> std::vector<Types::Mesh*> Load(const std::string& path, bool withIndices) {
             auto meshes = std::vector<Types::Mesh*>();
 

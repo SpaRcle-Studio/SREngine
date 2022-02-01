@@ -31,6 +31,9 @@ namespace FbxLoader {
             return State::Unknown;
     }
 
+    typedef std::vector<Vertex> VertexGroup;
+    typedef std::vector<VertexGroup> VertexGroups;
+
     class Loader {
     public:
         Loader(const Loader&) = delete;
@@ -38,8 +41,10 @@ namespace FbxLoader {
         ~Loader() = delete;
     private:
         static bool OptimizeGeometry(Geometry* geometry);
+        static std::vector<Geometry> SplitByMaterials(const Geometry& geometries);
         static std::vector<Vertex> GetVertices(Parser::Node* node, const std::vector<uint32_t>& indices);
         static Objects GetObjects(Parser::Node* node);
+        static std::vector<Material> GetMaterials(Parser::Node* node);
     public:
         static Fbx Load(
                 const std::string& converter,

@@ -105,10 +105,10 @@ namespace Framework::Helper {
         void Synchronize(bool force);
         [[nodiscard]] bool IsLastResource(IResource* resource);
         [[nodiscard]] Path GetResPath() const { return m_resourcesFolder; }
-        [[nodiscard]] Path GetCachePath() const { return m_resourcesFolder.Concat("/Cache"); }
-        [[nodiscard]] Path GetConfigPath() const { return m_resourcesFolder.Concat("/Configs"); }
-        [[nodiscard]] Path GetMaterialsPath() const { return m_resourcesFolder.Concat("/Materials"); }
-        [[nodiscard]] Path GetTexturesPath() const { return m_resourcesFolder.Concat("/Textures"); }
+        [[nodiscard]] Path GetCachePath() const { return m_resourcesFolder.Concat("Cache"); }
+        [[nodiscard]] Path GetConfigPath() const { return m_resourcesFolder.Concat("Configs"); }
+        [[nodiscard]] Path GetMaterialsPath() const { return m_resourcesFolder.Concat("Materials"); }
+        [[nodiscard]] Path GetTexturesPath() const { return m_resourcesFolder.Concat("Textures"); }
 
         IResource* Find(const std::string& Name, const std::string& ID);
 

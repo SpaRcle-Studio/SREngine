@@ -36,6 +36,7 @@ namespace Framework::Graphics {
 
         bool Add(Types::Mesh *mesh);
         bool Remove(Types::Mesh *mesh);
+        bool Empty();
     };
 }
 

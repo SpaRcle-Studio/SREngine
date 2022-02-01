@@ -576,6 +576,11 @@ void Framework::Graphics::Window::CentralizeWindow() {
 
     Helper::Debug::Log("Window::CentralizeWindow() : wait centralize window...");
 
+    if (!m_env->GetBasicWindow()) {
+        Helper::Debug::Warn("Window::CentralizeWindow() : basic window is nullptr!");
+        return;
+    }
+
     auto scr_size = m_env->GetScreenSize();
 
     auto w = m_isNeedResize ? m_newWindowSize.x : m_env->GetBasicWindow()->GetWidth();
@@ -694,23 +699,27 @@ bool Framework::Graphics::Window::IsAlive() const {
 bool Framework::Graphics::Window::SyncFreeResources() {
     Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources...");
 
-    /** Делаем 10 попыток синхронизации, чтобы все вложенные графические ресурсы успели уничтожиться
-     * и освободить свою память. Сделано для того, чтобы не осталась висеть графическая память
-     * после уничтожения контекстного потока */
     std::atomic<bool> syncComplete(false);
-    Helper::Types::SignalSemaphore semaphore;
 
-    auto thread = Helper::Types::Thread([&syncComplete, &semaphore, this]() {
-        const uint32_t maxSync = 10;
-        for (uint8_t i = 1; i <= maxSync; ++i) {
-            Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(i) + " / " + std::to_string(maxSync) + ")");
-
-            semaphore.Wait();
+    /** Ждем, пока все графические ресурсы не освободятся */
+    auto thread = Helper::Types::Thread([&syncComplete, this]() {
+        uint32_t syncStep = 0;
+        const uint32_t maxErrStep = 250;
+        while(!m_render->IsClean()) {
+            Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 
             if (auto material = Material::GetDefault(); material && material->GetCountUses() == 1)
                 Material::FreeDefault();
 
             ResourceManager::Instance().Synchronize(true);
+            m_render->Synchronize();
+
+            if (maxErrStep == syncStep) {
+                Helper::Debug::Error("Window::SyncFreeResources() : [FATAL] resources can not be released!");
+                Helper::ResourceManager::Instance().PrintMemoryDump();
+                Helper::Debug::Terminate();
+                break;
+            }
         }
 
         if (Material::GetDefault())
@@ -724,7 +733,6 @@ bool Framework::Graphics::Window::SyncFreeResources() {
     while (!syncComplete) {
         PollEvents();
         m_render->PollEvents();
-        semaphore.Signal();
     }
 
     thread.TryJoin();

@@ -28,5 +28,6 @@ vec4 quat_axis_angle( vec3 axis, float angle ) { return vec4( axis * sin( angle 
 
 void main() {
     TexCoord = inUV;
-    gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vec4(inPos, 1.0);
+    vec4 vPos = vec4(-inPos.x, inPos.y, inPos.z, 1.0);
+    gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vPos;
 }
