@@ -354,7 +354,7 @@ namespace Framework::Graphics {
                                                  std::to_string(m_memory->m_countUBO) + "\n\tIndex: " + std::to_string(value.second.second));
                             return;
                         }
-                        auto vkUBODescriptor = &m_memory->m_UBOs[value.second.second]->m_descriptor;
+                        auto vkUBODescriptor = m_memory->m_UBOs[value.second.second]->GetDescriptorRef();
                         writeDescriptorSets.emplace_back(EvoVulkan::Tools::Initializers::WriteDescriptorSet(
                                 vkDescriptorSet,
                                 VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
@@ -495,11 +495,11 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const override {
-            vkCmdBindVertexBuffers(m_currentCmd, 0, 1, &m_memory->m_VBOs[VBO]->m_buffer, m_offsets);
+            vkCmdBindVertexBuffers(m_currentCmd, 0, 1, m_memory->m_VBOs[VBO]->GetCRef(), m_offsets);
         }
         SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const override {
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
-            vkCmdBindIndexBuffer(m_currentCmd, m_memory->m_IBOs[IBO]->m_buffer, 0, VK_INDEX_TYPE_UINT32);
+            vkCmdBindIndexBuffer(m_currentCmd, *m_memory->m_IBOs[IBO], 0, VK_INDEX_TYPE_UINT32);
         }
         SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t& ID) const override {
             if (ID >= m_memory->m_countTextures) {

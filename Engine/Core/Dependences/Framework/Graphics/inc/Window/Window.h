@@ -57,12 +57,12 @@ namespace Framework::Graphics {
 
         volatile bool         m_hasErrors             = false;
         volatile bool         m_isEnvInit             = false;
-        volatile bool         m_isWindowClose         = false;
 
-        volatile bool         m_isWindowFocus         = true;
+        std::atomic<bool>     m_isWindowClose         = false;
+        std::atomic<bool>     m_isWindowFocus         = true;
+        std::atomic<bool>     m_isNeedResize          = false;
+        std::atomic<bool>     m_isNeedMove            = false;
 
-        volatile bool         m_isNeedResize          = false;
-        volatile bool         m_isNeedMove            = false;
     private:
         std::thread           m_thread                = std::thread();
 

@@ -35,9 +35,9 @@ namespace Framework::Helper {
         }
 
         if (Debug::g_showUseMemory) {
-            std::cout << '<' << (float)ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
+            std::cout << '<' << static_cast<uint32_t>(ResourceManager::GetUsedMemoryLoad() / 1024) << " KB> ";
             if (g_file.is_open())
-                g_file << '<' << (float)ResourceManager::GetUsedMemoryLoad() / 1024.f << " KB> ";
+                g_file << '<' << static_cast<uint32_t>(ResourceManager::GetUsedMemoryLoad() / 1024) << " KB> ";
         }
 
         DWORD bg_color = g_theme == Theme::Light ? (WORD)(((int)ConsoleColor::LightGray << 4)) : (WORD)(((int)ConsoleColor::Black << 4));

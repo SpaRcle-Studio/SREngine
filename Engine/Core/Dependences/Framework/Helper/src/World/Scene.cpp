@@ -299,7 +299,7 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
 Framework::Helper::World::Scene::Scene(const std::string &name)
     : Types::SafePtr<Scene>(this)
     , m_name(name)
-    , m_observer(new Observer())
+    , m_observer(new Observer(GetThis()))
 {
     ReloadConfig();
 }
@@ -447,6 +447,11 @@ bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
     OnChanged();
 
     return true;
+}
+
+void Scene::ReloadChunks() {
+    for (auto&& [position, pRegion] : m_regions)
+        pRegion->Reload();
 }
 
 

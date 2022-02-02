@@ -7,6 +7,7 @@
 
 #include <Base/Compiler.h>
 
+#include <Xml.h>
 #include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
 #include <EvoScript/Compilation/AddressTableGen.h>
@@ -19,10 +20,7 @@ namespace Framework::Scripting {
         EvoCompiler(const EvoCompiler&) = delete;
     private:
         ~EvoCompiler() override = default;
-    private:
-        EvoScript::Compiler*        m_compiler      = nullptr;
-        EvoScript::AddressTableGen* m_generator     = nullptr;
-        EvoScript::CastingGen*      m_casting       = nullptr;
+
     public:
         [[nodiscard]] EvoScript::CastingGen*      GetCasting()           const { return m_casting;   }
         [[nodiscard]] EvoScript::AddressTableGen* GetGenerator()         const { return m_generator; }
@@ -30,25 +28,17 @@ namespace Framework::Scripting {
 
     public:
         bool Init() override;
+        bool Destroy() override;
+        void Free() override { delete this; }
 
-        bool Destroy() override {
-            if (m_compiler) {
-                m_compiler->Destroy();
-                m_compiler->Free();
-                m_compiler = nullptr;
-            }
+    private:
+        [[nodiscard]] std::string GetGenerator(const SR_XML_NS::Node& config) const;
 
-            if (m_generator) {
-                delete m_generator;
-                m_generator = nullptr;
-            }
+    private:
+        EvoScript::Compiler*        m_compiler      = nullptr;
+        EvoScript::AddressTableGen* m_generator     = nullptr;
+        EvoScript::CastingGen*      m_casting       = nullptr;
 
-            return true;
-        }
-
-        void Free() override {
-            delete this;
-        }
     };
 }
 

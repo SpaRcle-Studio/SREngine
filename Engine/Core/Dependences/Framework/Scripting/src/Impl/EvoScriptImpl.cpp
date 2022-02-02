@@ -4,6 +4,7 @@
 
 #include "Impl/EvoScriptImpl.h"
 #include <Impl/EvoCompiler.h>
+#include <Utils/Features.h>
 
 #include <ctime>
 #include <ratio>
@@ -83,7 +84,8 @@ bool Framework::Scripting::EvoScriptImpl::Compile() {
     this->m_script = EvoScript::Script::Allocate(
             m_name, compiler->GetEvoScriptCompiler(), compiler->GetGenerator()->GetAddresses(), true);
 
-    if (!m_script->Load(m_path)) {
+    const bool canCompile = Helper::Features::Instance().Enabled("EvoCompiler");
+    if (!m_script->Load(m_path, canCompile)) {
         Helper::Debug::Error("EvoScriptImpl::Compile() : failed to load script!");
         return false;
     }

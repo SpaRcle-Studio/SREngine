@@ -173,10 +173,13 @@ void Framework::Engine::Await() {
         EventManager::PoolEvents();
         m_compiler->PollEvents();
 
+        const bool windowFocused = m_window ? m_window->IsWindowFocus() : false;
+
         /// fixed update
         if (accumulator >= updateFrequency) {
             while (accumulator >= updateFrequency) {
-                Helper::Input::Check();
+                if (windowFocused)
+                    Helper::Input::Check();
 
                 if (Input::GetKey(KeyCode::Ctrl) && Input::GetKeyDown(KeyCode::Z)) {
                     m_cmdManager->Cancel();
@@ -275,7 +278,7 @@ bool Framework::Engine::LoadMainScript() {
 
     std::string scriptName;
     switch (m_scriptType) {
-        case MainScriptType::Engine:    scriptName = "Engine/Engine"; break;
+        case MainScriptType::Engine:    scriptName = "Engine/Kernel"; break;
         case MainScriptType::Benchmark: scriptName = "Engine/Benchmark"; break;
         case MainScriptType::Game:
         case MainScriptType::None:

@@ -47,7 +47,7 @@ namespace Framework::Graphics {
         std::function<void(BasicWindow*, int, int)> m_callback_resize;
         std::function<void(BasicWindow*, int, int)> m_callback_move;
         std::function<void(BasicWindow*, double, double)> m_callback_scroll;
-        std::function<void(BasicWindow*, int)> m_callback_focus;
+        std::function<void(BasicWindow*, bool)> m_callback_focus;
         std::function<void(BasicWindow*)> m_callback_close;
 
         WindowState m_state = WindowState::Default;
@@ -76,7 +76,7 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void SetCallbackScroll(std::function<void(BasicWindow*, double, double)> fun) {
             this->m_callback_scroll = std::move(fun);
         }
-        SR_FORCE_INLINE void SetCallbackFocus(std::function<void(BasicWindow*, int)> fun) {
+        SR_FORCE_INLINE void SetCallbackFocus(std::function<void(BasicWindow*, bool)> fun) {
             this->m_callback_focus = std::move(fun);
         }
         SR_FORCE_INLINE void SetCallbackClose(std::function<void(BasicWindow*)> fun) {

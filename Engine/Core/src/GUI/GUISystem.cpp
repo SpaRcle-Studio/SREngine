@@ -573,6 +573,10 @@ void GUISystem::DrawWorldEdit(Types::SafePtr<Helper::World::Scene> scene) {
         if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
             scene->SetWorldOffset(World::Offset(regionOffset, offset.m_chunk));
 
+        if (ImGui::Button("Reload chunks")) {
+            scene->ReloadChunks();
+        }
+
         if (auto&& chunk = scene->GetCurrentChunk()) {
             ImGui::Separator();
             auto size = static_cast<int32_t>(chunk->GetContainerSize());

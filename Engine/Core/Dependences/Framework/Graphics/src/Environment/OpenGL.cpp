@@ -141,7 +141,8 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
     glfwSwapInterval(swapInterval);
 
     glfwSetWindowFocusCallback(m_window, [](GLFWwindow* win, int focus) {
-        g_callback(WinEvents::Focus, win, &focus, nullptr);
+        bool bFocus = focus == 1;
+        g_callback(WinEvents::Focus, win, &bFocus, nullptr);
     });
 
     glfwSetWindowSizeCallback(m_window, [](GLFWwindow* win, int w, int h) {

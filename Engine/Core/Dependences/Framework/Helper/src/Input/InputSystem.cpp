@@ -7,8 +7,7 @@
 
 void Framework::Helper::Input::Check() {
     if (!Input::g_init) {
-        for (auto &g_key : g_keys)
-            g_key = State::UnPressed;
+        Reset();
         g_init = true;
     }
 
@@ -94,4 +93,16 @@ int Framework::Helper::Input::DebugKey() {
             if (g_arr[i] >> 7 != 0)
                 return i;
     return -1;
+}
+
+void Input::Reset() {
+    for (auto &g_key : g_keys)
+        g_key = State::UnPressed;
+    g_mouse_old = g_mouse = Helper::GetMousePos();
+    g_mouseScroll = g_mouseScrollCurrent = glm::vec2(0,0);
+}
+
+void Input::Reload() {
+    g_init = false;
+    Reset();
 }

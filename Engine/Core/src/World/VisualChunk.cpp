@@ -124,6 +124,12 @@ bool Framework::Core::World::VisualChunk::ApplyOffset() {
     return Chunk::ApplyOffset();
 }
 
+void Framework::Core::World::VisualChunk::Reload() {
+
+
+    Chunk::Reload();
+}
+
 
 
 

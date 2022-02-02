@@ -117,7 +117,7 @@ namespace Framework::Helper {
     #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
     #define SRAssert(expr) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
     #define SRAssert1(expr) SRAssert(expr)
-    #define SR_SAFE_PTR_ASSERT(expr, msg)
+    #define SR_SAFE_PTR_ASSERT(expr, msg) { }
 
     #define SRVerifyFalse2(expr, msg) {                                      \
             [[maybe_unused]] const volatile bool verify_expression = (expr); \

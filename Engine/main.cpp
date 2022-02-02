@@ -104,8 +104,12 @@ int main(int argc, char **argv) {
             dynamic_cast<Bone*>(bone)->SetRender(Engine::Instance().GetRender());
         });
 
-        Chunk::SetAllocator([](SRChunkAllocArgs)   -> Chunk*  { return new VisualChunk(SRChunkAllocVArgs); });
-        Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
+        if (Helper::Features::Instance().Enabled("DebugChunks", false))
+            Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
+
+        if (Helper::Features::Instance().Enabled("DebugRegions", false))
+            Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
+
         Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
     }
 
@@ -151,7 +155,7 @@ int main(int argc, char **argv) {
     auto&& engine = Engine::Instance();
 
     if(engine.Create(window, physics)) {
-      if (engine.Init(Engine::MainScriptType::Engine)){
+      if (engine.Init(Engine::MainScriptType::Engine)) {
           if (engine.Run()){
 
           }

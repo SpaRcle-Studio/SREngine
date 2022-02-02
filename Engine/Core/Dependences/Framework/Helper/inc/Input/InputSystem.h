@@ -5,8 +5,7 @@
 #ifndef GAMEENGINE_INPUTSYSTEM_H
 #define GAMEENGINE_INPUTSYSTEM_H
 
-//#include <Input/Input.h>
-
+#include <atomic>
 #include <glm/vec2.hpp>
 
 #ifdef WIN32
@@ -125,7 +124,7 @@ namespace Framework::Helper {
 
         inline static BYTE*     g_arr                        = nullptr;
     private:
-        inline static bool g_init = false;
+        inline static std::atomic<bool> g_init = false;
         inline static State g_keys[256];
     public:
         inline static void SetMouseScroll(double xoffset, double yoffset){
@@ -133,6 +132,7 @@ namespace Framework::Helper {
         }
 
         static void Check();
+        static void Reload();
 
         static Math::FVector2 GetMouseDrag();
 
@@ -143,6 +143,9 @@ namespace Framework::Helper {
         static bool GetKeyDown(KeyCode key);
         static bool GetKeyUp(KeyCode key);
         static bool GetKey(KeyCode key);
+    private:
+        static void Reset();
+
     };
 }
 

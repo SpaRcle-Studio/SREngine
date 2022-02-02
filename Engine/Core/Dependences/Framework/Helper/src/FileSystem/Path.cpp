@@ -136,7 +136,7 @@ namespace Framework::Helper {
     }
 
     Path Path::Concat(const Path &path) const {
-        if ((!m_path.empty() && m_path.back() != '/') || (!path.Empty() && path.m_path[0] != '/'))
+        if ((!m_path.empty() && m_path.back() != '/') && (!path.Empty() && path.m_path.front() != '/'))
             return m_path + "/" + path.m_path;
 
         return m_path + path.m_path;

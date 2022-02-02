@@ -78,11 +78,13 @@ namespace Framework::Helper::World {
 
         void OnChanged();
 
+        bool ReloadConfig();
+        void ReloadChunks();
+
     private:
         void CheckShift(const Math::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope();
-        bool ReloadConfig();
 
     private:
         SR_INLINE static Allocator   g_allocator           = Allocator();
@@ -101,7 +103,7 @@ namespace Framework::Helper::World {
         GameObjects                  m_rootObjects         = GameObjects();
 
         Regions                      m_regions             = Regions();
-        Math::IVector2               m_chunkSize           = Math::IVector2(0, 0);
+        Math::IVector2               m_chunkSize           = Math::IVector2();
         uint32_t                     m_regionWidth         = 0;
 
         Observer*                    m_observer            = nullptr;

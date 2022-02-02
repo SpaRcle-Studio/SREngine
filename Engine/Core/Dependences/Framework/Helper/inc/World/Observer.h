@@ -14,10 +14,13 @@ namespace Framework::Helper {
 }
 
 namespace Framework::Helper::World {
+    class Scene;
+
     struct Offset {
         Offset(const Math::IVector2& region, const Math::IVector3& chunk)
-                : m_region(region)
-                , m_chunk(chunk) { }
+            : m_region(region)
+            , m_chunk(chunk)
+        { }
 
         Offset() : Offset({ 0, 0 }, { 0, 0, 0 }) { }
 
@@ -45,7 +48,7 @@ namespace Framework::Helper::World {
 
     class Observer {
     public:
-        Observer();
+        Observer(const Types::SafePtr<Scene>& scene);
 
     public:
         void SetChunk(Math::IVector3 chunk);
@@ -54,6 +57,8 @@ namespace Framework::Helper::World {
         void SetScope(int32_t value) { m_scope = value; }
         void SetShiftDist(int32_t value) { m_shiftDistance = value; }
         Offset MathNeighbour(const Math::IVector3& offset);
+
+        [[nodiscard]] Types::SafePtr<Scene> GetScene() const { return m_scene; }
 
     public:
         Math::IVector2 m_chunkSize;
@@ -69,6 +74,7 @@ namespace Framework::Helper::World {
 
         Offset m_offset;
 
+        Types::SafePtr<Scene> m_scene;
         Types::SafePtr<Helper::GameObject> m_target;
     };
 

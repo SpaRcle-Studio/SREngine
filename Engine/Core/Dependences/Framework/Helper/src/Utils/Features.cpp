@@ -20,7 +20,16 @@ bool FeatureGroup::Enabled(const std::string &name) const {
     if (auto pIt = m_values.find(name); pIt != m_values.end())
         return pIt->second;
 
+    Helper::Debug::Warn("FeatureGroup::Enabled() : feature \"" + name + "\" not found!");
+
     return false;
+}
+
+bool FeatureGroup::Enabled(const std::string &name, bool def) const {
+    if (auto pIt = m_values.find(name); pIt != m_values.end())
+        return pIt->second;
+
+    return def;
 }
 
 bool Features::Enabled(const std::string &group, const std::string &name) const {
@@ -59,6 +68,10 @@ bool Features::Reload(const std::string &path) {
 
 bool Features::Enabled(const std::string &name) const {
     return GetGroup("Common").Enabled(name);
+}
+
+bool Features::Enabled(const std::string &name, bool def) const {
+    return GetGroup("Common").Enabled(name, def);
 }
 
 bool Features::Register(const std::string &group, const std::string &name, bool value) {

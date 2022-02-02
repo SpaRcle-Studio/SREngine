@@ -71,7 +71,8 @@ bool Framework::Graphics::Window::Create() {
                 break;
             case Environment::WinEvents::Focus:
                 this->m_isWindowFocus = *(bool*)(arg1);
-                std::cout << "Window focus state: " << *(int*)(arg1) << std::endl;
+                Helper::Debug::System(Helper::Format("Window focus state: %s", (*(bool*)(arg1)) ? "True" : "False"));
+                Helper::Input::Reload();
                 break;
         }
     });
@@ -403,21 +404,22 @@ bool Framework::Graphics::Window::InitEnvironment() {
         Debug::Error("Window::InitEnvironment() : failed to creating window!");
         return false;
     }
-    this->m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetResPath().Concat("/Textures/").Concat(m_icoPath).CStr());
 
-    Debug::Graph("Window::InitEnvironment() : set context current...");
+    this->m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetTexturesPath().Concat(m_icoPath).CStr());
+
+    Debug::Graph("Window::InitEnvironment() : set thread context as current...");
     if (!this->m_env->SetContextCurrent()) {
         Debug::Error("Window::InitEnvironment() : failed to set context!");
         return false;
     }
 
-    Debug::Graph("Window::InitEnvironment() : initializing environment...");
+    Debug::Graph("Window::InitEnvironment() : initializing the environment...");
     if (!this->m_env->Init(m_vsync)) {
         Debug::Error("Window::InitEnvironment() : failed to initializing environment!");
         return false;
     }
 
-    Debug::Graph("Window::InitEnvironment() : post-initializing environment...");
+    Debug::Graph("Window::InitEnvironment() : post-initializing the environment...");
     this->m_env->PostInit();
 
     {
@@ -427,7 +429,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     if (m_env->IsGUISupport()) {
-        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("/Fonts/CalibriL.ttf"))) {
+        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
             GUI::ICanvas::InitStyle();
             this->m_env->InitGUI();
         } else

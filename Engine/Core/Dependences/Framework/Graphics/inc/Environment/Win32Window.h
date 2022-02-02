@@ -149,6 +149,16 @@ namespace Framework::Graphics {
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }
+                case WM_SETFOCUS: {
+                    if (m_callback_focus)
+                        m_callback_focus(this, true);
+                    return DefWindowProc(hwnd, msg, wParam, lParam);
+                }
+                case WM_KILLFOCUS: {
+                    if (m_callback_focus)
+                        m_callback_focus(this, false);
+                    return DefWindowProc(hwnd, msg, wParam, lParam);
+                }
                 case WM_SIZE: {
                     switch (wParam) {
                         case SIZE_MINIMIZED: m_state = WindowState::Collapsed; break;

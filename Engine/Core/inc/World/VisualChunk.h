@@ -32,6 +32,7 @@ namespace Framework::Core::World {
         void UpdateLoadPos();
 
         bool ApplyOffset() override;
+        void Reload() override;
         void OnExit() override;
         void OnEnter() override;
         bool Unload() override;

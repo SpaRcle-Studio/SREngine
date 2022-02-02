@@ -122,7 +122,7 @@ namespace Framework::Graphics {
                 return g_environment;
         }
 
-        static inline void SetWinCallBack(std::function<void(WinEvents, void* win, void* arg1, void* arg2)> callback) { g_callback = std::move(callback); }
+        static void SetWinCallBack(const std::function<void(WinEvents, void* win, void* arg1, void* arg2)>& callback);
     public:
         virtual bool PreInitGUI(const std::string& fontPath);
         virtual void SetGUIEnabled(bool enabled) { }

@@ -52,3 +52,7 @@ bool Framework::Graphics::Environment::InitWindowFormat(const Framework::Graphic
     }
 }
 
+void Framework::Graphics::Environment::SetWinCallBack(const std::function<void(WinEvents, void * , void * , void * )>& callback) {
+    g_callback = std::move(callback);
+}
+

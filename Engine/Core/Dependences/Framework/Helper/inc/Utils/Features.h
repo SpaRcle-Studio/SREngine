@@ -18,6 +18,7 @@ namespace Framework::Helper {
         friend class Features;
     public:
         [[nodiscard]] bool Enabled(const std::string& name) const;
+        [[nodiscard]] bool Enabled(const std::string& name, bool def) const;
 
     private:
         bool Register(const std::string& name, bool value);
@@ -35,6 +36,7 @@ namespace Framework::Helper {
     public:
         bool Reload(const std::string& path = "");
         [[nodiscard]] bool Enabled(const std::string& name) const;
+        [[nodiscard]] bool Enabled(const std::string& name, bool def) const;
         [[nodiscard]] bool Enabled(const std::string& group, const std::string& name) const;
 
     private:

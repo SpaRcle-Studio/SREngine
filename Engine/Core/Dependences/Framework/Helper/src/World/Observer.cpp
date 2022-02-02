@@ -18,22 +18,9 @@ using namespace Framework::Helper::Math;
 FVector3 Framework::Helper::World::AddOffset(const FVector3 &chunk, const FVector3 &offset) {
     auto result = chunk + offset;
 
-    /*if (offset.x != 0) {
-        if (offset.x >= result.x && result.x > 0)
-            result.x += static_cast<Math::Unit>(result.x) / abs(result.x);
-
-        if (offset.x <= result.x && result.x < 0)
-            result.x += static_cast<Math::Unit>(result.x) / abs(result.x);
-
-        if (result.x == 0)
-            result.x += static_cast<Math::Unit>(offset.x) / abs(offset.x);
-    }*/
-
     SR_OFFSET(result.x, offset.x);
     SR_OFFSET(result.y, offset.y);
     SR_OFFSET(result.z, offset.z);
-
-    //SRAssert(!result.HasZero())
 
     return result;
 }
@@ -47,16 +34,6 @@ FVector2 Framework::Helper::World::AddOffset(const FVector2 &region, const IVect
 
     SR_OFFSET(result.x, offset.x);
     SR_OFFSET(result.y, offset.y);
-
-    /*if (offset.x != 0 && result.x == 0) {
-        result.x += static_cast<Math::Unit>(offset.x) / abs(offset.x);
-    }
-
-    if (offset.y != 0 && result.y == 0) {
-        result.y += static_cast<Math::Unit>(offset.y) / abs(offset.y);
-    }*/
-
-    //SRAssert(!result.HasZero())
 
     return result;
 }
@@ -72,8 +49,6 @@ Math::Unit Framework::Helper::World::AddOffset(const Unit &value, const Unit &of
     auto result = value + offset;
 
     SR_OFFSET(result, offset);
-
-    //SRAssert(result != 0)
 
     return result;
 }
@@ -116,10 +91,11 @@ void Framework::Helper::World::Observer::SetWorldMetrics(const IVector2 &chunkSi
     m_regionWidth = regionWidth;
 }
 
-Framework::Helper::World::Observer::Observer()
+Framework::Helper::World::Observer::Observer(const Types::SafePtr<Scene>& scene)
     : m_regionWidth(0)
     , m_shiftDistance(0)
     , m_scope(0)
+    , m_scene(scene)
 { }
 
 Offset Observer::MathNeighbour(const IVector3 &offset) {

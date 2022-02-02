@@ -55,6 +55,7 @@ namespace Framework::Helper {
         public:
             virtual void OnEnter();
             virtual void OnExit();
+            virtual void Reload();
             virtual void Update(float_t dt);
             virtual bool Access();
             virtual bool Belongs(const Math::FVector3& point);

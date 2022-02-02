@@ -61,10 +61,8 @@ void Chunk::SetAllocator(const Chunk::Allocator &allocator) {
 Chunk *Chunk::Allocate(SRChunkAllocArgs) {
     if (g_allocator)
         return g_allocator(SRChunkAllocVArgs);
-    else {
-        Helper::Debug::Error("Chunk::Allocate() : allocator isn't set!");
-        return nullptr;
-    }
+
+    return new Chunk(SRChunkAllocVArgs);
 }
 
 bool Chunk::Belongs(const Framework::Helper::Math::IVector3 &position,
@@ -107,6 +105,10 @@ bool Chunk::ApplyOffset() {
 bool Chunk::Load() {
     m_loadState = LoadState::Loaded;
     return true;
+}
+
+void Chunk::Reload() {
+
 }
 
 Chunk::~Chunk() = default;

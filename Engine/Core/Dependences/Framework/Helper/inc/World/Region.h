@@ -41,6 +41,7 @@ namespace Framework::Helper {
             virtual bool Unload();
             virtual void OnEnter();
             virtual void OnExit();
+            virtual void Reload();
 
             virtual void ApplyOffset();
 

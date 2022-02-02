@@ -70,10 +70,8 @@ void Region::SetAllocator(const Region::Allocator &allocator) {
 Region *Region::Allocate(SRRegionAllocArgs) {
     if (g_allocator)
         return g_allocator(SRRegionAllocVArgs);
-    else {
-        Helper::Debug::Error("Region::Allocate() : allocator isn't set!");
-        return nullptr;
-    }
+
+    return new Region(SRRegionAllocVArgs);
 }
 
 Framework::Helper::Math::IVector2 Region::GetWorldPosition() const {
@@ -111,4 +109,9 @@ Chunk *Region::GetChunk(const FVector3 &position) {
     );
 
     return GetChunk(MakeChunk(targetPos, m_width));
+}
+
+void Region::Reload() {
+    for (auto&& [position, pChunk] : m_loadedChunks)
+        pChunk->Reload();
 }
