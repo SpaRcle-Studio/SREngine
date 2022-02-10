@@ -8,6 +8,8 @@
 #include <functional>
 
 namespace FbxLoader {
+    typedef std::function<void(const std::string& msg)> MsgFn;
+
     class Debug {
     public:
         Debug() = delete;
@@ -16,9 +18,10 @@ namespace FbxLoader {
     private:
         static inline bool g_init = false;
     public:
-        static void Init(const std::function<void(const std::string& msg)>& err_fun) {
+        static void Init(const MsgFn& err_fun, const MsgFn& warn_fun) {
             if (!g_init) {
                 Error = err_fun;
+                Warn  = warn_fun;
             }
             g_init = true;
         }
@@ -27,9 +30,11 @@ namespace FbxLoader {
         }
     public:
         static inline std::function<void(const std::string& msg)> Error = std::function<void(const std::string& msg)>();
+        static inline std::function<void(const std::string& msg)> Warn  = std::function<void(const std::string& msg)>();
     };
 }
 
 #define FBX_ERROR(msg) Debug::Error(msg);
+#define FBX_WARN(msg) Debug::Warn(msg);
 
 #endif //FBXLOADER_DEBUG_H

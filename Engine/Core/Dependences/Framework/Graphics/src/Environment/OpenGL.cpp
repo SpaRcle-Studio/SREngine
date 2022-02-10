@@ -596,7 +596,8 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
         Framework::Graphics::TextureFilter filter,
         TextureCompression compression,
         uint8_t mipLevels,
-        bool alpha
+        bool alpha,
+        bool cpuUsage
 ) const {
     unsigned int id;
     glGenTextures(1, &id);
@@ -666,7 +667,7 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
     return id;
 }
 
-int32_t Framework::Graphics::OpenGL::CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) {
+int32_t Framework::Graphics::OpenGL::CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) {
     uint32_t cubemap = 0;
 
     glGenTextures(1, &cubemap);

@@ -222,7 +222,7 @@ bool Framework::Engine::Close() {
 
     m_isRun = false;
 
-    if (m_cmdManager) {
+    if (m_cmdManager && m_cmdManager->IsRun()) {
         m_cmdManager->Close();
         delete m_cmdManager;
         m_cmdManager = nullptr;

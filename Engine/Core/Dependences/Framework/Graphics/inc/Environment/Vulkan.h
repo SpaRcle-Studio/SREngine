@@ -104,7 +104,7 @@ namespace Framework::Graphics {
         [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
         [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
     public:
-        uint64_t GetVRAMUsage() override { return m_kernel->GetDevice() ? m_kernel->GetDevice()->GetAllocatedMemorySize() : 0; }
+        uint64_t GetVRAMUsage() override;
 
         bool PreInit(
                 unsigned int smooth_samples,
@@ -444,12 +444,13 @@ namespace Framework::Graphics {
                 TextureFilter filter,
                 TextureCompression compression,
                 uint8_t mipLevels,
-                bool alpha) const override;
+                bool alpha,
+                bool cpuUsage) const override;
 
         int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
-        [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) override {
-            if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1); id < 0) {
+        [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override {
+            if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1, cpuUsage); id < 0) {
                 Helper::Debug::Error("Vulkan::CalculateCubeMap() : failed to allocate texture!");
                 return -1;
             } else

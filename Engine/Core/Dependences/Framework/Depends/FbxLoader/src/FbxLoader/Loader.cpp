@@ -18,7 +18,7 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
     if (!Debug::IsInit())
         return {};
 
-    const std::string name      = Tools::BackReadTo(path, '/');
+    const std::string name      = Tools::BackReadTo(path, '/', 1);
     const std::string dir       = Tools::ReadToLast(path, '/', 1);
     const std::string ascii     = Tools::FixPath(cache + "/fbx_ascii/" + dir);
     const std::string model     = models + "/" + path;
@@ -27,7 +27,7 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
 
     const std::string hash = Tools::GetHash(model);
 
-    if (Tools::FileExists(hashPath) && Tools::LoadHash(hashPath) == hash) {
+    if (Tools::FileExists(cacheFile) && Tools::LoadHash(hashPath) == hash) {
         Fbx fbx;
         fbx.LoadFrom(cacheFile);
         return fbx;
@@ -96,10 +96,15 @@ FbxLoader::Objects FbxLoader::Loader::GetObjects(FbxLoader::Parser::Node *node) 
                 geometry.name = Tools::GetBetween(info[1], '\"');
                 geometry.type = Tools::GetBetween(info[2], '\"');
 
+                if (geometry.type == "Shape") {
+                    FBX_WARN("FbxLoader::GetObjects() : shape \"" + geometry.name + "\" ignored.")
+                    continue;
+                }
+
                 if (auto indices = object->Find("PolygonVertexIndex"); indices) {
                     geometry.indices = FixIndices(Tools::SplitAndCastToInt32(indices->Get2SubNode()->value, ','));
                     if (geometry.indices.empty()) {
-                        FBX_ERROR("FbxLoader::GetObjects() : failed parse indices!");
+                        FBX_ERROR("FbxLoader::GetObjects() : failed to parse indices!");
                         return {};
                     }
 

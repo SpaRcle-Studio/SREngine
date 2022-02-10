@@ -80,7 +80,6 @@ EXTERN void Start() {
     auto&& engine = Engine::Instance();
 
     g_window = engine.GetWindow();
-    g_window->SetGUIEnabled(false);
     g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
 

@@ -195,6 +195,7 @@ template<typename T> void SafePtr<T>::RecursiveLock() {
     if(m_data->m_owner.load() == this_id) {
         /// recursive locking
         ++(m_data->m_lockCount);
+        SR_SAFE_PTR_ASSERT("Lock count > 10000!", m_data->m_lockCount < 10000);
     }
     else {
         bool expected = false;

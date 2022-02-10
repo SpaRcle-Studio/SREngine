@@ -88,9 +88,6 @@ ret:
     else if (ext == "fbx") {
         SRAssert(type == MeshType::Static);
 
-        if (!FbxLoader::Debug::IsInit())
-            FbxLoader::Debug::Init([](const std::string& msg) { Helper::Debug::Error(msg); });
-
         const auto resFolder = Helper::ResourceManager::Instance().GetResPath();
 
         auto fbx = FbxLoader::Loader::Load(

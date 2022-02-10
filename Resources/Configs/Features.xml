@@ -6,5 +6,6 @@
        <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
        <CrashHandler Value="true"/>
+       <SkyboxCPUUsage Value="true"/>
    </Common>
 </Features>

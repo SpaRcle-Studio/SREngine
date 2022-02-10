@@ -23,6 +23,7 @@
 #include <Utils/CmdOptions.h>
 #include <Utils/Features.h>
 #include <GUI/NodeManager.h>
+#include <FbxLoader/Debug.h>
 
 using namespace Framework;
 
@@ -74,6 +75,13 @@ int main(int argc, char **argv) {
         ResourceManager::Instance().Init(folder);
 
     Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
+
+    if (!FbxLoader::Debug::IsInit()) {
+        FbxLoader::Debug::Init(
+                [](const std::string &msg) { Helper::Debug::Error(msg); },
+                [](const std::string &msg) { Helper::Debug::Warn(msg); }
+        );
+    }
 
     if (Features::Instance().Enabled("CrashHandler")) {
 #ifdef SR_WIN32

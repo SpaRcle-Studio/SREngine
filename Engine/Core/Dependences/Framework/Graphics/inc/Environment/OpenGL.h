@@ -437,8 +437,9 @@ namespace Framework::Graphics {
                 TextureFilter filter,
                 TextureCompression compression,
                 uint8_t mipLevels,
-                bool alpha) const override;
-        [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) override;
+                bool alpha,
+                bool cpuUsage) const override;
+        [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override;
         SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override{
             Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
             //glClearTexSubImage()

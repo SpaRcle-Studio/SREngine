@@ -48,20 +48,20 @@ namespace Framework::Graphics {
         Types::WindowFormat* m_winFormat = nullptr;
         static inline std::mutex g_mutex = std::mutex();
 
-        GUIContext      m_guiContext            = nullptr;
-        Font            m_iconFont              = nullptr;
+        GUIContext        m_guiContext            = nullptr;
+        Font              m_iconFont              = nullptr;
 
-        BasicWindow*    m_basicWindow           = nullptr;
-        bool            m_hasErrors             = false;
-        bool            m_guiEnabled            = false;
+        BasicWindow*      m_basicWindow           = nullptr;
+        bool              m_hasErrors             = false;
+        bool              m_guiEnabled            = false;
 
-        int32_t         m_currentFBOid          = -1;
-        int32_t         m_currentDescID         = -1;
-        int             m_currentShaderID       = -1;
-        __int16         m_preferredDevice       = -1;
-        unsigned __int8 m_currentBuildIteration = 0;
+        int32_t           m_currentFBOid          = -1;
+        int32_t           m_currentDescID         = -1;
+        int               m_currentShaderID       = -1;
+        __int16           m_preferredDevice       = -1;
+        unsigned __int8   m_currentBuildIteration = 0;
 
-        bool            m_needReBuild           = false;
+        std::atomic<bool> m_needReBuild           = false;
     protected:
         Environment()  = default;
         ~Environment() = default;
@@ -297,7 +297,7 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const { }
         virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) { return false; }
 
-        [[nodiscard]] virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data) { return -1; }
+        [[nodiscard]] virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) { return -1; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const { return false; }
         [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const { return false; }
@@ -319,7 +319,8 @@ namespace Framework::Graphics {
                 TextureFilter filter,
                 TextureCompression compression,
                 uint8_t mipLevels,
-                bool alpha) const { return -1; }
+                bool alpha,
+                bool cpuUsage) const { return -1; }
     };
 }
 

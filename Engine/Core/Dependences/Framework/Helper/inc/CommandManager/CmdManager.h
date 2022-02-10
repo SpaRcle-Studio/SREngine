@@ -40,6 +40,7 @@ namespace Framework::Helper {
 
     public:
         [[nodiscard]] ICommand* MakeCommand(const std::string& id) const;
+        [[nodiscard]] bool IsRun() const { return m_isRun; }
         bool MakeAndExecute(const std::string& id, SyncType sync);
         bool Execute(ICommand* cmd, SyncType sync);
         bool Cancel();

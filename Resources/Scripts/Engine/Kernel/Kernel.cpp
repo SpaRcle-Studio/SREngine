@@ -19,7 +19,6 @@
 
 SafePtr<Scene> g_scene;
 SafePtr<GameObject> g_camera;
-SafePtr<GameObject> g_miku;
 
 Skybox* g_skybox = nullptr;
 Window* g_window = nullptr;
@@ -146,7 +145,7 @@ void LoadMiku() {
     };
 
     auto fbx_meshes = Mesh::Load("Game/Miku.fbx", MeshType::Static);
-    g_miku = g_scene->Instance("Miku");
+    auto character = g_scene->Instance("Miku");
 
     for (uint32_t i = 0; i < 6; i++) {
         Mesh* mesh = fbx_meshes[i];
@@ -161,8 +160,35 @@ void LoadMiku() {
         auto cube = g_scene->Instance(mesh->GetGeometryName());
         cube->AddComponent(DynamicCastMeshToComponent(mesh));
 
-        g_miku->AddChild(cube);
+        character->AddChild(cube);
     }
+
+    character->GetTransform()->Translate(character->GetTransform()->Right());
+}
+
+void LoadKurumi() {
+    Render* render = Engine::Instance().GetRender();
+
+    Material* material = Material::Load("Game/kurumi");
+
+    auto fbx_meshes = Mesh::Load("Game/Kurumi.fbx", MeshType::Static);
+    auto character = g_scene->Instance("Kurumi");
+
+    for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+        Mesh* mesh = fbx_meshes[i];
+
+        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+
+        render->RegisterMesh(mesh);
+        mesh->WaitCalculate();
+        mesh->SetMaterial(material);
+        auto object = g_scene->Instance(mesh->GetGeometryName());
+        object->AddComponent(DynamicCastMeshToComponent(mesh));
+
+        character->AddChild(object);
+    }
+
+    character->GetTransform()->Translate(-character->GetTransform()->Right());
 }
 
 EXTERN void Start() {
@@ -178,7 +204,7 @@ EXTERN void Start() {
 
 
     Vector2 size = g_window->GetWindowSize();
-    g_window->SetGUIEnabled(false);
+    //g_window->SetGUIEnabled(false);
     //g_window->Resize(size.x, size.y);
     g_window->CentralizeWindow();
 
@@ -195,7 +221,10 @@ EXTERN void Start() {
 
     g_scene->SetObserver(g_camera);
 
+    g_window->Synchronize();
+
     //LoadMiku();
+    //LoadKurumi();
     LoadNemesis();
     LoadCubes();
 }
@@ -247,6 +276,7 @@ EXTERN void FixedUpdate() {
         frames = 0; deltaTime = 0; }
 
     if (Input::GetKeyDown(KeyCode::F2)) {
+        g_window->Synchronize();
         if (g_camera.LockIfValid()) {
             auto camera = (Camera *) g_camera->GetComponent("Camera");
             camera->SetDirectOutput(!camera->IsDirectOutput());

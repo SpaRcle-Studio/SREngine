@@ -18,25 +18,26 @@ bool Framework::Graphics::Memory::TextureConfigs::Reload() {
     if (path.Exists()) {
         auto doc = Helper::Xml::Document::Load(path);
         for (const auto& texture : doc.Root().TryGetNode("Textures").TryGetNodes("Texture")) {
-            auto format      = StringToEnumTextureFormat(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
-            auto type        = StringToEnumTextureType(texture.TryGetAttribute("Type").ToString("Diffuse"));
-            auto autoRemove  = texture.TryGetAttribute("AutoRemove").ToBool(true);
-            auto filter      = StringToEnumTextureFilter(texture.TryGetAttribute("Filter").ToString("LINEAR"));
-            auto compression = StringToEnumTextureCompression(texture.TryGetAttribute("Compression").ToString("None"));
-            auto mipLevels   = static_cast<uint32_t>(texture.TryGetAttribute("MipLevels").ToInt(1));
-            auto alpha       = StringToEnumBoolExt(texture.TryGetAttribute("Alpha").ToString("None"));
+            const auto format      = StringToEnumTextureFormat(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
+            const auto type        = StringToEnumTextureType(texture.TryGetAttribute("Type").ToString("Diffuse"));
+            const auto autoRemove  = texture.TryGetAttribute("AutoRemove").ToBool(true);
+            const auto filter      = StringToEnumTextureFilter(texture.TryGetAttribute("Filter").ToString("LINEAR"));
+            const auto compression = StringToEnumTextureCompression(texture.TryGetAttribute("Compression").ToString("None"));
+            const auto mipLevels   = static_cast<uint32_t>(texture.TryGetAttribute("MipLevels").ToInt(1));
+            const auto alpha       = StringToEnumBoolExt(texture.TryGetAttribute("Alpha").ToString("None"));
+            const auto cpuUsage    = texture.TryGetAttribute("CPUUsage").ToBool(false);
 
             m_configs.insert(std::make_pair(
                     texture.GetAttribute("Path").ToString(),
-                    TextureConfig {
+                    TextureConfig(
                         format,
                         type,
                         autoRemove,
                         filter,
                         compression,
                         mipLevels,
-                        alpha
-                    }
+                        alpha,
+                        cpuUsage)
             ));
         }
 
@@ -53,15 +54,7 @@ TextureConfig Framework::Graphics::Memory::TextureConfigs::FindOrDefault(const s
     if (auto&& config = Find(path); config.has_value())
         return config.value();
 
-    return TextureConfig {
-            TextureFormat::RGBA8_UNORM,
-            TextureType::Diffuse,
-            true,
-            TextureFilter::LINEAR,
-            TextureCompression::None,
-            1,
-            Helper::BoolExt::None
-    };
+    return TextureConfig();
 }
 
 std::optional<TextureConfig> Framework::Graphics::Memory::TextureConfigs::Find(const std::string& path) {

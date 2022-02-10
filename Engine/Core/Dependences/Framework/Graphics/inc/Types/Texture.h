@@ -62,15 +62,7 @@ namespace Framework::Graphics::Types {
     public:
         static Texture* Load(const std::string& path);
 
-        static Texture* Load(
-                const std::string& path,
-                TextureFormat format,
-                bool autoRemove = false,
-                TextureType type = TextureType::Diffuse,
-                TextureFilter filter = TextureFilter::NEAREST,
-                TextureCompression compression = TextureCompression::None,
-                uint8_t mipLevels = 1,
-                Helper::BoolExt alpha = Helper::BoolExt::None);
+        static Texture* Load(const std::string& path, const Memory::TextureConfig& config);
     public:
         bool Destroy() override;
 

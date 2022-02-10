@@ -11,6 +11,7 @@
 #include <Types/Vertices.h>
 #include <Window/Window.h>
 #include <Loaders/ObjLoader.h>
+#include <Utils/Features.h>
 
 Framework::Graphics::Types::Skybox::Skybox() {
     this->m_env = Environment::Get();
@@ -70,7 +71,8 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
         return false;
     }
 
-    if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data); m_cubeMap < 0) {
+    const bool cpuUsage = Helper::Features::Instance().Enabled("SkyboxCPUUsage", false);
+    if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
         Helper::Debug::Error("Skybox::Calculate() : failed calculate cube map!");
         this->m_hasErrors = true;
         return false;

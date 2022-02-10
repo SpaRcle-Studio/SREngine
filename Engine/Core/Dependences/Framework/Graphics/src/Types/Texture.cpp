@@ -49,29 +49,10 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     return IResource::Destroy();
 }
 
-Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(
-        const std::string& localPath,
-        TextureFormat format,
-        bool autoRemove,
-        TextureType type,
-        TextureFilter filter,
-        TextureCompression compression,
-        uint8_t mipLevels,
-        Helper::BoolExt alpha)
-{
+Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(const std::string& localPath, const Memory::TextureConfig& config) {
     const auto path = ResourceManager::Instance().GetResPath().Concat("/Textures/").Concat(localPath);
 
     Texture* texture = nullptr;
-
-    TextureConfig config = {
-        format,
-        type,
-        autoRemove,
-        filter,
-        compression,
-        mipLevels,
-        alpha
-    };
 
     if (IResource* find = ResourceManager::Instance().Find<Texture>(localPath)) {
         texture = ((Texture*)(find));
@@ -119,7 +100,7 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     m_ID = m_env->CalculateTexture(m_data,
             m_config.m_format, m_width, m_height, m_config.m_filter,
             m_config.m_compression, m_config.m_mipLevels,
-            m_config.m_alpha == Helper::BoolExt::None);
+            m_config.m_alpha == Helper::BoolExt::None, m_config.m_cpuUsage);
 
     if (m_ID < 0) { // TODO: vulkan can be return 0 as correct value
         Debug::Error("Texture::Calculate() : failed calculate texture!");
@@ -158,16 +139,7 @@ bool Framework::Graphics::Types::Texture::FreeVideoMemory()  {
 }
 
 Texture *Texture::Load(const std::string &path) {
-    const auto config = TextureConfigs::Instance().FindOrDefault(path);
-
-    return Load(path,
-            config.m_format,
-            config.m_autoRemove,
-            config.m_type,
-            config.m_filter,
-            config.m_compression,
-            config.m_mipLevels,
-            config.m_alpha);
+    return Load(path, TextureConfigs::Instance().FindOrDefault(path));
 }
 
 void Texture::SetConfig(const TextureConfig &config) {

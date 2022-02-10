@@ -88,9 +88,6 @@ namespace Framework::Graphics {
         std::vector<Camera*>  m_cameras               = std::vector<Camera*>();
         uint32_t              m_countCameras          = 0;
 
-        /* 1 - current, 2 - new */
-        std::pair<bool, bool> m_GUIEnabled            = { false, false };
-
         ImGuiWindow*          m_aimedWindowTarget     = nullptr;
         Camera*               m_aimedCameraTarget     = nullptr;
         Mesh*                 m_aimedMesh             = nullptr;
@@ -106,6 +103,9 @@ namespace Framework::Graphics {
         Math::IVector2        m_windowPos             = { 0, 0 };
         Math::IVector2        m_newWindowPos          = { 0, 0 };
         Math::IVector2        m_newWindowSize         = { 0, 0 };
+
+        /* 1 - current, 2 - new */
+        std::pair<std::atomic<bool>, std::atomic<bool>> m_GUIEnabled = { false, false };
     private:
         void PollEvents();
         void Thread();
@@ -114,6 +114,7 @@ namespace Framework::Graphics {
 
         void DrawToCamera(Framework::Graphics::Camera* camera);
     public:
+        void Synchronize();
         void BeginSync();
         void EndSync();
         bool TrySync();

@@ -16,6 +16,8 @@ namespace Framework::Graphics{
 
     const std::vector<const char*> Vulkan::m_instanceExtensions = {
             VK_KHR_SURFACE_EXTENSION_NAME,
+            VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
+            VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
         #ifdef SR_WIN32
             VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
         #endif
@@ -436,7 +438,8 @@ namespace Framework::Graphics{
             TextureFilter filter,
             TextureCompression compression,
             uint8_t mipLevels,
-            bool alpha // unused
+            bool alpha,
+            bool cpuUsage// unused
     ) const {
         auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format, true /* alpha */);
         if (vkFormat == VK_FORMAT_MAX_ENUM) {
@@ -473,7 +476,7 @@ namespace Framework::Graphics{
         auto ID = this->m_memory->AllocateTexture(
                 data, w, h, vkFormat,
                 VulkanTools::AbstractTextureFilterToVkFilter(filter),
-                compression, mipLevels);
+                compression, mipLevels, cpuUsage);
 
         if (compression != TextureCompression::None)
             free(data); //! free compressed data. Original data isn't will free
@@ -577,6 +580,10 @@ namespace Framework::Graphics{
 
     Helper::Math::IVector2 Vulkan::GetScreenSize() const {
         return m_basicWindow->GetScreenResolution();
+    }
+
+    uint64_t Vulkan::GetVRAMUsage() {
+        return m_kernel->GetAllocator() ? m_kernel->GetAllocator()->GetGPUMemoryUsage() : 0;
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

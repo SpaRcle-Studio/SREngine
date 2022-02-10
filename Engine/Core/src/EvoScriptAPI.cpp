@@ -262,6 +262,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Window, AddCamera, void, ESArg1(Camera* camera), ESArg1(camera))
         ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
 
+        ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, CentralizeWindow, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)

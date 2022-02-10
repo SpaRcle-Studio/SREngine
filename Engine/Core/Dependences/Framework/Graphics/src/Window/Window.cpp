@@ -173,13 +173,13 @@ void Framework::Graphics::Window::Thread() {
 
         if (!m_hasErrors && !m_isClose)
             if (!this->InitEnvironment()) {
-                Debug::Error("Window::Thread() : failed initialize render environment!");
+                Debug::Error("Window::Thread() : failed to initialize render environment!");
                 m_hasErrors = true;
                 return;
             }
 
         if (!m_render->Init()) {
-            Debug::Error("Window::Thread() : failed initialize render!");
+            Debug::Error("Window::Thread() : failed to initialize render!");
             this->m_hasErrors = true;
             return;
 
@@ -190,7 +190,7 @@ void Framework::Graphics::Window::Thread() {
             goto waitRun;
 
         if (!m_render->Run()) {
-            Debug::Error("Window::Thread() : failed running render!");
+            Debug::Error("Window::Thread() : failed to ran render!");
             m_hasErrors = true;
             return;
         }
@@ -235,7 +235,7 @@ void Framework::Graphics::Window::Thread() {
 
                         m_render->SetCurrentCamera(m_cameras[0]);
 
-                        Helper::Debug::Info("Window::Thread() : re-build render...");
+                        ///Helper::Debug::Info("Window::Thread() : re-build render...");
 
                         if (m_cameras[0]->IsReady()) {
                             if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
@@ -420,7 +420,11 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     Debug::Graph("Window::InitEnvironment() : post-initializing the environment...");
-    this->m_env->PostInit();
+
+    if (!m_env->PostInit()) {
+        Debug::Error("Window::InitEnvironment() : failed to post-initializing environment!");
+        return false;
+    }
 
     {
         Debug::Log("Window::InitEnvironment() : vendor is "   + m_env->GetVendor());
@@ -429,10 +433,14 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     if (m_env->IsGUISupport()) {
-        if (this->m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
+        if (m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
             GUI::ICanvas::InitStyle();
-            this->m_env->InitGUI();
-        } else
+            if (!m_env->InitGUI()) {
+                Debug::Error("Window::InitEnvironment() : failed to initializing GUI!");
+                return false;
+            }
+        }
+        else
             Debug::Error("Window::InitEnvironment() : failed to pre-initializing GUI!");
     }
 
@@ -491,7 +499,7 @@ void Framework::Graphics::Window::PollEvents() {
     if (m_GUIEnabled.first != m_GUIEnabled.second) {
         m_env->SetBuildState(false);
         this->m_env->SetGUIEnabled(m_GUIEnabled.second);
-        m_GUIEnabled.first = m_GUIEnabled.second;
+        m_GUIEnabled.first.store(m_GUIEnabled.second);
     }
 
     if (m_countNewCameras > 0) {
@@ -742,4 +750,13 @@ bool Framework::Graphics::Window::SyncFreeResources() {
     Helper::Debug::System("Window::SyncFreeResources() : complete synchronizing!");
 
     return true;
+}
+
+void Framework::Graphics::Window::Synchronize() {
+ret:
+    if (!m_isNeedMove && !m_isNeedResize && !m_env->IsNeedReBuild() && m_GUIEnabled.first == m_GUIEnabled.second)
+        return;
+
+    Helper::Types::Thread::Sleep(10);
+    goto ret;
 }
