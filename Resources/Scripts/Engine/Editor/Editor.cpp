@@ -27,7 +27,7 @@ EXTERN void OnGUI() {
 
     gui.BeginDockSpace();
 
-    if (SafePtr<Scene> scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+    /*if (SafePtr<Scene> scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
         if (gui.BeginWindow("Scene")) {
             if (completeTexID < 0) {
                 if (SafePtr<GameObject> gm = scene->FindByComponent("Camera"); gm.Valid()) {
@@ -50,30 +50,20 @@ EXTERN void OnGUI() {
             gui.EndWindow();
         }
         scene.Unlock();
-    }
+    }*/
 
-    if (gui.BeginWindow("Inspector")) {
-        gui.DrawInspector(Engine::Instance().GetScene());
-        gui.EndWindow();
-    }
+    //if (gui.BeginWindow("Inspector")) {
+    //    gui.DrawInspector(Engine::Instance().GetScene());
+    //    gui.EndWindow();
+   // }
 
-    if (gui.BeginWindow("World edit")) {
-        gui.DrawWorldEdit(Engine::Instance().GetScene());
-        gui.EndWindow();
-    }
+    //if (gui.BeginWindow("World edit")) {
+    //    gui.DrawWorldEdit(Engine::Instance().GetScene());
+    //    gui.EndWindow();
+    //}
 
-    if (gui.BeginWindow("Hierarchy")) {
-        gui.DrawHierarchy(Engine::Instance().GetScene());
-        gui.EndWindow();
-    }
-
-    if (gui.BeginWindow("Assets")) {
-        gui.DrawFileBrowser();
-        gui.EndWindow();
-    }
-
-    //if (gui.BeginWindow("Evo Script Editor")) {
-    //    gui.DrawVisualScriptEditor();
+    //if (gui.BeginWindow("Hierarchy")) {
+    //    gui.DrawHierarchy(Engine::Instance().GetScene());
     //    gui.EndWindow();
     //}
 }

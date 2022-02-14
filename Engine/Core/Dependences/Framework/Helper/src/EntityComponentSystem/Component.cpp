@@ -5,59 +5,39 @@
 #include "EntityComponentSystem/Component.h"
 #include <EntityComponentSystem/GameObject.h>
 
-Framework::Helper::Component::Component(const std::string& name)
-    : m_name(name)
-{ }
+namespace Framework::Helper {
+    void Framework::Helper::Component::OnAttachComponent() {
+        ComponentManager::Instance().DoEvent(this, m_id);
+    }
 
-Framework::Helper::Component::~Component() = default;
+    bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const std::function<Component *(void)> &constructor) {
+        m_names.insert(std::make_pair(id, name));
+        m_ids.insert(std::make_pair(name, id));
+        m_creators.insert(std::make_pair(id, constructor));
 
-void Framework::Helper::Component::OnAttachComponent()  {
-    const std::lock_guard<std::mutex> lock(g_mutex);
-    if (auto event = g_events.find(m_name); event != g_events.end())
-        event->second(this);
-}
+        Debug::System("ComponentManager::RegisterComponentImpl() : register \"" + name + "\"...");
 
-bool Framework::Helper::Component::RegisterComponent(const std::string &name, const std::function<Component *(void)> &constructor)  {
-    const std::lock_guard<std::mutex> lock(g_mutex);
-
-    if (auto find = g_compList.find(name); find == g_compList.end()) {
-        Debug::System("Component::RegisterComponent() : register \""+name+"\"...");
-        g_compList.insert(std::make_pair(name, constructor));
-        g_names.emplace_back(name);
         return true;
     }
-    else{
-        Debug::Error("Component::RegisterComponent() : component \""+name+"\" already registered!");
-        return false;
+
+    Component *Helper::ComponentManager::CreateComponentOfName(const std::string &name) {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
+        if (m_ids.count(name) == 0) {
+            Helper::Debug::Error("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
+            return nullptr;
+        }
+
+        return CreateComponentImpl(m_ids.at(name));
     }
-}
 
-bool Framework::Helper::Component::RegisterEvents(const std::string &compName, const Framework::Helper::Component::Event &onAttach)  {
-    const std::lock_guard<std::mutex> lock(g_mutex);
+    Component *Helper::ComponentManager::CreateComponentImpl(size_t id) {
+        if (m_creators.count(id) == 0) {
+            Helper::Debug::Error("ComponentManager::CreateComponentImpl() : component if \"" + std::to_string(id) + "\" not found!");
+            return nullptr;
+        }
 
-    if (auto find = g_events.find(compName); find == g_events.end()) {
-        g_events.insert(std::make_pair(compName, onAttach));
-        return true;
-    } else {
-        Debug::Error("Component::RegisterEvents() : events for component \""+compName+"\" already registered!");
-        return false;
+        return m_creators.at(id)();
     }
-}
-
-std::vector<std::string> Framework::Helper::Component::GetComponentsNames()  {
-    const std::lock_guard<std::mutex> lock(g_mutex);
-    return g_names;
-}
-
-Framework::Helper::Component *Framework::Helper::Component::CreateComponentOfName(const std::string &name)  {
-    const std::lock_guard<std::mutex> lock(g_mutex);
-
-    auto find = g_compList.find(name);
-    if (find == g_compList.end()) {
-        Debug::Error("Component::CreateComponentOfName() : component \"" + name + "\" is not exists!");
-        return nullptr;
-    }
-    else
-        return find->second();
 }
 

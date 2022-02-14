@@ -3,7 +3,7 @@
 //
 
 #include <GUI/GUISystem.h>
-#include <GUI/FileBrowser.h>
+#include <GUI/Editor/FileBrowser.h>
 #include <GUI/VisualScriptEditor.h>
 #include <Input/InputSystem.h>
 #include <GUI.h>
@@ -12,6 +12,7 @@
 #include <Engine.h>
 #include <World/Chunk.h>
 #include <EngineCommands.h>
+#include <GUI/Editor/MessageBox.h>
 
 namespace Framework::Core {
     inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
@@ -331,7 +332,8 @@ void GUISystem::DrawChild(const Framework::Helper::Types::SafePtr<Framework::Hel
 
             if (open)
                 DrawChild(child);
-        } else {
+        }
+        else {
             ImGui::TreeNodeEx((void *) (intptr_t) i,
                               g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
                               "%s", child->GetName().c_str()
@@ -362,9 +364,9 @@ bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {
 void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject) {
     if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
         if (ImGui::BeginMenu("Add component")) {
-            for (const auto &a : Component::GetComponentsNames()) {
-                if (ImGui::MenuItem(a.c_str())) {
-                    gameObject->AddComponent(Component::CreateComponentOfName(a));
+            for (const auto& [name, id] : ComponentManager::Instance().GetComponentsNames()) {
+                if (ImGui::MenuItem(name.c_str())) {
+                    gameObject->AddComponent(ComponentManager::Instance().CreateComponentOfName(name));
                     break;
                 }
             }
@@ -754,7 +756,8 @@ bool GUISystem::BeginMenuBar() {
     //if (ImGui::BeginMainMenuBar()) {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("New scene")) {
-
+            if (Engine::Instance().GetScene())
+                Graphics::GUI::MessageBoxWidget::Instance().Show("Warning", "Do you want close the current scene?");
         }
 
         if (ImGui::MenuItem("Load scene")) {
@@ -794,6 +797,40 @@ bool GUISystem::BeginMenuBar() {
     }
 
     if (ImGui::BeginMenu("Editor")) {
+        if (ImGui::MenuItem("Empty GameObject")) {
+            if (auto&& scene = Engine::Instance().GetScene()) {
+                scene->Instance("New GameObject");
+            }
+        }
+
+        ImGui::EndMenu();
+    }
+
+    if (ImGui::BeginMenu("Window")) {
+        if (ImGui::MenuItem("Assets")) {
+            Engine::Instance().GetEditor()->GetFileBrowser()->Open();
+        }
+
+        if (ImGui::MenuItem("Hierarchy")) {
+            Engine::Instance().GetEditor()->GetHierarchy()->Open();
+        }
+
+        if (ImGui::MenuItem("Inspector")) {
+            Engine::Instance().GetEditor()->GetInspector()->Open();
+        }
+
+        if (ImGui::MenuItem("Scene")) {
+            Engine::Instance().GetEditor()->GetSceneViewer()->Open();
+        }
+
+        if (ImGui::MenuItem("Visual Script")) {
+            Engine::Instance().GetEditor()->GetVisualScriptEditor()->Open();
+        }
+
+        if (ImGui::MenuItem("World edit")) {
+            Engine::Instance().GetEditor()->GetWorldEdit()->Open();
+        }
+
         ImGui::EndMenu();
     }
 
@@ -802,18 +839,9 @@ bool GUISystem::BeginMenuBar() {
     }
 
     return true;
-    //} else
-   //     return false;
 }
 
 void GUISystem::EndMenuBar() {
     //ImGui::EndMainMenuBar();
 }
 
-void GUISystem::DrawFileBrowser() {
-    Engine::Instance().GetEditor()->GetFileBrowser()->Draw();
-}
-
-void GUISystem::DrawVisualScriptEditor() {
-    Engine::Instance().GetEditor()->GetVisualScriptEditor()->Draw();
-}

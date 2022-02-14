@@ -8,9 +8,10 @@
 #include <Input/InputSystem.h>
 #include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
-#include <GUI/EditorGUI.h>
 #include <Events/EventManager.h>
 #include <Utils/Features.h>
+#include <GUI/WidgetManager.h>
+#include <GUI/EditorGUI.h>
 
 #include <Render/Render.h>
 #include <Window/Window.h>
@@ -33,19 +34,22 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     this->m_compiler   = new Scripting::EvoCompiler();
     this->m_cmdManager = new Helper::CmdManager();
 
-    if (m_isCreate){
+    if (m_isCreate) {
         Helper::Debug::Error("Engine::Create() : game engine already create!");
         return false;
     }
 
     Helper::Debug::Info("Engine::Create() : creating game engine...");
 
-    if (!this->m_window->Create()){
+    if (!this->m_window->Create()) {
         Helper::Debug::Error("Engine::Create() : failed create window!");
         return false;
     }
 
-    m_window->SetCanvas(m_editor = new Core::GUI::EditorGUI(m_compiler));
+    window->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
+    window->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI(m_compiler));
+
+    m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
 
     if (!m_physics->Create()) {
         Helper::Debug::Error("Engine::Create() : failed create physics engine!");
@@ -98,9 +102,9 @@ bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
         return false;
     }
 
-    this->RegisterLibraries();
+    RegisterLibraries();
 
-    this->m_isInit = true;
+    m_isInit = true;
 
     return true;
 }
@@ -118,7 +122,7 @@ bool Framework::Engine::Run() {
 
     Helper::Debug::Info("Engine::Run() : running game engine...");
 
-    if (!this->m_window->Run()){
+    if (!m_window->Run()){
         Helper::Debug::Error("Engine::Run() : failed to ran window!");
         return false;
     }
@@ -185,12 +189,17 @@ void Framework::Engine::Await() {
                     m_cmdManager->Cancel();
                 }
 
+                if (Input::GetKeyDown(KeyCode::F2)) {
+                    m_editor->Enable(!m_editor->Enabled());
+                }
+
                 if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
                     Debug::System("Engine::Await() : The closing key combination have been detected!");
                     m_exitEvent = true;
                     break;
                 }
 
+                m_editor->Update();
                 m_compiler->FixedUpdateAll();
                 accumulator -= updateFrequency;
             }
@@ -206,8 +215,8 @@ void Framework::Engine::Await() {
         accumulator += (float)deltaTime.count() / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
     }
 
-    if (m_window->IsGUIEnabled()) {
-        m_window->SetGUIEnabled(false);
+    if (m_editor->Enabled()) {
+        m_editor->Enable(false);
         Helper::Debug::System("Engine::Await() : disable editor gui...");
     }
 
@@ -234,18 +243,18 @@ bool Framework::Engine::Close() {
         delete m_worldThread;
     }
 
-    if (m_window && m_window->IsRun()) {
-        m_window->Close();
-        m_window->Free();
-        m_window = nullptr;
-    }
-
-    /// должен освобождаться перед компилятором,
+    /// должен освобождаться перед компилятором и перед окном,
     /// так как может содержать скрипты
     if (m_editor) {
         m_editor->Destroy();
         m_editor->Free();
         m_editor = nullptr;
+    }
+
+    if (m_window && m_window->IsRun()) {
+        m_window->Close();
+        m_window->Free();
+        m_window = nullptr;
     }
 
     if (m_compiler) {
@@ -304,12 +313,20 @@ bool Framework::Engine::CloseScene() {
 }
 
 bool Framework::Engine::SetScene(const Helper::Types::SafePtr<World::Scene> &scene)  {
-    // TODO: add thread security!
     if (m_scene.Valid() && scene == m_scene) {
         Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
         return false;
-    } else {
-        this->m_scene = scene;
+    }
+    else {
+        m_scene = scene;
+
+        if (m_editor) {
+            m_editor->GetHierarchy()->SetScene(m_scene);
+            m_editor->GetSceneViewer()->SetScene(m_scene);
+            m_editor->GetInspector()->SetScene(m_scene);
+            m_editor->GetWorldEdit()->SetScene(m_scene);
+        }
+
         return true;
     }
 }

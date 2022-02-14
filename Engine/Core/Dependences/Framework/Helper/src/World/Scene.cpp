@@ -225,8 +225,18 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
 }
 
 void Framework::Helper::World::Scene::Update(float_t dt) {
-    if (!m_observer->m_target.Valid())
+    if (!m_observer->m_target.Valid()) {
+        if (!m_regions.empty()) {
+            for (auto&& [pos, region] : m_regions) {
+                region->Unload();
+                delete region;
+            }
+
+            m_regions.clear();
+        }
+
         return;
+    }
 
     const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
     const auto regSize = Math::IVector2(m_regionWidth);
@@ -370,11 +380,19 @@ void Scene::CheckShift(const IVector3 &chunk) {
 
     if (chunk.x > shift) {
         offset.x -= abs(chunk.x);
-
         SetWorldOffset(Offset({ 0, 0 }, offset));
-    } else if (chunk.x < -shift) {
+    }
+    else if (chunk.x < -shift) {
         offset.x += abs(chunk.x);
+        SetWorldOffset(Offset({ 0, 0 }, offset));
+    }
 
+    if (chunk.z > shift) {
+        offset.z -= abs(chunk.z);
+        SetWorldOffset(Offset({ 0, 0 }, offset));
+    }
+    else if (chunk.z < -shift) {
+        offset.z += abs(chunk.z);
         SetWorldOffset(Offset({ 0, 0 }, offset));
     }
 }

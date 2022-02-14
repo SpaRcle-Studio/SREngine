@@ -262,8 +262,6 @@ void Framework::Graphics::Camera::OnRemoveComponent() {
     OnDestroyGameObject();
 }
 
-void Framework::Graphics::Camera::OnAttachComponent() {
-    Component::OnAttachComponent();
-}
+
 
 

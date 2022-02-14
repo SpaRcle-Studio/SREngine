@@ -430,7 +430,7 @@ namespace Framework::Graphics {
 
             {
                 RECT windowRect;
-                windowRect.left = 0L;
+                windowRect.left = 0;
                 windowRect.top = 0L;
                 windowRect.right = sizeX;
                 windowRect.bottom = sizeY;
@@ -446,7 +446,7 @@ namespace Framework::Graphics {
                         0, "SREngineWinClass",
                         name,
                         m_dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
-                        0, 0,
+                        posX - 8, posY,
                         width,
                         height,
                         nullptr,

@@ -20,7 +20,10 @@ namespace Framework::Graphics::Types {
     private:
         explicit DebugWireframeMesh(const std::string& name = "Unnamed")
             : IndexedMesh(MeshType::Wireframe, name)
-        { }
+        {
+            /// override component
+            Component::Init<DebugWireframeMesh>();
+        }
 
     protected:
         ~DebugWireframeMesh() override = default;

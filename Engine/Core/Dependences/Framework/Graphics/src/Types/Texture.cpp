@@ -41,8 +41,7 @@ bool Framework::Graphics::Types::Texture::Destroy() {
         это нормально, так как она не регистрируется в рендере в прямом смысле. Т-е она там не содержится.
         Меш узнает о том, что текстура будет уничтожена, так как он сам и уничтожает материал, содержащий ее.
     */
-    if (m_isCalculate)
-        m_render->FreeTexture(this);
+    m_render->FreeTexture(this);
 
     Helper::ResourceManager::Instance().Destroy(this);
 

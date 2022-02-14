@@ -138,7 +138,7 @@ void Pin::SetNode(Node* node) {
 }
 
 float_t Pin::GetWidth() const {
-    return ImGui::CalcTextSize(m_name.c_str()).x;
+    return static_cast<float_t>(m_name.size()); //TODO: crash ImGui::CalcTextSize(m_name.c_str()).x;
 }
 
 void Pin::AddLink(Link *link) {

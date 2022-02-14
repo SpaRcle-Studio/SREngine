@@ -14,13 +14,21 @@
 #include <Render/PostProcessing.h>
 #include <thread>
 #include <mutex>
+#include <list>
 #include <functional>
+#include <unordered_set>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
 #include <Types/Time.h>
 #include <Math/Vector3.h>
+#include <Types/SafeGateArray.h>
 
 namespace Framework::Graphics {
+    namespace GUI {
+        class WidgetManager;
+    }
+
+    // TODO: TO_REFACTORING
     class Window {
     public:
         Window(
@@ -80,14 +88,6 @@ namespace Framework::Graphics {
         std::mutex            m_mutex                 = std::mutex();
         std::mutex            m_drawMutex             = std::mutex();
 
-        std::mutex            m_camerasMutex          = std::mutex();
-        std::vector<Camera*>  m_newCameras            = std::vector<Camera*>();
-        uint32_t              m_countNewCameras       = 0;
-        std::vector<Camera*>  m_camerasToDestroy      = std::vector<Camera*>();
-        uint32_t              m_countCamerasToDestroy = 0;
-        std::vector<Camera*>  m_cameras               = std::vector<Camera*>();
-        uint32_t              m_countCameras          = 0;
-
         ImGuiWindow*          m_aimedWindowTarget     = nullptr;
         Camera*               m_aimedCameraTarget     = nullptr;
         Mesh*                 m_aimedMesh             = nullptr;
@@ -104,6 +104,9 @@ namespace Framework::Graphics {
         Math::IVector2        m_newWindowPos          = { 0, 0 };
         Math::IVector2        m_newWindowSize         = { 0, 0 };
 
+        Helper::Types::SafeGateArray<Camera*> m_cameras;
+        Helper::Types::SafeGateArray<GUI::WidgetManager*> m_widgetManagers;
+
         /* 1 - current, 2 - new */
         std::pair<std::atomic<bool>, std::atomic<bool>> m_GUIEnabled = { false, false };
     private:
@@ -111,6 +114,7 @@ namespace Framework::Graphics {
         void Thread();
         bool InitEnvironment();
         bool SyncFreeResources();
+        void DrawNoCamera();
 
         void DrawToCamera(Framework::Graphics::Camera* camera);
     public:
@@ -122,7 +126,7 @@ namespace Framework::Graphics {
 
         void AddCamera(Camera* camera);
         void DestroyCamera(Camera* camera);
-        [[nodiscard]] uint32_t GetCountCameras() const { return m_countCameras; }
+        [[nodiscard]] uint32_t GetCountCameras() const { return m_cameras.Count(); }
 
         [[nodiscard]] SR_FORCE_INLINE Render* GetRender() {
             if (!m_render) {
@@ -137,6 +141,7 @@ namespace Framework::Graphics {
         [[nodiscard]] bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept;
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
     public:
+        void RegisterWidgetManager(GUI::WidgetManager* widgetManager);
         void CentralizeWindow();
         void Resize(uint32_t w, uint32_t h);
         void CentralizeCursor() noexcept;

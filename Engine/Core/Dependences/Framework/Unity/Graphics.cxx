@@ -15,7 +15,12 @@
 #include "../Graphics/src/GUI/Icons.cpp"
 #include "../Graphics/src/GUI/NodeManager.cpp"
 #include "../Graphics/src/GUI/Pin.cpp"
-#include "../Graphics/src/GUI/FileBrowser.cpp"
+#include "../Graphics/src/GUI/Editor/FileBrowser.cpp"
+#include "../Graphics/src/GUI/Editor/SceneViewer.cpp"
+#include "../Graphics/src/GUI/Editor/Hierarchy.cpp"
+#include "../Graphics/src/GUI/Editor/MessageBox.cpp"
+#include "../Graphics/src/GUI/WidgetManager.cpp"
+#include "../Graphics/src/GUI/Widget.cpp"
 
 #include "../Graphics/src/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Lighting/Light.cpp"
@@ -29,6 +34,10 @@
 
 #include "../Graphics/src/Memory/TextureConfigs.cpp"
 #include "../Graphics/src/Memory/MeshManager.cpp"
+
+#include "../Graphics/src/Font/Font.cpp"
+#include "../Graphics/src/Font/FontLoader.cpp"
+#include "../Graphics/src/Font/Text.cpp"
 
 #include "../Graphics/src/Render/Camera.cpp"
 #include "../Graphics/src/Render/ColorBuffer.cpp"

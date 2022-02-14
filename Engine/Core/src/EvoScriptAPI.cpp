@@ -426,8 +426,6 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndDockSpace, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndWindow, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndChildWindow, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, DrawFileBrowser, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, DrawVisualScriptEditor, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, GetWindowSize, IVector2)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, DrawGuizmoTools, void)
 

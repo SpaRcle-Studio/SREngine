@@ -65,10 +65,6 @@ Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const 
     return find;
 }
 
-std::vector<Component *> Framework::Helper::GameObject::GetComponents(const std::string& name) {  // TODO: add security multi-threading
-    return std::vector<Component *>();
-}
-
 void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
     if (m_isDestroy) {
         Helper::Debug::Error("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
@@ -194,10 +190,6 @@ void GameObject::SetSelect(bool value) {
 
 std::string GameObject::GetName() const {
     return this->m_name;
-}
-
-std::vector<Component *> GameObject::GetComponents() {
-    return m_components;
 }
 
 void GameObject::SetNameFromInspector(const std::string &name) {
@@ -389,3 +381,9 @@ void GameObject::UpdateComponentsSkew() {
         comp->OnSkewed(m_transform->m_skew);
 }
 
+Component *GameObject::GetComponent(size_t id) {
+    for (auto&& component : m_components)
+        if (component->GetId() == id)
+           return component;
+    return nullptr;
+}

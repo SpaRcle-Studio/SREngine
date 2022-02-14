@@ -5,9 +5,6 @@
 #ifndef GAMEENGINE_SINGLETON_H
 #define GAMEENGINE_SINGLETON_H
 
-#include <tuple>
-#include <memory>
-
 namespace Framework::Helper {
     template<typename T>
     class Singleton {

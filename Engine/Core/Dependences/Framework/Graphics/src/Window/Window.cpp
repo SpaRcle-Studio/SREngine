@@ -48,7 +48,7 @@ bool Framework::Graphics::Window::Create() {
             case Environment::WinEvents::Resize: {
                 std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
                 if (size.first > 0 && size.second > 0)
-                    for (auto camera : m_cameras) {
+                    for (auto camera : m_cameras.GetElements()) {
                         if (camera->IsAllowUpdateProjection())
                         //    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
                                 camera->UpdateProjection(size.first, size.second);
@@ -220,25 +220,28 @@ void Framework::Graphics::Window::Thread() {
                         if (m_canvas)
                             this->m_canvas->Draw();
 
+                        for (auto&& widgetManager : m_widgetManagers.GetElements())
+                            widgetManager->Draw();
+
                         this->m_env->EndDrawGUI();
                     }
                 }
 
                 BeginSync();
 
-                for (auto camera : m_cameras)
+                for (auto&& camera : m_cameras.GetElements())
                     camera->PoolEvents();
 
                 if (m_env->IsNeedReBuild()) {
-                    if (!m_cameras.empty()) {
+                    if (!m_cameras.Empty()) {
                         m_env->ClearFramebuffersQueue();
 
-                        m_render->SetCurrentCamera(m_cameras[0]);
+                        m_render->SetCurrentCamera(m_cameras.Front());
 
                         ///Helper::Debug::Info("Window::Thread() : re-build render...");
 
-                        if (m_cameras[0]->IsReady()) {
-                            if (m_cameras[0]->GetPostProcessing()->BeginGeometry()) {
+                        if (m_cameras.Front()->IsReady()) {
+                            if (m_cameras.Front()->GetPostProcessing()->BeginGeometry()) {
                                 m_env->BeginRender();
                                 {
                                     this->m_env->SetViewport();
@@ -249,18 +252,18 @@ void Framework::Graphics::Window::Thread() {
                                 }
                                 m_env->EndRender();
 
-                                m_cameras[0]->GetPostProcessing()->EndGeometry();
+                                m_cameras.Front()->GetPostProcessing()->EndGeometry();
                             }
                         }
 
                         {
                             this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
 
-                            if (!m_cameras[0]->IsDirectOutput()) {
-                                m_env->BindFrameBuffer(m_cameras[0]->GetPostProcessing()->GetFinalFBO());
+                            if (!m_cameras.Front()->IsDirectOutput()) {
+                                m_env->BindFrameBuffer(m_cameras.Front()->GetPostProcessing()->GetFinalFBO());
                                 m_env->ClearBuffers();
 
-                                this->m_cameras[0]->GetPostProcessing()->Complete();
+                                this->m_cameras.Front()->GetPostProcessing()->Complete();
 
                                 m_env->BeginRender();
                                 {
@@ -268,11 +271,11 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetScissor();
 
                                     //! Должна вызываться в том же кадровом буфере, что и Complete
-                                    this->m_cameras[0]->GetPostProcessing()->Draw();
+                                    this->m_cameras.Front()->GetPostProcessing()->Draw();
                                 }
                                 m_env->EndRender();
                             } else
-                                this->m_cameras[0]->GetPostProcessing()->Complete();
+                                this->m_cameras.Front()->GetPostProcessing()->Complete();
 
                             for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
                                 m_env->SetBuildIteration(i);
@@ -284,8 +287,8 @@ void Framework::Graphics::Window::Thread() {
                                     this->m_env->SetViewport();
                                     this->m_env->SetScissor();
 
-                                    if (m_cameras[0]->IsDirectOutput())
-                                        this->m_cameras[0]->GetPostProcessing()->Draw();
+                                    if (m_cameras.Front()->IsDirectOutput())
+                                        this->m_cameras.Front()->GetPostProcessing()->Draw();
                                 }
                                 m_env->EndRender();
                             }
@@ -293,6 +296,8 @@ void Framework::Graphics::Window::Thread() {
 
                         m_env->SetBuildState(true);
                     }
+                    else
+                        DrawNoCamera();
                     EndSync();
                     continue;
                 }
@@ -321,19 +326,19 @@ void Framework::Graphics::Window::Thread() {
                 this->m_render->PollEvents();
                 this->PollEvents();
 
-                for (auto camera : m_cameras)
+                for (auto&& camera : m_cameras.GetElements())
                     camera->PoolEvents();
 
                 this->m_env->ClearBuffers();
 
                 {
-                    if (m_countCameras == 1) {
-                        if (m_cameras[0]->IsReady()) {
-                            DrawToCamera(m_cameras[0]);
+                    if (m_cameras.Count() == 1) {
+                        if (m_cameras.Front()->IsReady()) {
+                            DrawToCamera(m_cameras.Front());
                         }
                     }
                     else
-                        for (Camera* camera : m_cameras) {
+                        for (auto&& camera : m_cameras.GetElements()) {
                             if (!camera->IsReady()) {
                                 continue;
                             }
@@ -363,6 +368,10 @@ void Framework::Graphics::Window::Thread() {
     }
 
     Helper::Debug::Graph("Window::Thread() : exit from main cycle.");
+
+    if (!m_widgetManagers.Empty()) {
+        m_widgetManagers.Clear();
+    }
 
     if (m_env->IsGUISupport()) {
         m_env->StopGUI();
@@ -502,44 +511,26 @@ void Framework::Graphics::Window::PollEvents() {
         m_GUIEnabled.first.store(m_GUIEnabled.second);
     }
 
-    if (m_countNewCameras > 0) {
-        std::lock_guard<std::mutex> lock(m_camerasMutex);
+    if (m_widgetManagers.NeedFlush())
+        m_widgetManagers.Flush();
 
-        for (auto & camera : m_newCameras){
+    if (m_cameras.NeedFlush()) {
+        for (auto&& camera : m_cameras.GetAddedElements()) {
             camera->Create(this);
-            if (camera->CompleteResize()) {
-                m_cameras.push_back(camera);
-                m_countCameras++;
-            } else
+            if (!camera->CompleteResize())
                 Helper::Debug::Error("Window::PollEvents() : failed to complete resize camera!");
         }
 
-        m_newCameras.clear();
-        m_countNewCameras = 0;
+        for (auto&& camera : m_cameras.GetDeletedElements()) {
+            if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low)
+                Helper::Debug::Log("Window::PoolEvents() : remove camera...");
 
-        m_render->SetCurrentCamera(nullptr);
-        m_env->SetBuildState(false);
-    }
+            camera->Free();
 
-    if (m_countCamerasToDestroy > 0) {
-        std::lock_guard<std::mutex> lock(m_camerasMutex);
+            Helper::Debug::Log("Window::PoolEvents() : the camera has been successfully released!");
+        }
 
-        for (Camera* camera : m_camerasToDestroy)
-            for (size_t t = 0; t < m_countCameras; ++t) {
-                if (camera == m_cameras[t]) {
-                    if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low)
-                        Helper::Debug::Log("Window::PoolEvents() : remove camera...");
-
-                    m_cameras.erase(m_cameras.begin() + t);
-                    m_countCameras--;
-                    camera->Free();
-
-                    Helper::Debug::Log("Window::PoolEvents() : the camera has been successfully released!");
-                }
-            }
-
-        m_camerasToDestroy.clear();
-        m_countCamerasToDestroy = 0;
+        m_cameras.Flush();
 
         m_render->SetCurrentCamera(nullptr);
         m_env->SetBuildState(false);
@@ -582,9 +573,9 @@ void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
 }
 
 void Framework::Graphics::Window::CentralizeWindow() {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    Helper::Debug::Info("Window::CentralizeWindow() : wait centralize window...");
 
-    Helper::Debug::Log("Window::CentralizeWindow() : wait centralize window...");
+    std::lock_guard<std::mutex> lock(m_mutex);
 
     if (!m_env->GetBasicWindow()) {
         Helper::Debug::Warn("Window::CentralizeWindow() : basic window is nullptr!");
@@ -662,22 +653,15 @@ void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *cam
         Debug::Error("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
         return;
     }
-    m_camerasMutex.lock();
-    m_camerasToDestroy.push_back(camera);
-    m_countCamerasToDestroy++;
-    m_camerasMutex.unlock();
+
+    m_cameras.Remove(camera);
 }
 
 void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)  {
     if (Helper::Debug::GetLevel() > Helper::Debug::Level::None)
         Debug::Log("Window::AddCamera() : register new camera...");
 
-    m_camerasMutex.lock();
-
-    m_newCameras.push_back(camera);
-    m_countNewCameras++;
-
-    m_camerasMutex.unlock();
+    m_cameras.Add(camera);
 }
 
 void Framework::Graphics::Window::BeginSync() {
@@ -759,4 +743,33 @@ ret:
 
     Helper::Types::Thread::Sleep(10);
     goto ret;
+}
+
+void Framework::Graphics::Window::DrawNoCamera() {
+    m_env->ClearFramebuffersQueue();
+
+    {
+        m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+
+        m_render->CalculateAll();
+
+        for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
+            m_env->SetBuildIteration(i);
+
+            m_env->BindFrameBuffer(0);
+
+            m_env->BeginRender();
+            {
+                m_env->SetViewport();
+                m_env->SetScissor();
+            }
+            m_env->EndRender();
+        }
+    }
+
+    m_env->SetBuildState(true);
+}
+
+void Framework::Graphics::Window::RegisterWidgetManager(GUI::WidgetManager* widgetManager) {
+    m_widgetManagers.Add(widgetManager);
 }

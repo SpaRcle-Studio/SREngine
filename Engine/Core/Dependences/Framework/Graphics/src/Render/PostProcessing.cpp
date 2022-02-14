@@ -55,17 +55,22 @@ bool Framework::Graphics::PostProcessing::Destroy() {
     if (!m_isInit)
         return false;
 
-    if (m_frameBuffer != -1)
+    if (m_frameBuffer != -1) {
         if (!m_env->FreeFBO(m_frameBuffer) || !m_env->FreeTextures(m_colors.data(), m_colors.size())) {
             Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
             return false;
         }
+        m_colors.clear();
+        m_frameBuffer = -1;
+    }
 
-    if (m_finalFBO != -1)
+    if (m_finalFBO != -1) {
         if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
             Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
             return false;
         }
+        m_finalFBO = m_finalColorBuffer = -1;
+    }
 
     return true;
 }

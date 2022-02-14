@@ -22,7 +22,10 @@ namespace Framework::Graphics::Types {
     private:
         explicit Mesh3D(const std::string& name = "UnnamedMesh3D")
             : IndexedMesh(MeshType::Static, name)
-        { }
+        {
+            /// override component
+            Component::Init<Mesh3D>();
+        }
 
         ~Mesh3D() override = default;
 

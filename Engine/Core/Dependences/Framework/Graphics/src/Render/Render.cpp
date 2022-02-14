@@ -187,8 +187,6 @@ void Framework::Graphics::Render::PollEvents() {
             Helper::Debug::Graph("Render::PoolEvents() : free texture \"" + textureToFree->GetName() + "\"");
             if (textureToFree->IsCalculated())
                 textureToFree->FreeVideoMemory();
-            else
-                Debug::Error("Render::PoolEvents() : texture is not calculated! Something went wrong...");
 
             textureToFree->RemoveUsePoint();
             m_textures.erase(textureToFree);

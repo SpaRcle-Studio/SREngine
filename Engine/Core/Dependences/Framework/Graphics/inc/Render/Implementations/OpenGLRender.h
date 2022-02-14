@@ -53,6 +53,10 @@ namespace Framework::Graphics::Impl {
             ImGui::End();
         }
 
+        void CalculateAll() override {
+
+        }
+
         void DrawGeometry() override {
             SRDrawMeshCluster(m_geometry, OpenGL, {
                 this->m_currentCamera->UpdateShader<ProjViewUBO>(shader);

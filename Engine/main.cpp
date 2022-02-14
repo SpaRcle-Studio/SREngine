@@ -103,12 +103,12 @@ int main(int argc, char **argv) {
     // Register all components
     {
         //Component::RegisterComponent("SkinnedMesh", []() -> Component* { return new SkinnedMesh();  });
-        Component::RegisterComponent("Mesh3D",        []() -> Mesh3D*    { return Memory::MeshAllocator::Allocate<Mesh3D>(); });
-        Component::RegisterComponent("Rigidbody",     []() -> Rigidbody* { return new Rigidbody();                           });
-        Component::RegisterComponent("Camera",        []() -> Camera*    { return Camera::Allocate();                        });
-        Component::RegisterComponent("Bone",          []() -> Bone*      { return new Bone();                                });
+        ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return Memory::MeshAllocator::Allocate<Mesh3D>(); });
+        ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
+        ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return Camera::Allocate(); });
+        ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
 
-        Component::RegisterEvents("Bone", [](Component* bone){
+        ComponentManager::Instance().RegisterEvents<Bone>([](Component* bone){
             dynamic_cast<Bone*>(bone)->SetRender(Engine::Instance().GetRender());
         });
 

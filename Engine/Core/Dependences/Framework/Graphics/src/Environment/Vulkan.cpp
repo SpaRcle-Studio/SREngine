@@ -98,10 +98,11 @@ namespace Framework::Graphics{
             g_callback(WinEvents::Focus, win, &focus, nullptr);
         });
 
-        if (!this->m_basicWindow->Create(winName, 0, 0, m_winFormat->Width(), m_winFormat->Height(), fullScreen, resizable)) {
+        if (!m_basicWindow->Create(winName, 0, 0, m_winFormat->Width(), m_winFormat->Height(), fullScreen, resizable)) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
+        m_basicWindow->Centralize();
 
         m_basicWindow->SetHeaderEnabled(headerEnabled);
 

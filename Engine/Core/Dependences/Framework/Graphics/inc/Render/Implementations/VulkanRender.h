@@ -29,6 +29,21 @@ namespace Framework::Graphics::Impl {
             }
         }
 
+        void CalculateAll() override {
+            static Environment* env = Environment::Get();
+
+            for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
+                if (shader) shader->Init();
+                else
+                    continue;
+
+                for (auto const& [key, meshGroup] : subCluster.m_groups) {
+                    for (const auto &mesh : meshGroup)
+                        mesh->Calculate();
+                }
+            }
+        }
+
         void DrawGeometry() override {
             //SRDrawMeshCluster(m_geometry, Vulkan, ;)
 

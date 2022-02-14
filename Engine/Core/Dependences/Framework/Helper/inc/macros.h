@@ -48,6 +48,7 @@
     }                           \
 
 #define SR_FORCE_INLINE __forceinline
+#define SR_NODISCARD [[nodiscard]]
 #define SR_INLINE inline
 #define SR_NULL 0
 

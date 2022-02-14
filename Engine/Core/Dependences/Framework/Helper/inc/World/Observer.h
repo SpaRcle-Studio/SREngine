@@ -58,6 +58,8 @@ namespace Framework::Helper::World {
         void SetShiftDist(int32_t value) { m_shiftDistance = value; }
         Offset MathNeighbour(const Math::IVector3& offset);
 
+        int32_t GetScope() const { return m_scope; }
+
         [[nodiscard]] Types::SafePtr<Scene> GetScene() const { return m_scene; }
 
     public:

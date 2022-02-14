@@ -16,6 +16,9 @@ Framework::Graphics::Shader::Shader(Framework::Graphics::Render *render, const s
 }
 
 bool Framework::Graphics::Shader::Init() {
+    if (m_isInit)
+        return true;
+
     if (!Compile()) {
         Debug::Error("Shader::Init() : failed compiling shader!");
         return false;

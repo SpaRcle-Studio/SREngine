@@ -28,11 +28,12 @@ using namespace Framework::Graphics::Types;
 
 Framework::Graphics::Types::Mesh::Mesh(MeshType type, const std::string& name)
     : IResource(typeid(Mesh).name())
-    , Component("Mesh")
     , m_env(Environment::Get())
     , m_type(type)
     , m_pipeline(Environment::Get()->GetPipeLine())
 {
+    Component::Init<Mesh>();
+
     this->m_shader = nullptr;
     this->m_material = nullptr;
     this->m_geometryName = name;
@@ -277,8 +278,8 @@ void Mesh::ReCalcModel() {
 
 void Mesh::WaitCalculate() const  {
     ret:
-    if (!m_render || m_render->GetWindow()->GetCountCameras() == 0) {
-        SRAssert2(false, Helper::Format("Mesh::WaitCalculate() : There is no destination render or camera!"
+    if (!m_render) {
+        SRAssert2(false, Helper::Format("Mesh::WaitCalculate() : There is no destination render!"
                              " The geometry will never be calculated. \nName: %s", m_geometryName.c_str()).c_str());
         return;
     }

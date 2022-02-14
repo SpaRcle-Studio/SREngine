@@ -127,8 +127,9 @@ namespace Framework::Graphics {
     public:
         virtual void UpdateUBOs() { }
 
-        virtual void DrawGeometry()       = 0;
-        virtual void DrawSkybox()         = 0;
+        virtual void CalculateAll() = 0;
+        virtual void DrawGeometry() = 0;
+        virtual void DrawSkybox()   = 0;
     public:
         virtual void DrawGrid()                 = 0;
         virtual void DrawSingleColors()         = 0;

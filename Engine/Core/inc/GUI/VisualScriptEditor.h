@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <imgui_node_editor.h>
 #include <Utils/NonCopyable.h>
+#include <GUI/Widget.h>
 
 namespace SR_GRAPH_NS::GUI {
     class Pin;
@@ -16,13 +17,13 @@ namespace SR_GRAPH_NS::GUI {
 }
 
 namespace SR_CORE_NS::GUI {
-    class VisualScriptEditor : private Helper::NonCopyable {
+    class VisualScriptEditor : public SR_GRAPH_NS::GUI::Widget {
     public:
         VisualScriptEditor();
-        ~VisualScriptEditor();
+        ~VisualScriptEditor() override;
 
     public:
-        void Draw();
+        void Draw() override;
         void AddNode(SR_GRAPH_NS::GUI::Node* node);
         void AddLink(SR_GRAPH_NS::GUI::Link* link);
 

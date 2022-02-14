@@ -136,8 +136,16 @@ namespace Framework::Helper::Xml {
                 return *this;
             }
 
-            if (auto attrib = m_node.append_attribute(name.c_str()); !attrib.empty())
+            auto attrib = m_node.append_attribute(name.c_str());
+            if (attrib.empty())
+                return *this;
+
+            if constexpr (std::is_same<T, std::string>()) {
+                attrib.set_value(value.c_str());
+            }
+            else {
                 attrib.set_value(value);
+            }
 
             return *this;
         }

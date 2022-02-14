@@ -56,7 +56,7 @@ namespace Framework::Helper {
             if (auto&& group = m_copies.find(id); group != m_copies.end()) {
                 group->second.erase(resource);
             } else {
-                SRAssert2(false, "Resource group not found!");
+                SRAssert2(false, "Resource group not found! Id: " + id);
                 return;
             }
 

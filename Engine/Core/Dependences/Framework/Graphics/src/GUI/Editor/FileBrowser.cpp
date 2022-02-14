@@ -2,7 +2,7 @@
 // Created by Monika on 27.12.2021.
 //
 
-#include <GUI/FileBrowser.h>
+#include <GUI/Editor/FileBrowser.h>
 #include <FileSystem/Path.h>
 #include <Utils/VectorUtils.h>
 
@@ -13,6 +13,10 @@
 
 using namespace SR_GRAPH_NS::GUI;
 using namespace SR_UTILS_NS;
+
+FileBrowser::FileBrowser()
+    : Widget("Assets")
+{ }
 
 void FileBrowser::SetFolder(const Path &path) {
     SRAssert((m_root = path).IsDir());
@@ -104,4 +108,3 @@ void FileBrowser::Draw() {
     ImGui::EndGroup();
 }
 
-FileBrowser::FileBrowser() = default;

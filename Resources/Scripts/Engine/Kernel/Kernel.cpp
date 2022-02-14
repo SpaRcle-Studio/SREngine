@@ -18,7 +18,7 @@
 #include <ctime>
 
 SafePtr<Scene> g_scene;
-SafePtr<GameObject> g_camera;
+//SafePtr<GameObject> g_camera;
 
 Skybox* g_skybox = nullptr;
 Window* g_window = nullptr;
@@ -206,20 +206,19 @@ EXTERN void Start() {
     Vector2 size = g_window->GetWindowSize();
     //g_window->SetGUIEnabled(false);
     //g_window->Resize(size.x, size.y);
-    g_window->CentralizeWindow();
 
     g_skybox = Skybox::Load("Sea.jpg");
 
     Render* render = engine.GetRender();
     render->SetSkybox(g_skybox);
 
-    Camera* camera = Camera::Allocate(size.x, size.y);
+    /*Camera* camera = Camera::Allocate(size.x, size.y);
     camera->SetDirectOutput(true);
     g_window->AddCamera(camera);
     g_camera = g_scene->Instance("Camera");
     g_camera->AddComponent(DynamicCastCameraToComponent(camera));
 
-    g_scene->SetObserver(g_camera);
+    g_scene->SetObserver(g_camera);*/
 
     g_window->Synchronize();
 
@@ -233,7 +232,7 @@ void CameraMove(float dt) {
     auto dir = Input::GetMouseDrag() * dt;
     auto wheel = Input::GetMouseWheel() * dt;
 
-    if (g_camera.LockIfValid()) {
+    /*if (g_camera.LockIfValid()) {
         if (wheel != 0) {
             auto forward = g_camera->GetTransform()->Forward();
             g_camera->GetTransform()->Translate(forward * wheel);
@@ -254,7 +253,7 @@ void CameraMove(float dt) {
         }
 
         g_camera.Unlock();
-    }
+    }*/
 }
 
 void KeyCombinations() {
@@ -277,12 +276,12 @@ EXTERN void FixedUpdate() {
 
     if (Input::GetKeyDown(KeyCode::F2)) {
         g_window->Synchronize();
-        if (g_camera.LockIfValid()) {
+        /*if (g_camera.LockIfValid()) {
             auto camera = (Camera *) g_camera->GetComponent("Camera");
             camera->SetDirectOutput(!camera->IsDirectOutput());
             g_window->SetGUIEnabled(!g_window->IsGUIEnabled());
             g_camera.Unlock();
-        }
+        }*/
     }
 
     CameraMove(0.1f);

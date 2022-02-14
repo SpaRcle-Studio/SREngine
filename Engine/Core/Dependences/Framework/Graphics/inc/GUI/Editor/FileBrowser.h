@@ -6,22 +6,22 @@
 #define SRENGINE_FILEBROWSER_H
 
 #include <FileSystem/Path.h>
+#include <GUI/Widget.h>
 #include <string>
 #include <macros.h>
 
 namespace SR_GRAPH_NS::GUI {
-    class FileBrowser {
+    class FileBrowser : public Widget {
         using Hash = std::size_t;
     public:
         FileBrowser();
-        FileBrowser(const FileBrowser &copyFrom) = delete;
-        FileBrowser &operator=(const FileBrowser &copyFrom) = delete;
+        ~FileBrowser() override = default;
 
     public:
         void SetFolder(const Helper::Path& path);
-        void Draw();
 
     private:
+        void Draw() override;
         void Draw(const Helper::Path& root);
 
     private:

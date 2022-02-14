@@ -4,7 +4,7 @@
 #include <Types/Rigidbody.h>
 
 namespace Framework::Physics::Types {
-    Rigidbody::Rigidbody() : Component("Rigidbody") {
-
+    Rigidbody::Rigidbody() {
+        Component::Init<Rigidbody>();
     }
 }

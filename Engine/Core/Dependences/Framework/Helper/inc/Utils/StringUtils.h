@@ -89,7 +89,7 @@ namespace Framework::Helper {
 
             size_t size = str.size();
 
-            for (size_t i = (size - 1) + offset; i > 0; i--) {
+            for (int64_t i = (size - 1) + offset; i >= 0; --i) {
                 if (str[i] != c)
                     result += str[i];
                 else

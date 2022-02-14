@@ -25,6 +25,7 @@ namespace Framework::Helper::Types {
         SafePtr();
         ~SafePtr(); /// не должен быть виртуальным
     public:
+        operator bool() const { return Valid(); }
         bool operator==(SafePtr<T> ptr) const { return this->m_ptr == ptr.m_ptr; }
         bool operator!=(SafePtr<T> ptr) const { return this->m_ptr == ptr.m_ptr; }
         SafePtr<T> &operator=(const SafePtr<T> &ptr);
@@ -34,6 +35,7 @@ namespace Framework::Helper::Types {
     public:
         void Lock();
         void RecursiveLock();
+        void Replace(const SafePtr &ptr);
 
         void Unlock();
 
@@ -93,7 +95,7 @@ namespace Framework::Helper::Types {
         ++m_data->m_useCount;
     }
     template<typename T> SafePtr<T>::~SafePtr() {
-        if (m_data->m_useCount == 0) {
+        if (m_data->m_useCount <= 1) {
             SR_SAFE_PTR_ASSERT(!m_data->m_valid, "Ptr was not freed!");
             SR_SAFE_PTR_ASSERT(m_data->m_lockCount == 0 && !m_data->m_lock, "Ptr was not unlocked!");
 
@@ -245,6 +247,13 @@ namespace Framework::Helper::Types {
         Unlock();
 
         return false;
+    }
+
+    template<typename T> void SafePtr<T>::Replace(const SafePtr &ptr) {
+        SafePtr copy = *this;
+        copy.RecursiveLock();
+        *this = ptr;
+        copy.Unlock();
     }
 }
 

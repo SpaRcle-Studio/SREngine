@@ -13,7 +13,9 @@
 #include <GUI/Node.h>
 #include <GUI/Pin.h>
 
-Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor() {
+Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
+    : Framework::Graphics::GUI::Widget("Evo Script Editor")
+{
     auto config = new ax::NodeEditor::Config();
     static std::string settingsFile = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/NodeEditor.json");
     config->SettingsFile = settingsFile.c_str();

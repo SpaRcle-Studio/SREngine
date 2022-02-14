@@ -83,10 +83,10 @@ namespace Framework::Graphics {
         std::string           m_name                 = "Unnamed";
         std::string           m_path                 = "Unknown";
     private:
-        bool Init();
         bool Link();
         bool Compile();
     public:
+        bool Init();
         SR_FORCE_INLINE static Shader* GetCurrentShader() { return g_currentShader; }
         SR_FORCE_INLINE static void UnUseShaders() {
             Environment::Get()->UnUseShader();

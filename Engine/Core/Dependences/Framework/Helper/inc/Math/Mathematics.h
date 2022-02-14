@@ -46,6 +46,7 @@
 
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
+#define SR_CLAMP(x, upper, lower) (SR_MIN(upper, SR_MAX(x, lower)))
 
 #define RAD3(v) glm::vec3(RAD(v.x), RAD(v.y), RAD(v.z))
 #define DEG3(v) glm::vec3(DEG(v.x), DEG(v.y), DEG(v.z))

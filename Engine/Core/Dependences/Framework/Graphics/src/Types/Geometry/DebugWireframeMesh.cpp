@@ -53,6 +53,9 @@ void  Framework::Graphics::Types::DebugWireframeMesh::DrawVulkan() {
 bool Framework::Graphics::Types::DebugWireframeMesh::Calculate() {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
 
+    if (m_isCalculated)
+        return true;
+
     bool iboOK = ((m_IBO != SR_ID_INVALID && m_useIndices) || !m_useIndices);
     if (m_VBO != SR_ID_INVALID && iboOK && !m_hasErrors) {
         this->m_isCalculated = true;

@@ -10,7 +10,6 @@
 #include <Render/PostProcessing.h>
 #include <Debug.h>
 #include <functional>
-#include <GUI/ICanvas.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <Math/Vector3.h>
@@ -32,10 +31,11 @@ namespace Framework::Graphics {
         friend class ::Framework::API;
     private:
         Camera()
-            : Component("Camera")
-            , m_env(Environment::Get())
+            : m_env(Environment::Get())
             , m_pipeline(Environment::Get()->GetPipeLine())
-        { }
+        {
+            Component::Init<Camera>();
+        }
 
         ~Camera() override = default;
 
@@ -59,7 +59,6 @@ namespace Framework::Graphics {
         void OnRotate(const Math::FVector3& newValue) override;
         void OnMove(const Math::FVector3& newValue) override;
         void OnReady(bool ready) override;
-        void OnAttachComponent() override;
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;       }
         [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const { return m_isEnableDirectOut.first;   }
@@ -139,7 +138,6 @@ namespace Framework::Graphics {
 
         const PipeLine        m_pipeline          = PipeLine::Unknown;
 
-        GUI::ICanvas*         m_canvas            = nullptr;
         Window*		          m_window	     	  = nullptr;
         Environment*          m_env               = nullptr;
         PostProcessing*       m_postProcessing    = nullptr;

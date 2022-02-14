@@ -69,8 +69,8 @@ namespace Framework::Helper {
         void SetNameFromInspector(const std::string& name);
         /** \brief Get first needed component */
         Component* GetComponent(const std::string& name);
-        std::vector<Component*> GetComponents(const std::string& name);
-        std::vector<Component*> GetComponents();
+        Component* GetComponent(size_t id);
+        std::list<Component*> GetComponents() { return m_components; }
         bool AddComponent(Component* component);
         bool RemoveComponent(Component* component);
 
@@ -83,6 +83,11 @@ namespace Framework::Helper {
         bool AddChild(const GameObject::Ptr& child);
         bool IsChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
+
+    public:
+        template<typename T> T* GetComponent() {
+            return dynamic_cast<T*>(GetComponent(typeid(T).hash_code()));
+        }
 
     private:
         void UpdateComponents();
@@ -111,7 +116,7 @@ namespace Framework::Helper {
         Types::SafePtr<World::Scene>        m_scene          = Types::SafePtr<World::Scene>();
         Transform*                          m_transform      = nullptr;
 
-        std::vector<Component*>             m_components     = std::vector<Component*>();
+        std::list<Component*>               m_components     = std::list<Component*>();
 
         std::string                         m_name           = "Unnamed";
         std::string                         m_tag            = "None";
