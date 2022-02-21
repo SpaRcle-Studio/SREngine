@@ -38,13 +38,8 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
     if (m_backup.Valid() && scene.LockIfValid()) {
         Helper::Debug::Log(m_backup.Dump());
 
-        const auto gameObjectXml = m_backup.Root().GetNode("GameObject");
-
-        const auto tag = gameObjectXml.TryGetAttribute("Tag").ToString("Untagged");
-        const auto enabled = gameObjectXml.TryGetAttribute("Enabled").ToBool(true);
-
-        auto ptr = scene->Instance(gameObjectXml.GetAttribute("Name").ToString());
-        ptr->GetTransform()->Load(gameObjectXml.GetNode("Transform"));
+        const auto&& gameObjectXml = m_backup.Root().GetNode("GameObject");
+        auto ptr = scene->Instance(gameObjectXml);
 
         scene.Unlock();
         return true;

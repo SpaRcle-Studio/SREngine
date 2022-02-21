@@ -258,22 +258,22 @@ bool Mesh::FreeVideoMemory() {
 }
 
 void Mesh::ReCalcModel() {
-    glm::mat4 modelMat = glm::mat4(1); //glm::scale(glm::mat4(1), m_skew.ToGLM());
+    Math::Matrix4x4 modelMat = Math::Matrix4x4::FromTranslate(m_position);
 
     if (m_pipeline == PipeLine::OpenGL) {
-        modelMat = glm::translate(glm::mat4(1), { -m_position.x, m_position.y, m_position.z }) * modelMat;
-        modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3({ m_rotation.x, -m_rotation.y, m_rotation.z } ))));
+        modelMat *= Math::Matrix4x4::FromScale(m_skew.InverseAxis(0));
+        modelMat *= Math::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
     }
     else {
-        modelMat = glm::translate(glm::mat4(1), { m_position.x, m_position.y, m_position.z}) * modelMat;
-        modelMat *= mat4_cast(glm::quat(glm::radians(glm::vec3({ m_rotation.x, m_rotation.y, -m_rotation.z } ))));
+        modelMat *= Math::Matrix4x4::FromScale(m_skew);
+        modelMat *= Math::Matrix4x4::FromEulers(m_rotation);
     }
 
-    modelMat = glm::scale(modelMat, m_inverse ? -m_scale.ToGLM() : m_scale.ToGLM());
+    modelMat *= Math::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
 
-    this->m_modelMat = modelMat;
+    m_modelMat = modelMat.ToGLM();
 
-    this->UpdateUBO();
+    UpdateUBO();
 }
 
 void Mesh::WaitCalculate() const  {

@@ -138,7 +138,7 @@ namespace SR_UTILS_NS {
                 std::lock_guard<std::mutex> lock(m_mutex);
 
                 while (!m_commands.empty()) {
-                    SRVerifyFalse(DoCmd(m_commands.front()));
+                    SRVerifyFalse2(DoCmd(m_commands.front()), "Failed to execute command!");
                     m_commands.pop();
                 }
             }

@@ -108,10 +108,6 @@ int main(int argc, char **argv) {
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return Camera::Allocate(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
 
-        ComponentManager::Instance().RegisterEvents<Bone>([](Component* bone){
-            dynamic_cast<Bone*>(bone)->SetRender(Engine::Instance().GetRender());
-        });
-
         if (Helper::Features::Instance().Enabled("DebugChunks", false))
             Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
 

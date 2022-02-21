@@ -11,6 +11,8 @@
 #include <Render/Camera.h>
 
 namespace SR_GRAPH_NS::GUI {
+    class Guizmo;
+
     class SceneViewer : public Widget {
     public:
         explicit SceneViewer(Graphics::Window* window);
@@ -20,6 +22,9 @@ namespace SR_GRAPH_NS::GUI {
         void SetScene(Helper::World::Scene::Ptr scene);
         void Enable(bool value);
         void Update();
+
+        void OnKeyDown(const KeyDownEvent& event) override;
+        void OnKeyPress(const KeyPressEvent& event) override;
 
     private:
         void SetCameraActive(bool value);
@@ -33,14 +38,15 @@ namespace SR_GRAPH_NS::GUI {
         void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
 
     private:
-        Graphics::Window* m_window;
+        Graphics::Window* m_window = nullptr;
+        Guizmo* m_guizmo = nullptr;
         int32_t m_id;
         Helper::GameObject::Ptr m_camera;
         Helper::World::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = false;
         std::atomic<bool> m_cameraActive = false;
         Math::FVector3 m_rotation;
-        Math::FVector3 m_position;
+        Math::FVector3 m_translation;
 
     };
 }

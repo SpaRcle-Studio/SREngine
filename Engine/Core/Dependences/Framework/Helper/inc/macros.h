@@ -28,10 +28,10 @@
 /// #if defined(NDEBUG) || defined(_DEBUG)
 
 #if defined(SR_MSVC)
-    #if !defined(NDEBUG)
-        #define SR_DEBUG
-    #else
+    #if defined(NDEBUG)
         #define SR_RELEASE
+    #else
+        #define SR_DEBUG
     #endif
 #elif defined(SR_MINGW)
     #if defined(NDEBUG)
@@ -91,6 +91,7 @@
 
 #define SR_XML_NS Framework::Helper::Xml
 #define SR_UTILS_NS Framework::Helper
+#define SR_MATH_NS Framework::Helper::Math
 #define SR_GRAPH_NS Framework::Graphics
 #define SR_HTYPES_NS SR_UTILS_NS::Types
 #define SR_GTYPES_NS SR_GRAPH_NS::Types

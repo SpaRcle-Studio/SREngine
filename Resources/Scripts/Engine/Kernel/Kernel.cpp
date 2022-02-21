@@ -88,7 +88,7 @@ void LoadCubes() {
     render->RegisterMesh(mesh);
     mesh->WaitCalculate();
     cube->AddComponent(DynamicCastMeshToComponent(mesh));
-    cube->GetTransform()->Translate(FVector3(4, 0, 0));
+    ///cube->GetTransform()->Translate(FVector3(4, 0, 0));
 
     for (uint32_t i = 1; i <= 4; i++) {
         mesh = (Mesh*)mesh->Copy(nullptr);
@@ -102,7 +102,7 @@ void LoadCubes() {
         cube->AddChild(newCube);
         cube = newCube;
 
-        cube->GetTransform()->Translate(FVector3(2, 0, 0));
+        ///cube->GetTransform()->Translate(FVector3(2, 0, 0));
     }
 }
 
@@ -131,7 +131,7 @@ void LoadNemesis() {
 
         character->AddChild(object);
     }
-    character->GetTransform()->Rotate(FVector3(-90, 0, 0));
+    ///character->GetTransform()->Rotate(FVector3(-90, 0, 0));
 }
 
 void LoadMiku() {
@@ -163,7 +163,7 @@ void LoadMiku() {
         character->AddChild(cube);
     }
 
-    character->GetTransform()->Translate(character->GetTransform()->Right());
+    ///character->GetTransform()->Translate(character->GetTransform()->Right());
 }
 
 void LoadKurumi() {
@@ -188,7 +188,7 @@ void LoadKurumi() {
         character->AddChild(object);
     }
 
-    character->GetTransform()->Translate(-character->GetTransform()->Right());
+    ///character->GetTransform()->Translate(-character->GetTransform()->Right());
 }
 
 EXTERN void Start() {

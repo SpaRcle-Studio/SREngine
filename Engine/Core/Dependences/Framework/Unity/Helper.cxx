@@ -5,13 +5,17 @@
 #include "../Helper/src/EntityComponentSystem/ISavable.cpp"
 #include "../Helper/src/EntityComponentSystem/Transform.cpp"
 #include "../Helper/src/EntityComponentSystem/EntityManager.cpp"
+#include "../Helper/src/EntityComponentSystem/Transform3D.cpp"
 
 #include "../Helper/src/Events/EventManager.cpp"
+#include "../Helper/src/Events/Event.cpp"
+#include "../Helper/src/Events/EventDispatcher.cpp"
 
 #include "../Helper/src/FileSystem/FileSystem.cpp"
 #include "../Helper/src/FileSystem/Path.cpp"
 
 #include "../Helper/src/Input/InputSystem.cpp"
+#include "../Helper/src/Input/InputDispatcher.cpp"
 
 #include "../Helper/src/Math/Matrix3x3.cpp"
 #include "../Helper/src/Math/Quaternion.cpp"

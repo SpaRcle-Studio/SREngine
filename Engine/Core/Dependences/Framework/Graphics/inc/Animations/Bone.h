@@ -19,6 +19,11 @@ namespace Framework::Graphics::Animations {
     private:
         Types::Mesh* m_mesh = nullptr;
     public:
+
+        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) {
+            return nullptr;
+        }
+
         void SetRender(Render* render) {
             if (m_mesh) {
                 Helper::Debug::Error("Bone::SetRender() : render is already set!");

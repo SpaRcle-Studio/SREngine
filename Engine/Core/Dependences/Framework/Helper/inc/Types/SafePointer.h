@@ -39,6 +39,16 @@ namespace Framework::Helper::Types {
 
         void Unlock();
 
+        template<typename U> U Do(const std::function<U(T* ptr)>& func, U _default) {
+            if (LockIfValid()) {
+                const auto&& result = func(m_ptr);
+                Unlock();
+                return result;
+            }
+
+            return _default;
+        }
+
         bool LockIfValid();
         bool RecursiveLockIfValid();
 

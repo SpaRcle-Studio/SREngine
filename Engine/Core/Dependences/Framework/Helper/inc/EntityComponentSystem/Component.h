@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <mutex>
 #include <Debug.h>
+#include <Types/DataStorage.h>
 #include <Types/SafePointer.h>
 #include <Utils/Singleton.h>
 #include <Utils/NonCopyable.h>
@@ -28,34 +29,53 @@ namespace Framework::Helper {
     class ComponentManager : public Singleton<ComponentManager>, public NonCopyable {
         friend class Singleton<ComponentManager>;
         typedef std::function<void(Component*)> Event;
+        typedef std::function<Component*(const Helper::Xml::Node& xml, const Helper::Types::DataStorage* dataStorage)> Loader;
     public:
         Component* CreateComponentOfName(const std::string& name);
 
         template<typename T> Component* CreateComponent() {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
             return CreateComponentImpl(typeid(T).hash_code());
         }
 
         std::unordered_map<std::string, size_t> GetComponentsNames() {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
             return m_ids;
         }
 
         void DoEvent(Component* caller, size_t hash_id) {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
             if (m_events.count(hash_id) == 1)
                 m_events.at(hash_id)(caller);
         }
 
         template<typename T> bool RegisterEvents(const Event& onAttach) {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
             m_events.insert(std::make_pair(typeid(T).hash_code(), onAttach));
             return true;
         }
 
         template<typename T> bool RegisterComponent(const std::function<Component*(void)>& constructor) {
-            std::lock_guard<std::mutex> lock(m_mutex);
-            return RegisterComponentImpl(typeid(T).hash_code(), StringUtils::BackRead(typeid(T).name(), ':'), constructor);
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+            const auto&& code = typeid(T).hash_code();
+
+            m_loaders.insert(std::make_pair(code, [](const Helper::Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) -> Component* {
+                return T::LoadComponent(xml, dataStorage);
+            }));
+
+            return RegisterComponentImpl(code, StringUtils::BackRead(typeid(T).name(), ':'), constructor);
+        }
+
+        Component* Load(const Xml::Node& componentXml);
+
+        /// блокировщики контекста. Нужно для того, чтобы если есть несоклько рендеров или окон,
+        /// чтобы можно было безопасно их задать в DataStorage на время выполнения
+        void LockContext();
+        void UnlockContext();
+
+        Types::DataStorage* GetContext() {
+            return &m_context;
         }
 
     private:
@@ -63,11 +83,13 @@ namespace Framework::Helper {
         Component* CreateComponentImpl(size_t id);
 
     private:
-        std::mutex m_mutex = std::mutex();
+        mutable std::recursive_mutex m_mutex = std::recursive_mutex();
         std::unordered_map<size_t, std::function<Component*(void)>> m_creators;
+        std::unordered_map<size_t, Loader> m_loaders;
         std::unordered_map<size_t, Event> m_events;
         std::unordered_map<size_t, std::string> m_names;
         std::unordered_map<std::string, size_t> m_ids;
+        Types::DataStorage m_context;
 
     };
 

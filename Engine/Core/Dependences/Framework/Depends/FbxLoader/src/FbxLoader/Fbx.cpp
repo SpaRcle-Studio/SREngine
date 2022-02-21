@@ -15,8 +15,8 @@ void FbxLoader::NodeAttribute::Save(std::ofstream& file) const {
 
 void FbxLoader::NodeAttribute::Load(std::ifstream &file) {
     id = Tools::LoadValue<int64_t>(file);
-    name = Tools::LoadString(file);
-    type = Tools::LoadString(file);
+    name = Tools::LoadStr(file);
+    type = Tools::LoadStr(file);
 }
 
 FbxLoader::NodeAttribute::NodeAttribute()
@@ -38,8 +38,8 @@ void FbxLoader::Geometry::Save(std::ofstream &file) const {
 
 void FbxLoader::Geometry::Load(std::ifstream &file) {
     id = Tools::LoadValue<int64_t>(file);
-    name = Tools::LoadString(file);
-    type = Tools::LoadString(file);
+    name = Tools::LoadStr(file);
+    type = Tools::LoadStr(file);
     vertices = Tools::LoadComplexVector<Vertex>(file);
     indices = Tools::LoadVector<uint32_t>(file);
     materials = Tools::LoadVectorOfPairs<uint32_t, uint32_t>(file);

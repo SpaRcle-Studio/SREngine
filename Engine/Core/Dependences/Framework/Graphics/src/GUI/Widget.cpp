@@ -36,4 +36,18 @@ namespace Framework::Graphics::GUI {
 
         ImGui::Text("%s", text.c_str());
     }
+
+    void Widget::Open()  {
+        if (!m_open)
+            OnOpen();
+
+        m_open = true;
+    }
+
+    void Widget::Close() {
+        if (m_open)
+            OnClose();
+
+        m_open = false;
+    }
 }

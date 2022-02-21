@@ -15,8 +15,8 @@
 
 #define SR_POW(value) (value * value)
 
-#define RAD(x) (x * SR_PI / 180.0)
-#define DEG(x) (x / SR_PI * 180.0)
+#define RAD(x) (x * (SR_PI / 180.0))
+#define DEG(x) (x * (180.0 / SR_PI))
 
 //#define _FORCE_INLINE_ __attribute__((always_inline))
 //#define _ALWAYS_INLINE_ inline __attribute__((always_inline))
@@ -42,7 +42,8 @@
 #define Math_PI 3.1415926535897932384626433833
 #define Math_E 2.7182818284590452353602874714
 #define Math_INF INFINITY
-#define Math_NAN NAN
+
+#define SR_NAN NAN
 
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
@@ -57,7 +58,7 @@
 #include <limits>
 
 namespace Framework::Helper::Math {
-    typedef double Unit; //! can broken render
+    typedef double Unit; //! can broke render
 
     const double_t DoubleMAX = DBL_MAX;
     const float_t  FloatMAX  = FLT_MAX;
@@ -87,6 +88,7 @@ namespace Framework::Helper::Math {
     }
 }
 
+#define SR_EQUALS(a, b) (Framework::Helper::Math::is_equal_approx(a, b))
 #define Deg180InRad ((Framework::Helper::Math::Unit)M_PI)
 #define Deg90InRad  ((Framework::Helper::Math::Unit)RAD(90.0))
 

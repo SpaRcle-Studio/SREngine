@@ -2,10 +2,10 @@
 // Created by Monika on 11.02.2022.
 //
 
-#include <GUI/Editor/Hierarchy.h>
+#include <GUI/Hierarchy.h>
 #include <Input/InputSystem.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
     { }
@@ -91,5 +91,24 @@ namespace SR_GRAPH_NS::GUI {
         });
 
         ImGui::TreePop();
+    }
+
+    void Hierarchy::OnKeyDown(const KeyDownEvent &event) {
+        switch (event.GetKeyCode()) {
+            case KeyCode::Del:
+                if (m_scene.LockIfValid()) {
+                    if (auto &&selected = m_scene->GetSelected(); selected.LockIfValid()) {
+                        auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                        selected.Unlock();
+                    }
+                    m_scene.Unlock();
+                }
+                break;
+            default:
+                break;
+        }
+
+        InputHandler::OnKeyDown(event);
     }
 }

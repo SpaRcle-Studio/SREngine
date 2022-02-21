@@ -23,7 +23,7 @@ namespace Framework::Helper::Math {
         glm::mat4 self = glm::mat4(1);
 
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale){
-            this->self = glm::translate(glm::mat4(1), {
+            self = glm::translate(glm::mat4(1), {
                     translate.x,
                     translate.y,
                     translate.z
@@ -34,12 +34,32 @@ namespace Framework::Helper::Math {
             self = glm::scale(self, scale.ToGLM());
         }
 
-        explicit Matrix4x4(const Unit& scalar) {
-            this->self = glm::mat4((float)scalar);
+        explicit constexpr Matrix4x4(const Unit& scalar) {
+            self = glm::mat4(static_cast<float_t>(scalar));
         }
 
-        explicit Matrix4x4(const glm::mat4& mat) {
-            this->self = mat;
+        explicit constexpr Matrix4x4(const glm::mat4& mat) {
+            self = mat;
+        }
+
+        static constexpr Matrix4x4 Identity() {
+            return Matrix4x4(1);
+        }
+
+        static Matrix4x4 RotationYawPitchRoll(const FVector3& angles) {
+            return Matrix4x4(0.f, angles.ToQuat(), 1.f);
+        }
+
+        static Matrix4x4 FromEulers(const FVector3& eulers) {
+            return RotationYawPitchRoll(eulers.Radians());
+        }
+
+        static Matrix4x4 FromScale(const FVector3& scale) {
+            return Matrix4x4(glm::scale(glm::mat4x4(1), scale.ToGLM()));
+        }
+
+        static Matrix4x4 FromTranslate(const FVector3& translation) {
+            return Matrix4x4(translation, FVector3::Zero(), FVector3::One());
         }
 
         [[nodiscard]] Matrix4x4 Inverse() const {
@@ -118,6 +138,63 @@ namespace Framework::Helper::Math {
             return Matrix4x4(this->self - mat.self);
         }
     };
+
+    static bool DecomposeTransform(const glm::mat4& matrix, FVector3& translation, FVector3& rotation, FVector3& scale);
+
+    bool DecomposeTransform(const glm::mat4 &matrix, FVector3 &translation, FVector3 &rotation, FVector3 &scale) {
+        // From glm::decompose in matrix_decompose.inl
+
+        using namespace glm;
+        using T = float;
+
+        mat4 LocalMatrix(matrix);
+
+        // Normalize the matrix.
+        if (epsilonEqual(LocalMatrix[3][3], static_cast<float>(0), epsilon<T>()))
+            return false;
+
+        // First, isolate perspective.  This is the messiest.
+        if (
+                epsilonNotEqual(LocalMatrix[0][3], static_cast<T>(0), epsilon<T>()) ||
+                epsilonNotEqual(LocalMatrix[1][3], static_cast<T>(0), epsilon<T>()) ||
+                epsilonNotEqual(LocalMatrix[2][3], static_cast<T>(0), epsilon<T>()))
+        {
+            // Clear the perspective partition
+            LocalMatrix[0][3] = LocalMatrix[1][3] = LocalMatrix[2][3] = static_cast<T>(0);
+            LocalMatrix[3][3] = static_cast<T>(1);
+        }
+
+        // Next take care of translation (easy).
+        translation = vec3(LocalMatrix[3]);
+        LocalMatrix[3] = vec4(0, 0, 0, LocalMatrix[3].w);
+
+        vec3 Row[3], Pdum3;
+
+        // Now get scale and shear.
+        for (length_t i = 0; i < 3; ++i)
+            for (length_t j = 0; j < 3; ++j)
+                Row[i][j] = LocalMatrix[i][j];
+
+        // Compute X scale factor and normalize first row.
+        scale.x = length(Row[0]);
+        Row[0] = detail::scale(Row[0], static_cast<T>(1));
+        scale.y = length(Row[1]);
+        Row[1] = detail::scale(Row[1], static_cast<T>(1));
+        scale.z = length(Row[2]);
+        Row[2] = detail::scale(Row[2], static_cast<T>(1));
+
+        rotation.y = asin(-Row[0][2]);
+        if (cos(rotation.y) != 0) {
+            rotation.x = atan2(Row[1][2], Row[2][2]);
+            rotation.z = atan2(Row[0][1], Row[0][0]);
+        }
+        else {
+            rotation.x = atan2(-Row[2][0], Row[1][1]);
+            rotation.z = 0;
+        }
+
+        return true;
+    }
 }
 
 #endif //GAMEENGINE_MATRIX4X4_H

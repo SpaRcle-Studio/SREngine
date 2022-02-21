@@ -32,24 +32,43 @@ namespace Framework::Helper::Math {
             return mat4_cast(self);
         }
 
-        [[nodiscard]] Vector3<Unit> EulerAngle(bool degrees = true) const;
+        [[nodiscard]] Vector3<Unit> EulerAngle() const; //bool degrees = true
 
         [[nodiscard]] Quaternion Rotate(const Vector3<Unit>& v) const;
-        Quaternion(const Quaternion &p_q) {
-            this->self = p_q.self;
+
+        constexpr Quaternion(const Quaternion &p_q) {
+            self = p_q.self;
         }
 
-        Quaternion() {
+        constexpr Quaternion() {
             self = glm::quat();
         }
 
-        Quaternion(const Vector3<Unit> &p_euler, bool inRads = false);
+        //, bool inRads = false
+        Quaternion(const Vector3<Unit> &p_euler);
         explicit Quaternion(const glm::quat &q) {
             self = q;
         }
 
+        constexpr explicit Quaternion(Unit x, Unit y, Unit z, Unit w) {
+            self.x = x;
+            self.y = y;
+            self.z = z;
+            self.w = w;
+        }
+
+        static Quaternion FromEuler(const Vector3<Unit>& euler);
+
+        constexpr static Quaternion Identity() {
+            return Quaternion(0.0, 0.0, 0.0, 1.0);
+        }
+
         [[nodiscard]] Quaternion Inverse() const {
             return Quaternion(glm::inverse(self));
+        }
+
+        [[nodiscard]] std::string ToString() const {
+            return "(" + std::to_string(self.x) + ", " + std::to_string(self.y) + ", " + std::to_string(self.z) + ", " + std::to_string(self.w) + ")";
         }
 
         _FORCE_INLINE_ void operator+=(const Quaternion &p_q) {

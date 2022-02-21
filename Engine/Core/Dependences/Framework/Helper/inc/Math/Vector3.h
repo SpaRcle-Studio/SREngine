@@ -22,32 +22,32 @@ namespace Framework::Helper::Math {
             T coord[3] = { 0 };
         };
     public:
-        _FORCE_INLINE_ Vector3() {
+        constexpr _FORCE_INLINE_ Vector3() {
             x = 0;
             y = 0;
             z = 0;
         }
-        template<typename U> _FORCE_INLINE_ explicit Vector3(const Vector3<U>& vec) {
+        template<typename U> constexpr _FORCE_INLINE_ explicit Vector3(const Vector3<U>& vec) {
             x = static_cast<T>(vec.x);
             y = static_cast<T>(vec.y);
             z = static_cast<T>(vec.z);
         }
-        _FORCE_INLINE_ explicit Vector3(const float* vec) {
+        _FORCE_INLINE_ constexpr explicit Vector3(const float* vec) {
             x = (Unit)vec[0];
             y = (Unit)vec[1];
             z = (Unit)vec[2];
         }
-        _FORCE_INLINE_ explicit Vector3(const unsigned char* axis) {
+        _FORCE_INLINE_ constexpr explicit Vector3(const uint8_t* axis) {
             x = (Unit)axis[0];
             y = (Unit)axis[1];
             z = (Unit)axis[2];
         }
-        _FORCE_INLINE_ Vector3(T p_x, T p_y, T p_z) {
+        _FORCE_INLINE_ constexpr Vector3(T p_x, T p_y, T p_z) {
             x = p_x;
             y = p_y;
             z = p_z;
         }
-        _FORCE_INLINE_ Vector3(T p) {
+        _FORCE_INLINE_ constexpr Vector3(T p) {
             x = p;
             y = p;
             z = p;
@@ -69,6 +69,9 @@ namespace Framework::Helper::Math {
         template<typename U> static Vector3<T> YZ(const Vector2<U>& v, U value) {
             return Vector3<T>(static_cast<T>(value), static_cast<T>(v.x), static_cast<T>(v.y));
         }
+
+        static constexpr Vector3<T> Zero() { return Vector3(static_cast<T>(0)); }
+        static constexpr Vector3<T> One() { return Vector3(static_cast<T>(1)); }
 
         template<typename U> static Vector3<T> XY(const Vector2<U>& v) { return XY(v, 0); }
         template<typename U> static Vector3<T> XZ(const Vector2<U>& v) { return XZ(v, 0); }
@@ -132,8 +135,8 @@ namespace Framework::Helper::Math {
         [[nodiscard]] T Distance(Vector3 point) const {
             return sqrt(
                     pow(point.x - x, 2) +
-                        pow(point.y - y, 2) +
-                        pow(point.z - z, 2)
+                    pow(point.y - y, 2) +
+                    pow(point.z - z, 2)
             );
         }
 
@@ -157,11 +160,15 @@ namespace Framework::Helper::Math {
             return Vector3(xd, yd, zd);
         }
 
+        [[nodiscard]] bool ContainsNaN() const {
+            return static_cast<float>(x) == SR_NAN || static_cast<float>(y) == SR_NAN || static_cast<float>(z) == SR_NAN;
+        }
+
         [[nodiscard]] Vector3 Inverse() const {
             return Vector3(-x, -y, -z);
         }
 
-        [[nodiscard]] Vector3 InverseAxis(unsigned char axis) const {
+        [[nodiscard]] Vector3 InverseAxis(uint8_t axis) const {
             Vector3 v = *this;
             v[axis] = -v[axis];
             return v;
@@ -186,7 +193,8 @@ namespace Framework::Helper::Math {
             return vec3;
         }
 
-        [[nodiscard]] Quaternion ToQuat(bool inRads = false) const;
+        //bool inRads = false
+        [[nodiscard]] Quaternion ToQuat() const;
 
         _FORCE_INLINE_ const T &operator[](int p_axis) const {
             return coord[p_axis];
@@ -209,6 +217,10 @@ namespace Framework::Helper::Math {
 
         [[nodiscard]] Vector3 Abs() const {
             return Vector3(static_cast<T>(abs(x)), static_cast<T>(abs(y)), static_cast<T>(abs(z)));
+        }
+
+        [[nodiscard]] Vector3 FixEulerAngles() const {
+            return Vector3(FixAxis(x), FixAxis(y), FixAxis(z));
         }
 
         [[nodiscard]] T Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
@@ -319,7 +331,7 @@ namespace Framework::Helper::Math {
             return glm::vec3(x, y, z);
         }
         static Unit Magnitude(Vector3 vec) {
-            return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+            return sqrt(SR_POW(vec.x) + SR_POW(vec.y) + SR_POW(vec.z));
         }
 
         static T Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
@@ -347,17 +359,22 @@ namespace Framework::Helper::Math {
             return vector;
         }
 
-        static Vector3 FixEulerAngles(const Vector3& vec3) {
-            return Vector3(
-                    vec3.x > 0 ? vec3.x - (Unit)CMP_BIG_EPSILON : vec3.x + (Unit)CMP_BIG_EPSILON,
-                    vec3.y > 0 ? vec3.y - (Unit)CMP_BIG_EPSILON : vec3.y + (Unit)CMP_BIG_EPSILON,
-                    vec3.z > 0 ? vec3.z - (Unit)CMP_BIG_EPSILON : vec3.z + (Unit)CMP_BIG_EPSILON);
+        static T FixAxis(T axis) {
+            if (axis == 0)
+                return static_cast<T>(CMP_BIG_EPSILON);
+
+            T absolute = std::abs(axis);
+            if (SR_EQUALS(absolute, 90) || SR_EQUALS(absolute, 180) || SR_EQUALS(absolute, 270) || SR_EQUALS(absolute, 360))
+                return axis - static_cast<T>(CMP_BIG_EPSILON);
+
+            return axis;
         }
     };
 
+    // bool inRads
     template<typename T>
-    Quaternion Vector3<T>::ToQuat(bool inRads) const {
-        return Quaternion(*this, inRads);
+    Quaternion Vector3<T>::ToQuat() const {
+        return Quaternion(*this); //, inRads
     }
 
     template<typename T>

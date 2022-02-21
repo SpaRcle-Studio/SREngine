@@ -79,6 +79,10 @@ namespace Framework::Graphics {
         bool CompleteResize();
         void PoolEvents();
 
+        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) {
+            return nullptr;
+        }
+
         /**
          \brief Update shader parameters: proj-mat and view-mat.
          \warning Call after shader use, and before draw. */

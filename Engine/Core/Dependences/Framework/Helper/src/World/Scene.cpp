@@ -219,8 +219,7 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
     if (auto size = m_selectedGameObjects.size(); size == 0 || size > 1)
         return Types::SafePtr<GameObject>();
     else {
-        auto gameObject = *m_selectedGameObjects.begin();
-        return gameObject;
+        return *m_selectedGameObjects.begin();;
     }
 }
 
@@ -246,7 +245,7 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
     Math::FVector3 observerPos;
 
     if (m_observer->m_target.LockIfValid()) {
-        observerPos = m_observer->m_target->GetTransform()->GetPosition().Singular(chunkSize.Cast<Math::Unit>());
+        observerPos = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
 
         auto&& lastChunk = m_observer->m_lastChunk;
         auto&& lastRegion = m_observer->m_lastRegion;
@@ -403,7 +402,7 @@ void Scene::UpdateContainers() {
     const auto regSize2 = Math::IVector2(m_regionWidth - 1);
 
     for (const GameObject::Ptr& gameObject : this->GetRootGameObjects()) {
-        const auto gmPosition = gameObject->GetTransform()->GetPosition();
+        const Math::FVector3 gmPosition = gameObject->GetTransform()->GetTranslation();
         auto position = AddOffset(
                 Math::IVector3(gmPosition.Singular(chunkSize.Cast<Math::Unit>())) / chunkSize,
                 -m_observer->m_offset.m_chunk
@@ -471,6 +470,7 @@ void Scene::ReloadChunks() {
     for (auto&& [position, pRegion] : m_regions)
         pRegion->Reload();
 }
+
 
 
 

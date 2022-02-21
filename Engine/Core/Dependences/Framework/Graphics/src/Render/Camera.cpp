@@ -64,7 +64,7 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
     else {
         matrix = glm::rotate(matrix, -m_pitch + float(M_PI), { 1, 0, 0 });
         matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
-        matrix = glm::rotate(matrix, m_roll,  { 0, 0, 1 });
+        matrix = glm::rotate(matrix, -m_roll,  { 0, 0, 1 });
 
         m_viewMat = matrix;
 

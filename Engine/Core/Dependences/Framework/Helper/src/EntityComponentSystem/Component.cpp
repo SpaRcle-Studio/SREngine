@@ -21,7 +21,7 @@ namespace Framework::Helper {
     }
 
     Component *Helper::ComponentManager::CreateComponentOfName(const std::string &name) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         if (m_ids.count(name) == 0) {
             Helper::Debug::Error("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
@@ -38,6 +38,18 @@ namespace Framework::Helper {
         }
 
         return m_creators.at(id)();
+    }
+
+    Component *ComponentManager::Load(const Xml::Node &componentXml) {
+        return nullptr;
+    }
+
+    void ComponentManager::LockContext() {
+        m_mutex.lock();
+    }
+
+    void ComponentManager::UnlockContext() {
+        m_mutex.unlock();
     }
 }
 

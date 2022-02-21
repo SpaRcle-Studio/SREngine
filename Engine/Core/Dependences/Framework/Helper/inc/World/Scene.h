@@ -52,6 +52,7 @@ namespace Framework::Helper::World {
         virtual void BeginSync() = 0;
         virtual void EndSync() = 0;
         virtual bool TrySync() = 0;
+        virtual GameObject::Ptr Instance(const Xml::Node& gameObjectXml) = 0;
 
         void SetObserver(const GameObject::Ptr& observer) { m_observer->m_target = observer; }
 

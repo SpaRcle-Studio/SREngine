@@ -5,5 +5,5 @@
 	<Widget Name="Evo Script Editor" Open="false" />
 	<Widget Name="Scene" Open="true" />
 	<Widget Name="Inspector" Open="true" />
-	<Widget Name="World edit" Open="true" />
+	<Widget Name="World edit" Open="false" />
 </Widgets>

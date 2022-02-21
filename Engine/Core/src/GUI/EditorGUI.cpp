@@ -152,4 +152,16 @@ void EditorGUI::Update() {
     m_sceneViewer->Update();
 }
 
+void EditorGUI::OnKeyDown(const KeyDownEvent &event) {
+    WidgetManager::OnKeyDown(event);
+}
+
+void EditorGUI::OnKeyPress(const KeyPressEvent &event) {
+    WidgetManager::OnKeyPress(event);
+}
+
+void EditorGUI::OnKeyUp(const KeyUpEvent &event) {
+    WidgetManager::OnKeyUp(event);
+}
+
 

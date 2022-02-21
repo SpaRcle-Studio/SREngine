@@ -27,11 +27,13 @@ namespace Framework::Helper {
     };
 
     class Transform;
+    class Transform3D;
     class Component;
 
     class GameObject : public Types::SafePtr<GameObject>, public Entity {
         friend class World::Scene;
         friend class Transform;
+        friend class Transform3D;
         friend class ::Framework::API;
 
         enum class DestroyBy {
@@ -43,42 +45,42 @@ namespace Framework::Helper {
 
     private:
         GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag = "Untagged");
-        virtual ~GameObject();
+        ~GameObject() override;
 
     public:
-        [[nodiscard]] Types::SafePtr<World::Scene> GetScene() const { return this->m_scene; }
-        [[nodiscard]] Transform* GetTransform() const { return this->m_transform; }
-        [[nodiscard]] GameObject::Ptr GetParent() const { return m_parent; }
-        [[nodiscard]] std::string GetName() const;
-        [[nodiscard]] bool IsActive() const { return m_isActive && m_isParentActive; }
-        [[nodiscard]] bool IsEnabled() const { return m_isActive; }
-        [[nodiscard]] SR_INLINE bool HasChildren() const { return !m_children.empty(); }
-        [[nodiscard]] SR_INLINE bool IsSelect() const { return this->m_isSelect; }
-        [[nodiscard]] SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
-        [[nodiscard]] SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
+        SR_NODISCARD Types::SafePtr<World::Scene> GetScene() const { return m_scene; }
+        SR_NODISCARD Transform3D* GetTransform() const { return m_transform; }
+        SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
+        SR_NODISCARD std::string GetName() const;
+        SR_NODISCARD bool IsActive() const { return m_isActive && m_isParentActive; }
+        SR_NODISCARD bool IsEnabled() const { return m_isActive; }
+        SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
+        SR_NODISCARD SR_INLINE bool IsSelect() const { return m_isSelect; }
+        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
+        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
 
         [[nodiscard]] Xml::Document Save() const override;
 
         Math::FVector3 GetBarycenter();
         Math::FVector3 GetHierarchyBarycenter();
 
-        void ForEachComponent(const std::function<bool(Component*)>& fun);
         void ForEachChild(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetParent(const GameObject::Ptr& parent);
         void SetName(const std::string& name);
-        void SetNameFromInspector(const std::string& name);
-        /** \brief Get first needed component */
+
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
         std::list<Component*> GetComponents() { return m_components; }
         bool AddComponent(Component* component);
         bool RemoveComponent(Component* component);
+        bool ContainsComponent(const std::string& name);
+        void ForEachComponent(const std::function<bool(Component*)>& fun);
 
         bool Contains(const Types::SafePtr<GameObject>& child);
-        bool ContainsComponent(const std::string& name);
         void SetSelect(bool value);
         void SetActive(bool value);
         void Destroy(DestroyBy by = DestroyBy::Other);
+        void SetTransform(Transform3D* transform3D);
 
         bool AddChild(const GameObject::Ptr& child);
         bool IsChild(const GameObject::Ptr& child);
@@ -114,7 +116,7 @@ namespace Framework::Helper {
         std::atomic<bool>                   m_isDestroy      = false;
 
         Types::SafePtr<World::Scene>        m_scene          = Types::SafePtr<World::Scene>();
-        Transform*                          m_transform      = nullptr;
+        Transform3D*                        m_transform      = nullptr;
 
         std::list<Component*>               m_components     = std::list<Component*>();
 

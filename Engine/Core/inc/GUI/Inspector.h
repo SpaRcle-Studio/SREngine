@@ -26,6 +26,7 @@ namespace Framework::Core::GUI {
     private:
         Types::SafePtr<Helper::GameObject> m_gameObject;
         Types::SafePtr<World::Scene> m_scene;
+        bool m_local = true;
 
     };
 }

@@ -10,3 +10,6 @@
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui-node-editor"]
 	path = Engine/Core/Dependences/Framework/Depends/imgui-node-editor
 	url = https://github.com/Monika0000/imgui-node-editor
+[submodule "Engine/Core/Dependences/Framework/Depends/ImGuizmo"]
+	path = Engine/Core/Dependences/Framework/Depends/ImGuizmo
+	url = https://github.com/Monika0000/ImGuizmo

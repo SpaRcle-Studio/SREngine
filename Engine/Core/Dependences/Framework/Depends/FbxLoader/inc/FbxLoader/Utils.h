@@ -50,7 +50,7 @@ namespace FbxLoader::Tools {
         return pair;
     }
 
-    static std::string LoadString(std::ifstream& file) {
+    static std::string LoadStr(std::ifstream& file) {
         std::string str;
         int size;
         file.read((char*)&size, sizeof(int32_t));

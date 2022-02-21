@@ -22,10 +22,12 @@ namespace Framework::Core::GUI {
         GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetPipeLine()) {
             m_env = Graphics::Environment::Get();
         }
-        GUISystem(const GUISystem&) = default;
         ~GUISystem() = default;
 
     private:
+        float_t m_bounds[6] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
+        float_t m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };
+
         int32_t                  m_snapValue    = 100;
         Graphics::Environment*   m_env          = nullptr;
         const Graphics::PipeLine m_pipeLine     = Graphics::PipeLine::Unknown;

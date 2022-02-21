@@ -15,7 +15,13 @@ namespace Framework::Physics::Types {
     public:
         Rigidbody();
     private:
-        ~Rigidbody() = default;
+        ~Rigidbody() override = default;
+
+    public:
+        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) {
+            return nullptr;
+        }
+
     protected:
         void OnDestroyGameObject() override {
             delete this;

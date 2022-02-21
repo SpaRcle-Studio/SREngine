@@ -238,7 +238,7 @@ void GUISystem::DrawTexture(
     }
 
     if (m_pipeLine == Graphics::PipeLine::OpenGL)
-        DrawImage(reinterpret_cast<ImTextureID>(id), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
+        DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
         DrawImage(m_env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
@@ -413,47 +413,13 @@ void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helpe
 
         std::string gm_name = gameObject->GetName();
         if (ImGui::InputText("Name", &gm_name))
-            gameObject->SetNameFromInspector(gm_name);
+            gameObject->SetName(gm_name);
 
         ImGui::Text("Entity id: %llu", gameObject->GetEntityId());
         //ImGui::Text("Entity path: %s", gameObject->GetEntityPath().CStr());
 
         ImGui::Separator();
         DrawTextOnCenter("Transform");
-
-        auto position = gameObject->GetTransform()->GetPosition().ToGLM();
-        auto rotation = gameObject->GetTransform()->GetRotation().ToGLM();
-        auto scale    = gameObject->GetTransform()->GetScale().ToGLM();
-        auto skew     = gameObject->GetTransform()->GetSkew().ToGLM();
-
-        ImGui::Text("[Global]");
-
-        if (ImGui::InputFloat3("G Tr", &position[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            gameObject->GetTransform()->SetGlobalPosition(position);
-
-        if (ImGui::InputFloat3("G Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
-            gameObject->GetTransform()->SetRotation(rotation);
-
-        if (ImGui::InputFloat3("G Sc", &scale[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
-            gameObject->GetTransform()->SetScale(scale);
-
-        ImGui::Text("[Local]");
-
-        position = gameObject->GetTransform()->GetPosition(true).ToGLM();
-        rotation = gameObject->GetTransform()->GetRotation(true).ToGLM();
-        scale    = gameObject->GetTransform()->GetScale(true).ToGLM();
-
-        if (ImGui::InputFloat3("L Tr", &position[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            gameObject->GetTransform()->SetLocalPosition(position);
-
-        if (ImGui::InputFloat3("L Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            gameObject->GetTransform()->SetLocalRotation(rotation);
-
-        if (ImGui::InputFloat3("L Sc", &scale[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            gameObject->GetTransform()->SetLocalScale(position);
-
-        if (ImGui::InputFloat3("L Sw", &skew[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            gameObject->GetTransform()->SetSkew(skew);
 
         this->DrawComponents(gameObject);
 
@@ -593,6 +559,7 @@ void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::S
     if (!camera)
         return;
 
+    /*
     if (gameObject.LockIfValid()) {
         ImGuiWindow *window = ImGui::GetCurrentWindow();
         if (!window || window->SkipItems)
@@ -640,7 +607,7 @@ void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::S
                 &camera->GetImGuizmoView()[0][0],
                 &camera->GetProjection()[0][0],
                 m_boundsActive ? ImGuizmo::BOUNDS : m_currentGuizmoOperation, m_currentGuizmoMode,
-                &mat[0][0],
+                &mat[0][0],"F
                 &delta[0][0], nullptr, nullptr, boundsSnap,
                 &value, &axis[0])) {
             if (m_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
@@ -680,7 +647,7 @@ void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::S
         old_rotate = value;
 
         gameObject.Unlock();
-    }
+    }*/
 }
 
 bool GUISystem::ButtonWithId(
@@ -787,6 +754,10 @@ bool GUISystem::BeginMenuBar() {
 
         if (ImGui::MenuItem("Close scene")) {
             Engine::Instance().CloseScene();
+        }
+
+        if (ImGui::MenuItem("Reload")) {
+            Engine::Instance().Reload();
         }
 
         if (ImGui::MenuItem("Exit")) {

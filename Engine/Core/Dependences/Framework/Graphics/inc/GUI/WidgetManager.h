@@ -9,6 +9,8 @@
 #include <Utils/NonCopyable.h>
 #include <Utils/Singleton.h>
 #include <mutex>
+#include <Input/InputHandler.h>
+#include <Input/InputSystem.h>
 #include <string>
 #include <unordered_map>
 
@@ -17,7 +19,7 @@ namespace Framework::Graphics::GUI {
 
     typedef std::unordered_map<std::string, Widget*> Widgets;
 
-    class WidgetManager : public Helper::NonCopyable {
+    class WidgetManager : public Helper::NonCopyable, public Helper::InputHandler {
     public:
         ~WidgetManager() override;
 
@@ -28,6 +30,9 @@ namespace Framework::Graphics::GUI {
 
     public:
         Widgets& GetWidgets() { return m_widgets; }
+
+        void OnKeyDown(const Helper::KeyDownEvent& event) override;
+        void OnKeyUp(const Helper::KeyUpEvent& event) override;
 
     private:
         std::mutex m_mutex;

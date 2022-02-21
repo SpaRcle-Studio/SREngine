@@ -128,10 +128,9 @@ namespace Framework::Helper::Xml {
         [[nodiscard]] std::vector<Node> GetNodes(const std::string &name) const;
         [[nodiscard]] std::vector<Node> GetNodes() const;
 
-        template<typename T>
-        Xml::Node NAppendAttribute(const std::string &name, const T &value) {
+        template<typename T> Xml::Node NAppendAttribute(const std::string &name, const T &value) {
             if (!m_valid) {
-                SRAssert2(false, "Node::AddAttribute() : node is not valid!");
+                SRAssert2(false, "Node::NAppendAttribute() : node is not valid!");
                 g_xml_last_error = -2;
                 return *this;
             }
@@ -145,6 +144,28 @@ namespace Framework::Helper::Xml {
             }
             else {
                 attrib.set_value(value);
+            }
+
+            return *this;
+        }
+
+        template<typename T> Xml::Node NAppendAttributeDef(const std::string &name, const T &value, const T& def) {
+            if (!m_valid) {
+                SRAssert2(false, "Node::NAppendAttributeDef() : node is not valid!");
+                g_xml_last_error = -2;
+                return *this;
+            }
+
+            if (value != def) {
+                auto attrib = m_node.append_attribute(name.c_str());
+                if (attrib.empty())
+                    return *this;
+
+                if constexpr (std::is_same<T, std::string>()) {
+                    attrib.set_value(value.c_str());
+                } else {
+                    attrib.set_value(value);
+                }
             }
 
             return *this;

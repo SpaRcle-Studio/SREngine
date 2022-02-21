@@ -21,6 +21,9 @@
 #include <Types/Thread.h>
 #include <Types/SafePointer.h>
 
+#include <Input/InputDispatcher.h>
+#include <Input/InputHandler.h>
+
 namespace SR_WORLD_NS {
     class Scene;
 }
@@ -72,27 +75,28 @@ namespace Framework {
         bool LoadMainScript();
 
     private:
-        std::atomic<bool>      m_isCreate    = false;
-        std::atomic<bool>      m_isInit      = false;
-        std::atomic<bool>      m_isRun       = false;
-        std::atomic<bool>      m_isClose     = false;
+        std::atomic<bool>        m_isCreate    = false;
+        std::atomic<bool>        m_isInit      = false;
+        std::atomic<bool>        m_isRun       = false;
+        std::atomic<bool>        m_isClose     = false;
 
-        std::atomic<bool>      m_exitEvent   = false;
+        std::atomic<bool>        m_exitEvent   = false;
 
-        Engine::MainScriptType m_scriptType  = MainScriptType::None;
-        Scripting::Script*     m_mainScript  = nullptr;
+        Engine::MainScriptType   m_scriptType  = MainScriptType::None;
+        Scripting::Script*       m_mainScript  = nullptr;
 
-        Helper::CmdManager*    m_cmdManager  = nullptr;
-        Scripting::Compiler*   m_compiler    = nullptr;
-        SR_GRAPH_NS::Window*   m_window      = nullptr;
-        SR_GRAPH_NS::Render*   m_render      = nullptr;
-        ScenePtr               m_scene       = ScenePtr(nullptr);
+        Helper::CmdManager*      m_cmdManager  = nullptr;
+        Scripting::Compiler*     m_compiler    = nullptr;
+        SR_GRAPH_NS::Window*     m_window      = nullptr;
+        SR_GRAPH_NS::Render*     m_render      = nullptr;
+        ScenePtr                 m_scene       = ScenePtr(nullptr);
 
-        Helper::Types::Time*   m_time        = nullptr;
-        Helper::Types::Thread* m_worldThread = nullptr;
+        Helper::InputDispatcher* m_input       = nullptr;
+        Helper::Types::Time*     m_time        = nullptr;
+        Helper::Types::Thread*   m_worldThread = nullptr;
 
-        Core::GUI::EditorGUI*  m_editor      = nullptr;
-        Physics::PhysEngine*   m_physics     = nullptr;
+        Core::GUI::EditorGUI*    m_editor      = nullptr;
+        Physics::PhysEngine*     m_physics     = nullptr;
 
     };
 }

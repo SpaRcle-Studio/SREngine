@@ -17,8 +17,8 @@
 #include "../Graphics/src/GUI/Pin.cpp"
 #include "../Graphics/src/GUI/Editor/FileBrowser.cpp"
 #include "../Graphics/src/GUI/Editor/SceneViewer.cpp"
-#include "../Graphics/src/GUI/Editor/Hierarchy.cpp"
 #include "../Graphics/src/GUI/Editor/MessageBox.cpp"
+#include "../Graphics/src/GUI/Editor/Guizmo.cpp"
 #include "../Graphics/src/GUI/WidgetManager.cpp"
 #include "../Graphics/src/GUI/Widget.cpp"
 

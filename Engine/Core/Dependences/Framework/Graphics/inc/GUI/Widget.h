@@ -9,12 +9,14 @@
 #include <atomic>
 #include <utility>
 #include <Utils/NonCopyable.h>
+#include <Input/InputSystem.h>
+#include <Input/InputHandler.h>
 
 namespace Framework::Graphics::GUI {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
 
-    class Widget : public Helper::NonCopyable {
+    class Widget : public Helper::NonCopyable, public Helper::InputHandler {
         friend class WidgetManager;
     public:
         explicit Widget(std::string name)
@@ -31,18 +33,8 @@ namespace Framework::Graphics::GUI {
         SR_NODISCARD bool IsOpen() const { return m_open; }
         SR_NODISCARD bool IsFocused() const { return m_focused; }
 
-        virtual void Open() {
-            if (!m_open)
-                OnOpen();
-
-            m_open = true;
-        }
-        virtual void Close() {
-            if (m_open)
-                OnClose();
-
-            m_open = false;
-        }
+        virtual void Open();
+        virtual void Close();
 
     protected:
         virtual void Draw() = 0;

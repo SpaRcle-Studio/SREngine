@@ -23,8 +23,6 @@
 #include <Utils/GraphUtils.h>
 
 namespace Framework::Helper {
-    using namespace Framework::Helper::Math;
-
     enum class Location{
         Left, Center, Right, Forward, Back, Up, Down
     };
@@ -38,35 +36,38 @@ namespace Framework::Helper {
     public:
         void OnParentSet(Transform* parent);
 
-        void SetLocalPosition(FVector3 val);
-        void SetLocalRotation(FVector3 val);
-        void SetLocalScale(FVector3 val);
+        void SetLocalPosition(Math::FVector3 val);
+        void SetLocalRotation(Math::FVector3 val);
+        void SetLocalScale(Math::FVector3 val);
 
-        void SetPosition(FVector3 val, bool pivot = false);
-        void SetRotation(const FVector3& val, bool pivot = false);
-        void SetScale(FVector3 val);
-        void SetSkew(FVector3 val);
+        void SetWorldPosition(Math::FVector3 position);
+        void SetWorldRotation(Math::FVector3 rotation);
 
-        [[nodiscard]] SR_FORCE_INLINE bool HasParent() { return (bool)this->m_parent; }
+        //void SetPosition(FVector3 val, bool pivot = false);
+        //void SetRotation(const FVector3& val);
+        //void SetScale(FVector3 val);
+        //void SetSkew(FVector3 val);
+
+        [[nodiscard]] SR_FORCE_INLINE bool HasParent() { return (bool)m_parent; }
+        [[nodiscard]] Transform* GetParent() { return m_parent; }
 
         [[nodiscard]] Xml::Document Save() const override;
-        bool Load(const Xml::Node& xml) override;
 
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, bool local = false) const noexcept;
-        [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, FVector3 position, bool local = false) const noexcept;
+        [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, Math::FVector3 position, bool local = false) const noexcept;
+        [[nodiscard]] Math::Matrix4x4 GetInvWorldMatrix() const;
 
         void SetMatrix(glm::mat4 delta, glm::mat4 matrix, bool pivot) noexcept;
 
-        [[nodiscard]] FVector3 GetPosition(bool local = false) const {
-            return local ? m_localPosition : m_globalPosition;
-        }
-        [[nodiscard]] FVector3 GetRotation(bool local = false) const {
-            return (local ? m_localRotation : m_globalRotation);
-        }
-        [[nodiscard]] FVector3 GetScale(bool local = false) const {
-            return local ? m_localScale : m_globalScale;
-        }
-        [[nodiscard]] FVector3 GetSkew() const { return m_skew; }
+        SR_NODISCARD Math::FVector3 GetPosition() const { return m_globalPosition; }
+        SR_NODISCARD Math::FVector3 GetRotation() const { return m_globalRotation; }
+        SR_NODISCARD Math::FVector3 GetScale() const { return m_globalScale; }
+        SR_NODISCARD Math::FVector3 GetSkew() const { return m_skew; }
+
+        SR_NODISCARD Math::FVector3 GetLocalPosition() const { return m_localPosition; }
+        SR_NODISCARD Math::FVector3 GetLocalRotation() const { return m_localRotation; }
+        SR_NODISCARD Math::FVector3 GetLocalScale() const { return m_localScale; }
+        SR_NODISCARD Math::FVector3 GetLocalSkew() const { return m_skew; }
 
         /*inline static float Len(const glm::vec3& v) noexcept {
             return sqrt(
@@ -92,44 +93,42 @@ namespace Framework::Helper {
             );
         }*/
 
-        [[nodiscard]] FVector3 Direction(FVector3 preDir, bool local = false)   const noexcept;
-        [[nodiscard]] FVector3 Forward() const noexcept;
-        [[nodiscard]] FVector3 Right()   const noexcept;
-        [[nodiscard]] FVector3 Up()      const noexcept;
+        [[nodiscard]] Math::FVector3 Direction(Math::FVector3 preDir, bool local = false)   const noexcept;
+        [[nodiscard]] Math::FVector3 Forward() const noexcept;
+        [[nodiscard]] Math::FVector3 Right()   const noexcept;
+        [[nodiscard]] Math::FVector3 Up()      const noexcept;
 
-        void SetGlobalPosition(FVector3 position);
+        void Translate(Math::FVector3 val) noexcept;
+        void GlobalTranslate(Math::FVector3 axis, double value);
+        void GlobalTranslate(Math::FVector3 value);
 
-        void Translate(FVector3 val) noexcept;
-        void GlobalTranslate(FVector3 axis, double value);
-        void GlobalTranslate(FVector3 value);
+        void RotateAround(Math::FVector3 point, Math::FVector3 axis, Math::Unit angle, bool local = true) noexcept;
+        void Rotate(Math::FVector3 angle);
+        void Rotate(Math::FVector3 axis, double angle) noexcept;
+        void GlobalRotate(Math::FVector3 axis, double value);
+        void GlobalRotate(Math::FVector3 value);
 
-        void RotateAround(FVector3 point, FVector3 axis, Unit angle, bool local = true) noexcept;
-        void Rotate(FVector3 angle) noexcept;
-        void RotateAxis(FVector3 axis, double angle) noexcept;
-        void GlobalRotateAxis(FVector3 axis, double value);
-
-        void Scale(FVector3 val);
-        void Scaling(FVector3 val);
+        void Scale(Math::FVector3 val);
     private:
-        void UpdateChildPosition(FVector3 delta);
-        void UpdateChildScale(FVector3 delta);
-        void UpdateChildSkew(FVector3 delta);
+        void UpdateChildPosition(Math::FVector3 delta);
+        void UpdateChildScale(Math::FVector3 delta);
+        void UpdateChildSkew(Math::FVector3 delta);
         void UpdateChildRotation();
     public:
-        inline static const FVector3 right   = FVector3(1, 0, 0);
-        inline static const FVector3 up      = FVector3(0, 1, 0);
-        inline static const FVector3 forward = FVector3(0, 0, 1);
+        inline static const Math::FVector3 right   = Math::FVector3(1, 0, 0);
+        inline static const Math::FVector3 up      = Math::FVector3(0, 1, 0);
+        inline static const Math::FVector3 forward = Math::FVector3(0, 0, 1);
 
     private:
-        FVector3                     m_localPosition              = { 0, 0, 0 };
-        FVector3                     m_localRotation              = { 0, 0, 0 };
-        FVector3                     m_localScale                 = { 1, 1, 1 };
+        Math::FVector3               m_localPosition              = { 0, 0, 0 };
+        Math::FVector3               m_localRotation              = { 0, 0, 0 };
+        Math::FVector3               m_localScale                 = { 1, 1, 1 };
 
-        FVector3                     m_globalPosition             = { 0, 0, 0 };
-        FVector3                     m_globalRotation             = { 0, 0, 0 };
-        FVector3                     m_globalScale                = { 1, 1, 1 };
+        Math::FVector3               m_globalPosition             = { 0, 0, 0 };
+        Math::FVector3               m_globalRotation             = { 0, 0, 0 };
+        Math::FVector3               m_globalScale                = { 1, 1, 1 };
 
-        FVector3                     m_skew                       = { 1, 1, 1 };
+        Math::FVector3               m_skew                       = { 1, 1, 1 };
 
         GameObject*                  m_gameObject                 = nullptr;
         Transform*                   m_parent                     = nullptr;

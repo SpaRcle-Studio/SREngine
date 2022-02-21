@@ -3,7 +3,7 @@
 //
 
 #include <EntityComponentSystem/GameObject.h>
-#include <EntityComponentSystem/Transform.h>
+#include <EntityComponentSystem/Transform3D.h>
 #include <EntityComponentSystem/Component.h>
 #include <World/Scene.h>
 
@@ -15,6 +15,7 @@
 #include <Math/Vector3.h>
 #include <Math/Quaternion.h>
 #include <Math/Matrix4x4.h>
+#include <Math/Mathematics.h>
 
 using namespace Framework::Helper;
 
@@ -25,7 +26,7 @@ Framework::Helper::GameObject::GameObject(const Types::SafePtr<World::Scene>& sc
     m_tag   = std::move(tag);
     m_scene = scene;
 
-    m_transform = new Transform(this);
+    m_transform = new Transform3D(this);
 
     UpdateEntityPath();
 }
@@ -110,13 +111,6 @@ void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
 }
 
 void GameObject::UpdateComponents() {
-    /*for (Component* component : m_components){
-        component->OnMove(m_transform->m_globalPosition.ToGLM());
-        //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation)));
-        //component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
-        component->OnRotate(m_transform->m_globalRotation.ToGLM());
-        component->OnScaled(m_transform->m_globalScale.ToGLM());
-    }*/
     UpdateComponentsPosition();
     UpdateComponentsRotation();
     UpdateComponentsScale();
@@ -125,57 +119,48 @@ void GameObject::UpdateComponents() {
 
 void GameObject::UpdateComponentsPosition() {
     for (Component* component : m_components)
-        component->OnMove(m_transform->m_globalPosition);
-        //component->OnMove(m_transform->m_position + m_transform->m_parent_position);
+        component->OnMove(m_transform->GetTranslation());
 }
 
 void GameObject::UpdateComponentsRotation() {
     for (Component* component : m_components)
-        //component->OnRotate(m_transform->m_globalRotation.EulerAngle().Degrees().ToGLM());
-        component->OnRotate(m_transform->m_globalRotation);
-        //component->OnRotate(glm::degrees(glm::eulerAngles(m_transform->m_globalRotation);
-        //component->OnRotate(m_transform->m_rotation); // + m_transform->m_parent_rotation //  - m_transform->m_parent_rotation * 2.f
-
+        component->OnRotate(m_transform->GetRotation());
 }
 
 void GameObject::UpdateComponentsScale() {
     for (Component* component : m_components)
-        component->OnScaled(m_transform->m_globalScale.ToGLM()); // or multiple
-        //component->OnScaled(m_transform->m_scale + m_transform->m_parent_scale); // or multiple
+        component->OnScaled(m_transform->GetScale());
+}
+
+void GameObject::UpdateComponentsSkew() {
+    for (Component* component : m_components)
+        component->OnSkewed(m_transform->m_skew);
 }
 
 bool GameObject::AddChild(const Types::SafePtr<GameObject>& child) { // TODO: add security multi-threading
-    //!auto find = m_children.find(child);
-    //!if (find!=m_children.end()){
     if (Contains(child)) {
         Debug::Warn("GameObject::AddChild() : this child already exists in this game object!");
         return false;
     }
 
-    //child->m_parent = this;
     child->SetParent(*this);
 
-    //!this->m_children.insert(std::make_pair(child, child));
-    this->m_children.insert(child);
+    m_children.insert(child);
 
     /* TODO: Update child transforms with parent */
 
-    this->m_scene->OnChanged();
+    m_scene->OnChanged();
 
     return true;
 }
 
 void GameObject::SetName(const std::string &name) {
-    this->m_name = name;
-    this->m_scene->OnChanged();
+    m_name = name;
+    m_scene->OnChanged();
 }
 
-bool GameObject::Contains(const Types::SafePtr<GameObject>& child) {  // TODO: add security multi-threading
-    for (const auto& a : m_children){
-        if (a == child)
-            return true;
-    }
-    return false;
+bool GameObject::Contains(const Types::SafePtr<GameObject>& gameObject) {  // TODO: add security multi-threading
+    return m_children.count(gameObject) == 1;
 }
 
 void GameObject::SetSelect(bool value) {
@@ -189,12 +174,7 @@ void GameObject::SetSelect(bool value) {
 }
 
 std::string GameObject::GetName() const {
-    return this->m_name;
-}
-
-void GameObject::SetNameFromInspector(const std::string &name) {
-    this->m_name = name;
-    this->m_scene->OnChanged();
+    return m_name;
 }
 
 void GameObject::SetParent(const GameObject::Ptr& parent) {
@@ -284,19 +264,19 @@ Math::FVector3 GameObject::GetBarycenter() {
             count++;
         }
 
-    if (count == 0)
-        return Math::InfinityFV3;
-    else {
+    if (count != 0) {
         barycenter /= count;
         if (!m_parent.Valid())
             return barycenter;
-        else
-            return barycenter + m_transform->m_globalPosition;
+        ///else
+            ///return barycenter + m_transform->m_globalPosition;
     }
+
+    return Math::FVector3(Math::InfinityFV3);
 }
 
 Math::FVector3 GameObject::GetHierarchyBarycenter() {
-    auto barycenter = FVector3((Unit)0);
+    auto barycenter = Math::FVector3((Math::Unit)0);
     uint32_t count = 0;
 
     if (auto self = this->GetBarycenter(); !self.IsInfinity()) {
@@ -376,14 +356,20 @@ bool GameObject::IsChild(const GameObject::Ptr &child) {
     return m_children.count(child) == 1;
 }
 
-void GameObject::UpdateComponentsSkew() {
-    for (auto&& comp : m_components)
-        comp->OnSkewed(m_transform->m_skew);
-}
-
 Component *GameObject::GetComponent(size_t id) {
     for (auto&& component : m_components)
         if (component->GetId() == id)
            return component;
     return nullptr;
+}
+
+void GameObject::SetTransform(Transform3D* transform3D) {
+    if (m_transform == transform3D || !transform3D) {
+        SR_WARN("GameObject::SetTransform() : invalid transform!");
+    }
+    else {
+        delete m_transform;
+        m_transform = transform3D;
+        m_transform->SetGameObject(this);
+    }
 }

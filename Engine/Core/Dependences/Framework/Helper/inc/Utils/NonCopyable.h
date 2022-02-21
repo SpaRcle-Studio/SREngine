@@ -5,6 +5,8 @@
 #ifndef SRENGINE_NONCOPYABLE_H
 #define SRENGINE_NONCOPYABLE_H
 
+#include <macros.h>
+
 namespace Framework::Helper {
     class NonCopyable {
     protected:

@@ -112,6 +112,9 @@ namespace Framework::Helper {
     };
 }
 
+#define SR_WARN(msg) Framework::Helper::Debug::Warn(msg);
+#define SR_ERROR(msg) Framework::Helper::Debug::Error(msg);
+
 #ifdef SR_RELEASE
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
     #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression

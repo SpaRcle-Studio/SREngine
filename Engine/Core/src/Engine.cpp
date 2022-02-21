@@ -25,14 +25,15 @@ Framework::Engine::Engine() = default;
 Framework::Engine::~Engine() = default;
 
 bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine* physics) {
-    this->m_window = window;
-    this->m_render = window->GetRender();
+    m_window = window;
+    m_render = window->GetRender();
 
-    this->m_physics = physics;
+    m_physics = physics;
 
-    this->m_time       = new Helper::Types::Time();
-    this->m_compiler   = new Scripting::EvoCompiler();
-    this->m_cmdManager = new Helper::CmdManager();
+    m_time       = new Helper::Types::Time();
+    m_compiler   = new Scripting::EvoCompiler();
+    m_cmdManager = new Helper::CmdManager();
+    m_input      = new Helper::InputDispatcher();
 
     if (m_isCreate) {
         Helper::Debug::Error("Engine::Create() : game engine already create!");
@@ -41,13 +42,16 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
 
     Helper::Debug::Info("Engine::Create() : creating game engine...");
 
-    if (!this->m_window->Create()) {
+    if (!m_window->Create()) {
         Helper::Debug::Error("Engine::Create() : failed create window!");
         return false;
     }
 
     window->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
     window->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI(m_compiler));
+
+    m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
+    m_input->Register(m_editor);
 
     m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
 
@@ -127,7 +131,7 @@ bool Framework::Engine::Run() {
         return false;
     }
 
-    if (!this->LoadMainScript()) {
+    if (!LoadMainScript()) {
         Helper::Debug::Error("Engine::Run() : failed to load main script!");
         return false;
     }
@@ -182,21 +186,23 @@ void Framework::Engine::Await() {
         /// fixed update
         if (accumulator >= updateFrequency) {
             while (accumulator >= updateFrequency) {
-                if (windowFocused)
+                if (windowFocused) {
                     Helper::Input::Check();
+                    m_input->Check();
 
-                if (Input::GetKey(KeyCode::Ctrl) && Input::GetKeyDown(KeyCode::Z)) {
-                    m_cmdManager->Cancel();
-                }
+                    if (Input::GetKey(KeyCode::Ctrl) && Input::GetKeyDown(KeyCode::Z)) {
+                        m_cmdManager->Cancel();
+                    }
 
-                if (Input::GetKeyDown(KeyCode::F2)) {
-                    m_editor->Enable(!m_editor->Enabled());
-                }
+                    if (Input::GetKeyDown(KeyCode::F2)) {
+                        m_editor->Enable(!m_editor->Enabled());
+                    }
 
-                if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
-                    Debug::System("Engine::Await() : The closing key combination have been detected!");
-                    m_exitEvent = true;
-                    break;
+                    if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
+                        Debug::System("Engine::Await() : The closing key combination have been detected!");
+                        m_exitEvent = true;
+                        break;
+                    }
                 }
 
                 m_editor->Update();
@@ -231,11 +237,13 @@ bool Framework::Engine::Close() {
 
     m_isRun = false;
 
-    if (m_cmdManager && m_cmdManager->IsRun()) {
+    if (m_input)
+        m_input->UnregisterAll();
+    SR_SAFE_DELETE_PTR(m_input);
+
+    if (m_cmdManager && m_cmdManager->IsRun())
         m_cmdManager->Close();
-        delete m_cmdManager;
-        m_cmdManager = nullptr;
-    }
+    SR_SAFE_DELETE_PTR(m_cmdManager);
 
     if (m_worldThread) {
         Helper::Debug::Info("Engine::Close() : destroy world thread...");

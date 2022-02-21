@@ -3,6 +3,8 @@
 //
 
 #include "GUI/Inspector.h"
+#include <GUI/Utils.h>
+#include <EntityComponentSystem/Transform3D.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector()
@@ -16,46 +18,30 @@ namespace Framework::Core::GUI {
 
             std::string gm_name = m_gameObject->GetName();
             if (ImGui::InputText("Name", &gm_name))
-                m_gameObject->SetNameFromInspector(gm_name);
+                m_gameObject->SetName(gm_name);
 
             ImGui::Text("Entity id: %llu", m_gameObject->GetEntityId());
 
             ImGui::Separator();
             TextCenter("Transform");
 
-            auto position = m_gameObject->GetTransform()->GetPosition().ToGLM();
-            auto rotation = m_gameObject->GetTransform()->GetRotation().ToGLM();
-            auto scale    = m_gameObject->GetTransform()->GetScale().ToGLM();
-            auto skew     = m_gameObject->GetTransform()->GetSkew().ToGLM();
+            auto&& transform = m_gameObject->GetTransform();
 
-            ImGui::Text("[Global]");
+            auto&& translation = m_gameObject->GetTransform()->GetTranslation();
+            if (Graphics::GUI::DrawVec3Control("Translation", translation))
+                transform->SetTranslation(translation);
 
-            if (ImGui::InputFloat3("G Tr", &position[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_gameObject->GetTransform()->SetGlobalPosition(position);
+            auto&& rotation = m_gameObject->GetTransform()->GetRotation();
+            if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
+                transform->SetRotation(rotation);
 
-            if (ImGui::InputFloat3("G Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
-                m_gameObject->GetTransform()->SetRotation(rotation);
+            auto&& scale = m_gameObject->GetTransform()->GetScale();
+            if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
+                transform->SetScale(scale);
 
-            if (ImGui::InputFloat3("G Sc", &scale[0], "%.3f", ImGuiInputTextFlags_ReadOnly))
-                m_gameObject->GetTransform()->SetScale(scale);
-
-            ImGui::Text("[Local]");
-
-            position = m_gameObject->GetTransform()->GetPosition(true).ToGLM();
-            rotation = m_gameObject->GetTransform()->GetRotation(true).ToGLM();
-            scale    = m_gameObject->GetTransform()->GetScale(true).ToGLM();
-
-            if (ImGui::InputFloat3("L Tr", &position[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_gameObject->GetTransform()->SetLocalPosition(position);
-
-            if (ImGui::InputFloat3("L Rt", &rotation[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_gameObject->GetTransform()->SetLocalRotation(rotation);
-
-            if (ImGui::InputFloat3("L Sc", &scale[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_gameObject->GetTransform()->SetLocalScale(position);
-
-            if (ImGui::InputFloat3("L Sw", &skew[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_gameObject->GetTransform()->SetSkew(skew);
+            auto&& skew = m_gameObject->GetTransform()->GetSkew();
+            if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
+                transform->SetSkew(skew);
 
             DrawComponents();
 

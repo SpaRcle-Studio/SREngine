@@ -12,15 +12,18 @@
 #include <string>
 #include <macros.h>
 #include <mutex>
+#include <Input/InputEvents.h>
 
-namespace SR_GRAPH_NS::GUI {
-    class Hierarchy : public Widget {
+namespace SR_CORE_NS::GUI {
+    class Hierarchy : public Graphics::GUI::Widget {
     public:
         Hierarchy();
         ~Hierarchy() override = default;
 
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
+
+        void OnKeyDown(const Helper::KeyDownEvent& event) override;
 
     private:
         void Draw() override;
