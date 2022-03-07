@@ -14,6 +14,9 @@
 - [ ] Redhat
 - [ ] Android
 
+## Building
+ 1. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home)
+
 ## Used libraries
   * glm
   * OpenGL / GLFW / GLEW / glad
