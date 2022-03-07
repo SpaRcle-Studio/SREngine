@@ -210,7 +210,7 @@ namespace Framework {
         using namespace SR_MATH_NS;
 
         generator->RegisterNewClass("GameObject", "GameObject",
-                { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Transform.h", "Types/SafePointer.h", "ISavable.h" },
+                { "Math/Vector3.h", "string", "vector", "mutex", "Component.h", "Types/SafePointer.h", "ISavable.h" },
         { { "SafePtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
@@ -280,20 +280,7 @@ namespace Framework {
     }
 
     void API::RegisterTransform(EvoScript::AddressTableGen *generator) {
-        /*
-        generator->RegisterNewClass("Transform", "Transform", { "Math/Vector3.h" });
 
-        using namespace SR_MATH_NS;
-
-        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, Forward, FVector3)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, Right, FVector3)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, Up, FVector3)
-        ESRegisterMethod(EvoScript::Public, generator, Transform, Translate, void, ESArg1(FVector3 v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Transform, Rotate, void, ESArg1(FVector3 v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Transform, Scale, void, ESArg1(FVector3 v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Transform, RotateAround, void, ESArg4(FVector3 point, FVector3 axis, Unit angle, bool local), ESArg4(point, axis, angle, local))
-
-        generator->AddIncompleteType("GameObject", "Transform");*/
     }
 
     void API::RegisterInput(EvoScript::AddressTableGen *generator) {
