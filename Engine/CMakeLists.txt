@@ -6,10 +6,16 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(Core)
 
+if(EXISTS "${CMAKE_BINARY_DIR}/bin/Debug/glew32d.dll")
+    file(COPY ${CMAKE_BINARY_DIR}/bin/Debug/glew32d.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine/Debug)
+endif()
 if(EXISTS "${CMAKE_BINARY_DIR}/bin/glew32d.dll")
     file(COPY ${CMAKE_BINARY_DIR}/bin/glew32d.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
 endif()
 
+if(EXISTS "${CMAKE_BINARY_DIR}/bin/Release/glew32.dll")
+    file(COPY ${CMAKE_BINARY_DIR}/bin/Release/glew32d.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine/Release)
+endif()
 if(EXISTS "${CMAKE_BINARY_DIR}/bin/glew32.dll")
     file(COPY ${CMAKE_BINARY_DIR}/bin/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
 endif()
