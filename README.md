@@ -18,7 +18,7 @@
  1. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home)
  2. Install Cmake 
  3. Run command "git submodule update --init --recursive"
- 4. Add command argument "-resources path-to-our_repositoy/Resources"
+ 4. Add command argument "-resources path-to-our_repository/Resources"
 
 ## Used libraries
   * glm
