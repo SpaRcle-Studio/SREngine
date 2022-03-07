@@ -4,12 +4,13 @@
 [submodule "Engine/Core/Dependences/Framework/Depends/pugixml"]
 	path = Engine/Core/Dependences/Framework/Depends/pugixml
 	url = https://github.com/zeux/pugixml.git
-[submodule "Engine/Core/Dependences/Framework/Depends/EvoVulkan"]
-	path = Engine/Core/Dependences/Framework/Depends/EvoVulkan
-	url = https://github.com/Monika0000/EvoVulkan
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui-node-editor"]
 	path = Engine/Core/Dependences/Framework/Depends/imgui-node-editor
 	url = https://github.com/Monika0000/imgui-node-editor
 [submodule "Engine/Core/Dependences/Framework/Depends/ImGuizmo"]
 	path = Engine/Core/Dependences/Framework/Depends/ImGuizmo
 	url = https://github.com/Monika0000/ImGuizmo
+
+[submodule "Engine/Core/Dependences/Framework/Depends/EvoVulkan"]
+	path = Engine/Core/Dependences/Framework/Depends/EvoVulkan
+	url = https://github.com/Monika0000/EvoVulkan
