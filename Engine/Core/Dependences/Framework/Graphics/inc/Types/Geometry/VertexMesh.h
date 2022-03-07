@@ -23,6 +23,8 @@ namespace Framework::Graphics::Types {
 
         virtual void SetVertexArray(const std::any& vertices) = 0;
 
+        SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
+
     protected:
         IResource* Copy(IResource* destination) const override {
             if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {

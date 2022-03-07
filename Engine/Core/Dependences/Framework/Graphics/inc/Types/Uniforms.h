@@ -25,6 +25,7 @@ namespace Framework::Graphics {
 
     struct Mesh3dUBO {
         glm::mat4 model;
+        glm::vec4 color;
     };
 
     struct WireframeUBO {

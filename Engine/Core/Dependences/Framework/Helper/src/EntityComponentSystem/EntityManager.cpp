@@ -8,6 +8,34 @@
 
 using namespace Framework::Helper;
 
+EntityBranch::EntityBranch(EntityId entityId, std::list<EntityBranch> branches)
+    : m_branches(std::move(branches))
+    , m_id(entityId)
+{ }
+
+void EntityBranch::Reserve() const {
+    if (m_id != ENTITY_ID_MAX)
+        EntityManager::Instance().Reserve(m_id);
+
+    for (const auto& branch : m_branches)
+        branch.Reserve();
+}
+
+void EntityBranch::UnReserve() const {
+    if (m_id != ENTITY_ID_MAX)
+        EntityManager::Instance().TryUnReserve(m_id);
+
+    for (const auto& branch : m_branches)
+        branch.UnReserve();
+}
+
+void EntityBranch::Clear() {
+    m_id = ENTITY_ID_MAX;
+    m_branches.clear();
+}
+
+///---------------------------------------------------------------------------------------------------------------------
+
 EntityPath EntityPath::Concat(const EntityId &id) const {
     auto path = m_path;
     path.emplace_back(id);
@@ -38,7 +66,9 @@ EntityId EntityPath::Last() const {
 
 ///---------------------------------------------------------------------------------------------------------------------
 
-Entity::Entity() {
+Entity::Entity()
+    : m_entityId(ENTITY_ID_MAX)
+{
     m_entityId = EntityManager::Instance().Register(this);
 }
 
@@ -59,11 +89,13 @@ Framework::Helper::EntityManager::EntityManager()
 bool EntityManager::Reserve(const EntityId &id) {
     std::lock_guard<Mutex> lock(m_mutex);
 
-    if (m_entities.count(id) || m_reserved.count(id)) {
-        Helper::Debug::Error("EntityManager::Reserve() : entity already registered or reserved! Id: " + std::to_string(id));
+#ifdef SR_DEBUG
+    if (m_reserved.count(id)) {
+        Helper::Debug::Error("EntityManager::Reserve() : entity already reserved! Id: " + std::to_string(id));
         SRAssert(false);
         return false;
     }
+#endif
 
     m_reserved.insert(id);
 
@@ -73,27 +105,31 @@ bool EntityManager::Reserve(const EntityId &id) {
 Entity* EntityManager::GetReserved(const EntityId& id, const EntityAllocator& allocator) {
     std::lock_guard<Mutex> lock(m_mutex);
 
+#ifdef SR_DEBUG
     if (m_entities.count(id)) {
-        Helper::Debug::Error("EntityManager::Register() : entity already is registered! Something went wrong... \n\tId: " + std::to_string(id));
+        Helper::Debug::Error("EntityManager::GetReserved() : entity is registered! Something went wrong... \n\tId: " + std::to_string(id));
         SRAssert(false);
         return nullptr;
     }
+#endif
 
     if (m_reserved.count(id)) {
         m_nextId = id;
-        Entity* entity = allocator();
-        Register(entity);
-        return entity;
+        return allocator();
     }
 
-    Helper::Debug::Error("EntityManager::Register() : entity id isn't reserved! \n\tId: " + std::to_string(id));
-    SRAssert(false);
+    SRAssert2(false, "Entity id isn't reserved! \n\tId: " + std::to_string(id));
 
     return nullptr;
 }
 
 
 EntityId EntityManager::Register(Entity* entity) {
+    if (entity->GetEntityId() != ENTITY_ID_MAX) {
+        SRAssert2(false, "Double entity register!");
+        return entity->GetEntityId();
+    }
+
     std::lock_guard<Mutex> lock(m_mutex);
 
     EntityId id = m_nextId;
@@ -153,5 +189,26 @@ Entity *EntityManager::FindById(const EntityId &id) const {
 
     return m_entities.at(id);
 }
+
+bool EntityManager::UnReserve(const EntityId &id) {
+    if (TryUnReserve(id))
+        return true;
+
+    SRAssert2(false, "Entity isn't reserved! Id: " + std::to_string(id));
+
+    return false;
+}
+
+bool EntityManager::TryUnReserve(const EntityId &id) {
+    std::lock_guard<Mutex> lock(m_mutex);
+
+    if (m_reserved.count(id) == 0)
+        return false;
+
+    m_reserved.erase(id);
+
+    return true;
+}
+
 
 

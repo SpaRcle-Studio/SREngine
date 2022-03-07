@@ -14,6 +14,7 @@
 #include <unordered_set>
 #include <mutex>
 #include <vector>
+#include <list>
 #include <functional>
 #include <utility>
 #include <list>
@@ -25,6 +26,27 @@ namespace Framework::Helper {
 
     typedef uint64_t EntityId;
     typedef std::function<Entity*(void)> EntityAllocator;
+
+    static const EntityId ENTITY_ID_MAX = UINT64_MAX;
+
+    class EntityBranch {
+    public:
+        EntityBranch(EntityId entityId, std::list<EntityBranch> branches);
+
+        EntityBranch()
+            : EntityBranch(ENTITY_ID_MAX, {})
+        { }
+
+    public:
+        void Reserve() const;
+        void UnReserve() const;
+        void Clear();
+
+    private:
+        std::list<EntityBranch> m_branches;
+        EntityId m_id;
+
+    };
 
     class EntityPath {
     public:
@@ -51,26 +73,19 @@ namespace Framework::Helper {
         { }
 
     public:
-        //operator std::string() const { return m_path; }
+        SR_NODISCARD std::list<EntityId> ToEntityIds() const { return m_path; }
 
-    public:
-        [[nodiscard]] std::list<EntityId> ToEntityIds() const { return m_path; }
-
-        [[nodiscard]] EntityId Last() const;
-        [[nodiscard]] EntityPath Concat(const EntityId& id) const;
-        [[nodiscard]] EntityPath ConcatBack(const EntityId& id) const;
+        SR_NODISCARD EntityId Last() const;
+        SR_NODISCARD EntityPath Concat(const EntityId& id) const;
+        SR_NODISCARD EntityPath ConcatBack(const EntityId& id) const;
 
         EntityPath& Concat(const EntityId& id);
         EntityPath& ConcatBack(const EntityId& id);
-
-        //[[nodiscard]] const char* CStr() const { return m_path.c_str(); }
 
     private:
         std::list<EntityId> m_path;
 
     };
-
-    static const EntityId ENTITY_ID_MAX = UINT64_MAX;
 
     class Entity : public ISavable {
     public:
@@ -78,11 +93,15 @@ namespace Framework::Helper {
         Entity();
 
     public:
-        [[nodiscard]] EntityId GetEntityId() const { return m_entityId; }
-        [[nodiscard]] EntityPath GetEntityPath() const { return m_entityPath; }
+        SR_NODISCARD EntityId GetEntityId() const { return m_entityId; }
+        SR_NODISCARD EntityPath GetEntityPath() const { return m_entityPath; }
+
+        SR_NODISCARD EntityBranch GetEntityTree() const { return EntityBranch(m_entityId, GetEntityBranches()); }
 
     protected:
         void SetEntityPath(const EntityPath& path);
+
+        SR_NODISCARD virtual std::list<EntityBranch> GetEntityBranches() const { return {}; }
 
     private:
         EntityId m_entityId;
@@ -103,8 +122,12 @@ namespace Framework::Helper {
         EntityId Register(Entity* entity);
         void Unregister(const EntityId& id);
         bool Reserve(const EntityId& id);
+        bool UnReserve(const EntityId& id);
+        bool TryUnReserve(const EntityId& id);
         Entity* GetReserved(const EntityId& id, const EntityAllocator& allocator);
         Entity* FindById(const EntityId& id) const;
+        void Lock() { m_mutex.lock(); }
+        void Unlock() { m_mutex.unlock(); }
 
     private:
         void OnSingletonDestroy() override;

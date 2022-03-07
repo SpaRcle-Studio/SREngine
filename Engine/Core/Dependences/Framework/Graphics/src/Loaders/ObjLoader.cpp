@@ -20,4 +20,17 @@ namespace Framework::Graphics::ObjLoader {
                 return {};
         }
     }
+
+    Types::Mesh * ObjLoader::Load(const std::string &path, bool withIndices, Framework::Graphics::Types::MeshType type, uint32_t id) {
+        switch (type) {
+            case Types::MeshType::Static:
+                return Load<Types::Mesh3D>(path, withIndices, id);
+            case Types::MeshType::Wireframe:
+                return Load<Types::DebugWireframeMesh>(path, withIndices, id);
+            case Types::MeshType::Skinned:
+            case Types::MeshType::Unknown:
+            default:
+                return {};
+        }
+    }
 }

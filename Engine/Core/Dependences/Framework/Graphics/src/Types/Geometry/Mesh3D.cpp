@@ -63,10 +63,10 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
 
 void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices) {
     try {
-        auto mesh3DVertices   = std::any_cast<Vertices::Mesh3DVertices>(vertices);
-        this->m_countVertices = mesh3DVertices.size();
-        this->m_vertices      = mesh3DVertices;
-        this->m_isCalculated  = false;
+        auto mesh3DVertices = std::any_cast<Vertices::Mesh3DVertices>(vertices);
+        m_countVertices = mesh3DVertices.size();
+        m_vertices      = mesh3DVertices;
+        m_isCalculated  = false;
     }
     catch (const std::bad_any_cast& e) {
         Helper::Debug::Error("Mesh3D::SetVertexArray() : failed to cast any to vertices! \n\tMessage: " + std::string(e.what()));
@@ -78,23 +78,25 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
         return;
 
     if (!m_isCalculated)
-        if (m_hasErrors || !this->Calculate())
+        if (m_hasErrors || !Calculate())
             return;
 
     if (m_descriptorSet < 0) {
         if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
-            Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
-            m_hasErrors = true; return;
+            SR_ERROR("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
+            m_hasErrors = true;
+            return;
         }
 
         if (m_UBO = m_env->AllocateUBO(sizeof(Mesh3dUBO)); m_UBO < 0) {
-            Helper::Debug::Error("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
-            m_hasErrors = true; return;
+            SR_ERROR("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
+            m_hasErrors = true;
+            return;
         }
 
         this->m_env->UpdateDescriptorSets(m_descriptorSet, {
-                { DescriptorType::Uniform, { 0, m_UBO                                 } },
-                { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
+                { DescriptorType::Uniform, { 0, m_UBO               } },
+                { DescriptorType::Uniform, { 1, m_shader->GetUBO(0) } },
         });
 
         UpdateUBO();
@@ -124,27 +126,68 @@ void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
 }
 
 void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
-    if (m_UBO >= 0) {
-        Mesh3dUBO ubo = { m_modelMat };
+    if (m_UBO >= 0 && m_material) {
+        Mesh3dUBO ubo = { m_modelMat, m_material->m_color.ToGLM() };
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
     }
 }
 
 Xml::Document Mesh3D::Save() const {
     auto doc = Xml::Document::New();
-    auto root = doc.Root().AppendChild("Mesh");
+    auto root = doc.Root().AppendChild("Mesh3D");
 
+    root.AppendAttribute("Enabled", IsEnabled());
+    root.AppendAttribute("EntityId", GetEntityId());
     root.AppendAttribute("Type", EnumMeshTypeToString(m_type).c_str());
 
-    auto settings = root.AppendChild("Settings");
-    {
-        settings.AppendChild("Id").AppendAttribute("Value", GetResourceId().c_str());
-        settings.AppendChild("Enabled").AppendAttribute("Value", IsEnabled());
-        settings.AppendChild("Inverse").AppendAttribute("Value", IsInverse());
+    root.AppendChild("Path").AppendAttribute("Value", GetPath());
+    root.AppendChild("Id").AppendAttribute("Value", m_meshId);
+    root.AppendChild("Inverse").AppendAttribute("Value", IsInverse());
 
-        if (m_shader)
-            settings.AppendChild("Shader").AppendAttribute("Value", m_shader->GetName().c_str());
-    }
+    if (m_shader)
+        root.AppendChild("Shader").AppendAttribute("Name", m_shader->GetName());
+
+    if (m_material)
+        root.AppendChild("Material").AppendAttribute("Name", m_material->GetResourceId());
 
     return doc;
+}
+
+Component *Mesh3D::LoadComponent(const Xml::Node &xml, const Helper::Types::DataStorage *dataStorage) {
+    const MeshType type = StringToEnumMeshType(xml.GetAttribute("Type").ToString());
+    const auto&& path = xml.GetNode("Path").GetAttribute("Value").ToString();
+    const auto&& id = xml.GetNode("Id").GetAttribute("Value").ToUInt();
+
+    Render* render = dataStorage->GetPointer<Render>("Render");
+
+    if (!render) {
+        SRAssert(false);
+        return nullptr;
+    }
+
+    auto&& mesh = Load(path, type, id);
+
+    if (mesh) {
+        if (const auto&& shaderXml = xml.TryGetNode("Shader").TryGetAttribute("Name")) {
+            if (Shader* pShader = Shader::Load(render, shaderXml.ToString())) {
+                mesh->SetShader(pShader);
+            }
+            else {
+                SR_ERROR("Mesh3D::LoadComponent() : failed to load shader! Name: " + shaderXml.ToString());
+            }
+        }
+
+        render->RegisterMesh(mesh);
+
+        if (const auto&& materialXml = xml.TryGetNode("Material").TryGetAttribute("Name")) {
+            if (Material* pMaterial = Material::Load(materialXml.ToString())) {
+                mesh->SetMaterial(pMaterial);
+            }
+            else {
+                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + materialXml.ToString());
+            }
+        }
+    }
+
+    return mesh;
 }

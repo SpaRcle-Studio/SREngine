@@ -4,6 +4,7 @@
 
 #include "GUI/ICanvas.h"
 #include <GUI.h>
+#include <GUI/Editor/Theme.h>
 
 void Style_1(){
     ImGuiStyle& style = ImGui::GetStyle();
@@ -71,7 +72,7 @@ void Style_2(){
     ImGuiStyle* style = &ImGui::GetStyle();
     ImVec4* colors = style->Colors;
 
-    colors[ImGuiCol_Text]                   = ImVec4(1.000f, 1.000f, 1.000f, 1.000f);
+    /*colors[ImGuiCol_Text]                   = ImVec4(1.000f, 1.000f, 1.000f, 1.000f);
     colors[ImGuiCol_TextDisabled]           = ImVec4(0.500f, 0.500f, 0.500f, 1.000f);
     colors[ImGuiCol_WindowBg]               = ImVec4(0.180f, 0.180f, 0.180f, 1.000f);
     colors[ImGuiCol_ChildBg]                = ImVec4(0.280f, 0.280f, 0.280f, 0.000f);
@@ -120,7 +121,43 @@ void Style_2(){
     colors[ImGuiCol_NavHighlight]           = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
     colors[ImGuiCol_NavWindowingHighlight]  = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
     colors[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
-    colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
+    colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);*/
+
+    colors[ImGuiCol_WindowBg]              = ImVec4(0.14, 0.12, 0.16, 1.00);
+    colors[ImGuiCol_ChildBg]               = ImVec4(0.30, 0.20, 0.39, 0.00);
+    colors[ImGuiCol_PopupBg]               = ImVec4(0.05, 0.05, 0.10, 0.90);
+    colors[ImGuiCol_Border]                = ImVec4(0.89, 0.85, 0.92, 0.30);
+    colors[ImGuiCol_BorderShadow]          = ImVec4(0.00, 0.00, 0.00, 0.00);
+    colors[ImGuiCol_FrameBg]               = ImVec4(0.30, 0.20, 0.39, 1.00);
+    colors[ImGuiCol_FrameBgHovered]        = ImVec4(0.41, 0.19, 0.63, 0.68);
+    colors[ImGuiCol_FrameBgActive]         = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_TitleBg]               = ImVec4(0.41, 0.19, 0.63, 0.45);
+    colors[ImGuiCol_TitleBgCollapsed]      = ImVec4(0.41, 0.19, 0.63, 0.35);
+    colors[ImGuiCol_TitleBgActive]         = ImVec4(0.41, 0.19, 0.63, 0.78);
+    colors[ImGuiCol_MenuBarBg]             = ImVec4(0.30, 0.20, 0.39, 0.57);
+    colors[ImGuiCol_ScrollbarBg]           = ImVec4(0.30, 0.20, 0.39, 1.00);
+    colors[ImGuiCol_ScrollbarGrab]         = ImVec4(0.41, 0.19, 0.63, 0.31);
+    colors[ImGuiCol_ScrollbarGrabHovered]  = ImVec4(0.41, 0.19, 0.63, 0.78);
+    colors[ImGuiCol_ScrollbarGrabActive]   = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_PopupBg]               = ImVec4(0.30, 0.20, 0.39, 1.00);
+    colors[ImGuiCol_CheckMark]             = ImVec4(0.56, 0.61, 1.00, 1.00);
+    colors[ImGuiCol_SliderGrab]            = ImVec4(0.41, 0.19, 0.63, 0.24);
+    colors[ImGuiCol_SliderGrabActive]      = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_Button]                = ImVec4(0.41, 0.19, 0.63, 0.44);
+    colors[ImGuiCol_ButtonHovered]         = ImVec4(0.41, 0.19, 0.63, 0.86);
+    colors[ImGuiCol_ButtonActive]          = ImVec4(0.64, 0.33, 0.94, 1.00);
+    colors[ImGuiCol_Header]                = ImVec4(0.41, 0.19, 0.63, 0.76);
+    colors[ImGuiCol_HeaderHovered]         = ImVec4(0.41, 0.19, 0.63, 0.86);
+    colors[ImGuiCol_HeaderActive]          = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_ResizeGrip]            = ImVec4(0.41, 0.19, 0.63, 0.20);
+    colors[ImGuiCol_ResizeGripHovered]     = ImVec4(0.41, 0.19, 0.63, 0.78);
+    colors[ImGuiCol_ResizeGripActive]      = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_PlotLines]             = ImVec4(0.89, 0.85, 0.92, 0.63);
+    colors[ImGuiCol_PlotLinesHovered]      = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_PlotHistogram]         = ImVec4(0.89, 0.85, 0.92, 0.63);
+    colors[ImGuiCol_PlotHistogramHovered]  = ImVec4(0.41, 0.19, 0.63, 1.00);
+    colors[ImGuiCol_TextSelectedBg]        = ImVec4(0.41, 0.19, 0.63, 0.43);
+    colors[ImGuiCol_ModalWindowDarkening]  = ImVec4(0.20, 0.20, 0.20, 0.35);
 
     //style->ChildRounding = 4.0f;
     style->FrameBorderSize = 1.0f;
@@ -161,7 +198,7 @@ void Style_3(){
     /// 1 = MORE "3D" LOOK
     int is3D = 1;
 
-    colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+    /*colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     colors[ImGuiCol_TextDisabled]           = ImVec4(0.40f, 0.40f, 0.40f, 1.00f);
     colors[ImGuiCol_ChildBg]                = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
     colors[ImGuiCol_WindowBg]               = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
@@ -203,7 +240,7 @@ void Style_3(){
     colors[ImGuiCol_DragDropTarget]         = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
     colors[ImGuiCol_NavHighlight]           = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
     colors[ImGuiCol_NavWindowingHighlight]  = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
-    colors[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
+    colors[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);*/
 
     style.PopupRounding = 3;
 
@@ -243,7 +280,15 @@ void Style_3(){
 }
 
 void Framework::Graphics::GUI::ICanvas::InitStyle() {
-    Style_2();
+    ImGuiStyle & style = ImGui::GetStyle();
+
+    //Style_2();
+    //SRAssert(Theme::Save("Themes/Purple.xml", style));
+
+    if (auto&& theme = Theme::Load("Themes/Dark.xml")) {
+        theme->Apply(style);
+        delete theme;
+    }
 
     const static auto iniPath = ResourceManager::Instance().GetResPath().Concat("/Configs/ImGuiEditor.config");
     ImGui::GetIO().IniFilename = iniPath.CStr();

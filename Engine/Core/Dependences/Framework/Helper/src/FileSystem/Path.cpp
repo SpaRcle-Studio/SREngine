@@ -173,5 +173,12 @@ namespace Framework::Helper {
         return m_path + "." + ext;
     }
 
+    bool Path::Make() const {
+        if (m_path.empty())
+            return false;
+
+        return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+    }
+
     Path& Path::operator=(const Path& path) = default;
 }

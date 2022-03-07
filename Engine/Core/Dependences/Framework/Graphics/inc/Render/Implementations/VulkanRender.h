@@ -12,6 +12,14 @@
 
 namespace Framework::Graphics::Impl {
     class VulkanRender : public Render {
+    public:
+        explicit VulkanRender(std::string name)
+            : Render(std::move(name))
+        { }
+
+        ~VulkanRender() override = default;
+
+    public:
         void DrawSingleColors() override {
 
         }
@@ -55,8 +63,8 @@ namespace Framework::Graphics::Impl {
                     continue;
 
                 for (auto const& [key, meshGroup] : subCluster.m_groups) {
-                    env->BindVBO(meshGroup[0]->GetVBO<true>());
-                    env->BindIBO(meshGroup[0]->GetIBO<true>());
+                    env->BindVBO((*meshGroup.begin())->GetVBO<true>());
+                    env->BindIBO((*meshGroup.begin())->GetIBO<true>());
 
                     for (const auto &mesh : meshGroup)
                         mesh->DrawVulkan();

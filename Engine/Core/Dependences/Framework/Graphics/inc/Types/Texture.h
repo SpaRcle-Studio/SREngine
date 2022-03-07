@@ -50,7 +50,7 @@ namespace Framework::Graphics::Types {
 
             if (!m_isCalculate)
                 if (!Calculate()) {
-                    Helper::Debug::Error("Texture::GetID() : failed calculating texture!");
+                    Helper::Debug::Error("Texture::GetID() : failed to calculating texture!");
                     return -1;
                 }
 

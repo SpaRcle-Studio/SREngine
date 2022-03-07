@@ -8,6 +8,7 @@
 
 bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Types::Mesh *mesh)  {
     auto* vertex = dynamic_cast<Types::VertexMesh *>(mesh);
+    auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
 
     int32_t groupID = vertex ? vertex->GetVBO<false>() : SR_ID_INVALID;
     if (groupID == SR_ID_INVALID) {
@@ -15,22 +16,23 @@ bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Type
         return false;
     }
 
-    if (auto find = m_groups.find(groupID); find != m_groups.end()) {
-        auto &meshes = find->second;
-        for (uint32_t i = 0; i < m_counters[groupID]; ++i) {
-            if (meshes[i] == mesh) {
-                --m_counters[groupID];
-                --m_total;
+    if (auto groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
+        MeshGroup& group = groupIt->second;
 
-                meshes.erase(meshes.begin() + i);
-                mesh->RemoveUsePoint();
+        if (auto pIt = group.find(indexed); pIt != group.end()) {
+            group.erase(pIt);
 
-                if (m_counters[groupID] == 0) {
-                    m_groups.erase(groupID);
-                    m_counters.erase(groupID);
-                }
-                return true;
+            --m_counters[groupID];
+            --m_total;
+
+            mesh->RemoveUsePoint();
+
+            if (m_counters[groupID] == 0) {
+                m_groups.erase(groupIt);
+                m_counters.erase(groupID);
             }
+
+            return true;
         }
     }
     else {
@@ -52,10 +54,10 @@ bool Framework::Graphics::ShadedMeshSubCluster::Add(Framework::Graphics::Types::
         return false;
     }
 
-    if (auto find = this->m_groups.find(groupID); find == m_groups.end())
+    if (auto find = m_groups.find(groupID); find == m_groups.end())
         m_groups[groupID] = { indexed };
     else
-        find->second.push_back(indexed);
+        find->second.insert(indexed);
 
     ++m_counters[groupID];
     ++m_total;
@@ -71,7 +73,8 @@ bool Framework::Graphics::MeshCluster::Add(Framework::Graphics::Types::Mesh *mes
     const auto&& shader = mesh->GetShader();
     if (auto&& subCluster = m_subClusters.find(shader); subCluster == m_subClusters.end()) {
         return (m_subClusters[shader] = ShadedMeshSubCluster()).Add(mesh);
-    } else {
+    }
+    else {
         return subCluster->second.Add(mesh);
     }
 }
@@ -80,7 +83,8 @@ bool Framework::Graphics::MeshCluster::Remove(Framework::Graphics::Types::Mesh *
     const auto&& shader = mesh->GetShader();
     if (auto&& subCluster = m_subClusters.find(shader); subCluster == m_subClusters.end()) {
         return false;
-    } else {
+    }
+    else {
         auto const result = subCluster->second.Remove(mesh);
 
         if (subCluster->second.Empty())

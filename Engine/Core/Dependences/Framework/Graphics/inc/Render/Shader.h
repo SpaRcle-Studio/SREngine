@@ -15,6 +15,8 @@
 
 #include <Types/Vertices.h>
 #include <Types/Uniforms.h>
+#include <Utils/NonCopyable.h>
+#include <ResourceManager/IResource.h>
 
 namespace Framework::Graphics {
     typedef int ShaderFlags;
@@ -31,12 +33,14 @@ namespace Framework::Graphics {
 
     class Render;
 
-    class Shader {
-    private:
-        ~Shader() = default;
+    class Shader : public Helper::IResource {
     public:
-        Shader(Render* render, const std::string& name);
-        Shader(Shader&) = delete;
+        Shader(Render* render, std::string path);
+        Shader(Render* render, std::string path, std::string name);
+
+    private:
+        ~Shader() override = default;
+
     public:
         typedef enum {
             Geometry = 0,
@@ -46,6 +50,7 @@ namespace Framework::Graphics {
             Grid = 4,
             Custom = 0xffff,
         } StandardID;
+
         typedef enum {
             None         = 0,
             Diffuse      = 1 << 0,
@@ -98,6 +103,7 @@ namespace Framework::Graphics {
          * name - уникальное имя этого шейдера из конфига
          * */
         static Shader* Load(Render* render, const std::string& name);
+
     public:
         [[nodiscard]] SR_FORCE_INLINE int32_t GetID() {
             if (!m_isInit) {
@@ -109,11 +115,12 @@ namespace Framework::Graphics {
                     this->m_isError = true;
                     return -1;
                 }
-                this->m_isInit = true;
+                m_isInit = true;
             }
 
             return m_shaderProgram;
         }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetPath() const { return m_path; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const {
             if (index >= m_countSharedUniforms) {
@@ -124,15 +131,16 @@ namespace Framework::Graphics {
             return m_sharedUniforms[index];
         }
     public:
-        [[nodiscard]] SR_FORCE_INLINE bool Complete() const noexcept { return m_isInit; }
+         SR_NODISCARD SR_FORCE_INLINE bool Complete() const { return m_isInit; }
+
         bool Use() noexcept;
-        ///\warning Call only from OpenGL context!
-        void Free();
+        void FreeVideoMemory();
+
         bool SetVertex(
                 const std::vector<SR_VERTEX_DESCRIPTION>& descriptions,
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& attributes);
 
-        /*
+        /**
          * 0 - binding
          * 1 - type
          * 2 - ubo size
@@ -149,22 +157,22 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void SetBool(const char* name, const bool& v)         const noexcept {
             //m_env->SetBoolOfLocation(this->m_fields.find(name)->second, v);
             //m_env->SetBool(m_ID, name, v);
-            m_env->SetBool(this->m_shaderProgram, name, v);
+            m_env->SetBool(m_shaderProgram, name, v);
         }
         SR_FORCE_INLINE void SetFloat(const char* name, const float& v)       const noexcept {
             //m_env->SetFloatOfLocation(this->m_fields.find(name)->second, v);
             //m_env->SetFloat(m_ID, name, v);
-            m_env->SetFloat(this->m_shaderProgram, name, v);
+            m_env->SetFloat(m_shaderProgram, name, v);
         }
         SR_FORCE_INLINE void SetInt(const char* name, const int& v)            const noexcept {
             //m_env->SetIntOfLocation(m_fields.find(name)->second, v);
            // m_env->SetInt(m_ID, name, v);
-            m_env->SetInt(this->m_shaderProgram, name, v);
+            m_env->SetInt(m_shaderProgram, name, v);
         }
         SR_FORCE_INLINE void SetMat4(const char* name, const glm::mat4& v)    const noexcept {
             //m_env->SetMat4OfLocation(this->m_fields.find(name)->second, v);
            //m_env->SetMat4(m_ID, name, v);
-            m_env->SetMat4(this->m_shaderProgram, name, v);
+            m_env->SetMat4(m_shaderProgram, name, v);
         }
         //SR_FORCE_INLINE void SetVec4(const char* name, const glm::vec4& v)    const noexcept {
             //m_env->SetVec4(m_ID, name, v);
@@ -172,32 +180,15 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void SetVec3(const char* name, const glm::vec3& v)    const noexcept {
             //m_env->SetVec3OfLocation(this->m_fields.find(name)->second, v);
            // m_env->SetVec3(m_ID, name, v);
-            m_env->SetVec3(this->m_shaderProgram, name, v);
+            m_env->SetVec3(m_shaderProgram, name, v);
         }
         //SR_FORCE_INLINE void SetVec2(const char* name, const glm::vec2& v)    const noexcept { m_env->SetVec2(m_ID, name, v); }
         SR_FORCE_INLINE void SetIVec2(const char* name, const glm::ivec2& v)  const noexcept {
             //m_env->SetIVec2OfLocation(this->m_fields.find(name)->second, v);
             //m_env->SetIVec2(m_ID, name, v);
-            m_env->SetIVec2(this->m_shaderProgram, name, v);
+            m_env->SetIVec2(m_shaderProgram, name, v);
         }
     };
-
-    static std::string ShaderFlagsToString(Shader::Flags flags) {
-        switch (flags) {
-            case Shader::Flags::None:         return "None";
-            case Shader::Flags::Diffuse:      return "Diffuse";
-            case Shader::Flags::Normal:       return "Normal";
-            case Shader::Flags::Specular:     return "Specular";
-            case Shader::Flags::Glossiness:   return "Glossiness";
-            case Shader::Flags::Alpha:        return "Alpha";
-            case Shader::Flags::ForwardLight: return "ForwardLight";
-            case Shader::Flags::GBuffer:      return "GBuffer";
-            case Shader::Flags::MAX:          return "Max";
-            default:
-                Helper::Debug::Error("Graphics::ShaderFlagsToString() : unknown flag!");
-                return std::string();
-        }
-    }
 }
 
 #endif //GAMEENGINE_SHADER_H

@@ -39,47 +39,16 @@ namespace Framework::Graphics {
     class Window;
     class Camera;
 
-    class Render {
+    class Render : public Helper::NonCopyable {
     protected:
-        Render();
+        Render(std::string name);
+
     public:
-        Render(const Render&) = delete;
-    protected:
-        volatile bool                 m_isCreate                 = false;
-        volatile bool                 m_isInit                   = false;
-        volatile bool                 m_isRun                    = false;
-        volatile bool                 m_isClose                  = false;
-    protected:
-        Environment*                  m_env                      = nullptr;
+        ~Render() override = default;
 
-        Window*                       m_window                   = nullptr;
-        Camera*                       m_currentCamera            = nullptr;
-        mutable std::mutex            m_mutex                    = std::mutex();
-
-        // TO_REFACTORING
-        std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Mesh*>();
-        std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Mesh*>();
-        std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
-        std::vector<Skybox*>          m_skyboxesToFreeVidMem     = std::vector<Skybox*>();
-        std::unordered_set<Texture*>  m_textures                 = std::unordered_set<Texture*>();
-
-        MeshCluster                   m_geometry                 = { };
-        MeshCluster                   m_transparentGeometry      = { };
-
-        RenderSkybox                  m_skybox                   = { nullptr, nullptr };
-
-        std::vector<Shader*>          m_shaders                  = {};
-
-        ColorBuffer*                  m_colorBuffer              = nullptr;
-        EditorGrid*                   m_grid                     = nullptr;
-
-        bool                          m_gridEnabled              = false;
-        bool                          m_skyboxEnabled            = true;
-        bool                          m_wireFrame                = false;
-
-        const PipeLine                m_pipeLine                 = PipeLine::Unknown;
     public:
-        static Render* Allocate();
+        static Render* Allocate(std::string name);
+
     public:
         [[nodiscard]] SR_FORCE_INLINE bool IsRun() const noexcept { return m_isRun; }
         [[nodiscard]] SR_FORCE_INLINE bool IsInit() const noexcept { return m_isInit; }
@@ -94,6 +63,8 @@ namespace Framework::Graphics {
     public:
         void Synchronize();
         bool IsClean();
+
+        void ReRegisterMesh(Types::Mesh* mesh);
         void RemoveMesh(Types::Mesh* mesh);
         void RegisterMesh(Types::Mesh* mesh);
         void RegisterMeshes(const Helper::Types::List<Types::Mesh*>& meshes) {
@@ -135,6 +106,42 @@ namespace Framework::Graphics {
         virtual void DrawSingleColors()         = 0;
         virtual void DrawTransparentGeometry()  = 0;
         virtual void DrawSettingsPanel()        = 0;
+
+    protected:
+        std::atomic<bool>             m_isCreate                 = false;
+        std::atomic<bool>             m_isInit                   = false;
+        std::atomic<bool>             m_isRun                    = false;
+        std::atomic<bool>             m_isClose                  = false;
+
+        bool                          m_gridEnabled              = false;
+        bool                          m_skyboxEnabled            = true;
+        bool                          m_wireFrame                = false;
+
+        Window*                       m_window                   = nullptr;
+        Camera*                       m_currentCamera            = nullptr;
+        mutable std::recursive_mutex  m_mutex                    = std::recursive_mutex();
+
+        // TO_REFACTORING
+        std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Mesh*>();
+        std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Mesh*>();
+        std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
+        std::vector<Skybox*>          m_skyboxesToFreeVidMem     = std::vector<Skybox*>();
+        std::unordered_set<Texture*>  m_textures                 = std::unordered_set<Texture*>();
+
+        MeshCluster                   m_geometry                 = { };
+        MeshCluster                   m_transparentGeometry      = { };
+
+        RenderSkybox                  m_skybox                   = { nullptr, nullptr };
+
+        std::vector<Shader*>          m_shaders                  = {};
+
+        ColorBuffer*                  m_colorBuffer              = nullptr;
+        EditorGrid*                   m_grid                     = nullptr;
+        Environment*                  m_env                      = nullptr;
+
+        const PipeLine                m_pipeLine                 = PipeLine::Unknown;
+        const std::string             m_renderName               = "Unnamed";
+
     };
 }
 

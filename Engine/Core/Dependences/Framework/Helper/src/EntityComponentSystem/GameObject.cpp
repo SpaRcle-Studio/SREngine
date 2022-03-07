@@ -66,7 +66,7 @@ Framework::Helper::Component *Framework::Helper::GameObject::GetComponent(const 
     return find;
 }
 
-void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
+void GameObject::Destroy(DestroyByFlagBits by /* = DestroyByFlags::DestroyBy_Other */) {
     if (m_isDestroy) {
         Helper::Debug::Error("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
         return;
@@ -82,7 +82,9 @@ void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
 #endif
 
     if (m_scene.RecursiveLockIfValid()) {
-        if (by == DestroyBy::Other && m_parent.LockIfValid()) {
+        const bool byParent = by & DestroyBy_GameObject;
+
+        if (!byParent && m_parent.LockIfValid()) {
             m_parent->RemoveChild(*this);
             m_parent.Unlock();
         }
@@ -97,17 +99,15 @@ void GameObject::Destroy(DestroyBy by /* = DestroyBy::Other */) {
     m_components.clear();
 
     for (GameObject::Ptr gameObject : m_children) {
-        gameObject.AutoFree([](GameObject* gm) {
-            gm->Destroy(DestroyBy::GameObject);
-            gm->Free();
+        gameObject.AutoFree([by](GameObject* gm) {
+            gm->Destroy(by | DestroyBy_GameObject);
         });
     }
     m_children.clear();
 
     m_isDestroy = true;
 
-    if (by == DestroyBy::Other)
-        Free();
+    Free();
 }
 
 void GameObject::UpdateComponents() {
@@ -213,8 +213,17 @@ bool GameObject::ContainsComponent(const std::string &name) {
     return false;
 }
 
-void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
-    for (auto child : m_children) {
+void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject>&)> &fun) {
+    for (Types::SafePtr<GameObject> child : m_children) {
+        if (child.LockIfValid()) {
+            fun(child);
+            child.Unlock();
+        }
+    }
+}
+
+void GameObject::ForEachChild(const std::function<void(const Types::SafePtr<GameObject>&)> &fun) const {
+    for (const auto& child : m_children) {
         if (child.LockIfValid()) {
             fun(child);
             child.Unlock();
@@ -317,9 +326,10 @@ Xml::Document GameObject::Save() const {
     auto doc = Xml::Document::New();
     auto root = doc.Root().AppendChild("GameObject");
 
-    root.AppendAttribute("Name", m_name.c_str());
-    root.AppendAttribute("Tag", m_tag.c_str());
-    root.AppendAttribute("Enabled", IsEnabled());
+    root.AppendAttribute("Name", m_name);
+    root.AppendAttribute("EntityId", GetEntityId());
+    root.AppendAttributeDef("Tag", m_tag, "Untagged");
+    root.AppendAttributeDef("Enabled", IsEnabled(), true);
 
     root.AppendChild(m_transform->Save().DocumentElement());
 
@@ -373,3 +383,15 @@ void GameObject::SetTransform(Transform3D* transform3D) {
         m_transform->SetGameObject(this);
     }
 }
+
+std::list<EntityBranch> GameObject::GetEntityBranches() const {
+    std::list<EntityBranch> branches;
+
+    ForEachChild([&branches](const GameObject::Ptr& ptr) {
+        branches.emplace_back(ptr->GetEntityTree());
+    });
+
+    return std::move(branches);
+}
+
+

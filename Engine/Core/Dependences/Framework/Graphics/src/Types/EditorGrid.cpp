@@ -46,25 +46,28 @@ void Framework::Graphics::EditorGrid::Draw() {
 }
 
 Framework::Graphics::EditorGrid* Framework::Graphics::EditorGrid::Create(const std::string &shaderName, Framework::Graphics::Render *render) {
-    Helper::Debug::Graph("EditorGrid::Create() : create new grid...");
+    SR_GRAPH("EditorGrid::Create() : create new grid...");
     return new EditorGrid(shaderName, render);
 }
 
 void Framework::Graphics::EditorGrid::Free() {
-    Helper::Debug::Graph("EditorGrid::Free() : free grid class pointer and free video memory...");
+    SR_GRAPH("EditorGrid::Free() : free grid class pointer and free video memory...");
 
-    if (this->m_shader)
-        this->m_shader->Free();
+    if (m_shader) {
+        m_shader->FreeVideoMemory();
+        m_shader->Destroy();
+        m_shader = nullptr;
+    }
 
-    if (VAO)
-        if (!this->m_env->FreeVAO(VAO))
-            Helper::Debug::Error("EditorGrid::Free() : failed to free VAO!");
+    if (VAO && !m_env->FreeVAO(VAO)) {
+        SR_ERROR("EditorGrid::Free() : failed to free VAO!");
+    }
 
     delete this;
 }
 
 bool Framework::Graphics::EditorGrid::Calculate() {
-    Debug::Graph("EditorGrid::Calculate() : calculating grid...");
+    SR_GRAPH("EditorGrid::Calculate() : calculating grid...");
 
     if (!this->m_env->CalculateEmptyVAO(VAO)) {
         Debug::Error("EditorGrid::Calculate() : failed calculate grid VAO!");

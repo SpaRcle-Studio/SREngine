@@ -3,7 +3,6 @@
 //
 
 #include <Debug.h>
-#include <ResourceManager/ResourceManager.h>
 #include <Xml.h>
 
 #include <GUI/EditorGUI.h>
@@ -12,39 +11,36 @@
 #include <GUI/Inspector.h>
 #include <GUI/VisualScriptEditor.h>
 #include <GUI/WorldEdit.h>
+#include <GUI/EngineSettings.h>
 
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;
 
 EditorGUI::EditorGUI(Framework::Scripting::Compiler *compiler)
-        : m_compiler(compiler)
+    : m_compiler(compiler)
 {
     m_window = Engine::Instance().GetWindow();
 
-    Register(m_fileBrowser = new FileBrowser());
-    Register(m_hierarchy = new Hierarchy());
-    Register(m_scriptEditor = new VisualScriptEditor());
-    Register(m_sceneViewer = new SceneViewer(m_window));
-    Register(m_inspector = new Inspector());
-    Register(m_worldEdit = new WorldEdit());
+    AddWindow(new FileBrowser());
+    AddWindow(new Hierarchy());
+    AddWindow(new VisualScriptEditor());
+    AddWindow(new SceneViewer(m_window));
+    AddWindow(new Inspector());
+    AddWindow(new WorldEdit());
+    AddWindow(new EngineSettings());
 
-    m_fileBrowser->SetFolder(Helper::ResourceManager::Instance().GetResPath());
+    for (auto& [id, widget] : m_widgets)
+        Register(widget);
+
+    GetWindow<FileBrowser>()->SetFolder(Helper::ResourceManager::Instance().GetResPath());
 }
 
 EditorGUI::~EditorGUI() {
-    Remove(m_fileBrowser);
-    Remove(m_scriptEditor);
-    Remove(m_hierarchy);
-    Remove(m_sceneViewer);
-    Remove(m_inspector);
-    Remove(m_worldEdit);
-
-    SR_SAFE_DELETE_PTR(m_fileBrowser);
-    SR_SAFE_DELETE_PTR(m_scriptEditor);
-    SR_SAFE_DELETE_PTR(m_hierarchy);
-    SR_SAFE_DELETE_PTR(m_sceneViewer);
-    SR_SAFE_DELETE_PTR(m_inspector);
-    SR_SAFE_DELETE_PTR(m_worldEdit);
+    for (auto& [id, widget] : m_widgets) {
+        Remove(widget);
+        SR_SAFE_DELETE_PTR(widget);
+    }
+    m_widgets.clear();
 }
 
 bool EditorGUI::Init() {
@@ -103,17 +99,21 @@ void EditorGUI::Draw() {
             return;
     }
 
-    m_script->OnGUI();
+    if (m_script)
+        m_script->OnGUI();
 
     WidgetManager::Draw();
 }
 
 void EditorGUI::Save() {
     const auto path = Helper::ResourceManager::Instance().GetConfigPath().Concat("EditorWidgets.xml");
+
     auto document = Helper::Xml::Document::New();
     auto widgets = document.Root().AppendChild("Widgets");
+
     for (auto&& [name, widget] : GetWidgets())
         widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", widget->IsOpen());
+
     document.Save(path.ToString());
 }
 
@@ -139,17 +139,18 @@ void EditorGUI::Load() {
 void EditorGUI::Enable(bool value) {
     if (m_enabled != value) {
         m_window->Synchronize();
-        m_sceneViewer->Enable(value);
+        GetWindow<SceneViewer>()->Enable(value);
         m_window->SetGUIEnabled(!m_window->IsGUIEnabled());
         m_enabled = value;
     }
 }
 
 void EditorGUI::Update() {
-    if (Enabled())
-        m_inspector->Update();
+    if (Enabled()) {
+        GetWindow<Inspector>()->Update();
+    }
 
-    m_sceneViewer->Update();
+    GetWindow<SceneViewer>()->Update();
 }
 
 void EditorGUI::OnKeyDown(const KeyDownEvent &event) {

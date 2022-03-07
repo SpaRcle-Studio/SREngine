@@ -537,6 +537,9 @@ namespace Framework::Graphics {
         void NextFrameGUI() override {
             ImGui_ImplWin32_NewFrame();
         }
+        void* GetHandle() const override {
+            return reinterpret_cast<void*>(m_hWnd);
+        }
     };
 }
 

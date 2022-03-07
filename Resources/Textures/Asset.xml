@@ -2,9 +2,9 @@
 <Textures>
     <Texture Path="Engine/default.png" Filter="NEAREST" CPUUsage="true" />
 
-    <Texture Path="Game/Nemesis/npc_shu_901_body_d.png" CPUUsage="false" MipLevels="0" />
-    <Texture Path="Game/Nemesis/npc_shu_901_face_d.png" CPUUsage="false" MipLevels="0" />
-    <Texture Path="Game/Nemesis/npc_shu_901_hair_d.png" CPUUsage="false" MipLevels="0" />
+    <Texture Path="Game/Nemesis/npc_shu_901_body_d.png" CPUUsage="false" MipLevels="1" />
+    <Texture Path="Game/Nemesis/npc_shu_901_face_d.png" CPUUsage="false" MipLevels="1" />
+    <Texture Path="Game/Nemesis/npc_shu_901_hair_d.png" CPUUsage="false" MipLevels="1" />
 
     <Texture Path="Game/Miku/Miku_Bodytex_DM.png" CPUUsage="false" MipLevels="0" />
     <Texture Path="Game/Miku/Miku_Facetex_A.png"  CPUUsage="false" MipLevels="0" />

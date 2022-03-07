@@ -53,8 +53,8 @@ namespace Framework::Graphics {
                  *  2 - skybox sampler
            */
             m_env->BindDescriptorSet(m_descriptorSet);
-            this->m_env->BindTexture(1, m_colors[0]);
-            this->m_env->BindTexture(2, m_colors[1]);
+            m_env->BindTexture(1, m_colors[0]);
+            m_env->BindTexture(2, m_colors[1]);
 
             m_env->UnUseShader();
         }
@@ -75,11 +75,6 @@ namespace Framework::Graphics {
         }
 
         bool Destroy() override {
-            if (m_postProcessingShader) {
-                m_postProcessingShader->Free();
-                m_postProcessingShader = nullptr;
-            }
-
             if (m_descriptorSet != -1) {
                 m_env->FreeDescriptorSet(m_descriptorSet);
                 m_descriptorSet = -1;
@@ -87,7 +82,7 @@ namespace Framework::Graphics {
 
             if (m_ubo != -1) {
                 if (!m_env->FreeUBO(m_ubo))
-                    Helper::Debug::Warn("VulkanPostProcessing::Destroy() : failed to free UBO!");
+                    SR_WARN("VulkanPostProcessing::Destroy() : failed to free UBO!");
                 m_ubo = -1;
             }
 

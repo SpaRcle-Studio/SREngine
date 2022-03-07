@@ -22,6 +22,7 @@ namespace Framework::Core::GUI {
     class WorldEdit;
 
     class EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
+        using Widgets = std::unordered_map<size_t, Graphics::GUI::Widget*>;
     public:
         explicit EditorGUI(Scripting::Compiler* compiler);
 
@@ -33,12 +34,17 @@ namespace Framework::Core::GUI {
         bool Destroy();
         void Free();
 
-        SR_NODISCARD SR_GRAPH_NS::GUI::FileBrowser* GetFileBrowser() const { return m_fileBrowser; }
-        SR_NODISCARD SR_GRAPH_NS::GUI::SceneViewer* GetSceneViewer() const { return m_sceneViewer; }
-        SR_NODISCARD VisualScriptEditor* GetVisualScriptEditor() const { return m_scriptEditor; }
-        SR_NODISCARD GUI::Hierarchy* GetHierarchy() const { return m_hierarchy; }
-        SR_NODISCARD WorldEdit* GetWorldEdit() const { return m_worldEdit; }
-        SR_NODISCARD Inspector* GetInspector() const { return m_inspector; }
+        template<typename T> void AddWindow(T* widget) {
+            m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
+        }
+
+        template<typename T> T* GetWindow() {
+            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end())
+                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
+                    return pWidget;
+            return nullptr;
+        }
+
         SR_NODISCARD bool Enabled() const { return m_enabled; }
 
         void Draw() override;
@@ -55,18 +61,15 @@ namespace Framework::Core::GUI {
         void Load();
 
     private:
-        Graphics::Window*              m_window       = nullptr;
-        Scripting::Compiler*           m_compiler     = nullptr;
-        Scripting::Script*             m_script       = nullptr;
-        VisualScriptEditor*            m_scriptEditor = nullptr;
-        WorldEdit*                     m_worldEdit    = nullptr;
-        Inspector*                     m_inspector    = nullptr;
-        Hierarchy*                     m_hierarchy    = nullptr;
-        SR_GRAPH_NS::GUI::FileBrowser* m_fileBrowser  = nullptr;
-        SR_GRAPH_NS::GUI::SceneViewer* m_sceneViewer  = nullptr;
-        std::atomic<bool>              m_isInit       = false;
-        std::atomic<bool>              m_hasErrors    = false;
-        std::atomic<bool>              m_enabled      = false;
+        Graphics::Window*    m_window    = nullptr;
+        Scripting::Compiler* m_compiler  = nullptr;
+        Scripting::Script*   m_script    = nullptr;
+
+        std::atomic<bool>    m_isInit    = false;
+        std::atomic<bool>    m_hasErrors = false;
+        std::atomic<bool>    m_enabled   = false;
+
+        Widgets              m_widgets   = {};
 
     };
 }

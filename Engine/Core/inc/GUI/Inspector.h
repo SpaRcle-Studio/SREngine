@@ -6,8 +6,13 @@
 #define SRENGINE_INSPECTOR_H
 
 #include <GUI/Widget.h>
+#include <GUI/ComponentDrawer.h>
 #include <EntityComponentSystem/GameObject.h>
 #include <World/Scene.h>
+
+namespace Framework::Helper {
+    class Transform3D;
+}
 
 namespace Framework::Core::GUI {
     class Inspector : public Graphics::GUI::Widget {
@@ -22,11 +27,21 @@ namespace Framework::Core::GUI {
     protected:
         void Draw() override;
         void DrawComponents();
+        void DrawTransform(Helper::Transform3D* transform) const;
+
+        template<typename T> void DrawComponent(Helper::Component* component, const std::string& name) {
+            auto&& pComponent = dynamic_cast<T*>(component);
+
+            if (!pComponent)
+                return;
+
+            if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
+                ComponentDrawer::DrawComponent(pComponent);
+        }
 
     private:
-        Types::SafePtr<Helper::GameObject> m_gameObject;
-        Types::SafePtr<World::Scene> m_scene;
-        bool m_local = true;
+        Helper::Types::SafePtr<Helper::GameObject> m_gameObject;
+        Helper::Types::SafePtr<World::Scene> m_scene;
 
     };
 }

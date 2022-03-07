@@ -28,6 +28,7 @@ namespace Framework::Helper {
 
     public:
         Path Normalize();
+        bool Make() const;
         void NormalizeSelf();
         [[nodiscard]] std::string ToString() const;
         [[nodiscard]] size_t GetHash() const;

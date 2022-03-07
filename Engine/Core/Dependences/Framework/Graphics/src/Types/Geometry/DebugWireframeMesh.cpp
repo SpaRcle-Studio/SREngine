@@ -38,8 +38,8 @@ void  Framework::Graphics::Types::DebugWireframeMesh::DrawVulkan() {
         }
 
         this->m_env->UpdateDescriptorSets(m_descriptorSet, {
-                { DescriptorType::Uniform, { 0, m_UBO                                 } },
-                { DescriptorType::Uniform, { 1, Shader::GetCurrentShader()->GetUBO(0) } },
+                { DescriptorType::Uniform, { 0, m_UBO               } },
+                { DescriptorType::Uniform, { 1, m_shader->GetUBO(0) } },
         });
 
         UpdateUBO();
@@ -103,7 +103,7 @@ void Framework::Graphics::Types::DebugWireframeMesh::SetVertexArray(const std::a
 
 void Framework::Graphics::Types::DebugWireframeMesh::UpdateUBO() {
     if (m_UBO >= 0) {
-        WireframeUBO ubo = { m_modelMat, m_material->GetColor() };
+        WireframeUBO ubo = { m_modelMat, m_material->GetColor().ToGLM() };
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(WireframeUBO));
     }
 }

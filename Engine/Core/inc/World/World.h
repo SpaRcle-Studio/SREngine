@@ -30,22 +30,36 @@ namespace Framework::Core::World {
         GameObject::Ptr Instance(const Xml::Node& gameObjectXml) override {
             const auto&& tag = gameObjectXml.TryGetAttribute("Tag").ToString("Untagged");
             const auto&& enabled = gameObjectXml.TryGetAttribute("Enabled").ToBool(true);
+            const auto&& name = gameObjectXml.GetAttribute("Name").ToString();
+            const auto&& id = gameObjectXml.GetAttribute("EntityId").ToUInt64();
 
-            auto&& gameObject = Scene::Instance(gameObjectXml.GetAttribute("Name").ToString());
+            GameObject::Ptr gameObject;
+
+            EntityManager::Instance().GetReserved(id, [&gameObject, name, this]() -> Entity* {
+                return (gameObject = Scene::Instance(name)).DynamicCast<Entity*>();
+            });
+
+            if (!gameObject.Valid())
+                return gameObject;
+
             gameObject->SetTransform(Transform3D::Load(gameObjectXml.TryGetNode("Transform3D")));
 
-            Helper::ComponentManager::Instance().LockContext();
+            auto&& componentManager = Helper::ComponentManager::Instance();
 
-            if (auto&& context = Helper::ComponentManager::Instance().GetContext()) {
-                context->SetPointer("Render", Engine::Instance().GetRender());
-                context->SetPointer("Window", Engine::Instance().GetWindow());
-            }
+            componentManager.LoadComponents([&](Types::DataStorage& context) -> bool {
+                context.SetPointer("Render", Engine::Instance().GetRender());
+                context.SetPointer("Window", Engine::Instance().GetWindow());
 
-            for (const auto& childXml : gameObjectXml.TryGetNode("Components").TryGetNodes()) {
+                for (const auto& componentXml : gameObjectXml.TryGetNode("Components").TryGetNodes()) {
+                    if (auto&& component = componentManager.Load(componentXml))
+                        gameObject->AddComponent(component);
+                    else {
+                        SR_WARN("World::Instance() : failed to load \"" + componentXml.Name() + "\" component!")
+                    }
+                }
 
-            }
-
-            Helper::ComponentManager::Instance().UnlockContext();
+                return true;
+            });
 
             for (const auto& childXml : gameObjectXml.TryGetNode("Children").TryGetNodes()) {
                 if (auto&& child = Instance(childXml)) {

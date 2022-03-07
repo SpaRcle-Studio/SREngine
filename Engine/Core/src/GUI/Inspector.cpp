@@ -23,26 +23,8 @@ namespace Framework::Core::GUI {
             ImGui::Text("Entity id: %llu", m_gameObject->GetEntityId());
 
             ImGui::Separator();
-            TextCenter("Transform");
 
-            auto&& transform = m_gameObject->GetTransform();
-
-            auto&& translation = m_gameObject->GetTransform()->GetTranslation();
-            if (Graphics::GUI::DrawVec3Control("Translation", translation))
-                transform->SetTranslation(translation);
-
-            auto&& rotation = m_gameObject->GetTransform()->GetRotation();
-            if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
-                transform->SetRotation(rotation);
-
-            auto&& scale = m_gameObject->GetTransform()->GetScale();
-            if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
-                transform->SetScale(scale);
-
-            auto&& skew = m_gameObject->GetTransform()->GetSkew();
-            if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
-                transform->SetSkew(skew);
-
+            DrawTransform(m_gameObject->GetTransform());
             DrawComponents();
 
             m_gameObject.Unlock();
@@ -87,15 +69,36 @@ namespace Framework::Core::GUI {
                 ImGui::EndPopup();
             }
 
-            if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
-                component->DrawOnInspector();
+            DrawComponent<Graphics::Camera>(component, "Camera");
+            DrawComponent<Graphics::Types::Mesh3D>(component, "Mesh3D");
 
             return true;
 
-            exit:
+        exit:
             ImGui::EndMenu();
             ImGui::EndPopup();
+
             return false;
         });
+    }
+
+    void Inspector::DrawTransform(Helper::Transform3D *transform) const {
+        TextCenter("Transform");
+
+        auto&& translation = transform->GetTranslation();
+        if (Graphics::GUI::DrawVec3Control("Translation", translation))
+            transform->SetTranslation(translation);
+
+        auto&& rotation = transform->GetRotation();
+        if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
+            transform->SetRotation(rotation);
+
+        auto&& scale = transform->GetScale();
+        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
+            transform->SetScale(scale);
+
+        auto&& skew = transform->GetSkew();
+        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
+            transform->SetSkew(skew);
     }
 }

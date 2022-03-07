@@ -67,16 +67,19 @@ namespace Framework::Helper {
             return RegisterComponentImpl(code, StringUtils::BackRead(typeid(T).name(), ':'), constructor);
         }
 
+        bool LoadComponents(const std::function<bool(Types::DataStorage& context)>& loader) {
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+            const bool result = loader(m_context);
+
+            m_context.Clear();
+
+            return result;
+        }
+
         Component* Load(const Xml::Node& componentXml);
 
-        /// блокировщики контекста. Нужно для того, чтобы если есть несоклько рендеров или окон,
-        /// чтобы можно было безопасно их задать в DataStorage на время выполнения
-        void LockContext();
-        void UnlockContext();
-
-        Types::DataStorage* GetContext() {
-            return &m_context;
-        }
+        Types::DataStorage* GetContext() { return &m_context; }
 
     private:
         bool RegisterComponentImpl(size_t id, const std::string& name, const std::function<Component*(void)>& constructor);
@@ -108,12 +111,11 @@ namespace Framework::Helper {
         virtual void OnSelected(bool value) { this->m_isSelected = value; };
         virtual void OnReady(bool ready) { }
         virtual void OnAttachComponent();
-        virtual bool DrawOnInspector() { return false; }
 
     public:
-        void SetActive(bool v) { this->m_isActive = v;  this->OnReady(IsReady()); }
-        void SetEnabled(bool v) { this->m_isEnabled = v; this->OnReady(IsReady()); }
-        void SetParent(GameObject* parent) { this->m_parent = parent; }
+        void SetActive(bool value) { m_isActive = value; OnReady(IsReady()); }
+        void SetEnabled(bool value) { m_isEnabled = value; OnReady(IsReady()); }
+        void SetParent(GameObject* parent) { m_parent = parent; }
 
     public:
         [[nodiscard]] virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
@@ -122,13 +124,13 @@ namespace Framework::Helper {
         [[nodiscard]] SR_INLINE bool IsSelected() const { return m_isSelected;              }
         [[nodiscard]] SR_INLINE bool IsReady()    const { return m_isActive && m_isEnabled; }
         [[nodiscard]] SR_INLINE std::string GetComponentName() const { return m_name; }
-        [[nodiscard]] SR_INLINE size_t GetId() const { return m_id; }
+        [[nodiscard]] SR_INLINE size_t GetId() const { return m_componentId; }
         [[nodiscard]] SR_INLINE Component* BaseComponent() { return this; }
         [[nodiscard]] SR_INLINE GameObject* GetParent() const { return this->m_parent; }
 
     protected:
         template<typename T> void Init() {
-            m_id = typeid(T).hash_code();
+            m_componentId = typeid(T).hash_code();
             m_name = StringUtils::BackRead(typeid(T).name(), ':');
         }
 
@@ -144,7 +146,7 @@ namespace Framework::Helper {
         bool m_isEnabled           = true;
 
         std::string m_name = "Unknown";
-        size_t m_id = SIZE_MAX;
+        size_t m_componentId = SIZE_MAX;
         GameObject* m_parent = nullptr;
 
     };

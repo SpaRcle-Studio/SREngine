@@ -28,22 +28,22 @@ namespace Framework::Helper::Math {
             T coord[2] = { 0 };
         };
 
-        _FORCE_INLINE_ Vector2() {
+        constexpr _FORCE_INLINE_ Vector2() {
             x = 0;
             y = 0;
         }
 
-        _FORCE_INLINE_ Vector2(T p_x, T p_y) {
+        constexpr _FORCE_INLINE_ Vector2(T p_x, T p_y) {
             x = p_x;
             y = p_y;
         }
 
-        _FORCE_INLINE_ Vector2(T p) {
+        constexpr _FORCE_INLINE_ Vector2(T p) {
             x = p;
             y = p;
         }
 
-        _FORCE_INLINE_ Vector2(const glm::vec2 &vec2) {
+        constexpr _FORCE_INLINE_ Vector2(const glm::vec2 &vec2) {
             x = static_cast<T>(vec2.x);
             y = static_cast<T>(vec2.y);
         }
@@ -152,6 +152,10 @@ namespace Framework::Helper::Math {
             return (x == 0 || y == 0);
         }
 
+        template<typename U> [[nodiscard]] bool Contains(U value) const {
+            return x == static_cast<T>(value) || y == static_cast<T>(value);
+        }
+
         [[nodiscard]] _FORCE_INLINE_ glm::vec2 ToGLM() const noexcept {
             return { static_cast<float_t>(x), static_cast<float_t>(y) };
         }
@@ -172,6 +176,8 @@ namespace Framework::Helper::Math {
     typedef Vector2<Unit> FVector2;
     typedef Vector2<int32_t> IVector2;
     typedef Vector2<uint32_t> UVector2;
+
+    constexpr IVector2 IVector2MAX = IVector2(SR_INT32_MAX);
 }
 
 namespace std {

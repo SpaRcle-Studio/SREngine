@@ -43,8 +43,6 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     */
     m_render->FreeTexture(this);
 
-    Helper::ResourceManager::Instance().Destroy(this);
-
     return IResource::Destroy();
 }
 

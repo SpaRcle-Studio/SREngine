@@ -84,6 +84,13 @@ namespace Framework::Helper {
             return source.substr(first, last - first);
         }
 
+        static std::string Substring(const std::string& source, char symbol, uint32_t offset = 0) {
+            if (auto&& pos = source.find(symbol); pos == std::string::npos)
+                return source;
+            else
+                return source.substr(pos + offset, source.size() - 1);
+        }
+
         static SR_FORCE_INLINE std::string BackRead(const std::string& str, const char c, const int offset = 0) {
             std::string result = std::string();
 
@@ -140,7 +147,7 @@ namespace Framework::Helper {
                 else
                     result += str[t];
             }
-            return "";
+            return std::string();
         }
 
         static std::string GetExtensionFromFilePath(std::string path);

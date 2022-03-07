@@ -12,8 +12,15 @@ namespace Framework::Graphics::GUI {
             ImGui::SetNextWindowPos(pos, ImGuiCond_Always, ImVec2(0.5f, 0.5f));
         }
 
+        WindowFlags flags = m_flags;
+
+        if (!m_size.Contains(SR_INT32_MAX)) {
+            ImGui::SetNextWindowSize(ImVec2(m_size.x, m_size.y));
+            flags |= ImGuiWindowFlags_::ImGuiWindowFlags_NoResize;
+        }
+
         bool open = m_open;
-        if (ImGui::Begin(m_name.c_str(), &open, m_flags)) {
+        if (ImGui::Begin(m_name.c_str(), &open, flags)) {
             m_focused = ImGui::IsWindowFocused();
 
             if (!open) {
@@ -26,7 +33,7 @@ namespace Framework::Graphics::GUI {
         }
     }
 
-    void Widget::TextCenter(const std::string &text) {
+    void Widget::TextCenter(const std::string &text) const {
         float font_size = ImGui::GetFontSize() * text.size() / 2;
 
         ImGui::SameLine(

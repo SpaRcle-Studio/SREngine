@@ -98,6 +98,7 @@ int main(int argc, char **argv) {
         ResourceManager::Instance().RegisterType<Mesh>();
         ResourceManager::Instance().RegisterType<Texture>();
         ResourceManager::Instance().RegisterType<Material>();
+        ResourceManager::Instance().RegisterType<Shader>();
     }
 
     // Register all components
@@ -117,26 +118,29 @@ int main(int argc, char **argv) {
         Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
     }
 
-    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResPath().Concat("/Configs/Environment.config")); env == "OpenGL")
+    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResPath().Concat("/Configs/Environment.config")); env == "OpenGL"){
         Environment::Set(new OpenGL());
-    else if (env == "Vulkan")
+    }
+    else if (env == "Vulkan") {
         Environment::Set(new Vulkan());
+    }
     else if (env.empty()) {
-        Helper::Debug::Error("System error: file \"Resources/Configs/Environment.config\" does not exist!\n\t"
+        SR_ERROR("System error: file \"Resources/Configs/Environment.config\" does not exist!\n\t"
                              "Please, create it and write the name of the environment there!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -1500;
-    } else {
-        Helper::Debug::Error("System error: unknown environment! \"" + env + "\" does not support!");
+    }
+    else {
+        SR_ERROR("System error: unknown environment! \"" + env + "\" does not support!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -2000;
     }
 
-    Render* render = Render::Allocate();
+    Render* render = Render::Allocate("Main SpaRcle Render");
     if (!render) {
-        Helper::Debug::Error("FATAL: render is not support this pipeline!");
+        SR_ERROR("FATAL: render is not support this pipeline!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -1000;

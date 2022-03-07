@@ -21,7 +21,7 @@ namespace Framework::Core::GUI {
         void Draw() override;
 
     private:
-        Types::SafePtr<World::Scene> m_scene;
+        Helper::Types::SafePtr<World::Scene> m_scene;
 
     };
 }

@@ -23,8 +23,7 @@ namespace Framework::Helper {
         friend class ::Framework::API;
 
     protected:
-        explicit IResource(const char* name);
-
+        IResource(const char* name);
         virtual ~IResource() = default;
 
     public:

@@ -39,9 +39,9 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
     Debug::Graph("PostProcessing::Init() : initializing post processing...");
 
     {
-        this->m_postProcessingShader = Shader::Load(m_render, "postProcessing");
+        m_postProcessingShader = Shader::Load(m_render, "postProcessing");
 
-        this->m_blurShader = new Shader(m_render, "engine/blur");
+        m_blurShader = new Shader(m_render, "engine/blur");
     }
 
     m_isInit = true;
@@ -51,6 +51,18 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
 
 bool Framework::Graphics::PostProcessing::Destroy() {
     Helper::Debug::Graph("PostProcessing::Destroy() : destroying post processing...");
+
+    if (m_postProcessingShader) {
+        m_postProcessingShader->FreeVideoMemory();
+        m_postProcessingShader->Destroy();
+        m_postProcessingShader = nullptr;
+    }
+
+    if (m_blurShader) {
+        m_blurShader->FreeVideoMemory();
+        m_blurShader->Destroy();
+        m_blurShader = nullptr;
+    }
 
     if (!m_isInit)
         return false;

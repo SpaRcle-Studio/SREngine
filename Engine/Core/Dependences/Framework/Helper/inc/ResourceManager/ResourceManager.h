@@ -83,18 +83,6 @@ namespace Framework::Helper {
         static const float_t ResourceLifeTime;
 
     private:
-        std::vector<IResource*> m_resourcesToDestroy = std::vector<IResource*>();
-        Resources m_resources = Resources();
-
-    private:
-        Path m_resourcesFolder = "";
-        bool m_isInit = false;
-        std::recursive_mutex m_mutex = std::recursive_mutex();
-        std::atomic<bool> m_force = false;
-        std::atomic<bool> m_destroyIsEmpty = false;
-        Types::Thread m_thread;
-
-    private:
         /** \brief remove resource from resource manager */
         void Remove(IResource *resource);
 
@@ -112,8 +100,8 @@ namespace Framework::Helper {
 
         IResource* Find(const std::string& Name, const std::string& ID);
 
-        template<typename T> IResource* Find(const std::string& ID) {
-            return Find(typeid(T).name(), ID);
+        template<typename T> T* Find(const std::string& ID) {
+            return dynamic_cast<T*>(Find(typeid(T).name(), ID));
         }
 
         bool RegisterType(const std::string& type_name);
@@ -141,6 +129,21 @@ namespace Framework::Helper {
 
     public:
         void PrintMemoryDump();
+
+    private:
+        std::vector<IResource*> m_resourcesToDestroy = std::vector<IResource*>();
+        Resources m_resources = Resources();
+
+    private:
+        Path m_resourcesFolder = "";
+        bool m_isInit = false;
+        std::recursive_mutex m_mutex = std::recursive_mutex();
+        std::atomic<bool> m_force = false;
+        std::atomic<bool> m_destroyIsEmpty = false;
+        Types::Thread m_thread;
+        uint64_t m_lastTime = 0;
+        uint64_t m_deltaTime = 0;
+
     };
 }
 

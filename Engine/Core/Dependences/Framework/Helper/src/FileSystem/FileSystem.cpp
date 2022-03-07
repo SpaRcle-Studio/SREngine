@@ -164,7 +164,7 @@ std::vector<char> FileSystem::ReadBinary(const std::string &path) {
     return buffer;
 }
 
-bool FileSystem::CreatePath(const std::string &path) {
+bool FileSystem::CreateFolder(const std::string &path) {
 #ifdef __MINGW64__
     return mkdir(path.c_str());
 #else
@@ -316,4 +316,5 @@ bool FileSystem::FolderExists(const std::string &path) {
 
     return false; // this is not a directory!
 }
+
 

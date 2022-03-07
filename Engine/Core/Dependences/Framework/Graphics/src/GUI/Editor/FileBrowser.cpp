@@ -20,6 +20,7 @@ FileBrowser::FileBrowser()
 
 void FileBrowser::SetFolder(const Path &path) {
     SRAssert((m_root = path).IsDir());
+    m_selectedDir = m_root;
 }
 
 void FileBrowser::Draw(const Path &root) {
@@ -85,17 +86,24 @@ void FileBrowser::Draw() {
         ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
+        ImGui::BeginGroup();
+
         if (path.IsDir())
             ImGui::Button(SR_ICON_FOLDER, ImVec2(50, 50));
         else
             ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
+
+        ImGui::PopFont();
+
+        ImGui::Text("%s", path.GetBaseName().c_str());
+
+        ImGui::EndGroup();
 
         if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
             ImGui::SameLine();
         else
             index = 1;
 
-        ImGui::PopFont();
         ImGui::PopStyleVar();
     }
 

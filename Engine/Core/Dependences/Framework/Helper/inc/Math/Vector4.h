@@ -30,29 +30,39 @@ namespace Framework::Helper::Math {
             T coord[4] = { 0 };
         };
     public:
-        _FORCE_INLINE_ Vector4() {
+        SR_FAST_CONSTRUCTOR Vector4() {
             x = y = z = w = 0;
         }
 
-        _FORCE_INLINE_ Vector4(T scalar) {
+        SR_FAST_CONSTRUCTOR Vector4 (T scalar) {
             x = y = z = w = scalar;
         }
 
-        _FORCE_INLINE_ Vector4(const glm::vec4& vec4) {
+        SR_FAST_CONSTRUCTOR Vector4(const glm::vec4& vec4) {
             x = vec4.x;
             y = vec4.y;
             z = vec4.z;
             w = vec4.w;
         }
 
-        _FORCE_INLINE_ Vector4(T _x, T _y, T _z, T _w) {
+        SR_FAST_CONSTRUCTOR Vector4(T _x, T _y, T _z, T _w) {
             x = _x;
             y = _y;
             z = _z;
             w = _w;
         }
 
-        glm::vec4 ToGLM() const { return { x, y, z, w }; }
+    public:
+        SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
+
+        template<typename U, typename Y> SR_NODISCARD Vector4 Clamp(U _max, Y _min) const {
+            return Vector4(
+                SR_CLAMP(x, static_cast<T>(_max), static_cast<T>(_min)),
+                SR_CLAMP(y, static_cast<T>(_max), static_cast<T>(_min)),
+                SR_CLAMP(z, static_cast<T>(_max), static_cast<T>(_min)),
+                SR_CLAMP(w, static_cast<T>(_max), static_cast<T>(_min))
+            );
+        }
     };
 
     typedef Vector4<Unit>     FColor;

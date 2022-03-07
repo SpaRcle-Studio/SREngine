@@ -22,7 +22,25 @@ public:
 
     static std::string SaveFileDialog(const std::string& path, const std::string& filter);
 
-    static bool CreatePath(const std::string& path);
+    static bool CreatePath(std::string path, uint32_t offset = 0) {
+        if (path.empty())
+            return false;
+
+        if (path.back() != '/')
+            path.append("/");
+
+        auto pos = path.find('/', offset);
+        if (pos != std::string::npos) {
+            auto dir = path.substr(0, pos);
+
+            if (!CreateFolder(dir) || !CreatePath(path, pos + 1))
+                return false;
+        }
+
+        return true;
+    }
+
+    static bool CreateFolder(const std::string& path);
     static std::string GetExecutableFileName();
     static std::string GetPathToExe();
     static std::string GetFullPath(const std::string& path);

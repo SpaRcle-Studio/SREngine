@@ -10,6 +10,13 @@
 namespace Framework::Graphics::Impl {
     class OpenGLRender : public Render {
     public:
+        explicit OpenGLRender(std::string name)
+            : Render(std::move(name))
+        { }
+
+        ~OpenGLRender() override = default;
+
+    public:
         void DrawSingleColors() override {
             /*this->m_flatGeometryShader->Use();
 

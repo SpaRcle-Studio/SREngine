@@ -21,6 +21,7 @@ namespace Framework::Graphics::Types {
 
     public:
         template<bool fast> [[nodiscard]] int32_t GetIBO();
+        SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
 
         IResource* Copy(IResource* destination) const override;
 

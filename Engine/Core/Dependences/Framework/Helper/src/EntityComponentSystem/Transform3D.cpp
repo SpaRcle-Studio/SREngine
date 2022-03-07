@@ -215,15 +215,15 @@ Xml::Document Transform3D::Save() const {
 Transform3D* Transform3D::Load(const Xml::Node &xml) {
     Transform3D* transform3D = new Transform3D();
 
-    const auto& position = xml.TryGetNode("Position");
+    const auto& position = xml.TryGetNode("Translation");
     const auto& rotation = xml.TryGetNode("Rotation");
     const auto& scale    = xml.TryGetNode("Scale");
     const auto& skew     = xml.TryGetNode("Skew");
 
     transform3D->SetTranslation(position.TryGetAttribute("X").ToFloat(0.f), position.TryGetAttribute("Y").ToFloat(0.f), position.TryGetAttribute("Z").ToFloat(0.f));
-    transform3D->SetRotation(position.TryGetAttribute("X").ToFloat(0.f), position.TryGetAttribute("Y").ToFloat(0.f), position.TryGetAttribute("Z").ToFloat(0.f));
-    transform3D->SetScale(position.TryGetAttribute("X").ToFloat(1.f), position.TryGetAttribute("Y").ToFloat(1.f), position.TryGetAttribute("Z").ToFloat(1.f));
-    transform3D->SetSkew(position.TryGetAttribute("X").ToFloat(1.f), position.TryGetAttribute("Y").ToFloat(1.f), position.TryGetAttribute("Z").ToFloat(1.f));
+    transform3D->SetRotation(rotation.TryGetAttribute("X").ToFloat(0.f), rotation.TryGetAttribute("Y").ToFloat(0.f), rotation.TryGetAttribute("Z").ToFloat(0.f));
+    transform3D->SetScale(scale.TryGetAttribute("X").ToFloat(1.f), scale.TryGetAttribute("Y").ToFloat(1.f), scale.TryGetAttribute("Z").ToFloat(1.f));
+    transform3D->SetSkew(skew.TryGetAttribute("X").ToFloat(1.f), skew.TryGetAttribute("Y").ToFloat(1.f), skew.TryGetAttribute("Z").ToFloat(1.f));
 
     return transform3D;
 }

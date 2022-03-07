@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <cctype>
 
 namespace Framework::Graphics {
@@ -17,7 +18,11 @@ namespace Framework::Graphics {
 
     class Shader;
 
-    typedef std::unordered_map<uint32_t, std::vector<Types::IndexedMesh *>> MeshGroups;
+    typedef uint32_t ClusterShaderId;
+    typedef uint32_t ClusterVBOId;
+
+    typedef std::unordered_set<Types::IndexedMesh *> MeshGroup;
+    typedef std::unordered_map<ClusterVBOId, MeshGroup> MeshGroups;
     typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
     struct ShadedMeshSubCluster {
@@ -52,8 +57,8 @@ namespace Framework::Graphics {
             postShaderBindingCode                                          \
                                                                            \
             for (auto const& [key, meshGroup] : subCluster.m_groups) {     \
-                env->BindVBO(meshGroup[0]->GetVBO<true>());                \
-                env->BindIBO(meshGroup[0]->GetIBO<true>());                \
+                env->BindVBO((*meshGroup.begin())->GetVBO<true>());        \
+                env->BindIBO((*meshGroup.begin())->GetIBO<true>());        \
                                                                            \
                 for (const auto &mesh : meshGroup)                         \
                     mesh->Draw##PipeLine();                                \

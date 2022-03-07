@@ -12,7 +12,7 @@
 #endif
 
 namespace Framework::Helper {
-    const float_t ResourceManager::ResourceLifeTime = 0.f; // seconds
+    const float_t ResourceManager::ResourceLifeTime = 10.f; // seconds
 
     uint64_t ResourceManager::GetUsedMemoryLoad() {
     #ifdef SR_WIN32
@@ -58,7 +58,7 @@ namespace Framework::Helper {
 
     bool ResourceManager::Destroy(IResource *resource) {
         if (Debug::GetLevel() >= Debug::Level::High)
-            Debug::Log("ResourceManager::Destroy() : destroying \""+ std::string(resource->m_resourceName) +"\"");
+            SR_LOG("ResourceManager::Destroy() : destroying \""+ std::string(resource->m_resourceName) +"\"");
 
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
@@ -87,11 +87,14 @@ namespace Framework::Helper {
 
     void ResourceManager::GC() {
         do {
+            auto time = clock();
+            m_deltaTime = time - m_lastTime;
+            m_lastTime = time;
+
             /// даем возможность другим потокам отдать ресурсы на уничтожение,
             /// чтобы сразу же не блокировать им эту возможность
             Types::Thread::Sleep(100);
 
-            auto beginFrame = clock();
             const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
             if ((m_destroyIsEmpty = m_resourcesToDestroy.empty()))
@@ -101,15 +104,23 @@ namespace Framework::Helper {
             for (; resourceIt != m_resourcesToDestroy.end(); ) {
                 auto resource = *resourceIt;
 
-                if (IsLastResource(resource)) {
-                    resource->m_lifetime -= double_t(clock() - beginFrame) / (double_t) CLOCKS_PER_SEC;
-                } else {
+                const bool usageNow = resource->GetCountUses() > 0 || !resource->IsDestroy();
+
+                if (usageNow) {
+                    resource->m_lifetime = ResourceLifeTime;
+                }
+                else if (IsLastResource(resource)) {
+                    resource->m_lifetime -= double_t(m_deltaTime) / (double_t)CLOCKS_PER_SEC;
+                }
+                else {
                     /// нам не нужно ждать завершения времени жизни ресурса, у которого еще есть копии
                     resource->m_lifetime = 0.f;
                 }
 
                 const bool resourceAlive = !resource->IsForce() && resource->IsAlive() && !m_force;
-                if (resource->GetCountUses() > 0 || !resource->IsDestroy() || resourceAlive) {
+
+
+                if (usageNow || resourceAlive) {
                     ++resourceIt;
                     continue;
                 }
@@ -117,7 +128,7 @@ namespace Framework::Helper {
                 if (Debug::GetLevel() >= Debug::Level::High)
                     Debug::Log("ResourceManager::GC() : free \"" + std::string(resource->m_resourceName) + "\" resource");
 
-                this->Remove(resource);
+                Remove(resource);
 
                 {
                     /// так как некоторые ресурсы рекурсивно уничтожают дочерныие ресурсы при вызове деструктора, например материал,
@@ -127,13 +138,15 @@ namespace Framework::Helper {
                     m_resourcesToDestroy.erase(resourceIt);
                     delete resource;
                     resourceIt = m_resourcesToDestroy.begin();
+                    m_destroyIsEmpty = m_resourcesToDestroy.empty();
                 }
             }
 
             if (Debug::GetLevel() >= Debug::Level::High && m_destroyIsEmpty) {
                 Debug::Log("ResourceManager::GC() : complete garbage collection.");
             }
-        } while(m_isInit);
+        }
+        while(m_isInit);
     }
 
     void ResourceManager::RegisterResource(IResource *resource) {
@@ -161,15 +174,11 @@ namespace Framework::Helper {
 
         for (const auto& [resType, group] : m_resources) {
             dump += "\n\t\"" + resType + "\": " + std::to_string(group.m_copies.size());
-            /*if (!resources.empty()) {
-                if (strcmp(resources[0]->m_resource_name, "Texture") == 0) {
-                    std::string textures;
-                    for (IResource *res : resources) {
-                        textures += "\n\t\tUses = " + std::to_string(res->GetCountUses());
-                    }
-                    dump += textures;
-                }
-            }*/
+
+            uint32_t id = 0;
+            for (auto& pRes : group.m_group) {
+                dump += Helper::Format("\n\t\t%u: %s", id++, pRes->GetResourceId().c_str());
+            }
         }
 
         std::string wait;
@@ -202,8 +211,17 @@ namespace Framework::Helper {
     }
 
     void ResourceManager::Synchronize(bool force) {
-        m_force = true;
-        while (!m_destroyIsEmpty);
+        {
+            const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+            m_force = true;
+        }
+
+        while (!m_destroyIsEmpty) {
+            if (!m_thread.Joinable()) {
+                SR_ERROR("ResourceManager::Synchronize() : thread is dead!");
+            }
+        }
+
         m_force = false;
     }
 }

@@ -50,7 +50,7 @@
 
 namespace Framework::Helper::GUI {
     inline static void DrawTextOnCenter(const std::string& text, bool sameLine = true) {
-        float font_size = ImGui::GetFontSize() * text.size() / 2;
+        const auto font_size = ImGui::GetFontSize() * text.size() / 2;
 
         if (sameLine)
             ImGui::SameLine(
@@ -59,6 +59,17 @@ namespace Framework::Helper::GUI {
             );
 
         ImGui::Text("%s", text.c_str());
+    }
+
+    inline static void DrawTextOnCenter(const std::string& text, ImVec4 color) {
+        const auto font_size = ImGui::GetFontSize() * text.size() / 2;
+
+        ImGui::SameLine(
+                ImGui::GetWindowSize().x / 2 -
+                font_size + (font_size / 2)
+        );
+
+        ImGui::TextColored(color, "%s", text.c_str());
     }
 }
 

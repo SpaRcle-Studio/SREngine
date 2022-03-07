@@ -4,12 +4,14 @@
 
 #include <macros.h>
 
+#include "src/GUI/ComponentDrawer.cpp"
 #include "src/GUI/EditorGUI.cpp"
 #include "src/GUI/GUISystem.cpp"
 #include "src/GUI/Inspector.cpp"
 #include "src/GUI/WorldEdit.cpp"
 #include "src/GUI/Hierarchy.cpp"
 #include "src/GUI/VisualScriptEditor.cpp"
+#include "src/GUI/EngineSettings.cpp"
 
 #include "src/Parsers/BlueprintParser.cpp"
 

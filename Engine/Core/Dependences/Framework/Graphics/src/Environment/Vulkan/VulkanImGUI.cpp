@@ -5,6 +5,24 @@
 #include <Environment/Vulkan/VulkanImGUI.h>
 #include <GUI.h>
 
+int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
+    VkWin32SurfaceCreateInfoKHR sci;
+    PFN_vkCreateWin32SurfaceKHR vkCreateWin32SurfaceKHR;
+
+    vkCreateWin32SurfaceKHR = (PFN_vkCreateWin32SurfaceKHR)vkGetInstanceProcAddr(reinterpret_cast<VkInstance>(vk_inst), "vkCreateWin32SurfaceKHR");
+    if (!vkCreateWin32SurfaceKHR) {
+        return VK_ERROR_EXTENSION_NOT_PRESENT;
+    }
+
+    memset(&sci, 0, sizeof(sci));
+    sci.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+    sci.hinstance = GetModuleHandle(NULL);
+    sci.hwnd = static_cast<HWND>(pv->PlatformHandle);
+
+    VkResult err = vkCreateWin32SurfaceKHR(reinterpret_cast<VkInstance>(vk_inst), &sci, static_cast<const VkAllocationCallbacks *>(vk_allocators), (VkSurfaceKHR*)out_vk_surface);
+    return (int)err;
+}
+
 bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKernel* kernel) {
     Helper::Debug::Info("VkImGUI::Init() : initializing vulkan imgui...");
 
@@ -41,6 +59,13 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         Helper::Debug::Error("VkImGUI::Init() : failed to create render pass!");
         return false;
     }
+
+    ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
+
+    ImGuiViewport* mainViewport = platform_io.MainViewport;
+    mainViewport->PlatformHandle = kernel->GetSurface()->GetHandle();
+
+    platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
 
     // Setup Platform/Renderer bindings
     uint32_t images = m_swapchain->GetCountImages();

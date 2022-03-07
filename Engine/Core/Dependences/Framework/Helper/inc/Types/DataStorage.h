@@ -23,18 +23,22 @@ namespace Framework::Helper::Types {
             }
         }
 
-        template<typename T> T* GetPointer(const std::string& name) {
+        template<typename T> T* GetPointer(const std::string& name) const {
             if (m_pointers.count(name) == 0) {
                 SR_ERROR("DataStorage::GetPointer() : pointer not found! Name: " + name);
                 return nullptr;
             }
 
-            if (T* ptr = dynamic_cast<T*>(m_pointers.at(name)))
+            if (T* ptr = reinterpret_cast<T*>(m_pointers.at(name)))
                 return ptr;
 
             SR_ERROR("DataStorage::GetPointer() : invalid pointer! Name: " + name);
 
             return nullptr;
+        }
+
+        void Clear() {
+            m_pointers.clear();
         }
 
     private:

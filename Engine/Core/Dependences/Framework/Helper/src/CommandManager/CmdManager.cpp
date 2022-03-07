@@ -38,11 +38,13 @@ namespace SR_UTILS_NS {
             m_history.erase(pIt);
         }
 
+        m_lastCmdName = cmd->GetName();
         return cmd->Redo();
     }
 
     bool CmdManager::Cancel(ICommand *cmd) {
         --m_historyPC;
+        m_lastCmdName = cmd->GetName();
         return cmd->Undo();
     }
 
@@ -59,8 +61,9 @@ namespace SR_UTILS_NS {
 
     bool CmdManager::DoCmd(const Cmd& cmd) {
         switch (cmd.m_type) {
-            case CmdType::Redo:
+            case CmdType::Redo: {
                 return Execute(cmd.m_cmd);
+            }
             case CmdType::Undo:
                 return Cancel(cmd.m_cmd);
             default:
@@ -70,40 +73,22 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Execute(ICommand *cmd, SyncType sync) {
-        bool result = false;
+        std::lock_guard<std::mutex> lock(m_mutex);
 
-        switch (sync) {
-            case SyncType::Async: {
-                std::lock_guard<std::mutex> lock(m_mutex);
-                m_commands.push({cmd, CmdType::Redo});
-                result = true;
-                break;
-            }
-            case SyncType::Sync: {
-                std::lock_guard<std::mutex> lock(m_mutex);
+        if (m_historyPC != UINT32_MAX) {
+            for (uint32_t PC = m_history.size() - 1; PC > m_historyPC; --PC)
+                delete m_history[PC];
 
-                while (!m_commands.empty()) {
-                    // TODO: check result
-                    DoCmd(m_commands.front());
-                    m_commands.pop();
-                }
+            m_history.resize(m_historyPC + 1);
+        }
+        else {
+            for (auto&& command : m_history)
+                delete command;
 
-                result = DoCmd({cmd, CmdType::Redo});
-                break;
-            }
-            case SyncType::Force:
-                /// команду не нужно сохранять в историю,
-                /// так как она выполнилась ни синхронно,
-                /// ни асинхронно, следовательно она нарушит историю,
-                /// поэтому отменить ее нельзя
-                result = cmd->Redo();
-                delete cmd;
-                break;
-            default: SRAssert(false);
-                break;
+            m_history.clear();
         }
 
-        return result;
+        return ExecuteImpl(cmd, sync);
     }
 
     bool CmdManager::RegisterCommand(const std::string &id, const CmdAllocator &allocator) {
@@ -157,6 +142,69 @@ namespace SR_UTILS_NS {
 
         m_isRun.store(false);
 
-        return m_thread.TryJoin();
+        const bool result = m_thread.TryJoin();
+
+        ClearHistory();
+
+        return result;
+    }
+
+    bool CmdManager::ExecuteImpl(ICommand *cmd, SyncType sync) {
+        bool result = false;
+
+        switch (sync) {
+            case SyncType::Async: {
+                m_commands.push({cmd, CmdType::Redo});
+                result = true;
+                break;
+            }
+            case SyncType::Sync: {
+                while (!m_commands.empty()) {
+                    // TODO: check result
+                    DoCmd(m_commands.front());
+                    m_commands.pop();
+                }
+
+                result = DoCmd({cmd, CmdType::Redo});
+                break;
+            }
+            case SyncType::Force:
+                /// команду не нужно сохранять в историю,
+                /// так как она выполнилась ни синхронно,
+                /// ни асинхронно, следовательно она нарушит историю,
+                /// поэтому отменить ее нельзя
+                result = cmd->Redo();
+                delete cmd;
+                break;
+            default: SRAssert(false);
+                break;
+        }
+
+        return result;
+    }
+
+    void CmdManager::ClearHistory() {
+        for (auto&& command : m_history)
+            delete command;
+
+        m_history.clear();
+        m_historyPC = UINT32_MAX;
+    }
+
+    bool CmdManager::Redo() {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
+        if ((m_historyPC >= (m_history.size() - 1) && m_historyPC != UINT32_MAX) || m_history.empty())
+            return false;
+
+        auto&& cmd = m_history[++m_historyPC];
+
+        m_lastCmdName = cmd->GetName();
+        return cmd->Redo();
+    }
+
+    std::string CmdManager::GetLastCmdName() const {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        return m_lastCmdName;
     }
 }

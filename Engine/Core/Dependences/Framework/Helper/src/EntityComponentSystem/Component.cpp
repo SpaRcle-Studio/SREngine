@@ -7,7 +7,7 @@
 
 namespace Framework::Helper {
     void Framework::Helper::Component::OnAttachComponent() {
-        ComponentManager::Instance().DoEvent(this, m_id);
+        ComponentManager::Instance().DoEvent(this, m_componentId);
     }
 
     bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const std::function<Component *(void)> &constructor) {
@@ -41,15 +41,14 @@ namespace Framework::Helper {
     }
 
     Component *ComponentManager::Load(const Xml::Node &componentXml) {
-        return nullptr;
-    }
+        const auto&& name = componentXml.Name();
 
-    void ComponentManager::LockContext() {
-        m_mutex.lock();
-    }
+        if (m_ids.count(name) == 0) {
+            SR_ERROR("ComponentManager::Load() : component \"" + name + "\" not found!");
+            return nullptr;
+        }
 
-    void ComponentManager::UnlockContext() {
-        m_mutex.unlock();
+        return m_loaders.at(m_ids.at(name))(componentXml, &m_context);
     }
 }
 

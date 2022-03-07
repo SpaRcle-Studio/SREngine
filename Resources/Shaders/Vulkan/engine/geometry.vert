@@ -6,9 +6,11 @@ layout (location = 2) in vec3 inNorm;
 layout (location = 3) in vec3 inTang;
 
 layout (location = 0) out vec2 TexCoord;
+layout (location = 1) out vec4 Color;
 
 layout (binding = 0) uniform MeshUBO {
     mat4 model;
+    vec4 color;
 } meshUBO;
 
 layout (binding = 1) uniform ProjViewUBO {
@@ -28,6 +30,8 @@ vec4 quat_axis_angle( vec3 axis, float angle ) { return vec4( axis * sin( angle 
 
 void main() {
     TexCoord = inUV;
+    Color = meshUBO.color;
+
     vec4 vPos = vec4(-inPos.x, inPos.y, inPos.z, 1.0);
     gl_Position = sharedUBO.proj * sharedUBO.view * meshUBO.model * vPos;
 }

@@ -5,6 +5,7 @@
 #ifndef GAMEENGINE_SKYBOX_H
 #define GAMEENGINE_SKYBOX_H
 
+#include <Utils/NonCopyable.h>
 #include <Types/Texture.h>
 #include <vector>
 #include <array>
@@ -17,15 +18,32 @@ namespace Framework::Graphics {
 }
 
 namespace Framework::Graphics::Types {
-    class Skybox {
+    class Skybox : Helper::NonCopyable {
     private:
         Skybox();
-        ~Skybox();
-    private:
+        ~Skybox() override = default;
+
+    public:
+        static Skybox* Load(const std::string& name);
+
+    public:
+        SR_NODISCARD std::string GetName() const { return m_name; }
+
+        /// WARNING: Call only from render!
+        bool FreeVideoMemory();
+
+        bool SetRender(Render* render);
+        void DrawOpenGL();
+        void DrawVulkan();
+
+        bool AwaitFreeVideoMemory();
+        bool Free();
         bool Calculate();
+
     private:
         Environment*            m_env            = nullptr;
         Render*                 m_render         = nullptr;
+        Shader*                 m_shader         = nullptr;
 
         int32_t                 m_VAO            = -1;
         int32_t                 m_VBO            = -1;
@@ -38,25 +56,12 @@ namespace Framework::Graphics::Types {
 
         std::array<uint8_t*, 6> m_data           = std::array<uint8_t*, 6>();
 
-        bool                    m_isCalculated   = false;
-        bool                    m_hasErrors      = false;
-        volatile bool           m_isVideoMemFree = false;
+        std::atomic<bool>       m_hasErrors      = false;
+        std::atomic<bool>       m_isCalculated   = false;
+        std::atomic<bool>       m_isVideoMemFree = false;
 
         std::string             m_name           = "Unnamed";
-    public:
-        [[nodiscard]] std::string GetName() const { return m_name; }
-    public:
-        /// WARNING: Call only from render!
-        bool FreeVideoMemory();
 
-        bool SetRender(Render* render);
-        void DrawOpenGL();
-        void DrawVulkan();
-
-        bool AwaitFreeVideoMemory();
-        bool Free();
-    public:
-        static Skybox* Load(const std::string& name);
     };
 }
 

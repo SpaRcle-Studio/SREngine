@@ -51,6 +51,35 @@ bool Xml::Attribute::ToBool(bool def) const {
     return m_valid ? m_attribute.as_bool() : def;
 }
 
+int64_t Xml::Attribute::ToInt64(int64_t def) const {
+    return m_valid ? m_attribute.as_llong() : def;
+}
+
+int64_t Xml::Attribute::ToInt64() const {
+    if (!CheckError("Attribute::ToInt64() : attribute isn't valid!"))
+        return 0;
+    else
+        return m_attribute.as_llong();
+}
+
+uint64_t Xml::Attribute::ToUInt64() const {
+    if (!CheckError("Attribute::ToInt64() : attribute isn't valid!"))
+        return 0;
+    else
+        return m_attribute.as_ullong();
+}
+
+uint32_t Xml::Attribute::ToUInt() const {
+    if (!CheckError("Attribute::ToUInt() : attribute isn't valid!"))
+        return 0;
+    else
+        return m_attribute.as_uint();
+}
+
+uint32_t Xml::Attribute::ToUInt(uint32_t def) const {
+    return m_valid ? m_attribute.as_uint() : def;
+}
+
 Framework::Helper::Xml::Document Framework::Helper::Xml::Document::Load(const std::string &path)  {
     auto xml = Document();
     if (pugi::xml_parse_result result = xml.m_document.load_file(path.c_str())) {

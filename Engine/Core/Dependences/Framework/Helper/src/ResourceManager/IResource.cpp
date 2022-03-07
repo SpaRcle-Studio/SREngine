@@ -7,9 +7,10 @@
 
 using namespace Framework::Helper;
 
-IResource::IResource(const char *res_name) : m_resourceName(res_name) {
-    m_lifetime = ResourceManager::ResourceLifeTime;
-}
+IResource::IResource(const char* name)
+    : m_resourceName(name)
+    , m_lifetime(ResourceManager::ResourceLifeTime)
+{ }
 
 bool IResource::ForceDestroy() {
     if (m_force || m_isDestroy) {
@@ -26,7 +27,8 @@ void IResource::SetId(const std::string &id) {
     if (m_resourceId == "NoID") {
         m_resourceId = id;
         ResourceManager::Instance().RegisterResource(this);
-    } else {
+    }
+    else {
         SRAssert2(false, "Double set resource id!");
     }
 }
@@ -40,6 +42,8 @@ IResource *IResource::Copy(IResource* destination) const {
 }
 
 bool IResource::Destroy() {
+    Helper::ResourceManager::Instance().Destroy(this);
+
     SRAssert(!m_isDestroy);
     m_isDestroy = true;
     return true;

@@ -40,48 +40,40 @@ namespace Framework::Graphics {
         ~Camera() override = default;
 
     public:
-        void UpdateProjection(uint32_t w, uint32_t h);
-        void UpdateProjection();
-
-        SR_FORCE_INLINE void SetDirectOutput(bool value) {
-            this->m_isEnableDirectOut.second = value;
-        }
-    public:
         static Camera* Allocate(uint32_t width = 0, uint32_t height = 0);
+        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage);
+
     public:
         bool Create(Window* window);
 
         /// \warning Call only from window class!
         bool Free();
-    public:
-        bool DrawOnInspector() override;
 
         void OnRotate(const Math::FVector3& newValue) override;
         void OnMove(const Math::FVector3& newValue) override;
         void OnReady(bool ready) override;
-    public:
-        [[nodiscard]] SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;       }
-        [[nodiscard]] SR_FORCE_INLINE bool IsDirectOutput()     const { return m_isEnableDirectOut.first;   }
-        [[nodiscard]] SR_FORCE_INLINE bool IsNeedUpdate()       const { return m_needUpdate;                }
-        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetRotation()   const { return { m_pitch, m_yaw, m_roll };  }
-        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetView()       const { return this->m_viewMat;             }
-        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return this->m_viewTranslateMat; }
-        [[nodiscard]] SR_FORCE_INLINE glm::mat4 GetProjection() const { return this->m_projection;          }
-        [[nodiscard]] SR_FORCE_INLINE Math::IVector2 GetSize()   const { return m_cameraSize;                }
-        [[nodiscard]] SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;            }
-        [[nodiscard]] SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return this->m_pos.ToGLM();         }
 
-        [[nodiscard]] glm::mat4 GetImGuizmoView() const noexcept;
-        [[nodiscard]] glm::mat4 GetTranslationMatrix() const noexcept;
+    public:
+        SR_NODISCARD SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;      }
+        SR_NODISCARD SR_FORCE_INLINE bool IsDirectOutput()     const { return m_isEnableDirectOut.first;   }
+        SR_NODISCARD SR_FORCE_INLINE bool IsNeedUpdate()       const { return m_needUpdate;                }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation()   const { return { m_pitch, m_yaw, m_roll };  }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView()       const { return m_viewMat;                   }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;       }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                }
+        SR_NODISCARD SR_FORCE_INLINE Math::IVector2 GetSize()   const { return m_cameraSize;               }
+        SR_NODISCARD SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;  }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();          }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near;                              }
+        SR_NODISCARD SR_FORCE_INLINE Window* GetWindow() const { return m_window;                          }
+
+        SR_NODISCARD glm::mat4 GetImGuizmoView() const noexcept;
 
         void WaitCalculate() const;
         void WaitBuffersCalculate() const;
         bool CompleteResize();
         void PoolEvents();
-
-        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) {
-            return nullptr;
-        }
 
         /**
          \brief Update shader parameters: proj-mat and view-mat.
@@ -121,7 +113,16 @@ namespace Framework::Graphics {
                 }
             }
         }
+
         void UpdateShaderProjView(Shader* shader) noexcept;
+
+        void UpdateProjection(uint32_t w, uint32_t h);
+        void UpdateProjection();
+
+        void SetDirectOutput(bool value);
+        void SetFar(float_t value);
+        void SetNear(float_t value);
+
     private:
         void UpdateView() noexcept;
         bool Calculate() noexcept;
@@ -133,12 +134,14 @@ namespace Framework::Graphics {
         std::atomic<bool>     m_isCalculate       = false;
         std::atomic<bool>     m_isBuffCalculate   = false;
         std::atomic<bool>     m_needUpdate        = false;
+        std::atomic<bool>     m_allowUpdateProj   = true;
 
         volatile float_t      m_yaw               = 0;
         volatile float_t      m_pitch             = 0;
         volatile float_t      m_roll              = 0;
-        volatile float_t      m_far               = 8000.f;
-        volatile float_t      m_near              = 0.01f;
+
+        std::atomic<float_t>  m_far               = 200.f;
+        std::atomic<float_t>  m_near              = 0.01f;
 
         const PipeLine        m_pipeline          = PipeLine::Unknown;
 
@@ -152,9 +155,8 @@ namespace Framework::Graphics {
 
         // 1 - current, 2 - new
         std::pair<bool, bool> m_isEnableDirectOut = { false, false };
-        std::atomic<bool>     m_allowUpdateProj   = true;
 
-        Math::FVector3	      m_pos               = { 0, 0, 0 };
+        Math::FVector3	      m_position          = { 0, 0, 0 };
         Math::IVector2        m_cameraSize        = { 0, 0 };
     };
 }

@@ -45,15 +45,14 @@ public:
     [[nodiscard]] bool IsLocked() const { return Valid() && m_data->m_lock; }
     bool Free(const std::function<void(T *ptr)> &freeFun);
 private:
-    T*                               m_ptr;
-
     struct dynamic_data {
-        std::atomic<bool>            m_lock;
-        std::atomic<uint32_t>        m_lockCount;
-        std::atomic<uint32_t>        m_useCount;
-        bool                         m_valid{};
-        std::atomic<std::thread::id> m_owner;
+        mutable std::atomic<bool>            m_lock;
+        mutable std::atomic<uint32_t>        m_lockCount;
+        mutable std::atomic<uint32_t>        m_useCount;
+        bool                                 m_valid{};
+        mutable std::atomic<std::thread::id> m_owner;
     }* m_data;
+    T* m_ptr;
 };
 
 template<typename T>SafePtr<T>::SafePtr(T *ptr) {

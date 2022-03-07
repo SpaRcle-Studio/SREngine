@@ -23,6 +23,7 @@ namespace Framework::Helper {
     private:
         virtual bool Redo() = 0;
         virtual bool Undo() = 0;
+        virtual std::string GetName() = 0;
 
     public:
         virtual bool Load(const Xml::Node& node) { return false; }

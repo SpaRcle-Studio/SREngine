@@ -11,6 +11,7 @@
     <uniforms>
         <uniform binding="0" type="MeshUBO" name="meshUBO">
             <type name="mat4" var="model"/>
+            <type name="vec4" var="color"/>
         </uniform>
         <uniform binding="1" type="SharedUBO" name="sharedUBO">
             <type name="mat4" var="proj"/>

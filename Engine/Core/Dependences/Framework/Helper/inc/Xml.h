@@ -11,6 +11,8 @@
 #include <cmath>
 #include <FileSystem/Path.h>
 #include <Math/Vector4.h>
+#include <Math/Vector3.h>
+#include <Math/Vector2.h>
 
 namespace Framework::Helper::Xml {
     class Node;
@@ -53,19 +55,18 @@ namespace Framework::Helper::Xml {
         }
 
         [[nodiscard]] std::string ToString() const;
-
         [[nodiscard]] int32_t ToInt() const;
-
+        [[nodiscard]] uint32_t ToUInt() const;
+        [[nodiscard]] int64_t ToInt64() const;
+        [[nodiscard]] uint64_t ToUInt64() const;
         [[nodiscard]] float_t ToFloat() const;
-
         [[nodiscard]] bool ToBool() const;
 
         [[nodiscard]] std::string ToString(const std::string &def) const;
-
         [[nodiscard]] int32_t ToInt(int32_t def) const;
-
+        [[nodiscard]] uint32_t ToUInt(uint32_t def) const;
+        [[nodiscard]] int64_t ToInt64(int64_t def) const;
         [[nodiscard]] float_t ToFloat(float_t def) const;
-
         [[nodiscard]] bool ToBool(bool def) const;
     };
 
@@ -149,7 +150,7 @@ namespace Framework::Helper::Xml {
             return *this;
         }
 
-        template<typename T> Xml::Node NAppendAttributeDef(const std::string &name, const T &value, const T& def) {
+        template<typename T, typename U> Xml::Node NAppendAttributeDef(const std::string &name, const T &value, const U& def) {
             if (!m_valid) {
                 SRAssert2(false, "Node::NAppendAttributeDef() : node is not valid!");
                 g_xml_last_error = -2;
@@ -171,26 +172,106 @@ namespace Framework::Helper::Xml {
             return *this;
         }
 
-        template<typename T>
-        bool AppendAttribute(const std::string &name, const T &value) {
+        template<typename T> T GetAttribute() const {
+            if constexpr (std::is_same<T, Helper::Math::FColor>()) {
+                Helper::Math::FColor color;
+
+                color.r = GetAttribute("r").ToFloat();
+                color.g = GetAttribute("g").ToFloat();
+                color.b = GetAttribute("b").ToFloat();
+                color.a = GetAttribute("a").ToFloat();
+
+                return color;
+            }
+            else if constexpr (std::is_same<T, Helper::Math::FVector2>()) {
+                Helper::Math::FVector2 vector2;
+
+                vector2.x = GetAttribute("x").ToFloat();
+                vector2.y = GetAttribute("y").ToFloat();
+
+                return vector2;
+            }
+            else
+                static_assert("Unknown type!");
+        }
+
+        template<typename T> bool AppendAttribute(const T &value) {
             if (!m_valid) {
                 SRAssert2(false, "Node::AddAttribute() : node is not valid!");
                 g_xml_last_error = -2;
                 return false;
             }
 
-            if (auto attrib = m_node.append_attribute(name.c_str()); !attrib.empty()) {
-                attrib.set_value(value);
-                return true;
-            }
+            bool hasErrors = false;
 
-            return false;
+            if constexpr (std::is_same<T, Helper::Math::FColor>()) {
+                hasErrors |= AppendAttribute("r", value.r);
+                hasErrors |= AppendAttribute("g", value.g);
+                hasErrors |= AppendAttribute("b", value.b);
+                hasErrors |= AppendAttribute("a", value.a);
+            }
+            else if constexpr (std::is_same<T, Helper::Math::FVector2>()) {
+                hasErrors |= AppendAttribute("x", value.x);
+                hasErrors |= AppendAttribute("y", value.y);
+            }
+            else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
+                hasErrors |= AppendAttribute("x", value.x);
+                hasErrors |= AppendAttribute("y", value.y);
+                hasErrors |= AppendAttribute("z", value.z);
+            }
+            else
+                static_assert("Unknown type!");
+
+            return !hasErrors;
         }
 
+        template<typename T> bool AppendAttribute(const std::string &name, const T &value) {
+            if (!m_valid) {
+                SRAssert2(false, "Node::AddAttribute() : node is not valid!");
+                g_xml_last_error = -2;
+                return false;
+            }
+
+            auto attrib = m_node.append_attribute(name.c_str());
+            if (attrib.empty())
+                return false;
+
+            if constexpr (std::is_same<T, std::string>()) {
+                attrib.set_value(value.c_str());
+            }
+            else {
+                attrib.set_value(value);
+            }
+
+            return true;
+        }
+
+        template<typename T, typename U> bool AppendAttributeDef(const std::string &name, const T &value, const U& def) {
+            if (!m_valid) {
+                SRAssert2(false, "Node::AddAttribute() : node is not valid!");
+                g_xml_last_error = -2;
+                return false;
+            }
+
+            if (value != def) {
+                auto attrib = m_node.append_attribute(name.c_str());
+                if (attrib.empty())
+                    return false;
+
+                if constexpr (std::is_same<T, std::string>()) {
+                    attrib.set_value(value.c_str());
+                } else {
+                    attrib.set_value(value);
+                }
+            }
+
+            return true;
+        }
 
         Node AppendChild(const std::string &name);
 
         Node AppendChild(const Node &node);
+
 
         [[nodiscard]] Node TryGetNode(const std::string &name) const {
             return m_valid ? Node(m_node.child(name.c_str())) : Node();
@@ -246,8 +327,11 @@ namespace Framework::Helper::Xml {
         }
 
     public:
-        bool Save(const std::string &path) const {
-            return m_document.save_file(path.c_str());
+        bool Save(const Helper::Path& path) const {
+            if (!path.Exists()) {
+                path.Make();
+            }
+            return m_document.save_file(path.CStr());
         }
 
         [[nodiscard]] std::string Dump() const;
@@ -263,13 +347,23 @@ namespace Framework::Helper::Xml {
         [[nodiscard]] bool Valid() const { return m_valid; }
     };
 
-    static Helper::Math::FColor NodeToColor(const Xml::Node& node) {
-        return Math::FColor(
-                node.TryGetAttribute("r").ToFloat(0.f) / 255.f,
-                node.TryGetAttribute("g").ToFloat(0.f) / 255.f,
-                node.TryGetAttribute("b").ToFloat(0.f) / 255.f,
-                node.TryGetAttribute("a").ToFloat(0.f) / 255.f
-        );
+    template<bool NeedConvert> static Helper::Math::FColor NodeToColor(const Xml::Node& node) {
+        if constexpr(NeedConvert) {
+            return Math::FColor(
+                    node.TryGetAttribute("r").ToFloat(0.f) / 255.f,
+                    node.TryGetAttribute("g").ToFloat(0.f) / 255.f,
+                    node.TryGetAttribute("b").ToFloat(0.f) / 255.f,
+                    node.TryGetAttribute("a").ToFloat(0.f) / 255.f
+            );
+        }
+        else {
+            return Math::FColor(
+                    node.TryGetAttribute("r").ToFloat(0.f),
+                    node.TryGetAttribute("g").ToFloat(0.f),
+                    node.TryGetAttribute("b").ToFloat(0.f),
+                    node.TryGetAttribute("a").ToFloat(0.f)
+            );
+        }
     }
 
     static void AppendColorNode(Xml::Node& node, const Math::FColor& color) {

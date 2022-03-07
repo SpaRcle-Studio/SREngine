@@ -63,14 +63,9 @@ bool Framework::Helper::World::Scene::Destroy() {
     }
 
     for (auto gameObject : GetRootGameObjects()) {
-        gameObject.Lock();
-
-        gameObject.Free([](GameObject* gm) {
-            gm->Destroy(GameObject::DestroyBy::Scene);
-            gm->Free();
+        gameObject.AutoFree([](GameObject* gm) {
+            gm->Destroy(GameObject::DestroyBy_Scene);
         });
-
-        gameObject.Unlock();
     }
 
     if (!m_gameObjects.empty()) {

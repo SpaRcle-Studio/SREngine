@@ -124,6 +124,7 @@ namespace Framework::Graphics {
         virtual bool StopGUI() { return false; }
         virtual void NextFrameGUI() {  }
         virtual bool IsFullScreen() { return false; }
+        virtual void* GetHandle() const = 0;
     };
 }
 

@@ -36,9 +36,7 @@ namespace Framework::Graphics::Types {
         IResource* Copy(IResource* destination) const override;
         void SetVertexArray(const std::any& vertices) override;
 
-        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) {
-            return nullptr;
-        }
+        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage);
 
     private:
         void UpdateUBO() override;

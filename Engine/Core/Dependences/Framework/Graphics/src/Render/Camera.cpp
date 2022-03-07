@@ -22,8 +22,8 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
         }
     }
 
-    shader->SetMat4("viewMat", this->m_viewTranslateMat);
-    shader->SetMat4("projMat", this->m_projection);
+    shader->SetMat4("viewMat", m_viewTranslateMat);
+    shader->SetMat4("projMat", m_projection);
 }
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
@@ -56,9 +56,9 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
         m_viewMat = matrix;
 
         m_viewTranslateMat = glm::translate(matrix, {
-                m_pos.x,
-                -m_pos.y,
-                -m_pos.z//-m_pos.z
+                m_position.x,
+                -m_position.y,
+                -m_position.z//-m_pos.z
         });
     }
     else {
@@ -68,33 +68,30 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
 
         m_viewMat = matrix;
 
-        m_viewTranslateMat = glm::translate(matrix, {
-                -m_pos.x,
-                -m_pos.y,
-                -m_pos.z//-m_pos.z
-        });
+        m_viewTranslateMat = glm::translate(matrix, -m_position.ToGLM());
     }
 }
 
 void Framework::Graphics::Camera::OnRotate(const Math::FVector3& newValue) {
-    this->m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
-    this->m_pitch = float(newValue.x * 3.14 / 45.f / 4.f);
-    this->m_roll  = float(newValue.z * 3.14 / 45.f / 4.f);
+    m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
+    m_pitch = float(newValue.x * 3.14 / 45.f / 4.f);
+    m_roll  = float(newValue.z * 3.14 / 45.f / 4.f);
 
-    this->UpdateView();
+    UpdateView();
 }
 
 void Framework::Graphics::Camera::OnMove(const Math::FVector3& newValue) {
-    this->m_pos = newValue;
-    this->UpdateView();
+    m_position = newValue;
+    UpdateView();
 }
 
 void Framework::Graphics::Camera::UpdateProjection() {
-    m_projection = glm::perspective(glm::radians(65.f), (float)m_cameraSize.x / (float)m_cameraSize.y, m_near, m_far);
+    m_projection = glm::perspective(glm::radians(65.f), (float)m_cameraSize.x / (float)m_cameraSize.y, m_near.load(), m_far.load());
 }
+
 void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
-    this->m_cameraSize = { (int32_t)w, (int32_t)h };
-    m_projection = glm::perspective(glm::radians(65.f), (float)w / (float)h, m_near, m_far);
+    m_cameraSize = { (int32_t)w, (int32_t)h };
+    m_projection = glm::perspective(glm::radians(65.f), (float)w / (float)h, m_near.load(), m_far.load());
     m_needUpdate = true;
 }
 
@@ -104,7 +101,8 @@ bool Framework::Graphics::Camera::Calculate() noexcept {
 
     Debug::Graph("Camera::Calculate() : calculating camera...");
 
-    this->m_postProcessing->Init(m_window->GetRender());
+    m_postProcessing->Init(m_window->GetRender());
+
     m_needUpdate = true;
     m_isCalculate = true;
 
@@ -120,71 +118,11 @@ void Framework::Graphics::Camera::OnDestroyGameObject() {
 
 bool Framework::Graphics::Camera::Free() {
     Debug::Graph("Camera::Free() : free camera pointer...");
-    this->m_postProcessing->Destroy();
-    this->m_postProcessing->Free();
+
+    m_postProcessing->Destroy();
+    m_postProcessing->Free();
+
     delete this;
-    return true;
-}
-
-bool Framework::Graphics::Camera::DrawOnInspector() {
-    float_t cameraFar  = m_far;
-    float_t cameraNear = m_near;
-
-    if (ImGui::InputFloat("Far", &cameraFar, 50) || ImGui::InputFloat("Near", &cameraNear, 0.1)) {
-        m_far  = cameraFar;
-        m_near = cameraNear;
-        this->UpdateProjection();
-    }
-
-    if (!m_window)
-        ImGui::TextColored({1,0,0,1}, "Window is missing!");
-
-    ImGui::Separator();
-
-    Helper::GUI::DrawTextOnCenter("PostProcessing");
-
-    PostProcessing* post = m_postProcessing;
-
-
-    float gamma = post->GetGamma();
-    if (ImGui::InputFloat("Gamma", &gamma, 0.05))
-        post->SetGamma(gamma);
-
-    float exposure = post->GetExposure();
-    if (ImGui::InputFloat("Exposure", &exposure, 0.05))
-        post->SetExposure(exposure);
-
-    float saturation = post->GetSaturation();
-    if (ImGui::InputFloat("Saturation", &saturation, 0.05))
-        post->SetSaturation(saturation);
-
-    auto color = post->GetColorCorrection();
-    if (ImGui::InputFloat3("Color correction", reinterpret_cast<float*>(&color[0]))) // TODO: maybe unsafe
-        post->SetColorCorrection(color);
-
-    ImGui::NewLine();
-
-    bool enabled = post->GetBloomEnabled();
-    if (ImGui::Checkbox("Bloom", &enabled))
-        post->SetBloom(enabled);
-
-    ImGui::NewLine();
-
-    float bloom_intensity = post->GetBloomIntensity();
-    if (ImGui::InputFloat("Bloom intensity", &bloom_intensity, 0.1))
-        post->SetBloomIntensity(bloom_intensity);
-
-    color = post->GetBloomColor();
-    if (ImGui::InputFloat3("Bloom color", reinterpret_cast<float*>(&color[0]))) // TODO: maybe unsafe
-        post->SetBloomColor(color);
-
-    int bloom_amount = post->GetBloomAmount();
-    if (ImGui::InputInt("Bloom amount", &bloom_amount)) {
-        if (bloom_amount == 0)
-            bloom_amount = 1;
-        post->SetBloomAmount(bloom_amount);
-    }
-
     return true;
 }
 
@@ -205,15 +143,15 @@ bool Framework::Graphics::Camera::CompleteResize() {
         return false;
     }
 
-    this->UpdateProjection();
+    UpdateProjection();
 
-    if (!this->m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)) {
+    if (!m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)) {
         Debug::Error("Camera::CompleteResize() : failed recalculated frame buffers!");
         return false;
     }
 
     m_needUpdate = false;
-    this->m_isBuffCalculate = true;
+    m_isBuffCalculate = true;
 
     return true;
 }
@@ -223,7 +161,7 @@ void Framework::Graphics::Camera::PoolEvents()  {
 }
 
 void Framework::Graphics::Camera::OnReady(bool ready) {
-    this->m_env->SetBuildState(false);
+    m_env->SetBuildState(false);
 }
 
 glm::mat4 Framework::Graphics::Camera::GetImGuizmoView() const noexcept {
@@ -232,34 +170,44 @@ glm::mat4 Framework::Graphics::Camera::GetImGuizmoView() const noexcept {
     matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
 
     return glm::translate(matrix, {
-            m_pos.x,
-            -m_pos.y,
-            -m_pos.z
-    });
-}
-
-glm::mat4 Framework::Graphics::Camera::GetTranslationMatrix() const noexcept {
-    return glm::translate(glm::mat4(1), {
-            m_pos.x,
-            -m_pos.y,
-            -m_pos.z
+            m_position.x,
+            -m_position.y,
+            -m_position.z
     });
 }
 
 void Framework::Graphics::Camera::WaitBuffersCalculate() const {
-    ret:
+ret:
     if (!m_isBuffCalculate)
         goto ret;
 }
 
 void Framework::Graphics::Camera::WaitCalculate() const  {
-    ret:
+ret:
     if (!m_isCalculate)
         goto ret;
 }
 
 void Framework::Graphics::Camera::OnRemoveComponent() {
     OnDestroyGameObject();
+}
+
+void Framework::Graphics::Camera::SetDirectOutput(bool value) {
+    m_isEnableDirectOut.second = value;
+}
+
+void Framework::Graphics::Camera::SetFar(float_t value) {
+    m_far = value;
+    UpdateProjection();
+}
+
+void Framework::Graphics::Camera::SetNear(float_t value) {
+    m_near = value;
+    UpdateProjection();
+}
+
+Component *Framework::Graphics::Camera::LoadComponent(const Xml::Node &xml, const Helper::Types::DataStorage *dataStorage) {
+    return nullptr;
 }
 
 

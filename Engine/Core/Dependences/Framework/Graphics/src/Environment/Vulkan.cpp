@@ -157,7 +157,7 @@ namespace Framework::Graphics{
 #endif
         };
 
-        if (!m_kernel->Init(createSurf, m_deviceExtensions, true, swapInterval > 0)) {
+        if (!m_kernel->Init(createSurf, window->GetHandle(), m_deviceExtensions, true, swapInterval > 0)) {
             Helper::Debug::Error("Vulkan::Init() : failed to initialize Evo Vulkan kernel!");
             return false;
         }
@@ -256,11 +256,11 @@ namespace Framework::Graphics{
 
             if (fragmentPath.Exists())
                 modules.emplace_back(SourceShader(shaderName + ".frag", fragmentPath, ShaderType::Fragment));
-        }
 
-        if (modules.empty()) {
-            SRAssert2(false, "No shader modules were found!");
-            return false;
+            if (modules.empty()) {
+                SRAssert2(false, "No shader modules were found!");
+                return false;
+            }
         }
 
         bool errors = false;
@@ -532,6 +532,15 @@ namespace Framework::Graphics{
 
     void Vulkan::EndDrawGUI() {
         ImGui::Render();
+
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+        // Update and Render additional Platform Windows
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+        }
     }
 
     InternalTexture Vulkan::GetTexture(uint32_t id) const {

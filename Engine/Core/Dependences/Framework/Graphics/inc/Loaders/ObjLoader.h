@@ -35,6 +35,7 @@ namespace Framework::Graphics {
         };
 
         std::vector<Types::Mesh*> Load(const std::string& path, bool withIndices, Framework::Graphics::Types::MeshType type);
+        Types::Mesh* Load(const std::string& path, bool withIndices, Framework::Graphics::Types::MeshType type, uint32_t id);
 
         template<typename T> std::vector<Shape<T>> LoadSourceWithIndices(const std::string& path) {
             std::vector<Shape<T>> source = { };
@@ -117,6 +118,36 @@ namespace Framework::Graphics {
             }
 
             return nonIndexedShapes;
+        }
+
+        template<typename T> Types::Mesh* Load(const std::string& path, bool withIndices, uint32_t id) {
+            auto shapes = LoadSourceWithIndices<typename T::VertexType>(path);
+
+            if (shapes.size() <= id) {
+                SR_WARN("ObjLoader::Load() : incorrect id! \n\tPath: " + path + "\n\tId: " + std::to_string(id));
+                return nullptr;
+            }
+
+            const auto& [name, indices, vertices] = shapes[id];
+
+            auto *mesh = Memory::MeshAllocator::Allocate<T>();
+            mesh->SetGeometryName(name);
+            mesh->SetMaterial(Material::GetDefault());
+
+            if (withIndices) {
+                mesh->SetVertexArray(vertices);
+                mesh->SetIndexArray(indices);
+            }
+            else {
+                auto rawVertices = std::vector<typename T::VertexType>();
+
+                for (const auto& index : indices)
+                    rawVertices.emplace_back(vertices[index]);
+
+                mesh->SetVertexArray(rawVertices);
+            }
+
+            return mesh;
         }
 
         template<typename T> std::vector<Types::Mesh*> Load(const std::string& path, bool withIndices) {

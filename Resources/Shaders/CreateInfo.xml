@@ -6,7 +6,7 @@
     <Shader path="engine/geometry" name="geometry">
         <Vertex value="Mesh3DVertex"/>
         <Uniforms>
-            <!-- binding 0 - mesh   (model mat) -->
+            <!-- binding 0 - mesh   (model mat, color) -->
             <Uniform binding="0" type="Common" UBO="Mesh3dUBO" />
             <!-- binding 5 - shader (view & proj mat) -->
             <Uniform binding="5" type="Shared" UBO="ProjViewUBO" />
@@ -16,7 +16,7 @@
             <CullMode value="Back"/>
             <DepthCompare value="LessOrEqual"/>
             <PrimitiveTopology value="TriangleList"/>
-            <BlendEnabled value="true"/>
+            <BlendEnabled value="false"/>
             <DepthWrite value="true"/>
             <DepthTest value="true"/>
         </Info>

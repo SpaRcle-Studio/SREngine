@@ -112,8 +112,12 @@ namespace Framework::Helper {
     };
 }
 
+#define SR_LOG(msg) Framework::Helper::Debug::Log(msg);
+#define SR_INFO(msg) Framework::Helper::Debug::Info(msg);
 #define SR_WARN(msg) Framework::Helper::Debug::Warn(msg);
 #define SR_ERROR(msg) Framework::Helper::Debug::Error(msg);
+#define SR_GRAPH(msg) Framework::Helper::Debug::Graph(msg);
+#define SR_SHADER(msg) Framework::Helper::Debug::Shader(msg);
 
 #ifdef SR_RELEASE
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun

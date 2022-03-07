@@ -190,8 +190,13 @@ void Framework::Engine::Await() {
                     Helper::Input::Check();
                     m_input->Check();
 
-                    if (Input::GetKey(KeyCode::Ctrl) && Input::GetKeyDown(KeyCode::Z)) {
-                        m_cmdManager->Cancel();
+                    if (Input::GetKey(KeyCode::Ctrl)) {
+                        if (Input::GetKeyDown(KeyCode::Z))
+                            m_cmdManager->Cancel();
+
+                        if (Input::GetKeyDown(KeyCode::Y))
+                            if (!m_cmdManager->Redo())
+                                SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
                     }
 
                     if (Input::GetKeyDown(KeyCode::F2)) {
@@ -329,10 +334,10 @@ bool Framework::Engine::SetScene(const Helper::Types::SafePtr<World::Scene> &sce
         m_scene = scene;
 
         if (m_editor) {
-            m_editor->GetHierarchy()->SetScene(m_scene);
-            m_editor->GetSceneViewer()->SetScene(m_scene);
-            m_editor->GetInspector()->SetScene(m_scene);
-            m_editor->GetWorldEdit()->SetScene(m_scene);
+            m_editor->GetWindow<Hierarchy>()->SetScene(m_scene);
+            m_editor->GetWindow<SceneViewer>()->SetScene(m_scene);
+            m_editor->GetWindow<Inspector>()->SetScene(m_scene);
+            m_editor->GetWindow<WorldEdit>()->SetScene(m_scene);
         }
 
         return true;

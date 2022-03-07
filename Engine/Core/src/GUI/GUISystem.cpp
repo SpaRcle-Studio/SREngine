@@ -387,8 +387,8 @@ void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObj
             ImGui::EndPopup();
         }
 
-        if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
-            component->DrawOnInspector();
+        ///if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
+        ///    component->DrawOnInspector();
 
         return true;
 
@@ -519,7 +519,7 @@ void GUISystem::DrawGuizmoTools() {
     }
 }
 
-void GUISystem::DrawWorldEdit(Types::SafePtr<Helper::World::Scene> scene) {
+void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene) {
     if (scene.LockIfValid()) {
         const auto&& observer = scene->GetObserver();
         const auto offset = observer->m_offset;
@@ -779,27 +779,31 @@ bool GUISystem::BeginMenuBar() {
 
     if (ImGui::BeginMenu("Window")) {
         if (ImGui::MenuItem("Assets")) {
-            Engine::Instance().GetEditor()->GetFileBrowser()->Open();
+            Engine::Instance().GetEditor()->GetWindow<FileBrowser>()->Open();
         }
 
         if (ImGui::MenuItem("Hierarchy")) {
-            Engine::Instance().GetEditor()->GetHierarchy()->Open();
+            Engine::Instance().GetEditor()->GetWindow<Hierarchy>()->Open();
         }
 
         if (ImGui::MenuItem("Inspector")) {
-            Engine::Instance().GetEditor()->GetInspector()->Open();
+            Engine::Instance().GetEditor()->GetWindow<Inspector>()->Open();
         }
 
         if (ImGui::MenuItem("Scene")) {
-            Engine::Instance().GetEditor()->GetSceneViewer()->Open();
+            Engine::Instance().GetEditor()->GetWindow<SceneViewer>()->Open();
         }
 
         if (ImGui::MenuItem("Visual Script")) {
-            Engine::Instance().GetEditor()->GetVisualScriptEditor()->Open();
+            Engine::Instance().GetEditor()->GetWindow<VisualScriptEditor>()->Open();
         }
 
         if (ImGui::MenuItem("World edit")) {
-            Engine::Instance().GetEditor()->GetWorldEdit()->Open();
+            Engine::Instance().GetEditor()->GetWindow<WorldEdit>()->Open();
+        }
+
+        if (ImGui::MenuItem("Settings")) {
+            Engine::Instance().GetEditor()->GetWindow<EngineSettings>()->Open();
         }
 
         ImGui::EndMenu();

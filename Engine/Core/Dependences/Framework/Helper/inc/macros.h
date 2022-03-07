@@ -47,10 +47,15 @@
         ptr = nullptr;          \
     }                           \
 
+#define SR_FASTCALL_ATTRIBUTE __attribute__((fastcall))
+#define SR_FASTCALL __fastcall
+#define SR_CONSTEXPR constexpr
 #define SR_FORCE_INLINE __forceinline
 #define SR_NODISCARD [[nodiscard]]
 #define SR_INLINE inline
 #define SR_NULL 0
+
+#define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 
 #ifndef SR_USE_GLFW3
     #define SR_USE_GLFW3

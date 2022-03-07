@@ -10,47 +10,56 @@
 
 using namespace Framework::Helper;
 
-Framework::Graphics::Shader::Shader(Framework::Graphics::Render *render, const std::string& name) : m_env(Environment::Get()) {
-    this->m_render  = render;
-    this->m_name    = name;
+Framework::Graphics::Shader::Shader(Framework::Graphics::Render *render, std::string path, std::string name)
+    : IResource(typeid(Shader).name())
+    , m_env(Environment::Get())
+    , m_render(render)
+    , m_path(std::move(path))
+    , m_name(std::move(name))
+{
+    SetId(m_name);
 }
+
+Framework::Graphics::Shader::Shader(Framework::Graphics::Render *render, std::string path)
+    : Shader(render, std::move(path), "Unnamed")
+{ }
 
 bool Framework::Graphics::Shader::Init() {
     if (m_isInit)
         return true;
 
     if (!Compile()) {
-        Debug::Error("Shader::Init() : failed compiling shader!");
+        SR_ERROR("Shader::Init() : failed compiling shader!");
         return false;
     }
 
     if (!Link()) {
-        Debug::Error("Shader::Init() : failed linking shader!");
+        SR_ERROR("Shader::Init() : failed linking shader!");
         return false;
     }
 
     if (m_env->GetPipeLine() == PipeLine::Vulkan)
     {
         std::vector<uint64_t> sizes = {};
-        for (auto uniform : m_uniformsInfo)
+        for (const auto& uniform : m_uniformsInfo)
             if (uniform.first.second == UBOType::Shared)
                 sizes.push_back(uniform.second);
 
-        this->m_countSharedUniforms = sizes.size();
+        m_countSharedUniforms = sizes.size();
 
         if (!sizes.empty()) {
-            this->m_sharedUniforms = (int32_t *) malloc(sizeof(int32_t) * sizes.size());
-            for (uint32_t i = 0; i < sizes.size(); i++) {
-                 this->m_sharedUniforms[i] = this->m_env->AllocateUBO(sizes[i]);
-                 if (this->m_sharedUniforms[i] < 0) {
-                     Helper::Debug::Error("Shader::Init() : failed to allocate uniform buffer object!");
+            m_sharedUniforms = (int32_t *) malloc(sizeof(int32_t) * sizes.size());
+            for (uint32_t i = 0; i < sizes.size(); ++i) {
+                 m_sharedUniforms[i] = m_env->AllocateUBO(sizes[i]);
+                 if (m_sharedUniforms[i] < 0) {
+                     SR_ERROR("Shader::Init() : failed to allocate uniform buffer object!");
                      return false;
                  }
             }
         }
     }
 
-    this->m_isInit = true;
+    m_isInit = true;
 
     return true;
 }
@@ -60,22 +69,23 @@ bool Framework::Graphics::Shader::Compile() {
         Debug::Error("Shader::Compile() : shader already compile!");
         return false;
     }
-    Debug::Shader("Shader::Compile() : compiling \""+m_name+"\" shader...");
+    Debug::Shader("Shader::Compile() : compiling \"" + m_path + "\" shader...");
 
     m_fbo = m_env->GetCurrentFBO();
 
-    if (this->m_env->GetPipeLine() == PipeLine::OpenGL) {
-        if (!m_env->CompileShader(m_name, m_fbo, &m_shaderTempData)) {
-            Debug::Error("Shader::Compile() : failed to compile opengl \"" + m_name + "\" shader!");
+    if (m_env->GetPipeLine() == PipeLine::OpenGL) {
+        if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData)) {
+            Debug::Error("Shader::Compile() : failed to compile opengl \"" + m_path + "\" shader!");
             return false;
         }
-    } else {
+    }
+    else {
         auto sizes = std::vector<uint64_t>();
         for (auto info : m_uniformsInfo)
             sizes.push_back(info.second);
 
-        if (!m_env->CompileShader(m_name, m_fbo, &m_shaderTempData, sizes)) {
-            Debug::Error("Shader::Compile() : failed to compile \"" + m_name + "\" shader!");
+        if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData, sizes)) {
+            Debug::Error("Shader::Compile() : failed to compile \"" + m_path + "\" shader!");
             return false;
         }
     }
@@ -87,24 +97,19 @@ bool Framework::Graphics::Shader::Compile() {
 
 bool Framework::Graphics::Shader::Link() {
     if (m_isLink) {
-        Debug::Error("Shader::Link() : shader already linking!");
+        SR_ERROR("Shader::Link() : shader already linking!");
         return false;
     }
 
     if (!m_isCompile){
-        Debug::Error("Shader::Link() : shader is not compile!");
+        SR_ERROR("Shader::Link() : shader is not compile!");
         return false;
     }
 
-    Debug::Shader("Shader::Link() : linking \""+this->m_name+"\" shader...");
+    Debug::Shader("Shader::Link() : linking \"" + m_path + "\" shader...");
 
-    if (!m_env->LinkShader(
-            &m_shaderProgram,
-            &m_shaderTempData,
-            this->m_verticesDescription,
-            this->m_verticesAttributes,
-            this->m_shaderCreateInfo)) {
-        Debug::Error("Shader::Link() : failed linking \""+m_name+"\" shader!");
+    if (!m_env->LinkShader(&m_shaderProgram, &m_shaderTempData, m_verticesDescription, m_verticesAttributes, m_shaderCreateInfo)) {
+        SR_ERROR("Shader::Link() : failed linking \"" + m_path + "\" shader!");
         return false;
     }
 
@@ -118,21 +123,22 @@ bool Framework::Graphics::Shader::Use() noexcept {
         if (m_isError)
             return false;
 
-        if (!this->Init()) {
-            Debug::Error("Shader::Use() : failed to initialize shader!");
-            this->m_isError = true;
+        if (!Init()) {
+            SR_ERROR("Shader::Use() : failed to initialize shader!");
+            m_isError = true;
             return false;
         }
-        this->m_isInit = true;
+        m_isInit = true;
     }
 
     if (m_fbo != m_env->GetCurrentFBO()) {
-        Helper::Debug::Info("Shader::Use() : re-create \"" + m_name +  "\" shader...");
+        SR_INFO("Shader::Use() : re-create \"" + m_path +  "\" shader...");
         if (!m_env->ReCreateShader(m_shaderProgram)) {
-            Debug::Error("Shader::Use() : failed to re-create shader!");
-            this->m_isError = true;
+            SR_ERROR("Shader::Use() : failed to re-create shader!");
+            m_isError = true;
             return false;
-        } else
+        }
+        else
             m_fbo = m_env->GetCurrentFBO();
     }
 
@@ -142,25 +148,30 @@ bool Framework::Graphics::Shader::Use() noexcept {
     return true;
 }
 
-void Framework::Graphics::Shader::Free() {
+void Framework::Graphics::Shader::FreeVideoMemory() {
     if (m_isInit) {
-        Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer and free video memory...");
-        if (!m_env->DeleteShader(m_shaderProgram))
-            Helper::Debug::Error("Shader::Free() : failed to free video memory! Name: " + this->m_name);
-        this->m_shaderProgram = SR_NULL_SHADER;
+        SR_SHADER("Shader::Free() : free \"" + m_path + "\" shader class pointer and free video memory...");
+
+        if (!m_env->DeleteShader(m_shaderProgram)) {
+            SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_path);
+        }
+        m_shaderProgram = SR_NULL_SHADER;
 
         if (m_sharedUniforms) {
-            for (uint32_t i = 0; i < m_countSharedUniforms; i++)
-                if (!this->m_env->FreeUBO(this->m_sharedUniforms[i]))
-                    Helper::Debug::Error("Shader::Free() : failed to free uniform buffer object!");
-            free(m_sharedUniforms);
-            this->m_countSharedUniforms = 0;
-        }
-    } else {
-        Debug::Shader("Shader::Free() : free \""+m_name + "\" shader class pointer...");
-    }
+            for (uint32_t i = 0; i < m_countSharedUniforms; ++i) {
+                if (!m_env->FreeUBO(m_sharedUniforms[i]))
+                    SR_ERROR("Shader::Free() : failed to free uniform buffer object!");
+            }
 
-    delete this;
+            free(m_sharedUniforms);
+            m_sharedUniforms = nullptr;
+
+            m_countSharedUniforms = 0;
+        }
+    }
+    else {
+        SR_SHADER("Shader::Free() : free \"" + m_path + "\" shader class pointer...");
+    }
 }
 
 bool Framework::Graphics::Shader::SetVertex(
@@ -199,17 +210,22 @@ bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<std::p
 
 void Framework::Graphics::Shader::CopyVertexAndUniformsInfo(const Framework::Graphics::Shader *source) {
     if (m_isInit) {
-        Helper::Debug::Error("Shader::CopyVertexAndUniformsInfo() : shader already initialized!");
+        SR_ERROR("Shader::CopyVertexAndUniformsInfo() : shader already initialized!");
         return;
     }
 
-    this->m_verticesAttributes  = source->m_verticesAttributes;
-    this->m_verticesDescription = source->m_verticesDescription;
-    this->m_uniformsInfo        = source->m_uniformsInfo;
+    m_verticesAttributes  = source->m_verticesAttributes;
+    m_verticesDescription = source->m_verticesDescription;
+    m_uniformsInfo        = source->m_uniformsInfo;
 }
 
 Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, const std::string &name) {
-    Helper::Debug::Log("Shader::Load() : load \"" + name + "\" shader...");
+    if (auto&& pShader = ResourceManager::Instance().Find<Shader>(name)) {
+        SRAssert(render == pShader->m_render);
+        return pShader;
+    }
+
+    SR_LOG("Shader::Load() : load \"" + name + "\" shader...");
 
     std::vector<Xml::Node> shaders = {};
 
@@ -274,6 +290,9 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
             if (auto value = info.GetNode("PrimitiveTopology"))
                 createInfo.primitiveTopology = StringToEnumPrimitiveTopology(value.GetAttribute("value").ToString());
 
+            if (auto value = info.GetNode("BlendEnabled"))
+                createInfo.blendEnabled = value.GetAttribute("value").ToBool();
+
             if (auto value = info.GetNode("DepthWrite"))
                 createInfo.depthWrite = value.GetAttribute("value").ToBool();
 
@@ -285,13 +304,14 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
 
     auto shaderParser = [=](const Xml::Node& node) -> Shader* {
         if (auto path = node.GetAttribute("path"); path.Valid()) {
-            auto shader = new Shader(render, path.ToString()); {
+            auto shader = new Shader(render, path.ToString(), name); {
                 vertexParser(shader, node);
                 uniformParsers(shader, node);
                 infoParser(shader, node);
             }
             return shader;
-        } else
+        }
+        else
             return nullptr;
     };
 

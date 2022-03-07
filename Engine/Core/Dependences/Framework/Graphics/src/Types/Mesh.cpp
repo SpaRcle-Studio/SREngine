@@ -12,7 +12,7 @@
 #include <Loaders/ObjLoader.h>
 
 #include <GUI.h>
-#include <FbxLoader/Loader.h>
+#include <Utils/StringFormat.h>
 
 #include <Math/Matrix4x4.h>
 
@@ -34,9 +34,9 @@ Framework::Graphics::Types::Mesh::Mesh(MeshType type, const std::string& name)
 {
     Component::Init<Mesh>();
 
-    this->m_shader = nullptr;
-    this->m_material = nullptr;
-    this->m_geometryName = name;
+    m_shader = nullptr;
+    m_material = nullptr;
+    m_geometryName = name;
 }
 
 Framework::Graphics::Types::Mesh::~Mesh() {
@@ -53,22 +53,88 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
 
-    Helper::ResourceManager::Instance().Destroy(this);
-
     return IResource::Destroy();
+}
+
+
+Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
+    const auto& resourceId = Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, localPath.c_str());
+    const bool withIndices = Environment::Get()->GetPipeLine() == PipeLine::Vulkan;
+
+    Mesh* mesh = nullptr;
+
+    if (IResource* pResource = ResourceManager::Instance().Find<Mesh>(resourceId)) {
+        SRVerifyFalse((mesh = dynamic_cast<Mesh*>(pResource->Copy(nullptr))));
+        return mesh;
+    }
+
+    const auto path = ResourceManager::Instance().GetResPath().Concat("/Models/").Concat(localPath);
+    const auto ext = path.GetExtension();
+
+    if (ext == "obj") {
+        mesh = ObjLoader::Load(path.ToString(), withIndices, type, id);
+    }
+    else if (ext == "fbx") {
+        SRAssert(type == MeshType::Static);
+
+        const auto resFolder = Helper::ResourceManager::Instance().GetResPath();
+        auto fbx = FbxLoader::Loader::Load(
+                resFolder.Concat("Utilities/FbxFormatConverter.exe"),
+                resFolder.Concat("Cache"),
+                resFolder.Concat("Models"),
+                localPath,
+                withIndices);
+
+        if (fbx.GetShapes().size() <= id) {
+            Helper::Debug::Error("Mesh::Load() : incorrect id! \n\tPath: " + localPath + "\n\tId: " + std::to_string(id));
+            return {};
+        }
+
+        mesh = LoadFbx(type, withIndices, fbx.GetShapes()[id]);
+    }
+
+    if (mesh) {
+        mesh->SetId(resourceId);
+        mesh->m_meshId = id;
+    }
+
+    SRAssert(mesh);
+
+    return mesh;
+}
+
+Mesh *Mesh::LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry &geometry) {
+    Mesh3D* mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
+    mesh->SetGeometryName(geometry.name);
+    mesh->SetMaterial(Material::GetDefault());
+
+    if (withIndices)
+        mesh->SetIndexArray(geometry.indices);
+
+    auto vertices = std::vector<Vertices::Mesh3DVertex>();
+    for (auto vertex : geometry.vertices) {
+        vertices.emplace_back(Vertices::Mesh3DVertex{
+                .pos = {vertex.pos.x, vertex.pos.y, vertex.pos.z},
+                .uv  = {vertex.uv.x, vertex.uv.y},
+        });
+    }
+
+    mesh->SetVertexArray(vertices);
+
+    return mesh;
 }
 
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath, MeshType type) {
     auto path = ResourceManager::Instance().GetResPath().Concat("/Models/").Concat(localPath);
-
-    std::vector<Mesh*> meshes = std::vector<Mesh*>();
+    auto meshes = std::vector<Mesh*>();
+    const bool withIndices = Environment::Get()->GetPipeLine() == PipeLine::Vulkan;
 
     uint32_t counter = 0;
 ret:
-    const auto id = localPath + " - "+ std::to_string(counter) + " " + EnumMeshTypeToString(type);
+    const auto& id = Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), counter, localPath.c_str());
     if (IResource* find = ResourceManager::Instance().Find<Mesh>(id)) {
         if (IResource* copy = ((Mesh*)(find))->Copy(nullptr)) {
-            meshes.push_back((Mesh*)copy);
+            meshes.emplace_back(dynamic_cast<Mesh*>(copy));
             counter++;
             goto ret;
         }
@@ -78,8 +144,6 @@ ret:
     }
     else if (counter > 0)
         return meshes;
-
-    bool withIndices = Environment::Get()->GetPipeLine() == PipeLine::Vulkan;
 
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
@@ -104,29 +168,17 @@ ret:
         }
 
         for (const auto& shape : fbx.GetShapes()) {
-            auto* mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
-            mesh->SetGeometryName(shape.name);
-            mesh->SetMaterial(Material::GetDefault());
-
-            if (withIndices)
-                mesh->SetIndexArray(shape.indices);
-
-            auto vertices = std::vector<Vertices::Mesh3DVertex>();
-            for (auto vertex : shape.vertices)
-                vertices.emplace_back(Vertices::Mesh3DVertex {
-                    .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
-                    .uv  = { vertex.uv.x, vertex.uv.y },
-                }); // TODO
-            mesh->SetVertexArray(vertices);
-            meshes.emplace_back(mesh);
+            meshes.emplace_back(LoadFbx(type, withIndices, shape));
         }
-    } else {
+    }
+    else {
         Helper::Debug::Error("Mesh::Load() : unknown \"" + ext + "\" format!");
         meshes = std::vector<Mesh*>();
     }
 
     for (uint32_t i = 0; i < static_cast<uint32_t>(meshes.size()); ++i) {
-        meshes[i]->SetId(localPath + " - " + std::to_string(i) + " " + EnumMeshTypeToString(type));
+        meshes[i]->SetId(Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), i, localPath.c_str()));
+        meshes[i]->m_meshId = i;
     }
 
     return meshes;
@@ -164,40 +216,6 @@ void Mesh::OnSelected(bool value) {
         return;
 
     Component::OnSelected(value);
-}
-
-bool Mesh::DrawOnInspector() {
-    ImGui::Text("Geometry name: %s", GetGeometryName().c_str());
-    //ImGui::Text("Vertices count: %u", GetCountVertices());
-
-    if (!m_render)
-        ImGui::TextColored({1,0,0,1}, "Render is missing!");
-
-    ImGui::Separator();
-
-    if (m_material) {
-        Helper::GUI::DrawTextOnCenter("Material");
-
-        auto color = m_material->GetColor();
-        if (ImGui::InputFloat3("Color", &color[0]))
-            m_material->SetColor(color);
-
-        bool enabled = m_material->GetBloomEnabled();
-        if (ImGui::Checkbox("Bloom enabled", &enabled))
-            m_material->SetBloom(enabled);
-    } else
-        Helper::GUI::DrawTextOnCenter("Material (missing)");
-
-    ImGui::Separator();
-
-    if (m_shader) {
-        Helper::GUI::DrawTextOnCenter("Shader");
-        ImGui::Text("Name: %s", m_shader->GetName().c_str());
-    } else {
-        Helper::GUI::DrawTextOnCenter("Shader (missing)");
-    }
-
-    return true;
 }
 
 Math::FVector3 Mesh::GetBarycenter() const {
@@ -299,10 +317,11 @@ void Mesh::SetMaterial(Material *material) {
     if (m_material)
         m_material->UnSubscribe(this);
 
-    if ((m_material = material))
+    if ((m_material = material)) {
         m_material->Subscribe(this);
+    }
     else
-        Helper::Debug::Warn("Mesh::SetMaterial() : the material is nullptr!");
+        SR_WARN("Mesh::SetMaterial() : the material is nullptr!");
 
     if (m_material && m_render)
         m_material->Register(m_render);
@@ -338,3 +357,16 @@ void Mesh::OnSkewed(const Math::FVector3 &newValue) {
     m_skew = newValue;
     ReCalcModel();
 }
+
+void Mesh::OnTransparencyChanged() {
+    if (m_render) {
+        m_render->ReRegisterMesh(this);
+    }
+}
+
+std::string Mesh::GetPath() const {
+    return StringUtils::Substring(GetResourceId(), '|', 1);
+}
+
+
+

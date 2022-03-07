@@ -15,6 +15,14 @@
 
 #include <Render/ShaderGenerator.h>
 
+Framework::Graphics::Render::Render(std::string name)
+    : m_env(Environment::Get())
+    , m_pipeLine(Environment::Get()->GetPipeLine())
+    , m_renderName(name)
+{
+    m_newMeshes.reserve(500);
+}
+
 bool Framework::Graphics::Render::Create(Window* window) {
     if (m_isCreate){
         Debug::Error("Render::Create() : render already create!");
@@ -75,12 +83,12 @@ bool Framework::Graphics::Render::Run() {
 }
 bool Framework::Graphics::Render::Close() {
     if (!m_isRun) {
-        Debug::Error("Render::Close() : render is not running!");
+        SR_ERROR("Render::Close() : render is not running!");
         return false;
     }
 
     if (m_isClose) {
-        Debug::Error("Render::Close() : render already is closed");
+        SR_ERROR("Render::Close() : render already is closed");
         return false;
     }
 
@@ -91,19 +99,22 @@ bool Framework::Graphics::Render::Close() {
 
     for (auto& shader : m_shaders) {
         if (shader) {
-            shader->Free();
+            shader->FreeVideoMemory();
+            shader->Destroy();
             shader = nullptr;
         }
     }
 
-    if (this->m_grid)
+    if (m_grid)
         m_grid->Free();
 
     if (m_skybox.m_current) {
-        if (m_env->IsWindowOpen())
+        if (m_env->IsWindowOpen()) {
             m_skybox.m_current->FreeVideoMemory();
-        else
-            Helper::Debug::Warn("Render::Close() : window is close, can't free skybox video memory!");
+        }
+        else {
+            SR_WARN("Render::Close() : window is close, can't free skybox video memory!");
+        }
         m_skybox.m_current->Free();
         m_skybox.m_current = nullptr;
     }
@@ -115,7 +126,7 @@ bool Framework::Graphics::Render::Close() {
 }
 
 void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *mesh) {
-    const std::lock_guard<std::mutex> lock(m_mutex);
+    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
@@ -128,22 +139,22 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
     SRAssert(mesh->GetMaterial());
 
     if (!mesh->GetShader()) {
-        Debug::Error("Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
+        SR_ERROR("Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
         return;
     }
 
-    const std::lock_guard<std::mutex> lock(m_mutex);
+    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::Full)
-        Debug::Log("Render::RegisterMesh() : register new \"" + mesh->GetResourceId() + "\" mesh...");
+        SR_LOG("Render::RegisterMesh() : register new \"" + mesh->GetResourceId() + "\" mesh...");
 
     mesh->AddUsePoint();
     mesh->SetRender(this);
-    this->m_newMeshes.emplace_back(mesh);
+    m_newMeshes.emplace_back(mesh);
 }
 
 void Framework::Graphics::Render::PollEvents() {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     bool needRebuild = false;
 
     //! Check exists new meshes
@@ -152,15 +163,15 @@ void Framework::Graphics::Render::PollEvents() {
             // Add mesh to transparent meshes array or usual mesh array
 
             if (mesh->GetMaterial()->IsTransparent()) {
-                SRAssert(m_transparentGeometry.Add(mesh))
+                SRVerifyFalse(m_transparentGeometry.Add(mesh))
             } else {
-                SRAssert(m_geometry.Add(mesh))
+                SRVerifyFalse(m_geometry.Add(mesh))
             }
         }
 
         m_newMeshes.clear(); // Clear new meshes array
 
-        this->m_env->SetBuildState(false);
+        m_env->SetBuildState(false);
     }
 
     //! Check meshes to remove from render
@@ -169,12 +180,11 @@ void Framework::Graphics::Render::PollEvents() {
         if (mesh->IsCalculated())
             mesh->FreeVideoMemory();
 
-        // Remove mesh from transparent meshes array or usual mesh array
-
         if (mesh->GetMaterial()->IsTransparent()) {
-            SRAssert(m_transparentGeometry.Remove(mesh))
-        } else {
-            SRAssert(m_geometry.Remove(mesh))
+            SRVerifyFalse2(m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+        }
+        else {
+            SRVerifyFalse2(m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
         }
 
         needRebuild = true;
@@ -221,41 +231,41 @@ void Framework::Graphics::Render::PollEvents() {
     }
 
     if (needRebuild)
-        this->m_env->SetBuildState(false);
-}
-
-Framework::Graphics::Render::Render() : m_env(Environment::Get()), m_pipeLine(m_env->GetPipeLine()) {
-    m_newMeshes.reserve(500);
+        m_env->SetBuildState(false);
 }
 
 void Framework::Graphics::Render::SetSkybox(Framework::Graphics::Types::Skybox *skybox) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-    if (skybox)
-        Helper::Debug::Log("Render::SetSkybox() : set new \"" + skybox->GetName() + "\" skybox...");
-    else
-        Helper::Debug::Log("Render::SetSkybox() : set a nullptr skybox...");
+    if (skybox) {
+        SR_LOG("Render::SetSkybox() : set new \"" + skybox->GetName() + "\" skybox...");
+    }
+    else {
+        SR_LOG("Render::SetSkybox() : set a nullptr skybox...");
+    }
 
     skybox->SetRender(this);
     if (m_skybox.m_current != skybox) {
         m_skybox.m_new = skybox;
-        this->m_env->SetBuildState(false);
+        m_env->SetBuildState(false);
     }
 }
 
 void Framework::Graphics::Render::FreeTexture(Framework::Graphics::Types::Texture *texture) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Graph("Render::FreeTexture() : register texture to remove...");
+    if (Debug::GetLevel() >= Debug::Level::High) {
+        SR_GRAPH("Render::FreeTexture() : register texture to remove...");
+    }
 
     m_texturesToFree.push_back(texture);
 }
 void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Graph("Render::RegisterTexture() : register new texture...");
+    if (Debug::GetLevel() >= Debug::Level::High) {
+        SR_GRAPH("Render::RegisterTexture() : register new texture...");
+    }
 
     texture->AddUsePoint();
     texture->SetRender(this);
@@ -263,19 +273,20 @@ void Framework::Graphics::Render::RegisterTexture(Types::Texture * texture) {
 }
 
 bool Framework::Graphics::Render::FreeSkyboxMemory(Skybox* skybox) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-    this->m_skyboxesToFreeVidMem.emplace_back(skybox);
+    m_skyboxesToFreeVidMem.emplace_back(skybox);
 
     return true;
 }
 
-Framework::Graphics::Render *Framework::Graphics::Render::Allocate() {
+Framework::Graphics::Render *Framework::Graphics::Render::Allocate(std::string name) {
     if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
-        return static_cast<Render *>(new Impl::OpenGLRender());
+        return static_cast<Render *>(new Impl::OpenGLRender(std::move(name)));
     else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan) {
-        return static_cast<Render *>(new Impl::VulkanRender());
-    } else
+        return static_cast<Render *>(new Impl::VulkanRender(std::move(name)));
+    }
+    else
         return nullptr;
 }
 
@@ -284,13 +295,13 @@ void Framework::Graphics::Render::SetCurrentCamera(Framework::Graphics::Camera *
 }
 
 bool Framework::Graphics::Render::InsertShader(uint32_t id, Shader* shader) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (id >= m_shaders.size())
         m_shaders.resize(id + 1);
 
     if (m_shaders[id]) {
-        Helper::Debug::Error("Render::InsertShader() : the specified place is already occupied! \n\tID: " + std::to_string(id));
+        SR_ERROR("Render::InsertShader() : the specified place is already occupied! \n\tID: " + std::to_string(id));
         return false;
     }
 
@@ -300,7 +311,7 @@ bool Framework::Graphics::Render::InsertShader(uint32_t id, Shader* shader) {
 }
 
 Framework::Graphics::Shader *Framework::Graphics::Render::FindShader(uint32_t id) const {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (m_shaders.size() <= id || !m_shaders[id])
         return nullptr;
@@ -313,7 +324,7 @@ void Framework::Graphics::Render::Synchronize() {
 
 ret:
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
         empty = m_newMeshes.empty() && m_removeMeshes.empty() && m_texturesToFree.empty() && m_skyboxesToFreeVidMem.empty();
     }
 
@@ -324,7 +335,7 @@ ret:
 }
 
 bool Framework::Graphics::Render::IsClean() {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     return m_newMeshes.empty() &&
            m_removeMeshes.empty() &&
@@ -333,4 +344,27 @@ bool Framework::Graphics::Render::IsClean() {
            m_transparentGeometry.Empty() &&
            m_geometry.Empty() &&
            m_skyboxesToFreeVidMem.empty();
+}
+
+void Framework::Graphics::Render::ReRegisterMesh(Mesh *mesh) {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    /*TODO: UNSAFE
+    if (!mesh->IsRegistered()) {
+        SRAssert2(false, "Mesh isn't registered!");
+        return;
+    }
+
+    if (!m_geometry.Remove(mesh)) {
+        SRVerifyFalse2(m_transparentGeometry.Remove(mesh), "Mesh not found!");
+    }
+
+    if (mesh->GetMaterial()->IsTransparent()) {
+        SRVerifyFalse(m_transparentGeometry.Add(mesh))
+    }
+    else {
+        SRVerifyFalse(m_geometry.Add(mesh))
+    }
+
+    m_env->SetBuildState(false);*/
 }

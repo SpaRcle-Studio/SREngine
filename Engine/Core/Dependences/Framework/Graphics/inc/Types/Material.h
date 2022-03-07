@@ -40,10 +40,10 @@ namespace Framework::Graphics::Types {
     public:
         Helper::IResource* Copy(Helper::IResource* destination) const override;
 
-        [[nodiscard]] bool GetBloomEnabled() const { return this->m_bloom;  }
-        [[nodiscard]] bool IsTransparent() const { return m_transparent;  }
-        [[nodiscard]] glm::vec4 GetColor() const { return m_color.ToGLM(); }
-        [[nodiscard]] uint32_t GetCountSubscriptions() const;
+        SR_NODISCARD bool GetBloomEnabled() const { return m_bloom;  }
+        SR_NODISCARD bool IsTransparent() const { return m_transparent;  }
+        SR_NODISCARD Helper::Math::FColor GetColor() const { return m_color; }
+        SR_NODISCARD uint32_t GetCountSubscriptions() const;
 
         void SetColor(float r, float g, float b) { SetColor(Helper::Math::FColor(r, g, b, 1.f)); }
         void SetColor(Helper::Math::FVector3 color) { SetColor(color.x, color.y, color.z); }
@@ -67,6 +67,7 @@ namespace Framework::Graphics::Types {
 
     private:
         bool Destroy() override;
+        void UpdateSubscribers();
 
     private:
         SR_INLINE static Material* m_default       = nullptr;
@@ -80,7 +81,7 @@ namespace Framework::Graphics::Types {
         std::atomic<bool>          m_bloom         = false;
         mutable std::mutex         m_mutex         = std::mutex();
 
-        Helper:: Math::FVector4    m_color         = Helper::Math::FVector4(1.f);
+        Helper::Math::FColor       m_color         = Helper::Math::FColor(1.f);
 
         Texture*                   m_diffuse       = nullptr;
         Texture*                   m_normal        = nullptr;

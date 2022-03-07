@@ -39,10 +39,12 @@ namespace Framework::Helper {
         ~CmdManager() = default;
 
     public:
+        [[nodiscard]] std::string GetLastCmdName() const;
         [[nodiscard]] ICommand* MakeCommand(const std::string& id) const;
         [[nodiscard]] bool IsRun() const { return m_isRun; }
         bool MakeAndExecute(const std::string& id, SyncType sync);
         bool Execute(ICommand* cmd, SyncType sync);
+        bool Redo();
         bool Cancel();
         bool RegisterCommand(const std::string& id, const CmdAllocator& allocator);
 
@@ -50,9 +52,11 @@ namespace Framework::Helper {
         bool Close();
 
     private:
+        bool ExecuteImpl(ICommand* cmd, SyncType sync);
         bool Execute(ICommand* cmd);
         bool Cancel(ICommand* cmd);
         bool DoCmd(const Cmd& cmd);
+        void ClearHistory();
 
     private:
         std::queue<Cmd> m_commands;
@@ -61,9 +65,10 @@ namespace Framework::Helper {
         uint32_t m_maxHistorySize = 0;
 
         CmdAllocators m_allocators;
-        std::mutex m_mutex;
+        mutable std::mutex m_mutex;
         Types::Thread m_thread;
         std::atomic<bool> m_isRun;
+        std::string m_lastCmdName;
 
     };
 }

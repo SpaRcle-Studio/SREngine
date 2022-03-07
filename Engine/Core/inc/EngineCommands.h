@@ -11,6 +11,10 @@
 
 namespace Framework::Helper {
     class GameObject;
+
+    namespace World {
+        class Scene;
+    }
 }
 
 namespace Framework::Core::Commands {
@@ -20,6 +24,8 @@ namespace Framework::Core::Commands {
 
         bool Redo() override;
         bool Undo() override;
+
+        std::string GetName() override { return "GameObjectRename"; }
     };
 
     class GameObjectDelete : public Helper::ICommand {
@@ -27,14 +33,18 @@ namespace Framework::Core::Commands {
         GameObjectDelete() = default;
         explicit GameObjectDelete(const Helper::Types::SafePtr<Helper::GameObject>& ptr);
 
-        ~GameObjectDelete() override = default;
+        ~GameObjectDelete() override;
 
         bool Redo() override;
         bool Undo() override;
 
+        std::string GetName() override { return "GameObjectDelete"; }
+
     private:
-        Framework::Helper::EntityPath m_path;
+        Helper::EntityPath m_path;
+        Helper::EntityBranch m_reserved;
         SR_XML_NS::Document m_backup;
+        Helper::Types::SafePtr<Helper::World::Scene> m_scene;
 
     };
 

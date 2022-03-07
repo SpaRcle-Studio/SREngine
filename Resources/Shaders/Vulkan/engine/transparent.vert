@@ -7,6 +7,7 @@ layout (location = 3) in vec3 inTang;
 
 layout (binding = 0) uniform MeshUBO {
     mat4 model;
+    vec4 color;
 } meshUBO;
 
 layout (binding = 1) uniform ProjViewUBO {

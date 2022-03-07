@@ -126,11 +126,16 @@ void Material::SetGlossiness(Texture*tex) {
 }
 
 bool Material::SetTransparent(bool value) {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     if (IsReadOnly())
         return false;
 
     m_transparent = value;
-    Environment::Get()->SetBuildState(false);
+
+    for (auto&& subscriber : m_subscriptions)
+        subscriber->OnTransparencyChanged();
+
     return true;
 }
 
@@ -164,7 +169,7 @@ Material *Material::Load(const std::string &name) {
             material->SetDiffuse(Texture::Load(diffuse.GetAttribute("Path").ToString()));
 
         if (auto color = matXml.TryGetNode("Color"))
-            material->SetColor(Xml::NodeToColor(color));
+            material->SetColor(Xml::NodeToColor<true>(color));
 
         material->SetId(name);
 
@@ -224,8 +229,10 @@ void Material::Subscribe(Mesh *mesh) {
 void Material::UnSubscribe(Mesh *mesh) {
     std::lock_guard<std::mutex> lock(m_mutex);
 
+    SRAssert(GetCountUses() > 0);
     SRAssert(m_subscriptions.count(mesh) == 1);
     m_subscriptions.erase(mesh);
+
     RemoveUsePoint();
 
     if (m_subscriptions.empty() && GetCountUses() == 0)
@@ -241,8 +248,6 @@ bool Material::Destroy() {
     if (IsDestroy())
         return false;
 
-    Helper::ResourceManager::Instance().Destroy(this);
-
     return IResource::Destroy();
 }
 
@@ -251,7 +256,7 @@ void Material::SetColor(glm::vec4 color) {
         return;
 
     m_color = color;
-    Environment::Get()->SetBuildState(false);
+    UpdateSubscribers();
 }
 
 void Material::SetColor(const Math::FColor &color) {
@@ -259,7 +264,7 @@ void Material::SetColor(const Math::FColor &color) {
         return;
 
     m_color = color;
-    Environment::Get()->SetBuildState(false);
+    UpdateSubscribers();
 }
 
 bool Material::Register(Framework::Graphics::Render *render) {
@@ -278,6 +283,13 @@ bool Material::Register(Framework::Graphics::Render *render) {
     if (m_glossiness && !m_glossiness->HasRender()) m_render->RegisterTexture(m_glossiness);
 
     return true;
+}
+
+void Material::UpdateSubscribers() {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    for (auto&& subscriber : m_subscriptions)
+        subscriber->UpdateUBO();
 }
 
 

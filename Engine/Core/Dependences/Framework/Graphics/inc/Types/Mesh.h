@@ -20,6 +20,7 @@
 #include <Environment/Environment.h>
 #include <EntityComponentSystem/Component.h>
 #include <Types/List.h>
+#include <FbxLoader/Loader.h>
 
 namespace Framework::Graphics{
     class Render;
@@ -58,6 +59,9 @@ namespace Framework::Graphics::Types {
 
     public:
         static std::vector<Mesh*> Load(const std::string& path, MeshType type);
+        static Mesh* Load(const std::string& path, MeshType type, uint32_t id);
+        static Mesh* LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry& geometry);
+
     public:
         /** \brief Set mesh to destroy in res manager
         * \return bool */
@@ -75,10 +79,9 @@ namespace Framework::Graphics::Types {
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();
-    protected:
-        bool DrawOnInspector() override;
-        Math::FVector3 GetBarycenter() const override;
     public:
+        Math::FVector3 GetBarycenter() const override;
+
         void OnMove(const Math::FVector3& newValue) override;
         void OnRotate(const Math::FVector3& newValue) override;
         void OnScaled(const Math::FVector3& newValue) override;
@@ -93,18 +96,22 @@ namespace Framework::Graphics::Types {
             this->m_env->SetBuildState(false);
         }
         void OnAttachComponent() override { }
+        void OnTransparencyChanged();
+
     public:
         void WaitCalculate() const;
         bool IsCanCalculate() const;
+        std::string GetPath() const;
 
-        [[nodiscard]] std::string GetGeometryName() const { return m_geometryName; }
-        [[nodiscard]] Shader* GetShader()           const { return m_shader; }
-        [[nodiscard]] Material* GetMaterial()       const { return m_material; }
-        [[nodiscard]] bool IsCalculated()           const { return m_isCalculated; }
-        [[nodiscard]] bool IsInverse()              const { return m_inverse; }
-        [[nodiscard]] bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
+        SR_NODISCARD Shader* GetShader()           const { return m_shader; }
+        SR_NODISCARD Render* GetRender()           const { return m_render; }
+        SR_NODISCARD Material* GetMaterial()       const { return m_material; }
+        SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
+        SR_NODISCARD bool IsInverse()              const { return m_inverse; }
+        SR_NODISCARD bool IsRegistered()           const { return m_render; }
 
-        void SetRender(Render* render) { this->m_render = render; };
+        void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
@@ -137,6 +144,9 @@ namespace Framework::Graphics::Types {
 
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;
+
+        /// определяет порядок меша в файле, если их там несколько
+        uint32_t                     m_meshId            = 0;
 
     };
 }

@@ -17,9 +17,6 @@
 #include <iostream>
 #include <ctime>
 
-SafePtr<Scene> g_scene;
-//SafePtr<GameObject> g_camera;
-
 Skybox* g_skybox = nullptr;
 Window* g_window = nullptr;
 
@@ -81,10 +78,11 @@ void LoadWireframe() {
 void LoadCubes() {
     Render* render = Engine::Instance().GetRender();
     auto mesh = Mesh::Load("Engine/cube.obj", MeshType::Static)[0];
+    auto scene = Engine::Instance().GetScene();
 
     mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
 
-    auto cube = g_scene->Instance("Cube");
+    auto cube = scene->Instance("Cube");
     render->RegisterMesh(mesh);
     mesh->WaitCalculate();
     cube->AddComponent(DynamicCastMeshToComponent(mesh));
@@ -97,7 +95,7 @@ void LoadCubes() {
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
 
-        auto newCube = g_scene->Instance("Cube");
+        auto newCube = scene->Instance("Cube");
         newCube->AddComponent(DynamicCastMeshToComponent(mesh));
         cube->AddChild(newCube);
         cube = newCube;
@@ -108,6 +106,7 @@ void LoadCubes() {
 
 void LoadNemesis() {
     Render* render = Engine::Instance().GetRender();
+    auto scene = Engine::Instance().GetScene();
 
     std::vector<Material*> materials = {
         Material::Load("Game/body_nemesis"),
@@ -116,7 +115,7 @@ void LoadNemesis() {
     };
 
     auto fbx_meshes = Mesh::Load("Game/Nemesis.fbx", MeshType::Static);
-    auto character = g_scene->Instance("Nemesis");
+    auto character = scene->Instance("Nemesis");
 
     for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
         Mesh* mesh = fbx_meshes[i];
@@ -126,7 +125,7 @@ void LoadNemesis() {
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->SetMaterial(materials[i]);
-        auto object = g_scene->Instance(mesh->GetGeometryName());
+        auto object = scene->Instance(mesh->GetGeometryName());
         object->AddComponent(DynamicCastMeshToComponent(mesh));
 
         character->AddChild(object);
@@ -136,6 +135,7 @@ void LoadNemesis() {
 
 void LoadMiku() {
     Render* render = Engine::Instance().GetRender();
+    auto scene = Engine::Instance().GetScene();
 
     Material* body = Material::Load("Game/miku_body");
     Material* face = Material::Load("Game/miku_face");
@@ -145,7 +145,7 @@ void LoadMiku() {
     };
 
     auto fbx_meshes = Mesh::Load("Game/Miku.fbx", MeshType::Static);
-    auto character = g_scene->Instance("Miku");
+    auto character = scene->Instance("Miku");
 
     for (uint32_t i = 0; i < 6; i++) {
         Mesh* mesh = fbx_meshes[i];
@@ -157,7 +157,7 @@ void LoadMiku() {
 
         mesh->WaitCalculate();
 
-        auto cube = g_scene->Instance(mesh->GetGeometryName());
+        auto cube = scene->Instance(mesh->GetGeometryName());
         cube->AddComponent(DynamicCastMeshToComponent(mesh));
 
         character->AddChild(cube);
@@ -168,11 +168,12 @@ void LoadMiku() {
 
 void LoadKurumi() {
     Render* render = Engine::Instance().GetRender();
+    auto scene = Engine::Instance().GetScene();
 
     Material* material = Material::Load("Game/kurumi");
 
     auto fbx_meshes = Mesh::Load("Game/Kurumi.fbx", MeshType::Static);
-    auto character = g_scene->Instance("Kurumi");
+    auto character = scene->Instance("Kurumi");
 
     for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
         Mesh* mesh = fbx_meshes[i];
@@ -182,7 +183,7 @@ void LoadKurumi() {
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->SetMaterial(material);
-        auto object = g_scene->Instance(mesh->GetGeometryName());
+        auto object = scene->Instance(mesh->GetGeometryName());
         object->AddComponent(DynamicCastMeshToComponent(mesh));
 
         character->AddChild(object);
@@ -193,10 +194,9 @@ void LoadKurumi() {
 
 EXTERN void Start() {
     auto&& engine = Engine::Instance();
-    g_scene = Scene::New("New scene");
     g_window = engine.GetWindow();
 
-    engine.SetScene(g_scene);
+    engine.SetScene(Scene::New("New scene"));
 
     //Vector2 size = { 1366, 768 }; // 848, 480
     //Vector2 size = { 1366, 768 }; // 848, 480
@@ -293,11 +293,12 @@ EXTERN void Update(float dt) {
 }
 
 EXTERN void Close() {
-    if (g_scene.LockIfValid()) {
-        g_scene.Free([](Scene *scene) {
-            g_scene->Destroy();
-            g_scene->Free();
+    auto scene = Engine::Instance().GetScene();
+    if (scene.LockIfValid()) {
+        scene.Free([](Scene *scene) {
+            scene->Destroy();
+            scene->Free();
         });
-        g_scene.Unlock();
+        scene.Unlock();
     }
 }
