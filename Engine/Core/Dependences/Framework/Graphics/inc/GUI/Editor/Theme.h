@@ -34,7 +34,7 @@ namespace Framework::Graphics::GUI {
             { "TabMinWidthForCloseButton", &ImGuiStyle::TabMinWidthForCloseButton },
             { "MouseCursorScale", &ImGuiStyle::MouseCursorScale },
             { "CurveTessellationTol", &ImGuiStyle::CurveTessellationTol },
-            { "CircleSegmentMaxError", &ImGuiStyle::CircleSegmentMaxError },
+            //{ "CircleSegmentMaxError", &ImGuiStyle::CircleSegmentMaxError },
     };
 
     inline static const std::unordered_map<std::string, bool ImGuiStyle::*> STYLE_BOOL_VALUES = {

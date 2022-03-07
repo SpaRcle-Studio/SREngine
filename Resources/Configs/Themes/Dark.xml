@@ -87,7 +87,6 @@
 		<TabRounding value="3" />
 		<TabMinWidthForCloseButton value="0" />
 		<MouseCursorScale value="1" />
-		<CircleSegmentMaxError value="1.60000002" />
 	</Floats>
 	<Booleans>
 		<AntiAliasedLines value="1" />

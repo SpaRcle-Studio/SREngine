@@ -23,15 +23,15 @@ using namespace Framework::Helper;
 
 unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, int w, int h, int components) {
     GLuint textureID;
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+    /// glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    glTexImage2D(GL_TEXTURE_2D, 0, components, w, h, 0, (components == 3) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    /// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    /// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    ///glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    ///glTexImage2D(GL_TEXTURE_2D, 0, components, w, h, 0, (components == 3) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, pixels);
     return (unsigned int)textureID;
 }
 
@@ -154,7 +154,7 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
     });
 
     glfwSetWindowPosCallback(m_window, [](GLFWwindow* win, int x, int y){
-         g_callback(WinEvents::Move, win, &x, &y);
+        g_callback(WinEvents::Move, win, &x, &y);
     });
 
     glfwSetScrollCallback(m_window, [](GLFWwindow* win, double xoffset, double yoffset){
@@ -167,40 +167,40 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
 
 
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glew...");
-    glewExperimental = TRUE;
-    if (glewInit() != GLEW_OK) {
-        Helper::Debug::Error("OpenGL::PreInit() : failed initializing glew!");
-        return false;
-    }
+    ///glewExperimental = TRUE;
+    ///if (glewInit() != GLEW_OK) {
+    ///    Helper::Debug::Error("OpenGL::PreInit() : failed initializing glew!");
+    ///    return false;
+    ///}
 
-    if (wglewIsSupported("WGL_ARB_create_context") != 1) {
-        Helper::Debug::Error("OpenGL::PreInit() : wglew is not support!");
-        return false;
-    }
+    ///if (wglewIsSupported("WGL_ARB_create_context") != 1) {
+    ///    Helper::Debug::Error("OpenGL::PreInit() : wglew is not support!");
+    ///    return false;
+    /// }
 
     return true;
 }
 
 bool Framework::Graphics::OpenGL::PostInit() {
     glEnable(GL_BLEND); // Прозрачность стекла
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+    /// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    /// glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
     glBlendEquation(GL_FUNC_ADD);
 
     glEnable(GL_TEXTURE_2D);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnable(GL_ALPHA_TEST);
-    glEnable(GL_COLOR_MATERIAL);
+    /// glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    /// glEnable(GL_ALPHA_TEST);
+    /// glEnable(GL_COLOR_MATERIAL);
 
-    glEnable(GL_MULTISAMPLE);
+    ///glEnable(GL_MULTISAMPLE);
 
     ///\%info ПРОВЕРЯЕМ ГЛУБИНУ, ЧТОБЫ ИЗБАВИТЬСЯ ОТ "ЭФФЕКТИА ПЕРЕКРЫТИЯ" ДАЛЬНИМИ ОБЪЕКТАМИ
-    glDepthFunc(GL_LEQUAL);
-    glDepthRange(0.0, 1.0);
+    /// glDepthFunc(GL_LEQUAL);
+    /// glDepthRange(0.0, 1.0);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE); // Отсечение граней
 
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Действительно хорошие вычисления перспективы
+///    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Действительно хорошие вычисления перспективы
 
     return true;
 }
@@ -213,8 +213,8 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
     //if (m_winFormat->GetValue() != Types::WindowFormat::Free) {
     //    w = m_winFormat->Width();
     //    h = m_winFormat->Height();
-   // } else
-        m_winFormat->SetFreeValue(w, h);
+    // } else
+    m_winFormat->SetFreeValue(w, h);
 
     if (Debug::GetLevel() >= Debug::Level::High)
         Debug::Log("OpenGL::SetWindowSize() : width = "+std::to_string(w) + "; height = "+ std::to_string(h));
@@ -403,7 +403,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
                 }
                 else
                     Debug::Warn("OpenGL::CompileShader() : There are warnings in the shader!\n\tReason: " +
-                                 std::string(FragmentShaderErrorMessage.data()));
+                                std::string(FragmentShaderErrorMessage.data()));
             }
         }
         //?===================================================================================================
@@ -479,7 +479,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
 bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t &hdrFBO, std::vector<int32_t>& colorBuffers) {
     bool isNew = hdrFBO <= 0;//!((bool)hdrFBO);
 
-    if (size.x == 0 || size.y == 0){
+    /**if (size.x == 0 || size.y == 0){
         Helper::Debug::Error("OpenGL::CreateFrameBuffer() : frame buffer has incorrect size!");
         return false;
     }
@@ -537,7 +537,7 @@ bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rbo
 
         Debug::Log("OpenGL::CreateFrameBuffer() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
             "\n\tHDR_FBO: "+std::to_string(hdrFBO) + colorBfs);
-    }
+    }*/
 
     return true;
 }
@@ -551,28 +551,28 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
 
     if (isNew) {
         Debug::Log("OpenGL::CreatePingPongFrameBuffer() : creating ping-pong frame buffers...");
-        glGenFramebuffers(pingpongFBO.size(), reinterpret_cast<GLuint *>(pingpongFBO.data()));
+        /// glGenFramebuffers(pingpongFBO.size(), reinterpret_cast<GLuint *>(pingpongFBO.data()));
         glGenTextures(pingpongColorBuffers.size(), reinterpret_cast<GLuint *>(pingpongColorBuffers.data()));
     }
 
     for (unsigned int i = 0; i < pingpongFBO.size(); i++)
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
+///        glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
         glBindTexture(GL_TEXTURE_2D, pingpongColorBuffers[i]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, size.x, size.y, 0, GL_RGBA, GL_FLOAT, NULL);
+///        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, size.x, size.y, 0, GL_RGBA, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // we clamp to the edge as the blur filter would otherwise sample repeated texture values!
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongColorBuffers[i], 0);
+///        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // we clamp to the edge as the blur filter would otherwise sample repeated texture values!
+///        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+///        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongColorBuffers[i], 0);
         // also check if framebuffers are complete (no need for depth buffer)
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-            Debug::Error("OpenGL::CreatePingPongFrameBufferObject() : frame buffer is not complete!");
-            return false;
-        }
+///        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+///            Debug::Error("OpenGL::CreatePingPongFrameBufferObject() : frame buffer is not complete!");
+///            return false;
+///        }
     }
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+///    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     if (isNew){
         std::string PingPongFBOBufs = "\n\tPingPongFBO: ";
@@ -602,6 +602,7 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
     unsigned int id;
     glGenTextures(1, &id);
 
+    /**
     GLuint gl_filter = 0;
     switch(filter){
         case TextureFilter::NEAREST:
@@ -619,21 +620,21 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
         case TextureFilter::Unknown:
             break; // TODO
     }
-
+*/
     Helper::Debug::Log("OpenGL::CalculateTexture() : calculating (ID "+std::to_string(id)+") texture...");
 
     glBindTexture(GL_TEXTURE_2D, id);
 
     // TODO: use alpha or format == 4 ?????????
-    GLuint compress = alpha ? GL_COMPRESSED_RGBA_S3TC_DXT5_EXT : GL_COMPRESSED_RGB_S3TC_DXT1_EXT; //GL_RGBA16F
-    glTexImage2D(GL_TEXTURE_2D, 0, compress, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    /// GLuint compress = alpha ? GL_COMPRESSED_RGBA_S3TC_DXT5_EXT : GL_COMPRESSED_RGB_S3TC_DXT1_EXT; //GL_RGBA16F
+    ///glTexImage2D(GL_TEXTURE_2D, 0, compress, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gl_filter);
+    ///glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, gl_filter);
+    ///glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, gl_filter);
 
-    GLuint texParam = GL_CLAMP_TO_BORDER; // GL_REPEAT, GL_CLAMP_TO_BORDER
+    /**GLuint texParam = GL_CLAMP_TO_BORDER; // GL_REPEAT, GL_CLAMP_TO_BORDER
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParam); // we clamp to the edge as the blur filter would otherwise sample repeated texture values!
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParam);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParam);*/
 
     /*
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParam);
@@ -671,7 +672,7 @@ int32_t Framework::Graphics::OpenGL::CalculateCubeMap(uint32_t w, uint32_t h, co
     uint32_t cubemap = 0;
 
     glGenTextures(1, &cubemap);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap);
+    /*glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap);
 
     for (unsigned char c = 0; c < 6; c++) {
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + c,
@@ -686,7 +687,7 @@ int32_t Framework::Graphics::OpenGL::CalculateCubeMap(uint32_t w, uint32_t h, co
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);*/
 
     return cubemap;
 }
@@ -746,7 +747,7 @@ unsigned int Framework::Graphics::OpenGL::CalculateSkybox() const {
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+///    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
@@ -791,7 +792,7 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
 bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &hdrFBO, int32_t &colorBuffer) {
     bool isNew = hdrFBO <= 0; //!((bool)hdrFBO);
 
-    if (isNew)
+    /**if (isNew)
         Debug::Graph("OpenGL::CreateSingleFrameBuffer() : creating new single frame buffer object...");
 
     if (isNew)
@@ -841,7 +842,7 @@ bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_
         Debug::Log("OpenGL::CreateSingleFrameBuffer() : successful!\n\tRBODepth: "+std::to_string(rboDepth)+
                    "\n\tHDR_FBO: "+std::to_string(hdrFBO) + "\n\tColor buffer: "+std::to_string(colorBuffer));
     }
-
+*/
     return true;
 }
 
@@ -882,12 +883,12 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
 
     {
         //? Binding vertex array
-        glBufferData(
-                GL_ARRAY_BUFFER,
-                count_verts * sizeof(Vertices::Mesh3DVertex),
-                &vertices[0],
-                GL_STATIC_DRAW
-        );
+        ///glBufferData(
+        ///        GL_ARRAY_BUFFER,
+        ///        count_verts * sizeof(Vertices::Mesh3DVertex),
+        ///        &vertices[0],
+        ///        GL_STATIC_DRAW
+        ///);
 
         //? Binding attrib vertex coordinates
         glEnableVertexAttribArray(0);
@@ -931,9 +932,9 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
 }
 
 int32_t Framework::Graphics::OpenGL::CalculateVBO(
-    void *vertices,
-    Framework::Graphics::Vertices::Type type,
-    size_t count)
+        void *vertices,
+        Framework::Graphics::Vertices::Type type,
+        size_t count)
 {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
         Helper::Debug::Log("OpenGL::CalculateVBO() : calculating " + std::to_string(count) + " vertices...");
@@ -949,17 +950,17 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
     glBindVertexArray(_vao);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-    glBufferData(GL_ARRAY_BUFFER, count * vertexSize, vertices, GL_STATIC_DRAW);
+    /// glBufferData(GL_ARRAY_BUFFER, count * vertexSize, vertices, GL_STATIC_DRAW);
 
     switch (type) {
         case Vertices::Type::Mesh3DVertex:
-            OpenGLSetVertexAttribPointer(0, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, pos))
+        OpenGLSetVertexAttribPointer(0, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, pos))
             OpenGLSetVertexAttribPointer(1, 2, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, uv))
             OpenGLSetVertexAttribPointer(2, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, norm))
             OpenGLSetVertexAttribPointer(3, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, tang))
             break;
         case Vertices::Type::SkyboxVertex:
-            OpenGLSetVertexAttribPointer(0, 3, Vertices::SkyboxVertex, offsetof(Vertices::SkyboxVertex, pos))
+        OpenGLSetVertexAttribPointer(0, 3, Vertices::SkyboxVertex, offsetof(Vertices::SkyboxVertex, pos))
             break;
         default:
             Helper::Debug::Error("OpenGL::CalculateVBO() : unknown vertex type!");
@@ -973,10 +974,10 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
 }
 
 int32_t Framework::Graphics::OpenGL::CalculateIBO(
-    void *indices,
-    uint32_t indxSize,
-    size_t count,
-    int32_t VBO)
+        void *indices,
+        uint32_t indxSize,
+        size_t count,
+        int32_t VBO)
 {
     if (VBO <= 0) {
         Helper::Debug::Error("OpenGL::CalculateIBO() : to calculate the IBO, OpenGL needs a VBO (VAO)!");
@@ -994,7 +995,7 @@ int32_t Framework::Graphics::OpenGL::CalculateIBO(
     glBindVertexArray(VBO); // VAO
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indxSize, indices, GL_STATIC_DRAW);
+        /// glBufferData(GL_ELEMENT_ARRAY_BUFFER, indxSize, indices, GL_STATIC_DRAW);
     }
     glBindVertexArray(0);
 

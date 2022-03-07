@@ -60,12 +60,12 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         return false;
     }
 
-    ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
+    //ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
 
-    ImGuiViewport* mainViewport = platform_io.MainViewport;
-    mainViewport->PlatformHandle = kernel->GetSurface()->GetHandle();
+    //ImGuiViewport* mainViewport = platform_io.MainViewport;
+    //mainViewport->PlatformHandle = kernel->GetSurface()->GetHandle();
 
-    platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
+    //platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
 
     // Setup Platform/Renderer bindings
     uint32_t images = m_swapchain->GetCountImages();

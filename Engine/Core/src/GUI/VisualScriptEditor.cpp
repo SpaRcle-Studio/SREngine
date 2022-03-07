@@ -133,7 +133,7 @@ SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &i
         return m_blueprints.at(id)->Copy();
     }
 
-    SRAssert2(false, Helper::Format("Blueprint \"%s\" not found!", id.c_str()))
+    SRAssert2(false, Helper::Format("Blueprint \"%s\" not found!", id.c_str()));
 
     return nullptr;
 }

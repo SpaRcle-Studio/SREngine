@@ -13,7 +13,7 @@
 #include <cassert>
 
 #ifdef SR_WIN32
-    #include <Windows.h>
+#include <Windows.h>
 #endif
 
 namespace Framework::Helper {
@@ -105,7 +105,7 @@ namespace Framework::Helper {
         static void Warn(const std::string& msg)        { Print(msg, Type::Warn);        g_countWarnings++; }
         static void Error(const std::string& msg)       { Print(msg, Type::Error);       g_countErrors++;   }
         static void VulkanError(const std::string& msg) { Print(msg, Type::VulkanError); g_countErrors++;   }
-        static void Assert(const std::string& msg)      { Print(msg, Type::Assert);      g_countErrors++;   }
+        static bool Assert(const std::string& msg)      { Print(msg, Type::Assert);      g_countErrors++;  return false; }
 
         static void ScriptLog(const std::string& msg)   { Print(msg, Type::ScriptLog);  }
         static void ScriptError(const std::string& msg) { Print(msg, Type::ScriptError);  }
@@ -120,11 +120,11 @@ namespace Framework::Helper {
 #define SR_SHADER(msg) Framework::Helper::Debug::Shader(msg);
 
 #ifdef SR_RELEASE
-    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
-    #define SRAssert2(expr, msg) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
-    #define SRAssert(expr) { [[maybe_unused]] const bool expression = !(expr); } // TODO: remove execution expression
+#define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
+    #define SRAssert2(expr, msg) ((void)(expr)) // TODO: remove execution expression
+    #define SRAssert(expr) ((void)(expr)) // TODO: remove execution expression
     #define SRAssert1(expr) SRAssert(expr)
-    #define SR_SAFE_PTR_ASSERT(expr, msg) { }
+    #define SR_SAFE_PTR_ASSERT(expr, msg)
 
     #define SRVerifyFalse2(expr, msg) {                                      \
             [[maybe_unused]] const volatile bool verify_expression = (expr); \
@@ -135,47 +135,49 @@ namespace Framework::Helper {
 #endif
 
 #ifdef SR_DEBUG
-    #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
+#define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
         .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
 
-    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
+#define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
         if (fun != notEquals) Framework::Helper::Debug::Error(errorMsg)
-    /*
-    _ACRTIMP void __cdecl _wassert(
-        _In_z_ wchar_t const* _Message,
-        _In_z_ wchar_t const* _File,
-        _In_   unsigned       _Line
-        );
+/*
+_ACRTIMP void __cdecl _wassert(
+    _In_z_ wchar_t const* _Message,
+    _In_z_ wchar_t const* _File,
+    _In_   unsigned       _Line
+    );
 
-    #define assert(expression) (void)(                                                       \
-            (!!(expression)) ||                                                              \
-            (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0) \
-        )
-     */
+#define assert(expression) (void)(                                                       \
+        (!!(expression)) ||                                                              \
+        (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0) \
+    )
+ */
 
-    //#define SRAssert2(expr, msg) static_cast<void>(                              \
+//#define SRAssert2(expr, msg) static_cast<void>(                              \
     //    (!!(expr)) || (Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)), 0) \
     //)                                                                            \
 
-    //#define SRAssert2(expr, msg) { if (!(expr)) Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); }
+//#define SRAssert2(expr, msg) ({ if (!(expr)) Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg)); })
 
-    #define SRAssert2(expr, msg) {                                  \
-        const volatile bool expression = !(expr);                   \
-        if (expression) {                                           \
-            Framework::Helper::Debug::Assert (SR_MAKE_ASSERT(msg)); \
-        }                                                           \
-    }                                                               \
+#define SRAssert2(expr, msg) (!!(expr) || Framework::Helper::Debug::Assert (SR_MAKE_ASSERT(msg)))
 
-    #define SRAssert1(expr) SRAssert2(expr, #expr)
-    #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
+//{                                  \
+    //    const volatile bool expression = !(expr);                   \
+    //    if (expression) {                                           \
+   //         Framework::Helper::Debug::Assert (SR_MAKE_ASSERT(msg)); \
+    //    }                                                           \
+   // }                                                               \
 
-    #define SRVerifyFalse2(expr, msg) {                 \
+#define SRAssert1(expr) SRAssert2(expr, #expr)
+#define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
+
+#define SRVerifyFalse2(expr, msg) {                 \
         const volatile bool verify_expression = (expr); \
-        SRAssert2(verify_expression, msg)               \
+        SRAssert2(verify_expression, msg);              \
     }                                                   \
 
-    #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
-    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr<%s>] %s \n\tPtr: %p", typeid(T).name(), msg, (void *) m_ptr));
+#define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.");
+#define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr<%s>] %s \n\tPtr: %p", typeid(T).name(), msg, (void *) m_ptr));
 
 #endif
 

@@ -5,9 +5,8 @@
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
 
+#include <GUI.h>
 #include <Environment/Environment.h>
-#include <GL/glew.h>
-#include <GL/wglew.h>
 
 #define GLFW_EXPOSE_NATIVE_WIN32
 
@@ -19,7 +18,7 @@
 #include <Debug.h>
 
 #ifdef WIN32
-    #include <wingdi.h>
+#include <wingdi.h>
 #endif
 
 //#define SR_OPENGL_USE_WINAPI
@@ -80,7 +79,7 @@ namespace Framework::Graphics {
         bool CloseWindow() override;
 
         SR_FORCE_INLINE void ClearBuffers() override {
-            glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+            ///glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         }
         SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const override { glClearColor(r, g, b, a); }
         SR_FORCE_INLINE void SwapBuffers() const override  {
@@ -114,11 +113,11 @@ namespace Framework::Graphics {
         }
         glm::vec3 GetPixelColor(glm::vec2 uPos) override {
             unsigned char uColor[3] = { 0, 0, 0 };
-            glReadPixels(uPos.x, uPos.y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &uColor[0]);
+            /// glReadPixels(uPos.x, uPos.y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &uColor[0]);
             return {
-                uColor[0],
-                uColor[1],
-                uColor[2]
+                    uColor[0],
+                    uColor[1],
+                    uColor[2]
             };
         }
 
@@ -134,7 +133,7 @@ namespace Framework::Graphics {
             unsigned long bytes = (unsigned long)size.x * (unsigned long)size.y * 4;
 
             auto *pixels = new float[bytes];
-            glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_FLOAT, pixels);
+            /// glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_FLOAT, pixels);
 
             GLuint r, g, b, a; // or GLubyte r, g, b, a;
 
@@ -156,15 +155,15 @@ namespace Framework::Graphics {
             return glm::vec4(r,g,b,a);
         }
 
-       /* glm::vec2 GetWindowSize() override {
-            glm::vec2 val;
-#ifdef  SR_OPENGL_USE_WINAPI
+        /* glm::vec2 GetWindowSize() override {
+             glm::vec2 val;
+ #ifdef  SR_OPENGL_USE_WINAPI
 
-#else
-            glfwGetWindowSize(m_window, (int*)&val.x, (int*)&val.y);
-#endif
-            return val;
-        }*/
+ #else
+             glfwGetWindowSize(m_window, (int*)&val.x, (int*)&val.y);
+ #endif
+             return val;
+         }*/
 
         [[nodiscard]] inline bool IsFullScreen() const override {
 #ifdef  SR_OPENGL_USE_WINAPI
@@ -206,8 +205,8 @@ namespace Framework::Graphics {
 #endif
         }
 
-        SR_FORCE_INLINE std::string GetVendor()   const override { return std::string((char*)glGetString(GL_VENDOR));      }
-        SR_FORCE_INLINE std::string GetRenderer() const override { return std::string((char*)glGetString(GL_RENDERER));    }
+        SR_FORCE_INLINE std::string GetVendor()   const override { return /*std::string((char*)glGetString(GL_VENDOR));  */  "";    }
+        SR_FORCE_INLINE std::string GetRenderer() const override { return /*std::string((char*)glGetString(GL_RENDERER));*/  "";    }
         SR_FORCE_INLINE std::string GetVersion()  const override { return std::string((char*)glGetString(GL_VERSION));     }
 
         SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const override {
@@ -224,7 +223,7 @@ namespace Framework::Graphics {
 
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
             this->m_currentFBOid = FBO;
-            glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+            ///glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         }
 
         SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO) const override {
@@ -243,7 +242,7 @@ namespace Framework::Graphics {
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes
-                ) const override;
+        ) const override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -262,28 +261,28 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void SetBool(SR_SHADER_PROGRAM shaderProgram, const char* name, bool v) const override {
-            glUniform1iv(glGetUniformLocation(shaderProgram, name), 1, (int*)&v);
+            ///glUniform1iv(glGetUniformLocation(shaderProgram, name), 1, (int*)&v);
         }
         SR_FORCE_INLINE void SetFloat(SR_SHADER_PROGRAM shaderProgram, const char* name, float v) const override {
-            glUniform1fv(glGetUniformLocation(shaderProgram, name), 1, &v);
+            /// glUniform1fv(glGetUniformLocation(shaderProgram, name), 1, &v);
         }
         SR_FORCE_INLINE void SetInt(SR_SHADER_PROGRAM shaderProgram, const char* name, int v) const override {
-            glUniform1iv(glGetUniformLocation(shaderProgram, name), 1, &v);
+            ///glUniform1iv(glGetUniformLocation(shaderProgram, name), 1, &v);
         }
         SR_FORCE_INLINE void SetMat4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::mat4& v) const override {
             glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name), 1, GL_FALSE, &v[0][0]);
         }
         SR_FORCE_INLINE void SetVec4(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec4& v) const override {
-            glUniform4fv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
+            /// glUniform4fv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
         }
         SR_FORCE_INLINE void SetVec3(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec3& v) const override {
-            glUniform3fv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
+            /// glUniform3fv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
         }
         SR_FORCE_INLINE void SetVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::vec2& v) const override {
-            glUniform2fv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
+            /// glUniform2fv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
         }
         SR_FORCE_INLINE void SetIVec2(SR_SHADER_PROGRAM shaderProgram, const char* name, const glm::ivec2& v) const override {
-            glUniform2iv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
+            /// glUniform2iv(glGetUniformLocation(shaderProgram, name), 1, &v[0]);
         }
 
         // ============================== [ MESH METHODS ] ==============================
@@ -295,10 +294,10 @@ namespace Framework::Graphics {
                 glDisable(GL_CULL_FACE); // Отсечение граней
         }
         SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const override {
-            if (enabled)
-                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            else
-                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            ///if (enabled)
+            ///     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            /// else
+            ///     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
         SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const override {
             glGenVertexArrays(1, &VAO);
@@ -315,7 +314,7 @@ namespace Framework::Graphics {
         [[nodiscard]] bool FreeVAO(uint32_t VAO) const override;
         SR_FORCE_INLINE void DrawLines(const uint32_t& VAO, const uint32_t& count_vertices) const override {
             glBindVertexArray(VAO);
-            glDrawArrays(GL_LINES, 0, count_vertices);
+            /// glDrawArrays(GL_LINES, 0, count_vertices);
         }
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const override {
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
@@ -334,12 +333,12 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void DrawTriangles(const uint32_t& count_vertices) const override {
-            glDrawArrays(GL_TRIANGLES, 0, count_vertices);
+            /// glDrawArrays(GL_TRIANGLES, 0, count_vertices);
         }
 
         SR_FORCE_INLINE void DrawTriangles(const uint32_t& VAO, const uint32_t& count_vertices) const override {
             glBindVertexArray(VAO);
-            glDrawArrays(GL_TRIANGLES, 0, count_vertices);
+            /// glDrawArrays(GL_TRIANGLES, 0, count_vertices);
         }
         SR_FORCE_INLINE void DrawInstancedVertices(uint32_t VAO, uint32_t IBO, uint32_t count) const override {
             glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, IBO);
@@ -367,7 +366,7 @@ namespace Framework::Graphics {
             glGenBuffers(1, &VBO);
             glBindVertexArray(VAO);
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(QuadVertices), &QuadVertices, GL_STATIC_DRAW);
+            /// glBufferData(GL_ARRAY_BUFFER, sizeof(QuadVertices), &QuadVertices, GL_STATIC_DRAW);
             glEnableVertexAttribArray(0);
             glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
             glEnableVertexAttribArray(1);
@@ -378,16 +377,16 @@ namespace Framework::Graphics {
         }
         uint32_t CalculateSkybox() const override;
         SR_FORCE_INLINE void DrawSkybox(const uint32_t& VAO, const uint32_t& CubeMap) const override {
-            glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+            /**glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
             // ... задание видовой и проекционной матриц
             glBindVertexArray(VAO);
             glBindTexture(GL_TEXTURE_CUBE_MAP, CubeMap);
             glDrawArrays(GL_TRIANGLES, 0, 36);
-            glDepthFunc(GL_LESS); // set depth function back to default
+            glDepthFunc(GL_LESS); // set depth function back to default*/
         }
 
         SR_FORCE_INLINE void Draw(const uint32_t& vertCount) const override {
-            glDrawArrays(GL_TRIANGLES, 0, vertCount);
+            /// glDrawArrays(GL_TRIANGLES, 0, vertCount);
         }
 
         SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const override {
@@ -399,7 +398,7 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE void DrawQuad(const uint32_t& VAO) const override{
             glBindVertexArray(VAO);
             //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+            /// glDrawArrays(GL_TRIANGLES, 0, 6);
             //glBindVertexArray(0);
         }
 
@@ -416,7 +415,7 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE void Draw6Triangles() const override {
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+            /// glDrawArrays(GL_TRIANGLES, 0, 6);
         }
 
         SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const override {
@@ -447,11 +446,11 @@ namespace Framework::Graphics {
             return true;
         }
         [[nodiscard]] bool FreeFBO(uint32_t FBO) const override {
-            glDeleteFramebuffers(1, &FBO);
+            /// glDeleteFramebuffers(1, &FBO);
             return true;
         }
         [[nodiscard]] bool FreeRBO(uint32_t RBO) const override {
-            glDeleteFramebuffers(1, &RBO);
+            ///  glDeleteFramebuffers(1, &RBO);
             return true;
         }
         [[nodiscard]] bool FreeTexture(uint32_t ID) const override;

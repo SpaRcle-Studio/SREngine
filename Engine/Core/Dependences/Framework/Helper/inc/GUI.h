@@ -9,41 +9,46 @@
 #include <Debug.h>
 
 #ifdef SR_USE_IMGUI
-    //#define IMGUI_DISABLE
+//#define IMGUI_DISABLE
 
-    #define IMGUI_DEFINE_MATH_OPERATORS
-    #define IMGUI_USE_WCHAR32
+#define IMGUI_DEFINE_MATH_OPERATORS
+#define IMGUI_USE_WCHAR32
 
-    #ifndef IM_ASSERT
-        #define IM_ASSERT(_EXP) SRAssert1(_EXP)
-    #endif
+#ifndef IM_ASSERT
+    #define IM_ASSERT(_EXP) SRAssert1(_EXP)
+#endif
 
-    #ifndef IM_ASSERT_USER_ERROR
-        #define IM_ASSERT_USER_ERROR(_EXP, _MSG) SRAssert2(_EXP, _MSG)
-    #endif
+#ifndef IM_ASSERT_USER_ERROR
+    #define IM_ASSERT_USER_ERROR(_EXP, _MSG) SRAssert2(_EXP, _MSG)
+#endif
 
-    #include <imgui.h>
+#include <imgui.h>
     #include <misc/cpp/imgui_stdlib.h>
-    #include <imgui_internal.h>
+#include <imgui_internal.h>
 
-    #ifdef SR_WIN32
-        #include <backends/imgui_impl_win32.h>
-    #endif
+#ifdef SR_WIN32
+    #include <backends/imgui_impl_win32.h>
+#endif
 
-    #ifdef SR_USE_VULKAN
-        #include <backends/imgui_impl_vulkan.h>
-    #endif
+#ifdef SR_USE_VULKAN
+    #include <backends/imgui_impl_vulkan.h>
+#endif
 
-    #ifdef SR_USE_OPENGL
-        #include <GL/glew.h>
-        #include <backends/imgui_impl_opengl3.h>
-    #endif
+#ifdef SR_USE_OPENGL
+    #define GL_GLEXT_PROTOTYPES
+    //#include <GL/glew.h>
+    //#include <GL/wglew.h>
+    #include <backends/imgui_impl_opengl3.h>
+    #include <backends/imgui_impl_opengl3_loader.h>
 
-    #ifdef SR_USE_GLFW3
-        #include <backends/imgui_impl_glfw.h>
-    #endif
+    //#include <GL/gl3w.h>
+#endif
 
-    #include <ImGuizmo.h>
+#ifdef SR_USE_GLFW3
+    #include <backends/imgui_impl_glfw.h>
+#endif
+
+#include <ImGuizmo.h>
 #endif
 
 #include <string>

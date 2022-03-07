@@ -36,6 +36,60 @@
 #include <Environment/Vulkan/VulkanImGUI.h>
 
 namespace Framework::Graphics {
+    // Reusable buffers used for rendering 1 current in-flight frame, for ImGui_ImplVulkan_RenderDrawData()
+    // [Please zero-clear before use!]
+    struct ImGui_ImplVulkanH_FrameRenderBuffers
+    {
+        VkDeviceMemory      VertexBufferMemory;
+        VkDeviceMemory      IndexBufferMemory;
+        VkDeviceSize        VertexBufferSize;
+        VkDeviceSize        IndexBufferSize;
+        VkBuffer            VertexBuffer;
+        VkBuffer            IndexBuffer;
+    };
+
+    // Each viewport will hold 1 ImGui_ImplVulkanH_WindowRenderBuffers
+    // [Please zero-clear before use!]
+    struct ImGui_ImplVulkanH_WindowRenderBuffers
+    {
+        uint32_t            Index;
+        uint32_t            Count;
+        ImGui_ImplVulkanH_FrameRenderBuffers*   FrameRenderBuffers;
+    };
+
+    // Vulkan data
+    struct ImGui_ImplVulkan_Data
+    {
+        ImGui_ImplVulkan_InitInfo   VulkanInitInfo;
+        VkRenderPass                RenderPass;
+        VkDeviceSize                BufferMemoryAlignment;
+        VkPipelineCreateFlags       PipelineCreateFlags;
+        VkDescriptorSetLayout       DescriptorSetLayout;
+        VkPipelineLayout            PipelineLayout;
+        VkPipeline                  Pipeline;
+        uint32_t                    Subpass;
+        VkShaderModule              ShaderModuleVert;
+        VkShaderModule              ShaderModuleFrag;
+
+        // Font data
+        VkSampler                   FontSampler;
+        VkDeviceMemory              FontMemory;
+        VkImage                     FontImage;
+        VkImageView                 FontView;
+        VkDescriptorSet             FontDescriptorSet;
+        VkDeviceMemory              UploadBufferMemory;
+        VkBuffer                    UploadBuffer;
+
+        // Render buffers for main window
+        ImGui_ImplVulkanH_WindowRenderBuffers MainWindowRenderBuffers;
+
+        ImGui_ImplVulkan_Data()
+        {
+            memset(this, 0, sizeof(*this));
+            BufferMemoryAlignment = 256;
+        }
+    };
+
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
         EvoVulkan::Core::RenderResult Render() override;
@@ -136,10 +190,8 @@ namespace Framework::Graphics {
             }
 
             if (auto texture = m_memory->m_textures[id]) {
-                //auto backend = ImGui_ImplVulkan_GetBackendData();
-                //backend->VulkanInitInfo.De
-
-                return reinterpret_cast<void *>(texture->GetDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout()).m_self);
+                auto&& layout = ((ImGui_ImplVulkan_Data*)ImGui::GetIO().BackendRendererUserData)->DescriptorSetLayout;
+                return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
             }
             else {
                 Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");

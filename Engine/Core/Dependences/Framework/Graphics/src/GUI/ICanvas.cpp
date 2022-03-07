@@ -157,7 +157,7 @@ void Style_2(){
     colors[ImGuiCol_PlotHistogram]         = ImVec4(0.89, 0.85, 0.92, 0.63);
     colors[ImGuiCol_PlotHistogramHovered]  = ImVec4(0.41, 0.19, 0.63, 1.00);
     colors[ImGuiCol_TextSelectedBg]        = ImVec4(0.41, 0.19, 0.63, 0.43);
-    colors[ImGuiCol_ModalWindowDarkening]  = ImVec4(0.20, 0.20, 0.20, 0.35);
+//    colors[ImGuiCol_ModalWindowDarkening]  = ImVec4(0.20, 0.20, 0.20, 0.35);
 
     //style->ChildRounding = 4.0f;
     style->FrameBorderSize = 1.0f;
