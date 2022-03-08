@@ -68,6 +68,7 @@ namespace Framework::Core::GUI {
         std::atomic<bool>    m_isInit    = false;
         std::atomic<bool>    m_hasErrors = false;
         std::atomic<bool>    m_enabled   = false;
+        std::atomic<bool>    m_loaded    = false;
 
         Widgets              m_widgets   = {};
 

@@ -20,6 +20,7 @@ namespace Framework::Graphics::GUI {
 
         if (ImGui::DragFloat(std::string("##" + name).c_str(), &temp, drag, 0.0f, 0.0f, "%.2f")) {
             value = temp;
+            ImGui::PopItemFlag();
             return true;
         }
 

@@ -106,6 +106,10 @@ void EditorGUI::Draw() {
 }
 
 void EditorGUI::Save() {
+    if (!m_loaded) {
+        return;
+    }
+
     const auto path = Helper::ResourceManager::Instance().GetConfigPath().Concat("EditorWidgets.xml");
 
     auto document = Helper::Xml::Document::New();
@@ -118,6 +122,8 @@ void EditorGUI::Save() {
 }
 
 void EditorGUI::Load() {
+    m_loaded = true;
+
     const auto path = Helper::ResourceManager::Instance().GetConfigPath().Concat("EditorWidgets.xml");
 
     if (!path.Exists())
