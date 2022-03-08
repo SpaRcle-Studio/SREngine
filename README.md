@@ -16,9 +16,10 @@
 
 ## Building
  1. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home)
- 2. Install Cmake 
+ 2. Install CMake 
  3. Run command "git submodule update --init --recursive"
- 4. Add command argument "-resources path-to-our-repository/Resources"
+ 4. Generate system build files with CMake
+ 5. Build and run Engine.exe with command line argument "-resources path-to-your-repository/Resources"
 
 ## Used libraries
   * glm
