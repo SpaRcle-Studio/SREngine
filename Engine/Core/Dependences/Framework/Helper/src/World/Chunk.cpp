@@ -21,6 +21,10 @@ Chunk::Chunk(SRChunkAllocArgs)
     SRAssert(m_observer);
     SRAssert(m_region);
     SRAssert(!m_position.HasZero());
+
+    if (m_region) {
+        m_regionPosition = m_region->GetPosition();
+    }
 }
 
 void Chunk::Update(float_t dt) {
@@ -36,13 +40,20 @@ bool Chunk::Belongs(const Math::FVector3 &point) {
         point.x <= xMax && point.y <= yMax && point.z <= zMax;
 }
 
-bool Chunk::Access() {
-    m_lifetime = 2.f;
+bool Chunk::Access(float_t dt) {
+    m_lifetime = dt + 2.f;
     return true;
 }
 
 bool Chunk::Unload() {
     m_loadState = LoadState::Unload;
+
+    for (auto gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
+        gameObject.AutoFree([](auto gm) {
+            gm->Destroy();
+        });
+    }
+
     return true;
 }
 
@@ -77,38 +88,44 @@ bool Chunk::Belongs(const Framework::Helper::Math::IVector3 &position,
            point.x <= xMax && point.y <= yMax && point.z <= zMax;
 }
 
-bool Chunk::Clear() {
-    if (m_container.empty())
-        return false;
-
-    m_container.clear();
-
-    return true;
-}
-
-void Chunk::Insert(const GameObject::Ptr& ptr) {
-    m_container.insert(ptr);
-}
-
-void Chunk::Erase(const Framework::Helper::GameObject::Ptr &ptr) {
-    m_container.erase(ptr);
-}
-
-uint32_t Chunk::GetContainerSize() const {
-    return static_cast<uint32_t>(m_container.size());
-}
-
 bool Chunk::ApplyOffset() {
     return true;
 }
 
-bool Chunk::Load() {
+bool Chunk::Load(const Xml::Node& xml) {
+    for (const auto& gameObjectXml : xml.TryGetNodes()) {
+        m_observer->m_scene->Instance(gameObjectXml);
+    }
+
     m_loadState = LoadState::Loaded;
+    Access(0.f);
+
     return true;
 }
 
 void Chunk::Reload() {
 
+}
+
+Xml::Document Chunk::Save() const {
+    /// scene already locked
+    const auto& container = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+    if (container.empty())
+        return Xml::Document::Empty();
+
+    auto document = Xml::Document::New();
+
+    auto&& chunkXml = document.Root().AppendChild("Chunk");
+    chunkXml.AppendAttribute(m_position);
+
+    for (const auto& gameObject : container) {
+        if (gameObject.LockIfValid()) {
+            chunkXml.AppendChild(gameObject->Save(SAVABLE_FLAG_ECS_NO_ID).DocumentElement());
+            gameObject.Unlock();
+        }
+    }
+
+    return document;
 }
 
 Chunk::~Chunk() = default;

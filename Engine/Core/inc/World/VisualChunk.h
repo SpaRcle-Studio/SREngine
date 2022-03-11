@@ -36,7 +36,7 @@ namespace Framework::Core::World {
         void OnExit() override;
         void OnEnter() override;
         bool Unload() override;
-        bool Load() override;
+        bool Load(const Xml::Node& xml) override;
 
         void Update(float_t dt) override;
 

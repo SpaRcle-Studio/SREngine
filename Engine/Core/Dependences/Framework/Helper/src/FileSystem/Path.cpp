@@ -173,11 +173,20 @@ namespace Framework::Helper {
         return m_path + "." + ext;
     }
 
-    bool Path::Make() const {
+    bool Path::Make(Type type) const {
         if (m_path.empty())
             return false;
 
-        return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+        switch (type) {
+            default:
+                SRAssert(false);
+                SR_FALLTHROUGH;
+            case Type::Undefined:
+            case Type::File:
+                return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+            case Type::Folder:
+                return FileSystem::CreatePath(m_path);
+        }
     }
 
     Path& Path::operator=(const Path& path) = default;

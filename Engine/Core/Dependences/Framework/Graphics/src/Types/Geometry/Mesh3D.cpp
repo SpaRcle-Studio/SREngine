@@ -132,12 +132,16 @@ void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
     }
 }
 
-Xml::Document Mesh3D::Save() const {
+Xml::Document Mesh3D::Save(SavableFlags flags) const {
     auto doc = Xml::Document::New();
     auto root = doc.Root().AppendChild("Mesh3D");
 
     root.AppendAttribute("Enabled", IsEnabled());
-    root.AppendAttribute("EntityId", GetEntityId());
+
+    if (!(flags & SAVABLE_FLAG_ECS_NO_ID)) {
+        root.AppendAttribute("EntityId", GetEntityId());
+    }
+
     root.AppendAttribute("Type", EnumMeshTypeToString(m_type).c_str());
 
     root.AppendChild("Path").AppendAttribute("Value", GetPath());

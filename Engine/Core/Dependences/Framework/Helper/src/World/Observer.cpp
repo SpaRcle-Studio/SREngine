@@ -53,6 +53,8 @@ Math::Unit Framework::Helper::World::AddOffset(const Unit &value, const Unit &of
     return result;
 }
 
+
+
 Math::IVector3 Framework::Helper::World::MakeChunk(const IVector3 &rawChunkPos, int32_t width) {
     Math::IVector3 chunk = rawChunkPos;
 
@@ -113,5 +115,14 @@ Offset Observer::MathNeighbour(const IVector3 &offset) {
 
     const auto chunk = AddOffset(m_chunk, offset);
     return { AddOffset(m_region, region / m_regionWidth), MakeChunk(chunk, m_regionWidth) };
+}
+
+Math::IVector3 Observer::WorldPosToChunkPos(const Math::FVector3& position) {
+    const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
+
+    return AddOffset(
+            position.Singular(Math::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<int>() / chunkSize,
+            m_offset.m_chunk
+    );
 }
 

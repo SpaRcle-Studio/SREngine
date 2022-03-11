@@ -28,9 +28,9 @@ namespace Framework::Graphics::GUI {
             }
             else
                 Draw();
-
-            ImGui::End();
         }
+
+        ImGui::End();
     }
 
     void Widget::TextCenter(const std::string &text) const {

@@ -13,11 +13,13 @@
 #include <Math/Vector4.h>
 #include <Math/Vector3.h>
 #include <Math/Vector2.h>
+#include <Utils/NonCopyable.h>
 
 namespace Framework::Helper::Xml {
     class Node;
 
     class Attribute;
+    class Document;
 
     static int32_t g_xml_last_error = 0;
 
@@ -66,6 +68,7 @@ namespace Framework::Helper::Xml {
         [[nodiscard]] int32_t ToInt(int32_t def) const;
         [[nodiscard]] uint32_t ToUInt(uint32_t def) const;
         [[nodiscard]] int64_t ToInt64(int64_t def) const;
+        [[nodiscard]] uint64_t ToUInt64(uint64_t def) const;
         [[nodiscard]] float_t ToFloat(float_t def) const;
         [[nodiscard]] bool ToBool(bool def) const;
     };
@@ -105,6 +108,8 @@ namespace Framework::Helper::Xml {
 
             return m_node.name();
         }
+
+        [[nodiscard]] Document ToDocument() const;
 
         [[nodiscard]] Attribute GetAttribute(const std::string &name) const {
             if (!m_valid) {
@@ -191,6 +196,15 @@ namespace Framework::Helper::Xml {
 
                 return vector2;
             }
+            else if constexpr (std::is_same<T, Helper::Math::IVector3>()) {
+                Helper::Math::IVector3 vector3;
+
+                vector3.x = GetAttribute("x").ToInt();
+                vector3.y = GetAttribute("y").ToInt();
+                vector3.z = GetAttribute("z").ToInt();
+
+                return vector3;
+            }
             else
                 static_assert("Unknown type!");
         }
@@ -214,7 +228,16 @@ namespace Framework::Helper::Xml {
                 hasErrors |= AppendAttribute("x", value.x);
                 hasErrors |= AppendAttribute("y", value.y);
             }
+            else if constexpr (std::is_same<T, Helper::Math::IVector2>()) {
+                hasErrors |= AppendAttribute("x", value.x);
+                hasErrors |= AppendAttribute("y", value.y);
+            }
             else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
+                hasErrors |= AppendAttribute("x", value.x);
+                hasErrors |= AppendAttribute("y", value.y);
+                hasErrors |= AppendAttribute("z", value.z);
+            }
+            else if constexpr (std::is_same<T, Helper::Math::IVector3>()) {
                 hasErrors |= AppendAttribute("x", value.x);
                 hasErrors |= AppendAttribute("y", value.y);
                 hasErrors |= AppendAttribute("z", value.z);
@@ -293,11 +316,24 @@ namespace Framework::Helper::Xml {
 
     };
 
-    class Document {
+    class Document : public NonCopyable {
     public:
         Document() {
             m_document = {};
             m_valid = false;
+        }
+
+        Document(Document&& document) noexcept
+            : m_document(std::exchange(document.m_document, {}))
+            , m_valid(std::exchange(document.m_valid, {}))
+        { }
+
+        ~Document() override = default;
+
+        Document& operator=(Document&& document) noexcept {
+            m_document = std::exchange(document.m_document, {});
+            m_valid = std::exchange(document.m_valid, {});
+            return *this;
         }
 
     private:
@@ -337,6 +373,13 @@ namespace Framework::Helper::Xml {
         [[nodiscard]] std::string Dump() const;
 
         [[nodiscard]] Node Root() const {
+            return Node(m_document.root());
+        }
+
+        [[nodiscard]] Node TryRoot() const {
+            if (!Valid())
+                return Node();
+
             return Node(m_document.root());
         }
 

@@ -199,6 +199,10 @@ void Framework::Engine::Await() {
                                 SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
                     }
 
+                    if (Input::GetKeyDown(KeyCode::F3)) {
+                        Reload();
+                    }
+
                     if (Input::GetKeyDown(KeyCode::F2)) {
                         m_editor->Enable(!m_editor->Enabled());
                     }

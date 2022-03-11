@@ -57,8 +57,9 @@ namespace Framework::Helper::World {
         void SetScope(int32_t value) { m_scope = value; }
         void SetShiftDist(int32_t value) { m_shiftDistance = value; }
         Offset MathNeighbour(const Math::IVector3& offset);
+        Math::IVector3 WorldPosToChunkPos(const Math::FVector3& position);
 
-        int32_t GetScope() const { return m_scope; }
+        [[nodiscard]] int32_t GetScope() const { return m_scope; }
 
         [[nodiscard]] Types::SafePtr<Scene> GetScene() const { return m_scene; }
 

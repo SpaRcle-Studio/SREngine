@@ -322,28 +322,32 @@ bool GameObject::RemoveComponent(Component *component) {
     return false;
 }
 
-Xml::Document GameObject::Save() const {
+Xml::Document GameObject::Save(SavableFlags flags) const {
     auto doc = Xml::Document::New();
     auto root = doc.Root().AppendChild("GameObject");
 
     root.AppendAttribute("Name", m_name);
-    root.AppendAttribute("EntityId", GetEntityId());
+
+    if (!(flags & Helper::SAVABLE_FLAG_ECS_NO_ID)) {
+        root.AppendAttribute("EntityId", GetEntityId());
+    }
+
     root.AppendAttributeDef("Tag", m_tag, "Untagged");
     root.AppendAttributeDef("Enabled", IsEnabled(), true);
 
-    root.AppendChild(m_transform->Save().DocumentElement());
+    root.AppendChild(m_transform->Save(flags).DocumentElement());
 
     if (!m_components.empty()) {
         auto components = root.AppendChild("Components");
         for (const auto &comp : m_components) {
-            components.AppendChild(comp->Save().DocumentElement());
+            components.AppendChild(comp->Save(flags).DocumentElement());
         }
     }
 
     if (!m_children.empty()) {
         auto children = root.AppendChild("Children");
         for (const auto &child : m_children)
-            children.AppendChild(child->Save().DocumentElement());
+            children.AppendChild(child->Save(flags).DocumentElement());
     }
 
     return doc;

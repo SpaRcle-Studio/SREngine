@@ -547,7 +547,7 @@ void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene
 
         if (auto&& chunk = scene->GetCurrentChunk()) {
             ImGui::Separator();
-            auto size = static_cast<int32_t>(chunk->GetContainerSize());
+            int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
             ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
         }
 
@@ -740,15 +740,17 @@ bool GUISystem::BeginMenuBar() {
 
                     scene->SetName(sceneName);
 
-                    if (scene->Save(folder)) {
+                    if (scene->SaveAt(folder)) {
                         Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
-                    } else {
-                        Helper::Debug::Error("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
+                    }
+                    else {
+                        SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
                     }
                 }
                 scene.Unlock();
-            } else {
-                Helper::Debug::Warn("GUISystem::BeginMenuBar() : scene isn't valid!");
+            }
+            else {
+                SR_WARN("GUISystem::BeginMenuBar() : scene isn't valid!");
             }
         }
 

@@ -118,21 +118,23 @@ int main(int argc, char **argv) {
         Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
     }
 
-    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResPath().Concat("/Configs/Environment.config")); env == "OpenGL"){
+    const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
+    const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
+
+    if (envName == "OpenGL"){
         Environment::Set(new OpenGL());
     }
-    else if (env == "Vulkan") {
+    else if (envName == "Vulkan") {
         Environment::Set(new Vulkan());
     }
-    else if (env.empty()) {
-        SR_ERROR("System error: file \"Resources/Configs/Environment.config\" does not exist!\n\t"
-                             "Please, create it and write the name of the environment there!");
+    else if (envName.empty()) {
+        SR_ERROR("System error: file \"Resources/Configs/Environment.xml\" does not exist!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -1500;
     }
     else {
-        SR_ERROR("System error: unknown environment! \"" + env + "\" does not support!");
+        SR_ERROR("System error: unknown environment! \"" + envName + "\" does not support!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -2000;

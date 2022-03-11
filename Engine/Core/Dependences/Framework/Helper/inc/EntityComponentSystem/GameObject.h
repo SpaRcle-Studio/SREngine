@@ -65,7 +65,7 @@ namespace Framework::Helper {
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
 
-        SR_NODISCARD Xml::Document Save() const override;
+        SR_NODISCARD Xml::Document Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
         Math::FVector3 GetBarycenter();

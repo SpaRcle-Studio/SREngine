@@ -11,6 +11,13 @@
 #include <Xml.h>
 
 namespace Framework::Helper {
+    typedef uint64_t SavableFlags;
+
+    enum SavableFlagBits {
+        SAVABLE_FLAG_NONE = 1 << 0,
+        SAVABLE_FLAG_ECS_NO_ID = 1 << 1,
+    };
+
     class ISavable {
     protected:
         ISavable();
@@ -23,7 +30,9 @@ namespace Framework::Helper {
         bool m_isLoaded   = false;
 
     public:
-        [[nodiscard]] virtual Xml::Document Save() const { return Xml::Document::New(); }
+        [[nodiscard]] virtual Xml::Document Save(SavableFlags flags) const {
+            return Xml::Document::New();
+        }
 
     };
 }

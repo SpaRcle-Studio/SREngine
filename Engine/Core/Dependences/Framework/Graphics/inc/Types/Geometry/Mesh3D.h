@@ -45,7 +45,7 @@ namespace Framework::Graphics::Types {
         void DrawVulkan() override;
         void DrawOpenGL() override;
 
-        [[nodiscard]] Helper::Xml::Document Save() const override;
+        [[nodiscard]] Helper::Xml::Document Save(SavableFlags flags) const override;
 
     private:
         std::vector<VertexType> m_vertices = std::vector<VertexType>();

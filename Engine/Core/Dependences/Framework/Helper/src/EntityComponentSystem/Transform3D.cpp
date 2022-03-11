@@ -172,7 +172,7 @@ void Transform3D::RotateAroundParent(Math::FVector3 eulers) {
     }
 }
 
-Xml::Document Transform3D::Save() const {
+Xml::Document Transform3D::Save(SavableFlags flags) const {
     auto doc = Xml::Document::New();
     auto root = doc.Root().AppendChild("Transform3D");
 

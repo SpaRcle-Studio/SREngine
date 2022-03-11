@@ -31,13 +31,18 @@ namespace Framework::Core::World {
             const auto&& tag = gameObjectXml.TryGetAttribute("Tag").ToString("Untagged");
             const auto&& enabled = gameObjectXml.TryGetAttribute("Enabled").ToBool(true);
             const auto&& name = gameObjectXml.GetAttribute("Name").ToString();
-            const auto&& id = gameObjectXml.GetAttribute("EntityId").ToUInt64();
+            const auto&& id = gameObjectXml.TryGetAttribute("EntityId").ToUInt64(UINT64_MAX);
 
             GameObject::Ptr gameObject;
 
-            EntityManager::Instance().GetReserved(id, [&gameObject, name, this]() -> Entity* {
-                return (gameObject = Scene::Instance(name)).DynamicCast<Entity*>();
-            });
+            if (id == UINT64_MAX) {
+                gameObject = Scene::Instance(name);
+            }
+            else {
+                EntityManager::Instance().GetReserved(id, [&gameObject, name, this]() -> Entity * {
+                    return (gameObject = Scene::Instance(name)).DynamicCast<Entity *>();
+                });
+            }
 
             if (!gameObject.Valid())
                 return gameObject;

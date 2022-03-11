@@ -113,9 +113,9 @@ bool Framework::Core::World::VisualChunk::Unload() {
     return Chunk::Unload();
 }
 
-bool Framework::Core::World::VisualChunk::Load() {
+bool Framework::Core::World::VisualChunk::Load(const Xml::Node& xml) {
     SetLoadVisible(true);
-    return Chunk::Load();
+    return Chunk::Load(xml);
 }
 
 bool Framework::Core::World::VisualChunk::ApplyOffset() {

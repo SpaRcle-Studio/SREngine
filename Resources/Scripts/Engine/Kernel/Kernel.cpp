@@ -118,17 +118,25 @@ void LoadNemesis() {
     auto character = scene->Instance("Nemesis");
 
     for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
-        Mesh* mesh = fbx_meshes[i];
+        Mesh *mesh = fbx_meshes[i];
 
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
 
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->SetMaterial(materials[i]);
-        auto object = scene->Instance(mesh->GetGeometryName());
-        object->AddComponent(DynamicCastMeshToComponent(mesh));
+    }
 
-        character->AddChild(object);
+    if (character.LockIfValid()) {
+        for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+            Mesh *mesh = fbx_meshes[i];
+
+            auto object = scene->Instance(mesh->GetGeometryName());
+            object->AddComponent(DynamicCastMeshToComponent(mesh));
+
+            character->AddChild(object);
+        }
+        character.Unlock();
     }
     ///character->GetTransform()->Rotate(FVector3(-90, 0, 0));
 }

@@ -464,7 +464,7 @@ void Framework::Helper::Transform::OnParentSet(Framework::Helper::Transform *par
     }
 }
 
-Framework::Helper::Xml::Document Framework::Helper::Transform::Save() const {
+Framework::Helper::Xml::Document Framework::Helper::Transform::Save(SavableFlags flags) const {
     auto doc = Xml::Document::New();
     auto root = doc.Root().AppendChild("Transform");
 

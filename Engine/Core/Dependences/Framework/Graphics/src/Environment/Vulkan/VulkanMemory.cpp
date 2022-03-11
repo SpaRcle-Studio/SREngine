@@ -134,7 +134,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateUBO(uint32_t UB
             m_UBOs[i] = EvoVulkan::Types::VmaBuffer::Create(
                     m_kernel->GetAllocator(),
                     VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-                    VMA_MEMORY_USAGE_CPU_ONLY,
+                    VMA_MEMORY_USAGE_CPU_TO_GPU,
                     UBOSize);
 
             return (int32_t)i;
@@ -177,7 +177,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t bu
             m_VBOs[i] = EvoVulkan::Types::VmaBuffer::Create(
                     m_kernel->GetAllocator(),
                     VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-                    VMA_MEMORY_USAGE_CPU_ONLY,
+                    VMA_MEMORY_USAGE_CPU_TO_GPU,
                     buffSize, data);
 
             return (int32_t)i;
@@ -195,7 +195,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t bu
             m_IBOs[i] = EvoVulkan::Types::VmaBuffer::Create(
                     m_kernel->GetAllocator(),
                     VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-                    VMA_MEMORY_USAGE_CPU_ONLY,
+                    VMA_MEMORY_USAGE_CPU_TO_GPU,
                     buffSize, data);
 
             return (int32_t)i;

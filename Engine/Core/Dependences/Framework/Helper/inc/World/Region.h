@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <functional>
 #include <World/Observer.h>
+#include <Xml.h>
 
 namespace Framework::Helper {
     class GameObject;
@@ -20,6 +21,7 @@ namespace Framework::Helper {
         class Observer;
 
         typedef std::unordered_map<Math::IVector3, Chunk*> Chunks;
+        typedef std::unordered_map<Math::IVector3, Xml::Document> CachedChunks;
 
         #define SRRegionAllocArgs Framework::Helper::World::Observer* observer, uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector2& position
         #define SRRegionAllocVArgs observer, width, chunkSize, position
@@ -38,6 +40,7 @@ namespace Framework::Helper {
 
         public:
             virtual void Update(float_t dt);
+            virtual bool Load();
             virtual bool Unload();
             virtual void OnEnter();
             virtual void OnExit();
@@ -56,6 +59,8 @@ namespace Framework::Helper {
             [[nodiscard]] Math::IVector2 GetPosition() const { return m_position; }
             [[nodiscard]] Math::IVector2 GetWorldPosition() const;
 
+            SR_NODISCARD Xml::Document Save() const;
+
         public:
             typedef std::function<Region*(SRRegionAllocArgs)> Allocator;
 
@@ -68,6 +73,7 @@ namespace Framework::Helper {
         protected:
             Observer* m_observer;
             Chunks m_loadedChunks;
+            CachedChunks m_cached;
             uint32_t m_width;
             Math::IVector2 m_chunkSize;
             Math::IVector2 m_position;

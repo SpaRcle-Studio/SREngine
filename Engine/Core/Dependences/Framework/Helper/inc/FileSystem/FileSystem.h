@@ -33,8 +33,8 @@ public:
         if (pos != std::string::npos) {
             auto dir = path.substr(0, pos);
 
-            if (!CreateFolder(dir) || !CreatePath(path, pos + 1))
-                return false;
+            CreateFolder(dir);
+            CreatePath(path, pos + 1);
         }
 
         return true;

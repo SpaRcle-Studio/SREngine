@@ -46,7 +46,7 @@ namespace Framework::Core::GUI {
 
             if (auto&& chunk = m_scene->GetCurrentChunk()) {
                 ImGui::Separator();
-                auto size = static_cast<int32_t>(chunk->GetContainerSize());
+                int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
                 ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
             }
 

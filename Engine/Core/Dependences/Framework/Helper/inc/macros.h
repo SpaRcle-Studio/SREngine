@@ -52,6 +52,7 @@
 #define SR_CONSTEXPR constexpr
 #define SR_FORCE_INLINE __forceinline
 #define SR_NODISCARD [[nodiscard]]
+#define SR_FALLTHROUGH [[fallthrough]]
 #define SR_INLINE inline
 #define SR_NULL 0
 

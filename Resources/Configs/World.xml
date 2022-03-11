@@ -3,11 +3,11 @@
     <DefaultChunkWidth Value="10"/>
     <DefaultChunkHeight Value="50"/>
     <DefaultRegionWidth Value="10"/>
-    <DefaultShiftDistance Value="10"/>
+    <DefaultShiftDistance Value="20"/>
     <DefaultScope Value="10"/>
 
     <ScopeEnabled Value="true"/>
     <ShiftEnabled Value="true"/>
 
-    <UpdateContainer Value="false"/>
+    <UpdateContainer Value="true"/>
 </Configs>

@@ -15,11 +15,18 @@ void Region::Update(float_t dt) {
 
         pChunk->Update(dt);
 
-        if (pChunk->IsAlive())
+        if (pChunk->IsAlive()) {
             ++pIt;
+        }
         else {
+            if (auto&& doc = pChunk->Save(); doc.Valid()) {
+                m_cached[pIt->first] = std::move(doc);
+            }
+
             pChunk->Unload();
+
             delete pChunk;
+
             pIt = m_loadedChunks.erase(pIt);
         }
     }
@@ -28,13 +35,25 @@ void Region::Update(float_t dt) {
 Chunk* Region::GetChunk(const Framework::Helper::Math::IVector3 &position) {
     SRAssert(position.XZ() <= static_cast<int32_t>(m_width) && position.XZ() > 0);
 
-    if (auto&& it = m_loadedChunks.find(position); it == m_loadedChunks.end()) {
-        auto chunk = m_loadedChunks[position] = Chunk::Allocate(m_observer, this, position, m_chunkSize);
-        chunk->Load();
-        return chunk;
+    Chunk* pChunk = nullptr;
+
+    if (auto&& pChunkIt = m_loadedChunks.find(position); pChunkIt == m_loadedChunks.end()) {
+        pChunk = m_loadedChunks[position] = Chunk::Allocate(m_observer, this, position, m_chunkSize);
     }
-    else
-        return it->second;
+    else {
+        pChunk = pChunkIt->second;
+    }
+
+    if (pChunk && pChunk->GetState() == Chunk::LoadState::Unload) {
+        if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
+            pChunk->Load(pCacheIt->second.DocumentElement());
+            m_cached.erase(pCacheIt);
+        } else {
+            pChunk->Load(Xml::Node());
+        }
+    }
+
+    return pChunk;
 }
 
 Region::~Region() {
@@ -43,14 +62,21 @@ Region::~Region() {
     }
 
     m_loadedChunks.clear();
+    m_cached.clear();
 }
 
 bool Region::Unload() {
-    Helper::Debug::Log("Region::Unload() : unloading region at " + m_position.ToString());
+    SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
 
     for (auto&& [position, chunk] : m_loadedChunks) {
+        if (auto&& doc = chunk->Save(); doc.Valid()) {
+            m_cached[position] = std::move(doc);
+        }
+
         chunk->Unload();
     }
+
+    m_loadedChunks.clear();
 
     return true;
 }
@@ -101,17 +127,52 @@ void Region::ApplyOffset() {
 }
 
 Chunk *Region::GetChunk(const FVector3 &position) {
-    const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
-
-    const auto targetPos = AddOffset(
-            position.Singular(Math::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<int>() / chunkSize,
-            -m_observer->m_offset.m_chunk
-    );
-
-    return GetChunk(MakeChunk(targetPos, m_width));
+    return GetChunk(MakeChunk(m_observer->WorldPosToChunkPos(position), m_width));
 }
 
 void Region::Reload() {
     for (auto&& [position, pChunk] : m_loadedChunks)
         pChunk->Reload();
 }
+
+Xml::Document Region::Save() const {
+    auto document = Xml::Document::New();
+
+    auto&& regionXml = document.Root().AppendChild("Region");
+    regionXml.AppendAttribute(m_position);
+
+    bool hasValid = !m_cached.empty();
+
+    for (const auto& [position, pChunk] : m_loadedChunks) {
+        if (const auto&& chunkDoc = pChunk->Save(); chunkDoc.Valid()) {
+            hasValid = true;
+            regionXml.AppendChild(chunkDoc.DocumentElement());
+        }
+    }
+
+    for (const auto& [position, cache] : m_cached) {
+        regionXml.AppendChild(cache.DocumentElement());
+    }
+
+    if (hasValid) {
+        return document;
+    }
+    else
+        return Xml::Document::Empty();
+}
+
+bool Region::Load() {
+    SR_LOG("Scene::Update() : loading region at " + m_position.ToString());
+
+    const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("reg");
+    if (path.Exists()) {
+        auto&& doc = Xml::Document::Load(path);
+        for (const auto& chunk : doc.Root().GetNode("Region").GetNodes()) {
+            const auto&& position = chunk.GetAttribute<Math::IVector3>();
+            m_cached[position] = chunk.ToDocument();
+        }
+    }
+
+    return true;
+}
+
