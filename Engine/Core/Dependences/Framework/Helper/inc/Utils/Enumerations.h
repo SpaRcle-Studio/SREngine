@@ -36,7 +36,7 @@
     }
 
 #define SR_ENUM_CLASS(enumName, ...)                                                             \
-    enum class enumName {                                                                        \
+    enum class enumName : int32_t {                                                              \
         __VA_ARGS__                                                                              \
     };                                                                                           \
     namespace SR_CODEGEN_ENUM {                                                                  \

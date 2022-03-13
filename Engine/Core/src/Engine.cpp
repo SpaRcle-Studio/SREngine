@@ -324,6 +324,7 @@ bool Framework::Engine::LoadMainScript() {
 
 bool Framework::Engine::CloseScene() {
     return m_scene.AutoFree([](World::Scene* scene) {
+        scene->Save();
         scene->Destroy();
         scene->Free();
     });

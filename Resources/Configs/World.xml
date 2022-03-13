@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Configs>
-    <DefaultChunkWidth Value="10"/>
-    <DefaultChunkHeight Value="50"/>
-    <DefaultRegionWidth Value="10"/>
+    <DefaultChunkWidth Value="15"/>
+    <DefaultChunkHeight Value="20"/>
+    <DefaultRegionWidth Value="15"/>
     <DefaultShiftDistance Value="20"/>
     <DefaultScope Value="10"/>
 

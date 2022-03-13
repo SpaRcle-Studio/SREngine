@@ -152,7 +152,7 @@ void Framework::Helper::World::Scene::DeSelectAll() {
         }
     }
 
-    this->m_selectedGameObjects.clear();
+    m_selectedGameObjects.clear();
 }
 
 Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::World::Scene::FindByComponent(const std::string &name) {
@@ -180,6 +180,22 @@ bool Framework::Helper::World::Scene::Save() {
     return SaveAt(m_path);
 }
 
+void Scene::SaveRegion(Region* pRegion) const {
+    const auto regions = m_path.Concat(std::string(m_name)).Concat("regions");
+
+    regions.Make(Path::Type::Folder);
+
+    const auto& regPath = regions.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
+    if (auto&& regionMarshal = pRegion->Save(); regionMarshal.Valid()) {
+        regionMarshal.Save(regPath);
+        /// debug: regionMarshal.Save(regPath.ConcatExt("json"), MarshalSaveMode::Json);
+    }
+    else if (regPath.Exists()) {
+        FileSystem::Delete(regPath.CStr());
+        /// debug: FileSystem::Delete(regPath.ConcatExt("json").CStr());
+    }
+}
+
 bool Framework::Helper::World::Scene::SaveAt(const std::string& folder) {
     m_path = folder;
 
@@ -201,20 +217,12 @@ bool Framework::Helper::World::Scene::SaveAt(const std::string& folder) {
         }
     }
 
-    const auto scene = m_path.Concat(std::string(m_name));
-    const auto regions = scene.Concat("regions");
-
-    regions.Make(Path::Type::Folder);
 
     for (auto&& [position, pRegion] : m_regions) {
-        const auto& regPath = regions.Concat(position.ToString()).ConcatExt("reg");
-        if (auto&& regionXml = pRegion->Save(); regionXml.Valid()) {
-            regionXml.Save(regPath);
-        }
-        else if (regPath.Exists()) {
-            FileSystem::Delete(regPath.CStr());
-        }
+        SaveRegion(pRegion);
     }
+
+    const auto scene = m_path.Concat(std::string(m_name));
 
     return xml.Save(scene.Concat("main.scene"));
 }
@@ -240,9 +248,10 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
 void Framework::Helper::World::Scene::Update(float_t dt) {
     if (!m_observer->m_target.Valid()) {
         if (!m_regions.empty()) {
-            for (auto&& [pos, region] : m_regions) {
-                region->Unload();
-                delete region;
+            for (auto&& [pos, pRegion] : m_regions) {
+                pRegion->Unload();
+                SaveRegion(pRegion);
+                delete pRegion;
             }
 
             m_regions.clear();
@@ -311,6 +320,7 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
             }
             else {
                 pRegion->Unload();
+                SaveRegion(pRegion);
                 delete pRegion;
                 pIt = m_regions.erase(pIt);
             }
@@ -319,8 +329,6 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
 
     if (m_shiftEnabled)
         CheckShift(observerPos.Cast<int>() / chunkSize);
-
-    Save(); // TODO: it's test!
 }
 
 Framework::Helper::World::Scene::Scene(const std::string &name)
@@ -335,7 +343,11 @@ Framework::Helper::World::Scene::Scene(const std::string &name)
 void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::World::Offset &offset) {
     const auto prevOffset = m_observer->m_offset;
     const auto region = (offset.m_chunk / static_cast<int32_t>(m_regionWidth)).ZeroAxis(Math::AXIS_Y);
-    m_observer->m_offset = World::Offset(offset.m_region + region.XZ(), offset.m_chunk - region * m_regionWidth);
+
+    m_observer->m_offset = World::Offset(
+            offset.m_region + region.XZ(),
+            offset.m_chunk - region * m_regionWidth
+    );
 
     SR_LOG("Scene::SetWorldOffset() : set new offset " + m_observer->m_offset.ToString());
 
@@ -401,6 +413,15 @@ void Scene::CheckShift(const IVector3 &chunk) {
     }
     else if (chunk.x < -shift) {
         offset.x += abs(chunk.x);
+        SetWorldOffset(Offset({ 0, 0 }, offset));
+    }
+
+    if (chunk.y > shift) {
+        offset.y -= abs(chunk.y);
+        SetWorldOffset(Offset({ 0, 0 }, offset));
+    }
+    else if (chunk.y < -shift) {
+        offset.y += abs(chunk.y);
         SetWorldOffset(Offset({ 0, 0 }, offset));
     }
 
@@ -480,6 +501,7 @@ GameObjects Scene::GetGameObjectsAtChunk(const IVector2 &region, const IVector3 
 
     return m_tensor.at(key);
 }
+
 
 
 

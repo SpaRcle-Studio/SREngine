@@ -94,8 +94,10 @@ Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
     }
 
     if (mesh) {
-        mesh->SetId(resourceId);
+        /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
+        /// и другой поток может его подхватить
         mesh->m_meshId = id;
+        mesh->SetId(resourceId);
     }
 
     SRAssert(mesh);
@@ -177,8 +179,10 @@ ret:
     }
 
     for (uint32_t i = 0; i < static_cast<uint32_t>(meshes.size()); ++i) {
-        meshes[i]->SetId(Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), i, localPath.c_str()));
+        /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
+        /// и другой поток может его подхватить
         meshes[i]->m_meshId = i;
+        meshes[i]->SetId(Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), i, localPath.c_str()));
     }
 
     return meshes;
@@ -249,6 +253,7 @@ IResource *Mesh::Copy(IResource* destination) const {
     mesh->m_scale      = m_scale;
     mesh->m_skew       = m_skew;
 
+    mesh->m_meshId        = m_meshId;
     mesh->m_isCalculated  = m_isCalculated;
     mesh->m_modelMat      = m_modelMat;
 

@@ -87,7 +87,7 @@ namespace Framework::Helper::World {
         virtual void BeginSync() = 0;
         virtual void EndSync() = 0;
         virtual bool TrySync() = 0;
-        virtual GameObject::Ptr Instance(const Xml::Node& gameObjectXml) = 0;
+        virtual GameObject::Ptr Instance(const MarshalDecodeNode& node) = 0;
 
         void SetObserver(const GameObject::Ptr& observer) { m_observer->m_target = observer; }
 
@@ -124,6 +124,7 @@ namespace Framework::Helper::World {
         void CheckShift(const Math::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
+        void SaveRegion(Region* pRegion) const;
 
     private:
         SR_INLINE static Allocator   g_allocator           = Allocator();

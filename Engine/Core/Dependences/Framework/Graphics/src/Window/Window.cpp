@@ -714,6 +714,8 @@ bool Framework::Graphics::Window::SyncFreeResources() {
                 Helper::Debug::Terminate();
                 break;
             }
+
+            Helper::Types::Thread::Sleep(50);
         }
 
         if (Material::GetDefault())

@@ -24,6 +24,7 @@
 #include <Utils/Features.h>
 #include <GUI/NodeManager.h>
 #include <FbxLoader/Debug.h>
+#include <Types/Marshal.h>
 
 using namespace Framework;
 
@@ -73,6 +74,8 @@ int main(int argc, char **argv) {
         ResourceManager::Instance().Init(exe + "/../../Resources");
     else
         ResourceManager::Instance().Init(folder);
+
+    RuntimeTest::MarshalRunRuntimeTest();
 
     Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
 

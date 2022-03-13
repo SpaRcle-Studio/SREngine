@@ -19,8 +19,8 @@ void Region::Update(float_t dt) {
             ++pIt;
         }
         else {
-            if (auto&& doc = pChunk->Save(); doc.Valid()) {
-                m_cached[pIt->first] = std::move(doc);
+            if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
+                m_cached[pIt->first] = std::move(marshal);
             }
 
             pChunk->Unload();
@@ -46,10 +46,11 @@ Chunk* Region::GetChunk(const Framework::Helper::Math::IVector3 &position) {
 
     if (pChunk && pChunk->GetState() == Chunk::LoadState::Unload) {
         if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
-            pChunk->Load(pCacheIt->second.DocumentElement());
+            pChunk->Load(pCacheIt->second.Decode());
             m_cached.erase(pCacheIt);
-        } else {
-            pChunk->Load(Xml::Node());
+        }
+        else {
+            pChunk->Load(MarshalDecodeNode());
         }
     }
 
@@ -68,12 +69,12 @@ Region::~Region() {
 bool Region::Unload() {
     SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
 
-    for (auto&& [position, chunk] : m_loadedChunks) {
-        if (auto&& doc = chunk->Save(); doc.Valid()) {
-            m_cached[position] = std::move(doc);
+    for (auto&& [position, pChunk] : m_loadedChunks) {
+        if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
+            m_cached[position] = std::move(marshal);
         }
 
-        chunk->Unload();
+        pChunk->Unload();
     }
 
     m_loadedChunks.clear();
@@ -135,41 +136,49 @@ void Region::Reload() {
         pChunk->Reload();
 }
 
-Xml::Document Region::Save() const {
-    auto document = Xml::Document::New();
-
-    auto&& regionXml = document.Root().AppendChild("Region");
-    regionXml.AppendAttribute(m_position);
+MarshalEncodeNode Region::Save() const {
+    MarshalEncodeNode marshal("Region");
+    marshal.Append(m_position);
 
     bool hasValid = !m_cached.empty();
 
     for (const auto& [position, pChunk] : m_loadedChunks) {
-        if (const auto&& chunkDoc = pChunk->Save(); chunkDoc.Valid()) {
+        if (const auto&& chunkMarshal = pChunk->Save(); chunkMarshal.Valid()) {
             hasValid = true;
-            regionXml.AppendChild(chunkDoc.DocumentElement());
+            marshal.Append(chunkMarshal);
         }
     }
 
     for (const auto& [position, cache] : m_cached) {
-        regionXml.AppendChild(cache.DocumentElement());
+        if (cache.Valid()) {
+            marshal.Append(cache);
+        }
+        else {
+            SRAssert2(false, "invalid cache!");
+        }
     }
 
     if (hasValid) {
-        return document;
+        return marshal;
     }
     else
-        return Xml::Document::Empty();
+        return MarshalEncodeNode();
 }
 
 bool Region::Load() {
     SR_LOG("Scene::Update() : loading region at " + m_position.ToString());
 
-    const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("reg");
+    const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
     if (path.Exists()) {
-        auto&& doc = Xml::Document::Load(path);
-        for (const auto& chunk : doc.Root().GetNode("Region").GetNodes()) {
+        auto&& decoded = MarshalDecodeNode::Load(path);
+        for (const auto& chunk : decoded.GetNodes()) {
             const auto&& position = chunk.GetAttribute<Math::IVector3>();
-            m_cached[position] = chunk.ToDocument();
+            if (auto&& cache = chunk.Encode(); cache.Valid()) {
+                m_cached[position] = std::move(cache);
+            }
+            else {
+                SRAssert2(false, "invalid cache!");
+            }
         }
     }
 

@@ -233,7 +233,7 @@ EXTERN void Start() {
     //LoadMiku();
     //LoadKurumi();
     LoadNemesis();
-    LoadCubes();
+    //LoadCubes();
 }
 
 void CameraMove(float dt) {
@@ -301,12 +301,5 @@ EXTERN void Update(float dt) {
 }
 
 EXTERN void Close() {
-    auto scene = Engine::Instance().GetScene();
-    if (scene.LockIfValid()) {
-        scene.Free([](Scene *scene) {
-            scene->Destroy();
-            scene->Free();
-        });
-        scene.Unlock();
-    }
+    Engine::Instance().CloseScene();
 }

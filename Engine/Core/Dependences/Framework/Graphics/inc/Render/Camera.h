@@ -41,7 +41,9 @@ namespace Framework::Graphics {
 
     public:
         static Camera* Allocate(uint32_t width = 0, uint32_t height = 0);
-        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage);
+        static Component* LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
+            return nullptr;
+        }
 
     public:
         bool Create(Window* window);
@@ -140,7 +142,7 @@ namespace Framework::Graphics {
         volatile float_t      m_pitch             = 0;
         volatile float_t      m_roll              = 0;
 
-        std::atomic<float_t>  m_far               = 200.f;
+        std::atomic<float_t>  m_far               = 500.f;
         std::atomic<float_t>  m_near              = 0.01f;
 
         const PipeLine        m_pipeline          = PipeLine::Unknown;

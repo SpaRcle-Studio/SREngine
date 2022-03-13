@@ -11,10 +11,15 @@
 
 namespace Framework::Helper::Math {
     enum Axis {
-        NONE = 0,
-        AXIS_X = 1,
-        AXIS_Y = 2,
-        AXIS_Z = 3,
+        AXIS_NONE = 1 << 0,
+        AXIS_X    = 1 << 1,
+        AXIS_Y    = 1 << 2,
+        AXIS_Z    = 1 << 3,
+
+        AXIS_XY   = AXIS_X | AXIS_Y,
+        AXIS_XZ   = AXIS_X | AXIS_Z,
+        AXIS_YZ   = AXIS_Y | AXIS_Z,
+        AXIS_XYZ  = AXIS_X | AXIS_Y | AXIS_Z,
     };
 
     template<typename T> struct Vector2 {

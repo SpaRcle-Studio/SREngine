@@ -29,7 +29,7 @@ namespace Framework::Helper {
     class ComponentManager : public Singleton<ComponentManager>, public NonCopyable {
         friend class Singleton<ComponentManager>;
         typedef std::function<void(Component*)> Event;
-        typedef std::function<Component*(const Helper::Xml::Node& xml, const Helper::Types::DataStorage* dataStorage)> Loader;
+        typedef std::function<Component*(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage)> Loader;
     public:
         Component* CreateComponentOfName(const std::string& name);
 
@@ -60,8 +60,8 @@ namespace Framework::Helper {
 
             const auto&& code = typeid(T).hash_code();
 
-            m_loaders.insert(std::make_pair(code, [](const Helper::Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) -> Component* {
-                return T::LoadComponent(xml, dataStorage);
+            m_loaders.insert(std::make_pair(code, [](const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) -> Component* {
+                return T::LoadComponent(node, dataStorage);
             }));
 
             return RegisterComponentImpl(code, StringUtils::BackRead(typeid(T).name(), ':'), constructor);
@@ -77,7 +77,7 @@ namespace Framework::Helper {
             return result;
         }
 
-        Component* Load(const Xml::Node& componentXml);
+        Component* Load(const MarshalDecodeNode& node);
 
         Types::DataStorage* GetContext() { return &m_context; }
 
@@ -124,7 +124,7 @@ namespace Framework::Helper {
         [[nodiscard]] SR_INLINE bool IsSelected() const { return m_isSelected;              }
         [[nodiscard]] SR_INLINE bool IsReady()    const { return m_isActive && m_isEnabled; }
         [[nodiscard]] SR_INLINE std::string GetComponentName() const { return m_name; }
-        [[nodiscard]] SR_INLINE size_t GetId() const { return m_componentId; }
+        [[nodiscard]] SR_INLINE size_t GetComponentId() const { return m_componentId; }
         [[nodiscard]] SR_INLINE Component* BaseComponent() { return this; }
         [[nodiscard]] SR_INLINE GameObject* GetParent() const { return this->m_parent; }
 

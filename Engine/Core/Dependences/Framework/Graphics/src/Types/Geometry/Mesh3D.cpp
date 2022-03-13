@@ -132,35 +132,34 @@ void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
     }
 }
 
-Xml::Document Mesh3D::Save(SavableFlags flags) const {
-    auto doc = Xml::Document::New();
-    auto root = doc.Root().AppendChild("Mesh3D");
+MarshalEncodeNode Mesh3D::Save(SavableFlags flags) const {
+    MarshalEncodeNode marshal("Mesh3D");
 
-    root.AppendAttribute("Enabled", IsEnabled());
+    marshal.AppendDef("Enabled", IsEnabled(), true);
 
     if (!(flags & SAVABLE_FLAG_ECS_NO_ID)) {
-        root.AppendAttribute("EntityId", GetEntityId());
+        marshal.Append("EntityId", static_cast<uint64_t>(GetEntityId()));
     }
 
-    root.AppendAttribute("Type", EnumMeshTypeToString(m_type).c_str());
+    marshal.AppendDef("Type", static_cast<int32_t>(m_type), static_cast<int32_t>(MeshType::Static));
 
-    root.AppendChild("Path").AppendAttribute("Value", GetPath());
-    root.AppendChild("Id").AppendAttribute("Value", m_meshId);
-    root.AppendChild("Inverse").AppendAttribute("Value", IsInverse());
+    marshal.Append("Path", GetPath());
+    marshal.Append("Id", m_meshId);
+    marshal.AppendDef("Inverse", IsInverse(), false);
 
     if (m_shader)
-        root.AppendChild("Shader").AppendAttribute("Name", m_shader->GetName());
+        marshal.Append(MarshalEncodeNode("Shader").Append("Name", m_shader->GetName()));
 
     if (m_material)
-        root.AppendChild("Material").AppendAttribute("Name", m_material->GetResourceId());
+        marshal.Append(MarshalEncodeNode("Material").Append("Name", m_material->GetResourceId()));
 
-    return doc;
+    return marshal;
 }
 
-Component *Mesh3D::LoadComponent(const Xml::Node &xml, const Helper::Types::DataStorage *dataStorage) {
-    const MeshType type = StringToEnumMeshType(xml.GetAttribute("Type").ToString());
-    const auto&& path = xml.GetNode("Path").GetAttribute("Value").ToString();
-    const auto&& id = xml.GetNode("Id").GetAttribute("Value").ToUInt();
+Component *Mesh3D::LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage *dataStorage) {
+    const MeshType type = static_cast<MeshType>(node.GetAttributeDef<int32_t>("Type", static_cast<int32_t>(MeshType::Static)));
+    const auto&& path = node.GetAttribute<std::string>("Path");
+    const auto&& id = node.GetAttribute<uint32_t>("Id");
 
     Render* render = dataStorage->GetPointer<Render>("Render");
 
@@ -172,23 +171,27 @@ Component *Mesh3D::LoadComponent(const Xml::Node &xml, const Helper::Types::Data
     auto&& mesh = Load(path, type, id);
 
     if (mesh) {
-        if (const auto&& shaderXml = xml.TryGetNode("Shader").TryGetAttribute("Name")) {
-            if (Shader* pShader = Shader::Load(render, shaderXml.ToString())) {
+        if (const auto& shaderNode = node.TryGetNode("Shader"); shaderNode.Valid()) {
+            const std::string& shaderName = shaderNode.GetAttribute<std::string>("Name");
+
+            if (Shader* pShader = Shader::Load(render, shaderName)) {
                 mesh->SetShader(pShader);
             }
             else {
-                SR_ERROR("Mesh3D::LoadComponent() : failed to load shader! Name: " + shaderXml.ToString());
+                SR_ERROR("Mesh3D::LoadComponent() : failed to load shader! Name: " + shaderName);
             }
         }
 
         render->RegisterMesh(mesh);
 
-        if (const auto&& materialXml = xml.TryGetNode("Material").TryGetAttribute("Name")) {
-            if (Material* pMaterial = Material::Load(materialXml.ToString())) {
+        if (const auto& materialNode = node.TryGetNode("Material"); materialNode.Valid()) {
+            const std::string& materialName = materialNode.GetAttribute<std::string>("Name");
+
+            if (Material* pMaterial = Material::Load(materialName)) {
                 mesh->SetMaterial(pMaterial);
             }
             else {
-                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + materialXml.ToString());
+                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + materialName);
             }
         }
     }

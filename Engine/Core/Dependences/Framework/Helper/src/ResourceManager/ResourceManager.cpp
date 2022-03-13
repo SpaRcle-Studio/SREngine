@@ -12,7 +12,7 @@
 #endif
 
 namespace Framework::Helper {
-    const float_t ResourceManager::ResourceLifeTime = 10.f; // seconds
+    const float_t ResourceManager::ResourceLifeTime = 30.f; // seconds
 
     uint64_t ResourceManager::GetUsedMemoryLoad() {
     #ifdef SR_WIN32

@@ -175,7 +175,17 @@ namespace Framework::Helper::Math {
         }
         [[nodiscard]] Vector3 ZeroAxis(Axis axis) const {
             Vector3 v = *this;
-            v[static_cast<int>(axis) - 1] = 0;
+
+            switch (axis) {
+                case Axis::AXIS_X: v[0] = 0; break;
+                case Axis::AXIS_Y: v[1] = 0; break;
+                case Axis::AXIS_Z: v[2] = 0; break;
+                case Axis::AXIS_XY: v[0] = v[1] = 0; break;
+                case Axis::AXIS_XZ: v[0] = v[1] = 0; break;
+                case Axis::AXIS_YZ: v[1] = v[2] = 0; break;
+                case Axis::AXIS_XYZ: v[0] = v[1] = v[2] = 0; break;
+            }
+
             return v;
         }
 

@@ -464,32 +464,6 @@ void Framework::Helper::Transform::OnParentSet(Framework::Helper::Transform *par
     }
 }
 
-Framework::Helper::Xml::Document Framework::Helper::Transform::Save(SavableFlags flags) const {
-    auto doc = Xml::Document::New();
-    auto root = doc.Root().AppendChild("Transform");
-
-    const auto& position = GetPosition();
-    const auto& rotation = GetRotation();
-    const auto& scale    = GetScale();
-
-    root.AppendChild("Position")
-            .NAppendAttribute("X", position.x)
-            .NAppendAttribute("Y", position.y)
-            .NAppendAttribute("Z", position.z);
-
-    root.AppendChild("Rotation")
-            .NAppendAttribute("X", rotation.x)
-            .NAppendAttribute("Y", rotation.y)
-            .NAppendAttribute("Z", rotation.z);
-
-    root.AppendChild("Scale")
-            .NAppendAttribute("X", scale.x)
-            .NAppendAttribute("Y", scale.y)
-            .NAppendAttribute("Z", scale.z);
-
-    return doc;
-}
-
 void Framework::Helper::Transform::Scale(FVector3 val) {
     /*if (m_parent) { // local
         m_localScale += val;

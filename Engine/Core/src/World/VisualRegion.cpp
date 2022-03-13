@@ -58,7 +58,12 @@ void Framework::Core::World::VisualRegion::UpdateFacesPos() {
         fPos = fPos.DeSingular(size);
 
         fPos += offset.m_chunk.XZ() * m_chunkSize.x;
-        m_mesh->OnMove(Math::FVector3(fPos.x, static_cast<Math::Unit>(0.01), fPos.y));
+
+        m_mesh->OnMove(Math::FVector3(
+                fPos.x,
+                static_cast<Math::Unit>(0.01) + offset.m_chunk.y * m_chunkSize.y,
+                fPos.y
+        ));
     }
 }
 

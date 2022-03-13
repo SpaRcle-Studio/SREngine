@@ -21,7 +21,7 @@ namespace Framework::Helper {
         class Observer;
 
         typedef std::unordered_map<Math::IVector3, Chunk*> Chunks;
-        typedef std::unordered_map<Math::IVector3, Xml::Document> CachedChunks;
+        typedef std::unordered_map<Math::IVector3, MarshalEncodeNode> CachedChunks;
 
         #define SRRegionAllocArgs Framework::Helper::World::Observer* observer, uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector2& position
         #define SRRegionAllocVArgs observer, width, chunkSize, position
@@ -59,7 +59,7 @@ namespace Framework::Helper {
             [[nodiscard]] Math::IVector2 GetPosition() const { return m_position; }
             [[nodiscard]] Math::IVector2 GetWorldPosition() const;
 
-            SR_NODISCARD Xml::Document Save() const;
+            SR_NODISCARD MarshalEncodeNode Save() const;
 
         public:
             typedef std::function<Region*(SRRegionAllocArgs)> Allocator;

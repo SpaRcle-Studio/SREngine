@@ -322,35 +322,38 @@ bool GameObject::RemoveComponent(Component *component) {
     return false;
 }
 
-Xml::Document GameObject::Save(SavableFlags flags) const {
-    auto doc = Xml::Document::New();
-    auto root = doc.Root().AppendChild("GameObject");
+MarshalEncodeNode GameObject::Save(SavableFlags flags) const {
+    MarshalEncodeNode marshal("GameObject");
 
-    root.AppendAttribute("Name", m_name);
+    marshal.Append("Name", m_name);
 
     if (!(flags & Helper::SAVABLE_FLAG_ECS_NO_ID)) {
-        root.AppendAttribute("EntityId", GetEntityId());
+        marshal.Append("EntityId", static_cast<uint64_t>(GetEntityId()));
     }
 
-    root.AppendAttributeDef("Tag", m_tag, "Untagged");
-    root.AppendAttributeDef("Enabled", IsEnabled(), true);
+    marshal.AppendDef("Tag", m_tag, "Untagged");
+    marshal.AppendDef("Enabled", IsEnabled(), true);
 
-    root.AppendChild(m_transform->Save(flags).DocumentElement());
+    marshal.Append(m_transform->Save(flags));
 
     if (!m_components.empty()) {
-        auto components = root.AppendChild("Components");
+        MarshalEncodeNode components("Components");
         for (const auto &comp : m_components) {
-            components.AppendChild(comp->Save(flags).DocumentElement());
+            if (auto compNode = comp->Save(flags); compNode.Valid()) {
+                components.Append(compNode);
+            }
         }
+        marshal.Append(components);
     }
 
     if (!m_children.empty()) {
-        auto children = root.AppendChild("Children");
+        MarshalEncodeNode children("Children");
         for (const auto &child : m_children)
-            children.AppendChild(child->Save(flags).DocumentElement());
+            children.Append(child->Save(flags));
+        marshal.Append(children);
     }
 
-    return doc;
+    return marshal;
 }
 
 void GameObject::UpdateEntityPath() {
@@ -372,7 +375,7 @@ bool GameObject::IsChild(const GameObject::Ptr &child) {
 
 Component *GameObject::GetComponent(size_t id) {
     for (auto&& component : m_components)
-        if (component->GetId() == id)
+        if (component->GetComponentId() == id)
            return component;
     return nullptr;
 }

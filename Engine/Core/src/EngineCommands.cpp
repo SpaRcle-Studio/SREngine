@@ -57,9 +57,7 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
         return false;
 
     if (m_scene.LockIfValid()) {
-        const auto&& gameObjectXml = m_backup.Root().GetNode("GameObject");
-        auto ptr = m_scene->Instance(gameObjectXml);
-
+        auto ptr = m_scene->Instance(m_backup.Decode());
         m_scene.Unlock();
         return true;
     }

@@ -46,8 +46,9 @@ namespace Framework::Helper {
             [[nodiscard]] LoadState GetState() const { return m_loadState; }
             [[nodiscard]] bool IsAlive() const { return m_lifetime > 0; }
             [[nodiscard]] Math::IVector3 GetPosition() const { return m_position; }
+            [[nodiscard]] Math::FVector3 GetWorldPosition(Math::Axis center = Math::AXIS_NONE) const;
 
-            SR_NODISCARD Xml::Document Save() const;
+            SR_NODISCARD MarshalEncodeNode Save() const;
 
         public:
             virtual void OnEnter();
@@ -57,7 +58,7 @@ namespace Framework::Helper {
             virtual bool Access(float_t dt);
             virtual bool Belongs(const Math::FVector3& point);
             virtual bool Unload();
-            virtual bool Load(const Xml::Node& xml);
+            virtual bool Load(const MarshalDecodeNode& node);
 
             virtual bool ApplyOffset();
 

@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include <mutex>
-#include <json/json.hpp>
 #include <map>
 #include <glm/glm.hpp>
 
@@ -21,10 +20,10 @@ namespace Framework {
     class API;
 }
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     namespace World {
         class Scene;
-    };
+    }
 
     class Transform;
     class Transform3D;
@@ -65,7 +64,7 @@ namespace Framework::Helper {
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
 
-        SR_NODISCARD Xml::Document Save(SavableFlags flags) const override;
+        SR_NODISCARD MarshalEncodeNode Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
         Math::FVector3 GetBarycenter();

@@ -46,6 +46,8 @@
 #define SR_NAN NAN
 #define SR_INT32_MAX INT32_MAX
 #define SR_UINT32_MAX UINT32_MAX
+#define SR_UINT16_MAX UINT16_MAX
+#define SR_UINT64_MAX UINT64_MAX
 
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
@@ -89,23 +91,34 @@ namespace Framework::Helper::Math {
         return abs(a - b) < tolerance;
     }
 
+    template<typename T> constexpr bool IsLogical() {
+        return std::is_same_v<T, bool>();
+    }
+
     template<typename T> constexpr bool IsNumber() {
         return
+            std::is_same_v<T, bool> ||
             std::is_same_v<T, float> ||
             std::is_same_v<T, double> ||
             std::is_same_v<T, int> ||
+            std::is_same_v<T, unsigned short> ||
+            std::is_same_v<T, short> ||
             std::is_same_v<T, unsigned int> ||
             std::is_same_v<T, unsigned> ||
             std::is_same_v<T, long> ||
             std::is_same_v<T, long long> ||
             std::is_same_v<T, unsigned long long> ||
             std::is_same_v<T, unsigned long> ||
-            std::is_same_v<T, int64_t> ||
             std::is_same_v<T, float_t> ||
             std::is_same_v<T, double_t> ||
+            std::is_same_v<T, int64_t> ||
             std::is_same_v<T, uint64_t> ||
-            std::is_same_v<T, uint32_t> ||
             std::is_same_v<T, int32_t> ||
+            std::is_same_v<T, uint32_t> ||
+            std::is_same_v<T, int8_t> ||
+            std::is_same_v<T, uint8_t> ||
+            std::is_same_v<T, int16_t> ||
+            std::is_same_v<T, uint16_t> ||
             std::is_same_v<T, Unit>;
     }
 }

@@ -76,6 +76,7 @@ void Framework::Core::GUI::ComponentDrawer::DrawComponent(Camera* camera) {
 
 void Framework::Core::GUI::ComponentDrawer::DrawComponent(Mesh3D* mesh3d) {
     Graphics::GUI::DrawValue("Mesh", mesh3d->GetResourceId());
+    Graphics::GUI::DrawValue("Id", mesh3d->GetMeshId());
     Graphics::GUI::DrawValue("Geometry name", mesh3d->GetGeometryName());
     Graphics::GUI::DrawValue("Vertices count", mesh3d->GetVerticesCount());
     Graphics::GUI::DrawValue("Indices count", mesh3d->GetIndicesCount());

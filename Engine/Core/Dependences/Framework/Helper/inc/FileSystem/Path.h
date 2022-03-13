@@ -34,6 +34,7 @@ namespace Framework::Helper {
         [[nodiscard]] size_t GetHash() const;
         [[nodiscard]] const char* CStr() const;
 
+        [[nodiscard]] Path GetFolder() const { return m_path; }
         [[nodiscard]] Path Concat(const Path& path) const;
         [[nodiscard]] Path ConcatExt(const std::string& ext) const;
 

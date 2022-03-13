@@ -39,8 +39,8 @@ namespace Framework::Graphics::Types {
     enum class MeshFeatures {
         None     = 0,
         Vertices = 1 << 0,
-        Indices  = 1 << 1,
-        Skinning = 1 << 2
+        Indexed  = 1 << 1,
+        Skinned  = 1 << 2
     };
 
     SR_ENUM_CLASS(MeshType,
@@ -63,13 +63,12 @@ namespace Framework::Graphics::Types {
         static Mesh* LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry& geometry);
 
     public:
-        /** \brief Set mesh to destroy in res manager
-        * \return bool */
         bool Destroy() override;
+
     protected:
-         /** \brief Re-calc mesh space-transform matrix */
         virtual void ReCalcModel();
         virtual bool Calculate();
+
     public:
         IResource* Copy(IResource* destination) const override;
 
@@ -79,6 +78,7 @@ namespace Framework::Graphics::Types {
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();
+
     public:
         Math::FVector3 GetBarycenter() const override;
 
@@ -90,10 +90,10 @@ namespace Framework::Graphics::Types {
         void OnSelected(bool value) override;
         void OnDestroyGameObject() override;
         void OnRemoveComponent() override {
-            this->OnDestroyGameObject();
+            OnDestroyGameObject();
         }
         void OnReady(bool ready) override {
-            this->m_env->SetBuildState(false);
+            m_env->SetBuildState(false);
         }
         void OnAttachComponent() override { }
         void OnTransparencyChanged();
@@ -110,6 +110,7 @@ namespace Framework::Graphics::Types {
         SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
         SR_NODISCARD bool IsInverse()              const { return m_inverse; }
         SR_NODISCARD bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
 
         void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
@@ -146,7 +147,7 @@ namespace Framework::Graphics::Types {
         int32_t                      m_UBO               = SR_ID_INVALID;
 
         /// определяет порядок меша в файле, если их там несколько
-        uint32_t                     m_meshId            = 0;
+        uint32_t                     m_meshId            = SR_UINT32_MAX;
 
     };
 }

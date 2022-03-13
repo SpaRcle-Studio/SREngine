@@ -206,9 +206,7 @@ void Framework::Graphics::Camera::SetNear(float_t value) {
     UpdateProjection();
 }
 
-Component *Framework::Graphics::Camera::LoadComponent(const Xml::Node &xml, const Helper::Types::DataStorage *dataStorage) {
-    return nullptr;
-}
+
 
 
 

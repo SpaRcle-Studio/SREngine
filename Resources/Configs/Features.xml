@@ -4,7 +4,7 @@
        <EvoCompiler Value="true"/>
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>
-       <ChunkSystem Value="false"/>
+       <ChunkSystem Value="true"/>
        <EditorOnStartup Value="true"/>
        <CrashHandler Value="true"/>
        <SkyboxCPUUsage Value="true"/>

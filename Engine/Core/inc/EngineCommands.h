@@ -43,7 +43,7 @@ namespace Framework::Core::Commands {
     private:
         Helper::EntityPath m_path;
         Helper::EntityBranch m_reserved;
-        SR_XML_NS::Document m_backup;
+        MarshalEncodeNode m_backup;
         Helper::Types::SafePtr<Helper::World::Scene> m_scene;
 
     };

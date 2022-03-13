@@ -92,9 +92,10 @@ bool Chunk::ApplyOffset() {
     return true;
 }
 
-bool Chunk::Load(const Xml::Node& xml) {
-    for (const auto& gameObjectXml : xml.TryGetNodes()) {
-        m_observer->m_scene->Instance(gameObjectXml);
+bool Chunk::Load(const MarshalDecodeNode& node) {
+    for (const auto& gameObjectNode : node.GetNodes()) {
+        auto&& ptr = m_observer->m_scene->Instance(gameObjectNode);
+        ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
     }
 
     m_loadState = LoadState::Loaded;
@@ -107,25 +108,42 @@ void Chunk::Reload() {
 
 }
 
-Xml::Document Chunk::Save() const {
+MarshalEncodeNode Chunk::Save() const {
     /// scene already locked
     const auto& container = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
     if (container.empty())
-        return Xml::Document::Empty();
+        return MarshalEncodeNode();
 
-    auto document = Xml::Document::New();
-
-    auto&& chunkXml = document.Root().AppendChild("Chunk");
-    chunkXml.AppendAttribute(m_position);
+    MarshalEncodeNode marshal("Chunk");
+    marshal.Append(m_position);
 
     for (const auto& gameObject : container) {
         if (gameObject.LockIfValid()) {
-            chunkXml.AppendChild(gameObject->Save(SAVABLE_FLAG_ECS_NO_ID).DocumentElement());
+            /// сохраняем объект относительно начала координат чанка
+            gameObject->GetTransform()->GlobalTranslate(-GetWorldPosition());
+            marshal.Append(gameObject->Save(SAVABLE_FLAG_ECS_NO_ID));
             gameObject.Unlock();
         }
     }
 
-    return document;
+    return marshal;
+}
+
+Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {
+    auto fPos = Helper::World::AddOffset(
+            Math::FVector3::XZ(m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 0, 1)),
+            m_observer->m_offset.m_chunk.Cast<Math::Unit>()
+    );
+
+    fPos = Math::FVector3(
+            fPos.x * m_size.x + (center & Math::AXIS_X ? (Math::Unit) m_size.x / 2 : 0),
+            fPos.y * m_size.y + (center & Math::AXIS_Y ? (Math::Unit) m_size.y / 2 : 0),
+            fPos.z * m_size.x + (center & Math::AXIS_Z ? (Math::Unit) m_size.x / 2 : 0)
+    );
+
+    fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
+
+    return fPos;
 }
 
 Chunk::~Chunk() = default;

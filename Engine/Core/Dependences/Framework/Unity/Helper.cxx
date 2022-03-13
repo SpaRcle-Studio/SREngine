@@ -30,6 +30,7 @@
 #include "../Helper/src/Types/String.cpp"
 #include "../Helper/src/Types/Time.cpp"
 #include "../Helper/src/Types/Time.cpp"
+#include "../Helper/src/Types/Marshal.cpp"
 
 #include "../Helper/src/Utils/Stacktrace.cpp"
 #include "../Helper/src/Utils/StringUtils.cpp"

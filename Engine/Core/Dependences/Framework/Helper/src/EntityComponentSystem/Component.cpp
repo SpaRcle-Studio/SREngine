@@ -40,15 +40,15 @@ namespace Framework::Helper {
         return m_creators.at(id)();
     }
 
-    Component *ComponentManager::Load(const Xml::Node &componentXml) {
-        const auto&& name = componentXml.Name();
+    Component *ComponentManager::Load(const MarshalDecodeNode& node) {
+        const auto&& name = node.Name();
 
         if (m_ids.count(name) == 0) {
             SR_ERROR("ComponentManager::Load() : component \"" + name + "\" not found!");
             return nullptr;
         }
 
-        return m_loaders.at(m_ids.at(name))(componentXml, &m_context);
+        return m_loaders.at(m_ids.at(name))(node, &m_context);
     }
 }
 
