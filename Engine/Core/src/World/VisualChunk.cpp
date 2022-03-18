@@ -49,7 +49,7 @@ void Framework::Core::World::VisualChunk::SetFacesVisible(bool value) {
 }
 void Framework::Core::World::VisualChunk::SetLoadVisible(bool value) {
     auto&& mesh = m_meshes[1];
-    if (value && !mesh && m_position.y == 1) {
+    if (value && !mesh && m_position.y == 1 && m_regionPosition.y == 1) {
         mesh = dynamic_cast<DebugWireframeMesh *>(Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe)[0]);
 
         auto render = Engine::Instance().GetRender();

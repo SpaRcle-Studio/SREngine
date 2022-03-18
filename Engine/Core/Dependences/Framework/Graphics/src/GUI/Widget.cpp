@@ -6,13 +6,21 @@
 
 namespace Framework::Graphics::GUI {
     void Widget::DrawWindow()  {
+        m_widgetFlags = WIDGET_FLAG_NONE;
+
         if (m_center) {
             ImGuiIO& io = ImGui::GetIO();
             ImVec2 pos(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f);
             ImGui::SetNextWindowPos(pos, ImGuiCond_Always, ImVec2(0.5f, 0.5f));
         }
 
-        WindowFlags flags = m_flags;
+        WindowFlags flags = m_windowFlags;
+
+        if (IsFocused() || IsHovered()) {
+            //ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_WindowBg, IsFocused() ? ImVec4(0, 1, 0, 1) : ImVec4(1, 0, 0, 1));
+            ImVec4 color = ImGui::GetStyleColorVec4(ImGuiCol_::ImGuiCol_WindowBg);
+            ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_WindowBg, color + ImVec4(0.02, 0.02, 0.02, 0));
+        }
 
         if (!m_size.Contains(SR_INT32_MAX)) {
             ImGui::SetNextWindowSize(ImVec2(m_size.x, m_size.y));
@@ -21,14 +29,18 @@ namespace Framework::Graphics::GUI {
 
         bool open = m_open;
         if (ImGui::Begin(m_name.c_str(), &open, flags)) {
-            m_focused = ImGui::IsWindowFocused();
-
             if (!open) {
                 Close();
             }
             else
                 Draw();
         }
+
+        if (IsFocused() || IsHovered())
+            ImGui::PopStyleColor();
+
+        InternalCheckFocused();
+        InternalCheckHovered();
 
         ImGui::End();
     }
@@ -56,5 +68,31 @@ namespace Framework::Graphics::GUI {
             OnClose();
 
         m_open = false;
+    }
+
+    void Widget::InternalCheckFocused() {
+        if (ImGui::IsWindowFocused() || m_widgetFlags & WIDGET_FLAG_FOCUSED) {
+            m_internalFlags |= WIDGET_FLAG_FOCUSED;
+        }
+        else if (IsFocused()) {
+            m_internalFlags ^= WIDGET_FLAG_FOCUSED;
+        }
+    }
+
+    void Widget::InternalCheckHovered() {
+        if (ImGui::IsWindowHovered() || m_widgetFlags & WIDGET_FLAG_HOVERED) {
+            m_internalFlags |= WIDGET_FLAG_HOVERED;
+        }
+        else if (IsHovered()) {
+            m_internalFlags ^= WIDGET_FLAG_HOVERED;
+        }
+    }
+
+    void Widget::CheckFocused() {
+        m_widgetFlags |= ImGui::IsWindowFocused() ? WIDGET_FLAG_FOCUSED : WIDGET_FLAG_NONE;
+    }
+
+    void Widget::CheckHovered() {
+        m_widgetFlags |= ImGui::IsWindowHovered() ? WIDGET_FLAG_HOVERED : WIDGET_FLAG_NONE;
     }
 }

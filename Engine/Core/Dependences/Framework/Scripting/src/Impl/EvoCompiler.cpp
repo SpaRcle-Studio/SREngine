@@ -11,12 +11,12 @@
 #include <Utils/Features.h>
 
 bool Framework::Scripting::EvoCompiler::Init() {
-    Helper::Debug::Info("EvoCompiler::Init() : initialization of the compiler...");
+    SR_INFO("EvoCompiler::Init() : initialization of the compiler...");
 
-    EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { Helper::Debug::Error(msg); };
-    EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { Helper::Debug::Log(msg);   };
-    EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { Helper::Debug::Warn(msg);  };
-    EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { Helper::Debug::Info(msg);  };
+    EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { SR_ERROR(msg); };
+    EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { SR_LOG(msg);   };
+    EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { SR_WARN(msg);  };
+    EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { SR_INFO(msg);  };
 
     const auto configPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/EvoScript.xml");
 
@@ -26,22 +26,23 @@ bool Framework::Scripting::EvoCompiler::Init() {
         const auto generator = GetGenerator(configs);
 
         if (generator.empty()) {
-            Helper::Debug::Error("EvoCompiler::Init() : failed to get cmake generator!");
+            SR_ERROR("EvoCompiler::Init() : failed to get cmake generator!");
             return false;
         }
 
-        this->m_generator = new EvoScript::AddressTableGen();
-        this->m_casting = new EvoScript::CastingGen(m_generator);
+        m_generator = new EvoScript::AddressTableGen();
+        m_casting = new EvoScript::CastingGen(m_generator);
 
-        this->m_compiler  = EvoScript::Compiler::Create(
+        m_compiler  = EvoScript::Compiler::Create(
                 generator,
                 Helper::ResourceManager::Instance().GetCachePath().Concat("Scripting")
         );
 
         return true;
     }
-    else
-        Helper::Debug::Error("EvoCompiler::Init() : config file not found! \n\tPath: " + configPath.ToString());
+    else {
+        SR_ERROR("EvoCompiler::Init() : config file not found! \n\tPath: " + configPath.ToString());
+    }
 
     return false;
 }
@@ -63,24 +64,26 @@ bool Framework::Scripting::EvoCompiler::Destroy()  {
 
 std::string Framework::Scripting::EvoCompiler::GetGenerator(const Framework::Helper::Xml::Node &config) const {
     if (!Helper::Features::Instance().Enabled("EvoCompiler", true)) {
-        Helper::Debug::Info("EvoCompiler::GetGenerator() : cmake generator is disabled.");
+        SR_INFO("EvoCompiler::GetGenerator() : cmake generator is disabled.");
         return "Disabled";
     }
 
-    const auto warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
     auto generator = config.GetNode("Generator").GetAttribute("Value").ToString();
 
     if (generator.empty()) {
-        Helper::Debug::Error("EvoCompiler::Init() : invalid generator!");
+        SR_ERROR("EvoCompiler::Init() : invalid generator!");
         return std::string();
     }
 
 #ifdef __MINGW64__
-    if (generator.find("Visual Studio") != std::string::npos)
-            Helper::Debug::Warn(warnMsg);
+    const auto warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
+
+    if (generator.find("Visual Studio") != std::string::npos) {
+        SR_WARN(warnMsg);
+    }
 #endif
 
-    Helper::Debug::Info("EvoCompiler::GetGenerator() : use \"" + generator + "\" generator...");
+    SR_INFO("EvoCompiler::GetGenerator() : use \"" + generator + "\" generator...");
 
     return std::move(generator);
 }

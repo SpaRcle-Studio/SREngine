@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Input/InputSystem.h"
+#include <Platform/Platform.h>
 
 void Framework::Helper::Input::Check() {
     if (!Input::g_init) {
@@ -15,7 +16,7 @@ void Framework::Helper::Input::Check() {
     g_mouseScrollCurrent = glm::vec2(0,0);
 
     g_mouse_old = g_mouse;
-    g_mouse = Helper::GetMousePos();
+    g_mouse = Helper::Platform::GetMousePos();
 
     if (!g_arr) {
         g_arr = new BYTE[256];
@@ -98,7 +99,7 @@ int Framework::Helper::Input::DebugKey() {
 void Input::Reset() {
     for (auto &g_key : g_keys)
         g_key = State::UnPressed;
-    g_mouse_old = g_mouse = Helper::GetMousePos();
+    g_mouse_old = g_mouse = Helper::Platform::GetMousePos();
     g_mouseScroll = g_mouseScrollCurrent = glm::vec2(0,0);
 }
 

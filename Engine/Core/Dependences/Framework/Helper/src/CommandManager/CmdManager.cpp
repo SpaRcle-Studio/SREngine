@@ -95,7 +95,7 @@ namespace SR_UTILS_NS {
         std::lock_guard<std::mutex> lock(m_mutex);
 
         if (m_allocators.count(id) == 1) {
-            Helper::Debug::Error("CmdManager::RegisterCommand() : command \"" + id + "\" already is registered!");
+            SR_ERROR("CmdManager::RegisterCommand() : command \"" + id + "\" already is registered!");
             return false;
         }
 
@@ -106,13 +106,13 @@ namespace SR_UTILS_NS {
 
     bool CmdManager::Run() {
         if (m_isRun.load()) {
-            Helper::Debug::Error("CmdManager::Run() : command manager is already ran!");
+            SR_ERROR("CmdManager::Run() : command manager is already ran!");
             return false;
         }
 
         m_isRun.store(true);
 
-        Helper::Debug::Info("CmdManager::Run() : running command manager thread...");
+        SR_INFO("CmdManager::Run() : running command manager thread...");
 
         m_maxHistorySize = 128;
 
@@ -134,11 +134,11 @@ namespace SR_UTILS_NS {
 
     bool CmdManager::Close() {
         if (!m_isRun.load()) {
-            Helper::Debug::Error("CmdManager::Close() : command manager isn't ran!");
+            SR_ERROR("CmdManager::Close() : command manager isn't ran!");
             return false;
         }
 
-        Helper::Debug::Info("CmdManager::Close() : stopping command manager thread...");
+        SR_INFO("CmdManager::Close() : stopping command manager thread...");
 
         m_isRun.store(false);
 

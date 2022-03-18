@@ -8,6 +8,10 @@
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/Stacktrace.h>
 
+#ifdef SR_WIN32
+    #include <Windows.h>
+#endif
+
 namespace Framework::Helper {
     void Debug::Print(std::string msg, Debug::Type type) {
         std::lock_guard<std::mutex> lock(g_mutex);

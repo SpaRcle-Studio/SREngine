@@ -26,8 +26,9 @@ void Framework::Scripting::Compiler::FixedUpdateAll() {
 void Framework::Scripting::Compiler::RegisterScript(Script *script) {
     m_operationMutex.lock();
 
-    if (m_scriptsToAdd.count(script) != 0)
-        Helper::Debug::Error("Compiler::RegisterScript() : script is already add to pool!");
+    if (m_scriptsToAdd.count(script) != 0) {
+        SR_ERROR("Compiler::RegisterScript() : script is already add to pool!");
+    }
     else
         m_scriptsToAdd.insert(script);
 
@@ -37,8 +38,9 @@ void Framework::Scripting::Compiler::RegisterScript(Script *script) {
 void Framework::Scripting::Compiler::RemoveScript(Framework::Scripting::Script *script) {
     m_operationMutex.lock();
 
-    if (m_scriptsToDel.count(script) != 0)
-        Helper::Debug::Error("Compiler::RemoveScript() : script is already add to pool!");
+    if (m_scriptsToDel.count(script) != 0) {
+        SR_ERROR("Compiler::RemoveScript() : script is already add to pool!");
+    }
     else
         m_scriptsToDel.insert(script);
 
@@ -50,19 +52,20 @@ void Framework::Scripting::Compiler::PollEvents() {
     m_operationMutex.lock();
 
     for (auto add : m_scriptsToAdd)
-        if (m_scripts.count(add) == 0)
-            this->m_scripts.insert(add);
+        if (m_scripts.count(add) == 0) {
+            m_scripts.insert(add);
+        }
         else
-            Helper::Debug::Error("Compiler::PollEvents() : script is already exists!");
+            SR_ERROR("Compiler::PollEvents() : script is already exists!");
 
     for (auto add : m_scriptsToDel)
         if (m_scripts.count(add) != 0) {
-            this->m_scripts.erase(add);
+            m_scripts.erase(add);
             if (add->IsNeedFreeAfterDestroy())
                 add->ForcedFree();
         }
         else
-            Helper::Debug::Error("Compiler::PollEvents() : script isn't exists!");
+            SR_ERROR("Compiler::PollEvents() : script isn't exists!");
 
     m_scriptsToDel.clear();
     m_scriptsToAdd.clear();

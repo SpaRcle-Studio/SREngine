@@ -5,11 +5,12 @@
 #ifndef GAMEENGINE_IRESOURCE_H
 #define GAMEENGINE_IRESOURCE_H
 
+#include <Debug.h>
+
 #include <string>
 #include <mutex>
 #include <cmath>
 #include <atomic>
-#include <Debug.h>
 
 namespace Framework {
     class API;

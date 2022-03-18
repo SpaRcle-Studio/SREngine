@@ -88,29 +88,29 @@ namespace SR_UTILS_NS {
                 return MARSHAL_TYPE::String;
         }
 
-        template<typename T> static void SaveValue(std::stringstream& stream, const T& value) {
+        template<typename T> static void SR_FASTCALL SaveValue(std::stringstream& stream, const T& value) {
             stream.write((const char *) &value, sizeof(T));
         }
 
-        static void SaveShortString(std::stringstream& stream, const std::string& str) {
+        static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str) {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
-        static void SaveString(std::stringstream& stream, const std::string& str) {
+        static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str) {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
-        template<typename Stream, typename T> static T LoadValue(Stream& stream) {
+        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
             T value;
             stream.read((char*)&value, sizeof(T));
             return value;
         }
 
-        template<typename Stream> static std::string LoadShortStr(Stream& stream) {
+        template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream) {
             std::string str;
             uint16_t size;
             stream.read((char*)&size, sizeof(uint16_t));
@@ -119,7 +119,7 @@ namespace SR_UTILS_NS {
             return str;
         }
 
-        template<typename Stream> static std::string LoadStr(Stream& stream) {
+        template<typename Stream> static std::string SR_FASTCALL LoadStr(Stream& stream) {
             std::string str;
             size_t size;
             stream.read((char*)&size, sizeof(size_t));
@@ -196,6 +196,7 @@ namespace SR_UTILS_NS {
 
     public:
         static MarshalEncodeNode Load(const Path& path);
+        static MarshalEncodeNode LoadFromMemory(const std::string& data);
 
     public:
         [[nodiscard]] MarshalDecodeNode Decode() const;
@@ -204,8 +205,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::stringstream Save() const;
         SR_NODISCARD bool Empty() const { return m_count == 0; }
         SR_NODISCARD bool Valid() const { return !Empty() && m_stream.rdbuf()->in_avail() > 0; }
+        SR_NODISCARD std::string ToString() const;
 
-        template<typename T, typename U> MarshalEncodeNode& AppendDef(const T& value, const U& def) {
+        template<typename T, typename U> MarshalEncodeNode& SR_FASTCALL AppendDef(const T& value, const U& def) {
             if constexpr (std::is_same<T, Math::FColor>()) {
                 AppendDef("r", value.r, def);
                 AppendDef("g", value.g, def);
@@ -227,7 +229,7 @@ namespace SR_UTILS_NS {
             return *this;
         }
 
-        template<typename T> MarshalEncodeNode& Append(const T& value) {
+        template<typename T> MarshalEncodeNode& SR_FASTCALL Append(const T& value) {
             if constexpr (std::is_same<T, MarshalEncodeNode>()) {
                 m_stream << value.Save().rdbuf(); /// move buffer
                 ++m_count;
@@ -255,14 +257,14 @@ namespace SR_UTILS_NS {
             return *this;
         }
 
-        template<typename T, typename U> MarshalEncodeNode& AppendDef(const std::string& name, const T& value, const U& def) {
+        template<typename T, typename U> MarshalEncodeNode& SR_FASTCALL AppendDef(const std::string& name, const T& value, const U& def) {
             if (value == def)
                 return *this;
 
             return Append(name, value);
         }
 
-        template<typename T> MarshalEncodeNode& Append(const std::string& name, const T& value);
+        template<typename T> MarshalEncodeNode& SR_FASTCALL Append(const std::string& name, const T& value);
 
     private:
         std::string m_name;
@@ -274,6 +276,9 @@ namespace SR_UTILS_NS {
     };
 
     struct MarshalAttribute {
+#if SR_MARSHAL_USE_LIST
+        std::string m_name;
+#endif
         MARSHAL_TYPE m_type;
         std::string m_data;
     };
@@ -289,10 +294,41 @@ namespace SR_UTILS_NS {
             : m_name(std::move(name))
         { }
 
+        MarshalDecodeNode& operator=(MarshalDecodeNode&& marshal) noexcept {
+            m_name = std::exchange(marshal.m_name, {});
+            m_attributes = std::exchange(marshal.m_attributes, {});
+            m_nodes = std::exchange(marshal.m_nodes, {});
+            return *this;
+        }
+
+        MarshalDecodeNode& operator=(const MarshalDecodeNode& marshal) {
+            m_name = marshal.m_name;
+            m_attributes = marshal.m_attributes;
+            m_nodes = marshal.m_nodes;
+            return *this;
+        }
+
+        MarshalDecodeNode(const MarshalDecodeNode& marshal) {
+            m_name = marshal.m_name;
+            m_attributes = marshal.m_attributes;
+            m_nodes = marshal.m_nodes;
+        }
+
+        MarshalDecodeNode(MarshalDecodeNode&& marshal) noexcept {
+            m_name = std::exchange(marshal.m_name, {});
+            m_attributes = std::exchange(marshal.m_attributes, {});
+            m_nodes = std::exchange(marshal.m_nodes, {});
+        }
+
         MarshalDecodeNode() = default;
+
+        explicit operator bool() const {
+            return Valid();
+        }
 
     public:
         static MarshalDecodeNode Load(const Path& path);
+        static MarshalDecodeNode LoadFromMemory(const std::string& data);
 
     public:
         SR_NODISCARD bool Empty() const { return m_attributes.empty() && m_nodes.empty(); }
@@ -301,35 +337,44 @@ namespace SR_UTILS_NS {
         [[nodiscard]] MarshalEncodeNode Encode() const;
         void Encode(std::stringstream& stream) const;
 
-        MarshalDecodeNode& AppendNode(const MarshalDecodeNode& node);
+        MarshalDecodeNode& SR_FASTCALL AppendNode(MarshalDecodeNode&& node);
 
-        template<typename T> MarshalDecodeNode& Append(const std::string& name, const T& value) {
+        template<typename T> MarshalDecodeNode& SR_FASTCALL Append(std::string name, T value) {
             constexpr auto type = MarshalUtils::TypeToMarshal<T>();
 
+        #if SR_MARSHAL_USE_LIST
             if constexpr (Math::IsNumber<T>()) {
+                m_attributes.emplace_back(MarshalAttribute { std::move(name), type, std::to_string(value) });
+            }
+            else {
+                m_attributes.emplace_back(MarshalAttribute { std::move(name), type, std::move(value) });
+            }
+        #else
+            if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
                 m_attributes[name] = MarshalAttribute { type, std::to_string(value) };
             }
             else {
-                m_attributes[name] = MarshalAttribute { type, value };
+                m_attributes[name] = MarshalAttribute { type, std::move(value) };
             }
+        #endif
 
             return *this;
         }
 
         template<typename T> T GetAttribute() const;
-        template<typename T, typename U> T GetAttributeDef(const U& def) const;
+        template<typename T, typename U> T SR_FASTCALL GetAttributeDef(const U& def) const;
 
-        template<typename T> T GetAttributeDef(const std::string& name, const T& def) const;
-        template<typename T> T GetAttribute(const std::string& name) const;
+        template<typename T> T SR_FASTCALL GetAttributeDef(const std::string& name, const T& def) const;
+        template<typename T> T SR_FASTCALL GetAttribute(const std::string& name) const;
 
-        [[nodiscard]] MarshalDecodeNode TryGetNode(const std::string& name) const;
+        [[nodiscard]] MarshalDecodeNode SR_FASTCALL TryGetNode(const std::string& name) const;
 
-        [[nodiscard]] MarshalDecodeNode TryGetNodeRef(const std::string& name) const {
+        [[nodiscard]] MarshalDecodeNode  TryGetNodeRef(const std::string& name) const {
             return GetNodeRef(name);
         }
 
         [[nodiscard]] const MarshalDecodeNode& GetNodeRef(const std::string& name) const;
-        [[nodiscard]] MarshalDecodeNode GetNode(const std::string& name) const;
+        [[nodiscard]] MarshalDecodeNode SR_FASTCALL GetNode(const std::string& name) const;
         [[nodiscard]] std::list<MarshalDecodeNode> GetNodes() const;
 
         SR_NODISCARD std::string Name() const { return m_name; }
@@ -344,8 +389,13 @@ namespace SR_UTILS_NS {
     private:
         std::string m_name;
 
+#if SR_MARSHAL_USE_LIST
+        std::list<MarshalAttribute> m_attributes;
+        std::list<MarshalDecodeNode> m_nodes;
+#else
         std::unordered_map<std::string, MarshalAttribute> m_attributes;
         std::unordered_map<std::string, std::list<MarshalDecodeNode>> m_nodes;
+#endif
 
     };
 
@@ -363,8 +413,8 @@ namespace SR_UTILS_NS {
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
-        template<typename Stream> MarshalDecodeNode LoadNode(Stream &stream) {
-            MarshalDecodeNode node(MarshalUtils::LoadShortStr<Stream>(stream));
+        template<typename Stream> MarshalDecodeNode SR_FASTCALL LoadNode(Stream &stream) {
+            MarshalDecodeNode node(std::move(MarshalUtils::LoadShortStr<Stream>(stream)));
 
             const uint16_t count = MarshalUtils::LoadValue<Stream, uint16_t>(stream);
 
@@ -372,46 +422,47 @@ namespace SR_UTILS_NS {
                 auto &&type = MarshalUtils::LoadValue<Stream, MARSHAL_TYPE>(stream);
 
                 if (type == MARSHAL_TYPE::Node) {
-                    node.AppendNode(LoadNode<Stream>(stream));
-                } else {
-                    const std::string &name = MarshalUtils::LoadShortStr<Stream>(stream);
+                    node.AppendNode(std::move(LoadNode<Stream>(stream)));
+                } 
+                else {
+                    std::string name = MarshalUtils::LoadShortStr<Stream>(stream);
 
                     switch (type) {
-                        case MARSHAL_TYPE::Bool:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, bool>(stream));
-                            break;
-                        case MARSHAL_TYPE::Int8:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, int8_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::UInt8:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, uint8_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::Int16:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, int16_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::UInt16:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, uint16_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::Int32:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, int32_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::UInt32:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, uint32_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::Int64:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, int64_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::UInt64:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, uint64_t>(stream));
-                            break;
-                        case MARSHAL_TYPE::Float:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, float_t>(stream));
-                            break;
                         case MARSHAL_TYPE::Double:
-                            node.Append(name, MarshalUtils::LoadValue<Stream, double_t>(stream));
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, double_t>(stream));
                             break;
                         case MARSHAL_TYPE::String:
-                            node.Append(name, MarshalUtils::LoadStr<Stream>(stream));
+                            node.Append(std::move(name), MarshalUtils::LoadStr<Stream>(stream));
+                            break;
+                        case MARSHAL_TYPE::Bool:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, bool>(stream));
+                            break;
+                        case MARSHAL_TYPE::Int8:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, int8_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::UInt8:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, uint8_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::Int16:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, int16_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::UInt16:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, uint16_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::Int32:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, int32_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::UInt32:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, uint32_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::Int64:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, int64_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::UInt64:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, uint64_t>(stream));
+                            break;
+                        case MARSHAL_TYPE::Float:
+                            node.Append(std::move(name), MarshalUtils::LoadValue<Stream, float_t>(stream));
                             break;
                         default: {
                             SRAssert(false);
@@ -436,6 +487,20 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> inline T MarshalDecodeNode::GetAttribute(const std::string &name) const {
+#if SR_MARSHAL_USE_LIST
+        for (const auto& attribute : m_attributes) {
+            if (attribute.m_name == name) {
+                if constexpr (Math::IsNumber<T>()) {
+                    return LexicalCast<T>(attribute.m_data);
+                }
+                else
+                    return attribute.m_data;
+            }
+        }
+
+        SRAssert2(false, "Attribute not found! Name: " + name);
+        return T();
+#else
         auto&& pIt = m_attributes.find(name);
 
         if (pIt == m_attributes.end()) {
@@ -449,6 +514,7 @@ namespace SR_UTILS_NS {
         else {
             return pIt->second.m_data;
         }
+#endif
     }
 
     template<typename T, typename U> inline T MarshalDecodeNode::GetAttributeDef(const U& def) const {
@@ -474,10 +540,24 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> inline T MarshalDecodeNode::GetAttributeDef(const std::string& name, const T& def) const {
+#if SR_MARSHAL_USE_LIST
+        for (const auto& attribute : m_attributes) {
+            if (attribute.m_name == name) {
+                if constexpr (Math::IsNumber<T>()) {
+                    return LexicalCast<T>(attribute.m_data);
+                }
+                else
+                    return attribute.m_data;
+            }
+        }
+
+        return def;
+#else
         if (m_attributes.count(name) == 1)
             return GetAttribute<T>(name);
 
         return def;
+#endif
     }
 
     template<typename T> inline MarshalEncodeNode &MarshalEncodeNode::Append(const std::string &name, const T &value) {

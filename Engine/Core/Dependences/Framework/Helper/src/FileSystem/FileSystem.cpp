@@ -149,7 +149,7 @@ std::vector<char> FileSystem::ReadBinary(const std::string &path) {
     std::ifstream file(path, std::ios::ate | std::ios::binary);
 
     if (!file.is_open()) {
-        Helper::Debug::Error("FileSystem::ReadBinary() : failed to open \""+path+"\"file!");
+        SR_ERROR("FileSystem::ReadBinary() : failed to open \""+path+"\"file!");
         return std::vector<char>();
     }
 

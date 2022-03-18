@@ -17,12 +17,14 @@ namespace Framework::Helper::World {
     class Scene;
 
     struct Offset {
-        Offset(const Math::IVector2& region, const Math::IVector3& chunk)
+        Offset(const Math::IVector3& region, const Math::IVector3& chunk)
             : m_region(region)
             , m_chunk(chunk)
         { }
 
-        Offset() : Offset({ 0, 0 }, { 0, 0, 0 }) { }
+        Offset()
+            : Offset(Math::IVector3::Zero(), Math::IVector3::Zero())
+        { }
 
         [[nodiscard]] std::string ToString() const {
             return Helper::Format("{ Region: %s, Chunk: %s }", m_region.ToString().c_str(), m_chunk.ToString().c_str());
@@ -30,19 +32,19 @@ namespace Framework::Helper::World {
 
         [[nodiscard]] bool Empty() const { return m_region.Empty() && m_chunk.Empty(); }
 
-        _FORCE_INLINE_ bool operator==(const Offset &p_v) const {
+        SR_FORCE_INLINE bool operator==(const Offset &p_v) const {
             return m_chunk == p_v.m_chunk && m_region == p_v.m_region;
         }
 
-        _FORCE_INLINE_ bool operator!=(const Offset &p_v) const {
+        SR_FORCE_INLINE bool operator!=(const Offset &p_v) const {
             return m_chunk != p_v.m_chunk || m_region != p_v.m_region;
         }
 
-        _FORCE_INLINE_ Offset operator-(const Offset &p_v) const {
+        SR_FORCE_INLINE Offset operator-(const Offset &p_v) const {
             return Offset(m_region - p_v.m_region, m_chunk - p_v.m_chunk);
         }
 
-        Math::IVector2 m_region;
+        Math::IVector3 m_region;
         Math::IVector3 m_chunk;
     };
 
@@ -52,7 +54,7 @@ namespace Framework::Helper::World {
 
     public:
         void SetChunk(Math::IVector3 chunk);
-        void Move(const Math::IVector2& value);
+        void MoveRegion(const Math::IVector3& value);
         void SetWorldMetrics(const Math::IVector2& chunkSize, int32_t regionWidth);
         void SetScope(int32_t value) { m_scope = value; }
         void SetShiftDist(int32_t value) { m_shiftDistance = value; }
@@ -69,8 +71,8 @@ namespace Framework::Helper::World {
         int32_t m_shiftDistance;
         int32_t m_scope;
 
-        Math::IVector2 m_region;
-        Math::IVector2 m_lastRegion;
+        Math::IVector3 m_region;
+        Math::IVector3 m_lastRegion;
 
         Math::IVector3 m_chunk;
         Math::IVector3 m_lastChunk;
@@ -85,8 +87,7 @@ namespace Framework::Helper::World {
     Math::Unit AddOffset(const Math::Unit& value, const Math::Unit& offset);
     Math::FVector3 AddOffset(const Math::FVector3& chunk, const Math::FVector3& offset);
     Math::IVector3 AddOffset(const Math::IVector3& chunk, const Math::IVector3& offset);
-    Math::IVector2 AddOffset(const Math::IVector2& region, const Math::IVector2& offset);
-    Math::FVector2 AddOffset(const Math::FVector2& region, const Math::IVector2& offset);
+    Math::FVector3 AddOffset(const Math::FVector3& region, const Math::IVector3& offset);
 }
 
 #endif //GAMEENGINE_OBSERVER_H

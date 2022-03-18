@@ -50,8 +50,9 @@ bool Framework::Graphics::Types::Mesh::Destroy() {
     if (IsDestroy())
         return false;
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
+    if (Debug::GetLevel() >= Debug::Level::High) {
+        SR_LOG("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
+    }
 
     return IResource::Destroy();
 }

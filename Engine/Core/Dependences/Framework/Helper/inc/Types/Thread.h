@@ -52,12 +52,7 @@ namespace Framework::Helper::Types {
         }
         void Detach() { m_thread.detach(); }
 
-        static void Sleep(uint64_t milliseconds) {
-        #ifdef SR_WIN32
-            #include <Windows.h>
-            ::Sleep(static_cast<DWORD>(milliseconds));
-        #endif
-        }
+        static void Sleep(uint64_t milliseconds);
 
     private:
         std::thread m_thread;

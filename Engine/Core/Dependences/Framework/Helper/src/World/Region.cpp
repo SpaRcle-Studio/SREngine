@@ -33,7 +33,7 @@ void Region::Update(float_t dt) {
 }
 
 Chunk* Region::GetChunk(const Framework::Helper::Math::IVector3 &position) {
-    SRAssert(position.XZ() <= static_cast<int32_t>(m_width) && position.XZ() > 0);
+    SRAssert(position <= static_cast<int32_t>(m_width) && position > 0);
 
     Chunk* pChunk = nullptr;
 
@@ -83,11 +83,11 @@ bool Region::Unload() {
 }
 
 void Region::OnEnter() {
-
+    m_containsObserver = true;
 }
 
 void Region::OnExit() {
-
+    m_containsObserver = false;
 }
 
 void Region::SetAllocator(const Region::Allocator &allocator) {
@@ -101,12 +101,13 @@ Region *Region::Allocate(SRRegionAllocArgs) {
     return new Region(SRRegionAllocVArgs);
 }
 
-Framework::Helper::Math::IVector2 Region::GetWorldPosition() const {
-    const Math::IVector2 offset = m_observer->m_offset.m_region;
+Framework::Helper::Math::IVector3 Region::GetWorldPosition() const {
+    const Math::IVector3 offset = m_observer->m_offset.m_region;
     auto position = AddOffset(m_position, offset) * m_width;
 
     if (position.x > 0) position.x -= m_width - 1;
     if (position.y > 0) position.y -= m_width - 1;
+    if (position.z > 0) position.z -= m_width - 1;
 
     return position;
 }

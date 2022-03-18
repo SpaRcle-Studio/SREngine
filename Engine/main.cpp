@@ -3,6 +3,11 @@
 //
 
 #include <macros.h>
+
+#ifdef SR_WIN32
+    #include <Windows.h>
+#endif
+
 #include <Debug.h>
 
 #include <Engine.h>

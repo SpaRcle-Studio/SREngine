@@ -17,14 +17,14 @@ namespace Framework::Helper::Math {
                 FVector3(0, 0, 1)
         };
 
-        _FORCE_INLINE_ const FVector3 &operator[](int axis) const {
+        SR_FORCE_INLINE const FVector3 &operator[](int axis) const {
             return elements[axis];
         }
-        _FORCE_INLINE_ FVector3 &operator[](int axis) {
+        SR_FORCE_INLINE FVector3 &operator[](int axis) {
             return elements[axis];
         }
 
-        _FORCE_INLINE_ void Set(double xx, double xy, double xz, double yx, double yy, double yz, double zx, double zy, double zz) {
+        SR_FORCE_INLINE void Set(double xx, double xy, double xz, double yx, double yy, double yz, double zx, double zy, double zz) {
             elements[0][0] = xx;
             elements[0][1] = xy;
             elements[0][2] = xz;
@@ -54,12 +54,12 @@ namespace Framework::Helper::Math {
                     }
                 } else {
                     euler.x = atan2(elements[2][1], elements[1][1]);
-                    euler.y = -Math_PI / 2.0;
+                    euler.y = -SR_PI / 2.0;
                     euler.z = 0.0;
                 }
             } else {
                 euler.x = atan2(elements[2][1], elements[1][1]);
-                euler.y = Math_PI / 2.0;
+                euler.y = SR_PI / 2.0;
                 euler.z = 0.0;
             }
             return euler;

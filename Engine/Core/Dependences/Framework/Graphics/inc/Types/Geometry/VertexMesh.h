@@ -30,7 +30,8 @@ namespace Framework::Graphics::Types {
             if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {
                 vertex->m_countVertices = m_countVertices;
                 return Mesh::Copy(vertex);
-            } else {
+            }
+            else {
                 Helper::Debug::Error("VertexMesh::Copy() : bad cast!");
                 return nullptr;
             }

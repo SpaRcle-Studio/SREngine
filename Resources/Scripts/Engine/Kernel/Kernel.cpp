@@ -232,7 +232,7 @@ EXTERN void Start() {
 
     //LoadMiku();
     //LoadKurumi();
-    LoadNemesis();
+    //LoadNemesis();
     //LoadCubes();
 }
 

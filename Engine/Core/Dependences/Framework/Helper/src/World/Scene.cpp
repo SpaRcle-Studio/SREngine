@@ -241,7 +241,7 @@ Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Help
     if (auto size = m_selectedGameObjects.size(); size == 0 || size > 1)
         return Types::SafePtr<GameObject>();
     else {
-        return *m_selectedGameObjects.begin();;
+        return *m_selectedGameObjects.begin();
     }
 }
 
@@ -261,8 +261,8 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
     }
 
     const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
-    const auto regSize = Math::IVector2(m_regionWidth);
-    const auto regSize2 = Math::IVector2(m_regionWidth - 1);
+    const auto regSize = Math::IVector3(m_regionWidth);
+    const auto regSize2 = Math::IVector3(m_regionWidth - 1);
 
     const World::Offset offset = m_observer->m_offset;
     Math::FVector3 observerPos;
@@ -283,10 +283,10 @@ void Framework::Helper::World::Scene::Update(float_t dt) {
 
             m_observer->SetChunk(chunk);
 
-            auto region = AddOffset(chunk.XZ().Singular(regSize2) / regSize, -offset.m_region);
+            auto region = AddOffset(chunk.Singular(regSize2) / regSize, -offset.m_region);
 
             if (auto regionDelta = (region - lastRegion); !regionDelta.Empty()) {
-                m_observer->Move(regionDelta);
+                m_observer->MoveRegion(regionDelta);
                 SRAssert(!m_observer->m_region.HasZero());
             }
 
@@ -342,10 +342,10 @@ Framework::Helper::World::Scene::Scene(const std::string &name)
 
 void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::World::Offset &offset) {
     const auto prevOffset = m_observer->m_offset;
-    const auto region = (offset.m_chunk / static_cast<int32_t>(m_regionWidth)).ZeroAxis(Math::AXIS_Y);
+    const auto region = (offset.m_chunk / static_cast<int32_t>(m_regionWidth));
 
     m_observer->m_offset = World::Offset(
-            offset.m_region + region.XZ(),
+            offset.m_region + region,
             offset.m_chunk - region * m_regionWidth
     );
 
@@ -353,7 +353,7 @@ void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::Wo
 
     const auto deltaOffset = m_observer->m_offset - prevOffset;
 
-    const auto fOffset = ((Math::IVector3::XZ(deltaOffset.m_region * m_regionWidth) + deltaOffset.m_chunk)
+    const auto fOffset = ((deltaOffset.m_region * m_regionWidth + deltaOffset.m_chunk)
             * Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<Math::Unit>();
 
     /// пытаемсы синхронно сдвинуть все объекты, если невозможно (в случае двойной блокировки) то делаем асинхронно,
@@ -405,33 +405,33 @@ void Scene::UpdateScope(float_t dt) {
 
 void Scene::CheckShift(const IVector3 &chunk) {
     const auto shift = m_observer->m_shiftDistance;
-    Math::IVector3 offset = m_observer->m_offset.m_chunk + Math::IVector3::XZ(m_observer->m_offset.m_region * m_regionWidth);
+    Math::IVector3 offset = m_observer->m_offset.m_chunk + (m_observer->m_offset.m_region * m_regionWidth);
 
     if (chunk.x > shift) {
         offset.x -= abs(chunk.x);
-        SetWorldOffset(Offset({ 0, 0 }, offset));
+        SetWorldOffset(Offset(Math::IVector3::Zero(), offset));
     }
     else if (chunk.x < -shift) {
         offset.x += abs(chunk.x);
-        SetWorldOffset(Offset({ 0, 0 }, offset));
+        SetWorldOffset(Offset(Math::IVector3::Zero(), offset));
     }
 
     if (chunk.y > shift) {
         offset.y -= abs(chunk.y);
-        SetWorldOffset(Offset({ 0, 0 }, offset));
+        SetWorldOffset(Offset(Math::IVector3::Zero(), offset));
     }
     else if (chunk.y < -shift) {
         offset.y += abs(chunk.y);
-        SetWorldOffset(Offset({ 0, 0 }, offset));
+        SetWorldOffset(Offset(Math::IVector3::Zero(), offset));
     }
 
     if (chunk.z > shift) {
         offset.z -= abs(chunk.z);
-        SetWorldOffset(Offset({ 0, 0 }, offset));
+        SetWorldOffset(Offset(Math::IVector3::Zero(), offset));
     }
     else if (chunk.z < -shift) {
         offset.z += abs(chunk.z);
-        SetWorldOffset(Offset({ 0, 0 }, offset));
+        SetWorldOffset(Offset(Math::IVector3::Zero(), offset));
     }
 }
 
@@ -444,7 +444,7 @@ void Scene::UpdateContainers() {
         const Math::FVector3 gmPosition = gameObject->GetTransform()->GetTranslation();
 
         auto chunk = AddOffset(IVector3(gmPosition.Singular(chunkSize.Cast<Math::Unit>()) / chunkSize), -m_observer->m_offset.m_chunk);
-        auto region = AddOffset(chunk.XZ().Singular(Math::IVector2(m_regionWidth - 1)) / Math::IVector2(m_regionWidth), -m_observer->m_offset.m_region);
+        auto region = AddOffset(chunk.Singular(Math::IVector3(m_regionWidth - 1)) / Math::IVector3(m_regionWidth), -m_observer->m_offset.m_region);
 
         const TensorKey key = TensorKey(region, MakeChunk(chunk, m_regionWidth));
         m_tensor[key].insert(gameObject);
@@ -494,7 +494,7 @@ void Scene::ReloadChunks() {
         pRegion->Reload();
 }
 
-GameObjects Scene::GetGameObjectsAtChunk(const IVector2 &region, const IVector3 &chunk) {
+GameObjects Scene::GetGameObjectsAtChunk(const IVector3 &region, const IVector3 &chunk) {
     const auto key = TensorKey(region, chunk);
     if (m_tensor.count(key) == 0)
         return GameObjects();

@@ -48,6 +48,10 @@ namespace Framework::RuntimeTest {
     }
 }
 
+std::string MarshalEncodeNode::ToString() const {
+    return Save().str();
+}
+
 MarshalDecodeNode MarshalDecodeNode::Load(const Path &path) {
     MarshalDecodeNode node;
 
@@ -60,13 +64,25 @@ MarshalDecodeNode MarshalDecodeNode::Load(const Path &path) {
         return node;
     }
 
-    node = MarshalUtils::LoadNode(file);
+    node = std::move(MarshalUtils::LoadNode(file));
     file.close();
     return node;
 }
 
-MarshalDecodeNode &MarshalDecodeNode::AppendNode(const MarshalDecodeNode &node) {
-    m_nodes[node.m_name].emplace_back(node);
+MarshalDecodeNode &MarshalDecodeNode::AppendNode(MarshalDecodeNode&& node) {
+#if SR_MARSHAL_USE_LIST
+    m_nodes.emplace_back(std::move(node));
+#else
+    std::string name = node.m_name;
+
+    if (auto&& pIt = m_nodes.find(name); pIt != m_nodes.end()) {
+        pIt->second.emplace_back(std::move(node));
+    }
+    else {
+        m_nodes.insert(std::make_pair(std::move(name), std::list{ std::move(node) }));
+    }
+#endif
+
     return *this;
 }
 
@@ -83,6 +99,9 @@ std::string MarshalDecodeNode::ToJson(uint32_t tab, bool root) const {
     json.append(emptyNode ? ": { " : ": {\n");
 
     uint32_t index = 0;
+
+#if SR_MARSHAL_USE_LIST
+#else
     for (const auto& [name, attribute] : m_attributes) {
         ++index;
 
@@ -123,6 +142,7 @@ std::string MarshalDecodeNode::ToJson(uint32_t tab, bool root) const {
             json.append("\n");
         }
     }
+#endif
 
     json.append(emptyNode ? 0 : tab, ' ').append("}");
     if (root)
@@ -136,6 +156,8 @@ std::string MarshalDecodeNode::Dump(uint32_t tab) const {
 
     dump.append(std::string(tab, ' ').append(m_name).append("\n"));
 
+#if SR_MARSHAL_USE_LIST
+#else
     for (auto&& [name, value] : m_attributes) {
         dump.append(std::string(tab + 3, ' ').append("\"").append(name).append("\"=").append(value.m_data).append("\n"));
     }
@@ -144,11 +166,16 @@ std::string MarshalDecodeNode::Dump(uint32_t tab) const {
         for (auto&& node : nodes)
             dump.append(node.Dump(tab + 3));
     }
+#endif
+
 
     return dump;
 }
 
 std::list<MarshalDecodeNode> MarshalDecodeNode::GetNodes() const {
+#if SR_MARSHAL_USE_LIST
+    return m_nodes;
+#else
     std::list<MarshalDecodeNode> merged;
 
     for (auto& [name, group] : m_nodes) {
@@ -156,9 +183,20 @@ std::list<MarshalDecodeNode> MarshalDecodeNode::GetNodes() const {
     }
 
     return merged;
+#endif
 }
 
 const MarshalDecodeNode& MarshalDecodeNode::GetNodeRef(const std::string &name) const {
+#if SR_MARSHAL_USE_LIST
+    for (const auto& node : m_nodes)
+        if (node.m_name == name)
+            return node;
+
+    SRAssert(false);
+
+    static MarshalDecodeNode def;
+    return def;
+#else
     auto&& pIt = m_nodes.find(name);
 
     if (pIt == m_nodes.end()) {
@@ -167,9 +205,19 @@ const MarshalDecodeNode& MarshalDecodeNode::GetNodeRef(const std::string &name) 
     }
 
     return pIt->second.front();
+#endif
 }
 
 MarshalDecodeNode MarshalDecodeNode::GetNode(const std::string &name) const {
+#if SR_MARSHAL_USE_LIST
+    for (const auto& node : m_nodes)
+        if (node.m_name == name)
+            return node;
+
+    SRAssert(false);
+
+    return MarshalDecodeNode();
+#else
     auto&& pIt = m_nodes.find(name);
 
     if (pIt == m_nodes.end()) {
@@ -178,34 +226,66 @@ MarshalDecodeNode MarshalDecodeNode::GetNode(const std::string &name) const {
     }
 
     return pIt->second.front();
+#endif
 }
 
 void MarshalDecodeNode::Encode(std::stringstream& stream) const {
     uint16_t count = m_attributes.size();
+#if SR_MARSHAL_USE_LIST
+    count += m_nodes.size();
+#else
     for (auto&& [name, group] : m_nodes) {
         count += group.size();
     }
+#endif
 
     MarshalUtils::SaveValue(stream, MARSHAL_TYPE::Node);
     MarshalUtils::SaveShortString(stream, m_name);
     MarshalUtils::SaveValue(stream, count);
 
+#if SR_MARSHAL_USE_LIST
+    for (auto&& attribute : m_attributes) {
+        MarshalUtils::SaveValue(stream, attribute.m_type);
+        MarshalUtils::SaveShortString(stream, attribute.m_name);
+        MarshalUtils::Encode(stream, attribute.m_data, attribute.m_type);
+    }
+#else
     for (auto&& [name, attribute] : m_attributes) {
         MarshalUtils::SaveValue(stream, attribute.m_type);
         MarshalUtils::SaveShortString(stream, name);
         MarshalUtils::Encode(stream, attribute.m_data, attribute.m_type);
     }
+#endif
 
+#if SR_MARSHAL_USE_LIST
+    for (const auto& node : m_nodes) {
+        node.Encode(stream);
+    }
+#else
     for (auto&& [name, group] : m_nodes) {
         for (auto &&node : group) {
             node.Encode(stream);
         }
     }
+#endif
 }
 
 MarshalEncodeNode MarshalDecodeNode::Encode() const {
     MarshalEncodeNode marshal(m_name);
 
+#if SR_MARSHAL_USE_LIST
+    marshal.m_count = m_attributes.size() + m_nodes.size();
+
+    for (const auto& attribute : m_attributes) {
+        MarshalUtils::SaveValue(marshal.m_stream, attribute.m_type);
+        MarshalUtils::SaveShortString(marshal.m_stream, attribute.m_name);
+        MarshalUtils::Encode(marshal.m_stream, attribute.m_data, attribute.m_type);
+    }
+
+    for (const auto& node : m_nodes) {
+        node.Encode(marshal.m_stream);
+    }
+#else
     marshal.m_count = m_attributes.size();
     for (auto&& [name, group] : m_nodes) {
         marshal.m_count = marshal.m_count + group.size();
@@ -222,17 +302,40 @@ MarshalEncodeNode MarshalDecodeNode::Encode() const {
             node.Encode(marshal.m_stream);
         }
     }
+#endif
 
     return marshal;
 }
 
 MarshalDecodeNode MarshalDecodeNode::TryGetNode(const std::string &name) const  {
+#if SR_MARSHAL_USE_LIST
+    for (const auto& node : m_nodes)
+        if (node.m_name == name)
+            return node;
+
+    return MarshalDecodeNode();
+#else
     auto&& pIt = m_nodes.find(name);
 
     if (pIt == m_nodes.end())
         return MarshalDecodeNode();
 
     return pIt->second.front();
+#endif
+}
+
+MarshalDecodeNode MarshalDecodeNode::LoadFromMemory(const std::string &data) {
+    MarshalDecodeNode node;
+
+    if (data.empty() || data.size() < sizeof(MARSHAL_TYPE))
+        return node;
+
+    std::stringstream stream(data);
+    if (MarshalUtils::LoadValue<std::stringstream, MARSHAL_TYPE>(stream) != MARSHAL_TYPE::Node) {
+        return node;
+    }
+
+    return MarshalUtils::LoadNode(stream);
 }
 
 namespace SR_UTILS_NS {
@@ -298,24 +401,25 @@ namespace SR_UTILS_NS {
 
             if (type == MARSHAL_TYPE::Node) {
                 /// добавляем независимо от валидности
-                marshal.AppendNode(MarshalUtils::LoadNode<std::stringstream>(stream));
+                auto&& node = MarshalUtils::LoadNode<std::stringstream>(stream);
+                marshal.AppendNode(std::move(node));
             }
             else {
-                const std::string& name = MarshalUtils::LoadShortStr<std::stringstream>(stream);
+                std::string name = MarshalUtils::LoadShortStr<std::stringstream>(stream);
 
                 switch (type) {
-                    case MARSHAL_TYPE::Bool:   marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, bool>(stream)); break;
-                    case MARSHAL_TYPE::Int8:   marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, int8_t>(stream)); break;
-                    case MARSHAL_TYPE::UInt8:  marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, uint8_t>(stream)); break;
-                    case MARSHAL_TYPE::Int16:  marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, int16_t>(stream)); break;
-                    case MARSHAL_TYPE::UInt16: marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, uint16_t>(stream)); break;
-                    case MARSHAL_TYPE::Int32:  marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, int32_t>(stream)); break;
-                    case MARSHAL_TYPE::UInt32: marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, uint32_t>(stream)); break;
-                    case MARSHAL_TYPE::Int64:  marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, int64_t>(stream)); break;
-                    case MARSHAL_TYPE::UInt64: marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, uint64_t>(stream)); break;
-                    case MARSHAL_TYPE::Float:  marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, float_t>(stream)); break;
-                    case MARSHAL_TYPE::Double: marshal.Append(name, MarshalUtils::LoadValue<std::stringstream, double_t>(stream)); break;
-                    case MARSHAL_TYPE::String: marshal.Append(name, MarshalUtils::LoadStr<std::stringstream>(stream)); break;
+                    case MARSHAL_TYPE::Double: marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, double_t>(stream)); break;
+                    case MARSHAL_TYPE::String: marshal.Append(std::move(name), MarshalUtils::LoadStr<std::stringstream>(stream)); break;
+                    case MARSHAL_TYPE::Bool:   marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, bool>(stream)); break;
+                    case MARSHAL_TYPE::Int8:   marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, int8_t>(stream)); break;
+                    case MARSHAL_TYPE::UInt8:  marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, uint8_t>(stream)); break;
+                    case MARSHAL_TYPE::Int16:  marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, int16_t>(stream)); break;
+                    case MARSHAL_TYPE::UInt16: marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, uint16_t>(stream)); break;
+                    case MARSHAL_TYPE::Int32:  marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, int32_t>(stream)); break;
+                    case MARSHAL_TYPE::UInt32: marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, uint32_t>(stream)); break;
+                    case MARSHAL_TYPE::Int64:  marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, int64_t>(stream)); break;
+                    case MARSHAL_TYPE::UInt64: marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, uint64_t>(stream)); break;
+                    case MARSHAL_TYPE::Float:  marshal.Append(std::move(name), MarshalUtils::LoadValue<std::stringstream, float_t>(stream)); break;
                     default:
                         break;
                 }
@@ -323,6 +427,25 @@ namespace SR_UTILS_NS {
         }
 
         return marshal;
+    }
+
+    MarshalEncodeNode MarshalEncodeNode::LoadFromMemory(const std::string &data) {
+        MarshalEncodeNode node;
+
+        if (data.size() < sizeof(MARSHAL_TYPE)) {
+            return node;
+        }
+
+        node.m_stream = std::stringstream(data);
+
+        if (MarshalUtils::LoadValue<std::stringstream, MARSHAL_TYPE>(node.m_stream) != MARSHAL_TYPE::Node) {
+            return MarshalEncodeNode();
+        }
+
+        node.m_name = MarshalUtils::LoadShortStr(node.m_stream);
+        node.m_count = MarshalUtils::LoadValue<std::stringstream, uint16_t>(node.m_stream);
+
+        return node;
     }
 
     MarshalEncodeNode MarshalEncodeNode::Load(const Path& path) {

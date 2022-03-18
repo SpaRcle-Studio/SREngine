@@ -43,8 +43,10 @@ Framework::Helper::IResource* Framework::Graphics::Types::Mesh3D::Copy(IResource
     auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D(m_geometryName));
     mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
 
-    if (mesh3D->IsCalculated())
-        mesh3D->m_VBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(GetResourceId());
+    if (mesh3D->IsCalculated()) {
+        auto &&manager = Memory::MeshManager::Instance();
+        mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(GetResourceId());
+    }
     else
         mesh3D->m_vertices = m_vertices;
 

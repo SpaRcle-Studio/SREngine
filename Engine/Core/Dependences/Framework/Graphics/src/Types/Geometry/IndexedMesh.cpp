@@ -7,21 +7,24 @@
 namespace Framework::Graphics::Types {
     IResource *IndexedMesh::Copy(IResource *destination) const {
         if (!destination) {
-            Helper::Debug::Error("IndexedMesh::Copy() : destination in nullptr!");
+            SR_ERROR("IndexedMesh::Copy() : destination in nullptr!");
             return nullptr;
         }
 
         auto indexed = dynamic_cast<IndexedMesh *>(destination);
         if (!indexed) {
-            Helper::Debug::Error("IndexedMesh::Copy() : bad cast!");
+            SR_ERROR("IndexedMesh::Copy() : bad cast!");
             return nullptr;
         }
 
         if (IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
             indexed->m_IBO = manager.CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId());
-        } else
+        }
+        else {
+            ///SR_WARN("IndexesMesh::Copy() : copying raw data. This can lead to a decrease in performance!");
             indexed->m_indices = m_indices;
+        }
 
         indexed->m_countIndices = m_countIndices;
         indexed->m_useIndices = m_useIndices;

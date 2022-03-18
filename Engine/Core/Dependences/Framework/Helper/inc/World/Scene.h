@@ -25,12 +25,12 @@
 namespace Framework::Helper::World {
     struct TensorKey {
         TensorKey() = default;
-        TensorKey(const Framework::Helper::Math::IVector2& _region, const Framework::Helper::Math::IVector3& _chunk)
+        TensorKey(const Framework::Helper::Math::IVector3& _region, const Framework::Helper::Math::IVector3& _chunk)
             : region(_region)
             , chunk(_chunk)
         { }
 
-        Framework::Helper::Math::IVector2 region;
+        Framework::Helper::Math::IVector3 region;
         Framework::Helper::Math::IVector3 chunk;
 
         bool operator==(const TensorKey &other) const {
@@ -44,7 +44,7 @@ namespace std {
         size_t operator()(Framework::Helper::World::TensorKey const& vecPair) const {
             std::size_t res = 0;
 
-            std::hash<Framework::Helper::Math::IVector2> hFirst;
+            std::hash<Framework::Helper::Math::IVector3> hFirst;
             std::hash<Framework::Helper::Math::IVector3> hSecond;
 
             res ^= hFirst(vecPair.region) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
@@ -61,7 +61,7 @@ namespace Framework::Helper::World {
 
     typedef std::unordered_set<GameObject::Ptr> GameObjects;
     typedef std::unordered_map<TensorKey, GameObjects> Tensor;
-    typedef std::unordered_map<Math::IVector2, Region*> Regions;
+    typedef std::unordered_map<Math::IVector3, Region*> Regions;
 
     class Scene : public Types::SafePtr<Scene> {
     public:
@@ -102,9 +102,11 @@ namespace Framework::Helper::World {
         SR_NODISCARD std::string GetName() const { return m_name; }
         void SetName(const std::string& name) { m_name = name; }
 
+        uint32_t GetSelectedCount() const { return m_selectedGameObjects.size(); }
+        GameObjects GetAllSelected() const { return m_selectedGameObjects; }
         GameObjects GetGameObjects();
         GameObjects& GetRootGameObjects();
-        GameObjects GetGameObjectsAtChunk(const Math::IVector2& region, const Math::IVector3& chunk);
+        GameObjects GetGameObjectsAtChunk(const Math::IVector3& region, const Math::IVector3& chunk);
 
         GameObject::Ptr FindByComponent(const std::string& name);
         GameObject::Ptr Instance(const std::string& name);

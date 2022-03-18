@@ -55,6 +55,7 @@
 #define SR_FALLTHROUGH [[fallthrough]]
 #define SR_INLINE inline
 #define SR_NULL 0
+#define SR_MARSHAL_USE_LIST 1
 
 #define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 

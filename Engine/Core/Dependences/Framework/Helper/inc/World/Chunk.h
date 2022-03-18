@@ -74,7 +74,7 @@ namespace Framework::Helper {
             float_t m_lifetime;
 
             Math::IVector2 m_size;
-            Math::IVector2 m_regionPosition;
+            Math::IVector3 m_regionPosition;
             Math::IVector3 m_position;
         };
     }

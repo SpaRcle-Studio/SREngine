@@ -8,7 +8,7 @@
 #include <ResourceManager/ResourceManager.h>
 
 bool Framework::Graphics::Environment::PreInitGUI(const std::string &fontPath) {
-    Helper::Debug::Graph("Environment::InitGUI() : pre-initializing ImGUI library...");
+    SR_GRAPH("Environment::InitGUI() : pre-initializing ImGUI library...");
 
     {
         //IMGUI_CHECKVERSION();

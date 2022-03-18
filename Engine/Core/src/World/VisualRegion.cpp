@@ -7,12 +7,10 @@
 #include "World/VisualRegion.h"
 
 void Framework::Core::World::VisualRegion::OnEnter() {
-    SetVisible(true);
     Region::OnEnter();
 }
 
 void Framework::Core::World::VisualRegion::OnExit() {
-    SetVisible(false);
     Region::OnExit();
 }
 
@@ -20,7 +18,7 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
     using namespace Graphics::Types;
     using namespace Graphics;
 
-    if (value && !m_mesh) {
+    if (value && !m_mesh && m_position.y == 1) {
         m_mesh = dynamic_cast<DebugWireframeMesh *>(Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe)[0]);
 
         auto render = Engine::Instance().GetRender();
@@ -48,21 +46,26 @@ bool Framework::Core::World::VisualRegion::Unload() {
     return Region::Unload();
 }
 
+bool Framework::Core::World::VisualRegion::Load() {
+    SetVisible(true);
+    return Region::Load();
+}
+
 void Framework::Core::World::VisualRegion::UpdateFacesPos() {
     if (m_mesh) {
-        const auto size = Math::FVector2(m_width) * m_chunkSize.x;
+        const auto size = Math::FVector3(m_width) * m_chunkSize.x;
         const Helper::World::Offset offset = m_observer->m_offset;
 
         auto fPos = Helper::World::AddOffset(m_position.Cast<Math::Unit>(), offset.m_region);
         fPos = fPos * size + (size / 2);
         fPos = fPos.DeSingular(size);
 
-        fPos += offset.m_chunk.XZ() * m_chunkSize.x;
+        fPos += offset.m_chunk * m_chunkSize.x;
 
         m_mesh->OnMove(Math::FVector3(
                 fPos.x,
-                static_cast<Math::Unit>(0.01) + offset.m_chunk.y * m_chunkSize.y,
-                fPos.y
+                static_cast<Math::Unit>(0.01),
+                fPos.z
         ));
     }
 }

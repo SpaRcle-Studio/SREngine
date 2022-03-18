@@ -189,5 +189,19 @@ namespace Framework::Helper {
         }
     }
 
+    Path Path::GetPrevious() const {
+        if (m_path.empty())
+            return m_path;
+
+        if (const auto&& pos = m_path.rfind('/'); pos != std::string::npos) {
+            if (pos <= 1)
+                return m_path;
+
+            return m_path.substr(0, pos);
+        }
+
+        return m_path;
+    }
+
     Path& Path::operator=(const Path& path) = default;
 }

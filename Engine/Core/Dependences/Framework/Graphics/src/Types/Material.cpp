@@ -23,8 +23,9 @@ Material::Material(Texture *diffuse, Texture *normal, Texture *specular, Texture
 }
 
 Material::~Material() {
-    if (Debug::GetLevel() >= Debug::Level::Full)
-        Debug::Log("Material::FreeTextures() : free material textures...");
+    if (Debug::GetLevel() >= Debug::Level::Full) {
+        SR_LOG("Material::FreeTextures() : free material textures...");
+    }
 
     SetReadOnly(false);
 

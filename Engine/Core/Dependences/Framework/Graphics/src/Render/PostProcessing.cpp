@@ -14,9 +14,10 @@
 #include <Render/Implementations/OpenGLPostProcessing.h>
 #include <Render/Implementations/VulkanPostProcessing.h>
 
-Framework::Graphics::PostProcessing::PostProcessing(Camera* camera) : m_env(Environment::Get()){
-    this->m_camera = camera;
-}
+Framework::Graphics::PostProcessing::PostProcessing(Camera* camera)
+    : m_env(Environment::Get())
+    , m_camera(camera)
+{ }
 
 Framework::Graphics::PostProcessing* Framework::Graphics::PostProcessing::Allocate(Framework::Graphics::Camera *camera) {
     if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
@@ -24,23 +25,22 @@ Framework::Graphics::PostProcessing* Framework::Graphics::PostProcessing::Alloca
     else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan)
         return new VulkanPostProcessing(camera);
 
-    Helper::Debug::Error("PostProcessing::Allocate() : implementation not found!");
+    SR_ERROR("PostProcessing::Allocate() : implementation not found!");
     return nullptr;
 }
 
 bool Framework::Graphics::PostProcessing::Init(Render* render) {
     if (m_isInit) {
-        Debug::Error("PostProcessing::Init() : post processing already initialize!");
+        SR_ERROR("PostProcessing::Init() : post processing already initialize!");
         return false;
     }
 
-    this->m_render = render;
+    m_render = render;
 
-    Debug::Graph("PostProcessing::Init() : initializing post processing...");
+    SR_GRAPH("PostProcessing::Init() : initializing post processing...");
 
     {
         m_postProcessingShader = Shader::Load(m_render, "postProcessing");
-
         m_blurShader = new Shader(m_render, "engine/blur");
     }
 
@@ -50,7 +50,7 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
 }
 
 bool Framework::Graphics::PostProcessing::Destroy() {
-    Helper::Debug::Graph("PostProcessing::Destroy() : destroying post processing...");
+    SR_GRAPH("PostProcessing::Destroy() : destroying post processing...");
 
     if (m_postProcessingShader) {
         m_postProcessingShader->FreeVideoMemory();
@@ -69,7 +69,7 @@ bool Framework::Graphics::PostProcessing::Destroy() {
 
     if (m_frameBuffer != -1) {
         if (!m_env->FreeFBO(m_frameBuffer) || !m_env->FreeTextures(m_colors.data(), m_colors.size())) {
-            Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
+            SR_ERROR("PostProcessing::Destroy() : failed to destroy framebuffer!");
             return false;
         }
         m_colors.clear();
@@ -78,7 +78,7 @@ bool Framework::Graphics::PostProcessing::Destroy() {
 
     if (m_finalFBO != -1) {
         if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
-            Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy framebuffer!");
+            SR_ERROR("PostProcessing::Destroy() : failed to destroy framebuffer!");
             return false;
         }
         m_finalFBO = m_finalColorBuffer = -1;
@@ -88,15 +88,15 @@ bool Framework::Graphics::PostProcessing::Destroy() {
 }
 
 bool Framework::Graphics::PostProcessing::OnResize(uint32_t w, uint32_t h) {
-    Helper::Debug::Graph("PostProcessing::OnResize() : re-create frame buffers...");
+    SR_GRAPH("PostProcessing::OnResize() : re-create frame buffers...");
 
     if (!m_env->CreateSingleFrameBuffer({w, h}, m_finalDepth, m_finalFBO, m_finalColorBuffer)) {
-        Helper::Debug::Error("PostProcessing::OnResize() : failed to create single frame buffer object!");
+        SR_ERROR("PostProcessing::OnResize() : failed to create single frame buffer object!");
         return false;
     }
 
     if (!m_env->CreateFrameBuffer({w, h}, m_depth, m_frameBuffer, m_colors)) {
-        Helper::Debug::Error("PostProcessing::OnResize() : failed to create frame buffer object!");
+        SR_ERROR("PostProcessing::OnResize() : failed to create frame buffer object!");
         return false;
     }
 

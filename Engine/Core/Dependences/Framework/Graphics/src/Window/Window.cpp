@@ -106,7 +106,7 @@ bool Framework::Graphics::Window::Init() {
         return false;
 
     if (!Graphics::Material::InitDefault(GetRender())) {
-        Helper::Debug::Error("Window::Init() : failed to initialize default material!");
+        SR_ERROR("Window::Init() : failed to initialize default material!");
         return false;
     }
 
@@ -196,7 +196,7 @@ void Framework::Graphics::Window::Thread() {
         }
     }
 
-    Debug::Log("Window::Thread() : screen size is " + m_env->GetScreenSize().ToString());
+    SR_LOG("Window::Thread() : screen size is " + m_env->GetScreenSize().ToString());
 
     double deltaTime = 0;
     uint32_t frames = 0;
@@ -367,7 +367,7 @@ void Framework::Graphics::Window::Thread() {
         }
     }
 
-    Helper::Debug::Graph("Window::Thread() : exit from main cycle.");
+    SR_GRAPH("Window::Thread() : exit from main cycle.");
 
     if (!m_widgetManagers.Empty()) {
         m_widgetManagers.Clear();
@@ -375,11 +375,11 @@ void Framework::Graphics::Window::Thread() {
 
     if (m_env->IsGUISupport()) {
         m_env->StopGUI();
-        Helper::Debug::Graph("Window::Thread() : complete stopping gui!");
+        SR_GRAPH("Window::Thread() : complete stopping gui!");
     }
 
     if (!SyncFreeResources()) {
-        Debug::Error("Window::Thread() : failed to free resources!");
+        SR_ERROR("Window::Thread() : failed to free resources!");
     }
 
     if (!this->m_render->Close()) {
@@ -396,39 +396,40 @@ void Framework::Graphics::Window::Thread() {
 }
 
 bool Framework::Graphics::Window::InitEnvironment() {
-    Debug::Graph("Window::InitEnvironment() : initializing render environment...");
+    SR_GRAPH("Window::InitEnvironment() : initializing render environment...");
 
-    Debug::Graph("Window::InitEnvironment() : pre-initializing...");
-    if (!this->m_env->PreInit(
+    SR_GRAPH("Window::InitEnvironment() : pre-initializing...");
+    if (!m_env->PreInit(
             m_smoothSamples,
             "SpaRcle Engine", /// App name
             "SREngine",       /// Engine name
-            ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe"))){
-        Debug::Error("Window::InitEnvironment() : failed to pre-initializing environment!");
+            ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe")))
+    {
+        SR_ERROR("Window::InitEnvironment() : failed to pre-initializing environment!");
         return false;
     }
 
-    Debug::Graph("Window::InitEnvironment() : creating window...");
-    if (!this->m_env->MakeWindow(this->m_win_name, m_fullScreen, m_resizable, m_headerEnabled)) {
-        Debug::Error("Window::InitEnvironment() : failed to creating window!");
+    SR_GRAPH("Window::InitEnvironment() : creating window...");
+    if (!m_env->MakeWindow(m_win_name, m_fullScreen, m_resizable, m_headerEnabled)) {
+        SR_ERROR("Window::InitEnvironment() : failed to creating window!");
         return false;
     }
 
-    this->m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetTexturesPath().Concat(m_icoPath).CStr());
+    m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetTexturesPath().Concat(m_icoPath).CStr());
 
     Debug::Graph("Window::InitEnvironment() : set thread context as current...");
-    if (!this->m_env->SetContextCurrent()) {
-        Debug::Error("Window::InitEnvironment() : failed to set context!");
+    if (!m_env->SetContextCurrent()) {
+        SR_ERROR("Window::InitEnvironment() : failed to set context!");
         return false;
     }
 
-    Debug::Graph("Window::InitEnvironment() : initializing the environment...");
-    if (!this->m_env->Init(m_vsync)) {
-        Debug::Error("Window::InitEnvironment() : failed to initializing environment!");
+    SR_GRAPH("Window::InitEnvironment() : initializing the environment...");
+    if (!m_env->Init(m_vsync)) {
+        SR_ERROR("Window::InitEnvironment() : failed to initializing environment!");
         return false;
     }
 
-    Debug::Graph("Window::InitEnvironment() : post-initializing the environment...");
+    SR_GRAPH("Window::InitEnvironment() : post-initializing the environment...");
 
     if (!m_env->PostInit()) {
         Debug::Error("Window::InitEnvironment() : failed to post-initializing environment!");
@@ -436,21 +437,22 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     {
-        Debug::Log("Window::InitEnvironment() : vendor is "   + m_env->GetVendor());
-        Debug::Log("Window::InitEnvironment() : renderer is " + m_env->GetRenderer());
-        Debug::Log("Window::InitEnvironment() : version is "  + m_env->GetVersion());
+        SR_LOG("Window::InitEnvironment() : vendor is "   + m_env->GetVendor());
+        SR_LOG("Window::InitEnvironment() : renderer is " + m_env->GetRenderer());
+        SR_LOG("Window::InitEnvironment() : version is "  + m_env->GetVersion());
     }
 
     if (m_env->IsGUISupport()) {
         if (m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
             GUI::ICanvas::InitStyle();
             if (!m_env->InitGUI()) {
-                Debug::Error("Window::InitEnvironment() : failed to initializing GUI!");
+                SR_ERROR("Window::InitEnvironment() : failed to initializing GUI!");
                 return false;
             }
         }
-        else
-            Debug::Error("Window::InitEnvironment() : failed to pre-initializing GUI!");
+        else {
+            SR_ERROR("Window::InitEnvironment() : failed to pre-initializing GUI!");
+        }
     }
 
     m_isEnvInit = true;
@@ -517,17 +519,19 @@ void Framework::Graphics::Window::PollEvents() {
     if (m_cameras.NeedFlush()) {
         for (auto&& camera : m_cameras.GetAddedElements()) {
             camera->Create(this);
-            if (!camera->CompleteResize())
-                Helper::Debug::Error("Window::PollEvents() : failed to complete resize camera!");
+            if (!camera->CompleteResize()) {
+                SR_ERROR("Window::PollEvents() : failed to complete resize camera!");
+            }
         }
 
         for (auto&& camera : m_cameras.GetDeletedElements()) {
-            if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low)
-                Helper::Debug::Log("Window::PoolEvents() : remove camera...");
+            if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low) {
+                SR_LOG("Window::PoolEvents() : remove camera...");
+            }
 
             camera->Free();
 
-            Helper::Debug::Log("Window::PoolEvents() : the camera has been successfully released!");
+            SR_LOG("Window::PoolEvents() : the camera has been successfully released!");
         }
 
         m_cameras.Flush();
@@ -555,7 +559,7 @@ void Framework::Graphics::Window::PollEvents() {
 
 bool Framework::Graphics::Window::Free() {
     if (m_isClose) {
-        Debug::Info("Window::Free() : free window pointer...");
+        SR_INFO("Window::Free() : free window pointer...");
 
         delete this;
         return true;
@@ -567,18 +571,19 @@ bool Framework::Graphics::Window::Free() {
 void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
     std::lock_guard<std::mutex> lock(m_mutex);
 
-    Helper::Debug::Log("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
-    this->m_newWindowSize = { (int32_t)w, (int32_t)h };
-    this->m_isNeedResize = true;
+    SR_LOG("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
+
+    m_newWindowSize = { (int32_t)w, (int32_t)h };
+    m_isNeedResize = true;
 }
 
 void Framework::Graphics::Window::CentralizeWindow() {
-    Helper::Debug::Info("Window::CentralizeWindow() : wait centralize window...");
+    SR_INFO("Window::CentralizeWindow() : wait centralize window...");
 
     std::lock_guard<std::mutex> lock(m_mutex);
 
     if (!m_env->GetBasicWindow()) {
-        Helper::Debug::Warn("Window::CentralizeWindow() : basic window is nullptr!");
+        SR_WARN("Window::CentralizeWindow() : basic window is nullptr!");
         return;
     }
 
@@ -590,8 +595,8 @@ void Framework::Graphics::Window::CentralizeWindow() {
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;
 
-    this->m_newWindowPos = { (int32_t)w, (int32_t)h };
-    this->m_isNeedMove = true;
+    m_newWindowPos = { (int32_t)w, (int32_t)h };
+    m_isNeedMove = true;
 }
 
 glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphics::Camera *camera, ImGuiWindow *aimedWindowTarget) {
@@ -641,16 +646,18 @@ Framework::Graphics::Types::Mesh *Framework::Graphics::Window::PopAimedMesh() no
         Types::Mesh* aim = m_aimedMesh;
         m_aimedMesh = nullptr;
         return aim;
-    } else
+    }
+    else
         return nullptr;
 }
 
 void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *camera) {
-    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None)
-        Debug::Log("Window::RemoveCamera() : register camera to remove...");
+    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None) {
+        SR_LOG("Window::RemoveCamera() : register camera to remove...");
+    }
 
     if (!camera) {
-        Debug::Error("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
+        SR_ERROR("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
         return;
     }
 
@@ -658,8 +665,9 @@ void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *cam
 }
 
 void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)  {
-    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None)
-        Debug::Log("Window::AddCamera() : register new camera...");
+    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None) {
+        SR_LOG("Window::AddCamera() : register new camera...");
+    }
 
     m_cameras.Add(camera);
 }
@@ -679,7 +687,8 @@ bool Framework::Graphics::Window::TrySync() {
     try {
         BeginSync();
         return true;
-    } catch (const std::exception& exception) {
+    }
+    catch (const std::exception& exception) {
 
     }
 

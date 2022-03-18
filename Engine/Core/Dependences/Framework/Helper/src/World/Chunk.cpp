@@ -131,7 +131,7 @@ MarshalEncodeNode Chunk::Save() const {
 
 Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {
     auto fPos = Helper::World::AddOffset(
-            Math::FVector3::XZ(m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 0, 1)),
+            ((m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 1, 1))).Cast<Math::Unit>(),
             m_observer->m_offset.m_chunk.Cast<Math::Unit>()
     );
 
