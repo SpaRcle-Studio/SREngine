@@ -71,36 +71,36 @@ namespace Framework::Helper::Math {
             return "(" + std::to_string(self.x) + ", " + std::to_string(self.y) + ", " + std::to_string(self.z) + ", " + std::to_string(self.w) + ")";
         }
 
-        _FORCE_INLINE_ void operator+=(const Quaternion &p_q) {
+        SR_FORCE_INLINE void operator+=(const Quaternion &p_q) {
             self += p_q.self;
         }
-        _FORCE_INLINE_ void operator-=(const Quaternion &p_q) {
+        SR_FORCE_INLINE void operator-=(const Quaternion &p_q) {
             self -= p_q.self;
         }
-        _FORCE_INLINE_ void operator*=(const double &s){
+        SR_FORCE_INLINE void operator*=(const double &s){
             self *= s;
         }
-        _FORCE_INLINE_ void operator/=(const double &s) {
+        SR_FORCE_INLINE void operator/=(const double &s) {
             self *= 1.0 / s;
         }
-        _FORCE_INLINE_ Quaternion operator+(const Quaternion &q2) const {
+        SR_FORCE_INLINE Quaternion operator+(const Quaternion &q2) const {
             const Quaternion &q1 = *this;
             return Quaternion(q1.self + q2.self);
         }
-        _FORCE_INLINE_ Quaternion operator-(const Quaternion &q2) const {
+        SR_FORCE_INLINE Quaternion operator-(const Quaternion &q2) const {
             const Quaternion &q1 = *this;
             return Quaternion(q1.self - q2.self);
         }
-        _FORCE_INLINE_ Quaternion operator-() const {
+        SR_FORCE_INLINE Quaternion operator-() const {
             const Quaternion &q2 = *this;
             return Quaternion(-q2.self);
         }
-        _FORCE_INLINE_ Quaternion operator*(const double &s) const {
+        SR_FORCE_INLINE Quaternion operator*(const double &s) const {
             glm::quat q = self;
             q *= s;
             return Quaternion(q);
         }
-        _FORCE_INLINE_ Quaternion operator/(const double &s) const {
+        SR_FORCE_INLINE Quaternion operator/(const double &s) const {
             glm::quat q = self;
             q *= 1.0 / s;
             return Quaternion(q);

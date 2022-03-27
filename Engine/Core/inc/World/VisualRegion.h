@@ -34,6 +34,7 @@ namespace Framework::Core::World {
         void OnEnter() override;
         void OnExit() override;
         bool Unload() override;
+        bool Load() override;
 
     };
 }

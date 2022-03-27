@@ -571,8 +571,8 @@ namespace Framework::Graphics{
     }*/
 
     int32_t Vulkan::CalculateVBO(void *vertices, Vertices::Type type, size_t count)  {
-        auto size = Vertices::GetVertexSize(type);
-        if (auto id = this->m_memory->AllocateVBO(size * count, vertices); id >= 0) {
+        const auto size = Vertices::GetVertexSize(type);
+        if (auto id = m_memory->AllocateVBO(size * count, vertices); id >= 0) {
             return id;
         }
         else
@@ -581,7 +581,7 @@ namespace Framework::Graphics{
 
     int32_t Vulkan::CalculateIBO(void *indices, uint32_t indxSize, size_t count, int32_t VBO) {
         // ignore VBO
-        if (auto id = this->m_memory->AllocateIBO(indxSize * count, indices); id >= 0) {
+        if (auto id = m_memory->AllocateIBO(indxSize * count, indices); id >= 0) {
             return id;
         }
         else

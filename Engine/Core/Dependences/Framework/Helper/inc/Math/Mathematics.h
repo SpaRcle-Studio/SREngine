@@ -5,6 +5,8 @@
 #ifndef GAMEENGINE_MATHEMATICS_H
 #define GAMEENGINE_MATHEMATICS_H
 
+#include <macros.h>
+
 #ifndef M_PI
     #define M_PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
 #endif
@@ -21,9 +23,6 @@
 //#define _FORCE_INLINE_ __attribute__((always_inline))
 //#define _ALWAYS_INLINE_ inline __attribute__((always_inline))
 
-#define _FORCE_INLINE_ __forceinline
-#define _ALWAYS_INLINE_ inline
-
 #define DegreesToRad(angle) angle*M_PI/180
 #define RadToDegrees(angle) angle*180/M_PI
 
@@ -39,13 +38,19 @@
 #define Math_SQRT2 1.4142135623730950488016887242
 #define Math_LN2 0.6931471805599453094172321215
 #define Math_TAU 6.2831853071795864769252867666
-#define Math_PI 3.1415926535897932384626433833
 #define Math_E 2.7182818284590452353602874714
 #define Math_INF INFINITY
 
+#define SR_INF INFINITY
 #define SR_NAN NAN
+#define SR_INT16_MAX INT16_MAX
+#define SR_UINT16_MAX UINT16_MAX
 #define SR_INT32_MAX INT32_MAX
 #define SR_UINT32_MAX UINT32_MAX
+#define SR_INT64_MAX INT64_MAX
+#define SR_UINT64_MAX UINT64_MAX
+#define SR_DOUBLE_MAX DBL_MAX
+#define SR_FLOAT_MAX FLT_MAX
 
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
@@ -68,7 +73,7 @@ namespace Framework::Helper::Math {
 
     const Unit UnitMAX = DoubleMAX;
 
-    static _ALWAYS_INLINE_ bool is_equal_approx(Unit a, Unit b) noexcept {
+    static SR_FORCE_INLINE bool is_equal_approx(Unit a, Unit b) noexcept {
         // Check for exact equality first, required to handle "infinity" values.
         if (a == b) {
             return true;
@@ -80,7 +85,7 @@ namespace Framework::Helper::Math {
         }
         return abs(a - b) < tolerance;
     }
-    static _ALWAYS_INLINE_ bool is_equal_approx(Unit a, Unit b, Unit tolerance) {
+    static SR_FORCE_INLINE bool is_equal_approx(Unit a, Unit b, Unit tolerance) {
         // Check for exact equality first, required to handle "infinity" values.
         if (a == b) {
             return true;
@@ -89,23 +94,34 @@ namespace Framework::Helper::Math {
         return abs(a - b) < tolerance;
     }
 
+    template<typename T> constexpr bool IsLogical() {
+        return std::is_same_v<T, bool>();
+    }
+
     template<typename T> constexpr bool IsNumber() {
         return
+            std::is_same_v<T, bool> ||
             std::is_same_v<T, float> ||
             std::is_same_v<T, double> ||
             std::is_same_v<T, int> ||
+            std::is_same_v<T, unsigned short> ||
+            std::is_same_v<T, short> ||
             std::is_same_v<T, unsigned int> ||
             std::is_same_v<T, unsigned> ||
             std::is_same_v<T, long> ||
             std::is_same_v<T, long long> ||
             std::is_same_v<T, unsigned long long> ||
             std::is_same_v<T, unsigned long> ||
-            std::is_same_v<T, int64_t> ||
             std::is_same_v<T, float_t> ||
             std::is_same_v<T, double_t> ||
+            std::is_same_v<T, int64_t> ||
             std::is_same_v<T, uint64_t> ||
-            std::is_same_v<T, uint32_t> ||
             std::is_same_v<T, int32_t> ||
+            std::is_same_v<T, uint32_t> ||
+            std::is_same_v<T, int8_t> ||
+            std::is_same_v<T, uint8_t> ||
+            std::is_same_v<T, int16_t> ||
+            std::is_same_v<T, uint16_t> ||
             std::is_same_v<T, Unit>;
     }
 }

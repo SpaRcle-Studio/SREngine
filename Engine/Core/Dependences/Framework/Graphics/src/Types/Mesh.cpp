@@ -8,6 +8,7 @@
 
 #include <Debug.h>
 #include <exception>
+#include <Render/Shader.h>
 
 #include <Loaders/ObjLoader.h>
 
@@ -17,14 +18,13 @@
 #include <Math/Matrix4x4.h>
 
 #include <Types/Geometry/Mesh3D.h>
+#include <Types/RawMesh.h>
 #include <Types/Geometry/SkinnedMesh.h>
 #include <Types/Geometry/DebugWireframeMesh.h>
 #include <Memory/MeshManager.h>
 #include <Memory/MeshAllocator.h>
 
 #include <Window/Window.h>
-
-using namespace Framework::Graphics::Types;
 
 Framework::Graphics::Types::Mesh::Mesh(MeshType type, const std::string& name)
     : IResource(typeid(Mesh).name())
@@ -44,20 +44,83 @@ Framework::Graphics::Types::Mesh::~Mesh() {
         m_material->UnSubscribe(this);
         m_material = nullptr;
     }
+
+    if (m_rawMesh) {
+        m_rawMesh->RemoveUsePoint();
+        m_rawMesh = nullptr;
+    }
 }
 
 bool Framework::Graphics::Types::Mesh::Destroy() {
-    if (IsDestroy())
+    if (IsDestroyed())
         return false;
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
+    if (Debug::GetLevel() >= Debug::Level::High) {
+        SR_LOG("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
+    }
 
     return IResource::Destroy();
 }
 
 
 Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
+    auto&& pMesh = TryLoad(localPath, type, id);
+
+    SRVerifyFalse2(pMesh, "Mesh not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
+
+    return pMesh;
+}
+
+Mesh *Mesh::TryLoad(const std::string &localPath, MeshType type, uint32_t id) {
+    const auto& resourceId = Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, localPath.c_str());
+
+    Mesh* mesh = nullptr;
+
+    if (Mesh* pMesh = ResourceManager::Instance().Find<Mesh>(resourceId)) {
+        SRVerifyFalse((mesh = dynamic_cast<Mesh*>(pMesh->Copy(nullptr))));
+        return mesh;
+    }
+
+    auto pRaw = Helper::Types::RawMesh::Load(localPath);
+
+    if (!pRaw) {
+        return nullptr;
+    }
+
+    if (id >= pRaw->GetModelsCount()) {
+        if (pRaw->GetCountUses() == 0) {
+            SR_WARN("Mesh::TryLoad() : unresolved situation...");
+            pRaw->Destroy();
+        }
+        return nullptr;
+    }
+
+    switch (type) {
+        case MeshType::Static: mesh = Memory::MeshAllocator::Allocate<Mesh3D>(); break;
+        case MeshType::Wireframe: mesh = Memory::MeshAllocator::Allocate<DebugWireframeMesh>(); break;
+        case MeshType::Unknown:
+        case MeshType::Skinned:
+            SRAssert(false);
+            return mesh;
+    }
+
+    if (mesh) {
+        /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
+        /// и другой поток может его подхватить
+        mesh->m_meshId = id;
+
+        mesh->SetRawMesh(pRaw);
+        mesh->SetGeometryName(pRaw->GetGeometryName(id));
+        mesh->SetMaterial(Material::GetDefault());
+
+        mesh->SetId(resourceId);
+    }
+
+    SRAssert(mesh);
+
+    return mesh;
+
+    /*
     const auto& resourceId = Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, localPath.c_str());
     const bool withIndices = Environment::Get()->GetPipeLine() == PipeLine::Vulkan;
 
@@ -69,12 +132,12 @@ Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
     }
 
     const auto path = ResourceManager::Instance().GetResPath().Concat("/Models/").Concat(localPath);
-    const auto ext = path.GetExtension();
+    //const auto ext = path.GetExtension();
 
-    if (ext == "obj") {
-        mesh = ObjLoader::Load(path.ToString(), withIndices, type, id);
-    }
-    else if (ext == "fbx") {
+    //if (ext == "obj") {
+    //    mesh = ObjLoader::Load(path.ToString(), withIndices, type, id);
+    //}
+    //else if (ext == "fbx") {
         SRAssert(type == MeshType::Static);
 
         const auto resFolder = Helper::ResourceManager::Instance().GetResPath();
@@ -86,46 +149,82 @@ Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
                 withIndices);
 
         if (fbx.GetShapes().size() <= id) {
-            Helper::Debug::Error("Mesh::Load() : incorrect id! \n\tPath: " + localPath + "\n\tId: " + std::to_string(id));
+            SR_ERROR("Mesh::Load() : incorrect id! \n\tPath: " + localPath + "\n\tId: " + std::to_string(id));
             return {};
         }
 
         mesh = LoadFbx(type, withIndices, fbx.GetShapes()[id]);
-    }
+    //}
 
     if (mesh) {
-        mesh->SetId(resourceId);
+        /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
+        /// и другой поток может его подхватить
         mesh->m_meshId = id;
+        mesh->SetId(resourceId);
     }
 
     SRAssert(mesh);
 
-    return mesh;
+    return mesh;*/
 }
 
 Mesh *Mesh::LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry &geometry) {
-    Mesh3D* mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
+    /*IndexedMesh* mesh = nullptr;
+
+    if (geometry.vertices.empty()) {
+        SR_ERROR("Mesh::LoadFbx() : vertices is empty! Geometry: " + geometry.name);
+        return nullptr;
+    }
+
+    switch (type) {
+        case MeshType::Static: {
+            mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
+            mesh->SetVertexArray(Vertices::CastVertices<Vertices::Mesh3DVertex>(geometry.vertices));
+            break;
+        }
+        case MeshType::Wireframe:
+            mesh = Memory::MeshAllocator::Allocate<DebugWireframeMesh>();
+            mesh->SetVertexArray(Vertices::CastVertices<Vertices::SkyboxVertex>(geometry.vertices));
+            break;
+        case MeshType::Unknown:
+        case MeshType::Skinned:
+            SRAssert(false);
+            return mesh;
+    }
+
+    if (!mesh) {
+        SRAssert(false);
+        return nullptr;
+    }
+
     mesh->SetGeometryName(geometry.name);
     mesh->SetMaterial(Material::GetDefault());
 
     if (withIndices)
         mesh->SetIndexArray(geometry.indices);
 
-    auto vertices = std::vector<Vertices::Mesh3DVertex>();
-    for (auto vertex : geometry.vertices) {
-        vertices.emplace_back(Vertices::Mesh3DVertex{
-                .pos = {vertex.pos.x, vertex.pos.y, vertex.pos.z},
-                .uv  = {vertex.uv.x, vertex.uv.y},
-        });
-    }
 
-    mesh->SetVertexArray(vertices);
+    return mesh;*/
 
-    return mesh;
+    return nullptr;
 }
 
 std::vector<Mesh *> Framework::Graphics::Types::Mesh::Load(const std::string& localPath, MeshType type) {
-    auto path = ResourceManager::Instance().GetResPath().Concat("/Models/").Concat(localPath);
+    std::vector<Mesh*> meshes;
+
+    uint32_t id = 0;
+    while(auto&& pMesh = TryLoad(localPath, type, id)) {
+        meshes.emplace_back(pMesh);
+        ++id;
+    }
+
+    if (meshes.empty()) {
+        SR_ERROR("Mesh::Load() : failed to load mesh! Path: " + localPath);
+    }
+
+    return meshes;
+
+    /*auto path = ResourceManager::Instance().GetResPath().Concat("/Models/").Concat(localPath);
     auto meshes = std::vector<Mesh*>();
     const bool withIndices = Environment::Get()->GetPipeLine() == PipeLine::Vulkan;
 
@@ -147,11 +246,11 @@ ret:
 
     std::string ext = StringUtils::GetExtensionFromFilePath(path);
 
-    if (ext == "obj") {
-        meshes = ObjLoader::Load(path, withIndices, type);
-    }
-    else if (ext == "fbx") {
-        SRAssert(type == MeshType::Static);
+    //if (ext == "obj") {
+    //    meshes = ObjLoader::Load(path, withIndices, type);
+    //}
+    //else if (ext == "fbx") {
+        //SRAssert(type == MeshType::Static);
 
         const auto resFolder = Helper::ResourceManager::Instance().GetResPath();
 
@@ -163,48 +262,53 @@ ret:
                 withIndices);
 
         if (fbx.GetShapes().empty()) {
-            Helper::Debug::Error("Mesh::Load() : file not found! \n\tPath: " + localPath);
+            SR_ERROR("Mesh::Load() : file not found or need triangulate! \n\tPath: " + localPath);
             return {};
         }
 
         for (const auto& shape : fbx.GetShapes()) {
-            meshes.emplace_back(LoadFbx(type, withIndices, shape));
+            if (auto&& mesh = LoadFbx(type, withIndices, shape))
+                meshes.emplace_back(mesh);
         }
-    }
-    else {
-        Helper::Debug::Error("Mesh::Load() : unknown \"" + ext + "\" format!");
-        meshes = std::vector<Mesh*>();
-    }
+    //}
+    //else {
+    //    SR_ERROR("Mesh::Load() : unknown \"" + ext + "\" format!");
+    //    meshes = std::vector<Mesh*>();
+    //}
 
     for (uint32_t i = 0; i < static_cast<uint32_t>(meshes.size()); ++i) {
-        meshes[i]->SetId(Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), i, localPath.c_str()));
+        /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
+        /// и другой поток может его подхватить
         meshes[i]->m_meshId = i;
+        meshes[i]->SetId(Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), i, localPath.c_str()));
     }
 
-    return meshes;
+    return meshes;*/
 }
 
 void Mesh::OnDestroyGameObject() {
-    this->Destroy();
-    if (!m_render)
-        Debug::Error("Mesh::OnDestroyGameObject() : render is not set! Something went wrong...");
+    Destroy();
+
+    if (!m_render) {
+        SR_ERROR("Mesh::OnDestroyGameObject() : render is not set! Something went wrong...");
+    }
     else
         m_render->RemoveMesh(this);
 }
 
 bool Mesh::IsCanCalculate() const {
     if (!m_render) {
-        Debug::Error("Mesh::IsCanCalculate() : mesh is not register in render!");
+        SR_ERROR("Mesh::IsCanCalculate() : mesh is not register in render!");
         return false;
     }
 
     if (!m_shader) {
-        Debug::Error("Mesh::IsCanCalculate() : mesh have not shader!");
+        SR_ERROR("Mesh::IsCanCalculate() : mesh have not shader!");
         return false;
     }
 
-    if (!m_material){
-        Debug::Error("Mesh::IsCanCalculate() : mesh have not material!");
+    if (!m_material) {
+        SR_ERROR("Mesh::IsCanCalculate() : mesh have not material!");
         return false;
     }
 
@@ -212,7 +316,7 @@ bool Mesh::IsCanCalculate() const {
 }
 
 void Mesh::OnSelected(bool value) {
-    if (value == this->IsSelected())
+    if (value == IsSelected())
         return;
 
     Component::OnSelected(value);
@@ -226,22 +330,25 @@ Math::FVector3 Mesh::GetBarycenter() const {
 }
 
 IResource *Mesh::Copy(IResource* destination) const {
-    if (IsDestroy()) {
-        Debug::Error("Mesh::Copy() : mesh already destroyed!");
+    if (IsDestroyed()) {
+        SR_ERROR("Mesh::Copy() : mesh already destroyed!");
         return nullptr;
     }
 
     Mesh* mesh = dynamic_cast<Mesh*>(destination);
     if (!mesh) {
-        Debug::Error("Mesh::Copy() : impossible to copy basic mesh!");
+        SR_ERROR("Mesh::Copy() : impossible to copy basic mesh!");
         return nullptr;
     }
 
     if (Debug::GetLevel() >= Debug::Level::Full)
-        Debug::Log("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
+        SR_LOG("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
+
+    mesh->m_meshId        = m_meshId;
 
     mesh->SetMaterial(m_material);
     mesh->SetShader(nullptr);
+    mesh->SetRawMesh(m_rawMesh);
 
     mesh->m_barycenter = m_barycenter;
     mesh->m_position   = m_position;
@@ -249,8 +356,9 @@ IResource *Mesh::Copy(IResource* destination) const {
     mesh->m_scale      = m_scale;
     mesh->m_skew       = m_skew;
 
-    mesh->m_isCalculated  = m_isCalculated;
     mesh->m_modelMat      = m_modelMat;
+    mesh->m_isCalculated.store(m_isCalculated);
+    mesh->m_hasErrors.store(false);
 
     return Helper::IResource::Copy(mesh);
 }
@@ -258,19 +366,19 @@ IResource *Mesh::Copy(IResource* destination) const {
 bool Mesh::FreeVideoMemory() {
     if (m_pipeline == PipeLine::Vulkan) {
         if (m_descriptorSet >= 0) {
-            this->m_env->FreeDescriptorSet(m_descriptorSet);
-            this->m_descriptorSet = -5;
+            m_env->FreeDescriptorSet(m_descriptorSet);
+            m_descriptorSet = -5;
         }
 
         if (m_UBO >= 0) {
-            if (!this->m_env->FreeUBO(m_UBO)) {
+            if (!m_env->FreeUBO(m_UBO)) {
                 Helper::Debug::Error("Mesh::FreeVideoMemory() : failed to free uniform buffer object!");
                 return false;
             }
         }
     }
 
-    this->m_isCalculated = false;
+    m_isCalculated = false;
 
     return true;
 }
@@ -366,6 +474,23 @@ void Mesh::OnTransparencyChanged() {
 
 std::string Mesh::GetPath() const {
     return StringUtils::Substring(GetResourceId(), '|', 1);
+}
+
+void Mesh::SetRawMesh(Helper::Types::RawMesh *pRaw) {
+    if (m_rawMesh && pRaw) {
+        SRAssert(false);
+        return;
+    }
+
+    if (m_rawMesh) {
+        m_rawMesh->RemoveUsePoint();
+    }
+
+    if (pRaw) {
+        pRaw->AddUsePoint();
+    }
+
+    m_rawMesh = pRaw;
 }
 
 

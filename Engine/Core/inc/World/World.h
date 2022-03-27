@@ -27,22 +27,28 @@ namespace Framework::Core::World {
         void EndSync() override { Framework::Engine::Instance().GetWindow()->EndSync(); }
         bool TrySync() override { return Framework::Engine::Instance().GetWindow()->TrySync(); }
 
-        GameObject::Ptr Instance(const Xml::Node& gameObjectXml) override {
-            const auto&& tag = gameObjectXml.TryGetAttribute("Tag").ToString("Untagged");
-            const auto&& enabled = gameObjectXml.TryGetAttribute("Enabled").ToBool(true);
-            const auto&& name = gameObjectXml.GetAttribute("Name").ToString();
-            const auto&& id = gameObjectXml.GetAttribute("EntityId").ToUInt64();
+        GameObject::Ptr Instance(const MarshalDecodeNode& node) override {
+            const auto&& name = node.GetAttribute<std::string>("Name");
+
+            const auto&& tag = node.GetAttributeDef<std::string>("Tag", "Untagged");
+            const auto&& enabled = node.GetAttributeDef<bool>("Enabled", true);
+            const auto&& id = node.GetAttributeDef<uint64_t>("EntityId", UINT64_MAX);
 
             GameObject::Ptr gameObject;
 
-            EntityManager::Instance().GetReserved(id, [&gameObject, name, this]() -> Entity* {
-                return (gameObject = Scene::Instance(name)).DynamicCast<Entity*>();
-            });
+            if (id == UINT64_MAX) {
+                gameObject = Scene::Instance(name);
+            }
+            else {
+                EntityManager::Instance().GetReserved(id, [&gameObject, name, this]() -> Entity * {
+                    return (gameObject = Scene::Instance(name)).DynamicCast<Entity *>();
+                });
+            }
 
             if (!gameObject.Valid())
                 return gameObject;
 
-            gameObject->SetTransform(Transform3D::Load(gameObjectXml.TryGetNode("Transform3D")));
+            gameObject->SetTransform(Transform3D::Load(node.GetNode("Transform3D")));
 
             auto&& componentManager = Helper::ComponentManager::Instance();
 
@@ -50,19 +56,20 @@ namespace Framework::Core::World {
                 context.SetPointer("Render", Engine::Instance().GetRender());
                 context.SetPointer("Window", Engine::Instance().GetWindow());
 
-                for (const auto& componentXml : gameObjectXml.TryGetNode("Components").TryGetNodes()) {
-                    if (auto&& component = componentManager.Load(componentXml))
+                for (const auto& componentNode : node.TryGetNode("Components").GetNodes()) {
+                    if (auto&& component = componentManager.Load(componentNode)) {
                         gameObject->AddComponent(component);
+                    }
                     else {
-                        SR_WARN("World::Instance() : failed to load \"" + componentXml.Name() + "\" component!")
+                        SR_WARN("World::Instance() : failed to load \"" + componentNode.Name() + "\" component!");
                     }
                 }
 
                 return true;
             });
 
-            for (const auto& childXml : gameObjectXml.TryGetNode("Children").TryGetNodes()) {
-                if (auto&& child = Instance(childXml)) {
+            for (const auto& childNode : node.TryGetNode("Children").GetNodes()) {
+                if (auto&& child = Instance(childNode)) {
                     gameObject->AddChild(child);
                 }
             }

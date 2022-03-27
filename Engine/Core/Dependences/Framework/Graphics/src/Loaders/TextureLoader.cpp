@@ -3,6 +3,7 @@
 //
 
 #define STB_IMAGE_IMPLEMENTATION
+
 #include "stbi/stb_image.c"
 
 #include <Utils/StringUtils.h>
@@ -28,7 +29,7 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
         unsigned char* imgData = stbi_load(path.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
 
         if (!imgData) {
-            Helper::Debug::Error("TextureLoader::Load() : can not load \""+path + "\" file!");
+            SR_ERROR("TextureLoader::Load() : can not load \""+path + "\" file!");
             return texture;
         }
 
@@ -46,12 +47,15 @@ Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
 }
 
 bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("TextureLoader::Free() : free source image data...");
-    if (data)
+    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+        SR_LOG("TextureLoader::Free() : free source image data...");
+    }
+
+    if (data) {
         stbi_image_free(data);
+    }
     else {
-        Helper::Debug::Error("TextureLoader::Free() : data is nullptr!");
+        SR_ERROR("TextureLoader::Free() : data is nullptr!");
         return false;
     }
     return true;

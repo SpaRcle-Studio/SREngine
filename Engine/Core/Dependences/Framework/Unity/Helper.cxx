@@ -1,5 +1,9 @@
 #include <macros.h>
 
+#ifdef SR_WIN32
+    #include "../Helper/src/Platform/PlatformWindows.cpp"
+#endif
+
 #include "../Helper/src/EntityComponentSystem/Component.cpp"
 #include "../Helper/src/EntityComponentSystem/GameObject.cpp"
 #include "../Helper/src/EntityComponentSystem/ISavable.cpp"
@@ -21,8 +25,11 @@
 #include "../Helper/src/Math/Quaternion.cpp"
 #include "../Helper/src/Math/Vector3.cpp"
 
+#include "../Helper/src/TaskManager/TaskManager.cpp"
+
 #include "../Helper/src/ResourceManager/IResource.cpp"
 #include "../Helper/src/ResourceManager/ResourceManager.cpp"
+#include "../Helper/src/ResourceManager/ResourcesHolder.cpp"
 
 #include "../Helper/src/CommandManager/ICommand.cpp"
 #include "../Helper/src/CommandManager/CmdManager.cpp"
@@ -30,6 +37,9 @@
 #include "../Helper/src/Types/String.cpp"
 #include "../Helper/src/Types/Time.cpp"
 #include "../Helper/src/Types/Time.cpp"
+#include "../Helper/src/Types/Marshal.cpp"
+#include "../Helper/src/Types/Thread.cpp"
+#include "../Helper/src/Types/RawMesh.cpp"
 
 #include "../Helper/src/Utils/Stacktrace.cpp"
 #include "../Helper/src/Utils/StringUtils.cpp"

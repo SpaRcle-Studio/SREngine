@@ -5,6 +5,7 @@
 #ifndef GAMEENGINE_OBJLOADER_H
 #define GAMEENGINE_OBJLOADER_H
 
+/*
 #include <string>
 #include <vector>
 #include <mutex>
@@ -14,8 +15,8 @@
 #include <Debug.h>
 #include <glm/glm.hpp>
 #include <Types/Vertices.h>
-#include "../../../Depends/tinyobjloader/inc/tiny_obj_loader.h"
 #include <Memory/MeshAllocator.h>
+#include <tiny_obj_loader.h>
 
 namespace Framework::Graphics::Types {
     class Mesh;
@@ -46,7 +47,7 @@ namespace Framework::Graphics {
             std::string warn, err;
 
             if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, path.c_str())) {
-                Helper::Debug::Error("ObjLoader::LoadSourceWithIndices() : failed open file!\n\tWarn: " + warn + "\n\tError: " + err);
+                SR_ERROR("ObjLoader::LoadSourceWithIndices() : failed open file!\n\tWarn: " + warn + "\n\tError: " + err);
                 return {};
             }
 
@@ -163,7 +164,8 @@ namespace Framework::Graphics {
                 if (withIndices) {
                     mesh->SetVertexArray(vertices);
                     mesh->SetIndexArray(indices);
-                } else {
+                }
+                else {
                     auto rawVertices = std::vector<typename T::VertexType>();
 
                     for (const auto& index : indices)
@@ -178,6 +180,6 @@ namespace Framework::Graphics {
             return meshes;
         }
     };
-}
+}*/
 
 #endif //GAMEENGINE_OBJLOADER_H

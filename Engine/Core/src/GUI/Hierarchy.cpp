@@ -4,6 +4,7 @@
 
 #include <GUI/Hierarchy.h>
 #include <Input/InputSystem.h>
+#include <Platform/Platform.h>
 
 namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()
@@ -11,38 +12,14 @@ namespace SR_CORE_NS::GUI {
     { }
 
     void Hierarchy::Draw() {
-        m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
-
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        if (m_scene.LockIfValid()) {
-            uint64_t i = 0;
+        m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
 
-            if (ImGui::TreeNodeEx(m_scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
-                ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
-
-                m_scene->ForEachRootObjects([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& gm) {
-                    if (gm->HasChildren()) {
-                        const bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                                      m_nodeFlagsWithChild | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                                      "%s", gm->GetName().c_str());
-                        CheckSelected(gm);
-
-                        if (open)
-                            DrawChild(gm);
-                    }
-                    else {
-                        ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                          m_nodeFlagsWithoutChild | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", gm->GetName().c_str());
-
-                        CheckSelected(gm);
-                    }
-                    i++;
-                });
-                ImGui::TreePop();
-                ImGui::PopStyleVar();
-            }
+        if (m_scene.TryLockIfValid()) {
+            m_scene->ForEachRootObjects([&](const Helper::GameObject::Ptr& gm) {
+                DrawChild(gm);
+            });
 
             m_scene.Unlock();
         }
@@ -53,8 +30,49 @@ namespace SR_CORE_NS::GUI {
         m_scene = scene;
     }
 
+    void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) const {
+        ImGui::PushID((void*)(intptr_t)id);
+        if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
+            if (m_scene->GetAllSelected().count(gm) == 0) {
+                gm->GetScene()->DeSelectAll();
+                gm->SetSelect(true);
+            }
+
+            if (ImGui::Selectable("Copy")) {
+                Copy();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Paste")) {
+                Paste();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Cut")) {
+
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Delete")) {
+
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Add children")) {
+
+            }
+
+            ImGui::EndPopup();
+        }
+        ImGui::PopID();
+    }
+
     void Hierarchy::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject> &gm) const {
-        if (ImGui::IsItemClicked()) {
+        if (ImGui::IsItemClicked() && !gm->IsSelected()) {
             if (!m_shiftPressed && gm->GetScene().Valid())
                 gm->GetScene()->DeSelectAll();
 
@@ -62,45 +80,73 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::DrawChild(const Helper::Types::SafePtr<Helper::GameObject> &root) const {
-        uint64_t i = 0;
+    void Hierarchy::DrawChild(const Helper::GameObject::Ptr &root) {
+        const auto& name = root->GetName();
+        const bool hasChild = root->HasChildren();
 
-        root->ForEachChild([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& child){
-            if (child->HasChildren()) {
-                const bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                              m_nodeFlagsWithChild |
-                                              (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                              "%s", child->GetName().c_str()
-                );
+        const ImGuiTreeNodeFlags flags = (hasChild ? m_nodeFlagsWithChild : m_nodeFlagsWithoutChild) |
+                (root->IsSelected() ? ImGuiTreeNodeFlags_Selected : 0);
 
-                CheckSelected(child);
+        const uint64_t id = root->GetEntityId();
+        const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
-                if (open)
-                    DrawChild(child);
+        ContextMenu(root, id);
+        CheckSelected(root);
 
-            } else {
-                ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                  m_nodeFlagsWithoutChild | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                  "%s", child->GetName().c_str()
-                );
+        if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource()) {
+            m_pointersHolder.clear();
 
-                CheckSelected(child);
+            for (const GameObject::Ptr& ptr : m_scene->GetAllSelected())
+                m_pointersHolder.emplace_back(ptr);
+
+            ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<Helper::GameObject::Ptr>), ImGuiCond_Once);
+            ImGui::Text("%s ->", name.c_str());
+            ImGui::EndDragDropSource();
+        }
+
+        if (ImGui::BeginDragDropTarget()) {
+            ImGui::Separator();
+
+            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
+                for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                    if (ptr.RecursiveLockIfValid()) {
+                        ptr->MoveToTree(root);
+                        ptr->Unlock();
+                    }
+                }
             }
 
-            ++i;
-        });
+            ImGui::EndDragDropTarget();
+        }
 
-        ImGui::TreePop();
+        if (open && hasChild) {
+            root->ForEachChild([&](const Helper::GameObject::Ptr &child) {
+                DrawChild(child);
+            });
+            ImGui::TreePop();
+        }
     }
 
     void Hierarchy::OnKeyDown(const KeyDownEvent &event) {
         switch (event.GetKeyCode()) {
+            case KeyCode::C: {
+                if (IsKeyPressed(KeyCode::Ctrl))
+                    Copy();
+                break;
+            }
+            case KeyCode::V: {
+                if (IsKeyPressed(KeyCode::Ctrl))
+                    Paste();
+                break;
+            }
             case KeyCode::Del:
                 if (m_scene.LockIfValid()) {
-                    if (auto &&selected = m_scene->GetSelected(); selected.LockIfValid()) {
-                        auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-                        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-                        selected.Unlock();
+                    for (auto&& selected : m_scene->GetAllSelected()) {
+                        if (selected.LockIfValid()) {
+                            auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                            selected.Unlock();
+                        }
                     }
                     m_scene.Unlock();
                 }
@@ -110,5 +156,41 @@ namespace SR_CORE_NS::GUI {
         }
 
         InputHandler::OnKeyDown(event);
+    }
+
+    void Hierarchy::OnKeyUp(const KeyUpEvent &event) {
+        switch (event.GetKeyCode()) {
+            case KeyCode::LShift: {
+                if (m_pointersHolder.size() > 1) {
+                    m_pointersHolder.clear();
+                }
+                break;
+            }
+            default:
+                break;
+        }
+
+        InputHandler::OnKeyUp(event);
+    }
+
+    void Hierarchy::Copy() const {
+        MarshalEncodeNode marshal;
+
+        for (auto&& ptr : m_scene->GetAllSelected()) {
+            marshal.Append(ptr->Save(SAVABLE_FLAG_ECS_NO_ID));
+        }
+
+        if (marshal.Valid())
+            Helper::Platform::TextToClipboard(marshal.ToString());
+    }
+
+    void Hierarchy::Paste() const {
+        if (auto marshal = Helper::MarshalDecodeNode::LoadFromMemory(Helper::Platform::GetClipboardText())) {
+            m_scene->DeSelectAll();
+            for (const auto& gameObject : marshal.GetNodes()) {
+                if (auto&& ptr = m_scene->Instance(gameObject))
+                    ptr->SetSelect(true);
+            }
+        }
     }
 }

@@ -216,8 +216,9 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
     // } else
     m_winFormat->SetFreeValue(w, h);
 
-    if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("OpenGL::SetWindowSize() : width = "+std::to_string(w) + "; height = "+ std::to_string(h));
+    if (Debug::GetLevel() >= Debug::Level::High) {
+        SR_LOG("OpenGL::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
+    }
 
 #ifdef  SR_OPENGL_USE_WINAPI
 

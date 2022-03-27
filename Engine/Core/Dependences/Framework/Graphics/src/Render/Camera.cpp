@@ -139,7 +139,7 @@ Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate(uint32_t widt
 
 bool Framework::Graphics::Camera::CompleteResize() {
     if (m_cameraSize.x <= 0 || m_cameraSize.y <= 0) {
-        Helper::Debug::Error("Camera::CompleteResize() : camera width or height equals or less zero!");
+        SR_ERROR("Camera::CompleteResize() : camera width or height equals or less zero!");
         return false;
     }
 
@@ -206,9 +206,7 @@ void Framework::Graphics::Camera::SetNear(float_t value) {
     UpdateProjection();
 }
 
-Component *Framework::Graphics::Camera::LoadComponent(const Xml::Node &xml, const Helper::Types::DataStorage *dataStorage) {
-    return nullptr;
-}
+
 
 
 

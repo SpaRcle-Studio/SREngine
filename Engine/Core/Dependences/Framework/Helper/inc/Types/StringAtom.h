@@ -51,6 +51,11 @@ namespace Framework::Helper {
             return static_cast<uint64_t>(m_data.size());
         };
 
+        [[nodiscard]] std::string ToString() const {
+            const std::lock_guard<std::mutex> lock(m_mutex);
+            return m_data;
+        };
+
     private:
         mutable std::mutex m_mutex;
         std::string m_data;

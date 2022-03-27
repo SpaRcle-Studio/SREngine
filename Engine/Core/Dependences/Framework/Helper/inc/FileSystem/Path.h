@@ -5,9 +5,12 @@
 #ifndef SRENGINE_PATH_H
 #define SRENGINE_PATH_H
 
+#include <macros.h>
+
 #include <string>
 #include <atomic>
 #include <vector>
+#include <string_view>
 #include <functional>
 
 namespace Framework::Helper {
@@ -28,29 +31,34 @@ namespace Framework::Helper {
 
     public:
         Path Normalize();
-        bool Make() const;
+        bool Make(Type type = Type::Undefined) const;
         void NormalizeSelf();
-        [[nodiscard]] std::string ToString() const;
-        [[nodiscard]] size_t GetHash() const;
-        [[nodiscard]] const char* CStr() const;
 
-        [[nodiscard]] Path Concat(const Path& path) const;
-        [[nodiscard]] Path ConcatExt(const std::string& ext) const;
+        SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD size_t GetHash() const;
+        SR_NODISCARD const char* CStr() const;
 
-        [[nodiscard]] bool Valid() const;
-        [[nodiscard]] bool Empty() const;
-        [[nodiscard]] bool Exists() const;
+        SR_NODISCARD Path GetPrevious() const;
+        SR_NODISCARD Path GetFolder() const { return m_path; }
+        SR_NODISCARD Path Concat(const Path& path) const;
+        SR_NODISCARD Path ConcatExt(const std::string& ext) const;
 
-        [[nodiscard]] Type GetType() const;
-        [[nodiscard]] bool IsDir() const;
-        [[nodiscard]] bool IsFile() const;
+        SR_NODISCARD bool Valid() const;
+        SR_NODISCARD bool Empty() const;
+        SR_NODISCARD bool Exists() const;
 
-        [[nodiscard]] std::vector<Path> GetFiles() const;
-        [[nodiscard]] std::vector<Path> GetFolders() const;
-        [[nodiscard]] std::vector<Path> GetAll() const;
+        SR_NODISCARD Type GetType() const;
+        SR_NODISCARD bool IsDir() const;
+        SR_NODISCARD bool IsFile() const;
 
-        [[nodiscard]] std::string GetExtension() const;
-        [[nodiscard]] std::string GetBaseName() const;
+        SR_NODISCARD std::vector<Path> GetFiles() const;
+        SR_NODISCARD std::vector<Path> GetFolders() const;
+        SR_NODISCARD std::vector<Path> GetAll() const;
+
+        SR_NODISCARD std::string_view GetExtensionView() const;
+        SR_NODISCARD std::string_view GetBaseNameView() const;
+        SR_NODISCARD std::string GetExtension() const;
+        SR_NODISCARD std::string GetBaseName() const;
 
     private:
         void Update();

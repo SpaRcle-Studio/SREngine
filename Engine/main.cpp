@@ -3,6 +3,12 @@
 //
 
 #include <macros.h>
+
+#ifdef SR_WIN32
+    #include <Windows.h>
+    #include <shellapi.h>
+#endif
+
 #include <Debug.h>
 
 #include <Engine.h>
@@ -24,6 +30,7 @@
 #include <Utils/Features.h>
 #include <GUI/NodeManager.h>
 #include <FbxLoader/Debug.h>
+#include <Types/Marshal.h>
 
 using namespace Framework;
 
@@ -74,6 +81,8 @@ int main(int argc, char **argv) {
     else
         ResourceManager::Instance().Init(folder);
 
+    RuntimeTest::MarshalRunRuntimeTest();
+
     Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
 
     if (!FbxLoader::Debug::IsInit()) {
@@ -95,6 +104,7 @@ int main(int argc, char **argv) {
 
     // Register all resource types
     {
+        ResourceManager::Instance().RegisterType<RawMesh>();
         ResourceManager::Instance().RegisterType<Mesh>();
         ResourceManager::Instance().RegisterType<Texture>();
         ResourceManager::Instance().RegisterType<Material>();
@@ -118,21 +128,23 @@ int main(int argc, char **argv) {
         Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
     }
 
-    if (const auto env = Helper::FileSystem::ReadAllText(ResourceManager::Instance().GetResPath().Concat("/Configs/Environment.config")); env == "OpenGL"){
+    const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
+    const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
+
+    if (envName == "OpenGL"){
         Environment::Set(new OpenGL());
     }
-    else if (env == "Vulkan") {
+    else if (envName == "Vulkan") {
         Environment::Set(new Vulkan());
     }
-    else if (env.empty()) {
-        SR_ERROR("System error: file \"Resources/Configs/Environment.config\" does not exist!\n\t"
-                             "Please, create it and write the name of the environment there!");
+    else if (envName.empty()) {
+        SR_ERROR("System error: file \"Resources/Configs/Environment.xml\" does not exist!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -1500;
     }
     else {
-        SR_ERROR("System error: unknown environment! \"" + env + "\" does not support!");
+        SR_ERROR("System error: unknown environment! \"" + envName + "\" does not support!");
         ResourceManager::Instance().Stop();
         Debug::Stop();
         return -2000;
@@ -168,11 +180,13 @@ int main(int argc, char **argv) {
 
           }
           else
-              Debug::Error("Failed to running game engine!");
-      } else
-          Debug::Error("Failed to initializing game engine!");
-    } else
-        Debug::Error("Failed to creating game engine!");
+              SR_ERROR("Failed to running game engine!");
+      }
+      else
+          SR_ERROR("Failed to initializing game engine!");
+    }
+    else
+        SR_ERROR("Failed to creating game engine!");
 
     if (engine.IsRun()) {
         Debug::System("All systems successfully run!");

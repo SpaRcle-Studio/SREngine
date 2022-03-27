@@ -5,26 +5,19 @@
 #ifndef GAMEENGINE_TEXTURE_H
 #define GAMEENGINE_TEXTURE_H
 
-#include <mutex>
 #include <ResourceManager/IResource.h>
 #include <Environment/Environment.h>
 #include <Environment/TextureHelper.h>
 #include <Memory/TextureConfigs.h>
-#include <macros.h>
 
 namespace Framework::Graphics{
     class TextureLoader;
     class Render;
 }
 
-namespace Framework {
-    class API;
-}
-
 namespace Framework::Graphics::Types {
     class Texture : public Helper::IResource {
         friend class ::Framework::Graphics::TextureLoader;
-        friend class ::Framework::API;
     private:
         Texture();
         ~Texture() override;
@@ -34,25 +27,23 @@ namespace Framework::Graphics::Types {
         void SetConfig(const Memory::TextureConfig& config);
 
     public:
-        void OnDestroyGameObject();
-
         void SetRender(Render* render);
 
         [[nodiscard]] SR_FORCE_INLINE Render* GetRender() const noexcept { return m_render; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculate; }
         [[nodiscard]] SR_FORCE_INLINE bool HasRender() const noexcept { return GetRender(); }
+
         [[nodiscard]] SR_FORCE_INLINE int32_t GetID() noexcept {
-            if (IsDestroy()) {
-                Helper::Debug::Error("Texture::GetID() : texture \"" + GetResourceId() + "\" is destroyed!");
+            if (IsDestroyed()) {
+                SR_ERROR("Texture::GetID() : texture \"" + GetResourceId() + "\" is destroyed!");
                 return -1;
             }
 
-            if (!m_isCalculate)
-                if (!Calculate()) {
-                    Helper::Debug::Error("Texture::GetID() : failed to calculating texture!");
-                    return -1;
-                }
+            if (!m_isCalculate && !Calculate()) {
+                SR_ERROR("Texture::GetID() : failed to calculating texture!");
+                return -1;
+            }
 
             return m_ID;
         }

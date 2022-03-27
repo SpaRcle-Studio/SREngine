@@ -19,30 +19,31 @@ namespace Framework::Graphics::Animations {
     private:
         Types::Mesh* m_mesh = nullptr;
     public:
-
-        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage) {
+        static Component* LoadComponent(const Helper::MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
             return nullptr;
         }
 
         void SetRender(Render* render) {
             if (m_mesh) {
-                Helper::Debug::Error("Bone::SetRender() : render is already set!");
-            } else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", MeshType::Static); !meshes.empty()) {
+                SR_ERROR("Bone::SetRender() : render is already set!");
+            }
+            else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", MeshType::Static); !meshes.empty()) {
                 m_mesh = meshes[0];
                 render->RegisterMesh(m_mesh);
-            } else {
-                Helper::Debug::Error("Bone::SetRender() : failed to load mesh!");
+            }
+            else {
+                SR_ERROR("Bone::SetRender() : failed to load mesh!");
             }
         }
-        void OnMove(const Math::FVector3& value) override {
+        void OnMove(const Helper::Math::FVector3& value) override {
             if (m_mesh)
                 m_mesh->OnMove(value);
         }
-        void OnRotate(const Math::FVector3& value) override {
+        void OnRotate(const Helper::Math::FVector3& value) override {
             if (m_mesh)
                 m_mesh->OnRotate(value);
         }
-        void OnScaled(const Math::FVector3& value) override {
+        void OnScaled(const Helper::Math::FVector3& value) override {
             if (m_mesh)
                 m_mesh->OnScaled(value);
         }

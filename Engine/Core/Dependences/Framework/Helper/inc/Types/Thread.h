@@ -5,11 +5,11 @@
 #ifndef GAMEENGINE_THREAD_H
 #define GAMEENGINE_THREAD_H
 
+#include <Debug.h>
+
 #include <thread>
 #include <functional>
 #include <atomic>
-
-#include <Debug.h>
 
 namespace Framework::Helper::Types {
     class Thread {
@@ -23,7 +23,11 @@ namespace Framework::Helper::Types {
         { }
 
         explicit Thread(const std::function<void()>& fn)
-                : m_thread(fn)
+            : m_thread(fn)
+        { }
+
+        template<class Functor, typename... Args> explicit Thread(Functor&& fn, Args&&... args)
+            : m_thread(fn, std::forward<Args>(args)...)
         { }
 
         Thread(Thread&& thread)  noexcept {
@@ -52,12 +56,7 @@ namespace Framework::Helper::Types {
         }
         void Detach() { m_thread.detach(); }
 
-        static void Sleep(uint64_t milliseconds) {
-        #ifdef SR_WIN32
-            #include <Windows.h>
-            ::Sleep(static_cast<DWORD>(milliseconds));
-        #endif
-        }
+        static void Sleep(uint64_t milliseconds);
 
     private:
         std::thread m_thread;

@@ -10,9 +10,6 @@
 #include <Debug.h>
 #include <Render/Render.h>
 
-inline static std::map<unsigned int, unsigned long> TexID_usages = std::map<unsigned int, unsigned long>();
-inline static std::map<std::string, unsigned int> TexID_names = std::map<std::string, unsigned int>();
-
 Framework::Graphics::Types::Texture::Texture()
     : IResource(typeid(Texture).name())
 {
@@ -26,21 +23,15 @@ Framework::Graphics::Types::Texture::~Texture() {
 }
 
 bool Framework::Graphics::Types::Texture::Destroy() {
-    if (IsDestroy()) {
+    if (IsDestroyed()) {
+        SRAssert2(false, "Texture already destroyed!");
         return false;
     }
 
     if (Debug::GetLevel() >= Debug::Level::Medium)
-        Debug::Log("Texture::Destroy() : destroying texture...");
+        SR_LOG("Texture::Destroy() : destroying texture...");
 
-    /*
-        Проверяем, просчитана ли текстура, если просчитана,
-        регистрируем в рендере для освобождения видео-памяти, если нет, просто убираем
-        юз-поинт.
-        Может возникнуть такая ситуация, что текстура будет уничтожена еще до ее просчета,
-        это нормально, так как она не регистрируется в рендере в прямом смысле. Т-е она там не содержится.
-        Меш узнает о том, что текстура будет уничтожена, так как он сам и уничтожает материал, содержащий ее.
-    */
+    /// TODO:
     m_render->FreeTexture(this);
 
     return IResource::Destroy();
@@ -55,11 +46,11 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(c
         texture = ((Texture*)(find));
 
         if (texture->m_config != config || config.m_autoRemove != texture->IsEnabledAutoRemove())
-            Debug::Warn("Texture::Load() : copy values do not match load values.");
+            SR_WARN("Texture::Load() : copy values do not match load values.");
     }
     else {
         if (Debug::GetLevel() >= Debug::Level::Medium)
-            Debug::Log("Texture::Load : load \"" + localPath + "\" texture...");
+            SR_LOG("Texture::Load : load \"" + localPath + "\" texture...");
 
         texture = TextureLoader::Load(path.ToString());
         texture->SetConfig(config);
@@ -75,23 +66,23 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     if (!m_data)
         return false;
 
-    if (!m_render){
-        Debug::Error("Texture::Calculate() : this texture is not register in render!");
+    if (!m_render) {
+        SR_ERROR("Texture::Calculate() : this texture is not register in render!");
         return false;
     }
 
-    if (IsDestroy()) {
-        Debug::Error("Texture::Calculate() : texture is destroyed!");
+    if (IsDestroyed()) {
+        SR_ERROR("Texture::Calculate() : texture is destroyed!");
         return false;
     }
 
     if (m_isCalculate){
-        Debug::Error("Texture::Calculate() : texture already calculated!");
+        SR_ERROR("Texture::Calculate() : texture already calculated!");
         return false;
     }
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Texture::Calculate() : calculating \"" + GetResourceId() + "\" texture...");
+        SR_LOG("Texture::Calculate() : calculating \"" + GetResourceId() + "\" texture...");
 
     // TODO: to refactoring
     m_ID = m_env->CalculateTexture(m_data,
@@ -100,35 +91,33 @@ bool Framework::Graphics::Types::Texture::Calculate() {
             m_config.m_alpha == Helper::BoolExt::None, m_config.m_cpuUsage);
 
     if (m_ID < 0) { // TODO: vulkan can be return 0 as correct value
-        Debug::Error("Texture::Calculate() : failed calculate texture!");
+        SR_ERROR("Texture::Calculate() : failed calculate texture!");
         return false;
-    } else {
+    }
+    else {
         if (Debug::GetLevel() >= Debug::Level::High)
-            Debug::Log("Texture::Calculate() : texture \"" + GetResourceId() + "\" has " + std::to_string(m_ID) + " id.");
+            SR_LOG("Texture::Calculate() : texture \"" + GetResourceId() + "\" has " + std::to_string(m_ID) + " id.");
+
         TextureLoader::Free(m_data);
+
         m_data = nullptr;
     }
 
-    this->m_isCalculate = true;
+    m_isCalculate = true;
 
     return true;
 }
 
-void Framework::Graphics::Types::Texture::OnDestroyGameObject() {
-    if (IsEnabledAutoRemove() && GetCountUses() == 1)
-        this->Destroy();
-}
-
 void Framework::Graphics::Types::Texture::SetRender(Framework::Graphics::Render *render) {
-    this->m_render = render;
+    m_render = render;
 }
 
 bool Framework::Graphics::Types::Texture::FreeVideoMemory()  {
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
+        SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
 
     if (!m_isCalculate) {
-        Debug::Error("Texture::FreeVideoMemory() : texture \"" + std::string(GetResourceName()) + "\" is not calculated!");
+        SR_ERROR("Texture::FreeVideoMemory() : texture \"" + std::string(GetResourceName()) + "\" is not calculated!");
         return false;
     }
     else

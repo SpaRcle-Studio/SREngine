@@ -56,63 +56,150 @@ void FileBrowser::Draw(const Path &root) {
     }, folders);
 }
 
+bool ThumbNail(ImTextureID user_texture_id, std::string label, bool double_click, const ImVec2& size, const ImVec2& uv0 = ImVec2(0.0f, 0.0f), const ImVec2& uv1 = ImVec2(1.0f, 1.0f), int frame_padding = 1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0), const ImVec4& tint_col = ImVec4(0, 0, 0, 0))
+{
+    ImGuiButtonFlags button_flags = 0;
+    if(double_click)
+        button_flags |= ImGuiButtonFlags_PressedOnClickRelease | ImGuiButtonFlags_PressedOnDoubleClick;
+
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+        return false;
+
+    ImGuiContext& g = *GImGui;
+    const ImGuiStyle& style = g.Style;
+
+    // Default to using texture ID as ID. User can still push string/integer prefixes.
+    // We could hash the size/uv to create a unique ID but that would prevent the user from animating UV.
+    //PushID((void*)(intptr_t)user_texture_id);
+    const ImGuiID id = window->GetID(label.c_str());
+    const ImVec2 label_size = ImGui::CalcTextSize(label.c_str(), NULL, true);
+
+    //PopID();
+
+    // add 3 font size to y for button rectangle height;
+    ImVec2 button_size = size;
+    button_size.y += label_size.y * 2;
+
+    const ImVec2 padding = (frame_padding >= 0) ? ImVec2((float)frame_padding, (float)frame_padding) : style.FramePadding;
+    const ImRect bb(window->DC.CursorPos, window->DC.CursorPos + button_size + padding * 2);
+    const ImRect image_bb(window->DC.CursorPos + padding, window->DC.CursorPos + padding + size);
+    ImGui::ItemSize(bb);
+    if (!ImGui::ItemAdd(bb, id))
+        return false;
+
+    bool hovered, held;
+    bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, button_flags);
+
+    // Render
+    const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
+    ImGui::RenderNavHighlight(bb, id);
+    ImGui::RenderFrame(bb.Min, bb.Max, col, true, ImClamp((float)ImMin(padding.x, padding.y), 0.0f, style.FrameRounding));
+    if (bg_col.w > 0.0f)
+        window->DrawList->AddRectFilled(image_bb.Min, image_bb.Max, ImGui::GetColorU32(bg_col));
+    window->DrawList->AddImage(user_texture_id, image_bb.Min, image_bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
+
+    // offset the thumbnail max y + padding.y
+    ImRect offset = bb;
+    offset.Min.y = image_bb.Max.y + padding.y;
+    // render the text
+    ImGui::RenderTextClipped(offset.Min + style.FramePadding, offset.Max - style.FramePadding, label.c_str(), NULL, &label_size, style.ButtonTextAlign, &offset);
+
+    //std::stringstream input_text_label;
+    //input_text_label.str(std::string());
+    //input_text_label << "##" << label;
+
+    //ImGuiInputTextFlags text_flag = ImGuiInputTextFlags_None;
+    //ImGui::InputText(input_text_label.str().c_str(), label->data(), 64, text_flag, NULL, NULL);
+
+
+    return pressed;
+}
+
 void FileBrowser::Draw() {
     // left
 
-    ImGui::BeginChild("left pane", ImVec2(250, 0), true);
+    float_t assetWidth = 0.f;
 
-    ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
+    if (ImGui::BeginChild("left pane", ImVec2(250, 0), true)) {
 
-    Draw(m_root);
+        ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
 
-    float assetWidth = ImGui::GetItemRectSize().x;
+        Draw(m_root);
 
-    ImGui::PopStyleVar();
+        assetWidth = ImGui::GetItemRectSize().x;
 
-    ImGui::EndChild();
+        ImGui::PopStyleVar();
+
+        CheckHovered();
+        CheckFocused();
+
+        ImGui::EndChild();
+    }
+
     ImGui::SameLine();
 
     /////////////////////// right
     ImGui::BeginGroup();
-    ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing())); // Leave room for 1 line below us
-    ImGui::Separator();
+    if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
+        ImGui::Separator();
 
-    auto wndSize = ImGui::GetWindowSize();
+        if (ImGui::Button("Back")) {
+            m_selectedDir = m_selectedDir.GetPrevious();
+        }
+        ImGui::SameLine();
+        ImGui::Text("%s", m_selectedDir.CStr());
 
-    uint32_t index = 1;
-    for (const auto& path : m_selectedDir.GetAll()) {
-        ++index;
+        ImGui::Separator();
 
-        ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+        auto wndSize = ImGui::GetWindowSize();
 
-        ImGui::BeginGroup();
+        uint32_t index = 1;
+        for (const auto &path : m_selectedDir.GetAll()) {
+            if (path.GetBaseName().empty())
+                continue;
 
-        if (path.IsDir())
-            ImGui::Button(SR_ICON_FOLDER, ImVec2(50, 50));
-        else
-            ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
+            ++index;
 
-        ImGui::PopFont();
+            ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
-        ImGui::Text("%s", path.GetBaseName().c_str());
+            ImGui::BeginGroup();
 
-        ImGui::EndGroup();
+            if (path.IsDir()) {
+                if (ImGui::ButtonEx(SR_ICON_FOLDER, ImVec2(50, 50), ImGuiButtonFlags_PressedOnDoubleClick)) {
+                    m_selectedDir = path;
+                }
+            }
+            else
+                ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
 
-        if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
-            ImGui::SameLine();
-        else
-            index = 1;
+            ImGui::PopFont();
 
-        ImGui::PopStyleVar();
+            ImGui::Text("%s", path.GetBaseName().c_str());
+
+            ImGui::EndGroup();
+
+            if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
+                ImGui::SameLine();
+            else
+                index = 1;
+
+            ImGui::PopStyleVar();
+        }
+
+        CheckHovered();
+        CheckFocused();
+
+        ImGui::EndChild();
     }
 
-    ImGui::EndChild();
-    ImGui::BeginChild("buttons");
+    /*ImGui::BeginChild("buttons");
     if (ImGui::Button("Revert")) {}
     ImGui::SameLine();
     if (ImGui::Button("Save")) {}
-    ImGui::EndChild();
+    ImGui::EndChild();*/
+
     ImGui::EndGroup();
 }
 

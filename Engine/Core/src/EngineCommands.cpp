@@ -42,7 +42,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
         const bool result = ptr.AutoFree([this](GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
-            m_backup = ptr->Save();
+            m_backup = ptr->Save(SAVABLE_FLAG_NONE);
             ptr->Destroy();
         });
         m_scene.Unlock();
@@ -57,9 +57,7 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
         return false;
 
     if (m_scene.LockIfValid()) {
-        const auto&& gameObjectXml = m_backup.Root().GetNode("GameObject");
-        auto ptr = m_scene->Instance(gameObjectXml);
-
+        auto ptr = m_scene->Instance(m_backup.Decode());
         m_scene.Unlock();
         return true;
     }

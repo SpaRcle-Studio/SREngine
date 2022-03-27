@@ -105,7 +105,7 @@ namespace Framework::Graphics {
 
         static bool Set(Environment* env) {
             if (g_environment != nullptr) {
-                Helper::Debug::Error("Environment::Set() : environment already set!");
+                SR_ERROR("Environment::Set() : environment already set!");
                 return false;
             }
             else {
@@ -115,7 +115,7 @@ namespace Framework::Graphics {
         }
         static Environment* Get() {
             if (g_environment == nullptr){
-                Framework::Helper::Debug::Error("Environment::Get() : environment is not set!");
+                SR_ERROR("Environment::Get() : environment is not set!");
                 return nullptr;
             }
             else

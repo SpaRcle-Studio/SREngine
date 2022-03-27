@@ -8,21 +8,19 @@
 #include <vector>
 #include <macros.h>
 
-#include <glm/mat4x4.hpp>
-#include <glm/vec3.hpp>
-#include <glm/glm.hpp>
-#include <glm/gtx/hash.hpp>
-
-#include <Render/Shader.h>
 #include <Types/Material.h>
-#include <ResourceManager/IResource.h>
+#include <Types/RawMesh.h>
 
 #include <Environment/Environment.h>
 #include <EntityComponentSystem/Component.h>
 #include <Types/List.h>
 #include <FbxLoader/Loader.h>
 
-namespace Framework::Graphics{
+namespace SR_UTILS_NS::Types {
+    class RawMesh;
+}
+
+namespace Framework::Graphics {
     class Render;
     class Shader;
 }
@@ -32,15 +30,13 @@ namespace Framework {
 }
 
 namespace Framework::Graphics::Types {
-    using namespace Helper;
-
     class Material;
 
     enum class MeshFeatures {
         None     = 0,
         Vertices = 1 << 0,
-        Indices  = 1 << 1,
-        Skinning = 1 << 2
+        Indexed  = 1 << 1,
+        Skinned  = 1 << 2
     };
 
     SR_ENUM_CLASS(MeshType,
@@ -50,7 +46,7 @@ namespace Framework::Graphics::Types {
         Skinned = 3,
     )
 
-    class Mesh : public IResource, public Component {
+    class Mesh : public Helper::IResource, public Helper::Component {
         friend class Material;
         friend class ::Framework::API;
     protected:
@@ -59,17 +55,18 @@ namespace Framework::Graphics::Types {
 
     public:
         static std::vector<Mesh*> Load(const std::string& path, MeshType type);
+        static Mesh* TryLoad(const std::string& path, MeshType type, uint32_t id);
         static Mesh* Load(const std::string& path, MeshType type, uint32_t id);
         static Mesh* LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry& geometry);
 
     public:
-        /** \brief Set mesh to destroy in res manager
-        * \return bool */
         bool Destroy() override;
+
     protected:
-         /** \brief Re-calc mesh space-transform matrix */
         virtual void ReCalcModel();
         virtual bool Calculate();
+        virtual void SetRawMesh(Helper::Types::RawMesh* raw);
+
     public:
         IResource* Copy(IResource* destination) const override;
 
@@ -79,21 +76,22 @@ namespace Framework::Graphics::Types {
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();
-    public:
-        Math::FVector3 GetBarycenter() const override;
 
-        void OnMove(const Math::FVector3& newValue) override;
-        void OnRotate(const Math::FVector3& newValue) override;
-        void OnScaled(const Math::FVector3& newValue) override;
-        void OnSkewed(const Math::FVector3& newValue) override;
+    public:
+        Helper::Math::FVector3 GetBarycenter() const override;
+
+        void OnMove(const Helper::Math::FVector3& newValue) override;
+        void OnRotate(const Helper::Math::FVector3& newValue) override;
+        void OnScaled(const Helper::Math::FVector3& newValue) override;
+        void OnSkewed(const Helper::Math::FVector3& newValue) override;
 
         void OnSelected(bool value) override;
         void OnDestroyGameObject() override;
         void OnRemoveComponent() override {
-            this->OnDestroyGameObject();
+            OnDestroyGameObject();
         }
         void OnReady(bool ready) override {
-            this->m_env->SetBuildState(false);
+            m_env->SetBuildState(false);
         }
         void OnAttachComponent() override { }
         void OnTransparencyChanged();
@@ -110,19 +108,20 @@ namespace Framework::Graphics::Types {
         SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
         SR_NODISCARD bool IsInverse()              const { return m_inverse; }
         SR_NODISCARD bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
 
         void SetRender(Render* render) { m_render = render; };
-        void SetInverse(bool value) { this->m_inverse = value; ReCalcModel(); }
+        void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetShader(Shader* shader);
 
     public:
-        Math::FVector3               m_barycenter        = Math::FVector3(Math::UnitMAX);
-        Math::FVector3               m_position          = Math::FVector3();
-        Math::FVector3               m_rotation          = Math::FVector3();
-        Math::FVector3               m_skew              = Math::FVector3(1);
-        Math::FVector3               m_scale             = Math::FVector3(1);
+        Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);
+        Helper::Math::FVector3       m_position          = Helper::Math::FVector3();
+        Helper::Math::FVector3       m_rotation          = Helper::Math::FVector3();
+        Helper::Math::FVector3       m_skew              = Helper::Math::FVector3(1);
+        Helper::Math::FVector3       m_scale             = Helper::Math::FVector3(1);
         glm::mat4                    m_modelMat          = glm::mat4(0);
 
     protected:
@@ -134,19 +133,20 @@ namespace Framework::Graphics::Types {
 
         mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
 
-        std::string                  m_geometryName     = "Unnamed";
+        std::string                  m_geometryName      = "Unnamed";
         Shader*                      m_shader            = nullptr;
         Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
+        Helper::Types::RawMesh*      m_rawMesh           = nullptr;
 
-        volatile bool                m_hasErrors         = false;
-        volatile bool                m_isCalculated      = false;
+        std::atomic<bool>            m_hasErrors         = false;
+        std::atomic<bool>            m_isCalculated      = false;
 
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;
 
         /// определяет порядок меша в файле, если их там несколько
-        uint32_t                     m_meshId            = 0;
+        uint32_t                     m_meshId            = SR_UINT32_MAX;
 
     };
 }

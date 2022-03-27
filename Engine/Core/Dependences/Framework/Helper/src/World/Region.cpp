@@ -15,26 +15,46 @@ void Region::Update(float_t dt) {
 
         pChunk->Update(dt);
 
-        if (pChunk->IsAlive())
+        if (pChunk->IsAlive()) {
             ++pIt;
+        }
         else {
+            if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
+                m_cached[pIt->first] = std::move(marshal);
+            }
+
             pChunk->Unload();
+
             delete pChunk;
+
             pIt = m_loadedChunks.erase(pIt);
         }
     }
 }
 
 Chunk* Region::GetChunk(const Framework::Helper::Math::IVector3 &position) {
-    SRAssert(position.XZ() <= static_cast<int32_t>(m_width) && position.XZ() > 0);
+    SRAssert(position <= static_cast<int32_t>(m_width) && position > 0);
 
-    if (auto&& it = m_loadedChunks.find(position); it == m_loadedChunks.end()) {
-        auto chunk = m_loadedChunks[position] = Chunk::Allocate(m_observer, this, position, m_chunkSize);
-        chunk->Load();
-        return chunk;
+    Chunk* pChunk = nullptr;
+
+    if (auto&& pChunkIt = m_loadedChunks.find(position); pChunkIt == m_loadedChunks.end()) {
+        pChunk = m_loadedChunks[position] = Chunk::Allocate(m_observer, this, position, m_chunkSize);
     }
-    else
-        return it->second;
+    else {
+        pChunk = pChunkIt->second;
+    }
+
+    if (pChunk && pChunk->GetState() == Chunk::LoadState::Unload) {
+        if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
+            pChunk->Load(pCacheIt->second.Decode());
+            m_cached.erase(pCacheIt);
+        }
+        else {
+            pChunk->Load(MarshalDecodeNode());
+        }
+    }
+
+    return pChunk;
 }
 
 Region::~Region() {
@@ -43,24 +63,31 @@ Region::~Region() {
     }
 
     m_loadedChunks.clear();
+    m_cached.clear();
 }
 
 bool Region::Unload() {
-    Helper::Debug::Log("Region::Unload() : unloading region at " + m_position.ToString());
+    SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
 
-    for (auto&& [position, chunk] : m_loadedChunks) {
-        chunk->Unload();
+    for (auto&& [position, pChunk] : m_loadedChunks) {
+        if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
+            m_cached[position] = std::move(marshal);
+        }
+
+        pChunk->Unload();
     }
+
+    m_loadedChunks.clear();
 
     return true;
 }
 
 void Region::OnEnter() {
-
+    m_containsObserver = true;
 }
 
 void Region::OnExit() {
-
+    m_containsObserver = false;
 }
 
 void Region::SetAllocator(const Region::Allocator &allocator) {
@@ -74,12 +101,13 @@ Region *Region::Allocate(SRRegionAllocArgs) {
     return new Region(SRRegionAllocVArgs);
 }
 
-Framework::Helper::Math::IVector2 Region::GetWorldPosition() const {
-    const Math::IVector2 offset = m_observer->m_offset.m_region;
+Framework::Helper::Math::IVector3 Region::GetWorldPosition() const {
+    const Math::IVector3 offset = m_observer->m_offset.m_region;
     auto position = AddOffset(m_position, offset) * m_width;
 
     if (position.x > 0) position.x -= m_width - 1;
     if (position.y > 0) position.y -= m_width - 1;
+    if (position.z > 0) position.z -= m_width - 1;
 
     return position;
 }
@@ -101,17 +129,60 @@ void Region::ApplyOffset() {
 }
 
 Chunk *Region::GetChunk(const FVector3 &position) {
-    const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
-
-    const auto targetPos = AddOffset(
-            position.Singular(Math::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<int>() / chunkSize,
-            -m_observer->m_offset.m_chunk
-    );
-
-    return GetChunk(MakeChunk(targetPos, m_width));
+    return GetChunk(MakeChunk(m_observer->WorldPosToChunkPos(position), m_width));
 }
 
 void Region::Reload() {
     for (auto&& [position, pChunk] : m_loadedChunks)
         pChunk->Reload();
 }
+
+MarshalEncodeNode Region::Save() const {
+    MarshalEncodeNode marshal("Region");
+    marshal.Append(m_position);
+
+    bool hasValid = !m_cached.empty();
+
+    for (const auto& [position, pChunk] : m_loadedChunks) {
+        if (const auto&& chunkMarshal = pChunk->Save(); chunkMarshal.Valid()) {
+            hasValid = true;
+            marshal.Append(chunkMarshal);
+        }
+    }
+
+    for (const auto& [position, cache] : m_cached) {
+        if (cache.Valid()) {
+            marshal.Append(cache);
+        }
+        else {
+            SRAssert2(false, "invalid cache!");
+        }
+    }
+
+    if (hasValid) {
+        return marshal;
+    }
+    else
+        return MarshalEncodeNode();
+}
+
+bool Region::Load() {
+    SR_LOG("Scene::Update() : loading region at " + m_position.ToString());
+
+    const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
+    if (path.Exists()) {
+        auto&& decoded = MarshalDecodeNode::Load(path);
+        for (const auto& chunk : decoded.GetNodes()) {
+            const auto&& position = chunk.GetAttribute<Math::IVector3>();
+            if (auto&& cache = chunk.Encode(); cache.Valid()) {
+                m_cached[position] = std::move(cache);
+            }
+            else {
+                SRAssert2(false, "invalid cache!");
+            }
+        }
+    }
+
+    return true;
+}
+

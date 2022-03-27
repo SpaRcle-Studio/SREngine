@@ -5,16 +5,21 @@
 #ifndef GAMEENGINE_VECTOR2_H
 #define GAMEENGINE_VECTOR2_H
 
-#include <string>
-#include "Mathematics.h"
+#include <Math/Mathematics.h>
 #include <glm/glm.hpp>
+#include <string>
 
 namespace Framework::Helper::Math {
     enum Axis {
-        NONE = 0,
-        AXIS_X = 1,
-        AXIS_Y = 2,
-        AXIS_Z = 3,
+        AXIS_NONE = 1 << 0,
+        AXIS_X    = 1 << 1,
+        AXIS_Y    = 1 << 2,
+        AXIS_Z    = 1 << 3,
+
+        AXIS_XY   = AXIS_X | AXIS_Y,
+        AXIS_XZ   = AXIS_X | AXIS_Z,
+        AXIS_YZ   = AXIS_Y | AXIS_Z,
+        AXIS_XYZ  = AXIS_X | AXIS_Y | AXIS_Z,
     };
 
     template<typename T> struct Vector2 {
@@ -28,22 +33,22 @@ namespace Framework::Helper::Math {
             T coord[2] = { 0 };
         };
 
-        constexpr _FORCE_INLINE_ Vector2() {
+        constexpr SR_FORCE_INLINE Vector2() {
             x = 0;
             y = 0;
         }
 
-        constexpr _FORCE_INLINE_ Vector2(T p_x, T p_y) {
+        constexpr SR_FORCE_INLINE Vector2(T p_x, T p_y) {
             x = p_x;
             y = p_y;
         }
 
-        constexpr _FORCE_INLINE_ Vector2(T p) {
+        constexpr SR_FORCE_INLINE Vector2(T p) {
             x = p;
             y = p;
         }
 
-        constexpr _FORCE_INLINE_ Vector2(const glm::vec2 &vec2) {
+        constexpr SR_FORCE_INLINE Vector2(const glm::vec2 &vec2) {
             x = static_cast<T>(vec2.x);
             y = static_cast<T>(vec2.y);
         }
@@ -73,78 +78,78 @@ namespace Framework::Helper::Math {
             return Vector2(static_cast<T>(abs(x)), static_cast<T>(abs(y)));
         }
 
-        _FORCE_INLINE_ Vector2 operator-() const { return Vector2(-x, -y); }
-        _FORCE_INLINE_ Vector2 operator+() const { return *this; }
+        SR_FORCE_INLINE Vector2 operator-() const { return Vector2(-x, -y); }
+        SR_FORCE_INLINE Vector2 operator+() const { return *this; }
 
-        _FORCE_INLINE_ bool operator<=(const Vector2 &p_v) const { return x <= p_v.x && y <= p_v.y; }
-        _FORCE_INLINE_ bool operator>=(const Vector2 &p_v) const { return x >= p_v.x && y >= p_v.y; }
-        _FORCE_INLINE_ bool operator<(const Vector2 &p_v) const { return x < p_v.x && y < p_v.y; }
-        _FORCE_INLINE_ bool operator>(const Vector2 &p_v) const { return x > p_v.x && y > p_v.y; }
+        SR_FORCE_INLINE bool operator<=(const Vector2 &p_v) const { return x <= p_v.x && y <= p_v.y; }
+        SR_FORCE_INLINE bool operator>=(const Vector2 &p_v) const { return x >= p_v.x && y >= p_v.y; }
+        SR_FORCE_INLINE bool operator<(const Vector2 &p_v) const { return x < p_v.x && y < p_v.y; }
+        SR_FORCE_INLINE bool operator>(const Vector2 &p_v) const { return x > p_v.x && y > p_v.y; }
 
-        _FORCE_INLINE_ bool operator>(T p_scalar) const { return *this > Vector2<T>(p_scalar); }
-        _FORCE_INLINE_ bool operator<(T p_scalar) const { return *this < Vector2<T>(p_scalar); }
-        _FORCE_INLINE_ bool operator>=(T p_scalar) const { return *this >= Vector2<T>(p_scalar); }
-        _FORCE_INLINE_ bool operator<=(T p_scalar) const { return *this <= Vector2<T>(p_scalar); }
-        _FORCE_INLINE_ bool operator==(T p_scalar) const { return *this == Vector2<T>(p_scalar); }
-        _FORCE_INLINE_ bool operator!=(T p_scalar) const { return *this != Vector2<T>(p_scalar); }
+        SR_FORCE_INLINE bool operator>(T p_scalar) const { return *this > Vector2<T>(p_scalar); }
+        SR_FORCE_INLINE bool operator<(T p_scalar) const { return *this < Vector2<T>(p_scalar); }
+        SR_FORCE_INLINE bool operator>=(T p_scalar) const { return *this >= Vector2<T>(p_scalar); }
+        SR_FORCE_INLINE bool operator<=(T p_scalar) const { return *this <= Vector2<T>(p_scalar); }
+        SR_FORCE_INLINE bool operator==(T p_scalar) const { return *this == Vector2<T>(p_scalar); }
+        SR_FORCE_INLINE bool operator!=(T p_scalar) const { return *this != Vector2<T>(p_scalar); }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator*(const U &scalar) const noexcept {
+        template<typename U> SR_FORCE_INLINE Vector2 operator*(const U &scalar) const noexcept {
             return Vector2(x * scalar, y * scalar);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator+(const Vector2<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector2 operator+(const Vector2<U> &p_v) const {
             return Vector2(x + p_v.x, y + p_v.y);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator-(const Vector2<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector2 operator-(const Vector2<U> &p_v) const {
             return Vector2(x - p_v.x, y - p_v.y);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator*=(const U& value) {
+        template<typename U> SR_FORCE_INLINE Vector2 operator*=(const U& value) {
             this->x *= value;
             this->y *= value;
             return *this;
         }
 
-        template<typename U> _FORCE_INLINE_ bool operator==(const Vector2<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE bool operator==(const Vector2<U> &p_v) const {
             return x == p_v.x && y == p_v.y;
         }
 
-        template<typename U> _FORCE_INLINE_ bool operator!=(const Vector2<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE bool operator!=(const Vector2<U> &p_v) const {
             return x != p_v.x || y != p_v.y;
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator*(const Vector2<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector2 operator*(const Vector2<U> &p_v) const {
             return Vector2(x * p_v.x, y * p_v.y);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator/(const Vector2<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector2 operator/(const Vector2<U> &p_v) const {
             return Vector2(x / p_v.x, y / p_v.y);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 operator/(const U &v) const {
+        template<typename U> SR_FORCE_INLINE Vector2 operator/(const U &v) const {
             return Vector2(x / v, y / v);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 &operator/=(U p_scalar) {
+        template<typename U> SR_FORCE_INLINE Vector2 &operator/=(U p_scalar) {
             x /= p_scalar;
             y /= p_scalar;
             return *this;
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 &operator-=(const Vector2<U> &p_v) {
+        template<typename U> SR_FORCE_INLINE Vector2 &operator-=(const Vector2<U> &p_v) {
             x -= p_v.x;
             y -= p_v.y;
             return *this;
         }
 
-        template<typename U> _FORCE_INLINE_ Vector2 &operator+=(Vector2<U> v) {
+        template<typename U> SR_FORCE_INLINE Vector2 &operator+=(Vector2<U> v) {
             x += v.x;
             y += v.y;
             return *this;
         }
 
-        [[nodiscard]] _FORCE_INLINE_ bool Empty() const {
+        [[nodiscard]] SR_FORCE_INLINE bool Empty() const {
             return x == 0 && y == 0;
         }
 
@@ -156,15 +161,15 @@ namespace Framework::Helper::Math {
             return x == static_cast<T>(value) || y == static_cast<T>(value);
         }
 
-        [[nodiscard]] _FORCE_INLINE_ glm::vec2 ToGLM() const noexcept {
+        [[nodiscard]] SR_FORCE_INLINE glm::vec2 ToGLM() const noexcept {
             return { static_cast<float_t>(x), static_cast<float_t>(y) };
         }
 
-        _FORCE_INLINE_ const T &operator[](int p_axis) const {
+        SR_FORCE_INLINE const T &operator[](int p_axis) const {
             return coord[p_axis];
         }
 
-        _FORCE_INLINE_ T &operator[](int p_axis) {
+        SR_FORCE_INLINE T &operator[](int p_axis) {
             return coord[p_axis];
         }
 

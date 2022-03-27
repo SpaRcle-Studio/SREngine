@@ -344,4 +344,30 @@ namespace FbxLoader::Tools {
     };
 }
 
+#undef S11
+#undef S12
+#undef S13
+#undef S14
+#undef S21
+#undef S22
+#undef S23
+#undef S24
+#undef S31
+#undef S32
+#undef S33
+#undef S34
+#undef S41
+#undef S42
+#undef S43
+#undef S44
+#undef F
+#undef G
+#undef H
+#undef I
+#undef ROTATE_LEFT
+#undef FF
+#undef GG
+#undef HH
+#undef II
+
 #endif //FBXLOADER_MD5HASH_H

@@ -69,7 +69,8 @@ namespace Framework::Graphics {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
                 if (Find<vertexType, memType>(resourceID).has_value()) {
-                    Helper::Debug::Error("MeshManager::Register() : memory already registered!");
+                    SR_ERROR("MeshManager::Register() : memory already registered!");
+                    SRAssert(false);
                     return false;
                 }
 
@@ -83,8 +84,9 @@ namespace Framework::Graphics {
                 const std::lock_guard<std::mutex> lock(m_mutex);
 
                 if (auto iter = Find<vertexType, memType>(resourceID); !iter.has_value()) {
-                    Helper::Debug::Error("MeshManager::Register() : memory isn't registered! "
+                    SR_ERROR("MeshManager::Free() : memory isn't registered! "
                                          "\n\tResource id: " + resourceID);
+                    SRAssert(false);
                     return FreeResult::NotFound;
                 } else
                     return this->FreeImpl(iter, memType);

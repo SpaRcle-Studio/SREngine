@@ -22,6 +22,15 @@
 #include <FbxLoader/MD5Hash.h>
 
 namespace FbxLoader::Tools {
+    class NonCopyable {
+    protected:
+        constexpr NonCopyable() = default;
+        virtual ~NonCopyable() = default;
+
+        NonCopyable(const NonCopyable&) = delete;
+        NonCopyable& operator=(const NonCopyable&) = delete;
+    };
+
     template<typename T> static void SaveValue(std::ofstream& file, const T& value) {
         file.write((const char*)&value, sizeof(T));
     }
@@ -85,7 +94,9 @@ namespace FbxLoader::Tools {
 
     template<typename T> static void SaveVector(std::ofstream& file, const std::vector<T>& vec) {
         SaveValue(file, static_cast<uint32_t>(vec.size()));
-        file.write((const char*)&vec[0], vec.size() * sizeof(T));
+
+        if (vec.size() > 0)
+            file.write((const char*)&vec[0], vec.size() * sizeof(T));
     }
 
     template<typename T, typename U> static void SaveVectorOfPairs(std::ofstream& file, const std::vector<std::pair<T, U>>& vec) {
@@ -99,7 +110,9 @@ namespace FbxLoader::Tools {
 
         auto size = LoadValue<uint32_t>(file);
         result.resize(size);
-        file.read((char*)&result[0], size * sizeof(T));
+
+        if (size > 0)
+            file.read((char*)&result[0], size * sizeof(T));
 
         return result;
     }

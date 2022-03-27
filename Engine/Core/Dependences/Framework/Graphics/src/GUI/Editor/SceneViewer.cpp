@@ -19,7 +19,7 @@ void SceneViewer::SetCamera(GameObject::Ptr camera) {
 }
 
 void SceneViewer::Draw() {
-    auto&& selected = m_scene.Do<Helper::GameObject::Ptr>([](World::Scene* scene) -> Helper::GameObject::Ptr {
+    auto&& selected = m_scene.TryDo<Helper::GameObject::Ptr>([](World::Scene* scene) -> Helper::GameObject::Ptr {
         return scene->GetSelected();
     }, Helper::GameObject::Ptr());
 
@@ -37,6 +37,9 @@ void SceneViewer::Draw() {
 
                 DrawTexture(Math::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
                 m_guizmo->Draw(selected, m_camera);
+
+                CheckFocused();
+                CheckHovered();
             }
             ImGui::EndChild();
 
@@ -77,7 +80,7 @@ void SceneViewer::Enable(bool value) {
 }
 
 void SceneViewer::Update() {
-    if (!IsOpen())
+    if (!IsOpen() || !IsHovered())
         return;
 
     float_t speed = 0.1f;

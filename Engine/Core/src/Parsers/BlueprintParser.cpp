@@ -14,8 +14,9 @@ std::vector<SR_GRAPH_NS::GUI::Node*> SR_CORE_NS::BlueprintParser::Parse(const st
         for (const Helper::Xml::Node& blueprint : xml.Root().GetNode("Blueprints").GetNodes())
             blueprints.emplace_back(ParseBlueprint(blueprint));
     }
-    else
-        Helper::Debug::Error("BlueprintParser::Parse : config file not found! \n\tPath: " + path);
+    else {
+        SR_ERROR("BlueprintParser::Parse : config file not found! \n\tPath: " + path);
+    }
 
     return blueprints;
 }

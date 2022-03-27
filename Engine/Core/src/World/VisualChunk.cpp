@@ -17,44 +17,23 @@ void Framework::Core::World::VisualChunk::Update(float_t dt) {
 
 void Framework::Core::World::VisualChunk::UpdateFacesPos() {
     if (auto&& mesh = m_meshes[0]) {
-        auto fPos = Math::FVector3::XZ(m_region->GetWorldPosition());
-        const Helper::World::Offset offset = m_observer->m_offset;
-
-        fPos = Helper::World::AddOffset(fPos + (m_position - Math::FVector3(1, 0, 1)),
-                                        offset.m_chunk.Cast<Math::Unit>());
-
-        fPos = Math::FVector3(
-                fPos.x * m_size.x + (Math::Unit) m_size.x / 2,
-                fPos.y * m_size.y + (Math::Unit) m_size.y / 2,
-                fPos.z * m_size.x + (Math::Unit) m_size.x / 2);
-
-        fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
-
-        mesh->OnMove(fPos);
+        mesh->OnMove(GetWorldPosition(Math::AXIS_XYZ));
     }
 }
 void Framework::Core::World::VisualChunk::UpdateLoadPos() {
     if (auto&& mesh = m_meshes[1]) {
-        auto fPos = Math::FVector3::XZ(m_region->GetWorldPosition());
-        const Helper::World::Offset offset = m_observer->m_offset;
-
-        fPos = Helper::World::AddOffset(fPos + (m_position - Math::FVector3(1, 0, 1)),
-                                        offset.m_chunk.Cast<Math::Unit>());
-
-        fPos = Math::FVector3(
-                fPos.x * m_size.x + (Math::Unit) m_size.x / 2,
-                fPos.y * m_size.y,
-                fPos.z * m_size.x + (Math::Unit) m_size.x / 2);
-
-        fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
-        mesh->OnMove(fPos);
+        mesh->OnMove(GetWorldPosition(Math::AXIS_XZ));
     }
 }
 
 void Framework::Core::World::VisualChunk::SetFacesVisible(bool value) {
     auto&& mesh = m_meshes[0];
     if (value && !mesh) {
-        mesh = dynamic_cast<DebugWireframeMesh *>(Mesh::Load("engine/cubeWireframe.obj", MeshType::Wireframe)[0]);
+        if (auto&& meshes = Mesh::Load("engine/cubeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
+            mesh = dynamic_cast<DebugWireframeMesh *>(meshes.at(0));
+        }
+        else
+            return;
 
         auto render = Engine::Instance().GetRender();
 
@@ -74,8 +53,12 @@ void Framework::Core::World::VisualChunk::SetFacesVisible(bool value) {
 }
 void Framework::Core::World::VisualChunk::SetLoadVisible(bool value) {
     auto&& mesh = m_meshes[1];
-    if (value && !mesh && m_position.y == 1) {
-        mesh = dynamic_cast<DebugWireframeMesh *>(Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe)[0]);
+    if (value && !mesh && m_position.y == 1 && m_regionPosition.y == 1) {
+        if (auto&& meshes = Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
+            mesh = dynamic_cast<DebugWireframeMesh *>(meshes.at(0));
+        }
+        else
+            return;
 
         auto render = Engine::Instance().GetRender();
 
@@ -113,9 +96,9 @@ bool Framework::Core::World::VisualChunk::Unload() {
     return Chunk::Unload();
 }
 
-bool Framework::Core::World::VisualChunk::Load() {
+bool Framework::Core::World::VisualChunk::Load(const MarshalDecodeNode& node) {
     SetLoadVisible(true);
-    return Chunk::Load();
+    return Chunk::Load(node);
 }
 
 bool Framework::Core::World::VisualChunk::ApplyOffset() {

@@ -173,11 +173,42 @@ namespace Framework::Helper {
         return m_path + "." + ext;
     }
 
-    bool Path::Make() const {
+    bool Path::Make(Type type) const {
         if (m_path.empty())
             return false;
 
-        return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+        switch (type) {
+            default:
+                SRAssert(false);
+                SR_FALLTHROUGH;
+            case Type::Undefined:
+            case Type::File:
+                return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+            case Type::Folder:
+                return FileSystem::CreatePath(m_path);
+        }
+    }
+
+    Path Path::GetPrevious() const {
+        if (m_path.empty())
+            return m_path;
+
+        if (const auto&& pos = m_path.rfind('/'); pos != std::string::npos) {
+            if (pos <= 1)
+                return m_path;
+
+            return m_path.substr(0, pos);
+        }
+
+        return m_path;
+    }
+
+    std::string_view Path::GetExtensionView() const {
+        return m_ext;
+    }
+
+    std::string_view Path::GetBaseNameView() const {
+        return m_name;
     }
 
     Path& Path::operator=(const Path& path) = default;

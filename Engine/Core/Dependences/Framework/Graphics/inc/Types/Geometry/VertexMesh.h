@@ -21,23 +21,30 @@ namespace Framework::Graphics::Types {
     public:
         template<bool fast> [[nodiscard]] int32_t GetVBO();
 
-        virtual void SetVertexArray(const std::any& vertices) = 0;
+        ///virtual void SetVertexArray(const std::any& vertices) = 0;
 
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
 
     protected:
         IResource* Copy(IResource* destination) const override {
             if (auto vertex = dynamic_cast<VertexMesh*>(destination)) {
+                /// Копирование VBO происходит в классе-наследнике
                 vertex->m_countVertices = m_countVertices;
                 return Mesh::Copy(vertex);
-            } else {
-                Helper::Debug::Error("VertexMesh::Copy() : bad cast!");
+            }
+            else {
+                SR_ERROR("VertexMesh::Copy() : bad cast!");
                 return nullptr;
             }
         }
 
         bool Calculate() override {
             return Mesh::Calculate();
+        }
+
+        void SetRawMesh(Helper::Types::RawMesh* raw) override {
+            m_countVertices = raw->GetVertices(m_meshId).size();
+            Mesh::SetRawMesh(raw);
         }
 
     protected:
@@ -65,19 +72,18 @@ namespace Framework::Graphics::Types {
     }
 
     template<Vertices::Type type> bool VertexMesh::CalculateVBO(void* data) {
-        using namespace Memory;
-
-        if (m_VBO = MeshManager::Instance().CopyIfExists<type, MeshManager::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
+        if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshManager::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
             if (m_countVertices == 0 || !data) {
-                Debug::Error("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
+                SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
                 return false;
             }
 
-            if (m_VBO = this->m_env->CalculateVBO(data, type, m_countVertices); m_VBO == SR_ID_INVALID) {
-                Debug::Error("VertexMesh::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
-                this->m_hasErrors = true;
+            if (m_VBO = m_env->CalculateVBO(data, type, m_countVertices); m_VBO == SR_ID_INVALID) {
+                SR_ERROR("VertexMesh::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
+                m_hasErrors = true;
                 return false;
-            } else {
+            }
+            else {
                 return Memory::MeshManager::Instance().Register<type, Memory::MeshManager::VBO>(GetResourceId(), m_VBO);
             }
         }
@@ -90,7 +96,7 @@ namespace Framework::Graphics::Types {
 
         if (MeshManager::Instance().Free<type, MeshManager::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!m_env->FreeVBO(m_VBO)) {
-                Debug::Error("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
+                SR_ERROR("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
                 return false;
             }
         }

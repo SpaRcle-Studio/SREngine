@@ -14,7 +14,7 @@
 #define SR_ENUM_TO_STRING(enumName)                                                              \
     static std::string Enum##enumName##ToString(enumName value) {                                \
         const std::lock_guard<std::mutex> lock(SR_CODEGEN_ENUM::g_##enumName##_mutex);           \
-        auto& _map = SR_CODEGEN_ENUM::codegen_get_##enumName##_mapValue();                        \
+        auto& _map = SR_CODEGEN_ENUM::codegen_get_##enumName##_mapValue();                       \
         if (_map.empty())                                                                        \
             SR_CODEGEN_ENUM::procedure##enumName##_enum_parse();                                 \
         if (auto v = _map.find(value); v != _map.end())                                          \
@@ -26,7 +26,7 @@
 #define SR_ENUM_FROM_STRING(enumName)                                                            \
     static enumName StringToEnum##enumName(const std::string& value) {                           \
         const std::lock_guard<std::mutex> lock(SR_CODEGEN_ENUM::g_##enumName##_mutex);           \
-        auto& _map = SR_CODEGEN_ENUM::codegen_get_##enumName##_mapKey();                          \
+        auto& _map = SR_CODEGEN_ENUM::codegen_get_##enumName##_mapKey();                         \
         if (_map.empty())                                                                        \
             SR_CODEGEN_ENUM::procedure##enumName##_enum_parse();                                 \
         if (auto v = _map.find(value); v != _map.end())                                          \
@@ -36,7 +36,7 @@
     }
 
 #define SR_ENUM_CLASS(enumName, ...)                                                             \
-    enum class enumName {                                                                        \
+    enum class enumName : int32_t {                                                              \
         __VA_ARGS__                                                                              \
     };                                                                                           \
     namespace SR_CODEGEN_ENUM {                                                                  \

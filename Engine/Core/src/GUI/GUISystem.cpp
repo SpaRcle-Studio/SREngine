@@ -286,17 +286,17 @@ void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helpe
 
             scene->ForEachRootObjects([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& gm) {
                 if (gm->HasChildren()) {
-                    bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                                  g_node_flags_with_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                                  "%s", gm->GetName().c_str());
-                    CheckSelected(gm);
+                    //bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
+                    //                              g_node_flags_with_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                    //                              "%s", gm->GetName().c_str());
+                    //CheckSelected(gm);
 
-                    if (open)
-                        this->DrawChild(gm);
+                    //if (open)
+                    //    this->DrawChild(gm);
                 } else {
-                    ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                      g_node_flags_without_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                      "%s", gm->GetName().c_str());
+                    //ImGui::TreeNodeEx((void *) (intptr_t) i,
+                    //                  g_node_flags_without_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+                     //                 "%s", gm->GetName().c_str());
 
                     CheckSelected(gm);
                 }
@@ -322,22 +322,22 @@ void GUISystem::DrawChild(const Framework::Helper::Types::SafePtr<Framework::Hel
 
     root->ForEachChild([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& child){
         if (child->HasChildren()) {
-            bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                                          g_node_flags_with_child |
-                                          (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                                          "%s", child->GetName().c_str()
-            );
+            //bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
+            //                              g_node_flags_with_child |
+             //                             (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+            ///                             "%s", child->GetName().c_str()
+            //);
 
-            CheckSelected(child);
+            //CheckSelected(child);
 
-            if (open)
-                DrawChild(child);
+            //if (open)
+            //   DrawChild(child);
         }
         else {
-            ImGui::TreeNodeEx((void *) (intptr_t) i,
-                              g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                              "%s", child->GetName().c_str()
-            );
+            //ImGui::TreeNodeEx((void *) (intptr_t) i,
+            //                  g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
+            //                  "%s", child->GetName().c_str()
+            //);
 
             CheckSelected(child);
         }
@@ -547,7 +547,7 @@ void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene
 
         if (auto&& chunk = scene->GetCurrentChunk()) {
             ImGui::Separator();
-            auto size = static_cast<int32_t>(chunk->GetContainerSize());
+            int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
             ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
         }
 
@@ -740,15 +740,17 @@ bool GUISystem::BeginMenuBar() {
 
                     scene->SetName(sceneName);
 
-                    if (scene->Save(folder)) {
+                    if (scene->SaveAt(folder)) {
                         Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
-                    } else {
-                        Helper::Debug::Error("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
+                    }
+                    else {
+                        SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
                     }
                 }
                 scene.Unlock();
-            } else {
-                Helper::Debug::Warn("GUISystem::BeginMenuBar() : scene isn't valid!");
+            }
+            else {
+                SR_WARN("GUISystem::BeginMenuBar() : scene isn't valid!");
             }
         }
 
@@ -804,6 +806,10 @@ bool GUISystem::BeginMenuBar() {
 
         if (ImGui::MenuItem("Settings")) {
             Engine::Instance().GetEditor()->GetWindow<EngineSettings>()->Open();
+        }
+
+        if (ImGui::MenuItem("Statistics")) {
+            Engine::Instance().GetEditor()->GetWindow<EngineStatistics>()->Open();
         }
 
         ImGui::EndMenu();

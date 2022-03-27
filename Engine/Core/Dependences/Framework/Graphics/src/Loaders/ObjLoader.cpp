@@ -2,6 +2,7 @@
 // Created by Nikita on 17.11.2020.
 //
 
+/*
 #include "Loaders/ObjLoader.h"
 #include <ResourceManager/ResourceManager.h>
 
@@ -33,4 +34,4 @@ namespace Framework::Graphics::ObjLoader {
                 return {};
         }
     }
-}
+}*/

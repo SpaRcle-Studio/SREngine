@@ -172,58 +172,41 @@ void Transform3D::RotateAroundParent(Math::FVector3 eulers) {
     }
 }
 
-Xml::Document Transform3D::Save() const {
-    auto doc = Xml::Document::New();
-    auto root = doc.Root().AppendChild("Transform3D");
+MarshalEncodeNode Transform3D::Save(SavableFlags flags) const {
+    MarshalEncodeNode marshal("Transform3D");
 
     const auto& translation = GetTranslation();
     const auto& rotation    = GetRotation();
     const auto& scale       = GetScale();
     const auto& skew        = GetSkew();
 
-    if (translation != FVector3::Zero()) {
-        root.AppendChild("Translation")
-                .NAppendAttributeDef("X", translation.x, (Unit) 0)
-                .NAppendAttributeDef("Y", translation.y, (Unit) 0)
-                .NAppendAttributeDef("Z", translation.z, (Unit) 0);
-    }
+    if (translation != FVector3::Zero())
+        marshal.Append(MarshalEncodeNode("Translation").AppendDef(translation, (Unit)0));
 
-    if (rotation != FVector3::Zero()) {
-        root.AppendChild("Rotation")
-                .NAppendAttributeDef("X", rotation.x, (Unit) 0)
-                .NAppendAttributeDef("Y", rotation.y, (Unit) 0)
-                .NAppendAttributeDef("Z", rotation.z, (Unit) 0);
-    }
+    if (rotation != FVector3::Zero())
+        marshal.Append(MarshalEncodeNode("Rotation").AppendDef(rotation, (Unit)0));
 
-    if (scale != FVector3::One()) {
-        root.AppendChild("Scale")
-                .NAppendAttributeDef("X", scale.x, (Unit) 1)
-                .NAppendAttributeDef("Y", scale.y, (Unit) 1)
-                .NAppendAttributeDef("Z", scale.z, (Unit) 1);
-    }
+    if (scale != FVector3::One())
+        marshal.Append(MarshalEncodeNode("Scale").AppendDef(scale, (Unit)0));
 
-    if (skew != FVector3::One()) {
-        root.AppendChild("Skew")
-                .NAppendAttributeDef("X", skew.x, (Unit) 1)
-                .NAppendAttributeDef("Y", skew.y, (Unit) 1)
-                .NAppendAttributeDef("Z", skew.z, (Unit) 1);
-    }
+    if (skew != FVector3::One())
+        marshal.Append(MarshalEncodeNode("Skew").AppendDef(skew, (Unit)0));
 
-    return doc;
+    return marshal;
 }
 
-Transform3D* Transform3D::Load(const Xml::Node &xml) {
+Transform3D* Transform3D::Load(const MarshalDecodeNode& node) {
     Transform3D* transform3D = new Transform3D();
 
-    const auto& position = xml.TryGetNode("Translation");
-    const auto& rotation = xml.TryGetNode("Rotation");
-    const auto& scale    = xml.TryGetNode("Scale");
-    const auto& skew     = xml.TryGetNode("Skew");
+    const auto& position = node.TryGetNode("Translation");
+    const auto& rotation = node.TryGetNode("Rotation");
+    const auto& scale    = node.TryGetNode("Scale");
+    const auto& skew     = node.TryGetNode("Skew");
 
-    transform3D->SetTranslation(position.TryGetAttribute("X").ToFloat(0.f), position.TryGetAttribute("Y").ToFloat(0.f), position.TryGetAttribute("Z").ToFloat(0.f));
-    transform3D->SetRotation(rotation.TryGetAttribute("X").ToFloat(0.f), rotation.TryGetAttribute("Y").ToFloat(0.f), rotation.TryGetAttribute("Z").ToFloat(0.f));
-    transform3D->SetScale(scale.TryGetAttribute("X").ToFloat(1.f), scale.TryGetAttribute("Y").ToFloat(1.f), scale.TryGetAttribute("Z").ToFloat(1.f));
-    transform3D->SetSkew(skew.TryGetAttribute("X").ToFloat(1.f), skew.TryGetAttribute("Y").ToFloat(1.f), skew.TryGetAttribute("Z").ToFloat(1.f));
+    transform3D->SetTranslation(position.GetAttributeDef<FVector3>((Math::Unit)0));
+    transform3D->SetRotation(rotation.GetAttributeDef<FVector3>((Math::Unit)0));
+    transform3D->SetScale(scale.GetAttributeDef<FVector3>((Math::Unit)1));
+    transform3D->SetSkew(skew.GetAttributeDef<FVector3>((Math::Unit)1));
 
     return transform3D;
 }

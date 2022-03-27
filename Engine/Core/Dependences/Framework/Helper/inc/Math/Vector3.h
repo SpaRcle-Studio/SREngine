@@ -22,32 +22,32 @@ namespace Framework::Helper::Math {
             T coord[3] = { 0 };
         };
     public:
-        constexpr _FORCE_INLINE_ Vector3() {
+        constexpr SR_FORCE_INLINE Vector3() {
             x = 0;
             y = 0;
             z = 0;
         }
-        template<typename U> constexpr _FORCE_INLINE_ explicit Vector3(const Vector3<U>& vec) {
+        template<typename U> constexpr SR_FORCE_INLINE explicit Vector3(const Vector3<U>& vec) {
             x = static_cast<T>(vec.x);
             y = static_cast<T>(vec.y);
             z = static_cast<T>(vec.z);
         }
-        _FORCE_INLINE_ constexpr explicit Vector3(const float* vec) {
+        SR_FORCE_INLINE constexpr explicit Vector3(const float* vec) {
             x = (Unit)vec[0];
             y = (Unit)vec[1];
             z = (Unit)vec[2];
         }
-        _FORCE_INLINE_ constexpr explicit Vector3(const uint8_t* axis) {
+        SR_FORCE_INLINE constexpr explicit Vector3(const uint8_t* axis) {
             x = (Unit)axis[0];
             y = (Unit)axis[1];
             z = (Unit)axis[2];
         }
-        _FORCE_INLINE_ constexpr Vector3(T p_x, T p_y, T p_z) {
+        SR_FORCE_INLINE constexpr Vector3(T p_x, T p_y, T p_z) {
             x = p_x;
             y = p_y;
             z = p_z;
         }
-        _FORCE_INLINE_ constexpr Vector3(T p) {
+        SR_FORCE_INLINE constexpr Vector3(T p) {
             x = p;
             y = p;
             z = p;
@@ -78,61 +78,61 @@ namespace Framework::Helper::Math {
         template<typename U> static Vector3<T> YZ(const Vector2<U>& v) { return YZ(v, 0); }
 
     public:
-        template<typename U> [[nodiscard]] Vector3<U> Cast() const { return Vector3<U>(
+        template<typename U> SR_NODISCARD Vector3<U> Cast() const { return Vector3<U>(
                     static_cast<U>(x),
                     static_cast<U>(y),
                     static_cast<U>(z)
                 );
         }
 
-        [[nodiscard]] Vector2<T> XY() const { return Vector2<T>(x, y); }
-        [[nodiscard]] Vector2<T> XZ() const { return Vector2<T>(x, z); }
-        [[nodiscard]] Vector2<T> YZ() const { return Vector2<T>(y, z); }
+        SR_NODISCARD Vector2<T> XY() const { return Vector2<T>(x, y); }
+        SR_NODISCARD Vector2<T> XZ() const { return Vector2<T>(x, z); }
+        SR_NODISCARD Vector2<T> YZ() const { return Vector2<T>(y, z); }
 
-        [[nodiscard]] Vector3 Singular(const Vector3& segment) const { return Vector3(
+        SR_NODISCARD Vector3 Singular(const Vector3& segment) const { return Vector3(
                      x > 0 ? x + segment.x : x - segment.x,
                      y > 0 ? y + segment.y : y - segment.y,
                      z > 0 ? z + segment.z : z - segment.z
                 );
         }
-        [[nodiscard]] Vector3 DeSingular(const Vector3& segment) const { return Vector3(
+        SR_NODISCARD Vector3 DeSingular(const Vector3& segment) const { return Vector3(
                     x > 0 ? x - segment.x : x,
                     y > 0 ? y - segment.y : y,
                     z > 0 ? z - segment.z : z
             );
         }
 
-        [[nodiscard]] T Max() const {
+        SR_NODISCARD T Max() const {
             return x > y && x > z ? x : y > x && y > z ? y : z;
         }
-        [[nodiscard]] T Min() const {
+        SR_NODISCARD T Min() const {
             return x < y && x < z ? x : y < x && y < z ? y : z;
         }
 
-        [[nodiscard]] bool Empty() const {
+        SR_NODISCARD bool Empty() const {
             return (x == 0 && y == 0 && z == 0);
         }
 
-        [[nodiscard]] bool HasZero() const {
+        SR_NODISCARD bool HasZero() const {
             return (x == 0 || y == 0 || z == 0);
         }
 
-        [[nodiscard]] bool IsInfinity() const {
+        SR_NODISCARD bool IsInfinity() const {
             return (x == UnitMAX && y == UnitMAX && z == UnitMAX); // TODO
         }
 
-        [[nodiscard]] Vector3 Radians() const {
+        SR_NODISCARD Vector3 Radians() const {
             return { static_cast<T>(RAD(x)), static_cast<T>(RAD(y)), static_cast<T>(RAD(z)) };
         }
-        [[nodiscard]] Vector3 Degrees() const {
+        SR_NODISCARD Vector3 Degrees() const {
             return { static_cast<T>(DEG(x)), static_cast<T>(DEG(y)), static_cast<T>(DEG(z)) };
         }
 
-        [[nodiscard]] std::string ToString() const {
+        SR_NODISCARD std::string ToString() const {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
         }
 
-        [[nodiscard]] T Distance(Vector3 point) const {
+        SR_NODISCARD T Distance(Vector3 point) const {
             return sqrt(
                     pow(point.x - x, 2) +
                     pow(point.y - y, 2) +
@@ -140,7 +140,7 @@ namespace Framework::Helper::Math {
             );
         }
 
-        [[nodiscard]] Vector3 Direction(Vector3 point) const {
+        SR_NODISCARD Vector3 Direction(Vector3 point) const {
             if (point == *this)
                 return Vector3();
             Vector3 heading = point - (*this);
@@ -148,7 +148,7 @@ namespace Framework::Helper::Math {
             return heading / distance;
         }
 
-        [[nodiscard]] Vector3 Limits(int lim) const {
+        SR_NODISCARD Vector3 Limits(int lim) const {
             int xi = (int)x / lim;
             int yi = (int)y / lim;
             int zi = (int)z / lim;
@@ -160,26 +160,36 @@ namespace Framework::Helper::Math {
             return Vector3(xd, yd, zd);
         }
 
-        [[nodiscard]] bool ContainsNaN() const {
+        SR_NODISCARD bool ContainsNaN() const {
             return static_cast<float>(x) == SR_NAN || static_cast<float>(y) == SR_NAN || static_cast<float>(z) == SR_NAN;
         }
 
-        [[nodiscard]] Vector3 Inverse() const {
+        SR_NODISCARD Vector3 Inverse() const {
             return Vector3(-x, -y, -z);
         }
 
-        [[nodiscard]] Vector3 InverseAxis(uint8_t axis) const {
+        SR_NODISCARD Vector3 SR_FASTCALL InverseAxis(uint8_t axis) const {
             Vector3 v = *this;
             v[axis] = -v[axis];
             return v;
         }
-        [[nodiscard]] Vector3 ZeroAxis(Axis axis) const {
+        SR_NODISCARD Vector3 ZeroAxis(Axis axis) const {
             Vector3 v = *this;
-            v[static_cast<int>(axis) - 1] = 0;
+
+            switch (axis) {
+                case Axis::AXIS_X: v[0] = 0; break;
+                case Axis::AXIS_Y: v[1] = 0; break;
+                case Axis::AXIS_Z: v[2] = 0; break;
+                case Axis::AXIS_XY: v[0] = v[1] = 0; break;
+                case Axis::AXIS_XZ: v[0] = v[1] = 0; break;
+                case Axis::AXIS_YZ: v[1] = v[2] = 0; break;
+                case Axis::AXIS_XYZ: v[0] = v[1] = v[2] = 0; break;
+            }
+
             return v;
         }
 
-        [[nodiscard]] Vector3 Normalize() const {
+        SR_NODISCARD Vector3 Normalize() const {
             T len = static_cast<T>(std::sqrt(x * x + y * y + z * z));
 
             Vector3 vec3 = *this;
@@ -193,39 +203,38 @@ namespace Framework::Helper::Math {
             return vec3;
         }
 
-        //bool inRads = false
-        [[nodiscard]] Quaternion ToQuat() const;
+        SR_NODISCARD Quaternion ToQuat() const;
 
-        _FORCE_INLINE_ const T &operator[](int p_axis) const {
+        SR_FORCE_INLINE const T &operator[](int p_axis) const {
             return coord[p_axis];
         }
 
-        _FORCE_INLINE_ T &operator[](int p_axis) {
+        SR_FORCE_INLINE T &operator[](int p_axis) {
             return coord[p_axis];
         }
 
-        [[nodiscard]] _FORCE_INLINE_ T Length() const {
+        SR_NODISCARD SR_FORCE_INLINE T Length() const {
             return static_cast<T>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
         }
 
-        [[nodiscard]] Vector3 Replace(int from, int to) const {
+        SR_NODISCARD Vector3 Replace(int from, int to) const {
             return Vector3(
                     x == from ? to : x,
                     y == from ? to : y,
                     z == from ? to : z);
         }
 
-        [[nodiscard]] Vector3 Abs() const {
+        SR_NODISCARD Vector3 Abs() const {
             return Vector3(static_cast<T>(abs(x)), static_cast<T>(abs(y)), static_cast<T>(abs(z)));
         }
 
-        [[nodiscard]] Vector3 FixEulerAngles() const {
+        SR_NODISCARD Vector3 FixEulerAngles() const {
             return Vector3(FixAxis(x), FixAxis(y), FixAxis(z));
         }
 
-        [[nodiscard]] T Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
+        SR_NODISCARD T Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
 
-        [[nodiscard]] Vector3 Cross(const Vector3 &p_b) const {
+        SR_NODISCARD Vector3 Cross(const Vector3 &p_b) const {
             Vector3 ret(
                     (y * p_b.z) - (z * p_b.y),
                     (z * p_b.x) - (x * p_b.z),
@@ -234,18 +243,18 @@ namespace Framework::Helper::Math {
             return ret;
         }
 
-        [[nodiscard]] Vector3<T> Rotate(const Quaternion& q) const;
+        SR_NODISCARD Vector3<T> Rotate(const Quaternion& q) const;
 
-        template<typename U> _FORCE_INLINE_ Vector3 &operator+=(const Vector3<U> &p_v){
+        template<typename U> SR_FORCE_INLINE Vector3 &operator+=(const Vector3<U> &p_v){
             x += p_v.x;
             y += p_v.y;
             z += p_v.z;
             return *this;
         }
-        template<typename U> _FORCE_INLINE_ Vector3 operator+(const Vector3<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator+(const Vector3<U> &p_v) const {
             return Vector3(x + p_v.x, y + p_v.y, z + p_v.z);
         }
-        template<typename U> _FORCE_INLINE_ Vector3 operator%(const Vector3<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator%(const Vector3<U> &p_v) const {
             return Vector3(
                     static_cast<int32_t>(x) % static_cast<int32_t>(p_v.x),
                     static_cast<int32_t>(y) % static_cast<int32_t>(p_v.y),
@@ -253,81 +262,81 @@ namespace Framework::Helper::Math {
                 );
         }
 
-        template<typename U> _FORCE_INLINE_ Vector3 &operator-=(const Vector3<U> &p_v) {
+        template<typename U> SR_FORCE_INLINE Vector3 &operator-=(const Vector3<U> &p_v) {
             x -= p_v.x;
             y -= p_v.y;
             z -= p_v.z;
             return *this;
         }
-        template<typename U> _FORCE_INLINE_ Vector3 operator-(const Vector3<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator-(const Vector3<U> &p_v) const {
             return Vector3(x - p_v.x, y - p_v.y, z - p_v.z);
         }
-        template<typename U> _FORCE_INLINE_ Vector3 &operator*=(const Vector3<U> &p_v) {
+        template<typename U> SR_FORCE_INLINE Vector3 &operator*=(const Vector3<U> &p_v) {
             x *= p_v.x;
             y *= p_v.y;
             z *= p_v.z;
             return *this;
         }
-        template<typename U> _FORCE_INLINE_ Vector3 &operator%=(const Vector3<U> &p_v) {
+        template<typename U> SR_FORCE_INLINE Vector3 &operator%=(const Vector3<U> &p_v) {
             x %= p_v.x;
             y %= p_v.y;
             z %= p_v.z;
             return *this;
         }
 
-        template<typename U> _FORCE_INLINE_ Vector3 operator*(const Vector3<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator*(const Vector3<U> &p_v) const {
             return Vector3(x * p_v.x, y * p_v.y, z * p_v.z);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector3 &operator/=(const Vector3<U> &p_v) {
+        template<typename U> SR_FORCE_INLINE Vector3 &operator/=(const Vector3<U> &p_v) {
             x /= p_v.x;
             y /= p_v.y;
             z /= p_v.z;
             return *this;
         }
-        template<typename U> _FORCE_INLINE_ Vector3 operator/(const Vector3<U> &p_v) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator/(const Vector3<U> &p_v) const {
             return Vector3(x / p_v.x, y / p_v.y, z / p_v.z);
         }
 
-        template<typename U> _FORCE_INLINE_ Vector3 &operator*=(U p_scalar) {
+        template<typename U> SR_FORCE_INLINE Vector3 &operator*=(U p_scalar) {
             x *= p_scalar;
             y *= p_scalar;
             z *= p_scalar;
             return *this;
         }
-        template<typename U> _FORCE_INLINE_ Vector3 operator*(U p_scalar) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator*(U p_scalar) const {
             return Vector3(x * p_scalar, y * p_scalar, z * p_scalar);
         }
-        template<typename U> _FORCE_INLINE_ Vector3 &operator/=(U p_scalar) {
+        template<typename U> SR_FORCE_INLINE Vector3 &operator/=(U p_scalar) {
             x /= p_scalar;
             y /= p_scalar;
             z /= p_scalar;
             return *this;
         }
-        template<typename U> _FORCE_INLINE_ Vector3 operator/(U p_scalar) const {
+        template<typename U> SR_FORCE_INLINE Vector3 operator/(U p_scalar) const {
             return Vector3(x / p_scalar, y / p_scalar, z / p_scalar);
         }
 
-        template<typename U> _FORCE_INLINE_ bool operator>(U p_scalar) const { return *this > Vector3<U>(p_scalar); }
-        template<typename U> _FORCE_INLINE_ bool operator<(U p_scalar) const { return *this < Vector3<U>(p_scalar); }
-        template<typename U> _FORCE_INLINE_ bool operator>=(U p_scalar) const { return *this >= Vector3<U>(p_scalar); }
-        template<typename U> _FORCE_INLINE_ bool operator<=(U p_scalar) const { return *this <= Vector3<U>(p_scalar); }
-        template<typename U> _FORCE_INLINE_ bool operator==(U p_scalar) const { return *this == Vector3<U>(p_scalar); }
-        template<typename U> _FORCE_INLINE_ bool operator!=(U p_scalar) const { return *this != Vector3<U>(p_scalar); }
+        template<typename U> SR_FORCE_INLINE bool operator>(U p_scalar) const { return *this > Vector3<U>(p_scalar); }
+        template<typename U> SR_FORCE_INLINE bool operator<(U p_scalar) const { return *this < Vector3<U>(p_scalar); }
+        template<typename U> SR_FORCE_INLINE bool operator>=(U p_scalar) const { return *this >= Vector3<U>(p_scalar); }
+        template<typename U> SR_FORCE_INLINE bool operator<=(U p_scalar) const { return *this <= Vector3<U>(p_scalar); }
+        template<typename U> SR_FORCE_INLINE bool operator==(U p_scalar) const { return *this == Vector3<U>(p_scalar); }
+        template<typename U> SR_FORCE_INLINE bool operator!=(U p_scalar) const { return *this != Vector3<U>(p_scalar); }
 
-        _FORCE_INLINE_ Vector3 operator-() const { return Vector3(-x, -y, -z); }
-        _FORCE_INLINE_ Vector3 operator+() const { return *this; }
+        SR_FORCE_INLINE Vector3 operator-() const { return Vector3(-x, -y, -z); }
+        SR_FORCE_INLINE Vector3 operator+() const { return *this; }
 
-        _FORCE_INLINE_ bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
-        _FORCE_INLINE_ bool operator!=(const Vector3 &p_v) const { return x != p_v.x || y != p_v.y || z != p_v.z; }
+        SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
+        SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const { return x != p_v.x || y != p_v.y || z != p_v.z; }
 
-        _FORCE_INLINE_ bool operator<=(const Vector3 &p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
-        _FORCE_INLINE_ bool operator>=(const Vector3 &p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
-        _FORCE_INLINE_ bool operator<(const Vector3 &p_v) const { return x < p_v.x && y < p_v.y && z < p_v.z; }
-        _FORCE_INLINE_ bool operator>(const Vector3 &p_v) const { return x > p_v.x && y > p_v.y && z > p_v.z; }
+        SR_FORCE_INLINE bool operator<=(const Vector3 &p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
+        SR_FORCE_INLINE bool operator>=(const Vector3 &p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
+        SR_FORCE_INLINE bool operator<(const Vector3 &p_v) const { return x < p_v.x && y < p_v.y && z < p_v.z; }
+        SR_FORCE_INLINE bool operator>(const Vector3 &p_v) const { return x > p_v.x && y > p_v.y && z > p_v.z; }
 
     public:
-        [[nodiscard]] glm::vec3 ToGLM() const noexcept {
+        SR_NODISCARD glm::vec3 ToGLM() const noexcept {
             return glm::vec3(x, y, z);
         }
         static Unit Magnitude(Vector3 vec) {
@@ -343,7 +352,7 @@ namespace Framework::Helper::Math {
             return ret;
         }
 
-        [[nodiscard]] Vector3 ConvertAxis(Helper::Graph::PipeLine from, Helper::Graph::PipeLine to) const {
+        SR_NODISCARD Vector3 ConvertAxis(Helper::Graph::PipeLine from, Helper::Graph::PipeLine to) const {
             auto vector = *this;
 
             if (from != to)

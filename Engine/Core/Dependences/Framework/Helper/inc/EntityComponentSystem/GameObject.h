@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include <mutex>
-#include <json/json.hpp>
 #include <map>
 #include <glm/glm.hpp>
 
@@ -16,15 +15,17 @@
 #include <Math/Vector3.h>
 
 #include <EntityComponentSystem/EntityManager.h>
+#include "Component.h"
+
 
 namespace Framework {
     class API;
 }
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     namespace World {
         class Scene;
-    };
+    }
 
     class Transform;
     class Transform3D;
@@ -61,11 +62,11 @@ namespace Framework::Helper {
         SR_NODISCARD bool IsActive() const { return m_isActive && m_isParentActive; }
         SR_NODISCARD bool IsEnabled() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
-        SR_NODISCARD SR_INLINE bool IsSelect() const { return m_isSelect; }
+        SR_NODISCARD SR_INLINE bool IsSelected() const { return m_isSelect; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
 
-        SR_NODISCARD Xml::Document Save() const override;
+        SR_NODISCARD MarshalEncodeNode Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
         Math::FVector3 GetBarycenter();
@@ -73,7 +74,7 @@ namespace Framework::Helper {
 
         void ForEachChild(const std::function<void(Types::SafePtr<GameObject>&)>& fun);
         void ForEachChild(const std::function<void(const Types::SafePtr<GameObject>&)>& fun) const;
-        void SetParent(const GameObject::Ptr& parent);
+        bool SetParent(const GameObject::Ptr& parent);
         void SetName(const std::string& name);
 
         Component* GetComponent(const std::string& name);
@@ -90,6 +91,7 @@ namespace Framework::Helper {
         void Destroy(DestroyByFlagBits by = DestroyBy_Other);
         void SetTransform(Transform3D* transform3D);
 
+        bool MoveToTree(const GameObject::Ptr& destination);
         bool AddChild(const GameObject::Ptr& child);
         bool IsChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
@@ -109,7 +111,7 @@ namespace Framework::Helper {
         void Free();
         void OnPrentSetActive(bool value);
         void UpdateComponentsEnabled();
-        void UpdateEntityPath();
+        bool UpdateEntityPath();
 
     private:
         std::atomic<bool>                   m_isActive       = true;

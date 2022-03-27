@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Configs>
-    <DefaultChunkWidth Value="10"/>
-    <DefaultChunkHeight Value="50"/>
+    <DefaultChunkWidth Value="20"/>
+    <DefaultChunkHeight Value="30"/>
     <DefaultRegionWidth Value="10"/>
-    <DefaultShiftDistance Value="10"/>
-    <DefaultScope Value="10"/>
+    <DefaultShiftDistance Value="20"/>
+    <DefaultScope Value="5"/>
 
     <ScopeEnabled Value="true"/>
     <ShiftEnabled Value="true"/>
 
-    <UpdateContainer Value="false"/>
+    <UpdateContainer Value="true"/>
 </Configs>

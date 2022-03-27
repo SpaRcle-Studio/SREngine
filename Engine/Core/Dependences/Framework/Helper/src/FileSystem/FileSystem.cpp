@@ -1,11 +1,9 @@
 //
 // Created by Nikita on 16.11.2020.
 //
-#define CRT_SECURE_NO_WARNINGS
 
 #include <FileSystem/FileSystem.h>
 
-#include <macros.h>
 #include <cstdio>
 #include <Debug.h>
 #include <Utils/StringUtils.h>
@@ -13,6 +11,8 @@
 #ifdef SR_WIN32
     #include <Windows.h>
     #include <tchar.h>
+    #include <shellapi.h>
+    #include <commdlg.h>
 #endif
 
 #include <Utils/StringUtils.h>
@@ -112,8 +112,10 @@ std::string FileSystem::GetExecutableFileName() {
 }
 
 void FileSystem::Reload() {
+#ifdef SR_WIN32
     std::string exe = GetFullPathToExe();
     ShellExecute(NULL, "open", exe.c_str(), NULL, NULL, SW_SHOWDEFAULT);
+#endif
 }
 
 std::string FileSystem::ReadAllText(const std::string &path) {
@@ -149,7 +151,7 @@ std::vector<char> FileSystem::ReadBinary(const std::string &path) {
     std::ifstream file(path, std::ios::ate | std::ios::binary);
 
     if (!file.is_open()) {
-        Helper::Debug::Error("FileSystem::ReadBinary() : failed to open \""+path+"\"file!");
+        SR_ERROR("FileSystem::ReadBinary() : failed to open \""+path+"\"file!");
         return std::vector<char>();
     }
 

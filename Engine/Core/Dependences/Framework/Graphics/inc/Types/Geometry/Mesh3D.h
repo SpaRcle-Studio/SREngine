@@ -6,7 +6,6 @@
 #define GAMEENGINE_MESH3D_H
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/Geometry/VertexMesh.h>
 #include <Types/Vertices.h>
 
 #include <utility>
@@ -34,9 +33,9 @@ namespace Framework::Graphics::Types {
 
     public:
         IResource* Copy(IResource* destination) const override;
-        void SetVertexArray(const std::any& vertices) override;
+        //void SetVertexArray(const std::any& vertices) override;
 
-        static Component* LoadComponent(const Xml::Node& xml, const Helper::Types::DataStorage* dataStorage);
+        static Component* LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage);
 
     private:
         void UpdateUBO() override;
@@ -45,10 +44,10 @@ namespace Framework::Graphics::Types {
         void DrawVulkan() override;
         void DrawOpenGL() override;
 
-        [[nodiscard]] Helper::Xml::Document Save() const override;
+        [[nodiscard]] MarshalEncodeNode Save(SavableFlags flags) const override;
 
-    private:
-        std::vector<VertexType> m_vertices = std::vector<VertexType>();
+    //private:
+    //    std::vector<VertexType> m_vertices = std::vector<VertexType>();
 
     };
 }

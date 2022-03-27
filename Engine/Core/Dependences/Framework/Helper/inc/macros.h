@@ -8,6 +8,8 @@
 #pragma warning(disable: 4553)
 #pragma warning(disable: 4552)
 
+#define CRT_SECURE_NO_WARNINGS
+
 #define SR_USE_IMGUI
 
 #ifdef _MSVC_LANG
@@ -52,8 +54,10 @@
 #define SR_CONSTEXPR constexpr
 #define SR_FORCE_INLINE __forceinline
 #define SR_NODISCARD [[nodiscard]]
+#define SR_FALLTHROUGH [[fallthrough]]
 #define SR_INLINE inline
 #define SR_NULL 0
+#define SR_MARSHAL_USE_LIST 1
 
 #define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 
@@ -90,6 +94,7 @@
 #ifdef WIN32
     #define SR_WIN32_BOOL true
     #define SR_WIN32
+    #define WIN32_LEAN_AND_MEAN /// Исключите редко используемые компоненты из заголовков Windows
 #else
     #define SR_WIN32_BOOL false
 #endif

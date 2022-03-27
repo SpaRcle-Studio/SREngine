@@ -5,33 +5,11 @@
 #ifndef GAMEENGINE_INPUTSYSTEM_H
 #define GAMEENGINE_INPUTSYSTEM_H
 
+#include <Math/Vector2.h>
 #include <atomic>
-#include <glm/vec2.hpp>
 #include <Input/KeyCodes.h>
 
-#ifdef WIN32
-    #include <Windows.h>
-#include <Math/Vector2.h>
-
-#else
-    #include <conio.h>
-    #include <stdio.h>
-#endif
-
 namespace Framework::Helper {
-    static Math::FVector2 GetMousePos() {
-        #ifdef WIN32
-                POINT p;
-                GetCursorPos(&p);
-                return Math::FVector2(p.x, p.y);
-        #else
-                return {
-                        wherex(),
-                        wherey()
-                    };
-        #endif
-    }
-
     // TODO: make singleton!
     class Input {
         enum class State{
@@ -49,7 +27,7 @@ namespace Framework::Helper {
         inline static Math::FVector2 g_mouseScroll           = Math::FVector2();
         inline static Math::FVector2 g_mouseScrollCurrent    = Math::FVector2();
 
-        inline static BYTE*     g_arr                        = nullptr;
+        inline static unsigned char* g_arr                        = nullptr;
     private:
         inline static std::atomic<bool> g_init = false;
         inline static State g_keys[256];

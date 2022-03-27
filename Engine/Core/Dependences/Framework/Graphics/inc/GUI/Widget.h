@@ -17,23 +17,32 @@ namespace Framework::Graphics::GUI {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
 
+    enum WidgetFlags : uint32_t {
+        WIDGET_FLAG_NONE         = 1 << 0,
+        WIDGET_FLAG_HOVERED      = 1 << 1,
+        WIDGET_FLAG_FOCUSED      = 1 << 2,
+    };
+    typedef uint32_t WidgetFlagBits;
+
     class Widget : public Helper::NonCopyable, public Helper::InputHandler {
         friend class WidgetManager;
     public:
         explicit Widget(std::string name, Helper::Math::IVector2 size = Helper::Math::IVector2MAX)
             : m_name(std::move(name))
             , m_open(false)
-            , m_focused(false)
             , m_center(false)
-            , m_flags(ImGuiWindowFlags_::ImGuiWindowFlags_None)
+            , m_internalFlags(WIDGET_FLAG_NONE)
+            , m_windowFlags(ImGuiWindowFlags_::ImGuiWindowFlags_None)
             , m_size(size)
+            , m_widgetFlags(WIDGET_FLAG_NONE)
         { }
 
         ~Widget() override = default;
 
     public:
         SR_NODISCARD bool IsOpen() const { return m_open; }
-        SR_NODISCARD bool IsFocused() const { return m_focused; }
+        SR_NODISCARD bool IsFocused() const { return m_internalFlags & WIDGET_FLAG_FOCUSED; }
+        SR_NODISCARD bool IsHovered() const { return m_internalFlags & WIDGET_FLAG_HOVERED; }
 
         virtual void Open();
         virtual void Close();
@@ -45,22 +54,30 @@ namespace Framework::Graphics::GUI {
 
         void SetCenter(bool value) { m_center = value; }
         void SetName(const std::string& name) { m_name = name; }
-        void SetFlags(WindowFlags flags) { m_flags = flags; }
+        void SetFlags(WindowFlags flags) { m_windowFlags = flags; }
 
         void TextCenter(const std::string& text) const;
 
         SR_NODISCARD std::string GetName() const { return m_name; }
 
+        void CheckFocused();
+        void CheckHovered();
+
     private:
+        void InternalCheckFocused();
+        void InternalCheckHovered();
         void DrawWindow();
 
     private:
         std::string m_name;
         std::atomic<bool> m_open;
-        std::atomic<bool> m_focused;
         std::atomic<bool> m_center;
-        WindowFlags m_flags;
+        std::atomic<WidgetFlagBits> m_internalFlags;
+        WindowFlags m_windowFlags;
         Helper::Math::IVector2 m_size;
+
+    protected:
+        WidgetFlagBits m_widgetFlags;
 
     };
 }

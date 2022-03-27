@@ -85,8 +85,9 @@ void GameObject::Destroy(DestroyByFlagBits by /* = DestroyByFlags::DestroyBy_Oth
         const bool byParent = by & DestroyBy_GameObject;
 
         if (!byParent && m_parent.LockIfValid()) {
-            m_parent->RemoveChild(*this);
-            m_parent.Unlock();
+            GameObject::Ptr copy = m_parent;
+            copy->RemoveChild(*this);
+            copy.Unlock();
         }
 
         m_scene->Remove(*this);
@@ -137,13 +138,26 @@ void GameObject::UpdateComponentsSkew() {
         component->OnSkewed(m_transform->m_skew);
 }
 
-bool GameObject::AddChild(const Types::SafePtr<GameObject>& child) { // TODO: add security multi-threading
-    if (Contains(child)) {
-        Debug::Warn("GameObject::AddChild() : this child already exists in this game object!");
+bool GameObject::AddChild(const Types::SafePtr<GameObject>& child) {
+    if (child == *this) {
+        SRAssert2(false, "It is impossible to make a parent a child!");
         return false;
     }
 
-    child->SetParent(*this);
+    if (child->GetParent()) {
+        SRAssert2(false, "Child has parent!");
+        return false;
+    }
+
+    if (Contains(child)) {
+        SRAssert2(false, "This child already exists in this game object!");
+        return false;
+    }
+
+    if (!child->SetParent(*this)) {
+        SR_WARN("GameObject::AddChild() : failed to set parent!");
+        return false;
+    }
 
     m_children.insert(child);
 
@@ -177,12 +191,18 @@ std::string GameObject::GetName() const {
     return m_name;
 }
 
-void GameObject::SetParent(const GameObject::Ptr& parent) {
+bool GameObject::SetParent(const GameObject::Ptr& parent) {
     if (parent == m_parent) {
-        return;
+        return false;
     }
 
+    GameObject::Ptr oldParent = m_parent;
     m_parent = parent;
+
+    if (!UpdateEntityPath()) {
+        m_parent = oldParent;
+        return false;
+    }
 
     if (m_parent.Valid()) {
         m_transform->OnParentSet(m_parent->m_transform);
@@ -190,9 +210,9 @@ void GameObject::SetParent(const GameObject::Ptr& parent) {
     else
         m_transform->OnParentSet(nullptr);
 
-    UpdateEntityPath();
-
     m_scene->OnChanged();
+
+    return true;
 }
 
 void GameObject::RemoveChild(const GameObject::Ptr& ptr) {
@@ -201,6 +221,7 @@ void GameObject::RemoveChild(const GameObject::Ptr& ptr) {
         return;
     }
 
+    ptr->SetParent(GameObject::Ptr());
     m_children.erase(ptr);
 }
 
@@ -322,44 +343,58 @@ bool GameObject::RemoveComponent(Component *component) {
     return false;
 }
 
-Xml::Document GameObject::Save() const {
-    auto doc = Xml::Document::New();
-    auto root = doc.Root().AppendChild("GameObject");
+MarshalEncodeNode GameObject::Save(SavableFlags flags) const {
+    MarshalEncodeNode marshal("GameObject");
 
-    root.AppendAttribute("Name", m_name);
-    root.AppendAttribute("EntityId", GetEntityId());
-    root.AppendAttributeDef("Tag", m_tag, "Untagged");
-    root.AppendAttributeDef("Enabled", IsEnabled(), true);
+    marshal.Append("Name", m_name);
 
-    root.AppendChild(m_transform->Save().DocumentElement());
+    if (!(flags & Helper::SAVABLE_FLAG_ECS_NO_ID)) {
+        marshal.Append("EntityId", static_cast<uint64_t>(GetEntityId()));
+    }
+
+    marshal.AppendDef("Tag", m_tag, "Untagged");
+    marshal.AppendDef("Enabled", IsEnabled(), true);
+
+    marshal.Append(m_transform->Save(flags));
 
     if (!m_components.empty()) {
-        auto components = root.AppendChild("Components");
+        MarshalEncodeNode components("Components");
         for (const auto &comp : m_components) {
-            components.AppendChild(comp->Save().DocumentElement());
+            if (auto compNode = comp->Save(flags); compNode.Valid()) {
+                components.Append(compNode);
+            }
         }
+        marshal.Append(components);
     }
 
     if (!m_children.empty()) {
-        auto children = root.AppendChild("Children");
+        MarshalEncodeNode children("Children");
         for (const auto &child : m_children)
-            children.AppendChild(child->Save().DocumentElement());
+            children.Append(child->Save(flags));
+        marshal.Append(children);
     }
 
-    return doc;
+    return marshal;
 }
 
-void GameObject::UpdateEntityPath() {
+bool GameObject::UpdateEntityPath() {
     GameObject::Ptr current = *this;
     EntityPath path;
 
     do {
         path.ConcatBack(current->GetEntityId());
         current = current->m_parent;
+
+        if (current && current->GetEntityId() == GetEntityId()) {
+            SRAssert2(false, "Recursive entity path!");
+            return false;
+        }
     }
     while(current.Valid());
 
     SetEntityPath(path);
+
+    return true;
 }
 
 bool GameObject::IsChild(const GameObject::Ptr &child) {
@@ -368,7 +403,7 @@ bool GameObject::IsChild(const GameObject::Ptr &child) {
 
 Component *GameObject::GetComponent(size_t id) {
     for (auto&& component : m_components)
-        if (component->GetId() == id)
+        if (component->GetComponentId() == id)
            return component;
     return nullptr;
 }
@@ -392,6 +427,18 @@ std::list<EntityBranch> GameObject::GetEntityBranches() const {
     });
 
     return std::move(branches);
+}
+
+bool GameObject::MoveToTree(const GameObject::Ptr& destination) {
+    if (m_parent) {
+        GameObject::Ptr copy = m_parent;
+        if (copy.RecursiveLockIfValid()) {
+            copy->RemoveChild(*this);
+            copy->Unlock();
+        }
+    }
+
+    return destination->AddChild(*this);
 }
 
 

@@ -7,7 +7,6 @@
 
 #include <Debug.h>
 #include <FileSystem/Path.h>
-#include <string>
 #include <fstream>
 #include <functional>
 #include <mutex>
@@ -22,6 +21,7 @@
 
 #include <vector>
 #include <queue>
+#include <list>
 
 namespace Framework::Helper {
     enum class PathType {
@@ -90,15 +90,20 @@ namespace Framework::Helper {
         void GC();
 
     public:
-        void Synchronize(bool force);
-        [[nodiscard]] bool IsLastResource(IResource* resource);
-        [[nodiscard]] Path GetResPath() const { return m_resourcesFolder; }
-        [[nodiscard]] Path GetCachePath() const { return m_resourcesFolder.Concat("Cache"); }
-        [[nodiscard]] Path GetConfigPath() const { return m_resourcesFolder.Concat("Configs"); }
-        [[nodiscard]] Path GetMaterialsPath() const { return m_resourcesFolder.Concat("Materials"); }
-        [[nodiscard]] Path GetTexturesPath() const { return m_resourcesFolder.Concat("Textures"); }
+        SR_NODISCARD bool IsLastResource(IResource* resource);
+        SR_NODISCARD Path GetResPath() const { return m_resourcesFolder; }
+        SR_NODISCARD Path GetCachePath() const { return m_resourcesFolder.Concat("Cache"); }
+        SR_NODISCARD Path GetConfigPath() const { return m_resourcesFolder.Concat("Configs"); }
+        SR_NODISCARD Path GetMaterialsPath() const { return m_resourcesFolder.Concat("Materials"); }
+        SR_NODISCARD Path GetTexturesPath() const { return m_resourcesFolder.Concat("Textures"); }
+        SR_NODISCARD Path GetModelsPath() const { return m_resourcesFolder.Concat("Models"); }
+        SR_NODISCARD Path GetUtilsPath() const { return m_resourcesFolder.Concat("Utilities"); }
 
         IResource* Find(const std::string& Name, const std::string& ID);
+
+        void Synchronize(bool force);
+
+        void InspectResources(const std::function<void(const Resources&)>& callback);
 
         template<typename T> T* Find(const std::string& ID) {
             return dynamic_cast<T*>(Find(typeid(T).name(), ID));
@@ -125,13 +130,11 @@ namespace Framework::Helper {
         /** \brief Get current application memory usage of bytes */
         static uint64_t GetUsedMemoryLoad();
 
-        [[deprecated("Replaced by GetResPath")]] Path GetResourcesFolder() { return m_resourcesFolder; }
-
     public:
         void PrintMemoryDump();
 
     private:
-        std::vector<IResource*> m_resourcesToDestroy = std::vector<IResource*>();
+        std::list<IResource*> m_resourcesToDestroy = std::list<IResource*>();
         Resources m_resources = Resources();
 
     private:

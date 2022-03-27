@@ -12,6 +12,7 @@
 #include "src/GUI/Hierarchy.cpp"
 #include "src/GUI/VisualScriptEditor.cpp"
 #include "src/GUI/EngineSettings.cpp"
+#include "src/GUI/EngineStatistics.cpp"
 
 #include "src/Parsers/BlueprintParser.cpp"
 

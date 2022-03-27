@@ -59,8 +59,8 @@ namespace Framework::Helper {
         void SetSkew(Math::FVector3 skew);
         void SetSkew(Math::Unit x, Math::Unit y, Math::Unit z);
 
-        SR_NODISCARD Xml::Document Save() const override;
-        static Transform3D* Load(const Xml::Node& xml);
+        SR_NODISCARD MarshalEncodeNode Save(SavableFlags flags) const override;
+        static Transform3D* Load(const MarshalDecodeNode& node);
 
     private:
         void SetGameObject(GameObject* gameObject);

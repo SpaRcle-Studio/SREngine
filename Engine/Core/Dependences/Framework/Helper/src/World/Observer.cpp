@@ -25,21 +25,18 @@ FVector3 Framework::Helper::World::AddOffset(const FVector3 &chunk, const FVecto
     return result;
 }
 
-IVector2 Framework::Helper::World::AddOffset(const IVector2 &region, const IVector2 &offset) {
+IVector3 Framework::Helper::World::AddOffset(const IVector3 &region, const IVector3 &offset) {
     return AddOffset(region.Cast<Math::Unit>(), offset).Cast<int32_t>();
 }
 
-FVector2 Framework::Helper::World::AddOffset(const FVector2 &region, const IVector2 &offset) {
+FVector3 Framework::Helper::World::AddOffset(const FVector3 &region, const IVector3 &offset) {
     auto result = region + offset;
 
     SR_OFFSET(result.x, offset.x);
     SR_OFFSET(result.y, offset.y);
+    SR_OFFSET(result.z, offset.z);
 
     return result;
-}
-
-IVector3 Framework::Helper::World::AddOffset(const IVector3 &chunk, const IVector3 &offset) {
-    return AddOffset(chunk.Cast<Math::Unit>(), offset.Cast<Math::Unit>()).Cast<int32_t>();
 }
 
 Math::Unit Framework::Helper::World::AddOffset(const Unit &value, const Unit &offset) {
@@ -53,21 +50,23 @@ Math::Unit Framework::Helper::World::AddOffset(const Unit &value, const Unit &of
     return result;
 }
 
+
+
 Math::IVector3 Framework::Helper::World::MakeChunk(const IVector3 &rawChunkPos, int32_t width) {
     Math::IVector3 chunk = rawChunkPos;
 
-    if (abs(chunk.x) > width) chunk.x %= width;
-    if (abs(chunk.z) > width) chunk.z %= width;
+    #define SR_MAKE_CHUNK(value, width, chunk) {                                          \
+        Framework::Helper::Math::IVector3 temp = chunk;                                   \
+        if (abs(chunk.value) > width) chunk.value %= width;                               \
+        if (chunk.value == 0)                                                             \
+            chunk.value = temp.value > 0 ? width : 1;                                     \
+        else                                                                              \
+            chunk.value = chunk.value > 0 ? chunk.value : width - (abs(chunk.value) - 1); \
+    }                                                                                     \
 
-    if (chunk.x == 0)
-        chunk.x = rawChunkPos.x > 0 ? width : 1;
-    else
-        chunk.x = chunk.x > 0 ? chunk.x : width - (abs(chunk.x) - 1);
-
-    if (chunk.z == 0)
-        chunk.z = rawChunkPos.z > 0 ? width : 1;
-    else
-        chunk.z = chunk.z > 0 ? chunk.z : width - (abs(chunk.z) - 1);
+    SR_MAKE_CHUNK(x, width, chunk);
+    SR_MAKE_CHUNK(y, width, chunk);
+    SR_MAKE_CHUNK(z, width, chunk);
 
     return chunk;
 }
@@ -76,7 +75,7 @@ void Framework::Helper::World::Observer::SetChunk(IVector3 chunk) {
     m_chunk = MakeChunk(chunk, m_regionWidth);
 }
 
-void Framework::Helper::World::Observer::Move(const IVector2 &value) {
+void Framework::Helper::World::Observer::MoveRegion(const IVector3 &value) {
     m_region += value;
 
     if (m_region.x == 0)
@@ -84,6 +83,9 @@ void Framework::Helper::World::Observer::Move(const IVector2 &value) {
 
     if (m_region.y == 0)
         m_region.y = -(value.y / abs(value.y));
+
+    if (m_region.z == 0)
+        m_region.z = -(value.z / abs(value.z));
 }
 
 void Framework::Helper::World::Observer::SetWorldMetrics(const IVector2 &chunkSize, int32_t regionWidth) {
@@ -99,9 +101,9 @@ Framework::Helper::World::Observer::Observer(const Types::SafePtr<Scene>& scene)
 { }
 
 Offset Observer::MathNeighbour(const IVector3 &offset) {
-    Math::IVector2 region;
+    Math::IVector3 region;
 
-    if (offset.x >= 0)
+    /*if (offset.x >= 0)
         region.x = (m_chunk.x - 1) + offset.x;
     else
         region.x = (m_chunk.x - m_regionWidth) + offset.x;
@@ -109,9 +111,31 @@ Offset Observer::MathNeighbour(const IVector3 &offset) {
     if (offset.z >= 0)
         region.y = (m_chunk.z - 1) + offset.z;
     else
-        region.y = (m_chunk.z - m_regionWidth) + offset.z;
+        region.y = (m_chunk.z - m_regionWidth) + offset.z;*/
+
+    #define SR_REGION_NEIGHBOUR(chunk, region, width, offset, value) \
+        if (offset.value >= 0)                                       \
+            region.value = (chunk.value - 1) + offset.value;         \
+        else                                                         \
+            region.value = (chunk.value - width) + offset.value;     \
+
+    SR_REGION_NEIGHBOUR(m_chunk, region, m_regionWidth, offset, x);
+    SR_REGION_NEIGHBOUR(m_chunk, region, m_regionWidth, offset, y);
+    SR_REGION_NEIGHBOUR(m_chunk, region, m_regionWidth, offset, z);
 
     const auto chunk = AddOffset(m_chunk, offset);
-    return { AddOffset(m_region, region / m_regionWidth), MakeChunk(chunk, m_regionWidth) };
+    return Offset(
+            AddOffset(m_region, region / m_regionWidth),
+            MakeChunk(chunk, m_regionWidth)
+    );
+}
+
+Math::IVector3 Observer::WorldPosToChunkPos(const Math::FVector3& position) {
+    const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
+
+    return AddOffset(
+            position.Singular(Math::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<int>() / chunkSize,
+            m_offset.m_chunk
+    );
 }
 

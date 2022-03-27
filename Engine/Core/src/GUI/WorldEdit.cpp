@@ -15,7 +15,7 @@ namespace Framework::Core::GUI {
     }
 
     void WorldEdit::Draw() {
-        if (m_scene.LockIfValid()) {
+        if (m_scene.TryLockIfValid()) {
             const auto&& observer = m_scene->GetObserver();
             const auto offset = observer->m_offset;
 
@@ -23,7 +23,7 @@ namespace Framework::Core::GUI {
             TextCenter("Current");
 
             ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
-            ImGui::InputFloat2("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
+            ImGui::InputFloat3("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
 
             ImGui::Separator();
             TextCenter("Offset");
@@ -33,7 +33,7 @@ namespace Framework::Core::GUI {
                 m_scene->SetWorldOffset(World::Offset(offset.m_region, chunkOffset));
 
             auto regionOffset = offset.m_region.ToGLM();
-            if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
+            if (ImGui::InputFloat3("Region offset", &regionOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
                 m_scene->SetWorldOffset(World::Offset(regionOffset, offset.m_chunk));
 
             auto scope = observer->GetScope();
@@ -46,7 +46,7 @@ namespace Framework::Core::GUI {
 
             if (auto&& chunk = m_scene->GetCurrentChunk()) {
                 ImGui::Separator();
-                auto size = static_cast<int32_t>(chunk->GetContainerSize());
+                int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
                 ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
             }
 

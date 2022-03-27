@@ -80,6 +80,10 @@ uint32_t Xml::Attribute::ToUInt(uint32_t def) const {
     return m_valid ? m_attribute.as_uint() : def;
 }
 
+uint64_t Xml::Attribute::ToUInt64(uint64_t def) const {
+    return m_valid ? m_attribute.as_ullong() : def;
+}
+
 Framework::Helper::Xml::Document Framework::Helper::Xml::Document::Load(const std::string &path)  {
     auto xml = Document();
     if (pugi::xml_parse_result result = xml.m_document.load_file(path.c_str())) {
@@ -110,6 +114,12 @@ Framework::Helper::Xml::Node::Node()
     : m_node()
     , m_valid(false)
 { }
+
+Xml::Document Xml::Node::ToDocument() const {
+    auto doc = Document::New();
+    doc.Root().AppendChild(*this);
+    return doc;
+}
 
 Xml::Node Xml::Node::AppendChild(const std::string &name)  {
     if (!m_valid) {

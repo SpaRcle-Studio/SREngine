@@ -5,50 +5,60 @@
 #include "ResourceManager/IResource.h"
 #include "ResourceManager/ResourceManager.h"
 
-using namespace Framework::Helper;
+namespace SR_UTILS_NS {
+    IResource::IResource(const char *name)
+        : IResource(name, false)
+    { }
 
-IResource::IResource(const char* name)
-    : m_resourceName(name)
-    , m_lifetime(ResourceManager::ResourceLifeTime)
-{ }
+    IResource::IResource(const char *name, bool autoRemove)
+        : m_resourceName(name)
+        , m_lifetime(ResourceManager::ResourceLifeTime)
+        , m_autoRemove(autoRemove)
+    { }
 
-bool IResource::ForceDestroy() {
-    if (m_force || m_isDestroy) {
-        Helper::Debug::Error("IResource::ForceDestroy() : resource is already destroyed!");
-        return false;
+    bool IResource::ForceDestroy() {
+        if (m_force || IsDestroyed()) {
+            SR_ERROR("IResource::ForceDestroy() : resource is already destroyed!");
+            return false;
+        }
+
+        m_force = true;
+
+        return Destroy();
     }
 
-    m_force = true;
+    void IResource::SetId(const std::string &id, bool autoRegister) {
+        if (m_resourceId == "NoID") {
+            m_resourceId = id;
 
-    return this->Destroy();
-}
-
-void IResource::SetId(const std::string &id) {
-    if (m_resourceId == "NoID") {
-        m_resourceId = id;
-        ResourceManager::Instance().RegisterResource(this);
+            if (autoRegister) {
+                ResourceManager::Instance().RegisterResource(this);
+            }
+        }
+        else {
+            SRAssert2(false, "Double set resource id!");
+        }
     }
-    else {
-        SRAssert2(false, "Double set resource id!");
+
+    IResource *IResource::Copy(IResource *destination) const {
+        destination->m_autoRemove = m_autoRemove;
+        destination->m_lifetime = m_lifetime;
+        destination->m_loadState.store(m_loadState);
+        destination->SetId(m_resourceId);
+        destination->SetReadOnly(m_readOnly);
+
+        return destination;
     }
-}
 
-IResource *IResource::Copy(IResource* destination) const {
-    destination->m_autoRemove = m_autoRemove;
-    destination->SetId(m_resourceId);
-    destination->SetReadOnly(m_readOnly);
+    bool IResource::Destroy() {
+        Helper::ResourceManager::Instance().Destroy(this);
 
-    return destination;
-}
+        SRAssert(!IsDestroyed());
+        m_isDestroyed = true;
+        return true;
+    }
 
-bool IResource::Destroy() {
-    Helper::ResourceManager::Instance().Destroy(this);
-
-    SRAssert(!m_isDestroy);
-    m_isDestroy = true;
-    return true;
-}
-
-bool IResource::IsValid() const {
-    return m_resourceId != "NoID" && !m_resourceId.empty() && std::string(m_resourceName) != "Unnamed";
+    bool IResource::IsValid() const {
+        return m_resourceId != "NoID" && !m_resourceId.empty() && std::string(m_resourceName) != "Unnamed";
+    }
 }

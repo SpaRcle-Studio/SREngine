@@ -118,19 +118,28 @@ void LoadNemesis() {
     auto character = scene->Instance("Nemesis");
 
     for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
-        Mesh* mesh = fbx_meshes[i];
+        Mesh *mesh = fbx_meshes[i];
 
         mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
 
         render->RegisterMesh(mesh);
         mesh->WaitCalculate();
         mesh->SetMaterial(materials[i]);
-        auto object = scene->Instance(mesh->GetGeometryName());
-        object->AddComponent(DynamicCastMeshToComponent(mesh));
-
-        character->AddChild(object);
     }
-    ///character->GetTransform()->Rotate(FVector3(-90, 0, 0));
+
+    if (character.LockIfValid()) {
+        for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+            Mesh *mesh = fbx_meshes[i];
+
+            auto object = scene->Instance(mesh->GetGeometryName());
+            object->AddComponent(DynamicCastMeshToComponent(mesh));
+
+            character->AddChild(object);
+        }
+        character.Unlock();
+    }
+   character->GetTransform()->Rotate(FVector3(-90, 0, 0));
+   //character->GetTransform()->Translate(FVector3(10, 0, 0));
 }
 
 void LoadMiku() {
@@ -192,6 +201,26 @@ void LoadKurumi() {
     ///character->GetTransform()->Translate(-character->GetTransform()->Right());
 }
 
+void LoadRoom() {
+    Render* render = Engine::Instance().GetRender();
+    auto scene = Engine::Instance().GetScene();
+
+    auto fbx_meshes = Mesh::Load("Game/Room.fbx", MeshType::Static);
+    auto character = scene->Instance("Room");
+
+    for (uint32_t i = 0; i < fbx_meshes.size(); i++) {
+        Mesh* mesh = fbx_meshes[i];
+
+        mesh->SetShader(render->FindShader(static_cast<uint32_t>(StandardID::Geometry)));
+
+        render->RegisterMesh(mesh);
+        auto object = scene->Instance(mesh->GetGeometryName());
+        object->AddComponent(DynamicCastMeshToComponent(mesh));
+
+        character->AddChild(object);
+    }
+}
+
 EXTERN void Start() {
     auto&& engine = Engine::Instance();
     g_window = engine.GetWindow();
@@ -224,8 +253,9 @@ EXTERN void Start() {
 
     //LoadMiku();
     //LoadKurumi();
-    LoadNemesis();
-    LoadCubes();
+    //LoadNemesis();
+    //LoadCubes();
+    //LoadRoom();
 }
 
 void CameraMove(float dt) {
@@ -293,12 +323,5 @@ EXTERN void Update(float dt) {
 }
 
 EXTERN void Close() {
-    auto scene = Engine::Instance().GetScene();
-    if (scene.LockIfValid()) {
-        scene.Free([](Scene *scene) {
-            scene->Destroy();
-            scene->Free();
-        });
-        scene.Unlock();
-    }
+    Engine::Instance().CloseScene();
 }

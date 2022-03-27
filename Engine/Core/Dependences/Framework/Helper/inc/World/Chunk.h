@@ -43,24 +43,22 @@ namespace Framework::Helper {
             static bool Belongs(const Math::IVector3& position, const Math::IVector2& size, const Math::FVector3& point);
 
         public:
-            bool Clear();
-            void Insert(const GameObject::Ptr& ptr);
-            void Erase(const GameObject::Ptr& ptr);
-
-            [[nodiscard]] uint32_t GetContainerSize() const;
             [[nodiscard]] LoadState GetState() const { return m_loadState; }
             [[nodiscard]] bool IsAlive() const { return m_lifetime > 0; }
             [[nodiscard]] Math::IVector3 GetPosition() const { return m_position; }
+            [[nodiscard]] Math::FVector3 GetWorldPosition(Math::Axis center = Math::AXIS_NONE) const;
+
+            SR_NODISCARD MarshalEncodeNode Save() const;
 
         public:
             virtual void OnEnter();
             virtual void OnExit();
             virtual void Reload();
             virtual void Update(float_t dt);
-            virtual bool Access();
+            virtual bool Access(float_t dt);
             virtual bool Belongs(const Math::FVector3& point);
             virtual bool Unload();
-            virtual bool Load();
+            virtual bool Load(const MarshalDecodeNode& node);
 
             virtual bool ApplyOffset();
 
@@ -73,11 +71,10 @@ namespace Framework::Helper {
             Observer* m_observer;
             Region* m_region;
 
-            std::unordered_set<GameObject::Ptr> m_container;
-
             float_t m_lifetime;
 
             Math::IVector2 m_size;
+            Math::IVector3 m_regionPosition;
             Math::IVector3 m_position;
         };
     }

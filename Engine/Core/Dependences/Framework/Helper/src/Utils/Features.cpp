@@ -20,7 +20,7 @@ bool FeatureGroup::Enabled(const std::string &name) const {
     if (auto pIt = m_values.find(name); pIt != m_values.end())
         return pIt->second;
 
-    Helper::Debug::Warn("FeatureGroup::Enabled() : feature \"" + name + "\" not found!");
+    SR_WARN("FeatureGroup::Enabled() : feature \"" + name + "\" not found!");
 
     return false;
 }
@@ -41,7 +41,7 @@ bool Features::Reload(const std::string &path) {
 
     if (!path.empty()) {
         if (!FileSystem::FileExists(path)) {
-            Helper::Debug::Error("Features::Reload() : file not found! Path: " + path);
+            SR_ERROR("Features::Reload() : file not found! Path: " + path);
             return false;
         }
 
@@ -59,7 +59,7 @@ bool Features::Reload(const std::string &path) {
         }
     }
     else {
-        Helper::Debug::Error("Features::Reload() : error while loading file! Path: " + m_path);
+        SR_ERROR("Features::Reload() : error while loading file! Path: " + m_path);
         return false;
     }
 

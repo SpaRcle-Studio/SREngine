@@ -12,6 +12,7 @@
 #include <GUI/VisualScriptEditor.h>
 #include <GUI/WorldEdit.h>
 #include <GUI/EngineSettings.h>
+#include <GUI/EngineStatistics.h>
 
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;
@@ -28,6 +29,7 @@ EditorGUI::EditorGUI(Framework::Scripting::Compiler *compiler)
     AddWindow(new Inspector());
     AddWindow(new WorldEdit());
     AddWindow(new EngineSettings());
+    AddWindow(new EngineStatistics());
 
     for (auto& [id, widget] : m_widgets)
         Register(widget);
@@ -45,26 +47,26 @@ EditorGUI::~EditorGUI() {
 
 bool EditorGUI::Init() {
     if (m_isInit) {
-        Helper::Debug::Error("EditorGUI::Init() : editor gui is already initialized!");
+        SR_ERROR("EditorGUI::Init() : editor gui is already initialized!");
         return false;
     }
-    Helper::Debug::Info("EditorGUI::Init() : initializing editor gui...");
+    SR_INFO("EditorGUI::Init() : initializing editor gui...");
 
     if (!m_compiler) {
-        Helper::Debug::Error("EditorGUI::Init() : compiler is nullptr!");
+        SR_ERROR("EditorGUI::Init() : compiler is nullptr!");
         return false;
     }
 
-    this->m_script = Scripting::Script::Allocate("Engine/Editor", m_compiler, Scripting::ScriptType::EvoScript);
+    m_script = Scripting::Script::Allocate("Engine/Editor", m_compiler, Scripting::ScriptType::EvoScript);
     if (!m_script || !m_script->Compile()) {
-        Helper::Debug::Error("EditorGUI::Init() : failed to allocate/compile script!");
+        SR_ERROR("EditorGUI::Init() : failed to allocate/compile script!");
         m_hasErrors = true;
         return false;
     }
 
     Load();
 
-    this->m_isInit = true;
+    m_isInit = true;
 
     return true;
 }

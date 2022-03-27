@@ -51,7 +51,7 @@ namespace Framework::Helper {
         [[nodiscard]] SR_FORCE_INLINE bool HasParent() { return (bool)m_parent; }
         [[nodiscard]] Transform* GetParent() { return m_parent; }
 
-        [[nodiscard]] Xml::Document Save() const override;
+        [[nodiscard]] MarshalEncodeNode Save(SavableFlags flags) const override { return MarshalEncodeNode(); }
 
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, bool local = false) const noexcept;
         [[nodiscard]] glm::mat4 GetMatrix(Helper::Graph::PipeLine pipeLine, Math::FVector3 position, bool local = false) const noexcept;

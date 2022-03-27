@@ -7,6 +7,7 @@
 
 #include <Input/InputEvents.h>
 #include <Events/Event.h>
+#include <Input/InputSystem.h>
 
 namespace Framework::Helper {
     class InputHandler : public Event<KeyCode, MouseCode, KeyState> {
@@ -25,6 +26,11 @@ namespace Framework::Helper {
         virtual void OnKeyPress(const KeyPressEvent& event) { }
         virtual void OnKeyDown(const KeyDownEvent& event) { }
         virtual void OnKeyUp(const KeyUpEvent& event) { }
+
+    protected:
+        bool IsKeyPressed(KeyCode code) {
+            return Input::GetKey(code);
+        }
 
     private:
         void Trigger(KeyCode key, MouseCode mouse, KeyState state) override {

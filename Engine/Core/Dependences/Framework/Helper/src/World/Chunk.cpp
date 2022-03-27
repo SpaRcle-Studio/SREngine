@@ -21,6 +21,10 @@ Chunk::Chunk(SRChunkAllocArgs)
     SRAssert(m_observer);
     SRAssert(m_region);
     SRAssert(!m_position.HasZero());
+
+    if (m_region) {
+        m_regionPosition = m_region->GetPosition();
+    }
 }
 
 void Chunk::Update(float_t dt) {
@@ -36,13 +40,20 @@ bool Chunk::Belongs(const Math::FVector3 &point) {
         point.x <= xMax && point.y <= yMax && point.z <= zMax;
 }
 
-bool Chunk::Access() {
-    m_lifetime = 2.f;
+bool Chunk::Access(float_t dt) {
+    m_lifetime = dt + 2.f;
     return true;
 }
 
 bool Chunk::Unload() {
     m_loadState = LoadState::Unload;
+
+    for (auto gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
+        gameObject.AutoFree([](auto gm) {
+            gm->Destroy();
+        });
+    }
+
     return true;
 }
 
@@ -77,38 +88,62 @@ bool Chunk::Belongs(const Framework::Helper::Math::IVector3 &position,
            point.x <= xMax && point.y <= yMax && point.z <= zMax;
 }
 
-bool Chunk::Clear() {
-    if (m_container.empty())
-        return false;
-
-    m_container.clear();
-
-    return true;
-}
-
-void Chunk::Insert(const GameObject::Ptr& ptr) {
-    m_container.insert(ptr);
-}
-
-void Chunk::Erase(const Framework::Helper::GameObject::Ptr &ptr) {
-    m_container.erase(ptr);
-}
-
-uint32_t Chunk::GetContainerSize() const {
-    return static_cast<uint32_t>(m_container.size());
-}
-
 bool Chunk::ApplyOffset() {
     return true;
 }
 
-bool Chunk::Load() {
+bool Chunk::Load(const MarshalDecodeNode& node) {
+    for (const auto& gameObjectNode : node.GetNodes()) {
+        auto&& ptr = m_observer->m_scene->Instance(gameObjectNode);
+        ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+    }
+
     m_loadState = LoadState::Loaded;
+    Access(0.f);
+
     return true;
 }
 
 void Chunk::Reload() {
 
+}
+
+MarshalEncodeNode Chunk::Save() const {
+    /// scene already locked
+    const auto& container = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+    if (container.empty())
+        return MarshalEncodeNode();
+
+    MarshalEncodeNode marshal("Chunk");
+    marshal.Append(m_position);
+
+    for (const auto& gameObject : container) {
+        if (gameObject.LockIfValid()) {
+            /// сохраняем объект относительно начала координат чанка
+            gameObject->GetTransform()->GlobalTranslate(-GetWorldPosition());
+            marshal.Append(gameObject->Save(SAVABLE_FLAG_ECS_NO_ID));
+            gameObject.Unlock();
+        }
+    }
+
+    return marshal;
+}
+
+Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {
+    auto fPos = Helper::World::AddOffset(
+            ((m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 1, 1))).Cast<Math::Unit>(),
+            m_observer->m_offset.m_chunk.Cast<Math::Unit>()
+    );
+
+    fPos = Math::FVector3(
+            fPos.x * m_size.x + (center & Math::AXIS_X ? (Math::Unit) m_size.x / 2 : 0),
+            fPos.y * m_size.y + (center & Math::AXIS_Y ? (Math::Unit) m_size.y / 2 : 0),
+            fPos.z * m_size.x + (center & Math::AXIS_Z ? (Math::Unit) m_size.x / 2 : 0)
+    );
+
+    fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
+
+    return fPos;
 }
 
 Chunk::~Chunk() = default;
