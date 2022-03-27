@@ -19,7 +19,7 @@ void SceneViewer::SetCamera(GameObject::Ptr camera) {
 }
 
 void SceneViewer::Draw() {
-    auto&& selected = m_scene.Do<Helper::GameObject::Ptr>([](World::Scene* scene) -> Helper::GameObject::Ptr {
+    auto&& selected = m_scene.TryDo<Helper::GameObject::Ptr>([](World::Scene* scene) -> Helper::GameObject::Ptr {
         return scene->GetSelected();
     }, Helper::GameObject::Ptr());
 

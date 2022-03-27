@@ -45,6 +45,10 @@ void FbxLoader::Geometry::Load(std::ifstream &file) {
     materials = Tools::LoadVectorOfPairs<uint32_t, uint32_t>(file);
 }
 
+bool FbxLoader::Geometry::Valid() const {
+    return !indices.empty() && !vertices.empty();
+}
+
 void FbxLoader::Objects::Save(std::ofstream &file) const {
     Tools::SaveComplexVector(file, nodeAttributes);
     Tools::SaveComplexVector(file, geometries);
@@ -53,6 +57,11 @@ void FbxLoader::Objects::Save(std::ofstream &file) const {
 void FbxLoader::Objects::Load(std::ifstream &file) {
     nodeAttributes = Tools::LoadComplexVector<NodeAttribute>(file);
     geometries = Tools::LoadComplexVector<Geometry>(file);
+}
+
+void FbxLoader::Objects::Clear() {
+    geometries.clear();
+    nodeAttributes.clear();
 }
 
 void FbxLoader::Definitions::Save(std::ofstream &file) const {
@@ -65,6 +74,11 @@ void FbxLoader::Definitions::Load(std::ifstream &file) {
     count = Tools::LoadValue<uint32_t>(file);
 }
 
+void FbxLoader::Definitions::Clear() {
+    count = 0;
+    version = 0;
+}
+
 void FbxLoader::Fbx::Save(std::ofstream &file) const {
     definitions.Save(file);
     objects.Save(file);
@@ -73,4 +87,29 @@ void FbxLoader::Fbx::Save(std::ofstream &file) const {
 void FbxLoader::Fbx::Load(std::ifstream &file) {
     definitions.Load(file);
     objects.Load(file);
+}
+
+void FbxLoader::Connections::Save(std::ofstream &file) const {
+
+}
+
+void FbxLoader::Connections::Load(std::ifstream &file) {
+
+}
+
+void FbxLoader::Connections::Clear() {
+    geometryToModel.clear();
+    materialToModel.clear();
+    textureToMaterial.clear();
+    videoToTexture.clear();
+    nodeAttributeToModel.clear();
+    modelToModel.clear();
+}
+
+void FbxLoader::Model::Save(std::ofstream &file) const {
+
+}
+
+void FbxLoader::Model::Load(std::ifstream &file) {
+
 }

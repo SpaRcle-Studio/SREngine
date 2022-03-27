@@ -6,6 +6,7 @@
 
 #ifdef SR_WIN32
     #include <Windows.h>
+    #include <shellapi.h>
 #endif
 
 #include <Debug.h>
@@ -103,6 +104,7 @@ int main(int argc, char **argv) {
 
     // Register all resource types
     {
+        ResourceManager::Instance().RegisterType<RawMesh>();
         ResourceManager::Instance().RegisterType<Mesh>();
         ResourceManager::Instance().RegisterType<Texture>();
         ResourceManager::Instance().RegisterType<Material>();
@@ -178,11 +180,13 @@ int main(int argc, char **argv) {
 
           }
           else
-              Debug::Error("Failed to running game engine!");
-      } else
-          Debug::Error("Failed to initializing game engine!");
-    } else
-        Debug::Error("Failed to creating game engine!");
+              SR_ERROR("Failed to running game engine!");
+      }
+      else
+          SR_ERROR("Failed to initializing game engine!");
+    }
+    else
+        SR_ERROR("Failed to creating game engine!");
 
     if (engine.IsRun()) {
         Debug::System("All systems successfully run!");

@@ -12,6 +12,7 @@
 #include <Window/Window.h>
 #include <Loaders/ObjLoader.h>
 #include <Utils/Features.h>
+#include <Utils/Vertices.hpp>
 
 Framework::Graphics::Types::Skybox::Skybox()
     : m_env(Environment::Get())
@@ -78,38 +79,27 @@ bool Framework::Graphics::Types::Skybox::Calculate() {
     }
 
     const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("/Models/Engine/skybox.obj");
+    auto&& indexedVertices = Vertices::CastVertices<Vertices::SkyboxVertex>(SKYBOX_INDEXED_VERTICES);
 
     if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-        auto skyboxObj = Graphics::ObjLoader::LoadSourceWithIndices<Vertices::SkyboxVertex>(path.ToString());
+        auto&& indices = SKYBOX_INDICES;
 
-        if (skyboxObj.size() != 1) {
-            SR_ERROR("Skybox::Calculate() : failed to load skybox model!");
-            m_hasErrors = true;
-            return false;
-        }
-
-        auto& [name, indices, vertices] = skyboxObj[0];
-
-        if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SkyboxVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
+        if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::Type::SkyboxVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
             SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
             m_hasErrors = true;
             return false;
         }
 
-        if (m_IBO = m_env->CalculateIBO(indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID); m_IBO == SR_ID_INVALID) {
+        if (m_IBO = m_env->CalculateIBO((void *)indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID); m_IBO == SR_ID_INVALID) {
             SR_ERROR("Skybox::Calculate() : failed to calculate IBO!");
             m_hasErrors = true;
             return false;
         }
     }
     else {
-        auto obj = Graphics::ObjLoader::LoadSource<Vertices::SkyboxVertex>(path.ToString());
-        if (obj.empty()) {
-            SR_ERROR("Skybox::Calculate() : failed to load obj mesh! Path: " + path.ToString());
-            return false;
-        }
+        auto&& vertices = IndexedVerticesToNonIndexed(indexedVertices, SKYBOX_INDICES);
 
-        if (m_VBO = m_env->CalculateVBO(obj[0].data(), Vertices::Type::SkyboxVertex, obj[0].size()); m_VBO == SR_ID_INVALID) {
+        if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SkyboxVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
             SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
             m_hasErrors = true;
             return false;

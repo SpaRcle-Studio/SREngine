@@ -12,7 +12,7 @@ namespace Framework::Core::GUI {
     { }
 
     void Inspector::Draw() {
-        if (m_gameObject.LockIfValid()) {
+        if (m_gameObject.TryLockIfValid()) {
             if (bool v = m_gameObject->IsActive(); ImGui::Checkbox("Enabled", &v))
                 m_gameObject->SetActive(v);
 
@@ -32,7 +32,7 @@ namespace Framework::Core::GUI {
     }
 
     void Inspector::Update() {
-        if (m_scene.LockIfValid()) {
+        if (m_scene.TryLockIfValid()) {
             const auto selected = m_scene->GetSelected();
             m_gameObject.Replace(selected);
             m_scene.Unlock();

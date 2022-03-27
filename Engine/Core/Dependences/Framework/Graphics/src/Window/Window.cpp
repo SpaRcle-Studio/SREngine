@@ -707,7 +707,7 @@ bool Framework::Graphics::Window::SyncFreeResources() {
     /** Ждем, пока все графические ресурсы не освободятся */
     auto thread = Helper::Types::Thread([&syncComplete, this]() {
         uint32_t syncStep = 0;
-        const uint32_t maxErrStep = 250;
+        const uint32_t maxErrStep = 100;
         while(!m_render->IsClean()) {
             Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 

@@ -5,10 +5,11 @@
 #ifndef HELPER_FILESYSTEM_H
 #define HELPER_FILESYSTEM_H
 
+#include <FileSystem/Path.h>
+
 #include <string>
 #include <vector>
 #include <fstream>
-#include <FileSystem/Path.h>
 
 namespace Framework::Helper {
     class FileSystem {

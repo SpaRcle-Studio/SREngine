@@ -5,6 +5,8 @@
 #ifndef GAMEENGINE_SINGLETON_H
 #define GAMEENGINE_SINGLETON_H
 
+#include <macros.h>
+
 namespace Framework::Helper {
     template<typename T>
     class Singleton {

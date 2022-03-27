@@ -15,9 +15,9 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     if (m_isCalculated)
         return true;
 
-    bool iboOK = ((m_IBO != SR_ID_INVALID && m_useIndices) || !m_useIndices);
+    const bool iboOK = m_IBO != SR_ID_INVALID;
     if (m_VBO != SR_ID_INVALID && iboOK && !m_hasErrors) {
-        this->m_isCalculated = true;
+        m_isCalculated = true;
         return true;
     }
 
@@ -25,13 +25,15 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
         return false;
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
+        SR_LOG("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
 
-    if (!m_vertices.empty())
-        m_barycenter = Vertices::Barycenter(m_vertices);
-    SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
+    ///TODO: if (!m_vertices.empty())
+    ///    m_barycenter = Vertices::Barycenter(m_vertices);
+    ///SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
 
-    if (!CalculateVBO<Vertices::Type::Mesh3DVertex>(m_vertices.data()))
+    auto vertices = Vertices::CastVertices<Vertices::Mesh3DVertex>(m_rawMesh->GetVertices(m_meshId));
+
+    if (!CalculateVBO<Vertices::Type::Mesh3DVertex>(vertices.data()))
         return false;
 
     return IndexedMesh::Calculate();
@@ -47,15 +49,13 @@ Framework::Helper::IResource* Framework::Graphics::Types::Mesh3D::Copy(IResource
         auto &&manager = Memory::MeshManager::Instance();
         mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(GetResourceId());
     }
-    else
-        mesh3D->m_vertices = m_vertices;
 
     return mesh3D;
 }
 
 bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
+        SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
 
     if (!FreeVBO<Vertices::Type::Mesh3DVertex>())
         return false;
@@ -63,20 +63,23 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     return IndexedMesh::FreeVideoMemory();
 }
 
-void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices) {
+/*void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices) {
     try {
         auto mesh3DVertices = std::any_cast<Vertices::Mesh3DVertices>(vertices);
+
         m_countVertices = mesh3DVertices.size();
         m_vertices      = mesh3DVertices;
         m_isCalculated  = false;
+
+        SRAssert(!m_vertices.empty());
     }
     catch (const std::bad_any_cast& e) {
-        Helper::Debug::Error("Mesh3D::SetVertexArray() : failed to cast any to vertices! \n\tMessage: " + std::string(e.what()));
+        SR_ERROR("Mesh3D::SetVertexArray() : failed to cast any to vertices! \n\tMessage: " + std::string(e.what()));
     }
-}
+}*/
 
 void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
-    if (!IsReady() || IsDestroy())
+    if (!IsReady() || IsDestroyed())
         return;
 
     if (!m_isCalculated)
@@ -96,7 +99,7 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
             return;
         }
 
-        this->m_env->UpdateDescriptorSets(m_descriptorSet, {
+        m_env->UpdateDescriptorSets(m_descriptorSet, {
                 { DescriptorType::Uniform, { 0, m_UBO               } },
                 { DescriptorType::Uniform, { 1, m_shader->GetUBO(0) } },
         });
@@ -106,25 +109,20 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
         //!==========================
 
         m_env->BindDescriptorSet(m_descriptorSet);
-        this->m_material->UseVulkan();
+        m_material->UseVulkan();
     }
 
-    this->m_env->BindDescriptorSet(m_descriptorSet);
-
-    this->m_env->DrawIndices(this->m_countIndices);
+    m_env->BindDescriptorSet(m_descriptorSet);
+    m_env->DrawIndices(m_countIndices);
 }
 
 void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
-    if (IsDestroy() || (!m_isCalculated && !Calculate()))
+    if (IsDestroyed() || (!m_isCalculated && !Calculate()))
         return;
 
     ConfigureShader(m_shader)
-    this->m_material->UseOpenGL();
-
-    if (!m_useIndices)
-        this->m_env->DrawTriangles(m_countVertices);
-    else
-        SRAssert2Once(false, "Mesh::DrawOpenGL() : isn't support indices!");
+    m_material->UseOpenGL();
+    m_env->DrawTriangles(m_countVertices);
 }
 
 void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
@@ -185,6 +183,7 @@ Component *Mesh3D::LoadComponent(const MarshalDecodeNode& node, const Helper::Ty
         }
 
         render->RegisterMesh(mesh);
+        ///mesh->WaitCalculate();
 
         if (const auto& materialNode = node.TryGetNode("Material"); materialNode.Valid()) {
             const std::string& materialName = materialNode.GetAttribute<std::string>("Name");

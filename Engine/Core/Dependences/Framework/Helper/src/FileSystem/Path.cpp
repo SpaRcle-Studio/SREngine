@@ -203,5 +203,13 @@ namespace Framework::Helper {
         return m_path;
     }
 
+    std::string_view Path::GetExtensionView() const {
+        return m_ext;
+    }
+
+    std::string_view Path::GetBaseNameView() const {
+        return m_name;
+    }
+
     Path& Path::operator=(const Path& path) = default;
 }

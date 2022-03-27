@@ -32,7 +32,7 @@ add_subdirectory(Depends/EvoVulkan/Core)
 add_subdirectory(Depends/EvoScript/Core)
 add_subdirectory(Depends/FbxLoader)
 add_subdirectory(Depends/cmp_core)
-add_subdirectory(Depends/tinyobjloader)
+#add_subdirectory(Depends/tinyobjloader)
 
 #include(Depends/bullet3/UseBullet.cmake)
 
@@ -66,7 +66,7 @@ if (CYGWIN)
             EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
 else()
     target_link_libraries(Framework
-            opengl32 glfw glew TinyObjLoader
+            opengl32 glfw glew #TinyObjLoader
             ${Vulkan_LIBRARY} EvoVulkanCore
             EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
 endif()

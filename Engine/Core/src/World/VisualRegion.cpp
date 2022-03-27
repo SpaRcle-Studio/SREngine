@@ -19,7 +19,11 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
     using namespace Graphics;
 
     if (value && !m_mesh && m_position.y == 1) {
-        m_mesh = dynamic_cast<DebugWireframeMesh *>(Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe)[0]);
+        if (auto&& meshes = Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
+            m_mesh = dynamic_cast<DebugWireframeMesh *>(meshes.at(0));
+        }
+        else
+            return;
 
         auto render = Engine::Instance().GetRender();
 

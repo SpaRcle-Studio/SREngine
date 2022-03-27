@@ -84,6 +84,18 @@ namespace FbxLoader {
         vec3 tang;
         vec2 uv;
 
+        Vertex(int32_t x, int32_t y, int32_t z)
+            : Vertex(vec3(static_cast<float_t>(x), static_cast<float_t>(y), static_cast<float_t>(z)))
+        { }
+
+        Vertex(vec3 _pos)
+            : pos(std::move(_pos))
+            , norm(vec3())
+            , binorm(vec3())
+            , tang(vec3())
+            , uv(vec2())
+        { }
+
         Vertex(vec3 _pos, vec3 _norm, vec3 _binorm, vec3 _tang, vec2 _uv)
             : pos(std::move(_pos))
             , norm(std::move(_norm))

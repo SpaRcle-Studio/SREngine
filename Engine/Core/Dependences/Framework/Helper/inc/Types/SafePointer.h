@@ -41,6 +41,7 @@ namespace Framework::Helper::Types {
         T &operator*() const { return *m_ptr; }
         T *operator->() const { return m_ptr; }
     public:
+        bool TryLock() const;
         void Lock() const;
         void Unlock() const;
         void RecursiveLock() const;
@@ -61,6 +62,17 @@ namespace Framework::Helper::Types {
             return _default;
         }
 
+        template<typename U> U TryDo(const std::function<U(T* ptr)>& func, U _default) {
+            if (TryLockIfValid()) {
+                const auto&& result = func(m_ptr);
+                Unlock();
+                return result;
+            }
+
+            return _default;
+        }
+
+        SR_NODISCARD bool TryLockIfValid() const;
         SR_NODISCARD bool LockIfValid() const;
         SR_NODISCARD bool RecursiveLockIfValid() const;
 
@@ -290,6 +302,37 @@ namespace Framework::Helper::Types {
         copy.RecursiveLock();
         *this = ptr;
         copy.Unlock();
+    }
+
+    template<typename T> bool SafePtr<T>::TryLockIfValid() const {
+        if (!TryLock())
+            return false;
+
+        if (m_data->m_valid)
+            return true;
+
+        Unlock();
+
+        return false;
+    }
+
+    template<typename T> bool SafePtr<T>::TryLock() const {
+        const std::thread::id this_id = std::this_thread::get_id();
+
+        if(m_data->m_owner.load() == this_id) {
+            SR_SAFE_PTR_ASSERT(false, "Double locking detected!");
+            return false;
+        }
+        else {
+            bool expected = false;
+            while (!m_data->m_lock.compare_exchange_weak(expected, true, std::memory_order_acquire))
+                return false;
+
+            m_data->m_owner.store(this_id);
+            m_data->m_lockCount.store(1);
+
+            return true;
+        }
     }
 }
 

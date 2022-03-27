@@ -112,7 +112,7 @@ namespace SR_UTILS_NS {
 
         m_isRun.store(true);
 
-        SR_INFO("CmdManager::Run() : running command manager thread...");
+        SR_INFO("CmdManager::Run() : run command manager thread...");
 
         m_maxHistorySize = 128;
 

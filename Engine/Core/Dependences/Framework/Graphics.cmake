@@ -76,7 +76,7 @@ set(GRAPHICS_INC_PUBLIC
 
         ${FRAMEWORK_ROOT_DIR}/Depends/glew/include
         ${FRAMEWORK_ROOT_DIR}/Depends/FbxLoader/inc
-        ${FRAMEWORK_ROOT_DIR}/Depends/tinyobjloader/inc
+        #${FRAMEWORK_ROOT_DIR}/Depends/tinyobjloader/inc
 
         ${Vulkan_INCLUDE_DIRS}
         )

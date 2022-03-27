@@ -12,7 +12,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
         int32_t &depth)
 {
     if (inputColorAttachments.size() != outputColorAttachments.size())
-        Helper::Debug::Warn("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
+        SR_WARN("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
 
     outputColorAttachments.clear();
 
@@ -25,19 +25,21 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                     m_kernel->GetSwapchain(),
                     m_kernel->GetCmdPool(),
                     inputColorAttachments,
-                    w, h);
+                    w, h
+            );
 
             if (m_FBOs[i] == nullptr) {
-                Helper::Debug::Error("MemoryManager::AllocateFBO() : failed to create Evo Vulkan frame buffer object!");
+                SR_ERROR("MemoryManager::AllocateFBO() : failed to create Evo Vulkan frame buffer object!");
                 return -1;
             }
 
-            for (auto texture : m_FBOs[i]->AllocateColorTextureReferences()) {
-                int32_t id = this->FindFreeTextureIndex();
+            for (auto&& texture : m_FBOs[i]->AllocateColorTextureReferences()) {
+                int32_t id = FindFreeTextureIndex();
                 if (id < 0) {
-                    Helper::Debug::Error("MemoryManager::AllocateFBO() : failed to allocate index for FBO attachment!");
+                    SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO attachment!");
                     return -1;
-                } else {
+                }
+                else {
                     m_textures[id] = texture;
                     outputColorAttachments.push_back(id);
                 }
@@ -54,15 +56,15 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
 bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
         uint32_t FBO, uint32_t w, uint32_t h,
         const std::vector<int32_t> &oldColorAttachments,
-        uint32_t depth)
+        uint32_t /*depth*/)
 {
     if (FBO >= m_countFBO || m_FBOs[FBO] == nullptr) {
-        Helper::Debug::Error("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
+        SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
         return false;
     }
 
     if (!m_FBOs[FBO]->ReCreate(w, h)) {
-        Helper::Debug::Error("MemoryManager::ReAllocateFBO() : failed to re-create frame buffer object!");
+        SR_ERROR("MemoryManager::ReAllocateFBO() : failed to re-create frame buffer object!");
         return false;
     }
 
@@ -70,18 +72,18 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
 
     auto textures = m_FBOs[FBO]->AllocateColorTextureReferences();
     if (textures.size() != oldColorAttachments.size()) {
-        Helper::Debug::Error("MemoryManager::ReAllocateFBO() : incorrect old color attachments!");
+        SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachments!");
         return false;
     }
 
     for (uint32_t i = 0; i < textures.size(); ++i) {
         if (oldColorAttachments[i] < 0 || oldColorAttachments[i] >= m_countTextures) {
-            Helper::Debug::Error("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", range problem!");
+            SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", range problem!");
             return false;
         }
 
         if (m_textures[oldColorAttachments[i]] == nullptr) {
-            Helper::Debug::Error("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", texture not exists!");
+            SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", texture not exists!");
             return false;
         }
 
@@ -101,22 +103,22 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
 
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t ID) const  {
     if (ID >= m_countDescriptorSets) {
-        Helper::Debug::Error("MemoryManager::FreeDescriptorSet() : list index out of range!");
+        SR_ERROR("MemoryManager::FreeDescriptorSet() : list index out of range!");
         return false;
     }
 
-    auto memory = this->m_descriptorSets[ID];
+    auto&& memory = m_descriptorSets[ID];
     if (memory.m_self == VK_NULL_HANDLE) {
-        Helper::Debug::Error("MemoryManager::FreeDescriptorSet() : descriptor set is not exists!");
+        SR_ERROR("MemoryManager::FreeDescriptorSet() : descriptor set is not exists!");
         return false;
     }
 
     if (!m_descriptorManager->FreeDescriptorSet(memory)){
-        Helper::Debug::Error("MemoryManager::FreeDescriptorSet() : failed free descriptor set!");
+        SR_ERROR("MemoryManager::FreeDescriptorSet() : failed free descriptor set!");
         return false;
     }
 
-    this->m_descriptorSets[ID] = EvoVulkan::Core::DescriptorSet();
+    m_descriptorSets[ID] = EvoVulkan::Core::DescriptorSet();
 
     return true;
 }
@@ -141,14 +143,14 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateUBO(uint32_t UB
         }
     }
 
-    Helper::Debug::Error("MemoryManager::AllocateUBO() : overflow uniform buffer objects buffer!");
+    SR_ERROR("MemoryManager::AllocateUBO() : overflow uniform buffer objects buffer!");
 
     return -1;
 }
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType> &types) const {
     if (shaderProgram >= m_countShaderPrograms) {
-        Helper::Debug::Error("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
+        SR_ERROR("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
         return -1;
     }
 
@@ -156,9 +158,11 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
         if (m_descriptorSets[i].m_self == VK_NULL_HANDLE) {
             m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSets(
                     m_ShaderPrograms[shaderProgram]->GetDescriptorSetLayout(),
-                    types);
+                    types
+            );
+
             if (m_descriptorSets->m_self == VK_NULL_HANDLE) {
-                Helper::Debug::Error("MemoryManager::AllocateDescriptorSet() : failed allocate descriptor set! Something went wrong...");
+                SR_ERROR("MemoryManager::AllocateDescriptorSet() : failed allocate descriptor set! Something went wrong...");
                 return -1;
             }
 
@@ -166,7 +170,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
         }
     }
 
-    Helper::Debug::Error("MemoryManager::AllocateDescriptorSet() : overflow descriptor sets buffer!");
+    SR_ERROR("MemoryManager::AllocateDescriptorSet() : overflow descriptor sets buffer!");
 
     return -1;
 }
@@ -184,7 +188,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t bu
         }
     }
 
-    Helper::Debug::Error("MemoryManager::AllocateVBO() : overflow vertex buffer objects buffer!");
+    SR_ERROR("MemoryManager::AllocateVBO() : overflow vertex buffer objects buffer!");
 
     return SR_ID_INVALID;
 }
@@ -202,7 +206,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t bu
         }
     }
 
-    Helper::Debug::Error("MemoryManager::AllocateIBO() : overflow index buffer objects buffer!");
+    SR_ERROR("MemoryManager::AllocateIBO() : overflow index buffer objects buffer!");
 
     return SR_ID_INVALID;
 }
@@ -219,7 +223,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateShaderProgram(E
         }
     }
 
-    Helper::Debug::Error("MemoryManager::AllocateShaderProgram() : overflow shader programs buffer!");
+    SR_ERROR("MemoryManager::AllocateShaderProgram() : overflow shader programs buffer!");
 
     return -1;
 }
@@ -229,7 +233,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
         uint32_t w,
         uint32_t h,
         VkFormat format,
-        VkFilter filter,
+        VkFilter /*filter*/,
         uint8_t mipLevels,
         bool cpuUsage)
 {
@@ -238,14 +242,15 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
             m_textures[i] = EvoVulkan::Types::Texture::LoadCubeMap(m_device, m_allocator, m_pool, format, w, h, pixels, mipLevels, cpuUsage);
 
             if (!m_textures[i]) {
-                Helper::Debug::Error("MemoryManager::AllocateTexture() : failed to load Evo Vulkan texture!");
+                SR_ERROR("MemoryManager::AllocateTexture() : failed to load Evo Vulkan texture!");
                 return -1;
             }
 
             return (int32_t)i;
         }
 
-    Helper::Debug::Error("MemoryManager::AllocateTexture() : overflow textures buffer!");
+    SR_ERROR("MemoryManager::AllocateTexture() : overflow textures buffer!");
+
     return -1;
 }
 
@@ -253,7 +258,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
     uint8_t *pixels, uint32_t w, uint32_t h,
     VkFormat format,
     VkFilter filter,
-    Framework::Graphics::TextureCompression compression, // unused
+    Framework::Graphics::TextureCompression /*compression*/,
     uint8_t mipLevels,
     bool cpuUsage)
 {
@@ -267,7 +272,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
                 m_textures[i] = EvoVulkan::Types::Texture::Load(m_device, m_allocator, m_descriptorManager, m_pool, pixels, format, w, h, mipLevels, filter, cpuUsage);
 
             if (!m_textures[i]) {
-                Helper::Debug::Error("MemoryManager::AllocateTexture() : failed to load Evo Vulkan texture!");
+                SR_ERROR("MemoryManager::AllocateTexture() : failed to load Evo Vulkan texture!");
                 return -1;
             }
 
@@ -275,7 +280,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
         }
     }
 
-    Helper::Debug::Error("MemoryManager::AllocateTexture() : overflow textures buffer!");
+    SR_ERROR("MemoryManager::AllocateTexture() : overflow textures buffer!");
 
     return -1;
 }

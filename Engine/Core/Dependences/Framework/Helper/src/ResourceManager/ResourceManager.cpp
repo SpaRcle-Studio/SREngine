@@ -5,8 +5,6 @@
 #include "ResourceManager/ResourceManager.h"
 
 #ifdef SR_WIN32
-    #define WIN32_LEAN_AND_MEAN             // Исключите редко используемые компоненты из заголовков Windows
-
     #include <Psapi.h>
     #include <Windows.h>
 #endif
@@ -28,7 +26,7 @@ namespace Framework::Helper {
     }
 
     bool ResourceManager::Init(const std::string& resourcesFolder) {
-        Debug::Info("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
+        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
 
         m_resourcesFolder = resourcesFolder;
         m_resourcesFolder.Normalize();
@@ -41,13 +39,13 @@ namespace Framework::Helper {
     }
 
     bool ResourceManager::Stop() {
-        Debug::Info("ResourceManager::Stop() : stopping resource manager...");
+        SR_INFO("ResourceManager::Stop() : stopping resource manager...");
 
         m_isInit = false;
 
         Synchronize(true);
 
-        Debug::Info("ResourceManager::Stop() : stopping thread...");
+        SR_INFO("ResourceManager::Stop() : stopping thread...");
 
         m_thread.TryJoin();
 
@@ -68,7 +66,7 @@ namespace Framework::Helper {
     }
 
     bool ResourceManager::RegisterType(const std::string& type_name) {
-        Debug::Info("ResourceManager::RegisterType() : register new \""+std::string(type_name)+"\" type...");
+        SR_INFO("ResourceManager::RegisterType() : register new \""+std::string(type_name)+"\" type...");
         
         m_resources[type_name] = ResourceInfo();
 
@@ -76,9 +74,13 @@ namespace Framework::Helper {
     }
 
     void ResourceManager::Remove(IResource *resource) {
-        SRAssert(resource->IsValid());
-            auto&& resourcesGroup = m_resources.at(resource->m_resourceName);
-        resourcesGroup.Remove(resource);
+        if (resource->IsValid()) {
+            auto &&resourcesGroup = m_resources.at(resource->m_resourceName);
+            resourcesGroup.Remove(resource);
+        }
+        else {
+            SRAssert2(false, "Invalid resource!");
+        }
     }
 
     bool ResourceManager::IsLastResource(IResource* resource) {
@@ -104,7 +106,7 @@ namespace Framework::Helper {
             for (; resourceIt != m_resourcesToDestroy.end(); ) {
                 auto resource = *resourceIt;
 
-                const bool usageNow = resource->GetCountUses() > 0 || !resource->IsDestroy();
+                const bool usageNow = resource->GetCountUses() > 0 || !resource->IsDestroyed();
 
                 if (usageNow) {
                     resource->m_lifetime = ResourceLifeTime;
@@ -126,7 +128,7 @@ namespace Framework::Helper {
                 }
 
                 if (Debug::GetLevel() >= Debug::Level::High)
-                    Debug::Log("ResourceManager::GC() : free \"" + std::string(resource->m_resourceName) + "\" resource");
+                    SR_LOG("ResourceManager::GC() : free \"" + std::string(resource->m_resourceName) + "\" resource");
 
                 Remove(resource);
 
@@ -143,7 +145,7 @@ namespace Framework::Helper {
             }
 
             if (Debug::GetLevel() >= Debug::Level::High && m_destroyIsEmpty) {
-                Debug::Log("ResourceManager::GC() : complete garbage collection.");
+                SR_LOG("ResourceManager::GC() : complete garbage collection.");
             }
         }
         while(m_isInit);
@@ -153,7 +155,7 @@ namespace Framework::Helper {
         SRAssert(resource->IsValid());
 
         if (Debug::GetLevel() >= Debug::Level::Full)
-            Debug::Log("ResourceManager::RegisterResource() : add new \"" + std::string(resource->GetResourceName()) + "\" resource.");
+            SR_LOG("ResourceManager::RegisterResource() : add new \"" + std::string(resource->GetResourceName()) + "\" resource.");
 
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
@@ -177,7 +179,7 @@ namespace Framework::Helper {
 
             uint32_t id = 0;
             for (auto& pRes : group.m_group) {
-                dump += Helper::Format("\n\t\t%u: %s", id++, pRes->GetResourceId().c_str());
+                dump += Helper::Format("\n\t\t%u: %s = %u", id++, pRes->GetResourceId().c_str(), pRes->GetCountUses());
             }
         }
 
@@ -204,7 +206,7 @@ namespace Framework::Helper {
 
         IResource* pResource = m_resources.at(Name).Find(ID);
 
-        if (pResource && !pResource->m_isDestroy)
+        if (pResource && !pResource->IsDestroyed())
             return pResource;
 
         return nullptr;
@@ -223,5 +225,11 @@ namespace Framework::Helper {
         }
 
         m_force = false;
+    }
+
+    void ResourceManager::InspectResources(const std::function<void(const Resources &)> &callback) {
+        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        callback(m_resources);
     }
 }

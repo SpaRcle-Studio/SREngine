@@ -808,6 +808,10 @@ bool GUISystem::BeginMenuBar() {
             Engine::Instance().GetEditor()->GetWindow<EngineSettings>()->Open();
         }
 
+        if (ImGui::MenuItem("Statistics")) {
+            Engine::Instance().GetEditor()->GetWindow<EngineStatistics>()->Open();
+        }
+
         ImGui::EndMenu();
     }
 

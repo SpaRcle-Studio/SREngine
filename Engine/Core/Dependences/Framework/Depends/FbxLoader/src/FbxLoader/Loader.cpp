@@ -7,6 +7,7 @@
 #include <FbxLoader/Parser.h>
 #include <FbxLoader/MD5Hash.h>
 #include <unordered_set>
+#include <inc/tiny_obj_loader.h>
 
 FbxLoader::Fbx FbxLoader::Loader::Load(
     const std::string& converter,
@@ -19,11 +20,17 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
         return {};
 
     const std::string name      = Tools::BackReadTo(path, '/', 1);
+    const std::string ext       = Tools::BackReadTo(name, '.', 1);
     const std::string dir       = Tools::ReadToLast(path, '/', 1);
     const std::string ascii     = Tools::FixPath(cache + "/fbx_ascii/" + dir);
     const std::string model     = models + "/" + path;
     const std::string hashPath  = ascii + name + ".hash";
     const std::string cacheFile = ascii + name + ".cache";
+
+    if (!Tools::FileExists(model)) {
+        FBX_ERROR("Loader::Load() : file not exists! Path: " + model);
+        return {};
+    }
 
     const std::string hash = Tools::GetHash(model);
 
@@ -34,45 +41,28 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
     }
     else {
         Tools::CreatePath(ascii);
-        system((converter + " -c " + model + " -o " + ascii + name + " -ascii").c_str());
+        if (ext == "fbx") {
+            /// TODO: make cross-platform
+            const std::string args = converter + " -c " + model + " -o " + ascii + name + " -ascii";
+            system(args.c_str());
+
+            if (!Tools::FileExists(ascii + name)) {
+                FBX_ERROR("Loader::Load() : failed to convert binary to ascii!");
+                return {};
+            }
+        }
         Tools::SaveHash(hashPath, hash);
     }
 
-    if (auto text = Tools::ReadAllText(ascii + name); text.empty()) {
-        FBX_ERROR("FbxLoader::Load() : failed to read file! \n\tPath: " + ascii + name);
-        return {};
+    if (ext == "fbx") {
+        return LoadFbx(ascii + name, cacheFile, optimizeGeometry);
     }
-    else if (auto nodes = Parser::Parse(text); nodes) {
-        Fbx fbx = {};
-
-        if (fbx.objects = GetObjects(nodes); !fbx.objects.Ready()) {
-            delete nodes;
-            FBX_ERROR("FbxLoader::Load() : failed to get objects!");
-            return {};
-        }
-
-        if (optimizeGeometry)
-            for (auto& geometry : fbx.objects.geometries)
-                if (!OptimizeGeometry(&geometry))
-                    FBX_ERROR("FbxLoader::Load() : failed to optimize \"" + geometry.name + "\" geometry!");
-
-        if (!fbx.objects.geometries.empty()) {
-            const auto source = fbx.objects.geometries; /// copy
-            fbx.objects.geometries.clear();
-            for (const auto& src : source)
-                for (const auto& geometry : SplitByMaterials(src))
-                    fbx.objects.geometries.emplace_back(geometry);
-        }
-
-        delete nodes;
-
-        fbx.SaveTo(cacheFile);
-
-        return fbx;
-    } else {
-        FBX_ERROR("FbxLoader::Load() : failed to parse file!");
-        return {};
+    else if (ext == "obj") {
+        return LoadObj(model, cacheFile, optimizeGeometry);
     }
+
+    FBX_ERROR("Loader::Load() : unknown extension: " + ext + "\n\tPath: " + path);
+    return Fbx();
 }
 
 FbxLoader::Objects FbxLoader::Loader::GetObjects(FbxLoader::Parser::Node *node) {
@@ -83,6 +73,7 @@ FbxLoader::Objects FbxLoader::Loader::GetObjects(FbxLoader::Parser::Node *node) 
     Objects objects = {};
 
     for (auto object : node_objects->nodes) {
+        /// TODO: remove switch or replace
         switch (StateFromString(object->value)) {
             case State::Geometry: {
                 auto info = Tools::Split(object->subData, ',');
@@ -115,12 +106,13 @@ FbxLoader::Objects FbxLoader::Loader::GetObjects(FbxLoader::Parser::Node *node) 
 
                     geometry.materials = GetMaterials(object);
                 }
-                else {
-                    FBX_ERROR("FbxLoader::GetObjects() : failed to get indices!");
-                    return {};
-                }
 
-                objects.geometries.emplace_back(geometry);
+                if (geometry.vertices.empty()) {
+                    FBX_WARN("FbxLoader::GetObjects() : geometry \"" + geometry.name + "\" have not vertices!");
+                }
+                else
+                    objects.geometries.emplace_back(std::move(geometry));
+
                 break;
             }
             default:
@@ -177,7 +169,7 @@ bool FbxLoader::Loader::OptimizeGeometry(FbxLoader::Geometry *geometry) {
 
     std::unordered_map<Vertex, uint32_t> uniqueVertices {};
 
-    for (auto vertex : geometry->vertices) {
+    for (const auto& vertex : geometry->vertices) {
         if (uniqueVertices.count(vertex) == 0) {
             uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
             vertices.push_back(vertex);
@@ -208,32 +200,39 @@ std::vector<FbxLoader::Material> FbxLoader::Loader::GetMaterials(FbxLoader::Pars
 
     uint32_t last = 0;
     uint32_t counter = 0;
+    uint32_t counterPrev = 0;
     while (getline(ss, value, ',')) {
         auto id = static_cast<uint32_t>(std::stoi(value));
 
         if (id != last) {
             last = id;
-            material.second = counter - 1;
+
+            material.first = counterPrev;
+            material.second = counter;
 
             materials.emplace_back(material);
 
-            material.first = counter;
+            counterPrev = counter;
         }
 
         ++counter;
     }
 
-    material.second = counter - 1;
+    material.first = counterPrev;
+    material.second = counter;
+
     materials.emplace_back(material);
 
     return materials;
 }
 
-std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(const Geometry& geometry) {
-    if (geometry.materials.size() <= 1)
-        return { geometry };
-
+std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(Geometry&& geometry) {
     std::vector<Geometry> geometries;
+
+    if (geometry.materials.size() <= 1) {
+        geometries.emplace_back(std::move(geometry));
+        return geometries;
+    }
 
     uint32_t materialIndex= 0;
     for (const auto& material : geometry.materials) {
@@ -246,7 +245,6 @@ std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(const Geome
 
         std::vector<Vertex> vertices;
         std::unordered_map<Vertex, uint32_t> unique;
-        uint32_t index = 0;
 
         for (auto vertexIndex : std::vector<uint32_t>(
                 geometry.indices.begin() + material.first * 3,
@@ -264,9 +262,125 @@ std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(const Geome
 
         newGeometry.vertices = vertices;
 
-        geometries.emplace_back(newGeometry);
+        if (newGeometry.Valid()) {
+            geometries.emplace_back(std::move(newGeometry));
+        }
+        else {
+            FBX_WARN("Loader::SplitByMaterials() : invalid \"" + newGeometry.name + "\" mesh!");
+        }
     }
 
     return geometries;
+}
+
+FbxLoader::Fbx FbxLoader::Loader::LoadFbx(const std::string &ascii, const std::string &cache, bool needOptimize) {
+    if (auto text = Tools::ReadAllText(ascii); text.empty()) {
+        FBX_ERROR("FbxLoader::Load() : failed to read file! \n\tPath: " + ascii);
+        return {};
+    }
+    else if (auto nodes = Parser::Parse(text); nodes) {
+        Fbx fbx = {};
+
+        if (fbx.objects = GetObjects(nodes); !fbx.objects.Ready()) {
+            delete nodes;
+            FBX_ERROR("FbxLoader::Load() : failed to get objects!");
+            return {};
+        }
+
+        if (needOptimize)
+            for (auto& geometry : fbx.objects.geometries)
+                if (!OptimizeGeometry(&geometry))
+                    FBX_ERROR("FbxLoader::Load() : failed to optimize \"" + geometry.name + "\" geometry!");
+
+        if (!fbx.objects.geometries.empty()) {
+            auto source = std::exchange(fbx.objects.geometries, {});
+            for (auto&& src : source) {
+                for (auto &&geometry : SplitByMaterials(std::move(src)))
+                    fbx.objects.geometries.emplace_back(std::move(geometry));
+            }
+        }
+
+        delete nodes;
+
+        fbx.SaveTo(cache);
+
+        return fbx;
+    }
+    else {
+        FBX_ERROR("FbxLoader::Load() : failed to parse file!");
+        return {};
+    }
+}
+
+FbxLoader::Fbx FbxLoader::Loader::LoadObj(const std::string &path, const std::string &cache, bool needOptimize) {
+    tinyobj::attrib_t attrib;
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
+    std::string warn, err;
+
+    Fbx fbx;
+
+    if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, path.c_str())) {
+        FBX_ERROR("Loader::LoadObj() : failed to open file!\n\tWarn: " + warn + "\n\tError: " + err);
+        return fbx;
+    }
+
+    for (auto& shape : shapes) {
+        Geometry geometry;
+        geometry.name = shape.name;
+
+        std::unordered_map<Vertex, uint32_t> uniqueVertices {};
+
+        /// prepare indices
+        if (shape.mesh.indices.empty()) {
+            for (uint32_t i = 0; i < static_cast<uint32_t>(attrib.vertices.size() / 3); ++i) {
+                tinyobj::index_t index = {};
+
+                index.vertex_index = i;
+
+                shape.mesh.indices.emplace_back(index);
+            }
+        }
+
+        for (const auto& index : shape.mesh.indices) {
+            Vertex vertex;
+
+            vertex.pos = vec3 {
+                    (float_t)attrib.vertices[3 * index.vertex_index + 0],
+                    (float_t)attrib.vertices[3 * index.vertex_index + 1],
+                    (float_t)attrib.vertices[3 * index.vertex_index + 2]
+            };
+
+            if (!attrib.texcoords.empty()) {
+                vertex.uv = {
+                        attrib.texcoords[2 * index.texcoord_index + 0],
+                        1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
+                };
+            }
+
+            if (!attrib.normals.empty()) {
+                vertex.norm = {
+                        attrib.normals[3 * index.normal_index + 0],
+                        attrib.normals[3 * index.normal_index + 1],
+                        attrib.normals[3 * index.normal_index + 2]
+                };
+            }
+
+            vertex.tang = { 0, 0, 0 }; /// TODO: add tangent matching!
+
+            if (uniqueVertices.count(vertex) == 0) {
+                uniqueVertices[vertex] = static_cast<uint32_t>(geometry.vertices.size());
+                geometry.vertices.push_back(vertex);
+            }
+
+            geometry.indices.push_back(uniqueVertices[vertex]);
+        }
+
+        fbx.objects.geometries.emplace_back(std::move(geometry));
+    }
+
+    fbx.SaveTo(cache);
+
+    return fbx;
 }
 

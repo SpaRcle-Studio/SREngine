@@ -6,7 +6,6 @@
 #define GAMEENGINE_MESH3D_H
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/Geometry/VertexMesh.h>
 #include <Types/Vertices.h>
 
 #include <utility>
@@ -34,7 +33,7 @@ namespace Framework::Graphics::Types {
 
     public:
         IResource* Copy(IResource* destination) const override;
-        void SetVertexArray(const std::any& vertices) override;
+        //void SetVertexArray(const std::any& vertices) override;
 
         static Component* LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage);
 
@@ -47,8 +46,8 @@ namespace Framework::Graphics::Types {
 
         [[nodiscard]] MarshalEncodeNode Save(SavableFlags flags) const override;
 
-    private:
-        std::vector<VertexType> m_vertices = std::vector<VertexType>();
+    //private:
+    //    std::vector<VertexType> m_vertices = std::vector<VertexType>();
 
     };
 }

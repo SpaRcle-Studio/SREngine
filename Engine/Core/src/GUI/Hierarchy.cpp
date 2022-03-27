@@ -16,7 +16,7 @@ namespace SR_CORE_NS::GUI {
 
         m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
 
-        if (m_scene.LockIfValid()) {
+        if (m_scene.TryLockIfValid()) {
             m_scene->ForEachRootObjects([&](const Helper::GameObject::Ptr& gm) {
                 DrawChild(gm);
             });

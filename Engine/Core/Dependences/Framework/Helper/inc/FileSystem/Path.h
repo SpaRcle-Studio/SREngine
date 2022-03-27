@@ -5,9 +5,12 @@
 #ifndef SRENGINE_PATH_H
 #define SRENGINE_PATH_H
 
+#include <macros.h>
+
 #include <string>
 #include <atomic>
 #include <vector>
+#include <string_view>
 #include <functional>
 
 namespace Framework::Helper {
@@ -52,6 +55,8 @@ namespace Framework::Helper {
         SR_NODISCARD std::vector<Path> GetFolders() const;
         SR_NODISCARD std::vector<Path> GetAll() const;
 
+        SR_NODISCARD std::string_view GetExtensionView() const;
+        SR_NODISCARD std::string_view GetBaseNameView() const;
         SR_NODISCARD std::string GetExtension() const;
         SR_NODISCARD std::string GetBaseName() const;
 

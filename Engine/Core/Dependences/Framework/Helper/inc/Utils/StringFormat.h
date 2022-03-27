@@ -9,6 +9,14 @@
 #include <cstdarg>
 
 namespace Framework::Helper {
+    template<typename T> std::string ToString(const T& value) {
+        if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+            return std::to_string(value);
+        }
+        else
+            static_assert(false, "Unsupported type!");
+    }
+
     /// Warning: unsafe
     template<typename T> T LexicalCast(const std::string& str) {
         if constexpr (std::is_same<T, bool>()) {

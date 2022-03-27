@@ -67,9 +67,9 @@ void Material::SetDiffuse(Texture* texture) {
 
     if (m_diffuse) {
         m_diffuse->RemoveUsePoint();
-        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->IsEnabledAutoRemove()) {
+
+        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->IsEnabledAutoRemove())
             m_diffuse->Destroy();
-        }
     }
 
     m_diffuse = texture;
@@ -84,6 +84,7 @@ void Material::SetNormal(Texture *tex) {
 
     if (m_normal) {
         m_normal->RemoveUsePoint();
+
         if (m_normal->GetCountUses() <= 1 && m_normal->IsEnabledAutoRemove())
             m_normal->Destroy();
     }
@@ -100,6 +101,7 @@ void Material::SetSpecular(Texture* tex) {
 
     if (m_specular) {
         m_specular->RemoveUsePoint();
+
         if (m_specular->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
             m_specular->Destroy();
     }
@@ -117,6 +119,7 @@ void Material::SetGlossiness(Texture*tex) {
 
     if (m_glossiness) {
         m_glossiness->RemoveUsePoint();
+
         if (m_glossiness->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
             m_glossiness->Destroy();
     }
@@ -142,7 +145,7 @@ bool Material::SetTransparent(bool value) {
 
 Framework::Helper::IResource* Material::Copy(Framework::Helper::IResource* destination) const {
     if (destination)
-        Helper::Debug::Warn("Material::Copy() : destination ignored!");
+        SR_WARN("Material::Copy() : destination ignored!");
 
     auto material = new Material(m_diffuse, m_normal, m_specular, m_glossiness);
 
@@ -158,8 +161,8 @@ Material::Material()
 { }
 
 Material *Material::Load(const std::string &name) {
-    if (auto resource = ResourceManager::Instance().Find<Material>(name + ".mat"))
-        return dynamic_cast<Material*>(resource);
+    if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(name))
+        return pMaterial;
 
     if (auto doc = Xml::Document::Load(ResourceManager::Instance().GetMaterialsPath().Concat(name).ConcatExt("mat")); doc.Valid()) {
         auto matXml = doc.Root().GetNode("Material");
@@ -179,7 +182,8 @@ Material *Material::Load(const std::string &name) {
         return material;
     }
 
-    Helper::Debug::Error("Material::Load() : file not found! Path: " + name + ".mat");
+    SR_ERROR("Material::Load() : file not found! Path: " + name + ".mat");
+
     return nullptr;
 }
 
@@ -199,7 +203,7 @@ bool Material::InitDefault(Render* render) {
 }
 
 bool Material::FreeDefault() {
-    Helper::Debug::Info("Material::FreeDefault() : free default material...");
+    SR_INFO("Material::FreeDefault() : free default material...");
 
     if (m_default) {
         if (m_default->GetCountUses() <= 1 && m_default->GetCountSubscriptions() == 0) {
@@ -215,7 +219,8 @@ bool Material::FreeDefault() {
         }
     }
 
-    Helper::Debug::Error("Material::FreeDefault() : the material is nullptr!");
+    SR_ERROR("Material::FreeDefault() : the material is nullptr!");
+
     return false;
 }
 
@@ -246,7 +251,7 @@ uint32_t Material::GetCountSubscriptions() const {
 }
 
 bool Material::Destroy() {
-    if (IsDestroy())
+    if (IsDestroyed())
         return false;
 
     return IResource::Destroy();

@@ -18,6 +18,7 @@
 #include <Math/Vector3.h>
 #include <Utils/Enumerations.h>
 #include <Utils/StringFormat.h>
+#include <FbxLoader/Mesh.h>
 
 #define SR_VERTEX_DESCRIPTION size_t
 
@@ -166,6 +167,29 @@ namespace Framework::Graphics::Vertices {
                 break;
         }
         return info;
+    }
+
+    template<typename T> static std::vector<T> CastVertices(const std::vector<FbxLoader::Vertex>& raw) {
+        auto vertices = std::vector<T>();
+
+        if constexpr (std::is_same<Vertices::SkyboxVertex, T>::value) {
+            for (const auto& vertex : raw) {
+                vertices.emplace_back(Vertices::SkyboxVertex{
+                        .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
+                });
+            }
+        }
+
+        if constexpr (std::is_same<Vertices::Mesh3DVertex, T>::value) {
+            for (const auto& vertex : raw) {
+                vertices.emplace_back(Vertices::Mesh3DVertex{
+                        .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
+                        .uv  = { vertex.uv.x, vertex.uv.y },
+                });
+            }
+        }
+
+        return vertices;
     }
 }
 

@@ -15,7 +15,7 @@ namespace Framework::Core::GUI {
     }
 
     void WorldEdit::Draw() {
-        if (m_scene.LockIfValid()) {
+        if (m_scene.TryLockIfValid()) {
             const auto&& observer = m_scene->GetObserver();
             const auto offset = observer->m_offset;
 

@@ -31,9 +31,6 @@ namespace Framework::Graphics::Types {
     public:
         typedef Vertices::SkyboxVertex VertexType;
 
-    private:
-        std::vector<VertexType> m_vertices = std::vector<VertexType>();
-
     protected:
         void UpdateUBO() override;
 
@@ -45,8 +42,6 @@ namespace Framework::Graphics::Types {
         }
 
         IResource* Copy(IResource* destination) const override;
-
-        void SetVertexArray(const std::any& vertices) override;
 
         bool Calculate() override;
 

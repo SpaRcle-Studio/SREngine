@@ -8,6 +8,8 @@
 #pragma warning(disable: 4553)
 #pragma warning(disable: 4552)
 
+#define CRT_SECURE_NO_WARNINGS
+
 #define SR_USE_IMGUI
 
 #ifdef _MSVC_LANG
@@ -92,6 +94,7 @@
 #ifdef WIN32
     #define SR_WIN32_BOOL true
     #define SR_WIN32
+    #define WIN32_LEAN_AND_MEAN /// Исключите редко используемые компоненты из заголовков Windows
 #else
     #define SR_WIN32_BOOL false
 #endif
