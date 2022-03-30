@@ -16,7 +16,6 @@
 #include "../Graphics/src/GUI/NodeManager.cpp"
 #include "../Graphics/src/GUI/Pin.cpp"
 #include "../Graphics/src/GUI/Editor/FileBrowser.cpp"
-#include "../Graphics/src/GUI/Editor/SceneViewer.cpp"
 #include "../Graphics/src/GUI/Editor/MessageBox.cpp"
 #include "../Graphics/src/GUI/Editor/Guizmo.cpp"
 #include "../Graphics/src/GUI/Editor/Theme.cpp"

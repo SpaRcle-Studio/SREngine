@@ -58,6 +58,12 @@
 #define SR_INLINE inline
 #define SR_NULL 0
 #define SR_MARSHAL_USE_LIST 1
+#define SR_INVALID_STR_POS -1
+#define SR_ID_INVALID -1
+#define SR_SHADER_PROGRAM int32_t
+#define SR_NULL_SHADER -1
+#define SR_VERTEX_DESCRIPTION size_t
+#define GLM_ENABLE_EXPERIMENTAL
 
 #define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 
@@ -107,5 +113,7 @@
 #define SR_GTYPES_NS SR_GRAPH_NS::Types
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
+
+#define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 
 #endif //GAMEENGINE_MACROS_H

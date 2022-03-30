@@ -3,6 +3,7 @@
 //
 
 #include <Types/Geometry/DebugWireframeMesh.h>
+#include <Types/RawMesh.h>
 
 Framework::Helper::IResource* Framework::Graphics::Types::DebugWireframeMesh::Copy(IResource* destination) const {
     const std::lock_guard<std::recursive_mutex> locker(m_mutex);
@@ -48,7 +49,6 @@ void  Framework::Graphics::Types::DebugWireframeMesh::DrawVulkan() {
     }
 
     m_env->BindDescriptorSet(m_descriptorSet);
-
     m_env->DrawIndices(m_countIndices);
 }
 

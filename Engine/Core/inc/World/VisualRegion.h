@@ -33,7 +33,7 @@ namespace Framework::Core::World {
         void ApplyOffset() override;
         void OnEnter() override;
         void OnExit() override;
-        bool Unload() override;
+        bool Unload(bool force) override;
         bool Load() override;
 
     };

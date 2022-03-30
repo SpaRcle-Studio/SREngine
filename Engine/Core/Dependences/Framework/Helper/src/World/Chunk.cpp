@@ -4,7 +4,6 @@
 
 #include <World/Chunk.h>
 #include <World/Region.h>
-#include <EntityComponentSystem/Transform.h>
 
 using namespace Framework::Helper::World;
 

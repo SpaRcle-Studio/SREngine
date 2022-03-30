@@ -5,7 +5,6 @@
 #ifndef GAMEENGINE_GUI_H
 #define GAMEENGINE_GUI_H
 
-#include <macros.h>
 #include <Debug.h>
 
 #ifdef SR_USE_IMGUI

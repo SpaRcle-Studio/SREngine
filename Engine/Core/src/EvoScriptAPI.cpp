@@ -7,7 +7,6 @@
 #include <Engine.h>
 #include <Input/InputSystem.h>
 #include <Loaders/ObjLoader.h>
-#include <EntityComponentSystem/Transform.h>
 #include <Types/Skybox.h>
 
 #include <Debug.h>
@@ -107,10 +106,7 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetGameObjects, std::unordered_set<SafePtr<GameObject>>)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetRootGameObjects, std::unordered_set<SafePtr<GameObject>>&)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetSelected, SafePtr<GameObject>)
         ESRegisterMethod(EvoScript::Public, generator, Scene, SetObserver, void, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, RemoveSelected, bool, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, AddSelected, void, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
         ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
 
@@ -134,17 +130,12 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, OnAttachComponent, void)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsSelected, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsReady, bool)
-
-        ESRegisterMethodArg0(EvoScript::Protected, generator, Component, OnRemoveComponent, void)
-        ESRegisterMethodArg0(EvoScript::Protected, generator, Component, OnDestroyGameObject, void)
 
         ESRegisterMethod(EvoScript::Public, generator, Component, SetParent, void, ESArg1(GameObject* gm), ESArg1(gm))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnMove, void, ESArg1(const FVector3& v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Component, OnSelected, void, ESArg1(bool v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnReady, void, ESArg1(bool v), ESArg1(v))
 
         ESRegisterMethod(EvoScript::Public, generator, Component, SetActive, void, ESArg1(bool v), ESArg1(v))
@@ -190,7 +181,6 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Mesh, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
-        ESRegisterMethod(EvoScript::Public, generator, Mesh, OnSelected, void, ESArg1(bool v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, SetShader, void, ESArg1(Shader* shader), ESArg1(shader))
         ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
 
@@ -475,12 +465,10 @@ namespace Framework {
     void API::RegisterISavable(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Document", "ISavable");
         generator->RegisterNewClass("ISavable", "ISavable");
-
-        using namespace Xml;
     }
 
     void API::RegisterCasts(EvoScript::CastingGen *generator) {
-        ESRegisterDynamicCast(generator, Graphics::, Mesh, Helper::, Component)
+        ESRegisterDynamicCast(generator, Graphics::Types::, Mesh, Helper::, Component)
         ESRegisterDynamicCast(generator, Graphics::, Camera, Helper::, Component)
     }
 

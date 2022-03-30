@@ -7,8 +7,9 @@
 #include <EntityComponentSystem/Transform3D.h>
 
 namespace Framework::Core::GUI {
-    Inspector::Inspector()
+    Inspector::Inspector(Hierarchy* hierarchy)
         : Graphics::GUI::Widget("Inspector")
+        , m_hierarchy(hierarchy)
     { }
 
     void Inspector::Draw() {
@@ -32,15 +33,11 @@ namespace Framework::Core::GUI {
     }
 
     void Inspector::Update() {
-        if (m_scene.TryLockIfValid()) {
-            const auto selected = m_scene->GetSelected();
-            m_gameObject.Replace(selected);
-            m_scene.Unlock();
+        if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
+            m_gameObject.Replace(*selected.begin());
         }
-    }
-
-    void Inspector::SetScene(const World::Scene::Ptr& scene) {
-        m_scene.Replace(scene);
+        else
+            m_gameObject.Replace(GameObject::Ptr());
     }
 
     void Inspector::DrawComponents() {

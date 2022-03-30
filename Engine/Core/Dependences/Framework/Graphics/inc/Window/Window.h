@@ -34,7 +34,7 @@ namespace Framework::Graphics {
         Window(
                 const char* win_name,
                 const char* icoPath,
-                WindowFormat format,
+                Types::WindowFormat format,
                 Render* render,
                 bool vsync,
                 bool fullScreen,
@@ -90,7 +90,7 @@ namespace Framework::Graphics {
 
         ImGuiWindow*          m_aimedWindowTarget     = nullptr;
         Camera*               m_aimedCameraTarget     = nullptr;
-        Mesh*                 m_aimedMesh             = nullptr;
+        Types::Mesh*          m_aimedMesh             = nullptr;
         bool                  m_requireGetAimed       = false;
 
         GUI::ICanvas*         m_canvas                = nullptr;
@@ -137,7 +137,7 @@ namespace Framework::Graphics {
         }
         [[nodiscard]] bool IsRun() const noexcept { return m_isRun; }
         [[nodiscard]] bool IsGUIEnabled() const { return m_GUIEnabled.first; }
-        [[nodiscard]] Mesh* PopAimedMesh() noexcept;
+        [[nodiscard]] Types::Mesh* PopAimedMesh() noexcept;
         [[nodiscard]] bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept;
         glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
     public:

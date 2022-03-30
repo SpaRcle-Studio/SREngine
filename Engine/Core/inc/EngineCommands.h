@@ -9,7 +9,7 @@
 #include <CommandManager/CmdManager.h>
 #include <EntityComponentSystem/EntityManager.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class GameObject;
 
     namespace World {
@@ -17,7 +17,7 @@ namespace Framework::Helper {
     }
 }
 
-namespace Framework::Core::Commands {
+namespace SR_CORE_NS::Commands {
     class GameObjectRename : public Helper::ICommand {
     public:
         ~GameObjectRename() override = default;
@@ -31,7 +31,7 @@ namespace Framework::Core::Commands {
     class GameObjectDelete : public Helper::ICommand {
     public:
         GameObjectDelete() = default;
-        explicit GameObjectDelete(const Helper::Types::SafePtr<Helper::GameObject>& ptr);
+        explicit GameObjectDelete(const SR_HTYPES_NS::SafePtr<Helper::GameObject>& ptr);
 
         ~GameObjectDelete() override;
 
@@ -41,10 +41,10 @@ namespace Framework::Core::Commands {
         std::string GetName() override { return "GameObjectDelete"; }
 
     private:
-        Helper::EntityPath m_path;
-        Helper::EntityBranch m_reserved;
-        MarshalEncodeNode m_backup;
-        Helper::Types::SafePtr<Helper::World::Scene> m_scene;
+        SR_UTILS_NS::EntityPath m_path;
+        SR_UTILS_NS::EntityBranch m_reserved;
+        SR_UTILS_NS::MarshalEncodeNode m_backup;
+        SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
 
     };
 

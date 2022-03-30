@@ -13,6 +13,7 @@
 #include "src/GUI/VisualScriptEditor.cpp"
 #include "src/GUI/EngineSettings.cpp"
 #include "src/GUI/EngineStatistics.cpp"
+#include "src/GUI/SceneViewer.cpp"
 
 #include "src/Parsers/BlueprintParser.cpp"
 

@@ -306,12 +306,12 @@ void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helpe
             ImGui::PopStyleVar();
         }
 
-        auto&& selected = scene->GetSelected();
-        if (ImGui::Button("Delete") && selected.LockIfValid()) {
-            auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-            selected.Unlock();
-        }
+        //auto&& selected = scene->GetSelected();
+        //if (ImGui::Button("Delete") && selected.LockIfValid()) {
+        //    auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+        //    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        //    selected.Unlock();
+        //}
 
         scene.Unlock();
     }
@@ -400,64 +400,64 @@ void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObj
 }
 
 void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
-    Helper::Types::SafePtr<Helper::GameObject> gameObject;
-
-    if (scene.LockIfValid()) {
-        gameObject = scene->GetSelected();
-        scene.Unlock();
-    }
-
-    if (gameObject.LockIfValid()) {
-        if (bool v = gameObject->IsActive(); ImGui::Checkbox("Enabled", &v))
-            gameObject->SetActive(v);
-
-        std::string gm_name = gameObject->GetName();
-        if (ImGui::InputText("Name", &gm_name))
-            gameObject->SetName(gm_name);
-
-        ImGui::Text("Entity id: %llu", gameObject->GetEntityId());
-        //ImGui::Text("Entity path: %s", gameObject->GetEntityPath().CStr());
-
-        ImGui::Separator();
-        DrawTextOnCenter("Transform");
-
-        this->DrawComponents(gameObject);
-
-        /*ImGui::Text("[Parent direction]");
-
-        std::vector<Framework::Helper::Component *> comps = gameObject->GetComponents();
-        for (Framework::Helper::Component *comp : comps) {
-            std::string name = comp->GetComponentName();
-
-            if (ImGui::CollapsingHeader(name.c_str()))
-                comp->DrawOnInspector();
-        }
-
-        ImGui::Separator();
-
-        ImGui::InvisibleButton("void", ImVec2(ImGui::GetCurrentWindow()->Size.x, ImGui::GetCurrentWindow()->Size.y - ImGui::GetItemRectMin().y));
-
-        if (ImGui::BeginPopupContextItem("InspectorMenu", 1)) {
-            if (ImGui::BeginMenu("Add component")) {
-                for (const auto& a : Component::GetComponentsNames()) {
-                    if (ImGui::MenuItem(a.c_str()))
-                        gameObject->AddComponent(Component::CreateComponentOfName(a));
-                }
-                ImGui::EndMenu();
-            }
-            ImGui::EndPopup();
-        }*/
-
-        gameObject.Unlock();
-    }
+//    Helper::Types::SafePtr<Helper::GameObject> gameObject;
+//
+//    if (scene.LockIfValid()) {
+//        gameObject = scene->GetSelected();
+//        scene.Unlock();
+//    }
+//
+//    if (gameObject.LockIfValid()) {
+//        if (bool v = gameObject->IsActive(); ImGui::Checkbox("Enabled", &v))
+//            gameObject->SetActive(v);
+//
+//        std::string gm_name = gameObject->GetName();
+//        if (ImGui::InputText("Name", &gm_name))
+//            gameObject->SetName(gm_name);
+//
+//        ImGui::Text("Entity id: %llu", gameObject->GetEntityId());
+//        //ImGui::Text("Entity path: %s", gameObject->GetEntityPath().CStr());
+//
+//        ImGui::Separator();
+//        DrawTextOnCenter("Transform");
+//
+//        this->DrawComponents(gameObject);
+//
+//        /*ImGui::Text("[Parent direction]");
+//
+//        std::vector<Framework::Helper::Component *> comps = gameObject->GetComponents();
+//        for (Framework::Helper::Component *comp : comps) {
+//            std::string name = comp->GetComponentName();
+//
+//            if (ImGui::CollapsingHeader(name.c_str()))
+//                comp->DrawOnInspector();
+//        }
+//
+//        ImGui::Separator();
+//
+//        ImGui::InvisibleButton("void", ImVec2(ImGui::GetCurrentWindow()->Size.x, ImGui::GetCurrentWindow()->Size.y - ImGui::GetItemRectMin().y));
+//
+//        if (ImGui::BeginPopupContextItem("InspectorMenu", 1)) {
+//            if (ImGui::BeginMenu("Add component")) {
+//                for (const auto& a : Component::GetComponentsNames()) {
+//                    if (ImGui::MenuItem(a.c_str()))
+//                        gameObject->AddComponent(Component::CreateComponentOfName(a));
+//                }
+//                ImGui::EndMenu();
+//            }
+//            ImGui::EndPopup();
+//        }*/
+//
+//        gameObject.Unlock();
+//    }
 }
 
 void GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) const {
     if (ImGui::IsItemClicked()) {
-        if (!m_shiftPressed && gm->GetScene().Valid())
-            gm->GetScene()->DeSelectAll();
+        //if (!m_shiftPressed && gm->GetScene().Valid())
+        //    gm->GetScene()->DeSelectAll();
 
-        gm->SetSelect(true);
+        //gm->SetSelect(true);
     }
 }
 

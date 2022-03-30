@@ -5,31 +5,22 @@
 #ifndef GAMEENGINE_MESH_H
 #define GAMEENGINE_MESH_H
 
-#include <vector>
-#include <macros.h>
-
-#include <Types/Material.h>
-#include <Types/RawMesh.h>
-
-#include <Environment/Environment.h>
+#include <Environment/PipeLine.h>
+#include <Utils/Enumerations.h>
+#include <ResourceManager/IResource.h>
 #include <EntityComponentSystem/Component.h>
-#include <Types/List.h>
-#include <FbxLoader/Loader.h>
 
 namespace SR_UTILS_NS::Types {
     class RawMesh;
 }
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class Render;
     class Shader;
+    class Environment;
 }
 
-namespace Framework {
-    class API;
-}
-
-namespace Framework::Graphics::Types {
+namespace SR_GRAPH_NS::Types {
     class Material;
 
     enum class MeshFeatures {
@@ -48,16 +39,14 @@ namespace Framework::Graphics::Types {
 
     class Mesh : public Helper::IResource, public Helper::Component {
         friend class Material;
-        friend class ::Framework::API;
     protected:
-        explicit Mesh(MeshType type, const std::string& name = "Unnamed");
+        explicit Mesh(MeshType type, std::string name = "Unnamed");
         ~Mesh() override;
 
     public:
         static std::vector<Mesh*> Load(const std::string& path, MeshType type);
         static Mesh* TryLoad(const std::string& path, MeshType type, uint32_t id);
         static Mesh* Load(const std::string& path, MeshType type, uint32_t id);
-        static Mesh* LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry& geometry);
 
     public:
         bool Destroy() override;
@@ -85,14 +74,11 @@ namespace Framework::Graphics::Types {
         void OnScaled(const Helper::Math::FVector3& newValue) override;
         void OnSkewed(const Helper::Math::FVector3& newValue) override;
 
-        void OnSelected(bool value) override;
         void OnDestroyGameObject() override;
         void OnRemoveComponent() override {
             OnDestroyGameObject();
         }
-        void OnReady(bool ready) override {
-            m_env->SetBuildState(false);
-        }
+        void OnReady(bool ready) override;
         void OnAttachComponent() override { }
         void OnTransparencyChanged();
 

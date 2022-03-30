@@ -5,22 +5,11 @@
 #ifndef GAMEENGINE_VERTICES_H
 #define GAMEENGINE_VERTICES_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <macros.h>
-#include <variant>
-
-#include <glm/glm.hpp>
-#include <glm/gtx/hash.hpp>
-#include <glm/gtx/string_cast.hpp>
-
+#include <Debug.h>
 #include <Math/Vector3.h>
 #include <Utils/Enumerations.h>
 #include <Utils/StringFormat.h>
 #include <FbxLoader/Mesh.h>
-
-#define SR_VERTEX_DESCRIPTION size_t
 
 namespace Framework::Graphics::Vertices {
     enum class Attribute {

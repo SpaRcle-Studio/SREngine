@@ -5,7 +5,9 @@
 #ifndef SRENGINE_KEYCODES_H
 #define SRENGINE_KEYCODES_H
 
-namespace Framework::Helper {
+#include <Debug.h>
+
+namespace SR_UTILS_NS {
     enum class KeyboardLayout : uint8_t {
         EN, RU, UNKNOWN
     };

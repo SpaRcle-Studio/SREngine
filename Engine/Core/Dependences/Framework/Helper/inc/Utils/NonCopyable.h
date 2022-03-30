@@ -7,7 +7,7 @@
 
 #include <macros.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class NonCopyable {
     protected:
         constexpr NonCopyable() = default;

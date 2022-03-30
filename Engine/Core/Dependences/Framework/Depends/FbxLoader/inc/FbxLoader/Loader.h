@@ -14,23 +14,6 @@ namespace FbxLoader {
         Unknown, Definitions, Objects, NodeAttribute, Geometry, Vertices, PolygonVertexIndex
     };
 
-    inline static State StateFromString(const std::string& str) {
-        if (str == "Definitions")
-            return State::Definitions;
-        else if (str == "Objects")
-            return State::Objects;
-        else if (str == "NodeAttribute")
-            return State::NodeAttribute;
-        else if (str == "Geometry")
-            return State::Geometry;
-        else if (str == "Vertices")
-            return State::Vertices;
-        else if (str == "PolygonVertexIndex")
-            return State::PolygonVertexIndex;
-        else
-            return State::Unknown;
-    }
-
     typedef std::vector<Vertex> VertexGroup;
     typedef std::vector<VertexGroup> VertexGroups;
 
@@ -51,8 +34,15 @@ namespace FbxLoader {
     private:
         static Fbx LoadFbx(const std::string& ascii, const std::string& cache, bool needOptimize);
         static Fbx LoadObj(const std::string& path, const std::string& cache, bool needOptimize);
+
         static bool OptimizeGeometry(Geometry* geometry);
+
         static std::vector<Geometry> SplitByMaterials(Geometry&& geometries);
+
+        static Geometry ParseGeometry(Parser::Node* node);
+        static Model ParseModel(Parser::Node* node);
+        static NodeAttribute ParseNodeAttribute(Parser::Node* node);
+
         static std::vector<Vertex> GetVertices(Parser::Node* node, const std::vector<uint32_t>& indices);
         static Objects GetObjects(Parser::Node* node);
         static std::vector<Material> GetMaterials(Parser::Node* node);

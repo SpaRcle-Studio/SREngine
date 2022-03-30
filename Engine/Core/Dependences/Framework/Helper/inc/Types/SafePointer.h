@@ -5,19 +5,10 @@
 #ifndef SMARTPOINTER_SAFEPOINTER_H
 #define SMARTPOINTER_SAFEPOINTER_H
 
-#include <iostream>
-#include <functional>
-#include <string>
-#include <atomic>
-
-#include <string>
-#include <thread>
-#include <cstdlib>
-
-#include <Utils/StringFormat.h>
 #include <Debug.h>
+#include <Utils/StringFormat.h>
 
-namespace Framework::Helper::Types {
+namespace SR_UTILS_NS::Types {
     static std::atomic<int64_t> SAFE_POINTER_COUNTS = 0;
 
     #define SR_NEW_SAFE_PTR() {                              \
@@ -139,7 +130,8 @@ namespace Framework::Helper::Types {
             SR_DEL_SAFE_PTR();
 
             delete m_data;
-        } else
+        }
+        else
             --(m_data->m_useCount);
     }
 

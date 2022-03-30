@@ -5,12 +5,9 @@
 #ifndef GAMEENGINE_MESHCLUSTER_H
 #define GAMEENGINE_MESHCLUSTER_H
 
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <cctype>
+#include <Debug.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     namespace Types {
         class IndexedMesh;
         class Mesh;

@@ -17,12 +17,17 @@ namespace SR_CORE_NS::GUI {
         m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
 
         if (m_scene.TryLockIfValid()) {
-            m_scene->ForEachRootObjects([&](const Helper::GameObject::Ptr& gm) {
-                DrawChild(gm);
-            });
-
+            m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
         }
+
+        for (auto&& gameObject : m_tree) {
+            if (!gameObject.LockIfValid())
+                continue;
+
+            DrawChild(gameObject);
+            gameObject.Unlock();
+        };
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -30,12 +35,12 @@ namespace SR_CORE_NS::GUI {
         m_scene = scene;
     }
 
-    void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) const {
+    void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) {
         ImGui::PushID((void*)(intptr_t)id);
         if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
-            if (m_scene->GetAllSelected().count(gm) == 0) {
-                gm->GetScene()->DeSelectAll();
-                gm->SetSelect(true);
+            if (m_selected.count(gm) == 0) {
+                m_selected.clear();
+                m_selected.insert(gm);
             }
 
             if (ImGui::Selectable("Copy")) {
@@ -71,12 +76,12 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopID();
     }
 
-    void Hierarchy::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject> &gm) const {
-        if (ImGui::IsItemClicked() && !gm->IsSelected()) {
+    void Hierarchy::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject> &gm) {
+        if (ImGui::IsItemClicked() && m_selected.count(gm) == 0) {
             if (!m_shiftPressed && gm->GetScene().Valid())
-                gm->GetScene()->DeSelectAll();
+                m_selected.clear();
 
-            gm->SetSelect(true);
+            m_selected.insert(gm);
         }
     }
 
@@ -85,7 +90,7 @@ namespace SR_CORE_NS::GUI {
         const bool hasChild = root->HasChildren();
 
         const ImGuiTreeNodeFlags flags = (hasChild ? m_nodeFlagsWithChild : m_nodeFlagsWithoutChild) |
-                (root->IsSelected() ? ImGuiTreeNodeFlags_Selected : 0);
+                ((m_selected.count(root) == 1) ? ImGuiTreeNodeFlags_Selected : 0);
 
         const uint64_t id = root->GetEntityId();
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
@@ -96,8 +101,12 @@ namespace SR_CORE_NS::GUI {
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource()) {
             m_pointersHolder.clear();
 
-            for (const GameObject::Ptr& ptr : m_scene->GetAllSelected())
-                m_pointersHolder.emplace_back(ptr);
+            for (const GameObject::Ptr& ptr : m_selected) {
+                if (ptr.RecursiveLockIfValid()) {
+                    m_pointersHolder.emplace_back(ptr);
+                    ptr.Unlock();
+                }
+            }
 
             ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<Helper::GameObject::Ptr>), ImGuiCond_Once);
             ImGui::Text("%s ->", name.c_str());
@@ -139,18 +148,23 @@ namespace SR_CORE_NS::GUI {
                     Paste();
                 break;
             }
-            case KeyCode::Del:
+            case KeyCode::Del: {
+                std::lock_guard<std::mutex> lock(m_mutex);
+
+                /// TODO: make as command
                 if (m_scene.LockIfValid()) {
-                    for (auto&& selected : m_scene->GetAllSelected()) {
+                    for (auto&& selected : m_selected) {
                         if (selected.LockIfValid()) {
                             auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
                             Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
                             selected.Unlock();
                         }
                     }
+                    m_selected.clear();
                     m_scene.Unlock();
                 }
                 break;
+            }
             default:
                 break;
         }
@@ -159,6 +173,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::OnKeyUp(const KeyUpEvent &event) {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         switch (event.GetKeyCode()) {
             case KeyCode::LShift: {
                 if (m_pointersHolder.size() > 1) {
@@ -176,21 +192,40 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Copy() const {
         MarshalEncodeNode marshal;
 
-        for (auto&& ptr : m_scene->GetAllSelected()) {
-            marshal.Append(ptr->Save(SAVABLE_FLAG_ECS_NO_ID));
+        for (auto&& ptr : m_selected) {
+            if (ptr.LockIfValid()) {
+                marshal.Append(ptr->Save(SAVABLE_FLAG_ECS_NO_ID));
+                ptr.Unlock();
+            }
         }
 
         if (marshal.Valid())
             Helper::Platform::TextToClipboard(marshal.ToString());
     }
 
-    void Hierarchy::Paste() const {
+    void Hierarchy::Paste() {
         if (auto marshal = Helper::MarshalDecodeNode::LoadFromMemory(Helper::Platform::GetClipboardText())) {
-            m_scene->DeSelectAll();
-            for (const auto& gameObject : marshal.GetNodes()) {
-                if (auto&& ptr = m_scene->Instance(gameObject))
-                    ptr->SetSelect(true);
+            /// TODO: нужно сделать вызов через команду, иначе будет deadlock
+
+            std::set<Helper::GameObject::Ptr> selected;
+
+            if (m_scene.LockIfValid()) {
+                for (const auto &gameObject : marshal.GetNodes()) {
+                    if (auto &&ptr = m_scene->Instance(gameObject))
+                        selected.insert(ptr);
+                }
+                m_scene.Unlock();
+            }
+
+            {
+                std::lock_guard<std::mutex> lock(m_mutex);
+                m_selected = selected;
             }
         }
+    }
+
+    std::set<Helper::GameObject::Ptr> Hierarchy::GetSelected() const {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        return m_selected;
     }
 }

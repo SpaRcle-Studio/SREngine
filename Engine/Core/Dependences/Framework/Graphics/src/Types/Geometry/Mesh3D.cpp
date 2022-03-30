@@ -3,14 +3,14 @@
 //
 
 #include <Types/Geometry/Mesh3D.h>
+#include <Types/Uniforms.h>
 
 #define ConfigureShader(shader) \
             shader->SetMat4("modelMat", m_modelMat); \
             shader->SetVec3("color", m_material->m_color.ToGLM()); \
-            shader->SetIVec2("config", { (int)m_material->m_bloom, (int)this->m_isSelected }); \
 
 bool Framework::Graphics::Types::Mesh3D::Calculate()  {
-    const std::lock_guard<std::recursive_mutex> locker(m_mutex);
+    const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (m_isCalculated)
         return true;
@@ -105,12 +105,10 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
         });
 
         UpdateUBO();
-
-        //!==========================
-
-        m_env->BindDescriptorSet(m_descriptorSet);
-        m_material->UseVulkan();
     }
+
+    m_env->BindDescriptorSet(m_descriptorSet);
+    m_material->UseVulkan();
 
     m_env->BindDescriptorSet(m_descriptorSet);
     m_env->DrawIndices(m_countIndices);
@@ -183,7 +181,7 @@ Component *Mesh3D::LoadComponent(const MarshalDecodeNode& node, const Helper::Ty
         }
 
         render->RegisterMesh(mesh);
-        ///mesh->WaitCalculate();
+        /// mesh->WaitCalculate();
 
         if (const auto& materialNode = node.TryGetNode("Material"); materialNode.Valid()) {
             const std::string& materialName = materialNode.GetAttribute<std::string>("Name");

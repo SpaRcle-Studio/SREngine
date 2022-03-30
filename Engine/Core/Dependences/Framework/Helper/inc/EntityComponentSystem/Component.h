@@ -5,10 +5,9 @@
 #ifndef GAMEENGINE_COMPONENT_H
 #define GAMEENGINE_COMPONENT_H
 
+#include <Debug.h>
+
 #include <Math/Vector3.h>
-#include <string>
-#include <unordered_map>
-#include <mutex>
 #include <Types/DataStorage.h>
 #include <Types/SafePointer.h>
 #include <Utils/Singleton.h>
@@ -16,12 +15,9 @@
 #include <Utils/StringUtils.h>
 #include <EntityComponentSystem/EntityManager.h>
 
-namespace Framework {
-    class API;
-}
-
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class Component;
+    class GameObject;
 
     class ComponentManager : public Singleton<ComponentManager>, public NonCopyable {
         friend class Singleton<ComponentManager>;
@@ -93,10 +89,8 @@ namespace Framework::Helper {
 
     };
 
-    class GameObject;
     class Component : public Entity {
         friend class GameObject;
-        friend class Framework::API;
     public:
         ~Component() override = default;
 
@@ -105,7 +99,6 @@ namespace Framework::Helper {
         virtual void OnMove(const Math::FVector3& newValue) { };
         virtual void OnScaled(const Math::FVector3& newValue) { };
         virtual void OnSkewed(const Math::FVector3& newValue) { };
-        virtual void OnSelected(bool value) { this->m_isSelected = value; };
         virtual void OnReady(bool ready) { }
         virtual void OnAttachComponent();
 
@@ -115,15 +108,14 @@ namespace Framework::Helper {
         void SetParent(GameObject* parent) { m_parent = parent; }
 
     public:
-        [[nodiscard]] virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
-        [[nodiscard]] SR_INLINE bool IsEnabled()  const { return m_isEnabled;               }
-        [[nodiscard]] SR_INLINE bool IsActive()   const { return m_isActive;                }
-        [[nodiscard]] SR_INLINE bool IsSelected() const { return m_isSelected;              }
-        [[nodiscard]] SR_INLINE bool IsReady()    const { return m_isActive && m_isEnabled; }
-        [[nodiscard]] SR_INLINE std::string GetComponentName() const { return m_name; }
-        [[nodiscard]] SR_INLINE size_t GetComponentId() const { return m_componentId; }
-        [[nodiscard]] SR_INLINE Component* BaseComponent() { return this; }
-        [[nodiscard]] SR_INLINE GameObject* GetParent() const { return this->m_parent; }
+        SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
+        SR_NODISCARD SR_INLINE bool IsEnabled() const { return m_isEnabled; }
+        SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
+        SR_NODISCARD SR_INLINE bool IsReady() const { return m_isActive && m_isEnabled; }
+        SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
+        SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
+        SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
+        SR_NODISCARD SR_INLINE GameObject* GetParent() const { return this->m_parent; }
 
     protected:
         template<typename T> void Init() {
@@ -135,12 +127,10 @@ namespace Framework::Helper {
         virtual void OnDestroyGameObject() = 0;
 
     protected:
-        bool m_isSelected          = false;
-
-        // Задается игровым объектом/движком, когда необходимо принудительно отключить
-        bool m_isActive            = true;
-        // Задается скриптами и пользователем через инспектор
-        bool m_isEnabled           = true;
+        /// Задается игровым объектом/движком, когда необходимо принудительно отключить
+        bool m_isActive = true;
+        /// Задается скриптами и пользователем через инспектор
+        bool m_isEnabled = true;
 
         std::string m_name = "Unknown";
         size_t m_componentId = SIZE_MAX;

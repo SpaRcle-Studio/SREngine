@@ -10,7 +10,6 @@
 #include <Math/Vector2.h>
 #include <Environment/Environment.h>
 #include <World/Scene.h>
-#include <EntityComponentSystem/Transform.h>
 #include <Render/Camera.h>
 #include <GUI.h>
 #include <Utils/Singleton.h>

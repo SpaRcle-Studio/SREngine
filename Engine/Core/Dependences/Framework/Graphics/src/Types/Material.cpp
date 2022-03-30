@@ -161,6 +161,8 @@ Material::Material()
 { }
 
 Material *Material::Load(const std::string &name) {
+    SR_GLOBAL_LOCK
+
     if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(name))
         return pMaterial;
 

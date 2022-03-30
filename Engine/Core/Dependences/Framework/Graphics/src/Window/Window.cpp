@@ -83,12 +83,12 @@ bool Framework::Graphics::Window::Create() {
 }
 
 bool Framework::Graphics::Window::Init() {
-    if (!m_isCreate){
+    if (!m_isCreate) {
         Debug::Error("Window::Init() : window is not created!");
         return false;
     }
 
-    if (m_isInit){
+    if (m_isInit) {
         Debug::Error("Window::Init() : window already initialize!");
         return false;
     }
@@ -105,7 +105,7 @@ bool Framework::Graphics::Window::Init() {
     if (m_hasErrors)
         return false;
 
-    if (!Graphics::Material::InitDefault(GetRender())) {
+    if (!Types::Material::InitDefault(GetRender())) {
         SR_ERROR("Window::Init() : failed to initialize default material!");
         return false;
     }

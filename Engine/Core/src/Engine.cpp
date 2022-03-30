@@ -6,7 +6,6 @@
 #include <Types/Time.h>
 #include <Types/Timer.h>
 #include <Input/InputSystem.h>
-#include <EntityComponentSystem/Transform.h>
 #include <Environment/Environment.h>
 #include <Events/EventManager.h>
 #include <Utils/Features.h>
@@ -150,7 +149,7 @@ bool Framework::Engine::Run() {
 
     if (Helper::Features::Instance().Enabled("ChunkSystem")) {
         m_worldThread = new Helper::Types::Thread([this]() {
-            auto timer = Helper::Types::Timer(1.0);
+            auto timer = Helper::Types::Timer(0.1);
 
             while (m_isRun) {
                 if (timer.Update() && m_scene.LockIfValid()) {
@@ -341,7 +340,6 @@ bool Framework::Engine::SetScene(const Helper::Types::SafePtr<World::Scene> &sce
         if (m_editor) {
             m_editor->GetWindow<Hierarchy>()->SetScene(m_scene);
             m_editor->GetWindow<SceneViewer>()->SetScene(m_scene);
-            m_editor->GetWindow<Inspector>()->SetScene(m_scene);
             m_editor->GetWindow<WorldEdit>()->SetScene(m_scene);
         }
 

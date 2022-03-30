@@ -52,6 +52,7 @@ bool FbxLoader::Geometry::Valid() const {
 void FbxLoader::Objects::Save(std::ofstream &file) const {
     Tools::SaveComplexVector(file, nodeAttributes);
     Tools::SaveComplexVector(file, geometries);
+    Tools::SaveComplexVector(file, models);
 }
 
 void FbxLoader::Objects::Load(std::ifstream &file) {
@@ -107,9 +108,23 @@ void FbxLoader::Connections::Clear() {
 }
 
 void FbxLoader::Model::Save(std::ofstream &file) const {
-
+    Tools::SaveValue(file, id);
+    Tools::SaveString(file, name);
+    Tools::SaveString(file, type);
+    Tools::SaveValue(file, Translation);
+    Tools::SaveValue(file, Rotation);
+    Tools::SaveValue(file, Scale);
 }
 
 void FbxLoader::Model::Load(std::ifstream &file) {
+    id = Tools::LoadValue<uint64_t>(file);
+    name = Tools::LoadStr(file);
+    type = Tools::LoadStr(file);
+    Translation = Tools::LoadValue<vec3>(file);
+    Rotation = Tools::LoadValue<vec3>(file);
+    Scale = Tools::LoadValue<vec3>(file);
+}
 
+bool FbxLoader::Model::Valid() const {
+    return id != 0;
 }

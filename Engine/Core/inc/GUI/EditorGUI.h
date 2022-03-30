@@ -9,14 +9,16 @@
 #include <Base/Script.h>
 #include <Base/Compiler.h>
 #include <GUI/WidgetManager.h>
-#include <GUI/Hierarchy.h>
-#include <GUI/Editor/SceneViewer.h>
+
+namespace SR_GRAPH_NS {
+    class Window;
+}
 
 namespace SR_GRAPH_NS::GUI {
     class FileBrowser;
 }
 
-namespace Framework::Core::GUI {
+namespace SR_CORE_NS::GUI {
     class VisualScriptEditor;
     class Inspector;
     class WorldEdit;
@@ -51,9 +53,9 @@ namespace Framework::Core::GUI {
         void Update();
 
     private:
-        void OnKeyDown(const KeyDownEvent& event) override;
-        void OnKeyPress(const KeyPressEvent& event) override;
-        void OnKeyUp(const KeyUpEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
+        void OnKeyUp(const SR_UTILS_NS::KeyUpEvent& event) override;
 
     private:
         bool Init();

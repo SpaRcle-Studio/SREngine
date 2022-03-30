@@ -27,7 +27,7 @@ namespace Framework::Graphics::Animations {
             if (m_mesh) {
                 SR_ERROR("Bone::SetRender() : render is already set!");
             }
-            else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", MeshType::Static); !meshes.empty()) {
+            else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", Types::MeshType::Static); !meshes.empty()) {
                 m_mesh = meshes[0];
                 render->RegisterMesh(m_mesh);
             }

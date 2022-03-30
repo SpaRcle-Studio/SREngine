@@ -5,11 +5,11 @@
 #ifndef GAMEENGINE_WINDOWFORMAT_H
 #define GAMEENGINE_WINDOWFORMAT_H
 
-#include <string>
 #include <Debug.h>
 #include <glm/glm.hpp>
 
-namespace Framework::Graphics::Types {
+namespace SR_GRAPH_NS::Types {
+    /// TODO: TO REFACTORING
     class WindowFormat {
     public:
         enum Value {

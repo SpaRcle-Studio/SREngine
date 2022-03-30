@@ -42,7 +42,7 @@ namespace Framework::Helper {
         public:
             virtual void Update(float_t dt);
             virtual bool Load();
-            virtual bool Unload();
+            virtual bool Unload(bool force = false);
             virtual void OnEnter();
             virtual void OnExit();
             virtual void Reload();

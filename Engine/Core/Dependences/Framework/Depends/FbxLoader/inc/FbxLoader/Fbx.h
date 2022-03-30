@@ -92,8 +92,30 @@ namespace FbxLoader {
         void Save(std::ofstream &file) const override;
         void Load(std::ifstream &file) override;
 
+        [[nodiscard]] bool Valid() const;
+
+        Model(Model&& model) noexcept {
+            id = std::exchange(model.id, {});
+            name = std::exchange(model.name, {});
+            type = std::exchange(model.type, {});
+            Translation = std::exchange(model.Translation, {});
+            Rotation = std::exchange(model.Rotation, {});
+            Scale = std::exchange(model.Scale, {});
+        }
+
+        Model& operator=(Model&& model) noexcept {
+            id = std::exchange(model.id, {});
+            name = std::exchange(model.name, {});
+            type = std::exchange(model.type, {});
+            Translation = std::exchange(model.Translation, {});
+            Rotation = std::exchange(model.Rotation, {});
+            Scale = std::exchange(model.Scale, {});
+            return *this;
+        }
+
+
     public:
-        uint64_t    id;
+        uint64_t    id = 0;
         std::string name;
         std::string type;
 
@@ -113,6 +135,7 @@ namespace FbxLoader {
 
         std::vector<NodeAttribute> nodeAttributes;
         std::vector<Geometry>      geometries;
+        std::vector<Model>         models;
     };
 
     struct Connections : public Tools::ISerializable {

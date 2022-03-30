@@ -6,16 +6,12 @@
 #define GAMEENGINE_MESH3D_H
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/Vertices.h>
 
-#include <utility>
-#include <Types/Uniforms.h>
-
-namespace Framework::Graphics::Memory {
+namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
 }
 
-namespace Framework::Graphics::Types {
+namespace SR_GRAPH_NS::Types {
     class Mesh3D final : public IndexedMesh {
         friend class Memory::MeshAllocator;
     private:
@@ -33,9 +29,8 @@ namespace Framework::Graphics::Types {
 
     public:
         IResource* Copy(IResource* destination) const override;
-        //void SetVertexArray(const std::any& vertices) override;
 
-        static Component* LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage);
+        static Component* LoadComponent(const SR_UTILS_NS::MarshalDecodeNode& node, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     private:
         void UpdateUBO() override;
@@ -44,10 +39,7 @@ namespace Framework::Graphics::Types {
         void DrawVulkan() override;
         void DrawOpenGL() override;
 
-        [[nodiscard]] MarshalEncodeNode Save(SavableFlags flags) const override;
-
-    //private:
-    //    std::vector<VertexType> m_vertices = std::vector<VertexType>();
+        SR_NODISCARD SR_UTILS_NS::MarshalEncodeNode Save(SR_UTILS_NS::SavableFlags flags) const override;
 
     };
 }

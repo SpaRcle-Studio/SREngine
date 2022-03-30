@@ -63,6 +63,14 @@
 #include <cfloat>
 #include <cstdint>
 #include <limits>
+#include <string>
+#include <algorithm>
+
+#include <glm/glm.hpp>
+#include <glm/gtx/hash.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <glm/detail/type_quat.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 namespace Framework::Helper::Math {
     typedef double Unit; //! can broke render
@@ -96,6 +104,10 @@ namespace Framework::Helper::Math {
 
     template<typename T> constexpr bool IsLogical() {
         return std::is_same_v<T, bool>();
+    }
+
+    template<typename T> constexpr bool IsString() {
+        return std::is_same_v<T, std::string>();
     }
 
     template<typename T> constexpr bool IsNumber() {

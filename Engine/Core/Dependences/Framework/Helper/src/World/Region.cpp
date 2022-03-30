@@ -66,12 +66,14 @@ Region::~Region() {
     m_cached.clear();
 }
 
-bool Region::Unload() {
+bool Region::Unload(bool force) {
     SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
 
     for (auto&& [position, pChunk] : m_loadedChunks) {
-        if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
-            m_cached[position] = std::move(marshal);
+        if (!force) {
+            if (auto &&marshal = pChunk->Save(); marshal.Valid()) {
+                m_cached[position] = std::move(marshal);
+            }
         }
 
         pChunk->Unload();

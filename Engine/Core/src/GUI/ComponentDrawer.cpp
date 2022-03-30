@@ -7,6 +7,8 @@
 #include <Render/Camera.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <GUI/Utils.h>
+#include <Types/Texture.h>
+#include <Types/Material.h>
 
 using namespace Framework::Graphics::Types;
 using namespace Framework::Graphics;
@@ -86,12 +88,25 @@ void Framework::Core::GUI::ComponentDrawer::DrawComponent(Mesh3D* mesh3d) {
 
     ImGui::Separator();
 
+    const auto&& drawTexture = [](const std::string& name, Texture* texture) {
+        if (texture) {
+            Graphics::GUI::DrawValue(name, texture->GetName());
+        }
+        else
+            Graphics::GUI::DrawValue(name, "None");
+    };
+
     if (auto&& material = mesh3d->GetMaterial()) {
         const bool readOnly = material->IsReadOnly();
 
         Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
 
         Graphics::GUI::DrawValue("Material", material->GetResourceId());
+
+        drawTexture("Diffuse", material->GetDiffuse());
+        drawTexture("Normal", material->GetNormal());
+        drawTexture("Specular", material->GetSpecular());
+        drawTexture("Glossiness", material->GetGlossiness());
 
         auto color = material->GetColor();
         if (Graphics::GUI::DrawColorControl("Color", color, 1.f, !readOnly))

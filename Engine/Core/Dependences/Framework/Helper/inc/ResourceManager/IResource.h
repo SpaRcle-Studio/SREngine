@@ -7,11 +7,6 @@
 
 #include <Debug.h>
 
-#include <string>
-#include <mutex>
-#include <cmath>
-#include <atomic>
-
 namespace Framework::Helper {
     class ResourceManager;
 

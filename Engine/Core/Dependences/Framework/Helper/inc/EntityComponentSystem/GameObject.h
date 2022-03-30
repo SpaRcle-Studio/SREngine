@@ -5,37 +5,24 @@
 #ifndef GAMEENGINE_GAMEOBJECT_H
 #define GAMEENGINE_GAMEOBJECT_H
 
-#include <string>
-#include <vector>
-#include <mutex>
-#include <map>
-#include <glm/glm.hpp>
-
-#include <Types/SafePointer.h>
+#include <Debug.h>
 #include <Math/Vector3.h>
+#include <Types/SafePointer.h>
 
 #include <EntityComponentSystem/EntityManager.h>
 #include "Component.h"
 
-
-namespace Framework {
-    class API;
+namespace SR_UTILS_NS::World {
+    class Scene;
 }
 
 namespace SR_UTILS_NS {
-    namespace World {
-        class Scene;
-    }
-
-    class Transform;
     class Transform3D;
     class Component;
 
     class GameObject : public Types::SafePtr<GameObject>, public Entity {
         friend class World::Scene;
-        friend class Transform;
         friend class Transform3D;
-        friend class ::Framework::API;
 
         typedef enum {
             DestroyBy_Unknown    = 0,
@@ -62,7 +49,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsActive() const { return m_isActive && m_isParentActive; }
         SR_NODISCARD bool IsEnabled() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
-        SR_NODISCARD SR_INLINE bool IsSelected() const { return m_isSelect; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
 
@@ -86,7 +72,6 @@ namespace SR_UTILS_NS {
         void ForEachComponent(const std::function<bool(Component*)>& fun);
 
         bool Contains(const Types::SafePtr<GameObject>& child);
-        void SetSelect(bool value);
         void SetActive(bool value);
         void Destroy(DestroyByFlagBits by = DestroyBy_Other);
         void SetTransform(Transform3D* transform3D);
@@ -119,7 +104,6 @@ namespace SR_UTILS_NS {
 
         std::atomic<bool>                   m_isPrefab       = false;
 
-        std::atomic<bool>                   m_isSelect       = false;
         GameObject::Ptr                     m_parent         = GameObject::Ptr();
         std::unordered_set<GameObject::Ptr> m_children       = std::unordered_set<GameObject::Ptr>();
 

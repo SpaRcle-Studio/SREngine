@@ -10,19 +10,20 @@
 #include <EntityComponentSystem/GameObject.h>
 #include <World/Scene.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class Transform3D;
 }
 
-namespace Framework::Core::GUI {
+namespace SR_CORE_NS::GUI {
+    class Hierarchy;
+
     class Inspector : public Graphics::GUI::Widget {
     public:
-        Inspector();
+        Inspector(Hierarchy* hierarchy);
         ~Inspector() override = default;
 
     public:
         void Update();
-        void SetScene(const Helper::World::Scene::Ptr& scene);
 
     protected:
         void Draw() override;
@@ -41,7 +42,7 @@ namespace Framework::Core::GUI {
 
     private:
         Helper::Types::SafePtr<Helper::GameObject> m_gameObject;
-        Helper::Types::SafePtr<World::Scene> m_scene;
+        Hierarchy* m_hierarchy = nullptr;
 
     };
 }

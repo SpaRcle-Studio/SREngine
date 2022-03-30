@@ -7,24 +7,21 @@
 
 #include <Render/Shader.h>
 #include <Types/Mesh.h>
-#include <vector>
-#include <mutex>
-#include <queue>
 #include <Environment/Environment.h>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
 #include <Types/List.h>
-#include <iostream>
 
 #include <Render/MeshCluster.h>
 
 #include <Types/Geometry/IndexedMesh.h>
 
-namespace Framework::Graphics::Types {
+namespace SR_GRAPH_NS::Types {
     class Skybox;
+    class Texture;
 }
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     // TODO: to refactoring
 
     // first - current, second - new
@@ -32,8 +29,6 @@ namespace Framework::Graphics {
         Types::Skybox* m_current;
         Types::Skybox* m_new;
     };
-
-    using namespace Framework::Graphics::Types;
 
     class Light;
     class Window;
@@ -76,9 +71,9 @@ namespace Framework::Graphics {
         Shader* FindShader(uint32_t id) const;
 
         /** \brief Can get a nullptr value for removing skybox */
-        void SetSkybox(Skybox* skybox);
-        bool FreeSkyboxMemory(Skybox* skybox);
-        [[nodiscard]] Skybox* GetSkybox() const { return m_skybox.m_current; }
+        void SetSkybox(Types::Skybox* skybox);
+        bool FreeSkyboxMemory(Types::Skybox* skybox);
+        [[nodiscard]] Types::Skybox* GetSkybox() const { return m_skybox.m_current; }
 
         void RegisterTexture(Types::Texture* texture);
         void FreeTexture(Types::Texture* texture);
@@ -122,11 +117,11 @@ namespace Framework::Graphics {
         mutable std::recursive_mutex  m_mutex                    = std::recursive_mutex();
 
         // TO_REFACTORING
-        std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Mesh*>();
-        std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Mesh*>();
+        std::vector<Types::Mesh*>     m_newMeshes                = std::vector<Types::Mesh*>();
+        std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Types::Mesh*>();
         std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
-        std::vector<Skybox*>          m_skyboxesToFreeVidMem     = std::vector<Skybox*>();
-        std::unordered_set<Texture*>  m_textures                 = std::unordered_set<Texture*>();
+        std::vector<Types::Skybox*>   m_skyboxesToFreeVidMem     = std::vector<Types::Skybox*>();
+        std::unordered_set<Types::Texture*>  m_textures                 = std::unordered_set<Types::Texture*>();
 
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };

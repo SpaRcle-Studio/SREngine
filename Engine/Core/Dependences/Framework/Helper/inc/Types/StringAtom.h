@@ -5,8 +5,7 @@
 #ifndef GAMEENGINE_STRINGATOM_H
 #define GAMEENGINE_STRINGATOM_H
 
-#include <mutex>
-#include <string>
+#include <Debug.h>
 
 namespace Framework::Helper {
     class StringAtom {

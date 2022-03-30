@@ -3,6 +3,7 @@
 //
 
 #include <Types/Geometry/IndexedMesh.h>
+#include <Types/RawMesh.h>
 
 namespace Framework::Graphics::Types {
     IResource *IndexedMesh::Copy(IResource *destination) const {
@@ -24,7 +25,7 @@ namespace Framework::Graphics::Types {
 
         indexed->m_countIndices = m_countIndices;
 
-        return VertexMesh::Copy(indexed);
+        return Mesh::Copy(indexed);
     }
 
     bool IndexedMesh::Calculate() {
@@ -47,21 +48,25 @@ namespace Framework::Graphics::Types {
                 Memory::MeshManager::Instance().Register<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId(), m_IBO);
         }
 
-        return VertexMesh::Calculate();
+        return Mesh::Calculate();
     }
 
     bool IndexedMesh::FreeVideoMemory() {
         using namespace Memory;
+
         auto &&manager = Memory::MeshManager::Instance();
+
         if (manager.Free<Vertices::Type::Unknown, MeshManager::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!Environment::Get()->FreeIBO(m_IBO))
                 SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
         }
-        return VertexMesh::FreeVideoMemory();
+
+        return Mesh::FreeVideoMemory();
     }
 
     void IndexedMesh::SetRawMesh(Helper::Types::RawMesh *raw)  {
         m_countIndices = raw->GetIndices(m_meshId).size();
-        VertexMesh::SetRawMesh(raw);
+        m_countVertices = raw->GetVertices(m_meshId).size();
+        Mesh::SetRawMesh(raw);
     }
 }

@@ -6,13 +6,11 @@
 #define GAMEENGINE_MATERIAL_H
 
 #include <Types/Texture.h>
+
 #include <Render/Shader.h>
 #include <Math/Vector3.h>
 #include <Math/Vector4.h>
 
-#include <glm/glm.hpp>
-#include <macros.h>
-#include <mutex>
 #include <unordered_set>
 #include <ResourceManager/ResourceManager.h>
 
@@ -44,6 +42,11 @@ namespace Framework::Graphics::Types {
         SR_NODISCARD bool IsTransparent() const { return m_transparent;  }
         SR_NODISCARD Helper::Math::FColor GetColor() const { return m_color; }
         SR_NODISCARD uint32_t GetCountSubscriptions() const;
+
+        SR_NODISCARD Texture* GetDiffuse() const { return m_diffuse; }
+        SR_NODISCARD Texture* GetNormal() const { return m_normal; }
+        SR_NODISCARD Texture* GetSpecular() const { return m_specular; }
+        SR_NODISCARD Texture* GetGlossiness() const { return m_glossiness; }
 
         void SetColor(float r, float g, float b) { SetColor(Helper::Math::FColor(r, g, b, 1.f)); }
         void SetColor(Helper::Math::FVector3 color) { SetColor(color.x, color.y, color.z); }

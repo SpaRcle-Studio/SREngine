@@ -12,10 +12,14 @@
 
 namespace SR_GRAPH_NS::GUI {
     class Guizmo;
+}
 
-    class SceneViewer : public Widget {
+namespace SR_CORE_NS::GUI {
+    class Hierarchy;
+
+    class SceneViewer : public Graphics::GUI::Widget {
     public:
-        explicit SceneViewer(Graphics::Window* window);
+        explicit SceneViewer(Graphics::Window* window, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:
@@ -39,7 +43,8 @@ namespace SR_GRAPH_NS::GUI {
 
     private:
         Graphics::Window* m_window = nullptr;
-        Guizmo* m_guizmo = nullptr;
+        Hierarchy* m_hierarchy = nullptr;
+        Graphics::GUI::Guizmo* m_guizmo = nullptr;
         int32_t m_id;
         Helper::GameObject::Ptr m_camera;
         Helper::World::Scene::Ptr m_scene;

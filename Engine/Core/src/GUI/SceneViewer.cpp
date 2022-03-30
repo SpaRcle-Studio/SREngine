@@ -3,10 +3,10 @@
 //
 
 #include <Input/InputSystem.h>
-#include "GUI/Editor/SceneViewer.h"
-#include "GUI/Editor/Guizmo.h"
-#include "EntityComponentSystem/Transform.h"
-#include "EntityComponentSystem/GameObject.h"
+#include <GUI/SceneViewer.h>
+#include <GUI/Editor/Guizmo.h>
+#include <EntityComponentSystem/GameObject.h>
+#include <GUI/Hierarchy.h>
 
 void SceneViewer::SetCamera(GameObject::Ptr camera) {
     m_camera.AutoFree([this](GameObject* camera) {
@@ -19,10 +19,6 @@ void SceneViewer::SetCamera(GameObject::Ptr camera) {
 }
 
 void SceneViewer::Draw() {
-    auto&& selected = m_scene.TryDo<Helper::GameObject::Ptr>([](World::Scene* scene) -> Helper::GameObject::Ptr {
-        return scene->GetSelected();
-    }, Helper::GameObject::Ptr());
-
     if (m_camera.LockIfValid()) {
         auto camera = m_camera->GetComponent<Camera>();
         if (m_id = camera->GetPostProcessing()->GetFinally(); m_id >= 0 && camera->IsReady()) {
@@ -36,7 +32,9 @@ void SceneViewer::Draw() {
                 const auto winSize = ImGui::GetWindowSize();
 
                 DrawTexture(Math::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
-                m_guizmo->Draw(selected, m_camera);
+
+                if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                    m_guizmo->Draw(*selected.begin(), m_camera);
 
                 CheckFocused();
                 CheckHovered();
@@ -55,9 +53,10 @@ void SceneViewer::SetScene(World::Scene::Ptr scene) {
     SetCameraActive(m_cameraActive);
 }
 
-SceneViewer::SceneViewer(Graphics::Window* window)
+SceneViewer::SceneViewer(Graphics::Window* window, Hierarchy* hierarchy)
     : Widget("Scene")
     , m_window(window)
+    , m_hierarchy(hierarchy)
     , m_guizmo(new Guizmo())
     , m_id(-1)
 { }

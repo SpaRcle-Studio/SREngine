@@ -11,6 +11,8 @@ namespace SR_UTILS_NS::Types {
     { }
 
     RawMesh *RawMesh::Load(const std::string &path) {
+        SR_GLOBAL_LOCK
+
         if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
             return pResource;
         }

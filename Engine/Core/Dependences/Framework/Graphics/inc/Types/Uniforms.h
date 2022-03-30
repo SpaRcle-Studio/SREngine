@@ -5,8 +5,6 @@
 #ifndef GAMEENGINE_UNIFORMS_H
 #define GAMEENGINE_UNIFORMS_H
 
-#include <glm/glm.hpp>
-#include <map>
 #include <Utils/Enumerations.h>
 
 namespace Framework::Graphics {

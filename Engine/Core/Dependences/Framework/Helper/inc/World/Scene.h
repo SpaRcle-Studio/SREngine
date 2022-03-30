@@ -5,24 +5,11 @@
 #ifndef GAMEENGINE_SCENE_H
 #define GAMEENGINE_SCENE_H
 
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <map>
-#include <mutex>
-#include <macros.h>
-#include "EntityComponentSystem/GameObject.h"
-#include <World/Observer.h>
-#include <Debug.h>
-#include <atomic>
-#include <stack>
-#include <unordered_map>
-#include <unordered_set>
 #include <Types/SafePointer.h>
+#include <World/Observer.h>
 #include <Types/StringAtom.h>
 
-namespace Framework::Helper::World {
+namespace SR_UTILS_NS::World {
     struct TensorKey {
         TensorKey() = default;
         TensorKey(const Framework::Helper::Math::IVector3& _region, const Framework::Helper::Math::IVector3& _chunk)
@@ -55,11 +42,15 @@ namespace std {
     };
 }
 
-namespace Framework::Helper::World {
+namespace SR_UTILS_NS {
+    class GameObject;
+}
+
+namespace SR_UTILS_NS::World {
     class Region;
     class Chunk;
 
-    typedef std::unordered_set<GameObject::Ptr> GameObjects;
+    typedef std::unordered_set<Types::SafePtr<GameObject>> GameObjects;
     typedef std::unordered_map<TensorKey, GameObjects> Tensor;
     typedef std::unordered_map<Math::IVector3, Region*> Regions;
 
@@ -87,14 +78,13 @@ namespace Framework::Helper::World {
         virtual void BeginSync() = 0;
         virtual void EndSync() = 0;
         virtual bool TrySync() = 0;
-        virtual GameObject::Ptr Instance(const MarshalDecodeNode& node) = 0;
+        virtual Types::SafePtr<GameObject> Instance(const MarshalDecodeNode& node) = 0;
 
-        void SetObserver(const GameObject::Ptr& observer) { m_observer->m_target = observer; }
+        void SetObserver(const Types::SafePtr<GameObject>& observer) { m_observer->m_target = observer; }
 
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         Chunk* GetCurrentChunk() const;
         void SetWorldOffset(const World::Offset& offset);
-        Types::SafePtr<GameObject> GetSelected() const;
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
 
         SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat(m_name.ToString()).Concat("regions"); }
@@ -102,20 +92,15 @@ namespace Framework::Helper::World {
         SR_NODISCARD std::string GetName() const { return m_name; }
         void SetName(const std::string& name) { m_name = name; }
 
-        uint32_t GetSelectedCount() const { return m_selectedGameObjects.size(); }
-        GameObjects GetAllSelected() const { return m_selectedGameObjects; }
         GameObjects GetGameObjects();
         GameObjects& GetRootGameObjects();
         GameObjects GetGameObjectsAtChunk(const Math::IVector3& region, const Math::IVector3& chunk);
 
-        GameObject::Ptr FindByComponent(const std::string& name);
-        GameObject::Ptr Instance(const std::string& name);
+        Types::SafePtr<GameObject> FindByComponent(const std::string& name);
+        Types::SafePtr<GameObject> Instance(const std::string& name);
 
     public:
-        void DeSelectAll();
         bool Remove(const Types::SafePtr<GameObject>& gameObject);
-        bool RemoveSelected(const Types::SafePtr<GameObject>& gameObject);
-        void AddSelected(const Types::SafePtr<GameObject>& gameObject);
 
         void OnChanged();
 
@@ -143,7 +128,6 @@ namespace Framework::Helper::World {
         World::Tensor                m_tensor              = World::Tensor();
 
         GameObjects                  m_gameObjects         = GameObjects();
-        GameObjects                  m_selectedGameObjects = GameObjects();
         GameObjects                  m_rootObjects         = GameObjects();
 
         Regions                      m_regions             = Regions();

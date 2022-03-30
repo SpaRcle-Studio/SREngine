@@ -6,9 +6,6 @@
 #define GAMEENGINE_MESHMANAGER_H
 
 #include <Utils/Singleton.h>
-#include <unordered_map>
-#include <mutex>
-#include <optional>
 #include <Types/Vertices.h>
 #include <Environment/PipeLine.h>
 

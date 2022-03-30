@@ -5,11 +5,7 @@
 #ifndef GAMEENGINE_ENUMERATIONS_H
 #define GAMEENGINE_ENUMERATIONS_H
 
-#include <map>
-#include <unordered_map>
 #include <Utils/StringUtils.h>
-#include <mutex>
-#include <Debug.h>
 
 #define SR_ENUM_TO_STRING(enumName)                                                              \
     static std::string Enum##enumName##ToString(enumName value) {                                \
@@ -64,7 +60,7 @@
                     token = name;                                                                \
                 }                                                                                \
                 if (auto v = _mapValue.find((enumName)last); v != _mapValue.end()) {             \
-                    Helper::Debug::Warn(std::string("SR_CODEGEN_ENUM::enum_parse() : "           \
+                    SR_WARN(std::string("SR_CODEGEN_ENUM::enum_parse() : "           \
                         "conflict enums! \n\tEnum name: ").append(#enumName)                     \
                         .append("\n\tValues: ").append(v->second).append(" and ").append(token)); \
                     continue;                                                                    \

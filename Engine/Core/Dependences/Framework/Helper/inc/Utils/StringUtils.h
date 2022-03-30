@@ -5,16 +5,8 @@
 #ifndef GAMEENGINE_STRINGUTILS_H
 #define GAMEENGINE_STRINGUTILS_H
 
-#include <string>
-#include <cstring>
-#include <map>
-#include <glm/glm.hpp>
-#include <algorithm>
-#include <vector>
-#include <locale>
-#include <macros.h>
-
-#define SR_INVALID_STR -1
+#include <Debug.h>
+#include <Math/Mathematics.h>
 
 namespace Framework::Helper {
     class StringUtils {
@@ -54,7 +46,7 @@ namespace Framework::Helper {
             for (uint32_t i = 0; i < str.size(); i++)
                 if (str[i] == symbol)
                     return (int32_t)i;
-            return SR_INVALID_STR;
+            return SR_INVALID_STR_POS;
         }
 
         static SR_FORCE_INLINE std::string GetFileNameFromFullPath(std::string full_path) {
@@ -111,7 +103,7 @@ namespace Framework::Helper {
         static std::string ReadFrom(const std::string& str, const char& c, uint32_t start);
 
         static int32_t FindClosest(const std::string& str, const std::string& characters) {
-            int32_t pos = SR_INVALID_STR;
+            int32_t pos = SR_INVALID_STR_POS;
 
             for (char c : characters) {
                 auto find = str.find(c);

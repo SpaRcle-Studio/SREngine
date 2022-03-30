@@ -5,7 +5,7 @@
 #ifndef SRENGINE_COMPONENTDRAWER_H
 #define SRENGINE_COMPONENTDRAWER_H
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class Camera;
 
     namespace Types {
@@ -14,8 +14,8 @@ namespace Framework::Graphics {
 }
 
 namespace Framework::Core::GUI::ComponentDrawer {
-    void DrawComponent(Framework::Graphics::Camera* camera);
-    void DrawComponent(Framework::Graphics::Types::Mesh3D* mesh3d);
+    void DrawComponent(SR_GRAPH_NS::Camera* camera);
+    void DrawComponent(SR_GRAPH_NS::Types::Mesh3D* mesh3d);
 }
 
 #endif //SRENGINE_COMPONENTDRAWER_H

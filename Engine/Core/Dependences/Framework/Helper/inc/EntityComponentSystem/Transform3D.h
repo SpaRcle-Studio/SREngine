@@ -14,7 +14,7 @@
 #include <Types/SafePointer.h>
 #include <EntityComponentSystem/ISavable.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class GameObject;
 
     class Transform3D : public ISavable {

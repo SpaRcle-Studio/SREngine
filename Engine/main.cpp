@@ -16,9 +16,12 @@
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
 #include <Environment/Vulkan.h>
-#include <EntityComponentSystem/Transform.h>
 
 #include <Types/Rigidbody.h>
+#include <Types/RawMesh.h>
+#include <Types/Texture.h>
+#include <Types/Material.h>
+#include <Types/Mesh.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <Animations/Bone.h>
 #include <World/World.h>

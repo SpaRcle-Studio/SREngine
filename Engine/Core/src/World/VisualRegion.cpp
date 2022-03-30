@@ -45,9 +45,9 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
     }
 }
 
-bool Framework::Core::World::VisualRegion::Unload() {
+bool Framework::Core::World::VisualRegion::Unload(bool force) {
     SetVisible(false);
-    return Region::Unload();
+    return Region::Unload(force);
 }
 
 bool Framework::Core::World::VisualRegion::Load() {

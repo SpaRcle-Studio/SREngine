@@ -6,8 +6,6 @@
 #define GAMEENGINE_VECTOR2_H
 
 #include <Math/Mathematics.h>
-#include <glm/glm.hpp>
-#include <string>
 
 namespace Framework::Helper::Math {
     enum Axis {

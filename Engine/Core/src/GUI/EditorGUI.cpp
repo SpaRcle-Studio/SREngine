@@ -13,6 +13,8 @@
 #include <GUI/WorldEdit.h>
 #include <GUI/EngineSettings.h>
 #include <GUI/EngineStatistics.h>
+#include <GUI/Hierarchy.h>
+#include <GUI/SceneViewer.h>
 
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;
@@ -25,8 +27,8 @@ EditorGUI::EditorGUI(Framework::Scripting::Compiler *compiler)
     AddWindow(new FileBrowser());
     AddWindow(new Hierarchy());
     AddWindow(new VisualScriptEditor());
-    AddWindow(new SceneViewer(m_window));
-    AddWindow(new Inspector());
+    AddWindow(new SceneViewer(m_window, GetWindow<Hierarchy>()));
+    AddWindow(new Inspector(GetWindow<Hierarchy>()));
     AddWindow(new WorldEdit());
     AddWindow(new EngineSettings());
     AddWindow(new EngineStatistics());

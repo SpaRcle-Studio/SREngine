@@ -6,7 +6,6 @@
 #define GAMEENGINE_VECTOR3_H
 
 #include <Math/Vector2.h>
-#include <Utils/GraphUtils.h>
 #include <Math/Quaternion.h>
 
 namespace Framework::Helper::Math {
@@ -350,22 +349,6 @@ namespace Framework::Helper::Math {
                     (p_a.z * p_b.x) - (p_a.x * p_b.z),
                     (p_a.x * p_b.y) - (p_a.y * p_b.x));
             return ret;
-        }
-
-        SR_NODISCARD Vector3 ConvertAxis(Helper::Graph::PipeLine from, Helper::Graph::PipeLine to) const {
-            auto vector = *this;
-
-            if (from != to)
-                switch (from) {
-                    case Graph::PipeLine::OpenGL:
-                        break;
-                    case Graph::PipeLine::Vulkan:
-                        break;
-                    case Graph::PipeLine::DirectX:
-                        break;
-                }
-
-            return vector;
         }
 
         static T FixAxis(T axis) {

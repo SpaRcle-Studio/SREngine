@@ -4,7 +4,6 @@
 
 #include "World/Scene.h"
 #include <EntityComponentSystem/Component.h>
-#include <EntityComponentSystem/Transform.h>
 #include <EntityComponentSystem/GameObject.h>
 
 #include <World/Region.h>
@@ -45,21 +44,21 @@ Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> Framework::He
 
 bool Framework::Helper::World::Scene::Destroy() {
     if (m_isDestroy) {
-        Debug::Error("Scene::Destroy() : scene \"" + std::string(m_name) + "\" already destroyed!");
+        SR_ERROR("Scene::Destroy() : scene \"" + std::string(m_name) + "\" already destroyed!");
         return false;
     }
 
     if (Debug::GetLevel() > Debug::Level::None)
-        Debug::Log("Scene::Destroy() : unload " + std::to_string(m_regions.size()) + " regions...");
+        SR_LOG("Scene::Destroy() : unload " + std::to_string(m_regions.size()) + " regions...");
 
     for (auto&& [position, region] : m_regions) {
-        region->Unload();
+        region->Unload(true);
         delete region;
     }
 
     if (Debug::GetLevel() > Debug::Level::None) {
-        Debug::Log("Scene::Destroy() : complete unloading!");
-        Debug::Log("Scene::Destroy() : destroying \"" + std::string(m_name) + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
+        SR_LOG("Scene::Destroy() : complete unloading!");
+        SR_LOG("Scene::Destroy() : destroying \"" + std::string(m_name) + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
     }
 
     for (auto gameObject : GetRootGameObjects()) {
@@ -69,7 +68,7 @@ bool Framework::Helper::World::Scene::Destroy() {
     }
 
     if (!m_gameObjects.empty()) {
-        Helper::Debug::Warn(Format("Scene::Destroy() : after destroying the root objects, "
+        SR_WARN(Format("Scene::Destroy() : after destroying the root objects, "
                                    "there are %i objects left!", m_gameObjects.size()));
         m_gameObjects.clear();
     }
@@ -78,19 +77,19 @@ bool Framework::Helper::World::Scene::Destroy() {
     m_isHierarchyChanged = true;
 
     if (Debug::GetLevel() > Debug::Level::None)
-        Debug::Log("Scene::Destroy() : scene successfully destroyed!");
+        SR_LOG("Scene::Destroy() : scene successfully destroyed!");
 
     return true;
 }
 
 bool Framework::Helper::World::Scene::Free() {
     if (!m_isDestroy) {
-        Debug::Error("Scene::Free() : scene \"" + std::string(m_name) + "\" is not destroyed!");
+        SR_ERROR("Scene::Free() : scene \"" + std::string(m_name) + "\" is not destroyed!");
         return false;
     }
 
     if (Debug::GetLevel() > Debug::Level::None)
-        Debug::Log("Scene::Free() : free \"" + std::string(m_name) + "\" scene pointer...");
+        SR_LOG("Scene::Free() : free \"" + std::string(m_name) + "\" scene pointer...");
 
     if (m_observer) {
         delete m_observer;
@@ -114,45 +113,6 @@ Framework::Helper::World::GameObjects& Framework::Helper::World::Scene::GetRootG
     m_isHierarchyChanged = false;
 
     return m_rootObjects;
-}
-
-void Framework::Helper::World::Scene::AddSelected(const Types::SafePtr<GameObject>& gameObject) {
-    this->m_selectedGameObjects.insert(gameObject);
-
-    auto components = gameObject->GetComponents();
-    for (Framework::Helper::Component* comp : components) // TODO: unsafe
-        comp->OnSelected(true);
-}
-
-bool Framework::Helper::World::Scene::RemoveSelected(const GameObject::Ptr& gameObject) {
-    auto components = gameObject->GetComponents();
-    for (Framework::Helper::Component* comp : components) // TODO: unsafe
-        comp->OnSelected(false);
-
-    if (auto find = m_selectedGameObjects.find(gameObject); find == m_selectedGameObjects.end()) {
-        Helper::Debug::Error("Scene::RemoveSelected() : \""+gameObject->GetName() + "\" not found!");
-        return false;
-    }
-    else {
-        m_selectedGameObjects.erase(find);
-        return true;
-    }
-}
-
-void Framework::Helper::World::Scene::DeSelectAll() {
-    for (auto gameObject : m_selectedGameObjects) {
-        if (gameObject.RecursiveLockIfValid()) {
-            auto components = gameObject->GetComponents();
-            for (auto comp : components)
-                comp->OnSelected(false);
-
-            gameObject->m_isSelect = false;
-
-            gameObject.Unlock();
-        }
-    }
-
-    m_selectedGameObjects.clear();
 }
 
 Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::World::Scene::FindByComponent(const std::string &name) {
@@ -235,14 +195,6 @@ Framework::Helper::World::GameObjects Framework::Helper::World::Scene::GetGameOb
         v.insert(a);
 
     return v;
-}
-
-Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::World::Scene::GetSelected() const  {
-    if (auto size = m_selectedGameObjects.size(); size == 0 || size > 1)
-        return Types::SafePtr<GameObject>();
-    else {
-        return *m_selectedGameObjects.begin();
-    }
 }
 
 void Framework::Helper::World::Scene::Update(float_t dt) {
@@ -372,6 +324,7 @@ void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::Wo
 Framework::Helper::World::Chunk *Framework::Helper::World::Scene::GetCurrentChunk() const {
     if (const auto& region = m_regions.find(m_observer->m_region); region != m_regions.end())
         return region->second->Find(m_observer->m_chunk);
+
     return nullptr;
 }
 
@@ -474,15 +427,12 @@ bool Scene::ReloadConfig() {
         return true;
     }
     else {
-        Helper::Debug::Error("Scene::Scene() : file not found! Path: " + path);
+        SR_ERROR("Scene::Scene() : file not found! Path: " + path);
         return false;
     }
 }
 
 bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
-    if (m_selectedGameObjects.count(gameObject))
-        m_selectedGameObjects.erase(gameObject);
-
     m_gameObjects.erase(gameObject);
     OnChanged();
 

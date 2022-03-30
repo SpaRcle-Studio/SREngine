@@ -2,12 +2,11 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#include <iostream>
-
 #include <Render/Render.h>
 #include <Render/Camera.h>
 #include <Lighting/Light.h>
 #include <Types/Skybox.h>
+#include <Types/Material.h>
 #include <Window/Window.h>
 
 #include <Render/Implementations/VulkanRender.h>
@@ -24,41 +23,39 @@ Framework::Graphics::Render::Render(std::string name)
 }
 
 bool Framework::Graphics::Render::Create(Window* window) {
-    if (m_isCreate){
-        Debug::Error("Render::Create() : render already create!");
+    if (m_isCreate) {
+        SR_ERROR("Render::Create() : render already create!");
         return false;
     }
 
-    Debug::Graph("Render::Create() : creating render...");
+    SR_GRAPH("Render::Create() : creating render...");
 
-    this->m_window = window;
+    m_window = window;
 
-    //Codegen::ShaderGenerator::Instance()->Generate("geometry", "", Shader::Flags::Diffuse | Shader::Flags::Normal | Shader::Flags::GBuffer);
+    InsertShader(Shader::StandardID::Geometry, Shader::Load(this, "geometry"));
+    InsertShader(Shader::StandardID::Transparent, Shader::Load(this, "transparent"));
+    InsertShader(Shader::StandardID::Skybox, Shader::Load(this, "skybox"));
+    InsertShader(Shader::StandardID::DebugWireframe, Shader::Load(this, "debugWireframe"));
 
-    this->InsertShader(Shader::StandardID::Geometry, Shader::Load(this, "geometry"));
-    this->InsertShader(Shader::StandardID::Transparent, Shader::Load(this, "transparent"));
-    this->InsertShader(Shader::StandardID::Skybox, Shader::Load(this, "skybox"));
-    this->InsertShader(Shader::StandardID::DebugWireframe, Shader::Load(this, "debugWireframe"));
+    m_grid = EditorGrid::Create("engine/grid", this);
 
-    this->m_grid = EditorGrid::Create("engine/grid", this);
-
-    this->m_isCreate = true;
+    m_isCreate = true;
 
     return true;
 }
 
 bool Framework::Graphics::Render::Init() {
     if (!m_isCreate) {
-        Debug::Error("Render::Init() : render is not created!");
+        SR_ERROR("Render::Init() : render is not created!");
         return false;
     }
 
     if (m_isInit) {
-        Debug::Error("Render::Init() : render already initialize!");
+        SR_ERROR("Render::Init() : render already initialize!");
         return false;
     }
 
-    Debug::Graph("Render::Init() : initializing render...");
+    SR_GRAPH("Render::Init() : initializing render...");
 
     m_isInit = true;
 
@@ -66,18 +63,18 @@ bool Framework::Graphics::Render::Init() {
 }
 bool Framework::Graphics::Render::Run() {
     if (!m_isInit) {
-        Debug::Error("Render::Run() : render is not running!");
+        SR_ERROR("Render::Run() : render is not running!");
         return false;
     }
 
     if (m_isRun) {
-        Debug::Error("Render::Run() : render already is running!");
+        SR_ERROR("Render::Run() : render already is running!");
         return false;
     }
 
-    Debug::Graph("Render::Run() : running render...");
+    SR_GRAPH("Render::Run() : running render...");
 
-    this->m_isRun = true;
+    m_isRun = true;
 
     return true;
 }
@@ -129,9 +126,9 @@ void Framework::Graphics::Render::RemoveMesh(Framework::Graphics::Types::Mesh *m
     const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (Debug::GetLevel() >= Debug::Level::High)
-        Debug::Log("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
+        SR_LOG("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
 
-    this->m_removeMeshes.push(mesh);
+    m_removeMeshes.push(mesh);
 }
 
 void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh *mesh) {
@@ -164,7 +161,8 @@ void Framework::Graphics::Render::PollEvents() {
 
             if (mesh->GetMaterial()->IsTransparent()) {
                 SRVerifyFalse(m_transparentGeometry.Add(mesh))
-            } else {
+            }
+            else {
                 SRVerifyFalse(m_geometry.Add(mesh))
             }
         }

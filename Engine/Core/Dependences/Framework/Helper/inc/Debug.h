@@ -7,11 +7,35 @@
 
 #include <macros.h>
 
+#include <unordered_set>
+#include <stack>
+#include <cctype>
+#include <locale>
+#include <cstring>
+#include <variant>
+#include <optional>
 #include <fstream>
+#include <vector>
 #include <ostream>
+#include <queue>
 #include <mutex>
 #include <string>
 #include <cassert>
+#include <cmath>
+#include <atomic>
+#include <utility>
+#include <array>
+#include <map>
+#include <functional>
+#include <set>
+#include <exception>
+#include <unordered_map>
+#include <algorithm>
+#include <any>
+#include <thread>
+#include <cstdlib>
+#include <sstream>
+#include <list>
 
 namespace SR_UTILS_NS {
     /// TODO: TO REFACTORING
@@ -150,7 +174,7 @@ namespace SR_UTILS_NS {
         }                                                   \
 
     #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.");
-    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr<%s>] %s \n\tPtr: %p", typeid(T).name(), msg, (void *) m_ptr));
+    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
 #endif
 
 #define SRAssert2Once(expr, msg) {                         \

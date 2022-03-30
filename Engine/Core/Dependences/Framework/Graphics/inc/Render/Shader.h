@@ -6,13 +6,6 @@
 #define GAMEENGINE_SHADER_H
 
 #include <Environment/Environment.h>
-#include <glm/glm.hpp>
-#include <iostream>
-#include <string>
-#include <map>
-#include <Debug.h>
-#include <macros.h>
-
 #include <Types/Vertices.h>
 #include <Types/Uniforms.h>
 #include <Utils/NonCopyable.h>

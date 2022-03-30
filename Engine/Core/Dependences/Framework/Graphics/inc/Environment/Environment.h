@@ -6,27 +6,19 @@
 #define GAMEENGINE_ENVIRONMENT_H
 
 #include <GUI.h>
-#include <utility>
-#include <vector>
-#include <array>
-#include <map>
+
 #include <Types/WindowFormat.h>
-#include <functional>
+
 #include <glm/glm.hpp>
 #include <Environment/TextureHelper.h>
-#include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
 #include <Environment/Basic/IShaderProgram.h>
 
 #include <Environment/PipeLine.h>
 #include <Types/Vertices.h>
 #include <Types/Descriptors.h>
-#include <set>
 
-#define SR_SHADER_PROGRAM int32_t
-#define SR_NULL_SHADER -1
-
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     typedef ImGuiContext* GUIContext;
     typedef ImFont* Font;
 
@@ -36,6 +28,7 @@ namespace Framework::Graphics {
 
     enum class RenderBuffGroup { Kernel, Small, Normal, Large };
 
+    /// TODO: TO_REFACTORING
     class Environment {
     public:
         enum class WinEvents{

@@ -6,9 +6,7 @@
 #define SRENGINE_WIDGET_H
 
 #include <GUI.h>
-#include <atomic>
-#include <utility>
-#include <optional>
+
 #include <Utils/NonCopyable.h>
 #include <Input/InputSystem.h>
 #include <Input/InputHandler.h>
