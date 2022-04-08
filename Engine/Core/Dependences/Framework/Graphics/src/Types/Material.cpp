@@ -2,24 +2,22 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#include <Debug.h>
-#include "Types/Material.h"
+#include <Types/Material.h>
+
 #include <Types/Mesh.h>
 #include <Render/Shader.h>
-#include <iostream>
+#include <Types/Texture.h>
 
 using namespace Framework::Graphics::Types;
 
 Material::Material(Texture *diffuse, Texture *normal, Texture *specular, Texture *glossiness)
     : Helper::IResource(typeid(Material).name())
+    , m_env(Environment::Get())
 {
-    if (!m_env)
-        m_env = Environment::Get();
-
-    SetDiffuse(diffuse);
-    SetNormal(normal);
-    SetSpecular(specular);
-    SetGlossiness(glossiness);
+    SetTexture(diffuse, MAT_PROPERTY_DIFFUSE_TEXTURE);
+    SetTexture(normal, MAT_PROPERTY_NORMAL_TEXTURE);
+    SetTexture(specular, MAT_PROPERTY_SPECULAR_TEXTURE);
+    SetTexture(glossiness, MAT_PROPERTY_GLOSSINESS_TEXTURE);
 }
 
 Material::~Material() {
@@ -29,18 +27,17 @@ Material::~Material() {
 
     SetReadOnly(false);
 
-    SetDiffuse(nullptr);
-    SetNormal(nullptr);
-    SetSpecular(nullptr);
-    SetGlossiness(nullptr);
+    for (auto&& property : MAT_TEXTURE_PROPERTIES) {
+        SetTexture(nullptr, property);
+    }
 }
 
 void Material::UseOpenGL() const {
-    if (m_diffuse) {
-        m_env->BindTexture(4, m_diffuse->GetID());
-        Shader::GetCurrentShader()->SetInt("diffuseMap", 4);
+    //if (m_diffuse) {
+    //    m_env->BindTexture(4, m_diffuse->GetID());
+    //    Shader::GetCurrentShader()->SetInt("diffuseMap", 4);
         //m_mesh->m_shader->SetBool("hasDiffuse", true);
-    } //else{
+    // } //else{
         //m_env->BindTexture(1, 0);
         //m_mesh->m_shader->SetInt("diffuseMap", 1);
         //_mesh->m_shader->SetBool("hasDiffuse", false);
@@ -54,83 +51,13 @@ void Material::UseVulkan() {
      *   2 - diffuse
      */
 
-    if (m_diffuse) {
-        m_env->BindTexture(2, m_diffuse->GetID());
+    if (auto&& diffuse = GetTexture(MAT_PROPERTY_DIFFUSE_TEXTURE)) {
+        m_env->BindTexture(2, diffuse->GetID());
     }
-}
-
-void Material::SetDiffuse(Texture* texture) {
-    if (IsReadOnly()) return;
-
-    if (texture)
-        texture->AddUsePoint();
-
-    if (m_diffuse) {
-        m_diffuse->RemoveUsePoint();
-
-        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->IsEnabledAutoRemove())
-            m_diffuse->Destroy();
-    }
-
-    m_diffuse = texture;
-
-    Environment::Get()->SetBuildState(false);
-}
-void Material::SetNormal(Texture *tex) {
-    if (IsReadOnly()) return;
-
-    if (tex)
-        tex->AddUsePoint();
-
-    if (m_normal) {
-        m_normal->RemoveUsePoint();
-
-        if (m_normal->GetCountUses() <= 1 && m_normal->IsEnabledAutoRemove())
-            m_normal->Destroy();
-    }
-
-    m_normal = tex;
-
-    Environment::Get()->SetBuildState(false);
-}
-void Material::SetSpecular(Texture* tex) {
-    if (IsReadOnly()) return;
-
-    if (tex)
-        tex->AddUsePoint();
-
-    if (m_specular) {
-        m_specular->RemoveUsePoint();
-
-        if (m_specular->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
-            m_specular->Destroy();
-    }
-
-    m_specular = tex;
-
-    Environment::Get()->SetBuildState(false);
-}
-
-void Material::SetGlossiness(Texture*tex) {
-    if (IsReadOnly()) return;
-
-    if (tex)
-        tex->AddUsePoint();
-
-    if (m_glossiness) {
-        m_glossiness->RemoveUsePoint();
-
-        if (m_glossiness->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
-            m_glossiness->Destroy();
-    }
-
-    m_glossiness = tex;
-
-    Environment::Get()->SetBuildState(false);
 }
 
 bool Material::SetTransparent(bool value) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (IsReadOnly())
         return false;
@@ -144,14 +71,22 @@ bool Material::SetTransparent(bool value) {
 }
 
 Framework::Helper::IResource* Material::Copy(Framework::Helper::IResource* destination) const {
-    if (destination)
+    if (destination) {
         SR_WARN("Material::Copy() : destination ignored!");
+    }
 
-    auto material = new Material(m_diffuse, m_normal, m_specular, m_glossiness);
+    auto material = new Material();
 
     material->SetBloom(m_bloom);
-    material->SetColor(m_color);
     material->SetTransparent(m_transparent);
+
+    for (auto&& property : MAT_TEXTURE_PROPERTIES) {
+        material->SetTexture(GetTexture(property), property);
+    }
+
+    for (auto&& property : MAT_COLOR_PROPERTIES) {
+        material->SetColor(property, GetColor(property));
+    }
 
     return Helper::IResource::Copy(material);
 }
@@ -166,16 +101,24 @@ Material *Material::Load(const std::string &name) {
     if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(name))
         return pMaterial;
 
-    if (auto doc = Xml::Document::Load(ResourceManager::Instance().GetMaterialsPath().Concat(name).ConcatExt("mat")); doc.Valid()) {
+    const auto&& path = ResourceManager::Instance().GetMaterialsPath().Concat(name).ConcatExt("mat");
+    if (auto doc = Xml::Document::Load(path); doc.Valid()) {
         auto matXml = doc.Root().GetNode("Material");
 
         auto material = new Material();
 
+        if (auto shader = matXml.TryGetNode("Shader")) {
+            auto&& render = RenderManager::Instance().Get("Main");
+            auto&& pShader = Shader::Load(render, shader.GetAttribute("path").ToString());
+
+            material->SetShader(pShader);
+        }
+
         if (auto diffuse = matXml.TryGetNode("Diffuse"))
-            material->SetDiffuse(Texture::Load(diffuse.GetAttribute("Path").ToString()));
+            material->SetTexture(Texture::Load(diffuse.GetAttribute("path").ToString()), MAT_PROPERTY_DIFFUSE_TEXTURE);
 
         if (auto color = matXml.TryGetNode("Color"))
-            material->SetColor(Xml::NodeToColor<true>(color));
+            material->SetColor(MAT_PROPERTY_DIFFUSE_COLOR, Xml::NodeToColor<true>(color));
 
         material->SetId(name);
 
@@ -184,7 +127,7 @@ Material *Material::Load(const std::string &name) {
         return material;
     }
 
-    SR_ERROR("Material::Load() : file not found! Path: " + name + ".mat");
+    SR_ERROR("Material::Load() : file not found! Path: " + path.ToString());
 
     return nullptr;
 }
@@ -198,7 +141,7 @@ bool Material::InitDefault(Render* render) {
         if ((m_default = Material::Load("Engine/default")))
             m_default->AddUsePoint();
 
-        return m_default->Register(render);
+        return m_default->Register(render) && m_default->GetTexture(MAT_PROPERTY_DIFFUSE_TEXTURE);
     }
 
     return false;
@@ -227,7 +170,7 @@ bool Material::FreeDefault() {
 }
 
 void Material::Subscribe(Mesh *mesh) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     SRAssert(m_subscriptions.count(mesh) == 0);
     m_subscriptions.insert(mesh);
@@ -235,7 +178,7 @@ void Material::Subscribe(Mesh *mesh) {
 }
 
 void Material::UnSubscribe(Mesh *mesh) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     SRAssert(GetCountUses() > 0);
     SRAssert(m_subscriptions.count(mesh) == 1);
@@ -248,7 +191,7 @@ void Material::UnSubscribe(Mesh *mesh) {
 }
 
 uint32_t Material::GetCountSubscriptions() const {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     return m_subscriptions.size();
 }
 
@@ -257,22 +200,6 @@ bool Material::Destroy() {
         return false;
 
     return IResource::Destroy();
-}
-
-void Material::SetColor(glm::vec4 color) {
-    if (IsReadOnly())
-        return;
-
-    m_color = color;
-    UpdateSubscribers();
-}
-
-void Material::SetColor(const Math::FColor &color) {
-    if (IsReadOnly())
-        return;
-
-    m_color = color;
-    UpdateSubscribers();
 }
 
 bool Material::Register(Framework::Graphics::Render *render) {
@@ -285,19 +212,151 @@ bool Material::Register(Framework::Graphics::Render *render) {
 
     m_render = render;
 
-    if (m_diffuse    && !m_diffuse->HasRender())    m_render->RegisterTexture(m_diffuse);
-    if (m_normal     && !m_normal->HasRender())     m_render->RegisterTexture(m_normal);
-    if (m_specular   && !m_specular->HasRender())   m_render->RegisterTexture(m_specular);
-    if (m_glossiness && !m_glossiness->HasRender()) m_render->RegisterTexture(m_glossiness);
+    for (auto&& property : MAT_TEXTURE_PROPERTIES) {
+        if (auto&& pTexture = GetTexture(property); pTexture && !pTexture->HasRender()) {
+            m_render->RegisterTexture(pTexture);
+        }
+    }
 
     return true;
 }
 
 void Material::UpdateSubscribers() {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     for (auto&& subscriber : m_subscriptions)
         subscriber->UpdateUBO();
+}
+
+void Material::SetTexture(Texture *pTexture, MatProperty property) {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    if (property >= MAT_PROPERTY_MAX_ENUM) {
+        SRAssert(false);
+        return;
+    }
+
+    if (IsReadOnly())
+        return;
+
+    std::visit([=](Property && arg) {
+        if (std::holds_alternative<Texture*>(arg)) {
+            if (auto&& oldTexture = std::get<Texture*>(arg)) {
+                oldTexture->RemoveUsePoint();
+
+                if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove())
+                    oldTexture->Destroy();
+            }
+
+            if (pTexture)
+                pTexture->AddUsePoint();
+
+            m_properties.at(static_cast<uint32_t>(property)) = pTexture;
+        }
+        else {
+            SRAssert(false);
+        }
+    }, m_properties.at(static_cast<uint32_t>(property)));
+
+    UpdateSubscribers();
+
+    Environment::Get()->SetBuildState(false);
+}
+
+Texture *Material::GetTexture(MatProperty property) const {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    if (property >= MAT_PROPERTY_MAX_ENUM) {
+        SRAssert(false);
+        return nullptr;
+    }
+
+    return std::visit([](Property && arg) -> Texture* {
+        if (std::holds_alternative<Texture*>(arg)) {
+            return std::get<Texture*>(arg);
+        }
+
+        SRAssert(false);
+
+        return nullptr;
+    }, m_properties.at(static_cast<uint32_t>(property)));
+}
+
+void Material::SetColor(MatProperty property, float_t r, float_t g, float_t b) {
+    SetColor(property, SR_MATH_NS::FColor(r, g, b, 1.f));
+}
+
+void Material::SetColor(MatProperty property, float_t r, float_t g, float_t b, float_t a) {
+    SetColor(property, SR_MATH_NS::FColor(r, g, b, a));
+}
+
+void Material::SetColor(MatProperty property, const Framework::Helper::Math::FVector3& color) {
+    SetColor(property, SR_MATH_NS::FColor(color.x, color.y, color.z, 1.f));
+}
+
+void Material::SetColor(MatProperty property, const glm::vec4 &color) {
+    SetColor(property, SR_MATH_NS::FColor(color.r, color.g, color.b, color.a));
+}
+
+void Material::SetColor(MatProperty property, const Math::FColor &color) {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    if (property >= MAT_PROPERTY_MAX_ENUM) {
+        SRAssert(false);
+        return;
+    }
+
+    if (IsReadOnly())
+        return;
+
+    std::visit([=](Property && arg) {
+        if (std::holds_alternative<Texture*>(arg)) {
+            m_properties.at(static_cast<uint32_t>(property)) = color;
+        }
+        else {
+            SRAssert(false);
+        }
+    }, m_properties.at(static_cast<uint32_t>(property)));
+
+    UpdateSubscribers();
+}
+
+SR_MATH_NS::FColor Material::GetColor(Framework::Graphics::Types::MatProperty property) const {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    if (property >= MAT_PROPERTY_MAX_ENUM) {
+        SRAssert(false);
+        return SR_MATH_NS::FColor();
+    }
+
+    return std::visit([](Property && arg) -> SR_MATH_NS::FColor {
+        if (std::holds_alternative<SR_MATH_NS::FColor>(arg)) {
+            return std::get<SR_MATH_NS::FColor>(arg);
+        }
+
+        SRAssert(false);
+
+        return SR_MATH_NS::FColor();
+    }, m_properties.at(static_cast<uint32_t>(property)));
+}
+
+void Material::SetBloom(bool value) {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    m_bloom = value;
+
+    UpdateSubscribers();
+}
+
+void Material::SetShader(Framework::Graphics::Shader *shader) {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+    SRVerifyFalse(m_shader = shader);
+
+    if (!m_shader)
+        return;
+
+    UpdateSubscribers();
 }
 
 

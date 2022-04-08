@@ -10,7 +10,7 @@
 #include <FbxLoader/ISerializable.h>
 
 namespace FbxLoader {
-    typedef std::pair<uint32_t, uint32_t> Material;
+    typedef std::pair<uint32_t, uint32_t> MaterialRange;
 
     struct ObjectType {
 
@@ -28,7 +28,7 @@ namespace FbxLoader {
 
     class NodeAttribute : public Tools::ISerializable {
     public:
-        NodeAttribute();
+        NodeAttribute() = default;
         ~NodeAttribute() override = default;
 
     public:
@@ -36,16 +36,16 @@ namespace FbxLoader {
         void Load(std::ifstream& file) override;
 
     public:
-        uint64_t    id;
+        uint64_t    id = 0;
         std::string name;
         std::string type;
 
     };
 
-    struct Geometry : public Tools::ISerializable, public Tools::NonCopyable {
+    struct RawGeometry : public Tools::ISerializable, public Tools::NonCopyable {
     public:
-        Geometry();
-        ~Geometry() override = default;
+        RawGeometry() = default;
+        ~RawGeometry() override = default;
 
     public:
         void Save(std::ofstream& file) const override;
@@ -53,7 +53,7 @@ namespace FbxLoader {
 
         [[nodiscard]] bool Valid() const;
 
-        Geometry(Geometry&& geometry)  noexcept {
+        RawGeometry(RawGeometry&& geometry)  noexcept {
             id = std::exchange(geometry.id, {});
             name = std::exchange(geometry.name, {});
             type = std::exchange(geometry.type, {});
@@ -62,7 +62,7 @@ namespace FbxLoader {
             materials = std::exchange(geometry.materials, {});
         }
 
-        Geometry& operator=(Geometry&& geometry) noexcept {
+        RawGeometry& operator=(RawGeometry&& geometry) noexcept {
             id = std::exchange(geometry.id, {});
             name = std::exchange(geometry.name, {});
             type = std::exchange(geometry.type, {});
@@ -73,20 +73,20 @@ namespace FbxLoader {
         }
 
     public:
-        uint64_t    id;
+        uint64_t    id = 0;
         std::string name;
         std::string type;
 
         std::vector<Vertex> vertices;
         std::vector<uint32_t> indices;
-        std::vector<Material> materials;
+        std::vector<MaterialRange> materials;
 
     };
 
-    struct Model : public Tools::ISerializable, public Tools::NonCopyable {
+    struct RawModel : public Tools::ISerializable, public Tools::NonCopyable {
     public:
-        Model() = default;
-        ~Model() override = default;
+        RawModel() = default;
+        ~RawModel() override = default;
 
     public:
         void Save(std::ofstream &file) const override;
@@ -94,7 +94,7 @@ namespace FbxLoader {
 
         [[nodiscard]] bool Valid() const;
 
-        Model(Model&& model) noexcept {
+        RawModel(RawModel&& model) noexcept {
             id = std::exchange(model.id, {});
             name = std::exchange(model.name, {});
             type = std::exchange(model.type, {});
@@ -103,7 +103,7 @@ namespace FbxLoader {
             Scale = std::exchange(model.Scale, {});
         }
 
-        Model& operator=(Model&& model) noexcept {
+        RawModel& operator=(RawModel&& model) noexcept {
             id = std::exchange(model.id, {});
             name = std::exchange(model.name, {});
             type = std::exchange(model.type, {});
@@ -112,7 +112,6 @@ namespace FbxLoader {
             Scale = std::exchange(model.Scale, {});
             return *this;
         }
-
 
     public:
         uint64_t    id = 0;
@@ -134,8 +133,8 @@ namespace FbxLoader {
         void Clear();
 
         std::vector<NodeAttribute> nodeAttributes;
-        std::vector<Geometry>      geometries;
-        std::vector<Model>         models;
+        std::vector<RawGeometry>   geometries;
+        std::vector<RawModel>      models;
     };
 
     struct Connections : public Tools::ISerializable {
@@ -154,11 +153,11 @@ namespace FbxLoader {
         std::vector<Connection> modelToModel;
     };
 
-    struct Fbx : public Tools::ISerializable {
+    struct RawFbx : public Tools::ISerializable {
         void Save(std::ofstream& file) const override;
         void Load(std::ifstream& file) override;
 
-        [[nodiscard]] std::vector<Geometry>& GetShapes() { return objects.geometries; }
+        [[nodiscard]] std::vector<RawGeometry>& GetShapes() { return objects.geometries; }
 
         [[nodiscard]] bool Valid() const {
             return !objects.geometries.empty() ||

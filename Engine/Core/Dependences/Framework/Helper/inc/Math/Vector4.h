@@ -6,10 +6,8 @@
 #define SRENGINE_VECTOR4_H
 
 #include <Math/Mathematics.h>
-#include <macros.h>
-#include <glm/vec4.hpp>
 
-namespace Framework::Helper::Math {
+namespace SR_MATH_NS {
     template<typename T> struct Vector4 {
     public:
         union {

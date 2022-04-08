@@ -5,10 +5,10 @@
 #ifndef SRENGINE_VISUALSCRIPTEDITOR_H
 #define SRENGINE_VISUALSCRIPTEDITOR_H
 
-#include <unordered_map>
+#include <GUI/Widget.h>
+
 #include <imgui_node_editor.h>
 #include <Utils/NonCopyable.h>
-#include <GUI/Widget.h>
 
 namespace SR_GRAPH_NS::GUI {
     class Pin;

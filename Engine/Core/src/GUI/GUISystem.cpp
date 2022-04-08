@@ -153,7 +153,7 @@ void GUISystem::BeginDockSpace() {
 
         SR_BEGIN_RIGHT_ALIGNMENT()
             SR_RIGHT_BUTTON(close, "×", {
-                EventManager::Push(EventManager::Event::Exit);
+                SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
             }, {})
 
             if (pWindow->GetState() == Graphics::WindowState::Default)
@@ -361,12 +361,12 @@ bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {
     return is_open;
 }
 
-void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject) {
+void GUISystem::DrawComponents(const Helper::Types::SafePtr<SR_UTILS_NS::GameObject>& gameObject) {
     if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
         if (ImGui::BeginMenu("Add component")) {
-            for (const auto& [name, id] : ComponentManager::Instance().GetComponentsNames()) {
+            for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                 if (ImGui::MenuItem(name.c_str())) {
-                    gameObject->AddComponent(ComponentManager::Instance().CreateComponentOfName(name));
+                    gameObject->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
                     break;
                 }
             }
@@ -375,7 +375,7 @@ void GUISystem::DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObj
         ImGui::EndPopup();
     }
 
-    gameObject->ForEachComponent([gameObject, this](Component* component) -> bool {
+    gameObject->ForEachComponent([gameObject, this](SR_UTILS_NS::Component* component) -> bool {
         if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
             if (ImGui::BeginMenu("Remove component")) {
                 if (ImGui::MenuItem(component->GetComponentName().c_str())) {
@@ -535,11 +535,11 @@ void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene
 
         auto chunkOffset = offset.m_chunk.ToGLM();
         if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            scene->SetWorldOffset(World::Offset(offset.m_region, chunkOffset));
+            scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
 
         auto regionOffset = offset.m_region.ToGLM();
         if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
-            scene->SetWorldOffset(World::Offset(regionOffset, offset.m_chunk));
+            scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
 
         if (ImGui::Button("Reload chunks")) {
             scene->ReloadChunks();
@@ -734,9 +734,9 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Save scene")) {
             if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
-                if (auto path = FileSystem::SaveFileDialog(scenesPath.ToString(), "Scene Files(*.scene)"); !path.empty()) {
-                    const auto sceneName = StringUtils::GetFileNameFromFullPath(path);
-                    const auto folder = StringUtils::GetDirToFileFromFullPath(path);
+                if (auto path = SR_UTILS_NS::FileSystem::SaveFileDialog(scenesPath.ToString(), "Scene Files(*.scene)"); !path.empty()) {
+                    const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
+                    const auto folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
 
                     scene->SetName(sceneName);
 
@@ -763,7 +763,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Exit")) {
-            EventManager::Push(Helper::EventManager::Event::Exit);
+            SR_UTILS_NS::EventManager::Push(Helper::EventManager::Event::Exit);
         }
 
         ImGui::EndMenu();

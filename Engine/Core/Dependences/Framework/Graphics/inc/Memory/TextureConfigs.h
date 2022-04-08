@@ -6,10 +6,6 @@
 #define SRENGINE_TEXTURECONFIGS_H
 
 #include <Utils/Singleton.h>
-#include <atomic>
-#include <optional>
-#include <mutex>
-#include <unordered_map>
 #include <Environment/TextureHelper.h>
 
 namespace Framework::Graphics::Memory {

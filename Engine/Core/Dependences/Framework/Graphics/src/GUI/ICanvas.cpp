@@ -278,18 +278,3 @@ void Style_3(){
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
 }
-
-void Framework::Graphics::GUI::ICanvas::InitStyle() {
-    ImGuiStyle & style = ImGui::GetStyle();
-
-    //Style_2();
-    //SRAssert(Theme::Save("Themes/Purple.xml", style));
-
-    if (auto&& theme = Theme::Load("Themes/Dark.xml")) {
-        theme->Apply(style);
-        delete theme;
-    }
-
-    const static auto iniPath = ResourceManager::Instance().GetResPath().Concat("/Configs/ImGuiEditor.config");
-    ImGui::GetIO().IniFilename = iniPath.CStr();
-}

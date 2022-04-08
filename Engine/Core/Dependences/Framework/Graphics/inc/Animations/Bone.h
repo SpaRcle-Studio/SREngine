@@ -6,7 +6,6 @@
 #define GAMEENGINE_BONE_H
 
 #include <EntityComponentSystem/Component.h>
-#include <Debug.h>
 #include <Types/Mesh.h>
 #include <Render/Render.h>
 
@@ -19,7 +18,7 @@ namespace Framework::Graphics::Animations {
     private:
         Types::Mesh* m_mesh = nullptr;
     public:
-        static Component* LoadComponent(const Helper::MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
+        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 

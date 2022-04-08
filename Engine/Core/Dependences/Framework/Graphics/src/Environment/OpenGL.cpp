@@ -96,12 +96,7 @@ bool Framework::Graphics::OpenGL::PreInit(
     return true;
 }
 
-bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) {
-    if (!this->m_winFormat) {
-        Helper::Debug::Error("OpenGL::MakeWindow() : format isn't initialized!");
-        return false;
-    }
-
+bool Framework::Graphics::OpenGL::MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) {
 #ifdef  SR_OPENGL_USE_WINAPI
     this->m_basicWindow = new Win32Window(this->GetPipeLine());
     if (!this->m_basicWindow->Create(
@@ -117,7 +112,7 @@ bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScree
     m_monitor = glfwGetPrimaryMonitor();
     m_vidMode = glfwGetVideoMode(m_monitor);
 
-    m_window = glfwCreateWindow((int)m_winFormat->Width(), (int)m_winFormat->Height(), winName, fullScreen ? m_monitor : nullptr, nullptr);
+    m_window = glfwCreateWindow(size.x, size.y, name.c_str(), fullScreen ? m_monitor : nullptr, nullptr);
 
     return m_window != nullptr;
 #endif
@@ -214,7 +209,6 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
     //    w = m_winFormat->Width();
     //    h = m_winFormat->Height();
     // } else
-    m_winFormat->SetFreeValue(w, h);
 
     if (Debug::GetLevel() >= Debug::Level::High) {
         SR_LOG("OpenGL::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
@@ -223,6 +217,7 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
 #ifdef  SR_OPENGL_USE_WINAPI
 
 #else
+    //m_winFormat->SetFreeValue(w, h);
     glfwSetWindowSize(m_window, w, h);
 #endif
 

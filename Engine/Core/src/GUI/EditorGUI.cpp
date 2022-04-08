@@ -2,7 +2,6 @@
 // Created by Nikita on 19.07.2021.
 //
 
-#include <Debug.h>
 #include <Xml.h>
 
 #include <GUI/EditorGUI.h>
@@ -15,6 +14,8 @@
 #include <GUI/EngineStatistics.h>
 #include <GUI/Hierarchy.h>
 #include <GUI/SceneViewer.h>
+#include <Window/Window.h>
+#include <ResourceManager/ResourceManager.h>
 
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;
@@ -163,15 +164,15 @@ void EditorGUI::Update() {
     GetWindow<SceneViewer>()->Update();
 }
 
-void EditorGUI::OnKeyDown(const KeyDownEvent &event) {
+void EditorGUI::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
     WidgetManager::OnKeyDown(event);
 }
 
-void EditorGUI::OnKeyPress(const KeyPressEvent &event) {
+void EditorGUI::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
     WidgetManager::OnKeyPress(event);
 }
 
-void EditorGUI::OnKeyUp(const KeyUpEvent &event) {
+void EditorGUI::OnKeyUp(const SR_UTILS_NS::KeyUpEvent &event) {
     WidgetManager::OnKeyUp(event);
 }
 

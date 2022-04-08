@@ -6,11 +6,11 @@
 #define GAMEENGINE_TEXTURE_H
 
 #include <ResourceManager/IResource.h>
-#include <Environment/Environment.h>
 #include <Environment/TextureHelper.h>
 #include <Memory/TextureConfigs.h>
 
-namespace Framework::Graphics{
+namespace Framework::Graphics {
+    class Environment;
     class TextureLoader;
     class Render;
 }

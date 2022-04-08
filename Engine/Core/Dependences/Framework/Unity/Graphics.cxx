@@ -46,16 +46,18 @@
 #include "../Graphics/src/Render/Render.cpp"
 #include "../Graphics/src/Render/Shader.cpp"
 #include "../Graphics/src/Render/ShaderGenerator.cpp"
+#include "../Graphics/src/Render/RenderManager.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../Graphics/src/Types/Geometry/IndexedMesh.cpp"
+#include "../Graphics/src/Types/Geometry/ProceduralMesh.cpp"
 #include "../Graphics/src/Types/Geometry/Mesh3D.cpp"
+
 #include "../Graphics/src/Types/EditorGrid.cpp"
 #include "../Graphics/src/Types/Material.cpp"
 #include "../Graphics/src/Types/Mesh.cpp"
 #include "../Graphics/src/Types/Skybox.cpp"
 #include "../Graphics/src/Types/Texture.cpp"
-#include "../Graphics/src/Types/WindowFormat.cpp"
 
 #include "../Graphics/src/Window/Window.cpp"
 

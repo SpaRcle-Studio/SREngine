@@ -5,8 +5,7 @@
 #ifndef GAMEENGINE_STRINGFORMAT_H
 #define GAMEENGINE_STRINGFORMAT_H
 
-#include <string>
-#include <cstdarg>
+#include <Debug.h>
 
 namespace Framework::Helper {
     template<typename T> std::string ToString(const T& value) {

@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_LIGHT_H
 #define GAMEENGINE_LIGHT_H
 
-#include <glm/glm.hpp>
+#include <Math/Vector3.h>
 
 namespace Framework::Graphics {
     class Render;

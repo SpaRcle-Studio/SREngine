@@ -24,7 +24,7 @@ include(Scripting.cmake)
 add_subdirectory(Depends/glfw)
 add_subdirectory(Depends/glew/build/cmake)
 
-add_subdirectory(Depends/pugixml)
+#add_subdirectory(Depends/pugixml)
 add_subdirectory(Depends/inc/glm)
 
 #add_subdirectory(Depends/bullet3)
@@ -32,6 +32,7 @@ add_subdirectory(Depends/EvoVulkan/Core)
 add_subdirectory(Depends/EvoScript/Core)
 add_subdirectory(Depends/FbxLoader)
 add_subdirectory(Depends/cmp_core)
+add_subdirectory(Depends/assimp)
 #add_subdirectory(Depends/tinyobjloader)
 
 #include(Depends/bullet3/UseBullet.cmake)
@@ -62,13 +63,13 @@ add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSIC
 if (CYGWIN)
     target_link_libraries(Framework
             opengl32 glfw glew TinyObjLoader
-            "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkanCore
-            EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
+            "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkanCore assimp
+            EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
 else()
     target_link_libraries(Framework
             opengl32 glfw glew #TinyObjLoader
-            ${Vulkan_LIBRARY} EvoVulkanCore
-            EvoScriptCore CMP_Core FbxLoader pugixml) #bullet3 imgui
+            ${Vulkan_LIBRARY} EvoVulkanCore assimp
+            EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
 endif()
 
 if(WIN32)

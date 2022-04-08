@@ -19,15 +19,7 @@ void FbxLoader::NodeAttribute::Load(std::ifstream &file) {
     type = Tools::LoadStr(file);
 }
 
-FbxLoader::NodeAttribute::NodeAttribute()
-    : id(0)
-{ }
-
-FbxLoader::Geometry::Geometry()
-    : id(0)
-{ }
-
-void FbxLoader::Geometry::Save(std::ofstream &file) const {
+void FbxLoader::RawGeometry::Save(std::ofstream &file) const {
     Tools::SaveValue(file, id);
     Tools::SaveString(file, name);
     Tools::SaveString(file, type);
@@ -36,7 +28,7 @@ void FbxLoader::Geometry::Save(std::ofstream &file) const {
     Tools::SaveVectorOfPairs(file, materials);
 }
 
-void FbxLoader::Geometry::Load(std::ifstream &file) {
+void FbxLoader::RawGeometry::Load(std::ifstream &file) {
     id = Tools::LoadValue<int64_t>(file);
     name = Tools::LoadStr(file);
     type = Tools::LoadStr(file);
@@ -45,7 +37,7 @@ void FbxLoader::Geometry::Load(std::ifstream &file) {
     materials = Tools::LoadVectorOfPairs<uint32_t, uint32_t>(file);
 }
 
-bool FbxLoader::Geometry::Valid() const {
+bool FbxLoader::RawGeometry::Valid() const {
     return !indices.empty() && !vertices.empty();
 }
 
@@ -57,7 +49,7 @@ void FbxLoader::Objects::Save(std::ofstream &file) const {
 
 void FbxLoader::Objects::Load(std::ifstream &file) {
     nodeAttributes = Tools::LoadComplexVector<NodeAttribute>(file);
-    geometries = Tools::LoadComplexVector<Geometry>(file);
+    geometries = Tools::LoadComplexVector<RawGeometry>(file);
 }
 
 void FbxLoader::Objects::Clear() {
@@ -80,12 +72,12 @@ void FbxLoader::Definitions::Clear() {
     version = 0;
 }
 
-void FbxLoader::Fbx::Save(std::ofstream &file) const {
+void FbxLoader::RawFbx::Save(std::ofstream &file) const {
     definitions.Save(file);
     objects.Save(file);
 }
 
-void FbxLoader::Fbx::Load(std::ifstream &file) {
+void FbxLoader::RawFbx::Load(std::ifstream &file) {
     definitions.Load(file);
     objects.Load(file);
 }
@@ -107,7 +99,7 @@ void FbxLoader::Connections::Clear() {
     modelToModel.clear();
 }
 
-void FbxLoader::Model::Save(std::ofstream &file) const {
+void FbxLoader::RawModel::Save(std::ofstream &file) const {
     Tools::SaveValue(file, id);
     Tools::SaveString(file, name);
     Tools::SaveString(file, type);
@@ -116,7 +108,7 @@ void FbxLoader::Model::Save(std::ofstream &file) const {
     Tools::SaveValue(file, Scale);
 }
 
-void FbxLoader::Model::Load(std::ifstream &file) {
+void FbxLoader::RawModel::Load(std::ifstream &file) {
     id = Tools::LoadValue<uint64_t>(file);
     name = Tools::LoadStr(file);
     type = Tools::LoadStr(file);
@@ -125,6 +117,6 @@ void FbxLoader::Model::Load(std::ifstream &file) {
     Scale = Tools::LoadValue<vec3>(file);
 }
 
-bool FbxLoader::Model::Valid() const {
+bool FbxLoader::RawModel::Valid() const {
     return id != 0;
 }

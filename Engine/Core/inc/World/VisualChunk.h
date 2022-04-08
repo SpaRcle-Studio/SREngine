@@ -12,12 +12,12 @@ namespace Framework::Graphics::Types {
     class DebugWireframeMesh;
 }
 
-namespace Framework::Helper::World {
+namespace SR_WORLD_NS {
     class Region;
 }
 
 namespace Framework::Core::World {
-    class VisualChunk : public Helper::World::Chunk {
+    class VisualChunk : public SR_WORLD_NS::Chunk {
     public:
         explicit VisualChunk(SRChunkAllocArgs);
         ~VisualChunk() override = default;
@@ -36,7 +36,7 @@ namespace Framework::Core::World {
         void OnExit() override;
         void OnEnter() override;
         bool Unload() override;
-        bool Load(const MarshalDecodeNode& node) override;
+        bool Load(SR_HTYPES_NS::Marshal&& marshal) override;
 
         void Update(float_t dt) override;
 

@@ -5,10 +5,9 @@
 #ifndef GAMEENGINE_LIST_H
 #define GAMEENGINE_LIST_H
 
-#include <vector>
-#include <mutex>
+#include <Debug.h>
 
-namespace Framework::Helper::Types {
+namespace SR_HTYPES_NS {
     template <typename T> class List {
     private:
         std::vector<T> self = std::vector<T>();

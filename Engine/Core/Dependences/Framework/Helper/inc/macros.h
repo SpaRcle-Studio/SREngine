@@ -49,6 +49,8 @@
         ptr = nullptr;          \
     }                           \
 
+#define VK_PROTOTYPES
+
 #define SR_FASTCALL_ATTRIBUTE __attribute__((fastcall))
 #define SR_FASTCALL __fastcall
 #define SR_CONSTEXPR constexpr
@@ -101,6 +103,8 @@
     #define SR_WIN32_BOOL true
     #define SR_WIN32
     #define WIN32_LEAN_AND_MEAN /// Исключите редко используемые компоненты из заголовков Windows
+    #define GLFW_EXPOSE_NATIVE_WIN32
+    #define VK_USE_PLATFORM_WIN32_KHR
 #else
     #define SR_WIN32_BOOL false
 #endif

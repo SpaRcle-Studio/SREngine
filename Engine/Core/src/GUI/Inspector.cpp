@@ -37,15 +37,15 @@ namespace Framework::Core::GUI {
             m_gameObject.Replace(*selected.begin());
         }
         else
-            m_gameObject.Replace(GameObject::Ptr());
+            m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
     }
 
     void Inspector::DrawComponents() {
         if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
             if (ImGui::BeginMenu("Add component")) {
-                for (const auto& [name, id] : ComponentManager::Instance().GetComponentsNames()) {
+                for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                     if (ImGui::MenuItem(name.c_str())) {
-                        m_gameObject->AddComponent(ComponentManager::Instance().CreateComponentOfName(name));
+                        m_gameObject->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
                         break;
                     }
                 }
@@ -54,7 +54,7 @@ namespace Framework::Core::GUI {
             ImGui::EndPopup();
         }
 
-        m_gameObject->ForEachComponent([this](Component* component) -> bool {
+        m_gameObject->ForEachComponent([this](SR_UTILS_NS::Component* component) -> bool {
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(component->GetComponentName().c_str())) {

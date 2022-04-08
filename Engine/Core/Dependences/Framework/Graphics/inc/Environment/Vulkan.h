@@ -5,22 +5,14 @@
 #ifndef GAMEENGINE_VULKAN_H
 #define GAMEENGINE_VULKAN_H
 
-#define VK_PROTOTYPES
-
-#include <macros.h>
+#include <Debug.h>
 
 #ifdef SR_WIN32
-    #define GLFW_EXPOSE_NATIVE_WIN32
-    #define VK_USE_PLATFORM_WIN32_KHR
     #include <vulkan/vulkan.h>
     #include <Environment/Win32Window.h>
 #endif
 
 #include <Environment/Environment.h>
-
-#include <glm/glm.hpp>
-#include <glm\gtc\type_ptr.hpp>
-#include <Debug.h>
 
 #include <ResourceManager/ResourceManager.h>
 #include <FileSystem/FileSystem.h>
@@ -214,7 +206,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
 
-        bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) override;
+        bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }

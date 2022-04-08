@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_SREVOSCRIPT_H
 #define GAMEENGINE_SREVOSCRIPT_H
 
-#include "Base/Script.h"
+#include <Base/Script.h>
 
 #include <ResourceManager/ResourceManager.h>
 #include <EvoScript/Script.h>

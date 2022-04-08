@@ -5,37 +5,7 @@
 #ifndef HELPER_DEBUG_H
 #define HELPER_DEBUG_H
 
-#include <macros.h>
-
-#include <unordered_set>
-#include <stack>
-#include <cctype>
-#include <locale>
-#include <cstring>
-#include <variant>
-#include <optional>
-#include <fstream>
-#include <vector>
-#include <ostream>
-#include <queue>
-#include <mutex>
-#include <string>
-#include <cassert>
-#include <cmath>
-#include <atomic>
-#include <utility>
-#include <array>
-#include <map>
-#include <functional>
-#include <set>
-#include <exception>
-#include <unordered_map>
-#include <algorithm>
-#include <any>
-#include <thread>
-#include <cstdlib>
-#include <sstream>
-#include <list>
+#include <stdInclude.h>
 
 namespace SR_UTILS_NS {
     /// TODO: TO REFACTORING

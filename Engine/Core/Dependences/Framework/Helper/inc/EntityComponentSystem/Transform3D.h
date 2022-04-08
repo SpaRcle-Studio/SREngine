@@ -28,8 +28,11 @@ namespace SR_UTILS_NS {
 
     public:
         void Translate(Math::FVector3 translation);
+        void Translate(Math::Unit x, Math::Unit y, Math::Unit z);
         void Rotate(Math::FVector3 eulers);
         void Rotate(Math::Unit x, Math::Unit y, Math::Unit z);
+        void Scale(Math::FVector3 scale);
+        void Scale(Math::Unit x, Math::Unit y, Math::Unit z);
 
         void GlobalTranslate(Math::FVector3 translation);
         void GlobalRotate(Math::FVector3 eulers);
@@ -59,8 +62,8 @@ namespace SR_UTILS_NS {
         void SetSkew(Math::FVector3 skew);
         void SetSkew(Math::Unit x, Math::Unit y, Math::Unit z);
 
-        SR_NODISCARD MarshalEncodeNode Save(SavableFlags flags) const override;
-        static Transform3D* Load(const MarshalDecodeNode& node);
+        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
+        static Transform3D* Load(SR_HTYPES_NS::Marshal& marshal);
 
     private:
         void SetGameObject(GameObject* gameObject);

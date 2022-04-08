@@ -5,16 +5,16 @@
 #ifndef GAMEENGINE_VULKANMEMORY_H
 #define GAMEENGINE_VULKANMEMORY_H
 
+#include <Utils/NonCopyable.h>
+
 #include <EvoVulkan/Types/VulkanBuffer.h>
 #include <EvoVulkan/Complexes/Framebuffer.h>
 #include <EvoVulkan/VulkanKernel.h>
-#include <Debug.h>
 #include <EvoVulkan/Complexes/Shader.h>
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
 #include <Environment/TextureHelper.h>
 #include <Environment/Vulkan/DynamicTextureDescriptorSet.h>
-#include <Utils/NonCopyable.h>
 
 #define ZERO_VULKAN_MEMORY_MANAGER(type, count, array) { \
     array = (type*)malloc(sizeof(type) * count);         \

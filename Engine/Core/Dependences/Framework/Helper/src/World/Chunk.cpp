@@ -91,10 +91,18 @@ bool Chunk::ApplyOffset() {
     return true;
 }
 
-bool Chunk::Load(const MarshalDecodeNode& node) {
-    for (const auto& gameObjectNode : node.GetNodes()) {
-        auto&& ptr = m_observer->m_scene->Instance(gameObjectNode);
-        ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+bool Chunk::Load(SR_HTYPES_NS::Marshal&& marshal) {
+    if (marshal.Valid()) {
+        if (m_position != marshal.Read<Math::IVector3>()) {
+            SRAssert2(false, "Something went wrong...");
+            return false;
+        }
+
+        const uint64_t count = marshal.Read<uint64_t>();
+        for (uint64_t i = 0; i < count; ++i) {
+            if (auto &&ptr = m_observer->m_scene->Instance(marshal))
+                ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+        }
     }
 
     m_loadState = LoadState::Loaded;
@@ -107,23 +115,33 @@ void Chunk::Reload() {
 
 }
 
-MarshalEncodeNode Chunk::Save() const {
-    /// scene already locked
-    const auto& container = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
-    if (container.empty())
-        return MarshalEncodeNode();
+SR_HTYPES_NS::Marshal Chunk::Save() const {
+    /// scene is locked
 
-    MarshalEncodeNode marshal("Chunk");
-    marshal.Append(m_position);
-
-    for (const auto& gameObject : container) {
+    std::list<SR_HTYPES_NS::Marshal> gameObjects;
+    for (const auto& gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
         if (gameObject.LockIfValid()) {
             /// сохраняем объект относительно начала координат чанка
             gameObject->GetTransform()->GlobalTranslate(-GetWorldPosition());
-            marshal.Append(gameObject->Save(SAVABLE_FLAG_ECS_NO_ID));
+
+            if (auto&& gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
+                gameObjects.emplace_back(std::move(gameObjectMarshal));
+            }
+
             gameObject.Unlock();
         }
     }
+
+    SR_HTYPES_NS::Marshal marshal;
+
+    if (gameObjects.empty())
+        return marshal;
+
+    marshal.Write(m_position);
+    marshal.Write(static_cast<uint64_t>(gameObjects.size()));
+
+    for (auto&& gameObject : gameObjects)
+        marshal.Append(std::move(gameObject));
 
     return marshal;
 }

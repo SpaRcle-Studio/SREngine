@@ -3,11 +3,6 @@
 //
 
 #include <Types/Geometry/Mesh3D.h>
-#include <Types/Uniforms.h>
-
-#define ConfigureShader(shader) \
-            shader->SetMat4("modelMat", m_modelMat); \
-            shader->SetVec3("color", m_material->m_color.ToGLM()); \
 
 bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     const std::lock_guard<std::recursive_mutex> lock(m_mutex);
@@ -63,21 +58,6 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     return IndexedMesh::FreeVideoMemory();
 }
 
-/*void Framework::Graphics::Types::Mesh3D::SetVertexArray(const std::any& vertices) {
-    try {
-        auto mesh3DVertices = std::any_cast<Vertices::Mesh3DVertices>(vertices);
-
-        m_countVertices = mesh3DVertices.size();
-        m_vertices      = mesh3DVertices;
-        m_isCalculated  = false;
-
-        SRAssert(!m_vertices.empty());
-    }
-    catch (const std::bad_any_cast& e) {
-        SR_ERROR("Mesh3D::SetVertexArray() : failed to cast any to vertices! \n\tMessage: " + std::string(e.what()));
-    }
-}*/
-
 void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
     if (!IsReady() || IsDestroyed())
         return;
@@ -99,9 +79,11 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
             return;
         }
 
+        const auto&& shader = m_material->GetShader();
+
         m_env->UpdateDescriptorSets(m_descriptorSet, {
-                { DescriptorType::Uniform, { 0, m_UBO               } },
-                { DescriptorType::Uniform, { 1, m_shader->GetUBO(0) } },
+                { DescriptorType::Uniform, { 0, m_UBO             } },
+                { DescriptorType::Uniform, { 1, shader->GetUBO(0) } },
         });
 
         UpdateUBO();
@@ -118,82 +100,64 @@ void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
     if (IsDestroyed() || (!m_isCalculated && !Calculate()))
         return;
 
-    ConfigureShader(m_shader)
+    //ConfigureShader(m_shader)
     m_material->UseOpenGL();
     m_env->DrawTriangles(m_countVertices);
 }
 
 void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
     if (m_UBO >= 0 && m_material) {
-        Mesh3dUBO ubo = { m_modelMat, m_material->m_color.ToGLM() };
+        Mesh3dUBO ubo = { m_modelMat, m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM() };
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
     }
 }
 
-MarshalEncodeNode Mesh3D::Save(SavableFlags flags) const {
-    MarshalEncodeNode marshal("Mesh3D");
+SR_HTYPES_NS::Marshal Mesh3D::Save(SavableFlags flags) const {
+    SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
 
-    marshal.AppendDef("Enabled", IsEnabled(), true);
+    marshal.Write(IsEnabled());
+    marshal.Write(static_cast<int32_t>(m_type));
 
-    if (!(flags & SAVABLE_FLAG_ECS_NO_ID)) {
-        marshal.Append("EntityId", static_cast<uint64_t>(GetEntityId()));
-    }
+    marshal.Write(GetPath());
+    marshal.Write(m_meshId);
+    marshal.Write(IsInverse());
 
-    marshal.AppendDef("Type", static_cast<int32_t>(m_type), static_cast<int32_t>(MeshType::Static));
-
-    marshal.Append("Path", GetPath());
-    marshal.Append("Id", m_meshId);
-    marshal.AppendDef("Inverse", IsInverse(), false);
-
-    if (m_shader)
-        marshal.Append(MarshalEncodeNode("Shader").Append("Name", m_shader->GetName()));
-
-    if (m_material)
-        marshal.Append(MarshalEncodeNode("Material").Append("Name", m_material->GetResourceId()));
+    marshal.Write(m_material ? m_material->GetResourceId() : "None");
 
     return marshal;
 }
 
-Component *Mesh3D::LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage *dataStorage) {
-    const MeshType type = static_cast<MeshType>(node.GetAttributeDef<int32_t>("Type", static_cast<int32_t>(MeshType::Static)));
-    const auto&& path = node.GetAttribute<std::string>("Path");
-    const auto&& id = node.GetAttribute<uint32_t>("Id");
+Component *Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    const auto &&enabled = marshal.Read<bool>();
+    const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
 
-    Render* render = dataStorage->GetPointer<Render>("Render");
+    const auto &&path = marshal.Read<std::string>();
+    const auto &&id = marshal.Read<uint32_t>();
+    const auto &&inverse = marshal.Read<bool>();
+
+    const auto &&material = marshal.Read<std::string>();
+
+    Render *render = dataStorage->GetPointer<Render>("Render");
 
     if (!render) {
         SRAssert(false);
         return nullptr;
     }
 
-    auto&& mesh = Load(path, type, id);
+    auto &&pMesh = Load(path, type, id);
 
-    if (mesh) {
-        if (const auto& shaderNode = node.TryGetNode("Shader"); shaderNode.Valid()) {
-            const std::string& shaderName = shaderNode.GetAttribute<std::string>("Name");
-
-            if (Shader* pShader = Shader::Load(render, shaderName)) {
-                mesh->SetShader(pShader);
+    if (pMesh) {
+        if (material != "None") {
+            if (Material *pMaterial = Material::Load(material)) {
+                pMesh->SetMaterial(pMaterial);
             }
-            else {
-                SR_ERROR("Mesh3D::LoadComponent() : failed to load shader! Name: " + shaderName);
-            }
+            else
+                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
         }
 
-        render->RegisterMesh(mesh);
-        /// mesh->WaitCalculate();
-
-        if (const auto& materialNode = node.TryGetNode("Material"); materialNode.Valid()) {
-            const std::string& materialName = materialNode.GetAttribute<std::string>("Name");
-
-            if (Material* pMaterial = Material::Load(materialName)) {
-                mesh->SetMaterial(pMaterial);
-            }
-            else {
-                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + materialName);
-            }
-        }
+        render->RegisterMesh(pMesh);
+        /// TODO: mesh->WaitCalculate();
     }
 
-    return mesh;
+    return pMesh;
 }

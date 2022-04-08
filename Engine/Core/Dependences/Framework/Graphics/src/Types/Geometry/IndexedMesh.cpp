@@ -65,8 +65,8 @@ namespace Framework::Graphics::Types {
     }
 
     void IndexedMesh::SetRawMesh(Helper::Types::RawMesh *raw)  {
-        m_countIndices = raw->GetIndices(m_meshId).size();
-        m_countVertices = raw->GetVertices(m_meshId).size();
+        m_countIndices = raw->GetIndicesCount(m_meshId);
+        m_countVertices = raw->GetVerticesCount(m_meshId);
         Mesh::SetRawMesh(raw);
     }
 }

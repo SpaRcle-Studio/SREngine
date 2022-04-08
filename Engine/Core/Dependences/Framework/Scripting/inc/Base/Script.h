@@ -5,10 +5,6 @@
 #ifndef GAMEENGINE_SCRIPT_H
 #define GAMEENGINE_SCRIPT_H
 
-#include <string>
-#include <ctime>
-#include <ratio>
-#include <chrono>
 #include <Debug.h>
 
 namespace Framework::Scripting {

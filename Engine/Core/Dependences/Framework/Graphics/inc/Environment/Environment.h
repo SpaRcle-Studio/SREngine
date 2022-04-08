@@ -7,9 +7,6 @@
 
 #include <GUI.h>
 
-#include <Types/WindowFormat.h>
-
-#include <glm/glm.hpp>
 #include <Environment/TextureHelper.h>
 #include <Environment/Basic/BasicWindow.h>
 #include <Environment/Basic/IShaderProgram.h>
@@ -38,7 +35,6 @@ namespace SR_GRAPH_NS {
         Environment(Environment&) = delete;
     protected:
         inline static std::vector<std::function<void(double x, double y)>> g_scrollEvents = std::vector<std::function<void(double x, double y)>>();
-        Types::WindowFormat* m_winFormat = nullptr;
         static inline std::mutex g_mutex = std::mutex();
 
         GUIContext        m_guiContext            = nullptr;
@@ -82,13 +78,10 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                 }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;     }
         [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;       }
-        [[nodiscard]] Types::WindowFormat* GetWindowFormat()               const { return this->m_winFormat; }
         [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;     }
         [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;             }
         [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;             }
         [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown; }
-
-        bool InitWindowFormat(const Types::WindowFormat& windowFormat);
 
         SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -138,7 +131,7 @@ namespace SR_GRAPH_NS {
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
+        virtual bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
         virtual void SetWindowIcon(const char* path) {  }
 
         virtual bool PreInit(

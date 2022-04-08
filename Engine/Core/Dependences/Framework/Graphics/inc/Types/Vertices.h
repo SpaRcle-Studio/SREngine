@@ -5,13 +5,12 @@
 #ifndef GAMEENGINE_VERTICES_H
 #define GAMEENGINE_VERTICES_H
 
-#include <Debug.h>
-#include <Math/Vector3.h>
 #include <Utils/Enumerations.h>
+#include <Math/Vector3.h>
 #include <Utils/StringFormat.h>
-#include <FbxLoader/Mesh.h>
+#include <Utils/Vertices.hpp>
 
-namespace Framework::Graphics::Vertices {
+namespace SR_GRAPH_NS::Vertices {
     enum class Attribute {
         Unknown            = 0,
 
@@ -158,13 +157,15 @@ namespace Framework::Graphics::Vertices {
         return info;
     }
 
-    template<typename T> static std::vector<T> CastVertices(const std::vector<FbxLoader::Vertex>& raw) {
+    template<typename T> static std::vector<T> CastVertices(const std::vector<SR_UTILS_NS::Vertex>& raw) {
         auto vertices = std::vector<T>();
+
+        vertices.reserve(raw.size());
 
         if constexpr (std::is_same<Vertices::SkyboxVertex, T>::value) {
             for (const auto& vertex : raw) {
                 vertices.emplace_back(Vertices::SkyboxVertex{
-                        .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
+                        .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                 });
             }
         }
@@ -172,8 +173,8 @@ namespace Framework::Graphics::Vertices {
         if constexpr (std::is_same<Vertices::Mesh3DVertex, T>::value) {
             for (const auto& vertex : raw) {
                 vertices.emplace_back(Vertices::Mesh3DVertex{
-                        .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
-                        .uv  = { vertex.uv.x, vertex.uv.y },
+                        .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
+                        .uv  = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
                 });
             }
         }

@@ -5,23 +5,14 @@
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
 
-#include <GUI.h>
 #include <Environment/Environment.h>
-
-#define GLFW_EXPOSE_NATIVE_WIN32
 
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
-#include <glm/glm.hpp>
-#include <glm\gtc\type_ptr.hpp>
-#include <Debug.h>
-
 #ifdef WIN32
-#include <wingdi.h>
+    #include <wingdi.h>
 #endif
-
-//#define SR_OPENGL_USE_WINAPI
 
 namespace Framework::Graphics {
     class OpenGL : public Environment {
@@ -55,7 +46,7 @@ namespace Framework::Graphics {
 
         // ============================= [ WINDOW METHODS ] =============================
 
-        bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) override;
+        bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
 
         bool PreInit(
                 uint32_t smooth_samples,
@@ -95,10 +86,10 @@ namespace Framework::Graphics {
         void SetDepthTestEnabled(bool value) override;
 
         [[nodiscard]] glm::vec2 GetWindowSize() const override {
+            return { m_basicWindow->GetWidth(), m_basicWindow->GetHeight() };
 #ifdef  SR_OPENGL_USE_WINAPI
-            return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };
 #else
-            return { this->m_winFormat->Width(), this->m_winFormat->Height() };
+            //return { this->m_winFormat->Width(), this->m_winFormat->Height() };
 #endif
         }
 

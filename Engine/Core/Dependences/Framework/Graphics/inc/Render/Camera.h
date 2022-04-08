@@ -8,40 +8,23 @@
 #include <Render/Shader.h>
 #include <EntityComponentSystem/Component.h>
 #include <Render/PostProcessing.h>
-#include <Debug.h>
-#include <functional>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <Math/Vector3.h>
 #include <Math/Matrix4x4.h>
 #include <Types/Uniforms.h>
 #include <Events/EventManager.h>
 
-using namespace Framework::Helper;
-
-namespace Framework {
-    class API;
-};
-
 namespace Framework::Graphics {
     class Window;
 
-    /// TO_REFACTORING
-    class Camera : public Component {
-        friend class ::Framework::API;
+    /// TODO: TO_REFACTORING
+    class Camera : public SR_UTILS_NS::Component {
     private:
-        Camera()
-            : m_env(Environment::Get())
-            , m_pipeline(Environment::Get()->GetPipeLine())
-        {
-            Component::Init<Camera>();
-        }
-
+        Camera();
         ~Camera() override = default;
 
     public:
         static Camera* Allocate(uint32_t width = 0, uint32_t height = 0);
-        static Component* LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
+        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 
@@ -51,8 +34,8 @@ namespace Framework::Graphics {
         /// \warning Call only from window class!
         bool Free();
 
-        void OnRotate(const Math::FVector3& newValue) override;
-        void OnMove(const Math::FVector3& newValue) override;
+        void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
+        void OnMove(const SR_MATH_NS::FVector3& newValue) override;
         void OnReady(bool ready) override;
 
     public:
@@ -63,7 +46,7 @@ namespace Framework::Graphics {
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView()       const { return m_viewMat;                   }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;       }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                }
-        SR_NODISCARD SR_FORCE_INLINE Math::IVector2 GetSize()   const { return m_cameraSize;               }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize()   const { return m_cameraSize;               }
         SR_NODISCARD SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;  }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();          }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                }
@@ -82,7 +65,7 @@ namespace Framework::Graphics {
          \warning Call after shader use, and before draw. */
         template <typename T> void UpdateShader(Shader* shader) noexcept {
             if (!m_isCreate) {
-                Helper::Debug::Warn("Camera::UpdateShader() : camera is not create! Something went wrong...");
+                SR_WARN("Camera::UpdateShader() : camera is not create! Something went wrong...");
                 return;
             }
 
@@ -91,8 +74,7 @@ namespace Framework::Graphics {
 
             if (m_needUpdate) {
                 if (!CompleteResize()) {
-                    Helper::Debug::Error("Camera::UpdateShader() : failed to complete resize! Push exit event...");
-                    Helper::EventManager::Push(EventManager::Event::Fatal);
+                    SR_ERROR("Camera::UpdateShader() : failed to complete resize!");
                     return;
                 }
             }
@@ -158,8 +140,8 @@ namespace Framework::Graphics {
         // 1 - current, 2 - new
         std::pair<bool, bool> m_isEnableDirectOut = { false, false };
 
-        Math::FVector3	      m_position          = { 0, 0, 0 };
-        Math::IVector2        m_cameraSize        = { 0, 0 };
+        SR_MATH_NS::FVector3  m_position          = { 0, 0, 0 };
+        SR_MATH_NS::IVector2  m_cameraSize        = { 0, 0 };
     };
 }
 

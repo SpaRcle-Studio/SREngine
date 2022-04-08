@@ -7,10 +7,8 @@
 
 #include <Environment/Basic/BasicWindow.h>
 
-#include <iostream>
 #include <Windows.h>
 #include <Utils/StringUtils.h>
-#include <Utils/WindowsUtils.h>
 
 #include <Events/EventManager.h>
 #include <Math/Mathematics.h>

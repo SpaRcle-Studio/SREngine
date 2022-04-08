@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <Material>
+    <Shader path="debugWireframe"/>
     <Color r="0" g="255" b="0" a="255"/>
 </Material>

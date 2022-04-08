@@ -3,16 +3,8 @@
 //
 
 #include <Render/Render.h>
-#include <Render/Camera.h>
-#include <Lighting/Light.h>
 #include <Types/Skybox.h>
 #include <Types/Material.h>
-#include <Window/Window.h>
-
-#include <Render/Implementations/VulkanRender.h>
-#include <Render/Implementations/OpenGLRender.h>
-
-#include <Render/ShaderGenerator.h>
 
 Framework::Graphics::Render::Render(std::string name)
     : m_env(Environment::Get())
@@ -136,7 +128,7 @@ void Framework::Graphics::Render::RegisterMesh(Framework::Graphics::Types::Mesh 
     SRAssert(mesh->GetMaterial());
 
     if (!mesh->GetShader()) {
-        SR_ERROR("Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
+        SRAssert2(false, "Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
         return;
     }
 
@@ -276,16 +268,6 @@ bool Framework::Graphics::Render::FreeSkyboxMemory(Skybox* skybox) {
     m_skyboxesToFreeVidMem.emplace_back(skybox);
 
     return true;
-}
-
-Framework::Graphics::Render *Framework::Graphics::Render::Allocate(std::string name) {
-    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL)
-        return static_cast<Render *>(new Impl::OpenGLRender(std::move(name)));
-    else if (Environment::Get()->GetPipeLine() == PipeLine::Vulkan) {
-        return static_cast<Render *>(new Impl::VulkanRender(std::move(name)));
-    }
-    else
-        return nullptr;
 }
 
 void Framework::Graphics::Render::SetCurrentCamera(Framework::Graphics::Camera *camera) noexcept  {

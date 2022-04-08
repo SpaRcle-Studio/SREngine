@@ -7,10 +7,6 @@
 
 #include <Utils/Singleton.h>
 
-#include <unordered_map>
-#include <string>
-#include <mutex>
-
 namespace Framework::Helper {
     class Features;
 

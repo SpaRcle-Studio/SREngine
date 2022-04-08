@@ -7,10 +7,6 @@
 
 #include <Base/Script.h>
 
-#include <vector>
-#include <set>
-#include <mutex>
-
 namespace Framework::Scripting {
     class Compiler {
     protected:

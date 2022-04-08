@@ -5,8 +5,7 @@
 #ifndef GAMEENGINE_CMDOPTIONS_H
 #define GAMEENGINE_CMDOPTIONS_H
 
-#include <algorithm>
-#include <string>
+#include <Debug.h>
 
 namespace Framework::Helper {
     std::string GetCmdOption(char **begin, char **end, const std::string &option) {

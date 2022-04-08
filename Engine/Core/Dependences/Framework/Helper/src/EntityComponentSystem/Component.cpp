@@ -2,12 +2,20 @@
 // Created by Nikita on 27.11.2020.
 //
 
-#include "EntityComponentSystem/Component.h"
+#include <EntityComponentSystem/Component.h>
 #include <EntityComponentSystem/GameObject.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     void Framework::Helper::Component::OnAttachComponent() {
         ComponentManager::Instance().DoEvent(this, m_componentId);
+    }
+
+    SR_HTYPES_NS::Marshal Component::Save(SavableFlags flags) const {
+        auto marshal = Entity::Save(flags);
+
+        marshal.Write(m_name);
+
+        return marshal;
     }
 
     bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const std::function<Component *(void)> &constructor) {
@@ -24,7 +32,7 @@ namespace Framework::Helper {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         if (m_ids.count(name) == 0) {
-            Helper::Debug::Error("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
+            SR_ERROR("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
             return nullptr;
         }
 
@@ -33,22 +41,26 @@ namespace Framework::Helper {
 
     Component *Helper::ComponentManager::CreateComponentImpl(size_t id) {
         if (m_creators.count(id) == 0) {
-            Helper::Debug::Error("ComponentManager::CreateComponentImpl() : component if \"" + std::to_string(id) + "\" not found!");
+            SR_ERROR("ComponentManager::CreateComponentImpl() : component \"" + std::to_string(id) + "\" not found!");
             return nullptr;
         }
 
         return m_creators.at(id)();
     }
 
-    Component *ComponentManager::Load(const MarshalDecodeNode& node) {
-        const auto&& name = node.Name();
+    Component *ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (m_ids.count(name) == 0) {
-            SR_ERROR("ComponentManager::Load() : component \"" + name + "\" not found!");
+        m_lastComponent = marshal.Read<std::string>();
+
+        auto&& uidIt = m_ids.find(m_lastComponent);
+
+        if (uidIt == std::end(m_ids)) {
+            SRAssert2(false, "Component \"" + m_lastComponent + "\" not found!");
             return nullptr;
         }
 
-        return m_loaders.at(m_ids.at(name))(node, &m_context);
+        return m_loaders.at(uidIt->second)(marshal, &m_context);
     }
 }
 

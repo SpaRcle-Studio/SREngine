@@ -2,13 +2,13 @@
 // Created by Nikita on 17.11.2020.
 //
 
+#include <Types/Texture.h>
+
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/StringUtils.h>
-#include "Types/Texture.h"
-#include <map>
 #include <Loaders/TextureLoader.h>
-#include <Debug.h>
 #include <Render/Render.h>
+#include <Environment/Environment.h>
 
 Framework::Graphics::Types::Texture::Texture()
     : IResource(typeid(Texture).name())

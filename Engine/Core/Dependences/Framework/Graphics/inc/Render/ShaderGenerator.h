@@ -6,9 +6,6 @@
 #define GAMEENGINE_SHADERGENERATOR_H
 
 #include <Render/Shader.h>
-#include <Utils/str_switch.h>
-#include <optional>
-#include <string>
 
 namespace Framework::Graphics::Codegen {
     struct ShaderStruct {

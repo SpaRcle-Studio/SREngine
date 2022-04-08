@@ -8,6 +8,7 @@
 using namespace Framework::Helper::World;
 
 Region::Allocator Region::g_allocator = Region::Allocator();
+const uint16_t Region::VERSION = 1000;
 
 void Region::Update(float_t dt) {
     for (auto&& pIt = m_loadedChunks.begin(); pIt != m_loadedChunks.end(); ) {
@@ -46,11 +47,11 @@ Chunk* Region::GetChunk(const Framework::Helper::Math::IVector3 &position) {
 
     if (pChunk && pChunk->GetState() == Chunk::LoadState::Unload) {
         if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
-            pChunk->Load(pCacheIt->second.Decode());
+            pChunk->Load(std::move(pCacheIt->second));
             m_cached.erase(pCacheIt);
         }
         else {
-            pChunk->Load(MarshalDecodeNode());
+            pChunk->Load(SR_HTYPES_NS::Marshal());
         }
     }
 
@@ -71,7 +72,7 @@ bool Region::Unload(bool force) {
 
     for (auto&& [position, pChunk] : m_loadedChunks) {
         if (!force) {
-            if (auto &&marshal = pChunk->Save(); marshal.Valid()) {
+            if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
                 m_cached[position] = std::move(marshal);
             }
         }
@@ -139,45 +140,64 @@ void Region::Reload() {
         pChunk->Reload();
 }
 
-MarshalEncodeNode Region::Save() const {
-    MarshalEncodeNode marshal("Region");
-    marshal.Append(m_position);
+SR_HTYPES_NS::Marshal Region::Save() const {
+    SR_HTYPES_NS::Marshal marshal;
 
-    bool hasValid = !m_cached.empty();
+    std::list<SR_HTYPES_NS::Marshal> available;
 
     for (const auto& [position, pChunk] : m_loadedChunks) {
-        if (const auto&& chunkMarshal = pChunk->Save(); chunkMarshal.Valid()) {
-            hasValid = true;
-            marshal.Append(chunkMarshal);
+        if (auto&& chunkMarshal = pChunk->Save(); chunkMarshal.Valid()) {
+            SRAssert(chunkMarshal.BytesCount() > 0);
+            available.emplace_back(std::move(chunkMarshal));
         }
     }
 
     for (const auto& [position, cache] : m_cached) {
-        if (cache.Valid()) {
-            marshal.Append(cache);
-        }
-        else {
-            SRAssert2(false, "invalid cache!");
-        }
+        SRAssert(cache.Valid());
+        SRAssert(cache.BytesCount() > 0);
+        available.emplace_back(std::move(cache.Copy()));
     }
 
-    if (hasValid) {
+    const uint64_t chunkCount = available.size();
+    if (chunkCount == 0)
         return marshal;
+
+    marshal.Write(VERSION);
+    marshal.Write(chunkCount);
+
+    for (auto&& chunk : available) {
+        SRAssert(chunk.BytesCount() > 0);
+        marshal.Write(chunk.BytesCount());
+        marshal.Append(std::move(chunk));
     }
-    else
-        return MarshalEncodeNode();
+
+    return marshal;
 }
 
 bool Region::Load() {
-    SR_LOG("Scene::Update() : loading region at " + m_position.ToString());
+    SR_LOG("Region::Load() : loading region at " + m_position.ToString());
 
     const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
     if (path.Exists()) {
-        auto&& decoded = MarshalDecodeNode::Load(path);
-        for (const auto& chunk : decoded.GetNodes()) {
-            const auto&& position = chunk.GetAttribute<Math::IVector3>();
-            if (auto&& cache = chunk.Encode(); cache.Valid()) {
-                m_cached[position] = std::move(cache);
+        auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);
+
+        if (marshal.Read<uint16_t>() != VERSION) {
+            SR_ERROR("Region::Load() : version is different!");
+            return false;
+        }
+
+        const uint64_t count = marshal.Read<uint64_t>();
+
+        for (uint64_t i = 0; i < count; ++i) {
+            const uint64_t size = marshal.Read<uint64_t>();
+
+            SRAssert(size != 0);
+
+            SR_HTYPES_NS::Marshal chunk = marshal.ReadBytes(size);
+
+            auto&& position = chunk.View<Math::IVector3>(0);
+            if (chunk.Valid()) {
+                m_cached[position] = std::move(chunk);
             }
             else {
                 SRAssert2(false, "invalid cache!");

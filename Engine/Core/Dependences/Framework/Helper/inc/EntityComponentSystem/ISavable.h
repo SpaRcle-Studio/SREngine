@@ -5,14 +5,10 @@
 #ifndef GAMEENGINE_ISAVABLE_H
 #define GAMEENGINE_ISAVABLE_H
 
-#include <string>
-#include <cctype>
-#include <mutex>
-
-#include <Xml.h>
 #include <Types/Marshal.h>
+#include <Xml.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     typedef uint64_t SavableFlags;
 
     enum SavableFlagBits {
@@ -32,8 +28,8 @@ namespace Framework::Helper {
         bool m_isLoaded   = false;
 
     public:
-        [[nodiscard]] virtual MarshalEncodeNode Save(SavableFlags flags) const {
-            return MarshalEncodeNode();
+        SR_NODISCARD virtual SR_HTYPES_NS::Marshal Save(SavableFlags flags) const {
+            return SR_HTYPES_NS::Marshal();
         }
 
     };

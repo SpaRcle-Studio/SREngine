@@ -15,7 +15,7 @@ namespace Framework::Physics::Types {
         ~Rigidbody() override = default;
 
     public:
-        static Helper::Component* LoadComponent(const Helper::MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
+        static Helper::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 

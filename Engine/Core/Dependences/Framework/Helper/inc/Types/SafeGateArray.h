@@ -5,8 +5,7 @@
 #ifndef SRENGINE_SAFEGATEARRAY_H
 #define SRENGINE_SAFEGATEARRAY_H
 
-#include <unordered_set>
-#include <mutex>
+#include <Debug.h>
 
 namespace Framework::Helper::Types {
     template<typename T> class SafeGateArray {

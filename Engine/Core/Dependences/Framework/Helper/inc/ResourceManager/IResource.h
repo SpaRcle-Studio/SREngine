@@ -7,7 +7,7 @@
 
 #include <Debug.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class ResourceManager;
 
     class IResource {
@@ -69,6 +69,7 @@ namespace Framework::Helper {
         /** Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy();
         bool ForceDestroy();
+        bool Kill();
         void SetReadOnly(bool value) { m_readOnly = value; }
         void SetId(const std::string& id, bool autoRegister = true);
         void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }

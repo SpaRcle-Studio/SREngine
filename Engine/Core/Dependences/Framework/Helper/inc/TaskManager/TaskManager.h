@@ -9,11 +9,6 @@
 #include <Utils/NonCopyable.h>
 #include <Types/Thread.h>
 
-#include <list>
-#include <set>
-#include <map>
-#include <mutex>
-
 namespace SR_UTILS_NS {
     class Task : public NonCopyable {
     public:

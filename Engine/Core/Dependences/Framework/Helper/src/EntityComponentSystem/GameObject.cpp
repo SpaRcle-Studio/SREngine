@@ -7,14 +7,14 @@
 #include <EntityComponentSystem/Component.h>
 #include <World/Scene.h>
 
-#include <glm/gtx/string_cast.hpp>
-
 #include <Math/Vector3.h>
 #include <Math/Quaternion.h>
 #include <Math/Matrix4x4.h>
 #include <Math/Mathematics.h>
 
 namespace SR_UTILS_NS {
+    const uint16_t GameObject::VERSION = 1000;
+
     GameObject::GameObject(const Types::SafePtr<World::Scene> &scene, std::string name, std::string tag)
             : Types::SafePtr<GameObject>(this)
     {
@@ -317,49 +317,37 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::RemoveComponent(Component *component) {
-        for (auto it = m_components.begin(); it != m_components.end(); it++)
+        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
             if (*it == component) {
                 component->OnRemoveComponent();
                 m_components.erase(it);
                 return true;
             }
+        }
 
-        Helper::Debug::Error(
-                "GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+        SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
 
         return false;
     }
 
-    MarshalEncodeNode GameObject::Save(SavableFlags flags) const {
-        MarshalEncodeNode marshal("GameObject");
+    SR_HTYPES_NS::Marshal GameObject::Save(SavableFlags flags) const {
+        SR_HTYPES_NS::Marshal marshal = Entity::Save(flags);
 
-        marshal.Append("Name", m_name);
+        marshal.Write(VERSION);
 
-        if (!(flags & Helper::SAVABLE_FLAG_ECS_NO_ID)) {
-            marshal.Append("EntityId", static_cast<uint64_t>(GetEntityId()));
-        }
-
-        marshal.AppendDef("Tag", m_tag, "Untagged");
-        marshal.AppendDef("Enabled", IsEnabled(), true);
+        marshal.Write(IsEnabled());
+        marshal.Write(m_name);
+        marshal.Write(m_tag);
 
         marshal.Append(m_transform->Save(flags));
 
-        if (!m_components.empty()) {
-            MarshalEncodeNode components("Components");
-            for (const auto &comp : m_components) {
-                if (auto compNode = comp->Save(flags); compNode.Valid()) {
-                    components.Append(compNode);
-                }
-            }
-            marshal.Append(components);
-        }
+        marshal.Write(static_cast<uint32_t>(m_components.size()));
+        for (const auto &comp : m_components)
+            marshal.Append(comp->Save(flags));
 
-        if (!m_children.empty()) {
-            MarshalEncodeNode children("Children");
-            for (const auto &child : m_children)
-                children.Append(child->Save(flags));
-            marshal.Append(children);
-        }
+        marshal.Write(static_cast<uint32_t>(m_children.size()));
+        for (const auto &child : m_children)
+            marshal.Append(child->Save(flags));
 
         return marshal;
     }

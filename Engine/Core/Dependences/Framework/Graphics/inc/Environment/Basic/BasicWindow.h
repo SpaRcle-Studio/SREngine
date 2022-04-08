@@ -5,14 +5,7 @@
 #ifndef GAMEENGINE_BASICWINDOW_H
 #define GAMEENGINE_BASICWINDOW_H
 
-#include <macros.h>
-#include <functional>
-#include <utility>
-#include <string>
-#include <thread>
-#include <atomic>
 #include <Math/Vector3.h>
-
 #include <Environment/PipeLine.h>
 
 namespace Framework::Graphics {

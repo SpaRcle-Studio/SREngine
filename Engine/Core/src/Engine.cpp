@@ -60,7 +60,7 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     }
 
     Graphics::Environment::RegisterScrollEvent([](double x, double y){
-        Input::SetMouseScroll(x, y);
+        SR_UTILS_NS::Input::SetMouseScroll(x, y);
     });
 
     this->m_isCreate = true;
@@ -70,25 +70,25 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
 
 bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
     if (!m_isCreate) {
-        Debug::Error("Engine::Init() : engine is not create!");
+        SR_ERROR("Engine::Init() : engine is not create!");
         return false;
     }
 
     if (m_isInit) {
-        Debug::Error("Engine::Init() : engine is already initialize!");
+        SR_ERROR("Engine::Init() : engine is already initialize!");
         return false;
     }
 
     Helper::Debug::Info("Engine::Init() : initializing game engine...");
 
-    Helper::EventManager::Subscribe([this](EventManager::Event event){
+    Helper::EventManager::Subscribe([this](SR_UTILS_NS::EventManager::Event event){
         switch (event) {
-            case EventManager::Event::Exit:
-                this->m_exitEvent = true;
+            case SR_UTILS_NS::EventManager::Event::Exit:
+                m_exitEvent = true;
                 break;
-            case EventManager::Event::Fatal:
-                Debug::Error("Engine::(EventManager) : a fatal error event has been detected!");
-                this->m_exitEvent = true;
+            case SR_UTILS_NS::EventManager::Event::Fatal:
+                SR_ERROR("Engine::(EventManager) : a fatal error event has been detected!");
+                m_exitEvent = true;
                 break;
         }
     });
@@ -114,38 +114,38 @@ bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
 
 bool Framework::Engine::Run() {
     if (!m_isInit) {
-        Debug::Error("Engine::Run() : engine is not initialize!");
+        SR_ERROR("Engine::Run() : engine is not initialize!");
         return false;
     }
 
     if (m_isRun) {
-        Debug::Error("Engine::Run() : engine already ran!");
+        SR_ERROR("Engine::Run() : engine already ran!");
         return false;
     }
 
-    Helper::Debug::Info("Engine::Run() : running game engine...");
+    SR_INFO("Engine::Run() : running game engine...");
 
     if (!m_window->Run()){
-        Helper::Debug::Error("Engine::Run() : failed to ran window!");
+        SR_ERROR("Engine::Run() : failed to ran window!");
         return false;
     }
 
     if (!LoadMainScript()) {
-        Helper::Debug::Error("Engine::Run() : failed to load main script!");
+        SR_ERROR("Engine::Run() : failed to load main script!");
         return false;
     }
 
     if (!Core::Commands::RegisterEngineCommands()) {
-        Helper::Debug::Error("Engine::Run() : errors were detected during the registration of commands!");
+        SR_ERROR("Engine::Run() : errors were detected during the registration of commands!");
         return false;
     }
 
     if (!m_cmdManager->Run()) {
-        Helper::Debug::Error("Engine::Run() : failed to ran command manager!");
+        SR_ERROR("Engine::Run() : failed to ran command manager!");
         return false;
     }
 
-    Helper::Debug::Info("Engine::Run() : running world thread...");
+    SR_INFO("Engine::Run() : running world thread...");
 
     if (Helper::Features::Instance().Enabled("ChunkSystem")) {
         m_worldThread = new Helper::Types::Thread([this]() {
@@ -166,7 +166,7 @@ bool Framework::Engine::Run() {
 }
 
 void Framework::Engine::Await() {
-    Debug::Info("Engine::Await() : wait close engine...");
+    SR_INFO("Engine::Await() : wait close engine...");
 
     const float updateFrequency = (1.f / 60.f) * CLOCKS_PER_SEC;
     float accumulator = updateFrequency;
@@ -177,7 +177,7 @@ void Framework::Engine::Await() {
         auto deltaTime = clock::now() - timeStart;
         timeStart = clock::now();
 
-        EventManager::PoolEvents();
+        SR_UTILS_NS::EventManager::PoolEvents();
         m_compiler->PollEvents();
 
         const bool windowFocused = m_window ? m_window->IsWindowFocus() : false;
@@ -189,25 +189,25 @@ void Framework::Engine::Await() {
                     Helper::Input::Check();
                     m_input->Check();
 
-                    if (Input::GetKey(KeyCode::Ctrl)) {
-                        if (Input::GetKeyDown(KeyCode::Z))
+                    if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+                        if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::Z))
                             m_cmdManager->Cancel();
 
-                        if (Input::GetKeyDown(KeyCode::Y))
+                        if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::Y))
                             if (!m_cmdManager->Redo())
                                 SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
                     }
 
-                    if (Input::GetKeyDown(KeyCode::F3)) {
+                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F3)) {
                         Reload();
                     }
 
-                    if (Input::GetKeyDown(KeyCode::F2)) {
+                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                         m_editor->Enable(!m_editor->Enabled());
                     }
 
-                    if (Input::GetKey(KeyCode::BackSpace) && Input::GetKeyDown(KeyCode::LShift)) {
-                        Debug::System("Engine::Await() : The closing key combination have been detected!");
+                    if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::BackSpace) && SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::LShift)) {
+                        SR_UTILS_NS::Debug::System("Engine::Await() : The closing key combination have been detected!");
                         m_exitEvent = true;
                         break;
                     }
@@ -220,7 +220,7 @@ void Framework::Engine::Await() {
         }
 
         if (m_exitEvent) {
-            Debug::System("Engine::Await() : The closing event have been received!");
+            SR_UTILS_NS::Debug::System("Engine::Await() : The closing event have been received!");
             break;
         }
 
@@ -291,7 +291,7 @@ bool Framework::Engine::Close() {
 }
 
 bool Framework::Engine::RegisterLibraries() {
-    Helper::Debug::Log("Engine::RegisterLibraries() : register all libraries...");
+    SR_LOG("Engine::RegisterLibraries() : register all libraries...");
 
     API::RegisterEvoScriptClasses(dynamic_cast<Scripting::EvoCompiler*>(m_compiler));
 
@@ -299,7 +299,7 @@ bool Framework::Engine::RegisterLibraries() {
 }
 
 bool Framework::Engine::LoadMainScript() {
-    Debug::Info("Engine::LoadMainScript() : loading the main engine script...");
+    SR_INFO("Engine::LoadMainScript() : loading the main engine script...");
 
     std::string scriptName;
     switch (m_scriptType) {
@@ -308,30 +308,31 @@ bool Framework::Engine::LoadMainScript() {
         case MainScriptType::Game:
         case MainScriptType::None:
         default:
-            Helper::Debug::Error("Engine::LoadMainScript() : unknown script type!");
+            SR_ERROR("Engine::LoadMainScript() : unknown script type!");
             return false;
     }
 
     m_mainScript = Scripting::Script::Allocate(scriptName, m_compiler, Scripting::ScriptType::EvoScript);
 
     if (!m_mainScript->Compile()) {
-        Helper::Debug::Error("Engine::LoadMainScript() : failed to load main engine script!");
+        SR_ERROR("Engine::LoadMainScript() : failed to load main engine script!");
         return false;
-    } else
+    }
+    else
         return true;
 }
 
 bool Framework::Engine::CloseScene() {
-    return m_scene.AutoFree([](World::Scene* scene) {
+    return m_scene.AutoFree([](SR_WORLD_NS::Scene* scene) {
         scene->Save();
         scene->Destroy();
         scene->Free();
     });
 }
 
-bool Framework::Engine::SetScene(const Helper::Types::SafePtr<World::Scene> &scene)  {
+bool Framework::Engine::SetScene(const Helper::Types::SafePtr<SR_WORLD_NS::Scene> &scene)  {
     if (m_scene.Valid() && scene == m_scene) {
-        Helper::Debug::Warn("Engine::SetScene() : scene ptr equals current scene ptr!");
+        SR_WARN("Engine::SetScene() : scene ptr equals current scene ptr!");
         return false;
     }
     else {
@@ -349,5 +350,5 @@ bool Framework::Engine::SetScene(const Helper::Types::SafePtr<World::Scene> &sce
 
 void Framework::Engine::Reload() {
     Helper::FileSystem::Reload();
-    EventManager::Push(EventManager::Event::Exit);
+    SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
 }

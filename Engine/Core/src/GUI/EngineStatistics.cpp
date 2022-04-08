@@ -23,7 +23,7 @@ namespace Framework::Core::GUI {
 
     void EngineStatistics::ResourcesPage() {
         if (ImGui::BeginTabItem("Resources manager")) {
-            auto&& drawResource = [=](IResource* pRes, uint32_t index) {
+            auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
                 const bool isDestroyed = pRes->IsDestroyed();
 
                 std::string node = Helper::Format("[%u] %s = %u", index, pRes->GetResourceId().c_str(), pRes->GetCountUses());
@@ -39,11 +39,16 @@ namespace Framework::Core::GUI {
 
                 ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithoutChild);
 
-                if (isDestroyed)
+                if (isDestroyed) {
+                    if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && ImGui::IsItemHovered()) {
+                        pRes->Kill();
+                    }
+
                     ImGui::PopStyleColor();
+                }
             };
 
-            auto&& drawResources = [=](const std::unordered_set<IResource*>& resources, uint32_t index) {
+            auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
                 const auto node = Helper::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().c_str(), resources.size());

@@ -8,12 +8,12 @@
 #include <Debug.h>
 
 #include <Math/Vector3.h>
-#include <Types/DataStorage.h>
 #include <Types/SafePointer.h>
 #include <Utils/Singleton.h>
 #include <Utils/NonCopyable.h>
 #include <Utils/StringUtils.h>
 #include <EntityComponentSystem/EntityManager.h>
+#include <Types/DataStorage.h>
 
 namespace SR_UTILS_NS {
     class Component;
@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
     class ComponentManager : public Singleton<ComponentManager>, public NonCopyable {
         friend class Singleton<ComponentManager>;
         typedef std::function<void(Component*)> Event;
-        typedef std::function<Component*(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage)> Loader;
+        typedef std::function<Component*(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage)> Loader;
     public:
         Component* CreateComponentOfName(const std::string& name);
 
@@ -53,8 +53,8 @@ namespace SR_UTILS_NS {
 
             const auto&& code = typeid(T).hash_code();
 
-            m_loaders.insert(std::make_pair(code, [](const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) -> Component* {
-                return T::LoadComponent(node, dataStorage);
+            m_loaders.insert(std::make_pair(code, [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
+                return T::LoadComponent(marshal, dataStorage);
             }));
 
             return RegisterComponentImpl(code, StringUtils::BackRead(typeid(T).name(), ':'), constructor);
@@ -70,9 +70,14 @@ namespace SR_UTILS_NS {
             return result;
         }
 
-        Component* Load(const MarshalDecodeNode& node);
+        SR_NODISCARD std::string GetLastComponentName() const {
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
+            return m_lastComponent;
+        }
 
-        Types::DataStorage* GetContext() { return &m_context; }
+        Component* Load(SR_HTYPES_NS::Marshal& marshal);
+
+        SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
 
     private:
         bool RegisterComponentImpl(size_t id, const std::string& name, const std::function<Component*(void)>& constructor);
@@ -85,7 +90,8 @@ namespace SR_UTILS_NS {
         std::unordered_map<size_t, Event> m_events;
         std::unordered_map<size_t, std::string> m_names;
         std::unordered_map<std::string, size_t> m_ids;
-        Types::DataStorage m_context;
+        SR_HTYPES_NS::DataStorage m_context;
+        std::string m_lastComponent;
 
     };
 
@@ -126,6 +132,8 @@ namespace SR_UTILS_NS {
         virtual void OnRemoveComponent() = 0;
         virtual void OnDestroyGameObject() = 0;
 
+        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
+
     protected:
         /// Задается игровым объектом/движком, когда необходимо принудительно отключить
         bool m_isActive = true;
@@ -133,7 +141,7 @@ namespace SR_UTILS_NS {
         bool m_isEnabled = true;
 
         std::string m_name = "Unknown";
-        size_t m_componentId = SIZE_MAX;
+        uint64_t m_componentId = SIZE_MAX;
         GameObject* m_parent = nullptr;
 
     };

@@ -5,11 +5,13 @@
 #include <Input/InputSystem.h>
 #include <GUI/SceneViewer.h>
 #include <GUI/Editor/Guizmo.h>
-#include <EntityComponentSystem/GameObject.h>
 #include <GUI/Hierarchy.h>
+#include <EntityComponentSystem/Transform3D.h>
+#include <Window/Window.h>
+#include <Render/Camera.h>
 
-void SceneViewer::SetCamera(GameObject::Ptr camera) {
-    m_camera.AutoFree([this](GameObject* camera) {
+void SceneViewer::SetCamera(SR_UTILS_NS::GameObject::Ptr camera) {
+    m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
         m_translation = camera->GetTransform()->GetTranslation();
         m_rotation = camera->GetTransform()->GetRotation();
         camera->Destroy();
@@ -31,7 +33,7 @@ void SceneViewer::Draw() {
             if (ImGui::BeginChild("ViewerTexture")) {
                 const auto winSize = ImGui::GetWindowSize();
 
-                DrawTexture(Math::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
+                DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
 
                 if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
                     m_guizmo->Draw(*selected.begin(), m_camera);
@@ -48,7 +50,7 @@ void SceneViewer::Draw() {
     }
 }
 
-void SceneViewer::SetScene(World::Scene::Ptr scene) {
+void SceneViewer::SetScene(SR_WORLD_NS::Scene::Ptr scene) {
     m_scene.Replace(scene);
     SetCameraActive(m_cameraActive);
 }
@@ -83,21 +85,21 @@ void SceneViewer::Update() {
         return;
 
     float_t speed = 0.1f;
-    auto dir = Input::GetMouseDrag() * speed;
-    auto wheel = Input::GetMouseWheel() * speed;
+    auto dir = SR_UTILS_NS::Input::GetMouseDrag() * speed;
+    auto wheel = SR_UTILS_NS::Input::GetMouseWheel() * speed;
 
     if (m_camera.LockIfValid()) {
         if (wheel != 0) {
-            m_camera->GetTransform()->Translate(Transform3D::FORWARD * wheel);
+            m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
         }
 
-        if (Input::GetKey(KeyCode::MouseRight)) {
+        if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
             m_camera->GetTransform()->GlobalRotate(dir.y, dir.x, 0.0);
         }
 
-        if (Input::GetKey(KeyCode::MouseMiddle)) {
-            auto right = Transform3D::RIGHT * speed;
-            auto up = Transform3D::UP * speed;
+        if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
+            auto right = SR_UTILS_NS::Transform3D::RIGHT * speed;
+            auto up = SR_UTILS_NS::Transform3D::UP * speed;
 
             m_camera->GetTransform()->Translate(
                     (up * dir.y) + (right * -dir.x)
@@ -108,7 +110,7 @@ void SceneViewer::Update() {
     }
 }
 
-void SceneViewer::DrawTexture(Math::IVector2 winSize, Math::IVector2 texSize, uint32_t id, bool centralize)        {
+void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize)        {
     const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
     const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
 
@@ -198,15 +200,15 @@ void SceneViewer::SetCameraActive(bool value) {
         }
     }
     else
-        SetCamera(GameObject::Ptr());
+        SetCamera(GameObject());
 
     m_window->EndSync();
 }
 
-void SceneViewer::OnKeyDown(const KeyDownEvent &event) {
+void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
     m_guizmo->OnKeyDown(event);
 }
 
-void SceneViewer::OnKeyPress(const KeyPressEvent &event) {
+void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
     m_guizmo->OnKeyPress(event);
 }

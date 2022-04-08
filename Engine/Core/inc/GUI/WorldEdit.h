@@ -15,13 +15,13 @@ namespace Framework::Core::GUI {
         ~WorldEdit() override = default;
 
     public:
-        void SetScene(const Helper::World::Scene::Ptr& scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
     protected:
         void Draw() override;
 
     private:
-        Helper::Types::SafePtr<World::Scene> m_scene;
+        SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> m_scene;
 
     };
 }

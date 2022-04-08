@@ -7,10 +7,7 @@
 
 #include <Utils/NonCopyable.h>
 #include <Types/Texture.h>
-#include <vector>
-#include <array>
 #include <Environment/Environment.h>
-#include <glm/glm.hpp>
 
 namespace Framework::Graphics {
     class Camera;

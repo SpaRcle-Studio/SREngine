@@ -5,13 +5,6 @@
 #ifndef SRENGINE_CMDMANAGER_H
 #define SRENGINE_CMDMANAGER_H
 
-#include <string>
-#include <mutex>
-#include <queue>
-#include <list>
-#include <functional>
-#include <unordered_map>
-
 #include <Types/Thread.h>
 #include <CommandManager/ICommand.h>
 

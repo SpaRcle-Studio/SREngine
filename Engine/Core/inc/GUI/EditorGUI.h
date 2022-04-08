@@ -5,7 +5,6 @@
 #ifndef GAMEENGINE_EDITORGUI_H
 #define GAMEENGINE_EDITORGUI_H
 
-#include <GUI/ICanvas.h>
 #include <Base/Script.h>
 #include <Base/Compiler.h>
 #include <GUI/WidgetManager.h>

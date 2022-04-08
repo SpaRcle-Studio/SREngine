@@ -27,15 +27,14 @@ void Framework::Core::World::VisualRegion::SetVisible(bool value) {
 
         auto render = Engine::Instance().GetRender();
 
-        const auto size = Math::FVector2(m_width) * m_chunkSize.x;
+        const auto size = SR_MATH_NS::FVector2(m_width) * m_chunkSize.x;
 
         UpdateFacesPos();
 
-        m_mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
         m_mesh->SetMaterial(Material::Load("Engine/Colors/red"));
         render->RegisterMesh(m_mesh);
 
-        m_mesh->OnScaled(Math::FVector3(size.x / 2, 1, size.y / 2));
+        m_mesh->OnScaled(SR_MATH_NS::FVector3(size.x / 2, 1, size.y / 2));
     }
 
     if (!value && m_mesh) {
@@ -57,18 +56,18 @@ bool Framework::Core::World::VisualRegion::Load() {
 
 void Framework::Core::World::VisualRegion::UpdateFacesPos() {
     if (m_mesh) {
-        const auto size = Math::FVector3(m_width) * m_chunkSize.x;
+        const auto size = SR_MATH_NS::FVector3(m_width) * m_chunkSize.x;
         const Helper::World::Offset offset = m_observer->m_offset;
 
-        auto fPos = Helper::World::AddOffset(m_position.Cast<Math::Unit>(), offset.m_region);
+        auto fPos = Helper::World::AddOffset(m_position.Cast<SR_MATH_NS::Unit>(), offset.m_region);
         fPos = fPos * size + (size / 2);
         fPos = fPos.DeSingular(size);
 
         fPos += offset.m_chunk * m_chunkSize.x;
 
-        m_mesh->OnMove(Math::FVector3(
+        m_mesh->OnMove(SR_MATH_NS::FVector3(
                 fPos.x,
-                static_cast<Math::Unit>(0.01),
+                static_cast<SR_MATH_NS::Unit>(0.01),
                 fPos.z
         ));
     }

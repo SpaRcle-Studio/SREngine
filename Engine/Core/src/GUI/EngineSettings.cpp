@@ -7,7 +7,7 @@
 using namespace Framework::Core::GUI;
 
 EngineSettings::EngineSettings()
-    : Graphics::GUI::Widget("Settings", Math::IVector2(300, 400))
+    : Graphics::GUI::Widget("Settings", SR_MATH_NS::IVector2(300, 400))
 { }
 
 void EngineSettings::Draw() {

@@ -5,6 +5,9 @@
 #ifndef SRENGINE_GUIUTILS_H
 #define SRENGINE_GUIUTILS_H
 
+#include <Debug.h>
+#include <Math/Mathematics.h>
+
 namespace Framework::Graphics::GUI {
     static ImVec4 MakeDisableColor(ImVec4 color) {
         color.w /= 2;
@@ -35,7 +38,7 @@ namespace Framework::Graphics::GUI {
         if constexpr (std::is_same_v<T, std::string>) {
             string = value;
         }
-        else if constexpr (Math::IsNumber<T>()) {
+        else if constexpr (SR_MATH_NS::IsNumber<T>()) {
             string = std::to_string(value);
         }
         else if constexpr (std::is_same_v<T, const char*>) {
@@ -53,8 +56,8 @@ namespace Framework::Graphics::GUI {
 
     static bool DrawUnitControl(
             const char* label,
-            Math::Unit& value,
-            Math::Unit reset,
+            SR_MATH_NS::Unit& value,
+            SR_MATH_NS::Unit reset,
             ImVec2 btnSize,
             ImVec4 btn,
             ImVec4 hovered,
@@ -245,5 +248,36 @@ namespace Framework::Graphics::GUI {
         return result;
     }
 }
+
+/*
+glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphics::Camera *camera, ImGuiWindow *aimedWindowTarget) {
+    glm::vec2 win_pos = { aimedWindowTarget->Pos.x, aimedWindowTarget->Pos.y };
+    glm::vec2 win_size = { aimedWindowTarget->Size.x, aimedWindowTarget->Size.y };
+    glm::vec2 window_size = this->GetWindowSize().ToGLM();
+    glm::vec2 img_size = camera->GetSize().ToGLM();
+
+    glm::vec2 pos = m_env->GetMousePos();
+
+    const float dx = win_size.x / img_size.x;
+    const float dy = win_size.y / img_size.y;
+
+    if (dy > dx)
+        img_size *= dx;
+    else
+        img_size *= dy;
+
+    // Вычисляем положение мыши в окне относительно изображения н окне интерфейса
+
+    pos -= win_pos;
+    pos *= (window_size / win_size);
+
+    pos -= ((win_size - img_size) / 2.f) * window_size / win_size;
+    pos *= win_size / img_size;
+
+    pos.y = window_size.y - pos.y;
+
+    return pos;
+}
+ */
 
 #endif //SRENGINE_GUIUTILS_H

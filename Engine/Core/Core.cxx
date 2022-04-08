@@ -19,6 +19,7 @@
 
 #include "src/World/VisualChunk.cpp"
 #include "src/World/VisualRegion.cpp"
+#include "src/World/World.cpp"
 
 #include "src/Engine.cpp"
 #include "src/EngineCommands.cpp"

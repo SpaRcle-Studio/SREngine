@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_TEXTURELOADER_H
 #define GAMEENGINE_TEXTURELOADER_H
 
-#include <string>
+#include <stdInclude.h>
 
 namespace Framework::Graphics::Types{
     class Texture;

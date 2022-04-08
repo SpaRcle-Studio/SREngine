@@ -5,13 +5,7 @@
 #ifndef SRENGINE_PATH_H
 #define SRENGINE_PATH_H
 
-#include <macros.h>
-
-#include <string>
-#include <atomic>
-#include <vector>
-#include <string_view>
-#include <functional>
+#include <stdInclude.h>
 
 namespace Framework::Helper {
     class Path {

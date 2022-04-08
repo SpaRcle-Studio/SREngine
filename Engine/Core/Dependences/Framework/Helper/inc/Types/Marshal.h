@@ -12,17 +12,17 @@
 #include <Math/Vector3.h>
 #include <Utils/StringFormat.h>
 
-namespace SR_UTILS_NS {
+namespace SR_HTYPES_NS {
     class MarshalDecodeNode;
 }
 
 namespace std {
-    template<> struct hash<Framework::Helper::MarshalDecodeNode> {
-        size_t operator()(Framework::Helper::MarshalDecodeNode const& value) const;
+    template<> struct hash<SR_HTYPES_NS::MarshalDecodeNode> {
+        size_t operator()(SR_HTYPES_NS::MarshalDecodeNode const& value) const;
     };
 }
 
-namespace SR_UTILS_NS {
+namespace SR_HTYPES_NS {
     struct MarshalAttribute {
 #if SR_MARSHAL_USE_LIST
         std::string m_name;
@@ -59,13 +59,13 @@ namespace SR_UTILS_NS {
         static MarshalEncodeNode LoadFromMemory(const std::string& data);
 
     public:
-        [[nodiscard]] MarshalDecodeNode Decode() const;
-
         bool Save(const Path& path, MarshalSaveMode mode = MarshalSaveMode::Binary) const;
+
         SR_NODISCARD std::stringstream Save() const;
         SR_NODISCARD bool Empty() const { return m_count == 0; }
         SR_NODISCARD bool Valid() const { return !Empty() && m_stream.rdbuf()->in_avail() > 0; }
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD MarshalDecodeNode Decode() const;
 
         template<typename T, typename U> MarshalEncodeNode& SR_FASTCALL AppendDef(const T& value, const U& def) {
             if constexpr (std::is_same<T, Math::FColor>()) {
@@ -253,12 +253,16 @@ namespace SR_UTILS_NS {
 
     class Marshal {
     public:
+        Marshal() = default;
+
         Marshal(Marshal&& marshal) noexcept {
             m_stream = std::exchange(marshal.m_stream, {});
+            m_size = std::exchange(marshal.m_size, {});
         }
 
         Marshal& operator=(Marshal&& marshal) noexcept {
             m_stream = std::exchange(marshal.m_stream, {});
+            m_size = std::exchange(marshal.m_size, {});
             return *this;
         }
 
@@ -266,38 +270,79 @@ namespace SR_UTILS_NS {
         Marshal(const Marshal& marshal) = delete;
 
     public:
-        template<typename T> void Write(const T& value) {
-            if constexpr (Math::IsNumber<T>()) {
-                MarshalUtils::SaveValue(m_stream, value);
+        bool Save(const Path& path) const;
+        SR_NODISCARD Marshal Copy() const;
+
+        static Marshal Load(const Path& path);
+        static Marshal LoadFromMemory(const std::string& data);
+
+        SR_NODISCARD bool Valid() const { return BytesCount() > 0; }
+        SR_NODISCARD uint64_t BytesCount() const { return m_size; }
+        SR_NODISCARD std::string ToString() const;
+
+        void Append(Marshal&& marshal) {
+            if (marshal.m_size > 0) {
+                m_size += marshal.m_size;
+                m_stream << marshal.m_stream.rdbuf();
             }
-            else if constexpr (Math::IsString<T>()) {
+        }
+
+        Marshal ReadBytes(uint32_t size) {
+            Marshal marshal;
+
+            std::string buffer;
+            buffer.resize(size);
+            m_stream.read((char*)&buffer[0], size * sizeof(char));
+
+            marshal.m_stream << buffer;
+            marshal.m_size = size;
+
+            return marshal;
+        }
+
+        template<typename T> void Write(const T& value) {
+            if constexpr (Math::IsString<T>()) {
+                m_size += sizeof(size_t);
+                m_size += value.size() * sizeof(char);
                 MarshalUtils::SaveString(m_stream, value);
             }
-            else
-                static_assert("Unsupported type!");
+            else {
+                m_size += sizeof(T);
+                MarshalUtils::SaveValue(m_stream, value);
+            }
+        }
+
+        template<typename T> T View(uint64_t offset) const {
+            T value = T();
+
+            memcpy(
+                &value,
+                m_stream.rdbuf()->view().substr(offset, sizeof(T)).data(),
+                sizeof(T)
+            );
+
+            return value;
         }
 
         template<typename T> T Read() {
-            if constexpr (Math::IsNumber<T>()) {
-                return MarshalUtils::LoadValue<std::stringstream, T>(m_stream);
-            }
-            else if constexpr (Math::IsString<T>()) {
+            if constexpr (Math::IsString<T>()) {
                 return MarshalUtils::LoadStr<std::stringstream>(m_stream);
             }
             else
-                static_assert("Unsupported type!");
+                return MarshalUtils::LoadValue<std::stringstream, T>(m_stream);
         }
 
     private:
         std::stringstream m_stream;
+        uint64_t m_size = 0;
 
     };
 }
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
-        template<typename Stream> MarshalDecodeNode SR_FASTCALL LoadNode(Stream &stream) {
-            MarshalDecodeNode node(std::move(MarshalUtils::LoadShortStr<Stream>(stream)));
+        template<typename Stream> SR_HTYPES_NS::MarshalDecodeNode SR_FASTCALL LoadNode(Stream &stream) {
+            SR_HTYPES_NS::MarshalDecodeNode node(std::move(MarshalUtils::LoadShortStr<Stream>(stream)));
 
             const uint16_t count = MarshalUtils::LoadValue<Stream, uint16_t>(stream);
 
@@ -349,7 +394,7 @@ namespace SR_UTILS_NS {
                             break;
                         default: {
                             SRAssert(false);
-                            return MarshalDecodeNode();
+                            return SR_HTYPES_NS::MarshalDecodeNode();
                         }
                     }
                 }
@@ -358,7 +403,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    template<typename T> inline T MarshalDecodeNode::GetAttribute() const {
+    template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttribute() const {
         if constexpr (std::is_same<T, Math::IVector3>()) {
              return Math::IVector3(GetAttribute<int32_t>("x"), GetAttribute<int32_t>("y"), GetAttribute<int32_t>("z"));
         }
@@ -369,7 +414,7 @@ namespace SR_UTILS_NS {
             static_assert(false, "unknown type!");
     }
 
-    template<typename T> inline T MarshalDecodeNode::GetAttribute(const std::string &name) const {
+    template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttribute(const std::string &name) const {
 #if SR_MARSHAL_USE_LIST
         for (const auto& attribute : m_attributes) {
             if (attribute.m_name == name) {
@@ -400,7 +445,7 @@ namespace SR_UTILS_NS {
 #endif
     }
 
-    template<typename T, typename U> inline T MarshalDecodeNode::GetAttributeDef(const U& def) const {
+    template<typename T, typename U> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttributeDef(const U& def) const {
         if constexpr (std::is_same<T, Math::IVector3>()) {
             return Math::IVector3(
                     GetAttributeDef<int32_t>("x", def),
@@ -422,7 +467,7 @@ namespace SR_UTILS_NS {
             static_assert(false, "unknown type!");
     }
 
-    template<typename T> inline T MarshalDecodeNode::GetAttributeDef(const std::string& name, const T& def) const {
+    template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttributeDef(const std::string& name, const T& def) const {
 #if SR_MARSHAL_USE_LIST
         for (const auto& attribute : m_attributes) {
             if (attribute.m_name == name) {
@@ -443,7 +488,7 @@ namespace SR_UTILS_NS {
 #endif
     }
 
-    template<typename T> inline MarshalEncodeNode &MarshalEncodeNode::Append(const std::string &name, const T &value) {
+    template<typename T> inline SR_HTYPES_NS::MarshalEncodeNode &SR_HTYPES_NS::MarshalEncodeNode::Append(const std::string &name, const T &value) {
         if (m_hasNodes) {
             SRAssert2(false, "Attributes can be added before node adding!");
             return *this;
@@ -471,7 +516,7 @@ namespace Framework::RuntimeTest {
     bool MarshalRunRuntimeTest();
 }
 
-inline size_t std::hash<Framework::Helper::MarshalDecodeNode>::operator()(const Framework::Helper::MarshalDecodeNode &value) const {
+inline size_t std::hash<SR_HTYPES_NS::MarshalDecodeNode>::operator()(const SR_HTYPES_NS::MarshalDecodeNode &value) const {
     std::hash<std::string> h;
     return h(value.Name()) + 0x9e3779b9 + (0 << 6u) + (0 >> 2u);
 }

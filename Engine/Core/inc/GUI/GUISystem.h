@@ -5,17 +5,15 @@
 #ifndef GAMEENGINE_GUISYSTEM_H
 #define GAMEENGINE_GUISYSTEM_H
 
-#include <cstdint>
-#include <map>
-#include <Math/Vector2.h>
 #include <Environment/Environment.h>
+#include <Math/Vector2.h>
 #include <World/Scene.h>
 #include <Render/Camera.h>
-#include <GUI.h>
 #include <Utils/Singleton.h>
+#include <EntityComponentSystem/GameObject.h>
 
 namespace Framework::Core::GUI {
-    class GUISystem : public Singleton<GUISystem> {
+    class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {
         friend class Singleton<GUISystem>;
     private:
         GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetPipeLine()) {
@@ -40,7 +38,7 @@ namespace Framework::Core::GUI {
 
     private:
         bool CollapsingHeader(const char* label, ImGuiTreeNodeFlags flags = 0);
-        void DrawComponents(const Helper::Types::SafePtr<GameObject>& gameObject);
+        void DrawComponents(const SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>& gameObject);
         static void DrawImage(
                 ImTextureID user_texture_id,
                 const ImVec2& size,

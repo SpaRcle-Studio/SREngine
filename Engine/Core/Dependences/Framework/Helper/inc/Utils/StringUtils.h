@@ -8,7 +8,7 @@
 #include <Debug.h>
 #include <Math/Mathematics.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class StringUtils {
     public:
         StringUtils() = delete;
@@ -72,8 +72,14 @@ namespace Framework::Helper {
 
         static std::string GetBetween(const std::string& source, const std::string& begin, const std::string& end) {
             auto first = source.find(begin);
+            if (first == std::string::npos)
+                first = 0;
+
             auto last = source.find(end);
-            return source.substr(first, last - first);
+            if (last == std::string::npos)
+                last = source.size() - 1;
+
+            return source.substr(first + 1, (last - first) - 1);
         }
 
         static std::string Substring(const std::string& source, char symbol, uint32_t offset = 0) {

@@ -21,15 +21,15 @@ bool Framework::Core::Commands::GameObjectRename::Undo() {
 bool Framework::Core::Commands::GameObjectDelete::Redo() {
     using namespace Helper::World;
 
-    auto entity = EntityManager::Instance().FindById(m_path.Last());
-    auto ptrRaw = dynamic_cast<GameObject*>(entity);
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
 
     if (!ptrRaw)
         return false;
 
-    GameObject::Ptr& ptr = ptrRaw->GetThis();
+    SR_UTILS_NS::GameObject::Ptr& ptr = ptrRaw->GetThis();
 
-    m_scene = ptr.Do<Scene::Ptr>([](GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
+    m_scene = ptr.Do<Scene::Ptr>([](SR_UTILS_NS::GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
 
     /**
         Специфичная синхронизация, чтобы небыло дедлока, происходящего когда CommandManager пытается удалить объект,
@@ -39,10 +39,10 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
         Чтобы этого избежать, сперва блокируем сцену.
      */
     if (m_scene.LockIfValid()) {
-        const bool result = ptr.AutoFree([this](GameObject *ptr) {
+        const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
-            m_backup = ptr->Save(SAVABLE_FLAG_NONE);
+            m_backup = ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_NONE);
             ptr->Destroy();
         });
         m_scene.Unlock();
@@ -57,7 +57,7 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
         return false;
 
     if (m_scene.LockIfValid()) {
-        auto ptr = m_scene->Instance(m_backup.Decode());
+        auto ptr = m_scene->Instance(m_backup);
         m_scene.Unlock();
         return true;
     }

@@ -31,10 +31,7 @@
             return (enumName)0;                                                                  \
     }
 
-#define SR_ENUM_CLASS(enumName, ...)                                                             \
-    enum class enumName : int32_t {                                                              \
-        __VA_ARGS__                                                                              \
-    };                                                                                           \
+#define SR_ENUM_CODEGEN(enumName, ...)                                                           \
     namespace SR_CODEGEN_ENUM {                                                                  \
         typedef std::unordered_map<std::string, enumName> enumName##_mapKey;                     \
         typedef std::unordered_map<enumName, std::string> enumName##_mapValue;                   \
@@ -72,6 +69,19 @@
     }                                                                                            \
     SR_ENUM_TO_STRING(enumName)                                                                  \
     SR_ENUM_FROM_STRING(enumName)                                                                \
+
+
+#define SR_ENUM_CLASS(enumName, ...)                                                             \
+    enum class enumName : int32_t {                                                              \
+        __VA_ARGS__                                                                              \
+    };                                                                                           \
+    SR_ENUM_CODEGEN(enumName, __VA_ARGS__)                                                       \
+
+#define SR_ENUM(enumName, ...)                                                                   \
+    enum enumName : int32_t {                                                                    \
+        __VA_ARGS__                                                                              \
+    };                                                                                           \
+    SR_ENUM_CODEGEN(enumName, __VA_ARGS__)                                                       \
 
 /// --------------------------------------------------------------------------------------------------------------------
 

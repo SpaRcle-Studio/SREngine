@@ -5,7 +5,6 @@
 #ifndef SMARTPOINTER_SAFEPOINTER_H
 #define SMARTPOINTER_SAFEPOINTER_H
 
-#include <Debug.h>
 #include <Utils/StringFormat.h>
 
 namespace SR_UTILS_NS::Types {

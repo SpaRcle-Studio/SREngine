@@ -34,6 +34,8 @@
 #include <GUI/NodeManager.h>
 #include <FbxLoader/Debug.h>
 #include <Types/Marshal.h>
+#include <Render/Camera.h>
+#include <Render/RenderManager.h>
 
 using namespace Framework;
 
@@ -153,7 +155,7 @@ int main(int argc, char **argv) {
         return -2000;
     }
 
-    Render* render = Render::Allocate("Main SpaRcle Render");
+    Render* render = RenderManager::Instance().Allocate("Main");
     if (!render) {
         SR_ERROR("FATAL: render is not support this pipeline!");
         ResourceManager::Instance().Stop();
@@ -164,7 +166,7 @@ int main(int argc, char **argv) {
     auto window = new Window(
             "SpaRcle Engine",
             "Engine/icon.ico",
-            WindowFormat::_1366_768,
+            IVector2(1366, 768),
             render,
             false, // vsync
             false, // fullscreen

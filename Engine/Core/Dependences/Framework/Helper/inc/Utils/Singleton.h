@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_SINGLETON_H
 #define GAMEENGINE_SINGLETON_H
 
-#include <macros.h>
+#include <stdInclude.h>
 
 namespace SR_UTILS_NS {
     template<typename T>

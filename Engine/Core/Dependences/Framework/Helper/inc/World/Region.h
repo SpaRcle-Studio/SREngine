@@ -6,12 +6,10 @@
 #define GAMEENGINE_REGION_H
 
 #include <Math/Vector3.h>
-#include <unordered_map>
-#include <functional>
 #include <World/Observer.h>
 #include <Xml.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class GameObject;
 
     namespace World {
@@ -21,7 +19,7 @@ namespace Framework::Helper {
         class Observer;
 
         typedef std::unordered_map<Math::IVector3, Chunk*> Chunks;
-        typedef std::unordered_map<Math::IVector3, MarshalEncodeNode> CachedChunks;
+        typedef std::unordered_map<Math::IVector3, SR_HTYPES_NS::Marshal> CachedChunks;
 
         #define SRRegionAllocArgs Framework::Helper::World::Observer* observer, uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector3& position
         #define SRRegionAllocVArgs observer, width, chunkSize, position
@@ -61,7 +59,7 @@ namespace Framework::Helper {
             SR_NODISCARD Math::IVector3 GetWorldPosition() const;
             SR_NODISCARD bool ContainsObserver() const { return m_containsObserver; }
 
-            SR_NODISCARD MarshalEncodeNode Save() const;
+            SR_NODISCARD SR_HTYPES_NS::Marshal Save() const;
 
         public:
             typedef std::function<Region*(SRRegionAllocArgs)> Allocator;
@@ -71,6 +69,7 @@ namespace Framework::Helper {
 
         private:
             static Allocator g_allocator;
+            static const uint16_t VERSION;
 
         protected:
             Observer* m_observer;

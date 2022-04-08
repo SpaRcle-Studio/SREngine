@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <Material ReadOnly="true">
+    <Shader path="geometry"/>
     <Color r="255" g="255" b="255" a="255"/>
-    <Diffuse Path="Engine/default.png"/>
+    <Diffuse path="Engine/default.png"/>
 </Material>

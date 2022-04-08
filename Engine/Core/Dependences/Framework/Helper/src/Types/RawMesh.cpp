@@ -5,6 +5,12 @@
 #include <Types/RawMesh.h>
 #include <FbxLoader/Loader.h>
 
+#undef min
+#undef max
+
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 namespace SR_UTILS_NS::Types {
     RawMesh::RawMesh()
         : IResource(typeid(RawMesh).name(), true /** auto destroy */)
@@ -38,8 +44,7 @@ namespace SR_UTILS_NS::Types {
 
         bool hasErrors = !IResource::Unload();
 
-        hasErrors |= !m_fbx.Valid();
-        m_fbx.Clear();
+        m_importer.FreeScene();
 
         return !hasErrors;
     }
@@ -49,15 +54,34 @@ namespace SR_UTILS_NS::Types {
 
         bool hasErrors = !IResource::Load();
 
-        m_fbx = FbxLoader::Loader::Load(
-            ResourceManager::Instance().GetUtilsPath().Concat("FbxFormatConverter.exe"),
-            ResourceManager::Instance().GetCachePath(),
-            ResourceManager::Instance().GetModelsPath(),
-            GetResourceId(),
-            true
+        const auto&& path = ResourceManager::Instance().GetModelsPath().Concat(GetResourceId());
+
+        /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
+
+        m_scene = m_importer.ReadFile(path.ToString(),
+                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale
         );
 
-        hasErrors |= !m_fbx.Valid();
+        /*for (unsigned int index = 0; index < m_scene->mMetaData->mNumProperties; ++index) {
+            float_t f;
+            aiVector3D vec;
+            int32_t i;
+
+            m_scene->mMetaData->Get(m_scene->mMetaData->mKeys[index], f);
+            m_scene->mMetaData->Get(m_scene->mMetaData->mKeys[index], vec);
+            m_scene->mMetaData->Get(m_scene->mMetaData->mKeys[index], i);
+
+            std::cout << m_scene->mMetaData->mKeys[index].C_Str()
+                << "\nfloat = " << f
+                << "\nvec3 = " << vec.x << ", " << vec.y << ", " << vec.z
+                << "\nint = " << i
+                << std::endl;
+        }*/
+
+        if (!m_scene) {
+            SR_ERROR("RawMesh::Load() : failed to read file! Path: " + path.ToString());
+            hasErrors |= true;
+        }
 
         return !hasErrors;
     }
@@ -65,8 +89,8 @@ namespace SR_UTILS_NS::Types {
     bool RawMesh::Access(const RawMesh::CallbackFn &fn) const {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (m_fbx.Valid() && IsLoaded()) {
-            return fn(&m_fbx);
+        if (m_scene && IsLoaded()) {
+            return fn(m_scene);
         }
 
         SRAssert2(false, "Resource isn't loaded!");
@@ -74,17 +98,124 @@ namespace SR_UTILS_NS::Types {
         return false;
     }
 
-    uint32_t RawMesh::GetModelsCount() const {
+    uint32_t RawMesh::GetMeshesCount() const {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        /// TODO: replace to models
-        return m_fbx.objects.geometries.size();
+        if (!m_scene) {
+            SRAssert(false);
+            return 0;
+        }
+
+        return m_scene->mNumMeshes;
     }
 
     std::string RawMesh::GetGeometryName(uint32_t id) const {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        /// TODO: replace to models
-        return m_fbx.objects.geometries[id].name;
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        return m_scene->mMeshes[id]->mName.C_Str();
+    }
+
+    std::vector<SR_UTILS_NS::Vertex> RawMesh::GetVertices(uint32_t id) const {
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        auto&& mesh = m_scene->mMeshes[id];
+
+        std::vector<SR_UTILS_NS::Vertex> vertices;
+        vertices.reserve(mesh->mNumVertices);
+
+        const bool hasUV = mesh->mTextureCoords[0];
+        const bool hasNormals = mesh->mNormals;
+        const bool hasTangents = mesh->mTangents;
+
+        for (uint32_t i = 0; i < mesh->mNumVertices; ++i) {
+            vertices.emplace_back(SR_UTILS_NS::Vertex(
+                *reinterpret_cast<Vec3*>(&mesh->mVertices[i]),
+                hasUV ? (*reinterpret_cast<Vec2*>(&mesh->mTextureCoords[0][i])) : Vec2 { 0.f, 0.f },
+                hasNormals ? (*reinterpret_cast<Vec3*>(&mesh->mNormals[i])) : Vec3 { 0.f, 0.f, 0.f },
+                hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mTangents[i])) : Vec3 { 0.f, 0.f, 0.f },
+                hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mBitangents[i])) : Vec3 { 0.f, 0.f, 0.f }
+            ));
+        }
+
+        return vertices;
+    }
+
+    std::vector<uint32_t> RawMesh::GetIndices(uint32_t id) const {
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        auto&& mesh = m_scene->mMeshes[id];
+
+        std::vector<uint32_t> indices;
+
+        indices.reserve(mesh->mNumFaces * 3);
+
+        for (uint32_t i = 0; i < mesh->mNumFaces; ++i) {
+            aiFace face = mesh->mFaces[i];
+
+            SRAssert2(face.mNumIndices <= 3, "Mesh isn't triangulated!");
+
+            if (face.mNumIndices == 1) {
+                indices.emplace_back(face.mIndices[0]);
+            }
+            else if (face.mNumIndices == 2) {
+                indices.emplace_back(face.mIndices[0]);
+                indices.emplace_back(face.mIndices[1]);
+            }
+            else {
+                indices.emplace_back(face.mIndices[0]);
+                indices.emplace_back(face.mIndices[1]);
+                indices.emplace_back(face.mIndices[2]);
+            }
+        }
+
+        return indices;
+    }
+
+    uint32_t RawMesh::GetVerticesCount(uint32_t id) const {
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        return m_scene->mMeshes[id]->mNumVertices;
+    }
+
+    uint32_t RawMesh::GetIndicesCount(uint32_t id) const {
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        auto&& mesh = m_scene->mMeshes[id];
+
+        uint32_t sum = 0;
+
+        for (uint32_t i = 0; i < mesh->mNumFaces; ++i) {
+            sum += mesh->mFaces[i].mNumIndices;
+        }
+
+        return sum;
+    }
+
+    float_t RawMesh::GetScaleFactor() const {
+        float_t factor = 0.f;
+
+        if (m_scene->mMetaData->Get("UnitScaleFactor", factor))
+           return static_cast<double_t>(factor);
+
+        SRAssert(false);
+
+        return 1.f;
     }
 }

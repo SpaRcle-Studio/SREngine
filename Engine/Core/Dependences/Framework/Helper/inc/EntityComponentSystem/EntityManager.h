@@ -6,20 +6,11 @@
 #define SRENGINE_ENTITYMANAGER_H
 
 #include <EntityComponentSystem/ISavable.h>
+
 #include <Utils/Singleton.h>
 #include <Utils/Numeric.h>
-#include <Debug.h>
 
-#include <unordered_map>
-#include <unordered_set>
-#include <mutex>
-#include <vector>
-#include <list>
-#include <functional>
-#include <utility>
-#include <list>
-
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class GameObject;
     class Component;
     class Entity;
@@ -102,6 +93,18 @@ namespace Framework::Helper {
         void SetEntityPath(const EntityPath& path);
 
         SR_NODISCARD virtual std::list<EntityBranch> GetEntityBranches() const { return {}; }
+
+        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override {
+            SR_HTYPES_NS::Marshal marshal;
+
+            if (!(flags & SAVABLE_FLAG_ECS_NO_ID)) {
+                marshal.Write(static_cast<uint64_t>(GetEntityId()));
+            }
+            else
+                marshal.Write(static_cast<uint64_t>(ENTITY_ID_MAX));
+
+            return marshal;
+        }
 
     private:
         EntityId m_entityId;

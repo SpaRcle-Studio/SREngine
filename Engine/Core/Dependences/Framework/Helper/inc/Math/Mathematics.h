@@ -17,6 +17,9 @@
 
 #define SR_POW(value) (value * value)
 
+#define SR_RAD(x) (x * (SR_PI / 180.0))
+#define SR_DEG(x) (x * (180.0 / SR_PI))
+
 #define RAD(x) (x * (SR_PI / 180.0))
 #define DEG(x) (x * (180.0 / SR_PI))
 
@@ -71,8 +74,11 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/detail/type_quat.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/vec4.hpp>
 
-namespace Framework::Helper::Math {
+namespace SR_UTILS_NS::Math {
     typedef double Unit; //! can broke render
 
     const double_t DoubleMAX = DBL_MAX;
@@ -103,11 +109,11 @@ namespace Framework::Helper::Math {
     }
 
     template<typename T> constexpr bool IsLogical() {
-        return std::is_same_v<T, bool>();
+        return std::is_same_v<T, bool>;
     }
 
     template<typename T> constexpr bool IsString() {
-        return std::is_same_v<T, std::string>();
+        return std::is_same_v<T, std::string>;
     }
 
     template<typename T> constexpr bool IsNumber() {

@@ -6,14 +6,14 @@
 #define GAMEENGINE_XML_H
 
 #include <Debug.h>
-#include <pugixml.hpp>
-#include <vector>
-#include <cmath>
+
 #include <FileSystem/Path.h>
 #include <Math/Vector4.h>
 #include <Math/Vector3.h>
 #include <Math/Vector2.h>
 #include <Utils/NonCopyable.h>
+
+#include "../../Depends/assimp/contrib/pugixml/src/pugixml.hpp"
 
 namespace Framework::Helper::Xml {
     class Node;
@@ -79,9 +79,9 @@ namespace Framework::Helper::Xml {
     public:
         Node();
 
-        explicit Node(const pugi::xml_node &node) {
+        explicit Node(pugi::xml_node node) {
             m_node = node;
-            m_valid = !node.empty();
+            m_valid = !m_node.empty();
         }
 
     public:
@@ -319,25 +319,30 @@ namespace Framework::Helper::Xml {
     class Document : public NonCopyable {
     public:
         Document() {
-            m_document = {};
             m_valid = false;
         }
 
         Document(Document&& document) noexcept
             : m_document(std::exchange(document.m_document, {}))
             , m_valid(std::exchange(document.m_valid, {}))
+            , m_path(std::exchange(document.m_path, {}))
         { }
 
-        ~Document() override = default;
+        ~Document() override {
+            if (m_document) {
+                delete m_document;
+            }
+        }
 
         Document& operator=(Document&& document) noexcept {
             m_document = std::exchange(document.m_document, {});
             m_valid = std::exchange(document.m_valid, {});
+            m_path = std::exchange(document.m_path, {});
             return *this;
         }
 
     private:
-        pugi::xml_document m_document;
+        pugi::xml_document* m_document = nullptr;
         bool m_valid;
         std::string m_path;
     public:
@@ -349,8 +354,8 @@ namespace Framework::Helper::Xml {
             auto xml = Document();
             xml.m_valid = true;
             xml.m_path = "None";
-            xml.m_document = pugi::xml_document();
-            return xml;
+            xml.m_document = new pugi::xml_document();
+            return std::move(xml);
         }
 
         static Document Load(const std::string &path);
@@ -363,28 +368,39 @@ namespace Framework::Helper::Xml {
         }
 
     public:
+        Xml::Node AppendChild(const std::string& name) {
+            if (!m_valid) {
+                SRAssert2(false,"Document::AppendChild() : document is not valid!");
+                g_xml_last_error = -2;
+                return Node();
+            }
+
+            auto node = m_document->append_child(name.c_str());
+            return Node(node);
+        }
+
         bool Save(const Helper::Path& path) const {
             if (!path.Exists()) {
                 path.Make();
             }
-            return m_document.save_file(path.CStr());
+            return m_document->save_file(path.CStr());
         }
 
         [[nodiscard]] std::string Dump() const;
 
         [[nodiscard]] Node Root() const {
-            return Node(m_document.root());
+            return Node(m_document->root());
         }
 
         [[nodiscard]] Node TryRoot() const {
             if (!Valid())
                 return Node();
 
-            return Node(m_document.root());
+            return Node(m_document->root());
         }
 
         [[nodiscard]] Node DocumentElement() const {
-            return Node(m_document.document_element());
+            return Node(m_document->document_element());
         }
 
         [[nodiscard]] bool Valid() const { return m_valid; }

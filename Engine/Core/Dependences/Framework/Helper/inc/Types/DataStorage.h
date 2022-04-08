@@ -5,8 +5,8 @@
 #ifndef SRENGINE_DATASTORAGE_H
 #define SRENGINE_DATASTORAGE_H
 
-#include <Debug.h>
 #include <Utils/NonCopyable.h>
+#include <Debug.h>
 
 namespace Framework::Helper::Types {
     class DataStorage : public NonCopyable {

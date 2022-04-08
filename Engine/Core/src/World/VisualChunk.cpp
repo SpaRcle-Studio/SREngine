@@ -17,12 +17,12 @@ void Framework::Core::World::VisualChunk::Update(float_t dt) {
 
 void Framework::Core::World::VisualChunk::UpdateFacesPos() {
     if (auto&& mesh = m_meshes[0]) {
-        mesh->OnMove(GetWorldPosition(Math::AXIS_XYZ));
+        mesh->OnMove(GetWorldPosition(SR_MATH_NS::AXIS_XYZ));
     }
 }
 void Framework::Core::World::VisualChunk::UpdateLoadPos() {
     if (auto&& mesh = m_meshes[1]) {
-        mesh->OnMove(GetWorldPosition(Math::AXIS_XZ));
+        mesh->OnMove(GetWorldPosition(SR_MATH_NS::AXIS_XZ));
     }
 }
 
@@ -39,10 +39,9 @@ void Framework::Core::World::VisualChunk::SetFacesVisible(bool value) {
 
         UpdateFacesPos();
 
-        mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
         mesh->SetMaterial(Material::Load("Engine/Colors/green"));
         render->RegisterMesh(mesh);
-        mesh->OnScaled(Math::FVector3(m_size.x, m_size.y, m_size.x) / 2);
+        mesh->OnScaled(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2);
     }
 
     if (!value && mesh) {
@@ -64,10 +63,9 @@ void Framework::Core::World::VisualChunk::SetLoadVisible(bool value) {
 
         UpdateLoadPos();
 
-        mesh->SetShader(render->FindShader(static_cast<uint32_t>(Shader::StandardID::DebugWireframe)));
         mesh->SetMaterial(Material::Load("Engine/Colors/yellow"));
         render->RegisterMesh(mesh);
-        mesh->OnScaled(Math::FVector3(m_size.x, m_size.y, m_size.x) / 2);
+        mesh->OnScaled(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2);
     }
 
     if (!value && mesh) {
@@ -96,9 +94,9 @@ bool Framework::Core::World::VisualChunk::Unload() {
     return Chunk::Unload();
 }
 
-bool Framework::Core::World::VisualChunk::Load(const MarshalDecodeNode& node) {
+bool Framework::Core::World::VisualChunk::Load(SR_HTYPES_NS::Marshal&& marshal) {
     SetLoadVisible(true);
-    return Chunk::Load(node);
+    return Chunk::Load(std::move(marshal));
 }
 
 bool Framework::Core::World::VisualChunk::ApplyOffset() {

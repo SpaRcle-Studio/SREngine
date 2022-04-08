@@ -42,9 +42,6 @@ namespace SR_GRAPH_NS {
         ~Render() override = default;
 
     public:
-        static Render* Allocate(std::string name);
-
-    public:
         [[nodiscard]] SR_FORCE_INLINE bool IsRun() const noexcept { return m_isRun; }
         [[nodiscard]] SR_FORCE_INLINE bool IsInit() const noexcept { return m_isInit; }
     public:

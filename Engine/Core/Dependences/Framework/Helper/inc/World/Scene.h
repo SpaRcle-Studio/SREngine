@@ -44,6 +44,10 @@ namespace std {
 
 namespace SR_UTILS_NS {
     class GameObject;
+
+    namespace Types {
+        class RawMesh;
+    }
 }
 
 namespace SR_UTILS_NS::World {
@@ -75,12 +79,7 @@ namespace SR_UTILS_NS::World {
         void Update(float_t dt);
 
     public:
-        virtual void BeginSync() = 0;
-        virtual void EndSync() = 0;
-        virtual bool TrySync() = 0;
-        virtual Types::SafePtr<GameObject> Instance(const MarshalDecodeNode& node) = 0;
-
-        void SetObserver(const Types::SafePtr<GameObject>& observer) { m_observer->m_target = observer; }
+        void SetObserver(const SR_HTYPES_NS::SafePtr<GameObject>& observer) { m_observer->m_target = observer; }
 
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         Chunk* GetCurrentChunk() const;
@@ -92,12 +91,15 @@ namespace SR_UTILS_NS::World {
         SR_NODISCARD std::string GetName() const { return m_name; }
         void SetName(const std::string& name) { m_name = name; }
 
-        GameObjects GetGameObjects();
         GameObjects& GetRootGameObjects();
         GameObjects GetGameObjectsAtChunk(const Math::IVector3& region, const Math::IVector3& chunk);
 
         Types::SafePtr<GameObject> FindByComponent(const std::string& name);
-        Types::SafePtr<GameObject> Instance(const std::string& name);
+
+        virtual SR_HTYPES_NS::SafePtr<GameObject> InstanceFromFile(const std::string& path);
+        virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(const std::string& name);
+        virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(const Types::RawMesh* rawMesh);
+        virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
 
     public:
         bool Remove(const Types::SafePtr<GameObject>& gameObject);

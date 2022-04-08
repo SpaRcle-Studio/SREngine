@@ -7,21 +7,11 @@
 
 #include <Debug.h>
 #include <FileSystem/Path.h>
-#include <fstream>
-#include <functional>
-#include <mutex>
-#include <random>
-#include <unordered_map>
-#include <unordered_set>
 #include <Types/Thread.h>
 
-#include "IResource.h"
+#include <ResourceManager/IResource.h>
 #include <FileSystem/Path.h>
 #include <Utils/Singleton.h>
-
-#include <vector>
-#include <queue>
-#include <list>
 
 namespace Framework::Helper {
     enum class PathType {

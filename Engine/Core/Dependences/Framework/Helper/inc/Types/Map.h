@@ -8,8 +8,6 @@
 #include <Types/Vector.h>
 #include <Types/Pair.h>
 
-#include <mutex>
-
 // TODO: Check, refactoring and add exception processing
 
 namespace Framework::Helper::Types {

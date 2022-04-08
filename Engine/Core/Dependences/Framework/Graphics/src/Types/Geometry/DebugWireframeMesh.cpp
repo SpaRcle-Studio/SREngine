@@ -40,9 +40,11 @@ void  Framework::Graphics::Types::DebugWireframeMesh::DrawVulkan() {
             return;
         }
 
+        const auto&& shader = m_material->GetShader();
+
         m_env->UpdateDescriptorSets(m_descriptorSet, {
-                { DescriptorType::Uniform, { 0, m_UBO               } },
-                { DescriptorType::Uniform, { 1, m_shader->GetUBO(0) } },
+                { DescriptorType::Uniform, { 0, m_UBO             } },
+                { DescriptorType::Uniform, { 1, shader->GetUBO(0) } },
         });
 
         UpdateUBO();
@@ -94,7 +96,7 @@ bool Framework::Graphics::Types::DebugWireframeMesh::FreeVideoMemory() {
 
 void Framework::Graphics::Types::DebugWireframeMesh::UpdateUBO() {
     if (m_UBO >= 0) {
-        WireframeUBO ubo = { m_modelMat, m_material->GetColor().ToGLM() };
+        WireframeUBO ubo = { m_modelMat, m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM() };
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(WireframeUBO));
     }
 }

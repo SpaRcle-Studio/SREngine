@@ -7,7 +7,6 @@
 
 #include <Utils/Enumerations.h>
 #include <GUI/Icons.h>
-#include <list>
 #include <Utils/NonCopyable.h>
 
 namespace Framework::Graphics::GUI {

@@ -127,7 +127,7 @@ namespace SR_UTILS_NS {
             for (auto &&child : m_gameObject->m_children) {
                 child->m_transform->GlobalSkew(delta);
 
-                //FVector3 childTranslation = (child->m_transform->GetTranslation() - m_translation) * delta + m_translation;
+                //Math::FVector3 childTranslation = (child->m_transform->GetTranslation() - m_translation) * delta + m_translation;
                 //child->m_transform->SetTranslation(childTranslation);
             }
         }
@@ -168,46 +168,30 @@ namespace SR_UTILS_NS {
     void Transform3D::RotateAroundParent(Math::FVector3 eulers) {
         if (m_parent) {
             RotateAround(m_parent->m_translation, eulers);
-        } else {
+        }
+        else {
             Rotate(eulers); /// TODO: check working
         }
     }
 
-    MarshalEncodeNode Transform3D::Save(SavableFlags flags) const {
-        MarshalEncodeNode marshal("Transform3D");
+    SR_HTYPES_NS::Marshal Transform3D::Save(SavableFlags flags) const {
+        SR_HTYPES_NS::Marshal marshal;
 
-        const auto &translation = GetTranslation();
-        const auto &rotation = GetRotation();
-        const auto &scale = GetScale();
-        const auto &skew = GetSkew();
-
-        if (translation != Math::FVector3::Zero())
-            marshal.Append(MarshalEncodeNode("Translation").AppendDef(translation, (Math::Unit) 0));
-
-        if (rotation != Math::FVector3::Zero())
-            marshal.Append(MarshalEncodeNode("Rotation").AppendDef(rotation, (Math::Unit) 0));
-
-        if (scale != Math::FVector3::One())
-            marshal.Append(MarshalEncodeNode("Scale").AppendDef(scale, (Math::Unit) 0));
-
-        if (skew != Math::FVector3::One())
-            marshal.Append(MarshalEncodeNode("Skew").AppendDef(skew, (Math::Unit) 0));
+        marshal.Write(GetTranslation());
+        marshal.Write(GetRotation());
+        marshal.Write(GetScale());
+        marshal.Write(GetSkew());
 
         return marshal;
     }
 
-    Transform3D *Transform3D::Load(const MarshalDecodeNode &node) {
+    Transform3D *Transform3D::Load(SR_HTYPES_NS::Marshal &marshal) {
         Transform3D *transform3D = new Transform3D();
 
-        const auto &position = node.TryGetNode("Translation");
-        const auto &rotation = node.TryGetNode("Rotation");
-        const auto &scale = node.TryGetNode("Scale");
-        const auto &skew = node.TryGetNode("Skew");
-
-        transform3D->SetTranslation(position.GetAttributeDef<Math::FVector3>((Math::Unit) 0));
-        transform3D->SetRotation(rotation.GetAttributeDef<Math::FVector3>((Math::Unit) 0));
-        transform3D->SetScale(scale.GetAttributeDef<Math::FVector3>((Math::Unit) 1));
-        transform3D->SetSkew(skew.GetAttributeDef<Math::FVector3>((Math::Unit) 1));
+        transform3D->SetTranslation(marshal.Read<Math::FVector3>());
+        transform3D->SetRotation(marshal.Read<Math::FVector3>());
+        transform3D->SetScale(marshal.Read<Math::FVector3>());
+        transform3D->SetSkew(marshal.Read<Math::FVector3>());
 
         return transform3D;
     }
@@ -236,6 +220,18 @@ namespace SR_UTILS_NS {
         m_gameObject = gameObject;
 
         UpdateComponents();
+    }
+
+    void Transform3D::Translate(Math::Unit x, Math::Unit y, Math::Unit z) {
+        Translate(Math::FVector3(x, y, z));
+    }
+
+    void Transform3D::Scale(Math::FVector3 scale) {
+        SetScale(m_scale * scale);
+    }
+
+    void Transform3D::Scale(Math::Unit x, Math::Unit y, Math::Unit z) {
+        Scale(Math::FVector3(x, y, z));
     }
 }
 

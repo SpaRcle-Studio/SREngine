@@ -5,9 +5,10 @@
 #ifndef GAMEENGINE_ABSTRACTCASTS_H
 #define GAMEENGINE_ABSTRACTCASTS_H
 
-#include <vulkan/vulkan.h>
-#include <Types/Descriptors.h>
 #include <Debug.h>
+#include <Types/Descriptors.h>
+
+#include <vulkan/vulkan.h>
 
 namespace Framework::Graphics::VulkanTools {
     static SR_FORCE_INLINE VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {

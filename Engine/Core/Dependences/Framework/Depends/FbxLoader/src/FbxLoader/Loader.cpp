@@ -9,7 +9,7 @@
 #include <unordered_set>
 #include <inc/tiny_obj_loader.h>
 
-FbxLoader::Fbx FbxLoader::Loader::Load(
+FbxLoader::RawFbx FbxLoader::Loader::Load(
     const std::string& converter,
     const std::string& cache,
     const std::string& models,
@@ -35,7 +35,7 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
     const std::string hash = Tools::GetHash(model);
 
     if (Tools::FileExists(cacheFile) && Tools::LoadHash(hashPath) == hash) {
-        Fbx fbx;
+        RawFbx fbx;
         fbx.LoadFrom(cacheFile);
         return fbx;
     }
@@ -62,7 +62,7 @@ FbxLoader::Fbx FbxLoader::Loader::Load(
     }
 
     FBX_ERROR("Loader::Load() : unknown extension: " + ext + "\n\tPath: " + path);
-    return Fbx();
+    return RawFbx();
 }
 
 FbxLoader::Objects FbxLoader::Loader::GetObjects(FbxLoader::Parser::Node *node) {
@@ -123,7 +123,7 @@ std::vector<FbxLoader::Vertex> FbxLoader::Loader::GetVertices(FbxLoader::Parser:
     );
 }
 
-bool FbxLoader::Loader::OptimizeGeometry(FbxLoader::Geometry *geometry) {
+bool FbxLoader::Loader::OptimizeGeometry(FbxLoader::RawGeometry *geometry) {
     if (!geometry)
         return false;
 
@@ -147,8 +147,8 @@ bool FbxLoader::Loader::OptimizeGeometry(FbxLoader::Geometry *geometry) {
     return true;
 }
 
-std::vector<FbxLoader::Material> FbxLoader::Loader::GetMaterials(FbxLoader::Parser::Node *object) {
-    std::vector<Material> materials;
+std::vector<FbxLoader::MaterialRange> FbxLoader::Loader::GetMaterialRanges(FbxLoader::Parser::Node *object) {
+    std::vector<MaterialRange> materials;
 
     auto materials_node = [object]() -> Parser::Node* {
         if (auto v = object->Find("LayerElementMaterial"); v) return v->Find("Materials")->Get2SubNode(); return nullptr;
@@ -159,7 +159,7 @@ std::vector<FbxLoader::Material> FbxLoader::Loader::GetMaterials(FbxLoader::Pars
 
     std::istringstream ss(materials_node->value);
     std::string value;
-    Material material;
+    MaterialRange material;
 
     uint32_t last = 0;
     uint32_t counter = 0;
@@ -189,8 +189,8 @@ std::vector<FbxLoader::Material> FbxLoader::Loader::GetMaterials(FbxLoader::Pars
     return materials;
 }
 
-std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(Geometry&& geometry) {
-    std::vector<Geometry> geometries;
+std::vector<FbxLoader::RawGeometry> FbxLoader::Loader::SplitByMaterials(RawGeometry&& geometry) {
+    std::vector<RawGeometry> geometries;
 
     if (geometry.materials.size() <= 1) {
         geometries.emplace_back(std::move(geometry));
@@ -199,7 +199,7 @@ std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(Geometry&& 
 
     uint32_t materialIndex= 0;
     for (const auto& material : geometry.materials) {
-        Geometry newGeometry;
+        RawGeometry newGeometry;
 
         newGeometry.materials = { material };
         newGeometry.name = geometry.name + " (" + std::to_string(materialIndex++) + ")";
@@ -236,13 +236,13 @@ std::vector<FbxLoader::Geometry> FbxLoader::Loader::SplitByMaterials(Geometry&& 
     return geometries;
 }
 
-FbxLoader::Fbx FbxLoader::Loader::LoadFbx(const std::string &ascii, const std::string &cache, bool needOptimize) {
+FbxLoader::RawFbx FbxLoader::Loader::LoadFbx(const std::string &ascii, const std::string &cache, bool needOptimize) {
     if (auto text = Tools::ReadAllText(ascii); text.empty()) {
         FBX_ERROR("FbxLoader::Load() : failed to read file! \n\tPath: " + ascii);
         return {};
     }
     else if (auto nodes = Parser::Parse(text); nodes) {
-        Fbx fbx = {};
+        RawFbx fbx = {};
 
         if (fbx.objects = GetObjects(nodes); !fbx.objects.Ready()) {
             delete nodes;
@@ -275,13 +275,13 @@ FbxLoader::Fbx FbxLoader::Loader::LoadFbx(const std::string &ascii, const std::s
     }
 }
 
-FbxLoader::Fbx FbxLoader::Loader::LoadObj(const std::string &path, const std::string &cache, bool needOptimize) {
+FbxLoader::RawFbx FbxLoader::Loader::LoadObj(const std::string &path, const std::string &cache, bool needOptimize) {
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string warn, err;
 
-    Fbx fbx;
+    RawFbx fbx;
 
     if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, path.c_str())) {
         FBX_ERROR("Loader::LoadObj() : failed to open file!\n\tWarn: " + warn + "\n\tError: " + err);
@@ -289,7 +289,7 @@ FbxLoader::Fbx FbxLoader::Loader::LoadObj(const std::string &path, const std::st
     }
 
     for (auto& shape : shapes) {
-        Geometry geometry;
+        RawGeometry geometry;
         geometry.name = shape.name;
 
         std::unordered_map<Vertex, uint32_t> uniqueVertices {};
@@ -347,21 +347,21 @@ FbxLoader::Fbx FbxLoader::Loader::LoadObj(const std::string &path, const std::st
     return fbx;
 }
 
-FbxLoader::Geometry FbxLoader::Loader::ParseGeometry(FbxLoader::Parser::Node *node) {
+FbxLoader::RawGeometry FbxLoader::Loader::ParseGeometry(FbxLoader::Parser::Node *node) {
     auto info = Tools::Split(node->subData, ',');
     if (info.size() != 3) {
         FBX_ERROR("FbxLoader::ParseGeometry() : failed to get geometry info!");
         return {};
     }
 
-    Geometry geometry = { };
+    RawGeometry geometry = { };
     geometry.id = std::stoll(info[0]);
     geometry.name = Tools::GetBetween(info[1], '\"');
     geometry.type = Tools::GetBetween(info[2], '\"');
 
     if (geometry.type == "Shape") {
         FBX_WARN("FbxLoader::ParseGeometry() : shape \"" + geometry.name + "\" ignored.")
-        return Geometry();
+        return RawGeometry();
     }
 
     if (auto indices = node->Find("PolygonVertexIndex"); indices) {
@@ -376,7 +376,7 @@ FbxLoader::Geometry FbxLoader::Loader::ParseGeometry(FbxLoader::Parser::Node *no
             return {};
         }
 
-        geometry.materials = GetMaterials(node);
+        geometry.materials = GetMaterialRanges(node);
     }
 
     if (geometry.vertices.empty()) {
@@ -390,8 +390,8 @@ FbxLoader::Geometry FbxLoader::Loader::ParseGeometry(FbxLoader::Parser::Node *no
     return geometry;
 }
 
-FbxLoader::Model FbxLoader::Loader::ParseModel(FbxLoader::Parser::Node *node) {
-    FbxLoader::Model model;
+FbxLoader::RawModel FbxLoader::Loader::ParseModel(FbxLoader::Parser::Node *node) {
+    FbxLoader::RawModel model;
 
     int32_t version = INT32_MAX;
 

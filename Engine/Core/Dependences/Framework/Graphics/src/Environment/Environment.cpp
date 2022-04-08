@@ -42,16 +42,6 @@ bool Framework::Graphics::Environment::PreInitGUI(const std::string &fontPath) {
     return true;
 }
 
-bool Framework::Graphics::Environment::InitWindowFormat(const Framework::Graphics::Types::WindowFormat &windowFormat)  {
-    if (m_winFormat)
-        return false;
-    else {
-        this->m_winFormat = Types::WindowFormat::AllocMemory();
-        this->m_winFormat->SetFormat(windowFormat);
-        return true;
-    }
-}
-
 void Framework::Graphics::Environment::SetWinCallBack(const std::function<void(WinEvents, void * , void * , void * )>& callback) {
     g_callback = std::move(callback);
 }

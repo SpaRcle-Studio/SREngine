@@ -87,8 +87,8 @@ namespace SR_GRAPH_NS::Types {
         bool IsCanCalculate() const;
         std::string GetPath() const;
 
+        SR_NODISCARD Shader* GetShader()           const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
-        SR_NODISCARD Shader* GetShader()           const { return m_shader; }
         SR_NODISCARD Render* GetRender()           const { return m_render; }
         SR_NODISCARD Material* GetMaterial()       const { return m_material; }
         SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
@@ -100,7 +100,6 @@ namespace SR_GRAPH_NS::Types {
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
-        void SetShader(Shader* shader);
 
     public:
         Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);
@@ -120,7 +119,6 @@ namespace SR_GRAPH_NS::Types {
         mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
 
         std::string                  m_geometryName      = "Unnamed";
-        Shader*                      m_shader            = nullptr;
         Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
         Helper::Types::RawMesh*      m_rawMesh           = nullptr;

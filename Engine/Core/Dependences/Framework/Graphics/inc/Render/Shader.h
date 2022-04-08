@@ -11,7 +11,7 @@
 #include <Utils/NonCopyable.h>
 #include <ResourceManager/IResource.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     typedef int ShaderFlags;
 
     /*

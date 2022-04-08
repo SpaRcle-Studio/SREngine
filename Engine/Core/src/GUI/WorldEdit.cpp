@@ -10,7 +10,7 @@ namespace Framework::Core::GUI {
         : Graphics::GUI::Widget("World edit")
     { }
 
-    void WorldEdit::SetScene(const World::Scene::Ptr &scene) {
+    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
         m_scene.Replace(scene);
     }
 
@@ -30,11 +30,11 @@ namespace Framework::Core::GUI {
 
             auto chunkOffset = offset.m_chunk.ToGLM();
             if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_scene->SetWorldOffset(World::Offset(offset.m_region, chunkOffset));
+                m_scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
 
             auto regionOffset = offset.m_region.ToGLM();
             if (ImGui::InputFloat3("Region offset", &regionOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_scene->SetWorldOffset(World::Offset(regionOffset, offset.m_chunk));
+                m_scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
 
             auto scope = observer->GetScope();
             if (ImGui::InputInt("Scope", &scope))

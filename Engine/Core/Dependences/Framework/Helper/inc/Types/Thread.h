@@ -5,11 +5,7 @@
 #ifndef GAMEENGINE_THREAD_H
 #define GAMEENGINE_THREAD_H
 
-#include <Debug.h>
-
-#include <thread>
-#include <functional>
-#include <atomic>
+#include <stdInclude.h>
 
 namespace Framework::Helper::Types {
     class Thread {

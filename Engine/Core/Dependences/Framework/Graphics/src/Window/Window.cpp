@@ -2,34 +2,38 @@
 // Created by Nikita on 18.11.2020.
 //
 
-//#include <easy/profiler.h>
+#include <Window/Window.h>
 
-#include "Window/Window.h"
-#include <Debug.h>
-#include <iostream>
+Framework::Graphics::Window::Window(
+        std::string name,
+        std::string icoPath,
+        const Math::IVector2 &size,
+        Framework::Graphics::Render *render,
+        bool vsync, bool fullScreen, bool resizable,
+        bool headerEnabled, uint8_t smoothSamples
+    ) : m_env(Environment::Get())
+    , m_size(size)
+    , m_winName(std::move(name))
+    , m_icoPath(std::move(icoPath))
+    , m_render(render)
+    , m_fullScreen(fullScreen)
+    , m_vsync(vsync)
+    , m_smoothSamples(smoothSamples)
+    , m_resizable(resizable)
+    , m_headerEnabled(headerEnabled)
+{ }
 
-#include <ResourceManager/ResourceManager.h>
-#include <Memory/MeshManager.h>
-#include <glm/gtx/string_cast.hpp>
-#include <Utils/StringUtils.h>
-#include <Input/InputSystem.h>
-#include <Types/Semaphore.h>
-
-using namespace Framework::Helper;
 
 bool Framework::Graphics::Window::Create() {
     if (m_isCreate) {
-        Debug::Error("Window::Create() : window already create!");
+        SR_ERROR("Window::Create() : window are already create!");
         return false;
     }
 
-    Debug::Graph("Window::Create() : creating window...");
+    SR_INFO("Window::Create() : creating window...");
 
-    this->m_time = new Helper::Types::Time();
-    this->m_time->SetFPSLimit(60);
-
-    if (!this->m_render->Create(this)){
-        Debug::Error("Window::Create() : failed create render!");
+    if (!m_render->Create(this)) {
+        SR_ERROR("Window::Create() : failed to create render!");
         m_hasErrors = true;
         return false;
     }
@@ -41,26 +45,20 @@ bool Framework::Graphics::Window::Create() {
                 break;
             case Environment::WinEvents::Move: {
                 int size[2] = {*(int *) arg1, *(int *) arg2};
-                this->m_windowPos = { (int32_t)size[0], (int32_t)size[1] };
-                this->m_env->SetWindowPosition((int)m_windowPos.x, (int)m_windowPos.y);
+                m_windowPos = { (int32_t)size[0], (int32_t)size[1] };
+                m_env->SetWindowPosition((int)m_windowPos.x, (int)m_windowPos.y);
                 break;
             }
             case Environment::WinEvents::Resize: {
                 std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
-                if (size.first > 0 && size.second > 0)
+                if (size.first > 0 && size.second > 0) {
                     for (auto camera : m_cameras.GetElements()) {
-                        if (camera->IsAllowUpdateProjection())
-                        //    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
-                                camera->UpdateProjection(size.first, size.second);
-                        //    }
+                        if (camera->IsAllowUpdateProjection()) {
+                            camera->UpdateProjection(size.first, size.second);
+                        }
                         camera->CompleteResize();
                     }
-
-                //float ratio = m_format.GetRatio();
-                //m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
-
-                //this->m_camera->UpdateProjection(ratio);
-                //this->m_postProcessing->ReCalcFrameBuffers(*(int *) arg1, *(int *) arg2);
+                }
                 break;
             }
             case Environment::WinEvents::Scroll:
@@ -77,26 +75,26 @@ bool Framework::Graphics::Window::Create() {
         }
     });
 
-    this->m_isCreate = true;
+    m_isCreate = true;
 
     return true;
 }
 
 bool Framework::Graphics::Window::Init() {
     if (!m_isCreate) {
-        Debug::Error("Window::Init() : window is not created!");
+        SR_ERROR("Window::Init() : window is not created!");
         return false;
     }
 
     if (m_isInit) {
-        Debug::Error("Window::Init() : window already initialize!");
+        SR_ERROR("Window::Init() : window are already initialize!");
         return false;
     }
 
     Debug::Graph("Window::Init() : initializing window...");
 
     {
-        this->m_thread = std::thread(&Window::Thread, this);
+        m_thread = SR_HTYPES_NS::Thread(&Window::Thread, this);
 
         while (!m_isEnvInit && !m_hasErrors && !m_isClose) { } // Wait environment initialize
     }
@@ -117,35 +115,38 @@ bool Framework::Graphics::Window::Init() {
 
 bool Framework::Graphics::Window::Run() {
     if (!m_isInit) {
-        Debug::Error("Window::Run() : window is not initialized!");
+        SR_ERROR("Window::Run() : window is not initialized!");
         return false;
     }
 
     if (m_isRun) {
-        Debug::Error("Window::Run() : window already is running!");
+        SR_ERROR("Window::Run() : window are already is running!");
         return false;
     }
 
     Debug::Graph("Window::Run() : running window...");
 
-    this->m_isRun = true;
+    m_isRun = true;
 
-ret: if (!m_render->IsRun() && !m_hasErrors) goto ret;
-    if (m_hasErrors) return false;
+ret: if (!m_render->IsRun() && !m_hasErrors)
+    goto ret;
 
-    Debug::Info("Window::Run() : window has been successfully running!");
+    if (m_hasErrors)
+        return false;
+
+    SR_INFO("Window::Run() : window has been successfully running!");
 
     return true;
 }
 
 bool Framework::Graphics::Window::Close() {
     if (!m_isRun) {
-        Debug::Error("Window::Close() : window is not running!");
+        SR_ERROR("Window::Close() : window is not running!");
         return false;
     }
 
     if (m_isClose) {
-        Debug::Error("Window::Close() : window already is closed!");
+        SR_ERROR("Window::Close() : window already is closed!");
         return false;
     }
 
@@ -154,33 +155,28 @@ bool Framework::Graphics::Window::Close() {
     m_isRun   = false;
     m_isClose = true;
 
-    if (m_thread.joinable()) m_thread.join();
-
-    if (m_time) {
-        delete m_time;
-        m_time = nullptr;
-    }
+    m_thread.TryJoin();
 
     return true;
 }
 
 void Framework::Graphics::Window::Thread() {
-    Debug::Info("Window::Thread() : running window thread...");
+    SR_INFO("Window::Thread() : running window thread...");
 
     {
         waitInit:
         if (m_isInit && !m_isClose && !m_isRun && !m_hasErrors) goto waitInit;
 
         if (!m_hasErrors && !m_isClose)
-            if (!this->InitEnvironment()) {
-                Debug::Error("Window::Thread() : failed to initialize render environment!");
+            if (!InitEnvironment()) {
+                SR_ERROR("Window::Thread() : failed to initialize render environment!");
                 m_hasErrors = true;
                 return;
             }
 
         if (!m_render->Init()) {
-            Debug::Error("Window::Thread() : failed to initialize render!");
-            this->m_hasErrors = true;
+            SR_ERROR("Window::Thread() : failed to initialize render!");
+            m_hasErrors = true;
             return;
 
         }
@@ -190,7 +186,7 @@ void Framework::Graphics::Window::Thread() {
             goto waitRun;
 
         if (!m_render->Run()) {
-            Debug::Error("Window::Thread() : failed to ran render!");
+            SR_ERROR("Window::Thread() : failed to ran render!");
             m_hasErrors = true;
             return;
         }
@@ -201,169 +197,30 @@ void Framework::Graphics::Window::Thread() {
     double deltaTime = 0;
     uint32_t frames = 0;
 
-    // for optimization needed pipeline
+    /// for optimization needed pipeline
     const PipeLine pipeLine = m_env->GetPipeLine();
 
-    this->m_env->SetBuildState(false);
+    m_env->SetBuildState(false);
 
-    if (pipeLine == PipeLine::Vulkan) {
-        while (IsAlive()) {
-            clock_t beginFrame = clock();
+    while (IsAlive()) {
+        clock_t beginFrame = clock();
 
-            {
-                this->m_env->PollEvents();
-                this->PollEvents();
-                this->m_render->PollEvents();
+        m_env->PollEvents();
+        PollEvents();
+        m_render->PollEvents();
 
-                if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
-                    if (this->m_env->BeginDrawGUI()) {
-                        if (m_canvas)
-                            this->m_canvas->Draw();
-
-                        for (auto&& widgetManager : m_widgetManagers.GetElements())
-                            widgetManager->Draw();
-
-                        this->m_env->EndDrawGUI();
-                    }
-                }
-
-                BeginSync();
-
-                for (auto&& camera : m_cameras.GetElements())
-                    camera->PoolEvents();
-
-                if (m_env->IsNeedReBuild()) {
-                    if (!m_cameras.Empty()) {
-                        m_env->ClearFramebuffersQueue();
-
-                        m_render->SetCurrentCamera(m_cameras.Front());
-
-                        ///Helper::Debug::Info("Window::Thread() : re-build render...");
-
-                        if (m_cameras.Front()->IsReady()) {
-                            if (m_cameras.Front()->GetPostProcessing()->BeginGeometry()) {
-                                m_env->BeginRender();
-                                {
-                                    this->m_env->SetViewport();
-                                    this->m_env->SetScissor();
-
-                                    this->m_render->DrawGeometry();
-                                    this->m_render->DrawSkybox();
-                                }
-                                m_env->EndRender();
-
-                                m_cameras.Front()->GetPostProcessing()->EndGeometry();
-                            }
-                        }
-
-                        {
-                            this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
-
-                            if (!m_cameras.Front()->IsDirectOutput()) {
-                                m_env->BindFrameBuffer(m_cameras.Front()->GetPostProcessing()->GetFinalFBO());
-                                m_env->ClearBuffers();
-
-                                this->m_cameras.Front()->GetPostProcessing()->Complete();
-
-                                m_env->BeginRender();
-                                {
-                                    this->m_env->SetViewport();
-                                    this->m_env->SetScissor();
-
-                                    //! Должна вызываться в том же кадровом буфере, что и Complete
-                                    this->m_cameras.Front()->GetPostProcessing()->Draw();
-                                }
-                                m_env->EndRender();
-                            } else
-                                this->m_cameras.Front()->GetPostProcessing()->Complete();
-
-                            for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
-                                m_env->SetBuildIteration(i);
-
-                                m_env->BindFrameBuffer(0);
-
-                                m_env->BeginRender();
-                                {
-                                    this->m_env->SetViewport();
-                                    this->m_env->SetScissor();
-
-                                    if (m_cameras.Front()->IsDirectOutput())
-                                        this->m_cameras.Front()->GetPostProcessing()->Draw();
-                                }
-                                m_env->EndRender();
-                            }
-                        }
-
-                        m_env->SetBuildState(true);
-                    }
-                    else
-                        DrawNoCamera();
-                    EndSync();
-                    continue;
-                }
-                else
-                    this->m_render->UpdateUBOs();
-
-                this->m_env->DrawFrame();
-
-                EndSync();
-            }
-
-            deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
-            frames++;
-
-            if (deltaTime > 1.0) { //every second
-                std::cout << "FPS: " << frames - 1 << std::endl;
-                frames = 0; deltaTime = 0; }
+        if (pipeLine == PipeLine::Vulkan) {
+            DrawVulkan();
         }
-    }
-    else {
-        while (IsAlive()) {
-            clock_t beginFrame = clock();
+        else
+            DrawOpenGL();
 
-            {
-                this->m_env->PollEvents();
-                this->m_render->PollEvents();
-                this->PollEvents();
+        deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
+        ++frames;
 
-                for (auto&& camera : m_cameras.GetElements())
-                    camera->PoolEvents();
-
-                this->m_env->ClearBuffers();
-
-                {
-                    if (m_cameras.Count() == 1) {
-                        if (m_cameras.Front()->IsReady()) {
-                            DrawToCamera(m_cameras.Front());
-                        }
-                    }
-                    else
-                        for (auto&& camera : m_cameras.GetElements()) {
-                            if (!camera->IsReady()) {
-                                continue;
-                            }
-                            DrawToCamera(camera);
-                        }
-
-                    if (IsGUIEnabled() && m_env->IsGUISupport()) {
-                        if (this->m_env->BeginDrawGUI()) {
-                            if (m_canvas)
-                                this->m_canvas->Draw();
-
-                            this->m_env->EndDrawGUI();
-                        }
-                    }
-                }
-
-                this->m_env->SwapBuffers();
-            }
-
-            deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
-            frames++;
-
-            if (deltaTime > 1.0) { //every second
-                std::cout << "FPS: " << frames - 1 << std::endl;
-                frames = 0; deltaTime = 0; }
+        if (deltaTime > 1.0) { /// every second
+            std::cout << "FPS: " << frames - 1 << std::endl;
+            frames = 0; deltaTime = 0;
         }
     }
 
@@ -382,17 +239,17 @@ void Framework::Graphics::Window::Thread() {
         SR_ERROR("Window::Thread() : failed to free resources!");
     }
 
-    if (!this->m_render->Close()) {
-        Debug::Error("Window::Thread() : failed to close render!");
+    if (!m_render->Close()) {
+        SR_ERROR("Window::Thread() : failed to close render!");
     }
 
-    this->m_env->CloseWindow();
+    m_env->CloseWindow();
 
     Memory::MeshManager::Destroy();
 
-    Debug::Info("Window::Thread() : stopping window thread...");
+    SR_INFO("Window::Thread() : stopping window thread...");
 
-    this->m_isWindowClose = true;
+    m_isWindowClose = true;
 }
 
 bool Framework::Graphics::Window::InitEnvironment() {
@@ -410,7 +267,7 @@ bool Framework::Graphics::Window::InitEnvironment() {
     }
 
     SR_GRAPH("Window::InitEnvironment() : creating window...");
-    if (!m_env->MakeWindow(m_win_name, m_fullScreen, m_resizable, m_headerEnabled)) {
+    if (!m_env->MakeWindow(m_winName, m_size, m_fullScreen, m_resizable, m_headerEnabled)) {
         SR_ERROR("Window::InitEnvironment() : failed to creating window!");
         return false;
     }
@@ -444,7 +301,16 @@ bool Framework::Graphics::Window::InitEnvironment() {
 
     if (m_env->IsGUISupport()) {
         if (m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
-            GUI::ICanvas::InitStyle();
+            ImGuiStyle & style = ImGui::GetStyle();
+
+            if (auto&& theme = Theme::Load("Themes/Dark.xml")) {
+                theme->Apply(style);
+                delete theme;
+            }
+
+            const static auto iniPath = ResourceManager::Instance().GetResPath().Concat("/Configs/ImGuiEditor.config");
+            ImGui::GetIO().IniFilename = iniPath.CStr();
+
             if (!m_env->InitGUI()) {
                 SR_ERROR("Window::InitEnvironment() : failed to initializing GUI!");
                 return false;
@@ -478,30 +344,14 @@ void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* came
     camera->GetPostProcessing()->EndSkybox();
 
     camera->GetPostProcessing()->Complete();
-
-    /*
-    if (m_requireGetAimed) {
-        if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {
-            m_render->DrawSingleColors();
-
-            glm::vec2 pos = GetGlobalWindowMousePos(camera, m_aimedWindowTarget);
-            glm::vec3 color = m_env->GetPixelColor(pos);
-
-            m_env->ClearBuffers();
-
-            auto id = m_render->GetColorBuffer()->GetSelectColorObject(color);
-            if (id != std::numeric_limits<size_t>::max())
-                this->m_aimedMesh = this->m_render->GetMesh(id);
-            m_requireGetAimed = false;
-        }
-    }*/
 }
 
 void Framework::Graphics::Window::CentralizeCursor() noexcept {
     if (m_isRun) {
-        m_env->SetCursorPosition({ m_env->GetWindowFormat()->Width() / 2,  m_env->GetWindowFormat()->Height() / 2});
-    }else{
-        Debug::Error("Window::CentralizeCursor() : window is not run!");
+        m_env->SetCursorPosition({ GetWindowSize().x / 2,  GetWindowSize().y / 2});
+    }
+    else {
+        SR_ERROR("Window::CentralizeCursor() : the window isn't run!");
     }
 }
 
@@ -543,9 +393,9 @@ void Framework::Graphics::Window::PollEvents() {
     if (m_isNeedResize) {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        m_env->SetWindowSize((uint32_t)m_newWindowSize.x, (uint32_t)m_newWindowSize.y);
-        this->m_isNeedResize = false;
-        m_newWindowSize = { 0, 0 };
+        m_env->SetWindowSize((uint32_t)m_size.x, (uint32_t)m_size.y);
+        m_isNeedResize = false;
+        m_size = { 0, 0 };
     }
 
     if (m_isNeedMove) {
@@ -573,7 +423,7 @@ void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
 
     SR_LOG("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
 
-    m_newWindowSize = { (int32_t)w, (int32_t)h };
+    m_size = { (int32_t)w, (int32_t)h };
     m_isNeedResize = true;
 }
 
@@ -589,66 +439,14 @@ void Framework::Graphics::Window::CentralizeWindow() {
 
     auto scr_size = m_env->GetScreenSize();
 
-    auto w = m_isNeedResize ? m_newWindowSize.x : m_env->GetBasicWindow()->GetWidth();
-    auto h = m_isNeedResize ? m_newWindowSize.y : m_env->GetBasicWindow()->GetHeight();
+    auto w = m_isNeedResize ? m_size.x : m_env->GetBasicWindow()->GetWidth();
+    auto h = m_isNeedResize ? m_size.y : m_env->GetBasicWindow()->GetHeight();
 
     w = (int) (scr_size.x - (float)w) / 2;
     h = (int) (scr_size.y - (float)h) / 2;
 
     m_newWindowPos = { (int32_t)w, (int32_t)h };
     m_isNeedMove = true;
-}
-
-glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphics::Camera *camera, ImGuiWindow *aimedWindowTarget) {
-    glm::vec2 win_pos = { aimedWindowTarget->Pos.x, aimedWindowTarget->Pos.y };
-    glm::vec2 win_size = { aimedWindowTarget->Size.x, aimedWindowTarget->Size.y };
-    glm::vec2 window_size = this->GetWindowSize().ToGLM();
-    glm::vec2 img_size = camera->GetSize().ToGLM();
-
-    glm::vec2 pos = m_env->GetMousePos();
-
-    const float dx = win_size.x / img_size.x;
-    const float dy = win_size.y / img_size.y;
-
-    if (dy > dx)
-        img_size *= dx;
-    else
-        img_size *= dy;
-
-    // Вычисляем положение мыши в окне относительно изображения н окне интерфейса
-
-    pos -= win_pos;
-    pos *= (window_size / win_size);
-
-    pos -= ((win_size - img_size) / 2.f) * window_size / win_size;
-    pos *= win_size / img_size;
-
-    pos.y = window_size.y - pos.y;
-
-    return pos;
-}
-
-bool Framework::Graphics::Window::RequireAimedMesh(Framework::Graphics::Camera *camera, ImGuiWindow *window) noexcept  {
-    if (this->m_requireGetAimed)
-        return false;
-
-    this->m_requireGetAimed = true;
-
-    this->m_aimedCameraTarget = camera;
-    this->m_aimedWindowTarget = window;
-    this->m_aimedMesh = nullptr;
-
-    return true;
-}
-
-Framework::Graphics::Types::Mesh *Framework::Graphics::Window::PopAimedMesh() noexcept  {
-    if (m_aimedMesh) {
-        Types::Mesh* aim = m_aimedMesh;
-        m_aimedMesh = nullptr;
-        return aim;
-    }
-    else
-        return nullptr;
 }
 
 void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *camera) {
@@ -673,30 +471,15 @@ void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)
 }
 
 void Framework::Graphics::Window::BeginSync() {
-    m_drawMutex.lock();
+    m_mutex.lock();
 }
 
 void Framework::Graphics::Window::EndSync() {
-    m_drawMutex.unlock();
-}
-
-bool Framework::Graphics::Window::TrySync() {
-    if (!IsAlive())
-        return false;
-
-    try {
-        BeginSync();
-        return true;
-    }
-    catch (const std::exception& exception) {
-
-    }
-
-    return false;
+    m_mutex.unlock();
 }
 
 bool Framework::Graphics::Window::IsAlive() const {
-    return m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors();
+    return m_isRun && !m_hasErrors && !m_isClose && m_env->IsWindowOpen() && !m_env->HasErrors();
 }
 
 bool Framework::Graphics::Window::SyncFreeResources() {
@@ -784,3 +567,142 @@ void Framework::Graphics::Window::DrawNoCamera() {
 void Framework::Graphics::Window::RegisterWidgetManager(GUI::WidgetManager* widgetManager) {
     m_widgetManagers.Add(widgetManager);
 }
+
+void Framework::Graphics::Window::SetGUIEnabled(bool value) {
+    if (value) {
+        SR_LOG("Window::SetGUIEnabled() : enable gui...");
+    }
+    else
+        SR_LOG("Window::SetGUIEnabled() : disable gui...");
+
+    m_GUIEnabled.second = value;
+}
+
+void Framework::Graphics::Window::SetFullScreen(bool value) {
+    m_env->SetFullScreen(value);
+}
+
+void Framework::Graphics::Window::DrawVulkan() {
+    if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
+        if (m_env->BeginDrawGUI()) {
+            for (auto&& widgetManager : m_widgetManagers.GetElements())
+                widgetManager->Draw();
+
+            m_env->EndDrawGUI();
+        }
+    }
+
+    BeginSync();
+
+    for (auto&& camera : m_cameras.GetElements())
+        camera->PoolEvents();
+
+    if (m_env->IsNeedReBuild()) {
+        if (!m_cameras.Empty()) {
+            m_env->ClearFramebuffersQueue();
+
+            m_render->SetCurrentCamera(m_cameras.Front());
+
+            if (m_cameras.Front()->IsReady()) {
+                if (m_cameras.Front()->GetPostProcessing()->BeginGeometry()) {
+                    m_env->BeginRender();
+
+                    {
+                        m_env->SetViewport();
+                        m_env->SetScissor();
+
+                        m_render->DrawGeometry();
+                        m_render->DrawSkybox();
+                    }
+
+                    m_env->EndRender();
+
+                    m_cameras.Front()->GetPostProcessing()->EndGeometry();
+                }
+            }
+
+            {
+                m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+
+                if (!m_cameras.Front()->IsDirectOutput()) {
+                    m_env->BindFrameBuffer(m_cameras.Front()->GetPostProcessing()->GetFinalFBO());
+                    m_env->ClearBuffers();
+
+                    m_cameras.Front()->GetPostProcessing()->Complete();
+
+                    m_env->BeginRender();
+                    {
+                        m_env->SetViewport();
+                        m_env->SetScissor();
+
+                        //! Должна вызываться в том же кадровом буфере, что и Complete
+                        m_cameras.Front()->GetPostProcessing()->Draw();
+                    }
+                    m_env->EndRender();
+                }
+                else
+                    m_cameras.Front()->GetPostProcessing()->Complete();
+
+                for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
+                    m_env->SetBuildIteration(i);
+
+                    m_env->BindFrameBuffer(0);
+
+                    m_env->BeginRender();
+                    {
+                        m_env->SetViewport();
+                        m_env->SetScissor();
+
+                        if (m_cameras.Front()->IsDirectOutput())
+                            m_cameras.Front()->GetPostProcessing()->Draw();
+                    }
+                    m_env->EndRender();
+                }
+            }
+
+            m_env->SetBuildState(true);
+        }
+        else
+            DrawNoCamera();
+
+        EndSync();
+        return;
+    }
+    else
+        m_render->UpdateUBOs();
+
+    m_env->DrawFrame();
+
+    EndSync();
+}
+
+void Framework::Graphics::Window::DrawOpenGL() {
+    for (auto&& camera : m_cameras.GetElements())
+        camera->PoolEvents();
+
+    m_env->ClearBuffers();
+
+    {
+        if (m_cameras.Count() == 1) {
+            if (m_cameras.Front()->IsReady()) {
+                DrawToCamera(m_cameras.Front());
+            }
+        }
+        else
+            for (auto&& camera : m_cameras.GetElements()) {
+                if (!camera->IsReady()) {
+                    return;
+                }
+                DrawToCamera(camera);
+            }
+
+        if (IsGUIEnabled() && m_env->IsGUISupport()) {
+            if (m_env->BeginDrawGUI()) {
+                m_env->EndDrawGUI();
+            }
+        }
+    }
+
+    m_env->SwapBuffers();
+}
+

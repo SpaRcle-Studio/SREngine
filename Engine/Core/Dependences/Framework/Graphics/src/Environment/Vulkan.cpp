@@ -44,22 +44,22 @@ namespace Framework::Graphics{
         EvoVulkan::Tools::VkDebug::Graph  = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
         EvoVulkan::Tools::VkDebug::Assert = [](const std::string& msg) { Helper::Debug::Assert(SR_VRAM      + msg); };
 
-        this->m_imgui = new VulkanTypes::VkImGUI();
+        m_imgui = new VulkanTypes::VkImGUI();
 
-        this->m_kernel = new SRVulkan();
+        m_kernel = new SRVulkan();
         Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
 
         if (m_enableValidationLayers)
             m_kernel->SetValidationLayersEnabled(true);
 
-        this->m_viewport     = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
-        this->m_scissor      = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
-        this->m_cmdBufInfo   = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
-        this->m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
+        m_viewport     = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
+        m_scissor      = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
+        m_cmdBufInfo   = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
+        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
 
-        this->m_kernel->SetMultisampling(smooth_samples);
+        m_kernel->SetMultisampling(smooth_samples);
 
-        if (!this->m_kernel->PreInit(
+        if (!m_kernel->PreInit(
                 appName,
                 engineName,
                 glslc,
@@ -73,15 +73,10 @@ namespace Framework::Graphics{
         return true;
     }
 
-    bool Vulkan::MakeWindow(const char *winName, bool fullScreen, bool resizable, bool headerEnabled) {
+    bool Vulkan::MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) {
         Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
 
-        if (!this->m_winFormat) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : format isn't initialized!");
-            return false;
-        }
-
-        this->m_basicWindow = new Win32Window(this->GetPipeLine());
+        m_basicWindow = new Win32Window(this->GetPipeLine());
 
         m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
             m_kernel->SetSize(w, h);
@@ -98,7 +93,7 @@ namespace Framework::Graphics{
             g_callback(WinEvents::Focus, win, &focus, nullptr);
         });
 
-        if (!m_basicWindow->Create(winName, 0, 0, m_winFormat->Width(), m_winFormat->Height(), fullScreen, resizable)) {
+        if (!m_basicWindow->Create(name.c_str(), 0, 0, size.x, size.y, fullScreen, resizable)) {
             Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
@@ -106,7 +101,7 @@ namespace Framework::Graphics{
 
         m_basicWindow->SetHeaderEnabled(headerEnabled);
 
-        this->m_kernel->SetSize(m_basicWindow->GetSurfaceWidth(), m_basicWindow->GetSurfaceHeight());
+        m_kernel->SetSize(m_basicWindow->GetSurfaceWidth(), m_basicWindow->GetSurfaceHeight());
 
         return true;
     }

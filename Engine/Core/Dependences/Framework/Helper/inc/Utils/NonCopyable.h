@@ -5,7 +5,7 @@
 #ifndef SRENGINE_NONCOPYABLE_H
 #define SRENGINE_NONCOPYABLE_H
 
-#include <macros.h>
+#include <stdInclude.h>
 
 namespace SR_UTILS_NS {
     class NonCopyable {

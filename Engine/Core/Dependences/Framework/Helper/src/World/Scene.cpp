@@ -148,11 +148,9 @@ void Scene::SaveRegion(Region* pRegion) const {
     const auto& regPath = regions.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
     if (auto&& regionMarshal = pRegion->Save(); regionMarshal.Valid()) {
         regionMarshal.Save(regPath);
-        /// debug: regionMarshal.Save(regPath.ConcatExt("json"), MarshalSaveMode::Json);
     }
     else if (regPath.Exists()) {
         FileSystem::Delete(regPath.CStr());
-        /// debug: FileSystem::Delete(regPath.ConcatExt("json").CStr());
     }
 }
 
@@ -162,7 +160,7 @@ bool Framework::Helper::World::Scene::SaveAt(const std::string& folder) {
     UpdateContainers();
 
     auto xml = Xml::Document::New();
-    if (auto&& root = xml.Root().AppendChild("Scene"); root.Valid()) {
+    if (auto&& root = xml.AppendChild("Scene"); root.Valid()) {
         root.AppendAttribute("Name", std::string(m_name).c_str());
         if (auto&& settings = root.AppendChild("Settings")) {
             if (auto&& chunk = settings.AppendChild("Chunks")) {
@@ -185,16 +183,6 @@ bool Framework::Helper::World::Scene::SaveAt(const std::string& folder) {
     const auto scene = m_path.Concat(std::string(m_name));
 
     return xml.Save(scene.Concat("main.scene"));
-}
-
-Framework::Helper::World::GameObjects Framework::Helper::World::Scene::GetGameObjects()  {
-    auto v = GameObjects();
-    v.reserve(m_gameObjects.size());
-
-    for (const auto& a : m_gameObjects)
-        v.insert(a);
-
-    return v;
 }
 
 void Framework::Helper::World::Scene::Update(float_t dt) {
@@ -308,14 +296,8 @@ void Framework::Helper::World::Scene::SetWorldOffset(const Framework::Helper::Wo
     const auto fOffset = ((deltaOffset.m_region * m_regionWidth + deltaOffset.m_chunk)
             * Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<Math::Unit>();
 
-    /// пытаемсы синхронно сдвинуть все объекты, если невозможно (в случае двойной блокировки) то делаем асинхронно,
-    /// т.к. вероятнее всего находимся в том же потоке
-    bool sync = this->TrySync();
-    {
-        for (const GameObject::Ptr& gameObject : GetRootGameObjects())
-            gameObject->GetTransform()->GlobalTranslate(fOffset);
-    }
-    if (sync) this->EndSync();
+    for (const GameObject::Ptr& gameObject : GetRootGameObjects())
+        gameObject->GetTransform()->GlobalTranslate(fOffset);
 
     for (const auto& [position, pRegion] : m_regions)
         pRegion->ApplyOffset();
@@ -452,7 +434,21 @@ GameObjects Scene::GetGameObjectsAtChunk(const IVector3 &region, const IVector3 
     return m_tensor.at(key);
 }
 
+Types::SafePtr<GameObject> Scene::Instance(const Types::RawMesh *rawMesh) {
+    SRAssert2(false, "Method isn't implemented!");
+    return Types::SafePtr<GameObject>();
+}
 
+SR_HTYPES_NS::SafePtr<GameObject> Scene::InstanceFromFile(const std::string &path) {
+    if (auto&& raw = SR_HTYPES_NS::RawMesh::Load(path)) {
+        GameObject::Ptr root = Instance(raw);
 
+        if (raw->GetCountUses() == 0) {
+            raw->Destroy();
+        }
 
+        return root;
+    }
 
+    return SR_HTYPES_NS::SafePtr<GameObject>();
+}

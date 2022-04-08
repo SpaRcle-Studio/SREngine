@@ -3,26 +3,6 @@
 //
 
 #include <Types/Mesh.h>
-#include <ResourceManager/ResourceManager.h>
-#include <Render/Render.h>
-#include <Types/RawMesh.h>
-#include <FbxLoader/Loader.h>
-#include <Types/Material.h>
-
-#include <Render/Shader.h>
-
-#include <Loaders/ObjLoader.h>
-
-#include <GUI.h>
-#include <Utils/StringFormat.h>
-
-#include <Math/Matrix4x4.h>
-
-#include <Types/Geometry/Mesh3D.h>
-#include <Types/RawMesh.h>
-#include <Types/Geometry/SkinnedMesh.h>
-#include <Types/Geometry/DebugWireframeMesh.h>
-#include <Memory/MeshManager.h>
 #include <Memory/MeshAllocator.h>
 
 namespace SR_GRAPH_NS::Types {
@@ -31,7 +11,6 @@ namespace SR_GRAPH_NS::Types {
             , m_env(Environment::Get())
             , m_type(type)
             , m_pipeline(Environment::Get()->GetPipeLine())
-            , m_shader(nullptr)
             , m_material(nullptr)
             , m_geometryName(std::move(name))
     {
@@ -61,7 +40,6 @@ namespace SR_GRAPH_NS::Types {
         return IResource::Destroy();
     }
 
-
     Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
         auto &&pMesh = TryLoad(localPath, type, id);
 
@@ -88,7 +66,7 @@ namespace SR_GRAPH_NS::Types {
             return nullptr;
         }
 
-        if (id >= pRaw->GetModelsCount()) {
+        if (id >= pRaw->GetMeshesCount()) {
             if (pRaw->GetCountUses() == 0) {
                 SR_WARN("Mesh::TryLoad() : count uses is zero! Unresolved situation...\n\tPath: " + localPath +
                         "\n\tId: " + Helper::ToString(id));
@@ -160,11 +138,6 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        if (!m_shader) {
-            SR_ERROR("Mesh::IsCanCalculate() : mesh have not shader!");
-            return false;
-        }
-
         if (!m_material) {
             SR_ERROR("Mesh::IsCanCalculate() : mesh have not material!");
             return false;
@@ -198,7 +171,6 @@ namespace SR_GRAPH_NS::Types {
         mesh->m_meshId = m_meshId;
 
         mesh->SetMaterial(m_material);
-        mesh->SetShader(nullptr);
         mesh->SetRawMesh(m_rawMesh);
 
         mesh->m_barycenter = m_barycenter;
@@ -238,7 +210,8 @@ namespace SR_GRAPH_NS::Types {
         if (m_pipeline == PipeLine::OpenGL) {
             modelMat *= Math::Matrix4x4::FromScale(m_skew.InverseAxis(0));
             modelMat *= Math::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
-        } else {
+        }
+        else {
             modelMat *= Math::Matrix4x4::FromScale(m_skew);
             modelMat *= Math::Matrix4x4::FromEulers(m_rotation);
         }
@@ -285,14 +258,6 @@ namespace SR_GRAPH_NS::Types {
 
         if (m_isCalculated)
             Environment::Get()->SetBuildState(false);
-    }
-
-    void Mesh::SetShader(Framework::Graphics::Shader *shader) {
-        if (m_isCalculated) {
-            Environment::Get()->SetBuildState(false);
-            m_isCalculated = false;
-        }
-        m_shader = shader;
     }
 
     void Mesh::OnMove(const Math::FVector3 &newValue) {
@@ -345,6 +310,10 @@ namespace SR_GRAPH_NS::Types {
     void Mesh::OnReady(bool ready) {
         m_env->SetBuildState(false);
         Component::OnReady(ready);
+    }
+
+    Shader *Mesh::GetShader() const {
+        return m_material ? m_material->GetShader() : nullptr;
     }
 }
 

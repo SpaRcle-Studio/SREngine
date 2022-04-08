@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_STACKTRACE_H
 #define GAMEENGINE_STACKTRACE_H
 
-#include <string>
+#include <macros.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     std::string GetStacktrace();
 }
 

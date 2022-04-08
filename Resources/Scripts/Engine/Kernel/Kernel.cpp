@@ -76,7 +76,7 @@ void LoadWireframe() {
 }*/
 
 void LoadCubes() {
-    Render* render = Engine::Instance().GetRender();
+    /*Render* render = Engine::Instance().GetRender();
     auto mesh = Mesh::Load("Engine/cube.obj", MeshType::Static)[0];
     auto scene = Engine::Instance().GetScene();
 
@@ -101,11 +101,16 @@ void LoadCubes() {
         cube = newCube;
 
         ///cube->GetTransform()->Translate(FVector3(2, 0, 0));
-    }
+    }*/
 }
 
 void LoadNemesis() {
-    Render* render = Engine::Instance().GetRender();
+    if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+        scene->InstanceFromFile("Game/Nemesis.fbx");
+        scene.Unlock();
+    }
+
+    /*Render* render = Engine::Instance().GetRender();
     auto scene = Engine::Instance().GetScene();
 
     std::vector<Material*> materials = {
@@ -139,11 +144,11 @@ void LoadNemesis() {
         character.Unlock();
     }
    character->GetTransform()->Rotate(FVector3(-90, 0, 0));
-   //character->GetTransform()->Translate(FVector3(10, 0, 0));
+   //character->GetTransform()->Translate(FVector3(10, 0, 0));*/
 }
 
 void LoadMiku() {
-    Render* render = Engine::Instance().GetRender();
+    /*Render* render = Engine::Instance().GetRender();
     auto scene = Engine::Instance().GetScene();
 
     Material* body = Material::Load("Game/miku_body");
@@ -171,12 +176,12 @@ void LoadMiku() {
 
         character->AddChild(cube);
     }
-
+*/
     ///character->GetTransform()->Translate(character->GetTransform()->Right());
 }
 
 void LoadKurumi() {
-    Render* render = Engine::Instance().GetRender();
+    /*Render* render = Engine::Instance().GetRender();
     auto scene = Engine::Instance().GetScene();
 
     Material* material = Material::Load("Game/kurumi");
@@ -197,11 +202,19 @@ void LoadKurumi() {
 
         character->AddChild(object);
     }
-
+*/
     ///character->GetTransform()->Translate(-character->GetTransform()->Right());
 }
 
+void LoadAxe() {
+    if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+        scene->InstanceFromFile("Game/axe.blend");
+        scene.Unlock();
+    }
+}
+
 void LoadRoom() {
+    /*
     Render* render = Engine::Instance().GetRender();
     auto scene = Engine::Instance().GetScene();
 
@@ -218,6 +231,11 @@ void LoadRoom() {
         object->AddComponent(DynamicCastMeshToComponent(mesh));
 
         character->AddChild(object);
+    }*/
+
+    if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+        scene->InstanceFromFile("Game/Room.fbx");
+        scene.Unlock();
     }
 }
 
@@ -253,9 +271,10 @@ EXTERN void Start() {
 
     //LoadMiku();
     //LoadKurumi();
-    //LoadNemesis();
-    //LoadCubes();
     //LoadRoom();
+    LoadNemesis();
+    //LoadCubes();
+    LoadAxe();
 }
 
 void CameraMove(float dt) {

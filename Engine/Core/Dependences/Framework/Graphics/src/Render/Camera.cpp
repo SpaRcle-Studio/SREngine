@@ -4,20 +4,24 @@
 
 #include <Render/Camera.h>
 #include <Window/Window.h>
-#include <Debug.h>
-#include <string>
-
 #include <GUI.h>
+
+Framework::Graphics::Camera::Camera()
+    : m_env(Environment::Get())
+    , m_pipeline(Environment::Get()->GetPipeLine())
+{
+    SR_UTILS_NS::Component::Init<Camera>();
+}
 
 void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shader *shader) noexcept {
     if (!m_isCreate) {
-        Debug::Warn("Camera::UpdateShaderProjView() : camera is not create! Something went wrong...");
+        SR_WARN("Camera::UpdateShaderProjView() : camera is not create! Something went wrong...");
         return;
     }
 
     if (m_needUpdate) {
         if (!CompleteResize()) {
-            Debug::Error("Camera::UpdateShaderProjView() : failed to complete resize!");
+            SR_ERROR("Camera::UpdateShaderProjView() : failed to complete resize!");
             return;
         }
     }
@@ -28,19 +32,19 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
     Debug::Graph("Camera::Create() : creating camera...");
-    if (m_isCreate){
-        Debug::Error("Camera::Create() : camera already create!");
+    if (m_isCreate) {
+        SR_ERROR("Camera::Create() : camera already create!");
         return false;
     }
 
-    this->m_window = window;
+    m_window = window;
 
-    this->UpdateView();
+    UpdateView();
 
     if (!m_isCalculate)
-        this->Calculate();
+        Calculate();
 
-    this->m_isCreate = true;
+    m_isCreate = true;
 
     return true;
 }

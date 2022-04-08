@@ -103,14 +103,14 @@ void Framework::Core::GUI::ComponentDrawer::DrawComponent(Mesh3D* mesh3d) {
 
         Graphics::GUI::DrawValue("Material", material->GetResourceId());
 
-        drawTexture("Diffuse", material->GetDiffuse());
-        drawTexture("Normal", material->GetNormal());
-        drawTexture("Specular", material->GetSpecular());
-        drawTexture("Glossiness", material->GetGlossiness());
+        drawTexture("Diffuse", material->GetTexture(MAT_PROPERTY_DIFFUSE_TEXTURE));
+        drawTexture("Normal", material->GetTexture(MAT_PROPERTY_NORMAL_TEXTURE));
+        drawTexture("Specular", material->GetTexture(MAT_PROPERTY_SPECULAR_TEXTURE));
+        drawTexture("Glossiness", material->GetTexture(MAT_PROPERTY_GLOSSINESS_TEXTURE));
 
-        auto color = material->GetColor();
+        auto color = material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR);
         if (Graphics::GUI::DrawColorControl("Color", color, 1.f, !readOnly))
-            material->SetColor(color);
+            material->SetColor(MAT_PROPERTY_DIFFUSE_COLOR, color);
 
         auto blending = material->IsTransparent();
         if (Graphics::GUI::CheckBox("Blend", blending))

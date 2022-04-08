@@ -5,8 +5,7 @@
 #ifndef GAMEENGINE_COLORBUFFER_H
 #define GAMEENGINE_COLORBUFFER_H
 
-#include <glm/glm.hpp>
-#include <vector>
+#include <Debug.h>
 
 namespace Framework::Graphics {
     class ColorBuffer {

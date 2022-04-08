@@ -7,6 +7,9 @@
 
 #include <Debug.h>
 
+#include <Math/Vector3.h>
+#include <Math/Vector4.h>
+
 namespace SR_UTILS_NS {
     enum class MARSHAL_TYPE : uint8_t {
         Node = 0,
@@ -64,7 +67,55 @@ namespace SR_UTILS_NS {
         }
 
         template<typename T> static void SR_FASTCALL SaveValue(std::stringstream& stream, const T& value) {
-            stream.write((const char *) &value, sizeof(T));
+            if constexpr (std::is_same<T, Math::FColor>()) {
+                stream.write((const char *) &value.r, sizeof(Math::Unit));
+                stream.write((const char *) &value.g, sizeof(Math::Unit));
+                stream.write((const char *) &value.b, sizeof(Math::Unit));
+                stream.write((const char *) &value.a, sizeof(Math::Unit));
+            }
+            else if constexpr (std::is_same<T, Math::FVector3>()) {
+                stream.write((const char *) &value.x, sizeof(Math::Unit));
+                stream.write((const char *) &value.y, sizeof(Math::Unit));
+                stream.write((const char *) &value.z, sizeof(Math::Unit));
+            }
+            else if constexpr (std::is_same<T, Math::IVector3>()) {
+                stream.write((const char *) &value.x, sizeof(int32_t));
+                stream.write((const char *) &value.y, sizeof(int32_t));
+                stream.write((const char *) &value.z, sizeof(int32_t));
+            }
+            else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+                stream.write((const char *) &value, sizeof(T));
+            }
+            else
+                static_assert("Unsupported type!");
+        }
+
+        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
+            T value = T();
+
+            if constexpr (std::is_same<T, Math::FColor>()) {
+                stream.read((char*)&value.r, sizeof(Math::Unit));
+                stream.read((char*)&value.g, sizeof(Math::Unit));
+                stream.read((char*)&value.b, sizeof(Math::Unit));
+                stream.read((char*)&value.a, sizeof(Math::Unit));
+            }
+            else if constexpr (std::is_same<T, Math::FVector3>()) {
+                stream.read((char*)&value.x, sizeof(Math::Unit));
+                stream.read((char*)&value.y, sizeof(Math::Unit));
+                stream.read((char*)&value.z, sizeof(Math::Unit));
+            }
+            else if constexpr (std::is_same<T, Math::IVector3>()) {
+                stream.read((char*)&value.x, sizeof(int32_t));
+                stream.read((char*)&value.y, sizeof(int32_t));
+                stream.read((char*)&value.z, sizeof(int32_t));
+            }
+            else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+                stream.read((char*)&value, sizeof(T));
+            }
+            else
+                static_assert("Unsupported type!");
+
+            return value;
         }
 
         static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str) {
@@ -77,12 +128,6 @@ namespace SR_UTILS_NS {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));
-        }
-
-        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
-            T value;
-            stream.read((char*)&value, sizeof(T));
-            return value;
         }
 
         template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream) {

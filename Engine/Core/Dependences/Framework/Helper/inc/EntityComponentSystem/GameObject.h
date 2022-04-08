@@ -10,7 +10,6 @@
 #include <Types/SafePointer.h>
 
 #include <EntityComponentSystem/EntityManager.h>
-#include "Component.h"
 
 namespace SR_UTILS_NS::World {
     class Scene;
@@ -36,6 +35,7 @@ namespace SR_UTILS_NS {
 
     public:
         typedef Types::SafePtr<GameObject> Ptr;
+        static const uint16_t VERSION;
 
     private:
         GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag = "Untagged");
@@ -52,7 +52,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
 
-        SR_NODISCARD MarshalEncodeNode Save(SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
         Math::FVector3 GetBarycenter();

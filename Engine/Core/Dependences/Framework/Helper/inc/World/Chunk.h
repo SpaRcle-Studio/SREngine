@@ -5,7 +5,6 @@
 #ifndef GAMEENGINE_CHUNK_H
 #define GAMEENGINE_CHUNK_H
 
-#include <unordered_set>
 #include <EntityComponentSystem/GameObject.h>
 #include <Math/Vector2.h>
 #include <Types/SafePointer.h>
@@ -48,7 +47,7 @@ namespace Framework::Helper {
             [[nodiscard]] Math::IVector3 GetPosition() const { return m_position; }
             [[nodiscard]] Math::FVector3 GetWorldPosition(Math::Axis center = Math::AXIS_NONE) const;
 
-            SR_NODISCARD MarshalEncodeNode Save() const;
+            SR_NODISCARD SR_HTYPES_NS::Marshal Save() const;
 
         public:
             virtual void OnEnter();
@@ -58,7 +57,7 @@ namespace Framework::Helper {
             virtual bool Access(float_t dt);
             virtual bool Belongs(const Math::FVector3& point);
             virtual bool Unload();
-            virtual bool Load(const MarshalDecodeNode& node);
+            virtual bool Load(SR_HTYPES_NS::Marshal&& marshal);
 
             virtual bool ApplyOffset();
 
@@ -73,9 +72,9 @@ namespace Framework::Helper {
 
             float_t m_lifetime;
 
-            Math::IVector2 m_size;
-            Math::IVector3 m_regionPosition;
-            Math::IVector3 m_position;
+            SR_MATH_NS::IVector2 m_size;
+            SR_MATH_NS::IVector3 m_regionPosition;
+            SR_MATH_NS::IVector3 m_position;
         };
     }
 }

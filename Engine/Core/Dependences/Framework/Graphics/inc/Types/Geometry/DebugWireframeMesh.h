@@ -9,7 +9,6 @@
 #include <Types/Vertices.h>
 #include <Types/Uniforms.h>
 
-
 namespace Framework::Graphics::Memory {
     class MeshAllocator;
 }

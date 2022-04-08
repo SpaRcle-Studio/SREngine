@@ -7,8 +7,6 @@
 
 #include <GUI.h>
 #include <Utils/NonCopyable.h>
-#include <unordered_map>
-#include <string>
 #include <Math/Vector4.h>
 
 namespace Framework::Graphics::GUI {

@@ -5,12 +5,9 @@
 #ifndef SRENGINE_MESSAGEBOX_H
 #define SRENGINE_MESSAGEBOX_H
 
-#include <macros.h>
 #include <GUI/Widget.h>
 #include <Utils/NonCopyable.h>
 #include <Utils/Singleton.h>
-#include <mutex>
-#include <string>
 
 namespace Framework::Graphics::GUI {
     enum class MessageBoxType : uint8_t {
