@@ -20,7 +20,7 @@ namespace Framework::Helper {
     template<typename T> T LexicalCast(const std::string& str) {
         if constexpr (std::is_same<T, bool>()) {
             const char c = str.front();
-            return c == 't' || c == 'T' || c == '1' || c == 'y' || c == 'Y';
+            return c == 't' || c == 'T' || c == '1' || c == 'y' || c == 'Y' || c == '1';
         }
         else if constexpr (std::is_same<T, int8_t>()) {
             return static_cast<int8_t>(str.front());

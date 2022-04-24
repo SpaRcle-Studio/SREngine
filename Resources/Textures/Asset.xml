@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Textures>
-    <Texture Path="Engine/default.png" Filter="NEAREST" CPUUsage="true" />
+    <Texture Path="Engine/default.png" Filter="NEAREST" CPUUsage="false" />
+    <Texture Path="Engine/none.png" Filter="NEAREST" CPUUsage="false" />
 
     <Texture Path="Game/Nemesis/npc_shu_901_body_d.png" CPUUsage="false" MipLevels="1" />
     <Texture Path="Game/Nemesis/npc_shu_901_face_d.png" CPUUsage="false" MipLevels="1" />

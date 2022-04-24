@@ -37,6 +37,7 @@ namespace Framework::Helper {
             return true;
         }
 
+        static bool WriteToFile(const std::string& path, const std::string& text);
         static bool CreateFolder(const std::string& path);
         static std::string GetExecutableFileName();
         static std::string GetPathToExe();
@@ -48,11 +49,9 @@ namespace Framework::Helper {
         static std::vector<std::string> ReadAllLines(const std::string& path) {
             std::ifstream file(path);
             std::vector<std::string> lines = { };
-            while (true){
+            while (file.good()) {
                 std::string line;
                 std::getline(file,line);
-                if (!file.good())
-                    break;
                 lines.push_back(line);
             }
             return lines;

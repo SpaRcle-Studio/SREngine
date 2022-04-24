@@ -182,75 +182,67 @@ namespace Framework::Graphics{
         Helper::Debug::Graph("Vulkan::PostInit() : post-initializing vulkan...");
 
         if (!m_kernel->PostInit()) {
-            Helper::Debug::Error("Vulkan::PostInit() : failed to post-initialize Evo Vulkan kernel!");
+            SR_ERROR("Vulkan::PostInit() : failed to post-initialize Evo Vulkan kernel!");
             return false;
         }
 
         return true;
     }
 
-    bool Vulkan::CompileShader(
-            const std::string &path,
-            int32_t FBO,
-            void **shaderData,
-            const std::vector<uint64_t>& uniformSizes
-            ) const
-    {
+    bool Vulkan::CompileShader(const std::string &path, int32_t FBO, void **shaderData, const std::vector<uint64_t>& uniformSizes) const {
         if (FBO < 0) {
-            Helper::Debug::Error("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
+            SR_ERROR("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
             return false;
         }
 
-        EvoVulkan::Types::RenderPass renderPass = {};
-        if (FBO == 0)
-            renderPass = m_kernel->GetRenderPass();
-        else {
-            auto fbo = m_memory->m_FBOs[FBO - 1];
-            if (!fbo) {
-                Helper::Debug::Error("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
+        EvoVulkan::Types::RenderPass renderPass = m_kernel->GetRenderPass();
+        if (FBO != 0) {
+            if (auto fbo = m_memory->m_FBOs[FBO - 1]; fbo) {
+                renderPass = fbo->GetRenderPass();
+            }
+            else {
+                SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
                 return false;
             }
-
-            renderPass = fbo->GetRenderPass();
         }
 
         if (!renderPass.Ready()) {
-            Helper::Debug::Error("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
+            SR_ERROR("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
             return false;
         }
 
         int32_t ID = m_memory->AllocateShaderProgram(renderPass);
         if (ID < 0) {
-            Helper::Debug::Error("Vulkan::CompileShader() : failed to allocate shader program ID!");
+            SR_ERROR("Vulkan::CompileShader() : failed to allocate shader program ID!");
             return false;
-        } else {
+        }
+        else {
             int* dynamicID = new int();
             *dynamicID = ID;
             *shaderData = reinterpret_cast<void*>(dynamicID);
         }
 
-        auto shadersPath = Helper::ResourceManager::Instance().GetResPath().Concat("Shaders");
-
-        auto vertexPath = shadersPath.Concat("Common").Concat(path).ConcatExt(".vert");
-        auto fragmentPath = shadersPath.Concat("Common").Concat(path).ConcatExt(".frag");
-
-        {
-            if (!vertexPath.Exists())
-                vertexPath = shadersPath.Concat(GetPipeLineName()).Concat(path).ConcatExt(".vert");
-
-            if (!fragmentPath.Exists())
-                fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat(path).ConcatExt(".frag");
-        }
+        const std::vector<SR_UTILS_NS::Path> checkPatches = {
+                SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders/SRSL"),
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders").Concat("Common"),
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders").Concat(GetPipeLineName())
+        };
 
         std::vector<SourceShader> modules = {};
         {
-            auto shaderName = Helper::StringUtils::GetFileNameFromFullPath(path);
+            for (auto&& checkPath : checkPatches) {
+                if (auto&& modulePath = checkPath.Concat(path).ConcatExt(".vert"); modulePath.Exists()) {
+                    modules.emplace_back(SourceShader(path, modulePath.ToString(), ShaderStage::Vertex));
+                    break;
+                }
+            }
 
-            if (vertexPath.Exists())
-                modules.emplace_back(SourceShader(shaderName + ".vert", vertexPath, ShaderType::Vertex));
-
-            if (fragmentPath.Exists())
-                modules.emplace_back(SourceShader(shaderName + ".frag", fragmentPath, ShaderType::Fragment));
+            for (auto&& checkPath : checkPatches) {
+                if (auto&& modulePath = checkPath.Concat(path).ConcatExt(".frag"); modulePath.Exists()) {
+                    modules.emplace_back(SourceShader(path, modulePath.ToString(), ShaderStage::Fragment));
+                    break;
+                }
+            }
 
             if (modules.empty()) {
                 SRAssert2(false, "No shader modules were found!");
@@ -259,9 +251,9 @@ namespace Framework::Graphics{
         }
 
         bool errors = false;
-        std::vector<std::pair<LayoutBinding, ShaderType>> bindings = Graphics::AnalyseShader(modules, &errors);
+        auto&& uniforms = Graphics::AnalyseShader(modules, &errors);
         if (errors) {
-            Helper::Debug::Error("Vulkan::CompileShader() : failed to analyse shader!");
+            SR_ERROR("Vulkan::CompileShader() : failed to analyse shader!");
             return false;
         }
 
@@ -270,30 +262,48 @@ namespace Framework::Graphics{
             VkDescriptorType      type  = VK_DESCRIPTOR_TYPE_MAX_ENUM;
             VkShaderStageFlagBits stage = VK_SHADER_STAGE_ALL;
 
-            for (uint32_t i = 0; i < bindings.size(); i++) {
-                switch (bindings[i].first) {
+            for (auto&& uniform : uniforms) {
+                switch (uniform.type) {
                     case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
                     case LayoutBinding::Uniform:   type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;         break;
                     default:
-                        Helper::Debug::Error("Vulkan::CompileShader() : unknown binding type!");
+                        SR_ERROR("Vulkan::CompileShader() : unknown binding type!");
                         return false;
                 }
 
-                switch (bindings[i].second) {
-                    case ShaderType::Vertex:   stage = VK_SHADER_STAGE_VERTEX_BIT;   break;
-                    case ShaderType::Fragment: stage = VK_SHADER_STAGE_FRAGMENT_BIT; break;
+                switch (uniform.stage) {
+                    case ShaderStage::Vertex:   stage = VK_SHADER_STAGE_VERTEX_BIT;   break;
+                    case ShaderStage::Fragment: stage = VK_SHADER_STAGE_FRAGMENT_BIT; break;
                     default:
-                        Helper::Debug::Error("Vulkan::CompileShader() : unknown binding stage!");
+                        SR_ERROR("Vulkan::CompileShader() : unknown binding stage!");
                         return false;
                 }
 
-                descriptorLayoutBindings.emplace_back(EvoVulkan::Tools::Initializers::DescriptorSetLayoutBinding(type, stage, i));
+                for (auto&& descriptor : descriptorLayoutBindings) {
+                    if (descriptor.binding == uniform.binding) {
+                        if (descriptor.descriptorType != type) {
+                            SR_ERROR("Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
+                                SR_UTILS_NS::ToString(uniform.binding) + "\n\tPath: " + path);
+                            return false;
+                        }
+
+                        descriptor.stageFlags |= stage;
+                        goto skip;
+                    }
+                }
+
+                descriptorLayoutBindings.emplace_back(EvoVulkan::Tools::Initializers::DescriptorSetLayoutBinding(
+                        type, stage, uniform.binding
+                ));
+
+                skip:
+                    SR_NOOP;
             }
         }
 
         std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
         for (const auto& module : modules) {
-            VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_type);
+            VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_stage);
             vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_name, module.m_path, stage));
         }
 
@@ -303,7 +313,7 @@ namespace Framework::Graphics{
                 descriptorLayoutBindings,
                 uniformSizes
                 )) {
-            Helper::Debug::Error("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
+            SR_ERROR("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
             return false;
         }
 
@@ -318,25 +328,25 @@ namespace Framework::Graphics{
             SRShaderCreateInfo shaderCreateInfo) const
     {
         if (!shaderData) {
-            Helper::Debug::Error("Vulkan::LinkShader() : shader data is nullptr!");
+            SR_ERROR("Vulkan::LinkShader() : shader data is nullptr!");
             return false;
         }
         int* dynamicID = reinterpret_cast<int*>(*shaderData);
         if (!dynamicID) {
-            Helper::Debug::Error("Vulkan::LinkShader() : dynamic ID is nullptr!");
+            SR_ERROR("Vulkan::LinkShader() : dynamic ID is nullptr!");
             return false;
         }
 
-        auto vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
-        auto vkVertexAttributes   = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
+        auto&& vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
+        auto&& vkVertexAttributes   = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
         if (vkVertexAttributes.size() != vertexAttributes.size()) {
-            Helper::Debug::Error("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
+            SR_ERROR("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
             delete dynamicID;
             return false;
         }
 
         if (!m_memory->m_ShaderPrograms[*dynamicID]->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
-            Helper::Debug::Error("Vulkan::LinkShader() : failed to set vertex descriptions!");
+            SR_ERROR("Vulkan::LinkShader() : failed to set vertex descriptions!");
             delete dynamicID;
             return false;
         }
@@ -348,6 +358,11 @@ namespace Framework::Graphics{
         else if (shaderCreateInfo.cullMode == CullMode::Front)
             shaderCreateInfo.cullMode = CullMode::Back;
 
+        if (!shaderCreateInfo.Validate()) {
+            SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info!");
+            return false;
+        }
+
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
                 VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
                 VulkanTools::AbstractCullModeToVk(shaderCreateInfo.cullMode),
@@ -357,7 +372,7 @@ namespace Framework::Graphics{
                 shaderCreateInfo.depthTest,
                 VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology)))
         {
-            Helper::Debug::Error("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
+            SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;
             return false;
         }
@@ -403,18 +418,18 @@ namespace Framework::Graphics{
 
     [[nodiscard]] bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const {
         if (!IDs) {
-            Helper::Debug::Error("Vulkan::FreeTextures() : texture IDs is nullptr!");
+            SR_ERROR("Vulkan::FreeTextures() : texture IDs is nullptr!");
             return false;
         }
 
         for (uint32_t i = 0; i < count; i++) {
             if (IDs[i] < 0) {
-                Helper::Debug::Error("Vulkan::FreeTextures() : texture ID less zero!");
+                SR_ERROR("Vulkan::FreeTextures() : texture ID less zero!");
                 return false;
             }
 
             if (!m_memory->FreeTexture((uint32_t)IDs[i])) {
-                Helper::Debug::Error("Vulkan::FreeTextures() : failed to free texture!");
+                SR_ERROR("Vulkan::FreeTextures() : failed to free texture!");
                 return false;
             }
         }
@@ -439,14 +454,14 @@ namespace Framework::Graphics{
     ) const {
         auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format, true /* alpha */);
         if (vkFormat == VK_FORMAT_MAX_ENUM) {
-            Helper::Debug::Error("Vulkan::CalculateTexture() : unsupported format!");
+            SR_ERROR("Vulkan::CalculateTexture() : unsupported format!");
             return -1;
         }
 
         if (compression != TextureCompression::None) {
             vkFormat = VulkanTools::AbstractTextureCompToVkFormat(compression, vkFormat);
             if (vkFormat == VK_FORMAT_MAX_ENUM) {
-                Helper::Debug::Error("Vulkan::CalculateTexture() : unsupported format with compression!");
+                SR_ERROR("Vulkan::CalculateTexture() : unsupported format with compression!");
                 return -1;
             }
 
@@ -457,14 +472,14 @@ namespace Framework::Graphics{
             }
 
             if (data == nullptr || w == 0 || h == 0) {
-                Helper::Debug::Error("Vulkan::CalculateTexture() : failed to reconstruct image!");
+                SR_ERROR("Vulkan::CalculateTexture() : failed to reconstruct image!");
                 return -1;
             }
 
-            Helper::Debug::Log("Vulkan::CalculateTexture() : compress " + std::to_string(w * h * 4 / 1024 / 1024) + "MB source image...");
+            SR_LOG("Vulkan::CalculateTexture() : compress " + std::to_string(w * h * 4 / 1024 / 1024) + "MB source image...");
 
             if (data = Graphics::Compress(w, h, data, compression); data == nullptr) {
-                Helper::Debug::Error("Vulkan::CalculateTexture() : failed to compress image!");
+                SR_ERROR("Vulkan::CalculateTexture() : failed to compress image!");
                 return -1;
             }
         }
@@ -478,7 +493,7 @@ namespace Framework::Graphics{
             free(data); //! free compressed data. Original data isn't will free
 
         if (ID < 0) {
-            Helper::Debug::Error("Vulkan::CalculateTexture() : failed to allocate texture!");
+            SR_ERROR("Vulkan::CalculateTexture() : failed to allocate texture!");
             return -1;
         }
 
@@ -489,14 +504,14 @@ namespace Framework::Graphics{
         Helper::Debug::Graph("Vulkan::InitGUI() : initializing ImGUI library...");
 
         if (!m_kernel->GetDevice()) {
-            Helper::Debug::Error("Vulkan::InitGUI() : device is nullptr!");
+            SR_ERROR("Vulkan::InitGUI() : device is nullptr!");
             return false;
         }
 
         this->m_basicWindow->InitGUI();
 
         if (!m_imgui->Init(m_kernel)) {
-            Helper::Debug::Error("Vulkan::Init() : failed to init imgui!");
+            SR_ERROR("Vulkan::Init() : failed to init imgui!");
             return false;
         }
 
@@ -507,7 +522,7 @@ namespace Framework::Graphics{
         Helper::Debug::Vulkan("Vulkan::StopGUI() : stopping gui...");
 
         EVSafeFreeObject(m_imgui) else {
-            Helper::Debug::Error("Vulkan::StopGUI() : failed to destroy vulkan imgui!");
+            SR_ERROR("Vulkan::StopGUI() : failed to destroy vulkan imgui!");
             return false;
         }
 
@@ -609,8 +624,8 @@ namespace Framework::Graphics{
     }
 
     EvoVulkan::Core::RenderResult SRVulkan::Render()  {
-        if (this->PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
-            this->m_hasErrors |= !this->ResizeWindow();
+        if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
+            m_hasErrors |= !ResizeWindow();
 
         if (m_hasErrors)
             return EvoVulkan::Core::RenderResult::Fatal;
@@ -638,7 +653,7 @@ namespace Framework::Graphics{
         m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
         m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;
 
-        // Submit to queue
+        /// Submit to queue
         if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
             return EvoVulkan::Core::RenderResult::Error;
@@ -657,7 +672,7 @@ namespace Framework::Graphics{
                     return EvoVulkan::Core::RenderResult::Success;
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
-                return EvoVulkan::Core::RenderResult::Fatal;
+                SR_UTILS_NS::Debug::MakeCrash();
             default: {
                 SRAssertOnce(false);
                 return EvoVulkan::Core::RenderResult::Fatal;

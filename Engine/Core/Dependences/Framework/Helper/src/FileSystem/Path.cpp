@@ -76,10 +76,11 @@ namespace Framework::Helper {
         if (auto index = m_path.find_last_of("/\\"); index == std::string::npos) {
             m_name = std::string();
             m_ext = std::string();
-        } else {
+        }
+        else {
             ++index;
 
-            if (auto dot = m_path.find_last_of('.'); dot != std::string::npos && m_type == Type::File) {
+            if (auto dot = m_path.find_last_of('.'); dot != std::string::npos) {
                 m_name = m_path.substr(index, dot - index);
                 m_ext  = m_path.substr(dot + 1, m_path.size() - dot);
             } else {
@@ -183,7 +184,7 @@ namespace Framework::Helper {
                 SR_FALLTHROUGH;
             case Type::Undefined:
             case Type::File:
-                return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+                return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size() + 1)));
             case Type::Folder:
                 return FileSystem::CreatePath(m_path);
         }

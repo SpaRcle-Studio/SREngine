@@ -148,7 +148,8 @@ namespace Framework::Helper {
         size_t pos = 0;
         std::vector<std::string> tokens = {};
         while ((pos = source.find(delimiter)) != std::string::npos) {
-            tokens.emplace_back(source.substr(0, pos));
+            if (auto&& token = source.substr(0, pos); !token.empty())
+                tokens.emplace_back(std::move(token));
             source.erase(0, pos + delimiter.length());
         }
 
@@ -156,5 +157,27 @@ namespace Framework::Helper {
             tokens.emplace_back(source);
 
         return tokens;
+    }
+
+    std::string StringUtils::Tab(std::string code, uint32_t count) {
+        if (!code.empty()) {
+            code = std::string(count, '\t') + code;
+
+            uint64_t lastPos = 0;
+
+            do {
+                const auto pos = code.find("\n", lastPos);
+                lastPos = pos + 1;
+
+                if (pos == std::string::npos || pos + 1 == code.size()) {
+                    break;
+                }
+
+                code.insert(pos + 1, std::string(count, '\t'));
+            }
+            while (true);
+        }
+
+        return code;
     }
 }

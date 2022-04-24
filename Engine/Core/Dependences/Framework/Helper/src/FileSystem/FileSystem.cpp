@@ -319,4 +319,15 @@ bool FileSystem::FolderExists(const std::string &path) {
     return false; // this is not a directory!
 }
 
+bool FileSystem::WriteToFile(const std::string &path, const std::string &text) {
+    std::ofstream stream(path);
+    if (!stream.is_open()) {
+        return false;
+    }
+    stream << text;
+    stream.close();
+
+    return true;
+}
+
 

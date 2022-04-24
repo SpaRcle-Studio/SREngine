@@ -91,11 +91,8 @@ namespace SR_GRAPH_NS {
             g_currentShader = nullptr;
         }
 
-        /**
-         * шейдер будет загружен в соответствии с данными в /Shaders/CreateInfo.xml
-         * name - уникальное имя этого шейдера из конфига
-         * */
-        static Shader* Load(Render* render, const std::string& name);
+        static Shader* Load(Render* render, const SR_UTILS_NS::Path& path);
+        static Shader* LoadFromConfig(Render* render, const std::string& name);
 
     public:
         [[nodiscard]] SR_FORCE_INLINE int32_t GetID() {
@@ -117,7 +114,7 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE int32_t GetUBO(const uint32_t& index) const {
             if (index >= m_countSharedUniforms) {
-                Helper::Debug::Error("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +
+                SR_ERROR("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +
                     std::to_string(m_countSharedUniforms) + "\n\tIndex: " + std::to_string(index));
                 return -1;
             }

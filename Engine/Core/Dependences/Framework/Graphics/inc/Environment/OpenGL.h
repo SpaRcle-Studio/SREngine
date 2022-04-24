@@ -301,7 +301,7 @@ namespace Framework::Graphics {
          */
         int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO = SR_ID_INVALID) override;
-        int32_t CalculateVAO(std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) override;
+        int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) override;
         [[nodiscard]] bool FreeVAO(uint32_t VAO) const override;
         SR_FORCE_INLINE void DrawLines(const uint32_t& VAO, const uint32_t& count_vertices) const override {
             glBindVertexArray(VAO);

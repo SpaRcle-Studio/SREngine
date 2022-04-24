@@ -274,7 +274,7 @@ EXTERN void Start() {
     //LoadRoom();
     LoadNemesis();
     //LoadCubes();
-    LoadAxe();
+    //LoadAxe();
 }
 
 void CameraMove(float dt) {

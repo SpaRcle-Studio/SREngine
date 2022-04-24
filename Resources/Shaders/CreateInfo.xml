@@ -4,7 +4,7 @@
 
     <!-- Engine -->
     <Shader path="engine/geometry" name="geometry">
-        <Vertex value="Mesh3DVertex"/>
+        <Vertex value="StaticMeshVertex"/>
         <Uniforms>
             <!-- binding 0 - mesh   (model mat, color) -->
             <Uniform binding="0" type="Common" UBO="Mesh3dUBO" />

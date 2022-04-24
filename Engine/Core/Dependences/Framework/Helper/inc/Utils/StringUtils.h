@@ -70,6 +70,12 @@ namespace SR_UTILS_NS {
             return source;
         }
 
+        static std::string GetBetween(const std::string& source, int64_t begin, uint64_t end) {
+            return source.substr(begin + 1, (end - begin) - 1);
+        }
+
+        static std::string Tab(std::string code, uint32_t count = 1);
+
         static std::string GetBetween(const std::string& source, const std::string& begin, const std::string& end) {
             auto first = source.find(begin);
             if (first == std::string::npos)
@@ -282,6 +288,22 @@ namespace SR_UTILS_NS {
                 str++;
             }
             return count;
+        }
+
+        inline static std::string ReplaceAllRecursive(const std::string& original, const std::vector<std::string>& fromList, const std::string& to) noexcept {
+            std::string result = original;
+
+        repeat:
+            for (const auto& from : fromList) {
+                size_t pos = result.find(from);
+
+                if (pos != std::string::npos) {
+                    result.replace(pos, from.size(), to);
+                    goto repeat;
+                }
+            }
+
+            return result;
         }
 
         inline static std::string ReplaceAll(std::string const& original, std::string const& from, std::string const& to) noexcept {

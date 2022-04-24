@@ -862,7 +862,7 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
 }
 
 int32_t Framework::Graphics::OpenGL::CalculateVAO(
-        std::vector<Vertices::Mesh3DVertex> &vertices,
+        std::vector<Vertices::StaticMeshVertex> &vertices,
         size_t count_verts)
 {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
@@ -877,7 +877,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    {
+    /*{
         //? Binding vertex array
         ///glBufferData(
         ///        GL_ARRAY_BUFFER,
@@ -922,7 +922,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
     }
 
     glBindVertexArray(0);
-    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &VBO);*/
 
     return VAO;
 }
@@ -948,7 +948,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
 
     /// glBufferData(GL_ARRAY_BUFFER, count * vertexSize, vertices, GL_STATIC_DRAW);
 
-    switch (type) {
+    /*switch (type) {
         case Vertices::Type::Mesh3DVertex:
         OpenGLSetVertexAttribPointer(0, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, pos))
             OpenGLSetVertexAttribPointer(1, 2, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, uv))
@@ -961,7 +961,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
         default:
             Helper::Debug::Error("OpenGL::CalculateVBO() : unknown vertex type!");
             return SR_ID_INVALID;
-    }
+    }*/
 
     glBindVertexArray(0);
     glDeleteBuffers(1, &_vbo);

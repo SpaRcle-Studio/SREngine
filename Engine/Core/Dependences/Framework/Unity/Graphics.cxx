@@ -30,6 +30,8 @@
 #include "../Graphics/src/Loaders/FbxLoader.cpp"
 #include "../Graphics/src/Loaders/ImageLoader.cpp"
 #include "../Graphics/src/Loaders/ObjLoader.cpp"
+#include "../Graphics/src/Loaders/SRSL.cpp"
+#include "../Graphics/src/Loaders/SRSLParser.cpp"
 #include "../Graphics/src/Loaders/TextureLoader.cpp"
 
 #include "../Graphics/src/Memory/TextureConfigs.cpp"

@@ -53,14 +53,12 @@ namespace Framework::Graphics::Impl {
         }
 
         void DrawGeometry() override {
-            //SRDrawMeshCluster(m_geometry, Vulkan, ;)
-
             static Environment* env = Environment::Get();
 
             for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
-                if (shader) shader->Use();
-                else
+                if (!shader || shader && !shader->Use()) {
                     continue;
+                }
 
                 for (auto const& [key, meshGroup] : subCluster.m_groups) {
                     env->BindVBO((*meshGroup.begin())->GetVBO<true>());

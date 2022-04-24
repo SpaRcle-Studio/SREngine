@@ -25,7 +25,7 @@ namespace SR_GRAPH_NS::Types {
         ~Mesh3D() override = default;
 
     public:
-        typedef Vertices::Mesh3DVertex VertexType;
+        typedef Vertices::StaticMeshVertex VertexType;
 
     public:
         IResource* Copy(IResource* destination) const override;

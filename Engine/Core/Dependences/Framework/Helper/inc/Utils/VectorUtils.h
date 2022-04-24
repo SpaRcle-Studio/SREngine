@@ -33,6 +33,15 @@ namespace Framework::Helper {
 
             return result;
         }
+
+        inline static std::string Merge(const std::vector<std::string>& lines) {
+            std::string merged;
+
+            for (auto&& line : lines)
+                merged.append(line).append("\n");
+
+            return merged;
+        }
     };
 
     namespace Utils {

@@ -20,7 +20,7 @@ namespace SR_GRAPH_NS {
     typedef ImFont* Font;
 
     namespace Vertices {
-        struct Mesh3DVertex;
+        struct StaticMeshVertex;
     }
 
     enum class RenderBuffGroup { Kernel, Small, Normal, Large };
@@ -248,12 +248,12 @@ namespace SR_GRAPH_NS {
          *   1 - bind
          *   2 - uniform id / texture id
          */
-        virtual SR_FORCE_INLINE void UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) { }
+        virtual SR_FORCE_INLINE bool UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) { return false; }
 
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const { return false; }
-        virtual int32_t CalculateVAO(std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) { return SR_ID_INVALID; }
+        virtual int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) { return SR_ID_INVALID; }
         virtual int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) { return SR_ID_INVALID; }
         virtual int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO) { return SR_ID_INVALID; }
 

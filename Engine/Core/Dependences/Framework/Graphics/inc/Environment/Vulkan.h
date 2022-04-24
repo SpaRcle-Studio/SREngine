@@ -387,16 +387,16 @@ namespace Framework::Graphics {
             m_memory->m_UBOs[UBO]->CopyToDevice(data, uboSize);
         }
 
-        SR_FORCE_INLINE void UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) override {
+        SR_FORCE_INLINE bool UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) override {
             std::vector<VkWriteDescriptorSet> writeDescriptorSets = {};
             for (const auto& value : updateValues) {
                 switch (value.first) {
                     case DescriptorType::Uniform: {
-                        auto vkDescriptorSet = this->m_memory->m_descriptorSets[descriptorSet].m_self;
+                        auto vkDescriptorSet = m_memory->m_descriptorSets[descriptorSet].m_self;
                         if (value.second.second >= m_memory->m_countUBO) {
-                            Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: " +
+                            SR_ERROR("Vulkan::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: " +
                                                  std::to_string(m_memory->m_countUBO) + "\n\tIndex: " + std::to_string(value.second.second));
-                            return;
+                            return false;
                         }
                         auto vkUBODescriptor = m_memory->m_UBOs[value.second.second]->GetDescriptorRef();
                         writeDescriptorSets.emplace_back(EvoVulkan::Tools::Initializers::WriteDescriptorSet(
@@ -407,11 +407,19 @@ namespace Framework::Graphics {
                         break;
                     }
                     default:
-                        Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : unknown type!");
-                        return;
+                        SR_ERROR("Vulkan::UpdateDescriptorSets() : unknown type!");
+                        return false;
                 }
             }
+
+            if (writeDescriptorSets.empty()) {
+                SRAssert(false);
+                return false;
+            }
+
             vkUpdateDescriptorSets(*m_kernel->GetDevice(), writeDescriptorSets.size(), writeDescriptorSets.data(), 0, NULL);
+
+            return true;
         }
 
         SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) override {
@@ -434,7 +442,7 @@ namespace Framework::Graphics {
                 return -3;
             } else {
                 if (m_currentShaderID < 0) {
-                    Helper::Debug::Error("Vulkan::AllocDescriptorSet() : shader program do not set!");
+                    SRVerifyFalse2(false, "Shader program do not set!");
                     return -1;
                 }
 

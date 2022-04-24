@@ -20,6 +20,23 @@ namespace Framework::Helper {
         Path(const char* path);
         Path(std::string path);
 
+        Path(Path&& path) noexcept
+            : m_path(std::exchange(path.m_path, {}))
+            , m_name(std::exchange(path.m_name, {}))
+            , m_ext(std::exchange(path.m_ext, {}))
+            , m_hash(std::exchange(path.m_hash, {}))
+            , m_type(std::exchange(path.m_type, {}))
+        { }
+
+        Path& operator=(Path&& path) noexcept {
+            m_path = std::exchange(path.m_path, {});
+            m_name = std::exchange(path.m_name, {});
+            m_ext = std::exchange(path.m_ext, {});
+            m_hash = std::exchange(path.m_hash, {});
+            m_type = std::exchange(path.m_type, {});
+            return *this;
+        }
+
         operator const std::string&() { return m_path; }
         Path& operator=(const Path& path);
 

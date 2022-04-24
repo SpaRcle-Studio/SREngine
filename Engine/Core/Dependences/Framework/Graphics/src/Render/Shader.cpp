@@ -66,7 +66,7 @@ bool Framework::Graphics::Shader::Init() {
 
 bool Framework::Graphics::Shader::Compile() {
     if (m_isCompile) {
-        Debug::Error("Shader::Compile() : shader already compile!");
+        SR_ERROR("Shader::Compile() : shader already compile!");
         return false;
     }
     Debug::Shader("Shader::Compile() : compiling \"" + m_path + "\" shader...");
@@ -75,7 +75,7 @@ bool Framework::Graphics::Shader::Compile() {
 
     if (m_env->GetPipeLine() == PipeLine::OpenGL) {
         if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData)) {
-            Debug::Error("Shader::Compile() : failed to compile opengl \"" + m_path + "\" shader!");
+            SR_ERROR("Shader::Compile() : failed to compile opengl \"" + m_path + "\" shader!");
             return false;
         }
     }
@@ -85,7 +85,7 @@ bool Framework::Graphics::Shader::Compile() {
             sizes.push_back(info.second);
 
         if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData, sizes)) {
-            Debug::Error("Shader::Compile() : failed to compile \"" + m_path + "\" shader!");
+            SR_ERROR("Shader::Compile() : failed to compile \"" + m_path + "\" shader!");
             return false;
         }
     }
@@ -174,15 +174,14 @@ void Framework::Graphics::Shader::FreeVideoMemory() {
     }
 }
 
-bool Framework::Graphics::Shader::SetVertex(
-        const std::vector<SR_VERTEX_DESCRIPTION>& descriptions,
-        const std::vector<std::pair<Vertices::Attribute, size_t>> &attributes) {
+bool Framework::Graphics::Shader::SetVertex(const std::vector<SR_VERTEX_DESCRIPTION>& descriptions, const std::vector<std::pair<Vertices::Attribute, size_t>> &attributes) {
     if (m_isInit) {
         Helper::Debug::Error("Shader::SetVertexDescriptions() : shader already initialized!");
         return false;
-    } else {
-        this->m_verticesDescription = descriptions;
-        this->m_verticesAttributes  = attributes;
+    }
+    else {
+        m_verticesDescription = descriptions;
+        m_verticesAttributes  = attributes;
     }
 
     return true;
@@ -192,8 +191,9 @@ bool Framework::Graphics::Shader::SetCreateInfo(Framework::Graphics::SRShaderCre
     if (m_isInit) {
         Helper::Debug::Error("Shader::SetCreateInfo() : shader already initialized!");
         return false;
-    } else
-        this->m_shaderCreateInfo = shaderCreateInfo;
+    }
+    else
+        m_shaderCreateInfo = shaderCreateInfo;
 
     return m_shaderCreateInfo.Validate();
 }
@@ -202,8 +202,9 @@ bool Framework::Graphics::Shader::SetUniforms(const std::vector<std::pair<std::p
     if (m_isInit) {
         Helper::Debug::Error("Shader::SetUniforms() : shader already initialized!");
         return false;
-    } else
-        this->m_uniformsInfo = uniforms;
+    }
+    else
+        m_uniformsInfo = uniforms;
 
     return true;
 }
@@ -219,14 +220,71 @@ void Framework::Graphics::Shader::CopyVertexAndUniformsInfo(const Framework::Gra
     m_uniformsInfo        = source->m_uniformsInfo;
 }
 
-Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, const std::string &name) {
-    if (auto&& pShader = ResourceManager::Instance().Find<Shader>(name)) {
+Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, const SR_UTILS_NS::Path& path) {
+    if (auto&& pShader = ResourceManager::Instance().Find<Shader>(path.ToString())) {
         SRAssert(render == pShader->m_render);
         return pShader;
     }
 
-    SR_LOG("Shader::Load() : load \"" + name + "\" shader...");
+    SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
 
+    if (path.GetExtensionView() == "srsl") {
+        auto&& unit = SRSL::SRSLLoader::Instance().Load(path.ToString());
+
+        if (!unit) {
+            SR_ERROR("Shader::Load() : failed to load SRSL shader! \n\tPath: " + path.ToString());
+            return nullptr;
+        }
+
+        auto&& shader = new Shader(render, unit->path + "/shader", path.ToString());
+
+        {
+            const auto&& createInfo = SRShaderCreateInfo{
+                .polygonMode = unit->createInfo.polygonMode,
+                .cullMode = unit->createInfo.cullMode,
+                .depthCompare = unit->createInfo.depthCompare,
+                .primitiveTopology = unit->createInfo.primitiveTopology,
+                .blendEnabled = unit->createInfo.blendEnabled,
+                .depthWrite = unit->createInfo.depthWrite,
+                .depthTest = unit->createInfo.depthTest,
+            };
+            SRVerifyFalse2(shader->SetCreateInfo(createInfo), "Failed to validate shader create info!");
+
+            switch (unit->type) {
+                case SRSL::ShaderType::Spatial: {
+                    auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::StaticMeshVertex);
+                    shader->SetVertex(description, attrib);
+
+                    std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> uniforms = {};
+                    // 0 - binding
+                    // 1 - type
+                    // 2 - ubo size
+                    for (const auto& [binding, size] : unit->GetUniformSizes()) {
+                        uniforms.emplace_back(std::pair(std::pair(binding, UBOType::Common), size));
+                    }
+                    shader->SetUniforms(uniforms);
+                    break;
+                }
+                case SRSL::ShaderType::TransparentSpatial:
+                case SRSL::ShaderType::Animation:
+                case SRSL::ShaderType::PostProcess:
+                case SRSL::ShaderType::Skybox:
+                case SRSL::ShaderType::Canvas:
+                case SRSL::ShaderType::Particles:
+                case SRSL::ShaderType::Unknown:
+                default:
+                    SRAssert(false);
+                    break;
+            }
+        }
+
+        return shader;
+    }
+    else
+        return LoadFromConfig(render, path.ToString());
+}
+
+Framework::Graphics::Shader* Framework::Graphics::Shader::LoadFromConfig(Framework::Graphics::Render *render, const std::string &name) {
     std::vector<Xml::Node> shaders = {};
 
     auto findShader = [&shaders](const std::string& name) -> Xml::Node {
@@ -251,31 +309,31 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
         return Xml::Node::Empty();
     };
 
-    auto vertexParser = [=](Shader* shader, const Xml::Node& node) {
+    auto&& vertexParser = [=](Shader* shader, const Xml::Node& node) {
         if (auto vertex = getInheritNode(node, "Vertex")) {
             auto [descr, attrib] = Vertices::GetVertexInfo(Vertices::StringToEnumType(vertex.GetAttribute("value").ToString()));
             shader->SetVertex(descr, attrib);
         }
     };
 
-    auto uniformParsers = [=](Shader* shader, const Xml::Node& node) {
+    auto&& uniformParsers = [=](Shader* shader, const Xml::Node& node) {
         if (auto xmlUniforms = getInheritNode(node, "Uniforms")) {
             std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> uniforms = {};
             // 0 - binding
             // 1 - type
-            // 2 - ubo siz
+            // 2 - ubo size
             for (const auto& uniform : xmlUniforms.GetNodes()) {
                 uniforms.emplace_back(std::pair(
                         std::pair(
-                            (uint32_t)uniform.GetAttribute("binding").ToInt(),
-                            StringToEnumUBOType(uniform.GetAttribute("type").ToString())),
+                                (uint32_t)uniform.GetAttribute("binding").ToInt(),
+                                StringToEnumUBOType(uniform.GetAttribute("type").ToString())),
                         (uint64_t)GetUniformSize(uniform.GetAttribute("UBO").ToString())));
             }
             shader->SetUniforms(uniforms);
         }
     };
 
-    auto infoParser = [=](Shader* shader, const Xml::Node& node) {
+    auto&& infoParser = [=](Shader* shader, const Xml::Node& node) {
         auto createInfo = SRShaderCreateInfo();
         if (auto info = getInheritNode(node, "Info")) {
             if (auto value = info.GetNode("PolygonMode"))
@@ -302,7 +360,7 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
         SRAssert2(shader->SetCreateInfo(createInfo), "Failed to validate shader create info!");
     };
 
-    auto shaderParser = [=](const Xml::Node& node) -> Shader* {
+    auto&& shaderParser = [=](const Xml::Node& node) -> Shader* {
         if (auto path = node.GetAttribute("path"); path.Valid()) {
             auto shader = new Shader(render, path.ToString(), name); {
                 vertexParser(shader, node);
@@ -315,19 +373,23 @@ Framework::Graphics::Shader *Framework::Graphics::Shader::Load(Render* render, c
             return nullptr;
     };
 
-    auto createInfoPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml"));
+    auto&& createInfoPath = Helper::StringUtils::MakePath(Helper::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml"));
+
     if (FileSystem::FileExists(createInfoPath)) {
         auto xml = Helper::Xml::Document::Load(createInfoPath);
         shaders = xml.Root().GetNode("Shaders").GetNodes();
         if (auto shaderXml = findShader(name)) {
             auto shader = shaderParser(shaderXml);
-            if (!shader)
-                Helper::Debug::Error("Shader::Load() : failed to load \"" + name + "\" shader!");
+            if (!shader) {
+                SR_ERROR("Shader::LoadFromConfig() : failed to load \"" + name + "\" shader!");
+            }
             return shader;
-        } else
-            Helper::Debug::Error("Shader::Load() : shader \"" + name + "\" have not config!");
-    } else
-        Helper::Debug::Error("Shader::Load() : create info file not found! \n\tPath: " + createInfoPath);
+        }
+        else
+            SR_ERROR("Shader::LoadFromConfig() : shader \"" + name + "\" have not config!");
+    }
+    else
+        SR_ERROR("Shader::LoadFromConfig() : create info file not found! \n\tPath: " + createInfoPath);
 
     return nullptr;
 }

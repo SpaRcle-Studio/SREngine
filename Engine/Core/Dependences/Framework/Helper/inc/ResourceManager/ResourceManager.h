@@ -88,6 +88,7 @@ namespace Framework::Helper {
         SR_NODISCARD Path GetTexturesPath() const { return m_resourcesFolder.Concat("Textures"); }
         SR_NODISCARD Path GetModelsPath() const { return m_resourcesFolder.Concat("Models"); }
         SR_NODISCARD Path GetUtilsPath() const { return m_resourcesFolder.Concat("Utilities"); }
+        SR_NODISCARD Path GetShadersPath() const { return m_resourcesFolder.Concat("Shaders"); }
 
         IResource* Find(const std::string& Name, const std::string& ID);
 

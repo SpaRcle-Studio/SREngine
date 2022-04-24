@@ -10,7 +10,7 @@
 #include <Utils/Enumerations.h>
 
 namespace Framework::Graphics {
-    SR_ENUM_CLASS(ShaderType, Unknown, Vertex, Fragment, Tesselation)
+    SR_ENUM_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)
     SR_ENUM_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
     SR_ENUM_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
@@ -27,6 +27,12 @@ namespace Framework::Graphics {
             TriangleListWithAdjacency,
             TriangleStripWithAdjacency,
             PathList)
+
+    struct Uniform {
+        LayoutBinding type;
+        ShaderStage stage;
+        uint32_t binding;
+    };
 
     SR_ENUM_CLASS(DepthCompare,
         Unknown,
@@ -75,77 +81,84 @@ namespace Framework::Graphics {
     struct SourceShader {
         std::string m_name;
         std::string m_path;
-        ShaderType  m_type;
+        ShaderStage m_stage;
 
-        SourceShader(const std::string& name, const std::string& path, ShaderType type) {
-            m_name = name;
-            m_path = path;
-            m_type = type;
+        SourceShader(const std::string& name, const std::string& path, ShaderStage stage) {
+            m_name  = name;
+            m_path  = path;
+            m_stage = stage;
         }
     };
 
-    static std::vector<std::pair<LayoutBinding, ShaderType>> AnalyseShader(
-            const std::vector<SourceShader>& modules, bool* errors)
-    {
+    static std::vector<Uniform> AnalyseShader(const std::vector<SourceShader>& modules, bool* errors) {
         if (!errors) {
-            Helper::Debug::Error("Graphics::AnalyseShader() : errors flag pointer is nullptr! You are stupid!");
+            SR_ERROR("Graphics::AnalyseShader() : errors flag pointer is nullptr! You are stupid!");
             return { };
-        } else
+        }
+        else
             *errors = false;
 
         uint32_t count = 0;
 
-        auto bindings = std::vector<std::pair<LayoutBinding, ShaderType>>();
+        auto uniforms = std::vector<Uniform>();
 
         std::vector<std::string> lines = { };
         for (const auto& module : modules) {
             lines = Helper::FileSystem::ReadAllLines(module.m_path);
             if (lines.empty()) {
-                Helper::Debug::Error("Graphics::AnalyseShader() : failed read module! \n\tName: " + module.m_name);
+                SR_ERROR("Graphics::AnalyseShader() : failed to read module! \n\tPath: " + module.m_path);
                 *errors = true;
                 return { };
             }
 
-            for (const std::string& line : lines) {
+            for (std::string line : lines) {
+                if (const auto&& pos = line.find("//"); pos != std::string::npos) {
+                    line.resize(pos);
+                }
+
                 if (Helper::StringUtils::Contains(line, "binding")) {
                     int32_t index = Helper::StringUtils::IndexOf(line, '=');
+
+                    int32_t comment = Helper::StringUtils::IndexOf(line, '/');
+                    if (comment >= 0 && comment < index)
+                        continue;
+
                     if (index <= 0) {
-                        Helper::Debug::Error("Graphics::AnalyseShader() : incorrect binding location!");
+                        SRAssert2(false, "Graphics::AnalyseShader() : incorrect binding location!");
                         *errors = true;
                         return { };
                     }
 
-                    std::string location = Helper::StringUtils::ReadFrom(line, ')', index + 2);
+                    const auto&& location = Helper::StringUtils::ReadFrom(line, ')', index + 2);
                     if (location.empty()) {
-                        Helper::Debug::Error("Graphics::AnalyseShader() : failed match location!");
+                        SR_ERROR("Graphics::AnalyseShader() : failed match location!");
                         *errors = true;
                         return { };
                     }
 
-                    uint32_t loc = std::atoll(location.c_str());
-                    if (loc + 1 > bindings.size())
-                        bindings.resize(loc + 1);
+                    Uniform uniform {
+                        .type = GetBindingType(line),
+                        .stage = module.m_stage,
+                        .binding = static_cast<uint32_t>(std::atoll(location.c_str()))
+                    };
 
-                    bindings[loc] = std::pair(GetBindingType(line), module.m_type);
-                    if (bindings[loc].first == LayoutBinding::Unknown) {
-                        Helper::Debug::Error("Graphics::AnalyseShader() : unknown location! \n\tLine: " + line);
-                        *errors = true;
-                        return { };
-                    }
+                    uniforms.emplace_back(uniform);
+
                     count++;
                 }
             }
         }
 
-        // error correction
-        for (uint32_t i = 0; i < static_cast<uint32_t>(bindings.size()); ++i)
-            if (bindings[i].second == ShaderType::Unknown || bindings[i].first == LayoutBinding::Unknown) {
-                Helper::Debug::Error("IShaderProgram::AnalyseShader() : incorrect bindings! Missing " + std::to_string(i) + " binding!");
+        /// error correction
+        for (auto&& uniform : uniforms) {
+            if (uniform.stage == ShaderStage::Unknown || uniform.type == LayoutBinding::Unknown) {
+                Helper::Debug::Error("IShaderProgram::AnalyseShader() : incorrect uniforms!");
                 *errors = true;
-                return { };
+                return {};
             }
+        }
 
-        return bindings;
+        return uniforms;
     }
 }
 

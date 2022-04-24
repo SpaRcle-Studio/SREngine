@@ -86,7 +86,7 @@ namespace Framework::Helper {
         if (FileSystem::FileExists(successful.c_str()))
             FileSystem::Delete(successful.c_str());
 
-        g_log_path = log_path + "/log.txt";
+        g_log_path = Path(log_path + "/log.txt");
         if (FileSystem::FileExists(g_log_path.c_str()))
             FileSystem::Delete(g_log_path.c_str());
         g_file.open(g_log_path);

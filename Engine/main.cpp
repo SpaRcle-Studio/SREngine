@@ -20,6 +20,7 @@
 #include <Types/Rigidbody.h>
 #include <Types/RawMesh.h>
 #include <Types/Texture.h>
+#include <Loaders/SRSL.h>
 #include <Types/Material.h>
 #include <Types/Mesh.h>
 #include <Types/Geometry/Mesh3D.h>
@@ -77,16 +78,20 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    std::string exe = FileSystem::GetPathToExe();
+    auto&& exe = FileSystem::GetPathToExe();
     Debug::Init(exe, true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
 
-    if (auto folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty())
-        ResourceManager::Instance().Init(exe + "/../../Resources");
+    if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
+        ResourceManager::Instance().Init(Path(exe + "/../../Resources"));
+    }
     else
         ResourceManager::Instance().Init(folder);
 
     RuntimeTest::MarshalRunRuntimeTest();
+
+    SRSL::SRSLLoader::Instance().Load("Engine/standard.srsl");
+    //return 0;
 
     Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
 

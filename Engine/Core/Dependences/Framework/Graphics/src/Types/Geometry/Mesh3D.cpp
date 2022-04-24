@@ -3,6 +3,12 @@
 //
 
 #include <Types/Geometry/Mesh3D.h>
+#include <Types/RawMesh.h>
+#include <Types/Material.h>
+#include <Environment/Environment.h>
+#include <Types/Uniforms.h>
+#include <Render/Shader.h>
+#include <Render/Render.h>
 
 bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     const std::lock_guard<std::recursive_mutex> lock(m_mutex);
@@ -19,16 +25,16 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     if (!IsCanCalculate())
         return false;
 
-    if (Debug::GetLevel() >= Debug::Level::High)
+    if (SR_UTILS_NS::Debug::GetLevel() >= SR_UTILS_NS::Debug::Level::High)
         SR_LOG("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
 
     ///TODO: if (!m_vertices.empty())
     ///    m_barycenter = Vertices::Barycenter(m_vertices);
     ///SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
 
-    auto vertices = Vertices::CastVertices<Vertices::Mesh3DVertex>(m_rawMesh->GetVertices(m_meshId));
+    auto vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
 
-    if (!CalculateVBO<Vertices::Type::Mesh3DVertex>(vertices.data()))
+    if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices.data()))
         return false;
 
     return IndexedMesh::Calculate();
@@ -42,7 +48,7 @@ Framework::Helper::IResource* Framework::Graphics::Types::Mesh3D::Copy(IResource
 
     if (mesh3D->IsCalculated()) {
         auto &&manager = Memory::MeshManager::Instance();
-        mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::Mesh3DVertex, Memory::MeshManager::VBO>(GetResourceId());
+        mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::StaticMeshVertex, Memory::MeshManager::VBO>(GetResourceId());
     }
 
     return mesh3D;
@@ -52,7 +58,7 @@ bool Framework::Graphics::Types::Mesh3D::FreeVideoMemory() {
     if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
         SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
 
-    if (!FreeVBO<Vertices::Type::Mesh3DVertex>())
+    if (!FreeVBO<Vertices::Type::StaticMeshVertex>())
         return false;
 
     return IndexedMesh::FreeVideoMemory();
@@ -62,9 +68,8 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
     if (!IsReady() || IsDestroyed())
         return;
 
-    if (!m_isCalculated)
-        if (m_hasErrors || !Calculate())
-            return;
+    if ((!m_isCalculated && !Calculate()) || m_hasErrors)
+        return;
 
     if (m_descriptorSet < 0) {
         if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
@@ -81,10 +86,13 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
 
         const auto&& shader = m_material->GetShader();
 
-        m_env->UpdateDescriptorSets(m_descriptorSet, {
+        if (!m_env->UpdateDescriptorSets(m_descriptorSet, {
                 { DescriptorType::Uniform, { 0, m_UBO             } },
                 { DescriptorType::Uniform, { 1, shader->GetUBO(0) } },
-        });
+        })) {
+            m_hasErrors = true;
+            return;
+        }
 
         UpdateUBO();
     }
@@ -106,13 +114,13 @@ void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
 }
 
 void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
-    if (m_UBO >= 0 && m_material) {
+    if (m_UBO >= 0 && m_material && !m_hasErrors) {
         Mesh3dUBO ubo = { m_modelMat, m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM() };
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
     }
 }
 
-SR_HTYPES_NS::Marshal Mesh3D::Save(SavableFlags flags) const {
+SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags) const {
     SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
 
     marshal.Write(IsEnabled());
@@ -127,7 +135,7 @@ SR_HTYPES_NS::Marshal Mesh3D::Save(SavableFlags flags) const {
     return marshal;
 }
 
-Component *Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+SR_UTILS_NS::Component *SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
     const auto &&enabled = marshal.Read<bool>();
     const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
 
