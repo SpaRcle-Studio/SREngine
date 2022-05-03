@@ -6,7 +6,9 @@
 #define GAMEENGINE_VERTICES_H
 
 #include <Utils/Enumerations.h>
+#include <Math/Vector2.h>
 #include <Math/Vector3.h>
+#include <Math/Vector4.h>
 #include <Utils/StringFormat.h>
 #include <Utils/Vertices.hpp>
 

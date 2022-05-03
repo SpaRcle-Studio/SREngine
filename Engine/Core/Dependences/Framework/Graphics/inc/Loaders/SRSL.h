@@ -5,18 +5,21 @@
 #ifndef SRENGINE_SRSL_H
 #define SRENGINE_SRSL_H
 
+#include <Environment/Basic/IShaderProgram.h>
 #include <Loaders/SRSLParser.h>
 
 namespace SR_GRAPH_NS::SRSL {
     SR_ENUM_CLASS(ShaderType,
         Unknown,
         Spatial,            /// пространственный шейдер, все статические меши
+        SpatialCustom,      /// пространственный шейдер (только вершины), все статические меши
         TransparentSpatial, /// пространственный шейдер, все статические меши
         Animation,          /// пространтсвенный шейдер, геометрия со скелетом
         PostProcess,        /// шейдер пост-обработки
         Skybox,             /// шейдер скайбокса
         Canvas,             /// шейдер 2д пользовательского интерфейса
-        Particles           /// шейдер для частиц
+        Particles,          /// шейдер для частиц
+        Custom              /// полностью чистый шейдер, все настраивается вручную
     );
 
     enum VertexAttribute {
@@ -35,7 +38,7 @@ namespace SR_GRAPH_NS::SRSL {
     struct SRSLVariable {
         bool used;
         bool show;
-        std::string type;
+        ShaderVarType type;
         int32_t binding;
     };
     typedef std::map<std::string, SRSLVariable> SRSLVariables;
@@ -51,10 +54,11 @@ namespace SR_GRAPH_NS::SRSL {
         ShaderType type = ShaderType::Unknown;
         SRSLStages stages;
         SRShaderCreateInfo createInfo = {};
-        VertexAttributeBits attributes = SRSL_VERTEX_ATTRIBUTE_AUTO;
         std::map<std::string, SRSLVariable> bindings;
 
-        std::map<uint32_t, uint32_t> GetUniformSizes() const;
+        SR_NODISCARD std::list<std::pair<std::string, SRSLVariable>> GetUniformBlock() const;
+        SR_NODISCARD std::map<uint32_t, uint32_t> GetUniformSizes() const;
+        SR_NODISCARD std::map<std::string, SRSLVariable> GetSamplers() const;
 
     };
 
@@ -71,12 +75,14 @@ namespace SR_GRAPH_NS::SRSL {
         SRSLVariables RefAnalyzer(const std::string& code, const SRSLVars& allVars);
         bool PrepareUnit(SRSLUnit& unit, const SRSLVars& vars);
 
+        bool AnalyzeUniforms(SRSLUnit& unit, SRSLParseData& parseData, const std::string& fullCode);
+
         std::string MakeUniformsCode(SRSLUnit& unit, const std::string& code, SRSLParseData& parseData);
 
-        bool CreateFragment(SRSLUnit& unit, SRSLParseData& parseData, SR_UTILS_NS::Path&& path);
+        bool CreateFragment(SRSLUnit& unit, SRSLParseData& parseData, const std::string& code, SR_UTILS_NS::Path&& path);
         std::string MakeFragmentCode(const SRSLUnit &unit, const SRSLParseData& parseData);
 
-        bool CreateVertex(SRSLUnit& unit, SRSLParseData& parseData, SR_UTILS_NS::Path&& path);
+        bool CreateVertex(SRSLUnit& unit, SRSLParseData& parseData, const std::string& code, SR_UTILS_NS::Path&& path);
         std::string MakeVertexCode(const SRSLUnit &unit, const SRSLParseData& parseData);
 
     };

@@ -2,15 +2,11 @@
 // Created by Nikita on 16.11.2020.
 //
 
-#include "Debug.h"
-#include "FileSystem/FileSystem.h"
-#include <iostream>
+#include <Debug.h>
+#include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/Stacktrace.h>
-
-#ifdef SR_WIN32
-    #include <Windows.h>
-#endif
+#include <Platform/Platform.h>
 
 namespace Framework::Helper {
     void Debug::Print(std::string msg, Debug::Type type) {
@@ -39,9 +35,9 @@ namespace Framework::Helper {
         }
 
         if (Debug::g_showUseMemory) {
-            std::cout << '<' << static_cast<uint32_t>(ResourceManager::GetUsedMemoryLoad() / 1024) << " KB> ";
+            std::cout << '<' << static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024) << " KB> ";
             if (g_file.is_open())
-                g_file << '<' << static_cast<uint32_t>(ResourceManager::GetUsedMemoryLoad() / 1024) << " KB> ";
+                g_file << '<' << static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024) << " KB> ";
         }
 
         DWORD bg_color = g_theme == Theme::Light ? (WORD)(((int)ConsoleColor::LightGray << 4)) : (WORD)(((int)ConsoleColor::Black << 4));

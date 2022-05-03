@@ -468,14 +468,6 @@ namespace Framework {
 
     void API::RegisterShader(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Shader", "Shader");
-
-        generator->RegisterEnum("StandardID", "Shader", true, {
-                { "Geometry",       Shader::StandardID::Geometry       },
-                { "Skybox",         Shader::StandardID::Skybox         },
-                { "Transparent",    Shader::StandardID::Transparent    },
-                { "DebugWireframe", Shader::StandardID::DebugWireframe },
-                { "Grid",           Shader::StandardID::Grid           },
-        });
     }
 }
 

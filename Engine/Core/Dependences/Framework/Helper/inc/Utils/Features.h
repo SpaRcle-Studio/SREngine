@@ -7,7 +7,7 @@
 
 #include <Utils/Singleton.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class Features;
 
     class FeatureGroup {

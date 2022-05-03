@@ -4,7 +4,7 @@
 	<Widget Name="Hierarchy" Open="true" />
 	<Widget Name="Assets" Open="true" />
 	<Widget Name="Evo Script Editor" Open="false" />
-	<Widget Name="World edit" Open="true" />
+	<Widget Name="World edit" Open="false" />
 	<Widget Name="Scene" Open="true" />
 	<Widget Name="Engine statistics" Open="true" />
 	<Widget Name="Inspector" Open="true" />

@@ -8,12 +8,13 @@
 #include <Render/Shader.h>
 #include <EntityComponentSystem/Component.h>
 #include <Render/PostProcessing.h>
+#include <Environment/Environment.h>
 #include <Math/Vector3.h>
 #include <Math/Matrix4x4.h>
 #include <Types/Uniforms.h>
 #include <Events/EventManager.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class Window;
 
     /// TODO: TO_REFACTORING
@@ -40,13 +41,13 @@ namespace Framework::Graphics {
 
     public:
         SR_NODISCARD SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;      }
-        SR_NODISCARD SR_FORCE_INLINE bool IsDirectOutput()     const { return m_isEnableDirectOut.first;   }
-        SR_NODISCARD SR_FORCE_INLINE bool IsNeedUpdate()       const { return m_needUpdate;                }
-        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation()   const { return { m_pitch, m_yaw, m_roll };  }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView()       const { return m_viewMat;                   }
+        SR_NODISCARD SR_FORCE_INLINE bool IsDirectOutput() const { return m_isEnableDirectOut.first;       }
+        SR_NODISCARD SR_FORCE_INLINE bool IsNeedUpdate() const { return m_needUpdate;                      }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll };    }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat;                         }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;       }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize()   const { return m_cameraSize;               }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize() const { return m_cameraSize;           }
         SR_NODISCARD SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;  }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();          }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                }
@@ -84,13 +85,15 @@ namespace Framework::Graphics {
                     shader->SetMat4("PVmat", this->m_projection * this->m_viewTranslateMat);
                 else if constexpr (std::is_same<T, SkyboxUBO>::value)
                     shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
-            } else {
+            }
+            else {
                 if constexpr (std::is_same<T, ProjViewUBO>::value) {
                     ProjViewUBO ubo = {};
                     ubo.view = this->m_viewTranslateMat;
                     ubo.proj = this->m_projection;
                     m_env->UpdateUBO(shader->GetUBO(0), &ubo, sizeof(ProjViewUBO));
-                } else if constexpr (std::is_same<T, SkyboxUBO>::value) {
+                }
+                else if constexpr (std::is_same<T, SkyboxUBO>::value) {
                     SkyboxUBO ubo = {};
                     ubo.PVMat = m_projection * m_viewMat;
                     m_env->UpdateUBO(shader->GetUBO(0), &ubo, sizeof(SkyboxUBO));

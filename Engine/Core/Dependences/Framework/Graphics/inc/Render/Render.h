@@ -22,7 +22,7 @@ namespace SR_GRAPH_NS::Types {
 }
 
 namespace SR_GRAPH_NS {
-    // TODO: to refactoring
+    /// TODO: to refactoring
 
     // first - current, second - new
     struct RenderSkybox {
@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS {
         void Synchronize();
         bool IsClean();
 
-        void ReRegisterMesh(Types::Mesh* mesh);
+        void ReRegisterMesh(SR_GTYPES_NS::Mesh* mesh);
         void RemoveMesh(Types::Mesh* mesh);
         void RegisterMesh(Types::Mesh* mesh);
         void RegisterMeshes(const Helper::Types::List<Types::Mesh*>& meshes) {
@@ -68,12 +68,13 @@ namespace SR_GRAPH_NS {
         Shader* FindShader(uint32_t id) const;
 
         /** \brief Can get a nullptr value for removing skybox */
-        void SetSkybox(Types::Skybox* skybox);
-        bool FreeSkyboxMemory(Types::Skybox* skybox);
-        [[nodiscard]] Types::Skybox* GetSkybox() const { return m_skybox.m_current; }
+        void SetSkybox(SR_GTYPES_NS::Skybox* skybox);
+        bool FreeSkyboxMemory(SR_GTYPES_NS::Skybox* skybox);
+        [[nodiscard]] SR_GTYPES_NS::Skybox* GetSkybox() const { return m_skybox.m_current; }
 
-        void RegisterTexture(Types::Texture* texture);
-        void FreeTexture(Types::Texture* texture);
+        void RegisterTexture(SR_GTYPES_NS::Texture* texture);
+        void FreeTexture(SR_GTYPES_NS::Texture* texture);
+        void FreeShader(Shader* shader);
     public:
         [[nodiscard]] inline Window* GetWindow() const noexcept { return m_window; }
     public:
@@ -118,7 +119,7 @@ namespace SR_GRAPH_NS {
         std::queue<Types::Mesh*>      m_removeMeshes             = std::queue<Types::Mesh*>();
         std::vector<Types::Texture*>  m_texturesToFree           = std::vector<Types::Texture*>();
         std::vector<Types::Skybox*>   m_skyboxesToFreeVidMem     = std::vector<Types::Skybox*>();
-        std::unordered_set<Types::Texture*>  m_textures                 = std::unordered_set<Types::Texture*>();
+        std::unordered_set<Types::Texture*>  m_textures          = std::unordered_set<Types::Texture*>();
 
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };
@@ -126,6 +127,7 @@ namespace SR_GRAPH_NS {
         RenderSkybox                  m_skybox                   = { nullptr, nullptr };
 
         std::vector<Shader*>          m_shaders                  = {};
+        std::queue<Shader*>           m_shadersToFree            = {};
 
         ColorBuffer*                  m_colorBuffer              = nullptr;
         EditorGrid*                   m_grid                     = nullptr;

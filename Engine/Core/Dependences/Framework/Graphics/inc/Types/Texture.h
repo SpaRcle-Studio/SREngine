@@ -22,9 +22,12 @@ namespace Framework::Graphics::Types {
         Texture();
         ~Texture() override;
 
-    private:
-        bool Calculate();
-        void SetConfig(const Memory::TextureConfig& config);
+    public:
+        static Texture* Load(const std::string& path);
+        static Texture* Load(const std::string& path, const Memory::TextureConfig& config);
+        static Texture* LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
+        static Texture* GetNone();
+        static void FreeNoneTexture();
 
     public:
         void SetRender(Render* render);
@@ -33,32 +36,22 @@ namespace Framework::Graphics::Types {
         [[nodiscard]] SR_FORCE_INLINE std::string GetName() const { return m_name; }
         [[nodiscard]] SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculate; }
         [[nodiscard]] SR_FORCE_INLINE bool HasRender() const noexcept { return GetRender(); }
-
-        [[nodiscard]] SR_FORCE_INLINE int32_t GetID() noexcept {
-            if (IsDestroyed()) {
-                SR_ERROR("Texture::GetID() : texture \"" + GetResourceId() + "\" is destroyed!");
-                return -1;
-            }
-
-            if (!m_isCalculate && !Calculate()) {
-                SR_ERROR("Texture::GetID() : failed to calculating texture!");
-                return -1;
-            }
-
-            return m_ID;
-        }
+        [[nodiscard]] SR_FORCE_INLINE int32_t GetID() noexcept;
 
         /* Call only from render pool events */
         bool FreeVideoMemory();
-    public:
-        static Texture* Load(const std::string& path);
 
-        static Texture* Load(const std::string& path, const Memory::TextureConfig& config);
     public:
         bool Destroy() override;
 
     private:
-        inline static Environment* m_env         = nullptr;
+        bool Calculate();
+        void SetConfig(const Memory::TextureConfig& config);
+
+    private:
+        inline static Texture*     m_none        = nullptr;
+
+        Environment* m_env                       = nullptr;
         Render*                    m_render      = nullptr;
         uint8_t*                   m_data        = nullptr;
 

@@ -330,4 +330,30 @@ bool FileSystem::WriteToFile(const std::string &path, const std::string &text) {
     return true;
 }
 
+std::string FileSystem::ReadBinaryAsString(const std::string &path) {
+    std::ifstream file(path, std::ios::ate | std::ios::binary);
+
+    if (!file.is_open()) {
+        SR_ERROR("FileSystem::ReadBinaryAsString() : failed to open \""+path+"\" file!");
+        return std::string();
+    }
+
+    size_t fileSize = (size_t) file.tellg();
+    std::string buffer;
+    buffer.resize(fileSize);
+
+    file.seekg(0);
+    file.read(buffer.data(), fileSize);
+
+    file.close();
+
+    return buffer;
+}
+
+uint64_t FileSystem::GetFileHash(const std::string &path) {
+    const std::string& file = ReadBinaryAsString(path);
+    auto&& h = std::hash<std::string>();
+    return h(file);
+}
+
 

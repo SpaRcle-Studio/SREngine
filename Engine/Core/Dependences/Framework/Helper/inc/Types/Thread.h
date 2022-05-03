@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_THREAD_H
 #define GAMEENGINE_THREAD_H
 
-#include <stdInclude.h>
+#include <Debug.h>
 
-namespace Framework::Helper::Types {
+namespace SR_HTYPES_NS {
     class Thread {
     public:
         Thread()
@@ -40,7 +40,7 @@ namespace Framework::Helper::Types {
         }
 
     public:
-        [[nodiscard]] bool Joinable() const { return m_thread.joinable(); }
+        SR_NODISCARD bool Joinable() const { return m_thread.joinable(); }
         void Join() { m_thread.join(); }
         bool TryJoin() {
             if (Joinable()) {
@@ -56,6 +56,7 @@ namespace Framework::Helper::Types {
 
     private:
         std::thread m_thread;
+
     };
 }
 

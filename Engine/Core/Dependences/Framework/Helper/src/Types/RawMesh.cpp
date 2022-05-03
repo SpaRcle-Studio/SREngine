@@ -5,16 +5,20 @@
 #include <Types/RawMesh.h>
 #include <FbxLoader/Loader.h>
 
-#undef min
-#undef max
-
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <assimp/Importer.hpp>
 
 namespace SR_UTILS_NS::Types {
     RawMesh::RawMesh()
         : IResource(typeid(RawMesh).name(), true /** auto destroy */)
-    { }
+    {
+        m_importer = new Assimp::Importer();
+    }
+
+    RawMesh::~RawMesh() {
+        delete m_importer;
+    }
 
     RawMesh *RawMesh::Load(const std::string &path) {
         SR_GLOBAL_LOCK
@@ -44,7 +48,7 @@ namespace SR_UTILS_NS::Types {
 
         bool hasErrors = !IResource::Unload();
 
-        m_importer.FreeScene();
+        m_importer->FreeScene();
 
         return !hasErrors;
     }
@@ -58,7 +62,7 @@ namespace SR_UTILS_NS::Types {
 
         /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
 
-        m_scene = m_importer.ReadFile(path.ToString(),
+        m_scene = m_importer->ReadFile(path.ToString(),
                 aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale
         );
 

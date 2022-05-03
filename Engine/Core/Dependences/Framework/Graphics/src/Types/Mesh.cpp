@@ -4,6 +4,9 @@
 
 #include <Types/Mesh.h>
 #include <Memory/MeshAllocator.h>
+#include <EntityComponentSystem/Component.h>
+#include <ResourceManager/ResourceManager.h>
+#include <ResourceManager/IResource.h>
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type, std::string name)
@@ -188,14 +191,12 @@ namespace SR_GRAPH_NS::Types {
 
     bool Mesh::FreeVideoMemory() {
         if (m_pipeline == PipeLine::Vulkan) {
-            if (m_descriptorSet >= 0) {
-                m_env->FreeDescriptorSet(m_descriptorSet);
-                m_descriptorSet = -5;
+            if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+                SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
             }
 
-            if (m_UBO >= 0 && !m_env->FreeUBO(m_UBO)) {
+            if (m_UBO >= 0 && !m_env->FreeUBO(&m_UBO)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free uniform buffer object!");
-                return false;
             }
         }
 
@@ -219,8 +220,6 @@ namespace SR_GRAPH_NS::Types {
         modelMat *= Math::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
 
         m_modelMat = modelMat.ToGLM();
-
-        UpdateUBO();
     }
 
     void Mesh::WaitCalculate() const {
@@ -244,6 +243,10 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::SetMaterial(Material *material) {
+        if (material == m_material) {
+            return;
+        }
+
         if (m_material)
             m_material->UnSubscribe(this);
 
@@ -253,8 +256,7 @@ namespace SR_GRAPH_NS::Types {
         else
             SR_WARN("Mesh::SetMaterial() : the material is nullptr!");
 
-        if (m_material && m_render)
-            m_material->Register(m_render);
+        m_shaderDirty = true;
 
         if (m_isCalculated)
             Environment::Get()->SetBuildState(false);
@@ -286,7 +288,7 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    std::string Mesh::GetPath() const {
+    std::string Mesh::GetResourcePath() const {
         return StringUtils::Substring(GetResourceId(), '|', 1);
     }
 
@@ -314,6 +316,10 @@ namespace SR_GRAPH_NS::Types {
 
     Shader *Mesh::GetShader() const {
         return m_material ? m_material->GetShader() : nullptr;
+    }
+
+    void Mesh::OnShaderChanged() {
+        m_shaderDirty = true;
     }
 }
 

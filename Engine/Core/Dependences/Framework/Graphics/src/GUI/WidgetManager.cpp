@@ -46,13 +46,17 @@ WidgetManager::~WidgetManager() {
 void WidgetManager::OnKeyDown(const KeyDownEvent &event) {
     std::lock_guard<std::mutex> lock(m_mutex);
 
-    for (auto&& [name, pWidget] : m_widgets)
-        pWidget->OnKeyDown(event);
+    for (auto&& [name, pWidget] : m_widgets) {
+        if (pWidget->IsFocused())
+            pWidget->OnKeyDown(event);
+    }
 }
 
 void WidgetManager::OnKeyUp(const KeyUpEvent &event) {
     std::lock_guard<std::mutex> lock(m_mutex);
 
-    for (auto&& [name, pWidget] : m_widgets)
-        pWidget->OnKeyUp(event);
+    for (auto&& [name, pWidget] : m_widgets) {
+        if (pWidget->IsFocused())
+            pWidget->OnKeyUp(event);
+    }
 }

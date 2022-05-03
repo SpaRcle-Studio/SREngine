@@ -9,6 +9,8 @@ const std::unordered_set<std::string> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VA
 };
 
 std::optional<SR_GRAPH_NS::SRSL::SRSLUnit> SR_GRAPH_NS::SRSL::SRSLLoader::Load(std::string path) {
+    SR_SHADER_LOG("SRSLLoader::Load() : loading SpaRcle shader... \n\tPath: " + path);
+
     if (const auto& pos = path.find(".srsl"); pos != std::string::npos) {
         path.resize(path.size() - (path.size() - pos));
     }
@@ -43,12 +45,20 @@ std::optional<SR_GRAPH_NS::SRSL::SRSLUnit> SR_GRAPH_NS::SRSL::SRSLLoader::Load(s
         return {};
     }
 
-    if (!CreateVertex(unit, parseData.value(), cache.Concat(path).Concat("shader.vert"))) {
+    const auto&& vertex = MakeVertexCode(unit, parseData.value());
+    const auto&& fragment = MakeFragmentCode(unit, parseData.value());
+
+    if (!AnalyzeUniforms(unit, parseData.value(), vertex + fragment)) {
+        SR_ERROR("SRSLLoader::Load() : failed to analyze uniforms! \n\tPath: " + shader.ToString());
+        return {};
+    }
+
+    if (!CreateVertex(unit, parseData.value(), vertex, cache.Concat(path).Concat("shader.vert"))) {
         SR_ERROR("SRSLLoader::Load() : failed to create vertex shader! \n\tPath: " + shader.ToString());
         return {};
     }
 
-    if (!CreateFragment(unit, parseData.value(), cache.Concat(path).Concat("shader.frag"))) {
+    if (!CreateFragment(unit, parseData.value(), fragment, cache.Concat(path).Concat("shader.frag"))) {
         SR_ERROR("SRSLLoader::Load() : failed to create fragment shader! \n\tPath: " + shader.ToString());
         return {};
     }
@@ -60,17 +70,21 @@ SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::RefAnalyzer(cons
     SRSLVariables used;
 
     const auto&& isUsed = [&code](const std::string& var) -> bool {
-        if (auto&& pos = code.find(var); pos != std::string::npos) {
+        size_t offset = 0;
+    retry:
+        if (auto&& pos = code.find(var, offset); pos != std::string::npos) {
             const std::string operators = "!~`@#$%^&*()-=+:'\"|\\/.,?^;<> \t\n";
 
             /// check left side
             if (pos > 0 && operators.find(code[pos - 1]) == std::string::npos) {
-                return false;
+                offset = pos + var.size();
+                goto retry;
             }
 
             /// check right side
             if ((pos + var.size() < code.size()) && operators.find(code[pos + var.size()]) == std::string::npos) {
-                return false;
+                offset = pos + var.size();
+                goto retry;
             }
         }
         else
@@ -91,7 +105,7 @@ SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::RefAnalyzer(cons
             continue;
         }
 
-        used[args[2]] = SRSLVariable { isUsed(args[2]), true, args[1] };
+        used[args[2]] = SRSLVariable { isUsed(args[2]), true, GetShaderVarTypeFromString(args[1]) };
     }
 
     for (const auto& var : STANDARD_VARIABLES) {
@@ -102,7 +116,7 @@ SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::RefAnalyzer(cons
             continue;
         }
 
-        used[args[1]] = SRSLVariable { isUsed(args[1]), false, args[0] };
+        used[args[1]] = SRSLVariable { isUsed(args[1]), false, GetShaderVarTypeFromString(args[0]) };
     }
 
     return used;
@@ -148,39 +162,37 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::PrepareUnit(SRSLUnit& unit, const SRSLVars& 
         return false;
     }
 
-    switch (unit.type) {
-        case ShaderType::TransparentSpatial:
-        case ShaderType::Spatial:
-            unit.attributes = SRSL_VERTEX_ATTRIBUTE_POSITION
-                | SRSL_VERTEX_ATTRIBUTE_UV
-                | SRSL_VERTEX_ATTRIBUTE_NORMAL
-                | SRSL_VERTEX_ATTRIBUTE_TANGENT
-                | SRSL_VERTEX_ATTRIBUTE_BITANGENT;
+    return true;
+}
 
-            break;
-        case ShaderType::Animation:
-        case ShaderType::PostProcess:
-        case ShaderType::Skybox:
-        case ShaderType::Canvas:
-        case ShaderType::Particles:
-        case ShaderType::Unknown:
-            SRAssert(false);
-            break;
+bool Framework::Graphics::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSLParseData &parseData, const std::string &fullCode) {
+    SRSLVariables uniforms;
+
+    for (auto&& [name, var] : RefAnalyzer(fullCode, parseData.vars)) {
+        if (!IsSamplerType(var.type)) {
+            uniforms[name] = var;
+        }
+    }
+
+    if (!uniforms.empty()) {
+        for (auto&& [name, var] : uniforms) {
+            var.binding = +parseData.lastBinding;
+            unit.bindings[name] = var;
+        }
+
+        ++parseData.lastBinding;
     }
 
     return true;
 }
 
 std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, const std::string &code, SRSLParseData &parseData) {
-    SRSLVariables uniforms;
     SRSLVariables samplers;
 
     for (auto&& [name, var] : RefAnalyzer(code, parseData.vars)) {
-        if (var.type == "sampler2D") {
+        if (IsSamplerType(var.type)) {
             samplers[name] = var;
         }
-        else
-            uniforms[name] = var;
     }
 
     std::string source = "// -- codegen -- | begin default bindings\n";
@@ -195,7 +207,11 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
             unit.bindings[name] = samplers[name];
         }
 
-        source += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s;", unit.bindings[name].binding, var.type.c_str(), name.c_str());
+        source += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s;",
+                unit.bindings[name].binding,
+                ShaderVarTypeToString(var.type).c_str(),
+                name.c_str()
+        );
 
         if (var.show) {
             source += " // public\n";
@@ -204,30 +220,15 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
             source += " // hidden\n";
     }
 
-    const bool haveUsed = [=]() -> bool {
-        for (auto&& [name, var] : uniforms) {
-            if (var.used)
-                return true;
-        }
-        return false;
-    }();
+    /// ----------------------------------------------------------------------------------------------------------------
 
-    if (haveUsed && !uniforms.empty()) {
-        if (unit.bindings.count(uniforms.begin()->first) == 0) {
-            for (auto&& [name, var] : uniforms) {
-                var.binding = parseData.lastBinding;
-                unit.bindings[name] = var;
-            }
+    auto&& uniforms = unit.GetUniformBlock();
 
-            parseData.lastBinding++;
-        }
-
-        auto&& binding = unit.bindings.at(uniforms.begin()->first).binding;
-
-        source += SR_UTILS_NS::Format("layout (binding = %i) uniform BLOCK {\n", binding);
+    if (!uniforms.empty()) {
+        source += SR_UTILS_NS::Format("layout (binding = %i) uniform BLOCK {\n", uniforms.begin()->second.binding);
 
         for (auto&& [name, var] : uniforms) {
-            source += SR_UTILS_NS::Format("\t%s %s;", var.type.c_str(), name.c_str());
+            source += SR_UTILS_NS::Format("\t%s %s;", ShaderVarTypeToString(var.type).c_str(), name.c_str());
 
             if (var.show) {
                 source += " // public\n";
@@ -244,7 +245,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
     return source;
 }
 
-bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData &parseData, Path &&path) {
+bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData &parseData, const std::string& code, Path &&path) {
     auto& stage = unit.stages[ShaderStage::Fragment];
     stage.path = std::move(path);
 
@@ -254,22 +255,31 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
         return false;
     }
 
-    const std::string fragCode = MakeFragmentCode(unit, parseData);
-
     /// ----------------------------------------------------------------------------------------------------------------
 
     std::string source;
 
     source += "// [WARNING: THIS FILE WAS CREATED BY CODE GENERATION]\n\n";
 
-    source += "#version 450\n";
-    source += "#extension GL_ARB_separate_shader_objects : enable\n\n";
+    source += "#version 450\n\n";
+    source += "#extension GL_ARB_separate_shader_objects : enable\n";
+    source += "#extension GL_EXT_shader_atomic_float : enable\n\n";
 
-    source += "layout (location = 0) out vec4 OUT_COLOR;\n\n";
+    switch (unit.type) {
+        case ShaderType::Custom:
+            break;
+        case ShaderType::Spatial:
+        case ShaderType::SpatialCustom:
+            source += "layout (location = 0) out vec4 OUT_COLOR;\n\n";
+            break;
+        default:
+            SRAssert(false);
+            return false;
+    }
 
-    source += MakeUniformsCode(unit, fragCode, parseData);
+    source += MakeUniformsCode(unit, code, parseData);
 
-    source += fragCode;
+    source += code;
 
     /// ----------------------------------------------------------------------------------------------------------------
 
@@ -282,12 +292,15 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
     source += "// -- codegen -- | begin declaration default vars\n";
     uint32_t location = 0;
     switch (unit.type) {
+        case ShaderType::SpatialCustom:
         case ShaderType::Spatial:
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT;\n", location++);
+            SR_FALLTHROUGH;
+        case ShaderType::Custom:
             source += "vec4 COLOR;\n";
             break;
         default:
@@ -313,7 +326,10 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
     /// вставляем код отвечающий за данный тип шейдера
     source += "\t// -- codegen -- | begin shader code\n";
     switch (unit.type) {
+        case ShaderType::Custom:
+            break;
         case ShaderType::Spatial:
+        case ShaderType::SpatialCustom:
             source += "\tOUT_COLOR = COLOR;\n";
             break;
         default:
@@ -333,6 +349,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     source += "// -- codegen -- | begin declaration default vars\n";
     uint32_t location = 0;
     switch (unit.type) {
+        case ShaderType::Custom:
+            break;
+        case ShaderType::SpatialCustom:
         case ShaderType::Spatial:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location++);
@@ -353,6 +372,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     /// объявляем все дефолтные переменные
     source += "\t// -- codegen -- | begin default vars\n";
     switch (unit.type) {
+        case ShaderType::Custom:
+            break;
+        case ShaderType::SpatialCustom:
         case ShaderType::Spatial:
             source += "\tVERTEX = VERTEX_INPUT;\n";
             source += "\tUV = UV_INPUT;\n";
@@ -379,6 +401,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     /// вставляем код отвечающий за данный тип шейдера
     source += "\t// -- codegen -- | begin shader code\n";
     switch (unit.type) {
+        case ShaderType::Custom:
+        case ShaderType::SpatialCustom:
+            break;
         case ShaderType::Spatial:
             source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
             break;
@@ -393,7 +418,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     return source;
 }
 
-bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& parseData, SR_UTILS_NS::Path&& path) {
+bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& parseData, const std::string& code, SR_UTILS_NS::Path&& path) {
     auto& stage = unit.stages[ShaderStage::Vertex];
     stage.path = std::move(path);
 
@@ -403,42 +428,49 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
         return false;
     }
 
-    const auto&& vertexCode = MakeVertexCode(unit, parseData);
-
     /// ----------------------------------------------------------------------------------------------------------------
 
     std::string source;
 
     source += "// [WARNING: THIS FILE WAS CREATED BY CODE GENERATION]\n\n";
 
-    source += "#version 450\n";
-    source += "#extension GL_ARB_separate_shader_objects : enable\n\n";
+    source += "#version 450\n\n";
+    source += "#extension GL_ARB_separate_shader_objects : enable\n";
+    source += "#extension GL_EXT_shader_atomic_float : enable\n\n";
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     source += "// -- codegen -- | begin vertex locations\n";
 
     uint32_t location = 0;
-    if (unit.attributes & SRSL_VERTEX_ATTRIBUTE_POSITION)
-        source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);
 
-    if (unit.attributes & SRSL_VERTEX_ATTRIBUTE_UV)
-        source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV_INPUT;\n", location++);
-
-    if (unit.attributes & SRSL_VERTEX_ATTRIBUTE_NORMAL)
-        source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL_INPUT;\n", location++);
-
-    if (unit.attributes & SRSL_VERTEX_ATTRIBUTE_TANGENT)
-        source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT_INPUT;\n", location++);
-
-    if (unit.attributes & SRSL_VERTEX_ATTRIBUTE_BITANGENT)
-        source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT_INPUT;\n", location++);
+    switch (unit.type) {
+        case ShaderType::TransparentSpatial:
+        case ShaderType::Spatial:
+        case ShaderType::SpatialCustom:
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT_INPUT;\n", location++);
+            break;
+        case ShaderType::Custom:
+            break;
+        case ShaderType::Animation:
+        case ShaderType::PostProcess:
+        case ShaderType::Skybox:
+        case ShaderType::Canvas:
+        case ShaderType::Particles:
+        case ShaderType::Unknown:
+            SRAssert(false);
+            break;
+    }
 
     source += "// -- codegen -- | end vertex locations\n\n";
 
-    source += MakeUniformsCode(unit, vertexCode, parseData);
+    source += MakeUniformsCode(unit, code, parseData);
 
-    source += vertexCode;
+    source += code;
 
     /// ----------------------------------------------------------------------------------------------------------------
 
@@ -448,42 +480,45 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
 std::map<uint32_t, uint32_t> Framework::Graphics::SRSL::SRSLUnit::GetUniformSizes() const {
     std::map<uint32_t, uint32_t> uniforms;
 
-    const std::unordered_set<std::string> sampler = {
-            "sampler1D",
-            "sampler2D",
-            "sampler3D",
-            "samplerCube",
-            "sampler1DShadow",
-            "sampler2DShadow",
-    };
-
-    const std::unordered_map<std::string, uint32_t> sizes = {
-            { "float", 4         },
-            { "int",   4         },
-            { "bool",  4         },
-            { "vec2",  4 * 2     },
-            { "ivec2", 4 * 2     },
-            { "vec3",  4 * 3     },
-            { "ivec3", 4 * 3     },
-            { "vec4",  4 * 4     },
-            { "ivec4", 4 * 4     },
-            { "mat2",  4 * 2 * 2 },
-            { "mat3",  4 * 3 * 3 },
-            { "mat4",  4 * 4 * 4 },
-    };
-
     for (const auto& [name, var] : bindings) {
-        if (sampler.count(var.type) == 1) {
+        if (IsSamplerType(var.type) || !var.used) {
             continue;
         }
 
-        if (sizes.count(var.type) == 0) {
-            SRAssert2(false, "Unknown uniform type!");
-            return {};
-        }
-
-        uniforms[var.binding] += sizes.at(var.type);
+        uniforms[var.binding] += GetShaderVarSize(var.type);
     }
 
     return uniforms;
+}
+
+std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> Framework::Graphics::SRSL::SRSLUnit::GetUniformBlock() const {
+    auto&& variables = std::list<std::pair<std::string, SRSLVariable>>();
+
+    for (auto&& [name, var] : bindings) {
+        if (!var.used || IsSamplerType(var.type)) {
+            continue;
+        }
+
+        variables.emplace_back(std::make_pair(name, var));
+    }
+
+    variables.sort([](const std::pair<std::string, SRSLVariable> &a, const std::pair<std::string, SRSLVariable> &b) {
+        return GetShaderVarSize(a.second.type) > GetShaderVarSize(b.second.type);
+    });
+
+    return variables;
+}
+
+std::map<std::string, SR_GRAPH_NS::SRSL::SRSLVariable> Framework::Graphics::SRSL::SRSLUnit::GetSamplers() const {
+    auto&& samplers = std::map<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>();
+
+    for (auto&& [name, var] : bindings) {
+        if (!var.used || !IsSamplerType(var.type)) {
+            continue;
+        }
+
+        samplers[name] = var;
+    }
+
+    return samplers;
 }

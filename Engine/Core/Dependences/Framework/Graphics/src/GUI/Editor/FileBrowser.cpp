@@ -121,7 +121,9 @@ void FileBrowser::Draw() {
 
     float_t assetWidth = 0.f;
 
-    if (ImGui::BeginChild("left pane", ImVec2(250, 0), true)) {
+    const auto&& leftWidth = 250;
+
+    if (ImGui::BeginChild("left pane", ImVec2(leftWidth, 0), true)) {
 
         ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
 
@@ -137,9 +139,16 @@ void FileBrowser::Draw() {
         ImGui::EndChild();
     }
 
+    auto&& windowWidth = ImGui::GetWindowWidth();
+    if (leftWidth > windowWidth - 20)
+        return;
+
     ImGui::SameLine();
 
     /////////////////////// right
+
+    auto width = ImGui::GetWindowWidth();
+
     ImGui::BeginGroup();
     if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
         ImGui::Separator();

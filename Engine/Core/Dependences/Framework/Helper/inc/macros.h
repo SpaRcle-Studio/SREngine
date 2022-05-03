@@ -49,8 +49,6 @@
         ptr = nullptr;          \
     }                           \
 
-#define VK_PROTOTYPES
-
 #define SR_FASTCALL_ATTRIBUTE __attribute__((fastcall))
 #define SR_FASTCALL __fastcall
 #define SR_CONSTEXPR constexpr
@@ -58,6 +56,7 @@
 #define SR_NODISCARD [[nodiscard]]
 #define SR_FALLTHROUGH [[fallthrough]]
 #define SR_INLINE inline
+#define SR_INLINE_STATIC SR_INLINE static
 #define SR_NULL 0
 #define SR_MARSHAL_USE_LIST 1
 #define SR_INVALID_STR_POS -1
@@ -89,6 +88,7 @@
 
 #ifndef SR_USE_VULKAN
     #define SR_USE_VULKAN
+    #define VK_PROTOTYPES
 #endif
 
 #ifndef SR_USE_OPENGL
@@ -112,6 +112,7 @@
 
 #define SR_XML_NS Framework::Helper::Xml
 #define SR_UTILS_NS Framework::Helper
+#define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
 #define SR_GRAPH_NS Framework::Graphics
 #define SR_HTYPES_NS SR_UTILS_NS::Types

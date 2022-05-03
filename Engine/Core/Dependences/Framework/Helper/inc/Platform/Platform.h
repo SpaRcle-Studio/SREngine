@@ -12,6 +12,8 @@ namespace SR_UTILS_NS::Platform {
     extern std::string GetClipboardText();
     extern void ClearClipboard();
     extern Math::FVector2 GetMousePos();
+    extern void Sleep(uint64_t milliseconds);
+    extern uint64_t GetProcessUsedMemory();
 }
 
 #endif //SRENGINE_PLATFORM_H

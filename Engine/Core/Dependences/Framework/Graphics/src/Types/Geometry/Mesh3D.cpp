@@ -32,7 +32,7 @@ bool Framework::Graphics::Types::Mesh3D::Calculate()  {
     ///    m_barycenter = Vertices::Barycenter(m_vertices);
     ///SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
 
-    auto vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
+    auto&& vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
 
     if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices.data()))
         return false;
@@ -71,53 +71,72 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
     if ((!m_isCalculated && !Calculate()) || m_hasErrors)
         return;
 
-    if (m_descriptorSet < 0) {
-        if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
-            SR_ERROR("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
-            m_hasErrors = true;
-            return;
+    if (m_shaderDirty) {
+        if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+            SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
         }
 
-        if (m_UBO = m_env->AllocateUBO(sizeof(Mesh3dUBO)); m_UBO < 0) {
-            SR_ERROR("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
-            m_hasErrors = true;
-            return;
+        if (m_UBO >= 0 && !m_env->FreeUBO(&m_UBO)) {
+            SR_ERROR("Mesh::FreeVideoMemory() : failed to free uniform buffer object!");
         }
 
-        const auto&& shader = m_material->GetShader();
+        auto &&shader = m_material->GetShader();
 
-        if (!m_env->UpdateDescriptorSets(m_descriptorSet, {
-                { DescriptorType::Uniform, { 0, m_UBO             } },
-                { DescriptorType::Uniform, { 1, shader->GetUBO(0) } },
-        })) {
-            m_hasErrors = true;
-            return;
+        if (shader->GetUBOBlockSize() > 0) {
+            if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform}); m_descriptorSet < 0) {
+                SR_ERROR("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
+                m_hasErrors = true;
+                return;
+            }
+
+            if (m_UBO = m_env->AllocateUBO(shader->GetUBOBlockSize()); m_UBO < 0) {
+                SR_ERROR("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
+                m_hasErrors = true;
+                return;
+            }
+
+            m_env->BindUBO(m_UBO);
+            m_env->BindDescriptorSet(m_descriptorSet);
         }
+        else if (shader->GetSamplersCount() > 0) {
+            if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::CombinedImage}); m_descriptorSet < 0) {
+                SR_ERROR("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
+                m_hasErrors = true;
+                return;
+            }
+            m_env->BindDescriptorSet(m_descriptorSet);
+        }
+        else
+            m_env->ResetDescriptorSet();
 
-        UpdateUBO();
+        shader->InitUBOBlock();
+        shader->Flush();
     }
 
-    m_env->BindDescriptorSet(m_descriptorSet);
-    m_material->UseVulkan();
+    m_material->UseSamplers();
 
-    m_env->BindDescriptorSet(m_descriptorSet);
+    if (m_descriptorSet != SR_ID_INVALID) {
+        m_env->BindDescriptorSet(m_descriptorSet);
+    }
+
     m_env->DrawIndices(m_countIndices);
 }
 
-void Framework::Graphics::Types::Mesh3D::DrawOpenGL()  {
+void Framework::Graphics::Types::Mesh3D::DrawOpenGL() {
     if (IsDestroyed() || (!m_isCalculated && !Calculate()))
         return;
 
-    //ConfigureShader(m_shader)
-    m_material->UseOpenGL();
-    m_env->DrawTriangles(m_countVertices);
+    //m_material->UseOpenGL();
+    //m_env->DrawTriangles(m_countVertices);
 }
 
 void Framework::Graphics::Types::Mesh3D::UpdateUBO() {
     if (m_UBO >= 0 && m_material && !m_hasErrors) {
-        Mesh3dUBO ubo = { m_modelMat, m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM() };
-        m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
+        //Mesh3dUBO ubo = { m_modelMat, m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM() };
+        //m_env->UpdateUBO(m_UBO, &ubo, sizeof(Mesh3dUBO));
     }
+
+
 }
 
 SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags) const {
@@ -126,7 +145,7 @@ SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags
     marshal.Write(IsEnabled());
     marshal.Write(static_cast<int32_t>(m_type));
 
-    marshal.Write(GetPath());
+    marshal.Write(GetResourcePath());
     marshal.Write(m_meshId);
     marshal.Write(IsInverse());
 

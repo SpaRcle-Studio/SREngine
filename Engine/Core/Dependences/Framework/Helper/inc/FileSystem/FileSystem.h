@@ -57,11 +57,14 @@ namespace Framework::Helper {
             return lines;
         }
 
+        static std::string ReadBinaryAsString(const std::string& path);
         static std::vector<char> ReadBinary(const std::string& path);
 
         static std::string ReadAllText(const std::string& path);
 
         static char* Load(std::string path);
+
+        static uint64_t GetFileHash(const std::string& path);
 
         static const char* FileMapView(std::string path);
         static void UnmapFile(const char* str);

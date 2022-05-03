@@ -235,6 +235,8 @@ void Framework::Graphics::Window::Thread() {
         SR_GRAPH("Window::Thread() : complete stopping gui!");
     }
 
+    SR_GTYPES_NS::Texture::FreeNoneTexture();
+
     if (!SyncFreeResources()) {
         SR_ERROR("Window::Thread() : failed to free resources!");
     }
@@ -491,17 +493,25 @@ bool Framework::Graphics::Window::SyncFreeResources() {
     auto thread = Helper::Types::Thread([&syncComplete, this]() {
         uint32_t syncStep = 0;
         const uint32_t maxErrStep = 100;
+
+        ResourceManager::Instance().Synchronize(true);
+
+        if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
+            SR_GTYPES_NS::Material::FreeDefault();
+
+        m_render->Synchronize();
+
         while(!m_render->IsClean()) {
             Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 
-            if (auto material = Material::GetDefault(); material && material->GetCountUses() == 1)
-                Material::FreeDefault();
+            if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
+                SR_GTYPES_NS::Material::FreeDefault();
 
             ResourceManager::Instance().Synchronize(true);
             m_render->Synchronize();
 
             if (maxErrStep == syncStep) {
-                Helper::Debug::Error("Window::SyncFreeResources() : [FATAL] resources can not be released!");
+                SR_ERROR("Window::SyncFreeResources() : [FATAL] resources can not be released!");
                 Helper::ResourceManager::Instance().PrintMemoryDump();
                 Helper::Debug::Terminate();
                 break;
@@ -509,9 +519,6 @@ bool Framework::Graphics::Window::SyncFreeResources() {
 
             Helper::Types::Thread::Sleep(50);
         }
-
-        if (Material::GetDefault())
-            Helper::Debug::Warn("Window::SyncFreeResources() : default material was not be freed!");
 
         syncComplete = true;
     });
@@ -521,6 +528,11 @@ bool Framework::Graphics::Window::SyncFreeResources() {
     while (!syncComplete) {
         PollEvents();
         m_render->PollEvents();
+    }
+
+    if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
+        SRAssert2(false, "Window::SyncFreeResources() : default material was not be freed!\n\tUses count: " +
+                         std::to_string(material->GetCountUses()));
     }
 
     thread.TryJoin();

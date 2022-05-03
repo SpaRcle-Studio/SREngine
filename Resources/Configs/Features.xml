@@ -7,6 +7,7 @@
        <ChunkSystem Value="true"/>
        <EditorOnStartup Value="true"/>
        <CrashHandler Value="true"/>
-       <SkyboxCPUUsage Value="true"/>
+       <SkyboxCPUUsage Value="false"/>
+       <AutoReloadResources Value="true"/>
    </Common>
 </Features>

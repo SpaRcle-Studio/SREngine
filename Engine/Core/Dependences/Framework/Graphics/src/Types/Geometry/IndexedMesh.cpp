@@ -57,7 +57,7 @@ namespace Framework::Graphics::Types {
         auto &&manager = Memory::MeshManager::Instance();
 
         if (manager.Free<Vertices::Type::Unknown, MeshManager::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
-            if (!Environment::Get()->FreeIBO(m_IBO))
+            if (!Environment::Get()->FreeIBO(&m_IBO))
                 SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
         }
 

@@ -110,7 +110,10 @@ namespace SR_UTILS_NS {
 #define SR_WARN(msg) Framework::Helper::Debug::Warn(msg);
 #define SR_ERROR(msg) Framework::Helper::Debug::Error(msg);
 #define SR_GRAPH(msg) Framework::Helper::Debug::Graph(msg);
+#define SR_GRAPH_LOG(msg) Framework::Helper::Debug::Graph(msg);
 #define SR_SHADER(msg) Framework::Helper::Debug::Shader(msg);
+#define SR_SHADER_LOG(msg) Framework::Helper::Debug::Shader(msg);
+#define SR_SYSTEM_LOG(msg) Framework::Helper::Debug::System(msg);
 
 #ifdef SR_RELEASE
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun

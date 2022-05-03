@@ -75,15 +75,12 @@ namespace Framework::Graphics {
         }
 
         bool Destroy() override {
-            if (m_descriptorSet != -1) {
-                m_env->FreeDescriptorSet(m_descriptorSet);
-                m_descriptorSet = -1;
+            if (m_descriptorSet != SR_ID_INVALID && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+                SR_ERROR("VulkanPostProcessing::Destroy() : failed to free descriptor set!");
             }
 
-            if (m_ubo != -1) {
-                if (!m_env->FreeUBO(m_ubo))
-                    SR_WARN("VulkanPostProcessing::Destroy() : failed to free UBO!");
-                m_ubo = -1;
+            if (m_ubo != SR_ID_INVALID && !m_env->FreeUBO(&m_ubo)) {
+                SR_ERROR("VulkanPostProcessing::Destroy() : failed to free UBO!");
             }
 
             return PostProcessing::Destroy();

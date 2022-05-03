@@ -164,7 +164,7 @@ namespace Framework::Graphics::GUI {
         return result;
     }
 
-    static bool DrawVec3Control(const std::string& label, Helper::Math::FVector3& values, float_t resetValue = 0.0f, float_t columnWidth = 70.0f) {
+    static bool DrawVec3Control(const std::string& label, Helper::Math::FVector3& values, float_t resetValue = 0.0f, float_t columnWidth = 70.0f, float_t drag = 0.1) {
         bool result = false;
 
         ImGuiIO& io = ImGui::GetIO();
@@ -187,21 +187,21 @@ namespace Framework::Graphics::GUI {
         result |= DrawUnitControl("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag);
 
         ImGui::SameLine();
 
         result |= DrawUnitControl("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag);
 
         ImGui::SameLine();
 
         result |= DrawUnitControl("Z", values.z, resetValue, buttonSize,
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
+               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag);
 
         ImGui::PopStyleVar();
 

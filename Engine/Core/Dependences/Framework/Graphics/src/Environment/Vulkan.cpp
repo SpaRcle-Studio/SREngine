@@ -27,7 +27,8 @@ namespace Framework::Graphics{
     };
 
     const std::vector<const char*> Vulkan::m_deviceExtensions = {
-            VK_KHR_SWAPCHAIN_EXTENSION_NAME
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+            //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
     };
 
     #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
@@ -42,7 +43,7 @@ namespace Framework::Graphics{
         EvoVulkan::Tools::VkDebug::Warn   = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
         EvoVulkan::Tools::VkDebug::Error  = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Graph  = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
-        EvoVulkan::Tools::VkDebug::Assert = [](const std::string& msg) { Helper::Debug::Assert(SR_VRAM      + msg); };
+        EvoVulkan::Tools::VkDebug::Assert = [](const std::string& msg) { Helper::Debug::Assert(SR_VRAM      + msg); return false; };
 
         m_imgui = new VulkanTypes::VkImGUI();
 
@@ -109,15 +110,16 @@ namespace Framework::Graphics{
     bool Vulkan::CloseWindow() {
         Helper::Debug::Graph("Vulkan::CloseWindow() : close window...");
 
-        if (m_kernel)
-            if (!this->m_kernel->Destroy()) {
-                Helper::Debug::Error("Vulkan::CloseWindow() : failed to destroy Evo Vulkan kernel!");
-                return false;
-            }
-
         if (m_memory) {
             m_memory->Free();
             m_memory = nullptr;
+        }
+
+        if (m_kernel) {
+            if (!m_kernel->Destroy()) {
+                SR_ERROR("Vulkan::CloseWindow() : failed to destroy Evo Vulkan kernel!");
+                return false;
+            }
         }
 
         return true;
@@ -160,7 +162,7 @@ namespace Framework::Graphics{
         Helper::Debug::Info("Vulkan::Init() : create vulkan memory manager...");
         this->m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
         if (!m_memory) {
-            Helper::Debug::Error("Vulkan::Init() : failed to create vulkan memory manager!");
+            SR_ERROR("Vulkan::Init() : failed to create vulkan memory manager!");
             return false;
         }
 
@@ -169,13 +171,13 @@ namespace Framework::Graphics{
 
     void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
         if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Low)
-            Helper::Debug::Log("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
+            SR_LOG("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
 
-        this->m_basicWindow->Resize(w, h);
+        m_basicWindow->Resize(w, h);
     }
 
     void Vulkan::SetWindowPosition(int x, int y) {
-        this->m_basicWindow->Move(x, y);
+        m_basicWindow->Move(x, y);
     }
 
     bool Vulkan::PostInit() {
@@ -282,7 +284,7 @@ namespace Framework::Graphics{
                 for (auto&& descriptor : descriptorLayoutBindings) {
                     if (descriptor.binding == uniform.binding) {
                         if (descriptor.descriptorType != type) {
-                            SR_ERROR("Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
+                            SRVerifyFalse2(false, "Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
                                 SR_UTILS_NS::ToString(uniform.binding) + "\n\tPath: " + path);
                             return false;
                         }

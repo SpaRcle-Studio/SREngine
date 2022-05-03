@@ -307,19 +307,20 @@ namespace Framework::Graphics {
             glBindVertexArray(VAO);
             /// glDrawArrays(GL_LINES, 0, count_vertices);
         }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const override {
+        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const override {
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Helper::Debug::Log("OpenGL::FreeVBO() : free VBO \"" + std::to_string(ID) + "\" VAO...");
+                Helper::Debug::Log("OpenGL::FreeVBO() : free VBO \"" + std::to_string(*ID) + "\" VAO...");
 
-            if (ID > 0) {
-                glDeleteVertexArrays(1, &ID); // VAO
+            if (*ID > 0) {
+                glDeleteVertexArrays(1, reinterpret_cast<const GLuint *>(ID)); // VAO
                 return true;
-            } else {
-                Helper::Debug::Error("OpenGL::FreeVBO() : VBO (VAO) is zero! Something went wrong...");
+            }
+            else {
+                SR_ERROR("OpenGL::FreeVBO() : VBO (VAO) is zero! Something went wrong...");
                 return false;
             }
         }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const override {
+        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const override {
             return true; // nothing
         }
 
@@ -393,15 +394,15 @@ namespace Framework::Graphics {
             //glBindVertexArray(0);
         }
 
-        SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) const override {
+        SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) override {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO); // EBO
         }
 
-        SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) const override {
+        SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) override {
             glBindVertexArray(VAO);
         }
 
-        SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) const override {
+        SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {
             glBindVertexArray(VBO); // VAO
         }
 

@@ -212,5 +212,9 @@ namespace Framework::Helper {
         return m_name;
     }
 
+    uint64_t Path::GetFileHash() const {
+        return FileSystem::GetFileHash(m_path);
+    }
+
     Path& Path::operator=(const Path& path) = default;
 }

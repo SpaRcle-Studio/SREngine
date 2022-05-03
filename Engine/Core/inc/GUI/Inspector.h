@@ -30,13 +30,13 @@ namespace SR_CORE_NS::GUI {
         void DrawComponents();
         void DrawTransform(Helper::Transform3D* transform) const;
 
-        template<typename T> void DrawComponent(Helper::Component* component, const std::string& name) {
+        template<typename T> void DrawComponent(Helper::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
 
             if (!pComponent)
                 return;
 
-            if (ImGui::CollapsingHeader(component->GetComponentName().c_str()))
+            if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index++, component->GetComponentName().c_str()).c_str()))
                 ComponentDrawer::DrawComponent(pComponent);
         }
 

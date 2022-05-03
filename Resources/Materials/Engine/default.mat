@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<Material ReadOnly="true">
-    <Shader path="geometry"/>
+<Material ReadOnly="false">
+    <Shader path="Engine/standard.srsl"/>
     <Color r="255" g="255" b="255" a="255"/>
     <Diffuse path="Engine/default.png"/>
 </Material>

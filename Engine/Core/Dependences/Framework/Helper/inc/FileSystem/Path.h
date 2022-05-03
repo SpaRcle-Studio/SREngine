@@ -47,6 +47,7 @@ namespace Framework::Helper {
 
         SR_NODISCARD std::string ToString() const;
         SR_NODISCARD size_t GetHash() const;
+        SR_NODISCARD uint64_t GetFileHash() const;
         SR_NODISCARD const char* CStr() const;
 
         SR_NODISCARD Path GetPrevious() const;

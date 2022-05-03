@@ -5,6 +5,7 @@
 #include <GUI/ComponentDrawer.h>
 
 #include <Render/Camera.h>
+#include <Environment/Basic/IShaderProgram.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <GUI/Utils.h>
 #include <Types/Texture.h>
@@ -103,7 +104,42 @@ void Framework::Core::GUI::ComponentDrawer::DrawComponent(Mesh3D* mesh3d) {
 
         Graphics::GUI::DrawValue("Material", material->GetResourceId());
 
-        drawTexture("Diffuse", material->GetTexture(MAT_PROPERTY_DIFFUSE_TEXTURE));
+        if (auto&& shader = material->GetShader()) {
+            Graphics::GUI::DrawValue("Shader name", shader->GetName());
+        }
+
+        for (auto&& property : material->GetProperties()) {
+            std::visit([&property, &material](ShaderPropertyVariant&& arg){
+                if (std::holds_alternative<int32_t>(arg)) {
+                    auto&& value = std::get<int32_t>(arg);
+                    if (ImGui::InputInt(property.displayName.c_str(), &value)) {
+                        property.data = value;
+                    }
+                }
+                else if (std::holds_alternative<float_t>(arg)) {
+                    float_t value = std::get<float_t>(arg);
+                    if (ImGui::InputFloat(property.displayName.c_str(), &value)) {
+                        property.data = value;
+                    }
+                }
+                else if (std::holds_alternative<SR_MATH_NS::FVector3>(arg)) {
+                    auto&& value = std::get<SR_MATH_NS::FVector3>(arg);
+                    if (Graphics::GUI::DrawVec3Control(property.displayName, value, 0.f, 70.f, 0.01f)) {
+                        property.data = value;
+                    }
+                }
+                else if (std::holds_alternative<Texture*>(arg)) {
+                    auto&& value = std::get<Texture*>(arg);
+                    std::string id = value ? value->GetResourceId() : std::string();
+                    if (ImGui::InputText(property.displayName.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                        auto&& texture = SR_GTYPES_NS::Texture::Load(id);
+                        material->SetTexture(property, texture);
+                    }
+                }
+            }, property.data);
+        }
+
+        /*drawTexture("Diffuse", material->GetTexture(MAT_PROPERTY_DIFFUSE_TEXTURE));
         drawTexture("Normal", material->GetTexture(MAT_PROPERTY_NORMAL_TEXTURE));
         drawTexture("Specular", material->GetTexture(MAT_PROPERTY_SPECULAR_TEXTURE));
         drawTexture("Glossiness", material->GetTexture(MAT_PROPERTY_GLOSSINESS_TEXTURE));
@@ -114,19 +150,9 @@ void Framework::Core::GUI::ComponentDrawer::DrawComponent(Mesh3D* mesh3d) {
 
         auto blending = material->IsTransparent();
         if (Graphics::GUI::CheckBox("Blend", blending))
-            material->SetTransparent(blending);
+            material->SetTransparent(blending);*/
     }
     else {
         Helper::GUI::DrawTextOnCenter("Material (Missing)");
-    }
-
-    ImGui::Separator();
-
-    if (auto&& shader = mesh3d->GetShader()) {
-        Helper::GUI::DrawTextOnCenter("Shader");
-        Graphics::GUI::DrawValue("Shader name", shader->GetName());
-    }
-    else {
-        Helper::GUI::DrawTextOnCenter("Shader (Missing)", ImVec4(1, 0, 0, 1));
     }
 }

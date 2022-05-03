@@ -65,7 +65,7 @@ namespace Framework::Core::GUI {
                     if (ImGui::TreeNodeEx(groupName.c_str(), m_nodeFlagsWithChild)) {
                         uint32_t index = 0;
 
-                        for (const auto&[resourceName, pResources] : info.m_copies) {
+                        for (const auto&[resourceName, pResources] : info.GetCopiesRef()) {
                             if (pResources.size() == 1) {
                                 drawResource(*pResources.begin(), index++);
                             }

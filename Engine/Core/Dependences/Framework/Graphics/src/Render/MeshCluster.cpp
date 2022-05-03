@@ -25,6 +25,7 @@ bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Type
             --m_total;
 
             mesh->RemoveUsePoint();
+            mesh->SetRender(nullptr);
 
             if (m_counters[groupID] == 0) {
                 m_groups.erase(groupIt);

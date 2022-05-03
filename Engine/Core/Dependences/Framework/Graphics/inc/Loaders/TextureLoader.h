@@ -19,10 +19,10 @@ namespace Framework::Graphics {
     private:
         Types::Texture* g_default = nullptr;
     public:
-        static Types::Texture* GetDefaultTexture()             noexcept;
-        static bool SetDefaultTexture(Types::Texture* texture) noexcept;
+        static Types::Texture* GetDefaultTexture() noexcept;
     public:
         static Types::Texture* Load(std::string path);
+        static Types::Texture* LoadFromMemory(const std::string& data);
         static bool Free(unsigned char* data);
     };
 }

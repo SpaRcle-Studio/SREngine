@@ -10,19 +10,18 @@
 #include <Render/Render.h>
 #include <Environment/Environment.h>
 
-Framework::Graphics::Types::Texture::Texture()
+SR_GRAPH_NS::Types::Texture::Texture()
     : IResource(typeid(Texture).name())
-{
-    if(!m_env)
-        m_env = Environment::Get();
-}
+    , m_env(Environment::Get())
+{ }
 
-Framework::Graphics::Types::Texture::~Texture() {
-    if (m_data)
+SR_GRAPH_NS::Types::Texture::~Texture() {
+    if (m_data) {
         TextureLoader::Free(m_data);
+    }
 }
 
-bool Framework::Graphics::Types::Texture::Destroy() {
+bool SR_GRAPH_NS::Types::Texture::Destroy() {
     if (IsDestroyed()) {
         SRAssert2(false, "Texture already destroyed!");
         return false;
@@ -31,13 +30,12 @@ bool Framework::Graphics::Types::Texture::Destroy() {
     if (Debug::GetLevel() >= Debug::Level::Medium)
         SR_LOG("Texture::Destroy() : destroying texture...");
 
-    /// TODO:
     m_render->FreeTexture(this);
 
     return IResource::Destroy();
 }
 
-Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(const std::string& localPath, const Memory::TextureConfig& config) {
+SR_GRAPH_NS::Types::Texture* SR_GRAPH_NS::Types::Texture::Load(const std::string& localPath, const Memory::TextureConfig& config) {
     const auto path = ResourceManager::Instance().GetResPath().Concat("/Textures/").Concat(localPath);
 
     Texture* texture = nullptr;
@@ -52,17 +50,18 @@ Framework::Graphics::Types::Texture *Framework::Graphics::Types::Texture::Load(c
         if (Debug::GetLevel() >= Debug::Level::Medium)
             SR_LOG("Texture::Load : load \"" + localPath + "\" texture...");
 
-        texture = TextureLoader::Load(path.ToString());
-        texture->SetConfig(config);
-        texture->m_name = localPath;
+        if ((texture = TextureLoader::Load(path.ToString()))) {
+            texture->SetConfig(config);
+            texture->m_name = localPath;
 
-        texture->SetId(localPath);
+            texture->SetId(localPath);
+        }
     }
 
     return texture;
 }
 
-bool Framework::Graphics::Types::Texture::Calculate() {
+bool SR_GRAPH_NS::Types::Texture::Calculate() {
     if (!m_data)
         return false;
 
@@ -108,11 +107,11 @@ bool Framework::Graphics::Types::Texture::Calculate() {
     return true;
 }
 
-void Framework::Graphics::Types::Texture::SetRender(Framework::Graphics::Render *render) {
+void SR_GRAPH_NS::Types::Texture::SetRender(Framework::Graphics::Render *render) {
     m_render = render;
 }
 
-bool Framework::Graphics::Types::Texture::FreeVideoMemory()  {
+bool SR_GRAPH_NS::Types::Texture::FreeVideoMemory()  {
     if (Debug::GetLevel() >= Debug::Level::High)
         SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
 
@@ -124,11 +123,11 @@ bool Framework::Graphics::Types::Texture::FreeVideoMemory()  {
         return Framework::Graphics::Types::Texture::m_env->FreeTexture(m_ID);
 }
 
-Texture *Texture::Load(const std::string &path) {
+SR_GTYPES_NS::Texture *SR_GTYPES_NS::Texture::Load(const std::string &path) {
     return Load(path, TextureConfigs::Instance().FindOrDefault(path));
 }
 
-void Texture::SetConfig(const TextureConfig &config) {
+void SR_GTYPES_NS::Texture::SetConfig(const TextureConfig &config) {
     auto alpha = m_config.m_alpha;
     m_config = config;
 
@@ -137,4 +136,68 @@ void Texture::SetConfig(const TextureConfig &config) {
         m_config.m_alpha = alpha;
 
     SetAutoRemoveEnabled(m_config.m_autoRemove);
+}
+
+int32_t SR_GTYPES_NS::Texture::GetID() noexcept  {
+    if (IsDestroyed()) {
+        SR_ERROR("Texture::GetID() : texture \"" + GetResourceId() + "\" is destroyed!");
+        return -1;
+    }
+
+    if (!m_isCalculate && !Calculate()) {
+        SR_ERROR("Texture::GetID() : failed to calculating texture!");
+        return -1;
+    }
+
+    return m_ID;
+}
+
+SR_GTYPES_NS::Texture *SR_GTYPES_NS::Texture::GetNone() {
+    if (!m_none) {
+        /// так как вписать в код данные текстуры невозможно, то она хранится в виде base64, текстура размером 1x1 елого цвета типа png
+        const std::string image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAADUlEQVQI12N48eIFOwAINALALwGcPAAAAABJRU5ErkJggg==";
+
+        const auto&& config = TextureConfig(
+                /**.m_format = */ TextureFormat::RGBA8_UNORM,
+                /**.m_type = */ TextureType::Diffuse,
+                /**.m_autoRemove = */ false,
+                /**.m_filter = */ TextureFilter::NEAREST,
+                /**.m_compression = */ TextureCompression::None,
+                /**.m_mipLevels = */ 1,
+                /**.m_alpha = */ Helper::BoolExt::None,
+                /**.m_cpuUsage = */ false
+        );
+
+        m_none = LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(image), config);
+    }
+
+    if (!m_none) {
+        SR_ERROR("Texture::GetNone() : fatal internal error...");
+        SR_UTILS_NS::Debug::MakeCrash();
+    }
+
+    return m_none;
+}
+
+SR_GTYPES_NS::Texture *SR_GTYPES_NS::Texture::LoadFromMemory(const std::string& data, const TextureConfig &config) {
+    Texture* texture = TextureLoader::LoadFromMemory(data);
+
+    if (!texture) {
+        SRVerifyFalse2(false, "Texture::LoadFromMemory() : failed to load texture!");
+        return nullptr;
+    }
+
+    texture->SetConfig(config);
+    texture->m_name = "TextureFromMemory";
+
+    texture->SetId(texture->m_name);
+
+    return texture;
+}
+
+void SR_GTYPES_NS::Texture::FreeNoneTexture() {
+    if (m_none) {
+        m_none->Destroy();
+        m_none = nullptr;
+    }
 }

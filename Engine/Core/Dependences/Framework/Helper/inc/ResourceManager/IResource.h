@@ -6,6 +6,7 @@
 #define GAMEENGINE_IRESOURCE_H
 
 #include <Debug.h>
+#include <FileSystem/Path.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
@@ -24,6 +25,7 @@ namespace SR_UTILS_NS {
         virtual ~IResource() = default;
 
     public:
+        SR_NODISCARD uint64_t GetFileHash() const;
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD bool IsLoaded() const { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
@@ -35,6 +37,10 @@ namespace SR_UTILS_NS {
         SR_NODISCARD float_t GetLifetime() const { return m_lifetime; }
         SR_NODISCARD const char *GetResourceName() const { return m_resourceName; }
         SR_NODISCARD std::string GetResourceId() const { return m_resourceId; }
+        SR_NODISCARD virtual std::string GetResourcePath() const { return m_resourceId; }
+        SR_NODISCARD virtual bool CanHaveDuplicates() const { return false; }
+        SR_NODISCARD virtual uint64_t GetResourceHash() const { return 0; }
+        SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
 
         SR_NODISCARD virtual IResource* Copy(IResource* destination) const;
 
@@ -49,6 +55,8 @@ namespace SR_UTILS_NS {
             if (m_countUses == 0 && m_autoRemove && !IsDestroyed())
                 Destroy();
         }
+
+        virtual bool Reload() { return false; }
 
         virtual bool Unload() {
             if (m_loadState == LoadState::Unknown || m_loadState == LoadState::Loaded) {
@@ -80,14 +88,15 @@ namespace SR_UTILS_NS {
 
     private:
         float_t m_lifetime = 0;
+
         std::atomic<bool> m_force = false;
         std::atomic<bool> m_readOnly = false;
+        std::atomic<bool> m_isDestroyed = false;
+        std::atomic<bool> m_autoRemove = false;
+
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
         std::string m_resourceId = "NoID";
-        bool m_autoRemove = false;
 
-        std::atomic<bool> m_isDestroyed = false;
-        /* Count uses current resource now */
         std::atomic<uint64_t> m_countUses = 0;
 
     };

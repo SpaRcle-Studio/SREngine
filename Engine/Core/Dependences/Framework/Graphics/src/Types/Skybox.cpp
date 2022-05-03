@@ -194,28 +194,21 @@ bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
         m_VAO = -1;
     }
 
-    if (m_VBO != -1) {
-        if (!m_env->FreeVBO(m_VBO)) {
-            SR_ERROR("Skybox::FreeVideoMemory() : failed to free VBO!");
-        }
-        m_VBO = -1;
+    if (m_VBO != SR_ID_INVALID && !m_env->FreeVBO(&m_VBO)) {
+        SR_ERROR("Skybox::FreeVideoMemory() : failed to free VBO!");
     }
 
-    if (m_IBO != -1) {
-        if (!m_env->FreeIBO(m_IBO)) {
-            SR_ERROR("Skybox::FreeVideoMemory() : failed to free IBO!");
-        }
-        m_IBO = -1;
+    if (m_IBO != SR_ID_INVALID && !m_env->FreeIBO(&m_IBO)) {
+        SR_ERROR("Skybox::FreeVideoMemory() : failed to free IBO!");
     }
 
-    if (m_cubeMap != -1) {
+    if (m_cubeMap != SR_ID_INVALID) {
         m_env->FreeCubeMap(m_cubeMap);
-        m_cubeMap = -1;
+        m_cubeMap = SR_ID_INVALID;
     }
 
-    if (m_descriptorSet >= 0) {
-        m_env->FreeDescriptorSet(m_descriptorSet);
-        m_descriptorSet = -1;
+    if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+        SR_ERROR("Skybox::FreeVideoMemory() : failed to free descriptor set!");
     }
 
     m_isCalculated = false;

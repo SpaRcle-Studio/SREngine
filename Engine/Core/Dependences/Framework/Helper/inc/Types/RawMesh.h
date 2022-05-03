@@ -9,7 +9,9 @@
 #include <Utils/Vertices.hpp>
 #include <Types/SafePointer.h>
 
-#include <assimp/Importer.hpp>
+namespace Assimp {
+    class Importer;
+}
 
 class aiScene;
 
@@ -24,7 +26,7 @@ namespace SR_UTILS_NS::Types {
 
     private:
         RawMesh();
-        ~RawMesh() override = default;
+        ~RawMesh() override;
 
     public:
         static RawMesh *Load(const std::string &path);
@@ -48,7 +50,7 @@ namespace SR_UTILS_NS::Types {
 
     private:
         const aiScene* m_scene;
-        Assimp::Importer m_importer;
+        Assimp::Importer* m_importer;
 
         /// блокировка на случай выгрузки ресурса
         /// во время работы у указателем на его данные

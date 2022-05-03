@@ -23,13 +23,6 @@ namespace SR_GRAPH_NS {
 namespace SR_GRAPH_NS::Types {
     class Material;
 
-    enum class MeshFeatures {
-        None     = 0,
-        Vertices = 1 << 0,
-        Indexed  = 1 << 1,
-        Skinned  = 1 << 2
-    };
-
     SR_ENUM_CLASS(MeshType,
         Unknown = 0,
         Static = 1,
@@ -61,7 +54,7 @@ namespace SR_GRAPH_NS::Types {
 
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
-        virtual void UpdateUBO() = 0;
+        virtual void UpdateUBO() { }
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();
@@ -74,6 +67,7 @@ namespace SR_GRAPH_NS::Types {
         void OnScaled(const Helper::Math::FVector3& newValue) override;
         void OnSkewed(const Helper::Math::FVector3& newValue) override;
 
+        void OnShaderChanged();
         void OnDestroyGameObject() override;
         void OnRemoveComponent() override {
             OnDestroyGameObject();
@@ -85,7 +79,6 @@ namespace SR_GRAPH_NS::Types {
     public:
         void WaitCalculate() const;
         bool IsCanCalculate() const;
-        std::string GetPath() const;
 
         SR_NODISCARD Shader* GetShader()           const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
@@ -94,7 +87,12 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
         SR_NODISCARD bool IsInverse()              const { return m_inverse; }
         SR_NODISCARD bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD glm::mat4 GetModelMatrix()    const { return m_modelMat; }
         SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
+        SR_NODISCARD uint32_t GetDescriptorSet()   const { return m_descriptorSet; }
+        SR_NODISCARD uint32_t GetUBO()             const { return m_UBO; }
+        SR_NODISCARD std::string GetResourcePath() const override;
+        SR_NODISCARD bool CanHaveDuplicates() const override { return true; }
 
         void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
@@ -125,6 +123,7 @@ namespace SR_GRAPH_NS::Types {
 
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
+        std::atomic<bool>            m_shaderDirty       = false;
 
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;

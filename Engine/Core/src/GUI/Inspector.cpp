@@ -54,7 +54,8 @@ namespace Framework::Core::GUI {
             ImGui::EndPopup();
         }
 
-        m_gameObject->ForEachComponent([this](SR_UTILS_NS::Component* component) -> bool {
+        uint32_t index = 0;
+        m_gameObject->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(component->GetComponentName().c_str())) {
@@ -66,8 +67,8 @@ namespace Framework::Core::GUI {
                 ImGui::EndPopup();
             }
 
-            DrawComponent<Graphics::Camera>(component, "Camera");
-            DrawComponent<Graphics::Types::Mesh3D>(component, "Mesh3D");
+            DrawComponent<Graphics::Camera>(component, "Camera", index);
+            DrawComponent<Graphics::Types::Mesh3D>(component, "Mesh3D", index);
 
             return true;
 

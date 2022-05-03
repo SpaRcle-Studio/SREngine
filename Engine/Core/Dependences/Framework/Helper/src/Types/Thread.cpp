@@ -3,14 +3,11 @@
 //
 
 #include <Types/Thread.h>
+#include <Platform/Platform.h>
 
-#ifdef SR_WIN32
-    #include <Windows.h>
-#endif
-
-void Types::Thread::Sleep(uint64_t milliseconds) {
-#ifdef SR_WIN32
-    ::Sleep(static_cast<DWORD>(milliseconds));
-#endif
+namespace SR_HTYPES_NS {
+    void Thread::Sleep(uint64_t milliseconds) {
+        Platform::Sleep(milliseconds);
+    }
 }
 

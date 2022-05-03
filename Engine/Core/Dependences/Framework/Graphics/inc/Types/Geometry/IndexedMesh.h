@@ -86,7 +86,7 @@ namespace SR_GRAPH_NS::Types {
         using namespace Memory;
 
         if (MeshManager::Instance().Free<type, MeshManager::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
-            if (!m_env->FreeVBO(m_VBO)) {
+            if (!m_env->FreeVBO(&m_VBO)) {
                 SR_ERROR("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
                 return false;
             }

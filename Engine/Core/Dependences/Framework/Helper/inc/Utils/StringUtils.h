@@ -15,6 +15,17 @@ namespace SR_UTILS_NS {
         StringUtils(StringUtils&) = delete;
         ~StringUtils() = delete;
     public:
+        inline static const std::string base64_chars =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "abcdefghijklmnopqrstuvwxyz"
+                "0123456789+/";
+
+        static inline bool is_base64(unsigned char c) {
+            return (isalnum(c) || (c == '+') || (c == '/'));
+        }
+
+        static std::string Base64Decode(const std::string& base64);
+
         inline static glm::vec3 IntToColor(size_t index) noexcept {
             unsigned char r = ((index >> 16) & 0xFF);  // Extract the RR byte
             unsigned char g = ((index >> 8) & 0xFF);   // Extract the GG byte

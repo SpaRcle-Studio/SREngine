@@ -96,7 +96,8 @@ bool Framework::Graphics::Types::DebugWireframeMesh::FreeVideoMemory() {
 
 void Framework::Graphics::Types::DebugWireframeMesh::UpdateUBO() {
     if (m_UBO >= 0) {
-        WireframeUBO ubo = { m_modelMat, m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM() };
+        //m_material->GetColor(MAT_PROPERTY_DIFFUSE_COLOR).ToGLM()
+        WireframeUBO ubo = { m_modelMat, glm::vec4(1, 1, 1, 1) };
         m_env->UpdateUBO(m_UBO, &ubo, sizeof(WireframeUBO));
     }
 }

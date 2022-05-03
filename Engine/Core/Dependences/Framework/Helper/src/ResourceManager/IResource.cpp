@@ -2,8 +2,8 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#include "ResourceManager/IResource.h"
-#include "ResourceManager/ResourceManager.h"
+#include <ResourceManager/IResource.h>
+#include <ResourceManager/ResourceManager.h>
 
 namespace SR_UTILS_NS {
     IResource::IResource(const char *name)
@@ -41,7 +41,7 @@ namespace SR_UTILS_NS {
     }
 
     IResource *IResource::Copy(IResource *destination) const {
-        destination->m_autoRemove = m_autoRemove;
+        destination->m_autoRemove.store(m_autoRemove);
         destination->m_lifetime = m_lifetime;
         destination->m_loadState.store(m_loadState);
         destination->SetId(m_resourceId);
@@ -74,5 +74,16 @@ namespace SR_UTILS_NS {
         }
 
         return false;
+    }
+
+    uint64_t IResource::GetFileHash() const {
+        auto&& path = GetResourcePath();
+        auto&& fullPath = GetAssociatedPath().Concat(path);
+
+        if (fullPath.Exists()) {
+            return fullPath.GetFileHash();
+        }
+
+        return 0;
     }
 }

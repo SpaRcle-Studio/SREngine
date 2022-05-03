@@ -82,18 +82,20 @@ int main(int argc, char **argv) {
     Debug::Init(exe, true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
 
+    auto&& resourcesManager = ResourceManager::Instance();
+
     if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
-        ResourceManager::Instance().Init(Path(exe + "/../../Resources"));
+        resourcesManager.Init(Path(exe + "/../../Resources"));
     }
     else
-        ResourceManager::Instance().Init(folder);
+        resourcesManager.Init(folder);
 
     RuntimeTest::MarshalRunRuntimeTest();
 
     SRSL::SRSLLoader::Instance().Load("Engine/standard.srsl");
     //return 0;
 
-    Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
+    Features::Instance().Reload(resourcesManager.GetResPath().Concat("/Configs/Features.xml"));
 
     if (!FbxLoader::Debug::IsInit()) {
         FbxLoader::Debug::Init(
@@ -114,11 +116,11 @@ int main(int argc, char **argv) {
 
     // Register all resource types
     {
-        ResourceManager::Instance().RegisterType<RawMesh>();
-        ResourceManager::Instance().RegisterType<Mesh>();
-        ResourceManager::Instance().RegisterType<Texture>();
-        ResourceManager::Instance().RegisterType<Material>();
-        ResourceManager::Instance().RegisterType<Shader>();
+        resourcesManager.RegisterType<RawMesh>();
+        resourcesManager.RegisterType<Mesh>();
+        resourcesManager.RegisterType<Texture>();
+        resourcesManager.RegisterType<Material>();
+        resourcesManager.RegisterType<Shader>();
     }
 
     // Register all components

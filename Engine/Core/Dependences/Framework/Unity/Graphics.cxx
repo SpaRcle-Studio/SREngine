@@ -49,6 +49,7 @@
 #include "../Graphics/src/Render/Shader.cpp"
 #include "../Graphics/src/Render/ShaderGenerator.cpp"
 #include "../Graphics/src/Render/RenderManager.cpp"
+#include "../Graphics/src/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../Graphics/src/Types/Geometry/IndexedMesh.cpp"
@@ -62,9 +63,3 @@
 #include "../Graphics/src/Types/Texture.cpp"
 
 #include "../Graphics/src/Window/Window.cpp"
-
-
-
-
-
-

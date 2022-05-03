@@ -28,8 +28,9 @@
 #include "../Helper/src/TaskManager/TaskManager.cpp"
 
 #include "../Helper/src/ResourceManager/IResource.cpp"
-#include "../Helper/src/ResourceManager/ResourceManager.cpp"
+#include "../Helper/src/ResourceManager/ResourceInfo.cpp"
 #include "../Helper/src/ResourceManager/ResourcesHolder.cpp"
+#include "../Helper/src/ResourceManager/ResourceManager.cpp"
 
 #include "../Helper/src/CommandManager/ICommand.cpp"
 #include "../Helper/src/CommandManager/CmdManager.cpp"
