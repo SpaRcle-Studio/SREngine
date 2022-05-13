@@ -6,6 +6,7 @@
 #define GAMEENGINE_SCRIPT_H
 
 #include <Debug.h>
+#include <Utils/NonCopyable.h>
 
 namespace Framework::Scripting {
     typedef std::chrono::high_resolution_clock::time_point Time;

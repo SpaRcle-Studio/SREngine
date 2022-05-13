@@ -8,31 +8,34 @@
 #include <Base/Script.h>
 
 namespace Framework::Scripting {
-    class Compiler {
+    class Compiler : SR_UTILS_NS::NonCopyable {
     protected:
         Compiler() = default;
-        virtual ~Compiler() = default;
-    public:
-        Compiler(const Compiler&) = delete;
-    protected:
-        std::set<Script*> m_scripts        = {};
-        std::mutex        m_useMutex       = std::mutex();
+        ~Compiler() override = default;
 
-        std::set<Script*> m_scriptsToAdd   = {};
-        std::set<Script*> m_scriptsToDel   = {};
-        std::mutex        m_operationMutex = std::mutex();
     public:
+        void StartAll();
         void UpdateAll();
         void FixedUpdateAll();
+
     public:
         void RegisterScript(Script* script);
         void RemoveScript(Script* script);
         void PollEvents();
         bool Contains(Script* script);
+
     public:
         virtual bool Init()    = 0;
         virtual bool Destroy() = 0;
         virtual void Free()    = 0;
+
+    protected:
+        std::recursive_mutex m_mutex          = std::recursive_mutex();
+
+        std::set<Script*>    m_scripts        = {};
+        std::set<Script*>    m_scriptsToAdd   = {};
+        std::set<Script*>    m_scriptsToDel   = {};
+
     };
 }
 

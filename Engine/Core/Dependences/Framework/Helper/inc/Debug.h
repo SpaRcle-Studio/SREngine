@@ -99,6 +99,7 @@ namespace SR_UTILS_NS {
         static void Error(const std::string& msg)       { Print(msg, Type::Error);       g_countErrors++;   }
         static void VulkanError(const std::string& msg) { Print(msg, Type::VulkanError); g_countErrors++;   }
         static bool Assert(const std::string& msg)      { Print(msg, Type::Assert);      g_countErrors++;  return false; }
+        static bool AssertOnceCheck(const std::string& msg);
 
         static void ScriptLog(const std::string& msg)   { Print(msg, Type::ScriptLog);  }
         static void ScriptError(const std::string& msg) { Print(msg, Type::ScriptError);  }
@@ -115,24 +116,20 @@ namespace SR_UTILS_NS {
 #define SR_SHADER_LOG(msg) Framework::Helper::Debug::Shader(msg);
 #define SR_SYSTEM_LOG(msg) Framework::Helper::Debug::System(msg);
 
+#define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
+            .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
+
 #ifdef SR_RELEASE
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
-    #define SRAssert2(expr, msg) ((void)(expr)) // TODO: remove execution expression
-    #define SRAssert(expr) ((void)(expr)) // TODO: remove execution expression
+    #define SRAssert2(expr, msg) (SR_NOOP)
+    #define SRAssert(expr) (SR_NOOP)
     #define SRAssert1(expr) SRAssert(expr)
-    #define SR_SAFE_PTR_ASSERT(expr, msg)
-
-    #define SRVerifyFalse2(expr, msg) {                                      \
-            [[maybe_unused]] const volatile bool verify_expression = (expr); \
-        }                                                                    \
-
-    #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "")
+    #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
+    #define SRAssert2Once(expr, msg) (SR_NOOP)
+    #define SRVerifyFalse2(expr, msg) (!(!!(expr)))
 #endif
 
 #ifdef SR_DEBUG
-    #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
-            .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
-
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
             if (fun != notEquals) Framework::Helper::Debug::Error(errorMsg)
 
@@ -141,23 +138,16 @@ namespace SR_UTILS_NS {
     #define SRAssert1(expr) SRAssert2(expr, #expr)
     #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
 
-    #define SRVerifyFalse2(expr, msg) {                 \
-            const volatile bool verify_expression = (expr); \
-            SRAssert2(verify_expression, msg);              \
-        }                                                   \
+    #define SRVerifyFalse2(expr, msg) (!(!!(expr) || Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg))))
 
-    #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.");
     #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
+
+    #define SRAssert2Once(expr, msg) ((!(expr) && SR_UTILS_NS::Debug::AssertOnceCheck(SR_MAKE_ASSERT(msg))) || SRAssert2(expr, msg))
 #endif
 
-#define SRAssert2Once(expr, msg) {                         \
-        static volatile bool g_generated_asserted = false; \
-        if (!g_generated_asserted) {                       \
-            SRAssert2(expr, msg);                          \
-            g_generated_asserted = true;                   \
-        }                                                  \
-    }                                                      \
+#define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
 
+#define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
 
 #endif //HELPER_DEBUG_H

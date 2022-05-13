@@ -40,8 +40,8 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
     SR_GRAPH("PostProcessing::Init() : initializing post processing...");
 
     {
-        m_postProcessingShader = Shader::Load(m_render, "postProcessing");
-        m_blurShader = new Shader(m_render, "engine/blur");
+        m_postProcessingShader = Shader::Load("postProcessing");
+        m_blurShader = new Shader("engine/blur");
     }
 
     m_isInit = true;

@@ -12,48 +12,57 @@ namespace Framework::Helper {
         if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
             return std::to_string(value);
         }
+        else if constexpr (Math::IsString<T>()) {
+            return value;
+        }
         else
             static_assert(false, "Unsupported type!");
     }
 
     /// Warning: unsafe
     template<typename T> T LexicalCast(const std::string& str) {
-        if constexpr (std::is_same<T, bool>()) {
-            const char c = str.front();
-            return c == 't' || c == 'T' || c == '1' || c == 'y' || c == 'Y' || c == '1';
+        try {
+            if constexpr (std::is_same<T, bool>()) {
+                const char c = str.front();
+                return c == 't' || c == 'T' || c == '1' || c == 'y' || c == 'Y' || c == '1';
+            }
+            else if constexpr (std::is_same<T, int8_t>()) {
+                return static_cast<int8_t>(str.front());
+            }
+            else if constexpr (std::is_same<T, uint8_t>()) {
+                return static_cast<uint8_t>(str.front());
+            }
+            else if constexpr (std::is_same<T, int16_t>()) {
+                return std::stoi(str);
+            }
+            else if constexpr (std::is_same<T, uint16_t>()) {
+                return static_cast<uint16_t>(std::stoi(str));
+            }
+            else if constexpr (std::is_same<T, int32_t>()) {
+                return std::stoi(str);
+            }
+            else if constexpr (std::is_same<T, int64_t>()) {
+                return std::stoll(str);
+            }
+            else  if constexpr (std::is_same<T, uint32_t>()) {
+                return static_cast<uint32_t>(std::stoi(str));
+            }
+            else if constexpr (std::is_same<T, uint64_t>()) {
+                return static_cast<uint64_t>(std::stoll(str));
+            }
+            else if constexpr (std::is_same<T, float_t>()) {
+                return std::stof(str);
+            }
+            else if constexpr (std::is_same<T, double_t>() || std::is_same<T, Math::Unit>()) {
+                return std::stod(str);
+            }
+            else
+                static_assert(false, "Unsupported type!");
         }
-        else if constexpr (std::is_same<T, int8_t>()) {
-            return static_cast<int8_t>(str.front());
+        catch (...) {
+            SRAssert(false);
+            return T();
         }
-        else if constexpr (std::is_same<T, uint8_t>()) {
-            return static_cast<uint8_t>(str.front());
-        }
-        else if constexpr (std::is_same<T, int16_t>()) {
-            return std::stoi(str);
-        }
-        else if constexpr (std::is_same<T, uint16_t>()) {
-            return static_cast<uint16_t>(std::stoi(str));
-        }
-        else if constexpr (std::is_same<T, int32_t>()) {
-            return std::stoi(str);
-        }
-        else if constexpr (std::is_same<T, int64_t>()) {
-            return std::stoll(str);
-        }
-        else  if constexpr (std::is_same<T, uint32_t>()) {
-            return static_cast<uint32_t>(std::stoi(str));
-        }
-        else if constexpr (std::is_same<T, uint64_t>()) {
-            return static_cast<uint64_t>(std::stoll(str));
-        }
-        else if constexpr (std::is_same<T, float_t>()) {
-            return std::stof(str);
-        }
-        else if constexpr (std::is_same<T, double_t>() || std::is_same<T, Math::Unit>()) {
-            return std::stod(str);
-        }
-        else
-            static_assert(false, "Unsupported type!");
     }
 
     static std::string Format(const char* fmt, ...) {

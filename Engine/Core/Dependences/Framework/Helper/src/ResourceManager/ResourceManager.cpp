@@ -16,7 +16,7 @@ namespace SR_UTILS_NS {
 
         m_isInit = true;
 
-        m_thread = Types::Thread(std::thread(&ResourceManager::Thread, this));
+        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(std::thread(&ResourceManager::Thread, this));
 
         return true;
     }
@@ -24,13 +24,19 @@ namespace SR_UTILS_NS {
     bool ResourceManager::Stop() {
         SR_INFO("ResourceManager::Stop() : stopping resource manager...");
 
+        PrintMemoryDump();
+
         m_isInit = false;
 
         Synchronize(true);
 
         SR_INFO("ResourceManager::Stop() : stopping thread...");
 
-        m_thread.TryJoin();
+        if (m_thread) {
+            m_thread->TryJoin();
+            m_thread->Free();
+            m_thread = nullptr;
+        }
 
         PrintMemoryDump();
 
@@ -163,6 +169,8 @@ namespace SR_UTILS_NS {
     void ResourceManager::PrintMemoryDump() {
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
+        uint64_t count = 0;
+
         std::string dump = "\n================================ MEMORY DUMP ================================";
 
         for (const auto& [name, type] : m_resources) {
@@ -171,18 +179,26 @@ namespace SR_UTILS_NS {
             uint32_t id = 0;
             for (auto& pRes : type.m_resources) {
                 dump += Helper::Format("\n\t\t%u: %s = %u", id++, pRes->GetResourceId().c_str(), pRes->GetCountUses());
+                ++count;
             }
         }
 
         std::string wait;
         for (auto res : m_destroyed) {
             wait += "\n\t\t" + res->m_resourceId + "; uses = " +std::to_string(res->GetCountUses());
+            ++count;
         }
 
         dump += "\n\tWait destroy: " + std::to_string(m_destroyed.size()) + wait;
 
         dump += "\n=============================================================================";
-        Debug::System(dump);
+
+        if (count > 0) {
+            SR_SYSTEM_LOG(dump);
+        }
+        else {
+            SR_SYSTEM_LOG("Memory dump is empty!");
+        }
     }
 
     IResource *ResourceManager::Find(const std::string& Name, const std::string& ID) {
@@ -210,7 +226,7 @@ namespace SR_UTILS_NS {
         }
 
         while (!m_destroyIsEmpty) {
-            if (!m_thread.Joinable()) {
+            if (!m_thread->Joinable()) {
                 SR_ERROR("ResourceManager::Synchronize() : thread is dead!");
                 break;
             }

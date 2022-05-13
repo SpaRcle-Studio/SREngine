@@ -221,4 +221,8 @@ namespace Framework::Helper {
 
         return ret;
     }
+
+    std::string StringUtils::Remove(std::string source, uint32_t count) {
+        return source.substr(count, source.size() - count);
+    }
 }

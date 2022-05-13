@@ -21,15 +21,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Mesh::~Mesh() {
-        if (m_material) {
-            m_material->UnSubscribe(this);
-            m_material = nullptr;
-        }
-
-        if (m_rawMesh) {
-            m_rawMesh->RemoveUsePoint();
-            m_rawMesh = nullptr;
-        }
+        SetRawMesh(nullptr);
+        SetMaterial(nullptr);
     }
 
     bool Mesh::Destroy() {
@@ -247,16 +240,15 @@ namespace SR_GRAPH_NS::Types {
             return;
         }
 
-        if (m_material)
-            m_material->UnSubscribe(this);
+        m_dirtyMaterial = true;
+
+        if (m_material) {
+            RemoveDependency(m_material);
+        }
 
         if ((m_material = material)) {
-            m_material->Subscribe(this);
+            AddDependency(m_material);
         }
-        else
-            SR_WARN("Mesh::SetMaterial() : the material is nullptr!");
-
-        m_shaderDirty = true;
 
         if (m_isCalculated)
             Environment::Get()->SetBuildState(false);
@@ -299,11 +291,11 @@ namespace SR_GRAPH_NS::Types {
         }
 
         if (m_rawMesh) {
-            m_rawMesh->RemoveUsePoint();
+            RemoveDependency(m_rawMesh);
         }
 
         if (pRaw) {
-            pRaw->AddUsePoint();
+            AddDependency(pRaw);
         }
 
         m_rawMesh = pRaw;
@@ -318,8 +310,12 @@ namespace SR_GRAPH_NS::Types {
         return m_material ? m_material->GetShader() : nullptr;
     }
 
-    void Mesh::OnShaderChanged() {
-        m_shaderDirty = true;
+    void Mesh::OnResourceUpdated(IResource *pResource, int32_t depth) {
+        if (dynamic_cast<Material*>(pResource) == m_material && m_material) {
+            m_dirtyMaterial = true;
+        }
+
+        IResource::OnResourceUpdated(pResource, depth);
     }
 }
 

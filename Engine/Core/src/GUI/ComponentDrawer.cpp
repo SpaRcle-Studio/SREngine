@@ -133,7 +133,7 @@ void Framework::Core::GUI::ComponentDrawer::DrawComponent(Mesh3D* mesh3d) {
                     std::string id = value ? value->GetResourceId() : std::string();
                     if (ImGui::InputText(property.displayName.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue)) {
                         auto&& texture = SR_GTYPES_NS::Texture::Load(id);
-                        material->SetTexture(property, texture);
+                        material->SetTexture(&property, texture);
                     }
                 }
             }, property.data);

@@ -71,7 +71,12 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
     if ((!m_isCalculated && !Calculate()) || m_hasErrors)
         return;
 
-    if (m_shaderDirty) {
+    auto &&shader = m_material->GetShader();
+
+    if (m_dirtyMaterial)
+    {
+        m_dirtyMaterial = false;
+
         if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
             SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
         }
@@ -79,8 +84,6 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
         if (m_UBO >= 0 && !m_env->FreeUBO(&m_UBO)) {
             SR_ERROR("Mesh::FreeVideoMemory() : failed to free uniform buffer object!");
         }
-
-        auto &&shader = m_material->GetShader();
 
         if (shader->GetUBOBlockSize() > 0) {
             if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform}); m_descriptorSet < 0) {
@@ -111,9 +114,9 @@ void Framework::Graphics::Types::Mesh3D::DrawVulkan() {
 
         shader->InitUBOBlock();
         shader->Flush();
-    }
 
-    m_material->UseSamplers();
+        m_material->UseSamplers();
+    }
 
     if (m_descriptorSet != SR_ID_INVALID) {
         m_env->BindDescriptorSet(m_descriptorSet);

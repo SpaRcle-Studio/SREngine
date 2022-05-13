@@ -9,6 +9,7 @@
 
 namespace SR_HTYPES_NS {
     class Timer {
+        using ClockType = std::chrono::time_point<std::chrono::steady_clock>;
     public:
         explicit Timer(float_t updateFrequency)
             : m_updateFrequency(updateFrequency)
@@ -20,9 +21,11 @@ namespace SR_HTYPES_NS {
                 m_frames = 0; m_deltaTime = 0;
             }
 
-            auto&& now = clock();
+            auto&& now = std::chrono::high_resolution_clock::now();
 
-            m_deltaTime += double_t(now - m_beginFrame) / (double_t) CLOCKS_PER_SEC;
+            using ms = std::chrono::duration<double, std::milli>;
+            m_deltaTime += std::chrono::duration_cast<ms>(now - m_beginFrame).count() / (double_t) CLOCKS_PER_SEC;
+
             m_frames++;
             m_beginFrame = now;
 
@@ -33,10 +36,10 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD uint32_t GetFrames() const { return m_frames; }
 
     private:
-        float_t  m_updateFrequency;
-        double_t m_deltaTime = 0;
-        uint32_t m_frames = 0;
-        clock_t  m_beginFrame{};
+        float_t   m_updateFrequency;
+        double_t  m_deltaTime = 0;
+        uint32_t  m_frames = 0;
+        ClockType m_beginFrame{};
 
     };
 }

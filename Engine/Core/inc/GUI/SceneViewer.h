@@ -56,6 +56,7 @@ namespace SR_CORE_NS::GUI {
         std::atomic<bool> m_cameraActive = false;
         SR_MATH_NS::FVector3 m_rotation;
         SR_MATH_NS::FVector3 m_translation;
+        bool m_updateNonHoveredSceneViewer = false;
 
     };
 }

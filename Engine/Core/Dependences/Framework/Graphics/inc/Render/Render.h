@@ -42,16 +42,16 @@ namespace SR_GRAPH_NS {
         ~Render() override = default;
 
     public:
-        [[nodiscard]] SR_FORCE_INLINE bool IsRun() const noexcept { return m_isRun; }
-        [[nodiscard]] SR_FORCE_INLINE bool IsInit() const noexcept { return m_isInit; }
-    public:
-        [[nodiscard]] SR_FORCE_INLINE ColorBuffer* GetColorBuffer() const noexcept { return this->m_colorBuffer; }
+        SR_NODISCARD bool IsRun() const { return m_isRun; }
+        SR_NODISCARD bool IsInit() const { return m_isInit; }
+        SR_NODISCARD bool GetWireFrameEnabled() const { return m_wireFrame; }
+        SR_NODISCARD ColorBuffer* GetColorBuffer() const { return m_colorBuffer; }
+        SR_NODISCARD Camera* GetCurrentCamera() const { return m_currentCamera; }
 
-        SR_FORCE_INLINE void SetWireFrameEnabled(const bool& value) noexcept { this->m_wireFrame = value; }
-        [[nodiscard]] SR_FORCE_INLINE bool GetWireFrameEnabled() const noexcept { return this->m_wireFrame; }
-        SR_FORCE_INLINE void SetGridEnabled(bool value) { this->m_gridEnabled = value; }
-        void SetCurrentCamera(Camera* camera) noexcept;
-        [[nodiscard]] SR_FORCE_INLINE Camera* GetCurrentCamera() const noexcept { return this->m_currentCamera; }
+        void SetWireFrameEnabled(const bool& value) { m_wireFrame = value; }
+        void SetGridEnabled(bool value) { m_gridEnabled = value; }
+        void SetCurrentCamera(Camera* camera);
+
     public:
         void Synchronize();
         bool IsClean();

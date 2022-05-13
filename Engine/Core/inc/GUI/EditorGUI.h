@@ -46,6 +46,8 @@ namespace SR_CORE_NS::GUI {
             return nullptr;
         }
 
+        void CloseAllWindows();
+
         SR_NODISCARD bool Enabled() const { return m_enabled; }
 
         void Draw() override;
@@ -62,16 +64,18 @@ namespace SR_CORE_NS::GUI {
         void Load();
 
     private:
-        Graphics::Window*    m_window    = nullptr;
-        Scripting::Compiler* m_compiler  = nullptr;
-        Scripting::Script*   m_script    = nullptr;
+        Graphics::Window*    m_window     = nullptr;
+        Scripting::Compiler* m_compiler   = nullptr;
+        Scripting::Script*   m_script     = nullptr;
 
-        std::atomic<bool>    m_isInit    = false;
-        std::atomic<bool>    m_hasErrors = false;
-        std::atomic<bool>    m_enabled   = false;
-        std::atomic<bool>    m_loaded    = false;
+        std::atomic<bool>    m_isInit     = false;
+        std::atomic<bool>    m_hasErrors  = false;
+        std::atomic<bool>    m_enabled    = false;
+        std::atomic<bool>    m_loaded     = false;
 
-        Widgets              m_widgets   = {};
+        bool                 m_useDocking = true;
+
+        Widgets              m_widgets    = {};
 
     };
 }

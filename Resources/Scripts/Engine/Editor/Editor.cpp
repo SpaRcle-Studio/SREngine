@@ -23,9 +23,9 @@ EXTERN void Start() {
 }
 
 EXTERN void OnGUI() {
-    GUISystem& gui = GUISystem::Instance();
+    //GUISystem& gui = GUISystem::Instance();
 
-    gui.BeginDockSpace();
+    //gui.BeginDockSpace();
 
     /*if (SafePtr<Scene> scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
         if (gui.BeginWindow("Scene")) {

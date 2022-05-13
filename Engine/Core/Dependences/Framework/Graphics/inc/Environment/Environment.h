@@ -214,7 +214,7 @@ namespace SR_GRAPH_NS {
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes = {}
-                ) const { return false; }
+                ) { return false; }
         virtual bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,

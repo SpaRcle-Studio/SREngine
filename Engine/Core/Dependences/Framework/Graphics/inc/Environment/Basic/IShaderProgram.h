@@ -7,6 +7,7 @@
 
 #include <FileSystem/FileSystem.h>
 #include <Utils/StringUtils.h>
+#include <Utils/Hashes.h>
 #include <Utils/Enumerations.h>
 #include <Types/Uniforms.h>
 #include <Types/Vertices.h>
@@ -291,6 +292,35 @@ namespace Framework::Graphics {
 
         return uniforms;
     }
+}
+
+namespace std {
+    template<> struct hash<Framework::Graphics::ShaderSamplers> {
+        size_t operator()(Framework::Graphics::ShaderSamplers const& value) const {
+            std::size_t res = 0;
+
+            for (auto&& [key, val] : value) {
+                res = SR_UTILS_NS::HashCombine(key, res);
+                res = SR_UTILS_NS::HashCombine(val.first, res);
+                res = SR_UTILS_NS::HashCombine(val.second, res);
+            }
+
+            return res;
+        }
+    };
+
+    template<> struct hash<Framework::Graphics::ShaderProperties> {
+        size_t operator()(Framework::Graphics::ShaderProperties const& value) const {
+            std::size_t res = 0;
+
+            for (auto&& [key, val] : value) {
+                res = SR_UTILS_NS::HashCombine(key, res);
+                res = SR_UTILS_NS::HashCombine(val, res);
+            }
+
+            return res;
+        }
+    };
 }
 
 #endif //GAMEENGINE_ISHADERPROGRAM_H

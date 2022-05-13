@@ -181,29 +181,57 @@ namespace Framework::Helper::Xml {
             if constexpr (std::is_same<T, Helper::Math::FColor>()) {
                 Helper::Math::FColor color;
 
-                color.r = GetAttribute("r").ToFloat();
-                color.g = GetAttribute("g").ToFloat();
-                color.b = GetAttribute("b").ToFloat();
-                color.a = GetAttribute("a").ToFloat();
+                color.r = GetAttribute("R").ToFloat();
+                color.g = GetAttribute("G").ToFloat();
+                color.b = GetAttribute("B").ToFloat();
+                color.a = GetAttribute("A").ToFloat();
 
                 return color;
+            }
+            if constexpr (std::is_same<T, Helper::Math::FVector4>()) {
+                Helper::Math::FVector4 vector4;
+
+                vector4.x = GetAttribute("X").ToFloat();
+                vector4.y = GetAttribute("Y").ToFloat();
+                vector4.z = GetAttribute("Z").ToFloat();
+                vector4.w = GetAttribute("W").ToFloat();
+
+                return vector4;
             }
             else if constexpr (std::is_same<T, Helper::Math::FVector2>()) {
                 Helper::Math::FVector2 vector2;
 
-                vector2.x = GetAttribute("x").ToFloat();
-                vector2.y = GetAttribute("y").ToFloat();
+                vector2.x = GetAttribute("X").ToFloat();
+                vector2.y = GetAttribute("Y").ToFloat();
 
                 return vector2;
+            }
+            else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
+                Helper::Math::FVector3 vector3;
+
+                vector3.x = GetAttribute("X").ToFloat();
+                vector3.y = GetAttribute("Y").ToFloat();
+                vector3.z = GetAttribute("Z").ToFloat();
+
+                return vector3;
             }
             else if constexpr (std::is_same<T, Helper::Math::IVector3>()) {
                 Helper::Math::IVector3 vector3;
 
-                vector3.x = GetAttribute("x").ToInt();
-                vector3.y = GetAttribute("y").ToInt();
-                vector3.z = GetAttribute("z").ToInt();
+                vector3.x = GetAttribute("X").ToInt();
+                vector3.y = GetAttribute("Y").ToInt();
+                vector3.z = GetAttribute("Z").ToInt();
 
                 return vector3;
+            }
+            else if constexpr (std::is_same<T, int32_t>()) {
+                return GetAttribute("Int32").ToInt();
+            }
+            else if constexpr (std::is_same<T, float_t>()) {
+                return GetAttribute("Float").ToFloat();
+            }
+            else if constexpr (std::is_same<T, std::string>()) {
+                return GetAttribute("String").ToString();
             }
             else
                 static_assert("Unknown type!");
@@ -219,28 +247,34 @@ namespace Framework::Helper::Xml {
             bool hasErrors = false;
 
             if constexpr (std::is_same<T, Helper::Math::FColor>()) {
-                hasErrors |= AppendAttribute("r", value.r);
-                hasErrors |= AppendAttribute("g", value.g);
-                hasErrors |= AppendAttribute("b", value.b);
-                hasErrors |= AppendAttribute("a", value.a);
+                hasErrors |= AppendAttribute("R", value.r);
+                hasErrors |= AppendAttribute("G", value.g);
+                hasErrors |= AppendAttribute("B", value.b);
+                hasErrors |= AppendAttribute("A", value.a);
+            }
+            if constexpr (std::is_same<T, Helper::Math::FVector4>()) {
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
+                hasErrors |= AppendAttribute("Z", value.z);
+                hasErrors |= AppendAttribute("W", value.w);
             }
             else if constexpr (std::is_same<T, Helper::Math::FVector2>()) {
-                hasErrors |= AppendAttribute("x", value.x);
-                hasErrors |= AppendAttribute("y", value.y);
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
             }
             else if constexpr (std::is_same<T, Helper::Math::IVector2>()) {
-                hasErrors |= AppendAttribute("x", value.x);
-                hasErrors |= AppendAttribute("y", value.y);
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
             }
             else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
-                hasErrors |= AppendAttribute("x", value.x);
-                hasErrors |= AppendAttribute("y", value.y);
-                hasErrors |= AppendAttribute("z", value.z);
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
+                hasErrors |= AppendAttribute("Z", value.z);
             }
             else if constexpr (std::is_same<T, Helper::Math::IVector3>()) {
-                hasErrors |= AppendAttribute("x", value.x);
-                hasErrors |= AppendAttribute("y", value.y);
-                hasErrors |= AppendAttribute("z", value.z);
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
+                hasErrors |= AppendAttribute("Z", value.z);
             }
             else
                 static_assert("Unknown type!");

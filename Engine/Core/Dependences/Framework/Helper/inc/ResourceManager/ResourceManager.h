@@ -80,7 +80,7 @@ namespace SR_UTILS_NS {
 
         Path m_folder = Path();
         std::recursive_mutex m_mutex = std::recursive_mutex();
-        Types::Thread m_thread;
+        Types::Thread::Ptr m_thread;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;
 

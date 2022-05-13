@@ -92,9 +92,6 @@ int main(int argc, char **argv) {
 
     RuntimeTest::MarshalRunRuntimeTest();
 
-    SRSL::SRSLLoader::Instance().Load("Engine/standard.srsl");
-    //return 0;
-
     Features::Instance().Reload(resourcesManager.GetResPath().Concat("/Configs/Features.xml"));
 
     if (!FbxLoader::Debug::IsInit()) {
@@ -216,5 +213,9 @@ int main(int argc, char **argv) {
 
     ResourceManager::Instance().Stop();
 
-    return Debug::Stop();
+    SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
+
+    Debug::Stop();
+
+    return 0;
 }

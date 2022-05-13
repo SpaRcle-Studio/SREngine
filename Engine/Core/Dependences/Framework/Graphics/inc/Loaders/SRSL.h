@@ -15,7 +15,7 @@ namespace SR_GRAPH_NS::SRSL {
         SpatialCustom,      /// пространственный шейдер (только вершины), все статические меши
         TransparentSpatial, /// пространственный шейдер, все статические меши
         Animation,          /// пространтсвенный шейдер, геометрия со скелетом
-        PostProcess,        /// шейдер пост-обработки
+        PostProcessing,     /// шейдер пост-обработки
         Skybox,             /// шейдер скайбокса
         Canvas,             /// шейдер 2д пользовательского интерфейса
         Particles,          /// шейдер для частиц
@@ -66,13 +66,15 @@ namespace SR_GRAPH_NS::SRSL {
         friend class SR_UTILS_NS::Singleton<SRSLLoader>;
         using Stream = std::ifstream;
 
-        static const std::unordered_set<std::string> STANDARD_VARIABLES;
+        static const std::unordered_map<std::string, ShaderVarType> STANDARD_VARIABLES;
+        static const std::unordered_map<std::string, ShaderVarType> COLOR_INDICES;
 
     public:
         std::optional<SRSLUnit> Load(std::string path);
 
     private:
         SRSLVariables RefAnalyzer(const std::string& code, const SRSLVars& allVars);
+        SRSLVariables GetColorIndices(const std::string& code);
         bool PrepareUnit(SRSLUnit& unit, const SRSLVars& vars);
 
         bool AnalyzeUniforms(SRSLUnit& unit, SRSLParseData& parseData, const std::string& fullCode);

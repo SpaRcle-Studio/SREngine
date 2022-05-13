@@ -133,19 +133,17 @@ namespace Framework::Graphics {
 
         VulkanTools::MemoryManager*                     m_memory             = nullptr;
         EvoVulkan::Core::VulkanKernel*                  m_kernel             = nullptr;
+
     private:
         static const std::vector<const char*> m_validationLayers;
         static const std::vector<const char*> m_instanceExtensions;
         static const std::vector<const char*> m_deviceExtensions;
 
-#ifdef SR_RELEASE
-        const bool m_enableValidationLayers = false;
-#else
-        const bool m_enableValidationLayers = true;
-#endif
+        bool m_enableValidationLayers = false;
+
     public:
-        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const override { return PipeLine::Vulkan; }
-        [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
+        [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine()       const override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
         [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
         [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
         [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
@@ -210,22 +208,8 @@ namespace Framework::Graphics {
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
-        void SetViewport(int32_t width, int32_t height) override {
-            if (m_currentFBOid == 0)
-                this->m_viewport = this->m_kernel->GetViewport();
-            else if (m_currentFramebuffer)
-                m_viewport = m_currentFramebuffer->GetViewport();
-
-            vkCmdSetViewport(m_currentCmd, 0, 1, &m_viewport);
-        }
-        void SetScissor(int32_t width, int32_t height) override {
-            if (m_currentFBOid == 0)
-                this->m_scissor = this->m_kernel->GetScissor();
-            else if (m_currentFramebuffer)
-                this->m_scissor = m_currentFramebuffer->GetScissor();
-
-            vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
-        }
+        void SetViewport(int32_t width, int32_t height) override;
+        void SetScissor(int32_t width, int32_t height) override;
 
         SR_FORCE_INLINE void BeginRender() override {
             vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
@@ -243,13 +227,15 @@ namespace Framework::Graphics {
         /** \Vulkan Clear next frame buffer usage */
         SR_FORCE_INLINE void ClearBuffers() override {
             if (m_currentFBOid < 0) {
-                Helper::Debug::Error("Vulkan::ClearBuffers() : frame buffer isn't attached!");
+                SR_ERROR("Vulkan::ClearBuffers() : frame buffer isn't attached!");
                 return;
-            } else if (m_currentFBOid > 0) {
-                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid - 1]->GetCountClearValues();
-                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
-            } else {
-                Helper::Debug::Error("Vulkan::ClearBuffers() : TODO!");
+            }
+            else if (m_currentFBOid > 0) {
+                m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid - 1]->GetCountClearValues();
+                m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
+            }
+            else {
+                SR_ERROR("Vulkan::ClearBuffers() : TODO!");
             }
         }
 
@@ -307,7 +293,7 @@ namespace Framework::Graphics {
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes
-                ) const override;
+                ) override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -344,9 +330,10 @@ namespace Framework::Graphics {
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
-                Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
+                SR_ERROR("Vulkan::DeleteShader() : failed free shader program!");
                 return false;
-            } else
+            }
+            else
                 return true;
         }
         SR_FORCE_INLINE void UnUseShader() override {
@@ -393,6 +380,11 @@ namespace Framework::Graphics {
             if (UBO >= m_memory->m_countUBO.first) { // TODO: add check debug/release
                 SRAssert2(false, "Vulkan::UpdateUBO() : uniform index out of range! \n\tCount uniforms: " +
                                      std::to_string(m_memory->m_countUBO.first) + "\n\tIndex: " + std::to_string(UBO));
+                return;
+            }
+
+            if (!m_memory->m_UBOs[UBO]) {
+                SRAssertOnce(false);
                 return;
             }
 
@@ -495,7 +487,7 @@ namespace Framework::Graphics {
                     VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 0,
                     m_memory->m_textures[textureID]->GetDescriptorRef());
 
-            vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
+            vkUpdateDescriptorSets(*m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
 
             return descriptorSetID;
         }

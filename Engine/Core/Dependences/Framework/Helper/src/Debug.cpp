@@ -127,4 +127,17 @@ namespace Framework::Helper {
         return false;
 #endif
     }
+
+    bool Debug::AssertOnceCheck(const std::string &msg) {
+        std::lock_guard<std::mutex> lock(g_mutex);
+
+        static std::unordered_set<std::string> asserts;
+
+        if (asserts.count(msg) == 0) {
+            asserts.insert(msg);
+            return false;
+        }
+
+        return true;
+    }
 }

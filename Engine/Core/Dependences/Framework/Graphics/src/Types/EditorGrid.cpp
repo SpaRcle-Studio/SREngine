@@ -10,12 +10,12 @@
 #include <Events/EventManager.h>
 
 Framework::Graphics::EditorGrid::EditorGrid(const std::string &shaderName, Render *render) : m_env(Environment::Get()) {
-    this->m_render = render;
-    this->m_shader = new Shader(this->m_render, shaderName);
+    //this->m_render = render;
+   // this->m_shader = new Shader(this->m_render, shaderName);
 }
 
 Framework::Graphics::EditorGrid::~EditorGrid() {
-    this->m_render = nullptr;
+   // this->m_render = nullptr;
 }
 
 void Framework::Graphics::EditorGrid::Draw() {

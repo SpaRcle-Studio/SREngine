@@ -6,10 +6,6 @@
 #include <Impl/EvoCompiler.h>
 #include <Utils/Features.h>
 
-#include <ctime>
-#include <ratio>
-#include <chrono>
-
 bool Framework::Scripting::EvoScriptImpl::AwaitDestroy() {
     Helper::Debug::Log("EvoScriptImpl::AwaitDestroy() : await destroy \"" + m_name + "\" script...");
 
@@ -27,22 +23,22 @@ void Framework::Scripting::EvoScriptImpl::Awake() {
     if (m_isDestroy)
         return;
 
-    this->m_script->Awake();
+    m_script->Awake();
 }
 
 void Framework::Scripting::EvoScriptImpl::Start() {
-    if (m_isDestroy)
+    if (m_isDestroy || m_isStart)
         return;
 
-    this->m_script->Start();
-    this->m_isStart = true;
+    m_script->Start();
+    m_isStart = true;
 }
 
 void Framework::Scripting::EvoScriptImpl::Close() {
     if (m_isDestroy)
         return;
 
-    this->m_script->Close();
+    m_script->Close();
 }
 
 void Framework::Scripting::EvoScriptImpl::Update() {
@@ -50,12 +46,12 @@ void Framework::Scripting::EvoScriptImpl::Update() {
         return;
 
     if (!m_isStart)
-        this->Start();
+        Start();
 
     using clock = std::chrono::high_resolution_clock;
     auto delta_time = clock::now() - m_lastUpd;
     m_lastUpd = clock::now();
-    this->m_script->Update((float)delta_time.count() / 1000000.f);
+    m_script->Update((float)delta_time.count() / 1000000.f);
 }
 
 void Framework::Scripting::EvoScriptImpl::FixedUpdate() {
@@ -63,9 +59,9 @@ void Framework::Scripting::EvoScriptImpl::FixedUpdate() {
         return;
 
     if (!m_isStart)
-        this->Start();
+        Start();
 
-    this->m_script->FixedUpdate();
+    m_script->FixedUpdate();
 }
 
 void Framework::Scripting::EvoScriptImpl::OnGUI() {
@@ -73,7 +69,7 @@ void Framework::Scripting::EvoScriptImpl::OnGUI() {
         return;
 
     if (!m_isStart)
-        this->Start();
+        Start();
 
     m_script->OnGUI();
 }
@@ -81,7 +77,12 @@ void Framework::Scripting::EvoScriptImpl::OnGUI() {
 bool Framework::Scripting::EvoScriptImpl::Compile() {
     auto* compiler = dynamic_cast<Scripting::EvoCompiler*>(m_compiler);
 
-    this->m_script = EvoScript::Script::Allocate(
+    if (!compiler || !compiler->GetGenerator()) {
+        SR_ERROR("EvoScriptImpl::Compile() : compiler isn't init! \n\tPath: " + m_path);
+        return false;
+    }
+
+    m_script = EvoScript::Script::Allocate(
             m_name, compiler->GetEvoScriptCompiler(), compiler->GetGenerator()->GetAddresses(), true);
 
     const bool canCompile = Helper::Features::Instance().Enabled("EvoCompiler");
@@ -90,15 +91,15 @@ bool Framework::Scripting::EvoScriptImpl::Compile() {
         return false;
     }
 
-    this->m_compiler->RegisterScript(this);
+    m_compiler->RegisterScript(this);
 
     return true;
 }
 
 bool Framework::Scripting::EvoScriptImpl::DelayedDestroyAndFree() {
-    this->m_needFreeAfterDestroy = true;
-    this->m_compiler->RemoveScript(this);
-    this->m_isDestroy = true;
+    m_needFreeAfterDestroy = true;
+    m_compiler->RemoveScript(this);
+    m_isDestroy = true;
 
     return true;
 }

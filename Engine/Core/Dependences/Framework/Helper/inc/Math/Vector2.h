@@ -155,6 +155,14 @@ namespace Framework::Helper::Math {
             return (x == 0 || y == 0);
         }
 
+        [[nodiscard]] bool HasNegative() const {
+            return (x < 0 || y < 0);
+        }
+
+        [[nodiscard]] bool HasPositive() const {
+            return (x > 0 || y > 0);
+        }
+
         template<typename U> [[nodiscard]] bool Contains(U value) const {
             return x == static_cast<T>(value) || y == static_cast<T>(value);
         }

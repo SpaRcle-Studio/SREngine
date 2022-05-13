@@ -116,9 +116,9 @@ namespace SR_UTILS_NS {
 
         m_maxHistorySize = 128;
 
-        m_thread = Types::Thread([this]() {
+        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
             while(m_isRun.load()) {
-                m_thread.Sleep(100);
+                m_thread->Sleep(100);
 
                 std::lock_guard<std::mutex> lock(m_mutex);
 
@@ -129,7 +129,7 @@ namespace SR_UTILS_NS {
             }
         });
 
-        return m_thread.Joinable();
+        return m_thread->Joinable();
     }
 
     bool CmdManager::Close() {
@@ -142,7 +142,12 @@ namespace SR_UTILS_NS {
 
         m_isRun.store(false);
 
-        const bool result = m_thread.TryJoin();
+        const bool result = m_thread && m_thread->TryJoin();
+
+        if (m_thread) {
+            m_thread->Free();
+            m_thread = nullptr;
+        }
 
         ClearHistory();
 

@@ -6,26 +6,29 @@
 
 void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
     if (m_currentCamera) {
-        m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::DebugWireframe]);
-        m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
+        //m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::DebugWireframe]);
+        //m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
 
         for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
             if (!shader || !shader->Ready()) {
                 continue;
             }
 
-            shader->SetMat4("VIEW_MATRIX", m_currentCamera->GetViewTranslate());
-            shader->SetMat4("PROJECTION_MATRIX", m_currentCamera->GetProjection());
-            shader->SetFloat("TIME", clock());
+            shader->SetMat4(Shader::VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
+            shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
+            shader->SetFloat(Shader::TIME, clock());
 
             for (auto const& [key, meshGroup] : subCluster.m_groups) {
                 for (const auto &mesh : meshGroup) {
                     mesh->GetMaterial()->Use();
 
-                    shader->SetMat4("MODEL_MATRIX", mesh->GetModelMatrix());
+                    shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
 
-                    if (auto&& ubo = mesh->GetUBO()) {
+                    if (auto&& ubo = mesh->GetUBO(); ubo != SR_ID_INVALID) {
                         m_env->BindUBO(ubo);
+                    }
+                    else {
+                        SRAssertOnce(false);
                     }
 
                     shader->Flush();
@@ -51,6 +54,6 @@ void Framework::Graphics::Impl::VulkanRender::DrawGeometry()  {
                 mesh->DrawVulkan();
         }
 
-        env->UnUseShader();
+        shader->UnUse();
     }
 }

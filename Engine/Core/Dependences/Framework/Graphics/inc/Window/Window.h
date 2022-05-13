@@ -15,6 +15,9 @@ namespace SR_GRAPH_NS {
         class WidgetManager;
     }
 
+    class Render;
+    class Camera;
+
     class Window : SR_UTILS_NS::NonCopyable {
     public:
         Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size, Render* render,
@@ -89,7 +92,7 @@ namespace SR_GRAPH_NS {
         std::atomic<bool>     m_headerEnabled         = false;
 
     private:
-        SR_HTYPES_NS::Thread  m_thread                = SR_HTYPES_NS::Thread();
+        SR_HTYPES_NS::Thread::Ptr m_thread            = nullptr;
 
         Environment*          m_env                   = nullptr;
 

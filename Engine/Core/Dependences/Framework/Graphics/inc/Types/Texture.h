@@ -64,8 +64,6 @@ namespace Framework::Graphics::Types {
         std::atomic<bool>          m_isCalculate = false;
         std::atomic<bool>          m_hasErrors   = false;
 
-        std::mutex                 m_mutex       = std::mutex();
-
         Memory::TextureConfig      m_config      = Memory::TextureConfig();
 
     };

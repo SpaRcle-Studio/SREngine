@@ -16,6 +16,14 @@ namespace SR_UTILS_NS {
         , m_autoRemove(autoRemove)
     { }
 
+    IResource::~IResource() {
+        SRAssert(m_dependencies.empty());
+
+        while (!m_parents.empty()) {
+            (*m_parents.begin())->RemoveDependency(this);
+        }
+    }
+
     bool IResource::ForceDestroy() {
         if (m_force || IsDestroyed()) {
             SR_ERROR("IResource::ForceDestroy() : resource is already destroyed!");
@@ -85,5 +93,64 @@ namespace SR_UTILS_NS {
         }
 
         return 0;
+    }
+
+    void IResource::SetResourceHash(uint64_t hash) {
+        m_resourceHash = hash;
+    }
+
+    void IResource::AddDependency(IResource *pResource) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        pResource->AddUsePoint();
+
+        m_dependencies.insert(pResource);
+        pResource->m_parents.insert(this);
+    }
+
+    void IResource::RemoveDependency(IResource *pResource) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        if (SRVerifyFalse(m_dependencies.count(pResource) == 1)) {
+            return;
+        }
+
+        if (SRVerifyFalse(pResource->m_parents.count(this) == 1)) {
+            return;
+        }
+
+        m_dependencies.erase(pResource);
+        pResource->m_parents.erase(this);
+
+        pResource->RemoveUsePoint();
+    }
+
+    void IResource::UpdateResources(int32_t depth) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        /// вверх по иерархии
+        if (depth == 0 || depth > 0) {
+            for (auto &&pResource : m_parents) {
+                pResource->OnResourceUpdated(this, depth + 1);
+            }
+        }
+
+        /// вниз по иерархии
+        if (depth == 0 || depth < 0) {
+            for (auto &&pResource : m_dependencies) {
+                pResource->OnResourceUpdated(this, depth - 1);
+            }
+        }
+    }
+
+    void IResource::OnResourceUpdated(IResource *pResource, int32_t depth) {
+        SRAssert(depth != 0);
+
+        if (depth > 0) {
+            UpdateResources(depth + 1);
+        }
+        else {
+            UpdateResources(depth - 1);
+        }
     }
 }

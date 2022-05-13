@@ -52,10 +52,6 @@ namespace SR_UTILS_NS::Types {
         const aiScene* m_scene;
         Assimp::Importer* m_importer;
 
-        /// блокировка на случай выгрузки ресурса
-        /// во время работы у указателем на его данные
-        mutable std::recursive_mutex m_mutex;
-
     };
 }
 

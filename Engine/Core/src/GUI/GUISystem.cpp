@@ -812,6 +812,10 @@ bool GUISystem::BeginMenuBar() {
             Engine::Instance().GetEditor()->GetWindow<EngineStatistics>()->Open();
         }
 
+        if (ImGui::MenuItem("Close all")) {
+            Engine::Instance().GetEditor()->CloseAllWindows();
+        }
+
         ImGui::EndMenu();
     }
 

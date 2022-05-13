@@ -14,13 +14,14 @@
 #include <string>
 #include <unordered_map>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     class Widget;
 
     typedef std::unordered_map<std::string, Widget*> Widgets;
 
     class WidgetManager : public Helper::NonCopyable, public Helper::InputHandler {
     public:
+        WidgetManager();
         ~WidgetManager() override;
 
         virtual void Draw();
@@ -37,6 +38,7 @@ namespace Framework::Graphics::GUI {
     private:
         std::mutex m_mutex;
         Widgets m_widgets;
+        bool m_ignoreNonFocused;
 
     };
 

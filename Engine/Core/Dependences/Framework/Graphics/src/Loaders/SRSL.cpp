@@ -4,8 +4,22 @@
 
 #include <Loaders/SRSL.h>
 
-const std::unordered_set<std::string> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VARIABLES = {
-    "float TIME", "mat4 MODEL_MATRIX", "mat4 VIEW_MATRIX", "mat4 PROJECTION_MATRIX"
+const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VARIABLES = {
+        { "TIME", ShaderVarType::Float },
+        { "MODEL_MATRIX", ShaderVarType::Mat4 },
+        { "VIEW_MATRIX", ShaderVarType::Mat4 },
+        { "PROJECTION_MATRIX", ShaderVarType::Mat4 },
+};
+
+const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::COLOR_INDICES = {
+        { "COLOR_INDEX_0", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_1", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_2", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_3", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_4", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_5", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_6", ShaderVarType::Vec4 },
+        { "COLOR_INDEX_7", ShaderVarType::Vec4 },
 };
 
 std::optional<SR_GRAPH_NS::SRSL::SRSLUnit> SR_GRAPH_NS::SRSL::SRSLLoader::Load(std::string path) {
@@ -105,18 +119,15 @@ SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::RefAnalyzer(cons
             continue;
         }
 
-        used[args[2]] = SRSLVariable { isUsed(args[2]), true, GetShaderVarTypeFromString(args[1]) };
+        used[args[2]] = SRSLVariable { isUsed(args[2]), true, GetShaderVarTypeFromString(args[1]), -1 };
     }
 
-    for (const auto& var : STANDARD_VARIABLES) {
-        auto&& args = SR_UTILS_NS::StringUtils::Split(var, " ");
+    for (const auto& [name, type] : STANDARD_VARIABLES) {
+        used[name] = SRSLVariable { isUsed(name), false, type, -1 };
+    }
 
-        /// { type, name }
-        if (args.size() != 2) {
-            continue;
-        }
-
-        used[args[1]] = SRSLVariable { isUsed(args[1]), false, GetShaderVarTypeFromString(args[0]) };
+    for (const auto& [name, type] : COLOR_INDICES) {
+        used[name] = SRSLVariable { isUsed(name), false, type, -1 };
     }
 
     return used;
@@ -169,7 +180,7 @@ bool Framework::Graphics::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSL
     SRSLVariables uniforms;
 
     for (auto&& [name, var] : RefAnalyzer(fullCode, parseData.vars)) {
-        if (!IsSamplerType(var.type)) {
+        if (!IsSamplerType(var.type) && COLOR_INDICES.count(name) == 0) {
             uniforms[name] = var;
         }
     }
@@ -184,6 +195,21 @@ bool Framework::Graphics::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSL
     }
 
     return true;
+}
+
+Framework::Graphics::SRSL::SRSLVariables Framework::Graphics::SRSL::SRSLLoader::GetColorIndices(const std::string &code) {
+    SRSLVariables indices;
+
+    const std::string prefix = "COLOR_INDEX_";
+
+    for (auto&& [name, var] : RefAnalyzer(code, {})) {
+        if (auto&& pos = name.find(prefix); pos != std::string::npos) {
+            var.binding = SR_UTILS_NS::LexicalCast<int32_t>(SR_UTILS_NS::StringUtils::Remove(name, prefix.size()));
+            indices[name] = var;
+        }
+    }
+
+    return indices;
 }
 
 std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, const std::string &code, SRSLParseData &parseData) {
@@ -270,8 +296,19 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
             break;
         case ShaderType::Spatial:
         case ShaderType::SpatialCustom:
-            source += "layout (location = 0) out vec4 OUT_COLOR;\n\n";
+        case ShaderType::PostProcessing: {
+            for (auto&& [name, var] : GetColorIndices(code)) {
+                if (!var.used) {
+                    continue;
+                }
+
+                source += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n",
+                        var.binding, ShaderVarTypeToString(var.type).c_str(), name.c_str()
+                );
+            }
+            source += "\n";
             break;
+        }
         default:
             SRAssert(false);
             return false;
@@ -299,9 +336,13 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT;\n", location++);
-            SR_FALLTHROUGH;
+            source += "vec4 COLOR;";
+            break;
         case ShaderType::Custom:
-            source += "vec4 COLOR;\n";
+            break;
+        case ShaderType::PostProcessing:
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV;\n", location++);
             break;
         default:
             SRAssert(false);
@@ -330,7 +371,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
             break;
         case ShaderType::Spatial:
         case ShaderType::SpatialCustom:
-            source += "\tOUT_COLOR = COLOR;\n";
+            source += "\tCOLOR_INDEX_0 = COLOR;\n";
+            break;
+        case ShaderType::PostProcessing:
             break;
         default:
             SRAssert(false);
@@ -359,6 +402,10 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 TANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 BITANBENT;\n", location++);
             break;
+        case ShaderType::PostProcessing:
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location++);
+            break;
         default:
             SRAssert(false);
             break;
@@ -373,6 +420,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     source += "\t// -- codegen -- | begin default vars\n";
     switch (unit.type) {
         case ShaderType::Custom:
+        case ShaderType::PostProcessing:
             break;
         case ShaderType::SpatialCustom:
         case ShaderType::Spatial:
@@ -406,6 +454,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             break;
         case ShaderType::Spatial:
             source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
+            break;
+        case ShaderType::PostProcessing:
+            source += "\tgl_Position = vec4(VERTEX, 1.0);\n";
             break;
         default:
             SRAssert(false);
@@ -455,13 +506,14 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT_INPUT;\n", location++);
             break;
         case ShaderType::Custom:
+        case ShaderType::PostProcessing:
             break;
         case ShaderType::Animation:
-        case ShaderType::PostProcess:
         case ShaderType::Skybox:
         case ShaderType::Canvas:
         case ShaderType::Particles:
         case ShaderType::Unknown:
+        default:
             SRAssert(false);
             break;
     }

@@ -15,7 +15,9 @@
 #include <GUI/Hierarchy.h>
 #include <GUI/SceneViewer.h>
 #include <Window/Window.h>
+#include <Utils/Features.h>
 #include <ResourceManager/ResourceManager.h>
+#include <GUI/GUISystem.h>
 
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;
@@ -60,11 +62,13 @@ bool EditorGUI::Init() {
         return false;
     }
 
-    m_script = Scripting::Script::Allocate("Engine/Editor", m_compiler, Scripting::ScriptType::EvoScript);
-    if (!m_script || !m_script->Compile()) {
-        SR_ERROR("EditorGUI::Init() : failed to allocate/compile script!");
-        m_hasErrors = true;
-        return false;
+    if (SR_UTILS_NS::Features::Instance().Enabled("UseEditorGUIScript", false)) {
+        m_script = Scripting::Script::Allocate("Engine/Editor", m_compiler, Scripting::ScriptType::EvoScript);
+        if (!m_script || !m_script->Compile()) {
+            SR_ERROR("EditorGUI::Init() : failed to allocate/compile script!");
+            m_hasErrors = true;
+            return false;
+        }
     }
 
     Load();
@@ -85,8 +89,7 @@ bool EditorGUI::Destroy() {
         m_script = nullptr;
     }
 
-    if (m_isInit)
-        m_isInit = false;
+    m_isInit = false;
 
     return true;
 }
@@ -102,6 +105,10 @@ void EditorGUI::Draw() {
     if (!m_isInit) {
         if (!Init())
             return;
+    }
+
+    if (m_useDocking) {
+        GUISystem::Instance().BeginDockSpace();
     }
 
     if (m_script)
@@ -129,6 +136,8 @@ void EditorGUI::Save() {
 void EditorGUI::Load() {
     m_loaded = true;
 
+    m_useDocking = SR_UTILS_NS::Features::Instance().Enabled("EditorWidgetsDocking", true);
+
     const auto path = Helper::ResourceManager::Instance().GetConfigPath().Concat("EditorWidgets.xml");
 
     if (!path.Exists())
@@ -150,6 +159,9 @@ void EditorGUI::Load() {
 void EditorGUI::Enable(bool value) {
     if (m_enabled != value) {
         m_window->Synchronize();
+        if (!m_isInit) {
+            Init();
+        }
         GetWindow<SceneViewer>()->Enable(value);
         m_window->SetGUIEnabled(!m_window->IsGUIEnabled());
         m_enabled = value;
@@ -174,6 +186,11 @@ void EditorGUI::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
 
 void EditorGUI::OnKeyUp(const SR_UTILS_NS::KeyUpEvent &event) {
     WidgetManager::OnKeyUp(event);
+}
+
+void EditorGUI::CloseAllWindows() {
+    for (auto& [id, widget] : m_widgets)
+        widget->Close();
 }
 
 

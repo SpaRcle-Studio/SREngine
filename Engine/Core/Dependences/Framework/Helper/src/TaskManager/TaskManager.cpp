@@ -25,35 +25,46 @@ namespace SR_UTILS_NS {
     }
 
     Task::~Task() {
-        SRAssert(m_state->load() == State::Completed && !m_thread.Joinable());
+        SRAssert(m_state->load() == State::Completed && (m_thread && !m_thread->Joinable()));
 
-        if (m_thread.Joinable())
-            m_thread.Detach();
+        if (m_thread) {
+            if (m_thread->Joinable()) {
+                m_thread->Detach();
+            }
+
+            m_thread->Free();
+            m_thread = nullptr;
+        }
 
         delete m_state;
     }
 
     bool Task::Stop() {
-        if (m_state->load() != State::Launched || !m_thread.Joinable()) {
+        if (m_state->load() != State::Launched || !m_thread->Joinable()) {
             SRAssert(false);
             return false;
         }
 
-        m_thread.Detach();
+        if (m_thread) {
+            m_thread->Detach();
+            m_thread->Free();
+            m_thread = nullptr;
+        }
+
         m_state->store(State::Stopped);
 
         return true;
     }
 
     bool Task::Run(uint64_t id) {
-        if (m_state->load() != State::Waiting || !m_function || m_thread.Joinable()) {
+        if (m_state->load() != State::Waiting || !m_function || (m_thread && m_thread->Joinable())) {
             SRAssert(false);
             return false;
         }
 
         m_id = id;
         m_state->store(State::Launched);
-        m_thread = Types::Thread(m_function, m_state);
+        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(m_function, m_state);
 
         return true;
     }
@@ -99,9 +110,9 @@ namespace SR_UTILS_NS {
 
         SR_INFO("TaskManager::Run() : run task manager thread...");
 
-        m_thread = Types::Thread([this]() {
+        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
             while (m_isRun.load()) {
-                m_thread.Sleep(10);
+                m_thread->Sleep(10);
 
                 std::lock_guard<std::mutex> lock(m_mutex);
 
@@ -117,7 +128,7 @@ namespace SR_UTILS_NS {
             }
         });
 
-        return m_thread.Joinable();
+        return m_thread->Joinable();
     }
 
     void TaskManager::Close() {

@@ -67,7 +67,6 @@ namespace SR_GRAPH_NS::Types {
         void OnScaled(const Helper::Math::FVector3& newValue) override;
         void OnSkewed(const Helper::Math::FVector3& newValue) override;
 
-        void OnShaderChanged();
         void OnDestroyGameObject() override;
         void OnRemoveComponent() override {
             OnDestroyGameObject();
@@ -87,17 +86,20 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
         SR_NODISCARD bool IsInverse()              const { return m_inverse; }
         SR_NODISCARD bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD const glm::mat4& GetModelMatrixRef() const { return m_modelMat; }
         SR_NODISCARD glm::mat4 GetModelMatrix()    const { return m_modelMat; }
         SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
         SR_NODISCARD uint32_t GetDescriptorSet()   const { return m_descriptorSet; }
         SR_NODISCARD uint32_t GetUBO()             const { return m_UBO; }
         SR_NODISCARD std::string GetResourcePath() const override;
-        SR_NODISCARD bool CanHaveDuplicates() const override { return true; }
 
         void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
+
+    protected:
+        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
 
     public:
         Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);
@@ -114,8 +116,6 @@ namespace SR_GRAPH_NS::Types {
         const PipeLine               m_pipeline          = PipeLine::Unknown;
         const MeshType               m_type              = MeshType::Unknown;
 
-        mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
-
         std::string                  m_geometryName      = "Unnamed";
         Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
@@ -123,7 +123,7 @@ namespace SR_GRAPH_NS::Types {
 
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
-        std::atomic<bool>            m_shaderDirty       = false;
+        std::atomic<bool>            m_dirtyMaterial     = false;
 
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;

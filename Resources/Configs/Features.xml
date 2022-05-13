@@ -2,12 +2,18 @@
 <Features>
    <Common>
        <EvoCompiler Value="true"/>
-       <DebugChunks Value="true"/>
-       <DebugRegions Value="true"/>
+       <DebugChunks Value="false"/>
+       <DebugRegions Value="false"/>
        <ChunkSystem Value="true"/>
        <EditorOnStartup Value="true"/>
        <CrashHandler Value="true"/>
        <SkyboxCPUUsage Value="false"/>
        <AutoReloadResources Value="true"/>
+       <UpdateScripts Value="false"/>
+       <UseEditorGUIScript Value="false"/>
+       <EditorWidgetsDocking Value="true"/>
+       <InputIgnoreNonFocusedWidgets Value="false"/>
+       <UpdateNonHoveredSceneViewer Value="true"/>
+       <VulkanValidation Value="true"/>
    </Common>
 </Features>

@@ -16,13 +16,13 @@ namespace SR_UTILS_NS {
 
     public:
         enum class LoadState {
-            Unknown, Loaded, Unloaded
+            Unknown, Loaded, Reloading, Loading, Unloading, Unloaded
         };
 
     protected:
         explicit IResource(const char* name);
         IResource(const char* name, bool autoRemove);
-        virtual ~IResource() = default;
+        virtual ~IResource();
 
     public:
         SR_NODISCARD uint64_t GetFileHash() const;
@@ -38,19 +38,18 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const char *GetResourceName() const { return m_resourceName; }
         SR_NODISCARD std::string GetResourceId() const { return m_resourceId; }
         SR_NODISCARD virtual std::string GetResourcePath() const { return m_resourceId; }
-        SR_NODISCARD virtual bool CanHaveDuplicates() const { return false; }
-        SR_NODISCARD virtual uint64_t GetResourceHash() const { return 0; }
+        SR_NODISCARD virtual uint64_t GetResourceHash() const { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
 
         SR_NODISCARD virtual IResource* Copy(IResource* destination) const;
 
         /** Add one point to count uses current resource */
-        void AddUsePoint() { m_countUses++; }
+        void AddUsePoint() { ++m_countUses; }
 
         /** Remove one point from count uses current resource */
         void RemoveUsePoint() {
             SRAssert2(m_countUses > 0, "count use points is zero!");
-            m_countUses--;
+            --m_countUses;
 
             if (m_countUses == 0 && m_autoRemove && !IsDestroyed())
                 Destroy();
@@ -74,6 +73,9 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+        void AddDependency(IResource* pResource);
+        void RemoveDependency(IResource* pResource);
+
         /** Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy();
         bool ForceDestroy();
@@ -81,21 +83,33 @@ namespace SR_UTILS_NS {
         void SetReadOnly(bool value) { m_readOnly = value; }
         void SetId(const std::string& id, bool autoRegister = true);
         void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }
+        void SetResourceHash(uint64_t hash);
+
+    protected:
+        void UpdateResources(int32_t depth = 0);
+        virtual void OnResourceUpdated(IResource* pResource, int32_t depth);
 
     protected:
         /** \brief This is resource name. \example Mesh, Texture, Audio... */
         const char *m_resourceName = "Unnamed";
 
+        std::atomic<LoadState> m_loadState = LoadState::Unknown;
+
+        mutable std::recursive_mutex m_mutex;
+
     private:
         float_t m_lifetime = 0;
+        uint64_t m_resourceHash = 0;
 
         std::atomic<bool> m_force = false;
         std::atomic<bool> m_readOnly = false;
         std::atomic<bool> m_isDestroyed = false;
         std::atomic<bool> m_autoRemove = false;
 
-        std::atomic<LoadState> m_loadState = LoadState::Unknown;
         std::string m_resourceId = "NoID";
+
+        std::unordered_set<IResource*> m_parents;
+        std::unordered_set<IResource*> m_dependencies;
 
         std::atomic<uint64_t> m_countUses = 0;
 

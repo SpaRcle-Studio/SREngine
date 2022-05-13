@@ -29,11 +29,13 @@ namespace SR_GTYPES_NS {
             ShaderPropertyVariant data;
             ShaderVarType type;
         };
+
         using Properties = std::list<Property>;
         using Super = SR_UTILS_NS::IResource;
 
     private:
         Material();
+        ~Material() override = default;
 
     public:
         static Material* GetDefault();
@@ -47,11 +49,13 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsBloomEnabled() const { return m_bloom;  }
         SR_NODISCARD bool IsTransparent() const { return m_transparent;  }
-        SR_NODISCARD uint32_t GetCountSubscriptions() const;
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD Properties& GetProperties() { return m_properties; }
+        SR_NODISCARD Property* GetProperty(const std::string& id);
 
-        void SetTexture(Property& property, Texture* pTexture);
+        void SetTexture(Property* property, Texture* pTexture);
+
+        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
 
         void SetShader(Shader* shader);
         void SetBloom(bool value);
@@ -60,25 +64,19 @@ namespace SR_GTYPES_NS {
         void Use();
         void UseSamplers();
 
-        void Subscribe(Mesh* mesh);
-        void UnSubscribe(Mesh* mesh);
-
     private:
+        void InitShader();
         bool Destroy() override;
-        void UpdateSubscribers();
 
     private:
         SR_INLINE_STATIC Material*   m_default       = nullptr;
 
-        std::unordered_set<Mesh*>    m_subscriptions = {};
-
         const Environment*           m_env           = nullptr;
         Shader*                      m_shader        = nullptr;
 
+        std::atomic<bool>            m_dirtyShader   = false;
         std::atomic<bool>            m_transparent   = false;
         std::atomic<bool>            m_bloom         = false;
-
-        mutable std::recursive_mutex m_mutex         = std::recursive_mutex();
 
         Properties                   m_properties    = Properties();
 

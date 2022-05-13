@@ -6,6 +6,7 @@
 #include <GUI/SceneViewer.h>
 #include <GUI/Editor/Guizmo.h>
 #include <GUI/Hierarchy.h>
+#include <Utils/Features.h>
 #include <EntityComponentSystem/Transform3D.h>
 #include <Window/Window.h>
 #include <Render/Camera.h>
@@ -33,10 +34,10 @@ void SceneViewer::Draw() {
             if (ImGui::BeginChild("ViewerTexture")) {
                 const auto winSize = ImGui::GetWindowSize();
 
-                DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
+                //DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
 
-                if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
-                    m_guizmo->Draw(*selected.begin(), m_camera);
+                //if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                //    m_guizmo->Draw(*selected.begin(), m_camera);
 
                 CheckFocused();
                 CheckHovered();
@@ -61,7 +62,9 @@ SceneViewer::SceneViewer(Graphics::Window* window, Hierarchy* hierarchy)
     , m_hierarchy(hierarchy)
     , m_guizmo(new Guizmo())
     , m_id(-1)
-{ }
+{
+    m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
+}
 
 SceneViewer::~SceneViewer() {
     SetCameraActive(false);
@@ -73,7 +76,7 @@ void SceneViewer::Enable(bool value) {
     m_enabled = value;
 
     if (m_camera.LockIfValid()) {
-        if (Camera* camera = m_camera->GetComponent<Camera>()) {
+        if (auto* camera = m_camera->GetComponent<Camera>()) {
             camera->SetDirectOutput(!m_enabled);
         }
         m_camera.Unlock();
@@ -81,7 +84,7 @@ void SceneViewer::Enable(bool value) {
 }
 
 void SceneViewer::Update() {
-    if (!IsOpen() || !IsHovered())
+    if (!IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer))
         return;
 
     float_t speed = 0.1f;
@@ -166,7 +169,8 @@ void SceneViewer::InitCamera() {
         camera = m_scene->Instance("Editor camera");
         m_scene->SetObserver(camera);
         m_scene.Unlock();
-    } else
+    }
+    else
         return;
 
     const auto size = m_window->GetWindowSize();

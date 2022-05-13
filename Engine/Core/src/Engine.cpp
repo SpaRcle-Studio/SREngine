@@ -17,9 +17,6 @@
 
 #include <World/Scene.h>
 
-#include <utility>
-#include <chrono>
-
 Framework::Engine::Engine() = default;
 Framework::Engine::~Engine() = default;
 
@@ -63,7 +60,7 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
         SR_UTILS_NS::Input::SetMouseScroll(x, y);
     });
 
-    this->m_isCreate = true;
+    m_isCreate = true;
 
     return true;
 }
@@ -145,13 +142,17 @@ bool Framework::Engine::Run() {
         return false;
     }
 
-    SR_INFO("Engine::Run() : running world thread...");
+    m_isRun = true;
 
     if (Helper::Features::Instance().Enabled("ChunkSystem")) {
-        m_worldThread = new Helper::Types::Thread([this]() {
+        SR_INFO("Engine::Run() : running world thread...");
+
+        m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
             auto timer = Helper::Types::Timer(0.1);
 
             while (m_isRun) {
+                SR_HTYPES_NS::Thread::Sleep(1);
+
                 if (timer.Update() && m_scene.LockIfValid()) {
                     m_scene->Update(timer.GetDeltaTime());
                     m_scene.Unlock();
@@ -159,8 +160,6 @@ bool Framework::Engine::Run() {
             }
         });
     }
-
-    this->m_isRun = true;
 
     return true;
 }
@@ -172,18 +171,24 @@ void Framework::Engine::Await() {
     float accumulator = updateFrequency;
     using clock = std::chrono::high_resolution_clock;
     auto timeStart = clock::now();
+    const bool needUpdateScripts = SR_UTILS_NS::Features::Instance().Enabled("UpdateScripts", true);
 
     while (m_isRun) {
-        auto deltaTime = clock::now() - timeStart;
-        timeStart = clock::now();
+        SR_HTYPES_NS::Thread::Sleep(1);
 
-        SR_UTILS_NS::EventManager::PoolEvents();
-        m_compiler->PollEvents();
+        const auto now = clock::now();
+        const auto deltaTime = now - timeStart;
+        timeStart = now;
 
         const bool windowFocused = m_window ? m_window->IsWindowFocus() : false;
 
         /// fixed update
         if (accumulator >= updateFrequency) {
+            SR_UTILS_NS::EventManager::PoolEvents();
+            m_compiler->PollEvents();
+
+            m_compiler->StartAll();
+
             while (accumulator >= updateFrequency) {
                 if (windowFocused) {
                     Helper::Input::Check();
@@ -214,17 +219,23 @@ void Framework::Engine::Await() {
                 }
 
                 m_editor->Update();
-                m_compiler->FixedUpdateAll();
+
+                if (needUpdateScripts) {
+                    m_compiler->FixedUpdateAll();
+                }
+
                 accumulator -= updateFrequency;
             }
         }
 
         if (m_exitEvent) {
-            SR_UTILS_NS::Debug::System("Engine::Await() : The closing event have been received!");
+            SR_SYSTEM_LOG("Engine::Await() : The closing event have been received!");
             break;
         }
 
-        m_compiler->UpdateAll();
+        if (needUpdateScripts) {
+            m_compiler->UpdateAll();
+        }
 
         accumulator += (float)deltaTime.count() / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
     }
@@ -241,7 +252,7 @@ void Framework::Engine::Await() {
 }
 
 bool Framework::Engine::Close() {
-    Helper::Debug::Info("Engine::Close() : close game engine...");
+    SR_INFO("Engine::Close() : close game engine...");
 
     m_isRun = false;
 
@@ -254,9 +265,10 @@ bool Framework::Engine::Close() {
     SR_SAFE_DELETE_PTR(m_cmdManager);
 
     if (m_worldThread) {
-        Helper::Debug::Info("Engine::Close() : destroy world thread...");
+        SR_INFO("Engine::Close() : destroy world thread...");
         m_worldThread->TryJoin();
-        delete m_worldThread;
+        m_worldThread->Free();
+        m_worldThread = nullptr;
     }
 
     /// должен освобождаться перед компилятором и перед окном,
@@ -274,15 +286,15 @@ bool Framework::Engine::Close() {
     }
 
     if (m_compiler) {
-        this->m_compiler->PollEvents();
-        Helper::Debug::Info("Engine::Close() : destroy compiler...");
+        m_compiler->PollEvents();
+        SR_INFO("Engine::Close() : destroy compiler...");
         m_compiler->Destroy();
         m_compiler->Free();
         m_compiler = nullptr;
     }
 
     if (m_time) {
-        Helper::Debug::Info("Engine::Close() : destroy time...");
+        SR_INFO("Engine::Close() : destroy time...");
         delete m_time;
         m_time = nullptr;
     }

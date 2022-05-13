@@ -40,19 +40,21 @@ namespace SR_GRAPH_NS {
         void OnReady(bool ready) override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;      }
-        SR_NODISCARD SR_FORCE_INLINE bool IsDirectOutput() const { return m_isEnableDirectOut.first;       }
-        SR_NODISCARD SR_FORCE_INLINE bool IsNeedUpdate() const { return m_needUpdate;                      }
-        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll };    }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat;                         }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;       }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize() const { return m_cameraSize;           }
-        SR_NODISCARD SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;  }
-        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();          }
-        SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                }
-        SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near;                              }
-        SR_NODISCARD SR_FORCE_INLINE Window* GetWindow() const { return m_window;                          }
+        SR_NODISCARD SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;          }
+        SR_NODISCARD SR_FORCE_INLINE bool IsDirectOutput() const { return m_isEnableDirectOut.first;           }
+        SR_NODISCARD SR_FORCE_INLINE bool IsNeedUpdate() const { return m_needUpdate;                          }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll };        }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat;                             }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewTranslateRef() const { return m_viewTranslateMat; }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;           }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const { return m_projection;          }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize() const { return m_cameraSize;               }
+        SR_NODISCARD SR_FORCE_INLINE PostProcessing* GetPostProcessing() const { return m_postProcessing;      }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                    }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near;                                  }
+        SR_NODISCARD SR_FORCE_INLINE Window* GetWindow() const { return m_window;                              }
 
         SR_NODISCARD glm::mat4 GetImGuizmoView() const noexcept;
 
@@ -81,10 +83,10 @@ namespace SR_GRAPH_NS {
             }
 
             if (m_pipeline == PipeLine::OpenGL) {
-                if constexpr (std::is_same<T, ProjViewUBO>::value)
-                    shader->SetMat4("PVmat", this->m_projection * this->m_viewTranslateMat);
-                else if constexpr (std::is_same<T, SkyboxUBO>::value)
-                    shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
+                //if constexpr (std::is_same<T, ProjViewUBO>::value)
+                //    shader->SetMat4("PVmat", this->m_projection * this->m_viewTranslateMat);
+                //else if constexpr (std::is_same<T, SkyboxUBO>::value)
+                //    shader->SetMat4("PVmat", this->m_projection * this->m_viewMat);
             }
             else {
                 if constexpr (std::is_same<T, ProjViewUBO>::value) {

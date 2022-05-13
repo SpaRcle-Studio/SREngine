@@ -67,29 +67,29 @@ namespace Framework::Graphics {
             m_postProcessingShader->Use();
 
             {
-                m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
-                m_postProcessingShader->SetVec3("ColorCorrection", m_colorCorrection.ToGLM());
+                //m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
+                //m_postProcessingShader->SetVec3("ColorCorrection", m_colorCorrection.ToGLM());
             }
 
             m_env->BindTexture(0, m_colors[0]);
-            m_postProcessingShader->SetInt("scene", 0);
+            //m_postProcessingShader->SetInt("scene", 0);
 
             if (m_bloom) { // SEE: POSSIBLE BUGS
                 m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
 
-                m_postProcessingShader->SetInt("bloomBlur", 1);
+                //m_postProcessingShader->SetInt("bloomBlur", 1);
 
-                m_postProcessingShader->SetVec3("BloomColor", m_bloomColor.ToGLM());
+                //m_postProcessingShader->SetVec3("BloomColor", m_bloomColor.ToGLM());
             }
 
             m_env->BindTexture(2, m_colors[4]);
-            m_postProcessingShader->SetInt("skybox", 2);
+            //m_postProcessingShader->SetInt("skybox", 2);
 
             m_env->BindTexture(3, m_colors[3]);
-            m_postProcessingShader->SetInt("stencil", 3);
+            //m_postProcessingShader->SetInt("stencil", 3);
 
             m_env->BindTexture(4, m_colors[2]);
-            m_postProcessingShader->SetInt("depth", 4);
+            //m_postProcessingShader->SetInt("depth", 4);
             m_env->Draw(3);
 
             if (!m_camera->IsDirectOutput())
@@ -106,15 +106,15 @@ namespace Framework::Graphics {
             m_firstIteration = true;
 
             m_blurShader->Use();
-            m_blurShader->SetFloat("BloomIntensity", m_bloomIntensity);
+            //m_blurShader->SetFloat("BloomIntensity", m_bloomIntensity);
 
             for (unsigned char i = 0; i < m_bloomAmount; i++) {
                 m_env->BindFrameBuffer(m_PingPongFrameBuffers[m_horizontal]);
 
-                m_blurShader->SetBool("horizontal", m_horizontal);
+                //m_blurShader->SetBool("horizontal", m_horizontal);
 
                 m_env->BindTexture(0, m_firstIteration ? m_colors[1] : m_PingPongColorBuffers[!m_horizontal]);
-                m_blurShader->SetInt("image", 0);
+                //m_blurShader->SetInt("image", 0);
                 m_env->Draw(3);
 
                 m_horizontal = !m_horizontal;

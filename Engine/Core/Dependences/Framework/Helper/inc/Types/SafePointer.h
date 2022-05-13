@@ -242,7 +242,7 @@ namespace SR_UTILS_NS::Types {
             m_data->m_lock.store(false, std::memory_order_release);
         }
         else
-            SR_SAFE_PTR_ASSERT(false, "lock count = 0!")
+            SR_SAFE_PTR_ASSERT(false, "lock count = 0!");
     }
 
     template<typename T> SR_NODISCARD bool SafePtr<T>::LockIfValid() const {

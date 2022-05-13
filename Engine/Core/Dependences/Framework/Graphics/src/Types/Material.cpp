@@ -16,22 +16,24 @@ namespace SR_GTYPES_NS {
     { }
 
     void Material::Use() {
+        InitShader();
+
         for (const Material::Property& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Int:
-                    m_shader->SetInt(property.id, std::get<int32_t>(property.data));
+                    m_shader->SetInt(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<int32_t>(property.data));
                     break;
                 case ShaderVarType::Float:
-                    m_shader->SetFloat(property.id, std::get<float_t>(property.data));
+                    m_shader->SetFloat(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<float_t>(property.data));
                     break;
                 case ShaderVarType::Vec2:
-                    m_shader->SetVec2(property.id, std::get<SR_MATH_NS::FVector2>(property.data).ToGLM());
+                    m_shader->SetVec2(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector2>(property.data).ToGLM());
                     break;
                 case ShaderVarType::Vec3:
-                    m_shader->SetVec3(property.id, std::get<SR_MATH_NS::FVector3>(property.data).ToGLM());
+                    m_shader->SetVec3(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector3>(property.data).ToGLM());
                     break;
                 case ShaderVarType::Vec4:
-                    m_shader->SetVec4(property.id, std::get<SR_MATH_NS::FVector4>(property.data).ToGLM());
+                    m_shader->SetVec4(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector4>(property.data).ToGLM());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
@@ -50,9 +52,6 @@ namespace SR_GTYPES_NS {
             return false;
 
         m_transparent = value;
-
-        for (auto&& subscriber : m_subscriptions)
-            subscriber->OnTransparencyChanged();
 
         return true;
     }
@@ -76,14 +75,61 @@ namespace SR_GTYPES_NS {
 
             if (auto&& shader = matXml.TryGetNode("Shader")) {
                 auto&& render = RenderManager::Instance().Get("Main");
-                auto&& pShader = Shader::Load(render, shader.GetAttribute("path").ToString());
+                auto&& pShader = Shader::Load(shader.GetAttribute("Path").ToString());
 
                 material->SetShader(pShader);
+                material->InitShader();
             }
 
             if (auto&& properties = matXml.TryGetNode("Properties")) {
-                for (auto&& property : properties.GetNodes()) {
+                for (auto&& propertyXml : properties.GetNodes()) {
+                    const std::string id = propertyXml.GetAttribute("Id").ToString();
+                    auto&& type = StringToEnumShaderVarType(propertyXml.GetAttribute("Type").ToString());
 
+                    Property* pProperty = material->GetProperty(id);
+
+                    if (!pProperty) {
+                        SR_WARN("Material::Load() : failed to load \"" + id + "\" property!")
+                        continue;
+                    }
+
+                    if (pProperty->type != type) {
+                        SR_WARN("Material::Load() : incompatible types in \"" + id + "\" property!")
+                        continue;
+                    }
+
+                    switch (type) {
+                        case ShaderVarType::Int:
+                            pProperty->data = propertyXml.GetAttribute<int32_t>();
+                            break;
+                        case ShaderVarType::Float:
+                            pProperty->data = propertyXml.GetAttribute<float_t>();
+                            break;
+                        case ShaderVarType::Vec2:
+                            pProperty->data = propertyXml.GetAttribute<SR_MATH_NS::FVector2>();
+                            break;
+                        case ShaderVarType::Vec3:
+                            pProperty->data = propertyXml.GetAttribute<SR_MATH_NS::FVector3>();
+                            break;
+                        case ShaderVarType::Vec4:
+                            pProperty->data = propertyXml.GetAttribute<SR_MATH_NS::FVector4>();
+                            break;
+                        case ShaderVarType::Sampler2D:
+                            material->SetTexture(pProperty, Texture::Load(propertyXml.GetAttribute<std::string>()));
+                            break;
+                        case ShaderVarType::Mat2:
+                        case ShaderVarType::Mat3:
+                        case ShaderVarType::Mat4:
+                        case ShaderVarType::Sampler1D:
+                        case ShaderVarType::Sampler3D:
+                        case ShaderVarType::SamplerCube:
+                        case ShaderVarType::Sampler1DShadow:
+                        case ShaderVarType::Sampler2DShadow:
+                        case ShaderVarType::Unknown:
+                        default:
+                            SRAssert(false);
+                            break;
+                    }
                 }
             }
 
@@ -118,7 +164,7 @@ namespace SR_GTYPES_NS {
         SR_INFO("Material::FreeDefault() : free default material...");
 
         if (m_default) {
-            if (m_default->GetCountUses() <= 1 && m_default->GetCountSubscriptions() == 0) {
+            if (m_default->GetCountUses() <= 1) {
                 m_default->RemoveUsePoint();
                 m_default->Destroy();
 
@@ -136,32 +182,6 @@ namespace SR_GTYPES_NS {
         return false;
     }
 
-    void Material::Subscribe(Mesh *mesh) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        SRAssert(m_subscriptions.count(mesh) == 0);
-        m_subscriptions.insert(mesh);
-        AddUsePoint();
-    }
-
-    void Material::UnSubscribe(Mesh *mesh) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        SRAssert(GetCountUses() > 0);
-        SRAssert(m_subscriptions.count(mesh) == 1);
-        m_subscriptions.erase(mesh);
-
-        RemoveUsePoint();
-
-        if (m_subscriptions.empty() && GetCountUses() == 0)
-            Destroy();
-    }
-
-    uint32_t Material::GetCountSubscriptions() const {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-        return m_subscriptions.size();
-    }
-
     bool Material::Destroy() {
         if (IsDestroyed())
             return false;
@@ -169,10 +189,10 @@ namespace SR_GTYPES_NS {
         SetReadOnly(false);
         SetShader(nullptr);
 
-        for (Property& property : m_properties) {
+        for (auto&& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Sampler2D:
-                    SetTexture(property, nullptr);
+                    SetTexture(&property, nullptr);
                     break;
                 default:
                     break;
@@ -180,10 +200,6 @@ namespace SR_GTYPES_NS {
         }
 
         return IResource::Destroy();
-    }
-
-    void SR_GTYPES_NS::Material::UpdateSubscribers() {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
     }
 
     /*
@@ -303,8 +319,6 @@ namespace SR_GTYPES_NS {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         m_bloom = value;
-
-        UpdateSubscribers();
     }
 
     void SR_GTYPES_NS::Material::SetShader(Shader *shader) {
@@ -314,11 +328,16 @@ namespace SR_GTYPES_NS {
             return;
         }
 
+        m_dirtyShader = true;
+
         if (m_shader) {
             auto&& render = m_shader->GetRender();
-            m_shader->RemoveUsePoint();
+            RemoveDependency(m_shader);
             if (m_shader->GetCountUses() == 0) {
-                render->FreeShader(m_shader);
+                SRAssert2(render, "Render are nullptr!");
+                if (render) {
+                    render->FreeShader(m_shader);
+                }
             }
             m_shader = nullptr;
         }
@@ -327,43 +346,39 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        m_shader->AddUsePoint();
-
-        for (auto&& [name, property] : m_shader->GetProperties()) {
-            Property aProperty;
-
-            aProperty.id = name;
-            aProperty.displayName = name; // TODO: make a pretty name
-            aProperty.data = GetVariantFromShaderVarType(property);
-            aProperty.type = property;
-
-            m_properties.emplace_back(aProperty);
-        }
-
-        UpdateSubscribers();
+        AddDependency(m_shader);
     }
 
-    void Material::SetTexture(Material::Property &property, Texture *pTexture) {
-        if (auto&& oldTexture = std::get<Texture*>(property.data)) {
+    void Material::SetTexture(Material::Property* property, Texture *pTexture) {
+        if (SRVerifyFalse(property)) {
+            return;
+        }
+
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        if (auto&& oldTexture = std::get<Texture*>(property->data)) {
             if (oldTexture == pTexture) {
                 return;
             }
 
-            oldTexture->RemoveUsePoint();
+            RemoveDependency(oldTexture);
 
             if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove())
                 oldTexture->Destroy();
         }
 
-        if (pTexture)
-            pTexture->AddUsePoint();
+        if (pTexture) {
+            AddDependency(pTexture);
+        }
 
-        property.data = pTexture;
+        property->data = pTexture;
 
         Environment::Get()->SetBuildState(false);
     }
 
     void Material::UseSamplers() {
+        InitShader();
+
         for (const Material::Property& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Sampler2D:
@@ -373,5 +388,62 @@ namespace SR_GTYPES_NS {
                     break;
             }
         }
+    }
+
+    void Material::InitShader() {
+        if (m_dirtyShader) {
+            Properties properties = m_properties;
+
+            m_properties.clear();
+
+            for (auto&& [name, property] : m_shader->GetProperties()) {
+                Property aProperty;
+
+                aProperty.id = name;
+                aProperty.displayName = name; // TODO: make a pretty name
+                aProperty.data = GetVariantFromShaderVarType(property);
+                aProperty.type = property;
+
+                m_properties.emplace_back(aProperty);
+            }
+
+            for (auto&& property : properties) {
+                if (auto&& pProperty = GetProperty(property.id); pProperty && pProperty->type == property.type) {
+                    pProperty->data = property.data;
+                }
+                else if (property.type == ShaderVarType::Sampler2D) {
+                    auto&& pTexture = std::get<Texture*>(property.data);
+
+                    if (!pTexture) {
+                        continue;
+                    }
+
+                    RemoveDependency(pTexture);
+
+                    if (pTexture->GetCountUses() <= 1 && pTexture->IsEnabledAutoRemove())
+                        pTexture->Destroy();
+                }
+            }
+
+            m_dirtyShader = false;
+        }
+    }
+
+    void Material::OnResourceUpdated(IResource *pResource, int32_t depth) {
+        if (dynamic_cast<Shader*>(pResource) == m_shader && m_shader) {
+            m_dirtyShader = true;
+        }
+
+        IResource::OnResourceUpdated(pResource, depth);
+    }
+
+    Material::Property *Material::GetProperty(const std::string& id) {
+        for (auto&& property : m_properties) {
+            if (property.id == id) {
+                return &property;
+            }
+        }
+
+        return nullptr;
     }
 }

@@ -26,8 +26,8 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
         }
     }
 
-    shader->SetMat4("viewMat", m_viewTranslateMat);
-    shader->SetMat4("projMat", m_projection);
+    //shader->SetMat4(SR_RU"viewMat", m_viewTranslateMat);
+    //shader->SetMat4("projMat", m_projection);
 }
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {

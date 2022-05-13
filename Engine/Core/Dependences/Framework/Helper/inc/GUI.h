@@ -10,15 +10,16 @@
 #ifdef SR_USE_IMGUI
     //#define IMGUI_DISABLE
 
+    #define IMGUI_UNLIMITED_FRAME_RATE
     #define IMGUI_DEFINE_MATH_OPERATORS
     #define IMGUI_USE_WCHAR32
 
     #ifndef IM_ASSERT
-        #define IM_ASSERT(_EXP) SRAssert1(_EXP)
+        #define IM_ASSERT(_EXP) SRAssert1Once(_EXP)
     #endif
 
     #ifndef IM_ASSERT_USER_ERROR
-        #define IM_ASSERT_USER_ERROR(_EXP, _MSG) SRAssert2(_EXP, _MSG)
+        #define IM_ASSERT_USER_ERROR(_EXP, _MSG) SRAssert2Once(_EXP, _MSG)
     #endif
 
     #include <imgui.h>

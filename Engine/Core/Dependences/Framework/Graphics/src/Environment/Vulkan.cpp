@@ -4,69 +4,78 @@
 
 #include <Environment/Vulkan.h>
 #include <GUI.h>
+#include <Utils/Features.h>
 
 #ifdef SR_WIN32
     #include <vulkan/vulkan_win32.h>
 #endif
 
-namespace Framework::Graphics{
-    const std::vector<const char*> Vulkan::m_validationLayers = {
+namespace Framework::Graphics {
+    const std::vector<const char *> Vulkan::m_validationLayers = {
             "VK_LAYER_KHRONOS_validation"
     };
 
-    const std::vector<const char*> Vulkan::m_instanceExtensions = {
+    const std::vector<const char *> Vulkan::m_instanceExtensions = {
             VK_KHR_SURFACE_EXTENSION_NAME,
             VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
             VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
-        #ifdef SR_WIN32
+#ifdef SR_WIN32
             VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
-        #endif
-        #ifndef SR_RELEASE
+#endif
+#ifndef SR_RELEASE
             VK_EXT_DEBUG_UTILS_EXTENSION_NAME
-        #endif
+#endif
     };
 
-    const std::vector<const char*> Vulkan::m_deviceExtensions = {
+    const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
     };
 
-    #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
+#define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
     bool Vulkan::PreInit(
             unsigned int smooth_samples,
-            const std::string& appName,
-            const std::string& engineName,
-            const std::string& glslc)
-    {
-        EvoVulkan::Tools::VkDebug::Log    = [](const std::string& msg) { Helper::Debug::VulkanLog(SR_VRAM   + msg); };
-        EvoVulkan::Tools::VkDebug::Warn   = [](const std::string& msg) { Helper::Debug::Warn(SR_VRAM        + msg); };
-        EvoVulkan::Tools::VkDebug::Error  = [](const std::string& msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Graph  = [](const std::string& msg) { Helper::Debug::Vulkan(SR_VRAM      + msg); };
-        EvoVulkan::Tools::VkDebug::Assert = [](const std::string& msg) { Helper::Debug::Assert(SR_VRAM      + msg); return false; };
+            const std::string &appName,
+            const std::string &engineName,
+            const std::string &glslc) {
+        EvoVulkan::Tools::VkDebug::Log = [](const std::string &msg) { Helper::Debug::VulkanLog(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Warn = [](const std::string &msg) { Helper::Debug::Warn(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Error = [](const std::string &msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Graph = [](const std::string &msg) { Helper::Debug::Vulkan(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Assert = [](const std::string &msg) {
+            Helper::Debug::Assert(SR_VRAM + msg);
+            return false;
+        };
 
         m_imgui = new VulkanTypes::VkImGUI();
 
         m_kernel = new SRVulkan();
         Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
 
-        if (m_enableValidationLayers)
-            m_kernel->SetValidationLayersEnabled(true);
+        m_enableValidationLayers = SR_UTILS_NS::Features::Instance().Enabled("VulkanValidation", false);
 
-        m_viewport     = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
-        m_scissor      = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
-        m_cmdBufInfo   = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
-        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
+        if (m_enableValidationLayers) {
+            m_kernel->SetValidationLayersEnabled(true);
+        }
+
+        m_viewport = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
+        m_scissor = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
+        m_cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
+        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr,
+                                                                       0);
 
         m_kernel->SetMultisampling(smooth_samples);
+
+        /// TOOD: вынести в конфиг
+        m_kernel->SetSwapchainImagesCount(2);
 
         if (!m_kernel->PreInit(
                 appName,
                 engineName,
                 glslc,
                 m_instanceExtensions,
-                m_validationLayers))
-        {
+                m_validationLayers)) {
             Helper::Debug::Error("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
             return false;
         }
@@ -74,23 +83,24 @@ namespace Framework::Graphics{
         return true;
     }
 
-    bool Vulkan::MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) {
+    bool Vulkan::MakeWindow(const std::string &name, const SR_MATH_NS::IVector2 &size, bool fullScreen, bool resizable,
+                            bool headerEnabled) {
         Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
 
         m_basicWindow = new Win32Window(this->GetPipeLine());
 
-        m_basicWindow->SetCallbackResize([this](BasicWindow* win, int w, int h) {
+        m_basicWindow->SetCallbackResize([this](BasicWindow *win, int w, int h) {
             m_kernel->SetSize(w, h);
         });
 
-        m_basicWindow->SetCallbackScroll([this](BasicWindow* win, double xoffset, double yoffset) {
+        m_basicWindow->SetCallbackScroll([this](BasicWindow *win, double xoffset, double yoffset) {
             for (const auto &a : g_scrollEvents)
                 a(xoffset, yoffset);
 
             g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
         });
 
-        m_basicWindow->SetCallbackFocus([this](BasicWindow* win, bool focus) {
+        m_basicWindow->SetCallbackFocus([this](BasicWindow *win, bool focus) {
             g_callback(WinEvents::Focus, win, &focus, nullptr);
         });
 
@@ -130,15 +140,15 @@ namespace Framework::Graphics{
 
         auto window = m_basicWindow;
 
-        auto createSurf = [window](const VkInstance& instance) -> VkSurfaceKHR {
+        auto createSurf = [window](const VkInstance &instance) -> VkSurfaceKHR {
 #ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
             if (window->GetType() == BasicWindow::Type::Win32) {
                 VkWin32SurfaceCreateInfoKHR surfaceInfo = {};
-                surfaceInfo.sType     = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
-                surfaceInfo.pNext     = nullptr;
-                surfaceInfo.flags     = 0;
+                surfaceInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+                surfaceInfo.pNext = nullptr;
+                surfaceInfo.flags = 0;
                 surfaceInfo.hinstance = dynamic_cast<Win32Window *>(window)->GetHINSTANCE();
-                surfaceInfo.hwnd      = dynamic_cast<Win32Window *>(window)->GetHWND();
+                surfaceInfo.hwnd = dynamic_cast<Win32Window *>(window)->GetHWND();
 
                 VkSurfaceKHR surface = VK_NULL_HANDLE;
                 VkResult result = vkCreateWin32SurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
@@ -146,8 +156,7 @@ namespace Framework::Graphics{
                     return VK_NULL_HANDLE;
                 else
                     return surface;
-            }
-            else {
+            } else {
                 Helper::Debug::Error("Vulkan::Init() : window is not support this architecture!");
                 return VK_NULL_HANDLE;
             }
@@ -171,7 +180,7 @@ namespace Framework::Graphics{
 
     void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
         if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Low)
-            SR_LOG("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = "+ std::to_string(h));
+            SR_LOG("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
 
         m_basicWindow->Resize(w, h);
     }
@@ -191,9 +200,9 @@ namespace Framework::Graphics{
         return true;
     }
 
-    bool Vulkan::CompileShader(const std::string &path, int32_t FBO, void **shaderData, const std::vector<uint64_t>& uniformSizes) const {
+    bool Vulkan::CompileShader(const std::string &path, int32_t FBO, void **shaderData, const std::vector<uint64_t> &uniformSizes) {
         if (FBO < 0) {
-            SR_ERROR("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
+            SRVerifyFalse2(false, "Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
             return false;
         }
 
@@ -201,8 +210,7 @@ namespace Framework::Graphics{
         if (FBO != 0) {
             if (auto fbo = m_memory->m_FBOs[FBO - 1]; fbo) {
                 renderPass = fbo->GetRenderPass();
-            }
-            else {
+            } else {
                 SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
                 return false;
             }
@@ -213,15 +221,16 @@ namespace Framework::Graphics{
             return false;
         }
 
-        int32_t ID = m_memory->AllocateShaderProgram(renderPass);
+        const int32_t ID = m_memory->AllocateShaderProgram(renderPass);
         if (ID < 0) {
             SR_ERROR("Vulkan::CompileShader() : failed to allocate shader program ID!");
             return false;
         }
         else {
-            int* dynamicID = new int();
+            /// TODO: memory leak possible
+            int *dynamicID = new int();
             *dynamicID = ID;
-            *shaderData = reinterpret_cast<void*>(dynamicID);
+            *shaderData = reinterpret_cast<void *>(dynamicID);
         }
 
         const std::vector<SR_UTILS_NS::Path> checkPatches = {
@@ -232,15 +241,15 @@ namespace Framework::Graphics{
 
         std::vector<SourceShader> modules = {};
         {
-            for (auto&& checkPath : checkPatches) {
-                if (auto&& modulePath = checkPath.Concat(path).ConcatExt(".vert"); modulePath.Exists()) {
+            for (auto &&checkPath : checkPatches) {
+                if (auto &&modulePath = checkPath.Concat(path).ConcatExt(".vert"); modulePath.Exists()) {
                     modules.emplace_back(SourceShader(path, modulePath.ToString(), ShaderStage::Vertex));
                     break;
                 }
             }
 
-            for (auto&& checkPath : checkPatches) {
-                if (auto&& modulePath = checkPath.Concat(path).ConcatExt(".frag"); modulePath.Exists()) {
+            for (auto &&checkPath : checkPatches) {
+                if (auto &&modulePath = checkPath.Concat(path).ConcatExt(".frag"); modulePath.Exists()) {
                     modules.emplace_back(SourceShader(path, modulePath.ToString(), ShaderStage::Fragment));
                     break;
                 }
@@ -253,7 +262,7 @@ namespace Framework::Graphics{
         }
 
         bool errors = false;
-        auto&& uniforms = Graphics::AnalyseShader(modules, &errors);
+        auto &&uniforms = Graphics::AnalyseShader(modules, &errors);
         if (errors) {
             SR_ERROR("Vulkan::CompileShader() : failed to analyse shader!");
             return false;
@@ -261,31 +270,40 @@ namespace Framework::Graphics{
 
         std::vector<VkDescriptorSetLayoutBinding> descriptorLayoutBindings = {};
         {
-            VkDescriptorType      type  = VK_DESCRIPTOR_TYPE_MAX_ENUM;
+            VkDescriptorType type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
             VkShaderStageFlagBits stage = VK_SHADER_STAGE_ALL;
 
-            for (auto&& uniform : uniforms) {
+            for (auto &&uniform : uniforms) {
                 switch (uniform.type) {
-                    case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
-                    case LayoutBinding::Uniform:   type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;         break;
+                    case LayoutBinding::Sampler2D:
+                        type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+                        break;
+                    case LayoutBinding::Uniform:
+                        type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+                        break;
                     default:
                         SR_ERROR("Vulkan::CompileShader() : unknown binding type!");
                         return false;
                 }
 
                 switch (uniform.stage) {
-                    case ShaderStage::Vertex:   stage = VK_SHADER_STAGE_VERTEX_BIT;   break;
-                    case ShaderStage::Fragment: stage = VK_SHADER_STAGE_FRAGMENT_BIT; break;
+                    case ShaderStage::Vertex:
+                        stage = VK_SHADER_STAGE_VERTEX_BIT;
+                        break;
+                    case ShaderStage::Fragment:
+                        stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+                        break;
                     default:
                         SR_ERROR("Vulkan::CompileShader() : unknown binding stage!");
                         return false;
                 }
 
-                for (auto&& descriptor : descriptorLayoutBindings) {
+                for (auto &&descriptor : descriptorLayoutBindings) {
                     if (descriptor.binding == uniform.binding) {
                         if (descriptor.descriptorType != type) {
-                            SRVerifyFalse2(false, "Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
-                                SR_UTILS_NS::ToString(uniform.binding) + "\n\tPath: " + path);
+                            SRVerifyFalse2(false,
+                                           "Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
+                                           SR_UTILS_NS::ToString(uniform.binding) + "\n\tPath: " + path);
                             return false;
                         }
 
@@ -299,12 +317,12 @@ namespace Framework::Graphics{
                 ));
 
                 skip:
-                    SR_NOOP;
+                SR_NOOP;
             }
         }
 
         std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
-        for (const auto& module : modules) {
+        for (const auto &module : modules) {
             VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_stage);
             vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_name, module.m_path, stage));
         }
@@ -314,7 +332,8 @@ namespace Framework::Graphics{
                 vkModules,
                 descriptorLayoutBindings,
                 uniformSizes
-                )) {
+        )) {
+            DeleteShader(ID);
             SR_ERROR("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
             return false;
         }
@@ -325,22 +344,21 @@ namespace Framework::Graphics{
     bool Vulkan::LinkShader(
             SR_SHADER_PROGRAM *shaderProgram,
             void **shaderData,
-            const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
-            const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-            SRShaderCreateInfo shaderCreateInfo) const
-    {
+            const std::vector<SR_VERTEX_DESCRIPTION> &vertexDescriptions,
+            const std::vector<std::pair<Vertices::Attribute, size_t>> &vertexAttributes,
+            SRShaderCreateInfo shaderCreateInfo) const {
         if (!shaderData) {
             SR_ERROR("Vulkan::LinkShader() : shader data is nullptr!");
             return false;
         }
-        int* dynamicID = reinterpret_cast<int*>(*shaderData);
+        int *dynamicID = reinterpret_cast<int *>(*shaderData);
         if (!dynamicID) {
             SR_ERROR("Vulkan::LinkShader() : dynamic ID is nullptr!");
             return false;
         }
 
-        auto&& vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
-        auto&& vkVertexAttributes   = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
+        auto &&vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
+        auto &&vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
         if (vkVertexAttributes.size() != vertexAttributes.size()) {
             SR_ERROR("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
             delete dynamicID;
@@ -361,7 +379,13 @@ namespace Framework::Graphics{
             shaderCreateInfo.cullMode = CullMode::Back;
 
         if (!shaderCreateInfo.Validate()) {
-            SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info!");
+            SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info! Create info:"
+                     "\n\tPolygon mode: " + EnumPolygonModeToString(shaderCreateInfo.polygonMode) +
+                     "\n\tCull mode: " + EnumCullModeToString(shaderCreateInfo.cullMode) +
+                     "\n\tDepth compare: " + EnumDepthCompareToString(shaderCreateInfo.depthCompare) +
+                     "\n\tPrimitive topology: " + EnumPrimitiveTopologyToString(shaderCreateInfo.primitiveTopology)
+            );
+
             return false;
         }
 
@@ -372,8 +396,7 @@ namespace Framework::Graphics{
                 shaderCreateInfo.blendEnabled,
                 shaderCreateInfo.depthWrite,
                 shaderCreateInfo.depthTest,
-                VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology)))
-        {
+                VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology))) {
             SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;
             return false;
@@ -385,7 +408,8 @@ namespace Framework::Graphics{
         return true;
     }
 
-    bool Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
+    bool
+    Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
         if (size.x == 0 || size.y == 0) {
             Helper::Debug::Error("Vulkan::CreateFrameBuffer() : width or height equals zero!");
             return false;
@@ -397,7 +421,7 @@ namespace Framework::Graphics{
         }
 
         if (FBO > 0) {
-            if (!this->m_memory->ReAllocateFBO(FBO - 1 , size.x, size.y, colorBuffers, rboDepth)) {
+            if (!this->m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, rboDepth)) {
                 Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             return true;
@@ -430,7 +454,7 @@ namespace Framework::Graphics{
                 return false;
             }
 
-            if (!m_memory->FreeTexture((uint32_t)IDs[i])) {
+            if (!m_memory->FreeTexture((uint32_t) IDs[i])) {
                 SR_ERROR("Vulkan::FreeTextures() : failed to free texture!");
                 return false;
             }
@@ -444,7 +468,7 @@ namespace Framework::Graphics{
     }
 
     int32_t Vulkan::CalculateTexture(
-            uint8_t* data,
+            uint8_t *data,
             TextureFormat format,
             uint32_t w,
             uint32_t h,
@@ -478,7 +502,8 @@ namespace Framework::Graphics{
                 return -1;
             }
 
-            SR_LOG("Vulkan::CalculateTexture() : compress " + std::to_string(w * h * 4 / 1024 / 1024) + "MB source image...");
+            SR_LOG("Vulkan::CalculateTexture() : compress " + std::to_string(w * h * 4 / 1024 / 1024) +
+                   "MB source image...");
 
             if (data = Graphics::Compress(w, h, data, compression); data == nullptr) {
                 SR_ERROR("Vulkan::CalculateTexture() : failed to compress image!");
@@ -545,11 +570,11 @@ namespace Framework::Graphics{
     void Vulkan::EndDrawGUI() {
         ImGui::Render();
 
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        ImGuiIO &io = ImGui::GetIO();
+        (void) io;
 
         // Update and Render additional Platform Windows
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-        {
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
         }
@@ -560,7 +585,7 @@ namespace Framework::Graphics{
         if (!texture)
             return {};
         return {
-                .m_data   = reinterpret_cast<void*>(texture->GetImageView()),
+                .m_data   = reinterpret_cast<void *>(texture->GetImageView()),
                 .m_width  = texture->GetWidth(),
                 .m_height = texture->GetHeight()
         };
@@ -582,12 +607,11 @@ namespace Framework::Graphics{
         return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
     }*/
 
-    int32_t Vulkan::CalculateVBO(void *vertices, Vertices::Type type, size_t count)  {
+    int32_t Vulkan::CalculateVBO(void *vertices, Vertices::Type type, size_t count) {
         const auto size = Vertices::GetVertexSize(type);
         if (auto id = m_memory->AllocateVBO(size * count, vertices); id >= 0) {
             return id;
-        }
-        else
+        } else
             return SR_ID_INVALID;
     }
 
@@ -595,8 +619,7 @@ namespace Framework::Graphics{
         // ignore VBO
         if (auto id = m_memory->AllocateIBO(indxSize * count, indices); id >= 0) {
             return id;
-        }
-        else
+        } else
             return SR_ID_INVALID;
     }
 
@@ -606,6 +629,42 @@ namespace Framework::Graphics{
 
     uint64_t Vulkan::GetVRAMUsage() {
         return m_kernel->GetAllocator() ? m_kernel->GetAllocator()->GetGPUMemoryUsage() : 0;
+    }
+
+    void Vulkan::SetViewport(int32_t width, int32_t height) {
+        if (width > 0 && height > 0) {
+            m_viewport = EvoVulkan::Tools::Initializers::Viewport(
+                    static_cast<float_t>(width),
+                    static_cast<float_t>(height),
+                    0.f, 1.f
+            );
+        }
+        else {
+            if (m_currentFBOid == 0) {
+                m_viewport = m_kernel->GetViewport();
+            }
+            else if (m_currentFramebuffer) {
+                m_viewport = m_currentFramebuffer->GetViewport();
+            }
+        }
+
+        vkCmdSetViewport(m_currentCmd, 0, 1, &m_viewport);
+    }
+
+    void Vulkan::SetScissor(int32_t width, int32_t height) {
+        if (width > 0 && height > 0) {
+            m_scissor = EvoVulkan::Tools::Initializers::Rect2D(width, height, 0, 0);
+        }
+        else {
+            if (m_currentFBOid == 0) {
+                m_scissor = m_kernel->GetScissor();
+            }
+            else if (m_currentFramebuffer) {
+                m_scissor = m_currentFramebuffer->GetScissor();
+            }
+        }
+
+        vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

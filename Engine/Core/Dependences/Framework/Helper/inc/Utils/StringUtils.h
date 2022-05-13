@@ -81,6 +81,8 @@ namespace SR_UTILS_NS {
             return source;
         }
 
+        static std::string Remove(std::string source, uint32_t count);
+
         static std::string GetBetween(const std::string& source, int64_t begin, uint64_t end) {
             return source.substr(begin + 1, (end - begin) - 1);
         }

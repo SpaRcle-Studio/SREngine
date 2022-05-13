@@ -59,7 +59,7 @@ namespace Framework::Helper {
 
         CmdAllocators m_allocators;
         mutable std::mutex m_mutex;
-        Types::Thread m_thread;
+        Types::Thread::Ptr m_thread;
         std::atomic<bool> m_isRun;
         std::string m_lastCmdName;
 

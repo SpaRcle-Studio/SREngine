@@ -57,6 +57,7 @@
 #include "../Graphics/src/Types/Geometry/Mesh3D.cpp"
 
 #include "../Graphics/src/Types/EditorGrid.cpp"
+#include "../Graphics/src/Types/Framebuffer.cpp"
 #include "../Graphics/src/Types/Material.cpp"
 #include "../Graphics/src/Types/Mesh.cpp"
 #include "../Graphics/src/Types/Skybox.cpp"

@@ -8,8 +8,10 @@
 #include <Types/Vertices.h>
 #include <Types/Uniforms.h>
 #include <Utils/NonCopyable.h>
+#include <Utils/Hashes.h>
 #include <ResourceManager/IResource.h>
 #include <Environment/Basic/IShaderProgram.h>
+#include <sparsehash/dense_hash_map>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -31,17 +33,21 @@ namespace SR_GRAPH_NS {
         };
 
     public:
-        void Append(const std::string& name, ShaderVarType type, bool hidden);
+        ShaderUBOBlock();
+
+    public:
+
+        void Append(uint64_t hashId, ShaderVarType type, bool hidden);
         void Init();
         void DeInit();
-        void SetField(const std::string& name, const void* data);
+        void SetField(uint64_t hashId, const void* data) noexcept;
 
         SR_NODISCARD uint32_t GetBinding() const { return m_binding; }
         SR_NODISCARD bool Valid() const { return m_memory && m_binding != SR_ID_INVALID; }
 
     private:
         uint32_t m_binding = SR_ID_INVALID;
-        std::unordered_map<std::string, SubBlock> m_data;
+        google::dense_hash_map<uint64_t, SubBlock> m_data;
         uint32_t m_size = 0;
         char* m_memory = nullptr;
 
@@ -49,8 +55,8 @@ namespace SR_GRAPH_NS {
 
     class Shader : public Helper::IResource {
     public:
-        Shader(Render* render, std::string path);
-        Shader(Render* render, std::string path, std::string name);
+        explicit Shader(std::string path);
+        Shader(std::string path, std::string name);
 
     private:
         ~Shader() override;
@@ -62,6 +68,12 @@ namespace SR_GRAPH_NS {
             Grid = 4,
             Custom = 0xffff,
         } StandardID;
+
+        static constexpr uint64_t MODEL_MATRIX = SR_COMPILE_TIME_CRC32_STR("MODEL_MATRIX");
+        static constexpr uint64_t VIEW_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_MATRIX");
+        static constexpr uint64_t PROJECTION_MATRIX = SR_COMPILE_TIME_CRC32_STR("PROJECTION_MATRIX");
+        static constexpr uint64_t TIME = SR_COMPILE_TIME_CRC32_STR("TIME");
+
     private:
         bool Link();
         bool Compile();
@@ -70,8 +82,8 @@ namespace SR_GRAPH_NS {
         bool Init();
         SR_FORCE_INLINE static Shader* GetCurrentShader() { return g_currentShader; }
 
-        static Shader* Load(Render* render, const SR_UTILS_NS::Path& path);
-        static Shader* LoadFromConfig(Render* render, const std::string& name);
+        static Shader* Load(const SR_UTILS_NS::Path& path);
+        static Shader* LoadFromConfig(const std::string& name);
 
     public:
         SR_NODISCARD SR_FORCE_INLINE std::string GetPath() const { return m_path; }
@@ -89,6 +101,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE bool Complete() const { return m_isInit; }
 
         bool Use() noexcept;
+        void UnUse() noexcept;
         bool InitUBOBlock();
         bool Flush() const;
         void FreeVideoMemory();
@@ -105,14 +118,22 @@ namespace SR_GRAPH_NS {
         bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
 
     public:
-        void SetBool(const std::string& name, const bool& v) noexcept;
-        void SetFloat(const std::string& name, const float& v) noexcept;
-        void SetInt(const std::string& name, const int& v) noexcept;
-        void SetMat4(const std::string& name, const glm::mat4& v) noexcept;
-        void SetVec4(const std::string& name, const glm::vec4& v) noexcept;
-        void SetVec3(const std::string& name, const glm::vec3& v) noexcept;
-        void SetVec2(const std::string& name, const glm::vec2& v) noexcept;
-        void SetIVec2(const std::string& name, const glm::ivec2& v) noexcept;
+        template<typename T> void SetValue(uint64_t hashId, const T& v) noexcept {
+            if (!IsLoaded()) {
+                return;
+            }
+
+            m_uniformBlock.SetField(hashId, &v);
+        }
+
+        void SetBool(uint64_t hashId, const bool& v) noexcept;
+        void SetFloat(uint64_t hashId, const float& v) noexcept;
+        void SetInt(uint64_t hashId, const int& v) noexcept;
+        void SetMat4(uint64_t hashId, const glm::mat4& v) noexcept;
+        void SetVec4(uint64_t hashId, const glm::vec4& v) noexcept;
+        void SetVec3(uint64_t hashId, const glm::vec3& v) noexcept;
+        void SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;
+        void SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
         void SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
 
     private:
@@ -121,10 +142,10 @@ namespace SR_GRAPH_NS {
         SR_SHADER_PROGRAM     m_shaderProgram        = SR_NULL_SHADER;
         void*                 m_shaderTempData       = nullptr;
 
-        bool                  m_isLink               = false;
-        bool                  m_isCompile            = false;
-        bool                  m_hasErrors            = false;
-        bool                  m_isInit               = false;
+        std::atomic<bool>     m_isLink               = false;
+        std::atomic<bool>     m_isCompile            = false;
+        std::atomic<bool>     m_hasErrors            = false;
+        std::atomic<bool>     m_isInit               = false;
 
     private: // For vulkan
         SRShaderCreateInfo    m_shaderCreateInfo     = {};
@@ -140,8 +161,8 @@ namespace SR_GRAPH_NS {
         ShaderProperties      m_properties           = ShaderProperties();
 
     private:
-        Environment*          m_env                  = nullptr;
         Render*               m_render               = nullptr;
+        Environment*          m_env                  = nullptr;
         std::string           m_name                 = "Unnamed";
         std::string           m_path                 = "Unknown";
 

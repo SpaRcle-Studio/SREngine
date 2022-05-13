@@ -302,7 +302,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
         const std::string& name,
         int32_t FBO,
         void** shaderData,
-        const std::vector<uint64_t>& uniformSizes) const
+        const std::vector<uint64_t>& uniformSizes)
 {
     auto shadersPath = ResourceManager::Instance().GetResPath().Concat("Shaders");
 

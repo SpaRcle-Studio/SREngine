@@ -8,9 +8,11 @@
 #include <Utils/NonCopyable.h>
 #include <Debug.h>
 
-namespace Framework::Helper::Types {
+namespace SR_HTYPES_NS {
     class DataStorage : public NonCopyable {
     public:
+        using Ptr = DataStorage*;
+
         ~DataStorage() override = default;
 
     public:
@@ -18,6 +20,10 @@ namespace Framework::Helper::Types {
             if (!(m_pointers[name] = reinterpret_cast<void*>(pointer))) {
                 SR_ERROR("DataStorage::SetPointer() : invalid pointer! Name: " + name);
             }
+        }
+
+        template<typename T> void SetPointer(T* pointer) {
+            SetPointer(typeid(T).name(), pointer);
         }
 
         template<typename T> T* GetPointer(const std::string& name) const {
@@ -32,6 +38,10 @@ namespace Framework::Helper::Types {
             SR_ERROR("DataStorage::GetPointer() : invalid pointer! Name: " + name);
 
             return nullptr;
+        }
+
+        template<typename T> T* GetPointer() const {
+            return GetPointer<T>(typeid(T).name());
         }
 
         void Clear() {
