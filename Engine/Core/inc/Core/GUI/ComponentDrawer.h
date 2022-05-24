@@ -1,0 +1,25 @@
+//
+// Created by Monika on 23.02.2022.
+//
+
+#ifndef SRENGINE_COMPONENTDRAWER_H
+#define SRENGINE_COMPONENTDRAWER_H
+
+#include <stdInclude.h>
+
+namespace SR_GRAPH_NS {
+    class Camera;
+
+    namespace Types {
+        class Mesh3D;
+        class Material;
+    }
+}
+
+namespace Framework::Core::GUI::ComponentDrawer {
+    void DrawComponent(SR_GRAPH_NS::Camera* camera, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::Types::Mesh3D* mesh3d, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::Types::Material* material, int32_t index);
+}
+
+#endif //SRENGINE_COMPONENTDRAWER_H

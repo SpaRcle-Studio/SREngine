@@ -202,7 +202,7 @@ namespace Framework::Graphics {
 
     bool Vulkan::CompileShader(const std::string &path, int32_t FBO, void **shaderData, const std::vector<uint64_t> &uniformSizes) {
         if (FBO < 0) {
-            SRVerifyFalse2(false, "Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
+            SRHalt("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
             return false;
         }
 
@@ -301,8 +301,7 @@ namespace Framework::Graphics {
                 for (auto &&descriptor : descriptorLayoutBindings) {
                     if (descriptor.binding == uniform.binding) {
                         if (descriptor.descriptorType != type) {
-                            SRVerifyFalse2(false,
-                                           "Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
+                            SRHalt("Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
                                            SR_UTILS_NS::ToString(uniform.binding) + "\n\tPath: " + path);
                             return false;
                         }
@@ -679,17 +678,25 @@ namespace Framework::Graphics {
         uint32_t h = m_height;
 
         Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
-        dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->ReSize(w, h);
+
+        if (m_GUIEnabled) {
+            dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(w, h);
+        }
 
         return true;
     }
 
     EvoVulkan::Core::RenderResult SRVulkan::Render()  {
-        if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate)
+        if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate) {
+            VK_LOG("SRVulkan::Render() : out of date...");
             m_hasErrors |= !ResizeWindow();
 
-        if (m_hasErrors)
-            return EvoVulkan::Core::RenderResult::Fatal;
+            if (m_hasErrors) {
+                return EvoVulkan::Core::RenderResult::Fatal;
+            }
+
+            return EvoVulkan::Core::RenderResult::Success;
+        }
 
         for (const auto& submitInfo : m_framebuffersQueue)
             if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {

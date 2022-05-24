@@ -174,8 +174,13 @@ namespace Framework::Graphics {
         //[[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
         [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
         [[nodiscard]] void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const override {
+            if (id == SR_ID_INVALID) {
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : invalid id!");
+                return nullptr;
+            }
+
             if (!imgui) {
-                Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : todo!");
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : todo!");
                 return nullptr;
             }
 
@@ -184,7 +189,7 @@ namespace Framework::Graphics {
                 return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
             }
             else {
-                Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
                 return nullptr;
             }
         }
@@ -197,10 +202,10 @@ namespace Framework::Graphics {
         }
 
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const override { return true; }
-        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return this->m_kernel->GetDevice()->GetName(); }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
-        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { this->m_basicWindow->GetSurfaceWidth(), this->m_basicWindow->GetSurfaceHeight() }; }
+        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { m_basicWindow->GetWidth(), m_basicWindow->GetHeight() }; }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
 
@@ -211,9 +216,16 @@ namespace Framework::Graphics {
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;
 
-        SR_FORCE_INLINE void BeginRender() override {
+        SR_FORCE_INLINE bool BeginRender() override {
+            if (!m_renderPassBI.pClearValues) {
+                SRAssertOnce(false);
+                return false;
+            }
+
             vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
             vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+
+            return true;
         }
         SR_FORCE_INLINE void EndRender() override {
             vkCmdEndRenderPass(m_currentCmd);
@@ -451,7 +463,7 @@ namespace Framework::Graphics {
             }
             else {
                 if (m_currentShaderID < 0) {
-                    SRVerifyFalse2(false, "Shader program do not set!");
+                    SRHalt("Shader program do not set!");
                     return SR_ID_INVALID;
                 }
 
@@ -609,9 +621,11 @@ namespace Framework::Graphics {
             return m_memory->FreeUBO(id);
         }
 
-        SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override {
-            if (!m_memory->FreeTexture((uint32_t)ID)) {
-                Helper::Debug::Error("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(ID) + ")");
+        SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) override {
+            const int32_t id = *ID; *ID = SR_ID_INVALID;
+
+            if (!m_memory->FreeTexture((uint32_t)id)) {
+                Helper::Debug::Error("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(id) + ")");
                 return false;
             } else
                 return true;

@@ -19,10 +19,9 @@ namespace SR_GTYPES_NS {
 namespace Framework::Graphics {
     /**
        0 - binding
-       1 - type
-       2 - ubo size
+       1 - ubo size
     */
-    typedef std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> UBOInfo;
+    typedef std::vector<std::pair<uint32_t, uint64_t>> UBOInfo;
 
     typedef std::variant<SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::FVector4> ShaderPropertyVariant;
 
@@ -139,7 +138,7 @@ namespace Framework::Graphics {
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
     typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
-    typedef std::map<std::string, std::pair<ShaderVarType, uint32_t>> ShaderSamplers;
+    typedef std::map<uint64_t, std::pair<ShaderVarType, uint32_t>> ShaderSamplers;
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
     SR_ENUM_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)

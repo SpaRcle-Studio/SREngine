@@ -8,6 +8,7 @@
 #include <Types/SafePointer.h>
 #include <World/Observer.h>
 #include <Types/StringAtom.h>
+#include <Types/Marshal.h>
 
 namespace SR_UTILS_NS::World {
     struct TensorKey {

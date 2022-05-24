@@ -92,40 +92,40 @@ namespace SR_GRAPH_NS::Vertices {
         return str;
     }
 
-    struct SkyboxVertex {
+    struct SimpleVertex {
         glm::vec3 pos;
 
         static SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
-            return sizeof(SkyboxVertex);
+            return sizeof(SimpleVertex);
         }
 
-        bool operator==(const SkyboxVertex& other) const {
+        bool operator==(const SimpleVertex& other) const {
             return pos == other.pos;
         }
 
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkyboxVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SimpleVertex, pos)));
 
             return descriptions;
         }
     };
-    typedef std::vector<SkyboxVertex> SkyboxVertices;
+    typedef std::vector<SimpleVertex> SimpleVertices;
 
     SR_ENUM_CLASS(Type,
         Unknown,
         StaticMeshVertex,
         SkinnedMeshVertex,
-        SkyboxVertex
+        SimpleVertex
     )
 
     static uint32_t GetVertexSize(Type type) {
         switch (type) {
             case Type::StaticMeshVertex:
                 return sizeof(StaticMeshVertex);
-            case Type::SkyboxVertex:
-                return sizeof(SkyboxVertex);
+            case Type::SimpleVertex:
+                return sizeof(SimpleVertex);
             default:
                 SRAssert(false);
                 return 0;
@@ -152,13 +152,15 @@ namespace SR_GRAPH_NS::Vertices {
                 info.m_attributes = StaticMeshVertex::GetAttributes();
                 info.m_descriptions = { StaticMeshVertex::GetDescription() };
                 break;
-            case Type::SkyboxVertex:
-                info.m_attributes = SkyboxVertex::GetAttributes();
-                info.m_descriptions = { SkyboxVertex::GetDescription() };
-                break;;
-            default:
-                Helper::Debug::Error("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int)type));
+            case Type::SimpleVertex:
+                info.m_attributes = SimpleVertex::GetAttributes();
+                info.m_descriptions = { SimpleVertex::GetDescription() };
                 break;
+            default: {
+                SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int) type));
+                SRAssert(false);
+                break;
+            }
         }
         return info;
     }
@@ -168,9 +170,9 @@ namespace SR_GRAPH_NS::Vertices {
 
         vertices.reserve(raw.size());
 
-        if constexpr (std::is_same<Vertices::SkyboxVertex, T>::value) {
+        if constexpr (std::is_same<Vertices::SimpleVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::SkyboxVertex{
+                vertices.emplace_back(Vertices::SimpleVertex{
                         .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                 });
             }
@@ -209,8 +211,8 @@ namespace std {
         }
     };
 
-    template<> struct hash<Framework::Graphics::Vertices::SkyboxVertex> {
-        size_t operator()(Framework::Graphics::Vertices::SkyboxVertex const& vertex) const {
+    template<> struct hash<Framework::Graphics::Vertices::SimpleVertex> {
+        size_t operator()(Framework::Graphics::Vertices::SimpleVertex const& vertex) const {
             std::size_t res = 0;
             hash_combine<glm::vec3>(res, vertex.pos);
             return res;

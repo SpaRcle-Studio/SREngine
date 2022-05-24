@@ -21,6 +21,7 @@ namespace SR_GRAPH_NS {
 
     namespace Vertices {
         struct StaticMeshVertex;
+        struct SimpleMeshVertex;
     }
 
     enum class RenderBuffGroup { Kernel, Small, Normal, Large };
@@ -166,7 +167,7 @@ namespace SR_GRAPH_NS {
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const { }
         virtual SR_FORCE_INLINE void DrawFrame() { }
-        virtual SR_FORCE_INLINE void BeginRender() { }
+        virtual SR_FORCE_INLINE bool BeginRender() { return false; }
         virtual SR_FORCE_INLINE void EndRender() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
@@ -285,13 +286,13 @@ namespace SR_GRAPH_NS {
         virtual SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const { }
         virtual SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t&  ID) const { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const { }
-        virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) { return false; }
+        virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) { return false; }
 
         SR_NODISCARD virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) { return -1; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeUBO(int32_t* ID) const { return false; }
-        SR_NODISCARD virtual bool FreeVAO(uint32_t VAO) const { return false; }
+        SR_NODISCARD virtual bool FreeVAO(int32_t* VAO) const { return false; }
         SR_NODISCARD virtual bool FreeFBO(uint32_t FBO) const { return false; }
         SR_NODISCARD virtual bool FreeRBO(uint32_t RBO) const { return false; }
         SR_NODISCARD virtual bool FreeTextures(int32_t* IDs, uint32_t count) const { return false; }

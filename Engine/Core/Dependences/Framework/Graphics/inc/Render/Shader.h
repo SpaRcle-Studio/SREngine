@@ -71,8 +71,10 @@ namespace SR_GRAPH_NS {
 
         static constexpr uint64_t MODEL_MATRIX = SR_COMPILE_TIME_CRC32_STR("MODEL_MATRIX");
         static constexpr uint64_t VIEW_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_MATRIX");
+        static constexpr uint64_t VIEW_NO_TRANSLATE_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_NO_TRANSLATE_MATRIX");
         static constexpr uint64_t PROJECTION_MATRIX = SR_COMPILE_TIME_CRC32_STR("PROJECTION_MATRIX");
         static constexpr uint64_t TIME = SR_COMPILE_TIME_CRC32_STR("TIME");
+        static constexpr uint64_t SKYBOX_DIFFUSE = SR_COMPILE_TIME_CRC32_STR("SKYBOX_DIFFUSE");
 
     private:
         bool Link();
@@ -90,7 +92,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { return m_render; }
         SR_NODISCARD SR_FORCE_INLINE std::string GetName() const { return m_name; }
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
-        SR_NODISCARD int32_t GetUBO(const uint32_t& index) const;
+        //SR_NODISCARD int32_t GetUBO(const uint32_t& index) const;
         SR_NODISCARD int32_t GetID();
         SR_NODISCARD bool Ready() const;
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
@@ -135,6 +137,11 @@ namespace SR_GRAPH_NS {
         void SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;
         void SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
         void SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
+        void SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
+        void SetSampler2D(uint64_t hashId, Types::Texture* sampler) noexcept;
+
+    private:
+        void SetSampler(uint64_t hashId, int32_t sampler) noexcept;
 
     private:
         inline static Shader* g_currentShader        = nullptr;
@@ -152,7 +159,6 @@ namespace SR_GRAPH_NS {
         VertexAttributes      m_verticesAttributes   = {};
         VertexDescriptions    m_verticesDescription  = {};
 
-        std::vector<int32_t>  m_sharedUniforms       = {};
         int32_t               m_fbo                  = -1;
 
         UBOInfo               m_uniformsInfo         = {};

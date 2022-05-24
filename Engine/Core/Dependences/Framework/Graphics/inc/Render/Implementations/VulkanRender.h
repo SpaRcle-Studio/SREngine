@@ -47,15 +47,7 @@ namespace Framework::Graphics::Impl {
 
         void DrawGeometry() override;
 
-        void DrawSkybox() override {
-            if (m_skybox.m_current && m_skyboxEnabled) {
-                m_shaders[Shader::StandardID::Skybox]->Use();
-
-                m_skybox.m_current->DrawVulkan();
-
-                m_env->UnUseShader();
-            }
-        }
+        void DrawSkybox() override;
 
         void DrawTransparentGeometry() override {
 

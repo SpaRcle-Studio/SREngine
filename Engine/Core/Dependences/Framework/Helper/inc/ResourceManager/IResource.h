@@ -7,11 +7,12 @@
 
 #include <Debug.h>
 #include <FileSystem/Path.h>
+#include <Utils/NonCopyable.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
 
-    class IResource {
+    class IResource : public NonCopyable {
         friend class ResourceManager;
 
     public:
@@ -22,10 +23,10 @@ namespace SR_UTILS_NS {
     protected:
         explicit IResource(const char* name);
         IResource(const char* name, bool autoRemove);
-        virtual ~IResource();
+        ~IResource() override;
 
     public:
-        SR_NODISCARD uint64_t GetFileHash() const;
+        SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD bool IsLoaded() const { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }

@@ -57,12 +57,12 @@ namespace Framework::Graphics {
                 m_bloomClear = true;
             }
 
-            if (m_camera->IsDirectOutput())
-                m_env->BindFrameBuffer(0);
-            else {
-                m_env->BindFrameBuffer(this->m_finalFBO);
-                m_env->ClearBuffers();
-            }
+            //if (m_camera->IsDirectOutput())
+            //    m_env->BindFrameBuffer(0);
+           // else {
+            //    m_env->BindFrameBuffer(this->m_finalFBO);
+           //     m_env->ClearBuffers();
+           // }
 
             m_postProcessingShader->Use();
 
@@ -92,8 +92,8 @@ namespace Framework::Graphics {
             //m_postProcessingShader->SetInt("depth", 4);
             m_env->Draw(3);
 
-            if (!m_camera->IsDirectOutput())
-                m_env->BindFrameBuffer(0);
+            //if (!m_camera->IsDirectOutput())
+            //    m_env->BindFrameBuffer(0);
         }
     private:
         void BlurBloom() {

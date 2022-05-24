@@ -18,6 +18,7 @@ namespace Framework::Helper {
         static bool FileExists(const std::string& path);
 
         static std::string SaveFileDialog(const std::string& path, const std::string& filter);
+        static std::string LoadFileDialog(const std::string& path, const std::string& filter);
 
         static bool CreatePath(std::string path, uint32_t offset = 0) {
             if (path.empty())
@@ -39,6 +40,7 @@ namespace Framework::Helper {
 
         static bool WriteToFile(const std::string& path, const std::string& text);
         static bool CreateFolder(const std::string& path);
+        static bool IsAbsolutePath(const std::string& path);
         static std::string GetExecutableFileName();
         static std::string GetPathToExe();
         static std::string GetFullPath(const std::string& path);

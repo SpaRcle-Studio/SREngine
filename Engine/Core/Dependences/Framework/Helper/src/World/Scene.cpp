@@ -2,15 +2,12 @@
 // Created by Nikita on 30.11.2020.
 //
 
-#include "World/Scene.h"
-#include <EntityComponentSystem/Component.h>
-#include <EntityComponentSystem/GameObject.h>
+#include <World/Scene.h>
+#include <ECS/Component.h>
+#include <ECS/GameObject.h>
 
 #include <World/Region.h>
 #include <World/Chunk.h>
-
-#include <utility>
-#include <Debug.h>
 
 Framework::Helper::Types::SafePtr<Framework::Helper::GameObject> Framework::Helper::World::Scene::Instance(const std::string& name) {
     if (Debug::GetLevel() >= Debug::Level::High)

@@ -54,13 +54,17 @@ namespace Framework::Helper {
         SR_NODISCARD Path GetFolder() const { return m_path; }
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
+        SR_NODISCARD Path FileDialog() const;
+        SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;
+        SR_NODISCARD bool IsSubPath(const Path& subPath) const;
         SR_NODISCARD bool Exists() const;
 
         SR_NODISCARD Type GetType() const;
         SR_NODISCARD bool IsDir() const;
+        SR_NODISCARD bool IsAbs() const;
         SR_NODISCARD bool IsFile() const;
 
         SR_NODISCARD std::vector<Path> GetFiles() const;

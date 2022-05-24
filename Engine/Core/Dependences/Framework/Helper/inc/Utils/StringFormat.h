@@ -6,6 +6,7 @@
 #define GAMEENGINE_STRINGFORMAT_H
 
 #include <Debug.h>
+#include <Math/Mathematics.h>
 
 namespace Framework::Helper {
     template<typename T> std::string ToString(const T& value) {

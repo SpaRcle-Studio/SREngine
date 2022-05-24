@@ -166,19 +166,32 @@ namespace Framework::Graphics {
                             break;
                     }
 
-                    if ((wParam != SIZE_MINIMIZED)) {
-                        if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
+                    if (wParam != SIZE_MINIMIZED) {
+                        if (wParam == SIZE_MAXIMIZED || wParam == SIZE_RESTORED) {
                             m_surfaceWidth = LOWORD(lParam);
                             m_surfaceHeight = HIWORD(lParam);
 
+                            if (m_surfaceWidth != 0 && m_styleState != StyleState::Changing) {
+                                m_width = m_surfaceWidth;
+                            }
+
+                            if (m_surfaceHeight != 0 && m_styleState != StyleState::Changing) {
+                                m_height = m_headerEnabled ? m_surfaceHeight + 30 : m_surfaceHeight;
+                            }
+
                             m_resizeReason = ResizeReason::None;
 
-                            this->m_callback_resize(this, GetSurfaceWidth(), GetSurfaceHeight());
+                            m_callback_resize(this, GetSurfaceWidth(), GetSurfaceHeight());
                         }
-                    } else {
+                    }
+                    else {
+                        m_width = 0;
+                        m_height = 0;
+
                         m_surfaceWidth = 0;
                         m_surfaceHeight = 0;
-                        this->m_callback_resize(this, GetSurfaceWidth(), GetSurfaceHeight());
+
+                        m_callback_resize(this, GetSurfaceWidth(), GetSurfaceHeight());
                     }
 
                     m_collapsed = m_surfaceWidth == 0 || m_surfaceHeight == 0;
@@ -259,11 +272,13 @@ namespace Framework::Graphics {
                 return;
             }
 
+            m_styleState = StyleState::Changing;
+
             m_headerEnabled = enable;
 
             // костыль, чтобы окно всегда получало событие WM_SIZE, не зависимо от того,
             // изменился ли размер, иначе будет deadlock
-            SendMessage(m_hWnd, WM_SIZE, 0, 0);
+            // SendMessage(m_hWnd, WM_SIZE, 0, 0);
 
             if (m_headerEnabled) {
                 m_dwStyle |= WS_CAPTION;
@@ -275,21 +290,27 @@ namespace Framework::Graphics {
                 m_dwStyle &= ~WS_SYSMENU;
             }
 
-            SetWindowLong(m_hWnd, GWL_STYLE, m_dwStyle);
-            ShowWindow(m_hWnd, 1);
-            UpdateWindow(m_hWnd);
 
-            Resize(m_absWidth, m_absHeight);
+            SetWindowLong(m_hWnd, GWL_STYLE, m_dwStyle);
+            UpdateWindow(m_hWnd); 
+
+            m_styleState = StyleState::Changed;
+
+            Resize(m_width, m_height);
             Centralize();
+
+            ShowWindow(m_hWnd, SW_SHOW);
         }
 
         void Centralize() override {
-            auto screenSize = this->GetScreenResolution();
+            auto screenSize = GetScreenResolution();
 
-            auto posX = (screenSize.x / 2 - m_absWidth / 2);
-            auto posY = (screenSize.y / 2 - m_absHeight / 2);
+            uint32_t headerSize = m_headerEnabled ? 30 : 0;
 
-            this->Move(posX, posY);
+            auto posX = (screenSize.x / 2 - m_width / 2);
+            auto posY = (screenSize.y / 2 - m_height / 2);
+
+            Move(posX, posY);
         }
 
         void Resize(uint32_t w, uint32_t h) override {
@@ -299,7 +320,7 @@ namespace Framework::Graphics {
                 .left = 0L,
                 .top = 0,
                 .right = static_cast<LONG>(m_headerEnabled ? w + 8 : w /* + 7 */),
-                .bottom = static_cast<LONG>(h /* + 1 */)
+                .bottom = static_cast<LONG>(m_headerEnabled ? h + 1 : h)
             };
 
             AdjustWindowRectEx(&newRect, m_dwStyle, FALSE, m_dwExStyle);
@@ -361,10 +382,10 @@ namespace Framework::Graphics {
         }
 
         [[nodiscard]] uint32_t GetWidth()  const override {
-            return GetSize().x;
+            return m_width;//GetSize().x;
         }
         [[nodiscard]] uint32_t GetHeight() const override {
-            return GetSize().y;
+            return m_height;//GetSize().y;
         }
 
         [[nodiscard]] Helper::Math::IVector2 GetScreenResolution() const override {
@@ -400,8 +421,8 @@ namespace Framework::Graphics {
         bool Create(const char* name, int32_t posX, int32_t posY, uint32_t sizeX, uint32_t sizeY, bool fullscreen, bool resizable) override {
             this->m_hInst = GetModuleHandleA(nullptr);
 
-            m_absWidth = sizeX;
-            m_absHeight = sizeY;
+            m_width = sizeX;
+            m_height = sizeY;
 
             sizeY = AbsHeightToWin32(sizeY, m_headerEnabled);
 

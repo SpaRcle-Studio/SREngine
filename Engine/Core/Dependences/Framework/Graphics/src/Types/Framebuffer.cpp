@@ -7,12 +7,18 @@
 #include <Render/Shader.h>
 
 namespace SR_GTYPES_NS {
+    Framebuffer::Framebuffer()
+        : Super(typeid(Framebuffer).name(), true /** auto destroy */)
+    { }
+
     Framebuffer::~Framebuffer() {
         SRAssert(m_frameBuffer == SR_ID_INVALID);
 
         for (auto&& color : m_colors) {
             SRAssert(color == SR_ID_INVALID);
         }
+
+        SRAssert(m_shader);
     }
 
     Framebuffer *Framebuffer::Create(uint32_t images, const Math::IVector2 &size) {
@@ -27,8 +33,8 @@ namespace SR_GTYPES_NS {
         fbo->SetSize(size);
         fbo->SetImagesCount(images);
 
-        if (!shaderPath.empty() && (fbo->m_shader = Shader::Load(shaderPath))) {
-            fbo->m_shader->AddUsePoint();
+        if (!shaderPath.empty()) {
+            fbo->InitShader(shaderPath);
         }
 
         return fbo;
@@ -57,6 +63,21 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
+    bool Framebuffer::InitShader(const std::string& path) {
+        if (!m_shader) {
+            if (!(m_shader = Shader::Load(path))) {
+                m_hasErrors = false;
+                return false;
+            }
+
+            m_shader->AddUsePoint();
+        }
+
+
+
+        return true;
+    }
+
     void Framebuffer::Free() {
         if (!m_isInit) {
             return;
@@ -65,7 +86,7 @@ namespace SR_GTYPES_NS {
         auto&& environment = Environment::Get();
 
         if (m_frameBuffer != SR_ID_INVALID) {
-            SRVerifyFalse(environment->FreeFBO(m_frameBuffer));
+            SRVerifyFalse(!environment->FreeFBO(m_frameBuffer));
             m_frameBuffer = SR_ID_INVALID;
         }
 
@@ -74,7 +95,7 @@ namespace SR_GTYPES_NS {
                 continue;
             }
 
-            SRVerifyFalse(environment->FreeTexture(color));
+            SRVerifyFalse(!environment->FreeTexture(color));
 
             color = SR_ID_INVALID;
         }
@@ -119,7 +140,7 @@ namespace SR_GTYPES_NS {
 
     void Framebuffer::SetImagesCount(uint32_t count) {
         if (m_isInit) {
-            SRVerifyFalse2(false, "Frame buffer are initialized!");
+            SRHalt("Frame buffer are initialized!");
             return;
         }
 
@@ -129,7 +150,9 @@ namespace SR_GTYPES_NS {
     bool Framebuffer::BeginRender() {
         auto&& env = Environment::Get();
 
-        env->BeginRender();
+        if (!env->BeginRender()) {
+            return false;
+        }
 
         env->SetViewport(m_size.x, m_size.y);
         env->SetScissor(m_size.x, m_size.y);
@@ -146,13 +169,8 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        if (!m_shader) {
-            if (!(m_shader = Shader::Load("Engine/framebuffer.srsl"))) {
-                m_hasErrors = false;
-                return;
-            }
-
-            m_shader->AddUsePoint();
+        if ((!m_shader || m_dirtyShader) && InitShader("Engine/framebuffer.srsl")) {
+            return;
         }
 
         auto&& env = Environment::Get();
@@ -166,5 +184,14 @@ namespace SR_GTYPES_NS {
         env->Draw(3);
 
         m_shader->UnUse();
+    }
+
+    void Framebuffer::OnResourceUpdated(IResource* pResource, int32_t deep) {
+        if (dynamic_cast<Shader*>(pResource) == m_shader && m_shader) {
+            m_dirtyShader = true;
+            m_hasErrors = false;
+        }
+
+        Super::UpdateResources(deep);
     }
 }

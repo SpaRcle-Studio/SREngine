@@ -11,7 +11,7 @@ namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
 }
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Mesh3D final : public IndexedMesh {
         friend class Memory::MeshAllocator;
     private:
@@ -33,7 +33,6 @@ namespace SR_GRAPH_NS::Types {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     private:
-        void UpdateUBO() override;
         bool Calculate() override;
         bool FreeVideoMemory() override;
         void DrawVulkan() override;

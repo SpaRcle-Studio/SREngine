@@ -6,8 +6,8 @@
 #define SRENGINE_GUIZMO_H
 
 #include <Utils/NonCopyable.h>
-#include <EntityComponentSystem/GameObject.h>
-#include <EntityComponentSystem/Transform3D.h>
+#include <ECS/GameObject.h>
+#include <ECS/Transform3D.h>
 #include <Math/Vector3.h>
 #include <Input/InputSystem.h>
 

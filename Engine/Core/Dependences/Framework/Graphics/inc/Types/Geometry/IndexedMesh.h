@@ -18,8 +18,8 @@ namespace SR_GRAPH_NS::Types {
         { }
 
     public:
-        template<bool fast> [[nodiscard]] int32_t GetIBO();
-        template<bool fast> [[nodiscard]] int32_t GetVBO();
+        template<bool fast> SR_NODISCARD int32_t GetIBO();
+        template<bool fast> SR_NODISCARD int32_t GetVBO();
 
         SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }

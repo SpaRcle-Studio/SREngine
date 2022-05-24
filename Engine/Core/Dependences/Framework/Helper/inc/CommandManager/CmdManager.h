@@ -6,37 +6,37 @@
 #define SRENGINE_CMDMANAGER_H
 
 #include <Types/Thread.h>
-#include <CommandManager/ICommand.h>
+#include <CommandManager/ReversibleCommand.h>
 
-namespace Framework::Helper {
-    typedef std::function<ICommand*(void)> CmdAllocator;
+namespace SR_UTILS_NS {
+    typedef std::function<ReversibleCommand*(void)> CmdAllocator;
     typedef std::unordered_map<std::string, CmdAllocator> CmdAllocators;
 
     enum class SyncType {
         Sync, Async, Force
     };
 
-    class CmdManager {
+    class CmdManager : SR_UTILS_NS::NonCopyable {
     private:
         enum class CmdType {
             Redo, Undo
         };
 
         struct Cmd {
-            ICommand* m_cmd;
+            ReversibleCommand* m_cmd;
             CmdType m_type;
         };
 
     public:
         CmdManager() = default;
-        ~CmdManager() = default;
+        ~CmdManager() override = default;
 
     public:
         [[nodiscard]] std::string GetLastCmdName() const;
-        [[nodiscard]] ICommand* MakeCommand(const std::string& id) const;
+        [[nodiscard]] ReversibleCommand* MakeCommand(const std::string& id) const;
         [[nodiscard]] bool IsRun() const { return m_isRun; }
         bool MakeAndExecute(const std::string& id, SyncType sync);
-        bool Execute(ICommand* cmd, SyncType sync);
+        bool Execute(ReversibleCommand* cmd, SyncType sync);
         bool Redo();
         bool Cancel();
         bool RegisterCommand(const std::string& id, const CmdAllocator& allocator);
@@ -45,21 +45,21 @@ namespace Framework::Helper {
         bool Close();
 
     private:
-        bool ExecuteImpl(ICommand* cmd, SyncType sync);
-        bool Execute(ICommand* cmd);
-        bool Cancel(ICommand* cmd);
+        bool ExecuteImpl(ReversibleCommand* cmd, SyncType sync);
+        bool Execute(ReversibleCommand* cmd);
+        bool Cancel(ReversibleCommand* cmd);
         bool DoCmd(const Cmd& cmd);
         void ClearHistory();
 
     private:
         std::queue<Cmd> m_commands;
-        std::vector<ICommand*> m_history;
+        std::vector<ReversibleCommand*> m_history;
         uint32_t m_historyPC = UINT32_MAX;
         uint32_t m_maxHistorySize = 0;
 
         CmdAllocators m_allocators;
         mutable std::mutex m_mutex;
-        Types::Thread::Ptr m_thread;
+        Types::Thread::Ptr m_thread{};
         std::atomic<bool> m_isRun;
         std::string m_lastCmdName;
 

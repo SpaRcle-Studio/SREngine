@@ -42,6 +42,7 @@
 #include "../Graphics/src/Font/Text.cpp"
 
 #include "../Graphics/src/Render/Camera.cpp"
+#include "../Graphics/src/Render/RenderScene.cpp"
 #include "../Graphics/src/Render/ColorBuffer.cpp"
 #include "../Graphics/src/Render/MeshCluster.cpp"
 #include "../Graphics/src/Render/PostProcessing.cpp"
@@ -62,5 +63,6 @@
 #include "../Graphics/src/Types/Mesh.cpp"
 #include "../Graphics/src/Types/Skybox.cpp"
 #include "../Graphics/src/Types/Texture.cpp"
+#include "../Graphics/src/Types/GraphicsCommand.cpp"
 
 #include "../Graphics/src/Window/Window.cpp"

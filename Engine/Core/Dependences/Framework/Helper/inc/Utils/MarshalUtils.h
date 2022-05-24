@@ -5,8 +5,7 @@
 #ifndef SRENGINE_MARSHALUTILS_H
 #define SRENGINE_MARSHALUTILS_H
 
-#include <Debug.h>
-
+#include <Utils/StringFormat.h>
 #include <Math/Vector3.h>
 #include <Math/Vector4.h>
 

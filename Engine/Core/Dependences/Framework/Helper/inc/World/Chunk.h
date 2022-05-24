@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_CHUNK_H
 #define GAMEENGINE_CHUNK_H
 
-#include <EntityComponentSystem/GameObject.h>
+#include <ECS/GameObject.h>
 #include <Math/Vector2.h>
 #include <Types/SafePointer.h>
 #include <World/Observer.h>

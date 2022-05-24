@@ -8,7 +8,7 @@
 #include <Environment/PipeLine.h>
 #include <Utils/Enumerations.h>
 #include <ResourceManager/IResource.h>
-#include <EntityComponentSystem/Component.h>
+#include <ECS/Component.h>
 
 namespace SR_UTILS_NS::Types {
     class RawMesh;
@@ -20,7 +20,7 @@ namespace SR_GRAPH_NS {
     class Environment;
 }
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Material;
 
     SR_ENUM_CLASS(MeshType,
@@ -54,7 +54,6 @@ namespace SR_GRAPH_NS::Types {
 
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
-        virtual void UpdateUBO() { }
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();
@@ -92,6 +91,7 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD uint32_t GetDescriptorSet()   const { return m_descriptorSet; }
         SR_NODISCARD uint32_t GetUBO()             const { return m_UBO; }
         SR_NODISCARD std::string GetResourcePath() const override;
+        SR_NODISCARD bool HaveDefMaterial()        const;
 
         void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }

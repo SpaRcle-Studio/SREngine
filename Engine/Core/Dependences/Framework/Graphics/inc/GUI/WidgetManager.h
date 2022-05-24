@@ -5,7 +5,7 @@
 #ifndef SRENGINE_WIDGETMANAGER_H
 #define SRENGINE_WIDGETMANAGER_H
 
-#include <macros.h>
+#include <Types/Thread.h>
 #include <Utils/NonCopyable.h>
 #include <Utils/Singleton.h>
 #include <mutex>
@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS::GUI {
         void OnKeyUp(const Helper::KeyUpEvent& event) override;
 
     private:
-        std::mutex m_mutex;
+        SR_HTYPES_NS::Thread::Mutex m_mutex;
         Widgets m_widgets;
         bool m_ignoreNonFocused;
 

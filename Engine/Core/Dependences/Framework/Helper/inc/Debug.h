@@ -126,7 +126,7 @@ namespace SR_UTILS_NS {
     #define SRAssert1(expr) SRAssert(expr)
     #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
     #define SRAssert2Once(expr, msg) (SR_NOOP)
-    #define SRVerifyFalse2(expr, msg) (!(!!(expr)))
+    #define SRVerifyFalse2(expr, msg) ((!!(expr)))
 #endif
 
 #ifdef SR_DEBUG
@@ -138,7 +138,7 @@ namespace SR_UTILS_NS {
     #define SRAssert1(expr) SRAssert2(expr, #expr)
     #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
 
-    #define SRVerifyFalse2(expr, msg) (!(!!(expr) || Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg))))
+    #define SRVerifyFalse2(expr, msg) ((!(expr) || Framework::Helper::Debug::Assert(SR_MAKE_ASSERT(msg))))
 
     #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, Framework::Helper::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
 
@@ -149,5 +149,6 @@ namespace SR_UTILS_NS {
 
 #define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
+#define SRHalt(msg) SRAssert2(false, msg)
 
 #endif //HELPER_DEBUG_H

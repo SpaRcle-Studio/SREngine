@@ -6,6 +6,7 @@
 
 #include <Render/Implementations/VulkanRender.h>
 #include <Render/Implementations/OpenGLRender.h>
+#include <Render/Render.h>
 
 SR_GRAPH_NS::Render* SR_GRAPH_NS::RenderManager::Allocate(const std::string& name) {
     Render* render = nullptr;

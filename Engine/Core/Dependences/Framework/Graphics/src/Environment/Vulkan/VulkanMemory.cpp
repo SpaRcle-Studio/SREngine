@@ -129,27 +129,27 @@ bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t
 }
 
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeVBO(uint32_t ID) {
-    SRVerifyFalse(--m_countVBO.second >= 0);
+    SRVerifyFalse(--m_countVBO.second < 0);
     return FreeMemory(ID, m_countVBO.first, m_VBOs);
 }
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeUBO(uint32_t ID) {
-    SRVerifyFalse(--m_countUBO.second >= 0);
+    SRVerifyFalse(--m_countUBO.second < 0);
     return FreeMemory(ID, m_countUBO.first, m_UBOs);
 }
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeIBO(uint32_t ID) {
-    SRVerifyFalse(--m_countIBO.second >= 0);
+    SRVerifyFalse(--m_countIBO.second < 0);
     return FreeMemory(ID, m_countIBO.first, m_IBOs);
 }
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeFBO(uint32_t ID) {
-    SRVerifyFalse(--m_countFBO.second >= 0);
+    SRVerifyFalse(--m_countFBO.second < 0);
     return FreeMemory(ID, m_countFBO.first, m_FBOs);
 }
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeShaderProgram(uint32_t ID) {
-    SRVerifyFalse(--m_countShaderPrograms.second >= 0);
+    SRVerifyFalse(--m_countShaderPrograms.second < 0);
     return FreeMemory(ID, m_countShaderPrograms.first, m_ShaderPrograms);
 }
 bool Framework::Graphics::VulkanTools::MemoryManager::FreeTexture(uint32_t ID) {
-    SRVerifyFalse(--m_countTextures.second >= 0);
+    SRVerifyFalse(--m_countTextures.second < 0);
     return FreeMemory(ID, m_countTextures.first, m_textures);
 }
 

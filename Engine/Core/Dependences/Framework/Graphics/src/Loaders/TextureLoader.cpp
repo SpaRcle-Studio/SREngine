@@ -12,34 +12,31 @@
 
 #include <Debug.h>
 
-SR_GTYPES_NS::Texture *Framework::Graphics::TextureLoader::Load(std::string path) {
-#ifdef WIN32
-    path = Helper::StringUtils::MakePath(path, true);
-#else
-    path = StringUtils::MakePath(path, false);
-#endif
-
-    SR_GTYPES_NS::Texture* texture = nullptr;
-
-    {
-        int width, height, numComponents;
-
-        unsigned char* imgData = stbi_load(path.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
-
-        if (!imgData) {
-            SR_ERROR("TextureLoader::Load() : can not load \""+path + "\" file!");
-            return texture;
-        }
-
-        texture = new SR_GTYPES_NS::Texture();
-
-        texture->m_height = height;
-        texture->m_width  = width;
-        texture->m_data   = imgData;
-        texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
+bool Framework::Graphics::TextureLoader::Load(Types::Texture* texture, std::string path) {
+    if (!SRVerifyFalse(!texture)) {
+        return false;
     }
 
-    return texture;
+    if (!SRVerifyFalse2(texture->m_data, "Texture already loaded!")) {
+        return false;
+    }
+
+    int width, height, numComponents;
+
+    unsigned char* imgData = stbi_load(path.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
+
+    if (!imgData) {
+        SR_ERROR("TextureLoader::Load() : can not load \"" + path + "\" file!");
+        return false;
+    }
+
+    texture->m_height     = height;
+    texture->m_width      = width;
+    texture->m_channels   = numComponents;
+    texture->m_data       = imgData;
+    texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
+
+    return true;
 }
 
 bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
@@ -54,6 +51,7 @@ bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
         SR_ERROR("TextureLoader::Free() : data is nullptr!");
         return false;
     }
+
     return true;
 }
 
@@ -61,33 +59,32 @@ SR_GTYPES_NS::Texture *Framework::Graphics::TextureLoader::GetDefaultTexture() n
     return nullptr;
 }
 
-SR_GTYPES_NS::Texture *Framework::Graphics::TextureLoader::LoadFromMemory(const std::string& data) {
-    SR_GTYPES_NS::Texture* texture = nullptr;
-
-    {
-        int width, height, numComponents;
-
-        unsigned char* imgData = stbi_load_from_memory(
-                reinterpret_cast<const stbi_uc*>(data.c_str()),
-                data.size(), &width, &height, &numComponents, STBI_rgb_alpha
-        );
-
-        if (!imgData) {
-            std::string reason;
-            if (stbi_failure_reason())
-                reason = stbi_failure_reason();
-
-            SR_ERROR("TextureLoader::LoadFromMemory() : can not load texture from memory!\n\tReason: " + reason);
-            return texture;
-        }
-
-        texture = new Types::Texture();
-
-        texture->m_height = height;
-        texture->m_width  = width;
-        texture->m_data   = imgData;
-        texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
+bool Framework::Graphics::TextureLoader::LoadFromMemory(Types::Texture* texture, const std::string& data) {
+    if (!SRVerifyFalse(!texture)) {
+        return false;
     }
 
-    return texture;
+    int width, height, numComponents;
+
+    unsigned char* imgData = stbi_load_from_memory(
+            reinterpret_cast<const stbi_uc*>(data.c_str()),
+            data.size(), &width, &height, &numComponents, STBI_rgb_alpha
+    );
+
+    if (!imgData) {
+        std::string reason;
+        if (stbi_failure_reason())
+            reason = stbi_failure_reason();
+
+        SR_ERROR("TextureLoader::LoadFromMemory() : can not load texture from memory!\n\tReason: " + reason);
+
+        return false;
+    }
+
+    texture->m_height = height;
+    texture->m_width  = width;
+    texture->m_data   = imgData;
+    texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
+
+    return true;
 }

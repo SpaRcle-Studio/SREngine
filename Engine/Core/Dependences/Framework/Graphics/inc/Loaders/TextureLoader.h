@@ -21,8 +21,8 @@ namespace Framework::Graphics {
     public:
         static Types::Texture* GetDefaultTexture() noexcept;
     public:
-        static Types::Texture* Load(std::string path);
-        static Types::Texture* LoadFromMemory(const std::string& data);
+        static bool Load(Types::Texture* texture, std::string path);
+        static bool LoadFromMemory(Types::Texture* texture, const std::string& data);
         static bool Free(unsigned char* data);
     };
 }

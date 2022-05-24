@@ -20,8 +20,10 @@ namespace SR_UTILS_NS::Types {
         delete m_importer;
     }
 
-    RawMesh *RawMesh::Load(const std::string &path) {
+    RawMesh *RawMesh::Load(const std::string &rawPath) {
         SR_GLOBAL_LOCK
+
+        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetModelsPath());
 
         if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
             return pResource;
@@ -32,7 +34,7 @@ namespace SR_UTILS_NS::Types {
         pMesh->SetId(path, false /** auto register */);
 
         if (!pMesh->Load()) {
-            SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path);
+            SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
             delete pMesh;
             return nullptr;
         }
@@ -44,7 +46,7 @@ namespace SR_UTILS_NS::Types {
     }
 
     bool RawMesh::Unload() {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         bool hasErrors = !IResource::Unload();
 
@@ -54,16 +56,19 @@ namespace SR_UTILS_NS::Types {
     }
 
     bool RawMesh::Load() {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         bool hasErrors = !IResource::Load();
 
-        const auto&& path = ResourceManager::Instance().GetModelsPath().Concat(GetResourceId());
+        Path&& path = Path(GetResourceId());
+        if (!path.IsAbs()) {
+            path = ResourceManager::Instance().GetModelsPath().Concat(path);
+        }
 
         /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
 
         m_scene = m_importer->ReadFile(path.ToString(),
-                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale
+                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale | aiProcess_GenUVCoords | aiProcess_TransformUVCoords
         );
 
         /*for (unsigned int index = 0; index < m_scene->mMetaData->mNumProperties; ++index) {
@@ -83,7 +88,7 @@ namespace SR_UTILS_NS::Types {
         }*/
 
         if (!m_scene) {
-            SR_ERROR("RawMesh::Load() : failed to read file! Path: " + path.ToString());
+            SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
             hasErrors |= true;
         }
 

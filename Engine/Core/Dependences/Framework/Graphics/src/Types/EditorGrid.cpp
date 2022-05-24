@@ -59,9 +59,9 @@ void Framework::Graphics::EditorGrid::Free() {
         m_shader = nullptr;
     }
 
-    if (VAO && !m_env->FreeVAO(VAO)) {
-        SR_ERROR("EditorGrid::Free() : failed to free VAO!");
-    }
+    //if (VAO && !m_env->FreeVAO(VAO)) {
+    //    SR_ERROR("EditorGrid::Free() : failed to free VAO!");
+    //}
 
     delete this;
 }

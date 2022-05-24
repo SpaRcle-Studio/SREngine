@@ -22,7 +22,7 @@ namespace SR_HTYPES_NS {
     }
 
     Thread::Ptr Thread::Factory::Create(std::thread thread) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         auto&& pThread = new Thread(std::move(thread));
 
@@ -51,7 +51,7 @@ namespace SR_HTYPES_NS {
     }
 
     Thread::Ptr Thread::Factory::GetThisThread() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         if (auto&& pIt = m_threads.find(SR_UTILS_NS::GetThisThreadId()); pIt != m_threads.end()) {
             return pIt->second;
@@ -75,7 +75,8 @@ namespace SR_HTYPES_NS {
     }
 
     uint32_t Thread::Factory::GetThreadsCount() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
+
         return m_threads.size();
     }
 }

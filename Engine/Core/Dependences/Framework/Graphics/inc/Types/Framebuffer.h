@@ -6,20 +6,21 @@
 #define SRENGINE_FRAMEBUFFER_H
 
 #include <Debug.h>
-#include <Utils/NonCopyable.h>
 #include <Math/Vector2.h>
+#include <ResourceManager/IResource.h>
 
 namespace SR_GRAPH_NS {
     class Shader;
 }
 
 namespace SR_GTYPES_NS {
-    class Framebuffer : SR_UTILS_NS::NonCopyable {
+    class Framebuffer : SR_UTILS_NS::IResource {
     public:
         using Ptr = Framebuffer*;
+        using Super = SR_UTILS_NS::IResource;
 
     private:
-        Framebuffer() = default;
+        Framebuffer();
         ~Framebuffer() override;
 
     public:
@@ -37,16 +38,21 @@ namespace SR_GTYPES_NS {
         void SetSize(const SR_MATH_NS::IVector2& size);
         void SetImagesCount(uint32_t count);
 
+    protected:
+        void OnResourceUpdated(IResource* pResource, int32_t deep) override;
+
     private:
         bool Init();
         bool OnResize();
+        bool InitShader(const std::string& path);
 
     private:
         Shader*              m_shader      = nullptr;
 
         bool                 m_isInit      = false;
-        bool                 m_hasErrors   = false;
+        std::atomic<bool>    m_hasErrors   = false;
         std::atomic<bool>    m_needResize  = false;
+        std::atomic<bool>    m_dirtyShader = false;
 
         std::vector<int32_t> m_colors      = { };
         int32_t              m_depth       = -1;

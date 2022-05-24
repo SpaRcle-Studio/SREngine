@@ -1,0 +1,41 @@
+ShaderType Compute;
+
+struct Buffer {
+    vec4 data;
+}
+
+uniform float gravity1        = 1000.0;
+uniform vec3  blackHolePos1   = vec3(5,0,0);
+uniform float gravity2        = 1000.0;
+uniform vec3  blackHolePos2   = vec3(-5,0,0);
+uniform float particleInvMass = 1.0 / 0.1;
+uniform float deltaT          = 0.0005;
+uniform float maxDist         = 45.0;
+
+readonly buffer Buffer colors;
+buffer vec4 position;
+buffer Buffer velocity;
+
+void kernel() {
+    int idx = GLOBAL_INVOCATION_ID.x;
+
+    vec3 p = position[idx].xyz;
+
+    vec3 d = blackHolePos1 - p;
+    float dist  = length(d);
+    vec3 force = (gravity1 / dist) * normalize(d);
+
+    d = blackHolePos2 - p;
+    dist = length(d);
+    force += (gravity2 / dist) * normalize(d);
+
+    if (dist > maxDist) {
+        position[idx] = vec4(0, 0, 0, 1);
+    }
+    else {
+        vec3 a = force * particleInvMass;
+
+        position[idx] = vec4(p + velocity[idx].xyz * deltaT + 0.5 * a * deltaT * deltaT, 1.0);
+        velocity[idx] = vec4(velocity[idx].xyz + a * deltaT, 0.0 );
+    }
+}

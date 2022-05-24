@@ -11,9 +11,9 @@
        <AutoReloadResources Value="true"/>
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
-       <EditorWidgetsDocking Value="true"/>
+       <EditorWidgetsDocking Value="false"/>
        <InputIgnoreNonFocusedWidgets Value="false"/>
        <UpdateNonHoveredSceneViewer Value="true"/>
-       <VulkanValidation Value="true"/>
+       <VulkanValidation Value="false"/>
    </Common>
 </Features>

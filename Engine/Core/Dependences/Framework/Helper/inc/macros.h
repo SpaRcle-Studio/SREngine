@@ -49,12 +49,16 @@
         ptr = nullptr;          \
     }                           \
 
+#define SR_COMBINE_HELPER(X, Y) X##Y
+#define SR_COMBINE(X, Y) SR_COMBINE_HELPER(X, Y)
 #define SR_FASTCALL_ATTRIBUTE __attribute__((fastcall))
 #define SR_FASTCALL __fastcall
 #define SR_CONSTEXPR constexpr
 #define SR_FORCE_INLINE __forceinline
 #define SR_NODISCARD [[nodiscard]]
 #define SR_FALLTHROUGH [[fallthrough]]
+#define SR_MAYBE_UNUSED [[maybe_unused]]
+#define SR_MAYBE_UNUSED_VAR [[maybe_unused]] auto&& SR_COMBINE(unused_var, __LINE__) =
 #define SR_INLINE inline
 #define SR_INLINE_STATIC SR_INLINE static
 #define SR_NULL 0
@@ -119,6 +123,7 @@
 #define SR_GTYPES_NS SR_GRAPH_NS::Types
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
+#define SR_SCRIPTING_NS Framework::Scripting
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 

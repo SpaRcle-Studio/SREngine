@@ -354,21 +354,21 @@ namespace SR_GRAPH_NS {
     void Window::DrawToCamera(Camera* camera) {
         m_render->SetCurrentCamera(camera);
 
-        camera->GetPostProcessing()->BeginGeometry();
+        //camera->GetPostProcessing()->BeginGeometry();
         {
             m_render->DrawGeometry();
             m_render->DrawTransparentGeometry();
         }
-        camera->GetPostProcessing()->EndGeometry();
+        //camera->GetPostProcessing()->EndGeometry();
 
-        camera->GetPostProcessing()->BeginSkybox();
+        //camera->GetPostProcessing()->BeginSkybox();
         {
             m_render->DrawSkybox();
             m_render->DrawGrid();
         }
-        camera->GetPostProcessing()->EndSkybox();
+        //camera->GetPostProcessing()->EndSkybox();
 
-        camera->GetPostProcessing()->Complete();
+        //camera->GetPostProcessing()->Complete();
     }
 
     void Window::CentralizeCursor() noexcept {
@@ -511,6 +511,8 @@ namespace SR_GRAPH_NS {
         SR_SYSTEM_LOG("Window::SyncFreeResources() : synchronizing resources...");
 
         std::atomic<bool> syncComplete(false);
+
+        m_render->SetSkybox(nullptr);
 
         /** Ждем, пока все графические ресурсы не освободятся */
         auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
@@ -728,15 +730,12 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        for (auto &&camera : m_cameras.GetElements())
-            camera->PoolEvents();
-
         if (m_env->IsNeedReBuild()) {
             m_render->SetCurrentCamera(m_cameras.Front());
 
             m_env->ClearFramebuffersQueue();
 
-            /*static auto fbo = Types::Framebuffer::Create(1, { 500, 500 });
+            /*static auto fbo = Types::Framebuffer::Create(1, { 10, 10 });
 
             {
                 fbo->Bind();
@@ -762,6 +761,7 @@ namespace SR_GRAPH_NS {
                     //fbo->Draw();
 
                     m_render->DrawGeometry();
+                    m_render->DrawSkybox();
                 }
                 m_env->EndRender();
             }
@@ -776,9 +776,6 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::DrawOpenGL() {
-        for (auto&& camera : m_cameras.GetElements())
-            camera->PoolEvents();
-
         m_env->ClearBuffers();
 
         {
@@ -803,5 +800,13 @@ namespace SR_GRAPH_NS {
         }
 
         m_env->SwapBuffers();
+    }
+
+    bool Window::IsFullScreen() const {
+        return m_env->IsFullScreen();
+    }
+
+    SR_MATH_NS::IVector2 Window::GetWindowSize() const {
+        return m_env->GetWindowSize();
     }
 }

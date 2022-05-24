@@ -111,11 +111,11 @@ namespace SR_UTILS_NS {
     void IResource::RemoveDependency(IResource *pResource) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (SRVerifyFalse(m_dependencies.count(pResource) == 1)) {
+        if (!SRVerifyFalse(m_dependencies.count(pResource) == 0)) {
             return;
         }
 
-        if (SRVerifyFalse(pResource->m_parents.count(this) == 1)) {
+        if (!SRVerifyFalse(pResource->m_parents.count(this) == 0)) {
             return;
         }
 

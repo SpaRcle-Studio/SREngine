@@ -53,7 +53,7 @@ namespace SR_UTILS_NS {
         if (const auto& features = doc.Root().GetNode("Features")) {
             for (const auto& group : features.GetNodes()) {
                 for (const auto& feature : group.GetNodes()) {
-                    SRVerifyFalse(Register(group.Name(), feature.Name(), feature.GetAttribute("Value").ToBool(false)));
+                    SRVerifyFalse(!Register(group.Name(), feature.Name(), feature.GetAttribute("Value").ToBool(false)));
                 }
             }
         }

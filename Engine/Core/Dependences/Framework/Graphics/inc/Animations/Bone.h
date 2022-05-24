@@ -5,7 +5,8 @@
 #ifndef GAMEENGINE_BONE_H
 #define GAMEENGINE_BONE_H
 
-#include <EntityComponentSystem/Component.h>
+#include <ECS/Component.h>
+
 #include <Types/Mesh.h>
 #include <Render/Render.h>
 

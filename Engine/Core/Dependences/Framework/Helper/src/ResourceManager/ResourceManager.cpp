@@ -47,7 +47,7 @@ namespace SR_UTILS_NS {
         if (Debug::GetLevel() >= Debug::Level::High)
             SR_LOG("ResourceManager::Destroy() : destroying \""+ std::string(resource->m_resourceName) +"\"");
 
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         m_destroyed.emplace_back(resource);
 

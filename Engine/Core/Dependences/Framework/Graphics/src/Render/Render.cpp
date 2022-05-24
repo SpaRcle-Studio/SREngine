@@ -25,8 +25,8 @@ namespace SR_GRAPH_NS {
 
         m_window = window;
 
-        InsertShader(Shader::StandardID::Skybox, Shader::Load("skybox"));
-        InsertShader(Shader::StandardID::DebugWireframe, Shader::Load("debugWireframe"));
+        //InsertShader(Shader::StandardID::Skybox, Shader::Load("skybox"));
+        //InsertShader(Shader::StandardID::DebugWireframe, Shader::Load("debugWireframe"));
 
         m_grid = EditorGrid::Create("engine/grid", this);
 
@@ -99,17 +99,6 @@ namespace SR_GRAPH_NS {
             m_grid->Free();
         }
 
-        if (m_skybox.m_current) {
-            if (m_env->IsWindowOpen()) {
-                m_skybox.m_current->FreeVideoMemory();
-            }
-            else {
-                SR_WARN("Render::Close() : window is close, can't free skybox video memory!");
-            }
-            m_skybox.m_current->Free();
-            m_skybox.m_current = nullptr;
-        }
-
         m_isRun = false;
         m_isClose = true;
 
@@ -126,8 +115,20 @@ namespace SR_GRAPH_NS {
     }
 
     void Render::RegisterMesh(SR_GTYPES_NS::Mesh *mesh) {
-        SRAssert(mesh);
-        SRAssert(mesh->GetMaterial());
+        if (!SRVerifyFalse(!mesh)) {
+            return;
+        }
+
+        if (!mesh->GetMaterial()) {
+            SR_WARN("Render::RegisterMesh() : mesh have not material! Try use default material... \n\tMesh resource id: " + mesh->GetResourceId());
+            if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
+                mesh->SetMaterial(material);
+            }
+            else {
+                SR_ERROR("Render::RegisterMesh() : failed to get default material, something went wrong...");
+                return;
+            }
+        }
 
         if (!mesh->GetShader()) {
             SRAssert2(false, "Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
@@ -154,10 +155,10 @@ namespace SR_GRAPH_NS {
                 // Add mesh to transparent meshes array or usual mesh array
 
                 if (mesh->GetMaterial()->IsTransparent()) {
-                    SRVerifyFalse(m_transparentGeometry.Add(mesh));
+                    SRVerifyFalse(!m_transparentGeometry.Add(mesh));
                 }
                 else {
-                    SRVerifyFalse(m_geometry.Add(mesh));
+                    SRVerifyFalse(!m_geometry.Add(mesh));
                 }
             }
 
@@ -166,9 +167,7 @@ namespace SR_GRAPH_NS {
             needRebuild = true;
         }
 
-        while (!m_shadersToFree.empty()) {
-            const auto &shader = m_shadersToFree.front();
-
+        while (auto&& shader = m_shadersToFree.Pop(nullptr)) {
             SRAssert(shader->GetCountUses() == 0);
 
             shader->FreeVideoMemory();
@@ -178,7 +177,6 @@ namespace SR_GRAPH_NS {
             }
 
             needRebuild = true;
-            m_shadersToFree.pop();
         }
 
         //! Check meshes to remove from render
@@ -186,10 +184,10 @@ namespace SR_GRAPH_NS {
             const auto &mesh = m_removeMeshes.front();
 
             if (mesh->GetMaterial()->IsTransparent()) {
-                SRVerifyFalse2(m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+                SRVerifyFalse2(!m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
             }
             else {
-                SRVerifyFalse2(m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+                SRVerifyFalse2(!m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
             }
 
             if (mesh->IsCalculated())
@@ -202,7 +200,7 @@ namespace SR_GRAPH_NS {
         //! Free textures
         if (!m_texturesToFree.empty()) {
             for (auto& textureToFree : m_texturesToFree) {
-                Helper::Debug::Graph("Render::PoolEvents() : free texture \"" + textureToFree->GetName() + "\"");
+                Helper::Debug::Graph("Render::PoolEvents() : free texture \"" + textureToFree->GetResourceId() + "\"");
                 if (textureToFree->IsCalculated())
                     textureToFree->FreeVideoMemory();
 
@@ -215,50 +213,34 @@ namespace SR_GRAPH_NS {
             needRebuild = true;
         }
 
-        //! Free skyboxes
-        if (!m_skyboxesToFreeVidMem.empty()) {
-            Debug::Graph("Render::PoolEvents() : free skyboxes video memory...");
-            for (auto skybox : m_skyboxesToFreeVidMem) {
-                if (skybox == m_skybox.m_current)
-                    m_skybox.m_current = nullptr;
-
-                if (skybox == m_skybox.m_new) {
-                    Debug::Warn("Render::PoolEvents() : skybox installed as new but marked for removal!");
-                    m_skybox.m_new = nullptr;
-                }
-
-                if (!skybox->FreeVideoMemory())
-                    Debug::Error("Render::PoolEvents() : failed to free skybox video memory!");
-            }
-            m_skyboxesToFreeVidMem.clear();
-
-            needRebuild = true;
-        }
-
-        //! Set new skybox
-        if (m_skybox.m_new != m_skybox.m_current) {
-            m_skybox.m_current = m_skybox.m_new;
-        }
-
         if (needRebuild)
             m_env->SetBuildState(false);
     }
 
     void Render::SetSkybox(SR_GTYPES_NS::Skybox *skybox) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
+
+        if (skybox == m_skybox) {
+            return;
+        }
 
         if (skybox) {
-            SR_LOG("Render::SetSkybox() : set new \"" + skybox->GetName() + "\" skybox...");
+            SR_LOG("Render::SetSkybox() : set new \"" + skybox->GetResourceId() + "\" skybox...");
         }
         else {
             SR_LOG("Render::SetSkybox() : set a nullptr skybox...");
         }
 
-        skybox->SetRender(this);
-        if (m_skybox.m_current != skybox) {
-            m_skybox.m_new = skybox;
-            m_env->SetBuildState(false);
+        if (m_skybox) {
+            m_skybox->FreeVideoMemory();
+            m_skybox->RemoveUsePoint();
         }
+
+        if ((m_skybox = skybox)) {
+            m_skybox->AddUsePoint();
+        }
+
+        m_env->SetBuildState(false);
     }
 
     void Render::FreeTexture(SR_GTYPES_NS::Texture *texture) {
@@ -327,7 +309,7 @@ namespace SR_GRAPH_NS {
     ret:
         {
             std::lock_guard<std::recursive_mutex> lock(m_mutex);
-            empty = m_newMeshes.empty() && m_removeMeshes.empty() && m_texturesToFree.empty() && m_skyboxesToFreeVidMem.empty();
+            empty = m_newMeshes.empty() && m_removeMeshes.empty() && !m_skybox && m_texturesToFree.empty() && m_skyboxesToFreeVidMem.empty();
         }
 
         if (!empty) {
@@ -337,7 +319,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool Render::IsClean() {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         return m_newMeshes.empty() &&
                m_removeMeshes.empty() &&
@@ -346,7 +328,7 @@ namespace SR_GRAPH_NS {
                m_transparentGeometry.Empty() &&
                m_geometry.Empty() &&
                m_skyboxesToFreeVidMem.empty() &&
-               m_shadersToFree.empty();
+               m_shadersToFree.Empty();
     }
 
     void Framework::Graphics::Render::ReRegisterMesh(SR_GTYPES_NS::Mesh *mesh) {
@@ -355,7 +337,6 @@ namespace SR_GRAPH_NS {
     }
 
     void Render::FreeShader(Shader *shader) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-        m_shadersToFree.push(shader);
+        m_shadersToFree.Push(shader);
     }
 }

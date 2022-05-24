@@ -15,6 +15,7 @@
 #include <Render/MeshCluster.h>
 
 #include <Types/Geometry/IndexedMesh.h>
+#include <Types/SafeQueue.h>
 
 namespace SR_GRAPH_NS::Types {
     class Skybox;
@@ -70,7 +71,7 @@ namespace SR_GRAPH_NS {
         /** \brief Can get a nullptr value for removing skybox */
         void SetSkybox(SR_GTYPES_NS::Skybox* skybox);
         bool FreeSkyboxMemory(SR_GTYPES_NS::Skybox* skybox);
-        [[nodiscard]] SR_GTYPES_NS::Skybox* GetSkybox() const { return m_skybox.m_current; }
+        [[nodiscard]] SR_GTYPES_NS::Skybox* GetSkybox() const { return m_skybox; }
 
         void RegisterTexture(SR_GTYPES_NS::Texture* texture);
         void FreeTexture(SR_GTYPES_NS::Texture* texture);
@@ -107,7 +108,6 @@ namespace SR_GRAPH_NS {
         std::atomic<bool>             m_isClose                  = false;
 
         bool                          m_gridEnabled              = false;
-        bool                          m_skyboxEnabled            = true;
         bool                          m_wireFrame                = false;
 
         Window*                       m_window                   = nullptr;
@@ -124,10 +124,10 @@ namespace SR_GRAPH_NS {
         MeshCluster                   m_geometry                 = { };
         MeshCluster                   m_transparentGeometry      = { };
 
-        RenderSkybox                  m_skybox                   = { nullptr, nullptr };
+        Types::Skybox*                m_skybox                   = nullptr;
 
         std::vector<Shader*>          m_shaders                  = {};
-        std::queue<Shader*>           m_shadersToFree            = {};
+        SR_HTYPES_NS::SafeQueue<Shader*> m_shadersToFree         = {};
 
         ColorBuffer*                  m_colorBuffer              = nullptr;
         EditorGrid*                   m_grid                     = nullptr;

@@ -7,8 +7,7 @@
 #include <GUI.h>
 
 Framework::Graphics::Camera::Camera()
-    : m_env(Environment::Get())
-    , m_pipeline(Environment::Get()->GetPipeLine())
+    : m_pipeline(Environment::Get()->GetPipeLine())
 {
     SR_UTILS_NS::Component::Init<Camera>();
 }
@@ -19,15 +18,12 @@ void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shad
         return;
     }
 
-    if (m_needUpdate) {
-        if (!CompleteResize()) {
-            SR_ERROR("Camera::UpdateShaderProjView() : failed to complete resize!");
-            return;
-        }
-    }
-
-    //shader->SetMat4(SR_RU"viewMat", m_viewTranslateMat);
-    //shader->SetMat4("projMat", m_projection);
+    //if (m_needUpdate) {
+    //    if (!CompleteResize()) {
+   //         SR_ERROR("Camera::UpdateShaderProjView() : failed to complete resize!");
+    //        return;
+    //    }
+   // }
 }
 
 bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
@@ -77,9 +73,9 @@ void Framework::Graphics::Camera::UpdateView() noexcept {
 }
 
 void Framework::Graphics::Camera::OnRotate(const Math::FVector3& newValue) {
-    m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
-    m_pitch = float(newValue.x * 3.14 / 45.f / 4.f);
-    m_roll  = float(newValue.z * 3.14 / 45.f / 4.f);
+    m_yaw   = float_t(newValue.y * 3.14 / 45.f / 4.f);
+    m_pitch = float_t(newValue.x * 3.14 / 45.f / 4.f);
+    m_roll  = float_t(newValue.z * 3.14 / 45.f / 4.f);
 
     UpdateView();
 }
@@ -90,24 +86,22 @@ void Framework::Graphics::Camera::OnMove(const Math::FVector3& newValue) {
 }
 
 void Framework::Graphics::Camera::UpdateProjection() {
-    m_projection = glm::perspective(glm::radians(65.f), (float)m_cameraSize.x / (float)m_cameraSize.y, m_near.load(), m_far.load());
+    m_aspect = static_cast<float_t>(m_cameraSize.x) / static_cast<float_t>(m_cameraSize.y);
+    m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
 }
 
-void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
+void Framework::Graphics::Camera::UpdateProjection(uint32_t w, uint32_t h) {
     m_cameraSize = { (int32_t)w, (int32_t)h };
-    m_projection = glm::perspective(glm::radians(65.f), (float)w / (float)h, m_near.load(), m_far.load());
-    m_needUpdate = true;
+    m_aspect = static_cast<float_t>(w) / static_cast<float_t>(h);
+    m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
 }
 
 bool Framework::Graphics::Camera::Calculate() noexcept {
     if (m_isCalculate)
         return false;
 
-    Debug::Graph("Camera::Calculate() : calculating camera...");
+    SR_GRAPH_LOG("Camera::Calculate() : calculating camera...");
 
-    m_postProcessing->Init(m_window->GetRender());
-
-    m_needUpdate = true;
     m_isCalculate = true;
 
     return true;
@@ -121,23 +115,16 @@ void Framework::Graphics::Camera::OnDestroyGameObject() {
 }
 
 bool Framework::Graphics::Camera::Free() {
-    Debug::Graph("Camera::Free() : free camera pointer...");
-
-    m_postProcessing->Destroy();
-    m_postProcessing->Free();
+    SR_GRAPH_LOG("Camera::Free() : free camera pointer...");
 
     delete this;
     return true;
 }
 
 Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate(uint32_t width, uint32_t height) {
-    auto camera = new Camera();
-    camera->m_postProcessing = PostProcessing::Allocate(camera);
+    auto&& camera = new Camera();
     camera->m_cameraSize = { (int32_t)width, (int32_t)height };
-    if (!camera->m_postProcessing) {
-        Debug::Error("Camera::Allocate() : failed to allocate post processing!");
-        return nullptr;
-    }
+    camera->UpdateProjection();
     return camera;
 }
 
@@ -149,23 +136,13 @@ bool Framework::Graphics::Camera::CompleteResize() {
 
     UpdateProjection();
 
-    if (!m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)) {
-        Debug::Error("Camera::CompleteResize() : failed recalculated frame buffers!");
-        return false;
-    }
-
-    m_needUpdate = false;
     m_isBuffCalculate = true;
 
     return true;
 }
 
-void Framework::Graphics::Camera::PoolEvents()  {
-    m_isEnableDirectOut.first = m_isEnableDirectOut.second;
-}
-
 void Framework::Graphics::Camera::OnReady(bool ready) {
-    m_env->SetBuildState(false);
+
 }
 
 glm::mat4 Framework::Graphics::Camera::GetImGuizmoView() const noexcept {
@@ -196,10 +173,6 @@ void Framework::Graphics::Camera::OnRemoveComponent() {
     OnDestroyGameObject();
 }
 
-void Framework::Graphics::Camera::SetDirectOutput(bool value) {
-    m_isEnableDirectOut.second = value;
-}
-
 void Framework::Graphics::Camera::SetFar(float_t value) {
     m_far = value;
     UpdateProjection();
@@ -207,6 +180,11 @@ void Framework::Graphics::Camera::SetFar(float_t value) {
 
 void Framework::Graphics::Camera::SetNear(float_t value) {
     m_near = value;
+    UpdateProjection();
+}
+
+void Framework::Graphics::Camera::SetFOV(float_t value) {
+    m_FOV = value;
     UpdateProjection();
 }
 

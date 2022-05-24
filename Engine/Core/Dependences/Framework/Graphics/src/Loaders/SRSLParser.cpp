@@ -25,6 +25,11 @@ bool SR_GRAPH_NS::SRSL::RemoveComments(SR_GRAPH_NS::SRSL::SRSLCode &code) {
             }
         }
 
+        if (comment != std::string::npos && comment < begin) {
+            *pIt = pIt->substr(0, comment);
+            goto repeat;
+        }
+
         if (begin != std::string::npos && end != std::string::npos) {
             pIt->replace(begin, (end - begin) + 2, "");
             goto repeat;
@@ -32,11 +37,6 @@ bool SR_GRAPH_NS::SRSL::RemoveComments(SR_GRAPH_NS::SRSL::SRSLCode &code) {
         else if (begin != std::string::npos) {
             pIt->resize(begin);
             multiple = true;
-            goto repeat;
-        }
-
-        if (comment != std::string::npos) {
-            *pIt = pIt->substr(0, comment);
             goto repeat;
         }
 

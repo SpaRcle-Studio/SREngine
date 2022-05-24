@@ -232,12 +232,12 @@ void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {
 #endif
 }
 
-bool Framework::Graphics::OpenGL::FreeVAO(unsigned int VAO) const {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("OpenGL::FreeVAO() : free mesh \""+std::to_string(VAO) + "\" VAO...");
+bool Framework::Graphics::OpenGL::FreeVAO(int* VAO) const {
+    //if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+    //    Helper::Debug::Log("OpenGL::FreeVAO() : free mesh \""+std::to_string(VAO) + "\" VAO...");
 
     if (VAO) {
-        glDeleteVertexArrays(1, &VAO);
+        //glDeleteVertexArrays(1, &VAO);
         return true;
     } else {
         Helper::Debug::Error("OpenGL::FreeVAO() : VAO is zero! Something went wrong...");

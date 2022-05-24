@@ -4,22 +4,21 @@ PolygonMode Fill;
 CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled false;
+BlendEnabled false; 
 DepthWrite true;
 DepthTest true;
-
-uniform vec3 color;
+ 
+uniform vec4 color;
 uniform sampler2D diffuse;
 
 vec4 GetTextureColor() {
     return texture(diffuse, UV);
-}
+} 
 
 void fragment() {
-    COLOR = vec4(color, 1.f) * GetTextureColor();
+	COLOR = GetTextureColor() * color;
 }
 
 void vertex() {
-    VERTEX.x = -VERTEX.x * TIME;
-    VERTEX *= GetTextureColor().rgb;
+    VERTEX.x = -VERTEX.x;
 }

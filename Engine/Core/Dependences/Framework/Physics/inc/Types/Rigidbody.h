@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_RIGIDBODY_H
 #define GAMEENGINE_RIGIDBODY_H
 
-#include <EntityComponentSystem/Component.h>
+#include <ECS/Component.h>
 
 namespace Framework::Physics::Types {
     class Rigidbody : public Helper::Component {

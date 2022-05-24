@@ -16,6 +16,7 @@ namespace SR_GRAPH_NS {
     }
 
     class Render;
+    class Environment;
     class Camera;
 
     class Window : SR_UTILS_NS::NonCopyable {
@@ -51,12 +52,12 @@ namespace SR_GRAPH_NS {
         void SetGUIEnabled(bool value);
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE  bool IsRun() const { return m_isRun; }
-        SR_NODISCARD SR_FORCE_INLINE  bool IsGUIEnabled() const { return m_GUIEnabled.first; }
-        SR_NODISCARD SR_FORCE_INLINE bool IsFullScreen() const { return m_env->IsFullScreen(); }
+        SR_NODISCARD SR_FORCE_INLINE bool IsRun() const { return m_isRun; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsGUIEnabled() const { return m_GUIEnabled.first; }
+        SR_NODISCARD bool IsFullScreen() const;
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetWindowSize() const { return m_env->GetWindowSize(); }
+        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
         SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { SRAssert(m_render); return m_render; }
         SR_NODISCARD bool IsAlive() const;
 

@@ -13,9 +13,12 @@ namespace Framework::Graphics::Memory {
     class MeshAllocator;
 }
 
-namespace Framework::Graphics::Types {
+namespace SR_GTYPES_NS {
     class DebugWireframeMesh final : public IndexedMesh {
         friend class Memory::MeshAllocator;
+    public:
+        typedef Vertices::SimpleVertex VertexType;
+
     private:
         explicit DebugWireframeMesh(const std::string& name = "Unnamed")
             : IndexedMesh(MeshType::Wireframe, name)
@@ -28,23 +31,15 @@ namespace Framework::Graphics::Types {
         ~DebugWireframeMesh() override = default;
 
     public:
-        typedef Vertices::SkyboxVertex VertexType;
-
-    protected:
-        void UpdateUBO() override;
-
-    public:
         void DrawVulkan() override;
-
-        void DrawOpenGL() override {
-
-        }
+        void DrawOpenGL() override { }
 
         IResource* Copy(IResource* destination) const override;
 
         bool Calculate() override;
 
         bool FreeVideoMemory() override;
+
     };
 }
 

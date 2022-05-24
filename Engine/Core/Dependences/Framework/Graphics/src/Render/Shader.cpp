@@ -27,7 +27,6 @@ namespace SR_GRAPH_NS {
         m_uniformBlock.DeInit();
         m_uniformBlock = ShaderUBOBlock();
 
-        m_sharedUniforms.clear();
         m_samplers.clear();
     }
 
@@ -39,7 +38,7 @@ namespace SR_GRAPH_NS {
         if (m_isInit)
             return true;
 
-        if (SRVerifyFalse2((m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
+        if (!SRVerifyFalse2(!(m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
             m_hasErrors = true;
             return false;
         }
@@ -52,23 +51,6 @@ namespace SR_GRAPH_NS {
         if (!Link()) {
             SR_ERROR("Shader::Init() : failed linking shader!");
             return false;
-        }
-
-        if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-            std::vector<uint64_t> sizes = {};
-            for (const auto &uniform : m_uniformsInfo)
-                if (uniform.first.second == UBOType::Shared)
-                    sizes.push_back(uniform.second);
-
-            if (!sizes.empty()) {
-                m_sharedUniforms.resize(sizes.size());
-                for (uint32_t i = 0; i < sizes.size(); ++i) {
-                    if ((m_sharedUniforms[i] = m_env->AllocateUBO(sizes[i])) < 0) {
-                        SR_ERROR("Shader::Init() : failed to allocate uniform buffer object!");
-                        return false;
-                    }
-                }
-            }
         }
 
         /// calculate shader params hash
@@ -100,9 +82,10 @@ namespace SR_GRAPH_NS {
             }
         }
         else {
-            auto sizes = std::vector<uint64_t>();
-            for (auto info : m_uniformsInfo)
-                sizes.push_back(info.second);
+            auto&& sizes = std::vector<uint64_t>();
+            sizes.reserve(m_uniformsInfo.size());
+            for (auto&& [binding, size] : m_uniformsInfo)
+                sizes.push_back(size);
 
             if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData, sizes)) {
                 SR_ERROR("Shader::Compile() : failed to compile \"" + m_path + "\" shader!");
@@ -184,16 +167,8 @@ namespace SR_GRAPH_NS {
             if (!m_env->DeleteShader(m_shaderProgram)) {
                 SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_path);
             }
+
             m_shaderProgram = SR_NULL_SHADER;
-
-            if (!m_sharedUniforms.empty()) {
-                for (uint32_t i = 0; i < m_sharedUniforms.size(); ++i) {
-                    if (!m_env->FreeUBO(&m_sharedUniforms[i]))
-                        SR_ERROR("Shader::Free() : failed to free uniform buffer object!");
-                }
-
-                m_sharedUniforms.clear();
-            }
         }
         else {
             SR_SHADER("Shader::Free() : free \"" + m_path + "\" shader class pointer...");
@@ -229,8 +204,9 @@ namespace SR_GRAPH_NS {
             SR_ERROR("Shader::SetUniforms() : shader already initialized!");
             return false;
         }
-        else
+        else {
             m_uniformsInfo = uniforms;
+        }
 
         return true;
     }
@@ -285,6 +261,10 @@ namespace SR_GRAPH_NS {
 
         SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
 
+        if (!SRVerifyFalse2(path.ToString().empty(), "Invalid shader path!")) {
+            return nullptr;
+        }
+
         if (path.GetExtensionView() == "srsl") {
             auto &&shader = new Shader(std::string(), path.ToString());
             shader->Reload();
@@ -329,16 +309,12 @@ namespace SR_GRAPH_NS {
 
         auto &&uniformParsers = [=](Shader *shader, const Xml::Node &node) {
             if (auto xmlUniforms = getInheritNode(node, "Uniforms")) {
-                std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> uniforms = {};
-                // 0 - binding
-                // 1 - type
-                // 2 - ubo size
+                std::vector<std::pair<uint32_t, uint64_t>> uniforms = {};
                 for (const auto &uniform : xmlUniforms.GetNodes()) {
                     uniforms.emplace_back(std::pair(
-                            std::pair(
-                                    (uint32_t) uniform.GetAttribute("binding").ToInt(),
-                                    StringToEnumUBOType(uniform.GetAttribute("type").ToString())),
-                            (uint64_t) GetUniformSize(uniform.GetAttribute("UBO").ToString())));
+                            (uint32_t) uniform.GetAttribute("binding").ToInt(),
+                            (uint64_t) GetUniformSize(uniform.GetAttribute("UBO").ToString()))
+                    );
                 }
                 shader->SetUniforms(uniforms);
             }
@@ -406,14 +382,14 @@ namespace SR_GRAPH_NS {
         return nullptr;
     }
 
-    int32_t Shader::GetUBO(const uint32_t &index) const {
-        if (index >= m_sharedUniforms.size()) {
-            SR_ERROR("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +
-                     std::to_string(m_sharedUniforms.size()) + "\n\tIndex: " + std::to_string(index));
-            return -1;
-        }
-        return m_sharedUniforms[index];
-    }
+    //int32_t Shader::GetUBO(const uint32_t &index) const {
+    //    if (index >= m_sharedUniforms.size()) {
+    //        SR_ERROR("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +
+    //                 std::to_string(m_sharedUniforms.size()) + "\n\tIndex: " + std::to_string(index));
+    //        return -1;
+    //    }
+    //    return m_sharedUniforms[index];
+   // }
 
     int32_t Shader::GetID() {
         if (!m_isInit) {
@@ -440,8 +416,20 @@ namespace SR_GRAPH_NS {
     void Shader::SetVec2(uint64_t hashId, const glm::vec2 &v) noexcept { SetValue(hashId, v); }
     void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
 
-    void Shader::SetSampler2D(const std::string &name, Types::Texture *sampler) noexcept {
-        if (!IsLoaded() || m_samplers.count(name) == 0) {
+    void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
+        m_env->BindTexture(m_samplers.at(hashId).second, sampler);
+    }
+
+    void Shader::SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept {
+        if (!IsLoaded() || m_samplers.count(hashId) == 0) {
+            return;
+        }
+
+        SetSampler(hashId, sampler);
+    }
+
+    void Shader::SetSampler2D(uint64_t hashId, Types::Texture *sampler) noexcept {
+        if (!IsLoaded() || m_samplers.count(hashId) == 0) {
             return;
         }
 
@@ -452,7 +440,11 @@ namespace SR_GRAPH_NS {
             m_render->RegisterTexture(sampler);
         }
 
-        m_env->BindTexture(m_samplers.at(name).second, sampler->GetID());
+        SetSampler(hashId, sampler->GetID());
+    }
+
+    void Shader::SetSampler2D(const std::string &name, Types::Texture *sampler) noexcept {
+        SetSampler2D(SR_RUNTIME_TIME_CRC32_STR(name.c_str()), sampler);
     }
 
     bool Shader::Ready() const {
@@ -533,19 +525,16 @@ namespace SR_GRAPH_NS {
                         .depthWrite = unit->createInfo.depthWrite,
                         .depthTest = unit->createInfo.depthTest,
                 };
-                SRVerifyFalse2(SetCreateInfo(createInfo), "Failed to validate shader create info!");
+                SRVerifyFalse2(!SetCreateInfo(createInfo), "Failed to validate shader create info!");
 
                 switch (unit->type) {
                     case SRSL::ShaderType::Custom:
                     case SRSL::ShaderType::PostProcessing:
                         break;
                     case SRSL::ShaderType::Spatial: {
-                        std::vector<std::pair<std::pair<uint32_t, UBOType>, uint64_t>> uniforms = {};
-                        /// 0 - binding
-                        /// 1 - type
-                        /// 2 - ubo size
+                        UBOInfo uniforms = {};
                         for (const auto&[binding, size] : unit->GetUniformSizes()) {
-                            uniforms.emplace_back(std::pair(std::pair(binding, UBOType::Common), size));
+                            uniforms.emplace_back(std::pair(binding, size));
                         }
                         SetUniforms(uniforms);
 
@@ -556,9 +545,21 @@ namespace SR_GRAPH_NS {
                         SetVertex(description, attrib);
                         break;
                     }
+                    case SRSL::ShaderType::Simple:
+                    case SRSL::ShaderType::Skybox: {
+                        UBOInfo uniforms = {};
+                        for (const auto&[binding, size] : unit->GetUniformSizes()) {
+                            uniforms.emplace_back(std::pair(binding, size));
+                        }
+                        SetUniforms(uniforms);
+
+                        auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::SimpleVertex);
+                        SetVertex(description, attrib);
+
+                        break;
+                    }
                     case SRSL::ShaderType::TransparentSpatial:
                     case SRSL::ShaderType::Animation:
-                    case SRSL::ShaderType::Skybox:
                     case SRSL::ShaderType::Canvas:
                     case SRSL::ShaderType::Particles:
                     case SRSL::ShaderType::Unknown:
@@ -570,7 +571,7 @@ namespace SR_GRAPH_NS {
                 m_properties.clear();
                 m_samplers.clear();
                 for (auto&&[name, sampler] : unit->GetSamplers()) {
-                    m_samplers[name] = std::make_pair(
+                    m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = std::make_pair(
                             sampler.type,
                             sampler.binding
                     );

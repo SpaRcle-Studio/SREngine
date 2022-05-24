@@ -11,6 +11,4 @@
     <Texture Path="Game/Miku/Miku_Facetex_A.png"  CPUUsage="false" MipLevels="0" />
 
     <Texture Path="Game/Kurumi/YH018_Kurum.png" CPUUsage="false" MipLevels="0" />
-
-    <Texture Path="Game/stone.jpg" CPUUsage="false" MipLevels="0" />
 </Textures>

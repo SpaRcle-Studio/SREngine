@@ -5,48 +5,53 @@
 #ifndef GAMEENGINE_SKYBOX_H
 #define GAMEENGINE_SKYBOX_H
 
-#include <Utils/NonCopyable.h>
-#include <Types/Texture.h>
-#include <Environment/Environment.h>
+#include <ResourceManager/IResource.h>
 
-namespace Framework::Graphics {
-    class Camera;
+namespace SR_GRAPH_NS {
     class Shader;
+    class Render;
+    class Environment;
 }
 
-namespace Framework::Graphics::Types {
-    class Skybox : Helper::NonCopyable {
+namespace SR_GTYPES_NS {
+    class Texture;
+
+    class Skybox : public SR_UTILS_NS::IResource {
     private:
         Skybox();
-        ~Skybox() override = default;
+        ~Skybox() override;
 
     public:
-        static Skybox* Load(const std::string& name);
+        static Skybox* Load(const SR_UTILS_NS::Path& path);
 
     public:
-        SR_NODISCARD std::string GetName() const { return m_name; }
+        SR_NODISCARD Shader* GetShader() const { return m_shader; }
+        SR_NODISCARD int32_t GetVBO();
+        SR_NODISCARD int32_t GetIBO();
+        SR_NODISCARD int32_t GetUBO();
 
-        /// WARNING: Call only from render!
         bool FreeVideoMemory();
+        void Draw();
 
-        bool SetRender(Render* render);
+    protected:
+        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+
+    private:
+        bool Calculate();
         void DrawOpenGL();
         void DrawVulkan();
-
-        bool AwaitFreeVideoMemory();
-        bool Free();
-        bool Calculate();
+        void SetShader(Shader *shader);
 
     private:
         Environment*            m_env            = nullptr;
-        Render*                 m_render         = nullptr;
         Shader*                 m_shader         = nullptr;
 
-        int32_t                 m_VAO            = -1;
-        int32_t                 m_VBO            = -1;
-        int32_t                 m_IBO            = -1;
-        int32_t                 m_descriptorSet  = -1;
-        int32_t                 m_cubeMap        = -1;
+        int32_t                 m_VAO            = SR_ID_INVALID;
+        int32_t                 m_VBO            = SR_ID_INVALID;
+        int32_t                 m_IBO            = SR_ID_INVALID;
+        int32_t                 m_UBO            = SR_ID_INVALID;
+        int32_t                 m_descriptorSet  = SR_ID_INVALID;
+        int32_t                 m_cubeMap        = SR_ID_INVALID;
 
         uint32_t                m_width          = 0;
         uint32_t                m_height         = 0;
@@ -54,10 +59,8 @@ namespace Framework::Graphics::Types {
         std::array<uint8_t*, 6> m_data           = std::array<uint8_t*, 6>();
 
         std::atomic<bool>       m_hasErrors      = false;
+        std::atomic<bool>       m_dirtyShader    = false;
         std::atomic<bool>       m_isCalculated   = false;
-        std::atomic<bool>       m_isVideoMemFree = false;
-
-        std::string             m_name           = "Unnamed";
 
     };
 }

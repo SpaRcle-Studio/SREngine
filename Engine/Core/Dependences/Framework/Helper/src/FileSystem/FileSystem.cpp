@@ -196,6 +196,45 @@ std::string FileSystem::SaveFileDialog(const std::string &path, const std::strin
     ofn.nMaxFileTitle = 0;
     ofn.lpstrInitialDir = NULL;
     ofn.lpstrTitle = 0;
+    ofn.Flags = OFN_ENABLESIZING | OFN_FILEMUSTEXIST | OFN_EXPLORER;
+    ofn.nFileOffset = 0;
+    ofn.nFileExtension = 0;
+    ofn.lpstrDefExt = NULL;
+    ofn.lCustData = 0;
+    ofn.lpfnHook = NULL;
+    ofn.lpTemplateName = NULL;
+    ofn.lpstrInitialDir = newPath.c_str();
+
+    if (GetSaveFileNameA(&ofn)) {
+        return buf;
+    }
+#else
+#endif
+    return std::string();
+}
+
+std::string FileSystem::LoadFileDialog(const std::string &path, const std::string &filter) {
+#ifdef WIN32
+    auto newPath = StringUtils::ReplaceAll(path, "/", "\\");
+
+    OPENFILENAME ofn;          // common dialog box structure
+
+    char buf[255] = "\0";
+    char cCustomFilter[256] = "\0\0";
+    int nFilterIndex = 0;
+    ofn.lStructSize = sizeof(OPENFILENAME);
+    ofn.hwndOwner = NULL;
+    ofn.hInstance = NULL;//GetModuleHandle(NULL);
+    ofn.lpstrFilter = filter.c_str();
+    ofn.lpstrCustomFilter = cCustomFilter;
+    ofn.nMaxCustFilter = 256;
+    ofn.nFilterIndex = nFilterIndex;
+    ofn.lpstrFile = buf;
+    ofn.nMaxFile = 255;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.lpstrTitle = 0;
     ofn.Flags = OFN_FILEMUSTEXIST;
     ofn.nFileOffset = 0;
     ofn.nFileExtension = 0;
@@ -354,6 +393,14 @@ uint64_t FileSystem::GetFileHash(const std::string &path) {
     const std::string& file = ReadBinaryAsString(path);
     auto&& h = std::hash<std::string>();
     return h(file);
+}
+
+bool FileSystem::IsAbsolutePath(const std::string &path) {
+#ifdef SR_WIN32
+    return path.size() >= 2 && path[1] == ':';
+#else
+    return false;
+#endif
 }
 
 

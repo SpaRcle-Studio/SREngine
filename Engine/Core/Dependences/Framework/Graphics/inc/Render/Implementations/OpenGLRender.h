@@ -54,7 +54,6 @@ namespace Framework::Graphics::Impl {
             ImGui::Text("Pipeline name: %s", m_env->GetPipeLineName().c_str());
 
             ImGui::Checkbox("Grid", &m_gridEnabled);
-            ImGui::Checkbox("Skybox", &m_skyboxEnabled);
             ImGui::Checkbox("WireFrame", &m_wireFrame);
 
             ImGui::End();
@@ -71,12 +70,12 @@ namespace Framework::Graphics::Impl {
         }
 
         void DrawSkybox() override {
-            if (m_skybox.m_current && m_skyboxEnabled) {
-                m_shaders[Shader::StandardID::Skybox]->Use();
-                m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
-
-                m_skybox.m_current->DrawOpenGL();
-            }
+           //if (m_skybox.m_current && m_skyboxEnabled) {
+            //    m_shaders[Shader::StandardID::Skybox]->Use();
+            //    m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
+//
+            //    m_skybox.m_current->DrawOpenGL();
+            //}
         }
 
         void DrawGrid() override {

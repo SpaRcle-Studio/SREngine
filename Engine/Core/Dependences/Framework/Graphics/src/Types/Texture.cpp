@@ -18,6 +18,7 @@ SR_GRAPH_NS::Types::Texture::Texture()
 SR_GRAPH_NS::Types::Texture::~Texture() {
     if (m_data) {
         TextureLoader::Free(m_data);
+        m_data = nullptr;
     }
 }
 
@@ -35,30 +36,64 @@ bool SR_GRAPH_NS::Types::Texture::Destroy() {
     return IResource::Destroy();
 }
 
-SR_GRAPH_NS::Types::Texture* SR_GRAPH_NS::Types::Texture::Load(const std::string& localPath, const Memory::TextureConfig& config) {
-    const auto path = ResourceManager::Instance().GetResPath().Concat("/Textures/").Concat(localPath);
+SR_GRAPH_NS::Types::Texture* SR_GRAPH_NS::Types::Texture::Load(const std::string& rawPath, const Memory::TextureConfig& config) {
+    SR_GLOBAL_LOCK
 
-    Texture* texture = nullptr;
+    Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetTexturesPath());
 
-    if (IResource* find = ResourceManager::Instance().Find<Texture>(localPath)) {
-        texture = ((Texture*)(find));
-
-        if (texture->m_config != config || config.m_autoRemove != texture->IsEnabledAutoRemove())
+    if (auto&& pResource = ResourceManager::Instance().Find<Texture>(path)) {
+        if (pResource->m_config != config || config.m_autoRemove != pResource->IsEnabledAutoRemove()) {
             SR_WARN("Texture::Load() : copy values do not match load values.");
-    }
-    else {
-        if (Debug::GetLevel() >= Debug::Level::Medium)
-            SR_LOG("Texture::Load : load \"" + localPath + "\" texture...");
-
-        if ((texture = TextureLoader::Load(path.ToString()))) {
-            texture->SetConfig(config);
-            texture->m_name = localPath;
-
-            texture->SetId(localPath);
         }
+
+        return pResource;
     }
 
-    return texture;
+    auto&& pTexture = new Texture();
+
+    pTexture->SetConfig(config);
+    pTexture->SetId(path, false /** auto register */);
+
+    if (!pTexture->Load()) {
+        SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());
+        delete pTexture;
+        return nullptr;
+    }
+
+    /// отложенная ручная регистрация
+    ResourceManager::Instance().RegisterResource(pTexture);
+
+    return pTexture;
+}
+
+bool Framework::Graphics::Types::Texture::Unload() {
+    SR_SCOPED_LOCK
+
+    bool hasErrors = !IResource::Unload();
+
+    if (m_data) {
+        TextureLoader::Free(m_data);
+        m_data = nullptr;
+    }
+
+    return !hasErrors;
+}
+
+bool Framework::Graphics::Types::Texture::Load() {
+    SR_SCOPED_LOCK
+
+    bool hasErrors = !IResource::Load();
+
+    Path&& path = Path(GetResourceId());
+    if (!path.IsAbs()) {
+        path = ResourceManager::Instance().GetTexturesPath().Concat(path);
+    }
+
+    if (!TextureLoader::Load(this, path.ToString())) {
+        hasErrors |= true;
+    }
+
+    return !hasErrors;
 }
 
 bool SR_GRAPH_NS::Types::Texture::Calculate() {
@@ -67,6 +102,7 @@ bool SR_GRAPH_NS::Types::Texture::Calculate() {
 
     if (!m_render) {
         SR_ERROR("Texture::Calculate() : this texture is not register in render!");
+        m_hasErrors = true;
         return false;
     }
 
@@ -75,7 +111,7 @@ bool SR_GRAPH_NS::Types::Texture::Calculate() {
         return false;
     }
 
-    if (m_isCalculate){
+    if (m_isCalculate) {
         SR_ERROR("Texture::Calculate() : texture already calculated!");
         return false;
     }
@@ -138,15 +174,19 @@ void SR_GTYPES_NS::Texture::SetConfig(const TextureConfig &config) {
     SetAutoRemoveEnabled(m_config.m_autoRemove);
 }
 
-int32_t SR_GTYPES_NS::Texture::GetID() noexcept  {
+int32_t SR_GTYPES_NS::Texture::GetID() noexcept {
+    if (m_hasErrors) {
+        return SR_ID_INVALID;
+    }
+
     if (IsDestroyed()) {
         SR_ERROR("Texture::GetID() : texture \"" + GetResourceId() + "\" is destroyed!");
-        return -1;
+        return SR_ID_INVALID;
     }
 
     if (!m_isCalculate && !Calculate()) {
         SR_ERROR("Texture::GetID() : failed to calculating texture!");
-        return -1;
+        return SR_ID_INVALID;
     }
 
     return m_ID;
@@ -180,17 +220,16 @@ SR_GTYPES_NS::Texture *SR_GTYPES_NS::Texture::GetNone() {
 }
 
 SR_GTYPES_NS::Texture *SR_GTYPES_NS::Texture::LoadFromMemory(const std::string& data, const TextureConfig &config) {
-    Texture* texture = TextureLoader::LoadFromMemory(data);
+    Texture* texture = new Texture();
 
-    if (!texture) {
-        SRVerifyFalse2(false, "Texture::LoadFromMemory() : failed to load texture!");
+    if (!TextureLoader::LoadFromMemory(texture, data)) {
+        SRHalt("Texture::LoadFromMemory() : failed to load texture!");
+        delete texture;
         return nullptr;
     }
 
     texture->SetConfig(config);
-    texture->m_name = "TextureFromMemory";
-
-    texture->SetId(texture->m_name);
+    texture->SetId("TextureFromMemory");
 
     return texture;
 }
@@ -201,3 +240,9 @@ void SR_GTYPES_NS::Texture::FreeNoneTexture() {
         m_none = nullptr;
     }
 }
+
+void *SR_GTYPES_NS::Texture::GetDescriptor() {
+    return m_env->GetDescriptorSetFromTexture(GetID(), true);
+}
+
+

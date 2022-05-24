@@ -15,45 +15,51 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::Draw() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
-        for (auto&&[name, widget] : m_widgets)
+        for (auto&&[name, widget] : m_widgets) {
             if (widget->IsOpen())
                 widget->DrawWindow();
+        }
     }
 
     bool WidgetManager::Register(Widget *widget) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         if (m_widgets.count(widget->GetName()) == 1) {
-            SRAssert(false);
+            SRHalt("Widget are already registered!");
             return false;
         }
 
         m_widgets.insert(std::make_pair(widget->GetName(), widget));
 
+        widget->SetManager(this);
+
         return true;
     }
 
     bool WidgetManager::Remove(Widget *widget) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         if (m_widgets.count(widget->GetName()) == 0) {
-            SRAssert(false);
+            SRHalt("Widget are not registered!");
             return false;
         }
 
         m_widgets.erase(widget->GetName());
 
+        widget->SetManager(nullptr);
+
         return true;
     }
 
     WidgetManager::~WidgetManager() {
+        SRAssert2(m_widgets.empty(), "Memory leak possible!");
         m_widgets.clear();
     }
 
     void WidgetManager::OnKeyDown(const KeyDownEvent &event) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -62,7 +68,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnKeyUp(const KeyUpEvent &event) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)

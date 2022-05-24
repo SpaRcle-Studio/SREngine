@@ -17,22 +17,12 @@ namespace SR_UTILS_NS {
     public:
         static const float_t ResourceLifeTime;
 
-    private:
-        /** \brief remove resource from resource manager */
-        void Remove(IResource *resource);
-
-        /** \brief Grabble collector */
-        void GC();
-
-        void CheckResourceHashes();
-
-        void Thread();
-
     public:
         SR_NODISCARD bool IsLastResource(IResource* resource);
         SR_NODISCARD Path GetResPath() const { return m_folder; }
         SR_NODISCARD Path GetCachePath() const { return m_folder.Concat("Cache"); }
         SR_NODISCARD Path GetConfigPath() const { return m_folder.Concat("Configs"); }
+        SR_NODISCARD Path GetFontsPath() const { return m_folder.Concat("Fonts"); }
         SR_NODISCARD Path GetMaterialsPath() const { return m_folder.Concat("Materials"); }
         SR_NODISCARD Path GetTexturesPath() const { return m_folder.Concat("Textures"); }
         SR_NODISCARD Path GetModelsPath() const { return m_folder.Concat("Models"); }
@@ -60,6 +50,7 @@ namespace SR_UTILS_NS {
 
         /** \warning Call only from IResource parents \brief Register resource to destroy in resource manager */
         bool Destroy(IResource *resource);
+
     public:
         /** \brief Init resource manager */
         bool Init(const std::string& resourcesFolder);
@@ -68,6 +59,12 @@ namespace SR_UTILS_NS {
         bool Stop();
 
         void PrintMemoryDump();
+
+    private:
+        void Remove(IResource *resource);
+        void GC();
+        void CheckResourceHashes();
+        void Thread();
 
     private:
         ResourcesList m_destroyed = ResourcesList();

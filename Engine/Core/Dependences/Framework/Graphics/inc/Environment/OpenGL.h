@@ -302,7 +302,7 @@ namespace Framework::Graphics {
         int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO = SR_ID_INVALID) override;
         int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) override;
-        [[nodiscard]] bool FreeVAO(uint32_t VAO) const override;
+        [[nodiscard]] bool FreeVAO(int32_t* VAO) const override;
         SR_FORCE_INLINE void DrawLines(const uint32_t& VAO, const uint32_t& count_vertices) const override {
             glBindVertexArray(VAO);
             /// glDrawArrays(GL_LINES, 0, count_vertices);
@@ -431,10 +431,10 @@ namespace Framework::Graphics {
                 bool alpha,
                 bool cpuUsage) const override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override;
-        SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override{
-            Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
+        SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) override{
+            //Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
             //glClearTexSubImage()
-            glDeleteTextures(6, reinterpret_cast<const GLuint *>(&ID)); // TODO: I don't know if this works
+            //glDeleteTextures(6, reinterpret_cast<const GLuint *>(&ID)); // TODO: I don't know if this works
             return true;
         }
         [[nodiscard]] bool FreeFBO(uint32_t FBO) const override {

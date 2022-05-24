@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<RenderScene>
+    <Technique Name="Basic">
+        <PreRender/>
+        <Render>
+            <!-- =========================================================== -->
+            <Pass Type="Framebuffer">
+                <Out Id="Color" />
+                <Out Id="Bloom" />
+                <Out Id="Skybox" />
+            </Pass>
+            <Pass Type="Shader" Path="Engine/skybox.srsl" />
+            <Pass Type="Shader" Path="Engine/standard.srsl" />
+            <Pass Type="Shader" Path="Engine/transparent.srsl" />
+            <!-- =========================================================== -->
+            <Pass Type="Framebuffer">
+                <Out Id="BlurBloom" />
+            </Pass>
+            <Pass Type="Shader" Path="Engine/blur.srsl" >
+                <In Id="Bloom" />
+            </Pass>
+            <!-- =========================================================== -->
+            <Pass Type="Framebuffer" Direct="true" />
+            <Pass Type="Shader" Path="Engine/framebuffer.srsl" >
+                <In Id="Color" />
+                <In Id="Skybox" />
+                <In Id="BlurBloom" />
+            </Pass>
+            <!-- =========================================================== -->
+        </Render>
+        <PostRender/>
+        <Update />
+    </Technique>
+    <Technique Name="Wireframed">
+        <PreRender/>
+        <Render>
+            <Pass Type="Framebuffer">
+                <Out Index="0" Name="Color" />
+                <Out Index="1" Name="Bloom" />
+            </Pass>
+            <Pass Type="Shader" Path="Engine/standard.srsl" />
+            <Pass Type="Shader" Path="Engine/transparent.srsl" />
+            <Pass Type="Framebuffer" Direct="true" />
+            <Pass Type="Shader" Path="Engine/framebuffer.srsl" />
+        </Render>
+        <PostRender/>
+    </Technique>
+    <Technique Name="Forward">
+        <Pass />
+        <Pass />
+        <Pass />
+        <Pass />
+        <Pass />
+        <Pass />
+    </Technique>
+    <Technique Name="Clustered">
+        <Pass />
+        <Pass />
+        <Pass />
+        <Pass />
+        <Pass />
+        <Pass />
+    </Technique>
+</RenderScene>

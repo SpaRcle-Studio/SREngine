@@ -11,7 +11,10 @@
 
 #include <Debug.h>
 
-#include <Engine.h>
+#include <Core/Engine.h>
+#include <Core/World/World.h>
+#include <Core/World/VisualChunk.h>
+#include <Core/World/VisualRegion.h>
 
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
@@ -22,14 +25,12 @@
 #include <Types/Texture.h>
 #include <Loaders/SRSL.h>
 #include <Types/Material.h>
+#include <Types/Skybox.h>
 #include <Types/Mesh.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <Animations/Bone.h>
-#include <World/World.h>
 #include <Input/InputSystem.h>
 #include <Memory/MeshAllocator.h>
-#include <World/VisualChunk.h>
-#include <World/VisualRegion.h>
 #include <Utils/CmdOptions.h>
 #include <Utils/Features.h>
 #include <GUI/NodeManager.h>
@@ -118,6 +119,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Texture>();
         resourcesManager.RegisterType<Material>();
         resourcesManager.RegisterType<Shader>();
+        resourcesManager.RegisterType<Skybox>();
     }
 
     // Register all components
@@ -140,7 +142,7 @@ int main(int argc, char **argv) {
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
     const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
 
-    if (envName == "OpenGL"){
+    if (envName == "OpenGL") {
         Environment::Set(new OpenGL());
     }
     else if (envName == "Vulkan") {
@@ -170,7 +172,7 @@ int main(int argc, char **argv) {
     auto window = new Window(
             "SpaRcle Engine",
             "Engine/icon.ico",
-            IVector2(1366, 768),
+            IVector2(1366, 768), //IVector2(1600, 900),
             render,
             false, // vsync
             false, // fullscreen

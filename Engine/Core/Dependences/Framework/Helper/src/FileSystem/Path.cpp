@@ -73,9 +73,15 @@ namespace Framework::Helper {
 
         m_type = GetType();
 
-        if (auto index = m_path.find_last_of("/\\"); index == std::string::npos) {
-            m_name = std::string();
-            m_ext = std::string();
+        if (auto&& index = m_path.find_last_of("/\\"); index == std::string::npos) {
+            if (index = m_path.find_last_of("."); index != std::string::npos) {
+                m_name = m_path.substr(0, (m_path.size() - index) - 1);
+                m_ext  = m_path.substr(index + 1, m_path.size() - index);
+            }
+            else {
+                m_name = m_path;
+                m_ext = std::string();
+            }
         }
         else {
             ++index;
@@ -83,7 +89,8 @@ namespace Framework::Helper {
             if (auto dot = m_path.find_last_of('.'); dot != std::string::npos) {
                 m_name = m_path.substr(index, dot - index);
                 m_ext  = m_path.substr(dot + 1, m_path.size() - dot);
-            } else {
+            }
+            else {
                 m_name = m_path.substr(index);
                 m_ext  = std::string();
             }
@@ -214,6 +221,27 @@ namespace Framework::Helper {
 
     uint64_t Path::GetFileHash() const {
         return FileSystem::GetFileHash(m_path);
+    }
+
+    bool Path::IsAbs() const {
+        return FileSystem::IsAbsolutePath(m_path);
+    }
+
+    Path Path::FileDialog() const {
+        return Path(FileSystem::SaveFileDialog(m_path, ""));
+    }
+
+    bool Path::IsSubPath(const Path &subPath) const {
+        return m_path.find(subPath.m_path) != std::string::npos;
+    }
+
+    Path Path::RemoveSubPath(const Path &subPath) const {
+        auto&& index = m_path.find(subPath.m_path);
+        if (index == std::string::npos) {
+            return *this;
+        }
+
+        return StringUtils::Remove(m_path, index, subPath.m_path.size() + 1);
     }
 
     Path& Path::operator=(const Path& path) = default;

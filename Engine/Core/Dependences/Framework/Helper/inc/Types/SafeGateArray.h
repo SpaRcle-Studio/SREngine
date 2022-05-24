@@ -7,7 +7,7 @@
 
 #include <Debug.h>
 
-namespace Framework::Helper::Types {
+namespace SR_HTYPES_NS {
     template<typename T> class SafeGateArray {
     public:
         SafeGateArray() = default;

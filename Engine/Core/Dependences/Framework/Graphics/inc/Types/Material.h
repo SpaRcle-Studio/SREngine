@@ -42,7 +42,7 @@ namespace SR_GTYPES_NS {
         static bool FreeDefault();
         static bool InitDefault(Render* render);
 
-        static Material* Load(const std::string& name);
+        static Material* Load(const std::string& path);
 
     public:
         Super* Copy(Super* destination) const override;
@@ -52,6 +52,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD Properties& GetProperties() { return m_properties; }
         SR_NODISCARD Property* GetProperty(const std::string& id);
+        SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
         void SetTexture(Property* property, Texture* pTexture);
 
@@ -63,6 +64,9 @@ namespace SR_GTYPES_NS {
 
         void Use();
         void UseSamplers();
+
+    protected:
+        bool Reload() override;
 
     private:
         void InitShader();

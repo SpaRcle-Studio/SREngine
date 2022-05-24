@@ -33,6 +33,7 @@ namespace Framework::Graphics::GUI {
             , m_windowFlags(ImGuiWindowFlags_::ImGuiWindowFlags_None)
             , m_size(size)
             , m_widgetFlags(WIDGET_FLAG_NONE)
+            , m_manager(nullptr)
         { }
 
         ~Widget() override = default;
@@ -41,6 +42,8 @@ namespace Framework::Graphics::GUI {
         SR_NODISCARD bool IsOpen() const { return m_open; }
         SR_NODISCARD bool IsFocused() const { return m_internalFlags & WIDGET_FLAG_FOCUSED; }
         SR_NODISCARD bool IsHovered() const { return m_internalFlags & WIDGET_FLAG_HOVERED; }
+        SR_NODISCARD WidgetManager* GetManager() const { return m_manager; }
+        SR_NODISCARD std::string GetName() const { return m_name; }
 
         virtual void Open();
         virtual void Close();
@@ -56,12 +59,12 @@ namespace Framework::Graphics::GUI {
 
         void TextCenter(const std::string& text) const;
 
-        SR_NODISCARD std::string GetName() const { return m_name; }
-
         void CheckFocused();
         void CheckHovered();
 
     private:
+        void SetManager(WidgetManager* manager);
+
         void InternalCheckFocused();
         void InternalCheckHovered();
         void DrawWindow();
@@ -73,6 +76,7 @@ namespace Framework::Graphics::GUI {
         std::atomic<WidgetFlagBits> m_internalFlags;
         WindowFlags m_windowFlags;
         Helper::Math::IVector2 m_size;
+        WidgetManager* m_manager;
 
     protected:
         WidgetFlagBits m_widgetFlags;

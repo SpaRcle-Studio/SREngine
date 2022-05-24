@@ -4,7 +4,7 @@
 
 #include <Types/Mesh.h>
 #include <Memory/MeshAllocator.h>
-#include <EntityComponentSystem/Component.h>
+#include <ECS/Component.h>
 #include <ResourceManager/ResourceManager.h>
 #include <ResourceManager/IResource.h>
 
@@ -39,7 +39,7 @@ namespace SR_GRAPH_NS::Types {
     Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
         auto &&pMesh = TryLoad(localPath, type, id);
 
-        SRVerifyFalse2(pMesh, "Mesh not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
+        SRVerifyFalse2(!pMesh, "Mesh not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
 
         return pMesh;
     }
@@ -52,7 +52,7 @@ namespace SR_GRAPH_NS::Types {
         Mesh *mesh = nullptr;
 
         if (Mesh *pMesh = ResourceManager::Instance().Find<Mesh>(resourceId)) {
-            SRVerifyFalse((mesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
+            SRVerifyFalse(!(mesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
             return mesh;
         }
 
@@ -316,6 +316,10 @@ namespace SR_GRAPH_NS::Types {
         }
 
         IResource::OnResourceUpdated(pResource, depth);
+    }
+
+    bool Mesh::HaveDefMaterial() const {
+        return !(!m_material || m_material != Material::GetDefault());
     }
 }
 
