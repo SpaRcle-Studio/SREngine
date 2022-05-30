@@ -4,6 +4,7 @@
 
 #include <Environment/Vulkan/VulkanMemory.h>
 #include <Environment/PipeLine.h>
+#include <EvoVulkan/Types/VmaBuffer.h>
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
         uint32_t w, uint32_t h,

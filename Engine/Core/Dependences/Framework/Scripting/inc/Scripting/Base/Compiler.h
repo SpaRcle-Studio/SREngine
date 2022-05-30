@@ -17,26 +17,10 @@ namespace SR_SCRIPTING_NS {
         ~Compiler() override = default;
 
     public:
-        void StartAll();
-        void UpdateAll();
-        void FixedUpdateAll();
-
-    public:
-        void RegisterScript(Script* script);
-        void RemoveScript(Script* script);
-        void PollEvents();
-        bool Contains(Script* script);
-
-    public:
-        virtual bool Init()    = 0;
-        virtual bool Destroy() = 0;
+        virtual bool Init() = 0;
 
     protected:
         Mutex m_mutex = Mutex();
-
-        std::set<Script*> m_scripts        = {};
-        std::set<Script*> m_scriptsToAdd   = {};
-        std::set<Script*> m_scriptsToDel   = {};
 
     };
 }

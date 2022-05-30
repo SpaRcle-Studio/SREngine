@@ -26,7 +26,7 @@ void SceneViewer::Draw() {
     if (m_camera.LockIfValid()) {
         auto camera = m_camera->GetComponent<Camera>();
         //if (m_id = camera->GetPostProcessing()->GetFinally(); m_id >= 0 && camera->IsReady()) {
-        if (m_id = SR_ID_INVALID; m_id >= 0 && camera->IsReady()) {
+        if (m_id = SR_ID_INVALID; m_id >= 0 && camera->IsActive()) {
             m_guizmo->DrawTools();
 
             ImGui::BeginGroup();

@@ -47,17 +47,13 @@ namespace Framework::Graphics::Animations {
             if (m_mesh)
                 m_mesh->OnScaled(value);
         }
-        void OnDestroyGameObject() override {
-            delete this;
-        }
-        void OnRemoveComponent() override {
-            if (m_mesh)
-                m_mesh->OnRemoveComponent();
+        void OnDestroy() override {
+            if (m_mesh) {
+                m_mesh->OnDestroy();
+                m_mesh = nullptr;
+            }
 
-            OnDestroyGameObject();
-        }
-        void OnAttachComponent() override {
-            Component::OnAttachComponent();
+            delete this;
         }
     };
 }

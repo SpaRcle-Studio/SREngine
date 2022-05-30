@@ -43,7 +43,6 @@ namespace SR_UTILS_NS {
         }
 
         component->SetParent(this);
-        component->OnAttachComponent();
         m_components.push_back(component);
 
         UpdateComponents();
@@ -93,8 +92,9 @@ namespace SR_UTILS_NS {
             m_scene.Unlock();
         }
 
-        for (Component *component : m_components)
-            component->OnDestroyGameObject();
+        for (auto&& component : m_components) {
+            component->OnDestroy();
+        }
         m_components.clear();
 
         for (GameObject::Ptr gameObject : m_children) {
@@ -267,8 +267,8 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::UpdateComponentsEnabled() {
-        for (auto comp : m_components)
-            comp->SetActive(m_isParentActive && m_isActive);
+        //for (auto comp : m_components)
+        //  comp->SetActive(m_isParentActive && m_isActive);
     }
 
     Math::FVector3 GameObject::GetBarycenter() {
@@ -320,7 +320,7 @@ namespace SR_UTILS_NS {
     bool GameObject::RemoveComponent(Component *component) {
         for (auto it = m_components.begin(); it != m_components.end(); ++it) {
             if (*it == component) {
-                component->OnRemoveComponent();
+                component->OnDestroy();
                 m_components.erase(it);
                 return true;
             }

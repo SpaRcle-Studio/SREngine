@@ -66,7 +66,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::DrawVulkan() {
-        if (!IsReady() || IsDestroyed())
+        if (!IsActive() || IsDestroyed())
             return;
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)

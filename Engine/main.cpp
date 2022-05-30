@@ -19,6 +19,7 @@
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
 #include <Environment/Vulkan.h>
+#include <ECS/ComponentManager.h>
 
 #include <Types/Rigidbody.h>
 #include <Types/RawMesh.h>
@@ -38,6 +39,7 @@
 #include <Types/Marshal.h>
 #include <Render/Camera.h>
 #include <Render/RenderManager.h>
+#include <Scripting/Base/Behaviour.h>
 
 using namespace Framework;
 
@@ -55,6 +57,8 @@ using namespace Framework::Graphics::Animations;
 
 using namespace Framework::Physics;
 using namespace Framework::Physics::Types;
+
+using namespace Framework::Scripting;
 
 /*
         +---------------+       +----+          +----+       +---------------+            +----------------+
@@ -120,6 +124,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Material>();
         resourcesManager.RegisterType<Shader>();
         resourcesManager.RegisterType<Skybox>();
+        resourcesManager.RegisterType<Behaviour>();
     }
 
     // Register all components
@@ -129,6 +134,7 @@ int main(int argc, char **argv) {
         ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return Camera::Allocate(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
+        ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
 
         if (Helper::Features::Instance().Enabled("DebugChunks", false))
             Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
@@ -186,15 +192,15 @@ int main(int argc, char **argv) {
     auto&& engine = Engine::Instance();
 
     if(engine.Create(window, physics)) {
-      if (engine.Init(Engine::MainScriptType::Engine)) {
-          if (engine.Run()){
+        if (engine.Init()) {
+            if (engine.Run()) {
 
-          }
-          else
-              SR_ERROR("Failed to running game engine!");
-      }
-      else
-          SR_ERROR("Failed to initializing game engine!");
+            }
+            else
+                SR_ERROR("Failed to running game engine!");
+        }
+        else
+            SR_ERROR("Failed to initializing game engine!");
     }
     else
         SR_ERROR("Failed to creating game engine!");
@@ -207,7 +213,8 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
-    Framework::Helper::EntityManager::Destroy();
+    SR_SCRIPTING_NS::GlobalEvoCompiler::Destroy();
+    SR_UTILS_NS::EntityManager::Destroy();
     Framework::Engine::Destroy();
     Framework::Graphics::GUI::NodeManager::Destroy();
 

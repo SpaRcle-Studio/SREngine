@@ -10,14 +10,14 @@
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type, std::string name)
-            : IResource(typeid(Mesh).name())
-            , m_env(Environment::Get())
-            , m_type(type)
-            , m_pipeline(Environment::Get()->GetPipeLine())
-            , m_material(nullptr)
-            , m_geometryName(std::move(name))
+        : IResource(typeid(Mesh).name())
+        , m_env(Environment::Get())
+        , m_type(type)
+        , m_pipeline(Environment::Get()->GetPipeLine())
+        , m_material(nullptr)
+        , m_geometryName(std::move(name))
     {
-        Component::Init<Mesh>();
+        Component::InitComponent<Mesh>();
     }
 
     Mesh::~Mesh() {
@@ -118,14 +118,15 @@ namespace SR_GRAPH_NS::Types {
         return meshes;
     }
 
-    void Mesh::OnDestroyGameObject() {
+    void Mesh::OnDestroy() {
         Destroy();
 
-        if (!m_render) {
+        if (m_render) {
+            m_render->RemoveMesh(this);
+        }
+        else if (IsCalculated()) {
             SR_ERROR("Mesh::OnDestroyGameObject() : render is not set! Something went wrong...");
         }
-        else
-            m_render->RemoveMesh(this);
     }
 
     bool Mesh::IsCanCalculate() const {
@@ -299,11 +300,6 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_rawMesh = pRaw;
-    }
-
-    void Mesh::OnReady(bool ready) {
-        m_env->SetBuildState(false);
-        Component::OnReady(ready);
     }
 
     Shader *Mesh::GetShader() const {

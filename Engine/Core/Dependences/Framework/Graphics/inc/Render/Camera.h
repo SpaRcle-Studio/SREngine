@@ -37,7 +37,6 @@ namespace SR_GRAPH_NS {
 
         void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
         void OnMove(const SR_MATH_NS::FVector3& newValue) override;
-        void OnReady(bool ready) override;
 
     public:
         SR_NODISCARD SR_FORCE_INLINE bool IsAllowUpdateProjection() const { return m_allowUpdateProj;          }
@@ -115,8 +114,7 @@ namespace SR_GRAPH_NS {
     private:
         void UpdateView() noexcept;
         bool Calculate() noexcept;
-        void OnRemoveComponent() override;
-        void OnDestroyGameObject() override;
+        void OnDestroy() override;
 
     private:
         std::atomic<bool>     m_isCreate          = false;

@@ -156,7 +156,7 @@ namespace SR_GTYPES_NS {
         if (m_shader) {
             auto&& render = m_shader->GetRender();
             RemoveDependency(m_shader);
-            if (m_shader->GetCountUses() == 0) {
+            if (m_shader->GetCountUses() == 0 && m_shader->Ready()) {
                 SRAssert2(render, "Render are nullptr!");
                 if (render) {
                     render->FreeShader(m_shader);
@@ -186,7 +186,7 @@ namespace SR_GTYPES_NS {
 
             RemoveDependency(oldTexture);
 
-            if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove())
+            if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove() && !oldTexture->IsDestroyed())
                 oldTexture->Destroy();
         }
 
@@ -196,7 +196,7 @@ namespace SR_GTYPES_NS {
 
         property->data = pTexture;
 
-        /// обновляем все иерархию вверх (меши)
+        /// обновляем всю иерархию вверх (меши)
         UpdateResources(1);
 
         Environment::Get()->SetBuildState(false);

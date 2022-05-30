@@ -18,7 +18,7 @@ namespace Framework {
         API(const API &) = delete;
         ~API() = delete;
     public:
-        static void RegisterEvoScriptClasses(Framework::Scripting::EvoCompiler *compiler);
+        static void RegisterEvoScriptClasses();
         static void RegisterDebug(EvoScript::AddressTableGen* generator);
         static void RegisterEngine(EvoScript::AddressTableGen* generator);
         static void RegisterScene(EvoScript::AddressTableGen* generator);

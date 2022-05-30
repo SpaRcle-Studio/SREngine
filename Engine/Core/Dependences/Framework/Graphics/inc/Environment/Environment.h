@@ -67,6 +67,7 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] Font GetIconFont() const { return m_iconFont; }
         [[nodiscard]] GUIContext GetGUIContext() const { return m_guiContext; }
         [[nodiscard]] bool IsGUIEnabled() const { return m_guiEnabled; }
+        [[nodiscard]] bool HasWindow() const { return m_basicWindow; }
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }

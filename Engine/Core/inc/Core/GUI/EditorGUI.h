@@ -35,7 +35,7 @@ namespace SR_CORE_NS::GUI {
         using Widgets = std::unordered_map<size_t, Graphics::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
     public:
-        explicit EditorGUI(Scripting::Compiler* compiler);
+        explicit EditorGUI();
 
     private:
         ~EditorGUI() override;
@@ -78,8 +78,6 @@ namespace SR_CORE_NS::GUI {
 
     private:
         Graphics::Window*    m_window     = nullptr;
-        Scripting::Compiler* m_compiler   = nullptr;
-        Scripting::Script*   m_script     = nullptr;
 
         std::atomic<bool>    m_isInit     = false;
         std::atomic<bool>    m_hasErrors  = false;

@@ -6,6 +6,7 @@
 
 #include <GUI/Utils.h>
 #include <ECS/Transform3D.h>
+#include <Scripting/Base/Behaviour.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -57,6 +58,8 @@ namespace Framework::Core::GUI {
 
         uint32_t index = 0;
         m_gameObject->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
+            SR_UTILS_NS::Component* copyPtrComponent = component;
+
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(component->GetComponentName().c_str())) {
@@ -68,8 +71,18 @@ namespace Framework::Core::GUI {
                 ImGui::EndPopup();
             }
 
-            DrawComponent<Graphics::Camera>(component, "Camera", index);
-            DrawComponent<Graphics::Types::Mesh3D>(component, "Mesh3D", index);
+            copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
+            copyPtrComponent = DrawComponent<Graphics::Camera>(copyPtrComponent, "Camera", index);
+            copyPtrComponent = DrawComponent<Graphics::Types::Mesh3D>(copyPtrComponent, "Mesh3D", index);
+
+            if (copyPtrComponent != component && copyPtrComponent) {
+                SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
+
+                m_gameObject->RemoveComponent(component);
+                m_gameObject->AddComponent(copyPtrComponent);
+
+                return false;
+            }
 
             return true;
 

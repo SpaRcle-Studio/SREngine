@@ -37,13 +37,13 @@ namespace SR_UTILS_NS {
         using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource*>>;
         using Info = std::unordered_map<ResourcePath, ResourceInfo>;
     public:
-        SR_NODISCARD IResource* Find(const std::string& id);
-        SR_NODISCARD bool IsLast(const std::string& id);
+        SR_NODISCARD IResource* Find(const ResourceId& id);
+        SR_NODISCARD bool IsLast(const ResourceId& id);
         SR_NODISCARD const CopiesMap& GetCopiesRef() const;
         SR_NODISCARD Info& GetInfo();
 
-        void Remove(IResource* resource);
-        void Add(IResource* resource);
+        void Remove(IResource* pResource);
+        void Add(IResource* pResource);
 
     private:
         ResourcesSet m_resources;

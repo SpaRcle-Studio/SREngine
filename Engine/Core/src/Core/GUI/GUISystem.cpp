@@ -11,6 +11,7 @@
 #include <Input/InputSystem.h>
 #include <GUI.h>
 #include <ResourceManager/ResourceManager.h>
+#include <ECS/ComponentManager.h>
 #include <World/Chunk.h>
 #include <GUI/Editor/MessageBox.h>
 

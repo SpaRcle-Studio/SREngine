@@ -14,8 +14,10 @@
 #include <ResourceManager/ResourceManager.h>
 
 namespace Framework {
-    void API::RegisterEvoScriptClasses(Scripting::EvoCompiler* compiler)  {
-        auto generator = compiler->GetGenerator();
+    void API::RegisterEvoScriptClasses() {
+        auto&& compiler = SR_SCRIPTING_NS::GlobalEvoCompiler::Instance();
+        auto&& generator = compiler.GetGenerator();
+        auto&& casts = compiler.GetCasting();
 
         RegisterScene(generator);
         RegisterDebug(generator);
@@ -38,14 +40,12 @@ namespace Framework {
         RegisterPostProcessing(generator);
         RegisterISavable(generator);
 
-        auto casts = compiler->GetCasting();
-
         RegisterCasts(casts);
 
         generator->Save(Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/Libraries/"));
         casts->Save(Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/Libraries/"));
 
-        compiler->GetEvoScriptCompiler()->SetApiVersion(generator->GetApiVersion());
+        compiler.SetApiVersion(generator->GetApiVersion());
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {
@@ -127,20 +127,15 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetParent, GameObject*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetBarycenter, FVector3)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, OnAttachComponent, void)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsReady, bool)
 
         ESRegisterMethod(EvoScript::Public, generator, Component, SetParent, void, ESArg1(GameObject* gm), ESArg1(gm))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnMove, void, ESArg1(const FVector3& v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Component, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Component, OnReady, void, ESArg1(bool v), ESArg1(v))
 
-        ESRegisterMethod(EvoScript::Public, generator, Component, SetActive, void, ESArg1(bool v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Component, SetEnabled, void, ESArg1(bool v), ESArg1(v))
-
 
         generator->AddIncompleteType("GameObject", "Component");
     }
@@ -227,7 +222,6 @@ namespace Framework {
 
         ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
-        ESRegisterMethod(EvoScript::Private, generator, Camera, OnReady, void, ESArg1(bool v), ESArg1(v)) // Component
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {

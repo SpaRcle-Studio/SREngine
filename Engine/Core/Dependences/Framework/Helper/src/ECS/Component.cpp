@@ -4,12 +4,11 @@
 
 #include <ECS/Component.h>
 #include <ECS/GameObject.h>
+#include <Types/Thread.h>
+
+#include <ECS/ComponentManager.h>
 
 namespace SR_UTILS_NS {
-    void Framework::Helper::Component::OnAttachComponent() {
-        ComponentManager::Instance().DoEvent(this, m_componentId);
-    }
-
     SR_HTYPES_NS::Marshal Component::Save(SavableFlags flags) const {
         auto marshal = Entity::Save(flags);
 
@@ -18,18 +17,22 @@ namespace SR_UTILS_NS {
         return marshal;
     }
 
+    bool Component::IsActive() const {
+        return m_isEnabled && (!m_parent || m_parent->IsActive());
+    }
+
     bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const std::function<Component *(void)> &constructor) {
         m_names.insert(std::make_pair(id, name));
         m_ids.insert(std::make_pair(name, id));
         m_creators.insert(std::make_pair(id, constructor));
 
-        Debug::System("ComponentManager::RegisterComponentImpl() : register \"" + name + "\"...");
+        SR_SYSTEM_LOG("ComponentManager::RegisterComponentImpl() : register \"" + name + "\"...");
 
         return true;
     }
 
     Component *Helper::ComponentManager::CreateComponentOfName(const std::string &name) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         if (m_ids.count(name) == 0) {
             SR_ERROR("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
@@ -49,7 +52,7 @@ namespace SR_UTILS_NS {
     }
 
     Component *ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         m_lastComponent = marshal.Read<std::string>();
 

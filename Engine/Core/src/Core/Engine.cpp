@@ -15,6 +15,7 @@
 
 #include <Render/Render.h>
 #include <Window/Window.h>
+#include <Types/Skybox.h>
 
 #include <World/Scene.h>
 
@@ -25,7 +26,6 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     m_physics = physics;
 
     m_time       = new Helper::Types::Time();
-    m_compiler   = new Scripting::EvoCompiler();
     m_cmdManager = new Helper::CmdManager();
     m_input      = new Helper::InputDispatcher();
 
@@ -42,7 +42,7 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     }
 
     window->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
-    window->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI(m_compiler));
+    window->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI());
 
     m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
     m_input->Register(m_editor);
@@ -50,7 +50,7 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
 
     if (!m_physics->Create()) {
-        SR_ERROR("Engine::Create() : failed create physics engine!");
+        SR_ERROR("Engine::Create() : failed to create physics engine!");
         return false;
     }
 
@@ -58,12 +58,21 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
         SR_UTILS_NS::Input::SetMouseScroll(x, y);
     });
 
+    if (!m_scene.Valid()) {
+        SetScene(SR_WORLD_NS::Scene::New("New scene"));
+    }
+
+    /// TODO: move to camera
+    if (!m_window->GetRender()->GetSkybox()) {
+        m_window->GetRender()->SetSkybox(SR_GTYPES_NS::Skybox::Load("Sea.jpg"));
+    }
+
     m_isCreate = true;
 
     return true;
 }
 
-bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
+bool Framework::Engine::Init() {
     if (!m_isCreate) {
         SR_ERROR("Engine::Init() : engine is not create!");
         return false;
@@ -87,13 +96,6 @@ bool Framework::Engine::Init(Engine::MainScriptType mainScriptType) {
                 break;
         }
     });
-
-    m_scriptType = mainScriptType;
-
-    if (!m_compiler || !m_compiler->Init()) {
-        Helper::Debug::Error("Engine::Init() : failed to initialize compiler!");
-        return false;
-    }
 
     if (!m_window->Init()) {
         Helper::Debug::Error("Engine::Init() : failed to initialize window!");
@@ -120,13 +122,8 @@ bool Framework::Engine::Run() {
 
     SR_INFO("Engine::Run() : running game engine...");
 
-    if (!m_window->Run()){
+    if (!m_window->Run()) {
         SR_ERROR("Engine::Run() : failed to ran window!");
-        return false;
-    }
-
-    if (!LoadMainScript()) {
-        SR_ERROR("Engine::Run() : failed to load main script!");
         return false;
     }
 
@@ -183,9 +180,6 @@ void Framework::Engine::Await() {
         /// fixed update
         if (accumulator >= updateFrequency) {
             SR_UTILS_NS::EventManager::PoolEvents();
-            m_compiler->PollEvents();
-
-            m_compiler->StartAll();
 
             while (accumulator >= updateFrequency) {
                 if (windowFocused) {
@@ -222,10 +216,6 @@ void Framework::Engine::Await() {
 
                 m_editor->Update();
 
-                if (needUpdateScripts) {
-                    m_compiler->FixedUpdateAll();
-                }
-
                 accumulator -= updateFrequency;
             }
         }
@@ -235,10 +225,6 @@ void Framework::Engine::Await() {
             break;
         }
 
-        if (needUpdateScripts) {
-            m_compiler->UpdateAll();
-        }
-
         accumulator += (float)deltaTime.count() / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
     }
 
@@ -246,17 +232,14 @@ void Framework::Engine::Await() {
         m_editor->Enable(false);
         Helper::Debug::System("Engine::Await() : disable editor gui...");
     }
-
-    Helper::Debug::System("Engine::Await() : Stopping main engine script...");
-
-    m_mainScript->Close();
-    m_mainScript->DelayedDestroyAndFree();
 }
 
 bool Framework::Engine::Close() {
     SR_INFO("Engine::Close() : close game engine...");
 
     m_isRun = false;
+
+    CloseScene();
 
     if (m_input)
         m_input->UnregisterAll();
@@ -287,14 +270,6 @@ bool Framework::Engine::Close() {
         m_window = nullptr;
     }
 
-    if (m_compiler) {
-        m_compiler->PollEvents();
-        SR_INFO("Engine::Close() : destroy compiler...");
-        m_compiler->Destroy();
-        delete m_compiler;
-        m_compiler = nullptr;
-    }
-
     if (m_time) {
         SR_INFO("Engine::Close() : destroy time...");
         delete m_time;
@@ -307,36 +282,14 @@ bool Framework::Engine::Close() {
 bool Framework::Engine::RegisterLibraries() {
     SR_LOG("Engine::RegisterLibraries() : register all libraries...");
 
-    API::RegisterEvoScriptClasses(dynamic_cast<Scripting::EvoCompiler*>(m_compiler));
+    API::RegisterEvoScriptClasses();
 
     return true;
 }
 
-bool Framework::Engine::LoadMainScript() {
-    SR_INFO("Engine::LoadMainScript() : loading the main engine script...");
-
-    std::string scriptName;
-    switch (m_scriptType) {
-        case MainScriptType::Engine:    scriptName = "Engine/Kernel"; break;
-        case MainScriptType::Benchmark: scriptName = "Engine/Benchmark"; break;
-        case MainScriptType::Game:
-        case MainScriptType::None:
-        default:
-            SR_ERROR("Engine::LoadMainScript() : unknown script type!");
-            return false;
-    }
-
-    m_mainScript = Scripting::Script::Allocate(scriptName, m_compiler, Scripting::ScriptType::EvoScript);
-
-    if (!m_mainScript->Compile()) {
-        SR_ERROR("Engine::LoadMainScript() : failed to load main engine script!");
-        return false;
-    }
-    else
-        return true;
-}
-
 bool Framework::Engine::CloseScene() {
+    SR_INFO("Engine::CloseScene() : close scene...");
+
     return m_scene.AutoFree([](SR_WORLD_NS::Scene* scene) {
         scene->Save();
         scene->Destroy();

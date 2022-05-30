@@ -21,7 +21,7 @@ namespace SR_GTYPES_NS {
     }
 
     void DebugWireframeMesh::DrawVulkan() {
-        if (!IsReady() || IsDestroyed())
+        if (!IsActive() || IsDestroyed())
             return;
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)

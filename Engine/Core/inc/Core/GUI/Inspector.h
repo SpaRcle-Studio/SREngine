@@ -29,16 +29,18 @@ namespace SR_CORE_NS::GUI {
     protected:
         void Draw() override;
         void DrawComponents();
-        void DrawTransform(Helper::Transform3D* transform) const;
+        void DrawTransform(SR_UTILS_NS::Transform3D* transform) const;
 
-        template<typename T> void DrawComponent(Helper::Component* component, const std::string& name, uint32_t& index) {
+        template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
 
             if (!pComponent)
-                return;
+                return component;
 
             if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index++, component->GetComponentName().c_str()).c_str()))
                 ComponentDrawer::DrawComponent(pComponent, index);
+
+            return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
         }
 
     private:

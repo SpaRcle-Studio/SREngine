@@ -29,9 +29,6 @@ namespace SR_SCRIPTING_NS {
         ~Script() override = default;
 
     public:
-        static Scripting::Script* Allocate(const std::string& name, Compiler* compiler, ScriptType type);
-
-    public:
         SR_NODISCARD bool IsAutoFree() const;
 
         virtual bool AwaitDestroy()          = 0;

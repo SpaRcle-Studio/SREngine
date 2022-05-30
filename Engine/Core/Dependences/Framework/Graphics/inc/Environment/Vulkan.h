@@ -24,6 +24,7 @@
 #include <EvoVulkan/Tools/VulkanInsert.h>
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
+#include <EvoVulkan/Types/VmaBuffer.h>
 
 #include <Environment/Vulkan/VulkanImGUI.h>
 
@@ -85,6 +86,8 @@ namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
         EvoVulkan::Core::RenderResult Render() override;
+        ~SRVulkan() override = default;
+
     public:
         bool OnResize() override;
 
@@ -205,7 +208,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
-        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { m_basicWindow->GetWidth(), m_basicWindow->GetHeight() }; }
+        [[nodiscard]] glm::vec2 GetWindowSize()                 const override;
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
 

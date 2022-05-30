@@ -780,13 +780,13 @@ namespace SR_GRAPH_NS {
 
         {
             if (m_cameras.Count() == 1) {
-                if (m_cameras.Front()->IsReady()) {
+                if (m_cameras.Front()->IsActive()) {
                     DrawToCamera(m_cameras.Front());
                 }
             }
             else
                 for (auto&& camera : m_cameras.GetElements()) {
-                    if (!camera->IsReady()) {
+                    if (!camera->IsActive()) {
                         return;
                     }
                     DrawToCamera(camera);
@@ -807,6 +807,10 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MATH_NS::IVector2 Window::GetWindowSize() const {
+        if (!m_env || !m_env->HasWindow()) {
+            return m_size;
+        }
+
         return m_env->GetWindowSize();
     }
 }

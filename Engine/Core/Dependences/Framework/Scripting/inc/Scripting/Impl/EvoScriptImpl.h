@@ -22,9 +22,7 @@ namespace SR_SCRIPTING_NS {
         ~EvoScriptImpl() override = default;
 
     public:
-        bool AwaitDestroy() override;
         bool Compile() override;
-        bool DelayedDestroyAndFree() override;
 
     public:
         void Awake() override;

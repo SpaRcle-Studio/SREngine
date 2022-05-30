@@ -20,11 +20,8 @@ namespace Framework::Physics::Types {
         }
 
     protected:
-        void OnDestroyGameObject() override {
+        void OnDestroy() override {
             delete this;
-        }
-        void OnRemoveComponent() override {
-            OnRemoveComponent();
         }
     };
 }

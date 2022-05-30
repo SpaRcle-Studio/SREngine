@@ -6,6 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(Core)
 
+if(EXISTS "${CMAKE_BINARY_DIR}/Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core/EvoVulkan.dll")
+    file(COPY ${CMAKE_BINARY_DIR}/Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core/EvoVulkan.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine/Debug)
+endif()
+if(EXISTS "${CMAKE_BINARY_DIR}/Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core/EvoVulkand.dll")
+    file(COPY ${CMAKE_BINARY_DIR}/Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core/EvoVulkand.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+endif()
+
 if(EXISTS "${CMAKE_BINARY_DIR}/bin/Debug/glew32d.dll")
     file(COPY ${CMAKE_BINARY_DIR}/bin/Debug/glew32d.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine/Debug)
 endif()

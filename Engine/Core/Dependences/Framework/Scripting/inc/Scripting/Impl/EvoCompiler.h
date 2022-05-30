@@ -14,27 +14,37 @@
 #include <EvoScript/Compilation/Casting.h>
 
 namespace SR_SCRIPTING_NS {
-    class EvoCompiler : public Compiler {
+    class EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {
     public:
-        EvoCompiler() = default;
-        ~EvoCompiler() override = default;
+        explicit EvoCompiler(std::string cachePath);
+        ~EvoCompiler() override;
 
     public:
-        SR_NODISCARD EvoScript::CastingGen*      GetCasting()           const { return m_casting;   }
-        SR_NODISCARD EvoScript::AddressTableGen* GetGenerator()         const { return m_generator; }
-        SR_NODISCARD EvoScript::Compiler*        GetEvoScriptCompiler() const { return m_compiler;  }
+        SR_NODISCARD EvoScript::CastingGen* GetCasting() const { return m_casting; }
+        SR_NODISCARD EvoScript::AddressTableGen* GetGenerator() const { return m_generator; }
 
     public:
         bool Init() override;
-        bool Destroy() override;
 
     private:
-        SR_NODISCARD std::string GetGenerator(const SR_XML_NS::Node& config) const;
+        SR_NODISCARD std::string GetGeneratorName(const SR_XML_NS::Node& config) const;
 
     private:
-        EvoScript::Compiler*        m_compiler      = nullptr;
-        EvoScript::AddressTableGen* m_generator     = nullptr;
-        EvoScript::CastingGen*      m_casting       = nullptr;
+        EvoScript::AddressTableGen* m_generator = nullptr;
+        EvoScript::CastingGen*      m_casting   = nullptr;
+
+    };
+
+    class GlobalEvoCompiler : public EvoCompiler, public SR_UTILS_NS::Singleton<GlobalEvoCompiler> {
+        friend SR_UTILS_NS::Singleton<GlobalEvoCompiler>;
+    protected:
+        GlobalEvoCompiler();
+        ~GlobalEvoCompiler() override = default;
+
+    protected:
+        void OnSingletonDestroy() override {
+            SR_INFO("GlobalEvoCompiler::OnSingletonDestroy() : free global compiler...")
+        }
 
     };
 }

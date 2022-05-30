@@ -8,20 +8,6 @@
 #include <Utils/Features.h>
 
 namespace SR_SCRIPTING_NS {
-    bool EvoScriptImpl::AwaitDestroy() {
-        SR_LOG("EvoScriptImpl::AwaitDestroy() : await destroy \"" + m_name + "\" script...");
-
-        m_compiler->RemoveScript(this);
-
-    ret:
-        if (m_compiler->Contains(this))
-            goto ret;
-
-        m_isDestroy = true;
-
-        return true;
-    }
-
     void EvoScriptImpl::Awake() {
         if (m_isDestroy)
             return;
@@ -85,28 +71,13 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        m_script = EvoScript::Script::Allocate(
-                m_name,
-                compiler->GetEvoScriptCompiler(),
-                compiler->GetGenerator()->GetAddresses(),
-                true
-        );
+        m_script = EvoScript::Script::Allocate(m_name, compiler->GetGenerator()->GetAddresses());
 
         const bool canCompile = Helper::Features::Instance().Enabled("EvoCompiler");
-        if (!m_script->Load(m_path, canCompile)) {
+        if (!m_script->Load(m_path, *compiler, canCompile)) {
             SR_ERROR("EvoScriptImpl::Compile() : failed to load script!");
             return false;
         }
-
-        m_compiler->RegisterScript(this);
-
-        return true;
-    }
-
-    bool Framework::Scripting::EvoScriptImpl::DelayedDestroyAndFree() {
-        m_autoFree = true;
-        m_compiler->RemoveScript(this);
-        m_isDestroy = true;
 
         return true;
     }

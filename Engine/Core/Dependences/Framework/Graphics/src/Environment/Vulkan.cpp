@@ -39,11 +39,11 @@ namespace Framework::Graphics {
             const std::string &appName,
             const std::string &engineName,
             const std::string &glslc) {
-        EvoVulkan::Tools::VkDebug::Log = [](const std::string &msg) { Helper::Debug::VulkanLog(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Warn = [](const std::string &msg) { Helper::Debug::Warn(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Error = [](const std::string &msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Graph = [](const std::string &msg) { Helper::Debug::Vulkan(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Assert = [](const std::string &msg) {
+        EvoVulkan::Tools::VkDebug::Instance().LogCallback = [](const std::string &msg) { Helper::Debug::VulkanLog(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().WarnCallback = [](const std::string &msg) { Helper::Debug::Warn(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().ErrorCallback = [](const std::string &msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().GraphCallback = [](const std::string &msg) { Helper::Debug::Vulkan(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().AssertCallback = [](const std::string &msg) {
             Helper::Debug::Assert(SR_VRAM + msg);
             return false;
         };
@@ -534,7 +534,7 @@ namespace Framework::Graphics {
             return false;
         }
 
-        this->m_basicWindow->InitGUI();
+        m_basicWindow->InitGUI();
 
         if (!m_imgui->Init(m_kernel)) {
             SR_ERROR("Vulkan::Init() : failed to init imgui!");
@@ -664,6 +664,18 @@ namespace Framework::Graphics {
         }
 
         vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
+    }
+
+    glm::vec2 Vulkan::GetWindowSize() const {
+        if (!m_basicWindow) {
+            SRHalt("Vulkan::GetWindowSize() : Basic window is nullptr!");
+            return glm::vec2(0, 0);
+        }
+
+        return {
+            m_basicWindow->GetWidth(),
+            m_basicWindow->GetHeight()
+        };
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

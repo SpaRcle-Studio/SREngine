@@ -67,6 +67,7 @@ namespace SR_UTILS_NS {
         }
 
         virtual bool Load() {
+            SRAssert2(IsValid(), "Invalid resource!");
             if (m_loadState == LoadState::Unknown || m_loadState == LoadState::Unloaded) {
                 m_loadState = LoadState::Loaded;
                 return true;

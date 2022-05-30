@@ -9,7 +9,7 @@
 Framework::Graphics::Camera::Camera()
     : m_pipeline(Environment::Get()->GetPipeLine())
 {
-    SR_UTILS_NS::Component::Init<Camera>();
+    SR_UTILS_NS::Component::InitComponent<Camera>();
 }
 
 void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shader *shader) noexcept {
@@ -86,14 +86,20 @@ void Framework::Graphics::Camera::OnMove(const Math::FVector3& newValue) {
 }
 
 void Framework::Graphics::Camera::UpdateProjection() {
-    m_aspect = static_cast<float_t>(m_cameraSize.x) / static_cast<float_t>(m_cameraSize.y);
+    if (m_cameraSize.HasZero()) {
+        SR_WARN("Camera::UpdateProjection() : camera size has zero!");
+        m_aspect = 0.f;
+    }
+    else {
+        m_aspect = static_cast<float_t>(m_cameraSize.x) / static_cast<float_t>(m_cameraSize.y);
+    }
+
     m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
 }
 
 void Framework::Graphics::Camera::UpdateProjection(uint32_t w, uint32_t h) {
     m_cameraSize = { (int32_t)w, (int32_t)h };
-    m_aspect = static_cast<float_t>(w) / static_cast<float_t>(h);
-    m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
+    UpdateProjection();
 }
 
 bool Framework::Graphics::Camera::Calculate() noexcept {
@@ -107,7 +113,7 @@ bool Framework::Graphics::Camera::Calculate() noexcept {
     return true;
 }
 
-void Framework::Graphics::Camera::OnDestroyGameObject() {
+void Framework::Graphics::Camera::OnDestroy() {
     if (m_window) {
         m_window->DestroyCamera(this);
         m_window = nullptr;
@@ -141,10 +147,6 @@ bool Framework::Graphics::Camera::CompleteResize() {
     return true;
 }
 
-void Framework::Graphics::Camera::OnReady(bool ready) {
-
-}
-
 glm::mat4 Framework::Graphics::Camera::GetImGuizmoView() const noexcept {
     auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
     matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
@@ -167,10 +169,6 @@ void Framework::Graphics::Camera::WaitCalculate() const  {
 ret:
     if (!m_isCalculate)
         goto ret;
-}
-
-void Framework::Graphics::Camera::OnRemoveComponent() {
-    OnDestroyGameObject();
 }
 
 void Framework::Graphics::Camera::SetFar(float_t value) {

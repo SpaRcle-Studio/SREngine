@@ -31,7 +31,12 @@ bool SR_GRAPH_NS::Types::Texture::Destroy() {
     if (Debug::GetLevel() >= Debug::Level::Medium)
         SR_LOG("Texture::Destroy() : destroying texture...");
 
-    m_render->FreeTexture(this);
+    if (m_render) {
+        m_render->FreeTexture(this);
+    }
+    else if (IsCalculated()) {
+        SRAssert2(false, "Render lost!");
+    }
 
     return IResource::Destroy();
 }

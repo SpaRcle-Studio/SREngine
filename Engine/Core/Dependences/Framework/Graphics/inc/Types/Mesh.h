@@ -66,12 +66,8 @@ namespace SR_GTYPES_NS {
         void OnScaled(const Helper::Math::FVector3& newValue) override;
         void OnSkewed(const Helper::Math::FVector3& newValue) override;
 
-        void OnDestroyGameObject() override;
-        void OnRemoveComponent() override {
-            OnDestroyGameObject();
-        }
-        void OnReady(bool ready) override;
-        void OnAttachComponent() override { }
+        void OnDestroy() override;
+
         void OnTransparencyChanged();
 
     public:

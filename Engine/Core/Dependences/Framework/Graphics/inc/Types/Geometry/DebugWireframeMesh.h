@@ -24,7 +24,7 @@ namespace SR_GTYPES_NS {
             : IndexedMesh(MeshType::Wireframe, name)
         {
             /// override component
-            Component::Init<DebugWireframeMesh>();
+            Component::InitComponent<DebugWireframeMesh>();
         }
 
     protected:

@@ -23,8 +23,7 @@
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;
 
-EditorGUI::EditorGUI(Framework::Scripting::Compiler *compiler)
-    : m_compiler(compiler)
+EditorGUI::EditorGUI()
 {
     m_window = Engine::Instance().GetWindow();
 
@@ -59,20 +58,6 @@ bool EditorGUI::Init() {
 
     SR_INFO("EditorGUI::Init() : initializing editor gui...");
 
-    if (!m_compiler) {
-        SR_ERROR("EditorGUI::Init() : compiler is nullptr!");
-        return false;
-    }
-
-    if (SR_UTILS_NS::Features::Instance().Enabled("UseEditorGUIScript", false)) {
-        m_script = Scripting::Script::Allocate("Engine/Editor", m_compiler, Scripting::ScriptType::EvoScript);
-        if (!m_script || !m_script->Compile()) {
-            SR_ERROR("EditorGUI::Init() : failed to allocate/compile script!");
-            m_hasErrors = true;
-            return false;
-        }
-    }
-
     Load();
 
     m_isInit = true;
@@ -82,14 +67,6 @@ bool EditorGUI::Init() {
 
 bool EditorGUI::Destroy() {
     Save();
-
-    if (m_compiler)
-        m_compiler = nullptr;
-
-    if (m_script) {
-        m_script->DelayedDestroyAndFree();
-        m_script = nullptr;
-    }
 
     m_isInit = false;
 
@@ -112,9 +89,6 @@ void EditorGUI::Draw() {
     if (m_useDocking) {
         GUISystem::Instance().BeginDockSpace();
     }
-
-    if (m_script)
-        m_script->OnGUI();
 
     WidgetManager::Draw();
 }

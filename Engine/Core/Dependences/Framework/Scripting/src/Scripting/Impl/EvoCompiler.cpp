@@ -11,6 +11,22 @@
 #include <Utils/Features.h>
 
 namespace SR_SCRIPTING_NS {
+    EvoCompiler::EvoCompiler(std::string cachePath)
+        : EvoScript::Compiler(std::move(cachePath))
+    { }
+
+    EvoCompiler::~EvoCompiler() {
+        if (m_generator) {
+            delete m_generator;
+            m_generator = nullptr;
+        }
+
+        if (m_casting) {
+            delete m_casting;
+            m_casting = nullptr;
+        }
+    }
+
     bool EvoCompiler::Init() {
         SR_INFO("EvoCompiler::Init() : initialization of the compiler...");
 
@@ -24,20 +40,17 @@ namespace SR_SCRIPTING_NS {
         if (configPath.Exists()) {
             auto xml = SR_XML_NS::Document::Load(configPath);
             const auto& configs = xml.Root().GetNode("Configs");
-            const auto generator = GetGenerator(configs);
+            const auto generator = GetGeneratorName(configs);
 
             if (generator.empty()) {
                 SR_ERROR("EvoCompiler::Init() : failed to get cmake generator!");
                 return false;
             }
 
+            SetGenerator(generator);
+
             m_generator = new EvoScript::AddressTableGen();
             m_casting = new EvoScript::CastingGen(m_generator);
-
-            m_compiler  = EvoScript::Compiler::Create(
-                    generator,
-                    Helper::ResourceManager::Instance().GetCachePath().Concat("Scripting")
-            );
 
             return true;
         }
@@ -48,28 +61,13 @@ namespace SR_SCRIPTING_NS {
         return false;
     }
 
-    bool Framework::Scripting::EvoCompiler::Destroy()  {
-        if (m_compiler) {
-            m_compiler->Destroy();
-            m_compiler->Free();
-            m_compiler = nullptr;
-        }
-
-        if (m_generator) {
-            delete m_generator;
-            m_generator = nullptr;
-        }
-
-        return true;
-    }
-
-    std::string Framework::Scripting::EvoCompiler::GetGenerator(const Framework::Helper::Xml::Node &config) const {
+    std::string Framework::Scripting::EvoCompiler::GetGeneratorName(const Framework::Helper::Xml::Node &config) const {
         if (!Helper::Features::Instance().Enabled("EvoCompiler", true)) {
             SR_INFO("EvoCompiler::GetGenerator() : cmake generator is disabled.");
             return "Disabled";
         }
 
-        auto generator = config.GetNode("Generator").GetAttribute("Value").ToString();
+        auto&& generator = config.GetNode("Generator").GetAttribute("Value").ToString();
 
         if (generator.empty()) {
             SR_ERROR("EvoCompiler::Init() : invalid generator!");
@@ -87,5 +85,11 @@ namespace SR_SCRIPTING_NS {
         SR_INFO("EvoCompiler::GetGenerator() : use \"" + generator + "\" generator...");
 
         return std::move(generator);
+    }
+
+    GlobalEvoCompiler::GlobalEvoCompiler()
+        : SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"))
+    {
+        Init();
     }
 }

@@ -19,7 +19,7 @@ namespace SR_GTYPES_NS {
             : IndexedMesh(MeshType::Static, name)
         {
             /// override component
-            Component::Init<Mesh3D>();
+            Component::InitComponent<Mesh3D>();
         }
 
         ~Mesh3D() override = default;

@@ -13,6 +13,7 @@
 #include <EvoVulkan/Complexes/Shader.h>
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
+#include <EvoVulkan/DescriptorSet.h>
 #include <Environment/TextureHelper.h>
 #include <Environment/Vulkan/DynamicTextureDescriptorSet.h>
 
@@ -24,8 +25,6 @@
 
 namespace Framework::Graphics::VulkanTools {
     class MemoryManager : Helper::NonCopyable {
-    public:
-        MemoryManager(const MemoryManager&) = delete;
     private:
         MemoryManager() = default;
         ~MemoryManager() override = default;

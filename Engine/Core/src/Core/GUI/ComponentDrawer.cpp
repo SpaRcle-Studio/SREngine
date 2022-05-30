@@ -5,6 +5,7 @@
 #include <Core/GUI/ComponentDrawer.h>
 #include <Core/GUI/GUISystem.h>
 
+#include <Scripting/Base/Behaviour.h>
 #include <Render/Camera.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <ResourceManager/ResourceManager.h>
@@ -17,7 +18,14 @@ using namespace Framework::Graphics::Types;
 using namespace Framework::Graphics;
 
 namespace Framework::Core::GUI {
-    void ComponentDrawer::DrawComponent(Camera* camera, int32_t index) {
+    void ComponentDrawer::DrawComponent(Scripting::Behaviour *&behaviour, int32_t index) {
+        ImGui::Text("%p", (void*)behaviour);
+        if (ImGui::Button("Reset")) {
+            behaviour = Scripting::Behaviour::CreateEmpty();
+        }
+    }
+
+    void ComponentDrawer::DrawComponent(Camera*& camera, int32_t index) {
         float_t cameraFar  = camera->GetFar();
         if (ImGui::InputFloat("Far", &cameraFar, 5) && cameraFar >= 0) {
             camera->SetFar(cameraFar);
@@ -37,7 +45,7 @@ namespace Framework::Core::GUI {
             ImGui::TextColored(ImColor(1, 0, 0, 1), "WARN: Window is missing!");
     }
 
-    void ComponentDrawer::DrawComponent(Mesh3D* mesh3d, int32_t index) {
+    void ComponentDrawer::DrawComponent(Mesh3D*& mesh3d, int32_t index) {
         Graphics::GUI::DrawValue("Mesh", mesh3d->GetResourceId());
         Graphics::GUI::DrawValue("Id", mesh3d->GetMeshId());
         Graphics::GUI::DrawValue("Geometry name", mesh3d->GetGeometryName());
@@ -65,7 +73,7 @@ namespace Framework::Core::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(Framework::Graphics::Types::Material *material, int32_t index) {
+    void ComponentDrawer::DrawComponent(Framework::Graphics::Types::Material *&material, int32_t index) {
         const bool readOnly = material->IsReadOnly();
 
         Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
