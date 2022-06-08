@@ -50,6 +50,7 @@
 #include "../Graphics/src/Render/Shader.cpp"
 #include "../Graphics/src/Render/ShaderGenerator.cpp"
 #include "../Graphics/src/Render/RenderManager.cpp"
+#include "../Graphics/src/Render/CameraManager.cpp"
 #include "../Graphics/src/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"

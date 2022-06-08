@@ -7,7 +7,7 @@
 
 #include <Utils/StringFormat.h>
 
-namespace SR_UTILS_NS::Types {
+namespace SR_HTYPES_NS {
     static std::atomic<int64_t> SAFE_POINTER_COUNTS = 0;
 
     #define SR_NEW_SAFE_PTR() {                              \
@@ -66,10 +66,12 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD bool LockIfValid() const;
         SR_NODISCARD bool RecursiveLockIfValid() const;
 
+        SR_NODISCARD T* Get() const { return m_ptr; }
         SR_NODISCARD void* GetRawPtr() const { return (void*)m_ptr; }
         SR_NODISCARD SafePtr<T>& GetThis() { return *this; }
         SR_NODISCARD bool Valid() const { return m_data && m_data->m_valid; }
         SR_NODISCARD bool IsLocked() const { return Valid() && m_data->m_lock; }
+        SR_NODISCARD uint32_t GetUseCount() const;
 
         [[deprecated("Ref-unsafe. Replaced by AutoFree")]]
         bool Free(const std::function<void(T *ptr)> &freeFun);
@@ -324,6 +326,10 @@ namespace SR_UTILS_NS::Types {
 
             return true;
         }
+    }
+
+    template<typename T> uint32_t SafePtr<T>::GetUseCount() const {
+        return Valid() ? m_data->m_useCount.load() : 0;
     }
 }
 

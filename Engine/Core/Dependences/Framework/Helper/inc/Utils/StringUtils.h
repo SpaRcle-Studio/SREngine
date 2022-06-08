@@ -9,6 +9,25 @@
 #include <Math/Mathematics.h>
 
 namespace SR_UTILS_NS {
+    static std::wstring s2ws(const std::string& str)
+    {
+        using convert_typeX = std::codecvt_utf8<wchar_t>;
+        std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+        return converterX.from_bytes(str);
+    }
+
+    static std::string ws2s(const std::wstring& wstr)
+    {
+        using convert_typeX = std::codecvt_utf8<wchar_t>;
+        std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+        return converterX.to_bytes(wstr);
+    }
+
+    #define SR_S2WS(str) s2ws(str)
+    #define SR_WS2S(wstr) ws2s(wstr)
+
     class StringUtils {
     public:
         StringUtils() = delete;
@@ -320,11 +339,11 @@ namespace SR_UTILS_NS {
             return result;
         }
 
-        inline static std::string ReplaceAll(std::string const& original, std::string const& from, std::string const& to) noexcept {
-            std::string results;
-            std::string::const_iterator end = original.end();
-            std::string::const_iterator current = original.begin();
-            std::string::const_iterator next = std::search(current, end, from.begin(), from.end());
+        template<typename stringType> static stringType ReplaceAll(stringType const& original, stringType const& from, stringType const& to) noexcept {
+            stringType results;
+            typename stringType::const_iterator end = original.end();
+            typename stringType::const_iterator current = original.begin();
+            typename stringType::const_iterator next = std::search(current, end, from.begin(), from.end());
             while (next != end) {
                 results.append(current, next);
                 results.append(to);
@@ -334,14 +353,15 @@ namespace SR_UTILS_NS {
             results.append(current, next);
             return results;
         }
+
         inline static std::string ToLower(std::string str) noexcept {
             for (char & t : str)
                 t = tolower(t);
             return str;
         }
         inline static std::string MakePath(std::string str, bool toLower = false) noexcept {
-            str = ReplaceAll(str, "\\\\", "/");
-            str = ReplaceAll(str, "\\", "/");
+            str = ReplaceAll<std::string>(str, "\\\\", "/");
+            str = ReplaceAll<std::string>(str, "\\", "/");
             if (toLower) str = ToLower(str);
             return str;
         }

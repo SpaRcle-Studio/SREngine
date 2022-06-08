@@ -29,7 +29,7 @@ void Framework::Graphics::EditorGrid::Draw() {
         }
     }
 
-    if (this->m_shader->Use()) {
+    /*if (this->m_shader->Use()) {
         Camera *camera = m_render->GetCurrentCamera();
 
         camera->UpdateShaderProjView(m_shader);
@@ -42,7 +42,7 @@ void Framework::Graphics::EditorGrid::Draw() {
     } else {
         //Helper::EventManager::Push(Helper::EventManager::Event::Fatal);
         this->m_hasErrors = true;
-    }
+    }*/
 }
 
 Framework::Graphics::EditorGrid* Framework::Graphics::EditorGrid::Create(const std::string &shaderName, Framework::Graphics::Render *render) {
@@ -67,14 +67,14 @@ void Framework::Graphics::EditorGrid::Free() {
 }
 
 bool Framework::Graphics::EditorGrid::Calculate() {
-    SR_GRAPH("EditorGrid::Calculate() : calculating grid...");
+    SR_GRAPH_LOG("EditorGrid::Calculate() : calculating grid...");
 
-    if (!this->m_env->CalculateEmptyVAO(VAO)) {
-        Debug::Error("EditorGrid::Calculate() : failed calculate grid VAO!");
+    if (!m_env->CalculateEmptyVAO(VAO)) {
+        SR_ERROR("EditorGrid::Calculate() : failed calculate grid VAO!");
         return false;
     }
 
-    this->m_isCalculated = true;
+    m_isCalculated = true;
 
     return true;
 }

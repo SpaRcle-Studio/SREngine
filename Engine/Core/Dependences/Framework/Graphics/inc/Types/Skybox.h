@@ -35,6 +35,7 @@ namespace SR_GTYPES_NS {
 
     protected:
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        uint64_t GetFileHash() const override { return 0; }
 
     private:
         bool Calculate();

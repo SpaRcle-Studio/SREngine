@@ -10,6 +10,8 @@
 #include <Loaders/ObjLoader.h>
 #include <Types/Skybox.h>
 
+#include <Render/PostProcessing.h>
+
 #include <Debug.h>
 #include <ResourceManager/ResourceManager.h>
 
@@ -245,7 +247,6 @@ namespace Framework {
         using namespace SR_MATH_NS;
 
         ESRegisterMethod(EvoScript::Public, generator, Window, SetGUIEnabled, void, ESArg1(bool v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Window, AddCamera, void, ESArg1(Camera* camera), ESArg1(camera))
         ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
@@ -426,20 +427,6 @@ namespace Framework {
         using namespace SR_WORLD_NS;
 
         generator->RegisterNewClass("PostProcessing", "PostProcessing", { "cstdint", "Math/Vector3.h", "vector" });
-
-        ESRegisterMethod(EvoScript::Private, generator, PostProcessing, OnResize, bool, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
-        ESRegisterMethod(EvoScript::Private, generator, PostProcessing, Init, bool, ESArg1(Render* render), ESArg1(render))
-
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, Destroy, bool)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, Free, bool)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, BeginSkybox, void)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, EndSkybox, void)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, BeginGeometry, bool)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, EndGeometry, void)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, Complete, void)
-        ESRegisterMethodArg0(EvoScript::Private, generator, PostProcessing, Draw, void)
-
-        ESRegisterMethodArg0(EvoScript::Public, generator, PostProcessing, GetFinally, uint32_t)
 
         generator->AddIncompleteType("Shader", "PostProcessing");
         generator->AddIncompleteType("Camera", "PostProcessing");

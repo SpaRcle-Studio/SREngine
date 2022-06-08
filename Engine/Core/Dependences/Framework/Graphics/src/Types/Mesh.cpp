@@ -317,5 +317,15 @@ namespace SR_GRAPH_NS::Types {
     bool Mesh::HaveDefMaterial() const {
         return !(!m_material || m_material != Material::GetDefault());
     }
+
+    void Mesh::OnEnabled() {
+        m_env->SetBuildState(false);
+        Component::OnEnabled();
+    }
+
+    void Mesh::OnDisabled() {
+        m_env->SetBuildState(false);
+        Component::OnDisabled();
+    }
 }
 

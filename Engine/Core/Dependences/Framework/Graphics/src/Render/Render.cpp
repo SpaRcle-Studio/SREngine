@@ -200,9 +200,12 @@ namespace SR_GRAPH_NS {
         //! Free textures
         if (!m_texturesToFree.empty()) {
             for (auto& textureToFree : m_texturesToFree) {
-                Helper::Debug::Graph("Render::PoolEvents() : free texture \"" + textureToFree->GetResourceId() + "\"");
-                if (textureToFree->IsCalculated())
+                SR_GRAPH_LOG("Render::PoolEvents() : free texture...\n\tResource id:" +
+                             textureToFree->GetResourceId() + "\n\tTexture id: " + std::to_string(textureToFree->FastGetId()));
+
+                if (textureToFree->IsCalculated()) {
                     textureToFree->FreeVideoMemory();
+                }
 
                 textureToFree->RemoveUsePoint();
                 m_textures.erase(textureToFree);

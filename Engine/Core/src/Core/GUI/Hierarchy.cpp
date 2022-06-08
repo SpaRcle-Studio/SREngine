@@ -6,6 +6,7 @@
 
 #include <Input/InputSystem.h>
 #include <Platform/Platform.h>
+#include <GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()
@@ -16,6 +17,8 @@ namespace SR_CORE_NS::GUI {
         std::lock_guard<std::mutex> lock(m_mutex);
 
         m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
+
+        DrawMenu();
 
         if (m_scene.TryLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
@@ -28,7 +31,69 @@ namespace SR_CORE_NS::GUI {
 
             DrawChild(gameObject);
             gameObject.Unlock();
-        };
+        }
+    }
+
+    void Hierarchy::DrawMenu() {
+        auto&& font = Graphics::Environment::Get()->GetIconFont();
+        float_t scale = font->Scale;
+        font->Scale /= 3;
+
+        const ImVec2 buttonSize = ImVec2(25, 25);
+
+        bool locked = false;
+
+        if (m_scene.TryLockIfValid()) {
+            m_isActive = m_scene->IsActive();
+            m_isPaused = m_scene->IsPaused();
+            locked = true;
+        }
+
+        bool active = m_isActive;
+        bool paused = m_isPaused;
+
+        {
+            ImGui::PushFont(font);
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+
+            ImGui::Separator();
+
+            if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize)) {
+                active = !active;
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::Button(paused ? SR_ICON_PAUSE_CIRCLE : SR_ICON_PAUSE, buttonSize)) {
+                paused = !paused;
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::Button(SR_ICON_STOP, buttonSize)) {
+                active = false;
+                paused = false;
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::Button(SR_ICON_UNDO, buttonSize) && locked) {
+                m_scene->Reload();
+            }
+
+            ImGui::Separator();
+
+            ImGui::PopFont();
+            ImGui::PopStyleVar();
+        }
+
+        if (locked) {
+            m_scene->SetActive((m_isActive = active));
+            m_scene->SetPaused((m_isPaused = paused));
+            m_scene.Unlock();
+        }
+
+        font->Scale = scale;
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -214,9 +279,17 @@ namespace SR_CORE_NS::GUI {
 
             if (m_scene.LockIfValid()) {
                 auto&& count = marshal.Read<uint64_t>();
+
+                if (count > 1000) {
+                    SR_WARN("Hierarchy::Paste() : Attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
+                }
+
                 for (uint64_t i = 0; i < count; ++i) {
-                    if (auto &&ptr = m_scene->Instance(marshal))
+                    if (auto &&ptr = m_scene->Instance(marshal)) {
                         selected.insert(ptr);
+                    }
+                    else
+                        break;
                 }
                 m_scene.Unlock();
             }

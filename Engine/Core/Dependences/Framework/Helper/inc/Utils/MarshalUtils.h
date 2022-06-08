@@ -77,16 +77,25 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value.y, sizeof(Math::Unit));
                 stream.write((const char *) &value.z, sizeof(Math::Unit));
             }
+            else if constexpr (std::is_same<T, Math::FVector2>()) {
+                stream.write((const char *) &value.x, sizeof(Math::Unit));
+                stream.write((const char *) &value.y, sizeof(Math::Unit));
+            }
             else if constexpr (std::is_same<T, Math::IVector3>()) {
                 stream.write((const char *) &value.x, sizeof(int32_t));
                 stream.write((const char *) &value.y, sizeof(int32_t));
                 stream.write((const char *) &value.z, sizeof(int32_t));
             }
+            else if constexpr (std::is_same<T, Math::IVector2>()) {
+                stream.write((const char *) &value.x, sizeof(int32_t));
+                stream.write((const char *) &value.y, sizeof(int32_t));
+            }
             else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
                 stream.write((const char *) &value, sizeof(T));
             }
-            else
-                static_assert("Unsupported type!");
+            else {
+                static_assert(false, "Unsupported type!");
+            }
         }
 
         template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
@@ -103,16 +112,25 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.y, sizeof(Math::Unit));
                 stream.read((char*)&value.z, sizeof(Math::Unit));
             }
+            else if constexpr (std::is_same<T, Math::FVector2>()) {
+                stream.read((char*)&value.x, sizeof(Math::Unit));
+                stream.read((char*)&value.y, sizeof(Math::Unit));
+            }
             else if constexpr (std::is_same<T, Math::IVector3>()) {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
                 stream.read((char*)&value.z, sizeof(int32_t));
             }
+            else if constexpr (std::is_same<T, Math::IVector2>()) {
+                stream.read((char*)&value.x, sizeof(int32_t));
+                stream.read((char*)&value.y, sizeof(int32_t));
+            }
             else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
                 stream.read((char*)&value, sizeof(T));
             }
-            else
-                static_assert("Unsupported type!");
+            else {
+                static_assert(false, "Unsupported type!");
+            }
 
             return value;
         }

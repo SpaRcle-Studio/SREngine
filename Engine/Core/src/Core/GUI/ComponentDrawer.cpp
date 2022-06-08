@@ -3,29 +3,48 @@
 //
 
 #include <Core/GUI/ComponentDrawer.h>
-#include <Core/GUI/GUISystem.h>
 
+#include <Core/GUI/GUISystem.h>
+#include <Types/DataStorage.h>
 #include <Scripting/Base/Behaviour.h>
-#include <Render/Camera.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <ResourceManager/ResourceManager.h>
 #include <GUI/Utils.h>
 #include <Types/Texture.h>
 #include <Render/Render.h>
 #include <Types/Material.h>
+#include <Render/Camera.h>
 
-using namespace Framework::Graphics::Types;
-using namespace Framework::Graphics;
-
-namespace Framework::Core::GUI {
-    void ComponentDrawer::DrawComponent(Scripting::Behaviour *&behaviour, int32_t index) {
-        ImGui::Text("%p", (void*)behaviour);
-        if (ImGui::Button("Reset")) {
-            behaviour = Scripting::Behaviour::CreateEmpty();
+namespace SR_CORE_NS::GUI {
+    void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, int32_t index) {
+        if (!pBehaviour) {
+            return;
         }
+
+        if (ImGui::Button("Select script")) {
+            auto&& path = SR_UTILS_NS::Path(SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath()).FolderDialog();
+
+            if (path.Exists()) {
+                if (auto&& newBehaviour = Scripting::Behaviour::Load(path)) {
+                    pBehaviour = newBehaviour;
+                }
+            }
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Reset")) {
+            pBehaviour = Scripting::Behaviour::CreateEmpty();
+        }
+
+        if (pBehaviour->IsEmpty()) {
+            return;
+        }
+
+        Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
     }
 
-    void ComponentDrawer::DrawComponent(Camera*& camera, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Camera*& camera, int32_t index) {
         float_t cameraFar  = camera->GetFar();
         if (ImGui::InputFloat("Far", &cameraFar, 5) && cameraFar >= 0) {
             camera->SetFar(cameraFar);
@@ -40,12 +59,9 @@ namespace Framework::Core::GUI {
         if (ImGui::InputFloat("FOV", &cameraFOV, 0.5) && cameraFOV >= 0) {
             camera->SetFOV(cameraFOV);
         }
-
-        if (!camera->GetWindow())
-            ImGui::TextColored(ImColor(1, 0, 0, 1), "WARN: Window is missing!");
     }
 
-    void ComponentDrawer::DrawComponent(Mesh3D*& mesh3d, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, int32_t index) {
         Graphics::GUI::DrawValue("Mesh", mesh3d->GetResourceId());
         Graphics::GUI::DrawValue("Id", mesh3d->GetMeshId());
         Graphics::GUI::DrawValue("Geometry name", mesh3d->GetGeometryName());
@@ -57,14 +73,6 @@ namespace Framework::Core::GUI {
 
         ImGui::Separator();
 
-        /*const auto&& drawTexture = [](const std::string& name, Texture* texture) {
-            if (texture) {
-                Graphics::GUI::DrawValue(name, texture->GetName());
-            }
-            else
-                Graphics::GUI::DrawValue(name, "None");
-        };*/
-
         if (auto&& material = mesh3d->GetMaterial()) {
             DrawComponent(material, index);
         }
@@ -73,7 +81,7 @@ namespace Framework::Core::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(Framework::Graphics::Types::Material *&material, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Material *&material, int32_t index) {
         const bool readOnly = material->IsReadOnly();
 
         Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
@@ -85,7 +93,7 @@ namespace Framework::Core::GUI {
         }
 
         for (auto&& property : material->GetProperties()) {
-            std::visit([&property, &material, index](ShaderPropertyVariant&& arg){
+            std::visit([&property, &material, index](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
                 if (std::holds_alternative<int32_t>(arg)) {
                     auto&& value = std::get<int32_t>(arg);
                     if (ImGui::InputInt(property.displayName.c_str(), &value)) {
@@ -110,19 +118,19 @@ namespace Framework::Core::GUI {
                         property.data = value;
                     }
                 }
-                else if (std::holds_alternative<Texture*>(arg)) {
-                    auto&& value = std::get<Texture*>(arg);
+                else if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
+                    auto&& value = std::get<SR_GTYPES_NS::Texture*>(arg);
 
                     ImGui::Separator();
 
-                    auto&& pDescriptor = value ? value->GetDescriptor() : Texture::GetNone();
+                    auto&& pDescriptor = value ? value->GetDescriptor() : SR_GTYPES_NS::Texture::GetNone();
                     if (pDescriptor) {
                         if (GUISystem::Instance().ImageButton(pDescriptor, SR_MATH_NS::IVector2(50))) {
                             auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().FileDialog();
 
                             if (path.Exists()) {
                                 if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {
-                                    if (auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<Render>(); render && !texture->HasRender()) {
+                                    if (auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<SR_GRAPH_NS::Render>(); render && !texture->HasRender()) {
                                         render->RegisterTexture(texture);
                                     }
                                     material->SetTexture(&property, texture);

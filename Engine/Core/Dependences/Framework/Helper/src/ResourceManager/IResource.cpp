@@ -85,12 +85,20 @@ namespace SR_UTILS_NS {
     }
 
     uint64_t IResource::GetFileHash() const {
-        auto&& path = GetResourcePath();
-        auto&& fullPath = GetAssociatedPath().Concat(path);
+        auto&& path = Path(GetResourcePath());
 
-        if (fullPath.Exists()) {
-            return fullPath.GetFileHash();
+        if (!path.IsAbs()) {
+            path = GetAssociatedPath().Concat(path);
         }
+
+        if (path.Exists(Path::Type::File)) {
+            if (auto&& hash = path.GetFileHash(); hash != SR_UINT64_MAX) {
+                return hash;
+            }
+        }
+
+        SRAssert2Once(false, "Failed to get resource hash! \n\tResource id: " + GetResourceId() +
+            "\n\tResource path: " + path.ToString());
 
         return 0;
     }

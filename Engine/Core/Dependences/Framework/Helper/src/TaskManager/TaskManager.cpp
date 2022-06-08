@@ -114,7 +114,7 @@ namespace SR_UTILS_NS {
             while (m_isRun.load()) {
                 m_thread->Sleep(10);
 
-                std::lock_guard<std::mutex> lock(m_mutex);
+                SR_SCOPED_LOCK
 
                 for (auto pIt = m_tasks.begin(); pIt != m_tasks.end(); ) {
                     if (pIt->IsCompleted()) {
@@ -136,7 +136,7 @@ namespace SR_UTILS_NS {
     }
 
     bool TaskManager::Execute(Task &&task) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         const uint64_t uniqueId = GetUniqueId();
         m_ids.insert(uniqueId);

@@ -20,7 +20,12 @@ namespace SR_SCRIPTING_NS {
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        path = path.RemoveSubPath(resourceManager.GetModelsPath());
+        path = path.RemoveSubPath(resourceManager.GetScriptsPath());
+
+        if (path.IsAbs()) {
+            SR_ERROR("Behaviour::Load() : the behavior cannot be located outside the resources folder! \n\tPath: " + path.ToString());
+            return nullptr;
+        }
 
         Behaviour* pBehaviour = nullptr;
 
@@ -47,8 +52,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     Behaviour::GameObjectPtr Behaviour::GetGameObject() const {
-        if (auto&& parent = GetParent()) {
-            return parent->GetThis();
+        if (auto&& pParent = GetParent()) {
+            return pParent->GetThis();
         }
 
         return GameObjectPtr();
@@ -65,7 +70,7 @@ namespace SR_SCRIPTING_NS {
     Behaviour *Behaviour::CreateEmpty() {
         auto&& pBehaviour = new Behaviour();
 
-        pBehaviour->SetId("EmptyBehaviour", false);
+        pBehaviour->SetId(EMPTY_ID, false);
 
         if (!pBehaviour->Load()) {
             SR_ERROR("Behaviour::CreateEmpty() : failed to load behaviour!");
@@ -83,5 +88,25 @@ namespace SR_SCRIPTING_NS {
             Destroy();
         }
         Component::OnDestroy();
+    }
+
+    bool Behaviour::IsEmpty() const {
+        return GetResourceId() == EMPTY_ID;
+    }
+
+    bool Behaviour::Reload() {
+        SR_LOG("Behaviour::Reload() : reloading \"" + GetResourceId() + "\" behaviour...");
+
+        m_loadState = LoadState::Reloading;
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+
+        return true;
+    }
+
+    SR_UTILS_NS::Path Behaviour::GetAssociatedPath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
     }
 }

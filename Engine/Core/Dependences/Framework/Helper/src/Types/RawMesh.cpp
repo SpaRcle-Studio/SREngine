@@ -227,4 +227,8 @@ namespace SR_UTILS_NS::Types {
 
         return 1.f;
     }
+
+    SR_UTILS_NS::Path RawMesh::GetAssociatedPath() const {
+        return ResourceManager::Instance().GetModelsPath();
+    }
 }

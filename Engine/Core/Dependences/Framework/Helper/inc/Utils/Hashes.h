@@ -84,6 +84,10 @@ namespace SR_UTILS_NS {
         std::hash<T> h;
         return hash ^ h(value) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     }
+
+    static uint64_t CombineTwoHashes(uint64_t hash1, uint64_t hash2) {
+        return hash2 ^ hash1 + 0x9e3779b9 + (hash2 << 6) + (hash2 >> 2);
+    }
 }
 
 #define SR_COMPILE_TIME_CRC32_STR(x) (SR_UTILS_NS::Hash::Detail::MM<sizeof(x)-1>::crc32(x))

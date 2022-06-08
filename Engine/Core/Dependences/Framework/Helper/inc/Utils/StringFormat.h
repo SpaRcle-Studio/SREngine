@@ -8,7 +8,7 @@
 #include <Debug.h>
 #include <Math/Mathematics.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     template<typename T> std::string ToString(const T& value) {
         if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
             return std::to_string(value);

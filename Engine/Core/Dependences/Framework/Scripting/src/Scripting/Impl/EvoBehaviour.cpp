@@ -18,9 +18,10 @@ namespace SR_SCRIPTING_NS {
         if (!path.empty()) {
             auto&& compiler = GlobalEvoCompiler::Instance();
 
-            m_script = EvoScript::Script::Allocate("Behaviour", compiler.GetGenerator()->GetAddresses());
+            m_script = EvoScript::Script::Allocate(path, compiler.GetGenerator()->GetAddresses());
 
-            if (!m_script || !m_script->Load(path, compiler, true)) {
+            auto&& fullPath = GetAssociatedPath().Concat(path);
+            if (!m_script || !m_script->Load(fullPath, compiler, true)) {
                 SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path);
                 return false;
             }
@@ -41,5 +42,24 @@ namespace SR_SCRIPTING_NS {
         }
 
         return !hasErrors;
+    }
+
+    uint64_t EvoBehaviour::GetFileHash() const {
+        auto&& path = SR_UTILS_NS::Path(GetResourcePath());
+
+        if (!path.IsAbs()) {
+            path = GetAssociatedPath().Concat(path);
+        }
+
+        if (path.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+            if (auto&& hash = path.GetFolderHash(); hash != SR_UINT64_MAX) {
+                return hash;
+            }
+        }
+
+        SRHalt("Failed to get behaviour hash! \n\tResource id: " + GetResourceId() +
+               "\n\tResource path: " + path.ToString());
+
+        return 0;
     }
 }

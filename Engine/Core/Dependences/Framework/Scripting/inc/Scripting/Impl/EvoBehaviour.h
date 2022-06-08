@@ -15,6 +15,7 @@ namespace SR_SCRIPTING_NS {
     protected:
         bool Load() override;
         bool Unload() override;
+        SR_NODISCARD uint64_t GetFileHash() const override;
 
     private:
         EvoScript::Script* m_script = nullptr;

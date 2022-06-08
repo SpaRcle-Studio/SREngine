@@ -5,7 +5,7 @@
 #include <Types/Geometry/IndexedMesh.h>
 #include <Types/RawMesh.h>
 
-namespace Framework::Graphics::Types {
+namespace SR_GTYPES_NS {
     IResource *IndexedMesh::Copy(IResource *destination) const {
         if (!destination) {
             SR_ERROR("IndexedMesh::Copy() : destination in nullptr!");
@@ -20,7 +20,7 @@ namespace Framework::Graphics::Types {
 
         if (IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            indexed->m_IBO = manager.CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId());
+            indexed->m_IBO = manager.CopyIfExists<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId());
         }
 
         indexed->m_countIndices = m_countIndices;
@@ -31,7 +31,7 @@ namespace Framework::Graphics::Types {
     bool IndexedMesh::Calculate() {
         auto&& indices = m_rawMesh->GetIndices(m_meshId);
 
-        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
+        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
             SRAssert(indices.size() == m_countIndices);
 
             if (m_countIndices == 0 || indices.empty()) {
@@ -45,7 +45,7 @@ namespace Framework::Graphics::Types {
                 return false;
             }
             else
-                Memory::MeshManager::Instance().Register<Vertices::Type::Unknown, Memory::MeshManager::IBO>(GetResourceId(), m_IBO);
+                Memory::MeshManager::Instance().Register<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
         }
 
         return Mesh::Calculate();
@@ -56,7 +56,7 @@ namespace Framework::Graphics::Types {
 
         auto &&manager = Memory::MeshManager::Instance();
 
-        if (manager.Free<Vertices::Type::Unknown, MeshManager::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
+        if (manager.Free<Vertices::Type::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!Environment::Get()->FreeIBO(&m_IBO))
                 SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
         }

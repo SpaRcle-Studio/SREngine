@@ -77,10 +77,10 @@ bool Framework::Graphics::PostProcessing::Destroy() {
     }
 
     if (m_finalFBO != -1) {
-        if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
-            SR_ERROR("PostProcessing::Destroy() : failed to destroy framebuffer!");
-            return false;
-        }
+        //if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
+        //    SR_ERROR("PostProcessing::Destroy() : failed to destroy framebuffer!");
+        //    return false;
+        //}
         m_finalFBO = m_finalColorBuffer = -1;
     }
 

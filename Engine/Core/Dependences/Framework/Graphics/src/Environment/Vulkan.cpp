@@ -40,7 +40,7 @@ namespace Framework::Graphics {
             const std::string &engineName,
             const std::string &glslc) {
         EvoVulkan::Tools::VkDebug::Instance().LogCallback = [](const std::string &msg) { Helper::Debug::VulkanLog(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().WarnCallback = [](const std::string &msg) { Helper::Debug::Warn(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Instance().ErrorCallback = [](const std::string &msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Instance().GraphCallback = [](const std::string &msg) { Helper::Debug::Vulkan(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Instance().AssertCallback = [](const std::string &msg) {
@@ -75,8 +75,9 @@ namespace Framework::Graphics {
                 engineName,
                 glslc,
                 m_instanceExtensions,
-                m_validationLayers)) {
-            Helper::Debug::Error("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
+                m_validationLayers))
+        {
+            SR_ERROR("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
             return false;
         }
 
@@ -105,7 +106,7 @@ namespace Framework::Graphics {
         });
 
         if (!m_basicWindow->Create(name.c_str(), 0, 0, size.x, size.y, fullScreen, resizable)) {
-            Helper::Debug::Error("Vulkan::MakeWindow() : failed to create window!");
+            SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
         m_basicWindow->Centralize();
@@ -152,19 +153,21 @@ namespace Framework::Graphics {
 
                 VkSurfaceKHR surface = VK_NULL_HANDLE;
                 VkResult result = vkCreateWin32SurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
-                if (result != VK_SUCCESS)
+                if (result != VK_SUCCESS) {
                     return VK_NULL_HANDLE;
+                }
                 else
                     return surface;
-            } else {
-                Helper::Debug::Error("Vulkan::Init() : window is not support this architecture!");
+            }
+            else {
+                SR_ERROR("Vulkan::Init() : window is not support this architecture!");
                 return VK_NULL_HANDLE;
             }
 #endif
         };
 
         if (!m_kernel->Init(createSurf, window->GetHandle(), m_deviceExtensions, true, swapInterval > 0)) {
-            Helper::Debug::Error("Vulkan::Init() : failed to initialize Evo Vulkan kernel!");
+            SR_ERROR("Vulkan::Init() : failed to initialize Evo Vulkan kernel!");
             return false;
         }
 
@@ -407,21 +410,20 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool
-    Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
+    bool Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
         if (size.x == 0 || size.y == 0) {
-            Helper::Debug::Error("Vulkan::CreateFrameBuffer() : width or height equals zero!");
+            SR_ERROR("Vulkan::CreateFrameBuffer() : width or height equals zero!");
             return false;
         }
 
         if (FBO == 0) {
-            Helper::Debug::Error("Vulkan::CreateFrameBuffer() : zero frame buffer are default frame buffer!");
+            SR_ERROR("Vulkan::CreateFrameBuffer() : zero frame buffer are default frame buffer!");
             return false;
         }
 
         if (FBO > 0) {
-            if (!this->m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, rboDepth)) {
-                Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
+            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, rboDepth)) {
+                SR_ERROR("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             return true;
         }
@@ -432,7 +434,7 @@ namespace Framework::Graphics {
 
         FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, rboDepth) + 1;
         if (FBO <= 0) {
-            Helper::Debug::Error("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
+            SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
             return false;
         }
 

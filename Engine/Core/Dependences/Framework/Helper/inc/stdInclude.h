@@ -10,6 +10,7 @@
 #include <string_view>
 #include <cstdarg>
 #include <initializer_list>
+#include <codecvt>
 #include <cstddef>
 #include <unordered_set>
 #include <stack>

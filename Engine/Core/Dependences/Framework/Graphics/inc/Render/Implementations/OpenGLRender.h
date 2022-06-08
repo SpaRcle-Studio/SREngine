@@ -64,9 +64,9 @@ namespace Framework::Graphics::Impl {
         }
 
         void DrawGeometry() override {
-            SRDrawMeshCluster(m_geometry, OpenGL, {
-                this->m_currentCamera->UpdateShader<ProjViewUBO>(shader);
-            })
+            //SRDrawMeshCluster(m_geometry, OpenGL, {
+            //    this->m_currentCamera->UpdateShader<ProjViewUBO>(shader);
+            //})
         }
 
         void DrawSkybox() override {

@@ -49,7 +49,7 @@ namespace Framework::Graphics::VulkanTools {
             case ShaderStage::Fragment: return VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT;
             case ShaderStage::Vertex:   return VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT;
             default:
-                Helper::Debug::Error("VulkanTools::VkShaderShaderTypeToStage() : unknown type!");
+                SR_ERROR("VulkanTools::VkShaderShaderTypeToStage() : unknown type!");
                 return VkShaderStageFlagBits::VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
         }
     }

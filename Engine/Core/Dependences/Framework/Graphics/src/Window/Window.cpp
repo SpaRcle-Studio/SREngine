@@ -64,14 +64,9 @@ namespace SR_GRAPH_NS {
                     break;
                 }
                 case Environment::WinEvents::Resize: {
-                    std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
-                    if (size.first > 0 && size.second > 0) {
-                        for (auto camera : m_cameras.GetElements()) {
-                            if (camera->IsAllowUpdateProjection()) {
-                                camera->UpdateProjection(size.first, size.second);
-                            }
-                            camera->CompleteResize();
-                        }
+                    auto&& [width, height] = std::pair<int, int> {*(int *) arg1, *(int *) arg2};
+                    if (width > 0 && height > 0) {
+                        CameraManager::Instance().OnWindowResized(this, width, height);
                     }
                     break;
                 }
@@ -381,7 +376,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::PollEvents() {
-        // change gui enabled
+        /// change gui enabled
         if (m_GUIEnabled.first != m_GUIEnabled.second) {
             m_env->SetBuildState(false);
             this->m_env->SetGUIEnabled(m_GUIEnabled.second);
@@ -391,32 +386,8 @@ namespace SR_GRAPH_NS {
         if (m_widgetManagers.NeedFlush())
             m_widgetManagers.Flush();
 
-        if (m_cameras.NeedFlush()) {
-            for (auto&& camera : m_cameras.GetAddedElements()) {
-                camera->Create(this);
-                if (!camera->CompleteResize()) {
-                    SR_ERROR("Window::PollEvents() : failed to complete resize camera!");
-                }
-            }
-
-            for (auto&& camera : m_cameras.GetDeletedElements()) {
-                if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low) {
-                    SR_LOG("Window::PoolEvents() : remove camera...");
-                }
-
-                camera->Free();
-
-                SR_LOG("Window::PoolEvents() : the camera has been successfully released!");
-            }
-
-            m_cameras.Flush();
-
-            m_render->SetCurrentCamera(nullptr);
-            m_env->SetBuildState(false);
-        }
-
         if (m_isNeedResize) {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            SR_LOCK_GUARD
 
             m_env->SetWindowSize((uint32_t)m_size.x, (uint32_t)m_size.y);
             m_isNeedResize = false;
@@ -424,7 +395,7 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_isNeedMove) {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            SR_LOCK_GUARD
 
             m_env->SetWindowPosition((int)m_newWindowPos.x, (int)m_newWindowPos.y);
 
@@ -444,7 +415,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::Resize(uint32_t w, uint32_t h) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         SR_LOG("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
 
@@ -455,7 +426,7 @@ namespace SR_GRAPH_NS {
     void Window::CentralizeWindow() {
         SR_INFO("Window::CentralizeWindow() : wait centralize window...");
 
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (!m_env->GetBasicWindow()) {
             SR_WARN("Window::CentralizeWindow() : basic window is nullptr!");
@@ -472,27 +443,6 @@ namespace SR_GRAPH_NS {
 
         m_newWindowPos = { (int32_t)w, (int32_t)h };
         m_isNeedMove = true;
-    }
-
-    void Window::DestroyCamera(Framework::Graphics::Camera *camera) {
-        if (Helper::Debug::GetLevel() > Helper::Debug::Level::None) {
-            SR_LOG("Window::RemoveCamera() : register camera to remove...");
-        }
-
-        if (!camera) {
-            SR_ERROR("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
-            return;
-        }
-
-        m_cameras.Remove(camera);
-    }
-
-    void Window::AddCamera(Framework::Graphics::Camera *camera)  {
-        if (Helper::Debug::GetLevel() > Helper::Debug::Level::None) {
-            SR_LOG("Window::AddCamera() : register new camera...");
-        }
-
-        m_cameras.Add(camera);
     }
 
     void Window::BeginSync() {
@@ -721,17 +671,23 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        if (m_cameras.Empty()) {
+        CameraManager::LockSingleton();
+
+        auto&& cameraManager = CameraManager::Instance();
+        auto&& camera = cameraManager.GetFirstCamera();
+
+        if (!camera) {
             if (canUseGUI) {
                 DrawNoCamera();
             }
 
             m_env->SetBuildState(true);
+            CameraManager::UnlockSingleton();
             return;
         }
 
         if (m_env->IsNeedReBuild()) {
-            m_render->SetCurrentCamera(m_cameras.Front());
+            m_render->SetCurrentCamera(camera);
 
             m_env->ClearFramebuffersQueue();
 
@@ -772,11 +728,13 @@ namespace SR_GRAPH_NS {
             m_render->UpdateUBOs();
         }
 
+        CameraManager::UnlockSingleton();
+
         m_env->DrawFrame();
     }
 
     void Window::DrawOpenGL() {
-        m_env->ClearBuffers();
+        /*m_env->ClearBuffers();
 
         {
             if (m_cameras.Count() == 1) {
@@ -799,7 +757,7 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        m_env->SwapBuffers();
+        m_env->SwapBuffers();*/
     }
 
     bool Window::IsFullScreen() const {

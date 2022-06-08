@@ -4,6 +4,7 @@
 
 #include <Utils/Features.h>
 #include <Xml.h>
+#include <Types/Thread.h>
 
 namespace SR_UTILS_NS {
     bool FeatureGroup::Register(const std::string &name, bool value) {
@@ -36,7 +37,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Features::Reload(const std::string &path) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (!path.empty()) {
             if (!FileSystem::FileExists(path)) {
@@ -81,7 +82,7 @@ namespace SR_UTILS_NS {
     }
 
     const FeatureGroup& Features::GetGroup(const std::string &name) const {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (auto pIt = m_features.find(name); pIt != m_features.end())
             return pIt->second;

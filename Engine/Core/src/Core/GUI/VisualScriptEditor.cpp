@@ -110,7 +110,7 @@ void Framework::Core::GUI::VisualScriptEditor::AddLink(Framework::Graphics::GUI:
 }
 
 void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
-    Helper::Debug::Log("VisualScriptEditor::LoadConfig() : loading config...");
+    SR_LOG("VisualScriptEditor::LoadConfig() : loading config...");
 
     const auto& resManager = Helper::ResourceManager::Instance();
     const auto path = resManager.GetConfigPath().Concat("/EvoScript.xml");
@@ -125,8 +125,9 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
             }
         }
     }
-    else
-        Helper::Debug::Error("VisualScriptEditor::LoadConfig() : config file not found! \n\tPath: " + strPath);
+    else {
+        SR_ERROR("VisualScriptEditor::LoadConfig() : config file not found! \n\tPath: " + strPath);
+    }
 }
 
 SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {
@@ -156,7 +157,7 @@ void VisualScriptEditor::RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint) {
     const std::string name = blueprint->GetName();
 
     if (m_blueprints.count(name)) {
-        Helper::Debug::Error(Helper::Format("VisualScriptEditor::RegisterBlueprint() : blueprint \"%s\" already registered!"));
+        SR_ERROR(Helper::Format("VisualScriptEditor::RegisterBlueprint() : blueprint \"%s\" already registered!"));
         return;
     }
 

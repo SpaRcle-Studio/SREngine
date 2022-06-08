@@ -14,7 +14,7 @@ SR_UTILS_NS::GameObject::Ptr Framework::Core::World::World::Instance(Framework::
 
     auto&& version = marshal.Read<uint16_t>();
     if (version != SR_UTILS_NS::GameObject::VERSION) {
-        SRAssert2(false, "Version is different! Version: " + Helper::ToString(version));
+        SRAssert2Once(false, "Version is different! Version: " + Helper::ToString(version));
         return gameObject;
     }
 
@@ -42,8 +42,8 @@ SR_UTILS_NS::GameObject::Ptr Framework::Core::World::World::Instance(Framework::
 
     auto&& componentManager = Helper::ComponentManager::Instance();
     componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool {
-        context.SetPointer("Render", Engine::Instance().GetRender());
-        context.SetPointer("Window", Engine::Instance().GetWindow());
+        context.SetPointer<Render>(Engine::Instance().GetRender());
+        context.SetPointer<Window>(Engine::Instance().GetWindow());
 
         auto&& componentCount = marshal.Read<uint32_t>();
 

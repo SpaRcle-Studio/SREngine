@@ -14,6 +14,7 @@
 #include <Utils/Features.h>
 
 #include <Render/Render.h>
+#include <Render/CameraManager.h>
 #include <Window/Window.h>
 #include <Types/Skybox.h>
 
@@ -98,7 +99,7 @@ bool Framework::Engine::Init() {
     });
 
     if (!m_window->Init()) {
-        Helper::Debug::Error("Engine::Init() : failed to initialize window!");
+        SR_ERROR("Engine::Init() : failed to initialize window!");
         return false;
     }
 
@@ -171,6 +172,8 @@ void Framework::Engine::Await() {
     while (m_isRun) {
         SR_HTYPES_NS::Thread::Sleep(1);
 
+        SR_GRAPH_NS::CameraManager::Instance().Update();
+
         const auto now = clock::now();
         const auto deltaTime = now - timeStart;
         timeStart = now;
@@ -230,7 +233,7 @@ void Framework::Engine::Await() {
 
     if (m_editor->Enabled()) {
         m_editor->Enable(false);
-        Helper::Debug::System("Engine::Await() : disable editor gui...");
+        SR_SYSTEM_LOG("Engine::Await() : disable editor gui...");
     }
 }
 

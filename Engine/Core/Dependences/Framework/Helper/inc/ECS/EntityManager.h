@@ -78,7 +78,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class Entity : public ISavable {
+    class Entity : public ISavable, public NonCopyable {
     public:
         ~Entity() override;
         Entity();
@@ -139,7 +139,6 @@ namespace SR_UTILS_NS {
         std::unordered_map<EntityId, Entity*> m_entities;
         std::unordered_set<EntityId> m_reserved;
         EntityId m_nextId;
-        mutable Mutex m_mutex;
 
     };
 }

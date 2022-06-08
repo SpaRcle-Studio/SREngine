@@ -5,23 +5,21 @@
 #ifndef SRENGINE_NODEMANAGER_H
 #define SRENGINE_NODEMANAGER_H
 
-#include <unordered_set>
-#include <unordered_map>
-#include <mutex>
 #include <Utils/Singleton.h>
+#include <Types/Thread.h>
 
-namespace Framework::Graphics::GUI {
-    class NodeManager : public Helper::Singleton<NodeManager> {
-        friend class Helper::Singleton<NodeManager>;
+namespace SR_GRAPH_NS::GUI {
+    class NodeManager : public SR_UTILS_NS::Singleton<NodeManager> {
+        friend class SR_UTILS_NS::Singleton<NodeManager>;
     public:
         ~NodeManager() override = default;
 
     public:
-        [[nodiscard]] uintptr_t AllocUniqueId(void* ptr);
+        SR_NODISCARD uintptr_t AllocUniqueId(void* ptr);
         void FreeUniqueId(const uintptr_t& id);
 
         template<typename T> T* GetUnique(uintptr_t id) const {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            SR_LOCK_GUARD
 
             if (m_uniques.count(id) == 0)
                 return nullptr;
@@ -33,7 +31,6 @@ namespace Framework::Graphics::GUI {
         void OnSingletonDestroy() override;
 
     private:
-        mutable std::mutex m_mutex;
         std::unordered_map<uintptr_t, void*> m_uniques;
 
     };

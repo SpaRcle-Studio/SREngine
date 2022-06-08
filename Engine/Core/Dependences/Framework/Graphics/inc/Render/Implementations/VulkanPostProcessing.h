@@ -19,8 +19,9 @@ namespace Framework::Graphics {
                 m_env->BindFrameBuffer(m_frameBuffer);
                 m_env->ClearBuffers();
                 return true;
-            } else {
-                Helper::Debug::Error("VulkanPostProcessing::BeginGeometry() : frame buffer is not calculated!");
+            }
+            else {
+                SR_ERROR("VulkanPostProcessing::BeginGeometry() : frame buffer is not calculated!");
                 return false;
             }
         }

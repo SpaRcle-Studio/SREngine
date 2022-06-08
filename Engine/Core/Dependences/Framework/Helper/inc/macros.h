@@ -9,6 +9,7 @@
 #pragma warning(disable: 4552)
 
 #define CRT_SECURE_NO_WARNINGS
+#define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
 
 #define SR_USE_IMGUI
 

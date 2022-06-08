@@ -192,7 +192,8 @@ namespace Framework::Graphics {
                 return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
             }
             else {
-                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!\n\tTexture id: " + std::to_string(id));
+                SRHalt("Something went wrong...");
                 return nullptr;
             }
         }
@@ -282,21 +283,22 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override {
             if (auto shader = m_memory->m_ShaderPrograms[shaderProgram]) {
                 if (m_currentFBOid < 0) {
-                    Helper::Debug::Error("Vulkan::ReCreateShader() : frame buffer does not attached!");
+                    SR_ERROR("Vulkan::ReCreateShader() : frame buffer does not attached!");
                     return false;
                 }
 
                 if (auto renderPass = (m_currentFBOid == 0 ? m_kernel->GetRenderPass() : m_memory->m_FBOs[m_currentFBOid - 1]->GetRenderPass())) {
                     if (!shader->ReCreatePipeLine(renderPass)) {
-                        Helper::Debug::Error("Vulkan::ReCreateShader() : failed to re-create pipeLine!");
+                        SR_ERROR("Vulkan::ReCreateShader() : failed to re-create pipeLine!");
                         return true;
                     }
                 } else {
-                    Helper::Debug::Error("Vulkan::ReCreateShader() : failed to get render pass!");
+                    SR_ERROR("Vulkan::ReCreateShader() : failed to get render pass!");
                     return false;
                 }
-            } else {
-                Helper::Debug::Error("Vulkan::ReCreateShader() : shader isn't exists!");
+            }
+            else {
+                SR_ERROR("Vulkan::ReCreateShader() : shader isn't exists!");
                 return false;
             }
 
@@ -318,19 +320,19 @@ namespace Framework::Graphics {
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (shaderProgram >= m_memory->m_countShaderPrograms.first) {
-                Helper::Debug::Error("Vulkan::UseShader() : index out of range!");
+                SR_ERROR("Vulkan::UseShader() : index out of range!");
                 return;
             }
 
-            this->m_currentShaderID = (int)shaderProgram;
-            this->m_currentShader   = m_memory->m_ShaderPrograms[shaderProgram];
+            m_currentShaderID = (int)shaderProgram;
+            m_currentShader   = m_memory->m_ShaderPrograms[shaderProgram];
             if (!m_currentShader) {
-                Helper::Debug::Error("Vulkan::UseShader() : shader is nullptr!");
+                SR_ERROR("Vulkan::UseShader() : shader is nullptr!");
                 return;
             }
-            this->m_currentLayout = m_currentShader->GetPipelineLayout();
+            m_currentLayout = m_currentShader->GetPipelineLayout();
 
-            this->m_currentShader->Bind(this->m_currentCmd);
+            m_currentShader->Bind(m_currentCmd);
         }
 
         bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
@@ -338,7 +340,7 @@ namespace Framework::Graphics {
             std::vector<int32_t> color = { colorBuffer };
             bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
             if (!result)
-                Helper::Debug::Error("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
+                SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
             colorBuffer = color[0];
             return result;
         }
@@ -481,19 +483,19 @@ namespace Framework::Graphics {
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) override {
             if (!m_memory->m_textures[textureID]) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : texture is not exists!");
+                SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : texture is not exists!");
                 return -1;
             }
 
             if (m_currentShaderID < 0) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : shader is not attached!");
+                SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : shader is not attached!");
                 return -1;
             }
 
             const std::set<DescriptorType> types = { DescriptorType::CombinedImage };
-            int32_t descriptorSetID = this->m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
+            int32_t descriptorSetID = m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
             if (descriptorSetID < 0) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
+                SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
                 return -1;
             }
 
@@ -531,9 +533,10 @@ namespace Framework::Graphics {
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override {
             if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1, cpuUsage); id < 0) {
-                Helper::Debug::Error("Vulkan::CalculateCubeMap() : failed to allocate texture!");
+                SR_ERROR("Vulkan::CalculateCubeMap() : failed to allocate texture!");
                 return -1;
-            } else
+            }
+            else
                 return id;
         }
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
@@ -553,15 +556,17 @@ namespace Framework::Graphics {
 
                 auto framebuffer = m_memory->m_FBOs[FBO - 1];
                 if (!framebuffer) {
-                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer object don't exist!");
+                    SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer object don't exist!");
                     return;
                 }
 
-                for (auto fbo : m_framebuffersQueue)
+                for (auto&& fbo : m_framebuffersQueue) {
                     if (fbo == framebuffer) {
-                        Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
+                        SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
                         return;
                     }
+                }
+
                 m_framebuffersQueue.push_back(framebuffer);
 
                 this->m_renderPassBI.framebuffer = *framebuffer;
@@ -628,19 +633,22 @@ namespace Framework::Graphics {
             const int32_t id = *ID; *ID = SR_ID_INVALID;
 
             if (!m_memory->FreeTexture((uint32_t)id)) {
-                Helper::Debug::Error("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(id) + ")");
+                SR_ERROR("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(id) + ")");
                 return false;
-            } else
+            }
+            else
                 return true;
         }
 
         [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const override;
 
-        [[nodiscard]] bool FreeTexture(uint32_t ID) const override {
-            if (!m_memory->FreeTexture((uint32_t)ID)) {
-                Helper::Debug::Error("Vulkan::FreeTexture() : failed to free texture!");
+        [[nodiscard]] bool FreeTexture(int32_t* id) const override {
+            if (!m_memory->FreeTexture(static_cast<uint32_t>(*id))) {
+                SR_ERROR("Vulkan::FreeTexture() : failed to free texture!");
                 return false;
             }
+
+            *id = SR_ID_INVALID;
 
             return true;
         }

@@ -21,6 +21,7 @@ namespace SR_UTILS_NS {
     class GameObject : public Types::SafePtr<GameObject>, public Entity {
         friend class World::Scene;
         friend class Transform3D;
+        friend class Component;
 
         typedef enum {
             DestroyBy_Unknown    = 0,
@@ -45,11 +46,11 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Transform3D* GetTransform() const { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
         SR_NODISCARD std::string GetName() const;
-        SR_NODISCARD bool IsActive() const { return m_isActive && m_isParentActive; }
-        SR_NODISCARD bool IsEnabled() const { return m_isActive; }
+        SR_NODISCARD bool IsActive() const;
+        SR_NODISCARD bool IsEnabled() const { return m_isEnabled; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
-        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return this->m_children; }
-        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return this->m_children; }
+        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return m_children; }
+        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return m_children; }
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
@@ -71,7 +72,7 @@ namespace SR_UTILS_NS {
         void ForEachComponent(const std::function<bool(Component*)>& fun);
 
         bool Contains(const Types::SafePtr<GameObject>& child);
-        void SetActive(bool value);
+        void SetEnabled(bool value);
         void Destroy(DestroyByFlagBits by = DestroyBy_Other);
         void SetTransform(Transform3D* transform3D);
 
@@ -92,21 +93,22 @@ namespace SR_UTILS_NS {
         void UpdateComponentsScale();
         void UpdateComponentsSkew();
 
+        /// TODO: remove this method
         void Free();
-        void OnPrentSetActive(bool value);
-        void UpdateComponentsEnabled();
+
         bool UpdateEntityPath();
 
-    private:
-        std::atomic<bool>                   m_isActive       = true;
-        std::atomic<bool>                   m_isParentActive = true;
+        void CheckActivity();
 
-        std::atomic<bool>                   m_isPrefab       = false;
+    private:
+        std::atomic<bool>                   m_isEnabled      = true;
+        std::atomic<bool>                   m_isActive       = true;
+
+        std::atomic<bool>                   m_isDestroy      = false;
 
         GameObject::Ptr                     m_parent         = GameObject::Ptr();
         std::unordered_set<GameObject::Ptr> m_children       = std::unordered_set<GameObject::Ptr>();
 
-        std::atomic<bool>                   m_isDestroy      = false;
 
         Types::SafePtr<World::Scene>        m_scene          = Types::SafePtr<World::Scene>();
         Transform3D*                        m_transform      = nullptr;

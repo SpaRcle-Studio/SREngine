@@ -16,8 +16,9 @@ namespace Framework::Core::GUI {
 
     void Inspector::Draw() {
         if (m_gameObject.TryLockIfValid()) {
-            if (bool v = m_gameObject->IsActive(); ImGui::Checkbox("Enabled", &v))
-                m_gameObject->SetActive(v);
+            if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
+                m_gameObject->SetEnabled(v);
+            }
 
             std::string gm_name = m_gameObject->GetName();
             if (ImGui::InputText("Name", &gm_name))
@@ -98,7 +99,7 @@ namespace Framework::Core::GUI {
         TextCenter("Transform");
 
         auto&& translation = transform->GetTranslation();
-        if (Graphics::GUI::DrawVec3Control("Translation", translation))
+        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f))
             transform->SetTranslation(translation);
 
         auto&& rotation = transform->GetRotation();

@@ -4,164 +4,162 @@
 
 #include <World/Chunk.h>
 #include <World/Region.h>
+#include <ECS/GameObject.h>
 
-using namespace Framework::Helper::World;
+namespace SR_WORLD_NS {
+    Chunk::Allocator Chunk::g_allocator = Chunk::Allocator();
 
-Chunk::Allocator Chunk::g_allocator = Chunk::Allocator();
+    Chunk::Chunk(SRChunkAllocArgs)
+        : m_loadState(LoadState::Unload)
+        , m_observer(observer)
+        , m_region(region)
+        , m_position(position)
+        , m_size(size)
+        , m_lifetime(0.f)
+    {
+        SRAssert(m_observer);
+        SRAssert(m_region);
+        SRAssert(!m_position.HasZero());
 
-Chunk::Chunk(SRChunkAllocArgs)
-    : m_loadState(LoadState::Unload)
-    , m_observer(observer)
-    , m_region(region)
-    , m_position(position)
-    , m_size(size)
-    , m_lifetime(0.f)
-{
-    SRAssert(m_observer);
-    SRAssert(m_region);
-    SRAssert(!m_position.HasZero());
-
-    if (m_region) {
-        m_regionPosition = m_region->GetPosition();
-    }
-}
-
-void Chunk::Update(float_t dt) {
-    m_lifetime -= dt;
-}
-
-bool Chunk::Belongs(const Math::FVector3 &point) {
-    const float_t xMax = m_position.x + m_size.x;
-    const float_t yMax = m_position.y + m_size.y;
-    const float_t zMax = m_position.z + m_size.x;
-
-    return point.x >= m_position.x && point.y >= m_position.y && point.z >= m_position.z &&
-        point.x <= xMax && point.y <= yMax && point.z <= zMax;
-}
-
-bool Chunk::Access(float_t dt) {
-    m_lifetime = dt + 2.f;
-    return true;
-}
-
-bool Chunk::Unload() {
-    m_loadState = LoadState::Unload;
-
-    for (auto gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
-        gameObject.AutoFree([](auto gm) {
-            gm->Destroy();
-        });
-    }
-
-    return true;
-}
-
-void Chunk::OnExit() {
-    m_region->OnExit();
-}
-
-void Chunk::OnEnter() {
-    m_region->OnEnter();
-}
-
-void Chunk::SetAllocator(const Chunk::Allocator &allocator) {
-    g_allocator = allocator;
-}
-
-Chunk *Chunk::Allocate(SRChunkAllocArgs) {
-    if (g_allocator)
-        return g_allocator(SRChunkAllocVArgs);
-
-    return new Chunk(SRChunkAllocVArgs);
-}
-
-bool Chunk::Belongs(const Framework::Helper::Math::IVector3 &position,
-                    const Framework::Helper::Math::IVector2 &size,
-                    const Framework::Helper::Math::FVector3 &point)
-{
-    const float_t xMax = position.x + size.x;
-    const float_t yMax = position.y + size.y;
-    const float_t zMax = position.z + size.x;
-
-    return point.x >= position.x && point.y >= position.y && point.z >= position.z &&
-           point.x <= xMax && point.y <= yMax && point.z <= zMax;
-}
-
-bool Chunk::ApplyOffset() {
-    return true;
-}
-
-bool Chunk::Load(SR_HTYPES_NS::Marshal&& marshal) {
-    if (marshal.Valid()) {
-        if (m_position != marshal.Read<Math::IVector3>()) {
-            SRAssert2(false, "Something went wrong...");
-            return false;
-        }
-
-        const uint64_t count = marshal.Read<uint64_t>();
-        for (uint64_t i = 0; i < count; ++i) {
-            if (auto &&ptr = m_observer->m_scene->Instance(marshal))
-                ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+        if (m_region) {
+            m_regionPosition = m_region->GetPosition();
         }
     }
 
-    m_loadState = LoadState::Loaded;
-    Access(0.f);
+    void Chunk::Update(float_t dt) {
+        m_lifetime -= dt;
+    }
 
-    return true;
-}
+    bool Chunk::Belongs(const Math::FVector3 &point) {
+        const float_t xMax = m_position.x + m_size.x;
+        const float_t yMax = m_position.y + m_size.y;
+        const float_t zMax = m_position.z + m_size.x;
 
-void Chunk::Reload() {
+        return point.x >= m_position.x && point.y >= m_position.y && point.z >= m_position.z &&
+            point.x <= xMax && point.y <= yMax && point.z <= zMax;
+    }
 
-}
+    bool Chunk::Access(float_t dt) {
+        m_lifetime = dt + 2.f;
+        return true;
+    }
 
-SR_HTYPES_NS::Marshal Chunk::Save() const {
-    /// scene is locked
+    bool Chunk::Unload() {
+        m_loadState = LoadState::Unload;
 
-    std::list<SR_HTYPES_NS::Marshal> gameObjects;
-    for (const auto& gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
-        if (gameObject.LockIfValid()) {
-            /// сохраняем объект относительно начала координат чанка
-            gameObject->GetTransform()->GlobalTranslate(-GetWorldPosition());
+        for (auto gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
+            gameObject.AutoFree([](auto gm) {
+                gm->Destroy();
+            });
+        }
 
-            if (auto&& gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
-                gameObjects.emplace_back(std::move(gameObjectMarshal));
+        return true;
+    }
+
+    void Chunk::OnExit() {
+        m_region->OnExit();
+    }
+
+    void Chunk::OnEnter() {
+        m_region->OnEnter();
+    }
+
+    void Chunk::SetAllocator(const Chunk::Allocator &allocator) {
+        g_allocator = allocator;
+    }
+
+    Chunk *Chunk::Allocate(SRChunkAllocArgs) {
+        if (g_allocator)
+            return g_allocator(SRChunkAllocVArgs);
+
+        return new Chunk(SRChunkAllocVArgs);
+    }
+
+    bool Chunk::Belongs(const SR_MATH_NS::IVector3 &position,
+                        const SR_MATH_NS::IVector2 &size,
+                        const SR_MATH_NS::FVector3 &point)
+    {
+        const float_t xMax = position.x + size.x;
+        const float_t yMax = position.y + size.y;
+        const float_t zMax = position.z + size.x;
+
+        return point.x >= position.x && point.y >= position.y && point.z >= position.z &&
+               point.x <= xMax && point.y <= yMax && point.z <= zMax;
+    }
+
+    bool Chunk::ApplyOffset() {
+        return true;
+    }
+
+    bool Chunk::Load(SR_HTYPES_NS::Marshal&& marshal) {
+        if (marshal.Valid()) {
+            if (m_position != marshal.Read<Math::IVector3>()) {
+                SRAssert2(false, "Something went wrong...");
+                return false;
             }
 
-            gameObject.Unlock();
+            const uint64_t count = marshal.Read<uint64_t>();
+            for (uint64_t i = 0; i < count; ++i) {
+                if (auto &&ptr = m_observer->m_scene->Instance(marshal))
+                    ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+            }
         }
+
+        m_loadState = LoadState::Loaded;
+        Access(0.f);
+
+        return true;
     }
 
-    SR_HTYPES_NS::Marshal marshal;
+    void Chunk::Reload() {
 
-    if (gameObjects.empty())
+    }
+
+    SR_HTYPES_NS::Marshal Chunk::Save() const {
+        /// scene is locked
+
+        std::list<SR_HTYPES_NS::Marshal> gameObjects;
+        for (const auto& gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
+            if (gameObject.LockIfValid()) {
+                /// сохраняем объект относительно начала координат чанка
+                gameObject->GetTransform()->GlobalTranslate(-GetWorldPosition());
+
+                if (auto&& gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
+                    gameObjects.emplace_back(std::move(gameObjectMarshal));
+                }
+
+                gameObject.Unlock();
+            }
+        }
+
+        SR_HTYPES_NS::Marshal marshal;
+
+        if (gameObjects.empty())
+            return marshal;
+
+        marshal.Write(m_position);
+        marshal.Write(static_cast<uint64_t>(gameObjects.size()));
+
+        for (auto&& gameObject : gameObjects)
+            marshal.Append(std::move(gameObject));
+
         return marshal;
+    }
 
-    marshal.Write(m_position);
-    marshal.Write(static_cast<uint64_t>(gameObjects.size()));
+    Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {
+        auto fPos = Helper::World::AddOffset(
+                ((m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 1, 1))).Cast<Math::Unit>(),
+                m_observer->m_offset.m_chunk.Cast<Math::Unit>()
+        );
 
-    for (auto&& gameObject : gameObjects)
-        marshal.Append(std::move(gameObject));
+        fPos = Math::FVector3(
+                fPos.x * m_size.x + (center & Math::AXIS_X ? (Math::Unit) m_size.x / 2 : 0),
+                fPos.y * m_size.y + (center & Math::AXIS_Y ? (Math::Unit) m_size.y / 2 : 0),
+                fPos.z * m_size.x + (center & Math::AXIS_Z ? (Math::Unit) m_size.x / 2 : 0)
+        );
 
-    return marshal;
+        fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
+
+        return fPos;
+    }
 }
-
-Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {
-    auto fPos = Helper::World::AddOffset(
-            ((m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 1, 1))).Cast<Math::Unit>(),
-            m_observer->m_offset.m_chunk.Cast<Math::Unit>()
-    );
-
-    fPos = Math::FVector3(
-            fPos.x * m_size.x + (center & Math::AXIS_X ? (Math::Unit) m_size.x / 2 : 0),
-            fPos.y * m_size.y + (center & Math::AXIS_Y ? (Math::Unit) m_size.y / 2 : 0),
-            fPos.z * m_size.x + (center & Math::AXIS_Z ? (Math::Unit) m_size.x / 2 : 0)
-    );
-
-    fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
-
-    return fPos;
-}
-
-Chunk::~Chunk() = default;
-

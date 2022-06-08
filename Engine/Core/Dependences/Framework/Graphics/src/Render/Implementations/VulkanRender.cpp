@@ -20,16 +20,18 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
 
         for (auto const& [key, meshGroup] : subCluster.m_groups) {
             for (const auto &mesh : meshGroup) {
+                auto&& ubo = mesh->GetUBO();
+
+                /// component may be disabled.
+                if (ubo == SR_ID_INVALID) {
+                    continue;
+                }
+
                 mesh->GetMaterial()->Use();
 
                 shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
 
-                if (auto&& ubo = mesh->GetUBO(); ubo != SR_ID_INVALID) {
-                    m_env->BindUBO(ubo);
-                }
-                else {
-                    SRAssertOnce(false);
-                }
+                m_env->BindUBO(ubo);
 
                 shader->Flush();
             }

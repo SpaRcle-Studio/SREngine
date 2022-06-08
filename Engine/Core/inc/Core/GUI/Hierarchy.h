@@ -30,6 +30,7 @@ namespace SR_CORE_NS::GUI {
         void CheckSelected(const Helper::GameObject::Ptr& gm);
         void ContextMenu(const Helper::GameObject::Ptr& gm, uint64_t id);
         void DrawChild(const Helper::GameObject::Ptr& root);
+        void DrawMenu();
         void Copy() const;
         void Paste();
 
@@ -40,9 +41,12 @@ namespace SR_CORE_NS::GUI {
         mutable std::mutex m_mutex;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::list<Helper::GameObject::Ptr> m_pointersHolder;
-        std::atomic<bool> m_shiftPressed;
         std::set<Helper::GameObject::Ptr> m_selected;
         std::unordered_set<Helper::GameObject::Ptr> m_tree;
+
+        std::atomic<bool> m_shiftPressed;
+        std::atomic<bool> m_isActive;
+        std::atomic<bool> m_isPaused;
 
     };
 }

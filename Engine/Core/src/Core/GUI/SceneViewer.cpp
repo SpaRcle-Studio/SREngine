@@ -24,7 +24,7 @@ void SceneViewer::SetCamera(SR_UTILS_NS::GameObject::Ptr camera) {
 
 void SceneViewer::Draw() {
     if (m_camera.LockIfValid()) {
-        auto camera = m_camera->GetComponent<Camera>();
+        auto camera = m_camera->GetComponent<SR_GRAPH_NS::Camera>();
         //if (m_id = camera->GetPostProcessing()->GetFinally(); m_id >= 0 && camera->IsReady()) {
         if (m_id = SR_ID_INVALID; m_id >= 0 && camera->IsActive()) {
             m_guizmo->DrawTools();
@@ -78,7 +78,7 @@ void SceneViewer::Enable(bool value) {
     m_enabled = value;
 
     if (m_camera.LockIfValid()) {
-        if (auto* camera = m_camera->GetComponent<Camera>()) {
+        if (auto* camera = m_camera->GetComponent<SR_GRAPH_NS::Camera>()) {
             //camera->SetDirectOutput(!m_enabled);
         }
         m_camera.Unlock();
@@ -134,7 +134,7 @@ void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2
         ImGui::SetCursorPos(centralizedCursorPos);
     }
 
-    auto&& env = Environment::Get();
+    auto&& env = SR_GRAPH_NS::Environment::Get();
     if (env->GetPipeLine() == Graphics::PipeLine::OpenGL)
         DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
@@ -176,14 +176,12 @@ void SceneViewer::InitCamera() {
         return;
 
     const auto size = m_window->GetWindowSize();
-    auto component = Camera::Allocate(size.x, size.y);
+    auto component = SR_GRAPH_NS::Camera::Allocate(size.x, size.y);
     //component->SetDirectOutput(true);
     camera->AddComponent(component);
 
     camera->GetTransform()->GlobalTranslate(m_translation);
     camera->GetTransform()->GlobalRotate(m_rotation);
-
-    m_window->AddCamera(component);
 
     SetCamera(camera);
 }

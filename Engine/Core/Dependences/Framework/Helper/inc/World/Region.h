@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
         #define SRRegionAllocArgs Framework::Helper::World::Observer* observer, uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector3& position
         #define SRRegionAllocVArgs observer, width, chunkSize, position
 
-        class Region {
+        class Region : public NonCopyable {
         protected:
             explicit Region(SRRegionAllocArgs)
                 : m_observer(observer)
@@ -35,7 +35,7 @@ namespace SR_UTILS_NS {
             { }
 
         public:
-            virtual ~Region();
+            ~Region() override;
 
         public:
             virtual void Update(float_t dt);

@@ -9,9 +9,25 @@
 #include <Math/Vector3.h>
 #include <Types/SafePointer.h>
 #include <Utils/Singleton.h>
-#include <Utils/NonCopyable.h>
 #include <Utils/StringUtils.h>
-#include <Types/DataStorage.h>
+#include <Types/Marshal.h>
+
+/**
+ *  Component adding if enabled:
+ *      Reset() -> OnEnabled()
+ *
+ *  Component adding if disabled: nothing
+ *
+ *  Component removing if enabled:
+ *      OnDisabled() -> OnDestroy()
+ *
+ *  Component removing if disabled and started:
+ *      OnDestroy()
+ */
+
+namespace SR_HTYPES_NS {
+    class DataStorage;
+}
 
 namespace SR_UTILS_NS {
     class Component;
@@ -28,13 +44,17 @@ namespace SR_UTILS_NS {
         virtual void OnScaled(const Math::FVector3& newValue) { }
         virtual void OnSkewed(const Math::FVector3& newValue) { }
 
-        virtual void OnEnabled() { }
-        virtual void OnDisabled() { }
+        /// Вызывается когда компонент добавляется на объект
+        virtual void Reset() { }
+        /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
         virtual void OnDestroy() { }
 
+        virtual void OnEnabled() { }
+        virtual void OnDisabled() { }
+
     public:
-        void SetEnabled(bool value) { m_isEnabled = value; }
-        void SetParent(GameObject* parent) { m_parent = parent; }
+        void SetEnabled(bool value);
+        void SetParent(GameObject* parent);
 
     public:
         /// Активен и компонент и его родительский объект
@@ -56,9 +76,16 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
 
+    private:
+        void CheckActivity();
+
     protected:
         std::atomic<bool> m_isEnabled = true;
+        std::atomic<bool> m_isActive = false;
+
+        /// TODO: need remove for optimization, use numeric id
         std::string m_name = "Unknown";
+
         uint64_t m_componentId = SIZE_MAX;
         GameObject* m_parent = nullptr;
 

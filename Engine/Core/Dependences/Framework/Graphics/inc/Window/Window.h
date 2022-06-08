@@ -39,8 +39,6 @@ namespace SR_GRAPH_NS {
         void BeginSync();
         void EndSync();
 
-        void AddCamera(Camera* camera);
-        void DestroyCamera(Camera* camera);
         void RegisterWidgetManager(GUI::WidgetManager* widgetManager);
 
     public:
@@ -103,13 +101,12 @@ namespace SR_GRAPH_NS {
 
         Render*               m_render                = nullptr;
 
-        std::mutex            m_mutex                 = std::mutex();
+        std::recursive_mutex  m_mutex                 = std::recursive_mutex();
 
         SR_MATH_NS::IVector2  m_windowPos             = { 0, 0 };
         SR_MATH_NS::IVector2  m_newWindowPos          = { 0, 0 };
         SR_MATH_NS::IVector2  m_size                  = { 0, 0 };
 
-        Helper::Types::SafeGateArray<Camera*> m_cameras;
         Helper::Types::SafeGateArray<GUI::WidgetManager*> m_widgetManagers;
 
         /* 1 - current, 2 - new */

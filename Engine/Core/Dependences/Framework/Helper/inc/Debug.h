@@ -111,10 +111,13 @@ namespace SR_UTILS_NS {
 #define SR_WARN(msg) Framework::Helper::Debug::Warn(msg);
 #define SR_ERROR(msg) Framework::Helper::Debug::Error(msg);
 #define SR_GRAPH(msg) Framework::Helper::Debug::Graph(msg);
-#define SR_GRAPH_LOG(msg) Framework::Helper::Debug::Graph(msg);
+#define SR_GRAPH_LOG(msg) SR_GRAPH(msg);
 #define SR_SHADER(msg) Framework::Helper::Debug::Shader(msg);
 #define SR_SHADER_LOG(msg) Framework::Helper::Debug::Shader(msg);
 #define SR_SYSTEM_LOG(msg) Framework::Helper::Debug::System(msg);
+#define SR_VULKAN_MSG(msg) Framework::Helper::Debug::Vulkan(msg);
+#define SR_VULKAN_LOG(msg) Framework::Helper::Debug::VulkanLog(msg);
+#define SR_VULKAN_ERROR(msg) Framework::Helper::Debug::VulkanError(msg);
 
 #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
             .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
@@ -150,5 +153,6 @@ namespace SR_UTILS_NS {
 #define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
 #define SRHalt(msg) SRAssert2(false, msg)
+#define SRHalt0() SRAssert(false)
 
 #endif //HELPER_DEBUG_H

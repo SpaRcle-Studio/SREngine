@@ -283,7 +283,7 @@ namespace Framework::Graphics {
         /// error correction
         for (auto&& uniform : uniforms) {
             if (uniform.stage == ShaderStage::Unknown || uniform.type == LayoutBinding::Unknown) {
-                Helper::Debug::Error("IShaderProgram::AnalyseShader() : incorrect uniforms!");
+                SR_ERROR("IShaderProgram::AnalyseShader() : incorrect uniforms!");
                 *errors = true;
                 return {};
             }

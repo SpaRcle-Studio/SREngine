@@ -27,7 +27,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD virtual uint64_t GetFileHash() const;
-        SR_NODISCARD bool IsValid() const;
+        SR_NODISCARD virtual bool IsValid() const;
         SR_NODISCARD bool IsLoaded() const { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const { return m_isDestroyed; }
@@ -59,10 +59,14 @@ namespace SR_UTILS_NS {
         virtual bool Reload() { return false; }
 
         virtual bool Unload() {
-            if (m_loadState == LoadState::Unknown || m_loadState == LoadState::Loaded) {
+            if (m_loadState == LoadState::Unknown ||
+                m_loadState == LoadState::Loaded ||
+                m_loadState == LoadState::Reloading
+            ) {
                 m_loadState = LoadState::Unloaded;
                 return true;
             }
+
             return false;
         }
 

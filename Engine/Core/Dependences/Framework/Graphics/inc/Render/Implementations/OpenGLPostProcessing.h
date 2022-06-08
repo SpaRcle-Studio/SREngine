@@ -132,10 +132,10 @@ namespace Framework::Graphics {
             if (!m_isInit)
                 return false;
 
-            if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
-                Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy final framebuffer!");
-                return false;
-            }
+            //if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
+            //    SR_ERROR("PostProcessing::Destroy() : failed to destroy final framebuffer!");
+            //    return false;
+            //}
 
             if (!m_env->FreeRBO(m_depth))
                 return false;
@@ -148,7 +148,7 @@ namespace Framework::Graphics {
 
         bool OnResize(uint32_t w, uint32_t h) override {
             if (!m_env->CreatePingPongFrameBuffer({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
-                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
+                SR_ERROR("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
                 return false;
             }
 

@@ -347,7 +347,7 @@ namespace SR_UTILS_NS {
             const uint16_t count = MarshalUtils::LoadValue<Stream, uint16_t>(stream);
 
             for (uint16_t i = 0; i < count; ++i) {
-                auto &&type = MarshalUtils::LoadValue<Stream, MARSHAL_TYPE>(stream);
+                auto &&type = static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<Stream, uint8_t>(stream));
 
                 if (type == MARSHAL_TYPE::Node) {
                     node.AppendNode(std::move(LoadNode<Stream>(stream)));

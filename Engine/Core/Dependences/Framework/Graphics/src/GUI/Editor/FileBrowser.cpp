@@ -180,8 +180,9 @@ void FileBrowser::Draw() {
                     m_selectedDir = path;
                 }
             }
-            else
+            else {
                 ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
+            }
 
             ImGui::PopFont();
 

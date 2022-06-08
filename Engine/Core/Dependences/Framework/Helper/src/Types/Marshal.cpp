@@ -113,7 +113,7 @@ namespace SR_HTYPES_NS {
         if (!file.is_open())
             return node;
 
-        if (MarshalUtils::LoadValue<std::ifstream, MARSHAL_TYPE>(file) != MARSHAL_TYPE::Node) {
+        if (static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<std::ifstream, uint8_t>(file)) != MARSHAL_TYPE::Node) {
             file.close();
             return node;
         }
@@ -293,13 +293,13 @@ namespace SR_HTYPES_NS {
         }
     #endif
 
-        MarshalUtils::SaveValue(stream, MARSHAL_TYPE::Node);
+        MarshalUtils::SaveValue(stream, static_cast<uint8_t>(MARSHAL_TYPE::Node));
         MarshalUtils::SaveShortString(stream, m_name);
         MarshalUtils::SaveValue(stream, count);
 
     #if SR_MARSHAL_USE_LIST
         for (auto&& attribute : m_attributes) {
-            MarshalUtils::SaveValue(stream, attribute.m_type);
+            MarshalUtils::SaveValue(stream, static_cast<uint8_t>(attribute.m_type));
             MarshalUtils::SaveShortString(stream, attribute.m_name);
             MarshalUtils::Encode(stream, attribute.m_data, attribute.m_type);
         }
@@ -331,7 +331,7 @@ namespace SR_HTYPES_NS {
         marshal.m_count = m_attributes.size() + m_nodes.size();
 
         for (const auto& attribute : m_attributes) {
-            MarshalUtils::SaveValue(marshal.m_stream, attribute.m_type);
+            MarshalUtils::SaveValue(marshal.m_stream, static_cast<uint8_t>(attribute.m_type));
             MarshalUtils::SaveShortString(marshal.m_stream, attribute.m_name);
             MarshalUtils::Encode(marshal.m_stream, attribute.m_data, attribute.m_type);
         }
@@ -385,7 +385,7 @@ namespace SR_HTYPES_NS {
             return node;
 
         std::stringstream stream(data);
-        if (MarshalUtils::LoadValue<std::stringstream, MARSHAL_TYPE>(stream) != MARSHAL_TYPE::Node) {
+        if (static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<std::stringstream, uint8_t>(stream)) != MARSHAL_TYPE::Node) {
             return node;
         }
 
@@ -431,7 +431,7 @@ namespace SR_HTYPES_NS {
     std::stringstream MarshalEncodeNode::Save() const  {
         std::stringstream stream;
 
-        MarshalUtils::SaveValue(stream, MARSHAL_TYPE::Node);
+        MarshalUtils::SaveValue(stream, static_cast<uint8_t>(MARSHAL_TYPE::Node));
         MarshalUtils::SaveShortString(stream, m_name);
 
         MarshalUtils::SaveValue(stream, m_count);
@@ -450,7 +450,7 @@ namespace SR_HTYPES_NS {
         MarshalDecodeNode marshal(m_name);
 
         for (uint16_t i = 0; i < m_count; ++i) {
-            auto&& type = MarshalUtils::LoadValue<std::stringstream, MARSHAL_TYPE>(stream);
+            auto&& type = static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<std::stringstream, uint8_t>(stream));
 
             if (type == MARSHAL_TYPE::Node) {
                 /// добавляем независимо от валидности
@@ -491,7 +491,7 @@ namespace SR_HTYPES_NS {
 
         node.m_stream = std::stringstream(data);
 
-        if (MarshalUtils::LoadValue<std::stringstream, MARSHAL_TYPE>(node.m_stream) != MARSHAL_TYPE::Node) {
+        if (static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<std::stringstream, uint8_t>(node.m_stream)) != MARSHAL_TYPE::Node) {
             return MarshalEncodeNode();
         }
 
@@ -508,7 +508,7 @@ namespace SR_HTYPES_NS {
         if (!file.is_open())
             return node;
 
-        if (MarshalUtils::LoadValue<std::ifstream, MARSHAL_TYPE>(file) != MARSHAL_TYPE::Node) {
+        if (static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<std::ifstream, uint8_t>(file)) != MARSHAL_TYPE::Node) {
             file.close();
             return node;
         }

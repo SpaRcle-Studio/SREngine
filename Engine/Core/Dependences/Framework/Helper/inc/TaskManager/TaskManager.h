@@ -59,7 +59,6 @@ namespace SR_UTILS_NS {
         [[nodiscard]] uint64_t GetUniqueId() const;
 
     private:
-        mutable std::mutex m_mutex;
         Types::Thread::Ptr m_thread;
         std::atomic<bool> m_isRun;
         std::list<Task> m_tasks;

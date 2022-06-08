@@ -314,7 +314,7 @@ namespace Framework::Graphics {
         }
 
         void Resize(uint32_t w, uint32_t h) override {
-            Helper::Debug::Log(Helper::Format("Win32Window::Resize() : set new sizes %ux%u", w, h));
+            SR_LOG(Helper::Format("Win32Window::Resize() : set new sizes %ux%u", w, h));
 
             RECT newRect = RECT {
                 .left = 0L,
@@ -407,7 +407,7 @@ namespace Framework::Graphics {
         }
 
         void SetIcon(const char* path) override {
-            Helper::Debug::Log("Win32Window::SetIcon() : set icon... \n\tPath: " + std::string(path));
+            SR_LOG("Win32Window::SetIcon() : set icon... \n\tPath: " + std::string(path));
 
             HICON hWindowIcon    = NULL;
             HICON hWindowIconBig = NULL;

@@ -440,7 +440,7 @@ namespace SR_GRAPH_NS {
             m_render->RegisterTexture(sampler);
         }
 
-        SetSampler(hashId, sampler->GetID());
+        SetSampler(hashId, sampler->GetId());
     }
 
     void Shader::SetSampler2D(const std::string &name, Types::Texture *sampler) noexcept {

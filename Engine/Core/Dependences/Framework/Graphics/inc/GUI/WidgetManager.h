@@ -8,11 +8,8 @@
 #include <Types/Thread.h>
 #include <Utils/NonCopyable.h>
 #include <Utils/Singleton.h>
-#include <mutex>
 #include <Input/InputHandler.h>
 #include <Input/InputSystem.h>
-#include <string>
-#include <unordered_map>
 
 namespace SR_GRAPH_NS::GUI {
     class Widget;
@@ -36,14 +33,14 @@ namespace SR_GRAPH_NS::GUI {
         void OnKeyUp(const Helper::KeyUpEvent& event) override;
 
     private:
-        SR_HTYPES_NS::Thread::Mutex m_mutex;
+        std::recursive_mutex m_mutex;
         Widgets m_widgets;
         bool m_ignoreNonFocused;
 
     };
 
-    class GlobalWidgetManager : public WidgetManager, public Helper::Singleton<GlobalWidgetManager> {
-        friend class Helper::Singleton<GlobalWidgetManager>;
+    class GlobalWidgetManager : public WidgetManager, public SR_UTILS_NS::Singleton<GlobalWidgetManager> {
+        friend class SR_UTILS_NS::Singleton<GlobalWidgetManager>;
     public:
         ~GlobalWidgetManager() override = default;
     };

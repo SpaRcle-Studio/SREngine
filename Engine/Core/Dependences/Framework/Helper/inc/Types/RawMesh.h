@@ -43,6 +43,7 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;
 
         SR_NODISCARD float_t GetScaleFactor() const;
+        SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
     protected:
         bool Unload() override;

@@ -50,7 +50,7 @@ bool Framework::Graphics::ShadedMeshSubCluster::Add(Framework::Graphics::Types::
 
     int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
     if (groupID == SR_ID_INVALID) {
-        Helper::Debug::Error("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
+        SR_ERROR("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
         return false;
     }
 

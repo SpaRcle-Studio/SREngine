@@ -39,6 +39,7 @@
 #include <Types/Marshal.h>
 #include <Render/Camera.h>
 #include <Render/RenderManager.h>
+#include <Render/CameraManager.h>
 #include <Scripting/Base/Behaviour.h>
 
 using namespace Framework;
@@ -101,8 +102,8 @@ int main(int argc, char **argv) {
 
     if (!FbxLoader::Debug::IsInit()) {
         FbxLoader::Debug::Init(
-                [](const std::string &msg) { Helper::Debug::Error(msg); },
-                [](const std::string &msg) { Helper::Debug::Warn(msg); }
+                [](const std::string &msg) { SR_ERROR(msg); },
+                [](const std::string &msg) { SR_WARN(msg); }
         );
     }
 
@@ -213,6 +214,7 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
+    SR_GRAPH_NS::CameraManager::Destroy();
     SR_SCRIPTING_NS::GlobalEvoCompiler::Destroy();
     SR_UTILS_NS::EntityManager::Destroy();
     Framework::Engine::Destroy();

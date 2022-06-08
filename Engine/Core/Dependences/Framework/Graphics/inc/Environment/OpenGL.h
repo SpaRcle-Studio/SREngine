@@ -308,8 +308,9 @@ namespace Framework::Graphics {
             /// glDrawArrays(GL_LINES, 0, count_vertices);
         }
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Helper::Debug::Log("OpenGL::FreeVBO() : free VBO \"" + std::to_string(*ID) + "\" VAO...");
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+                SR_LOG("OpenGL::FreeVBO() : free VBO \"" + std::to_string(*ID) + "\" VAO...");
+            }
 
             if (*ID > 0) {
                 glDeleteVertexArrays(1, reinterpret_cast<const GLuint *>(ID)); // VAO
@@ -445,7 +446,7 @@ namespace Framework::Graphics {
             ///  glDeleteFramebuffers(1, &RBO);
             return true;
         }
-        [[nodiscard]] bool FreeTexture(uint32_t ID) const override;
+        [[nodiscard]] bool FreeTexture(int32_t* id) const override;
         [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const override;
     };
 }

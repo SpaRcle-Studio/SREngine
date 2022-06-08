@@ -42,7 +42,7 @@ namespace Framework::Graphics::VulkanTools {
             m_pool   = m_kernel->GetCmdPool();
 
             if (!m_descriptorManager || !m_device || !m_pool) {
-                Helper::Debug::Error("MemoryManager::Initialize() : failed to get (descriptor manager/device/cmd pool)!");
+                SR_ERROR("MemoryManager::Initialize() : failed to get (descriptor manager/device/cmd pool)!");
                 return false;
             }
 
@@ -67,7 +67,7 @@ namespace Framework::Graphics::VulkanTools {
 
         template<typename T> bool FreeMemory(uint32_t id, uint32_t maxCount, T** pool) const {
             if (id >= maxCount) {
-                Helper::Debug::Error("MemoryManager::FreeMemory() : list index out of range!");
+                SR_ERROR("MemoryManager::FreeMemory() : list index out of range!");
                 return false;
             }
 
@@ -79,8 +79,9 @@ namespace Framework::Graphics::VulkanTools {
 
                 return true;
             }
-            else
-                Helper::Debug::Error("MemoryManager::FreeMemory() : id is not exists! (" + std::to_string(id) + ")");
+            else {
+                SR_ERROR("MemoryManager::FreeMemory() : id is not exists! (" + std::to_string(id) + ")");
+            }
 
             return false;
         }
@@ -90,7 +91,7 @@ namespace Framework::Graphics::VulkanTools {
             auto memory = new MemoryManager();
 
             if (!memory->Initialize(kernel)) {
-                Helper::Debug::Error("MemoryManager::Create() : failed to initialize memory!");
+                SR_ERROR("MemoryManager::Create() : failed to initialize memory!");
                 return nullptr;
             }
 

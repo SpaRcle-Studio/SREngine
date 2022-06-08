@@ -14,7 +14,7 @@ namespace SR_GTYPES_NS {
 
         if (wireFramed->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            wireFramed->m_VBO = manager.CopyIfExists<Vertices::Type::SimpleVertex, Memory::MeshManager::VBO>(GetResourceId());
+            wireFramed->m_VBO = manager.CopyIfExists<Vertices::Type::SimpleVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
         }
 
         return wireFramed;

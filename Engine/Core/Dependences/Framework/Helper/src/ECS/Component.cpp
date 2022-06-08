@@ -4,24 +4,55 @@
 
 #include <ECS/Component.h>
 #include <ECS/GameObject.h>
-#include <Types/Thread.h>
-
 #include <ECS/ComponentManager.h>
+
+#include <Types/Thread.h>
 
 namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal Component::Save(SavableFlags flags) const {
         auto marshal = Entity::Save(flags);
 
         marshal.Write(m_name);
+        marshal.Write(IsEnabled());
 
         return marshal;
     }
 
     bool Component::IsActive() const {
-        return m_isEnabled && (!m_parent || m_parent->IsActive());
+        return IsEnabled() && (!m_parent || m_parent->m_isActive);
     }
 
-    bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const std::function<Component *(void)> &constructor) {
+    void Component::SetParent(GameObject *parent) {
+        m_parent = parent;
+
+        CheckActivity();
+    }
+
+    void Component::SetEnabled(bool value) {
+        if (value == m_isEnabled) {
+            return;
+        }
+
+        m_isEnabled = value;
+
+        CheckActivity();
+    }
+
+    void Component::CheckActivity() {
+        const bool isActive = IsActive();
+        if (isActive == m_isActive) {
+            return;
+        }
+
+        if ((m_isActive = isActive)) {
+            OnEnabled();
+        }
+        else {
+            OnDisabled();
+        }
+    }
+
+    bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const Construction& constructor) {
         m_names.insert(std::make_pair(id, name));
         m_ids.insert(std::make_pair(name, id));
         m_creators.insert(std::make_pair(id, constructor));
@@ -55,6 +86,7 @@ namespace SR_UTILS_NS {
         SR_SCOPED_LOCK
 
         m_lastComponent = marshal.Read<std::string>();
+        const auto&& enabled = marshal.Read<bool>();
 
         auto&& uidIt = m_ids.find(m_lastComponent);
 
@@ -63,7 +95,12 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        return m_loaders.at(uidIt->second)(marshal, &m_context);
+        if (auto&& pComponent = m_loaders.at(uidIt->second)(marshal, &m_context)) {
+            pComponent->SetEnabled(enabled);
+            return pComponent;
+        }
+
+        return nullptr;
     }
 }
 

@@ -62,13 +62,15 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void ResourceManager::Remove(IResource *resource) {
-        if (resource->IsValid()) {
-            auto &&resourcesGroup = m_resources.at(resource->m_resourceName);
-            resourcesGroup.Remove(resource);
+    void ResourceManager::Remove(IResource *pResource) {
+        if (pResource->IsValid()) {
+            auto &&resourcesGroup = m_resources.at(pResource->m_resourceName);
+            resourcesGroup.Remove(pResource);
         }
         else {
-            SRAssert2(false, "Invalid resource!");
+            SRAssert2(false, "Invalid resource! "
+                             "\n\tType: " + std::string(pResource->GetResourceName()) +
+                             "\n\tId: " + pResource->GetResourceId());
         }
     }
 
@@ -86,7 +88,7 @@ namespace SR_UTILS_NS {
             /// чтобы сразу же не блокировать им эту возможность
             Types::Thread::Sleep(100);
 
-            const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+            SR_SCOPED_LOCK
 
             GC();
 
@@ -154,7 +156,7 @@ namespace SR_UTILS_NS {
         if (Debug::GetLevel() >= Debug::Level::Full)
             SR_LOG("ResourceManager::RegisterResource() : add new \"" + std::string(resource->GetResourceName()) + "\" resource.");
 
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
     #ifdef SR_DEBUG
         if (m_resources.count(resource->m_resourceName) == 0) {
@@ -167,7 +169,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::PrintMemoryDump() {
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         uint64_t count = 0;
 
@@ -202,7 +204,7 @@ namespace SR_UTILS_NS {
     }
 
     IResource *ResourceManager::Find(const std::string& Name, const std::string& ID) {
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
     #if defined(SR_DEBUG)
         if (m_resources.count(Name) == 0) {
@@ -221,7 +223,7 @@ namespace SR_UTILS_NS {
 
     void ResourceManager::Synchronize(bool force) {
         {
-            const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+            SR_SCOPED_LOCK
             m_force = true;
         }
 
@@ -236,7 +238,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::InspectResources(const std::function<void(const ResourcesTypes &)> &callback) {
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_SCOPED_LOCK
 
         callback(m_resources);
     }

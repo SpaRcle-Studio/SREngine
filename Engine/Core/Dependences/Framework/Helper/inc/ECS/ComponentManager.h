@@ -22,9 +22,10 @@ namespace SR_UTILS_NS {
     class Component;
     class GameObject;
 
-    class ComponentManager : public Singleton<ComponentManager>, public NonCopyable {
+    class ComponentManager : public Singleton<ComponentManager> {
         friend class Singleton<ComponentManager>;
         typedef std::function<void(Component*)> Event;
+        typedef std::function<Component*(void)> Construction;
         typedef std::function<Component*(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage)> Loader;
     public:
         Component* CreateComponentOfName(const std::string& name);
@@ -40,7 +41,7 @@ namespace SR_UTILS_NS {
         }
 
 
-        template<typename T> bool RegisterComponent(const std::function<Component*(void)>& constructor) {
+        template<typename T> bool RegisterComponent(const Construction& constructor) {
             SR_SCOPED_LOCK
 
             const auto&& code = typeid(T).hash_code();
@@ -72,12 +73,11 @@ namespace SR_UTILS_NS {
         SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
 
     private:
-        bool RegisterComponentImpl(size_t id, const std::string& name, const std::function<Component*(void)>& constructor);
+        bool RegisterComponentImpl(size_t id, const std::string& name, const Construction& constructor);
         Component* CreateComponentImpl(size_t id);
 
     private:
-        mutable std::recursive_mutex m_mutex = std::recursive_mutex();
-        std::unordered_map<size_t, std::function<Component*(void)>> m_creators;
+        std::unordered_map<size_t, Construction> m_creators;
         std::unordered_map<size_t, Loader> m_loaders;
         std::unordered_map<size_t, std::string> m_names;
         std::unordered_map<std::string, size_t> m_ids;

@@ -95,9 +95,7 @@ namespace SR_GTYPES_NS {
                 continue;
             }
 
-            SRVerifyFalse(!environment->FreeTexture(color));
-
-            color = SR_ID_INVALID;
+            SRVerifyFalse(!environment->FreeTexture(&color));
         }
 
         if (m_shader) {

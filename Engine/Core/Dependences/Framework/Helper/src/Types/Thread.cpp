@@ -4,6 +4,7 @@
 
 #include <Types/Thread.h>
 #include <Platform/Platform.h>
+#include <Types/DataStorage.h>
 
 namespace SR_HTYPES_NS {
     Thread::Thread(std::thread &&thread)

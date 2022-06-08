@@ -8,15 +8,15 @@
 #include <Debug.h>
 #include <Utils/ThreadUtils.h>
 #include <Utils/Singleton.h>
-#include <Types/DataStorage.h>
 
 namespace SR_HTYPES_NS {
+    class DataStorage;
+
     class Thread : public NonCopyable {
     public:
         using Ptr = Thread*;
         using ThreadId = std::string;
         using ThreadsMap = std::unordered_map<ThreadId, Thread::Ptr>;
-        using Mutex = std::recursive_mutex;
 
         class Factory : public Singleton<Factory> {
             friend class Singleton<Factory>;
@@ -40,7 +40,6 @@ namespace SR_HTYPES_NS {
             void Remove(Thread* pThread);
 
         private:
-            Mutex m_mutex = Mutex();
             ThreadsMap m_threads = ThreadsMap();
 
         };
@@ -60,7 +59,7 @@ namespace SR_HTYPES_NS {
     public:
         SR_NODISCARD bool Joinable() const { return m_thread.joinable(); }
         SR_NODISCARD ThreadId GetId();
-        SR_NODISCARD DataStorage::Ptr GetContext() { return m_context; }
+        SR_NODISCARD DataStorage* GetContext() { return m_context; }
 
         void Join() { m_thread.join(); }
         bool TryJoin();
@@ -76,7 +75,7 @@ namespace SR_HTYPES_NS {
     private:
         std::thread m_thread;
         ThreadId m_id;
-        DataStorage::Ptr m_context;
+        DataStorage* m_context;
 
     };
 }

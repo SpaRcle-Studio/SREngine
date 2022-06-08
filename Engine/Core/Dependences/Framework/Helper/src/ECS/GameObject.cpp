@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
     const uint16_t GameObject::VERSION = 1000;
 
     GameObject::GameObject(const Types::SafePtr<World::Scene> &scene, std::string name, std::string tag)
-            : Types::SafePtr<GameObject>(this)
+        : Types::SafePtr<GameObject>(this)
     {
         m_name = std::move(name);
         m_tag = std::move(tag);
@@ -37,8 +37,8 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::AddComponent(Component *component) {  // TODO: add security multi-threading
-        if (this->m_isDestroy) {
-            Debug::Error("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
+        if (m_isDestroy) {
+            SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
             return false;
         }
 
@@ -194,7 +194,8 @@ namespace SR_UTILS_NS {
 
         if (m_parent.Valid()) {
             m_transform->OnParentSet(m_parent->m_transform);
-        } else
+        }
+        else
             m_transform->OnParentSet(nullptr);
 
         m_scene->OnChanged();
@@ -213,10 +214,11 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::ContainsComponent(const std::string &name) {
-        for (auto comp : m_components)
-            if (comp->GetComponentName() == name) {
+        for (auto&& pComponent : m_components) {
+            if (pComponent->GetComponentName() == name) {
                 return true;
             }
+        }
 
         return false;
     }
@@ -239,36 +241,44 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void GameObject::SetActive(bool value) {
-        if (value != m_isActive)
-            m_isActive = value;
-        else
+    void GameObject::SetEnabled(bool value) {
+        if (m_isEnabled == value) {
             return;
+        }
 
-        for (auto child : m_children)
-            if (child.LockIfValid()) {
-                child->OnPrentSetActive(value);
-                child.Unlock();
-            }
+        m_isEnabled = value;
 
-        UpdateComponentsEnabled();
+        CheckActivity();
     }
 
-    void GameObject::OnPrentSetActive(bool value) {
-        m_isParentActive = value;
+    bool GameObject::IsActive() const {
+        if (m_parent.RecursiveLockIfValid()) {
+            const bool parentActive = m_parent->m_isActive;
+            m_parent.Unlock();
+            return IsEnabled() && parentActive;
+        }
 
-        for (auto child : m_children)
-            if (child.LockIfValid()) {
-                child->OnPrentSetActive(value);
-                child.Unlock();
-            }
-
-        UpdateComponentsEnabled();
+        return IsEnabled();
     }
 
-    void GameObject::UpdateComponentsEnabled() {
-        //for (auto comp : m_components)
-        //  comp->SetActive(m_isParentActive && m_isActive);
+    void GameObject::CheckActivity() {
+        const bool isActive = IsActive();
+        if (isActive == m_isActive) {
+            return;
+        }
+
+        m_isActive = isActive;
+
+        for (auto&& child : m_children) {
+            if (child.LockIfValid()) {
+                child->CheckActivity();
+                child.Unlock();
+            }
+        }
+
+        for (auto&& pComponent : m_components) {
+            pComponent->CheckActivity();
+        }
     }
 
     Math::FVector3 GameObject::GetBarycenter() {

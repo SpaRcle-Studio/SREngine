@@ -8,12 +8,13 @@
 #include <Types/SafePointer.h>
 #include <Math/Vector3.h>
 #include <Utils/StringFormat.h>
+#include <Utils/NonCopyable.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class GameObject;
 }
 
-namespace Framework::Helper::World {
+namespace SR_WORLD_NS {
     class Scene;
 
     struct Offset {
@@ -26,11 +27,11 @@ namespace Framework::Helper::World {
             : Offset(Math::IVector3::Zero(), Math::IVector3::Zero())
         { }
 
-        [[nodiscard]] std::string ToString() const {
-            return Helper::Format("{ Region: %s, Chunk: %s }", m_region.ToString().c_str(), m_chunk.ToString().c_str());
+        SR_NODISCARD std::string ToString() const {
+            return SR_UTILS_NS::Format("{ Region: %s, Chunk: %s }", m_region.ToString().c_str(), m_chunk.ToString().c_str());
         }
 
-        [[nodiscard]] bool Empty() const { return m_region.Empty() && m_chunk.Empty(); }
+        SR_NODISCARD bool Empty() const { return m_region.Empty() && m_chunk.Empty(); }
 
         SR_FORCE_INLINE bool operator==(const Offset &p_v) const {
             return m_chunk == p_v.m_chunk && m_region == p_v.m_region;
@@ -48,9 +49,10 @@ namespace Framework::Helper::World {
         Math::IVector3 m_chunk;
     };
 
-    class Observer {
+    class Observer : public NonCopyable {
     public:
-        Observer(const Types::SafePtr<Scene>& scene);
+        Observer(Scene* scene);
+        ~Observer() override = default;
 
     public:
         void SetChunk(Math::IVector3 chunk);
@@ -61,9 +63,7 @@ namespace Framework::Helper::World {
         Offset MathNeighbour(const Math::IVector3& offset);
         Math::IVector3 WorldPosToChunkPos(const Math::FVector3& position);
 
-        [[nodiscard]] int32_t GetScope() const { return m_scope; }
-
-        [[nodiscard]] Types::SafePtr<Scene> GetScene() const { return m_scene; }
+        SR_NODISCARD int32_t GetScope() const { return m_scope; }
 
     public:
         Math::IVector2 m_chunkSize;
@@ -79,7 +79,7 @@ namespace Framework::Helper::World {
 
         Offset m_offset;
 
-        Types::SafePtr<Scene> m_scene;
+        Scene* m_scene;
         Types::SafePtr<Helper::GameObject> m_target;
     };
 

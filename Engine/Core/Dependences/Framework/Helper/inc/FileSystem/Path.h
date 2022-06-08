@@ -19,6 +19,7 @@ namespace Framework::Helper {
         Path(const Path& path);
         Path(const char* path);
         Path(std::string path);
+        Path(std::wstring path);
 
         Path(Path&& path) noexcept
             : m_path(std::exchange(path.m_path, {}))
@@ -38,7 +39,7 @@ namespace Framework::Helper {
         }
 
         operator const std::string&() { return m_path; }
-        Path& operator=(const Path& path);
+        Path& operator=(const Path& path) = default;
 
     public:
         Path Normalize();
@@ -46,8 +47,11 @@ namespace Framework::Helper {
         void NormalizeSelf();
 
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD std::wstring ToWinApiPath() const;
+        SR_NODISCARD std::wstring ToUnicodeString() const;
         SR_NODISCARD size_t GetHash() const;
         SR_NODISCARD uint64_t GetFileHash() const;
+        SR_NODISCARD uint64_t GetFolderHash(uint64_t deep = SR_UINT64_MAX) const;
         SR_NODISCARD const char* CStr() const;
 
         SR_NODISCARD Path GetPrevious() const;
@@ -55,12 +59,15 @@ namespace Framework::Helper {
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path FileDialog() const;
+        SR_NODISCARD Path FolderDialog() const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;
         SR_NODISCARD bool IsSubPath(const Path& subPath) const;
+        SR_NODISCARD bool IsHidden() const;
         SR_NODISCARD bool Exists() const;
+        SR_NODISCARD bool Exists(Type type) const;
 
         SR_NODISCARD Type GetType() const;
         SR_NODISCARD bool IsDir() const;

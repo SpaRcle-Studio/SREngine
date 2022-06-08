@@ -95,7 +95,10 @@ namespace SR_GTYPES_NS {
         void SetMaterial(Material* material);
 
     protected:
+        SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        void OnEnabled() override;
+        void OnDisabled() override;
 
     public:
         Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);

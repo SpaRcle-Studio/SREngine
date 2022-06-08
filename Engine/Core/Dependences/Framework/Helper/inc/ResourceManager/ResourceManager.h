@@ -12,7 +12,7 @@
 #include <Utils/Singleton.h>
 
 namespace SR_UTILS_NS {
-    class ResourceManager : public Helper::Singleton<ResourceManager> {
+    class ResourceManager : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
     public:
         static const float_t ResourceLifeTime;
@@ -28,6 +28,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetModelsPath() const { return m_folder.Concat("Models"); }
         SR_NODISCARD Path GetUtilsPath() const { return m_folder.Concat("Utilities"); }
         SR_NODISCARD Path GetShadersPath() const { return m_folder.Concat("Shaders"); }
+        SR_NODISCARD Path GetScriptsPath() const { return m_folder.Concat("Scripts"); }
 
         IResource* Find(const std::string& Name, const std::string& ID);
 
@@ -76,7 +77,6 @@ namespace SR_UTILS_NS {
         std::atomic<bool> m_destroyIsEmpty = false;
 
         Path m_folder = Path();
-        std::recursive_mutex m_mutex = std::recursive_mutex();
         Types::Thread::Ptr m_thread;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;

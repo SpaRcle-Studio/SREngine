@@ -89,10 +89,12 @@ Framework::Helper::Xml::Document Framework::Helper::Xml::Document::Load(const st
     if (pugi::xml_parse_result result = xml.m_document->load_file(path.c_str())) {
         xml.m_valid = true;
         xml.m_path = path;
-    } else {
-        Helper::Debug::Error("Document::Load() : failed to load xml! \n\tPath: " + path + "\n\tDescription: " + std::string(result.description()));
+    }
+    else {
+        SR_ERROR("Document::Load() : failed to load xml! \n\tPath: " + path + "\n\tDescription: " + std::string(result.description()));
         Xml::g_xml_last_error = -3;
     }
+
     return xml;
 }
 

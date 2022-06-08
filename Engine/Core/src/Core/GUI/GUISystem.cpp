@@ -732,7 +732,7 @@ void GUISystem::SetGuizmoTool(uint8_t toolId) {
         case 1: m_currentGuizmoOperation = ImGuizmo::OPERATION::ROTATE;    break;
         case 2: m_currentGuizmoOperation = ImGuizmo::OPERATION::SCALE;     break;
         default:
-            Helper::Debug::Error("GUISystem::SetGuizmoTool() : unknown tool id!");
+            SR_ERROR("GUISystem::SetGuizmoTool() : unknown tool id!");
             return;
     }
 }

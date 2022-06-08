@@ -9,7 +9,7 @@
 #include <Utils/NonCopyable.h>
 #include <Utils/Singleton.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     enum class MessageBoxType : uint8_t {
         Info, Warn, Error
     };
@@ -22,8 +22,8 @@ namespace Framework::Graphics::GUI {
     };
     typedef uint32_t MessageBoxButton;
 
-    class MessageBoxWidget : public Widget, public Helper::Singleton<MessageBoxWidget> {
-        friend class Helper::Singleton<MessageBoxWidget>;
+    class MessageBoxWidget : public Widget, public SR_UTILS_NS::Singleton<MessageBoxWidget> {
+        friend class SR_UTILS_NS::Singleton<MessageBoxWidget>;
     private:
         MessageBoxWidget();
         ~MessageBoxWidget() override;
@@ -37,7 +37,6 @@ namespace Framework::Graphics::GUI {
         void Draw() override;
 
     private:
-        std::recursive_mutex m_mutex;
         std::string m_header;
         std::string m_message;
         MessageBoxType m_type;

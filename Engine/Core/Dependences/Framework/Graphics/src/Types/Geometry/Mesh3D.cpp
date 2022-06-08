@@ -49,7 +49,7 @@ namespace SR_GTYPES_NS {
 
         if (mesh3D->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::StaticMeshVertex, Memory::MeshManager::VBO>(GetResourceId());
+            mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::StaticMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
         }
 
         return mesh3D;
@@ -134,7 +134,6 @@ namespace SR_GTYPES_NS {
     SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags) const {
         SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
 
-        marshal.Write(IsEnabled());
         marshal.Write(static_cast<int32_t>(m_type));
 
         marshal.Write(GetResourcePath());
@@ -147,7 +146,6 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Component *SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&enabled = marshal.Read<bool>();
         const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
 
         const auto &&path = marshal.Read<std::string>();
@@ -156,10 +154,9 @@ namespace SR_GTYPES_NS {
 
         const auto &&material = marshal.Read<std::string>();
 
-        Render *render = dataStorage->GetPointer<Render>("Render");
+        Render* pRender = dataStorage->GetPointer<Render>();
 
-        if (!render) {
-            SRAssert(false);
+        if (!SRVerifyFalse(!pRender)) {
             return nullptr;
         }
 
@@ -174,7 +171,7 @@ namespace SR_GTYPES_NS {
                     SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
             }
 
-            render->RegisterMesh(pMesh);
+            pRender->RegisterMesh(pMesh);
             /// TODO: mesh->WaitCalculate();
         }
 

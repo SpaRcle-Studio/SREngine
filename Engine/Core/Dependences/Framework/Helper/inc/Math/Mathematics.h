@@ -52,6 +52,7 @@
 #define SR_UINT32_MAX UINT32_MAX
 #define SR_INT64_MAX INT64_MAX
 #define SR_UINT64_MAX UINT64_MAX
+#define SR_UINTPTR_MAX UINTPTR_MAX
 #define SR_DOUBLE_MAX DBL_MAX
 #define SR_FLOAT_MAX FLT_MAX
 
@@ -78,7 +79,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/vec4.hpp>
 
-namespace SR_UTILS_NS::Math {
+namespace SR_MATH_NS {
     typedef double Unit; //! can broke render
 
     const double_t DoubleMAX = DBL_MAX;
@@ -108,39 +109,55 @@ namespace SR_UTILS_NS::Math {
         return abs(a - b) < tolerance;
     }
 
+    template<typename T> constexpr bool IsVolatile() {
+        return std::is_volatile<T>::value;
+    }
+
     template<typename T> constexpr bool IsLogical() {
-        return std::is_same_v<T, bool>;
+        if (!IsVolatile<T>()) {
+            return IsLogical<volatile T>();
+        }
+
+        return std::is_same_v<T, volatile bool>;
     }
 
     template<typename T> constexpr bool IsString() {
-        return std::is_same_v<T, std::string>;
+        if (!IsVolatile<T>()) {
+            return IsString<volatile T>();
+        }
+
+        return std::is_same_v<T, volatile std::string>;
     }
 
     template<typename T> constexpr bool IsNumber() {
+        if (!IsVolatile<T>()) {
+            return IsNumber<volatile T>();
+        }
+
         return
-            std::is_same_v<T, bool> ||
-            std::is_same_v<T, float> ||
-            std::is_same_v<T, double> ||
-            std::is_same_v<T, int> ||
-            std::is_same_v<T, unsigned short> ||
-            std::is_same_v<T, short> ||
-            std::is_same_v<T, unsigned int> ||
-            std::is_same_v<T, unsigned> ||
-            std::is_same_v<T, long> ||
-            std::is_same_v<T, long long> ||
-            std::is_same_v<T, unsigned long long> ||
-            std::is_same_v<T, unsigned long> ||
-            std::is_same_v<T, float_t> ||
-            std::is_same_v<T, double_t> ||
-            std::is_same_v<T, int64_t> ||
-            std::is_same_v<T, uint64_t> ||
-            std::is_same_v<T, int32_t> ||
-            std::is_same_v<T, uint32_t> ||
-            std::is_same_v<T, int8_t> ||
-            std::is_same_v<T, uint8_t> ||
-            std::is_same_v<T, int16_t> ||
-            std::is_same_v<T, uint16_t> ||
-            std::is_same_v<T, Unit>;
+            std::is_same_v<T, volatile bool> ||
+            std::is_same_v<T, volatile float> ||
+            std::is_same_v<T, volatile double> ||
+            std::is_same_v<T, volatile int> ||
+            std::is_same_v<T, volatile unsigned short> ||
+            std::is_same_v<T, volatile short> ||
+            std::is_same_v<T, volatile unsigned int> ||
+            std::is_same_v<T, volatile unsigned> ||
+            std::is_same_v<T, volatile long> ||
+            std::is_same_v<T, volatile long long> ||
+            std::is_same_v<T, volatile unsigned long long> ||
+            std::is_same_v<T, volatile unsigned long> ||
+            std::is_same_v<T, volatile float_t> ||
+            std::is_same_v<T, volatile double_t> ||
+            std::is_same_v<T, volatile int64_t> ||
+            std::is_same_v<T, volatile uint64_t> ||
+            std::is_same_v<T, volatile int32_t> ||
+            std::is_same_v<T, volatile uint32_t> ||
+            std::is_same_v<T, volatile int8_t> ||
+            std::is_same_v<T, volatile uint8_t> ||
+            std::is_same_v<T, volatile int16_t> ||
+            std::is_same_v<T, volatile uint16_t> ||
+            std::is_same_v<T, volatile Unit>;
     }
 }
 

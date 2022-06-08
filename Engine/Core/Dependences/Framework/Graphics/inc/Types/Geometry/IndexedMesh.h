@@ -63,7 +63,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     template<Vertices::Type type> bool IndexedMesh::CalculateVBO(void *data) {
-        if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshManager::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
+        if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
             if (m_countVertices == 0 || !data) {
                 SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
                 return false;
@@ -75,7 +75,7 @@ namespace SR_GRAPH_NS::Types {
                 return false;
             }
             else {
-                return Memory::MeshManager::Instance().Register<type, Memory::MeshManager::VBO>(GetResourceId(), m_VBO);
+                return Memory::MeshManager::Instance().Register<type, Memory::MeshMemoryType::VBO>(GetResourceId(), m_VBO);
             }
         }
 
@@ -85,7 +85,7 @@ namespace SR_GRAPH_NS::Types {
     template<Vertices::Type type> bool IndexedMesh::FreeVBO() {
         using namespace Memory;
 
-        if (MeshManager::Instance().Free<type, MeshManager::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
+        if (MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!m_env->FreeVBO(&m_VBO)) {
                 SR_ERROR("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
                 return false;

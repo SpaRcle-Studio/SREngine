@@ -156,10 +156,15 @@ namespace SR_GTYPES_NS {
         if (m_shader) {
             auto&& render = m_shader->GetRender();
             RemoveDependency(m_shader);
-            if (m_shader->GetCountUses() == 0 && m_shader->Ready()) {
-                SRAssert2(render, "Render are nullptr!");
-                if (render) {
-                    render->FreeShader(m_shader);
+            if (m_shader->GetCountUses() == 0) {
+                if (m_shader->Ready()) {
+                    SRAssert2(render, "Render are nullptr!");
+                    if (render) {
+                        render->FreeShader(m_shader);
+                    }
+                }
+                else {
+                    m_shader->Destroy();
                 }
             }
             m_shader = nullptr;
