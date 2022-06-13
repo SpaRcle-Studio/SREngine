@@ -5,11 +5,7 @@
 #ifndef GAMEENGINE_ENUMERATIONS_H
 #define GAMEENGINE_ENUMERATIONS_H
 
-#include <map>
-#include <unordered_map>
 #include <Utils/StringUtils.h>
-#include <mutex>
-#include <Debug.h>
 
 #define SR_ENUM_TO_STRING(enumName)                                                              \
     static std::string Enum##enumName##ToString(enumName value) {                                \
@@ -35,10 +31,7 @@
             return (enumName)0;                                                                  \
     }
 
-#define SR_ENUM_CLASS(enumName, ...)                                                             \
-    enum class enumName : int32_t {                                                              \
-        __VA_ARGS__                                                                              \
-    };                                                                                           \
+#define SR_ENUM_CODEGEN(enumName, ...)                                                           \
     namespace SR_CODEGEN_ENUM {                                                                  \
         typedef std::unordered_map<std::string, enumName> enumName##_mapKey;                     \
         typedef std::unordered_map<enumName, std::string> enumName##_mapValue;                   \
@@ -64,7 +57,7 @@
                     token = name;                                                                \
                 }                                                                                \
                 if (auto v = _mapValue.find((enumName)last); v != _mapValue.end()) {             \
-                    Helper::Debug::Warn(std::string("SR_CODEGEN_ENUM::enum_parse() : "           \
+                    SR_WARN(std::string("SR_CODEGEN_ENUM::enum_parse() : "           \
                         "conflict enums! \n\tEnum name: ").append(#enumName)                     \
                         .append("\n\tValues: ").append(v->second).append(" and ").append(token)); \
                     continue;                                                                    \
@@ -76,6 +69,19 @@
     }                                                                                            \
     SR_ENUM_TO_STRING(enumName)                                                                  \
     SR_ENUM_FROM_STRING(enumName)                                                                \
+
+
+#define SR_ENUM_CLASS(enumName, ...)                                                             \
+    enum class enumName : int32_t {                                                              \
+        __VA_ARGS__                                                                              \
+    };                                                                                           \
+    SR_ENUM_CODEGEN(enumName, __VA_ARGS__)                                                       \
+
+#define SR_ENUM(enumName, ...)                                                                   \
+    enum enumName : int32_t {                                                                    \
+        __VA_ARGS__                                                                              \
+    };                                                                                           \
+    SR_ENUM_CODEGEN(enumName, __VA_ARGS__)                                                       \
 
 /// --------------------------------------------------------------------------------------------------------------------
 

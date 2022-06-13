@@ -6,7 +6,6 @@
 #define GAMEENGINE_INPUTSYSTEM_H
 
 #include <Math/Vector2.h>
-#include <atomic>
 #include <Input/KeyCodes.h>
 
 namespace Framework::Helper {

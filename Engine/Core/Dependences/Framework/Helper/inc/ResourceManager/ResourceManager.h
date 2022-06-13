@@ -6,104 +6,35 @@
 #define HELPER_RESOURCEMANAGER_H
 
 #include <Debug.h>
-#include <FileSystem/Path.h>
-#include <fstream>
-#include <functional>
-#include <mutex>
-#include <random>
-#include <unordered_map>
-#include <unordered_set>
+#include <ResourceManager/ResourceInfo.h>
 #include <Types/Thread.h>
-
-#include "IResource.h"
-#include <FileSystem/Path.h>
+#include <ResourceManager/IResource.h>
 #include <Utils/Singleton.h>
 
-#include <vector>
-#include <queue>
-#include <list>
-
-namespace Framework::Helper {
-    enum class PathType {
-        Resources, Other, Mods
-    };
-
-    struct ResourceInfo {
-        std::unordered_set<IResource*> m_group;
-        std::unordered_map<std::string, std::unordered_set<IResource*>> m_copies;
-
-        [[nodiscard]] IResource* Find(const std::string& id) {
-            if (auto&& pIt = m_copies.find(id); pIt == m_copies.end())
-                return nullptr;
-            else {
-                if (pIt->second.empty()) {
-                    return nullptr;
-                } else
-                    return *pIt->second.begin();
-            }
-        }
-
-        [[nodiscard]] bool IsLast(const std::string& id) {
-            if (auto&& pIt = m_copies.find(id); pIt == m_copies.end())
-                return true;
-            else
-                return pIt->second.size() == 1;
-        }
-
-        void Remove(IResource* resource) {
-            const auto id = resource->GetResourceId();
-
-            if (auto&& group = m_copies.find(id); group != m_copies.end()) {
-                group->second.erase(resource);
-            } else {
-                SRAssert2(false, "Resource group not found! Id: " + id);
-                return;
-            }
-
-            if (m_copies.at(id).empty())
-                m_copies.erase(id);
-
-            m_group.erase(resource);
-        }
-
-        void Add(IResource* resource) {
-            m_copies[resource->GetResourceId()].insert(resource);
-            m_group.insert(resource);
-        }
-    };
-
-    typedef std::unordered_map<std::string, ResourceInfo> Resources;
-
-    class ResourceManager : public Helper::Singleton<ResourceManager> {
+namespace SR_UTILS_NS {
+    class ResourceManager : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
-    private:
-        ~ResourceManager() override = default;
-
     public:
         static const float_t ResourceLifeTime;
 
-    private:
-        /** \brief remove resource from resource manager */
-        void Remove(IResource *resource);
-
-        /** \brief Grabble collector */
-        void GC();
-
     public:
         SR_NODISCARD bool IsLastResource(IResource* resource);
-        SR_NODISCARD Path GetResPath() const { return m_resourcesFolder; }
-        SR_NODISCARD Path GetCachePath() const { return m_resourcesFolder.Concat("Cache"); }
-        SR_NODISCARD Path GetConfigPath() const { return m_resourcesFolder.Concat("Configs"); }
-        SR_NODISCARD Path GetMaterialsPath() const { return m_resourcesFolder.Concat("Materials"); }
-        SR_NODISCARD Path GetTexturesPath() const { return m_resourcesFolder.Concat("Textures"); }
-        SR_NODISCARD Path GetModelsPath() const { return m_resourcesFolder.Concat("Models"); }
-        SR_NODISCARD Path GetUtilsPath() const { return m_resourcesFolder.Concat("Utilities"); }
+        SR_NODISCARD Path GetResPath() const { return m_folder; }
+        SR_NODISCARD Path GetCachePath() const { return m_folder.Concat("Cache"); }
+        SR_NODISCARD Path GetConfigPath() const { return m_folder.Concat("Configs"); }
+        SR_NODISCARD Path GetFontsPath() const { return m_folder.Concat("Fonts"); }
+        SR_NODISCARD Path GetMaterialsPath() const { return m_folder.Concat("Materials"); }
+        SR_NODISCARD Path GetTexturesPath() const { return m_folder.Concat("Textures"); }
+        SR_NODISCARD Path GetModelsPath() const { return m_folder.Concat("Models"); }
+        SR_NODISCARD Path GetUtilsPath() const { return m_folder.Concat("Utilities"); }
+        SR_NODISCARD Path GetShadersPath() const { return m_folder.Concat("Shaders"); }
+        SR_NODISCARD Path GetScriptsPath() const { return m_folder.Concat("Scripts"); }
 
         IResource* Find(const std::string& Name, const std::string& ID);
 
         void Synchronize(bool force);
 
-        void InspectResources(const std::function<void(const Resources&)>& callback);
+        void InspectResources(const std::function<void(const ResourcesTypes &)>& callback);
 
         template<typename T> T* Find(const std::string& ID) {
             return dynamic_cast<T*>(Find(typeid(T).name(), ID));
@@ -120,6 +51,7 @@ namespace Framework::Helper {
 
         /** \warning Call only from IResource parents \brief Register resource to destroy in resource manager */
         bool Destroy(IResource *resource);
+
     public:
         /** \brief Init resource manager */
         bool Init(const std::string& resourcesFolder);
@@ -127,23 +59,25 @@ namespace Framework::Helper {
         /** \brief Stop resource manager */
         bool Stop();
 
-        /** \brief Get current application memory usage of bytes */
-        static uint64_t GetUsedMemoryLoad();
-
-    public:
         void PrintMemoryDump();
 
     private:
-        std::list<IResource*> m_resourcesToDestroy = std::list<IResource*>();
-        Resources m_resources = Resources();
+        void Remove(IResource *resource);
+        void GC();
+        void CheckResourceHashes();
+        void Thread();
 
     private:
-        Path m_resourcesFolder = "";
-        bool m_isInit = false;
-        std::recursive_mutex m_mutex = std::recursive_mutex();
+        ResourcesList m_destroyed = ResourcesList();
+        ResourcesTypes m_resources = ResourcesTypes();
+
+    private:
+        std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_force = false;
         std::atomic<bool> m_destroyIsEmpty = false;
-        Types::Thread m_thread;
+
+        Path m_folder = Path();
+        Types::Thread::Ptr m_thread;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;
 

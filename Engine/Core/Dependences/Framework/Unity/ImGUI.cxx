@@ -24,7 +24,7 @@
     //#include "../Depends/imgui/backends/imgui_impl_glut.cpp"
 #endif
 
-#ifdef SR_USE_OPENGL
+#ifdef SR_USE_VULKAN
     #include "../Depends/imgui/backends/imgui_impl_vulkan.cpp"
 #endif
 

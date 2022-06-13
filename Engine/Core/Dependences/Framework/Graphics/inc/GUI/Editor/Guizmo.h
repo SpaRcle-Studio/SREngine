@@ -6,8 +6,8 @@
 #define SRENGINE_GUIZMO_H
 
 #include <Utils/NonCopyable.h>
-#include <EntityComponentSystem/GameObject.h>
-#include <EntityComponentSystem/Transform3D.h>
+#include <ECS/GameObject.h>
+#include <ECS/Transform3D.h>
 #include <Math/Vector3.h>
 #include <Input/InputSystem.h>
 
@@ -16,8 +16,8 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GRAPH_NS::GUI {
-    class Guizmo : public Helper::NonCopyable, public Helper::InputHandler {
-        using GameObject = Helper::Types::SafePtr<Helper::GameObject>;
+    class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
+        using GameObject = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
     public:
         Guizmo();
         ~Guizmo() override = default;
@@ -26,8 +26,8 @@ namespace SR_GRAPH_NS::GUI {
         void Draw(GameObject gameObject, GameObject camera);
         void DrawTools();
 
-        void OnKeyDown(const KeyDownEvent& event) override;
-        void OnKeyPress(const KeyPressEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
 
         SR_NODISCARD bool IsTranslate() const { return m_operation == ImGuizmo::OPERATION::TRANSLATE; }
         SR_NODISCARD bool IsRotate() const { return m_operation == ImGuizmo::OPERATION::ROTATE; }
@@ -53,20 +53,20 @@ namespace SR_GRAPH_NS::GUI {
         void DrawManipulation(SR_GRAPH_NS::Camera* camera);
 
     private:
-        Transform3D*        m_transform     = nullptr;
-        int32_t             m_snapValue     = 100;
-        float_t             m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };
-        float_t             m_snap[3]       = { 1.f, 1.f, 1.f };
-        float_t             m_bounds[6]     = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
+        SR_UTILS_NS::Transform3D* m_transform     = nullptr;
+        int32_t                   m_snapValue     = 100;
+        float_t                   m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };
+        float_t                   m_snap[3]       = { 1.f, 1.f, 1.f };
+        float_t                   m_bounds[6]     = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
 
-        std::atomic<bool>   m_boundsActive  = false;
-        std::atomic<bool>   m_snapActive    = false;
-        std::atomic<bool>   m_center        = false;
-        std::atomic<bool>   m_active        = true;
+        std::atomic<bool>         m_boundsActive  = false;
+        std::atomic<bool>         m_snapActive    = false;
+        std::atomic<bool>         m_center        = false;
+        std::atomic<bool>         m_active        = true;
 
-        Math::FVector3      m_barycenter    = Math::FVector3();
-        ImGuizmo::OPERATION m_operation     = ImGuizmo::OPERATION::TRANSLATE;
-        ImGuizmo::MODE      m_mode          = ImGuizmo::MODE::LOCAL;
+        SR_MATH_NS::FVector3      m_barycenter    = SR_MATH_NS::FVector3();
+        ImGuizmo::OPERATION       m_operation     = ImGuizmo::OPERATION::TRANSLATE;
+        ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
 
     };
 }

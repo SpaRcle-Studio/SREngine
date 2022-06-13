@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<Material ReadOnly="true">
-    <Color r="255" g="255" b="255" a="255"/>
-    <Diffuse Path="Engine/default.png"/>
+<Material ReadOnly="false">
+    <Shader Path="Engine/standard.srsl"/>
+    <Properties>
+        <Property Id="diffuse" Type="Sampler2D" String="Engine/default.png"/>
+        <Property Id="color" Type="Vec4" X="1.0" Y="1.0" Z="1.0" W="1.0"/>
+    </Properties>
 </Material>

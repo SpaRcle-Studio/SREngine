@@ -7,10 +7,141 @@
 
 #include <FileSystem/FileSystem.h>
 #include <Utils/StringUtils.h>
+#include <Utils/Hashes.h>
 #include <Utils/Enumerations.h>
+#include <Types/Uniforms.h>
+#include <Types/Vertices.h>
+
+namespace SR_GTYPES_NS {
+    class Texture;
+}
 
 namespace Framework::Graphics {
-    SR_ENUM_CLASS(ShaderType, Unknown, Vertex, Fragment, Tesselation)
+    /**
+       0 - binding
+       1 - ubo size
+    */
+    typedef std::vector<std::pair<uint32_t, uint64_t>> UBOInfo;
+
+    typedef std::variant<SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::FVector4> ShaderPropertyVariant;
+
+    SR_ENUM_CLASS(ShaderVarType,
+              Unknown,
+              Int,
+              Float,
+              Vec2,
+              Vec3,
+              Vec4,
+              Mat2,
+              Mat3,
+              Mat4,
+              Sampler1D,
+              Sampler2D,
+              Sampler3D,
+              SamplerCube,
+              Sampler1DShadow,
+              Sampler2DShadow,
+    )
+
+    static bool IsSamplerType(ShaderVarType type) {
+        switch (type) {
+            case ShaderVarType::Sampler1D:
+            case ShaderVarType::Sampler2D:
+            case ShaderVarType::Sampler3D:
+            case ShaderVarType::SamplerCube:
+            case ShaderVarType::Sampler1DShadow:
+            case ShaderVarType::Sampler2DShadow:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    static bool IsMatrixType(ShaderVarType type) {
+        switch (type) {
+            case ShaderVarType::Mat2:
+            case ShaderVarType::Mat3:
+            case ShaderVarType::Mat4:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    static std::string ShaderVarTypeToString(ShaderVarType type) {
+        std::string str = EnumShaderVarTypeToString(type);
+
+        if (!str.empty()) {
+            str[0] = tolower(str[0]);
+        }
+
+        return str;
+    }
+
+    static uint32_t GetShaderVarSize(ShaderVarType type) {
+        switch (type) {
+            case ShaderVarType::Int:
+            case ShaderVarType::Float:
+                return 4;
+            case ShaderVarType::Vec2:
+                return 4 * 2;
+            case ShaderVarType::Vec3:
+                return 4 * 3;
+            case ShaderVarType::Vec4:
+                return 4 * 4;
+            case ShaderVarType::Mat2:
+                return 4 * 2 * 2;
+            case ShaderVarType::Mat3:
+                return 4 * 3 * 3;
+            case ShaderVarType::Mat4:
+                return 4 * 4 * 4;
+            case ShaderVarType::Unknown:
+            default:
+                SRAssert2(false, "unknown type!");
+                return 0;
+        }
+    }
+
+    static ShaderPropertyVariant GetVariantFromShaderVarType(ShaderVarType type) {
+        switch (type) {
+            case ShaderVarType::Int:
+                return static_cast<int32_t>(0);
+            case ShaderVarType::Float:
+                return static_cast<float_t>(0.f);
+            case ShaderVarType::Vec2:
+                return SR_MATH_NS::FVector2(SR_MATH_NS::Unit(0));
+            case ShaderVarType::Vec3:
+                return SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0));
+            case ShaderVarType::Vec4:
+                return SR_MATH_NS::FVector4(SR_MATH_NS::Unit(0));
+            case ShaderVarType::Sampler1D:
+            case ShaderVarType::Sampler2D:
+            case ShaderVarType::Sampler3D:
+            case ShaderVarType::SamplerCube:
+            case ShaderVarType::Sampler1DShadow:
+            case ShaderVarType::Sampler2DShadow:
+                return static_cast<Types::Texture*>(nullptr);
+            default:
+                SRAssert(false);
+                return ShaderPropertyVariant();
+        }
+    }
+
+    static ShaderVarType GetShaderVarTypeFromString(std::string str) {
+        if (!str.empty()) {
+            str[0] = toupper(str[0]);
+        }
+
+        return StringToEnumShaderVarType(str);
+    }
+
+    typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
+    typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
+    typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
+    typedef std::map<uint64_t, std::pair<ShaderVarType, uint32_t>> ShaderSamplers;
+    typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
+
+    SR_ENUM_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)
     SR_ENUM_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
     SR_ENUM_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
@@ -27,6 +158,12 @@ namespace Framework::Graphics {
             TriangleListWithAdjacency,
             TriangleStripWithAdjacency,
             PathList)
+
+    struct Uniform {
+        LayoutBinding type;
+        ShaderStage stage;
+        uint32_t binding;
+    };
 
     SR_ENUM_CLASS(DepthCompare,
         Unknown,
@@ -75,78 +212,114 @@ namespace Framework::Graphics {
     struct SourceShader {
         std::string m_name;
         std::string m_path;
-        ShaderType  m_type;
+        ShaderStage m_stage;
 
-        SourceShader(const std::string& name, const std::string& path, ShaderType type) {
-            m_name = name;
-            m_path = path;
-            m_type = type;
+        SourceShader(const std::string& name, const std::string& path, ShaderStage stage) {
+            m_name  = name;
+            m_path  = path;
+            m_stage = stage;
         }
     };
 
-    static std::vector<std::pair<LayoutBinding, ShaderType>> AnalyseShader(
-            const std::vector<SourceShader>& modules, bool* errors)
-    {
+    static std::vector<Uniform> AnalyseShader(const std::vector<SourceShader>& modules, bool* errors) {
         if (!errors) {
-            Helper::Debug::Error("Graphics::AnalyseShader() : errors flag pointer is nullptr! You are stupid!");
+            SR_ERROR("Graphics::AnalyseShader() : errors flag pointer is nullptr! You are stupid!");
             return { };
-        } else
+        }
+        else
             *errors = false;
 
         uint32_t count = 0;
 
-        auto bindings = std::vector<std::pair<LayoutBinding, ShaderType>>();
+        auto uniforms = std::vector<Uniform>();
 
         std::vector<std::string> lines = { };
         for (const auto& module : modules) {
             lines = Helper::FileSystem::ReadAllLines(module.m_path);
             if (lines.empty()) {
-                Helper::Debug::Error("Graphics::AnalyseShader() : failed read module! \n\tName: " + module.m_name);
+                SR_ERROR("Graphics::AnalyseShader() : failed to read module! \n\tPath: " + module.m_path);
                 *errors = true;
                 return { };
             }
 
-            for (const std::string& line : lines) {
+            for (std::string line : lines) {
+                if (const auto&& pos = line.find("//"); pos != std::string::npos) {
+                    line.resize(pos);
+                }
+
                 if (Helper::StringUtils::Contains(line, "binding")) {
                     int32_t index = Helper::StringUtils::IndexOf(line, '=');
+
+                    int32_t comment = Helper::StringUtils::IndexOf(line, '/');
+                    if (comment >= 0 && comment < index)
+                        continue;
+
                     if (index <= 0) {
-                        Helper::Debug::Error("Graphics::AnalyseShader() : incorrect binding location!");
+                        SRAssert2(false, "Graphics::AnalyseShader() : incorrect binding location!");
                         *errors = true;
                         return { };
                     }
 
-                    std::string location = Helper::StringUtils::ReadFrom(line, ')', index + 2);
+                    const auto&& location = Helper::StringUtils::ReadFrom(line, ')', index + 2);
                     if (location.empty()) {
-                        Helper::Debug::Error("Graphics::AnalyseShader() : failed match location!");
+                        SR_ERROR("Graphics::AnalyseShader() : failed match location!");
                         *errors = true;
                         return { };
                     }
 
-                    uint32_t loc = std::atoll(location.c_str());
-                    if (loc + 1 > bindings.size())
-                        bindings.resize(loc + 1);
+                    Uniform uniform {
+                        .type = GetBindingType(line),
+                        .stage = module.m_stage,
+                        .binding = static_cast<uint32_t>(std::atoll(location.c_str()))
+                    };
 
-                    bindings[loc] = std::pair(GetBindingType(line), module.m_type);
-                    if (bindings[loc].first == LayoutBinding::Unknown) {
-                        Helper::Debug::Error("Graphics::AnalyseShader() : unknown location! \n\tLine: " + line);
-                        *errors = true;
-                        return { };
-                    }
+                    uniforms.emplace_back(uniform);
+
                     count++;
                 }
             }
         }
 
-        // error correction
-        for (uint32_t i = 0; i < static_cast<uint32_t>(bindings.size()); ++i)
-            if (bindings[i].second == ShaderType::Unknown || bindings[i].first == LayoutBinding::Unknown) {
-                Helper::Debug::Error("IShaderProgram::AnalyseShader() : incorrect bindings! Missing " + std::to_string(i) + " binding!");
+        /// error correction
+        for (auto&& uniform : uniforms) {
+            if (uniform.stage == ShaderStage::Unknown || uniform.type == LayoutBinding::Unknown) {
+                SR_ERROR("IShaderProgram::AnalyseShader() : incorrect uniforms!");
                 *errors = true;
-                return { };
+                return {};
+            }
+        }
+
+        return uniforms;
+    }
+}
+
+namespace std {
+    template<> struct hash<Framework::Graphics::ShaderSamplers> {
+        size_t operator()(Framework::Graphics::ShaderSamplers const& value) const {
+            std::size_t res = 0;
+
+            for (auto&& [key, val] : value) {
+                res = SR_UTILS_NS::HashCombine(key, res);
+                res = SR_UTILS_NS::HashCombine(val.first, res);
+                res = SR_UTILS_NS::HashCombine(val.second, res);
             }
 
-        return bindings;
-    }
+            return res;
+        }
+    };
+
+    template<> struct hash<Framework::Graphics::ShaderProperties> {
+        size_t operator()(Framework::Graphics::ShaderProperties const& value) const {
+            std::size_t res = 0;
+
+            for (auto&& [key, val] : value) {
+                res = SR_UTILS_NS::HashCombine(key, res);
+                res = SR_UTILS_NS::HashCombine(val, res);
+            }
+
+            return res;
+        }
+    };
 }
 
 #endif //GAMEENGINE_ISHADERPROGRAM_H

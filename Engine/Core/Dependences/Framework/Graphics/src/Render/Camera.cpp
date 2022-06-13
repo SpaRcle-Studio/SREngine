@@ -3,211 +3,159 @@
 //
 
 #include <Render/Camera.h>
+#include <Render/CameraManager.h>
 #include <Window/Window.h>
-#include <Debug.h>
-#include <string>
+#include <Types/DataStorage.h>
 
-#include <GUI.h>
-
-void Framework::Graphics::Camera::UpdateShaderProjView(Framework::Graphics::Shader *shader) noexcept {
-    if (!m_isCreate) {
-        Debug::Warn("Camera::UpdateShaderProjView() : camera is not create! Something went wrong...");
-        return;
+namespace SR_GRAPH_NS {
+    Camera::Camera()
+        : m_pipeline(Environment::Get()->GetPipeLine())
+    {
+        SR_UTILS_NS::Component::InitComponent<Camera>();
+        CameraManager::Instance().RegisterCamera(this);
     }
 
-    if (m_needUpdate) {
-        if (!CompleteResize()) {
-            Debug::Error("Camera::UpdateShaderProjView() : failed to complete resize!");
-            return;
+    void Camera::OnDestroy() {
+        CameraManager::Instance().DestroyCamera(this);
+        Component::OnDestroy();
+    }
+
+    SR_HTYPES_NS::Marshal Camera::Save(Framework::Helper::SavableFlags flags) const {
+        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+
+        marshal.Write(m_far);
+        marshal.Write(m_near);
+        marshal.Write(m_FOV);
+
+        return marshal;
+    }
+
+    Component * Camera::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        const auto&& _far = marshal.Read<float_t>();
+        const auto&& _near = marshal.Read<float_t>();
+        const auto&& FOV = marshal.Read<float_t>();
+
+        auto&& pWindow = dataStorage->GetPointer<Window>();
+
+        if (!SRVerifyFalse(!pWindow)) {
+            return nullptr;
+        }
+
+        auto&& viewportSize = pWindow->GetWindowSize();
+
+        if (auto&& pCamera = Allocate(viewportSize.x, viewportSize.y)) {
+            pCamera->SetFar(_far);
+            pCamera->SetNear(_near);
+            pCamera->SetFOV(FOV);
+
+            pCamera->UpdateView();
+            pCamera->UpdateProjection();
+
+            return pCamera;
+        }
+
+        return nullptr;
+    }
+
+    void Camera::UpdateView() noexcept {
+        glm::mat4 matrix(1.f);
+
+        if (m_pipeline == PipeLine::OpenGL) {
+            matrix = glm::rotate(matrix, m_pitch, { 1, 0, 0 });
+            matrix = glm::rotate(matrix, m_yaw + float(180.f * 3.14 / 45.f / 4.f), { 0, 1, 0 });
+            matrix = glm::rotate(matrix, m_roll,   { 0, 0, 1 });
+
+            m_viewMat = matrix;
+
+            m_viewTranslateMat = glm::translate(matrix, {
+                    m_position.x,
+                    -m_position.y,
+                    -m_position.z//-m_pos.z
+            });
+        }
+        else {
+            matrix = glm::rotate(matrix, -m_pitch + float(M_PI), { 1, 0, 0 });
+            matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
+            matrix = glm::rotate(matrix, -m_roll,  { 0, 0, 1 });
+
+            m_viewMat = matrix;
+
+            m_viewTranslateMat = glm::translate(matrix, -m_position.ToGLM());
         }
     }
 
-    shader->SetMat4("viewMat", m_viewTranslateMat);
-    shader->SetMat4("projMat", m_projection);
-}
+    void Camera::OnRotate(const Math::FVector3& newValue) {
+        m_yaw   = float_t(newValue.y * 3.14 / 45.f / 4.f);
+        m_pitch = float_t(newValue.x * 3.14 / 45.f / 4.f);
+        m_roll  = float_t(newValue.z * 3.14 / 45.f / 4.f);
 
-bool Framework::Graphics::Camera::Create(Framework::Graphics::Window *window) {
-    Debug::Graph("Camera::Create() : creating camera...");
-    if (m_isCreate){
-        Debug::Error("Camera::Create() : camera already create!");
-        return false;
+        UpdateView();
     }
 
-    this->m_window = window;
+    void Camera::OnMove(const Math::FVector3& newValue) {
+        m_position = newValue;
+        UpdateView();
+    }
 
-    this->UpdateView();
+    void Camera::UpdateProjection() {
+        if (m_viewportSize.HasZero()) {
+            SRHalt("Camera::UpdateProjection() : viewport size has zero!");
+            m_aspect = 0.f;
+        }
+        else {
+            m_aspect = static_cast<float_t>(m_viewportSize.x) / static_cast<float_t>(m_viewportSize.y);
+        }
 
-    if (!m_isCalculate)
-        this->Calculate();
+        m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
+    }
 
-    this->m_isCreate = true;
+    void Camera::UpdateProjection(uint32_t w, uint32_t h) {
+        m_viewportSize = { (int32_t)w, (int32_t)h };
+        UpdateProjection();
+    }
 
-    return true;
-}
+    Camera* Camera::Allocate(uint32_t width, uint32_t height) {
+        auto&& camera = new Camera();
+        camera->m_viewportSize = { (int32_t)width, (int32_t)height };
+        camera->UpdateProjection();
+        camera->UpdateView();
+        return camera;
+    }
 
-void Framework::Graphics::Camera::UpdateView() noexcept {
-    glm::mat4 matrix(1.f);
+    glm::mat4 Camera::GetImGuizmoView() const noexcept {
+        auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
+        matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
 
-    if (m_pipeline == PipeLine::OpenGL) {
-        matrix = glm::rotate(matrix, m_pitch, { 1, 0, 0 });
-        matrix = glm::rotate(matrix, m_yaw + float(180.f * 3.14 / 45.f / 4.f), { 0, 1, 0 });
-        matrix = glm::rotate(matrix, m_roll,   { 0, 0, 1 });
-
-        m_viewMat = matrix;
-
-        m_viewTranslateMat = glm::translate(matrix, {
+        return glm::translate(matrix, {
                 m_position.x,
                 -m_position.y,
-                -m_position.z//-m_pos.z
+                -m_position.z
         });
     }
-    else {
-        matrix = glm::rotate(matrix, -m_pitch + float(M_PI), { 1, 0, 0 });
-        matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
-        matrix = glm::rotate(matrix, -m_roll,  { 0, 0, 1 });
 
-        m_viewMat = matrix;
-
-        m_viewTranslateMat = glm::translate(matrix, -m_position.ToGLM());
-    }
-}
-
-void Framework::Graphics::Camera::OnRotate(const Math::FVector3& newValue) {
-    m_yaw   = float(newValue.y * 3.14 / 45.f / 4.f);
-    m_pitch = float(newValue.x * 3.14 / 45.f / 4.f);
-    m_roll  = float(newValue.z * 3.14 / 45.f / 4.f);
-
-    UpdateView();
-}
-
-void Framework::Graphics::Camera::OnMove(const Math::FVector3& newValue) {
-    m_position = newValue;
-    UpdateView();
-}
-
-void Framework::Graphics::Camera::UpdateProjection() {
-    m_projection = glm::perspective(glm::radians(65.f), (float)m_cameraSize.x / (float)m_cameraSize.y, m_near.load(), m_far.load());
-}
-
-void Framework::Graphics::Camera::UpdateProjection(unsigned int w, unsigned int h) {
-    m_cameraSize = { (int32_t)w, (int32_t)h };
-    m_projection = glm::perspective(glm::radians(65.f), (float)w / (float)h, m_near.load(), m_far.load());
-    m_needUpdate = true;
-}
-
-bool Framework::Graphics::Camera::Calculate() noexcept {
-    if (m_isCalculate)
-        return false;
-
-    Debug::Graph("Camera::Calculate() : calculating camera...");
-
-    m_postProcessing->Init(m_window->GetRender());
-
-    m_needUpdate = true;
-    m_isCalculate = true;
-
-    return true;
-}
-
-void Framework::Graphics::Camera::OnDestroyGameObject() {
-    if (m_window) {
-        m_window->DestroyCamera(this);
-        m_window = nullptr;
-    }
-}
-
-bool Framework::Graphics::Camera::Free() {
-    Debug::Graph("Camera::Free() : free camera pointer...");
-
-    m_postProcessing->Destroy();
-    m_postProcessing->Free();
-
-    delete this;
-    return true;
-}
-
-Framework::Graphics::Camera *Framework::Graphics::Camera::Allocate(uint32_t width, uint32_t height) {
-    auto camera = new Camera();
-    camera->m_postProcessing = PostProcessing::Allocate(camera);
-    camera->m_cameraSize = { (int32_t)width, (int32_t)height };
-    if (!camera->m_postProcessing) {
-        Debug::Error("Camera::Allocate() : failed to allocate post processing!");
-        return nullptr;
-    }
-    return camera;
-}
-
-bool Framework::Graphics::Camera::CompleteResize() {
-    if (m_cameraSize.x <= 0 || m_cameraSize.y <= 0) {
-        SR_ERROR("Camera::CompleteResize() : camera width or height equals or less zero!");
-        return false;
+    void Camera::SetFar(float_t value) {
+        m_far = value;
+        UpdateProjection();
     }
 
-    UpdateProjection();
-
-    if (!m_postProcessing->OnResize(m_cameraSize.x, m_cameraSize.y)) {
-        Debug::Error("Camera::CompleteResize() : failed recalculated frame buffers!");
-        return false;
+    void Camera::SetNear(float_t value) {
+        m_near = value;
+        UpdateProjection();
     }
 
-    m_needUpdate = false;
-    m_isBuffCalculate = true;
+    void Camera::SetFOV(float_t value) {
+        m_FOV = value;
+        UpdateProjection();
+    }
 
-    return true;
+    void Camera::OnEnabled() {
+        Environment::Get()->SetBuildState(false);
+        Component::OnEnabled();
+    }
+
+    void Camera::OnDisabled() {
+        Environment::Get()->SetBuildState(false);
+        Component::OnDisabled();
+    }
 }
-
-void Framework::Graphics::Camera::PoolEvents()  {
-    m_isEnableDirectOut.first = m_isEnableDirectOut.second;
-}
-
-void Framework::Graphics::Camera::OnReady(bool ready) {
-    m_env->SetBuildState(false);
-}
-
-glm::mat4 Framework::Graphics::Camera::GetImGuizmoView() const noexcept {
-    auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
-    matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
-    matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
-
-    return glm::translate(matrix, {
-            m_position.x,
-            -m_position.y,
-            -m_position.z
-    });
-}
-
-void Framework::Graphics::Camera::WaitBuffersCalculate() const {
-ret:
-    if (!m_isBuffCalculate)
-        goto ret;
-}
-
-void Framework::Graphics::Camera::WaitCalculate() const  {
-ret:
-    if (!m_isCalculate)
-        goto ret;
-}
-
-void Framework::Graphics::Camera::OnRemoveComponent() {
-    OnDestroyGameObject();
-}
-
-void Framework::Graphics::Camera::SetDirectOutput(bool value) {
-    m_isEnableDirectOut.second = value;
-}
-
-void Framework::Graphics::Camera::SetFar(float_t value) {
-    m_far = value;
-    UpdateProjection();
-}
-
-void Framework::Graphics::Camera::SetNear(float_t value) {
-    m_near = value;
-    UpdateProjection();
-}
-
-
-
-
-
-

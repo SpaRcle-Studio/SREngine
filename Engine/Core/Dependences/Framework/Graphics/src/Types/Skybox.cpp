@@ -2,7 +2,7 @@
 // Created by Nikita on 20.11.2020.
 //
 
-#include "Types/Skybox.h"
+#include <Types/Skybox.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/StringUtils.h>
 #include <stbi/stb_image.h>
@@ -14,238 +14,282 @@
 #include <Utils/Features.h>
 #include <Utils/Vertices.hpp>
 
-Framework::Graphics::Types::Skybox::Skybox()
-    : m_env(Environment::Get())
-{ }
+namespace SR_GTYPES_NS {
+    Skybox::Skybox()
+        : SR_UTILS_NS::IResource(typeid(Skybox).name(), true /** autoRemove */)
+        , m_env(Environment::Get())
+    { }
 
-Framework::Graphics::Types::Skybox *Framework::Graphics::Types::Skybox::Load(const std::string& name) {
-    std::string skyboxName = name;
+    Skybox::~Skybox() {
+        SetShader(nullptr);
+        SRAssert(m_cubeMap == SR_ID_INVALID);
 
-    std::string ext = StringUtils::GetExtensionFromFilePath(skyboxName);
-    skyboxName.resize(skyboxName.size() - ext.size() - 1);
-
-    const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("Skyboxes").Concat(skyboxName);
-
-    SR_LOG("Skybox::Load() : loading \""+skyboxName+"\" skybox...");
-
-    std::array<uint8_t*, 6> sides = { };
-    static const std::string files[6]{ "right", "left", "top", "bottom", "front", "back" };
-
-    int W, H, C;
-
-    for (uint8_t i = 0; i < 6; ++i) {
-        const auto file = path.Concat(files[i]).ConcatExt(ext);
-
-        int w = 0, h = 0, comp = 0;
-        uint8_t* data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);
-
-        if (!i) {
-            W = w;
-            H = h;
-            C = comp;
-        }
-        else if (h != H || w != W || C != comp) {
-            SR_WARN("Skybox::Load() : \"" + name + "\" skybox has different sizes!");
-        }
-
-        if (!data) {
-            SR_ERROR("Skybox::Load() : failed load \"" + skyboxName + "\" skybox!\n\tPath: " + file.ToString());
-            return nullptr;
-        }
-        sides[i] = data;
-    }
-
-    auto* skybox = new Skybox();
-
-    skybox->m_name   = skyboxName;
-    skybox->m_width  = W;
-    skybox->m_height = H;
-    skybox->m_data   = sides;
-
-    return skybox;
-}
-
-bool Framework::Graphics::Types::Skybox::Calculate() {
-    if (m_isCalculated) {
-        SR_ERROR("Skybox::Calculate() : skybox already calculated!");
-        return false;
-    }
-
-    const bool cpuUsage = Helper::Features::Instance().Enabled("SkyboxCPUUsage", false);
-    if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
-        SR_ERROR("Skybox::Calculate() : failed to calculate cube map!");
-        m_hasErrors = true;
-        return false;
-    }
-
-    const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("/Models/Engine/skybox.obj");
-    auto&& indexedVertices = Vertices::CastVertices<Vertices::SkyboxVertex>(SKYBOX_INDEXED_VERTICES);
-
-    if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-        auto&& indices = SKYBOX_INDICES;
-
-        if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::Type::SkyboxVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
-            SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
-            m_hasErrors = true;
-            return false;
-        }
-
-        if (m_IBO = m_env->CalculateIBO((void *)indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID); m_IBO == SR_ID_INVALID) {
-            SR_ERROR("Skybox::Calculate() : failed to calculate IBO!");
-            m_hasErrors = true;
-            return false;
-        }
-    }
-    else {
-        auto&& vertices = IndexedVerticesToNonIndexed(indexedVertices, SKYBOX_INDICES);
-
-        if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SkyboxVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
-            SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
-            m_hasErrors = true;
-            return false;
-        }
-    }
-
-    m_isCalculated = true;
-    return true;
-}
-
-bool Framework::Graphics::Types::Skybox::Free() {
-    SR_LOG("Skybox::Free() : free skybox pointer...");
-
-    if (m_isCalculated) {
-        if (!m_isVideoMemFree) {
-            if (m_render->GetWindow()->IsWindowOpen()) {
-                SR_ERROR("Skybox::Free() : video memory is not free!");
-                return false;
-            } else {
-                SR_ERROR("Skybox::Free() : video memory is not free! Window is closed.");
+        for (auto&& img : m_data) {
+            if (img) {
+                stbi_image_free(img);
+                img = nullptr;
             }
         }
     }
 
-    delete this;
-    return true;
-}
+    Skybox *Skybox::Load(const SR_UTILS_NS::Path& path) {
+        auto&& folder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Skyboxes").Concat(path.GetBaseName());
 
-void Framework::Graphics::Types::Skybox::DrawOpenGL() {
-    if (!m_isCalculated && (m_hasErrors || !Calculate())) {
-        return;
+        SR_LOG("Skybox::Load() : loading \"" + path.ToString() + "\" skybox...");
+
+        std::array<uint8_t *, 6> sides = {};
+
+        static constexpr const char* files[6] { "right", "left", "top", "bottom", "front", "back" };
+
+        int32_t W, H, C;
+
+        for (uint8_t i = 0; i < 6; ++i) {
+            auto&& file = folder.Concat(files[i]).ConcatExt(path.GetExtension());
+
+            int32_t w = 0, h = 0, comp = 0;
+            uint8_t *data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);
+
+            if (!data) {
+                SR_ERROR("Skybox::Load() : failed to load skybox!\n\tPath: " + file.ToString());
+                return nullptr;
+            }
+
+            if (i == 0) {
+                W = w;
+                H = h;
+                C = comp;
+            }
+            else if (h != H || w != W || C != comp) {
+                SR_WARN("Skybox::Load() : \"" + path.ToString() + "\" skybox has different sizes!");
+            }
+
+            sides[i] = data;
+        }
+
+        auto *skybox = new Skybox();
+
+        skybox->m_width = W;
+        skybox->m_height = H;
+        skybox->m_data = sides;
+
+        skybox->SetShader(Shader::Load("Engine/skybox.srsl"));
+
+        skybox->SetId(path.ToString());
+
+        return skybox;
     }
 
-    m_env->DrawSkybox(m_VAO, m_cubeMap);
-}
+    bool Skybox::Calculate() {
+        if (m_isCalculated) {
+            SR_ERROR("Skybox::Calculate() : skybox already calculated!");
+            return false;
+        }
 
-void Framework::Graphics::Types::Skybox::DrawVulkan() {
-    if (!m_isCalculated && (m_hasErrors || !Calculate())) {
-        return;
-    }
-
-    if (m_descriptorSet < 0) {
-        if (m_descriptorSet = m_env->AllocDescriptorSet({ DescriptorType::Uniform }); m_descriptorSet < 0) {
-            SR_ERROR("Skybox::DrawVulkan() : failed to calculate descriptor set!");
+        const bool cpuUsage = Helper::Features::Instance().Enabled("SkyboxCPUUsage", false);
+        if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
+            SR_ERROR("Skybox::Calculate() : failed to calculate cube map!");
             m_hasErrors = true;
-            return;
+            return false;
+        }
+
+        auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SKYBOX_INDEXED_VERTICES);
+
+        if (m_env->GetPipeLine() == PipeLine::Vulkan) {
+            auto &&indices = SKYBOX_INDICES;
+
+            if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::Type::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
+                SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
+                m_hasErrors = true;
+                return false;
+            }
+
+            if (m_IBO = m_env->CalculateIBO((void *) indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID);
+                    m_IBO == SR_ID_INVALID) {
+                SR_ERROR("Skybox::Calculate() : failed to calculate IBO!");
+                m_hasErrors = true;
+                return false;
+            }
         }
         else {
-            m_env->UpdateDescriptorSets(m_descriptorSet, {
-                    { DescriptorType::Uniform, { 0, Shader::GetCurrentShader()->GetUBO(0) } },
-            });
+            auto &&vertices = IndexedVerticesToNonIndexed(indexedVertices, SKYBOX_INDICES);
 
-            m_env->BindDescriptorSet(m_descriptorSet);
-            /**
-             * 0 - view/proj
-             * 1 - cube map
-            */
-            m_env->BindTexture(1, m_cubeMap);
+            if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
+                SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
+                m_hasErrors = true;
+                return false;
+            }
         }
+
+        m_isCalculated = true;
+
+        return true;
     }
 
-    m_env->BindVBO(m_VBO);
-    m_env->BindIBO(m_IBO);
-    m_env->BindDescriptorSet(m_descriptorSet);
-
-    m_env->DrawIndices(36);
-}
-
-bool Framework::Graphics::Types::Skybox::SetRender(Render *render) {
-    if (m_render) {
-        SR_ERROR("Skybox::SetRender() : render already set!");
-        return false;
+    void Skybox::DrawOpenGL() {
+        m_env->DrawSkybox(m_VAO, m_cubeMap);
     }
 
-    m_render = render;
+    void Skybox::DrawVulkan() {
+        if (m_dirtyShader)
+        {
+            m_dirtyShader = false;
 
-    return true;
-}
+            if (m_descriptorSet != SR_ID_INVALID && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+                SR_ERROR("Skybox::DrawVulkan() : failed to free descriptor set!");
+            }
 
-bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
-    if (m_isVideoMemFree) {
-        SR_ERROR("Skybox::FreeVideoMemory() : video memory already is freed!");
-        return false;
+            if (m_UBO != SR_ID_INVALID && !m_env->FreeUBO(&m_UBO)) {
+                SR_ERROR("Skybox::DrawVulkan() : failed to free uniform buffer object!");
+            }
+
+            if (m_shader->GetUBOBlockSize() > 0) {
+                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform}); m_descriptorSet == SR_ID_INVALID) {
+                    SR_ERROR("Skybox::DrawVulkan() : failed to calculate descriptor set!");
+                    m_hasErrors = true;
+                    return;
+                }
+
+                if (m_UBO = m_env->AllocateUBO(m_shader->GetUBOBlockSize()); m_UBO == SR_ID_INVALID) {
+                    SR_ERROR("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
+                    m_hasErrors = true;
+                    return;
+                }
+
+                m_env->BindUBO(m_UBO);
+                m_env->BindDescriptorSet(m_descriptorSet);
+            }
+            else if (m_shader->GetSamplersCount() > 0) {
+                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::CombinedImage}); m_descriptorSet == SR_ID_INVALID) {
+                    SR_ERROR("Skybox::DrawVulkan() : failed to calculate descriptor set!");
+                    m_hasErrors = true;
+                    return;
+                }
+                m_env->BindDescriptorSet(m_descriptorSet);
+            }
+            else
+                m_env->ResetDescriptorSet();
+
+            m_shader->InitUBOBlock();
+            m_shader->Flush();
+
+            m_shader->SetSamplerCube(Shader::SKYBOX_DIFFUSE, m_cubeMap);
+        }
+
+        m_env->BindVBO(m_VBO);
+        m_env->BindIBO(m_IBO);
+
+        if (m_descriptorSet != SR_ID_INVALID) {
+            m_env->BindDescriptorSet(m_descriptorSet);
+        }
+
+        m_env->DrawIndices(36);
     }
 
-    SR_LOG("Skybox::FreeVideoMemory() : free skybox video memory...");
+    bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
+        if (!m_isCalculated) {
+            return false;
+        }
 
-    if (m_VAO != -1) {
-        if (!m_env->FreeVAO(m_VAO)) {
+        SR_LOG("Skybox::FreeVideoMemory() : free skybox video memory...");
+
+        if (m_VAO != SR_ID_INVALID && !m_env->FreeVAO(&m_VAO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free VAO!");
         }
-        m_VAO = -1;
-    }
 
-    if (m_VBO != -1) {
-        if (!m_env->FreeVBO(m_VBO)) {
+        if (m_VBO != SR_ID_INVALID && !m_env->FreeVBO(&m_VBO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free VBO!");
         }
-        m_VBO = -1;
-    }
 
-    if (m_IBO != -1) {
-        if (!m_env->FreeIBO(m_IBO)) {
+        if (m_IBO != SR_ID_INVALID && !m_env->FreeIBO(&m_IBO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free IBO!");
         }
-        m_IBO = -1;
+
+        if (m_UBO != SR_ID_INVALID && !m_env->FreeUBO(&m_UBO)) {
+            SR_ERROR("Skybox::FreeVideoMemory() : failed to free uniform buffer object!");
+        }
+
+        if (m_cubeMap != SR_ID_INVALID && !m_env->FreeCubeMap(&m_cubeMap)) {
+            SR_ERROR("Skybox::FreeVideoMemory() : failed to free cube map!");
+        }
+
+        if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+            SR_ERROR("Skybox::FreeVideoMemory() : failed to free descriptor set!");
+        }
+
+        m_isCalculated = false;
+
+        return true;
     }
 
-    if (m_cubeMap != -1) {
-        m_env->FreeCubeMap(m_cubeMap);
-        m_cubeMap = -1;
+    void Skybox::Draw() {
+        if (!m_isCalculated && (m_hasErrors || !Calculate())) {
+            return;
+        }
+
+        switch (m_env->GetPipeLine()) {
+            case PipeLine::Vulkan:
+                DrawVulkan();
+                break;
+            default:
+                SRAssertOnce(false);
+                break;
+        }
     }
 
-    if (m_descriptorSet >= 0) {
-        m_env->FreeDescriptorSet(m_descriptorSet);
-        m_descriptorSet = -1;
+    void Skybox::OnResourceUpdated(IResource *pResource, int32_t depth) {
+        if (dynamic_cast<Shader*>(pResource) == m_shader && m_shader) {
+            m_dirtyShader = true;
+            m_hasErrors = false;
+        }
+
+        IResource::OnResourceUpdated(pResource, depth);
     }
 
-    m_isCalculated = false;
-    m_isVideoMemFree = true;
+    void Skybox::SetShader(Shader *shader) {
+        SR_SCOPED_LOCK
 
-    return true;
-}
+        if (m_shader == shader) {
+            return;
+        }
 
-bool Framework::Graphics::Types::Skybox::AwaitFreeVideoMemory() {
-    if (m_isVideoMemFree) {
-        SR_ERROR("Skybox::AwaitFreeVideoMemory() : video memory is already freed!");
-        return false;
+        m_dirtyShader = true;
+
+        if (m_shader) {
+            auto&& render = m_shader->GetRender();
+            RemoveDependency(m_shader);
+            if (m_shader->GetCountUses() == 0) {
+                SRAssert2(render, "Render are nullptr!");
+                if (render) {
+                    render->FreeShader(m_shader);
+                }
+            }
+            m_shader = nullptr;
+        }
+
+        if (!(m_shader = shader)) {
+            return;
+        }
+
+        AddDependency(m_shader);
     }
 
-    if (!m_isCalculated) {
-        SR_ERROR("Skybox::AwaitFreeVideoMemory() : skybox isn't calculated!");
-        return false;
+    int32_t Skybox::GetVBO() {
+        if (!m_isCalculated && (m_hasErrors || !Calculate())) {
+            return SR_ID_INVALID;
+        }
+
+        return m_VBO;
     }
 
-    if (!m_env->IsWindowOpen()) {
-        SR_ERROR("Skybox::AwaitFreeVideoMemory() : window has been closed!");
-        return false;
+    int32_t Skybox::GetIBO() {
+        if (!m_isCalculated && (m_hasErrors || !Calculate())) {
+            return SR_ID_INVALID;
+        }
+
+        return m_IBO;
     }
 
-    if (m_render)
-        m_render->FreeSkyboxMemory(this);
-
-    ret:
-    if (m_isVideoMemFree)
-        goto ret;
-
-    return true;
+    int32_t Skybox::GetUBO() {
+        return m_UBO;
+    }
 }

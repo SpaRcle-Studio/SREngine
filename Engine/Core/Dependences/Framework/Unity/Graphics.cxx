@@ -16,7 +16,6 @@
 #include "../Graphics/src/GUI/NodeManager.cpp"
 #include "../Graphics/src/GUI/Pin.cpp"
 #include "../Graphics/src/GUI/Editor/FileBrowser.cpp"
-#include "../Graphics/src/GUI/Editor/SceneViewer.cpp"
 #include "../Graphics/src/GUI/Editor/MessageBox.cpp"
 #include "../Graphics/src/GUI/Editor/Guizmo.cpp"
 #include "../Graphics/src/GUI/Editor/Theme.cpp"
@@ -31,37 +30,41 @@
 #include "../Graphics/src/Loaders/FbxLoader.cpp"
 #include "../Graphics/src/Loaders/ImageLoader.cpp"
 #include "../Graphics/src/Loaders/ObjLoader.cpp"
+#include "../Graphics/src/Loaders/SRSL.cpp"
+#include "../Graphics/src/Loaders/SRSLParser.cpp"
 #include "../Graphics/src/Loaders/TextureLoader.cpp"
 
 #include "../Graphics/src/Memory/TextureConfigs.cpp"
 #include "../Graphics/src/Memory/MeshManager.cpp"
+#include "../Graphics/src/Memory/UBOManager.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"
 #include "../Graphics/src/Font/Text.cpp"
 
 #include "../Graphics/src/Render/Camera.cpp"
+#include "../Graphics/src/Render/RenderScene.cpp"
 #include "../Graphics/src/Render/ColorBuffer.cpp"
 #include "../Graphics/src/Render/MeshCluster.cpp"
 #include "../Graphics/src/Render/PostProcessing.cpp"
 #include "../Graphics/src/Render/Render.cpp"
 #include "../Graphics/src/Render/Shader.cpp"
 #include "../Graphics/src/Render/ShaderGenerator.cpp"
+#include "../Graphics/src/Render/RenderManager.cpp"
+#include "../Graphics/src/Render/CameraManager.cpp"
+#include "../Graphics/src/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../Graphics/src/Types/Geometry/IndexedMesh.cpp"
+#include "../Graphics/src/Types/Geometry/ProceduralMesh.cpp"
 #include "../Graphics/src/Types/Geometry/Mesh3D.cpp"
+
 #include "../Graphics/src/Types/EditorGrid.cpp"
+#include "../Graphics/src/Types/Framebuffer.cpp"
 #include "../Graphics/src/Types/Material.cpp"
 #include "../Graphics/src/Types/Mesh.cpp"
 #include "../Graphics/src/Types/Skybox.cpp"
 #include "../Graphics/src/Types/Texture.cpp"
-#include "../Graphics/src/Types/WindowFormat.cpp"
+#include "../Graphics/src/Types/GraphicsCommand.cpp"
 
 #include "../Graphics/src/Window/Window.cpp"
-
-
-
-
-
-

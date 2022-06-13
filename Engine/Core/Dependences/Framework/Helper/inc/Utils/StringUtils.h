@@ -5,24 +5,46 @@
 #ifndef GAMEENGINE_STRINGUTILS_H
 #define GAMEENGINE_STRINGUTILS_H
 
-#include <string>
-#include <cstring>
-#include <map>
-#include <glm/glm.hpp>
-#include <algorithm>
-#include <vector>
-#include <locale>
-#include <macros.h>
+#include <Debug.h>
+#include <Math/Mathematics.h>
 
-#define SR_INVALID_STR -1
+namespace SR_UTILS_NS {
+    static std::wstring s2ws(const std::string& str)
+    {
+        using convert_typeX = std::codecvt_utf8<wchar_t>;
+        std::wstring_convert<convert_typeX, wchar_t> converterX;
 
-namespace Framework::Helper {
+        return converterX.from_bytes(str);
+    }
+
+    static std::string ws2s(const std::wstring& wstr)
+    {
+        using convert_typeX = std::codecvt_utf8<wchar_t>;
+        std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+        return converterX.to_bytes(wstr);
+    }
+
+    #define SR_S2WS(str) s2ws(str)
+    #define SR_WS2S(wstr) ws2s(wstr)
+
     class StringUtils {
     public:
         StringUtils() = delete;
         StringUtils(StringUtils&) = delete;
         ~StringUtils() = delete;
     public:
+        inline static const std::string base64_chars =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "abcdefghijklmnopqrstuvwxyz"
+                "0123456789+/";
+
+        static inline bool is_base64(unsigned char c) {
+            return (isalnum(c) || (c == '+') || (c == '/'));
+        }
+
+        static std::string Base64Decode(const std::string& base64);
+
         inline static glm::vec3 IntToColor(size_t index) noexcept {
             unsigned char r = ((index >> 16) & 0xFF);  // Extract the RR byte
             unsigned char g = ((index >> 8) & 0xFF);   // Extract the GG byte
@@ -54,7 +76,7 @@ namespace Framework::Helper {
             for (uint32_t i = 0; i < str.size(); i++)
                 if (str[i] == symbol)
                     return (int32_t)i;
-            return SR_INVALID_STR;
+            return SR_INVALID_STR_POS;
         }
 
         static SR_FORCE_INLINE std::string GetFileNameFromFullPath(std::string full_path) {
@@ -78,10 +100,25 @@ namespace Framework::Helper {
             return source;
         }
 
+        static std::string Remove(std::string source, uint32_t count);
+        static std::string Remove(std::string source, uint32_t start, uint32_t count);
+
+        static std::string GetBetween(const std::string& source, int64_t begin, uint64_t end) {
+            return source.substr(begin + 1, (end - begin) - 1);
+        }
+
+        static std::string Tab(std::string code, uint32_t count = 1);
+
         static std::string GetBetween(const std::string& source, const std::string& begin, const std::string& end) {
             auto first = source.find(begin);
+            if (first == std::string::npos)
+                first = 0;
+
             auto last = source.find(end);
-            return source.substr(first, last - first);
+            if (last == std::string::npos)
+                last = source.size() - 1;
+
+            return source.substr(first + 1, (last - first) - 1);
         }
 
         static std::string Substring(const std::string& source, char symbol, uint32_t offset = 0) {
@@ -111,7 +148,7 @@ namespace Framework::Helper {
         static std::string ReadFrom(const std::string& str, const char& c, uint32_t start);
 
         static int32_t FindClosest(const std::string& str, const std::string& characters) {
-            int32_t pos = SR_INVALID_STR;
+            int32_t pos = SR_INVALID_STR_POS;
 
             for (char c : characters) {
                 auto find = str.find(c);
@@ -286,11 +323,27 @@ namespace Framework::Helper {
             return count;
         }
 
-        inline static std::string ReplaceAll(std::string const& original, std::string const& from, std::string const& to) noexcept {
-            std::string results;
-            std::string::const_iterator end = original.end();
-            std::string::const_iterator current = original.begin();
-            std::string::const_iterator next = std::search(current, end, from.begin(), from.end());
+        inline static std::string ReplaceAllRecursive(const std::string& original, const std::vector<std::string>& fromList, const std::string& to) noexcept {
+            std::string result = original;
+
+        repeat:
+            for (const auto& from : fromList) {
+                size_t pos = result.find(from);
+
+                if (pos != std::string::npos) {
+                    result.replace(pos, from.size(), to);
+                    goto repeat;
+                }
+            }
+
+            return result;
+        }
+
+        template<typename stringType> static stringType ReplaceAll(stringType const& original, stringType const& from, stringType const& to) noexcept {
+            stringType results;
+            typename stringType::const_iterator end = original.end();
+            typename stringType::const_iterator current = original.begin();
+            typename stringType::const_iterator next = std::search(current, end, from.begin(), from.end());
             while (next != end) {
                 results.append(current, next);
                 results.append(to);
@@ -300,14 +353,15 @@ namespace Framework::Helper {
             results.append(current, next);
             return results;
         }
+
         inline static std::string ToLower(std::string str) noexcept {
             for (char & t : str)
                 t = tolower(t);
             return str;
         }
         inline static std::string MakePath(std::string str, bool toLower = false) noexcept {
-            str = ReplaceAll(str, "\\\\", "/");
-            str = ReplaceAll(str, "\\", "/");
+            str = ReplaceAll<std::string>(str, "\\\\", "/");
+            str = ReplaceAll<std::string>(str, "\\", "/");
             if (toLower) str = ToLower(str);
             return str;
         }

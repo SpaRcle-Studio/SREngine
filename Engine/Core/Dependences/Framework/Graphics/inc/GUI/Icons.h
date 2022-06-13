@@ -40,6 +40,19 @@
 #define SR_ICON_FILE_VIDEO "\xef\x87\x88"	// U+f1c8
 #define SR_ICON_FILE_WORD "\xef\x87\x82"	// U+f1c2
 
+#define SR_ICON_PLAY "\xef\x81\x8b"	// U+f04b
+#define SR_ICON_PLAY_CIRCLE "\xef\x85\x84"	// U+f144
+#define SR_ICON_PAUSE "\xef\x81\x8c"	// U+f04c
+#define SR_ICON_PAUSE_CIRCLE "\xef\x8a\x8b"	// U+f28b
+#define SR_ICON_STOP "\xef\x81\x8d"	// U+f04d
+#define SR_ICON_STOP_CIRCLE "\xef\x8a\x8d"	// U+f28d
+#define SR_ICON_STOPWATCH "\xef\x8b\xb2"	// U+f2f2
+#define SR_ICON_STOPWATCH_20 "\xee\x81\xaf"	// U+e06f
+
+#define SR_ICON_BACKSPACE "\xef\x95\x9a"	// U+f55a
+#define SR_ICON_UNDO "\xef\x83\xa2"
+
+
 inline static const char* SR_ICONS[] = {
     SR_ICON_FOLDER,
     SR_ICON_FOLDER_MINUS,
@@ -69,6 +82,15 @@ inline static const char* SR_ICONS[] = {
     SR_ICON_FILE_UPLOAD,
     SR_ICON_FILE_VIDEO,
     SR_ICON_FILE_WORD,
+
+    SR_ICON_PLAY,
+    SR_ICON_PLAY_CIRCLE,
+    SR_ICON_PAUSE,
+    SR_ICON_PAUSE_CIRCLE,
+    SR_ICON_STOP,
+    SR_ICON_STOP_CIRCLE,
+    SR_ICON_STOPWATCH,
+    SR_ICON_STOPWATCH_20,
 };
 
 namespace Framework::Graphics::GUI {

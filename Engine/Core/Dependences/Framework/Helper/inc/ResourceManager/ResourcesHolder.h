@@ -5,10 +5,8 @@
 #ifndef SRENGINE_RESOURCESHOLDER_H
 #define SRENGINE_RESOURCESHOLDER_H
 
-#include <macros.h>
 #include <Utils/NonCopyable.h>
 #include <ResourceManager/IResource.h>
-#include <unordered_set>
 
 namespace SR_UTILS_NS {
     class ResourcesHolder : public NonCopyable {

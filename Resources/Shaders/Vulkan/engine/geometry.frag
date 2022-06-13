@@ -9,6 +9,11 @@ layout (location = 1) in vec4 Color;
 
 layout (binding = 2) uniform sampler2D DiffuseMap;
 
+layout (binding = 0) uniform MeshUBO {
+    mat4 model;
+    vec4 color;
+} meshUBO;
+
 void main() {
-    outColor = texture(DiffuseMap, TexCoord) * Color;
+    outColor = texture(DiffuseMap, TexCoord) * meshUBO.color;
 }

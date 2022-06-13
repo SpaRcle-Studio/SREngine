@@ -5,22 +5,14 @@
 #ifndef GAMEENGINE_VULKAN_H
 #define GAMEENGINE_VULKAN_H
 
-#define VK_PROTOTYPES
-
-#include <macros.h>
+#include <Debug.h>
 
 #ifdef SR_WIN32
-    #define GLFW_EXPOSE_NATIVE_WIN32
-    #define VK_USE_PLATFORM_WIN32_KHR
     #include <vulkan/vulkan.h>
     #include <Environment/Win32Window.h>
 #endif
 
 #include <Environment/Environment.h>
-
-#include <glm/glm.hpp>
-#include <glm\gtc\type_ptr.hpp>
-#include <Debug.h>
 
 #include <ResourceManager/ResourceManager.h>
 #include <FileSystem/FileSystem.h>
@@ -32,6 +24,7 @@
 #include <EvoVulkan/Tools/VulkanInsert.h>
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
+#include <EvoVulkan/Types/VmaBuffer.h>
 
 #include <Environment/Vulkan/VulkanImGUI.h>
 
@@ -93,6 +86,8 @@ namespace Framework::Graphics {
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
         EvoVulkan::Core::RenderResult Render() override;
+        ~SRVulkan() override = default;
+
     public:
         bool OnResize() override;
 
@@ -141,19 +136,17 @@ namespace Framework::Graphics {
 
         VulkanTools::MemoryManager*                     m_memory             = nullptr;
         EvoVulkan::Core::VulkanKernel*                  m_kernel             = nullptr;
+
     private:
         static const std::vector<const char*> m_validationLayers;
         static const std::vector<const char*> m_instanceExtensions;
         static const std::vector<const char*> m_deviceExtensions;
 
-#ifdef SR_RELEASE
-        const bool m_enableValidationLayers = false;
-#else
-        const bool m_enableValidationLayers = true;
-#endif
+        bool m_enableValidationLayers = false;
+
     public:
-        [[nodiscard]] SR_FORCE_INLINE PipeLine    GetPipeLine()       const override { return PipeLine::Vulkan; }
-        [[nodiscard]] SR_FORCE_INLINE uint8_t     GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
+        [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine()       const override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
         [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
         [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
         [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
@@ -184,8 +177,13 @@ namespace Framework::Graphics {
         //[[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
         [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
         [[nodiscard]] void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const override {
+            if (id == SR_ID_INVALID) {
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : invalid id!");
+                return nullptr;
+            }
+
             if (!imgui) {
-                Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : todo!");
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : todo!");
                 return nullptr;
             }
 
@@ -194,7 +192,8 @@ namespace Framework::Graphics {
                 return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
             }
             else {
-                Helper::Debug::Error("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!");
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!\n\tTexture id: " + std::to_string(id));
+                SRHalt("Something went wrong...");
                 return nullptr;
             }
         }
@@ -207,37 +206,30 @@ namespace Framework::Graphics {
         }
 
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const override { return true; }
-        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return this->m_kernel->GetDevice()->GetName(); }
+        [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
-        [[nodiscard]] glm::vec2 GetWindowSize()                 const override { return { this->m_basicWindow->GetSurfaceWidth(), this->m_basicWindow->GetSurfaceHeight() }; }
+        [[nodiscard]] glm::vec2 GetWindowSize()                 const override;
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
 
-        bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) override;
+        bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
-        void SetViewport(int32_t width, int32_t height) override {
-            if (m_currentFBOid == 0)
-                this->m_viewport = this->m_kernel->GetViewport();
-            else if (m_currentFramebuffer)
-                m_viewport = m_currentFramebuffer->GetViewport();
+        void SetViewport(int32_t width, int32_t height) override;
+        void SetScissor(int32_t width, int32_t height) override;
 
-            vkCmdSetViewport(m_currentCmd, 0, 1, &m_viewport);
-        }
-        void SetScissor(int32_t width, int32_t height) override {
-            if (m_currentFBOid == 0)
-                this->m_scissor = this->m_kernel->GetScissor();
-            else if (m_currentFramebuffer)
-                this->m_scissor = m_currentFramebuffer->GetScissor();
+        SR_FORCE_INLINE bool BeginRender() override {
+            if (!m_renderPassBI.pClearValues) {
+                SRAssertOnce(false);
+                return false;
+            }
 
-            vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
-        }
-
-        SR_FORCE_INLINE void BeginRender() override {
             vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
             vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+
+            return true;
         }
         SR_FORCE_INLINE void EndRender() override {
             vkCmdEndRenderPass(m_currentCmd);
@@ -251,13 +243,15 @@ namespace Framework::Graphics {
         /** \Vulkan Clear next frame buffer usage */
         SR_FORCE_INLINE void ClearBuffers() override {
             if (m_currentFBOid < 0) {
-                Helper::Debug::Error("Vulkan::ClearBuffers() : frame buffer isn't attached!");
+                SR_ERROR("Vulkan::ClearBuffers() : frame buffer isn't attached!");
                 return;
-            } else if (m_currentFBOid > 0) {
-                this->m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid - 1]->GetCountClearValues();
-                this->m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
-            } else {
-                Helper::Debug::Error("Vulkan::ClearBuffers() : TODO!");
+            }
+            else if (m_currentFBOid > 0) {
+                m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_currentFBOid - 1]->GetCountClearValues();
+                m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
+            }
+            else {
+                SR_ERROR("Vulkan::ClearBuffers() : TODO!");
             }
         }
 
@@ -289,21 +283,22 @@ namespace Framework::Graphics {
         SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override {
             if (auto shader = m_memory->m_ShaderPrograms[shaderProgram]) {
                 if (m_currentFBOid < 0) {
-                    Helper::Debug::Error("Vulkan::ReCreateShader() : frame buffer does not attached!");
+                    SR_ERROR("Vulkan::ReCreateShader() : frame buffer does not attached!");
                     return false;
                 }
 
                 if (auto renderPass = (m_currentFBOid == 0 ? m_kernel->GetRenderPass() : m_memory->m_FBOs[m_currentFBOid - 1]->GetRenderPass())) {
                     if (!shader->ReCreatePipeLine(renderPass)) {
-                        Helper::Debug::Error("Vulkan::ReCreateShader() : failed to re-create pipeLine!");
+                        SR_ERROR("Vulkan::ReCreateShader() : failed to re-create pipeLine!");
                         return true;
                     }
                 } else {
-                    Helper::Debug::Error("Vulkan::ReCreateShader() : failed to get render pass!");
+                    SR_ERROR("Vulkan::ReCreateShader() : failed to get render pass!");
                     return false;
                 }
-            } else {
-                Helper::Debug::Error("Vulkan::ReCreateShader() : shader isn't exists!");
+            }
+            else {
+                SR_ERROR("Vulkan::ReCreateShader() : shader isn't exists!");
                 return false;
             }
 
@@ -315,7 +310,7 @@ namespace Framework::Graphics {
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes
-                ) const override;
+                ) override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -324,20 +319,20 @@ namespace Framework::Graphics {
                 SRShaderCreateInfo shaderCreateInfo) const override;
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
-            if (shaderProgram >= m_memory->m_countShaderPrograms) {
-                Helper::Debug::Error("Vulkan::UseShader() : index out of range!");
+            if (shaderProgram >= m_memory->m_countShaderPrograms.first) {
+                SR_ERROR("Vulkan::UseShader() : index out of range!");
                 return;
             }
 
-            this->m_currentShaderID = (int)shaderProgram;
-            this->m_currentShader   = m_memory->m_ShaderPrograms[shaderProgram];
+            m_currentShaderID = (int)shaderProgram;
+            m_currentShader   = m_memory->m_ShaderPrograms[shaderProgram];
             if (!m_currentShader) {
-                Helper::Debug::Error("Vulkan::UseShader() : shader is nullptr!");
+                SR_ERROR("Vulkan::UseShader() : shader is nullptr!");
                 return;
             }
-            this->m_currentLayout = m_currentShader->GetPipelineLayout();
+            m_currentLayout = m_currentShader->GetPipelineLayout();
 
-            this->m_currentShader->Bind(this->m_currentCmd);
+            m_currentShader->Bind(m_currentCmd);
         }
 
         bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
@@ -345,30 +340,41 @@ namespace Framework::Graphics {
             std::vector<int32_t> color = { colorBuffer };
             bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
             if (!result)
-                Helper::Debug::Error("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
+                SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
             colorBuffer = color[0];
             return result;
         }
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
-                Helper::Debug::Error("Vulkan::DeleteShader() : failed free shader program!");
+                SR_ERROR("Vulkan::DeleteShader() : failed free shader program!");
                 return false;
-            } else
+            }
+            else
                 return true;
         }
         SR_FORCE_INLINE void UnUseShader() override {
-            this->m_currentShader   = nullptr;
-            this->m_currentShaderID = -1;
-            this->m_currentLayout   = VK_NULL_HANDLE;
+            m_currentShader   = nullptr;
+            m_currentShaderID = -1;
+            m_currentLayout   = VK_NULL_HANDLE;
         }
     public:
+        virtual SR_FORCE_INLINE void ResetDescriptorSet() {
+            Environment::ResetDescriptorSet();
+            m_currentDesrSets = VK_NULL_HANDLE;
+        }
+
         SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const override {
             if (m_currentDesrSets != VK_NULL_HANDLE)
                 vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
 
             vkCmdDrawIndexed(m_currentCmd, countIndices, 1, 0, 0, 0);
         }
+
+        SR_FORCE_INLINE void BindUBO(const uint32_t& UBO) override {
+            m_currentUBOid = UBO;
+        }
+
         SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const override {
             if (m_currentDesrSets != VK_NULL_HANDLE)
                 vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDesrSets, 0, NULL);
@@ -377,34 +383,41 @@ namespace Framework::Graphics {
         }
 
         [[nodiscard]] SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const override {
-            auto id = this->m_memory->AllocateUBO(uboSize);
-            if (id < 0) {
-                Helper::Debug::Error("Vulkan::AllocateUBO() : failed to allocate uniform buffer object!");
-                return -1;
-            } else
+            SRAssert2(uboSize > 0, "Incorrect UBO size!");
+
+            if (auto&& id = m_memory->AllocateUBO(uboSize); id < 0) {
+                SR_ERROR("Vulkan::AllocateUBO() : failed to allocate uniform buffer object!");
+                return SR_ID_INVALID;
+            }
+            else
                 return id;
         }
 
         SR_FORCE_INLINE void UpdateUBO(const uint32_t& UBO, void* data, const uint64_t& uboSize) override {
-            if (UBO >= m_memory->m_countUBO) { // TODO: add check debug/release
-                Helper::Debug::Error("Vulkan::UpdateUBO() : uniform index out of range! \n\tCount uniforms: " +
-                                     std::to_string(m_memory->m_countUBO) + "\n\tIndex: " + std::to_string(UBO));
+            if (UBO >= m_memory->m_countUBO.first) { // TODO: add check debug/release
+                SRAssert2(false, "Vulkan::UpdateUBO() : uniform index out of range! \n\tCount uniforms: " +
+                                     std::to_string(m_memory->m_countUBO.first) + "\n\tIndex: " + std::to_string(UBO));
+                return;
+            }
+
+            if (!m_memory->m_UBOs[UBO]) {
+                SRAssertOnce(false);
                 return;
             }
 
             m_memory->m_UBOs[UBO]->CopyToDevice(data, uboSize);
         }
 
-        SR_FORCE_INLINE void UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) override {
+        SR_FORCE_INLINE bool UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) override {
             std::vector<VkWriteDescriptorSet> writeDescriptorSets = {};
             for (const auto& value : updateValues) {
                 switch (value.first) {
                     case DescriptorType::Uniform: {
-                        auto vkDescriptorSet = this->m_memory->m_descriptorSets[descriptorSet].m_self;
-                        if (value.second.second >= m_memory->m_countUBO) {
-                            Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: " +
-                                                 std::to_string(m_memory->m_countUBO) + "\n\tIndex: " + std::to_string(value.second.second));
-                            return;
+                        auto vkDescriptorSet = m_memory->m_descriptorSets[descriptorSet].m_self;
+                        if (value.second.second >= m_memory->m_countUBO.first) {
+                            SRAssert2(false, "Vulkan::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: " +
+                                                 std::to_string(m_memory->m_countUBO.first) + "\n\tIndex: " + std::to_string(value.second.second));
+                            return false;
                         }
                         auto vkUBODescriptor = m_memory->m_UBOs[value.second.second]->GetDescriptorRef();
                         writeDescriptorSets.emplace_back(EvoVulkan::Tools::Initializers::WriteDescriptorSet(
@@ -415,62 +428,74 @@ namespace Framework::Graphics {
                         break;
                     }
                     default:
-                        Helper::Debug::Error("Vulkan::UpdateDescriptorSets() : unknown type!");
-                        return;
+                        SR_ERROR("Vulkan::UpdateDescriptorSets() : unknown type!");
+                        return false;
                 }
             }
+
+            if (writeDescriptorSets.empty()) {
+                SRAssert(false);
+                return false;
+            }
+
             vkUpdateDescriptorSets(*m_kernel->GetDevice(), writeDescriptorSets.size(), writeDescriptorSets.data(), 0, NULL);
+
+            return true;
         }
 
-        SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) override {
+        SR_FORCE_INLINE bool FreeDescriptorSet(int32_t* descriptorSet) override {
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Full)
                 Helper::Debug::Graph("Vulkan::FreeDescriptorSet() : free descriptor set...");
 
-            if (!this->m_memory->FreeDescriptorSet(descriptorSet)) {
-                Helper::Debug::Error("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
+            if (!m_memory->FreeDescriptorSet(*descriptorSet)) {
+                SR_ERROR("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
+                *descriptorSet = SR_ID_INVALID;
                 return false;
-            } else
-                return true;
+            }
+
+            *descriptorSet = SR_ID_INVALID;
+
+            return true;
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) override {
             if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Full)
                 Helper::Debug::Graph("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
 
-            auto vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
+            auto&& vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
             if (vkTypes.size() != types.size()) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSet() : failed to cast abstract descriptor types to vulkan descriptor types!");
-                return -3;
-            } else {
+                SR_ERROR("Vulkan::AllocDescriptorSet() : failed to cast abstract descriptor types to vulkan descriptor types!");
+                return SR_ID_INVALID;
+            }
+            else {
                 if (m_currentShaderID < 0) {
-                    Helper::Debug::Error("Vulkan::AllocDescriptorSet() : shader program do not set!");
-                    return -1;
+                    SRHalt("Shader program do not set!");
+                    return SR_ID_INVALID;
                 }
 
-                auto id = this->m_memory->AllocateDescriptorSet(m_currentShaderID, vkTypes);
-                if (id >= 0) {
+                if (auto&& id = m_memory->AllocateDescriptorSet(m_currentShaderID, vkTypes); id >= 0) {
                     return id;
                 }
                 else {
-                    Helper::Debug::Error("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
-                    return -1;
+                    SR_ERROR("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
+                    return SR_ID_INVALID;
                 }
             }
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) override {
             if (!m_memory->m_textures[textureID]) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : texture is not exists!");
+                SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : texture is not exists!");
                 return -1;
             }
 
             if (m_currentShaderID < 0) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : shader is not attached!");
+                SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : shader is not attached!");
                 return -1;
             }
 
             const std::set<DescriptorType> types = { DescriptorType::CombinedImage };
-            int32_t descriptorSetID = this->m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
+            int32_t descriptorSetID = m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
             if (descriptorSetID < 0) {
-                Helper::Debug::Error("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
+                SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
                 return -1;
             }
 
@@ -479,15 +504,20 @@ namespace Framework::Graphics {
                     VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 0,
                     m_memory->m_textures[textureID]->GetDescriptorRef());
 
-            vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
+            vkUpdateDescriptorSets(*m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
 
             return descriptorSetID;
         }
 
-        SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) override { //const uint32_t& binding,
-            //this->m_descriptorSets[binding] = m_memory->m_descriptorSets[descriptorSet].m_self;
-            m_currentDescID = descriptorSet;
-            this->m_currentDesrSets = m_memory->m_descriptorSets[descriptorSet].m_self;
+        SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) override {
+            Environment::BindDescriptorSet(descriptorSet);
+
+            if (descriptorSet >= m_memory->m_countDescriptorSets.first) {
+                SR_ERROR("Vulkan::BindDescriptorSet() : incorrect range! (" + std::to_string(descriptorSet) + ")");
+                return;
+            }
+
+            m_currentDesrSets = m_memory->m_descriptorSets[descriptorSet].m_self;
         }
         int32_t CalculateTexture(
                 uint8_t* data,
@@ -503,37 +533,40 @@ namespace Framework::Graphics {
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override {
             if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1, cpuUsage); id < 0) {
-                Helper::Debug::Error("Vulkan::CalculateCubeMap() : failed to allocate texture!");
+                SR_ERROR("Vulkan::CalculateCubeMap() : failed to allocate texture!");
                 return -1;
-            } else
+            }
+            else
                 return id;
         }
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
             if (FBO == 0) {
-                this->m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
-                this->m_renderPassBI.renderPass  = m_kernel->GetRenderPass();
-                this->m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
-                this->m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
+                m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
+                m_renderPassBI.renderPass  = m_kernel->GetRenderPass();
+                m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
+                m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
 
-                this->m_currentFramebuffer = nullptr;
-            } else {
+                m_currentFramebuffer = nullptr;
+            }
+            else {
                 if (FBO == UINT32_MAX) {
-                    Helper::Debug::Error(
-                            "Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
+                    SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
                     return;
                 }
 
                 auto framebuffer = m_memory->m_FBOs[FBO - 1];
                 if (!framebuffer) {
-                    Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer object don't exist!");
+                    SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer object don't exist!");
                     return;
                 }
 
-                for (auto fbo : m_framebuffersQueue)
+                for (auto&& fbo : m_framebuffersQueue) {
                     if (fbo == framebuffer) {
-                        Helper::Debug::Error("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
+                        SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
                         return;
                     }
+                }
+
                 m_framebuffersQueue.push_back(framebuffer);
 
                 this->m_renderPassBI.framebuffer = *framebuffer;
@@ -547,53 +580,75 @@ namespace Framework::Graphics {
             this->m_currentFBOid = FBO;
         }
 
-        SR_FORCE_INLINE void BindVBO(const unsigned int& VBO) const override {
+        SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {
             vkCmdBindVertexBuffers(m_currentCmd, 0, 1, m_memory->m_VBOs[VBO]->GetCRef(), m_offsets);
         }
-        SR_FORCE_INLINE void BindIBO(const unsigned int& IBO) const override {
+        SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) override {
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
             vkCmdBindIndexBuffer(m_currentCmd, *m_memory->m_IBOs[IBO], 0, VK_INDEX_TYPE_UINT32);
         }
         SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t& ID) const override {
-            if (ID >= m_memory->m_countTextures) {
-                Helper::Debug::Error("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
+            if (ID >= m_memory->m_countTextures.first) {
+                SR_ERROR("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
                 return;
             }
 
             EvoVulkan::Types::Texture* texture = m_memory->m_textures[ID];
 
             if (!texture) {
-                Helper::Debug::Error("Vulkan::BindTexture() : texture is not exists!");
+                SR_ERROR("Vulkan::BindTexture() : texture is not exists!");
                 return;
             }
 
-            auto descriptorSet = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
-                    m_memory->m_descriptorSets[m_currentDescID].m_self,
-                    VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, activeTexture,
-                    texture->GetDescriptorRef());
+            auto&& descriptorSet = m_memory->m_countDescriptorSets.first <= m_currentDescriptorSetId ? nullptr : m_memory->m_descriptorSets[m_currentDescriptorSetId];
+            if (!descriptorSet) {
+                SRAssert2Once(false, "Vulkan::BindTexture() : incorrect descriptor set!");
+                return;
+            }
 
-            vkUpdateDescriptorSets(*this->m_kernel->GetDevice(), 1, &descriptorSet, 0, nullptr);
+            auto&& imageDescriptorRef = texture->GetDescriptorRef();
+
+            const auto&& descriptorSetWrite = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                    descriptorSet.m_self,
+                    VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, activeTexture,
+                    imageDescriptorRef);
+
+            vkUpdateDescriptorSets(*m_kernel->GetDevice(), 1, &descriptorSetWrite, 0, nullptr);
         }
 
-        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const override { return this->m_memory->FreeVBO(ID); }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const override { return this->m_memory->FreeIBO(ID); }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const override { return this->m_memory->FreeUBO(ID); }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const override {
+            const int32_t id = *ID; *ID = SR_ID_INVALID;
+            return m_memory->FreeVBO(id);
+        }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const override {
+            const int32_t id = *ID; *ID = SR_ID_INVALID;
+            return m_memory->FreeIBO(id);
+        }
+        [[nodiscard]] SR_FORCE_INLINE bool FreeUBO(int32_t* ID) const override {
+            const int32_t id = *ID; *ID = SR_ID_INVALID;
+            return m_memory->FreeUBO(id);
+        }
 
-        SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override {
-            if (!m_memory->FreeTexture((uint32_t)ID)) {
-                Helper::Debug::Error("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(ID) + ")");
+        SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) override {
+            const int32_t id = *ID; *ID = SR_ID_INVALID;
+
+            if (!m_memory->FreeTexture((uint32_t)id)) {
+                SR_ERROR("Vulkan::FreeCubeMap() : failed to free texture! (" + std::to_string(id) + ")");
                 return false;
-            } else
+            }
+            else
                 return true;
         }
 
         [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const override;
 
-        [[nodiscard]] bool FreeTexture(uint32_t ID) const override {
-            if (!m_memory->FreeTexture((uint32_t)ID)) {
-                Helper::Debug::Error("Vulkan::FreeTexture() : failed to free texture!");
+        [[nodiscard]] bool FreeTexture(int32_t* id) const override {
+            if (!m_memory->FreeTexture(static_cast<uint32_t>(*id))) {
+                SR_ERROR("Vulkan::FreeTexture() : failed to free texture!");
                 return false;
             }
+
+            *id = SR_ID_INVALID;
 
             return true;
         }

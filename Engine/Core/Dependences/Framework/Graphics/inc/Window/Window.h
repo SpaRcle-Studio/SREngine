@@ -5,110 +5,61 @@
 #ifndef GAMEENGINE_WINDOW_H
 #define GAMEENGINE_WINDOW_H
 
-#include <Types/WindowFormat.h>
-
 #include <GUI.h>
-#include <Render/Render.h>
-#include <Render/Camera.h>
-#include <Environment/Environment.h>
-#include <Render/PostProcessing.h>
-#include <thread>
-#include <mutex>
-#include <list>
-#include <functional>
-#include <unordered_set>
-#include <Types/EditorGrid.h>
-#include <Render/ColorBuffer.h>
-#include <Types/Time.h>
+
 #include <Math/Vector3.h>
 #include <Types/SafeGateArray.h>
+#include <Utils/NonCopyable.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     namespace GUI {
         class WidgetManager;
     }
 
-    // TODO: TO_REFACTORING
-    class Window {
+    class Render;
+    class Environment;
+    class Camera;
+
+    class Window : SR_UTILS_NS::NonCopyable {
     public:
-        Window(
-                const char* win_name,
-                const char* icoPath,
-                WindowFormat format,
-                Render* render,
-                bool vsync,
-                bool fullScreen,
-                bool resizable,
-                bool headerEnabled,
-                unsigned int smoothSamples
-                )
-                : m_env(Environment::Get())
-        {
-            this->m_env->InitWindowFormat(format);
-
-            this->m_win_name        = win_name;
-            this->m_icoPath         = icoPath;
-            this->m_render          = render;
-            this->m_fullScreen      = fullScreen;
-            this->m_vsync           = vsync;
-            this->m_smoothSamples   = smoothSamples;
-            this->m_resizable       = resizable;
-            this->m_headerEnabled   = headerEnabled;
-        }
-    private:
-        ~Window() = default;
-    private:
-        volatile bool         m_isCreate              = false;
-        volatile bool         m_isInit                = false;
-        volatile bool         m_isRun                 = false;
-        volatile bool         m_isClose               = false;
-
-        volatile bool         m_hasErrors             = false;
-        volatile bool         m_isEnvInit             = false;
-
-        std::atomic<bool>     m_isWindowClose         = false;
-        std::atomic<bool>     m_isWindowFocus         = true;
-        std::atomic<bool>     m_isNeedResize          = false;
-        std::atomic<bool>     m_isNeedMove            = false;
+        Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size, Render* render,
+                bool vsync, bool fullScreen, bool resizable, bool headerEnabled, uint8_t smoothSamples);
 
     private:
-        std::thread           m_thread                = std::thread();
+        ~Window() override = default;
 
-        Helper::Types::Time*  m_time                  = nullptr;
+    public:
+        bool Create();
+        bool Init();
+        bool Run();
+        bool Close();
+        bool Free();
 
-        Environment*          m_env                   = nullptr;
+    public:
+        void Synchronize();
+        void BeginSync();
+        void EndSync();
 
-        const char*           m_win_name              = "Unnamed";
-        const char*           m_icoPath               = "Unknown";
-        uint8_t               m_smoothSamples         = 4;
+        void RegisterWidgetManager(GUI::WidgetManager* widgetManager);
 
-        Render*               m_render                = nullptr;
+    public:
+        void CentralizeWindow();
+        void CentralizeCursor() noexcept;
+        void Resize(uint32_t w, uint32_t h);
 
-        // TODO: TO_REFACTORING
-        std::mutex            m_mutex                 = std::mutex();
-        std::mutex            m_drawMutex             = std::mutex();
+        void SetFullScreen(bool value);
+        void SetGUIEnabled(bool value);
 
-        ImGuiWindow*          m_aimedWindowTarget     = nullptr;
-        Camera*               m_aimedCameraTarget     = nullptr;
-        Mesh*                 m_aimedMesh             = nullptr;
-        bool                  m_requireGetAimed       = false;
+    public:
+        SR_NODISCARD SR_FORCE_INLINE bool IsRun() const { return m_isRun; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsGUIEnabled() const { return m_GUIEnabled.first; }
+        SR_NODISCARD bool IsFullScreen() const;
+        SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
+        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
+        SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { SRAssert(m_render); return m_render; }
+        SR_NODISCARD bool IsAlive() const;
 
-        GUI::ICanvas*         m_canvas                = nullptr;
-
-        bool                  m_vsync                 = false;
-        bool                  m_fullScreen            = false;
-        bool                  m_resizable             = false;
-        bool                  m_headerEnabled         = false;
-
-        Math::IVector2        m_windowPos             = { 0, 0 };
-        Math::IVector2        m_newWindowPos          = { 0, 0 };
-        Math::IVector2        m_newWindowSize         = { 0, 0 };
-
-        Helper::Types::SafeGateArray<Camera*> m_cameras;
-        Helper::Types::SafeGateArray<GUI::WidgetManager*> m_widgetManagers;
-
-        /* 1 - current, 2 - new */
-        std::pair<std::atomic<bool>, std::atomic<bool>> m_GUIEnabled = { false, false };
     private:
         void PollEvents();
         void Thread();
@@ -116,57 +67,53 @@ namespace Framework::Graphics {
         bool SyncFreeResources();
         void DrawNoCamera();
 
-        void DrawToCamera(Framework::Graphics::Camera* camera);
-    public:
-        void Synchronize();
-        void BeginSync();
-        void EndSync();
-        bool TrySync();
-        [[nodiscard]] bool IsAlive() const;
+        void DrawVulkan();
+        void DrawOpenGL();
 
-        void AddCamera(Camera* camera);
-        void DestroyCamera(Camera* camera);
-        [[nodiscard]] uint32_t GetCountCameras() const { return m_cameras.Count(); }
+        void DrawToCamera(Camera* camera, uint32_t fbo);
+        void DrawSingleCamera(Camera* camera);
 
-        [[nodiscard]] SR_FORCE_INLINE Render* GetRender() {
-            if (!m_render) {
-                Debug::Error("Window::GetRender() : render is nullptr! Engine may be crash...");
-                return nullptr;
-            }
-            return m_render;
-        }
-        [[nodiscard]] bool IsRun() const noexcept { return m_isRun; }
-        [[nodiscard]] bool IsGUIEnabled() const { return m_GUIEnabled.first; }
-        [[nodiscard]] Mesh* PopAimedMesh() noexcept;
-        [[nodiscard]] bool RequireAimedMesh(Camera* camera, ImGuiWindow* window) noexcept;
-        glm::vec2 GetGlobalWindowMousePos(Camera* camera, ImGuiWindow* win);
-    public:
-        void RegisterWidgetManager(GUI::WidgetManager* widgetManager);
-        void CentralizeWindow();
-        void Resize(uint32_t w, uint32_t h);
-        void CentralizeCursor() noexcept;
+    private:
+        std::atomic<bool>     m_isCreate              = false;
+        std::atomic<bool>     m_isInit                = false;
+        std::atomic<bool>     m_isRun                 = false;
+        std::atomic<bool>     m_isClose               = false;
 
-        void SetCanvas(GUI::ICanvas* canvas) { m_canvas = canvas; }
-        SR_FORCE_INLINE void SetGUIEnabled(bool value) noexcept {
-            if (value)
-                Helper::Debug::Log("Window::SetGUIEnabled() : enable gui...");
-            else
-                Helper::Debug::Log("Window::SetGUIEnabled() : disable gui...");
+        std::atomic<bool>     m_hasErrors             = false;
+        std::atomic<bool>     m_isEnvInit             = false;
 
-            this->m_GUIEnabled.second = value;
-        }
-    public:
-        [[nodiscard]] SR_FORCE_INLINE bool IsFullScreen()            const { return this->m_env->IsFullScreen(); }
-        SR_FORCE_INLINE void SetFullScreen(bool value)               const { this->m_env->SetFullScreen(value);  }
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()            const { return !this->m_isWindowClose;      }
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowFocus()           const { return this->m_isWindowFocus;       }
-        [[nodiscard]] SR_FORCE_INLINE Math::IVector2 GetWindowSize() const { return m_env->GetWindowSize();      }
-    public:
-        bool Create();
-        bool Init();
-        bool Run();
-        bool Close();
-        bool Free();
+        std::atomic<bool>     m_isWindowClose         = false;
+        std::atomic<bool>     m_isWindowFocus         = true;
+        std::atomic<bool>     m_isNeedResize          = false;
+        std::atomic<bool>     m_isNeedMove            = false;
+
+        std::atomic<bool>     m_vsync                 = false;
+        std::atomic<bool>     m_fullScreen            = false;
+        std::atomic<bool>     m_resizable             = false;
+        std::atomic<bool>     m_headerEnabled         = false;
+
+    private:
+        SR_HTYPES_NS::Thread::Ptr m_thread            = nullptr;
+
+        Environment*          m_env                   = nullptr;
+
+        std::string           m_winName               = "Unnamed";
+        std::string           m_icoPath               = "Unknown";
+        uint8_t               m_smoothSamples         = 4;
+
+        Render*               m_render                = nullptr;
+
+        std::recursive_mutex  m_mutex                 = std::recursive_mutex();
+
+        SR_MATH_NS::IVector2  m_windowPos             = { 0, 0 };
+        SR_MATH_NS::IVector2  m_newWindowPos          = { 0, 0 };
+        SR_MATH_NS::IVector2  m_size                  = { 0, 0 };
+
+        Helper::Types::SafeGateArray<GUI::WidgetManager*> m_widgetManagers;
+
+        /* 1 - current, 2 - new */
+        std::pair<std::atomic<bool>, std::atomic<bool>> m_GUIEnabled = { false, false };
+
     };
 }
 

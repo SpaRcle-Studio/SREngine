@@ -5,88 +5,84 @@
 #ifndef GAMEENGINE_MATERIAL_H
 #define GAMEENGINE_MATERIAL_H
 
-#include <Types/Texture.h>
-#include <Render/Shader.h>
+#include <ResourceManager/IResource.h>
+#include <Environment/Basic/IShaderProgram.h>
 #include <Math/Vector3.h>
 #include <Math/Vector4.h>
 
-#include <glm/glm.hpp>
-#include <macros.h>
-#include <mutex>
-#include <unordered_set>
-#include <ResourceManager/ResourceManager.h>
+namespace SR_GRAPH_NS {
+    class Shader;
+}
 
-namespace Framework::Graphics::Types {
+namespace SR_GTYPES_NS {
     class Mesh;
     class Mesh3D;
+    class Texture;
 
-    class Material : public Helper::IResource {
+    class Material : public SR_UTILS_NS::IResource {
         friend class Mesh;
         friend class Mesh3D;
 
+        struct Property {
+            std::string id;
+            std::string displayName;
+            ShaderPropertyVariant data;
+            ShaderVarType type;
+        };
+
+        using Properties = std::list<Property>;
+        using Super = SR_UTILS_NS::IResource;
+
     private:
         Material();
-        Material(Texture* diffuse, Texture* normal, Texture* specular, Texture* glossiness);
-
-        ~Material() override;
+        ~Material() override = default;
 
     public:
         static Material* GetDefault();
         static bool FreeDefault();
         static bool InitDefault(Render* render);
 
-        static Material* Load(const std::string& name);
+        static Material* Load(const std::string& path);
 
     public:
-        Helper::IResource* Copy(Helper::IResource* destination) const override;
+        Super* Copy(Super* destination) const override;
 
-        SR_NODISCARD bool GetBloomEnabled() const { return m_bloom;  }
+        SR_NODISCARD bool IsBloomEnabled() const { return m_bloom;  }
         SR_NODISCARD bool IsTransparent() const { return m_transparent;  }
-        SR_NODISCARD Helper::Math::FColor GetColor() const { return m_color; }
-        SR_NODISCARD uint32_t GetCountSubscriptions() const;
+        SR_NODISCARD Shader* GetShader() const { return m_shader; }
+        SR_NODISCARD Properties& GetProperties() { return m_properties; }
+        SR_NODISCARD Property* GetProperty(const std::string& id);
+        SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
-        void SetColor(float r, float g, float b) { SetColor(Helper::Math::FColor(r, g, b, 1.f)); }
-        void SetColor(Helper::Math::FVector3 color) { SetColor(color.x, color.y, color.z); }
-        void SetColor(glm::vec4 color);
-        void SetColor(const Helper::Math::FColor& color);
-        void SetBloom(bool value) { this->m_bloom = value; };
+        void SetTexture(Property* property, Texture* pTexture);
+
+        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+
+        void SetShader(Shader* shader);
+        void SetBloom(bool value);
         bool SetTransparent(bool value);
 
-        void SetDiffuse(Texture* tex);
-        void SetNormal(Texture* tex);
-        void SetSpecular(Texture* tex);
-        void SetGlossiness(Texture* tex);
+        void Use();
+        void UseSamplers();
 
-        void UseVulkan();
-        void UseOpenGL() const;
-
-        void Subscribe(Mesh* mesh);
-        void UnSubscribe(Mesh* mesh);
-
-        bool Register(Render* render);
+    protected:
+        bool Reload() override;
 
     private:
+        void InitShader();
         bool Destroy() override;
-        void UpdateSubscribers();
 
     private:
-        SR_INLINE static Material* m_default       = nullptr;
+        SR_INLINE_STATIC Material*   m_default       = nullptr;
 
-        std::unordered_set<Mesh*>  m_subscriptions = {};
+        const Environment*           m_env           = nullptr;
+        Shader*                      m_shader        = nullptr;
 
-        const Environment*         m_env           = nullptr;
-        Render*                    m_render        = nullptr;
+        std::atomic<bool>            m_dirtyShader   = false;
+        std::atomic<bool>            m_transparent   = false;
+        std::atomic<bool>            m_bloom         = false;
 
-        std::atomic<bool>          m_transparent   = false;
-        std::atomic<bool>          m_bloom         = false;
-        mutable std::mutex         m_mutex         = std::mutex();
-
-        Helper::Math::FColor       m_color         = Helper::Math::FColor(1.f);
-
-        Texture*                   m_diffuse       = nullptr;
-        Texture*                   m_normal        = nullptr;
-        Texture*                   m_specular      = nullptr;
-        Texture*                   m_glossiness    = nullptr;
+        Properties                   m_properties    = Properties();
 
     };
 }

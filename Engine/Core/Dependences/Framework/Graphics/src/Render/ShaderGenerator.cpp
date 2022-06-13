@@ -3,6 +3,8 @@
 //
 
 #include <Render/ShaderGenerator.h>
+
+/*
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/VectorUtils.h>
 #include <Xml.h>
@@ -224,3 +226,4 @@ bool Framework::Graphics::Codegen::CodeSegment::CheckConditions(const std::vecto
     }
     return true;
 }
+*/

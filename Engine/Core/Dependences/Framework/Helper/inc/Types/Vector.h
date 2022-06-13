@@ -3,12 +3,8 @@
 //
 #ifndef EVOENGINE_VECTOR_H
 #define EVOENGINE_VECTOR_H
-#include <initializer_list>
-#include <iostream>
-#include <cstddef>
-#include <algorithm>
 
-#include <mutex>
+#include <Debug.h>
 
 // TODO: Check, refactoring and add exception processing
 

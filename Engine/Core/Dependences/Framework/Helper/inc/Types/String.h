@@ -5,7 +5,7 @@
 #ifndef GAME_STRING_H
 #define GAME_STRING_H
 
-#include <cstddef>
+#include <Debug.h>
 
 // TODO: Check, refactoring and add exception processing
 

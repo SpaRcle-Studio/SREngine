@@ -5,24 +5,14 @@
 #ifndef GAMEENGINE_VERTICES_H
 #define GAMEENGINE_VERTICES_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <macros.h>
-#include <variant>
-
-#include <glm/glm.hpp>
-#include <glm/gtx/hash.hpp>
-#include <glm/gtx/string_cast.hpp>
-
-#include <Math/Vector3.h>
 #include <Utils/Enumerations.h>
+#include <Math/Vector2.h>
+#include <Math/Vector3.h>
+#include <Math/Vector4.h>
 #include <Utils/StringFormat.h>
-#include <FbxLoader/Mesh.h>
+#include <Utils/Vertices.hpp>
 
-#define SR_VERTEX_DESCRIPTION size_t
-
-namespace Framework::Graphics::Vertices {
+namespace SR_GRAPH_NS::Vertices {
     enum class Attribute {
         Unknown            = 0,
 
@@ -47,39 +37,42 @@ namespace Framework::Graphics::Vertices {
         return Helper::Format("{ %f, %f }", vec2.x, vec2.y);
     }
 
-    struct Mesh3DVertex {
+    struct StaticMeshVertex {
         glm::vec3 pos;
         glm::vec2 uv;
         glm::vec3 norm;
         glm::vec3 tang;
+        glm::vec3 bitang;
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
-            return sizeof(Mesh3DVertex);
+            return sizeof(StaticMeshVertex);
         }
 
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(Mesh3DVertex, pos)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(Mesh3DVertex, uv)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(Mesh3DVertex, norm)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(Mesh3DVertex, tang)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(StaticMeshVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(StaticMeshVertex, uv)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(StaticMeshVertex, norm)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(StaticMeshVertex, tang)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(StaticMeshVertex, bitang)));
 
             return descriptions;
         }
 
-        bool operator==(const Mesh3DVertex& other) const {
-            return pos      == other.pos
-                   && uv    == other.uv
-                   && norm  == other.norm
-                   && tang  == other.tang;
+        bool operator==(const StaticMeshVertex& other) const {
+            return pos       == other.pos
+                   && uv     == other.uv
+                   && norm   == other.norm
+                   && bitang == other.bitang
+                   && tang   == other.tang;
         }
 
         [[nodiscard]] std::string ToString() const {
             return "{ " + Vertices::ToString(pos) + ", " + Vertices::ToString(uv) + " }";
         }
     };
-    typedef std::vector<Mesh3DVertex> Mesh3DVertices;
+    typedef std::vector<StaticMeshVertex> StaticMeshVertices;
 
     static std::string ToString(const std::vector<uint32_t>& indices) {
         std::string str = std::to_string(indices.size()) + " indices: \n";
@@ -90,7 +83,7 @@ namespace Framework::Graphics::Vertices {
         return str;
     }
 
-    static std::string ToString(const std::vector<Mesh3DVertex>& vertices) {
+    static std::string ToString(const std::vector<StaticMeshVertex>& vertices) {
         std::string str = std::to_string(vertices.size()) + " vertices: \n";
         for (uint32_t i = 0; i < vertices.size() - 1; i++)
             str += vertices[i].ToString() + ",\n";
@@ -99,41 +92,42 @@ namespace Framework::Graphics::Vertices {
         return str;
     }
 
-    struct SkyboxVertex {
+    struct SimpleVertex {
         glm::vec3 pos;
 
         static SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
-            return sizeof(SkyboxVertex);
+            return sizeof(SimpleVertex);
         }
 
-        bool operator==(const SkyboxVertex& other) const {
+        bool operator==(const SimpleVertex& other) const {
             return pos == other.pos;
         }
 
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkyboxVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SimpleVertex, pos)));
 
             return descriptions;
         }
     };
-    typedef std::vector<SkyboxVertex> SkyboxVertices;
+    typedef std::vector<SimpleVertex> SimpleVertices;
 
     SR_ENUM_CLASS(Type,
         Unknown,
-        Mesh3DVertex,
-        SkyboxVertex
+        StaticMeshVertex,
+        SkinnedMeshVertex,
+        SimpleVertex
     )
 
     static uint32_t GetVertexSize(Type type) {
         switch (type) {
-            case Type::Mesh3DVertex:
-                return sizeof(Mesh3DVertex);
-            case Type::SkyboxVertex:
-                return sizeof(SkyboxVertex);
+            case Type::StaticMeshVertex:
+                return sizeof(StaticMeshVertex);
+            case Type::SimpleVertex:
+                return sizeof(SimpleVertex);
             default:
-                Helper::Debug::Error("Vertices::GetVertexSize() : unknown type!");
+                SRAssert(false);
                 return 0;
         }
     }
@@ -154,37 +148,44 @@ namespace Framework::Graphics::Vertices {
     static VertexInfo GetVertexInfo(Type type) {
         VertexInfo info = {};
         switch (type) {
-            case Type::Mesh3DVertex:
-                info.m_attributes = Mesh3DVertex::GetAttributes();
-                info.m_descriptions = { Mesh3DVertex::GetDescription() };
+            case Type::StaticMeshVertex:
+                info.m_attributes = StaticMeshVertex::GetAttributes();
+                info.m_descriptions = { StaticMeshVertex::GetDescription() };
                 break;
-            case Type::SkyboxVertex:
-                info.m_attributes = SkyboxVertex::GetAttributes();
-                info.m_descriptions = { SkyboxVertex::GetDescription() };
-                break;;
-            default:
-                Helper::Debug::Error("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int)type));
+            case Type::SimpleVertex:
+                info.m_attributes = SimpleVertex::GetAttributes();
+                info.m_descriptions = { SimpleVertex::GetDescription() };
                 break;
+            default: {
+                SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int) type));
+                SRAssert(false);
+                break;
+            }
         }
         return info;
     }
 
-    template<typename T> static std::vector<T> CastVertices(const std::vector<FbxLoader::Vertex>& raw) {
+    template<typename T> static std::vector<T> CastVertices(const std::vector<SR_UTILS_NS::Vertex>& raw) {
         auto vertices = std::vector<T>();
 
-        if constexpr (std::is_same<Vertices::SkyboxVertex, T>::value) {
+        vertices.reserve(raw.size());
+
+        if constexpr (std::is_same<Vertices::SimpleVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::SkyboxVertex{
-                        .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
+                vertices.emplace_back(Vertices::SimpleVertex{
+                        .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                 });
             }
         }
 
-        if constexpr (std::is_same<Vertices::Mesh3DVertex, T>::value) {
+        if constexpr (std::is_same<Vertices::StaticMeshVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::Mesh3DVertex{
-                        .pos = { vertex.pos.x, vertex.pos.y, vertex.pos.z },
-                        .uv  = { vertex.uv.x, vertex.uv.y },
+                vertices.emplace_back(Vertices::StaticMeshVertex{
+                        .pos    = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
+                        .uv     = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
+                        .norm   = *reinterpret_cast<glm::vec3*>((void*)&vertex.normal),
+                        .tang   = *reinterpret_cast<glm::vec3*>((void*)&vertex.tangent),
+                        .bitang = *reinterpret_cast<glm::vec3*>((void*)&vertex.bitangent),
                 });
             }
         }
@@ -199,8 +200,8 @@ namespace std {
         s^= h(v) + 0x9e3779b9 + (s<< 6) + (s>> 2);
     }
 
-    template<> struct hash<Framework::Graphics::Vertices::Mesh3DVertex> {
-        size_t operator()(Framework::Graphics::Vertices::Mesh3DVertex const& vertex) const {
+    template<> struct hash<Framework::Graphics::Vertices::StaticMeshVertex> {
+        size_t operator()(Framework::Graphics::Vertices::StaticMeshVertex const& vertex) const {
             std::size_t res = 0;
             hash_combine<glm::vec3>(res, vertex.pos);
             hash_combine<glm::vec2>(res, vertex.uv);
@@ -210,8 +211,8 @@ namespace std {
         }
     };
 
-    template<> struct hash<Framework::Graphics::Vertices::SkyboxVertex> {
-        size_t operator()(Framework::Graphics::Vertices::SkyboxVertex const& vertex) const {
+    template<> struct hash<Framework::Graphics::Vertices::SimpleVertex> {
+        size_t operator()(Framework::Graphics::Vertices::SimpleVertex const& vertex) const {
             std::size_t res = 0;
             hash_combine<glm::vec3>(res, vertex.pos);
             return res;

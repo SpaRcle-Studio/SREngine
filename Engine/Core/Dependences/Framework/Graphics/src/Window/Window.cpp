@@ -2,767 +2,537 @@
 // Created by Nikita on 18.11.2020.
 //
 
-//#include <easy/profiler.h>
-
-#include "Window/Window.h"
-#include <Debug.h>
-#include <iostream>
-
-#include <ResourceManager/ResourceManager.h>
-#include <Memory/MeshManager.h>
-#include <glm/gtx/string_cast.hpp>
-#include <Utils/StringUtils.h>
+#include <Window/Window.h>
+#include <Math/Vector2.h>
+#include <Render/Render.h>
+#include <Render/Camera.h>
+#include <Environment/Environment.h>
 #include <Input/InputSystem.h>
-#include <Types/Semaphore.h>
+#include <Types/Thread.h>
+#include <Types/Material.h>
+#include <Types/Texture.h>
+#include <Types/Framebuffer.h>
+#include <ResourceManager/ResourceManager.h>
+#include <GUI/Editor/Theme.h>
+#include <GUI/WidgetManager.h>
+#include <GUI/Widget.h>
 
-using namespace Framework::Helper;
+namespace SR_GRAPH_NS {
+    Window::Window(
+            std::string name,
+            std::string icoPath,
+            const SR_MATH_NS::IVector2 &size,
+            Render *render,
+            bool vsync, bool fullScreen, bool resizable,
+            bool headerEnabled, uint8_t smoothSamples
+        ) : m_env(Environment::Get())
+        , m_size(size)
+        , m_winName(std::move(name))
+        , m_icoPath(std::move(icoPath))
+        , m_render(render)
+        , m_fullScreen(fullScreen)
+        , m_vsync(vsync)
+        , m_smoothSamples(smoothSamples)
+        , m_resizable(resizable)
+        , m_headerEnabled(headerEnabled)
+    { }
 
-bool Framework::Graphics::Window::Create() {
-    if (m_isCreate) {
-        Debug::Error("Window::Create() : window already create!");
-        return false;
-    }
 
-    Debug::Graph("Window::Create() : creating window...");
-
-    this->m_time = new Helper::Types::Time();
-    this->m_time->SetFPSLimit(60);
-
-    if (!this->m_render->Create(this)){
-        Debug::Error("Window::Create() : failed create render!");
-        m_hasErrors = true;
-        return false;
-    }
-
-    Framework::Graphics::Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
-        switch (event) {
-            case Environment::WinEvents::Close:
-                Debug::System("Window event: close window...");
-                break;
-            case Environment::WinEvents::Move: {
-                int size[2] = {*(int *) arg1, *(int *) arg2};
-                this->m_windowPos = { (int32_t)size[0], (int32_t)size[1] };
-                this->m_env->SetWindowPosition((int)m_windowPos.x, (int)m_windowPos.y);
-                break;
-            }
-            case Environment::WinEvents::Resize: {
-                std::pair<int, int> size = {*(int *) arg1, *(int *) arg2};
-                if (size.first > 0 && size.second > 0)
-                    for (auto camera : m_cameras.GetElements()) {
-                        if (camera->IsAllowUpdateProjection())
-                        //    if (Environment::Get()->GetPipeLine() == PipeLine::OpenGL || camera->IsDirectOutput()) {
-                                camera->UpdateProjection(size.first, size.second);
-                        //    }
-                        camera->CompleteResize();
-                    }
-
-                //float ratio = m_format.GetRatio();
-                //m_env->SetWindowSize(*(int*)arg1, *(int*)arg2);
-
-                //this->m_camera->UpdateProjection(ratio);
-                //this->m_postProcessing->ReCalcFrameBuffers(*(int *) arg1, *(int *) arg2);
-                break;
-            }
-            case Environment::WinEvents::Scroll:
-                break;
-            case Environment::WinEvents::LeftClick:
-                break;
-            case Environment::WinEvents::RightClick:
-                break;
-            case Environment::WinEvents::Focus:
-                this->m_isWindowFocus = *(bool*)(arg1);
-                Helper::Debug::System(Helper::Format("Window focus state: %s", (*(bool*)(arg1)) ? "True" : "False"));
-                Helper::Input::Reload();
-                break;
+    bool Window::Create() {
+        if (m_isCreate) {
+            SR_ERROR("Window::Create() : window are already create!");
+            return false;
         }
-    });
 
-    this->m_isCreate = true;
+        SR_INFO("Window::Create() : creating window...");
 
-    return true;
-}
+        if (!m_render->Create(this)) {
+            SR_ERROR("Window::Create() : failed to create render!");
+            m_hasErrors = true;
+            return false;
+        }
 
-bool Framework::Graphics::Window::Init() {
-    if (!m_isCreate){
-        Debug::Error("Window::Init() : window is not created!");
-        return false;
+        Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
+            switch (event) {
+                case Environment::WinEvents::Close:
+                    SR_SYSTEM_LOG("Window event: close window...");
+                    break;
+                case Environment::WinEvents::Move: {
+                    int size[2] = {*(int *) arg1, *(int *) arg2};
+                    m_windowPos = { (int32_t)size[0], (int32_t)size[1] };
+                    m_env->SetWindowPosition((int)m_windowPos.x, (int)m_windowPos.y);
+                    break;
+                }
+                case Environment::WinEvents::Resize: {
+                    auto&& [width, height] = std::pair<int, int> {*(int *) arg1, *(int *) arg2};
+                    if (width > 0 && height > 0) {
+                        CameraManager::Instance().OnWindowResized(this, width, height);
+                    }
+                    break;
+                }
+                case Environment::WinEvents::Scroll:
+                    break;
+                case Environment::WinEvents::LeftClick:
+                    break;
+                case Environment::WinEvents::RightClick:
+                    break;
+                case Environment::WinEvents::Focus:
+                    m_isWindowFocus = *(bool*)(arg1);
+                    SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", (*(bool*)(arg1)) ? "True" : "False"));
+                    SR_UTILS_NS::Input::Reload();
+                    break;
+            }
+        });
+
+        m_isCreate = true;
+
+        return true;
     }
 
-    if (m_isInit){
-        Debug::Error("Window::Init() : window already initialize!");
-        return false;
+    bool Window::Init() {
+        if (!m_isCreate) {
+            SR_ERROR("Window::Init() : window is not created!");
+            return false;
+        }
+
+        if (m_isInit) {
+            SR_ERROR("Window::Init() : window are already initialize!");
+            return false;
+        }
+
+        SR_GRAPH_LOG("Window::Init() : initializing window...");
+
+        {
+            m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Window::Thread, this);
+            m_thread->SetPriority(Helper::ThreadPriority::SR_THREAD_PRIORITY_HIGHEST);
+
+            while (!m_isEnvInit && !m_hasErrors && !m_isClose) { } // Wait environment initialize
+        }
+
+        ret: if (!m_render->IsInit() && !m_hasErrors) goto ret;
+        if (m_hasErrors)
+            return false;
+
+        if (!SR_GTYPES_NS::Material::InitDefault(GetRender())) {
+            SR_ERROR("Window::Init() : failed to initialize default material!");
+            return false;
+        }
+
+        m_isInit = true;
+
+        return true;
     }
 
-    Debug::Graph("Window::Init() : initializing window...");
+    bool Framework::Graphics::Window::Run() {
+        if (!m_isInit) {
+            SR_ERROR("Window::Run() : window is not initialized!");
+            return false;
+        }
 
-    {
-        this->m_thread = std::thread(&Window::Thread, this);
+        if (m_isRun) {
+            SR_ERROR("Window::Run() : window are already is running!");
+            return false;
+        }
 
-        while (!m_isEnvInit && !m_hasErrors && !m_isClose) { } // Wait environment initialize
+        SR_GRAPH_LOG("Window::Run() : running window...");
+
+        m_isRun = true;
+
+    ret: if (!m_render->IsRun() && !m_hasErrors)
+        goto ret;
+
+        if (m_hasErrors)
+            return false;
+
+        SR_INFO("Window::Run() : window has been successfully running!");
+
+        return true;
     }
 
-    ret: if (!m_render->IsInit() && !m_hasErrors) goto ret;
-    if (m_hasErrors)
-        return false;
+    bool Framework::Graphics::Window::Close() {
+        if (!m_isRun) {
+            SR_ERROR("Window::Close() : window is not running!");
+            return false;
+        }
 
-    if (!Graphics::Material::InitDefault(GetRender())) {
-        SR_ERROR("Window::Init() : failed to initialize default material!");
-        return false;
+        if (m_isClose) {
+            SR_ERROR("Window::Close() : window already is closed!");
+            return false;
+        }
+
+        SR_GRAPH_LOG("Window::Close() : close window...");
+
+        m_isRun   = false;
+        m_isClose = true;
+
+        if (m_thread) {
+            m_thread->TryJoin();
+            m_thread->Free();
+            m_thread = nullptr;
+        }
+
+        return true;
     }
 
-    m_isInit = true;
+    void Framework::Graphics::Window::Thread() {
+        SR_INFO("Window::Thread() : running window thread...");
 
-    return true;
-}
+        {
+            waitInit:
+            if (m_isInit && !m_isClose && !m_isRun && !m_hasErrors) goto waitInit;
 
-bool Framework::Graphics::Window::Run() {
-    if (!m_isInit) {
-        Debug::Error("Window::Run() : window is not initialized!");
-        return false;
-    }
+            if (!m_hasErrors && !m_isClose)
+                if (!InitEnvironment()) {
+                    SR_ERROR("Window::Thread() : failed to initialize render environment!");
+                    m_hasErrors = true;
+                    return;
+                }
 
-    if (m_isRun) {
-        Debug::Error("Window::Run() : window already is running!");
-        return false;
-    }
-
-    Debug::Graph("Window::Run() : running window...");
-
-    this->m_isRun = true;
-
-ret: if (!m_render->IsRun() && !m_hasErrors) goto ret;
-    if (m_hasErrors) return false;
-
-    Debug::Info("Window::Run() : window has been successfully running!");
-
-    return true;
-}
-
-bool Framework::Graphics::Window::Close() {
-    if (!m_isRun) {
-        Debug::Error("Window::Close() : window is not running!");
-        return false;
-    }
-
-    if (m_isClose) {
-        Debug::Error("Window::Close() : window already is closed!");
-        return false;
-    }
-
-    Debug::Graph("Window::Close() : close window...");
-
-    m_isRun   = false;
-    m_isClose = true;
-
-    if (m_thread.joinable()) m_thread.join();
-
-    if (m_time) {
-        delete m_time;
-        m_time = nullptr;
-    }
-
-    return true;
-}
-
-void Framework::Graphics::Window::Thread() {
-    Debug::Info("Window::Thread() : running window thread...");
-
-    {
-        waitInit:
-        if (m_isInit && !m_isClose && !m_isRun && !m_hasErrors) goto waitInit;
-
-        if (!m_hasErrors && !m_isClose)
-            if (!this->InitEnvironment()) {
-                Debug::Error("Window::Thread() : failed to initialize render environment!");
+            if (!m_render->Init()) {
+                SR_ERROR("Window::Thread() : failed to initialize render!");
                 m_hasErrors = true;
                 return;
             }
 
-        if (!m_render->Init()) {
-            Debug::Error("Window::Thread() : failed to initialize render!");
-            this->m_hasErrors = true;
-            return;
+            SR_THIS_THREAD->GetContext()->SetPointer<Render>(m_render);
 
+            waitRun:
+            if (!m_isRun && !m_isClose && !m_hasErrors)
+                goto waitRun;
+
+            if (!m_render->Run()) {
+                SR_ERROR("Window::Thread() : failed to ran render!");
+                m_hasErrors = true;
+                return;
+            }
         }
 
-        waitRun:
-        if (!m_isRun && !m_isClose && !m_hasErrors)
-            goto waitRun;
+        SR_LOG("Window::Thread() : screen size is " + m_env->GetScreenSize().ToString());
 
-        if (!m_render->Run()) {
-            Debug::Error("Window::Thread() : failed to ran render!");
-            m_hasErrors = true;
-            return;
-        }
-    }
+        double deltaTime = 0;
+        uint32_t frames = 0;
 
-    SR_LOG("Window::Thread() : screen size is " + m_env->GetScreenSize().ToString());
+        /// for optimization needed pipeline
+        const PipeLine pipeLine = m_env->GetPipeLine();
 
-    double deltaTime = 0;
-    uint32_t frames = 0;
+        m_env->SetBuildState(false);
 
-    // for optimization needed pipeline
-    const PipeLine pipeLine = m_env->GetPipeLine();
-
-    this->m_env->SetBuildState(false);
-
-    if (pipeLine == PipeLine::Vulkan) {
         while (IsAlive()) {
-            clock_t beginFrame = clock();
+            auto t_start = std::chrono::high_resolution_clock::now();
 
-            {
-                this->m_env->PollEvents();
-                this->PollEvents();
-                this->m_render->PollEvents();
+            m_env->PollEvents();
+            PollEvents();
+            m_render->PollEvents();
 
-                if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
-                    if (this->m_env->BeginDrawGUI()) {
-                        if (m_canvas)
-                            this->m_canvas->Draw();
-
-                        for (auto&& widgetManager : m_widgetManagers.GetElements())
-                            widgetManager->Draw();
-
-                        this->m_env->EndDrawGUI();
-                    }
-                }
-
-                BeginSync();
-
-                for (auto&& camera : m_cameras.GetElements())
-                    camera->PoolEvents();
-
-                if (m_env->IsNeedReBuild()) {
-                    if (!m_cameras.Empty()) {
-                        m_env->ClearFramebuffersQueue();
-
-                        m_render->SetCurrentCamera(m_cameras.Front());
-
-                        ///Helper::Debug::Info("Window::Thread() : re-build render...");
-
-                        if (m_cameras.Front()->IsReady()) {
-                            if (m_cameras.Front()->GetPostProcessing()->BeginGeometry()) {
-                                m_env->BeginRender();
-                                {
-                                    this->m_env->SetViewport();
-                                    this->m_env->SetScissor();
-
-                                    this->m_render->DrawGeometry();
-                                    this->m_render->DrawSkybox();
-                                }
-                                m_env->EndRender();
-
-                                m_cameras.Front()->GetPostProcessing()->EndGeometry();
-                            }
-                        }
-
-                        {
-                            this->m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
-
-                            if (!m_cameras.Front()->IsDirectOutput()) {
-                                m_env->BindFrameBuffer(m_cameras.Front()->GetPostProcessing()->GetFinalFBO());
-                                m_env->ClearBuffers();
-
-                                this->m_cameras.Front()->GetPostProcessing()->Complete();
-
-                                m_env->BeginRender();
-                                {
-                                    this->m_env->SetViewport();
-                                    this->m_env->SetScissor();
-
-                                    //! Должна вызываться в том же кадровом буфере, что и Complete
-                                    this->m_cameras.Front()->GetPostProcessing()->Draw();
-                                }
-                                m_env->EndRender();
-                            } else
-                                this->m_cameras.Front()->GetPostProcessing()->Complete();
-
-                            for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
-                                m_env->SetBuildIteration(i);
-
-                                m_env->BindFrameBuffer(0);
-
-                                m_env->BeginRender();
-                                {
-                                    this->m_env->SetViewport();
-                                    this->m_env->SetScissor();
-
-                                    if (m_cameras.Front()->IsDirectOutput())
-                                        this->m_cameras.Front()->GetPostProcessing()->Draw();
-                                }
-                                m_env->EndRender();
-                            }
-                        }
-
-                        m_env->SetBuildState(true);
-                    }
-                    else
-                        DrawNoCamera();
-                    EndSync();
-                    continue;
-                }
-                else
-                    this->m_render->UpdateUBOs();
-
-                this->m_env->DrawFrame();
-
-                EndSync();
+            if (pipeLine == PipeLine::Vulkan) {
+                DrawVulkan();
             }
+            else
+                DrawOpenGL();
 
-            deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
-            frames++;
+            auto t_end = std::chrono::high_resolution_clock::now();
 
-            if (deltaTime > 1.0) { //every second
-                std::cout << "FPS: " << frames - 1 << std::endl;
-                frames = 0; deltaTime = 0; }
+            const double_t milliseconds = std::chrono::duration<double_t, std::milli>(t_end - t_start).count();
+            deltaTime += milliseconds / CLOCKS_PER_SEC;
+            ++frames;
+
+            if (deltaTime > 1.0) { /// every second
+                SR_LOG(SR_UTILS_NS::Format("FPS: %i; ms: %f", frames - 1, milliseconds));
+                frames = 0; deltaTime = 0;
+            }
         }
+
+        SR_GRAPH("Window::Thread() : exit from main cycle.");
+
+        if (!m_widgetManagers.Empty()) {
+            m_widgetManagers.Clear();
+        }
+
+        if (m_env->IsGUISupport()) {
+            m_env->StopGUI();
+            SR_GRAPH("Window::Thread() : complete stopping gui!");
+        }
+
+        SR_GTYPES_NS::Texture::FreeNoneTexture();
+
+        if (!SyncFreeResources()) {
+            SR_ERROR("Window::Thread() : failed to free resources!");
+        }
+
+        if (!m_render->Close()) {
+            SR_ERROR("Window::Thread() : failed to close render!");
+        }
+
+        m_env->CloseWindow();
+
+        Memory::MeshManager::Destroy();
+
+        SR_INFO("Window::Thread() : stopping window thread...");
+
+        m_isWindowClose = true;
     }
-    else {
-        while (IsAlive()) {
-            clock_t beginFrame = clock();
 
-            {
-                this->m_env->PollEvents();
-                this->m_render->PollEvents();
-                this->PollEvents();
+    bool Framework::Graphics::Window::InitEnvironment() {
+        SR_GRAPH("Window::InitEnvironment() : initializing render environment...");
 
-                for (auto&& camera : m_cameras.GetElements())
-                    camera->PoolEvents();
+        SR_GRAPH("Window::InitEnvironment() : pre-initializing...");
+        if (!m_env->PreInit(
+                m_smoothSamples,
+                "SpaRcle Engine", /// App name
+                "SREngine",       /// Engine name
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe")))
+        {
+            SR_ERROR("Window::InitEnvironment() : failed to pre-initializing environment!");
+            return false;
+        }
 
-                this->m_env->ClearBuffers();
+        SR_GRAPH("Window::InitEnvironment() : creating window...");
+        if (!m_env->MakeWindow(m_winName, m_size, m_fullScreen, m_resizable, m_headerEnabled)) {
+            SR_ERROR("Window::InitEnvironment() : failed to creating window!");
+            return false;
+        }
 
-                {
-                    if (m_cameras.Count() == 1) {
-                        if (m_cameras.Front()->IsReady()) {
-                            DrawToCamera(m_cameras.Front());
-                        }
-                    }
-                    else
-                        for (auto&& camera : m_cameras.GetElements()) {
-                            if (!camera->IsReady()) {
-                                continue;
-                            }
-                            DrawToCamera(camera);
-                        }
+        m_env->SetWindowIcon(SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().Concat(m_icoPath).CStr());
 
-                    if (IsGUIEnabled() && m_env->IsGUISupport()) {
-                        if (this->m_env->BeginDrawGUI()) {
-                            if (m_canvas)
-                                this->m_canvas->Draw();
+        SR_GRAPH_LOG("Window::InitEnvironment() : set thread context as current...");
+        if (!m_env->SetContextCurrent()) {
+            SR_ERROR("Window::InitEnvironment() : failed to set context!");
+            return false;
+        }
 
-                            this->m_env->EndDrawGUI();
-                        }
-                    }
+        SR_GRAPH("Window::InitEnvironment() : initializing the environment...");
+        if (!m_env->Init(m_vsync)) {
+            SR_ERROR("Window::InitEnvironment() : failed to initializing environment!");
+            return false;
+        }
+
+        SR_GRAPH("Window::InitEnvironment() : post-initializing the environment...");
+
+        if (!m_env->PostInit()) {
+            SR_ERROR("Window::InitEnvironment() : failed to post-initializing environment!");
+            return false;
+        }
+
+        {
+            SR_LOG("Window::InitEnvironment() : vendor is "   + m_env->GetVendor());
+            SR_LOG("Window::InitEnvironment() : renderer is " + m_env->GetRenderer());
+            SR_LOG("Window::InitEnvironment() : version is "  + m_env->GetVersion());
+        }
+
+        if (m_env->IsGUISupport()) {
+            if (m_env->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
+                ImGuiStyle & style = ImGui::GetStyle();
+
+                if (auto&& theme = GUI::Theme::Load("Themes/Dark.xml")) {
+                    theme->Apply(style);
+                    delete theme;
                 }
 
-                this->m_env->SwapBuffers();
+                const static auto iniPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Configs/ImGuiEditor.config");
+                ImGui::GetIO().IniFilename = iniPath.CStr();
+
+                if (!m_env->InitGUI()) {
+                    SR_ERROR("Window::InitEnvironment() : failed to initializing GUI!");
+                    return false;
+                }
             }
-
-            deltaTime += double(clock() - beginFrame) / (double) CLOCKS_PER_SEC;
-            frames++;
-
-            if (deltaTime > 1.0) { //every second
-                std::cout << "FPS: " << frames - 1 << std::endl;
-                frames = 0; deltaTime = 0; }
+            else {
+                SR_ERROR("Window::InitEnvironment() : failed to pre-initializing GUI!");
+            }
         }
+
+        m_isEnvInit = true;
+
+        return true;
     }
 
-    SR_GRAPH("Window::Thread() : exit from main cycle.");
-
-    if (!m_widgetManagers.Empty()) {
-        m_widgetManagers.Clear();
-    }
-
-    if (m_env->IsGUISupport()) {
-        m_env->StopGUI();
-        SR_GRAPH("Window::Thread() : complete stopping gui!");
-    }
-
-    if (!SyncFreeResources()) {
-        SR_ERROR("Window::Thread() : failed to free resources!");
-    }
-
-    if (!this->m_render->Close()) {
-        Debug::Error("Window::Thread() : failed to close render!");
-    }
-
-    this->m_env->CloseWindow();
-
-    Memory::MeshManager::Destroy();
-
-    Debug::Info("Window::Thread() : stopping window thread...");
-
-    this->m_isWindowClose = true;
-}
-
-bool Framework::Graphics::Window::InitEnvironment() {
-    SR_GRAPH("Window::InitEnvironment() : initializing render environment...");
-
-    SR_GRAPH("Window::InitEnvironment() : pre-initializing...");
-    if (!m_env->PreInit(
-            m_smoothSamples,
-            "SpaRcle Engine", /// App name
-            "SREngine",       /// Engine name
-            ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe")))
-    {
-        SR_ERROR("Window::InitEnvironment() : failed to pre-initializing environment!");
-        return false;
-    }
-
-    SR_GRAPH("Window::InitEnvironment() : creating window...");
-    if (!m_env->MakeWindow(m_win_name, m_fullScreen, m_resizable, m_headerEnabled)) {
-        SR_ERROR("Window::InitEnvironment() : failed to creating window!");
-        return false;
-    }
-
-    m_env->SetWindowIcon(Helper::ResourceManager::Instance().GetTexturesPath().Concat(m_icoPath).CStr());
-
-    Debug::Graph("Window::InitEnvironment() : set thread context as current...");
-    if (!m_env->SetContextCurrent()) {
-        SR_ERROR("Window::InitEnvironment() : failed to set context!");
-        return false;
-    }
-
-    SR_GRAPH("Window::InitEnvironment() : initializing the environment...");
-    if (!m_env->Init(m_vsync)) {
-        SR_ERROR("Window::InitEnvironment() : failed to initializing environment!");
-        return false;
-    }
-
-    SR_GRAPH("Window::InitEnvironment() : post-initializing the environment...");
-
-    if (!m_env->PostInit()) {
-        Debug::Error("Window::InitEnvironment() : failed to post-initializing environment!");
-        return false;
-    }
-
-    {
-        SR_LOG("Window::InitEnvironment() : vendor is "   + m_env->GetVendor());
-        SR_LOG("Window::InitEnvironment() : renderer is " + m_env->GetRenderer());
-        SR_LOG("Window::InitEnvironment() : version is "  + m_env->GetVersion());
-    }
-
-    if (m_env->IsGUISupport()) {
-        if (m_env->PreInitGUI(Helper::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
-            GUI::ICanvas::InitStyle();
-            if (!m_env->InitGUI()) {
-                SR_ERROR("Window::InitEnvironment() : failed to initializing GUI!");
-                return false;
-            }
+    void Window::CentralizeCursor() noexcept {
+        if (m_isRun) {
+            m_env->SetCursorPosition({ GetWindowSize().x / 2,  GetWindowSize().y / 2});
         }
         else {
-            SR_ERROR("Window::InitEnvironment() : failed to pre-initializing GUI!");
+            SR_ERROR("Window::CentralizeCursor() : the window isn't run!");
         }
     }
 
-    m_isEnvInit = true;
-
-    return true;
-}
-
-void Framework::Graphics::Window::DrawToCamera(Framework::Graphics::Camera* camera) {
-    m_render->SetCurrentCamera(camera);
-
-    camera->GetPostProcessing()->BeginGeometry();
-    {
-        m_render->DrawGeometry();
-        m_render->DrawTransparentGeometry();
-    }
-    camera->GetPostProcessing()->EndGeometry();
-
-    camera->GetPostProcessing()->BeginSkybox();
-    {
-        m_render->DrawSkybox();
-        m_render->DrawGrid();
-    }
-    camera->GetPostProcessing()->EndSkybox();
-
-    camera->GetPostProcessing()->Complete();
-
-    /*
-    if (m_requireGetAimed) {
-        if (m_aimedCameraTarget == camera && m_aimedWindowTarget) {
-            m_render->DrawSingleColors();
-
-            glm::vec2 pos = GetGlobalWindowMousePos(camera, m_aimedWindowTarget);
-            glm::vec3 color = m_env->GetPixelColor(pos);
-
-            m_env->ClearBuffers();
-
-            auto id = m_render->GetColorBuffer()->GetSelectColorObject(color);
-            if (id != std::numeric_limits<size_t>::max())
-                this->m_aimedMesh = this->m_render->GetMesh(id);
-            m_requireGetAimed = false;
-        }
-    }*/
-}
-
-void Framework::Graphics::Window::CentralizeCursor() noexcept {
-    if (m_isRun) {
-        m_env->SetCursorPosition({ m_env->GetWindowFormat()->Width() / 2,  m_env->GetWindowFormat()->Height() / 2});
-    }else{
-        Debug::Error("Window::CentralizeCursor() : window is not run!");
-    }
-}
-
-void Framework::Graphics::Window::PollEvents() {
-    // change gui enabled
-    if (m_GUIEnabled.first != m_GUIEnabled.second) {
-        m_env->SetBuildState(false);
-        this->m_env->SetGUIEnabled(m_GUIEnabled.second);
-        m_GUIEnabled.first.store(m_GUIEnabled.second);
-    }
-
-    if (m_widgetManagers.NeedFlush())
-        m_widgetManagers.Flush();
-
-    if (m_cameras.NeedFlush()) {
-        for (auto&& camera : m_cameras.GetAddedElements()) {
-            camera->Create(this);
-            if (!camera->CompleteResize()) {
-                SR_ERROR("Window::PollEvents() : failed to complete resize camera!");
-            }
+    void Window::PollEvents() {
+        /// change gui enabled
+        if (m_GUIEnabled.first != m_GUIEnabled.second) {
+            m_env->SetBuildState(false);
+            this->m_env->SetGUIEnabled(m_GUIEnabled.second);
+            m_GUIEnabled.first.store(m_GUIEnabled.second);
         }
 
-        for (auto&& camera : m_cameras.GetDeletedElements()) {
-            if (Helper::Debug::GetLevel() > Helper::Debug::Level::Low) {
-                SR_LOG("Window::PoolEvents() : remove camera...");
-            }
+        if (m_widgetManagers.NeedFlush())
+            m_widgetManagers.Flush();
 
-            camera->Free();
+        if (m_isNeedResize) {
+            SR_LOCK_GUARD
 
-            SR_LOG("Window::PoolEvents() : the camera has been successfully released!");
+            m_env->SetWindowSize((uint32_t)m_size.x, (uint32_t)m_size.y);
+            m_isNeedResize = false;
+            m_size = { 0, 0 };
         }
 
-        m_cameras.Flush();
+        if (m_isNeedMove) {
+            SR_LOCK_GUARD
 
-        m_render->SetCurrentCamera(nullptr);
-        m_env->SetBuildState(false);
+            m_env->SetWindowPosition((int)m_newWindowPos.x, (int)m_newWindowPos.y);
+
+            this->m_isNeedMove = false;
+        }
     }
 
-    if (m_isNeedResize) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+    bool Window::Free() {
+        if (m_isClose) {
+            SR_INFO("Window::Free() : free window pointer...");
 
-        m_env->SetWindowSize((uint32_t)m_newWindowSize.x, (uint32_t)m_newWindowSize.y);
-        this->m_isNeedResize = false;
-        m_newWindowSize = { 0, 0 };
+            delete this;
+            return true;
+        }
+        else
+            return false;
     }
 
-    if (m_isNeedMove) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+    void Window::Resize(uint32_t w, uint32_t h) {
+        SR_LOCK_GUARD
 
-        m_env->SetWindowPosition((int)m_newWindowPos.x, (int)m_newWindowPos.y);
+        SR_LOG("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
 
-        this->m_isNeedMove = false;
-    }
-}
-
-bool Framework::Graphics::Window::Free() {
-    if (m_isClose) {
-        SR_INFO("Window::Free() : free window pointer...");
-
-        delete this;
-        return true;
-    }
-    else
-        return false;
-}
-
-void Framework::Graphics::Window::Resize(uint32_t w, uint32_t h) {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    SR_LOG("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
-
-    m_newWindowSize = { (int32_t)w, (int32_t)h };
-    m_isNeedResize = true;
-}
-
-void Framework::Graphics::Window::CentralizeWindow() {
-    SR_INFO("Window::CentralizeWindow() : wait centralize window...");
-
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    if (!m_env->GetBasicWindow()) {
-        SR_WARN("Window::CentralizeWindow() : basic window is nullptr!");
-        return;
+        m_size = { (int32_t)w, (int32_t)h };
+        m_isNeedResize = true;
     }
 
-    auto scr_size = m_env->GetScreenSize();
+    void Window::CentralizeWindow() {
+        SR_INFO("Window::CentralizeWindow() : wait centralize window...");
 
-    auto w = m_isNeedResize ? m_newWindowSize.x : m_env->GetBasicWindow()->GetWidth();
-    auto h = m_isNeedResize ? m_newWindowSize.y : m_env->GetBasicWindow()->GetHeight();
+        SR_LOCK_GUARD
 
-    w = (int) (scr_size.x - (float)w) / 2;
-    h = (int) (scr_size.y - (float)h) / 2;
+        if (!m_env->GetBasicWindow()) {
+            SR_WARN("Window::CentralizeWindow() : basic window is nullptr!");
+            return;
+        }
 
-    m_newWindowPos = { (int32_t)w, (int32_t)h };
-    m_isNeedMove = true;
-}
+        auto scr_size = m_env->GetScreenSize();
 
-glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphics::Camera *camera, ImGuiWindow *aimedWindowTarget) {
-    glm::vec2 win_pos = { aimedWindowTarget->Pos.x, aimedWindowTarget->Pos.y };
-    glm::vec2 win_size = { aimedWindowTarget->Size.x, aimedWindowTarget->Size.y };
-    glm::vec2 window_size = this->GetWindowSize().ToGLM();
-    glm::vec2 img_size = camera->GetSize().ToGLM();
+        auto w = m_isNeedResize ? m_size.x : m_env->GetBasicWindow()->GetWidth();
+        auto h = m_isNeedResize ? m_size.y : m_env->GetBasicWindow()->GetHeight();
 
-    glm::vec2 pos = m_env->GetMousePos();
+        w = (int) (scr_size.x - (float)w) / 2;
+        h = (int) (scr_size.y - (float)h) / 2;
 
-    const float dx = win_size.x / img_size.x;
-    const float dy = win_size.y / img_size.y;
-
-    if (dy > dx)
-        img_size *= dx;
-    else
-        img_size *= dy;
-
-    // Вычисляем положение мыши в окне относительно изображения н окне интерфейса
-
-    pos -= win_pos;
-    pos *= (window_size / win_size);
-
-    pos -= ((win_size - img_size) / 2.f) * window_size / win_size;
-    pos *= win_size / img_size;
-
-    pos.y = window_size.y - pos.y;
-
-    return pos;
-}
-
-bool Framework::Graphics::Window::RequireAimedMesh(Framework::Graphics::Camera *camera, ImGuiWindow *window) noexcept  {
-    if (this->m_requireGetAimed)
-        return false;
-
-    this->m_requireGetAimed = true;
-
-    this->m_aimedCameraTarget = camera;
-    this->m_aimedWindowTarget = window;
-    this->m_aimedMesh = nullptr;
-
-    return true;
-}
-
-Framework::Graphics::Types::Mesh *Framework::Graphics::Window::PopAimedMesh() noexcept  {
-    if (m_aimedMesh) {
-        Types::Mesh* aim = m_aimedMesh;
-        m_aimedMesh = nullptr;
-        return aim;
-    }
-    else
-        return nullptr;
-}
-
-void Framework::Graphics::Window::DestroyCamera(Framework::Graphics::Camera *camera) {
-    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None) {
-        SR_LOG("Window::RemoveCamera() : register camera to remove...");
+        m_newWindowPos = { (int32_t)w, (int32_t)h };
+        m_isNeedMove = true;
     }
 
-    if (!camera) {
-        SR_ERROR("Window::RemoveCamera() : camera is nullptr! The application will now crash...");
-        return;
+    void Window::BeginSync() {
+        m_mutex.lock();
     }
 
-    m_cameras.Remove(camera);
-}
-
-void Framework::Graphics::Window::AddCamera(Framework::Graphics::Camera *camera)  {
-    if (Helper::Debug::GetLevel() > Helper::Debug::Level::None) {
-        SR_LOG("Window::AddCamera() : register new camera...");
+    void Window::EndSync() {
+        m_mutex.unlock();
     }
 
-    m_cameras.Add(camera);
-}
-
-void Framework::Graphics::Window::BeginSync() {
-    m_drawMutex.lock();
-}
-
-void Framework::Graphics::Window::EndSync() {
-    m_drawMutex.unlock();
-}
-
-bool Framework::Graphics::Window::TrySync() {
-    if (!IsAlive())
-        return false;
-
-    try {
-        BeginSync();
-        return true;
-    }
-    catch (const std::exception& exception) {
-
+    bool Window::IsAlive() const {
+        return m_isRun && !m_hasErrors && !m_isClose && m_env->IsWindowOpen() && !m_env->HasErrors();
     }
 
-    return false;
-}
+    bool Window::SyncFreeResources() {
+        SR_SYSTEM_LOG("Window::SyncFreeResources() : synchronizing resources...");
 
-bool Framework::Graphics::Window::IsAlive() const {
-    return m_isRun && !m_hasErrors && !m_isClose && this->m_env->IsWindowOpen() && !m_env->HasErrors();
-}
+        std::atomic<bool> syncComplete(false);
 
-bool Framework::Graphics::Window::SyncFreeResources() {
-    Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources...");
+        m_render->SetSkybox(nullptr);
 
-    std::atomic<bool> syncComplete(false);
+        /** Ждем, пока все графические ресурсы не освободятся */
+        auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
+            uint32_t syncStep = 0;
+            const uint32_t maxErrStep = 100;
 
-    /** Ждем, пока все графические ресурсы не освободятся */
-    auto thread = Helper::Types::Thread([&syncComplete, this]() {
-        uint32_t syncStep = 0;
-        const uint32_t maxErrStep = 100;
-        while(!m_render->IsClean()) {
-            Helper::Debug::System("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
+            SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
-            if (auto material = Material::GetDefault(); material && material->GetCountUses() == 1)
-                Material::FreeDefault();
+            if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
+                SR_GTYPES_NS::Material::FreeDefault();
 
-            ResourceManager::Instance().Synchronize(true);
             m_render->Synchronize();
 
-            if (maxErrStep == syncStep) {
-                Helper::Debug::Error("Window::SyncFreeResources() : [FATAL] resources can not be released!");
-                Helper::ResourceManager::Instance().PrintMemoryDump();
-                Helper::Debug::Terminate();
-                break;
+            while(!m_render->IsClean()) {
+                SR_SYSTEM_LOG("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
+
+                if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
+                    SR_GTYPES_NS::Material::FreeDefault();
+
+                SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
+                m_render->Synchronize();
+
+                if (maxErrStep == syncStep) {
+                    SR_ERROR("Window::SyncFreeResources() : [FATAL] resources can not be released!");
+                    Helper::ResourceManager::Instance().PrintMemoryDump();
+                    Helper::Debug::Terminate();
+                    break;
+                }
+
+                Helper::Types::Thread::Sleep(50);
             }
 
-            Helper::Types::Thread::Sleep(50);
+            syncComplete = true;
+        });
+
+        /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
+         * то они могут ожидать пока графический поток уберет метку использования с них */
+        while (!syncComplete) {
+            PollEvents();
+            m_render->PollEvents();
         }
 
-        if (Material::GetDefault())
-            Helper::Debug::Warn("Window::SyncFreeResources() : default material was not be freed!");
+        if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
+            SRAssert2(false, "Window::SyncFreeResources() : default material was not be freed!\n\tUses count: " +
+                             std::to_string(material->GetCountUses()));
+        }
 
-        syncComplete = true;
-    });
+        thread->TryJoin();
+        thread->Free();
 
-    /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
-     * то они могут ожидать пока графический поток уберет метку использования с них */
-    while (!syncComplete) {
-        PollEvents();
-        m_render->PollEvents();
+        SR_SYSTEM_LOG("Window::SyncFreeResources() : complete synchronizing!");
+
+        return true;
     }
 
-    thread.TryJoin();
+    void Window::Synchronize() {
+    ret:
+        if (!m_isNeedMove && !m_isNeedResize && !m_env->IsNeedReBuild() && m_GUIEnabled.first == m_GUIEnabled.second)
+            return;
 
-    Helper::Debug::System("Window::SyncFreeResources() : complete synchronizing!");
+        Helper::Types::Thread::Sleep(10);
+        goto ret;
+    }
 
-    return true;
-}
+    void Window::DrawToCamera(Camera* camera, uint32_t fbo) {
+        m_render->SetCurrentCamera(camera);
 
-void Framework::Graphics::Window::Synchronize() {
-ret:
-    if (!m_isNeedMove && !m_isNeedResize && !m_env->IsNeedReBuild() && m_GUIEnabled.first == m_GUIEnabled.second)
-        return;
+        for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
+            m_env->SetBuildIteration(i);
 
-    Helper::Types::Thread::Sleep(10);
-    goto ret;
-}
+            m_env->BindFrameBuffer(fbo);
 
-void Framework::Graphics::Window::DrawNoCamera() {
-    m_env->ClearFramebuffersQueue();
+            m_env->BeginRender();
+            {
+                m_env->SetViewport();
+                m_env->SetScissor();
 
-    {
+                m_render->DrawGeometry();
+                m_render->DrawSkybox();
+            }
+            m_env->EndRender();
+        }
+    }
+
+    void Window::DrawSingleCamera(Camera *camera) {
+        m_render->SetCurrentCamera(camera);
+
+        m_env->ClearFramebuffersQueue();
+
         m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
-
-        m_render->CalculateAll();
 
         for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
             m_env->SetBuildIteration(i);
@@ -773,14 +543,141 @@ void Framework::Graphics::Window::DrawNoCamera() {
             {
                 m_env->SetViewport();
                 m_env->SetScissor();
+
+                m_render->DrawGeometry();
+                m_render->DrawSkybox();
             }
             m_env->EndRender();
         }
     }
 
-    m_env->SetBuildState(true);
-}
+    void Window::DrawNoCamera() {
+        m_env->ClearFramebuffersQueue();
 
-void Framework::Graphics::Window::RegisterWidgetManager(GUI::WidgetManager* widgetManager) {
-    m_widgetManagers.Add(widgetManager);
+        {
+            m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+
+            //m_render->CalculateAll();
+
+            for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
+                m_env->SetBuildIteration(i);
+
+                m_env->BindFrameBuffer(0);
+
+                m_env->BeginRender();
+                {
+                    m_env->SetViewport();
+                    m_env->SetScissor();
+                }
+                m_env->EndRender();
+            }
+        }
+
+        m_env->DrawFrame();
+    }
+
+    void Window::RegisterWidgetManager(GUI::WidgetManager* widgetManager) {
+        m_widgetManagers.Add(widgetManager);
+    }
+
+    void Window::SetGUIEnabled(bool value) {
+        if (value) {
+            SR_LOG("Window::SetGUIEnabled() : enable gui...");
+        }
+        else
+            SR_LOG("Window::SetGUIEnabled() : disable gui...");
+
+        m_GUIEnabled.second = value;
+    }
+
+    void Window::SetFullScreen(bool value) {
+        m_env->SetFullScreen(value);
+    }
+
+    void Window::DrawVulkan() {
+        const bool canUseGUI = IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed();
+
+        if (canUseGUI) {
+            if (m_env->BeginDrawGUI()) {
+                for (auto &&widgetManager : m_widgetManagers.GetElements())
+                    widgetManager->Draw();
+
+                m_env->EndDrawGUI();
+            }
+        }
+
+        CameraManager::LockSingleton();
+
+        auto&& cameraManager = CameraManager::Instance();
+        auto&& firstCamera = cameraManager.GetFirstCamera();
+        auto&& uboManager = Memory::UBOManager::Instance();
+
+        if (!firstCamera) {
+            if (canUseGUI) {
+                DrawNoCamera();
+            }
+
+            m_env->SetBuildState(true);
+            CameraManager::UnlockSingleton();
+            return;
+        }
+
+        const bool multipleRender = Features::Instance().Enabled("MultiRenderTargets");
+        auto&& cameras = cameraManager.GetCameras();
+
+        if (m_env->IsNeedReBuild()) {
+            SR_LOG("Window::DrawVulkan() : re-build scene...");
+
+            if (!multipleRender || cameras.size() == 1) {
+                uboManager.SetCurrentCamera(firstCamera);
+                DrawSingleCamera(firstCamera);
+            }
+            else {
+                m_env->ClearFramebuffersQueue();
+
+                m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.f, 1);
+
+                for (auto &&pCamera : cameras) {
+                    uboManager.SetCurrentCamera(pCamera);
+                    DrawToCamera(pCamera, 0);
+                }
+            }
+
+            m_env->SetBuildState(true);
+        }
+        else {
+            if (!multipleRender || cameras.size() == 1) {
+                uboManager.SetCurrentCamera(firstCamera);
+                m_render->SetCurrentCamera(firstCamera);
+                m_render->UpdateUBOs();
+            }
+            else {
+                for (auto &&pCamera : cameras) {
+                    uboManager.SetCurrentCamera(pCamera);
+                    m_render->SetCurrentCamera(pCamera);
+                    m_render->UpdateUBOs();
+                }
+            }
+        }
+
+        CameraManager::UnlockSingleton();
+
+        m_env->DrawFrame();
+    }
+
+    void Window::DrawOpenGL() {
+
+    }
+
+    bool Window::IsFullScreen() const {
+        return m_env->IsFullScreen();
+    }
+
+    SR_MATH_NS::IVector2 Window::GetWindowSize() const {
+        if (!m_env || !m_env->HasWindow()) {
+            return m_size;
+        }
+
+        return m_env->GetWindowSize();
+    }
 }

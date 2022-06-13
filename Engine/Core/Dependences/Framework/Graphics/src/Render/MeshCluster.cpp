@@ -2,17 +2,16 @@
 // Created by Monika on 31.10.2021.
 //
 
+#include <Debug.h>
 #include <Render/MeshCluster.h>
 #include <Types/Geometry/IndexedMesh.h>
-#include <Debug.h>
 
 bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Types::Mesh *mesh)  {
-    auto* vertex = dynamic_cast<Types::VertexMesh *>(mesh);
     auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
 
-    int32_t groupID = vertex ? vertex->GetVBO<false>() : SR_ID_INVALID;
+    int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
     if (groupID == SR_ID_INVALID) {
-        Helper::Debug::Error("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
+        SR_ERROR("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
         return false;
     }
 
@@ -26,6 +25,7 @@ bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Type
             --m_total;
 
             mesh->RemoveUsePoint();
+            mesh->SetRender(nullptr);
 
             if (m_counters[groupID] == 0) {
                 m_groups.erase(groupIt);
@@ -36,11 +36,11 @@ bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Type
         }
     }
     else {
-        Helper::Debug::Error("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
+        SR_ERROR("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
         return false;
     }
 
-    Helper::Debug::Error("ShadedMeshSubCluster::Remove() : mesh not found!");
+    SR_ERROR("ShadedMeshSubCluster::Remove() : mesh not found!");
 
     return false;
 }
@@ -50,7 +50,7 @@ bool Framework::Graphics::ShadedMeshSubCluster::Add(Framework::Graphics::Types::
 
     int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
     if (groupID == SR_ID_INVALID) {
-        Helper::Debug::Error("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
+        SR_ERROR("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
         return false;
     }
 

@@ -5,13 +5,8 @@
 #ifndef GAMEENGINE_SHADERGENERATOR_H
 #define GAMEENGINE_SHADERGENERATOR_H
 
-#include <Render/Shader.h>
-#include <Utils/str_switch.h>
-#include <optional>
-#include <string>
-
 namespace Framework::Graphics::Codegen {
-    struct ShaderStruct {
+    /*struct ShaderStruct {
         std::string m_name;
         /// 1 - type, 2 - name
         std::map<std::string, std::string> m_types;
@@ -120,7 +115,7 @@ namespace Framework::Graphics::Codegen {
                 const std::vector<std::string>& defines);
     public:
         bool Generate(const std::string& name, const std::string& dist, ShaderFlags flags);
-    };
+    };*/
 }
 
 #endif //GAMEENGINE_SHADERGENERATOR_H

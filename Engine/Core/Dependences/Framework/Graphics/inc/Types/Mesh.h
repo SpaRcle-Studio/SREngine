@@ -5,39 +5,23 @@
 #ifndef GAMEENGINE_MESH_H
 #define GAMEENGINE_MESH_H
 
-#include <vector>
-#include <macros.h>
-
-#include <Types/Material.h>
-#include <Types/RawMesh.h>
-
-#include <Environment/Environment.h>
-#include <EntityComponentSystem/Component.h>
-#include <Types/List.h>
-#include <FbxLoader/Loader.h>
+#include <Environment/PipeLine.h>
+#include <Utils/Enumerations.h>
+#include <ResourceManager/IResource.h>
+#include <ECS/Component.h>
 
 namespace SR_UTILS_NS::Types {
     class RawMesh;
 }
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class Render;
     class Shader;
+    class Environment;
 }
 
-namespace Framework {
-    class API;
-}
-
-namespace Framework::Graphics::Types {
+namespace SR_GTYPES_NS {
     class Material;
-
-    enum class MeshFeatures {
-        None     = 0,
-        Vertices = 1 << 0,
-        Indexed  = 1 << 1,
-        Skinned  = 1 << 2
-    };
 
     SR_ENUM_CLASS(MeshType,
         Unknown = 0,
@@ -48,16 +32,14 @@ namespace Framework::Graphics::Types {
 
     class Mesh : public Helper::IResource, public Helper::Component {
         friend class Material;
-        friend class ::Framework::API;
     protected:
-        explicit Mesh(MeshType type, const std::string& name = "Unnamed");
+        explicit Mesh(MeshType type, std::string name = "Unnamed");
         ~Mesh() override;
 
     public:
         static std::vector<Mesh*> Load(const std::string& path, MeshType type);
         static Mesh* TryLoad(const std::string& path, MeshType type, uint32_t id);
         static Mesh* Load(const std::string& path, MeshType type, uint32_t id);
-        static Mesh* LoadFbx(MeshType type, bool withIndices, const FbxLoader::Geometry& geometry);
 
     public:
         bool Destroy() override;
@@ -72,7 +54,6 @@ namespace Framework::Graphics::Types {
 
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
-        virtual void UpdateUBO() = 0;
 
         /** \warning call only from render */
         virtual bool FreeVideoMemory();
@@ -85,36 +66,41 @@ namespace Framework::Graphics::Types {
         void OnScaled(const Helper::Math::FVector3& newValue) override;
         void OnSkewed(const Helper::Math::FVector3& newValue) override;
 
-        void OnSelected(bool value) override;
-        void OnDestroyGameObject() override;
-        void OnRemoveComponent() override {
-            OnDestroyGameObject();
-        }
-        void OnReady(bool ready) override {
-            m_env->SetBuildState(false);
-        }
-        void OnAttachComponent() override { }
+        void OnDestroy() override;
+
         void OnTransparencyChanged();
 
     public:
         void WaitCalculate() const;
         bool IsCanCalculate() const;
-        std::string GetPath() const;
 
+        SR_NODISCARD Shader* GetShader()           const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
-        SR_NODISCARD Shader* GetShader()           const { return m_shader; }
         SR_NODISCARD Render* GetRender()           const { return m_render; }
         SR_NODISCARD Material* GetMaterial()       const { return m_material; }
         SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
         SR_NODISCARD bool IsInverse()              const { return m_inverse; }
         SR_NODISCARD bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD const glm::mat4& GetModelMatrixRef() const { return m_modelMat; }
+        SR_NODISCARD glm::mat4 GetModelMatrix()    const { return m_modelMat; }
         SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
+        SR_NODISCARD uint32_t GetDescriptorSet()   const { return m_descriptorSet; }
+        SR_NODISCARD int32_t GetUBO()              const { return m_UBO; }
+        SR_NODISCARD int32_t GetVirtualUBO()       const { return m_virtualUBO; }
+        SR_NODISCARD std::string GetResourcePath() const override;
+        SR_NODISCARD bool HaveDefMaterial()        const;
+        SR_NODISCARD virtual bool CanDraw()        const;
 
         void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
-        void SetShader(Shader* shader);
+
+    protected:
+        SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
+        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        void OnEnabled() override;
+        void OnDisabled() override;
 
     public:
         Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);
@@ -131,19 +117,18 @@ namespace Framework::Graphics::Types {
         const PipeLine               m_pipeline          = PipeLine::Unknown;
         const MeshType               m_type              = MeshType::Unknown;
 
-        mutable std::recursive_mutex m_mutex             = std::recursive_mutex();
-
         std::string                  m_geometryName      = "Unnamed";
-        Shader*                      m_shader            = nullptr;
         Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
         Helper::Types::RawMesh*      m_rawMesh           = nullptr;
 
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
+        std::atomic<bool>            m_dirtyMaterial     = false;
 
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;
+        int32_t                      m_virtualUBO        = SR_ID_INVALID;
 
         /// определяет порядок меша в файле, если их там несколько
         uint32_t                     m_meshId            = SR_UINT32_MAX;

@@ -5,9 +5,6 @@
 #ifndef GAMEENGINE_VECTORUTILS_H
 #define GAMEENGINE_VECTORUTILS_H
 
-#include <vector>
-#include <cctype>
-#include <functional>
 #include <Utils/StringFormat.h>
 
 namespace Framework::Helper {
@@ -35,6 +32,15 @@ namespace Framework::Helper {
                 static_assert("Unsupported type!");
 
             return result;
+        }
+
+        inline static std::string Merge(const std::vector<std::string>& lines) {
+            std::string merged;
+
+            for (auto&& line : lines)
+                merged.append(line).append("\n");
+
+            return merged;
         }
     };
 

@@ -28,14 +28,7 @@ namespace Framework::Graphics::Impl {
 
         }
 
-        void UpdateUBOs() override {
-            if (m_currentCamera) {
-                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::DebugWireframe]);
-                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::Geometry]);
-                this->m_currentCamera->UpdateShader<ProjViewUBO>(m_shaders[Shader::StandardID::Transparent]);
-                this->m_currentCamera->UpdateShader<SkyboxUBO>(m_shaders[Shader::StandardID::Skybox]);
-            }
-        }
+        void UpdateUBOs() override;
 
         void CalculateAll() override {
             static Environment* env = Environment::Get();
@@ -52,37 +45,9 @@ namespace Framework::Graphics::Impl {
             }
         }
 
-        void DrawGeometry() override {
-            //SRDrawMeshCluster(m_geometry, Vulkan, ;)
+        void DrawGeometry() override;
 
-            static Environment* env = Environment::Get();
-
-            for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
-                if (shader) shader->Use();
-                else
-                    continue;
-
-                for (auto const& [key, meshGroup] : subCluster.m_groups) {
-                    env->BindVBO((*meshGroup.begin())->GetVBO<true>());
-                    env->BindIBO((*meshGroup.begin())->GetIBO<true>());
-
-                    for (const auto &mesh : meshGroup)
-                        mesh->DrawVulkan();
-                }
-
-                env->UnUseShader();
-            }
-        }
-
-        void DrawSkybox() override {
-            if (m_skybox.m_current && m_skyboxEnabled) {
-                m_shaders[Shader::StandardID::Skybox]->Use();
-
-                m_skybox.m_current->DrawVulkan();
-
-                m_env->UnUseShader();
-            }
-        }
+        void DrawSkybox() override;
 
         void DrawTransparentGeometry() override {
 

@@ -2,15 +2,11 @@
 // Created by Nikita on 16.11.2020.
 //
 
-#include "Debug.h"
-#include "FileSystem/FileSystem.h"
-#include <iostream>
+#include <Debug.h>
+#include <FileSystem/FileSystem.h>
 #include <ResourceManager/ResourceManager.h>
 #include <Utils/Stacktrace.h>
-
-#ifdef SR_WIN32
-    #include <Windows.h>
-#endif
+#include <Platform/Platform.h>
 
 namespace Framework::Helper {
     void Debug::Print(std::string msg, Debug::Type type) {
@@ -39,9 +35,9 @@ namespace Framework::Helper {
         }
 
         if (Debug::g_showUseMemory) {
-            std::cout << '<' << static_cast<uint32_t>(ResourceManager::GetUsedMemoryLoad() / 1024) << " KB> ";
+            std::cout << '<' << static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024) << " KB> ";
             if (g_file.is_open())
-                g_file << '<' << static_cast<uint32_t>(ResourceManager::GetUsedMemoryLoad() / 1024) << " KB> ";
+                g_file << '<' << static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024) << " KB> ";
         }
 
         DWORD bg_color = g_theme == Theme::Light ? (WORD)(((int)ConsoleColor::LightGray << 4)) : (WORD)(((int)ConsoleColor::Black << 4));
@@ -86,7 +82,7 @@ namespace Framework::Helper {
         if (FileSystem::FileExists(successful.c_str()))
             FileSystem::Delete(successful.c_str());
 
-        g_log_path = log_path + "/log.txt";
+        g_log_path = Path(log_path + "/log.txt");
         if (FileSystem::FileExists(g_log_path.c_str()))
             FileSystem::Delete(g_log_path.c_str());
         g_file.open(g_log_path);
@@ -130,5 +126,18 @@ namespace Framework::Helper {
 #else
         return false;
 #endif
+    }
+
+    bool Debug::AssertOnceCheck(const std::string &msg) {
+        std::lock_guard<std::mutex> lock(g_mutex);
+
+        static std::unordered_set<std::string> asserts;
+
+        if (asserts.count(msg) == 0) {
+            asserts.insert(msg);
+            return false;
+        }
+
+        return true;
     }
 }

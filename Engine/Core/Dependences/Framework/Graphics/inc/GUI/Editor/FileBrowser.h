@@ -7,8 +7,6 @@
 
 #include <FileSystem/Path.h>
 #include <GUI/Widget.h>
-#include <string>
-#include <macros.h>
 
 namespace SR_GRAPH_NS::GUI {
     class FileBrowser : public Widget {

@@ -6,36 +6,27 @@
 #define GAMEENGINE_ENVIRONMENT_H
 
 #include <GUI.h>
-#include <utility>
-#include <vector>
-#include <array>
-#include <map>
-#include <Types/WindowFormat.h>
-#include <functional>
-#include <glm/glm.hpp>
+
 #include <Environment/TextureHelper.h>
-#include <macros.h>
 #include <Environment/Basic/BasicWindow.h>
 #include <Environment/Basic/IShaderProgram.h>
 
 #include <Environment/PipeLine.h>
 #include <Types/Vertices.h>
 #include <Types/Descriptors.h>
-#include <set>
 
-#define SR_SHADER_PROGRAM int32_t
-#define SR_NULL_SHADER -1
-
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     typedef ImGuiContext* GUIContext;
     typedef ImFont* Font;
 
     namespace Vertices {
-        struct Mesh3DVertex;
+        struct StaticMeshVertex;
+        struct SimpleMeshVertex;
     }
 
     enum class RenderBuffGroup { Kernel, Small, Normal, Large };
 
+    /// TODO: TO_REFACTORING
     class Environment {
     public:
         enum class WinEvents{
@@ -45,23 +36,23 @@ namespace Framework::Graphics {
         Environment(Environment&) = delete;
     protected:
         inline static std::vector<std::function<void(double x, double y)>> g_scrollEvents = std::vector<std::function<void(double x, double y)>>();
-        Types::WindowFormat* m_winFormat = nullptr;
         static inline std::mutex g_mutex = std::mutex();
 
-        GUIContext        m_guiContext            = nullptr;
-        Font              m_iconFont              = nullptr;
+        GUIContext        m_guiContext             = nullptr;
+        Font              m_iconFont               = nullptr;
 
-        BasicWindow*      m_basicWindow           = nullptr;
-        bool              m_hasErrors             = false;
-        bool              m_guiEnabled            = false;
+        BasicWindow*      m_basicWindow            = nullptr;
+        bool              m_hasErrors              = false;
+        bool              m_guiEnabled             = false;
 
-        int32_t           m_currentFBOid          = -1;
-        int32_t           m_currentDescID         = -1;
-        int               m_currentShaderID       = -1;
-        __int16           m_preferredDevice       = -1;
-        unsigned __int8   m_currentBuildIteration = 0;
+        int32_t           m_currentUBOid           = -1;
+        int32_t           m_currentFBOid           = -1;
+        int32_t           m_currentDescriptorSetId = -1;
+        int               m_currentShaderID        = -1;
+        __int16           m_preferredDevice        = -1;
+        unsigned __int8   m_currentBuildIteration  = 0;
 
-        std::atomic<bool> m_needReBuild           = false;
+        std::atomic<bool> m_needReBuild            = false;
     protected:
         Environment()  = default;
         ~Environment() = default;
@@ -76,6 +67,7 @@ namespace Framework::Graphics {
         [[nodiscard]] Font GetIconFont() const { return m_iconFont; }
         [[nodiscard]] GUIContext GetGUIContext() const { return m_guiContext; }
         [[nodiscard]] bool IsGUIEnabled() const { return m_guiEnabled; }
+        [[nodiscard]] bool HasWindow() const { return m_basicWindow; }
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
@@ -85,17 +77,16 @@ namespace Framework::Graphics {
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }
 
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;    }
-        [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                 }
-        [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;     }
-        [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;       }
-        [[nodiscard]] Types::WindowFormat* GetWindowFormat()               const { return this->m_winFormat; }
-        [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;     }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;             }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;             }
-        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown; }
-
-        bool InitWindowFormat(const Types::WindowFormat& windowFormat);
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentUBO()             const { return m_currentUBOid;           }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;           }
+        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentDescriptorSet()   const { return m_currentDescriptorSetId; }
+        [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                        }
+        [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;            }
+        [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;              }
+        [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;            }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;                    }
+        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;                    }
+        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown;        }
 
         SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -145,7 +136,7 @@ namespace Framework::Graphics {
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        virtual bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
+        virtual bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
         virtual void SetWindowIcon(const char* path) {  }
 
         virtual bool PreInit(
@@ -177,7 +168,7 @@ namespace Framework::Graphics {
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const { }
         virtual SR_FORCE_INLINE void DrawFrame() { }
-        virtual SR_FORCE_INLINE void BeginRender() { }
+        virtual SR_FORCE_INLINE bool BeginRender() { return false; }
         virtual SR_FORCE_INLINE void EndRender() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
@@ -211,21 +202,21 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
         virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }
 
-        [[nodiscard]] virtual inline bool IsFullScreen() const { return false; }
+        SR_NODISCARD virtual inline bool IsFullScreen() const { return false; }
         virtual SR_FORCE_INLINE void SetFullScreen(bool value) {  }
         virtual void SetDepthTestEnabled(bool value) { }
 
         // ============================= [ SHADER METHODS ] =============================
 
-        [[nodiscard]] virtual std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const {
+        SR_NODISCARD virtual std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const {
             return std::map<std::string, uint32_t>(); }
-        [[nodiscard]] virtual SR_SHADER_PROGRAM AllocShaderProgram() const { return SR_NULL_SHADER; }
+        SR_NODISCARD virtual SR_SHADER_PROGRAM AllocShaderProgram() const { return SR_NULL_SHADER; }
         virtual bool CompileShader(
                 const std::string& path,
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes = {}
-                ) const { return false; }
+                ) { return false; }
         virtual bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -248,12 +239,13 @@ namespace Framework::Graphics {
 
         // ============================== [ MESH METHODS ] ==============================
 
-        [[nodiscard]] virtual SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const { return -1; }
+        SR_NODISCARD virtual SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const { return SR_ID_INVALID; }
 
-        virtual SR_FORCE_INLINE bool FreeDescriptorSet(const uint32_t& descriptorSet) { return false; }
-        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return -2; }
-        virtual SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) { return -2; }
-        virtual SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) { }
+        virtual SR_FORCE_INLINE bool FreeDescriptorSet(int32_t* descriptorSet) { return false; }
+        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return SR_ID_INVALID; }
+        virtual SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) { return SR_ID_INVALID; }
+        virtual SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) { m_currentDescriptorSetId = descriptorSet; }
+        virtual SR_FORCE_INLINE void ResetDescriptorSet() { m_currentDescriptorSetId = SR_ID_INVALID; }
 
         virtual SR_FORCE_INLINE void UpdateUBO(const uint32_t& UBO, void* data, const uint64_t& uboSize) { }
 
@@ -262,23 +254,23 @@ namespace Framework::Graphics {
          *   1 - bind
          *   2 - uniform id / texture id
          */
-        virtual SR_FORCE_INLINE void UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) { }
+        virtual SR_FORCE_INLINE bool UpdateDescriptorSets(uint32_t descriptorSet, const std::vector<std::pair<DescriptorType, std::pair<uint32_t, uint32_t>>>& updateValues) { return false; }
 
         virtual SR_FORCE_INLINE void SetCullFacingEnabled(const bool& enabled) const { }
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const { return false; }
-        virtual int32_t CalculateVAO(std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) { return SR_ID_INVALID; }
+        virtual int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) { return SR_ID_INVALID; }
         virtual int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) { return SR_ID_INVALID; }
         virtual int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO) { return SR_ID_INVALID; }
 
         /** Vertex pos and texture cords */
         virtual SR_FORCE_INLINE bool CalculateQuad(uint32_t& VBO, uint32_t& VAO) const { return false; }
-        [[nodiscard]] virtual uint32_t CalculateSkybox() const { return -1; }
+        SR_NODISCARD virtual uint32_t CalculateSkybox() const { return -1; }
 
-        virtual SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) const { }
-        virtual SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) const { }
-        virtual SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) const { }
-        virtual SR_FORCE_INLINE void BindUBO(const uint32_t& UBO) const { }
+        virtual SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) { }
+        virtual SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) { }
+        virtual SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) { }
+        virtual SR_FORCE_INLINE void BindUBO(const uint32_t& UBO) { }
         virtual SR_FORCE_INLINE void Draw6Triangles() const { }
 
         virtual SR_FORCE_INLINE void DrawSkybox(const uint32_t&  VAO, const uint32_t& CubeMap) const { }
@@ -295,17 +287,18 @@ namespace Framework::Graphics {
         virtual SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const { }
         virtual SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t&  ID) const { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const { }
-        virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) { return false; }
+        virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) { return false; }
 
-        [[nodiscard]] virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) { return -1; }
-        [[nodiscard]] virtual SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const { return false; }
-        [[nodiscard]] virtual SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const { return false; }
-        [[nodiscard]] virtual SR_FORCE_INLINE bool FreeUBO(uint32_t ID) const { return false; }
-        [[nodiscard]] virtual bool FreeVAO(uint32_t VAO) const { return false; }
-        [[nodiscard]] virtual bool FreeFBO(uint32_t FBO) const { return false; }
-        [[nodiscard]] virtual bool FreeRBO(uint32_t RBO) const { return false; }
-        [[nodiscard]] virtual bool FreeTextures(int32_t* IDs, uint32_t count) const { return false; }
-        [[nodiscard]] virtual bool FreeTexture(uint32_t ID) const { return false; }
+        SR_NODISCARD virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) { return -1; }
+
+        SR_NODISCARD virtual SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const { return false; }
+        SR_NODISCARD virtual SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const { return false; }
+        SR_NODISCARD virtual SR_FORCE_INLINE bool FreeUBO(int32_t* ID) const { return false; }
+        SR_NODISCARD virtual bool FreeVAO(int32_t* VAO) const { return false; }
+        SR_NODISCARD virtual bool FreeFBO(uint32_t FBO) const { return false; }
+        SR_NODISCARD virtual bool FreeRBO(uint32_t RBO) const { return false; }
+        SR_NODISCARD virtual bool FreeTextures(int32_t* IDs, uint32_t count) const { return false; }
+        SR_NODISCARD virtual bool FreeTexture(int32_t* id) const { return false; }
 
         /* mipLevels :
               0 - auto

@@ -6,16 +6,12 @@
 #define GAMEENGINE_MESH3D_H
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/Vertices.h>
 
-#include <utility>
-#include <Types/Uniforms.h>
-
-namespace Framework::Graphics::Memory {
+namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
 }
 
-namespace Framework::Graphics::Types {
+namespace SR_GTYPES_NS {
     class Mesh3D final : public IndexedMesh {
         friend class Memory::MeshAllocator;
     private:
@@ -23,31 +19,26 @@ namespace Framework::Graphics::Types {
             : IndexedMesh(MeshType::Static, name)
         {
             /// override component
-            Component::Init<Mesh3D>();
+            Component::InitComponent<Mesh3D>();
         }
 
         ~Mesh3D() override = default;
 
     public:
-        typedef Vertices::Mesh3DVertex VertexType;
+        typedef Vertices::StaticMeshVertex VertexType;
 
     public:
         IResource* Copy(IResource* destination) const override;
-        //void SetVertexArray(const std::any& vertices) override;
 
-        static Component* LoadComponent(const MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage);
+        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     private:
-        void UpdateUBO() override;
         bool Calculate() override;
         bool FreeVideoMemory() override;
         void DrawVulkan() override;
         void DrawOpenGL() override;
 
-        [[nodiscard]] MarshalEncodeNode Save(SavableFlags flags) const override;
-
-    //private:
-    //    std::vector<VertexType> m_vertices = std::vector<VertexType>();
+        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
 
     };
 }

@@ -5,27 +5,26 @@
 #ifndef GAMEENGINE_VULKANMEMORY_H
 #define GAMEENGINE_VULKANMEMORY_H
 
+#include <Utils/NonCopyable.h>
+
 #include <EvoVulkan/Types/VulkanBuffer.h>
 #include <EvoVulkan/Complexes/Framebuffer.h>
 #include <EvoVulkan/VulkanKernel.h>
-#include <Debug.h>
 #include <EvoVulkan/Complexes/Shader.h>
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
+#include <EvoVulkan/DescriptorSet.h>
 #include <Environment/TextureHelper.h>
 #include <Environment/Vulkan/DynamicTextureDescriptorSet.h>
-#include <Utils/NonCopyable.h>
 
 #define ZERO_VULKAN_MEMORY_MANAGER(type, count, array) { \
-    array = (type*)malloc(sizeof(type) * count);         \
+    array = new type[count];                             \
     for (uint32_t i = 0; i < count; ++i)                 \
         array[i] = nullptr;                              \
 }                                                        \
 
 namespace Framework::Graphics::VulkanTools {
     class MemoryManager : Helper::NonCopyable {
-    public:
-        MemoryManager(const MemoryManager&) = delete;
     private:
         MemoryManager() = default;
         ~MemoryManager() override = default;
@@ -43,24 +42,24 @@ namespace Framework::Graphics::VulkanTools {
             m_pool   = m_kernel->GetCmdPool();
 
             if (!m_descriptorManager || !m_device || !m_pool) {
-                Helper::Debug::Error("MemoryManager::Initialize() : failed to get (descriptor manager/device/cmd pool)!");
+                SR_ERROR("MemoryManager::Initialize() : failed to get (descriptor manager/device/cmd pool)!");
                 return false;
             }
 
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countUBO, m_UBOs)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countVBO, m_VBOs)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countIBO, m_IBOs)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::FrameBuffer*, m_countFBO, m_FBOs)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::Shader*, m_countShaderPrograms, m_ShaderPrograms)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Core::DescriptorSet, m_countDescriptorSets, m_descriptorSets)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::Texture*, m_countTextures, m_textures)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countUBO.first, m_UBOs)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countVBO.first, m_VBOs)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countIBO.first, m_IBOs)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::FrameBuffer*, m_countFBO.first, m_FBOs)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::Shader*, m_countShaderPrograms.first, m_ShaderPrograms)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Core::DescriptorSet, m_countDescriptorSets.first, m_descriptorSets)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::Texture*, m_countTextures.first, m_textures)
 
             m_isInit = true;
             return true;
         }
     private:
         [[nodiscard]] int32_t FindFreeTextureIndex() const {
-            for (uint32_t i = 0; i < m_countTextures; i++)
+            for (uint32_t i = 0; i < m_countTextures.first; i++)
                 if (m_textures[i] == nullptr)
                     return (int32_t)i;
             return -1;
@@ -68,7 +67,7 @@ namespace Framework::Graphics::VulkanTools {
 
         template<typename T> bool FreeMemory(uint32_t id, uint32_t maxCount, T** pool) const {
             if (id >= maxCount) {
-                Helper::Debug::Error("MemoryManager::FreeMemory() : list index out of range!");
+                SR_ERROR("MemoryManager::FreeMemory() : list index out of range!");
                 return false;
             }
 
@@ -80,8 +79,9 @@ namespace Framework::Graphics::VulkanTools {
 
                 return true;
             }
-            else
-                Helper::Debug::Error("MemoryManager::FreeMemory() : id is not exists! (" + std::to_string(id) + ")");
+            else {
+                SR_ERROR("MemoryManager::FreeMemory() : id is not exists! (" + std::to_string(id) + ")");
+            }
 
             return false;
         }
@@ -91,7 +91,7 @@ namespace Framework::Graphics::VulkanTools {
             auto memory = new MemoryManager();
 
             if (!memory->Initialize(kernel)) {
-                Helper::Debug::Error("MemoryManager::Create() : failed to initialize memory!");
+                SR_ERROR("MemoryManager::Create() : failed to initialize memory!");
                 return nullptr;
             }
 
@@ -99,24 +99,24 @@ namespace Framework::Graphics::VulkanTools {
         }
         void Free();
     public:
-        [[nodiscard]] bool FreeDescriptorSet(uint32_t ID) const;
+        [[nodiscard]] bool FreeDescriptorSet(uint32_t ID);
 
-        [[nodiscard]] bool FreeShaderProgram(uint32_t ID) const;
+        [[nodiscard]] bool FreeShaderProgram(uint32_t ID);
 
-        [[nodiscard]] bool FreeVBO(uint32_t ID) const;
-        [[nodiscard]] bool FreeUBO(uint32_t ID) const;
-        [[nodiscard]] bool FreeIBO(uint32_t ID) const;
-        [[nodiscard]] bool FreeFBO(uint32_t ID) const;
+        [[nodiscard]] bool FreeVBO(uint32_t ID);
+        [[nodiscard]] bool FreeUBO(uint32_t ID);
+        [[nodiscard]] bool FreeIBO(uint32_t ID);
+        [[nodiscard]] bool FreeFBO(uint32_t ID);
 
-        [[nodiscard]] bool FreeTexture(uint32_t ID) const;
+        [[nodiscard]] bool FreeTexture(uint32_t ID);
 
     public:
-        [[nodiscard]] int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType>& types) const;
+        [[nodiscard]] int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType>& types);
 
         [[nodiscard]] int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass);
 
-        [[nodiscard]] int32_t AllocateVBO(uint32_t buffSize, void* data) const;
-        [[nodiscard]] int32_t AllocateUBO(uint32_t UBOSize) const;
+        [[nodiscard]] int32_t AllocateVBO(uint32_t buffSize, void* data);
+        [[nodiscard]] int32_t AllocateUBO(uint32_t UBOSize);
         [[nodiscard]] int32_t AllocateIBO(uint32_t buffSize, void* data);
 
         [[nodiscard]] bool ReAllocateFBO(
@@ -156,13 +156,13 @@ namespace Framework::Graphics::VulkanTools {
         EvoVulkan::Memory::Allocator*             m_allocator               = nullptr;
         EvoVulkan::Types::CmdPool*                m_pool                    = nullptr;
 
-        uint32_t                                  m_countUBO                = 10000;
-        uint32_t                                  m_countVBO                = 1000;
-        uint32_t                                  m_countIBO                = 1000;
-        uint32_t                                  m_countFBO                = 15;
-        uint32_t                                  m_countShaderPrograms     = 50;
-        uint32_t                                  m_countDescriptorSets     = 10000;
-        uint32_t                                  m_countTextures           = 1000;
+        std::pair<uint32_t, int32_t>              m_countUBO                = { 10000, 0 };
+        std::pair<uint32_t, int32_t>              m_countVBO                = { 1000, 0 };
+        std::pair<uint32_t, int32_t>              m_countIBO                = { 1000, 0 };
+        std::pair<uint32_t, int32_t>              m_countFBO                = { 15, 0 };
+        std::pair<uint32_t, int32_t>              m_countShaderPrograms     = { 50, 0 };
+        std::pair<uint32_t, int32_t>              m_countDescriptorSets     = { 10000, 0 };
+        std::pair<uint32_t, int32_t>              m_countTextures           = { 1000, 0 };
 
         EvoVulkan::Types::VmaBuffer**             m_UBOs                    = nullptr;
         EvoVulkan::Types::VmaBuffer**             m_VBOs                    = nullptr;

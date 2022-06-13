@@ -2,11 +2,11 @@
 // Created by Monika on 08.01.2022.
 //
 
-#include "CommandManager/CmdManager.h"
+#include <CommandManager/CmdManager.h>
 #include <Debug.h>
 
 namespace SR_UTILS_NS {
-    ICommand *CmdManager::MakeCommand(const std::string &id) const {
+    ReversibleCommand *CmdManager::MakeCommand(const std::string &id) const {
         return m_allocators.at(id)();
     }
 
@@ -14,7 +14,7 @@ namespace SR_UTILS_NS {
         return Execute(MakeCommand(id), sync);
     }
 
-    bool CmdManager::Execute(ICommand *cmd) {
+    bool CmdManager::Execute(ReversibleCommand *cmd) {
         if (m_historyPC != UINT32_MAX) {
             /// если следущая команада будет перезаписывать историю,
             /// например когда мы отменили действия, и пытаемся сделать что-то другое,
@@ -42,7 +42,7 @@ namespace SR_UTILS_NS {
         return cmd->Redo();
     }
 
-    bool CmdManager::Cancel(ICommand *cmd) {
+    bool CmdManager::Cancel(ReversibleCommand *cmd) {
         --m_historyPC;
         m_lastCmdName = cmd->GetName();
         return cmd->Undo();
@@ -72,7 +72,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    bool CmdManager::Execute(ICommand *cmd, SyncType sync) {
+    bool CmdManager::Execute(ReversibleCommand *cmd, SyncType sync) {
         std::lock_guard<std::mutex> lock(m_mutex);
 
         if (m_historyPC != UINT32_MAX) {
@@ -116,20 +116,20 @@ namespace SR_UTILS_NS {
 
         m_maxHistorySize = 128;
 
-        m_thread = Types::Thread([this]() {
+        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
             while(m_isRun.load()) {
-                m_thread.Sleep(100);
+                m_thread->Sleep(100);
 
                 std::lock_guard<std::mutex> lock(m_mutex);
 
                 while (!m_commands.empty()) {
-                    SRVerifyFalse2(DoCmd(m_commands.front()), "Failed to execute command!");
+                    SRVerifyFalse2(!DoCmd(m_commands.front()), "Failed to execute command!");
                     m_commands.pop();
                 }
             }
         });
 
-        return m_thread.Joinable();
+        return m_thread->Joinable();
     }
 
     bool CmdManager::Close() {
@@ -142,14 +142,19 @@ namespace SR_UTILS_NS {
 
         m_isRun.store(false);
 
-        const bool result = m_thread.TryJoin();
+        const bool result = m_thread && m_thread->TryJoin();
+
+        if (m_thread) {
+            m_thread->Free();
+            m_thread = nullptr;
+        }
 
         ClearHistory();
 
         return result;
     }
 
-    bool CmdManager::ExecuteImpl(ICommand *cmd, SyncType sync) {
+    bool CmdManager::ExecuteImpl(ReversibleCommand *cmd, SyncType sync) {
         bool result = false;
 
         switch (sync) {

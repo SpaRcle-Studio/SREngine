@@ -5,9 +5,6 @@
 #ifndef GAMEENGINE_TEXTUREHELPER_H
 #define GAMEENGINE_TEXTUREHELPER_H
 
-#include <cstdint>
-#include <utility>
-#include <string>
 #include <Utils/Enumerations.h>
 
 namespace Framework::Graphics {
@@ -27,10 +24,6 @@ namespace Framework::Graphics {
     inline static bool IsUNORM(TextureFormat f) {
         return f >= TextureFormat::RGBA8_UNORM || f <= TextureFormat::RGBA16_UNORM;
     }
-
-    SR_ENUM_CLASS(TextureType,
-        Unknown, Diffuse, Normal, Specular, Roughness, Glossiness
-    );
 
     SR_ENUM_CLASS(TextureFilter,
         Unknown = 0, NEAREST = 1, LINEAR = 2, NEAREST_MIPMAP_NEAREST = 3,

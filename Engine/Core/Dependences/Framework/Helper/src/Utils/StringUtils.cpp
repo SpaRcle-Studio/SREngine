@@ -148,7 +148,8 @@ namespace Framework::Helper {
         size_t pos = 0;
         std::vector<std::string> tokens = {};
         while ((pos = source.find(delimiter)) != std::string::npos) {
-            tokens.emplace_back(source.substr(0, pos));
+            if (auto&& token = source.substr(0, pos); !token.empty())
+                tokens.emplace_back(std::move(token));
             source.erase(0, pos + delimiter.length());
         }
 
@@ -156,5 +157,83 @@ namespace Framework::Helper {
             tokens.emplace_back(source);
 
         return tokens;
+    }
+
+    std::string StringUtils::Tab(std::string code, uint32_t count) {
+        if (!code.empty()) {
+            code = std::string(count, '\t') + code;
+
+            uint64_t lastPos = 0;
+
+            do {
+                const auto pos = code.find("\n", lastPos);
+                lastPos = pos + 1;
+
+                if (pos == std::string::npos || pos + 1 == code.size()) {
+                    break;
+                }
+
+                code.insert(pos + 1, std::string(count, '\t'));
+            }
+            while (true);
+        }
+
+        return code;
+    }
+
+    std::string StringUtils::Base64Decode(const std::string & base64) {
+        int in_len = base64.size();
+        int i = 0;
+        int j = 0;
+        int in_ = 0;
+        unsigned char char_array_4[4], char_array_3[3];
+        std::string ret;
+
+        while (in_len-- && (base64[in_] != '=') && is_base64(base64[in_])) {
+            char_array_4[i++] = base64[in_]; in_++;
+            if (i ==4) {
+                for (i = 0; i <4; i++)
+                    char_array_4[i] = base64_chars.find(char_array_4[i]);
+
+                char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+                char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+                char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+                for (i = 0; (i < 3); i++)
+                    ret += char_array_3[i];
+                i = 0;
+            }
+        }
+
+        if (i) {
+            for (j = i; j <4; j++)
+                char_array_4[j] = 0;
+
+            for (j = 0; j <4; j++)
+                char_array_4[j] = base64_chars.find(char_array_4[j]);
+
+            char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+            char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+            char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+            for (j = 0; (j < i - 1); j++) ret += char_array_3[j];
+        }
+
+        return ret;
+    }
+
+    std::string StringUtils::Remove(std::string source, uint32_t count) {
+        return source.substr(count, source.size() - count);
+    }
+
+    std::string StringUtils::Remove(std::string source, uint32_t start, uint32_t count) {
+        const uint64_t size = source.size();
+
+        if (static_cast<int64_t>(size) - count < 0) {
+            SRHalt("StringUtils::Remove() : out of range!");
+            return std::string();
+        }
+
+        return source.substr(count + start, size - count);
     }
 }

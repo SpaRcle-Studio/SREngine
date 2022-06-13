@@ -11,26 +11,36 @@
 
 #include <Debug.h>
 
-#include <Engine.h>
+#include <Core/Engine.h>
+#include <Core/World/World.h>
+#include <Core/World/VisualChunk.h>
+#include <Core/World/VisualRegion.h>
 
 #include <ResourceManager/ResourceManager.h>
 #include <Environment/OpenGL.h>
 #include <Environment/Vulkan.h>
-#include <EntityComponentSystem/Transform.h>
+#include <ECS/ComponentManager.h>
 
 #include <Types/Rigidbody.h>
+#include <Types/RawMesh.h>
+#include <Types/Texture.h>
+#include <Loaders/SRSL.h>
+#include <Types/Material.h>
+#include <Types/Skybox.h>
+#include <Types/Mesh.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <Animations/Bone.h>
-#include <World/World.h>
 #include <Input/InputSystem.h>
 #include <Memory/MeshAllocator.h>
-#include <World/VisualChunk.h>
-#include <World/VisualRegion.h>
 #include <Utils/CmdOptions.h>
 #include <Utils/Features.h>
 #include <GUI/NodeManager.h>
 #include <FbxLoader/Debug.h>
 #include <Types/Marshal.h>
+#include <Render/Camera.h>
+#include <Render/RenderManager.h>
+#include <Render/CameraManager.h>
+#include <Scripting/Base/Behaviour.h>
 
 using namespace Framework;
 
@@ -48,6 +58,8 @@ using namespace Framework::Graphics::Animations;
 
 using namespace Framework::Physics;
 using namespace Framework::Physics::Types;
+
+using namespace Framework::Scripting;
 
 /*
         +---------------+       +----+          +----+       +---------------+            +----------------+
@@ -72,23 +84,26 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    std::string exe = FileSystem::GetPathToExe();
+    auto&& exe = FileSystem::GetPathToExe();
     Debug::Init(exe, true, Debug::Theme::Dark);
     Debug::SetLevel(Debug::Level::Low);
 
-    if (auto folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty())
-        ResourceManager::Instance().Init(exe + "/../../Resources");
+    auto&& resourcesManager = ResourceManager::Instance();
+
+    if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
+        resourcesManager.Init(Path(exe + "/../../Resources"));
+    }
     else
-        ResourceManager::Instance().Init(folder);
+        resourcesManager.Init(folder);
 
     RuntimeTest::MarshalRunRuntimeTest();
 
-    Features::Instance().Reload(ResourceManager::Instance().GetResPath().Concat("/Configs/Features.xml"));
+    Features::Instance().Reload(resourcesManager.GetResPath().Concat("/Configs/Features.xml"));
 
     if (!FbxLoader::Debug::IsInit()) {
         FbxLoader::Debug::Init(
-                [](const std::string &msg) { Helper::Debug::Error(msg); },
-                [](const std::string &msg) { Helper::Debug::Warn(msg); }
+                [](const std::string &msg) { SR_ERROR(msg); },
+                [](const std::string &msg) { SR_WARN(msg); }
         );
     }
 
@@ -104,11 +119,13 @@ int main(int argc, char **argv) {
 
     // Register all resource types
     {
-        ResourceManager::Instance().RegisterType<RawMesh>();
-        ResourceManager::Instance().RegisterType<Mesh>();
-        ResourceManager::Instance().RegisterType<Texture>();
-        ResourceManager::Instance().RegisterType<Material>();
-        ResourceManager::Instance().RegisterType<Shader>();
+        resourcesManager.RegisterType<RawMesh>();
+        resourcesManager.RegisterType<Mesh>();
+        resourcesManager.RegisterType<Texture>();
+        resourcesManager.RegisterType<Material>();
+        resourcesManager.RegisterType<Shader>();
+        resourcesManager.RegisterType<Skybox>();
+        resourcesManager.RegisterType<Behaviour>();
     }
 
     // Register all components
@@ -118,6 +135,7 @@ int main(int argc, char **argv) {
         ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return Camera::Allocate(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
+        ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
 
         if (Helper::Features::Instance().Enabled("DebugChunks", false))
             Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
@@ -131,7 +149,7 @@ int main(int argc, char **argv) {
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
     const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
 
-    if (envName == "OpenGL"){
+    if (envName == "OpenGL") {
         Environment::Set(new OpenGL());
     }
     else if (envName == "Vulkan") {
@@ -150,7 +168,7 @@ int main(int argc, char **argv) {
         return -2000;
     }
 
-    Render* render = Render::Allocate("Main SpaRcle Render");
+    Render* render = RenderManager::Instance().Allocate("Main");
     if (!render) {
         SR_ERROR("FATAL: render is not support this pipeline!");
         ResourceManager::Instance().Stop();
@@ -161,7 +179,7 @@ int main(int argc, char **argv) {
     auto window = new Window(
             "SpaRcle Engine",
             "Engine/icon.ico",
-            WindowFormat::_1366_768,
+            IVector2(1366, 768), //IVector2(1600, 900),
             render,
             false, // vsync
             false, // fullscreen
@@ -175,15 +193,15 @@ int main(int argc, char **argv) {
     auto&& engine = Engine::Instance();
 
     if(engine.Create(window, physics)) {
-      if (engine.Init(Engine::MainScriptType::Engine)) {
-          if (engine.Run()){
+        if (engine.Init()) {
+            if (engine.Run()) {
 
-          }
-          else
-              SR_ERROR("Failed to running game engine!");
-      }
-      else
-          SR_ERROR("Failed to initializing game engine!");
+            }
+            else
+                SR_ERROR("Failed to running game engine!");
+        }
+        else
+            SR_ERROR("Failed to initializing game engine!");
     }
     else
         SR_ERROR("Failed to creating game engine!");
@@ -196,7 +214,9 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
-    Framework::Helper::EntityManager::Destroy();
+    SR_GRAPH_NS::CameraManager::Destroy();
+    SR_SCRIPTING_NS::GlobalEvoCompiler::Destroy();
+    SR_UTILS_NS::EntityManager::Destroy();
     Framework::Engine::Destroy();
     Framework::Graphics::GUI::NodeManager::Destroy();
 
@@ -204,5 +224,9 @@ int main(int argc, char **argv) {
 
     ResourceManager::Instance().Stop();
 
-    return Debug::Stop();
+    SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
+
+    Debug::Stop();
+
+    return 0;
 }

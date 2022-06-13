@@ -9,11 +9,6 @@
 #include <Utils/NonCopyable.h>
 #include <Types/Thread.h>
 
-#include <list>
-#include <set>
-#include <map>
-#include <mutex>
-
 namespace SR_UTILS_NS {
     class Task : public NonCopyable {
     public:
@@ -40,7 +35,7 @@ namespace SR_UTILS_NS {
 
     private:
         uint64_t m_id;
-        Types::Thread m_thread;
+        Types::Thread::Ptr m_thread;
         TaskFn m_function;
         /// должен быть динамическим, иначе может потеряться ссылка при перемещении
         std::atomic<State>* m_state;
@@ -64,8 +59,7 @@ namespace SR_UTILS_NS {
         [[nodiscard]] uint64_t GetUniqueId() const;
 
     private:
-        mutable std::mutex m_mutex;
-        Types::Thread m_thread;
+        Types::Thread::Ptr m_thread;
         std::atomic<bool> m_isRun;
         std::list<Task> m_tasks;
 

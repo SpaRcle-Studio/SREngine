@@ -5,7 +5,6 @@
 #ifndef GAMEENGINE_EDITORGRID_H
 #define GAMEENGINE_EDITORGRID_H
 
-#include <string>
 #include <Environment/Environment.h>
 
 namespace Framework::Graphics {

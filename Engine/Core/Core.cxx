@@ -4,21 +4,23 @@
 
 #include <macros.h>
 
-#include "src/GUI/ComponentDrawer.cpp"
-#include "src/GUI/EditorGUI.cpp"
-#include "src/GUI/GUISystem.cpp"
-#include "src/GUI/Inspector.cpp"
-#include "src/GUI/WorldEdit.cpp"
-#include "src/GUI/Hierarchy.cpp"
-#include "src/GUI/VisualScriptEditor.cpp"
-#include "src/GUI/EngineSettings.cpp"
-#include "src/GUI/EngineStatistics.cpp"
+#include "src/Core/GUI/ComponentDrawer.cpp"
+#include "src/Core/GUI/EditorGUI.cpp"
+#include "src/Core/GUI/GUISystem.cpp"
+#include "src/Core/GUI/Inspector.cpp"
+#include "src/Core/GUI/WorldEdit.cpp"
+#include "src/Core/GUI/Hierarchy.cpp"
+#include "src/Core/GUI/VisualScriptEditor.cpp"
+#include "src/Core/GUI/EngineSettings.cpp"
+#include "src/Core/GUI/EngineStatistics.cpp"
+#include "src/Core/GUI/SceneViewer.cpp"
 
-#include "src/Parsers/BlueprintParser.cpp"
+#include "src/Core/Parsers/BlueprintParser.cpp"
 
-#include "src/World/VisualChunk.cpp"
-#include "src/World/VisualRegion.cpp"
+#include "src/Core/World/VisualChunk.cpp"
+#include "src/Core/World/VisualRegion.cpp"
+#include "src/Core/World/World.cpp"
 
-#include "src/Engine.cpp"
-#include "src/EngineCommands.cpp"
-#include "src/EvoScriptAPI.cpp"
+#include "src/Core/Engine.cpp"
+#include "src/Core/EngineCommands.cpp"
+#include "src/Core/EvoScriptAPI.cpp"

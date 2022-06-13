@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_DYNAMICTEXTUREDESCRIPTORSET_H
 #define GAMEENGINE_DYNAMICTEXTUREDESCRIPTORSET_H
 
-#include <cstdint>
+#include <Debug.h>
 #include <vulkan/vulkan.h>
 
 namespace Framework::Graphics::VulkanTypes {

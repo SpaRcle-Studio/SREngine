@@ -31,7 +31,7 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
     m_multisample = kernel->GetMultisampleTarget();
 
     if (!m_device || !m_swapchain || !m_multisample) {
-        Helper::Debug::Error("VkImGUI::Init() : device, multisample or swapchain is nullptr!");
+        SR_ERROR("VkImGUI::Init() : device, multisample or swapchain is nullptr!");
         return false;
     }
 
@@ -39,7 +39,7 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         m_pool = EvoVulkan::Core::DescriptorPool::Create(m_device, 1000 * m_poolSizes.size(), m_poolSizes);
 
     if (!m_pool) {
-        Helper::Debug::Error("VkImGUI::Init() : failed to create descriptor pool!");
+        SR_ERROR("VkImGUI::Init() : failed to create descriptor pool!");
         return false;
     }
 
@@ -54,9 +54,11 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
                         VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
                     )
             },
-            m_device->MultisampleEnabled(), false);
+            m_device->MultisampleEnabled(), false
+    );
+
     if (!m_renderPass.Ready()) {
-        Helper::Debug::Error("VkImGUI::Init() : failed to create render pass!");
+        SR_ERROR("VkImGUI::Init() : failed to create render pass!");
         return false;
     }
 
@@ -87,11 +89,11 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
     };
 
     if (!ImGui_ImplVulkan_Init(&init_info, m_renderPass)) {
-        Helper::Debug::Error("Vulkan::InitGUI() : failed to init vulkan imgui implementation!");
+        SR_ERROR("Vulkan::InitGUI() : failed to init vulkan imgui implementation!");
         return false;
     }
     else {
-        auto single = EvoVulkan::Types::CmdBuffer::BeginSingleTime(m_device, kernel->GetCmdPool());
+        auto&& single = EvoVulkan::Types::CmdBuffer::BeginSingleTime(m_device, kernel->GetCmdPool());
         ImGui_ImplVulkan_CreateFontsTexture(*single);
         single->End();
         single->Destroy();
@@ -102,22 +104,22 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
     this->m_cmdBuffs.resize(m_swapchain->GetCountImages());
     for (auto& m_cmdBuff : m_cmdBuffs) {
         if (auto pool = m_device->CreateCommandPool(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT); pool != VK_NULL_HANDLE) {
-            this->m_cmdPools.emplace_back(pool);
+            m_cmdPools.emplace_back(pool);
 
-            auto info = EvoVulkan::Tools::Initializers::CommandBufferAllocateInfo(pool, VK_COMMAND_BUFFER_LEVEL_PRIMARY, 1);
+            auto&& info = EvoVulkan::Tools::Initializers::CommandBufferAllocateInfo(pool, VK_COMMAND_BUFFER_LEVEL_PRIMARY, 1);
             if (vkAllocateCommandBuffers(*m_device, &info, &m_cmdBuff) != VK_SUCCESS) {
-                Helper::Debug::Error("VkImGUI::Init() : failed to create command buffer!");
+                SR_ERROR("VkImGUI::Init() : failed to create command buffer!");
                 return false;
             }
         }
         else {
-            Helper::Debug::Error("VkImGUI::Init() : failed to create command pool!");
+            SR_ERROR("VkImGUI::Init() : failed to create command pool!");
             return false;
         }
     }
 
-    if (!this->ReSize(m_swapchain->GetSurfaceWidth(), m_swapchain->GetSurfaceHeight())) {
-        Helper::Debug::Error("Vulkan::InitGUI() : failed to resize frame buffers!");
+    if (!ReSize(m_swapchain->GetSurfaceWidth(), m_swapchain->GetSurfaceHeight())) {
+        SR_ERROR("Vulkan::InitGUI() : failed to resize frame buffers!");
         return false;
     }
 
@@ -137,15 +139,17 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Destroy() {
     if (m_pool) {
         delete m_pool;
         m_pool = nullptr;
-    } else {
-        Helper::Debug::Error("VkImGUI::Destroy() : descriptor pool is nullptr!");
+    }
+    else {
+        SR_ERROR("VkImGUI::Destroy() : descriptor pool is nullptr!");
         return false;
     }
 
-    if (m_renderPass.Ready())
+    if (m_renderPass.Ready()) {
         DestroyRenderPass(m_device, &m_renderPass);
+    }
     else {
-        Helper::Debug::Error("VkImGUI::Destroy() : render pass isn't ready!");
+        SR_ERROR("VkImGUI::Destroy() : render pass isn't ready!");
         return false;
     }
 
@@ -170,15 +174,17 @@ void Framework::Graphics::VulkanTypes::VkImGUI::Free() {
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t height) {
-    Helper::Debug::Graph("VkImGUI::ReSize() : resize imgui vulkan frame buffers...");
+    SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...");
 
     if (!m_device || !m_swapchain) {
-        Helper::Debug::Error("VkImGUI::ReSize() : device or swapchain is nullptr!");
+        SR_ERROR("VkImGUI::ReSize() : device or swapchain is nullptr!");
         return false;
     }
 
-    for (auto& buffer : m_frameBuffs)
+    for (auto& buffer : m_frameBuffs) {
         vkDestroyFramebuffer(*m_device, buffer, nullptr);
+    }
+
     m_frameBuffs.clear();
     m_frameBuffs.resize(m_swapchain->GetCountImages());
 
@@ -190,12 +196,13 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t 
         if (m_device->MultisampleEnabled()) {
             attaches[0] = m_multisample->GetResolve(0);
             attaches[1] = m_swapchain->GetBuffers()[i].m_view;
-        } else
+        }
+        else
             attaches[0] = m_swapchain->GetBuffers()[i].m_view;
 
         fbInfo.pAttachments = attaches.data();
         if (vkCreateFramebuffer(*m_device, &fbInfo, nullptr, &m_frameBuffs[i]) != VK_SUCCESS) {
-            Helper::Debug::Error("VkImGUI::ReSize() : failed to create frame buffer!");
+            SR_ERROR("VkImGUI::ReSize() : failed to create frame buffer!");
             return false;
         }
     }

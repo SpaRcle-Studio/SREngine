@@ -5,8 +5,8 @@
 #ifndef GAMEENGINE_BONE_H
 #define GAMEENGINE_BONE_H
 
-#include <EntityComponentSystem/Component.h>
-#include <Debug.h>
+#include <ECS/Component.h>
+
 #include <Types/Mesh.h>
 #include <Render/Render.h>
 
@@ -19,7 +19,7 @@ namespace Framework::Graphics::Animations {
     private:
         Types::Mesh* m_mesh = nullptr;
     public:
-        static Component* LoadComponent(const Helper::MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
+        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 
@@ -27,7 +27,7 @@ namespace Framework::Graphics::Animations {
             if (m_mesh) {
                 SR_ERROR("Bone::SetRender() : render is already set!");
             }
-            else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", MeshType::Static); !meshes.empty()) {
+            else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", Types::MeshType::Static); !meshes.empty()) {
                 m_mesh = meshes[0];
                 render->RegisterMesh(m_mesh);
             }
@@ -47,17 +47,13 @@ namespace Framework::Graphics::Animations {
             if (m_mesh)
                 m_mesh->OnScaled(value);
         }
-        void OnDestroyGameObject() override {
-            delete this;
-        }
-        void OnRemoveComponent() override {
-            if (m_mesh)
-                m_mesh->OnRemoveComponent();
+        void OnDestroy() override {
+            if (m_mesh) {
+                m_mesh->OnDestroy();
+                m_mesh = nullptr;
+            }
 
-            OnDestroyGameObject();
-        }
-        void OnAttachComponent() override {
-            Component::OnAttachComponent();
+            delete this;
         }
     };
 }

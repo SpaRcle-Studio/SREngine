@@ -270,6 +270,10 @@ namespace FbxLoader::Tools {
         return text;
     }
 
+    static inline float_t CastToFloat(const std::string& str) {
+        return std::stof(str);
+    }
+
     static inline std::vector<float_t> SplitAndCastToFloat(const std::string& str, char splitter) {
         auto result = std::vector<float_t>();
         std::istringstream ss(str);

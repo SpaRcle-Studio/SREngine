@@ -7,11 +7,9 @@
 
 #include <GUI.h>
 #include <Utils/NonCopyable.h>
-#include <unordered_map>
-#include <string>
 #include <Math/Vector4.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     inline static const std::unordered_map<std::string, float ImGuiStyle::*> STYLE_FLOAT_VALUES = {
             { "Alpha", &ImGuiStyle::Alpha },
             { "WindowRounding", &ImGuiStyle::WindowRounding },

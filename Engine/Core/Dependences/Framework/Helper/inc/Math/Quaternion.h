@@ -6,13 +6,8 @@
 #define GAMEENGINE_QUATERNION_H
 
 #include <Math/Mathematics.h>
-#include <glm/glm.hpp>
-#include <glm/detail/type_quat.hpp>
-#include <limits>
-#include <algorithm>
-#include <glm/gtc/quaternion.hpp>
 
-namespace Framework::Helper::Math {
+namespace SR_UTILS_NS::Math {
     template<typename T> struct Vector3;
 
     class Matrix4x4;
@@ -22,18 +17,10 @@ namespace Framework::Helper::Math {
     private:
         glm::quat self{};
     public:
-        [[nodiscard]] inline glm::quat ToGLM() const {
-            return self;
-        }
-
+        [[nodiscard]] inline glm::quat ToGLM() const { return self; }
         [[nodiscard]] Matrix4x4 ToMat4x4() const;
-
-        [[nodiscard]] inline glm::mat4 ToMat4x4GLM() const {
-            return mat4_cast(self);
-        }
-
-        [[nodiscard]] Vector3<Unit> EulerAngle() const; //bool degrees = true
-
+        [[nodiscard]] inline glm::mat4 ToMat4x4GLM() const { return mat4_cast(self); }
+        [[nodiscard]] Vector3<Unit> EulerAngle() const;
         [[nodiscard]] Quaternion Rotate(const Vector3<Unit>& v) const;
 
         constexpr Quaternion(const Quaternion &p_q) {

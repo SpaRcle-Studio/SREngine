@@ -5,12 +5,6 @@
 #ifndef SRENGINE_SEMAPHORE_H
 #define SRENGINE_SEMAPHORE_H
 
-#include <atomic>
-
-#include <string>
-#include <mutex>
-#include <cstdlib>
-
 #include <Debug.h>
 
 namespace Framework::Helper::Types {

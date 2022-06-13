@@ -5,23 +5,14 @@
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
 
-#include <GUI.h>
 #include <Environment/Environment.h>
-
-#define GLFW_EXPOSE_NATIVE_WIN32
 
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
-#include <glm/glm.hpp>
-#include <glm\gtc\type_ptr.hpp>
-#include <Debug.h>
-
 #ifdef WIN32
-#include <wingdi.h>
+    #include <wingdi.h>
 #endif
-
-//#define SR_OPENGL_USE_WINAPI
 
 namespace Framework::Graphics {
     class OpenGL : public Environment {
@@ -55,7 +46,7 @@ namespace Framework::Graphics {
 
         // ============================= [ WINDOW METHODS ] =============================
 
-        bool MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) override;
+        bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
 
         bool PreInit(
                 uint32_t smooth_samples,
@@ -95,10 +86,10 @@ namespace Framework::Graphics {
         void SetDepthTestEnabled(bool value) override;
 
         [[nodiscard]] glm::vec2 GetWindowSize() const override {
+            return { m_basicWindow->GetWidth(), m_basicWindow->GetHeight() };
 #ifdef  SR_OPENGL_USE_WINAPI
-            return { this->m_basicWindow->GetWidth(), this->m_basicWindow->GetHeight() };
 #else
-            return { this->m_winFormat->Width(), this->m_winFormat->Height() };
+            //return { this->m_winFormat->Width(), this->m_winFormat->Height() };
 #endif
         }
 
@@ -242,7 +233,7 @@ namespace Framework::Graphics {
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes
-        ) const override;
+        ) override;
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
@@ -310,25 +301,27 @@ namespace Framework::Graphics {
          */
         int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO = SR_ID_INVALID) override;
-        int32_t CalculateVAO(std::vector<Vertices::Mesh3DVertex>& vertices, size_t count_verts) override;
-        [[nodiscard]] bool FreeVAO(uint32_t VAO) const override;
+        int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) override;
+        [[nodiscard]] bool FreeVAO(int32_t* VAO) const override;
         SR_FORCE_INLINE void DrawLines(const uint32_t& VAO, const uint32_t& count_vertices) const override {
             glBindVertexArray(VAO);
             /// glDrawArrays(GL_LINES, 0, count_vertices);
         }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(uint32_t ID) const override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-                Helper::Debug::Log("OpenGL::FreeVBO() : free VBO \"" + std::to_string(ID) + "\" VAO...");
+        [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const override {
+            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+                SR_LOG("OpenGL::FreeVBO() : free VBO \"" + std::to_string(*ID) + "\" VAO...");
+            }
 
-            if (ID > 0) {
-                glDeleteVertexArrays(1, &ID); // VAO
+            if (*ID > 0) {
+                glDeleteVertexArrays(1, reinterpret_cast<const GLuint *>(ID)); // VAO
                 return true;
-            } else {
-                Helper::Debug::Error("OpenGL::FreeVBO() : VBO (VAO) is zero! Something went wrong...");
+            }
+            else {
+                SR_ERROR("OpenGL::FreeVBO() : VBO (VAO) is zero! Something went wrong...");
                 return false;
             }
         }
-        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(uint32_t ID) const override {
+        [[nodiscard]] SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const override {
             return true; // nothing
         }
 
@@ -402,15 +395,15 @@ namespace Framework::Graphics {
             //glBindVertexArray(0);
         }
 
-        SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) const override {
+        SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) override {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO); // EBO
         }
 
-        SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) const override {
+        SR_FORCE_INLINE void BindVAO(const uint32_t& VAO) override {
             glBindVertexArray(VAO);
         }
 
-        SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) const override {
+        SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {
             glBindVertexArray(VBO); // VAO
         }
 
@@ -439,10 +432,10 @@ namespace Framework::Graphics {
                 bool alpha,
                 bool cpuUsage) const override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override;
-        SR_FORCE_INLINE bool FreeCubeMap(int32_t ID) override{
-            Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
+        SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) override{
+            //Helper::Debug::Graph("OpenGL::FreeCubeMap() : free ("+std::to_string(ID)+") cube map...");
             //glClearTexSubImage()
-            glDeleteTextures(6, reinterpret_cast<const GLuint *>(&ID)); // TODO: I don't know if this works
+            //glDeleteTextures(6, reinterpret_cast<const GLuint *>(&ID)); // TODO: I don't know if this works
             return true;
         }
         [[nodiscard]] bool FreeFBO(uint32_t FBO) const override {
@@ -453,7 +446,7 @@ namespace Framework::Graphics {
             ///  glDeleteFramebuffers(1, &RBO);
             return true;
         }
-        [[nodiscard]] bool FreeTexture(uint32_t ID) const override;
+        [[nodiscard]] bool FreeTexture(int32_t* id) const override;
         [[nodiscard]] bool FreeTextures(int32_t* IDs, uint32_t count) const override;
     };
 }

@@ -85,14 +85,16 @@ uint64_t Xml::Attribute::ToUInt64(uint64_t def) const {
 }
 
 Framework::Helper::Xml::Document Framework::Helper::Xml::Document::Load(const std::string &path)  {
-    auto xml = Document();
-    if (pugi::xml_parse_result result = xml.m_document.load_file(path.c_str())) {
+    auto xml = Document::New();
+    if (pugi::xml_parse_result result = xml.m_document->load_file(path.c_str())) {
         xml.m_valid = true;
         xml.m_path = path;
-    } else {
-        Helper::Debug::Error("Document::Load() : failed to load xml! \n\tPath: " + path + "\n\tDescription: " + std::string(result.description()));
+    }
+    else {
+        SR_ERROR("Document::Load() : failed to load xml! \n\tPath: " + path + "\n\tDescription: " + std::string(result.description()));
         Xml::g_xml_last_error = -3;
     }
+
     return xml;
 }
 
@@ -101,7 +103,7 @@ std::string Xml::Document::Dump() const {
         return std::string();
 
     std::ostringstream stream;
-    m_document.save(stream, PUGIXML_TEXT("    "));
+    m_document->save(stream, PUGIXML_TEXT("    "));
 
     return stream.str();
 }

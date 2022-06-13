@@ -6,12 +6,16 @@
 #define SRENGINE_PLATFORM_H
 
 #include <Math/Vector2.h>
+#include <Utils/ThreadUtils.h>
 
 namespace SR_UTILS_NS::Platform {
     extern void TextToClipboard(const std::string& text);
     extern std::string GetClipboardText();
     extern void ClearClipboard();
     extern Math::FVector2 GetMousePos();
+    extern void Sleep(uint64_t milliseconds);
+    extern uint64_t GetProcessUsedMemory();
+    extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
 }
 
 #endif //SRENGINE_PLATFORM_H

@@ -2,300 +2,384 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#include <Debug.h>
-#include "Types/Material.h"
+#include <Types/Material.h>
+
 #include <Types/Mesh.h>
 #include <Render/Shader.h>
-#include <iostream>
+#include <Types/Texture.h>
+#include <ResourceManager/IResource.h>
 
-using namespace Framework::Graphics::Types;
+namespace SR_GTYPES_NS {
+    Material::Material()
+        : SR_UTILS_NS::IResource(typeid(Material).name(), true /** autoRemove */)
+        , m_env(Environment::Get())
+    { }
 
-Material::Material(Texture *diffuse, Texture *normal, Texture *specular, Texture *glossiness)
-    : Helper::IResource(typeid(Material).name())
-{
-    if (!m_env)
-        m_env = Environment::Get();
+    void Material::Use() {
+        InitShader();
 
-    SetDiffuse(diffuse);
-    SetNormal(normal);
-    SetSpecular(specular);
-    SetGlossiness(glossiness);
-}
-
-Material::~Material() {
-    if (Debug::GetLevel() >= Debug::Level::Full) {
-        SR_LOG("Material::FreeTextures() : free material textures...");
-    }
-
-    SetReadOnly(false);
-
-    SetDiffuse(nullptr);
-    SetNormal(nullptr);
-    SetSpecular(nullptr);
-    SetGlossiness(nullptr);
-}
-
-void Material::UseOpenGL() const {
-    if (m_diffuse) {
-        m_env->BindTexture(4, m_diffuse->GetID());
-        Shader::GetCurrentShader()->SetInt("diffuseMap", 4);
-        //m_mesh->m_shader->SetBool("hasDiffuse", true);
-    } //else{
-        //m_env->BindTexture(1, 0);
-        //m_mesh->m_shader->SetInt("diffuseMap", 1);
-        //_mesh->m_shader->SetBool("hasDiffuse", false);
-    //}
-}
-
-void Material::UseVulkan() {
-    /*
-     *   0 - model
-     *   1 - view/proj
-     *   2 - diffuse
-     */
-
-    if (m_diffuse) {
-        m_env->BindTexture(2, m_diffuse->GetID());
-    }
-}
-
-void Material::SetDiffuse(Texture* texture) {
-    if (IsReadOnly()) return;
-
-    if (texture)
-        texture->AddUsePoint();
-
-    if (m_diffuse) {
-        m_diffuse->RemoveUsePoint();
-
-        if (m_diffuse->GetCountUses() <= 1 && m_diffuse->IsEnabledAutoRemove())
-            m_diffuse->Destroy();
-    }
-
-    m_diffuse = texture;
-
-    Environment::Get()->SetBuildState(false);
-}
-void Material::SetNormal(Texture *tex) {
-    if (IsReadOnly()) return;
-
-    if (tex)
-        tex->AddUsePoint();
-
-    if (m_normal) {
-        m_normal->RemoveUsePoint();
-
-        if (m_normal->GetCountUses() <= 1 && m_normal->IsEnabledAutoRemove())
-            m_normal->Destroy();
-    }
-
-    m_normal = tex;
-
-    Environment::Get()->SetBuildState(false);
-}
-void Material::SetSpecular(Texture* tex) {
-    if (IsReadOnly()) return;
-
-    if (tex)
-        tex->AddUsePoint();
-
-    if (m_specular) {
-        m_specular->RemoveUsePoint();
-
-        if (m_specular->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
-            m_specular->Destroy();
-    }
-
-    m_specular = tex;
-
-    Environment::Get()->SetBuildState(false);
-}
-
-void Material::SetGlossiness(Texture*tex) {
-    if (IsReadOnly()) return;
-
-    if (tex)
-        tex->AddUsePoint();
-
-    if (m_glossiness) {
-        m_glossiness->RemoveUsePoint();
-
-        if (m_glossiness->GetCountUses() <= 1 && m_specular->IsEnabledAutoRemove())
-            m_glossiness->Destroy();
-    }
-
-    m_glossiness = tex;
-
-    Environment::Get()->SetBuildState(false);
-}
-
-bool Material::SetTransparent(bool value) {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    if (IsReadOnly())
-        return false;
-
-    m_transparent = value;
-
-    for (auto&& subscriber : m_subscriptions)
-        subscriber->OnTransparencyChanged();
-
-    return true;
-}
-
-Framework::Helper::IResource* Material::Copy(Framework::Helper::IResource* destination) const {
-    if (destination)
-        SR_WARN("Material::Copy() : destination ignored!");
-
-    auto material = new Material(m_diffuse, m_normal, m_specular, m_glossiness);
-
-    material->SetBloom(m_bloom);
-    material->SetColor(m_color);
-    material->SetTransparent(m_transparent);
-
-    return Helper::IResource::Copy(material);
-}
-
-Material::Material()
-    : Material(nullptr, nullptr, nullptr, nullptr)
-{ }
-
-Material *Material::Load(const std::string &name) {
-    if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(name))
-        return pMaterial;
-
-    if (auto doc = Xml::Document::Load(ResourceManager::Instance().GetMaterialsPath().Concat(name).ConcatExt("mat")); doc.Valid()) {
-        auto matXml = doc.Root().GetNode("Material");
-
-        auto material = new Material();
-
-        if (auto diffuse = matXml.TryGetNode("Diffuse"))
-            material->SetDiffuse(Texture::Load(diffuse.GetAttribute("Path").ToString()));
-
-        if (auto color = matXml.TryGetNode("Color"))
-            material->SetColor(Xml::NodeToColor<true>(color));
-
-        material->SetId(name);
-
-        material->SetReadOnly(matXml.TryGetAttribute("ReadOnly").ToBool(false));
-
-        return material;
-    }
-
-    SR_ERROR("Material::Load() : file not found! Path: " + name + ".mat");
-
-    return nullptr;
-}
-
-Material *Material::GetDefault() {
-    return m_default;
-}
-
-bool Material::InitDefault(Render* render) {
-    if (!m_default) {
-        if ((m_default = Material::Load("Engine/default")))
-            m_default->AddUsePoint();
-
-        return m_default->Register(render);
-    }
-
-    return false;
-}
-
-bool Material::FreeDefault() {
-    SR_INFO("Material::FreeDefault() : free default material...");
-
-    if (m_default) {
-        if (m_default->GetCountUses() <= 1 && m_default->GetCountSubscriptions() == 0) {
-            m_default->RemoveUsePoint();
-            m_default->Destroy();
-
-            m_default = nullptr;
-            return true;
+        for (const Material::Property& property : m_properties) {
+            switch (property.type) {
+                case ShaderVarType::Int:
+                    m_shader->SetInt(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<int32_t>(property.data));
+                    break;
+                case ShaderVarType::Float:
+                    m_shader->SetFloat(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<float_t>(property.data));
+                    break;
+                case ShaderVarType::Vec2:
+                    m_shader->SetVec2(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector2>(property.data).ToGLM());
+                    break;
+                case ShaderVarType::Vec3:
+                    m_shader->SetVec3(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector3>(property.data).ToGLM());
+                    break;
+                case ShaderVarType::Vec4:
+                    m_shader->SetVec4(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector4>(property.data).ToGLM());
+                    break;
+                case ShaderVarType::Sampler2D:
+                    /// samplers used at UseSamplers
+                    break;
+                default:
+                    SRAssertOnce(false);
+                    break;
+            }
         }
-        else {
-            SRAssert2(false, Helper::Format("Material::FreeDefault() : the material is still in use! Count uses: %i", m_default->GetCountUses()).c_str());
+    }
+
+    bool Material::SetTransparent(bool value) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        if (IsReadOnly())
+            return false;
+
+        m_transparent = value;
+
+        return true;
+    }
+
+    SR_UTILS_NS::IResource* Material::Copy(SR_UTILS_NS::IResource* destination) const {
+        SRAssert2(false, "Material is not are copyable!");
+        return nullptr;
+    }
+
+    Material* Material::Load(const std::string &path) {
+        SR_GLOBAL_LOCK
+
+        if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(path))
+            return pMaterial;
+
+        auto&& pMaterial = new Material();
+
+        pMaterial->SetId(path, false);
+
+        if (!pMaterial->Reload()) {
+            delete pMaterial;
+            return nullptr;
+        }
+
+        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMaterial);
+
+        return pMaterial;
+    }
+
+    Material* Material::GetDefault() {
+        return m_default;
+    }
+
+    bool Material::InitDefault(Render* render) {
+        if (!m_default) {
+            if ((m_default = Material::Load("Engine/default.mat"))) {
+                m_default->AddUsePoint();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool Material::FreeDefault() {
+        SR_INFO("Material::FreeDefault() : free default material...");
+
+        if (m_default) {
+            if (m_default->GetCountUses() <= 1) {
+                m_default->RemoveUsePoint();
+                m_default->Destroy();
+
+                m_default = nullptr;
+                return true;
+            }
+            else {
+                SRAssert2(false, Helper::Format("Material::FreeDefault() : the material is still in use! Count uses: %i", m_default->GetCountUses()).c_str());
+                return false;
+            }
+        }
+
+        SR_ERROR("Material::FreeDefault() : the material is nullptr!");
+
+        return false;
+    }
+
+    bool Material::Destroy() {
+        if (IsDestroyed())
+            return false;
+
+        SetReadOnly(false);
+        SetShader(nullptr);
+
+        for (auto&& property : m_properties) {
+            switch (property.type) {
+                case ShaderVarType::Sampler2D:
+                    SetTexture(&property, nullptr);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return IResource::Destroy();
+    }
+
+    void SR_GTYPES_NS::Material::SetBloom(bool value) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        m_bloom = value;
+    }
+
+    void SR_GTYPES_NS::Material::SetShader(Shader *shader) {
+        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        if (m_shader == shader) {
+            return;
+        }
+
+        m_dirtyShader = true;
+
+        if (m_shader) {
+            auto&& render = m_shader->GetRender();
+            RemoveDependency(m_shader);
+            if (m_shader->GetCountUses() == 0) {
+                if (m_shader->Ready()) {
+                    SRAssert2(render, "Render are nullptr!");
+                    if (render) {
+                        render->FreeShader(m_shader);
+                    }
+                }
+                else {
+                    m_shader->Destroy();
+                }
+            }
+            m_shader = nullptr;
+        }
+
+        if (!(m_shader = shader)) {
+            return;
+        }
+
+        AddDependency(m_shader);
+    }
+
+    void Material::SetTexture(Material::Property* property, Texture *pTexture) {
+        if (!SRVerifyFalse(!property)) {
+            return;
+        }
+
+        SR_SCOPED_LOCK
+
+        if (auto&& oldTexture = std::get<Texture*>(property->data)) {
+            if (oldTexture == pTexture) {
+                return;
+            }
+
+            RemoveDependency(oldTexture);
+
+            if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove() && !oldTexture->IsDestroyed())
+                oldTexture->Destroy();
+        }
+
+        if (pTexture) {
+            AddDependency(pTexture);
+        }
+
+        property->data = pTexture;
+
+        /// обновляем всю иерархию вверх (меши)
+        UpdateResources(1);
+
+        Environment::Get()->SetBuildState(false);
+    }
+
+    void Material::UseSamplers() {
+        InitShader();
+
+        if (m_env->GetCurrentDescriptorSet() == SR_ID_INVALID) {
+            return;
+        }
+
+        for (const Material::Property& property : m_properties) {
+            switch (property.type) {
+                case ShaderVarType::Sampler2D:
+                    m_shader->SetSampler2D(property.id, std::get<Texture*>(property.data));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    void Material::InitShader() {
+        if (m_dirtyShader) {
+            Properties properties = m_properties;
+
+            m_properties.clear();
+
+            if (m_shader) {
+                for (auto&&[name, property] : m_shader->GetProperties()) {
+                    Property aProperty;
+
+                    aProperty.id = name;
+                    aProperty.displayName = name; // TODO: make a pretty name
+                    aProperty.data = GetVariantFromShaderVarType(property);
+                    aProperty.type = property;
+
+                    m_properties.emplace_back(aProperty);
+                }
+            }
+
+            for (auto&& property : properties) {
+                if (auto&& pProperty = GetProperty(property.id); pProperty && pProperty->type == property.type) {
+                    pProperty->data = property.data;
+                }
+                else if (property.type == ShaderVarType::Sampler2D) {
+                    auto&& pTexture = std::get<Texture*>(property.data);
+
+                    if (!pTexture) {
+                        continue;
+                    }
+
+                    RemoveDependency(pTexture);
+
+                    if (pTexture->GetCountUses() <= 1 && pTexture->IsEnabledAutoRemove())
+                        pTexture->Destroy();
+                }
+            }
+
+            m_dirtyShader = false;
+        }
+    }
+
+    void Material::OnResourceUpdated(IResource *pResource, int32_t depth) {
+        if (dynamic_cast<Shader*>(pResource) == m_shader && m_shader) {
+            m_dirtyShader = true;
+        }
+
+        IResource::OnResourceUpdated(pResource, depth);
+    }
+
+    Material::Property *Material::GetProperty(const std::string& id) {
+        for (auto&& property : m_properties) {
+            if (property.id == id) {
+                return &property;
+            }
+        }
+
+        return nullptr;
+    }
+
+    bool Material::Reload() {
+        SR_LOG("Material::Reload() : reloading \"" + GetResourceId() + "\" material...");
+
+        m_loadState = LoadState::Reloading;
+
+        /// clear old data
+        {
+            SetReadOnly(false);
+            SetShader(nullptr);
+            InitShader();
+        }
+
+        const auto&& path = ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
+
+        auto&& document = Xml::Document::Load(path);
+        if (!document.Valid()) {
+            SR_ERROR("Material::Reload() : file not found! \n\tPath: " + path.ToString());
             return false;
         }
+
+        auto&& matXml = document.Root().GetNode("Material");
+        if (!matXml) {
+            SR_ERROR("Material::Reload() : \"Material\" node not found! \n\tPath: " + path.ToString());
+            return false;
+        }
+
+        if (auto&& shader = matXml.TryGetNode("Shader")) {
+            auto&& render = RenderManager::Instance().Get("Main");
+            auto&& pShader = Shader::Load(shader.GetAttribute("Path").ToString());
+
+            SetShader(pShader);
+            InitShader();
+        }
+
+        if (auto&& properties = matXml.TryGetNode("Properties")) {
+            for (auto&& propertyXml : properties.GetNodes()) {
+                const std::string id = propertyXml.GetAttribute("Id").ToString();
+                auto&& type = StringToEnumShaderVarType(propertyXml.GetAttribute("Type").ToString());
+
+                Property* pProperty = GetProperty(id);
+
+                if (!pProperty) {
+                    SR_WARN("Material::Reload() : failed to load \"" + id + "\" property!")
+                    continue;
+                }
+
+                if (pProperty->type != type) {
+                    SR_WARN("Material::Reload() : incompatible types in \"" + id + "\" property!")
+                    continue;
+                }
+
+                switch (type) {
+                    case ShaderVarType::Int:
+                        pProperty->data = propertyXml.GetAttribute<int32_t>();
+                        break;
+                    case ShaderVarType::Float:
+                        pProperty->data = propertyXml.GetAttribute<float_t>();
+                        break;
+                    case ShaderVarType::Vec2:
+                        pProperty->data = propertyXml.GetAttribute<SR_MATH_NS::FVector2>();
+                        break;
+                    case ShaderVarType::Vec3:
+                        pProperty->data = propertyXml.GetAttribute<SR_MATH_NS::FVector3>();
+                        break;
+                    case ShaderVarType::Vec4:
+                        pProperty->data = propertyXml.GetAttribute<SR_MATH_NS::FVector4>();
+                        break;
+                    case ShaderVarType::Sampler2D:
+                        SetTexture(pProperty, Texture::Load(propertyXml.GetAttribute<std::string>()));
+                        break;
+                    case ShaderVarType::Mat2:
+                    case ShaderVarType::Mat3:
+                    case ShaderVarType::Mat4:
+                    case ShaderVarType::Sampler1D:
+                    case ShaderVarType::Sampler3D:
+                    case ShaderVarType::SamplerCube:
+                    case ShaderVarType::Sampler1DShadow:
+                    case ShaderVarType::Sampler2DShadow:
+                    case ShaderVarType::Unknown:
+                    default:
+                        SRAssert(false);
+                        break;
+                }
+            }
+        }
+
+        SetReadOnly(matXml.TryGetAttribute("ReadOnly").ToBool(false));
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+
+        return true;
     }
 
-    SR_ERROR("Material::FreeDefault() : the material is nullptr!");
-
-    return false;
-}
-
-void Material::Subscribe(Mesh *mesh) {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    SRAssert(m_subscriptions.count(mesh) == 0);
-    m_subscriptions.insert(mesh);
-    AddUsePoint();
-}
-
-void Material::UnSubscribe(Mesh *mesh) {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    SRAssert(GetCountUses() > 0);
-    SRAssert(m_subscriptions.count(mesh) == 1);
-    m_subscriptions.erase(mesh);
-
-    RemoveUsePoint();
-
-    if (m_subscriptions.empty() && GetCountUses() == 0)
-        Destroy();
-}
-
-uint32_t Material::GetCountSubscriptions() const {
-    std::lock_guard<std::mutex> lock(m_mutex);
-    return m_subscriptions.size();
-}
-
-bool Material::Destroy() {
-    if (IsDestroyed())
-        return false;
-
-    return IResource::Destroy();
-}
-
-void Material::SetColor(glm::vec4 color) {
-    if (IsReadOnly())
-        return;
-
-    m_color = color;
-    UpdateSubscribers();
-}
-
-void Material::SetColor(const Math::FColor &color) {
-    if (IsReadOnly())
-        return;
-
-    m_color = color;
-    UpdateSubscribers();
-}
-
-bool Material::Register(Framework::Graphics::Render *render) {
-    SRAssert(render);
-
-    if (m_render) {
-        SRAssert(render == m_render);
-        return false;
+    SR_UTILS_NS::Path Material::GetAssociatedPath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
     }
-
-    m_render = render;
-
-    if (m_diffuse    && !m_diffuse->HasRender())    m_render->RegisterTexture(m_diffuse);
-    if (m_normal     && !m_normal->HasRender())     m_render->RegisterTexture(m_normal);
-    if (m_specular   && !m_specular->HasRender())   m_render->RegisterTexture(m_specular);
-    if (m_glossiness && !m_glossiness->HasRender()) m_render->RegisterTexture(m_glossiness);
-
-    return true;
 }
-
-void Material::UpdateSubscribers() {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-    for (auto&& subscriber : m_subscriptions)
-        subscriber->UpdateUBO();
-}
-
-

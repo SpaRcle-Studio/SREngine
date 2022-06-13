@@ -5,173 +5,34 @@
 #ifndef SRENGINE_MARSHAL_H
 #define SRENGINE_MARSHAL_H
 
-#include <macros.h>
-
-#include <fstream>
-#include <ostream>
-#include <sstream>
-#include <string>
-
-#include <unordered_map>
-#include <unordered_set>
-#include <list>
+#include <Utils/MarshalUtils.h>
 
 #include <FileSystem/Path.h>
 #include <Math/Vector2.h>
 #include <Math/Vector3.h>
+#include <Utils/NonCopyable.h>
 #include <Utils/StringFormat.h>
-#include <variant>
 
-namespace SR_UTILS_NS {
+namespace SR_HTYPES_NS {
     class MarshalDecodeNode;
 }
 
 namespace std {
-    template<> struct hash<Framework::Helper::MarshalDecodeNode> {
-        size_t operator()(Framework::Helper::MarshalDecodeNode const& value) const;
+    template<> struct hash<SR_HTYPES_NS::MarshalDecodeNode> {
+        size_t operator()(SR_HTYPES_NS::MarshalDecodeNode const& value) const;
     };
 }
 
-namespace SR_UTILS_NS {
-    enum class MARSHAL_TYPE : uint8_t {
-        Node = 0,
-        Bool = 1,
-        Int8 = 2,
-        UInt8 = 3,
-        Int16 = 4,
-        UInt16 = 5,
-        Int32 = 6,
-        UInt32 = 7,
-        Int64 = 8,
-        UInt64 = 9,
-        Float = 10,
-        Double = 11,
-        String = 12,
+namespace SR_HTYPES_NS {
+    struct MarshalAttribute {
+#if SR_MARSHAL_USE_LIST
+        std::string m_name;
+#endif
+        MARSHAL_TYPE m_type;
+        std::string m_data;
     };
 
-    namespace MarshalUtils {
-        template<typename T> constexpr MARSHAL_TYPE TypeToMarshal() {
-            if constexpr (std::is_same<T, bool>()) {
-                return MARSHAL_TYPE::Bool;
-            }
-            else if constexpr (std::is_same<T, int8_t>() || std::is_same<T, char>()) {
-                return MARSHAL_TYPE::Int8;
-            }
-            else if constexpr (std::is_same<T, uint8_t>() || std::is_same<T, unsigned char>()) {
-                return MARSHAL_TYPE::UInt8;
-            }
-            else if constexpr (std::is_same<T, int16_t>() || std::is_same<T, short>()) {
-                return MARSHAL_TYPE::Int16;
-            }
-            else if constexpr (std::is_same<T, uint16_t>() || std::is_same<T, unsigned short>()) {
-                return MARSHAL_TYPE::UInt16;
-            }
-            else if constexpr (std::is_same<T, int32_t>() || std::is_same<T, int>()) {
-                return MARSHAL_TYPE::Int32;
-            }
-            else if constexpr (std::is_same<T, uint32_t>() || std::is_same<T, unsigned int>()) {
-                return MARSHAL_TYPE::UInt32;
-            }
-            else if constexpr (std::is_same<T, int64_t>() || std::is_same<T, long long>()) {
-                return MARSHAL_TYPE::Int64;
-            }
-            else if constexpr (std::is_same<T, uint64_t>() || std::is_same<T, unsigned long long>()) {
-                return MARSHAL_TYPE::UInt64;
-            }
-            else if constexpr (std::is_same<T, float_t>() || std::is_same<T, float>()) {
-                return MARSHAL_TYPE::Float;
-            }
-            else if constexpr (std::is_same<T, double_t>() || std::is_same<T, double>()) {
-                return MARSHAL_TYPE::Double;
-            }
-            else
-                return MARSHAL_TYPE::String;
-        }
-
-        template<typename T> static void SR_FASTCALL SaveValue(std::stringstream& stream, const T& value) {
-            stream.write((const char *) &value, sizeof(T));
-        }
-
-        static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str) {
-            const int16_t size = str.size();
-            stream.write((const char*)&size, sizeof(int16_t));
-            stream.write((const char*)&str[0], size * sizeof(char));
-        }
-
-        static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str) {
-            const size_t size = str.size();
-            stream.write((const char*)&size, sizeof(size_t));
-            stream.write((const char*)&str[0], size * sizeof(char));
-        }
-
-        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
-            T value;
-            stream.read((char*)&value, sizeof(T));
-            return value;
-        }
-
-        template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream) {
-            std::string str;
-            uint16_t size;
-            stream.read((char*)&size, sizeof(uint16_t));
-            str.resize(size);
-            stream.read((char*)&str[0], size * sizeof(char));
-            return str;
-        }
-
-        template<typename Stream> static std::string SR_FASTCALL LoadStr(Stream& stream) {
-            std::string str;
-            size_t size;
-            stream.read((char*)&size, sizeof(size_t));
-            str.resize(size);
-            stream.read((char*)&str[0], size * sizeof(char));
-            return str;
-        }
-
-        static void Encode(std::stringstream& stream, const std::string& str, MARSHAL_TYPE type) {
-            switch (type) {
-                case MARSHAL_TYPE::Bool: SaveValue(stream, LexicalCast<bool>(str)); break;
-                case MARSHAL_TYPE::Int8: SaveValue(stream, LexicalCast<int8_t>(str)); break;
-                case MARSHAL_TYPE::UInt8: SaveValue(stream, LexicalCast<uint8_t>(str)); break;
-                case MARSHAL_TYPE::Int16: SaveValue(stream, LexicalCast<int16_t>(str)); break;
-                case MARSHAL_TYPE::UInt16: SaveValue(stream, LexicalCast<uint16_t>(str)); break;
-                case MARSHAL_TYPE::Int32: SaveValue(stream, LexicalCast<int32_t>(str)); break;
-                case MARSHAL_TYPE::UInt32: SaveValue(stream, LexicalCast<uint32_t>(str)); break;
-                case MARSHAL_TYPE::Int64: SaveValue(stream, LexicalCast<int64_t>(str)); break;
-                case MARSHAL_TYPE::UInt64: SaveValue(stream, LexicalCast<uint64_t>(str)); break;
-                case MARSHAL_TYPE::Float: SaveValue(stream, LexicalCast<float_t>(str)); break;
-                case MARSHAL_TYPE::Double: SaveValue(stream, LexicalCast<double_t>(str)); break;
-                case MARSHAL_TYPE::String: SaveString(stream, str); break;
-                case MARSHAL_TYPE::Node:
-                    break;
-            }
-        }
-
-        static bool IsNumber(const MARSHAL_TYPE& type) {
-            switch (type) {
-                case MARSHAL_TYPE::Int8:
-                case MARSHAL_TYPE::UInt8:
-                case MARSHAL_TYPE::Int16:
-                case MARSHAL_TYPE::UInt16:
-                case MARSHAL_TYPE::Int32:
-                case MARSHAL_TYPE::UInt32:
-                case MARSHAL_TYPE::Int64:
-                case MARSHAL_TYPE::UInt64:
-                case MARSHAL_TYPE::Float:
-                case MARSHAL_TYPE::Double:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-    }
-
-    enum class MarshalSaveMode {
-        Binary,
-        Json
-    };
-
-    class MarshalEncodeNode {
+    class MarshalEncodeNode : public SR_UTILS_NS::NonCopyable {
         friend class MarshalDecodeNode;
     public:
         MarshalEncodeNode();
@@ -199,13 +60,13 @@ namespace SR_UTILS_NS {
         static MarshalEncodeNode LoadFromMemory(const std::string& data);
 
     public:
-        [[nodiscard]] MarshalDecodeNode Decode() const;
-
         bool Save(const Path& path, MarshalSaveMode mode = MarshalSaveMode::Binary) const;
+
         SR_NODISCARD std::stringstream Save() const;
         SR_NODISCARD bool Empty() const { return m_count == 0; }
         SR_NODISCARD bool Valid() const { return !Empty() && m_stream.rdbuf()->in_avail() > 0; }
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD MarshalDecodeNode Decode() const;
 
         template<typename T, typename U> MarshalEncodeNode& SR_FASTCALL AppendDef(const T& value, const U& def) {
             if constexpr (std::is_same<T, Math::FColor>()) {
@@ -273,14 +134,6 @@ namespace SR_UTILS_NS {
         std::stringstream m_stream;
         volatile uint16_t m_count = SR_UINT16_MAX;
 
-    };
-
-    struct MarshalAttribute {
-#if SR_MARSHAL_USE_LIST
-        std::string m_name;
-#endif
-        MARSHAL_TYPE m_type;
-        std::string m_data;
     };
 
     class MarshalDecodeNode {
@@ -401,25 +254,101 @@ namespace SR_UTILS_NS {
 
     class Marshal {
     public:
-        Marshal(MarshalEncodeNode encode) {
-            m_data = std::move(encode);
+        Marshal() = default;
+
+        Marshal(Marshal&& marshal) noexcept {
+            m_stream = std::exchange(marshal.m_stream, {});
+            m_size = std::exchange(marshal.m_size, {});
+        }
+
+        Marshal& operator=(Marshal&& marshal) noexcept {
+            m_stream = std::exchange(marshal.m_stream, {});
+            m_size = std::exchange(marshal.m_size, {});
+            return *this;
+        }
+
+        Marshal& operator=(const Marshal& marshal) = delete;
+        Marshal(const Marshal& marshal) = delete;
+
+    public:
+        bool Save(const Path& path) const;
+        SR_NODISCARD Marshal Copy() const;
+
+        static Marshal Load(const Path& path);
+        static Marshal LoadFromMemory(const std::string& data);
+
+        SR_NODISCARD bool Valid() const { return BytesCount() > 0; }
+        SR_NODISCARD uint64_t BytesCount() const { return m_size; }
+        SR_NODISCARD std::string ToString() const;
+
+        void Append(Marshal&& marshal) {
+            if (marshal.m_size > 0) {
+                m_size += marshal.m_size;
+                m_stream << marshal.m_stream.rdbuf();
+            }
+        }
+
+        Marshal ReadBytes(uint32_t size) {
+            Marshal marshal;
+
+            std::string buffer;
+            buffer.resize(size);
+            m_stream.read((char*)&buffer[0], size * sizeof(char));
+
+            marshal.m_stream << buffer;
+            marshal.m_size = size;
+
+            return marshal;
+        }
+
+        template<typename T> void Write(const T& value) {
+            if constexpr (Math::IsString<T>()) {
+                m_size += sizeof(size_t);
+                m_size += value.size() * sizeof(char);
+                MarshalUtils::SaveString(m_stream, value);
+            }
+            else {
+                m_size += sizeof(T);
+                MarshalUtils::SaveValue(m_stream, value);
+            }
+        }
+
+        template<typename T> T View(uint64_t offset) const {
+            T value = T();
+
+            memcpy(
+                &value,
+                m_stream.rdbuf()->view().substr(offset, sizeof(T)).data(),
+                sizeof(T)
+            );
+
+            return value;
+        }
+
+        template<typename T> T Read() {
+            if constexpr (Math::IsString<T>()) {
+                return MarshalUtils::LoadStr<std::stringstream>(m_stream);
+            }
+            else
+                return MarshalUtils::LoadValue<std::stringstream, T>(m_stream);
         }
 
     private:
-        std::variant<MarshalEncodeNode, MarshalDecodeNode> m_data;
+        std::stringstream m_stream;
+        uint64_t m_size = 0;
 
     };
 }
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
-        template<typename Stream> MarshalDecodeNode SR_FASTCALL LoadNode(Stream &stream) {
-            MarshalDecodeNode node(std::move(MarshalUtils::LoadShortStr<Stream>(stream)));
+        template<typename Stream> SR_HTYPES_NS::MarshalDecodeNode SR_FASTCALL LoadNode(Stream &stream) {
+            SR_HTYPES_NS::MarshalDecodeNode node(std::move(MarshalUtils::LoadShortStr<Stream>(stream)));
 
             const uint16_t count = MarshalUtils::LoadValue<Stream, uint16_t>(stream);
 
             for (uint16_t i = 0; i < count; ++i) {
-                auto &&type = MarshalUtils::LoadValue<Stream, MARSHAL_TYPE>(stream);
+                auto &&type = static_cast<MARSHAL_TYPE>(MarshalUtils::LoadValue<Stream, uint8_t>(stream));
 
                 if (type == MARSHAL_TYPE::Node) {
                     node.AppendNode(std::move(LoadNode<Stream>(stream)));
@@ -466,7 +395,7 @@ namespace SR_UTILS_NS {
                             break;
                         default: {
                             SRAssert(false);
-                            return MarshalDecodeNode();
+                            return SR_HTYPES_NS::MarshalDecodeNode();
                         }
                     }
                 }
@@ -475,7 +404,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    template<typename T> inline T MarshalDecodeNode::GetAttribute() const {
+    template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttribute() const {
         if constexpr (std::is_same<T, Math::IVector3>()) {
              return Math::IVector3(GetAttribute<int32_t>("x"), GetAttribute<int32_t>("y"), GetAttribute<int32_t>("z"));
         }
@@ -486,7 +415,7 @@ namespace SR_UTILS_NS {
             static_assert(false, "unknown type!");
     }
 
-    template<typename T> inline T MarshalDecodeNode::GetAttribute(const std::string &name) const {
+    template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttribute(const std::string &name) const {
 #if SR_MARSHAL_USE_LIST
         for (const auto& attribute : m_attributes) {
             if (attribute.m_name == name) {
@@ -517,7 +446,7 @@ namespace SR_UTILS_NS {
 #endif
     }
 
-    template<typename T, typename U> inline T MarshalDecodeNode::GetAttributeDef(const U& def) const {
+    template<typename T, typename U> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttributeDef(const U& def) const {
         if constexpr (std::is_same<T, Math::IVector3>()) {
             return Math::IVector3(
                     GetAttributeDef<int32_t>("x", def),
@@ -539,7 +468,7 @@ namespace SR_UTILS_NS {
             static_assert(false, "unknown type!");
     }
 
-    template<typename T> inline T MarshalDecodeNode::GetAttributeDef(const std::string& name, const T& def) const {
+    template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttributeDef(const std::string& name, const T& def) const {
 #if SR_MARSHAL_USE_LIST
         for (const auto& attribute : m_attributes) {
             if (attribute.m_name == name) {
@@ -560,7 +489,7 @@ namespace SR_UTILS_NS {
 #endif
     }
 
-    template<typename T> inline MarshalEncodeNode &MarshalEncodeNode::Append(const std::string &name, const T &value) {
+    template<typename T> inline SR_HTYPES_NS::MarshalEncodeNode &SR_HTYPES_NS::MarshalEncodeNode::Append(const std::string &name, const T &value) {
         if (m_hasNodes) {
             SRAssert2(false, "Attributes can be added before node adding!");
             return *this;
@@ -588,7 +517,7 @@ namespace Framework::RuntimeTest {
     bool MarshalRunRuntimeTest();
 }
 
-inline size_t std::hash<Framework::Helper::MarshalDecodeNode>::operator()(const Framework::Helper::MarshalDecodeNode &value) const {
+inline size_t std::hash<SR_HTYPES_NS::MarshalDecodeNode>::operator()(const SR_HTYPES_NS::MarshalDecodeNode &value) const {
     std::hash<std::string> h;
     return h(value.Name()) + 0x9e3779b9 + (0 << 6u) + (0 >> 2u);
 }

@@ -5,10 +5,7 @@
 #ifndef GAMEENGINE_TIME_H
 #define GAMEENGINE_TIME_H
 
-#include <ctime>
-#include <iostream>
-#include <ratio>
-#include <chrono>
+#include <Debug.h>
 
 namespace Framework::Helper::Types {
     class Time {

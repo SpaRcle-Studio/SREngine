@@ -6,6 +6,12 @@
 #define FBXLOADER_DEBUG_H
 
 #include <functional>
+#include <utility>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cctype>
+#include <cmath>
 
 namespace FbxLoader {
     typedef std::function<void(const std::string& msg)> MsgFn;

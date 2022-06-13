@@ -6,8 +6,6 @@
 #define GAMEENGINE_VECTOR2_H
 
 #include <Math/Mathematics.h>
-#include <glm/glm.hpp>
-#include <string>
 
 namespace Framework::Helper::Math {
     enum Axis {
@@ -155,6 +153,14 @@ namespace Framework::Helper::Math {
 
         [[nodiscard]] bool HasZero() const {
             return (x == 0 || y == 0);
+        }
+
+        [[nodiscard]] bool HasNegative() const {
+            return (x < 0 || y < 0);
+        }
+
+        [[nodiscard]] bool HasPositive() const {
+            return (x > 0 || y > 0);
         }
 
         template<typename U> [[nodiscard]] bool Contains(U value) const {

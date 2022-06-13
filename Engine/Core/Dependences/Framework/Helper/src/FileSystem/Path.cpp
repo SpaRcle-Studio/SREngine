@@ -4,12 +4,21 @@
 
 #include <FileSystem/Path.h>
 #include <FileSystem/FileSystem.h>
-#include <utility>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     Path::Path()
-        : Path("")
+        : Path(std::string())
     { }
+
+    Path::Path(std::wstring path)
+        : m_path(SR_WS2S(path))
+        , m_name("")
+        , m_ext("")
+        , m_hash(SIZE_MAX)
+        , m_type(Type::Undefined)
+    {
+        Update();
+    }
 
     Path::Path(std::string path)
         : m_path(std::move(path))
@@ -53,7 +62,7 @@ namespace Framework::Helper {
     }
 
     std::vector<Path> Path::GetAll() const {
-        return FileSystem::GetAllInDir(m_path);
+        return FileSystem::GetAllInDir(*this);
     }
 
     std::vector<Path> Path::GetFolders() const {
@@ -73,16 +82,24 @@ namespace Framework::Helper {
 
         m_type = GetType();
 
-        if (auto index = m_path.find_last_of("/\\"); index == std::string::npos) {
-            m_name = std::string();
-            m_ext = std::string();
-        } else {
+        if (auto&& index = m_path.find_last_of("/\\"); index == std::string::npos) {
+            if (index = m_path.find_last_of("."); index != std::string::npos) {
+                m_name = m_path.substr(0, (m_path.size() - index) - 1);
+                m_ext  = m_path.substr(index + 1, m_path.size() - index);
+            }
+            else {
+                m_name = m_path;
+                m_ext = std::string();
+            }
+        }
+        else {
             ++index;
 
-            if (auto dot = m_path.find_last_of('.'); dot != std::string::npos && m_type == Type::File) {
+            if (auto dot = m_path.find_last_of('.'); dot != std::string::npos) {
                 m_name = m_path.substr(index, dot - index);
                 m_ext  = m_path.substr(dot + 1, m_path.size() - dot);
-            } else {
+            }
+            else {
                 m_name = m_path.substr(index);
                 m_ext  = std::string();
             }
@@ -143,7 +160,11 @@ namespace Framework::Helper {
     }
 
     bool Path::Exists() const {
-        switch (m_type) {
+        return Exists(m_type);
+    }
+
+    bool Path::Exists(Type type) const {
+        switch (type) {
             case Type::File:
                 return Helper::FileSystem::FileExists(m_path);
             case Type::Folder:
@@ -183,7 +204,7 @@ namespace Framework::Helper {
                 SR_FALLTHROUGH;
             case Type::Undefined:
             case Type::File:
-                return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size())));
+                return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size() + 1)));
             case Type::Folder:
                 return FileSystem::CreatePath(m_path);
         }
@@ -211,5 +232,54 @@ namespace Framework::Helper {
         return m_name;
     }
 
-    Path& Path::operator=(const Path& path) = default;
+    uint64_t Path::GetFileHash() const {
+        return FileSystem::GetFileHash(m_path);
+    }
+
+    uint64_t Path::GetFolderHash(uint64_t deep) const {
+        return FileSystem::GetFolderHash(m_path, deep);
+    }
+
+    bool Path::IsAbs() const {
+        return FileSystem::IsAbsolutePath(m_path);
+    }
+
+    Path Path::FileDialog() const {
+        return Path(FileSystem::SaveFileDialog(m_path, ""));
+    }
+
+    bool Path::IsSubPath(const Path &subPath) const {
+        return m_path.find(subPath.m_path) != std::string::npos;
+    }
+
+    Path Path::RemoveSubPath(const Path &subPath) const {
+        auto&& index = m_path.find(subPath.m_path);
+
+        if (index == std::string::npos) {
+            return *this;
+        }
+
+        if (m_path.size() == subPath.m_path.size()) {
+            return Path();
+        }
+
+        return StringUtils::Remove(m_path, index, subPath.m_path.size() + 1);
+    }
+
+    Path Path::FolderDialog() const {
+        return Path(FileSystem::BrowseFolder(m_path));
+    }
+
+    bool Path::IsHidden() const {
+        return FileSystem::IsHiddenFile(m_path);
+    }
+
+    std::wstring Path::ToUnicodeString() const {
+        return SR_S2WS(m_path);
+    }
+
+    std::wstring Path::ToWinApiPath() const {
+        auto&& wstring = ToUnicodeString();
+        return SR_UTILS_NS::StringUtils::ReplaceAll<std::wstring>(wstring, L"/", L"\\");
+    }
 }

@@ -26,6 +26,10 @@ namespace FbxLoader::Parser {
             return nullptr;
         }
 
+        [[nodiscard]] std::string GetSubNodeValue() const {
+            return (*nodes.begin())->value;
+        }
+
         [[nodiscard]] Node* Get2SubNode() const {
 #ifdef _DEBUG
             if (nodes.empty()) {

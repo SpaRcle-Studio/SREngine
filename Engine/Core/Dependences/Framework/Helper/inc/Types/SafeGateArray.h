@@ -5,10 +5,9 @@
 #ifndef SRENGINE_SAFEGATEARRAY_H
 #define SRENGINE_SAFEGATEARRAY_H
 
-#include <unordered_set>
-#include <mutex>
+#include <Debug.h>
 
-namespace Framework::Helper::Types {
+namespace SR_HTYPES_NS {
     template<typename T> class SafeGateArray {
     public:
         SafeGateArray() = default;
@@ -57,14 +56,14 @@ namespace Framework::Helper::Types {
 
         uint32_t Count() const { return m_count; }
         uint32_t Empty() const { return m_count == 0; }
-        std::unordered_set<T>& GetElements() { return m_container; }
-        std::unordered_set<T>& GetAddedElements() { return m_add; }
-        std::unordered_set<T>& GetDeletedElements() { return m_remove; }
+        std::set<T>& GetElements() { return m_container; }
+        std::set<T>& GetAddedElements() { return m_add; }
+        std::set<T>& GetDeletedElements() { return m_remove; }
 
     private:
-        std::unordered_set<T> m_add;
-        std::unordered_set<T> m_remove;
-        std::unordered_set<T> m_container;
+        std::set<T> m_add;
+        std::set<T> m_remove;
+        std::set<T> m_container;
         std::mutex m_mutex;
         std::atomic<bool> m_needFlush = false;
         std::atomic<uint32_t> m_count = 0;

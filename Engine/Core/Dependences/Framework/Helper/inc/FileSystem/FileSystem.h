@@ -6,10 +6,7 @@
 #define HELPER_FILESYSTEM_H
 
 #include <FileSystem/Path.h>
-
-#include <string>
-#include <vector>
-#include <fstream>
+#include <Utils/StringUtils.h>
 
 namespace Framework::Helper {
     class FileSystem {
@@ -22,6 +19,9 @@ namespace Framework::Helper {
         static bool FileExists(const std::string& path);
 
         static std::string SaveFileDialog(const std::string& path, const std::string& filter);
+        static std::string LoadFileDialog(const std::string& path, const std::string& filter);
+
+        static Path BrowseFolder(const Path& path);
 
         static bool CreatePath(std::string path, uint32_t offset = 0) {
             if (path.empty())
@@ -41,7 +41,10 @@ namespace Framework::Helper {
             return true;
         }
 
+        static bool WriteToFile(const std::string& path, const std::string& text);
         static bool CreateFolder(const std::string& path);
+        static bool IsAbsolutePath(const std::string& path);
+        static bool IsHiddenFile(const std::string& path);
         static std::string GetExecutableFileName();
         static std::string GetPathToExe();
         static std::string GetFullPath(const std::string& path);
@@ -52,28 +55,30 @@ namespace Framework::Helper {
         static std::vector<std::string> ReadAllLines(const std::string& path) {
             std::ifstream file(path);
             std::vector<std::string> lines = { };
-            while (true){
+            while (file.good()) {
                 std::string line;
                 std::getline(file,line);
-                if (!file.good())
-                    break;
                 lines.push_back(line);
             }
             return lines;
         }
 
+        static std::string ReadBinaryAsString(const std::string& path, bool checkError = true);
         static std::vector<char> ReadBinary(const std::string& path);
 
         static std::string ReadAllText(const std::string& path);
 
         static char* Load(std::string path);
 
+        static uint64_t GetFileHash(const std::string& path);
+        static uint64_t GetFolderHash(const Path& path, uint64_t deep = SR_UINT64_MAX);
+
         static const char* FileMapView(std::string path);
         static void UnmapFile(const char* str);
 
         static std::vector<Path> GetFilesInDir(const std::string& path);
         static std::vector<Path> GetDirectoriesInDir(const std::string& path);
-        static std::vector<Path> GetAllInDir(const std::string& path);
+        static std::vector<Path> GetAllInDir(const Path& path);
 
         static bool FolderExists(const std::string &path);
     };

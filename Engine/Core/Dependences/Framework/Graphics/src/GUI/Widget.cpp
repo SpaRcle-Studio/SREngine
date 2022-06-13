@@ -95,4 +95,8 @@ namespace Framework::Graphics::GUI {
     void Widget::CheckHovered() {
         m_widgetFlags |= ImGui::IsWindowHovered() ? WIDGET_FLAG_HOVERED : WIDGET_FLAG_NONE;
     }
+
+    void Widget::SetManager(WidgetManager* manager) {
+        m_manager = manager;
+    }
 }

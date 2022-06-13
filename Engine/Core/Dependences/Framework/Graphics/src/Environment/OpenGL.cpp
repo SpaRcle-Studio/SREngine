@@ -79,7 +79,7 @@ bool Framework::Graphics::OpenGL::PreInit(
     Helper::Debug::Graph("OpenGL::PreInit() : initializing glfw...");
 
     if (!glfwInit()) {
-        Helper::Debug::Error("OpenGL::PreInit() : failed initializing glfw!");
+        SR_ERROR("OpenGL::PreInit() : failed initializing glfw!");
         return false;
     }
 
@@ -96,12 +96,7 @@ bool Framework::Graphics::OpenGL::PreInit(
     return true;
 }
 
-bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScreen, bool resizable, bool headerEnabled) {
-    if (!this->m_winFormat) {
-        Helper::Debug::Error("OpenGL::MakeWindow() : format isn't initialized!");
-        return false;
-    }
-
+bool Framework::Graphics::OpenGL::MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) {
 #ifdef  SR_OPENGL_USE_WINAPI
     this->m_basicWindow = new Win32Window(this->GetPipeLine());
     if (!this->m_basicWindow->Create(
@@ -109,7 +104,7 @@ bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScree
             (int)m_winFormat->Width(), (int)m_winFormat->Height(),
             fullScreen, resizable))
     {
-        Helper::Debug::Error("OpenGL::MakeWindow() : failed create window!");
+        SR_ERROR("OpenGL::MakeWindow() : failed create window!");
         return false;
     } else
         return true;
@@ -117,7 +112,7 @@ bool Framework::Graphics::OpenGL::MakeWindow(const char* winName, bool fullScree
     m_monitor = glfwGetPrimaryMonitor();
     m_vidMode = glfwGetVideoMode(m_monitor);
 
-    m_window = glfwCreateWindow((int)m_winFormat->Width(), (int)m_winFormat->Height(), winName, fullScreen ? m_monitor : nullptr, nullptr);
+    m_window = glfwCreateWindow(size.x, size.y, name.c_str(), fullScreen ? m_monitor : nullptr, nullptr);
 
     return m_window != nullptr;
 #endif
@@ -214,7 +209,6 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
     //    w = m_winFormat->Width();
     //    h = m_winFormat->Height();
     // } else
-    m_winFormat->SetFreeValue(w, h);
 
     if (Debug::GetLevel() >= Debug::Level::High) {
         SR_LOG("OpenGL::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
@@ -223,6 +217,7 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
 #ifdef  SR_OPENGL_USE_WINAPI
 
 #else
+    //m_winFormat->SetFreeValue(w, h);
     glfwSetWindowSize(m_window, w, h);
 #endif
 
@@ -237,15 +232,16 @@ void Framework::Graphics::OpenGL::SetWindowPosition(int x, int y) {
 #endif
 }
 
-bool Framework::Graphics::OpenGL::FreeVAO(unsigned int VAO) const {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("OpenGL::FreeVAO() : free mesh \""+std::to_string(VAO) + "\" VAO...");
+bool Framework::Graphics::OpenGL::FreeVAO(int* VAO) const {
+    //if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+    //    Helper::Debug::Log("OpenGL::FreeVAO() : free mesh \""+std::to_string(VAO) + "\" VAO...");
 
     if (VAO) {
-        glDeleteVertexArrays(1, &VAO);
+        //glDeleteVertexArrays(1, &VAO);
         return true;
-    } else {
-        Helper::Debug::Error("OpenGL::FreeVAO() : VAO is zero! Something went wrong...");
+    }
+    else {
+        SR_ERROR("OpenGL::FreeVAO() : VAO is zero! Something went wrong...");
         return false;
     }
 }
@@ -285,11 +281,13 @@ std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields
     for (const auto& field : v)
         if (fields.find(field) == fields.end()) {
             int location = glGetUniformLocation(ID, field.c_str());
-            if (location < 0)
-                Debug::Error("OpenGL::GetShaderFields() : field \""+field+"\" not found! ("+std::to_string(location)+") \n\tMay be this field is not using...");
+            if (location < 0) {
+                SR_ERROR("OpenGL::GetShaderFields() : field \""+field+"\" not found! ("+std::to_string(location)+") \n\tMay be this field is not using...");
+            }
             else {
-                if (Debug::GetLevel() >= Debug::Level::High)
-                    Debug::Log("OpenGL::GetShaderFields() : add field \""+ field +"\"");
+                if (Debug::GetLevel() >= Debug::Level::High) {
+                    SR_LOG("OpenGL::GetShaderFields() : add field \"" + field + "\"");
+                }
 
                 fields.insert(std::make_pair(field, location));
             }
@@ -307,7 +305,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
         const std::string& name,
         int32_t FBO,
         void** shaderData,
-        const std::vector<uint64_t>& uniformSizes) const
+        const std::vector<uint64_t>& uniformSizes)
 {
     auto shadersPath = ResourceManager::Instance().GetResPath().Concat("Shaders");
 
@@ -337,8 +335,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
         while (getline(VertexShaderStream, line))
             VertexShaderCode += "\n" + line;
         VertexShaderStream.close();
-    } else {
-        Helper::Debug::Error("OpenGL::CompileShader() : failed to read vertex shader! \n\tPath: " + vertexPath.ToString());
+    }
+    else {
+        SR_ERROR("OpenGL::CompileShader() : failed to read vertex shader! \n\tPath: " + vertexPath.ToString());
         return false;
     }
 
@@ -350,8 +349,9 @@ bool Framework::Graphics::OpenGL::CompileShader(
         while (getline(FragmentShaderStream, line))
             FragmentShaderCode += "\n" + line;
         FragmentShaderStream.close();
-    } else {
-        Helper::Debug::Error("OpenGL::CompileShader() : failed to read fragment shader! \n\tPath: " + fragmentPath.ToString());
+    }
+    else {
+        SR_ERROR("OpenGL::CompileShader() : failed to read fragment shader! \n\tPath: " + fragmentPath.ToString());
         return false;
     }
 
@@ -372,7 +372,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
             std::vector<char> VertexShaderErrorMessage(InfoLogLength);
             glGetShaderInfoLog(glShader->m_vertex, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
             if (VertexShaderErrorMessage.size() > 10) {
-                Debug::Error("OpenGL::CompileShader : Failed compiling vertex shader!\n\tReason : " +
+                SR_ERROR("OpenGL::CompileShader : Failed compiling vertex shader!\n\tReason : " +
                              std::string(VertexShaderErrorMessage.data()));
                 return false;
             }
@@ -398,13 +398,14 @@ bool Framework::Graphics::OpenGL::CompileShader(
                 bool isError = StringUtils::Contains(std::string(FragmentShaderErrorMessage.data()), "error");
 
                 if (isError) {
-                    Debug::Error("OpenGL::CompileShader() : Failed compiling fragment shader!\n\tReason : " +
+                    SR_ERROR("OpenGL::CompileShader() : Failed compiling fragment shader!\n\tReason : " +
                                  std::string(FragmentShaderErrorMessage.data()));
                     return false;
                 }
-                else
-                    Debug::Warn("OpenGL::CompileShader() : There are warnings in the shader!\n\tReason: " +
-                                std::string(FragmentShaderErrorMessage.data()));
+                else {
+                    SR_WARN("OpenGL::CompileShader() : There are warnings in the shader!\n\tReason: " +
+                            std::string(FragmentShaderErrorMessage.data()));
+                }
             }
         }
         //?===================================================================================================
@@ -426,7 +427,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
         return false;
 
     if (!shaderData) {
-        Helper::Debug::Error("OpenGL::LinkShader() : shader data is nullptr!");
+        SR_ERROR("OpenGL::LinkShader() : shader data is nullptr!");
         return false;
     }
 
@@ -452,10 +453,10 @@ bool Framework::Graphics::OpenGL::LinkShader(
         if (!error.empty()) {
             auto index = error.find("error");
             if (index == std::string::npos) {
-                Debug::Warn("OpenGL::LinkShader : Warning linking program! Reason : " + error);
+                SR_WARN("OpenGL::LinkShader : Warning linking program! Reason : " + error);
             }
             else {
-                Debug::Error("OpenGL::LinkShader : Failed linking program! Reason : " + error);
+                SR_ERROR("OpenGL::LinkShader : Failed linking program! Reason : " + error);
                 SRAssert(false);
                 return false;
             }
@@ -551,7 +552,7 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
     bool isNew = pingpongFBO[0] <= 0;
 
     if (isNew) {
-        Debug::Log("OpenGL::CreatePingPongFrameBuffer() : creating ping-pong frame buffers...");
+        SR_LOG("OpenGL::CreatePingPongFrameBuffer() : creating ping-pong frame buffers...");
         /// glGenFramebuffers(pingpongFBO.size(), reinterpret_cast<GLuint *>(pingpongFBO.data()));
         glGenTextures(pingpongColorBuffers.size(), reinterpret_cast<GLuint *>(pingpongColorBuffers.data()));
     }
@@ -584,7 +585,7 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
         for (size_t t = 0; t < pingpongColorBuffers.size(); t++)
             PingPongColorBufs += std::to_string(pingpongColorBuffers[t]) + (t+1 == pingpongColorBuffers.size() ? "" : ",");
 
-        Debug::Log("OpenGL::CreateHDRFrameBufferObject() : successful!"+PingPongFBOBufs+PingPongColorBufs);
+        SR_LOG("OpenGL::CreateHDRFrameBufferObject() : successful!"+PingPongFBOBufs+PingPongColorBufs);
     }
 
     return true;
@@ -622,7 +623,7 @@ int32_t Framework::Graphics::OpenGL::CalculateTexture(
             break; // TODO
     }
 */
-    Helper::Debug::Log("OpenGL::CalculateTexture() : calculating (ID "+std::to_string(id)+") texture...");
+    SR_LOG("OpenGL::CalculateTexture() : calculating (ID "+std::to_string(id)+") texture...");
 
     glBindTexture(GL_TEXTURE_2D, id);
 
@@ -854,8 +855,8 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
         glDisable(GL_DEPTH_TEST);
 }
 
-[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTexture(uint32_t ID) const  {
-    glDeleteTextures(1, &ID);
+[[nodiscard]] bool Framework::Graphics::OpenGL::FreeTexture(int32_t* id) const  {
+    //glDeleteTextures(1, &ID);
     return true;
 }
 
@@ -867,11 +868,12 @@ void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
 }
 
 int32_t Framework::Graphics::OpenGL::CalculateVAO(
-        std::vector<Vertices::Mesh3DVertex> &vertices,
+        std::vector<Vertices::StaticMeshVertex> &vertices,
         size_t count_verts)
 {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("OpenGL::CalculateVAO() : calculating " + std::to_string(vertices.size()) + " vertices...");
+    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+        SR_LOG("OpenGL::CalculateVAO() : calculating " + std::to_string(vertices.size()) + " vertices...");
+    }
 
     int32_t VAO = 0;
     uint32_t VBO = 0;
@@ -882,7 +884,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    {
+    /*{
         //? Binding vertex array
         ///glBufferData(
         ///        GL_ARRAY_BUFFER,
@@ -927,7 +929,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
     }
 
     glBindVertexArray(0);
-    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &VBO);*/
 
     return VAO;
 }
@@ -937,8 +939,9 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
         Framework::Graphics::Vertices::Type type,
         size_t count)
 {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
-        Helper::Debug::Log("OpenGL::CalculateVBO() : calculating " + std::to_string(count) + " vertices...");
+    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+        SR_LOG("OpenGL::CalculateVBO() : calculating " + std::to_string(count) + " vertices...");
+    }
 
     uint32_t _vbo = 0;
     uint32_t _vao = 0;
@@ -953,7 +956,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
 
     /// glBufferData(GL_ARRAY_BUFFER, count * vertexSize, vertices, GL_STATIC_DRAW);
 
-    switch (type) {
+    /*switch (type) {
         case Vertices::Type::Mesh3DVertex:
         OpenGLSetVertexAttribPointer(0, 3, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, pos))
             OpenGLSetVertexAttribPointer(1, 2, Vertices::Mesh3DVertex, offsetof(Vertices::Mesh3DVertex, uv))
@@ -966,7 +969,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
         default:
             Helper::Debug::Error("OpenGL::CalculateVBO() : unknown vertex type!");
             return SR_ID_INVALID;
-    }
+    }*/
 
     glBindVertexArray(0);
     glDeleteBuffers(1, &_vbo);
@@ -981,12 +984,12 @@ int32_t Framework::Graphics::OpenGL::CalculateIBO(
         int32_t VBO)
 {
     if (VBO <= 0) {
-        Helper::Debug::Error("OpenGL::CalculateIBO() : to calculate the IBO, OpenGL needs a VBO (VAO)!");
+        SR_ERROR("OpenGL::CalculateIBO() : to calculate the IBO, OpenGL needs a VBO (VAO)!");
         return SR_ID_INVALID;
     }
 
     if (count == 0 || !indices) {
-        Helper::Debug::Error("OpenGL::CalculateIBO() : count indices is zero or indices is nullptr!");
+        SR_ERROR("OpenGL::CalculateIBO() : count indices is zero or indices is nullptr!");
         return SR_ID_INVALID;
     }
 

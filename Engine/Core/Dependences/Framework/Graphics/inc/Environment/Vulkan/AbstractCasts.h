@@ -5,9 +5,10 @@
 #ifndef GAMEENGINE_ABSTRACTCASTS_H
 #define GAMEENGINE_ABSTRACTCASTS_H
 
-#include <vulkan/vulkan.h>
-#include <Types/Descriptors.h>
 #include <Debug.h>
+#include <Types/Descriptors.h>
+
+#include <vulkan/vulkan.h>
 
 namespace Framework::Graphics::VulkanTools {
     static SR_FORCE_INLINE VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
@@ -43,23 +44,23 @@ namespace Framework::Graphics::VulkanTools {
         return vkDescriptions;
     }
 
-    static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderType type) {
+    static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderStage type) {
         switch (type) {
-            case ShaderType::Fragment: return VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT;
-            case ShaderType::Vertex:   return VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT;
+            case ShaderStage::Fragment: return VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT;
+            case ShaderStage::Vertex:   return VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT;
             default:
-                Helper::Debug::Error("VulkanTools::VkShaderShaderTypeToStage() : unknown type!");
+                SR_ERROR("VulkanTools::VkShaderShaderTypeToStage() : unknown type!");
                 return VkShaderStageFlagBits::VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
         }
     }
 
-    static SR_FORCE_INLINE ShaderType VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
+    static SR_FORCE_INLINE ShaderStage VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
         switch (stage) {
-            case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderType::Fragment;
-            case VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT:   return ShaderType::Vertex;
+            case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderStage::Fragment;
+            case VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT:   return ShaderStage::Vertex;
             default:
-                Helper::Debug::Error("VulkanTools::VkShaderStageToShaderType() : unknown stage!");
-                return ShaderType::Unknown;
+                SR_ERROR("VulkanTools::VkShaderStageToShaderType() : unknown stage!");
+                return ShaderStage::Unknown;
         }
     }
 
@@ -71,7 +72,7 @@ namespace Framework::Graphics::VulkanTools {
         for (uint32_t i = 0; i < attributes.size(); i++) {
             auto format = AttributeToVkFormat(attributes[i].first);
             if (format == VK_FORMAT_UNDEFINED) {
-                Helper::Debug::Error("VulkanTools::AbstractDescriptionsToVkDescriptions() : unknown attribute!");
+                SR_ERROR("VulkanTools::AbstractDescriptionsToVkDescriptions() : unknown attribute!");
                 return { };
             }
 
@@ -81,10 +82,10 @@ namespace Framework::Graphics::VulkanTools {
         return vkDescrs;
     }
 
-    static SR_FORCE_INLINE std::vector<std::pair<std::string, ShaderType>> VkModulesToAbstractModules(
+    static SR_FORCE_INLINE std::vector<std::pair<std::string, ShaderStage>> VkModulesToAbstractModules(
             const std::vector<std::pair<std::string, VkShaderStageFlagBits>>& modules)
     {
-        auto abstract = std::vector<std::pair<std::string, ShaderType>>();
+        auto abstract = std::vector<std::pair<std::string, ShaderStage>>();
         for (const auto& a : modules)
             abstract.emplace_back(std::pair(a.first, VkShaderStageToShaderType(a.second)));
         return abstract;
@@ -155,7 +156,7 @@ namespace Framework::Graphics::VulkanTools {
             case DescriptorType::CombinedImage:
                 return VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
             default: {
-                Helper::Debug::Error("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
+                SR_ERROR("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
                 return VK_DESCRIPTOR_TYPE_MAX_ENUM;
             }
         }
@@ -174,7 +175,7 @@ namespace Framework::Graphics::VulkanTools {
                     break;
                 }
                 default: {
-                    Helper::Debug::Error("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
+                    SR_ERROR("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
                     return {};
                 }
             }

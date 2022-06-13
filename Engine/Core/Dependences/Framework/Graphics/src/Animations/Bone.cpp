@@ -5,5 +5,5 @@
 #include <Animations/Bone.h>
 
 Framework::Graphics::Animations::Bone::Bone() {
-    Component::Init<Bone>();
+    Component::InitComponent<Bone>();
 }

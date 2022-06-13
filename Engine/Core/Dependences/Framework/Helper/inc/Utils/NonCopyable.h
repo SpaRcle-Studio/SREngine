@@ -5,9 +5,9 @@
 #ifndef SRENGINE_NONCOPYABLE_H
 #define SRENGINE_NONCOPYABLE_H
 
-#include <macros.h>
+#include <stdInclude.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class NonCopyable {
     protected:
         constexpr NonCopyable() = default;

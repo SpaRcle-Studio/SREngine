@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_PIPELINE_H
 #define GAMEENGINE_PIPELINE_H
 
-#define SR_ID_INVALID -1
+#include <macros.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     enum class PipeLine {
         Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12
     };

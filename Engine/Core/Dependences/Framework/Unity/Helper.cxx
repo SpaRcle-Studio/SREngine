@@ -4,12 +4,12 @@
     #include "../Helper/src/Platform/PlatformWindows.cpp"
 #endif
 
-#include "../Helper/src/EntityComponentSystem/Component.cpp"
-#include "../Helper/src/EntityComponentSystem/GameObject.cpp"
-#include "../Helper/src/EntityComponentSystem/ISavable.cpp"
-#include "../Helper/src/EntityComponentSystem/Transform.cpp"
-#include "../Helper/src/EntityComponentSystem/EntityManager.cpp"
-#include "../Helper/src/EntityComponentSystem/Transform3D.cpp"
+#include "../Helper/src/ECS/Component.cpp"
+#include "../Helper/src/ECS/GameObject.cpp"
+#include "../Helper/src/ECS/ISavable.cpp"
+#include "../Helper/src/ECS/Transform.cpp"
+#include "../Helper/src/ECS/EntityManager.cpp"
+#include "../Helper/src/ECS/Transform3D.cpp"
 
 #include "../Helper/src/Events/EventManager.cpp"
 #include "../Helper/src/Events/Event.cpp"
@@ -28,8 +28,9 @@
 #include "../Helper/src/TaskManager/TaskManager.cpp"
 
 #include "../Helper/src/ResourceManager/IResource.cpp"
-#include "../Helper/src/ResourceManager/ResourceManager.cpp"
+#include "../Helper/src/ResourceManager/ResourceInfo.cpp"
 #include "../Helper/src/ResourceManager/ResourcesHolder.cpp"
+#include "../Helper/src/ResourceManager/ResourceManager.cpp"
 
 #include "../Helper/src/CommandManager/ICommand.cpp"
 #include "../Helper/src/CommandManager/CmdManager.cpp"
@@ -39,6 +40,7 @@
 #include "../Helper/src/Types/Time.cpp"
 #include "../Helper/src/Types/Marshal.cpp"
 #include "../Helper/src/Types/Thread.cpp"
+#include "../Helper/src/Types/SafeQueue.cpp"
 #include "../Helper/src/Types/RawMesh.cpp"
 
 #include "../Helper/src/Utils/Stacktrace.cpp"

@@ -5,41 +5,42 @@
 #include <GUI/NodeManager.h>
 #include <Debug.h>
 
-using namespace Framework::Graphics::GUI;
+namespace SR_GRAPH_NS::GUI {
+    uintptr_t NodeManager::AllocUniqueId(void* ptr) {
+        SR_LOCK_GUARD
 
-uintptr_t NodeManager::AllocUniqueId(void* ptr) {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    retry:
+        uintptr_t id = static_cast<uintptr_t>(Random::Instance().Int64());
 
-retry:
-    uintptr_t id = static_cast<uintptr_t>(Random::Instance().Int64());
+        if (m_uniques.count(id) == 1 || id == SR_UINTPTR_MAX || id == 0) {
+            SR_WARN("NodeManager::AllocUniqueId() : collision detected! Id: " + std::to_string(id));
+            goto retry;
+        }
 
-    if (m_uniques.count(id) == 1 || id == UINTPTR_MAX || id == 0) {
-        Helper::Debug::Warn("NodeManager::AllocUniqueId() : collision detected! Id: " + std::to_string(id));
-        goto retry;
+        m_uniques.insert(std::make_pair(id, ptr));
+
+        return id;
     }
 
-    m_uniques.insert(std::make_pair(id, ptr));
+    void NodeManager::FreeUniqueId(const uintptr_t& id) {
+        if (id == SR_UINTPTR_MAX)
+            return;
 
-    return id;
-}
+        SR_LOCK_GUARD
 
-void NodeManager::FreeUniqueId(const uintptr_t& id) {
-    if (id == UINTPTR_MAX)
-        return;
+    #ifdef SR_DEBUG
+        if (m_uniques.count(id) == 0) {
+            SRAssert2(false, SR_UTILS_NS::Format("Id not found! Id: %ul", id));
+            return;
+        }
+    #endif
 
-    std::lock_guard<std::mutex> lock(m_mutex);
-
-#ifdef SR_DEBUG
-    if (m_uniques.count(id) == 0) {
-        SRAssert2(false, Helper::Format("Id not found! Id: %ul", id));
-        return;
+        m_uniques.erase(id);
     }
-#endif
 
-    m_uniques.erase(id);
-}
-
-void NodeManager::OnSingletonDestroy() {
-    if (!m_uniques.empty())
-        Helper::Debug::Warn(Helper::Format("NodeManager::OnSingletonDestroy() : %u uniques was been released!", m_uniques.size()));
+    void NodeManager::OnSingletonDestroy() {
+        if (!m_uniques.empty()) {
+            SR_WARN(SR_UTILS_NS::Format("NodeManager::OnSingletonDestroy() : %u uniques was been released!", m_uniques.size()));
+        }
+    }
 }

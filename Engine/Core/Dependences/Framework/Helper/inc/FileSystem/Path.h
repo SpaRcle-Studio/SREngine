@@ -5,13 +5,7 @@
 #ifndef SRENGINE_PATH_H
 #define SRENGINE_PATH_H
 
-#include <macros.h>
-
-#include <string>
-#include <atomic>
-#include <vector>
-#include <string_view>
-#include <functional>
+#include <stdInclude.h>
 
 namespace Framework::Helper {
     class Path {
@@ -25,9 +19,27 @@ namespace Framework::Helper {
         Path(const Path& path);
         Path(const char* path);
         Path(std::string path);
+        Path(std::wstring path);
+
+        Path(Path&& path) noexcept
+            : m_path(std::exchange(path.m_path, {}))
+            , m_name(std::exchange(path.m_name, {}))
+            , m_ext(std::exchange(path.m_ext, {}))
+            , m_hash(std::exchange(path.m_hash, {}))
+            , m_type(std::exchange(path.m_type, {}))
+        { }
+
+        Path& operator=(Path&& path) noexcept {
+            m_path = std::exchange(path.m_path, {});
+            m_name = std::exchange(path.m_name, {});
+            m_ext = std::exchange(path.m_ext, {});
+            m_hash = std::exchange(path.m_hash, {});
+            m_type = std::exchange(path.m_type, {});
+            return *this;
+        }
 
         operator const std::string&() { return m_path; }
-        Path& operator=(const Path& path);
+        Path& operator=(const Path& path) = default;
 
     public:
         Path Normalize();
@@ -35,20 +47,31 @@ namespace Framework::Helper {
         void NormalizeSelf();
 
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD std::wstring ToWinApiPath() const;
+        SR_NODISCARD std::wstring ToUnicodeString() const;
         SR_NODISCARD size_t GetHash() const;
+        SR_NODISCARD uint64_t GetFileHash() const;
+        SR_NODISCARD uint64_t GetFolderHash(uint64_t deep = SR_UINT64_MAX) const;
         SR_NODISCARD const char* CStr() const;
 
         SR_NODISCARD Path GetPrevious() const;
         SR_NODISCARD Path GetFolder() const { return m_path; }
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
+        SR_NODISCARD Path FileDialog() const;
+        SR_NODISCARD Path FolderDialog() const;
+        SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;
+        SR_NODISCARD bool IsSubPath(const Path& subPath) const;
+        SR_NODISCARD bool IsHidden() const;
         SR_NODISCARD bool Exists() const;
+        SR_NODISCARD bool Exists(Type type) const;
 
         SR_NODISCARD Type GetType() const;
         SR_NODISCARD bool IsDir() const;
+        SR_NODISCARD bool IsAbs() const;
         SR_NODISCARD bool IsFile() const;
 
         SR_NODISCARD std::vector<Path> GetFiles() const;

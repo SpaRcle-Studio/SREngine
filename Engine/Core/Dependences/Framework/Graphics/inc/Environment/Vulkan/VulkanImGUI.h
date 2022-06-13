@@ -5,10 +5,9 @@
 #ifndef GAMEENGINE_VULKANIMGUI_H
 #define GAMEENGINE_VULKANIMGUI_H
 
-#include <EvoVulkan/VulkanKernel.h>
-
 #include <GUI.h>
 
+#include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/DescriptorManager.h>
 #include <EvoVulkan/Types/RenderPass.h>
 

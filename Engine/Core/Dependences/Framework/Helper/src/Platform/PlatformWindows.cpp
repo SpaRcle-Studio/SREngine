@@ -6,6 +6,17 @@
 #include <Debug.h>
 
 #include <Windows.h>
+#include <Psapi.h>
+
+/// убираем проклятые min и max после инклуда Windows.h
+
+#ifdef min
+    #undef min
+#endif
+
+#ifdef max
+    #undef max
+#endif
 
 namespace SR_UTILS_NS::Platform {
     void TextToClipboard(const std::string &text) {
@@ -65,5 +76,55 @@ namespace SR_UTILS_NS::Platform {
         POINT p;
         GetCursorPos(&p);
         return Math::FVector2(p.x, p.y);
+    }
+
+    void Sleep(uint64_t milliseconds) {
+        ::Sleep(static_cast<DWORD>(milliseconds));
+    }
+
+    uint64_t GetProcessUsedMemory() {
+        PROCESS_MEMORY_COUNTERS pmc;
+        BOOL result = GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS *) &pmc, sizeof(pmc));
+        if (result)
+            return static_cast<uint64_t>(pmc.PeakWorkingSetSize);
+        else
+            return -1;
+    }
+
+    void SetThreadPriority(void *nativeHandle, ThreadPriority priority) {
+        int32_t winPriority = 0;
+
+        switch (priority) {
+            case ThreadPriority::SR_THREAD_PRIORITY_ABOVE_NORMAL:
+                winPriority = THREAD_PRIORITY_ABOVE_NORMAL;
+                break;
+            case ThreadPriority::SR_THREAD_PRIORITY_BELOW_NORMAL:
+                winPriority = THREAD_PRIORITY_BELOW_NORMAL;
+                break;
+            case ThreadPriority::SR_THREAD_PRIORITY_HIGHEST:
+                winPriority = THREAD_PRIORITY_HIGHEST;
+                break;
+            case ThreadPriority::SR_THREAD_PRIORITY_IDLE:
+                winPriority = THREAD_PRIORITY_IDLE;
+                break;
+            case ThreadPriority::SR_THREAD_PRIORITY_LOWEST:
+                winPriority = THREAD_PRIORITY_LOWEST;
+                break;
+            case ThreadPriority::SR_THREAD_PRIORITY_NORMAL:
+                winPriority = THREAD_PRIORITY_NORMAL;
+                break;
+            case ThreadPriority::SR_THREAD_PRIORITY_TIME_CRITICAL:
+                winPriority = THREAD_PRIORITY_TIME_CRITICAL;
+                break;
+            default:
+                SRAssert(false);
+                return;
+        }
+
+        auto&& result = ::SetThreadPriority(static_cast<HANDLE>(nativeHandle), winPriority);
+
+        if (result == FALSE) {
+            SR_ERROR("Platform::SetThreadPriority() : failed to set thread priority!");
+        }
     }
 }

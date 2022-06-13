@@ -30,17 +30,28 @@ FbxLoader::Parser::Node *FbxLoader::Parser::Parse(const std::string &text)  {
                     uint32_t space = text.rfind(' ', value);
                     uint32_t count = (space - oldValue) - 2;
 
-                    auto subNode = new Node { {}, text.substr(oldValue + 2, count), "", (*(currNode->nodes.end() - 1)) };
-                    (*(currNode->nodes.end() - 1))->nodes.emplace_back(subNode);
+                    /// attribute, no has nodes
+                    if (oldValue + 2 + count == space) {
+                        (*(currNode->nodes.end() - 1))->subData = text.substr(oldValue + 2, count);
+                    }
+                    /// attribute with nodes
+                    else {
+                        auto subNode = new Node{{}, text.substr(oldValue + 2, count), "", (*(currNode->nodes.end() - 1))};
+                        (*(currNode->nodes.end() - 1))->nodes.emplace_back(subNode);
+                    }
 
                     pos += count + 2;
-                } else if (open - value > 2)
+                }
+                else if (open - value > 2) {
                     if (auto nextVal = text.find(": ", value + 1); nextVal > open) {
                         uint32_t count = (open - value) - 2;
                         subData = text.substr(value + 2, count);
                     }
+                }
 
-                currNode->nodes.emplace_back(new Node{{}, text.substr(pos, value - pos), subData, currNode});
+                auto&& subNode = new Node{{}, text.substr(pos, value - pos), subData, currNode};
+
+                currNode->nodes.emplace_back(subNode);
 
                 pos = value + 1;
                 oldValue = value;

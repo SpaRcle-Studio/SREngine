@@ -5,12 +5,9 @@
 #ifndef GAMEENGINE_EVENTMANAGER_H
 #define GAMEENGINE_EVENTMANAGER_H
 
-#include <functional>
-#include <mutex>
-#include <utility>
-#include <vector>
+#include <Debug.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     // Global event manager
 
     class EventManager {

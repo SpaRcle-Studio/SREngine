@@ -1,12 +1,6 @@
 
 
-set(SCRIPTING_SRC
-        ${FRAMEWORK_ROOT_DIR}/Scripting/src/Base/Script.cpp
-        ${FRAMEWORK_ROOT_DIR}/Scripting/src/Base/Compiler.cpp
-
-        ${FRAMEWORK_ROOT_DIR}/Scripting/src/Impl/EvoCompiler.cpp
-        ${FRAMEWORK_ROOT_DIR}/Scripting/src/Impl/EvoScriptImpl.cpp
-        )
+set(SCRIPTING_SRC ${FRAMEWORK_ROOT_DIR}/Unity/Scripting.cxx)
 
 set(SCRIPTING_INC_PUBLIC
         ${FRAMEWORK_ROOT_DIR}/Scripting/inc

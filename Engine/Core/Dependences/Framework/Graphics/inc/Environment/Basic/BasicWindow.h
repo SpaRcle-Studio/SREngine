@@ -5,14 +5,7 @@
 #ifndef GAMEENGINE_BASICWINDOW_H
 #define GAMEENGINE_BASICWINDOW_H
 
-#include <macros.h>
-#include <functional>
-#include <utility>
-#include <string>
-#include <thread>
-#include <atomic>
 #include <Math/Vector3.h>
-
 #include <Environment/PipeLine.h>
 
 namespace Framework::Graphics {
@@ -52,8 +45,8 @@ namespace Framework::Graphics {
 
         WindowState m_state = WindowState::Default;
 
-        uint32_t m_absWidth  = 0;
-        uint32_t m_absHeight = 0;
+        uint32_t m_width  = 0;
+        uint32_t m_height = 0;
 
         uint32_t m_surfaceWidth  = 0;
         uint32_t m_surfaceHeight = 0;

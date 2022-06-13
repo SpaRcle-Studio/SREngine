@@ -5,14 +5,7 @@
 #ifndef FBXLOADER_MESH_H
 #define FBXLOADER_MESH_H
 
-#include <utility>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <cctype>
-#include <cmath>
-#include "Debug.h"
-
+#include <FbxLoader/Debug.h>
 #include <FbxLoader/ISerializable.h>
 #include <FbxLoader/Utils.h>
 

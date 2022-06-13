@@ -7,7 +7,7 @@
 
 #include <Input/KeyCodes.h>
 
-namespace Framework::Helper {
+namespace SR_UTILS_NS {
     class KeyPressEvent {
     public:
         KeyPressEvent(KeyCode code)
@@ -18,6 +18,7 @@ namespace Framework::Helper {
 
     private:
         KeyCode m_code;
+
     };
 
     class KeyDownEvent {
@@ -30,6 +31,7 @@ namespace Framework::Helper {
 
     private:
         KeyCode m_code;
+
     };
 
     class KeyUpEvent {
@@ -42,6 +44,7 @@ namespace Framework::Helper {
 
     private:
         KeyCode m_code;
+
     };
 
     class MouseDownEvent {
@@ -54,6 +57,7 @@ namespace Framework::Helper {
 
     private:
         MouseCode m_code;
+
     };
 
     class MouseUpEvent {
@@ -66,6 +70,7 @@ namespace Framework::Helper {
 
     private:
         MouseCode m_code;
+
     };
 }
 

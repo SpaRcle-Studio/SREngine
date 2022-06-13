@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_RIGIDBODY_H
 #define GAMEENGINE_RIGIDBODY_H
 
-#include <EntityComponentSystem/Component.h>
+#include <ECS/Component.h>
 
 namespace Framework::Physics::Types {
     class Rigidbody : public Helper::Component {
@@ -15,16 +15,13 @@ namespace Framework::Physics::Types {
         ~Rigidbody() override = default;
 
     public:
-        static Helper::Component* LoadComponent(const Helper::MarshalDecodeNode& node, const Helper::Types::DataStorage* dataStorage) {
+        static Helper::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 
     protected:
-        void OnDestroyGameObject() override {
+        void OnDestroy() override {
             delete this;
-        }
-        void OnRemoveComponent() override {
-            OnRemoveComponent();
         }
     };
 }

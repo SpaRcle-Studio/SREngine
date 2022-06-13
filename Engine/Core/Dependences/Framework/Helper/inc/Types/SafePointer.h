@@ -5,19 +5,9 @@
 #ifndef SMARTPOINTER_SAFEPOINTER_H
 #define SMARTPOINTER_SAFEPOINTER_H
 
-#include <iostream>
-#include <functional>
-#include <string>
-#include <atomic>
-
-#include <string>
-#include <thread>
-#include <cstdlib>
-
 #include <Utils/StringFormat.h>
-#include <Debug.h>
 
-namespace Framework::Helper::Types {
+namespace SR_HTYPES_NS {
     static std::atomic<int64_t> SAFE_POINTER_COUNTS = 0;
 
     #define SR_NEW_SAFE_PTR() {                              \
@@ -76,10 +66,12 @@ namespace Framework::Helper::Types {
         SR_NODISCARD bool LockIfValid() const;
         SR_NODISCARD bool RecursiveLockIfValid() const;
 
+        SR_NODISCARD T* Get() const { return m_ptr; }
         SR_NODISCARD void* GetRawPtr() const { return (void*)m_ptr; }
         SR_NODISCARD SafePtr<T>& GetThis() { return *this; }
         SR_NODISCARD bool Valid() const { return m_data && m_data->m_valid; }
         SR_NODISCARD bool IsLocked() const { return Valid() && m_data->m_lock; }
+        SR_NODISCARD uint32_t GetUseCount() const;
 
         [[deprecated("Ref-unsafe. Replaced by AutoFree")]]
         bool Free(const std::function<void(T *ptr)> &freeFun);
@@ -139,7 +131,8 @@ namespace Framework::Helper::Types {
             SR_DEL_SAFE_PTR();
 
             delete m_data;
-        } else
+        }
+        else
             --(m_data->m_useCount);
     }
 
@@ -251,7 +244,7 @@ namespace Framework::Helper::Types {
             m_data->m_lock.store(false, std::memory_order_release);
         }
         else
-            SR_SAFE_PTR_ASSERT(false, "lock count = 0!")
+            SR_SAFE_PTR_ASSERT(false, "lock count = 0!");
     }
 
     template<typename T> SR_NODISCARD bool SafePtr<T>::LockIfValid() const {
@@ -333,6 +326,10 @@ namespace Framework::Helper::Types {
 
             return true;
         }
+    }
+
+    template<typename T> uint32_t SafePtr<T>::GetUseCount() const {
+        return Valid() ? m_data->m_useCount.load() : 0;
     }
 }
 

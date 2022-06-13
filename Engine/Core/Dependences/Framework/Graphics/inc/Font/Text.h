@@ -5,9 +5,7 @@
 #ifndef SRENGINE_TEXT_H
 #define SRENGINE_TEXT_H
 
-#include <string>
-#include <atomic>
-#include <mutex>
+#include <stdInclude.h>
 
 namespace Framework::Graphics {
     class Text {

@@ -57,43 +57,43 @@ namespace Framework::Graphics {
                 m_bloomClear = true;
             }
 
-            if (m_camera->IsDirectOutput())
-                m_env->BindFrameBuffer(0);
-            else {
-                m_env->BindFrameBuffer(this->m_finalFBO);
-                m_env->ClearBuffers();
-            }
+            //if (m_camera->IsDirectOutput())
+            //    m_env->BindFrameBuffer(0);
+           // else {
+            //    m_env->BindFrameBuffer(this->m_finalFBO);
+           //     m_env->ClearBuffers();
+           // }
 
             m_postProcessingShader->Use();
 
             {
-                m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
-                m_postProcessingShader->SetVec3("ColorCorrection", m_colorCorrection.ToGLM());
+                //m_postProcessingShader->SetVec3("GammaExpSat", { m_gamma, m_exposure, m_saturation });
+                //m_postProcessingShader->SetVec3("ColorCorrection", m_colorCorrection.ToGLM());
             }
 
             m_env->BindTexture(0, m_colors[0]);
-            m_postProcessingShader->SetInt("scene", 0);
+            //m_postProcessingShader->SetInt("scene", 0);
 
             if (m_bloom) { // SEE: POSSIBLE BUGS
                 m_env->BindTexture(1, m_PingPongColorBuffers[!m_horizontal]);
 
-                m_postProcessingShader->SetInt("bloomBlur", 1);
+                //m_postProcessingShader->SetInt("bloomBlur", 1);
 
-                m_postProcessingShader->SetVec3("BloomColor", m_bloomColor.ToGLM());
+                //m_postProcessingShader->SetVec3("BloomColor", m_bloomColor.ToGLM());
             }
 
             m_env->BindTexture(2, m_colors[4]);
-            m_postProcessingShader->SetInt("skybox", 2);
+            //m_postProcessingShader->SetInt("skybox", 2);
 
             m_env->BindTexture(3, m_colors[3]);
-            m_postProcessingShader->SetInt("stencil", 3);
+            //m_postProcessingShader->SetInt("stencil", 3);
 
             m_env->BindTexture(4, m_colors[2]);
-            m_postProcessingShader->SetInt("depth", 4);
+            //m_postProcessingShader->SetInt("depth", 4);
             m_env->Draw(3);
 
-            if (!m_camera->IsDirectOutput())
-                m_env->BindFrameBuffer(0);
+            //if (!m_camera->IsDirectOutput())
+            //    m_env->BindFrameBuffer(0);
         }
     private:
         void BlurBloom() {
@@ -106,15 +106,15 @@ namespace Framework::Graphics {
             m_firstIteration = true;
 
             m_blurShader->Use();
-            m_blurShader->SetFloat("BloomIntensity", m_bloomIntensity);
+            //m_blurShader->SetFloat("BloomIntensity", m_bloomIntensity);
 
             for (unsigned char i = 0; i < m_bloomAmount; i++) {
                 m_env->BindFrameBuffer(m_PingPongFrameBuffers[m_horizontal]);
 
-                m_blurShader->SetBool("horizontal", m_horizontal);
+                //m_blurShader->SetBool("horizontal", m_horizontal);
 
                 m_env->BindTexture(0, m_firstIteration ? m_colors[1] : m_PingPongColorBuffers[!m_horizontal]);
-                m_blurShader->SetInt("image", 0);
+                //m_blurShader->SetInt("image", 0);
                 m_env->Draw(3);
 
                 m_horizontal = !m_horizontal;
@@ -132,10 +132,10 @@ namespace Framework::Graphics {
             if (!m_isInit)
                 return false;
 
-            if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
-                Helper::Debug::Error("PostProcessing::Destroy() : failed to destroy final framebuffer!");
-                return false;
-            }
+            //if (!m_env->FreeFBO(m_finalFBO) || !m_env->FreeTexture(m_finalColorBuffer)) {
+            //    SR_ERROR("PostProcessing::Destroy() : failed to destroy final framebuffer!");
+            //    return false;
+            //}
 
             if (!m_env->FreeRBO(m_depth))
                 return false;
@@ -148,7 +148,7 @@ namespace Framework::Graphics {
 
         bool OnResize(uint32_t w, uint32_t h) override {
             if (!m_env->CreatePingPongFrameBuffer({w, h}, m_PingPongFrameBuffers, m_PingPongColorBuffers)) {
-                Helper::Debug::Error("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
+                SR_ERROR("PostProcessing::ReCalcFrameBuffers() : failed to create ping pong frame buffer object!");
                 return false;
             }
 
