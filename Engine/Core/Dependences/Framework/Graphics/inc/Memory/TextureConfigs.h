@@ -53,6 +53,10 @@ namespace SR_GRAPH_NS::Memory {
                    && (m_alpha == lrs.m_alpha || m_alpha == SR_UTILS_NS::BoolExt::None || lrs.m_alpha == SR_UTILS_NS::BoolExt::None)
                    && m_cpuUsage == lrs.m_cpuUsage;
         }
+
+        bool operator!=(const TextureConfig& lrs) const {
+            return !(*this == lrs);
+        }
     };
 
     class TextureConfigs : public SR_UTILS_NS::Singleton<TextureConfigs> {

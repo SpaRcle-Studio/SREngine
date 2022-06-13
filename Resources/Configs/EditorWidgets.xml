@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <Widgets>
+	<Widget Name="World edit" Open="false" />
 	<Widget Name="Settings" Open="false" />
+	<Widget Name="Engine statistics" Open="false" />
+	<Widget Name="Scene" Open="true" />
 	<Widget Name="Hierarchy" Open="true" />
 	<Widget Name="Assets" Open="false" />
 	<Widget Name="Evo Script Editor" Open="false" />
-	<Widget Name="World edit" Open="false" />
-	<Widget Name="Scene" Open="true" />
-	<Widget Name="Engine statistics" Open="false" />
 	<Widget Name="Inspector" Open="true" />
 </Widgets>

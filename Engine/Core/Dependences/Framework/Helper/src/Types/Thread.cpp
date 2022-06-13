@@ -19,7 +19,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::SetPriority(ThreadPriority priority) {
-        Platform::SetThreadPriority(m_thread.native_handle(), priority);
+        Platform::SetThreadPriority(reinterpret_cast<void*>(m_thread.native_handle()), priority);
     }
 
     Thread::Ptr Thread::Factory::Create(std::thread thread) {
@@ -73,6 +73,14 @@ namespace SR_HTYPES_NS {
     void Thread::Free() {
         Factory::Instance().Remove(this);
         delete this;
+    }
+
+    Thread::~Thread() {
+        SRAssert(!Joinable());
+        if (m_context) {
+            delete m_context;
+            m_context = nullptr;
+        }
     }
 
     uint32_t Thread::Factory::GetThreadsCount() {

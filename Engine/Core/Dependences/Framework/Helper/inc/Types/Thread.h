@@ -51,10 +51,7 @@ namespace SR_HTYPES_NS {
 
         explicit Thread(std::thread&& thread);
 
-        ~Thread() override {
-            SRAssert(!Joinable());
-            delete m_context;
-        }
+        ~Thread() override;
 
     public:
         SR_NODISCARD bool Joinable() const { return m_thread.joinable(); }

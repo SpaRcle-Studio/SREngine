@@ -16,6 +16,7 @@ namespace SR_UTILS_NS::Platform {
     extern void Sleep(uint64_t milliseconds);
     extern uint64_t GetProcessUsedMemory();
     extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
+    extern void Terminate();
 }
 
 #endif //SRENGINE_PLATFORM_H

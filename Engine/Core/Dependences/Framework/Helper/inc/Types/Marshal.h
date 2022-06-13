@@ -43,15 +43,22 @@ namespace SR_HTYPES_NS {
             m_hasNodes = std::exchange(marshal.m_hasNodes, {});
             m_count = std::exchange(marshal.m_count, {});
             m_name = std::exchange(marshal.m_name, {});
+#ifdef SR_MINGW
+            m_stream.swap(marshal.m_stream);
+#else
             m_stream = std::exchange(marshal.m_stream, {});
+#endif
         }
 
         MarshalEncodeNode& operator=(MarshalEncodeNode&& marshal) noexcept {
             m_hasNodes = std::exchange(marshal.m_hasNodes, {});
             m_count = std::exchange(marshal.m_count, {});
             m_name = std::exchange(marshal.m_name, {});
+#ifdef SR_MINGW
+            m_stream.swap(marshal.m_stream);
+#else
             m_stream = std::exchange(marshal.m_stream, {});
-
+#endif
             return *this;
         }
 
@@ -84,8 +91,9 @@ namespace SR_HTYPES_NS {
                 AppendDef("y", value.y, def);
                 AppendDef("z", value.z, def);
             }
-            else
-                static_assert(false, "unknown type!");
+            else {
+                SR_STATIC_ASSERT("unknown type!");
+            }
 
             return *this;
         }
@@ -113,7 +121,7 @@ namespace SR_HTYPES_NS {
                 Append("z", value.z);
             }
             else
-                static_assert(false, "unknown type!");
+                SR_STATIC_ASSERT("unknown type!");
 
             return *this;
         }
@@ -257,12 +265,20 @@ namespace SR_HTYPES_NS {
         Marshal() = default;
 
         Marshal(Marshal&& marshal) noexcept {
+#ifdef SR_MINGW
+            m_stream.swap(marshal.m_stream);
+#else
             m_stream = std::exchange(marshal.m_stream, {});
+#endif
             m_size = std::exchange(marshal.m_size, {});
         }
 
         Marshal& operator=(Marshal&& marshal) noexcept {
+#ifdef SR_MINGW
+            m_stream.swap(marshal.m_stream);
+#else
             m_stream = std::exchange(marshal.m_stream, {});
+#endif
             m_size = std::exchange(marshal.m_size, {});
             return *this;
         }
@@ -316,12 +332,23 @@ namespace SR_HTYPES_NS {
         template<typename T> T View(uint64_t offset) const {
             T value = T();
 
+
+#ifdef SR_MINGW
+            char* c;
+            m_stream.rdbuf()->pubsetbuf(c, sizeof(T));
+
+            memcpy(
+                &value,
+                c,
+                sizeof(T)
+            );
+#else
             memcpy(
                 &value,
                 m_stream.rdbuf()->view().substr(offset, sizeof(T)).data(),
                 sizeof(T)
             );
-
+#endif
             return value;
         }
 
@@ -411,8 +438,9 @@ namespace SR_UTILS_NS {
         else if constexpr (std::is_same<T, Math::IVector2>()) {
             return Math::IVector2(GetAttribute<int32_t>("x"), GetAttribute<int32_t>("y"));
         }
-        else
-            static_assert(false, "unknown type!");
+        else {
+            SR_STATIC_ASSERT("unknown type!");
+        }
     }
 
     template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttribute(const std::string &name) const {
@@ -464,8 +492,9 @@ namespace SR_UTILS_NS {
         else if constexpr (std::is_same<T, Math::IVector2>()) {
             return Math::IVector2(GetAttributeDef<int32_t>("x", def), GetAttributeDef<int32_t>("y", def));
         }
-        else
-            static_assert(false, "unknown type!");
+        else {
+            SR_STATIC_ASSERT("unknown type!");
+        }
     }
 
     template<typename T> inline T SR_HTYPES_NS::MarshalDecodeNode::GetAttributeDef(const std::string& name, const T& def) const {

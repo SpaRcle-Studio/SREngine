@@ -71,25 +71,29 @@
     SR_ENUM_FROM_STRING(enumName)                                                                \
 
 
-#define SR_ENUM_CLASS(enumName, ...)                                                             \
-    enum class enumName : int32_t {                                                              \
+#define SR_ENUM_CLASS_T(enumName, type, ...)                                                     \
+    enum class enumName : type {                                                                 \
         __VA_ARGS__                                                                              \
     };                                                                                           \
     SR_ENUM_CODEGEN(enumName, __VA_ARGS__)                                                       \
 
-#define SR_ENUM(enumName, ...)                                                                   \
-    enum enumName : int32_t {                                                                    \
+#define SR_ENUM_T(enumName, type, ...)                                                           \
+    enum enumName : type {                                                                       \
         __VA_ARGS__                                                                              \
     };                                                                                           \
     SR_ENUM_CODEGEN(enumName, __VA_ARGS__)                                                       \
+
+#define SR_ENUM_CLASS(enumName, ...) SR_ENUM_CLASS_T(enumName, int32_t, __VA_ARGS__)
+#define SR_ENUM(enumName, ...) SR_ENUM_T(enumName, int32_t, __VA_ARGS__)
 
 /// --------------------------------------------------------------------------------------------------------------------
 
-namespace Framework::Helper {
-    SR_ENUM_CLASS(BoolExt,
-                  None  = -1,
-                  False = 0,
-                  True  = 1);
+namespace SR_UTILS_NS {
+    SR_ENUM_CLASS_T(BoolExt, int8_t,
+          None  = -1,
+          False = 0,
+          True  = 1
+    );
 }
 
 #endif //GAMEENGINE_ENUMERATIONS_H

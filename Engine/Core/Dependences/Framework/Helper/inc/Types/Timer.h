@@ -21,13 +21,18 @@ namespace SR_HTYPES_NS {
                 m_frames = 0; m_deltaTime = 0;
             }
 
+#ifdef SR_MINGW
+            SRHalt("TODO!");
+#else
             auto&& now = std::chrono::high_resolution_clock::now();
 
             using ms = std::chrono::duration<double, std::milli>;
+
             m_deltaTime += std::chrono::duration_cast<ms>(now - m_beginFrame).count() / (double_t) CLOCKS_PER_SEC;
 
             m_frames++;
             m_beginFrame = now;
+#endif
 
             return m_deltaTime > m_updateFrequency;
         }

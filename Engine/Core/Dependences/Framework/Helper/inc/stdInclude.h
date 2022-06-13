@@ -14,6 +14,7 @@
 #include <cstddef>
 #include <unordered_set>
 #include <stack>
+#include <direct.h>
 #include <cctype>
 #include <locale>
 #include <cstring>
@@ -47,5 +48,9 @@
 #include <chrono>
 #include <random>
 #include <cstdint>
+
+#ifdef SR_MINGW
+    #include <iomanip>
+#endif
 
 #endif //SRENGINE_STDINCLUDE_H

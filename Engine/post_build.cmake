@@ -28,6 +28,8 @@ macro(SRCopyFileToApp dir file)
     endif()
 endmacro()
 
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "libEvoVulkan.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "libEvoVulkand.dll")
 SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "EvoVulkan.dll")
 SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "EvoVulkand.dll")
 

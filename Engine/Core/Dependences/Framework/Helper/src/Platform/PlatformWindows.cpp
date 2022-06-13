@@ -127,4 +127,12 @@ namespace SR_UTILS_NS::Platform {
             SR_ERROR("Platform::SetThreadPriority() : failed to set thread priority!");
         }
     }
+
+    void Terminate() {
+#ifdef SR_MINGW
+
+#else
+        terminate();
+#endif
+    }
 }

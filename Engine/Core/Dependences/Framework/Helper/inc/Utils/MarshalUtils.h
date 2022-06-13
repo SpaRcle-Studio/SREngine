@@ -94,7 +94,7 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value, sizeof(T));
             }
             else {
-                static_assert(false, "Unsupported type!");
+                SR_STATIC_ASSERT("Unsupported type!");
             }
         }
 
@@ -129,7 +129,7 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value, sizeof(T));
             }
             else {
-                static_assert(false, "Unsupported type!");
+                SR_STATIC_ASSERT("Unsupported type!");
             }
 
             return value;

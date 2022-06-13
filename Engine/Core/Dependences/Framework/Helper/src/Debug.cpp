@@ -140,4 +140,10 @@ namespace Framework::Helper {
 
         return true;
     }
+
+    void Debug::Terminate() {
+        Assert("[Stacktrace]");
+        System("Function \"Terminate\" has been called... >_<");
+        Platform::Terminate();
+    }
 }

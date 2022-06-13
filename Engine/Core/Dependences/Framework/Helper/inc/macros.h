@@ -128,4 +128,12 @@
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 
+//#define SR_STATIC_ASSERT2(expr, msg)
+
+#ifdef SR_MINGW
+    #define SR_STATIC_ASSERT(msg) static_assert(msg);
+#else
+    #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
+#endif
+
 #endif //GAMEENGINE_MACROS_H

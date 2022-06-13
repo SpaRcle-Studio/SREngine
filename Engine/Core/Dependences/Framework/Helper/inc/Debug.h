@@ -74,11 +74,7 @@ namespace SR_UTILS_NS {
 
         static bool IsRunningUnderDebugger();
 
-        static void Terminate() {
-            Assert("[Stacktrace]");
-            System("Function \"Terminate\" has been called... >_<");
-            terminate();
-        }
+        static void Terminate();
         static void MakeCrash() {
             Assert("[Stacktrace]");
             System("Function \"MakeCrash\" has been called... >_<");

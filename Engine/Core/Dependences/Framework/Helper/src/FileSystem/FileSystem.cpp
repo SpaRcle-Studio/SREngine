@@ -3,10 +3,11 @@
 //
 
 #include <FileSystem/FileSystem.h>
-
-#include <cstdio>
 #include <Debug.h>
 #include <Utils/StringUtils.h>
+#include <Debug.h>
+#include <FileSystem/Path.h>
+#include <Utils/Hashes.h>
 
 #ifdef SR_WIN32
     #include <Windows.h>
@@ -14,13 +15,11 @@
     #include <shellapi.h>
     #include <commdlg.h>
     #include <shlobj.h>
-#endif
 
-#include <Utils/StringUtils.h>
-#include <Debug.h>
-#include <direct.h>
-#include <FileSystem/Path.h>
-#include <Utils/Hashes.h>
+    #ifdef SR_MINGW
+        #include <ShObjIdl.h>
+    #endif
+#endif
 
 namespace SR_UTILS_NS {
     bool FileSystem::Delete(const char *file) { return remove(file); }
@@ -433,7 +432,7 @@ namespace SR_UTILS_NS {
     }
 
     SR_UTILS_NS::Path FileSystem::BrowseFolder(const SR_UTILS_NS::Path &path) {
-    #ifdef SR_WIN32
+    #if defined(SR_WIN32) and defined(SR_MSVC)
         LPWSTR lPath = NULL;
 
         IFileDialog *pfd;

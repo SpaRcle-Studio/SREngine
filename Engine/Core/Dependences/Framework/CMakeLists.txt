@@ -5,13 +5,18 @@ set(CMAKE_CXX_STANDARD 20)
 
 #SET(CMAKE_CXX_FLAGS_DEBUG  "-mbig-obj -O2")
 
+if (MINGW)
+
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
+endif()
+
 # Переменная дириктории исходного кода данного фреймворка
 set(FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(IMGUI_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui)
 set(IMGUIZMO_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/ImGuizmo)
 set(IMGUI_NODE_EDITOR_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui-node-editor)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
 
 # Включаем вспомогательные файлы
 include(Audio.cmake)
@@ -67,10 +72,17 @@ if (CYGWIN)
             "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkan::lib assimp
             EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
 else()
+    if (MINGW)
     target_link_libraries(Framework
             opengl32 glfw glew #TinyObjLoader
-            ${Vulkan_LIBRARY} EvoVulkan::lib assimp
+            ${Vulkan_LIBRARY} EvoVulkan::lib assimp Dwmapi.lib
             EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
+    else()
+        target_link_libraries(Framework
+                opengl32 glfw glew #TinyObjLoader
+                ${Vulkan_LIBRARY} EvoVulkan::lib assimp
+                EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
+    endif()
 endif()
 
 if(WIN32)

@@ -16,8 +16,9 @@ namespace SR_UTILS_NS {
         else if constexpr (Math::IsString<T>()) {
             return value;
         }
-        else
-            static_assert(false, "Unsupported type!");
+        else if constexpr (false) {
+            SR_STATIC_ASSERT("Unsupported type!");
+        }
     }
 
     /// Warning: unsafe
@@ -58,7 +59,7 @@ namespace SR_UTILS_NS {
                 return std::stod(str);
             }
             else
-                static_assert(false, "Unsupported type!");
+                SR_STATIC_ASSERT("Unsupported type!");
         }
         catch (...) {
             SRAssert(false);
