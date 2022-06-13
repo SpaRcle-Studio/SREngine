@@ -290,6 +290,7 @@ namespace SR_GRAPH_NS {
         virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) { return false; }
 
         SR_NODISCARD virtual int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) { return -1; }
+
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeUBO(int32_t* ID) const { return false; }

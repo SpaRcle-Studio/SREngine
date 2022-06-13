@@ -467,9 +467,11 @@ namespace SR_GRAPH_NS {
             m_env->UpdateDescriptorSets(descriptorSet, {
                     {DescriptorType::Uniform, {m_uniformBlock.m_binding, ubo}},
             });
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     bool Shader::Flush() const {

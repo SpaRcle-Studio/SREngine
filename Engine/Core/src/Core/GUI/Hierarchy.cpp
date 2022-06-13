@@ -59,6 +59,10 @@ namespace SR_CORE_NS::GUI {
             ImGui::Separator();
 
             if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize)) {
+                if (active) {
+                    paused = false;
+                }
+
                 active = !active;
             }
 

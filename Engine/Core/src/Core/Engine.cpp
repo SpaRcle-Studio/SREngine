@@ -64,8 +64,10 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     }
 
     /// TODO: move to camera
-    if (!m_window->GetRender()->GetSkybox()) {
-        m_window->GetRender()->SetSkybox(SR_GTYPES_NS::Skybox::Load("Sea.jpg"));
+    if (SR_UTILS_NS::Features::Instance().Enabled("LoadSkybox")) {
+        if (!m_window->GetRender()->GetSkybox()) {
+            m_window->GetRender()->SetSkybox(SR_GTYPES_NS::Skybox::Load("Sea.jpg"));
+        }
     }
 
     m_isCreate = true;

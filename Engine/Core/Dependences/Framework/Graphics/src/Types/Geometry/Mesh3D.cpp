@@ -72,11 +72,25 @@ namespace SR_GTYPES_NS {
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)
             return;
 
-        auto &&shader = m_material->GetShader();
+        auto&& shader = m_material->GetShader();
+        auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
+
+            /*m_virtualUBO = uboManager.AllocateUBO(shader->GetUBOBlockSize(), shader->GetSamplersCount());
+
+            if (m_virtualUBO != SR_ID_INVALID) {
+                uboManager.BindUBO(m_virtualUBO);
+            }
+            else
+                m_env->ResetDescriptorSet();
+
+            shader->InitUBOBlock();
+            shader->Flush();
+
+            m_material->UseSamplers();*/
 
             if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
@@ -122,6 +136,8 @@ namespace SR_GTYPES_NS {
         if (m_descriptorSet != SR_ID_INVALID) {
             m_env->BindDescriptorSet(m_descriptorSet);
         }
+
+        // uboManager.BindUBO(m_virtualUBO);
 
         m_env->DrawIndices(m_countIndices);
     }

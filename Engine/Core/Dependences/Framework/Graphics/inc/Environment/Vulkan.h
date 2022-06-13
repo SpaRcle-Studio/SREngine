@@ -385,9 +385,9 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const override {
             SRAssert2(uboSize > 0, "Incorrect UBO size!");
 
-            if (auto&& id = this->m_memory->AllocateUBO(uboSize); id < 0) {
+            if (auto&& id = m_memory->AllocateUBO(uboSize); id < 0) {
                 SR_ERROR("Vulkan::AllocateUBO() : failed to allocate uniform buffer object!");
-                return -1;
+                return SR_ID_INVALID;
             }
             else
                 return id;

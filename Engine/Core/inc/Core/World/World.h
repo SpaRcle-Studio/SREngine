@@ -27,6 +27,7 @@ namespace SR_CORE_NS::World {
     public:
         SR_UTILS_NS::GameObject::Ptr Instance(SR_HTYPES_NS::Marshal& marshal) override;
         SR_UTILS_NS::GameObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
+        void FindObserver() override;
 
     };
 }

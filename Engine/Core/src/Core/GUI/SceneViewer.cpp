@@ -169,7 +169,7 @@ void SceneViewer::InitCamera() {
     Helper::GameObject::Ptr camera;
     if (m_scene.LockIfValid()) {
         camera = m_scene->Instance("Editor camera");
-        m_scene->SetObserver(camera);
+        //m_scene->SetObserver(camera);
         m_scene.Unlock();
     }
     else

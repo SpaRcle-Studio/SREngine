@@ -2,6 +2,7 @@
 <Features>
    <Common>
        <EvoCompiler Value="true"/>
+       <LoadSkybox Value="true"/>
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
@@ -14,6 +15,7 @@
        <EditorWidgetsDocking Value="false"/>
        <InputIgnoreNonFocusedWidgets Value="false"/>
        <UpdateNonHoveredSceneViewer Value="true"/>
-       <VulkanValidation Value="false"/>
+       <VulkanValidation Value="true"/>
+       <MultiRenderTargets Value="false"/>
    </Common>
 </Features>

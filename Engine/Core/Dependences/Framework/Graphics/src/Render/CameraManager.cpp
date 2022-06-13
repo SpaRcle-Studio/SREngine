@@ -64,6 +64,27 @@ namespace SR_GRAPH_NS {
         return CameraManager::CameraPtr();
     }
 
+
+    std::list<CameraManager::CameraPtr> CameraManager::GetCameras() const {
+        SR_LOCK_GUARD
+
+        std::list<CameraPtr> cameras;
+
+        for (auto&&[camera, destroyed] : m_cameras) {
+            if (destroyed) {
+                continue;
+            }
+
+            if (!camera->IsActive()) {
+                continue;
+            }
+
+            cameras.emplace_back(camera);
+        }
+
+        return cameras;
+    }
+
     void CameraManager::OnSingletonDestroy() {
         Update();
 

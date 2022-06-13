@@ -210,6 +210,10 @@ namespace SR_GTYPES_NS {
     void Material::UseSamplers() {
         InitShader();
 
+        if (m_env->GetCurrentDescriptorSet() == SR_ID_INVALID) {
+            return;
+        }
+
         for (const Material::Property& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Sampler2D:

@@ -11,7 +11,7 @@
 #include <Utils/Hashes.h>
 #include <ResourceManager/IResource.h>
 #include <Environment/Basic/IShaderProgram.h>
-#include <sparsehash/dense_hash_map>
+#include <Types/Map.h>
 
 namespace SR_GTYPES_NS {
     class Texture;

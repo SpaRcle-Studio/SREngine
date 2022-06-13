@@ -21,12 +21,6 @@ namespace SR_UTILS_NS {
         ISavable();
         virtual ~ISavable();
 
-    private:
-        /// этот флаг означает, чтобыхотя-бы раз сохраняли этот объект
-        bool m_onceSaved  = false;
-        /// true - объект был загружен из-файла, false - объект был создан средствами движка
-        bool m_isLoaded   = false;
-
     public:
         SR_NODISCARD virtual SR_HTYPES_NS::Marshal Save(SavableFlags flags) const {
             return SR_HTYPES_NS::Marshal();

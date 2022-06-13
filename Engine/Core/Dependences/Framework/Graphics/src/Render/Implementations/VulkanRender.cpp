@@ -9,6 +9,8 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
         return;
     }
 
+    auto&& uboManager = Memory::UBOManager::Instance();
+
     for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
         if (!shader || !shader->Ready()) {
             continue;
@@ -20,16 +22,25 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
 
         for (auto const& [key, meshGroup] : subCluster.m_groups) {
             for (const auto &mesh : meshGroup) {
-                auto&& ubo = mesh->GetUBO();
+                if (!mesh->IsActive()) {
+                    continue;
+                }
 
-                /// component may be disabled.
+                auto&& ubo = mesh->GetUBO();
                 if (ubo == SR_ID_INVALID) {
                     continue;
                 }
 
+                //auto&& virtualUbo = mesh->GetVirtualUBO();
+                //if (virtualUbo == SR_ID_INVALID) {
+                //    continue;
+                //}
+
                 mesh->GetMaterial()->Use();
 
                 shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
+
+                //uboManager.BindUBO(virtualUbo);
 
                 m_env->BindUBO(ubo);
 

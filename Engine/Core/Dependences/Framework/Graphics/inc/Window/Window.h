@@ -9,6 +9,7 @@
 
 #include <Math/Vector3.h>
 #include <Types/SafeGateArray.h>
+#include <Utils/NonCopyable.h>
 
 namespace SR_GRAPH_NS {
     namespace GUI {
@@ -69,7 +70,8 @@ namespace SR_GRAPH_NS {
         void DrawVulkan();
         void DrawOpenGL();
 
-        void DrawToCamera(Framework::Graphics::Camera* camera);
+        void DrawToCamera(Camera* camera, uint32_t fbo);
+        void DrawSingleCamera(Camera* camera);
 
     private:
         std::atomic<bool>     m_isCreate              = false;

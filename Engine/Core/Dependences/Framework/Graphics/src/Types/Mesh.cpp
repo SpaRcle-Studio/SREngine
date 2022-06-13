@@ -327,5 +327,15 @@ namespace SR_GRAPH_NS::Types {
         m_env->SetBuildState(false);
         Component::OnDisabled();
     }
+
+    bool Mesh::CanDraw() const {
+        if (!IsActive() || IsDestroyed())
+            return false;
+
+        if (m_hasErrors)
+            return false;
+
+        return true;
+    }
 }
 

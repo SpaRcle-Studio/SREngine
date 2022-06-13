@@ -709,6 +709,8 @@ namespace Framework::Graphics {
                 return EvoVulkan::Core::RenderResult::Fatal;
             }
 
+            VK_LOG("SRVulkan::Render() : window are successfully resized!");
+
             return EvoVulkan::Core::RenderResult::Success;
         }
 
@@ -738,6 +740,11 @@ namespace Framework::Graphics {
         /// Submit to queue
         if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+
+            if (result == VK_ERROR_DEVICE_LOST) {
+                Debug::Terminate();
+            }
+
             return EvoVulkan::Core::RenderResult::Error;
         }
 
@@ -754,7 +761,7 @@ namespace Framework::Graphics {
                     return EvoVulkan::Core::RenderResult::Success;
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
-                SR_UTILS_NS::Debug::MakeCrash();
+                SR_UTILS_NS::Debug::Terminate();
             default: {
                 SRAssertOnce(false);
                 return EvoVulkan::Core::RenderResult::Fatal;

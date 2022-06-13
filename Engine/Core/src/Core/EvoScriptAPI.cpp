@@ -107,7 +107,6 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, Free, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetRootGameObjects, std::unordered_set<SafePtr<GameObject>>&)
-        ESRegisterMethod(EvoScript::Public, generator, Scene, SetObserver, void, ESArg1(const SafePtr<GameObject>& gm), ESArg1(gm))
         ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))

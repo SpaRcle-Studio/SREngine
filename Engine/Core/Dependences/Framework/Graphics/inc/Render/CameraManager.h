@@ -26,6 +26,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD uint32_t GetCountCameras() const;
         SR_NODISCARD CameraPtr GetFirstCamera() const;
+        SR_NODISCARD std::list<CameraPtr> GetCameras() const;
 
     protected:
         void OnSingletonDestroy() override;

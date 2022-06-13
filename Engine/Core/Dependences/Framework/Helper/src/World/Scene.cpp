@@ -186,62 +186,48 @@ namespace SR_WORLD_NS {
     }
 
     void Scene::Update(float_t dt) {
-        if (!m_observer->m_target.Valid()) {
-            if (!m_regions.empty()) {
-                for (auto&& [pos, pRegion] : m_regions) {
-                    pRegion->Unload();
-                    SaveRegion(pRegion);
-                    delete pRegion;
-                }
-
-                m_regions.clear();
-            }
-
-            return;
-        }
+        FindObserver();
 
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
         const auto regSize = Math::IVector3(m_regionWidth);
         const auto regSize2 = Math::IVector3(m_regionWidth - 1);
 
         const World::Offset offset = m_observer->m_offset;
-        Math::FVector3 observerPos;
 
         if (m_observer->m_target.LockIfValid()) {
-            observerPos = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
-
-            auto&& lastChunk = m_observer->m_lastChunk;
-            auto&& lastRegion = m_observer->m_lastRegion;
-
+            m_observer->m_targetPosition = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
             m_observer->m_target.Unlock();
+        }
 
-            auto&& chunk = AddOffset(SR_MATH_NS::IVector3(observerPos / chunkSize), -offset.m_chunk);
+        auto&& lastChunk = m_observer->m_lastChunk;
+        auto&& lastRegion = m_observer->m_lastRegion;
 
-            if (lastChunk != chunk) {
-                if (m_regions.find(lastRegion) != m_regions.end())
-                    m_regions.at(lastRegion)->GetChunk(m_observer->m_chunk)->OnExit();
+        auto&& chunk = AddOffset(SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize), -offset.m_chunk);
 
-                m_observer->SetChunk(chunk);
+        if (lastChunk != chunk) {
+            if (m_regions.find(lastRegion) != m_regions.end())
+                m_regions.at(lastRegion)->GetChunk(m_observer->m_chunk)->OnExit();
 
-                auto region = AddOffset(chunk.Singular(regSize2) / regSize, -offset.m_region);
+            m_observer->SetChunk(chunk);
 
-                if (auto regionDelta = (region - lastRegion); !regionDelta.Empty()) {
-                    m_observer->MoveRegion(regionDelta);
-                    SRAssert(!m_observer->m_region.HasZero());
-                }
+            auto region = AddOffset(chunk.Singular(regSize2) / regSize, -offset.m_region);
 
-                if (m_regions.find(m_observer->m_region) == m_regions.end()) {
-                    auto pRegion = Region::Allocate(m_observer, m_regionWidth, m_chunkSize, m_observer->m_region);
-                    pRegion->Load();
-                    m_regions.insert(std::pair(m_observer->m_region, pRegion));
-                }
-
-                if (auto &&regionIt = m_regions.at(m_observer->m_region))
-                    regionIt->GetChunk(m_observer->m_chunk)->OnEnter();
-
-                lastRegion = region;
-                lastChunk = chunk;
+            if (auto regionDelta = (region - lastRegion); !regionDelta.Empty()) {
+                m_observer->MoveRegion(regionDelta);
+                SRAssert(!m_observer->m_region.HasZero());
             }
+
+            if (m_regions.find(m_observer->m_region) == m_regions.end()) {
+                auto pRegion = Region::Allocate(m_observer, m_regionWidth, m_chunkSize, m_observer->m_region);
+                pRegion->Load();
+                m_regions.insert(std::pair(m_observer->m_region, pRegion));
+            }
+
+            if (auto &&regionIt = m_regions.at(m_observer->m_region))
+                regionIt->GetChunk(m_observer->m_chunk)->OnEnter();
+
+            lastRegion = region;
+            lastChunk = chunk;
         }
 
         if (m_updateContainer)
@@ -267,8 +253,9 @@ namespace SR_WORLD_NS {
             }
         }
 
-        if (m_shiftEnabled)
-            CheckShift(observerPos.Cast<int>() / chunkSize);
+        if (m_shiftEnabled) {
+            CheckShift(m_observer->m_targetPosition.Cast<int>() / chunkSize);
+        }
     }
 
     Scene::Scene(const std::string &name)

@@ -89,7 +89,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Framework::Graphics::Window::Init() {
+    bool Window::Init() {
         if (!m_isCreate) {
             SR_ERROR("Window::Init() : window is not created!");
             return false;
@@ -346,26 +346,6 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void Window::DrawToCamera(Camera* camera) {
-        m_render->SetCurrentCamera(camera);
-
-        //camera->GetPostProcessing()->BeginGeometry();
-        {
-            m_render->DrawGeometry();
-            m_render->DrawTransparentGeometry();
-        }
-        //camera->GetPostProcessing()->EndGeometry();
-
-        //camera->GetPostProcessing()->BeginSkybox();
-        {
-            m_render->DrawSkybox();
-            m_render->DrawGrid();
-        }
-        //camera->GetPostProcessing()->EndSkybox();
-
-        //camera->GetPostProcessing()->Complete();
-    }
-
     void Window::CentralizeCursor() noexcept {
         if (m_isRun) {
             m_env->SetCursorPosition({ GetWindowSize().x / 2,  GetWindowSize().y / 2});
@@ -527,13 +507,57 @@ namespace SR_GRAPH_NS {
         goto ret;
     }
 
+    void Window::DrawToCamera(Camera* camera, uint32_t fbo) {
+        m_render->SetCurrentCamera(camera);
+
+        for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
+            m_env->SetBuildIteration(i);
+
+            m_env->BindFrameBuffer(fbo);
+
+            m_env->BeginRender();
+            {
+                m_env->SetViewport();
+                m_env->SetScissor();
+
+                m_render->DrawGeometry();
+                m_render->DrawSkybox();
+            }
+            m_env->EndRender();
+        }
+    }
+
+    void Window::DrawSingleCamera(Camera *camera) {
+        m_render->SetCurrentCamera(camera);
+
+        m_env->ClearFramebuffersQueue();
+
+        m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+
+        for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
+            m_env->SetBuildIteration(i);
+
+            m_env->BindFrameBuffer(0);
+
+            m_env->BeginRender();
+            {
+                m_env->SetViewport();
+                m_env->SetScissor();
+
+                m_render->DrawGeometry();
+                m_render->DrawSkybox();
+            }
+            m_env->EndRender();
+        }
+    }
+
     void Window::DrawNoCamera() {
         m_env->ClearFramebuffersQueue();
 
         {
             m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
 
-            m_render->CalculateAll();
+            //m_render->CalculateAll();
 
             for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
                 m_env->SetBuildIteration(i);
@@ -571,95 +595,6 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::DrawVulkan() {
-        /*if (IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed()) {
-            if (m_env->BeginDrawGUI()) {
-                for (auto &&widgetManager : m_widgetManagers.GetElements())
-                    widgetManager->Draw();
-
-                m_env->EndDrawGUI();
-            }
-        }
-
-        BeginSync();
-
-        for (auto &&camera : m_cameras.GetElements())
-            camera->PoolEvents();
-
-        if (m_env->IsNeedReBuild()) {
-            if (!m_cameras.Empty()) {
-                m_env->ClearFramebuffersQueue();
-
-                m_render->SetCurrentCamera(m_cameras.Front());
-
-                if (m_cameras.Front()->IsReady()) {
-                    if (m_cameras.Front()->GetPostProcessing()->BeginGeometry()) {
-                        m_env->BeginRender();
-
-                        {
-                            m_env->SetViewport();
-                            m_env->SetScissor();
-
-                            m_render->DrawGeometry();
-                            m_render->DrawSkybox();
-                        }
-
-                        m_env->EndRender();
-
-                        m_cameras.Front()->GetPostProcessing()->EndGeometry();
-                    }
-                }
-
-                {
-                    m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
-
-                    if (!m_cameras.Front()->IsDirectOutput()) {
-                        m_env->BindFrameBuffer(m_cameras.Front()->GetPostProcessing()->GetFinalFBO());
-                        m_env->ClearBuffers();
-
-                        m_cameras.Front()->GetPostProcessing()->Complete();
-
-                        m_env->BeginRender();
-                        {
-                            m_env->SetViewport();
-                            m_env->SetScissor();
-
-                            //! Должна вызываться в том же кадровом буфере, что и Complete
-                            m_cameras.Front()->GetPostProcessing()->Draw();
-                        }
-                        m_env->EndRender();
-                    } else
-                        m_cameras.Front()->GetPostProcessing()->Complete();
-
-                    for (uint8_t i = 0; i < m_env->GetCountBuildIter(); i++) {
-                        m_env->SetBuildIteration(i);
-
-                        m_env->BindFrameBuffer(0);
-
-                        m_env->BeginRender();
-                        {
-                            m_env->SetViewport();
-                            m_env->SetScissor();
-
-                            if (m_cameras.Front()->IsDirectOutput())
-                                m_cameras.Front()->GetPostProcessing()->Draw();
-                        }
-                        m_env->EndRender();
-                    }
-                }
-
-                m_env->SetBuildState(true);
-            } else
-                DrawNoCamera();
-
-            EndSync();
-            return;
-        } else
-            m_render->UpdateUBOs();
-
-        m_env->DrawFrame();
-
-        EndSync();*/
-
         const bool canUseGUI = IsGUIEnabled() && m_env->IsGUISupport() && !m_env->IsWindowCollapsed();
 
         if (canUseGUI) {
@@ -674,9 +609,10 @@ namespace SR_GRAPH_NS {
         CameraManager::LockSingleton();
 
         auto&& cameraManager = CameraManager::Instance();
-        auto&& camera = cameraManager.GetFirstCamera();
+        auto&& firstCamera = cameraManager.GetFirstCamera();
+        auto&& uboManager = Memory::UBOManager::Instance();
 
-        if (!camera) {
+        if (!firstCamera) {
             if (canUseGUI) {
                 DrawNoCamera();
             }
@@ -686,46 +622,42 @@ namespace SR_GRAPH_NS {
             return;
         }
 
+        const bool multipleRender = Features::Instance().Enabled("MultiRenderTargets");
+        auto&& cameras = cameraManager.GetCameras();
+
         if (m_env->IsNeedReBuild()) {
-            m_render->SetCurrentCamera(camera);
+            SR_LOG("Window::DrawVulkan() : re-build scene...");
 
-            m_env->ClearFramebuffersQueue();
+            if (!multipleRender || cameras.size() == 1) {
+                uboManager.SetCurrentCamera(firstCamera);
+                DrawSingleCamera(firstCamera);
+            }
+            else {
+                m_env->ClearFramebuffersQueue();
 
-            /*static auto fbo = Types::Framebuffer::Create(1, { 10, 10 });
+                m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.f, 1);
 
-            {
-                fbo->Bind();
-
-                if (fbo->BeginRender())
-                {
-                    fbo->EndRender();
+                for (auto &&pCamera : cameras) {
+                    uboManager.SetCurrentCamera(pCamera);
+                    DrawToCamera(pCamera, 0);
                 }
-            }*/
-
-            m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
-
-            for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
-                m_env->SetBuildIteration(i);
-
-                m_env->BindFrameBuffer(0);
-
-                m_env->BeginRender();
-                {
-                    m_env->SetViewport();
-                    m_env->SetScissor();
-
-                    //fbo->Draw();
-
-                    m_render->DrawGeometry();
-                    m_render->DrawSkybox();
-                }
-                m_env->EndRender();
             }
 
             m_env->SetBuildState(true);
         }
         else {
-            m_render->UpdateUBOs();
+            if (!multipleRender || cameras.size() == 1) {
+                uboManager.SetCurrentCamera(firstCamera);
+                m_render->SetCurrentCamera(firstCamera);
+                m_render->UpdateUBOs();
+            }
+            else {
+                for (auto &&pCamera : cameras) {
+                    uboManager.SetCurrentCamera(pCamera);
+                    m_render->SetCurrentCamera(pCamera);
+                    m_render->UpdateUBOs();
+                }
+            }
         }
 
         CameraManager::UnlockSingleton();
@@ -734,30 +666,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::DrawOpenGL() {
-        /*m_env->ClearBuffers();
 
-        {
-            if (m_cameras.Count() == 1) {
-                if (m_cameras.Front()->IsActive()) {
-                    DrawToCamera(m_cameras.Front());
-                }
-            }
-            else
-                for (auto&& camera : m_cameras.GetElements()) {
-                    if (!camera->IsActive()) {
-                        return;
-                    }
-                    DrawToCamera(camera);
-                }
-
-            if (IsGUIEnabled() && m_env->IsGUISupport()) {
-                if (m_env->BeginDrawGUI()) {
-                    m_env->EndDrawGUI();
-                }
-            }
-        }
-
-        m_env->SwapBuffers();*/
     }
 
     bool Window::IsFullScreen() const {

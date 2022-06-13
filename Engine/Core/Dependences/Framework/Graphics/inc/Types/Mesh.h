@@ -85,9 +85,11 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD glm::mat4 GetModelMatrix()    const { return m_modelMat; }
         SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
         SR_NODISCARD uint32_t GetDescriptorSet()   const { return m_descriptorSet; }
-        SR_NODISCARD uint32_t GetUBO()             const { return m_UBO; }
+        SR_NODISCARD int32_t GetUBO()              const { return m_UBO; }
+        SR_NODISCARD int32_t GetVirtualUBO()       const { return m_virtualUBO; }
         SR_NODISCARD std::string GetResourcePath() const override;
         SR_NODISCARD bool HaveDefMaterial()        const;
+        SR_NODISCARD virtual bool CanDraw()        const;
 
         void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
@@ -126,6 +128,7 @@ namespace SR_GTYPES_NS {
 
         int32_t                      m_descriptorSet     = SR_ID_INVALID;
         int32_t                      m_UBO               = SR_ID_INVALID;
+        int32_t                      m_virtualUBO        = SR_ID_INVALID;
 
         /// определяет порядок меша в файле, если их там несколько
         uint32_t                     m_meshId            = SR_UINT32_MAX;

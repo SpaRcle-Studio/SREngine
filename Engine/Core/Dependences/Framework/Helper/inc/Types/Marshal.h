@@ -10,6 +10,7 @@
 #include <FileSystem/Path.h>
 #include <Math/Vector2.h>
 #include <Math/Vector3.h>
+#include <Utils/NonCopyable.h>
 #include <Utils/StringFormat.h>
 
 namespace SR_HTYPES_NS {
@@ -31,7 +32,7 @@ namespace SR_HTYPES_NS {
         std::string m_data;
     };
 
-    class MarshalEncodeNode {
+    class MarshalEncodeNode : public SR_UTILS_NS::NonCopyable {
         friend class MarshalDecodeNode;
     public:
         MarshalEncodeNode();

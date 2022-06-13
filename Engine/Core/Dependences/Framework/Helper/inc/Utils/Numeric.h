@@ -17,9 +17,19 @@ namespace SR_UTILS_NS {
             , std::llround(std::pow(2,62)))
         { }
 
+        ~Random() override = default;
+
     public:
         int64_t Int64() {
             return m_dist(m_e2);
+        }
+
+        int32_t Int32() {
+            return static_cast<int32_t>(m_dist(m_e2));
+        }
+
+        uint32_t UInt32() {
+            return static_cast<uint32_t>(m_dist(m_e2));
         }
 
     private:

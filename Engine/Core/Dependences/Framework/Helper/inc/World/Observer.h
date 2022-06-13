@@ -80,6 +80,8 @@ namespace SR_WORLD_NS {
         Offset m_offset;
 
         Scene* m_scene;
+
+        Math::FVector3 m_targetPosition;
         Types::SafePtr<Helper::GameObject> m_target;
     };
 

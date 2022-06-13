@@ -8,6 +8,9 @@
 #include <Types/Vector.h>
 #include <Types/Pair.h>
 
+#include <sparsehash/dense_hash_map>
+#include <flat_hash_map/flat_hash_map.hpp>
+
 // TODO: Check, refactoring and add exception processing
 
 namespace Framework::Helper::Types {

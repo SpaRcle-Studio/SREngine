@@ -75,10 +75,12 @@ namespace SR_UTILS_NS {
         static bool IsRunningUnderDebugger();
 
         static void Terminate() {
+            Assert("[Stacktrace]");
             System("Function \"Terminate\" has been called... >_<");
             terminate();
         }
         static void MakeCrash() {
+            Assert("[Stacktrace]");
             System("Function \"MakeCrash\" has been called... >_<");
             for (long long int i = 0; ++i; (&i)[i] = i);
             // https://codengineering.ru/q/what-is-the-easiest-way-to-make-a-c-program-crash-24928

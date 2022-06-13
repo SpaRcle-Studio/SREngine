@@ -9,6 +9,7 @@
 #include <World/Observer.h>
 #include <Types/StringAtom.h>
 #include <Types/Marshal.h>
+#include <World/CameraData.h>
 
 namespace SR_WORLD_NS {
     struct TensorKey {
@@ -83,7 +84,7 @@ namespace SR_WORLD_NS {
         void SetWorldOffset(const World::Offset& offset);
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetName(const std::string& name) { m_name = name; }
-        void SetObserver(const SR_HTYPES_NS::SafePtr<GameObject>& observer) { m_observer->m_target = observer; }
+        //void SetObserver(const SR_HTYPES_NS::SafePtr<GameObject>& observer) { m_observer->m_target = observer; }
         void SetActive(bool value) { m_isActive = value; }
         void SetPaused(bool value) { m_isPaused = value; }
 
@@ -115,10 +116,14 @@ namespace SR_WORLD_NS {
         bool ReloadChunks();
 
     private:
+        virtual void FindObserver() { }
         void CheckShift(const Math::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
         void SaveRegion(Region* pRegion) const;
+
+    protected:
+        Observer*                    m_observer            = nullptr;
 
     private:
         SR_INLINE static Allocator   g_allocator           = Allocator();
@@ -143,8 +148,6 @@ namespace SR_WORLD_NS {
         Regions                      m_regions             = Regions();
         Math::IVector2               m_chunkSize           = Math::IVector2();
         uint32_t                     m_regionWidth         = 0;
-
-        Observer*                    m_observer            = nullptr;
 
     };
 }
