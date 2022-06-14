@@ -83,11 +83,11 @@
     #define SR_USE_IMGUIZMO
 #endif
 
-#if defined(SR_USE_IMGUI) and not (SR_USE_IMGUIZMO)
+#if defined(SR_USE_IMGUI) and not defined(SR_USE_IMGUIZMO)
     #define SR_USE_IMGUIZMO
 #endif
 
-#if defined(SR_USE_IMGUI) and not (SR_USE_IMGUI_NODE_EDITOR)
+#if defined(SR_USE_IMGUI) and not defined(SR_USE_IMGUI_NODE_EDITOR)
     #define SR_USE_IMGUI_NODE_EDITOR
 #endif
 

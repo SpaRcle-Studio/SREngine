@@ -334,14 +334,7 @@ namespace SR_HTYPES_NS {
 
 
 #ifdef SR_MINGW
-            char* c;
-            m_stream.rdbuf()->pubsetbuf(c, sizeof(T));
-
-            memcpy(
-                &value,
-                c,
-                sizeof(T)
-            );
+            SRHalt0();
 #else
             memcpy(
                 &value,

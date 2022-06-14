@@ -9,7 +9,11 @@
 
 namespace SR_HTYPES_NS {
     class Timer {
+#ifdef SR_MINGW
+        using ClockType = std::chrono::high_resolution_clock::time_point;
+#else
         using ClockType = std::chrono::time_point<std::chrono::steady_clock>;
+#endif
     public:
         explicit Timer(float_t updateFrequency)
             : m_updateFrequency(updateFrequency)
@@ -21,9 +25,6 @@ namespace SR_HTYPES_NS {
                 m_frames = 0; m_deltaTime = 0;
             }
 
-#ifdef SR_MINGW
-            SRHalt("TODO!");
-#else
             auto&& now = std::chrono::high_resolution_clock::now();
 
             using ms = std::chrono::duration<double, std::milli>;
@@ -32,7 +33,6 @@ namespace SR_HTYPES_NS {
 
             m_frames++;
             m_beginFrame = now;
-#endif
 
             return m_deltaTime > m_updateFrequency;
         }
