@@ -5,10 +5,11 @@
 #ifndef GAMEENGINE_ISHADERPROGRAM_H
 #define GAMEENGINE_ISHADERPROGRAM_H
 
-#include <FileSystem/FileSystem.h>
-#include <Utils/StringUtils.h>
-#include <Utils/Hashes.h>
-#include <Utils/Enumerations.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Common/StringUtils.h>
+#include <Utils/Common/Hashes.h>
+#include <Utils/Common/Enumerations.h>
+
 #include <Types/Uniforms.h>
 #include <Types/Vertices.h>
 

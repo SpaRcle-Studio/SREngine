@@ -7,7 +7,7 @@
 
 #include <Render/Render.h>
 #include <Types/Geometry/DebugWireframeMesh.h>
-#include <World/Region.h>
+#include <Utils/World/Region.h>
 
 using namespace Framework::Graphics::Types;
 using namespace Framework::Graphics;

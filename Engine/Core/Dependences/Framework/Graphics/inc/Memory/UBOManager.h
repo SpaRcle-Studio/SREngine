@@ -5,8 +5,8 @@
 #ifndef SRENGINE_UBOMANAGER_H
 #define SRENGINE_UBOMANAGER_H
 
-#include <Utils/Singleton.h>
-#include <Types/Map.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/Types/Map.h>
 
 namespace SR_GRAPH_NS {
     class Camera;

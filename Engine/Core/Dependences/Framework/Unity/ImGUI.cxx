@@ -2,7 +2,7 @@
 // Created by Monika on 11.12.2021.
 //
 
-#include <GUI.h>
+#include <Utils/GUI.h>
 
 #include "../Depends/imgui/imgui.cpp"
 #include "../Depends/imgui/imgui_tables.cpp"

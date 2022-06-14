@@ -4,7 +4,7 @@
 
 #include <Render/CameraManager.h>
 #include <Render/Camera.h>
-#include <Types/Thread.h>
+#include <Utils/Types/Thread.h>
 
 namespace SR_GRAPH_NS {
     void CameraManager::Update() {

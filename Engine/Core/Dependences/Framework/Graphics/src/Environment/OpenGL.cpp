@@ -4,24 +4,19 @@
 
 
 
-#include <iostream>
-#include "Environment/OpenGL.h"
-#include <vector>
-#include <string>
-#include <Debug.h>
-#include <Utils/StringUtils.h>
+#include <Environment/OpenGL.h>
 
-#include <GUI.h>
+#include <Utils/Common/StringUtils.h>
+#include <Utils/GUI.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+
 #include <Environment/Win32Window.h>
-#include <ResourceManager/ResourceManager.h>
 
 #define OpenGLSetVertexAttribPointer(id, count, vertex, offset) \
     glEnableVertexAttribArray(id); \
     glVertexAttribPointer(id, count, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offset); \
 
-using namespace Framework::Helper;
-
-unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, int w, int h, int components) {
+unsigned int SR_GRAPH_NS::OpenGL::CreateTexture(unsigned char *pixels, int w, int h, int components) {
     GLuint textureID;
     /// glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
     glGenTextures(1, &textureID);
@@ -36,7 +31,7 @@ unsigned int Framework::Graphics::OpenGL::CreateTexture(unsigned char *pixels, i
 }
 
 bool Framework::Graphics::OpenGL::InitGUI() {
-    Debug::Graph("OpenGL::InitGUI() : initializing ImGUI library...");
+    SR_GRAPH_LOG("OpenGL::InitGUI() : initializing ImGUI library...");
 
 #ifdef  SR_OPENGL_USE_WINAPI
     this->m_basicWindow->InitGUI();
@@ -51,7 +46,7 @@ bool Framework::Graphics::OpenGL::InitGUI() {
 
 
 bool Framework::Graphics::OpenGL::StopGUI() {
-    Debug::Graph("OpenGL::StopGUI() : stopping ImGUI library...");
+    SR_GRAPH_LOG("OpenGL::StopGUI() : stopping ImGUI library...");
 
 #ifdef  SR_OPENGL_USE_WINAPI
     ImGui_ImplOpenGL3_Init();
@@ -76,7 +71,7 @@ bool Framework::Graphics::OpenGL::PreInit(
 #ifdef  SR_OPENGL_USE_WINAPI
 
 #else
-    Helper::Debug::Graph("OpenGL::PreInit() : initializing glfw...");
+    SR_GRAPH_LOG("OpenGL::PreInit() : initializing glfw...");
 
     if (!glfwInit()) {
         SR_ERROR("OpenGL::PreInit() : failed initializing glfw!");
@@ -161,7 +156,7 @@ bool Framework::Graphics::OpenGL::Init(int swapInterval) {
 #endif
 
 
-    Helper::Debug::Graph("OpenGL::PreInit() : initializing glew...");
+    SR_GRAPH_LOG("OpenGL::PreInit() : initializing glew...");
     ///glewExperimental = TRUE;
     ///if (glewInit() != GLEW_OK) {
     ///    Helper::Debug::Error("OpenGL::PreInit() : failed initializing glew!");
@@ -210,9 +205,9 @@ void Framework::Graphics::OpenGL::SetWindowSize(unsigned int w, unsigned int h) 
     //    h = m_winFormat->Height();
     // } else
 
-    if (Debug::GetLevel() >= Debug::Level::High) {
+    //if (SR_Debug::GetLevel() >= Debug::Level::High) {
         SR_LOG("OpenGL::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
-    }
+    //}
 
 #ifdef  SR_OPENGL_USE_WINAPI
 
@@ -256,9 +251,9 @@ std::vector<std::string> FindFields(const std::string& path) {
         while (getline(stream, line)) {
             auto p = line.find("uniform");
             if (p != -1) {
-                line = StringUtils::ReadTo(line, ';', p);
+                line = SR_UTILS_NS::StringUtils::ReadTo(line, ';', p);
                 if (line.find("//") == -1) {
-                    line = StringUtils::BackRead(line, ' ', -1);
+                    line = SR_UTILS_NS::StringUtils::BackRead(line, ' ', -1);
                     //std::cout << line << std::endl;
                     fields.push_back(line);
                 }
@@ -285,9 +280,7 @@ std::map<std::string, unsigned int> Framework::Graphics::OpenGL::GetShaderFields
                 SR_ERROR("OpenGL::GetShaderFields() : field \""+field+"\" not found! ("+std::to_string(location)+") \n\tMay be this field is not using...");
             }
             else {
-                if (Debug::GetLevel() >= Debug::Level::High) {
-                    SR_LOG("OpenGL::GetShaderFields() : add field \"" + field + "\"");
-                }
+                SR_LOG("OpenGL::GetShaderFields() : add field \"" + field + "\"");
 
                 fields.insert(std::make_pair(field, location));
             }
@@ -307,7 +300,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes)
 {
-    auto shadersPath = ResourceManager::Instance().GetResPath().Concat("Shaders");
+    auto shadersPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders");
 
     auto vertexPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".vert");
     auto fragmentPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".frag");
@@ -395,7 +388,7 @@ bool Framework::Graphics::OpenGL::CompileShader(
             std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
             glGetShaderInfoLog(glShader->m_fragment, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
             if (FragmentShaderErrorMessage.size() > 10) {
-                bool isError = StringUtils::Contains(std::string(FragmentShaderErrorMessage.data()), "error");
+                bool isError = SR_UTILS_NS::StringUtils::Contains(std::string(FragmentShaderErrorMessage.data()), "error");
 
                 if (isError) {
                     SR_ERROR("OpenGL::CompileShader() : Failed compiling fragment shader!\n\tReason : " +
@@ -449,7 +442,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
     if (InfoLogLength != 0) {
         std::vector<char> ProgramErrorMessage(InfoLogLength);
         glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-        std::string error = StringUtils::FromCharVector(ProgramErrorMessage);
+        std::string error = SR_UTILS_NS::StringUtils::FromCharVector(ProgramErrorMessage);
         if (!error.empty()) {
             auto index = error.find("error");
             if (index == std::string::npos) {
@@ -795,7 +788,7 @@ bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_
     bool isNew = hdrFBO <= 0; //!((bool)hdrFBO);
 
     /**if (isNew)
-        Debug::Graph("OpenGL::CreateSingleFrameBuffer() : creating new single frame buffer object...");
+        SR_GRAPH_LOG("OpenGL::CreateSingleFrameBuffer() : creating new single frame buffer object...");
 
     if (isNew)
         glGenFramebuffers(1, reinterpret_cast<GLuint *>(&hdrFBO));
@@ -871,7 +864,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
         std::vector<Vertices::StaticMeshVertex> &vertices,
         size_t count_verts)
 {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+    if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
         SR_LOG("OpenGL::CalculateVAO() : calculating " + std::to_string(vertices.size()) + " vertices...");
     }
 
@@ -939,7 +932,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVBO(
         Framework::Graphics::Vertices::Type type,
         size_t count)
 {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+    if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
         SR_LOG("OpenGL::CalculateVBO() : calculating " + std::to_string(count) + " vertices...");
     }
 
@@ -1006,8 +999,8 @@ int32_t Framework::Graphics::OpenGL::CalculateIBO(
     return EBO;
 }
 
-Math::IVector2 Framework::Graphics::OpenGL::GetScreenSize() const {
-    return Math::IVector2(this->m_vidMode->width, this->m_vidMode->height);
+SR_MATH_NS::IVector2 Framework::Graphics::OpenGL::GetScreenSize() const {
+    return SR_MATH_NS::IVector2(this->m_vidMode->width, this->m_vidMode->height);
 }
 
 

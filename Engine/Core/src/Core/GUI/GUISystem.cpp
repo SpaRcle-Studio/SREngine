@@ -8,11 +8,11 @@
 #include <Core/EngineCommands.h>
 
 #include <GUI/Editor/FileBrowser.h>
-#include <Input/InputSystem.h>
-#include <GUI.h>
-#include <ResourceManager/ResourceManager.h>
-#include <ECS/ComponentManager.h>
-#include <World/Chunk.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/GUI.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ECS/ComponentManager.h>
+#include <Utils/World/Chunk.h>
 #include <GUI/Editor/MessageBox.h>
 
 namespace Framework::Core {
@@ -759,7 +759,7 @@ bool GUISystem::BeginMenuBar() {
                     scene->SetName(sceneName);
 
                     if (scene->SaveAt(folder)) {
-                        Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
+                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
                     }
                     else {
                         SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");

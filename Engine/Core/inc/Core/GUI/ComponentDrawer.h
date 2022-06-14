@@ -5,7 +5,7 @@
 #ifndef SRENGINE_COMPONENTDRAWER_H
 #define SRENGINE_COMPONENTDRAWER_H
 
-#include <stdInclude.h>
+#include <Utils/stdInclude.h>
 
 namespace SR_SCRIPTING_NS {
     class Behaviour;

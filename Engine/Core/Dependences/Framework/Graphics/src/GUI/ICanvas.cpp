@@ -2,8 +2,8 @@
 // Created by Nikita on 08.01.2021.
 //
 
-#include "GUI/ICanvas.h"
-#include <GUI.h>
+#include <GUI/ICanvas.h>
+#include <Utils/GUI.h>
 #include <GUI/Editor/Theme.h>
 
 void Style_1(){

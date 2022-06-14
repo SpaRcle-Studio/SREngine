@@ -4,8 +4,8 @@
 
 #include <Core/GUI/Hierarchy.h>
 
-#include <Input/InputSystem.h>
-#include <Platform/Platform.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/Platform/Platform.h>
 #include <GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {

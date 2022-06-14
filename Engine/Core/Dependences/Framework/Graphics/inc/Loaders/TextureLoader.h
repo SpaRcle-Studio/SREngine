@@ -5,13 +5,13 @@
 #ifndef GAMEENGINE_TEXTURELOADER_H
 #define GAMEENGINE_TEXTURELOADER_H
 
-#include <stdInclude.h>
+#include <Utils/stdInclude.h>
 
-namespace Framework::Graphics::Types{
+namespace SR_HTYPES_NS {
     class Texture;
 }
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class TextureLoader {
     public:
         TextureLoader()  = delete;

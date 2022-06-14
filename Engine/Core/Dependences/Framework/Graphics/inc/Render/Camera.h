@@ -5,10 +5,11 @@
 #ifndef GAMEENGINE_CAMERA_H
 #define GAMEENGINE_CAMERA_H
 
-#include <ECS/Component.h>
 #include <Environment/Environment.h>
-#include <Math/Vector3.h>
-#include <Math/Matrix4x4.h>
+
+#include <Utils/ECS/Component.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Math/Matrix4x4.h>
 
 namespace SR_GRAPH_NS {
     class Window;

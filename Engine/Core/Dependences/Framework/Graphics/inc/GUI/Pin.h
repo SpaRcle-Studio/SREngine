@@ -5,12 +5,10 @@
 #ifndef SRENGINE_PIN_H
 #define SRENGINE_PIN_H
 
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 #include <GUI/Icons.h>
-#include <Utils/NonCopyable.h>
-#include <unordered_set>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     class Node;
     class Link;
 
@@ -34,7 +32,7 @@ namespace Framework::Graphics::GUI {
           Input
     );
 
-    class Pin : private Helper::NonCopyable {
+    class Pin : private SR_UTILS_NS::NonCopyable {
         friend class Node;
         friend class Link;
     public:
@@ -44,7 +42,7 @@ namespace Framework::Graphics::GUI {
         Pin(const std::string& name, PinKind kind);
         Pin(const std::string& name, PinType type, PinKind kind);
 
-        ~Pin();
+        ~Pin() override;
 
     public:
         static ImColor GetIconColor(const PinType& type);

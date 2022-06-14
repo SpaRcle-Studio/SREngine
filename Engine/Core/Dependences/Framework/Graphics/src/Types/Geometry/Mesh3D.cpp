@@ -3,7 +3,7 @@
 //
 
 #include <Types/Geometry/Mesh3D.h>
-#include <Types/RawMesh.h>
+#include <Utils/Types/RawMesh.h>
 #include <Types/Material.h>
 #include <Environment/Environment.h>
 #include <Types/Uniforms.h>
@@ -26,8 +26,9 @@ namespace SR_GTYPES_NS {
         if (!IsCanCalculate())
             return false;
 
-        if (SR_UTILS_NS::Debug::GetLevel() >= SR_UTILS_NS::Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
+        }
 
         ///TODO: if (!m_vertices.empty())
         ///    m_barycenter = Vertices::Barycenter(m_vertices);
@@ -56,8 +57,9 @@ namespace SR_GTYPES_NS {
     }
 
     bool Mesh3D::FreeVideoMemory() {
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
+        }
 
         if (!FreeVBO<Vertices::Type::StaticMeshVertex>())
             return false;

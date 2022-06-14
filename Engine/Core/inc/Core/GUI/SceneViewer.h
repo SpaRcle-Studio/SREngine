@@ -5,8 +5,8 @@
 #ifndef SRENGINE_SCENEVIEWER_H
 #define SRENGINE_SCENEVIEWER_H
 
-#include <ECS/GameObject.h>
-#include <World/Scene.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
 
 namespace SR_GRAPH_NS {
     class Camera;

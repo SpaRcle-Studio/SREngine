@@ -5,9 +5,8 @@
 #ifndef SRENGINE_THEME_H
 #define SRENGINE_THEME_H
 
-#include <GUI.h>
-#include <Utils/NonCopyable.h>
-#include <Math/Vector4.h>
+#include <Utils/GUI.h>
+#include <Utils/Math/Vector4.h>
 
 namespace SR_GRAPH_NS::GUI {
     inline static const std::unordered_map<std::string, float ImGuiStyle::*> STYLE_FLOAT_VALUES = {
@@ -116,22 +115,22 @@ namespace SR_GRAPH_NS::GUI {
     public:
         static Theme* Load(const std::string& path);
         static bool Save(const std::string& path, const ImGuiStyle& style);
-        static Math::FColor ImVec4ToColor(ImVec4 imVec4);
-        static Math::FVector2 ImVec2ToFVector2(ImVec2 imVec2);
+        static SR_MATH_NS::FColor ImVec4ToColor(ImVec4 imVec4);
+        static SR_MATH_NS::FVector2 ImVec2ToFVector2(ImVec2 imVec2);
 
     public:
         bool Save(const std::string& path);
 
         bool Apply(ImGuiStyle& style) const;
 
-        void SetColor(const std::string& id, const Math::FColor& color);
-        void SetSize(const std::string& id, const Math::FVector2& size);
+        void SetColor(const std::string& id, const SR_MATH_NS::FColor& color);
+        void SetSize(const std::string& id, const SR_MATH_NS::FVector2& size);
         void SetFloat(const std::string& id, float_t value);
         void SetBool(const std::string& id, bool value);
 
     private:
-        std::unordered_map<std::string, Math::FColor> m_colors;
-        std::unordered_map<std::string, Math::FVector2> m_sizes;
+        std::unordered_map<std::string, SR_MATH_NS::FColor> m_colors;
+        std::unordered_map<std::string, SR_MATH_NS::FVector2> m_sizes;
         std::unordered_map<std::string, float_t> m_floats;
         std::unordered_map<std::string, float_t> m_booleans;
 

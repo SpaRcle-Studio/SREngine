@@ -5,17 +5,17 @@
 #ifndef GAMEENGINE_RIGIDBODY_H
 #define GAMEENGINE_RIGIDBODY_H
 
-#include <ECS/Component.h>
+#include <Utils/ECS/Component.h>
 
 namespace Framework::Physics::Types {
-    class Rigidbody : public Helper::Component {
+    class Rigidbody : public SR_UTILS_NS::Component {
     public:
         Rigidbody();
     private:
         ~Rigidbody() override = default;
 
     public:
-        static Helper::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+        static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 

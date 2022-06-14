@@ -5,7 +5,7 @@
 #ifndef SRENGINE_RENDERSCENE_H
 #define SRENGINE_RENDERSCENE_H
 
-#include <Utils/NonCopyable.h>
+#include <Utils/Common/NonCopyable.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene : public SR_UTILS_NS::NonCopyable {

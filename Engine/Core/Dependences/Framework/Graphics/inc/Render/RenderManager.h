@@ -5,7 +5,7 @@
 #ifndef SRENGINE_RENDERMANAGER_H
 #define SRENGINE_RENDERMANAGER_H
 
-#include <Utils/Singleton.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_GRAPH_NS {
     class Render;

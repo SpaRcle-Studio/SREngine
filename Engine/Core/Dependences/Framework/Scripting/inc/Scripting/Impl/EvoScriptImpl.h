@@ -7,7 +7,7 @@
 
 #include <Scripting/Base/Script.h>
 #include <EvoScript/Script.h>
-#include <FileSystem/Path.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_SCRIPTING_NS {
     class Compiler;

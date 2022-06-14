@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_TEXTURE_H
 #define GAMEENGINE_TEXTURE_H
 
-#include <ResourceManager/IResource.h>
+#include <Utils/ResourceManager/IResource.h>
 #include <Environment/TextureHelper.h>
 #include <Memory/TextureConfigs.h>
 

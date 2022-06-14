@@ -5,11 +5,9 @@
 #ifndef GAMEENGINE_WINDOW_H
 #define GAMEENGINE_WINDOW_H
 
-#include <GUI.h>
-
-#include <Math/Vector3.h>
-#include <Types/SafeGateArray.h>
-#include <Utils/NonCopyable.h>
+#include <Utils/GUI.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Types/SafeGateArray.h>
 
 namespace SR_GRAPH_NS {
     namespace GUI {

@@ -5,9 +5,9 @@
 #ifndef SRENGINE_PROCEDURALMESH_H
 #define SRENGINE_PROCEDURALMESH_H
 
-#include <Debug.h>
+#include <Utils/Debug.h>
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class ProceduralMesh {
 
     };

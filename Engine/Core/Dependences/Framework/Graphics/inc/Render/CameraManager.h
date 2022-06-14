@@ -5,8 +5,8 @@
 #ifndef SRENGINE_CAMERAMANAGER_H
 #define SRENGINE_CAMERAMANAGER_H
 
-#include <Utils/Singleton.h>
-#include <Types/SafePointer.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/Types/SafePointer.h>
 
 namespace SR_GRAPH_NS {
     class Camera;

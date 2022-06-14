@@ -10,12 +10,12 @@
 #include <Environment/Environment.h>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
-#include <Types/List.h>
+#include <Utils/Types/List.h>
 
 #include <Render/MeshCluster.h>
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/SafeQueue.h>
+#include <Utils/Types/SafeQueue.h>
 
 namespace SR_GRAPH_NS::Types {
     class Skybox;

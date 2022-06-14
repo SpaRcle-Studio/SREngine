@@ -4,9 +4,9 @@
 
 #include <Types/Mesh.h>
 #include <Memory/MeshAllocator.h>
-#include <ECS/Component.h>
-#include <ResourceManager/ResourceManager.h>
-#include <ResourceManager/IResource.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/IResource.h>
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type, std::string name)
@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS::Types {
         if (IsDestroyed())
             return false;
 
-        if (Debug::GetLevel() >= Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
         }
 
@@ -51,7 +51,7 @@ namespace SR_GRAPH_NS::Types {
 
         Mesh *mesh = nullptr;
 
-        if (Mesh *pMesh = ResourceManager::Instance().Find<Mesh>(resourceId)) {
+        if (Mesh *pMesh = SR_UTILS_NS::ResourceManager::Instance().Find<Mesh>(resourceId)) {
             SRVerifyFalse(!(mesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
             return mesh;
         }
@@ -143,14 +143,14 @@ namespace SR_GRAPH_NS::Types {
         return true;
     }
 
-    Math::FVector3 Mesh::GetBarycenter() const {
-        auto baryMat = Math::Matrix4x4(m_barycenter, Math::FVector3(), 1.0);
-        auto rotateMat = Math::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
+    SR_MATH_NS::FVector3 Mesh::GetBarycenter() const {
+        auto baryMat = SR_MATH_NS::Matrix4x4(m_barycenter, SR_MATH_NS::FVector3(), 1.0);
+        auto rotateMat = SR_MATH_NS::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
 
         return (rotateMat * baryMat).GetTranslate();
     }
 
-    IResource *Mesh::Copy(IResource *destination) const {
+    SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
         if (IsDestroyed()) {
             SR_ERROR("Mesh::Copy() : mesh already destroyed!");
             return nullptr;
@@ -162,8 +162,9 @@ namespace SR_GRAPH_NS::Types {
             return nullptr;
         }
 
-        if (Debug::GetLevel() >= Debug::Level::Full)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
             SR_LOG("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
+        }
 
         mesh->m_meshId = m_meshId;
 
@@ -180,7 +181,7 @@ namespace SR_GRAPH_NS::Types {
         mesh->m_isCalculated.store(m_isCalculated);
         mesh->m_hasErrors.store(false);
 
-        return Helper::IResource::Copy(mesh);
+        return SR_UTILS_NS::IResource::Copy(mesh);
     }
 
     bool Mesh::FreeVideoMemory() {
@@ -200,18 +201,18 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::ReCalcModel() {
-        Math::Matrix4x4 modelMat = Math::Matrix4x4::FromTranslate(m_position);
+        SR_MATH_NS::Matrix4x4 modelMat = SR_MATH_NS::Matrix4x4::FromTranslate(m_position);
 
         if (m_pipeline == PipeLine::OpenGL) {
-            modelMat *= Math::Matrix4x4::FromScale(m_skew.InverseAxis(0));
-            modelMat *= Math::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
+            modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew.InverseAxis(0));
+            modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
         }
         else {
-            modelMat *= Math::Matrix4x4::FromScale(m_skew);
-            modelMat *= Math::Matrix4x4::FromEulers(m_rotation);
+            modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
+            modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
         }
 
-        modelMat *= Math::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
+        modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
 
         m_modelMat = modelMat.ToGLM();
     }
@@ -255,22 +256,22 @@ namespace SR_GRAPH_NS::Types {
             Environment::Get()->SetBuildState(false);
     }
 
-    void Mesh::OnMove(const Math::FVector3 &newValue) {
+    void Mesh::OnMove(const SR_MATH_NS::FVector3 &newValue) {
         m_position = newValue;
         ReCalcModel();
     }
 
-    void Mesh::OnRotate(const Math::FVector3 &newValue) {
+    void Mesh::OnRotate(const SR_MATH_NS::FVector3 &newValue) {
         m_rotation = newValue;
         ReCalcModel();
     }
 
-    void Mesh::OnScaled(const Math::FVector3 &newValue) {
+    void Mesh::OnScaled(const SR_MATH_NS::FVector3 &newValue) {
         m_scale = newValue;
         ReCalcModel();
     }
 
-    void Mesh::OnSkewed(const Math::FVector3 &newValue) {
+    void Mesh::OnSkewed(const SR_MATH_NS::FVector3 &newValue) {
         m_skew = newValue;
         ReCalcModel();
     }
@@ -282,7 +283,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     std::string Mesh::GetResourcePath() const {
-        return StringUtils::Substring(GetResourceId(), '|', 1);
+        return SR_UTILS_NS::StringUtils::Substring(GetResourceId(), '|', 1);
     }
 
     void Mesh::SetRawMesh(Helper::Types::RawMesh *pRaw) {

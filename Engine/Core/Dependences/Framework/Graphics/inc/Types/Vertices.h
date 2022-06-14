@@ -5,12 +5,13 @@
 #ifndef GAMEENGINE_VERTICES_H
 #define GAMEENGINE_VERTICES_H
 
-#include <Utils/Enumerations.h>
-#include <Math/Vector2.h>
-#include <Math/Vector3.h>
-#include <Math/Vector4.h>
-#include <Utils/StringFormat.h>
-#include <Utils/Vertices.hpp>
+#include <Utils/Math/Vector2.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector4.h>
+
+#include <Utils/Common/StringFormat.h>
+#include <Utils/Common/Vertices.hpp>
+#include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS::Vertices {
     enum class Attribute {

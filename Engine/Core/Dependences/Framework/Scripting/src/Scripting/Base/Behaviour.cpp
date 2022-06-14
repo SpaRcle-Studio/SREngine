@@ -4,8 +4,8 @@
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoBehaviour.h>
-#include <ECS/GameObject.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
 namespace SR_SCRIPTING_NS {
     Behaviour::Behaviour()

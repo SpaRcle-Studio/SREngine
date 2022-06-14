@@ -6,14 +6,13 @@
 #include <Core/GUI/GUISystem.h>
 #include <Core/Engine.h>
 
-#include <Input/InputSystem.h>
+#include <Utils/Input/InputSystem.h>
 #include <Loaders/ObjLoader.h>
 #include <Types/Skybox.h>
 
 #include <Render/PostProcessing.h>
 
-#include <Debug.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
@@ -54,15 +53,15 @@ namespace Framework {
         using namespace SR_UTILS_NS;
 
         generator->RegisterNewClass("Debug", "Debug", {"string"});
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Log, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Warn, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, System, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Shader, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Error, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Info, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Script, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptError, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptLog, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Log, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Warn, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, System, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Shader, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Error, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Info, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Script, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptError, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptLog, void, ESArg1(const std::string& msg), ESArg1(msg))
     }
 
     void API::RegisterEngine(EvoScript::AddressTableGen *generator) {

@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_TEXTUREHELPER_H
 #define GAMEENGINE_TEXTUREHELPER_H
 
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     SR_ENUM_CLASS(TextureFormat,
         Unknown      = 0,
 

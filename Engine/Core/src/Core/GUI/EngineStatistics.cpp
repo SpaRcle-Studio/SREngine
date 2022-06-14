@@ -4,7 +4,7 @@
 
 #include <Core/GUI/EngineStatistics.h>
 
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
 namespace Framework::Core::GUI {
     EngineStatistics::EngineStatistics()

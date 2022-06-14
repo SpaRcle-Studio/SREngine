@@ -8,8 +8,8 @@
 #include <Core/GUI/ComponentDrawer.h>
 
 #include <GUI/Widget.h>
-#include <ECS/GameObject.h>
-#include <World/Scene.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
 
 namespace SR_UTILS_NS {
     class Transform3D;

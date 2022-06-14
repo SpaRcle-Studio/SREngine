@@ -5,10 +5,4 @@
 #ifndef SRENGINE_FONTLOADER_H
 #define SRENGINE_FONTLOADER_H
 
-
-class FontLoader {
-
-};
-
-
 #endif //SRENGINE_FONTLOADER_H

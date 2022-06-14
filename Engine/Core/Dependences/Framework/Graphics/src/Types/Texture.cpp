@@ -4,8 +4,8 @@
 
 #include <Types/Texture.h>
 
-#include <ResourceManager/ResourceManager.h>
-#include <Utils/StringUtils.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Common/StringUtils.h>
 #include <Loaders/TextureLoader.h>
 #include <Render/Render.h>
 #include <Environment/Environment.h>
@@ -28,8 +28,9 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (Debug::GetLevel() >= Debug::Level::Medium)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
             SR_LOG("Texture::Destroy() : destroying texture...");
+        }
 
         if (m_render) {
             m_render->FreeTexture(this);
@@ -44,9 +45,9 @@ namespace SR_GTYPES_NS {
     Texture* Texture::Load(const std::string& rawPath, const Memory::TextureConfig& config) {
         SR_GLOBAL_LOCK
 
-        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetTexturesPath());
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath());
 
-        if (auto&& pResource = ResourceManager::Instance().Find<Texture>(path)) {
+        if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
             if (pResource->m_config != config || config.m_autoRemove != pResource->IsEnabledAutoRemove()) {
                 SR_WARN("Texture::Load() : copy values do not match load values.");
             }
@@ -66,7 +67,7 @@ namespace SR_GTYPES_NS {
         }
 
         /// отложенная ручная регистрация
-        ResourceManager::Instance().RegisterResource(pTexture);
+        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pTexture);
 
         return pTexture;
     }
@@ -92,9 +93,9 @@ namespace SR_GTYPES_NS {
 
         bool hasErrors = !IResource::Load();
 
-        Path&& path = Path(GetResourceId());
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
         if (!path.IsAbs()) {
-            path = ResourceManager::Instance().GetTexturesPath().Concat(path);
+            path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().Concat(path);
         }
 
         if (!TextureLoader::Load(this, path.ToString())) {
@@ -130,8 +131,9 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (Debug::GetLevel() >= Debug::Level::None)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::None) {
             SR_LOG("Texture::Calculate() : calculating \"" + GetResourceId() + "\" texture...");
+        }
 
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!Environment::Get()->FreeTexture(&m_id));
@@ -148,7 +150,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
         else {
-            if (Debug::GetLevel() >= Debug::Level::High) {
+            if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("Texture::Calculate() : texture \"" + GetResourceId() + "\" has " + std::to_string(m_id) + " id.");
             }
 
@@ -169,7 +171,7 @@ namespace SR_GTYPES_NS {
     bool Texture::FreeVideoMemory()  {
         SR_SCOPED_LOCK
 
-        if (Debug::GetLevel() >= Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
         }
 
@@ -236,7 +238,7 @@ namespace SR_GTYPES_NS {
 
         if (!m_none) {
             SR_ERROR("Texture::GetNone() : fatal internal error...");
-            SR_UTILS_NS::Debug::MakeCrash();
+            SR_UTILS_NS::Debug::Instance().MakeCrash();
         }
 
         return m_none;

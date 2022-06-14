@@ -4,7 +4,7 @@
 
 #include <Core/World/World.h>
 
-#include <Types/RawMesh.h>
+#include <Utils/Types/RawMesh.h>
 #include <assimp/scene.h>
 #include <Render/CameraManager.h>
 

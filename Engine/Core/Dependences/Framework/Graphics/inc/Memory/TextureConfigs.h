@@ -5,7 +5,7 @@
 #ifndef SRENGINE_TEXTURECONFIGS_H
 #define SRENGINE_TEXTURECONFIGS_H
 
-#include <Utils/Singleton.h>
+#include <Utils/Common/Singleton.h>
 #include <Environment/TextureHelper.h>
 
 namespace SR_GRAPH_NS::Memory {

@@ -5,10 +5,10 @@
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/Hierarchy.h>
 
-#include <Input/InputSystem.h>
+#include <Utils/Input/InputSystem.h>
 #include <GUI/Editor/Guizmo.h>
-#include <Utils/Features.h>
-#include <ECS/Transform3D.h>
+#include <Utils/Common/Features.h>
+#include <Utils/ECS/Transform3D.h>
 #include <Window/Window.h>
 #include <Render/Camera.h>
 

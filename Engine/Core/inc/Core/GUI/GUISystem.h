@@ -6,11 +6,11 @@
 #define GAMEENGINE_GUISYSTEM_H
 
 #include <Environment/Environment.h>
-#include <Math/Vector2.h>
-#include <World/Scene.h>
+#include <Utils/Math/Vector2.h>
+#include <Utils/World/Scene.h>
 #include <Render/Camera.h>
-#include <Utils/Singleton.h>
-#include <ECS/GameObject.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace Framework::Core::GUI {
     class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {

@@ -8,7 +8,7 @@
 #include <Scripting/Base/Script.h>
 #include <Scripting/Base/Compiler.h>
 #include <GUI/WidgetManager.h>
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 
 namespace SR_GTYPES_NS {
     class Texture;

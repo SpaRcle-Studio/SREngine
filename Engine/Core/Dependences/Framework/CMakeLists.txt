@@ -19,9 +19,9 @@ set(IMGUIZMO_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/ImGuizmo)
 set(IMGUI_NODE_EDITOR_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui-node-editor)
 
 # Включаем вспомогательные файлы
+include(Utils.cmake)
 include(Audio.cmake)
 include(Graphics.cmake)
-include(Helper.cmake)
 include(Physics.cmake)
 include(Scripting.cmake)
 
@@ -62,7 +62,7 @@ find_package(OpenGL REQUIRED)
 #        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
 
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${HELPER_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
+add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${UTILS_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 
@@ -99,7 +99,7 @@ endif()
 # Устанавливаем директории
 target_include_directories(Framework
         PUBLIC
-            ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${HELPER_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC}
+            ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${UTILS_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC}
             ${IMGUI_ROOT_DIR} ${IMGUIZMO_ROOT_DIR} ${IMGUI_NODE_EDITOR_ROOT_DIR}
-        PRIVATE ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${HELPER_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE}
-        INSTANCE ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${HELPER_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE})
+        PRIVATE ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${UTILS_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE}
+        INSTANCE ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${UTILS_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE})

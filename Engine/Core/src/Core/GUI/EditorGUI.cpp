@@ -13,12 +13,12 @@
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/SceneViewer.h>
 
-#include <Xml.h>
+#include <Utils/Xml.h>
 
 #include <GUI/Editor/FileBrowser.h>
 #include <Window/Window.h>
-#include <Utils/Features.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/Common/Features.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
 using namespace SR_CORE_NS::GUI;
 using namespace SR_GRAPH_NS::GUI;

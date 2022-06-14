@@ -6,10 +6,11 @@
 #define SRENGINE_HIERARCHY_H
 
 #include <GUI/Widget.h>
-#include <Types/SafePointer.h>
-#include <World/Scene.h>
-#include <Input/InputEvents.h>
-#include <ECS/GameObject.h>
+
+#include <Utils/Types/SafePointer.h>
+#include <Utils/World/Scene.h>
+#include <Utils/Input/InputEvents.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_CORE_NS::GUI {
     class Hierarchy : public Graphics::GUI::Widget {

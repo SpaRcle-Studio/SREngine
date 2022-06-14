@@ -5,19 +5,18 @@
 #ifndef SRENGINE_LINK_H
 #define SRENGINE_LINK_H
 
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 #include <GUI/Icons.h>
-#include <Utils/NonCopyable.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     class Pin;
 
-    class Link : private Helper::NonCopyable {
+    class Link : private SR_UTILS_NS::NonCopyable {
     public:
         Link();
         Link(Pin* start, Pin* end);
         Link(Pin* start, Pin* end, ImColor color);
-        ~Link();
+        ~Link() override;
 
     public:
         [[nodiscard]] uintptr_t GetId() const;

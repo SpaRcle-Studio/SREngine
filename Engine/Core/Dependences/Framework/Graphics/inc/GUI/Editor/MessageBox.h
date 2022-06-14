@@ -6,8 +6,7 @@
 #define SRENGINE_MESSAGEBOX_H
 
 #include <GUI/Widget.h>
-#include <Utils/NonCopyable.h>
-#include <Utils/Singleton.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_GRAPH_NS::GUI {
     enum class MessageBoxType : uint8_t {

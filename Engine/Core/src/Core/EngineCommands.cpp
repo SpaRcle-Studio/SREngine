@@ -5,8 +5,8 @@
 #include <Core/EngineCommands.h>
 #include <Core/Engine.h>
 
-#include <ECS/GameObject.h>
-#include <World/Scene.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
 
 bool Framework::Core::Commands::GameObjectRename::Redo() {
     return false;
@@ -19,7 +19,7 @@ bool Framework::Core::Commands::GameObjectRename::Undo() {
 //!-------------------------------------------------------
 
 bool Framework::Core::Commands::GameObjectDelete::Redo() {
-    using namespace Helper::World;
+    using namespace SR_WORLD_NS;
 
     auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
     auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);

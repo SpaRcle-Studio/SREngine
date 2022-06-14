@@ -5,10 +5,10 @@
 #include <Core/GUI/ComponentDrawer.h>
 
 #include <Core/GUI/GUISystem.h>
-#include <Types/DataStorage.h>
+#include <Utils/Types/DataStorage.h>
 #include <Scripting/Base/Behaviour.h>
 #include <Types/Geometry/Mesh3D.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <GUI/Utils.h>
 #include <Types/Texture.h>
 #include <Render/Render.h>

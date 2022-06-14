@@ -3,8 +3,9 @@
 //
 
 #include <GUI/Editor/Theme.h>
-#include <Xml.h>
-#include <ResourceManager/ResourceManager.h>
+
+#include <Utils/Xml.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
 namespace SR_GRAPH_NS::GUI {
     Theme *Theme::Load(const std::string &path) {
@@ -19,10 +20,10 @@ namespace SR_GRAPH_NS::GUI {
         auto&& themes = document.Root().GetNode("Theme");
 
         for (const auto& xml : themes.GetNode("Colors").GetNodes())
-            theme->SetColor(xml.Name(), xml.GetAttribute<Math::FColor>());
+            theme->SetColor(xml.Name(), xml.GetAttribute<SR_MATH_NS::FColor>());
 
         for (const auto& xml : themes.GetNode("Sizes").GetNodes())
-            theme->SetSize(xml.Name(), xml.GetAttribute<Math::FVector2>());
+            theme->SetSize(xml.Name(), xml.GetAttribute<SR_MATH_NS::FVector2>());
 
         for (const auto& xml : themes.GetNode("Floats").GetNodes())
             theme->SetFloat(xml.Name(), xml.GetAttribute("value").ToFloat());
@@ -80,19 +81,19 @@ namespace SR_GRAPH_NS::GUI {
         return document.Save(Helper::ResourceManager::Instance().GetConfigPath().Concat(path));
     }
 
-    void Theme::SetColor(const std::string& id, const Math::FColor& color) {
+    void Theme::SetColor(const std::string& id, const SR_MATH_NS::FColor& color) {
         m_colors[id] = color;
     }
 
-    Math::FColor Theme::ImVec4ToColor(ImVec4 imVec4) {
-        return Framework::Helper::Math::FColor(imVec4.x, imVec4.y, imVec4.z, imVec4.w);
+    SR_MATH_NS::FColor Theme::ImVec4ToColor(ImVec4 imVec4) {
+        return SR_MATH_NS::FColor(imVec4.x, imVec4.y, imVec4.z, imVec4.w);
     }
 
-    Math::FVector2 Theme::ImVec2ToFVector2(ImVec2 imVec2) {
-        return Framework::Helper::Math::FVector2(imVec2.x, imVec2.y);
+    SR_MATH_NS::FVector2 Theme::ImVec2ToFVector2(ImVec2 imVec2) {
+        return SR_MATH_NS::FVector2(imVec2.x, imVec2.y);
     }
 
-    void Theme::SetSize(const std::string &id, const Math::FVector2 &size) {
+    void Theme::SetSize(const std::string &id, const SR_MATH_NS::FVector2 &size) {
         m_sizes[id] = size;
     }
 

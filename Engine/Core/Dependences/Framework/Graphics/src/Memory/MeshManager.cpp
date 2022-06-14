@@ -28,7 +28,7 @@ namespace SR_GRAPH_NS::Memory {
 
     bool MeshManager::RegisterImpl(const std::string &resourceId, MeshMemoryType memType, uint32_t id) {
     #ifndef SR_RELEASE
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("MeshManager::RegisterImpl() : register resource \"" + resourceId + "\"");
         }
     #endif
@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS::Memory {
                 case MeshMemoryType::IBO: m_IBOs.erase(iter.value());
                 skip:
                 #ifndef SR_RELEASE
-                    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+                    if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                         SR_LOG("MeshManager::FreeImpl() : free resource \"" + resourceId + "\"");
                     }
                 #endif
@@ -68,7 +68,8 @@ namespace SR_GRAPH_NS::Memory {
                     SR_ERROR("MeshManager::FreeImpl() : unknown type!");
                     return FreeResult::UnknownMem;
             }
-        } else {
+        }
+        else {
             memory.m_usages--;
             return FreeResult::EndUse;
         }
@@ -93,7 +94,7 @@ namespace SR_GRAPH_NS::Memory {
             SR_WARN("MeshVidMemInfo::Copy() : unknown memory type!");
         }
 
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             switch (m_type) {
                 case MeshMemoryType::VBO: SR_LOG("MeshVidMemInfo::Copy() : copy VBO..."); break;
                 case MeshMemoryType::IBO: SR_LOG("MeshVidMemInfo::Copy() : copy IBO..."); break;

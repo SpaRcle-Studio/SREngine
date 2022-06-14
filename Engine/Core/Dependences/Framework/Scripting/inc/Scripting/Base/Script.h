@@ -5,8 +5,7 @@
 #ifndef GAMEENGINE_SCRIPT_H
 #define GAMEENGINE_SCRIPT_H
 
-#include <Debug.h>
-#include <Utils/NonCopyable.h>
+#include <Utils/Debug.h>
 
 namespace SR_SCRIPTING_NS {
     typedef std::chrono::high_resolution_clock::time_point Time;

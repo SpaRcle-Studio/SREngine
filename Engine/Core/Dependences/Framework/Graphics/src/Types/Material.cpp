@@ -7,7 +7,6 @@
 #include <Types/Mesh.h>
 #include <Render/Shader.h>
 #include <Types/Texture.h>
-#include <ResourceManager/IResource.h>
 
 namespace SR_GTYPES_NS {
     Material::Material()
@@ -64,7 +63,7 @@ namespace SR_GTYPES_NS {
     Material* Material::Load(const std::string &path) {
         SR_GLOBAL_LOCK
 
-        if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(path))
+        if (auto&& pMaterial = SR_UTILS_NS::ResourceManager::Instance().Find<Material>(path))
             return pMaterial;
 
         auto&& pMaterial = new Material();
@@ -296,9 +295,9 @@ namespace SR_GTYPES_NS {
             InitShader();
         }
 
-        const auto&& path = ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
+        const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
 
-        auto&& document = Xml::Document::Load(path);
+        auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
             SR_ERROR("Material::Reload() : file not found! \n\tPath: " + path.ToString());
             return false;

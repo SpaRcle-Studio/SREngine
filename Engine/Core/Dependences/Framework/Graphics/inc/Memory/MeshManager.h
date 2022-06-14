@@ -5,10 +5,11 @@
 #ifndef GAMEENGINE_MESHMANAGER_H
 #define GAMEENGINE_MESHMANAGER_H
 
-#include <Utils/Singleton.h>
 #include <Types/Vertices.h>
 #include <Environment/PipeLine.h>
-#include <Types/Thread.h>
+
+#include <Utils/Types/Thread.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_GTYPES_NS {
     class Mesh3D;

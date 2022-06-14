@@ -84,7 +84,7 @@ namespace SR_GRAPH_NS {
         auto data = std::string();
         data.append("\n\tNew meshes       : " + std::to_string(m_newMeshes.size()));
         data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
-        Debug::Graph("Render::Close() : close render..." + data);
+        SR_GRAPH_LOG("Render::Close() : close render..." + data);
 
         for (auto& shader : m_shaders) {
             if (shader) {
@@ -108,8 +108,9 @@ namespace SR_GRAPH_NS {
     void Render::RemoveMesh(SR_GTYPES_NS::Mesh *mesh) {
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (Debug::GetLevel() >= Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
+        }
 
         m_removeMeshes.push(mesh);
     }
@@ -137,8 +138,9 @@ namespace SR_GRAPH_NS {
 
         const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (Debug::GetLevel() >= Debug::Level::Full)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
             SR_LOG("Render::RegisterMesh() : register new \"" + mesh->GetResourceId() + "\" mesh...");
+        }
 
         mesh->AddUsePoint();
         mesh->SetRender(this);
@@ -249,7 +251,7 @@ namespace SR_GRAPH_NS {
     void Render::FreeTexture(SR_GTYPES_NS::Texture *texture) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (Debug::GetLevel() >= Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_GRAPH("Render::FreeTexture() : register texture to remove...");
         }
 
@@ -259,7 +261,7 @@ namespace SR_GRAPH_NS {
     void Render::RegisterTexture(Types::Texture * texture) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (Debug::GetLevel() >= Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_GRAPH("Render::RegisterTexture() : register new texture...");
         }
 

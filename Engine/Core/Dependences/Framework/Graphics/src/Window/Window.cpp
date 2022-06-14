@@ -3,16 +3,16 @@
 //
 
 #include <Window/Window.h>
-#include <Math/Vector2.h>
+#include <Utils/Math/Vector2.h>
 #include <Render/Render.h>
 #include <Render/Camera.h>
 #include <Environment/Environment.h>
-#include <Input/InputSystem.h>
-#include <Types/Thread.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/Types/Thread.h>
 #include <Types/Material.h>
 #include <Types/Texture.h>
 #include <Types/Framebuffer.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <GUI/Editor/Theme.h>
 #include <GUI/WidgetManager.h>
 #include <GUI/Widget.h>
@@ -467,8 +467,8 @@ namespace SR_GRAPH_NS {
 
                 if (maxErrStep == syncStep) {
                     SR_ERROR("Window::SyncFreeResources() : [FATAL] resources can not be released!");
-                    Helper::ResourceManager::Instance().PrintMemoryDump();
-                    Helper::Debug::Terminate();
+                    SR_UTILS_NS::ResourceManager::Instance().PrintMemoryDump();
+                    SR_UTILS_NS::Debug::Instance().Terminate();
                     break;
                 }
 
@@ -622,7 +622,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        const bool multipleRender = Features::Instance().Enabled("MultiRenderTargets");
+        const bool multipleRender = SR_UTILS_NS::Features::Instance().Enabled("MultiRenderTargets");
         auto&& cameras = cameraManager.GetCameras();
 
         if (m_env->IsNeedReBuild()) {

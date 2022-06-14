@@ -5,9 +5,9 @@
 #ifndef SRENGINE_ENGINECOMMANDS_H
 #define SRENGINE_ENGINECOMMANDS_H
 
-#include <Types/SafePointer.h>
-#include <CommandManager/CmdManager.h>
-#include <ECS/EntityManager.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/CommandManager/CmdManager.h>
+#include <Utils/ECS/EntityManager.h>
 
 namespace SR_UTILS_NS {
     class GameObject;

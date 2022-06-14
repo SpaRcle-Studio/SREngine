@@ -168,7 +168,7 @@ namespace Framework::Graphics {
                 return;
 
             if (value) {
-                Helper::Debug::Graph("OpenGL::SetFullScreen(): enable full screen...");
+                SR_GRAPH_LOG("OpenGL::SetFullScreen(): enable full screen...");
 #ifdef  SR_OPENGL_USE_WINAPI
 
 #else
@@ -178,7 +178,7 @@ namespace Framework::Graphics {
 #endif
             }
             else {
-                Helper::Debug::Graph("OpenGL::SetFullScreen(): disable full screen...");
+                SR_GRAPH_LOG("OpenGL::SetFullScreen(): disable full screen...");
 #ifdef  SR_OPENGL_USE_WINAPI
 
 #else
@@ -308,7 +308,7 @@ namespace Framework::Graphics {
             /// glDrawArrays(GL_LINES, 0, count_vertices);
         }
         [[nodiscard]] SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+            if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("OpenGL::FreeVBO() : free VBO \"" + std::to_string(*ID) + "\" VAO...");
             }
 

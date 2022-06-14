@@ -5,18 +5,16 @@
 #ifndef SRENGINE_WIDGETMANAGER_H
 #define SRENGINE_WIDGETMANAGER_H
 
-#include <Types/Thread.h>
-#include <Utils/NonCopyable.h>
-#include <Utils/Singleton.h>
-#include <Input/InputHandler.h>
-#include <Input/InputSystem.h>
+#include <Utils/Types/Thread.h>
+#include <Utils/Input/InputHandler.h>
+#include <Utils/Input/InputSystem.h>
 
 namespace SR_GRAPH_NS::GUI {
     class Widget;
 
     typedef std::unordered_map<std::string, Widget*> Widgets;
 
-    class WidgetManager : public Helper::NonCopyable, public Helper::InputHandler {
+    class WidgetManager : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
     public:
         WidgetManager();
         ~WidgetManager() override;
@@ -29,8 +27,8 @@ namespace SR_GRAPH_NS::GUI {
     public:
         Widgets& GetWidgets() { return m_widgets; }
 
-        void OnKeyDown(const Helper::KeyDownEvent& event) override;
-        void OnKeyUp(const Helper::KeyUpEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
+        void OnKeyUp(const SR_UTILS_NS::KeyUpEvent& event) override;
 
     private:
         std::recursive_mutex m_mutex;

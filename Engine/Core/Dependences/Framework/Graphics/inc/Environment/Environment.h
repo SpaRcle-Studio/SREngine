@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_ENVIRONMENT_H
 #define GAMEENGINE_ENVIRONMENT_H
 
-#include <GUI.h>
+#include <Utils/GUI.h>
 
 #include <Environment/TextureHelper.h>
 #include <Environment/Basic/BasicWindow.h>

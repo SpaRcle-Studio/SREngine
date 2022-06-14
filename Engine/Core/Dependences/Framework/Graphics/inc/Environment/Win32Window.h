@@ -7,11 +7,12 @@
 
 #include <Environment/Basic/BasicWindow.h>
 
+/// TODO: move to platform class
 #include <Windows.h>
-#include <Utils/StringUtils.h>
 
-#include <Events/EventManager.h>
-#include <Math/Mathematics.h>
+#include <Utils/Common/StringUtils.h>
+#include <Utils/Events/EventManager.h>
+#include <Utils/Math/Mathematics.h>
 
 #define BORDERWIDTH  5
 #define BORDERSIZE BORDERWIDTH * 2
@@ -137,13 +138,13 @@ namespace Framework::Graphics {
                     }
                 }
                 case WM_CLOSE: {
-                    Helper::Debug::System("Win32Window::CallBack() : WM_CLOSE event has been received!");
-                    Helper::EventManager::Push(Helper::EventManager::Event::Exit);
+                    SR_SYSTEM_LOG("Win32Window::CallBack() : WM_CLOSE event has been received!");
+                    SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
                     return 0;
                 }
                 case (WM_WINDOWPOSCHANGED): {
                     DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
-                    this->m_maximize = styles & WS_MAXIMIZE;
+                    m_maximize = styles & WS_MAXIMIZE;
 
                     return DefWindowProc(hwnd, msg, wParam, lParam);
                 }

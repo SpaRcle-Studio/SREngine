@@ -5,13 +5,15 @@
 #ifndef GAMEENGINE_SHADER_H
 #define GAMEENGINE_SHADER_H
 
+#include <Environment/Basic/IShaderProgram.h>
+
 #include <Types/Vertices.h>
 #include <Types/Uniforms.h>
-#include <Utils/NonCopyable.h>
-#include <Utils/Hashes.h>
-#include <ResourceManager/IResource.h>
-#include <Environment/Basic/IShaderProgram.h>
-#include <Types/Map.h>
+
+#include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Hashes.h>
+#include <Utils/ResourceManager/IResource.h>
+#include <Utils/Types/Map.h>
 
 namespace SR_GTYPES_NS {
     class Texture;

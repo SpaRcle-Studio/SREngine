@@ -6,9 +6,10 @@
 #define GAMEENGINE_MESH_H
 
 #include <Environment/PipeLine.h>
-#include <Utils/Enumerations.h>
-#include <ResourceManager/IResource.h>
-#include <ECS/Component.h>
+
+#include <Utils/Common/Enumerations.h>
+#include <Utils/ResourceManager/IResource.h>
+#include <Utils/ECS/Component.h>
 
 namespace SR_UTILS_NS::Types {
     class RawMesh;
@@ -30,7 +31,7 @@ namespace SR_GTYPES_NS {
         Skinned = 3,
     )
 
-    class Mesh : public Helper::IResource, public Helper::Component {
+    class Mesh : public SR_UTILS_NS::IResource, public SR_UTILS_NS::Component {
         friend class Material;
     protected:
         explicit Mesh(MeshType type, std::string name = "Unnamed");

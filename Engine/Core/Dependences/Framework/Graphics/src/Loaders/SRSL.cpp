@@ -273,7 +273,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
     return source;
 }
 
-bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData &parseData, const std::string& code, Path &&path) {
+bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData &parseData, const std::string& code, SR_UTILS_NS::Path &&path) {
     auto& stage = unit.stages[ShaderStage::Fragment];
     stage.path = std::move(path);
 

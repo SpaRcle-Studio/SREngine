@@ -3,16 +3,15 @@
 //
 
 #include <Types/Skybox.h>
-#include <ResourceManager/ResourceManager.h>
-#include <Utils/StringUtils.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Common/StringUtils.h>
 #include <stbi/stb_image.h>
-#include <Debug.h>
 #include <Render/Render.h>
 #include <Types/Vertices.h>
 #include <Window/Window.h>
 #include <Loaders/ObjLoader.h>
-#include <Utils/Features.h>
-#include <Utils/Vertices.hpp>
+#include <Utils/Common/Features.h>
+#include <Utils/Common/Vertices.hpp>
 
 namespace SR_GTYPES_NS {
     Skybox::Skybox()
@@ -92,10 +91,10 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SKYBOX_INDEXED_VERTICES);
+        auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
 
         if (m_env->GetPipeLine() == PipeLine::Vulkan) {
-            auto &&indices = SKYBOX_INDICES;
+            auto &&indices = SR_UTILS_NS::SKYBOX_INDICES;
 
             if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::Type::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
@@ -111,7 +110,7 @@ namespace SR_GTYPES_NS {
             }
         }
         else {
-            auto &&vertices = IndexedVerticesToNonIndexed(indexedVertices, SKYBOX_INDICES);
+            auto &&vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
 
             if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");

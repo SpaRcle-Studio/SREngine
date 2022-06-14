@@ -3,11 +3,11 @@
 //
 
 #include <Environment/Environment.h>
-#include <GUI.h>
+#include <Utils/GUI.h>
 #include <GUI/Icons.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
-bool Framework::Graphics::Environment::PreInitGUI(const std::string &fontPath) {
+bool SR_GRAPH_NS::Environment::PreInitGUI(const std::string &fontPath) {
     SR_GRAPH("Environment::InitGUI() : pre-initializing ImGUI library...");
 
     {

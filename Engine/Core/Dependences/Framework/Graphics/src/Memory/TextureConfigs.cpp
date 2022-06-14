@@ -3,8 +3,8 @@
 //
 
 #include <Memory/TextureConfigs.h>
-#include <Debug.h>
-#include <Xml.h>
+#include <Utils/Debug.h>
+#include <Utils/Xml.h>
 
 namespace SR_GRAPH_NS::Memory {
     bool TextureConfigs::Reload() {
@@ -22,7 +22,7 @@ namespace SR_GRAPH_NS::Memory {
                 const auto filter      = StringToEnumTextureFilter(texture.TryGetAttribute("Filter").ToString("LINEAR"));
                 const auto compression = StringToEnumTextureCompression(texture.TryGetAttribute("Compression").ToString("None"));
                 const auto mipLevels   = static_cast<uint32_t>(texture.TryGetAttribute("MipLevels").ToInt(1));
-                const auto alpha       = StringToEnumBoolExt(texture.TryGetAttribute("Alpha").ToString("None"));
+                const auto alpha       = SR_UTILS_NS::StringToEnumBoolExt(texture.TryGetAttribute("Alpha").ToString("None"));
                 const auto cpuUsage    = texture.TryGetAttribute("CPUUsage").ToBool(false);
 
                 m_configs.insert(std::make_pair(

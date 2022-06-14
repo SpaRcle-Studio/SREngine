@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_VULKANMEMORY_H
 #define GAMEENGINE_VULKANMEMORY_H
 
-#include <Utils/NonCopyable.h>
+#include <Utils/Common/NonCopyable.h>
 
 #include <EvoVulkan/Types/VulkanBuffer.h>
 #include <EvoVulkan/Complexes/Framebuffer.h>

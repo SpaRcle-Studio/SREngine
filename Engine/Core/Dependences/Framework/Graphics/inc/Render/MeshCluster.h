@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_MESHCLUSTER_H
 #define GAMEENGINE_MESHCLUSTER_H
 
-#include <Debug.h>
+#include <Utils/Debug.h>
 
 namespace SR_GRAPH_NS {
     namespace Types {

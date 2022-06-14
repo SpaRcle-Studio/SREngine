@@ -4,11 +4,11 @@
 
 #include <Scripting/Impl/EvoCompiler.h>
 
-#include <ResourceManager/ResourceManager.h>
-#include <FileSystem/FileSystem.h>
-#include <FileSystem/Path.h>
-#include <Xml.h>
-#include <Utils/Features.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/Path.h>
+#include <Utils/Xml.h>
+#include <Utils/Common/Features.h>
 
 namespace SR_SCRIPTING_NS {
     EvoCompiler::EvoCompiler(std::string cachePath)

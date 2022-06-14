@@ -5,7 +5,7 @@
 #include <Render/Camera.h>
 #include <Render/CameraManager.h>
 #include <Window/Window.h>
-#include <Types/DataStorage.h>
+#include <Utils/Types/DataStorage.h>
 
 namespace SR_GRAPH_NS {
     Camera::Camera()
@@ -30,7 +30,7 @@ namespace SR_GRAPH_NS {
         return marshal;
     }
 
-    Component * Camera::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component * Camera::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         const auto&& _far = marshal.Read<float_t>();
         const auto&& _near = marshal.Read<float_t>();
         const auto&& FOV = marshal.Read<float_t>();
@@ -84,7 +84,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    void Camera::OnRotate(const Math::FVector3& newValue) {
+    void Camera::OnRotate(const SR_MATH_NS::FVector3& newValue) {
         m_yaw   = float_t(newValue.y * 3.14 / 45.f / 4.f);
         m_pitch = float_t(newValue.x * 3.14 / 45.f / 4.f);
         m_roll  = float_t(newValue.z * 3.14 / 45.f / 4.f);
@@ -92,7 +92,7 @@ namespace SR_GRAPH_NS {
         UpdateView();
     }
 
-    void Camera::OnMove(const Math::FVector3& newValue) {
+    void Camera::OnMove(const SR_MATH_NS::FVector3& newValue) {
         m_position = newValue;
         UpdateView();
     }

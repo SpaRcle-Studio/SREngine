@@ -5,12 +5,10 @@
 #ifndef SRENGINE_NODE_H
 #define SRENGINE_NODE_H
 
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 #include <GUI/Icons.h>
-#include <list>
-#include <Utils/NonCopyable.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     SR_ENUM_CLASS(NodeType,
         None,
         Blueprint,
@@ -24,7 +22,7 @@ namespace Framework::Graphics::GUI {
     class Node;
     class Link;
 
-    class Node : private Helper::NonCopyable {
+    class Node : private SR_UTILS_NS::NonCopyable {
     public:
         Node();
         explicit Node(const std::string& name);
@@ -32,7 +30,7 @@ namespace Framework::Graphics::GUI {
         Node(const std::string& name, ImColor color);
         Node(const std::string& name, NodeType type, ImColor color);
 
-        ~Node();
+        ~Node() override;
 
     public:
         Node* AddInput(Pin* pin);

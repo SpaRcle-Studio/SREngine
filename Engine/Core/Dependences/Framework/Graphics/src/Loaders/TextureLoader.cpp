@@ -6,11 +6,11 @@
 
 #include "stbi/stb_image.c"
 
-#include <Utils/StringUtils.h>
-#include "Loaders/TextureLoader.h"
+#include <Utils/Common/StringUtils.h>
+#include <Loaders/TextureLoader.h>
 #include <Types/Texture.h>
 
-#include <Debug.h>
+#include <Utils/Debug.h>
 
 bool Framework::Graphics::TextureLoader::Load(Types::Texture* texture, std::string path) {
     if (!SRVerifyFalse(!texture)) {
@@ -40,7 +40,7 @@ bool Framework::Graphics::TextureLoader::Load(Types::Texture* texture, std::stri
 }
 
 bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
-    if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High) {
+    if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
         SR_LOG("TextureLoader::Free() : free source image data...");
     }
 

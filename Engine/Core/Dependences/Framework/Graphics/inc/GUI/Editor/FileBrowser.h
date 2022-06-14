@@ -5,7 +5,7 @@
 #ifndef SRENGINE_FILEBROWSER_H
 #define SRENGINE_FILEBROWSER_H
 
-#include <FileSystem/Path.h>
+#include <Utils/FileSystem/Path.h>
 #include <GUI/Widget.h>
 
 namespace SR_GRAPH_NS::GUI {

@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_COLORBUFFER_H
 #define GAMEENGINE_COLORBUFFER_H
 
-#include <Debug.h>
+#include <Utils/Debug.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class ColorBuffer {
         struct cbInfo_t {
             size_t Name;

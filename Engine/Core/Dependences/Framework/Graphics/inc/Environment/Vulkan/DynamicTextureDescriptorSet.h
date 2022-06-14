@@ -5,8 +5,8 @@
 #ifndef GAMEENGINE_DYNAMICTEXTUREDESCRIPTORSET_H
 #define GAMEENGINE_DYNAMICTEXTUREDESCRIPTORSET_H
 
-#include <Debug.h>
-#include <vulkan/vulkan.h>
+#include <Utils/macros.h>
+#include <EvoVulkan/Memory/Allocator.h>
 
 namespace Framework::Graphics::VulkanTypes {
     struct DynamicTextureDescriptorSet {

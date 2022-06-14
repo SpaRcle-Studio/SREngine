@@ -6,8 +6,8 @@
 #include <Render/Render.h>
 #include <Render/Shader.h>
 #include <Render/Camera.h>
-#include <Debug.h>
-#include <Events/EventManager.h>
+#include <Utils/Debug.h>
+#include <Utils/Events/EventManager.h>
 
 Framework::Graphics::EditorGrid::EditorGrid(const std::string &shaderName, Render *render) : m_env(Environment::Get()) {
     //this->m_render = render;
@@ -24,7 +24,7 @@ void Framework::Graphics::EditorGrid::Draw() {
     else if (!m_isCalculated) {
         m_hasErrors = !Calculate();
         if (m_hasErrors) {
-            Helper::EventManager::Push(EventManager::Event::Fatal);
+            //Helper::EventManager::Push(EventManager::Event::Fatal);
             return;
         }
     }

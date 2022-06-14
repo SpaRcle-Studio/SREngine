@@ -5,12 +5,9 @@
 #ifndef SRENGINE_BLUEPRINTPARSER_H
 #define SRENGINE_BLUEPRINTPARSER_H
 
-#include <macros.h>
-#include <Utils/Singleton.h>
-#include <string>
-#include <vector>
-#include <GUI.h>
-#include <Xml.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/GUI.h>
+#include <Utils/Xml.h>
 
 namespace SR_GRAPH_NS::GUI {
     class Pin;

@@ -3,8 +3,9 @@
 //
 
 #include <GUI/WidgetManager.h>
-#include <Debug.h>
-#include <Utils/Features.h>
+
+#include <Utils/Debug.h>
+#include <Utils/Common/Features.h>
 
 namespace SR_GRAPH_NS::GUI {
     WidgetManager::WidgetManager()
@@ -58,7 +59,7 @@ namespace SR_GRAPH_NS::GUI {
         m_widgets.clear();
     }
 
-    void WidgetManager::OnKeyDown(const KeyDownEvent &event) {
+    void WidgetManager::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
         SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {
@@ -67,7 +68,7 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
-    void WidgetManager::OnKeyUp(const KeyUpEvent &event) {
+    void WidgetManager::OnKeyUp(const SR_UTILS_NS::KeyUpEvent &event) {
         SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {

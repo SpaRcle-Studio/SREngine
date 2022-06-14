@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SRSLPARSER_H
 #define SRENGINE_SRSLPARSER_H
 
-#include <Utils/Singleton.h>
+#include <Utils/Common/Singleton.h>
 #include <Types/Vertices.h>
 #include <Environment/Basic/IShaderProgram.h>
 

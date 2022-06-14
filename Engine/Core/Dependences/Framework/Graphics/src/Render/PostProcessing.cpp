@@ -3,13 +3,10 @@
 //
 #include <Environment/Environment.h>
 
-#include "Render/PostProcessing.h"
+#include <Render/PostProcessing.h>
 
-#include <Debug.h>
 #include <Render/Render.h>
 #include <Render/Camera.h>
-
-#include <Debug.h>
 
 #include <Render/Implementations/OpenGLPostProcessing.h>
 #include <Render/Implementations/VulkanPostProcessing.h>

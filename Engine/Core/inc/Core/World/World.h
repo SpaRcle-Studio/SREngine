@@ -6,15 +6,15 @@
 #define SRENGINE_WORLD_H
 
 #include <Core/Engine.h>
-
-#include <World/Scene.h>
 #include <Window/Window.h>
-#include <ECS/Component.h>
-#include <ECS/Transform3D.h>
-#include <ECS/GameObject.h>
+
+#include <Utils/World/Scene.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/Transform3D.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_CORE_NS::World {
-    class World : public Helper::World::Scene {
+    class World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
     public:
         explicit World(const std::string& name)

@@ -3,7 +3,7 @@
 //
 
 #include <Types/Geometry/DebugWireframeMesh.h>
-#include <Types/RawMesh.h>
+#include <Utils/Types/RawMesh.h>
 
 namespace SR_GTYPES_NS {
     SR_UTILS_NS::IResource* DebugWireframeMesh::Copy(IResource* destination) const {
@@ -96,8 +96,9 @@ namespace SR_GTYPES_NS {
         if (!IsCanCalculate())
             return false;
 
-        if (Debug::GetLevel() >= Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("DebugWireframeMesh::Calculate() : calculating \"" + m_geometryName + "\"...");
+        }
 
         ///TODO: if (!m_vertices.empty())
         ///    m_barycenter = Vertices::Barycenter(m_vertices);
@@ -114,8 +115,9 @@ namespace SR_GTYPES_NS {
     bool DebugWireframeMesh::FreeVideoMemory() {
         SR_SCOPED_LOCK
 
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
+        }
 
         if (!FreeVBO<Vertices::Type::SimpleVertex>())
             return false;

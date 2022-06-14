@@ -124,7 +124,7 @@ namespace Framework::Graphics {
         }
     public:
         bool Free() override {
-            Helper::Debug::Graph("OpenGLPostProcessing::Free() : free post processing pointer...");
+            SR_GRAPH_LOG("OpenGLPostProcessing::Free() : free post processing pointer...");
             delete this;
             return true;
         }
