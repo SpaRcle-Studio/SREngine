@@ -13,7 +13,7 @@
 #include <Utils/Math/Vector2.h>
 #include <Utils/Common/NonCopyable.h>
 
-#include "../../Depends/assimp/contrib/pugixml/src/pugixml.hpp"
+#include "../../libs/assimp/contrib/pugixml/src/pugixml.hpp"
 
 namespace SR_UTILS_NS::Xml {
     class Node;
@@ -26,7 +26,9 @@ namespace SR_UTILS_NS::Xml {
     class SR_DLL_EXPORT Attribute {
     public:
         Attribute()
-                : m_attribute(), m_valid(false) {}
+            : m_attribute()
+            , m_valid(false)
+        { }
 
         explicit Attribute(const pugi::xml_attribute &attribute) {
             m_attribute = attribute;
@@ -39,8 +41,9 @@ namespace SR_UTILS_NS::Xml {
 
     private:
         SR_NODISCARD bool CheckError(const std::string &msg) const {
-            if (m_valid)
+            if (m_valid) {
                 return true;
+            }
             else {
                 SRAssert2(false, msg);
                 g_xml_last_error = -1;

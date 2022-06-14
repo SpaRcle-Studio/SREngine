@@ -76,11 +76,12 @@ namespace SR_GRAPH_NS {
                     break;
                 case Environment::WinEvents::RightClick:
                     break;
-                case Environment::WinEvents::Focus:
-                    m_isWindowFocus = *(bool*)(arg1);
-                    SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", (*(bool*)(arg1)) ? "True" : "False"));
-                    SR_UTILS_NS::Input::Reload();
+                case Environment::WinEvents::Focus: {
+                    m_isWindowFocus = *(bool *) (arg1);
+                    SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", (*(bool *) (arg1)) ? "True" : "False"));
+                    SR_UTILS_NS::Input::Instance().Reload();
                     break;
+                }
             }
         });
 
@@ -179,7 +180,8 @@ namespace SR_GRAPH_NS {
 
         {
             waitInit:
-            if (m_isInit && !m_isClose && !m_isRun && !m_hasErrors) goto waitInit;
+            if (m_isInit && !m_isClose && !m_isRun && !m_hasErrors)
+                goto waitInit;
 
             if (!m_hasErrors && !m_isClose)
                 if (!InitEnvironment()) {

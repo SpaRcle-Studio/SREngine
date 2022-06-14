@@ -10,6 +10,39 @@
 #include <Utils/World/Chunk.h>
 
 namespace SR_WORLD_NS {
+    bool SceneAllocator::Init(const SceneAllocator::Allocator &allocator) {
+        if (m_allocator) {
+            SR_WARN("SceneAllocator::Init() : allocator already initialized!");
+            return false;
+        }
+
+        m_allocator = allocator;
+
+        return true;
+    }
+
+    SceneAllocator::ScenePtr SceneAllocator::Allocate() {
+        if (!m_allocator) {
+            SRHalt("SceneAllocator::Allocate() : allocator isn't initialized!");
+            Platform::Terminate();
+        }
+
+        return *m_allocator();
+    }
+
+    Scene::Scene()
+        : Scene("Unnamed")
+    { }
+
+    Scene::Scene(const std::string &name)
+        : Super(this)
+        , m_name(name)
+        , m_observer(new Observer(this))
+    {
+        m_path = ResourceManager::Instance().GetCachePath().Concat("Scenes");
+        ReloadConfig();
+    }
+
     SR_HTYPES_NS::SafePtr<GameObject> Scene::Instance(const std::string& name) {
         if (Debug::Instance().GetLevel() >= Debug::Level::High) {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
@@ -29,12 +62,16 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::New() : creating new scene...");
         }
 
-        if (!g_allocator) {
-            SR_ERROR("Scene::New() : allocator is not set!");
+        auto&& scene = SceneAllocator::Instance().Allocate();
+
+        if (!scene) {
+            SR_ERROR("Scene::New() : failed to allocate scene!");
             return Types::SafePtr<Scene>();
         }
 
-        return *g_allocator(name);
+        scene->SetName(name);
+
+        return scene;
     }
 
     SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const std::string& name) {
@@ -259,15 +296,6 @@ namespace SR_WORLD_NS {
         if (m_shiftEnabled) {
             CheckShift(m_observer->m_targetPosition.Cast<int>() / chunkSize);
         }
-    }
-
-    Scene::Scene(const std::string &name)
-        : Types::SafePtr<Scene>(this)
-        , m_name(name)
-        , m_observer(new Observer(this))
-    {
-        m_path = ResourceManager::Instance().GetCachePath().Concat("Scenes");
-        ReloadConfig();
     }
 
     void Scene::SetWorldOffset(const Offset &offset) {

@@ -90,19 +90,19 @@ void SceneViewer::Update() {
         return;
 
     float_t speed = 0.1f;
-    auto dir = SR_UTILS_NS::Input::GetMouseDrag() * speed;
-    auto wheel = SR_UTILS_NS::Input::GetMouseWheel() * speed;
+    auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
+    auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
 
     if (m_camera.LockIfValid()) {
         if (wheel != 0) {
             m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
         }
 
-        if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
             m_camera->GetTransform()->GlobalRotate(dir.y, dir.x, 0.0);
         }
 
-        if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
             auto right = SR_UTILS_NS::Transform3D::RIGHT * speed;
             auto up = SR_UTILS_NS::Transform3D::UP * speed;
 

@@ -535,10 +535,6 @@ namespace SR_UTILS_NS {
     }
 }
 
-namespace Framework::RuntimeTest {
-    bool MarshalRunRuntimeTest();
-}
-
 inline size_t std::hash<SR_HTYPES_NS::MarshalDecodeNode>::operator()(const SR_HTYPES_NS::MarshalDecodeNode &value) const {
     std::hash<std::string> h;
     return h(value.Name()) + 0x9e3779b9 + (0 << 6u) + (0 >> 2u);

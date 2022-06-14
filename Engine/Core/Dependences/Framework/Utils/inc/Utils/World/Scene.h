@@ -60,19 +60,34 @@ namespace SR_WORLD_NS {
     typedef std::unordered_map<TensorKey, GameObjects> Tensor;
     typedef std::unordered_map<Math::IVector3, Region*> Regions;
 
+    class SR_DLL_EXPORT SceneAllocator : public SR_UTILS_NS::Singleton<SceneAllocator> {
+        typedef std::function<Scene*(void)> Allocator;
+        using ScenePtr = Types::SafePtr<Scene>;
+    protected:
+        ~SceneAllocator() override = default;
+
+    public:
+        bool Init(const Allocator& allocator);
+        ScenePtr Allocate();
+
+    private:
+        Allocator m_allocator;
+
+    };
+
     class SR_DLL_EXPORT Scene : public Types::SafePtr<Scene> {
     public:
         typedef Types::SafePtr<Scene> Ptr;
-        typedef std::function<Scene*(const std::string& name)> Allocator;
+        using Super = Types::SafePtr<Scene>;
 
     protected:
+        Scene();
         explicit Scene(const std::string& name);
         virtual ~Scene() = default;
 
     public:
         static Types::SafePtr<Scene> New(const std::string& name);
         static Types::SafePtr<Scene> Load(const std::string& name);
-        static void SetAllocator(const Allocator& allocator) { g_allocator = allocator; }
 
         bool Save();
         bool SaveAt(const std::string& folder);
@@ -84,7 +99,6 @@ namespace SR_WORLD_NS {
         void SetWorldOffset(const World::Offset& offset);
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetName(const std::string& name) { m_name = name; }
-        //void SetObserver(const SR_HTYPES_NS::SafePtr<GameObject>& observer) { m_observer->m_target = observer; }
         void SetActive(bool value) { m_isActive = value; }
         void SetPaused(bool value) { m_isPaused = value; }
 
@@ -126,8 +140,6 @@ namespace SR_WORLD_NS {
         Observer*                    m_observer            = nullptr;
 
     private:
-        SR_INLINE static Allocator   g_allocator           = Allocator();
-
         bool                         m_updateContainer     = false;
         bool                         m_shiftEnabled        = false;
         bool                         m_scopeEnabled        = false;

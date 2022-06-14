@@ -46,6 +46,8 @@
 #include "../Utils/src/Utils/Common/Stacktrace.cpp"
 #include "../Utils/src/Utils/Common/StringUtils.cpp"
 #include "../Utils/src/Utils/Common/Features.cpp"
+#include "../Utils/src/Utils/Common/Singleton.cpp"
+#include "../Utils/src/Utils/Common/SingletonHolder.cpp"
 
 #include "../Utils/src/Utils/World/Chunk.cpp"
 #include "../Utils/src/Utils/World/Observer.cpp"

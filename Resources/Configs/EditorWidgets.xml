@@ -7,5 +7,5 @@
 	<Widget Name="World edit" Open="false" />
 	<Widget Name="Scene" Open="true" />
 	<Widget Name="Engine statistics" Open="false" />
-	<Widget Name="Inspector" Open="false" />
+	<Widget Name="Inspector" Open="true" />
 </Widgets>

@@ -12,6 +12,11 @@ namespace SR_UTILS_NS {
     void Debug::Print(std::string msg, Debug::Type type) {
         SR_LOCK_GUARD
 
+        if (!m_isInit) {
+            std::cerr << "Debug::Print() : Debugger isn't initialized!\n";
+            Platform::Terminate();
+        }
+
         std::string pref;
         ConsoleColor color;
 

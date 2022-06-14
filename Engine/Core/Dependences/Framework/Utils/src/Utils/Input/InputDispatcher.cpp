@@ -7,20 +7,20 @@
 
 void SR_UTILS_NS::InputDispatcher::Check() {
     for (const auto& code : KeyCodes) {
-        if (Input::GetKeyDown(code))
+        if (Input::Instance().GetKeyDown(code))
             Dispatch<InputHandler>(code, MouseCode::None, KeyState::Down);
-        else if (Input::GetKeyUp(code))
+        else if (Input::Instance().GetKeyUp(code))
             Dispatch<InputHandler>(code, MouseCode::None, KeyState::Up);
-        else if (Input::GetKey(code))
+        else if (Input::Instance().GetKey(code))
             Dispatch<InputHandler>(code, MouseCode::None, KeyState::Press);
     }
 
     for (const auto& code : MouseCodes) {
-        if (Input::GetMouseDown(code))
+        if (Input::Instance().GetMouseDown(code))
             Dispatch<InputHandler>(KeyCode::None, code, KeyState::Down);
-        else if (Input::GetMouseUp(code))
+        else if (Input::Instance().GetMouseUp(code))
             Dispatch<InputHandler>(KeyCode::None, code, KeyState::Up);
-        else if (Input::GetMouse(code))
+        else if (Input::Instance().GetMouse(code))
             Dispatch<InputHandler>(KeyCode::None, code, KeyState::Press);
     }
 }

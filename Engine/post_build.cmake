@@ -33,5 +33,10 @@ SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "libE
 SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "EvoVulkan.dll")
 SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/EvoVulkan/Core" "EvoVulkand.dll")
 
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "Utils.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "Utilsd.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "libUtils.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "libUtilsd.dll")
+
 SRCopyFileToApp("bin" "glew32.dll")
 SRCopyFileToApp("bin" "glew32d.dll")

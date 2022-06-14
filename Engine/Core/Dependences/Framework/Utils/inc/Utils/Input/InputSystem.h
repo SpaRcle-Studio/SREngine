@@ -7,52 +7,54 @@
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Input/KeyCodes.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
     // TODO: make singleton!
-    class SR_DLL_EXPORT Input {
+    class SR_DLL_EXPORT Input : public Singleton<Input> {
+        friend class Singleton<Input>;
+
         enum class State{
             UnPressed, Down, Pressed, Up
         };
 
-    public:
-        Input() = delete;
-        Input(Input&) = delete;
-        ~Input() = delete;
-    private:
-        inline static Math::FVector2 g_mouse_old             = Math::FVector2();
-        inline static Math::FVector2 g_mouse                 = Math::FVector2();
+    protected:
+        ~Input() override = default;
 
-        inline static Math::FVector2 g_mouseScroll           = Math::FVector2();
-        inline static Math::FVector2 g_mouseScrollCurrent    = Math::FVector2();
-
-        inline static unsigned char* g_arr                        = nullptr;
-    private:
-        inline static std::atomic<bool> g_init = false;
-        inline static State g_keys[256];
     public:
-        inline static void SetMouseScroll(double xoffset, double yoffset){
-            g_mouseScrollCurrent = { (float_t)xoffset, (float_t)yoffset };
+        void SetMouseScroll(double_t xOffset, double_t yOffset){
+            m_mouseScrollCurrent = { (float_t)xOffset, (float_t)yOffset };
         }
 
-        static void Check();
-        static void Reload();
+        void Check();
+        void Reload();
 
-        static Math::FVector2 GetMouseDrag();
+        SR_MATH_NS::FVector2 GetMouseDrag();
 
-        static int GetMouseWheel();
+        int32_t GetMouseWheel();
+        int32_t DebugKey();
 
-        static int DebugKey();
+        bool GetMouseDown(MouseCode code) { return GetKeyDown(static_cast<KeyCode>(code)); }
+        bool GetMouseUp(MouseCode code) { return GetKeyUp(static_cast<KeyCode>(code)); }
+        bool GetMouse(MouseCode code) { return GetKey(static_cast<KeyCode>(code)); }
 
-        static bool GetMouseDown(MouseCode code) { return GetKeyDown(static_cast<KeyCode>(code)); }
-        static bool GetMouseUp(MouseCode code) { return GetKeyUp(static_cast<KeyCode>(code)); }
-        static bool GetMouse(MouseCode code) { return GetKey(static_cast<KeyCode>(code)); }
+        bool GetKeyDown(KeyCode key);
+        bool GetKeyUp(KeyCode key);
+        bool GetKey(KeyCode key);
 
-        static bool GetKeyDown(KeyCode key);
-        static bool GetKeyUp(KeyCode key);
-        static bool GetKey(KeyCode key);
     private:
-        static void Reset();
+        void Reset();
+
+    private:
+        SR_MATH_NS::FVector2 m_mousePrev;
+        SR_MATH_NS::FVector2 m_mouse;
+        SR_MATH_NS::FVector2 m_mouseScroll;
+        SR_MATH_NS::FVector2 m_mouseScrollCurrent;
+
+        uint8_t* m_arr = nullptr;
+        std::atomic<bool> m_init = false;
+
+        State m_keys[256] = { };
 
     };
 }

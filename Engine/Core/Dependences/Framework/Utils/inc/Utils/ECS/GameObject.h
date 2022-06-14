@@ -35,7 +35,7 @@ namespace SR_UTILS_NS {
 
     public:
         typedef Types::SafePtr<GameObject> Ptr;
-        static const uint16_t VERSION;
+        SR_INLINE static const uint16_t VERSION = 1000;
 
     private:
         GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag = "Untagged");

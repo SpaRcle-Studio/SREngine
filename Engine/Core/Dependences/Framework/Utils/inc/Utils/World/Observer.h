@@ -49,7 +49,7 @@ namespace SR_WORLD_NS {
         Math::IVector3 m_chunk;
     };
 
-    class Observer : public NonCopyable {
+    class SR_DLL_EXPORT Observer : public NonCopyable {
     public:
         Observer(Scene* scene);
         ~Observer() override = default;
@@ -85,11 +85,11 @@ namespace SR_WORLD_NS {
         Types::SafePtr<Helper::GameObject> m_target;
     };
 
-    Math::IVector3 MakeChunk(const Math::IVector3& rawChunkPos, int32_t width);
-    Math::Unit AddOffset(const Math::Unit& value, const Math::Unit& offset);
-    Math::FVector3 AddOffset(const Math::FVector3& chunk, const Math::FVector3& offset);
-    Math::IVector3 AddOffset(const Math::IVector3& chunk, const Math::IVector3& offset);
-    Math::FVector3 AddOffset(const Math::FVector3& region, const Math::IVector3& offset);
+    SR_DLL_EXPORT Math::IVector3 MakeChunk(const Math::IVector3& rawChunkPos, int32_t width);
+    SR_DLL_EXPORT Math::Unit AddOffset(const Math::Unit& value, const Math::Unit& offset);
+    SR_DLL_EXPORT Math::FVector3 AddOffset(const Math::FVector3& chunk, const Math::FVector3& offset);
+    SR_DLL_EXPORT Math::IVector3 AddOffset(const Math::IVector3& chunk, const Math::IVector3& offset);
+    SR_DLL_EXPORT Math::FVector3 AddOffset(const Math::FVector3& region, const Math::IVector3& offset);
 }
 
 #endif //GAMEENGINE_OBSERVER_H

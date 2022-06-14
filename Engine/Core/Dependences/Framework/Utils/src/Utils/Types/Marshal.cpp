@@ -5,49 +5,6 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
-namespace Framework::RuntimeTest {
-    bool MarshalRunRuntimeTest() {
-        /*MarshalEncodeNode node("Root node");
-        MarshalEncodeNode child("Some child");
-
-        child.Append("One", 1)
-               .Append("Two", 2)
-               .Append("String", "1234567890");
-
-        node.Append(
-                MarshalEncodeNode("Child 1")
-                    .Append("Value 1", 50)
-                    .Append("Value 2", 100)
-                    .Append(child)
-        );
-
-       node.Append(
-               MarshalEncodeNode("Child 2")
-                    .Append("Value N", 0.15)
-                    .Append("Value 3", -50)
-                    .Append("Value 4", -100)
-                    .Append("Value 5", "Aboba")
-
-                    .Append(MarshalEncodeNode("Empty"))
-        );
-
-        std::cout << node.Decode().Dump() << std::endl;
-
-        const auto path = ResourceManager::Instance().GetCachePath().Concat("RuntimeTest");
-        path.Make();
-
-        node.Save(path.Concat("Marshal.bin"));
-        auto decode = MarshalDecodeNode::Load(path.Concat("Marshal.bin"));
-        std::cout << decode.Dump() << std::endl;
-
-        decode.Encode().Save(path.Concat("Marshal2.bin"));
-        decode = MarshalDecodeNode::Load(path.Concat("Marshal.bin"));
-        std::cout << decode.Dump() << std::endl;*/
-
-        return true;
-    }
-}
-
 namespace SR_HTYPES_NS {
     bool Marshal::Save(const Path &path) const {
         std::ofstream file;

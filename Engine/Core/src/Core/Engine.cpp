@@ -54,7 +54,7 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     }
 
     Graphics::Environment::RegisterScrollEvent([](double x, double y){
-        SR_UTILS_NS::Input::SetMouseScroll(x, y);
+        SR_UTILS_NS::Input::Instance().SetMouseScroll(x, y);
     });
 
     if (!m_scene.Valid()) {
@@ -186,31 +186,31 @@ void Framework::Engine::Await() {
 
             while (accumulator >= updateFrequency) {
                 if (windowFocused) {
-                    Helper::Input::Check();
+                    SR_UTILS_NS::Input::Instance().Check();
                     m_input->Check();
 
-                    if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-                        if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::Z))
+                    if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+                        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
                             m_cmdManager->Cancel();
 
-                        if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::Y))
+                        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
                             if (!m_cmdManager->Redo())
                                 SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
                     }
 
-                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
                         m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
                     }
 
-                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                         m_editor->Enable(!m_editor->Enabled());
                     }
 
-                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F3)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3)) {
                         Reload();
                     }
 
-                    if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::BackSpace) && SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::LShift)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::BackSpace) && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift)) {
                         SR_SYSTEM_LOG("Engine::Await() : The closing key combination have been detected!");
                         m_exitEvent = true;
                         break;

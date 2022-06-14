@@ -14,8 +14,6 @@
 #include <Utils/Math/Mathematics.h>
 
 namespace SR_UTILS_NS {
-    const uint16_t GameObject::VERSION = 1000;
-
     GameObject::GameObject(const Types::SafePtr<World::Scene> &scene, std::string name, std::string tag)
         : Types::SafePtr<GameObject>(this)
     {

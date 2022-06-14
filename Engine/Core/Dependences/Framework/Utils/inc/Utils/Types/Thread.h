@@ -18,7 +18,7 @@ namespace SR_HTYPES_NS {
         using ThreadId = std::string;
         using ThreadsMap = std::unordered_map<ThreadId, Thread::Ptr>;
 
-        class Factory : public Singleton<Factory> {
+        class SR_DLL_EXPORT Factory : public Singleton<Factory> {
             friend class Singleton<Factory>;
             friend class Thread;
         protected:
@@ -45,9 +45,7 @@ namespace SR_HTYPES_NS {
         };
 
     private:
-        Thread()
-            : Thread(std::thread())
-        { }
+        Thread();
 
         explicit Thread(std::thread&& thread);
 

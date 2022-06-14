@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
     #define SR_S2WS(str) s2ws(str)
     #define SR_WS2S(wstr) ws2s(wstr)
 
-    class StringUtils {
+    class SR_DLL_EXPORT StringUtils {
     public:
         StringUtils() = delete;
         StringUtils(StringUtils&) = delete;

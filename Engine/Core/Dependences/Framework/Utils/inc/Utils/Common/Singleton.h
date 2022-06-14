@@ -8,52 +8,99 @@
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_UTILS_NS {
-    template<typename T> class SR_DLL_EXPORT Singleton : public NonCopyable {
+    template<typename T> class Singleton;
+
+    class SR_DLL_EXPORT SingletonManager : public NonCopyable {
     public:
-        static void Destroy();
+        void** GetSingleton(uint64_t id);
 
-        static T& Instance();
+    private:
+        std::unordered_map<uint64_t, void*> m_singletons;
 
-    public:
-        static void LockSingleton();
-        static void UnlockSingleton();
-
-    protected:
-        static T* m_instance;
-        static std::recursive_mutex m_mutex;
-
-        Singleton() { m_instance = static_cast <T*> (this); };
-        ~Singleton() override = default;
-
-        virtual void OnSingletonDestroy() { }
     };
 
-    template<typename T> T* Singleton<T>::m_instance = 0;
-    template<typename T> std::recursive_mutex Singleton<T>::m_mutex = std::recursive_mutex();
+    SR_DLL_EXPORT SingletonManager* GetSingletonManager();
 
-    template<typename T> T& Singleton<T>::Instance() {
-        if(!m_instance)
-            Singleton<T>::m_instance = new T();
+    template<typename T> class SR_DLL_EXPORT Singleton : public NonCopyable {
+    protected:
+        Singleton()
+            : m_instance(nullptr)
+        { }
 
-        return *m_instance;
-    }
+        ~Singleton() override = default;
 
-    template<typename T> void Singleton<T>::Destroy() {
-        if (!m_instance) {
-            return;
+    public:
+        SR_MAYBE_UNUSED static void Destroy() {
+            auto&& singleton = GetSingleton();
+
+            if (!(*singleton)) {
+                return;
+            }
+
+            (*singleton)->InternalDestroy();
+
+            delete *singleton;
+            (*singleton) = nullptr;
         }
-        m_instance->OnSingletonDestroy();
-        delete Singleton<T>::m_instance;
-        Singleton<T>::m_instance = 0;
-    }
 
-    template<typename T> void Singleton<T>::LockSingleton() {
-        m_mutex.lock();
-    }
+        SR_MAYBE_UNUSED static T& Instance() {
+            auto&& singleton = GetSingleton();
 
-    template<typename T> void Singleton<T>::UnlockSingleton() {
-        m_mutex.unlock();
-    }
+            if (!(*singleton)) {
+                *singleton = new Singleton<T>();
+            }
+
+            return (*singleton)->InternalInstance();
+        }
+
+        SR_MAYBE_UNUSED static void LockSingleton() {
+            if (auto&& singleton = GetSingleton()) {
+                (*singleton)->m_mutex.lock();
+            }
+        }
+
+        SR_MAYBE_UNUSED static void UnlockSingleton() {
+            if (auto&& singleton = GetSingleton()) {
+                (*singleton)->m_mutex.unlock();
+            }
+        }
+
+    protected:
+        virtual void OnSingletonDestroy() { }
+
+    private:
+        static Singleton<T>** GetSingleton() {
+            void** p = GetSingletonManager()->GetSingleton(typeid(Singleton<T>).hash_code());
+
+            return reinterpret_cast<Singleton<T>**>(p);
+        }
+
+        T& InternalInstance() {
+            if (!m_instance) {
+                m_instance = new T();
+            }
+
+            return *m_instance;
+        }
+
+        void InternalDestroy() {
+            if (!m_instance) {
+                return;
+            }
+
+            m_instance->OnSingletonDestroy();
+
+            delete m_instance;
+            m_instance = nullptr;
+        }
+
+    protected:
+        mutable std::recursive_mutex m_mutex;
+
+    private:
+        T* m_instance;
+
+    };
 }
 
 #endif //GAMEENGINE_SINGLETON_H

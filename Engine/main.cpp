@@ -102,8 +102,6 @@ int main(int argc, char **argv) {
     else
         resourcesManager.Init(folder);
 
-    RuntimeTest::MarshalRunRuntimeTest();
-
     Features::Instance().Reload(resourcesManager.GetResPath().Concat("/Configs/Features.xml"));
 
     if (!FbxLoader::Debug::IsInit()) {
@@ -149,7 +147,7 @@ int main(int argc, char **argv) {
         if (Helper::Features::Instance().Enabled("DebugRegions", false))
             Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
 
-        Scene::SetAllocator([](const std::string& name) -> Scene* { return new Core::World::World(name); });
+        SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World::World(); });
     }
 
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));

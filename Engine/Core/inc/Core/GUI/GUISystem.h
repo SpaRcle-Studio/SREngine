@@ -106,7 +106,7 @@ namespace Framework::Core::GUI {
         }
 
         void DrawChild(const Helper::Types::SafePtr<Helper::GameObject>& root);
-        void DrawHierarchy(Helper::Types::SafePtr<Helper::World::Scene> scene);
+        void DrawHierarchy(const Helper::Types::SafePtr<Helper::World::Scene>& scene);
         void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
 

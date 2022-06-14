@@ -293,8 +293,8 @@ void GUISystem::DrawImage(
         window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
 }
 
-void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
-    m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
+void GUISystem::DrawHierarchy(const Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene>& scene) {
+    m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
     if (scene.LockIfValid()) {
         unsigned long i = 0;

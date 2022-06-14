@@ -14,9 +14,13 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_CORE_NS::World {
-    class World : public SR_WORLD_NS::Scene {
+    class SR_DLL_EXPORT World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
     public:
+        World()
+            : Scene()
+        { }
+
         explicit World(const std::string& name)
             : Scene(name)
         { }

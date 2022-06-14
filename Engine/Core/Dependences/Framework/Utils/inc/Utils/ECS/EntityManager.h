@@ -114,9 +114,6 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT EntityManager : public Singleton<EntityManager> {
         friend class Singleton<EntityManager>;
-    private:
-        typedef std::recursive_mutex Mutex;
-
     public:
         EntityManager();
         ~EntityManager() override = default;
@@ -129,8 +126,6 @@ namespace SR_UTILS_NS {
         bool TryUnReserve(const EntityId& id);
         Entity* GetReserved(const EntityId& id, const EntityAllocator& allocator);
         Entity* FindById(const EntityId& id) const;
-        void Lock() { m_mutex.lock(); }
-        void Unlock() { m_mutex.unlock(); }
 
     private:
         void OnSingletonDestroy() override;

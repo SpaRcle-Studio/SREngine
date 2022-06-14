@@ -3,7 +3,6 @@
 //
 
 #include <Utils/Types/RawMesh.h>
-#include <FbxLoader/Loader.h>
 
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>

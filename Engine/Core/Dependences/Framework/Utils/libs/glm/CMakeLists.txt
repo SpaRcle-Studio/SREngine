@@ -1,3 +1,5 @@
+option(BUILD_SHARED_LIBS "Build shared library" ON)
+
 file(GLOB ROOT_SOURCE *.cpp)
 file(GLOB ROOT_INLINE *.inl)
 file(GLOB ROOT_HEADER *.hpp)

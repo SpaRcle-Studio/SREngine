@@ -19,7 +19,7 @@ set(IMGUIZMO_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/ImGuizmo)
 set(IMGUI_NODE_EDITOR_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui-node-editor)
 
 # Включаем вспомогательные файлы
-include(Utils.cmake)
+#include(Utils.cmake)
 include(Audio.cmake)
 include(Graphics.cmake)
 include(Physics.cmake)
@@ -31,14 +31,15 @@ add_subdirectory(Depends/glfw)
 add_subdirectory(Depends/glew/build/cmake)
 
 #add_subdirectory(Depends/pugixml)
-add_subdirectory(Depends/inc/glm)
+#add_subdirectory(Depends/inc/glm)
 
 #add_subdirectory(Depends/bullet3)
 add_subdirectory(Depends/EvoVulkan/Core)
 add_subdirectory(Depends/EvoScript/Core)
-add_subdirectory(Depends/FbxLoader)
+#add_subdirectory(Depends/FbxLoader)
 add_subdirectory(Depends/cmp_core)
-add_subdirectory(Depends/assimp)
+#add_subdirectory(Depends/assimp)
+add_subdirectory(Utils)
 #add_subdirectory(Depends/tinyobjloader)
 
 #include(Depends/bullet3/UseBullet.cmake)
@@ -69,19 +70,19 @@ add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${UTILS_SRC} ${PHYSICS
 if (CYGWIN)
     target_link_libraries(Framework
             opengl32 glfw glew TinyObjLoader
-            "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkan::lib assimp
-            EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
+            "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkan::lib Utils::lib
+            EvoScriptCore CMP_Core) #bullet3 imgui pugixml assimp FbxLoader
 else()
     if (MINGW)
-    target_link_libraries(Framework
-            opengl32 glfw glew #TinyObjLoader
-            ${Vulkan_LIBRARY} EvoVulkan::lib assimp Dwmapi.lib
-            EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
+        target_link_libraries(Framework
+                opengl32 glfw glew
+                ${Vulkan_LIBRARY} EvoVulkan::lib Dwmapi.lib Utils::lib
+                EvoScriptCore CMP_Core) #bullet3 imgui pugixml FbxLoader assimp
     else()
         target_link_libraries(Framework
-                opengl32 glfw glew #TinyObjLoader
-                ${Vulkan_LIBRARY} EvoVulkan::lib assimp
-                EvoScriptCore CMP_Core FbxLoader) #bullet3 imgui pugixml
+                opengl32 glfw glew
+                ${Vulkan_LIBRARY} EvoVulkan::lib Utils::lib
+                EvoScriptCore CMP_Core) #bullet3 imgui pugixml FbxLoader assimp
     endif()
 endif()
 
@@ -99,7 +100,10 @@ endif()
 # Устанавливаем директории
 target_include_directories(Framework
         PUBLIC
-            ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${UTILS_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC}
+            ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC} #${UTILS_INC_PUBLIC}
             ${IMGUI_ROOT_DIR} ${IMGUIZMO_ROOT_DIR} ${IMGUI_NODE_EDITOR_ROOT_DIR}
-        PRIVATE ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${UTILS_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE}
-        INSTANCE ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${UTILS_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE})
+        PRIVATE
+            ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE} #${UTILS_INC_PRIVATE}
+        INSTANCE
+            ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE} #${UTILS_INC_INSTANCE}
+)

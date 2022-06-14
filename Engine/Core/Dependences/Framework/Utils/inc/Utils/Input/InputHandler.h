@@ -29,7 +29,7 @@ namespace SR_UTILS_NS {
 
     protected:
         bool IsKeyPressed(KeyCode code) {
-            return Input::GetKey(code);
+            return Input::Instance().GetKey(code);
         }
 
     private:

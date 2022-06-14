@@ -16,7 +16,7 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Draw() {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
+        m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
         DrawMenu();
 
@@ -271,8 +271,9 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        if (marshal.Valid())
+        if (marshal.Valid()) {
             Helper::Platform::TextToClipboard(marshal.ToString());
+        }
     }
 
     void Hierarchy::Paste() {

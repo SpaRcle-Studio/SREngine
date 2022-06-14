@@ -3,6 +3,9 @@ project(Utils)
 
 set(CMAKE_CXX_STANDARD 20)
 
+add_subdirectory(libs/glm)
+add_subdirectory(libs/assimp)
+
 if (UTILS_STATIC_LIBRARY)
     add_library(Utils STATIC Utils.cxx)
 
@@ -16,4 +19,8 @@ else()
     add_library(Utils::lib ALIAS Utils)
 endif()
 
+target_link_libraries(Utils assimp)
+
 target_include_directories(Utils PUBLIC inc)
+target_include_directories(Utils PUBLIC libs)
+target_include_directories(Utils PUBLIC libs/assimp/include)

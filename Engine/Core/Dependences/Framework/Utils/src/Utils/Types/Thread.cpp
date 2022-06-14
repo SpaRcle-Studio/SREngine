@@ -14,6 +14,18 @@ namespace SR_HTYPES_NS {
         m_context = new DataStorage();
     }
 
+    Thread::~Thread() {
+        SRAssert(!Joinable());
+        if (m_context) {
+            delete m_context;
+            m_context = nullptr;
+        }
+    }
+
+    Thread::Thread()
+        : Thread(std::thread())
+    { }
+
     void Thread::Sleep(uint64_t milliseconds) {
         Platform::Sleep(milliseconds);
     }
@@ -73,14 +85,6 @@ namespace SR_HTYPES_NS {
     void Thread::Free() {
         Factory::Instance().Remove(this);
         delete this;
-    }
-
-    Thread::~Thread() {
-        SRAssert(!Joinable());
-        if (m_context) {
-            delete m_context;
-            m_context = nullptr;
-        }
     }
 
     uint32_t Thread::Factory::GetThreadsCount() {
