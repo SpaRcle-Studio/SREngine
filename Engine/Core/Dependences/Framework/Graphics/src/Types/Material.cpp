@@ -320,12 +320,15 @@ namespace SR_GTYPES_NS {
         if (auto&& properties = matXml.TryGetNode("Properties")) {
             for (auto&& propertyXml : properties.GetNodes()) {
                 const std::string id = propertyXml.GetAttribute("Id").ToString();
-                auto&& type = StringToEnumShaderVarType(propertyXml.GetAttribute("Type").ToString());
+                auto&& typeName = propertyXml.GetAttribute("Type").ToString();
+                auto&& type = StringToEnumShaderVarType(typeName);
 
                 Property* pProperty = GetProperty(id);
 
                 if (!pProperty) {
-                    SR_WARN("Material::Reload() : failed to load \"" + id + "\" property!")
+                    SR_WARN("Material::Reload() : failed to load \"" + id + "\" property! \n\tType: "
+                        + typeName + "\n\tProperty count: " + std::to_string(m_properties.size()));
+
                     continue;
                 }
 

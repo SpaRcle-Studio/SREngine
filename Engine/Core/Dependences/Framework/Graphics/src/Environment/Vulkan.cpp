@@ -11,22 +11,6 @@
 #endif
 
 namespace Framework::Graphics {
-    const std::vector<const char *> Vulkan::m_validationLayers = {
-            "VK_LAYER_KHRONOS_validation"
-    };
-
-    const std::vector<const char *> Vulkan::m_instanceExtensions = {
-            VK_KHR_SURFACE_EXTENSION_NAME,
-            VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
-            VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
-#ifdef SR_WIN32
-            VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
-#endif
-#ifndef SR_RELEASE
-            VK_EXT_DEBUG_UTILS_EXTENSION_NAME
-#endif
-    };
-
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
@@ -62,20 +46,35 @@ namespace Framework::Graphics {
         m_viewport = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
         m_scissor = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
         m_cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
-        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr,
-                                                                       0);
+        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
 
         m_kernel->SetMultisampling(smooth_samples);
 
         /// TOOD: вынести в конфиг
         m_kernel->SetSwapchainImagesCount(2);
 
+        std::vector<const char*>&& validationLayers = { };
+        std::vector<const char*>&& instanceExtensions = {
+                VK_KHR_SURFACE_EXTENSION_NAME,
+                VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
+                VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
+#ifdef SR_WIN32
+                VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
+#endif
+        };
+
+        if (m_enableValidationLayers) {
+            instanceExtensions.emplace_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+            validationLayers.emplace_back("VK_LAYER_KHRONOS_validation");
+        }
+
+
         if (!m_kernel->PreInit(
                 appName,
                 engineName,
                 glslc,
-                m_instanceExtensions,
-                m_validationLayers))
+                instanceExtensions,
+                validationLayers))
         {
             SR_ERROR("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
             return false;

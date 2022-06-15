@@ -263,6 +263,7 @@ namespace SR_GRAPH_NS {
         SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
 
         if (!SRVerifyFalse2(path.ToString().empty(), "Invalid shader path!")) {
+            SR_WARN("Shader::Load() : failed to load shader!");
             return nullptr;
         }
 

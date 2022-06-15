@@ -110,7 +110,7 @@ void Framework::Core::GUI::VisualScriptEditor::AddLink(Framework::Graphics::GUI:
 }
 
 void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
-    SR_LOG("VisualScriptEditor::LoadConfig() : loading config...");
+    /*SR_LOG("VisualScriptEditor::LoadConfig() : loading config...");
 
     const auto& resManager = Helper::ResourceManager::Instance();
     const auto path = resManager.GetConfigPath().Concat("/EvoScript.xml");
@@ -127,7 +127,7 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
     }
     else {
         SR_ERROR("VisualScriptEditor::LoadConfig() : config file not found! \n\tPath: " + strPath);
-    }
+    }*/
 }
 
 SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {

@@ -135,8 +135,6 @@ namespace SR_GRAPH_NS {
         EvoVulkan::Core::VulkanKernel*                  m_kernel             = nullptr;
 
     private:
-        static const std::vector<const char*> m_validationLayers;
-        static const std::vector<const char*> m_instanceExtensions;
         static const std::vector<const char*> m_deviceExtensions;
 
         bool m_enableValidationLayers = false;

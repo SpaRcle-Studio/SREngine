@@ -124,7 +124,7 @@ namespace SR_UTILS_NS {
     #define SRAssert1(expr) SRAssert(expr)
     #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
     #define SRAssert2Once(expr, msg) (SR_NOOP)
-    #define SRVerifyFalse2(expr, msg) ((!!(expr)))
+    #define SRVerifyFalse2(expr, msg) ((!(expr)))
 #endif
 
 #ifdef SR_DEBUG
