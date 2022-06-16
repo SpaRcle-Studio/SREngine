@@ -178,7 +178,7 @@ void Framework::Engine::Await() {
         const auto deltaTime = now - timeStart;
         timeStart = now;
 
-        const bool windowFocused = m_window ? m_window->IsWindowFocus() : false;
+        const bool windowFocused = m_window != nullptr && m_window->IsWindowFocus();
 
         /// fixed update
         if (accumulator >= updateFrequency) {
