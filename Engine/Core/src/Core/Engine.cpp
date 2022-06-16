@@ -242,6 +242,14 @@ bool Framework::Engine::Close() {
 
     m_isRun = false;
 
+    /// должен освобождаться перед компилятором и перед окном,
+    /// так как может содержать скрипты
+    if (m_editor) {
+        m_editor->Destroy();
+        m_editor->Free();
+        m_editor = nullptr;
+    }
+
     CloseScene();
 
     if (m_input)
@@ -257,14 +265,6 @@ bool Framework::Engine::Close() {
         m_worldThread->TryJoin();
         m_worldThread->Free();
         m_worldThread = nullptr;
-    }
-
-    /// должен освобождаться перед компилятором и перед окном,
-    /// так как может содержать скрипты
-    if (m_editor) {
-        m_editor->Destroy();
-        m_editor->Free();
-        m_editor = nullptr;
     }
 
     if (m_window && m_window->IsRun()) {

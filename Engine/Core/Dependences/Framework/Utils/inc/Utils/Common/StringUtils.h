@@ -43,7 +43,12 @@ namespace SR_UTILS_NS {
             return (isalnum(c) || (c == '+') || (c == '/'));
         }
 
+        static inline bool IsBase64(unsigned char c) {
+            return (isalnum(c) || (c == '+') || (c == '/'));
+        }
+
         static std::string Base64Decode(const std::string& base64);
+        static std::string Base64Encode(const std::string& data);
 
         inline static glm::vec3 IntToColor(size_t index) noexcept {
             unsigned char r = ((index >> 16) & 0xFF);  // Extract the RR byte

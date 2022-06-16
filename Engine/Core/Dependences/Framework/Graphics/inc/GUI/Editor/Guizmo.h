@@ -25,8 +25,8 @@ namespace SR_GRAPH_NS::GUI {
         void Draw(GameObject gameObject, GameObject camera);
         void DrawTools();
 
-        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
-        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
         SR_NODISCARD bool IsTranslate() const { return m_operation == ImGuizmo::OPERATION::TRANSLATE; }
         SR_NODISCARD bool IsRotate() const { return m_operation == ImGuizmo::OPERATION::ROTATE; }

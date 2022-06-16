@@ -177,10 +177,10 @@ namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal Transform3D::Save(SavableFlags flags) const {
         SR_HTYPES_NS::Marshal marshal;
 
-        marshal.Write(GetTranslation());
-        marshal.Write(GetRotation());
-        marshal.Write(GetScale());
-        marshal.Write(GetSkew());
+        marshal.Write(GetTranslation(), Math::FVector3(0.f));
+        marshal.Write(GetRotation(), Math::FVector3(0.f));
+        marshal.Write(GetScale(), Math::FVector3(1.f));
+        marshal.Write(GetSkew(), Math::FVector3(1.f));
 
         return marshal;
     }
@@ -188,10 +188,10 @@ namespace SR_UTILS_NS {
     Transform3D *Transform3D::Load(SR_HTYPES_NS::Marshal &marshal) {
         Transform3D *transform3D = new Transform3D();
 
-        transform3D->SetTranslation(marshal.Read<Math::FVector3>());
-        transform3D->SetRotation(marshal.Read<Math::FVector3>());
-        transform3D->SetScale(marshal.Read<Math::FVector3>());
-        transform3D->SetSkew(marshal.Read<Math::FVector3>());
+        transform3D->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
+        transform3D->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
+        transform3D->SetScale(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+        transform3D->SetSkew(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
 
         return transform3D;
     }

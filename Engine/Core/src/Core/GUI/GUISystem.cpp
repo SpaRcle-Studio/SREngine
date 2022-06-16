@@ -38,64 +38,10 @@ namespace Framework::Core {
 
 using namespace Framework::Core::GUI;
 
-/*
-bool HY_ImGui_BeginMainStatusBar()
-{
-    ImGuiContext& g = *GImGui;
-    ImGuiViewportP* viewport = g.Viewports[0];
-    ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainStatusBar");
+/// drag
+bool GUISystem::BeginDockSpace() {
+    bool drag = false;
 
-    // For the main menu bar, which cannot be moved, we honor g.Style.DisplaySafeAreaPadding to ensure text can be visible on a TV set.
-    g.NextWindowData.MenuBarOffsetMinVal = ImVec2(g.Style.DisplaySafeAreaPadding.x, ImMax(g.Style.DisplaySafeAreaPadding.y - g.Style.FramePadding.y, 0.0f));
-
-    // Get our rectangle at the top of the work area
-    //__debugbreak();
-    if (menu_bar_window == NULL || menu_bar_window->BeginCount == 0)
-    {
-        // Set window position
-        // We don't attempt to calculate our height ahead, as it depends on the per-viewport font size. However menu-bar will affect the minimum window size so we'll get the right height.
-        ImVec2 menu_bar_pos = viewport->Pos + viewport->CurrWorkOffsetMin;
-        ImVec2 menu_bar_size = ImVec2(viewport->Size.x - viewport->CurrWorkOffsetMin.x + viewport->CurrWorkOffsetMax.x, 1.0f);
-        ImGui::SetNextWindowPos(menu_bar_pos);
-        ImGui::SetNextWindowSize(menu_bar_size);
-    }
-
-    // Create window
-    ImGui::SetNextWindowViewport(viewport->ID); // Enforce viewport so we don't create our own viewport when ImGuiConfigFlags_ViewportsNoMerge is set.
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 0));    // Lift normal size constraint, however the presence of a menu-bar will give us the minimum height we want.
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
-    bool is_open = ImGui::Begin("##MainStatusBar", NULL, window_flags) && ImGui::BeginMenuBar();
-    ImGui::PopStyleVar(2);
-
-    // Report our size into work area (for next frame) using actual window size
-    menu_bar_window = ImGui::GetCurrentWindow();
-    if (menu_bar_window->BeginCount == 1)
-        viewport->CurrWorkOffsetMin.y += menu_bar_window->Size.y;
-
-    g.NextWindowData.MenuBarOffsetMinVal = ImVec2(0.0f, 0.0f);
-    if (!is_open)
-    {
-        ImGui::End();
-        return false;
-    }
-    return true; //-V1020
-}
-void HY_ImGui_EndMainStatusBar()
-{
-    ImGui::EndMenuBar();
-
-    // When the user has left the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
-    // FIXME: With this strategy we won't be able to restore a NULL focus.
-    ImGuiContext& g = *GImGui;
-    if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
-        ImGui::FocusTopMostWindowUnderOne(g.NavWindow, NULL);
-
-    ImGui::End();
-}
-*/
-
-void GUISystem::BeginDockSpace() {
     const float toolbarSize = 0;
 
     ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -133,13 +79,7 @@ void GUISystem::BeginDockSpace() {
             click = Click::None;
 
         if (click == Click::Drag) {
-            auto drag = ImGui::GetMouseDragDelta();
-            auto pos = Graphics::Environment::Get()->GetBasicWindow()->GetPosition();
-
-            pos.x += drag.x;
-            pos.y += drag.y;
-
-            Graphics::Environment::Get()->GetBasicWindow()->Move(pos.x, pos.y);
+            drag = true;
         }
 
         ImGui::Text("%s", winName);
@@ -193,10 +133,8 @@ void GUISystem::BeginDockSpace() {
     ImGui::DockSpace(dockMain);
     ImGui::End();
     ImGui::PopStyleVar(3);
-}
 
-void GUISystem::EndDockSpace() {
-
+    return drag;
 }
 
 bool GUISystem::BeginWindow(const char* name) {
@@ -291,79 +229,6 @@ void GUISystem::DrawImage(
     }
     else
         window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
-}
-
-void GUISystem::DrawHierarchy(const Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene>& scene) {
-    m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
-
-    if (scene.LockIfValid()) {
-        unsigned long i = 0;
-
-        if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
-            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
-
-            scene->ForEachRootObjects([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& gm) {
-                if (gm->HasChildren()) {
-                    //bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                    //                              g_node_flags_with_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                    //                              "%s", gm->GetName().c_str());
-                    //CheckSelected(gm);
-
-                    //if (open)
-                    //    this->DrawChild(gm);
-                } else {
-                    //ImGui::TreeNodeEx((void *) (intptr_t) i,
-                    //                  g_node_flags_without_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                     //                 "%s", gm->GetName().c_str());
-
-                    CheckSelected(gm);
-                }
-                i++;
-            });
-            ImGui::TreePop();
-            ImGui::PopStyleVar();
-        }
-
-        //auto&& selected = scene->GetSelected();
-        //if (ImGui::Button("Delete") && selected.LockIfValid()) {
-        //    auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-        //    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-        //    selected.Unlock();
-        //}
-
-        scene.Unlock();
-    }
-}
-
-void GUISystem::DrawChild(const Framework::Helper::Types::SafePtr<Framework::Helper::GameObject>& root) {
-    unsigned long i = 0;
-
-    root->ForEachChild([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& child){
-        if (child->HasChildren()) {
-            //bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-            //                              g_node_flags_with_child |
-             //                             (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-            ///                             "%s", child->GetName().c_str()
-            //);
-
-            //CheckSelected(child);
-
-            //if (open)
-            //   DrawChild(child);
-        }
-        else {
-            //ImGui::TreeNodeEx((void *) (intptr_t) i,
-            //                  g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-            //                  "%s", child->GetName().c_str()
-            //);
-
-            CheckSelected(child);
-        }
-
-        i++;
-    });
-
-    ImGui::TreePop();
 }
 
 bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {

@@ -46,6 +46,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Transform3D* GetTransform() const { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
         SR_NODISCARD std::string GetName() const;
+        SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const;
         SR_NODISCARD bool IsEnabled() const { return m_isEnabled; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
@@ -62,6 +63,7 @@ namespace SR_UTILS_NS {
         void ForEachChild(const std::function<void(const Types::SafePtr<GameObject>&)>& fun) const;
         bool SetParent(const GameObject::Ptr& parent);
         void SetName(const std::string& name);
+        void SetTag(const std::string& tag);
 
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
@@ -116,7 +118,7 @@ namespace SR_UTILS_NS {
         std::list<Component*>               m_components     = std::list<Component*>();
 
         std::string                         m_name           = "Unnamed";
-        std::string                         m_tag            = "None";
+        std::string                         m_tag            = "Untagged";
 
     };
 }

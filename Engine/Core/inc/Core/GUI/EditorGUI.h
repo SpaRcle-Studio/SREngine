@@ -67,9 +67,11 @@ namespace SR_CORE_NS::GUI {
         void Update();
 
     private:
-        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
-        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
-        void OnKeyUp(const SR_UTILS_NS::KeyUpEvent& event) override;
+        void OnMouseDrag(const SR_UTILS_NS::MouseInputData* data) override;
+
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
         bool Init();
@@ -85,6 +87,7 @@ namespace SR_CORE_NS::GUI {
         std::atomic<bool>    m_loaded     = false;
 
         std::atomic<bool>    m_useDocking = true;
+        std::atomic<bool>    m_dragWindow = false;
 
         Widgets              m_widgets    = { };
         Icons                m_icons      = { };

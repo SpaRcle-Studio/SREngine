@@ -68,8 +68,12 @@ namespace SR_MATH_NS {
             );
         }
 
-        [[nodiscard]] T Distance(const Vector2 &vec) const noexcept {
+        SR_NODISCARD T Distance(const Vector2 &vec) const noexcept {
             return static_cast<T>(sqrt(pow(vec.x - x, 2) + pow(vec.y - y, 2)));
+        }
+
+        SR_NODISCARD T Length() const noexcept {
+            return Distance(Vector2<T>());
         }
 
         [[nodiscard]] Vector2 Abs() const {

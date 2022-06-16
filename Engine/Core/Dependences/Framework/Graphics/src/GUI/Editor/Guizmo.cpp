@@ -173,8 +173,8 @@ namespace SR_GRAPH_NS::GUI {
         return matrix;
     }
 
-    void Guizmo::OnKeyDown(const Helper::KeyDownEvent &event) {
-        switch (event.GetKeyCode()) {
+    void Guizmo::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+        switch (data->GetKeyCode()) {
             case Helper::KeyCode::Q: m_active = false; break;
             case Helper::KeyCode::W: SetOperation(ImGuizmo::OPERATION::TRANSLATE); break;
             case Helper::KeyCode::E: SetOperation(ImGuizmo::OPERATION::ROTATE); break;
@@ -184,10 +184,14 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
-    void Guizmo::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
-        switch (event.GetKeyCode()) {
+    void Guizmo::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
+        if (!m_transform) {
+            return;
+        }
+
+        switch (data->GetKeyCode()) {
             case Helper::KeyCode::F: {
-                m_transform->RotateAroundParent(SR_MATH_NS::FVector3(0, 1, 0));
+                //m_transform->RotateAroundParent(SR_MATH_NS::FVector3(0, 1, 0));
                 break;
             }
             default:

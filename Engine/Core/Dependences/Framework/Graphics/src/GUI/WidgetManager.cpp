@@ -59,21 +59,39 @@ namespace SR_GRAPH_NS::GUI {
         m_widgets.clear();
     }
 
-    void WidgetManager::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
+    void WidgetManager::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
-                pWidget->OnKeyDown(event);
+                pWidget->OnKeyDown(data);
         }
     }
 
-    void WidgetManager::OnKeyUp(const SR_UTILS_NS::KeyUpEvent &event) {
+    void WidgetManager::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
         SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
-                pWidget->OnKeyUp(event);
+                pWidget->OnKeyUp(data);
+        }
+    }
+
+    void WidgetManager::OnKeyPress(const SR_UTILS_NS::KeyboardInputData *data) {
+        SR_SCOPED_LOCK
+
+        for (auto&&[name, pWidget] : m_widgets) {
+            if (pWidget->IsFocused() || !m_ignoreNonFocused)
+                pWidget->OnKeyPress(data);
+        }
+    }
+
+    void WidgetManager::OnMouseDrag(const SR_UTILS_NS::MouseInputData *data) {
+        SR_SCOPED_LOCK
+
+        for (auto&&[name, pWidget] : m_widgets) {
+            if (pWidget->IsFocused() || !m_ignoreNonFocused)
+                pWidget->OnMouseDrag(data);
         }
     }
 }

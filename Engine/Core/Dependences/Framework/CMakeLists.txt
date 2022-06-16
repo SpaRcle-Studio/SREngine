@@ -3,6 +3,9 @@ project(Framework)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(SR_UTILS_STATIC_LIBRARY ON)
+set(EVOVULKAN_STATIC_LIBRARY OFF)
+
 #SET(CMAKE_CXX_FLAGS_DEBUG  "-mbig-obj -O2")
 
 if (MINGW)
@@ -67,22 +70,21 @@ add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${UTILS_SRC} ${PHYSICS
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 
+target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core EvoVulkan::lib)
+
+if (SR_UTILS_STATIC_LIBRARY)
+    target_link_libraries(Framework Utils)
+else()
+    target_link_libraries(Framework Utils::lib)
+endif()
+
 if (CYGWIN)
-    target_link_libraries(Framework
-            opengl32 glfw glew TinyObjLoader
-            "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" EvoVulkan::lib Utils::lib
-            EvoScriptCore CMP_Core) #bullet3 imgui pugixml assimp FbxLoader
+    target_link_libraries(Framework "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")
 else()
     if (MINGW)
-        target_link_libraries(Framework
-                opengl32 glfw glew
-                ${Vulkan_LIBRARY} EvoVulkan::lib Dwmapi.lib Utils::lib
-                EvoScriptCore CMP_Core) #bullet3 imgui pugixml FbxLoader assimp
+        target_link_libraries(Framework ${Vulkan_LIBRARY} Dwmapi.lib)
     else()
-        target_link_libraries(Framework
-                opengl32 glfw glew
-                ${Vulkan_LIBRARY} EvoVulkan::lib Utils::lib
-                EvoScriptCore CMP_Core) #bullet3 imgui pugixml FbxLoader assimp
+        target_link_libraries(Framework ${Vulkan_LIBRARY})
     endif()
 endif()
 

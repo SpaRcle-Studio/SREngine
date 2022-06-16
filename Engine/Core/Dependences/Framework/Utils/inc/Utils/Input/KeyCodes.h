@@ -13,7 +13,7 @@ namespace SR_UTILS_NS {
     };
 
     enum class KeyState : uint8_t {
-        Down, Up, Press
+        None, Down, Up, Press
     };
 
     enum class MouseCode : uint8_t {

@@ -114,6 +114,7 @@ namespace SR_WORLD_NS {
         Chunk* GetCurrentChunk() const;
 
         Types::SafePtr<GameObject> FindByComponent(const std::string& name);
+        Types::SafePtr<GameObject> Find(const std::string& name);
 
         virtual SR_HTYPES_NS::SafePtr<GameObject> InstanceFromFile(const std::string& path);
         virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(const std::string& name);

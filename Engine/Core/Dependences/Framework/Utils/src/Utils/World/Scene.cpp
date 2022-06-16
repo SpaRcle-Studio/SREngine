@@ -478,4 +478,16 @@ namespace SR_WORLD_NS {
         SR_INFO("Scene::Reload() : reload scene...");
         return ReloadConfig() && ReloadChunks();
     }
+
+    Types::SafePtr<GameObject> Scene::Find(const std::string &name) {
+        for (auto&& object : m_gameObjects) {
+            /// блокировать объекты не нужно, так как уничтожиться они могут только из сцены
+            /// Но стоит предусмотреть защиту от одновременного изменения имени
+            if (object->GetName() == name) {
+                return object;
+            }
+        }
+
+        return SafePtr<GameObject>(nullptr);
+    }
 }

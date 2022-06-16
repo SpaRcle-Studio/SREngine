@@ -105,8 +105,6 @@ namespace Framework::Core::GUI {
             ImGui::Text("%s", text.c_str());
         }
 
-        void DrawChild(const Helper::Types::SafePtr<Helper::GameObject>& root);
-        void DrawHierarchy(const Helper::Types::SafePtr<Helper::World::Scene>& scene);
         void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
 
@@ -121,8 +119,7 @@ namespace Framework::Core::GUI {
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmo(Graphics::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
         void DrawGuizmoTools();
-        void BeginDockSpace();
-        void EndDockSpace();
+        bool BeginDockSpace();
         bool BeginWindow(const char* name);
         void EndWindow();
         bool BeginChildWindow(const char* name);

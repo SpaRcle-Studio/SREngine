@@ -21,8 +21,8 @@ namespace SR_CORE_NS::GUI {
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
-        void OnKeyDown(const Helper::KeyDownEvent& event) override;
-        void OnKeyUp(const Helper::KeyUpEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
         SR_NODISCARD std::set<Helper::GameObject::Ptr> GetSelected() const;
 

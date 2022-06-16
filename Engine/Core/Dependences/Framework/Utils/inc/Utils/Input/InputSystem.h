@@ -10,7 +10,6 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    // TODO: make singleton!
     class SR_DLL_EXPORT Input : public Singleton<Input> {
         friend class Singleton<Input>;
 
@@ -30,6 +29,8 @@ namespace SR_UTILS_NS {
         void Reload();
 
         SR_MATH_NS::FVector2 GetMouseDrag();
+        SR_MATH_NS::FVector2 GetMousePos() const { return m_mouse; }
+        SR_MATH_NS::FVector2 GetPrevMousePos() const { return m_mousePrev; }
 
         int32_t GetMouseWheel();
         int32_t DebugKey();

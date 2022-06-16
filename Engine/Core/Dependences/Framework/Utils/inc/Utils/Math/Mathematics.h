@@ -162,6 +162,7 @@ namespace SR_MATH_NS {
 }
 
 #define SR_EQUALS(a, b) (Framework::Helper::Math::is_equal_approx(a, b))
+#define SR_EQUALS_T(a, b, tolerance) (Framework::Helper::Math::is_equal_approx(a, b, tolerance))
 #define Deg180InRad ((Framework::Helper::Math::Unit)M_PI)
 #define Deg90InRad  ((Framework::Helper::Math::Unit)RAD(90.0))
 

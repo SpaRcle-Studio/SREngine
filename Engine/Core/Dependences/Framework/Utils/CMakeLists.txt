@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 3.16)
 project(Utils)
 
 set(CMAKE_CXX_STANDARD 20)
+set(ASSIMP_BUILD_ASSIMP_VIEW OFF)
 
 add_subdirectory(libs/glm)
 add_subdirectory(libs/assimp)
 
-if (UTILS_STATIC_LIBRARY)
+if (SR_UTILS_STATIC_LIBRARY)
     add_library(Utils STATIC Utils.cxx)
 
     if (CYGWIN)

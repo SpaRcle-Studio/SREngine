@@ -20,6 +20,8 @@
 
 #include "../Utils/src/Utils/Input/InputSystem.cpp"
 #include "../Utils/src/Utils/Input/InputDispatcher.cpp"
+#include "../Utils/src/Utils/Input/InputDevice.cpp"
+#include "../Utils/src/Utils/Input/InputHandler.cpp"
 
 #include "../Utils/src/Utils/Math/Matrix3x3.cpp"
 #include "../Utils/src/Utils/Math/Quaternion.cpp"

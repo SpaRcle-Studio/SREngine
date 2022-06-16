@@ -6,8 +6,10 @@
 #define SRENGINE_INPUTEVENTS_H
 
 #include <Utils/Input/KeyCodes.h>
+#include <Utils/Math/Vector2.h>
 
 namespace SR_UTILS_NS {
+    /*
     class SR_DLL_EXPORT KeyPressEvent {
     public:
         KeyPressEvent(KeyCode code)
@@ -47,6 +49,23 @@ namespace SR_UTILS_NS {
 
     };
 
+    class MouseDragEvent {
+    public:
+        MouseDragEvent(MouseCode code)
+            : m_code(code)
+        { }
+
+        SR_NODISCARD MouseCode GetKeyCode() const { return m_code; }
+
+    public:
+        SR_MATH_NS::FVector2 m_prevPos;
+        SR_MATH_NS::FVector2 m_currPos;
+
+    private:
+        MouseCode m_code;
+
+    };
+
     class MouseDownEvent {
     public:
         MouseDownEvent(MouseCode code)
@@ -71,7 +90,7 @@ namespace SR_UTILS_NS {
     private:
         MouseCode m_code;
 
-    };
+    };*/
 }
 
 #endif //SRENGINE_INPUTEVENTS_H

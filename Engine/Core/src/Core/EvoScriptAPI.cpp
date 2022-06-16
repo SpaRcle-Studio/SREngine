@@ -402,8 +402,6 @@ namespace Framework {
 
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, BeginMenuBar, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndMenuBar, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, BeginDockSpace, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndDockSpace, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndWindow, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndChildWindow, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, GetWindowSize, IVector2)
@@ -412,7 +410,6 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawTexture, void, ESArg4(IVector2 win, IVector2 img, uint32_t id, bool center), ESArg4(win, img, id, center))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawHierarchy, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawWorldEdit, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawInspector, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, SetGuizmoTool, void, ESArg1(uint8_t id), ESArg1(id))

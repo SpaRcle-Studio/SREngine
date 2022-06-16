@@ -59,6 +59,14 @@ namespace SR_HTYPES_NS {
         return marshal;
     }
 
+    Marshal Marshal::LoadFromBase64(const std::string &base64) {
+        return LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(base64));
+    }
+
+    std::string Marshal::ToBase64() const {
+        return SR_UTILS_NS::StringUtils::Base64Encode(ToString());
+    }
+
     std::string MarshalEncodeNode::ToString() const {
         return Save().str();
     }

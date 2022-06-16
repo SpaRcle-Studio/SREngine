@@ -12,7 +12,7 @@
 #include <Window/Window.h>
 #include <Render/Camera.h>
 
-void SceneViewer::SetCamera(SR_UTILS_NS::GameObject::Ptr camera) {
+void SceneViewer::SetCamera(const GameObjectPtr& camera) {
     m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
         m_translation = camera->GetTransform()->GetTranslation();
         m_rotation = camera->GetTransform()->GetRotation();
@@ -70,7 +70,6 @@ SceneViewer::SceneViewer(Graphics::Window* window, Hierarchy* hierarchy)
 
 SceneViewer::~SceneViewer() {
     SetCameraActive(false);
-
     SR_SAFE_DELETE_PTR(m_guizmo);
 }
 
@@ -169,7 +168,6 @@ void SceneViewer::InitCamera() {
     Helper::GameObject::Ptr camera;
     if (m_scene.LockIfValid()) {
         camera = m_scene->Instance("Editor camera");
-        //m_scene->SetObserver(camera);
         m_scene.Unlock();
     }
     else
@@ -204,15 +202,15 @@ void SceneViewer::SetCameraActive(bool value) {
         }
     }
     else
-        SetCamera(GameObject());
+        SetCamera(GameObjectPtr());
 
     m_window->EndSync();
 }
 
-void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
-    m_guizmo->OnKeyDown(event);
+void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+    m_guizmo->OnKeyDown(data);
 }
 
-void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
-    m_guizmo->OnKeyPress(event);
+void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
+    m_guizmo->OnKeyPress(data);
 }

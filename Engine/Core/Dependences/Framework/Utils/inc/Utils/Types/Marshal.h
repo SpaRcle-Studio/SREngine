@@ -292,10 +292,12 @@ namespace SR_HTYPES_NS {
 
         static Marshal Load(const Path& path);
         static Marshal LoadFromMemory(const std::string& data);
+        static Marshal LoadFromBase64(const std::string& base64);
 
         SR_NODISCARD bool Valid() const { return BytesCount() > 0; }
         SR_NODISCARD uint64_t BytesCount() const { return m_size; }
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD std::string ToBase64() const;
 
         void Append(Marshal&& marshal) {
             if (marshal.m_size > 0) {
@@ -329,6 +331,16 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        template<typename T> void Write(const T& value, const T& def) {
+            if (value == def) {
+                Write<bool>(true);
+            }
+            else {
+                Write<bool>(false);
+                Write<T>(value);
+            }
+        }
+
         template<typename T> T View(uint64_t offset) const {
             T value = T();
 
@@ -351,6 +363,14 @@ namespace SR_HTYPES_NS {
             }
             else
                 return MarshalUtils::LoadValue<std::stringstream, T>(m_stream);
+        }
+
+        template<typename T> T Read(const T& def) {
+            if (Read<bool>()) {
+                return def;
+            }
+
+            return Read<T>();
         }
 
     private:

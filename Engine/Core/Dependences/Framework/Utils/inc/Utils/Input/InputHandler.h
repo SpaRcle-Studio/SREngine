@@ -8,9 +8,10 @@
 #include <Utils/Input/InputEvents.h>
 #include <Utils/Events/Event.h>
 #include <Utils/Input/InputSystem.h>
+#include <Utils/Input/InputDevice.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT InputHandler : public Event<KeyCode, MouseCode, KeyState> {
+    class SR_DLL_EXPORT InputHandler : public Event<InputDeviceData*> {
     protected:
         InputHandler()
             : Event(typeid(InputHandler).name())
@@ -19,13 +20,14 @@ namespace SR_UTILS_NS {
         ~InputHandler() override = default;
 
     public:
-        virtual void OnMousePress(const MouseDownEvent& event) { }
-        virtual void OnMouseDown(const MouseDownEvent& event) { }
-        virtual void OnMouseUp(const MouseUpEvent& event) { }
+        virtual void OnMouseDrag(const MouseInputData* data) { }
+        virtual void OnMousePress(const MouseInputData* data) { }
+        virtual void OnMouseDown(const MouseInputData* data) { }
+        virtual void OnMouseUp(const MouseInputData* data) { }
 
-        virtual void OnKeyPress(const KeyPressEvent& event) { }
-        virtual void OnKeyDown(const KeyDownEvent& event) { }
-        virtual void OnKeyUp(const KeyUpEvent& event) { }
+        virtual void OnKeyPress(const KeyboardInputData* data) { }
+        virtual void OnKeyDown(const KeyboardInputData* data) { }
+        virtual void OnKeyUp(const KeyboardInputData* data) { }
 
     protected:
         bool IsKeyPressed(KeyCode code) {
@@ -33,23 +35,11 @@ namespace SR_UTILS_NS {
         }
 
     private:
-        void Trigger(KeyCode key, MouseCode mouse, KeyState state) override {
-            if (key != KeyCode::None) {
-                switch (state) {
-                    case KeyState::Press: OnKeyPress(key); break;
-                    case KeyState::Down: OnKeyDown(key); break;
-                    case KeyState::Up: OnKeyUp(key); break;
-                }
-            }
+        void Trigger(InputDeviceData* inputDeviceData) override;
 
-            if (mouse != MouseCode::None) {
-                switch (state) {
-                    case KeyState::Press: OnMousePress(mouse); break;
-                    case KeyState::Down: OnMouseDown(mouse); break;
-                    case KeyState::Up: OnMouseUp(mouse); break;
-                }
-            }
-        }
+        void TriggerKeyboard(KeyboardInputData* keyboardInputData);
+        void TriggerMouse(MouseInputData* mouseInputData);
+
     };
 }
 

@@ -23,13 +23,13 @@ Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
 
     m_editor = ax::NodeEditor::CreateEditor(config);
 
-    LoadConfig();
+    //LoadConfig();
 
-    AddNode(CreateBlueprint("Branch"));
+    //AddNode(CreateBlueprint("Branch"));
 
-    AddNode(CreateBlueprint("X"));
+    //AddNode(CreateBlueprint("X"));
 
-    AddNode(CreateBlueprint("OnStart"));
+    //AddNode(CreateBlueprint("OnStart"));
 
     /*AddNode(Node("Node A")
             .AddInput(Pin("Pin AAAA", PinType::Flow))

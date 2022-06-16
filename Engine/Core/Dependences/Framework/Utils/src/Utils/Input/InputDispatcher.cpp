@@ -5,22 +5,68 @@
 #include <Utils/Input/InputDispatcher.h>
 #include <Utils/Input/InputHandler.h>
 
-void SR_UTILS_NS::InputDispatcher::Check() {
-    for (const auto& code : KeyCodes) {
-        if (Input::Instance().GetKeyDown(code))
-            Dispatch<InputHandler>(code, MouseCode::None, KeyState::Down);
-        else if (Input::Instance().GetKeyUp(code))
-            Dispatch<InputHandler>(code, MouseCode::None, KeyState::Up);
-        else if (Input::Instance().GetKey(code))
-            Dispatch<InputHandler>(code, MouseCode::None, KeyState::Press);
+namespace SR_UTILS_NS {
+    InputDispatcher::InputDispatcher()
+        : Super()
+    {
+        m_keyboardData = new KeyboardInputData();
+        m_mouseData = new MouseInputData();
     }
 
-    for (const auto& code : MouseCodes) {
-        if (Input::Instance().GetMouseDown(code))
-            Dispatch<InputHandler>(KeyCode::None, code, KeyState::Down);
-        else if (Input::Instance().GetMouseUp(code))
-            Dispatch<InputHandler>(KeyCode::None, code, KeyState::Up);
-        else if (Input::Instance().GetMouse(code))
-            Dispatch<InputHandler>(KeyCode::None, code, KeyState::Press);
+    InputDispatcher::~InputDispatcher() {
+        SR_SAFE_DELETE_PTR(m_keyboardData);
+        SR_SAFE_DELETE_PTR(m_mouseData);
+    }
+
+    void InputDispatcher::Check() {
+        CheckKeyboard();
+        CheckMouse();
+    }
+
+    void InputDispatcher::CheckKeyboard() {
+        auto&& input = Input::Instance();
+
+        for (auto&& code : KeyCodes) {
+            if (input.GetKeyDown(code)) {
+                m_keyboardData->m_state = KeyState::Down;
+            }
+            else if (input.GetKeyUp(code)) {
+                m_keyboardData->m_state = KeyState::Up;
+            }
+            else if (input.GetKey(code)) {
+                m_keyboardData->m_state = KeyState::Press;
+            }
+            else
+                continue;
+
+            m_keyboardData->m_code = code;
+
+            Dispatch<InputHandler>(dynamic_cast<InputDeviceData*>(m_keyboardData));
+        }
+    }
+
+    void InputDispatcher::CheckMouse() {
+        auto&& input = Input::Instance();
+
+        for (auto&& code : MouseCodes) {
+            if (input.GetMouseDown(code)) {
+                m_mouseData->m_state = KeyState::Down;
+            }
+            else if (input.GetMouseUp(code)) {
+                m_mouseData->m_state = KeyState::Up;
+            }
+            else if (input.GetMouse(code)) {
+                m_mouseData->m_state = KeyState::Press;
+            }
+            else
+                continue;
+
+            m_mouseData->m_code = code;
+            m_mouseData->m_wheel = input.GetMouseWheel();
+            m_mouseData->m_position = input.GetMousePos();
+            m_mouseData->m_prevPos = input.GetPrevMousePos();
+
+            Dispatch<InputHandler>(dynamic_cast<InputDeviceData*>(m_mouseData));
+        }
     }
 }

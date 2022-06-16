@@ -169,6 +169,11 @@ namespace SR_UTILS_NS {
         m_scene->OnChanged();
     }
 
+    void GameObject::SetTag(const std::string &tag) {
+        m_tag = tag;
+        m_scene->OnChanged();
+    }
+
     bool GameObject::Contains(const Types::SafePtr<GameObject> &gameObject) {  // TODO: add security multi-threading
         return m_children.count(gameObject) == 1;
     }
@@ -346,7 +351,14 @@ namespace SR_UTILS_NS {
 
         marshal.Write(IsEnabled());
         marshal.Write(m_name);
-        marshal.Write(m_tag);
+
+        if (HasTag()) {
+            marshal.Write(true);
+            marshal.Write(m_tag);
+        }
+        else {
+            marshal.Write(false);
+        }
 
         marshal.Append(m_transform->Save(flags));
 
@@ -421,5 +433,9 @@ namespace SR_UTILS_NS {
         }
 
         return destination->AddChild(*this);
+    }
+
+    bool GameObject::HasTag() const {
+        return m_tag != "Untagged";
     }
 }

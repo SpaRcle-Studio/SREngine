@@ -86,8 +86,12 @@ void EditorGUI::Draw() {
             return;
     }
 
+
     if (m_useDocking) {
-        GUISystem::Instance().BeginDockSpace();
+        m_dragWindow = GUISystem::Instance().BeginDockSpace();
+    }
+    else {
+        m_dragWindow = false;
     }
 
     WidgetManager::Draw();
@@ -152,21 +156,37 @@ void EditorGUI::Update() {
     GetWindow<SceneViewer>()->Update();
 }
 
-void EditorGUI::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
-    WidgetManager::OnKeyDown(event);
+void EditorGUI::OnMouseDrag(const SR_UTILS_NS::MouseInputData* data) {
+    if (m_dragWindow) {
+        auto&& drag = data->GetDrag();
+        auto&& pos = Graphics::Environment::Get()->GetBasicWindow()->GetPosition();
+
+        pos += drag;
+
+        Graphics::Environment::Get()->GetBasicWindow()->Move(pos.x, pos.y);
+
+        //SR_LOG(SR_UTILS_NS::Format("[%f, %f]", drag.x, drag.y));
+    }
+
+    WidgetManager::OnMouseDrag(data);
 }
 
-void EditorGUI::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
-    WidgetManager::OnKeyPress(event);
+void EditorGUI::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+    WidgetManager::OnKeyDown(data);
 }
 
-void EditorGUI::OnKeyUp(const SR_UTILS_NS::KeyUpEvent &event) {
-    WidgetManager::OnKeyUp(event);
+void EditorGUI::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
+    WidgetManager::OnKeyPress(data);
+}
+
+void EditorGUI::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
+    WidgetManager::OnKeyUp(data);
 }
 
 void EditorGUI::CloseAllWindows() {
     for (auto& [id, widget] : m_widgets)
         widget->Close();
 }
+
 
 
