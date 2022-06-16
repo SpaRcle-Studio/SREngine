@@ -83,12 +83,16 @@ namespace SR_UTILS_NS::Platform {
     }
 
     uint64_t GetProcessUsedMemory() {
+#ifdef SR_MINGW
+#else
         PROCESS_MEMORY_COUNTERS pmc;
         BOOL result = GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS *) &pmc, sizeof(pmc));
-        if (result)
+        if (result) {
             return static_cast<uint64_t>(pmc.PeakWorkingSetSize);
-        else
-            return -1;
+        }
+#endif
+
+        return -1;
     }
 
     void SetThreadPriority(void *nativeHandle, ThreadPriority priority) {
