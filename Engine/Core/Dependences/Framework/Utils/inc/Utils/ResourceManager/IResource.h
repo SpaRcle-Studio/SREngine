@@ -38,7 +38,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD float_t GetLifetime() const { return m_lifetime; }
         SR_NODISCARD const char *GetResourceName() const { return m_resourceName; }
         SR_NODISCARD std::string GetResourceId() const { return m_resourceId; }
-        SR_NODISCARD virtual std::string GetResourcePath() const { return m_resourceId; }
+        SR_NODISCARD virtual Path GetResourcePath() const { return m_resourceId; }
         SR_NODISCARD virtual uint64_t GetResourceHash() const { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
 

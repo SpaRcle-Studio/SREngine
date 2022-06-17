@@ -8,6 +8,8 @@
 #include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
+    /// TODO: use glm?
+
     struct Vec2 {
         float_t x, y;
     };

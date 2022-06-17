@@ -67,9 +67,7 @@ namespace SR_UTILS_NS {
 
         volatile static bool enableBreakPoints = true;
         if (type == Debug::Type::Assert && IsRunningUnderDebugger() && enableBreakPoints) {
-        #if defined(SR_WIN32) and defined(SR_MSVC)
-            __debugbreak();
-        #endif
+            Breakpoint();
         }
     }
 

@@ -17,6 +17,8 @@
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 
+#include "src/Core/Settings/EditorSettings.cpp"
+
 #include "src/Core/World/VisualChunk.cpp"
 #include "src/Core/World/VisualRegion.cpp"
 #include "src/Core/World/World.cpp"

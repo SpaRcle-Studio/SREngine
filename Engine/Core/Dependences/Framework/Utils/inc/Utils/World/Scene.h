@@ -61,6 +61,7 @@ namespace SR_WORLD_NS {
     typedef std::unordered_map<Math::IVector3, Region*> Regions;
 
     class SR_DLL_EXPORT SceneAllocator : public SR_UTILS_NS::Singleton<SceneAllocator> {
+        friend class SR_UTILS_NS::Singleton<SceneAllocator>;
         typedef std::function<Scene*(void)> Allocator;
         using ScenePtr = Types::SafePtr<Scene>;
     protected:

@@ -271,11 +271,13 @@ namespace SR_GTYPES_NS {
     void* Texture::GetDescriptor() {
         SR_SCOPED_LOCK
 
-        if (!IsCalculated()) {
+        auto&& textureId = GetId();
+
+        if (textureId == SR_ID_INVALID) {
             return nullptr;
         }
 
-        return Environment::Get()->GetDescriptorSetFromTexture(GetId(), true);
+        return Environment::Get()->GetDescriptorSetFromTexture(textureId, true);
     }
 
     SR_UTILS_NS::Path Framework::Graphics::Types::Texture::GetAssociatedPath() const {

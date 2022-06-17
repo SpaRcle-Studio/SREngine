@@ -15,6 +15,10 @@ namespace SR_GRAPH_NS {
         m_newMeshes.reserve(500);
     }
 
+    Render::~Render() {
+        SRAssert(IsClean());
+    }
+
     bool Render::Create(Window* window) {
         if (m_isCreate) {
             SR_ERROR("Render::Create() : render already create!");
@@ -85,15 +89,6 @@ namespace SR_GRAPH_NS {
         data.append("\n\tNew meshes       : " + std::to_string(m_newMeshes.size()));
         data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
         SR_GRAPH_LOG("Render::Close() : close render..." + data);
-
-        for (auto& shader : m_shaders) {
-            if (shader) {
-                shader->RemoveUsePoint();
-                shader->FreeVideoMemory();
-                shader->Destroy();
-                shader = nullptr;
-            }
-        }
 
         if (m_grid) {
             m_grid->Free();
@@ -280,32 +275,6 @@ namespace SR_GRAPH_NS {
 
     void Render::SetCurrentCamera(Framework::Graphics::Camera *camera)  {
         m_currentCamera = camera;
-    }
-
-    bool Render::InsertShader(uint32_t id, Shader* shader) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (id >= m_shaders.size())
-            m_shaders.resize(id + 1);
-
-        if (m_shaders[id]) {
-            SR_ERROR("Render::InsertShader() : the specified place is already occupied! \n\tID: " + std::to_string(id));
-            return false;
-        }
-
-        shader->AddUsePoint();
-        m_shaders[id] = shader;
-
-        return true;
-    }
-
-    Shader *Render::FindShader(uint32_t id) const {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (m_shaders.size() <= id || !m_shaders[id])
-            return nullptr;
-
-        return m_shaders[id];
     }
 
     void Render::Synchronize() {

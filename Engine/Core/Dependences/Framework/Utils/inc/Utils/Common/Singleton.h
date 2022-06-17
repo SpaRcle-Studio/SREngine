@@ -6,6 +6,8 @@
 #define GAMEENGINE_SINGLETON_H
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Breakpoint.h>
+#include <Utils/Common/Stacktrace.h>
 
 namespace SR_UTILS_NS {
     template<typename T> class Singleton;
@@ -23,21 +25,25 @@ namespace SR_UTILS_NS {
 
     template<typename T> class SR_DLL_EXPORT Singleton : public NonCopyable {
     protected:
-        Singleton()
-            : m_instance(nullptr)
-        { }
-
+        Singleton() = default;
         ~Singleton() override = default;
 
     public:
-        SR_MAYBE_UNUSED static void Destroy() {
+        SR_MAYBE_UNUSED static void DestroySingleton() {
             auto&& singleton = GetSingleton();
 
             if (!(*singleton)) {
                 return;
             }
 
-            (*singleton)->InternalDestroy();
+            if (!(*singleton)->IsSingletonCanBeDestroyed()) {
+                std::cerr << "Singleton can't be destroyed!\n";
+                std::cerr << GetStacktrace() << std::endl;
+                Breakpoint();
+                return;
+            }
+
+            (*singleton)->OnSingletonDestroy();
 
             delete *singleton;
             (*singleton) = nullptr;
@@ -47,10 +53,11 @@ namespace SR_UTILS_NS {
             auto&& singleton = GetSingleton();
 
             if (!(*singleton)) {
-                *singleton = new Singleton<T>();
+                *singleton = new T();
+                (*singleton)->InitSingleton();
             }
 
-            return (*singleton)->InternalInstance();
+            return *static_cast<T*>(*singleton);
         }
 
         SR_MAYBE_UNUSED static void LockSingleton() {
@@ -67,38 +74,17 @@ namespace SR_UTILS_NS {
 
     protected:
         virtual void OnSingletonDestroy() { }
+        virtual void InitSingleton() { }
+        virtual bool IsSingletonCanBeDestroyed() const { return true; }
 
     private:
         static Singleton<T>** GetSingleton() {
             void** p = GetSingletonManager()->GetSingleton(typeid(Singleton<T>).hash_code());
-
             return reinterpret_cast<Singleton<T>**>(p);
-        }
-
-        T& InternalInstance() {
-            if (!m_instance) {
-                m_instance = new T();
-            }
-
-            return *m_instance;
-        }
-
-        void InternalDestroy() {
-            if (!m_instance) {
-                return;
-            }
-
-            m_instance->OnSingletonDestroy();
-
-            delete m_instance;
-            m_instance = nullptr;
         }
 
     protected:
         mutable std::recursive_mutex m_mutex;
-
-    private:
-        T* m_instance;
 
     };
 }

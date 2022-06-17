@@ -20,7 +20,7 @@ namespace SR_GTYPES_NS {
     { }
 
     Skybox::~Skybox() {
-        SetShader(nullptr);
+        SRAssert(!m_shader);
         SRAssert(m_cubeMap == SR_ID_INVALID);
 
         for (auto&& img : m_data) {
@@ -214,6 +214,8 @@ namespace SR_GTYPES_NS {
         if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free descriptor set!");
         }
+
+        SetShader(nullptr);
 
         m_isCalculated = false;
 

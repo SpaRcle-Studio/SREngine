@@ -20,7 +20,7 @@ namespace SR_UTILS_NS {
         ~InputHandler() override = default;
 
     public:
-        virtual void OnMouseDrag(const MouseInputData* data) { }
+        virtual void OnMouseMove(const MouseInputData* data) { }
         virtual void OnMousePress(const MouseInputData* data) { }
         virtual void OnMouseDown(const MouseInputData* data) { }
         virtual void OnMouseUp(const MouseInputData* data) { }

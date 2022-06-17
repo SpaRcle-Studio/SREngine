@@ -28,42 +28,16 @@ namespace SR_GTYPES_NS {
             return;
 
         auto &&shader = m_material->GetShader();
+        auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-                SR_ERROR("DebugWireframeMesh::FreeVideoMemory() : failed to free descriptor set!");
-            }
+            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
 
-            if (m_UBO >= 0 && !m_env->FreeUBO(&m_UBO)) {
-                SR_ERROR("DebugWireframeMesh::FreeVideoMemory() : failed to free uniform buffer object!");
-            }
-
-            if (shader->GetUBOBlockSize() > 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform}); m_descriptorSet < 0) {
-                    SR_ERROR("DebugWireframeMesh::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true;
-                    return;
-                }
-
-                if (m_UBO = m_env->AllocateUBO(shader->GetUBOBlockSize()); m_UBO < 0) {
-                    SR_ERROR("DebugWireframeMesh::DrawVulkan() : failed to allocate uniform buffer object!");
-                    m_hasErrors = true;
-                    return;
-                }
-
-                m_env->BindUBO(m_UBO);
-                m_env->BindDescriptorSet(m_descriptorSet);
-            }
-            else if (shader->GetSamplersCount() > 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::CombinedImage}); m_descriptorSet < 0) {
-                    SR_ERROR("DebugWireframeMesh::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true;
-                    return;
-                }
-                m_env->BindDescriptorSet(m_descriptorSet);
+            if (m_virtualUBO != SR_ID_INVALID) {
+                uboManager.BindUBO(m_virtualUBO);
             }
             else
                 m_env->ResetDescriptorSet();
@@ -74,9 +48,7 @@ namespace SR_GTYPES_NS {
             m_material->UseSamplers();
         }
 
-        if (m_descriptorSet != SR_ID_INVALID) {
-            m_env->BindDescriptorSet(m_descriptorSet);
-        }
+        uboManager.BindUBO(m_virtualUBO);
 
         m_env->DrawIndices(m_countIndices);
     }
@@ -93,20 +65,17 @@ namespace SR_GTYPES_NS {
             return true;
         }
 
-        if (!IsCanCalculate())
+        if (!IsCanCalculate()) {
             return false;
+        }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("DebugWireframeMesh::Calculate() : calculating \"" + m_geometryName + "\"...");
         }
 
-        ///TODO: if (!m_vertices.empty())
-        ///    m_barycenter = Vertices::Barycenter(m_vertices);
-        ///SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
-
         auto vertices = Vertices::CastVertices<Vertices::SimpleVertex>(m_rawMesh->GetVertices(m_meshId));
 
-        if (!CalculateVBO<Vertices::Type::SimpleVertex>(vertices.data()))
+        if (!CalculateVBO<Vertices::Type::SimpleVertex>(vertices))
             return false;
 
         return IndexedMesh::Calculate();

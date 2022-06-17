@@ -29,6 +29,8 @@
 
 #include "../Utils/src/Utils/TaskManager/TaskManager.cpp"
 
+#include "../Utils/src/Utils/Settings.cpp"
+
 #include "../Utils/src/Utils/ResourceManager/IResource.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceInfo.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourcesHolder.cpp"

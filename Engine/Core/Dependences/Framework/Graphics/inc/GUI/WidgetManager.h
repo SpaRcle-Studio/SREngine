@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS::GUI {
     public:
         Widgets& GetWidgets() { return m_widgets; }
 
-        void OnMouseDrag(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;

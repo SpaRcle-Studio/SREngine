@@ -56,8 +56,7 @@ namespace SR_UTILS_NS {
         /** \brief Init resource manager */
         bool Init(const std::string& resourcesFolder);
 
-        /** \brief Stop resource manager */
-        bool Stop();
+        void OnSingletonDestroy() override;
 
         void PrintMemoryDump();
 

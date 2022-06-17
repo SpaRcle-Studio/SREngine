@@ -86,12 +86,12 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
-    void WidgetManager::OnMouseDrag(const SR_UTILS_NS::MouseInputData *data) {
+    void WidgetManager::OnMouseMove(const SR_UTILS_NS::MouseInputData *data) {
         SR_SCOPED_LOCK
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
-                pWidget->OnMouseDrag(data);
+                pWidget->OnMouseMove(data);
         }
     }
 }

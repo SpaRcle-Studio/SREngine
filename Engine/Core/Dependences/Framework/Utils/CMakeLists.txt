@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.16)
 project(Utils)
 
 set(CMAKE_CXX_STANDARD 20)
+
+set(ASSIMP_BUILD_TESTS OFF)
 set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
+set(ASSIMP_INSTALL OFF)
 set(ASSIMP_BUILD_ASSIMP_VIEW OFF)
 
 add_subdirectory(libs/glm)

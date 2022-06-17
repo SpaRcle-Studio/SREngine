@@ -21,8 +21,8 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool ResourceManager::Stop() {
-        SR_INFO("ResourceManager::Stop() : stopping resource manager...");
+    void ResourceManager::OnSingletonDestroy() {
+        SR_INFO("ResourceManager::OnSingletonDestroy() : stopping resource manager...");
 
         PrintMemoryDump();
 
@@ -30,7 +30,7 @@ namespace SR_UTILS_NS {
 
         Synchronize(true);
 
-        SR_INFO("ResourceManager::Stop() : stopping thread...");
+        SR_INFO("ResourceManager::OnSingletonDestroy() : stopping thread...");
 
         if (m_thread) {
             m_thread->TryJoin();
@@ -39,8 +39,6 @@ namespace SR_UTILS_NS {
         }
 
         PrintMemoryDump();
-
-        return true;
     }
 
     bool ResourceManager::Destroy(IResource *resource) {
@@ -247,6 +245,8 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::CheckResourceHashes() {
+        SR_LOCK_GUARD
+
         for (auto&& [_, type] : m_resources) {
             for (auto&& [path, info] : type.GetInfo()) {
                 for (auto&& pResource : info.m_loaded) {

@@ -186,12 +186,13 @@ namespace SR_GRAPH_NS::Types {
 
     bool Mesh::FreeVideoMemory() {
         if (m_pipeline == PipeLine::Vulkan) {
-            if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-                SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
-            }
+            //if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
+            //    SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
+            //}
 
-            if (m_UBO >= 0 && !m_env->FreeUBO(&m_UBO)) {
-                SR_ERROR("Mesh::FreeVideoMemory() : failed to free uniform buffer object!");
+            auto&& uboManager = Memory::UBOManager::Instance();
+            if (m_virtualUBO >= 0 && !uboManager.FreeUBO(&m_virtualUBO)) {
+                SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
             }
         }
 
@@ -282,7 +283,7 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    std::string Mesh::GetResourcePath() const {
+    SR_UTILS_NS::Path Mesh::GetResourcePath() const {
         return SR_UTILS_NS::StringUtils::Substring(GetResourceId(), '|', 1);
     }
 

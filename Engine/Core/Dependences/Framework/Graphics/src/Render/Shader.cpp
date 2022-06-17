@@ -435,7 +435,9 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        sampler = sampler ? sampler : SR_GTYPES_NS::Texture::GetNone();
+        if (!sampler) {
+            sampler = SR_GTYPES_NS::Texture::GetNone();
+        }
 
         if (!sampler->HasRender()) {
             SRAssert(m_render);

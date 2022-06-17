@@ -3,9 +3,6 @@ project(Framework)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SR_UTILS_STATIC_LIBRARY OFF)
-set(EVOVULKAN_STATIC_LIBRARY OFF)
-
 #SET(CMAKE_CXX_FLAGS_DEBUG  "-mbig-obj -O2")
 
 if (MINGW)

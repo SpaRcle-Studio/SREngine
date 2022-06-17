@@ -8,7 +8,7 @@
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager() {
-        //m_UBOs.max_load_factor(0.9f);
+        m_virtualTable.max_load_factor(0.9f);
         m_virtualTable.reserve(5000);
     }
 
@@ -54,8 +54,6 @@ namespace SR_GRAPH_NS::Memory {
             return false;
         }
 
-        *virtualUbo = SR_ID_INVALID;
-
         auto&& pIt = m_virtualTable.find(*virtualUbo);
         if (pIt == std::end(m_virtualTable)) {
             SRHalt("UBOManager::FreeUBO() : ubo not found!");
@@ -67,17 +65,12 @@ namespace SR_GRAPH_NS::Memory {
         auto&& info = pIt->second;
         for (auto&& [pCamera, data] : info.m_data) {
             auto&& [ubo, descriptor] = data;
-
-            if (ubo != SR_ID_INVALID && !env->FreeUBO(&ubo)) {
-                SR_ERROR("UBOManager::FreeUBO() : failed to free ubo!");
-            }
-
-            if (descriptor != SR_ID_INVALID && !env->FreeDescriptorSet(&descriptor)) {
-                SR_ERROR("UBOManager::FreeUBO() : failed to free descriptor!");
-            }
+            FreeMemory(&ubo, &descriptor);
         }
 
         m_virtualTable.erase(pIt);
+
+        *virtualUbo = SR_ID_INVALID;
 
         return true;
     }
@@ -88,9 +81,16 @@ namespace SR_GRAPH_NS::Memory {
         auto&& random = SR_UTILS_NS::Random::Instance();
 
         while (virtualUbo == SR_ID_INVALID) {
-            const VirtualUBO unique = random.UInt32();
+            VirtualUBO unique = random.Int32();
 
-            if (m_virtualTable.count(unique) == 0) {
+            /// можно использовать только положительные индексы
+            if (unique < 0) {
+                unique = -unique;
+            }
+
+            SRAssertOnce(unique >= 0);
+
+            if (m_virtualTable.count(unique) == 0 && unique != SR_ID_INVALID) {
                 virtualUbo = unique;
                 break;
             }
@@ -168,6 +168,42 @@ namespace SR_GRAPH_NS::Memory {
 
         if (descriptor != SR_ID_INVALID) {
             env->BindDescriptorSet(descriptor);
+        }
+    }
+
+    UBOManager::VirtualUBO UBOManager::ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples) {
+        if (virtualUbo == SR_ID_INVALID) {
+            return AllocateUBO(uboSize, samples);
+        }
+
+        auto&& pIt = m_virtualTable.find(virtualUbo);
+        if (pIt == std::end(m_virtualTable)) {
+            SRHalt("UBOManager::ReAllocateUBO() : ubo not found!");
+            return virtualUbo;
+        }
+
+        auto&& info = pIt->second;
+        for (auto&& [pCamera, data] : info.m_data) {
+            auto&& [ubo, descriptor] = data;
+            FreeMemory(&ubo, &descriptor);
+
+            if (!AllocMemory(&ubo, &descriptor, info.m_uboSize, info.m_samples)) {
+                SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
+            }
+        }
+
+        return virtualUbo;
+    }
+
+    void UBOManager::FreeMemory(UBOManager::UBO *ubo, UBOManager::Descriptor *descriptor) {
+        auto&& env = Environment::Get();
+
+        if (*ubo != SR_ID_INVALID && !env->FreeUBO(ubo)) {
+            SR_ERROR("UBOManager::FreeMemory() : failed to free ubo!");
+        }
+
+        if (*descriptor != SR_ID_INVALID && !env->FreeDescriptorSet(descriptor)) {
+            SR_ERROR("UBOManager::FreeMemory() : failed to free descriptor!");
         }
     }
 }

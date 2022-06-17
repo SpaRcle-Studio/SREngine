@@ -47,7 +47,7 @@ namespace SR_UTILS_NS {
         }
 
         if (mouseInputData->IsDrag()) {
-            OnMouseDrag(mouseInputData);
+            OnMouseMove(mouseInputData);
             return;
         }
 

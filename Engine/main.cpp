@@ -43,6 +43,7 @@
 #include <Render/RenderManager.h>
 #include <Render/CameraManager.h>
 #include <Scripting/Base/Behaviour.h>
+#include <Utils/Settings.h>
 
 using namespace Framework;
 
@@ -130,6 +131,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Shader>();
         resourcesManager.RegisterType<Skybox>();
         resourcesManager.RegisterType<Behaviour>();
+        resourcesManager.RegisterType<Settings>();
     }
 
     // Register all components
@@ -161,13 +163,13 @@ int main(int argc, char **argv) {
     }
     else if (envName.empty()) {
         SR_ERROR("System error: file \"Resources/Configs/Environment.xml\" does not exist!");
-        ResourceManager::Instance().Stop();
+        ResourceManager::DestroySingleton();
         Debug::Instance().Stop();
         return -1500;
     }
     else {
         SR_ERROR("System error: unknown environment! \"" + envName + "\" does not support!");
-        ResourceManager::Instance().Stop();
+        ResourceManager::DestroySingleton();
         Debug::Instance().Stop();
         return -2000;
     }
@@ -175,7 +177,7 @@ int main(int argc, char **argv) {
     Render* render = RenderManager::Instance().Allocate("Main");
     if (!render) {
         SR_ERROR("FATAL: render is not support this pipeline!");
-        ResourceManager::Instance().Stop();
+        ResourceManager::DestroySingleton();
         Debug::Instance().Stop();
         return -1000;
     }
@@ -218,15 +220,15 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
-    SR_GRAPH_NS::CameraManager::Destroy();
-    SR_SCRIPTING_NS::GlobalEvoCompiler::Destroy();
-    SR_UTILS_NS::EntityManager::Destroy();
-    Framework::Engine::Destroy();
-    Framework::Graphics::GUI::NodeManager::Destroy();
+    SR_GRAPH_NS::CameraManager::DestroySingleton();
+    SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
+    SR_UTILS_NS::EntityManager::DestroySingleton();
+    Framework::Engine::DestroySingleton();
+    Framework::Graphics::GUI::NodeManager::DestroySingleton();
 
     Debug::Instance().System("All systems successfully closed!");
 
-    ResourceManager::Instance().Stop();
+    ResourceManager::DestroySingleton();
 
     SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
 

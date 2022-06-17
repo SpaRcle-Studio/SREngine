@@ -153,12 +153,16 @@ void GUISystem::EndChildWindow() {
     ImGui::EndChild();
 }
 
-bool GUISystem::ImageButton(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
+bool GUISystem::ImageButton(void *descriptor, const Framework::Helper::Math::IVector2 &size, int32_t framePadding) {
     if (m_pipeLine == Graphics::PipeLine::OpenGL) {
-        return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+        return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), framePadding);
     }
 
-    return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(-1, 0), ImVec2(0, 1));
+    return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(-1, 0), ImVec2(0, 1), framePadding);
+}
+
+bool GUISystem::ImageButton(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
+    return ImageButton(descriptor, size, -1);
 }
 
 void GUISystem::DrawTexture(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
@@ -725,6 +729,7 @@ bool GUISystem::BeginMenuBar() {
 void GUISystem::EndMenuBar() {
     //ImGui::EndMainMenuBar();
 }
+
 
 
 

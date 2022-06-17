@@ -267,7 +267,7 @@ namespace SR_GRAPH_NS {
 
         m_env->CloseWindow();
 
-        Memory::MeshManager::Destroy();
+        Memory::MeshManager::DestroySingleton();
 
         SR_INFO("Window::Thread() : stopping window thread...");
 

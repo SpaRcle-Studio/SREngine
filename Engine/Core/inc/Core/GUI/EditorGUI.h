@@ -22,14 +22,14 @@ namespace SR_GRAPH_NS::GUI {
     class FileBrowser;
 }
 
+namespace SR_CORE_NS {
+    enum class EditorIcon : uint32_t;
+}
+
 namespace SR_CORE_NS::GUI {
     class VisualScriptEditor;
     class Inspector;
     class WorldEdit;
-
-    SR_ENUM_CLASS(EditorIcon,
-            Unknown
-    );
 
     class EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
         using Widgets = std::unordered_map<size_t, Graphics::GUI::Widget*>;
@@ -60,6 +60,7 @@ namespace SR_CORE_NS::GUI {
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
+        SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -67,7 +68,7 @@ namespace SR_CORE_NS::GUI {
         void Update();
 
     private:
-        void OnMouseDrag(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
