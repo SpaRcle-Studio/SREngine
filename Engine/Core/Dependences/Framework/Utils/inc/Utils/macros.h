@@ -130,7 +130,7 @@
 
 //#define SR_STATIC_ASSERT2(expr, msg)
 
-#ifdef SR_MINGW
+#if defined(SR_MINGW) || (_MSC_VER > 1929)
     #define SR_STATIC_ASSERT(msg) static_assert(msg);
 #else
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
