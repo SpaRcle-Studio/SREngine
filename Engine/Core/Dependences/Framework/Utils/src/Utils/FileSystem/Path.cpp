@@ -244,10 +244,6 @@ namespace SR_UTILS_NS {
         return FileSystem::IsAbsolutePath(m_path);
     }
 
-    Path Path::FileDialog() const {
-        return Path(FileSystem::SaveFileDialog(m_path, ""));
-    }
-
     bool Path::IsSubPath(const Path &subPath) const {
         return m_path.find(subPath.m_path) != std::string::npos;
     }

@@ -183,6 +183,10 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         auto&& info = pIt->second;
+
+        info.m_uboSize = uboSize;
+        info.m_samples = samples;
+
         for (auto&& [pCamera, data] : info.m_data) {
             auto&& [ubo, descriptor] = data;
             FreeMemory(&ubo, &descriptor);

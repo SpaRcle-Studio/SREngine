@@ -18,9 +18,6 @@ namespace SR_UTILS_NS {
 
         static bool FileExists(const std::string& path);
 
-        static std::string SaveFileDialog(const std::string& path, const std::string& filter);
-        static std::string LoadFileDialog(const std::string& path, const std::string& filter);
-
         static Path BrowseFolder(const Path& path);
 
         static bool CreatePath(std::string path, uint32_t offset = 0) {

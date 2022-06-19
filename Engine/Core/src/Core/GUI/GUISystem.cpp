@@ -621,17 +621,17 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Save scene")) {
             if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
-                if (auto path = SR_UTILS_NS::FileSystem::SaveFileDialog(scenesPath.ToString(), "Scene Files(*.scene)"); !path.empty()) {
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
                     const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
                     const auto folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
 
                     scene->SetName(sceneName);
 
                     if (scene->SaveAt(folder)) {
-                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
+                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene saved as \"" + path.ToString() + "\"");
                     }
                     else {
-                        SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
+                        SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
                     }
                 }
                 scene.Unlock();
@@ -648,7 +648,9 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Instance from file")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                if (auto path = SR_UTILS_NS::FileSystem::LoadFileDialog(resourcesPath.ToString(), ""); !path.empty()) {
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
+                    { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
+                {
                     scene->InstanceFromFile(path);
                 }
                 scene.Unlock();

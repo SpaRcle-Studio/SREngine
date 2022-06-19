@@ -15,6 +15,7 @@
 #include <Types/Material.h>
 #include <Render/Camera.h>
 #include <Core/GUI/EditorGUI.h>
+#include <Utils/FileSystem/FileDialog.h>
 #include <Core/Settings/EditorSettings.h>
 
 namespace SR_CORE_NS::GUI {
@@ -89,11 +90,30 @@ namespace SR_CORE_NS::GUI {
 
             Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
 
+            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
+                if (GUISystem::Instance().ImageButton(pDescriptor, SR_MATH_NS::IVector2(75), 0)) {
+                    auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
+                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(materialsPath, { { "Material", "mat" } });
+
+                    if (path.Exists()) {
+                        if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(path)) {
+                            material = pMaterial;
+                            return;
+                        }
+                    }
+                }
+            }
+
+            ImGui::SameLine();
+            ImGui::BeginGroup();
+
             Graphics::GUI::DrawValue("Material", material->GetResourceId());
 
             if (auto &&shader = material->GetShader()) {
-                Graphics::GUI::DrawValue("Shader name", shader->GetName());
+                Graphics::GUI::DrawValue("Shader", shader->GetName());
             }
+
+            ImGui::EndGroup();
 
             DrawMaterialProps(material, context, index);
         }
@@ -141,19 +161,14 @@ namespace SR_CORE_NS::GUI {
 
                     /// пробуем взять иконку из редактора
                     if (!pDescriptor) {
-                        if (auto&& iconTexture = context->GetIcon(EditorIcon::Unknown)) {
-                            if (!iconTexture->HasRender()) {
-                                render->RegisterTexture(iconTexture);
-                            }
-
-                            pDescriptor = iconTexture->GetDescriptor();
-                        }
+                        pDescriptor = context->GetIconDescriptor(EditorIcon::Unknown);
                     }
 
                     /// если нашли хоть какой-то дескриптор
                     if (pDescriptor) {
                         if (GUISystem::Instance().ImageButton(pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
-                            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().FileDialog();
+                            auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath();
+                            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 
                             if (path.Exists()) {
                                 if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {

@@ -212,6 +212,41 @@ namespace SR_CORE_NS::GUI {
 
         return SR_GTYPES_NS::Texture::GetNone();
     }
+
+    void *EditorGUI::GetIconDescriptor(EditorIcon icon) const {
+        if (auto&& iconTexture = GetIcon(icon)) {
+            if (!iconTexture->HasRender()) {
+                auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<SR_GRAPH_NS::Render>();
+
+
+                if (!render) {
+                    SRHalt("Is not in the rendering context!");
+                    return nullptr;
+                }
+
+                render->RegisterTexture(iconTexture);
+            }
+
+            if (!iconTexture->GetDescriptor()) {
+                iconTexture = SR_GTYPES_NS::Texture::GetNone();
+
+                if (!iconTexture->HasRender()) {
+                    auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<SR_GRAPH_NS::Render>();
+
+                    if (!render) {
+                        SRHalt("Is not in the rendering context!");
+                        return nullptr;
+                    }
+
+                    render->RegisterTexture(iconTexture);
+                }
+            }
+
+            return iconTexture->GetDescriptor();
+        }
+
+        return nullptr;
+    }
 }
 
 

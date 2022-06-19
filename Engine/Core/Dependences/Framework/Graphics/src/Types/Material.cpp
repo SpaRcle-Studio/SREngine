@@ -60,8 +60,10 @@ namespace SR_GTYPES_NS {
         return nullptr;
     }
 
-    Material* Material::Load(const std::string &path) {
+    Material* Material::Load(const std::string &rawPath) {
         SR_GLOBAL_LOCK
+
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath());
 
         if (auto&& pMaterial = SR_UTILS_NS::ResourceManager::Instance().Find<Material>(path))
             return pMaterial;

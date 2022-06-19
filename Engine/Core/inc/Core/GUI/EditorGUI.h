@@ -31,7 +31,8 @@ namespace SR_CORE_NS::GUI {
     class Inspector;
     class WorldEdit;
 
-    class EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
+    class
+    EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
         using Widgets = std::unordered_map<size_t, Graphics::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
     public:
@@ -61,6 +62,7 @@ namespace SR_CORE_NS::GUI {
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
         SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
+        SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 

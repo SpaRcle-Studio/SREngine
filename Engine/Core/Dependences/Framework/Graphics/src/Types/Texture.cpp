@@ -212,6 +212,7 @@ namespace SR_GTYPES_NS {
 
         if (!m_isCalculated && !Calculate()) {
             SR_ERROR("Texture::GetId() : failed to calculating texture!");
+            m_hasErrors = true;
             return SR_ID_INVALID;
         }
 
@@ -309,6 +310,8 @@ namespace SR_GTYPES_NS {
         hasErrors |= !Load();
 
         UpdateResources();
+
+        m_hasErrors = false;
 
         return !hasErrors;
     }
