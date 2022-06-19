@@ -91,6 +91,7 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& component : m_components) {
+            component->SetParent(nullptr);
             component->OnDestroy();
         }
         m_components.clear();
