@@ -26,23 +26,23 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
                     continue;
                 }
 
-                auto&& ubo = mesh->GetUBO();
-                if (ubo == SR_ID_INVALID) {
-                    continue;
-                }
-
-                //auto&& virtualUbo = mesh->GetVirtualUBO();
-                //if (virtualUbo == SR_ID_INVALID) {
+                //auto&& ubo = mesh->GetUBO();
+                //if (ubo == SR_ID_INVALID) {
                 //    continue;
                 //}
+
+                auto&& virtualUbo = mesh->GetVirtualUBO();
+                if (virtualUbo == SR_ID_INVALID) {
+                    continue;
+                }
 
                 mesh->GetMaterial()->Use();
 
                 shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
 
-                //uboManager.BindUBO(virtualUbo);
+                uboManager.BindUBO(virtualUbo);
 
-                m_env->BindUBO(ubo);
+                //m_env->BindUBO(ubo);
 
                 shader->Flush();
             }

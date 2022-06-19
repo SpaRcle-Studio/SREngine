@@ -5,9 +5,9 @@
 #ifndef SRENGINE_FRAMEBUFFER_H
 #define SRENGINE_FRAMEBUFFER_H
 
-#include <Debug.h>
-#include <Math/Vector2.h>
-#include <ResourceManager/IResource.h>
+#include <Utils/Debug.h>
+#include <Utils/Math/Vector2.h>
+#include <Utils/ResourceManager/IResource.h>
 
 namespace SR_GRAPH_NS {
     class Shader;

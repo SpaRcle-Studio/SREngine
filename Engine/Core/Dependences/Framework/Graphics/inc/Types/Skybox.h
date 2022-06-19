@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_SKYBOX_H
 #define GAMEENGINE_SKYBOX_H
 
-#include <ResourceManager/IResource.h>
+#include <Utils/ResourceManager/IResource.h>
 
 namespace SR_GRAPH_NS {
     class Shader;

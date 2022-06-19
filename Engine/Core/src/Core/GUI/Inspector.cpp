@@ -5,7 +5,7 @@
 #include <Core/GUI/Inspector.h>
 
 #include <GUI/Utils.h>
-#include <ECS/Transform3D.h>
+#include <Utils/ECS/Transform3D.h>
 #include <Scripting/Base/Behaviour.h>
 
 namespace Framework::Core::GUI {

@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_UNIFORMS_H
 #define GAMEENGINE_UNIFORMS_H
 
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     SR_ENUM_CLASS(UBOType,
         Common, Shared
     )

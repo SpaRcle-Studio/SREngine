@@ -3,30 +3,14 @@
 //
 
 #include <Environment/Vulkan.h>
-#include <GUI.h>
-#include <Utils/Features.h>
+#include <Utils/GUI.h>
+#include <Utils/Common/Features.h>
 
 #ifdef SR_WIN32
     #include <vulkan/vulkan_win32.h>
 #endif
 
 namespace Framework::Graphics {
-    const std::vector<const char *> Vulkan::m_validationLayers = {
-            "VK_LAYER_KHRONOS_validation"
-    };
-
-    const std::vector<const char *> Vulkan::m_instanceExtensions = {
-            VK_KHR_SURFACE_EXTENSION_NAME,
-            VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
-            VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
-#ifdef SR_WIN32
-            VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
-#endif
-#ifndef SR_RELEASE
-            VK_EXT_DEBUG_UTILS_EXTENSION_NAME
-#endif
-    };
-
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
@@ -39,19 +23,19 @@ namespace Framework::Graphics {
             const std::string &appName,
             const std::string &engineName,
             const std::string &glslc) {
-        EvoVulkan::Tools::VkDebug::Instance().LogCallback = [](const std::string &msg) { Helper::Debug::VulkanLog(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().ErrorCallback = [](const std::string &msg) { Helper::Debug::VulkanError(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().GraphCallback = [](const std::string &msg) { Helper::Debug::Vulkan(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkDebug::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
         EvoVulkan::Tools::VkDebug::Instance().AssertCallback = [](const std::string &msg) {
-            Helper::Debug::Assert(SR_VRAM + msg);
+            SRAssert2(false, SR_VRAM + msg);
             return false;
         };
 
         m_imgui = new VulkanTypes::VkImGUI();
 
         m_kernel = new SRVulkan();
-        Helper::Debug::Info("Vulkan::PreInit() : pre-initializing vulkan...");
+        SR_INFO("Vulkan::PreInit() : pre-initializing vulkan...");
 
         m_enableValidationLayers = SR_UTILS_NS::Features::Instance().Enabled("VulkanValidation", false);
 
@@ -62,20 +46,35 @@ namespace Framework::Graphics {
         m_viewport = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
         m_scissor = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
         m_cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
-        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr,
-                                                                       0);
+        m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
 
         m_kernel->SetMultisampling(smooth_samples);
 
         /// TOOD: вынести в конфиг
         m_kernel->SetSwapchainImagesCount(2);
 
+        std::vector<const char*>&& validationLayers = { };
+        std::vector<const char*>&& instanceExtensions = {
+                VK_KHR_SURFACE_EXTENSION_NAME,
+                VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
+                VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
+#ifdef SR_WIN32
+                VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
+#endif
+        };
+
+        if (m_enableValidationLayers) {
+            instanceExtensions.emplace_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+            validationLayers.emplace_back("VK_LAYER_KHRONOS_validation");
+        }
+
+
         if (!m_kernel->PreInit(
                 appName,
                 engineName,
                 glslc,
-                m_instanceExtensions,
-                m_validationLayers))
+                instanceExtensions,
+                validationLayers))
         {
             SR_ERROR("Vulkan::PreInit() : failed to pre-init Evo Vulkan kernel!");
             return false;
@@ -86,7 +85,7 @@ namespace Framework::Graphics {
 
     bool Vulkan::MakeWindow(const std::string &name, const SR_MATH_NS::IVector2 &size, bool fullScreen, bool resizable,
                             bool headerEnabled) {
-        Helper::Debug::Graph("Vulkan::MakeWindow() : creating window...");
+        SR_GRAPH_LOG("Vulkan::MakeWindow() : creating window...");
 
         m_basicWindow = new Win32Window(this->GetPipeLine());
 
@@ -119,7 +118,7 @@ namespace Framework::Graphics {
     }
 
     bool Vulkan::CloseWindow() {
-        Helper::Debug::Graph("Vulkan::CloseWindow() : close window...");
+        SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
 
         if (m_memory) {
             m_memory->Free();
@@ -137,7 +136,7 @@ namespace Framework::Graphics {
     }
 
     bool Vulkan::Init(int swapInterval) {
-        Helper::Debug::Graph("Vulkan::Init() : initializing vulkan...");
+        SR_GRAPH_LOG("Vulkan::Init() : initializing vulkan...");
 
         auto window = m_basicWindow;
 
@@ -171,7 +170,7 @@ namespace Framework::Graphics {
             return false;
         }
 
-        Helper::Debug::Info("Vulkan::Init() : create vulkan memory manager...");
+        SR_INFO("Vulkan::Init() : create vulkan memory manager...");
         this->m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
         if (!m_memory) {
             SR_ERROR("Vulkan::Init() : failed to create vulkan memory manager!");
@@ -182,8 +181,9 @@ namespace Framework::Graphics {
     }
 
     void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Low)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
             SR_LOG("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
+        }
 
         m_basicWindow->Resize(w, h);
     }
@@ -193,7 +193,7 @@ namespace Framework::Graphics {
     }
 
     bool Vulkan::PostInit() {
-        Helper::Debug::Graph("Vulkan::PostInit() : post-initializing vulkan...");
+        SR_GRAPH_LOG("Vulkan::PostInit() : post-initializing vulkan...");
 
         if (!m_kernel->PostInit()) {
             SR_ERROR("Vulkan::PostInit() : failed to post-initialize Evo Vulkan kernel!");
@@ -529,7 +529,7 @@ namespace Framework::Graphics {
     }
 
     bool Vulkan::InitGUI() {
-        Helper::Debug::Graph("Vulkan::InitGUI() : initializing ImGUI library...");
+        SR_GRAPH_LOG("Vulkan::InitGUI() : initializing ImGUI library...");
 
         if (!m_kernel->GetDevice()) {
             SR_ERROR("Vulkan::InitGUI() : device is nullptr!");
@@ -547,7 +547,7 @@ namespace Framework::Graphics {
     }
 
     bool Vulkan::StopGUI() {
-        Helper::Debug::Vulkan("Vulkan::StopGUI() : stopping gui...");
+        SR_VULKAN_MSG("Vulkan::StopGUI() : stopping gui...");
 
         EVSafeFreeObject(m_imgui) else {
             SR_ERROR("Vulkan::StopGUI() : failed to destroy vulkan imgui!");
@@ -742,7 +742,7 @@ namespace Framework::Graphics {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
             if (result == VK_ERROR_DEVICE_LOST) {
-                Debug::Terminate();
+                SR_UTILS_NS::Debug::Instance().Terminate();
             }
 
             return EvoVulkan::Core::RenderResult::Error;
@@ -761,7 +761,7 @@ namespace Framework::Graphics {
                     return EvoVulkan::Core::RenderResult::Success;
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
-                SR_UTILS_NS::Debug::Terminate();
+                SR_UTILS_NS::Debug::Instance().Terminate();
             default: {
                 SRAssertOnce(false);
                 return EvoVulkan::Core::RenderResult::Fatal;

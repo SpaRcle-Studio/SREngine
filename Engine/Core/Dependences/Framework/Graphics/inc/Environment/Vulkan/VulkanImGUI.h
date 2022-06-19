@@ -5,13 +5,13 @@
 #ifndef GAMEENGINE_VULKANIMGUI_H
 #define GAMEENGINE_VULKANIMGUI_H
 
-#include <GUI.h>
+#include <Utils/GUI.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/DescriptorManager.h>
 #include <EvoVulkan/Types/RenderPass.h>
 
-namespace Framework::Graphics::VulkanTypes {
+namespace SR_GRAPH_NS::VulkanTypes {
     class VkImGUI {
     public:
         VkImGUI() = default;

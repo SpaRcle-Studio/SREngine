@@ -3,15 +3,16 @@
 //
 
 #include <Render/Shader.h>
-#include <Debug.h>
-#include <Xml.h>
+
+#include <Types/Texture.h>
 #include <Render/Render.h>
 #include <Environment/Environment.h>
-#include <ResourceManager/ResourceManager.h>
-#include <Types/Texture.h>
-#include <Types/Thread.h>
-#include <Types/DataStorage.h>
-#include <Utils/Hashes.h>
+
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Xml.h>
+#include <Utils/Types/Thread.h>
+#include <Utils/Types/DataStorage.h>
+#include <Utils/Common/Hashes.h>
 
 namespace SR_GRAPH_NS {
     Shader::Shader(std::string path, std::string name)
@@ -255,13 +256,14 @@ namespace SR_GRAPH_NS {
     }
 
     Shader* Shader::Load(const SR_UTILS_NS::Path &path) {
-        if (auto &&pShader = ResourceManager::Instance().Find<Shader>(path.ToString())) {
+        if (auto &&pShader = SR_UTILS_NS::ResourceManager::Instance().Find<Shader>(path.ToString())) {
             return pShader;
         }
 
         SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
 
         if (!SRVerifyFalse2(path.ToString().empty(), "Invalid shader path!")) {
+            SR_WARN("Shader::Load() : failed to load shader!");
             return nullptr;
         }
 
@@ -275,17 +277,17 @@ namespace SR_GRAPH_NS {
     }
 
     Shader* Shader::LoadFromConfig(const std::string &name) {
-        std::vector<Xml::Node> shaders = {};
+        std::vector<SR_XML_NS::Node> shaders = {};
 
-        auto findShader = [&shaders](const std::string &name) -> Xml::Node {
+        auto findShader = [&shaders](const std::string &name) -> SR_XML_NS::Node {
             for (const auto &shaderXml : shaders)
                 if (shaderXml.GetAttribute("name").ToString() == name)
                     return shaderXml;
-            return Xml::Node::Empty();
+            return SR_XML_NS::Node::Empty();
         };
 
-        typedef std::function<Xml::Node(const Xml::Node &node, const std::string &attribName)> getInheritNodeFun;
-        getInheritNodeFun getInheritNode = [findShader, name, &getInheritNode](const Xml::Node &node, const std::string &nodeName) -> Xml::Node {
+        typedef std::function<SR_XML_NS::Node(const SR_XML_NS::Node &node, const std::string &attribName)> getInheritNodeFun;
+        getInheritNodeFun getInheritNode = [findShader, name, &getInheritNode](const SR_XML_NS::Node &node, const std::string &nodeName) -> SR_XML_NS::Node {
             if (auto targetNode = node.GetNode(nodeName)) {
                 if (auto inherit = targetNode.GetAttribute("inherit")) {
                     if (auto inheritShader = findShader(inherit.ToString()))
@@ -296,10 +298,10 @@ namespace SR_GRAPH_NS {
                 } else
                     return targetNode;
             }
-            return Xml::Node::Empty();
+            return SR_XML_NS::Node::Empty();
         };
 
-        auto &&vertexParser = [=](Shader *shader, const Xml::Node &node) {
+        auto &&vertexParser = [=](Shader *shader, const SR_XML_NS::Node &node) {
             if (auto vertex = getInheritNode(node, "Vertex")) {
                 auto[descr, attrib] = Vertices::GetVertexInfo(
                         Vertices::StringToEnumType(vertex.GetAttribute("value").ToString()));
@@ -307,7 +309,7 @@ namespace SR_GRAPH_NS {
             }
         };
 
-        auto &&uniformParsers = [=](Shader *shader, const Xml::Node &node) {
+        auto &&uniformParsers = [=](Shader *shader, const SR_XML_NS::Node &node) {
             if (auto xmlUniforms = getInheritNode(node, "Uniforms")) {
                 std::vector<std::pair<uint32_t, uint64_t>> uniforms = {};
                 for (const auto &uniform : xmlUniforms.GetNodes()) {
@@ -320,7 +322,7 @@ namespace SR_GRAPH_NS {
             }
         };
 
-        auto &&infoParser = [=](Shader *shader, const Xml::Node &node) {
+        auto &&infoParser = [=](Shader *shader, const SR_XML_NS::Node &node) {
             auto createInfo = SRShaderCreateInfo();
             if (auto info = getInheritNode(node, "Info")) {
                 if (auto value = info.GetNode("PolygonMode"))
@@ -348,7 +350,7 @@ namespace SR_GRAPH_NS {
             SRAssert2(shader->SetCreateInfo(createInfo), "Failed to validate shader create info!");
         };
 
-        auto &&shaderParser = [=](const Xml::Node &node) -> Shader * {
+        auto &&shaderParser = [=](const SR_XML_NS::Node &node) -> Shader * {
             if (auto path = node.GetAttribute("path"); path.Valid()) {
                 auto shader = new Shader(path.ToString(), name);
                 {
@@ -362,11 +364,11 @@ namespace SR_GRAPH_NS {
                 return nullptr;
         };
 
-        auto &&createInfoPath = Helper::StringUtils::MakePath(
-                Helper::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml"));
+        auto &&createInfoPath = SR_UTILS_NS::StringUtils::MakePath(
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml"));
 
-        if (FileSystem::FileExists(createInfoPath)) {
-            auto xml = Helper::Xml::Document::Load(createInfoPath);
+        if (SR_UTILS_NS::FileSystem::FileExists(createInfoPath)) {
+            auto xml = SR_XML_NS::Document::Load(createInfoPath);
             shaders = xml.Root().GetNode("Shaders").GetNodes();
             if (auto shaderXml = findShader(name)) {
                 auto shader = shaderParser(shaderXml);
@@ -433,7 +435,9 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        sampler = sampler ? sampler : SR_GTYPES_NS::Texture::GetNone();
+        if (!sampler) {
+            sampler = SR_GTYPES_NS::Texture::GetNone();
+        }
 
         if (!sampler->HasRender()) {
             SRAssert(m_render);

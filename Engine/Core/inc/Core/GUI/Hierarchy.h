@@ -6,10 +6,11 @@
 #define SRENGINE_HIERARCHY_H
 
 #include <GUI/Widget.h>
-#include <Types/SafePointer.h>
-#include <World/Scene.h>
-#include <Input/InputEvents.h>
-#include <ECS/GameObject.h>
+
+#include <Utils/Types/SafePointer.h>
+#include <Utils/World/Scene.h>
+#include <Utils/Input/InputEvents.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_CORE_NS::GUI {
     class Hierarchy : public Graphics::GUI::Widget {
@@ -20,8 +21,8 @@ namespace SR_CORE_NS::GUI {
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
-        void OnKeyDown(const Helper::KeyDownEvent& event) override;
-        void OnKeyUp(const Helper::KeyUpEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
         SR_NODISCARD std::set<Helper::GameObject::Ptr> GetSelected() const;
 

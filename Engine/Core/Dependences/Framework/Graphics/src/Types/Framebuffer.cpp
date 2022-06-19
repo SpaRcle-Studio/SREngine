@@ -21,11 +21,11 @@ namespace SR_GTYPES_NS {
         SRAssert(m_shader);
     }
 
-    Framebuffer *Framebuffer::Create(uint32_t images, const Math::IVector2 &size) {
+    Framebuffer *Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size) {
         return Create(images, size, std::string());
     }
 
-    Framebuffer::Ptr Framebuffer::Create(uint32_t images, const Math::IVector2 &size, const std::string& shaderPath) {
+    Framebuffer::Ptr Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size, const std::string& shaderPath) {
         Framebuffer* fbo = new Framebuffer();
 
         SRAssert(!size.HasZero() && !size.HasNegative() && images > 0);
@@ -131,7 +131,7 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    void Framebuffer::SetSize(const Math::IVector2 &size) {
+    void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
         m_size = size;
         m_needResize = true;
     }

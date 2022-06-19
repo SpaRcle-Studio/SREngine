@@ -5,8 +5,8 @@
 #ifndef SRENGINE_SCENEVIEWER_H
 #define SRENGINE_SCENEVIEWER_H
 
-#include <ECS/GameObject.h>
-#include <World/Scene.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
 
 namespace SR_GRAPH_NS {
     class Camera;
@@ -20,8 +20,8 @@ namespace SR_GRAPH_NS::GUI {
 namespace SR_CORE_NS::GUI {
     class Hierarchy;
 
-    class SceneViewer : public Graphics::GUI::Widget {
-        using GameObject = SR_UTILS_NS::GameObject::Ptr;
+    class SR_DLL_EXPORT SceneViewer : public Graphics::GUI::Widget {
+        using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
     public:
         explicit SceneViewer(Graphics::Window* window, Hierarchy* hierarchy);
         ~SceneViewer() override;
@@ -31,8 +31,8 @@ namespace SR_CORE_NS::GUI {
         void Enable(bool value);
         void Update();
 
-        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
-        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
         void SetCameraActive(bool value);
@@ -41,7 +41,7 @@ namespace SR_CORE_NS::GUI {
         void Draw() override;
 
         void InitCamera();
-        void SetCamera(GameObject camera);
+        void SetCamera(const GameObjectPtr& camera);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
 
@@ -50,7 +50,7 @@ namespace SR_CORE_NS::GUI {
         Hierarchy* m_hierarchy = nullptr;
         Graphics::GUI::Guizmo* m_guizmo = nullptr;
         int32_t m_id;
-        GameObject m_camera;
+        GameObjectPtr m_camera;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = false;
         std::atomic<bool> m_cameraActive = false;

@@ -5,9 +5,9 @@
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/Parsers/BlueprintParser.h>
 
-#include <ResourceManager/ResourceManager.h>
-#include <FileSystem/FileSystem.h>
-#include <Xml.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Xml.h>
 #include <GUI/NodeManager.h>
 
 #include <GUI/Link.h>
@@ -23,13 +23,13 @@ Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
 
     m_editor = ax::NodeEditor::CreateEditor(config);
 
-    LoadConfig();
+    //LoadConfig();
 
-    AddNode(CreateBlueprint("Branch"));
+    //AddNode(CreateBlueprint("Branch"));
 
-    AddNode(CreateBlueprint("X"));
+    //AddNode(CreateBlueprint("X"));
 
-    AddNode(CreateBlueprint("OnStart"));
+    //AddNode(CreateBlueprint("OnStart"));
 
     /*AddNode(Node("Node A")
             .AddInput(Pin("Pin AAAA", PinType::Flow))
@@ -110,7 +110,7 @@ void Framework::Core::GUI::VisualScriptEditor::AddLink(Framework::Graphics::GUI:
 }
 
 void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
-    SR_LOG("VisualScriptEditor::LoadConfig() : loading config...");
+    /*SR_LOG("VisualScriptEditor::LoadConfig() : loading config...");
 
     const auto& resManager = Helper::ResourceManager::Instance();
     const auto path = resManager.GetConfigPath().Concat("/EvoScript.xml");
@@ -127,7 +127,7 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
     }
     else {
         SR_ERROR("VisualScriptEditor::LoadConfig() : config file not found! \n\tPath: " + strPath);
-    }
+    }*/
 }
 
 SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {

@@ -5,8 +5,8 @@
 #ifndef GAMEENGINE_VISUALCHUNK_H
 #define GAMEENGINE_VISUALCHUNK_H
 
-#include <World/Chunk.h>
-#include <Math/Vector3.h>
+#include <Utils/World/Chunk.h>
+#include <Utils/Math/Vector3.h>
 
 namespace Framework::Graphics::Types {
     class DebugWireframeMesh;

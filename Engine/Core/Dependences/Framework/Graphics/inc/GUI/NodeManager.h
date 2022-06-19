@@ -5,8 +5,8 @@
 #ifndef SRENGINE_NODEMANAGER_H
 #define SRENGINE_NODEMANAGER_H
 
-#include <Utils/Singleton.h>
-#include <Types/Thread.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/Types/Thread.h>
 
 namespace SR_GRAPH_NS::GUI {
     class NodeManager : public SR_UTILS_NS::Singleton<NodeManager> {

@@ -5,7 +5,9 @@
 #ifndef GAMEENGINE_VULKAN_H
 #define GAMEENGINE_VULKAN_H
 
-#include <Debug.h>
+#include <Utils/Debug.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 #ifdef SR_WIN32
     #include <vulkan/vulkan.h>
@@ -13,22 +15,17 @@
 #endif
 
 #include <Environment/Environment.h>
-
-#include <ResourceManager/ResourceManager.h>
-#include <FileSystem/FileSystem.h>
-
 #include <Environment/Vulkan/VulkanMemory.h>
-
 #include <Environment/Vulkan/AbstractCasts.h>
+#include <Environment/Vulkan/VulkanImGUI.h>
+
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
 #include <EvoVulkan/Types/VmaBuffer.h>
 
-#include <Environment/Vulkan/VulkanImGUI.h>
-
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     // Reusable buffers used for rendering 1 current in-flight frame, for ImGui_ImplVulkan_RenderDrawData()
     // [Please zero-clear before use!]
     struct ImGui_ImplVulkanH_FrameRenderBuffers
@@ -138,8 +135,6 @@ namespace Framework::Graphics {
         EvoVulkan::Core::VulkanKernel*                  m_kernel             = nullptr;
 
     private:
-        static const std::vector<const char*> m_validationLayers;
-        static const std::vector<const char*> m_instanceExtensions;
         static const std::vector<const char*> m_deviceExtensions;
 
         bool m_enableValidationLayers = false;
@@ -444,8 +439,8 @@ namespace Framework::Graphics {
         }
 
         SR_FORCE_INLINE bool FreeDescriptorSet(int32_t* descriptorSet) override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Full)
-                Helper::Debug::Graph("Vulkan::FreeDescriptorSet() : free descriptor set...");
+            if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full)
+                SR_GRAPH_LOG("Vulkan::FreeDescriptorSet() : free descriptor set...");
 
             if (!m_memory->FreeDescriptorSet(*descriptorSet)) {
                 SR_ERROR("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
@@ -458,8 +453,9 @@ namespace Framework::Graphics {
             return true;
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) override {
-            if (Helper::Debug::GetLevel() >= Helper::Debug::Level::Full)
-                Helper::Debug::Graph("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
+            if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
+                SR_GRAPH_LOG("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
+            }
 
             auto&& vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
             if (vkTypes.size() != types.size()) {

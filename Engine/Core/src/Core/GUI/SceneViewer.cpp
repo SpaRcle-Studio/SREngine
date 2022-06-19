@@ -5,14 +5,14 @@
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/Hierarchy.h>
 
-#include <Input/InputSystem.h>
+#include <Utils/Input/InputSystem.h>
 #include <GUI/Editor/Guizmo.h>
-#include <Utils/Features.h>
-#include <ECS/Transform3D.h>
+#include <Utils/Common/Features.h>
+#include <Utils/ECS/Transform3D.h>
 #include <Window/Window.h>
 #include <Render/Camera.h>
 
-void SceneViewer::SetCamera(SR_UTILS_NS::GameObject::Ptr camera) {
+void SceneViewer::SetCamera(const GameObjectPtr& camera) {
     m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
         m_translation = camera->GetTransform()->GetTranslation();
         m_rotation = camera->GetTransform()->GetRotation();
@@ -70,7 +70,6 @@ SceneViewer::SceneViewer(Graphics::Window* window, Hierarchy* hierarchy)
 
 SceneViewer::~SceneViewer() {
     SetCameraActive(false);
-
     SR_SAFE_DELETE_PTR(m_guizmo);
 }
 
@@ -90,19 +89,19 @@ void SceneViewer::Update() {
         return;
 
     float_t speed = 0.1f;
-    auto dir = SR_UTILS_NS::Input::GetMouseDrag() * speed;
-    auto wheel = SR_UTILS_NS::Input::GetMouseWheel() * speed;
+    auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
+    auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
 
     if (m_camera.LockIfValid()) {
         if (wheel != 0) {
             m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
         }
 
-        if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
             m_camera->GetTransform()->GlobalRotate(dir.y, dir.x, 0.0);
         }
 
-        if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
             auto right = SR_UTILS_NS::Transform3D::RIGHT * speed;
             auto up = SR_UTILS_NS::Transform3D::UP * speed;
 
@@ -169,7 +168,6 @@ void SceneViewer::InitCamera() {
     Helper::GameObject::Ptr camera;
     if (m_scene.LockIfValid()) {
         camera = m_scene->Instance("Editor camera");
-        //m_scene->SetObserver(camera);
         m_scene.Unlock();
     }
     else
@@ -204,15 +202,15 @@ void SceneViewer::SetCameraActive(bool value) {
         }
     }
     else
-        SetCamera(GameObject());
+        SetCamera(GameObjectPtr());
 
     m_window->EndSync();
 }
 
-void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
-    m_guizmo->OnKeyDown(event);
+void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+    m_guizmo->OnKeyDown(data);
 }
 
-void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyPressEvent &event) {
-    m_guizmo->OnKeyPress(event);
+void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
+    m_guizmo->OnKeyPress(data);
 }

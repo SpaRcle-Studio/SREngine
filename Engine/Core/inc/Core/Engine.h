@@ -7,20 +7,17 @@
 
 #include <Core/GUI/EditorGUI.h>
 #include <Core/EvoScriptAPI.h>
+#include <Core/PhysEngine.h>
 #include <Core/EngineCommands.h>
 
-#include <Debug.h>
-#include <Events/EventManager.h>
-#include <Types/Time.h>
-#include <FileSystem/FileSystem.h>
-#include <Core/PhysEngine.h>
-
-
-#include <Types/Thread.h>
-#include <Types/SafePointer.h>
-
-#include <Input/InputDispatcher.h>
-#include <Input/InputHandler.h>
+#include <Utils/Events/EventManager.h>
+#include <Utils/Types/Time.h>
+#include <Utils/Types/Timer.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Types/Thread.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Input/InputDispatcher.h>
+#include <Utils/Input/InputHandler.h>
 
 namespace SR_WORLD_NS {
     class Scene;

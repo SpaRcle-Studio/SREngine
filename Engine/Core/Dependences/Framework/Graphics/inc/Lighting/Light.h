@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_LIGHT_H
 #define GAMEENGINE_LIGHT_H
 
-#include <Math/Vector3.h>
+#include <Utils/Math/Vector3.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class Render;
 
     class Light {

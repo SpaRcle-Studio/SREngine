@@ -2,7 +2,6 @@
 // Created by Monika on 31.10.2021.
 //
 
-#include <Debug.h>
 #include <Render/MeshCluster.h>
 #include <Types/Geometry/IndexedMesh.h>
 

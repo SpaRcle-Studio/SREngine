@@ -5,7 +5,7 @@
 #ifndef SRENGINE_COMPONENTDRAWER_H
 #define SRENGINE_COMPONENTDRAWER_H
 
-#include <stdInclude.h>
+#include <Utils/stdInclude.h>
 
 namespace SR_SCRIPTING_NS {
     class Behaviour;
@@ -20,11 +20,17 @@ namespace SR_GRAPH_NS {
     }
 }
 
+namespace SR_CORE_NS::GUI {
+    class EditorGUI;
+}
+
 namespace SR_CORE_NS::GUI::ComponentDrawer {
-    void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, int32_t index);
-    void DrawComponent(SR_GRAPH_NS::Camera*& camera, int32_t index);
-    void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, int32_t index);
-    void DrawComponent(SR_GRAPH_NS::Types::Material*& material, int32_t index);
+    void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::Camera*& camera, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
+
+    void DrawComponent(SR_GRAPH_NS::Types::Material*& material, EditorGUI* context, int32_t index);
+    void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
 }
 
 #endif //SRENGINE_COMPONENTDRAWER_H

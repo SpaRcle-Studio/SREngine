@@ -8,14 +8,15 @@
 #include <Core/GUI/ComponentDrawer.h>
 
 #include <GUI/Widget.h>
-#include <ECS/GameObject.h>
-#include <World/Scene.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
 
 namespace SR_UTILS_NS {
     class Transform3D;
 }
 
 namespace SR_CORE_NS::GUI {
+    class EditorGUI;
     class Hierarchy;
 
     class Inspector : public Graphics::GUI::Widget {
@@ -33,9 +34,11 @@ namespace SR_CORE_NS::GUI {
 
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
+            auto&& context = dynamic_cast<EditorGUI*>(GetManager());
 
-            if (!pComponent)
+            if (!pComponent || !context) {
                 return component;
+            }
 
             ++index;
 
@@ -47,7 +50,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index, component->GetComponentName().c_str()).c_str()))
-                ComponentDrawer::DrawComponent(pComponent, index);
+                ComponentDrawer::DrawComponent(pComponent, context, index);
 
             return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
         }

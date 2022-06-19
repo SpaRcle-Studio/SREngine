@@ -3,10 +3,10 @@
 //
 
 #include "Core/PhysEngine.h"
-#include <Debug.h>
+#include <Utils/Debug.h>
 
 bool Framework::Physics::PhysEngine::Create() {
-    Helper::Debug::Info("PhysEngine::Create() : create physics engine...");
+    SR_INFO("PhysEngine::Create() : create physics engine...");
 
     /*this->m_collisionConf = new btDefaultCollisionConfiguration();
     this->m_dispatcher = new btCollisionDispatcher(m_collisionConf);

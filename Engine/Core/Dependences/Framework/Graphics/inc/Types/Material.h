@@ -5,10 +5,11 @@
 #ifndef GAMEENGINE_MATERIAL_H
 #define GAMEENGINE_MATERIAL_H
 
-#include <ResourceManager/IResource.h>
+#include <Utils/ResourceManager/IResource.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector4.h>
+
 #include <Environment/Basic/IShaderProgram.h>
-#include <Math/Vector3.h>
-#include <Math/Vector4.h>
 
 namespace SR_GRAPH_NS {
     class Shader;
@@ -42,7 +43,7 @@ namespace SR_GTYPES_NS {
         static bool FreeDefault();
         static bool InitDefault(Render* render);
 
-        static Material* Load(const std::string& path);
+        static Material* Load(const std::string& rawPath);
 
     public:
         Super* Copy(Super* destination) const override;

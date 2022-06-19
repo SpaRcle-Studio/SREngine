@@ -5,11 +5,10 @@
 #ifndef SRENGINE_GUIZMO_H
 #define SRENGINE_GUIZMO_H
 
-#include <Utils/NonCopyable.h>
-#include <ECS/GameObject.h>
-#include <ECS/Transform3D.h>
-#include <Math/Vector3.h>
-#include <Input/InputSystem.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform3D.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Input/InputSystem.h>
 
 namespace SR_GRAPH_NS {
     class Camera;
@@ -19,15 +18,15 @@ namespace SR_GRAPH_NS::GUI {
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObject = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
     public:
-        Guizmo();
+        Guizmo() = default;
         ~Guizmo() override = default;
 
     public:
         void Draw(GameObject gameObject, GameObject camera);
         void DrawTools();
 
-        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
-        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
         SR_NODISCARD bool IsTranslate() const { return m_operation == ImGuizmo::OPERATION::TRANSLATE; }
         SR_NODISCARD bool IsRotate() const { return m_operation == ImGuizmo::OPERATION::ROTATE; }

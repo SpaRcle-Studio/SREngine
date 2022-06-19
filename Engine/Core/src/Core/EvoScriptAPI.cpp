@@ -6,14 +6,13 @@
 #include <Core/GUI/GUISystem.h>
 #include <Core/Engine.h>
 
-#include <Input/InputSystem.h>
+#include <Utils/Input/InputSystem.h>
 #include <Loaders/ObjLoader.h>
 #include <Types/Skybox.h>
 
 #include <Render/PostProcessing.h>
 
-#include <Debug.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
@@ -54,15 +53,15 @@ namespace Framework {
         using namespace SR_UTILS_NS;
 
         generator->RegisterNewClass("Debug", "Debug", {"string"});
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Log, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Warn, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, System, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Shader, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Error, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Info, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Script, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptError, void, ESArg1(const std::string& msg), ESArg1(msg))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptLog, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Log, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Warn, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, System, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Shader, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Error, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Info, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Script, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptError, void, ESArg1(const std::string& msg), ESArg1(msg))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptLog, void, ESArg1(const std::string& msg), ESArg1(msg))
     }
 
     void API::RegisterEngine(EvoScript::AddressTableGen *generator) {
@@ -229,8 +228,6 @@ namespace Framework {
         generator->RegisterNewClass("Render", "Render",
                 { "vector", "mutex", "stdint.h", "map", "Skybox.h", "Texture.h", "Shader.h" });
 
-        ESRegisterMethod(EvoScript::Public, generator, Render, FindShader, Shader*, ESArg1(uint32_t id), ESArg1(id))
-
         ESRegisterMethod(EvoScript::Public, generator, Render, SetSkybox, void, ESArg1(Skybox* skybox), ESArg1(skybox))
         ESRegisterMethod(EvoScript::Public, generator, Render, RegisterMesh, void, ESArg1(Mesh* mesh), ESArg1(mesh))
         ESRegisterMethod(EvoScript::Public, generator, Render, RegisterTexture, void, ESArg1(Texture* texture), ESArg1(texture))
@@ -272,11 +269,11 @@ namespace Framework {
         using namespace SR_UTILS_NS;
 
         generator->RegisterNewClass("Input", "Input", { "Math/Vector2.h" });
-        ESRegisterStaticMethodArg0(EvoScript::Public, generator, Input, GetMouseWheel, int)
-        ESRegisterStaticMethodArg0(EvoScript::Public, generator, Input, GetMouseDrag, FVector2)
-        ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKey, bool, ESArg1(KeyCode key), ESArg1(key))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), ESArg1(key))
-        ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyUp, bool, ESArg1(KeyCode key), ESArg1(key))
+        // ESRegisterStaticMethodArg0(EvoScript::Public, generator, Input, GetMouseWheel, int)
+        // ESRegisterStaticMethodArg0(EvoScript::Public, generator, Input, GetMouseDrag, FVector2)
+        // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKey, bool, ESArg1(KeyCode key), ESArg1(key))
+        // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), ESArg1(key))
+        // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyUp, bool, ESArg1(KeyCode key), ESArg1(key))
 
         generator->RegisterEnum("KeyCode", "Input", true, {
                 { "MouseLeft",  1 },
@@ -403,8 +400,6 @@ namespace Framework {
 
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, BeginMenuBar, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndMenuBar, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, BeginDockSpace, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndDockSpace, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndWindow, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndChildWindow, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, GetWindowSize, IVector2)
@@ -413,7 +408,6 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawTexture, void, ESArg4(IVector2 win, IVector2 img, uint32_t id, bool center), ESArg4(win, img, id, center))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawHierarchy, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawWorldEdit, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawInspector, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, SetGuizmoTool, void, ESArg1(uint8_t id), ESArg1(id))

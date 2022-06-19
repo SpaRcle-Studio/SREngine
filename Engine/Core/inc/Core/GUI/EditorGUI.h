@@ -8,7 +8,7 @@
 #include <Scripting/Base/Script.h>
 #include <Scripting/Base/Compiler.h>
 #include <GUI/WidgetManager.h>
-#include <Utils/Enumerations.h>
+#include <Utils/Common/Enumerations.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -22,16 +22,17 @@ namespace SR_GRAPH_NS::GUI {
     class FileBrowser;
 }
 
+namespace SR_CORE_NS {
+    enum class EditorIcon : uint32_t;
+}
+
 namespace SR_CORE_NS::GUI {
     class VisualScriptEditor;
     class Inspector;
     class WorldEdit;
 
-    SR_ENUM_CLASS(EditorIcon,
-            Unknown
-    );
-
-    class EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
+    class
+    EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
         using Widgets = std::unordered_map<size_t, Graphics::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
     public:
@@ -60,6 +61,8 @@ namespace SR_CORE_NS::GUI {
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
+        SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
+        SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -67,9 +70,11 @@ namespace SR_CORE_NS::GUI {
         void Update();
 
     private:
-        void OnKeyDown(const SR_UTILS_NS::KeyDownEvent& event) override;
-        void OnKeyPress(const SR_UTILS_NS::KeyPressEvent& event) override;
-        void OnKeyUp(const SR_UTILS_NS::KeyUpEvent& event) override;
+        void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
+
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
+        void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
         bool Init();
@@ -85,6 +90,7 @@ namespace SR_CORE_NS::GUI {
         std::atomic<bool>    m_loaded     = false;
 
         std::atomic<bool>    m_useDocking = true;
+        std::atomic<bool>    m_dragWindow = false;
 
         Widgets              m_widgets    = { };
         Icons                m_icons      = { };

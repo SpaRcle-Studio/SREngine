@@ -6,19 +6,17 @@
 #include <Core/GUI/EditorGUI.h>
 
 #include <GUI/WidgetManager.h>
-#include <Types/Time.h>
-#include <Types/Timer.h>
-#include <Input/InputSystem.h>
 #include <Environment/Environment.h>
-#include <Events/EventManager.h>
-#include <Utils/Features.h>
+
+#include <Utils/Events/EventManager.h>
+#include <Utils/World/Scene.h>
+#include <Utils/Common/Features.h>
 
 #include <Render/Render.h>
 #include <Render/CameraManager.h>
 #include <Window/Window.h>
-#include <Types/Skybox.h>
 
-#include <World/Scene.h>
+#include <Types/Skybox.h>
 
 bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine* physics) {
     m_window = window;
@@ -56,7 +54,7 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     }
 
     Graphics::Environment::RegisterScrollEvent([](double x, double y){
-        SR_UTILS_NS::Input::SetMouseScroll(x, y);
+        SR_UTILS_NS::Input::Instance().SetMouseScroll(x, y);
     });
 
     if (!m_scene.Valid()) {
@@ -86,7 +84,7 @@ bool Framework::Engine::Init() {
         return false;
     }
 
-    Helper::Debug::Info("Engine::Init() : initializing game engine...");
+    SR_INFO("Engine::Init() : initializing game engine...");
 
     Helper::EventManager::Subscribe([this](SR_UTILS_NS::EventManager::Event event){
         switch (event) {
@@ -180,7 +178,7 @@ void Framework::Engine::Await() {
         const auto deltaTime = now - timeStart;
         timeStart = now;
 
-        const bool windowFocused = m_window ? m_window->IsWindowFocus() : false;
+        const bool windowFocused = m_window != nullptr && m_window->IsWindowFocus();
 
         /// fixed update
         if (accumulator >= updateFrequency) {
@@ -188,32 +186,32 @@ void Framework::Engine::Await() {
 
             while (accumulator >= updateFrequency) {
                 if (windowFocused) {
-                    Helper::Input::Check();
+                    SR_UTILS_NS::Input::Instance().Check();
                     m_input->Check();
 
-                    if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-                        if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::Z))
+                    if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+                        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
                             m_cmdManager->Cancel();
 
-                        if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::Y))
+                        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
                             if (!m_cmdManager->Redo())
                                 SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
                     }
 
-                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
                         m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
                     }
 
-                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                         m_editor->Enable(!m_editor->Enabled());
                     }
 
-                    if (SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::F3)) {
+                    if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3)) {
                         Reload();
                     }
 
-                    if (SR_UTILS_NS::Input::GetKey(SR_UTILS_NS::KeyCode::BackSpace) && SR_UTILS_NS::Input::GetKeyDown(SR_UTILS_NS::KeyCode::LShift)) {
-                        SR_UTILS_NS::Debug::System("Engine::Await() : The closing key combination have been detected!");
+                    if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::BackSpace) && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift)) {
+                        SR_SYSTEM_LOG("Engine::Await() : The closing key combination have been detected!");
                         m_exitEvent = true;
                         break;
                     }
@@ -244,6 +242,14 @@ bool Framework::Engine::Close() {
 
     m_isRun = false;
 
+    /// должен освобождаться перед компилятором и перед окном,
+    /// так как может содержать скрипты
+    if (m_editor) {
+        m_editor->Destroy();
+        m_editor->Free();
+        m_editor = nullptr;
+    }
+
     CloseScene();
 
     if (m_input)
@@ -259,14 +265,6 @@ bool Framework::Engine::Close() {
         m_worldThread->TryJoin();
         m_worldThread->Free();
         m_worldThread = nullptr;
-    }
-
-    /// должен освобождаться перед компилятором и перед окном,
-    /// так как может содержать скрипты
-    if (m_editor) {
-        m_editor->Destroy();
-        m_editor->Free();
-        m_editor = nullptr;
     }
 
     if (m_window && m_window->IsRun()) {

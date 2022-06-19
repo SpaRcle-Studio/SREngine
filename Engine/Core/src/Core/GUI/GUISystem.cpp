@@ -7,12 +7,12 @@
 #include <Core/Engine.h>
 #include <Core/EngineCommands.h>
 
-#include <GUI/Editor/FileBrowser.h>
-#include <Input/InputSystem.h>
-#include <GUI.h>
-#include <ResourceManager/ResourceManager.h>
-#include <ECS/ComponentManager.h>
-#include <World/Chunk.h>
+#include <Core/GUI/FileBrowser.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/GUI.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ECS/ComponentManager.h>
+#include <Utils/World/Chunk.h>
 #include <GUI/Editor/MessageBox.h>
 
 namespace Framework::Core {
@@ -38,64 +38,10 @@ namespace Framework::Core {
 
 using namespace Framework::Core::GUI;
 
-/*
-bool HY_ImGui_BeginMainStatusBar()
-{
-    ImGuiContext& g = *GImGui;
-    ImGuiViewportP* viewport = g.Viewports[0];
-    ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainStatusBar");
+/// drag
+bool GUISystem::BeginDockSpace() {
+    bool drag = false;
 
-    // For the main menu bar, which cannot be moved, we honor g.Style.DisplaySafeAreaPadding to ensure text can be visible on a TV set.
-    g.NextWindowData.MenuBarOffsetMinVal = ImVec2(g.Style.DisplaySafeAreaPadding.x, ImMax(g.Style.DisplaySafeAreaPadding.y - g.Style.FramePadding.y, 0.0f));
-
-    // Get our rectangle at the top of the work area
-    //__debugbreak();
-    if (menu_bar_window == NULL || menu_bar_window->BeginCount == 0)
-    {
-        // Set window position
-        // We don't attempt to calculate our height ahead, as it depends on the per-viewport font size. However menu-bar will affect the minimum window size so we'll get the right height.
-        ImVec2 menu_bar_pos = viewport->Pos + viewport->CurrWorkOffsetMin;
-        ImVec2 menu_bar_size = ImVec2(viewport->Size.x - viewport->CurrWorkOffsetMin.x + viewport->CurrWorkOffsetMax.x, 1.0f);
-        ImGui::SetNextWindowPos(menu_bar_pos);
-        ImGui::SetNextWindowSize(menu_bar_size);
-    }
-
-    // Create window
-    ImGui::SetNextWindowViewport(viewport->ID); // Enforce viewport so we don't create our own viewport when ImGuiConfigFlags_ViewportsNoMerge is set.
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 0));    // Lift normal size constraint, however the presence of a menu-bar will give us the minimum height we want.
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
-    bool is_open = ImGui::Begin("##MainStatusBar", NULL, window_flags) && ImGui::BeginMenuBar();
-    ImGui::PopStyleVar(2);
-
-    // Report our size into work area (for next frame) using actual window size
-    menu_bar_window = ImGui::GetCurrentWindow();
-    if (menu_bar_window->BeginCount == 1)
-        viewport->CurrWorkOffsetMin.y += menu_bar_window->Size.y;
-
-    g.NextWindowData.MenuBarOffsetMinVal = ImVec2(0.0f, 0.0f);
-    if (!is_open)
-    {
-        ImGui::End();
-        return false;
-    }
-    return true; //-V1020
-}
-void HY_ImGui_EndMainStatusBar()
-{
-    ImGui::EndMenuBar();
-
-    // When the user has left the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
-    // FIXME: With this strategy we won't be able to restore a NULL focus.
-    ImGuiContext& g = *GImGui;
-    if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
-        ImGui::FocusTopMostWindowUnderOne(g.NavWindow, NULL);
-
-    ImGui::End();
-}
-*/
-
-void GUISystem::BeginDockSpace() {
     const float toolbarSize = 0;
 
     ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -133,13 +79,7 @@ void GUISystem::BeginDockSpace() {
             click = Click::None;
 
         if (click == Click::Drag) {
-            auto drag = ImGui::GetMouseDragDelta();
-            auto pos = Graphics::Environment::Get()->GetBasicWindow()->GetPosition();
-
-            pos.x += drag.x;
-            pos.y += drag.y;
-
-            Graphics::Environment::Get()->GetBasicWindow()->Move(pos.x, pos.y);
+            drag = true;
         }
 
         ImGui::Text("%s", winName);
@@ -193,10 +133,8 @@ void GUISystem::BeginDockSpace() {
     ImGui::DockSpace(dockMain);
     ImGui::End();
     ImGui::PopStyleVar(3);
-}
 
-void GUISystem::EndDockSpace() {
-
+    return drag;
 }
 
 bool GUISystem::BeginWindow(const char* name) {
@@ -215,15 +153,69 @@ void GUISystem::EndChildWindow() {
     ImGui::EndChild();
 }
 
-bool GUISystem::ImageButton(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
+
+bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding, ImGuiButtonFlags flags) {
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* window = g.CurrentWindow;
+    if (window->SkipItems)
+        return false;
+
+    ImVec4 bg_col = ImVec4(0,0,0,0);
+    ImVec4 tint_col = ImVec4(1,1,1,1);
+    ImVec2 uv0, uv1;
+
     if (m_pipeLine == Graphics::PipeLine::OpenGL) {
-        return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0));
+        uv0 = ImVec2(0, 1);
+        uv1 = ImVec2(1, 0);
+    }
+    else {
+        uv0 = ImVec2(-1, 0);
+        uv1 = ImVec2(0, 1);
     }
 
-    return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(-1, 0), ImVec2(0, 1));
+    /// Default to using texture ID as ID. User can still push string/integer prefixes.
+    ImGui::PushID((void*)(intptr_t)descriptor);
+    const ImGuiID id = window->GetID(imageId.data());
+    ImGui::PopID();
+
+    const ImVec2 padding = (framePadding >= 0) ? ImVec2((float)framePadding, (float)framePadding) : g.Style.FramePadding;
+
+    const ImRect bb(window->DC.CursorPos, window->DC.CursorPos + ImVec2(size.x, size.y) + padding * 2);
+    ImGui::ItemSize(bb);
+    if (!ImGui::ItemAdd(bb, id))
+        return false;
+
+    bool hovered, held;
+    bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, flags);
+
+    // Render
+    const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
+    ImGui::RenderNavHighlight(bb, id);
+    ImGui::RenderFrame(bb.Min, bb.Max, col, true, ImClamp((float)ImMin(padding.x, padding.y), 0.0f, g.Style.FrameRounding));
+    if (bg_col.w > 0.0f)
+        window->DrawList->AddRectFilled(bb.Min + padding, bb.Max - padding, ImGui::GetColorU32(bg_col));
+    window->DrawList->AddImage((ImTextureID)descriptor, bb.Min + padding, bb.Max - padding, uv0, uv1, ImGui::GetColorU32(tint_col));
+
+    return pressed;
 }
 
-void GUISystem::DrawTexture(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
+bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    return ImageButton(imageId.data(), descriptor, size, framePadding, ImGuiButtonFlags_None);
+}
+
+bool GUISystem::ImageButtonDouble(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    return ImageButton(imageId.data(), descriptor, size, framePadding, ImGuiButtonFlags_PressedOnDoubleClick);
+}
+
+bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    return ImageButton("##image", descriptor, size, framePadding);
+}
+
+bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size) {
+    return ImageButton(descriptor, size, -1);
+}
+
+void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
     if (m_pipeLine == Graphics::PipeLine::OpenGL) {
         DrawImage(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
@@ -291,79 +283,6 @@ void GUISystem::DrawImage(
     }
     else
         window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
-}
-
-void GUISystem::DrawHierarchy(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
-    m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
-
-    if (scene.LockIfValid()) {
-        unsigned long i = 0;
-
-        if (ImGui::TreeNodeEx(scene->GetName().c_str(), ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) {
-            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
-
-            scene->ForEachRootObjects([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& gm) {
-                if (gm->HasChildren()) {
-                    //bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-                    //                              g_node_flags_with_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                    //                              "%s", gm->GetName().c_str());
-                    //CheckSelected(gm);
-
-                    //if (open)
-                    //    this->DrawChild(gm);
-                } else {
-                    //ImGui::TreeNodeEx((void *) (intptr_t) i,
-                    //                  g_node_flags_without_child | (gm->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-                     //                 "%s", gm->GetName().c_str());
-
-                    CheckSelected(gm);
-                }
-                i++;
-            });
-            ImGui::TreePop();
-            ImGui::PopStyleVar();
-        }
-
-        //auto&& selected = scene->GetSelected();
-        //if (ImGui::Button("Delete") && selected.LockIfValid()) {
-        //    auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-        //    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-        //    selected.Unlock();
-        //}
-
-        scene.Unlock();
-    }
-}
-
-void GUISystem::DrawChild(const Framework::Helper::Types::SafePtr<Framework::Helper::GameObject>& root) {
-    unsigned long i = 0;
-
-    root->ForEachChild([&i, this](const Helper::Types::SafePtr<Helper::GameObject>& child){
-        if (child->HasChildren()) {
-            //bool open = ImGui::TreeNodeEx((void *) (intptr_t) i,
-            //                              g_node_flags_with_child |
-             //                             (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-            ///                             "%s", child->GetName().c_str()
-            //);
-
-            //CheckSelected(child);
-
-            //if (open)
-            //   DrawChild(child);
-        }
-        else {
-            //ImGui::TreeNodeEx((void *) (intptr_t) i,
-            //                  g_node_flags_without_child | (child->IsSelect() ? ImGuiTreeNodeFlags_Selected : 0),
-            //                  "%s", child->GetName().c_str()
-            //);
-
-            CheckSelected(child);
-        }
-
-        i++;
-    });
-
-    ImGui::TreePop();
 }
 
 bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {
@@ -752,17 +671,17 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Save scene")) {
             if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
-                if (auto path = SR_UTILS_NS::FileSystem::SaveFileDialog(scenesPath.ToString(), "Scene Files(*.scene)"); !path.empty()) {
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
                     const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
                     const auto folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
 
                     scene->SetName(sceneName);
 
                     if (scene->SaveAt(folder)) {
-                        Helper::Debug::System("GUISystem::BeginMenuBar() : scene saved as \"" + path + "\"");
+                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene saved as \"" + path.ToString() + "\"");
                     }
                     else {
-                        SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path + "\"");
+                        SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
                     }
                 }
                 scene.Unlock();
@@ -779,7 +698,9 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Instance from file")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                if (auto path = SR_UTILS_NS::FileSystem::LoadFileDialog(resourcesPath.ToString(), ""); !path.empty()) {
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
+                    { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
+                {
                     scene->InstanceFromFile(path);
                 }
                 scene.Unlock();
@@ -860,6 +781,8 @@ bool GUISystem::BeginMenuBar() {
 void GUISystem::EndMenuBar() {
     //ImGui::EndMainMenuBar();
 }
+
+
 
 
 

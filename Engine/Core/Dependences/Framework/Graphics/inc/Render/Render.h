@@ -10,12 +10,12 @@
 #include <Environment/Environment.h>
 #include <Types/EditorGrid.h>
 #include <Render/ColorBuffer.h>
-#include <Types/List.h>
+#include <Utils/Types/List.h>
 
 #include <Render/MeshCluster.h>
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/SafeQueue.h>
+#include <Utils/Types/SafeQueue.h>
 
 namespace SR_GRAPH_NS::Types {
     class Skybox;
@@ -40,7 +40,7 @@ namespace SR_GRAPH_NS {
         Render(std::string name);
 
     public:
-        ~Render() override = default;
+        ~Render() override;
 
     public:
         SR_NODISCARD bool IsRun() const { return m_isRun; }
@@ -64,9 +64,6 @@ namespace SR_GRAPH_NS {
             for (size_t i = 0; i < meshes.Size(); i++)
                 this->RegisterMesh(meshes[i]);
         }
-
-        bool InsertShader(uint32_t id, Shader* shader);
-        Shader* FindShader(uint32_t id) const;
 
         /** \brief Can get a nullptr value for removing skybox */
         void SetSkybox(SR_GTYPES_NS::Skybox* skybox);
@@ -126,7 +123,6 @@ namespace SR_GRAPH_NS {
 
         Types::Skybox*                m_skybox                   = nullptr;
 
-        std::vector<Shader*>          m_shaders                  = {};
         SR_HTYPES_NS::SafeQueue<Shader*> m_shadersToFree         = {};
 
         ColorBuffer*                  m_colorBuffer              = nullptr;

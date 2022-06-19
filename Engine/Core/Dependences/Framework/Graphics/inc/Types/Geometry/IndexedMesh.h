@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS::Types {
         bool Calculate() override;
         bool FreeVideoMemory() override;
 
-        template<Vertices::Type type> bool CalculateVBO(void* data);
+        template<Vertices::Type type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
         template<Vertices::Type type> bool FreeVBO();
 
         void SetRawMesh(Helper::Types::RawMesh* raw) override;
@@ -62,14 +62,19 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    template<Vertices::Type type> bool IndexedMesh::CalculateVBO(void *data) {
+    template<Vertices::Type type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
+
+        ///TODO: if (!m_vertices.empty())
+        ///    m_barycenter = Vertices::Barycenter(m_vertices);
+        ///SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
+
         if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
-            if (m_countVertices == 0 || !data) {
+            if (m_countVertices == 0 || !vertices.data()) {
                 SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
                 return false;
             }
 
-            if (m_VBO = m_env->CalculateVBO(data, type, m_countVertices); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_env->CalculateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("VertexMesh::Calculate() : failed calculate VBO \"" + m_geometryName + "\" mesh!");
                 m_hasErrors = true;
                 return false;

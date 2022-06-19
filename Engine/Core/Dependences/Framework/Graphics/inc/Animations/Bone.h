@@ -5,17 +5,17 @@
 #ifndef GAMEENGINE_BONE_H
 #define GAMEENGINE_BONE_H
 
-#include <ECS/Component.h>
+#include <Utils/ECS/Component.h>
 
 #include <Types/Mesh.h>
 #include <Render/Render.h>
 
-namespace Framework::Graphics::Animations {
-    class Bone : public Helper::Component {
+namespace SR_GRAPH_NS::Animations {
+    class Bone : public SR_UTILS_NS::Component {
     public:
         Bone();
     private:
-        ~Bone() = default;
+        ~Bone() override = default;
     private:
         Types::Mesh* m_mesh = nullptr;
     public:

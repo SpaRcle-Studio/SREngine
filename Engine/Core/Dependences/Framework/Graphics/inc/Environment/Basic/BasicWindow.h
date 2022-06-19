@@ -5,10 +5,10 @@
 #ifndef GAMEENGINE_BASICWINDOW_H
 #define GAMEENGINE_BASICWINDOW_H
 
-#include <Math/Vector3.h>
+#include <Utils/Math/Vector3.h>
 #include <Environment/PipeLine.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     enum class ResizeReason {
         Unknown, None, WndCreate, UserResize, AppResize
     };

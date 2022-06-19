@@ -5,9 +5,9 @@
 #ifndef SRENGINE_TEXT_H
 #define SRENGINE_TEXT_H
 
-#include <stdInclude.h>
+#include <Utils/stdInclude.h>
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class Text {
     private:
         std::u32string m_text;

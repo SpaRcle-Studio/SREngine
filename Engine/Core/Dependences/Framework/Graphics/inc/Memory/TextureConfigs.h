@@ -5,7 +5,7 @@
 #ifndef SRENGINE_TEXTURECONFIGS_H
 #define SRENGINE_TEXTURECONFIGS_H
 
-#include <Utils/Singleton.h>
+#include <Utils/Common/Singleton.h>
 #include <Environment/TextureHelper.h>
 
 namespace SR_GRAPH_NS::Memory {
@@ -52,6 +52,10 @@ namespace SR_GRAPH_NS::Memory {
                    && m_mipLevels == lrs.m_mipLevels
                    && (m_alpha == lrs.m_alpha || m_alpha == SR_UTILS_NS::BoolExt::None || lrs.m_alpha == SR_UTILS_NS::BoolExt::None)
                    && m_cpuUsage == lrs.m_cpuUsage;
+        }
+
+        bool operator!=(const TextureConfig& lrs) const {
+            return !(*this == lrs);
         }
     };
 

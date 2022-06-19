@@ -4,7 +4,7 @@
 
 #include <Core/World/World.h>
 
-#include <Types/RawMesh.h>
+#include <Utils/Types/RawMesh.h>
 #include <assimp/scene.h>
 #include <Render/CameraManager.h>
 
@@ -22,7 +22,12 @@ namespace Framework::Core::World {
 
         auto&& enabled = marshal.Read<bool>();
         auto&& name = marshal.Read<std::string>();
-        auto&& tag = marshal.Read<std::string>();
+        auto&& hasTag = marshal.Read<bool>();
+        std::string tag;
+
+        if (hasTag) {
+            tag = marshal.Read<std::string>();
+        }
 
         if (entityId == UINT64_MAX) {
             gameObject = Scene::Instance(name);
@@ -39,6 +44,10 @@ namespace Framework::Core::World {
         /// ----------------------
 
         gameObject->SetTransform(SR_UTILS_NS::Transform3D::Load(marshal));
+
+        if (hasTag) {
+            gameObject->SetTag(tag);
+        }
 
         /// ----------------------
 

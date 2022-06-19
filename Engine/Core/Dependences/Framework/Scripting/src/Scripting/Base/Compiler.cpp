@@ -3,7 +3,7 @@
 //
 
 #include <Scripting/Base/Compiler.h>
-#include <Types/Thread.h>
+#include <Utils/Types/Thread.h>
 
 namespace SR_SCRIPTING_NS {
 

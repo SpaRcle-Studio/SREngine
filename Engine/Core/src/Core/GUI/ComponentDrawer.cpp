@@ -5,18 +5,21 @@
 #include <Core/GUI/ComponentDrawer.h>
 
 #include <Core/GUI/GUISystem.h>
-#include <Types/DataStorage.h>
+#include <Utils/Types/DataStorage.h>
 #include <Scripting/Base/Behaviour.h>
 #include <Types/Geometry/Mesh3D.h>
-#include <ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <GUI/Utils.h>
 #include <Types/Texture.h>
 #include <Render/Render.h>
 #include <Types/Material.h>
 #include <Render/Camera.h>
+#include <Core/GUI/EditorGUI.h>
+#include <Utils/FileSystem/FileDialog.h>
+#include <Core/Settings/EditorSettings.h>
 
 namespace SR_CORE_NS::GUI {
-    void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, int32_t index) {
+    void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
         if (!pBehaviour) {
             return;
         }
@@ -44,7 +47,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
     }
 
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Camera*& camera, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Camera*& camera, EditorGUI* context, int32_t index) {
         float_t cameraFar  = camera->GetFar();
         if (ImGui::InputFloat("Far", &cameraFar, 5) && cameraFar >= 0) {
             camera->SetFar(cameraFar);
@@ -61,7 +64,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, EditorGUI* context, int32_t index) {
         Graphics::GUI::DrawValue("Mesh", mesh3d->GetResourceId());
         Graphics::GUI::DrawValue("Id", mesh3d->GetMeshId());
         Graphics::GUI::DrawValue("Geometry name", mesh3d->GetGeometryName());
@@ -73,27 +76,52 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::Separator();
 
-        if (auto&& material = mesh3d->GetMaterial()) {
-            DrawComponent(material, index);
-        }
-        else {
-            Helper::GUI::DrawTextOnCenter("Material (Missing)");
+        auto&& material = mesh3d->GetMaterial();
+        SR_GTYPES_NS::Material* copy = material;
+        DrawComponent(copy, context, index);
+        if (copy != material) {
+            mesh3d->SetMaterial(copy);
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Material *&material, int32_t index) {
-        const bool readOnly = material->IsReadOnly();
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Material *&material, EditorGUI* context, int32_t index) {
+        if (material) {
+            const bool readOnly = material->IsReadOnly();
 
-        Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
+            Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
 
-        Graphics::GUI::DrawValue("Material", material->GetResourceId());
+            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
+                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 0)) {
+                    auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
+                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(materialsPath, { { "Material", "mat" } });
 
-        if (auto&& shader = material->GetShader()) {
-            Graphics::GUI::DrawValue("Shader name", shader->GetName());
+                    if (path.Exists()) {
+                        if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(path)) {
+                            material = pMaterial;
+                            return;
+                        }
+                    }
+                }
+            }
+
+            ImGui::SameLine();
+            ImGui::BeginGroup();
+
+            Graphics::GUI::DrawValue("Material", material->GetResourceId());
+
+            if (auto &&shader = material->GetShader()) {
+                Graphics::GUI::DrawValue("Shader", shader->GetName());
+            }
+
+            ImGui::EndGroup();
+
+            DrawMaterialProps(material, context, index);
         }
+    }
 
+    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI *context, int32_t index) {
         for (auto&& property : material->GetProperties()) {
-            std::visit([&property, &material, index](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
+            std::visit([&property, &material, index, context](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
                 if (std::holds_alternative<int32_t>(arg)) {
                     auto&& value = std::get<int32_t>(arg);
                     if (ImGui::InputInt(property.displayName.c_str(), &value)) {
@@ -119,39 +147,64 @@ namespace SR_CORE_NS::GUI {
                     }
                 }
                 else if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
+                    auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<SR_GRAPH_NS::Render>();
+
+                    if (!render) {
+                        return;
+                    }
+
                     auto&& value = std::get<SR_GTYPES_NS::Texture*>(arg);
 
                     ImGui::Separator();
 
-                    auto&& pDescriptor = value ? value->GetDescriptor() : SR_GTYPES_NS::Texture::GetNone();
+                    void* pDescriptor = value ? value->GetDescriptor() : nullptr;
+
+                    /// пробуем взять иконку из редактора
+                    if (!pDescriptor) {
+                        pDescriptor = context->GetIconDescriptor(EditorIcon::Unknown);
+                    }
+
+                    /// если нашли хоть какой-то дескриптор
                     if (pDescriptor) {
-                        if (GUISystem::Instance().ImageButton(pDescriptor, SR_MATH_NS::IVector2(50))) {
-                            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().FileDialog();
+                        if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
+                            auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath();
+                            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 
                             if (path.Exists()) {
                                 if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {
-                                    if (auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<SR_GRAPH_NS::Render>(); render && !texture->HasRender()) {
+                                    if (!texture->HasRender()) {
                                         render->RegisterTexture(texture);
                                     }
                                     material->SetTexture(&property, texture);
                                 }
                             }
                         }
-                        ImGui::SameLine();
                     }
 
+                    /// -------------------------
+
+                    ImGui::SameLine();
+                    ImGui::BeginGroup();
+
+                    ImGui::Text("Property: %s", property.displayName.c_str());
+
                     if (value) {
-                        ImGui::Text("Width: %i\nHeight: %i\nChannels: %i", value->GetWidth(), value->GetHeight(), value->GetChannels());
+                        ImGui::Text("Size: %ix%i\nChannels: %i", value->GetWidth(), value->GetHeight(), value->GetChannels());
                     }
                     else {
-                        ImGui::Text("Width: None\nHeight: None\nChannels: None");
+                        ImGui::Text("Size: None\nChannels: None");
                     }
 
                     std::string id = value ? value->GetResourceId() : std::string();
-                    if (ImGui::InputText(property.displayName.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue)) {
+
+                    auto&& inputLabel = SR_UTILS_NS::Format("##%s-%i-mat-tex", property.displayName.c_str(), index);
+                    if (ImGui::InputText(inputLabel.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
                         auto&& texture = SR_GTYPES_NS::Texture::Load(id);
                         material->SetTexture(&property, texture);
+                        value = texture;
                     }
+
+                    ImGui::EndGroup();
 
                     ImGui::Separator();
                 }

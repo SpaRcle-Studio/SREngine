@@ -3,7 +3,7 @@
 //
 
 #include <Environment/Vulkan/VulkanImGUI.h>
-#include <GUI.h>
+#include <Utils/GUI.h>
 
 int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
     VkWin32SurfaceCreateInfoKHR sci;
@@ -24,7 +24,7 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKernel* kernel) {
-    Helper::Debug::Info("VkImGUI::Init() : initializing vulkan imgui...");
+    SR_INFO("VkImGUI::Init() : initializing vulkan imgui...");
 
     m_device      = kernel->GetDevice();
     m_swapchain   = kernel->GetSwapchain();
@@ -134,7 +134,7 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::Destroy() {
-    Helper::Debug::Info("VkImGUI::Destroy() : destroying vulkan imgui...");
+    SR_INFO("VkImGUI::Destroy() : destroying vulkan imgui...");
 
     if (m_pool) {
         delete m_pool;

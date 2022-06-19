@@ -6,11 +6,11 @@
 #define GAMEENGINE_GUISYSTEM_H
 
 #include <Environment/Environment.h>
-#include <Math/Vector2.h>
-#include <World/Scene.h>
+#include <Utils/Math/Vector2.h>
+#include <Utils/World/Scene.h>
 #include <Render/Camera.h>
-#include <Utils/Singleton.h>
-#include <ECS/GameObject.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace Framework::Core::GUI {
     class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {
@@ -105,8 +105,6 @@ namespace Framework::Core::GUI {
             ImGui::Text("%s", text.c_str());
         }
 
-        void DrawChild(const Helper::Types::SafePtr<Helper::GameObject>& root);
-        void DrawHierarchy(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
 
@@ -116,13 +114,16 @@ namespace Framework::Core::GUI {
             ImVec2 size = ImGui::GetWindowSize();
             return { (int32_t)size.x, (int32_t)size.y };
         }
+        bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding, ImGuiButtonFlags flags);
+        bool ImageButtonDouble(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
+        bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
+        bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmo(Graphics::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
         void DrawGuizmoTools();
-        void BeginDockSpace();
-        void EndDockSpace();
+        bool BeginDockSpace();
         bool BeginWindow(const char* name);
         void EndWindow();
         bool BeginChildWindow(const char* name);

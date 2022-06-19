@@ -5,13 +5,13 @@
 #ifndef SRENGINE_WIDGET_H
 #define SRENGINE_WIDGET_H
 
-#include <GUI.h>
+#include <Utils/GUI.h>
 
-#include <Utils/NonCopyable.h>
-#include <Input/InputSystem.h>
-#include <Input/InputHandler.h>
+#include <Utils/Common/NonCopyable.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/Input/InputHandler.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
 
@@ -22,7 +22,7 @@ namespace Framework::Graphics::GUI {
     };
     typedef uint32_t WidgetFlagBits;
 
-    class Widget : public Helper::NonCopyable, public Helper::InputHandler {
+    class Widget : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         friend class WidgetManager;
     public:
         explicit Widget(std::string name, Helper::Math::IVector2 size = Helper::Math::IVector2MAX)

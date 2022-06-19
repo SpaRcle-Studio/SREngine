@@ -3,10 +3,10 @@
 //
 
 #include <Types/Geometry/IndexedMesh.h>
-#include <Types/RawMesh.h>
+#include <Utils/Types/RawMesh.h>
 
 namespace SR_GTYPES_NS {
-    IResource *IndexedMesh::Copy(IResource *destination) const {
+    SR_UTILS_NS::IResource *IndexedMesh::Copy(SR_UTILS_NS::IResource *destination) const {
         if (!destination) {
             SR_ERROR("IndexedMesh::Copy() : destination in nullptr!");
             return nullptr;

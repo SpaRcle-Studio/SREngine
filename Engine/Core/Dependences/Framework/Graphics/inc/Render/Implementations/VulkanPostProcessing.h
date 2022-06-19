@@ -70,7 +70,7 @@ namespace Framework::Graphics {
         }
     public:
         bool Free() override {
-            Helper::Debug::Graph("VulkanPostProcessing::Free() : free post processing pointer...");
+            SR_GRAPH_LOG("VulkanPostProcessing::Free() : free post processing pointer...");
             delete this;
             return true;
         }

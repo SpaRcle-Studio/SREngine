@@ -2,7 +2,7 @@
 // Created by Monika on 17.01.2022.
 //
 
-#include <macros.h>
+#include <Utils/macros.h>
 
 #include "src/Core/GUI/ComponentDrawer.cpp"
 #include "src/Core/GUI/EditorGUI.cpp"
@@ -14,8 +14,11 @@
 #include "src/Core/GUI/EngineSettings.cpp"
 #include "src/Core/GUI/EngineStatistics.cpp"
 #include "src/Core/GUI/SceneViewer.cpp"
+#include "src/Core/GUI/FileBrowser.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
+
+#include "src/Core/Settings/EditorSettings.cpp"
 
 #include "src/Core/World/VisualChunk.cpp"
 #include "src/Core/World/VisualRegion.cpp"

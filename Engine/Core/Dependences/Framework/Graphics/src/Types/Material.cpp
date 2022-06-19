@@ -7,7 +7,6 @@
 #include <Types/Mesh.h>
 #include <Render/Shader.h>
 #include <Types/Texture.h>
-#include <ResourceManager/IResource.h>
 
 namespace SR_GTYPES_NS {
     Material::Material()
@@ -61,10 +60,12 @@ namespace SR_GTYPES_NS {
         return nullptr;
     }
 
-    Material* Material::Load(const std::string &path) {
+    Material* Material::Load(const std::string &rawPath) {
         SR_GLOBAL_LOCK
 
-        if (auto&& pMaterial = ResourceManager::Instance().Find<Material>(path))
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath());
+
+        if (auto&& pMaterial = SR_UTILS_NS::ResourceManager::Instance().Find<Material>(path))
             return pMaterial;
 
         auto&& pMaterial = new Material();
@@ -296,9 +297,9 @@ namespace SR_GTYPES_NS {
             InitShader();
         }
 
-        const auto&& path = ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
+        const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
 
-        auto&& document = Xml::Document::Load(path);
+        auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
             SR_ERROR("Material::Reload() : file not found! \n\tPath: " + path.ToString());
             return false;
@@ -321,12 +322,15 @@ namespace SR_GTYPES_NS {
         if (auto&& properties = matXml.TryGetNode("Properties")) {
             for (auto&& propertyXml : properties.GetNodes()) {
                 const std::string id = propertyXml.GetAttribute("Id").ToString();
-                auto&& type = StringToEnumShaderVarType(propertyXml.GetAttribute("Type").ToString());
+                auto&& typeName = propertyXml.GetAttribute("Type").ToString();
+                auto&& type = StringToEnumShaderVarType(typeName);
 
                 Property* pProperty = GetProperty(id);
 
                 if (!pProperty) {
-                    SR_WARN("Material::Reload() : failed to load \"" + id + "\" property!")
+                    SR_WARN("Material::Reload() : failed to load \"" + id + "\" property! \n\tType: "
+                        + typeName + "\n\tProperty count: " + std::to_string(m_properties.size()));
+
                     continue;
                 }
 

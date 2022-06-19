@@ -4,8 +4,8 @@
 
 #include <Core/GUI/Hierarchy.h>
 
-#include <Input/InputSystem.h>
-#include <Platform/Platform.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/Platform/Platform.h>
 #include <GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {
@@ -16,7 +16,7 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Draw() {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        m_shiftPressed = Helper::Input::GetKey(Helper::KeyCode::LShift);
+        m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
         DrawMenu();
 
@@ -206,8 +206,8 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::OnKeyDown(const SR_UTILS_NS::KeyDownEvent &event) {
-        switch (event.GetKeyCode()) {
+    void Hierarchy::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+        switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::C: {
                 if (IsKeyPressed(SR_UTILS_NS::KeyCode::Ctrl))
                     Copy();
@@ -239,13 +239,13 @@ namespace SR_CORE_NS::GUI {
                 break;
         }
 
-        InputHandler::OnKeyDown(event);
+        InputHandler::OnKeyDown(data);
     }
 
-    void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyUpEvent &event) {
+    void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        switch (event.GetKeyCode()) {
+        switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::LShift: {
                 if (m_pointersHolder.size() > 1) {
                     m_pointersHolder.clear();
@@ -256,7 +256,7 @@ namespace SR_CORE_NS::GUI {
                 break;
         }
 
-        InputHandler::OnKeyUp(event);
+        InputHandler::OnKeyUp(data);
     }
 
     void Hierarchy::Copy() const {
@@ -271,12 +271,15 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        if (marshal.Valid())
-            Helper::Platform::TextToClipboard(marshal.ToString());
+        if (marshal.Valid()) {
+            Helper::Platform::TextToClipboard(marshal.ToBase64());
+        }
     }
 
     void Hierarchy::Paste() {
-        if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromMemory(Helper::Platform::GetClipboardText()); marshal.Valid()) {
+        auto&& base64 = Helper::Platform::GetClipboardText();
+
+        if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
             /// TODO: нужно сделать вызов через команду, иначе будет deadlock
 
             std::set<Helper::GameObject::Ptr> selected;

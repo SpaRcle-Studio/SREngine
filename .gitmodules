@@ -13,6 +13,9 @@
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui"]
 	path = Engine/Core/Dependences/Framework/Depends/imgui
 	url = https://github.com/ocornut/imgui
-[submodule "Engine/Core/Dependences/Framework/Depends/assimp"]
-	path = Engine/Core/Dependences/Framework/Depends/assimp
-	url = https://github.com/assimp/assimp
+[submodule "Engine/Core/Dependences/Framework/Utils/libs/assimp"]
+	path = Engine/Core/Dependences/Framework/Utils/libs/assimp
+	url = https://github.com/Monika0000/assimp
+[submodule "Engine/Core/Dependences/Framework/Utils/libs/nativefiledialog"]
+	path = Engine/Core/Dependences/Framework/Utils/libs/nativefiledialog
+	url = https://github.com/Monika0000/nativefiledialog-extended

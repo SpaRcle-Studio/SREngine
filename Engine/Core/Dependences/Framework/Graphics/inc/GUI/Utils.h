@@ -5,10 +5,10 @@
 #ifndef SRENGINE_GUIUTILS_H
 #define SRENGINE_GUIUTILS_H
 
-#include <Debug.h>
-#include <Math/Mathematics.h>
+#include <Utils/Debug.h>
+#include <Utils/Math/Mathematics.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_NS::GUI {
     static ImVec4 MakeDisableColor(ImVec4 color) {
         color.w /= 2;
         return color;

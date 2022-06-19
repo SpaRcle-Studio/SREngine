@@ -5,8 +5,8 @@
 #ifndef SRENGINE_UBOMANAGER_H
 #define SRENGINE_UBOMANAGER_H
 
-#include <Utils/Singleton.h>
-#include <Types/Map.h>
+#include <Utils/Common/Singleton.h>
+#include <Utils/Types/Map.h>
 
 namespace SR_GRAPH_NS {
     class Camera;
@@ -59,12 +59,15 @@ namespace SR_GRAPH_NS::Memory {
         void SetCurrentCamera(Camera* pCamera);
 
     public:
+        SR_NODISCARD VirtualUBO ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples);
         SR_NODISCARD VirtualUBO AllocateUBO(uint32_t uboSize, uint32_t samples);
         bool FreeUBO(VirtualUBO* ubo);
         void BindUBO(VirtualUBO ubo);
 
     private:
         SR_NODISCARD bool AllocMemory(UBO* ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples);
+        void FreeMemory(UBO* ubo, Descriptor* descriptor);
+
         SR_NODISCARD VirtualUBO GenerateUnique() const;
 
     private:

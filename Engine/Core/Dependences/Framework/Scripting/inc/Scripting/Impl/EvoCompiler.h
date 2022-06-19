@@ -7,14 +7,14 @@
 
 #include <Scripting/Base/Compiler.h>
 
-#include <Xml.h>
+#include <Utils/Xml.h>
 #include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
 #include <EvoScript/Compilation/AddressTableGen.h>
 #include <EvoScript/Compilation/Casting.h>
 
 namespace SR_SCRIPTING_NS {
-    class EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {
+    class SR_DLL_EXPORT EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {
     public:
         explicit EvoCompiler(std::string cachePath);
         ~EvoCompiler() override;
@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
 
     };
 
-    class GlobalEvoCompiler : public EvoCompiler, public SR_UTILS_NS::Singleton<GlobalEvoCompiler> {
+    class SR_DLL_EXPORT GlobalEvoCompiler : public EvoCompiler, public SR_UTILS_NS::Singleton<GlobalEvoCompiler> {
         friend SR_UTILS_NS::Singleton<GlobalEvoCompiler>;
     protected:
         GlobalEvoCompiler();

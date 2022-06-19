@@ -3,14 +3,15 @@
 //
 
 #include <GUI/NodeManager.h>
-#include <Debug.h>
+#include <Utils/Debug.h>
+#include <Utils/Common/Numeric.h>
 
 namespace SR_GRAPH_NS::GUI {
     uintptr_t NodeManager::AllocUniqueId(void* ptr) {
         SR_LOCK_GUARD
 
     retry:
-        uintptr_t id = static_cast<uintptr_t>(Random::Instance().Int64());
+        uintptr_t id = static_cast<uintptr_t>(SR_UTILS_NS::Random::Instance().Int64());
 
         if (m_uniques.count(id) == 1 || id == SR_UINTPTR_MAX || id == 0) {
             SR_WARN("NodeManager::AllocUniqueId() : collision detected! Id: " + std::to_string(id));

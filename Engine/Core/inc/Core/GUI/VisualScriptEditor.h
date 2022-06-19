@@ -8,7 +8,6 @@
 #include <GUI/Widget.h>
 
 #include <imgui_node_editor.h>
-#include <Utils/NonCopyable.h>
 
 namespace SR_GRAPH_NS::GUI {
     class Pin;
@@ -27,8 +26,8 @@ namespace SR_CORE_NS::GUI {
         void AddNode(SR_GRAPH_NS::GUI::Node* node);
         void AddLink(SR_GRAPH_NS::GUI::Link* link);
 
-        [[nodiscard]] SR_GRAPH_NS::GUI::Node* CreateBlueprint(const std::string& id) const;
-        [[nodiscard]] bool ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const;
+        SR_NODISCARD SR_GRAPH_NS::GUI::Node* CreateBlueprint(const std::string& id) const;
+        SR_NODISCARD bool ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const;
 
     private:
         void LoadConfig();

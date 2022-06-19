@@ -2,8 +2,10 @@
 // Created by Nikita on 13.12.2020.
 //
 
-#include "Lighting/DirectionalLight.h"
+#include <Lighting/DirectionalLight.h>
 
-Framework::Graphics::DirectionalLight::DirectionalLight(Framework::Graphics::Render *render) : Light(render) {
-
+namespace SR_GRAPH_NS {
+    DirectionalLight::DirectionalLight(Render *render)
+        : Light(render)
+    { }
 }

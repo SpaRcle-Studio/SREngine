@@ -6,8 +6,7 @@
 #define SRENGINE_MESSAGEBOX_H
 
 #include <GUI/Widget.h>
-#include <Utils/NonCopyable.h>
-#include <Utils/Singleton.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_GRAPH_NS::GUI {
     enum class MessageBoxType : uint8_t {
@@ -22,7 +21,7 @@ namespace SR_GRAPH_NS::GUI {
     };
     typedef uint32_t MessageBoxButton;
 
-    class MessageBoxWidget : public Widget, public SR_UTILS_NS::Singleton<MessageBoxWidget> {
+    class SR_DLL_EXPORT MessageBoxWidget : public Widget, public SR_UTILS_NS::Singleton<MessageBoxWidget> {
         friend class SR_UTILS_NS::Singleton<MessageBoxWidget>;
     private:
         MessageBoxWidget();

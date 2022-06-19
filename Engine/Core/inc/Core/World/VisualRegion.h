@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_VISUALREGION_H
 #define GAMEENGINE_VISUALREGION_H
 
-#include <World/Region.h>
-#include <Math/Vector3.h>
-#include <Math/Vector2.h>
+#include <Utils/World/Region.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector2.h>
 
 namespace Framework::Graphics::Types {
     class DebugWireframeMesh;

@@ -3,7 +3,7 @@
 //
 
 #include <Types/Geometry/Mesh3D.h>
-#include <Types/RawMesh.h>
+#include <Utils/Types/RawMesh.h>
 #include <Types/Material.h>
 #include <Environment/Environment.h>
 #include <Types/Uniforms.h>
@@ -26,16 +26,13 @@ namespace SR_GTYPES_NS {
         if (!IsCanCalculate())
             return false;
 
-        if (SR_UTILS_NS::Debug::GetLevel() >= SR_UTILS_NS::Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
-
-        ///TODO: if (!m_vertices.empty())
-        ///    m_barycenter = Vertices::Barycenter(m_vertices);
-        ///SRAssert(m_barycenter != Math::FVector3(Math::UnitMAX));
+        }
 
         auto&& vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
 
-        if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices.data()))
+        if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices))
             return false;
 
         return IndexedMesh::Calculate();
@@ -56,8 +53,9 @@ namespace SR_GTYPES_NS {
     }
 
     bool Mesh3D::FreeVideoMemory() {
-        if (Helper::Debug::GetLevel() >= Helper::Debug::Level::High)
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
+        }
 
         if (!FreeVBO<Vertices::Type::StaticMeshVertex>())
             return false;
@@ -79,53 +77,16 @@ namespace SR_GTYPES_NS {
         {
             m_dirtyMaterial = false;
 
-            /*m_virtualUBO = uboManager.AllocateUBO(shader->GetUBOBlockSize(), shader->GetSamplersCount());
+            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
                 uboManager.BindUBO(m_virtualUBO);
             }
-            else
+            else {
                 m_env->ResetDescriptorSet();
-
-            shader->InitUBOBlock();
-            shader->Flush();
-
-            m_material->UseSamplers();*/
-
-            if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-                SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
+                m_hasErrors = true;
+                return;
             }
-
-            if (m_UBO >= 0 && !m_env->FreeUBO(&m_UBO)) {
-                SR_ERROR("Mesh::FreeVideoMemory() : failed to free uniform buffer object!");
-            }
-
-            if (shader->GetUBOBlockSize() > 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform}); m_descriptorSet < 0) {
-                    SR_ERROR("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true;
-                    return;
-                }
-
-                if (m_UBO = m_env->AllocateUBO(shader->GetUBOBlockSize()); m_UBO < 0) {
-                    SR_ERROR("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
-                    m_hasErrors = true;
-                    return;
-                }
-
-                m_env->BindUBO(m_UBO);
-                m_env->BindDescriptorSet(m_descriptorSet);
-            }
-            else if (shader->GetSamplersCount() > 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::CombinedImage}); m_descriptorSet < 0) {
-                    SR_ERROR("Mesh3D::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true;
-                    return;
-                }
-                m_env->BindDescriptorSet(m_descriptorSet);
-            }
-            else
-                m_env->ResetDescriptorSet();
 
             shader->InitUBOBlock();
             shader->Flush();
@@ -133,11 +94,7 @@ namespace SR_GTYPES_NS {
             m_material->UseSamplers();
         }
 
-        if (m_descriptorSet != SR_ID_INVALID) {
-            m_env->BindDescriptorSet(m_descriptorSet);
-        }
-
-        // uboManager.BindUBO(m_virtualUBO);
+        uboManager.BindUBO(m_virtualUBO);
 
         m_env->DrawIndices(m_countIndices);
     }
@@ -152,7 +109,8 @@ namespace SR_GTYPES_NS {
 
         marshal.Write(static_cast<int32_t>(m_type));
 
-        marshal.Write(GetResourcePath());
+        /// TODO: use unicode
+        marshal.Write(GetResourcePath().ToString());
         marshal.Write(m_meshId);
         marshal.Write(IsInverse());
 

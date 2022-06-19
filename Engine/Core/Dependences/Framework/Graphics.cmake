@@ -1,9 +1,12 @@
 
+message("Vulkan sdk path: $ENV{VULKAN_SDK}")
+
 if (CYGWIN)
     #include_directories("$ENV{VULKAN_SDK}/Include")
 else()
     include_directories(${Vulkan_INCLUDE_DIRS})
-    find_package(Vulkan REQUIRED FATAL_ERROR)
+    #find_package(Vulkan REQUIRED FATAL_ERROR)
+    find_package(Vulkan REQUIRED)
 endif()
 
 set(GRAPHICS_SRC

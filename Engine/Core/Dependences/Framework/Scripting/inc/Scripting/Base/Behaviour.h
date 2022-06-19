@@ -5,8 +5,8 @@
 #ifndef SRENGINE_BEHAVIOUR_H
 #define SRENGINE_BEHAVIOUR_H
 
-#include <ECS/Component.h>
-#include <ResourceManager/IResource.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/ResourceManager/IResource.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
