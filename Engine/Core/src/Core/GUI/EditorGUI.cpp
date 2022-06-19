@@ -12,7 +12,7 @@
 #include <Core/GUI/EngineStatistics.h>
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/SceneViewer.h>
-#include <GUI/Editor/FileBrowser.h>
+#include <Core/GUI/FileBrowser.h>
 #include <Window/Window.h>
 #include <Utils/Common/Features.h>
 #include <Core/Settings/EditorSettings.h>

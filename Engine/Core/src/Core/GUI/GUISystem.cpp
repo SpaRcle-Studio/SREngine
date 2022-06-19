@@ -7,7 +7,7 @@
 #include <Core/Engine.h>
 #include <Core/EngineCommands.h>
 
-#include <GUI/Editor/FileBrowser.h>
+#include <Core/GUI/FileBrowser.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/GUI.h>
 #include <Utils/ResourceManager/ResourceManager.h>

@@ -2,7 +2,7 @@
 // Created by Monika on 27.12.2021.
 //
 
-#include <GUI/Editor/FileBrowser.h>
+#include "Core/GUI/FileBrowser.h"
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>

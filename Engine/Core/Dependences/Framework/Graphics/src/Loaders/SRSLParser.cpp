@@ -3,6 +3,7 @@
 //
 
 #include <Loaders/SRSLParser.h>
+#include <Utils/Common/VectorUtils.h>
 
 bool SR_GRAPH_NS::SRSL::RemoveComments(SR_GRAPH_NS::SRSL::SRSLCode &code) {
     bool multiple = false;
