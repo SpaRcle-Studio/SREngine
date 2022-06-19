@@ -186,7 +186,7 @@ bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const 
         return false;
 
     bool hovered, held;
-    bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held);
+    bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held, flags);
 
     // Render
     const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);

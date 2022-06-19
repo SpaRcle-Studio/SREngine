@@ -393,11 +393,11 @@ namespace SR_UTILS_NS {
             return myconv.to_bytes(str);
         }
 
-        // CutStringToOutputIt
-        static std::string CutFilePath(std::wstring str, unsigned int frompos){
+        // Cut string (file name) to output it
+        static std::string CutName(std::wstring str, unsigned int frompos){
             if (str.size() > frompos){
                 str = str.substr(0,frompos);
-                str.append(L"..."); //должно быть "…"
+                str.append(L"..."); //должно быть "…", но юникод символы не поддерживаются
             }
             return wstring_to_utf8(str);
         }

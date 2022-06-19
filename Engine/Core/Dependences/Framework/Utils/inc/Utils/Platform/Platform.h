@@ -7,6 +7,7 @@
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Common/ThreadUtils.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void TextToClipboard(const std::string& text);
@@ -17,6 +18,8 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern uint64_t GetProcessUsedMemory();
     SR_DLL_EXPORT extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
     SR_DLL_EXPORT extern void Terminate();
+    SR_DLL_EXPORT extern void OpenWithAssociatedApp(const Path& filepath);
 }
+
 
 #endif //SRENGINE_PLATFORM_H

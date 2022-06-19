@@ -7,6 +7,8 @@
 
 #include <Windows.h>
 #include <Psapi.h>
+#include <rpc.h>
+#include <shellapi.h>
 
 /// убираем проклятые min и max после инклуда Windows.h
 
@@ -138,5 +140,9 @@ namespace SR_UTILS_NS::Platform {
 #else
         terminate();
 #endif
+    }
+
+    void OpenWithAssociatedApp(const Path &filepath) {
+        system(filepath.ToString().c_str());
     }
 }

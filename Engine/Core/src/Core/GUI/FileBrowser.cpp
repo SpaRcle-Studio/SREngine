@@ -168,29 +168,22 @@ namespace SR_GRAPH_NS::GUI {
 
                 ++index;
 
-                ///wow, icons instead of special font
-
-                //ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
-                //ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
-
                 ImGui::BeginGroup();
 
                 if (path.IsDir()) {
                     void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::Folder);
-                    if (GUISystem::Instance().ImageButton(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
+                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
                         m_selectedDir = path;
                     }
                 }
                 else {
                     void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
-                    if (GUISystem::Instance().ImageButton(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
-                        //ok
+                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
+                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
                     }
-                    //ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
                 }
 
-                auto id = SR_UTILS_NS::StringUtils::CutFilePath(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
-                //ImGui::PopFont();
+                auto id = SR_UTILS_NS::StringUtils::CutName(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
 
                 ImGui::Text("%s", id.c_str());
 
