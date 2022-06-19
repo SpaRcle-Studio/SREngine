@@ -43,7 +43,7 @@ namespace SR_GTYPES_NS {
         static bool FreeDefault();
         static bool InitDefault(Render* render);
 
-        static Material* Load(const std::string& path);
+        static Material* Load(const std::string& rawPath);
 
     public:
         Super* Copy(Super* destination) const override;

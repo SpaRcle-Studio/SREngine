@@ -10,6 +10,7 @@ set(ASSIMP_BUILD_ASSIMP_VIEW OFF)
 
 add_subdirectory(libs/glm)
 add_subdirectory(libs/assimp)
+add_subdirectory(libs/nativefiledialog)
 
 if (SR_UTILS_STATIC_LIBRARY)
     add_library(Utils STATIC Utils.cxx)
@@ -24,7 +25,7 @@ else()
     add_library(Utils::lib ALIAS Utils)
 endif()
 
-target_link_libraries(Utils assimp)
+target_link_libraries(Utils assimp nfd)
 
 target_include_directories(Utils PUBLIC inc)
 target_include_directories(Utils PUBLIC libs)
