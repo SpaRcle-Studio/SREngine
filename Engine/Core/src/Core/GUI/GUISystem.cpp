@@ -153,19 +153,36 @@ void GUISystem::EndChildWindow() {
     ImGui::EndChild();
 }
 
-bool GUISystem::ImageButton(void *descriptor, const Framework::Helper::Math::IVector2 &size, int32_t framePadding) {
+
+bool GUISystem::ImageButton(std::string_view&& id, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* window = g.CurrentWindow;
+    if (window->SkipItems)
+        return false;
+
+    // Default to using texture ID as ID. User can still push string/integer prefixes.
+    ImGui::PushID((void*)(intptr_t)descriptor);
+    const ImGuiID imageId = window->GetID(id.data());
+    ImGui::PopID();
+
+    const ImVec2 padding = (framePadding >= 0) ? ImVec2((float)framePadding, (float)framePadding) : g.Style.FramePadding;
+
     if (m_pipeLine == Graphics::PipeLine::OpenGL) {
-        return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), framePadding);
+        return ImGui::ImageButtonEx(imageId, (ImTextureID)descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), padding, ImVec4(0,0,0,0), ImVec4(1,1,1,1));
     }
 
-    return ImGui::ImageButton(descriptor, ImVec2(size.x, size.y), ImVec2(-1, 0), ImVec2(0, 1), framePadding);
+    return ImGui::ImageButtonEx(imageId, (ImTextureID)descriptor, ImVec2(size.x, size.y), ImVec2(-1, 0), ImVec2(0, 1), padding, ImVec4(0,0,0,0), ImVec4(1,1,1,1));
 }
 
-bool GUISystem::ImageButton(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
+bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    return ImageButton("##image", descriptor, size, framePadding);
+}
+
+bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size) {
     return ImageButton(descriptor, size, -1);
 }
 
-void GUISystem::DrawTexture(void *descriptor, const Framework::Helper::Math::IVector2 &size) {
+void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
     if (m_pipeLine == Graphics::PipeLine::OpenGL) {
         DrawImage(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
@@ -731,6 +748,7 @@ bool GUISystem::BeginMenuBar() {
 void GUISystem::EndMenuBar() {
     //ImGui::EndMainMenuBar();
 }
+
 
 
 

@@ -187,9 +187,9 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
                     types
             );
 
-            if (m_descriptorSets->m_self == VK_NULL_HANDLE) {
+            if (m_descriptorSets[i].m_self == VK_NULL_HANDLE) {
                 SR_ERROR("MemoryManager::AllocateDescriptorSet() : failed allocate descriptor set! Something went wrong...");
-                return -1;
+                return SR_ID_INVALID;
             }
 
             ++m_countDescriptorSets.second;

@@ -114,7 +114,8 @@ namespace Framework::Core::GUI {
             ImVec2 size = ImGui::GetWindowSize();
             return { (int32_t)size.x, (int32_t)size.y };
         }
-        bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePaddin);
+        bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
+        bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);

@@ -91,7 +91,7 @@ namespace SR_CORE_NS::GUI {
             Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
-                if (GUISystem::Instance().ImageButton(pDescriptor, SR_MATH_NS::IVector2(75), 0)) {
+                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 0)) {
                     auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(materialsPath, { { "Material", "mat" } });
 
@@ -166,7 +166,7 @@ namespace SR_CORE_NS::GUI {
 
                     /// если нашли хоть какой-то дескриптор
                     if (pDescriptor) {
-                        if (GUISystem::Instance().ImageButton(pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
+                        if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
                             auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath();
                             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 

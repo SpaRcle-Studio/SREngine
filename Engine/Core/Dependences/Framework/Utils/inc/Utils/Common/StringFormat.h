@@ -92,4 +92,6 @@ namespace SR_UTILS_NS {
     }
 }
 
+#define SR_FORMAT(fmt, ...) SR_UTILS_NS::Format(fmt, __VA_ARGS__)
+
 #endif //GAMEENGINE_STRINGFORMAT_H
