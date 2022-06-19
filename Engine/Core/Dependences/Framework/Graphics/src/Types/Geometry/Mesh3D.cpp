@@ -82,8 +82,11 @@ namespace SR_GTYPES_NS {
             if (m_virtualUBO != SR_ID_INVALID) {
                 uboManager.BindUBO(m_virtualUBO);
             }
-            else
+            else {
                 m_env->ResetDescriptorSet();
+                m_hasErrors = true;
+                return;
+            }
 
             shader->InitUBOBlock();
             shader->Flush();

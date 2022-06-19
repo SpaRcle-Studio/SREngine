@@ -154,24 +154,57 @@ void GUISystem::EndChildWindow() {
 }
 
 
-bool GUISystem::ImageButton(std::string_view&& id, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding, ImGuiButtonFlags flags) {
     ImGuiContext& g = *GImGui;
     ImGuiWindow* window = g.CurrentWindow;
     if (window->SkipItems)
         return false;
 
-    // Default to using texture ID as ID. User can still push string/integer prefixes.
+    ImVec4 bg_col = ImVec4(0,0,0,0);
+    ImVec4 tint_col = ImVec4(1,1,1,1);
+    ImVec2 uv0, uv1;
+
+    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+        uv0 = ImVec2(0, 1);
+        uv1 = ImVec2(1, 0);
+    }
+    else {
+        uv0 = ImVec2(-1, 0);
+        uv1 = ImVec2(0, 1);
+    }
+
+    /// Default to using texture ID as ID. User can still push string/integer prefixes.
     ImGui::PushID((void*)(intptr_t)descriptor);
-    const ImGuiID imageId = window->GetID(id.data());
+    const ImGuiID id = window->GetID(imageId.data());
     ImGui::PopID();
 
     const ImVec2 padding = (framePadding >= 0) ? ImVec2((float)framePadding, (float)framePadding) : g.Style.FramePadding;
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
-        return ImGui::ImageButtonEx(imageId, (ImTextureID)descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), padding, ImVec4(0,0,0,0), ImVec4(1,1,1,1));
-    }
+    const ImRect bb(window->DC.CursorPos, window->DC.CursorPos + ImVec2(size.x, size.y) + padding * 2);
+    ImGui::ItemSize(bb);
+    if (!ImGui::ItemAdd(bb, id))
+        return false;
 
-    return ImGui::ImageButtonEx(imageId, (ImTextureID)descriptor, ImVec2(size.x, size.y), ImVec2(-1, 0), ImVec2(0, 1), padding, ImVec4(0,0,0,0), ImVec4(1,1,1,1));
+    bool hovered, held;
+    bool pressed = ImGui::ButtonBehavior(bb, id, &hovered, &held);
+
+    // Render
+    const ImU32 col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
+    ImGui::RenderNavHighlight(bb, id);
+    ImGui::RenderFrame(bb.Min, bb.Max, col, true, ImClamp((float)ImMin(padding.x, padding.y), 0.0f, g.Style.FrameRounding));
+    if (bg_col.w > 0.0f)
+        window->DrawList->AddRectFilled(bb.Min + padding, bb.Max - padding, ImGui::GetColorU32(bg_col));
+    window->DrawList->AddImage((ImTextureID)descriptor, bb.Min + padding, bb.Max - padding, uv0, uv1, ImGui::GetColorU32(tint_col));
+
+    return pressed;
+}
+
+bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    return ImageButton(imageId.data(), descriptor, size, framePadding, ImGuiButtonFlags_None);
+}
+
+bool GUISystem::ImageButtonDouble(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {
+    return ImageButton(imageId.data(), descriptor, size, framePadding, ImGuiButtonFlags_PressedOnDoubleClick);
 }
 
 bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding) {

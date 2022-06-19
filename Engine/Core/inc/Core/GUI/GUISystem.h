@@ -114,6 +114,8 @@ namespace Framework::Core::GUI {
             ImVec2 size = ImGui::GetWindowSize();
             return { (int32_t)size.x, (int32_t)size.y };
         }
+        bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding, ImGuiButtonFlags flags);
+        bool ImageButtonDouble(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
