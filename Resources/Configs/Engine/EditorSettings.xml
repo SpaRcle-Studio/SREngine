@@ -3,5 +3,7 @@
     <Icons Type="Custom">
         <Pair First="Unknown" Second="Engine/unknown.png"/>
         <Pair First="Material" Second="Engine/material.png"/>
+        <Pair First="File" Second="Engine/file.png"/>
+        <Pair First="Folder" Second="Engine/folder.png"/>
     </Icons>
 </Settings>

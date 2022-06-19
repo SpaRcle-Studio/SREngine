@@ -7,10 +7,14 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
+#include <codecvt>
 
 namespace SR_UTILS_NS {
     static std::wstring s2ws(const std::string& str)
     {
+        if (str.empty())
+            return L"";
+
         using convert_typeX = std::codecvt_utf8<wchar_t>;
         std::wstring_convert<convert_typeX, wchar_t> converterX;
 
@@ -374,6 +378,30 @@ namespace SR_UTILS_NS {
             std::string result(begin(vs), end(vs));
             return result;
         }
+
+        // convert UTF-8 string to wstring
+        static std::wstring utf8_to_wstring (const std::string& str)
+        {
+            std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+            return myconv.from_bytes(str);
+        }
+
+        // convert wstring to UTF-8 string
+        static std::string wstring_to_utf8 (const std::wstring& str)
+        {
+            std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+            return myconv.to_bytes(str);
+        }
+
+        // CutStringToOutputIt
+        static std::string CutFilePath(std::wstring str, unsigned int frompos){
+            if (str.size() > frompos){
+                str = str.substr(0,frompos);
+                str.append(L"..."); //должно быть "…"
+            }
+            return wstring_to_utf8(str);
+        }
+
 #ifdef WIN32
         inline static const wchar_t* CharsToWchar(const char* str) noexcept {
             const size_t cSize = strlen(str) + 1;

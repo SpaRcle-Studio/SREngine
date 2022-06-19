@@ -10,7 +10,9 @@
 namespace SR_CORE_NS {
     SR_ENUM_CLASS_T(EditorIcon, uint32_t,
           Unknown,
-          Material
+          Material,
+          File,
+          Folder
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {

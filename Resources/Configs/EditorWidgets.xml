@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Widgets>
 	<Widget Name="Settings" Open="false" />
-	<Widget Name="Hierarchy" Open="true" />
-	<Widget Name="Assets" Open="false" />
+	<Widget Name="Hierarchy" Open="false" />
+	<Widget Name="Assets" Open="true" />
 	<Widget Name="Evo Script Editor" Open="false" />
 	<Widget Name="World edit" Open="false" />
 	<Widget Name="Scene" Open="true" />

@@ -121,7 +121,7 @@ namespace SR_GRAPH_NS::GUI {
 
         const auto&& leftWidth = 250;
 
-        if (ImGui::BeginChild("left pane", ImVec2(leftWidth, 0), true)) {
+        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) {
 
             ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
 
@@ -168,23 +168,31 @@ namespace SR_GRAPH_NS::GUI {
 
                 ++index;
 
-                ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
-                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+                ///wow, icons instead of special font
+
+                //ImGui::PushFont(Graphics::Environment::Get()->GetIconFont());
+                //ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
                 ImGui::BeginGroup();
 
                 if (path.IsDir()) {
-                    if (ImGui::ButtonEx(SR_ICON_FOLDER, ImVec2(50, 50), ImGuiButtonFlags_PressedOnDoubleClick)) {
+                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::Folder);
+                    if (GUISystem::Instance().ImageButton(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
                         m_selectedDir = path;
                     }
                 }
                 else {
-                    ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
+                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    if (GUISystem::Instance().ImageButton(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
+                        //ok
+                    }
+                    //ImGui::Button(SR_ICON_FILE, ImVec2(50, 50));
                 }
 
-                ImGui::PopFont();
+                auto id = SR_UTILS_NS::StringUtils::CutFilePath(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
+                //ImGui::PopFont();
 
-                ImGui::Text("%s", path.GetBaseName().c_str());
+                ImGui::Text("%s", id.c_str());
 
                 ImGui::EndGroup();
 
@@ -193,7 +201,7 @@ namespace SR_GRAPH_NS::GUI {
                 else
                     index = 1;
 
-                ImGui::PopStyleVar();
+                //ImGui::PopStyleVar();
             }
 
             CheckHovered();
