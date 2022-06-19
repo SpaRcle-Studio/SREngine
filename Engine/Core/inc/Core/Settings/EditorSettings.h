@@ -12,6 +12,7 @@ namespace SR_CORE_NS {
           Unknown,
           Material,
           File,
+          EmptyFolder,
           Folder
     );
 

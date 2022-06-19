@@ -72,6 +72,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsDir() const;
         SR_NODISCARD bool IsAbs() const;
         SR_NODISCARD bool IsFile() const;
+        SR_NODISCARD bool IsEmpty() const;
 
         SR_NODISCARD std::vector<Path> GetFiles() const;
         SR_NODISCARD std::vector<Path> GetFolders() const;

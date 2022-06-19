@@ -171,7 +171,8 @@ namespace SR_GRAPH_NS::GUI {
                 ImGui::BeginGroup();
 
                 if (path.IsDir()) {
-                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::Folder);
+                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(path.IsEmpty() ? Core::EditorIcon::EmptyFolder : Core::EditorIcon::Folder);
+
                     if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
                         m_selectedDir = path;
                     }

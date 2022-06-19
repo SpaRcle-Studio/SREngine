@@ -278,4 +278,9 @@ namespace SR_UTILS_NS {
         auto&& wstring = ToUnicodeString();
         return SR_UTILS_NS::StringUtils::ReplaceAll<std::wstring>(wstring, L"/", L"\\");
     }
+
+    bool Path::IsEmpty() const {
+        /// TODO: optimize
+        return GetAll().empty();
+    }
 }
