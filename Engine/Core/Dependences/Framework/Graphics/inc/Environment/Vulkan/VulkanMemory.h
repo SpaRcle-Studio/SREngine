@@ -13,7 +13,7 @@
 #include <EvoVulkan/Complexes/Shader.h>
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
-#include <EvoVulkan/DescriptorSet.h>
+#include <EvoVulkan/Types/DescriptorSet.h>
 #include <Environment/TextureHelper.h>
 #include <Environment/Vulkan/DynamicTextureDescriptorSet.h>
 
@@ -51,7 +51,7 @@ namespace Framework::Graphics::VulkanTools {
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countIBO.first, m_IBOs)
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::FrameBuffer*, m_countFBO.first, m_FBOs)
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::Shader*, m_countShaderPrograms.first, m_ShaderPrograms)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Core::DescriptorSet, m_countDescriptorSets.first, m_descriptorSets)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::DescriptorSet, m_countDescriptorSets.first, m_descriptorSets)
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::Texture*, m_countTextures.first, m_textures)
 
             m_isInit = true;
@@ -169,7 +169,7 @@ namespace Framework::Graphics::VulkanTools {
         EvoVulkan::Types::VmaBuffer**             m_IBOs                    = nullptr;
         EvoVulkan::Complexes::FrameBuffer**       m_FBOs                    = nullptr;
         EvoVulkan::Complexes::Shader**            m_ShaderPrograms          = nullptr;
-        EvoVulkan::Core::DescriptorSet*           m_descriptorSets          = nullptr;
+        EvoVulkan::Types::DescriptorSet*          m_descriptorSets          = nullptr;
         EvoVulkan::Types::Texture**               m_textures                = nullptr;
 
     private:

@@ -16,6 +16,9 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
             continue;
         }
 
+        /**
+         * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
+         */
         shader->SetMat4(Shader::VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
         shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
         shader->SetFloat(Shader::TIME, clock());

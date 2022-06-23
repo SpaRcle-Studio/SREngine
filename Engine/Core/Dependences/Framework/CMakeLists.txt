@@ -65,9 +65,15 @@ find_package(OpenGL REQUIRED)
 # Добавляем библиотеку фреймворка
 add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${UTILS_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
 
+target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core)
+
 #target_compile_features(Framework INTERFACE cxx_std_20)
 
-target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core EvoVulkan::lib)
+if (EVO_VULKAN_STATIC_LIBRARY)
+    target_link_libraries(Framework EvoVulkan)
+else()
+    target_link_libraries(Framework EvoVulkan::lib)
+endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
     target_link_libraries(Framework Utils)

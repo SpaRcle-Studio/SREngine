@@ -122,12 +122,17 @@ namespace SR_GRAPH_NS {
         bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
 
     public:
-        template<typename T> void SetValue(uint64_t hashId, const T& v) noexcept {
+        template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
             if (!IsLoaded()) {
                 return;
             }
 
-            m_uniformBlock.SetField(hashId, &v);
+            if constexpr (shared) {
+                m_uniformSharedBlock.SetField(hashId, &v);
+            }
+            else {
+                m_uniformBlock.SetField(hashId, &v);
+            }
         }
 
         void SetBool(uint64_t hashId, const bool& v) noexcept;
@@ -165,6 +170,7 @@ namespace SR_GRAPH_NS {
 
         UBOInfo               m_uniformsInfo         = {};
         ShaderUBOBlock        m_uniformBlock         = ShaderUBOBlock();
+        ShaderUBOBlock        m_uniformSharedBlock   = ShaderUBOBlock();
         ShaderSamplers        m_samplers             = ShaderSamplers();
         ShaderProperties      m_properties           = ShaderProperties();
 

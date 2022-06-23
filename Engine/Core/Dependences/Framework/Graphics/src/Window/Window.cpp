@@ -484,7 +484,9 @@ namespace SR_GRAPH_NS {
          * то они могут ожидать пока графический поток уберет метку использования с них */
         while (!syncComplete) {
             PollEvents();
+            SR_UTILS_NS::ResourceManager::LockSingleton();
             m_render->PollEvents();
+            SR_UTILS_NS::ResourceManager::UnlockSingleton();
         }
 
         if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {

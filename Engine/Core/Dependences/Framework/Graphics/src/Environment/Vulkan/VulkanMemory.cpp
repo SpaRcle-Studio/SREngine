@@ -117,12 +117,12 @@ bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t
         return false;
     }
 
-    if (!m_descriptorManager->FreeDescriptorSet(memory)){
+    if (!m_descriptorManager->FreeDescriptorSet(&memory)){
         SR_ERROR("MemoryManager::FreeDescriptorSet() : failed free descriptor set!");
         return false;
     }
 
-    m_descriptorSets[ID] = EvoVulkan::Core::DescriptorSet();
+    m_descriptorSets[ID] = EvoVulkan::Types::DescriptorSet();
 
     --m_countDescriptorSets.second;
 
@@ -182,7 +182,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
 
     for (uint32_t i = 0; i < m_countDescriptorSets.first; ++i) {
         if (m_descriptorSets[i].m_self == VK_NULL_HANDLE) {
-            m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSets(
+            m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSet(
                     m_ShaderPrograms[shaderProgram]->GetDescriptorSetLayout(),
                     types
             );
