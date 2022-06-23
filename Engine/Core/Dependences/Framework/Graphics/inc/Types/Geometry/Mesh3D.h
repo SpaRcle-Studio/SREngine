@@ -14,6 +14,7 @@ namespace SR_GRAPH_NS::Memory {
 namespace SR_GTYPES_NS {
     class Mesh3D final : public IndexedMesh {
         friend class Memory::MeshAllocator;
+        SR_ENTITY_SET_VERSION(1000);
     private:
         explicit Mesh3D(const std::string& name = "UnnamedMesh3D")
             : IndexedMesh(MeshType::Static, name)

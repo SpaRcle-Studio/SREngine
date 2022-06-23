@@ -171,7 +171,7 @@ namespace SR_GTYPES_NS {
     bool Texture::FreeVideoMemory()  {
         SR_SCOPED_LOCK
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
             SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
         }
 
@@ -314,5 +314,10 @@ namespace SR_GTYPES_NS {
         m_hasErrors = false;
 
         return !hasErrors;
+    }
+
+    void Texture::RemoveUsePoint() {
+        SRAssert2(m_countUses > 0, "count use points is zero!");
+        --m_countUses;
     }
 }

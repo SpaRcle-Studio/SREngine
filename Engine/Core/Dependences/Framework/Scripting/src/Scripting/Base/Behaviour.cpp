@@ -15,6 +15,10 @@ namespace SR_SCRIPTING_NS {
         Component::InitComponent<Behaviour>();
     }
 
+    SR_UTILS_NS::Component* Behaviour::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        return nullptr;
+    }
+
     Behaviour *Behaviour::Load(SR_UTILS_NS::Path path) {
         SR_GLOBAL_LOCK
 

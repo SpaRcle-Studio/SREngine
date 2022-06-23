@@ -19,6 +19,8 @@ namespace SR_UTILS_NS {
     class Component;
 
     class SR_DLL_EXPORT GameObject : public Types::SafePtr<GameObject>, public Entity {
+        SR_ENTITY_SET_VERSION(1000);
+    private:
         friend class World::Scene;
         friend class Transform3D;
         friend class Component;
@@ -35,7 +37,6 @@ namespace SR_UTILS_NS {
 
     public:
         typedef Types::SafePtr<GameObject> Ptr;
-        SR_INLINE static const uint16_t VERSION = 1000;
 
     private:
         GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag = "Untagged");

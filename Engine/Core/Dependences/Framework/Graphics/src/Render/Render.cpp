@@ -205,6 +205,7 @@ namespace SR_GRAPH_NS {
                 }
 
                 textureToFree->RemoveUsePoint();
+
                 m_textures.erase(textureToFree);
             }
 

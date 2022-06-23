@@ -9,6 +9,7 @@
 
 namespace Framework::Physics::Types {
     class Rigidbody : public SR_UTILS_NS::Component {
+        SR_ENTITY_SET_VERSION(1000);
     public:
         Rigidbody();
     private:

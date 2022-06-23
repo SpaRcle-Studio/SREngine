@@ -14,6 +14,7 @@ namespace SR_UTILS_NS {
 
         marshal.Write(m_name);
         marshal.Write(IsEnabled());
+        marshal.Write<uint16_t>(ComponentManager::Instance().GetVersion(this));
 
         return marshal;
     }
@@ -52,16 +53,6 @@ namespace SR_UTILS_NS {
         }
     }
 
-    bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const Construction& constructor) {
-        m_names.insert(std::make_pair(id, name));
-        m_ids.insert(std::make_pair(name, id));
-        m_creators.insert(std::make_pair(id, constructor));
-
-        SR_SYSTEM_LOG("ComponentManager::RegisterComponentImpl() : register \"" + name + "\"...");
-
-        return true;
-    }
-
     Component *Helper::ComponentManager::CreateComponentOfName(const std::string &name) {
         SR_SCOPED_LOCK
 
@@ -74,19 +65,20 @@ namespace SR_UTILS_NS {
     }
 
     Component *Helper::ComponentManager::CreateComponentImpl(size_t id) {
-        if (m_creators.count(id) == 0) {
+        if (m_meta.count(id) == 0) {
             SR_ERROR("ComponentManager::CreateComponentImpl() : component \"" + std::to_string(id) + "\" not found!");
             return nullptr;
         }
 
-        return m_creators.at(id)();
+        return m_meta.at(id).constructor();
     }
 
     Component *ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
         SR_SCOPED_LOCK
 
-        m_lastComponent = marshal.Read<std::string>();
-        const auto&& enabled = marshal.Read<bool>();
+        m_lastComponent = marshal.Read<std::string>(); /// name
+        auto&& enabled = marshal.Read<bool>();         /// enabled
+        auto&& version = marshal.Read<uint16_t>();     /// version
 
         auto&& uidIt = m_ids.find(m_lastComponent);
 
@@ -95,7 +87,7 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        if (auto&& pComponent = m_loaders.at(uidIt->second)(marshal, &m_context)) {
+        if (auto&& pComponent = m_meta.at(uidIt->second).loader(marshal, &m_context)) {
             pComponent->SetEnabled(enabled);
             return pComponent;
         }

@@ -48,7 +48,7 @@ namespace SR_UTILS_NS {
         void AddUsePoint() { ++m_countUses; }
 
         /** Remove one point from count uses current resource */
-        void RemoveUsePoint() {
+        virtual void RemoveUsePoint() {
             SRAssert2(m_countUses > 0, "count use points is zero!");
             --m_countUses;
 
@@ -101,6 +101,8 @@ namespace SR_UTILS_NS {
 
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
 
+        std::atomic<uint64_t> m_countUses = 0;
+
         mutable std::recursive_mutex m_mutex;
 
     private:
@@ -116,8 +118,6 @@ namespace SR_UTILS_NS {
 
         std::unordered_set<IResource*> m_parents;
         std::unordered_set<IResource*> m_dependencies;
-
-        std::atomic<uint64_t> m_countUses = 0;
 
     };
 }

@@ -12,6 +12,7 @@
 
 namespace SR_GRAPH_NS::Animations {
     class Bone : public SR_UTILS_NS::Component {
+        SR_ENTITY_SET_VERSION(1000);
     public:
         Bone();
     private:
