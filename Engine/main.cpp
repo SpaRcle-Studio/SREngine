@@ -1,6 +1,6 @@
 //
 // Created by Nikita on 29.12.2020.
-//
+//	looked by Drakeme on 26.06.2022.
 
 #include <Utils/macros.h>
 
