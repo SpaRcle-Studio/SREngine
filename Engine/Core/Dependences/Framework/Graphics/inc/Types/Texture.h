@@ -39,7 +39,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetHeight() const noexcept { return m_height; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetChannels() const noexcept { return m_channels; }
         SR_NODISCARD int32_t GetId() noexcept;
-        SR_NODISCARD int32_t FastGetId() noexcept { return m_id; }
+        SR_NODISCARD int32_t FastGetId() const noexcept { return m_id; }
         SR_NODISCARD void* GetDescriptor();
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD bool IsValid() const override;

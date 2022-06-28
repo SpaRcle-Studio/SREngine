@@ -16,7 +16,24 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Component* Behaviour::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        return nullptr;
+        const auto &&path = marshal.Read<std::string>();
+
+        auto&& pBehaviour = Load(path);
+
+        if (pBehaviour) {
+            /// ok
+        }
+
+        return pBehaviour;
+    }
+
+    SR_HTYPES_NS::Marshal Behaviour::Save(SR_UTILS_NS::SavableFlags flags) const {
+        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+
+        /// TODO: use unicode
+        marshal.Write(GetResourcePath().ToString());
+
+        return marshal;
     }
 
     Behaviour *Behaviour::Load(SR_UTILS_NS::Path path) {
@@ -99,9 +116,14 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::Reload() {
+        SR_LOCK_GUARD
+
         SR_LOG("Behaviour::Reload() : reloading \"" + GetResourceId() + "\" behaviour...");
 
         m_loadState = LoadState::Reloading;
+
+        Unload();
+        Load();
 
         m_loadState = LoadState::Loaded;
 

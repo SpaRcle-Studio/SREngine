@@ -262,10 +262,6 @@ namespace SR_UTILS_NS {
         return StringUtils::Remove(m_path, index, subPath.m_path.size() + 1);
     }
 
-    Path Path::FolderDialog() const {
-        return Path(FileSystem::BrowseFolder(m_path));
-    }
-
     bool Path::IsHidden() const {
         return FileSystem::IsHiddenFile(m_path);
     }

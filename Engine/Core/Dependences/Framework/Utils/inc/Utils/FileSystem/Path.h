@@ -58,7 +58,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetFolder() const { return m_path; }
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
-        SR_NODISCARD Path FolderDialog() const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;

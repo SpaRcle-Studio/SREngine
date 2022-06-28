@@ -27,6 +27,12 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        InitHooks();
+
+        if (m_initBehaviour) {
+            m_initBehaviour();
+        }
+
         return Behaviour::Load();
     }
 
@@ -34,6 +40,10 @@ namespace SR_SCRIPTING_NS {
         SR_SCOPED_LOCK
 
         bool hasErrors = !Behaviour::Unload();
+
+        if (m_releaseBehaviour) {
+            m_releaseBehaviour();
+        }
 
         if (m_script) {
             m_script->Destroy();
@@ -61,5 +71,40 @@ namespace SR_SCRIPTING_NS {
                "\n\tResource path: " + path.ToString());
 
         return 0;
+    }
+
+    void EvoBehaviour::InitHooks() {
+        m_initBehaviour = m_script->GetFunction<EvoScript::Typedefs::InitBehaviourFnPtr>("InitBehaviour");
+        m_releaseBehaviour = m_script->GetFunction<EvoScript::Typedefs::ReleaseBehaviourFnPtr>("ReleaseBehaviour");
+        m_getProperties = m_script->GetFunction<EvoScript::Typedefs::GetPropertiesFnPtr>("GetProperties");
+        m_getProperty = m_script->GetFunction<EvoScript::Typedefs::GetPropertyFnPtr>("GetProperty");
+        m_setProperty = m_script->GetFunction<EvoScript::Typedefs::SetPropertyFnPtr>("SetProperty");
+    }
+
+    EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
+        SR_LOCK_GUARD
+
+        if (!m_getProperties) {
+            return EvoBehaviour::Properties();
+        }
+        return m_getProperties();
+    }
+
+    std::any EvoBehaviour::GetProperty(const std::string &id) const {
+        SR_LOCK_GUARD
+
+        if (!m_getProperty) {
+            return std::any();
+        }
+        return m_getProperty(id);
+    }
+
+    void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
+        SR_LOCK_GUARD
+
+        if (!m_setProperty) {
+            return;
+        }
+        m_setProperty(id, val);
     }
 }

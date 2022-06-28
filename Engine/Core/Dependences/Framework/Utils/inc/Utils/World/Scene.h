@@ -95,6 +95,8 @@ namespace SR_WORLD_NS {
         bool Destroy();
         bool Free();
         void Update(float_t dt);
+        void RunScene();
+        void StopScene();
 
     public:
         void SetWorldOffset(const World::Offset& offset);
@@ -130,6 +132,8 @@ namespace SR_WORLD_NS {
         bool Reload();
         bool ReloadConfig();
         bool ReloadChunks();
+
+        void UpdateTree();
 
     private:
         virtual void FindObserver() { }

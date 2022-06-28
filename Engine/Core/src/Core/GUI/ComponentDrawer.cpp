@@ -17,6 +17,7 @@
 #include <Core/GUI/EditorGUI.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Core/Settings/EditorSettings.h>
+#include <Utils/Common/AnyVisitor.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
@@ -25,12 +26,16 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (ImGui::Button("Select script")) {
-            auto&& path = SR_UTILS_NS::Path(SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath()).FolderDialog();
+            auto&& scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().PickFolder(scriptsPath);
 
             if (path.Exists()) {
                 if (auto&& newBehaviour = Scripting::Behaviour::Load(path)) {
                     pBehaviour = newBehaviour;
                 }
+            }
+            else if (!path.Empty()) {
+                SR_WARN("ComponentDrawer::DrawComponent() : behaviour not found!\n\tPath: " + path.ToString());
             }
         }
 
@@ -45,6 +50,43 @@ namespace SR_CORE_NS::GUI {
         }
 
         Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
+
+        auto&& properties = pBehaviour->GetProperties();
+
+        if (!properties.empty()) {
+            ImGui::Separator();
+        }
+
+        for (auto&& property : properties) {
+            std::any&& value = pBehaviour->GetProperty(property);
+
+            auto&& visitor = SR_UTILS_NS::Overloaded {
+                [property, pBehaviour](int value) {
+                    if (ImGui::InputInt(property.c_str(), &value)) {
+                        pBehaviour->SetProperty(property, value);
+                    }
+                },
+                [property, pBehaviour](bool value) {
+                    if (ImGui::Checkbox(property.c_str(), &value)) {
+                        pBehaviour->SetProperty(property, value);
+                    }
+                },
+                [property, pBehaviour](float value) {
+                    if (ImGui::InputFloat(property.c_str(), &value)) {
+                        pBehaviour->SetProperty(property, value);
+                    }
+                },
+                [property, pBehaviour](double value) {
+                    if (ImGui::InputDouble(property.c_str(), &value)) {
+                        pBehaviour->SetProperty(property, value);
+                    }
+                },
+                [property](auto&&) {
+                    ImGui::Text("%s : [Unknown property type]", property.c_str());
+                }
+            };
+            SR_UTILS_NS::AnyVisitor<int, bool, float, double>{}(value, visitor);
+        }
     }
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Camera*& camera, EditorGUI* context, int32_t index) {
@@ -79,6 +121,8 @@ namespace SR_CORE_NS::GUI {
         auto&& material = mesh3d->GetMaterial();
         SR_GTYPES_NS::Material* copy = material;
         DrawComponent(copy, context, index);
+
+        /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != material) {
             mesh3d->SetMaterial(copy);
         }

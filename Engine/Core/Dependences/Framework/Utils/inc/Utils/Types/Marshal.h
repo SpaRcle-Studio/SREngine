@@ -271,6 +271,7 @@ namespace SR_HTYPES_NS {
             m_stream = std::exchange(marshal.m_stream, {});
 #endif
             m_size = std::exchange(marshal.m_size, {});
+            m_position = std::exchange(marshal.m_position, {});
         }
 
         Marshal& operator=(Marshal&& marshal) noexcept {
@@ -280,6 +281,7 @@ namespace SR_HTYPES_NS {
             m_stream = std::exchange(marshal.m_stream, {});
 #endif
             m_size = std::exchange(marshal.m_size, {});
+            m_position = std::exchange(marshal.m_position, {});
             return *this;
         }
 
@@ -295,6 +297,7 @@ namespace SR_HTYPES_NS {
         static Marshal LoadFromBase64(const std::string& base64);
 
         SR_NODISCARD bool Valid() const { return BytesCount() > 0; }
+        SR_NODISCARD uint64_t GetPosition() const { return m_position; }
         SR_NODISCARD uint64_t BytesCount() const { return m_size; }
         SR_NODISCARD std::string ToString() const;
         SR_NODISCARD std::string ToBase64() const;
@@ -306,12 +309,20 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        void SkipBytes(uint32_t size) {
+            std::string buffer;
+            buffer.resize(size);
+            m_stream.read((char*)&buffer[0], size * sizeof(char));
+            m_position += size * sizeof(char);
+        }
+
         Marshal ReadBytes(uint32_t size) {
             Marshal marshal;
 
             std::string buffer;
             buffer.resize(size);
             m_stream.read((char*)&buffer[0], size * sizeof(char));
+            m_position += size * sizeof(char);
 
             marshal.m_stream << buffer;
             marshal.m_size = size;
@@ -359,10 +370,11 @@ namespace SR_HTYPES_NS {
 
         template<typename T> T Read() {
             if constexpr (Math::IsString<T>()) {
-                return MarshalUtils::LoadStr<std::stringstream>(m_stream);
+                return MarshalUtils::LoadStr<std::stringstream>(m_stream, m_position);
             }
-            else
-                return MarshalUtils::LoadValue<std::stringstream, T>(m_stream);
+            else {
+                return MarshalUtils::LoadValue<std::stringstream, T>(m_stream, m_position);
+            }
         }
 
         template<typename T> T Read(const T& def) {
@@ -376,6 +388,7 @@ namespace SR_HTYPES_NS {
     private:
         std::stringstream m_stream;
         uint64_t m_size = 0;
+        uint64_t m_position = 0;
 
     };
 }

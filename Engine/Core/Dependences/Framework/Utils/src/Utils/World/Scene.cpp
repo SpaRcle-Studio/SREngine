@@ -101,7 +101,7 @@ namespace SR_WORLD_NS {
 
         for (auto gameObject : GetRootGameObjects()) {
             gameObject.AutoFree([](GameObject* gm) {
-                gm->Destroy(GameObject::DestroyBy_Scene);
+                gm->Destroy(GameObject_DestroyBy_Scene);
             });
         }
 
@@ -291,6 +291,10 @@ namespace SR_WORLD_NS {
                     pIt = m_regions.erase(pIt);
                 }
             }
+        }
+
+        if (m_isActive) {
+            UpdateTree();
         }
 
         if (m_shiftEnabled) {
@@ -489,5 +493,23 @@ namespace SR_WORLD_NS {
         }
 
         return SafePtr<GameObject>(nullptr);
+    }
+
+    void Scene::UpdateTree() {
+        for (auto&& gameObject : m_rootObjects) {
+            gameObject->Awake();
+        }
+
+        for (auto&& gameObject : m_rootObjects) {
+            gameObject->Start();
+        }
+    }
+
+    void Scene::RunScene() {
+        m_isActive = true;
+    }
+
+    void Scene::StopScene() {
+        m_isActive = false;
     }
 }

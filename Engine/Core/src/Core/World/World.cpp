@@ -59,6 +59,8 @@ namespace Framework::Core::World {
             auto&& componentCount = marshal.Read<uint32_t>();
 
             for (uint32_t i = 0; i < componentCount; ++i) {
+                auto&& bytesCount = marshal.Read<uint64_t>();
+                auto&& position = marshal.GetPosition();
                 /// TODO: use entity id
                 auto&& compEntityId = marshal.Read<uint64_t>();
 
@@ -67,6 +69,14 @@ namespace Framework::Core::World {
                 }
                 else {
                     SR_WARN("World::Instance() : failed to load \"" + SR_UTILS_NS::ComponentManager::Instance().GetLastComponentName() + "\" component!");
+                }
+
+                const uint64_t readBytes = marshal.GetPosition() - position;
+                const uint64_t lostBytes = bytesCount - readBytes;
+
+                if (lostBytes > 0) {
+                    SR_WARN("World::Instance() : bytes were lost when loading the component!");
+                    marshal.SkipBytes(lostBytes);
                 }
             }
 

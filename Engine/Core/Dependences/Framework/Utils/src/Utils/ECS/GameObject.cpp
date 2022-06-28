@@ -51,16 +51,17 @@ namespace SR_UTILS_NS {
     Component *Framework::Helper::GameObject::GetComponent(const std::string &name) {
         Component *find = nullptr;
 
-        for (auto component : m_components)
+        for (auto&& component : m_components) {
             if (component->GetComponentName() == name) {
                 find = component;
                 break;
             }
+        }
 
         return find;
     }
 
-    void GameObject::Destroy(DestroyByFlagBits by /** = DestroyByFlags::DestroyBy_Other */) {
+    void GameObject::Destroy(GODestroyByFlagBits by /** = DestroyByFlags::DestroyBy_Other */) {
         if (m_isDestroy) {
             SR_ERROR("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
             return;
@@ -77,7 +78,7 @@ namespace SR_UTILS_NS {
 #endif
 
         if (m_scene.RecursiveLockIfValid()) {
-            const bool byParent = by & DestroyBy_GameObject;
+            const bool byParent = by & GameObject_DestroyBy_GameObject;
 
             if (!byParent && m_parent.LockIfValid()) {
                 GameObject::Ptr copy = m_parent;
@@ -98,7 +99,7 @@ namespace SR_UTILS_NS {
 
         for (GameObject::Ptr gameObject : m_children) {
             gameObject.AutoFree([by](GameObject *gm) {
-                gm->Destroy(by | DestroyBy_GameObject);
+                gm->Destroy(by | GameObject_DestroyBy_GameObject);
             });
         }
         m_children.clear();
@@ -265,9 +266,9 @@ namespace SR_UTILS_NS {
         return IsEnabled();
     }
 
-    void GameObject::CheckActivity() {
+    void GameObject::CheckActivity(bool force) {
         const bool isActive = IsActive();
-        if (isActive == m_isActive) {
+        if (isActive == m_isActive && !force) {
             return;
         }
 
@@ -275,7 +276,7 @@ namespace SR_UTILS_NS {
 
         for (auto&& child : m_children) {
             if (child.LockIfValid()) {
-                child->CheckActivity();
+                child->CheckActivity(force);
                 child.Unlock();
             }
         }
@@ -285,7 +286,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    Math::FVector3 GameObject::GetBarycenter() {
+    SR_MATH_NS::FVector3 GameObject::GetBarycenter() {
         auto barycenter = Math::FVector3();
         uint32_t count = 0;
 
@@ -326,9 +327,11 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::ForEachComponent(const std::function<bool(Component *)> &fun) {
-        for (auto component : m_components)
-            if (!fun(component))
+        for (auto&& component : m_components) {
+            if (!fun(component)) {
                 break;
+            }
+        }
     }
 
     bool GameObject::RemoveComponent(Component *component) {
@@ -364,12 +367,16 @@ namespace SR_UTILS_NS {
         marshal.Append(m_transform->Save(flags));
 
         marshal.Write(static_cast<uint32_t>(m_components.size()));
-        for (const auto &comp : m_components)
-            marshal.Append(comp->Save(flags));
+        for (auto&& component : m_components) {
+            auto&& marshalComponent = component->Save(flags);
+            marshal.Write<uint64_t>(marshalComponent.BytesCount());
+            marshal.Append(std::move(marshalComponent));
+        }
 
         marshal.Write(static_cast<uint32_t>(m_children.size()));
-        for (const auto &child : m_children)
+        for (auto&& child : m_children) {
             marshal.Append(child->Save(flags));
+        }
 
         return marshal;
     }
@@ -398,16 +405,20 @@ namespace SR_UTILS_NS {
     }
 
     Component *GameObject::GetComponent(size_t id) {
-        for (auto &&component : m_components)
-            if (component->GetComponentId() == id)
+        for (auto &&component : m_components) {
+            if (component->GetComponentId() == id) {
                 return component;
+            }
+        }
+
         return nullptr;
     }
 
     void GameObject::SetTransform(Transform3D *transform3D) {
         if (m_transform == transform3D || !transform3D) {
             SR_WARN("GameObject::SetTransform() : invalid transform!");
-        } else {
+        }
+        else {
             delete m_transform;
             m_transform = transform3D;
             m_transform->SetGameObject(this);
@@ -438,5 +449,33 @@ namespace SR_UTILS_NS {
 
     bool GameObject::HasTag() const {
         return m_tag != "Untagged";
+    }
+
+    void GameObject::Awake() {
+        if (!IsEnabled()) {
+            return;
+        }
+
+        for (auto&& pComponent : m_components) {
+            pComponent->Awake();
+        }
+
+        for (auto&& child : m_children) {
+            child->Awake();
+        }
+    }
+
+    void GameObject::Start() {
+        if (!IsEnabled()) {
+            return;
+        }
+
+        for (auto&& pComponent : m_components) {
+            pComponent->Start();
+        }
+
+        for (auto&& child : m_children) {
+            child->Start();
+        }
     }
 }

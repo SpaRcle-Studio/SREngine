@@ -439,5 +439,9 @@ namespace Framework {
     void API::RegisterShader(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Shader", "Shader");
     }
+
+    void API::RegisterBehaviour(EvoScript::AddressTableGen *generator) {
+
+    }
 }
 

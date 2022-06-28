@@ -354,6 +354,7 @@ namespace SR_UTILS_NS {
     #endif
     }
 
+    /*
     SR_UTILS_NS::Path FileSystem::BrowseFolder(const SR_UTILS_NS::Path &path) {
     #if defined(SR_WIN32) and defined(SR_MSVC)
         LPWSTR lPath = NULL;
@@ -397,7 +398,7 @@ namespace SR_UTILS_NS {
         SRHalt("TODO");
         return std::string();
     #endif
-    }
+    }*/
 
     bool FileSystem::IsHiddenFile(const std::string &path) {
     #ifdef SR_WIN32

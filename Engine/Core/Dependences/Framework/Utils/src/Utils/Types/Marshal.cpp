@@ -42,6 +42,7 @@ namespace SR_HTYPES_NS {
         /// copy buffer
         marshal.m_stream << m_stream.str();
         marshal.m_size = m_size;
+        marshal.m_position = 0;
 
         return marshal;
     }

@@ -98,7 +98,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
+        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream, uint64_t& readCount) {
             T value = T();
 
             if constexpr (std::is_same<T, Math::FColor>()) {
@@ -106,33 +106,44 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.g, sizeof(Math::Unit));
                 stream.read((char*)&value.b, sizeof(Math::Unit));
                 stream.read((char*)&value.a, sizeof(Math::Unit));
+                readCount += sizeof(Math::Unit) * 4;
             }
             else if constexpr (std::is_same<T, Math::FVector3>()) {
                 stream.read((char*)&value.x, sizeof(Math::Unit));
                 stream.read((char*)&value.y, sizeof(Math::Unit));
                 stream.read((char*)&value.z, sizeof(Math::Unit));
+                readCount += sizeof(Math::Unit) * 3;
             }
             else if constexpr (std::is_same<T, Math::FVector2>()) {
                 stream.read((char*)&value.x, sizeof(Math::Unit));
                 stream.read((char*)&value.y, sizeof(Math::Unit));
+                readCount += sizeof(Math::Unit) * 2;
             }
             else if constexpr (std::is_same<T, Math::IVector3>()) {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
                 stream.read((char*)&value.z, sizeof(int32_t));
+                readCount += sizeof(int32_t) * 3;
             }
             else if constexpr (std::is_same<T, Math::IVector2>()) {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
+                readCount += sizeof(int32_t) * 2;
             }
             else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
                 stream.read((char*)&value, sizeof(T));
+                readCount += sizeof(T);
             }
             else {
                 SR_STATIC_ASSERT("Unsupported type!");
             }
 
             return value;
+        }
+
+        template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream) {
+            uint64_t readCount = 0;
+            return LoadValue<Stream, T>(stream, readCount);
         }
 
         static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str) {
@@ -147,22 +158,36 @@ namespace SR_UTILS_NS {
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
-        template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream) {
+        template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream, uint64_t& readCount) {
             std::string str;
             uint16_t size;
             stream.read((char*)&size, sizeof(uint16_t));
+            SRAssert(size < SR_UINT16_MAX);
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
+            readCount += sizeof(uint16_t) + (size * sizeof(char));
+            return str;
+        }
+
+        template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream) {
+            uint64_t readCount = 0;
+            return LoadShortStr<Stream>(stream, readCount);
+        }
+
+        template<typename Stream> static std::string SR_FASTCALL LoadStr(Stream& stream, uint64_t& readCount) {
+            std::string str;
+            size_t size;
+            stream.read((char*)&size, sizeof(size_t));
+            SRAssert(size < SR_UINT16_MAX);
+            str.resize(size);
+            stream.read((char*)&str[0], size * sizeof(char));
+            readCount += sizeof(size_t) + (size * sizeof(char));
             return str;
         }
 
         template<typename Stream> static std::string SR_FASTCALL LoadStr(Stream& stream) {
-            std::string str;
-            size_t size;
-            stream.read((char*)&size, sizeof(size_t));
-            str.resize(size);
-            stream.read((char*)&str[0], size * sizeof(char));
-            return str;
+            uint64_t readCount = 0;
+            return LoadStr<Stream>(stream, readCount);
         }
 
         static void Encode(std::stringstream& stream, const std::string& str, MARSHAL_TYPE type) {

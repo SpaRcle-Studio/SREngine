@@ -17,6 +17,30 @@ namespace SR_UTILS_NS {
         Singleton::OnSingletonDestroy();
     }
 
+    Path Helper::FileDialog::PickFolder(const Path &defaultPath) const {
+        std::string path;
+
+        nfdchar_t *outPath;
+
+        nfdresult_t result = NFD_PickFolder(&outPath, defaultPath.ToString().c_str());
+
+        if (result == NFD_OKAY)
+        {
+            path = std::string(outPath);
+            NFD_FreePath(outPath);
+        }
+        else if (result == NFD_CANCEL)
+        {
+            /// ignore
+        }
+        else
+        {
+            /// ignore
+        }
+
+        return path;
+    }
+
     Path FileDialog::SaveDialog(const Path &defaultPath, const Filter& filter) const {
         std::string path;
 

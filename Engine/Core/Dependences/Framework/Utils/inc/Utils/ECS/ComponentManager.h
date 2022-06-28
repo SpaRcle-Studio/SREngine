@@ -11,8 +11,6 @@
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
-#include <Utils/Common/Singleton.h>
-#include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Types/DataStorage.h>
 
@@ -45,17 +43,8 @@ namespace SR_UTILS_NS {
             return m_ids;
         }
 
-        uint16_t GetVersion(const Component* pComponent) {
-            SR_SCOPED_LOCK
-
-            auto&& pIt = m_meta.find(pComponent->GetComponentId());
-
-            if (pIt == m_meta.end()) {
-                return 0;
-            }
-
-            return pIt->second.version;
-        }
+        uint16_t GetVersion(const Component* pComponent) const;
+        uint16_t GetVersionById(uint64_t id) const;
 
         template<typename T> bool RegisterComponent(const Construction& constructor) {
             SR_SCOPED_LOCK
@@ -80,24 +69,12 @@ namespace SR_UTILS_NS {
             return true;
         }
 
-        bool LoadComponents(const std::function<bool(Types::DataStorage& context)>& loader) {
-            SR_SCOPED_LOCK
-
-            const bool result = loader(m_context);
-
-            m_context.Clear();
-
-            return result;
-        }
-
-        SR_NODISCARD std::string GetLastComponentName() const {
-            SR_SCOPED_LOCK
-            return m_lastComponent;
-        }
+        bool LoadComponents(const std::function<bool(Types::DataStorage& context)>& loader);
 
         Component* Load(SR_HTYPES_NS::Marshal& marshal);
 
         SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
+        SR_NODISCARD std::string GetLastComponentName() const;
 
     private:
         Component* CreateComponentImpl(size_t id);

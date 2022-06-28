@@ -18,23 +18,21 @@ namespace SR_UTILS_NS {
     class Transform3D;
     class Component;
 
+    SR_ENUM(GameObjectDestroyBy,
+        GameObject_DestroyBy_Unknown    = 0,
+        GameObject_DestroyBy_Scene      = 1 << 0,
+        GameObject_DestroyBy_GameObject = 1 << 1,
+        GameObject_DestroyBy_Other      = 1 << 2,
+        GameObject_DestroyBy_Command    = 1 << 3
+    );
+    typedef uint64_t GODestroyByFlagBits;
+
     class SR_DLL_EXPORT GameObject : public Types::SafePtr<GameObject>, public Entity {
         SR_ENTITY_SET_VERSION(1000);
     private:
         friend class World::Scene;
         friend class Transform3D;
         friend class Component;
-
-        typedef enum {
-            DestroyBy_Unknown    = 0,
-            DestroyBy_Scene      = 1 << 0,
-            DestroyBy_GameObject = 1 << 1,
-            DestroyBy_Other      = 1 << 2,
-            DestroyBy_Command    = 1 << 3
-        } DestroyByFlag;
-
-        typedef uint64_t DestroyByFlagBits;
-
     public:
         typedef Types::SafePtr<GameObject> Ptr;
 
@@ -76,7 +74,7 @@ namespace SR_UTILS_NS {
 
         bool Contains(const Types::SafePtr<GameObject>& child);
         void SetEnabled(bool value);
-        void Destroy(DestroyByFlagBits by = DestroyBy_Other);
+        void Destroy(GODestroyByFlagBits by = GameObject_DestroyBy_Other);
         void SetTransform(Transform3D* transform3D);
 
         bool MoveToTree(const GameObject::Ptr& destination);
@@ -96,17 +94,19 @@ namespace SR_UTILS_NS {
         void UpdateComponentsScale();
         void UpdateComponentsSkew();
 
+        void Awake();
+        void Start();
+
         /// TODO: remove this method
         void Free();
 
         bool UpdateEntityPath();
 
-        void CheckActivity();
+        void CheckActivity(bool force = false);
 
     private:
         std::atomic<bool>                   m_isEnabled      = true;
         std::atomic<bool>                   m_isActive       = true;
-
         std::atomic<bool>                   m_isDestroy      = false;
 
         GameObject::Ptr                     m_parent         = GameObject::Ptr();
