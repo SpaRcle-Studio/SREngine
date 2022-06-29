@@ -75,7 +75,7 @@ namespace Framework::Core::World {
                 const uint64_t lostBytes = bytesCount - readBytes;
 
                 if (lostBytes > 0) {
-                    SR_WARN("World::Instance() : bytes were lost when loading the component!");
+                    SR_WARN("World::Instance() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
                     marshal.SkipBytes(lostBytes);
                 }
             }

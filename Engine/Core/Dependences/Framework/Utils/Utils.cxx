@@ -45,6 +45,7 @@
 #include "../Utils/src/Utils/Types/Time.cpp"
 #include "../Utils/src/Utils/Types/Time.cpp"
 #include "../Utils/src/Utils/Types/Marshal.cpp"
+#include "../Utils/src/Utils/Types/EDMarshal.cpp"
 #include "../Utils/src/Utils/Types/Thread.cpp"
 #include "../Utils/src/Utils/Types/SafeQueue.cpp"
 #include "../Utils/src/Utils/Types/RawMesh.cpp"

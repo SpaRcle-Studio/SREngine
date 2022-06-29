@@ -155,6 +155,16 @@ void GUISystem::EndChildWindow() {
 
 
 bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding, ImGuiButtonFlags flags) {
+    ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0, 0, 0, 0));
+
+    const bool result = ImageButtonInternal(imageId.data(), descriptor, size, framePadding, flags);
+
+    ImGui::PopStyleColor();
+
+    return result;
+}
+
+bool GUISystem::ImageButtonInternal(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding, ImGuiButtonFlags flags) {
     ImGuiContext& g = *GImGui;
     ImGuiWindow* window = g.CurrentWindow;
     if (window->SkipItems)

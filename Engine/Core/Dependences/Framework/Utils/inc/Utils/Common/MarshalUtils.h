@@ -8,63 +8,10 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector4.h>
+#include <Utils/Common/TypeInfo.h>
 
 namespace SR_UTILS_NS {
-    enum class MARSHAL_TYPE : uint8_t {
-        Node = 0,
-        Bool = 1,
-        Int8 = 2,
-        UInt8 = 3,
-        Int16 = 4,
-        UInt16 = 5,
-        Int32 = 6,
-        UInt32 = 7,
-        Int64 = 8,
-        UInt64 = 9,
-        Float = 10,
-        Double = 11,
-        String = 12,
-    };
-
     namespace MarshalUtils {
-        template<typename T> constexpr MARSHAL_TYPE TypeToMarshal() {
-            if constexpr (std::is_same<T, bool>()) {
-                return MARSHAL_TYPE::Bool;
-            }
-            else if constexpr (std::is_same<T, int8_t>() || std::is_same<T, char>()) {
-                return MARSHAL_TYPE::Int8;
-            }
-            else if constexpr (std::is_same<T, uint8_t>() || std::is_same<T, unsigned char>()) {
-                return MARSHAL_TYPE::UInt8;
-            }
-            else if constexpr (std::is_same<T, int16_t>() || std::is_same<T, short>()) {
-                return MARSHAL_TYPE::Int16;
-            }
-            else if constexpr (std::is_same<T, uint16_t>() || std::is_same<T, unsigned short>()) {
-                return MARSHAL_TYPE::UInt16;
-            }
-            else if constexpr (std::is_same<T, int32_t>() || std::is_same<T, int>()) {
-                return MARSHAL_TYPE::Int32;
-            }
-            else if constexpr (std::is_same<T, uint32_t>() || std::is_same<T, unsigned int>()) {
-                return MARSHAL_TYPE::UInt32;
-            }
-            else if constexpr (std::is_same<T, int64_t>() || std::is_same<T, long long>()) {
-                return MARSHAL_TYPE::Int64;
-            }
-            else if constexpr (std::is_same<T, uint64_t>() || std::is_same<T, unsigned long long>()) {
-                return MARSHAL_TYPE::UInt64;
-            }
-            else if constexpr (std::is_same<T, float_t>() || std::is_same<T, float>()) {
-                return MARSHAL_TYPE::Float;
-            }
-            else if constexpr (std::is_same<T, double_t>() || std::is_same<T, double>()) {
-                return MARSHAL_TYPE::Double;
-            }
-            else
-                return MARSHAL_TYPE::String;
-        }
-
         template<typename T> static void SR_FASTCALL SaveValue(std::stringstream& stream, const T& value) {
             if constexpr (std::is_same<T, Math::FColor>()) {
                 stream.write((const char *) &value.r, sizeof(Math::Unit));
@@ -146,16 +93,20 @@ namespace SR_UTILS_NS {
             return LoadValue<Stream, T>(stream, readCount);
         }
 
-        static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str) {
+        static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(char));
+
+            bytesCount += sizeof(int16_t) + size * sizeof(char);
         }
 
-        static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str) {
+        static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));
+
+            bytesCount += sizeof(size_t) + size * sizeof(char);
         }
 
         template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream, uint64_t& readCount) {
@@ -190,40 +141,77 @@ namespace SR_UTILS_NS {
             return LoadStr<Stream>(stream, readCount);
         }
 
-        static void Encode(std::stringstream& stream, const std::string& str, MARSHAL_TYPE type) {
+        template<typename Stream> static std::any SR_FASTCALL LoadAny(Stream& stream, uint64_t& readCount) {
+            auto&& type = static_cast<StandardType>(LoadValue<Stream, uint16_t>(stream, readCount));
+
             switch (type) {
-                case MARSHAL_TYPE::Bool: SaveValue(stream, LexicalCast<bool>(str)); break;
-                case MARSHAL_TYPE::Int8: SaveValue(stream, LexicalCast<int8_t>(str)); break;
-                case MARSHAL_TYPE::UInt8: SaveValue(stream, LexicalCast<uint8_t>(str)); break;
-                case MARSHAL_TYPE::Int16: SaveValue(stream, LexicalCast<int16_t>(str)); break;
-                case MARSHAL_TYPE::UInt16: SaveValue(stream, LexicalCast<uint16_t>(str)); break;
-                case MARSHAL_TYPE::Int32: SaveValue(stream, LexicalCast<int32_t>(str)); break;
-                case MARSHAL_TYPE::UInt32: SaveValue(stream, LexicalCast<uint32_t>(str)); break;
-                case MARSHAL_TYPE::Int64: SaveValue(stream, LexicalCast<int64_t>(str)); break;
-                case MARSHAL_TYPE::UInt64: SaveValue(stream, LexicalCast<uint64_t>(str)); break;
-                case MARSHAL_TYPE::Float: SaveValue(stream, LexicalCast<float_t>(str)); break;
-                case MARSHAL_TYPE::Double: SaveValue(stream, LexicalCast<double_t>(str)); break;
-                case MARSHAL_TYPE::String: SaveString(stream, str); break;
-                case MARSHAL_TYPE::Node:
-                    break;
+                case StandardType::Bool: return LoadValue<Stream, bool>(stream, readCount);
+                case StandardType::Int8: return LoadValue<Stream, int8_t>(stream, readCount);
+                case StandardType::UInt8: return LoadValue<Stream, uint8_t>(stream, readCount);
+                case StandardType::Int16: return LoadValue<Stream, int16_t>(stream, readCount);
+                case StandardType::UInt16: return LoadValue<Stream, uint16_t>(stream, readCount);
+                case StandardType::Int32: return LoadValue<Stream, int32_t>(stream, readCount);
+                case StandardType::UInt32: return LoadValue<Stream, uint32_t>(stream, readCount);
+                case StandardType::Int64: return LoadValue<Stream, int64_t>(stream, readCount);
+                case StandardType::UInt64: return LoadValue<Stream, uint64_t>(stream, readCount);
+                case StandardType::Float: return LoadValue<Stream, float_t>(stream, readCount);
+                case StandardType::Double: return LoadValue<Stream, double_t>(stream, readCount);
+                case StandardType::String: return LoadStr<Stream>(stream, readCount);
+                default:
+                    SRHalt0();
+                    return std::any();
             }
         }
 
-        static bool IsNumber(const MARSHAL_TYPE& type) {
+        template<typename Stream> static void SR_FASTCALL SaveAny(Stream& stream, const std::any& any, uint64_t& bytesCount) {
+            try {
+                auto&& type = GetStandardType(any);
+
+                SaveValue(stream, static_cast<uint16_t>(type));
+
+                bytesCount += sizeof(StandardType);
+
+                /// string ignored
+                bytesCount += GetTypeSize(type);
+
+                switch (type) {
+                    case StandardType::Bool: SaveValue(stream, std::any_cast<bool>(any)); break;
+                    case StandardType::Int8: SaveValue(stream, std::any_cast<int8_t>(any)); break;
+                    case StandardType::UInt8: SaveValue(stream, std::any_cast<uint8_t>(any)); break;
+                    case StandardType::Int16: SaveValue(stream, std::any_cast<int16_t>(any)); break;
+                    case StandardType::UInt16: SaveValue(stream, std::any_cast<uint16_t>(any)); break;
+                    case StandardType::Int32: SaveValue(stream, std::any_cast<int32_t>(any)); break;
+                    case StandardType::UInt32: SaveValue(stream, std::any_cast<uint32_t>(any)); break;
+                    case StandardType::Int64: SaveValue(stream, std::any_cast<int64_t>(any)); break;
+                    case StandardType::UInt64: SaveValue(stream, std::any_cast<uint64_t>(any)); break;
+                    case StandardType::Float: SaveValue(stream, std::any_cast<float_t>(any)); break;
+                    case StandardType::Double: SaveValue(stream, std::any_cast<double_t>(any)); break;
+                    case StandardType::String: SaveString(stream, std::any_cast<std::string>(any), bytesCount); break;
+                    default:
+                        SRHalt0();
+                        break;
+                }
+            }
+            catch(const std::bad_any_cast& e) {
+                SRHalt0();
+            }
+        }
+
+        static void Encode(std::stringstream& stream, const std::string& str, StandardType type) {
+            uint64_t bytesCount = 0;
             switch (type) {
-                case MARSHAL_TYPE::Int8:
-                case MARSHAL_TYPE::UInt8:
-                case MARSHAL_TYPE::Int16:
-                case MARSHAL_TYPE::UInt16:
-                case MARSHAL_TYPE::Int32:
-                case MARSHAL_TYPE::UInt32:
-                case MARSHAL_TYPE::Int64:
-                case MARSHAL_TYPE::UInt64:
-                case MARSHAL_TYPE::Float:
-                case MARSHAL_TYPE::Double:
-                    return true;
-                default:
-                    return false;
+                case StandardType::Bool: SaveValue(stream, LexicalCast<bool>(str)); break;
+                case StandardType::Int8: SaveValue(stream, LexicalCast<int8_t>(str)); break;
+                case StandardType::UInt8: SaveValue(stream, LexicalCast<uint8_t>(str)); break;
+                case StandardType::Int16: SaveValue(stream, LexicalCast<int16_t>(str)); break;
+                case StandardType::UInt16: SaveValue(stream, LexicalCast<uint16_t>(str)); break;
+                case StandardType::Int32: SaveValue(stream, LexicalCast<int32_t>(str)); break;
+                case StandardType::UInt32: SaveValue(stream, LexicalCast<uint32_t>(str)); break;
+                case StandardType::Int64: SaveValue(stream, LexicalCast<int64_t>(str)); break;
+                case StandardType::UInt64: SaveValue(stream, LexicalCast<uint64_t>(str)); break;
+                case StandardType::Float: SaveValue(stream, LexicalCast<float_t>(str)); break;
+                case StandardType::Double: SaveValue(stream, LexicalCast<double_t>(str)); break;
+                case StandardType::String: SaveString(stream, str, bytesCount); break;
             }
         }
     }

@@ -25,63 +25,72 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        if (ImGui::Button("Select script")) {
-            auto&& scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
-            auto&& path = SR_UTILS_NS::FileDialog::Instance().PickFolder(scriptsPath);
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Script)) {
+            if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+                auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
+                auto &&path = SR_UTILS_NS::FileDialog::Instance().PickFolder(scriptsPath);
 
-            if (path.Exists()) {
-                if (auto&& newBehaviour = Scripting::Behaviour::Load(path)) {
-                    pBehaviour = newBehaviour;
+                if (path.Exists()) {
+                    if (auto &&newBehaviour = Scripting::Behaviour::Load(path)) {
+                        pBehaviour = newBehaviour;
+                    }
                 }
-            }
-            else if (!path.Empty()) {
-                SR_WARN("ComponentDrawer::DrawComponent() : behaviour not found!\n\tPath: " + path.ToString());
+                else if (!path.Empty()) {
+                    SR_WARN("ComponentDrawer::DrawComponent() : behaviour not found!\n\tPath: " + path.ToString());
+                }
             }
         }
 
         ImGui::SameLine();
 
-        if (ImGui::Button("Reset")) {
-            pBehaviour = Scripting::Behaviour::CreateEmpty();
+        ImGui::BeginGroup();
+        {
+            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
+                if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
+                    pBehaviour = Scripting::Behaviour::CreateEmpty();
+                }
+            }
+
+            Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
         }
+        ImGui::EndGroup();
 
         if (pBehaviour->IsEmpty()) {
             return;
         }
 
-        Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
-
         auto&& properties = pBehaviour->GetProperties();
 
         if (!properties.empty()) {
             ImGui::Separator();
+            SR_UTILS_NS::GUI::DrawTextOnCenter("Properties");
         }
 
         for (auto&& property : properties) {
             std::any&& value = pBehaviour->GetProperty(property);
 
             auto&& visitor = SR_UTILS_NS::Overloaded {
-                [property, pBehaviour](int value) {
-                    if (ImGui::InputInt(property.c_str(), &value)) {
+                [&](int value) {
+                    if (ImGui::InputInt(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
-                [property, pBehaviour](bool value) {
-                    if (ImGui::Checkbox(property.c_str(), &value)) {
+                [&](bool value) {
+                    if (ImGui::Checkbox(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
-                [property, pBehaviour](float value) {
-                    if (ImGui::InputFloat(property.c_str(), &value)) {
+                [&](float value) {
+                    if (ImGui::InputFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
-                [property, pBehaviour](double value) {
-                    if (ImGui::InputDouble(property.c_str(), &value)) {
+                [&](double value) {
+                    if (ImGui::InputDouble(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
-                [property](auto&&) {
+                [&](auto&&) {
                     ImGui::Text("%s : [Unknown property type]", property.c_str());
                 }
             };
@@ -135,7 +144,7 @@ namespace SR_CORE_NS::GUI {
             Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
-                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 0)) {
+                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
                     auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(materialsPath, { { "Material", "mat" } });
 

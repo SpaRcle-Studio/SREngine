@@ -13,7 +13,9 @@ namespace SR_CORE_NS {
           Material,
           File,
           EmptyFolder,
-          Folder
+          Folder,
+          Script,
+          Reset
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {

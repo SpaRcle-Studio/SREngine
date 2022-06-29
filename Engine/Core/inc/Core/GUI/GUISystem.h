@@ -130,6 +130,10 @@ namespace Framework::Core::GUI {
         void EndChildWindow();
         bool BeginMenuBar();
         void EndMenuBar();
+
+    private:
+        bool ImageButtonInternal(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding, ImGuiButtonFlags flags);
+
     };
 }
 

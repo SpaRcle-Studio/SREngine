@@ -19,7 +19,7 @@ namespace SR_SCRIPTING_NS {
         using TransformPtr = SR_UTILS_NS::Transform3D*;
         using Properties = std::vector<std::string>;
         SR_INLINE_STATIC SR_CONSTEXPR const char* EMPTY_ID = "EmptyBehaviour";
-        SR_ENTITY_SET_VERSION(1000);
+        SR_ENTITY_SET_VERSION(1002);
     protected:
         Behaviour();
         ~Behaviour() override = default;

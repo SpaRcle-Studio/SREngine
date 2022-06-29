@@ -16,12 +16,17 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Component* Behaviour::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&path = marshal.Read<std::string>();
+        auto&& path = marshal.Read<std::string>();
+        auto&& propertyCount = marshal.Read<uint16_t>();
 
         auto&& pBehaviour = Load(path);
 
         if (pBehaviour) {
-            /// ok
+            for (uint16_t i = 0; i < propertyCount; ++i) {
+                auto&& propertyId = marshal.Read<std::string>();
+                auto&& property = marshal.Read<std::any>();
+                pBehaviour->SetProperty(propertyId, property);
+            }
         }
 
         return pBehaviour;
@@ -30,8 +35,16 @@ namespace SR_SCRIPTING_NS {
     SR_HTYPES_NS::Marshal Behaviour::Save(SR_UTILS_NS::SavableFlags flags) const {
         SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
 
+        auto&& properties = GetProperties();
+
         /// TODO: use unicode
         marshal.Write(GetResourcePath().ToString());
+        marshal.Write<uint16_t>(properties.size());
+
+        for (auto&& propertyId : properties) {
+            marshal.Write<std::string>(propertyId);
+            marshal.Write<std::any>(GetProperty(propertyId));
+        }
 
         return marshal;
     }
