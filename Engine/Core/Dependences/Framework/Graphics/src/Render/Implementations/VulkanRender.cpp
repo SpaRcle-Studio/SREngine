@@ -29,11 +29,6 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
                     continue;
                 }
 
-                //auto&& ubo = mesh->GetUBO();
-                //if (ubo == SR_ID_INVALID) {
-                //    continue;
-                //}
-
                 auto&& virtualUbo = mesh->GetVirtualUBO();
                 if (virtualUbo == SR_ID_INVALID) {
                     continue;
@@ -43,9 +38,9 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
 
                 shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
 
-                uboManager.BindUBO(virtualUbo);
-
-                //m_env->BindUBO(ubo);
+                if (uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
+                    SR_ERROR("VulkanRender::UpdateUBOs() : memory has been duplicated!");
+                }
 
                 shader->Flush();
             }

@@ -166,7 +166,9 @@ void SceneViewer::DrawImage(ImTextureID user_texture_id, const ImVec2 &size, con
 
 void SceneViewer::InitCamera() {
     Helper::GameObject::Ptr camera;
-    if (m_scene.LockIfValid()) {
+
+    /// сцена может быть уже заблокирована до Engine::SetScene
+    if (m_scene.RecursiveLockIfValid()) {
         camera = m_scene->Instance("Editor camera");
         m_scene.Unlock();
     }

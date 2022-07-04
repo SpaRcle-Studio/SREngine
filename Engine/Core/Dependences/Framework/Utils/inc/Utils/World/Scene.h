@@ -87,11 +87,11 @@ namespace SR_WORLD_NS {
         virtual ~Scene() = default;
 
     public:
-        static Types::SafePtr<Scene> New(const std::string& name);
-        static Types::SafePtr<Scene> Load(const std::string& name);
+        static Types::SafePtr<Scene> New(const Path& path);
+        static Types::SafePtr<Scene> Load(const Path& path);
 
         bool Save();
-        bool SaveAt(const std::string& folder);
+        bool SaveAt(const Path& path);
         bool Destroy();
         bool Free();
         void Update(float_t dt);
@@ -102,10 +102,11 @@ namespace SR_WORLD_NS {
         void SetWorldOffset(const World::Offset& offset);
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetName(const std::string& name) { m_name = name; }
+        void SetPath(const Path& path) { m_path = path; }
         void SetActive(bool value) { m_isActive = value; }
         void SetPaused(bool value) { m_isPaused = value; }
 
-        SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat(m_name.ToString()).Concat("regions"); }
+        SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat("regions"); }
         SR_NODISCARD Path GetPath() const { return m_path; }
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }

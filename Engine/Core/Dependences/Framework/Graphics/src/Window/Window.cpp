@@ -580,6 +580,10 @@ namespace SR_GRAPH_NS {
         m_env->DrawFrame();
     }
 
+    void Window::RemoveWidgetManager(GUI::WidgetManager* widgetManager) {
+        m_widgetManagers.SyncRemove(widgetManager);
+    }
+
     void Window::RegisterWidgetManager(GUI::WidgetManager* widgetManager) {
         m_widgetManagers.Add(widgetManager);
     }

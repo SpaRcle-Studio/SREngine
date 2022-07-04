@@ -39,7 +39,6 @@ namespace SR_WORLD_NS {
         , m_name(name)
         , m_observer(new Observer(this))
     {
-        m_path = ResourceManager::Instance().GetCachePath().Concat("Scenes");
         ReloadConfig();
     }
 
@@ -57,7 +56,7 @@ namespace SR_WORLD_NS {
         return gm;
     }
 
-    SR_HTYPES_NS::SafePtr<Scene> Scene::New(const std::string& name) {
+    SR_HTYPES_NS::SafePtr<Scene> Scene::New(const Path& path) {
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::New() : creating new scene...");
         }
@@ -69,13 +68,27 @@ namespace SR_WORLD_NS {
             return Types::SafePtr<Scene>();
         }
 
-        scene->SetName(name);
+        scene->SetPath(path);
+        scene->SetName(path.GetBaseName());
 
         return scene;
     }
 
-    SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const std::string& name) {
-        Types::SafePtr<Scene> scene;
+    SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const Path& path) {
+        if (Debug::Instance().GetLevel() > Debug::Level::None) {
+            SR_LOG("Scene::Load() : loading scene...");
+        }
+
+        auto&& scene = SceneAllocator::Instance().Allocate();
+
+        if (!scene) {
+            SR_ERROR("Scene::Load() : failed to allocate scene!");
+            return Types::SafePtr<Scene>();
+        }
+
+        scene->SetPath(path);
+        scene->SetName(path.GetBaseName());
+
         return scene;
     }
 
@@ -181,11 +194,11 @@ namespace SR_WORLD_NS {
     }
 
     void Scene::SaveRegion(Region* pRegion) const {
-        const auto regions = m_path.Concat(std::string(m_name)).Concat("regions");
+        auto&& regionsPath = GetRegionsPath();
 
-        regions.Make(Path::Type::Folder);
+        regionsPath.Make(Path::Type::Folder);
 
-        const auto& regPath = regions.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
+        auto&& regPath = regionsPath.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
         if (auto&& regionMarshal = pRegion->Save(); regionMarshal.Valid()) {
             regionMarshal.Save(regPath);
         }
@@ -194,8 +207,9 @@ namespace SR_WORLD_NS {
         }
     }
 
-    bool Scene::SaveAt(const std::string& folder) {
-        m_path = folder;
+    bool Scene::SaveAt(const Path& path) {
+        SetPath(path);
+        SetName(path.GetBaseName());
 
         UpdateContainers();
 
@@ -220,9 +234,7 @@ namespace SR_WORLD_NS {
             SaveRegion(pRegion);
         }
 
-        const auto scene = m_path.Concat(std::string(m_name));
-
-        return xml.Save(scene.Concat("main.scene"));
+        return xml.Save(m_path.Concat("main.scene"));
     }
 
     void Scene::Update(float_t dt) {

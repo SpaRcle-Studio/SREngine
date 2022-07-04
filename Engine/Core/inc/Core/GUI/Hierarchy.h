@@ -35,11 +35,12 @@ namespace SR_CORE_NS::GUI {
         void Copy() const;
         void Paste();
 
+        void PlayScene();
+
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         const ImGuiTreeNodeFlags m_nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
 
-        mutable std::mutex m_mutex;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::list<Helper::GameObject::Ptr> m_pointersHolder;
         std::set<Helper::GameObject::Ptr> m_selected;

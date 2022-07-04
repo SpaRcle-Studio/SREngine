@@ -79,6 +79,7 @@ namespace SR_GRAPH_NS::GUI {
         WidgetManager* m_manager;
 
     protected:
+        mutable std::recursive_mutex m_mutex;
         WidgetFlagBits m_widgetFlags;
 
     };

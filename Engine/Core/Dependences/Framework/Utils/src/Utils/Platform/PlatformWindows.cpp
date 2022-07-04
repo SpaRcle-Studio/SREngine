@@ -21,6 +21,27 @@
 #endif
 
 namespace SR_UTILS_NS::Platform {
+    std::string GetLastErrorAsString()
+    {
+        //Get the error message ID, if any.
+        DWORD errorMessageID = ::GetLastError();
+        if(errorMessageID == 0) {
+            return std::string(); //No error message has been recorded
+        }
+        LPSTR messageBuffer = nullptr;
+        //Ask Win32 to give us the string version of that message ID.
+        //The parameters we pass in, tell Win32 to create the buffer that holds the message for us (because we don't yet know how long the message string will be).
+        size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                                     NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
+        //Copy the error message into a std::string.
+        std::string message(messageBuffer, size);
+        //Free the Win32's string's buffer.
+        LocalFree(messageBuffer);
+        return message;
+    }
+}
+
+namespace SR_UTILS_NS::Platform {
     void TextToClipboard(const std::string &text) {
         if (text.empty()) {
             SR_WARN("Platform::TextToClipboard() : text is empty!");
@@ -144,5 +165,63 @@ namespace SR_UTILS_NS::Platform {
 
     void OpenWithAssociatedApp(const Path &filepath) {
         system(filepath.ToString().c_str());
+    }
+
+    bool Copy(const Path &from, const Path &to) {
+        if (from.IsFile()) {
+            const bool result = CopyFileA(
+                    reinterpret_cast<LPCSTR>(from.ToString().c_str()),
+                    reinterpret_cast<LPCSTR>(to.ToString().c_str()),
+                    false
+            );
+
+            if (!result) {
+                SR_WARN("Platform::Copy() : " + GetLastErrorAsString());
+            }
+
+            return result;
+        }
+
+        if (!from.IsDir()) {
+            return false;
+        }
+
+        CreateFolder(to);
+
+        for (auto&& item : GetInDirectory(from)) {
+            if (Copy(item, to.Concat(item.GetBaseNameAndExt()))) {
+                continue;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    std::list<Path> GetInDirectory(const Path &dir) {
+        std::list<Path> items;
+        const std::string search_path = dir.ToString() + "/*.*";
+        WIN32_FIND_DATA fd;
+        HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+        if(hFind != INVALID_HANDLE_VALUE) {
+            do {
+                const auto filename = std::string(fd.cFileName);
+                if (filename != "." && filename != ".." && !filename.empty())
+                    items.emplace_back(dir.ToString() + "/" + filename);
+            }
+            while(::FindNextFile(hFind, &fd));
+
+            ::FindClose(hFind);
+        }
+        return items;
+    }
+
+    bool CreateFolder(const Path &path) {
+#ifdef SR_MINGW
+        return mkdir(path.CStr());
+#else
+        return _mkdir(path.CStr());
+#endif
     }
 }

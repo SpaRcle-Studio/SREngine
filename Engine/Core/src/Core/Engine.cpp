@@ -58,7 +58,8 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     });
 
     if (!m_scene.Valid()) {
-        SetScene(SR_WORLD_NS::Scene::New("New scene"));
+        auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
+        SetScene(SR_WORLD_NS::Scene::New(scenePath));
     }
 
     /// TODO: move to camera
@@ -242,9 +243,8 @@ bool Framework::Engine::Close() {
 
     m_isRun = false;
 
-    /// должен освобождаться перед компилятором и перед окном,
-    /// так как может содержать скрипты
-    if (m_editor) {
+    if (m_editor && m_window) {
+        m_window->RemoveWidgetManager(m_editor);
         m_editor->Destroy();
         m_editor->Free();
         m_editor = nullptr;
@@ -252,8 +252,9 @@ bool Framework::Engine::Close() {
 
     CloseScene();
 
-    if (m_input)
+    if (m_input) {
         m_input->UnregisterAll();
+    }
     SR_SAFE_DELETE_PTR(m_input);
 
     if (m_cmdManager && m_cmdManager->IsRun())
@@ -268,6 +269,7 @@ bool Framework::Engine::Close() {
     }
 
     if (m_window && m_window->IsRun()) {
+        m_window->RemoveWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
         m_window->Close();
         m_window->Free();
         m_window = nullptr;

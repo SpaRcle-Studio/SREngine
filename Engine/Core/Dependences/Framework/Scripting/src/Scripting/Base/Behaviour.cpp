@@ -135,8 +135,12 @@ namespace SR_SCRIPTING_NS {
 
         m_loadState = LoadState::Reloading;
 
+        auto&& stash = StashProperties();
+
         Unload();
         Load();
+
+        UnStashProperties(stash);
 
         m_loadState = LoadState::Loaded;
 
@@ -147,5 +151,25 @@ namespace SR_SCRIPTING_NS {
 
     SR_UTILS_NS::Path Behaviour::GetAssociatedPath() const {
         return SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
+    }
+
+    std::map<std::string, std::any> Behaviour::StashProperties() const {
+        SR_LOCK_GUARD
+
+        auto&& stash = std::map<std::string, std::any>();
+
+        for (auto&& propertyId : GetProperties()) {
+            stash[propertyId] = GetProperty(propertyId);
+        }
+
+        return stash;
+    }
+
+    void Behaviour::UnStashProperties(const std::map<std::string, std::any> &props) {
+        SR_LOCK_GUARD
+
+        for (auto&& [propertyId, value] : props) {
+            SetProperty(propertyId, value);
+        }
     }
 }

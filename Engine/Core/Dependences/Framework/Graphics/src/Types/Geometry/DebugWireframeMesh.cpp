@@ -51,9 +51,19 @@ namespace SR_GTYPES_NS {
             m_material->UseSamplers();
         }
 
-        uboManager.BindUBO(m_virtualUBO);
-
-        m_env->DrawIndices(m_countIndices);
+        switch (uboManager.BindUBO(m_virtualUBO)) {
+            case Memory::UBOManager::BindResult::Duplicated:
+                shader->InitUBOBlock();
+                shader->Flush();
+                m_material->UseSamplers();
+                SR_FALLTHROUGH;
+            case Memory::UBOManager::BindResult::Success:
+                m_env->DrawIndices(m_countIndices);
+                break;
+            case Memory::UBOManager::BindResult::Failed:
+            default:
+                break;
+        }
     }
 
     bool DebugWireframeMesh::Calculate() {

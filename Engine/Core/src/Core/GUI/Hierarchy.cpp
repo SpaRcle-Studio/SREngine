@@ -14,7 +14,7 @@ namespace SR_CORE_NS::GUI {
     { }
 
     void Hierarchy::Draw() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
@@ -58,7 +58,11 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::Separator();
 
-            if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize)) {
+            if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize) && locked) {
+                if (active && !paused) {
+                    PlayScene();
+                }
+
                 if (active) {
                     paused = false;
                 }
@@ -82,7 +86,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (ImGui::Button(SR_ICON_UNDO, buttonSize) && locked) {
-                m_scene->Reload();
+                //m_scene->Reload();
             }
 
             ImGui::Separator();
@@ -101,7 +105,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
         m_scene = scene;
     }
 
@@ -219,7 +223,7 @@ namespace SR_CORE_NS::GUI {
                 break;
             }
             case SR_UTILS_NS::KeyCode::Del: {
-                std::lock_guard<std::mutex> lock(m_mutex);
+                SR_LOCK_GUARD
 
                 /// TODO: make as command
                 if (m_scene.LockIfValid()) {
@@ -243,7 +247,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::LShift: {
@@ -288,7 +292,7 @@ namespace SR_CORE_NS::GUI {
                 auto&& count = marshal.Read<uint64_t>();
 
                 if (count > 1000) {
-                    SR_WARN("Hierarchy::Paste() : Attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
+                    SR_WARN("Hierarchy::Paste() : attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
                 }
 
                 for (uint64_t i = 0; i < count; ++i) {
@@ -302,14 +306,37 @@ namespace SR_CORE_NS::GUI {
             }
 
             {
-                std::lock_guard<std::mutex> lock(m_mutex);
+                SR_LOCK_GUARD
                 m_selected = selected;
             }
         }
     }
 
     std::set<Helper::GameObject::Ptr> Hierarchy::GetSelected() const {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
         return m_selected;
+    }
+
+    void Hierarchy::PlayScene() {
+        SR_LOCK_GUARD
+
+        m_scene->Save();
+
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-engine-scene");
+        if (!m_scene->GetPath().Copy(runtimePath)) {
+            SR_ERROR("Hierarchy::PlayScene() : failed to copy scene!");
+            return;
+        }
+
+        auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
+        /// оставляем заблокированной, разблокируется после отрисовки кнопки
+        if (!runtimeScene.LockIfValid()) {
+            SR_ERROR("Hierarchy::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
+            return;
+        }
+
+        m_scene.Unlock();
+        Engine::Instance().CloseScene();
+        Engine::Instance().SetScene(runtimeScene);
     }
 }

@@ -23,6 +23,8 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void MessageBoxWidget::Draw() {
+        SR_LOCK_GUARD_INHERIT(Widget)
+
         ImGui::TextColored(ImColor(255, 255, 0), "%s", m_header.c_str());
 
         ImGui::Spacing();
@@ -49,7 +51,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void MessageBoxWidget::Show(const std::string& header, const std::string& message, MessageBoxType type, MessageBoxButton buttons) {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(Widget)
 
         m_header = header;
         m_message = message;

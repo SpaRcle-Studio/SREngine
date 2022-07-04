@@ -46,6 +46,8 @@ namespace SR_UTILS_NS {
         bool Make(Type type = Type::Undefined) const;
         void NormalizeSelf();
 
+        SR_NODISCARD bool Copy(const Path& destination) const;
+
         SR_NODISCARD std::string ToString() const;
         SR_NODISCARD std::wstring ToWinApiPath() const;
         SR_NODISCARD std::wstring ToUnicodeString() const;
@@ -81,6 +83,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string_view GetBaseNameView() const;
         SR_NODISCARD std::string GetExtension() const;
         SR_NODISCARD std::string GetBaseName() const;
+        SR_NODISCARD std::string GetBaseNameAndExt() const;
 
     private:
         void Update();

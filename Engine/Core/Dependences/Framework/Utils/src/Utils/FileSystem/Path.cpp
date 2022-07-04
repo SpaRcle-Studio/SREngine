@@ -279,4 +279,12 @@ namespace SR_UTILS_NS {
         /// TODO: optimize
         return GetAll().empty();
     }
+
+    bool Path::Copy(const Path &destination) const {
+        return Platform::Copy(*this, destination);
+    }
+
+    std::string Path::GetBaseNameAndExt() const {
+        return m_name + "." + m_ext;
+    }
 }

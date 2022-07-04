@@ -38,6 +38,7 @@ namespace SR_GRAPH_NS {
         void BeginSync();
         void EndSync();
 
+        void RemoveWidgetManager(GUI::WidgetManager* widgetManager);
         void RegisterWidgetManager(GUI::WidgetManager* widgetManager);
 
     public:

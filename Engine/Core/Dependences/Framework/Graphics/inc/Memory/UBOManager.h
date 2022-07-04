@@ -27,18 +27,21 @@ namespace SR_GRAPH_NS::Memory {
             m_data = std::exchange(ref.m_data, {});
             m_samples = std::exchange(ref.m_samples, {});
             m_uboSize = std::exchange(ref.m_uboSize, {});
+            m_shaderProgram = std::exchange(ref.m_shaderProgram, {});
         }
 
         VirtualUBOInfo& operator=(VirtualUBOInfo&& ref) noexcept {
             m_data = std::exchange(ref.m_data, {});
             m_samples = std::exchange(ref.m_samples, {});
             m_uboSize = std::exchange(ref.m_uboSize, {});
+            m_shaderProgram = std::exchange(ref.m_shaderProgram, {});
             return *this;
         }
 
         ska::flat_hash_map<Camera*, std::pair<UBO, Descriptor>> m_data;
         uint32_t m_samples = 0;
         uint32_t m_uboSize = 0;
+        int32_t m_shaderProgram = SR_ID_INVALID;
 
     };
 
@@ -50,7 +53,12 @@ namespace SR_GRAPH_NS::Memory {
         using VirtualUBO = int32_t;
         using Descriptor = int32_t;
         using UBO = int32_t;
-
+    public:
+        enum class BindResult : uint8_t {
+            Success,
+            Duplicated,
+            Failed
+        };
     private:
         UBOManager();
         ~UBOManager() override = default;
@@ -62,10 +70,10 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualUBO ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples);
         SR_NODISCARD VirtualUBO AllocateUBO(uint32_t uboSize, uint32_t samples);
         bool FreeUBO(VirtualUBO* ubo);
-        void BindUBO(VirtualUBO ubo);
+        BindResult BindUBO(VirtualUBO ubo);
 
     private:
-        SR_NODISCARD bool AllocMemory(UBO* ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples);
+        SR_NODISCARD bool AllocMemory(UBO* ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples, int32_t shader);
         void FreeMemory(UBO* ubo, Descriptor* descriptor);
 
         SR_NODISCARD VirtualUBO GenerateUnique() const;
@@ -73,6 +81,7 @@ namespace SR_GRAPH_NS::Memory {
     private:
         ska::flat_hash_map<VirtualUBO, VirtualUBOInfo> m_virtualTable;
         Camera* m_camera = nullptr;
+        bool m_singleCameraMode = false;
 
     };
 }

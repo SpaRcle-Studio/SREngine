@@ -19,8 +19,6 @@ namespace SR_GRAPH_NS {
                 delete pCamera;
 
                 pIt = m_cameras.erase(pIt);
-
-                Environment::Get()->SetBuildState(false);
             }
             else {
                 ++pIt;
@@ -99,6 +97,7 @@ namespace SR_GRAPH_NS {
         SR_LOG("CameraManager::RegisterCamera() : register new camera...");
 
         m_cameras.insert(std::make_pair(camera, false));
+
         Environment::Get()->SetBuildState(false);
     }
 
@@ -113,5 +112,7 @@ namespace SR_GRAPH_NS {
         else {
             SRHalt("Camera not registered!");
         }
+
+        Environment::Get()->SetBuildState(false);
     }
 }

@@ -2,20 +2,26 @@
 <Features>
    <Common>
        <EvoCompiler Value="true"/>
-       <LoadSkybox Value="true"/>
+       <UpdateScripts Value="false"/>
+       <UseEditorGUIScript Value="false"/>
+
+       <CrashHandler Value="true"/>
+
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
+
        <EditorOnStartup Value="true"/>
-       <CrashHandler Value="true"/>
-       <SkyboxCPUUsage Value="false"/>
-       <AutoReloadResources Value="true"/>
-       <UpdateScripts Value="false"/>
-       <UseEditorGUIScript Value="false"/>
        <EditorWidgetsDocking Value="false"/>
        <InputIgnoreNonFocusedWidgets Value="false"/>
        <UpdateNonHoveredSceneViewer Value="true"/>
+
+       <AutoReloadResources Value="true"/>
+
+       <LoadSkybox Value="true"/>
+       <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
+       <SingleCameraMode Value="false"/>
    </Common>
 </Features>

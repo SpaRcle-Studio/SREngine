@@ -72,7 +72,8 @@ namespace SR_GRAPH_NS {
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
         //void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
-        void SetCurrentShaderID(const int32_t& id)  { m_currentShaderID = id;           }
+        void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
+        SR_NODISCARD int32_t GetCurrentShaderId() const { return m_currentShaderID; }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }

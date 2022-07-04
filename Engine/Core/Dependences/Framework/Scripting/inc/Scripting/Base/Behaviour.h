@@ -44,6 +44,9 @@ namespace SR_SCRIPTING_NS {
         virtual void SetProperty(const std::string& id, const std::any& val) { }
 
     protected:
+        std::map<std::string, std::any> StashProperties() const;
+        void UnStashProperties(const std::map<std::string, std::any>& props);
+
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
         SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
