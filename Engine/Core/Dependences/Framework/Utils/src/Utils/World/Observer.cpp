@@ -82,6 +82,7 @@ namespace SR_WORLD_NS {
 
     void Observer::SetChunk(SR_MATH_NS::IVector3 chunk) {
         m_chunk = MakeChunk(chunk, m_regionWidth);
+        SRAssert(!m_chunk.HasZero());
     }
 
     void Observer::MoveRegion(const SR_MATH_NS::IVector3 &value) {
@@ -123,5 +124,19 @@ namespace SR_WORLD_NS {
                 position.Singular(Math::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<int>() / chunkSize,
                 m_offset.m_chunk
         );
+    }
+
+    void Observer::SetTarget(const Observer::GameObjectPtr &target) {
+        m_target = target;
+
+        m_chunk = SR_MATH_NS::IVector3();
+        m_region = SR_MATH_NS::IVector3();
+
+        m_lastChunk = SR_MATH_NS::IVector3();
+        m_lastRegion = SR_MATH_NS::IVector3();
+
+        m_targetPosition = SR_MATH_NS::FVector3();
+
+        m_offset = Offset();
     }
 }

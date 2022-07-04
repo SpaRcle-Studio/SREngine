@@ -250,7 +250,10 @@ bool Framework::Engine::Close() {
         m_editor = nullptr;
     }
 
-    CloseScene();
+    if (m_scene.Valid()) {
+        m_scene->Save();
+        SetScene(ScenePtr());
+    }
 
     if (m_input) {
         m_input->UnregisterAll();
@@ -292,32 +295,44 @@ bool Framework::Engine::RegisterLibraries() {
     return true;
 }
 
-bool Framework::Engine::CloseScene() {
-    SR_INFO("Engine::CloseScene() : close scene...");
-
-    return m_scene.AutoFree([](SR_WORLD_NS::Scene* scene) {
-        scene->Save();
-        scene->Destroy();
-        scene->Free();
-    });
-}
-
 bool Framework::Engine::SetScene(const Helper::Types::SafePtr<SR_WORLD_NS::Scene> &scene)  {
-    if (m_scene.Valid() && scene == m_scene) {
+    SR_LOCK_GUARD
+
+    /// создаем бекап указателя на сцену,
+    /// чтобы проконтролировать, что она корректно уничтожится и не произойдет блокировки
+    bool locked = false;
+    ScenePtr oldScene = m_scene;
+
+    if (oldScene.RecursiveLockIfValid())
+    {
+        oldScene.AutoFree([](SR_WORLD_NS::Scene* scene) {
+            scene->Destroy();
+            scene->Free();
+        });
+        locked = true;
+    }
+
+    if (scene == oldScene && scene.Valid()) {
         SR_WARN("Engine::SetScene() : scene ptr equals current scene ptr!");
+        if (locked) {
+            oldScene.Unlock();
+        }
         return false;
     }
-    else {
-        m_scene = scene;
 
-        if (m_editor) {
-            m_editor->GetWindow<Hierarchy>()->SetScene(m_scene);
-            m_editor->GetWindow<SceneViewer>()->SetScene(m_scene);
-            m_editor->GetWindow<WorldEdit>()->SetScene(m_scene);
-        }
+    m_scene = scene;
 
-        return true;
+    if (m_editor) {
+        m_editor->GetWindow<Hierarchy>()->SetScene(m_scene);
+        m_editor->GetWindow<SceneViewer>()->SetScene(m_scene);
+        m_editor->GetWindow<WorldEdit>()->SetScene(m_scene);
     }
+
+    if (locked) {
+        oldScene.Unlock();
+    }
+
+    return true;
 }
 
 void Framework::Engine::Reload() {

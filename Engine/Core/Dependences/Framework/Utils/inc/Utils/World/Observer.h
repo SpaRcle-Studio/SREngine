@@ -50,11 +50,13 @@ namespace SR_WORLD_NS {
     };
 
     class SR_DLL_EXPORT Observer : public NonCopyable {
+        using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
     public:
         Observer(Scene* scene);
         ~Observer() override = default;
 
     public:
+        void SetTarget(const GameObjectPtr& target);
         void SetChunk(Math::IVector3 chunk);
         void MoveRegion(const Math::IVector3& value);
         void SetWorldMetrics(const Math::IVector2& chunkSize, int32_t regionWidth);
@@ -82,7 +84,7 @@ namespace SR_WORLD_NS {
         Scene* m_scene;
 
         Math::FVector3 m_targetPosition;
-        Types::SafePtr<Helper::GameObject> m_target;
+        GameObjectPtr m_target;
     };
 
     SR_DLL_EXPORT Math::IVector3 MakeChunk(const Math::IVector3& rawChunkPos, int32_t width);

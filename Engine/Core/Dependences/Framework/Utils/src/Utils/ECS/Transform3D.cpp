@@ -177,7 +177,9 @@ namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal Transform3D::Save(SavableFlags flags) const {
         SR_HTYPES_NS::Marshal marshal;
 
-        marshal.Write(GetTranslation(), Math::FVector3(0.f));
+        auto&& offset = SR_THIS_THREAD->GetContext()->GetValueDef<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3());
+
+        marshal.Write(offset + GetTranslation(), Math::FVector3(0.f));
         marshal.Write(GetRotation(), Math::FVector3(0.f));
         marshal.Write(GetScale(), Math::FVector3(1.f));
         marshal.Write(GetSkew(), Math::FVector3(1.f));

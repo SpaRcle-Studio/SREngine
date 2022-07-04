@@ -46,8 +46,6 @@ namespace Framework {
 
     public:
         void Reload();
-
-        bool CloseScene();
         bool SetScene(const ScenePtr& scene);
 
         SR_NODISCARD SR_INLINE Helper::Types::Time* GetTime() const { return this->m_time; }

@@ -702,7 +702,10 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Close scene")) {
-            Engine::Instance().CloseScene();
+            if (auto&& scene = Engine::Instance().GetScene()) {
+                scene->Save();
+            }
+            Engine::Instance().SetScene(ScenePtr());
         }
 
         if (ImGui::MenuItem("Instance from file")) {

@@ -153,7 +153,10 @@ namespace Framework::Core::World {
         if (auto&& pCamera = cameraManager.GetFirstCamera()) {
             if (auto &&gameObject = pCamera->GetParent()) {
                 if (gameObject->TryLockIfValid()) {
-                    m_observer->m_target = gameObject->GetThis();
+                    auto&& target = gameObject->GetThis();
+                    if (target != m_observer->m_target) {
+                        m_observer->SetTarget(target);
+                    }
                     gameObject->Unlock();
                 }
             }

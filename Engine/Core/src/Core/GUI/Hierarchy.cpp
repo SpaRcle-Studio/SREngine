@@ -322,21 +322,22 @@ namespace SR_CORE_NS::GUI {
 
         m_scene->Save();
 
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-engine-scene");
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-scene");
         if (!m_scene->GetPath().Copy(runtimePath)) {
             SR_ERROR("Hierarchy::PlayScene() : failed to copy scene!");
             return;
         }
 
         auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
+
         /// оставляем заблокированной, разблокируется после отрисовки кнопки
-        if (!runtimeScene.LockIfValid()) {
+        if (!runtimeScene.RecursiveLockIfValid()) {
             SR_ERROR("Hierarchy::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
             return;
         }
 
         m_scene.Unlock();
-        Engine::Instance().CloseScene();
+
         Engine::Instance().SetScene(runtimeScene);
     }
 }

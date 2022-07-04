@@ -634,7 +634,7 @@ namespace SR_GRAPH_NS {
         auto&& cameras = cameraManager.GetCameras();
 
         if (m_env->IsNeedReBuild()) {
-            SR_LOG("Window::DrawVulkan() : re-build scene...");
+            //SR_LOG("Window::DrawVulkan() : re-build scene...");
 
             if (!multipleRender || cameras.size() == 1) {
                 uboManager.SetCurrentCamera(firstCamera);

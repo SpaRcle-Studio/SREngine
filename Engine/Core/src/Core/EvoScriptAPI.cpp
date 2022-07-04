@@ -73,7 +73,6 @@ namespace Framework {
         ESRegisterStaticMethodArg0(EvoScript::Public, generator, Engine, Instance, Engine&)
         ESRegisterMethodArg0(EvoScript::Private, generator, Engine, RegisterLibraries, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, Reload, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, CloseScene, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetTime, Time*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetWindow, Window*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetRender, Render*)

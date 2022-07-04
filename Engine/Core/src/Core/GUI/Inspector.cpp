@@ -15,6 +15,8 @@ namespace Framework::Core::GUI {
     { }
 
     void Inspector::Draw() {
+        SR_LOCK_GUARD
+
         if (m_gameObject.TryLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
                 m_gameObject->SetEnabled(v);
@@ -36,6 +38,8 @@ namespace Framework::Core::GUI {
     }
 
     void Inspector::Update() {
+        SR_LOCK_GUARD
+
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             m_gameObject.Replace(*selected.begin());
         }

@@ -208,6 +208,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::SaveAt(const Path& path) {
+        SR_INFO(SR_FORMAT("Scene::SaveAt() : save scene...\n\tPath: %s", path.CStr()));
+
         SetPath(path);
         SetName(path.GetBaseName());
 

@@ -4,6 +4,7 @@
 
 #include <Utils/Platform/Platform.h>
 #include <Utils/Debug.h>
+#include <Utils/Common/StringFormat.h>
 
 #include <Windows.h>
 #include <Psapi.h>
@@ -34,7 +35,7 @@ namespace SR_UTILS_NS::Platform {
         size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
                                      NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
         //Copy the error message into a std::string.
-        std::string message(messageBuffer, size);
+        std::string message(messageBuffer, size - 3);
         //Free the Win32's string's buffer.
         LocalFree(messageBuffer);
         return message;
@@ -176,7 +177,7 @@ namespace SR_UTILS_NS::Platform {
             );
 
             if (!result) {
-                SR_WARN("Platform::Copy() : " + GetLastErrorAsString());
+                SR_WARN(SR_FORMAT("Platform::Copy() : %s\n\tFrom: %s\n\tTo: %s", GetLastErrorAsString().c_str(), from.CStr(), to.CStr()));
             }
 
             return result;

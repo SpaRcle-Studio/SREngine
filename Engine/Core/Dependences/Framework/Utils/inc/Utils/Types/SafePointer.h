@@ -24,12 +24,16 @@ namespace SR_HTYPES_NS {
         ~SafePtr(); /// не должен быть виртуальным
     public:
         operator bool() const { return Valid(); }
-        bool operator==(SafePtr<T> ptr) const { return this->m_ptr == ptr.m_ptr; }
-        bool operator!=(SafePtr<T> ptr) const { return this->m_ptr == ptr.m_ptr; }
         SafePtr<T> &operator=(const SafePtr<T> &ptr);
         SafePtr<T> &operator=(T *ptr);
         T &operator*() const { return *m_ptr; }
         T *operator->() const { return m_ptr; }
+        SR_NODISCARD SR_INLINE bool operator==(const SafePtr<T>& right) const noexcept {
+            return m_ptr == right.m_ptr;
+        }
+        SR_NODISCARD SR_INLINE bool operator!=(const SafePtr<T>& right) const noexcept {
+            return m_ptr != right.m_ptr;
+        }
     public:
         bool TryLock() const;
         void Lock() const;
@@ -190,7 +194,7 @@ namespace SR_HTYPES_NS {
 
         bool result = false;
 
-        if (ptrCopy.LockIfValid()) {
+        if (ptrCopy.RecursiveLockIfValid()) {
             result = ptrCopy.FreeImpl(freeFun);
             ptrCopy.Unlock();
         }
@@ -332,6 +336,14 @@ namespace SR_HTYPES_NS {
         return Valid() ? m_data->m_useCount.load() : 0;
     }
 }
+
+//template <class T> SR_NODISCARD SR_INLINE bool operator==(const SR_HTYPES_NS::SafePtr<T>& left, const SR_HTYPES_NS::SafePtr<T>& right) {
+//    return left.GetRawPtr() == right.GetRawPtr();
+//}
+//
+//template <class T> SR_NODISCARD SR_INLINE bool operator!=(const SR_HTYPES_NS::SafePtr<T>& left, const SR_HTYPES_NS::SafePtr<T>& right) {
+//    return left.GetRawPtr() != right.GetRawPtr();
+//}
 
 namespace std {
     template<typename T> struct hash<Framework::Helper::Types::SafePtr<T>> {
