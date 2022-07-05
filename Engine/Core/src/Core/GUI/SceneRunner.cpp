@@ -6,7 +6,7 @@
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
-        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 30))
+        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 50))
     { }
 
     void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
@@ -26,6 +26,7 @@ namespace SR_CORE_NS::GUI {
         if (m_scene.TryLockIfValid()) {
             m_isActive = m_scene->IsActive();
             m_isPaused = m_scene->IsPaused();
+            m_lastPath = std::move(m_scene->GetPath());
             locked = true;
         }
 
@@ -38,15 +39,14 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::Separator();
 
-            if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize) && locked) {
+            if (ImGui::Button(active ? SR_ICON_STOP : SR_ICON_PLAY, buttonSize) && locked) {
                 active = !active;
-
-                paused = false;
 
                 if (active) {
                     active = PlayScene();
                 }
                 else {
+                    paused = false;
                     ReturnScene();
                 }
             }
@@ -59,21 +59,20 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::SameLine();
 
-            if (ImGui::Button(SR_ICON_STOP, buttonSize)) {
-                active = false;
-                paused = false;
-            }
-
-            ImGui::SameLine();
-
             if (ImGui::Button(SR_ICON_UNDO, buttonSize) && locked) {
-                //m_scene->Reload();
+                m_scene->Reload();
             }
 
             ImGui::Separator();
 
             ImGui::PopFont();
             ImGui::PopStyleVar();
+
+            font->Scale = scale;
+
+            ImGui::Text("%s", m_isActive ? m_scenePath.CStr() : m_lastPath.CStr());
+
+            ImGui::Separator();
         }
 
         if (locked) {
@@ -81,8 +80,6 @@ namespace SR_CORE_NS::GUI {
             m_scene->SetPaused((m_isPaused = paused));
             m_scene.Unlock();
         }
-
-        font->Scale = scale;
     }
 
     bool SceneRunner::PlayScene() {
@@ -93,7 +90,7 @@ namespace SR_CORE_NS::GUI {
             return false;
         }
 
-        m_scenePath = m_scene->GetPath();
+        m_scenePath = m_lastPath;
 
         auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-scene");
 

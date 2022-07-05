@@ -27,9 +27,11 @@ namespace SR_CORE_NS::GUI {
         void ReturnScene();
 
     private:
+        bool m_isActive = false;
+        bool m_isPaused = false;
+
         SR_WORLD_NS::Scene::Ptr m_scene;
-        std::atomic<bool> m_isActive;
-        std::atomic<bool> m_isPaused;
+        SR_UTILS_NS::Path m_lastPath;
         SR_UTILS_NS::Path m_scenePath;
 
     };

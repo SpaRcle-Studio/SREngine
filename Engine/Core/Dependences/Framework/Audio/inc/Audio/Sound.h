@@ -4,6 +4,8 @@
 
 #ifndef SRENGINE_SOUND_H
 #define SRENGINE_SOUND_H
+
+/*
 namespace SR_SCRIPTING_NS {
     class Behaviour : public SR_UTILS_NS::IResource, public SR_UTILS_NS::Component {
         using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
@@ -14,5 +16,7 @@ namespace SR_SCRIPTING_NS {
     protected:
         Behaviour();
         ~Behaviour() override = default;
+*/
+
 #endif //SRENGINE_SOUND_H
 
