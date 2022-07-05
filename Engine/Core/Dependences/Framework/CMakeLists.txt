@@ -33,6 +33,7 @@ add_subdirectory(Depends/glew/build/cmake)
 #add_subdirectory(Depends/pugixml)
 #add_subdirectory(Depends/inc/glm)
 
+add_subdirectory(Depends/OpenAL)
 #add_subdirectory(Depends/bullet3)
 add_subdirectory(Depends/EvoVulkan/Core)
 add_subdirectory(Depends/EvoScript/Core)
@@ -65,7 +66,7 @@ find_package(OpenGL REQUIRED)
 # Добавляем библиотеку фреймворка
 add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${UTILS_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
 
-target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core)
+target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core OpenAL)
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 

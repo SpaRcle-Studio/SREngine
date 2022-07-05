@@ -126,6 +126,7 @@
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
 #define SR_SCRIPTING_NS Framework::Scripting
+#define SR_AUDIO_NS Framework::Audio
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 

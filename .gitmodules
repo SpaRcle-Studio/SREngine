@@ -19,3 +19,6 @@
 [submodule "Engine/Core/Dependences/Framework/Utils/libs/nativefiledialog"]
 	path = Engine/Core/Dependences/Framework/Utils/libs/nativefiledialog
 	url = https://github.com/Monika0000/nativefiledialog-extended
+[submodule "Engine/Core/Dependences/Framework/Depends/OpenAL"]
+	path = Engine/Core/Dependences/Framework/Depends/OpenAL
+	url = https://github.com/kcat/openal-soft
