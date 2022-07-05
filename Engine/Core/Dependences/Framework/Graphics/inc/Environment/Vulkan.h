@@ -577,9 +577,17 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {
+            if (VBO == SR_ID_INVALID) {
+                return;
+            }
+
             vkCmdBindVertexBuffers(m_currentCmd, 0, 1, m_memory->m_VBOs[VBO]->GetCRef(), m_offsets);
         }
         SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) override {
+            if (IBO == SR_ID_INVALID) {
+                return;
+            }
+
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
             vkCmdBindIndexBuffer(m_currentCmd, *m_memory->m_IBOs[IBO], 0, VK_INDEX_TYPE_UINT32);
         }

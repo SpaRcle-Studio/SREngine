@@ -95,6 +95,8 @@ int main(int argc, char **argv) {
     Debug::Instance().Init(exe, true, Debug::Theme::Dark);
     Debug::Instance().SetLevel(Debug::Level::Low);
 
+    Thread::Factory::Instance().SetMainThread();
+
     auto&& resourcesManager = ResourceManager::Instance();
 
     if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {

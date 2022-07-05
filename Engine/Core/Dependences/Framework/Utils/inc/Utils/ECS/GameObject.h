@@ -19,13 +19,19 @@ namespace SR_UTILS_NS {
     class Component;
 
     SR_ENUM(GameObjectDestroyBy,
-        GameObject_DestroyBy_Unknown    = 0,
-        GameObject_DestroyBy_Scene      = 1 << 0,
-        GameObject_DestroyBy_GameObject = 1 << 1,
-        GameObject_DestroyBy_Other      = 1 << 2,
-        GameObject_DestroyBy_Command    = 1 << 3
+        GAMEOBJECT_DESTROY_BY_UNKNOWN    = 1 << 0,
+        GAMEOBJECT_DESTROY_BY_SCENE      = 1 << 1,
+        GAMEOBJECT_DESTROY_BY_GAMEOBJECT = 1 << 2,
+        GAMEOBJECT_DESTROY_BY_OTHER      = 1 << 3,
+        GAMEOBJECT_DESTROY_BY_COMMAND    = 1 << 4,
     );
-    typedef uint64_t GODestroyByFlagBits;
+    typedef uint64_t GODestroyByBits;
+
+    SR_ENUM(GameObjectFlags,
+        GAMEOBJECT_FLAG_NONE    = 1 << 0,
+        GAMEOBJECT_FLAG_NO_SAVE = 1 << 1,
+    );
+    typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public Types::SafePtr<GameObject>, public Entity {
         SR_ENTITY_SET_VERSION(1000);
@@ -51,6 +57,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return m_children; }
+        SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
@@ -74,8 +81,9 @@ namespace SR_UTILS_NS {
 
         bool Contains(const Types::SafePtr<GameObject>& child);
         void SetEnabled(bool value);
-        void Destroy(GODestroyByFlagBits by = GameObject_DestroyBy_Other);
+        void Destroy(GODestroyByBits by = GAMEOBJECT_DESTROY_BY_OTHER);
         void SetTransform(Transform3D* transform3D);
+        void SetFlags(GameObjectFlagBits flags) { m_flags = flags; }
 
         bool MoveToTree(const GameObject::Ptr& destination);
         bool AddChild(const GameObject::Ptr& child);
@@ -120,6 +128,8 @@ namespace SR_UTILS_NS {
 
         std::string                         m_name           = "Unnamed";
         std::string                         m_tag            = "Untagged";
+
+        GameObjectFlagBits                  m_flags          = GAMEOBJECT_FLAG_NONE;
 
     };
 }

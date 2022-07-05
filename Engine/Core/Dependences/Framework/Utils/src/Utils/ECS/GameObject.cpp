@@ -61,7 +61,7 @@ namespace SR_UTILS_NS {
         return find;
     }
 
-    void GameObject::Destroy(GODestroyByFlagBits by /** = DestroyByFlags::DestroyBy_Other */) {
+    void GameObject::Destroy(GODestroyByBits by /** = DestroyByFlags::DestroyBy_Other */) {
         if (m_isDestroy) {
             SR_ERROR("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
             return;
@@ -78,7 +78,7 @@ namespace SR_UTILS_NS {
 #endif
 
         if (m_scene.RecursiveLockIfValid()) {
-            const bool byParent = by & GameObject_DestroyBy_GameObject;
+            const bool byParent = by & GAMEOBJECT_DESTROY_BY_GAMEOBJECT;
 
             if (!byParent && m_parent.LockIfValid()) {
                 GameObject::Ptr copy = m_parent;
@@ -99,7 +99,7 @@ namespace SR_UTILS_NS {
 
         for (GameObject::Ptr gameObject : m_children) {
             gameObject.AutoFree([by](GameObject *gm) {
-                gm->Destroy(by | GameObject_DestroyBy_GameObject);
+                gm->Destroy(by | GAMEOBJECT_DESTROY_BY_GAMEOBJECT);
             });
         }
         m_children.clear();
@@ -349,6 +349,10 @@ namespace SR_UTILS_NS {
     }
 
     SR_HTYPES_NS::Marshal GameObject::Save(SavableFlags flags) const {
+        if (GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+            return SR_HTYPES_NS::Marshal();
+        }
+
         SR_HTYPES_NS::Marshal marshal = Entity::Save(flags);
 
         marshal.Write(VERSION);
@@ -366,6 +370,8 @@ namespace SR_UTILS_NS {
 
         marshal.Append(m_transform->Save(flags));
 
+        /// save components
+
         marshal.Write(static_cast<uint32_t>(m_components.size()));
         for (auto&& component : m_components) {
             auto&& marshalComponent = component->Save(flags);
@@ -373,8 +379,21 @@ namespace SR_UTILS_NS {
             marshal.Append(std::move(marshalComponent));
         }
 
-        marshal.Write(static_cast<uint32_t>(m_children.size()));
+        /// save children
+
+        uint32_t childrenNum = 0;
         for (auto&& child : m_children) {
+            if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+                continue;
+            }
+            ++childrenNum;
+        }
+
+        marshal.Write(static_cast<uint32_t>(childrenNum));
+        for (auto&& child : m_children) {
+            if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+                continue;
+            }
             marshal.Append(child->Save(flags));
         }
 

@@ -21,6 +21,7 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void OpenWithAssociatedApp(const Path& filepath);
     SR_DLL_EXPORT extern bool Copy(const Path& from, const Path& to);
     SR_DLL_EXPORT extern bool CreateFolder(const Path& path);
+    SR_DLL_EXPORT extern bool Delete(const Path& path);
     SR_DLL_EXPORT extern std::list<Path> GetInDirectory(const Path& dir);
 }
 

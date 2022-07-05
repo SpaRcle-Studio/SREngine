@@ -127,8 +127,7 @@ namespace SR_WORLD_NS {
                 /// сохраняем объекты относительно начала координат чанка
                 SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 
-                if (auto &&gameObjectMarshal = gameObject->Save(
-                            SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
+                if (auto &&gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
                     marshaled.emplace_back(std::move(gameObjectMarshal));
                 }
 

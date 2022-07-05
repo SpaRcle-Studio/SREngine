@@ -114,7 +114,7 @@ namespace SR_WORLD_NS {
 
         for (auto gameObject : GetRootGameObjects()) {
             gameObject.AutoFree([](GameObject* gm) {
-                gm->Destroy(GameObject_DestroyBy_Scene);
+                gm->Destroy(GAMEOBJECT_DESTROY_BY_SCENE);
             });
         }
 
@@ -510,11 +510,13 @@ namespace SR_WORLD_NS {
     }
 
     void Scene::UpdateTree() {
-        for (auto&& gameObject : m_rootObjects) {
+        auto&& root = GetRootGameObjects();
+
+        for (auto&& gameObject : root) {
             gameObject->Awake();
         }
 
-        for (auto&& gameObject : m_rootObjects) {
+        for (auto&& gameObject : root) {
             gameObject->Start();
         }
     }

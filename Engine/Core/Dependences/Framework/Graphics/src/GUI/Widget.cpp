@@ -5,6 +5,36 @@
 #include <GUI/Widget.h>
 
 namespace Framework::Graphics::GUI {
+    void Widget::DrawSubWindow() {
+        m_widgetFlags = WIDGET_FLAG_NONE;
+
+        if (m_center) {
+            ImGuiIO& io = ImGui::GetIO();
+            ImVec2 pos(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f);
+            ImGui::SetNextWindowPos(pos, ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+        }
+
+        WindowFlags flags = m_windowFlags;
+
+        if (IsFocused() || IsHovered()) {
+            ImVec4 color = ImGui::GetStyleColorVec4(ImGuiCol_::ImGuiCol_WindowBg);
+            ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_WindowBg, color + ImVec4(0.02, 0.02, 0.02, 0));
+        }
+
+        auto&& size = m_size.Contains(SR_INT32_MAX) ? ImVec2(0, 0) : ImVec2(m_size.x, m_size.y);
+        if (ImGui::BeginChild(m_name.c_str(), size, false, flags)) {
+            Draw();
+        }
+
+        if (IsFocused() || IsHovered())
+            ImGui::PopStyleColor();
+
+        InternalCheckFocused();
+        InternalCheckHovered();
+
+        ImGui::EndChild();
+    }
+
     void Widget::DrawWindow()  {
         m_widgetFlags = WIDGET_FLAG_NONE;
 
@@ -17,7 +47,6 @@ namespace Framework::Graphics::GUI {
         WindowFlags flags = m_windowFlags;
 
         if (IsFocused() || IsHovered()) {
-            //ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_WindowBg, IsFocused() ? ImVec4(0, 1, 0, 1) : ImVec4(1, 0, 0, 1));
             ImVec4 color = ImGui::GetStyleColorVec4(ImGuiCol_::ImGuiCol_WindowBg);
             ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_WindowBg, color + ImVec4(0.02, 0.02, 0.02, 0));
         }

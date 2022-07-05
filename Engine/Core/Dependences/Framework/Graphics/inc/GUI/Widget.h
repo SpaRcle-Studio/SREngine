@@ -48,6 +48,8 @@ namespace SR_GRAPH_NS::GUI {
         virtual void Open();
         virtual void Close();
 
+        void DrawSubWindow();
+
     protected:
         virtual void Draw() = 0;
         virtual void OnClose() { }

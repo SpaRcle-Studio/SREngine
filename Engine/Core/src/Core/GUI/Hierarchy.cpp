@@ -7,23 +7,30 @@
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
 #include <GUI/Icons.h>
+#include <Core/GUI/SceneRunner.h>
 
 namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
-    { }
+    {
+        m_sceneRunnerWidget = new SceneRunner();
+    }
+
+    Hierarchy::~Hierarchy() {
+        SR_SAFE_DELETE_PTR(m_sceneRunnerWidget);
+    }
 
     void Hierarchy::Draw() {
         SR_LOCK_GUARD
 
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
-        DrawMenu();
-
         if (m_scene.TryLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
         }
+
+        m_sceneRunnerWidget->DrawSubWindow();
 
         for (auto&& gameObject : m_tree) {
             if (!gameObject.LockIfValid())
@@ -34,79 +41,14 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::DrawMenu() {
-        auto&& font = Graphics::Environment::Get()->GetIconFont();
-        float_t scale = font->Scale;
-        font->Scale /= 3;
-
-        const ImVec2 buttonSize = ImVec2(25, 25);
-
-        bool locked = false;
-
-        if (m_scene.TryLockIfValid()) {
-            m_isActive = m_scene->IsActive();
-            m_isPaused = m_scene->IsPaused();
-            locked = true;
-        }
-
-        bool active = m_isActive;
-        bool paused = m_isPaused;
-
-        {
-            ImGui::PushFont(font);
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
-
-            ImGui::Separator();
-
-            if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize) && locked) {
-                if (active && !paused) {
-                    PlayScene();
-                }
-
-                if (active) {
-                    paused = false;
-                }
-
-                active = !active;
-            }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button(paused ? SR_ICON_PAUSE_CIRCLE : SR_ICON_PAUSE, buttonSize)) {
-                paused = !paused;
-            }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button(SR_ICON_STOP, buttonSize)) {
-                active = false;
-                paused = false;
-            }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button(SR_ICON_UNDO, buttonSize) && locked) {
-                //m_scene->Reload();
-            }
-
-            ImGui::Separator();
-
-            ImGui::PopFont();
-            ImGui::PopStyleVar();
-        }
-
-        if (locked) {
-            m_scene->SetActive((m_isActive = active));
-            m_scene->SetPaused((m_isPaused = paused));
-            m_scene.Unlock();
-        }
-
-        font->Scale = scale;
-    }
-
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
         SR_LOCK_GUARD
+
         m_scene = scene;
+
+        if (auto&& widget = dynamic_cast<SceneRunner*>(m_sceneRunnerWidget)) {
+            widget->SetScene(m_scene);
+        }
     }
 
     void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) {
@@ -315,29 +257,5 @@ namespace SR_CORE_NS::GUI {
     std::set<Helper::GameObject::Ptr> Hierarchy::GetSelected() const {
         SR_LOCK_GUARD
         return m_selected;
-    }
-
-    void Hierarchy::PlayScene() {
-        SR_LOCK_GUARD
-
-        m_scene->Save();
-
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-scene");
-        if (!m_scene->GetPath().Copy(runtimePath)) {
-            SR_ERROR("Hierarchy::PlayScene() : failed to copy scene!");
-            return;
-        }
-
-        auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
-
-        /// оставляем заблокированной, разблокируется после отрисовки кнопки
-        if (!runtimeScene.RecursiveLockIfValid()) {
-            SR_ERROR("Hierarchy::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
-            return;
-        }
-
-        m_scene.Unlock();
-
-        Engine::Instance().SetScene(runtimeScene);
     }
 }

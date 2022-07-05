@@ -40,6 +40,34 @@ namespace SR_UTILS_NS::Platform {
         LocalFree(messageBuffer);
         return message;
     }
+
+    std::string ErrorCodeToString(const DWORD a_error_code)
+    {
+        // Get the last windows error message.
+        char msg_buf[1025] = { 0 };
+        // Get the error message for our os code.
+        if (FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+                          0,
+                          a_error_code,
+                          0,
+                          msg_buf,
+                          sizeof(msg_buf) - 1,
+                          0))
+        {
+            // Remove trailing newline character.
+            char* nl_ptr = 0;
+            if (0 != (nl_ptr = strchr(msg_buf, '\n')))
+            {
+                *nl_ptr = '\0';
+            }
+            if (0 != (nl_ptr = strchr(msg_buf, '\r')))
+            {
+                *nl_ptr = '\0';
+            }
+            return std::string(msg_buf);
+        }
+        return std::string("Failed to get error message");
+    }
 }
 
 namespace SR_UTILS_NS::Platform {
@@ -224,5 +252,37 @@ namespace SR_UTILS_NS::Platform {
 #else
         return _mkdir(path.CStr());
 #endif
+    }
+
+    bool Delete(const Path &path) {
+        if (path.IsFile()) {
+            const bool result = std::remove(path.CStr()) == 0;
+
+            if (!result) {
+                SR_WARN(SR_FORMAT("Platform::Delete() : failed to delete file!\n\tPath: %s", path.CStr()));
+            }
+
+            return result;
+        }
+
+        if (!path.IsDir()) {
+            return false;
+        }
+
+        for (auto&& item : GetInDirectory(path)) {
+            if (Delete(item)) {
+                continue;
+            }
+
+            return false;
+        }
+
+        const bool result = _rmdir(path.CStr()) == 0;
+
+        if (!result) {
+            SR_WARN(SR_FORMAT("Platform::Delete() : failed to delete folder!\n\tPath: %s", path.CStr()));
+        }
+
+        return result;
     }
 }

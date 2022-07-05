@@ -13,10 +13,10 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_CORE_NS::GUI {
-    class Hierarchy : public Graphics::GUI::Widget {
+    class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
     public:
         Hierarchy();
-        ~Hierarchy() override = default;
+        ~Hierarchy() override;
 
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
@@ -31,11 +31,8 @@ namespace SR_CORE_NS::GUI {
         void CheckSelected(const Helper::GameObject::Ptr& gm);
         void ContextMenu(const Helper::GameObject::Ptr& gm, uint64_t id);
         void DrawChild(const Helper::GameObject::Ptr& root);
-        void DrawMenu();
         void Copy() const;
         void Paste();
-
-        void PlayScene();
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
@@ -47,8 +44,8 @@ namespace SR_CORE_NS::GUI {
         std::unordered_set<Helper::GameObject::Ptr> m_tree;
 
         std::atomic<bool> m_shiftPressed;
-        std::atomic<bool> m_isActive;
-        std::atomic<bool> m_isPaused;
+
+        SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;
 
     };
 }
