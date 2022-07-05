@@ -40,6 +40,7 @@ namespace SR_AUDIO_NS {
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::ResourceManager::Instance().GetAudioPath().Concat(rawPath);
 
+        //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
         ALCdevice* openALDevice = alcOpenDevice(nullptr);
         if(!openALDevice)
             return 0;
@@ -58,19 +59,20 @@ namespace SR_AUDIO_NS {
             return 0;
         }
 
-        std::uint8_t channels;
-        std::int32_t sampleRate;
-        std::uint8_t bitsPerSample;
-        std::vector<char> soundData;
-        if(!load_wav(path.CStr(), channels, sampleRate, bitsPerSample,
-                     reinterpret_cast<ALsizei &>(soundData)))
+        std::uint8_t 	channels;
+        std::int32_t 	sampleRate;
+        std::uint8_t 	bitsPerSample;
+        ALsizei			dataSize;
+        char* rawSoundData = load_wav(path.CStr(), channels, sampleRate, bitsPerSample, dataSize);
+        if(rawSoundData == nullptr || dataSize == 0)
         {
             std::cerr << "ERROR: Could not load wav" << std::endl;
             return 0;
         }
+        std::vector<char> soundData(rawSoundData, rawSoundData + dataSize);
 
         ALuint buffer;
-        alGenBuffers( 1, &buffer);
+        alCall(alGenBuffers, 1, &buffer);
 
         ALenum format;
         if(channels == 1 && bitsPerSample == 8)
@@ -90,17 +92,17 @@ namespace SR_AUDIO_NS {
             return 0;
         }
 
-        alBufferData(buffer, format, soundData.data(), soundData.size(), sampleRate);
+        alCall(alBufferData, buffer, format, soundData.data(), soundData.size(), sampleRate);
         soundData.clear(); // erase the sound in RAM
 
         ALuint source;
-        alGenSources( 1, &source);
-        alSourcef( source, AL_PITCH, 1);
-        alSourcef( source, AL_GAIN, 1.0f);
-        alSource3f( source, AL_POSITION, 0, 0, 0);
-        alSource3f( source, AL_VELOCITY, 0, 0, 0);
-        alSourcei( source, AL_LOOPING, AL_FALSE);
-        alSourcei( source, AL_BUFFER, buffer);
+        alCall(alGenSources, 1, &source);
+        alCall(alSourcef, source, AL_PITCH, 1);
+        alCall(alSourcef, source, AL_GAIN, 1.0f);
+        alCall(alSource3f, source, AL_POSITION, 0, 0, 0);
+        alCall(alSource3f, source, AL_VELOCITY, 0, 0, 0);
+        alCall(alSourcei, source, AL_LOOPING, AL_FALSE);
+        alCall(alSourcei, source, AL_BUFFER, buffer);
 
         alSourcePlay( source);
 
@@ -108,17 +110,18 @@ namespace SR_AUDIO_NS {
 
         while(state == AL_PLAYING)
         {
-            alGetSourcei( source, AL_SOURCE_STATE, &state);
+            alGetSourcei(source, AL_SOURCE_STATE, &state);
         }
 
-        alDeleteSources( 1, &source);
-        alDeleteBuffers( 1, &buffer);
+        alDeleteSources(1, &source);
+        alDeleteBuffers(1, &buffer);
 
         alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, nullptr);
         alcCall(alcDestroyContext, openALDevice, openALContext);
 
         ALCboolean closed;
         alcCall(alcCloseDevice, closed, openALDevice, openALDevice);
-        return nullptr;
+        return NULL;
+        //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
     }
 }

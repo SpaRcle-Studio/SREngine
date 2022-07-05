@@ -10,6 +10,7 @@
 #include <AL/alc.h>
 
 namespace SR_AUDIO_NS {
+    //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
     bool check_alc_errors(const std::string& filename, const std::uint_fast32_t line, ALCdevice* device)
     {
         ALCenum error = alcGetError(device);
@@ -40,7 +41,6 @@ namespace SR_AUDIO_NS {
             return false;
         }
         return true;
-
     }
     bool check_al_errors(const std::string& filename, const std::uint_fast32_t line)
     {
@@ -78,11 +78,22 @@ namespace SR_AUDIO_NS {
                     const std::uint_fast32_t line,
                     alFunction function,
                     Params... params)
-    ->typename std::enable_if_t<!std::is_same_v<void,decltype(function(params...))>,decltype(function(params...))>
+    ->typename std::enable_if_t<!std::is_same_v<void, decltype(function(params...))>, decltype(function(params...))>
     {
         auto ret = function(std::forward<Params>(params)...);
-        check_al_errors(filename,line);
+        check_al_errors(filename, line);
         return ret;
+    }
+
+    template<typename alFunction, typename... Params>
+    auto alCallImpl(const char* filename,
+                    const std::uint_fast32_t line,
+                    alFunction function,
+                    Params... params)
+    ->typename std::enable_if_t<std::is_same_v<void, decltype(function(params...))>, bool>
+    {
+        function(std::forward<Params>(params)...);
+        return check_al_errors(filename, line);
     }
     template<typename alcFunction, typename... Params>
     auto alcCallImpl(const char* filename,
@@ -108,8 +119,9 @@ namespace SR_AUDIO_NS {
         returnValue = function(std::forward<Params>(params)...);
         return check_alc_errors(filename,line,device);
     }
+    //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
 }
-#define alcCall(function, device, ...) SR_AUDIO_NS::alcCallImpl(__FILE__, __LINE__, function, device, __VA_ARGS__)
+#define alcCall(function, device, ...) alcCallImpl(__FILE__, __LINE__, function, device, __VA_ARGS__)
 #define alCall(function, ...) SR_AUDIO_NS::alCallImpl(__FILE__, __LINE__, function, __VA_ARGS__)
 
 #endif //SRENGINE_TOOLS_H
