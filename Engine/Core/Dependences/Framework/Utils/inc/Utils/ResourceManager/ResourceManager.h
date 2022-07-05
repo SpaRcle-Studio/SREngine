@@ -26,6 +26,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetMaterialsPath() const { return m_folder.Concat("Materials"); }
         SR_NODISCARD Path GetTexturesPath() const { return m_folder.Concat("Textures"); }
         SR_NODISCARD Path GetModelsPath() const { return m_folder.Concat("Models"); }
+        SR_NODISCARD Path GetAudioPath() const { return m_folder.Concat("Audio"); }
         SR_NODISCARD Path GetUtilsPath() const { return m_folder.Concat("Utilities"); }
         SR_NODISCARD Path GetShadersPath() const { return m_folder.Concat("Shaders"); }
         SR_NODISCARD Path GetScriptsPath() const { return m_folder.Concat("Scripts"); }

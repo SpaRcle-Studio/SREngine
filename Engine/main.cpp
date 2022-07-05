@@ -11,6 +11,7 @@
 #endif
 
 #include <Utils/Debug.h>
+#include <Audio/Sound.h>
 
 #include <Core/Engine.h>
 #include <Core/World/World.h>
@@ -64,6 +65,7 @@ using namespace Framework::Physics::Types;
 
 using namespace Framework::Scripting;
 
+using namespace Framework::Audio;
 /*
         +---------------+       +----+          +----+       +---------------+            +----------------+
         |               |       \     \        /     /       |               |           /                 |
@@ -134,6 +136,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Skybox>();
         resourcesManager.RegisterType<Behaviour>();
         resourcesManager.RegisterType<Settings>();
+        resourcesManager.RegisterType<Sound>();
     }
 
     // Register all components
@@ -153,6 +156,9 @@ int main(int argc, char **argv) {
 
         SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World::World(); });
     }
+
+    //TEST AUDIO LOAD
+    SR_AUDIO_NS::Sound::Load("test.wav");
 
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
     const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");

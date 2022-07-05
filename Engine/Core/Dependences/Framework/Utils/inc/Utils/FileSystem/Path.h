@@ -6,6 +6,7 @@
 #define SRENGINE_PATH_H
 
 #include <Utils/stdInclude.h>
+#include <Utils/Math/Mathematics.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Path {
