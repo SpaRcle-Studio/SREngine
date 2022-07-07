@@ -27,6 +27,7 @@
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/Marshal.h>
+#include <Audio/RawSound.h>
 
 #include <Types/Rigidbody.h>
 #include <Utils/Types/RawMesh.h>
@@ -137,6 +138,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Behaviour>();
         resourcesManager.RegisterType<Settings>();
         resourcesManager.RegisterType<Sound>();
+        resourcesManager.RegisterType<RawSound>();
     }
 
     // Register all components
@@ -158,7 +160,11 @@ int main(int argc, char **argv) {
     }
 
     //TEST AUDIO LOAD
-    SR_AUDIO_NS::Sound::Load("test.wav");
+
+    SR_AUDIO_NS::Sound::Load("ahh.wav");
+    //SR_AUDIO_NS::Sound::Load("drop.wav");
+    //SR_AUDIO_NS::Sound::Load("Space_Engineers_Main_Theme_KhydroDjent.wav");
+    //SR_AUDIO_NS::Sound::Load("Space_Angels_Musicfonts.wav");
 
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
     const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");

@@ -150,4 +150,10 @@
     #define SR_DLL_EXPORT
 #endif
 
+#if defined(SR_MSVC)
+    #define SR_STRCMPI _strcmpi
+#else
+    #define SR_STRCMPI strcasecmp
+#endif
+
 #endif //GAMEENGINE_MACROS_H

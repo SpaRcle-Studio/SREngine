@@ -1,0 +1,8 @@
+//
+// Created by Monika on 07.07.2022.
+//
+
+#ifndef SRENGINE_SOUNDMANAGER_H
+#define SRENGINE_SOUNDMANAGER_H
+
+#endif //SRENGINE_SOUNDMANAGER_H

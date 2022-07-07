@@ -10,6 +10,26 @@
 #include <AL/alc.h>
 
 namespace SR_AUDIO_NS {
+    /*bool get_available_devices(std::vector<std::string>& devicesVec, ALCdevice* device)
+    {
+        const ALCchar* devices;
+        if(!alcCall(alcGetString, devices, device, nullptr, ALC_DEVICE_SPECIFIER))
+            return false;
+
+        const char* ptr = devices;
+
+        devicesVec.clear();
+
+        do
+        {
+            devicesVec.push_back(std::string(ptr));
+            ptr += devicesVec.back().size() + 1;
+        }
+        while(*(ptr + 1) != '\0');
+
+        return true;
+    }*/
+
     //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
     bool check_alc_errors(const std::string& filename, const std::uint_fast32_t line, ALCdevice* device)
     {

@@ -9,17 +9,29 @@
 #include <Utils/ResourceManager/IResource.h>
 
 namespace SR_AUDIO_NS {
-    class Sound : public SR_UTILS_NS::IResource {
+    class RawSound;
 
+    class Sound : public SR_UTILS_NS::IResource {
     protected:
         Sound();
-
-        ~Sound() override = default;
+        ~Sound() override;
 
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
 
     public:
-        static Sound* Load(SR_UTILS_NS::Path path);
+        static Sound* Load(const SR_UTILS_NS::Path& path);
+
+    protected:
+        bool Load() override;
+        bool Unload() override;
+        bool Reload() override;
+
+    private:
+        void SetRawSound(RawSound* pRawSound);
+
+    private:
+        RawSound* m_rawSound = nullptr;
+
     };
 
 }

@@ -138,6 +138,26 @@ namespace SR_UTILS_NS {
         return data;
     }
 
+    std::vector<uint8_t> FileSystem::ReadFileAsVector(const std::string &path) {
+        std::ifstream file(path, std::ifstream::binary | std::ios::in);
+
+        if (file.fail()) {
+            return std::vector<uint8_t>();
+        }
+
+        file.seekg(0, std::ios::end);
+        std::streampos end = file.tellg();
+        file.seekg(0, std::ios::beg);
+        std::streampos start = file.tellg();
+        size_t size = static_cast<size_t>(end - start);
+
+        std::vector<uint8_t> result(size);
+
+        file.read(reinterpret_cast<char*>(result.data()), size);
+
+        return result;
+    }
+
     std::vector<char> FileSystem::ReadBinary(const std::string &path) {
         /*std::ifstream ifd(path,  std::ios::binary |  std::ios::ate);
         int size = ifd.tellg();
@@ -411,5 +431,9 @@ namespace SR_UTILS_NS {
         SRHalt0();
         return false;
     #endif
+    }
+
+    std::shared_ptr<std::vector<uint8_t>> FileSystem::ReadFileAsBlob(const std::string &path) {
+        return std::make_shared<std::vector<uint8_t>>(std::move(ReadFileAsVector(path)));
     }
 }

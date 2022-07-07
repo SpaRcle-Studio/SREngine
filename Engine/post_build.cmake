@@ -38,5 +38,10 @@ SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "Utilsd.dll")
 SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "libUtils.dll")
 SRCopyFileToApp("Engine/Core/Dependences/Framework/Utils" "libUtilsd.dll")
 
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/OpenAL" "OpenAL32.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/OpenAL" "OpenAL64.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/OpenAL" "OpenAL32d.dll")
+SRCopyFileToApp("Engine/Core/Dependences/Framework/Depends/OpenAL" "OpenAL64d.dll")
+
 SRCopyFileToApp("bin" "glew32.dll")
 SRCopyFileToApp("bin" "glew32d.dll")

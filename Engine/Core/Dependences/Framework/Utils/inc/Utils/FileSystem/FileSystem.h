@@ -62,6 +62,8 @@ namespace SR_UTILS_NS {
 
         static std::string ReadBinaryAsString(const std::string& path, bool checkError = true);
         static std::vector<char> ReadBinary(const std::string& path);
+        static std::vector<uint8_t> ReadFileAsVector(const std::string& path);
+        static std::shared_ptr<std::vector<uint8_t>> ReadFileAsBlob(const std::string& path);
 
         static std::string ReadAllText(const std::string& path);
 
