@@ -28,6 +28,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Types/Marshal.h>
 #include <Audio/RawSound.h>
+#include <Audio/SoundManager.h>
 
 #include <Types/Rigidbody.h>
 #include <Utils/Types/RawMesh.h>
@@ -161,10 +162,15 @@ int main(int argc, char **argv) {
 
     //TEST AUDIO LOAD
 
-    SR_AUDIO_NS::Sound::Load("ahh.wav");
+    if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Space_Angels_Musicfonts.wav")) {
+        pSound->PlayAsync();
+        //pSound->Destroy();
+    }
+
+    //SR_AUDIO_NS::Sound::Load("ahh.wav");
     //SR_AUDIO_NS::Sound::Load("drop.wav");
     //SR_AUDIO_NS::Sound::Load("Space_Engineers_Main_Theme_KhydroDjent.wav");
-    //SR_AUDIO_NS::Sound::Load("Space_Angels_Musicfonts.wav");
+    //SR_AUDIO_NS::Sound::Load("TRAUMATIC.mp3");
 
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
     const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
@@ -237,6 +243,7 @@ int main(int argc, char **argv) {
     SR_GRAPH_NS::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
+    SR_AUDIO_NS::SoundManager::DestroySingleton();
     Framework::Engine::DestroySingleton();
     Framework::Graphics::GUI::NodeManager::DestroySingleton();
 

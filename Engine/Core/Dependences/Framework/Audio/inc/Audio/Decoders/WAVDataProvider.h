@@ -11,7 +11,7 @@ namespace SR_AUDIO_NS {
     /// a Microsoft WAVE decoder
     class WAVDataProvider : public IWaveDataProvider {
     public:
-        explicit WAVDataProvider(const SoundData& data);
+        explicit WAVDataProvider(const RawSoundDataPtr& data);
 
         SR_NODISCARD virtual const WaveDataFormat &GetWaveDataFormat() const override { return m_format; }
 
@@ -22,13 +22,13 @@ namespace SR_AUDIO_NS {
         virtual void Seek(float Seconds) override;
 
     private:
-        SoundData m_data;
+        RawSoundDataPtr m_data;
         size_t m_dataSize;
         WaveDataFormat m_format;
 
     };
 
-    SoundData TryMP3InsideWAV(const SoundData& data);
+    RawSoundDataPtr TryMP3InsideWAV(const RawSoundDataPtr& data);
 }
 
 #endif //SRENGINE_WAVDATAPROVIDER_H

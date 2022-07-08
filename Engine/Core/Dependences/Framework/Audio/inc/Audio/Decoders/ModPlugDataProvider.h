@@ -14,7 +14,7 @@ namespace SR_AUDIO_NS {
     class ModPlugDataProvider : public IWaveDataProvider
     {
     public:
-        explicit ModPlugDataProvider(const SoundData& data);
+        explicit ModPlugDataProvider(const RawSoundDataPtr& data);
         ~ModPlugDataProvider() override;
 
         virtual const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
@@ -31,7 +31,7 @@ namespace SR_AUDIO_NS {
         int DecodeFromFile(size_t size);
 
     private:
-        SoundData m_data;
+        RawSoundDataPtr m_data;
         WaveDataFormat m_format;
 
         std::vector<uint8_t> m_decodingBuffer;

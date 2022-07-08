@@ -30,7 +30,7 @@ namespace SR_AUDIO_NS {
         g_ModPlugLoaded = true;
     }
 
-    ModPlugDataProvider::ModPlugDataProvider(const SoundData& data)
+    ModPlugDataProvider::ModPlugDataProvider(const RawSoundDataPtr& data)
             : m_data(data)
             , m_format()
             , m_decodingBuffer()

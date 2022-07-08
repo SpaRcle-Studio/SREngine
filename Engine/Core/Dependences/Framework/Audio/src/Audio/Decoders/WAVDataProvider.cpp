@@ -370,11 +370,13 @@ namespace SR_AUDIO_NS::Tools {
 }
 
 namespace SR_AUDIO_NS {
-    WAVDataProvider::WAVDataProvider(const SoundData& data)
+    WAVDataProvider::WAVDataProvider(const RawSoundDataPtr& data)
             : m_data(data)
             , m_dataSize(data ? data->size() : 0)
             , m_format()
     {
+        int s = sizeof(sWAVHeader);
+
         if (data && data->size() > sizeof(sWAVHeader))
         {
             const sWAVHeader* Header = reinterpret_cast<const sWAVHeader*>(data.get()->data());
@@ -608,7 +610,16 @@ namespace SR_AUDIO_NS {
 
     const uint8_t* WAVDataProvider::GetWaveData() const
     {
-        return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + sizeof(sWAVHeader) : nullptr);
+        const sWAVHeader* Header = reinterpret_cast<const sWAVHeader*>(m_data.get()->data());
+
+        const bool IsJUNK = memcmp(&Header->FMT, "JUNK", 4) == 0;
+
+        if (IsJUNK) {
+            return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + 80 : nullptr);
+        }
+        else {
+            return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + 44 /** standard wav header size */: nullptr);
+        }
     }
 
     size_t WAVDataProvider::GetWaveDataSize() const
@@ -626,25 +637,25 @@ namespace SR_AUDIO_NS {
         // TODO:
     }
 
-    SoundData TryMP3InsideWAV(const SoundData &data) {
+    RawSoundDataPtr TryMP3InsideWAV(const RawSoundDataPtr &data) {
         if (!data || data->size() < sizeof(sWAVHeader))
-            return SoundData();
+            return RawSoundDataPtr();
 
         const sWAVHeader* Header = reinterpret_cast<const sWAVHeader*>(data->data());
 
         const uint16_t FORMAT_MP3 = 0x0055;
 
-        bool IsMP3  = Header->FormatTag == FORMAT_MP3;
-        bool IsRIFF = memcmp( &Header->RIFF, "RIFF", 4 ) == 0;
-        bool IsWAVE = memcmp( &Header->WAVE, "WAVE", 4 ) == 0;
+        const bool IsMP3  = Header->FormatTag == FORMAT_MP3;
+        const bool IsRIFF = memcmp(&Header->RIFF, "RIFF", 4) == 0;
+        const bool IsWAVE = memcmp(&Header->WAVE, "WAVE", 4) == 0;
 
         if (IsRIFF && IsWAVE && IsMP3)
         {
             std::vector<uint8_t> MP3Data(data->data() + sizeof(sWAVHeader), data->data() + data->size());
 
-            return std::make_shared<std::vector<uint8_t>>(MP3Data);
+            return std::make_shared<RawSoundData>(MP3Data);
         }
 
         return nullptr;
     }
-}                                 
+}

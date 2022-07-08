@@ -3,95 +3,84 @@
 //
 
 #include <Audio/Sound.h>
-#include <Audio/Tools.h>
-#include <Audio/Loader.h>
+#include <Audio/SoundManager.h>
+#include <Audio/SoundData.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
-/*
- * SR_UTILS_NS::Path&& path = SR_UTILS_NS::ResourceManager::Instance().GetAudioPath().Concat("");
+/*ALCdevice* openALDevice = alcOpenDevice(nullptr);
+if(!openALDevice)
+    return 0;
 
-        //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
-        ALCdevice* openALDevice = alcOpenDevice(nullptr);
-        if(!openALDevice)
-            return 0;
+ALCcontext* openALContext;
+if(!alcCall(alcCreateContext, openALContext, openALDevice, openALDevice, nullptr) || !openALContext)
+{
+    std::cerr << "ERROR: Could not create audio context" << std::endl;
+    return 0;
+}
+ALCboolean contextMadeCurrent = false;
+if(!alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, openALContext)
+   || contextMadeCurrent != ALC_TRUE)
+{
+    std::cerr << "ERROR: Could not make audio context current" << std::endl;
+    return 0;
+}
 
-        ALCcontext* openALContext;
-        if(!alcCall(alcCreateContext, openALContext, openALDevice, openALDevice, nullptr) || !openALContext)
-        {
-            std::cerr << "ERROR: Could not create audio context" << std::endl;
-            return 0;
-        }
-        ALCboolean contextMadeCurrent = false;
-        if(!alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, openALContext)
-           || contextMadeCurrent != ALC_TRUE)
-        {
-            std::cerr << "ERROR: Could not make audio context current" << std::endl;
-            return 0;
-        }
+std::uint8_t 	channels = m_rawSound->GetChannels();
+std::int32_t 	sampleRate = m_rawSound->GetSampleRate();
+std::uint8_t 	bitsPerSample = m_rawSound->GetBitsPerSample();
 
-        std::uint8_t 	channels;
-        std::int32_t 	sampleRate;
-        std::uint8_t 	bitsPerSample;
-        ALsizei			dataSize;
-        char* rawSoundData = load_wav(path.CStr(), channels, sampleRate, bitsPerSample, dataSize);
-        if(rawSoundData == nullptr || dataSize == 0)
-        {
-            std::cerr << "ERROR: Could not load wav" << std::endl;
-            return 0;
-        }
-        std::vector<char> soundData(rawSoundData, rawSoundData + dataSize);
+ALuint buffer;
+alCall(alGenBuffers, 1, &buffer);
 
-        ALuint buffer;
-        alCall(alGenBuffers, 1, &buffer);
+ALenum format;
+if(channels == 1 && bitsPerSample == 8)
+    format = AL_FORMAT_MONO8;
+else if(channels == 1 && bitsPerSample == 16)
+    format = AL_FORMAT_MONO16;
+else if(channels == 2 && bitsPerSample == 8)
+    format = AL_FORMAT_STEREO8;
+else if(channels == 2 && bitsPerSample == 16)
+    format = AL_FORMAT_STEREO16;
+else
+{
+    std::cerr
+            << "ERROR: unrecognised wave format: "
+            << channels << " channels, "
+            << bitsPerSample << " bps" << std::endl;
+    return 0;
+}
 
-        ALenum format;
-        if(channels == 1 && bitsPerSample == 8)
-            format = AL_FORMAT_MONO8;
-        else if(channels == 1 && bitsPerSample == 16)
-            format = AL_FORMAT_MONO16;
-        else if(channels == 2 && bitsPerSample == 8)
-            format = AL_FORMAT_STEREO8;
-        else if(channels == 2 && bitsPerSample == 16)
-            format = AL_FORMAT_STEREO16;
-        else
-        {
-            std::cerr
-                    << "ERROR: unrecognised wave format: "
-                    << channels << " channels, "
-                    << bitsPerSample << " bps" << std::endl;
-            return 0;
-        }
+alCall(alBufferData, buffer, format, m_rawSound->GetBufferData(), m_rawSound->GetBufferSize(), sampleRate);
 
-        alCall(alBufferData, buffer, format, soundData.data(), soundData.size(), sampleRate);
-        soundData.clear(); // erase the sound in RAM
+ALuint source;
+alCall(alGenSources, 1, &source);
+alCall(alSourcef, source, AL_PITCH, 1);
+alCall(alSourcef, source, AL_GAIN, 1.0f);
+alCall(alSource3f, source, AL_POSITION, 0, 0, 0);
+alCall(alSource3f, source, AL_VELOCITY, 0, 0, 0);
+alCall(alSourcei, source, AL_LOOPING, AL_TRUE);
+alCall(alSourcei, source, AL_BUFFER, buffer);
 
-        ALuint source;
-        alCall(alGenSources, 1, &source);
-        alCall(alSourcef, source, AL_PITCH, 1);
-        alCall(alSourcef, source, AL_GAIN, 1.0f);
-        alCall(alSource3f, source, AL_POSITION, 0, 0, 0);
-        alCall(alSource3f, source, AL_VELOCITY, 0, 0, 0);
-        alCall(alSourcei, source, AL_LOOPING, AL_FALSE);
-        alCall(alSourcei, source, AL_BUFFER, buffer);
+alSourcePlay( source);
 
-        alSourcePlay( source);
+ALint state = AL_PLAYING;
+float_t offset = 0.f;
 
-        ALint state = AL_PLAYING;
+while(state == AL_PLAYING)
+{
+    alGetSourcei(source, AL_SOURCE_STATE, &state);
+    alGetSourcef(source, AL_SAMPLE_OFFSET, &offset);
+    std::cout << offset << std::endl;
+}
 
-        while(state == AL_PLAYING)
-        {
-            alGetSourcei(source, AL_SOURCE_STATE, &state);
-        }
+alDeleteSources(1, &source);
+alDeleteBuffers(1, &buffer);
 
-        alDeleteSources(1, &source);
-        alDeleteBuffers(1, &buffer);
+alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, nullptr);
+alcCall(alcDestroyContext, openALDevice, openALContext);
 
-        alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, nullptr);
-        alcCall(alcDestroyContext, openALDevice, openALContext);
-
-        ALCboolean closed;
-        alcCall(alcCloseDevice, closed, openALDevice, openALDevice);
- */
+ALCboolean closed;
+alcCall(alcCloseDevice, closed, openALDevice, openALDevice);*/
 
 namespace SR_AUDIO_NS {
     Sound::Sound()
@@ -133,83 +122,40 @@ namespace SR_AUDIO_NS {
         return pSound;
     }
 
+    bool Sound::Play(const PlayParams &params) {
+        return SoundManager::Instance().Play(this, params);
+    }
+
+    bool Sound::Play() {
+        PlayParams params = { 0 };
+        params.async = false;
+        return Play(params);
+    }
+
+    bool Sound::PlayAsync() {
+        PlayParams params = { 0 };
+        params.async = true;
+        return Play(params);
+    }
+
     bool Sound::Load() {
-        ALCdevice* openALDevice = alcOpenDevice(nullptr);
-        if(!openALDevice)
-            return 0;
+        auto&& soundManager = SoundManager::Instance();
 
-        ALCcontext* openALContext;
-        if(!alcCall(alcCreateContext, openALContext, openALDevice, openALDevice, nullptr) || !openALContext)
-        {
-            std::cerr << "ERROR: Could not create audio context" << std::endl;
-            return 0;
+        if (!(m_data = soundManager.Register(this))) {
+            SR_ERROR("Sound::Load() : failed to register sound!");
+            return false;
         }
-        ALCboolean contextMadeCurrent = false;
-        if(!alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, openALContext)
-           || contextMadeCurrent != ALC_TRUE)
-        {
-            std::cerr << "ERROR: Could not make audio context current" << std::endl;
-            return 0;
-        }
-
-        std::uint8_t 	channels = m_rawSound->GetChannels();
-        std::int32_t 	sampleRate = m_rawSound->GetSampleRate();
-        std::uint8_t 	bitsPerSample = m_rawSound->GetBitsPerSample();
-
-        ALuint buffer;
-        alCall(alGenBuffers, 1, &buffer);
-
-        ALenum format;
-        if(channels == 1 && bitsPerSample == 8)
-            format = AL_FORMAT_MONO8;
-        else if(channels == 1 && bitsPerSample == 16)
-            format = AL_FORMAT_MONO16;
-        else if(channels == 2 && bitsPerSample == 8)
-            format = AL_FORMAT_STEREO8;
-        else if(channels == 2 && bitsPerSample == 16)
-            format = AL_FORMAT_STEREO16;
-        else
-        {
-            std::cerr
-                    << "ERROR: unrecognised wave format: "
-                    << channels << " channels, "
-                    << bitsPerSample << " bps" << std::endl;
-            return 0;
-        }
-
-        alCall(alBufferData, buffer, format, m_rawSound->GetBufferData(), m_rawSound->GetBufferSize(), sampleRate);
-
-        ALuint source;
-        alCall(alGenSources, 1, &source);
-        alCall(alSourcef, source, AL_PITCH, 1);
-        alCall(alSourcef, source, AL_GAIN, 1.0f);
-        alCall(alSource3f, source, AL_POSITION, 0, 0, 0);
-        alCall(alSource3f, source, AL_VELOCITY, 0, 0, 0);
-        alCall(alSourcei, source, AL_LOOPING, AL_TRUE);
-        alCall(alSourcei, source, AL_BUFFER, buffer);
-
-        alSourcePlay( source);
-
-        ALint state = AL_PLAYING;
-
-        while(state == AL_PLAYING)
-        {
-            alGetSourcei(source, AL_SOURCE_STATE, &state);
-        }
-
-        alDeleteSources(1, &source);
-        alDeleteBuffers(1, &buffer);
-
-        alcCall(alcMakeContextCurrent, contextMadeCurrent, openALDevice, nullptr);
-        alcCall(alcDestroyContext, openALDevice, openALContext);
-
-        ALCboolean closed;
-        alcCall(alcCloseDevice, closed, openALDevice, openALDevice);
 
         return IResource::Load();
     }
 
     bool Sound::Unload() {
+        auto&& soundManager = SoundManager::Instance();
+
+        if (m_data && !soundManager.Unregister(&m_data)) {
+            SR_ERROR("Sound::Unload() : failed to unregister sound!");
+        }
+
         return IResource::Unload();
     }
 
@@ -245,5 +191,29 @@ namespace SR_AUDIO_NS {
         }
 
         m_rawSound = pRawSound;
+    }
+
+    const uint8_t *Sound::GetBufferData() const {
+        return m_rawSound ? m_rawSound->GetBufferData() : nullptr;
+    }
+
+    uint64_t Sound::GetBufferSize() const {
+        return m_rawSound ? m_rawSound->GetBufferSize() : 0;
+    }
+
+    uint8_t Sound::GetChannels() const {
+        return m_rawSound ? m_rawSound->GetChannels() : 0;
+    }
+
+    uint8_t Sound::GetBitsPerSample() const {
+        return m_rawSound ? m_rawSound->GetBitsPerSample() : 0;
+    }
+
+    uint32_t Sound::GetSampleRate() const {
+        return m_rawSound ? m_rawSound->GetSampleRate() : 0;
+    }
+
+    SoundData *Sound::GetData() const {
+        return m_data;
     }
 }

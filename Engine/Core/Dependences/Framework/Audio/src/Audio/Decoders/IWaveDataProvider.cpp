@@ -54,12 +54,12 @@ namespace SR_AUDIO_NS::Tools {
 }
 
 namespace SR_AUDIO_NS {
-    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path &path, const SoundData &data) {
+    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path &path, const RawSoundDataPtr &data) {
         const char* ext = path.GetExtensionView().data();
 
-        //if ( strcmpi( Ext, "mp3" ) == 0 )
-        //    return std::make_shared<clMP3DataProvider>( Data );
-        //
+        if (SR_STRCMPI(ext, "mp3") == 0)
+            return std::make_shared<MP3DataProvider>(data);
+
         //if ( strcmpi( Ext, "ogg" ) == 0 )
         //    return std::make_shared<clOGGDataProvider>( Data );
         //

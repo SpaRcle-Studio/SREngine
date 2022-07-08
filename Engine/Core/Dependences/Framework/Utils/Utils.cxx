@@ -28,6 +28,7 @@
 #include "../Utils/src/Utils/Math/Matrix3x3.cpp"
 #include "../Utils/src/Utils/Math/Quaternion.cpp"
 #include "../Utils/src/Utils/Math/Vector3.cpp"
+#include "../Utils/src/Utils/Math/Vector6.cpp"
 
 #include "../Utils/src/Utils/TaskManager/TaskManager.cpp"
 

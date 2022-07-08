@@ -8,7 +8,8 @@
 #include <Utils/macros.h>
 
 namespace SR_AUDIO_NS {
-    typedef std::shared_ptr<std::vector<uint8_t>> SoundData;
+    typedef std::vector<uint8_t> RawSoundData;
+    typedef std::shared_ptr<RawSoundData> RawSoundDataPtr;
 
     class WaveDataFormat : public SR_UTILS_NS::NonCopyable
     {
@@ -49,7 +50,7 @@ namespace SR_AUDIO_NS {
 
     };
 
-    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const SoundData& data);
+    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const RawSoundDataPtr& data);
 }
 
 #endif //SRENGINE_IWAVEDATAPROVIDER_H

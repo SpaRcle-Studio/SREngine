@@ -12,7 +12,7 @@ namespace SR_AUDIO_NS {
     class MP3DataProvider: public IWaveDataProvider
     {
     public:
-        explicit MP3DataProvider(const SoundData& data);
+        explicit MP3DataProvider(const RawSoundDataPtr& data);
         ~MP3DataProvider() override;
 
         virtual const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
@@ -26,11 +26,7 @@ namespace SR_AUDIO_NS {
         virtual void Seek(float_t seconds) override;
 
     private:
-        int DecodeFromFile(size_t bytesRead);
-        void LoadMP3Info();
-
-    private:
-        SoundData m_data;
+        RawSoundDataPtr m_data;
         WaveDataFormat m_format;
 
         std::vector<uint8_t> m_decodingBuffer;
