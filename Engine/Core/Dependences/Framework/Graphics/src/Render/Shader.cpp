@@ -364,10 +364,9 @@ namespace SR_GRAPH_NS {
                 return nullptr;
         };
 
-        auto &&createInfoPath = SR_UTILS_NS::StringUtils::MakePath(
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml"));
+        auto &&createInfoPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml");
 
-        if (SR_UTILS_NS::FileSystem::FileExists(createInfoPath)) {
+        if (createInfoPath.Exists(Helper::Path::Type::File)) {
             auto xml = SR_XML_NS::Document::Load(createInfoPath);
             shaders = xml.Root().GetNode("Shaders").GetNodes();
             if (auto shaderXml = findShader(name)) {
@@ -378,8 +377,9 @@ namespace SR_GRAPH_NS {
                 return shader;
             } else
                 SR_ERROR("Shader::LoadFromConfig() : shader \"" + name + "\" have not config!");
-        } else
-            SR_ERROR("Shader::LoadFromConfig() : create info file not found! \n\tPath: " + createInfoPath);
+        }
+        else
+            SR_ERROR("Shader::LoadFromConfig() : create info file not found! \n\tPath: " + createInfoPath.ToString());
 
         return nullptr;
     }

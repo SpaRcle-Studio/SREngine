@@ -3,13 +3,20 @@
 //
 
 #include <Utils/Platform/Platform.h>
-#include <Utils/Debug.h>
 #include <Utils/Common/StringFormat.h>
+#include <Utils/Debug.h>
 
 #include <Windows.h>
 #include <Psapi.h>
 #include <rpc.h>
+#include <tchar.h>
 #include <shellapi.h>
+#include <commdlg.h>
+#include <shlobj.h>
+
+#ifdef SR_MINGW
+    #include <ShObjIdl.h>
+#endif
 
 /// убираем проклятые min и max после инклуда Windows.h
 
@@ -217,7 +224,7 @@ namespace SR_UTILS_NS::Platform {
 
         CreateFolder(to);
 
-        for (auto&& item : GetInDirectory(from)) {
+        for (auto&& item : GetInDirectory(from, Path::Type::Undefined)) {
             if (Copy(item, to.Concat(item.GetBaseNameAndExt()))) {
                 continue;
             }
@@ -228,13 +235,21 @@ namespace SR_UTILS_NS::Platform {
         return true;
     }
 
-    std::list<Path> GetInDirectory(const Path &dir) {
+    std::list<Path> GetInDirectory(const Path &dir, Path::Type type) {
         std::list<Path> items;
         const std::string search_path = dir.ToString() + "/*.*";
         WIN32_FIND_DATA fd;
         HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
         if(hFind != INVALID_HANDLE_VALUE) {
             do {
+                if ((fd.dwFileAttributes & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY)) && type == Path::Type::File) {
+                    continue;
+                }
+
+                if (!(fd.dwFileAttributes & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY)) && type == Path::Type::Folder) {
+                    continue;
+                }
+
                 const auto filename = std::string(fd.cFileName);
                 if (filename != "." && filename != ".." && !filename.empty())
                     items.emplace_back(dir.ToString() + "/" + filename);
@@ -269,7 +284,7 @@ namespace SR_UTILS_NS::Platform {
             return false;
         }
 
-        for (auto&& item : GetInDirectory(path)) {
+        for (auto&& item : GetInDirectory(path, Path::Type::Undefined)) {
             if (Delete(item)) {
                 continue;
             }
@@ -284,5 +299,58 @@ namespace SR_UTILS_NS::Platform {
         }
 
         return result;
+    }
+
+    Path GetApplicationPath() {
+        const std::size_t buf_len = 260;
+        auto s = new TCHAR[buf_len];
+        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
+        return s;
+    }
+
+    Path GetApplicationName() {
+        const std::size_t buf_len = 260;
+        auto s = new TCHAR[buf_len];
+        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
+        return Path(s).GetBaseNameAndExt();
+    }
+
+    bool FileExists(const Path &path) {
+        FILE* f = nullptr;
+        if (fopen_s(&f, path.CStr(), "r") == 0) {
+            fclose(f);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool FolderExists(const Path &path) {
+        DWORD ftyp = GetFileAttributesA(path.CStr());
+        if (ftyp == INVALID_FILE_ATTRIBUTES)
+            return false;  //something is wrong with your path!
+
+        if (ftyp & FILE_ATTRIBUTE_DIRECTORY)
+            return true;   // this is a directory!
+
+        return false;
+    }
+
+    bool FileIsHidden(const Path &path) {
+        const DWORD attributes = GetFileAttributes(path.CStr());
+        if (attributes & FILE_ATTRIBUTE_HIDDEN)
+            return true;
+
+        return false;
+    }
+
+    void SelfOpen() {
+        auto&& exe = SR_PLATFORM_NS::GetApplicationPath();
+        ShellExecute(NULL, "open", exe.CStr(), NULL, NULL, SW_SHOWDEFAULT);
+    }
+
+    bool IsAbsolutePath(const Path &path) {
+        auto&& view = path.View();
+        return view.size() >= 2 && view[1] == ':';
     }
 }

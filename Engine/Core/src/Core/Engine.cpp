@@ -336,6 +336,6 @@ bool Framework::Engine::SetScene(const Helper::Types::SafePtr<SR_WORLD_NS::Scene
 }
 
 void Framework::Engine::Reload() {
-    Helper::FileSystem::Reload();
+    SR_PLATFORM_NS::SelfOpen();
     SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
 }

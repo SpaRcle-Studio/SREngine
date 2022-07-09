@@ -8,73 +8,13 @@
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/StringUtils.h>
 
-/// TODO: move to platform class!
-
-#ifdef SR_WIN32
-    #include <Windows.h>
-    #include <tchar.h>
-    #include <shellapi.h>
-    #include <commdlg.h>
-    #include <shlobj.h>
-
-    #ifdef SR_MINGW
-        #include <ShObjIdl.h>
-    #endif
-#endif
-
 namespace SR_UTILS_NS {
-    bool FileSystem::Delete(const char *file) { return remove(file); }
-
-    bool FileSystem::FileExists(const std::string& path) {
-    #ifdef WIN32
-        if (FILE* f = fopen(path.c_str(), "r")) {
-            fclose(f);
-            return true;
-        }
-        else
-            return false;
-    #else
-        SR_ERROR("FileSystem::FileExists() : engine not support this function!");
-        return false;
-    #endif
-    }
-
-    std::string FileSystem::GetPathToExe() {
-    #ifdef SR_WIN32
-        const std::size_t buf_len = 260;
-        auto s = new TCHAR[buf_len];
-        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
-        return StringUtils::GetDirToFileFromFullPath(s);
-    #else
-        SR_ERROR("FileSystem::GetPathToExe() : linux not support this function!");
-        return "NoDirectory";
-    #endif
-    }
-
-    std::string FileSystem::GetFullPathToExe() {
-    #ifdef SR_WIN32
-        const std::size_t buf_len = 260;
-        auto s = new TCHAR[buf_len];
-        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
-        return s;
-    #else
-        Debug::Error("FileSystem::GetPathToExe() : linux not support this function!");
-        return "NoDirectory";
-    #endif
-    }
-
     void FileSystem::UnmapFile(const char *str) {
 
     }
 
     const char *FileSystem::FileMapView(std::string path) {
         const char *data = nullptr;
-
-    #ifdef WIN32
-
-    #else
-
-    #endif
 
         return data;
     }
@@ -99,24 +39,6 @@ namespace SR_UTILS_NS {
         infile.read(buffer, length);
 
         return buffer;
-    }
-
-    std::string FileSystem::GetExecutableFileName() {
-    #ifdef SR_WIN32
-        const std::size_t buf_len = 260;
-        auto s = new TCHAR[buf_len];
-        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
-        return StringUtils::GetFileNameFromFullPath(s);
-    #else
-        return "Unsupported function";
-    #endif
-    }
-
-    void FileSystem::Reload() {
-    #ifdef SR_WIN32
-        std::string exe = GetFullPathToExe();
-        ShellExecute(NULL, "open", exe.c_str(), NULL, NULL, SW_SHOWDEFAULT);
-    #endif
     }
 
     std::string FileSystem::ReadAllText(const std::string &path) {
@@ -187,23 +109,33 @@ namespace SR_UTILS_NS {
         return buffer;
     }
 
-    bool FileSystem::CreateFolder(const std::string &path) {
-    #ifdef SR_MINGW
-        return mkdir(path.c_str());
-    #else
-        return _mkdir(path.c_str());
-    #endif
+    bool FileSystem::CreatePath(std::string path, uint32_t offset) {
+        if (path.empty())
+            return false;
+
+        if (path.back() != '/')
+            path.append("/");
+
+        auto pos = path.find('/', offset);
+        if (pos != std::string::npos) {
+            auto dir = path.substr(0, pos);
+
+            Platform::CreateFolder(dir);
+            CreatePath(path, pos + 1);
+        }
+
+        return true;
     }
 
-    std::string FileSystem::GetFullPath(const std::string& path) {
-    #ifdef SR_WIN32
-        char fullFilename[MAX_PATH];
-        GetFullPathName(path.c_str(), MAX_PATH, fullFilename, nullptr);
-        return std::string(fullFilename);
-    #else
-        return std::string();
-    #endif
-    }
+    //std::string FileSystem::GetFullPath(const std::string& path) {
+    //#ifdef SR_WIN32
+    //    char fullFilename[MAX_PATH];
+    //    GetFullPathName(path.c_str(), MAX_PATH, fullFilename, nullptr);
+    //    return std::string(fullFilename);
+    //#else
+    //    return std::string();
+    //#endif
+    //}
 
     std::string FileSystem::NormalizePath(const std::string &path) {
         auto newPath = StringUtils::MakePath(path);
@@ -221,84 +153,6 @@ namespace SR_UTILS_NS {
         } while(true);
 
         return newPath;
-    }
-
-    std::vector<Path> FileSystem::GetFilesInDir(const std::string& path) {
-        std::vector<Path> files;
-    #ifdef SR_WIN32
-        const std::string search_path = path + "/*.*";
-        WIN32_FIND_DATA fd;
-        HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
-        if(hFind != INVALID_HANDLE_VALUE) {
-            do {
-                // read all (real) files in current folder
-                // , delete '!' read other 2 default folder . and ..
-                if (!(static_cast<unsigned>(fd.dwFileAttributes) & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY))) {
-                    files.emplace_back(path + "/" + std::string(fd.cFileName));
-                }
-            } while(::FindNextFile(hFind, &fd));
-
-            ::FindClose(hFind);
-        }
-    #endif
-        return files;
-    }
-
-    std::vector<Path> FileSystem::GetDirectoriesInDir(const std::string &path) {
-        std::vector<Path> folders;
-    #ifdef SR_WIN32
-        const std::string search_path = path + "/*.*";
-        WIN32_FIND_DATA fd;
-        HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
-        if(hFind != INVALID_HANDLE_VALUE) {
-            do {
-                // read all (real) files in current folder
-                // , delete '!' read other 2 default folder . and ..
-                if ((fd.dwFileAttributes & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY))) {
-                    const auto filename = std::string(fd.cFileName);
-                    const auto folder = path + "/" + filename;
-                    if (filename != "." && filename != ".." && !filename.empty())
-                        folders.emplace_back(folder);
-                }
-            } while(::FindNextFile(hFind, &fd));
-
-            ::FindClose(hFind);
-        }
-    #endif
-        return folders;
-    }
-
-    std::vector<Path> FileSystem::GetAllInDir(const Path &path) {
-        std::vector<Path> folders;
-    #ifdef SR_WIN32
-        const std::string search_path = path.ToString() + "/*.*";
-        WIN32_FIND_DATA fd;
-        HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
-        if(hFind != INVALID_HANDLE_VALUE) {
-            do {
-                const auto filename = std::string(fd.cFileName);
-                if (filename != "." && filename != ".." && !filename.empty())
-                    folders.emplace_back(path.ToString() + "/" + filename);
-            }
-            while(::FindNextFile(hFind, &fd));
-
-            ::FindClose(hFind);
-        }
-    #endif
-        return folders;
-    }
-
-    bool FileSystem::FolderExists(const std::string &path) {
-    #ifdef SR_WIN32
-        DWORD ftyp = GetFileAttributesA(path.c_str());
-        if (ftyp == INVALID_FILE_ATTRIBUTES)
-            return false;  //something is wrong with your path!
-
-        if (ftyp & FILE_ATTRIBUTE_DIRECTORY)
-            return true;   // this is a directory!
-    #endif
-
-        return false; // this is not a directory!
     }
 
     bool FileSystem::WriteToFile(const std::string &path, const std::string &text) {
@@ -350,7 +204,7 @@ namespace SR_UTILS_NS {
 
         uint64_t hash = 0;
 
-        for (auto&& subPath : GetAllInDir(path)) {
+        for (auto&& subPath : Platform::GetInDirectory(path, Path::Type::Undefined)) {
             if (subPath.IsHidden()) {
                 continue;
             }
@@ -364,73 +218,6 @@ namespace SR_UTILS_NS {
         }
 
         return hash;
-    }
-
-    bool FileSystem::IsAbsolutePath(const std::string &path) {
-    #ifdef SR_WIN32
-        return path.size() >= 2 && path[1] == ':';
-    #else
-        return false;
-    #endif
-    }
-
-    /*
-    SR_UTILS_NS::Path FileSystem::BrowseFolder(const SR_UTILS_NS::Path &path) {
-    #if defined(SR_WIN32) and defined(SR_MSVC)
-        LPWSTR lPath = NULL;
-
-        IFileDialog *pfd;
-        if (SUCCEEDED(CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pfd))))
-        {
-            DWORD dwOptions;
-            if (SUCCEEDED(pfd->GetOptions(&dwOptions)))
-            {
-                pfd->SetOptions(dwOptions | FOS_PICKFOLDERS);
-            }
-
-            IShellItem* psiWinDir;
-            std::wstring folder = path.ToWinApiPath();
-            HRESULT result = SHCreateItemFromParsingName(folder.c_str(), NULL, IID_PPV_ARGS(&psiWinDir));
-            if (result == S_OK)
-            {
-                pfd->SetDefaultFolder(psiWinDir);
-                pfd->SetFolder(psiWinDir);
-                psiWinDir->Release();
-            }
-
-            if (SUCCEEDED(pfd->Show(NULL)))
-            {
-                IShellItem *psi;
-                if (SUCCEEDED(pfd->GetResult(&psi)))
-                {
-                    if(!SUCCEEDED(psi->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &lPath)))
-                    {
-                        MessageBox(NULL, "GetIDListName() failed", NULL, NULL);
-                    }
-                    psi->Release();
-                }
-            }
-            pfd->Release();
-        }
-
-        return lPath ? std::wstring(lPath) : std::wstring();
-    #else
-        SRHalt("TODO");
-        return std::string();
-    #endif
-    }*/
-
-    bool FileSystem::IsHiddenFile(const std::string &path) {
-    #ifdef SR_WIN32
-        const DWORD attributes = GetFileAttributes(path.c_str());
-        if (attributes & FILE_ATTRIBUTE_HIDDEN)
-            return true;
-
-        return false;
-    #else
-        SRHalt0();
-        return false;
-    #endif
     }
 
     std::shared_ptr<std::vector<uint8_t>> FileSystem::ReadFileAsBlob(const std::string &path) {

@@ -36,12 +36,12 @@ namespace SR_UTILS_NS {
         return GetGroup(group).Enabled(name);
     }
 
-    bool Features::Reload(const std::string &path) {
+    bool Features::Reload(const Path &path) {
         SR_LOCK_GUARD
 
-        if (!path.empty()) {
-            if (!FileSystem::FileExists(path)) {
-                SR_ERROR("Features::Reload() : file not found! Path: " + path);
+        if (!path.Empty()) {
+            if (!path.Exists()) {
+                SR_ERROR("Features::Reload() : file not found! \n\tPath: " + path.ToString());
                 return false;
             }
 
@@ -59,7 +59,7 @@ namespace SR_UTILS_NS {
             }
         }
         else {
-            SR_ERROR("Features::Reload() : error while loading file! Path: " + m_path);
+            SR_ERROR("Features::Reload() : error while loading file! \n\tPath: " + m_path.ToString());
             return false;
         }
 

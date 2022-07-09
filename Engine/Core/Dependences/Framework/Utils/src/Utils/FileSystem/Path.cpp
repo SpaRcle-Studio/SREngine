@@ -57,16 +57,16 @@ namespace SR_UTILS_NS {
         return m_type == Type::File;
     }
 
-    std::vector<Path> Path::GetFiles() const {
-        return FileSystem::GetFilesInDir(m_path);
+    std::list<Path> Path::GetFiles() const {
+        return Platform::GetInDirectory(*this, Path::Type::File);
     }
 
-    std::vector<Path> Path::GetAll() const {
-        return FileSystem::GetAllInDir(*this);
+    std::list<Path> Path::GetAll() const {
+        return Platform::GetInDirectory(*this, Path::Type::Undefined);
     }
 
-    std::vector<Path> Path::GetFolders() const {
-        return FileSystem::GetDirectoriesInDir(m_path);
+    std::list<Path> Path::GetFolders() const {
+        return Platform::GetInDirectory(*this, Path::Type::Folder);
     }
 
     bool Path::Valid() const {
@@ -166,11 +166,12 @@ namespace SR_UTILS_NS {
     bool Path::Exists(Type type) const {
         switch (type) {
             case Type::File:
-                return Helper::FileSystem::FileExists(m_path);
+                return Platform::FileExists(m_path);
             case Type::Folder:
-                return Helper::FileSystem::FolderExists(m_path);
+                return Platform::FolderExists(m_path);
             default:
                 SRAssert(false);
+                SR_FALLTHROUGH;
             case Type::Undefined:
                 return false;
         }
@@ -224,6 +225,19 @@ namespace SR_UTILS_NS {
         return m_path;
     }
 
+    Path Path::GetFolder() const {
+        switch (GetType()) {
+            case Type::File:
+                return SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(m_path);
+            default:
+                SRHalt0();
+                SR_FALLTHROUGH;
+            case Type::Folder:
+            case Type::Undefined:
+                return m_path;
+        }
+    }
+
     std::string_view Path::GetExtensionView() const {
         return m_ext;
     }
@@ -241,7 +255,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Path::IsAbs() const {
-        return FileSystem::IsAbsolutePath(m_path);
+        return Platform::IsAbsolutePath(m_path);
     }
 
     bool Path::IsSubPath(const Path &subPath) const {
@@ -263,7 +277,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Path::IsHidden() const {
-        return FileSystem::IsHiddenFile(m_path);
+        return Platform::FileIsHidden(m_path);
     }
 
     std::wstring Path::ToUnicodeString() const {
@@ -286,5 +300,9 @@ namespace SR_UTILS_NS {
 
     std::string Path::GetBaseNameAndExt() const {
         return m_name + "." + m_ext;
+    }
+
+    std::string_view Path::View() const {
+        return m_path;
     }
 }

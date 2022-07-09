@@ -58,7 +58,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const char* CStr() const;
 
         SR_NODISCARD Path GetPrevious() const;
-        SR_NODISCARD Path GetFolder() const { return m_path; }
+        SR_NODISCARD Path GetFolder() const;
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
@@ -76,12 +76,13 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsFile() const;
         SR_NODISCARD bool IsEmpty() const;
 
-        SR_NODISCARD std::vector<Path> GetFiles() const;
-        SR_NODISCARD std::vector<Path> GetFolders() const;
-        SR_NODISCARD std::vector<Path> GetAll() const;
+        SR_NODISCARD std::list<Path> GetFiles() const;
+        SR_NODISCARD std::list<Path> GetFolders() const;
+        SR_NODISCARD std::list<Path> GetAll() const;
 
         SR_NODISCARD std::string_view GetExtensionView() const;
         SR_NODISCARD std::string_view GetBaseNameView() const;
+        SR_NODISCARD std::string_view View() const;
         SR_NODISCARD std::string GetExtension() const;
         SR_NODISCARD std::string GetBaseName() const;
         SR_NODISCARD std::string GetBaseNameAndExt() const;

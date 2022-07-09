@@ -6,6 +6,7 @@
 #define HELPER_DEBUG_H
 
 #include <Utils/Common/Singleton.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Debug : public Singleton<Debug> {
@@ -60,7 +61,7 @@ namespace SR_UTILS_NS {
         void MakeCrash();
 
         void Init(const std::string& log_path, bool ShowUsedMemory, Theme colorTheme = Theme::Light);
-        int Stop();
+        void OnSingletonDestroy() override;
 
     public:
         void Log(const std::string& msg)         { Print(msg, Type::Log);                            }
@@ -88,7 +89,7 @@ namespace SR_UTILS_NS {
         Theme              m_theme                     = Theme::Light;
 
         std::atomic<bool>  m_isInit                    = false;
-        std::string        m_logPath                  = "";
+        Path               m_logPath                   = Path();
         std::ofstream      m_file                      = std::ofstream();
         std::atomic<Level> m_level                     = Level::Low;
         size_t             m_countErrors               = 0;

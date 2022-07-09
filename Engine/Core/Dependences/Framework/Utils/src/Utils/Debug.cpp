@@ -76,13 +76,13 @@ namespace SR_UTILS_NS {
 
         InitColorTheme();
 
-        std::string successful = FileSystem::GetPathToExe() + "/successful";
-        if (FileSystem::FileExists(successful.c_str()))
-            FileSystem::Delete(successful.c_str());
+        auto&& successfulPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder().Concat("/successful");
+        if (successfulPath.Exists(Path::Type::File))
+            Platform::Delete(successfulPath);
 
         m_logPath = Path(log_path + "/log.txt");
-        if (FileSystem::FileExists(m_logPath.c_str()))
-            FileSystem::Delete(m_logPath.c_str());
+        if (m_logPath.Exists(Path::Type::File))
+            Platform::Delete(m_logPath);
         m_file.open(m_logPath);
 
         m_console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -90,16 +90,16 @@ namespace SR_UTILS_NS {
         m_isInit = true;
         m_showUseMemory = ShowUsedMemory;
 
-        std::string msg = "Debugger has been initialized. \n\tLog path: " + m_logPath;
+        std::string msg = "Debugger has been initialized. \n\tLog path: " + m_logPath.ToString();
         Print(msg, Type::Debug);
     }
 
-    int Debug::Stop() {
+    void Debug::OnSingletonDestroy() {
         if (!m_countErrors && !m_countWarnings) {
             std::string msg = "Debugger has been stopped.";
             Print(msg, Type::Debug);
         }
-        else{
+        else {
             std::string msg = "Debugger has been stopped with errors!\n"
                               "\tErrors count: "+std::to_string(m_countErrors)+
                               "\n\tWarnings count: "+std::to_string(m_countWarnings);
@@ -107,10 +107,8 @@ namespace SR_UTILS_NS {
         }
         m_file.close();
 
-        std::ofstream o(FileSystem::GetPathToExe() + "/successful");
+        std::ofstream o(Platform::GetApplicationPath().GetFolder().Concat("/successful"));
         o.close();
-
-        return 0;
     }
 
     void Debug::InitColorTheme() {

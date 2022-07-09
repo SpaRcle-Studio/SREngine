@@ -11,6 +11,8 @@
 
 namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void TextToClipboard(const std::string& text);
+    SR_DLL_EXPORT extern Path GetApplicationPath();
+    SR_DLL_EXPORT extern Path GetApplicationName();
     SR_DLL_EXPORT extern std::string GetClipboardText();
     SR_DLL_EXPORT extern void ClearClipboard();
     SR_DLL_EXPORT extern Math::FVector2 GetMousePos();
@@ -18,11 +20,16 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern uint64_t GetProcessUsedMemory();
     SR_DLL_EXPORT extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
     SR_DLL_EXPORT extern void Terminate();
+    SR_DLL_EXPORT extern void SelfOpen();
     SR_DLL_EXPORT extern void OpenWithAssociatedApp(const Path& filepath);
     SR_DLL_EXPORT extern bool Copy(const Path& from, const Path& to);
     SR_DLL_EXPORT extern bool CreateFolder(const Path& path);
     SR_DLL_EXPORT extern bool Delete(const Path& path);
-    SR_DLL_EXPORT extern std::list<Path> GetInDirectory(const Path& dir);
+    SR_DLL_EXPORT extern bool FileExists(const Path& path);
+    SR_DLL_EXPORT extern bool IsAbsolutePath(const Path& path);
+    SR_DLL_EXPORT extern bool FolderExists(const Path& path);
+    SR_DLL_EXPORT extern bool FileIsHidden(const Path& path);
+    SR_DLL_EXPORT extern std::list<Path> GetInDirectory(const Path& dir, Path::Type type);
 }
 
 

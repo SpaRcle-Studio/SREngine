@@ -6,6 +6,7 @@
 #define SRENGINE_FEATURES_H
 
 #include <Utils/Common/Singleton.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_UTILS_NS {
     class Features;
@@ -30,7 +31,7 @@ namespace SR_UTILS_NS {
         ~Features() override = default;
 
     public:
-        bool Reload(const std::string& path = "");
+        bool Reload(const Path& path = Path());
         SR_NODISCARD bool Enabled(const std::string& name) const;
         SR_NODISCARD bool Enabled(const std::string& name, bool def) const;
         SR_NODISCARD bool Enabled(const std::string& group, const std::string& name) const;
@@ -41,7 +42,7 @@ namespace SR_UTILS_NS {
 
     private:
         std::unordered_map<std::string, FeatureGroup> m_features;
-        std::string m_path;
+        Path m_path;
 
     };
 }

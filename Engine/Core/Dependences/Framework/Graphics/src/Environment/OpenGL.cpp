@@ -300,15 +300,15 @@ bool Framework::Graphics::OpenGL::CompileShader(
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes)
 {
-    auto shadersPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders");
+    auto&& shadersPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders");
 
-    auto vertexPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".vert");
-    auto fragmentPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".frag");
+    auto&& vertexPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".vert");
+    auto&& fragmentPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".frag");
 
-    if (!Helper::FileSystem::FileExists(vertexPath))
+    if (!vertexPath.Exists())
         vertexPath = shadersPath.Concat(GetPipeLineName()).Concat(name).ConcatExt(".vert");
 
-    if (!Helper::FileSystem::FileExists(fragmentPath))
+    if (!fragmentPath.Exists())
         fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat(name).ConcatExt(".frag");
 
     auto* glShader = new GLShaderData();

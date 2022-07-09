@@ -202,8 +202,8 @@ namespace SR_WORLD_NS {
         if (auto&& regionMarshal = pRegion->Save(); regionMarshal.Valid()) {
             regionMarshal.Save(regPath);
         }
-        else if (regPath.Exists()) {
-            FileSystem::Delete(regPath.CStr());
+        else if (regPath.Exists(Path::Type::File)) {
+            Platform::Delete(regPath);
         }
     }
 

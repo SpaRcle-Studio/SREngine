@@ -47,6 +47,7 @@
 #include <Render/CameraManager.h>
 #include <Scripting/Base/Behaviour.h>
 #include <Utils/Settings.h>
+#include <Utils/Platform/Platform.h>
 
 using namespace Framework;
 
@@ -95,7 +96,7 @@ int main(int argc, char **argv) {
     setlocale(LC_NUMERIC, "C");
     srand(time(NULL));
 
-    auto&& exe = FileSystem::GetPathToExe();
+    auto&& exe = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
     Debug::Instance().Init(exe, true, Debug::Theme::Dark);
     Debug::Instance().SetLevel(Debug::Level::Low);
 
@@ -104,7 +105,7 @@ int main(int argc, char **argv) {
     auto&& resourcesManager = ResourceManager::Instance();
 
     if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
-        resourcesManager.Init(Path(exe + "/../../Resources"));
+        resourcesManager.Init(Path(exe.ToString() + "/../../Resources"));
     }
     else
         resourcesManager.Init(folder);
@@ -122,7 +123,7 @@ int main(int argc, char **argv) {
 #ifdef SR_WIN32
         ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
                 "/Utilities/EngineCrashHandler.exe").CStr()),
-                     ("--log log.txt --target " + FileSystem::GetExecutableFileName() + " --out " + exe + "\\").c_str(),
+                     ("--log log.txt --target " + SR_PLATFORM_NS::GetApplicationName().ToString() + " --out " + exe.ToString() + "\\").c_str(),
                      nullptr, SW_SHOWDEFAULT
         );
 #endif
@@ -162,6 +163,7 @@ int main(int argc, char **argv) {
 
     //TEST AUDIO LOAD
 
+    /*
     if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Space_Angels_Musicfonts.wav")) {
         pSound->PlayAsync();
         //pSound->Destroy();
@@ -171,6 +173,7 @@ int main(int argc, char **argv) {
     //SR_AUDIO_NS::Sound::Load("drop.wav");
     //SR_AUDIO_NS::Sound::Load("Space_Engineers_Main_Theme_KhydroDjent.wav");
     //SR_AUDIO_NS::Sound::Load("TRAUMATIC.mp3");
+     */
 
     const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
     const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
@@ -184,13 +187,13 @@ int main(int argc, char **argv) {
     else if (envName.empty()) {
         SR_ERROR("System error: file \"Resources/Configs/Environment.xml\" does not exist!");
         ResourceManager::DestroySingleton();
-        Debug::Instance().Stop();
+        Debug::Instance().DestroySingleton();
         return -1500;
     }
     else {
         SR_ERROR("System error: unknown environment! \"" + envName + "\" does not support!");
         ResourceManager::DestroySingleton();
-        Debug::Instance().Stop();
+        Debug::Instance().DestroySingleton();
         return -2000;
     }
 
@@ -198,7 +201,7 @@ int main(int argc, char **argv) {
     if (!render) {
         SR_ERROR("FATAL: render is not support this pipeline!");
         ResourceManager::DestroySingleton();
-        Debug::Instance().Stop();
+        Debug::Instance().DestroySingleton();
         return -1000;
     }
 
@@ -253,7 +256,7 @@ int main(int argc, char **argv) {
 
     SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
 
-    Debug::Instance().Stop();
+    Debug::Instance().DestroySingleton();
 
     return 0;
 }
