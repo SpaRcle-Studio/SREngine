@@ -438,8 +438,6 @@ namespace Framework::Graphics {
             return false;
         }
 
-        // TODO: Depth color!
-
         return true;
     }
 

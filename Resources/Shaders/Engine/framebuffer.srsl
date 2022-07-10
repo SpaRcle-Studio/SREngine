@@ -9,7 +9,10 @@ DepthWrite false;
 DepthTest false;
 
 void fragment() {
-    COLOR_INDEX_0 = vec4(UV, 1, 1);
+    //vec3 color = vec3(1.2, 0.9, 1);
+    COLOR_INDEX_0 = vec4(texture(COLOR_ATTACHMENT_0, UV).rgb * color, 1);
+    //COLOR_INDEX_0 = vec4(texture(DEPTH_ATTACHMENT, UV).rgb, 1);
+    //COLOR_INDEX_0 = vec4(UV, 1, 1);
 }
 
 void vertex() {

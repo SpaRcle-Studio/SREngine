@@ -143,7 +143,7 @@ namespace SR_GRAPH_NS::Memory {
         return false;
     }
 
-    UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) {
+    UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) noexcept {
         if (!m_camera && !m_singleCameraMode) {
             SR_ERROR("UBOManager::AllocateUBO() : camera is nullptr!");
             return BindResult::Failed;
@@ -174,8 +174,6 @@ namespace SR_GRAPH_NS::Memory {
                     m_camera,
                     std::make_pair(ubo, descriptor))
             );
-
-            //SR_GRAPH("UBOManager::BindUBO() : memory has been duplicated.");
 
             result = BindResult::Duplicated;
 

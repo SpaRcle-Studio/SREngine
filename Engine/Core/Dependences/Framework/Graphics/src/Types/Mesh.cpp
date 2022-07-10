@@ -186,12 +186,8 @@ namespace SR_GRAPH_NS::Types {
 
     bool Mesh::FreeVideoMemory() {
         if (m_pipeline == PipeLine::Vulkan) {
-            //if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-            //    SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
-            //}
-
             auto&& uboManager = Memory::UBOManager::Instance();
-            if (m_virtualUBO >= 0 && !uboManager.FreeUBO(&m_virtualUBO)) {
+            if (m_virtualUBO != SR_ID_INVALID && !uboManager.FreeUBO(&m_virtualUBO)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
             }
         }

@@ -536,6 +536,18 @@ namespace SR_GRAPH_NS {
 
         m_env->ClearFramebuffersQueue();
 
+        ///
+
+        //static auto* fbo = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(2000));
+        //
+        //if (fbo->Bind() && fbo->BeginRender()) {
+        //    m_render->DrawGeometry();
+        //    m_render->DrawSkybox();
+        //    fbo->EndRender();
+        //}
+
+        ///
+
         m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
 
         for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
@@ -547,6 +559,8 @@ namespace SR_GRAPH_NS {
             {
                 m_env->SetViewport();
                 m_env->SetScissor();
+
+                //fbo->Draw();
 
                 m_render->DrawGeometry();
                 m_render->DrawSkybox();

@@ -151,7 +151,6 @@ namespace SR_GRAPH_NS {
                 m_fbo = m_env->GetCurrentFBO();
         }
 
-        g_currentShader = this;
         m_env->UseShader(m_shaderProgram);
 
         return true;
@@ -422,6 +421,14 @@ namespace SR_GRAPH_NS {
         m_env->BindTexture(m_samplers.at(hashId).second, sampler);
     }
 
+    void Shader::SetSampler2D(uint64_t hashId, int32_t sampler) noexcept {
+        if (!IsLoaded() || m_samplers.count(hashId) == 0) {
+            return;
+        }
+
+        SetSampler(hashId, sampler);
+    }
+
     void Shader::SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept {
         if (!IsLoaded() || m_samplers.count(hashId) == 0) {
             return;
@@ -503,6 +510,7 @@ namespace SR_GRAPH_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetShadersPath();
     }
 
+    /// TODO: переделать на Load/Unload
     bool Shader::Reload() {
         SR_SHADER_LOG("Shader::Reload() : reloading \"" + m_name + "\" shader...");
 

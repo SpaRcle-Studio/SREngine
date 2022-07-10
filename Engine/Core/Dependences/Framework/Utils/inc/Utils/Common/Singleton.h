@@ -14,14 +14,14 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT SingletonManager : public NonCopyable {
     public:
-        void** GetSingleton(uint64_t id);
+        void** GetSingleton(uint64_t id) noexcept;
 
     private:
         std::unordered_map<uint64_t, void*> m_singletons;
 
     };
 
-    SR_DLL_EXPORT SingletonManager* GetSingletonManager();
+    SR_DLL_EXPORT SingletonManager* GetSingletonManager() noexcept;
 
     template<typename T> class SR_DLL_EXPORT Singleton : public NonCopyable {
     protected:
@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
             (*singleton) = nullptr;
         }
 
-        SR_MAYBE_UNUSED static T& Instance() {
+        SR_MAYBE_UNUSED static T& Instance() noexcept {
             auto&& singleton = GetSingleton();
 
             if (!(*singleton)) {
@@ -78,7 +78,7 @@ namespace SR_UTILS_NS {
         virtual bool IsSingletonCanBeDestroyed() const { return true; }
 
     private:
-        static Singleton<T>** GetSingleton() {
+        static Singleton<T>** GetSingleton() noexcept {
             void** p = GetSingletonManager()->GetSingleton(typeid(Singleton<T>).hash_code());
             return reinterpret_cast<Singleton<T>**>(p);
         }

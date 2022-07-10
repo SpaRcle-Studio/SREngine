@@ -9,7 +9,6 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Common/Singleton.h>
-#include <Utils/Common/StringUtils.h>
 #include <Utils/Types/Marshal.h>
 
 /**
@@ -65,9 +64,9 @@ namespace SR_UTILS_NS {
 
     public:
         /// Активен и компонент и его родительский объект
-        SR_NODISCARD bool IsActive() const;
+        SR_NODISCARD bool IsActive() const noexcept;
         /// Активен сам компонент, независимо от объекта
-        SR_NODISCARD SR_INLINE bool IsEnabled() const { return m_isEnabled; }
+        SR_NODISCARD SR_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
 
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }

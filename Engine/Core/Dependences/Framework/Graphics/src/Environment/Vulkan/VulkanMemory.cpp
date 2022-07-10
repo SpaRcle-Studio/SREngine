@@ -38,7 +38,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                 int32_t id = FindFreeTextureIndex();
                 if (id < 0) {
                     SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO attachment!");
-                    return -1;
+                    return SR_ID_INVALID;
                 }
                 else {
                     m_textures[id] = texture;
@@ -47,7 +47,18 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                 }
             }
 
-            //TODO: depth buffer!
+            if (auto&& depthTexture = m_FBOs[i]->AllocateDepthTextureReference()) {
+                int32_t id = FindFreeTextureIndex();
+                if (id < 0) {
+                    SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO depth!");
+                    return SR_ID_INVALID;
+                }
+                else {
+                    m_textures[id] = depthTexture;
+                    ++m_countTextures.second;
+                    depth = id;
+                }
+            }
 
             ++m_countFBO.second;
 

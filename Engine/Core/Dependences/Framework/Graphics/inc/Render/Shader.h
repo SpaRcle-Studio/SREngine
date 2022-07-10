@@ -77,6 +77,18 @@ namespace SR_GRAPH_NS {
         static constexpr uint64_t PROJECTION_MATRIX = SR_COMPILE_TIME_CRC32_STR("PROJECTION_MATRIX");
         static constexpr uint64_t TIME = SR_COMPILE_TIME_CRC32_STR("TIME");
         static constexpr uint64_t SKYBOX_DIFFUSE = SR_COMPILE_TIME_CRC32_STR("SKYBOX_DIFFUSE");
+        static constexpr uint64_t DEPTH_ATTACHMENT = SR_COMPILE_TIME_CRC32_STR("DEPTH_ATTACHMENT");
+
+        static constexpr std::array<uint64_t, 8> COLOR_ATTACHMENTS = {
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_0"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_1"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_2"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_3"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_4"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_5"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_6"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_7")
+        };
 
     private:
         bool Link();
@@ -84,7 +96,6 @@ namespace SR_GRAPH_NS {
 
     public:
         bool Init();
-        SR_FORCE_INLINE static Shader* GetCurrentShader() { return g_currentShader; }
 
         static Shader* Load(const SR_UTILS_NS::Path& path);
         static Shader* LoadFromConfig(const std::string& name);
@@ -146,13 +157,12 @@ namespace SR_GRAPH_NS {
         void SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
         void SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
         void SetSampler2D(uint64_t hashId, Types::Texture* sampler) noexcept;
+        void SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
 
     private:
         void SetSampler(uint64_t hashId, int32_t sampler) noexcept;
 
     private:
-        inline static Shader* g_currentShader        = nullptr;
-
         SR_SHADER_PROGRAM     m_shaderProgram        = SR_NULL_SHADER;
         void*                 m_shaderTempData       = nullptr;
 
@@ -166,7 +176,7 @@ namespace SR_GRAPH_NS {
         VertexAttributes      m_verticesAttributes   = {};
         VertexDescriptions    m_verticesDescription  = {};
 
-        int32_t               m_fbo                  = -1;
+        int32_t               m_fbo                  = SR_ID_INVALID;
 
         UBOInfo               m_uniformsInfo         = {};
         ShaderUBOBlock        m_uniformBlock         = ShaderUBOBlock();

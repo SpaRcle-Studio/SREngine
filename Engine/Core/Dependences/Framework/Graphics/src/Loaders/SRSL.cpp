@@ -24,6 +24,18 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "COLOR_INDEX_7", ShaderVarType::Vec4 },
 };
 
+const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::ATTACHMENTS = {
+        { "COLOR_ATTACHMENT_0", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_1", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_2", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_3", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_4", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_5", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_6", ShaderVarType::Sampler2D },
+        { "COLOR_ATTACHMENT_7", ShaderVarType::Sampler2D },
+        { "DEPTH_ATTACHMENT", ShaderVarType::Sampler2D },
+};
+
 std::optional<SR_GRAPH_NS::SRSL::SRSLUnit> SR_GRAPH_NS::SRSL::SRSLLoader::Load(std::string path) {
     SR_SHADER_LOG("SRSLLoader::Load() : loading SpaRcle shader... \n\tPath: " + path);
 
@@ -132,6 +144,10 @@ SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::RefAnalyzer(cons
         used[name] = SRSLVariable { isUsed(name), false, type, -1 };
     }
 
+    for (const auto& [name, type] : ATTACHMENTS) {
+        used[name] = SRSLVariable { isUsed(name), false, type, -1 };
+    }
+
     return used;
 }
 
@@ -188,12 +204,17 @@ bool Framework::Graphics::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSL
     }
 
     if (!uniforms.empty()) {
+        bool used = false;
+
         for (auto&& [name, var] : uniforms) {
-            var.binding = +parseData.lastBinding;
+            var.binding = parseData.lastBinding;
             unit.bindings[name] = var;
+            used |= var.used;
         }
 
-        ++parseData.lastBinding;
+        if (used) {
+            ++parseData.lastBinding;
+        }
     }
 
     return true;
@@ -310,6 +331,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
                         var.binding, ShaderVarTypeToString(var.type).c_str(), name.c_str()
                 );
             }
+
             source += "\n";
             break;
         }

@@ -60,6 +60,8 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
+        m_isInit = true;
+
         return true;
     }
 
@@ -73,7 +75,31 @@ namespace SR_GTYPES_NS {
             m_shader->AddUsePoint();
         }
 
+        auto&& uboManager = Memory::UBOManager::Instance();
+        auto&& env = Environment::Get();
 
+        auto&& uboBlockSize = m_shader->GetUBOBlockSize();
+        auto&& samplersCount = m_shader->GetSamplersCount();
+
+        env->SetCurrentShaderId(m_shader->GetID());
+
+        if ((m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, uboBlockSize, samplersCount)) != SR_ID_INVALID) {
+            uboManager.BindUBO(m_virtualUBO);
+        }
+        else {
+            env->ResetDescriptorSet();
+            m_hasErrors = true;
+            return false;
+        }
+
+        m_shader->InitUBOBlock();
+        m_shader->Flush();
+
+        for (uint32_t i = 0; i < static_cast<uint32_t>(m_colors.size()); ++i) {
+            m_shader->SetSampler2D(Shader::COLOR_ATTACHMENTS[i], m_colors[i]);
+        }
+
+        m_shader->SetSampler2D(Shader::DEPTH_ATTACHMENT, m_depth);
 
         return true;
     }
@@ -148,6 +174,8 @@ namespace SR_GTYPES_NS {
     bool Framebuffer::BeginRender() {
         auto&& env = Environment::Get();
 
+        env->ClearBuffers();
+
         if (!env->BeginRender()) {
             return false;
         }
@@ -167,19 +195,29 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        if ((!m_shader || m_dirtyShader) && InitShader("Engine/framebuffer.srsl")) {
+        if ((!m_shader || m_dirtyShader) && !InitShader("Engine/framebuffer.srsl")) {
             return;
         }
 
         auto&& env = Environment::Get();
+        auto&& uboManager = Memory::UBOManager::Instance();
 
         if (!m_shader->Use()) {
             m_hasErrors = false;
             return;
         }
 
-        env->ResetDescriptorSet();
-        env->Draw(3);
+        switch (uboManager.BindUBO(m_virtualUBO)) {
+            case Memory::UBOManager::BindResult::Success:
+                env->Draw(3);
+                break;
+            case Memory::UBOManager::BindResult::Duplicated:
+                SRHalt0();
+                SR_FALLTHROUGH;
+            case Memory::UBOManager::BindResult::Failed:
+            default:
+                break;
+        }
 
         m_shader->UnUse();
     }
@@ -191,5 +229,17 @@ namespace SR_GTYPES_NS {
         }
 
         Super::UpdateResources(deep);
+    }
+
+    int32_t Framebuffer::GetId() {
+        if (m_hasErrors) {
+            return SR_ID_INVALID;
+        }
+
+        if ((!m_isInit || m_needResize) && !Init()) {
+            SR_ERROR("Framebuffer::GetId() : failed to initialize framebuffer!");
+        }
+
+        return m_frameBuffer;
     }
 }

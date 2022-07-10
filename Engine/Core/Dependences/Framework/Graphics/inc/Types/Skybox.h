@@ -28,7 +28,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD int32_t GetVBO();
         SR_NODISCARD int32_t GetIBO();
-        SR_NODISCARD int32_t GetUBO();
+        SR_NODISCARD int32_t GetVirtualUBO();
 
         bool FreeVideoMemory();
         void Draw();
@@ -50,9 +50,10 @@ namespace SR_GTYPES_NS {
         int32_t                 m_VAO            = SR_ID_INVALID;
         int32_t                 m_VBO            = SR_ID_INVALID;
         int32_t                 m_IBO            = SR_ID_INVALID;
-        int32_t                 m_UBO            = SR_ID_INVALID;
-        int32_t                 m_descriptorSet  = SR_ID_INVALID;
+
         int32_t                 m_cubeMap        = SR_ID_INVALID;
+
+        int32_t                 m_virtualUBO     = SR_ID_INVALID;
 
         uint32_t                m_width          = 0;
         uint32_t                m_height         = 0;

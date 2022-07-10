@@ -5,7 +5,6 @@
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/ComponentManager.h>
-
 #include <Utils/Types/Thread.h>
 
 namespace SR_UTILS_NS {
@@ -19,7 +18,7 @@ namespace SR_UTILS_NS {
         return marshal;
     }
 
-    bool Component::IsActive() const {
+    bool Component::IsActive() const noexcept {
         return IsEnabled() && (!m_parent || m_parent->m_isActive);
     }
 

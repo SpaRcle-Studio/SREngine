@@ -10,6 +10,7 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
     }
 
     auto&& uboManager = Memory::UBOManager::Instance();
+    auto&& time = clock();
 
     for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
         if (!shader || !shader->Ready()) {
@@ -21,7 +22,7 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
          */
         shader->SetMat4(Shader::VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
         shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
-        shader->SetFloat(Shader::TIME, clock());
+        shader->SetFloat(Shader::TIME, time);
 
         for (auto const& [key, meshGroup] : subCluster.m_groups) {
             for (const auto &mesh : meshGroup) {
@@ -56,13 +57,15 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
 
         shader->SetMat4(Shader::VIEW_NO_TRANSLATE_MATRIX, m_currentCamera->GetViewRef());
         shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
-        shader->SetFloat(Shader::TIME, clock());
+        shader->SetFloat(Shader::TIME, time);
 
-        if (auto&& ubo = m_skybox->GetUBO(); ubo != SR_ID_INVALID) {
-            m_env->BindUBO(ubo);
+        auto&& virtualUbo = m_skybox->GetVirtualUBO();
+        if (virtualUbo == SR_ID_INVALID) {
+            return;
         }
-        else {
-            SRAssertOnce(false);
+
+        if (uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
+            SR_ERROR("VulkanRender::UpdateUBOs() : memory has been duplicated!");
         }
 
         shader->Flush();

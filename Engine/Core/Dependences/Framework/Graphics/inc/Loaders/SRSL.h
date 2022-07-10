@@ -70,6 +70,7 @@ namespace SR_GRAPH_NS::SRSL {
 
         static const std::unordered_map<std::string, ShaderVarType> STANDARD_VARIABLES;
         static const std::unordered_map<std::string, ShaderVarType> COLOR_INDICES;
+        static const std::unordered_map<std::string, ShaderVarType> ATTACHMENTS;
 
     public:
         std::optional<SRSLUnit> Load(std::string path);

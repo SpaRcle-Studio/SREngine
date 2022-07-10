@@ -217,7 +217,7 @@ namespace SR_GRAPH_NS {
 
         SR_FORCE_INLINE bool BeginRender() override {
             if (!m_renderPassBI.pClearValues) {
-                SRAssertOnce(false);
+                SRAssert2Once(false, "pClearValues is nullptr! Please, call ClearBuffers before BeginRender");
                 return false;
             }
 
@@ -246,7 +246,8 @@ namespace SR_GRAPH_NS {
                 m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
             }
             else {
-                SR_ERROR("Vulkan::ClearBuffers() : TODO!");
+                /// в какой ситуации это может случиться?
+                SRHalt("Vulkan::ClearBuffers() : TODO!");
             }
         }
 
@@ -559,6 +560,7 @@ namespace SR_GRAPH_NS {
                 for (auto&& fbo : m_framebuffersQueue) {
                     if (fbo == framebuffer) {
                         SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
+                        SRHalt0();
                         return;
                     }
                 }

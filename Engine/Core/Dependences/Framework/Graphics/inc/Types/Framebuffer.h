@@ -38,6 +38,8 @@ namespace SR_GTYPES_NS {
         void SetSize(const SR_MATH_NS::IVector2& size);
         void SetImagesCount(uint32_t count);
 
+        SR_NODISCARD int32_t GetId();
+
     protected:
         void OnResourceUpdated(IResource* pResource, int32_t deep) override;
 
@@ -55,10 +57,11 @@ namespace SR_GTYPES_NS {
         std::atomic<bool>    m_dirtyShader = false;
 
         std::vector<int32_t> m_colors      = { };
-        int32_t              m_depth       = -1;
-        int32_t              m_frameBuffer = -1;
+        int32_t              m_depth       = SR_ID_INVALID;
+        int32_t              m_frameBuffer = SR_ID_INVALID;
+        int32_t              m_virtualUBO  = SR_ID_INVALID;
 
-        SR_MATH_NS::IVector2 m_size        = {};
+        SR_MATH_NS::IVector2 m_size        = { };
 
     };
 }

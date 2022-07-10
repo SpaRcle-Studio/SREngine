@@ -33,11 +33,11 @@ namespace SR_GRAPH_NS {
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll };        }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat;                             }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const { return m_viewMat;                   }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewTranslateRef() const { return m_viewTranslateMat; }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat;                   }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewTranslateRef() const noexcept { return m_viewTranslateMat; }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;           }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const { return m_projection;          }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const noexcept { return m_projection;          }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize() const { return m_viewportSize;             }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                    }

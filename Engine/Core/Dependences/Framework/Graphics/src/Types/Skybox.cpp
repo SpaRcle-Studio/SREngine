@@ -125,48 +125,26 @@ namespace SR_GTYPES_NS {
     }
 
     void Skybox::DrawOpenGL() {
-        m_env->DrawSkybox(m_VAO, m_cubeMap);
+
     }
 
     void Skybox::DrawVulkan() {
+        auto&& uboManager = Memory::UBOManager::Instance();
+
         if (m_dirtyShader)
         {
             m_dirtyShader = false;
 
-            if (m_descriptorSet != SR_ID_INVALID && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-                SR_ERROR("Skybox::DrawVulkan() : failed to free descriptor set!");
-            }
+            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, m_shader->GetUBOBlockSize(), m_shader->GetSamplersCount());
 
-            if (m_UBO != SR_ID_INVALID && !m_env->FreeUBO(&m_UBO)) {
-                SR_ERROR("Skybox::DrawVulkan() : failed to free uniform buffer object!");
+            if (m_virtualUBO != SR_ID_INVALID) {
+                uboManager.BindUBO(m_virtualUBO);
             }
-
-            if (m_shader->GetUBOBlockSize() > 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform}); m_descriptorSet == SR_ID_INVALID) {
-                    SR_ERROR("Skybox::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true;
-                    return;
-                }
-
-                if (m_UBO = m_env->AllocateUBO(m_shader->GetUBOBlockSize()); m_UBO == SR_ID_INVALID) {
-                    SR_ERROR("Mesh3D::DrawVulkan() : failed to allocate uniform buffer object!");
-                    m_hasErrors = true;
-                    return;
-                }
-
-                m_env->BindUBO(m_UBO);
-                m_env->BindDescriptorSet(m_descriptorSet);
-            }
-            else if (m_shader->GetSamplersCount() > 0) {
-                if (m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::CombinedImage}); m_descriptorSet == SR_ID_INVALID) {
-                    SR_ERROR("Skybox::DrawVulkan() : failed to calculate descriptor set!");
-                    m_hasErrors = true;
-                    return;
-                }
-                m_env->BindDescriptorSet(m_descriptorSet);
-            }
-            else
+            else {
                 m_env->ResetDescriptorSet();
+                m_hasErrors = true;
+                return;
+            }
 
             m_shader->InitUBOBlock();
             m_shader->Flush();
@@ -177,11 +155,19 @@ namespace SR_GTYPES_NS {
         m_env->BindVBO(m_VBO);
         m_env->BindIBO(m_IBO);
 
-        if (m_descriptorSet != SR_ID_INVALID) {
-            m_env->BindDescriptorSet(m_descriptorSet);
+        switch (uboManager.BindUBO(m_virtualUBO)) {
+            case Memory::UBOManager::BindResult::Duplicated:
+                m_shader->InitUBOBlock();
+                m_shader->Flush();
+                m_shader->SetSamplerCube(Shader::SKYBOX_DIFFUSE, m_cubeMap);
+                SR_FALLTHROUGH;
+            case Memory::UBOManager::BindResult::Success:
+                m_env->DrawIndices(36);
+                break;
+            case Memory::UBOManager::BindResult::Failed:
+            default:
+                break;
         }
-
-        m_env->DrawIndices(36);
     }
 
     bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
@@ -203,16 +189,13 @@ namespace SR_GTYPES_NS {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free IBO!");
         }
 
-        if (m_UBO != SR_ID_INVALID && !m_env->FreeUBO(&m_UBO)) {
-            SR_ERROR("Skybox::FreeVideoMemory() : failed to free uniform buffer object!");
-        }
-
         if (m_cubeMap != SR_ID_INVALID && !m_env->FreeCubeMap(&m_cubeMap)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free cube map!");
         }
 
-        if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-            SR_ERROR("Skybox::FreeVideoMemory() : failed to free descriptor set!");
+        auto&& uboManager = Memory::UBOManager::Instance();
+        if (m_virtualUBO != SR_ID_INVALID && !uboManager.FreeUBO(&m_virtualUBO)) {
+            SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
         }
 
         SetShader(nullptr);
@@ -290,7 +273,7 @@ namespace SR_GTYPES_NS {
         return m_IBO;
     }
 
-    int32_t Skybox::GetUBO() {
-        return m_UBO;
+    int32_t Skybox::GetVirtualUBO() {
+        return m_virtualUBO;
     }
 }

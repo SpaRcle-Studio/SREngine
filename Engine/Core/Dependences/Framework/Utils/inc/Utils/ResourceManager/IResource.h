@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD virtual bool IsValid() const;
-        SR_NODISCARD bool IsLoaded() const { return m_loadState == LoadState::Loaded; }
+        SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const { return m_isDestroyed; }
         SR_NODISCARD bool IsForce() const { return m_force; }

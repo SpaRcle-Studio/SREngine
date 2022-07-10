@@ -187,13 +187,13 @@ int main(int argc, char **argv) {
     else if (envName.empty()) {
         SR_ERROR("System error: file \"Resources/Configs/Environment.xml\" does not exist!");
         ResourceManager::DestroySingleton();
-        Debug::Instance().DestroySingleton();
+        Debug::DestroySingleton();
         return -1500;
     }
     else {
         SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported!");
         ResourceManager::DestroySingleton();
-        Debug::Instance().DestroySingleton();
+        Debug::DestroySingleton();
         return -2000;
     }
 
@@ -201,7 +201,7 @@ int main(int argc, char **argv) {
     if (!render) {
         SR_ERROR("FATAL: render does not support this pipeline!");
         ResourceManager::DestroySingleton();
-        Debug::Instance().DestroySingleton();
+        Debug::DestroySingleton();
         return -1000;
     }
 
@@ -256,7 +256,7 @@ int main(int argc, char **argv) {
 
     SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
 
-    Debug::Instance().DestroySingleton();
+    Debug::DestroySingleton();
 
     return 0;
 }

@@ -70,7 +70,7 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualUBO ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples);
         SR_NODISCARD VirtualUBO AllocateUBO(uint32_t uboSize, uint32_t samples);
         bool FreeUBO(VirtualUBO* ubo);
-        BindResult BindUBO(VirtualUBO ubo);
+        BindResult BindUBO(VirtualUBO ubo) noexcept;
 
     private:
         SR_NODISCARD bool AllocMemory(UBO* ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples, int32_t shader);
