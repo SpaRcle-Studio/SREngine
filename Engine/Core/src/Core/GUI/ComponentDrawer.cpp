@@ -36,7 +36,7 @@ namespace SR_CORE_NS::GUI {
                     }
                 }
                 else if (!path.Empty()) {
-                    SR_WARN("ComponentDrawer::DrawComponent() : behaviour not found!\n\tPath: " + path.ToString());
+                    SR_WARN("ComponentDrawer::DrawComponent() : behaviour is not found!\n\tPath: " + path.ToString());
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Indices count", mesh3d->GetIndicesCount());
 
         if (!mesh3d->IsRegistered())
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "WARN: Mesh isn't registered!");
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "WARN: Mesh is not registered!");
 
         ImGui::Separator();
 

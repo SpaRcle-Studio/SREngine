@@ -57,7 +57,7 @@ namespace SR_SCRIPTING_NS {
         path = path.RemoveSubPath(resourceManager.GetScriptsPath());
 
         if (path.IsAbs()) {
-            SR_ERROR("Behaviour::Load() : the behavior cannot be located outside the resources folder! \n\tPath: " + path.ToString());
+            SR_ERROR("Behaviour::Load() : the behavior cannot be located outside of the resources folder! \n\tPath: " + path.ToString());
             return nullptr;
         }
 

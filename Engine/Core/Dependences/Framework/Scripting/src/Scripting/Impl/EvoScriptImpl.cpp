@@ -67,7 +67,7 @@ namespace SR_SCRIPTING_NS {
         auto&& compiler = dynamic_cast<Scripting::EvoCompiler*>(m_compiler);
 
         if (!compiler || !compiler->GetGenerator()) {
-            SR_ERROR("EvoScriptImpl::Compile() : compiler isn't init! \n\tPath: " + m_path);
+            SR_ERROR("EvoScriptImpl::Compile() : compiler is not init! \n\tPath: " + m_path);
             return false;
         }
 

@@ -29,14 +29,14 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
     m_input      = new Helper::InputDispatcher();
 
     if (m_isCreate) {
-        SR_ERROR("Engine::Create() : game engine already create!");
+        SR_ERROR("Engine::Create() : game engine is already created!");
         return false;
     }
 
     SR_INFO("Engine::Create() : creating game engine...");
 
     if (!m_window->Create()) {
-        SR_ERROR("Engine::Create() : failed create window!");
+        SR_ERROR("Engine::Create() : failed to create window!");
         return false;
     }
 
@@ -76,12 +76,12 @@ bool Framework::Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine*
 
 bool Framework::Engine::Init() {
     if (!m_isCreate) {
-        SR_ERROR("Engine::Init() : engine is not create!");
+        SR_ERROR("Engine::Init() : engine is not created!");
         return false;
     }
 
     if (m_isInit) {
-        SR_ERROR("Engine::Init() : engine is already initialize!");
+        SR_ERROR("Engine::Init() : engine is already initialized!");
         return false;
     }
 
@@ -113,19 +113,19 @@ bool Framework::Engine::Init() {
 
 bool Framework::Engine::Run() {
     if (!m_isInit) {
-        SR_ERROR("Engine::Run() : engine is not initialize!");
+        SR_ERROR("Engine::Run() : engine is not initialized!");
         return false;
     }
 
     if (m_isRun) {
-        SR_ERROR("Engine::Run() : engine already ran!");
+        SR_ERROR("Engine::Run() : engine already running!");
         return false;
     }
 
     SR_INFO("Engine::Run() : running game engine...");
 
     if (!m_window->Run()) {
-        SR_ERROR("Engine::Run() : failed to ran window!");
+        SR_ERROR("Engine::Run() : failed to run window!");
         return false;
     }
 
@@ -135,7 +135,7 @@ bool Framework::Engine::Run() {
     }
 
     if (!m_cmdManager->Run()) {
-        SR_ERROR("Engine::Run() : failed to ran command manager!");
+        SR_ERROR("Engine::Run() : failed to run command manager!");
         return false;
     }
 
@@ -162,7 +162,7 @@ bool Framework::Engine::Run() {
 }
 
 void Framework::Engine::Await() {
-    SR_INFO("Engine::Await() : wait close engine...");
+    SR_INFO("Engine::Await() : waiting for the engine to close...");
 
     const float updateFrequency = (1.f / 60.f) * CLOCKS_PER_SEC;
     float accumulator = updateFrequency;
@@ -225,7 +225,7 @@ void Framework::Engine::Await() {
         }
 
         if (m_exitEvent) {
-            SR_SYSTEM_LOG("Engine::Await() : The closing event have been received!");
+            SR_SYSTEM_LOG("Engine::Await() : the closing event have been received!");
             break;
         }
 
@@ -234,12 +234,12 @@ void Framework::Engine::Await() {
 
     if (m_editor->Enabled()) {
         m_editor->Enable(false);
-        SR_SYSTEM_LOG("Engine::Await() : disable editor gui...");
+        SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
     }
 }
 
 bool Framework::Engine::Close() {
-    SR_INFO("Engine::Close() : close game engine...");
+    SR_INFO("Engine::Close() : closing game engine...");
 
     m_isRun = false;
 
@@ -265,7 +265,7 @@ bool Framework::Engine::Close() {
     SR_SAFE_DELETE_PTR(m_cmdManager);
 
     if (m_worldThread) {
-        SR_INFO("Engine::Close() : destroy world thread...");
+        SR_INFO("Engine::Close() : destroying world thread...");
         m_worldThread->TryJoin();
         m_worldThread->Free();
         m_worldThread = nullptr;
@@ -279,7 +279,7 @@ bool Framework::Engine::Close() {
     }
 
     if (m_time) {
-        SR_INFO("Engine::Close() : destroy time...");
+        SR_INFO("Engine::Close() : destroying time...");
         delete m_time;
         m_time = nullptr;
     }
@@ -288,7 +288,7 @@ bool Framework::Engine::Close() {
 }
 
 bool Framework::Engine::RegisterLibraries() {
-    SR_LOG("Engine::RegisterLibraries() : register all libraries...");
+    SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
     API::RegisterEvoScriptClasses();
 

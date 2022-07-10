@@ -27,7 +27,7 @@ namespace SR_AUDIO_NS {
         auto&& pRawSound = RawSound::Load(path);
 
         if (!pRawSound) {
-            SR_ERROR("Sound::Load() : failed to load raw sound!");
+            SR_ERROR("Sound::Load() : failed to load a raw sound!");
             return nullptr;
         }
 

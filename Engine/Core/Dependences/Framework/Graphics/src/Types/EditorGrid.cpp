@@ -70,7 +70,7 @@ bool Framework::Graphics::EditorGrid::Calculate() {
     SR_GRAPH_LOG("EditorGrid::Calculate() : calculating grid...");
 
     if (!m_env->CalculateEmptyVAO(VAO)) {
-        SR_ERROR("EditorGrid::Calculate() : failed calculate grid VAO!");
+        SR_ERROR("EditorGrid::Calculate() : failed to calculate grid VAO!");
         return false;
     }
 

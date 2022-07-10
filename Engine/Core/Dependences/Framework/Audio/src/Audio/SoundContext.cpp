@@ -15,10 +15,10 @@ namespace SR_AUDIO_NS {
     { }
 
     SoundContext *SoundContext::Allocate(SoundDevice *pDevice) {
-        SR_INFO("SoundContext::Allocate() : allocate sound context...");
+        SR_INFO("SoundContext::Allocate() : allocating a sound context...");
 
         if (!pDevice) {
-            SR_ERROR("SoundContext::Allocate() : device is nullptr!");
+            SR_ERROR("SoundContext::Allocate() : the device is nullptr!");
             return nullptr;
         }
 

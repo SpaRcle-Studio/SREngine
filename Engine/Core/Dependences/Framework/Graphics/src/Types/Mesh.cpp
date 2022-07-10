@@ -39,7 +39,7 @@ namespace SR_GRAPH_NS::Types {
     Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
         auto &&pMesh = TryLoad(localPath, type, id);
 
-        SRVerifyFalse2(!pMesh, "Mesh not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
+        SRVerifyFalse2(!pMesh, "Mesh is not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
 
         return pMesh;
     }
@@ -131,12 +131,12 @@ namespace SR_GRAPH_NS::Types {
 
     bool Mesh::IsCanCalculate() const {
         if (!m_render) {
-            SR_ERROR("Mesh::IsCanCalculate() : mesh is not register in render!");
+            SR_ERROR("Mesh::IsCanCalculate() : mesh is not registered in render!");
             return false;
         }
 
         if (!m_material) {
-            SR_ERROR("Mesh::IsCanCalculate() : mesh have not material!");
+            SR_ERROR("Mesh::IsCanCalculate() : mesh does not have a material!");
             return false;
         }
 
@@ -152,7 +152,7 @@ namespace SR_GRAPH_NS::Types {
 
     SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
         if (IsDestroyed()) {
-            SR_ERROR("Mesh::Copy() : mesh already destroyed!");
+            SR_ERROR("Mesh::Copy() : mesh is already destroyed!");
             return nullptr;
         }
 

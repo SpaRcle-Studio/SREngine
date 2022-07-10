@@ -159,7 +159,7 @@ namespace SR_GTYPES_NS {
             RemoveDependency(m_shader);
             if (m_shader->GetCountUses() == 0) {
                 if (m_shader->Ready()) {
-                    SRAssert2(render, "Render are nullptr!");
+                    SRAssert2(render, "Render is nullptr!");
                     if (render) {
                         render->FreeShader(m_shader);
                     }
@@ -301,13 +301,13 @@ namespace SR_GTYPES_NS {
 
         auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
-            SR_ERROR("Material::Reload() : file not found! \n\tPath: " + path.ToString());
+            SR_ERROR("Material::Reload() : file is not found! \n\tPath: " + path.ToString());
             return false;
         }
 
         auto&& matXml = document.Root().GetNode("Material");
         if (!matXml) {
-            SR_ERROR("Material::Reload() : \"Material\" node not found! \n\tPath: " + path.ToString());
+            SR_ERROR("Material::Reload() : \"Material\" node is not found! \n\tPath: " + path.ToString());
             return false;
         }
 

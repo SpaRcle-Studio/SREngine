@@ -40,11 +40,11 @@ namespace SR_GRAPH_NS {
 
     bool Window::Create() {
         if (m_isCreate) {
-            SR_ERROR("Window::Create() : window are already create!");
+            SR_ERROR("Window::Create() : the window is already created!");
             return false;
         }
 
-        SR_INFO("Window::Create() : creating window...");
+        SR_INFO("Window::Create() : creating the window...");
 
         if (!m_render->Create(this)) {
             SR_ERROR("Window::Create() : failed to create render!");
@@ -55,7 +55,7 @@ namespace SR_GRAPH_NS {
         Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
             switch (event) {
                 case Environment::WinEvents::Close:
-                    SR_SYSTEM_LOG("Window event: close window...");
+                    SR_SYSTEM_LOG("Window event: closing the window...");
                     break;
                 case Environment::WinEvents::Move: {
                     int size[2] = {*(int *) arg1, *(int *) arg2};
@@ -92,16 +92,16 @@ namespace SR_GRAPH_NS {
 
     bool Window::Init() {
         if (!m_isCreate) {
-            SR_ERROR("Window::Init() : window is not created!");
+            SR_ERROR("Window::Init() : the window is not created!");
             return false;
         }
 
         if (m_isInit) {
-            SR_ERROR("Window::Init() : window are already initialize!");
+            SR_ERROR("Window::Init() : the window is already initialized!");
             return false;
         }
 
-        SR_GRAPH_LOG("Window::Init() : initializing window...");
+        SR_GRAPH_LOG("Window::Init() : initializing the window...");
 
         {
             m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Window::Thread, this);
@@ -126,16 +126,16 @@ namespace SR_GRAPH_NS {
 
     bool Framework::Graphics::Window::Run() {
         if (!m_isInit) {
-            SR_ERROR("Window::Run() : window is not initialized!");
+            SR_ERROR("Window::Run() : the window is not initialized!");
             return false;
         }
 
         if (m_isRun) {
-            SR_ERROR("Window::Run() : window are already is running!");
+            SR_ERROR("Window::Run() : the window is already running!");
             return false;
         }
 
-        SR_GRAPH_LOG("Window::Run() : running window...");
+        SR_GRAPH_LOG("Window::Run() : running the window...");
 
         m_isRun = true;
 
@@ -145,23 +145,23 @@ namespace SR_GRAPH_NS {
         if (m_hasErrors)
             return false;
 
-        SR_INFO("Window::Run() : window has been successfully running!");
+        SR_INFO("Window::Run() : the window is successfully running!");
 
         return true;
     }
 
     bool Framework::Graphics::Window::Close() {
         if (!m_isRun) {
-            SR_ERROR("Window::Close() : window is not running!");
+            SR_ERROR("Window::Close() : the window is not running!");
             return false;
         }
 
         if (m_isClose) {
-            SR_ERROR("Window::Close() : window already is closed!");
+            SR_ERROR("Window::Close() : window is already closed!");
             return false;
         }
 
-        SR_GRAPH_LOG("Window::Close() : close window...");
+        SR_GRAPH_LOG("Window::Close() : closing the window...");
 
         m_isRun   = false;
         m_isClose = true;
@@ -176,7 +176,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Framework::Graphics::Window::Thread() {
-        SR_INFO("Window::Thread() : running window thread...");
+        SR_INFO("Window::Thread() : running window's thread...");
 
         {
             waitInit:
@@ -185,13 +185,13 @@ namespace SR_GRAPH_NS {
 
             if (!m_hasErrors && !m_isClose)
                 if (!InitEnvironment()) {
-                    SR_ERROR("Window::Thread() : failed to initialize render environment!");
+                    SR_ERROR("Window::Thread() : failed to initialize the render environment!");
                     m_hasErrors = true;
                     return;
                 }
 
             if (!m_render->Init()) {
-                SR_ERROR("Window::Thread() : failed to initialize render!");
+                SR_ERROR("Window::Thread() : failed to initialize the render!");
                 m_hasErrors = true;
                 return;
             }
@@ -203,7 +203,7 @@ namespace SR_GRAPH_NS {
                 goto waitRun;
 
             if (!m_render->Run()) {
-                SR_ERROR("Window::Thread() : failed to ran render!");
+                SR_ERROR("Window::Thread() : failed to run the render!");
                 m_hasErrors = true;
                 return;
             }
@@ -244,7 +244,7 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        SR_GRAPH("Window::Thread() : exit from main cycle.");
+        SR_GRAPH("Window::Thread() : exiting from main cycle.");
 
         if (!m_widgetManagers.Empty()) {
             m_widgetManagers.Clear();
@@ -252,7 +252,7 @@ namespace SR_GRAPH_NS {
 
         if (m_env->IsGUISupport()) {
             m_env->StopGUI();
-            SR_GRAPH("Window::Thread() : complete stopping gui!");
+            SR_GRAPH("Window::Thread() : completely stopping the GUI!");
         }
 
         SR_GTYPES_NS::Texture::FreeNoneTexture();
@@ -262,7 +262,7 @@ namespace SR_GRAPH_NS {
         }
 
         if (!m_render->Close()) {
-            SR_ERROR("Window::Thread() : failed to close render!");
+            SR_ERROR("Window::Thread() : failed to close the render!");
         }
 
         m_env->CloseWindow();
@@ -275,7 +275,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool Framework::Graphics::Window::InitEnvironment() {
-        SR_GRAPH("Window::InitEnvironment() : initializing render environment...");
+        SR_GRAPH("Window::InitEnvironment() : initializing the render environment...");
 
         SR_GRAPH("Window::InitEnvironment() : pre-initializing...");
         if (!m_env->PreInit(
@@ -284,13 +284,13 @@ namespace SR_GRAPH_NS {
                 "SREngine",       /// Engine name
                 SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe")))
         {
-            SR_ERROR("Window::InitEnvironment() : failed to pre-initializing environment!");
+            SR_ERROR("Window::InitEnvironment() : failed to pre-initialize the environment!");
             return false;
         }
 
-        SR_GRAPH("Window::InitEnvironment() : creating window...");
+        SR_GRAPH("Window::InitEnvironment() : creating the window...");
         if (!m_env->MakeWindow(m_winName, m_size, m_fullScreen, m_resizable, m_headerEnabled)) {
-            SR_ERROR("Window::InitEnvironment() : failed to creating window!");
+            SR_ERROR("Window::InitEnvironment() : failed to create the window!");
             return false;
         }
 
@@ -304,14 +304,14 @@ namespace SR_GRAPH_NS {
 
         SR_GRAPH("Window::InitEnvironment() : initializing the environment...");
         if (!m_env->Init(m_vsync)) {
-            SR_ERROR("Window::InitEnvironment() : failed to initializing environment!");
+            SR_ERROR("Window::InitEnvironment() : failed to initialize the environment!");
             return false;
         }
 
         SR_GRAPH("Window::InitEnvironment() : post-initializing the environment...");
 
         if (!m_env->PostInit()) {
-            SR_ERROR("Window::InitEnvironment() : failed to post-initializing environment!");
+            SR_ERROR("Window::InitEnvironment() : failed to post-initialize environment!");
             return false;
         }
 
@@ -334,12 +334,12 @@ namespace SR_GRAPH_NS {
                 ImGui::GetIO().IniFilename = iniPath.CStr();
 
                 if (!m_env->InitGUI()) {
-                    SR_ERROR("Window::InitEnvironment() : failed to initializing GUI!");
+                    SR_ERROR("Window::InitEnvironment() : failed to initialize the GUI!");
                     return false;
                 }
             }
             else {
-                SR_ERROR("Window::InitEnvironment() : failed to pre-initializing GUI!");
+                SR_ERROR("Window::InitEnvironment() : failed to pre-initialize the GUI!");
             }
         }
 
@@ -353,7 +353,7 @@ namespace SR_GRAPH_NS {
             m_env->SetCursorPosition({ GetWindowSize().x / 2,  GetWindowSize().y / 2});
         }
         else {
-            SR_ERROR("Window::CentralizeCursor() : the window isn't run!");
+            SR_ERROR("Window::CentralizeCursor() : the window is not running!");
         }
     }
 
@@ -406,7 +406,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::CentralizeWindow() {
-        SR_INFO("Window::CentralizeWindow() : wait centralize window...");
+        SR_INFO("Window::CentralizeWindow() : wait to centralize window...");
 
         SR_LOCK_GUARD
 
@@ -497,7 +497,7 @@ namespace SR_GRAPH_NS {
         thread->TryJoin();
         thread->Free();
 
-        SR_SYSTEM_LOG("Window::SyncFreeResources() : complete synchronizing!");
+        SR_SYSTEM_LOG("Window::SyncFreeResources() : synchronizing is complete!");
 
         return true;
     }
@@ -590,10 +590,10 @@ namespace SR_GRAPH_NS {
 
     void Window::SetGUIEnabled(bool value) {
         if (value) {
-            SR_LOG("Window::SetGUIEnabled() : enable gui...");
+            SR_LOG("Window::SetGUIEnabled() : enabling gui...");
         }
         else
-            SR_LOG("Window::SetGUIEnabled() : disable gui...");
+            SR_LOG("Window::SetGUIEnabled() : disabling gui...");
 
         m_GUIEnabled.second = value;
     }

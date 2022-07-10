@@ -80,7 +80,7 @@ namespace SR_GTYPES_NS {
 
     bool Skybox::Calculate() {
         if (m_isCalculated) {
-            SR_ERROR("Skybox::Calculate() : skybox already calculated!");
+            SR_ERROR("Skybox::Calculate() : the skybox is already calculated!");
             return false;
         }
 
@@ -259,7 +259,7 @@ namespace SR_GTYPES_NS {
             auto&& render = m_shader->GetRender();
             RemoveDependency(m_shader);
             if (m_shader->GetCountUses() == 0) {
-                SRAssert2(render, "Render are nullptr!");
+                SRAssert2(render, "Render is nullptr!");
                 if (render) {
                     render->FreeShader(m_shader);
                 }

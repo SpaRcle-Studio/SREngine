@@ -183,7 +183,7 @@ bool GUISystem::ImageButtonInternal(std::string_view&& imageId, void *descriptor
         uv1 = ImVec2(0, 1);
     }
 
-    /// Default to using texture ID as ID. User can still push string/integer prefixes.
+    /// Default is to use texture ID as ID. User can still push string/integer prefixes.
     ImGui::PushID((void*)(intptr_t)descriptor);
     const ImGuiID id = window->GetID(imageId.data());
     ImGui::PopID();
@@ -688,7 +688,7 @@ bool GUISystem::BeginMenuBar() {
                     scene->SetName(sceneName);
 
                     if (scene->SaveAt(folder)) {
-                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene saved as \"" + path.ToString() + "\"");
+                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
                     }
                     else {
                         SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
@@ -697,7 +697,7 @@ bool GUISystem::BeginMenuBar() {
                 scene.Unlock();
             }
             else {
-                SR_WARN("GUISystem::BeginMenuBar() : scene isn't valid!");
+                SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
             }
         }
 
@@ -719,7 +719,7 @@ bool GUISystem::BeginMenuBar() {
                 scene.Unlock();
             }
             else {
-                SR_WARN("GUISystem::BeginMenuBar() : scene isn't valid!");
+                SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
             }
         }
 

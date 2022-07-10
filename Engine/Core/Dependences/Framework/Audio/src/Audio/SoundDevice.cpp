@@ -12,7 +12,7 @@ namespace SR_AUDIO_NS {
     { }
 
     SoundDevice* SoundDevice::Allocate(AudioLibrary audioLibrary) {
-        SR_LOG("SoundDevice::Allocate() : allocate sound device...");
+        SR_LOG("SoundDevice::Allocate() : allocating a sound device...");
 
         switch (audioLibrary) {
             case AudioLibrary::OpenAL:
@@ -23,7 +23,7 @@ namespace SR_AUDIO_NS {
             case AudioLibrary::SoLoud:
             case AudioLibrary::Unknown:
             default:
-                SR_ERROR("SoundDevice::Allocate() : audio library not supported!");
+                SR_ERROR("SoundDevice::Allocate() : the audio library is not supported!");
                 break;
         }
 

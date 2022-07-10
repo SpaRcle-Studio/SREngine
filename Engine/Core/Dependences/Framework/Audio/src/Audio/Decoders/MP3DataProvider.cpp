@@ -24,14 +24,14 @@ namespace SR_AUDIO_NS {
             , m_decoderData(new DecoderData())
     {
         if (mp3dec_ex_open_buf(&m_decoderData->mp3d, data->data(), data->size(), MP3D_SEEK_TO_SAMPLE)) {
-            SR_ERROR("MP3DataProvider::MP3DataProvider() : failed to load buffer!");
+            SR_ERROR("MP3DataProvider::MP3DataProvider() : failed to load a buffer!");
             return;
         }
 
         /** dec.samples, dec.info.hz, dec.info.layer, dec.info.channels should be filled */
         if (mp3dec_ex_seek(&m_decoderData->mp3d, 0))
         {
-            SR_ERROR("MP3DataProvider::MP3DataProvider() : failed to seek buffer!");
+            SR_ERROR("MP3DataProvider::MP3DataProvider() : failed to seek a buffer!");
             return;
         }
 
@@ -45,7 +45,7 @@ namespace SR_AUDIO_NS {
                 /// TODO
             }
 
-            SR_ERROR("MP3DataProvider::MP3DataProvider() : samples count are different!");
+            SR_ERROR("MP3DataProvider::MP3DataProvider() : samples count is different!");
             return;
         }
 

@@ -42,7 +42,7 @@ namespace Framework::Graphics::VulkanTools {
             m_pool   = m_kernel->GetCmdPool();
 
             if (!m_descriptorManager || !m_device || !m_pool) {
-                SR_ERROR("MemoryManager::Initialize() : failed to get (descriptor manager/device/cmd pool)!");
+                SR_ERROR("MemoryManager::Initialize() : failed to get a (descriptor manager/device/cmd pool)!");
                 return false;
             }
 
@@ -67,7 +67,7 @@ namespace Framework::Graphics::VulkanTools {
 
         template<typename T> bool FreeMemory(uint32_t id, uint32_t maxCount, T** pool) const {
             if (id >= maxCount) {
-                SR_ERROR("MemoryManager::FreeMemory() : list index out of range!");
+                SR_ERROR("MemoryManager::FreeMemory() : the list index is out of range!");
                 return false;
             }
 
@@ -80,7 +80,7 @@ namespace Framework::Graphics::VulkanTools {
                 return true;
             }
             else {
-                SR_ERROR("MemoryManager::FreeMemory() : id is not exists! (" + std::to_string(id) + ")");
+                SR_ERROR("MemoryManager::FreeMemory() : the id does not exist! (" + std::to_string(id) + ")");
             }
 
             return false;

@@ -24,19 +24,19 @@ namespace SR_GTYPES_NS {
 
     bool Texture::Destroy() {
         if (IsDestroyed()) {
-            SRAssert2(false, "Texture already destroyed!");
+            SRAssert2(false, "The texture is already destroyed!");
             return false;
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
-            SR_LOG("Texture::Destroy() : destroying texture...");
+            SR_LOG("Texture::Destroy() : destroying the texture...");
         }
 
         if (m_render) {
             m_render->FreeTexture(this);
         }
         else if (IsCalculated()) {
-            SRAssert2(false, "Render lost!");
+            SRAssert2(false, "Render is lost!");
         }
 
         return IResource::Destroy();
@@ -116,18 +116,18 @@ namespace SR_GTYPES_NS {
         }
 
         if (!m_render) {
-            SR_ERROR("Texture::Calculate() : this texture is not register in render!");
+            SR_ERROR("Texture::Calculate() : this texture is not registered in render!");
             m_hasErrors = true;
             return false;
         }
 
         if (IsDestroyed()) {
-            SR_ERROR("Texture::Calculate() : texture is destroyed!");
+            SR_ERROR("Texture::Calculate() : the texture is destroyed!");
             return false;
         }
 
         if (m_isCalculated) {
-            SR_ERROR("Texture::Calculate() : texture already calculated!");
+            SR_ERROR("Texture::Calculate() : the texture is already calculated!");
             return false;
         }
 
@@ -146,7 +146,7 @@ namespace SR_GTYPES_NS {
                 m_config.m_alpha == SR_UTILS_NS::BoolExt::None, m_config.m_cpuUsage);
 
         if (m_id == SR_ID_INVALID) { // TODO: vulkan can be return 0 as correct value
-            SR_ERROR("Texture::Calculate() : failed to calculate texture!");
+            SR_ERROR("Texture::Calculate() : failed to calculate the texture!");
             return false;
         }
         else {
@@ -172,7 +172,7 @@ namespace SR_GTYPES_NS {
         SR_SCOPED_LOCK
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
-            SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture video memory...");
+            SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture's video memory...");
         }
 
         if (!m_isCalculated) {
@@ -206,12 +206,12 @@ namespace SR_GTYPES_NS {
         }
 
         if (IsDestroyed()) {
-            SR_ERROR("Texture::GetId() : texture \"" + GetResourceId() + "\" is destroyed!");
+            SR_ERROR("Texture::GetId() : the texture \"" + GetResourceId() + "\" is destroyed!");
             return SR_ID_INVALID;
         }
 
         if (!m_isCalculated && !Calculate()) {
-            SR_ERROR("Texture::GetId() : failed to calculating texture!");
+            SR_ERROR("Texture::GetId() : failed to calculate the texture!");
             m_hasErrors = true;
             return SR_ID_INVALID;
         }
@@ -249,7 +249,7 @@ namespace SR_GTYPES_NS {
         Texture* texture = new Texture();
 
         if (!TextureLoader::LoadFromMemory(texture, data)) {
-            SRHalt("Texture::LoadFromMemory() : failed to load texture!");
+            SRHalt("Texture::LoadFromMemory() : failed to load the texture!");
             delete texture;
             return nullptr;
         }
@@ -300,7 +300,7 @@ namespace SR_GTYPES_NS {
     bool Texture::Reload() {
         SR_SCOPED_LOCK
 
-        SR_LOG("Texture::Reload() : reloading \"" + GetResourceId() + "\" texture...");
+        SR_LOG("Texture::Reload() : reloading \"" + GetResourceId() + "\" the texture...");
 
         m_loadState = LoadState::Reloading;
 
@@ -317,7 +317,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Texture::RemoveUsePoint() {
-        SRAssert2(m_countUses > 0, "count use points is zero!");
+        SRAssert2(m_countUses > 0, "use points count is zero!");
         --m_countUses;
     }
 }

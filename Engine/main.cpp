@@ -88,7 +88,7 @@ using namespace Framework::Audio;
 
 int main(int argc, char **argv) {
     if constexpr (sizeof(size_t) != 8) {
-        std::cerr << "The engine only supports 64-bit systems!\n";
+        std::cerr << "The engine supports only 64-bit systems!\n";
         return -1;
     }
 
@@ -191,7 +191,7 @@ int main(int argc, char **argv) {
         return -1500;
     }
     else {
-        SR_ERROR("System error: unknown environment! \"" + envName + "\" does not support!");
+        SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported!");
         ResourceManager::DestroySingleton();
         Debug::Instance().DestroySingleton();
         return -2000;
@@ -199,7 +199,7 @@ int main(int argc, char **argv) {
 
     Render* render = RenderManager::Instance().Allocate("Main");
     if (!render) {
-        SR_ERROR("FATAL: render is not support this pipeline!");
+        SR_ERROR("FATAL: render does not support this pipeline!");
         ResourceManager::DestroySingleton();
         Debug::Instance().DestroySingleton();
         return -1000;
@@ -227,16 +227,16 @@ int main(int argc, char **argv) {
 
             }
             else
-                SR_ERROR("Failed to running game engine!");
+                SR_ERROR("Failed to run game engine!");
         }
         else
-            SR_ERROR("Failed to initializing game engine!");
+            SR_ERROR("Failed to initialize game engine!");
     }
     else
-        SR_ERROR("Failed to creating game engine!");
+        SR_ERROR("Failed to create game engine!");
 
     if (engine.IsRun()) {
-        Debug::Instance().System("All systems successfully run!");
+        Debug::Instance().System("All systems are successfully running!");
 
         engine.Await(); // await close engine
     }
@@ -250,7 +250,7 @@ int main(int argc, char **argv) {
     Framework::Engine::DestroySingleton();
     Framework::Graphics::GUI::NodeManager::DestroySingleton();
 
-    Debug::Instance().System("All systems successfully closed!");
+    Debug::Instance().System("All systems were successfully closed!");
 
     ResourceManager::DestroySingleton();
 

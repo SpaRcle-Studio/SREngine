@@ -108,7 +108,7 @@ namespace SR_GTYPES_NS {
 
     bool Framebuffer::OnResize() {
         if (m_colors.empty()) {
-            SR_ERROR("Framebuffer::OnResize() : colors count isn't set!");
+            SR_ERROR("Framebuffer::OnResize() : colors count is not set!");
             m_hasErrors = true;
             return false;
         }
@@ -138,7 +138,7 @@ namespace SR_GTYPES_NS {
 
     void Framebuffer::SetImagesCount(uint32_t count) {
         if (m_isInit) {
-            SRHalt("Frame buffer are initialized!");
+            SRHalt("Frame buffer is initialized!");
             return;
         }
 

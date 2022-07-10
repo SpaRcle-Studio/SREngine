@@ -187,7 +187,7 @@ namespace SR_GRAPH_NS {
                 return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
             }
             else {
-                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!\n\tTexture id: " + std::to_string(id));
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture does not exist!\n\tTexture id: " + std::to_string(id));
                 SRHalt("Something went wrong...");
                 return nullptr;
             }
@@ -238,7 +238,7 @@ namespace SR_GRAPH_NS {
         /** \Vulkan Clear next frame buffer usage */
         SR_FORCE_INLINE void ClearBuffers() override {
             if (m_currentFBOid < 0) {
-                SR_ERROR("Vulkan::ClearBuffers() : frame buffer isn't attached!");
+                SR_ERROR("Vulkan::ClearBuffers() : frame buffer is not attached!");
                 return;
             }
             else if (m_currentFBOid > 0) {
@@ -278,7 +278,7 @@ namespace SR_GRAPH_NS {
         SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override {
             if (auto shader = m_memory->m_ShaderPrograms[shaderProgram]) {
                 if (m_currentFBOid < 0) {
-                    SR_ERROR("Vulkan::ReCreateShader() : frame buffer does not attached!");
+                    SR_ERROR("Vulkan::ReCreateShader() : frame buffer is not attached!");
                     return false;
                 }
 
@@ -293,7 +293,7 @@ namespace SR_GRAPH_NS {
                 }
             }
             else {
-                SR_ERROR("Vulkan::ReCreateShader() : shader isn't exists!");
+                SR_ERROR("Vulkan::ReCreateShader() : shader does not exist!");
                 return false;
             }
 

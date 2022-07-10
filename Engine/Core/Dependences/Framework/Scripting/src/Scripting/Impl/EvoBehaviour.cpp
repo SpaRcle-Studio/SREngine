@@ -9,7 +9,7 @@ namespace SR_SCRIPTING_NS {
         SR_SCOPED_LOCK
 
         if (m_script) {
-            SR_ERROR("EvoBehaviour::Load() : script already loaded!");
+            SR_ERROR("EvoBehaviour::Load() : script is already loaded!");
             return false;
         }
 
