@@ -46,7 +46,7 @@ namespace SR_GTYPES_NS {
     private:
         bool Init();
         bool OnResize();
-        bool InitShader(const std::string& path);
+        bool InitShader();
 
     private:
         Shader*              m_shader      = nullptr;
@@ -62,6 +62,7 @@ namespace SR_GTYPES_NS {
         int32_t              m_virtualUBO  = SR_ID_INVALID;
 
         SR_MATH_NS::IVector2 m_size        = { };
+        SR_UTILS_NS::Path    m_shaderPath  = SR_UTILS_NS::Path();
 
     };
 }

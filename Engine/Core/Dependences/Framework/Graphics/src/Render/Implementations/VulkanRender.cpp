@@ -20,9 +20,9 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
         /**
          * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
          */
-        shader->SetMat4(Shader::VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
-        shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
-        shader->SetFloat(Shader::TIME, time);
+        shader->SetMat4(SHADER_VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
+        shader->SetMat4(SHADER_PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
+        shader->SetFloat(SHADER_TIME, time);
 
         for (auto const& [key, meshGroup] : subCluster.m_groups) {
             for (const auto &mesh : meshGroup) {
@@ -37,7 +37,7 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
 
                 mesh->GetMaterial()->Use();
 
-                shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
+                shader->SetMat4(SHADER_MODEL_MATRIX, mesh->GetModelMatrixRef());
 
                 if (uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                     SR_ERROR("VulkanRender::UpdateUBOs() : memory has been duplicated!");
@@ -55,9 +55,9 @@ void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
             return;
         }
 
-        shader->SetMat4(Shader::VIEW_NO_TRANSLATE_MATRIX, m_currentCamera->GetViewRef());
-        shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
-        shader->SetFloat(Shader::TIME, time);
+        shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_currentCamera->GetViewRef());
+        shader->SetMat4(SHADER_PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
+        shader->SetFloat(SHADER_TIME, time);
 
         auto&& virtualUbo = m_skybox->GetVirtualUBO();
         if (virtualUbo == SR_ID_INVALID) {

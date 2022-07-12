@@ -5,7 +5,9 @@
 #include <Memory/ShaderProgramManager.h>
 
 namespace SR_GRAPH_NS::Memory {
-    ShaderProgramManager::ShaderProgramManager() {
+    ShaderProgramManager::ShaderProgramManager()
+        : SR_UTILS_NS::Singleton<ShaderProgramManager>()
+    {
         m_virtualTable.max_load_factor(0.9f);
         m_virtualTable.reserve(1000);
     }
@@ -155,6 +157,54 @@ namespace SR_GRAPH_NS::Memory {
         env->UseShader(static_cast<ShaderProgram>(fboIt->second));
 
         return result;
+    }
+
+    bool ShaderProgramManager::FreeProgram(VirtualProgram *program) {
+        if (!SRVerifyFalse(!program)) {
+            return false;
+        }
+
+        auto&& pIt = m_virtualTable.find(*program);
+        if (pIt == std::end(m_virtualTable)) {
+            SRHalt("ShaderProgramManager::FreeProgram() : virtual program not found!");
+            return false;
+        }
+
+        auto&& env = Environment::Get();
+        auto&& [_, info] = *pIt;
+
+        for (auto&& [fbo /** unused */, shaderProgram] : info.m_data) {
+            env->DeleteShader(shaderProgram);
+        }
+
+        m_virtualTable.erase(pIt);
+
+        *program = SR_ID_INVALID;
+
+        return true;
+    }
+
+    ShaderProgramManager::ShaderProgram ShaderProgramManager::GetProgram(VirtualProgram virtualProgram) const noexcept {
+        SR_LOCK_GUARD
+
+        auto&& pIt = m_virtualTable.find(virtualProgram);
+        if (pIt == std::end(m_virtualTable)) {
+            SRHalt("ShaderProgramManager::GetProgram() : virtual program not found!");
+            return SR_ID_INVALID;
+        }
+
+        auto&& env = Environment::Get();
+        auto&& [_, info] = *pIt;
+        auto&& framebufferId = static_cast<int32_t>(env->GetCurrentFBO());
+        auto&& fboIt = info.m_data.find(framebufferId);
+
+        if (fboIt == std::end(info.m_data))
+        {
+            SRHalt("ShaderProgramManager::GetProgram() : framebuffer not found!!");
+            return SR_ID_INVALID;
+        }
+
+        return fboIt->second;
     }
 }
 

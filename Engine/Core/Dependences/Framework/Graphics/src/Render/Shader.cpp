@@ -27,21 +27,20 @@ namespace SR_GRAPH_NS {
     }
 
     bool Shader::Init() {
-        if (m_isInit)
+        if (m_isInit) {
+            SRHalt("Double shader initialization!");
             return true;
+        }
 
         if (!SRVerifyFalse2(!(m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
             m_hasErrors = true;
             return false;
         }
 
-        if (!Compile()) {
-            SR_ERROR("Shader::Init() : failed compiling shader!");
-            return false;
-        }
-
-        if (!Link()) {
-            SR_ERROR("Shader::Init() : failed linking shader!");
+        m_shaderProgram = Memory::ShaderProgramManager::Instance().ReAllocate(m_shaderProgram, m_shaderCreateInfo);
+        if (m_shaderProgram == SR_ID_INVALID) {
+            SR_ERROR("Shader::Init() : failed to allocate shader program!");
+            m_hasErrors = true;
             return false;
         }
 
@@ -57,105 +56,24 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Shader::Compile() {
-        if (m_isCompile) {
-            SR_ERROR("Shader::Compile() : shader already compile!");
-            return false;
-        }
-
-        SR_SHADER_LOG("Shader::Compile() : compiling \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
-
-        auto&& env = Environment::Get();
-
-        m_fbo = env->GetCurrentFBO();
-
-        if (env->GetPipeLine() == PipeLine::OpenGL) {
-            if (!env->CompileShader(m_shaderCreateInfo.path, m_fbo, &m_shaderTempData)) {
-                SR_ERROR("Shader::Compile() : failed to compile opengl \"" + m_shaderCreateInfo.path.ToString() + "\" shader!");
-                return false;
-            }
-        }
-        else {
-            auto&& sizes = std::vector<uint64_t>();
-            sizes.reserve(m_shaderCreateInfo.uniforms.size());
-            for (auto&& [binding, size] : m_shaderCreateInfo.uniforms)
-                sizes.push_back(size);
-
-            if (!env->CompileShader(m_shaderCreateInfo.path, m_fbo, &m_shaderTempData, sizes)) {
-                SR_ERROR("Shader::Compile() : failed to compile \"" + m_shaderCreateInfo.path.ToString() + "\" shader!");
-                return false;
-            }
-        }
-
-        m_isCompile = true;
-
-        return true;
-    }
-
-    bool Shader::Link() {
-        if (m_isLink) {
-            SR_ERROR("Shader::Link() : shader already linking!");
-            return false;
-        }
-
-        if (!m_isCompile) {
-            SR_ERROR("Shader::Link() : shader is not compile!");
-            return false;
-        }
-
-        auto&& env = Environment::Get();
-
-        SR_SHADER_LOG("Shader::Link() : linking \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
-
-        if (m_shaderProgram != SR_NULL_SHADER && !env->DeleteShader(m_shaderProgram)) {
-            SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_shaderCreateInfo.path.ToString());
-        }
-
-        if (!env->LinkShader(&m_shaderProgram, &m_shaderTempData, m_shaderCreateInfo.vertexDescriptions, m_shaderCreateInfo.vertexAttributes,
-                               m_shaderCreateInfo)) {
-            SR_ERROR("Shader::Link() : failed linking \"" + m_shaderCreateInfo.path.ToString() + "\" shader!");
-            return false;
-        }
-
-        m_isLink = true;
-
-        return true;
-    }
-
     bool Shader::Use() noexcept {
-        if (!m_isInit) {
-            if (m_hasErrors)
-                return false;
-
-            if (!Init()) {
-                SR_ERROR("Shader::Use() : failed to initialize shader!");
-                m_hasErrors = true;
-                return false;
-            }
-            m_isInit = true;
+        if (m_hasErrors) {
+            return false;
         }
 
-        auto&& env = Environment::Get();
-
-        if (m_fbo != env->GetCurrentFBO()) {
-            if (m_fbo == SR_ID_INVALID) {
-                SR_INFO("Shader::Use() : re-create \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
-                if (!env->ReCreateShader(m_shaderProgram)) {
-                    SR_ERROR("Shader::Use() : failed to re-create shader!");
-                    m_hasErrors = true;
-                    return false;
-                }
-                else
-                    m_fbo = env->GetCurrentFBO();
-            }
-            else {
-                SRHalt("Shader::Use() : frame buffer was been changed!");
-            }
+        if (!m_isInit && !Init()) {
+            SR_ERROR("Shader::Use() : failed to initialize shader!");
+            return false;
         }
 
-        env->UseShader(m_shaderProgram);
-
-        return true;
+        switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
+            case Memory::ShaderProgramManager::BindResult::Success:
+            case Memory::ShaderProgramManager::BindResult::Duplicated:
+                return true;
+            case Memory::ShaderProgramManager::BindResult::Failed:
+            default:
+                return false;
+        }
     }
 
     void Shader::UnUse() noexcept {
@@ -167,13 +85,9 @@ namespace SR_GRAPH_NS {
         if (m_isInit) {
             SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader class pointer and free video memory...");
 
-            auto&& env = Environment::Get();
-
-            if (!env->DeleteShader(m_shaderProgram)) {
-                SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_shaderCreateInfo.path.ToString());
+            if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
+                SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + m_shaderCreateInfo.path.ToString());
             }
-
-            m_shaderProgram = SR_NULL_SHADER;
         }
         else {
             SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader class pointer...");
@@ -217,19 +131,16 @@ namespace SR_GRAPH_NS {
     }
 
     int32_t Shader::GetID() {
-        if (!m_isInit) {
-            if (m_hasErrors)
-                return false;
-
-            if (!Init()) {
-                SR_ERROR("Shader::GetID() : failed to initialize shader!");
-                m_hasErrors = true;
-                return SR_ID_INVALID;
-            }
-            m_isInit = true;
+        if (m_hasErrors) {
+            return false;
         }
 
-        return m_shaderProgram;
+        if (!m_isInit && !Init()) {
+            SR_ERROR("Shader::Use() : failed to initialize shader!");
+            return false;
+        }
+
+        return Memory::ShaderProgramManager::Instance().GetProgram(m_shaderProgram);
     }
 
     void Shader::SetBool(uint64_t hashId, const bool &v) noexcept { SetValue(hashId, v); }
@@ -340,7 +251,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool Shader::Reload() {
-        SR_SHADER_LOG("Shader::Reload() : reloading \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
+        SR_SHADER_LOG("Shader::Reload() : reloading \"" + GetResourceId() + "\" shader...");
 
         m_loadState = LoadState::Reloading;
 
@@ -458,11 +369,7 @@ namespace SR_GRAPH_NS {
         bool hasErrors = !IResource::Unload();
 
         m_isInit = false;
-
         m_hasErrors = false;
-
-        m_isCompile = false;
-        m_isLink = false;
 
         m_uniformBlock.DeInit();
 

@@ -4,12 +4,14 @@ PolygonMode Fill;
 CullMode Front;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled false;
+BlendEnabled true;
 DepthWrite false;
 DepthTest false;
 
 void fragment() {
-    COLOR_INDEX_0 = texture(COLOR_ATTACHMENT_0, UV);
+    if (UV.x < 0.0 || UV.x > 0.5) {
+        COLOR_INDEX_0 = texture(COLOR_ATTACHMENT_0, vec2(UV.x - 0.15, UV.y));
+    }
 }
 
 void vertex() {

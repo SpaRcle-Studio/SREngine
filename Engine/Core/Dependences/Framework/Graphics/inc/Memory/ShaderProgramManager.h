@@ -40,6 +40,7 @@ namespace SR_GRAPH_NS::Memory {
      * Класс реализует возможность рендера одного объекта в несколько кадровых буферов
     */
     class SR_DLL_EXPORT ShaderProgramManager : public SR_UTILS_NS::Singleton<ShaderProgramManager> {
+        friend class SR_UTILS_NS::Singleton<ShaderProgramManager>;
     public:
         using VirtualProgram = int32_t;
         using ShaderProgram = int32_t;
@@ -56,7 +57,11 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualProgram ReAllocate(VirtualProgram program, const SRShaderCreateInfo& createInfo);
         SR_NODISCARD VirtualProgram Allocate(const SRShaderCreateInfo& createInfo);
 
+        bool FreeProgram(VirtualProgram* program);
+
         BindResult BindProgram(VirtualProgram virtualProgram) noexcept;
+
+        SR_NODISCARD ShaderProgram GetProgram(VirtualProgram virtualProgram) const noexcept;
 
     private:
         SR_NODISCARD VirtualProgram GenerateUnique() const;

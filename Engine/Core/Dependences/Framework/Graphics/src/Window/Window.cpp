@@ -538,18 +538,18 @@ namespace SR_GRAPH_NS {
 
         ///
 
-        //static auto* fbo1 = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(200));
+        //static auto* fbo1 = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(1000), "Engine/framebuffer_screen_left.srsl");
         //if (fbo1->Bind() && fbo1->BeginRender()) {
-        //    m_render->DrawGeometry();
+        //    //m_render->DrawGeometry();
         //    m_render->DrawSkybox();
         //    fbo1->EndRender();
         //}
-
-        //static auto* fbo2 = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(100));
-        //
+//
+        //static auto* fbo2 = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(1000), "Engine/framebuffer_screen_right.srsl");
+//
         //if (fbo2->Bind() && fbo2->BeginRender()) {
-        //    //m_render->DrawGeometry();
-        //    m_render->DrawSkybox();
+        //    m_render->DrawGeometry();
+        //    //m_render->DrawSkybox();
         //    fbo2->EndRender();
         //}
 
@@ -570,8 +570,8 @@ namespace SR_GRAPH_NS {
                 //fbo1->Draw();
                 //fbo2->Draw();
 
-                m_render->DrawGeometry();
                 m_render->DrawSkybox();
+                m_render->DrawGeometry();
             }
             m_env->EndRender();
         }

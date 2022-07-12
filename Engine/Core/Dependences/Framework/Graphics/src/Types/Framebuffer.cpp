@@ -22,7 +22,7 @@ namespace SR_GTYPES_NS {
     }
 
     Framebuffer *Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size) {
-        return Create(images, size, std::string());
+        return Create(images, size, "Engine/framebuffer.srsl");
     }
 
     Framebuffer::Ptr Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size, const std::string& shaderPath) {
@@ -32,10 +32,7 @@ namespace SR_GTYPES_NS {
 
         fbo->SetSize(size);
         fbo->SetImagesCount(images);
-
-        if (!shaderPath.empty()) {
-            fbo->InitShader(shaderPath);
-        }
+        fbo->m_shaderPath = shaderPath;
 
         return fbo;
     }
@@ -65,9 +62,9 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    bool Framebuffer::InitShader(const std::string& path) {
+    bool Framebuffer::InitShader() {
         if (!m_shader) {
-            if (!(m_shader = Shader::Load(path))) {
+            if (!(m_shader = Shader::Load(m_shaderPath))) {
                 m_hasErrors = false;
                 return false;
             }
@@ -99,10 +96,10 @@ namespace SR_GTYPES_NS {
         m_shader->Flush();
 
         for (uint32_t i = 0; i < static_cast<uint32_t>(m_colors.size()); ++i) {
-            m_shader->SetSampler2D(Shader::COLOR_ATTACHMENTS[i], m_colors[i]);
+            m_shader->SetSampler2D(SHADER_COLOR_ATTACHMENTS[i], m_colors[i]);
         }
 
-        m_shader->SetSampler2D(Shader::DEPTH_ATTACHMENT, m_depth);
+        m_shader->SetSampler2D(SHADER_DEPTH_ATTACHMENT, m_depth);
 
         /// сбрасываем значение
         uboManager.SetIgnoreCameras(false);
@@ -201,7 +198,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        if ((!m_shader || m_dirtyShader) && !InitShader("Engine/framebuffer.srsl")) {
+        if ((!m_shader || m_dirtyShader) && !InitShader()) {
             return;
         }
 

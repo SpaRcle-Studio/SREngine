@@ -149,7 +149,7 @@ namespace SR_GTYPES_NS {
             m_shader->InitUBOBlock();
             m_shader->Flush();
 
-            m_shader->SetSamplerCube(Shader::SKYBOX_DIFFUSE, m_cubeMap);
+            m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
         }
 
         m_env->BindVBO(m_VBO);
@@ -159,7 +159,7 @@ namespace SR_GTYPES_NS {
             case Memory::UBOManager::BindResult::Duplicated:
                 m_shader->InitUBOBlock();
                 m_shader->Flush();
-                m_shader->SetSamplerCube(Shader::SKYBOX_DIFFUSE, m_cubeMap);
+                m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
                 m_env->DrawIndices(36);
