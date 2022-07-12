@@ -239,7 +239,7 @@ namespace Framework::Graphics {
                 void** shaderData,
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
-                SRShaderCreateInfo shaderCreateInfo = {}) const override;
+                const SRShaderCreateInfo& shaderCreateInfo = {}) const override;
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
             glDeleteProgram(shaderProgram);

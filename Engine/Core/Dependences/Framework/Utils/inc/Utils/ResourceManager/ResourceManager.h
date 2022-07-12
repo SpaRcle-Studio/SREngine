@@ -37,8 +37,12 @@ namespace SR_UTILS_NS {
 
         void InspectResources(const std::function<void(const ResourcesTypes &)>& callback);
 
-        template<typename T> T* Find(const std::string& ID) {
-            return dynamic_cast<T*>(Find(typeid(T).name(), ID));
+        template<typename T> T* Find(const std::string& id) {
+            return dynamic_cast<T*>(Find(typeid(T).name(), id));
+        }
+
+        template<typename T> T* Find(const Path& path) {
+            return dynamic_cast<T*>(Find(typeid(T).name(), path.ToString()));
         }
 
         bool RegisterType(const std::string& type_name);

@@ -179,6 +179,7 @@ namespace SR_UTILS_NS {
 
     void Path::NormalizeSelf() {
         m_path = FileSystem::NormalizePath(m_path);
+        m_type = GetType();
     }
 
     bool Path::Empty() const {

@@ -36,6 +36,8 @@
 #include "../Graphics/src/Memory/TextureConfigs.cpp"
 #include "../Graphics/src/Memory/MeshManager.cpp"
 #include "../Graphics/src/Memory/UBOManager.cpp"
+#include "../Graphics/src/Memory/ShaderProgramManager.cpp"
+#include "../Graphics/src/Memory/ShaderUBOBlock.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"

@@ -219,6 +219,7 @@ namespace SR_UTILS_NS::Platform {
         }
 
         if (!from.IsDir()) {
+            SR_WARN(SR_FORMAT("Platform::Copy() : \"%s\" is not directory!", from.c_str()));
             return false;
         }
 

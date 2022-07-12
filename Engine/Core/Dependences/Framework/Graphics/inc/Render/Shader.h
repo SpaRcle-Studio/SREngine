@@ -5,15 +5,14 @@
 #ifndef GAMEENGINE_SHADER_H
 #define GAMEENGINE_SHADER_H
 
-#include <Environment/Basic/IShaderProgram.h>
-
 #include <Types/Vertices.h>
 #include <Types/Uniforms.h>
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/ResourceManager/IResource.h>
-#include <Utils/Types/Map.h>
+
+#include <Memory/ShaderUBOBlock.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -24,53 +23,14 @@ namespace SR_GRAPH_NS {
     class Shader;
     class Environment;
 
-    class ShaderUBOBlock {
-        friend class Shader;
-
-        struct SubBlock {
-            ShaderVarType type;
-            uint32_t size;
-            uint32_t offset;
-            bool hidden;
-        };
-
+    class Shader : public SR_UTILS_NS::IResource {
     public:
-        ShaderUBOBlock();
-
-    public:
-
-        void Append(uint64_t hashId, ShaderVarType type, bool hidden);
-        void Init();
-        void DeInit();
-        void SetField(uint64_t hashId, const void* data) noexcept;
-
-        SR_NODISCARD uint32_t GetBinding() const { return m_binding; }
-        SR_NODISCARD bool Valid() const { return m_memory && m_binding != SR_ID_INVALID; }
-
-    private:
-        uint32_t m_binding = SR_ID_INVALID;
-        google::dense_hash_map<uint64_t, SubBlock> m_data;
-        uint32_t m_size = 0;
-        char* m_memory = nullptr;
-
-    };
-
-    class Shader : public Helper::IResource {
-    public:
-        explicit Shader(std::string path);
-        Shader(std::string path, std::string name);
+        Shader();
 
     private:
         ~Shader() override;
 
     public:
-        typedef enum {
-            Skybox = 1,
-            DebugWireframe = 3,
-            Grid = 4,
-            Custom = 0xffff,
-        } StandardID;
-
         static constexpr uint64_t MODEL_MATRIX = SR_COMPILE_TIME_CRC32_STR("MODEL_MATRIX");
         static constexpr uint64_t VIEW_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_MATRIX");
         static constexpr uint64_t VIEW_NO_TRANSLATE_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_NO_TRANSLATE_MATRIX");
@@ -97,13 +57,12 @@ namespace SR_GRAPH_NS {
     public:
         bool Init();
 
-        static Shader* Load(const SR_UTILS_NS::Path& path);
-        static Shader* LoadFromConfig(const std::string& name);
+        static Shader* Load(const SR_UTILS_NS::Path& rawPath);
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE std::string GetPath() const { return m_path; }
+        //SR_NODISCARD SR_FORCE_INLINE std::string GetPath() const { return m_path; }
         SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { return m_render; }
-        SR_NODISCARD SR_FORCE_INLINE std::string GetName() const { return m_name; }
+        //SR_NODISCARD SR_FORCE_INLINE std::string GetName() const { return m_name; }
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         //SR_NODISCARD int32_t GetUBO(const uint32_t& index) const;
         SR_NODISCARD int32_t GetID();
@@ -122,15 +81,15 @@ namespace SR_GRAPH_NS {
         void FreeVideoMemory();
         bool Reload() override;
 
-        bool SetVertex(const VertexDescriptions& descriptions, const VertexAttributes& attributes);
+        //bool SetVertex(const VertexDescriptions& descriptions, const VertexAttributes& attributes);
 
         /**
          * 0 - binding
          * 1 - type
          * 2 - ubo size
          */
-        bool SetUniforms(const UBOInfo& uniforms);
-        bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
+        //bool SetUniforms(const UBOInfo& uniforms);
+        //bool SetCreateInfo(SRShaderCreateInfo shaderCreateInfo);
 
     public:
         template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
@@ -139,7 +98,7 @@ namespace SR_GRAPH_NS {
             }
 
             if constexpr (shared) {
-                m_uniformSharedBlock.SetField(hashId, &v);
+                //m_uniformSharedBlock.SetField(hashId, &v);
             }
             else {
                 m_uniformBlock.SetField(hashId, &v);
@@ -162,33 +121,30 @@ namespace SR_GRAPH_NS {
     private:
         void SetSampler(uint64_t hashId, int32_t sampler) noexcept;
 
-    private:
-        SR_SHADER_PROGRAM     m_shaderProgram        = SR_NULL_SHADER;
-        void*                 m_shaderTempData       = nullptr;
+    protected:
+        bool Load() override;
+        bool Unload() override;
 
-        std::atomic<bool>     m_isLink               = false;
-        std::atomic<bool>     m_isCompile            = false;
-        std::atomic<bool>     m_hasErrors            = false;
-        std::atomic<bool>     m_isInit               = false;
+    private:
+        SR_SHADER_PROGRAM      m_shaderProgram        = SR_NULL_SHADER;
+        void*                  m_shaderTempData       = nullptr;
+
+        std::atomic<bool>      m_isLink               = false;
+        std::atomic<bool>      m_isCompile            = false;
+        std::atomic<bool>      m_hasErrors            = false;
+        std::atomic<bool>      m_isInit               = false;
 
     private: // For vulkan
-        SRShaderCreateInfo    m_shaderCreateInfo     = {};
-        VertexAttributes      m_verticesAttributes   = {};
-        VertexDescriptions    m_verticesDescription  = {};
+        SRShaderCreateInfo     m_shaderCreateInfo     = {};
 
-        int32_t               m_fbo                  = SR_ID_INVALID;
+        int32_t                m_fbo                  = SR_ID_INVALID;
 
-        UBOInfo               m_uniformsInfo         = {};
-        ShaderUBOBlock        m_uniformBlock         = ShaderUBOBlock();
-        ShaderUBOBlock        m_uniformSharedBlock   = ShaderUBOBlock();
-        ShaderSamplers        m_samplers             = ShaderSamplers();
-        ShaderProperties      m_properties           = ShaderProperties();
+        Memory::ShaderUBOBlock m_uniformBlock         = Memory::ShaderUBOBlock();
+        ShaderSamplers         m_samplers             = ShaderSamplers();
+        ShaderProperties       m_properties           = ShaderProperties();
 
     private:
-        Render*               m_render               = nullptr;
-        Environment*          m_env                  = nullptr;
-        std::string           m_name                 = "Unnamed";
-        std::string           m_path                 = "Unknown";
+        Render*                m_render               = nullptr;
 
     };
 }

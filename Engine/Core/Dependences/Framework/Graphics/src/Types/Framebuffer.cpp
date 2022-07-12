@@ -83,6 +83,9 @@ namespace SR_GTYPES_NS {
 
         env->SetCurrentShaderId(m_shader->GetID());
 
+        /// кадровый буфер работает незваисимо от камеры
+        uboManager.SetIgnoreCameras(true);
+
         if ((m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, uboBlockSize, samplersCount)) != SR_ID_INVALID) {
             uboManager.BindUBO(m_virtualUBO);
         }
@@ -100,6 +103,9 @@ namespace SR_GTYPES_NS {
         }
 
         m_shader->SetSampler2D(Shader::DEPTH_ATTACHMENT, m_depth);
+
+        /// сбрасываем значение
+        uboManager.SetIgnoreCameras(false);
 
         return true;
     }
@@ -207,17 +213,23 @@ namespace SR_GTYPES_NS {
             return;
         }
 
+        /// кадровый буфер работает незваисимо от камеры
+        uboManager.SetIgnoreCameras(true);
+
         switch (uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Success:
                 env->Draw(3);
                 break;
             case Memory::UBOManager::BindResult::Duplicated:
-                SRHalt0();
+                SRHalt("Framebuffer memory has been duplicated!");
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Failed:
             default:
                 break;
         }
+
+        /// сбрасываем значение
+        uboManager.SetIgnoreCameras(false);
 
         m_shader->UnUse();
     }

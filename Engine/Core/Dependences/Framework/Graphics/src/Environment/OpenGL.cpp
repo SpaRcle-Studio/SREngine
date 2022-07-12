@@ -414,7 +414,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
         void** shaderData,
         const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
         const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-        SRShaderCreateInfo shaderCreateInfo) const
+        const SRShaderCreateInfo& shaderCreateInfo) const
 {
     if (!shaderProgram)
         return false;

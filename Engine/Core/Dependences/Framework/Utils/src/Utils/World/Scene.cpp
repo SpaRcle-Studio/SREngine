@@ -236,6 +236,9 @@ namespace SR_WORLD_NS {
             SaveRegion(pRegion);
         }
 
+
+        m_path.Normalize();
+
         return xml.Save(m_path.Concat("main.scene"));
     }
 

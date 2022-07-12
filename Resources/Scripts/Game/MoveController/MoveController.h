@@ -20,6 +20,9 @@ private:
     SR_PROPERTY(speed)
     float_t speed;
 
+    SR_PROPERTY(wind)
+    float_t wind;
+
     SR_PROPERTY(checkbox)
     bool checkbox;
 

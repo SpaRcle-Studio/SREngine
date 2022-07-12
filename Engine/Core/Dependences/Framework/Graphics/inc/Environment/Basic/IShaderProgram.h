@@ -160,7 +160,7 @@ namespace Framework::Graphics {
             TriangleStripWithAdjacency,
             PathList)
 
-    struct Uniform {
+    struct SR_DLL_EXPORT Uniform {
         LayoutBinding type;
         ShaderStage stage;
         uint32_t binding;
@@ -177,22 +177,91 @@ namespace Framework::Graphics {
         GreaterOrEqual,
         Always)
 
-    struct SRShaderCreateInfo {
-        PolygonMode       polygonMode       = PolygonMode::Unknown;
-        CullMode          cullMode          = CullMode::Unknown;
-        DepthCompare      depthCompare      = DepthCompare::Unknown;
-        PrimitiveTopology primitiveTopology = PrimitiveTopology::Unknown;
+    struct SR_DLL_EXPORT SRShaderCreateInfo {
+        SRShaderCreateInfo() = default;
 
-        bool blendEnabled = false;
-        bool depthWrite   = false;
-        bool depthTest    = false;
+        SRShaderCreateInfo(const SRShaderCreateInfo& ref)
+            : path(ref.path)
+            , polygonMode(ref.polygonMode)
+            , cullMode(ref.cullMode)
+            , depthCompare(ref.depthCompare)
+            , primitiveTopology(ref.primitiveTopology)
+            , vertexAttributes(ref.vertexAttributes)
+            , vertexDescriptions(ref.vertexDescriptions)
+            , uniforms(ref.uniforms)
+            , blendEnabled(ref.blendEnabled)
+            , depthWrite(ref.depthWrite)
+            , depthTest(ref.depthTest)
+        { }
 
-        [[nodiscard]] bool Validate() const {
+        SRShaderCreateInfo(SRShaderCreateInfo&& ref) noexcept {
+            path = std::exchange(ref.path, {});
+            polygonMode = std::exchange(ref.polygonMode, {});
+            cullMode = std::exchange(ref.cullMode, {});
+            depthCompare = std::exchange(ref.depthCompare, {});
+            primitiveTopology = std::exchange(ref.primitiveTopology, {});
+            vertexAttributes = std::exchange(ref.vertexAttributes, {});
+            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
+            uniforms = std::exchange(ref.uniforms, {});
+            blendEnabled = std::exchange(ref.blendEnabled, {});
+            depthWrite = std::exchange(ref.depthWrite, {});
+            depthTest = std::exchange(ref.depthTest, {});
+        }
+
+        SRShaderCreateInfo& operator=(const SRShaderCreateInfo& ref) noexcept {
+            path = ref.path;
+            polygonMode = ref.polygonMode;
+            cullMode = ref.cullMode;
+            depthCompare = ref.depthCompare;
+            primitiveTopology = ref.primitiveTopology;
+            vertexAttributes = ref.vertexAttributes;
+            vertexDescriptions = ref.vertexDescriptions;
+            uniforms = ref.uniforms;
+            blendEnabled = ref.blendEnabled;
+            depthWrite = ref.depthWrite;
+            depthTest = ref.depthTest;
+            return *this;
+        }
+
+        SRShaderCreateInfo& operator=(SRShaderCreateInfo&& ref) noexcept {
+            path = std::exchange(ref.path, {});
+            polygonMode = std::exchange(ref.polygonMode, {});
+            cullMode = std::exchange(ref.cullMode, {});
+            depthCompare = std::exchange(ref.depthCompare, {});
+            primitiveTopology = std::exchange(ref.primitiveTopology, {});
+            vertexAttributes = std::exchange(ref.vertexAttributes, {});
+            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
+            uniforms = std::exchange(ref.uniforms, {});
+            blendEnabled = std::exchange(ref.blendEnabled, {});
+            depthWrite = std::exchange(ref.depthWrite, {});
+            depthTest = std::exchange(ref.depthTest, {});
+            return *this;
+        }
+
+    public:
+        SR_NODISCARD bool Validate() const noexcept {
             return polygonMode       != PolygonMode::Unknown
                    && cullMode          != CullMode::Unknown
                    && depthCompare      != DepthCompare::Unknown
                    && primitiveTopology != PrimitiveTopology::Unknown;
         }
+
+    public:
+        SR_UTILS_NS::Path path;
+
+        PolygonMode       polygonMode       = PolygonMode::Unknown;
+        CullMode          cullMode          = CullMode::Unknown;
+        DepthCompare      depthCompare      = DepthCompare::Unknown;
+        PrimitiveTopology primitiveTopology = PrimitiveTopology::Unknown;
+
+        VertexAttributes vertexAttributes;
+        VertexDescriptions vertexDescriptions;
+        UBOInfo uniforms;
+
+        bool blendEnabled = false;
+        bool depthWrite   = false;
+        bool depthTest    = false;
+
     };
 
     static LayoutBinding GetBindingType(const std::string& line) {

@@ -38,7 +38,7 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
 
     {
         m_postProcessingShader = Shader::Load("postProcessing");
-        m_blurShader = new Shader("engine/blur");
+        //m_blurShader = new Shader("engine/blur");
     }
 
     m_isInit = true;

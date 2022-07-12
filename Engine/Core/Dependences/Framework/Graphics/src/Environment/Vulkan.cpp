@@ -348,7 +348,7 @@ namespace Framework::Graphics {
             void **shaderData,
             const std::vector<SR_VERTEX_DESCRIPTION> &vertexDescriptions,
             const std::vector<std::pair<Vertices::Attribute, size_t>> &vertexAttributes,
-            SRShaderCreateInfo shaderCreateInfo) const {
+            const SRShaderCreateInfo& shaderCreateInfo) const {
         if (!shaderData) {
             SR_ERROR("Vulkan::LinkShader() : shader data is nullptr!");
             return false;
@@ -375,15 +375,14 @@ namespace Framework::Graphics {
 
         /** Так как геометрия грузится отзеркаленная по оси X, то она выворачивается наизнанку,
          * соответственно, нужно изменить отсечения полигонов на обратный */
-        if (shaderCreateInfo.cullMode == CullMode::Back)
-            shaderCreateInfo.cullMode = CullMode::Front;
-        else if (shaderCreateInfo.cullMode == CullMode::Front)
-            shaderCreateInfo.cullMode = CullMode::Back;
+        const CullMode cullMode =
+                shaderCreateInfo.cullMode == CullMode::Back ? CullMode::Front :
+                    (shaderCreateInfo.cullMode == CullMode::Front ? CullMode::Back : shaderCreateInfo.cullMode);
 
         if (!shaderCreateInfo.Validate()) {
             SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info! Create info:"
                      "\n\tPolygon mode: " + EnumPolygonModeToString(shaderCreateInfo.polygonMode) +
-                     "\n\tCull mode: " + EnumCullModeToString(shaderCreateInfo.cullMode) +
+                     "\n\tCull mode: " + EnumCullModeToString(cullMode) +
                      "\n\tDepth compare: " + EnumDepthCompareToString(shaderCreateInfo.depthCompare) +
                      "\n\tPrimitive topology: " + EnumPrimitiveTopologyToString(shaderCreateInfo.primitiveTopology)
             );
@@ -393,7 +392,7 @@ namespace Framework::Graphics {
 
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
                 VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
-                VulkanTools::AbstractCullModeToVk(shaderCreateInfo.cullMode),
+                VulkanTools::AbstractCullModeToVk(cullMode),
                 VulkanTools::AbstractDepthOpToVk(shaderCreateInfo.depthCompare),
                 shaderCreateInfo.blendEnabled,
                 shaderCreateInfo.depthWrite,
@@ -676,6 +675,29 @@ namespace Framework::Graphics {
             m_basicWindow->GetWidth(),
             m_basicWindow->GetHeight()
         };
+    }
+
+    int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo &createInfo, int32_t fbo) {
+        void* temp = nullptr;
+
+        auto&& sizes = std::vector<uint64_t>();
+        sizes.reserve(createInfo.uniforms.size());
+        for (auto&& [binding, size] : createInfo.uniforms)
+            sizes.push_back(size);
+
+        if (!CompileShader(createInfo.path.ToString(), fbo, &temp, sizes)) {
+            SR_ERROR("Vulkan::AllocateShaderProgram() : failed to compile \"" + createInfo.path.ToString() + "\" shader!");
+            return SR_ID_INVALID;
+        }
+
+        int32_t program = SR_ID_INVALID;
+
+        if (!LinkShader(&program, &temp, createInfo.vertexDescriptions, createInfo.vertexAttributes, createInfo)) {
+            SR_ERROR("Vulkan::AllocateShaderProgram() : failed linking \"" + createInfo.path.ToString() + "\" shader!");
+            return false;
+        }
+
+        return program;
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GRAPH_NS::Memory {
-    struct VirtualUBOInfo : public SR_UTILS_NS::NonCopyable {
+    struct SR_DLL_EXPORT VirtualUBOInfo : public SR_UTILS_NS::NonCopyable {
         using Descriptor = int32_t;
         using UBO = int32_t;
 
@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS::Memory {
     /**
      * Класс реализует возможность рендера в несколько камер с нескольких ракурсов
     */
-    class UBOManager : public SR_UTILS_NS::Singleton<UBOManager> {
+    class SR_DLL_EXPORT UBOManager : public SR_UTILS_NS::Singleton<UBOManager> {
         friend class SR_UTILS_NS::Singleton<UBOManager>;
         using VirtualUBO = int32_t;
         using Descriptor = int32_t;
@@ -71,6 +71,7 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualUBO AllocateUBO(uint32_t uboSize, uint32_t samples);
         bool FreeUBO(VirtualUBO* ubo);
         BindResult BindUBO(VirtualUBO ubo) noexcept;
+        void SetIgnoreCameras(bool value);
 
     private:
         SR_NODISCARD bool AllocMemory(UBO* ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples, int32_t shader);
@@ -82,6 +83,7 @@ namespace SR_GRAPH_NS::Memory {
         ska::flat_hash_map<VirtualUBO, VirtualUBOInfo> m_virtualTable;
         Camera* m_camera = nullptr;
         bool m_singleCameraMode = false;
+        bool m_ignoreCameras = false;
 
     };
 }

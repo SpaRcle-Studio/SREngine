@@ -228,6 +228,8 @@ namespace SR_UTILS_NS {
             m_force = true;
         }
 
+        /// TODO: добавить таймер, по истечению которого поток будет умирать, чтобы не стоять в deadlock'е
+
         while (!m_destroyIsEmpty) {
             if (!m_thread->Joinable()) {
                 SR_ERROR("ResourceManager::Synchronize() : thread is dead!");

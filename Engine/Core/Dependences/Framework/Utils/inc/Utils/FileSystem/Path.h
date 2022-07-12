@@ -56,6 +56,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint64_t GetFileHash() const;
         SR_NODISCARD uint64_t GetFolderHash(uint64_t deep = SR_UINT64_MAX) const;
         SR_NODISCARD const char* CStr() const;
+        SR_NODISCARD const char* c_str() const { return CStr(); }
 
         SR_NODISCARD Path GetPrevious() const;
         SR_NODISCARD Path GetFolder() const;
@@ -65,6 +66,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;
+        SR_NODISCARD bool empty() const { return Empty(); }
         SR_NODISCARD bool IsSubPath(const Path& subPath) const;
         SR_NODISCARD bool IsHidden() const;
         SR_NODISCARD bool Exists() const;
@@ -72,8 +74,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Type GetType() const;
         SR_NODISCARD bool IsDir() const;
-        SR_NODISCARD bool IsAbs() const;
         SR_NODISCARD bool IsFile() const;
+        SR_NODISCARD bool IsAbs() const;
         SR_NODISCARD bool IsEmpty() const;
 
         SR_NODISCARD std::list<Path> GetFiles() const;

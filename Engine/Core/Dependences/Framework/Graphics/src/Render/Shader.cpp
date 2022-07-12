@@ -15,25 +15,16 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_GRAPH_NS {
-    Shader::Shader(std::string path, std::string name)
-            : IResource(typeid(Shader).name())
-            , m_env(Environment::Get())
-            , m_path(std::move(path))
-            , m_name(std::move(name))
-    {
-        SR_UTILS_NS::IResource::SetId(m_name);
-    }
+    Shader::Shader()
+        : IResource(typeid(Shader).name())
+    { }
 
     Shader::~Shader() {
         m_uniformBlock.DeInit();
-        m_uniformBlock = ShaderUBOBlock();
+        m_uniformBlock = Memory::ShaderUBOBlock();
 
         m_samplers.clear();
     }
-
-    Shader::Shader(std::string path)
-        : Shader(std::move(path), "Unnamed")
-    { }
 
     bool Shader::Init() {
         if (m_isInit)
@@ -72,24 +63,26 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        SR_SHADER_LOG("Shader::Compile() : compiling \"" + m_path + "\" shader...");
+        SR_SHADER_LOG("Shader::Compile() : compiling \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
 
-        m_fbo = m_env->GetCurrentFBO();
+        auto&& env = Environment::Get();
 
-        if (m_env->GetPipeLine() == PipeLine::OpenGL) {
-            if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData)) {
-                SR_ERROR("Shader::Compile() : failed to compile opengl \"" + m_path + "\" shader!");
+        m_fbo = env->GetCurrentFBO();
+
+        if (env->GetPipeLine() == PipeLine::OpenGL) {
+            if (!env->CompileShader(m_shaderCreateInfo.path, m_fbo, &m_shaderTempData)) {
+                SR_ERROR("Shader::Compile() : failed to compile opengl \"" + m_shaderCreateInfo.path.ToString() + "\" shader!");
                 return false;
             }
         }
         else {
             auto&& sizes = std::vector<uint64_t>();
-            sizes.reserve(m_uniformsInfo.size());
-            for (auto&& [binding, size] : m_uniformsInfo)
+            sizes.reserve(m_shaderCreateInfo.uniforms.size());
+            for (auto&& [binding, size] : m_shaderCreateInfo.uniforms)
                 sizes.push_back(size);
 
-            if (!m_env->CompileShader(m_path, m_fbo, &m_shaderTempData, sizes)) {
-                SR_ERROR("Shader::Compile() : failed to compile \"" + m_path + "\" shader!");
+            if (!env->CompileShader(m_shaderCreateInfo.path, m_fbo, &m_shaderTempData, sizes)) {
+                SR_ERROR("Shader::Compile() : failed to compile \"" + m_shaderCreateInfo.path.ToString() + "\" shader!");
                 return false;
             }
         }
@@ -110,15 +103,17 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        SR_SHADER_LOG("Shader::Link() : linking \"" + m_path + "\" shader...");
+        auto&& env = Environment::Get();
 
-        if (m_shaderProgram != SR_NULL_SHADER && !m_env->DeleteShader(m_shaderProgram)) {
-            SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_path);
+        SR_SHADER_LOG("Shader::Link() : linking \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
+
+        if (m_shaderProgram != SR_NULL_SHADER && !env->DeleteShader(m_shaderProgram)) {
+            SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_shaderCreateInfo.path.ToString());
         }
 
-        if (!m_env->LinkShader(&m_shaderProgram, &m_shaderTempData, m_verticesDescription, m_verticesAttributes,
+        if (!env->LinkShader(&m_shaderProgram, &m_shaderTempData, m_shaderCreateInfo.vertexDescriptions, m_shaderCreateInfo.vertexAttributes,
                                m_shaderCreateInfo)) {
-            SR_ERROR("Shader::Link() : failed linking \"" + m_path + "\" shader!");
+            SR_ERROR("Shader::Link() : failed linking \"" + m_shaderCreateInfo.path.ToString() + "\" shader!");
             return false;
         }
 
@@ -140,257 +135,86 @@ namespace SR_GRAPH_NS {
             m_isInit = true;
         }
 
-        if (m_fbo != m_env->GetCurrentFBO()) {
-            SR_INFO("Shader::Use() : re-create \"" + m_path + "\" shader...");
-            if (!m_env->ReCreateShader(m_shaderProgram)) {
-                SR_ERROR("Shader::Use() : failed to re-create shader!");
-                m_hasErrors = true;
-                return false;
+        auto&& env = Environment::Get();
+
+        if (m_fbo != env->GetCurrentFBO()) {
+            if (m_fbo == SR_ID_INVALID) {
+                SR_INFO("Shader::Use() : re-create \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
+                if (!env->ReCreateShader(m_shaderProgram)) {
+                    SR_ERROR("Shader::Use() : failed to re-create shader!");
+                    m_hasErrors = true;
+                    return false;
+                }
+                else
+                    m_fbo = env->GetCurrentFBO();
             }
-            else
-                m_fbo = m_env->GetCurrentFBO();
+            else {
+                SRHalt("Shader::Use() : frame buffer was been changed!");
+            }
         }
 
-        m_env->UseShader(m_shaderProgram);
+        env->UseShader(m_shaderProgram);
 
         return true;
     }
 
     void Shader::UnUse() noexcept {
-        m_env->UnUseShader();
+        auto&& env = Environment::Get();
+        env->UnUseShader();
     }
 
     void Shader::FreeVideoMemory() {
         if (m_isInit) {
-            SR_SHADER("Shader::Free() : free \"" + m_path + "\" shader class pointer and free video memory...");
+            SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader class pointer and free video memory...");
 
-            if (!m_env->DeleteShader(m_shaderProgram)) {
-                SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_path);
+            auto&& env = Environment::Get();
+
+            if (!env->DeleteShader(m_shaderProgram)) {
+                SR_ERROR("Shader::Free() : failed to free video memory! Name: " + m_shaderCreateInfo.path.ToString());
             }
 
             m_shaderProgram = SR_NULL_SHADER;
         }
         else {
-            SR_SHADER("Shader::Free() : free \"" + m_path + "\" shader class pointer...");
+            SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader class pointer...");
         }
     }
 
-    bool Shader::SetVertex(const VertexDescriptions& descriptions, const VertexAttributes& attributes) {
-        if (m_isInit && m_isCompile && m_isLink) {
-            SR_ERROR("Shader::SetVertexDescriptions() : shader already initialized!");
-            return false;
-        }
-        else {
-            m_verticesDescription = descriptions;
-            m_verticesAttributes = attributes;
-        }
+    Shader* Shader::Load(const SR_UTILS_NS::Path &rawPath) {
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        return true;
-    }
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetShadersPath());
 
-    bool Framework::Graphics::Shader::SetCreateInfo(SRShaderCreateInfo shaderCreateInfo) {
-        if (m_isInit && m_isCompile && m_isLink) {
-            SR_ERROR("Shader::SetCreateInfo() : shader already initialized!");
-            return false;
-        }
-        else
-            m_shaderCreateInfo = shaderCreateInfo;
-
-        return m_shaderCreateInfo.Validate();
-    }
-
-    bool Shader::SetUniforms(const UBOInfo &uniforms) {
-        if (m_isInit && m_isCompile && m_isLink) {
-            SR_ERROR("Shader::SetUniforms() : shader already initialized!");
-            return false;
-        }
-        else {
-            m_uniformsInfo = uniforms;
-        }
-
-        return true;
-    }
-
-    void ShaderUBOBlock::Append(uint64_t hashId, ShaderVarType type, bool hidden) {
-        auto &&size = GetShaderVarSize(type);
-
-        m_data.insert(std::make_pair(hashId, SubBlock{
-                .type = type,
-                .size = size,
-                .offset = m_size,
-                .hidden = hidden,
-        }));
-
-        m_size += size;
-    }
-
-    void ShaderUBOBlock::Init() {
-        if (m_memory) {
-            delete m_memory;
-            m_memory = nullptr;
-        }
-
-        m_memory = new char[m_size];
-    }
-
-    void ShaderUBOBlock::DeInit() {
-        m_data.clear();
-        m_size = 0;
-        m_binding = SR_ID_INVALID;
-
-        if (m_memory) {
-            delete m_memory;
-            m_memory = nullptr;
-        }
-    }
-
-    void ShaderUBOBlock::SetField(uint64_t hashId, const void *data) noexcept {
-        if (auto &&pIt = m_data.find(hashId); pIt != m_data.end() && m_memory) {
-            memcpy(m_memory + pIt->second.offset, data, pIt->second.size);
-        }
-    }
-
-    ShaderUBOBlock::ShaderUBOBlock() {
-        m_data.set_empty_key(static_cast<uint64_t>(0));
-    }
-
-    Shader* Shader::Load(const SR_UTILS_NS::Path &path) {
-        if (auto &&pShader = SR_UTILS_NS::ResourceManager::Instance().Find<Shader>(path.ToString())) {
+        if (auto&& pShader = resourceManager.Find<Shader>(path)) {
             return pShader;
         }
 
         SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
 
-        if (!SRVerifyFalse2(path.ToString().empty(), "Invalid shader path!")) {
+        if (!SRVerifyFalse2(path.Empty(), "Invalid shader path!")) {
             SR_WARN("Shader::Load() : failed to load shader!");
             return nullptr;
         }
 
-        if (path.GetExtensionView() == "srsl") {
-            auto &&shader = new Shader(std::string(), path.ToString());
-            shader->Reload();
-            return shader;
+        if (path.GetExtensionView() != "srsl") {
+            SR_ERROR("Shader::Load() : unknown extension!");
+            return nullptr;
         }
-        else
-            return LoadFromConfig(path.ToString());
-    }
 
-    Shader* Shader::LoadFromConfig(const std::string &name) {
-        std::vector<SR_XML_NS::Node> shaders = {};
+        auto&& pShader = new Shader();
 
-        auto findShader = [&shaders](const std::string &name) -> SR_XML_NS::Node {
-            for (const auto &shaderXml : shaders)
-                if (shaderXml.GetAttribute("name").ToString() == name)
-                    return shaderXml;
-            return SR_XML_NS::Node::Empty();
-        };
+        pShader->SetId(path.ToString(), false);
 
-        typedef std::function<SR_XML_NS::Node(const SR_XML_NS::Node &node, const std::string &attribName)> getInheritNodeFun;
-        getInheritNodeFun getInheritNode = [findShader, name, &getInheritNode](const SR_XML_NS::Node &node, const std::string &nodeName) -> SR_XML_NS::Node {
-            if (auto targetNode = node.GetNode(nodeName)) {
-                if (auto inherit = targetNode.GetAttribute("inherit")) {
-                    if (auto inheritShader = findShader(inherit.ToString()))
-                        return getInheritNode(inheritShader, nodeName);
-                    else
-                        SR_ERROR("Shader::Load() [getInheritAttrib] : \"" + inherit.ToString() +
-                                             "\" inherit shader not found! \n\tShader name: " + name);
-                } else
-                    return targetNode;
-            }
-            return SR_XML_NS::Node::Empty();
-        };
-
-        auto &&vertexParser = [=](Shader *shader, const SR_XML_NS::Node &node) {
-            if (auto vertex = getInheritNode(node, "Vertex")) {
-                auto[descr, attrib] = Vertices::GetVertexInfo(
-                        Vertices::StringToEnumType(vertex.GetAttribute("value").ToString()));
-                shader->SetVertex(descr, attrib);
-            }
-        };
-
-        auto &&uniformParsers = [=](Shader *shader, const SR_XML_NS::Node &node) {
-            if (auto xmlUniforms = getInheritNode(node, "Uniforms")) {
-                std::vector<std::pair<uint32_t, uint64_t>> uniforms = {};
-                for (const auto &uniform : xmlUniforms.GetNodes()) {
-                    uniforms.emplace_back(std::pair(
-                            (uint32_t) uniform.GetAttribute("binding").ToInt(),
-                            (uint64_t) GetUniformSize(uniform.GetAttribute("UBO").ToString()))
-                    );
-                }
-                shader->SetUniforms(uniforms);
-            }
-        };
-
-        auto &&infoParser = [=](Shader *shader, const SR_XML_NS::Node &node) {
-            auto createInfo = SRShaderCreateInfo();
-            if (auto info = getInheritNode(node, "Info")) {
-                if (auto value = info.GetNode("PolygonMode"))
-                    createInfo.polygonMode = StringToEnumPolygonMode(value.GetAttribute("value").ToString());
-
-                if (auto value = info.GetNode("CullMode"))
-                    createInfo.cullMode = StringToEnumCullMode(value.GetAttribute("value").ToString());
-
-                if (auto value = info.GetNode("DepthCompare"))
-                    createInfo.depthCompare = StringToEnumDepthCompare(value.GetAttribute("value").ToString());
-
-                if (auto value = info.GetNode("PrimitiveTopology"))
-                    createInfo.primitiveTopology = StringToEnumPrimitiveTopology(
-                            value.GetAttribute("value").ToString());
-
-                if (auto value = info.GetNode("BlendEnabled"))
-                    createInfo.blendEnabled = value.GetAttribute("value").ToBool();
-
-                if (auto value = info.GetNode("DepthWrite"))
-                    createInfo.depthWrite = value.GetAttribute("value").ToBool();
-
-                if (auto value = info.GetNode("DepthTest"))
-                    createInfo.depthTest = value.GetAttribute("value").ToBool();
-            }
-            SRAssert2(shader->SetCreateInfo(createInfo), "Failed to validate shader create info!");
-        };
-
-        auto &&shaderParser = [=](const SR_XML_NS::Node &node) -> Shader * {
-            if (auto path = node.GetAttribute("path"); path.Valid()) {
-                auto shader = new Shader(path.ToString(), name);
-                {
-                    vertexParser(shader, node);
-                    uniformParsers(shader, node);
-                    infoParser(shader, node);
-                }
-                return shader;
-            }
-            else
-                return nullptr;
-        };
-
-        auto &&createInfoPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Shaders/CreateInfo.xml");
-
-        if (createInfoPath.Exists(Helper::Path::Type::File)) {
-            auto xml = SR_XML_NS::Document::Load(createInfoPath);
-            shaders = xml.Root().GetNode("Shaders").GetNodes();
-            if (auto shaderXml = findShader(name)) {
-                auto shader = shaderParser(shaderXml);
-                if (!shader) {
-                    SR_ERROR("Shader::LoadFromConfig() : failed to load \"" + name + "\" shader!");
-                }
-                return shader;
-            } else
-                SR_ERROR("Shader::LoadFromConfig() : shader \"" + name + "\" have not config!");
+        if (!pShader->Reload()) {
+            SR_ERROR("Shader::Load() : failed to reload shader!\n\tPath: " + path.ToString());
+            delete pShader;
+            return nullptr;
         }
-        else
-            SR_ERROR("Shader::LoadFromConfig() : create info file not found! \n\tPath: " + createInfoPath.ToString());
 
-        return nullptr;
+        resourceManager.RegisterResource(pShader);
+
+        return pShader;
     }
-
-    //int32_t Shader::GetUBO(const uint32_t &index) const {
-    //    if (index >= m_sharedUniforms.size()) {
-    //        SR_ERROR("Shader::GetUBO() : index out of range! \n\tCount uniforms: " +
-    //                 std::to_string(m_sharedUniforms.size()) + "\n\tIndex: " + std::to_string(index));
-    //        return -1;
-    //    }
-    //    return m_sharedUniforms[index];
-   // }
 
     int32_t Shader::GetID() {
         if (!m_isInit) {
@@ -400,7 +224,7 @@ namespace SR_GRAPH_NS {
             if (!Init()) {
                 SR_ERROR("Shader::GetID() : failed to initialize shader!");
                 m_hasErrors = true;
-                return -1;
+                return SR_ID_INVALID;
             }
             m_isInit = true;
         }
@@ -418,7 +242,8 @@ namespace SR_GRAPH_NS {
     void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
 
     void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
-        m_env->BindTexture(m_samplers.at(hashId).second, sampler);
+        auto&& env = Environment::Get();
+        env->BindTexture(m_samplers.at(hashId).second, sampler);
     }
 
     void Shader::SetSampler2D(uint64_t hashId, int32_t sampler) noexcept {
@@ -467,16 +292,18 @@ namespace SR_GRAPH_NS {
     }
 
     bool Shader::InitUBOBlock() {
+        auto&& env = Environment::Get();
+
         if (m_uniformBlock.m_size > 0 && m_uniformBlock.m_memory) {
             memset(m_uniformBlock.m_memory, 1, m_uniformBlock.m_size);
         }
 
-        auto&& ubo = m_env->GetCurrentUBO();
-        auto&& descriptorSet = m_env->GetCurrentDescriptorSet();
+        auto&& ubo = env->GetCurrentUBO();
+        auto&& descriptorSet = env->GetCurrentDescriptorSet();
 
         if (ubo != SR_ID_INVALID && descriptorSet != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            m_env->UpdateDescriptorSets(descriptorSet, {
-                    {DescriptorType::Uniform, {m_uniformBlock.m_binding, ubo}},
+            env->UpdateDescriptorSets(descriptorSet, {
+                    { DescriptorType::Uniform, { m_uniformBlock.m_binding, ubo } },
             });
 
             return true;
@@ -490,9 +317,11 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        auto &&ubo = m_env->GetCurrentUBO();
+        auto&& env = Environment::Get();
+
+        auto &&ubo = env->GetCurrentUBO();
         if (ubo != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            m_env->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);
+            env->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);
         }
 
         return true;
@@ -510,115 +339,136 @@ namespace SR_GRAPH_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetShadersPath();
     }
 
-    /// TODO: переделать на Load/Unload
     bool Shader::Reload() {
-        SR_SHADER_LOG("Shader::Reload() : reloading \"" + m_name + "\" shader...");
+        SR_SHADER_LOG("Shader::Reload() : reloading \"" + m_shaderCreateInfo.path.ToString() + "\" shader...");
 
         m_loadState = LoadState::Reloading;
 
-        m_isCompile = false;
-        m_isLink = false;
+        Unload();
 
-        if (SR_UTILS_NS::Path(m_name).GetExtensionView() == "srsl") {
-            auto &&unit = SRSL::SRSLLoader::Instance().Load(m_name);
-
-            if (!unit) {
-                SR_ERROR("Shader::Reload() : failed to load SRSL shader! \n\tPath: " + m_name);
-            }
-
-            if (unit)
-            {
-                m_path = unit->path + "/shader";
-
-                const auto &&createInfo = SRShaderCreateInfo{
-                        .polygonMode = unit->createInfo.polygonMode,
-                        .cullMode = unit->createInfo.cullMode,
-                        .depthCompare = unit->createInfo.depthCompare,
-                        .primitiveTopology = unit->createInfo.primitiveTopology,
-                        .blendEnabled = unit->createInfo.blendEnabled,
-                        .depthWrite = unit->createInfo.depthWrite,
-                        .depthTest = unit->createInfo.depthTest,
-                };
-                SRVerifyFalse2(!SetCreateInfo(createInfo), "Failed to validate shader create info!");
-
-                switch (unit->type) {
-                    case SRSL::ShaderType::Custom:
-                    case SRSL::ShaderType::PostProcessing:
-                        break;
-                    case SRSL::ShaderType::Spatial: {
-                        UBOInfo uniforms = {};
-                        for (const auto&[binding, size] : unit->GetUniformSizes()) {
-                            uniforms.emplace_back(std::pair(binding, size));
-                        }
-                        SetUniforms(uniforms);
-
-                        SR_FALLTHROUGH;
-                    }
-                    case SRSL::ShaderType::SpatialCustom: {
-                        auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::StaticMeshVertex);
-                        SetVertex(description, attrib);
-                        break;
-                    }
-                    case SRSL::ShaderType::Simple:
-                    case SRSL::ShaderType::Skybox: {
-                        UBOInfo uniforms = {};
-                        for (const auto&[binding, size] : unit->GetUniformSizes()) {
-                            uniforms.emplace_back(std::pair(binding, size));
-                        }
-                        SetUniforms(uniforms);
-
-                        auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::SimpleVertex);
-                        SetVertex(description, attrib);
-
-                        break;
-                    }
-                    case SRSL::ShaderType::TransparentSpatial:
-                    case SRSL::ShaderType::Animation:
-                    case SRSL::ShaderType::Canvas:
-                    case SRSL::ShaderType::Particles:
-                    case SRSL::ShaderType::Unknown:
-                    default:
-                        SRAssert(false);
-                        break;
-                }
-
-                m_properties.clear();
-                m_samplers.clear();
-                for (auto&&[name, sampler] : unit->GetSamplers()) {
-                    m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = std::make_pair(
-                            sampler.type,
-                            sampler.binding
-                    );
-
-                    if (sampler.show) {
-                        m_properties.emplace_back(std::make_pair(name, sampler.type));
-                    }
-                }
-
-                m_uniformBlock.DeInit();
-                for (auto&&[name, var] : unit->GetUniformBlock()) {
-                    m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(name.c_str()), var.type, !var.show);
-                    m_uniformBlock.m_binding = var.binding;
-
-                    if (var.show && !IsMatrixType(var.type)) {
-                        m_properties.emplace_back(std::make_pair(name, var.type));
-                    }
-                }
-
-                m_uniformBlock.Init();
-            }
+        if (!Load()) {
+            return false;
         }
-
-        /// в последнюю очередь
-        m_hasErrors = false;
-        m_isInit = false;
 
         m_loadState = LoadState::Loaded;
 
         UpdateResources();
 
-        m_env->SetBuildState(false);
+        Environment::Get()->SetBuildState(false);
 
         return true;
+    }
+
+    bool Shader::Load() {
+        SR_LOCK_GUARD
+
+        bool hasErrors = !IResource::Load();
+
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
+
+        if (path.IsAbs()) {
+            SR_ERROR("Shader::Load() : absolute path is not allowed!");
+            return false;
+        }
+
+        auto &&unit = SRSL::SRSLLoader::Instance().Load(path);
+
+        if (!unit) {
+            SR_ERROR("Shader::Load() : failed to load SRSL shader! \n\tPath: " + path.ToString());
+            return false;
+        }
+
+        m_shaderCreateInfo = std::move(unit->createInfo);
+        m_shaderCreateInfo.path = unit->path + "/shader";
+
+        switch (unit->type) {
+            case SRSL::ShaderType::Custom:
+            case SRSL::ShaderType::PostProcessing:
+                break;
+            case SRSL::ShaderType::Spatial: {
+                UBOInfo uniforms = {};
+                for (const auto& [binding, size] : unit->GetUniformSizes()) {
+                    uniforms.emplace_back(std::pair(binding, size));
+                }
+
+                m_shaderCreateInfo.uniforms = std::move(uniforms);
+
+                SR_FALLTHROUGH;
+            }
+            case SRSL::ShaderType::SpatialCustom: {
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::StaticMeshVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(description);
+                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+                break;
+            }
+            case SRSL::ShaderType::Simple:
+            case SRSL::ShaderType::Skybox: {
+                UBOInfo uniforms = { };
+                for (const auto& [binding, size] : unit->GetUniformSizes()) {
+                    uniforms.emplace_back(std::pair(binding, size));
+                }
+                m_shaderCreateInfo.uniforms = std::move(uniforms);
+
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::SimpleVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(description);
+                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+
+                break;
+            }
+            case SRSL::ShaderType::TransparentSpatial:
+            case SRSL::ShaderType::Animation:
+            case SRSL::ShaderType::Canvas:
+            case SRSL::ShaderType::Particles:
+            case SRSL::ShaderType::Unknown:
+            default:
+                SRAssert(false);
+                break;
+        }
+
+        for (auto&&[name, sampler] : unit->GetSamplers()) {
+            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = std::make_pair(
+                sampler.type,
+                sampler.binding
+            );
+
+            if (sampler.show) {
+                m_properties.emplace_back(std::make_pair(name, sampler.type));
+            }
+        }
+
+        for (auto&&[name, var] : unit->GetUniformBlock()) {
+            m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(name.c_str()), var.type, !var.show);
+            m_uniformBlock.m_binding = var.binding;
+
+            if (var.show && !IsMatrixType(var.type)) {
+                m_properties.emplace_back(std::make_pair(name, var.type));
+            }
+        }
+
+        m_uniformBlock.Init();
+
+        return !hasErrors;
+    }
+
+    bool Shader::Unload() {
+        SR_LOCK_GUARD
+
+        bool hasErrors = !IResource::Unload();
+
+        m_isInit = false;
+
+        m_hasErrors = false;
+
+        m_isCompile = false;
+        m_isLink = false;
+
+        m_uniformBlock.DeInit();
+
+        m_properties.clear();
+        m_samplers.clear();
+
+        return !hasErrors;
     }
 }

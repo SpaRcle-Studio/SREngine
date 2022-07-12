@@ -538,12 +538,19 @@ namespace SR_GRAPH_NS {
 
         ///
 
-        //static auto* fbo = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(2000));
-        //
-        //if (fbo->Bind() && fbo->BeginRender()) {
+        //static auto* fbo1 = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(200));
+        //if (fbo1->Bind() && fbo1->BeginRender()) {
         //    m_render->DrawGeometry();
         //    m_render->DrawSkybox();
-        //    fbo->EndRender();
+        //    fbo1->EndRender();
+        //}
+
+        //static auto* fbo2 = SR_GTYPES_NS::Framebuffer::Create(1, SR_MATH_NS::IVector2(100));
+        //
+        //if (fbo2->Bind() && fbo2->BeginRender()) {
+        //    //m_render->DrawGeometry();
+        //    m_render->DrawSkybox();
+        //    fbo2->EndRender();
         //}
 
         ///
@@ -560,7 +567,8 @@ namespace SR_GRAPH_NS {
                 m_env->SetViewport();
                 m_env->SetScissor();
 
-                //fbo->Draw();
+                //fbo1->Draw();
+                //fbo2->Draw();
 
                 m_render->DrawGeometry();
                 m_render->DrawSkybox();

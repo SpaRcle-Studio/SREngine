@@ -312,7 +312,9 @@ namespace SR_GRAPH_NS {
                 void** shaderData,
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-                SRShaderCreateInfo shaderCreateInfo) const override;
+                const SRShaderCreateInfo& shaderCreateInfo) const override;
+
+        int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (shaderProgram >= m_memory->m_countShaderPrograms.first) {

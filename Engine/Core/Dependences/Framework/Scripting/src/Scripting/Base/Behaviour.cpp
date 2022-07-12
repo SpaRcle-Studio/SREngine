@@ -138,7 +138,10 @@ namespace SR_SCRIPTING_NS {
         auto&& stash = StashProperties();
 
         Unload();
-        Load();
+
+        if (!Load()) {
+            return false;
+        }
 
         UnStashProperties(stash);
 

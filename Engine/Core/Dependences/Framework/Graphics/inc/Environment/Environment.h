@@ -209,6 +209,8 @@ namespace SR_GRAPH_NS {
 
         // ============================= [ SHADER METHODS ] =============================
 
+        virtual int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) { return SR_ID_INVALID; }
+
         SR_NODISCARD virtual std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const {
             return std::map<std::string, uint32_t>(); }
         SR_NODISCARD virtual SR_SHADER_PROGRAM AllocShaderProgram() const { return SR_NULL_SHADER; }
@@ -223,7 +225,7 @@ namespace SR_GRAPH_NS {
                 void** shaderData,
                 const std::vector<size_t>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
-                SRShaderCreateInfo shaderCreateInfo = {}) const { return false; }
+                const SRShaderCreateInfo& shaderCreateInfo = {}) const { return false; }
         virtual SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) { return false; }
         virtual SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) { return false; }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) { }

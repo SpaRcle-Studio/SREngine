@@ -163,7 +163,7 @@ namespace SR_CORE_NS::GUI {
             Graphics::GUI::DrawValue("Material", material->GetResourceId());
 
             if (auto &&shader = material->GetShader()) {
-                Graphics::GUI::DrawValue("Shader", shader->GetName());
+                //Graphics::GUI::DrawValue("Shader", shader->GetName());
             }
 
             ImGui::EndGroup();

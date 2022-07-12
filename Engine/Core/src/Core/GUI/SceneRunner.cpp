@@ -102,7 +102,8 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (!m_scene->GetPath().Copy(runtimePath)) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!");
+            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
+                + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
             return false;
         }
 
