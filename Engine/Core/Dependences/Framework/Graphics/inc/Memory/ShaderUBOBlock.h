@@ -14,7 +14,7 @@ namespace SR_GRAPH_NS {
 
 namespace SR_GRAPH_NS::Memory {
     class ShaderUBOBlock {
-        friend class Shader;
+        friend class SR_GRAPH_NS::Shader;
 
         struct SubBlock {
             ShaderVarType type;
@@ -30,14 +30,14 @@ namespace SR_GRAPH_NS::Memory {
         void Append(uint64_t hashId, ShaderVarType type, bool hidden);
         void Init();
         void DeInit();
-        void SetField(uint64_t hashId, const void* data) noexcept;
+        void SR_FASTCALL SetField(uint64_t hashId, const void* data) noexcept;
 
         SR_NODISCARD uint32_t GetBinding() const { return m_binding; }
         SR_NODISCARD bool Valid() const { return m_memory && m_binding != SR_ID_INVALID; }
 
     private:
         uint32_t m_binding = SR_ID_INVALID;
-        google::dense_hash_map<uint64_t, SubBlock> m_data;
+        ska::flat_hash_map<uint64_t, SubBlock> m_data;
         uint32_t m_size = 0;
         char* m_memory = nullptr;
 

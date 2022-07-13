@@ -17,8 +17,14 @@ namespace SR_GRAPH_NS::Memory {
         using Descriptor = int32_t;
         using UBO = int32_t;
 
+        struct Data {
+            Camera* pCamera;
+            Descriptor descriptor;
+            UBO ubo;
+        };
+
         VirtualUBOInfo() {
-            m_data.reserve(8);
+            //m_data.reserve(8);
         }
 
         ~VirtualUBOInfo() override = default;
@@ -38,7 +44,8 @@ namespace SR_GRAPH_NS::Memory {
             return *this;
         }
 
-        ska::flat_hash_map<Camera*, std::pair<UBO, Descriptor>> m_data;
+        //ska::flat_hash_map<Camera*, std::pair<UBO, Descriptor>> m_data;
+        std::forward_list<Data> m_data;
         uint32_t m_samples = 0;
         uint32_t m_uboSize = 0;
         int32_t m_shaderProgram = SR_ID_INVALID;

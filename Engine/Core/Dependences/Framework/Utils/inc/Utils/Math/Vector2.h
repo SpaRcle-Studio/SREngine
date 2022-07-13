@@ -51,7 +51,7 @@ namespace SR_MATH_NS {
             y = static_cast<T>(vec2.y);
         }
 
-        template<typename U> [[nodiscard]] Vector2<U> Cast() const { return Vector2<U>(
+        template<typename U> SR_NODISCARD Vector2<U> SR_FASTCALL Cast() const noexcept { return Vector2<U>(
                     static_cast<U>(x),
                     static_cast<U>(y)
             );

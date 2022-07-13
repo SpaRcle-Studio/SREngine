@@ -77,11 +77,11 @@ namespace SR_MATH_NS {
         template<typename U> static Vector3<T> YZ(const Vector2<U>& v) { return YZ(v, 0); }
 
     public:
-        template<typename U> SR_NODISCARD Vector3<U> Cast() const { return Vector3<U>(
+        template<typename U> SR_NODISCARD Vector3<U> SR_FASTCALL Cast() const noexcept { return Vector3<U>(
                     static_cast<U>(x),
                     static_cast<U>(y),
                     static_cast<U>(z)
-                );
+            );
         }
 
         SR_NODISCARD Vector2<T> XY() const { return Vector2<T>(x, y); }

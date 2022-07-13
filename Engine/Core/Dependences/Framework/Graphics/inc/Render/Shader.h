@@ -58,18 +58,18 @@ namespace SR_GRAPH_NS {
             m_uniformBlock.SetField(hashId, &v);
         }
 
-        void SetBool(uint64_t hashId, const bool& v) noexcept;
-        void SetFloat(uint64_t hashId, const float& v) noexcept;
-        void SetInt(uint64_t hashId, const int& v) noexcept;
-        void SetMat4(uint64_t hashId, const glm::mat4& v) noexcept;
-        void SetVec4(uint64_t hashId, const glm::vec4& v) noexcept;
-        void SetVec3(uint64_t hashId, const glm::vec3& v) noexcept;
-        void SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;
-        void SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
-        void SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
-        void SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
-        void SetSampler2D(uint64_t hashId, Types::Texture* sampler) noexcept;
-        void SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
+        void SR_FASTCALL SetBool(uint64_t hashId, const bool& v) noexcept;
+        void SR_FASTCALL SetFloat(uint64_t hashId, const float& v) noexcept;
+        void SR_FASTCALL SetInt(uint64_t hashId, const int& v) noexcept;
+        void SR_FASTCALL SetMat4(uint64_t hashId, const glm::mat4& v) noexcept;
+        void SR_FASTCALL SetVec4(uint64_t hashId, const glm::vec4& v) noexcept;
+        void SR_FASTCALL SetVec3(uint64_t hashId, const glm::vec3& v) noexcept;
+        void SR_FASTCALL SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;
+        void SR_FASTCALL SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
+        void SR_FASTCALL SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
+        void SR_FASTCALL SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(uint64_t hashId, Types::Texture* sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
 
     protected:
         bool Load() override;

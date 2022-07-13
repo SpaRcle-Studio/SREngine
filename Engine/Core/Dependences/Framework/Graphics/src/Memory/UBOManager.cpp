@@ -46,10 +46,17 @@ namespace SR_GRAPH_NS::Memory {
         virtualUboInfo.m_samples = samples;
         virtualUboInfo.m_uboSize = uboSize;
         virtualUboInfo.m_shaderProgram = shaderProgram;
-        virtualUboInfo.m_data.insert(std::make_pair(
+
+        virtualUboInfo.m_data.emplace_front(VirtualUBOInfo::Data {
                 m_ignoreCameras ? nullptr : m_camera,
-                std::make_pair(ubo, descriptor))
-        );
+                descriptor,
+                ubo
+        });
+
+        //virtualUboInfo.m_data.insert(std::make_pair(
+        //        m_ignoreCameras ? nullptr : m_camera,
+        //        std::make_pair(ubo, descriptor))
+        //);
 
         m_virtualTable.insert(std::make_pair(
                 virtualUbo,
@@ -73,8 +80,7 @@ namespace SR_GRAPH_NS::Memory {
         auto&& env = Environment::Get();
 
         auto&& info = pIt->second;
-        for (auto&& [pCamera, data] : info.m_data) {
-            auto&& [ubo, descriptor] = data;
+        for (auto&& [pCamera, descriptor, ubo] : info.m_data) {
             FreeMemory(&ubo, &descriptor);
         }
 
@@ -135,6 +141,8 @@ namespace SR_GRAPH_NS::Memory {
             }
         }
 
+        SRAssert(*ubo != SR_ID_INVALID || *descriptor != SR_ID_INVALID);
+
         env->SetCurrentShaderId(shaderIdStash);
         return true;
 
@@ -157,30 +165,37 @@ namespace SR_GRAPH_NS::Memory {
 
         BindResult result = BindResult::Success;
 
-        VirtualUBOInfo& info = pIt->second;
-    retry:
-        /// если не нашли камеру, то дублируем память под новую камеру
-        auto&& cameraIt = info.m_data.find(m_ignoreCameras ? nullptr : m_camera);
-        if (cameraIt == std::end(info.m_data))
-        {
-            Descriptor descriptor = SR_ID_INVALID;
-            UBO ubo = SR_ID_INVALID;
+        auto&& info = pIt->second;
 
+        Descriptor descriptor = SR_ID_INVALID;
+        UBO ubo = SR_ID_INVALID;
+
+        for (auto&& data : info.m_data) {
+            if (data.pCamera == (m_ignoreCameras ? nullptr : m_camera)) {
+                descriptor = data.descriptor;
+                ubo = data.ubo;
+                break;
+            }
+        }
+
+        /// если не нашли камеру, то дублируем память под новую камеру
+        if (descriptor == SR_ID_INVALID && ubo == SR_ID_INVALID)
+        {
             if (!AllocMemory(&ubo, &descriptor, info.m_uboSize, info.m_samples, info.m_shaderProgram)) {
                 SR_ERROR("UBOManager::BindUBO() : failed to allocate memory!");
                 return BindResult::Failed;
             }
 
-            info.m_data.insert(std::make_pair(m_ignoreCameras ? nullptr : m_camera, std::make_pair(ubo, descriptor)));
+            info.m_data.emplace_front(VirtualUBOInfo::Data {
+                    m_ignoreCameras ? nullptr : m_camera,
+                    descriptor,
+                    ubo
+            });
 
             result = BindResult::Duplicated;
-
-            goto retry;
         }
 
         auto&& env = Environment::Get();
-
-        auto&& [ubo, descriptor] = cameraIt->second;
 
         if (ubo != SR_ID_INVALID) {
             env->BindUBO(ubo);
@@ -220,8 +235,7 @@ namespace SR_GRAPH_NS::Memory {
         info.m_shaderProgram = shaderProgram;
 
         /// очищаем ВСЕ старые данные
-        for (auto&& [pCamera, data] : info.m_data) {
-            auto&& [ubo, descriptor] = data;
+        for (auto&& [pCamera, descriptor, ubo] : info.m_data) {
             FreeMemory(&ubo, &descriptor);
         }
         info.m_data.clear();
@@ -234,7 +248,11 @@ namespace SR_GRAPH_NS::Memory {
             SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
         }
 
-        info.m_data.insert(std::make_pair(m_ignoreCameras ? nullptr : m_camera, std::make_pair(ubo, descriptor)));
+        info.m_data.emplace_front(VirtualUBOInfo::Data {
+                m_ignoreCameras ? nullptr : m_camera,
+                descriptor,
+                ubo
+        });
 
         return virtualUbo;
     }

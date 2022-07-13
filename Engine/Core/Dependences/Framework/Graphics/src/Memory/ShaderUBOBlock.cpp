@@ -6,7 +6,8 @@
 
 namespace SR_GRAPH_NS::Memory {
     ShaderUBOBlock::ShaderUBOBlock() {
-        m_data.set_empty_key(static_cast<uint64_t>(0));
+        m_data.reserve(10);
+        m_data.max_load_factor(0.9f);
     }
 
     void ShaderUBOBlock::Append(uint64_t hashId, ShaderVarType type, bool hidden) {
@@ -43,7 +44,11 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     void ShaderUBOBlock::SetField(uint64_t hashId, const void *data) noexcept {
-        if (auto &&pIt = m_data.find(hashId); pIt != m_data.end() && m_memory) {
+        if (!m_memory) {
+            return;
+        }
+
+        if (auto &&pIt = m_data.find(hashId); pIt != m_data.end()) {
             memcpy(m_memory + pIt->second.offset, data, pIt->second.size);
         }
     }

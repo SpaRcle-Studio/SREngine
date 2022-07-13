@@ -7,6 +7,8 @@
 
 #include <Utils/Common/NonCopyable.h>
 
+#include <Render/RenderContext.h>
+
 namespace SR_GRAPH_NS {
     class RenderScene : public SR_UTILS_NS::NonCopyable {
     public:
