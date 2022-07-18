@@ -2,7 +2,7 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#include <Render/Shader.h>
+#include <Types/Shader.h>
 
 #include <Types/Texture.h>
 #include <Render/Render.h>
@@ -14,7 +14,7 @@
 #include <Utils/Types/DataStorage.h>
 #include <Utils/Common/Hashes.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     Shader::Shader()
         : IResource(typeid(Shader).name())
     { }
@@ -77,7 +77,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Shader::UnUse() noexcept {
-        auto&& env = Environment::Get();
+        auto&& env = SR_GRAPH_NS::Environment::Get();
         env->UnUseShader();
     }
 
@@ -153,7 +153,7 @@ namespace SR_GRAPH_NS {
     void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
 
     void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
-        auto&& env = Environment::Get();
+        auto&& env = SR_GRAPH_NS::Environment::Get();
         env->BindTexture(m_samplers.at(hashId).second, sampler);
     }
 
@@ -203,7 +203,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool Shader::InitUBOBlock() {
-        auto&& env = Environment::Get();
+        auto&& env = SR_GRAPH_NS::Environment::Get();
 
         if (m_uniformBlock.m_size > 0 && m_uniformBlock.m_memory) {
             memset(m_uniformBlock.m_memory, 1, m_uniformBlock.m_size);
@@ -228,7 +228,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        auto&& env = Environment::Get();
+        auto&& env = SR_GRAPH_NS::Environment::Get();
 
         auto &&ubo = env->GetCurrentUBO();
         if (ubo != SR_ID_INVALID && m_uniformBlock.Valid()) {
@@ -265,7 +265,8 @@ namespace SR_GRAPH_NS {
 
         UpdateResources();
 
-        Environment::Get()->SetBuildState(false);
+        auto&& env = SR_GRAPH_NS::Environment::Get();
+        env->SetBuildState(false);
 
         return true;
     }

@@ -77,7 +77,7 @@ namespace Framework::Core::GUI {
             }
 
             copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
-            copyPtrComponent = DrawComponent<Graphics::Camera>(copyPtrComponent, "Camera", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
             copyPtrComponent = DrawComponent<Graphics::Types::Mesh3D>(copyPtrComponent, "Mesh3D", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {

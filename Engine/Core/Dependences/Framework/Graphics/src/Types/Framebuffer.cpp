@@ -4,7 +4,7 @@
 
 #include <Types/Framebuffer.h>
 #include <Environment/Environment.h>
-#include <Render/Shader.h>
+#include <Types/Shader.h>
 
 namespace SR_GTYPES_NS {
     Framebuffer::Framebuffer()
@@ -14,8 +14,8 @@ namespace SR_GTYPES_NS {
     Framebuffer::~Framebuffer() {
         SRAssert(m_frameBuffer == SR_ID_INVALID);
 
-        for (auto&& color : m_colors) {
-            SRAssert(color == SR_ID_INVALID);
+        for (auto&& [texture, format] : m_colors) {
+            SRAssert(texture == SR_ID_INVALID);
         }
 
         SRAssert(m_shader);
@@ -25,14 +25,30 @@ namespace SR_GTYPES_NS {
         return Create(images, size, "Engine/framebuffer.srsl");
     }
 
-    Framebuffer::Ptr Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size, const std::string& shaderPath) {
+    Framebuffer::Ptr Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size, const SR_UTILS_NS::Path& shaderPath) {
+        std::list<ColorFormat> colors;
+
+        for (uint32_t i = 0; i < images; ++i) {
+            colors.emplace_back(ColorFormat::RGBA8_UNORM);
+        }
+
+        return Create(colors, DepthFormat::Auto, size, shaderPath);
+    }
+
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size, const SR_UTILS_NS::Path &shaderPath) {
         Framebuffer* fbo = new Framebuffer();
 
-        SRAssert(!size.HasZero() && !size.HasNegative() && images > 0);
+        SRAssert(!size.HasZero() && !size.HasNegative());
 
         fbo->SetSize(size);
-        fbo->SetImagesCount(images);
         fbo->m_shaderPath = shaderPath;
+        fbo->m_depth.format = depth;
+
+        for (auto&& color : colors) {
+            ColorLayer layer;
+            layer.format = color;
+            fbo->m_colors.emplace_back(layer);
+        }
 
         return fbo;
     }
@@ -96,10 +112,10 @@ namespace SR_GTYPES_NS {
         m_shader->Flush();
 
         for (uint32_t i = 0; i < static_cast<uint32_t>(m_colors.size()); ++i) {
-            m_shader->SetSampler2D(SHADER_COLOR_ATTACHMENTS[i], m_colors[i]);
+            m_shader->SetSampler2D(SHADER_COLOR_ATTACHMENTS[i], m_colors[i].texture);
         }
 
-        m_shader->SetSampler2D(SHADER_DEPTH_ATTACHMENT, m_depth);
+        m_shader->SetSampler2D(SHADER_DEPTH_ATTACHMENT, m_depth.texture);
 
         /// сбрасываем значение
         uboManager.SetIgnoreCameras(false);
@@ -107,7 +123,7 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    void Framebuffer::Free() {
+    void Framebuffer::FreeVideoMemory() {
         if (!m_isInit) {
             return;
         }
@@ -119,20 +135,18 @@ namespace SR_GTYPES_NS {
             m_frameBuffer = SR_ID_INVALID;
         }
 
-        for (auto&& color : m_colors) {
-            if (color == SR_ID_INVALID) {
+        for (auto&& [texture, format] : m_colors) {
+            if (texture == SR_ID_INVALID) {
                 continue;
             }
 
-            SRVerifyFalse(!environment->FreeTexture(&color));
+            SRVerifyFalse(!environment->FreeTexture(&texture));
         }
 
         if (m_shader) {
             m_shader->RemoveUsePoint();
             m_shader = nullptr;
         }
-
-        delete this;
     }
 
     bool Framebuffer::OnResize() {
@@ -148,7 +162,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (!Environment::Get()->CreateFrameBuffer(m_size.ToGLM(), m_depth, m_frameBuffer, m_colors)) {
+        if (!Environment::Get()->CreateFrameBuffer(m_size.ToGLM(), m_frameBuffer, &m_depth, m_colors)) {
             SR_ERROR("Framebuffer::OnResize() : failed to create frame buffer!");
             m_hasErrors = true;
             return false;
@@ -163,15 +177,6 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
         m_size = size;
         m_needResize = true;
-    }
-
-    void Framebuffer::SetImagesCount(uint32_t count) {
-        if (m_isInit) {
-            SRHalt("Frame buffer is initialized!");
-            return;
-        }
-
-        m_colors.resize(count);
     }
 
     bool Framebuffer::BeginRender() {

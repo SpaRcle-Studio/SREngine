@@ -35,7 +35,7 @@ namespace SR_UTILS_NS {
 
     protected:
         virtual void ClearSettings() { }
-        virtual void LoadSettings(const Xml::Node& node) { }
+        virtual bool LoadSettings(const Xml::Node& node) { return true; }
 
         bool Reload() final;
         bool Destroy() final;
@@ -45,8 +45,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetAssociatedPath() const override;
 
     private:
-        bool Load() override;
-        bool Unload() override;
+        bool Load() final;
+        bool Unload() final;
 
     };
 

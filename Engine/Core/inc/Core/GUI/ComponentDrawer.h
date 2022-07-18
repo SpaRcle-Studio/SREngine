@@ -12,9 +12,10 @@ namespace SR_SCRIPTING_NS {
 }
 
 namespace SR_GRAPH_NS {
-    class Camera;
+
 
     namespace Types {
+        class Camera;
         class Mesh3D;
         class Material;
     }
@@ -26,7 +27,7 @@ namespace SR_CORE_NS::GUI {
 
 namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_GRAPH_NS::Camera*& camera, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_GRAPH_NS::Types::Material*& material, EditorGUI* context, int32_t index);

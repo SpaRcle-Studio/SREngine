@@ -2,11 +2,11 @@
 // Created by Monika on 05.06.2022.
 //
 
-#include <Render/CameraManager.h>
-#include <Render/Camera.h>
+#include <Memory/CameraManager.h>
+#include <Types/Camera.h>
 #include <Utils/Types/Thread.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Memory {
     void CameraManager::Update() {
         SR_LOCK_GUARD
 
@@ -38,7 +38,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    uint32_t Framework::Graphics::CameraManager::GetCountCameras() const {
+    uint32_t CameraManager::GetCountCameras() const {
         SR_LOCK_GUARD
 
         return static_cast<uint32>(m_cameras.size());

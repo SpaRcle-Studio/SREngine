@@ -38,21 +38,23 @@
 #include "../Graphics/src/Memory/UBOManager.cpp"
 #include "../Graphics/src/Memory/ShaderProgramManager.cpp"
 #include "../Graphics/src/Memory/ShaderUBOBlock.cpp"
+#include "../Graphics/src/Memory/CameraManager.cpp"
+
+#include "../Graphics/src/Pass/BasePass.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"
 #include "../Graphics/src/Font/Text.cpp"
 
-#include "../Graphics/src/Render/Camera.cpp"
 #include "../Graphics/src/Render/RenderScene.cpp"
 #include "../Graphics/src/Render/ColorBuffer.cpp"
+#include "../Graphics/src/Render/RenderTechnique.cpp"
 #include "../Graphics/src/Render/MeshCluster.cpp"
 #include "../Graphics/src/Render/PostProcessing.cpp"
 #include "../Graphics/src/Render/Render.cpp"
-#include "../Graphics/src/Render/Shader.cpp"
 #include "../Graphics/src/Render/ShaderGenerator.cpp"
 #include "../Graphics/src/Render/RenderManager.cpp"
-#include "../Graphics/src/Render/CameraManager.cpp"
+#include "../Graphics/src/Render/RenderContext.cpp"
 #include "../Graphics/src/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"
@@ -67,5 +69,8 @@
 #include "../Graphics/src/Types/Skybox.cpp"
 #include "../Graphics/src/Types/Texture.cpp"
 #include "../Graphics/src/Types/GraphicsCommand.cpp"
+#include "../Graphics/src/Types/Camera.cpp"
+#include "../Graphics/src/Types/Shader.cpp"
+#include "../Graphics/src/Types/RenderTexture.cpp"
 
 #include "../Graphics/src/Window/Window.cpp"

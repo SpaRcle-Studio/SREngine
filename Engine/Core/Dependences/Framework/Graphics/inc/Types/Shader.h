@@ -20,10 +20,13 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class Render;
-    class Shader;
     class Environment;
+}
 
-    class Shader : public SR_UTILS_NS::IResource {
+namespace SR_GRAPH_NS::Types {
+    class Shader;
+
+    class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         using ShaderProgram = int32_t;
     private:
         Shader();
@@ -37,7 +40,7 @@ namespace SR_GRAPH_NS {
         void UnUse() noexcept;
         bool InitUBOBlock();
         bool Flush() const;
-        void FreeVideoMemory();
+        void FreeVideoMemory() override;
         bool Reload() override;
 
     public:

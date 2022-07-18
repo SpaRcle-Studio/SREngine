@@ -8,7 +8,7 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Camera;
 }
 
@@ -18,15 +18,12 @@ namespace SR_GRAPH_NS::Memory {
         using UBO = int32_t;
 
         struct Data {
-            Camera* pCamera;
+            Types::Camera* pCamera;
             Descriptor descriptor;
             UBO ubo;
         };
 
-        VirtualUBOInfo() {
-            //m_data.reserve(8);
-        }
-
+        VirtualUBOInfo() = default;
         ~VirtualUBOInfo() override = default;
 
         VirtualUBOInfo(VirtualUBOInfo&& ref)  noexcept {
@@ -44,7 +41,6 @@ namespace SR_GRAPH_NS::Memory {
             return *this;
         }
 
-        //ska::flat_hash_map<Camera*, std::pair<UBO, Descriptor>> m_data;
         std::forward_list<Data> m_data;
         uint32_t m_samples = 0;
         uint32_t m_uboSize = 0;
@@ -71,7 +67,7 @@ namespace SR_GRAPH_NS::Memory {
         ~UBOManager() override = default;
 
     public:
-        void SetCurrentCamera(Camera* pCamera);
+        void SetCurrentCamera(Types::Camera* pCamera);
 
     public:
         SR_NODISCARD VirtualUBO ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples);
@@ -88,7 +84,7 @@ namespace SR_GRAPH_NS::Memory {
 
     private:
         ska::flat_hash_map<VirtualUBO, VirtualUBOInfo> m_virtualTable;
-        Camera* m_camera = nullptr;
+        Types::Camera* m_camera = nullptr;
         bool m_singleCameraMode = false;
         bool m_ignoreCameras = false;
 

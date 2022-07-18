@@ -168,7 +168,7 @@ namespace SR_GTYPES_NS {
         m_render = render;
     }
 
-    bool Texture::FreeVideoMemory()  {
+    void Texture::FreeVideoMemory() {
         SR_SCOPED_LOCK
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
@@ -177,12 +177,13 @@ namespace SR_GTYPES_NS {
 
         if (!m_isCalculated) {
             SR_ERROR("Texture::FreeVideoMemory() : texture \"" + std::string(GetResourceName()) + "\" is not calculated!");
-            return false;
         }
 
         m_isCalculated = false;
 
-        return Environment::Get()->FreeTexture(&m_id);
+        if (!Environment::Get()->FreeTexture(&m_id)) {
+            SR_ERROR("Texture::FreeVideoMemory() : failed to free texture!");
+        }
     }
 
     Texture* Texture::Load(const std::string &path) {
@@ -225,7 +226,7 @@ namespace SR_GTYPES_NS {
             const std::string image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAADUlEQVQI12N48eIFOwAINALALwGcPAAAAABJRU5ErkJggg==";
 
             const auto&& config = Memory::TextureConfig(
-                    /**.m_format = */ TextureFormat::RGBA8_UNORM,
+                    /**.m_format = */ ColorFormat::RGBA8_UNORM,
                     /**.m_autoRemove = */ false,
                     /**.m_filter = */ TextureFilter::NEAREST,
                     /**.m_compression = */ TextureCompression::None,

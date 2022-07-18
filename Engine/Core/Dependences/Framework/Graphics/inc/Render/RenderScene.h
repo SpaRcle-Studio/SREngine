@@ -6,11 +6,15 @@
 #define SRENGINE_RENDERSCENE_H
 
 #include <Utils/Common/NonCopyable.h>
-
-#include <Render/RenderContext.h>
+#include <Render/MeshCluster.h>
 
 namespace SR_GRAPH_NS {
+    class RenderContext;
+
     class RenderScene : public SR_UTILS_NS::NonCopyable {
+        enum class State {
+            Idle, WaitRebuild, Rebuild, Update, Submit
+        };
     public:
         ~RenderScene() override = default;
 
@@ -21,6 +25,10 @@ namespace SR_GRAPH_NS {
             // pre render
             // render
             // post render
+        }
+
+        void SetDirty() {
+            m_dirty = true;
         }
 
     private:
@@ -39,8 +47,13 @@ namespace SR_GRAPH_NS {
 
         // lights
 
-        // environment (pipe line)
-        // может использоваться несколькими RenderScene'ами
+        MeshCluster       m_opaque      = { };
+        MeshCluster       m_transparent = { };
+
+        Types::Skybox*    m_skybox      = nullptr;
+        RenderContext*    m_context     = nullptr;
+
+        std::atomic<bool> m_dirty       = false;
 
     };
 }

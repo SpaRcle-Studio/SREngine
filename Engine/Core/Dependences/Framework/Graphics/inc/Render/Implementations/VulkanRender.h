@@ -8,7 +8,6 @@
 #include <Render/Render.h>
 
 #include <Types/Skybox.h>
-#include <Render/Camera.h>
 
 namespace Framework::Graphics::Impl {
     class VulkanRender : public Render {

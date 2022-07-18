@@ -3,6 +3,7 @@
 //
 
 #include <Render/Implementations/VulkanRender.h>
+#include <Types/Camera.h>
 
 void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
     if (!m_currentCamera) {

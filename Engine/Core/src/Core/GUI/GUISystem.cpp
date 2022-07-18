@@ -502,7 +502,7 @@ void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene
     }
 }
 
-void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
+void GUISystem::DrawGuizmo(Framework::Graphics::Types::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
     if (!camera)
         return;
 

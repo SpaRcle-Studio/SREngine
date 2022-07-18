@@ -333,15 +333,15 @@ namespace SR_GRAPH_NS {
             m_currentShader->Bind(m_currentCmd);
         }
 
-        bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
-        bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
-            std::vector<int32_t> color = { colorBuffer };
-            bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
-            if (!result)
-                SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
-            colorBuffer = color[0];
-            return result;
-        }
+        bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) override;
+        //bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
+        //    std::vector<int32_t> color = { colorBuffer };
+        //    bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
+        //    if (!result)
+        //        SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
+        //    colorBuffer = color[0];
+        //    return result;
+        //}
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
@@ -520,7 +520,7 @@ namespace SR_GRAPH_NS {
         }
         int32_t CalculateTexture(
                 uint8_t* data,
-                TextureFormat format,
+                ColorFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,

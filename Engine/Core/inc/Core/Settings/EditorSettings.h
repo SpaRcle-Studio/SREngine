@@ -32,7 +32,7 @@ namespace SR_CORE_NS {
 
     protected:
         void ClearSettings() override;
-        void LoadSettings(const SR_XML_NS::Node& node) override;
+        bool LoadSettings(const SR_XML_NS::Node& node) override;
 
     private:
         Icons m_icons;

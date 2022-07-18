@@ -184,7 +184,7 @@ namespace SR_GRAPH_NS::Types {
         return SR_UTILS_NS::IResource::Copy(mesh);
     }
 
-    bool Mesh::FreeVideoMemory() {
+    void Mesh::FreeVideoMemory() {
         if (m_pipeline == PipeLine::Vulkan) {
             auto&& uboManager = Memory::UBOManager::Instance();
             if (m_virtualUBO != SR_ID_INVALID && !uboManager.FreeUBO(&m_virtualUBO)) {
@@ -193,8 +193,6 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_isCalculated = false;
-
-        return true;
     }
 
     void Mesh::ReCalcModel() {

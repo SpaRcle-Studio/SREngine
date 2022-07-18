@@ -9,13 +9,18 @@
 #include <Utils/Types/SafePointer.h>
 
 namespace SR_GRAPH_NS {
-    class Camera;
     class Window;
+}
 
+namespace SR_GRAPH_NS::Types {
+    class Camera;
+}
+
+namespace SR_GRAPH_NS::Memory {
     class CameraManager : public SR_UTILS_NS::Singleton<CameraManager> {
-        friend class Camera;
+        friend class Types::Camera;
         friend class SR_UTILS_NS::Singleton<CameraManager>;
-        using CameraPtr = Camera*;
+        using CameraPtr = Types::Camera*;
     protected:
         ~CameraManager() override = default;
 

@@ -1,0 +1,8 @@
+//
+// Created by Monika on 14.07.2022.
+//
+
+#ifndef SRENGINE_TRANSPARENTPASS_H
+#define SRENGINE_TRANSPARENTPASS_H
+
+#endif //SRENGINE_TRANSPARENTPASS_H

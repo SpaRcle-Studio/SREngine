@@ -5,33 +5,22 @@
 #ifndef GAMEENGINE_POSTPROCESSING_H
 #define GAMEENGINE_POSTPROCESSING_H
 
+/*
 #include <Utils/Math/Vector3.h>
+
+namespace SR_GRAPH_NS::Types {
+    class Camera;
+}
 
 namespace SR_GRAPH_NS {
     class Render;
-    class Camera;
     class Shader;
-
-    /*
-     How use? (OpenGL)
-
-     void Draw() {
-        ...clear buffers
-
-        postProcessing->Begin();
-
-        ...draw geometry
-
-        postProcessing->End();
-
-        ...swapBuffers
-     */
 
     // TODO: add freeing video buffers!
     class PostProcessing {
     protected:
         virtual ~PostProcessing() = default;
-        PostProcessing(Camera* camera);
+        //PostProcessing(Camera* camera);
     public:
         PostProcessing(const PostProcessing&) = delete;
     protected:
@@ -53,13 +42,7 @@ namespace SR_GRAPH_NS {
         int32_t                m_finalFBO              = -1;
         int32_t                m_finalColorBuffer      = -1;
 
-        /*
-         *  0 - geometry color
-         *  1 - bright color
-         *  2 - depth color
-         *  3 - stencil mask
-         *  4 - skybox color
-         */
+
         std::vector<int32_t>  m_colors                = { -1, -1, -1, -1, -1 };
         int32_t               m_depth                 = -1;
         int32_t               m_frameBuffer           = -1;
@@ -72,11 +55,11 @@ namespace SR_GRAPH_NS {
         Shader*               m_postProcessingShader  = nullptr;
         Shader*               m_blurShader            = nullptr;
 
-        Camera*               m_camera                = nullptr;
+        //Camera*               m_camera                = nullptr;
         Render*               m_render                = nullptr;
         bool                  m_isInit                = false;
     public:
-        static PostProcessing* Allocate(Camera* camera);
+        //static PostProcessing* Allocate(Camera* camera);
     public:
         [[nodiscard]] SR_FORCE_INLINE Helper::Math::FVector3 GetColorCorrection() const noexcept { return m_colorCorrection; }
         [[nodiscard]] SR_FORCE_INLINE Helper::Math::FVector3 GetBloomColor()      const noexcept { return m_bloomColor;       }
@@ -99,7 +82,6 @@ namespace SR_GRAPH_NS {
         SR_FORCE_INLINE void SetBloomColor(Helper::Math::FVector3 value)      noexcept { m_bloomColor           = value;     }
         SR_FORCE_INLINE void SetBloom(bool v)                                noexcept { this->m_bloom = v;                  }
     public:
-        /** \brief Init shader and set default values \warning Call only from window context \return bool */
         virtual bool Init(Render* render);
 
         virtual bool Destroy();
@@ -128,5 +110,7 @@ namespace SR_GRAPH_NS {
         //[[nodiscard]] SR_FORCE_INLINE uint32_t GetBlurBloomMask() const noexcept { return m_PingPongColorBuffers[0]; }
     };
 }
+
+*/
 
 #endif //GAMEENGINE_POSTPROCESSING_H

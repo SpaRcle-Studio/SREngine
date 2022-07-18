@@ -5,12 +5,16 @@
 #ifndef GAMEENGINE_EDITORGRID_H
 #define GAMEENGINE_EDITORGRID_H
 
+/*
 #include <Environment/Environment.h>
+
+namespace SR_GRAPH_NS::Types {
+    class Camera;
+    class Shader;
+}
 
 namespace Framework::Graphics {
     class Render;
-    class Camera;
-    class Shader;
 
     class EditorGrid {
     private:
@@ -35,6 +39,6 @@ namespace Framework::Graphics {
         ///\warning Call only from OpenGL context!
         void Draw();
     };
-}
+}*/
 
 #endif //GAMEENGINE_EDITORGRID_H

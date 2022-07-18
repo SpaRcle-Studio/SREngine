@@ -13,7 +13,7 @@
 #include <Utils/Common/Features.h>
 
 #include <Render/Render.h>
-#include <Render/CameraManager.h>
+#include <Memory/CameraManager.h>
 #include <Window/Window.h>
 
 #include <Types/Skybox.h>
@@ -173,7 +173,7 @@ void Framework::Engine::Await() {
     while (m_isRun) {
         SR_HTYPES_NS::Thread::Sleep(1);
 
-        SR_GRAPH_NS::CameraManager::Instance().Update();
+        SR_GRAPH_NS::Memory::CameraManager::Instance().Update();
 
         const auto now = clock::now();
         const auto deltaTime = now - timeStart;

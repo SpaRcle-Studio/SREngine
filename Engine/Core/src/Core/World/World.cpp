@@ -6,7 +6,7 @@
 
 #include <Utils/Types/RawMesh.h>
 #include <assimp/scene.h>
-#include <Render/CameraManager.h>
+#include <Memory/CameraManager.h>
 
 namespace Framework::Core::World {
     SR_UTILS_NS::GameObject::Ptr World::Instance(Framework::Helper::Types::Marshal &marshal)  {
@@ -146,9 +146,9 @@ namespace Framework::Core::World {
     }
 
     void World::FindObserver() {
-        auto&& cameraManager = SR_GRAPH_NS::CameraManager::Instance();
+        auto&& cameraManager = SR_GRAPH_NS::Memory::CameraManager::Instance();
 
-        SR_GRAPH_NS::CameraManager::LockSingleton();
+        SR_GRAPH_NS::Memory::CameraManager::LockSingleton();
 
         if (auto&& pCamera = cameraManager.GetFirstCamera()) {
             if (auto &&gameObject = pCamera->GetParent()) {
@@ -162,6 +162,6 @@ namespace Framework::Core::World {
             }
         }
 
-        SR_GRAPH_NS::CameraManager::UnlockSingleton();
+        SR_GRAPH_NS::Memory::CameraManager::UnlockSingleton();
     }
 }

@@ -10,6 +10,7 @@
 #include <Utils/Common/Enumerations.h>
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ECS/Component.h>
+#include <Memory/IGraphicsResource.h>
 
 namespace SR_UTILS_NS::Types {
     class RawMesh;
@@ -17,8 +18,11 @@ namespace SR_UTILS_NS::Types {
 
 namespace SR_GRAPH_NS {
     class Render;
-    class Shader;
     class Environment;
+}
+
+namespace SR_GRAPH_NS::Types {
+    class Shader;
 }
 
 namespace SR_GTYPES_NS {
@@ -31,7 +35,7 @@ namespace SR_GTYPES_NS {
         Skinned = 3,
     )
 
-    class Mesh : public SR_UTILS_NS::IResource, public SR_UTILS_NS::Component {
+    class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {
         friend class Material;
     protected:
         explicit Mesh(MeshType type, std::string name = "Unnamed");
@@ -56,8 +60,7 @@ namespace SR_GTYPES_NS {
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
 
-        /** \warning call only from render */
-        virtual bool FreeVideoMemory();
+        void FreeVideoMemory() override;
 
     public:
         Helper::Math::FVector3 GetBarycenter() const override;

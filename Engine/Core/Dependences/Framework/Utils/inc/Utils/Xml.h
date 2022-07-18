@@ -207,6 +207,14 @@ namespace SR_UTILS_NS::Xml {
 
                 return vector2;
             }
+            else if constexpr (std::is_same<T, Helper::Math::UVector2>()) {
+                Helper::Math::UVector2 vector2;
+
+                vector2.x = GetAttribute("X").ToUInt();
+                vector2.y = GetAttribute("Y").ToUInt();
+
+                return vector2;
+            }
             else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
                 Helper::Math::FVector3 vector3;
 
@@ -222,6 +230,15 @@ namespace SR_UTILS_NS::Xml {
                 vector3.x = GetAttribute("X").ToInt();
                 vector3.y = GetAttribute("Y").ToInt();
                 vector3.z = GetAttribute("Z").ToInt();
+
+                return vector3;
+            }
+            else if constexpr (std::is_same<T, Helper::Math::UVector3>()) {
+                Helper::Math::UVector3 vector3;
+
+                vector3.x = GetAttribute("X").ToUInt();
+                vector3.y = GetAttribute("Y").ToUInt();
+                vector3.z = GetAttribute("Z").ToUInt();
 
                 return vector3;
             }

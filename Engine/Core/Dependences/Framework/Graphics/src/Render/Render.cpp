@@ -5,6 +5,7 @@
 #include <Render/Render.h>
 #include <Types/Skybox.h>
 #include <Types/Material.h>
+#include <Types/Shader.h>
 
 namespace SR_GRAPH_NS {
     Render::Render(std::string name)
@@ -32,7 +33,7 @@ namespace SR_GRAPH_NS {
         //InsertShader(Shader::StandardID::Skybox, Shader::Load("skybox"));
         //InsertShader(Shader::StandardID::DebugWireframe, Shader::Load("debugWireframe"));
 
-        m_grid = EditorGrid::Create("engine/grid", this);
+        //m_grid = EditorGrid::Create("engine/grid", this);
 
         m_isCreate = true;
 
@@ -90,9 +91,9 @@ namespace SR_GRAPH_NS {
         data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
         SR_GRAPH_LOG("Render::Close() : close render..." + data);
 
-        if (m_grid) {
-            m_grid->Free();
-        }
+        //if (m_grid) {
+        //    m_grid->Free();
+        //}
 
         m_isRun = false;
         m_isClose = true;
@@ -274,7 +275,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void Render::SetCurrentCamera(Framework::Graphics::Camera *camera)  {
+    void Render::SetCurrentCamera(Framework::Graphics::Types::Camera *camera)  {
         m_currentCamera = camera;
     }
 
@@ -311,7 +312,7 @@ namespace SR_GRAPH_NS {
         SRAssert(false);
     }
 
-    void Render::FreeShader(Shader *shader) {
+    void Render::FreeShader(Types::Shader *shader) {
         m_shadersToFree.Push(shader);
     }
 }

@@ -35,7 +35,7 @@ namespace SR_GTYPES_NS {
 
     private:
         bool Calculate() override;
-        bool FreeVideoMemory() override;
+        void FreeVideoMemory() override;
         void DrawVulkan() override;
         void DrawOpenGL() override;
 

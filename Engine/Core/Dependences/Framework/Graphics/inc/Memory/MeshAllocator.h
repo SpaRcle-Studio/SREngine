@@ -17,10 +17,12 @@ namespace Framework::Graphics::Memory {
 
     public:
         template<typename U> static U* Allocate() {
-            if constexpr (std::is_same<Types::Mesh3D, U>::value)
+            if constexpr (std::is_same<Types::Mesh3D, U>::value) {
                 return new Types::Mesh3D();
-            else if constexpr (std::is_same<Types::DebugWireframeMesh, U>::value)
+            }
+            else if constexpr (std::is_same<Types::DebugWireframeMesh, U>::value) {
                 return new Types::DebugWireframeMesh();
+            }
             else
                 return nullptr;
         }

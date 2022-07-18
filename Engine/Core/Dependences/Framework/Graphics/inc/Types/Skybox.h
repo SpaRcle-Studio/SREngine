@@ -7,8 +7,11 @@
 
 #include <Utils/ResourceManager/IResource.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Shader;
+}
+
+namespace SR_GRAPH_NS {
     class Render;
     class Environment;
 }

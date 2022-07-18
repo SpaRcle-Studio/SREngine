@@ -252,6 +252,10 @@ namespace SR_UTILS_NS {
         for (auto&& [_, type] : m_resources) {
             for (auto&& [path, info] : type.GetInfo()) {
                 for (auto&& pResource : info.m_loaded) {
+                    if (pResource->IsDestroyed()) {
+                        continue;
+                    }
+
                     auto&& fileHash = pResource->GetFileHash();
                     if (fileHash != info.m_fileHash) {
                         pResource->Reload();

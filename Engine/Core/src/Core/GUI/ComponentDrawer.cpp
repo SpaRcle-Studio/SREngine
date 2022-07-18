@@ -13,7 +13,7 @@
 #include <Types/Texture.h>
 #include <Render/Render.h>
 #include <Types/Material.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Core/Settings/EditorSettings.h>
@@ -98,7 +98,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Camera*& camera, EditorGUI* context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index) {
         float_t cameraFar  = camera->GetFar();
         if (ImGui::InputFloat("Far", &cameraFar, 5) && cameraFar >= 0) {
             camera->SetFar(cameraFar);

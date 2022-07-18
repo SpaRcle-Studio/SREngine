@@ -8,13 +8,13 @@
 #include <Utils/Types/Map.h>
 #include <Environment/Basic/IShaderProgram.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Shader;
 }
 
 namespace SR_GRAPH_NS::Memory {
     class ShaderUBOBlock {
-        friend class SR_GRAPH_NS::Shader;
+        friend class SR_GRAPH_NS::Types::Shader;
 
         struct SubBlock {
             ShaderVarType type;

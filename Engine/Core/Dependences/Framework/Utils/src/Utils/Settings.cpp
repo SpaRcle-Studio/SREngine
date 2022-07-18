@@ -62,7 +62,6 @@ namespace SR_UTILS_NS {
     }
 
     Path Settings::GetResourcePath() const {
-        SRHalt("Settings::GetResourcePath() : settings have not path!");
         return IResource::GetResourcePath();
     }
 

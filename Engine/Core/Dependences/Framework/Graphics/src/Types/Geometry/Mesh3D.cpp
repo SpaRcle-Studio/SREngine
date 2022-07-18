@@ -7,8 +7,9 @@
 #include <Types/Material.h>
 #include <Environment/Environment.h>
 #include <Types/Uniforms.h>
-#include <Render/Shader.h>
+#include <Types/Shader.h>
 #include <Render/Render.h>
+#include <Utils/Types/DataStorage.h>
 
 namespace SR_GTYPES_NS {
     bool Mesh3D::Calculate()  {
@@ -52,15 +53,16 @@ namespace SR_GTYPES_NS {
         return mesh3D;
     }
 
-    bool Mesh3D::FreeVideoMemory() {
+    void Mesh3D::FreeVideoMemory() {
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }
 
-        if (!FreeVBO<Vertices::Type::StaticMeshVertex>())
-            return false;
+        if (!FreeVBO<Vertices::Type::StaticMeshVertex>()) {
+            SR_ERROR("Mesh3D::FreeVideoMemory() : failed to free VBO!");
+        }
 
-        return IndexedMesh::FreeVideoMemory();
+        IndexedMesh::FreeVideoMemory();
     }
 
     void Mesh3D::DrawVulkan() {

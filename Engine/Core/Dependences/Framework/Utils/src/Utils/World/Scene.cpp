@@ -280,8 +280,11 @@ namespace SR_WORLD_NS {
                 m_regions.insert(std::pair(m_observer->m_region, pRegion));
             }
 
-            if (auto &&regionIt = m_regions.at(m_observer->m_region))
-                regionIt->GetChunk(m_observer->m_chunk)->OnEnter();
+            if (auto &&regionIt = m_regions.at(m_observer->m_region)) {
+                if (auto&& pChunk = regionIt->GetChunk(m_observer->m_chunk)) {
+                    pChunk->OnEnter();
+                }
+            }
 
             lastRegion = region;
             lastChunk = chunk;

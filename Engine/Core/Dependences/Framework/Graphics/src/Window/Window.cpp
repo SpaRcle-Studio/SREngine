@@ -5,7 +5,7 @@
 #include <Window/Window.h>
 #include <Utils/Math/Vector2.h>
 #include <Render/Render.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <Environment/Environment.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Types/Thread.h>
@@ -66,7 +66,7 @@ namespace SR_GRAPH_NS {
                 case Environment::WinEvents::Resize: {
                     auto&& [width, height] = std::pair<int, int> {*(int *) arg1, *(int *) arg2};
                     if (width > 0 && height > 0) {
-                        CameraManager::Instance().OnWindowResized(this, width, height);
+                        Memory::CameraManager::Instance().OnWindowResized(this, width, height);
                     }
                     break;
                 }
@@ -511,7 +511,7 @@ namespace SR_GRAPH_NS {
         goto ret;
     }
 
-    void Window::DrawToCamera(Camera* camera, uint32_t fbo) {
+    void Window::DrawToCamera(Types::Camera* camera, uint32_t fbo) {
         m_render->SetCurrentCamera(camera);
 
         for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
@@ -531,7 +531,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    void Window::DrawSingleCamera(Camera *camera) {
+    void Window::DrawSingleCamera(Types::Camera *camera) {
         m_render->SetCurrentCamera(camera);
 
         m_env->ClearFramebuffersQueue();
@@ -636,9 +636,9 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        CameraManager::LockSingleton();
+        Memory::CameraManager::LockSingleton();
 
-        auto&& cameraManager = CameraManager::Instance();
+        auto&& cameraManager = Memory::CameraManager::Instance();
         auto&& firstCamera = cameraManager.GetFirstCamera();
         auto&& uboManager = Memory::UBOManager::Instance();
 
@@ -648,7 +648,7 @@ namespace SR_GRAPH_NS {
             }
 
             m_env->SetBuildState(true);
-            CameraManager::UnlockSingleton();
+            Memory::CameraManager::UnlockSingleton();
             return;
         }
 
@@ -690,7 +690,7 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        CameraManager::UnlockSingleton();
+        Memory::CameraManager::UnlockSingleton();
 
         m_env->DrawFrame();
     }

@@ -8,8 +8,11 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Camera;
+}
+
+namespace SR_GRAPH_NS {
     class Window;
 }
 

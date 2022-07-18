@@ -350,7 +350,7 @@ namespace Framework {
                 { "BC7",  7 },
         });
 
-        generator->RegisterEnum("TextureFormat", "Texture", true, {
+        generator->RegisterEnum("ColorFormat", "Texture", true, {
                 { "Unknown",          0 },
                 { "RGBA8_UNORM",  10000 },
                 { "RGBA16_UNORM", 10001 },
@@ -432,7 +432,7 @@ namespace Framework {
 
     void API::RegisterCasts(EvoScript::CastingGen *generator) {
         ESRegisterDynamicCast(generator, Graphics::Types::, Mesh, Helper::, Component)
-        ESRegisterDynamicCast(generator, Graphics::, Camera, Helper::, Component)
+        //ESRegisterDynamicCast(generator, Graphics::, Camera, Helper::, Component)
     }
 
     void API::RegisterShader(EvoScript::AddressTableGen *generator) {

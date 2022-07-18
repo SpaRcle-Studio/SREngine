@@ -11,7 +11,7 @@
 
 #include <Environment/Basic/IShaderProgram.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Shader;
 }
 
@@ -77,7 +77,7 @@ namespace SR_GTYPES_NS {
         SR_INLINE_STATIC Material*   m_default       = nullptr;
 
         const Environment*           m_env           = nullptr;
-        Shader*                      m_shader        = nullptr;
+        Types::Shader*               m_shader        = nullptr;
 
         std::atomic<bool>            m_dirtyShader   = false;
         std::atomic<bool>            m_transparent   = false;

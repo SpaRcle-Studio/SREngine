@@ -3,7 +3,7 @@
 //
 
 #include <Memory/UBOManager.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <Environment/Environment.h>
 
 namespace SR_GRAPH_NS::Memory {
@@ -13,7 +13,7 @@ namespace SR_GRAPH_NS::Memory {
         m_singleCameraMode = SR_UTILS_NS::Features::Instance().Enabled("SingleCameraMode", false);
     }
 
-    void UBOManager::SetCurrentCamera(Camera *pCamera) {
+    void UBOManager::SetCurrentCamera(Types::Camera *pCamera) {
         m_camera = m_singleCameraMode ? nullptr : pCamera;
     }
 
@@ -52,11 +52,6 @@ namespace SR_GRAPH_NS::Memory {
                 descriptor,
                 ubo
         });
-
-        //virtualUboInfo.m_data.insert(std::make_pair(
-        //        m_ignoreCameras ? nullptr : m_camera,
-        //        std::make_pair(ubo, descriptor))
-        //);
 
         m_virtualTable.insert(std::make_pair(
                 virtualUbo,

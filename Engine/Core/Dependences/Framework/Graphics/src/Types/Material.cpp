@@ -5,7 +5,7 @@
 #include <Types/Material.h>
 
 #include <Types/Mesh.h>
-#include <Render/Shader.h>
+#include <Types/Shader.h>
 #include <Types/Texture.h>
 
 namespace SR_GTYPES_NS {

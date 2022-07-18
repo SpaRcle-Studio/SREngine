@@ -94,16 +94,17 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    bool DebugWireframeMesh::FreeVideoMemory() {
+    void DebugWireframeMesh::FreeVideoMemory() {
         SR_SCOPED_LOCK
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }
 
-        if (!FreeVBO<Vertices::Type::SimpleVertex>())
-            return false;
+        if (!FreeVBO<Vertices::Type::SimpleVertex>()) {
+            SR_ERROR("DebugWireframeMesh::FreeVideoMemory() : failed to free VBO!");
+        }
 
-        return IndexedMesh::FreeVideoMemory();
+        IndexedMesh::FreeVideoMemory();
     }
 }

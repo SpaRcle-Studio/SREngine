@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Settings dynamicScaling="true" shader="Engine/framebuffer.srsl">
+    <Depth Format="Auto"/>
+    <Colors>
+        <Color Format="RGBA8_UNORM"/>
+    </Colors>
+    <Size X="0" Y="0"/>
+    <PreScale X="1" Y="1"/>
+</Settings>

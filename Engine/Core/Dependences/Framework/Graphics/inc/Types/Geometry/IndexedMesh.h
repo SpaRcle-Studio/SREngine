@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS::Types {
         IResource* Copy(IResource* destination) const override;
 
         bool Calculate() override;
-        bool FreeVideoMemory() override;
+        void FreeVideoMemory() override;
 
         template<Vertices::Type type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
         template<Vertices::Type type> bool FreeVBO();

@@ -10,7 +10,7 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Input/InputSystem.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Camera;
 }
 
@@ -48,8 +48,8 @@ namespace SR_GRAPH_NS::GUI {
 
     private:
         glm::mat4 GetMatrix();
-        void SetRect(SR_GRAPH_NS::Camera* camera);
-        void DrawManipulation(SR_GRAPH_NS::Camera* camera);
+        void SetRect(SR_GRAPH_NS::Types::Camera* camera);
+        void DrawManipulation(SR_GRAPH_NS::Types::Camera* camera);
 
     private:
         SR_UTILS_NS::Transform3D* m_transform     = nullptr;

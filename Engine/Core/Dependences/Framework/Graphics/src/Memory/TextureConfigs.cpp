@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS::Memory {
         if (path.Exists()) {
             auto doc = Helper::Xml::Document::Load(path);
             for (const auto& texture : doc.Root().TryGetNode("Textures").TryGetNodes("Texture")) {
-                const auto format      = StringToEnumTextureFormat(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
+                const auto format      = StringToEnumColorFormat(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
                 const auto autoRemove  = texture.TryGetAttribute("AutoRemove").ToBool(true);
                 const auto filter      = StringToEnumTextureFilter(texture.TryGetAttribute("Filter").ToString("LINEAR"));
                 const auto compression = StringToEnumTextureCompression(texture.TryGetAttribute("Compression").ToString("None"));

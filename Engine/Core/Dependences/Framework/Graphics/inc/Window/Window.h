@@ -9,6 +9,10 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafeGateArray.h>
 
+namespace SR_GRAPH_NS::Types {
+    class Camera;
+}
+
 namespace SR_GRAPH_NS {
     namespace GUI {
         class WidgetManager;
@@ -16,7 +20,6 @@ namespace SR_GRAPH_NS {
 
     class Render;
     class Environment;
-    class Camera;
 
     class Window : SR_UTILS_NS::NonCopyable {
     public:
@@ -69,8 +72,8 @@ namespace SR_GRAPH_NS {
         void DrawVulkan();
         void DrawOpenGL();
 
-        void DrawToCamera(Camera* camera, uint32_t fbo);
-        void DrawSingleCamera(Camera* camera);
+        void DrawToCamera(Types::Camera* camera, uint32_t fbo);
+        void DrawSingleCamera(Types::Camera* camera);
 
     private:
         std::atomic<bool>     m_isCreate              = false;

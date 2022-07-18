@@ -10,7 +10,7 @@
 
 namespace SR_GRAPH_NS::Memory {
     struct TextureConfig {
-        TextureConfig(TextureFormat format,
+        TextureConfig(ColorFormat format,
                 bool autoRemove,
                 TextureFilter filter,
                 TextureCompression compression,
@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS::Memory {
         { }
 
         TextureConfig()
-            : m_format(TextureFormat::RGBA8_UNORM)
+            : m_format(ColorFormat::RGBA8_UNORM)
             , m_autoRemove(true)
             , m_filter(TextureFilter::LINEAR)
             , m_compression(TextureCompression::None)
@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS::Memory {
             , m_cpuUsage(false)
         { }
 
-        TextureFormat m_format;
+        ColorFormat m_format;
         bool m_autoRemove;
         TextureFilter m_filter;
         TextureCompression m_compression;

@@ -8,37 +8,40 @@
 #include <Utils/Debug.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/ResourceManager/IResource.h>
+#include <Memory/IGraphicsResource.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Shader;
 }
 
 namespace SR_GTYPES_NS {
-    class Framebuffer : SR_UTILS_NS::IResource {
+    class RenderTexture;
+
+    class Framebuffer : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
     public:
         using Ptr = Framebuffer*;
         using Super = SR_UTILS_NS::IResource;
-
     private:
         Framebuffer();
         ~Framebuffer() override;
 
     public:
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
-        static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size, const std::string& shaderPath);
+        static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size, const SR_UTILS_NS::Path& shaderPath);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, const SR_UTILS_NS::Path& shaderPath);
 
     public:
         bool Bind();
         void Draw();
-        void Free();
 
         bool BeginRender();
         void EndRender();
 
         void SetSize(const SR_MATH_NS::IVector2& size);
-        void SetImagesCount(uint32_t count);
 
         SR_NODISCARD int32_t GetId();
+
+        void FreeVideoMemory() override;
 
     protected:
         void OnResourceUpdated(IResource* pResource, int32_t deep) override;
@@ -49,20 +52,21 @@ namespace SR_GTYPES_NS {
         bool InitShader();
 
     private:
-        Shader*              m_shader      = nullptr;
+        Shader*                 m_shader         = nullptr;
 
-        bool                 m_isInit      = false;
-        std::atomic<bool>    m_hasErrors   = false;
-        std::atomic<bool>    m_needResize  = false;
-        std::atomic<bool>    m_dirtyShader = false;
+        bool                    m_isInit         = false;
+        bool                    m_dynamicScaling = false;
+        std::atomic<bool>       m_hasErrors      = false;
+        std::atomic<bool>       m_needResize     = false;
+        std::atomic<bool>       m_dirtyShader    = false;
 
-        std::vector<int32_t> m_colors      = { };
-        int32_t              m_depth       = SR_ID_INVALID;
-        int32_t              m_frameBuffer = SR_ID_INVALID;
-        int32_t              m_virtualUBO  = SR_ID_INVALID;
+        std::vector<ColorLayer> m_colors         = { };
+        DepthLayer              m_depth          = { };
+        int32_t                 m_frameBuffer    = SR_ID_INVALID;
+        int32_t                 m_virtualUBO     = SR_ID_INVALID;
 
-        SR_MATH_NS::IVector2 m_size        = { };
-        SR_UTILS_NS::Path    m_shaderPath  = SR_UTILS_NS::Path();
+        SR_MATH_NS::IVector2    m_size           = { };
+        SR_UTILS_NS::Path       m_shaderPath     = SR_UTILS_NS::Path();
 
     };
 }

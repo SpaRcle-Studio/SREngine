@@ -16,6 +16,16 @@
 #include <Types/Descriptors.h>
 
 namespace SR_GRAPH_NS {
+    struct ColorLayer {
+        int32_t texture = SR_ID_INVALID;
+        ColorFormat format = ColorFormat::Unknown;
+    };
+
+    struct DepthLayer {
+        int32_t texture = SR_ID_INVALID;
+        DepthFormat format = DepthFormat::Unknown;
+    };
+
     typedef ImGuiContext* GUIContext;
     typedef ImFont* Font;
 
@@ -196,9 +206,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const { }
 
-        virtual bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) { return false; }
-        virtual bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) { return false; }
-        virtual bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const { return false; }
+        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) { return false; }
 
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
         virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }
@@ -310,7 +318,7 @@ namespace SR_GRAPH_NS {
          */
         virtual int32_t CalculateTexture(
                 uint8_t * data,
-                TextureFormat format,
+                ColorFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,

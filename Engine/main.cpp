@@ -37,17 +37,20 @@
 #include <Types/Material.h>
 #include <Types/Skybox.h>
 #include <Types/Mesh.h>
+#include <Types/Shader.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <Animations/Bone.h>
 #include <Memory/MeshAllocator.h>
 #include <GUI/NodeManager.h>
 #include <FbxLoader/Debug.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <Render/RenderManager.h>
-#include <Render/CameraManager.h>
+#include <Memory/CameraManager.h>
 #include <Scripting/Base/Behaviour.h>
 #include <Utils/Settings.h>
 #include <Utils/Platform/Platform.h>
+#include <Types/Framebuffer.h>
+#include <Types/RenderTexture.h>
 
 using namespace Framework;
 
@@ -141,6 +144,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Settings>();
         resourcesManager.RegisterType<Sound>();
         resourcesManager.RegisterType<RawSound>();
+        resourcesManager.RegisterType<Framebuffer>();
     }
 
     // Register all components
@@ -243,7 +247,7 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
-    SR_GRAPH_NS::CameraManager::DestroySingleton();
+    SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
     SR_AUDIO_NS::SoundManager::DestroySingleton();

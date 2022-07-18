@@ -5,6 +5,7 @@
 #include <Environment/Vulkan.h>
 #include <Utils/GUI.h>
 #include <Utils/Common/Features.h>
+#include <Environment/Vulkan/AbstractCasts.h>
 
 #ifdef SR_WIN32
     #include <vulkan/vulkan_win32.h>
@@ -409,7 +410,18 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool Vulkan::CreateFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &FBO, std::vector<int32_t> &colorBuffers) {
+    bool Vulkan::CreateFrameBuffer(const Helper::Math::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors) {
+        std::vector<int32_t> colorBuffers;
+        colorBuffers.reserve(colors.size());
+
+        std::vector<VkFormat> formats;
+        formats.reserve(colors.size());
+
+        for (auto&& color : colors) {
+            colorBuffers.emplace_back(color.texture);
+            formats.emplace_back(VulkanTools::AbstractTextureFormatToVkFormat(color.format));
+        }
+
         if (size.x == 0 || size.y == 0) {
             SR_ERROR("Vulkan::CreateFrameBuffer() : width or height equals zero!");
             return false;
@@ -421,20 +433,21 @@ namespace Framework::Graphics {
         }
 
         if (FBO > 0) {
-            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, rboDepth)) {
+            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, pDepth->texture)) {
                 SR_ERROR("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
-            return true;
+            goto success;
         }
 
-        std::vector<VkFormat> formats = {};
-        for (uint32_t i = 0; i < colorBuffers.size(); i++)
-            formats.emplace_back(VK_FORMAT_R8G8B8A8_UNORM);
-
-        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, rboDepth) + 1;
+        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, pDepth->texture) + 1;
         if (FBO <= 0) {
             SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
             return false;
+        }
+
+    success:
+        for (uint32_t i = 0; i < static_cast<uint32_t>(colors.size()); ++i) {
+            colors[i].texture = colorBuffers[i];
         }
 
         return true;
@@ -467,7 +480,7 @@ namespace Framework::Graphics {
 
     int32_t Vulkan::CalculateTexture(
             uint8_t *data,
-            TextureFormat format,
+            ColorFormat format,
             uint32_t w,
             uint32_t h,
             TextureFilter filter,
@@ -476,7 +489,7 @@ namespace Framework::Graphics {
             bool alpha,
             bool cpuUsage// unused
     ) const {
-        auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format, true /* alpha */);
+        auto vkFormat = VulkanTools::AbstractTextureFormatToVkFormat(format);
         if (vkFormat == VK_FORMAT_MAX_ENUM) {
             SR_ERROR("Vulkan::CalculateTexture() : unsupported format!");
             return -1;

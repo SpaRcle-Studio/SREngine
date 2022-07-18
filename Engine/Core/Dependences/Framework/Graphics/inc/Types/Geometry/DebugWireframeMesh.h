@@ -38,7 +38,7 @@ namespace SR_GTYPES_NS {
 
         bool Calculate() override;
 
-        bool FreeVideoMemory() override;
+        void FreeVideoMemory() override;
 
     };
 }

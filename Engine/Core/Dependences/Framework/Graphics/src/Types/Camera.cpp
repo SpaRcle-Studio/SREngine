@@ -2,21 +2,21 @@
 // Created by Nikita on 18.11.2020.
 //
 
-#include <Render/Camera.h>
-#include <Render/CameraManager.h>
+#include <Types/Camera.h>
+#include <Memory/CameraManager.h>
 #include <Window/Window.h>
 #include <Utils/Types/DataStorage.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     Camera::Camera()
         : m_pipeline(Environment::Get()->GetPipeLine())
     {
         SR_UTILS_NS::Component::InitComponent<Camera>();
-        CameraManager::Instance().RegisterCamera(this);
+        Memory::CameraManager::Instance().RegisterCamera(this);
     }
 
     void Camera::OnDestroy() {
-        CameraManager::Instance().DestroyCamera(this);
+        Memory::CameraManager::Instance().DestroyCamera(this);
         Component::OnDestroy();
     }
 

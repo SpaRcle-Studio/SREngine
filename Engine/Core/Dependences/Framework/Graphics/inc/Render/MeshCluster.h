@@ -13,9 +13,8 @@ namespace SR_GRAPH_NS {
     namespace Types {
         class IndexedMesh;
         class Mesh;
+        class Shader;
     }
-
-    class Shader;
 
     typedef uint32_t ClusterVBOId;
 
@@ -24,9 +23,8 @@ namespace SR_GRAPH_NS {
     typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
     struct ShadedMeshSubCluster : public SR_UTILS_NS::NonCopyable {
-        ~ShadedMeshSubCluster() override = default;
-
         ShadedMeshSubCluster() = default;
+        ~ShadedMeshSubCluster() override = default;
 
         ShadedMeshSubCluster(ShadedMeshSubCluster&& ref) noexcept {
             m_groups = std::exchange(ref.m_groups, {});
@@ -55,7 +53,7 @@ namespace SR_GRAPH_NS {
         MeshCluster();
         ~MeshCluster() override = default;
 
-        ska::flat_hash_map<Shader*, ShadedMeshSubCluster> m_subClusters;
+        ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
         bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;

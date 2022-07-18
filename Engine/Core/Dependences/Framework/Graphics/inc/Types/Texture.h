@@ -8,6 +8,7 @@
 #include <Utils/ResourceManager/IResource.h>
 #include <Environment/TextureHelper.h>
 #include <Memory/TextureConfigs.h>
+#include <Memory/IGraphicsResource.h>
 
 namespace SR_GRAPH_NS {
     class Environment;
@@ -16,7 +17,7 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GTYPES_NS {
-    class Texture : public SR_UTILS_NS::IResource {
+    class Texture : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class ::SR_GRAPH_NS::TextureLoader;
     private:
         Texture();
@@ -47,7 +48,7 @@ namespace SR_GTYPES_NS {
 
         void RemoveUsePoint() override;
 
-        bool FreeVideoMemory();
+        void FreeVideoMemory() override;
 
     protected:
         bool Unload() override;
