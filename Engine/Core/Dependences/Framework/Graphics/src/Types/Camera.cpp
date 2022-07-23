@@ -6,17 +6,64 @@
 #include <Memory/CameraManager.h>
 #include <Window/Window.h>
 #include <Utils/Types/DataStorage.h>
+#include <Render/RenderTechnique.h>
+#include <Utils/Types/SafePtrLockGuard.h>
 
-namespace SR_GRAPH_NS::Types {
-    Camera::Camera()
-        : m_pipeline(Environment::Get()->GetPipeLine())
+namespace SR_GTYPES_NS {
+    Camera::Camera(uint32_t width, uint32_t height)
+        : m_viewportSize(SR_MATH_NS::IVector2(width, height))
     {
         SR_UTILS_NS::Component::InitComponent<Camera>();
-        Memory::CameraManager::Instance().RegisterCamera(this);
+
+        UpdateProjection();
+        UpdateView();
+    }
+
+    Camera::~Camera() {
+        std::visit([this](RenderTechniquePtr&& arg) {
+            if (std::holds_alternative<RenderTechnique *>(arg)) {
+                std::get<RenderTechnique*>(arg)->RemoveUsePoint();
+            }
+        }, m_renderTechnique);
+    }
+
+    void Camera::OnAttached() {
+        Component::OnAttached();
+
+        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
+            renderScene->RegisterCamera(this);
+            renderScene.Unlock();
+        }
+        else {
+            SRHalt("Render scene is invalid!");
+        }
+
+        /*auto&& cameraManager = Memory::CameraManager::Instance();
+
+        /// Что-то пошло не так, возможно переподсоединили компонент во время уничтожения объекта.
+        if (cameraManager.IsDestroyed(this)) {
+            SRHalt("Camera is destroyed! Crash possible!");
+            return;
+        }
+
+        /// Возможно компонент был переподсоиденен, стоит его перезарегистрировать
+        if (cameraManager.IsRegistered(this)) {
+            cameraManager.UnRegisterCamera(this);
+        }
+
+        cameraManager.RegisterCamera(this);*/
     }
 
     void Camera::OnDestroy() {
-        Memory::CameraManager::Instance().DestroyCamera(this);
+        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
+            renderScene->DestroyCamera(this);
+            renderScene.Unlock();
+        }
+        else {
+            SRHalt("Render scene is invalid!");
+        }
+
+        //Memory::CameraManager::Instance().DestroyCamera(this);
         Component::OnDestroy();
     }
 
@@ -43,45 +90,72 @@ namespace SR_GRAPH_NS::Types {
 
         auto&& viewportSize = pWindow->GetWindowSize();
 
-        if (auto&& pCamera = Allocate(viewportSize.x, viewportSize.y)) {
-            pCamera->SetFar(_far);
-            pCamera->SetNear(_near);
-            pCamera->SetFOV(FOV);
+        auto&& pCamera = new Camera(viewportSize.x, viewportSize.y);
 
-            pCamera->UpdateView();
-            pCamera->UpdateProjection();
+        pCamera->SetFar(_far);
+        pCamera->SetNear(_near);
+        pCamera->SetFOV(FOV);
 
-            return pCamera;
+        pCamera->UpdateView();
+        pCamera->UpdateProjection();
+
+        return pCamera;
+    }
+
+    RenderTechnique *Camera::GetRenderTechnique() {
+        return std::visit([this](RenderTechniquePtr&& arg) -> RenderTechnique* {
+            if (std::holds_alternative<RenderTechnique*>(arg)) {
+                return std::get<RenderTechnique*>(arg);
+            }
+            else {
+                auto&& path = std::get<SR_UTILS_NS::Path>(arg);
+
+                /// default technique
+                if (path.Empty()) {
+                    path = "Engine/MainRenderTechnique.xml";
+                }
+
+                if (auto&& pRenderTechnique = RenderTechnique::Load(path)) {
+                    pRenderTechnique->SetCamera(this);
+                    pRenderTechnique->SetRenderScene(GetRenderScene());
+                    pRenderTechnique->AddUsePoint();
+
+                    m_renderTechnique = pRenderTechnique;
+
+                    return GetRenderTechnique();
+                }
+
+                return nullptr;
+            }
+        }, m_renderTechnique);
+    }
+
+    Camera::RenderScenePtr Camera::GetRenderScene() const {
+        auto&& scene = GetScene();
+
+        SR_HTYPES_NS::SafePtrRecursiveLockGuard m_lock(scene);
+
+        if (scene.Valid()) {
+            return scene->GetDataStorage().GetValue<RenderScenePtr>();
+        }
+        else {
+            SRHalt("Scene is invalid!");
         }
 
-        return nullptr;
+        return RenderScenePtr();
     }
 
     void Camera::UpdateView() noexcept {
         glm::mat4 matrix(1.f);
 
-        if (m_pipeline == PipeLine::OpenGL) {
-            matrix = glm::rotate(matrix, m_pitch, { 1, 0, 0 });
-            matrix = glm::rotate(matrix, m_yaw + float(180.f * 3.14 / 45.f / 4.f), { 0, 1, 0 });
-            matrix = glm::rotate(matrix, m_roll,   { 0, 0, 1 });
+        /// Vulkan implementation
+        matrix = glm::rotate(matrix, -m_pitch + float_t(M_PI), { 1, 0, 0 });
+        matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
+        matrix = glm::rotate(matrix, -m_roll,  { 0, 0, 1 });
 
-            m_viewMat = matrix;
+        m_viewTranslateMat = glm::translate(matrix, -m_position.ToGLM());
 
-            m_viewTranslateMat = glm::translate(matrix, {
-                    m_position.x,
-                    -m_position.y,
-                    -m_position.z//-m_pos.z
-            });
-        }
-        else {
-            matrix = glm::rotate(matrix, -m_pitch + float(M_PI), { 1, 0, 0 });
-            matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
-            matrix = glm::rotate(matrix, -m_roll,  { 0, 0, 1 });
-
-            m_viewMat = matrix;
-
-            m_viewTranslateMat = glm::translate(matrix, -m_position.ToGLM());
-        }
+        m_viewMat = matrix;
     }
 
     void Camera::OnRotate(const SR_MATH_NS::FVector3& newValue) {
@@ -114,14 +188,6 @@ namespace SR_GRAPH_NS::Types {
         UpdateProjection();
     }
 
-    Camera* Camera::Allocate(uint32_t width, uint32_t height) {
-        auto&& camera = new Camera();
-        camera->m_viewportSize = { (int32_t)width, (int32_t)height };
-        camera->UpdateProjection();
-        camera->UpdateView();
-        return camera;
-    }
-
     glm::mat4 Camera::GetImGuizmoView() const noexcept {
         auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
         matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
@@ -150,12 +216,22 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Camera::OnEnabled() {
-        Environment::Get()->SetBuildState(false);
+        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
+            renderScene->SetDirtyCameras();
+            renderScene.Unlock();
+        }
+
+        //Environment::Get()->SetBuildState(false);
         Component::OnEnabled();
     }
 
     void Camera::OnDisabled() {
-        Environment::Get()->SetBuildState(false);
+        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
+            renderScene->SetDirtyCameras();
+            renderScene.Unlock();
+        }
+
+        //Environment::Get()->SetBuildState(false);
         Component::OnDisabled();
     }
 }

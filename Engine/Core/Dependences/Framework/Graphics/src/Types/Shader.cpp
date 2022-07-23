@@ -6,6 +6,7 @@
 
 #include <Types/Texture.h>
 #include <Render/Render.h>
+#include <Render/RenderContext.h>
 #include <Environment/Environment.h>
 
 #include <Utils/ResourceManager/ResourceManager.h>
@@ -35,6 +36,15 @@ namespace SR_GRAPH_NS::Types {
         if (!SRVerifyFalse2(!(m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
             m_hasErrors = true;
             return false;
+        }
+
+        if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
+            m_hasErrors = true;
+            return false;
+        }
+        else if (m_context.LockIfValid()) {
+            m_context->Register(this);
+            m_context.Unlock();
         }
 
         m_shaderProgram = Memory::ShaderProgramManager::Instance().ReAllocate(m_shaderProgram, m_shaderCreateInfo);
@@ -195,7 +205,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Ready() const {
-        return !m_hasErrors && m_isInit;
+        return !m_hasErrors && m_isInit && m_shaderProgram != SR_ID_INVALID;
     }
 
     uint64_t Shader::GetUBOBlockSize() const {

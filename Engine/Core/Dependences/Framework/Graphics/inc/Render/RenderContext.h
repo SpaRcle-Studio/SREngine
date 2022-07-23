@@ -6,47 +6,67 @@
 #define SRENGINE_RENDERCONTEXT_H
 
 #include <Render/MeshCluster.h>
+#include <Utils/World/Scene.h>
+#include <Utils/Types/SafePointer.h>
 
 namespace SR_GTYPES_NS {
     class Framebuffer;
     class Shader;
     class Texture;
+    class Skybox;
 }
 
 namespace SR_GRAPH_NS {
     class RenderScene;
+    class RenderTechnique;
+    class Environment;
+
     /**
      * Здесь хранятся все контекстные ресурсы.
      * Исключение - меши, потому что они могут быть в нескольких экземплярах.
      * Управлением памяти мешей занимается MeshCluster, который у каждой RenderScene свой.
      */
-    class RenderContext : public SR_UTILS_NS::NonCopyable {
+    class RenderContext : public SR_HTYPES_NS::SafePtr<RenderContext> {
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using PipelinePtr = Environment*;
+        using Super = SR_HTYPES_NS::SafePtr<RenderContext>;
     public:
-        ~RenderContext() override = default;
+        RenderContext();
+        virtual ~RenderContext() = default;
 
     public:
         void Update();
 
-        SR_NODISCARD bool IsEmpty() const;
-
     public:
+        bool Init();
+
+        RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
+
         void Register(Types::Framebuffer* pFramebuffer);
         void Register(Types::Shader* pShader);
         void Register(Types::Texture* pTexture);
+        void Register(RenderTechnique* pTechnique);
+
+        SR_NODISCARD bool IsEmpty() const;
+        SR_NODISCARD PipelinePtr GetPipeline() const;
 
     private:
         template<typename T> bool Update(std::list<T>& resourceList);
 
     private:
-        mutable std::recursive_mutex m_mutex;
-
         std::list<Types::Framebuffer*> m_framebuffers;
         std::list<Types::Shader*> m_shaders;
         std::list<Types::Texture*> m_textures;
+        std::list<RenderTechnique*> m_techniques;
 
-        std::list<RenderScene*> m_scenes;
+        std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>> m_scenes;
+
+        PipelinePtr m_pipeline = nullptr;
+        PipeLineType m_pipelineType = PipeLineType::Unknown;
 
     };
+
+    /// ------------------------------------------------------------------------------
 
     template<typename T> bool RenderContext::Update(std::list<T> &resourceList) {
         bool dirty = false;
@@ -62,7 +82,7 @@ namespace SR_GRAPH_NS {
                 /// Иначе ресурс может дважды уничтожиться.
                 pResource->RemoveUsePoint();
                 pIt = resourceList.erase(pIt);
-                /// после освобождения ресурса необходимо перестроить сцену
+                /// После освобождения ресурса необходимо перестроить все контекстные сцены рендера.
                 dirty |= true;
             }
             else {

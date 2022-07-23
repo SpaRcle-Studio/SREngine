@@ -242,6 +242,9 @@ namespace SR_UTILS_NS::Xml {
 
                 return vector3;
             }
+            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+                return GetAttribute("Path").ToString();
+            }
             else if constexpr (std::is_same<T, int32_t>()) {
                 return GetAttribute("Int32").ToInt();
             }

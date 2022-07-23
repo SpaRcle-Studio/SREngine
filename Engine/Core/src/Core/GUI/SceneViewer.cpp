@@ -177,9 +177,10 @@ void SceneViewer::InitCamera() {
         return;
 
     const auto size = m_window->GetWindowSize();
-    auto component = SR_GTYPES_NS::Camera::Allocate(size.x, size.y);
+
+    auto&& pCamera = new SR_GTYPES_NS::Camera(size.x, size.y);
     //component->SetDirectOutput(true);
-    camera->AddComponent(component);
+    camera->AddComponent(pCamera);
 
     camera->GetTransform()->GlobalTranslate(m_translation);
     camera->GetTransform()->GlobalRotate(m_rotation);

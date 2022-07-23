@@ -20,6 +20,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class Render;
+    class RenderContext;
     class Environment;
 }
 
@@ -28,6 +29,7 @@ namespace SR_GRAPH_NS::Types {
 
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         using ShaderProgram = int32_t;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
     private:
         Shader();
         ~Shader() override;
@@ -45,6 +47,7 @@ namespace SR_GRAPH_NS::Types {
 
     public:
         SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { return m_render; }
+        SR_NODISCARD SR_FORCE_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD int32_t GetID();
         SR_NODISCARD bool Ready() const;
@@ -93,7 +96,9 @@ namespace SR_GRAPH_NS::Types {
         ShaderSamplers         m_samplers             = ShaderSamplers();
         ShaderProperties       m_properties           = ShaderProperties();
 
+        SR_DEPRECATED
         Render*                m_render               = nullptr;
+        RenderContextPtr       m_context              = { };
 
     };
 }

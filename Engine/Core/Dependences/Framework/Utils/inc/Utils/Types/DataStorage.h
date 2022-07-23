@@ -25,6 +25,9 @@ namespace SR_HTYPES_NS {
         template<typename T> T* GetPointer(const std::string& name) const;
         template<typename T> T* GetPointer() const;
 
+        template<typename T> T* GetPointerDef(const std::string& name, T* def) const;
+        template<typename T> T* GetPointerDef(T* def) const;
+
         template<typename T> T GetValue(const std::string& name) const;
         template<typename T> T GetValue() const;
 
@@ -132,6 +135,23 @@ namespace SR_HTYPES_NS {
 
     template<typename T> bool DataStorage::RemoveValue() {
         return RemoveValue<T>(typeid(T).name());
+    }
+
+    template<typename T> T *DataStorage::GetPointerDef(const std::string &name, T *def) const {
+        if (m_pointers.count(name) == 0) {
+            return def;
+        }
+
+        if (T* ptr = reinterpret_cast<T*>(m_pointers.at(name)))
+            return ptr;
+
+        SR_ERROR("DataStorage::GetPointerDef() : invalid pointer! Name: " + name);
+
+        return def;
+    }
+
+    template<typename T> T *DataStorage::GetPointerDef(T *def) const {
+        return GetPointerDef<T>(typeid(T).name(), def);
     }
 }
 

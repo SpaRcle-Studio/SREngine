@@ -8,6 +8,7 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Task : public NonCopyable {
@@ -15,48 +16,55 @@ namespace SR_UTILS_NS {
         enum class State {
             Unknown, Waiting, Launched, Stopped, Completed, Failed
         };
+        using StatePtr = std::atomic<State>*;
 
-        using TaskFn = std::function<void(std::atomic<State>*)>;
+        using TaskFn = SR_HTYPES_NS::Function<void(StatePtr)>;
 
     public:
-        explicit Task(TaskFn fn);
+        explicit Task(TaskFn fn, bool createThread);
         Task(Task&& task) noexcept;
         Task& operator=(Task&& task) noexcept;
 
         ~Task() override;
 
     public:
-        bool Run(uint64_t id);
+        bool Run();
         bool Stop();
 
+        void SetId(uint64_t id);
+
         SR_NODISCARD bool IsCompleted() const;
+        SR_NODISCARD bool IsWaiting() const;
         SR_NODISCARD State GetResult() const;
         SR_NODISCARD uint64_t GetId() const;
 
     private:
+        bool m_createThread;
         uint64_t m_id;
         Types::Thread::Ptr m_thread;
         TaskFn m_function;
         /// должен быть динамическим, иначе может потеряться ссылка при перемещении
-        std::atomic<State>* m_state;
+        StatePtr m_state;
 
     };
 
     class TaskManager : public Singleton<TaskManager> {
         friend class Singleton<TaskManager>;
+        using TaskFn = SR_HTYPES_NS::Function<void(std::atomic<Task::State>*)>;
+        using TaskId = uint64_t;
     public:
         ~TaskManager() override;
 
     public:
-        bool Run();
-        void Close();
+        TaskId Execute(Task&& task);
+        TaskId Execute(const TaskFn& function, bool createThread);
 
-        bool Execute(Task&& task);
-
-        Task::State GetResult(uint64_t taskId) const;
+        Task::State GetResult(TaskId taskId) const;
 
     private:
-        [[nodiscard]] uint64_t GetUniqueId() const;
+        SR_NODISCARD uint64_t GetUniqueId() const;
+        void OnSingletonDestroy() override;
+        void InitSingleton() override;
 
     private:
         Types::Thread::Ptr m_thread;
@@ -65,8 +73,8 @@ namespace SR_UTILS_NS {
 
         /// Предполагается, что задач не будет слишком много,
         /// и не будет надобности в unordered set/map
-        std::set<uint64_t> m_ids;
-        mutable std::map<uint64_t, Task::State> m_results;
+        std::set<TaskId> m_ids;
+        mutable std::map<TaskId, Task::State> m_results;
 
     };
 }

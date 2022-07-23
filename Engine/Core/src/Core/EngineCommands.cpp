@@ -27,7 +27,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
     if (!ptrRaw)
         return false;
 
-    SR_UTILS_NS::GameObject::Ptr& ptr = ptrRaw->GetThis();
+    auto&& ptr = ptrRaw->GetThis();
 
     m_scene = ptr.Do<Scene::Ptr>([](SR_UTILS_NS::GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
 

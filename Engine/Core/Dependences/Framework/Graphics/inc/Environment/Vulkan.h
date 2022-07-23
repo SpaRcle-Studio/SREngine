@@ -160,8 +160,13 @@ namespace SR_GRAPH_NS {
         bool InitGUI() override;
         bool StopGUI() override;
         void SetGUIEnabled(bool enabled) override {
-            m_kernel->SetGUIEnabled(enabled);
+            if (m_guiEnabled == enabled) {
+                return;
+            }
+
             m_guiEnabled = enabled;
+
+            m_kernel->SetGUIEnabled(enabled);
             m_basicWindow->SetHeaderEnabled(!enabled);
         }
         bool BeginDrawGUI() override;

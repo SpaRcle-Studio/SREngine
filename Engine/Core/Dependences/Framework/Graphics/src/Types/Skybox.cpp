@@ -8,7 +8,6 @@
 #include <stbi/stb_image.h>
 #include <Render/Render.h>
 #include <Types/Vertices.h>
-#include <Window/Window.h>
 #include <Loaders/ObjLoader.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/Vertices.hpp>
@@ -20,14 +19,23 @@ namespace SR_GTYPES_NS {
     { }
 
     Skybox::~Skybox() {
-        SRAssert(!m_shader);
-        SRAssert(m_cubeMap == SR_ID_INVALID);
+        SetShader(nullptr);
+
+        SRAssert(
+            m_cubeMap == SR_ID_INVALID &&
+            m_virtualUBO == SR_ID_INVALID &&
+            m_VBO == SR_ID_INVALID &&
+            m_IBO == SR_ID_INVALID &&
+            m_VAO == SR_ID_INVALID
+        );
 
         for (auto&& img : m_data) {
-            if (img) {
-                stbi_image_free(img);
-                img = nullptr;
+            if (!img) {
+                continue;
             }
+
+            stbi_image_free(img);
+            img = nullptr;
         }
     }
 
@@ -65,17 +73,17 @@ namespace SR_GTYPES_NS {
             sides[i] = data;
         }
 
-        auto *skybox = new Skybox();
+        auto pSkybox = new Skybox();
 
-        skybox->m_width = W;
-        skybox->m_height = H;
-        skybox->m_data = sides;
+        pSkybox->m_width = W;
+        pSkybox->m_height = H;
+        pSkybox->m_data = sides;
 
-        skybox->SetShader(Shader::Load("Engine/skybox.srsl"));
+        pSkybox->SetShader(Shader::Load("Engine/skybox.srsl"));
 
-        skybox->SetId(path.ToString());
+        pSkybox->SetId(path.ToString());
 
-        return skybox;
+        return pSkybox;
     }
 
     bool Skybox::Calculate() {
@@ -84,11 +92,20 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        const bool cpuUsage = Helper::Features::Instance().Enabled("SkyboxCPUUsage", false);
+        const bool cpuUsage = SR_UTILS_NS::Features::Instance().Enabled("SkyboxCPUUsage", false);
         if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
             SR_ERROR("Skybox::Calculate() : failed to calculate cube map!");
             m_hasErrors = true;
             return false;
+        }
+
+        for (auto&& img : m_data) {
+            if (!img) {
+                continue;
+            }
+
+            stbi_image_free(img);
+            img = nullptr;
         }
 
         auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
@@ -170,8 +187,9 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Framework::Graphics::Types::Skybox::FreeVideoMemory() {
+    bool Skybox::FreeVideoMemory() {
         if (!m_isCalculated) {
+            SRHalt("Skybox::FreeVideoMemory() : The skybox isn't initialized!");
             return false;
         }
 
@@ -239,10 +257,14 @@ namespace SR_GTYPES_NS {
         m_dirtyShader = true;
 
         if (m_shader) {
-            auto&& render = m_shader->GetRender();
             RemoveDependency(m_shader);
             if (m_shader->GetCountUses() == 0) {
-                SRAssert2(render, "Render is nullptr!");
+                auto&& render = m_shader->GetRender();
+
+                if (!render && m_shader->Ready()) {
+                    SRHalt("Shader are initialized, but render is nullptr!");
+                }
+
                 if (render) {
                     render->FreeShader(m_shader);
                 }

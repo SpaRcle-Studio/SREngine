@@ -9,6 +9,8 @@
 
 namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal Component::Save(SavableFlags flags) const {
+        SR_LOCK_GUARD
+
         auto marshal = Entity::Save(flags);
 
         marshal.Write(m_name);
@@ -19,16 +21,22 @@ namespace SR_UTILS_NS {
     }
 
     bool Component::IsActive() const noexcept {
+        SR_LOCK_GUARD
+
         return IsEnabled() && (!m_parent || m_parent->m_isActive);
     }
 
     void Component::SetParent(GameObject *parent) {
+        SR_LOCK_GUARD
+
         m_parent = parent;
 
         CheckActivity();
     }
 
     void Component::SetEnabled(bool value) {
+        SR_LOCK_GUARD
+
         if (value == m_isEnabled) {
             return;
         }
@@ -39,6 +47,8 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
+        SR_LOCK_GUARD
+
         const bool isActive = IsActive();
         if (isActive == m_isActive) {
             return;
@@ -50,6 +60,30 @@ namespace SR_UTILS_NS {
         else {
             OnDisabled();
         }
+    }
+
+    SR_WORLD_NS::Scene::Ptr Component::GetScene() const {
+        SR_LOCK_GUARD
+
+        if (!m_parent) {
+            SRHalt("The component have not parent game object!");
+            return SR_WORLD_NS::Scene::Ptr();
+        }
+
+        /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
+        return m_parent->GetScene();
+    }
+
+    bool Component::IsEnabled() const noexcept {
+        SR_LOCK_GUARD
+
+        return m_isEnabled;
+    }
+
+    GameObject *Component::GetParent() const {
+        SR_LOCK_GUARD
+
+        return m_parent;
     }
 }
 

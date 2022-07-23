@@ -20,6 +20,7 @@
 #include <cstring>
 #include <variant>
 #include <optional>
+#include <memory>
 #include <fstream>
 #include <vector>
 #include <ostream>

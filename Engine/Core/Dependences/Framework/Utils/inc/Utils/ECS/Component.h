@@ -10,6 +10,7 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Marshal.h>
+#include <Utils/World/Scene.h>
 
 /**
  *  Component adding if enabled:
@@ -43,6 +44,8 @@ namespace SR_UTILS_NS {
         virtual void OnScaled(const Math::FVector3& newValue) { }
         virtual void OnSkewed(const Math::FVector3& newValue) { }
 
+        /// Вызывается после добавления компонента к игровому объекту
+        virtual void OnAttached() { }
         /// Вызывается когда компонент добавляется на объект
         virtual void Reset() { }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
@@ -66,13 +69,14 @@ namespace SR_UTILS_NS {
         /// Активен и компонент и его родительский объект
         SR_NODISCARD bool IsActive() const noexcept;
         /// Активен сам компонент, независимо от объекта
-        SR_NODISCARD SR_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
+        SR_NODISCARD SR_INLINE bool IsEnabled() const noexcept;
 
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
-        SR_NODISCARD SR_INLINE GameObject* GetParent() const { return m_parent; }
+        SR_NODISCARD SR_INLINE GameObject* GetParent() const;
+        SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
 
     protected:
         template<typename T> void InitComponent() {
@@ -86,8 +90,10 @@ namespace SR_UTILS_NS {
         void CheckActivity();
 
     protected:
-        std::atomic<bool> m_isEnabled = true;
-        std::atomic<bool> m_isActive = false;
+        mutable std::recursive_mutex m_mutex;
+
+        bool m_isEnabled = true;
+        bool m_isActive = false;
 
         /// TODO: need remove for optimization, use numeric id
         std::string m_name = "Unknown";

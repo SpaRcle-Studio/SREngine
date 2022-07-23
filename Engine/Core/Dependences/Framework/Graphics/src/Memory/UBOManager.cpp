@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS::Memory {
 
     UBOManager::VirtualUBO UBOManager::AllocateUBO(uint32_t uboSize, uint32_t samples) {
         if (!m_camera && !m_singleCameraMode && !m_ignoreCameras) {
-            SR_ERROR("UBOManager::AllocateUBO() : camera is nullptr!");
+            SRHalt("UBOManager::AllocateUBO() : camera is nullptr!");
             return SR_ID_INVALID;
         }
 
@@ -148,7 +148,7 @@ namespace SR_GRAPH_NS::Memory {
 
     UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) noexcept {
         if (!m_camera && !m_singleCameraMode && !m_ignoreCameras) {
-            SR_ERROR("UBOManager::AllocateUBO() : camera is nullptr!");
+            SRHalt("UBOManager::BindUBO() : camera is nullptr!");
             return BindResult::Failed;
         }
 

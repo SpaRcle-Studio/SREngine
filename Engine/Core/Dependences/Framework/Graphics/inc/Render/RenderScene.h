@@ -7,53 +7,86 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Render/MeshCluster.h>
+#include <Utils/Types/SafePointer.h>
+
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
+namespace SR_GTYPES_NS {
+    class Camera;
+}
 
 namespace SR_GRAPH_NS {
     class RenderContext;
+    class RenderTechnique;
 
-    class RenderScene : public SR_UTILS_NS::NonCopyable {
-        enum class State {
-            Idle, WaitRebuild, Rebuild, Update, Submit
+    class RenderScene : public SR_HTYPES_NS::SafePtr<RenderScene> {
+        using WidgetManagerPtr = GUI::WidgetManager*;
+        using WidgetManagers = std::list<WidgetManagerPtr>;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using CameraPtr = SR_GTYPES_NS::Camera*;
+        using PipelinePtr = Environment*;
+
+        struct CameraInfo {
+            bool isDestroyed = false;
+            CameraPtr pCamera = nullptr;
         };
-    public:
-        ~RenderScene() override = default;
 
     public:
-        void OnRender() {
-            // if dirty => rebuild cmd buffer
+        explicit RenderScene(const ScenePtr& scene, RenderContext* pContext);
+        virtual ~RenderScene();
 
-            // pre render
-            // render
-            // post render
-        }
+    public:
+        void Render();
 
-        void SetDirty() {
-            m_dirty = true;
-        }
+        void SetDirty();
+        void SetDirtyCameras();
+
+        void SetTechnique(const SR_UTILS_NS::Path& path);
+
+        void RegisterWidgetManager(WidgetManagerPtr pWidgetManager);
+        void RemoveWidgetManager(WidgetManagerPtr pWidgetManager);
+
+        void RegisterCamera(CameraPtr pCamera);
+        void DestroyCamera(CameraPtr pCamera);
+
+        void SetOverlayEnabled(bool enabled);
+
+        SR_NODISCARD bool IsEmpty() const;
+        SR_NODISCARD bool IsOverlayEnabled() const;
+        SR_NODISCARD RenderContext* GetContext() const;
+        SR_NODISCARD PipelinePtr GetPipeline() const;
+        SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
 
     private:
-        // command buffer
+        void SortCameras();
+        void RenderBlackScreen();
 
-        // is dirty
-        // добавили новые меши, поменяли шейдры/текстуры, изменили графическую очередь
+        void Build();
+        void Update();
+        void Overlay();
+        void Submit();
 
-        // cameras
+    private:
+        CameraPtr m_mainCamera = nullptr;
+        std::list<CameraPtr> m_offScreenCameras;
+        std::list<CameraInfo> m_cameras;
 
-        // Opaque mesh cluster
+        WidgetManagers m_widgetManagers;
 
-        // Transparent mesh cluster
+        ScenePtr m_scene;
 
-        // Skybox
+        RenderTechnique* m_technique   = nullptr;
+        RenderContext*   m_context     = nullptr;
 
-        // lights
+        MeshCluster      m_opaque      = { };
+        MeshCluster      m_transparent = { };
 
-        MeshCluster       m_opaque      = { };
-        MeshCluster       m_transparent = { };
-
-        Types::Skybox*    m_skybox      = nullptr;
-        RenderContext*    m_context     = nullptr;
-
-        std::atomic<bool> m_dirty       = false;
+        bool m_dirtyCameras = true;
+        bool m_dirty        = true;
+        bool m_hasDrawData  = false;
+        bool m_bOverlay     = false;
 
     };
 }

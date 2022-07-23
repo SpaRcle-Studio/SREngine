@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/SceneRunner.h>
+#include <Utils/TaskManager/TaskManager.h>
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
@@ -23,7 +24,7 @@ namespace SR_CORE_NS::GUI {
 
         bool locked = false;
 
-        if (m_scene.TryLockIfValid()) {
+        if (m_scene.TryRecursiveLockIfValid()) {
             m_isActive = m_scene->IsActive();
             m_isPaused = m_scene->IsPaused();
             m_lastPath = std::move(m_scene->GetPath());
@@ -85,6 +86,8 @@ namespace SR_CORE_NS::GUI {
     bool SceneRunner::PlayScene() {
         SR_LOCK_GUARD
 
+        SR_LOG("SceneRunner::PlayScene() : play scene \"" + m_lastPath.ToString() + "\"");
+
         if (!m_scene->Save()) {
             SR_ERROR("SceneRunner::PlayScene() : failed to save scene!");
             return false;
@@ -107,30 +110,40 @@ namespace SR_CORE_NS::GUI {
             return false;
         }
 
-        auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
+        //auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
+        //
+        ///// оставляем заблокированной, разблокируется после отрисовки кнопки
+        //if (!runtimeScene.RecursiveLockIfValid()) {
+        //    SR_ERROR("SceneRunner::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
+        //    return false;
+        //}
 
-        /// оставляем заблокированной, разблокируется после отрисовки кнопки
-        if (!runtimeScene.RecursiveLockIfValid()) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
-            return false;
-        }
+        //m_scene.Unlock();
 
-        m_scene.Unlock();
+        // return Engine::Instance().SetScene(runtimeScene);
 
-        return Engine::Instance().SetScene(runtimeScene);
+        SR_UTILS_NS::TaskManager::Instance().Execute([runtimePath /** copy */](SR_UTILS_NS::Task::StatePtr state) {
+            auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
+            Engine::Instance().SetScene(runtimeScene);
+            state->store(SR_UTILS_NS::Task::State::Completed);
+        }, false);
+
+        return true;
     }
 
     void SceneRunner::ReturnScene() {
-        auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
+        SR_LOG("SceneRunner::ReturnScene() : stop scene \"" + m_lastPath.ToString() + "\"");
+
+        /*auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
 
         if (!originalScene.RecursiveLockIfValid()) {
             SR_ERROR("SceneRunner::ReturnScene() : failed to load original scene!\n\tPath: " + m_scenePath.ToString());
-            Engine::Instance().SetScene(ScenePtr());
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Ptr());
             return;
         }
 
         m_scene.Unlock();
 
-        Engine::Instance().SetScene(originalScene);
+        Engine::Instance().SetScene(originalScene);*/
     }
 }

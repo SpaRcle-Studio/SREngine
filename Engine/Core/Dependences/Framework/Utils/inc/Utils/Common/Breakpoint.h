@@ -15,4 +15,6 @@ namespace SR_UTILS_NS {
     }
 }
 
+#define SR_MAKE_BREAKPOINT SR_UTILS_NS::Breakpoint()
+
 #endif //SRENGINE_BREAKPOINT_H

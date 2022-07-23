@@ -27,6 +27,7 @@
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/Marshal.h>
+#include <Utils/TaskManager/TaskManager.h>
 #include <Audio/RawSound.h>
 #include <Audio/SoundManager.h>
 
@@ -51,6 +52,7 @@
 #include <Utils/Platform/Platform.h>
 #include <Types/Framebuffer.h>
 #include <Types/RenderTexture.h>
+#include <Core/Settings/EditorSettings.h>
 
 using namespace Framework;
 
@@ -101,7 +103,7 @@ int main(int argc, char **argv) {
 
     auto&& exe = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
     Debug::Instance().Init(exe, true, Debug::Theme::Dark);
-    Debug::Instance().SetLevel(Debug::Level::Low);
+    Debug::Instance().SetLevel(Debug::Level::Medium);
 
     Thread::Factory::Instance().SetMainThread();
 
@@ -152,7 +154,7 @@ int main(int argc, char **argv) {
         //Component::RegisterComponent("SkinnedMesh", []() -> Component* { return new SkinnedMesh();  });
         ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return Memory::MeshAllocator::Allocate<Mesh3D>(); });
         ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
-        ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return Camera::Allocate(); });
+        ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
         ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
 
@@ -247,12 +249,14 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
+    SR_CORE_NS::EditorSettings::DestroySettings();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
     SR_AUDIO_NS::SoundManager::DestroySingleton();
     Framework::Engine::DestroySingleton();
     Framework::Graphics::GUI::NodeManager::DestroySingleton();
+    SR_UTILS_NS::TaskManager::DestroySingleton();
 
     Debug::Instance().System("All systems were successfully closed!");
 

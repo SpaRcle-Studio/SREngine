@@ -121,14 +121,13 @@ namespace SR_UTILS_NS {
 
             const bool resourceAlive = !resource->IsForce() && resource->IsAlive() && !m_force;
 
-
             if (usageNow || resourceAlive) {
                 ++resourceIt;
                 continue;
             }
 
-            if (Debug::Instance().GetLevel() >= Debug::Level::High) {
-                SR_LOG("ResourceManager::GC() : free \"" + std::string(resource->m_resourceName) + "\" resource");
+            if (Debug::Instance().GetLevel() >= Debug::Level::Medium) {
+                SR_LOG("ResourceManager::GC() : free \"" + resource->GetResourceId() + "\" resource");
             }
 
             Remove(resource);

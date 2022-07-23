@@ -13,7 +13,7 @@
 
 namespace SR_GTYPES_NS {
     bool Mesh3D::Calculate()  {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (m_isCalculated)
             return true;
@@ -40,7 +40,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::IResource* Mesh3D::Copy(IResource* destination) const {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D(m_geometryName));
         mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
@@ -54,6 +54,8 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::FreeVideoMemory() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }

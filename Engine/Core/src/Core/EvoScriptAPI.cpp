@@ -217,8 +217,6 @@ namespace Framework {
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
 
-        ESRegisterStaticMethod(EvoScript::Public, generator, Camera, Allocate, Camera*, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
-
         ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
     }

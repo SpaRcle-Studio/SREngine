@@ -7,7 +7,7 @@
 
 namespace SR_GTYPES_NS {
     SR_UTILS_NS::IResource* DebugWireframeMesh::Copy(IResource* destination) const {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh(m_geometryName));
         wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::Copy(wireFramed));
@@ -67,7 +67,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool DebugWireframeMesh::Calculate() {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (m_isCalculated)
             return true;
@@ -95,7 +95,7 @@ namespace SR_GTYPES_NS {
     }
 
     void DebugWireframeMesh::FreeVideoMemory() {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");

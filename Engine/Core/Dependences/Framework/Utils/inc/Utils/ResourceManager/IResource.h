@@ -109,9 +109,11 @@ namespace SR_UTILS_NS {
         float_t m_lifetime = 0;
         uint64_t m_resourceHash = 0;
 
+        /// Принудительно уничтожить ресурс
         std::atomic<bool> m_force = false;
         std::atomic<bool> m_readOnly = false;
         std::atomic<bool> m_isDestroyed = false;
+        /// Автоматическое уничтожение ресурса по истечению use-point'ов
         std::atomic<bool> m_autoRemove = false;
 
         std::string m_resourceId = "NoID";

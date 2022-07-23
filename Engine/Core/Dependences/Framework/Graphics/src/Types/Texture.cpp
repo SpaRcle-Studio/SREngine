@@ -29,7 +29,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
-            SR_LOG("Texture::Destroy() : destroying the texture...");
+            SR_LOG("Texture::Destroy() : destroying the texture \"" + GetResourceId() + "\"");
         }
 
         if (m_render) {
@@ -172,11 +172,11 @@ namespace SR_GTYPES_NS {
         SR_SCOPED_LOCK
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
-            SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceName()) + "\" texture's video memory...");
+            SR_LOG("Texture::FreeVideoMemory() : free \"" + GetResourceId() + "\" texture's video memory...");
         }
 
         if (!m_isCalculated) {
-            SR_ERROR("Texture::FreeVideoMemory() : texture \"" + std::string(GetResourceName()) + "\" is not calculated!");
+            SR_ERROR("Texture::FreeVideoMemory() : texture \"" + GetResourceId() + "\" is not calculated!");
         }
 
         m_isCalculated = false;

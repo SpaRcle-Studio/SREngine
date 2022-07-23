@@ -29,6 +29,10 @@ namespace SR_UTILS_NS {
         ~Singleton() override = default;
 
     public:
+        SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept {
+            return GetSingleton() != nullptr;
+        }
+
         SR_MAYBE_UNUSED static void DestroySingleton() {
             auto&& singleton = GetSingleton();
 
@@ -39,7 +43,7 @@ namespace SR_UTILS_NS {
             if (!(*singleton)->IsSingletonCanBeDestroyed()) {
                 std::cerr << "Singleton can't be destroyed!\n";
                 std::cerr << GetStacktrace() << std::endl;
-                Breakpoint();
+                SR_MAKE_BREAKPOINT;
                 return;
             }
 
@@ -62,12 +66,24 @@ namespace SR_UTILS_NS {
 
         SR_MAYBE_UNUSED static void LockSingleton() {
             if (auto&& singleton = GetSingleton()) {
+                if (!(*singleton)) {
+                    *singleton = new T();
+                    (*singleton)->InitSingleton();
+                }
+
                 (*singleton)->m_mutex.lock();
             }
         }
 
         SR_MAYBE_UNUSED static void UnlockSingleton() {
             if (auto&& singleton = GetSingleton()) {
+                if (!(*singleton)) {
+                    std::cerr << "Singleton isn't initialized!\n";
+                    std::cerr << GetStacktrace() << std::endl;
+                    SR_MAKE_BREAKPOINT;
+                    return;
+                }
+
                 (*singleton)->m_mutex.unlock();
             }
         }

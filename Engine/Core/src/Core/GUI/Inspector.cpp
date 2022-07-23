@@ -17,7 +17,7 @@ namespace Framework::Core::GUI {
     void Inspector::Draw() {
         SR_LOCK_GUARD
 
-        if (m_gameObject.TryLockIfValid()) {
+        if (m_gameObject.TryRecursiveLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
                 m_gameObject->SetEnabled(v);
             }

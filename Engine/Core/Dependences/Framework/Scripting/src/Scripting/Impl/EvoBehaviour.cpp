@@ -6,7 +6,7 @@
 
 namespace SR_SCRIPTING_NS {
     bool EvoBehaviour::Load() {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (m_script) {
             SR_ERROR("EvoBehaviour::Load() : script is already loaded!");
@@ -37,7 +37,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool EvoBehaviour::Unload() {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         bool hasErrors = !Behaviour::Unload();
 
@@ -82,7 +82,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (!m_getProperties) {
             return EvoBehaviour::Properties();
@@ -91,7 +91,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     std::any EvoBehaviour::GetProperty(const std::string &id) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (!m_getProperty) {
             return std::any();
@@ -100,7 +100,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (!m_setProperty) {
             return;

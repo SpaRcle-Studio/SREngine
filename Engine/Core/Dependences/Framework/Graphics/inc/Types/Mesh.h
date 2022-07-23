@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
         virtual void DrawVulkan() = 0;
         virtual void DrawOpenGL() = 0;
 
-        void FreeVideoMemory() override;
+        virtual void FreeVideoMemory() override;
 
     public:
         Helper::Math::FVector3 GetBarycenter() const override;

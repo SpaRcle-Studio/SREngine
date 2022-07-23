@@ -705,7 +705,7 @@ bool GUISystem::BeginMenuBar() {
             if (auto&& scene = Engine::Instance().GetScene()) {
                 scene->Save();
             }
-            Engine::Instance().SetScene(ScenePtr());
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Ptr());
         }
 
         if (ImGui::MenuItem("Instance from file")) {

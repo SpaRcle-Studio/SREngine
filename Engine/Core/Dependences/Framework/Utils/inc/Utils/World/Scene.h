@@ -10,6 +10,7 @@
 #include <Utils/Types/StringAtom.h>
 #include <Utils/Types/Marshal.h>
 #include <Utils/World/CameraData.h>
+#include <Utils/Types/DataStorage.h>
 
 namespace SR_WORLD_NS {
     struct SR_DLL_EXPORT TensorKey {
@@ -110,6 +111,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Path GetPath() const { return m_path; }
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
+        SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD bool IsPaused() const { return m_isPaused; }
         SR_NODISCARD bool IsActive() const { return m_isActive; }
 
@@ -160,6 +162,8 @@ namespace SR_WORLD_NS {
         Path                         m_path                = Path();
 
         World::Tensor                m_tensor              = World::Tensor();
+
+        SR_HTYPES_NS::DataStorage    m_dataStorage         = SR_HTYPES_NS::DataStorage();
 
         GameObjects                  m_gameObjects         = GameObjects();
         GameObjects                  m_rootObjects         = GameObjects();

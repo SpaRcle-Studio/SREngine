@@ -1,31 +1,36 @@
 #include <Utils/TaskManager/TaskManager.h>
 
 namespace SR_UTILS_NS {
-    Task::Task(TaskFn fn)
-        : m_id(SR_UINT64_MAX)
+    Task::Task(TaskFn fn, bool createThread)
+        : m_createThread(createThread)
+        , m_id(SR_UINT64_MAX)
         , m_function(std::move(fn))
         , m_state(new std::atomic<State>())
+        , m_thread(nullptr)
     {
         m_state->store(State::Waiting);
     }
 
     Task::Task(Task &&task) noexcept {
         m_thread = std::exchange(task.m_thread, { });
-        m_function = std::exchange(task.m_function, { });
+        m_function = task.m_function;
         m_id = std::exchange(task.m_id, { });
         m_state = std::exchange(task.m_state, { });
+        m_createThread = std::exchange(task.m_createThread, { });
     }
 
     Task &Task::operator=(Task &&task) noexcept {
         m_thread = std::exchange(task.m_thread, { });
-        m_function = std::exchange(task.m_function, { });
+        m_function = task.m_function;
         m_id = std::exchange(task.m_id, { });
         m_state = std::exchange(task.m_state, { });
+        m_createThread = std::exchange(task.m_createThread, { });
         return *this;
     }
 
     Task::~Task() {
-        SRAssert(m_state->load() == State::Completed && (m_thread && !m_thread->Joinable()));
+        SRAssert(!m_state || m_state->load() == State::Completed);
+        SRAssert(!m_thread || !m_thread->Joinable());
 
         if (m_thread) {
             if (m_thread->Joinable()) {
@@ -36,7 +41,9 @@ namespace SR_UTILS_NS {
             m_thread = nullptr;
         }
 
-        delete m_state;
+        if (m_state) {
+            delete m_state;
+        }
     }
 
     bool Task::Stop() {
@@ -56,15 +63,20 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool Task::Run(uint64_t id) {
+    bool Task::Run() {
         if (m_state->load() != State::Waiting || !m_function || (m_thread && m_thread->Joinable())) {
             SRAssert(false);
             return false;
         }
 
-        m_id = id;
         m_state->store(State::Launched);
-        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(m_function, m_state);
+
+        if (m_createThread) {
+            m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(m_function, m_state);
+        }
+        else {
+            m_function(m_state);
+        }
 
         return true;
     }
@@ -82,6 +94,13 @@ namespace SR_UTILS_NS {
         return m_id;
     }
 
+    bool Task::IsWaiting() const {
+        return m_state->load() == State::Waiting;
+    }
+
+    void Task::SetId(uint64_t id) {
+        m_id = id;
+    }
 
     Helper::TaskManager::~TaskManager() {
         if (!m_tasks.empty() || !m_ids.empty()) {
@@ -94,21 +113,23 @@ namespace SR_UTILS_NS {
 
         m_tasks.clear();
         m_ids.clear();
+
+        SRAssert(!m_thread);
     }
 
     uint64_t Helper::TaskManager::GetUniqueId() const {
         return 0;
     }
 
-    bool TaskManager::Run() {
+    void TaskManager::InitSingleton() {
         if (m_isRun.load()) {
-            SR_ERROR("TaskManager::Run() : task manager is already ran!");
-            return false;
+            SR_ERROR("TaskManager::InitSingleton() : task manager is already ran!");
+            return;
         }
 
         m_isRun.store(true);
 
-        SR_INFO("TaskManager::Run() : run task manager thread...");
+        SR_INFO("TaskManager::InitSingleton() : run task manager thread...");
 
         m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
             while (m_isRun.load()) {
@@ -117,30 +138,47 @@ namespace SR_UTILS_NS {
                 SR_SCOPED_LOCK
 
                 for (auto pIt = m_tasks.begin(); pIt != m_tasks.end(); ) {
+                    if (pIt->IsWaiting()) {
+                        pIt->Run();
+                    }
+
                     if (pIt->IsCompleted()) {
                         m_results.insert(std::make_pair(pIt->GetId(), pIt->GetResult()));
                         m_ids.erase(pIt->GetId());
                         pIt = m_tasks.erase(pIt);
                     }
-                    else
+                    else {
                         ++pIt;
+                    }
                 }
             }
         });
 
-        return m_thread->Joinable();
+        if (!m_thread->Joinable()) {
+            SR_ERROR("TaskManager::InitSingleton() : failed to run a thread!");
+        }
+
+        Singleton::InitSingleton();
     }
 
-    void TaskManager::Close() {
-
-    }
-
-    bool TaskManager::Execute(Task &&task) {
+    TaskManager::TaskId TaskManager::Execute(Task &&task) {
         SR_SCOPED_LOCK
 
         const uint64_t uniqueId = GetUniqueId();
+
+        task.SetId(uniqueId);
         m_ids.insert(uniqueId);
-        return m_tasks.emplace_back(std::move(task)).Run(uniqueId);
+        m_tasks.emplace_back(std::move(task));
+
+        return uniqueId;
+    }
+
+    TaskManager::TaskId TaskManager::Execute(const TaskFn& function, bool createThread) {
+        SR_SCOPED_LOCK
+
+        Task task(function, createThread);
+
+        return Execute(std::move(task));
     }
 
     Task::State Helper::TaskManager::GetResult(uint64_t taskId) const {
@@ -149,5 +187,17 @@ namespace SR_UTILS_NS {
         }
 
         return Task::State::Unknown;
+    }
+
+    void TaskManager::OnSingletonDestroy() {
+        m_isRun = false;
+
+        if (m_thread) {
+            m_thread->TryJoin();
+            m_thread->Free();
+            m_thread = nullptr;
+        }
+
+        Singleton::OnSingletonDestroy();
     }
 }

@@ -37,6 +37,9 @@ namespace SR_GRAPH_NS {
         , m_headerEnabled(headerEnabled)
     { }
 
+    Window::~Window() {
+        SRAssert(m_isClose);
+    }
 
     bool Window::Create() {
         if (m_isCreate) {
@@ -51,6 +54,8 @@ namespace SR_GRAPH_NS {
             m_hasErrors = true;
             return false;
         }
+
+        m_context = new RenderContext();
 
         Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
             switch (event) {
@@ -107,24 +112,28 @@ namespace SR_GRAPH_NS {
             m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Window::Thread, this);
             m_thread->SetPriority(Helper::ThreadPriority::SR_THREAD_PRIORITY_HIGHEST);
 
-            while (!m_isEnvInit && !m_hasErrors && !m_isClose) { } // Wait environment initialize
+            /// Wait environment initialize
+            while (!m_isEnvInit && !m_hasErrors && !m_isClose);
         }
 
-        ret: if (!m_render->IsInit() && !m_hasErrors) goto ret;
+        ret:
+        if (!m_render->IsInit() && !m_hasErrors)
+            goto ret;
+
         if (m_hasErrors)
             return false;
 
-        if (!SR_GTYPES_NS::Material::InitDefault(GetRender())) {
-            SR_ERROR("Window::Init() : failed to initialize default material!");
-            return false;
-        }
+        //if (!SR_GTYPES_NS::Material::InitDefault(GetRender())) {
+        //    SR_ERROR("Window::Init() : failed to initialize default material!");
+        //    return false;
+        //}
 
         m_isInit = true;
 
         return true;
     }
 
-    bool Framework::Graphics::Window::Run() {
+    bool Window::Run() {
         if (!m_isInit) {
             SR_ERROR("Window::Run() : the window is not initialized!");
             return false;
@@ -139,8 +148,9 @@ namespace SR_GRAPH_NS {
 
         m_isRun = true;
 
-    ret: if (!m_render->IsRun() && !m_hasErrors)
-        goto ret;
+    ret:
+        if (!m_render->IsRun() && !m_hasErrors)
+            goto ret;
 
         if (m_hasErrors)
             return false;
@@ -150,7 +160,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Framework::Graphics::Window::Close() {
+    bool Window::Close() {
         if (!m_isRun) {
             SR_ERROR("Window::Close() : the window is not running!");
             return false;
@@ -163,7 +173,7 @@ namespace SR_GRAPH_NS {
 
         SR_GRAPH_LOG("Window::Close() : closing the window...");
 
-        m_isRun   = false;
+        m_isRun = false;
         m_isClose = true;
 
         if (m_thread) {
@@ -172,10 +182,14 @@ namespace SR_GRAPH_NS {
             m_thread = nullptr;
         }
 
+        m_context.AutoFree([](RenderContext* pContext) {
+            delete pContext;
+        });
+
         return true;
     }
 
-    void Framework::Graphics::Window::Thread() {
+    void Window::Thread() {
         SR_INFO("Window::Thread() : running window's thread...");
 
         {
@@ -184,6 +198,7 @@ namespace SR_GRAPH_NS {
                 goto waitInit;
 
             if (!m_hasErrors && !m_isClose)
+                /// TODO: move to render context
                 if (!InitEnvironment()) {
                     SR_ERROR("Window::Thread() : failed to initialize the render environment!");
                     m_hasErrors = true;
@@ -196,7 +211,14 @@ namespace SR_GRAPH_NS {
                 return;
             }
 
+            if (!m_context->Init()) {
+                SR_ERROR("Window::Thread() : failed to initialize the render context!");
+                m_hasErrors = true;
+                return;
+            }
+
             SR_THIS_THREAD->GetContext()->SetPointer<Render>(m_render);
+            SR_THIS_THREAD->GetContext()->SetValue<RenderContextPtr>(m_context);
 
             waitRun:
             if (!m_isRun && !m_isClose && !m_hasErrors)
@@ -215,7 +237,7 @@ namespace SR_GRAPH_NS {
         uint32_t frames = 0;
 
         /// for optimization needed pipeline
-        const PipeLine pipeLine = m_env->GetPipeLine();
+        //const PipeLine pipeLine = m_env->GetPipeLine();
 
         m_env->SetBuildState(false);
 
@@ -224,13 +246,19 @@ namespace SR_GRAPH_NS {
 
             m_env->PollEvents();
             PollEvents();
-            m_render->PollEvents();
+            //m_render->PollEvents();
 
-            if (pipeLine == PipeLine::Vulkan) {
-                DrawVulkan();
+            m_context->Update();
+
+            if (m_drawCallback) {
+                m_drawCallback();
             }
-            else
-                DrawOpenGL();
+
+            //if (pipeLine == PipeLine::Vulkan) {
+            //    DrawVulkan();
+            //}
+            //else
+            //    DrawOpenGL();
 
             auto t_end = std::chrono::high_resolution_clock::now();
 
@@ -274,7 +302,7 @@ namespace SR_GRAPH_NS {
         m_isWindowClose = true;
     }
 
-    bool Framework::Graphics::Window::InitEnvironment() {
+    bool Window::InitEnvironment() {
         SR_GRAPH("Window::InitEnvironment() : initializing the render environment...");
 
         SR_GRAPH("Window::InitEnvironment() : pre-initializing...");
@@ -359,11 +387,11 @@ namespace SR_GRAPH_NS {
 
     void Window::PollEvents() {
         /// change gui enabled
-        if (m_GUIEnabled.first != m_GUIEnabled.second) {
-            m_env->SetBuildState(false);
-            this->m_env->SetGUIEnabled(m_GUIEnabled.second);
-            m_GUIEnabled.first.store(m_GUIEnabled.second);
-        }
+        //if (m_GUIEnabled.first != m_GUIEnabled.second) {
+        //    m_env->SetBuildState(false);
+        //    this->m_env->SetGUIEnabled(m_GUIEnabled.second);
+        //    m_GUIEnabled.first.store(m_GUIEnabled.second);
+        //}
 
         if (m_widgetManagers.NeedFlush())
             m_widgetManagers.Flush();
@@ -383,17 +411,6 @@ namespace SR_GRAPH_NS {
 
             this->m_isNeedMove = false;
         }
-    }
-
-    bool Window::Free() {
-        if (m_isClose) {
-            SR_INFO("Window::Free() : free window pointer...");
-
-            delete this;
-            return true;
-        }
-        else
-            return false;
     }
 
     void Window::Resize(uint32_t w, uint32_t h) {
@@ -453,16 +470,17 @@ namespace SR_GRAPH_NS {
 
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
-            if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
-                SR_GTYPES_NS::Material::FreeDefault();
+            //if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
+            //    SR_GTYPES_NS::Material::FreeDefault();
 
             m_render->Synchronize();
 
-            while(!m_render->IsClean()) {
+            ///!m_render->IsClean() &&
+            while(!m_context->IsEmpty()) {
                 SR_SYSTEM_LOG("Window::SyncFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 
-                if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
-                    SR_GTYPES_NS::Material::FreeDefault();
+                //if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
+                //    SR_GTYPES_NS::Material::FreeDefault();
 
                 SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
                 m_render->Synchronize();
@@ -486,6 +504,7 @@ namespace SR_GRAPH_NS {
             PollEvents();
             SR_UTILS_NS::ResourceManager::LockSingleton();
             m_render->PollEvents();
+            m_context->Update();
             SR_UTILS_NS::ResourceManager::UnlockSingleton();
         }
 
@@ -709,5 +728,9 @@ namespace SR_GRAPH_NS {
         }
 
         return m_env->GetWindowSize();
+    }
+
+    void Window::SetDrawCallback(const Window::DrawCallback &drawCallback) {
+        m_drawCallback = drawCallback;
     }
 }

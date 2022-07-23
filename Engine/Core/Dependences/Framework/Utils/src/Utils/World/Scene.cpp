@@ -76,7 +76,7 @@ namespace SR_WORLD_NS {
 
     SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const Path& path) {
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
-            SR_LOG("Scene::Load() : loading scene...");
+            SR_LOG("Scene::Load() : loading scene...\n\tPath: " + path.ToString());
         }
 
         auto&& scene = SceneAllocator::Instance().Allocate();

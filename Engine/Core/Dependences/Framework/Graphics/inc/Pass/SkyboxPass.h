@@ -5,4 +5,29 @@
 #ifndef SRENGINE_SKYBOXPASS_H
 #define SRENGINE_SKYBOXPASS_H
 
+#include <Pass/BasePass.h>
+
+namespace SR_GTYPES_NS {
+    class Skybox;
+}
+
+namespace SR_GRAPH_NS {
+    class SkyboxPass : public BasePass {
+    public:
+        explicit SkyboxPass(RenderTechnique* pTechnique);
+        ~SkyboxPass() override;
+
+    public:
+        bool Load(const SR_XML_NS::Node& passNode) override;
+        void Render() override;
+        void Update() override;
+
+        void DeInit() override;
+
+    private:
+        SR_GTYPES_NS::Skybox* m_skybox = nullptr;
+
+    };
+}
+
 #endif //SRENGINE_SKYBOXPASS_H

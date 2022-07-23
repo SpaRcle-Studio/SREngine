@@ -25,7 +25,7 @@ namespace SR_CORE_NS::GUI {
 
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
-        if (m_scene.TryLockIfValid()) {
+        if (m_scene.TryRecursiveLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
         }

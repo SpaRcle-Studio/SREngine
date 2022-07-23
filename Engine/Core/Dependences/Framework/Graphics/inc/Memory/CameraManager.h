@@ -10,6 +10,7 @@
 
 namespace SR_GRAPH_NS {
     class Window;
+    class RenderScene;
 }
 
 namespace SR_GRAPH_NS::Types {
@@ -21,6 +22,13 @@ namespace SR_GRAPH_NS::Memory {
         friend class Types::Camera;
         friend class SR_UTILS_NS::Singleton<CameraManager>;
         using CameraPtr = Types::Camera*;
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+
+        struct CameraInfo {
+            bool destroyed = false;
+            RenderScenePtr pRenderScene;
+        };
+
     protected:
         ~CameraManager() override = default;
 
@@ -32,16 +40,22 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD uint32_t GetCountCameras() const;
         SR_NODISCARD CameraPtr GetFirstCamera() const;
         SR_NODISCARD std::list<CameraPtr> GetCameras() const;
+        SR_NODISCARD CameraPtr GetMainCamera(RenderScene* pRScene);
+        SR_NODISCARD std::list<CameraPtr> GetOffScreenCameras(RenderScene* pRScene);
+
+        SR_NODISCARD bool IsRegistered(const CameraPtr& camera) const;
+        SR_NODISCARD bool IsDestroyed(const CameraPtr& camera) const;
 
     protected:
         void OnSingletonDestroy() override;
 
     private:
         void RegisterCamera(const CameraPtr& camera);
+        void UnRegisterCamera(const CameraPtr& camera);
         void DestroyCamera(const CameraPtr& camera);
 
     private:
-        std::map<CameraPtr, bool> m_cameras;
+        std::map<CameraPtr, CameraInfo> m_cameras;
 
     };
 }

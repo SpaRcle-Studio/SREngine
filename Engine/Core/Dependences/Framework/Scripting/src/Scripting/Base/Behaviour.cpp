@@ -129,7 +129,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::Reload() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         SR_LOG("Behaviour::Reload() : reloading \"" + GetResourceId() + "\" behaviour...");
 
@@ -157,7 +157,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     std::map<std::string, std::any> Behaviour::StashProperties() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto&& stash = std::map<std::string, std::any>();
 
@@ -169,7 +169,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::UnStashProperties(const std::map<std::string, std::any> &props) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         for (auto&& [propertyId, value] : props) {
             SetProperty(propertyId, value);

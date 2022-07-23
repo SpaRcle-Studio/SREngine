@@ -37,14 +37,10 @@ namespace SR_CORE_NS::GUI {
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
     public:
         explicit EditorGUI();
-
-    private:
         ~EditorGUI() override;
 
     public:
         void Enable(bool value);
-        bool Destroy();
-        void Free();
 
         template<typename T> void AddWindow(T* widget) {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));

@@ -10,6 +10,7 @@
 
 #define CRT_SECURE_NO_WARNINGS
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
+#define _HAS_AUTO_PTR_ETC 1
 
 #define SR_USE_IMGUI
 
@@ -59,6 +60,8 @@
 #define SR_NODISCARD [[nodiscard]]
 #define SR_FALLTHROUGH [[fallthrough]]
 #define SR_MAYBE_UNUSED [[maybe_unused]]
+#define SR_DEPRECATED_EX(text) [[deprecated(text)]]
+#define SR_DEPRECATED [[deprecated]]
 #define SR_MAYBE_UNUSED_VAR [[maybe_unused]] auto&& SR_COMBINE(unused_var, __LINE__) =
 #define SR_INLINE inline
 #define SR_INLINE_STATIC SR_INLINE static

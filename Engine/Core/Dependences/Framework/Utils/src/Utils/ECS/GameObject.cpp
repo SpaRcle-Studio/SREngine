@@ -34,14 +34,15 @@ namespace SR_UTILS_NS {
         delete this;
     }
 
-    bool GameObject::AddComponent(Component *component) {  // TODO: add security multi-threading
+    bool GameObject::AddComponent(Component* pComponent) {  // TODO: add security multi-threading
         if (m_isDestroy) {
             SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
             return false;
         }
 
-        component->SetParent(this);
-        m_components.push_back(component);
+        m_components.push_back(pComponent);
+        pComponent->SetParent(this);
+        pComponent->OnAttached();
 
         UpdateComponents();
 
@@ -92,8 +93,10 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& component : m_components) {
-            component->SetParent(nullptr);
             component->OnDestroy();
+            /// Зануляем родителя только после OnDestroy,
+            /// так как данные родителя еще могут пригодиться
+            component->SetParent(nullptr);
         }
         m_components.clear();
 

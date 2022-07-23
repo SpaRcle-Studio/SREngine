@@ -41,6 +41,16 @@ namespace SR_CORE_NS::GUI {
     }
 
     EditorGUI::~EditorGUI() {
+        for (auto&& [icon, pTexture] : m_icons) {
+            if (pTexture->GetCountUses() <= 1 && pTexture->IsEnabledAutoRemove() && !pTexture->IsDestroyed())
+                pTexture->Destroy();
+        }
+        m_icons.clear();
+
+        Save();
+
+        m_isInit = false;
+
         for (auto& [id, widget] : m_widgets) {
             Remove(widget);
             SR_SAFE_DELETE_PTR(widget);
@@ -61,26 +71,6 @@ namespace SR_CORE_NS::GUI {
         m_isInit = true;
 
         return true;
-    }
-
-    bool EditorGUI::Destroy() {
-        EditorSettings::Instance().DestroySettings();
-
-        for (auto&& [icon, pTexture] : m_icons) {
-            if (pTexture->GetCountUses() <= 1 && pTexture->IsEnabledAutoRemove() && !pTexture->IsDestroyed())
-                pTexture->Destroy();
-        }
-        m_icons.clear();
-
-        Save();
-
-        m_isInit = false;
-
-        return true;
-    }
-
-    void EditorGUI::Free() {
-        delete this;
     }
 
     void EditorGUI::Draw() {
@@ -160,7 +150,7 @@ namespace SR_CORE_NS::GUI {
                 Init();
             }
             GetWindow<SceneViewer>()->Enable(value);
-            m_window->SetGUIEnabled(!m_window->IsGUIEnabled());
+            //m_window->SetGUIEnabled(!m_window->IsGUIEnabled());
             m_enabled = value;
         }
     }

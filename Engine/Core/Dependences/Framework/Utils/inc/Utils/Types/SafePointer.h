@@ -36,18 +36,30 @@ namespace SR_HTYPES_NS {
         }
     public:
         bool TryLock() const;
+        bool TryRecursiveLock() const;
         void Lock() const;
         void Unlock() const;
         void RecursiveLock() const;
 
         void Replace(const SafePtr &ptr);
+        void ReplaceAndLock(const SafePtr& ptr);
 
         template<typename U> U DynamicCast() {
            return dynamic_cast<U>(m_ptr);
         }
 
+        bool Do(const std::function<void(T* ptr)>& func) {
+            if (RecursiveLockIfValid()) {
+                func(m_ptr);
+                Unlock();
+                return true;
+            }
+
+            return false;
+        }
+
         template<typename U> U Do(const std::function<U(T* ptr)>& func, U _default) {
-            if (LockIfValid()) {
+            if (RecursiveLockIfValid()) {
                 const auto&& result = func(m_ptr);
                 Unlock();
                 return result;
@@ -67,12 +79,28 @@ namespace SR_HTYPES_NS {
         }
 
         SR_NODISCARD bool TryLockIfValid() const;
+        SR_NODISCARD bool TryRecursiveLockIfValid() const;
         SR_NODISCARD bool LockIfValid() const;
         SR_NODISCARD bool RecursiveLockIfValid() const;
 
         SR_NODISCARD T* Get() const { return m_ptr; }
         SR_NODISCARD void* GetRawPtr() const { return (void*)m_ptr; }
-        SR_NODISCARD SafePtr<T>& GetThis() { return *this; }
+        SR_NODISCARD SafePtr<T> GetThis() {
+            return SafePtr<T>(*this);
+            /*SafePtr<T> ptr;
+
+            if (ptr.m_data) {
+                SR_DEL_SAFE_PTR();
+                delete ptr.m_data;
+            }
+
+            ptr.m_data = m_data;
+
+            ++(ptr.m_data->m_useCount);
+            ptr.m_ptr = m_ptr;
+
+            return ptr;*/
+        }
         SR_NODISCARD bool Valid() const { return m_data && m_data->m_valid; }
         SR_NODISCARD bool IsLocked() const { return Valid() && m_data->m_lock; }
         SR_NODISCARD uint32_t GetUseCount() const;
@@ -89,7 +117,7 @@ namespace SR_HTYPES_NS {
             mutable std::atomic<bool>            m_lock;
             mutable std::atomic<uint32_t>        m_lockCount;
             mutable std::atomic<uint32_t>        m_useCount;
-            bool                                 m_valid{};
+            bool                                 m_valid {};
             mutable std::atomic<std::thread::id> m_owner;
         }* m_data;
         T* m_ptr;
@@ -169,18 +197,25 @@ namespace SR_HTYPES_NS {
                 SR_DEL_SAFE_PTR();
 
                 delete m_data;
-            } else
+            }
+            else
                 --(m_data->m_useCount);
 
             SR_NEW_SAFE_PTR();
 
-            m_data = new dynamic_data {
-                false,                         // m_lock
-                0,                             // m_lockCount
-                1,                             // m_useCount
-                false,                         // m_valid
-                std::atomic<std::thread::id>() // m_owner
-            };
+            if (auto&& inherit = dynamic_cast<SafePtr<T>*>(ptr)) {
+                m_data = inherit->m_data;
+                ++(m_data->m_useCount);
+            }
+            else {
+                m_data = new dynamic_data{
+                        false,                         // m_lock
+                        0,                             // m_lockCount
+                        1,                             // m_useCount
+                        false,                         // m_valid
+                        std::atomic<std::thread::id>() // m_owner
+                };
+            }
         }
 
         m_data->m_valid = bool(m_ptr = ptr);
@@ -335,15 +370,55 @@ namespace SR_HTYPES_NS {
     template<typename T> uint32_t SafePtr<T>::GetUseCount() const {
         return Valid() ? m_data->m_useCount.load() : 0;
     }
-}
 
-//template <class T> SR_NODISCARD SR_INLINE bool operator==(const SR_HTYPES_NS::SafePtr<T>& left, const SR_HTYPES_NS::SafePtr<T>& right) {
-//    return left.GetRawPtr() == right.GetRawPtr();
-//}
-//
-//template <class T> SR_NODISCARD SR_INLINE bool operator!=(const SR_HTYPES_NS::SafePtr<T>& left, const SR_HTYPES_NS::SafePtr<T>& right) {
-//    return left.GetRawPtr() != right.GetRawPtr();
-//}
+    template<typename T> bool SafePtr<T>::TryRecursiveLockIfValid() const {
+        if (!TryRecursiveLock())
+            return false;
+
+        if (m_data->m_valid)
+            return true;
+
+        Unlock();
+
+        return false;
+    }
+
+    template<typename T> bool SafePtr<T>::TryRecursiveLock() const {
+        const std::thread::id this_id = std::this_thread::get_id();
+
+        if(m_data->m_owner.load() == this_id) {
+            /// recursive locking
+            ++(m_data->m_lockCount);
+            SR_SAFE_PTR_ASSERT("Lock count > 10000!", m_data->m_lockCount < 10000);
+
+            return true;
+        }
+        else {
+            bool expected = false;
+            while (!m_data->m_lock.compare_exchange_weak(expected, true, std::memory_order_acquire))
+                return false;
+
+            m_data->m_owner.store(this_id);
+            m_data->m_lockCount.store(1);
+
+            return true;
+        }
+    }
+
+    template<typename T> void SafePtr<T>::ReplaceAndLock(const SafePtr& ptr) {
+        if (ptr.m_ptr == m_ptr)
+            return;
+
+        if (ptr) {
+            ptr.RecursiveLock();
+        }
+
+        SafePtr copy = *this;
+        copy.RecursiveLock();
+        *this = ptr;
+        copy.Unlock();
+    }
+}
 
 namespace std {
     template<typename T> struct hash<Framework::Helper::Types::SafePtr<T>> {
