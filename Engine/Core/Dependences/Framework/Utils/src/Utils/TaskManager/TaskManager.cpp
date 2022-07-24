@@ -83,7 +83,7 @@ namespace SR_UTILS_NS {
 
     bool Task::IsCompleted() const {
         const State state = m_state->load();
-        return state == State::Completed || state == State::Failed || state == State::Stopped;
+        return (state == State::Completed || state == State::Failed || state == State::Stopped) && !m_thread->Joinable();
     }
 
     Task::State Task::GetResult() const {

@@ -110,31 +110,23 @@ namespace SR_CORE_NS::GUI {
             return false;
         }
 
-        //auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
-        //
-        ///// оставляем заблокированной, разблокируется после отрисовки кнопки
-        //if (!runtimeScene.RecursiveLockIfValid()) {
-        //    SR_ERROR("SceneRunner::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
-        //    return false;
-        //}
+        auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
 
-        //m_scene.Unlock();
+        /// оставляем заблокированной, разблокируется после отрисовки кнопки
+        if (!runtimeScene.RecursiveLockIfValid()) {
+            SR_ERROR("SceneRunner::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
+            return false;
+        }
 
-        // return Engine::Instance().SetScene(runtimeScene);
+        m_scene.Unlock();
 
-        SR_UTILS_NS::TaskManager::Instance().Execute([runtimePath /** copy */](SR_UTILS_NS::Task::StatePtr state) {
-            auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
-            Engine::Instance().SetScene(runtimeScene);
-            state->store(SR_UTILS_NS::Task::State::Completed);
-        }, false);
-
-        return true;
+        return Engine::Instance().SetScene(runtimeScene);
     }
 
     void SceneRunner::ReturnScene() {
         SR_LOG("SceneRunner::ReturnScene() : stop scene \"" + m_lastPath.ToString() + "\"");
 
-        /*auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
+        auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
 
         if (!originalScene.RecursiveLockIfValid()) {
             SR_ERROR("SceneRunner::ReturnScene() : failed to load original scene!\n\tPath: " + m_scenePath.ToString());
@@ -144,6 +136,6 @@ namespace SR_CORE_NS::GUI {
 
         m_scene.Unlock();
 
-        Engine::Instance().SetScene(originalScene);*/
+        Engine::Instance().SetScene(originalScene);
     }
 }

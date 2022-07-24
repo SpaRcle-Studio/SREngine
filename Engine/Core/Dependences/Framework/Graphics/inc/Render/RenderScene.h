@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS {
 
     class RenderScene : public SR_HTYPES_NS::SafePtr<RenderScene> {
         using WidgetManagerPtr = GUI::WidgetManager*;
-        using WidgetManagers = std::list<WidgetManagerPtr>;
+        using WidgetManagers = std::vector<WidgetManagerPtr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using PipelinePtr = Environment*;

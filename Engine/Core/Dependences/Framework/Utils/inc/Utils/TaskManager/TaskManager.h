@@ -57,7 +57,7 @@ namespace SR_UTILS_NS {
 
     public:
         TaskId Execute(Task&& task);
-        TaskId Execute(const TaskFn& function, bool createThread);
+        TaskId Execute(const TaskFn& function, bool createThread = false);
 
         Task::State GetResult(TaskId taskId) const;
 

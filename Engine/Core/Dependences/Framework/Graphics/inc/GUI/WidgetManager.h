@@ -33,8 +33,10 @@ namespace SR_GRAPH_NS::GUI {
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
+    protected:
+        mutable std::recursive_mutex m_mutex;
+
     private:
-        std::recursive_mutex m_mutex;
         Widgets m_widgets;
         bool m_ignoreNonFocused;
 

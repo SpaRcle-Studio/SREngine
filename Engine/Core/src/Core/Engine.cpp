@@ -28,10 +28,11 @@ namespace Framework {
 
         m_physics = physics;
 
-        m_time       = new Helper::Types::Time();
-        m_cmdManager = new Helper::CmdManager();
-        m_input      = new Helper::InputDispatcher();
+        m_time       = new SR_HTYPES_NS::Time();
+        m_cmdManager = new SR_UTILS_NS::CmdManager();
+        m_input      = new SR_UTILS_NS::InputDispatcher();
         m_pipeline   = SR_GRAPH_NS::Environment::Get();
+        m_editor     = new Core::GUI::EditorGUI();
 
         if (m_isCreate) {
             SR_ERROR("Engine::Create() : game engine is already created!");
@@ -47,13 +48,16 @@ namespace Framework {
             return false;
         }
 
+        m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
+        m_input->Register(m_editor);
+        m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
+
         //window->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
         //window->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI());
 
-        //m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
-//
+        //
         //if (m_editor) {
-        //    m_input->Register(m_editor);
+        //
         //    m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
         //}
 
@@ -182,7 +186,7 @@ namespace Framework {
         while (m_isRun) {
             SR_HTYPES_NS::Thread::Sleep(1);
 
-            SR_LOCK_GUARD
+            //SR_LOCK_GUARD
 
             ///SR_GRAPH_NS::Memory::CameraManager::Instance().Update();
 
@@ -259,15 +263,17 @@ namespace Framework {
 
         m_isRun = false;
 
+        if (m_input) {
+            m_input->UnregisterAll();
+        }
+        SR_SAFE_DELETE_PTR(m_input);
+
         if (m_scene.Valid()) {
             m_scene->Save();
             SetScene(ScenePtr());
         }
 
-        if (m_input) {
-            m_input->UnregisterAll();
-        }
-        SR_SAFE_DELETE_PTR(m_input);
+        SR_SAFE_DELETE_PTR(m_editor);
 
         if (m_cmdManager && m_cmdManager->IsRun())
             m_cmdManager->Close();
@@ -304,7 +310,8 @@ namespace Framework {
 
         if (m_renderScene.LockIfValid()) {
             m_renderScene->Render();
-            m_renderScene.Unlock();
+            /// В процессе отрисовки сцена могла быть заменена
+            m_renderScene.TryUnlock();
         }
     }
 
@@ -323,6 +330,7 @@ namespace Framework {
         /// чтобы проконтролировать, что она корректно уничтожится и не произойдет блокировки
         bool locked = false;
         ScenePtr oldScene = m_scene;
+        RenderScenePtr oldRenderScene = m_renderScene;
 
         if (oldScene.RecursiveLockIfValid())
         {
@@ -330,12 +338,6 @@ namespace Framework {
                 ptr->RemoveWidgetManager(m_editor);
                 ptr->RemoveWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
             });
-
-            m_input->Unregister(m_editor);
-            delete m_editor;
-            m_editor = nullptr;
-
-            m_input->Unregister(&Graphics::GUI::GlobalWidgetManager::Instance());
 
             oldScene.AutoFree([](SR_WORLD_NS::Scene* scene) {
                 scene->Destroy();
@@ -354,22 +356,18 @@ namespace Framework {
 
         if ((m_scene = scene).Valid()) {
             if (auto&& pContext = m_window->GetContext(); pContext.LockIfValid()) {
-                m_renderScene.ReplaceAndLock(pContext->CreateScene(m_scene));
+                m_renderScene.ReplaceAndCopyLock(pContext->CreateScene(m_scene));
 
                 m_renderScene->SetTechnique("Engine/EditorRenderTechnique.xml");
 
-                bool guiEnabled = SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false);
-
-                m_renderScene->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI());
-                m_renderScene->SetOverlayEnabled(guiEnabled);
-                m_editor->Enable(guiEnabled);
-                m_input->Register(m_editor);
-
+                m_renderScene->RegisterWidgetManager(m_editor);
                 m_renderScene->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
-                m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
+
+                m_renderScene->SetOverlayEnabled(m_editor->Enabled());
 
                 pContext.Unlock();
                 m_renderScene.Unlock();
+                oldRenderScene.RemoveAllLocks();
             }
         }
 

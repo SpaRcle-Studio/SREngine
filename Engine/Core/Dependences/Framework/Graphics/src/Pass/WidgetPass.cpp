@@ -17,8 +17,14 @@ namespace SR_GRAPH_NS {
         auto&& widgetManagers = GetRenderScene()->GetWidgetManagers();
 
         if (pipeline->BeginDrawGUI()) {
-            for (auto&& pWidgetManager : widgetManagers)
-                pWidgetManager->Draw();
+            /// Во время отрисовки виджета он может быть удален
+            for (uint16_t i = 0; ; ++i) {
+                if (i >= widgetManagers.size()) {
+                    break;
+                }
+
+                widgetManagers[i]->Draw();
+            }
 
             pipeline->EndDrawGUI();
         }

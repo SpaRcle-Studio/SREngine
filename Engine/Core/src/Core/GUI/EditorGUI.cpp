@@ -74,6 +74,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::Draw() {
+        SR_LOCK_GUARD
+
         if (m_hasErrors)
             return;
 
@@ -156,6 +158,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::Update() {
+        SR_LOCK_GUARD
+
         if (Enabled()) {
             GetWindow<Inspector>()->Update();
         }

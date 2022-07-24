@@ -154,10 +154,18 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::RegisterWidgetManager(RenderScene::WidgetManagerPtr pWidgetManager) {
+        if (!pWidgetManager) {
+            return;
+        }
+
         m_widgetManagers.emplace_back(pWidgetManager);
     }
 
     void RenderScene::RemoveWidgetManager(RenderScene::WidgetManagerPtr pWidgetManager) {
+        if (!pWidgetManager) {
+            return;
+        }
+
         for (auto&& pIt = m_widgetManagers.begin(); pIt != m_widgetManagers.end(); ) {
             if (*pIt == pWidgetManager) {
                 pIt = m_widgetManagers.erase(pIt);

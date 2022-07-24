@@ -39,10 +39,14 @@ namespace SR_HTYPES_NS {
         bool TryRecursiveLock() const;
         void Lock() const;
         void Unlock() const;
+        bool TryUnlock() const;
         void RecursiveLock() const;
+
+        void RemoveAllLocks();
 
         void Replace(const SafePtr &ptr);
         void ReplaceAndLock(const SafePtr& ptr);
+        void ReplaceAndCopyLock(const SafePtr& ptr);
 
         template<typename U> U DynamicCast() {
            return dynamic_cast<U>(m_ptr);
@@ -180,8 +184,8 @@ namespace SR_HTYPES_NS {
         else
             --(m_data->m_useCount);
 
-        m_ptr = ptr.m_ptr;
         m_data = ptr.m_data;
+        m_data->m_valid = bool(m_ptr = ptr.m_ptr);
 
         ++(m_data->m_useCount);
 
@@ -409,14 +413,55 @@ namespace SR_HTYPES_NS {
         if (ptr.m_ptr == m_ptr)
             return;
 
-        if (ptr) {
-            ptr.RecursiveLock();
-        }
+        ptr.RecursiveLock();
 
         SafePtr copy = *this;
         copy.RecursiveLock();
         *this = ptr;
         copy.Unlock();
+    }
+
+    template<typename T> void SafePtr<T>::ReplaceAndCopyLock(const SafePtr& ptr) {
+        if (ptr.m_ptr == m_ptr)
+            return;
+
+        SafePtr copy = *this;
+        copy.RecursiveLock();
+
+        for (uint32_t i = 0; i < m_data->m_lockCount; ++i) {
+            ptr.RecursiveLock();
+        }
+
+        *this = ptr;
+        copy.Unlock();
+    }
+
+    template<typename T> bool SafePtr<T>::TryUnlock() const {
+        if(m_data->m_lockCount > 1) {
+            /// recursive unlocking
+            --(m_data->m_lockCount);
+
+            return true;
+        }
+
+        if (m_data->m_lockCount) {
+            /// normal unlocking
+
+            m_data->m_owner.store(std::thread::id());
+            m_data->m_lockCount.store(0);
+
+            m_data->m_lock.store(false, std::memory_order_release);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    template<typename T> void SafePtr<T>::RemoveAllLocks() {
+        m_data->m_owner.store(std::thread::id());
+        m_data->m_lockCount.store(0);
+        m_data->m_lock.store(false, std::memory_order_release);
     }
 }
 
