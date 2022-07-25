@@ -10,7 +10,7 @@
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type, std::string name)
-        : IResource(typeid(Mesh).name())
+        : IResource(typeid(Mesh).name(), true /** auto remove */)
         , m_env(Environment::Get())
         , m_type(type)
         , m_pipeline(Environment::Get()->GetPipeLine())
@@ -130,10 +130,10 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Mesh::IsCanCalculate() const {
-        if (!m_render) {
-            SR_ERROR("Mesh::IsCanCalculate() : mesh is not registered in render!");
-            return false;
-        }
+        //if (!m_render) {
+        //    SR_ERROR("Mesh::IsCanCalculate() : mesh is not registered in render!");
+        //    return false;
+        //}
 
         if (!m_material) {
             SR_ERROR("Mesh::IsCanCalculate() : mesh does not have a material!");

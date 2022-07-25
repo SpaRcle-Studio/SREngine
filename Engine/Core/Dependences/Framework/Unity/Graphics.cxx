@@ -46,6 +46,7 @@
 #include "../Graphics/src/Pass/SwapchainPass.cpp"
 #include "../Graphics/src/Pass/GroupPass.cpp"
 #include "../Graphics/src/Pass/WidgetPass.cpp"
+#include "../Graphics/src/Pass/OpaquePass.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"

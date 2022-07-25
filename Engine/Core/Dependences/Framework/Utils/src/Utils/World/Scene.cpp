@@ -37,7 +37,7 @@ namespace SR_WORLD_NS {
     Scene::Scene(const std::string &name)
         : Super(this)
         , m_name(name)
-        , m_observer(new Observer(this))
+        , m_observer(new Observer(GetThis()))
     {
         ReloadConfig();
     }
@@ -47,7 +47,7 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
         }
 
-        Types::SafePtr<GameObject> gm = *(new GameObject(*this, name));
+        Types::SafePtr<GameObject> gm = *(new GameObject(GetThis(), name));
 
         m_gameObjects.insert(gm);
 
@@ -243,8 +243,6 @@ namespace SR_WORLD_NS {
     }
 
     void Scene::Update(float_t dt) {
-        FindObserver();
-
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
         const auto regSize = Math::IVector3(m_regionWidth);
         const auto regSize2 = Math::IVector3(m_regionWidth - 1);
@@ -533,5 +531,11 @@ namespace SR_WORLD_NS {
 
     void Scene::StopScene() {
         m_isActive = false;
+    }
+
+    void Scene::SetObserver(const Scene::GameObjectPtr &target) {
+        if (target != m_observer->m_target) {
+            m_observer->SetTarget(target);
+        }
     }
 }

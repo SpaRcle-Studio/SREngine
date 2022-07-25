@@ -30,18 +30,18 @@ namespace Framework::Graphics::Impl {
         void UpdateUBOs() override;
 
         void CalculateAll() override {
-            static Environment* env = Environment::Get();
+           //static Environment* env = Environment::Get();
 
-            for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
-                if (shader) shader->Init();
-                else
-                    continue;
+           //for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
+           //    if (shader) shader->Init();
+           //    else
+           //        continue;
 
-                for (auto const& [key, meshGroup] : subCluster.m_groups) {
-                    for (const auto &mesh : meshGroup)
-                        mesh->Calculate();
-                }
-            }
+           //    for (auto const& [key, meshGroup] : subCluster.m_groups) {
+           //        for (const auto &mesh : meshGroup)
+           //            mesh->Calculate();
+           //    }
+           //}
         }
 
         void DrawGeometry() override;

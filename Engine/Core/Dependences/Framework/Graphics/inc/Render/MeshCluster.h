@@ -22,42 +22,110 @@ namespace SR_GRAPH_NS {
     typedef std::unordered_map<ClusterVBOId, MeshGroup> MeshGroups;
     typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
-    struct ShadedMeshSubCluster : public SR_UTILS_NS::NonCopyable {
+    class ShadedMeshSubCluster : public SR_UTILS_NS::NonCopyable {
+    public:
+        using Iterator = MeshGroups::iterator;
+        using ConstIterator = MeshGroups::const_iterator;
+
+    public:
         ShadedMeshSubCluster() = default;
         ~ShadedMeshSubCluster() override = default;
 
         ShadedMeshSubCluster(ShadedMeshSubCluster&& ref) noexcept {
             m_groups = std::exchange(ref.m_groups, {});
-            m_counters = std::exchange(ref.m_counters, {});
-            m_total = std::exchange(ref.m_total, {});
         }
 
         ShadedMeshSubCluster& operator=(ShadedMeshSubCluster&& ref) noexcept {
             m_groups = std::exchange(ref.m_groups, {});
-            m_counters = std::exchange(ref.m_counters, {});
-            m_total = std::exchange(ref.m_total, {});
             return *this;
         }
 
-        MeshGroups        m_groups   = MeshGroups();
-        MeshGroupCounters m_counters = MeshGroupCounters();
-        uint32_t          m_total    = 0;
+    public:
+        Iterator erase(const Iterator& iterator) {
+            return m_groups.erase(iterator);
+        }
+
+        SR_NODISCARD Iterator begin() { return m_groups.begin(); }
+        SR_NODISCARD Iterator end() { return m_groups.end(); }
+
+        SR_NODISCARD ConstIterator begin() const { return m_groups.begin(); }
+        SR_NODISCARD ConstIterator end() const { return m_groups.end(); }
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
-        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
-
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
+
+    private:
+        MeshGroups m_groups = MeshGroups();
+
     };
 
-    struct MeshCluster : public SR_UTILS_NS::NonCopyable {
+    class MeshCluster : public SR_UTILS_NS::NonCopyable {
+    public:
+        using Iterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::iterator;
+        using ConstIterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::const_iterator;
+        using MeshPtr = SR_GTYPES_NS::Mesh*;
+
+    public:
         MeshCluster();
         ~MeshCluster() override = default;
 
-        ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
+    public:
+        Iterator erase(const Iterator& iterator) {
+            return m_subClusters.erase(iterator);
+        }
+
+        SR_NODISCARD Iterator begin() { return m_subClusters.begin(); }
+        SR_NODISCARD Iterator end() { return m_subClusters.end(); }
+
+        SR_NODISCARD ConstIterator begin() const { return m_subClusters.begin(); }
+        SR_NODISCARD ConstIterator end() const { return m_subClusters.end(); }
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
-        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
+
+        void Update();
+
+    protected:
+        virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) = 0;
+
+    protected:
+        ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
+
+    };
+
+    class OpaqueMeshCluster;
+    class TransparentMeshCluster;
+
+    class OpaqueMeshCluster : public MeshCluster {
+    public:
+        OpaqueMeshCluster(TransparentMeshCluster* pTransparentCluster)
+            : m_transparent(pTransparentCluster)
+        { }
+
+        ~OpaqueMeshCluster() override = default;
+
+    private:
+        bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) final;
+
+    private:
+        TransparentMeshCluster* m_transparent;
+
+    };
+
+    class TransparentMeshCluster : public MeshCluster {
+    public:
+        TransparentMeshCluster(OpaqueMeshCluster* pOpaqueCluster)
+            : m_opaque(pOpaqueCluster)
+        { }
+
+        ~TransparentMeshCluster() override = default;
+
+    private:
+        bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) final;
+
+    private:
+        OpaqueMeshCluster* m_opaque;
+
     };
 }
 

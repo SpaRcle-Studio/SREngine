@@ -7,8 +7,8 @@
 
        <CrashHandler Value="true"/>
 
-       <DebugChunks Value="false"/>
-       <DebugRegions Value="false"/>
+       <DebugChunks Value="true"/>
+       <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
 
        <EditorOnStartup Value="true"/>
@@ -18,7 +18,6 @@
 
        <AutoReloadResources Value="true"/>
 
-       <UseRenderTechnique Value="true"/>
        <LoadSkybox Value="true"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>

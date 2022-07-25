@@ -23,6 +23,7 @@ namespace SR_WORLD_NS {
     #define SRChunkAllocVArgs observer, region, position, size
 
     class SR_DLL_EXPORT Chunk : public NonCopyable {
+        using ScenePtr = SR_HTYPES_NS::SafePtr<Scene>;
     protected:
         Chunk(SRChunkAllocArgs);
 
@@ -44,8 +45,9 @@ namespace SR_WORLD_NS {
     public:
         SR_NODISCARD LoadState GetState() const { return m_loadState; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
-        SR_NODISCARD Math::IVector3 GetPosition() const { return m_position; }
-        SR_NODISCARD Math::FVector3 GetWorldPosition(Math::Axis center = Math::AXIS_NONE) const;
+        SR_NODISCARD SR_MATH_NS::IVector3 GetPosition() const { return m_position; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(SR_MATH_NS::Axis center = SR_MATH_NS::AXIS_NONE) const;
+        SR_NODISCARD ScenePtr GetScene() const;
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save() const;
 

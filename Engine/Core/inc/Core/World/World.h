@@ -13,9 +13,15 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/GameObject.h>
 
+namespace SR_GRAPH_NS {
+    class RenderScene;
+}
+
 namespace SR_CORE_NS::World {
     class SR_DLL_EXPORT World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
+        using CameraPtr = SR_GTYPES_NS::Camera*;
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
         World()
             : Scene()
@@ -31,7 +37,9 @@ namespace SR_CORE_NS::World {
     public:
         SR_UTILS_NS::GameObject::Ptr Instance(SR_HTYPES_NS::Marshal& marshal) override;
         SR_UTILS_NS::GameObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
-        void FindObserver() override;
+
+    private:
+        SR_NODISCARD RenderScenePtr GetRenderScene() const;
 
     };
 }

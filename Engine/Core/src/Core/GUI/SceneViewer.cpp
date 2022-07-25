@@ -53,7 +53,8 @@ void SceneViewer::Draw() {
     }
 }
 
-void SceneViewer::SetScene(SR_WORLD_NS::Scene::Ptr scene) {
+void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
+    SetCamera(GameObjectPtr());
     m_scene.Replace(scene);
     SetCameraActive(m_cameraActive);
 }

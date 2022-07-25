@@ -33,10 +33,10 @@ namespace SR_GRAPH_NS::Types {
             return true;
         }
 
-        if (!SRVerifyFalse2(!(m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
-            m_hasErrors = true;
-            return false;
-        }
+        //if (!SRVerifyFalse2(!(m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
+        //    m_hasErrors = true;
+        //    return false;
+        //}
 
         if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
             m_hasErrors = true;
@@ -388,5 +388,9 @@ namespace SR_GRAPH_NS::Types {
         m_samplers.clear();
 
         return !hasErrors;
+    }
+
+    bool Shader::IsBlendEnabled() const {
+        return m_shaderCreateInfo.blendEnabled;
     }
 }

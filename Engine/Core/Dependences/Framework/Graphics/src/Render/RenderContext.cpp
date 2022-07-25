@@ -36,27 +36,31 @@ namespace SR_GRAPH_NS {
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ) {
             auto&& [pScene, pRenderScene] = *pIt;
 
-            /// Если на сцене все еще есть объекты или технология рендера
-            if (!pRenderScene.Do<bool>([](RenderScene* pRScene) -> bool { return pRScene->IsEmpty(); }, false)) {
+            /// Нет смысла синхронизировать сцену рендера, так как она еще способна сама позаботиться о себе
+            if (pScene.Valid()) {
+                if (dirty) {
+                    pRenderScene->SetDirty();
+                }
+
+                ++pIt;
+                continue;
+            }
+
+            /// Синхронизируем и проверяем, есть ли еще на сцене объекты
+            if (!pRenderScene.Do<bool>([](RenderScene* pRScene) -> bool {
+                pRScene->Synchronize();
+                return pRScene->IsEmpty();
+            }, false)) {
                 ++pIt;
                 continue;
             }
 
             /// Как только уничтожается основная сцена, уничтожаем сцену рендера
-            if (!pScene.Valid()) {
-                SR_LOG("RenderContext::Update() : destroy render scene...");
-                pRenderScene.AutoFree([](RenderScene* ptr) {
-                    delete ptr;
-                });
-                pIt = m_scenes.erase(pIt);
-                continue;
-            }
-
-            if (dirty) {
-                pRenderScene->SetDirty();
-            }
-
-            ++pIt;
+            SR_LOG("RenderContext::Update() : destroy render scene...");
+            pRenderScene.AutoFree([](RenderScene* ptr) {
+                delete ptr;
+            });
+            pIt = m_scenes.erase(pIt);
         }
     }
 

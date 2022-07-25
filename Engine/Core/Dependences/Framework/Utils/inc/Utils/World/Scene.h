@@ -81,6 +81,7 @@ namespace SR_WORLD_NS {
     public:
         typedef Types::SafePtr<Scene> Ptr;
         using Super = Types::SafePtr<Scene>;
+        using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
 
     protected:
         Scene();
@@ -106,12 +107,14 @@ namespace SR_WORLD_NS {
         void SetPath(const Path& path) { m_path = path; }
         void SetActive(bool value) { m_isActive = value; }
         void SetPaused(bool value) { m_isPaused = value; }
+        void SetObserver(const GameObjectPtr& target);
 
         SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat("regions"); }
         SR_NODISCARD Path GetPath() const { return m_path; }
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
+        SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
         SR_NODISCARD bool IsPaused() const { return m_isPaused; }
         SR_NODISCARD bool IsActive() const { return m_isActive; }
 
@@ -139,7 +142,6 @@ namespace SR_WORLD_NS {
         void UpdateTree();
 
     private:
-        virtual void FindObserver() { }
         void CheckShift(const Math::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);

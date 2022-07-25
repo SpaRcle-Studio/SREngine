@@ -167,4 +167,8 @@ namespace SR_WORLD_NS {
 
         return fPos;
     }
+
+    Chunk::ScenePtr Chunk::GetScene() const {
+        return m_observer->m_scene;
+    }
 }

@@ -31,7 +31,7 @@ namespace SR_GTYPES_NS {
         Component::OnAttached();
 
         if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
-            renderScene->RegisterCamera(this);
+            renderScene->Register(this);
             renderScene.Unlock();
         }
         else {
@@ -56,7 +56,7 @@ namespace SR_GTYPES_NS {
 
     void Camera::OnDestroy() {
         if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
-            renderScene->DestroyCamera(this);
+            renderScene->Remove(this);
             renderScene.Unlock();
         }
         else {

@@ -24,7 +24,7 @@
 namespace Framework {
     bool Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine* physics) {
         m_window = window;
-        m_render = window->GetRender();
+        //m_render = window->GetRender();
 
         m_physics = physics;
 
@@ -157,18 +157,7 @@ namespace Framework {
         if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem")) {
             SR_INFO("Engine::Run() : running world thread...");
 
-            m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
-                auto timer = Helper::Types::Timer(0.1);
-
-                while (m_isRun) {
-                    SR_HTYPES_NS::Thread::Sleep(1);
-
-                    if (timer.Update() && m_scene.LockIfValid()) {
-                        m_scene->Update(timer.GetDeltaTime());
-                        m_scene.Unlock();
-                    }
-                }
-            });
+            m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
         }
 
         return true;
@@ -185,6 +174,8 @@ namespace Framework {
 
         while (m_isRun) {
             SR_HTYPES_NS::Thread::Sleep(1);
+
+            SRAssert(m_worldThread->Joinable());
 
             //SR_LOCK_GUARD
 
@@ -303,11 +294,6 @@ namespace Framework {
     }
 
     void Engine::DrawCallback() {
-        //if (!SR_UTILS_NS::Features::Instance().Enabled("UseRenderTechnique", false)) {
-        //    m_window->DrawVulkan();
-        //}
-        //else
-
         if (m_renderScene.LockIfValid()) {
             m_renderScene->Render();
             /// В процессе отрисовки сцена могла быть заменена
@@ -335,8 +321,8 @@ namespace Framework {
         if (oldScene.RecursiveLockIfValid())
         {
             m_renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->RemoveWidgetManager(m_editor);
-                ptr->RemoveWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
+                ptr->Remove(m_editor);
+                ptr->Remove(&Graphics::GUI::GlobalWidgetManager::Instance());
             });
 
             oldScene.AutoFree([](SR_WORLD_NS::Scene* scene) {
@@ -360,8 +346,8 @@ namespace Framework {
 
                 m_renderScene->SetTechnique("Engine/EditorRenderTechnique.xml");
 
-                m_renderScene->RegisterWidgetManager(m_editor);
-                m_renderScene->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
+                m_renderScene->Register(m_editor);
+                m_renderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
 
                 m_renderScene->SetOverlayEnabled(m_editor->Enabled());
 
@@ -387,5 +373,39 @@ namespace Framework {
     void Engine::Reload() {
         SR_PLATFORM_NS::SelfOpen();
         SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
+    }
+
+    void Engine::WorldThread() {
+        auto timer = Helper::Types::Timer(0.1);
+
+        while (m_isRun) {
+            SR_HTYPES_NS::Thread::Sleep(1);
+
+            auto&& pCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
+                if (auto&& pCamera = ptr->GetMainCamera()) {
+                    return pCamera;
+                }
+
+                return ptr->GetFirstOffScreenCamera();
+            }, nullptr);
+
+            if (!pCamera) {
+                continue;
+            }
+
+            if (timer.Update() && m_scene.LockIfValid()) {
+                if (auto &&gameObject = pCamera->GetParent()) {
+                    if (gameObject->TryLockIfValid()) {
+                        m_scene->SetObserver(gameObject->GetThis());
+                        gameObject->Unlock();
+                    }
+                }
+
+                m_scene->Update(timer.GetDeltaTime());
+                m_scene.Unlock();
+            }
+        }
+
+        SR_SYSTEM_LOG("Engine::WorldThread() : world thread completed!");
     }
 }

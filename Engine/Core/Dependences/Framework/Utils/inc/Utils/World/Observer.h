@@ -51,8 +51,9 @@ namespace SR_WORLD_NS {
 
     class SR_DLL_EXPORT Observer : public NonCopyable {
         using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<Scene>;
     public:
-        Observer(Scene* scene);
+        Observer(const ScenePtr& scene);
         ~Observer() override = default;
 
     public:
@@ -81,7 +82,7 @@ namespace SR_WORLD_NS {
 
         Offset m_offset;
 
-        Scene* m_scene;
+        ScenePtr m_scene;
 
         Math::FVector3 m_targetPosition;
         GameObjectPtr m_target;

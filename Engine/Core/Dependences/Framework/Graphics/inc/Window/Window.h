@@ -62,7 +62,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
-        SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { SRAssert(m_render); return m_render; }
+        //SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { SRAssert(m_render); return m_render; }
         SR_NODISCARD SR_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD bool IsAlive() const;
 
@@ -108,9 +108,6 @@ namespace SR_GRAPH_NS {
         std::string           m_winName               = "Unnamed";
         std::string           m_icoPath               = "Unknown";
         uint8_t               m_smoothSamples         = 4;
-
-        SR_DEPRECATED
-        Render*               m_render                = nullptr;
 
         RenderContextPtr      m_context               = { };
 

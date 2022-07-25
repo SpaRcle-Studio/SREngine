@@ -19,7 +19,7 @@
         region.value = (chunk.value - width) + offset.value;           \
 
 namespace SR_WORLD_NS {
-    Observer::Observer(Scene* scene)
+    Observer::Observer(const Observer::ScenePtr& scene)
         : m_regionWidth(0)
         , m_shiftDistance(0)
         , m_scope(0)

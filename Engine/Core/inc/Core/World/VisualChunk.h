@@ -8,8 +8,12 @@
 #include <Utils/World/Chunk.h>
 #include <Utils/Math/Vector3.h>
 
-namespace Framework::Graphics::Types {
+namespace SR_GTYPES_NS {
     class DebugWireframeMesh;
+}
+
+namespace SR_GRAPH_NS {
+    class RenderScene;
 }
 
 namespace SR_WORLD_NS {
@@ -18,12 +22,14 @@ namespace SR_WORLD_NS {
 
 namespace Framework::Core::World {
     class VisualChunk : public SR_WORLD_NS::Chunk {
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit VisualChunk(SRChunkAllocArgs);
         ~VisualChunk() override;
 
     private:
-        std::array<Graphics::Types::DebugWireframeMesh*, 2> m_meshes = { nullptr, nullptr };
+        SR_GTYPES_NS::DebugWireframeMesh* m_loadMesh = nullptr;
+        SR_GTYPES_NS::DebugWireframeMesh* m_stayMesh = nullptr;
 
     private:
         void SetFacesVisible(bool value);

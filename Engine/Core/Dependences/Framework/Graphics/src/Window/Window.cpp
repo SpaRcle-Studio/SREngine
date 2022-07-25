@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS {
         , m_size(size)
         , m_winName(std::move(name))
         , m_icoPath(std::move(icoPath))
-        , m_render(render)
+        //, m_render(render)
         , m_fullScreen(fullScreen)
         , m_vsync(vsync)
         , m_smoothSamples(smoothSamples)
@@ -49,11 +49,11 @@ namespace SR_GRAPH_NS {
 
         SR_INFO("Window::Create() : creating the window...");
 
-        if (!m_render->Create(this)) {
-            SR_ERROR("Window::Create() : failed to create render!");
-            m_hasErrors = true;
-            return false;
-        }
+       // if (!m_render->Create(this)) {
+       //     SR_ERROR("Window::Create() : failed to create render!");
+       //     m_hasErrors = true;
+       //     return false;
+       // }
 
         m_context = new RenderContext();
 
@@ -116,9 +116,9 @@ namespace SR_GRAPH_NS {
             while (!m_isEnvInit && !m_hasErrors && !m_isClose);
         }
 
-        ret:
-        if (!m_render->IsInit() && !m_hasErrors)
-            goto ret;
+        //ret:
+        //if (!m_render->IsInit() && !m_hasErrors)
+        //    goto ret;
 
         if (m_hasErrors)
             return false;
@@ -148,12 +148,12 @@ namespace SR_GRAPH_NS {
 
         m_isRun = true;
 
-    ret:
-        if (!m_render->IsRun() && !m_hasErrors)
-            goto ret;
-
-        if (m_hasErrors)
-            return false;
+    //ret:
+    //    if (!m_render->IsRun() && !m_hasErrors)
+    //        goto ret;
+//
+    //    if (m_hasErrors)
+    //        return false;
 
         SR_INFO("Window::Run() : the window is successfully running!");
 
@@ -205,11 +205,11 @@ namespace SR_GRAPH_NS {
                     return;
                 }
 
-            if (!m_render->Init()) {
-                SR_ERROR("Window::Thread() : failed to initialize the render!");
-                m_hasErrors = true;
-                return;
-            }
+            //if (!m_render->Init()) {
+            //    SR_ERROR("Window::Thread() : failed to initialize the render!");
+            //    m_hasErrors = true;
+            //    return;
+            //}
 
             if (!m_context->Init()) {
                 SR_ERROR("Window::Thread() : failed to initialize the render context!");
@@ -217,18 +217,18 @@ namespace SR_GRAPH_NS {
                 return;
             }
 
-            SR_THIS_THREAD->GetContext()->SetPointer<Render>(m_render);
+            //SR_THIS_THREAD->GetContext()->SetPointer<Render>(m_render);
             SR_THIS_THREAD->GetContext()->SetValue<RenderContextPtr>(m_context);
 
             waitRun:
             if (!m_isRun && !m_isClose && !m_hasErrors)
                 goto waitRun;
 
-            if (!m_render->Run()) {
-                SR_ERROR("Window::Thread() : failed to run the render!");
-                m_hasErrors = true;
-                return;
-            }
+            //if (!m_render->Run()) {
+            //    SR_ERROR("Window::Thread() : failed to run the render!");
+            //    m_hasErrors = true;
+            //    return;
+            //}
         }
 
         SR_LOG("Window::Thread() : screen size is " + m_env->GetScreenSize().ToString());
@@ -289,9 +289,9 @@ namespace SR_GRAPH_NS {
             SR_ERROR("Window::Thread() : failed to free resources!");
         }
 
-        if (!m_render->Close()) {
-            SR_ERROR("Window::Thread() : failed to close the render!");
-        }
+        //if (!m_render->Close()) {
+        //    SR_ERROR("Window::Thread() : failed to close the render!");
+        //}
 
         m_env->CloseWindow();
 
@@ -461,19 +461,19 @@ namespace SR_GRAPH_NS {
 
         std::atomic<bool> syncComplete(false);
 
-        m_render->SetSkybox(nullptr);
+        //m_render->SetSkybox(nullptr);
 
         /** Ждем, пока все графические ресурсы не освободятся */
         auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
             uint32_t syncStep = 0;
-            const uint32_t maxErrStep = 100;
+            const uint32_t maxErrStep = 50;
 
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
             //if (auto material = SR_GTYPES_NS::Material::GetDefault(); material && material->GetCountUses() == 1)
             //    SR_GTYPES_NS::Material::FreeDefault();
 
-            m_render->Synchronize();
+           // m_render->Synchronize();
 
             ///!m_render->IsClean() &&
             while(!m_context->IsEmpty()) {
@@ -483,7 +483,7 @@ namespace SR_GRAPH_NS {
                 //    SR_GTYPES_NS::Material::FreeDefault();
 
                 SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
-                m_render->Synchronize();
+                //m_render->Synchronize();
 
                 if (maxErrStep == syncStep) {
                     SR_ERROR("Window::SyncFreeResources() : [FATAL] resources can not be released!");
@@ -503,8 +503,10 @@ namespace SR_GRAPH_NS {
         while (!syncComplete) {
             PollEvents();
             SR_UTILS_NS::ResourceManager::LockSingleton();
-            m_render->PollEvents();
-            m_context->Update();
+            //m_render->PollEvents();
+            m_context.Do([](RenderContext* ptr) {
+                ptr->Update();
+            });
             SR_UTILS_NS::ResourceManager::UnlockSingleton();
         }
 
@@ -531,7 +533,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::DrawToCamera(Types::Camera* camera, uint32_t fbo) {
-        m_render->SetCurrentCamera(camera);
+        //m_render->SetCurrentCamera(camera);
 
         for (uint8_t i = 0; i < m_env->GetCountBuildIter(); ++i) {
             m_env->SetBuildIteration(i);
@@ -543,15 +545,15 @@ namespace SR_GRAPH_NS {
                 m_env->SetViewport();
                 m_env->SetScissor();
 
-                m_render->DrawGeometry();
-                m_render->DrawSkybox();
+                //m_render->DrawGeometry();
+                //m_render->DrawSkybox();
             }
             m_env->EndRender();
         }
     }
 
     void Window::DrawSingleCamera(Types::Camera *camera) {
-        m_render->SetCurrentCamera(camera);
+        //m_render->SetCurrentCamera(camera);
 
         m_env->ClearFramebuffersQueue();
 
@@ -589,8 +591,8 @@ namespace SR_GRAPH_NS {
                 //fbo1->Draw();
                 //fbo2->Draw();
 
-                m_render->DrawSkybox();
-                m_render->DrawGeometry();
+                //m_render->DrawSkybox();
+                //m_render->DrawGeometry();
             }
             m_env->EndRender();
         }
@@ -697,14 +699,14 @@ namespace SR_GRAPH_NS {
         else {
             if (!multipleRender || cameras.size() == 1) {
                 uboManager.SetCurrentCamera(firstCamera);
-                m_render->SetCurrentCamera(firstCamera);
-                m_render->UpdateUBOs();
+               //m_render->SetCurrentCamera(firstCamera);
+               //m_render->UpdateUBOs();
             }
             else {
                 for (auto &&pCamera : cameras) {
                     uboManager.SetCurrentCamera(pCamera);
-                    m_render->SetCurrentCamera(pCamera);
-                    m_render->UpdateUBOs();
+                   //m_render->SetCurrentCamera(pCamera);
+                   //m_render->UpdateUBOs();
                 }
             }
         }

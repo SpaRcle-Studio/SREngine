@@ -74,8 +74,6 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Private, generator, Engine, RegisterLibraries, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, Reload, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetTime, Time*)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetWindow, Window*)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetRender, Render*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetScene, SafePtr<Scene>)
         ESRegisterMethodArg0(EvoScript::Public, generator, Engine, IsRun, bool)
         ESRegisterMethod(EvoScript::Public, generator, Engine, SetScene, bool, ESArg1(const SafePtr<Scene>& scene), ESArg1(scene))
@@ -155,6 +153,7 @@ namespace Framework {
     void API::RegisterMesh(EvoScript::AddressTableGen *generator) {
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
+        using namespace SR_GTYPES_NS;
 
         generator->AddIncompleteType("Mesh", "Mesh");
 
@@ -216,6 +215,7 @@ namespace Framework {
 
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
+        using namespace SR_GTYPES_NS;
 
         ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
@@ -225,9 +225,9 @@ namespace Framework {
         generator->RegisterNewClass("Render", "Render",
                 { "vector", "mutex", "stdint.h", "map", "Skybox.h", "Texture.h", "Shader.h" });
 
-        ESRegisterMethod(EvoScript::Public, generator, Render, SetSkybox, void, ESArg1(Skybox* skybox), ESArg1(skybox))
-        ESRegisterMethod(EvoScript::Public, generator, Render, RegisterMesh, void, ESArg1(Mesh* mesh), ESArg1(mesh))
-        ESRegisterMethod(EvoScript::Public, generator, Render, RegisterTexture, void, ESArg1(Texture* texture), ESArg1(texture))
+        //ESRegisterMethod(EvoScript::Public, generator, Render, SetSkybox, void, ESArg1(Skybox* skybox), ESArg1(skybox))
+        //ESRegisterMethod(EvoScript::Public, generator, Render, RegisterMesh, void, ESArg1(Mesh* mesh), ESArg1(mesh))
+        //ESRegisterMethod(EvoScript::Public, generator, Render, RegisterTexture, void, ESArg1(Texture* texture), ESArg1(texture))
 
         generator->AddIncompleteType("Window", "Render");
         generator->AddIncompleteType("Camera", "Render");
@@ -238,6 +238,7 @@ namespace Framework {
         generator->RegisterNewClass("Window", "Window", { "thread", "vector", "mutex", "stdint.h", "Math/Vector2.h" });
 
         using namespace SR_MATH_NS;
+        using namespace SR_GRAPH_NS;
 
         ESRegisterMethod(EvoScript::Public, generator, Window, SetGUIEnabled, void, ESArg1(bool v), ESArg1(v))
         ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
@@ -333,7 +334,7 @@ namespace Framework {
     void API::RegisterSkybox(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Skybox", "Skybox", { "stdint.h", "vector", "string", "array" });
 
-        ESRegisterStaticMethod(EvoScript::Public, generator, Skybox, Load, Skybox*, ESArg1(const std::string& path), ESArg1(path))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Skybox, Load, Skybox*, ESArg1(const std::string& path), ESArg1(path))
     }
 
     void API::RegisterTexture(EvoScript::AddressTableGen *generator) {
@@ -373,14 +374,14 @@ namespace Framework {
         generator->RegisterNewClass("Texture", "Texture",
                 { "mutex", "stdint.h", "ResourceManager.h", "string" },
                 {{ "IResource", EvoScript::Public } });
-        ESRegisterMethodArg0(EvoScript::Private, generator, Texture, Destroy, bool) // IResource
-        ESRegisterStaticMethod(EvoScript::Public, generator, Texture, Load, Texture*, ESArg1(const std::string& name), ESArg1(name));
+        //ESRegisterMethodArg0(EvoScript::Private, generator, Texture, Destroy, bool) // IResource
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Texture, Load, Texture*, ESArg1(const std::string& name), ESArg1(name));
     }
 
     void API::RegisterMaterial(EvoScript::AddressTableGen *generator) {
         generator->RegisterNewClass("Material", "Material", { "Texture.h" });
 
-        ESRegisterStaticMethod(EvoScript::Public, generator, Material, Load, Material*, ESArg1(const std::string& name), ESArg1(name))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Material, Load, Material*, ESArg1(const std::string& name), ESArg1(name))
 
         generator->AddIncompleteType("Mesh", "Material");
     }
@@ -408,7 +409,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawWorldEdit, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawInspector, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, SetGuizmoTool, void, ESArg1(uint8_t id), ESArg1(id))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawGuizmo, void, ESArg2(Camera* camera, SafePtr<GameObject> gm), ESArg2(camera, gm))
+        //ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawGuizmo, void, ESArg2(Camera* camera, SafePtr<GameObject> gm), ESArg2(camera, gm))
     }
 
     void API::RegisterPostProcessing(EvoScript::AddressTableGen *generator) {

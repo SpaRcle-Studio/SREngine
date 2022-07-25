@@ -61,7 +61,6 @@ namespace SR_GTYPES_NS {
 
         void SetShader(Shader* shader);
         void SetBloom(bool value);
-        bool SetTransparent(bool value);
 
         void Use();
         void UseSamplers();

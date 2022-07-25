@@ -148,22 +148,22 @@ namespace SR_GRAPH_NS {
         bool needRebuild = false;
 
         //! Check exists new meshes
-        if (!m_newMeshes.empty()) {
-            for (auto mesh : m_newMeshes) {
-                // Add mesh to transparent meshes array or usual mesh array
-
-                if (mesh->GetMaterial()->IsTransparent()) {
-                    SRVerifyFalse(!m_transparentGeometry.Add(mesh));
-                }
-                else {
-                    SRVerifyFalse(!m_geometry.Add(mesh));
-                }
-            }
-
-            m_newMeshes.clear(); // Clear new meshes array
-
-            needRebuild = true;
-        }
+        //if (!m_newMeshes.empty()) {
+        //    for (auto mesh : m_newMeshes) {
+        //        // Add mesh to transparent meshes array or usual mesh array
+//
+        //        if (mesh->GetMaterial()->IsTransparent()) {
+        //            SRVerifyFalse(!m_transparentGeometry.Add(mesh));
+        //        }
+        //        else {
+        //            SRVerifyFalse(!m_geometry.Add(mesh));
+        //        }
+        //    }
+//
+        //    m_newMeshes.clear(); // Clear new meshes array
+//
+        //    needRebuild = true;
+        //}
 
         while (auto&& shader = m_shadersToFree.Pop(nullptr)) {
             SRAssert(shader->GetCountUses() == 0);
@@ -177,23 +177,23 @@ namespace SR_GRAPH_NS {
             needRebuild = true;
         }
 
-        //! Check meshes to remove from render
-        while (!m_removeMeshes.empty()) {
-            const auto &mesh = m_removeMeshes.front();
-
-            if (mesh->GetMaterial()->IsTransparent()) {
-                SRVerifyFalse2(!m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
-            }
-            else {
-                SRVerifyFalse2(!m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
-            }
-
-            if (mesh->IsCalculated())
-                mesh->FreeVideoMemory();
-
-            needRebuild = true;
-            m_removeMeshes.pop();
-        }
+        ////! Check meshes to remove from render
+        //while (!m_removeMeshes.empty()) {
+        //    const auto &mesh = m_removeMeshes.front();
+//
+        //    if (mesh->GetMaterial()->IsTransparent()) {
+        //        SRVerifyFalse2(!m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+        //    }
+        //    else {
+        //        SRVerifyFalse2(!m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+        //    }
+//
+        //    if (mesh->IsCalculated())
+        //        mesh->FreeVideoMemory();
+//
+        //    needRebuild = true;
+        //    m_removeMeshes.pop();
+        //}
 
         //! Free textures
         if (!m_texturesToFree.empty()) {
@@ -301,8 +301,8 @@ namespace SR_GRAPH_NS {
                m_removeMeshes.empty() &&
                m_texturesToFree.empty() &&
                m_textures.empty() &&
-               m_transparentGeometry.Empty() &&
-               m_geometry.Empty() &&
+              // m_transparentGeometry.Empty() &&
+              // m_geometry.Empty() &&
                m_skyboxesToFreeVidMem.empty() &&
                m_shadersToFree.Empty();
     }

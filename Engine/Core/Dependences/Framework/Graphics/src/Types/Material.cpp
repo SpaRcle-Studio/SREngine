@@ -44,17 +44,6 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Material::SetTransparent(bool value) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (IsReadOnly())
-            return false;
-
-        m_transparent = value;
-
-        return true;
-    }
-
     SR_UTILS_NS::IResource* Material::Copy(SR_UTILS_NS::IResource* destination) const {
         SRAssert2(false, "Material is not are copyable!");
         return nullptr;
@@ -171,7 +160,10 @@ namespace SR_GTYPES_NS {
             m_shader = nullptr;
         }
 
-        if (!(m_shader = shader)) {
+        if ((m_shader = shader)) {
+            m_transparent = shader->IsBlendEnabled();
+        }
+        else {
             return;
         }
 

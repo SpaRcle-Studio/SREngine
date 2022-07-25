@@ -7,6 +7,7 @@
 #include <Utils/Types/RawMesh.h>
 #include <assimp/scene.h>
 #include <Memory/CameraManager.h>
+#include <Render/RenderScene.h>
 
 namespace Framework::Core::World {
     SR_UTILS_NS::GameObject::Ptr World::Instance(Framework::Helper::Types::Marshal &marshal)  {
@@ -53,8 +54,7 @@ namespace Framework::Core::World {
 
         auto&& componentManager = Helper::ComponentManager::Instance();
         componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool {
-            context.SetPointer<Render>(Engine::Instance().GetRender());
-            context.SetPointer<Window>(Engine::Instance().GetWindow());
+            context.SetPointer<SR_GRAPH_NS::Window>(Engine::Instance().GetWindow());
 
             auto&& componentCount = marshal.Read<uint32_t>();
 
@@ -101,12 +101,13 @@ namespace Framework::Core::World {
             GameObjectPtr ptr = Scene::Instance(node->mName.C_Str());
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
-                if (auto&& mesh = Mesh::Load(rawMesh->GetResourceId(), MeshType::Static, node->mMeshes[i])) {
-                    auto&& render = Engine::Instance().GetRender();
+                if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
+                    //auto&& render = Engine::Instance().GetRender();
 
-                    mesh->SetMaterial(Material::GetDefault());
+                    mesh->SetMaterial(SR_GTYPES_NS::Material::GetDefault());
 
-                    render->RegisterMesh(mesh);
+                    //render->RegisterMesh(mesh);
+                    SRHalt("TODO!");
 
                     ptr->AddComponent(mesh);
                 }
@@ -145,23 +146,7 @@ namespace Framework::Core::World {
         return root;
     }
 
-    void World::FindObserver() {
-        auto&& cameraManager = SR_GRAPH_NS::Memory::CameraManager::Instance();
-
-        SR_GRAPH_NS::Memory::CameraManager::LockSingleton();
-
-        if (auto&& pCamera = cameraManager.GetFirstCamera()) {
-            if (auto &&gameObject = pCamera->GetParent()) {
-                if (gameObject->TryLockIfValid()) {
-                    auto&& target = gameObject->GetThis();
-                    if (target != m_observer->m_target) {
-                        m_observer->SetTarget(target);
-                    }
-                    gameObject->Unlock();
-                }
-            }
-        }
-
-        SR_GRAPH_NS::Memory::CameraManager::UnlockSingleton();
+    World::RenderScenePtr World::GetRenderScene() const {
+        return GetDataStorage().GetValue<RenderScenePtr>();
     }
 }

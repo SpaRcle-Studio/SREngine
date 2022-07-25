@@ -25,6 +25,7 @@ namespace SR_UTILS_NS {
         #define SRRegionAllocVArgs observer, width, chunkSize, position
 
         class SR_DLL_EXPORT Region : public NonCopyable {
+            using ScenePtr = SR_HTYPES_NS::SafePtr<Scene>;
         protected:
             explicit Region(SRRegionAllocArgs)
                 : m_observer(observer)
@@ -58,6 +59,7 @@ namespace SR_UTILS_NS {
             SR_NODISCARD Math::IVector3 GetPosition() const { return m_position; }
             SR_NODISCARD Math::IVector3 GetWorldPosition() const;
             SR_NODISCARD bool ContainsObserver() const { return m_containsObserver; }
+            SR_NODISCARD ScenePtr GetScene() const;
 
             SR_NODISCARD SR_HTYPES_NS::Marshal Save() const;
 

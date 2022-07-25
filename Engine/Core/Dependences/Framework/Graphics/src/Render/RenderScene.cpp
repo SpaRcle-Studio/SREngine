@@ -14,6 +14,8 @@ namespace SR_GRAPH_NS {
         : SR_HTYPES_NS::SafePtr<RenderScene>(this)
         , m_scene(scene)
         , m_context(pContext)
+        , m_opaque(&m_transparent)
+        , m_transparent(&m_opaque)
     { }
 
     RenderScene::~RenderScene() {
@@ -55,7 +57,6 @@ namespace SR_GRAPH_NS {
 
     void RenderScene::SetDirtyCameras() {
         m_dirtyCameras = true;
-        m_dirty = true;
     }
 
     bool RenderScene::IsEmpty() const {
@@ -153,7 +154,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    void RenderScene::RegisterWidgetManager(RenderScene::WidgetManagerPtr pWidgetManager) {
+    void RenderScene::Register(RenderScene::WidgetManagerPtr pWidgetManager) {
         if (!pWidgetManager) {
             return;
         }
@@ -161,7 +162,29 @@ namespace SR_GRAPH_NS {
         m_widgetManagers.emplace_back(pWidgetManager);
     }
 
-    void RenderScene::RemoveWidgetManager(RenderScene::WidgetManagerPtr pWidgetManager) {
+    void RenderScene::Register(RenderScene::MeshPtr pMesh) {
+        if (!pMesh) {
+            SRHalt("RenderScene::Register() : mesh is nullptr!");
+            return;
+        }
+
+        auto&& pMaterial = pMesh->GetMaterial();
+        if (!pMaterial) {
+            SRHalt("RenderScene::Register() : material is nullptr!");
+            return;
+        }
+
+        if (pMaterial->IsTransparent()) {
+            m_transparent.Add(pMesh);
+        }
+        else {
+            m_opaque.Add(pMesh);
+        }
+
+        m_dirty = true;
+    }
+
+    void RenderScene::Remove(RenderScene::WidgetManagerPtr pWidgetManager) {
         if (!pWidgetManager) {
             return;
         }
@@ -179,7 +202,7 @@ namespace SR_GRAPH_NS {
         SRHalt("RenderScene::RemoveWidgetManager() : the widget manager not found!");
     }
 
-    void RenderScene::RegisterCamera(RenderScene::CameraPtr pCamera) {
+    void RenderScene::Register(RenderScene::CameraPtr pCamera) {
         CameraInfo info;
 
         info.isDestroyed = false;
@@ -190,7 +213,7 @@ namespace SR_GRAPH_NS {
         m_dirtyCameras = true;
     }
 
-    void RenderScene::DestroyCamera(RenderScene::CameraPtr pCamera) {
+    void RenderScene::Remove(RenderScene::CameraPtr pCamera) {
         for (auto&& cameraInfo : m_cameras) {
             if (cameraInfo.pCamera != pCamera) {
                 continue;
@@ -208,6 +231,7 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::SortCameras() {
+        m_dirty = true;
         m_dirtyCameras = false;
         m_offScreenCameras.clear();
         m_mainCamera = nullptr;
@@ -277,5 +301,30 @@ namespace SR_GRAPH_NS {
 
     void RenderScene::SetOverlayEnabled(bool enabled) {
         m_bOverlay = enabled;
+    }
+
+    MeshCluster &RenderScene::GetOpaque() {
+        return m_opaque;
+    }
+
+    MeshCluster &RenderScene::GetTransparent() {
+        return m_transparent;
+    }
+
+    RenderScene::CameraPtr RenderScene::GetMainCamera() const {
+        return m_mainCamera;
+    }
+
+    RenderScene::CameraPtr RenderScene::GetFirstOffScreenCamera() const {
+        if (m_offScreenCameras.empty()) {
+            return nullptr;
+        }
+
+        return m_offScreenCameras.front();
+    }
+
+    void RenderScene::Synchronize() {
+        m_opaque.Update();
+        m_transparent.Update();
     }
 }

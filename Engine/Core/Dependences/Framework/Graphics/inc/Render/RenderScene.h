@@ -15,6 +15,7 @@ namespace SR_WORLD_NS {
 
 namespace SR_GTYPES_NS {
     class Camera;
+    class Mesh;
 }
 
 namespace SR_GRAPH_NS {
@@ -26,6 +27,7 @@ namespace SR_GRAPH_NS {
         using WidgetManagers = std::vector<WidgetManagerPtr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
+        using MeshPtr = SR_GTYPES_NS::Mesh*;
         using PipelinePtr = Environment*;
 
         struct CameraInfo {
@@ -39,17 +41,19 @@ namespace SR_GRAPH_NS {
 
     public:
         void Render();
+        void Synchronize();
 
         void SetDirty();
         void SetDirtyCameras();
 
         void SetTechnique(const SR_UTILS_NS::Path& path);
 
-        void RegisterWidgetManager(WidgetManagerPtr pWidgetManager);
-        void RemoveWidgetManager(WidgetManagerPtr pWidgetManager);
+        void Register(CameraPtr pCamera);
+        void Register(WidgetManagerPtr pWidgetManager);
+        void Register(MeshPtr pMesh);
 
-        void RegisterCamera(CameraPtr pCamera);
-        void DestroyCamera(CameraPtr pCamera);
+        void Remove(CameraPtr pCamera);
+        void Remove(WidgetManagerPtr pWidgetManager);
 
         void SetOverlayEnabled(bool enabled);
 
@@ -58,6 +62,10 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD RenderContext* GetContext() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
         SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
+        SR_NODISCARD MeshCluster& GetOpaque();
+        SR_NODISCARD MeshCluster& GetTransparent();
+        SR_NODISCARD CameraPtr GetMainCamera() const;
+        SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
 
     private:
         void SortCameras();
@@ -80,8 +88,8 @@ namespace SR_GRAPH_NS {
         RenderTechnique* m_technique   = nullptr;
         RenderContext*   m_context     = nullptr;
 
-        MeshCluster      m_opaque      = { };
-        MeshCluster      m_transparent = { };
+        OpaqueMeshCluster m_opaque;
+        TransparentMeshCluster m_transparent;
 
         bool m_dirtyCameras = true;
         bool m_dirty        = true;

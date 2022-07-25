@@ -118,8 +118,8 @@ namespace SR_GRAPH_NS {
         std::vector<Types::Skybox*>   m_skyboxesToFreeVidMem     = std::vector<Types::Skybox*>();
         std::unordered_set<Types::Texture*>  m_textures          = std::unordered_set<Types::Texture*>();
 
-        MeshCluster                   m_geometry                 = { };
-        MeshCluster                   m_transparentGeometry      = { };
+        //MeshCluster                   m_geometry                 = { };
+        //MeshCluster                   m_transparentGeometry      = { };
 
         Types::Skybox*                m_skybox                   = nullptr;
 

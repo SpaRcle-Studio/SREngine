@@ -215,4 +215,8 @@ namespace SR_WORLD_NS {
 
         return true;
     }
+
+    Region::ScenePtr Region::GetScene() const {
+        return m_observer->m_scene;
+    }
 }

@@ -54,6 +54,7 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
+        SR_NODISCARD bool IsBlendEnabled() const;
 
     public:
         template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
