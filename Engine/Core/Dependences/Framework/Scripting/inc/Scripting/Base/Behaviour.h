@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool IsEmpty() const;
 
     public:
-        void Reset() override { }
+        //void Reset() override { }
         void OnDisabled() override { }
         void OnEnabled() override { }
 

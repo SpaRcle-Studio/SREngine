@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS {
     class Light;
     class Window;
 
-    class SR_DEPRECATED Render : public Helper::NonCopyable {
+    class SR_DEPRECATED Render : public SR_UTILS_NS::NonCopyable {
     protected:
         Render(std::string name);
 

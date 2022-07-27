@@ -194,7 +194,14 @@ namespace Framework {
                 while (accumulator >= updateFrequency) {
                     if (windowFocused) {
                         SR_UTILS_NS::Input::Instance().Check();
+
+                        const bool locked = false;// m_renderScene.LockIfValid();
+
                         m_input->Check();
+
+                        if (locked) {
+                            m_renderScene.Unlock();
+                        }
 
                         if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
                             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))

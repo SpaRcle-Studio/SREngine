@@ -21,8 +21,7 @@ namespace SR_GRAPH_NS {
         bool Load(const SR_XML_NS::Node& passNode) override;
         void Render() override;
         void Update() override;
-
-        void DeInit() override;
+        bool Init() override;
 
     private:
         SR_GTYPES_NS::Skybox* m_skybox = nullptr;

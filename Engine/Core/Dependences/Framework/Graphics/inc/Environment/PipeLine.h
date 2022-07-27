@@ -13,6 +13,7 @@ namespace SR_GRAPH_NS {
     };
 
     typedef PipeLine PipeLineType;
+    typedef PipeLine PipelineType;
 }
 
 #endif //GAMEENGINE_PIPELINE_H

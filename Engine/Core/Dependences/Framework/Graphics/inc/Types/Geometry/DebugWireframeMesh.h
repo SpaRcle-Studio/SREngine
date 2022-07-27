@@ -31,8 +31,7 @@ namespace SR_GTYPES_NS {
         ~DebugWireframeMesh() override = default;
 
     public:
-        void DrawVulkan() override;
-        void DrawOpenGL() override { }
+        void Draw() override;
 
         IResource* Copy(IResource* destination) const override;
 

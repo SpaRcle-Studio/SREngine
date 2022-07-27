@@ -177,7 +177,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Mesh, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
 
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, WaitCalculate, void)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, WaitCalculate, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, IsCanCalculate, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetMaterial, Material*)

@@ -11,11 +11,11 @@
 namespace SR_GTYPES_NS {
     Material::Material()
         : SR_UTILS_NS::IResource(typeid(Material).name(), true /** autoRemove */)
-        , m_env(Environment::Get())
     { }
 
     void Material::Use() {
         InitShader();
+        InitContext();
 
         for (const Material::Property& property : m_properties) {
             switch (property.type) {
@@ -71,43 +71,6 @@ namespace SR_GTYPES_NS {
         return pMaterial;
     }
 
-    Material* Material::GetDefault() {
-        return m_default;
-    }
-
-    bool Material::InitDefault(Render* render) {
-        if (!m_default) {
-            if ((m_default = Material::Load("Engine/default.mat"))) {
-                m_default->AddUsePoint();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    bool Material::FreeDefault() {
-        SR_INFO("Material::FreeDefault() : free default material...");
-
-        if (m_default) {
-            if (m_default->GetCountUses() <= 1) {
-                m_default->RemoveUsePoint();
-                m_default->Destroy();
-
-                m_default = nullptr;
-                return true;
-            }
-            else {
-                SRAssert2(false, Helper::Format("Material::FreeDefault() : the material is still in use! Count uses: %i", m_default->GetCountUses()).c_str());
-                return false;
-            }
-        }
-
-        SR_ERROR("Material::FreeDefault() : the material is nullptr!");
-
-        return false;
-    }
-
     bool Material::Destroy() {
         if (IsDestroyed())
             return false;
@@ -128,14 +91,8 @@ namespace SR_GTYPES_NS {
         return IResource::Destroy();
     }
 
-    void SR_GTYPES_NS::Material::SetBloom(bool value) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        m_bloom = value;
-    }
-
     void SR_GTYPES_NS::Material::SetShader(Shader *shader) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (m_shader == shader) {
             return;
@@ -144,19 +101,7 @@ namespace SR_GTYPES_NS {
         m_dirtyShader = true;
 
         if (m_shader) {
-            auto&& render = m_shader->GetRender();
             RemoveDependency(m_shader);
-            if (m_shader->GetCountUses() == 0) {
-                if (m_shader->Ready()) {
-                    SRAssert2(render, "Render is nullptr!");
-                    if (render) {
-                        render->FreeShader(m_shader);
-                    }
-                }
-                else {
-                    m_shader->Destroy();
-                }
-            }
             m_shader = nullptr;
         }
 
@@ -183,9 +128,6 @@ namespace SR_GTYPES_NS {
             }
 
             RemoveDependency(oldTexture);
-
-            if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove() && !oldTexture->IsDestroyed())
-                oldTexture->Destroy();
         }
 
         if (pTexture) {
@@ -197,13 +139,18 @@ namespace SR_GTYPES_NS {
         /// обновляем всю иерархию вверх (меши)
         UpdateResources(1);
 
-        Environment::Get()->SetBuildState(false);
+        /// сработает только если хоть раз была отрендерина текстура материала
+        m_context.Do([](RenderContext* ptr) {
+            ptr->SetDirty();
+        });
     }
+
 
     void Material::UseSamplers() {
         InitShader();
+        InitContext();
 
-        if (m_env->GetCurrentDescriptorSet() == SR_ID_INVALID) {
+        if (m_context->GetPipeline()->GetCurrentDescriptorSet() == SR_ID_INVALID) {
             return;
         }
 
@@ -249,13 +196,20 @@ namespace SR_GTYPES_NS {
                     }
 
                     RemoveDependency(pTexture);
-
-                    if (pTexture->GetCountUses() <= 1 && pTexture->IsEnabledAutoRemove())
-                        pTexture->Destroy();
                 }
             }
 
             m_dirtyShader = false;
+        }
+    }
+
+    void Material::InitContext() {
+        if (!m_context) {
+            if (!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>())) {
+                SRHalt("Is not render context!");
+                return;
+            }
+            m_context->Register(this);
         }
     }
 

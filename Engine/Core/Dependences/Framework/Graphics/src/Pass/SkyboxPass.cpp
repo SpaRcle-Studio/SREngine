@@ -83,11 +83,13 @@ namespace SR_GRAPH_NS {
         BasePass::Update();
     }
 
-    void SkyboxPass::DeInit() {
+    bool SkyboxPass::Init() {
+        bool result = BasePass::Init();
+
         if (m_skybox) {
-            m_skybox->FreeVideoMemory();
+            m_context->Register(m_skybox);
         }
 
-        BasePass::DeInit();
+        return result;
     }
 }

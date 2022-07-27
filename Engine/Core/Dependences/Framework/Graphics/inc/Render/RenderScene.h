@@ -23,12 +23,14 @@ namespace SR_GRAPH_NS {
     class RenderTechnique;
 
     class RenderScene : public SR_HTYPES_NS::SafePtr<RenderScene> {
+    public:
         using WidgetManagerPtr = GUI::WidgetManager*;
         using WidgetManagers = std::vector<WidgetManagerPtr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using PipelinePtr = Environment*;
+        using Ptr = SR_HTYPES_NS::SafePtr<RenderScene>;
 
         struct CameraInfo {
             bool isDestroyed = false;

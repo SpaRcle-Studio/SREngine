@@ -20,7 +20,7 @@ namespace SR_GTYPES_NS {
         return wireFramed;
     }
 
-    void DebugWireframeMesh::DrawVulkan() {
+    void DebugWireframeMesh::Draw() {
         if (!IsActive() || IsDestroyed())
             return;
 
@@ -40,7 +40,7 @@ namespace SR_GTYPES_NS {
                 uboManager.BindUBO(m_virtualUBO);
             }
             else {
-                m_env->ResetDescriptorSet();
+                m_pipeline->ResetDescriptorSet();
                 m_hasErrors = true;
                 return;
             }
@@ -58,7 +58,7 @@ namespace SR_GTYPES_NS {
                 m_material->UseSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
-                m_env->DrawIndices(m_countIndices);
+                m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
             default:

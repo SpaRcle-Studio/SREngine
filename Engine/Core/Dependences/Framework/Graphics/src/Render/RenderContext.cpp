@@ -27,7 +27,9 @@ namespace SR_GRAPH_NS {
         SR_UTILS_NS::ResourceManager::LockSingleton();
         {
             dirty |= Update(m_techniques);
+            dirty |= Update(m_skyboxes);
             dirty |= Update(m_framebuffers);
+            dirty |= Update(m_materials);
             dirty |= Update(m_textures);
             dirty |= Update(m_shaders);
         }
@@ -67,7 +69,67 @@ namespace SR_GRAPH_NS {
     bool RenderContext::Init() {
         m_pipeline = Environment::Get();
         m_pipelineType = m_pipeline->GetPipeLine();
+
+        /// ----------------------------------------------------------------------------
+
+        if ((m_defaultMaterial = SR_GTYPES_NS::Material::Load("Engine/default.mat"))) {
+            m_defaultMaterial->AddUsePoint();
+        }
+        else {
+            SR_ERROR("RenderContext::Init() : failed to load default material!");
+        }
+
+        /// ----------------------------------------------------------------------------
+
+        if ((m_defaultTexture = SR_GTYPES_NS::Texture::Load("Engine/default.png"))) {
+            m_defaultTexture->AddUsePoint();
+        }
+        else {
+            SR_ERROR("RenderContext::Init() : failed to load default texture!")
+        }
+
+        /// ----------------------------------------------------------------------------
+
+        /// так как вписать в код данные текстуры невозможно, то она хранится в виде base64, текстура размером 1x1 белого цвета формата png
+        const std::string image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAADUlEQVQI12N48eIFOwAINALALwGcPAAAAABJRU5ErkJggg==";
+
+        const auto&& config = Memory::TextureConfig(
+                /**.m_format = */ ColorFormat::RGBA8_UNORM,
+                /**.m_filter = */ TextureFilter::NEAREST,
+                /**.m_compression = */ TextureCompression::None,
+                /**.m_mipLevels = */ 1,
+                /**.m_alpha = */ SR_UTILS_NS::BoolExt::None,
+                /**.m_cpuUsage = */ false
+        );
+
+        if ((m_noneTexture = SR_GTYPES_NS::Texture::LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(image), config))) {
+            m_noneTexture->AddUsePoint();
+        }
+        else {
+            SR_ERROR("RenderContext::Init() : failed to create none texture!")
+            return false;
+        }
+
+        /// ----------------------------------------------------------------------------
+
         return true;
+    }
+
+    void RenderContext::Close() {
+        if (m_noneTexture) {
+            m_noneTexture->RemoveUsePoint();
+            m_noneTexture = nullptr;
+        }
+
+        if (m_defaultTexture) {
+            m_defaultTexture->RemoveUsePoint();
+            m_defaultTexture = nullptr;
+        }
+
+        if (m_defaultMaterial) {
+            m_defaultMaterial->RemoveUsePoint();
+            m_defaultMaterial = nullptr;
+        }
     }
 
     RenderContext::RenderScenePtr RenderContext::CreateScene(const SR_WORLD_NS::Scene::Ptr &scene) {
@@ -120,16 +182,52 @@ namespace SR_GRAPH_NS {
         m_techniques.emplace_front(pTechnique);
     }
 
+    void RenderContext::Register(RenderContext::MaterialPtr pMaterial) {
+        pMaterial->AddUsePoint();
+        m_materials.emplace_front(pMaterial);
+    }
+
+    void RenderContext::Register(RenderContext::SkyboxPtr pSkybox) {
+        pSkybox->AddUsePoint();
+        m_skyboxes.emplace_front(pSkybox);
+    }
+
     bool RenderContext::IsEmpty() const {
         return
             m_shaders.empty() &&
             m_framebuffers.empty() &&
             m_textures.empty() &&
+            m_materials.empty() &&
+            m_skyboxes.empty() &&
             m_scenes.empty() &&
             m_techniques.empty();
     }
 
     RenderContext::PipelinePtr RenderContext::GetPipeline() const {
-        return Environment::Get();
+        return m_pipeline;
+    }
+
+    PipeLineType RenderContext::GetPipelineType() const {
+        return m_pipelineType;
+    }
+
+    RenderContext::MaterialPtr RenderContext::GetDefaultMaterial() const {
+        return m_defaultMaterial;
+    }
+
+    void RenderContext::SetDirty() {
+        for (auto&& [pScene, pRenderScene] : m_scenes) {
+            pRenderScene.Do([](RenderScene* ptr) {
+                ptr->SetDirty();
+            });
+        }
+    }
+
+    RenderContext::TexturePtr RenderContext::GetDefaultTexture() const {
+        return m_defaultTexture ? m_defaultTexture : m_noneTexture;
+    }
+
+    RenderContext::TexturePtr RenderContext::GetNoneTexture() const {
+        return m_noneTexture;
     }
 }

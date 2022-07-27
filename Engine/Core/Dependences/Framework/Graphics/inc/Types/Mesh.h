@@ -12,16 +12,17 @@
 #include <Utils/ECS/Component.h>
 #include <Memory/IGraphicsResource.h>
 
-namespace SR_UTILS_NS::Types {
+namespace SR_HTYPES_NS {
     class RawMesh;
 }
 
 namespace SR_GRAPH_NS {
-    class Render;
     class Environment;
+    class RenderScene;
+    class RenderContext;
 }
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Shader;
 }
 
@@ -37,6 +38,9 @@ namespace SR_GTYPES_NS {
 
     class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {
         friend class Material;
+        using PipelinePtr = Environment*;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     protected:
         explicit Mesh(MeshType type, std::string name = "Unnamed");
         ~Mesh() override;
@@ -52,51 +56,45 @@ namespace SR_GTYPES_NS {
     protected:
         virtual void ReCalcModel();
         virtual bool Calculate();
-        virtual void SetRawMesh(Helper::Types::RawMesh* raw);
+        virtual void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
 
     public:
         IResource* Copy(IResource* destination) const override;
 
-        virtual void DrawVulkan() = 0;
-        virtual void DrawOpenGL() = 0;
+        virtual void Draw() = 0;
 
-        virtual void FreeVideoMemory() override;
+        void FreeVideoMemory() override;
 
     public:
-        Helper::Math::FVector3 GetBarycenter() const override;
+        SR_MATH_NS::FVector3 GetBarycenter() const override;
 
-        void OnMove(const Helper::Math::FVector3& newValue) override;
-        void OnRotate(const Helper::Math::FVector3& newValue) override;
-        void OnScaled(const Helper::Math::FVector3& newValue) override;
-        void OnSkewed(const Helper::Math::FVector3& newValue) override;
+        void OnMove(const SR_MATH_NS::FVector3& newValue) override;
+        void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
+        void OnScaled(const SR_MATH_NS::FVector3& newValue) override;
+        void OnSkewed(const SR_MATH_NS::FVector3& newValue) override;
 
+        void OnAttached() override;
         void OnDestroy() override;
 
-        void OnTransparencyChanged();
-
     public:
-        void WaitCalculate() const;
         bool IsCanCalculate() const;
 
-        SR_NODISCARD Shader* GetShader()           const;
+        SR_NODISCARD Shader* GetShader() const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
-        SR_NODISCARD Render* GetRender()           const { return m_render; }
-        SR_NODISCARD Material* GetMaterial()       const { return m_material; }
-        SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
-        SR_NODISCARD bool IsInverse()              const { return m_inverse; }
-        SR_NODISCARD bool IsRegistered()           const { return m_render; }
+        SR_NODISCARD Material* GetMaterial() const { return m_material; }
+        SR_NODISCARD bool IsCalculated() const { return m_isCalculated; }
+        SR_NODISCARD bool IsInverse() const { return m_inverse; }
         SR_NODISCARD const glm::mat4& GetModelMatrixRef() const { return m_modelMat; }
-        SR_NODISCARD glm::mat4 GetModelMatrix()    const { return m_modelMat; }
-        SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
-        SR_NODISCARD int32_t GetVirtualUBO()       const { return m_virtualUBO; }
+        SR_NODISCARD glm::mat4 GetModelMatrix() const { return m_modelMat; }
+        SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
+        SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-        SR_NODISCARD bool HaveDefMaterial()        const;
-        SR_NODISCARD virtual bool CanDraw()        const;
 
-        void SetRender(Render* render) { m_render = render; };
         void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
+        void SetContext(const RenderContextPtr& context);
+        SR_NODISCARD RenderScenePtr GetRenderScene();
 
     protected:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
@@ -104,30 +102,28 @@ namespace SR_GTYPES_NS {
         void OnEnabled() override;
         void OnDisabled() override;
 
-    public:
-        Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);
-        Helper::Math::FVector3       m_position          = Helper::Math::FVector3();
-        Helper::Math::FVector3       m_rotation          = Helper::Math::FVector3();
-        Helper::Math::FVector3       m_skew              = Helper::Math::FVector3(1);
-        Helper::Math::FVector3       m_scale             = Helper::Math::FVector3(1);
+    protected:
+        SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
+        SR_MATH_NS::FVector3         m_position          = SR_MATH_NS::FVector3();
+        SR_MATH_NS::FVector3         m_rotation          = SR_MATH_NS::FVector3();
+        SR_MATH_NS::FVector3         m_skew              = SR_MATH_NS::FVector3(1);
+        SR_MATH_NS::FVector3         m_scale             = SR_MATH_NS::FVector3(1);
         glm::mat4                    m_modelMat          = glm::mat4(0);
 
-    protected:
         bool                         m_inverse           = false;
 
-        Environment*                 m_env               = nullptr;
-        const PipeLine               m_pipeline          = PipeLine::Unknown;
+        RenderScenePtr               m_renderScene       = { };
+        RenderContextPtr             m_context           = { };
+        PipelinePtr                  m_pipeline          = nullptr;
         const MeshType               m_type              = MeshType::Unknown;
 
         std::string                  m_geometryName      = "Unnamed";
-        Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
-        Helper::Types::RawMesh*      m_rawMesh           = nullptr;
+        SR_HTYPES_NS::RawMesh*       m_rawMesh           = nullptr;
 
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
         std::atomic<bool>            m_dirtyMaterial     = false;
-
 
         /// определяет порядок меша в файле, если их там несколько
         uint32_t                     m_meshId            = SR_UINT32_MAX;

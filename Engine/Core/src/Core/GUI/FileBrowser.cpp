@@ -11,7 +11,7 @@
 
 #include <GUI/Icons.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
         : Widget("Assets")
     { }

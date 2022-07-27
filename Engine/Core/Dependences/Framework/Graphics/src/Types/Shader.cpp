@@ -33,11 +33,6 @@ namespace SR_GRAPH_NS::Types {
             return true;
         }
 
-        //if (!SRVerifyFalse2(!(m_render = SR_THIS_THREAD->GetContext()->GetPointer<Render>()), "Is not render context!")) {
-        //    m_hasErrors = true;
-        //    return false;
-        //}
-
         if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
             m_hasErrors = true;
             return false;
@@ -189,12 +184,12 @@ namespace SR_GRAPH_NS::Types {
         }
 
         if (!sampler) {
-            sampler = SR_GTYPES_NS::Texture::GetNone();
+            sampler = m_context->GetNoneTexture();
         }
 
-        if (!sampler->HasRender()) {
-            SRAssert(m_render);
-            m_render->RegisterTexture(sampler);
+        if (!sampler) {
+            SRHalt("The sampler is nullptr!");
+            return;
         }
 
         SetSampler(hashId, sampler->GetId());
@@ -275,8 +270,9 @@ namespace SR_GRAPH_NS::Types {
 
         UpdateResources();
 
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        env->SetBuildState(false);
+        m_context.Do([](RenderContext* ptr) {
+            ptr->SetDirty();
+        });
 
         return true;
     }

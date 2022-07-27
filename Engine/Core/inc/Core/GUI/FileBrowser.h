@@ -8,8 +8,8 @@
 #include <Utils/FileSystem/Path.h>
 #include <GUI/Widget.h>
 
-namespace SR_GRAPH_NS::GUI {
-    class FileBrowser : public Widget {
+namespace SR_CORE_NS::GUI {
+    class FileBrowser : public SR_GRAPH_NS::GUI::Widget {
         using Hash = std::size_t;
     public:
         FileBrowser();

@@ -11,14 +11,12 @@
 namespace SR_GRAPH_NS::Memory {
     struct TextureConfig {
         TextureConfig(ColorFormat format,
-                bool autoRemove,
                 TextureFilter filter,
                 TextureCompression compression,
                 uint32_t mipLevels,
                 SR_UTILS_NS::BoolExt alpha,
                 bool cpuUsage)
             : m_format(format)
-            , m_autoRemove(autoRemove)
             , m_filter(filter)
             , m_compression(compression)
             , m_mipLevels(mipLevels)
@@ -28,7 +26,6 @@ namespace SR_GRAPH_NS::Memory {
 
         TextureConfig()
             : m_format(ColorFormat::RGBA8_UNORM)
-            , m_autoRemove(true)
             , m_filter(TextureFilter::LINEAR)
             , m_compression(TextureCompression::None)
             , m_mipLevels(1)
@@ -37,7 +34,6 @@ namespace SR_GRAPH_NS::Memory {
         { }
 
         ColorFormat m_format;
-        bool m_autoRemove;
         TextureFilter m_filter;
         TextureCompression m_compression;
         uint32_t m_mipLevels;
@@ -46,7 +42,6 @@ namespace SR_GRAPH_NS::Memory {
 
         bool operator==(const TextureConfig& lrs) const {
             return m_format == lrs.m_format
-                   && m_autoRemove == lrs.m_autoRemove
                    && m_filter == lrs.m_filter
                    && m_compression == lrs.m_compression
                    && m_mipLevels == lrs.m_mipLevels

@@ -128,4 +128,8 @@ namespace Framework::Graphics::GUI {
     void Widget::SetManager(WidgetManager* manager) {
         m_manager = manager;
     }
+
+    Widget::RenderScenePtr Widget::GetRenderScene() const {
+        return m_manager->GetRenderScene();
+    }
 }

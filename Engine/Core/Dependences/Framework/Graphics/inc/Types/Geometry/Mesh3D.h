@@ -36,8 +36,7 @@ namespace SR_GTYPES_NS {
     private:
         bool Calculate() override;
         void FreeVideoMemory() override;
-        void DrawVulkan() override;
-        void DrawOpenGL() override;
+        void Draw() override;
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
 

@@ -94,4 +94,12 @@ namespace SR_GRAPH_NS::GUI {
                 pWidget->OnMouseMove(data);
         }
     }
+
+    void WidgetManager::SetRenderScene(const WidgetManager::RenderScenePtr& renderScene) {
+        m_renderScene = renderScene;
+    }
+
+    WidgetManager::RenderScenePtr WidgetManager::GetRenderScene() const {
+        return m_renderScene;
+    }
 }

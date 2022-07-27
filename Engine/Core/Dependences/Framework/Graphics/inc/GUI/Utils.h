@@ -16,7 +16,7 @@ namespace SR_GRAPH_NS::GUI {
 
     static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
-    static bool DragUnit(const std::string& name, Helper::Math::Unit& value, float_t drag = 0.1f, bool active = true) {
+    static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f, bool active = true) {
         float_t temp = value;
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
@@ -99,7 +99,7 @@ namespace SR_GRAPH_NS::GUI {
 
     static bool DrawColorControl(
             const std::string& label,
-            Helper::Math::FVector4& values,
+            SR_MATH_NS::FVector4& values,
             float_t resetValue = 0.0f,
             bool active = true,
             float_t columnWidth = 40.0f)
@@ -164,7 +164,7 @@ namespace SR_GRAPH_NS::GUI {
         return result;
     }
 
-    static bool DrawVec3Control(const std::string& label, Helper::Math::FVector3& values, float_t resetValue = 0.0f, float_t columnWidth = 70.0f, float_t drag = 0.1) {
+    static bool DrawVec3Control(const std::string& label, SR_MATH_NS::FVector3& values, float_t resetValue = 0.0f, float_t columnWidth = 70.0f, float_t drag = 0.1) {
         bool result = false;
 
         ImGuiIO& io = ImGui::GetIO();

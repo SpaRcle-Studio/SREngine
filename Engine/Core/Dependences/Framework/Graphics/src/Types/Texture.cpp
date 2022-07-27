@@ -9,10 +9,11 @@
 #include <Loaders/TextureLoader.h>
 #include <Render/Render.h>
 #include <Environment/Environment.h>
+#include <Render/RenderContext.h>
 
 namespace SR_GTYPES_NS {
     Texture::Texture()
-        : IResource(typeid(Texture).name())
+        : IResource(typeid(Texture).name(), true /** auto remove */)
     { }
 
     Texture::~Texture() {
@@ -22,33 +23,13 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Texture::Destroy() {
-        if (IsDestroyed()) {
-            SRAssert2(false, "The texture is already destroyed!");
-            return false;
-        }
-
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
-            SR_LOG("Texture::Destroy() : destroying the texture \"" + GetResourceId() + "\"");
-        }
-
-        if (m_render) {
-            m_render->FreeTexture(this);
-        }
-        else if (IsCalculated()) {
-            SRAssert2(false, "Render is lost!");
-        }
-
-        return IResource::Destroy();
-    }
-
     Texture* Texture::Load(const std::string& rawPath, const Memory::TextureConfig& config) {
         SR_GLOBAL_LOCK
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath());
 
         if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
-            if (pResource->m_config != config || config.m_autoRemove != pResource->IsEnabledAutoRemove()) {
+            if (pResource->m_config != config) {
                 SR_WARN("Texture::Load() : copy values do not match load values.");
             }
 
@@ -83,7 +64,10 @@ namespace SR_GTYPES_NS {
         }
 
         m_isCalculated = false;
-        Environment::Get()->SetBuildState(false);
+
+        m_context.Do([](RenderContext* ptr) {
+            ptr->SetDirty();
+        });
 
         return !hasErrors;
     }
@@ -103,7 +87,10 @@ namespace SR_GTYPES_NS {
         }
 
         m_isCalculated = false;
-        Environment::Get()->SetBuildState(false);
+
+        m_context.Do([](RenderContext* ptr) {
+            ptr->SetDirty();
+        });
 
         return !hasErrors;
     }
@@ -111,23 +98,23 @@ namespace SR_GTYPES_NS {
     bool Texture::Calculate() {
         SR_SCOPED_LOCK
 
-        if (!m_data) {
+        if (m_isCalculated || !m_data) {
+            SR_ERROR("Texture::Calculate() : data is invalid or the texture is already calculated!");
             return false;
         }
 
-        if (!m_render) {
-            SR_ERROR("Texture::Calculate() : this texture is not registered in render!");
+        if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
             m_hasErrors = true;
             return false;
         }
 
+        m_context.Do([this](RenderContext* ptr) {
+            ptr->Register(this);
+            m_pipeline = ptr->GetPipeline();
+        });
+
         if (IsDestroyed()) {
             SR_ERROR("Texture::Calculate() : the texture is destroyed!");
-            return false;
-        }
-
-        if (m_isCalculated) {
-            SR_ERROR("Texture::Calculate() : the texture is already calculated!");
             return false;
         }
 
@@ -136,16 +123,16 @@ namespace SR_GTYPES_NS {
         }
 
         if (m_id != SR_ID_INVALID) {
-            SRVerifyFalse(!Environment::Get()->FreeTexture(&m_id));
+            SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
 
         // TODO: to refactoring
-        m_id = Environment::Get()->CalculateTexture(m_data,
+        m_id = m_pipeline->CalculateTexture(m_data,
                 m_config.m_format, m_width, m_height, m_config.m_filter,
                 m_config.m_compression, m_config.m_mipLevels,
                 m_config.m_alpha == SR_UTILS_NS::BoolExt::None, m_config.m_cpuUsage);
 
-        if (m_id == SR_ID_INVALID) { // TODO: vulkan can be return 0 as correct value
+        if (m_id == SR_ID_INVALID) {
             SR_ERROR("Texture::Calculate() : failed to calculate the texture!");
             return false;
         }
@@ -164,24 +151,23 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    void Texture::SetRender(SR_GRAPH_NS::Render *render) {
-        m_render = render;
-    }
-
     void Texture::FreeVideoMemory() {
         SR_SCOPED_LOCK
+
+        /// Просто игнорируем, текстура могла быть не использована
+        if (!m_isCalculated) {
+            return;
+        }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
             SR_LOG("Texture::FreeVideoMemory() : free \"" + GetResourceId() + "\" texture's video memory...");
         }
 
-        if (!m_isCalculated) {
-            SR_ERROR("Texture::FreeVideoMemory() : texture \"" + GetResourceId() + "\" is not calculated!");
-        }
-
         m_isCalculated = false;
 
-        if (!Environment::Get()->FreeTexture(&m_id)) {
+        SRAssert(m_pipeline);
+
+        if (m_pipeline && !m_pipeline->FreeTexture(&m_id)) {
             SR_ERROR("Texture::FreeVideoMemory() : failed to free texture!");
         }
     }
@@ -197,8 +183,6 @@ namespace SR_GTYPES_NS {
         // TODO: to refactoring
         if (alpha != SR_UTILS_NS::BoolExt::None)
             m_config.m_alpha = alpha;
-
-        SetAutoRemoveEnabled(m_config.m_autoRemove);
     }
 
     int32_t Texture::GetId() noexcept {
@@ -207,7 +191,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (IsDestroyed()) {
-            SR_ERROR("Texture::GetId() : the texture \"" + GetResourceId() + "\" is destroyed!");
+            SRHalt("Texture::GetId() : the texture \"" + GetResourceId() + "\" is destroyed!");
             return SR_ID_INVALID;
         }
 
@@ -218,32 +202,6 @@ namespace SR_GTYPES_NS {
         }
 
         return m_id;
-    }
-
-    Texture* Texture::GetNone() {
-        if (!m_none) {
-            /// так как вписать в код данные текстуры невозможно, то она хранится в виде base64, текстура размером 1x1 белого цвета формата png
-            const std::string image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAADUlEQVQI12N48eIFOwAINALALwGcPAAAAABJRU5ErkJggg==";
-
-            const auto&& config = Memory::TextureConfig(
-                    /**.m_format = */ ColorFormat::RGBA8_UNORM,
-                    /**.m_autoRemove = */ false,
-                    /**.m_filter = */ TextureFilter::NEAREST,
-                    /**.m_compression = */ TextureCompression::None,
-                    /**.m_mipLevels = */ 1,
-                    /**.m_alpha = */ SR_UTILS_NS::BoolExt::None,
-                    /**.m_cpuUsage = */ false
-            );
-
-            m_none = LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(image), config);
-        }
-
-        if (!m_none) {
-            SR_ERROR("Texture::GetNone() : fatal internal error...");
-            SR_UTILS_NS::Debug::Instance().MakeCrash();
-        }
-
-        return m_none;
     }
 
     Texture* Texture::LoadFromMemory(const std::string& data, const Memory::TextureConfig &config) {
@@ -263,13 +221,6 @@ namespace SR_GTYPES_NS {
         return texture;
     }
 
-    void SR_GTYPES_NS::Texture::FreeNoneTexture() {
-        if (m_none) {
-            m_none->Destroy();
-            m_none = nullptr;
-        }
-    }
-
     void* Texture::GetDescriptor() {
         SR_SCOPED_LOCK
 
@@ -279,7 +230,7 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        return Environment::Get()->GetDescriptorSetFromTexture(textureId, true);
+        return m_pipeline->GetDescriptorSetFromTexture(textureId, true);
     }
 
     SR_UTILS_NS::Path Framework::Graphics::Types::Texture::GetAssociatedPath() const {
@@ -315,10 +266,5 @@ namespace SR_GTYPES_NS {
         m_hasErrors = false;
 
         return !hasErrors;
-    }
-
-    void Texture::RemoveUsePoint() {
-        SRAssert2(m_countUses > 0, "use points count is zero!");
-        --m_countUses;
     }
 }

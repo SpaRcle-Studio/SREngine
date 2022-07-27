@@ -11,9 +11,8 @@
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type, std::string name)
         : IResource(typeid(Mesh).name(), true /** auto remove */)
-        , m_env(Environment::Get())
+        , m_pipeline(Environment::Get())
         , m_type(type)
-        , m_pipeline(Environment::Get()->GetPipeLine())
         , m_material(nullptr)
         , m_geometryName(std::move(name))
     {
@@ -26,8 +25,10 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Mesh::Destroy() {
-        if (IsDestroyed())
+        if (IsDestroyed()) {
+            SRHalt("The mesh already destroyed!");
             return false;
+        }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
@@ -39,7 +40,7 @@ namespace SR_GRAPH_NS::Types {
     Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
         auto &&pMesh = TryLoad(localPath, type, id);
 
-        SRVerifyFalse2(!pMesh, "Mesh is not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
+        SRVerifyFalse2(!pMesh, "Mesh is not found! Path: " + localPath + "; Id: " + SR_UTILS_NS::ToString(id));
 
         return pMesh;
     }
@@ -47,7 +48,7 @@ namespace SR_GRAPH_NS::Types {
     Mesh *Mesh::TryLoad(const std::string &localPath, MeshType type, uint32_t id) {
         SR_GLOBAL_LOCK
 
-        const auto &resourceId = Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, localPath.c_str());
+        const auto &resourceId = SR_UTILS_NS::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, localPath.c_str());
 
         Mesh *mesh = nullptr;
 
@@ -56,7 +57,7 @@ namespace SR_GRAPH_NS::Types {
             return mesh;
         }
 
-        auto pRaw = Helper::Types::RawMesh::Load(localPath);
+        auto&& pRaw = SR_HTYPES_NS::RawMesh::Load(localPath);
 
         if (!pRaw) {
             return nullptr;
@@ -64,9 +65,7 @@ namespace SR_GRAPH_NS::Types {
 
         if (id >= pRaw->GetMeshesCount()) {
             if (pRaw->GetCountUses() == 0) {
-                SR_WARN("Mesh::TryLoad() : count uses is zero! Unresolved situation...\n\tPath: " + localPath +
-                        "\n\tId: " + Helper::ToString(id));
-                SRAssert(false);
+                SRHalt("Mesh::TryLoad() : count uses is zero! Unresolved situation...\n\tPath: " + localPath + "\n\tId: " + SR_UTILS_NS::ToString(id));
                 pRaw->Destroy();
             }
             return nullptr;
@@ -92,7 +91,7 @@ namespace SR_GRAPH_NS::Types {
 
             mesh->SetRawMesh(pRaw);
             mesh->SetGeometryName(pRaw->GetGeometryName(id));
-            mesh->SetMaterial(Material::GetDefault());
+            //mesh->SetMaterial(Material::GetDefault());
 
             mesh->SetId(resourceId);
         }
@@ -102,8 +101,8 @@ namespace SR_GRAPH_NS::Types {
         return mesh;
     }
 
-    std::vector<Mesh *> Mesh::Load(const std::string &localPath, MeshType type) {
-        std::vector<Mesh *> meshes;
+    std::vector<Mesh*> Mesh::Load(const std::string &localPath, MeshType type) {
+        std::vector<Mesh*> meshes;
 
         uint32_t id = 0;
         while (auto &&pMesh = TryLoad(localPath, type, id)) {
@@ -118,22 +117,31 @@ namespace SR_GRAPH_NS::Types {
         return meshes;
     }
 
-    void Mesh::OnDestroy() {
-        Destroy();
+    void Mesh::OnAttached() {
+        AddUsePoint();
 
-        if (m_render) {
-            m_render->RemoveMesh(this);
-        }
-        else if (IsCalculated()) {
-            SR_ERROR("Mesh::OnDestroyGameObject() : render is not set! Something went wrong...");
-        }
+        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene* ptr) {
+            ptr->Register(this);
+        });
+
+        Component::OnAttached();
+    }
+
+    void Mesh::OnDestroy() {
+        RemoveUsePoint();
+
+        GetRenderScene().Do([](RenderScene *ptr) {
+            ptr->SetDirty();
+        });
+
+        Component::OnDestroy();
     }
 
     bool Mesh::IsCanCalculate() const {
-        //if (!m_render) {
-        //    SR_ERROR("Mesh::IsCanCalculate() : mesh is not registered in render!");
-        //    return false;
-        //}
+        if (!m_pipeline) {
+            SR_ERROR("Mesh::IsCanCalculate() : the mesh have not pipeline!");
+            return false;
+        }
 
         if (!m_material) {
             SR_ERROR("Mesh::IsCanCalculate() : mesh does not have a material!");
@@ -185,7 +193,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::FreeVideoMemory() {
-        if (m_pipeline == PipeLine::Vulkan) {
+        if (m_pipeline->GetPipeLine() == PipeLine::Vulkan) {
             auto&& uboManager = Memory::UBOManager::Instance();
             if (m_virtualUBO != SR_ID_INVALID && !uboManager.FreeUBO(&m_virtualUBO)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
@@ -198,7 +206,7 @@ namespace SR_GRAPH_NS::Types {
     void Mesh::ReCalcModel() {
         SR_MATH_NS::Matrix4x4 modelMat = SR_MATH_NS::Matrix4x4::FromTranslate(m_position);
 
-        if (m_pipeline == PipeLine::OpenGL) {
+        if (m_pipeline->GetPipeLine() == PipeLine::OpenGL) {
             modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew.InverseAxis(0));
             modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
         }
@@ -210,21 +218,6 @@ namespace SR_GRAPH_NS::Types {
         modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
 
         m_modelMat = modelMat.ToGLM();
-    }
-
-    void Mesh::WaitCalculate() const {
-        ret:
-        if (!m_render) {
-            SRAssert2(false, Helper::Format("Mesh::WaitCalculate() : There is no destination render!"
-                                            " The geometry will never be calculated. \nName: %s",
-                                            m_geometryName.c_str()).c_str());
-            return;
-        }
-
-        if (m_isCalculated)
-            return;
-
-        goto ret;
     }
 
     bool Mesh::Calculate() {
@@ -247,8 +240,9 @@ namespace SR_GRAPH_NS::Types {
             AddDependency(m_material);
         }
 
-        if (m_isCalculated)
-            Environment::Get()->SetBuildState(false);
+        if (m_isCalculated && m_pipeline) {
+            m_pipeline->SetBuildState(false);
+        }
     }
 
     void Mesh::OnMove(const SR_MATH_NS::FVector3 &newValue) {
@@ -271,17 +265,11 @@ namespace SR_GRAPH_NS::Types {
         ReCalcModel();
     }
 
-    void Mesh::OnTransparencyChanged() {
-        if (m_render) {
-            m_render->ReRegisterMesh(this);
-        }
-    }
-
     SR_UTILS_NS::Path Mesh::GetResourcePath() const {
         return SR_UTILS_NS::StringUtils::Substring(GetResourceId(), '|', 1);
     }
 
-    void Mesh::SetRawMesh(Helper::Types::RawMesh *pRaw) {
+    void Mesh::SetRawMesh(SR_HTYPES_NS::RawMesh *pRaw) {
         if (m_rawMesh && pRaw) {
             SRAssert(false);
             return;
@@ -310,28 +298,37 @@ namespace SR_GRAPH_NS::Types {
         IResource::OnResourceUpdated(pResource, depth);
     }
 
-    bool Mesh::HaveDefMaterial() const {
-        return !(!m_material || m_material != Material::GetDefault());
-    }
-
     void Mesh::OnEnabled() {
-        m_env->SetBuildState(false);
+        GetRenderScene().Do([](RenderScene *ptr) {
+            ptr->SetDirty();
+        });
         Component::OnEnabled();
     }
 
     void Mesh::OnDisabled() {
-        m_env->SetBuildState(false);
+        GetRenderScene().Do([](RenderScene *ptr) {
+            ptr->SetDirty();
+        });
         Component::OnDisabled();
     }
 
-    bool Mesh::CanDraw() const {
-        if (!IsActive() || IsDestroyed())
-            return false;
+    Mesh::RenderScenePtr Mesh::GetRenderScene() {
+        if (!m_renderScene.Valid()) {
+            m_renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+                return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+            }, RenderScenePtr());
+        }
 
-        if (m_hasErrors)
-            return false;
+        return m_renderScene;
+    }
 
-        return true;
+    void Mesh::SetContext(const Mesh::RenderContextPtr &context) {
+        if ((m_context = context)) {
+            m_pipeline = m_context->GetPipeline();
+        }
+        else {
+            SRHalt("Context is invalid!");
+        }
     }
 }
 

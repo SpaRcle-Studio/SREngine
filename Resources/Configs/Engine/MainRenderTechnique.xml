@@ -3,5 +3,6 @@
     <SwapchainPass>
         <OpaquePass/>
         <SkyboxPass Path="Sea.jpg"/>
+        <TransparentPass/>
     </SwapchainPass>
 </Technique>

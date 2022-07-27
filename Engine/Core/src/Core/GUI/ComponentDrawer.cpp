@@ -122,8 +122,8 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Vertices count", mesh3d->GetVerticesCount());
         Graphics::GUI::DrawValue("Indices count", mesh3d->GetIndicesCount());
 
-        if (!mesh3d->IsRegistered())
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "WARN: Mesh is not registered!");
+        //if (!mesh3d->IsRegistered())
+        //    ImGui::TextColored(ImVec4(1, 0, 0, 1), "WARN: Mesh is not registered!");
 
         ImGui::Separator();
 
@@ -200,12 +200,6 @@ namespace SR_CORE_NS::GUI {
                     }
                 }
                 else if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
-                    auto&& render = SR_THIS_THREAD->GetContext()->GetPointer<SR_GRAPH_NS::Render>();
-
-                    if (!render) {
-                        return;
-                    }
-
                     auto&& value = std::get<SR_GTYPES_NS::Texture*>(arg);
 
                     ImGui::Separator();
@@ -225,9 +219,6 @@ namespace SR_CORE_NS::GUI {
 
                             if (path.Exists()) {
                                 if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {
-                                    if (!texture->HasRender()) {
-                                        render->RegisterTexture(texture);
-                                    }
                                     material->SetTexture(&property, texture);
                                 }
                             }

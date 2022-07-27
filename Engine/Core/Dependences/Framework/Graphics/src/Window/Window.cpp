@@ -283,7 +283,9 @@ namespace SR_GRAPH_NS {
             SR_GRAPH("Window::Thread() : completely stopping the GUI!");
         }
 
-        SR_GTYPES_NS::Texture::FreeNoneTexture();
+        //SR_GTYPES_NS::Texture::FreeNoneTexture();
+
+        m_context->Close();
 
         if (!SyncFreeResources()) {
             SR_ERROR("Window::Thread() : failed to free resources!");
@@ -510,10 +512,10 @@ namespace SR_GRAPH_NS {
             SR_UTILS_NS::ResourceManager::UnlockSingleton();
         }
 
-        if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
-            SRAssert2(false, "Window::SyncFreeResources() : default material was not be freed!\n\tUses count: " +
-                             std::to_string(material->GetCountUses()));
-        }
+        //if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
+        //    SRAssert2(false, "Window::SyncFreeResources() : default material was not be freed!\n\tUses count: " +
+        //                     std::to_string(material->GetCountUses()));
+        //}
 
         thread->TryJoin();
         thread->Free();

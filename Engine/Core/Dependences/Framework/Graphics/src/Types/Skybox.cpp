@@ -187,10 +187,9 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Skybox::FreeVideoMemory() {
+    void Skybox::FreeVideoMemory() {
         if (!m_isCalculated) {
-            SRHalt("Skybox::FreeVideoMemory() : The skybox isn't initialized!");
-            return false;
+            return;
         }
 
         SR_LOG("Skybox::FreeVideoMemory() : free skybox video memory...");
@@ -219,8 +218,6 @@ namespace SR_GTYPES_NS {
         SetShader(nullptr);
 
         m_isCalculated = false;
-
-        return true;
     }
 
     void Skybox::Draw() {
@@ -258,17 +255,6 @@ namespace SR_GTYPES_NS {
 
         if (m_shader) {
             RemoveDependency(m_shader);
-            if (m_shader->GetCountUses() == 0) {
-                auto&& render = m_shader->GetRender();
-
-                if (!render && m_shader->Ready()) {
-                    SRHalt("Shader are initialized, but render is nullptr!");
-                }
-
-                if (render) {
-                    render->FreeShader(m_shader);
-                }
-            }
             m_shader = nullptr;
         }
 

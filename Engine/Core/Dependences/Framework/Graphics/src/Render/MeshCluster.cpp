@@ -11,45 +11,40 @@ namespace SR_GRAPH_NS {
         m_subClusters.reserve(25);
     }
 
-   //bool ShadedMeshSubCluster::Remove(Types::Mesh *mesh) noexcept {
-   //    auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
+   bool ShadedMeshSubCluster::Remove(Types::Mesh *mesh) noexcept {
+       auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
 
-   //    const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
-   //    if (groupID == SR_ID_INVALID) {
-   //        SR_ERROR("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
-   //        return false;
-   //    }
+       const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
+       if (groupID == SR_ID_INVALID) {
+           SR_ERROR("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
+           return false;
+       }
 
-   //    if (auto&& groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
-   //        MeshGroup& group = groupIt->second;
+       if (auto&& groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
+           MeshGroup& group = groupIt->second;
 
-   //        if (auto pIt = group.find(indexed); pIt != group.end()) {
-   //            group.erase(pIt);
+           if (auto pIt = group.find(indexed); pIt != group.end()) {
+               group.erase(pIt);
 
-   //            --m_counters[groupID];
-   //            --m_total;
+               /// После вызова меш может быть уже не валиден
+               mesh->RemoveUsePoint();
 
-   //            mesh->SetRender(nullptr);
-   //            /// После вызова меш может быть уже не валиден
-   //            mesh->RemoveUsePoint();
+               if (group.empty()) {
+                   m_groups.erase(groupIt);
+               }
 
-   //            if (m_counters[groupID] == 0) {
-   //                m_groups.erase(groupIt);
-   //                m_counters.erase(groupID);
-   //            }
+               return true;
+           }
+       }
+       else {
+           SR_ERROR("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
+           return false;
+       }
 
-   //            return true;
-   //        }
-   //    }
-   //    else {
-   //        SR_ERROR("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
-   //        return false;
-   //    }
+       SR_ERROR("ShadedMeshSubCluster::Remove() : mesh not found!");
 
-   //    SR_ERROR("ShadedMeshSubCluster::Remove() : mesh not found!");
-
-   //    return false;
-   //}
+       return false;
+   }
 
     bool ShadedMeshSubCluster::Add(Types::Mesh *mesh) noexcept {
         auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
@@ -65,8 +60,9 @@ namespace SR_GRAPH_NS {
         if (auto&& pIt = m_groups.find(groupID); pIt == m_groups.end()) {
             m_groups[groupID] = { indexed };
         }
-        else
-            pIt->second.insert(indexed);
+        else if (!pIt->second.insert(indexed).second) {
+            SRHalt("ShadedMeshSubCluster::Add() : failed to add mesh to cluster!");
+        }
 
         //++m_counters[groupID];
        // ++m_total;
@@ -81,6 +77,8 @@ namespace SR_GRAPH_NS {
     bool MeshCluster::Add(Types::Mesh *mesh) noexcept {
         const auto&& pShader = mesh->GetShader();
 
+        SRAssert(pShader);
+
         if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
             auto&& [subCluster, _] = m_subClusters.insert(std::make_pair(
                     pShader,
@@ -93,21 +91,24 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    //bool MeshCluster::Remove(Types::Mesh *mesh) noexcept {
-    //    const auto&& shader = mesh->GetShader();
-//
-    //    if (auto&& subCluster = m_subClusters.find(shader); subCluster == m_subClusters.end()) {
-    //        return false;
-    //    }
-    //    else {
-    //        auto const result = subCluster->second.Remove(mesh);
-//
-    //        if (subCluster->second.Empty())
-    //            m_subClusters.erase(subCluster);
-//
-    //        return result;
-    //    }
-    //}
+    bool MeshCluster::Remove(Types::Mesh *mesh) noexcept {
+        const auto&& pShader = mesh->GetShader();
+
+        SRAssert(pShader);
+
+        if (auto&& subCluster = m_subClusters.find(pShader); subCluster == m_subClusters.end()) {
+            return false;
+        }
+        else {
+            auto const result = subCluster->second.Remove(mesh);
+
+            if (subCluster->second.Empty()) {
+                m_subClusters.erase(subCluster);
+            }
+
+            return result;
+        }
+    }
 
     bool MeshCluster::Empty() const noexcept {
         return m_subClusters.empty();
@@ -122,7 +123,7 @@ namespace SR_GRAPH_NS {
                 auto&& [vbo, group] = *pGroupsIt;
 
                 for (auto pMeshIt = group.begin(); pMeshIt != group.end(); ) {
-                    auto&& pMesh = *pMeshIt;
+                    SR_GTYPES_NS::Mesh* pMesh = *pMeshIt; /** copy */
                     auto&& pMaterial = pMesh->GetMaterial();
 
                     SRAssert2(pMaterial, "Mesh have not material!");
@@ -143,14 +144,18 @@ namespace SR_GRAPH_NS {
                         continue;
                     }
 
-                    /// Если изменил свой кластер, то убираем его из текущего
+                    /// Если изменил свой кластер (прозрачность), то убираем его из текущего
                     if (ChangeCluster(pMesh)) {
+                        /// use-point от старого саб кластера
+                        pMesh->RemoveUsePoint();
                         pMeshIt = group.erase(pMeshIt);
                     }
-                    /// Если изменили шейдер (в связи с проверкой выше он автоматически непрозрачный), то
-                    /// добавляем в этот же кластер
+                    /// Мигрируем меш в другой саб сластер
                     else if (pMaterial->GetShader() != pShader) {
+                        pMeshIt = group.erase(pMeshIt);
                         Add(pMesh);
+                        /// use-point от старого саб кластера
+                        pMesh->RemoveUsePoint();
                         goto repeat;
                     }
                     else {

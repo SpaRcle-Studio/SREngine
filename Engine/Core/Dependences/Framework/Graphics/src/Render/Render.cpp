@@ -116,16 +116,16 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        if (!mesh->GetMaterial()) {
-            SR_WARN("Render::RegisterMesh() : mesh have not material! Try use default material... \n\tMesh resource id: " + mesh->GetResourceId());
-            if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
-                mesh->SetMaterial(material);
-            }
-            else {
-                SR_ERROR("Render::RegisterMesh() : failed to get default material, something went wrong...");
-                return;
-            }
-        }
+        //if (!mesh->GetMaterial()) {
+        //    SR_WARN("Render::RegisterMesh() : mesh have not material! Try use default material... \n\tMesh resource id: " + mesh->GetResourceId());
+        //    if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
+        //        mesh->SetMaterial(material);
+        //    }
+        //    else {
+        //        SR_ERROR("Render::RegisterMesh() : failed to get default material, something went wrong...");
+        //        return;
+        //    }
+        //}
 
         if (!mesh->GetShader()) {
             SRAssert2(false, "Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
@@ -139,7 +139,7 @@ namespace SR_GRAPH_NS {
         }
 
         mesh->AddUsePoint();
-        mesh->SetRender(this);
+        //mesh->SetRender(this);
         m_newMeshes.emplace_back(mesh);
     }
 
@@ -196,27 +196,27 @@ namespace SR_GRAPH_NS {
         //}
 
         //! Free textures
-        if (!m_texturesToFree.empty()) {
-            for (auto& textureToFree : m_texturesToFree) {
-                SR_GRAPH_LOG("Render::PoolEvents() : free texture...\n\tResource id:" +
-                             textureToFree->GetResourceId() + "\n\tTexture id: " + std::to_string(textureToFree->FastGetId()));
+      // if (!m_texturesToFree.empty()) {
+      //     for (auto& textureToFree : m_texturesToFree) {
+      //         SR_GRAPH_LOG("Render::PoolEvents() : free texture...\n\tResource id:" +
+      //                      textureToFree->GetResourceId() + "\n\tTexture id: " + std::to_string(textureToFree->FastGetId()));
 
-                if (textureToFree->IsCalculated()) {
-                    textureToFree->FreeVideoMemory();
-                }
+      //         if (textureToFree->IsCalculated()) {
+      //             textureToFree->FreeVideoMemory();
+      //         }
 
-                textureToFree->RemoveUsePoint();
+      //         textureToFree->RemoveUsePoint();
 
-                m_textures.erase(textureToFree);
-            }
+      //         m_textures.erase(textureToFree);
+      //     }
 
-            m_texturesToFree.clear();
+      //     m_texturesToFree.clear();
 
-            needRebuild = true;
-        }
+      //     needRebuild = true;
+      // }
 
-        if (needRebuild)
-            m_env->SetBuildState(false);
+      // if (needRebuild)
+      //     m_env->SetBuildState(false);
     }
 
     void Render::SetSkybox(SR_GTYPES_NS::Skybox *skybox) {
@@ -263,7 +263,7 @@ namespace SR_GRAPH_NS {
         }
 
         texture->AddUsePoint();
-        texture->SetRender(this);
+        //texture->SetRender(this);
         m_textures.insert(texture);
     }
 

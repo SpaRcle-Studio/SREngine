@@ -52,6 +52,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ConstIterator end() const { return m_groups.end(); }
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
+        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
     private:
@@ -81,6 +82,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ConstIterator end() const { return m_subClusters.end(); }
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
+        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
         void Update();

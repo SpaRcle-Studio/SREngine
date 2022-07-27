@@ -46,7 +46,6 @@ namespace SR_GRAPH_NS::Types {
         bool Reload() override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { return m_render; }
         SR_NODISCARD SR_FORCE_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD int32_t GetID();
@@ -97,8 +96,6 @@ namespace SR_GRAPH_NS::Types {
         ShaderSamplers         m_samplers             = ShaderSamplers();
         ShaderProperties       m_properties           = ShaderProperties();
 
-        SR_DEPRECATED
-        Render*                m_render               = nullptr;
         RenderContextPtr       m_context              = { };
 
     };

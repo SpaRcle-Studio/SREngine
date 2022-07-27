@@ -97,6 +97,8 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+    Thread::Sleep(5000);
+
     setlocale(LC_ALL, "rus");
     setlocale(LC_NUMERIC, "C");
     srand(time(NULL));
@@ -158,10 +160,10 @@ int main(int argc, char **argv) {
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
         ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
 
-        if (Helper::Features::Instance().Enabled("DebugChunks", false))
+        if (SR_UTILS_NS::Features::Instance().Enabled("DebugChunks", false))
             Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
 
-        if (Helper::Features::Instance().Enabled("DebugRegions", false))
+        if (SR_UTILS_NS::Features::Instance().Enabled("DebugRegions", false))
             Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
 
         SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World::World(); });

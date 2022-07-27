@@ -6,6 +6,7 @@
 #define GAMEENGINE_SKYBOX_H
 
 #include <Utils/ResourceManager/IResource.h>
+#include <Memory/IGraphicsResource.h>
 
 namespace SR_GRAPH_NS::Types {
     class Shader;
@@ -19,7 +20,7 @@ namespace SR_GRAPH_NS {
 namespace SR_GTYPES_NS {
     class Texture;
 
-    class Skybox : public SR_UTILS_NS::IResource {
+    class Skybox : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
     private:
         Skybox();
         ~Skybox() override;
@@ -33,7 +34,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetIBO();
         SR_NODISCARD int32_t GetVirtualUBO();
 
-        bool FreeVideoMemory();
+        void FreeVideoMemory() override;
         void Draw();
 
     protected:

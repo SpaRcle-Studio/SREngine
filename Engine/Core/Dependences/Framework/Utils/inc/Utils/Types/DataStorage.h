@@ -62,14 +62,14 @@ namespace SR_HTYPES_NS {
 
     template<typename T> T *DataStorage::GetPointer(const std::string &name) const  {
         if (m_pointers.count(name) == 0) {
-            SR_ERROR("DataStorage::GetPointer() : pointer not found! Name: " + name);
+            SRHalt("DataStorage::GetPointer() : pointer not found! Name: " + name);
             return nullptr;
         }
 
         if (T* ptr = reinterpret_cast<T*>(m_pointers.at(name)))
             return ptr;
 
-        SR_ERROR("DataStorage::GetPointer() : invalid pointer! Name: " + name);
+        SRHalt("DataStorage::GetPointer() : invalid pointer! Name: " + name);
 
         return nullptr;
     }

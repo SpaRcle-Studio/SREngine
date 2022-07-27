@@ -5,6 +5,6 @@
 
 namespace Framework::Physics::Types {
     Rigidbody::Rigidbody() {
-        Helper::Component::InitComponent<Rigidbody>();
+        SR_UTILS_NS::Component::InitComponent<Rigidbody>();
     }
 }

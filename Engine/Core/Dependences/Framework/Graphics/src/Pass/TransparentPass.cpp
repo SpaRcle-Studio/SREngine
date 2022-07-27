@@ -1,8 +1,8 @@
 //
-// Created by Monika on 24.07.2022.
+// Created by Monika on 27.07.2022.
 //
 
-#include <Pass/OpaquePass.h>
+#include <Pass/TransparentPass.h>
 #include <Types/Material.h>
 #include <Types/Shader.h>
 #include <Types/Geometry/IndexedMesh.h>
@@ -10,22 +10,22 @@
 #include <Environment/Basic/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
-    SR_REGISTER_RENDER_PASS(OpaquePass)
+    SR_REGISTER_RENDER_PASS(TransparentPass)
 
-    OpaquePass::OpaquePass(RenderTechnique *pTechnique)
+    TransparentPass::TransparentPass(RenderTechnique *pTechnique)
         : BasePass(pTechnique)
     { }
 
-    void OpaquePass::PreRender() {
-        GetRenderScene()->GetOpaque().Update();
+    void TransparentPass::PreRender() {
+        GetRenderScene()->GetTransparent().Update();
         BasePass::PreRender();
     }
 
-    void OpaquePass::Render() {
+    void TransparentPass::Render() {
         auto&& pipeline = GetPipeline();
-        auto&& opaque = GetRenderScene()->GetOpaque();
+        auto&& transparent = GetRenderScene()->GetTransparent();
 
-        for (auto&& [shader, subCluster] : opaque) {
+        for (auto&& [shader, subCluster] : transparent) {
             if (!shader || shader && !shader->Use()) {
                 continue;
             }
@@ -45,16 +45,16 @@ namespace SR_GRAPH_NS {
         BasePass::Render();
     }
 
-    void OpaquePass::Update() {
+    void TransparentPass::Update() {
         if (!m_camera) {
             return;
         }
 
         auto&& pipeline = GetPipeline();
-        auto&& opaque = GetRenderScene()->GetOpaque();
+        auto&& transparent = GetRenderScene()->GetTransparent();
         auto&& time = clock();
 
-        for (auto const& [shader, subCluster] : opaque) {
+        for (auto const& [shader, subCluster] : transparent) {
             if (!shader || !shader->Ready()) {
                 continue;
             }
@@ -83,7 +83,7 @@ namespace SR_GRAPH_NS {
                     shader->SetMat4(SHADER_MODEL_MATRIX, mesh->GetModelMatrixRef());
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                        SR_ERROR("OpaquePass::Update() : memory has been duplicated!");
+                        SR_ERROR("TransparentPass::Update() : memory has been duplicated!");
                     }
 
                     shader->Flush();

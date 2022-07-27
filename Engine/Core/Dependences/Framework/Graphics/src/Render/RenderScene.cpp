@@ -159,6 +159,8 @@ namespace SR_GRAPH_NS {
             return;
         }
 
+        pWidgetManager->SetRenderScene(GetThis());
+
         m_widgetManagers.emplace_back(pWidgetManager);
     }
 
@@ -168,13 +170,17 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& pMaterial = pMesh->GetMaterial();
-        if (!pMaterial) {
-            SRHalt("RenderScene::Register() : material is nullptr!");
-            return;
+        if (!pMesh->GetMaterial()) {
+            if (auto&& pDefaultMat = GetContext()->GetDefaultMaterial()) {
+                pMesh->SetMaterial(pDefaultMat);
+            }
+            else {
+                SR_ERROR("RenderScene::Register() : mesh material and default material is nullptr!");
+                return;
+            }
         }
 
-        if (pMaterial->IsTransparent()) {
+        if (pMesh->GetMaterial()->IsTransparent()) {
             m_transparent.Add(pMesh);
         }
         else {

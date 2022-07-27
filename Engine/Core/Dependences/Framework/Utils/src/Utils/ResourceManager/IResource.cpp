@@ -59,7 +59,7 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::Destroy() {
-        Helper::ResourceManager::Instance().Destroy(this);
+        ResourceManager::Instance().Destroy(this);
 
         SRAssert(!IsDestroyed());
         m_isDestroyed = true;

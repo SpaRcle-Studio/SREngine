@@ -108,7 +108,7 @@ namespace SR_GRAPH_NS::GUI {
             { "ImGuiCol_DockingPreview", ImGuiCol_DockingPreview },
     };
 
-    class Theme : public Helper::NonCopyable {
+    class Theme : public SR_UTILS_NS::NonCopyable {
     public:
         ~Theme() override = default;
 

@@ -102,17 +102,10 @@ namespace Framework::Core::World {
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
-                    //auto&& render = Engine::Instance().GetRender();
-
-                    mesh->SetMaterial(SR_GTYPES_NS::Material::GetDefault());
-
-                    //render->RegisterMesh(mesh);
-                    SRHalt("TODO!");
-
                     ptr->AddComponent(mesh);
                 }
                 else {
-                    SRAssert2(false, "failed to load mesh!");
+                    SRHalt("failed to load mesh!");
                 }
             }
 

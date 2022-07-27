@@ -31,11 +31,11 @@ namespace SR_GRAPH_NS::Vertices {
     };
 
     static std::string ToString(const glm::vec3& vec3) {
-        return Helper::Format("{ %f, %f, %f }", vec3.x, vec3.y, vec3.z);
+        return SR_UTILS_NS::Format("{ %f, %f, %f }", vec3.x, vec3.y, vec3.z);
     }
 
     static std::string ToString(const glm::vec2& vec2) {
-        return Helper::Format("{ %f, %f }", vec2.x, vec2.y);
+        return SR_UTILS_NS::Format("{ %f, %f }", vec2.x, vec2.y);
     }
 
     struct StaticMeshVertex {

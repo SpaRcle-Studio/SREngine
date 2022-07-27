@@ -67,7 +67,7 @@ namespace SR_GTYPES_NS {
         IndexedMesh::FreeVideoMemory();
     }
 
-    void Mesh3D::DrawVulkan() {
+    void Mesh3D::Draw() {
         if (!IsActive() || IsDestroyed())
             return;
 
@@ -87,7 +87,7 @@ namespace SR_GTYPES_NS {
                 uboManager.BindUBO(m_virtualUBO);
             }
             else {
-                m_env->ResetDescriptorSet();
+                m_pipeline->ResetDescriptorSet();
                 m_hasErrors = true;
                 return;
             }
@@ -105,17 +105,12 @@ namespace SR_GTYPES_NS {
                 m_material->UseSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
-                m_env->DrawIndices(m_countIndices);
+                m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
             default:
                 break;
         }
-    }
-
-    void Mesh3D::DrawOpenGL() {
-        if (IsDestroyed() || (!m_isCalculated && !Calculate()))
-            return;
     }
 
     SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags) const {
@@ -142,25 +137,14 @@ namespace SR_GTYPES_NS {
 
         const auto &&material = marshal.Read<std::string>();
 
-        Render* pRender = dataStorage->GetPointer<Render>();
-
-        if (!SRVerifyFalse(!pRender)) {
-            return nullptr;
-        }
-
         auto &&pMesh = Load(path, type, id);
 
-        if (pMesh) {
-            if (material != "None") {
-                if (Material *pMaterial = Material::Load(material)) {
-                    pMesh->SetMaterial(pMaterial);
-                }
-                else
-                    SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
+        if (pMesh && material != "None") {
+            if (Material *pMaterial = Material::Load(material)) {
+                pMesh->SetMaterial(pMaterial);
             }
-
-            pRender->RegisterMesh(pMesh);
-            /// TODO: mesh->WaitCalculate();
+            else
+                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
         }
 
         return pMesh;
