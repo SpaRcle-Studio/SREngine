@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(Core)
 
-add_executable(Engine main.cpp)
+add_executable(SREngine main.cpp)
 
-add_custom_command(TARGET Engine
+add_custom_command(TARGET SREngine
         POST_BUILD
         COMMAND ${CMAKE_COMMAND}
         -DTARGET_NAME=Engine
@@ -17,5 +17,5 @@ add_custom_command(TARGET Engine
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
-target_link_libraries(Engine Core)
+target_link_libraries(SREngine Core)
 
