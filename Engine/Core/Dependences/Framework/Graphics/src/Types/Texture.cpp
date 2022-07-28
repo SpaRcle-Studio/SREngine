@@ -23,13 +23,13 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    Texture* Texture::Load(const std::string& rawPath, const Memory::TextureConfig& config) {
+    Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
         SR_GLOBAL_LOCK
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath());
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
-            if (pResource->m_config != config) {
+            if (config && pResource->m_config != config.value()) {
                 SR_WARN("Texture::Load() : copy values do not match load values.");
             }
 
@@ -38,7 +38,13 @@ namespace SR_GTYPES_NS {
 
         auto&& pTexture = new Texture();
 
-        pTexture->SetConfig(config);
+        if (config) {
+            pTexture->SetConfig(config.value());
+        }
+        else {
+            pTexture->SetConfig(Memory::TextureConfig());
+        }
+
         pTexture->SetId(path, false /** auto register */);
 
         if (!pTexture->Load()) {
@@ -79,7 +85,7 @@ namespace SR_GTYPES_NS {
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
         if (!path.IsAbs()) {
-            path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().Concat(path);
+            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
         }
 
         if (!TextureLoader::Load(this, path.ToString())) {
@@ -172,10 +178,6 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    Texture* Texture::Load(const std::string &path) {
-        return Load(path, Memory::TextureConfigs::Instance().FindOrDefault(path));
-    }
-
     void Texture::SetConfig(const Memory::TextureConfig &config) {
         auto alpha = m_config.m_alpha;
         m_config = config;
@@ -234,7 +236,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Path Framework::Graphics::Types::Texture::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
     bool Texture::IsValid() const {

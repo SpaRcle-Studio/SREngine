@@ -120,6 +120,7 @@
 #endif
 
 #define SR_XML_NS Framework::Helper::Xml
+#define SR_PHYSICS_NS Framework::Physics
 #define SR_UTILS_NS Framework::Helper
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math

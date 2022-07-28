@@ -61,6 +61,10 @@ namespace SR_UTILS_NS {
                 return;
             }
 
+            if (!Singleton<T>::Instance().IsValid()) {
+                return;
+            }
+
             Singleton<T>::Instance().RemoveUsePoint();
             Singleton<T>::Instance().ForceDestroy();
 
@@ -84,7 +88,9 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> void GlobalSettings<T>::InitSingleton() {
-        SetId(GetResourcePath());
+        auto&& path = GetResourcePath();
+
+        SetId(path);
 
         AddUsePoint();
 

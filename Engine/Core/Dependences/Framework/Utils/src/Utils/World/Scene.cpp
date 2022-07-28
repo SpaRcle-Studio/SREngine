@@ -428,7 +428,7 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::ReloadConfig() {
-        const std::string path = ResourceManager::Instance().GetResPath().Concat("/Configs/World.xml");
+        const std::string path = ResourceManager::Instance().GetResPath().Concat("Engine/Configs/World.xml");
 
         if (auto xml = Xml::Document::Load(path); xml.Valid()) {
             const auto& configs = xml.Root().GetNode("Configs");

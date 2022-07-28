@@ -25,7 +25,7 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_mesh && m_position.y == 1) {
-            if (auto&& meshes = Mesh::Load("engine/planeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
+            if (auto&& meshes = Mesh::Load("Engine/Models/planeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
                 m_mesh = dynamic_cast<DebugWireframeMesh *>(meshes.at(0));
             }
             else
@@ -36,7 +36,7 @@ namespace Framework::Core::World {
             UpdateFacesPos();
 
             m_mesh->AddUsePoint();
-            m_mesh->SetMaterial(Material::Load("Engine/Colors/red.mat"));
+            m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
             m_mesh->OnScaled(SR_MATH_NS::FVector3(size.x / 2, 1, size.y / 2));
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {

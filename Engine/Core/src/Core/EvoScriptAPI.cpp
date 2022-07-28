@@ -20,33 +20,46 @@ namespace Framework {
         auto&& generator = compiler.GetGenerator();
         auto&& casts = compiler.GetCasting();
 
-        RegisterScene(generator);
-        RegisterDebug(generator);
-        RegisterEngine(generator);
-        RegisterComponent(generator);
-        RegisterUtils(generator);
-        RegisterMesh(generator);
-        RegisterResourceManager(generator);
-        RegisterGameObject(generator);
-        RegisterCamera(generator);
-        RegisterShader(generator);
-        RegisterWindow(generator);
-        RegisterRender(generator);
-        RegisterTransform(generator);
-        RegisterInput(generator);
-        RegisterSkybox(generator);
-        RegisterTexture(generator);
-        RegisterMaterial(generator);
-        RegisterGUISystem(generator);
-        RegisterPostProcessing(generator);
-        RegisterISavable(generator);
+        if (generator) {
+            RegisterScene(generator);
+            RegisterDebug(generator);
+            RegisterEngine(generator);
+            RegisterComponent(generator);
+            RegisterUtils(generator);
+            RegisterMesh(generator);
+            RegisterResourceManager(generator);
+            RegisterGameObject(generator);
+            RegisterCamera(generator);
+            RegisterShader(generator);
+            RegisterWindow(generator);
+            RegisterRender(generator);
+            RegisterTransform(generator);
+            RegisterInput(generator);
+            RegisterSkybox(generator);
+            RegisterTexture(generator);
+            RegisterMaterial(generator);
+            RegisterGUISystem(generator);
+            RegisterPostProcessing(generator);
+            RegisterISavable(generator);
 
-        RegisterCasts(casts);
+            generator->Save(Helper::ResourceManager::Instance().GetResPath().Concat("Libraries/"));
+        }
+        else {
+            SR_ERROR("API::RegisterEvoScriptClasses() : generator is nullptr!");
+        }
 
-        generator->Save(Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/Libraries/"));
-        casts->Save(Helper::ResourceManager::Instance().GetResPath().Concat("/Scripts/Libraries/"));
+        if (casts) {
+            RegisterCasts(casts);
 
-        compiler.SetApiVersion(generator->GetApiVersion());
+            casts->Save(Helper::ResourceManager::Instance().GetResPath().Concat("Libraries/"));
+        }
+        else {
+            SR_ERROR("API::RegisterEvoScriptClasses() : casts is nullptr!");
+        }
+
+        if (generator) {
+            compiler.SetApiVersion(generator->GetApiVersion());
+        }
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {

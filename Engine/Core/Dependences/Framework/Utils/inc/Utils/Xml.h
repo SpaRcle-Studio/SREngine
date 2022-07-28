@@ -13,7 +13,7 @@
 #include <Utils/Math/Vector2.h>
 #include <Utils/Common/NonCopyable.h>
 
-#include "../../libs/assimp/contrib/pugixml/src/pugixml.hpp"
+#include <assimp/contrib/pugixml/src/pugixml.hpp>
 
 namespace SR_UTILS_NS::Xml {
     class Node;

@@ -19,7 +19,7 @@ namespace SR_AUDIO_NS {
     Sound *Sound::Load(const SR_UTILS_NS::Path& rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetAudioPath());
+        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
 
         if (auto&& pSound = resourceManager.Find<Sound>(path))
             return pSound;

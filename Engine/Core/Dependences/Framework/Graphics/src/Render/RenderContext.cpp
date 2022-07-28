@@ -72,16 +72,18 @@ namespace SR_GRAPH_NS {
 
         /// ----------------------------------------------------------------------------
 
-        if ((m_defaultMaterial = SR_GTYPES_NS::Material::Load("Engine/default.mat"))) {
-            m_defaultMaterial->AddUsePoint();
-        }
-        else {
-            SR_ERROR("RenderContext::Init() : failed to load default material!");
-        }
+        Memory::TextureConfig config;
+
+        config.m_format = ColorFormat::RGBA8_UNORM;
+        config.m_filter = TextureFilter::NEAREST;
+        config.m_compression = TextureCompression::None;
+        config.m_mipLevels = 1;
+        config.m_alpha = SR_UTILS_NS::BoolExt::None;
+        config.m_cpuUsage = false;
 
         /// ----------------------------------------------------------------------------
 
-        if ((m_defaultTexture = SR_GTYPES_NS::Texture::Load("Engine/default.png"))) {
+        if ((m_defaultTexture = SR_GTYPES_NS::Texture::Load("Engine/Textures/default.png", config))) {
             m_defaultTexture->AddUsePoint();
         }
         else {
@@ -93,21 +95,21 @@ namespace SR_GRAPH_NS {
         /// так как вписать в код данные текстуры невозможно, то она хранится в виде base64, текстура размером 1x1 белого цвета формата png
         const std::string image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAADUlEQVQI12N48eIFOwAINALALwGcPAAAAABJRU5ErkJggg==";
 
-        const auto&& config = Memory::TextureConfig(
-                /**.m_format = */ ColorFormat::RGBA8_UNORM,
-                /**.m_filter = */ TextureFilter::NEAREST,
-                /**.m_compression = */ TextureCompression::None,
-                /**.m_mipLevels = */ 1,
-                /**.m_alpha = */ SR_UTILS_NS::BoolExt::None,
-                /**.m_cpuUsage = */ false
-        );
-
         if ((m_noneTexture = SR_GTYPES_NS::Texture::LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(image), config))) {
             m_noneTexture->AddUsePoint();
         }
         else {
             SR_ERROR("RenderContext::Init() : failed to create none texture!")
             return false;
+        }
+
+        /// ----------------------------------------------------------------------------
+
+        if ((m_defaultMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/default.mat"))) {
+            m_defaultMaterial->AddUsePoint();
+        }
+        else {
+            SR_ERROR("RenderContext::Init() : failed to load default material!");
         }
 
         /// ----------------------------------------------------------------------------

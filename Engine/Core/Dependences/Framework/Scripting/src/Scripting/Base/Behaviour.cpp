@@ -54,7 +54,7 @@ namespace SR_SCRIPTING_NS {
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        path = path.RemoveSubPath(resourceManager.GetScriptsPath());
+        path = path.RemoveSubPath(resourceManager.GetResPath());
 
         if (path.IsAbs()) {
             SR_ERROR("Behaviour::Load() : the behavior cannot be located outside of the resources folder! \n\tPath: " + path.ToString());
@@ -153,7 +153,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Path Behaviour::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
     std::map<std::string, std::any> Behaviour::StashProperties() const {

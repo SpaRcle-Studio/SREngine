@@ -17,7 +17,7 @@ namespace SR_AUDIO_NS {
     RawSound *RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetAudioPath());
+        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
 
         if (auto&& pRawSound = resourceManager.Find<RawSound>(path))
             return pRawSound;
@@ -37,7 +37,7 @@ namespace SR_AUDIO_NS {
     }
 
     SR_UTILS_NS::Path RawSound::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetAudioPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
     bool RawSound::Unload() {
@@ -57,7 +57,7 @@ namespace SR_AUDIO_NS {
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
         if (!path.IsAbs()) {
-            path = SR_UTILS_NS::ResourceManager::Instance().GetAudioPath().Concat(path);
+            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
         }
 
         auto&& dataBlob = SR_UTILS_NS::FileSystem::ReadFileAsBlob(path);

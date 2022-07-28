@@ -82,6 +82,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::list<Path> GetFolders() const;
         SR_NODISCARD std::list<Path> GetAll() const;
 
+        SR_NODISCARD std::string GetWithoutExtension() const;
         SR_NODISCARD std::string_view GetExtensionView() const;
         SR_NODISCARD std::string_view GetBaseNameView() const;
         SR_NODISCARD std::string_view View() const;

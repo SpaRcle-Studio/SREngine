@@ -12,7 +12,7 @@ namespace SR_GRAPH_NS::Memory {
 
         SR_INFO("TextureConfigs::Reload() : reloading configs...");
 
-        const auto path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().Concat("Asset.xml");
+        const auto path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Asset.xml");
 
         if (path.Exists()) {
             auto doc = Helper::Xml::Document::Load(path);

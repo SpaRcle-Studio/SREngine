@@ -102,7 +102,7 @@ namespace SR_GRAPH_NS::Types {
     Shader* Shader::Load(const SR_UTILS_NS::Path &rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetShadersPath());
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
 
         if (auto&& pShader = resourceManager.Find<Shader>(path)) {
             return pShader;
@@ -252,7 +252,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     SR_UTILS_NS::Path Shader::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetShadersPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
     bool Shader::Reload() {

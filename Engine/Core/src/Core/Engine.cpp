@@ -22,11 +22,8 @@
 #include <Types/Skybox.h>
 
 namespace Framework {
-    bool Engine::Create(SR_GRAPH_NS::Window* window, Physics::PhysEngine* physics) {
+    bool Engine::Create(SR_GRAPH_NS::Window* window) {
         m_window = window;
-        //m_render = window->GetRender();
-
-        m_physics = physics;
 
         m_time       = new SR_HTYPES_NS::Time();
         m_cmdManager = new SR_UTILS_NS::CmdManager();
@@ -52,20 +49,6 @@ namespace Framework {
         m_input->Register(m_editor);
         m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
 
-        //window->RegisterWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
-        //window->RegisterWidgetManager(m_editor = new Core::GUI::EditorGUI());
-
-        //
-        //if (m_editor) {
-        //
-        //    m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
-        //}
-
-        if (!m_physics->Create()) {
-            SR_ERROR("Engine::Create() : failed to create physics engine!");
-            return false;
-        }
-
         Graphics::Environment::RegisterScrollEvent([](double x, double y){
             SR_UTILS_NS::Input::Instance().SetMouseScroll(x, y);
         });
@@ -74,13 +57,6 @@ namespace Framework {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
             SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
-
-        ///// TODO: move to render technique (SkyboxPass)
-        //if (SR_UTILS_NS::Features::Instance().Enabled("LoadSkybox")) {
-        //    if (!m_window->GetRender()->GetSkybox()) {
-        //        m_window->GetRender()->SetSkybox(SR_GTYPES_NS::Skybox::Load("Sea.jpg"));
-        //    }
-        //}
 
         m_isCreate = true;
 
@@ -154,7 +130,7 @@ namespace Framework {
 
         m_isRun = true;
 
-        if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem")) {
+        if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
             SR_INFO("Engine::Run() : running world thread...");
 
             m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
@@ -174,8 +150,6 @@ namespace Framework {
 
         while (m_isRun) {
             SR_HTYPES_NS::Thread::Sleep(1);
-
-            SRAssert(m_worldThread->Joinable());
 
             //SR_LOCK_GUARD
 
@@ -285,7 +259,6 @@ namespace Framework {
         }
 
         if (m_window && m_window->IsRun()) {
-            //m_window->RemoveWidgetManager(&Graphics::GUI::GlobalWidgetManager::Instance());
             m_window->Close();
             delete m_window;
             m_window = nullptr;
@@ -351,7 +324,7 @@ namespace Framework {
             if (auto&& pContext = m_window->GetContext(); pContext.LockIfValid()) {
                 m_renderScene.ReplaceAndCopyLock(pContext->CreateScene(m_scene));
 
-                m_renderScene->SetTechnique("Engine/EditorRenderTechnique.xml");
+                m_renderScene->SetTechnique("Editor/Configs/EditorRenderTechnique.xml");
 
                 m_renderScene->Register(m_editor);
                 m_renderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());

@@ -102,7 +102,7 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        const auto path = Helper::ResourceManager::Instance().GetConfigPath().Concat("EditorWidgets.xml");
+        const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml");
 
         auto document = Helper::Xml::Document::New();
         auto widgets = document.Root().AppendChild("Widgets");
@@ -132,7 +132,7 @@ namespace SR_CORE_NS::GUI {
 
         m_useDocking = SR_UTILS_NS::Features::Instance().Enabled("EditorWidgetsDocking", true);
 
-        const auto path = Helper::ResourceManager::Instance().GetConfigPath().Concat("EditorWidgets.xml");
+        const auto path = Helper::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml");
 
         if (!path.Exists())
             return;

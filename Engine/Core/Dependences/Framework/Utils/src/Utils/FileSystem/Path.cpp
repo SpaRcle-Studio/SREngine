@@ -306,4 +306,14 @@ namespace SR_UTILS_NS {
     std::string_view Path::View() const {
         return m_path;
     }
+
+    std::string Path::GetWithoutExtension() const {
+        if (m_ext.empty()) {
+            return m_path;
+        }
+
+        std::string path = m_path;
+        path.resize(path.size() - (m_ext.size() + 1));
+        return path;
+    }
 }

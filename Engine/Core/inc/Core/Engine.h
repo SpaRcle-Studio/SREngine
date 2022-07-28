@@ -7,7 +7,6 @@
 
 #include <Core/GUI/EditorGUI.h>
 #include <Core/EvoScriptAPI.h>
-#include <Core/PhysEngine.h>
 #include <Core/EngineCommands.h>
 
 #include <Utils/Events/EventManager.h>
@@ -66,7 +65,7 @@ namespace Framework {
         SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
 
     public:
-        bool Create(Graphics::Window* window, Physics::PhysEngine* physics);
+        bool Create(Graphics::Window* window);
         bool Init();
         bool Run();
         void Await();
@@ -93,7 +92,6 @@ namespace Framework {
         SR_HTYPES_NS::Thread::Ptr     m_worldThread = nullptr;
 
         Core::GUI::EditorGUI*         m_editor      = nullptr;
-        Physics::PhysEngine*          m_physics     = nullptr;
         ScenePtr                      m_scene       = ScenePtr();
         RenderScenePtr                m_renderScene = RenderScenePtr();
         SR_UTILS_NS::InputDispatcher* m_input       = nullptr;

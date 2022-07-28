@@ -21,15 +21,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsLastResource(IResource* resource);
         SR_NODISCARD Path GetResPath() const { return m_folder; }
         SR_NODISCARD Path GetCachePath() const { return m_folder.Concat("Cache"); }
-        SR_NODISCARD Path GetConfigPath() const { return m_folder.Concat("Configs"); }
-        SR_NODISCARD Path GetFontsPath() const { return m_folder.Concat("Fonts"); }
-        SR_NODISCARD Path GetMaterialsPath() const { return m_folder.Concat("Materials"); }
-        SR_NODISCARD Path GetTexturesPath() const { return m_folder.Concat("Textures"); }
-        SR_NODISCARD Path GetModelsPath() const { return m_folder.Concat("Models"); }
-        SR_NODISCARD Path GetAudioPath() const { return m_folder.Concat("Audio"); }
-        SR_NODISCARD Path GetUtilsPath() const { return m_folder.Concat("Utilities"); }
-        SR_NODISCARD Path GetShadersPath() const { return m_folder.Concat("Shaders"); }
-        SR_NODISCARD Path GetScriptsPath() const { return m_folder.Concat("Scripts"); }
 
         IResource* Find(const std::string& Name, const std::string& ID);
 
@@ -81,7 +72,7 @@ namespace SR_UTILS_NS {
         std::atomic<bool> m_destroyIsEmpty = false;
 
         Path m_folder = Path();
-        Types::Thread::Ptr m_thread;
+        Types::Thread::Ptr m_thread = nullptr;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;
 

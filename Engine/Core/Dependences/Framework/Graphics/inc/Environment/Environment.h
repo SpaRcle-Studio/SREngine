@@ -126,7 +126,7 @@ namespace SR_GRAPH_NS {
 
         static void SetWinCallBack(const std::function<void(WinEvents, void* win, void* arg1, void* arg2)>& callback);
     public:
-        virtual bool PreInitGUI(const std::string& fontPath);
+        virtual bool PreInitGUI(const SR_UTILS_NS::Path& fontPath);
         virtual void SetGUIEnabled(bool enabled) { }
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }

@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
         EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { SR_WARN(msg);  };
         EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { SR_INFO(msg);  };
 
-        auto&& configPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Configs/EvoScript.xml");
+        auto&& configPath = Helper::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
 
         if (configPath.Exists()) {
             auto xml = SR_XML_NS::Document::Load(configPath);

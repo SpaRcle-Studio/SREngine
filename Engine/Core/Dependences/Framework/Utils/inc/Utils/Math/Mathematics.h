@@ -56,6 +56,8 @@
 #define SR_DOUBLE_MAX DBL_MAX
 #define SR_FLOAT_MAX FLT_MAX
 
+#define SR_EARTH_GRAVITY 9.81
+
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
 #define SR_CLAMP(x, upper, lower) (SR_MIN(upper, SR_MAX(x, lower)))

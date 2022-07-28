@@ -42,7 +42,7 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_stayMesh) {
-            if (auto &&meshes = SR_GTYPES_NS::Mesh::Load("engine/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe); !meshes.empty()) {
+            if (auto &&meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe); !meshes.empty()) {
                 m_stayMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(meshes.at(0));
             }
             else
@@ -51,7 +51,7 @@ namespace Framework::Core::World {
             UpdateFacesPos();
 
             m_stayMesh->AddUsePoint();
-            m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Colors/green.mat"));
+            m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/green_wireframe.mat"));
             m_stayMesh->OnScaled(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2);
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
@@ -71,7 +71,7 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_loadMesh && m_position.y == 1 && m_regionPosition.y == 1) {
-            if (auto &&meshes = SR_GTYPES_NS::Mesh::Load("Engine/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe); !meshes.empty()) {
+            if (auto &&meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe); !meshes.empty()) {
                 m_loadMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(meshes.at(0));
             }
             else
@@ -80,7 +80,7 @@ namespace Framework::Core::World {
             UpdateLoadPos();
 
             m_loadMesh->AddUsePoint();
-            m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Colors/yellow.mat"));
+            m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/yellow_wireframe.mat"));
             m_loadMesh->OnScaled(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2);
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {

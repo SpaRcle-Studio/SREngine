@@ -34,3 +34,6 @@
 [submodule "Engine/Core/Dependences/Framework/Audio/libs/libmodplug"]
 	path = Engine/Core/Dependences/Framework/Audio/libs/libmodplug
 	url = https://github.com/Konstanty/libmodplug
+[submodule "Engine/Core/Dependences/Framework/Physics/libs/bullet3"]
+	path = Engine/Core/Dependences/Framework/Physics/libs/bullet3
+	url = https://github.com/bulletphysics/bullet3

@@ -45,7 +45,7 @@ std::optional<SR_GRAPH_NS::SRSL::SRSLUnit> SR_GRAPH_NS::SRSL::SRSLLoader::Load(s
 
     auto&& resManager = SR_UTILS_NS::ResourceManager::Instance();
     auto&& cache = resManager.GetCachePath().Concat("Shaders/SRSL");
-    auto&& shader = resManager.GetShadersPath().Concat(path).ConcatExt(".srsl");
+    auto&& shader = resManager.GetResPath().Concat(path).ConcatExt(".srsl");
 
     if (!shader.Exists()) {
         SR_ERROR("SRSLLoader::Load() : file not exists! Path: " + shader.ToString());

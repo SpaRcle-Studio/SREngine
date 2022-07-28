@@ -112,7 +112,7 @@ namespace SR_GTYPES_NS {
 
                 /// default technique
                 if (path.Empty()) {
-                    path = "Engine/MainRenderTechnique.xml";
+                    path = "Engine/Configs/MainRenderTechnique.xml";
                 }
 
                 if (auto&& pRenderTechnique = RenderTechnique::Load(path)) {

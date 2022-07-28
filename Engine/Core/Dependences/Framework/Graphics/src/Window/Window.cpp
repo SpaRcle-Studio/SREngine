@@ -22,14 +22,12 @@ namespace SR_GRAPH_NS {
             std::string name,
             std::string icoPath,
             const SR_MATH_NS::IVector2 &size,
-            Render *render,
             bool vsync, bool fullScreen, bool resizable,
             bool headerEnabled, uint8_t smoothSamples
         ) : m_env(Environment::Get())
         , m_size(size)
         , m_winName(std::move(name))
         , m_icoPath(std::move(icoPath))
-        //, m_render(render)
         , m_fullScreen(fullScreen)
         , m_vsync(vsync)
         , m_smoothSamples(smoothSamples)
@@ -312,7 +310,7 @@ namespace SR_GRAPH_NS {
                 m_smoothSamples,
                 "SpaRcle Engine", /// App name
                 "SREngine",       /// Engine name
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Utilities/glslc.exe")))
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe")))
         {
             SR_ERROR("Window::InitEnvironment() : failed to pre-initialize the environment!");
             return false;
@@ -324,7 +322,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        m_env->SetWindowIcon(SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().Concat(m_icoPath).CStr());
+        m_env->SetWindowIcon(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_icoPath).CStr());
 
         SR_GRAPH_LOG("Window::InitEnvironment() : set thread context as current...");
         if (!m_env->SetContextCurrent()) {
@@ -352,15 +350,18 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_env->IsGUISupport()) {
-            if (m_env->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Fonts/CalibriL.ttf"))) {
+            if (m_env->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/CalibriL.ttf"))) {
                 ImGuiStyle & style = ImGui::GetStyle();
 
-                if (auto&& theme = GUI::Theme::Load("Themes/Dark.xml")) {
+                if (auto&& theme = GUI::Theme::Load("Engine/Configs/Themes/Dark.xml")) {
                     theme->Apply(style);
                     delete theme;
                 }
+                else {
+                    SR_ERROR(" Window::InitEnvironment() : failed to load theme!");
+                }
 
-                const static auto iniPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Configs/ImGuiEditor.config");
+                const static auto iniPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/ImGuiEditor.config");
                 ImGui::GetIO().IniFilename = iniPath.CStr();
 
                 if (!m_env->InitGUI()) {

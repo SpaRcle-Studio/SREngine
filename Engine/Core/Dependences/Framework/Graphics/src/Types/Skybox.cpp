@@ -40,7 +40,7 @@ namespace SR_GTYPES_NS {
     }
 
     Skybox *Skybox::Load(const SR_UTILS_NS::Path& path) {
-        auto&& folder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Skyboxes").Concat(path.GetBaseName());
+        auto&& folder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path.GetWithoutExtension());
 
         SR_LOG("Skybox::Load() : loading \"" + path.ToString() + "\" skybox...");
 
@@ -79,7 +79,8 @@ namespace SR_GTYPES_NS {
         pSkybox->m_height = H;
         pSkybox->m_data = sides;
 
-        pSkybox->SetShader(Shader::Load("Engine/skybox.srsl"));
+        /// TODO: добавить возможность кастомизации
+        pSkybox->SetShader(Shader::Load("Engine/Shaders/skybox.srsl"));
 
         pSkybox->SetId(path.ToString());
 

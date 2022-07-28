@@ -27,7 +27,7 @@ namespace SR_CORE_NS::GUI {
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Script)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
-                auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
+                auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto &&path = SR_UTILS_NS::FileDialog::Instance().PickFolder(scriptsPath);
 
                 if (path.Exists()) {
@@ -145,7 +145,7 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
                 if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
-                    auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
+                    auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(materialsPath, { { "Material", "mat" } });
 
                     if (path.Exists()) {
@@ -214,7 +214,7 @@ namespace SR_CORE_NS::GUI {
                     /// если нашли хоть какой-то дескриптор
                     if (pDescriptor) {
                         if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
-                            auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath();
+                            auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 
                             if (path.Exists()) {

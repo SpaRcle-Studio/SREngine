@@ -46,7 +46,7 @@ namespace SR_GTYPES_NS {
     public:
         Super* Copy(Super* destination) const override;
 
-        SR_NODISCARD bool IsTransparent() const { return m_transparent;  }
+        SR_NODISCARD bool IsTransparent() const { return m_transparent; }
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD Properties& GetProperties() { return m_properties; }
         SR_NODISCARD Property* GetProperty(const std::string& id);

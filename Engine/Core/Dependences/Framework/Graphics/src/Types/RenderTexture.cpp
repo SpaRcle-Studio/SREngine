@@ -17,7 +17,7 @@ namespace SR_GTYPES_NS {
     RenderTexture *RenderTexture::Load(const SR_UTILS_NS::Path &rawPath) {
         SR_GLOBAL_LOCK
 
-        auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetConfigPath());
+        auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Settings>(path)) {
             auto&& pRenderTexture = dynamic_cast<RenderTexture *>(pResource);

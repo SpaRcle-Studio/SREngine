@@ -6,7 +6,7 @@
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::Path EditorSettings::GetResourcePath() const {
-        return "Engine/EditorSettings.xml";
+        return "Editor/Configs/EditorSettings.xml";
     }
 
     void EditorSettings::ClearSettings() {

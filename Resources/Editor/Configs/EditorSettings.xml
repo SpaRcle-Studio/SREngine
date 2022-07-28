@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Settings>
+    <Icons Type="Custom">
+        <Pair First="Unknown" Second="Editor/Textures/unknown.png"/>
+        <Pair First="Material" Second="Editor/Textures/material.png"/>
+        <Pair First="File" Second="Editor/Textures/file.png"/>
+        <Pair First="Folder" Second="Editor/Textures/folder.png"/>
+        <Pair First="EmptyFolder" Second="Editor/Textures/empty_folder.png"/>
+        <Pair First="Script" Second="Editor/Textures/script.png"/>
+        <Pair First="Reset" Second="Editor/Textures/reset.png"/>
+    </Icons>
+</Settings>

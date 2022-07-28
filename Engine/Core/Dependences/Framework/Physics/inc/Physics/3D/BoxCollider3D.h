@@ -1,0 +1,8 @@
+//
+// Created by Monika on 28.07.2022.
+//
+
+#ifndef SRENGINE_BOXCOLLIDER3D_H
+#define SRENGINE_BOXCOLLIDER3D_H
+
+#endif //SRENGINE_BOXCOLLIDER3D_H

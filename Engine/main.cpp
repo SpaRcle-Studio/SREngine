@@ -31,7 +31,8 @@
 #include <Audio/RawSound.h>
 #include <Audio/SoundManager.h>
 
-#include <Types/Rigidbody.h>
+#include <Physics/3D/Rigidbody3D.h>
+#include <Physics/PhysicsScene.h>
 #include <Utils/Types/RawMesh.h>
 #include <Types/Texture.h>
 #include <Loaders/SRSL.h>
@@ -68,28 +69,12 @@ using namespace Framework::Graphics;
 using namespace Framework::Graphics::Types;
 using namespace Framework::Graphics::Animations;
 
-using namespace Framework::Physics;
-using namespace Framework::Physics::Types;
+//using namespace Framework::Physics;
+//using namespace Framework::Physics::Types;
 
 using namespace Framework::Scripting;
 
 using namespace Framework::Audio;
-/*
-        +---------------+       +----+          +----+       +---------------+            +----------------+
-        |               |       \     \        /     /       |               |           /                 |
-        |               |        \     \      /     /        |               |          /                  |
-        |      +--------+         \     \    /     /         |      +--------+         /         +---------+
-        |      |                   \     \  /     /          |      |                 /        /
-        |      +--------+           \     \/     /           |      +--------+       |        /
-        |               |            \          /            |               |       |       |
-        |               |            /          \            |               |       |       |
-        |      +--------+           /     /\     \           |      +--------+       |        \
-        |      |                   /     /  \     \          |      |                 \        \
-        |      +--------+         /     /    \     \         |      +--------+         \        +---------+
-        |               |        /     /      \     \        |               |          \                 |
-        |               |       /     /        \     \       |               |           \                |
-        +---------------+       +----+          +-----+      +---------------+            +---------------+
- */
 
 int main(int argc, char **argv) {
     if constexpr (sizeof(size_t) != 8) {
@@ -117,7 +102,7 @@ int main(int argc, char **argv) {
     else
         resourcesManager.Init(folder);
 
-    Features::Instance().Reload(resourcesManager.GetResPath().Concat("/Configs/Features.xml"));
+    Features::Instance().Reload(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
 
     if (!FbxLoader::Debug::IsInit()) {
         FbxLoader::Debug::Init(
@@ -129,7 +114,7 @@ int main(int argc, char **argv) {
     if (Features::Instance().Enabled("CrashHandler")) {
 #ifdef SR_WIN32
         ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
-                "/Utilities/EngineCrashHandler.exe").CStr()),
+                "Engine/Utilities/EngineCrashHandler.exe").CStr()),
                      ("--log log.txt --target " + SR_PLATFORM_NS::GetApplicationName().ToString() + " --out " + exe.ToString() + "\\").c_str(),
                      nullptr, SW_SHOWDEFAULT
         );
@@ -155,7 +140,7 @@ int main(int argc, char **argv) {
     {
         //Component::RegisterComponent("SkinnedMesh", []() -> Component* { return new SkinnedMesh();  });
         ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return Memory::MeshAllocator::Allocate<Mesh3D>(); });
-        ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
+        //ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
         ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
@@ -183,8 +168,8 @@ int main(int argc, char **argv) {
     //SR_AUDIO_NS::Sound::Load("TRAUMATIC.mp3");
      */
 
-    const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetConfigPath().Concat("Environment.xml"));
-    const auto&& envName = envDoc.TryRoot().TryGetNode("Environment").TryGetAttribute("Name").ToString("");
+    const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Pipeline.xml"));
+    const auto&& envName = envDoc.TryRoot().TryGetNode("Pipeline").TryGetAttribute("Name").ToString("");
 
     if (envName == "OpenGL") {
         Environment::Set(new OpenGL());
@@ -193,31 +178,18 @@ int main(int argc, char **argv) {
         Environment::Set(new Vulkan());
     }
     else if (envName.empty()) {
-        SR_ERROR("System error: file \"Resources/Configs/Environment.xml\" does not exist!");
-        ResourceManager::DestroySingleton();
-        Debug::DestroySingleton();
-        return -1500;
+        SR_ERROR("System error: file \"Engine/Configs/Pipeline.xml\" does not exist! Default use Vulkan...");
+        Environment::Set(new Vulkan());
     }
     else {
-        SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported!");
-        ResourceManager::DestroySingleton();
-        Debug::DestroySingleton();
-        return -2000;
-    }
-
-    Render* render = RenderManager::Instance().Allocate("Main");
-    if (!render) {
-        SR_ERROR("FATAL: render does not support this pipeline!");
-        ResourceManager::DestroySingleton();
-        Debug::DestroySingleton();
-        return -1000;
+        SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported! Default use Vulkan...");
+        Environment::Set(new Vulkan());
     }
 
     auto window = new Window(
             "SpaRcle Engine",
             "Engine/icon.ico",
             IVector2(1366, 768), //IVector2(1600, 900),
-            render,
             false, // vsync
             false, // fullscreen
             true,  // resizable
@@ -225,11 +197,9 @@ int main(int argc, char **argv) {
             2
     );
 
-    auto physics = new PhysEngine();
-
     auto&& engine = Engine::Instance();
 
-    if(engine.Create(window, physics)) {
+    if(engine.Create(window)) {
         if (engine.Init()) {
             if (engine.Run()) {
 

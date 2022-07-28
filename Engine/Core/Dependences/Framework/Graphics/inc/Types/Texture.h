@@ -27,8 +27,7 @@ namespace SR_GTYPES_NS {
         ~Texture() override;
 
     public:
-        static Texture* Load(const std::string& path);
-        static Texture* Load(const std::string& path, const Memory::TextureConfig& config);
+        static Texture* Load(const std::string& path, const std::optional<Memory::TextureConfig>& config = std::nullopt);
         static Texture* LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
 
     public:

@@ -8,12 +8,15 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 
 namespace SR_GRAPH_NS::GUI {
-    Theme *Theme::Load(const std::string &path) {
-        auto&& theme = new Theme();
+    Theme *Theme::Load(const SR_UTILS_NS::Path &path) {
+        const auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
 
-        const auto&& absPath = Helper::ResourceManager::Instance().GetConfigPath().Concat(path);
-        if (!absPath.Exists())
+        if (!absPath.Exists()) {
             return nullptr;
+            SR_ERROR("Theme::Load() : file not found! \n\tPath: " + absPath.ToString());
+        }
+
+        auto&& theme = new Theme();
 
         auto&& document = Helper::Xml::Document::Load(absPath);
 
@@ -58,7 +61,7 @@ namespace SR_GRAPH_NS::GUI {
         return result;
     }
 
-    bool Theme::Save(const std::string &path) {
+    bool Theme::Save(const SR_UTILS_NS::Path &path) {
         auto&& document = Helper::Xml::Document::New();
         auto&& theme = document.Root().AppendChild("Theme");
 
@@ -78,7 +81,7 @@ namespace SR_GRAPH_NS::GUI {
         for (const auto& [name, value] : m_booleans)
             booleans.AppendChild(name).AppendAttribute("value", value);
 
-        return document.Save(Helper::ResourceManager::Instance().GetConfigPath().Concat(path));
+        return document.Save(Helper::ResourceManager::Instance().GetResPath().Concat(path));
     }
 
     void Theme::SetColor(const std::string& id, const SR_MATH_NS::FColor& color) {

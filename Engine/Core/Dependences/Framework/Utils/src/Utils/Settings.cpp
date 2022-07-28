@@ -58,7 +58,7 @@ namespace SR_UTILS_NS {
     }
 
     Path Settings::GetAssociatedPath() const {
-        return ResourceManager::Instance().GetConfigPath();
+        return ResourceManager::Instance().GetResPath();
     }
 
     Path Settings::GetResourcePath() const {

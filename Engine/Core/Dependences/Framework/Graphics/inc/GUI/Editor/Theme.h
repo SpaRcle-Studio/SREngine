@@ -113,13 +113,13 @@ namespace SR_GRAPH_NS::GUI {
         ~Theme() override = default;
 
     public:
-        static Theme* Load(const std::string& path);
+        static Theme* Load(const SR_UTILS_NS::Path& path);
         static bool Save(const std::string& path, const ImGuiStyle& style);
         static SR_MATH_NS::FColor ImVec4ToColor(ImVec4 imVec4);
         static SR_MATH_NS::FVector2 ImVec2ToFVector2(ImVec2 imVec2);
 
     public:
-        bool Save(const std::string& path);
+        bool Save(const SR_UTILS_NS::Path& path);
 
         bool Apply(ImGuiStyle& style) const;
 

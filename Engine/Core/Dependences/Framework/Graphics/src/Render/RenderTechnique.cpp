@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS {
     RenderTechnique *RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
         SR_GLOBAL_LOCK
 
-        auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetConfigPath());
+        auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         auto&& pRenderTechnique = new RenderTechnique();
 

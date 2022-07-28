@@ -52,7 +52,7 @@ namespace SR_GTYPES_NS {
     Material* Material::Load(const std::string &rawPath) {
         SR_GLOBAL_LOCK
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath());
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         if (auto&& pMaterial = SR_UTILS_NS::ResourceManager::Instance().Find<Material>(path))
             return pMaterial;
@@ -243,7 +243,7 @@ namespace SR_GTYPES_NS {
             InitShader();
         }
 
-        const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
+        const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
 
         auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
@@ -258,7 +258,6 @@ namespace SR_GTYPES_NS {
         }
 
         if (auto&& shader = matXml.TryGetNode("Shader")) {
-            auto&& render = RenderManager::Instance().Get("Main");
             auto&& pShader = Shader::Load(shader.GetAttribute("Path").ToString());
 
             SetShader(pShader);
@@ -330,6 +329,6 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Path Material::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 }

@@ -28,7 +28,7 @@ namespace SR_GRAPH_NS {
         using DrawCallback = SR_HTYPES_NS::Function<void(void)>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
     public:
-        Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size, Render* render,
+        Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size,
                 bool vsync, bool fullScreen, bool resizable, bool headerEnabled, uint8_t smoothSamples);
         ~Window() override;
 

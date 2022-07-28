@@ -48,7 +48,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class TaskManager : public Singleton<TaskManager> {
+    class SR_DLL_EXPORT TaskManager : public Singleton<TaskManager> {
         friend class Singleton<TaskManager>;
         using TaskFn = SR_HTYPES_NS::Function<void(std::atomic<Task::State>*)>;
         using TaskId = uint64_t;
