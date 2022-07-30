@@ -1,8 +1,8 @@
 //
-// Created by Nikita on 02.06.2021.
+// Created by Monika on 30.07.2022.
 //
 
-#include <Types/Geometry/Mesh3D.h>
+#include <UI/Sprite2D.h>
 #include <Utils/Types/RawMesh.h>
 #include <Types/Material.h>
 #include <Environment/Environment.h>
@@ -10,15 +10,51 @@
 #include <Types/Shader.h>
 #include <Utils/Types/DataStorage.h>
 
-namespace SR_GTYPES_NS {
-    Mesh3D::Mesh3D()
-        : IndexedMesh(MeshType::Static)
+namespace SR_GRAPH_NS::UI {
+    Sprite2D::Sprite2D()
+        : IndexedMesh(Types::MeshType::Sprite2D)
     {
         /// override component
-        Component::InitComponent<Mesh3D>();
+        Component::InitComponent<Sprite2D>();
     }
 
-    bool Mesh3D::Calculate()  {
+    SR_UTILS_NS::IResource* Sprite2D::Copy(SR_UTILS_NS::IResource *destination) const {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
+        auto* sprite2D = dynamic_cast<Sprite2D *>(destination ? destination : new Sprite2D());
+        sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::Copy(sprite2D));
+
+        if (sprite2D->IsCalculated()) {
+            auto &&manager = Memory::MeshManager::Instance();
+            sprite2D->m_VBO = manager.CopyIfExists<Vertices::Type::UIVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
+        }
+
+        return sprite2D;
+    }
+
+    SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        const auto &&type = static_cast<Types::MeshType>(marshal.Read<int32_t>());
+
+        const auto &&path = marshal.Read<std::string>();
+        const auto &&id = marshal.Read<uint32_t>();
+        const auto &&inverse = marshal.Read<bool>();
+
+        const auto &&material = marshal.Read<std::string>();
+
+        auto &&pMesh = Load(path, type, id);
+
+        if (pMesh && material != "None") {
+            if (auto&& pMaterial = Types::Material::Load(material)) {
+                pMesh->SetMaterial(pMaterial);
+            }
+            else
+                SR_ERROR("Sprite2D::LoadComponent() : failed to load material! Name: " + material);
+        }
+
+        return pMesh;
+    }
+
+    bool Sprite2D::Calculate() {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (m_isCalculated)
@@ -35,46 +71,32 @@ namespace SR_GTYPES_NS {
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
+            SR_LOG("Sprite2D::Calculate() : calculating \"" + m_geometryName + "\"...");
         }
 
-        auto&& vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
+        auto&& vertices = Vertices::CastVertices<Vertices::UIVertex>(m_rawMesh->GetVertices(m_meshId));
 
-        if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices))
+        if (!CalculateVBO<Vertices::Type::UIVertex>(vertices))
             return false;
 
         return IndexedMesh::Calculate();
     }
 
-    SR_UTILS_NS::IResource* Mesh3D::Copy(IResource* destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D());
-        mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
-
-        if (mesh3D->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::StaticMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
-
-        return mesh3D;
-    }
-
-    void Mesh3D::FreeVideoMemory() {
+    void Sprite2D::FreeVideoMemory() {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
+            SR_LOG("Sprite2D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }
 
-        if (!FreeVBO<Vertices::Type::StaticMeshVertex>()) {
-            SR_ERROR("Mesh3D::FreeVideoMemory() : failed to free VBO!");
+        if (!FreeVBO<Vertices::Type::UIVertex>()) {
+            SR_ERROR("Sprite2D::FreeVideoMemory() : failed to free VBO!");
         }
 
         IndexedMesh::FreeVideoMemory();
     }
 
-    void Mesh3D::Draw() {
+    void Sprite2D::Draw() {
         if (!IsActive() || IsDestroyed())
             return;
 
@@ -120,7 +142,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags) const {
+    SR_HTYPES_NS::Marshal Sprite2D::Save(Framework::Helper::SavableFlags flags) const {
         SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
 
         marshal.Write(static_cast<int32_t>(m_type));
@@ -133,27 +155,5 @@ namespace SR_GTYPES_NS {
         marshal.Write(m_material ? m_material->GetResourceId() : "None");
 
         return marshal;
-    }
-
-    SR_UTILS_NS::Component *SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
-
-        const auto &&path = marshal.Read<std::string>();
-        const auto &&id = marshal.Read<uint32_t>();
-        const auto &&inverse = marshal.Read<bool>();
-
-        const auto &&material = marshal.Read<std::string>();
-
-        auto &&pMesh = Load(path, type, id);
-
-        if (pMesh && material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(material)) {
-                pMesh->SetMaterial(pMaterial);
-            }
-            else
-                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
-        }
-
-        return pMesh;
     }
 }

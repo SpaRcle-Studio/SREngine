@@ -34,6 +34,7 @@ namespace SR_GTYPES_NS {
         Static = 1,
         Wireframe = 2,
         Skinned = 3,
+        Sprite2D = 4,
     )
 
     class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {
@@ -42,13 +43,13 @@ namespace SR_GTYPES_NS {
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     protected:
-        explicit Mesh(MeshType type, std::string name = "Unnamed");
+        explicit Mesh(MeshType type);
         ~Mesh() override;
 
     public:
-        static std::vector<Mesh*> Load(const std::string& path, MeshType type);
-        static Mesh* TryLoad(const std::string& path, MeshType type, uint32_t id);
-        static Mesh* Load(const std::string& path, MeshType type, uint32_t id);
+        static std::vector<Mesh*> Load(const SR_UTILS_NS::Path& path, MeshType type);
+        static Mesh* TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
+        static Mesh* Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
 
     public:
         bool Destroy() override;
@@ -90,7 +91,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
 
-        void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
+        void SetInverse(bool value);
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetContext(const RenderContextPtr& context);
@@ -113,6 +114,7 @@ namespace SR_GTYPES_NS {
         bool                         m_inverse           = false;
 
         RenderScenePtr               m_renderScene       = { };
+        /// Контекст будет задан только после регистрации в RenderScene
         RenderContextPtr             m_context           = { };
         PipelinePtr                  m_pipeline          = nullptr;
         const MeshType               m_type              = MeshType::Unknown;
@@ -126,7 +128,7 @@ namespace SR_GTYPES_NS {
         std::atomic<bool>            m_dirtyMaterial     = false;
 
         /// определяет порядок меша в файле, если их там несколько
-        uint32_t                     m_meshId            = SR_UINT32_MAX;
+        int32_t                      m_meshId            = SR_UINT32_MAX;
         int32_t                      m_virtualUBO        = SR_ID_INVALID;
 
     };

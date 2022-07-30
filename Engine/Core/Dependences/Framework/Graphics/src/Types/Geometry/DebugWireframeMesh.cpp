@@ -6,10 +6,17 @@
 #include <Utils/Types/RawMesh.h>
 
 namespace SR_GTYPES_NS {
+    DebugWireframeMesh::DebugWireframeMesh()
+        : IndexedMesh(MeshType::Wireframe)
+    {
+        /// override component
+        Component::InitComponent<DebugWireframeMesh>();
+    }
+
     SR_UTILS_NS::IResource* DebugWireframeMesh::Copy(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
-        auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh(m_geometryName));
+        auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh());
         wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::Copy(wireFramed));
 
         if (wireFramed->IsCalculated()) {

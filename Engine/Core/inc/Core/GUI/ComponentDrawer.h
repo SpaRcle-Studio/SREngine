@@ -12,7 +12,9 @@ namespace SR_SCRIPTING_NS {
 }
 
 namespace SR_GRAPH_NS {
-
+    namespace UI {
+        class Sprite2D;
+    }
 
     namespace Types {
         class Camera;
@@ -29,8 +31,9 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
-
     void DrawComponent(SR_GRAPH_NS::Types::Material*& material, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::UI::Sprite2D*& sprite, EditorGUI* context, int32_t index);
+
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
 }
 

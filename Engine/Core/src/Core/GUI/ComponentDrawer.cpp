@@ -116,23 +116,68 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, EditorGUI* context, int32_t index) {
-        Graphics::GUI::DrawValue("Mesh", mesh3d->GetResourceId());
-        Graphics::GUI::DrawValue("Id", mesh3d->GetMeshId());
-        Graphics::GUI::DrawValue("Geometry name", mesh3d->GetGeometryName());
-        Graphics::GUI::DrawValue("Vertices count", mesh3d->GetVerticesCount());
-        Graphics::GUI::DrawValue("Indices count", mesh3d->GetIndicesCount());
+        if (!mesh3d->IsCanCalculate())
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
-        //if (!mesh3d->IsRegistered())
-        //    ImGui::TextColored(ImVec4(1, 0, 0, 1), "WARN: Mesh is not registered!");
+        if (!mesh3d->IsCalculated())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        auto&& pMaterial = mesh3d->GetMaterial();
+
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
+            if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend" } });
+
+                if (path.Exists()) {
+                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {
+                        if (pMaterial) {
+                            pMesh->SetMaterial(pMaterial);
+                        }
+
+                        mesh3d = dynamic_cast<SR_GTYPES_NS::Mesh3D *>(pMesh);
+
+                        return;
+                    }
+                }
+            }
+        }
+
+        ImGui::SameLine();
+        ImGui::BeginGroup();
+
+        Graphics::GUI::DrawValue("Path", mesh3d->GetResourcePath(), index);
+        Graphics::GUI::DrawValue("Name", mesh3d->GetGeometryName(), index);
+
+        int32_t meshId = mesh3d->GetMeshId();
+        if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+            auto&& path = mesh3d->GetResourcePath();
+
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, meshId)) {
+                if (pMaterial) {
+                    pMesh->SetMaterial(pMaterial);
+                }
+
+                mesh3d = dynamic_cast<SR_GTYPES_NS::Mesh3D *>(pMesh);
+
+                ImGui::EndGroup();
+
+                return;
+            }
+        }
+
+        ImGui::EndGroup();
+
+        Graphics::GUI::DrawValue("Vertices count", mesh3d->GetVerticesCount(), index);
+        Graphics::GUI::DrawValue("Indices count", mesh3d->GetIndicesCount(), index);
 
         ImGui::Separator();
 
-        auto&& material = mesh3d->GetMaterial();
-        SR_GTYPES_NS::Material* copy = material;
+        SR_GTYPES_NS::Material* copy = pMaterial;
         DrawComponent(copy, context, index);
 
         /// компилятор считает, что это недостижимый код (он ошибается)
-        if (copy != material) {
+        if (copy != pMaterial) {
             mesh3d->SetMaterial(copy);
         }
     }
@@ -145,8 +190,8 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
                 if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
-                    auto&& materialsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(materialsPath, { { "Material", "mat" } });
+                    auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
 
                     if (path.Exists()) {
                         if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(path)) {
@@ -160,7 +205,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
             ImGui::BeginGroup();
 
-            Graphics::GUI::DrawValue("Material", material->GetResourceId());
+            Graphics::GUI::DrawValue("Material", material->GetResourceId(), index);
 
             if (auto &&shader = material->GetShader()) {
                 //Graphics::GUI::DrawValue("Shader", shader->GetName());
@@ -177,7 +222,7 @@ namespace SR_CORE_NS::GUI {
             std::visit([&property, &material, index, context](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
                 if (std::holds_alternative<int32_t>(arg)) {
                     auto&& value = std::get<int32_t>(arg);
-                    if (ImGui::InputInt(property.displayName.c_str(), &value)) {
+                    if (ImGui::InputInt(SR_FORMAT_C("%i##%s", property.displayName.c_str(), index), &value)) {
                         property.data = value;
                     }
                 }
@@ -189,7 +234,7 @@ namespace SR_CORE_NS::GUI {
                 }
                 else if (std::holds_alternative<SR_MATH_NS::FVector3>(arg)) {
                     auto&& value = std::get<SR_MATH_NS::FVector3>(arg);
-                    if (Graphics::GUI::DrawVec3Control(property.displayName, value, 0.f, 70.f, 0.01f)) {
+                    if (Graphics::GUI::DrawVec3Control(property.displayName, value, 0.f, 70.f, 0.01f, index)) {
                         property.data = value;
                     }
                 }
@@ -254,5 +299,9 @@ namespace SR_CORE_NS::GUI {
                 }
             }, property.data);
         }
+    }
+
+    void ComponentDrawer::DrawComponent(Graphics::UI::Sprite2D *&sprite, EditorGUI *context, int32_t index) {
+
     }
 }

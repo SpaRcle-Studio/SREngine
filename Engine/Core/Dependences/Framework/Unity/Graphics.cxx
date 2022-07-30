@@ -53,6 +53,8 @@
 #include "../Graphics/src/Font/FontLoader.cpp"
 #include "../Graphics/src/Font/Text.cpp"
 
+#include "../Graphics/src/UI/Sprite2D.cpp"
+
 #include "../Graphics/src/Render/RenderScene.cpp"
 #include "../Graphics/src/Render/ColorBuffer.cpp"
 #include "../Graphics/src/Render/RenderTechnique.cpp"

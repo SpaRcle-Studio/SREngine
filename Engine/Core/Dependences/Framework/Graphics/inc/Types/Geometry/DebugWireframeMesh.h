@@ -15,19 +15,13 @@ namespace Framework::Graphics::Memory {
 
 namespace SR_GTYPES_NS {
     class DebugWireframeMesh final : public IndexedMesh {
-        friend class Memory::MeshAllocator;
     public:
         typedef Vertices::SimpleVertex VertexType;
 
-    private:
-        explicit DebugWireframeMesh(const std::string& name = "Unnamed")
-            : IndexedMesh(MeshType::Wireframe, name)
-        {
-            /// override component
-            Component::InitComponent<DebugWireframeMesh>();
-        }
+    public:
+        DebugWireframeMesh();
 
-    protected:
+    private:
         ~DebugWireframeMesh() override = default;
 
     public:

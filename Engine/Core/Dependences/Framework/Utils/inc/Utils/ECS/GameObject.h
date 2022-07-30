@@ -76,6 +76,7 @@ namespace SR_UTILS_NS {
         std::list<Component*> GetComponents() { return m_components; }
         bool AddComponent(Component* component);
         bool RemoveComponent(Component* component);
+        bool ReplaceComponent(Component* source, Component* destination);
         bool ContainsComponent(const std::string& name);
         void ForEachComponent(const std::function<bool(Component*)>& fun);
 

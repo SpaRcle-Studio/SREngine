@@ -13,8 +13,8 @@ namespace SR_GRAPH_NS::Types {
     protected:
         ~IndexedMesh() override = default;
 
-        explicit IndexedMesh(MeshType type, const std::string& name = "UnnamedIndexedMesh")
-            : Mesh(type, name)
+        explicit IndexedMesh(MeshType type)
+            : Mesh(type)
         { }
 
     public:
@@ -56,6 +56,10 @@ namespace SR_GRAPH_NS::Types {
             return m_VBO;
         }
         else {
+            if (!m_rawMesh) {
+                return SR_ID_INVALID;
+            }
+
             if (!m_isCalculated && !Calculate())
                 return SR_ID_INVALID;
 

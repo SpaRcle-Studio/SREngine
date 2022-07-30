@@ -41,6 +41,8 @@
 #include <Types/Mesh.h>
 #include <Types/Shader.h>
 #include <Types/Geometry/Mesh3D.h>
+#include <Types/Geometry/DebugWireframeMesh.h>
+#include <UI/Sprite2D.h>
 #include <Animations/Bone.h>
 #include <Memory/MeshAllocator.h>
 #include <GUI/NodeManager.h>
@@ -66,6 +68,7 @@ using namespace Framework::Helper::Types;
 using namespace Framework::Helper::World;
 
 using namespace Framework::Graphics;
+using namespace Framework::Graphics::UI;
 using namespace Framework::Graphics::Types;
 using namespace Framework::Graphics::Animations;
 
@@ -138,9 +141,9 @@ int main(int argc, char **argv) {
 
     // Register all components
     {
-        //Component::RegisterComponent("SkinnedMesh", []() -> Component* { return new SkinnedMesh();  });
-        ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return Memory::MeshAllocator::Allocate<Mesh3D>(); });
         //ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
+        ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return new Mesh3D(); });
+        ComponentManager::Instance().RegisterComponent<Sprite2D>([]() -> Sprite2D* { return new Sprite2D(); });
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
         ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });

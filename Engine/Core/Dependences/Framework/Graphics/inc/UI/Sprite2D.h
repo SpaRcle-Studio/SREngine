@@ -1,24 +1,20 @@
 //
-// Created by Nikita on 01.06.2021.
+// Created by Monika on 30.07.2022.
 //
 
-#ifndef GAMEENGINE_MESH3D_H
-#define GAMEENGINE_MESH3D_H
+#ifndef SRENGINE_SPRITE2D_H
+#define SRENGINE_SPRITE2D_H
 
 #include <Types/Geometry/IndexedMesh.h>
 
-namespace SR_GRAPH_NS::Memory {
-    class MeshAllocator;
-}
-
-namespace SR_GTYPES_NS {
-    class Mesh3D final : public IndexedMesh {
+namespace SR_GRAPH_NS::UI {
+    class Sprite2D final : public Types::IndexedMesh {
         SR_ENTITY_SET_VERSION(1000);
     public:
-        Mesh3D();
+        Sprite2D();
 
     private:
-        ~Mesh3D() override = default;
+        ~Sprite2D() override = default;
 
     public:
         typedef Vertices::StaticMeshVertex VertexType;
@@ -38,4 +34,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //GAMEENGINE_MESH3D_H
+#endif //SRENGINE_SPRITE2D_H

@@ -34,21 +34,6 @@ namespace SR_UTILS_NS {
         delete this;
     }
 
-    bool GameObject::AddComponent(Component* pComponent) {  // TODO: add security multi-threading
-        if (m_isDestroy) {
-            SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
-            return false;
-        }
-
-        m_components.push_back(pComponent);
-        pComponent->SetParent(this);
-        pComponent->OnAttached();
-
-        UpdateComponents();
-
-        return true;
-    }
-
     Component *Framework::Helper::GameObject::GetComponent(const std::string &name) {
         Component *find = nullptr;
 
@@ -337,6 +322,21 @@ namespace SR_UTILS_NS {
         }
     }
 
+    bool GameObject::AddComponent(Component* pComponent) {  // TODO: add security multi-threading
+        if (m_isDestroy) {
+            SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
+            return false;
+        }
+
+        m_components.push_back(pComponent);
+        pComponent->SetParent(this);
+        pComponent->OnAttached();
+
+        UpdateComponents();
+
+        return true;
+    }
+
     bool GameObject::RemoveComponent(Component *component) {
         for (auto it = m_components.begin(); it != m_components.end(); ++it) {
             if (*it == component) {
@@ -347,6 +347,31 @@ namespace SR_UTILS_NS {
         }
 
         SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+
+        return false;
+    }
+
+    bool GameObject::ReplaceComponent(Component *source, Component *destination) {
+        if (m_isDestroy) {
+            SR_ERROR("GameObject::ReplaceComponent() : this \"" + m_name + "\" game object is destroyed!");
+            return false;
+        }
+
+        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
+            if (*it == source) {
+                source->OnDestroy();
+                *it = destination;
+
+                destination->SetParent(this);
+                destination->OnAttached();
+
+                UpdateComponents();
+
+                return true;
+            }
+        }
+
+        SR_ERROR("GameObject::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
 
         return false;
     }

@@ -8,5 +8,6 @@
         <Pair First="EmptyFolder" Second="Editor/Textures/empty_folder.png"/>
         <Pair First="Script" Second="Editor/Textures/script.png"/>
         <Pair First="Reset" Second="Editor/Textures/reset.png"/>
+        <Pair First="Shapes" Second="Editor/Textures/shapes.png"/>
     </Icons>
 </Settings>

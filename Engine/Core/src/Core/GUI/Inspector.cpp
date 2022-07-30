@@ -7,6 +7,7 @@
 #include <GUI/Utils.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Scripting/Base/Behaviour.h>
+#include <UI/Sprite2D.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -78,13 +79,13 @@ namespace Framework::Core::GUI {
 
             copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
-            copyPtrComponent = DrawComponent<Graphics::Types::Mesh3D>(copyPtrComponent, "Mesh3D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
+            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
 
-                m_gameObject->RemoveComponent(component);
-                m_gameObject->AddComponent(copyPtrComponent);
+                m_gameObject->ReplaceComponent(component, copyPtrComponent);
 
                 return false;
             }

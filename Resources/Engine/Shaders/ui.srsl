@@ -1,0 +1,20 @@
+ShaderType UI;
+
+PolygonMode Fill;
+CullMode None; // TODO
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+uniform vec4 color;
+uniform sampler2D diffuse;
+
+void fragment() {
+	COLOR = texture(diffuse, UV) * color;
+}
+
+void vertex() {
+    VERTEX.x = -VERTEX.x;
+}
