@@ -19,6 +19,8 @@ namespace SR_CORE_NS::GUI {
         void SetFolder(const Helper::Path& path);
 
     private:
+        void DisplayFileContextMenu(const SR_UTILS_NS::Path &path);
+        void DisplayCurrentDirectoryContextMenu();
         void Draw() override;
         void Draw(const Helper::Path& root);
 

@@ -96,6 +96,74 @@ namespace SR_UTILS_NS::Platform {
             SR_ERROR("Platform::TextToClipboard() : failed to open clipboard!");
     }
 
+    class COleInitialize {
+    public:
+        COleInitialize() : m_hr(OleInitialize(NULL)) { }
+        ~COleInitialize() { if (SUCCEEDED(m_hr)) OleUninitialize(); }
+        operator HRESULT() const { return m_hr; }
+        HRESULT m_hr;
+    };
+
+    ///функция для копирования файла/файлов в буфер обмена
+    void CopyFilesToClipboard(std::list<SR_UTILS_NS::Path> paths) {
+
+        // calculate *bytes* needed for memory allocation
+        int clpSize = sizeof(DROPFILES);
+        for (auto &&path:paths)
+            clpSize += sizeof(TCHAR) * (_tcslen(path.ToString().c_str()) + 1); // + 1 => '\0'
+        clpSize += sizeof(TCHAR); // two \0 needed at the end
+
+        // allocate the zero initialized memory
+        HDROP hdrop   = (HDROP)GlobalAlloc(GHND, clpSize);
+        DROPFILES* df = (DROPFILES*)GlobalLock(hdrop);
+        df->pFiles    = sizeof(DROPFILES); // string offset
+#ifdef _UNICODE
+        df->fWide     = TRUE; // unicode file names
+#endif // _UNICODE
+
+        // copy paths to the allocated memory
+        TCHAR* dstStart = (TCHAR*)&df[1];
+        for (auto &&path:paths)
+        {
+            _tcscpy(dstStart, path.ToString().c_str());
+            dstStart = &dstStart[_tcslen(path.c_str()) + 1]; // + 1 => get beyond '\0'
+        }
+        GlobalUnlock(hdrop);
+
+        // prepare the clipboard
+        OpenClipboard(NULL);
+        EmptyClipboard();
+        SetClipboardData(CF_HDROP, hdrop);
+        CloseClipboard();
+    }
+
+    ///функция для получения файла/файлов из буфер обмена
+    void PasteFilesFromClipboard(const SR_UTILS_NS::Path &topath) {
+
+        if(!topath.IsDir()) {
+            return;
+        }
+
+        if (IsClipboardFormatAvailable(CF_HDROP)) { ///CF_HDROP - формат списка файлов
+            std::list<SR_UTILS_NS::Path> paths;
+
+            OpenClipboard(NULL);
+            HDROP hDrop = static_cast<HDROP>(GetClipboardData(CF_HDROP));
+            CloseClipboard();
+
+            const uint64_t size = 32768;
+            std::string buffer;
+            buffer.resize(size);
+            for (int i = 0; i < DragQueryFileA(hDrop,0xFFFFFFFF,NULL,NULL); i++) {
+                DragQueryFileA(hDrop,i,&buffer[0],size);
+                auto path = SR_UTILS_NS::Path(buffer);
+                Copy(path,topath.Concat(path.GetBaseNameAndExt()));
+            }
+        } else {
+            return;
+        }
+    }
+
     std::string GetClipboardText() {
         std::string text;
 

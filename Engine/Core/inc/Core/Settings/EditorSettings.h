@@ -8,6 +8,7 @@
 #include <Utils/Settings.h>
 
 namespace SR_CORE_NS {
+    ///Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml
     SR_ENUM_CLASS_T(EditorIcon, uint32_t,
           Unknown,
           Material,
@@ -17,6 +18,12 @@ namespace SR_CORE_NS {
           Script,
           Reset,
           Shapes,
+          ZIP,
+          JPG,
+          TXT,
+          XML,
+          PNG,
+          DLL
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {

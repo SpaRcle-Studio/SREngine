@@ -13,8 +13,8 @@
 
        <EditorOnStartup Value="true"/>
        <EditorWidgetsDocking Value="false"/>
-       <InputIgnoreNonFocusedWidgets Value="false"/>
-       <UpdateNonHoveredSceneViewer Value="true"/>
+       <InputIgnoreNonFocusedWidgets Value="true"/>
+       <UpdateNonHoveredSceneViewer Value="false"/>
 
        <AutoReloadResources Value="true"/>
 

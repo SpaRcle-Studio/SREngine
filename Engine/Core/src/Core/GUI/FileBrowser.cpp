@@ -21,6 +21,44 @@ namespace SR_CORE_NS::GUI {
         m_selectedDir = m_root;
     }
 
+    void FileBrowser::DisplayCurrentDirectoryContextMenu(){
+        if(ImGui::BeginPopupContextWindow()){
+            if (ImGui::Selectable("Paste")) {
+                SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
+            }
+            ImGui::EndPopup();
+        }
+    }
+
+    void FileBrowser::DisplayFileContextMenu(const SR_UTILS_NS::Path &path){
+        if (!ImGui::BeginPopupContextItem())
+            return;
+
+        if (ImGui::Selectable("Open")) {
+            SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+        }
+        if (ImGui::Selectable("Copy")) {
+            std::list<SR_UTILS_NS::Path> paths({path}); ///TODO: убрать, когда будет сделано выделение нескольких файлов и их передача в метод
+            SR_UTILS_NS::Platform::CopyFilesToClipboard(paths);
+        }
+        if (ImGui::Selectable("Cut")) {
+            ///SR_UTILS_NS::Platform::CopyFilesToClipboard(paths);
+            ///for (auto &&path:paths) {
+            /// SR_UTILS_NS::Platform::Delete(path);
+            ///}
+        }
+        if (ImGui::Selectable("Paste")) {
+            SR_UTILS_NS::Platform::PasteFilesFromClipboard(path);
+        }
+        if (ImGui::Selectable("Delete")) {
+            ///метод Delete является слишком опасным, поскольку проводит удаление рекурсивно
+            ///TODO: SR_UTILS_NS::Platform::Delete обезопасить от безвозвратного удаления файлов
+            ///SR_UTILS_NS::Platform::Delete(path);
+        }
+
+        ImGui::EndPopup();
+    }
+
     void FileBrowser::Draw(const SR_UTILS_NS::Path &root) {
         const ImGuiTreeNodeFlags WITH_CHILD = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         const ImGuiTreeNodeFlags SELECTED_WITH_CHILD = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_Selected;
@@ -143,12 +181,16 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::SameLine();
 
-        /////////////////////// right
+        // right top
+
+
+        /////////////////////// right bottom
 
         auto width = ImGui::GetWindowWidth();
 
         ImGui::BeginGroup();
         if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
+
             ImGui::Separator();
 
             if (ImGui::Button("Back")) {
@@ -158,6 +200,8 @@ namespace SR_CORE_NS::GUI {
             ImGui::Text("%s", m_selectedDir.CStr());
 
             ImGui::Separator();
+
+            DisplayCurrentDirectoryContextMenu();
 
             auto wndSize = ImGui::GetWindowSize();
 
@@ -176,12 +220,37 @@ namespace SR_CORE_NS::GUI {
                     if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
                         m_selectedDir = path;
                     }
+                    DisplayFileContextMenu(path);
                 }
                 else {
-                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    //void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    void* descriptor = nullptr;
+                    if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "zip") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::ZIP);
+                    }
+                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "jpg") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::JPG);
+                    }
+                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "txt") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::TXT);
+                    }
+                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "xml") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::XML);
+                    }
+                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "png") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::PNG);
+                    }
+                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "dll") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::DLL);
+                    }
+                    else {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    }
+
                     if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
                         SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
                     }
+                    DisplayFileContextMenu(path);
                 }
 
                 auto id = SR_UTILS_NS::StringUtils::CutName(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);

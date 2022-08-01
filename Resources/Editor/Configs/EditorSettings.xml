@@ -9,5 +9,11 @@
         <Pair First="Script" Second="Editor/Textures/script.png"/>
         <Pair First="Reset" Second="Editor/Textures/reset.png"/>
         <Pair First="Shapes" Second="Editor/Textures/shapes.png"/>
+        <Pair First="ZIP" Second="Editor/Textures/zip.png"/>
+        <Pair First="JPG" Second="Editor/Textures/jpg.png"/>
+        <Pair First="TXT" Second="Editor/Textures/txt.png"/>
+        <Pair First="XML" Second="Editor/Textures/xml.png"/>
+        <Pair First="PNG" Second="Editor/Textures/png.png"/>
+        <Pair First="DLL" Second="Editor/Textures/dll.png"/>
     </Icons>
 </Settings>
