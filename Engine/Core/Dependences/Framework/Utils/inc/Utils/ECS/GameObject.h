@@ -34,10 +34,12 @@ namespace SR_UTILS_NS {
     typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public Types::SafePtr<GameObject>, public Entity {
-        SR_ENTITY_SET_VERSION(1000);
+        SR_ENTITY_SET_VERSION(1001);
     private:
         friend class World::Scene;
         friend class Transform3D;
+        friend class Transform2D;
+        friend class Transform;
         friend class Component;
     public:
         typedef Types::SafePtr<GameObject> Ptr;
@@ -48,7 +50,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD Types::SafePtr<World::Scene> GetScene() const { return m_scene; }
-        SR_NODISCARD Transform3D* GetTransform() const { return m_transform; }
+        SR_NODISCARD Transform* GetTransform() const { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
         SR_NODISCARD std::string GetName() const;
         SR_NODISCARD bool HasTag() const;
@@ -62,6 +64,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
+        void OnWindowResized(const SR_MATH_NS::IVector2& size);
+
         Math::FVector3 GetBarycenter();
         Math::FVector3 GetHierarchyBarycenter();
 
@@ -74,6 +78,7 @@ namespace SR_UTILS_NS {
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
         std::list<Component*> GetComponents() { return m_components; }
+        std::list<Component*>& GetComponentsRef() { return m_components; }
         bool AddComponent(Component* component);
         bool RemoveComponent(Component* component);
         bool ReplaceComponent(Component* source, Component* destination);
@@ -83,7 +88,7 @@ namespace SR_UTILS_NS {
         bool Contains(const Types::SafePtr<GameObject>& child);
         void SetEnabled(bool value);
         void Destroy(GODestroyByBits by = GAMEOBJECT_DESTROY_BY_OTHER);
-        void SetTransform(Transform3D* transform3D);
+        void SetTransform(Transform* transform);
         void SetFlags(GameObjectFlagBits flags) { m_flags = flags; }
 
         bool MoveToTree(const GameObject::Ptr& destination);
@@ -97,6 +102,8 @@ namespace SR_UTILS_NS {
         }
 
     private:
+        void OnAttached();
+
         void UpdateComponents();
         void UpdateComponentsPosition();
         void UpdateComponentsRotation();
@@ -123,7 +130,7 @@ namespace SR_UTILS_NS {
 
 
         Types::SafePtr<World::Scene>        m_scene          = Types::SafePtr<World::Scene>();
-        Transform3D*                        m_transform      = nullptr;
+        Transform*                          m_transform      = nullptr;
 
         std::list<Component*>               m_components     = std::list<Component*>();
 

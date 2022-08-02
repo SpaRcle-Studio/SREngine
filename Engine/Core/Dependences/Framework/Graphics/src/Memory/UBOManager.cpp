@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS::Memory {
         auto&& shaderProgram = env->GetCurrentShaderId();
 
         if (shaderProgram == SR_ID_INVALID) {
-            SR_ERROR("UBOManager::AllocateUBO() : shader program do not set!");
+            SRHalt("UBOManager::AllocateUBO() : shader program do not set!");
             return SR_ID_INVALID;
         }
 

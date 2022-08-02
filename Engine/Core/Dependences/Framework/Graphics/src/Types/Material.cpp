@@ -7,6 +7,7 @@
 #include <Types/Mesh.h>
 #include <Types/Shader.h>
 #include <Types/Texture.h>
+#include <Render/RenderContext.h>
 
 namespace SR_GTYPES_NS {
     Material::Material()
@@ -105,10 +106,7 @@ namespace SR_GTYPES_NS {
             m_shader = nullptr;
         }
 
-        if ((m_shader = shader)) {
-            m_transparent = shader->IsBlendEnabled();
-        }
-        else {
+        if (!(m_shader = shader)) {
             return;
         }
 
@@ -330,5 +328,14 @@ namespace SR_GTYPES_NS {
 
     SR_UTILS_NS::Path Material::GetAssociatedPath() const {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+    }
+
+    bool Material::IsTransparent() const {
+        if (!m_shader) {
+            SRHalt("Shader is nullptr!");
+            return false;
+        }
+
+        return m_shader->IsBlendEnabled();
     }
 }

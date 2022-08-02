@@ -33,16 +33,19 @@ namespace SR_GTYPES_NS {
         void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
         void OnMove(const SR_MATH_NS::FVector3& newValue) override;
         void OnAttached() override;
+        void OnWindowResized(const SR_MATH_NS::IVector2& size) override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll };        }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat;                             }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat;                   }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat; }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
+        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetOrthogonalRef() const noexcept { return m_orthogonal; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewTranslateRef() const noexcept { return m_viewTranslateMat; }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat;           }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat; }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const noexcept { return m_projection;          }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize() const { return m_viewportSize;             }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetPosition() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                    }
         SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near;                                  }
@@ -56,14 +59,14 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
 
-        void UpdateProjection(uint32_t w, uint32_t h);
-        void UpdateProjection();
-
         void SetFar(float_t value);
         void SetNear(float_t value);
         void SetFOV(float_t value);
 
     private:
+        void UpdateProjection(uint32_t w, uint32_t h);
+        void UpdateProjection();
+
         void UpdateView() noexcept;
 
         void OnDestroy() override;
@@ -87,6 +90,7 @@ namespace SR_GTYPES_NS {
         glm::mat4	          m_projection        = glm::mat4(0);
         glm::mat4	          m_viewTranslateMat  = glm::mat4(0);
         glm::mat4	          m_viewMat           = glm::mat4(0);
+        glm::mat4	          m_orthogonal        = glm::mat4(0);
 
         SR_MATH_NS::FVector3  m_position          = { 0, 0, 0 };
         SR_MATH_NS::IVector2  m_viewportSize      = { 0, 0 };

@@ -8,6 +8,7 @@
 #include <Render/MeshCluster.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Math/Vector2.h>
 #include <Memory/IGraphicsResource.h>
 
 namespace SR_GTYPES_NS {
@@ -47,6 +48,8 @@ namespace SR_GRAPH_NS {
 
         void SetDirty();
 
+        void OnResize(const SR_MATH_NS::IVector2& size);
+
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
@@ -63,11 +66,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
+        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
 
     private:
         template<typename T> bool Update(std::list<T>& resourceList);
 
     private:
+        SR_MATH_NS::IVector2 m_windowSize;
+
         std::list<Types::Framebuffer*> m_framebuffers;
         std::list<Types::Shader*> m_shaders;
         std::list<TexturePtr> m_textures;

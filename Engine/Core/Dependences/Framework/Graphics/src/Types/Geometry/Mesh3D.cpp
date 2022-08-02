@@ -18,6 +18,10 @@ namespace SR_GTYPES_NS {
         Component::InitComponent<Mesh3D>();
     }
 
+    Mesh3D::~Mesh3D() {
+        SetRawMesh(nullptr);
+    }
+
     bool Mesh3D::Calculate()  {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
@@ -51,6 +55,9 @@ namespace SR_GTYPES_NS {
 
         auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D());
         mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
+
+        mesh3D->SetRawMesh(m_rawMesh);
+        mesh3D->m_meshId = m_meshId;
 
         if (mesh3D->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
@@ -144,7 +151,7 @@ namespace SR_GTYPES_NS {
 
         const auto &&material = marshal.Read<std::string>();
 
-        auto &&pMesh = Load(path, type, id);
+        auto &&pMesh = Mesh::Load(path, type, id);
 
         if (pMesh && material != "None") {
             if (auto&& pMaterial = Types::Material::Load(material)) {
@@ -155,5 +162,70 @@ namespace SR_GTYPES_NS {
         }
 
         return pMesh;
+    }
+
+    bool Mesh3D::Unload() {
+        SetRawMesh(nullptr);
+        return true;
+    }
+
+    bool Mesh3D::Load() {
+        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(GetResourcePath())) {
+            if (m_meshId >= pRawMesh->GetMeshesCount()) {
+                if (pRawMesh->GetCountUses() == 0) {
+                    SRHalt("Mesh3D::Load() : count uses is zero! Unresolved situation...");
+                    pRawMesh->Destroy();
+                }
+                return false;
+            }
+
+            m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
+            m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
+
+            SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
+            SetRawMesh(pRawMesh);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    void Mesh3D::SetRawMesh(SR_HTYPES_NS::RawMesh *pRaw) {
+        if (m_rawMesh) {
+            RemoveDependency(m_rawMesh);
+        }
+
+        if (pRaw) {
+            AddDependency(pRaw);
+        }
+
+        m_rawMesh = pRaw;
+    }
+
+    std::vector<uint32_t> Mesh3D::GetIndices() const {
+        return m_rawMesh->GetIndices(m_meshId);
+    }
+
+    bool Mesh3D::IsCanCalculate() const {
+        return m_rawMesh && m_meshId < m_rawMesh->GetMeshesCount() && Mesh::IsCanCalculate();
+    }
+
+    bool Mesh3D::Reload() {
+        SR_SHADER_LOG("Mesh3D::Reload() : reloading \"" + GetResourceId() + "\" mesh...");
+
+        m_loadState = LoadState::Reloading;
+
+        Unload();
+
+        if (!Load()) {
+            return false;
+        }
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+
+        return true;
     }
 }

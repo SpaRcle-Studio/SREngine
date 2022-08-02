@@ -11,6 +11,7 @@
 #include "../Utils/src/Utils/ECS/Transform.cpp"
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
+#include "../Utils/src/Utils/ECS/Transform2D.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"

@@ -15,7 +15,7 @@ namespace SR_GRAPH_NS {
         return GroupPass::Load(passNode);
     }
 
-    void SwapchainPass::Render() {
+    bool SwapchainPass::Render() {
         auto&& pipeline = GetContext()->GetPipeline();
 
         pipeline->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
@@ -34,6 +34,8 @@ namespace SR_GRAPH_NS {
             }
             pipeline->EndRender();
         }
+
+        return true;
     }
 
     void SwapchainPass::Update() {

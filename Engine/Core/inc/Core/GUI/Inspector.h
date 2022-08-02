@@ -13,6 +13,7 @@
 
 namespace SR_UTILS_NS {
     class Transform3D;
+    class Transform2D;
 }
 
 namespace SR_CORE_NS::GUI {
@@ -30,7 +31,9 @@ namespace SR_CORE_NS::GUI {
     protected:
         void Draw() override;
         void DrawComponents();
-        void DrawTransform(SR_UTILS_NS::Transform3D* transform) const;
+        void DrawSwitchTransform();
+        void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
+        void DrawTransform3D(SR_UTILS_NS::Transform3D* transform) const;
 
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);

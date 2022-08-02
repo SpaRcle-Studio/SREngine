@@ -31,10 +31,15 @@ namespace SR_HTYPES_NS {
 
 namespace SR_UTILS_NS {
     class Component;
+    class Transform2D;
+    class Transform3D;
+    class Transform;
     class GameObject;
 
     class SR_DLL_EXPORT Component : public Entity {
         friend class GameObject;
+    public:
+        using GameObjectPtr = SR_HTYPES_NS::SafePtr<GameObject>;
     public:
         ~Component() override = default;
 
@@ -43,6 +48,9 @@ namespace SR_UTILS_NS {
         virtual void OnMove(const Math::FVector3& newValue) { }
         virtual void OnScaled(const Math::FVector3& newValue) { }
         virtual void OnSkewed(const Math::FVector3& newValue) { }
+
+        virtual void OnGameObjectAttached() { }
+        virtual void OnWindowResized(const SR_MATH_NS::IVector2& size) { }
 
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { }
@@ -57,7 +65,6 @@ namespace SR_UTILS_NS {
         virtual void Update() { }
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
-        virtual void OnGUI() { }
 
     public:
         void SetEnabled(bool value);
@@ -75,6 +82,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
         SR_NODISCARD SR_INLINE GameObject* GetParent() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
+        SR_NODISCARD GameObjectPtr GetRoot() const;
+        SR_NODISCARD Transform* GetTransform() const;
 
     protected:
         template<typename T> void InitComponent() {

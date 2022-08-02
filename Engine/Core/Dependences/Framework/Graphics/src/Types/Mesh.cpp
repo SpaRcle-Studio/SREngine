@@ -10,6 +10,7 @@
 #include <Types/Geometry/Mesh3D.h>
 #include <Types/Geometry/DebugWireframeMesh.h>
 #include <UI/Sprite2D.h>
+#include <Render/RenderContext.h>
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type)
@@ -22,7 +23,6 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Mesh::~Mesh() {
-        SetRawMesh(nullptr);
         SetMaterial(nullptr);
     }
 
@@ -54,58 +54,62 @@ namespace SR_GRAPH_NS::Types {
 
         const auto &resourceId = SR_UTILS_NS::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, path.c_str());
 
-        Mesh *mesh = nullptr;
+        Mesh *pMesh = nullptr;
 
-        if (Mesh *pMesh = SR_UTILS_NS::ResourceManager::Instance().Find<Mesh>(resourceId)) {
-            SRVerifyFalse(!(mesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
-            return mesh;
+        if ((pMesh = SR_UTILS_NS::ResourceManager::Instance().Find<Mesh>(resourceId))) {
+            SRVerifyFalse(!(pMesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
+            return pMesh;
         }
 
-        auto&& pRaw = SR_HTYPES_NS::RawMesh::Load(path);
-
-        if (!pRaw) {
-            return nullptr;
-        }
-
-        if (id >= pRaw->GetMeshesCount()) {
-            if (pRaw->GetCountUses() == 0) {
-                SRHalt("Mesh::TryLoad() : count uses is zero! Unresolved situation...\n\tPath: " + path.ToString() + "\n\tId: " + SR_UTILS_NS::ToString(id));
-                pRaw->Destroy();
+        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
+            if (id >= pRawMesh->GetMeshesCount()) {
+                if (pRawMesh->GetCountUses() == 0) {
+                    SRHalt("Mesh::TryLoad() : count uses is zero! Unresolved situation...");
+                    pRawMesh->Destroy();
+                }
+                return nullptr;
             }
+        }
+        else {
             return nullptr;
         }
 
         switch (type) {
-            case MeshType::Static:
-                mesh = new Types::Mesh3D();
+            case MeshType::Static: {
+                auto&& pMesh3D = new Types::Mesh3D();
+                pMesh3D->m_meshId = id;
+                pMesh = pMesh3D;
                 break;
-            case MeshType::Wireframe:
-                mesh = new Types::DebugWireframeMesh();
+            }
+            case MeshType::Wireframe: {
+                auto &&pWireframe = new Types::DebugWireframeMesh();
+                pWireframe->m_meshId = id;
+                pMesh = pWireframe;
                 break;
+            }
             case MeshType::Sprite2D:
-                mesh = new UI::Sprite2D();
+                pMesh = new UI::Sprite2D();
                 break;
             case MeshType::Unknown:
             case MeshType::Skinned:
             default:
                 SRAssert(false);
-                return mesh;
+                return pMesh;
         }
 
-        if (mesh) {
-            /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
-            /// и другой поток может его подхватить
-            mesh->m_meshId = id;
+        if (pMesh) {
+            pMesh->SetId(resourceId, false /** auto register */);
 
-            mesh->SetRawMesh(pRaw);
-            mesh->SetGeometryName(pRaw->GetGeometryName(id));
+            if (!pMesh->Reload()) {
+                delete pMesh;
+                return nullptr;
+            }
 
-            mesh->SetId(resourceId);
+            /// отложенная ручная регистрация
+            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMesh);
         }
 
-        SRAssert(mesh);
-
-        return mesh;
+        return pMesh;
     }
 
     std::vector<Mesh*> Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type) {
@@ -147,7 +151,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Mesh::IsCanCalculate() const {
-        return m_rawMesh && static_cast<uint32_t>(m_meshId) < m_rawMesh->GetMeshesCount();
+        return true;
     }
 
     SR_MATH_NS::FVector3 Mesh::GetBarycenter() const {
@@ -173,10 +177,7 @@ namespace SR_GRAPH_NS::Types {
             SR_LOG("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
         }
 
-        mesh->m_meshId = m_meshId;
-
         mesh->SetMaterial(m_material);
-        mesh->SetRawMesh(m_rawMesh);
 
         mesh->m_geometryName = m_geometryName;
         mesh->m_barycenter = m_barycenter;
@@ -269,23 +270,6 @@ namespace SR_GRAPH_NS::Types {
         return SR_UTILS_NS::StringUtils::Substring(GetResourceId(), '|', 1);
     }
 
-    void Mesh::SetRawMesh(SR_HTYPES_NS::RawMesh *pRaw) {
-        if (m_rawMesh && pRaw) {
-            SRAssert(false);
-            return;
-        }
-
-        if (m_rawMesh) {
-            RemoveDependency(m_rawMesh);
-        }
-
-        if (pRaw) {
-            AddDependency(pRaw);
-        }
-
-        m_rawMesh = pRaw;
-    }
-
     Shader *Mesh::GetShader() const {
         return m_material ? m_material->GetShader() : nullptr;
     }
@@ -334,6 +318,10 @@ namespace SR_GRAPH_NS::Types {
     void Mesh::SetInverse(bool value) {
         m_inverse = value;
         ReCalcModel();
+    }
+
+    SR_MATH_NS::Unit Mesh::Distance(const Helper::Math::FVector3 &pos) const {
+        return m_position.Distance(pos);
     }
 }
 

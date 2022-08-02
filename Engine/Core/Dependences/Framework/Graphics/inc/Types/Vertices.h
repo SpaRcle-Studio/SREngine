@@ -86,13 +86,13 @@ namespace SR_GRAPH_NS::Vertices {
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(StaticMeshVertex, pos)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(StaticMeshVertex, uv)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(UIVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(UIVertex, uv)));
 
             return descriptions;
         }
 
-        bool operator==(const StaticMeshVertex& other) const {
+        bool operator==(const UIVertex& other) const {
             return pos       == other.pos
                    && uv     == other.uv;
         }
@@ -218,7 +218,7 @@ namespace SR_GRAPH_NS::Vertices {
             for (const auto& vertex : raw) {
                 vertices.emplace_back(Vertices::UIVertex{
                         .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
-                        .uv     = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
+                        .uv  = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
                 });
             }
         }

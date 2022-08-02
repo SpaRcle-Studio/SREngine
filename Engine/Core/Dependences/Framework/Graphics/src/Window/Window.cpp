@@ -47,12 +47,6 @@ namespace SR_GRAPH_NS {
 
         SR_INFO("Window::Create() : creating the window...");
 
-       // if (!m_render->Create(this)) {
-       //     SR_ERROR("Window::Create() : failed to create render!");
-       //     m_hasErrors = true;
-       //     return false;
-       // }
-
         m_context = new RenderContext();
 
         Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
@@ -67,10 +61,15 @@ namespace SR_GRAPH_NS {
                     break;
                 }
                 case Environment::WinEvents::Resize: {
-                    auto&& [width, height] = std::pair<int, int> {*(int *) arg1, *(int *) arg2};
-                    if (width > 0 && height > 0) {
-                        Memory::CameraManager::Instance().OnWindowResized(this, width, height);
-                    }
+                    m_context.Do([&](RenderContext* ptr) {
+                        auto&& [width, height] = std::pair<int, int>{*(int *) arg1, *(int *) arg2};
+                        if (width > 0 && height > 0) {
+                            ptr->OnResize(SR_MATH_NS::IVector2(width, height));
+                            if (m_resizeCallback) {
+                                m_resizeCallback(SR_MATH_NS::IVector2(width, height));
+                            }
+                        }
+                    });
                     break;
                 }
                 case Environment::WinEvents::Scroll:
@@ -737,5 +736,9 @@ namespace SR_GRAPH_NS {
 
     void Window::SetDrawCallback(const Window::DrawCallback &drawCallback) {
         m_drawCallback = drawCallback;
+    }
+
+    void Window::SetResizeCallback(const Window::ResizeCallback &resizeCallback) {
+        m_resizeCallback = resizeCallback;
     }
 }

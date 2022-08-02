@@ -4,6 +4,7 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Types/Thread.h>
 
@@ -84,6 +85,23 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD
 
         return m_parent;
+    }
+
+    Component::GameObjectPtr Component::GetRoot() const {
+        GameObjectPtr root = m_parent ? m_parent->GetThis() : GameObjectPtr();
+
+        if (root.RecursiveLockIfValid()) {
+            if (auto&& parent = root->GetParent()) {
+                root = parent;
+            }
+            root.Unlock();
+        }
+
+        return root;
+    }
+
+    Transform *Component::GetTransform() const {
+        return m_parent ? m_parent->GetTransform() : nullptr;
     }
 }
 

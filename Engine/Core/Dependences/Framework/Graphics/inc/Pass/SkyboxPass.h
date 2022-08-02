@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS {
 
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
-        void Render() override;
+        bool Render() override;
         void Update() override;
         bool Init() override;
 

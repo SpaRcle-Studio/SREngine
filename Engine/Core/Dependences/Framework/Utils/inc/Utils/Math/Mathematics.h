@@ -90,6 +90,10 @@ namespace SR_MATH_NS {
 
     const Unit UnitMAX = DoubleMAX;
 
+    static SR_FORCE_INLINE double_t SR_FASTCALL FastSqrt(double_t value) {
+        return std::sqrt(value);
+    }
+
     static SR_FORCE_INLINE bool is_equal_approx(Unit a, Unit b) noexcept {
         // Check for exact equality first, required to handle "infinity" values.
         if (a == b) {

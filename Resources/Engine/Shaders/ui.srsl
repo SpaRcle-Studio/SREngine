@@ -1,10 +1,10 @@
-ShaderType UI;
+ShaderType Canvas;
 
 PolygonMode Fill;
-CullMode None; // TODO
+CullMode None;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled false;
+BlendEnabled true;
 DepthWrite true;
 DepthTest true;
 
@@ -13,6 +13,10 @@ uniform sampler2D diffuse;
 
 void fragment() {
 	COLOR = texture(diffuse, UV) * color;
+
+    if (COLOR.a == 0) {
+        discard;
+    }
 }
 
 void vertex() {

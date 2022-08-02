@@ -37,9 +37,16 @@ namespace SR_GRAPH_NS::Types {
             m_hasErrors = true;
             return false;
         }
-        else if (m_context.LockIfValid()) {
+        else if (!m_isRegistered && m_context.LockIfValid()) {
             m_context->Register(this);
             m_context.Unlock();
+            m_isRegistered = true;
+        }
+
+        if (!m_shaderCreateInfo.Validate()) {
+            SR_ERROR("Shader::Init() : failed to validate shader!\n\tPath: " + GetResourcePath().ToString());
+            m_hasErrors = true;
+            return false;
         }
 
         m_shaderProgram = Memory::ShaderProgramManager::Instance().ReAllocate(m_shaderProgram, m_shaderCreateInfo);
@@ -88,14 +95,11 @@ namespace SR_GRAPH_NS::Types {
 
     void Shader::FreeVideoMemory() {
         if (m_isInit) {
-            SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader class pointer and free video memory...");
+            SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader free video memory...");
 
             if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
                 SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + m_shaderCreateInfo.path.ToString());
             }
-        }
-        else {
-            SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader class pointer...");
         }
     }
 
@@ -335,13 +339,25 @@ namespace SR_GRAPH_NS::Types {
 
                 break;
             }
-            case SRSL::ShaderType::TransparentSpatial:
             case SRSL::ShaderType::Animation:
-            case SRSL::ShaderType::Canvas:
+                break;
+            case SRSL::ShaderType::Canvas: {
+                UBOInfo uniforms = { };
+                for (const auto&[binding, size] : unit->GetUniformSizes()) {
+                    uniforms.emplace_back(std::pair(binding, size));
+                }
+                m_shaderCreateInfo.uniforms = std::move(uniforms);
+
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::UIVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(description);
+                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+
+                break;
+            }
             case SRSL::ShaderType::Particles:
             case SRSL::ShaderType::Unknown:
             default:
-                SRAssert(false);
+                SRHalt("Shader::Load() : unknown shader type!");
                 break;
         }
 

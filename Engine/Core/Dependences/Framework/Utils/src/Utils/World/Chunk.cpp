@@ -100,8 +100,15 @@ namespace SR_WORLD_NS {
 
             const uint64_t count = marshal.Read<uint64_t>();
             for (uint64_t i = 0; i < count; ++i) {
-                if (auto &&ptr = m_observer->m_scene->Instance(marshal))
-                    ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+                if (auto &&ptr = m_observer->m_scene->Instance(marshal)) {
+                    auto&& pTransform = ptr->GetTransform();
+
+                    if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
+                        continue;
+                    }
+
+                    pTransform->GlobalTranslate(GetWorldPosition());
+                }
             }
         }
 

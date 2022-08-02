@@ -46,6 +46,7 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
     protected:
+        bool Reload() override;
         bool Unload() override;
         bool Load() override;
 

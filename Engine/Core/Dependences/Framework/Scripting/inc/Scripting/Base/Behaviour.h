@@ -11,12 +11,14 @@
 namespace SR_UTILS_NS {
     class GameObject;
     class Transform3D;
+    class Transform2D;
+    class Transform;
 }
 
 namespace SR_SCRIPTING_NS {
     class Behaviour : public SR_UTILS_NS::IResource, public SR_UTILS_NS::Component {
         using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
-        using TransformPtr = SR_UTILS_NS::Transform3D*;
+        using TransformPtr = SR_UTILS_NS::Transform*;
         using Properties = std::vector<std::string>;
         SR_INLINE_STATIC SR_CONSTEXPR const char* EMPTY_ID = "EmptyBehaviour";
         SR_ENTITY_SET_VERSION(1002);
@@ -31,7 +33,6 @@ namespace SR_SCRIPTING_NS {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD GameObjectPtr GetGameObject() const;
-        SR_NODISCARD TransformPtr GetTransform() const;
         SR_NODISCARD bool IsEmpty() const;
 
     public:

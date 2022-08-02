@@ -31,6 +31,10 @@
 #include <Audio/RawSound.h>
 #include <Audio/SoundManager.h>
 
+#include <UI/Canvas.h>
+#include <UI/Anchor.h>
+#include <UI/Sprite2D.h>
+
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/PhysicsScene.h>
 #include <Utils/Types/RawMesh.h>
@@ -42,7 +46,6 @@
 #include <Types/Shader.h>
 #include <Types/Geometry/Mesh3D.h>
 #include <Types/Geometry/DebugWireframeMesh.h>
-#include <UI/Sprite2D.h>
 #include <Animations/Bone.h>
 #include <Memory/MeshAllocator.h>
 #include <GUI/NodeManager.h>
@@ -147,6 +150,8 @@ int main(int argc, char **argv) {
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });
         ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
         ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
+        ComponentManager::Instance().RegisterComponent<Canvas>([]() -> Canvas* { return new Canvas(); });
+        ComponentManager::Instance().RegisterComponent<Anchor>([]() -> Anchor* { return new Anchor(); });
 
         if (SR_UTILS_NS::Features::Instance().Enabled("DebugChunks", false))
             Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });

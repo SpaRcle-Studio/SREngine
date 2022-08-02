@@ -45,28 +45,39 @@ namespace SR_GRAPH_NS {
         BasePass::DeInit();
     }
 
-    void GroupPass::PreRender() {
+    void GroupPass::Prepare() {
         for (auto&& pPass : m_passes) {
-            pPass->PreRender();
+            pPass->Prepare();
         }
 
-        BasePass::PreRender();
+        BasePass::Prepare();
     }
 
-    void GroupPass::Render() {
+    bool GroupPass::PreRender() {
+        bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
-            pPass->Render();
+            hasDrawData |= pPass->PreRender();
         }
 
-        BasePass::Render();
+        return hasDrawData;
     }
 
-    void GroupPass::PostRender() {
+    bool GroupPass::Render() {
+        bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
-            pPass->PostRender();
+            hasDrawData |= pPass->Render();
         }
 
-        BasePass::PostRender();
+        return hasDrawData;
+    }
+
+    bool GroupPass::PostRender() {
+        bool hasDrawData = false;
+        for (auto&& pPass : m_passes) {
+            hasDrawData |= pPass->PostRender();
+        }
+
+        return hasDrawData;
     }
 
     void GroupPass::Update() {
@@ -77,12 +88,13 @@ namespace SR_GRAPH_NS {
         BasePass::Update();
     }
 
-    void GroupPass::Overlay() {
+    bool GroupPass::Overlay() {
+        bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
-            pPass->Overlay();
+            hasDrawData |= pPass->Overlay();
         }
 
-        BasePass::Overlay();
+        return hasDrawData;
     }
 
     void GroupPass::OnResize(const SR_MATH_NS::IVector2 &size) {
@@ -91,5 +103,21 @@ namespace SR_GRAPH_NS {
         }
 
         BasePass::OnResize(size);
+    }
+
+    void GroupPass::OnMeshAdded(SR_GTYPES_NS::Mesh *pMesh, bool transparent) {
+        for (auto&& pPass : m_passes) {
+            pPass->OnMeshAdded(pMesh, transparent);
+        }
+
+        BasePass::OnMeshAdded(pMesh, transparent);
+    }
+
+    void GroupPass::OnMeshRemoved(SR_GTYPES_NS::Mesh *pMesh, bool transparent) {
+        for (auto&& pPass : m_passes) {
+            pPass->OnMeshRemoved(pMesh, transparent);
+        }
+
+        BasePass::OnMeshRemoved(pMesh, transparent);
     }
 }

@@ -29,9 +29,9 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::Calculate() {
-        auto&& indices = m_rawMesh->GetIndices(m_meshId);
-
         if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
+            auto&& indices = GetIndices();
+
             SRAssert(indices.size() == m_countIndices);
 
             if (m_countIndices == 0 || indices.empty()) {
@@ -63,11 +63,5 @@ namespace SR_GTYPES_NS {
         }
 
         Mesh::FreeVideoMemory();
-    }
-
-    void IndexedMesh::SetRawMesh(Helper::Types::RawMesh *raw)  {
-        m_countIndices = raw->GetIndicesCount(m_meshId);
-        m_countVertices = raw->GetVerticesCount(m_meshId);
-        Mesh::SetRawMesh(raw);
     }
 }

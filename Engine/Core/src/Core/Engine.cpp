@@ -38,7 +38,13 @@ namespace Framework {
 
         SR_INFO("Engine::Create() : creating game engine...");
 
-        m_window->SetDrawCallback([this]() { DrawCallback(); });
+        m_window->SetDrawCallback([this]() {
+            DrawCallback();
+        });
+
+        m_window->SetResizeCallback([this](const SR_MATH_NS::IVector2& size) {
+            ResizeCallback(size);
+        });
 
         if (!m_window->Create()) {
             SR_ERROR("Engine::Create() : failed to create window!");
@@ -146,14 +152,9 @@ namespace Framework {
         float accumulator = updateFrequency;
         using clock = std::chrono::high_resolution_clock;
         auto timeStart = clock::now();
-        const bool needUpdateScripts = SR_UTILS_NS::Features::Instance().Enabled("UpdateScripts", true);
 
         while (m_isRun) {
             SR_HTYPES_NS::Thread::Sleep(1);
-
-            //SR_LOCK_GUARD
-
-            ///SR_GRAPH_NS::Memory::CameraManager::Instance().Update();
 
             const auto now = clock::now();
             const auto deltaTime = now - timeStart;
@@ -169,13 +170,7 @@ namespace Framework {
                     if (windowFocused) {
                         SR_UTILS_NS::Input::Instance().Check();
 
-                        const bool locked = false;// m_renderScene.LockIfValid();
-
                         m_input->Check();
-
-                        if (locked) {
-                            m_renderScene.Unlock();
-                        }
 
                         if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
                             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
@@ -387,5 +382,20 @@ namespace Framework {
         }
 
         SR_SYSTEM_LOG("Engine::WorldThread() : world thread completed!");
+    }
+
+    void Engine::ResizeCallback(const SR_MATH_NS::IVector2& size) {
+        if (!m_scene.LockIfValid()) {
+            return;
+        }
+
+        for (auto&& root : m_scene->GetRootGameObjects()) {
+            if (root.LockIfValid()) {
+                root->OnWindowResized(size);
+                root.Unlock();
+            }
+        }
+
+        m_scene.Unlock();
     }
 }

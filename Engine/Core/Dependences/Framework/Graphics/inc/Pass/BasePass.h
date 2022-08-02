@@ -12,6 +12,8 @@
 
 namespace SR_GTYPES_NS {
     class Camera;
+    class Mesh;
+    class Shader;
 }
 
 namespace SR_GRAPH_NS {
@@ -38,14 +40,26 @@ namespace SR_GRAPH_NS {
         virtual bool Init();
         virtual void DeInit();
 
-        virtual void PreRender() { }
-        virtual void Render() { }
-        virtual void PostRender() { }
+        /// Вызывается всегда и в самом начале
+        virtual bool Overlay() { return false; }
 
+        /// Вызывается всегда но полсе оверлея
+        virtual void Prepare() { }
+
+        /// Вызывается только во время построения
+        virtual bool PreRender() { return false; }
+        /// Вызывается только во время построения
+        virtual bool Render() { return false; }
+        /// Вызывается только во время построения
+        virtual bool PostRender() { return false; }
+
+        /// Вызывается постоянно после построения
         virtual void Update() { }
-        virtual void Overlay() { }
 
         virtual void OnResize(const SR_MATH_NS::IVector2& size) { }
+
+        virtual void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
+        virtual void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
 
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD Context GetContext() const { return m_context; }

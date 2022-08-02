@@ -11,10 +11,14 @@ namespace SR_GRAPH_NS {
         : BasePass(pTechnique)
     { }
 
-    void WidgetPass::Overlay() {
+    bool WidgetPass::Overlay() {
         auto&& pipeline = GetContext()->GetPipeline();
 
         auto&& widgetManagers = GetRenderScene()->GetWidgetManagers();
+
+        if (widgetManagers.empty()) {
+            return false;
+        }
 
         if (pipeline->BeginDrawGUI()) {
             /// Во время отрисовки виджета он может быть удален
@@ -27,8 +31,10 @@ namespace SR_GRAPH_NS {
             }
 
             pipeline->EndDrawGUI();
+
+            return true;
         }
 
-        BasePass::Overlay();
+        return false;
     }
 }

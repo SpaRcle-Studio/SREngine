@@ -90,6 +90,8 @@ namespace SR_GRAPH_NS::Types {
         std::atomic<bool>      m_hasErrors            = false;
         std::atomic<bool>      m_isInit               = false;
 
+        bool                   m_isRegistered         = false;
+
         SRShaderCreateInfo     m_shaderCreateInfo     = { };
 
         Memory::ShaderUBOBlock m_uniformBlock         = Memory::ShaderUBOBlock();

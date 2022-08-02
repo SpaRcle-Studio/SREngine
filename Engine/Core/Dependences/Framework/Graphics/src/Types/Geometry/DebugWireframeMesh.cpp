@@ -13,11 +13,18 @@ namespace SR_GTYPES_NS {
         Component::InitComponent<DebugWireframeMesh>();
     }
 
+    DebugWireframeMesh::~DebugWireframeMesh() {
+        SetRawMesh(nullptr);
+    }
+
     SR_UTILS_NS::IResource* DebugWireframeMesh::Copy(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh());
         wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::Copy(wireFramed));
+
+        wireFramed->SetRawMesh(m_rawMesh);
+        wireFramed->m_meshId = m_meshId;
 
         if (wireFramed->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
@@ -101,6 +108,45 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
+    bool DebugWireframeMesh::Unload() {
+        SetRawMesh(nullptr);
+        return Mesh::Unload();
+    }
+
+    void DebugWireframeMesh::SetRawMesh(SR_HTYPES_NS::RawMesh *pRaw) {
+        if (m_rawMesh) {
+            RemoveDependency(m_rawMesh);
+        }
+
+        if (pRaw) {
+            AddDependency(pRaw);
+        }
+
+        m_rawMesh = pRaw;
+    }
+
+    bool DebugWireframeMesh::Load() {
+        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(GetResourcePath())) {
+            if (m_meshId >= pRawMesh->GetMeshesCount()) {
+                if (pRawMesh->GetCountUses() == 0) {
+                    SRHalt("DebugWireframeMesh::Load() : count uses is zero! Unresolved situation...");
+                    pRawMesh->Destroy();
+                }
+                return false;
+            }
+
+            m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
+            m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
+
+            SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
+            SetRawMesh(pRawMesh);
+
+            return true;
+        }
+
+        return false;
+    }
+
     void DebugWireframeMesh::FreeVideoMemory() {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
@@ -113,5 +159,27 @@ namespace SR_GTYPES_NS {
         }
 
         IndexedMesh::FreeVideoMemory();
+    }
+
+    std::vector<uint32_t> DebugWireframeMesh::GetIndices() const {
+        return m_rawMesh->GetIndices(m_meshId);
+    }
+
+    bool DebugWireframeMesh::Reload() {
+        SR_SHADER_LOG("DebugWireframeMesh::Reload() : reloading \"" + GetResourceId() + "\" mesh...");
+
+        m_loadState = LoadState::Reloading;
+
+        Unload();
+
+        if (!Load()) {
+            return false;
+        }
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+
+        return true;
     }
 }

@@ -7,6 +7,7 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Render/MeshCluster.h>
+#include <Render/SortedMeshQueue.h>
 #include <Utils/Types/SafePointer.h>
 
 namespace SR_WORLD_NS {
@@ -45,6 +46,8 @@ namespace SR_GRAPH_NS {
         void Render();
         void Synchronize();
 
+        void OnResize(const SR_MATH_NS::IVector2& size);
+
         void SetDirty();
         void SetDirtyCameras();
 
@@ -68,14 +71,16 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MeshCluster& GetTransparent();
         SR_NODISCARD CameraPtr GetMainCamera() const;
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
+        SR_NODISCARD SR_MATH_NS::IVector2 GetSurfaceSize() const;
 
     private:
         void SortCameras();
         void RenderBlackScreen();
 
+        void Overlay();
+        void Prepare();
         void Build();
         void Update();
-        void Overlay();
         void Submit();
 
     private:
@@ -93,6 +98,8 @@ namespace SR_GRAPH_NS {
         OpaqueMeshCluster m_opaque;
         TransparentMeshCluster m_transparent;
 
+        SR_MATH_NS::IVector2 m_surfaceSize;
+
         bool m_dirtyCameras = true;
         bool m_dirty        = true;
         bool m_hasDrawData  = false;
@@ -100,5 +107,35 @@ namespace SR_GRAPH_NS {
 
     };
 }
+
+#define SR_RENDER_TECHNIQUES_CALL(FunctionName, ...)                        \
+    for (auto&& pCamera : m_offScreenCameras) {                             \
+        if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {      \
+            pRenderTechnique->FunctionName(##__VA_ARGS__);                  \
+        }                                                                   \
+    }                                                                       \
+    if (m_mainCamera) {                                                     \
+        if (auto&& pRenderTechnique = m_mainCamera->GetRenderTechnique()) { \
+            pRenderTechnique->FunctionName(##__VA_ARGS__);                  \
+        }                                                                   \
+    }                                                                       \
+    if (m_technique) {                                                      \
+        m_technique->FunctionName(##__VA_ARGS__);                           \
+    }                                                                       \
+
+#define SR_RENDER_TECHNIQUES_RETURN_CALL(FunctionName, ...)                 \
+    for (auto&& pCamera : m_offScreenCameras) {                             \
+        if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {      \
+            m_hasDrawData |= pRenderTechnique->FunctionName(##__VA_ARGS__); \
+        }                                                                   \
+    }                                                                       \
+    if (m_mainCamera) {                                                     \
+        if (auto&& pRenderTechnique = m_mainCamera->GetRenderTechnique()) { \
+            m_hasDrawData |= pRenderTechnique->FunctionName(##__VA_ARGS__); \
+        }                                                                   \
+    }                                                                       \
+    if (m_technique) {                                                      \
+        m_hasDrawData |= m_technique->FunctionName(##__VA_ARGS__);          \
+    }                                                                       \
 
 #endif //SRENGINE_RENDERSCENE_H

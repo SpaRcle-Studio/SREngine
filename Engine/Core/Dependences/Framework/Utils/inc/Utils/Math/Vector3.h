@@ -131,7 +131,7 @@ namespace SR_MATH_NS {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
         }
 
-        SR_NODISCARD T Distance(Vector3 point) const {
+        SR_NODISCARD T SR_FASTCALL Distance(const Vector3& point) const {
             return sqrt(
                     pow(point.x - x, 2) +
                     pow(point.y - y, 2) +
@@ -139,7 +139,7 @@ namespace SR_MATH_NS {
             );
         }
 
-        SR_NODISCARD Vector3 Direction(Vector3 point) const {
+        SR_NODISCARD Vector3 Direction(const Vector3& point) const {
             if (point == *this)
                 return Vector3();
             Vector3 heading = point - (*this);

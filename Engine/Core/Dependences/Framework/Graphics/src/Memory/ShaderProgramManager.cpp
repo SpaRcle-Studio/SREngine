@@ -78,6 +78,9 @@ namespace SR_GRAPH_NS::Memory {
         }
         virtualProgramInfo.m_data.clear();
 
+        /// обновляем данные
+        virtualProgramInfo.m_createInfo = createInfo;
+
         /// выделяем новую шейдерную программу
         auto&& framebufferId = static_cast<int32_t>(env->GetCurrentFBO());
         auto&& shaderProgram = env->AllocateShaderProgram(virtualProgramInfo.m_createInfo, framebufferId);

@@ -11,6 +11,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <GUI/Utils.h>
 #include <Types/Texture.h>
+#include <UI/Sprite2D.h>
 #include <Render/Render.h>
 #include <Types/Material.h>
 #include <Types/Camera.h>
@@ -18,6 +19,8 @@
 #include <Utils/FileSystem/FileDialog.h>
 #include <Core/Settings/EditorSettings.h>
 #include <Utils/Common/AnyVisitor.h>
+#include <UI/Anchor.h>
+#include <UI/Canvas.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
@@ -301,7 +304,31 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(Graphics::UI::Sprite2D *&sprite, EditorGUI *context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
 
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Canvas *&canvas, EditorGUI *context, int32_t index) {
+
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Sprite2D *&sprite, EditorGUI *context, int32_t index) {
+        if (!sprite->IsCanCalculate())
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
+
+        if (!sprite->IsCalculated())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        ImGui::Separator();
+
+        auto&& pMaterial = sprite->GetMaterial();
+
+        SR_GTYPES_NS::Material* copy = pMaterial;
+        DrawComponent(copy, context, index);
+
+        /// компилятор считает, что это недостижимый код (он ошибается)
+        if (copy != pMaterial) {
+            sprite->SetMaterial(copy);
+        }
     }
 }

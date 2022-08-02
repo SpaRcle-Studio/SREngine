@@ -19,14 +19,20 @@ namespace SR_GRAPH_NS {
         bool Init() override;
         void DeInit() override;
 
-        void PreRender() override;
-        void Render() override;
-        void PostRender() override;
+        bool Overlay() override;
+
+        void Prepare() override;
+
+        bool PreRender() override;
+        bool Render() override;
+        bool PostRender() override;
 
         void Update() override;
-        void Overlay() override;
 
         void OnResize(const SR_MATH_NS::IVector2& size) override;
+
+        void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
+        void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
 
     private:
         std::list<BasePass*> m_passes;

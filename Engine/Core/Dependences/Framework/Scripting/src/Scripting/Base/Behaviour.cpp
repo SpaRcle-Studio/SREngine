@@ -93,14 +93,6 @@ namespace SR_SCRIPTING_NS {
         return GameObjectPtr();
     }
 
-    Behaviour::TransformPtr Behaviour::GetTransform() const {
-        if (auto&& parent = GetParent()) {
-            return parent->GetTransform();
-        }
-
-        return nullptr;
-    }
-
     Behaviour *Behaviour::CreateEmpty() {
         auto&& pBehaviour = new Behaviour();
 

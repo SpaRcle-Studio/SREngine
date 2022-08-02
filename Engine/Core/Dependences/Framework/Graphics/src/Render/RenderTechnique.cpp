@@ -41,23 +41,37 @@ namespace SR_GRAPH_NS {
         return pRenderTechnique;
     }
 
-    void RenderTechnique::Render() {
+    bool RenderTechnique::Render() {
         if (m_dirty && !Build()) {
-            return;
+            return false;
         }
 
         m_uboManager.SetCurrentCamera(GetCamera());
 
+        bool hasDrawData = false;
+
         for (auto&& pass : m_passes) {
-            pass->PreRender();
+            hasDrawData |= pass->PreRender();
         }
 
         for (auto&& pass : m_passes) {
-            pass->Render();
+            hasDrawData |= pass->Render();
         }
 
         for (auto&& pass : m_passes) {
-            pass->PostRender();
+            hasDrawData |= pass->PostRender();
+        }
+
+        return hasDrawData;
+    }
+
+    void RenderTechnique::Prepare() {
+        if (m_dirty) {
+            return;
+        }
+
+        for (auto&& pass : m_passes) {
+            pass->Prepare();
         }
     }
 
@@ -73,16 +87,20 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    void RenderTechnique::Overlay() {
+    bool RenderTechnique::Overlay() {
         if (m_dirty) {
-            return;
+            return false;
         }
 
         m_uboManager.SetCurrentCamera(GetCamera());
 
+        bool hasDrawData = false;
+
         for (auto&& pass : m_passes) {
-            pass->Overlay();
+            hasDrawData |= pass->Overlay();
         }
+
+        return hasDrawData;
     }
 
     void RenderTechnique::OnResize(const SR_MATH_NS::IVector2 &size) {

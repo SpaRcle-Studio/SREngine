@@ -232,4 +232,24 @@ namespace SR_GRAPH_NS {
     RenderContext::TexturePtr RenderContext::GetNoneTexture() const {
         return m_noneTexture;
     }
+
+    void RenderContext::OnResize(const SR_MATH_NS::IVector2 &size) {
+        m_windowSize = size;
+
+        for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ++pIt) {
+            auto&&[pScene, pRenderScene] = *pIt;
+
+            if (!pScene.Valid()) {
+                continue;
+            }
+
+            pRenderScene.Do([&size](RenderScene *pRScene) {
+                pRScene->OnResize(size);
+            });
+        }
+    }
+
+    SR_MATH_NS::IVector2 RenderContext::GetWindowSize() const {
+        return m_windowSize;
+    }
 }

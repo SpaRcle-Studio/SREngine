@@ -10,6 +10,7 @@
 #include <Utils/Types/SafeGateArray.h>
 #include <Utils/Types/SafeGateArray.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Math/Vector2.h>
 
 namespace SR_GRAPH_NS::Types {
     class Camera;
@@ -27,6 +28,7 @@ namespace SR_GRAPH_NS {
     class Window : SR_UTILS_NS::NonCopyable {
         using DrawCallback = SR_HTYPES_NS::Function<void(void)>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
+        using ResizeCallback = SR_HTYPES_NS::Function<void(const SR_MATH_NS::IVector2&)>;
     public:
         Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size,
                 bool vsync, bool fullScreen, bool resizable, bool headerEnabled, uint8_t smoothSamples);
@@ -54,6 +56,7 @@ namespace SR_GRAPH_NS {
         void SetFullScreen(bool value);
         void SetGUIEnabled(bool value);
         void SetDrawCallback(const DrawCallback& drawCallback);
+        void SetResizeCallback(const ResizeCallback& resizeCallback);
 
     public:
         SR_NODISCARD SR_FORCE_INLINE bool IsRun() const { return m_isRun; }
@@ -62,7 +65,6 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
-        //SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { SRAssert(m_render); return m_render; }
         SR_NODISCARD SR_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD bool IsAlive() const;
 
@@ -102,6 +104,7 @@ namespace SR_GRAPH_NS {
         SR_HTYPES_NS::Thread::Ptr m_thread            = nullptr;
 
         DrawCallback          m_drawCallback          = { };
+        ResizeCallback        m_resizeCallback        = { };
 
         Environment*          m_env                   = nullptr;
 

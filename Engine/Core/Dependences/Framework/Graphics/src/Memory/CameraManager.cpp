@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS::Memory {
                 continue;
             }
 
-            camera->UpdateProjection(width, height);
+           // camera->UpdateProjection(width, height);
         }
     }
 

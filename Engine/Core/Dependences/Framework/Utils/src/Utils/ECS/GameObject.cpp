@@ -21,7 +21,7 @@ namespace SR_UTILS_NS {
         m_tag = std::move(tag);
         m_scene = scene;
 
-        m_transform = new Transform3D(this);
+        SetTransform(new Transform3D());
 
         UpdateEntityPath();
     }
@@ -79,9 +79,6 @@ namespace SR_UTILS_NS {
 
         for (auto&& component : m_components) {
             component->OnDestroy();
-            /// Зануляем родителя только после OnDestroy,
-            /// так как данные родителя еще могут пригодиться
-            component->SetParent(nullptr);
         }
         m_components.clear();
 
@@ -121,11 +118,11 @@ namespace SR_UTILS_NS {
 
     void GameObject::UpdateComponentsSkew() {
         for (Component *component : m_components)
-            component->OnSkewed(m_transform->m_skew);
+            component->OnSkewed(m_transform->GetSkew());
     }
 
     bool GameObject::AddChild(const Types::SafePtr<GameObject> &child) {
-        if (child == *this) {
+        if (child.Get() == this) {
             SRAssert2(false, "It is impossible to make a parent a child!");
             return false;
         }
@@ -148,6 +145,8 @@ namespace SR_UTILS_NS {
         m_children.insert(child);
 
         /* TODO: Update child transforms with parent */
+
+        child->OnAttached();
 
         m_scene->OnChanged();
 
@@ -184,12 +183,6 @@ namespace SR_UTILS_NS {
             m_parent = oldParent;
             return false;
         }
-
-        if (m_parent.Valid()) {
-            m_transform->OnParentSet(m_parent->m_transform);
-        }
-        else
-            m_transform->OnParentSet(nullptr);
 
         m_scene->OnChanged();
 
@@ -461,13 +454,15 @@ namespace SR_UTILS_NS {
         return nullptr;
     }
 
-    void GameObject::SetTransform(Transform3D *transform3D) {
-        if (m_transform == transform3D || !transform3D) {
+    void GameObject::SetTransform(Transform *transform) {
+        if (m_transform == transform || !transform) {
             SR_WARN("GameObject::SetTransform() : invalid transform!");
         }
         else {
-            delete m_transform;
-            m_transform = transform3D;
+            if (m_transform) {
+                delete m_transform;
+            }
+            m_transform = transform;
             m_transform->SetGameObject(this);
         }
     }
@@ -523,6 +518,32 @@ namespace SR_UTILS_NS {
 
         for (auto&& child : m_children) {
             child->Start();
+        }
+    }
+
+    void GameObject::OnWindowResized(const SR_MATH_NS::IVector2 &size) {
+        /// Игнорируем состояние объекта
+        /// if (!IsEnabled()) {
+        ///     return;
+        /// }
+
+        for (auto&& pComponent : m_components) {
+            pComponent->OnWindowResized(size);
+        }
+
+        for (auto&& children : m_children) {
+            if (!children.LockIfValid())
+                continue;
+
+            children->OnWindowResized(size);
+
+            children.Unlock();
+        }
+    }
+
+    void GameObject::OnAttached() {
+        for (auto&& pComponent : m_components) {
+            pComponent->OnGameObjectAttached();
         }
     }
 }

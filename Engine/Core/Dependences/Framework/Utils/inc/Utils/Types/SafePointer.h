@@ -6,6 +6,13 @@
 #define SMARTPOINTER_SAFEPOINTER_H
 
 #include <Utils/Common/StringFormat.h>
+#include <Utils/Types/Function.h>
+
+#define SR_SAFE_PTR_FORWARD_DECLARATION(className) \
+    namespace SR_HTYPES_NS { \
+        template<class T = className> class SafePtr; \
+    } \
+
 
 namespace SR_HTYPES_NS {
     static std::atomic<int64_t> SAFE_POINTER_COUNTS = 0;
@@ -16,7 +23,7 @@ namespace SR_HTYPES_NS {
     #define SR_DEL_SAFE_PTR() {                              \
         }                                                    \
 
-    template<typename T> class SR_DLL_EXPORT SafePtr {
+    template<class T> class SR_DLL_EXPORT SafePtr {
     public:
         explicit SafePtr(T *ptr);
         SafePtr(SafePtr const &ptr);
@@ -52,35 +59,9 @@ namespace SR_HTYPES_NS {
            return dynamic_cast<U>(m_ptr);
         }
 
-        bool Do(const std::function<void(T* ptr)>& func) {
-            if (RecursiveLockIfValid()) {
-                func(m_ptr);
-                Unlock();
-                return true;
-            }
-
-            return false;
-        }
-
-        template<typename U> U Do(const std::function<U(T* ptr)>& func, U _default) {
-            if (RecursiveLockIfValid()) {
-                const auto&& result = func(m_ptr);
-                Unlock();
-                return result;
-            }
-
-            return _default;
-        }
-
-        template<typename U> U TryDo(const std::function<U(T* ptr)>& func, U _default) {
-            if (TryLockIfValid()) {
-                const auto&& result = func(m_ptr);
-                Unlock();
-                return result;
-            }
-
-            return _default;
-        }
+        bool Do(const std::function<void(T* ptr)>& func);
+        template<typename U> U Do(const std::function<U(T* ptr)>& func, U _default);
+        template<typename U> U TryDo(const std::function<U(T* ptr)>& func, U _default);
 
         SR_NODISCARD bool TryLockIfValid() const;
         SR_NODISCARD bool TryRecursiveLockIfValid() const;
@@ -462,6 +443,36 @@ namespace SR_HTYPES_NS {
         m_data->m_owner.store(std::thread::id());
         m_data->m_lockCount.store(0);
         m_data->m_lock.store(false, std::memory_order_release);
+    }
+
+    template<class T> bool SafePtr<T>::Do(const std::function<void(T *)> &func)  {
+        if (RecursiveLockIfValid()) {
+            func(m_ptr);
+            Unlock();
+            return true;
+        }
+
+        return false;
+    }
+
+    template<class T> template<typename U> U SafePtr<T>::Do(const std::function<U(T *)> &func, U _default) {
+        if (RecursiveLockIfValid()) {
+            const auto&& result = func(m_ptr);
+            Unlock();
+            return result;
+        }
+
+        return _default;
+    }
+
+    template<class T> template<typename U> U SafePtr<T>::TryDo(const std::function<U(T *)> &func, U _default) {
+        if (TryLockIfValid()) {
+            const auto&& result = func(m_ptr);
+            Unlock();
+            return result;
+        }
+
+        return _default;
     }
 }
 

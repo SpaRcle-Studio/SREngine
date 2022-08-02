@@ -36,9 +36,10 @@ namespace SR_GRAPH_NS {
         static RenderTechnique* Load(const SR_UTILS_NS::Path& path);
 
     public:
-        virtual void Render();
+        virtual void Prepare();
+        virtual bool Overlay();
+        virtual bool Render();
         virtual void Update();
-        virtual void Overlay();
 
         virtual void OnResize(const SR_MATH_NS::IVector2& size);
 

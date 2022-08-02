@@ -48,12 +48,15 @@
 #include "../Graphics/src/Pass/WidgetPass.cpp"
 #include "../Graphics/src/Pass/OpaquePass.cpp"
 #include "../Graphics/src/Pass/TransparentPass.cpp"
+#include "../Graphics/src/Pass/SortedTransparentPass.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"
 #include "../Graphics/src/Font/Text.cpp"
 
 #include "../Graphics/src/UI/Sprite2D.cpp"
+#include "../Graphics/src/UI/Canvas.cpp"
+#include "../Graphics/src/UI/Anchor.cpp"
 
 #include "../Graphics/src/Render/RenderScene.cpp"
 #include "../Graphics/src/Render/ColorBuffer.cpp"
@@ -64,6 +67,7 @@
 #include "../Graphics/src/Render/ShaderGenerator.cpp"
 #include "../Graphics/src/Render/RenderManager.cpp"
 #include "../Graphics/src/Render/RenderContext.cpp"
+#include "../Graphics/src/Render/SortedMeshQueue.cpp"
 #include "../Graphics/src/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"

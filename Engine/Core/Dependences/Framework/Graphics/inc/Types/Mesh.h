@@ -57,7 +57,6 @@ namespace SR_GTYPES_NS {
     protected:
         virtual void ReCalcModel();
         virtual bool Calculate();
-        virtual void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
 
     public:
         IResource* Copy(IResource* destination) const override;
@@ -78,7 +77,7 @@ namespace SR_GTYPES_NS {
         void OnDestroy() override;
 
     public:
-        bool IsCanCalculate() const;
+        SR_NODISCARD virtual bool IsCanCalculate() const;
 
         SR_NODISCARD Shader* GetShader() const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
@@ -87,15 +86,17 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsInverse() const { return m_inverse; }
         SR_NODISCARD const glm::mat4& GetModelMatrixRef() const { return m_modelMat; }
         SR_NODISCARD glm::mat4 GetModelMatrix() const { return m_modelMat; }
-        SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD SR_MATH_NS::Unit SR_FASTCALL Distance(const SR_MATH_NS::FVector3& pos) const;
 
         void SetInverse(bool value);
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetContext(const RenderContextPtr& context);
         SR_NODISCARD RenderScenePtr GetRenderScene();
+
+        SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
 
     protected:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
@@ -121,14 +122,11 @@ namespace SR_GTYPES_NS {
 
         std::string                  m_geometryName      = "Unnamed";
         Material*                    m_material          = nullptr;
-        SR_HTYPES_NS::RawMesh*       m_rawMesh           = nullptr;
 
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
         std::atomic<bool>            m_dirtyMaterial     = false;
 
-        /// определяет порядок меша в файле, если их там несколько
-        int32_t                      m_meshId            = SR_UINT32_MAX;
         int32_t                      m_virtualUBO        = SR_ID_INVALID;
 
     };

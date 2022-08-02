@@ -33,16 +33,13 @@ namespace SR_GRAPH_NS {
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену
         Overlay();
 
-        if (m_dirtyCameras) {
-            SortCameras();
-        }
+        Prepare();
 
         if (m_dirty || GetPipeline()->IsNeedReBuild()) {
             Build();
         }
-        else {
-            Update();
-        }
+
+        Update();
 
         if (!m_hasDrawData) {
             RenderBlackScreen();
@@ -72,23 +69,7 @@ namespace SR_GRAPH_NS {
 
         m_hasDrawData = false;
 
-        for (auto&& pCamera : m_offScreenCameras) {
-            if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {
-                pRenderTechnique->Render();
-                m_hasDrawData = true;
-            }
-        }
-
-        if (m_mainCamera) {
-            if (auto&& pRenderTechnique = m_mainCamera->GetRenderTechnique()) {
-                pRenderTechnique->Render();
-                m_hasDrawData = true;
-            }
-        }
-
-        if (m_technique) {
-            m_technique->Render();
-        }
+        SR_RENDER_TECHNIQUES_RETURN_CALL(Render)
 
         m_dirty = false;
 
@@ -96,25 +77,11 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Update() {
-        for (auto&& pCamera : m_offScreenCameras) {
-            if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {
-                pRenderTechnique->Update();
-            }
-        }
-
-        if (m_mainCamera) {
-            if (auto&& pRenderTechnique = m_mainCamera->GetRenderTechnique()) {
-                pRenderTechnique->Update();
-            }
-        }
-
-        if (m_technique) {
-            m_technique->Update();
-        }
+        SR_RENDER_TECHNIQUES_CALL(Update)
     }
 
     void RenderScene::Submit() {
-        if (!m_hasDrawData && (!m_technique || m_technique->IsEmpty())) {
+        if (!m_hasDrawData) {
             return;
         }
 
@@ -149,9 +116,15 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        if (m_technique) {
-            m_technique->Overlay();
+        SR_RENDER_TECHNIQUES_RETURN_CALL(Overlay)
+    }
+
+    void RenderScene::Prepare() {
+        if (m_dirtyCameras) {
+            SortCameras();
         }
+
+        SR_RENDER_TECHNIQUES_CALL(Prepare)
     }
 
     void RenderScene::Register(RenderScene::WidgetManagerPtr pWidgetManager) {
@@ -332,5 +305,17 @@ namespace SR_GRAPH_NS {
     void RenderScene::Synchronize() {
         m_opaque.Update();
         m_transparent.Update();
+    }
+
+    void RenderScene::OnResize(const SR_MATH_NS::IVector2 &size) {
+        m_surfaceSize = size;
+
+        if (m_technique) {
+            m_technique->OnResize(size);
+        }
+    }
+
+    SR_MATH_NS::IVector2 RenderScene::GetSurfaceSize() const {
+        return m_surfaceSize;
     }
 }

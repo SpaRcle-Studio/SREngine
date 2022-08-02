@@ -14,8 +14,8 @@ namespace SR_GRAPH_NS {
         ~TransparentPass() override = default;
 
     public:
-        void PreRender() override;
-        void Render() override;
+        bool PreRender() override;
+        bool Render() override;
         void Update() override;
 
     };

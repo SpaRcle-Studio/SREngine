@@ -8,6 +8,7 @@
 #include <Utils/Debug.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/Map.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_GRAPH_NS {
     namespace Types {
@@ -65,6 +66,7 @@ namespace SR_GRAPH_NS {
         using Iterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::iterator;
         using ConstIterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::const_iterator;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
+        using ClusterCallback = SR_HTYPES_NS::Function<void(MeshPtr)>;
 
     public:
         MeshCluster();
@@ -85,6 +87,9 @@ namespace SR_GRAPH_NS {
         bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
+        void SetAddCallback(const ClusterCallback& callback) { m_addCallback = callback; }
+        void SetRemoveCallback(const ClusterCallback& callback) { m_removeCallback = callback; }
+
         void Update();
 
     protected:
@@ -92,6 +97,8 @@ namespace SR_GRAPH_NS {
 
     protected:
         ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
+        ClusterCallback m_addCallback;
+        ClusterCallback m_removeCallback;
 
     };
 

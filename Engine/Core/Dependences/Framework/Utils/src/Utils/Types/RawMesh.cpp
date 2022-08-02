@@ -32,7 +32,7 @@ namespace SR_HTYPES_NS {
 
         pMesh->SetId(path, false /** auto register */);
 
-        if (!pMesh->Load()) {
+        if (!pMesh->Reload()) {
             SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
             delete pMesh;
             return nullptr;
@@ -49,7 +49,9 @@ namespace SR_HTYPES_NS {
 
         bool hasErrors = !IResource::Unload();
 
-        m_importer->FreeScene();
+        if (m_importer) {
+            m_importer->FreeScene();
+        }
 
         return !hasErrors;
     }
@@ -229,5 +231,22 @@ namespace SR_HTYPES_NS {
 
     SR_UTILS_NS::Path RawMesh::GetAssociatedPath() const {
         return ResourceManager::Instance().GetResPath();
+    }
+
+    bool RawMesh::Reload() {
+        SR_LOCK_GUARD
+
+        SR_LOG("RawMesh::Reload() : reloading \"" + GetResourceId() + "\" raw mesh...");
+
+        m_loadState = LoadState::Reloading;
+
+        Unload();
+        Load();
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+
+        return true;
     }
 }

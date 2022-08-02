@@ -44,7 +44,7 @@ namespace Framework::Core::World {
 
         /// ----------------------
 
-        gameObject->SetTransform(SR_UTILS_NS::Transform3D::Load(marshal));
+        gameObject->SetTransform(SR_UTILS_NS::Transform::Load(marshal));
 
         if (hasTag) {
             gameObject->SetTag(tag);

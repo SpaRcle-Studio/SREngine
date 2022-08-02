@@ -28,12 +28,10 @@ namespace SR_GRAPH_NS::Types {
 
         bool Calculate() override;
 
-        virtual void FreeVideoMemory() override;
+        void FreeVideoMemory() override;
 
         template<Vertices::Type type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
         template<Vertices::Type type> bool FreeVBO();
-
-        void SetRawMesh(SR_HTYPES_NS::RawMesh* raw) override;
 
     protected:
         int32_t m_IBO = SR_ID_INVALID;
@@ -56,10 +54,6 @@ namespace SR_GRAPH_NS::Types {
             return m_VBO;
         }
         else {
-            if (!m_rawMesh) {
-                return SR_ID_INVALID;
-            }
-
             if (!m_isCalculated && !Calculate())
                 return SR_ID_INVALID;
 

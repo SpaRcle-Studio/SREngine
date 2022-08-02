@@ -11,12 +11,12 @@ DepthTest true;
 uniform vec4 color;
 uniform sampler2D diffuse;
 
-vec4 GetTextureColor() {
-    return texture(diffuse, UV);
-} 
-
 void fragment() {
-	COLOR = GetTextureColor() * color;
+	COLOR = texture(diffuse, UV) * color;
+
+    if (COLOR.a == 0) {
+        discard;
+    }
 }
 
 void vertex() {

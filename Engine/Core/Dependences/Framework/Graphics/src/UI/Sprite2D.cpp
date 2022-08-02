@@ -16,6 +16,11 @@ namespace SR_GRAPH_NS::UI {
     {
         /// override component
         Component::InitComponent<Sprite2D>();
+
+        m_countIndices = SPRITE_INDICES.size();
+        m_countVertices = SPRITE_VERTICES.size();
+
+        SetId("Sprite2DFromMemory");
     }
 
     SR_UTILS_NS::IResource* Sprite2D::Copy(SR_UTILS_NS::IResource *destination) const {
@@ -35,23 +40,19 @@ namespace SR_GRAPH_NS::UI {
     SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         const auto &&type = static_cast<Types::MeshType>(marshal.Read<int32_t>());
 
-        const auto &&path = marshal.Read<std::string>();
-        const auto &&id = marshal.Read<uint32_t>();
-        const auto &&inverse = marshal.Read<bool>();
-
         const auto &&material = marshal.Read<std::string>();
 
-        auto &&pMesh = Load(path, type, id);
+        auto&& pSprite = new Sprite2D();
 
-        if (pMesh && material != "None") {
+        if (material != "None") {
             if (auto&& pMaterial = Types::Material::Load(material)) {
-                pMesh->SetMaterial(pMaterial);
+                pSprite->SetMaterial(pMaterial);
             }
             else
                 SR_ERROR("Sprite2D::LoadComponent() : failed to load material! Name: " + material);
         }
 
-        return pMesh;
+        return pSprite;
     }
 
     bool Sprite2D::Calculate() {
@@ -74,9 +75,7 @@ namespace SR_GRAPH_NS::UI {
             SR_LOG("Sprite2D::Calculate() : calculating \"" + m_geometryName + "\"...");
         }
 
-        auto&& vertices = Vertices::CastVertices<Vertices::UIVertex>(m_rawMesh->GetVertices(m_meshId));
-
-        if (!CalculateVBO<Vertices::Type::UIVertex>(vertices))
+        if (!CalculateVBO<Vertices::Type::UIVertex>(SPRITE_VERTICES))
             return false;
 
         return IndexedMesh::Calculate();
@@ -147,13 +146,16 @@ namespace SR_GRAPH_NS::UI {
 
         marshal.Write(static_cast<int32_t>(m_type));
 
-        /// TODO: use unicode
-        marshal.Write(GetResourcePath().ToString());
-        marshal.Write(m_meshId);
-        marshal.Write(IsInverse());
-
         marshal.Write(m_material ? m_material->GetResourceId() : "None");
 
         return marshal;
+    }
+
+    SR_MATH_NS::FVector2 Sprite2D::GetSizes() const {
+        return SR_MATH_NS::FVector2(2.f, 2.f);
+    }
+
+    std::vector<uint32_t> Sprite2D::GetIndices() const {
+        return SPRITE_INDICES;
     }
 }

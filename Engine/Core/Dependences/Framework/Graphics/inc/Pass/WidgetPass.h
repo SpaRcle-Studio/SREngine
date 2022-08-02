@@ -14,7 +14,7 @@ namespace SR_GRAPH_NS {
         ~WidgetPass() override = default;
 
     public:
-        void Overlay() override;
+        bool Overlay() override;
 
     };
 }

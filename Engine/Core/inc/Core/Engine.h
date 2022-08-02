@@ -43,11 +43,6 @@ namespace Framework {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
         using ScenePtr = Helper::Types::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
-    public:
-        enum class MainScriptType {
-            None, Engine, Game, Benchmark
-        };
-
     private:
         Engine() = default;
         ~Engine() override = default;
@@ -59,7 +54,6 @@ namespace Framework {
         SR_NODISCARD SR_INLINE SR_HTYPES_NS::Time* GetTime() const { return this->m_time; }
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD SR_INLINE Graphics::Window* GetWindow() const { return m_window; }
-        //SR_NODISCARD SR_INLINE Graphics::Render* GetRender() const { return m_render; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
         SR_NODISCARD SR_INLINE Core::GUI::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
@@ -72,6 +66,7 @@ namespace Framework {
         bool Close();
 
     private:
+        void ResizeCallback(const SR_MATH_NS::IVector2& size);
         void DrawCallback();
         bool RegisterLibraries();
         void WorldThread();

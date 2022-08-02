@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<Material ReadOnly="false">
+    <Shader Path="Engine/Shaders/depth.srsl"/>
+</Material>

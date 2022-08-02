@@ -34,22 +34,22 @@ namespace SR_GRAPH_NS {
         return BasePass::Load(passNode);
     }
 
-    void SkyboxPass::Render() {
+    bool SkyboxPass::Render() {
         if (!m_skybox) {
-            return;
+            return false;
         }
 
         auto&& shader = m_skybox->GetShader();
 
         if (!shader || !shader->Use()) {
-            return;
+            return false;
         }
 
         m_skybox->Draw();
 
         shader->UnUse();
 
-        BasePass::Render();
+        return true;
     }
 
     void SkyboxPass::Update() {

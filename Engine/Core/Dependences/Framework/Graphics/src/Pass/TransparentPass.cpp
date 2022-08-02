@@ -16,14 +16,18 @@ namespace SR_GRAPH_NS {
         : BasePass(pTechnique)
     { }
 
-    void TransparentPass::PreRender() {
+    bool TransparentPass::PreRender() {
         GetRenderScene()->GetTransparent().Update();
-        BasePass::PreRender();
+        return false;
     }
 
-    void TransparentPass::Render() {
+    bool TransparentPass::Render() {
         auto&& pipeline = GetPipeline();
         auto&& transparent = GetRenderScene()->GetTransparent();
+
+        if (transparent.Empty()) {
+            return false;
+        }
 
         for (auto&& [shader, subCluster] : transparent) {
             if (!shader || shader && !shader->Use()) {
@@ -42,7 +46,7 @@ namespace SR_GRAPH_NS {
             shader->UnUse();
         }
 
-        BasePass::Render();
+        return true;
     }
 
     void TransparentPass::Update() {
@@ -64,6 +68,7 @@ namespace SR_GRAPH_NS {
              */
             shader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            shader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
             shader->SetFloat(SHADER_TIME, time);
 
             for (auto const& [key, meshGroup] : subCluster) {
