@@ -44,6 +44,7 @@ namespace SR_UTILS_NS {
         ~Component() override = default;
 
     public:
+        virtual void OnMatrixDirty() { }
         virtual void OnRotate(const Math::FVector3& newValue) { }
         virtual void OnMove(const Math::FVector3& newValue) { }
         virtual void OnScaled(const Math::FVector3& newValue) { }

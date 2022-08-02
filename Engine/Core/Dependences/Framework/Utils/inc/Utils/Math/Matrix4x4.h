@@ -107,6 +107,60 @@ namespace SR_MATH_NS {
             return FVector3(scale);
         }
 
+        bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale, FVector3& skew) const {
+            //glm::vec3 _scale;
+            //glm::quat _rotation;
+            //glm::vec3 _translation;
+
+            //glm::vec3 _skew;
+            //glm::vec4 _perspective;
+
+            //if (glm::decompose(self, _scale, _rotation, _translation, _skew, _perspective)) {
+            //    translation = _translation;
+            //    eulers = Quaternion(_rotation).EulerAngle();
+            //    scale = scale;
+            //    skew = _skew;
+            //    return true;
+            //}
+
+            // return false
+
+            translation = glm::vec3(self[3]);
+
+            scale[0] = glm::length(glm::vec3(self[0]));
+            scale[1] = glm::length(glm::vec3(self[1]));
+            scale[2] = glm::length(glm::vec3(self[2]));
+
+            const glm::mat3 rotMtx(
+                    glm::vec3(self[0]) / static_cast<float>(scale[0]),
+                    glm::vec3(self[1]) / static_cast<float>(scale[1]),
+                    glm::vec3(self[2]) / static_cast<float>(scale[2]));
+
+            eulers = glm::eulerAngles(glm::normalize(glm::quat_cast(rotMtx)));
+            eulers = eulers.Degrees();
+
+            return true;
+        }
+
+        bool Decompose(FVector3& translation, Quaternion& rotation, FVector3& scale, FVector3& skew) const {
+            glm::vec3 _scale;
+            glm::quat _rotation;
+            glm::vec3 _translation;
+
+            glm::vec3 _skew;
+            glm::vec4 _perspective;
+
+            if (glm::decompose(self, _scale, _rotation, _translation, _skew, _perspective)) {
+                translation = _translation;
+                rotation = _rotation;
+                scale = scale;
+                skew = _skew;
+                return true;
+            }
+
+            return false;
+        }
+
         [[nodiscard]] Quaternion GetQuat() const {
             glm::vec3 scale;
             glm::quat rotation;
@@ -120,7 +174,7 @@ namespace SR_MATH_NS {
             return Quaternion(rotation);
         }
 
-        Matrix4x4 operator*(Matrix4x4 mat) {
+        Matrix4x4 operator*(const Matrix4x4& mat) const {
             return Matrix4x4(this->self * mat.self);
         }
         void operator*=(const Matrix4x4& right) {

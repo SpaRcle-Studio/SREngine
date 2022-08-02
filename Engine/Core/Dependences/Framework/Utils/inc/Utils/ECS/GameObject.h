@@ -50,6 +50,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD Types::SafePtr<World::Scene> GetScene() const { return m_scene; }
+        SR_NODISCARD Transform* GetParentTransform() const { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
         SR_NODISCARD std::string GetName() const;
@@ -109,6 +110,7 @@ namespace SR_UTILS_NS {
         void UpdateComponentsRotation();
         void UpdateComponentsScale();
         void UpdateComponentsSkew();
+        void OnMatrixDirty();
 
         void Awake();
         void Start();

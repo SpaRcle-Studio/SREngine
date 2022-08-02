@@ -121,6 +121,11 @@ namespace SR_UTILS_NS {
             component->OnSkewed(m_transform->GetSkew());
     }
 
+    void GameObject::OnMatrixDirty() {
+        for (Component *component : m_components)
+            component->OnMatrixDirty();
+    }
+
     bool GameObject::AddChild(const Types::SafePtr<GameObject> &child) {
         if (child.Get() == this) {
             SRAssert2(false, "It is impossible to make a parent a child!");

@@ -30,14 +30,12 @@ namespace SR_GTYPES_NS {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     public:
-        void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
-        void OnMove(const SR_MATH_NS::FVector3& newValue) override;
+        void OnMatrixDirty() override;
         void OnAttached() override;
         void OnWindowResized(const SR_MATH_NS::IVector2& size) override;
 
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetView() const { return m_viewMat; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetOrthogonalRef() const noexcept { return m_orthogonal; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewTranslateRef() const noexcept { return m_viewTranslateMat; }

@@ -68,6 +68,7 @@ namespace SR_GRAPH_NS::Types {
         void SR_FASTCALL SetFloat(uint64_t hashId, const float& v) noexcept;
         void SR_FASTCALL SetInt(uint64_t hashId, const int& v) noexcept;
         void SR_FASTCALL SetMat4(uint64_t hashId, const glm::mat4& v) noexcept;
+        void SR_FASTCALL SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
         void SR_FASTCALL SetVec4(uint64_t hashId, const glm::vec4& v) noexcept;
         void SR_FASTCALL SetVec3(uint64_t hashId, const glm::vec3& v) noexcept;
         void SR_FASTCALL SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;

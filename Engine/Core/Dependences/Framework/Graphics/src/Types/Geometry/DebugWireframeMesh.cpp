@@ -182,4 +182,8 @@ namespace SR_GTYPES_NS {
 
         return true;
     }
+
+    void DebugWireframeMesh::SetMatrix(const SR_MATH_NS::Matrix4x4& matrix4X4) {
+        m_modelMatrix = matrix4X4;
+    }
 }

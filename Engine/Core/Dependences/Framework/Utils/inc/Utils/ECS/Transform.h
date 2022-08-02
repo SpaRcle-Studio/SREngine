@@ -31,6 +31,9 @@ namespace SR_UTILS_NS {
         ~Transform() override = default;
 
     public:
+        static Transform* Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject);
+
+    public:
         void SetGameObject(GameObject *gameObject);
 
         virtual void Translate(const Math::FVector3& translation) { }
@@ -40,14 +43,16 @@ namespace SR_UTILS_NS {
         virtual void Scale(const Math::FVector3& scale) { }
         virtual void Scale(Math::Unit x, Math::Unit y, Math::Unit z);
 
-        virtual void GlobalTranslate(const Math::FVector3& translation) { }
-        virtual void GlobalRotate(const Math::FVector3& eulers) { }
+        virtual void GlobalTranslate(const Math::FVector3& translation);
+        virtual void GlobalRotate(const Math::FVector3& eulers);
         virtual void GlobalRotate(Math::Unit x, Math::Unit y, Math::Unit z);
-        virtual void GlobalScale(const Math::FVector3& scale) { }
-        virtual void GlobalSkew(const Math::FVector3& skew) { }
+        virtual void GlobalScale(const Math::FVector3& scale);
+        virtual void GlobalSkew(const Math::FVector3& skew);
 
         virtual void RotateAround(const Math::FVector3& point, const Math::FVector3& eulers) { }
         virtual void RotateAroundParent(const Math::FVector3& eulers) { }
+
+        virtual void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix) { }
 
         virtual void SetTranslation(const Math::FVector3& translation) { }
         virtual void SetTranslation(Math::Unit x, Math::Unit y, Math::Unit z);
@@ -59,23 +64,28 @@ namespace SR_UTILS_NS {
         virtual void SetSkew(const Math::FVector3& skew) { }
         virtual void SetSkew(Math::Unit x, Math::Unit y, Math::Unit z);
 
+        SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix();
+
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3(); }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetRotation() const { return SR_MATH_NS::FVector3(); }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetScale() const { return SR_MATH_NS::FVector3(); }
-        SR_NODISCARD virtual SR_MATH_NS::FVector2 GetScale2D() const;
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetSkew() const { return SR_MATH_NS::FVector3(); }
+
+        SR_NODISCARD virtual SR_MATH_NS::FVector2 GetScale2D() const;
+
         SR_NODISCARD Transform* GetParentTransform() const;
 
         SR_NODISCARD virtual Measurement GetMeasurement() const = 0;
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
-        static Transform* Load(SR_HTYPES_NS::Marshal& marshal);
 
     protected:
-        void UpdateComponents();
+        virtual void UpdateMatrix() { }
+        virtual void UpdateTree();
 
     protected:
         GameObject* m_gameObject = nullptr;
+        bool m_dirtyMatrix = true;
 
     };
 }

@@ -29,9 +29,11 @@ namespace SR_GTYPES_NS {
         void Draw() override;
 
         void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
+        void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix4X4);
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override { return m_modelMatrix; }
 
         IResource* Copy(IResource* destination) const override;
 
@@ -47,6 +49,8 @@ namespace SR_GTYPES_NS {
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
+        /// Данный тип меша не является полноценным компонентом, потому должен сам отвечать за трансформацию
+        SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
 
     };
 }

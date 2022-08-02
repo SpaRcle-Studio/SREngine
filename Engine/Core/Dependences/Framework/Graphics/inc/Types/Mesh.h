@@ -55,7 +55,6 @@ namespace SR_GTYPES_NS {
         bool Destroy() override;
 
     protected:
-        virtual void ReCalcModel();
         virtual bool Calculate();
 
     public:
@@ -68,11 +67,6 @@ namespace SR_GTYPES_NS {
     public:
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 
-        void OnMove(const SR_MATH_NS::FVector3& newValue) override;
-        void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
-        void OnScaled(const SR_MATH_NS::FVector3& newValue) override;
-        void OnSkewed(const SR_MATH_NS::FVector3& newValue) override;
-
         void OnAttached() override;
         void OnDestroy() override;
 
@@ -83,14 +77,10 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
         SR_NODISCARD Material* GetMaterial() const { return m_material; }
         SR_NODISCARD bool IsCalculated() const { return m_isCalculated; }
-        SR_NODISCARD bool IsInverse() const { return m_inverse; }
-        SR_NODISCARD const glm::mat4& GetModelMatrixRef() const { return m_modelMat; }
-        SR_NODISCARD glm::mat4 GetModelMatrix() const { return m_modelMat; }
+        SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-        SR_NODISCARD SR_MATH_NS::Unit SR_FASTCALL Distance(const SR_MATH_NS::FVector3& pos) const;
 
-        void SetInverse(bool value);
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetContext(const RenderContextPtr& context);
@@ -106,13 +96,6 @@ namespace SR_GTYPES_NS {
 
     protected:
         SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
-        SR_MATH_NS::FVector3         m_position          = SR_MATH_NS::FVector3();
-        SR_MATH_NS::FVector3         m_rotation          = SR_MATH_NS::FVector3();
-        SR_MATH_NS::FVector3         m_skew              = SR_MATH_NS::FVector3(1);
-        SR_MATH_NS::FVector3         m_scale             = SR_MATH_NS::FVector3(1);
-        glm::mat4                    m_modelMat          = glm::mat4(0);
-
-        bool                         m_inverse           = false;
 
         RenderScenePtr               m_renderScene       = { };
         /// Контекст будет задан только после регистрации в RenderScene

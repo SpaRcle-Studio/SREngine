@@ -14,7 +14,7 @@ namespace SR_UTILS_NS {
 
         m_translation = translation;
 
-        UpdateComponents();
+        //UpdateComponents();
     }
 
     void Transform2D::SetTranslationAndRotation(const SR_MATH_NS::FVector3 &translation, const SR_MATH_NS::FVector3 &euler) {
@@ -26,7 +26,7 @@ namespace SR_UTILS_NS {
         m_translation = translation;
         m_rotation = euler.Limits(360);
 
-        UpdateComponents();
+        //UpdateComponents();
     }
 
     void Transform2D::SetRotation(const SR_MATH_NS::FVector3& euler) {
@@ -35,7 +35,7 @@ namespace SR_UTILS_NS {
 
         m_rotation = euler.Limits(360);
 
-        UpdateComponents();
+        //UpdateComponents();
     }
 
     void Transform2D::SetScale(const SR_MATH_NS::FVector3& rawScale) {
@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
         SR_MATH_NS::FVector3 delta = scale / m_scale;
 
         m_scale = scale;
-        UpdateComponents();
+        //UpdateComponents();
     }
 
     void Transform2D::SetSkew(const SR_MATH_NS::FVector3& rawSkew) {
@@ -63,6 +63,6 @@ namespace SR_UTILS_NS {
         Math::FVector3 delta = skew / m_skew;
 
         m_skew = skew;
-        UpdateComponents();
+        //UpdateComponents();
     }
 }

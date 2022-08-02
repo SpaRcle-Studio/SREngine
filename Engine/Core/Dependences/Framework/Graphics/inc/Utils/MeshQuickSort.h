@@ -15,9 +15,9 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     typedef bool(*MeshQSortCmpFn)(const SR_GTYPES_NS::Mesh *left, const SR_GTYPES_NS::Mesh *right, const SR_MATH_NS::FVector3& pos);
 
-    bool SR_FASTCALL MeshQSortCmpGreater(const SR_GTYPES_NS::Mesh *left, const SR_GTYPES_NS::Mesh *right, const SR_MATH_NS::FVector3& pos) {
-        return left->Distance(pos) < right->Distance(pos);
-    }
+   //bool SR_FASTCALL MeshQSortCmpGreater(const SR_GTYPES_NS::Mesh *left, const SR_GTYPES_NS::Mesh *right, const SR_MATH_NS::FVector3& pos) {
+   //    return left->Distance(pos) < right->Distance(pos);
+   //}
 
     bool SR_FASTCALL QuickSort(SR_GTYPES_NS::Mesh **data, const SR_MATH_NS::FVector3& pos, MeshQSortCmpFn cmp, uint32_t count);
     bool SR_FASTCALL QuickSortInternal(SR_GTYPES_NS::Mesh **data, const SR_MATH_NS::FVector3& pos, MeshQSortCmpFn cmp, uint32_t lowestIndex, uint32_t higherIndex);

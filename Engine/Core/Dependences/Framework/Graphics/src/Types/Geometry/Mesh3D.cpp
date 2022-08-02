@@ -135,7 +135,6 @@ namespace SR_GTYPES_NS {
         /// TODO: use unicode
         marshal.Write(GetResourcePath().ToString());
         marshal.Write(m_meshId);
-        marshal.Write(IsInverse());
 
         marshal.Write(m_material ? m_material->GetResourceId() : "None");
 
@@ -147,7 +146,6 @@ namespace SR_GTYPES_NS {
 
         const auto &&path = marshal.Read<std::string>();
         const auto &&id = marshal.Read<uint32_t>();
-        const auto &&inverse = marshal.Read<bool>();
 
         const auto &&material = marshal.Read<std::string>();
 

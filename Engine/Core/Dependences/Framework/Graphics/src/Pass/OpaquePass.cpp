@@ -85,7 +85,7 @@ namespace SR_GRAPH_NS {
 
                     mesh->GetMaterial()->Use();
 
-                    shader->SetMat4(SHADER_MODEL_MATRIX, mesh->GetModelMatrixRef());
+                    shader->SetMat4(SHADER_MODEL_MATRIX, mesh->GetModelMatrix());
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("OpaquePass::Update() : memory has been duplicated!");

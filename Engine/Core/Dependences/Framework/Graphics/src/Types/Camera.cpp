@@ -158,19 +158,6 @@ namespace SR_GTYPES_NS {
         m_viewMat = matrix;
     }
 
-    void Camera::OnRotate(const SR_MATH_NS::FVector3& newValue) {
-        m_yaw   = float_t(newValue.y * SR_PI / 45.f / 4.f);
-        m_pitch = float_t(newValue.x * SR_PI / 45.f / 4.f);
-        m_roll  = float_t(newValue.z * SR_PI / 45.f / 4.f);
-
-        UpdateView();
-    }
-
-    void Camera::OnMove(const SR_MATH_NS::FVector3& newValue) {
-        m_position = newValue;
-        UpdateView();
-    }
-
     void Camera::UpdateProjection() {
         if (m_viewportSize.HasZero()) {
             SRHalt("Camera::UpdateProjection() : viewport size has zero!");
@@ -248,5 +235,21 @@ namespace SR_GTYPES_NS {
         UpdateProjection(size.x, size.y);
 
         Component::OnWindowResized(size);
+    }
+
+    void Camera::OnMatrixDirty() {
+        auto&& matrix = GetTransform()->GetMatrix();
+        auto&& rotate = matrix.GetQuat().EulerAngle();
+        auto&& translation = matrix.GetTranslate();
+
+        m_yaw   = float_t(rotate.y * SR_PI / 45.f / 4.f);
+        m_pitch = float_t(rotate.x * SR_PI / 45.f / 4.f);
+        m_roll  = float_t(rotate.z * SR_PI / 45.f / 4.f);
+
+        m_position = translation;
+
+        UpdateView();
+
+        Component::OnMatrixDirty();
     }
 }

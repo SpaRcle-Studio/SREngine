@@ -67,22 +67,22 @@ namespace SR_GRAPH_NS {
         ///  partition
         do
         {
-            while (static_cast<int32_t>(m_data[i]->Distance(m_target)) < static_cast<int32_t>(x->Distance(m_target)))
-                i++;
-
-            while (static_cast<int32_t>(x->Distance(m_target)) < static_cast<int32_t>(m_data[j]->Distance(m_target)))
-                j--;
+            //while (static_cast<int32_t>(m_data[i]->Distance(m_target)) < static_cast<int32_t>(x->Distance(m_target)))
+            //    i++;
+//
+            //while (static_cast<int32_t>(x->Distance(m_target)) < static_cast<int32_t>(m_data[j]->Distance(m_target)))
+            //    j--;
 
             if (i <= j)
             {
                 /// swap(i, j);
-                if (static_cast<int32_t>(m_data[i]->Distance(m_target)) > static_cast<int32_t>(m_data[j]->Distance(m_target))) {
-                    SR_GTYPES_NS::Mesh *temp = m_data[i];
-                    m_data[i] = m_data[j];
-                    m_data[j] = temp;
-
-                    m_dirty = true;
-                }
+                //if (static_cast<int32_t>(m_data[i]->Distance(m_target)) > static_cast<int32_t>(m_data[j]->Distance(m_target))) {
+                //    SR_GTYPES_NS::Mesh *temp = m_data[i];
+                //    m_data[i] = m_data[j];
+                //    m_data[j] = temp;
+//
+                //    m_dirty = true;
+                //}
 
                 i++;
                 j--;

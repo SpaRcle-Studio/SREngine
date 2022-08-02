@@ -26,13 +26,25 @@ namespace Framework::Core::World {
 
     void VisualChunk::UpdateFacesPos() {
         if (m_stayMesh) {
-            m_stayMesh->OnMove(GetWorldPosition(SR_MATH_NS::AXIS_XYZ));
+            auto&& matrix = SR_MATH_NS::Matrix4x4(
+                    GetWorldPosition(SR_MATH_NS::AXIS_XYZ),
+                    SR_MATH_NS::Quaternion::Identity(),
+                    SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2
+            );
+
+            m_stayMesh->SetMatrix(matrix);
         }
     }
 
     void VisualChunk::UpdateLoadPos() {
         if (m_loadMesh) {
-            m_loadMesh->OnMove(GetWorldPosition(SR_MATH_NS::AXIS_XZ));
+            auto&& matrix = SR_MATH_NS::Matrix4x4(
+                    GetWorldPosition(SR_MATH_NS::AXIS_XZ),
+                    SR_MATH_NS::Quaternion::Identity(),
+                    SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2
+            );
+
+            m_loadMesh->SetMatrix(matrix);
         }
     }
 
@@ -52,7 +64,6 @@ namespace Framework::Core::World {
 
             m_stayMesh->AddUsePoint();
             m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/green_wireframe.mat"));
-            m_stayMesh->OnScaled(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2);
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
                 ptr->Register(m_stayMesh);
@@ -81,7 +92,6 @@ namespace Framework::Core::World {
 
             m_loadMesh->AddUsePoint();
             m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/yellow_wireframe.mat"));
-            m_loadMesh->OnScaled(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2);
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
                 ptr->Register(m_loadMesh);

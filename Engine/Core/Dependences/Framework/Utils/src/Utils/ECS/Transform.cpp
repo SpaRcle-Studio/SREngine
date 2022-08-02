@@ -3,16 +3,12 @@
 //
 
 #include <Utils/ECS/Transform.h>
+#include <Utils/ECS/Transform3D.h>
+
 
 namespace SR_UTILS_NS {
     void Transform::SetGameObject(GameObject *gameObject) {
-        if (m_gameObject) {
-            SR_WARN("Transform::SetGameObject() : game object already set!");
-        }
-
         m_gameObject = gameObject;
-
-        UpdateComponents();
     }
 
     Transform* Transform::GetParentTransform() const {
@@ -27,10 +23,20 @@ namespace SR_UTILS_NS {
         return nullptr;
     }
 
-    void Transform::UpdateComponents() {
-        if (m_gameObject) {
-            m_gameObject->UpdateComponents();
-        }
+    void Transform::GlobalTranslate(const Math::FVector3& translation) {
+        SetTranslation(GetTranslation() + translation);
+    }
+
+    void Transform::GlobalRotate(const Math::FVector3& eulers) {
+        SetRotation(GetRotation() + eulers);
+    }
+
+    void Transform::GlobalScale(const Math::FVector3 &scale) {
+        SetScale(GetScale() * scale);
+    }
+
+    void Transform::GlobalSkew(const Math::FVector3 &skew) {
+        SetSkew(GetSkew() * skew);
     }
 
     void Transform::Rotate(Math::Unit x, Math::Unit y, Math::Unit z) {
@@ -78,9 +84,14 @@ namespace SR_UTILS_NS {
                 marshal.Write(GetSkew(), Math::FVector3(1.f));
                 break;
             case Measurement::Space3D: {
-                auto&& offset = SR_THIS_THREAD->GetContext()->GetValueDef<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3());
+                if (m_gameObject->GetParent()) {
+                    marshal.Write(GetTranslation(), Math::FVector3(0.f));
+                }
+                else {
+                    auto &&offset = SR_THIS_THREAD->GetContext()->GetValueDef<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3());
+                    marshal.Write(offset + GetTranslation(), Math::FVector3(0.f));
+                }
 
-                marshal.Write(offset + GetTranslation(), Math::FVector3(0.f));
                 marshal.Write(GetRotation(), Math::FVector3(0.f));
                 marshal.Write(GetScale(), Math::FVector3(1.f));
                 marshal.Write(GetSkew(), Math::FVector3(1.f));
@@ -93,7 +104,7 @@ namespace SR_UTILS_NS {
         return marshal;
     }
 
-    Transform *Transform::Load(SR_HTYPES_NS::Marshal &marshal) {
+    Transform *Transform::Load(SR_HTYPES_NS::Marshal &marshal, GameObject* pGameObject) {
         Transform* transform = nullptr;
 
         switch (static_cast<Measurement>(marshal.Read<int8_t>())) {
@@ -104,8 +115,12 @@ namespace SR_UTILS_NS {
                 transform = new Transform3D();
                 break;
             case Measurement::Space4D:
-                break;
+            default:
+                SRHalt0();
+                return nullptr;
         }
+
+        transform->SetGameObject(pGameObject);
 
         transform->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
         transform->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
@@ -117,5 +132,20 @@ namespace SR_UTILS_NS {
 
     SR_MATH_NS::FVector2 Transform::GetScale2D() const {
         return GetScale().XY();
+    }
+
+    const SR_MATH_NS::Matrix4x4 &Transform::GetMatrix() {
+        static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
+        return matrix4X4;
+    }
+
+    void Transform::UpdateTree() {
+        m_dirtyMatrix = true;
+
+        m_gameObject->OnMatrixDirty();
+
+        for (auto &&child : m_gameObject->m_children) {
+            child->m_transform->UpdateTree();
+        }
     }
 }

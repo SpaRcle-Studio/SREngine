@@ -155,10 +155,12 @@ namespace SR_GRAPH_NS::Types {
     }
 
     SR_MATH_NS::FVector3 Mesh::GetBarycenter() const {
-        auto baryMat = SR_MATH_NS::Matrix4x4(m_barycenter, SR_MATH_NS::FVector3(), 1.0);
-        auto rotateMat = SR_MATH_NS::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
+        //auto baryMat = SR_MATH_NS::Matrix4x4(m_barycenter, SR_MATH_NS::FVector3(), 1.0);
+        //auto rotateMat = SR_MATH_NS::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
 
-        return (rotateMat * baryMat).GetTranslate();
+        //return (rotateMat * baryMat).GetTranslate();
+
+        return SR_MATH_NS::FVector3();
     }
 
     SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
@@ -181,12 +183,7 @@ namespace SR_GRAPH_NS::Types {
 
         mesh->m_geometryName = m_geometryName;
         mesh->m_barycenter = m_barycenter;
-        mesh->m_position = m_position;
-        mesh->m_rotation = m_rotation;
-        mesh->m_scale = m_scale;
-        mesh->m_skew = m_skew;
 
-        mesh->m_modelMat = m_modelMat;
         mesh->m_isCalculated.store(m_isCalculated);
         mesh->m_hasErrors.store(false);
 
@@ -202,23 +199,6 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_isCalculated = false;
-    }
-
-    void Mesh::ReCalcModel() {
-        SR_MATH_NS::Matrix4x4 modelMat = SR_MATH_NS::Matrix4x4::FromTranslate(m_position);
-
-        if (m_pipeline->GetPipeLine() == PipeLine::OpenGL) {
-            modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew.InverseAxis(0));
-            modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
-        }
-        else {
-            modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
-            modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
-        }
-
-        modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
-
-        m_modelMat = modelMat.ToGLM();
     }
 
     bool Mesh::Calculate() {
@@ -244,26 +224,6 @@ namespace SR_GRAPH_NS::Types {
         if (m_isCalculated && m_pipeline) {
             m_pipeline->SetBuildState(false);
         }
-    }
-
-    void Mesh::OnMove(const SR_MATH_NS::FVector3 &newValue) {
-        m_position = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnRotate(const SR_MATH_NS::FVector3 &newValue) {
-        m_rotation = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnScaled(const SR_MATH_NS::FVector3 &newValue) {
-        m_scale = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnSkewed(const SR_MATH_NS::FVector3 &newValue) {
-        m_skew = newValue;
-        ReCalcModel();
     }
 
     SR_UTILS_NS::Path Mesh::GetResourcePath() const {
@@ -315,13 +275,17 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    void Mesh::SetInverse(bool value) {
-        m_inverse = value;
-        ReCalcModel();
-    }
+    //SR_MATH_NS::Unit Mesh::Distance(const Helper::Math::FVector3 &pos) const {
+    //    return m_position.Distance(pos);
+    //}
 
-    SR_MATH_NS::Unit Mesh::Distance(const Helper::Math::FVector3 &pos) const {
-        return m_position.Distance(pos);
+    const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
+        if (auto&& pTransform = GetTransform()) {
+            return pTransform->GetMatrix();
+        }
+
+        static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
+        return matrix4X4;
     }
 }
 
