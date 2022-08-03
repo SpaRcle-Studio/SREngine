@@ -27,15 +27,14 @@ namespace SR_GRAPH_NS::UI {
 
     public:
         void OnAttached() override;
-        void OnWindowResized(const SR_MATH_NS::IVector2 &size) override;
         void OnDestroy() override;
 
-        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
+    protected:
+        void Update(float_t dt) override;
 
     private:
-        void TransformUI();
+        SR_MATH_NS::IVector2 m_size;
 
-    private:
         RenderContextPtr m_context;
         RenderScenePtr m_renderScene;
 

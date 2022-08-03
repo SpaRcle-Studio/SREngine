@@ -12,6 +12,7 @@
 #include <Utils/Math/Quaternion.h>
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Types/SafePtrLockGuard.h>
 
 namespace SR_UTILS_NS {
     GameObject::GameObject(const Types::SafePtr<World::Scene> &scene, std::string name, std::string tag)
@@ -37,12 +38,14 @@ namespace SR_UTILS_NS {
     Component *Framework::Helper::GameObject::GetComponent(const std::string &name) {
         Component *find = nullptr;
 
-        for (auto&& component : m_components) {
-            if (component->GetComponentName() == name) {
-                find = component;
-                break;
+        m_components.Do([&](std::list<Component*>& data) {
+            for (auto &&component : data) {
+                if (component->GetComponentName() == name) {
+                    find = component;
+                    break;
+                }
             }
-        }
+        });
 
         return find;
     }
@@ -58,9 +61,9 @@ namespace SR_UTILS_NS {
             SR_WARN("GameObject::Destroy() : game object \"" + GetName()
                                 + "\" is not locked, crash or memory corruption possible!");
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::High) {
-            SR_LOG("GameObject::Destroy() : destroying \"" + m_name + "\" game object contains " + std::to_string(m_components.size()) + " components...");
-        }
+        //if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::High) {
+        //    SR_LOG("GameObject::Destroy() : destroying \"" + m_name + "\" game object contains " + std::to_string(m_components.size()) + " components...");
+        //}
 #endif
 
         if (m_scene.RecursiveLockIfValid()) {
@@ -77,10 +80,12 @@ namespace SR_UTILS_NS {
             m_scene.Unlock();
         }
 
-        for (auto&& component : m_components) {
-            component->OnDestroy();
-        }
-        m_components.clear();
+        m_components.Do([&](std::list<Component*>& data) {
+            for (auto &&component : data) {
+                component->OnDestroy();
+            }
+            data.clear();
+        });
 
         for (GameObject::Ptr gameObject : m_children) {
             gameObject.AutoFree([by](GameObject *gm) {
@@ -94,36 +99,11 @@ namespace SR_UTILS_NS {
         Free();
     }
 
-    void GameObject::UpdateComponents() {
-        UpdateComponentsPosition();
-        UpdateComponentsRotation();
-        UpdateComponentsScale();
-        UpdateComponentsSkew();
-    }
-
-    void GameObject::UpdateComponentsPosition() {
-        for (Component *component : m_components)
-            component->OnMove(m_transform->GetTranslation());
-    }
-
-    void GameObject::UpdateComponentsRotation() {
-        for (Component *component : m_components)
-            component->OnRotate(m_transform->GetRotation());
-    }
-
-    void GameObject::UpdateComponentsScale() {
-        for (Component *component : m_components)
-            component->OnScaled(m_transform->GetScale());
-    }
-
-    void GameObject::UpdateComponentsSkew() {
-        for (Component *component : m_components)
-            component->OnSkewed(m_transform->GetSkew());
-    }
-
     void GameObject::OnMatrixDirty() {
-        for (Component *component : m_components)
-            component->OnMatrixDirty();
+        m_components.Do([&](auto&& data) {
+            for (Component *component : data)
+                component->OnMatrixDirty();
+        });
     }
 
     bool GameObject::AddChild(const Types::SafePtr<GameObject> &child) {
@@ -147,7 +127,7 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        m_children.insert(child);
+        m_children.push_back(child);
 
         /* TODO: Update child transforms with parent */
 
@@ -168,8 +148,14 @@ namespace SR_UTILS_NS {
         m_scene->OnChanged();
     }
 
-    bool GameObject::Contains(const Types::SafePtr<GameObject> &gameObject) {  // TODO: add security multi-threading
-        return m_children.count(gameObject) == 1;
+    bool GameObject::Contains(const Types::SafePtr<GameObject> &gameObject) {
+        for (auto&& children : m_children) {
+            if (children.Get() == gameObject.Get()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     std::string GameObject::GetName() const {
@@ -195,23 +181,30 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::RemoveChild(const GameObject::Ptr &ptr) {
-        if (!IsChild(ptr)) {
-            SRAssert2(false, Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
-            return;
+        ptr->SetParent(GameObject::Ptr());
+
+        for (auto pIt = m_children.begin(); pIt != m_children.end(); ) {
+            if (pIt->Get() == ptr.Get()) {
+                pIt = m_children.erase(pIt);
+                return;
+            }
+
+            ++pIt;
         }
 
-        ptr->SetParent(GameObject::Ptr());
-        m_children.erase(ptr);
+        SRHalt(Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
     }
 
     bool GameObject::ContainsComponent(const std::string &name) {
-        for (auto&& pComponent : m_components) {
-            if (pComponent->GetComponentName() == name) {
-                return true;
+        return m_components.Do<bool>([&](auto&& data) -> bool {
+            for (auto &&pComponent : data) {
+                if (pComponent->GetComponentName() == name) {
+                    return true;
+                }
             }
-        }
 
-        return false;
+            return false;
+        });
     }
 
     void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject> &)> &fun) {
@@ -238,8 +231,6 @@ namespace SR_UTILS_NS {
         }
 
         m_isEnabled = value;
-
-        CheckActivity();
     }
 
     bool GameObject::IsActive() const {
@@ -252,23 +243,56 @@ namespace SR_UTILS_NS {
         return IsEnabled();
     }
 
-    void GameObject::CheckActivity(bool force) {
-        const bool isActive = IsActive();
-        if (isActive == m_isActive && !force) {
+    void GameObject::CheckActivity() {
+        m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
+
+        for (auto&& pComponent : m_components.Get()) {
+            pComponent->CheckActivity();
+        }
+
+        for (auto&& child : m_children) {
+            child->CheckActivity();
+        }
+    }
+
+
+    void GameObject::Awake() {
+        /// Проверяем на IsEnabled а не на IsActive,
+        /// так как если родитель не активен, то метод не вызвался бы.
+        if (!IsEnabled()) {
             return;
         }
 
-        m_isActive = isActive;
-
-        for (auto&& child : m_children) {
-            if (child.LockIfValid()) {
-                child->CheckActivity(force);
-                child.Unlock();
+        for (auto&& pComponent : m_components.Get()) {
+            if (pComponent->IsAwake()) {
+                continue;
             }
+
+            pComponent->Awake();
         }
 
-        for (auto&& pComponent : m_components) {
-            pComponent->CheckActivity();
+        for (auto&& child : m_children) {
+            child->Awake();
+        }
+    }
+
+    void GameObject::Start() {
+        /// Проверяем на IsEnabled а не на IsActive,
+        /// так как если родитель не активен, то метод не вызвался бы.
+        if (!IsEnabled()) {
+            return;
+        }
+
+        for (auto&& pComponent : m_components.Get()) {
+            if (pComponent->IsStarted()) {
+                continue;
+            }
+
+            pComponent->Start();
+        }
+
+        for (auto&& child : m_children) {
+            child->Start();
         }
     }
 
@@ -276,19 +300,19 @@ namespace SR_UTILS_NS {
         auto barycenter = Math::FVector3();
         uint32_t count = 0;
 
-        for (auto comp : m_components)
-            if (auto br = comp->GetBarycenter(); !br.IsInfinity()) {
-                barycenter += br;
-                count++;
-            }
-
-        if (count != 0) {
-            barycenter /= count;
-            if (!m_parent.Valid())
-                return barycenter;
-            ///else
-            ///return barycenter + m_transform->m_globalPosition;
-        }
+        //for (auto comp : m_components)
+        //    if (auto br = comp->GetBarycenter(); !br.IsInfinity()) {
+        //        barycenter += br;
+        //        count++;
+        //    }
+        //
+        //if (count != 0) {
+        //    barycenter /= count;
+        //    if (!m_parent.Valid())
+        //        return barycenter;
+        //    ///else
+        //    ///return barycenter + m_transform->m_globalPosition;
+        //}
 
         return Math::FVector3(Math::InfinityFV3);
     }
@@ -313,40 +337,66 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::ForEachComponent(const std::function<bool(Component *)> &fun) {
-        for (auto&& component : m_components) {
-            if (!fun(component)) {
-                break;
+        m_components.Do([&](auto&& data) {
+            for (auto &&component : data) {
+                if (!fun(component)) {
+                    break;
+                }
             }
-        }
+        });
     }
 
-    bool GameObject::AddComponent(Component* pComponent) {  // TODO: add security multi-threading
+    bool GameObject::LoadComponent(Component *pComponent) {
+        if (m_isDestroy) {
+            SR_ERROR("GameObject::LoadComponent() : this \"" + m_name + "\" game object is destroyed!");
+            return false;
+        }
+
+        m_components.Do([&](std::list<Component*>& data) {
+            data.emplace_back(pComponent);
+            pComponent->SetParent(this);
+            pComponent->OnAttached();
+        });
+
+        return true;
+    }
+
+    bool GameObject::AddComponent(Component* pComponent) {
         if (m_isDestroy) {
             SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
             return false;
         }
 
-        m_components.push_back(pComponent);
-        pComponent->SetParent(this);
-        pComponent->OnAttached();
-
-        UpdateComponents();
+        m_components.Do([&](std::list<Component*>& data) {
+            data.emplace_back(pComponent);
+            pComponent->SetParent(this);
+            pComponent->OnAttached();
+        });
 
         return true;
     }
 
     bool GameObject::RemoveComponent(Component *component) {
-        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it == component) {
+        return m_components.Do<bool>([&](auto&& data) -> bool {
+            for (auto it = data.begin(); it != data.end(); ++it) {
+                if (*it != component) {
+                    continue;
+                }
+
+                if (component->GetParent() != this) {
+                    SRHalt0();
+                }
+
                 component->OnDestroy();
-                m_components.erase(it);
+                data.erase(it);
+
                 return true;
             }
-        }
 
-        SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+            SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
 
-        return false;
+            return false;
+        });
     }
 
     bool GameObject::ReplaceComponent(Component *source, Component *destination) {
@@ -355,23 +405,23 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it == source) {
-                source->OnDestroy();
-                *it = destination;
+        return m_components.Do<bool>([&](auto&& data) -> bool {
+            for (auto it = data.begin(); it != data.end(); ++it) {
+                if (*it == source) {
+                    source->OnDestroy();
+                    *it = destination;
 
-                destination->SetParent(this);
-                destination->OnAttached();
+                    destination->SetParent(this);
+                    destination->OnAttached();
 
-                UpdateComponents();
-
-                return true;
+                    return true;
+                }
             }
-        }
 
-        SR_ERROR("GameObject::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
+            SR_ERROR("GameObject::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
 
-        return false;
+            return false;
+        });
     }
 
     SR_HTYPES_NS::Marshal GameObject::Save(SavableFlags flags) const {
@@ -398,12 +448,14 @@ namespace SR_UTILS_NS {
 
         /// save components
 
-        marshal.Write(static_cast<uint32_t>(m_components.size()));
-        for (auto&& component : m_components) {
-            auto&& marshalComponent = component->Save(flags);
-            marshal.Write<uint64_t>(marshalComponent.BytesCount());
-            marshal.Append(std::move(marshalComponent));
-        }
+        m_components.Do([&](auto&& data) {
+            marshal.Write(static_cast<uint32_t>(data.size()));
+            for (auto &&component : data) {
+                auto &&marshalComponent = component->Save(flags);
+                marshal.Write<uint64_t>(marshalComponent.BytesCount());
+                marshal.Append(std::move(marshalComponent));
+            }
+        });
 
         /// save children
 
@@ -445,18 +497,18 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool GameObject::IsChild(const GameObject::Ptr &child) {
-        return m_children.count(child) == 1;
-    }
-
     Component *GameObject::GetComponent(size_t id) {
-        for (auto &&component : m_components) {
-            if (component->GetComponentId() == id) {
+        return m_components.Do<Component*>([&](auto&& data) -> Component* {
+            for (auto &&component : data) {
+                if (component->GetComponentId() != id) {
+                    continue;
+                }
+
                 return component;
             }
-        }
 
-        return nullptr;
+            return nullptr;
+        });
     }
 
     void GameObject::SetTransform(Transform *transform) {
@@ -498,57 +550,47 @@ namespace SR_UTILS_NS {
         return m_tag != "Untagged";
     }
 
-    void GameObject::Awake() {
-        if (!IsEnabled()) {
-            return;
-        }
-
-        for (auto&& pComponent : m_components) {
-            pComponent->Awake();
-        }
-
-        for (auto&& child : m_children) {
-            child->Awake();
-        }
-    }
-
-    void GameObject::Start() {
-        if (!IsEnabled()) {
-            return;
-        }
-
-        for (auto&& pComponent : m_components) {
-            pComponent->Start();
-        }
-
-        for (auto&& child : m_children) {
-            child->Start();
-        }
-    }
-
-    void GameObject::OnWindowResized(const SR_MATH_NS::IVector2 &size) {
-        /// Игнорируем состояние объекта
-        /// if (!IsEnabled()) {
-        ///     return;
-        /// }
-
-        for (auto&& pComponent : m_components) {
-            pComponent->OnWindowResized(size);
-        }
-
-        for (auto&& children : m_children) {
-            if (!children.LockIfValid())
-                continue;
-
-            children->OnWindowResized(size);
-
-            children.Unlock();
-        }
-    }
-
     void GameObject::OnAttached() {
-        for (auto&& pComponent : m_components) {
-            pComponent->OnGameObjectAttached();
+
+    }
+
+    void GameObject::FixedUpdate() {
+        /// Проверяем на IsEnabled а не на IsActive,
+        /// так как если родитель не активен, то метод не вызвался бы.
+        if (!IsEnabled()) {
+            return;
+        }
+
+        for (auto &&pComponent : m_components.Get()) {
+            if (!pComponent->IsEnabled() || !pComponent->IsStarted()) {
+                continue;
+            }
+
+            pComponent->FixedUpdate();
+        }
+
+        for (auto&& child : m_children) {
+            child->FixedUpdate();
+        }
+    }
+
+    void GameObject::Update(float_t dt) {
+        /// Проверяем на IsEnabled а не на IsActive,
+        /// так как если родитель не активен, то метод не вызвался бы.
+        if (!IsEnabled()) {
+            return;
+        }
+
+        for (auto &&pComponent : m_components.Get()) {
+            if (!pComponent->IsEnabled() || !pComponent->IsStarted()) {
+                continue;
+            }
+
+            pComponent->Update(dt);
+        }
+
+        for (auto&& child : m_children) {
+            child->Update(dt);
         }
     }
 }

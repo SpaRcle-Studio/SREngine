@@ -37,21 +37,6 @@ namespace SR_GTYPES_NS {
         else {
             SRHalt("Render scene is invalid!");
         }
-
-        /*auto&& cameraManager = Memory::CameraManager::Instance();
-
-        /// Что-то пошло не так, возможно переподсоединили компонент во время уничтожения объекта.
-        if (cameraManager.IsDestroyed(this)) {
-            SRHalt("Camera is destroyed! Crash possible!");
-            return;
-        }
-
-        /// Возможно компонент был переподсоиденен, стоит его перезарегистрировать
-        if (cameraManager.IsRegistered(this)) {
-            cameraManager.UnRegisterCamera(this);
-        }
-
-        cameraManager.RegisterCamera(this);*/
     }
 
     void Camera::OnDestroy() {
@@ -63,7 +48,6 @@ namespace SR_GTYPES_NS {
             SRHalt("Render scene is invalid!");
         }
 
-        //Memory::CameraManager::Instance().DestroyCamera(this);
         Component::OnDestroy();
     }
 
@@ -169,7 +153,7 @@ namespace SR_GTYPES_NS {
 
         m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////
 
         m_orthogonal = glm::mat4(1);
 
@@ -180,6 +164,10 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::UpdateProjection(uint32_t w, uint32_t h) {
+        if (m_viewportSize.x == static_cast<int32_t>(w) && m_viewportSize.y == static_cast<int32_t>(h)) {
+            return;
+        }
+
         m_viewportSize = { (int32_t)w, (int32_t)h };
         UpdateProjection();
     }
@@ -211,30 +199,22 @@ namespace SR_GTYPES_NS {
         UpdateProjection();
     }
 
-    void Camera::OnEnabled() {
+    void Camera::OnEnable() {
         if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
             renderScene->SetDirtyCameras();
             renderScene.Unlock();
         }
 
-        //Environment::Get()->SetBuildState(false);
-        Component::OnEnabled();
+        Component::OnEnable();
     }
 
-    void Camera::OnDisabled() {
+    void Camera::OnDisable() {
         if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
             renderScene->SetDirtyCameras();
             renderScene.Unlock();
         }
 
-        //Environment::Get()->SetBuildState(false);
-        Component::OnDisabled();
-    }
-
-    void Camera::OnWindowResized(const SR_MATH_NS::IVector2 &size) {
-        UpdateProjection(size.x, size.y);
-
-        Component::OnWindowResized(size);
+        Component::OnDisable();
     }
 
     void Camera::OnMatrixDirty() {

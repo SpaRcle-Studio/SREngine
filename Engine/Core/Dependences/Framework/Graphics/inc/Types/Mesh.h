@@ -91,8 +91,8 @@ namespace SR_GTYPES_NS {
     protected:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
-        void OnEnabled() override;
-        void OnDisabled() override;
+        void OnEnable() override;
+        void OnDisable() override;
 
     protected:
         SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);

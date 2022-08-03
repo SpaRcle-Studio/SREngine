@@ -24,30 +24,6 @@ namespace SR_GRAPH_NS::Animations {
             return nullptr;
         }
 
-        void SetRender(Render* render) {
-            if (m_mesh) {
-                SR_ERROR("Bone::SetRender() : render is already set!");
-            }
-            else if (auto meshes = Types::Mesh::Load("Engine/Bone.obj", Types::MeshType::Static); !meshes.empty()) {
-                m_mesh = meshes[0];
-                render->RegisterMesh(m_mesh);
-            }
-            else {
-                SR_ERROR("Bone::SetRender() : failed to load mesh!");
-            }
-        }
-        void OnMove(const Helper::Math::FVector3& value) override {
-            if (m_mesh)
-                m_mesh->OnMove(value);
-        }
-        void OnRotate(const Helper::Math::FVector3& value) override {
-            if (m_mesh)
-                m_mesh->OnRotate(value);
-        }
-        void OnScaled(const Helper::Math::FVector3& value) override {
-            if (m_mesh)
-                m_mesh->OnScaled(value);
-        }
         void OnDestroy() override {
             if (m_mesh) {
                 m_mesh->OnDestroy();

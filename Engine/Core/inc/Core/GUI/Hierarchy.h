@@ -41,7 +41,7 @@ namespace SR_CORE_NS::GUI {
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::list<Helper::GameObject::Ptr> m_pointersHolder;
         std::set<Helper::GameObject::Ptr> m_selected;
-        std::unordered_set<Helper::GameObject::Ptr> m_tree;
+        SR_WORLD_NS::GameObjects m_tree;
 
         std::atomic<bool> m_shiftPressed;
 

@@ -23,7 +23,7 @@ namespace SR_GTYPES_NS {
         using RenderTechniquePtr = std::variant<SR_UTILS_NS::Path, RenderTechnique*>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:
-        Camera(uint32_t width = 0, uint32_t height = 0);
+        explicit Camera(uint32_t width = 0, uint32_t height = 0);
         ~Camera() override;
 
     public:
@@ -32,9 +32,10 @@ namespace SR_GTYPES_NS {
     public:
         void OnMatrixDirty() override;
         void OnAttached() override;
-        void OnWindowResized(const SR_MATH_NS::IVector2& size) override;
+        void UpdateProjection(uint32_t w, uint32_t h);
 
     public:
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetOrthogonalRef() const noexcept { return m_orthogonal; }
@@ -62,14 +63,15 @@ namespace SR_GTYPES_NS {
         void SetFOV(float_t value);
 
     private:
-        void UpdateProjection(uint32_t w, uint32_t h);
         void UpdateProjection();
 
         void UpdateView() noexcept;
 
         void OnDestroy() override;
-        void OnEnabled() override;
-        void OnDisabled() override;
+        void OnEnable() override;
+        void OnDisable() override;
+
+
 
     private:
         /** >= 0 - одна главная камера, < 0 - закадровые камеры, которые рендерятся в RenderTexture.

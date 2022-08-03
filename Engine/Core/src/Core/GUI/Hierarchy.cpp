@@ -169,7 +169,7 @@ namespace SR_CORE_NS::GUI {
             case SR_UTILS_NS::KeyCode::Del: {
                 SR_LOCK_GUARD
 
-                if (m_scene.LockIfValid()) {
+                if (m_scene.RecursiveLockIfValid()) {
                     for (auto&& selected : m_selected) {
                         if (selected.LockIfValid()) {
                             auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
@@ -212,7 +212,7 @@ namespace SR_CORE_NS::GUI {
         marshal.Write(static_cast<uint64_t>(m_selected.size()));
 
         for (auto&& ptr : m_selected) {
-            if (ptr.LockIfValid()) {
+            if (ptr.RecursiveLockIfValid()) {
                 marshal.Append(ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
                 ptr.Unlock();
             }
@@ -225,38 +225,34 @@ namespace SR_CORE_NS::GUI {
 
     void Hierarchy::Paste() {
         /// TODO: перевести на команды
-        SR_UTILS_NS::TaskManager::Instance().Execute([this](std::atomic<SR_UTILS_NS::Task::State>* state) {
-            SR_HTYPES_NS::SafePtrLockGuard m_lock(GetRenderScene());
 
-            state->store(SR_UTILS_NS::Task::State::Completed);
-            auto&& base64 = Helper::Platform::GetClipboardText();
+        auto&& base64 = Helper::Platform::GetClipboardText();
 
-            if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
-                std::set<Helper::GameObject::Ptr> selected;
+        if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
+            std::set<Helper::GameObject::Ptr> selected;
 
-                if (m_scene.LockIfValid()) {
-                    auto&& count = marshal.Read<uint64_t>();
+            if (m_scene.RecursiveLockIfValid()) {
+                auto&& count = marshal.Read<uint64_t>();
 
-                    if (count > 1000) {
-                        SR_WARN("Hierarchy::Paste() : attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
-                    }
-
-                    for (uint64_t i = 0; i < count; ++i) {
-                        if (auto &&ptr = m_scene->Instance(marshal)) {
-                            selected.insert(ptr);
-                        }
-                        else
-                            break;
-                    }
-                    m_scene.Unlock();
+                if (count > 1000) {
+                    SR_WARN("Hierarchy::Paste() : attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
                 }
 
-                {
-                    SR_LOCK_GUARD
-                    m_selected = selected;
+                for (uint64_t i = 0; i < count; ++i) {
+                    if (auto &&ptr = m_scene->Instance(marshal)) {
+                        selected.insert(ptr);
+                    }
+                    else
+                        break;
                 }
+                m_scene.Unlock();
             }
-        });
+
+            {
+                SR_LOCK_GUARD
+                m_selected = selected;
+            }
+        }
     }
 
     std::set<Helper::GameObject::Ptr> Hierarchy::GetSelected() const {

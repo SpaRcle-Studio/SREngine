@@ -43,6 +43,8 @@ namespace Framework {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
         using ScenePtr = Helper::Types::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
+        using Clock = std::chrono::high_resolution_clock;
+        using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
     private:
         Engine() = default;
         ~Engine() override = default;
@@ -51,7 +53,6 @@ namespace Framework {
         void Reload();
         bool SetScene(const ScenePtr& scene);
 
-        SR_NODISCARD SR_INLINE SR_HTYPES_NS::Time* GetTime() const { return this->m_time; }
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD SR_INLINE Graphics::Window* GetWindow() const { return m_window; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
@@ -66,24 +67,31 @@ namespace Framework {
         bool Close();
 
     private:
+        void Prepare();
+        void FixedUpdate();
+        void Update(float_t dt);
         void ResizeCallback(const SR_MATH_NS::IVector2& size);
         void DrawCallback();
         bool RegisterLibraries();
         void WorldThread();
 
     private:
-        std::atomic<bool>             m_isCreate    = false;
-        std::atomic<bool>             m_isInit      = false;
-        std::atomic<bool>             m_isRun       = false;
-        std::atomic<bool>             m_isClose     = false;
+        std::atomic<bool> m_isCreate    = false;
+        std::atomic<bool> m_isInit      = false;
+        std::atomic<bool> m_isRun       = false;
 
-        std::atomic<bool>             m_exitEvent   = false;
+        std::atomic<bool> m_exitEvent   = false;
+        std::atomic<bool> m_isActive    = false;
 
-        SR_UTILS_NS::CmdManager*      m_cmdManager  = nullptr;
-        SR_GRAPH_NS::Window*          m_window      = nullptr;
-        SR_GRAPH_NS::Render*          m_render      = nullptr;
+        float_t m_speed = 1.f;
+        float_t m_updateFrequency = 1.f;
+        float_t m_accumulator = 1.f;
+        TimePoint m_timeStart;
 
-        SR_HTYPES_NS::Time*           m_time        = nullptr;
+        SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
+        SR_GRAPH_NS::Window*     m_window      = nullptr;
+        SR_GRAPH_NS::Render*     m_render      = nullptr;
+
         SR_HTYPES_NS::Thread::Ptr     m_worldThread = nullptr;
 
         Core::GUI::EditorGUI*         m_editor      = nullptr;

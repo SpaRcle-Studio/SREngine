@@ -14,6 +14,7 @@
 #include <Utils/Math/Quaternion.h>
 
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -80,11 +81,14 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
 
     protected:
-        virtual void UpdateMatrix() { }
+        virtual bool IsDirty() const noexcept;
+        virtual void UpdateMatrix() { m_dirtyMatrix = false; }
         virtual void UpdateTree();
 
     protected:
         GameObject* m_gameObject = nullptr;
+
+    private:
         bool m_dirtyMatrix = true;
 
     };

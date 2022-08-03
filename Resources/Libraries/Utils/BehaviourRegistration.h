@@ -22,6 +22,14 @@
         g_codegen_behaviour_ptr->Start();                                 \
     }                                                                     \
                                                                           \
+    EXTERN void OnDisable() {                                             \
+        g_codegen_behaviour_ptr->OnDisable();                             \
+    }                                                                     \
+                                                                          \
+    EXTERN void OnEnable() {                                              \
+        g_codegen_behaviour_ptr->OnEnable();                              \
+    }                                                                     \
+                                                                          \
     EXTERN void Update(float_t dt) {                                      \
         g_codegen_behaviour_ptr->Update(dt);                              \
     }                                                                     \

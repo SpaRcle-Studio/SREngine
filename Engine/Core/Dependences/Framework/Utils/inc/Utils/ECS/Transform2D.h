@@ -10,13 +10,17 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
+    SR_ENUM_CLASS(Stretch,
+          None = 1 << 0,
+          StretchX = 1 << 1,
+          StretchY = 1 << 2,
+          StretchXY = StretchX | StretchY,
+    );
+
     class SR_DLL_EXPORT Transform2D : public Transform {
         friend class GameObject;
     public:
-        Transform2D()
-            : Transform()
-        { }
-
+        Transform2D();
         ~Transform2D() override = default;
 
     public:
@@ -32,13 +36,25 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetSkew() const override { return m_skew; }
         SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::Space2D; }
 
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
+
+    protected:
+        void UpdateMatrix() override;
+
     public:
         SR_INLINE static constexpr SR_MATH_NS::FVector2 RIGHT = Math::FVector2(1, 0);
         SR_INLINE static constexpr SR_MATH_NS::FVector2 UP    = Math::FVector2(0, 1);
 
     protected:
+        Stretch m_stretch = Stretch::None;
+
+        SR_MATH_NS::Unit m_height = 1.f;
+        SR_MATH_NS::Unit m_width = 1.f;
+
+        SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
+        SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();
+
         SR_MATH_NS::FVector2 m_pivot = SR_MATH_NS::FVector2::Zero();
-        SR_MATH_NS::FVector2 m_size = SR_MATH_NS::FVector2(100.f);
 
         SR_MATH_NS::FVector2 m_anchorMin = SR_MATH_NS::FVector2::Zero();
         SR_MATH_NS::FVector2 m_anchorMax = SR_MATH_NS::FVector2::Zero();

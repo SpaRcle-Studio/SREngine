@@ -41,7 +41,7 @@ namespace SR_GRAPH_NS {
         virtual ~RenderContext() = default;
 
     public:
-        void Update();
+        void Update() noexcept;
 
         bool Init();
         void Close();
@@ -69,7 +69,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
 
     private:
-        template<typename T> bool Update(std::list<T>& resourceList);
+        template<typename T> bool Update(std::list<T>& resourceList) noexcept;
 
     private:
         SR_MATH_NS::IVector2 m_windowSize;
@@ -94,7 +94,7 @@ namespace SR_GRAPH_NS {
 
     /// ------------------------------------------------------------------------------
 
-    template<typename T> bool RenderContext::Update(std::list<T> &resourceList) {
+    template<typename T> bool RenderContext::Update(std::list<T> &resourceList) noexcept {
         bool dirty = false;
 
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {

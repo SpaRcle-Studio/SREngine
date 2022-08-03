@@ -14,7 +14,7 @@ namespace SR_GRAPH_NS::Memory {
 namespace SR_GTYPES_NS {
     class Mesh3D final : public IndexedMesh {
         friend class Mesh;
-        SR_ENTITY_SET_VERSION(1000);
+        SR_ENTITY_SET_VERSION(1001);
     public:
         Mesh3D();
 

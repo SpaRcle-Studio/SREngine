@@ -10,6 +10,7 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Marshal.h>
+#include <Utils/Types/SafeVariable.h>
 #include <Utils/World/Scene.h>
 
 /**
@@ -30,6 +31,7 @@ namespace SR_HTYPES_NS {
 }
 
 namespace SR_UTILS_NS {
+    class ComponentManager;
     class Component;
     class Transform2D;
     class Transform3D;
@@ -38,6 +40,7 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT Component : public Entity {
         friend class GameObject;
+        friend class ComponentManager;
     public:
         using GameObjectPtr = SR_HTYPES_NS::SafePtr<GameObject>;
     public:
@@ -45,38 +48,35 @@ namespace SR_UTILS_NS {
 
     public:
         virtual void OnMatrixDirty() { }
-        virtual void OnRotate(const Math::FVector3& newValue) { }
-        virtual void OnMove(const Math::FVector3& newValue) { }
-        virtual void OnScaled(const Math::FVector3& newValue) { }
-        virtual void OnSkewed(const Math::FVector3& newValue) { }
-
-        virtual void OnGameObjectAttached() { }
-        virtual void OnWindowResized(const SR_MATH_NS::IVector2& size) { }
 
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
         virtual void OnDestroy() { }
 
-        virtual void OnEnabled() { }
-        virtual void OnDisabled() { }
+        virtual void OnEnable() { m_isActive = true; }
+        virtual void OnDisable() { m_isActive = false; }
 
-        virtual void Awake() { }
-        virtual void Start() { }
-        virtual void Update() { }
+        virtual void Awake() { m_isAwake = true; }
+        virtual void Start() { m_isStarted = true; }
+        virtual void Update(float_t dt) { }
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
 
     public:
-        void SetEnabled(bool value);
-        void SetParent(GameObject* parent);
+        void CheckActivity();
 
-    public:
+        void SetEnabled(bool value);
+
         /// Активен и компонент и его родительский объект
         SR_NODISCARD bool IsActive() const noexcept;
         /// Активен сам компонент, независимо от объекта
-        SR_NODISCARD SR_INLINE bool IsEnabled() const noexcept;
+        SR_NODISCARD bool IsEnabled() const noexcept;
 
+        SR_NODISCARD bool IsAwake() const noexcept { return m_isAwake; }
+        SR_NODISCARD bool IsStarted() const noexcept { return m_isStarted; }
+
+        SR_NODISCARD virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
@@ -95,19 +95,20 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
 
     private:
-        void CheckActivity();
+        void SetParent(GameObject* parent);
 
     protected:
-        mutable std::recursive_mutex m_mutex;
+        std::atomic<bool> m_isEnabled = true;
 
-        bool m_isEnabled = true;
         bool m_isActive = false;
+        bool m_isAwake = false;
+        bool m_isStarted = false;
 
         /// TODO: need remove for optimization, use numeric id
         std::string m_name = "Unknown";
 
         uint64_t m_componentId = SIZE_MAX;
-        GameObject* m_parent = nullptr;
+        SR_HTYPES_NS::SafeVar<GameObject*> m_parent = nullptr;
 
     };
 }

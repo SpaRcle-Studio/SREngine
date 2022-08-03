@@ -5,6 +5,10 @@
 #include <Utils/ECS/Transform2D.h>
 
 namespace SR_UTILS_NS {
+    Transform2D::Transform2D()
+        : Transform()
+    { }
+
     void Transform2D::SetTranslation(const SR_MATH_NS::FVector3 &translation) {
         SR_MATH_NS::FVector3 delta = translation - m_translation;
 
@@ -14,7 +18,7 @@ namespace SR_UTILS_NS {
 
         m_translation = translation;
 
-        //UpdateComponents();
+        UpdateTree();
     }
 
     void Transform2D::SetTranslationAndRotation(const SR_MATH_NS::FVector3 &translation, const SR_MATH_NS::FVector3 &euler) {
@@ -26,7 +30,7 @@ namespace SR_UTILS_NS {
         m_translation = translation;
         m_rotation = euler.Limits(360);
 
-        //UpdateComponents();
+        UpdateTree();
     }
 
     void Transform2D::SetRotation(const SR_MATH_NS::FVector3& euler) {
@@ -35,7 +39,7 @@ namespace SR_UTILS_NS {
 
         m_rotation = euler.Limits(360);
 
-        //UpdateComponents();
+        UpdateTree();
     }
 
     void Transform2D::SetScale(const SR_MATH_NS::FVector3& rawScale) {
@@ -49,20 +53,47 @@ namespace SR_UTILS_NS {
         SR_MATH_NS::FVector3 delta = scale / m_scale;
 
         m_scale = scale;
-        //UpdateComponents();
+
+        UpdateTree();
     }
 
     void Transform2D::SetSkew(const SR_MATH_NS::FVector3& rawSkew) {
         SR_MATH_NS::FVector3 skew = rawSkew;
 
         if (skew.ContainsNaN()) {
-            SR_WARN("Transform2D::GlobalSkew() : skew contains NaN! Reset...");
+            SR_WARN("Transform2D::SetSkew() : skew contains NaN! Reset...");
             skew = Math::FVector3::One();
         }
 
         Math::FVector3 delta = skew / m_skew;
 
         m_skew = skew;
-        //UpdateComponents();
+
+        UpdateTree();
+    }
+
+    const SR_MATH_NS::Matrix4x4 &Transform2D::GetMatrix() {
+        if (IsDirty()) {
+            UpdateMatrix();
+
+            if (auto&& pTransform = m_gameObject->GetParentTransform()) {
+                m_matrix = pTransform->GetMatrix() * m_localMatrix;
+            }
+            else {
+                m_matrix = m_localMatrix;
+            }
+        }
+
+        return m_matrix;
+    }
+
+    void Transform2D::UpdateMatrix() {
+        m_localMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(m_translation);
+        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
+        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
+
+        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+        Transform::UpdateMatrix();
     }
 }

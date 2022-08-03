@@ -148,4 +148,8 @@ namespace SR_UTILS_NS {
             child->m_transform->UpdateTree();
         }
     }
+
+    bool Transform::IsDirty() const noexcept {
+        return m_dirtyMatrix;
+    }
 }

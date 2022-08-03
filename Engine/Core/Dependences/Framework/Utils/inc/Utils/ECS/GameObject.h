@@ -9,6 +9,7 @@
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SafeVariable.h>
 
 namespace SR_UTILS_NS::World {
     class Scene;
@@ -43,6 +44,8 @@ namespace SR_UTILS_NS {
         friend class Component;
     public:
         typedef Types::SafePtr<GameObject> Ptr;
+        using GameObjects = std::list<GameObject::Ptr>;
+        using Components = SR_HTYPES_NS::SafeVar<std::list<Component*>>;
 
     private:
         GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag = "Untagged");
@@ -58,14 +61,12 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsActive() const;
         SR_NODISCARD bool IsEnabled() const { return m_isEnabled; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
-        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>>& GetChildrenRef() { return m_children; }
-        SR_NODISCARD SR_INLINE std::unordered_set<Types::SafePtr<GameObject>> GetChildren() const { return m_children; }
+        SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
+        SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
-
-        void OnWindowResized(const SR_MATH_NS::IVector2& size);
 
         Math::FVector3 GetBarycenter();
         Math::FVector3 GetHierarchyBarycenter();
@@ -79,14 +80,21 @@ namespace SR_UTILS_NS {
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
         std::list<Component*> GetComponents() { return m_components; }
-        std::list<Component*>& GetComponentsRef() { return m_components; }
+        //std::list<Component*>& GetComponentsRef() { return m_components; }
+
+        /** Отличие от AddComponent в том, что используется только при загрузке объекта,
+         * не вызывая при этом Awake -> OnEnable -> Start */
+        bool LoadComponent(Component* component);
+        /** Добавляет новый компонент на объект, вызывает у компонента
+         * последовательность Awake -> OnEnable -> Start */
         bool AddComponent(Component* component);
+
         bool RemoveComponent(Component* component);
         bool ReplaceComponent(Component* source, Component* destination);
         bool ContainsComponent(const std::string& name);
         void ForEachComponent(const std::function<bool(Component*)>& fun);
 
-        bool Contains(const Types::SafePtr<GameObject>& child);
+        bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
         void Destroy(GODestroyByBits by = GAMEOBJECT_DESTROY_BY_OTHER);
         void SetTransform(Transform* transform);
@@ -94,8 +102,14 @@ namespace SR_UTILS_NS {
 
         bool MoveToTree(const GameObject::Ptr& destination);
         bool AddChild(const GameObject::Ptr& child);
-        bool IsChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
+
+        void Awake();
+        void Start();
+        void FixedUpdate();
+        void Update(float_t dt);
+
+        void CheckActivity();
 
     public:
         template<typename T> T* GetComponent() {
@@ -104,37 +118,25 @@ namespace SR_UTILS_NS {
 
     private:
         void OnAttached();
-
-        void UpdateComponents();
-        void UpdateComponentsPosition();
-        void UpdateComponentsRotation();
-        void UpdateComponentsScale();
-        void UpdateComponentsSkew();
         void OnMatrixDirty();
-
-        void Awake();
-        void Start();
 
         /// TODO: remove this method
         void Free();
 
         bool UpdateEntityPath();
 
-        void CheckActivity(bool force = false);
-
     private:
         std::atomic<bool>                   m_isEnabled      = true;
-        std::atomic<bool>                   m_isActive       = true;
+        std::atomic<bool>                   m_isActive       = false;
         std::atomic<bool>                   m_isDestroy      = false;
 
         GameObject::Ptr                     m_parent         = GameObject::Ptr();
-        std::unordered_set<GameObject::Ptr> m_children       = std::unordered_set<GameObject::Ptr>();
-
+        std::list<GameObject::Ptr>          m_children       = { };
 
         Types::SafePtr<World::Scene>        m_scene          = Types::SafePtr<World::Scene>();
         Transform*                          m_transform      = nullptr;
 
-        std::list<Component*>               m_components     = std::list<Component*>();
+        Components                          m_components     = std::list<Component*>();
 
         std::string                         m_name           = "Unnamed";
         std::string                         m_tag            = "Untagged";

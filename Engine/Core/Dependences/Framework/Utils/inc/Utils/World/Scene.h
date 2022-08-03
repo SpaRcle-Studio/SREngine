@@ -57,7 +57,7 @@ namespace SR_WORLD_NS {
     class Region;
     class Chunk;
 
-    typedef std::unordered_set<Types::SafePtr<GameObject>> GameObjects;
+    typedef std::list<Types::SafePtr<GameObject>> GameObjects;
     typedef std::unordered_map<TensorKey, GameObjects> Tensor;
     typedef std::unordered_map<Math::IVector3, Region*> Regions;
 

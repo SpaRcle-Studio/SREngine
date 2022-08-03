@@ -141,13 +141,19 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::OnDestroy() {
-        RemoveUsePoint();
-
-        GetRenderScene().Do([](RenderScene *ptr) {
-            ptr->SetDirty();
-        });
-
         Component::OnDestroy();
+
+        if (IsValid()) {
+            RemoveUsePoint();
+
+            if (auto &&renderScene = GetRenderScene()) {
+                renderScene->SetDirty();
+            }
+        }
+        else {
+            /// Ресурс так и не был зарегистрирован, удаляем вручную
+            delete this;
+        }
     }
 
     bool Mesh::IsCanCalculate() const {
@@ -242,18 +248,18 @@ namespace SR_GRAPH_NS::Types {
         IResource::OnResourceUpdated(pResource, depth);
     }
 
-    void Mesh::OnEnabled() {
-        GetRenderScene().Do([](RenderScene *ptr) {
-            ptr->SetDirty();
-        });
-        Component::OnEnabled();
+    void Mesh::OnEnable() {
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+        Component::OnEnable();
     }
 
-    void Mesh::OnDisabled() {
-        GetRenderScene().Do([](RenderScene *ptr) {
-            ptr->SetDirty();
-        });
-        Component::OnDisabled();
+    void Mesh::OnDisable() {
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+        Component::OnDisable();
     }
 
     Mesh::RenderScenePtr Mesh::GetRenderScene() {

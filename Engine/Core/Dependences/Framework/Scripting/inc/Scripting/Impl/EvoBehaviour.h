@@ -19,6 +19,12 @@ namespace SR_SCRIPTING_NS {
         void SetProperty(const std::string& id, const std::any& val) override;
 
     protected:
+        void Awake() override;
+        void OnEnable() override;
+        void OnDisable() override;
+        void Start() override;
+        void Update(float_t dt) override;
+
         bool Load() override;
         bool Unload() override;
         SR_NODISCARD uint64_t GetFileHash() const override;
@@ -28,6 +34,12 @@ namespace SR_SCRIPTING_NS {
 
     private:
         EvoScript::Script* m_script = nullptr;
+
+        EvoScript::Typedefs::AwakeFnPtr m_awake = nullptr;
+        EvoScript::Typedefs::OnEnableFnPtr m_onEnable = nullptr;
+        EvoScript::Typedefs::OnDisableFnPtr m_onDisable = nullptr;
+        EvoScript::Typedefs::StartFnPtr m_start = nullptr;
+        EvoScript::Typedefs::UpdateFnPtr m_update = nullptr;
 
         EvoScript::Typedefs::InitBehaviourFnPtr m_initBehaviour = nullptr;
         EvoScript::Typedefs::ReleaseBehaviourFnPtr m_releaseBehaviour = nullptr;

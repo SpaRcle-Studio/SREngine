@@ -44,7 +44,7 @@ namespace SR_UTILS_NS {
         }
 
         if (auto&& pComponent = m_meta.at(uidIt->second).loader(marshal, &m_context)) {
-            pComponent->SetEnabled(enabled);
+            pComponent->m_isEnabled = enabled;
             return pComponent;
         }
 

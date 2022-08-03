@@ -94,7 +94,7 @@ bool GUISystem::BeginDockSpace() {
 
         SR_BEGIN_RIGHT_ALIGNMENT()
             SR_RIGHT_BUTTON(close, "×", {
-                SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
+                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
             }, {})
 
             if (pWindow->GetState() == Graphics::WindowState::Default)
@@ -679,7 +679,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Save scene")) {
-            if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+            if (auto scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
                     const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
@@ -709,7 +709,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Instance from file")) {
-            if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
                     { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
@@ -728,7 +728,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Exit")) {
-            SR_UTILS_NS::EventManager::Push(Helper::EventManager::Event::Exit);
+            SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
         }
 
         ImGui::EndMenu();

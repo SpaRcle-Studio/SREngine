@@ -266,13 +266,13 @@ namespace SR_GRAPH_NS {
 
             m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
 
-            this->m_renderPassBI.clearValueCount = colorCount + 1;
-            this->m_renderPassBI.pClearValues    = m_clearValues.data();
+            m_renderPassBI.clearValueCount = colorCount + 1;
+            m_renderPassBI.pClearValues    = m_clearValues.data();
         }
 
         SR_FORCE_INLINE void DrawFrame() override {
-            if (this->m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
-                Helper::EventManager::Push(Helper::EventManager::Event::Fatal);
+            if (m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
+                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
                 m_hasErrors = true;
             }
         }

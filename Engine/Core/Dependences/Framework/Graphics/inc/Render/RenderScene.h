@@ -9,6 +9,7 @@
 #include <Render/MeshCluster.h>
 #include <Render/SortedMeshQueue.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SafeVariable.h>
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -43,12 +44,14 @@ namespace SR_GRAPH_NS {
         virtual ~RenderScene();
 
     public:
-        void Render();
+        void Render() noexcept;
         void Synchronize();
 
         void OnResize(const SR_MATH_NS::IVector2& size);
 
+        /// Можно вызывать не синхронно
         void SetDirty();
+
         void SetDirtyCameras();
 
         void SetTechnique(const SR_UTILS_NS::Path& path);
@@ -62,6 +65,7 @@ namespace SR_GRAPH_NS {
 
         void SetOverlayEnabled(bool enabled);
 
+        SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD bool IsOverlayEnabled() const;
         SR_NODISCARD RenderContext* GetContext() const;
@@ -80,8 +84,8 @@ namespace SR_GRAPH_NS {
         void Overlay();
         void Prepare();
         void Build();
-        void Update();
-        void Submit();
+        void Update() noexcept;
+        void Submit() noexcept;
 
     private:
         CameraPtr m_mainCamera = nullptr;
@@ -100,8 +104,9 @@ namespace SR_GRAPH_NS {
 
         SR_MATH_NS::IVector2 m_surfaceSize;
 
+        SR_HTYPES_NS::SafeVar<uint32_t> m_dirty = 0;
+
         bool m_dirtyCameras = true;
-        bool m_dirty        = true;
         bool m_hasDrawData  = false;
         bool m_bOverlay     = false;
 

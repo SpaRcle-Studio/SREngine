@@ -22,11 +22,6 @@ namespace SR_GRAPH_NS::UI {
     private:
         SR_NODISCARD SR_MATH_NS::FVector2 GetSizes() const;
 
-        void OnWindowResized(const SR_MATH_NS::IVector2& size) override;
-        void OnMove(const SR_MATH_NS::FVector3& newValue) override;
-        void OnRotate(const SR_MATH_NS::FVector3& newValue) override;
-        void OnScaled(const SR_MATH_NS::FVector3& newValue) override;
-        void OnSkewed(const SR_MATH_NS::FVector3& newValue) override;
         void OnDestroy() override;
 
         void TransformUI();

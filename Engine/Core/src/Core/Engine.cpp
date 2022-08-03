@@ -25,7 +25,6 @@ namespace Framework {
     bool Engine::Create(SR_GRAPH_NS::Window* window) {
         m_window = window;
 
-        m_time       = new SR_HTYPES_NS::Time();
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();
         m_pipeline   = SR_GRAPH_NS::Environment::Get();
@@ -55,7 +54,7 @@ namespace Framework {
         m_input->Register(m_editor);
         m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
 
-        Graphics::Environment::RegisterScrollEvent([](double x, double y){
+        Graphics::Environment::RegisterScrollEvent([](double x, double y) {
             SR_UTILS_NS::Input::Instance().SetMouseScroll(x, y);
         });
 
@@ -63,6 +62,10 @@ namespace Framework {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
             SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
+
+        m_updateFrequency = (1.f / (60.f * m_speed)) * CLOCKS_PER_SEC;
+        m_accumulator = m_updateFrequency;
+        m_timeStart = Clock::now();
 
         m_isCreate = true;
 
@@ -82,12 +85,12 @@ namespace Framework {
 
         SR_INFO("Engine::Init() : initializing game engine...");
 
-        Helper::EventManager::Subscribe([this](SR_UTILS_NS::EventManager::Event event){
+        Helper::EventManager::Instance().Subscribe([this](const SR_UTILS_NS::EventManager::Event& event){
             switch (event) {
                 case SR_UTILS_NS::EventManager::Event::Exit:
                     m_exitEvent = true;
                     break;
-                case SR_UTILS_NS::EventManager::Event::Fatal:
+                case SR_UTILS_NS::EventManager::Event::FatalError:
                     SR_ERROR("Engine::(EventManager) : a fatal error event has been detected!");
                     m_exitEvent = true;
                     break;
@@ -148,75 +151,13 @@ namespace Framework {
     void Engine::Await() {
         SR_INFO("Engine::Await() : waiting for the engine to close...");
 
-        const float updateFrequency = (1.f / 60.f) * CLOCKS_PER_SEC;
-        float accumulator = updateFrequency;
-        using clock = std::chrono::high_resolution_clock;
-        auto timeStart = clock::now();
-
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(1);
-
-            const auto now = clock::now();
-            const auto deltaTime = now - timeStart;
-            timeStart = now;
-
-            const bool windowFocused = m_window != nullptr && m_window->IsWindowFocus();
-
-            /// fixed update
-            if (accumulator >= updateFrequency) {
-                SR_UTILS_NS::EventManager::PoolEvents();
-
-                while (accumulator >= updateFrequency) {
-                    if (windowFocused) {
-                        SR_UTILS_NS::Input::Instance().Check();
-
-                        m_input->Check();
-
-                        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-                            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
-                                m_cmdManager->Cancel();
-
-                            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
-                                if (!m_cmdManager->Redo())
-                                    SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
-                        }
-
-                        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
-                            m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
-                        }
-
-                        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
-                            m_editor->Enable(!m_editor->Enabled());
-                            m_renderScene.Do([](SR_GRAPH_NS::RenderScene* ptr) {
-                                ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
-                            });
-                        }
-
-                        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3)) {
-                            Reload();
-                        }
-
-                        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::BackSpace) && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift)) {
-                            SR_SYSTEM_LOG("Engine::Await() : The closing key combination have been detected!");
-                            m_exitEvent = true;
-                            break;
-                        }
-                    }
-
-                    if (m_editor) {
-                        m_editor->Update();
-                    }
-
-                    accumulator -= updateFrequency;
-                }
-            }
+            SR_HTYPES_NS::Thread::Sleep(10);
 
             if (m_exitEvent) {
                 SR_SYSTEM_LOG("Engine::Await() : the closing event have been received!");
                 break;
             }
-
-            accumulator += (float)deltaTime.count() / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
         }
 
         if (m_editor && m_editor->Enabled()) {
@@ -259,16 +200,39 @@ namespace Framework {
             m_window = nullptr;
         }
 
-        if (m_time) {
-            SR_INFO("Engine::Close() : destroying time...");
-            delete m_time;
-            m_time = nullptr;
-        }
-
         return true;
     }
 
     void Engine::DrawCallback() {
+        if (m_window == nullptr || !m_window->IsWindowFocus()) {
+            m_accumulator = 0.f;
+            return;
+        }
+
+        SR_HTYPES_NS::Time::Instance().Update();
+
+        if (m_scene.LockIfValid()) {
+            Prepare();
+
+            Update(m_accumulator);
+
+            const auto now = SR_HTYPES_NS::Time::Instance().Now();
+            const auto deltaTime = now - m_timeStart;
+            m_timeStart = now;
+
+            /// fixed update
+            if (m_accumulator >= m_updateFrequency) {
+                while (m_accumulator >= m_updateFrequency) {
+                    FixedUpdate();
+                    m_accumulator -= m_updateFrequency;
+                }
+            }
+
+            m_accumulator += static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
+
+            m_scene.Unlock();
+        }
+
         if (m_renderScene.LockIfValid()) {
             m_renderScene->Render();
             /// В процессе отрисовки сцена могла быть заменена
@@ -335,6 +299,7 @@ namespace Framework {
         if (m_editor) {
             m_editor->GetWindow<Hierarchy>()->SetScene(m_scene);
             m_editor->GetWindow<SceneViewer>()->SetScene(m_scene);
+            m_editor->GetWindow<Inspector>()->SetScene(m_scene);
             m_editor->GetWindow<WorldEdit>()->SetScene(m_scene);
         }
 
@@ -347,7 +312,7 @@ namespace Framework {
 
     void Engine::Reload() {
         SR_PLATFORM_NS::SelfOpen();
-        SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
+        m_exitEvent = true;
     }
 
     void Engine::WorldThread() {
@@ -385,17 +350,75 @@ namespace Framework {
     }
 
     void Engine::ResizeCallback(const SR_MATH_NS::IVector2& size) {
-        if (!m_scene.LockIfValid()) {
+
+    }
+
+    void Engine::FixedUpdate() {
+        SR_UTILS_NS::Input::Instance().Check();
+
+        m_input->Check();
+
+        bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
+
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
+                m_cmdManager->Cancel();
+
+            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
+                if (!m_cmdManager->Redo())
+                    SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+        }
+
+        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+            m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+        }
+
+        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+            m_editor->Enable(!m_editor->Enabled());
+            m_renderScene.Do([](SR_GRAPH_NS::RenderScene* ptr) {
+                ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
+            });
+        }
+
+        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
+            Reload();
             return;
         }
 
-        for (auto&& root : m_scene->GetRootGameObjects()) {
-            if (root.LockIfValid()) {
-                root->OnWindowResized(size);
-                root.Unlock();
-            }
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::BackSpace) && lShiftPressed) {
+            SR_SYSTEM_LOG("Engine::Await() : The closing key combination have been detected!");
+            m_exitEvent = true;
+            return;
         }
 
-        m_scene.Unlock();
+        for (auto&& gameObject : m_scene->GetRootGameObjects()) {
+            gameObject->FixedUpdate();
+        }
+
+        if (m_editor) {
+            m_editor->Update();
+        }
+    }
+
+    void Engine::Update(float_t dt) {
+        for (auto&& gameObject : m_scene->GetRootGameObjects()) {
+            gameObject->Update(dt);
+        }
+    }
+
+    void Engine::Prepare() {
+        auto&& root = m_scene->GetRootGameObjects();
+
+        for (auto&& gameObject : root) {
+            gameObject->Awake();
+        }
+
+        for (auto&& gameObject : root) {
+            gameObject->CheckActivity();
+        }
+
+        for (auto&& gameObject : root) {
+            gameObject->Start();
+        }
     }
 }

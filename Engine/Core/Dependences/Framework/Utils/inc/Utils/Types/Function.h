@@ -48,7 +48,7 @@ namespace SR_HTYPES_NS {
             return *this;
         }
 
-        ReturnType operator()(ArgumentTypes... args) {
+        ReturnType operator()(ArgumentTypes... args) const noexcept {
             return mInvoker->invoke(args...);
         }
 

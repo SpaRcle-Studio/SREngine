@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS {
         SRAssert(IsEmpty());
     }
 
-    void RenderScene::Render() {
+    void RenderScene::Render() noexcept {
         /// ImGui будет нарисован поверх независимо оторядка отрисовки.
         /// Однако, если его нарисовать в конце, то пользователь может
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену
@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS {
 
         Prepare();
 
-        if (m_dirty || GetPipeline()->IsNeedReBuild()) {
+        if (IsDirty() || GetPipeline()->IsNeedReBuild()) {
             Build();
         }
 
@@ -49,7 +49,13 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::SetDirty() {
-        m_dirty = true;
+        m_dirty.Do([](uint32_t& data) {
+            ++data;
+        });
+    }
+
+    bool RenderScene::IsDirty() const noexcept {
+        return m_dirty.Get() > 0;
     }
 
     void RenderScene::SetDirtyCameras() {
@@ -71,16 +77,18 @@ namespace SR_GRAPH_NS {
 
         SR_RENDER_TECHNIQUES_RETURN_CALL(Render)
 
-        m_dirty = false;
+        m_dirty.Do([](uint32_t& data) {
+            data = data > 1 ? 1 : 0;
+        });
 
         GetPipeline()->SetBuildState(true);
     }
 
-    void RenderScene::Update() {
+    void RenderScene::Update() noexcept {
         SR_RENDER_TECHNIQUES_CALL(Update)
     }
 
-    void RenderScene::Submit() {
+    void RenderScene::Submit() noexcept {
         if (!m_hasDrawData) {
             return;
         }
@@ -309,6 +317,10 @@ namespace SR_GRAPH_NS {
 
     void RenderScene::OnResize(const SR_MATH_NS::IVector2 &size) {
         m_surfaceSize = size;
+
+        for (auto&& cameraInfo : m_cameras) {
+            cameraInfo.pCamera->UpdateProjection(m_surfaceSize.x, m_surfaceSize.y);
+        }
 
         if (m_technique) {
             m_technique->OnResize(size);

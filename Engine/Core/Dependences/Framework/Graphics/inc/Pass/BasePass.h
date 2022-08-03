@@ -7,6 +7,7 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Math/Vector2.h>
+#include <Utils/Types/Function.h>
 #include <Utils/Xml.h>
 #include <Memory/UBOManager.h>
 
@@ -22,7 +23,7 @@ namespace SR_GRAPH_NS {
     class Environment;
     class BasePass;
 
-    typedef std::map<std::string, std::function<BasePass*(RenderTechnique*, const SR_XML_NS::Node&)>> RenderPassMap;
+    typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(RenderTechnique*, const SR_XML_NS::Node&)>> RenderPassMap;
     RenderPassMap& GetRenderPassMap();
 
     class BasePass : public SR_UTILS_NS::NonCopyable {

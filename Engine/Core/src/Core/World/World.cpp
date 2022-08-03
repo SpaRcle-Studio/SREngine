@@ -44,6 +44,8 @@ namespace Framework::Core::World {
 
         /// ----------------------
 
+        gameObject->SetEnabled(enabled);
+
         gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
                 marshal,
                 gameObject.Get()
@@ -68,7 +70,7 @@ namespace Framework::Core::World {
                 auto&& compEntityId = marshal.Read<uint64_t>();
 
                 if (auto&& component = componentManager.Load(marshal)) {
-                    gameObject->AddComponent(component);
+                    gameObject->LoadComponent(component);
                 }
                 else {
                     SR_WARN("World::Instance() : failed to load \"" + SR_UTILS_NS::ComponentManager::Instance().GetLastComponentName() + "\" component!");
@@ -105,7 +107,7 @@ namespace Framework::Core::World {
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
-                    ptr->AddComponent(mesh);
+                    ptr->LoadComponent(mesh);
                 }
                 else {
                     SRHalt("failed to load mesh!");

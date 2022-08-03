@@ -31,11 +31,6 @@ namespace SR_GRAPH_NS::UI {
         });
     }
 
-    void Anchor::OnWindowResized(const SR_MATH_NS::IVector2& size) {
-        TransformUI();
-        Component::OnWindowResized(size);
-    }
-
     SR_UTILS_NS::Component* Anchor::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         return new Anchor();
     }
@@ -52,30 +47,14 @@ namespace SR_GRAPH_NS::UI {
             return size;
         }
 
-        for (auto&& pComponent : m_parent->GetComponentsRef()) {
-            if (auto&& pSprite = dynamic_cast<Sprite2D*>(pComponent)) {
-                size = pSprite->GetSizes() * GetTransform()->GetScale2D();
-            }
-        }
+        //for (auto&& pComponent : m_parent->GetComponentsRef()) {
+        //    if (auto&& pSprite = dynamic_cast<Sprite2D*>(pComponent)) {
+        //        size = pSprite->GetSizes() * GetTransform()->GetScale2D();
+        //    }
+        //}
 
         m_parent->Unlock();
 
         return size;
-    }
-
-    void Anchor::OnMove(const SR_MATH_NS::FVector3 &newValue) {
-        Component::OnMove(newValue);
-    }
-
-    void Anchor::OnRotate(const SR_MATH_NS::FVector3 &newValue) {
-        Component::OnRotate(newValue);
-    }
-
-    void Anchor::OnScaled(const SR_MATH_NS::FVector3 &newValue) {
-        Component::OnScaled(newValue);
-    }
-
-    void Anchor::OnSkewed(const SR_MATH_NS::FVector3 &newValue) {
-        Component::OnSkewed(newValue);
     }
 }

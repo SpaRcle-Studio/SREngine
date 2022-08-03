@@ -139,7 +139,7 @@ namespace Framework::Graphics {
                 }
                 case WM_CLOSE: {
                     SR_SYSTEM_LOG("Win32Window::CallBack() : WM_CLOSE event has been received!");
-                    SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
+                    SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
                     return 0;
                 }
                 case (WM_WINDOWPOSCHANGED): {

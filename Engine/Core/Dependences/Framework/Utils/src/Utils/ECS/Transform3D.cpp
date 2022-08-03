@@ -12,17 +12,17 @@ namespace SR_UTILS_NS {
         m_localMatrix *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
         m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
 
-        m_dirtyMatrix = false;
+        Transform::UpdateMatrix();
     }
 
-    void Transform3D::Rotate(const Math::FVector3& eulers) {
+    void Transform3D::Rotate(const SR_MATH_NS::FVector3& eulers) {
         Math::Matrix4x4 &&worldRotateMatrix = Math::Matrix4x4::FromEulers(m_rotation);
         Math::Matrix4x4 &&rotatedMatrix = worldRotateMatrix * Math::Matrix4x4::FromEulers(eulers);
         SetRotation(rotatedMatrix.GetQuat().EulerAngle());
     }
 
     const SR_MATH_NS::Matrix4x4& Transform3D::GetMatrix() {
-        if (m_dirtyMatrix) {
+        if (IsDirty()) {
             UpdateMatrix();
 
             if (auto&& pTransform = m_gameObject->GetParentTransform()) {
@@ -36,21 +36,17 @@ namespace SR_UTILS_NS {
         return m_matrix;
     }
 
-    void Transform3D::SetMatrix(const SR_MATH_NS::Matrix4x4 &matrix) {
-        matrix.Decompose(m_translation, m_rotation, m_scale, m_skew);
-    }
-
-    void Transform3D::Translate(const Math::FVector3& translation) {
+    void Transform3D::Translate(const SR_MATH_NS::FVector3& translation) {
         const auto &&direction = TransformDirection(translation);
         SetTranslation(m_translation + direction);
     }
 
-    Math::FVector3 Transform3D::TransformDirection(const Math::FVector3& direction) const {
-        return Math::Quaternion::FromEuler(m_rotation) * direction;
+    SR_MATH_NS::FVector3 Transform3D::TransformDirection(const SR_MATH_NS::FVector3& direction) const {
+        return SR_MATH_NS::Quaternion::FromEuler(m_rotation) * direction;
     }
 
-    void Transform3D::SetTranslation(const Math::FVector3& translation) {
-        Math::FVector3 delta = translation - m_translation;
+    void Transform3D::SetTranslation(const SR_MATH_NS::FVector3& translation) {
+        SR_MATH_NS::FVector3 delta = translation - m_translation;
 
         if (delta.Empty()) {
             return;
@@ -61,19 +57,19 @@ namespace SR_UTILS_NS {
         UpdateTree();
     }
 
-    void Transform3D::SetRotation(const Math::FVector3& euler) {
-        Math::FVector3 delta = (Math::Quaternion::FromEuler(euler.FixEulerAngles()) *
-                Math::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
+    void Transform3D::SetRotation(const SR_MATH_NS::FVector3& euler) {
+        SR_MATH_NS::FVector3 delta = (SR_MATH_NS::Quaternion::FromEuler(euler.FixEulerAngles()) *
+                SR_MATH_NS::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
 
         m_rotation = euler.Limits(360);
 
         UpdateTree();
     }
 
-    void Transform3D::SetTranslationAndRotation(const Math::FVector3 &translation, const Math::FVector3 &euler) {
-        Math::FVector3 deltaTranslation = translation - m_translation;
-        Math::FVector3 deltaRotation = (Math::Quaternion::FromEuler(euler) *
-                Math::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
+    void Transform3D::SetTranslationAndRotation(const SR_MATH_NS::FVector3 &translation, const SR_MATH_NS::FVector3 &euler) {
+        SR_MATH_NS::FVector3 deltaTranslation = translation - m_translation;
+        SR_MATH_NS::FVector3 deltaRotation = (SR_MATH_NS::Quaternion::FromEuler(euler) *
+                SR_MATH_NS::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
 
         m_translation = translation;
         m_rotation = euler.Limits(360);
@@ -89,7 +85,7 @@ namespace SR_UTILS_NS {
 
         if (scale.ContainsNaN()) {
             SR_WARN("Transform3D::SetScale() : scale contains NaN! Reset...");
-            scale = Math::FVector3::One();
+            scale = SR_MATH_NS::FVector3::One();
         }
 
         SR_MATH_NS::FVector3 delta = scale / m_scale;
@@ -99,41 +95,41 @@ namespace SR_UTILS_NS {
         UpdateTree();
     }
 
-    void Transform3D::SetSkew(const Math::FVector3& rawSkew) {
+    void Transform3D::SetSkew(const SR_MATH_NS::FVector3& rawSkew) {
         SR_MATH_NS::FVector3 skew = rawSkew;
 
         if (skew.ContainsNaN()) {
             SR_WARN("Transform3D::GlobalSkew() : skew contains NaN! Reset...");
-            skew = Math::FVector3::One();
+            skew = SR_MATH_NS::FVector3::One();
         }
 
-        Math::FVector3 delta = skew / m_skew;
+        SR_MATH_NS::FVector3 delta = skew / m_skew;
 
         m_skew = skew;
 
         UpdateTree();
     }
 
-    void Transform3D::RotateAround(const Math::FVector3& point, const Math::FVector3& eulers) {
-        const Math::Quaternion &&q = Math::Quaternion::FromEuler(eulers);
-        const Math::Quaternion &&rotation = q * Math::Quaternion::FromEuler(m_rotation);
+    void Transform3D::RotateAround(const SR_MATH_NS::FVector3& point, const SR_MATH_NS::FVector3& eulers) {
+        const SR_MATH_NS::Quaternion &&q = SR_MATH_NS::Quaternion::FromEuler(eulers);
+        const SR_MATH_NS::Quaternion &&rotation = q * SR_MATH_NS::Quaternion::FromEuler(m_rotation);
 
-        const Math::FVector3 &&worldPos = m_translation - point;
-        const Math::FVector3 &&rotatedPos = q * worldPos;
+        const SR_MATH_NS::FVector3 &&worldPos = m_translation - point;
+        const SR_MATH_NS::FVector3 &&rotatedPos = q * worldPos;
 
         SetTranslationAndRotation(point + rotatedPos, rotation.EulerAngle());
     }
 
-    void Transform3D::RotateAroundParent(const Math::FVector3& eulers) {
+    void Transform3D::RotateAroundParent(const SR_MATH_NS::FVector3& eulers) {
         if (auto&& pTransform = GetParentTransform()) {
             RotateAround(pTransform->GetTranslation(), eulers);
         }
         else {
-            Rotate(eulers); /// TODO: check working
+            Rotate(eulers);
         }
     }
 
-    void Transform3D::Scale(const Math::FVector3& scale) {
+    void Transform3D::Scale(const SR_MATH_NS::FVector3& scale) {
         SetScale(m_scale * scale);
     }
 }

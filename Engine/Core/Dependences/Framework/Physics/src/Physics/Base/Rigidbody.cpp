@@ -34,15 +34,15 @@ namespace SR_PHYSICS_NS::Types {
         Component::OnAttached();
     }
 
-    void Rigidbody::OnDestroy() {
-        Component::OnDestroy();
-    }
+    //void Rigidbody::OnDestroy() {
+    //    Component::OnDestroy();
+    //}
 
-    void Rigidbody::OnDisabled() {
-        Component::OnDisabled();
-    }
+    //void Rigidbody::OnDisabled() {
+    //    Component::OnDisabled();
+    //}
 
-    void Rigidbody::OnEnabled() {
-        Component::OnEnabled();
-    }
+    //void Rigidbody::OnEnabled() {
+    //    Component::OnEnabled();
+    //}
 }

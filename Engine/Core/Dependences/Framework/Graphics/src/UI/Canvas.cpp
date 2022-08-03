@@ -14,23 +14,6 @@ namespace SR_GRAPH_NS::UI {
         Component::InitComponent<Canvas>();
     }
 
-    SR_MATH_NS::IVector2 Canvas::GetWindowSize() const {
-        return m_context->GetWindowSize();
-    }
-
-    void Canvas::TransformUI() {
-        auto&& size = GetWindowSize();
-
-        if (size.HasZero()) {
-            return;
-        }
-
-        if (auto&& pTransform = GetTransform()) {
-            pTransform->SetTranslation(0, 0, 0);
-            pTransform->SetScale(size.Aspect(), 1.f, 1.f);
-        }
-    }
-
     void Canvas::OnAttached() {
         m_renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* pScene) {
             return pScene->GetDataStorage().GetValue<RenderScenePtr>();
@@ -38,13 +21,7 @@ namespace SR_GRAPH_NS::UI {
 
         m_context = m_renderScene->GetContext();
 
-        TransformUI();
         Component::OnAttached();
-    }
-
-    void Canvas::OnWindowResized(const SR_MATH_NS::IVector2 &size) {
-        TransformUI();
-        Component::OnWindowResized(size);
     }
 
     SR_UTILS_NS::Component* Canvas::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
@@ -54,5 +31,23 @@ namespace SR_GRAPH_NS::UI {
     void Canvas::OnDestroy() {
         Component::OnDestroy();
         delete this;
+    }
+
+    void Canvas::Update(float_t dt) {
+        if (m_renderScene.RecursiveLockIfValid()) {
+            auto&& windowSize = m_renderScene->GetSurfaceSize();
+
+            auto &&pTransform = dynamic_cast<SR_UTILS_NS::Transform2D *>(GetTransform());
+
+            if (windowSize != m_size && pTransform) {
+                m_size = windowSize;
+                pTransform->SetTranslation(SR_MATH_NS::FVector3(0.f));
+                pTransform->SetScale(SR_MATH_NS::FVector3(m_size.Aspect(), 1.f, 1.f));
+            }
+
+            m_renderScene.Unlock();
+        }
+
+        Component::Update(dt);
     }
 }

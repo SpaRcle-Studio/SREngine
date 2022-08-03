@@ -6,50 +6,25 @@
 #define GAMEENGINE_TIME_H
 
 #include <Utils/Debug.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_HTYPES_NS {
-    class SR_DLL_EXPORT Time {
+    class SR_DLL_EXPORT Time : public Singleton<Time> {
+        friend class Singleton<Time>;
     public:
-        Time() {
-            //this->num_fps_limit = 120.f;
-            //this->fps_lim = 1.f / num_fps_limit;
-            SetFPSLimit(120);
-        };
+        using Clock = std::chrono::high_resolution_clock;
+        using Point = std::chrono::time_point<std::chrono::steady_clock>;
 
-        //Time(Time &) = delete;
+    public:
+        void Update() {
+            m_point = Clock::now();
+        }
 
-        ~Time() = default;
+        SR_NODISCARD Point Now() const noexcept { return m_point; }
 
     private:
-        volatile double num_fps_limit = 0.f;
-        double          fps_limit_timer = 0.f;
-        volatile double fps_lim = 0.f;
-        volatile double frameDeltaTime = 0.f;
-        volatile int    now = 0, then = 0;
-    public:
-        inline void SetFPSLimit(int count) {
-            num_fps_limit = (float)count;
-            fps_lim = 1.f / num_fps_limit * 1000000.f;
-        }
+        Point m_point;
 
-        [[nodiscard]] inline double DeltaTime() const { return frameDeltaTime; }
-
-        inline bool Begin() {
-            now = clock();
-            //frameDeltaTime = ((double) (now - then)) / 1000.f;
-            frameDeltaTime = ((double) (now - then)) / 1000.f;
-            fps_limit_timer += frameDeltaTime;
-
-            if (fps_limit_timer >= fps_lim) {
-                fps_limit_timer = 0.0f;
-                return true;
-            } else
-                return false;
-        }
-
-        inline void End() {
-            then = now;
-        }
     };
 }
 

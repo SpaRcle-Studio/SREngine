@@ -45,6 +45,17 @@ namespace SR_SCRIPTING_NS {
             m_releaseBehaviour();
         }
 
+        m_initBehaviour = nullptr;
+        m_releaseBehaviour = nullptr;
+        m_getProperties = nullptr;
+        m_getProperty = nullptr;
+        m_setProperty = nullptr;
+        m_awake = nullptr;
+        m_onEnable = nullptr;
+        m_onDisable = nullptr;
+        m_start = nullptr;
+        m_update = nullptr;
+
         if (m_script) {
             m_script->Destroy();
             delete m_script;
@@ -79,6 +90,12 @@ namespace SR_SCRIPTING_NS {
         m_getProperties = m_script->GetFunction<EvoScript::Typedefs::GetPropertiesFnPtr>("GetProperties");
         m_getProperty = m_script->GetFunction<EvoScript::Typedefs::GetPropertyFnPtr>("GetProperty");
         m_setProperty = m_script->GetFunction<EvoScript::Typedefs::SetPropertyFnPtr>("SetProperty");
+
+        m_awake = m_script->GetFunction<EvoScript::Typedefs::AwakeFnPtr>("Awake");
+        m_onEnable = m_script->GetFunction<EvoScript::Typedefs::OnEnableFnPtr>("OnEnable");
+        m_onDisable = m_script->GetFunction<EvoScript::Typedefs::OnDisableFnPtr>("OnDisable");
+        m_start = m_script->GetFunction<EvoScript::Typedefs::StartFnPtr>("Start");
+        m_update = m_script->GetFunction<EvoScript::Typedefs::UpdateFnPtr>("Update");
     }
 
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
@@ -87,6 +104,7 @@ namespace SR_SCRIPTING_NS {
         if (!m_getProperties) {
             return EvoBehaviour::Properties();
         }
+
         return m_getProperties();
     }
 
@@ -96,6 +114,7 @@ namespace SR_SCRIPTING_NS {
         if (!m_getProperty) {
             return std::any();
         }
+
         return m_getProperty(id);
     }
 
@@ -105,6 +124,42 @@ namespace SR_SCRIPTING_NS {
         if (!m_setProperty) {
             return;
         }
+
         m_setProperty(id, val);
+    }
+
+    void EvoBehaviour::Awake() {
+        if (m_awake) {
+            m_awake();
+        }
+        Behaviour::Awake();
+    }
+
+    void EvoBehaviour::OnEnable() {
+        if (m_onEnable) {
+            m_onEnable();
+        }
+        Behaviour::OnEnable();
+    }
+
+    void EvoBehaviour::OnDisable() {
+        if (m_onDisable) {
+            m_onDisable();
+        }
+        Behaviour::OnDisable();
+    }
+
+    void EvoBehaviour::Start() {
+        if (m_start) {
+            m_start();
+        }
+        Behaviour::Start();
+    }
+
+    void EvoBehaviour::Update(float_t dt) {
+        if (m_update) {
+            m_update(dt);
+        }
+        Behaviour::Update(dt);
     }
 }

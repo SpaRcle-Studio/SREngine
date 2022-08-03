@@ -17,10 +17,10 @@ namespace SR_PHYSICS_NS::Types {
     protected:
         void OnAttached() override;
 
-        void OnDestroy() override;
+        //void OnDestroy() override;
 
-        void OnDisabled() override;
-        void OnEnabled() override;
+        //void OnDisabled() override;
+        //void OnEnabled() override;
 
     private:
         btRigidBody* m_rigidbody = nullptr;

@@ -14,6 +14,8 @@ class Behaviour : public NonCopyable {
     >;
 public:
     virtual void Awake() { }
+    virtual void OnEnable() { }
+    virtual void OnDisable() { }
     virtual void Start() { }
     virtual void Update(float_t dt) { }
     virtual void Close() { }

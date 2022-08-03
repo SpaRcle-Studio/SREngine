@@ -22,11 +22,13 @@ namespace SR_CORE_NS::GUI {
 
     class Inspector : public Graphics::GUI::Widget {
     public:
-        Inspector(Hierarchy* hierarchy);
+        explicit Inspector(Hierarchy* hierarchy);
         ~Inspector() override = default;
 
     public:
         void Update();
+
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
     protected:
         void Draw() override;
@@ -61,6 +63,7 @@ namespace SR_CORE_NS::GUI {
     private:
         Helper::Types::SafePtr<Helper::GameObject> m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
+        SR_WORLD_NS::Scene::Ptr m_scene;
 
     };
 }

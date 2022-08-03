@@ -7,6 +7,7 @@
 #include <GUI/Utils.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
+#include <Utils/Types/SafePtrLockGuard.h>
 #include <Scripting/Base/Behaviour.h>
 #include <UI/Sprite2D.h>
 #include <UI/Anchor.h>
@@ -64,6 +65,12 @@ namespace Framework::Core::GUI {
         }
         else
             m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
+    }
+
+    void Inspector::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
+        SR_LOCK_GUARD
+
+        m_scene = scene;
     }
 
     void Inspector::DrawComponents() {

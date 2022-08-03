@@ -15,7 +15,7 @@ namespace SR_GRAPH_NS {
         : Super(this)
     { }
 
-    void RenderContext::Update() {
+    void RenderContext::Update() noexcept {
         /**
          * Все ресурсы при завершении работы рендера должны остаться только с одним use-point'ом.
          * В противном случае память никогда не освободится.
@@ -219,9 +219,7 @@ namespace SR_GRAPH_NS {
 
     void RenderContext::SetDirty() {
         for (auto&& [pScene, pRenderScene] : m_scenes) {
-            pRenderScene.Do([](RenderScene* ptr) {
-                ptr->SetDirty();
-            });
+            pRenderScene->SetDirty();
         }
     }
 

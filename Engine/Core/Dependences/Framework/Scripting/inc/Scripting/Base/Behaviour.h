@@ -36,10 +36,6 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool IsEmpty() const;
 
     public:
-        //void Reset() override { }
-        void OnDisabled() override { }
-        void OnEnabled() override { }
-
         virtual Properties GetProperties() const { return {}; };
         virtual std::any GetProperty(const std::string& id) const { return std::any(); }
         virtual void SetProperty(const std::string& id, const std::any& val) { }

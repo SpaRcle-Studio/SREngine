@@ -16,8 +16,6 @@ namespace SR_UTILS_NS {
         { }
 
     public:
-        void UpdateMatrix() override;
-
         void Translate(const SR_MATH_NS::FVector3& translation) override;
         void Rotate(const SR_MATH_NS::FVector3& eulers) override;
         void Scale(const SR_MATH_NS::FVector3& scale) override;
@@ -27,8 +25,6 @@ namespace SR_UTILS_NS {
 
         /// Transforms direction from local space to world space
         SR_NODISCARD SR_MATH_NS::FVector3 TransformDirection(const SR_MATH_NS::FVector3& direction) const;
-
-        void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix) override;
 
         void SetTranslation(const SR_MATH_NS::FVector3& translation) override;
         void SetTranslationAndRotation(const SR_MATH_NS::FVector3& translation, const SR_MATH_NS::FVector3& euler) override;
@@ -45,6 +41,9 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::Space3D; }
 
+    private:
+        void UpdateMatrix() override;
+
     public:
         SR_INLINE static constexpr SR_MATH_NS::FVector3 RIGHT   = SR_MATH_NS::FVector3(1, 0, 0);
         SR_INLINE static constexpr SR_MATH_NS::FVector3 UP      = SR_MATH_NS::FVector3(0, 1, 0);
@@ -55,7 +54,7 @@ namespace SR_UTILS_NS {
         SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();
 
         SR_MATH_NS::FVector3 m_translation = SR_MATH_NS::FVector3::Zero();
-        SR_MATH_NS::FVector3 m_rotation = SR_MATH_NS::FVector3::Zero();;
+        SR_MATH_NS::FVector3 m_rotation = SR_MATH_NS::FVector3::Zero();
         SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
         SR_MATH_NS::FVector3 m_skew = SR_MATH_NS::FVector3::One();
 

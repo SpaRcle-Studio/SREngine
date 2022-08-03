@@ -10,8 +10,6 @@
 
 namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal Component::Save(SavableFlags flags) const {
-        SR_LOCK_GUARD
-
         auto marshal = Entity::Save(flags);
 
         marshal.Write(m_name);
@@ -22,86 +20,79 @@ namespace SR_UTILS_NS {
     }
 
     bool Component::IsActive() const noexcept {
-        SR_LOCK_GUARD
-
-        return IsEnabled() && (!m_parent || m_parent->m_isActive);
+        return IsEnabled() && m_parent.Do<bool>([](auto&& data) -> bool {
+            return !data || data->m_isActive;
+        });
     }
 
     void Component::SetParent(GameObject *parent) {
-        SR_LOCK_GUARD
-
-        m_parent = parent;
-
-        CheckActivity();
+        m_parent.Replace(parent);
     }
 
     void Component::SetEnabled(bool value) {
-        SR_LOCK_GUARD
-
-        if (value == m_isEnabled) {
-            return;
-        }
-
         m_isEnabled = value;
-
-        CheckActivity();
     }
 
     void Component::CheckActivity() {
-        SR_LOCK_GUARD
-
         const bool isActive = IsActive();
         if (isActive == m_isActive) {
             return;
         }
 
-        if ((m_isActive = isActive)) {
-            OnEnabled();
+        if (isActive) {
+            OnEnable();
         }
         else {
-            OnDisabled();
+            OnDisable();
         }
     }
 
     SR_WORLD_NS::Scene::Ptr Component::GetScene() const {
-        SR_LOCK_GUARD
+        return m_parent.Do<SR_WORLD_NS::Scene::Ptr>([](auto&& data) {
+            if (!data) {
+                SRHalt("The component have not parent game object!");
+                return SR_WORLD_NS::Scene::Ptr();
+            }
 
-        if (!m_parent) {
-            SRHalt("The component have not parent game object!");
-            return SR_WORLD_NS::Scene::Ptr();
-        }
-
-        /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
-        return m_parent->GetScene();
+            /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
+            return data->GetScene();
+        });
     }
 
     bool Component::IsEnabled() const noexcept {
-        SR_LOCK_GUARD
-
         return m_isEnabled;
     }
 
     GameObject *Component::GetParent() const {
-        SR_LOCK_GUARD
-
         return m_parent;
     }
 
     Component::GameObjectPtr Component::GetRoot() const {
-        GameObjectPtr root = m_parent ? m_parent->GetThis() : GameObjectPtr();
-
-        if (root.RecursiveLockIfValid()) {
-            if (auto&& parent = root->GetParent()) {
-                root = parent;
+        return m_parent.Do<GameObjectPtr>([](auto&& data) -> GameObjectPtr {
+            if (!data) {
+                return GameObjectPtr();
             }
-            root.Unlock();
-        }
 
-        return root;
+            GameObjectPtr root = data->GetThis();
+
+            while (root.RecursiveLockIfValid()) {
+                if (auto&& parent = root->GetParent()) {
+                    root.Unlock();
+                    root = parent;
+                }
+                else {
+                    root.Unlock();
+                }
+            }
+
+            return root;
+        });
     }
 
     Transform *Component::GetTransform() const {
-        return m_parent ? m_parent->GetTransform() : nullptr;
+        return m_parent.Do<Transform *>([](auto &&data) {
+            return data ? data->GetTransform() : nullptr;
+        });
     }
 }
 

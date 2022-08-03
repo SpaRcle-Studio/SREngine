@@ -49,7 +49,7 @@ namespace SR_WORLD_NS {
 
         Types::SafePtr<GameObject> gm = *(new GameObject(GetThis(), name));
 
-        m_gameObjects.insert(gm);
+        m_gameObjects.emplace_back(gm);
 
         m_isHierarchyChanged = true;
 
@@ -159,9 +159,10 @@ namespace SR_WORLD_NS {
 
         m_rootObjects.clear();
 
-        for (const auto& gm : m_gameObjects)
+        for (const auto& gm : m_gameObjects) {
             if (!gm->GetParent().Valid())
-                m_rootObjects.insert(gm);
+                m_rootObjects.emplace_back(gm);
+        }
 
         m_isHierarchyChanged = false;
 
@@ -423,7 +424,7 @@ namespace SR_WORLD_NS {
             auto region = AddOffset(chunk.Singular(Math::IVector3(m_regionWidth - 1)) / Math::IVector3(m_regionWidth), -m_observer->m_offset.m_region);
 
             const TensorKey key = TensorKey(region, MakeChunk(chunk, m_regionWidth));
-            m_tensor[key].insert(gameObject);
+            m_tensor[key].emplace_back(gameObject);
         }
     }
 
@@ -456,10 +457,21 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
-        m_gameObjects.erase(gameObject);
-        OnChanged();
+        for (auto pIt = m_gameObjects.begin(); pIt != m_gameObjects.end(); ++pIt) {
+            if (pIt->Get() != gameObject.Get()) {
+                continue;
+            }
 
-        return true;
+            m_gameObjects.erase(pIt);
+
+            OnChanged();
+
+            return true;
+        }
+
+        SRHalt("Scene::Remove() : game object not found!");
+
+        return false;
     }
 
     bool Scene::ReloadChunks() {

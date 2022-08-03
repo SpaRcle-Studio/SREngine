@@ -64,7 +64,7 @@ namespace SR_UTILS_NS {
             return *static_cast<T*>(*singleton);
         }
 
-        SR_MAYBE_UNUSED static void LockSingleton() {
+        SR_MAYBE_UNUSED static void LockSingleton() noexcept {
             if (auto&& singleton = GetSingleton()) {
                 if (!(*singleton)) {
                     *singleton = new T();
@@ -75,7 +75,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        SR_MAYBE_UNUSED static void UnlockSingleton() {
+        SR_MAYBE_UNUSED static void UnlockSingleton() noexcept {
             if (auto&& singleton = GetSingleton()) {
                 if (!(*singleton)) {
                     std::cerr << "Singleton isn't initialized!\n";
