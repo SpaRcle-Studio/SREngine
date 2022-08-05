@@ -17,6 +17,7 @@ namespace SR_UTILS_NS {
 
         using convert_typeX = std::codecvt_utf8<wchar_t>;
         std::wstring_convert<convert_typeX, wchar_t> converterX;
+        //std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converterX; //осталось с безуспешной попытки вывести utf-16 символ в ImGui
 
         return converterX.from_bytes(str);
     }

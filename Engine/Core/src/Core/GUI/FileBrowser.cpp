@@ -21,7 +21,7 @@ namespace SR_CORE_NS::GUI {
         m_selectedDir = m_root;
     }
 
-    void FileBrowser::DisplayCurrentDirectoryContextMenu(){
+    void FileBrowser::CurrentDirectoryContextMenu(){
         if(ImGui::BeginPopupContextWindow()){
             if (ImGui::Selectable("Paste")) {
                 SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
@@ -30,7 +30,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void FileBrowser::DisplayFileContextMenu(const SR_UTILS_NS::Path &path){
+    void FileBrowser::FileContextMenu(const SR_UTILS_NS::Path &path){
         if (!ImGui::BeginPopupContextItem())
             return;
 
@@ -57,6 +57,114 @@ namespace SR_CORE_NS::GUI {
         }
 
         ImGui::EndPopup();
+    }
+
+    void FileBrowser::CurrentDirectoryPanel() {
+        if (ImGui::BeginChild("current directory panel", ImVec2(0, 22))) {
+
+            ImGui::Separator();
+
+            if (ImGui::Button("Back")) {
+                m_selectedDir = m_selectedDir.GetPrevious();
+            }
+            ImGui::SameLine();
+            ImGui::Text("%s", m_selectedDir.CStr());
+
+            ImGui::EndChild();
+        }
+    }
+
+    void FileBrowser::ItemViewPanel() {
+        if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
+
+            ImGui::Separator();
+
+            CurrentDirectoryContextMenu();
+
+            auto wndSize = ImGui::GetWindowSize();
+
+            uint32_t index = 1;
+            for (const auto &path : m_selectedDir.GetAll()) {
+                if (path.GetBaseName().empty())
+                    continue;
+
+                ++index;
+
+                ImGui::BeginGroup();
+
+                if (path.IsDir()) {
+                    void *descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(
+                            path.IsEmpty() ? Core::EditorIcon::EmptyFolder : Core::EditorIcon::Folder);
+
+                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor,
+                                                                SR_MATH_NS::IVector2(50), 0)) {
+                        m_selectedDir = path;
+                    }
+                    FileContextMenu(path);
+                } else {
+                    //void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    void *descriptor = nullptr;
+                    if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "zip") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::ZIP);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "jpg") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::JPG);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "txt") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::TXT);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "xml") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::XML);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "png") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::PNG);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "dll") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::DLL);
+                    } else {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    }
+
+                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor,
+                                                                SR_MATH_NS::IVector2(50), 0)) {
+                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+                    }
+
+                    FileContextMenu(path);
+                }
+
+                auto id = SR_UTILS_NS::StringUtils::CutName(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
+
+                ImGui::Text("%s", id.c_str());
+
+                ImGui::EndGroup();
+
+                if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
+                    ImGui::SameLine();
+                else
+                    index = 1;
+
+                //ImGui::PopStyleVar();
+            }
+
+            CheckHovered();
+            CheckFocused();
+
+            ImGui::EndChild();
+        }
+    }
+
+    void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {
+        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) {
+
+            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
+
+            Draw(m_root);
+
+            assetWidth = ImGui::GetItemRectSize().x;
+
+            ImGui::PopStyleVar();
+
+            CheckHovered();
+            CheckFocused();
+
+            ImGui::EndChild();
+        }
     }
 
     void FileBrowser::Draw(const SR_UTILS_NS::Path &root) {
@@ -155,123 +263,31 @@ namespace SR_CORE_NS::GUI {
     void FileBrowser::Draw() {
         // left
 
-        float_t assetWidth = 0.f;
+        assetWidth = 0.f;
 
-        const auto&& leftWidth = 250;
+        const float_t leftWidth = 250;
 
-        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) {
+        //
+        FileCatalogPanel(leftWidth);
 
-            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
-
-            Draw(m_root);
-
-            assetWidth = ImGui::GetItemRectSize().x;
-
-            ImGui::PopStyleVar();
-
-            CheckHovered();
-            CheckFocused();
-
-            ImGui::EndChild();
-        }
-
-        auto&& windowWidth = ImGui::GetWindowWidth();
-        if (leftWidth > windowWidth - 20)
+        float_t windowWidth = ImGui::GetWindowWidth();
+        if (leftWidth > windowWidth - 40)
             return;
 
         ImGui::SameLine();
 
-        // right top
-
-
-        /////////////////////// right bottom
-
-        auto width = ImGui::GetWindowWidth();
+        // right
 
         ImGui::BeginGroup();
-        if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
-
-            ImGui::Separator();
-
-            if (ImGui::Button("Back")) {
-                m_selectedDir = m_selectedDir.GetPrevious();
-            }
-            ImGui::SameLine();
-            ImGui::Text("%s", m_selectedDir.CStr());
-
-            ImGui::Separator();
-
-            DisplayCurrentDirectoryContextMenu();
-
-            auto wndSize = ImGui::GetWindowSize();
-
-            uint32_t index = 1;
-            for (const auto &path : m_selectedDir.GetAll()) {
-                if (path.GetBaseName().empty())
-                    continue;
-
-                ++index;
-
-                ImGui::BeginGroup();
-
-                if (path.IsDir()) {
-                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(path.IsEmpty() ? Core::EditorIcon::EmptyFolder : Core::EditorIcon::Folder);
-
-                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
-                        m_selectedDir = path;
-                    }
-                    DisplayFileContextMenu(path);
-                }
-                else {
-                    //void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
-                    void* descriptor = nullptr;
-                    if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "zip") {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::ZIP);
-                    }
-                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "jpg") {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::JPG);
-                    }
-                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "txt") {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::TXT);
-                    }
-                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "xml") {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::XML);
-                    }
-                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "png") {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::PNG);
-                    }
-                    else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "dll") {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::DLL);
-                    }
-                    else {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
-                    }
-
-                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
-                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
-                    }
-                    DisplayFileContextMenu(path);
-                }
-
-                auto id = SR_UTILS_NS::StringUtils::CutName(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
-
-                ImGui::Text("%s", id.c_str());
-
-                ImGui::EndGroup();
-
-                if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
-                    ImGui::SameLine();
-                else
-                    index = 1;
-
-                //ImGui::PopStyleVar();
-            }
-
-            CheckHovered();
-            CheckFocused();
-
-            ImGui::EndChild();
+        CurrentDirectoryPanel();
+        auto&& DirectoryPanelHeight = ImGui::GetWindowHeight();
+        if (DirectoryPanelHeight < 50) {
+            ImGui::EndGroup();
+            return;
         }
+
+
+        ItemViewPanel();
 
         /*ImGui::BeginChild("buttons");
         if (ImGui::Button("Revert")) {}

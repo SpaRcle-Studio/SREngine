@@ -19,15 +19,18 @@ namespace SR_CORE_NS::GUI {
         void SetFolder(const Helper::Path& path);
 
     private:
-        void DisplayFileContextMenu(const SR_UTILS_NS::Path &path);
-        void DisplayCurrentDirectoryContextMenu();
+        void FileContextMenu(const SR_UTILS_NS::Path &path);
+        void CurrentDirectoryContextMenu();
+        void CurrentDirectoryPanel();
+        void ItemViewPanel();
+        void FileCatalogPanel(const float_t& leftWidth);
         void Draw() override;
         void Draw(const Helper::Path& root);
 
     private:
         Helper::Path m_root;
         Helper::Path m_selectedDir;
-
+        float_t assetWidth;
     };
 }
 

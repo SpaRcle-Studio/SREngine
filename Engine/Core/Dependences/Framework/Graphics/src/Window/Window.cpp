@@ -16,6 +16,7 @@
 #include <GUI/Editor/Theme.h>
 #include <GUI/WidgetManager.h>
 #include <GUI/Widget.h>
+#include <Utils/Platform/Platform.h>
 
 namespace SR_GRAPH_NS {
     Window::Window(
@@ -360,7 +361,10 @@ namespace SR_GRAPH_NS {
                     SR_ERROR(" Window::InitEnvironment() : failed to load theme!");
                 }
 
-                const static auto iniPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/ImGuiEditor.config");
+                const static auto iniPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
+                if (!iniPath.Exists()) {
+                    SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),iniPath);
+                }
                 ImGui::GetIO().IniFilename = iniPath.CStr();
 
                 if (!m_env->InitGUI()) {
