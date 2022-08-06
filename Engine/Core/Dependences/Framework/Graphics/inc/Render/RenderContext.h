@@ -36,6 +36,8 @@ namespace SR_GRAPH_NS {
         using MaterialPtr = SR_GTYPES_NS::Material*;
         using TexturePtr = SR_GTYPES_NS::Texture*;
         using SkyboxPtr = SR_GTYPES_NS::Skybox*;
+        using FramebufferPtr = Types::Framebuffer*;
+        using CameraPtr = Types::Camera*;
     public:
         RenderContext();
         virtual ~RenderContext() = default;
@@ -50,10 +52,13 @@ namespace SR_GRAPH_NS {
 
         void OnResize(const SR_MATH_NS::IVector2& size);
 
+        /// Установка начального размера окна
+        void SetWindowSize(const SR_MATH_NS::IVector2& size);
+
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
-        void Register(Types::Framebuffer* pFramebuffer);
+        void Register(FramebufferPtr pFramebuffer);
         void Register(Types::Shader* pShader);
         void Register(Types::Texture* pTexture);
         void Register(RenderTechnique* pTechnique);
@@ -66,6 +71,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
+        SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
 
     private:

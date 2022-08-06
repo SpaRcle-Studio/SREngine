@@ -12,9 +12,9 @@
        <ChunkSystem Value="true"/>
 
        <EditorOnStartup Value="true"/>
-       <EditorWidgetsDocking Value="false"/>
-       <InputIgnoreNonFocusedWidgets Value="false"/>
-       <UpdateNonHoveredSceneViewer Value="true"/>
+       <EditorWidgetsDocking Value="true"/>
+       <InputIgnoreNonFocusedWidgets Value="true"/>
+       <UpdateNonHoveredSceneViewer Value="false"/>
 
        <AutoReloadResources Value="true"/>
 

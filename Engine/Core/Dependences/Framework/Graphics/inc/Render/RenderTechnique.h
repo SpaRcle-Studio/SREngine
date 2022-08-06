@@ -49,9 +49,12 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD Context GetContext() const { return m_context; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD bool IsEmpty() const;
+        SR_NODISCARD std::string_view GetName() const;
 
         void SetCamera(CameraPtr pCamera);
         void SetRenderScene(const RenderScenePtr& pRScene);
+
+        BasePass* FindPass(const std::string& name) const;
 
     protected:
         bool Build();

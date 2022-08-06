@@ -261,8 +261,33 @@ namespace SR_GRAPH_NS {
 
             this->m_clearValues.resize(colorCount + 1);
 
-            for (uint8_t i = 0; i < colorCount; i++)
+            for (uint8_t i = 0; i < colorCount; ++i)
                 m_clearValues[i] = { .color = {{ r, g, b, a }} };
+
+            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+            m_renderPassBI.clearValueCount = colorCount + 1;
+            m_renderPassBI.pClearValues    = m_clearValues.data();
+        }
+
+        SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override {
+            uint8_t colorCount = static_cast<uint8_t>(colors.size());
+            colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
+
+            m_clearValues.resize(colorCount + 1);
+
+            for (uint8_t i = 0; i < colorCount; ++i) {
+                auto&& color = colors[i / (m_kernel->MultisamplingEnabled() ? 2 : 1)];
+
+                m_clearValues[i] = {
+                    .color = { {
+                        static_cast<float>(color.r),
+                        static_cast<float>(color.g),
+                        static_cast<float>(color.b),
+                        static_cast<float>(color.a)
+                    }
+                } };
+            }
 
             m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
 

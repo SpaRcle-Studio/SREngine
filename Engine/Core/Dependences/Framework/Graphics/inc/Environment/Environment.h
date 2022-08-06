@@ -175,6 +175,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const { }
         virtual SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) { }
+        virtual SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) { }
 
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const { }

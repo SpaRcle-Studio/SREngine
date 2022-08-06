@@ -31,6 +31,8 @@ namespace SR_GRAPH_NS {
 
         void OnResize(const SR_MATH_NS::IVector2& size) override;
 
+        SR_NODISCARD BasePass* FindPass(const std::string& name) const;
+
         void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
         void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
 

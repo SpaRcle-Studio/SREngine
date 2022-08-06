@@ -161,6 +161,20 @@ namespace SR_GTYPES_NS {
         m_orthogonal[1][1] = 1.f;
         m_orthogonal[2][2] = 1.f / (m_far - m_near);
         m_orthogonal[3][2] = m_near / (m_far - m_near);
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        std::visit([this](RenderTechniquePtr&& arg) {
+            if (std::holds_alternative<RenderTechnique *>(arg)) {
+                auto&& pRenderTechnique = std::get<RenderTechnique *>(arg);
+
+                if (!pRenderTechnique) {
+                    return;
+                }
+
+                pRenderTechnique->OnResize(m_viewportSize);
+            }
+        }, m_renderTechnique);
     }
 
     void Camera::UpdateProjection(uint32_t w, uint32_t h) {
@@ -231,5 +245,15 @@ namespace SR_GTYPES_NS {
         UpdateView();
 
         Component::OnMatrixDirty();
+    }
+
+    void Camera::SetRenderTechnique(const SR_UTILS_NS::Path& path) {
+        std::visit([this](RenderTechniquePtr&& arg) {
+            if (std::holds_alternative<RenderTechnique *>(arg)) {
+                std::get<RenderTechnique*>(arg)->RemoveUsePoint();
+            }
+        }, m_renderTechnique);
+
+        m_renderTechnique = path;
     }
 }

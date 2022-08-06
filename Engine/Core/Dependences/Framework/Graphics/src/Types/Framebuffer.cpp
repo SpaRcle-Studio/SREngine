@@ -9,7 +9,9 @@
 namespace SR_GTYPES_NS {
     Framebuffer::Framebuffer()
         : Super(typeid(Framebuffer).name(), true /** auto destroy */)
-    { }
+    {
+        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
+    }
 
     Framebuffer::~Framebuffer() {
         SRAssert(m_frameBuffer == SR_ID_INVALID);
@@ -18,7 +20,9 @@ namespace SR_GTYPES_NS {
             SRAssert(texture == SR_ID_INVALID);
         }
 
-        SRAssert(m_shader);
+        SRAssert(m_depth.texture == SR_ID_INVALID);
+
+        SRAssert(!m_shader);
     }
 
     Framebuffer *Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size) {
@@ -51,6 +55,10 @@ namespace SR_GTYPES_NS {
         }
 
         return fbo;
+    }
+
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_UTILS_NS::Path &shaderPath) {
+        return Create(colors, depth, SR_MATH_NS::IVector2(0, 0), shaderPath);
     }
 
     bool Framebuffer::Bind() {
@@ -135,6 +143,10 @@ namespace SR_GTYPES_NS {
             m_frameBuffer = SR_ID_INVALID;
         }
 
+        if (m_depth.texture != SR_ID_INVALID) {
+            SRVerifyFalse(!environment->FreeTexture(&m_depth.texture));
+        }
+
         for (auto&& [texture, format] : m_colors) {
             if (texture == SR_ID_INVALID) {
                 continue;
@@ -177,6 +189,21 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
         m_size = size;
         m_needResize = true;
+    }
+
+    bool Framebuffer::BeginRender(const Framebuffer::ClearColors &clearColors, float_t depth) {
+        auto&& env = Environment::Get();
+
+        env->ClearBuffers(clearColors, depth);
+
+        if (!env->BeginRender()) {
+            return false;
+        }
+
+        env->SetViewport(m_size.x, m_size.y);
+        env->SetScissor(m_size.x, m_size.y);
+
+        return true;
     }
 
     bool Framebuffer::BeginRender() {
@@ -255,5 +282,21 @@ namespace SR_GTYPES_NS {
         }
 
         return m_frameBuffer;
+    }
+
+    bool Framebuffer::IsValid() const {
+        return true;
+    }
+
+    uint64_t Framebuffer::GetFileHash() const {
+        return 0;
+    }
+
+    int32_t Framebuffer::GetColorTexture(uint32_t layer) const {
+        if (layer >= m_colors.size()) {
+            return SR_ID_INVALID;
+        }
+
+        return m_colors.at(layer).texture;
     }
 }

@@ -23,6 +23,8 @@ namespace SR_GRAPH_NS {
     RenderTechnique *RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
         SR_GLOBAL_LOCK
 
+        /// Данный ресурс может иметь копии
+
         auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         auto&& pRenderTechnique = new RenderTechnique();
@@ -247,5 +249,27 @@ namespace SR_GRAPH_NS {
         /// Не делаем блокировки, так как взаимодействие
         /// идет только из графического потока
         return m_passes.empty();
+    }
+
+    BasePass* RenderTechnique::FindPass(const std::string &name) const {
+        for (auto&& pPass : m_passes) {
+            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
+                if (auto&& pFoundPass = pGroupPass->FindPass(name)) {
+                    return pFoundPass;
+                }
+            }
+
+            if (pPass->GetName() != name) {
+                continue;
+            }
+
+            return pPass;
+        }
+
+        return nullptr;
+    }
+
+    std::string_view RenderTechnique::GetName() const {
+        return m_name;
     }
 }

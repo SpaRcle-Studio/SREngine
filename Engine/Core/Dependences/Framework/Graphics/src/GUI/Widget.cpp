@@ -132,4 +132,8 @@ namespace Framework::Graphics::GUI {
     Widget::RenderScenePtr Widget::GetRenderScene() const {
         return m_manager->GetRenderScene();
     }
+
+    Widget::ContextPtr Widget::GetContext() const {
+        return m_manager->GetContext();
+    }
 }

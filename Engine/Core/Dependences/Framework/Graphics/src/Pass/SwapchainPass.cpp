@@ -12,13 +12,20 @@ namespace SR_GRAPH_NS {
     { }
 
     bool SwapchainPass::Load(const SR_XML_NS::Node &passNode) {
+        m_depth = passNode.TryGetAttribute("Depth").ToFloat(1.f);
+
+        m_color.r = passNode.TryGetAttribute("R").ToFloat(0.f);
+        m_color.g = passNode.TryGetAttribute("G").ToFloat(0.f);
+        m_color.b = passNode.TryGetAttribute("B").ToFloat(0.f);
+        m_color.a = passNode.TryGetAttribute("A").ToFloat(0.f);
+
         return GroupPass::Load(passNode);
     }
 
     bool SwapchainPass::Render() {
         auto&& pipeline = GetContext()->GetPipeline();
 
-        pipeline->ClearBuffers(0.5f, 0.5f, 0.5f, 1.f, 1.f, 1);
+        pipeline->ClearBuffers(m_color.r, m_color.g, m_color.b, m_color.a, m_depth, 1);
 
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);

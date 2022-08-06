@@ -319,6 +319,10 @@ namespace SR_GRAPH_NS {
         m_surfaceSize = size;
 
         for (auto&& cameraInfo : m_cameras) {
+            if (cameraInfo.isDestroyed) {
+                continue;
+            }
+
             cameraInfo.pCamera->UpdateProjection(m_surfaceSize.x, m_surfaceSize.y);
         }
 

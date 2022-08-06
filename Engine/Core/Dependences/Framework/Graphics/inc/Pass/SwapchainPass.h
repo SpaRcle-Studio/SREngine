@@ -6,6 +6,7 @@
 #define SRENGINE_SWAPCHAINPASS_H
 
 #include <Pass/GroupPass.h>
+#include <Utils/Math/Vector3.h>
 
 namespace SR_GRAPH_NS {
     class SwapchainPass : public GroupPass {
@@ -17,6 +18,10 @@ namespace SR_GRAPH_NS {
         bool Load(const SR_XML_NS::Node& passNode) override;
         bool Render() override;
         void Update() override;
+
+    private:
+        float_t m_depth = 1.f;
+        SR_MATH_NS::FColor m_color;
 
     };
 }

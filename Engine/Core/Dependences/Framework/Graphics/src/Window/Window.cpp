@@ -50,6 +50,8 @@ namespace SR_GRAPH_NS {
 
         m_context = new RenderContext();
 
+        m_context->SetWindowSize(m_size);
+
         Environment::SetWinCallBack([this](Environment::WinEvents event, void* win, void* arg1, void* arg2){
             switch (event) {
                 case Environment::WinEvents::Close:

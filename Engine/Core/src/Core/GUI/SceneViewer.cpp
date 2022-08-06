@@ -11,6 +11,7 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Window/Window.h>
 #include <Types/Camera.h>
+#include <Types/Framebuffer.h>
 
 namespace SR_CORE_NS::GUI {
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
@@ -25,9 +26,13 @@ namespace SR_CORE_NS::GUI {
 
     void SceneViewer::Draw() {
         if (m_camera.LockIfValid()) {
-            auto camera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
-            //if (m_id = camera->GetPostProcessing()->GetFinally(); m_id >= 0 && camera->IsReady()) {
-            if (m_id = SR_ID_INVALID; m_id >= 0 && camera->IsActive()) {
+            auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
+
+            if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+                m_id = pFramebuffer->GetColorTexture(0);
+            }
+
+            if (m_id != SR_ID_INVALID && pCamera->IsActive()) {
                 m_guizmo->DrawTools();
 
                 ImGui::BeginGroup();
@@ -37,7 +42,7 @@ namespace SR_CORE_NS::GUI {
                 if (ImGui::BeginChild("ViewerTexture")) {
                     const auto winSize = ImGui::GetWindowSize();
 
-                    //DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
+                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
 
                     //if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
                     //    m_guizmo->Draw(*selected.begin(), m_camera);
@@ -181,7 +186,8 @@ namespace SR_CORE_NS::GUI {
         const auto size = m_window->GetWindowSize();
 
         auto&& pCamera = new SR_GTYPES_NS::Camera(size.x, size.y);
-        //component->SetDirectOutput(true);
+        pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
+
         camera->AddComponent(pCamera);
 
         camera->GetTransform()->GlobalTranslate(m_translation);

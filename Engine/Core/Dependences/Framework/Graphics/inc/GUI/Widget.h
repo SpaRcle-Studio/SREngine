@@ -11,6 +11,11 @@
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Input/InputHandler.h>
 
+namespace SR_GRAPH_NS {
+    class RenderScene;
+    class RenderContext;
+}
+
 namespace SR_GRAPH_NS::GUI {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
@@ -25,6 +30,7 @@ namespace SR_GRAPH_NS::GUI {
     class Widget : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         friend class WidgetManager;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using ContextPtr = RenderContext*;
     public:
         explicit Widget(std::string name, SR_MATH_NS::IVector2 size = SR_MATH_NS::IVector2MAX)
             : m_name(std::move(name))
@@ -46,6 +52,7 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD WidgetManager* GetManager() const { return m_manager; }
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD ContextPtr GetContext() const;
 
         virtual void Open();
         virtual void Close();

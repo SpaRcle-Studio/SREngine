@@ -67,6 +67,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD PipelinePtr GetPipeline() const { return m_pipeline; }
         SR_NODISCARD RenderTechnique* GetTechnique() const { return m_technique; }
         SR_NODISCARD bool IsInit() const { return m_isInit; }
+        SR_NODISCARD std::string_view GetName() const;
 
     protected:
         CameraPtr m_camera;

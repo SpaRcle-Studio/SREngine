@@ -283,7 +283,7 @@ namespace Framework {
             if (auto&& pContext = m_window->GetContext(); pContext.LockIfValid()) {
                 m_renderScene.ReplaceAndCopyLock(pContext->CreateScene(m_scene));
 
-                m_renderScene->SetTechnique("Editor/Configs/EditorRenderTechnique.xml");
+                m_renderScene->SetTechnique("Editor/Configs/OverlayRenderTechnique.xml");
 
                 m_renderScene->Register(m_editor);
                 m_renderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());

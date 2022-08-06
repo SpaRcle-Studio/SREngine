@@ -21,6 +21,7 @@ namespace SR_GTYPES_NS {
     public:
         using Ptr = Framebuffer*;
         using Super = SR_UTILS_NS::IResource;
+        using ClearColors = std::vector<SR_MATH_NS::FColor>;
     private:
         Framebuffer();
         ~Framebuffer() override;
@@ -29,19 +30,24 @@ namespace SR_GTYPES_NS {
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size, const SR_UTILS_NS::Path& shaderPath);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, const SR_UTILS_NS::Path& shaderPath);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_UTILS_NS::Path& shaderPath);
 
     public:
         bool Bind();
         void Draw();
 
+        bool BeginRender(const ClearColors& clearColors, float_t depth);
         bool BeginRender();
         void EndRender();
 
         void SetSize(const SR_MATH_NS::IVector2& size);
 
         SR_NODISCARD int32_t GetId();
+        SR_NODISCARD int32_t GetColorTexture(uint32_t layer) const;
 
         void FreeVideoMemory() override;
+        bool IsValid() const override;
+        uint64_t GetFileHash() const override;
 
     protected:
         void OnResourceUpdated(IResource* pResource, int32_t deep) override;

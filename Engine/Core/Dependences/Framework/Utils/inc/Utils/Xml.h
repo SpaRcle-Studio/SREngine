@@ -111,6 +111,16 @@ namespace SR_UTILS_NS::Xml {
             return m_node.name();
         }
 
+        SR_NODISCARD std::string_view NameView() const {
+            if (!m_valid) {
+                SRAssert2(false, "Node::Name() : node is not valid!");
+                g_xml_last_error = -4;
+                return {};
+            }
+
+            return m_node.name();
+        }
+
         SR_NODISCARD Document ToDocument() const;
         SR_NODISCARD Attribute GetAttribute(const std::string &name) const {
             if (!m_valid) {

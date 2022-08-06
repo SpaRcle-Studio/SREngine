@@ -24,7 +24,8 @@ namespace SR_GRAPH_NS {
     { }
 
     bool BasePass::Load(const SR_XML_NS::Node &passNode) {
-        m_name = passNode.Name();
+        /// Некоторые проходы имеют свое уникальное имя, нужное для поиска.
+        m_name = passNode.TryGetAttribute("Name").ToString(passNode.Name());
         return true;
     }
 
@@ -47,5 +48,9 @@ namespace SR_GRAPH_NS {
 
     BasePass::RenderScenePtr BasePass::GetRenderScene() const {
         return m_technique->GetRenderScene();
+    }
+
+    std::string_view BasePass::GetName() const {
+        return m_name;
     }
 }

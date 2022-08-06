@@ -62,6 +62,8 @@ namespace SR_GTYPES_NS {
         void SetNear(float_t value);
         void SetFOV(float_t value);
 
+        void SetRenderTechnique(const SR_UTILS_NS::Path& path);
+
     private:
         void UpdateProjection();
 
@@ -70,8 +72,6 @@ namespace SR_GTYPES_NS {
         void OnDestroy() override;
         void OnEnable() override;
         void OnDisable() override;
-
-
 
     private:
         /** >= 0 - одна главная камера, < 0 - закадровые камеры, которые рендерятся в RenderTexture.

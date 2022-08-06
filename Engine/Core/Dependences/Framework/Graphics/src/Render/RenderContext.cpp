@@ -250,4 +250,28 @@ namespace SR_GRAPH_NS {
     SR_MATH_NS::IVector2 RenderContext::GetWindowSize() const {
         return m_windowSize;
     }
+
+    void RenderContext::SetWindowSize(const SR_MATH_NS::IVector2 &size) {
+        m_windowSize = size;
+    }
+
+    RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name, CameraPtr pCamera) const {
+        for (auto&& pTechnique : m_techniques) {
+            if (pTechnique->GetCamera() != pCamera) {
+                continue;
+            }
+
+            auto&& pPass = pTechnique->FindPass(name);
+
+            if (!pPass) {
+                continue;
+            }
+
+            if (auto&& pFbPass = dynamic_cast<FramebufferPass*>(pPass)) {
+                return pFbPass->GetFramebuffer();
+            }
+        }
+
+        return nullptr;
+    }
 }

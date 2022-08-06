@@ -12,6 +12,7 @@
 
 namespace SR_GRAPH_NS {
     class RenderScene;
+    class RenderContext;
 }
 
 namespace SR_GRAPH_NS::GUI {
@@ -21,6 +22,7 @@ namespace SR_GRAPH_NS::GUI {
 
     class WidgetManager : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using ContextPtr = RenderContext*;
     public:
         WidgetManager();
         ~WidgetManager() override;
@@ -35,6 +37,7 @@ namespace SR_GRAPH_NS::GUI {
     public:
         Widgets& GetWidgets() { return m_widgets; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD ContextPtr GetContext() const;
 
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
 
