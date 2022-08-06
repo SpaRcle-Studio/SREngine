@@ -6,54 +6,39 @@
 #define GAMEENGINE_EVENTMANAGER_H
 
 #include <Utils/Debug.h>
+#include <Utils/Types/Function.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    /// Global event manager
+    class SR_DLL_EXPORT EventManager : public Singleton<EventManager> {
+        friend class Singleton<EventManager>;
+    private:
+        ~EventManager() override = default;
 
-    class SR_DLL_EXPORT EventManager {
     public:
         enum class Event {
-            Exit, Fatal
+            Exit, FatalError
         };
+
+        using Subscription = SR_HTYPES_NS::Function<void(const Event&)>;
+
     public:
-        EventManager() = delete;
-        EventManager(EventManager&) = delete;
-        ~EventManager() = delete;
-    public:
-        inline static void Subscribe(std::function<void(Event)> handler) {
-            g_mutex.lock();
-
-            EventManager::g_handler = std::move(handler);
-
-            g_mutex.unlock();
+        void Subscribe(Subscription&& subHandler) {
+            SR_LOCK_GUARD
+            m_subscriptions.emplace_back(std::move(subHandler));
         }
-        inline static void Push(EventManager::Event event){
-            g_mutex.lock();
 
-            EventManager::g_events.push_back(event);
-            EventManager::g_countEvents++;
+        void Broadcast(const Event& event){
+            SR_LOCK_GUARD
 
-            g_mutex.unlock();
+            for (auto&& subscription : m_subscriptions) {
+                subscription(event);
+            }
         }
-        inline static void PoolEvents() {
-            if (!g_countEvents)
-                return;
 
-            g_mutex.lock();
-
-            for (auto& event : g_events)
-                g_handler(event);
-
-            g_countEvents = 0;
-            g_events.clear();
-
-            g_mutex.unlock();
-        }
     private:
-        inline static std::function<void(Event)> g_handler = std::function<void(Event)>();
-        inline static size_t g_countEvents = 0;
-        inline static std::vector<Event> g_events = std::vector<Event>();
-        inline static std::mutex g_mutex = std::mutex();
+        std::list<Subscription> m_subscriptions;
+
     };
 }
 

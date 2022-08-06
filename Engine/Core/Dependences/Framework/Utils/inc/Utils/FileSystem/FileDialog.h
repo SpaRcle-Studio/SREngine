@@ -14,6 +14,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD Path OpenDialog(const Path& defaultPath, const Filter& filter) const;
         SR_NODISCARD Path SaveDialog(const Path& defaultPath, const Filter& filter) const;
+        SR_NODISCARD Path PickFolder(const Path& defaultPath) const;
 
     protected:
         void InitSingleton() override;

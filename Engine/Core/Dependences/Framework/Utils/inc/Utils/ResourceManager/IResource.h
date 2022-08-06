@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD virtual bool IsValid() const;
-        SR_NODISCARD bool IsLoaded() const { return m_loadState == LoadState::Loaded; }
+        SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const { return m_isDestroyed; }
         SR_NODISCARD bool IsForce() const { return m_force; }
@@ -48,7 +48,7 @@ namespace SR_UTILS_NS {
         void AddUsePoint() { ++m_countUses; }
 
         /** Remove one point from count uses current resource */
-        void RemoveUsePoint() {
+        virtual void RemoveUsePoint() {
             SRAssert2(m_countUses > 0, "count use points is zero!");
             --m_countUses;
 
@@ -101,23 +101,25 @@ namespace SR_UTILS_NS {
 
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
 
+        std::atomic<uint64_t> m_countUses = 0;
+
         mutable std::recursive_mutex m_mutex;
 
     private:
         float_t m_lifetime = 0;
         uint64_t m_resourceHash = 0;
 
+        /// Принудительно уничтожить ресурс
         std::atomic<bool> m_force = false;
         std::atomic<bool> m_readOnly = false;
         std::atomic<bool> m_isDestroyed = false;
+        /// Автоматическое уничтожение ресурса по истечению use-point'ов
         std::atomic<bool> m_autoRemove = false;
 
         std::string m_resourceId = "NoID";
 
         std::unordered_set<IResource*> m_parents;
         std::unordered_set<IResource*> m_dependencies;
-
-        std::atomic<uint64_t> m_countUses = 0;
 
     };
 }

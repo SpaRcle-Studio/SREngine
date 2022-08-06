@@ -8,7 +8,7 @@
 #include <Environment/Environment.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/World/Scene.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/ECS/GameObject.h>
 
@@ -121,7 +121,7 @@ namespace Framework::Core::GUI {
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
-        void DrawGuizmo(Graphics::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
+        void DrawGuizmo(Graphics::Types::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
         void DrawGuizmoTools();
         bool BeginDockSpace();
         bool BeginWindow(const char* name);
@@ -130,6 +130,10 @@ namespace Framework::Core::GUI {
         void EndChildWindow();
         bool BeginMenuBar();
         void EndMenuBar();
+
+    private:
+        bool ImageButtonInternal(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding, ImGuiButtonFlags flags);
+
     };
 }
 

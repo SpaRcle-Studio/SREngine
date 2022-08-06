@@ -3,31 +3,34 @@
 //
 
 #include <Types/Mesh.h>
-#include <Memory/MeshAllocator.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/ResourceManager/IResource.h>
 
+#include <Types/Geometry/Mesh3D.h>
+#include <Types/Geometry/DebugWireframeMesh.h>
+#include <UI/Sprite2D.h>
+#include <Render/RenderContext.h>
+
 namespace SR_GRAPH_NS::Types {
-    Mesh::Mesh(MeshType type, std::string name)
-        : IResource(typeid(Mesh).name())
-        , m_env(Environment::Get())
+    Mesh::Mesh(MeshType type)
+        : IResource(typeid(Mesh).name(), true /** auto remove */)
+        , m_pipeline(Environment::Get())
         , m_type(type)
-        , m_pipeline(Environment::Get()->GetPipeLine())
         , m_material(nullptr)
-        , m_geometryName(std::move(name))
     {
         Component::InitComponent<Mesh>();
     }
 
     Mesh::~Mesh() {
-        SetRawMesh(nullptr);
         SetMaterial(nullptr);
     }
 
     bool Mesh::Destroy() {
-        if (IsDestroyed())
+        if (IsDestroyed()) {
+            SRHalt("The mesh already destroyed!");
             return false;
+        }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
@@ -36,123 +39,139 @@ namespace SR_GRAPH_NS::Types {
         return IResource::Destroy();
     }
 
-    Mesh *Mesh::Load(const std::string &localPath, MeshType type, uint32_t id) {
-        auto &&pMesh = TryLoad(localPath, type, id);
+    Mesh *Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
+        auto &&pMesh = TryLoad(path, type, id);
 
-        SRVerifyFalse2(!pMesh, "Mesh not found! Path: " + localPath + "; Id: " + Helper::ToString(id));
+        SRVerifyFalse2(!pMesh, "Mesh is not found! Path: " + path.ToString() + "; Id: " + SR_UTILS_NS::ToString(id));
 
         return pMesh;
     }
 
-    Mesh *Mesh::TryLoad(const std::string &localPath, MeshType type, uint32_t id) {
+    Mesh *Mesh::TryLoad(const SR_UTILS_NS::Path& rawPath, MeshType type, uint32_t id) {
         SR_GLOBAL_LOCK
 
-        const auto &resourceId = Helper::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, localPath.c_str());
+        auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-        Mesh *mesh = nullptr;
+        const auto &resourceId = SR_UTILS_NS::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, path.c_str());
 
-        if (Mesh *pMesh = SR_UTILS_NS::ResourceManager::Instance().Find<Mesh>(resourceId)) {
-            SRVerifyFalse(!(mesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
-            return mesh;
+        Mesh *pMesh = nullptr;
+
+        if ((pMesh = SR_UTILS_NS::ResourceManager::Instance().Find<Mesh>(resourceId))) {
+            SRVerifyFalse(!(pMesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
+            return pMesh;
         }
 
-        auto pRaw = Helper::Types::RawMesh::Load(localPath);
-
-        if (!pRaw) {
-            return nullptr;
-        }
-
-        if (id >= pRaw->GetMeshesCount()) {
-            if (pRaw->GetCountUses() == 0) {
-                SR_WARN("Mesh::TryLoad() : count uses is zero! Unresolved situation...\n\tPath: " + localPath +
-                        "\n\tId: " + Helper::ToString(id));
-                SRAssert(false);
-                pRaw->Destroy();
+        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
+            if (id >= pRawMesh->GetMeshesCount()) {
+                if (pRawMesh->GetCountUses() == 0) {
+                    SRHalt("Mesh::TryLoad() : count uses is zero! Unresolved situation...");
+                    pRawMesh->Destroy();
+                }
+                return nullptr;
             }
+        }
+        else {
             return nullptr;
         }
 
         switch (type) {
-            case MeshType::Static:
-                mesh = Memory::MeshAllocator::Allocate<Mesh3D>();
+            case MeshType::Static: {
+                auto&& pMesh3D = new Types::Mesh3D();
+                pMesh3D->m_meshId = id;
+                pMesh = pMesh3D;
                 break;
-            case MeshType::Wireframe:
-                mesh = Memory::MeshAllocator::Allocate<DebugWireframeMesh>();
+            }
+            case MeshType::Wireframe: {
+                auto &&pWireframe = new Types::DebugWireframeMesh();
+                pWireframe->m_meshId = id;
+                pMesh = pWireframe;
+                break;
+            }
+            case MeshType::Sprite2D:
+                pMesh = new UI::Sprite2D();
                 break;
             case MeshType::Unknown:
             case MeshType::Skinned:
+            default:
                 SRAssert(false);
-                return mesh;
+                return pMesh;
         }
 
-        if (mesh) {
-            /// id меша нужно устанавливать перед id ресурса, так как когда ставится id ресурса он автоматически регистрируется
-            /// и другой поток может его подхватить
-            mesh->m_meshId = id;
+        if (pMesh) {
+            pMesh->SetId(resourceId, false /** auto register */);
 
-            mesh->SetRawMesh(pRaw);
-            mesh->SetGeometryName(pRaw->GetGeometryName(id));
-            mesh->SetMaterial(Material::GetDefault());
+            if (!pMesh->Reload()) {
+                delete pMesh;
+                return nullptr;
+            }
 
-            mesh->SetId(resourceId);
+            /// отложенная ручная регистрация
+            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMesh);
         }
 
-        SRAssert(mesh);
-
-        return mesh;
+        return pMesh;
     }
 
-    std::vector<Mesh *> Mesh::Load(const std::string &localPath, MeshType type) {
-        std::vector<Mesh *> meshes;
+    std::vector<Mesh*> Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type) {
+        std::vector<Mesh*> meshes;
 
         uint32_t id = 0;
-        while (auto &&pMesh = TryLoad(localPath, type, id)) {
+        while (auto &&pMesh = TryLoad(path, type, id)) {
             meshes.emplace_back(pMesh);
             ++id;
         }
 
         if (meshes.empty()) {
-            SR_ERROR("Mesh::Load() : failed to load mesh! Path: " + localPath);
+            SR_ERROR("Mesh::Load() : failed to load mesh! Path: " + path.ToString());
         }
 
         return meshes;
     }
 
-    void Mesh::OnDestroy() {
-        Destroy();
+    void Mesh::OnAttached() {
+        AddUsePoint();
 
-        if (m_render) {
-            m_render->RemoveMesh(this);
+        if (IsCanCalculate()) {
+            GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
+                ptr->Register(this);
+            });
         }
-        else if (IsCalculated()) {
-            SR_ERROR("Mesh::OnDestroyGameObject() : render is not set! Something went wrong...");
+
+        Component::OnAttached();
+    }
+
+    void Mesh::OnDestroy() {
+        Component::OnDestroy();
+
+        if (IsValid()) {
+            RemoveUsePoint();
+
+            if (auto &&renderScene = GetRenderScene()) {
+                renderScene->SetDirty();
+            }
+        }
+        else {
+            /// Ресурс так и не был зарегистрирован, удаляем вручную
+            delete this;
         }
     }
 
     bool Mesh::IsCanCalculate() const {
-        if (!m_render) {
-            SR_ERROR("Mesh::IsCanCalculate() : mesh is not register in render!");
-            return false;
-        }
-
-        if (!m_material) {
-            SR_ERROR("Mesh::IsCanCalculate() : mesh have not material!");
-            return false;
-        }
-
         return true;
     }
 
     SR_MATH_NS::FVector3 Mesh::GetBarycenter() const {
-        auto baryMat = SR_MATH_NS::Matrix4x4(m_barycenter, SR_MATH_NS::FVector3(), 1.0);
-        auto rotateMat = SR_MATH_NS::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
+        //auto baryMat = SR_MATH_NS::Matrix4x4(m_barycenter, SR_MATH_NS::FVector3(), 1.0);
+        //auto rotateMat = SR_MATH_NS::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
 
-        return (rotateMat * baryMat).GetTranslate();
+        //return (rotateMat * baryMat).GetTranslate();
+
+        return SR_MATH_NS::FVector3();
     }
 
     SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
         if (IsDestroyed()) {
-            SR_ERROR("Mesh::Copy() : mesh already destroyed!");
+            SR_ERROR("Mesh::Copy() : mesh is already destroyed!");
             return nullptr;
         }
 
@@ -166,71 +185,26 @@ namespace SR_GRAPH_NS::Types {
             SR_LOG("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
         }
 
-        mesh->m_meshId = m_meshId;
-
         mesh->SetMaterial(m_material);
-        mesh->SetRawMesh(m_rawMesh);
 
+        mesh->m_geometryName = m_geometryName;
         mesh->m_barycenter = m_barycenter;
-        mesh->m_position = m_position;
-        mesh->m_rotation = m_rotation;
-        mesh->m_scale = m_scale;
-        mesh->m_skew = m_skew;
 
-        mesh->m_modelMat = m_modelMat;
         mesh->m_isCalculated.store(m_isCalculated);
         mesh->m_hasErrors.store(false);
 
         return SR_UTILS_NS::IResource::Copy(mesh);
     }
 
-    bool Mesh::FreeVideoMemory() {
-        if (m_pipeline == PipeLine::Vulkan) {
-            //if (m_descriptorSet >= 0 && !m_env->FreeDescriptorSet(&m_descriptorSet)) {
-            //    SR_ERROR("Mesh::FreeVideoMemory() : failed to free descriptor set!");
-            //}
-
+    void Mesh::FreeVideoMemory() {
+        if (m_pipeline->GetPipeLine() == PipeLine::Vulkan) {
             auto&& uboManager = Memory::UBOManager::Instance();
-            if (m_virtualUBO >= 0 && !uboManager.FreeUBO(&m_virtualUBO)) {
+            if (m_virtualUBO != SR_ID_INVALID && !uboManager.FreeUBO(&m_virtualUBO)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
             }
         }
 
         m_isCalculated = false;
-
-        return true;
-    }
-
-    void Mesh::ReCalcModel() {
-        SR_MATH_NS::Matrix4x4 modelMat = SR_MATH_NS::Matrix4x4::FromTranslate(m_position);
-
-        if (m_pipeline == PipeLine::OpenGL) {
-            modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew.InverseAxis(0));
-            modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation.InverseAxis(1));
-        }
-        else {
-            modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
-            modelMat *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
-        }
-
-        modelMat *= SR_MATH_NS::Matrix4x4::FromScale(m_inverse ? -m_scale : m_scale);
-
-        m_modelMat = modelMat.ToGLM();
-    }
-
-    void Mesh::WaitCalculate() const {
-        ret:
-        if (!m_render) {
-            SRAssert2(false, Helper::Format("Mesh::WaitCalculate() : There is no destination render!"
-                                            " The geometry will never be calculated. \nName: %s",
-                                            m_geometryName.c_str()).c_str());
-            return;
-        }
-
-        if (m_isCalculated)
-            return;
-
-        goto ret;
     }
 
     bool Mesh::Calculate() {
@@ -253,55 +227,13 @@ namespace SR_GRAPH_NS::Types {
             AddDependency(m_material);
         }
 
-        if (m_isCalculated)
-            Environment::Get()->SetBuildState(false);
-    }
-
-    void Mesh::OnMove(const SR_MATH_NS::FVector3 &newValue) {
-        m_position = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnRotate(const SR_MATH_NS::FVector3 &newValue) {
-        m_rotation = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnScaled(const SR_MATH_NS::FVector3 &newValue) {
-        m_scale = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnSkewed(const SR_MATH_NS::FVector3 &newValue) {
-        m_skew = newValue;
-        ReCalcModel();
-    }
-
-    void Mesh::OnTransparencyChanged() {
-        if (m_render) {
-            m_render->ReRegisterMesh(this);
+        if (m_isCalculated && m_pipeline) {
+            m_pipeline->SetBuildState(false);
         }
     }
 
     SR_UTILS_NS::Path Mesh::GetResourcePath() const {
         return SR_UTILS_NS::StringUtils::Substring(GetResourceId(), '|', 1);
-    }
-
-    void Mesh::SetRawMesh(Helper::Types::RawMesh *pRaw) {
-        if (m_rawMesh && pRaw) {
-            SRAssert(false);
-            return;
-        }
-
-        if (m_rawMesh) {
-            RemoveDependency(m_rawMesh);
-        }
-
-        if (pRaw) {
-            AddDependency(pRaw);
-        }
-
-        m_rawMesh = pRaw;
     }
 
     Shader *Mesh::GetShader() const {
@@ -316,28 +248,50 @@ namespace SR_GRAPH_NS::Types {
         IResource::OnResourceUpdated(pResource, depth);
     }
 
-    bool Mesh::HaveDefMaterial() const {
-        return !(!m_material || m_material != Material::GetDefault());
+    void Mesh::OnEnable() {
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+        Component::OnEnable();
     }
 
-    void Mesh::OnEnabled() {
-        m_env->SetBuildState(false);
-        Component::OnEnabled();
+    void Mesh::OnDisable() {
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+        Component::OnDisable();
     }
 
-    void Mesh::OnDisabled() {
-        m_env->SetBuildState(false);
-        Component::OnDisabled();
+    Mesh::RenderScenePtr Mesh::GetRenderScene() {
+        if (!m_renderScene.Valid()) {
+            m_renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+                return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+            }, RenderScenePtr());
+        }
+
+        return m_renderScene;
     }
 
-    bool Mesh::CanDraw() const {
-        if (!IsActive() || IsDestroyed())
-            return false;
+    void Mesh::SetContext(const Mesh::RenderContextPtr &context) {
+        if ((m_context = context)) {
+            m_pipeline = m_context->GetPipeline();
+        }
+        else {
+            SRHalt("Context is invalid!");
+        }
+    }
 
-        if (m_hasErrors)
-            return false;
+    //SR_MATH_NS::Unit Mesh::Distance(const Helper::Math::FVector3 &pos) const {
+    //    return m_position.Distance(pos);
+    //}
 
-        return true;
+    const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
+        if (auto&& pTransform = GetTransform()) {
+            return pTransform->GetMatrix();
+        }
+
+        static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
+        return matrix4X4;
     }
 }
 

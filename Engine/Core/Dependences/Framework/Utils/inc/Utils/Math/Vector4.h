@@ -43,15 +43,23 @@ namespace SR_MATH_NS {
             w = vec4.w;
         }
 
-        SR_FAST_CONSTRUCTOR Vector4(T _x, T _y, T _z, T _w) {
-            x = _x;
-            y = _y;
-            z = _z;
-            w = _w;
-        }
+        SR_FAST_CONSTRUCTOR Vector4(T _x, T _y, T _z, T _w)
+            : x(_x)
+            , y(_y)
+            , z(_z)
+            , w(_w)
+        { }
 
     public:
         SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
+
+        template<typename U> SR_NODISCARD Vector4<U> SR_FASTCALL Cast() const noexcept { return Vector4<U>(
+                    static_cast<U>(x),
+                    static_cast<U>(y),
+                    static_cast<U>(z),
+                    static_cast<U>(w)
+            );
+        }
 
         template<typename U, typename Y> SR_NODISCARD Vector4 Clamp(U _max, Y _min) const {
             return Vector4(

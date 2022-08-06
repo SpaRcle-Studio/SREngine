@@ -59,7 +59,7 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::Destroy() {
-        Helper::ResourceManager::Instance().Destroy(this);
+        ResourceManager::Instance().Destroy(this);
 
         SRAssert(!IsDestroyed());
         m_isDestroyed = true;
@@ -67,6 +67,7 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::IsValid() const {
+        /// Медленная операция, нужно переделать
         return m_resourceId != "NoID" && !m_resourceId.empty() && std::string(m_resourceName) != "Unnamed";
     }
 

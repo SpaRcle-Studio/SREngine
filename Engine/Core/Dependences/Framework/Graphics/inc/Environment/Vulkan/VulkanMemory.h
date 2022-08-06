@@ -13,7 +13,7 @@
 #include <EvoVulkan/Complexes/Shader.h>
 #include <EvoVulkan/Types/Texture.h>
 #include <EvoVulkan/DescriptorManager.h>
-#include <EvoVulkan/DescriptorSet.h>
+#include <EvoVulkan/Types/DescriptorSet.h>
 #include <Environment/TextureHelper.h>
 #include <Environment/Vulkan/DynamicTextureDescriptorSet.h>
 
@@ -42,7 +42,7 @@ namespace Framework::Graphics::VulkanTools {
             m_pool   = m_kernel->GetCmdPool();
 
             if (!m_descriptorManager || !m_device || !m_pool) {
-                SR_ERROR("MemoryManager::Initialize() : failed to get (descriptor manager/device/cmd pool)!");
+                SR_ERROR("MemoryManager::Initialize() : failed to get a (descriptor manager/device/cmd pool)!");
                 return false;
             }
 
@@ -51,7 +51,7 @@ namespace Framework::Graphics::VulkanTools {
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::VmaBuffer*, m_countIBO.first, m_IBOs)
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::FrameBuffer*, m_countFBO.first, m_FBOs)
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Complexes::Shader*, m_countShaderPrograms.first, m_ShaderPrograms)
-            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Core::DescriptorSet, m_countDescriptorSets.first, m_descriptorSets)
+            ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::DescriptorSet, m_countDescriptorSets.first, m_descriptorSets)
             ZERO_VULKAN_MEMORY_MANAGER(EvoVulkan::Types::Texture*, m_countTextures.first, m_textures)
 
             m_isInit = true;
@@ -67,7 +67,7 @@ namespace Framework::Graphics::VulkanTools {
 
         template<typename T> bool FreeMemory(uint32_t id, uint32_t maxCount, T** pool) const {
             if (id >= maxCount) {
-                SR_ERROR("MemoryManager::FreeMemory() : list index out of range!");
+                SR_ERROR("MemoryManager::FreeMemory() : the list index is out of range!");
                 return false;
             }
 
@@ -80,7 +80,7 @@ namespace Framework::Graphics::VulkanTools {
                 return true;
             }
             else {
-                SR_ERROR("MemoryManager::FreeMemory() : id is not exists! (" + std::to_string(id) + ")");
+                SR_ERROR("MemoryManager::FreeMemory() : the id does not exist! (" + std::to_string(id) + ")");
             }
 
             return false;
@@ -169,7 +169,7 @@ namespace Framework::Graphics::VulkanTools {
         EvoVulkan::Types::VmaBuffer**             m_IBOs                    = nullptr;
         EvoVulkan::Complexes::FrameBuffer**       m_FBOs                    = nullptr;
         EvoVulkan::Complexes::Shader**            m_ShaderPrograms          = nullptr;
-        EvoVulkan::Core::DescriptorSet*           m_descriptorSets          = nullptr;
+        EvoVulkan::Types::DescriptorSet*          m_descriptorSets          = nullptr;
         EvoVulkan::Types::Texture**               m_textures                = nullptr;
 
     private:

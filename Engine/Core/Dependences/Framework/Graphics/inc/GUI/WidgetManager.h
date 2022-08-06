@@ -8,6 +8,12 @@
 #include <Utils/Types/Thread.h>
 #include <Utils/Input/InputHandler.h>
 #include <Utils/Input/InputSystem.h>
+#include <Utils/Types/SafePointer.h>
+
+namespace SR_GRAPH_NS {
+    class RenderScene;
+    class RenderContext;
+}
 
 namespace SR_GRAPH_NS::GUI {
     class Widget;
@@ -15,6 +21,8 @@ namespace SR_GRAPH_NS::GUI {
     typedef std::unordered_map<std::string, Widget*> Widgets;
 
     class WidgetManager : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using ContextPtr = RenderContext*;
     public:
         WidgetManager();
         ~WidgetManager() override;
@@ -24,8 +32,12 @@ namespace SR_GRAPH_NS::GUI {
         bool Register(Widget* widget);
         bool Remove(Widget* widget);
 
+        void SetRenderScene(const RenderScenePtr& renderScene);
+
     public:
         Widgets& GetWidgets() { return m_widgets; }
+        SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD ContextPtr GetContext() const;
 
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
 
@@ -33,8 +45,11 @@ namespace SR_GRAPH_NS::GUI {
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
+    protected:
+        mutable std::recursive_mutex m_mutex;
+
     private:
-        std::recursive_mutex m_mutex;
+        RenderScenePtr m_renderScene;
         Widgets m_widgets;
         bool m_ignoreNonFocused;
 

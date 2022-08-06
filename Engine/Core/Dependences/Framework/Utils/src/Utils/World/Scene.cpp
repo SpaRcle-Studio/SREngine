@@ -37,9 +37,8 @@ namespace SR_WORLD_NS {
     Scene::Scene(const std::string &name)
         : Super(this)
         , m_name(name)
-        , m_observer(new Observer(this))
+        , m_observer(new Observer(GetThis()))
     {
-        m_path = ResourceManager::Instance().GetCachePath().Concat("Scenes");
         ReloadConfig();
     }
 
@@ -48,16 +47,16 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
         }
 
-        Types::SafePtr<GameObject> gm = *(new GameObject(*this, name));
+        Types::SafePtr<GameObject> gm = *(new GameObject(GetThis(), name));
 
-        m_gameObjects.insert(gm);
+        m_gameObjects.emplace_back(gm);
 
         m_isHierarchyChanged = true;
 
         return gm;
     }
 
-    SR_HTYPES_NS::SafePtr<Scene> Scene::New(const std::string& name) {
+    SR_HTYPES_NS::SafePtr<Scene> Scene::New(const Path& path) {
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::New() : creating new scene...");
         }
@@ -69,13 +68,27 @@ namespace SR_WORLD_NS {
             return Types::SafePtr<Scene>();
         }
 
-        scene->SetName(name);
+        scene->SetPath(path);
+        scene->SetName(path.GetBaseName());
 
         return scene;
     }
 
-    SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const std::string& name) {
-        Types::SafePtr<Scene> scene;
+    SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const Path& path) {
+        if (Debug::Instance().GetLevel() > Debug::Level::None) {
+            SR_LOG("Scene::Load() : loading scene...\n\tPath: " + path.ToString());
+        }
+
+        auto&& scene = SceneAllocator::Instance().Allocate();
+
+        if (!scene) {
+            SR_ERROR("Scene::Load() : failed to allocate scene!");
+            return Types::SafePtr<Scene>();
+        }
+
+        scene->SetPath(path);
+        scene->SetName(path.GetBaseName());
+
         return scene;
     }
 
@@ -101,7 +114,7 @@ namespace SR_WORLD_NS {
 
         for (auto gameObject : GetRootGameObjects()) {
             gameObject.AutoFree([](GameObject* gm) {
-                gm->Destroy(GameObject::DestroyBy_Scene);
+                gm->Destroy(GAMEOBJECT_DESTROY_BY_SCENE);
             });
         }
 
@@ -146,9 +159,10 @@ namespace SR_WORLD_NS {
 
         m_rootObjects.clear();
 
-        for (const auto& gm : m_gameObjects)
+        for (const auto& gm : m_gameObjects) {
             if (!gm->GetParent().Valid())
-                m_rootObjects.insert(gm);
+                m_rootObjects.emplace_back(gm);
+        }
 
         m_isHierarchyChanged = false;
 
@@ -181,21 +195,24 @@ namespace SR_WORLD_NS {
     }
 
     void Scene::SaveRegion(Region* pRegion) const {
-        const auto regions = m_path.Concat(std::string(m_name)).Concat("regions");
+        auto&& regionsPath = GetRegionsPath();
 
-        regions.Make(Path::Type::Folder);
+        regionsPath.Make(Path::Type::Folder);
 
-        const auto& regPath = regions.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
+        auto&& regPath = regionsPath.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
         if (auto&& regionMarshal = pRegion->Save(); regionMarshal.Valid()) {
             regionMarshal.Save(regPath);
         }
-        else if (regPath.Exists()) {
-            FileSystem::Delete(regPath.CStr());
+        else if (regPath.Exists(Path::Type::File)) {
+            Platform::Delete(regPath);
         }
     }
 
-    bool Scene::SaveAt(const std::string& folder) {
-        m_path = folder;
+    bool Scene::SaveAt(const Path& path) {
+        SR_INFO(SR_FORMAT("Scene::SaveAt() : save scene...\n\tPath: %s", path.CStr()));
+
+        SetPath(path);
+        SetName(path.GetBaseName());
 
         UpdateContainers();
 
@@ -220,14 +237,13 @@ namespace SR_WORLD_NS {
             SaveRegion(pRegion);
         }
 
-        const auto scene = m_path.Concat(std::string(m_name));
 
-        return xml.Save(scene.Concat("main.scene"));
+        m_path.Normalize();
+
+        return xml.Save(m_path.Concat("main.scene"));
     }
 
     void Scene::Update(float_t dt) {
-        FindObserver();
-
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
         const auto regSize = Math::IVector3(m_regionWidth);
         const auto regSize2 = Math::IVector3(m_regionWidth - 1);
@@ -263,8 +279,11 @@ namespace SR_WORLD_NS {
                 m_regions.insert(std::pair(m_observer->m_region, pRegion));
             }
 
-            if (auto &&regionIt = m_regions.at(m_observer->m_region))
-                regionIt->GetChunk(m_observer->m_chunk)->OnEnter();
+            if (auto &&regionIt = m_regions.at(m_observer->m_region)) {
+                if (auto&& pChunk = regionIt->GetChunk(m_observer->m_chunk)) {
+                    pChunk->OnEnter();
+                }
+            }
 
             lastRegion = region;
             lastChunk = chunk;
@@ -291,6 +310,10 @@ namespace SR_WORLD_NS {
                     pIt = m_regions.erase(pIt);
                 }
             }
+        }
+
+        if (m_isActive) {
+            UpdateTree();
         }
 
         if (m_shiftEnabled) {
@@ -401,12 +424,12 @@ namespace SR_WORLD_NS {
             auto region = AddOffset(chunk.Singular(Math::IVector3(m_regionWidth - 1)) / Math::IVector3(m_regionWidth), -m_observer->m_offset.m_region);
 
             const TensorKey key = TensorKey(region, MakeChunk(chunk, m_regionWidth));
-            m_tensor[key].insert(gameObject);
+            m_tensor[key].emplace_back(gameObject);
         }
     }
 
     bool Scene::ReloadConfig() {
-        const std::string path = ResourceManager::Instance().GetResPath().Concat("/Configs/World.xml");
+        const std::string path = ResourceManager::Instance().GetResPath().Concat("Engine/Configs/World.xml");
 
         if (auto xml = Xml::Document::Load(path); xml.Valid()) {
             const auto& configs = xml.Root().GetNode("Configs");
@@ -434,10 +457,21 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
-        m_gameObjects.erase(gameObject);
-        OnChanged();
+        for (auto pIt = m_gameObjects.begin(); pIt != m_gameObjects.end(); ++pIt) {
+            if (pIt->Get() != gameObject.Get()) {
+                continue;
+            }
 
-        return true;
+            m_gameObjects.erase(pIt);
+
+            OnChanged();
+
+            return true;
+        }
+
+        SRHalt("Scene::Remove() : game object not found!");
+
+        return false;
     }
 
     bool Scene::ReloadChunks() {
@@ -489,5 +523,31 @@ namespace SR_WORLD_NS {
         }
 
         return SafePtr<GameObject>(nullptr);
+    }
+
+    void Scene::UpdateTree() {
+        auto&& root = GetRootGameObjects();
+
+        for (auto&& gameObject : root) {
+            gameObject->Awake();
+        }
+
+        for (auto&& gameObject : root) {
+            gameObject->Start();
+        }
+    }
+
+    void Scene::RunScene() {
+        m_isActive = true;
+    }
+
+    void Scene::StopScene() {
+        m_isActive = false;
+    }
+
+    void Scene::SetObserver(const Scene::GameObjectPtr &target) {
+        if (target != m_observer->m_target) {
+            m_observer->SetTarget(target);
+        }
     }
 }

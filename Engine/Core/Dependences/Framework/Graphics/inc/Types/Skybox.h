@@ -6,9 +6,13 @@
 #define GAMEENGINE_SKYBOX_H
 
 #include <Utils/ResourceManager/IResource.h>
+#include <Memory/IGraphicsResource.h>
+
+namespace SR_GRAPH_NS::Types {
+    class Shader;
+}
 
 namespace SR_GRAPH_NS {
-    class Shader;
     class Render;
     class Environment;
 }
@@ -16,7 +20,7 @@ namespace SR_GRAPH_NS {
 namespace SR_GTYPES_NS {
     class Texture;
 
-    class Skybox : public SR_UTILS_NS::IResource {
+    class Skybox : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
     private:
         Skybox();
         ~Skybox() override;
@@ -28,9 +32,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD int32_t GetVBO();
         SR_NODISCARD int32_t GetIBO();
-        SR_NODISCARD int32_t GetUBO();
+        SR_NODISCARD int32_t GetVirtualUBO();
 
-        bool FreeVideoMemory();
+        void FreeVideoMemory() override;
         void Draw();
 
     protected:
@@ -50,9 +54,10 @@ namespace SR_GTYPES_NS {
         int32_t                 m_VAO            = SR_ID_INVALID;
         int32_t                 m_VBO            = SR_ID_INVALID;
         int32_t                 m_IBO            = SR_ID_INVALID;
-        int32_t                 m_UBO            = SR_ID_INVALID;
-        int32_t                 m_descriptorSet  = SR_ID_INVALID;
+
         int32_t                 m_cubeMap        = SR_ID_INVALID;
+
+        int32_t                 m_virtualUBO     = SR_ID_INVALID;
 
         uint32_t                m_width          = 0;
         uint32_t                m_height         = 0;

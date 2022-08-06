@@ -25,6 +25,8 @@ namespace SR_HTYPES_NS {
             ~Factory() override = default;
 
         public:
+            void SetMainThread();
+
             SR_NODISCARD Ptr GetMainThread();
             SR_NODISCARD Ptr GetThisThread();
             SR_NODISCARD Ptr Create(std::thread thread);
@@ -41,6 +43,7 @@ namespace SR_HTYPES_NS {
 
         private:
             ThreadsMap m_threads = ThreadsMap();
+            Thread* m_main = nullptr;
 
         };
 
@@ -48,6 +51,7 @@ namespace SR_HTYPES_NS {
         Thread();
 
         explicit Thread(std::thread&& thread);
+        explicit Thread(ThreadId id);
 
         ~Thread() override;
 
@@ -78,6 +82,7 @@ namespace SR_HTYPES_NS {
 #define SR_THIS_THREAD (SR_HTYPES_NS::Thread::Factory::Instance().GetThisThread())
 
 #define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
+#define SR_LOCK_GUARD_INHERIT(baseClass) std::lock_guard<std::recursive_mutex> codegen_lock(baseClass::m_mutex);
 #define SR_SCOPED_LOCK std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
 
 #endif //GAMEENGINE_THREAD_H

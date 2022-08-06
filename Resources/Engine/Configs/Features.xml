@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Features>
+   <Common>
+       <EvoCompiler Value="true"/>
+       <UpdateScripts Value="false"/>
+       <UseEditorGUIScript Value="false"/>
+
+       <CrashHandler Value="true"/>
+
+       <DebugChunks Value="true"/>
+       <DebugRegions Value="true"/>
+       <ChunkSystem Value="true"/>
+
+       <EditorOnStartup Value="true"/>
+       <EditorWidgetsDocking Value="true"/>
+       <InputIgnoreNonFocusedWidgets Value="true"/>
+       <UpdateNonHoveredSceneViewer Value="false"/>
+
+       <AutoReloadResources Value="true"/>
+
+       <LoadSkybox Value="true"/>
+       <SkyboxCPUUsage Value="false"/>
+       <VulkanValidation Value="true"/>
+       <MultiRenderTargets Value="false"/>
+       <SingleCameraMode Value="false"/>
+   </Common>
+</Features>

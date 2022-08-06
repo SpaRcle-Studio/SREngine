@@ -13,14 +13,25 @@ namespace SR_HTYPES_NS {
         SafeGateArray() = default;
 
     public:
-        void Remove(T value) {
-            std::lock_guard <std::mutex> lock(m_mutex);
+        void Remove(const T& value) {
+            SR_LOCK_GUARD
             m_remove.insert(value);
             m_needFlush = true;
         }
 
+        void SyncRemove(const T& value) {
+            Remove(value);
+
+            while(true) {
+                SR_LOCK_GUARD
+                if (m_container.count(value) == 0) {
+                    return;
+                }
+            }
+        }
+
         void Add(T value) {
-            std::lock_guard <std::mutex> lock(m_mutex);
+            SR_LOCK_GUARD
             m_add.insert(value);
             m_needFlush = true;
         }
@@ -35,7 +46,7 @@ namespace SR_HTYPES_NS {
         }
 
         void Flush() {
-            std::lock_guard <std::mutex> lock(m_mutex);
+            SR_LOCK_GUARD
 
             for (auto &value : m_add) {
                 m_container.insert(value);
@@ -64,7 +75,7 @@ namespace SR_HTYPES_NS {
         std::set<T> m_add;
         std::set<T> m_remove;
         std::set<T> m_container;
-        std::mutex m_mutex;
+        std::recursive_mutex m_mutex;
         std::atomic<bool> m_needFlush = false;
         std::atomic<uint32_t> m_count = 0;
 

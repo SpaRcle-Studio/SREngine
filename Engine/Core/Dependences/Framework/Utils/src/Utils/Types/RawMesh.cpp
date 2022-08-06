@@ -22,7 +22,7 @@ namespace SR_HTYPES_NS {
     RawMesh *RawMesh::Load(const std::string &rawPath) {
         SR_GLOBAL_LOCK
 
-        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetModelsPath());
+        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
         if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
             return pResource;
@@ -32,7 +32,7 @@ namespace SR_HTYPES_NS {
 
         pMesh->SetId(path, false /** auto register */);
 
-        if (!pMesh->Load()) {
+        if (!pMesh->Reload()) {
             SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
             delete pMesh;
             return nullptr;
@@ -49,7 +49,9 @@ namespace SR_HTYPES_NS {
 
         bool hasErrors = !IResource::Unload();
 
-        m_importer->FreeScene();
+        if (m_importer) {
+            m_importer->FreeScene();
+        }
 
         return !hasErrors;
     }
@@ -61,7 +63,7 @@ namespace SR_HTYPES_NS {
 
         Path&& path = Path(GetResourceId());
         if (!path.IsAbs()) {
-            path = ResourceManager::Instance().GetModelsPath().Concat(path);
+            path = ResourceManager::Instance().GetResPath().Concat(path);
         }
 
         /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
@@ -95,7 +97,7 @@ namespace SR_HTYPES_NS {
     }
 
     bool RawMesh::Access(const RawMesh::CallbackFn &fn) const {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (m_scene && IsLoaded()) {
             return fn(m_scene);
@@ -107,7 +109,7 @@ namespace SR_HTYPES_NS {
     }
 
     uint32_t RawMesh::GetMeshesCount() const {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (!m_scene) {
             SRAssert(false);
@@ -118,7 +120,7 @@ namespace SR_HTYPES_NS {
     }
 
     std::string RawMesh::GetGeometryName(uint32_t id) const {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (!m_scene || id >= m_scene->mNumMeshes) {
             SRAssert2(false, "Out of range or invalid scene!");
@@ -228,6 +230,23 @@ namespace SR_HTYPES_NS {
     }
 
     SR_UTILS_NS::Path RawMesh::GetAssociatedPath() const {
-        return ResourceManager::Instance().GetModelsPath();
+        return ResourceManager::Instance().GetResPath();
+    }
+
+    bool RawMesh::Reload() {
+        SR_LOCK_GUARD
+
+        SR_LOG("RawMesh::Reload() : reloading \"" + GetResourceId() + "\" raw mesh...");
+
+        m_loadState = LoadState::Reloading;
+
+        Unload();
+        Load();
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+
+        return true;
     }
 }

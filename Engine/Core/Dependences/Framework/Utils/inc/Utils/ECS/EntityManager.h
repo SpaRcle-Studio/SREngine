@@ -10,6 +10,10 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Numeric.h>
 
+#define SR_ENTITY_SET_VERSION(version)                     \
+    public:                                                \
+        SR_INLINE static const uint16_t VERSION = version; \
+
 namespace SR_UTILS_NS {
     class GameObject;
     class Component;

@@ -6,6 +6,8 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Common/Features.h>
+#include <Render/RenderScene.h>
+#include <Render/RenderContext.h>
 
 namespace SR_GRAPH_NS::GUI {
     WidgetManager::WidgetManager()
@@ -93,5 +95,21 @@ namespace SR_GRAPH_NS::GUI {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
                 pWidget->OnMouseMove(data);
         }
+    }
+
+    void WidgetManager::SetRenderScene(const WidgetManager::RenderScenePtr& renderScene) {
+        m_renderScene = renderScene;
+    }
+
+    WidgetManager::RenderScenePtr WidgetManager::GetRenderScene() const {
+        return m_renderScene;
+    }
+
+    WidgetManager::ContextPtr WidgetManager::GetContext() const {
+        if (!m_renderScene) {
+            return ContextPtr();
+        }
+
+        return m_renderScene->GetContext();
     }
 }

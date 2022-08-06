@@ -19,10 +19,7 @@ set(IMGUIZMO_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/ImGuizmo)
 set(IMGUI_NODE_EDITOR_ROOT_DIR ${FRAMEWORK_ROOT_DIR}/Depends/imgui-node-editor)
 
 # Включаем вспомогательные файлы
-#include(Utils.cmake)
-include(Audio.cmake)
 include(Graphics.cmake)
-include(Physics.cmake)
 include(Scripting.cmake)
 
 #add_subdirectory(Depends/imgui)
@@ -33,14 +30,12 @@ add_subdirectory(Depends/glew/build/cmake)
 #add_subdirectory(Depends/pugixml)
 #add_subdirectory(Depends/inc/glm)
 
-#add_subdirectory(Depends/bullet3)
 add_subdirectory(Depends/EvoVulkan/Core)
 add_subdirectory(Depends/EvoScript/Core)
-#add_subdirectory(Depends/FbxLoader)
 add_subdirectory(Depends/cmp_core)
-#add_subdirectory(Depends/assimp)
 add_subdirectory(Utils)
-#add_subdirectory(Depends/tinyobjloader)
+add_subdirectory(Audio)
+add_subdirectory(Physics)
 
 #include(Depends/bullet3/UseBullet.cmake)
 
@@ -63,16 +58,34 @@ find_package(OpenGL REQUIRED)
 #        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
 
 # Добавляем библиотеку фреймворка
-add_library(Framework STATIC ${AUDIO_SRC} ${GRAPHICS_SRC} ${UTILS_SRC} ${PHYSICS_SRC} ${SCRIPTING_SRC})
+add_library(Framework STATIC ${GRAPHICS_SRC}  ${SCRIPTING_SRC})
+
+target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core OpenAL)
 
 #target_compile_features(Framework INTERFACE cxx_std_20)
 
-target_link_libraries(Framework opengl32 glfw glew EvoScriptCore CMP_Core EvoVulkan::lib)
+if (EVO_VULKAN_STATIC_LIBRARY)
+    target_link_libraries(Framework EvoVulkan)
+else()
+    target_link_libraries(Framework EvoVulkan::lib)
+endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
     target_link_libraries(Framework Utils)
 else()
     target_link_libraries(Framework Utils::lib)
+endif()
+
+if (SR_PHYSICS_STATIC_LIBRARY)
+    target_link_libraries(Framework Physics)
+else()
+    target_link_libraries(Framework Physics::lib)
+endif()
+
+if (SR_AUDIO_STATIC_LIBRARY)
+    target_link_libraries(Framework Audio)
+else()
+    target_link_libraries(Framework Audio::lib)
 endif()
 
 if (CYGWIN)
@@ -99,10 +112,10 @@ endif()
 # Устанавливаем директории
 target_include_directories(Framework
         PUBLIC
-            ${AUDIO_INC_PUBLIC} ${GRAPHICS_INC_PUBLIC} ${PHYSICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC} #${UTILS_INC_PUBLIC}
+            ${GRAPHICS_INC_PUBLIC} ${SCRIPTING_INC_PUBLIC}
             ${IMGUI_ROOT_DIR} ${IMGUIZMO_ROOT_DIR} ${IMGUI_NODE_EDITOR_ROOT_DIR}
         PRIVATE
-            ${AUDIO_INC_PRIVATE} ${GRAPHICS_INC_PRIVATE} ${PHYSICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE} #${UTILS_INC_PRIVATE}
+            ${GRAPHICS_INC_PRIVATE} ${SCRIPTING_INC_PRIVATE}
         INSTANCE
-            ${AUDIO_INC_INSTANCE} ${GRAPHICS_INC_INSTANCE} ${PHYSICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE} #${UTILS_INC_INSTANCE}
+            ${GRAPHICS_INC_INSTANCE} ${SCRIPTING_INC_INSTANCE}
 )

@@ -14,14 +14,14 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT SingletonManager : public NonCopyable {
     public:
-        void** GetSingleton(uint64_t id);
+        void** GetSingleton(uint64_t id) noexcept;
 
     private:
         std::unordered_map<uint64_t, void*> m_singletons;
 
     };
 
-    SR_DLL_EXPORT SingletonManager* GetSingletonManager();
+    SR_DLL_EXPORT SingletonManager* GetSingletonManager() noexcept;
 
     template<typename T> class SR_DLL_EXPORT Singleton : public NonCopyable {
     protected:
@@ -29,6 +29,10 @@ namespace SR_UTILS_NS {
         ~Singleton() override = default;
 
     public:
+        SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept {
+            return GetSingleton() != nullptr;
+        }
+
         SR_MAYBE_UNUSED static void DestroySingleton() {
             auto&& singleton = GetSingleton();
 
@@ -39,7 +43,7 @@ namespace SR_UTILS_NS {
             if (!(*singleton)->IsSingletonCanBeDestroyed()) {
                 std::cerr << "Singleton can't be destroyed!\n";
                 std::cerr << GetStacktrace() << std::endl;
-                Breakpoint();
+                SR_MAKE_BREAKPOINT;
                 return;
             }
 
@@ -49,7 +53,7 @@ namespace SR_UTILS_NS {
             (*singleton) = nullptr;
         }
 
-        SR_MAYBE_UNUSED static T& Instance() {
+        SR_MAYBE_UNUSED static T& Instance() noexcept {
             auto&& singleton = GetSingleton();
 
             if (!(*singleton)) {
@@ -60,14 +64,26 @@ namespace SR_UTILS_NS {
             return *static_cast<T*>(*singleton);
         }
 
-        SR_MAYBE_UNUSED static void LockSingleton() {
+        SR_MAYBE_UNUSED static void LockSingleton() noexcept {
             if (auto&& singleton = GetSingleton()) {
+                if (!(*singleton)) {
+                    *singleton = new T();
+                    (*singleton)->InitSingleton();
+                }
+
                 (*singleton)->m_mutex.lock();
             }
         }
 
-        SR_MAYBE_UNUSED static void UnlockSingleton() {
+        SR_MAYBE_UNUSED static void UnlockSingleton() noexcept {
             if (auto&& singleton = GetSingleton()) {
+                if (!(*singleton)) {
+                    std::cerr << "Singleton isn't initialized!\n";
+                    std::cerr << GetStacktrace() << std::endl;
+                    SR_MAKE_BREAKPOINT;
+                    return;
+                }
+
                 (*singleton)->m_mutex.unlock();
             }
         }
@@ -78,7 +94,7 @@ namespace SR_UTILS_NS {
         virtual bool IsSingletonCanBeDestroyed() const { return true; }
 
     private:
-        static Singleton<T>** GetSingleton() {
+        static Singleton<T>** GetSingleton() noexcept {
             void** p = GetSingletonManager()->GetSingleton(typeid(Singleton<T>).hash_code());
             return reinterpret_cast<Singleton<T>**>(p);
         }

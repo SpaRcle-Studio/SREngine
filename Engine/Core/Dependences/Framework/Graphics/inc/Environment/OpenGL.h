@@ -208,9 +208,9 @@ namespace Framework::Graphics {
 #endif
         }
 
-        bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& hdrFBO, int32_t& colorBuffer) override;
-        bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
-        bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const override;
+        //bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& hdrFBO, int32_t& colorBuffer) override;
+        //bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
+        //bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const override;
 
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
             this->m_currentFBOid = FBO;
@@ -239,7 +239,7 @@ namespace Framework::Graphics {
                 void** shaderData,
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
-                SRShaderCreateInfo shaderCreateInfo = {}) const override;
+                const SRShaderCreateInfo& shaderCreateInfo = {}) const override;
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             //glDeleteProgram(reinterpret_cast<OpenGLShader*>(shaderProgram)->m_programID);
             glDeleteProgram(shaderProgram);
@@ -424,7 +424,7 @@ namespace Framework::Graphics {
         }
         int32_t CalculateTexture(
                 uint8_t* data,
-                TextureFormat format,
+                ColorFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,

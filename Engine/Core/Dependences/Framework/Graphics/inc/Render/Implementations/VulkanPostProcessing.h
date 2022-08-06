@@ -33,7 +33,7 @@ namespace Framework::Graphics {
         void EndSkybox() override {}
 
         void Complete() override {
-            m_env->SetCurrentShaderID(m_postProcessingShader->GetID());
+            m_env->SetCurrentShaderId(m_postProcessingShader->GetID());
 
             if (m_descriptorSet == -1) {
                 m_descriptorSet = m_env->AllocDescriptorSet({DescriptorType::Uniform});

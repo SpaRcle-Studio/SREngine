@@ -13,7 +13,7 @@
 #include <Utils/Math/Vector2.h>
 #include <Utils/Common/NonCopyable.h>
 
-#include "../../libs/assimp/contrib/pugixml/src/pugixml.hpp"
+#include <assimp/contrib/pugixml/src/pugixml.hpp>
 
 namespace SR_UTILS_NS::Xml {
     class Node;
@@ -102,6 +102,16 @@ namespace SR_UTILS_NS::Xml {
         }
 
         SR_NODISCARD std::string Name() const {
+            if (!m_valid) {
+                SRAssert2(false, "Node::Name() : node is not valid!");
+                g_xml_last_error = -4;
+                return {};
+            }
+
+            return m_node.name();
+        }
+
+        SR_NODISCARD std::string_view NameView() const {
             if (!m_valid) {
                 SRAssert2(false, "Node::Name() : node is not valid!");
                 g_xml_last_error = -4;
@@ -207,6 +217,14 @@ namespace SR_UTILS_NS::Xml {
 
                 return vector2;
             }
+            else if constexpr (std::is_same<T, Helper::Math::UVector2>()) {
+                Helper::Math::UVector2 vector2;
+
+                vector2.x = GetAttribute("X").ToUInt();
+                vector2.y = GetAttribute("Y").ToUInt();
+
+                return vector2;
+            }
             else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
                 Helper::Math::FVector3 vector3;
 
@@ -224,6 +242,18 @@ namespace SR_UTILS_NS::Xml {
                 vector3.z = GetAttribute("Z").ToInt();
 
                 return vector3;
+            }
+            else if constexpr (std::is_same<T, Helper::Math::UVector3>()) {
+                Helper::Math::UVector3 vector3;
+
+                vector3.x = GetAttribute("X").ToUInt();
+                vector3.y = GetAttribute("Y").ToUInt();
+                vector3.z = GetAttribute("Z").ToUInt();
+
+                return vector3;
+            }
+            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+                return GetAttribute("Path").ToString();
             }
             else if constexpr (std::is_same<T, int32_t>()) {
                 return GetAttribute("Int32").ToInt();

@@ -16,12 +16,12 @@ namespace SR_GRAPH_NS::GUI {
 
     static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
-    static bool DragUnit(const std::string& name, Helper::Math::Unit& value, float_t drag = 0.1f, bool active = true) {
+    static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f, bool active = true, uint32_t index = 0) {
         float_t temp = value;
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
 
-        if (ImGui::DragFloat(std::string("##" + name).c_str(), &temp, drag, 0.0f, 0.0f, "%.2f")) {
+        if (ImGui::DragFloat(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0.0f, 0.0f, "%.2f")) {
             value = temp;
             ImGui::PopItemFlag();
             return true;
@@ -32,11 +32,34 @@ namespace SR_GRAPH_NS::GUI {
         return false;
     }
 
-    template<typename T> static void DrawValue(const std::string& label, const T& value) {
+    static bool InputInt(const std::string& name, int32_t& value, int32_t step = 1, bool active = true, uint32_t index = 0) {
+        int32_t temp = value;
+        bool changed = false;
+
+        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 300, 150);
+
+        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
+        ImGui::PushItemWidth(textWidth);
+
+        if (ImGui::InputInt(SR_FORMAT_C("%s##%i", name.c_str(), index), &temp, step)) {
+            value = temp;
+            changed = true;
+        }
+
+        ImGui::PopItemWidth();
+        ImGui::PopItemFlag();
+
+        return changed;
+    }
+
+    template<typename T> static void DrawValue(const std::string& label, const T& value, uint32_t index = 0) {
         std::string string;
 
         if constexpr (std::is_same_v<T, std::string>) {
             string = value;
+        }
+        else if constexpr (std::is_same_v<T, SR_UTILS_NS::Path>) {
+            string = value.ToString();
         }
         else if constexpr (SR_MATH_NS::IsNumber<T>()) {
             string = std::to_string(value);
@@ -44,13 +67,22 @@ namespace SR_GRAPH_NS::GUI {
         else if constexpr (std::is_same_v<T, const char*>) {
             string = std::string(value);
         }
-        else
-            static_assert("Unknown type!");
+        else {
+            SR_STATIC_ASSERT("Unknown type!");
+        }
+
+        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(string.c_str()).x, 300, 150);
 
         ImGui::PushItemFlag(ImGuiItemFlags_::ImGuiItemFlags_Disabled, true);
+        ImGui::PushItemWidth(textWidth);
 
-        ImGui::InputText(label.c_str(), &string, ImGuiInputTextFlags_::ImGuiInputTextFlags_ReadOnly);
+        ImGui::InputText(
+                SR_FORMAT_C("%s##%i", label.c_str(), index),
+                &string,
+                ImGuiInputTextFlags_::ImGuiInputTextFlags_ReadOnly
+        );
 
+        ImGui::PopItemWidth();
         ImGui::PopItemFlag();
     }
 
@@ -64,7 +96,8 @@ namespace SR_GRAPH_NS::GUI {
             ImVec4 activeCol,
             ImFont* font = nullptr,
             bool active = true,
-            float_t drag = 0.1f)
+            float_t drag = 0.1f,
+            uint32_t index = 0)
     {
         bool result = false;
 
@@ -77,7 +110,7 @@ namespace SR_GRAPH_NS::GUI {
         if (font)
             ImGui::PushFont(font);
 
-        if (ImGui::Button(label, btnSize) && active) {
+        if (ImGui::Button(SR_FORMAT_C("%s##%i", label, index), btnSize) && active) {
             value = reset;
             result = true;
         }
@@ -90,7 +123,7 @@ namespace SR_GRAPH_NS::GUI {
 
         ImGui::SameLine();
 
-        result |= DragUnit(label, value, drag, active);
+        result |= DragUnit(label, value, drag, active, index);
 
         ImGui::PopItemWidth();
 
@@ -99,10 +132,11 @@ namespace SR_GRAPH_NS::GUI {
 
     static bool DrawColorControl(
             const std::string& label,
-            Helper::Math::FVector4& values,
+            SR_MATH_NS::FVector4& values,
             float_t resetValue = 0.0f,
             bool active = true,
-            float_t columnWidth = 40.0f)
+            float_t columnWidth = 40.0f,
+            uint32_t index = 0)
     {
         bool result = false;
 
@@ -127,7 +161,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                                   ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
                                   ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
-                                  nullptr, active, 0.01f);
+                                  nullptr, active, 0.01f, index);
 
         ImGui::SameLine();
 
@@ -135,7 +169,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                                   ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
                                   ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
-                                  nullptr, active, 0.01f);
+                                  nullptr, active, 0.01f, index);
 
         ImGui::SameLine();
 
@@ -143,7 +177,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                                   ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
                                   ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
-                                  nullptr, active, 0.01f);
+                                  nullptr, active, 0.01f, index);
 
         ImGui::SameLine();
 
@@ -151,7 +185,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.7f, 0.7f, 0.7f, 1.0f },
                                   ImVec4{ 0.8f, 0.8f, 0.8f, 1.0f },
                                   ImVec4{ 0.7f, 0.7f, 0.7f, 1.0f },
-                                  nullptr, active, 0.01f);
+                                  nullptr, active, 0.01f, index);
 
         ImGui::PopStyleVar();
 
@@ -164,7 +198,14 @@ namespace SR_GRAPH_NS::GUI {
         return result;
     }
 
-    static bool DrawVec3Control(const std::string& label, Helper::Math::FVector3& values, float_t resetValue = 0.0f, float_t columnWidth = 70.0f, float_t drag = 0.1) {
+    static bool DrawVec3Control(
+            const std::string& label,
+            SR_MATH_NS::FVector3& values,
+            float_t resetValue = 0.0f,
+            float_t columnWidth = 70.0f,
+            float_t drag = 0.1,
+            uint32_t index = 0)
+    {
         bool result = false;
 
         ImGuiIO& io = ImGui::GetIO();
@@ -187,21 +228,21 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawUnitControl("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag);
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag, index);
 
         ImGui::SameLine();
 
         result |= DrawUnitControl("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag);
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag, index);
 
         ImGui::SameLine();
 
         result |= DrawUnitControl("Z", values.z, resetValue, buttonSize,
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag);
+               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag, index);
 
         ImGui::PopStyleVar();
 
@@ -222,7 +263,7 @@ namespace SR_GRAPH_NS::GUI {
         return result;
     }
 
-    static bool Button(const std::string& name, ImVec4 color = ImVec4(0, 0, 0, 0), ImVec4 hovered = ImVec4(0, 0, 0, 0)) {
+    static bool Button(const std::string& label, ImVec4 color = ImVec4(0, 0, 0, 0), ImVec4 hovered = ImVec4(0, 0, 0, 0), uint32_t index = 0) {
         const auto hasBtnColor = !Vec4Null(color);
         const auto hasHoveredColor = !Vec4Null(hovered);
 
@@ -237,7 +278,7 @@ namespace SR_GRAPH_NS::GUI {
         if (hasHoveredColor || hasBtnColor)
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hovered);
 
-        const auto result = ImGui::Button(name.c_str());
+        const auto result = ImGui::Button(SR_FORMAT_C("%s##%i", label.c_str(), index));
 
         if (hasBtnColor)
             ImGui::PopStyleColor(2);

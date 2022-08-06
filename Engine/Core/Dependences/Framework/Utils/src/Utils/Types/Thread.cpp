@@ -22,6 +22,13 @@ namespace SR_HTYPES_NS {
         }
     }
 
+    Thread::Thread(Thread::ThreadId id)
+        : m_id(id)
+        , m_thread(std::thread())
+    {
+        m_context = new DataStorage();
+    }
+
     Thread::Thread()
         : Thread(std::thread())
     { }
@@ -60,22 +67,40 @@ namespace SR_HTYPES_NS {
     }
 
     Thread::Ptr Thread::Factory::GetMainThread() {
-        return nullptr;
+        SR_LOCK_GUARD
+        SRAssert2(m_main, "Main thread isn't initialized!");
+        return m_main;
     }
 
     Thread::Ptr Thread::Factory::GetThisThread() {
         SR_SCOPED_LOCK
 
-        if (auto&& pIt = m_threads.find(SR_UTILS_NS::GetThisThreadId()); pIt != m_threads.end()) {
+        auto&& threadId = SR_UTILS_NS::GetThisThreadId();
+
+        if (auto&& pIt = m_threads.find(threadId); pIt != m_threads.end()) {
             return pIt->second;
         }
+
+        auto&& main = GetMainThread();
+
+        if (main && threadId == main->m_id) {
+            return main;
+        }
+
+        SRHalt("Thread::Factory::GetThisThread() : unknown thread!");
 
         return nullptr;
     }
 
     void Thread::Factory::Remove(Thread* pThread) {
         SR_LOG("Thread::Free() : free \"" + ToString(pThread->GetId()) + "\" thread...");
-        m_threads.erase(pThread->GetId());
+
+        if (pThread == m_main) {
+            m_main = nullptr;
+        }
+        else {
+            m_threads.erase(pThread->GetId());
+        }
     }
 
     Thread::ThreadId Thread::GetId() {
@@ -91,6 +116,16 @@ namespace SR_HTYPES_NS {
         SR_SCOPED_LOCK
 
         return m_threads.size();
+    }
+
+    void Thread::Factory::SetMainThread() {
+        SR_LOCK_GUARD
+
+        SRAssert2(!m_main, "Main thread already initialized!");
+
+        SR_LOG("Thread::Factory::SetMainThread() : initializing main thread...");
+
+        m_main = new Thread(SR_UTILS_NS::GetThisThreadId());
     }
 }
 

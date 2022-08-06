@@ -51,18 +51,22 @@ namespace SR_MATH_NS {
             y = static_cast<T>(vec2.y);
         }
 
-        template<typename U> [[nodiscard]] Vector2<U> Cast() const { return Vector2<U>(
+        static constexpr Vector2<T> Zero() { return Vector2(static_cast<T>(0)); }
+        static constexpr Vector2<T> One() { return Vector2(static_cast<T>(1)); }
+
+        template<typename U> SR_NODISCARD Vector2<U> SR_FASTCALL Cast() const noexcept { return Vector2<U>(
                     static_cast<U>(x),
                     static_cast<U>(y)
             );
         }
 
-        [[nodiscard]] Vector2 Singular(const Vector2& segment) const { return Vector2(
+        SR_NODISCARD Vector2 Singular(const Vector2& segment) const { return Vector2(
                     x > 0 ? x + segment.x : x - segment.x,
                     y > 0 ? y + segment.y : y - segment.y
             );
         }
-        [[nodiscard]] Vector2 DeSingular(const Vector2& segment) const { return Vector2(
+
+        SR_NODISCARD Vector2 DeSingular(const Vector2& segment) const { return Vector2(
                     x > 0 ? x - segment.x : x,
                     y > 0 ? y - segment.y : y
             );
@@ -76,8 +80,12 @@ namespace SR_MATH_NS {
             return Distance(Vector2<T>());
         }
 
-        [[nodiscard]] Vector2 Abs() const {
+        SR_NODISCARD Vector2 Abs() const {
             return Vector2(static_cast<T>(abs(x)), static_cast<T>(abs(y)));
+        }
+
+        SR_NODISCARD Unit Aspect() const {
+            return static_cast<Unit>(x) / static_cast<Unit>(y);
         }
 
         SR_FORCE_INLINE Vector2 operator-() const { return Vector2(-x, -y); }
@@ -151,27 +159,27 @@ namespace SR_MATH_NS {
             return *this;
         }
 
-        [[nodiscard]] SR_FORCE_INLINE bool Empty() const {
+        SR_NODISCARD SR_FORCE_INLINE bool Empty() const {
             return x == 0 && y == 0;
         }
 
-        [[nodiscard]] bool HasZero() const {
+        SR_NODISCARD bool HasZero() const {
             return (x == 0 || y == 0);
         }
 
-        [[nodiscard]] bool HasNegative() const {
+        SR_NODISCARD bool HasNegative() const {
             return (x < 0 || y < 0);
         }
 
-        [[nodiscard]] bool HasPositive() const {
+        SR_NODISCARD bool HasPositive() const {
             return (x > 0 || y > 0);
         }
 
-        template<typename U> [[nodiscard]] bool Contains(U value) const {
+        template<typename U> SR_NODISCARD bool Contains(U value) const {
             return x == static_cast<T>(value) || y == static_cast<T>(value);
         }
 
-        [[nodiscard]] SR_FORCE_INLINE glm::vec2 ToGLM() const noexcept {
+        SR_NODISCARD SR_FORCE_INLINE glm::vec2 ToGLM() const noexcept {
             return { static_cast<float_t>(x), static_cast<float_t>(y) };
         }
 
@@ -183,7 +191,7 @@ namespace SR_MATH_NS {
             return coord[p_axis];
         }
 
-        [[nodiscard]] std::string ToString() const {
+        SR_NODISCARD std::string ToString() const {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
         }
     };

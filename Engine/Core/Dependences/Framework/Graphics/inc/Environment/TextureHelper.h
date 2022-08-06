@@ -8,21 +8,46 @@
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS {
-    SR_ENUM_CLASS(TextureFormat,
+    SR_ENUM_CLASS_T(Dimension, uint8_t,
+        Unknown,
+        DIMENSION_2D,
+        DIMENSION_3D,
+        DIMENSION_CUBE
+    );
+
+    SR_ENUM_CLASS_T(Antialiasing, uint8_t,
+        None,
+        Samples2,
+        Samples4,
+        Samples8,
+        Samples16,
+        Samples32
+    );
+
+    SR_ENUM_CLASS(ColorFormat,
         Unknown      = 0,
 
         RGBA8_UNORM  = 10000,
         RGBA16_UNORM = 10001,
 
+        RGB8_UNORM  = 10002,
+        RGB16_UNORM = 10003,
+
         RGBA8_SRGB   = 20000,
     );
 
-    inline static bool IsSRGB(TextureFormat f) {
-        return f >= TextureFormat::RGBA8_SRGB || f <= TextureFormat::RGBA8_SRGB;
+    SR_ENUM_CLASS(DepthFormat,
+        Unknown,
+        None,
+        Auto
+    );
+
+    inline static bool IsSRGB(ColorFormat f) {
+        return f >= ColorFormat::RGBA8_SRGB || f <= ColorFormat::RGBA8_SRGB;
     }
 
-    inline static bool IsUNORM(TextureFormat f) {
-        return f >= TextureFormat::RGBA8_UNORM || f <= TextureFormat::RGBA16_UNORM;
+    inline static bool IsUNORM(ColorFormat f) {
+        return f >= ColorFormat::RGBA8_UNORM || f <= ColorFormat::RGBA16_UNORM;
     }
 
     SR_ENUM_CLASS(TextureFilter,

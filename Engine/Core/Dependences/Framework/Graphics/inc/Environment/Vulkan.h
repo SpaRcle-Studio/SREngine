@@ -160,8 +160,13 @@ namespace SR_GRAPH_NS {
         bool InitGUI() override;
         bool StopGUI() override;
         void SetGUIEnabled(bool enabled) override {
-            m_kernel->SetGUIEnabled(enabled);
+            if (m_guiEnabled == enabled) {
+                return;
+            }
+
             m_guiEnabled = enabled;
+
+            m_kernel->SetGUIEnabled(enabled);
             m_basicWindow->SetHeaderEnabled(!enabled);
         }
         bool BeginDrawGUI() override;
@@ -187,7 +192,7 @@ namespace SR_GRAPH_NS {
                 return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
             }
             else {
-                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture isn't exists!\n\tTexture id: " + std::to_string(id));
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : texture does not exist!\n\tTexture id: " + std::to_string(id));
                 SRHalt("Something went wrong...");
                 return nullptr;
             }
@@ -217,7 +222,7 @@ namespace SR_GRAPH_NS {
 
         SR_FORCE_INLINE bool BeginRender() override {
             if (!m_renderPassBI.pClearValues) {
-                SRAssertOnce(false);
+                SRAssert2Once(false, "pClearValues is nullptr! Please, call ClearBuffers before BeginRender");
                 return false;
             }
 
@@ -238,7 +243,7 @@ namespace SR_GRAPH_NS {
         /** \Vulkan Clear next frame buffer usage */
         SR_FORCE_INLINE void ClearBuffers() override {
             if (m_currentFBOid < 0) {
-                SR_ERROR("Vulkan::ClearBuffers() : frame buffer isn't attached!");
+                SR_ERROR("Vulkan::ClearBuffers() : frame buffer is not attached!");
                 return;
             }
             else if (m_currentFBOid > 0) {
@@ -246,7 +251,8 @@ namespace SR_GRAPH_NS {
                 m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_currentFBOid - 1]->GetClearValues();
             }
             else {
-                SR_ERROR("Vulkan::ClearBuffers() : TODO!");
+                /// в какой ситуации это может случиться?
+                SRHalt("Vulkan::ClearBuffers() : TODO!");
             }
         }
 
@@ -255,18 +261,43 @@ namespace SR_GRAPH_NS {
 
             this->m_clearValues.resize(colorCount + 1);
 
-            for (uint8_t i = 0; i < colorCount; i++)
+            for (uint8_t i = 0; i < colorCount; ++i)
                 m_clearValues[i] = { .color = {{ r, g, b, a }} };
 
             m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
 
-            this->m_renderPassBI.clearValueCount = colorCount + 1;
-            this->m_renderPassBI.pClearValues    = m_clearValues.data();
+            m_renderPassBI.clearValueCount = colorCount + 1;
+            m_renderPassBI.pClearValues    = m_clearValues.data();
+        }
+
+        SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override {
+            uint8_t colorCount = static_cast<uint8_t>(colors.size());
+            colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
+
+            m_clearValues.resize(colorCount + 1);
+
+            for (uint8_t i = 0; i < colorCount; ++i) {
+                auto&& color = colors[i / (m_kernel->MultisamplingEnabled() ? 2 : 1)];
+
+                m_clearValues[i] = {
+                    .color = { {
+                        static_cast<float>(color.r),
+                        static_cast<float>(color.g),
+                        static_cast<float>(color.b),
+                        static_cast<float>(color.a)
+                    }
+                } };
+            }
+
+            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+            m_renderPassBI.clearValueCount = colorCount + 1;
+            m_renderPassBI.pClearValues    = m_clearValues.data();
         }
 
         SR_FORCE_INLINE void DrawFrame() override {
-            if (this->m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
-                Helper::EventManager::Push(Helper::EventManager::Event::Fatal);
+            if (m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
+                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
                 m_hasErrors = true;
             }
         }
@@ -278,7 +309,7 @@ namespace SR_GRAPH_NS {
         SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override {
             if (auto shader = m_memory->m_ShaderPrograms[shaderProgram]) {
                 if (m_currentFBOid < 0) {
-                    SR_ERROR("Vulkan::ReCreateShader() : frame buffer does not attached!");
+                    SR_ERROR("Vulkan::ReCreateShader() : frame buffer is not attached!");
                     return false;
                 }
 
@@ -293,7 +324,7 @@ namespace SR_GRAPH_NS {
                 }
             }
             else {
-                SR_ERROR("Vulkan::ReCreateShader() : shader isn't exists!");
+                SR_ERROR("Vulkan::ReCreateShader() : shader does not exist!");
                 return false;
             }
 
@@ -311,7 +342,9 @@ namespace SR_GRAPH_NS {
                 void** shaderData,
                 const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-                SRShaderCreateInfo shaderCreateInfo) const override;
+                const SRShaderCreateInfo& shaderCreateInfo) const override;
+
+        int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (shaderProgram >= m_memory->m_countShaderPrograms.first) {
@@ -330,15 +363,15 @@ namespace SR_GRAPH_NS {
             m_currentShader->Bind(m_currentCmd);
         }
 
-        bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) override;
-        bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
-            std::vector<int32_t> color = { colorBuffer };
-            bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
-            if (!result)
-                SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
-            colorBuffer = color[0];
-            return result;
-        }
+        bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) override;
+        //bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
+        //    std::vector<int32_t> color = { colorBuffer };
+        //    bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
+        //    if (!result)
+        //        SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
+        //    colorBuffer = color[0];
+        //    return result;
+        //}
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
@@ -517,7 +550,7 @@ namespace SR_GRAPH_NS {
         }
         int32_t CalculateTexture(
                 uint8_t* data,
-                TextureFormat format,
+                ColorFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,
@@ -559,6 +592,7 @@ namespace SR_GRAPH_NS {
                 for (auto&& fbo : m_framebuffersQueue) {
                     if (fbo == framebuffer) {
                         SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
+                        SRHalt0();
                         return;
                     }
                 }
@@ -577,9 +611,17 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {
+            if (VBO == SR_ID_INVALID) {
+                return;
+            }
+
             vkCmdBindVertexBuffers(m_currentCmd, 0, 1, m_memory->m_VBOs[VBO]->GetCRef(), m_offsets);
         }
         SR_FORCE_INLINE void BindIBO(const uint32_t& IBO) override {
+            if (IBO == SR_ID_INVALID) {
+                return;
+            }
+
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
             vkCmdBindIndexBuffer(m_currentCmd, *m_memory->m_IBOs[IBO], 0, VK_INDEX_TYPE_UINT32);
         }

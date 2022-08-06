@@ -56,6 +56,8 @@
 #define SR_DOUBLE_MAX DBL_MAX
 #define SR_FLOAT_MAX FLT_MAX
 
+#define SR_EARTH_GRAVITY 9.81
+
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
 #define SR_CLAMP(x, upper, lower) (SR_MIN(upper, SR_MAX(x, lower)))
@@ -87,6 +89,10 @@ namespace SR_MATH_NS {
     const int32_t  Int32MAX  = INT32_MAX;
 
     const Unit UnitMAX = DoubleMAX;
+
+    static SR_FORCE_INLINE double_t SR_FASTCALL FastSqrt(double_t value) {
+        return std::sqrt(value);
+    }
 
     static SR_FORCE_INLINE bool is_equal_approx(Unit a, Unit b) noexcept {
         // Check for exact equality first, required to handle "infinity" values.

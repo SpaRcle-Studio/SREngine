@@ -7,10 +7,11 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform3D.h>
+#include <Utils/ECS/Transform2D.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Input/InputSystem.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Camera;
 }
 
@@ -48,11 +49,11 @@ namespace SR_GRAPH_NS::GUI {
 
     private:
         glm::mat4 GetMatrix();
-        void SetRect(SR_GRAPH_NS::Camera* camera);
-        void DrawManipulation(SR_GRAPH_NS::Camera* camera);
+        void SetRect(SR_GRAPH_NS::Types::Camera* camera);
+        void DrawManipulation(SR_GRAPH_NS::Types::Camera* camera);
 
     private:
-        SR_UTILS_NS::Transform3D* m_transform     = nullptr;
+        SR_UTILS_NS::Transform*  m_transform     = nullptr;
         int32_t                   m_snapValue     = 100;
         float_t                   m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };
         float_t                   m_snap[3]       = { 1.f, 1.f, 1.f };

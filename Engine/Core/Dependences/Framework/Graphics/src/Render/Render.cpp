@@ -5,6 +5,7 @@
 #include <Render/Render.h>
 #include <Types/Skybox.h>
 #include <Types/Material.h>
+#include <Types/Shader.h>
 
 namespace SR_GRAPH_NS {
     Render::Render(std::string name)
@@ -32,7 +33,7 @@ namespace SR_GRAPH_NS {
         //InsertShader(Shader::StandardID::Skybox, Shader::Load("skybox"));
         //InsertShader(Shader::StandardID::DebugWireframe, Shader::Load("debugWireframe"));
 
-        m_grid = EditorGrid::Create("engine/grid", this);
+        //m_grid = EditorGrid::Create("engine/grid", this);
 
         m_isCreate = true;
 
@@ -90,9 +91,9 @@ namespace SR_GRAPH_NS {
         data.append("\n\tMeshes to remove : " + std::to_string(m_removeMeshes.size()));
         SR_GRAPH_LOG("Render::Close() : close render..." + data);
 
-        if (m_grid) {
-            m_grid->Free();
-        }
+        //if (m_grid) {
+        //    m_grid->Free();
+        //}
 
         m_isRun = false;
         m_isClose = true;
@@ -115,16 +116,16 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        if (!mesh->GetMaterial()) {
-            SR_WARN("Render::RegisterMesh() : mesh have not material! Try use default material... \n\tMesh resource id: " + mesh->GetResourceId());
-            if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
-                mesh->SetMaterial(material);
-            }
-            else {
-                SR_ERROR("Render::RegisterMesh() : failed to get default material, something went wrong...");
-                return;
-            }
-        }
+        //if (!mesh->GetMaterial()) {
+        //    SR_WARN("Render::RegisterMesh() : mesh have not material! Try use default material... \n\tMesh resource id: " + mesh->GetResourceId());
+        //    if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
+        //        mesh->SetMaterial(material);
+        //    }
+        //    else {
+        //        SR_ERROR("Render::RegisterMesh() : failed to get default material, something went wrong...");
+        //        return;
+        //    }
+        //}
 
         if (!mesh->GetShader()) {
             SRAssert2(false, "Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
@@ -138,7 +139,7 @@ namespace SR_GRAPH_NS {
         }
 
         mesh->AddUsePoint();
-        mesh->SetRender(this);
+        //mesh->SetRender(this);
         m_newMeshes.emplace_back(mesh);
     }
 
@@ -147,22 +148,22 @@ namespace SR_GRAPH_NS {
         bool needRebuild = false;
 
         //! Check exists new meshes
-        if (!m_newMeshes.empty()) {
-            for (auto mesh : m_newMeshes) {
-                // Add mesh to transparent meshes array or usual mesh array
-
-                if (mesh->GetMaterial()->IsTransparent()) {
-                    SRVerifyFalse(!m_transparentGeometry.Add(mesh));
-                }
-                else {
-                    SRVerifyFalse(!m_geometry.Add(mesh));
-                }
-            }
-
-            m_newMeshes.clear(); // Clear new meshes array
-
-            needRebuild = true;
-        }
+        //if (!m_newMeshes.empty()) {
+        //    for (auto mesh : m_newMeshes) {
+        //        // Add mesh to transparent meshes array or usual mesh array
+//
+        //        if (mesh->GetMaterial()->IsTransparent()) {
+        //            SRVerifyFalse(!m_transparentGeometry.Add(mesh));
+        //        }
+        //        else {
+        //            SRVerifyFalse(!m_geometry.Add(mesh));
+        //        }
+        //    }
+//
+        //    m_newMeshes.clear(); // Clear new meshes array
+//
+        //    needRebuild = true;
+        //}
 
         while (auto&& shader = m_shadersToFree.Pop(nullptr)) {
             SRAssert(shader->GetCountUses() == 0);
@@ -176,45 +177,46 @@ namespace SR_GRAPH_NS {
             needRebuild = true;
         }
 
-        //! Check meshes to remove from render
-        while (!m_removeMeshes.empty()) {
-            const auto &mesh = m_removeMeshes.front();
-
-            if (mesh->GetMaterial()->IsTransparent()) {
-                SRVerifyFalse2(!m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
-            }
-            else {
-                SRVerifyFalse2(!m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
-            }
-
-            if (mesh->IsCalculated())
-                mesh->FreeVideoMemory();
-
-            needRebuild = true;
-            m_removeMeshes.pop();
-        }
+        ////! Check meshes to remove from render
+        //while (!m_removeMeshes.empty()) {
+        //    const auto &mesh = m_removeMeshes.front();
+//
+        //    if (mesh->GetMaterial()->IsTransparent()) {
+        //        SRVerifyFalse2(!m_transparentGeometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+        //    }
+        //    else {
+        //        SRVerifyFalse2(!m_geometry.Remove(mesh), "Mesh not found! Id: " + mesh->GetResourceId());
+        //    }
+//
+        //    if (mesh->IsCalculated())
+        //        mesh->FreeVideoMemory();
+//
+        //    needRebuild = true;
+        //    m_removeMeshes.pop();
+        //}
 
         //! Free textures
-        if (!m_texturesToFree.empty()) {
-            for (auto& textureToFree : m_texturesToFree) {
-                SR_GRAPH_LOG("Render::PoolEvents() : free texture...\n\tResource id:" +
-                             textureToFree->GetResourceId() + "\n\tTexture id: " + std::to_string(textureToFree->FastGetId()));
+      // if (!m_texturesToFree.empty()) {
+      //     for (auto& textureToFree : m_texturesToFree) {
+      //         SR_GRAPH_LOG("Render::PoolEvents() : free texture...\n\tResource id:" +
+      //                      textureToFree->GetResourceId() + "\n\tTexture id: " + std::to_string(textureToFree->FastGetId()));
 
-                if (textureToFree->IsCalculated()) {
-                    textureToFree->FreeVideoMemory();
-                }
+      //         if (textureToFree->IsCalculated()) {
+      //             textureToFree->FreeVideoMemory();
+      //         }
 
-                textureToFree->RemoveUsePoint();
-                m_textures.erase(textureToFree);
-            }
+      //         textureToFree->RemoveUsePoint();
 
-            m_texturesToFree.clear();
+      //         m_textures.erase(textureToFree);
+      //     }
 
-            needRebuild = true;
-        }
+      //     m_texturesToFree.clear();
 
-        if (needRebuild)
-            m_env->SetBuildState(false);
+      //     needRebuild = true;
+      // }
+
+      // if (needRebuild)
+      //     m_env->SetBuildState(false);
     }
 
     void Render::SetSkybox(SR_GTYPES_NS::Skybox *skybox) {
@@ -261,7 +263,7 @@ namespace SR_GRAPH_NS {
         }
 
         texture->AddUsePoint();
-        texture->SetRender(this);
+        //texture->SetRender(this);
         m_textures.insert(texture);
     }
 
@@ -273,7 +275,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void Render::SetCurrentCamera(Framework::Graphics::Camera *camera)  {
+    void Render::SetCurrentCamera(Framework::Graphics::Types::Camera *camera)  {
         m_currentCamera = camera;
     }
 
@@ -299,8 +301,8 @@ namespace SR_GRAPH_NS {
                m_removeMeshes.empty() &&
                m_texturesToFree.empty() &&
                m_textures.empty() &&
-               m_transparentGeometry.Empty() &&
-               m_geometry.Empty() &&
+              // m_transparentGeometry.Empty() &&
+              // m_geometry.Empty() &&
                m_skyboxesToFreeVidMem.empty() &&
                m_shadersToFree.Empty();
     }
@@ -310,7 +312,7 @@ namespace SR_GRAPH_NS {
         SRAssert(false);
     }
 
-    void Render::FreeShader(Shader *shader) {
+    void Render::FreeShader(Types::Shader *shader) {
         m_shadersToFree.Push(shader);
     }
 }

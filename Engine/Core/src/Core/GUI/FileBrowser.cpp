@@ -11,7 +11,7 @@
 
 #include <GUI/Icons.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
         : Widget("Assets")
     { }
@@ -19,6 +19,152 @@ namespace SR_GRAPH_NS::GUI {
     void FileBrowser::SetFolder(const SR_UTILS_NS::Path &path) {
         SRAssert((m_root = path).IsDir());
         m_selectedDir = m_root;
+    }
+
+    void FileBrowser::CurrentDirectoryContextMenu(){
+        if(ImGui::BeginPopupContextWindow()){
+            if (ImGui::Selectable("Paste")) {
+                SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
+            }
+            ImGui::EndPopup();
+        }
+    }
+
+    void FileBrowser::FileContextMenu(const SR_UTILS_NS::Path &path){
+        if (!ImGui::BeginPopupContextItem())
+            return;
+
+        if (ImGui::Selectable("Open")) {
+            SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+        }
+        if (ImGui::Selectable("Copy")) {
+            std::list<SR_UTILS_NS::Path> paths({path}); ///TODO: убрать, когда будет сделано выделение нескольких файлов и их передача в метод
+            SR_UTILS_NS::Platform::CopyFilesToClipboard(paths);
+        }
+        if (ImGui::Selectable("Cut")) {
+            ///SR_UTILS_NS::Platform::CopyFilesToClipboard(paths);
+            ///for (auto &&path:paths) {
+            /// SR_UTILS_NS::Platform::Delete(path);
+            ///}
+        }
+        if (ImGui::Selectable("Paste")) {
+            SR_UTILS_NS::Platform::PasteFilesFromClipboard(path);
+        }
+        if (ImGui::Selectable("Delete")) {
+            ///метод Delete является слишком опасным, поскольку проводит удаление рекурсивно
+            ///TODO: SR_UTILS_NS::Platform::Delete обезопасить от безвозвратного удаления файлов
+            ///SR_UTILS_NS::Platform::Delete(path);
+        }
+
+        ImGui::EndPopup();
+    }
+
+    void FileBrowser::CurrentDirectoryPanel() {
+        if (ImGui::BeginChild("current directory panel", ImVec2(0, 22))) {
+
+            ImGui::Separator();
+
+            if (ImGui::Button("Back")) {
+                m_selectedDir = m_selectedDir.GetPrevious();
+            }
+            ImGui::SameLine();
+            ImGui::Text("%s", m_selectedDir.CStr());
+
+            ImGui::EndChild();
+        }
+    }
+
+    void FileBrowser::ItemViewPanel() {
+        if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
+
+            ImGui::Separator();
+
+            CurrentDirectoryContextMenu();
+
+            auto wndSize = ImGui::GetWindowSize();
+
+            uint32_t index = 1;
+            for (const auto &path : m_selectedDir.GetAll()) {
+                if (path.GetBaseName().empty())
+                    continue;
+
+                ++index;
+
+                ImGui::BeginGroup();
+
+                if (path.IsDir()) {
+                    void *descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(
+                            path.IsEmpty() ? Core::EditorIcon::EmptyFolder : Core::EditorIcon::Folder);
+
+                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor,
+                                                                SR_MATH_NS::IVector2(50), 0)) {
+                        m_selectedDir = path;
+                    }
+                    FileContextMenu(path);
+                } else {
+                    //void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    void *descriptor = nullptr;
+                    if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "zip") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::ZIP);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "jpg") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::JPG);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "txt") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::TXT);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "xml") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::XML);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "png") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::PNG);
+                    } else if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path.ToString()) == "dll") {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::DLL);
+                    } else {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
+                    }
+
+                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor,
+                                                                SR_MATH_NS::IVector2(50), 0)) {
+                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+                    }
+
+                    FileContextMenu(path);
+                }
+
+                auto id = SR_UTILS_NS::StringUtils::CutName(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
+
+                ImGui::Text("%s", id.c_str());
+
+                ImGui::EndGroup();
+
+                if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
+                    ImGui::SameLine();
+                else
+                    index = 1;
+
+                //ImGui::PopStyleVar();
+            }
+
+            CheckHovered();
+            CheckFocused();
+
+            ImGui::EndChild();
+        }
+    }
+
+    void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {
+        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) {
+
+            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
+
+            Draw(m_root);
+
+            assetWidth = ImGui::GetItemRectSize().x;
+
+            ImGui::PopStyleVar();
+
+            CheckHovered();
+            CheckFocused();
+
+            ImGui::EndChild();
+        }
     }
 
     void FileBrowser::Draw(const SR_UTILS_NS::Path &root) {
@@ -117,91 +263,31 @@ namespace SR_GRAPH_NS::GUI {
     void FileBrowser::Draw() {
         // left
 
-        float_t assetWidth = 0.f;
+        assetWidth = 0.f;
 
-        const auto&& leftWidth = 250;
+        const float_t leftWidth = 250;
 
-        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) {
+        //
+        FileCatalogPanel(leftWidth);
 
-            ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
-
-            Draw(m_root);
-
-            assetWidth = ImGui::GetItemRectSize().x;
-
-            ImGui::PopStyleVar();
-
-            CheckHovered();
-            CheckFocused();
-
-            ImGui::EndChild();
-        }
-
-        auto&& windowWidth = ImGui::GetWindowWidth();
-        if (leftWidth > windowWidth - 20)
+        float_t windowWidth = ImGui::GetWindowWidth();
+        if (leftWidth > windowWidth - 40)
             return;
 
         ImGui::SameLine();
 
-        /////////////////////// right
-
-        auto width = ImGui::GetWindowWidth();
+        // right
 
         ImGui::BeginGroup();
-        if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
-            ImGui::Separator();
-
-            if (ImGui::Button("Back")) {
-                m_selectedDir = m_selectedDir.GetPrevious();
-            }
-            ImGui::SameLine();
-            ImGui::Text("%s", m_selectedDir.CStr());
-
-            ImGui::Separator();
-
-            auto wndSize = ImGui::GetWindowSize();
-
-            uint32_t index = 1;
-            for (const auto &path : m_selectedDir.GetAll()) {
-                if (path.GetBaseName().empty())
-                    continue;
-
-                ++index;
-
-                ImGui::BeginGroup();
-
-                if (path.IsDir()) {
-                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::Folder);
-                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
-                        m_selectedDir = path;
-                    }
-                }
-                else {
-                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::File);
-                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##%s", path.ToString().c_str()), descriptor, SR_MATH_NS::IVector2(50), 0)){
-                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
-                    }
-                }
-
-                auto id = SR_UTILS_NS::StringUtils::CutName(SR_UTILS_NS::s2ws(path.GetBaseName()), 8);
-
-                ImGui::Text("%s", id.c_str());
-
-                ImGui::EndGroup();
-
-                if ((ImGui::GetItemRectSize().x * index) + assetWidth < wndSize.x)
-                    ImGui::SameLine();
-                else
-                    index = 1;
-
-                //ImGui::PopStyleVar();
-            }
-
-            CheckHovered();
-            CheckFocused();
-
-            ImGui::EndChild();
+        CurrentDirectoryPanel();
+        auto&& DirectoryPanelHeight = ImGui::GetWindowHeight();
+        if (DirectoryPanelHeight < 50) {
+            ImGui::EndGroup();
+            return;
         }
+
+
+        ItemViewPanel();
 
         /*ImGui::BeginChild("buttons");
         if (ImGui::Button("Revert")) {}

@@ -9,14 +9,14 @@
 std::vector<SR_GRAPH_NS::GUI::Node*> SR_CORE_NS::BlueprintParser::Parse(const std::string &path) {
     std::vector<SR_GRAPH_NS::GUI::Node*> blueprints;
 
-    if (Helper::FileSystem::FileExists(path)) {
-        auto xml = Helper::Xml::Document::Load(path);
-        for (const Helper::Xml::Node& blueprint : xml.Root().GetNode("Blueprints").GetNodes())
-            blueprints.emplace_back(ParseBlueprint(blueprint));
-    }
-    else {
-        SR_ERROR("BlueprintParser::Parse : config file not found! \n\tPath: " + path);
-    }
+    //if (Helper::FileSystem::FileExists(path)) {
+    //    auto xml = Helper::Xml::Document::Load(path);
+    //    for (const Helper::Xml::Node& blueprint : xml.Root().GetNode("Blueprints").GetNodes())
+    //        blueprints.emplace_back(ParseBlueprint(blueprint));
+    //}
+    //else {
+    //    SR_ERROR("BlueprintParser::Parse : config file not found! \n\tPath: " + path);
+    //}
 
     return blueprints;
 }

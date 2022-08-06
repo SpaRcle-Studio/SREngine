@@ -4,6 +4,7 @@
 
 #include <Environment/Vulkan/VulkanImGUI.h>
 #include <Utils/GUI.h>
+#include <EvoVulkan/Types/DescriptorPool.h>
 
 int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
     VkWin32SurfaceCreateInfoKHR sci;
@@ -35,8 +36,9 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         return false;
     }
 
-    if (!m_pool)
-        m_pool = EvoVulkan::Core::DescriptorPool::Create(m_device, 1000 * m_poolSizes.size(), m_poolSizes);
+    if (!m_pool) {
+        m_pool = EvoVulkan::Types::DescriptorPool::Create(*m_device, 1000 * m_poolSizes.size(), m_poolSizes);
+    }
 
     if (!m_pool) {
         SR_ERROR("VkImGUI::Init() : failed to create descriptor pool!");

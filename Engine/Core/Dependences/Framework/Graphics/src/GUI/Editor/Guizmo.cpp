@@ -3,7 +3,7 @@
 //
 
 #include <GUI/Editor/Guizmo.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <GUI/Utils.h>
 
 namespace SR_GRAPH_NS::GUI {
@@ -65,7 +65,7 @@ namespace SR_GRAPH_NS::GUI {
             return;
         }
 
-        if (auto&& pCamera = camera->GetComponent<Graphics::Camera>()) {
+        if (auto&& pCamera = camera->GetComponent<SR_GRAPH_NS::Types::Camera>()) {
             ImGuizmo::SetOrthographic(false);
             ImGuizmo::SetDrawlist();
 
@@ -96,7 +96,7 @@ namespace SR_GRAPH_NS::GUI {
         camera.Unlock();
     }
 
-    void Guizmo::DrawManipulation(SR_GRAPH_NS::Camera* camera) {
+    void Guizmo::DrawManipulation(SR_GRAPH_NS::Types::Camera* camera) {
         glm::mat4 transform = GetMatrix();
 
         ImGuizmo::Manipulate(
@@ -134,7 +134,7 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
-    void Guizmo::SetRect(SR_GRAPH_NS::Camera* camera) {
+    void Guizmo::SetRect(SR_GRAPH_NS::Types::Camera* camera) {
         ImGuiWindow *window = ImGui::GetCurrentWindow();
         if (!window || window->SkipItems)
             return;

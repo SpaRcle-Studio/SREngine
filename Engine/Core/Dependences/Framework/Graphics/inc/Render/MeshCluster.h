@@ -6,63 +6,136 @@
 #define GAMEENGINE_MESHCLUSTER_H
 
 #include <Utils/Debug.h>
+#include <Utils/Common/NonCopyable.h>
+#include <Utils/Types/Map.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_GRAPH_NS {
     namespace Types {
         class IndexedMesh;
         class Mesh;
+        class Shader;
     }
 
-    class Shader;
-
-    typedef uint32_t ClusterShaderId;
     typedef uint32_t ClusterVBOId;
 
     typedef std::unordered_set<Types::IndexedMesh *> MeshGroup;
     typedef std::unordered_map<ClusterVBOId, MeshGroup> MeshGroups;
     typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
-    struct ShadedMeshSubCluster {
-        MeshGroups        m_groups   = MeshGroups();
-        MeshGroupCounters m_counters = MeshGroupCounters();
-        uint32_t          m_total    = 0;
+    class ShadedMeshSubCluster : public SR_UTILS_NS::NonCopyable {
+    public:
+        using Iterator = MeshGroups::iterator;
+        using ConstIterator = MeshGroups::const_iterator;
 
-        bool Add(Types::Mesh *mesh);
-        bool Remove(Types::Mesh *mesh);
+    public:
+        ShadedMeshSubCluster() = default;
+        ~ShadedMeshSubCluster() override = default;
 
-        [[nodiscard]] bool Empty() const;
+        ShadedMeshSubCluster(ShadedMeshSubCluster&& ref) noexcept {
+            m_groups = std::exchange(ref.m_groups, {});
+        }
+
+        ShadedMeshSubCluster& operator=(ShadedMeshSubCluster&& ref) noexcept {
+            m_groups = std::exchange(ref.m_groups, {});
+            return *this;
+        }
+
+    public:
+        Iterator erase(const Iterator& iterator) {
+            return m_groups.erase(iterator);
+        }
+
+        SR_NODISCARD Iterator begin() { return m_groups.begin(); }
+        SR_NODISCARD Iterator end() { return m_groups.end(); }
+
+        SR_NODISCARD ConstIterator begin() const { return m_groups.begin(); }
+        SR_NODISCARD ConstIterator end() const { return m_groups.end(); }
+
+        bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
+        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
+        SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
+
+    private:
+        MeshGroups m_groups = MeshGroups();
+
     };
 
-    struct MeshCluster {
-        std::unordered_map<Shader*, ShadedMeshSubCluster> m_subClusters;
+    class MeshCluster : public SR_UTILS_NS::NonCopyable {
+    public:
+        using Iterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::iterator;
+        using ConstIterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::const_iterator;
+        using MeshPtr = SR_GTYPES_NS::Mesh*;
+        using ClusterCallback = SR_HTYPES_NS::Function<void(MeshPtr)>;
 
-        bool Add(Types::Mesh *mesh);
-        bool Remove(Types::Mesh *mesh);
-        bool Empty();
+    public:
+        MeshCluster();
+        ~MeshCluster() override = default;
+
+    public:
+        Iterator erase(const Iterator& iterator) {
+            return m_subClusters.erase(iterator);
+        }
+
+        SR_NODISCARD Iterator begin() { return m_subClusters.begin(); }
+        SR_NODISCARD Iterator end() { return m_subClusters.end(); }
+
+        SR_NODISCARD ConstIterator begin() const { return m_subClusters.begin(); }
+        SR_NODISCARD ConstIterator end() const { return m_subClusters.end(); }
+
+        bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
+        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
+        SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
+
+        void SetAddCallback(const ClusterCallback& callback) { m_addCallback = callback; }
+        void SetRemoveCallback(const ClusterCallback& callback) { m_removeCallback = callback; }
+
+        void Update();
+
+    protected:
+        virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) = 0;
+
+    protected:
+        ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
+        ClusterCallback m_addCallback;
+        ClusterCallback m_removeCallback;
+
+    };
+
+    class OpaqueMeshCluster;
+    class TransparentMeshCluster;
+
+    class OpaqueMeshCluster : public MeshCluster {
+    public:
+        OpaqueMeshCluster(TransparentMeshCluster* pTransparentCluster)
+            : m_transparent(pTransparentCluster)
+        { }
+
+        ~OpaqueMeshCluster() override = default;
+
+    private:
+        bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) final;
+
+    private:
+        TransparentMeshCluster* m_transparent;
+
+    };
+
+    class TransparentMeshCluster : public MeshCluster {
+    public:
+        TransparentMeshCluster(OpaqueMeshCluster* pOpaqueCluster)
+            : m_opaque(pOpaqueCluster)
+        { }
+
+        ~TransparentMeshCluster() override = default;
+
+    private:
+        bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) final;
+
+    private:
+        OpaqueMeshCluster* m_opaque;
+
     };
 }
-
-#define SRDrawMeshCluster(cluster, PipeLine, postShaderBindingCode)        \
-    {                                                                      \
-        static Environment* env = Environment::Get();                      \
-                                                                           \
-        for (auto const& [shader, subCluster] : cluster.m_subClusters) {   \
-            if (shader) shader->Use();                                     \
-            else                                                           \
-                continue;                                                  \
-                                                                           \
-            postShaderBindingCode                                          \
-                                                                           \
-            for (auto const& [key, meshGroup] : subCluster.m_groups) {     \
-                env->BindVBO((*meshGroup.begin())->GetVBO<true>());        \
-                env->BindIBO((*meshGroup.begin())->GetIBO<true>());        \
-                                                                           \
-                for (const auto &mesh : meshGroup)                         \
-                    mesh->Draw##PipeLine();                                \
-            }                                                              \
-                                                                           \
-            env->UnUseShader();                                            \
-        }                                                                  \
-    }                                                                      \
 
 #endif //GAMEENGINE_MESHCLUSTER_H

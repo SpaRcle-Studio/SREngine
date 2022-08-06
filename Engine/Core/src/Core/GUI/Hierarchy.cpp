@@ -6,24 +6,33 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/TaskManager/TaskManager.h>
 #include <GUI/Icons.h>
+#include <Core/GUI/SceneRunner.h>
 
 namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
-    { }
+    {
+        m_sceneRunnerWidget = new SceneRunner();
+    }
+
+    Hierarchy::~Hierarchy() {
+        SR_SAFE_DELETE_PTR(m_sceneRunnerWidget);
+    }
 
     void Hierarchy::Draw() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
 
-        DrawMenu();
-
-        if (m_scene.TryLockIfValid()) {
+        if (m_scene.TryRecursiveLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
         }
+
+        m_sceneRunnerWidget->DrawSubWindow();
 
         for (auto&& gameObject : m_tree) {
             if (!gameObject.LockIfValid())
@@ -34,75 +43,14 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::DrawMenu() {
-        auto&& font = Graphics::Environment::Get()->GetIconFont();
-        float_t scale = font->Scale;
-        font->Scale /= 3;
-
-        const ImVec2 buttonSize = ImVec2(25, 25);
-
-        bool locked = false;
-
-        if (m_scene.TryLockIfValid()) {
-            m_isActive = m_scene->IsActive();
-            m_isPaused = m_scene->IsPaused();
-            locked = true;
-        }
-
-        bool active = m_isActive;
-        bool paused = m_isPaused;
-
-        {
-            ImGui::PushFont(font);
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
-
-            ImGui::Separator();
-
-            if (ImGui::Button(active ? SR_ICON_PLAY_CIRCLE : SR_ICON_PLAY, buttonSize)) {
-                if (active) {
-                    paused = false;
-                }
-
-                active = !active;
-            }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button(paused ? SR_ICON_PAUSE_CIRCLE : SR_ICON_PAUSE, buttonSize)) {
-                paused = !paused;
-            }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button(SR_ICON_STOP, buttonSize)) {
-                active = false;
-                paused = false;
-            }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button(SR_ICON_UNDO, buttonSize) && locked) {
-                m_scene->Reload();
-            }
-
-            ImGui::Separator();
-
-            ImGui::PopFont();
-            ImGui::PopStyleVar();
-        }
-
-        if (locked) {
-            m_scene->SetActive((m_isActive = active));
-            m_scene->SetPaused((m_isPaused = paused));
-            m_scene.Unlock();
-        }
-
-        font->Scale = scale;
-    }
-
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
+
         m_scene = scene;
+
+        if (auto&& widget = dynamic_cast<SceneRunner*>(m_sceneRunnerWidget)) {
+            widget->SetScene(m_scene);
+        }
     }
 
     void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) {
@@ -219,10 +167,9 @@ namespace SR_CORE_NS::GUI {
                 break;
             }
             case SR_UTILS_NS::KeyCode::Del: {
-                std::lock_guard<std::mutex> lock(m_mutex);
+                SR_LOCK_GUARD
 
-                /// TODO: make as command
-                if (m_scene.LockIfValid()) {
+                if (m_scene.RecursiveLockIfValid()) {
                     for (auto&& selected : m_selected) {
                         if (selected.LockIfValid()) {
                             auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
@@ -243,7 +190,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::LShift: {
@@ -265,7 +212,7 @@ namespace SR_CORE_NS::GUI {
         marshal.Write(static_cast<uint64_t>(m_selected.size()));
 
         for (auto&& ptr : m_selected) {
-            if (ptr.LockIfValid()) {
+            if (ptr.RecursiveLockIfValid()) {
                 marshal.Append(ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
                 ptr.Unlock();
             }
@@ -277,18 +224,18 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::Paste() {
+        /// TODO: перевести на команды
+
         auto&& base64 = Helper::Platform::GetClipboardText();
 
         if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
-            /// TODO: нужно сделать вызов через команду, иначе будет deadlock
-
             std::set<Helper::GameObject::Ptr> selected;
 
-            if (m_scene.LockIfValid()) {
+            if (m_scene.RecursiveLockIfValid()) {
                 auto&& count = marshal.Read<uint64_t>();
 
                 if (count > 1000) {
-                    SR_WARN("Hierarchy::Paste() : Attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
+                    SR_WARN("Hierarchy::Paste() : attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
                 }
 
                 for (uint64_t i = 0; i < count; ++i) {
@@ -302,14 +249,14 @@ namespace SR_CORE_NS::GUI {
             }
 
             {
-                std::lock_guard<std::mutex> lock(m_mutex);
+                SR_LOCK_GUARD
                 m_selected = selected;
             }
         }
     }
 
     std::set<Helper::GameObject::Ptr> Hierarchy::GetSelected() const {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
         return m_selected;
     }
 }

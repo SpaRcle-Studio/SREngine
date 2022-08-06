@@ -5,84 +5,58 @@
 #ifndef SRENGINE_TRANSFORM3D_H
 #define SRENGINE_TRANSFORM3D_H
 
-#include <Utils/ECS/ISavable.h>
-
-#include <Utils/Math/Mathematics.h>
-#include <Utils/Math/Vector3.h>
-#include <Utils/Math/Matrix4x4.h>
-#include <Utils/Math/Quaternion.h>
-
-#include <Utils/Types/SafePointer.h>
+#include <Utils/ECS/Transform.h>
 
 namespace SR_UTILS_NS {
-    class GameObject;
-
-    class SR_DLL_EXPORT Transform3D : public ISavable {
+    class SR_DLL_EXPORT Transform3D : public Transform {
         friend class GameObject;
     public:
-        explicit Transform3D(GameObject* parent);
-
         Transform3D()
-            : Transform3D(nullptr)
+            : Transform()
         { }
 
     public:
-        void Translate(Math::FVector3 translation);
-        void Translate(Math::Unit x, Math::Unit y, Math::Unit z);
-        void Rotate(Math::FVector3 eulers);
-        void Rotate(Math::Unit x, Math::Unit y, Math::Unit z);
-        void Scale(Math::FVector3 scale);
-        void Scale(Math::Unit x, Math::Unit y, Math::Unit z);
+        void Translate(const SR_MATH_NS::FVector3& translation) override;
+        void Rotate(const SR_MATH_NS::FVector3& eulers) override;
+        void Scale(const SR_MATH_NS::FVector3& scale) override;
 
-        void GlobalTranslate(Math::FVector3 translation);
-        void GlobalRotate(Math::FVector3 eulers);
-        void GlobalRotate(Math::Unit x, Math::Unit y, Math::Unit z);
-
-        void GlobalScale(const Math::FVector3& scale);
-        void GlobalSkew(const Math::FVector3& skew);
-
-        void RotateAround(Math::FVector3 point, Math::FVector3 eulers);
-        void RotateAroundParent(Math::FVector3 eulers);
+        void RotateAround(const SR_MATH_NS::FVector3& point, const SR_MATH_NS::FVector3& eulers) override;
+        void RotateAroundParent(const SR_MATH_NS::FVector3& eulers) override;
 
         /// Transforms direction from local space to world space
-        SR_NODISCARD Math::FVector3 TransformDirection(Math::FVector3 direction) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 TransformDirection(const SR_MATH_NS::FVector3& direction) const;
 
-        SR_NODISCARD Math::FVector3 GetTranslation() const { return m_translation; }
-        SR_NODISCARD Math::FVector3 GetRotation() const { return m_rotation; }
-        SR_NODISCARD Math::FVector3 GetScale() const { return m_scale; }
-        SR_NODISCARD Math::FVector3 GetSkew() const { return m_skew; }
+        void SetTranslation(const SR_MATH_NS::FVector3& translation) override;
+        void SetTranslationAndRotation(const SR_MATH_NS::FVector3& translation, const SR_MATH_NS::FVector3& euler) override;
+        void SetRotation(const SR_MATH_NS::FVector3& euler) override;
+        void SetScale(const SR_MATH_NS::FVector3& scale) override;
+        void SetSkew(const SR_MATH_NS::FVector3& skew) override;
 
-        void SetTranslation(Math::FVector3 translation);
-        void SetTranslation(Math::Unit x, Math::Unit y, Math::Unit z);
-        void SetTranslationAndRotation(const Math::FVector3& translation, const Math::FVector3& euler);
-        void SetRotation(Math::FVector3 euler);
-        void SetRotation(Math::Unit yaw, Math::Unit pitch, Math::Unit roll);
-        void SetScale(Math::FVector3 scale);
-        void SetScale(Math::Unit x, Math::Unit y, Math::Unit z);
-        void SetSkew(Math::FVector3 skew);
-        void SetSkew(Math::Unit x, Math::Unit y, Math::Unit z);
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
-        static Transform3D* Load(SR_HTYPES_NS::Marshal& marshal);
+        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetRotation() const override { return m_rotation; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const override { return m_scale; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetSkew() const override { return m_skew; }
+
+        SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::Space3D; }
 
     private:
-        void SetGameObject(GameObject* gameObject);
-        void OnParentSet(Transform3D* parent);
-        void UpdateComponents();
+        void UpdateMatrix() override;
 
     public:
-        inline static const Math::FVector3 RIGHT   = Math::FVector3(1, 0, 0);
-        inline static const Math::FVector3 UP      = Math::FVector3(0, 1, 0);
-        inline static const Math::FVector3 FORWARD = Math::FVector3(0, 0, 1);
+        SR_INLINE static constexpr SR_MATH_NS::FVector3 RIGHT   = SR_MATH_NS::FVector3(1, 0, 0);
+        SR_INLINE static constexpr SR_MATH_NS::FVector3 UP      = SR_MATH_NS::FVector3(0, 1, 0);
+        SR_INLINE static constexpr SR_MATH_NS::FVector3 FORWARD = SR_MATH_NS::FVector3(0, 0, 1);
 
-    private:
-        Transform3D* m_parent     = nullptr;
-        GameObject*  m_gameObject = nullptr;
+    protected:
+        SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
+        SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();
 
-        Math::FVector3 m_translation;
-        Math::FVector3 m_rotation;
-        Math::FVector3 m_scale;
-        Math::FVector3 m_skew;
+        SR_MATH_NS::FVector3 m_translation = SR_MATH_NS::FVector3::Zero();
+        SR_MATH_NS::FVector3 m_rotation = SR_MATH_NS::FVector3::Zero();
+        SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
+        SR_MATH_NS::FVector3 m_skew = SR_MATH_NS::FVector3::One();
 
     };
 }

@@ -5,7 +5,7 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    SingletonManager* GetSingletonManager() {
+    SingletonManager* GetSingletonManager() noexcept {
         static SingletonManager* singletonManager = nullptr;
 
         if (!singletonManager) {
@@ -15,7 +15,7 @@ namespace SR_UTILS_NS {
         return singletonManager;
     }
 
-    void** SingletonManager::GetSingleton(uint64_t id) {
+    void** SingletonManager::GetSingleton(uint64_t id) noexcept {
         return &m_singletons[id]; /// get or create
     }
 }

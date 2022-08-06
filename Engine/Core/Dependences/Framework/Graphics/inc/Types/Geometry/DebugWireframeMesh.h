@@ -15,30 +15,42 @@ namespace Framework::Graphics::Memory {
 
 namespace SR_GTYPES_NS {
     class DebugWireframeMesh final : public IndexedMesh {
-        friend class Memory::MeshAllocator;
+        friend class Mesh;
     public:
         typedef Vertices::SimpleVertex VertexType;
 
-    private:
-        explicit DebugWireframeMesh(const std::string& name = "Unnamed")
-            : IndexedMesh(MeshType::Wireframe, name)
-        {
-            /// override component
-            Component::InitComponent<DebugWireframeMesh>();
-        }
+    public:
+        DebugWireframeMesh();
 
-    protected:
-        ~DebugWireframeMesh() override = default;
+    private:
+        ~DebugWireframeMesh() override;
 
     public:
-        void DrawVulkan() override;
-        void DrawOpenGL() override { }
+        void Draw() override;
+
+        void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
+        void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix4X4);
+
+        SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override { return m_modelMatrix; }
 
         IResource* Copy(IResource* destination) const override;
 
         bool Calculate() override;
+        void FreeVideoMemory() override;
 
-        bool FreeVideoMemory() override;
+    protected:
+        bool Reload() override;
+        bool Load() override;
+        bool Unload() override;
+
+    private:
+        SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
+        /// определяет порядок меша в файле, если их там несколько
+        int32_t m_meshId = SR_UINT32_MAX;
+        /// Данный тип меша не является полноценным компонентом, потому должен сам отвечать за трансформацию
+        SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
 
     };
 }

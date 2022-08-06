@@ -15,6 +15,7 @@
 #include "src/Core/GUI/EngineStatistics.cpp"
 #include "src/Core/GUI/SceneViewer.cpp"
 #include "src/Core/GUI/FileBrowser.cpp"
+#include "src/Core/GUI/SceneRunner.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 

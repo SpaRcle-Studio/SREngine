@@ -19,3 +19,21 @@
 [submodule "Engine/Core/Dependences/Framework/Utils/libs/nativefiledialog"]
 	path = Engine/Core/Dependences/Framework/Utils/libs/nativefiledialog
 	url = https://github.com/Monika0000/nativefiledialog-extended
+[submodule "Engine/Core/Dependences/Framework/Depends/OpenAL"]
+	path = Engine/Core/Dependences/Framework/Depends/OpenAL
+	url = https://github.com/kcat/openal-soft
+[submodule "Engine/Core/Dependences/Framework/Utils/libs/ffmpeg"]
+	path = Engine/Core/Dependences/Framework/Utils/libs/ffmpeg
+	url = https://github.com/Monika0000/ffmpeg-cmake
+[submodule "Engine/Core/Dependences/Framework/Audio/libs/OpenAL"]
+	path = Engine/Core/Dependences/Framework/Audio/libs/OpenAL
+	url = https://github.com/kcat/openal-soft
+[submodule "Engine/Core/Dependences/Framework/Audio/libs/minimp3"]
+	path = Engine/Core/Dependences/Framework/Audio/libs/minimp3
+	url = https://github.com/lieff/minimp3
+[submodule "Engine/Core/Dependences/Framework/Audio/libs/libmodplug"]
+	path = Engine/Core/Dependences/Framework/Audio/libs/libmodplug
+	url = https://github.com/Konstanty/libmodplug
+[submodule "Engine/Core/Dependences/Framework/Physics/libs/bullet3"]
+	path = Engine/Core/Dependences/Framework/Physics/libs/bullet3
+	url = https://github.com/bulletphysics/bullet3

@@ -16,6 +16,16 @@
 #include <Types/Descriptors.h>
 
 namespace SR_GRAPH_NS {
+    struct ColorLayer {
+        int32_t texture = SR_ID_INVALID;
+        ColorFormat format = ColorFormat::Unknown;
+    };
+
+    struct DepthLayer {
+        int32_t texture = SR_ID_INVALID;
+        DepthFormat format = DepthFormat::Unknown;
+    };
+
     typedef ImGuiContext* GUIContext;
     typedef ImFont* Font;
 
@@ -72,7 +82,8 @@ namespace SR_GRAPH_NS {
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
         //void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
-        void SetCurrentShaderID(const int32_t& id)  { m_currentShaderID = id;           }
+        void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
+        SR_NODISCARD int32_t GetCurrentShaderId() const { return m_currentShaderID; }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }
@@ -115,7 +126,7 @@ namespace SR_GRAPH_NS {
 
         static void SetWinCallBack(const std::function<void(WinEvents, void* win, void* arg1, void* arg2)>& callback);
     public:
-        virtual bool PreInitGUI(const std::string& fontPath);
+        virtual bool PreInitGUI(const SR_UTILS_NS::Path& fontPath);
         virtual void SetGUIEnabled(bool enabled) { }
         virtual bool InitGUI() { return false; }
         virtual bool StopGUI() { return false; }
@@ -164,6 +175,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void ClearColorBuffers(float r, float g, float b, float a) const { }
         virtual SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) { }
+        virtual SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) { }
 
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const { }
@@ -195,9 +207,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const { }
 
-        virtual bool CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, std::vector<int32_t>& colorBuffers) { return false; }
-        virtual bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) { return false; }
-        virtual bool CreatePingPongFrameBuffer(glm::vec2 size,std::vector<int32_t> & pingpongFBO, std::vector<int32_t>& pingpongColorBuffers) const { return false; }
+        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) { return false; }
 
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
         virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }
@@ -207,6 +217,8 @@ namespace SR_GRAPH_NS {
         virtual void SetDepthTestEnabled(bool value) { }
 
         // ============================= [ SHADER METHODS ] =============================
+
+        virtual int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) { return SR_ID_INVALID; }
 
         SR_NODISCARD virtual std::map<std::string, uint32_t> GetShaderFields(const uint32_t& ID, const std::string& path) const {
             return std::map<std::string, uint32_t>(); }
@@ -222,7 +234,7 @@ namespace SR_GRAPH_NS {
                 void** shaderData,
                 const std::vector<size_t>& vertexDescriptions = {},
                 const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes = {},
-                SRShaderCreateInfo shaderCreateInfo = {}) const { return false; }
+                const SRShaderCreateInfo& shaderCreateInfo = {}) const { return false; }
         virtual SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) { return false; }
         virtual SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) { return false; }
         virtual SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) { }
@@ -307,7 +319,7 @@ namespace SR_GRAPH_NS {
          */
         virtual int32_t CalculateTexture(
                 uint8_t * data,
-                TextureFormat format,
+                ColorFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,

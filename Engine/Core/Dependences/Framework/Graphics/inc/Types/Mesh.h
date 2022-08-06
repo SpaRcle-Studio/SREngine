@@ -10,15 +10,20 @@
 #include <Utils/Common/Enumerations.h>
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ECS/Component.h>
+#include <Memory/IGraphicsResource.h>
 
-namespace SR_UTILS_NS::Types {
+namespace SR_HTYPES_NS {
     class RawMesh;
 }
 
 namespace SR_GRAPH_NS {
-    class Render;
-    class Shader;
     class Environment;
+    class RenderScene;
+    class RenderContext;
+}
+
+namespace SR_GTYPES_NS {
+    class Shader;
 }
 
 namespace SR_GTYPES_NS {
@@ -29,105 +34,82 @@ namespace SR_GTYPES_NS {
         Static = 1,
         Wireframe = 2,
         Skinned = 3,
+        Sprite2D = 4,
     )
 
-    class Mesh : public SR_UTILS_NS::IResource, public SR_UTILS_NS::Component {
+    class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {
         friend class Material;
+        using PipelinePtr = Environment*;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     protected:
-        explicit Mesh(MeshType type, std::string name = "Unnamed");
+        explicit Mesh(MeshType type);
         ~Mesh() override;
 
     public:
-        static std::vector<Mesh*> Load(const std::string& path, MeshType type);
-        static Mesh* TryLoad(const std::string& path, MeshType type, uint32_t id);
-        static Mesh* Load(const std::string& path, MeshType type, uint32_t id);
+        static std::vector<Mesh*> Load(const SR_UTILS_NS::Path& path, MeshType type);
+        static Mesh* TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
+        static Mesh* Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
 
     public:
         bool Destroy() override;
 
     protected:
-        virtual void ReCalcModel();
         virtual bool Calculate();
-        virtual void SetRawMesh(Helper::Types::RawMesh* raw);
 
     public:
         IResource* Copy(IResource* destination) const override;
 
-        virtual void DrawVulkan() = 0;
-        virtual void DrawOpenGL() = 0;
+        virtual void Draw() = 0;
 
-        /** \warning call only from render */
-        virtual bool FreeVideoMemory();
+        void FreeVideoMemory() override;
 
     public:
-        Helper::Math::FVector3 GetBarycenter() const override;
+        SR_MATH_NS::FVector3 GetBarycenter() const override;
 
-        void OnMove(const Helper::Math::FVector3& newValue) override;
-        void OnRotate(const Helper::Math::FVector3& newValue) override;
-        void OnScaled(const Helper::Math::FVector3& newValue) override;
-        void OnSkewed(const Helper::Math::FVector3& newValue) override;
-
+        void OnAttached() override;
         void OnDestroy() override;
 
-        void OnTransparencyChanged();
-
     public:
-        void WaitCalculate() const;
-        bool IsCanCalculate() const;
+        SR_NODISCARD virtual bool IsCanCalculate() const;
 
-        SR_NODISCARD Shader* GetShader()           const;
+        SR_NODISCARD Shader* GetShader() const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
-        SR_NODISCARD Render* GetRender()           const { return m_render; }
-        SR_NODISCARD Material* GetMaterial()       const { return m_material; }
-        SR_NODISCARD bool IsCalculated()           const { return m_isCalculated; }
-        SR_NODISCARD bool IsInverse()              const { return m_inverse; }
-        SR_NODISCARD bool IsRegistered()           const { return m_render; }
-        SR_NODISCARD const glm::mat4& GetModelMatrixRef() const { return m_modelMat; }
-        SR_NODISCARD glm::mat4 GetModelMatrix()    const { return m_modelMat; }
-        SR_NODISCARD uint32_t GetMeshId()          const { return m_meshId; }
-        SR_NODISCARD int32_t GetVirtualUBO()       const { return m_virtualUBO; }
+        SR_NODISCARD Material* GetMaterial() const { return m_material; }
+        SR_NODISCARD bool IsCalculated() const { return m_isCalculated; }
+        SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
+        SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-        SR_NODISCARD bool HaveDefMaterial()        const;
-        SR_NODISCARD virtual bool CanDraw()        const;
 
-        void SetRender(Render* render) { m_render = render; };
-        void SetInverse(bool value) { m_inverse = value; ReCalcModel(); }
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
+        void SetContext(const RenderContextPtr& context);
+        SR_NODISCARD RenderScenePtr GetRenderScene();
+
+        SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
 
     protected:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
-        void OnEnabled() override;
-        void OnDisabled() override;
-
-    public:
-        Helper::Math::FVector3       m_barycenter        = Helper::Math::FVector3(Helper::Math::UnitMAX);
-        Helper::Math::FVector3       m_position          = Helper::Math::FVector3();
-        Helper::Math::FVector3       m_rotation          = Helper::Math::FVector3();
-        Helper::Math::FVector3       m_skew              = Helper::Math::FVector3(1);
-        Helper::Math::FVector3       m_scale             = Helper::Math::FVector3(1);
-        glm::mat4                    m_modelMat          = glm::mat4(0);
+        void OnEnable() override;
+        void OnDisable() override;
 
     protected:
-        bool                         m_inverse           = false;
+        SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
 
-        Environment*                 m_env               = nullptr;
-        const PipeLine               m_pipeline          = PipeLine::Unknown;
+        RenderScenePtr               m_renderScene       = { };
+        /// Контекст будет задан только после регистрации в RenderScene
+        RenderContextPtr             m_context           = { };
+        PipelinePtr                  m_pipeline          = nullptr;
         const MeshType               m_type              = MeshType::Unknown;
 
         std::string                  m_geometryName      = "Unnamed";
-        Render*                      m_render            = nullptr;
         Material*                    m_material          = nullptr;
-        Helper::Types::RawMesh*      m_rawMesh           = nullptr;
 
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
         std::atomic<bool>            m_dirtyMaterial     = false;
 
-
-        /// определяет порядок меша в файле, если их там несколько
-        uint32_t                     m_meshId            = SR_UINT32_MAX;
         int32_t                      m_virtualUBO        = SR_ID_INVALID;
 
     };

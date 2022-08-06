@@ -5,7 +5,6 @@
 #ifndef GAMEENGINE_RENDER_H
 #define GAMEENGINE_RENDER_H
 
-#include <Render/Shader.h>
 #include <Types/Mesh.h>
 #include <Environment/Environment.h>
 #include <Types/EditorGrid.h>
@@ -20,6 +19,8 @@
 namespace SR_GRAPH_NS::Types {
     class Skybox;
     class Texture;
+    class Camera;
+    class Shader;
 }
 
 namespace SR_GRAPH_NS {
@@ -33,9 +34,8 @@ namespace SR_GRAPH_NS {
 
     class Light;
     class Window;
-    class Camera;
 
-    class Render : public Helper::NonCopyable {
+    class SR_DEPRECATED Render : public SR_UTILS_NS::NonCopyable {
     protected:
         Render(std::string name);
 
@@ -47,11 +47,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsInit() const { return m_isInit; }
         SR_NODISCARD bool GetWireFrameEnabled() const { return m_wireFrame; }
         SR_NODISCARD ColorBuffer* GetColorBuffer() const { return m_colorBuffer; }
-        SR_NODISCARD Camera* GetCurrentCamera() const { return m_currentCamera; }
+        SR_NODISCARD Types::Camera* GetCurrentCamera() const { return m_currentCamera; }
 
         void SetWireFrameEnabled(const bool& value) { m_wireFrame = value; }
         void SetGridEnabled(bool value) { m_gridEnabled = value; }
-        void SetCurrentCamera(Camera* camera);
+        void SetCurrentCamera(Types::Camera* camera);
 
     public:
         void Synchronize();
@@ -72,7 +72,7 @@ namespace SR_GRAPH_NS {
 
         void RegisterTexture(SR_GTYPES_NS::Texture* texture);
         void FreeTexture(SR_GTYPES_NS::Texture* texture);
-        void FreeShader(Shader* shader);
+        void FreeShader(Types::Shader* shader);
     public:
         [[nodiscard]] inline Window* GetWindow() const noexcept { return m_window; }
     public:
@@ -108,7 +108,7 @@ namespace SR_GRAPH_NS {
         bool                          m_wireFrame                = false;
 
         Window*                       m_window                   = nullptr;
-        Camera*                       m_currentCamera            = nullptr;
+        Types::Camera*                m_currentCamera            = nullptr;
         mutable std::recursive_mutex  m_mutex                    = std::recursive_mutex();
 
         // TO_REFACTORING
@@ -118,15 +118,15 @@ namespace SR_GRAPH_NS {
         std::vector<Types::Skybox*>   m_skyboxesToFreeVidMem     = std::vector<Types::Skybox*>();
         std::unordered_set<Types::Texture*>  m_textures          = std::unordered_set<Types::Texture*>();
 
-        MeshCluster                   m_geometry                 = { };
-        MeshCluster                   m_transparentGeometry      = { };
+        //MeshCluster                   m_geometry                 = { };
+        //MeshCluster                   m_transparentGeometry      = { };
 
         Types::Skybox*                m_skybox                   = nullptr;
 
-        SR_HTYPES_NS::SafeQueue<Shader*> m_shadersToFree         = {};
+        SR_HTYPES_NS::SafeQueue<Types::Shader*> m_shadersToFree         = {};
 
         ColorBuffer*                  m_colorBuffer              = nullptr;
-        EditorGrid*                   m_grid                     = nullptr;
+        //EditorGrid*                   m_grid                     = nullptr;
         Environment*                  m_env                      = nullptr;
 
         const PipeLine                m_pipeLine                 = PipeLine::Unknown;

@@ -33,16 +33,19 @@ namespace SR_UTILS_NS {
 
         ~Settings() override = default;
 
+    public:
+        bool Destroy() final;
+
     protected:
         virtual void ClearSettings() { }
-        virtual void LoadSettings(const Xml::Node& node) { }
+        virtual bool LoadSettings(const Xml::Node& node) { return true; }
 
         bool Reload() final;
-        bool Destroy() final;
 
     protected:
         SR_NODISCARD Path GetResourcePath() const override;
         SR_NODISCARD Path GetAssociatedPath() const override;
+        SR_NODISCARD SR_XML_NS::Document LoadDocument() const;
 
     private:
         bool Load() override;
@@ -53,7 +56,21 @@ namespace SR_UTILS_NS {
     template<typename T> class SR_DLL_EXPORT GlobalSettings : public Settings, public Singleton<T> {
         friend class Singleton<T>;
     public:
-        void DestroySettings();
+        SR_MAYBE_UNUSED static void DestroySettings() {
+            if (!Singleton<T>::IsSingletonInitialized()) {
+                return;
+            }
+
+            if (!Singleton<T>::Instance().IsValid()) {
+                return;
+            }
+
+            Singleton<T>::Instance().RemoveUsePoint();
+            Singleton<T>::Instance().ForceDestroy();
+
+            /// Форсированно уничтожаем этот ресурс, чтобы не ждать пока закончится время жизни
+            ResourceManager::Instance().Synchronize(true);
+        }
 
     protected:
         ~GlobalSettings() override = default;
@@ -62,6 +79,7 @@ namespace SR_UTILS_NS {
         void OnSingletonDestroy() final;
         void InitSingleton() final;
         bool IsSingletonCanBeDestroyed() const final { return false; }
+        void RemoveUsePoint() final;
 
     };
 
@@ -70,7 +88,9 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> void GlobalSettings<T>::InitSingleton() {
-        SetId(GetResourcePath());
+        auto&& path = GetResourcePath();
+
+        SetId(path);
 
         AddUsePoint();
 
@@ -81,8 +101,9 @@ namespace SR_UTILS_NS {
         Singleton<T>::InitSingleton();
     }
 
-    template<typename T> void GlobalSettings<T>::DestroySettings() {
-        RemoveUsePoint();
+    template<typename T> void GlobalSettings<T>::RemoveUsePoint() {
+        SRAssert2(m_countUses > 0, "count use points is zero!");
+        --m_countUses;
     }
 }
 

@@ -6,7 +6,8 @@
 
 #include <Utils/Types/RawMesh.h>
 #include <assimp/scene.h>
-#include <Render/CameraManager.h>
+#include <Memory/CameraManager.h>
+#include <Render/RenderScene.h>
 
 namespace Framework::Core::World {
     SR_UTILS_NS::GameObject::Ptr World::Instance(Framework::Helper::Types::Marshal &marshal)  {
@@ -43,7 +44,12 @@ namespace Framework::Core::World {
 
         /// ----------------------
 
-        gameObject->SetTransform(SR_UTILS_NS::Transform3D::Load(marshal));
+        gameObject->SetEnabled(enabled);
+
+        gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
+                marshal,
+                gameObject.Get()
+        ));
 
         if (hasTag) {
             gameObject->SetTag(tag);
@@ -53,20 +59,29 @@ namespace Framework::Core::World {
 
         auto&& componentManager = Helper::ComponentManager::Instance();
         componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool {
-            context.SetPointer<Render>(Engine::Instance().GetRender());
-            context.SetPointer<Window>(Engine::Instance().GetWindow());
+            context.SetPointer<SR_GRAPH_NS::Window>(Engine::Instance().GetWindow());
 
             auto&& componentCount = marshal.Read<uint32_t>();
 
             for (uint32_t i = 0; i < componentCount; ++i) {
+                auto&& bytesCount = marshal.Read<uint64_t>();
+                auto&& position = marshal.GetPosition();
                 /// TODO: use entity id
                 auto&& compEntityId = marshal.Read<uint64_t>();
 
                 if (auto&& component = componentManager.Load(marshal)) {
-                    gameObject->AddComponent(component);
+                    gameObject->LoadComponent(component);
                 }
                 else {
                     SR_WARN("World::Instance() : failed to load \"" + SR_UTILS_NS::ComponentManager::Instance().GetLastComponentName() + "\" component!");
+                }
+
+                const uint64_t readBytes = marshal.GetPosition() - position;
+                const uint64_t lostBytes = bytesCount - readBytes;
+
+                if (lostBytes > 0) {
+                    SR_WARN("World::Instance() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
+                    marshal.SkipBytes(lostBytes);
                 }
             }
 
@@ -91,17 +106,11 @@ namespace Framework::Core::World {
             GameObjectPtr ptr = Scene::Instance(node->mName.C_Str());
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
-                if (auto&& mesh = Mesh::Load(rawMesh->GetResourceId(), MeshType::Static, node->mMeshes[i])) {
-                    auto&& render = Engine::Instance().GetRender();
-
-                    mesh->SetMaterial(Material::GetDefault());
-
-                    render->RegisterMesh(mesh);
-
-                    ptr->AddComponent(mesh);
+                if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
+                    ptr->LoadComponent(mesh);
                 }
                 else {
-                    SRAssert2(false, "failed to load mesh!");
+                    SRHalt("failed to load mesh!");
                 }
             }
 
@@ -135,20 +144,7 @@ namespace Framework::Core::World {
         return root;
     }
 
-    void World::FindObserver() {
-        auto&& cameraManager = SR_GRAPH_NS::CameraManager::Instance();
-
-        SR_GRAPH_NS::CameraManager::LockSingleton();
-
-        if (auto&& pCamera = cameraManager.GetFirstCamera()) {
-            if (auto &&gameObject = pCamera->GetParent()) {
-                if (gameObject->TryLockIfValid()) {
-                    m_observer->m_target = gameObject->GetThis();
-                    gameObject->Unlock();
-                }
-            }
-        }
-
-        SR_GRAPH_NS::CameraManager::UnlockSingleton();
+    World::RenderScenePtr World::GetRenderScene() const {
+        return GetDataStorage().GetValue<RenderScenePtr>();
     }
 }

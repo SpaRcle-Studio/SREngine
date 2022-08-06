@@ -5,11 +5,13 @@
 #endif
 
 #include "../Utils/src/Utils/ECS/Component.cpp"
+#include "../Utils/src/Utils/ECS/ComponentManager.cpp"
 #include "../Utils/src/Utils/ECS/GameObject.cpp"
 #include "../Utils/src/Utils/ECS/ISavable.cpp"
 #include "../Utils/src/Utils/ECS/Transform.cpp"
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
+#include "../Utils/src/Utils/ECS/Transform2D.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
@@ -27,6 +29,7 @@
 #include "../Utils/src/Utils/Math/Matrix3x3.cpp"
 #include "../Utils/src/Utils/Math/Quaternion.cpp"
 #include "../Utils/src/Utils/Math/Vector3.cpp"
+#include "../Utils/src/Utils/Math/Vector6.cpp"
 
 #include "../Utils/src/Utils/TaskManager/TaskManager.cpp"
 
@@ -44,6 +47,7 @@
 #include "../Utils/src/Utils/Types/Time.cpp"
 #include "../Utils/src/Utils/Types/Time.cpp"
 #include "../Utils/src/Utils/Types/Marshal.cpp"
+#include "../Utils/src/Utils/Types/EDMarshal.cpp"
 #include "../Utils/src/Utils/Types/Thread.cpp"
 #include "../Utils/src/Utils/Types/SafeQueue.cpp"
 #include "../Utils/src/Utils/Types/RawMesh.cpp"

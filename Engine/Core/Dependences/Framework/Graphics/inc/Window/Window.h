@@ -8,6 +8,13 @@
 #include <Utils/GUI.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafeGateArray.h>
+#include <Utils/Types/SafeGateArray.h>
+#include <Utils/Types/Function.h>
+#include <Utils/Math/Vector2.h>
+
+namespace SR_GRAPH_NS::Types {
+    class Camera;
+}
 
 namespace SR_GRAPH_NS {
     namespace GUI {
@@ -15,29 +22,30 @@ namespace SR_GRAPH_NS {
     }
 
     class Render;
+    class RenderContext;
     class Environment;
-    class Camera;
 
     class Window : SR_UTILS_NS::NonCopyable {
+        using DrawCallback = SR_HTYPES_NS::Function<void(void)>;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
+        using ResizeCallback = SR_HTYPES_NS::Function<void(const SR_MATH_NS::IVector2&)>;
     public:
-        Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size, Render* render,
+        Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size,
                 bool vsync, bool fullScreen, bool resizable, bool headerEnabled, uint8_t smoothSamples);
-
-    private:
-        ~Window() override = default;
+        ~Window() override;
 
     public:
         bool Create();
         bool Init();
         bool Run();
         bool Close();
-        bool Free();
 
     public:
         void Synchronize();
         void BeginSync();
         void EndSync();
 
+        void RemoveWidgetManager(GUI::WidgetManager* widgetManager);
         void RegisterWidgetManager(GUI::WidgetManager* widgetManager);
 
     public:
@@ -47,6 +55,8 @@ namespace SR_GRAPH_NS {
 
         void SetFullScreen(bool value);
         void SetGUIEnabled(bool value);
+        void SetDrawCallback(const DrawCallback& drawCallback);
+        void SetResizeCallback(const ResizeCallback& resizeCallback);
 
     public:
         SR_NODISCARD SR_FORCE_INLINE bool IsRun() const { return m_isRun; }
@@ -55,8 +65,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
-        SR_NODISCARD SR_FORCE_INLINE Render* GetRender() const { SRAssert(m_render); return m_render; }
+        SR_NODISCARD SR_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD bool IsAlive() const;
+
+        void DrawVulkan();
+        void DrawOpenGL();
 
     private:
         void PollEvents();
@@ -65,11 +78,8 @@ namespace SR_GRAPH_NS {
         bool SyncFreeResources();
         void DrawNoCamera();
 
-        void DrawVulkan();
-        void DrawOpenGL();
-
-        void DrawToCamera(Camera* camera, uint32_t fbo);
-        void DrawSingleCamera(Camera* camera);
+        void DrawToCamera(Types::Camera* camera, uint32_t fbo);
+        void DrawSingleCamera(Types::Camera* camera);
 
     private:
         std::atomic<bool>     m_isCreate              = false;
@@ -93,13 +103,16 @@ namespace SR_GRAPH_NS {
     private:
         SR_HTYPES_NS::Thread::Ptr m_thread            = nullptr;
 
+        DrawCallback          m_drawCallback          = { };
+        ResizeCallback        m_resizeCallback        = { };
+
         Environment*          m_env                   = nullptr;
 
         std::string           m_winName               = "Unnamed";
         std::string           m_icoPath               = "Unknown";
         uint8_t               m_smoothSamples         = 4;
 
-        Render*               m_render                = nullptr;
+        RenderContextPtr      m_context               = { };
 
         std::recursive_mutex  m_mutex                 = std::recursive_mutex();
 

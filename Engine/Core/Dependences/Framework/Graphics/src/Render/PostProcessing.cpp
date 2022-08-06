@@ -1,12 +1,15 @@
 //
 // Created by Nikita on 19.11.2020.
 //
+
+
+/*
 #include <Environment/Environment.h>
 
 #include <Render/PostProcessing.h>
 
 #include <Render/Render.h>
-#include <Render/Camera.h>
+//#include <Render/Camera.h>
 
 #include <Render/Implementations/OpenGLPostProcessing.h>
 #include <Render/Implementations/VulkanPostProcessing.h>
@@ -38,7 +41,7 @@ bool Framework::Graphics::PostProcessing::Init(Render* render) {
 
     {
         m_postProcessingShader = Shader::Load("postProcessing");
-        m_blurShader = new Shader("engine/blur");
+        //m_blurShader = new Shader("engine/blur");
     }
 
     m_isInit = true;
@@ -100,3 +103,4 @@ bool Framework::Graphics::PostProcessing::OnResize(uint32_t w, uint32_t h) {
     return true;
 }
 
+*/

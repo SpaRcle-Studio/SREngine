@@ -41,7 +41,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
         std::vector<VkCommandPool>           m_cmdPools     = {};
         std::vector<VkCommandBuffer>         m_cmdBuffs     = {};
 
-        EvoVulkan::Core::DescriptorPool*     m_pool         = nullptr;
+        EvoVulkan::Types::DescriptorPool*    m_pool         = nullptr;
         EvoVulkan::Types::RenderPass         m_renderPass   = {};
 
         EvoVulkan::Types::Device*            m_device       = nullptr;

@@ -4,6 +4,7 @@
 
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Common/StringFormat.h>
 
 namespace SR_UTILS_NS {
     const float_t ResourceManager::ResourceLifeTime = 30.f; // seconds
@@ -85,7 +86,12 @@ namespace SR_UTILS_NS {
 
             /// даем возможность другим потокам отдать ресурсы на уничтожение,
             /// чтобы сразу же не блокировать им эту возможность
-            Types::Thread::Sleep(100);
+            if (m_force) {
+                Types::Thread::Sleep(100);
+            }
+            else {
+                Types::Thread::Sleep(500);
+            }
 
             SR_SCOPED_LOCK
 
@@ -121,14 +127,13 @@ namespace SR_UTILS_NS {
 
             const bool resourceAlive = !resource->IsForce() && resource->IsAlive() && !m_force;
 
-
             if (usageNow || resourceAlive) {
                 ++resourceIt;
                 continue;
             }
 
-            if (Debug::Instance().GetLevel() >= Debug::Level::High) {
-                SR_LOG("ResourceManager::GC() : free \"" + std::string(resource->m_resourceName) + "\" resource");
+            if (Debug::Instance().GetLevel() >= Debug::Level::Medium) {
+                SR_LOG("ResourceManager::GC() : free \"" + resource->GetResourceId() + "\" resource");
             }
 
             Remove(resource);
@@ -181,7 +186,7 @@ namespace SR_UTILS_NS {
 
             uint32_t id = 0;
             for (auto& pRes : type.m_resources) {
-                dump += Helper::Format("\n\t\t%u: %s = %u", id++, pRes->GetResourceId().c_str(), pRes->GetCountUses());
+                dump += SR_UTILS_NS::Format("\n\t\t%u: %s = %u", id++, pRes->GetResourceId().c_str(), pRes->GetCountUses());
                 ++count;
             }
         }
@@ -228,6 +233,8 @@ namespace SR_UTILS_NS {
             m_force = true;
         }
 
+        /// TODO: добавить таймер, по истечению которого поток будет умирать, чтобы не стоять в deadlock'е
+
         while (!m_destroyIsEmpty) {
             if (!m_thread->Joinable()) {
                 SR_ERROR("ResourceManager::Synchronize() : thread is dead!");
@@ -250,6 +257,10 @@ namespace SR_UTILS_NS {
         for (auto&& [_, type] : m_resources) {
             for (auto&& [path, info] : type.GetInfo()) {
                 for (auto&& pResource : info.m_loaded) {
+                    if (pResource->IsDestroyed()) {
+                        continue;
+                    }
+
                     auto&& fileHash = pResource->GetFileHash();
                     if (fileHash != info.m_fileHash) {
                         pResource->Reload();

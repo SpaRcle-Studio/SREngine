@@ -12,13 +12,12 @@ namespace SR_GRAPH_NS::Memory {
 
         SR_INFO("TextureConfigs::Reload() : reloading configs...");
 
-        const auto path = SR_UTILS_NS::ResourceManager::Instance().GetTexturesPath().Concat("Asset.xml");
+        const auto path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Asset.xml");
 
         if (path.Exists()) {
             auto doc = Helper::Xml::Document::Load(path);
             for (const auto& texture : doc.Root().TryGetNode("Textures").TryGetNodes("Texture")) {
-                const auto format      = StringToEnumTextureFormat(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
-                const auto autoRemove  = texture.TryGetAttribute("AutoRemove").ToBool(true);
+                const auto format      = StringToEnumColorFormat(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
                 const auto filter      = StringToEnumTextureFilter(texture.TryGetAttribute("Filter").ToString("LINEAR"));
                 const auto compression = StringToEnumTextureCompression(texture.TryGetAttribute("Compression").ToString("None"));
                 const auto mipLevels   = static_cast<uint32_t>(texture.TryGetAttribute("MipLevels").ToInt(1));
@@ -29,7 +28,6 @@ namespace SR_GRAPH_NS::Memory {
                         texture.GetAttribute("Path").ToString(),
                         TextureConfig(
                             format,
-                            autoRemove,
                             filter,
                             compression,
                             mipLevels,

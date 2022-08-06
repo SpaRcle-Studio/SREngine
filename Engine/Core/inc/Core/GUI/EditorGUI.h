@@ -9,6 +9,7 @@
 #include <Scripting/Base/Compiler.h>
 #include <GUI/WidgetManager.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Types/SafePointer.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -16,6 +17,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class Window;
+    class RenderContext;
 }
 
 namespace SR_GRAPH_NS::GUI {
@@ -31,29 +33,26 @@ namespace SR_CORE_NS::GUI {
     class Inspector;
     class WorldEdit;
 
-    class
-    EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
-        using Widgets = std::unordered_map<size_t, Graphics::GUI::Widget*>;
+    class EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
+        using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
     public:
         explicit EditorGUI();
-
-    private:
         ~EditorGUI() override;
 
     public:
         void Enable(bool value);
-        bool Destroy();
-        void Free();
 
         template<typename T> void AddWindow(T* widget) {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
         template<typename T> T* GetWindow() {
-            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end())
+            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
                     return pWidget;
+            }
             return nullptr;
         }
 
@@ -82,6 +81,8 @@ namespace SR_CORE_NS::GUI {
         void Load();
 
     private:
+        RenderContextPtr     m_context    = { };
+
         Graphics::Window*    m_window     = nullptr;
 
         std::atomic<bool>    m_isInit     = false;

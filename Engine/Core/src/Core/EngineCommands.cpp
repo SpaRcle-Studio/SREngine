@@ -7,6 +7,8 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
+#include <Utils/Types/SafePtrLockGuard.h>
+#include <Render/RenderScene.h>
 
 bool Framework::Core::Commands::GameObjectRename::Redo() {
     return false;
@@ -27,7 +29,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
     if (!ptrRaw)
         return false;
 
-    SR_UTILS_NS::GameObject::Ptr& ptr = ptrRaw->GetThis();
+    auto&& ptr = ptrRaw->GetThis();
 
     m_scene = ptr.Do<Scene::Ptr>([](SR_UTILS_NS::GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
 
@@ -39,12 +41,15 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
         Чтобы этого избежать, сперва блокируем сцену.
      */
     if (m_scene.LockIfValid()) {
+        SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
+
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             m_backup = ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_NONE);
             ptr->Destroy();
         });
+
         m_scene.Unlock();
         return result;
     }

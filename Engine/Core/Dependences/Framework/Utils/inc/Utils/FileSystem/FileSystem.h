@@ -14,40 +14,10 @@ namespace SR_UTILS_NS {
         FileSystem() = delete;
         ~FileSystem() = delete;
     public:
-        static bool Delete(const char *file);
-
-        static bool FileExists(const std::string& path);
-
-        static Path BrowseFolder(const Path& path);
-
-        static bool CreatePath(std::string path, uint32_t offset = 0) {
-            if (path.empty())
-                return false;
-
-            if (path.back() != '/')
-                path.append("/");
-
-            auto pos = path.find('/', offset);
-            if (pos != std::string::npos) {
-                auto dir = path.substr(0, pos);
-
-                CreateFolder(dir);
-                CreatePath(path, pos + 1);
-            }
-
-            return true;
-        }
+        static bool CreatePath(std::string path, uint32_t offset = 0);
 
         static bool WriteToFile(const std::string& path, const std::string& text);
-        static bool CreateFolder(const std::string& path);
-        static bool IsAbsolutePath(const std::string& path);
-        static bool IsHiddenFile(const std::string& path);
-        static std::string GetExecutableFileName();
-        static std::string GetPathToExe();
-        static std::string GetFullPath(const std::string& path);
         static std::string NormalizePath(const std::string& path);
-        static std::string GetFullPathToExe();
-        static void Reload();
 
         static std::vector<std::string> ReadAllLines(const std::string& path) {
             std::ifstream file(path);
@@ -62,6 +32,8 @@ namespace SR_UTILS_NS {
 
         static std::string ReadBinaryAsString(const std::string& path, bool checkError = true);
         static std::vector<char> ReadBinary(const std::string& path);
+        static std::vector<uint8_t> ReadFileAsVector(const std::string& path);
+        static std::shared_ptr<std::vector<uint8_t>> ReadFileAsBlob(const std::string& path);
 
         static std::string ReadAllText(const std::string& path);
 
@@ -72,12 +44,6 @@ namespace SR_UTILS_NS {
 
         static const char* FileMapView(std::string path);
         static void UnmapFile(const char* str);
-
-        static std::vector<Path> GetFilesInDir(const std::string& path);
-        static std::vector<Path> GetDirectoriesInDir(const std::string& path);
-        static std::vector<Path> GetAllInDir(const Path& path);
-
-        static bool FolderExists(const std::string &path);
     };
 }
 

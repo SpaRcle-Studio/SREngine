@@ -77,11 +77,11 @@ namespace SR_MATH_NS {
         template<typename U> static Vector3<T> YZ(const Vector2<U>& v) { return YZ(v, 0); }
 
     public:
-        template<typename U> SR_NODISCARD Vector3<U> Cast() const { return Vector3<U>(
+        template<typename U> SR_NODISCARD Vector3<U> SR_FASTCALL Cast() const noexcept { return Vector3<U>(
                     static_cast<U>(x),
                     static_cast<U>(y),
                     static_cast<U>(z)
-                );
+            );
         }
 
         SR_NODISCARD Vector2<T> XY() const { return Vector2<T>(x, y); }
@@ -131,7 +131,7 @@ namespace SR_MATH_NS {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
         }
 
-        SR_NODISCARD T Distance(Vector3 point) const {
+        SR_NODISCARD T SR_FASTCALL Distance(const Vector3& point) const {
             return sqrt(
                     pow(point.x - x, 2) +
                     pow(point.y - y, 2) +
@@ -139,7 +139,7 @@ namespace SR_MATH_NS {
             );
         }
 
-        SR_NODISCARD Vector3 Direction(Vector3 point) const {
+        SR_NODISCARD Vector3 Direction(const Vector3& point) const {
             if (point == *this)
                 return Vector3();
             Vector3 heading = point - (*this);

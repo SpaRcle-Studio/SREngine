@@ -8,8 +8,11 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::Types {
     class Camera;
+}
+
+namespace SR_GRAPH_NS {
     class Window;
 }
 
@@ -27,7 +30,7 @@ namespace SR_CORE_NS::GUI {
         ~SceneViewer() override;
 
     public:
-        void SetScene(SR_WORLD_NS::Scene::Ptr scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
         void Enable(bool value);
         void Update();
 

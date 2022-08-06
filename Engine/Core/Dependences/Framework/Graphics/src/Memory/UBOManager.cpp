@@ -3,22 +3,31 @@
 //
 
 #include <Memory/UBOManager.h>
-#include <Render/Camera.h>
+#include <Types/Camera.h>
 #include <Environment/Environment.h>
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager() {
         m_virtualTable.max_load_factor(0.9f);
         m_virtualTable.reserve(5000);
+        m_singleCameraMode = SR_UTILS_NS::Features::Instance().Enabled("SingleCameraMode", false);
     }
 
-    void UBOManager::SetCurrentCamera(Camera *pCamera) {
-        m_camera = pCamera;
+    void UBOManager::SetCurrentCamera(Types::Camera *pCamera) {
+        m_camera = m_singleCameraMode ? nullptr : pCamera;
     }
 
     UBOManager::VirtualUBO UBOManager::AllocateUBO(uint32_t uboSize, uint32_t samples) {
-        if (!m_camera) {
-            SR_ERROR("UBOManager::AllocateUBO() : camera is nullptr!");
+        if (!m_camera && !m_singleCameraMode && !m_ignoreCameras) {
+            SRHalt("UBOManager::AllocateUBO() : camera is nullptr!");
+            return SR_ID_INVALID;
+        }
+
+        auto&& env = Environment::Get();
+        auto&& shaderProgram = env->GetCurrentShaderId();
+
+        if (shaderProgram == SR_ID_INVALID) {
+            SRHalt("UBOManager::AllocateUBO() : shader program do not set!");
             return SR_ID_INVALID;
         }
 
@@ -27,7 +36,7 @@ namespace SR_GRAPH_NS::Memory {
         Descriptor descriptor = SR_ID_INVALID;
         UBO ubo = SR_ID_INVALID;
 
-        if (!AllocMemory(&ubo, &descriptor, uboSize, samples)) {
+        if (!AllocMemory(&ubo, &descriptor, uboSize, samples, shaderProgram)) {
             SR_ERROR("UBOManager::AllocateUBO() : failed to allocate memory!");
             return SR_ID_INVALID;
         }
@@ -36,10 +45,13 @@ namespace SR_GRAPH_NS::Memory {
 
         virtualUboInfo.m_samples = samples;
         virtualUboInfo.m_uboSize = uboSize;
-        virtualUboInfo.m_data.insert(std::make_pair(
-                m_camera,
-                std::make_pair(ubo, descriptor))
-        );
+        virtualUboInfo.m_shaderProgram = shaderProgram;
+
+        virtualUboInfo.m_data.emplace_front(VirtualUBOInfo::Data {
+                m_ignoreCameras ? nullptr : m_camera,
+                descriptor,
+                ubo
+        });
 
         m_virtualTable.insert(std::make_pair(
                 virtualUbo,
@@ -63,8 +75,7 @@ namespace SR_GRAPH_NS::Memory {
         auto&& env = Environment::Get();
 
         auto&& info = pIt->second;
-        for (auto&& [pCamera, data] : info.m_data) {
-            auto&& [ubo, descriptor] = data;
+        for (auto&& [pCamera, descriptor, ubo] : info.m_data) {
             FreeMemory(&ubo, &descriptor);
         }
 
@@ -80,7 +91,7 @@ namespace SR_GRAPH_NS::Memory {
 
         auto&& random = SR_UTILS_NS::Random::Instance();
 
-        while (virtualUbo == SR_ID_INVALID) {
+        while (true) {
             VirtualUBO unique = random.Int32();
 
             /// можно использовать только положительные индексы
@@ -101,66 +112,85 @@ namespace SR_GRAPH_NS::Memory {
         return virtualUbo;
     }
 
-    bool UBOManager::AllocMemory(UBO *ubo, Descriptor *descriptor, uint32_t uboSize, uint32_t samples) {
+    bool UBOManager::AllocMemory(UBO *ubo, Descriptor *descriptor, uint32_t uboSize, uint32_t samples, int32_t shader) {
         auto&& env = Environment::Get();
+        auto&& shaderIdStash = env->GetCurrentShaderId();
+
+        env->SetCurrentShaderId(shader);
 
         if (uboSize > 0) {
             if (*descriptor = env->AllocDescriptorSet({DescriptorType::Uniform}); *descriptor < 0) {
                 SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set!");
-                return false;
+                goto fails;
             }
 
             if (*ubo = env->AllocateUBO(uboSize); *ubo < 0) {
                 SR_ERROR("UBOManager::AllocMemory() : failed to allocate uniform buffer object!");
-                return false;
+                goto fails;
             }
         }
         else if (samples > 0) {
             if (*descriptor = env->AllocDescriptorSet({DescriptorType::CombinedImage}); *descriptor < 0) {
                 SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set!");
-                return false;
+                goto fails;
             }
         }
 
+        SRAssert(*ubo != SR_ID_INVALID || *descriptor != SR_ID_INVALID);
+
+        env->SetCurrentShaderId(shaderIdStash);
         return true;
+
+    fails:
+        env->SetCurrentShaderId(shaderIdStash);
+        return false;
     }
 
-    void UBOManager::BindUBO(VirtualUBO virtualUbo) {
-        if (!m_camera) {
-            SR_ERROR("UBOManager::AllocateUBO() : camera is nullptr!");
-            return;
+    UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) noexcept {
+        if (!m_camera && !m_singleCameraMode && !m_ignoreCameras) {
+            SRHalt("UBOManager::BindUBO() : camera is nullptr!");
+            return BindResult::Failed;
         }
 
         auto&& pIt = m_virtualTable.find(virtualUbo);
         if (pIt == std::end(m_virtualTable)) {
             SRHalt("UBOManager::BindUBO() : ubo not found!");
-            return;
+            return BindResult::Failed;
         }
 
-        VirtualUBOInfo& info = pIt->second;
-    retry:
-        auto&& cameraIt = info.m_data.find(m_camera);
-        if (cameraIt == std::end(info.m_data))
-        {
-            Descriptor descriptor = SR_ID_INVALID;
-            UBO ubo = SR_ID_INVALID;
+        BindResult result = BindResult::Success;
 
-            if (!AllocMemory(&ubo, &descriptor, info.m_uboSize, info.m_samples)) {
+        auto&& info = pIt->second;
+
+        Descriptor descriptor = SR_ID_INVALID;
+        UBO ubo = SR_ID_INVALID;
+
+        for (auto&& data : info.m_data) {
+            if (data.pCamera == (m_ignoreCameras ? nullptr : m_camera)) {
+                descriptor = data.descriptor;
+                ubo = data.ubo;
+                break;
+            }
+        }
+
+        /// если не нашли камеру, то дублируем память под новую камеру
+        if (descriptor == SR_ID_INVALID && ubo == SR_ID_INVALID)
+        {
+            if (!AllocMemory(&ubo, &descriptor, info.m_uboSize, info.m_samples, info.m_shaderProgram)) {
                 SR_ERROR("UBOManager::BindUBO() : failed to allocate memory!");
-                return;
+                return BindResult::Failed;
             }
 
-            info.m_data.insert(std::make_pair(
-                    m_camera,
-                    std::make_pair(ubo, descriptor))
-            );
+            info.m_data.emplace_front(VirtualUBOInfo::Data {
+                    m_ignoreCameras ? nullptr : m_camera,
+                    descriptor,
+                    ubo
+            });
 
-            goto retry;
+            result = BindResult::Duplicated;
         }
 
         auto&& env = Environment::Get();
-
-        auto&& [ubo, descriptor] = cameraIt->second;
 
         if (ubo != SR_ID_INVALID) {
             env->BindUBO(ubo);
@@ -169,11 +199,21 @@ namespace SR_GRAPH_NS::Memory {
         if (descriptor != SR_ID_INVALID) {
             env->BindDescriptorSet(descriptor);
         }
+
+        return result;
     }
 
     UBOManager::VirtualUBO UBOManager::ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples) {
         if (virtualUbo == SR_ID_INVALID) {
             return AllocateUBO(uboSize, samples);
+        }
+
+        auto&& env = Environment::Get();
+        auto&& shaderProgram = env->GetCurrentShaderId();
+
+        if (shaderProgram == SR_ID_INVALID) {
+            SR_ERROR("UBOManager::ReAllocateUBO() : shader program do not set!");
+            return virtualUbo;
         }
 
         auto&& pIt = m_virtualTable.find(virtualUbo);
@@ -184,17 +224,30 @@ namespace SR_GRAPH_NS::Memory {
 
         auto&& info = pIt->second;
 
+        /// задаем новые значения для дублирования памяти
         info.m_uboSize = uboSize;
         info.m_samples = samples;
+        info.m_shaderProgram = shaderProgram;
 
-        for (auto&& [pCamera, data] : info.m_data) {
-            auto&& [ubo, descriptor] = data;
+        /// очищаем ВСЕ старые данные
+        for (auto&& [pCamera, descriptor, ubo] : info.m_data) {
             FreeMemory(&ubo, &descriptor);
-
-            if (!AllocMemory(&ubo, &descriptor, info.m_uboSize, info.m_samples)) {
-                SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
-            }
         }
+        info.m_data.clear();
+
+        /// выделяем ОДНУ новую юниформу с дескриптором
+        Descriptor descriptor = SR_ID_INVALID;
+        UBO ubo = SR_ID_INVALID;
+
+        if (!AllocMemory(&ubo, &descriptor, info.m_uboSize, info.m_samples, info.m_shaderProgram)) {
+            SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
+        }
+
+        info.m_data.emplace_front(VirtualUBOInfo::Data {
+                m_ignoreCameras ? nullptr : m_camera,
+                descriptor,
+                ubo
+        });
 
         return virtualUbo;
     }
@@ -209,5 +262,10 @@ namespace SR_GRAPH_NS::Memory {
         if (*descriptor != SR_ID_INVALID && !env->FreeDescriptorSet(descriptor)) {
             SR_ERROR("UBOManager::FreeMemory() : failed to free descriptor!");
         }
+    }
+
+    void UBOManager::SetIgnoreCameras(bool value) {
+        SR_LOCK_GUARD
+        m_ignoreCameras = value;
     }
 }

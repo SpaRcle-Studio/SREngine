@@ -94,7 +94,7 @@ bool GUISystem::BeginDockSpace() {
 
         SR_BEGIN_RIGHT_ALIGNMENT()
             SR_RIGHT_BUTTON(close, "×", {
-                SR_UTILS_NS::EventManager::Push(SR_UTILS_NS::EventManager::Event::Exit);
+                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
             }, {})
 
             if (pWindow->GetState() == Graphics::WindowState::Default)
@@ -155,6 +155,16 @@ void GUISystem::EndChildWindow() {
 
 
 bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding, ImGuiButtonFlags flags) {
+    ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0, 0, 0, 0));
+
+    const bool result = ImageButtonInternal(imageId.data(), descriptor, size, framePadding, flags);
+
+    ImGui::PopStyleColor();
+
+    return result;
+}
+
+bool GUISystem::ImageButtonInternal(std::string_view&& imageId, void *descriptor, const SR_MATH_NS::IVector2 &size, int32_t framePadding, ImGuiButtonFlags flags) {
     ImGuiContext& g = *GImGui;
     ImGuiWindow* window = g.CurrentWindow;
     if (window->SkipItems)
@@ -173,7 +183,7 @@ bool GUISystem::ImageButton(std::string_view&& imageId, void *descriptor, const 
         uv1 = ImVec2(0, 1);
     }
 
-    /// Default to using texture ID as ID. User can still push string/integer prefixes.
+    /// Default is to use texture ID as ID. User can still push string/integer prefixes.
     ImGui::PushID((void*)(intptr_t)descriptor);
     const ImGuiID id = window->GetID(imageId.data());
     ImGui::PopID();
@@ -492,7 +502,7 @@ void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene
     }
 }
 
-void GUISystem::DrawGuizmo(Framework::Graphics::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
+void GUISystem::DrawGuizmo(Framework::Graphics::Types::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
     if (!camera)
         return;
 
@@ -669,7 +679,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Save scene")) {
-            if (auto scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+            if (auto scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
                     const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
@@ -678,7 +688,7 @@ bool GUISystem::BeginMenuBar() {
                     scene->SetName(sceneName);
 
                     if (scene->SaveAt(folder)) {
-                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene saved as \"" + path.ToString() + "\"");
+                        SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
                     }
                     else {
                         SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
@@ -687,16 +697,19 @@ bool GUISystem::BeginMenuBar() {
                 scene.Unlock();
             }
             else {
-                SR_WARN("GUISystem::BeginMenuBar() : scene isn't valid!");
+                SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
             }
         }
 
         if (ImGui::MenuItem("Close scene")) {
-            Engine::Instance().CloseScene();
+            if (auto&& scene = Engine::Instance().GetScene()) {
+                scene->Save();
+            }
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Ptr());
         }
 
         if (ImGui::MenuItem("Instance from file")) {
-            if (auto&& scene = Engine::Instance().GetScene(); scene.LockIfValid()) {
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
                     { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
@@ -706,7 +719,7 @@ bool GUISystem::BeginMenuBar() {
                 scene.Unlock();
             }
             else {
-                SR_WARN("GUISystem::BeginMenuBar() : scene isn't valid!");
+                SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
             }
         }
 
@@ -715,7 +728,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Exit")) {
-            SR_UTILS_NS::EventManager::Push(Helper::EventManager::Event::Exit);
+            SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
         }
 
         ImGui::EndMenu();

@@ -5,34 +5,35 @@
 #include <Types/Material.h>
 
 #include <Types/Mesh.h>
-#include <Render/Shader.h>
+#include <Types/Shader.h>
 #include <Types/Texture.h>
+#include <Render/RenderContext.h>
 
 namespace SR_GTYPES_NS {
     Material::Material()
         : SR_UTILS_NS::IResource(typeid(Material).name(), true /** autoRemove */)
-        , m_env(Environment::Get())
     { }
 
     void Material::Use() {
         InitShader();
+        InitContext();
 
         for (const Material::Property& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Int:
-                    m_shader->SetInt(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<int32_t>(property.data));
+                    m_shader->SetValue(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<int32_t>(property.data));
                     break;
                 case ShaderVarType::Float:
-                    m_shader->SetFloat(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<float_t>(property.data));
+                    m_shader->SetValue(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<float_t>(property.data));
                     break;
                 case ShaderVarType::Vec2:
-                    m_shader->SetVec2(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector2>(property.data).ToGLM());
+                    m_shader->SetValue(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    m_shader->SetVec3(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector3>(property.data).ToGLM());
+                    m_shader->SetValue(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    m_shader->SetVec4(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector4>(property.data).ToGLM());
+                    m_shader->SetValue(SR_RUNTIME_TIME_CRC32_STR(property.id.c_str()), std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
@@ -44,17 +45,6 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Material::SetTransparent(bool value) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (IsReadOnly())
-            return false;
-
-        m_transparent = value;
-
-        return true;
-    }
-
     SR_UTILS_NS::IResource* Material::Copy(SR_UTILS_NS::IResource* destination) const {
         SRAssert2(false, "Material is not are copyable!");
         return nullptr;
@@ -63,7 +53,7 @@ namespace SR_GTYPES_NS {
     Material* Material::Load(const std::string &rawPath) {
         SR_GLOBAL_LOCK
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath());
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         if (auto&& pMaterial = SR_UTILS_NS::ResourceManager::Instance().Find<Material>(path))
             return pMaterial;
@@ -80,43 +70,6 @@ namespace SR_GTYPES_NS {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMaterial);
 
         return pMaterial;
-    }
-
-    Material* Material::GetDefault() {
-        return m_default;
-    }
-
-    bool Material::InitDefault(Render* render) {
-        if (!m_default) {
-            if ((m_default = Material::Load("Engine/default.mat"))) {
-                m_default->AddUsePoint();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    bool Material::FreeDefault() {
-        SR_INFO("Material::FreeDefault() : free default material...");
-
-        if (m_default) {
-            if (m_default->GetCountUses() <= 1) {
-                m_default->RemoveUsePoint();
-                m_default->Destroy();
-
-                m_default = nullptr;
-                return true;
-            }
-            else {
-                SRAssert2(false, Helper::Format("Material::FreeDefault() : the material is still in use! Count uses: %i", m_default->GetCountUses()).c_str());
-                return false;
-            }
-        }
-
-        SR_ERROR("Material::FreeDefault() : the material is nullptr!");
-
-        return false;
     }
 
     bool Material::Destroy() {
@@ -139,14 +92,8 @@ namespace SR_GTYPES_NS {
         return IResource::Destroy();
     }
 
-    void SR_GTYPES_NS::Material::SetBloom(bool value) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        m_bloom = value;
-    }
-
     void SR_GTYPES_NS::Material::SetShader(Shader *shader) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (m_shader == shader) {
             return;
@@ -155,19 +102,7 @@ namespace SR_GTYPES_NS {
         m_dirtyShader = true;
 
         if (m_shader) {
-            auto&& render = m_shader->GetRender();
             RemoveDependency(m_shader);
-            if (m_shader->GetCountUses() == 0) {
-                if (m_shader->Ready()) {
-                    SRAssert2(render, "Render are nullptr!");
-                    if (render) {
-                        render->FreeShader(m_shader);
-                    }
-                }
-                else {
-                    m_shader->Destroy();
-                }
-            }
             m_shader = nullptr;
         }
 
@@ -191,9 +126,6 @@ namespace SR_GTYPES_NS {
             }
 
             RemoveDependency(oldTexture);
-
-            if (oldTexture->GetCountUses() <= 1 && oldTexture->IsEnabledAutoRemove() && !oldTexture->IsDestroyed())
-                oldTexture->Destroy();
         }
 
         if (pTexture) {
@@ -205,13 +137,18 @@ namespace SR_GTYPES_NS {
         /// обновляем всю иерархию вверх (меши)
         UpdateResources(1);
 
-        Environment::Get()->SetBuildState(false);
+        /// сработает только если хоть раз была отрендерина текстура материала
+        m_context.Do([](RenderContext* ptr) {
+            ptr->SetDirty();
+        });
     }
+
 
     void Material::UseSamplers() {
         InitShader();
+        InitContext();
 
-        if (m_env->GetCurrentDescriptorSet() == SR_ID_INVALID) {
+        if (m_context->GetPipeline()->GetCurrentDescriptorSet() == SR_ID_INVALID) {
             return;
         }
 
@@ -257,13 +194,20 @@ namespace SR_GTYPES_NS {
                     }
 
                     RemoveDependency(pTexture);
-
-                    if (pTexture->GetCountUses() <= 1 && pTexture->IsEnabledAutoRemove())
-                        pTexture->Destroy();
                 }
             }
 
             m_dirtyShader = false;
+        }
+    }
+
+    void Material::InitContext() {
+        if (!m_context) {
+            if (!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>())) {
+                SRHalt("Is not render context!");
+                return;
+            }
+            m_context->Register(this);
         }
     }
 
@@ -297,22 +241,21 @@ namespace SR_GTYPES_NS {
             InitShader();
         }
 
-        const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath().Concat(GetResourcePath());
+        const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
 
         auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
-            SR_ERROR("Material::Reload() : file not found! \n\tPath: " + path.ToString());
+            SR_ERROR("Material::Reload() : file is not found! \n\tPath: " + path.ToString());
             return false;
         }
 
         auto&& matXml = document.Root().GetNode("Material");
         if (!matXml) {
-            SR_ERROR("Material::Reload() : \"Material\" node not found! \n\tPath: " + path.ToString());
+            SR_ERROR("Material::Reload() : \"Material\" node is not found! \n\tPath: " + path.ToString());
             return false;
         }
 
         if (auto&& shader = matXml.TryGetNode("Shader")) {
-            auto&& render = RenderManager::Instance().Get("Main");
             auto&& pShader = Shader::Load(shader.GetAttribute("Path").ToString());
 
             SetShader(pShader);
@@ -384,6 +327,15 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Path Material::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetMaterialsPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+    }
+
+    bool Material::IsTransparent() const {
+        if (!m_shader) {
+            SRHalt("Shader is nullptr!");
+            return false;
+        }
+
+        return m_shader->IsBlendEnabled();
     }
 }

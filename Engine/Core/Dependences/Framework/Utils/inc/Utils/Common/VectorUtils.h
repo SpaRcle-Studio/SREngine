@@ -54,7 +54,27 @@ namespace SR_UTILS_NS {
         return true;
     }
 
+    template<typename T, typename U> bool ForEach(const std::function<bool(T& type, const uint32_t& index)> &fn, std::list<U>& vector) {
+        uint32_t index = 0;
+        for (T& folder : vector) {
+            if (!fn(folder, index))
+                return false;
+            ++index;
+        }
+        return true;
+    }
+
     template<typename T, typename U> bool ForEach(const std::function<bool(const T& type, const uint32_t& index)> &fn, const std::vector<U>& vector) {
+        uint32_t index = 0;
+        for (const T& folder : vector) {
+            if (!fn(folder, index))
+                return false;
+            ++index;
+        }
+        return true;
+    }
+
+    template<typename T, typename U> bool ForEach(const std::function<bool(const T& type, const uint32_t& index)> &fn, const std::list<U>& vector) {
         uint32_t index = 0;
         for (const T& folder : vector) {
             if (!fn(folder, index))

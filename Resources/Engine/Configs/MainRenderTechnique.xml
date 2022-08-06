@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Technique Name="Main">
+    <SwapchainPass R="0.0" G="0.0" B="0.0" A="1.0" Depth="1.0">
+        <OpaquePass/>
+        <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
+        <TransparentPass/>
+    </SwapchainPass>
+</Technique>

@@ -82,8 +82,8 @@ namespace Framework::Graphics::Impl {
             if (!m_gridEnabled)
                 return;
 
-            if (this->m_grid)
-                this->m_grid->Draw();
+           // if (this->m_grid)
+           //     this->m_grid->Draw();
         }
 
         void DrawTransparentGeometry() override {

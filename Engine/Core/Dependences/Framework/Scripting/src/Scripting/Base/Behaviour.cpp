@@ -15,15 +15,49 @@ namespace SR_SCRIPTING_NS {
         Component::InitComponent<Behaviour>();
     }
 
+    SR_UTILS_NS::Component* Behaviour::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        auto&& path = marshal.Read<std::string>();
+        auto&& propertyCount = marshal.Read<uint16_t>();
+
+        auto&& pBehaviour = Load(path);
+
+        if (pBehaviour) {
+            for (uint16_t i = 0; i < propertyCount; ++i) {
+                auto&& propertyId = marshal.Read<std::string>();
+                auto&& property = marshal.Read<std::any>();
+                pBehaviour->SetProperty(propertyId, property);
+            }
+        }
+
+        return pBehaviour;
+    }
+
+    SR_HTYPES_NS::Marshal Behaviour::Save(SR_UTILS_NS::SavableFlags flags) const {
+        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+
+        auto&& properties = GetProperties();
+
+        /// TODO: use unicode
+        marshal.Write(GetResourcePath().ToString());
+        marshal.Write<uint16_t>(properties.size());
+
+        for (auto&& propertyId : properties) {
+            marshal.Write<std::string>(propertyId);
+            marshal.Write<std::any>(GetProperty(propertyId));
+        }
+
+        return marshal;
+    }
+
     Behaviour *Behaviour::Load(SR_UTILS_NS::Path path) {
         SR_GLOBAL_LOCK
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        path = path.RemoveSubPath(resourceManager.GetScriptsPath());
+        path = path.RemoveSubPath(resourceManager.GetResPath());
 
         if (path.IsAbs()) {
-            SR_ERROR("Behaviour::Load() : the behavior cannot be located outside the resources folder! \n\tPath: " + path.ToString());
+            SR_ERROR("Behaviour::Load() : the behavior cannot be located outside of the resources folder! \n\tPath: " + path.ToString());
             return nullptr;
         }
 
@@ -59,14 +93,6 @@ namespace SR_SCRIPTING_NS {
         return GameObjectPtr();
     }
 
-    Behaviour::TransformPtr Behaviour::GetTransform() const {
-        if (auto&& parent = GetParent()) {
-            return parent->GetTransform();
-        }
-
-        return nullptr;
-    }
-
     Behaviour *Behaviour::CreateEmpty() {
         auto&& pBehaviour = new Behaviour();
 
@@ -95,9 +121,21 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::Reload() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         SR_LOG("Behaviour::Reload() : reloading \"" + GetResourceId() + "\" behaviour...");
 
         m_loadState = LoadState::Reloading;
+
+        auto&& stash = StashProperties();
+
+        Unload();
+
+        if (!Load()) {
+            return false;
+        }
+
+        UnStashProperties(stash);
 
         m_loadState = LoadState::Loaded;
 
@@ -107,6 +145,26 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Path Behaviour::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetScriptsPath();
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+    }
+
+    std::map<std::string, std::any> Behaviour::StashProperties() const {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
+        auto&& stash = std::map<std::string, std::any>();
+
+        for (auto&& propertyId : GetProperties()) {
+            stash[propertyId] = GetProperty(propertyId);
+        }
+
+        return stash;
+    }
+
+    void Behaviour::UnStashProperties(const std::map<std::string, std::any> &props) {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
+        for (auto&& [propertyId, value] : props) {
+            SetProperty(propertyId, value);
+        }
     }
 }

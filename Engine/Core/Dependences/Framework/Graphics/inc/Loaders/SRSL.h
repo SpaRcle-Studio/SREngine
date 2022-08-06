@@ -13,7 +13,6 @@ namespace SR_GRAPH_NS::SRSL {
         Unknown,
         Spatial,            /// пространственный шейдер, все статические меши
         SpatialCustom,      /// пространственный шейдер (только вершины), все статические меши
-        TransparentSpatial, /// пространственный шейдер, все статические меши
         Animation,          /// пространтсвенный шейдер, геометрия со скелетом
         PostProcessing,     /// шейдер пост-обработки
         Skybox,             /// шейдер скайбокса
@@ -70,6 +69,7 @@ namespace SR_GRAPH_NS::SRSL {
 
         static const std::unordered_map<std::string, ShaderVarType> STANDARD_VARIABLES;
         static const std::unordered_map<std::string, ShaderVarType> COLOR_INDICES;
+        static const std::unordered_map<std::string, ShaderVarType> ATTACHMENTS;
 
     public:
         std::optional<SRSLUnit> Load(std::string path);

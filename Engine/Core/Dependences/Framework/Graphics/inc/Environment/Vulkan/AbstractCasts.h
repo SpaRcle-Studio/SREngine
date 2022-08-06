@@ -182,12 +182,19 @@ namespace Framework::Graphics::VulkanTools {
         return vk;
     }
 
-    static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const TextureFormat& format, bool alpha) {
+    static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ColorFormat& format) {
         switch (format) {
-            case TextureFormat::Unknown:      return VK_FORMAT_MAX_ENUM;
-            case TextureFormat::RGBA8_UNORM:  return alpha ? VK_FORMAT_R8G8B8A8_UNORM     : VK_FORMAT_R8G8B8_UNORM;
-            case TextureFormat::RGBA16_UNORM: return alpha ? VK_FORMAT_R16G16B16A16_UNORM : VK_FORMAT_R16G16B16_UNORM;
-            case TextureFormat::RGBA8_SRGB:   return alpha ? VK_FORMAT_R8G8B8A8_SRGB      : VK_FORMAT_R8G8B8_SRGB;
+            case ColorFormat::RGBA8_UNORM: return VK_FORMAT_R8G8B8A8_UNORM;
+            case ColorFormat::RGBA16_UNORM: return VK_FORMAT_R16G16B16A16_UNORM;
+
+            case ColorFormat::RGB8_UNORM: return VK_FORMAT_R8G8B8_UNORM;
+            case ColorFormat::RGB16_UNORM: return VK_FORMAT_R16G16B16_UNORM;
+
+            case ColorFormat::RGBA8_SRGB: return VK_FORMAT_R8G8B8A8_SRGB;
+
+            case ColorFormat::Unknown:
+            default:
+                break;
         }
         return VkFormat::VK_FORMAT_MAX_ENUM;
     }

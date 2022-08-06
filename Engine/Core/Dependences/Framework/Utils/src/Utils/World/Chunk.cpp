@@ -100,8 +100,15 @@ namespace SR_WORLD_NS {
 
             const uint64_t count = marshal.Read<uint64_t>();
             for (uint64_t i = 0; i < count; ++i) {
-                if (auto &&ptr = m_observer->m_scene->Instance(marshal))
-                    ptr->GetTransform()->GlobalTranslate(GetWorldPosition());
+                if (auto &&ptr = m_observer->m_scene->Instance(marshal)) {
+                    auto&& pTransform = ptr->GetTransform();
+
+                    if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
+                        continue;
+                    }
+
+                    pTransform->GlobalTranslate(GetWorldPosition());
+                }
             }
         }
 
@@ -118,29 +125,34 @@ namespace SR_WORLD_NS {
     SR_HTYPES_NS::Marshal Chunk::Save() const {
         /// scene is locked
 
-        std::list<SR_HTYPES_NS::Marshal> gameObjects;
-        for (const auto& gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
-            if (gameObject.LockIfValid()) {
-                /// сохраняем объект относительно начала координат чанка
-                gameObject->GetTransform()->GlobalTranslate(-GetWorldPosition());
+        std::list<SR_HTYPES_NS::Marshal> marshaled;
 
-                if (auto&& gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
-                    gameObjects.emplace_back(std::move(gameObjectMarshal));
+        auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+
+        for (const auto &gameObject : gameObjects) {
+            if (gameObject.LockIfValid()) {
+                /// сохраняем объекты относительно начала координат чанка
+                SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
+
+                if (auto &&gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
+                    marshaled.emplace_back(std::move(gameObjectMarshal));
                 }
 
                 gameObject.Unlock();
             }
         }
 
+        SR_THIS_THREAD->GetContext()->RemoveValue<SR_MATH_NS::FVector3>();
+
         SR_HTYPES_NS::Marshal marshal;
 
-        if (gameObjects.empty())
+        if (marshaled.empty())
             return marshal;
 
         marshal.Write(m_position);
-        marshal.Write(static_cast<uint64_t>(gameObjects.size()));
+        marshal.Write(static_cast<uint64_t>(marshaled.size()));
 
-        for (auto&& gameObject : gameObjects)
+        for (auto&& gameObject : marshaled)
             marshal.Append(std::move(gameObject));
 
         return marshal;
@@ -161,5 +173,9 @@ namespace SR_WORLD_NS {
         fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
 
         return fPos;
+    }
+
+    Chunk::ScenePtr Chunk::GetScene() const {
+        return m_observer->m_scene;
     }
 }

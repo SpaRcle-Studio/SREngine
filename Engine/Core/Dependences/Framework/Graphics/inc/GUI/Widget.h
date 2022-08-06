@@ -11,6 +11,11 @@
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Input/InputHandler.h>
 
+namespace SR_GRAPH_NS {
+    class RenderScene;
+    class RenderContext;
+}
+
 namespace SR_GRAPH_NS::GUI {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
@@ -24,8 +29,10 @@ namespace SR_GRAPH_NS::GUI {
 
     class Widget : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         friend class WidgetManager;
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using ContextPtr = RenderContext*;
     public:
-        explicit Widget(std::string name, Helper::Math::IVector2 size = Helper::Math::IVector2MAX)
+        explicit Widget(std::string name, SR_MATH_NS::IVector2 size = SR_MATH_NS::IVector2MAX)
             : m_name(std::move(name))
             , m_open(false)
             , m_center(false)
@@ -44,9 +51,13 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD bool IsHovered() const { return m_internalFlags & WIDGET_FLAG_HOVERED; }
         SR_NODISCARD WidgetManager* GetManager() const { return m_manager; }
         SR_NODISCARD std::string GetName() const { return m_name; }
+        SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD ContextPtr GetContext() const;
 
         virtual void Open();
         virtual void Close();
+
+        void DrawSubWindow();
 
     protected:
         virtual void Draw() = 0;
@@ -75,10 +86,11 @@ namespace SR_GRAPH_NS::GUI {
         std::atomic<bool> m_center;
         std::atomic<WidgetFlagBits> m_internalFlags;
         WindowFlags m_windowFlags;
-        Helper::Math::IVector2 m_size;
+        SR_MATH_NS::IVector2 m_size;
         WidgetManager* m_manager;
 
     protected:
+        mutable std::recursive_mutex m_mutex;
         WidgetFlagBits m_widgetFlags;
 
     };

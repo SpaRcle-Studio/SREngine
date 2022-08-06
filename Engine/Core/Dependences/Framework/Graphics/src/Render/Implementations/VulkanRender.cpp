@@ -3,104 +3,106 @@
 //
 
 #include <Render/Implementations/VulkanRender.h>
+#include <Types/Camera.h>
 
 void Framework::Graphics::Impl::VulkanRender::UpdateUBOs() {
-    if (!m_currentCamera) {
-        return;
-    }
+   //if (!m_currentCamera) {
+   //    return;
+   //}
 
-    auto&& uboManager = Memory::UBOManager::Instance();
+   //auto&& uboManager = Memory::UBOManager::Instance();
+   //auto&& time = clock();
 
-    for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
-        if (!shader || !shader->Ready()) {
-            continue;
-        }
+   //for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
+   //    if (!shader || !shader->Ready()) {
+   //        continue;
+   //    }
 
-        shader->SetMat4(Shader::VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
-        shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
-        shader->SetFloat(Shader::TIME, clock());
+   //    /**
+   //     * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
+   //     */
+   //    shader->SetMat4(SHADER_VIEW_MATRIX, m_currentCamera->GetViewTranslateRef());
+   //    shader->SetMat4(SHADER_PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
+   //    shader->SetFloat(SHADER_TIME, time);
 
-        for (auto const& [key, meshGroup] : subCluster.m_groups) {
-            for (const auto &mesh : meshGroup) {
-                if (!mesh->IsActive()) {
-                    continue;
-                }
+   //    for (auto const& [key, meshGroup] : subCluster.m_groups) {
+   //        for (const auto &mesh : meshGroup) {
+   //            if (!mesh->IsActive()) {
+   //                continue;
+   //            }
 
-                //auto&& ubo = mesh->GetUBO();
-                //if (ubo == SR_ID_INVALID) {
-                //    continue;
-                //}
+   //            auto&& virtualUbo = mesh->GetVirtualUBO();
+   //            if (virtualUbo == SR_ID_INVALID) {
+   //                continue;
+   //            }
 
-                auto&& virtualUbo = mesh->GetVirtualUBO();
-                if (virtualUbo == SR_ID_INVALID) {
-                    continue;
-                }
+   //            mesh->GetMaterial()->Use();
 
-                mesh->GetMaterial()->Use();
+   //            shader->SetMat4(SHADER_MODEL_MATRIX, mesh->GetModelMatrixRef());
 
-                shader->SetMat4(Shader::MODEL_MATRIX, mesh->GetModelMatrixRef());
+   //            if (uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
+   //                SR_ERROR("VulkanRender::UpdateUBOs() : memory has been duplicated!");
+   //            }
 
-                uboManager.BindUBO(virtualUbo);
+   //            shader->Flush();
+   //        }
+   //    }
+   //}
 
-                //m_env->BindUBO(ubo);
+   //if (m_skybox) {
+   //    auto&& shader = m_skybox->GetShader();
 
-                shader->Flush();
-            }
-        }
-    }
+   //    if (!shader || !shader->Ready()) {
+   //        return;
+   //    }
 
-    if (m_skybox) {
-        auto&& shader = m_skybox->GetShader();
+   //    shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_currentCamera->GetViewRef());
+   //    shader->SetMat4(SHADER_PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
+   //    shader->SetFloat(SHADER_TIME, time);
 
-        if (!shader || !shader->Ready()) {
-            return;
-        }
+   //    auto&& virtualUbo = m_skybox->GetVirtualUBO();
+   //    if (virtualUbo == SR_ID_INVALID) {
+   //        return;
+   //    }
 
-        shader->SetMat4(Shader::VIEW_NO_TRANSLATE_MATRIX, m_currentCamera->GetViewRef());
-        shader->SetMat4(Shader::PROJECTION_MATRIX, m_currentCamera->GetProjectionRef());
-        shader->SetFloat(Shader::TIME, clock());
+   //    if (uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
+   //        SR_ERROR("VulkanRender::UpdateUBOs() : memory has been duplicated!");
+   //    }
 
-        if (auto&& ubo = m_skybox->GetUBO(); ubo != SR_ID_INVALID) {
-            m_env->BindUBO(ubo);
-        }
-        else {
-            SRAssertOnce(false);
-        }
-
-        shader->Flush();
-    }
+   //    shader->Flush();
+   //}
 }
 
 void Framework::Graphics::Impl::VulkanRender::DrawGeometry()  {
-    static Environment* env = Environment::Get();
+   //static Environment* env = Environment::Get();
 
-    for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
-        if (!shader || shader && !shader->Use()) {
-            continue;
-        }
+   //for (auto const& [shader, subCluster] : m_geometry.m_subClusters) {
+   //    if (!shader || shader && !shader->Use()) {
+   //        continue;
+   //    }
 
-        for (auto const& [key, meshGroup] : subCluster.m_groups) {
-            env->BindVBO((*meshGroup.begin())->GetVBO<true>());
-            env->BindIBO((*meshGroup.begin())->GetIBO<true>());
+   //    for (auto const& [key, meshGroup] : subCluster.m_groups) {
+   //        env->BindVBO((*meshGroup.begin())->GetVBO<true>());
+   //        env->BindIBO((*meshGroup.begin())->GetIBO<true>());
 
-            for (const auto &mesh : meshGroup)
-                mesh->DrawVulkan();
-        }
+   //        for (const auto &mesh : meshGroup)
+   //            mesh->DrawVulkan();
+   //    }
 
-        shader->UnUse();
-    }
+   //    shader->UnUse();
+   //}
 }
 
 void Framework::Graphics::Impl::VulkanRender::DrawSkybox()  {
-    if (m_skybox) {
-        auto&& shader = m_skybox->GetShader();
+   //if (m_skybox) {
+   //    auto&& shader = m_skybox->GetShader();
 
-        if (!shader || !shader->Use()) {
-            return;
-        }
+   //    if (!shader || !shader->Use()) {
+   //        return;
+   //    }
 
-        m_skybox->Draw();
+   //    m_skybox->Draw();
 
-        shader->UnUse();
-    }
+   //    shader->UnUse();
+   //}
 }

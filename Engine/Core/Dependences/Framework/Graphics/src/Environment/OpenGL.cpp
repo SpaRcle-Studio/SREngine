@@ -300,15 +300,15 @@ bool Framework::Graphics::OpenGL::CompileShader(
         void** shaderData,
         const std::vector<uint64_t>& uniformSizes)
 {
-    auto shadersPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders");
+    auto&& shadersPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders");
 
-    auto vertexPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".vert");
-    auto fragmentPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".frag");
+    auto&& vertexPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".vert");
+    auto&& fragmentPath = shadersPath.Concat("Common").Concat(name).ConcatExt(".frag");
 
-    if (!Helper::FileSystem::FileExists(vertexPath))
+    if (!vertexPath.Exists())
         vertexPath = shadersPath.Concat(GetPipeLineName()).Concat(name).ConcatExt(".vert");
 
-    if (!Helper::FileSystem::FileExists(fragmentPath))
+    if (!fragmentPath.Exists())
         fragmentPath = shadersPath.Concat(GetPipeLineName()).Concat(name).ConcatExt(".frag");
 
     auto* glShader = new GLShaderData();
@@ -414,7 +414,7 @@ bool Framework::Graphics::OpenGL::LinkShader(
         void** shaderData,
         const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
         const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
-        SRShaderCreateInfo shaderCreateInfo) const
+        const SRShaderCreateInfo& shaderCreateInfo) const
 {
     if (!shaderProgram)
         return false;
@@ -471,8 +471,8 @@ bool Framework::Graphics::OpenGL::LinkShader(
     return true;
 }
 
-bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t &hdrFBO, std::vector<int32_t>& colorBuffers) {
-    bool isNew = hdrFBO <= 0;//!((bool)hdrFBO);
+//bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t &hdrFBO, std::vector<int32_t>& colorBuffers) {
+//    bool isNew = hdrFBO <= 0;//!((bool)hdrFBO);
 
     /**if (size.x == 0 || size.y == 0){
         Helper::Debug::Error("OpenGL::CreateFrameBuffer() : frame buffer has incorrect size!");
@@ -534,29 +534,29 @@ bool Framework::Graphics::OpenGL::CreateFrameBuffer(glm::vec2 size, int32_t& rbo
             "\n\tHDR_FBO: "+std::to_string(hdrFBO) + colorBfs);
     }*/
 
-    return true;
-}
+//   return true;
+//
 
-bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
-        glm::vec2 size,
-        std::vector<int32_t> &pingpongFBO,
-        std::vector<int32_t>& pingpongColorBuffers) const
-{
-    bool isNew = pingpongFBO[0] <= 0;
+//ool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
+//       glm::vec2 size,
+//       std::vector<int32_t> &pingpongFBO,
+//       std::vector<int32_t>& pingpongColorBuffers) const
+//
+//   bool isNew = pingpongFBO[0] <= 0;
 
-    if (isNew) {
-        SR_LOG("OpenGL::CreatePingPongFrameBuffer() : creating ping-pong frame buffers...");
-        /// glGenFramebuffers(pingpongFBO.size(), reinterpret_cast<GLuint *>(pingpongFBO.data()));
-        glGenTextures(pingpongColorBuffers.size(), reinterpret_cast<GLuint *>(pingpongColorBuffers.data()));
-    }
+//   if (isNew) {
+//       SR_LOG("OpenGL::CreatePingPongFrameBuffer() : creating ping-pong frame buffers...");
+//       /// glGenFramebuffers(pingpongFBO.size(), reinterpret_cast<GLuint *>(pingpongFBO.data()));
+//       glGenTextures(pingpongColorBuffers.size(), reinterpret_cast<GLuint *>(pingpongColorBuffers.data()));
+//   }
 
-    for (unsigned int i = 0; i < pingpongFBO.size(); i++)
-    {
+//   for (unsigned int i = 0; i < pingpongFBO.size(); i++)
+//   {
 ///        glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
-        glBindTexture(GL_TEXTURE_2D, pingpongColorBuffers[i]);
+//        glBindTexture(GL_TEXTURE_2D, pingpongColorBuffers[i]);
 ///        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, size.x, size.y, 0, GL_RGBA, GL_FLOAT, NULL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+ //       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 ///        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // we clamp to the edge as the blur filter would otherwise sample repeated texture values!
 ///        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 ///        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongColorBuffers[i], 0);
@@ -565,28 +565,28 @@ bool Framework::Graphics::OpenGL::CreatePingPongFrameBuffer(
 ///            Debug::Error("OpenGL::CreatePingPongFrameBufferObject() : frame buffer is not complete!");
 ///            return false;
 ///        }
-    }
+//    }
 
 ///    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    if (isNew){
-        std::string PingPongFBOBufs = "\n\tPingPongFBO: ";
-        for (size_t t = 0; t < pingpongFBO.size(); t++)
-            PingPongFBOBufs += std::to_string(pingpongFBO[t]) + (t+1 == pingpongFBO.size() ? "" : ",");
-
-        std::string PingPongColorBufs = "\n\tPingPongColorBuffers: ";
-        for (size_t t = 0; t < pingpongColorBuffers.size(); t++)
-            PingPongColorBufs += std::to_string(pingpongColorBuffers[t]) + (t+1 == pingpongColorBuffers.size() ? "" : ",");
-
-        SR_LOG("OpenGL::CreateHDRFrameBufferObject() : successful!"+PingPongFBOBufs+PingPongColorBufs);
-    }
-
-    return true;
-}
+//    if (isNew){
+//        std::string PingPongFBOBufs = "\n\tPingPongFBO: ";
+//        for (size_t t = 0; t < pingpongFBO.size(); t++)
+//            PingPongFBOBufs += std::to_string(pingpongFBO[t]) + (t+1 == pingpongFBO.size() ? "" : ",");
+//
+//        std::string PingPongColorBufs = "\n\tPingPongColorBuffers: ";
+//        for (size_t t = 0; t < pingpongColorBuffers.size(); t++)
+//            PingPongColorBufs += std::to_string(pingpongColorBuffers[t]) + (t+1 == pingpongColorBuffers.size() ? "" : ",");
+//
+//        SR_LOG("OpenGL::CreateHDRFrameBufferObject() : successful!"+PingPongFBOBufs+PingPongColorBufs);
+//    }
+//
+//    return true;
+//}
 
 int32_t Framework::Graphics::OpenGL::CalculateTexture(
         uint8_t *data,
-        TextureFormat format,
+        ColorFormat format,
         uint32_t w, uint32_t h,
         Framework::Graphics::TextureFilter filter,
         TextureCompression compression,
@@ -784,8 +784,8 @@ void Framework::Graphics::OpenGL::EndDrawGUI() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &hdrFBO, int32_t &colorBuffer) {
-    bool isNew = hdrFBO <= 0; //!((bool)hdrFBO);
+//bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_t &rboDepth, int32_t &hdrFBO, int32_t &colorBuffer) {
+ //   bool isNew = hdrFBO <= 0; //!((bool)hdrFBO);
 
     /**if (isNew)
         SR_GRAPH_LOG("OpenGL::CreateSingleFrameBuffer() : creating new single frame buffer object...");
@@ -838,8 +838,8 @@ bool Framework::Graphics::OpenGL::CreateSingleFrameBuffer(glm::vec2 size, int32_
                    "\n\tHDR_FBO: "+std::to_string(hdrFBO) + "\n\tColor buffer: "+std::to_string(colorBuffer));
     }
 */
-    return true;
-}
+   // return true;
+//}
 
 void Framework::Graphics::OpenGL::SetDepthTestEnabled(bool value) {
     if (value)

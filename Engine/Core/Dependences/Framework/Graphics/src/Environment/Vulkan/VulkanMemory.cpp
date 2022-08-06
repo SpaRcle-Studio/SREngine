@@ -38,7 +38,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                 int32_t id = FindFreeTextureIndex();
                 if (id < 0) {
                     SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO attachment!");
-                    return -1;
+                    return SR_ID_INVALID;
                 }
                 else {
                     m_textures[id] = texture;
@@ -47,7 +47,18 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                 }
             }
 
-            //TODO: depth buffer!
+            if (auto&& depthTexture = m_FBOs[i]->AllocateDepthTextureReference()) {
+                int32_t id = FindFreeTextureIndex();
+                if (id < 0) {
+                    SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO depth!");
+                    return SR_ID_INVALID;
+                }
+                else {
+                    m_textures[id] = depthTexture;
+                    ++m_countTextures.second;
+                    depth = id;
+                }
+            }
 
             ++m_countFBO.second;
 
@@ -117,12 +128,12 @@ bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t
         return false;
     }
 
-    if (!m_descriptorManager->FreeDescriptorSet(memory)){
+    if (!m_descriptorManager->FreeDescriptorSet(&memory)){
         SR_ERROR("MemoryManager::FreeDescriptorSet() : failed free descriptor set!");
         return false;
     }
 
-    m_descriptorSets[ID] = EvoVulkan::Core::DescriptorSet();
+    m_descriptorSets[ID] = EvoVulkan::Types::DescriptorSet();
 
     --m_countDescriptorSets.second;
 
@@ -176,13 +187,13 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateUBO(uint32_t UB
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType> &types) {
     if (shaderProgram >= m_countShaderPrograms.first) {
-        SR_ERROR("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
+        SRHalt("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
         return -1;
     }
 
     for (uint32_t i = 0; i < m_countDescriptorSets.first; ++i) {
         if (m_descriptorSets[i].m_self == VK_NULL_HANDLE) {
-            m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSets(
+            m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSet(
                     m_ShaderPrograms[shaderProgram]->GetDescriptorSetLayout(),
                     types
             );

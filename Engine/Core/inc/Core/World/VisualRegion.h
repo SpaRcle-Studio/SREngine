@@ -9,16 +9,21 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector2.h>
 
-namespace Framework::Graphics::Types {
+namespace SR_GRAPH_NS {
+    class RenderScene;
+}
+
+namespace SR_GTYPES_NS {
     class DebugWireframeMesh;
 }
 
-namespace Framework::Helper::World {
+namespace SR_WORLD_NS {
     class Region;
 }
 
 namespace Framework::Core::World {
-    class VisualRegion : public Helper::World::Region {
+    class VisualRegion : public SR_WORLD_NS::Region {
+        using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit VisualRegion(SRRegionAllocArgs) : Helper::World::Region(SRRegionAllocVArgs) { }
         ~VisualRegion() override = default;

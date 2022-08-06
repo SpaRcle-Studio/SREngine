@@ -5,95 +5,211 @@
 #include <Render/MeshCluster.h>
 #include <Types/Geometry/IndexedMesh.h>
 
-bool Framework::Graphics::ShadedMeshSubCluster::Remove(Framework::Graphics::Types::Mesh *mesh)  {
-    auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
-
-    int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
-    if (groupID == SR_ID_INVALID) {
-        SR_ERROR("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
-        return false;
+namespace SR_GRAPH_NS {
+    MeshCluster::MeshCluster() {
+        m_subClusters.max_load_factor(0.9f);
+        m_subClusters.reserve(25);
     }
 
-    if (auto groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
-        MeshGroup& group = groupIt->second;
+   bool ShadedMeshSubCluster::Remove(Types::Mesh *mesh) noexcept {
+       auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
 
-        if (auto pIt = group.find(indexed); pIt != group.end()) {
-            group.erase(pIt);
+       const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
+       if (groupID == SR_ID_INVALID) {
+           SR_ERROR("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
+           return false;
+       }
 
-            --m_counters[groupID];
-            --m_total;
+       if (auto&& groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
+           MeshGroup& group = groupIt->second;
 
-            mesh->RemoveUsePoint();
-            mesh->SetRender(nullptr);
+           if (auto pIt = group.find(indexed); pIt != group.end()) {
+               group.erase(pIt);
 
-            if (m_counters[groupID] == 0) {
-                m_groups.erase(groupIt);
-                m_counters.erase(groupID);
-            }
+               /// После вызова меш может быть уже не валиден
+               mesh->RemoveUsePoint();
 
-            return true;
+               if (group.empty()) {
+                   m_groups.erase(groupIt);
+               }
+
+               return true;
+           }
+       }
+       else {
+           SR_ERROR("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
+           return false;
+       }
+
+       SR_ERROR("ShadedMeshSubCluster::Remove() : mesh not found!");
+
+       return false;
+   }
+
+    bool ShadedMeshSubCluster::Add(Types::Mesh *mesh) noexcept {
+        auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
+
+        const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
+        if (groupID == SR_ID_INVALID) {
+            SR_ERROR("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
+            return false;
+        }
+
+        mesh->AddUsePoint();
+
+        if (auto&& pIt = m_groups.find(groupID); pIt == m_groups.end()) {
+            m_groups[groupID] = { indexed };
+        }
+        else if (!pIt->second.insert(indexed).second) {
+            SRHalt("ShadedMeshSubCluster::Add() : failed to add mesh to cluster!");
+        }
+
+        return true;
+    }
+
+    bool ShadedMeshSubCluster::Empty() const noexcept {
+        return m_groups.empty();
+    }
+
+    bool MeshCluster::Add(Types::Mesh *mesh) noexcept {
+        const auto&& pShader = mesh->GetShader();
+
+        SRAssert(pShader);
+
+        if (m_addCallback) {
+            m_addCallback(mesh);
+        }
+
+        if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
+            auto&& [subCluster, _] = m_subClusters.insert(std::make_pair(
+                    pShader,
+                    std::move(ShadedMeshSubCluster())
+            ));
+            return subCluster->second.Add(mesh);
+        }
+        else {
+            return subClusterIt->second.Add(mesh);
         }
     }
-    else {
-        SR_ERROR("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
+
+    bool MeshCluster::Remove(Types::Mesh *mesh) noexcept {
+        const auto&& pShader = mesh->GetShader();
+
+        SRAssert(pShader);
+
+        if (auto&& subCluster = m_subClusters.find(pShader); subCluster == m_subClusters.end()) {
+            return false;
+        }
+        else {
+            auto const result = subCluster->second.Remove(mesh);
+
+            if (result && m_removeCallback) {
+                m_removeCallback(mesh);
+            }
+
+            if (subCluster->second.Empty()) {
+                m_subClusters.erase(subCluster);
+            }
+
+            return result;
+        }
+    }
+
+    bool MeshCluster::Empty() const noexcept {
+        return m_subClusters.empty();
+    }
+
+    void MeshCluster::Update() {
+    repeat:
+        for (auto pSubClusterIt = m_subClusters.begin(); pSubClusterIt != m_subClusters.end(); ) {
+            auto&& [pShader, subCluster] = *pSubClusterIt;
+
+            for (auto pGroupsIt = subCluster.begin(); pGroupsIt != subCluster.end(); ) {
+                auto&& [vbo, group] = *pGroupsIt;
+
+                for (auto pMeshIt = group.begin(); pMeshIt != group.end(); ) {
+                    SR_GTYPES_NS::Mesh* pMesh = *pMeshIt; /** copy */
+                    auto&& pMaterial = pMesh->GetMaterial();
+
+                    SRAssert2(pMaterial, "Mesh have not material!");
+
+                    if (pMesh->GetCountUses() == 1) {
+                        pMesh->RemoveUsePoint();
+
+                        if (pMesh->IsCalculated()) {
+                            pMesh->FreeVideoMemory();
+                        }
+
+                        if (m_removeCallback) {
+                            m_removeCallback(pMesh);
+                        }
+
+                        pMeshIt = group.erase(pMeshIt);
+                        continue;
+                    }
+
+                    if (!pMaterial) {
+                        ++pMeshIt;
+                        continue;
+                    }
+
+                    /// Если изменил свой кластер (прозрачность), то убираем его из текущего
+                    if (ChangeCluster(pMesh)) {
+                        if (m_removeCallback) {
+                            m_removeCallback(pMesh);
+                        }
+                        /// use-point от старого саб кластера
+                        pMesh->RemoveUsePoint();
+                        pMeshIt = group.erase(pMeshIt);
+                    }
+                    /// Мигрируем меш в другой саб кластер
+                    else if (pMaterial->GetShader() != pShader) {
+                        pMeshIt = group.erase(pMeshIt);
+                        Add(pMesh);
+                        /// use-point от старого саб кластера
+                        pMesh->RemoveUsePoint();
+                        goto repeat;
+                    }
+                    else {
+                        ++pMeshIt;
+                    }
+                }
+
+                if (group.empty()) {
+                    pGroupsIt = subCluster.erase(pGroupsIt);
+                }
+                else {
+                    ++pGroupsIt;
+                }
+            }
+
+            if (subCluster.Empty()) {
+                pSubClusterIt = m_subClusters.erase(pSubClusterIt);
+            }
+            else {
+                ++pSubClusterIt;
+            }
+        }
+    }
+
+    bool OpaqueMeshCluster::ChangeCluster(MeshCluster::MeshPtr pMesh) {
+        if (pMesh->GetMaterial()->IsTransparent()) {
+            SR_LOG("OpaqueMeshCluster::ChangeCluster() : change the cluster \"opaque -> transparent\"");
+            m_transparent->Add(pMesh);
+            return true;
+        }
+
         return false;
     }
 
-    SR_ERROR("ShadedMeshSubCluster::Remove() : mesh not found!");
+    bool TransparentMeshCluster::ChangeCluster(MeshCluster::MeshPtr pMesh) {
+        if (!pMesh->GetMaterial()->IsTransparent()) {
+            SR_LOG("TransparentMeshCluster::ChangeCluster() : change the cluster \"transparent -> opaque\"");
+            m_opaque->Add(pMesh);
+            return true;
+        }
 
-    return false;
-}
-
-bool Framework::Graphics::ShadedMeshSubCluster::Add(Framework::Graphics::Types::Mesh *mesh)  {
-    auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
-
-    int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
-    if (groupID == SR_ID_INVALID) {
-        SR_ERROR("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
         return false;
     }
-
-    if (auto find = m_groups.find(groupID); find == m_groups.end())
-        m_groups[groupID] = { indexed };
-    else
-        find->second.insert(indexed);
-
-    ++m_counters[groupID];
-    ++m_total;
-
-    return true;
-}
-
-bool Framework::Graphics::ShadedMeshSubCluster::Empty() const {
-    return m_total == 0;
-}
-
-bool Framework::Graphics::MeshCluster::Add(Framework::Graphics::Types::Mesh *mesh) {
-    const auto&& shader = mesh->GetShader();
-    if (auto&& subCluster = m_subClusters.find(shader); subCluster == m_subClusters.end()) {
-        return (m_subClusters[shader] = ShadedMeshSubCluster()).Add(mesh);
-    }
-    else {
-        return subCluster->second.Add(mesh);
-    }
-}
-
-bool Framework::Graphics::MeshCluster::Remove(Framework::Graphics::Types::Mesh *mesh) {
-    const auto&& shader = mesh->GetShader();
-    if (auto&& subCluster = m_subClusters.find(shader); subCluster == m_subClusters.end()) {
-        return false;
-    }
-    else {
-        auto const result = subCluster->second.Remove(mesh);
-
-        if (subCluster->second.Empty())
-            m_subClusters.erase(subCluster);
-
-        return result;
-    }
-}
-
-bool Framework::Graphics::MeshCluster::Empty() {
-    return m_subClusters.empty();
 }
 

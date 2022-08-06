@@ -2,6 +2,7 @@
 // Created by Nikita on 28.01.2021.
 //
 
+/*
 #include <Types/EditorGrid.h>
 #include <Render/Render.h>
 #include <Render/Shader.h>
@@ -29,20 +30,20 @@ void Framework::Graphics::EditorGrid::Draw() {
         }
     }
 
-    /*if (this->m_shader->Use()) {
-        Camera *camera = m_render->GetCurrentCamera();
+   //if (this->m_shader->Use()) {
+   //     Camera *camera = m_render->GetCurrentCamera();
 
-        camera->UpdateShaderProjView(m_shader);
-        //m_shader->SetVec3("CamPos", camera->GetGLPosition());
+   //     camera->UpdateShaderProjView(m_shader);
+   //     //m_shader->SetVec3("CamPos", camera->GetGLPosition());
 
-        if (VAO)
-            this->m_env->DrawTriangles(VAO, 6);
+   //     if (VAO)
+   //         this->m_env->DrawTriangles(VAO, 6);
 
-        //this->m_env->DrawInstancedVertices(VAO, IBO, 6);
-    } else {
-        //Helper::EventManager::Push(Helper::EventManager::Event::Fatal);
-        this->m_hasErrors = true;
-    }*/
+   //     //this->m_env->DrawInstancedVertices(VAO, IBO, 6);
+   // } else {
+   //     //Helper::EventManager::Push(Helper::EventManager::Event::Fatal);
+   //     this->m_hasErrors = true;
+   // }
 }
 
 Framework::Graphics::EditorGrid* Framework::Graphics::EditorGrid::Create(const std::string &shaderName, Framework::Graphics::Render *render) {
@@ -70,7 +71,7 @@ bool Framework::Graphics::EditorGrid::Calculate() {
     SR_GRAPH_LOG("EditorGrid::Calculate() : calculating grid...");
 
     if (!m_env->CalculateEmptyVAO(VAO)) {
-        SR_ERROR("EditorGrid::Calculate() : failed calculate grid VAO!");
+        SR_ERROR("EditorGrid::Calculate() : failed to calculate grid VAO!");
         return false;
     }
 
@@ -79,3 +80,4 @@ bool Framework::Graphics::EditorGrid::Calculate() {
     return true;
 }
 
+*/

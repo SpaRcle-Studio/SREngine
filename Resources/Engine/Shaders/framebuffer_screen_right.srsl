@@ -1,0 +1,20 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Front;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest false;
+
+void fragment() {
+    if (UV.x < 0.0 || UV.x > 0.5) {
+        COLOR_INDEX_0 = texture(COLOR_ATTACHMENT_0, vec2(UV.x - 0.15, UV.y));
+    }
+}
+
+void vertex() {
+    UV = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    VERTEX = vec3(UV * 2.0 - 1.0, 0.0);
+}

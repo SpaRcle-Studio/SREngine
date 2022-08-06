@@ -11,8 +11,6 @@
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
-#include <Utils/Common/Singleton.h>
-#include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Types/DataStorage.h>
 
@@ -25,6 +23,13 @@ namespace SR_UTILS_NS {
         typedef std::function<void(Component*)> Event;
         typedef std::function<Component*(void)> Construction;
         typedef std::function<Component*(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage)> Loader;
+
+        struct MetaComponent {
+            Construction constructor;
+            Loader loader;
+            std::string name;
+            uint16_t version;
+        };
     public:
         Component* CreateComponentOfName(const std::string& name);
 
@@ -38,47 +43,46 @@ namespace SR_UTILS_NS {
             return m_ids;
         }
 
+        uint16_t GetVersion(const Component* pComponent) const;
+        uint16_t GetVersionById(uint64_t id) const;
 
         template<typename T> bool RegisterComponent(const Construction& constructor) {
             SR_SCOPED_LOCK
 
-            const auto&& code = typeid(T).hash_code();
+            auto&& code = typeid(T).hash_code();
 
-            m_loaders.insert(std::make_pair(code, [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
+            m_meta[code].loader = [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
                 return T::LoadComponent(marshal, dataStorage);
-            }));
+            };
 
-            return RegisterComponentImpl(code, StringUtils::BackRead(typeid(T).name(), ':'), constructor);
+            /// TODO: mingw bad class name
+            auto&& name = StringUtils::BackRead(typeid(T).name(), ':');
+
+            m_meta[code].name = name;
+            m_meta[code].constructor = constructor;
+            m_meta[code].version = T::VERSION;
+
+            m_ids.insert(std::make_pair(name, code));
+
+            SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + name + "\"...");
+
+            return true;
         }
 
-        bool LoadComponents(const std::function<bool(Types::DataStorage& context)>& loader) {
-            SR_SCOPED_LOCK
-
-            const bool result = loader(m_context);
-
-            m_context.Clear();
-
-            return result;
-        }
-
-        SR_NODISCARD std::string GetLastComponentName() const {
-            SR_SCOPED_LOCK
-            return m_lastComponent;
-        }
+        bool LoadComponents(const std::function<bool(Types::DataStorage& context)>& loader);
 
         Component* Load(SR_HTYPES_NS::Marshal& marshal);
 
         SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
+        SR_NODISCARD std::string GetLastComponentName() const;
 
     private:
-        bool RegisterComponentImpl(size_t id, const std::string& name, const Construction& constructor);
         Component* CreateComponentImpl(size_t id);
 
     private:
-        std::unordered_map<size_t, Construction> m_creators;
-        std::unordered_map<size_t, Loader> m_loaders;
-        std::unordered_map<size_t, std::string> m_names;
+        std::unordered_map<size_t, MetaComponent> m_meta;
         std::unordered_map<std::string, size_t> m_ids;
+
         SR_HTYPES_NS::DataStorage m_context;
         std::string m_lastComponent;
 

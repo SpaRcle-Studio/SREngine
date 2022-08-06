@@ -10,6 +10,7 @@
 
 #define CRT_SECURE_NO_WARNINGS
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
+#define _HAS_AUTO_PTR_ETC 1
 
 #define SR_USE_IMGUI
 
@@ -59,11 +60,14 @@
 #define SR_NODISCARD [[nodiscard]]
 #define SR_FALLTHROUGH [[fallthrough]]
 #define SR_MAYBE_UNUSED [[maybe_unused]]
+#define SR_DEPRECATED_EX(text) [[deprecated(text)]]
+#define SR_DEPRECATED [[deprecated]]
 #define SR_MAYBE_UNUSED_VAR [[maybe_unused]] auto&& SR_COMBINE(unused_var, __LINE__) =
 #define SR_INLINE inline
 #define SR_INLINE_STATIC SR_INLINE static
 #define SR_NULL 0
 #define SR_MARSHAL_USE_LIST 1
+#define SR_MARSHAL_ENCODE_AND_DECODE 0
 #define SR_INVALID_STR_POS -1
 #define SR_ID_INVALID -1
 #define SR_SHADER_PROGRAM int32_t
@@ -116,6 +120,7 @@
 #endif
 
 #define SR_XML_NS Framework::Helper::Xml
+#define SR_PHYSICS_NS Framework::Physics
 #define SR_UTILS_NS Framework::Helper
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
@@ -125,6 +130,7 @@
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
 #define SR_SCRIPTING_NS Framework::Scripting
+#define SR_AUDIO_NS Framework::Audio
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 
@@ -146,6 +152,12 @@
     #endif
 #else
     #define SR_DLL_EXPORT
+#endif
+
+#if defined(SR_MSVC)
+    #define SR_STRCMPI _strcmpi
+#else
+    #define SR_STRCMPI strcasecmp
 #endif
 
 #endif //GAMEENGINE_MACROS_H

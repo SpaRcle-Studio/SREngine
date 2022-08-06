@@ -8,8 +8,8 @@
 #include <Utils/FileSystem/Path.h>
 #include <GUI/Widget.h>
 
-namespace SR_GRAPH_NS::GUI {
-    class FileBrowser : public Widget {
+namespace SR_CORE_NS::GUI {
+    class FileBrowser : public SR_GRAPH_NS::GUI::Widget {
         using Hash = std::size_t;
     public:
         FileBrowser();
@@ -19,13 +19,18 @@ namespace SR_GRAPH_NS::GUI {
         void SetFolder(const Helper::Path& path);
 
     private:
+        void FileContextMenu(const SR_UTILS_NS::Path &path);
+        void CurrentDirectoryContextMenu();
+        void CurrentDirectoryPanel();
+        void ItemViewPanel();
+        void FileCatalogPanel(const float_t& leftWidth);
         void Draw() override;
         void Draw(const Helper::Path& root);
 
     private:
         Helper::Path m_root;
         Helper::Path m_selectedDir;
-
+        float_t assetWidth;
     };
 }
 

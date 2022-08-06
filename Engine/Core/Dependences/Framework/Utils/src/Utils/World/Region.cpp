@@ -34,7 +34,14 @@ namespace SR_WORLD_NS {
     }
 
     Chunk* Region::GetChunk(const SR_MATH_NS::IVector3 &position) {
-        SRAssert(position <= static_cast<int32_t>(m_width) && position > 0);
+        if (position < 0 || position > static_cast<int32_t>(m_width)) {
+            SR_ERROR(SR_FORMAT("Region::GetChunk() : incorrect position! "
+                               "\n\tWidth: %i\n\tRegion position: %i, %i\n\tChunk position: %i, %i",
+                               m_width, m_position.x, m_position.y, position.x, position.y
+            ));
+            SRHalt0();
+            return nullptr;
+        }
 
         Chunk* pChunk = nullptr;
 
@@ -207,5 +214,9 @@ namespace SR_WORLD_NS {
         }
 
         return true;
+    }
+
+    Region::ScenePtr Region::GetScene() const {
+        return m_observer->m_scene;
     }
 }

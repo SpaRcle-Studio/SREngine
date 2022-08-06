@@ -11,6 +11,9 @@ namespace SR_GRAPH_NS {
     enum class PipeLine {
         Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12
     };
+
+    typedef PipeLine PipeLineType;
+    typedef PipeLine PipelineType;
 }
 
 #endif //GAMEENGINE_PIPELINE_H

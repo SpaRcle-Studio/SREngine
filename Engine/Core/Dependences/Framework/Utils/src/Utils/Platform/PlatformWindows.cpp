@@ -3,12 +3,20 @@
 //
 
 #include <Utils/Platform/Platform.h>
+#include <Utils/Common/StringFormat.h>
 #include <Utils/Debug.h>
 
 #include <Windows.h>
 #include <Psapi.h>
 #include <rpc.h>
+#include <tchar.h>
 #include <shellapi.h>
+#include <commdlg.h>
+#include <shlobj.h>
+
+#ifdef SR_MINGW
+    #include <ShObjIdl.h>
+#endif
 
 /// убираем проклятые min и max после инклуда Windows.h
 
@@ -19,6 +27,55 @@
 #ifdef max
     #undef max
 #endif
+
+namespace SR_UTILS_NS::Platform {
+    std::string GetLastErrorAsString()
+    {
+        //Get the error message ID, if any.
+        DWORD errorMessageID = ::GetLastError();
+        if(errorMessageID == 0) {
+            return std::string(); //No error message has been recorded
+        }
+        LPSTR messageBuffer = nullptr;
+        //Ask Win32 to give us the string version of that message ID.
+        //The parameters we pass in, tell Win32 to create the buffer that holds the message for us (because we don't yet know how long the message string will be).
+        size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                                     NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
+        //Copy the error message into a std::string.
+        std::string message(messageBuffer, size - 3);
+        //Free the Win32's string's buffer.
+        LocalFree(messageBuffer);
+        return message;
+    }
+
+    std::string ErrorCodeToString(const DWORD a_error_code)
+    {
+        // Get the last windows error message.
+        char msg_buf[1025] = { 0 };
+        // Get the error message for our os code.
+        if (FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+                          0,
+                          a_error_code,
+                          0,
+                          msg_buf,
+                          sizeof(msg_buf) - 1,
+                          0))
+        {
+            // Remove trailing newline character.
+            char* nl_ptr = 0;
+            if (0 != (nl_ptr = strchr(msg_buf, '\n')))
+            {
+                *nl_ptr = '\0';
+            }
+            if (0 != (nl_ptr = strchr(msg_buf, '\r')))
+            {
+                *nl_ptr = '\0';
+            }
+            return std::string(msg_buf);
+        }
+        return std::string("Failed to get error message");
+    }
+}
 
 namespace SR_UTILS_NS::Platform {
     void TextToClipboard(const std::string &text) {
@@ -37,6 +94,74 @@ namespace SR_UTILS_NS::Platform {
         }
         else
             SR_ERROR("Platform::TextToClipboard() : failed to open clipboard!");
+    }
+
+    class COleInitialize {
+    public:
+        COleInitialize() : m_hr(OleInitialize(NULL)) { }
+        ~COleInitialize() { if (SUCCEEDED(m_hr)) OleUninitialize(); }
+        operator HRESULT() const { return m_hr; }
+        HRESULT m_hr;
+    };
+
+    ///функция для копирования файла/файлов в буфер обмена
+    void CopyFilesToClipboard(std::list<SR_UTILS_NS::Path> paths) {
+
+        // calculate *bytes* needed for memory allocation
+        int clpSize = sizeof(DROPFILES);
+        for (auto &&path:paths)
+            clpSize += sizeof(TCHAR) * (_tcslen(path.ToString().c_str()) + 1); // + 1 => '\0'
+        clpSize += sizeof(TCHAR); // two \0 needed at the end
+
+        // allocate the zero initialized memory
+        HDROP hdrop   = (HDROP)GlobalAlloc(GHND, clpSize);
+        DROPFILES* df = (DROPFILES*)GlobalLock(hdrop);
+        df->pFiles    = sizeof(DROPFILES); // string offset
+#ifdef _UNICODE
+        df->fWide     = TRUE; // unicode file names
+#endif // _UNICODE
+
+        // copy paths to the allocated memory
+        TCHAR* dstStart = (TCHAR*)&df[1];
+        for (auto &&path:paths)
+        {
+            _tcscpy(dstStart, path.ToString().c_str());
+            dstStart = &dstStart[_tcslen(path.c_str()) + 1]; // + 1 => get beyond '\0'
+        }
+        GlobalUnlock(hdrop);
+
+        // prepare the clipboard
+        OpenClipboard(NULL);
+        EmptyClipboard();
+        SetClipboardData(CF_HDROP, hdrop);
+        CloseClipboard();
+    }
+
+    ///функция для получения файла/файлов из буфер обмена
+    void PasteFilesFromClipboard(const SR_UTILS_NS::Path &topath) {
+
+        if(!topath.IsDir()) {
+            return;
+        }
+
+        if (IsClipboardFormatAvailable(CF_HDROP)) { ///CF_HDROP - формат списка файлов
+            std::list<SR_UTILS_NS::Path> paths;
+
+            OpenClipboard(NULL);
+            HDROP hDrop = static_cast<HDROP>(GetClipboardData(CF_HDROP));
+            CloseClipboard();
+
+            const uint64_t size = 32768;
+            std::string buffer;
+            buffer.resize(size);
+            for (int i = 0; i < DragQueryFileA(hDrop,0xFFFFFFFF,NULL,NULL); i++) {
+                DragQueryFileA(hDrop,i,&buffer[0],size);
+                auto path = SR_UTILS_NS::Path(buffer);
+                Copy(path,topath.Concat(path.GetBaseNameAndExt()));
+            }
+        } else {
+            return;
+        }
     }
 
     std::string GetClipboardText() {
@@ -144,5 +269,157 @@ namespace SR_UTILS_NS::Platform {
 
     void OpenWithAssociatedApp(const Path &filepath) {
         system(filepath.ToString().c_str());
+    }
+
+    bool Copy(const Path &from, const Path &to) {
+        if (from.IsFile()) {
+            const bool result = CopyFileA(
+                    reinterpret_cast<LPCSTR>(from.ToString().c_str()),
+                    reinterpret_cast<LPCSTR>(to.ToString().c_str()),
+                    false
+            );
+
+            if (!result) {
+                SR_WARN(SR_FORMAT("Platform::Copy() : %s\n\tFrom: %s\n\tTo: %s", GetLastErrorAsString().c_str(), from.CStr(), to.CStr()));
+            }
+
+            return result;
+        }
+
+        if (!from.IsDir()) {
+            SR_WARN(SR_FORMAT("Platform::Copy() : \"%s\" is not directory!", from.c_str()));
+            return false;
+        }
+
+        CreateFolder(to);
+
+        for (auto&& item : GetInDirectory(from, Path::Type::Undefined)) {
+            if (Copy(item, to.Concat(item.GetBaseNameAndExt()))) {
+                continue;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    std::list<Path> GetInDirectory(const Path &dir, Path::Type type) {
+        std::list<Path> items;
+        const std::string search_path = dir.ToString() + "/*.*";
+        WIN32_FIND_DATA fd;
+        HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+        if(hFind != INVALID_HANDLE_VALUE) {
+            do {
+                if ((fd.dwFileAttributes & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY)) && type == Path::Type::File) {
+                    continue;
+                }
+
+                if (!(fd.dwFileAttributes & static_cast<uint64_t>(FILE_ATTRIBUTE_DIRECTORY)) && type == Path::Type::Folder) {
+                    continue;
+                }
+
+                const auto filename = std::string(fd.cFileName);
+                if (filename != "." && filename != ".." && !filename.empty())
+                    items.emplace_back(dir.ToString() + "/" + filename);
+            }
+            while(::FindNextFile(hFind, &fd));
+
+            ::FindClose(hFind);
+        }
+        return items;
+    }
+
+    bool CreateFolder(const Path &path) {
+#ifdef SR_MINGW
+        return mkdir(path.CStr());
+#else
+        return _mkdir(path.CStr());
+#endif
+    }
+
+    bool Delete(const Path &path) {
+        if (path.IsFile()) {
+            const bool result = std::remove(path.CStr()) == 0;
+
+            if (!result) {
+                SR_WARN(SR_FORMAT("Platform::Delete() : failed to delete file!\n\tPath: %s", path.CStr()));
+            }
+
+            return result;
+        }
+
+        if (!path.IsDir()) {
+            return false;
+        }
+
+        for (auto&& item : GetInDirectory(path, Path::Type::Undefined)) {
+            if (Delete(item)) {
+                continue;
+            }
+
+            return false;
+        }
+
+        const bool result = _rmdir(path.CStr()) == 0;
+
+        if (!result) {
+            SR_WARN(SR_FORMAT("Platform::Delete() : failed to delete folder!\n\tPath: %s", path.CStr()));
+        }
+
+        return result;
+    }
+
+    Path GetApplicationPath() {
+        const std::size_t buf_len = 260;
+        auto s = new TCHAR[buf_len];
+        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
+        return s;
+    }
+
+    Path GetApplicationName() {
+        const std::size_t buf_len = 260;
+        auto s = new TCHAR[buf_len];
+        auto path_len = GetModuleFileName(GetModuleHandle(nullptr), s, buf_len);
+        return Path(s).GetBaseNameAndExt();
+    }
+
+    bool FileExists(const Path &path) {
+        FILE* f = nullptr;
+        if (fopen_s(&f, path.CStr(), "r") == 0) {
+            fclose(f);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool FolderExists(const Path &path) {
+        DWORD ftyp = GetFileAttributesA(path.CStr());
+        if (ftyp == INVALID_FILE_ATTRIBUTES)
+            return false;  //something is wrong with your path!
+
+        if (ftyp & FILE_ATTRIBUTE_DIRECTORY)
+            return true;   // this is a directory!
+
+        return false;
+    }
+
+    bool FileIsHidden(const Path &path) {
+        const DWORD attributes = GetFileAttributes(path.CStr());
+        if (attributes & FILE_ATTRIBUTE_HIDDEN)
+            return true;
+
+        return false;
+    }
+
+    void SelfOpen() {
+        auto&& exe = SR_PLATFORM_NS::GetApplicationPath();
+        ShellExecute(NULL, "open", exe.CStr(), NULL, NULL, SW_SHOWDEFAULT);
+    }
+
+    bool IsAbsolutePath(const Path &path) {
+        auto&& view = path.View();
+        return view.size() >= 2 && view[1] == ':';
     }
 }

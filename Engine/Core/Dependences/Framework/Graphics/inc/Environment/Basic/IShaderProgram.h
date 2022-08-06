@@ -17,7 +17,27 @@ namespace SR_GTYPES_NS {
     class Texture;
 }
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
+    static constexpr uint64_t SHADER_MODEL_MATRIX = SR_COMPILE_TIME_CRC32_STR("MODEL_MATRIX");
+    static constexpr uint64_t SHADER_VIEW_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_MATRIX");
+    static constexpr uint64_t SHADER_VIEW_NO_TRANSLATE_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_NO_TRANSLATE_MATRIX");
+    static constexpr uint64_t SHADER_PROJECTION_MATRIX = SR_COMPILE_TIME_CRC32_STR("PROJECTION_MATRIX");
+    static constexpr uint64_t SHADER_ORTHOGONAL_MATRIX = SR_COMPILE_TIME_CRC32_STR("ORTHOGONAL_MATRIX");
+    static constexpr uint64_t SHADER_TIME = SR_COMPILE_TIME_CRC32_STR("TIME");
+    static constexpr uint64_t SHADER_SKYBOX_DIFFUSE = SR_COMPILE_TIME_CRC32_STR("SKYBOX_DIFFUSE");
+    static constexpr uint64_t SHADER_DEPTH_ATTACHMENT = SR_COMPILE_TIME_CRC32_STR("DEPTH_ATTACHMENT");
+
+    static constexpr std::array<uint64_t, 8> SHADER_COLOR_ATTACHMENTS = {
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_0"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_1"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_2"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_3"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_4"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_5"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_6"),
+            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_7")
+    };
+
     /**
        0 - binding
        1 - ubo size
@@ -160,7 +180,7 @@ namespace Framework::Graphics {
             TriangleStripWithAdjacency,
             PathList)
 
-    struct Uniform {
+    struct SR_DLL_EXPORT Uniform {
         LayoutBinding type;
         ShaderStage stage;
         uint32_t binding;
@@ -177,22 +197,91 @@ namespace Framework::Graphics {
         GreaterOrEqual,
         Always)
 
-    struct SRShaderCreateInfo {
-        PolygonMode       polygonMode       = PolygonMode::Unknown;
-        CullMode          cullMode          = CullMode::Unknown;
-        DepthCompare      depthCompare      = DepthCompare::Unknown;
-        PrimitiveTopology primitiveTopology = PrimitiveTopology::Unknown;
+    struct SR_DLL_EXPORT SRShaderCreateInfo {
+        SRShaderCreateInfo() = default;
 
-        bool blendEnabled = false;
-        bool depthWrite   = false;
-        bool depthTest    = false;
+        SRShaderCreateInfo(const SRShaderCreateInfo& ref)
+            : path(ref.path)
+            , polygonMode(ref.polygonMode)
+            , cullMode(ref.cullMode)
+            , depthCompare(ref.depthCompare)
+            , primitiveTopology(ref.primitiveTopology)
+            , vertexAttributes(ref.vertexAttributes)
+            , vertexDescriptions(ref.vertexDescriptions)
+            , uniforms(ref.uniforms)
+            , blendEnabled(ref.blendEnabled)
+            , depthWrite(ref.depthWrite)
+            , depthTest(ref.depthTest)
+        { }
 
-        [[nodiscard]] bool Validate() const {
+        SRShaderCreateInfo(SRShaderCreateInfo&& ref) noexcept {
+            path = std::exchange(ref.path, {});
+            polygonMode = std::exchange(ref.polygonMode, {});
+            cullMode = std::exchange(ref.cullMode, {});
+            depthCompare = std::exchange(ref.depthCompare, {});
+            primitiveTopology = std::exchange(ref.primitiveTopology, {});
+            vertexAttributes = std::exchange(ref.vertexAttributes, {});
+            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
+            uniforms = std::exchange(ref.uniforms, {});
+            blendEnabled = std::exchange(ref.blendEnabled, {});
+            depthWrite = std::exchange(ref.depthWrite, {});
+            depthTest = std::exchange(ref.depthTest, {});
+        }
+
+        SRShaderCreateInfo& operator=(const SRShaderCreateInfo& ref) noexcept {
+            path = ref.path;
+            polygonMode = ref.polygonMode;
+            cullMode = ref.cullMode;
+            depthCompare = ref.depthCompare;
+            primitiveTopology = ref.primitiveTopology;
+            vertexAttributes = ref.vertexAttributes;
+            vertexDescriptions = ref.vertexDescriptions;
+            uniforms = ref.uniforms;
+            blendEnabled = ref.blendEnabled;
+            depthWrite = ref.depthWrite;
+            depthTest = ref.depthTest;
+            return *this;
+        }
+
+        SRShaderCreateInfo& operator=(SRShaderCreateInfo&& ref) noexcept {
+            path = std::exchange(ref.path, {});
+            polygonMode = std::exchange(ref.polygonMode, {});
+            cullMode = std::exchange(ref.cullMode, {});
+            depthCompare = std::exchange(ref.depthCompare, {});
+            primitiveTopology = std::exchange(ref.primitiveTopology, {});
+            vertexAttributes = std::exchange(ref.vertexAttributes, {});
+            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
+            uniforms = std::exchange(ref.uniforms, {});
+            blendEnabled = std::exchange(ref.blendEnabled, {});
+            depthWrite = std::exchange(ref.depthWrite, {});
+            depthTest = std::exchange(ref.depthTest, {});
+            return *this;
+        }
+
+    public:
+        SR_NODISCARD bool Validate() const noexcept {
             return polygonMode       != PolygonMode::Unknown
                    && cullMode          != CullMode::Unknown
                    && depthCompare      != DepthCompare::Unknown
                    && primitiveTopology != PrimitiveTopology::Unknown;
         }
+
+    public:
+        SR_UTILS_NS::Path path;
+
+        PolygonMode       polygonMode       = PolygonMode::Unknown;
+        CullMode          cullMode          = CullMode::Unknown;
+        DepthCompare      depthCompare      = DepthCompare::Unknown;
+        PrimitiveTopology primitiveTopology = PrimitiveTopology::Unknown;
+
+        VertexAttributes vertexAttributes;
+        VertexDescriptions vertexDescriptions;
+        UBOInfo uniforms;
+
+        bool blendEnabled = false;
+        bool depthWrite   = false;
+        bool depthTest    = false;
+
     };
 
     static LayoutBinding GetBindingType(const std::string& line) {

@@ -4,8 +4,8 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/ComponentManager.h>
-
 #include <Utils/Types/Thread.h>
 
 namespace SR_UTILS_NS {
@@ -14,28 +14,23 @@ namespace SR_UTILS_NS {
 
         marshal.Write(m_name);
         marshal.Write(IsEnabled());
+        marshal.Write<uint16_t>(ComponentManager::Instance().GetVersion(this));
 
         return marshal;
     }
 
-    bool Component::IsActive() const {
-        return IsEnabled() && (!m_parent || m_parent->m_isActive);
+    bool Component::IsActive() const noexcept {
+        return IsEnabled() && m_parent.Do<bool>([](auto&& data) -> bool {
+            return !data || data->m_isActive;
+        });
     }
 
     void Component::SetParent(GameObject *parent) {
-        m_parent = parent;
-
-        CheckActivity();
+        m_parent.Replace(parent);
     }
 
     void Component::SetEnabled(bool value) {
-        if (value == m_isEnabled) {
-            return;
-        }
-
         m_isEnabled = value;
-
-        CheckActivity();
     }
 
     void Component::CheckActivity() {
@@ -44,63 +39,60 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        if ((m_isActive = isActive)) {
-            OnEnabled();
+        if (isActive) {
+            OnEnable();
         }
         else {
-            OnDisabled();
+            OnDisable();
         }
     }
 
-    bool ComponentManager::RegisterComponentImpl(size_t id, const std::string &name, const Construction& constructor) {
-        m_names.insert(std::make_pair(id, name));
-        m_ids.insert(std::make_pair(name, id));
-        m_creators.insert(std::make_pair(id, constructor));
+    SR_WORLD_NS::Scene::Ptr Component::GetScene() const {
+        return m_parent.Do<SR_WORLD_NS::Scene::Ptr>([](auto&& data) {
+            if (!data) {
+                SRHalt("The component have not parent game object!");
+                return SR_WORLD_NS::Scene::Ptr();
+            }
 
-        SR_SYSTEM_LOG("ComponentManager::RegisterComponentImpl() : register \"" + name + "\"...");
-
-        return true;
+            /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
+            return data->GetScene();
+        });
     }
 
-    Component *Helper::ComponentManager::CreateComponentOfName(const std::string &name) {
-        SR_SCOPED_LOCK
-
-        if (m_ids.count(name) == 0) {
-            SR_ERROR("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
-            return nullptr;
-        }
-
-        return CreateComponentImpl(m_ids.at(name));
+    bool Component::IsEnabled() const noexcept {
+        return m_isEnabled;
     }
 
-    Component *Helper::ComponentManager::CreateComponentImpl(size_t id) {
-        if (m_creators.count(id) == 0) {
-            SR_ERROR("ComponentManager::CreateComponentImpl() : component \"" + std::to_string(id) + "\" not found!");
-            return nullptr;
-        }
-
-        return m_creators.at(id)();
+    GameObject *Component::GetParent() const {
+        return m_parent;
     }
 
-    Component *ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
-        SR_SCOPED_LOCK
+    Component::GameObjectPtr Component::GetRoot() const {
+        return m_parent.Do<GameObjectPtr>([](auto&& data) -> GameObjectPtr {
+            if (!data) {
+                return GameObjectPtr();
+            }
 
-        m_lastComponent = marshal.Read<std::string>();
-        const auto&& enabled = marshal.Read<bool>();
+            GameObjectPtr root = data->GetThis();
 
-        auto&& uidIt = m_ids.find(m_lastComponent);
+            while (root.RecursiveLockIfValid()) {
+                if (auto&& parent = root->GetParent()) {
+                    root.Unlock();
+                    root = parent;
+                }
+                else {
+                    root.Unlock();
+                }
+            }
 
-        if (uidIt == std::end(m_ids)) {
-            SRAssert2(false, "Component \"" + m_lastComponent + "\" not found!");
-            return nullptr;
-        }
+            return root;
+        });
+    }
 
-        if (auto&& pComponent = m_loaders.at(uidIt->second)(marshal, &m_context)) {
-            pComponent->SetEnabled(enabled);
-            return pComponent;
-        }
-
-        return nullptr;
+    Transform *Component::GetTransform() const {
+        return m_parent.Do<Transform *>([](auto &&data) {
+            return data ? data->GetTransform() : nullptr;
+        });
     }
 }
 

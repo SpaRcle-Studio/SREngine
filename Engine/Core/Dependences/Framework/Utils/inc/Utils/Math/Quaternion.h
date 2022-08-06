@@ -17,11 +17,11 @@ namespace SR_MATH_NS {
     private:
         glm::quat self{};
     public:
-        [[nodiscard]] inline glm::quat ToGLM() const { return self; }
-        [[nodiscard]] Matrix4x4 ToMat4x4() const;
-        [[nodiscard]] inline glm::mat4 ToMat4x4GLM() const { return mat4_cast(self); }
-        [[nodiscard]] Vector3<Unit> EulerAngle() const;
-        [[nodiscard]] Quaternion Rotate(const Vector3<Unit>& v) const;
+        SR_NODISCARD inline glm::quat ToGLM() const { return self; }
+        SR_NODISCARD Matrix4x4 ToMat4x4() const;
+        SR_NODISCARD inline glm::mat4 ToMat4x4GLM() const { return mat4_cast(self); }
+        SR_NODISCARD Vector3<Unit> EulerAngle() const;
+        SR_NODISCARD Quaternion Rotate(const Vector3<Unit>& v) const;
 
         constexpr Quaternion(const Quaternion &p_q) {
             self = p_q.self;
@@ -33,7 +33,8 @@ namespace SR_MATH_NS {
 
         //, bool inRads = false
         Quaternion(const Vector3<Unit> &p_euler);
-        explicit Quaternion(const glm::quat &q) {
+
+        Quaternion(const glm::quat &q) {
             self = q;
         }
 
