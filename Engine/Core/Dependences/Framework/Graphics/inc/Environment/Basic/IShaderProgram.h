@@ -44,122 +44,10 @@ namespace SR_GRAPH_NS {
     */
     typedef std::vector<std::pair<uint32_t, uint64_t>> UBOInfo;
 
-    typedef std::variant<SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::FVector4> ShaderPropertyVariant;
-
-    SR_ENUM_CLASS(ShaderVarType,
-              Unknown,
-              Int,
-              Float,
-              Vec2,
-              Vec3,
-              Vec4,
-              Mat2,
-              Mat3,
-              Mat4,
-              Sampler1D,
-              Sampler2D,
-              Sampler3D,
-              SamplerCube,
-              Sampler1DShadow,
-              Sampler2DShadow,
-    )
-
-    static bool IsSamplerType(ShaderVarType type) {
-        switch (type) {
-            case ShaderVarType::Sampler1D:
-            case ShaderVarType::Sampler2D:
-            case ShaderVarType::Sampler3D:
-            case ShaderVarType::SamplerCube:
-            case ShaderVarType::Sampler1DShadow:
-            case ShaderVarType::Sampler2DShadow:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    static bool IsMatrixType(ShaderVarType type) {
-        switch (type) {
-            case ShaderVarType::Mat2:
-            case ShaderVarType::Mat3:
-            case ShaderVarType::Mat4:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    static std::string ShaderVarTypeToString(ShaderVarType type) {
-        std::string str = EnumShaderVarTypeToString(type);
-
-        if (!str.empty()) {
-            str[0] = tolower(str[0]);
-        }
-
-        return str;
-    }
-
-    static uint32_t GetShaderVarSize(ShaderVarType type) {
-        switch (type) {
-            case ShaderVarType::Int:
-            case ShaderVarType::Float:
-                return 4;
-            case ShaderVarType::Vec2:
-                return 4 * 2;
-            case ShaderVarType::Vec3:
-                return 4 * 3;
-            case ShaderVarType::Vec4:
-                return 4 * 4;
-            case ShaderVarType::Mat2:
-                return 4 * 2 * 2;
-            case ShaderVarType::Mat3:
-                return 4 * 3 * 3;
-            case ShaderVarType::Mat4:
-                return 4 * 4 * 4;
-            case ShaderVarType::Unknown:
-            default:
-                SRAssert2(false, "unknown type!");
-                return 0;
-        }
-    }
-
-    static ShaderPropertyVariant GetVariantFromShaderVarType(ShaderVarType type) {
-        switch (type) {
-            case ShaderVarType::Int:
-                return static_cast<int32_t>(0);
-            case ShaderVarType::Float:
-                return static_cast<float_t>(0.f);
-            case ShaderVarType::Vec2:
-                return SR_MATH_NS::FVector2(SR_MATH_NS::Unit(0));
-            case ShaderVarType::Vec3:
-                return SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0));
-            case ShaderVarType::Vec4:
-                return SR_MATH_NS::FVector4(SR_MATH_NS::Unit(0));
-            case ShaderVarType::Sampler1D:
-            case ShaderVarType::Sampler2D:
-            case ShaderVarType::Sampler3D:
-            case ShaderVarType::SamplerCube:
-            case ShaderVarType::Sampler1DShadow:
-            case ShaderVarType::Sampler2DShadow:
-                return static_cast<Types::Texture*>(nullptr);
-            default:
-                SRAssert(false);
-                return ShaderPropertyVariant();
-        }
-    }
-
-    static ShaderVarType GetShaderVarTypeFromString(std::string str) {
-        if (!str.empty()) {
-            str[0] = toupper(str[0]);
-        }
-
-        return StringToEnumShaderVarType(str);
-    }
-
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
-    typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
-    typedef std::map<uint64_t, std::pair<ShaderVarType, uint32_t>> ShaderSamplers;
+
+    SR_DEPRECATED
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
     SR_ENUM_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)
@@ -381,35 +269,6 @@ namespace SR_GRAPH_NS {
 
         return uniforms;
     }
-}
-
-namespace std {
-    template<> struct hash<Framework::Graphics::ShaderSamplers> {
-        size_t operator()(Framework::Graphics::ShaderSamplers const& value) const {
-            std::size_t res = 0;
-
-            for (auto&& [key, val] : value) {
-                res = SR_UTILS_NS::HashCombine(key, res);
-                res = SR_UTILS_NS::HashCombine(val.first, res);
-                res = SR_UTILS_NS::HashCombine(val.second, res);
-            }
-
-            return res;
-        }
-    };
-
-    template<> struct hash<Framework::Graphics::ShaderProperties> {
-        size_t operator()(Framework::Graphics::ShaderProperties const& value) const {
-            std::size_t res = 0;
-
-            for (auto&& [key, val] : value) {
-                res = SR_UTILS_NS::HashCombine(key, res);
-                res = SR_UTILS_NS::HashCombine(val, res);
-            }
-
-            return res;
-        }
-    };
 }
 
 #endif //GAMEENGINE_ISHADERPROGRAM_H

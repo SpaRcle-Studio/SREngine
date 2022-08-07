@@ -181,10 +181,13 @@ namespace Framework {
             SetScene(ScenePtr());
         }
 
+        SR_INFO("Engine::Close() : destroying the editor...");
         SR_SAFE_DELETE_PTR(m_editor);
 
-        if (m_cmdManager && m_cmdManager->IsRun())
+        if (m_cmdManager && m_cmdManager->IsRun()) {
+            SR_INFO("Engine::Close() : close the command manager...");
             m_cmdManager->Close();
+        }
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
         if (m_worldThread) {
@@ -204,7 +207,7 @@ namespace Framework {
     }
 
     void Engine::DrawCallback() {
-        if (m_window == nullptr || !m_window->IsWindowFocus()) {
+        if (!m_isRun || m_window == nullptr || !m_window->IsWindowFocus()) {
             m_accumulator = 0.f;
             return;
         }

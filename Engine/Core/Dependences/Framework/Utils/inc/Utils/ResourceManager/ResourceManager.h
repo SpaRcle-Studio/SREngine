@@ -69,7 +69,6 @@ namespace SR_UTILS_NS {
     private:
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_force = false;
-        std::atomic<bool> m_destroyIsEmpty = false;
 
         Path m_folder = Path();
         Types::Thread::Ptr m_thread = nullptr;

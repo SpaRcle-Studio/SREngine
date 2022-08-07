@@ -34,9 +34,10 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD FramebufferPtr GetFramebuffer() const;
 
     private:
-        bool m_dynamicResizing = false;
+        void LoadSettings(const SR_XML_NS::Node& settingsNode);
 
-        SR_UTILS_NS::Path m_shader;
+    private:
+        bool m_dynamicResizing = false;
 
         SR_MATH_NS::FVector2 m_preScale;
         SR_MATH_NS::IVector2 m_size;

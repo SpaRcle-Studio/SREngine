@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Material ReadOnly="false">
+    <Shader Path="Engine/Shaders/standard.srsl"/>
+    <Properties>
+        <Property Id="diffuse" Type="Sampler2D" IsAttachment="true" Framebuffer="SceneViewFBO" Layer="0"/>
+    </Properties>
+</Material>

@@ -268,10 +268,9 @@ namespace SR_GRAPH_NS::Types {
         Unload();
 
         if (!Load()) {
+            m_loadState = LoadState::Error;
             return false;
         }
-
-        m_loadState = LoadState::Loaded;
 
         UpdateResources();
 
@@ -284,8 +283,6 @@ namespace SR_GRAPH_NS::Types {
 
     bool Shader::Load() {
         SR_LOCK_GUARD
-
-        bool hasErrors = !IResource::Load();
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
@@ -384,7 +381,7 @@ namespace SR_GRAPH_NS::Types {
 
         m_uniformBlock.Init();
 
-        return !hasErrors;
+        return IResource::Load();
     }
 
     bool Shader::Unload() {

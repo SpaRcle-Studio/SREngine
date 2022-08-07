@@ -518,6 +518,8 @@ namespace SR_GRAPH_NS {
             SR_UTILS_NS::ResourceManager::UnlockSingleton();
         }
 
+        SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
+
         //if (auto&& material = SR_GTYPES_NS::Material::GetDefault()) {
         //    SRAssert2(false, "Window::SyncFreeResources() : default material was not be freed!\n\tUses count: " +
         //                     std::to_string(material->GetCountUses()));

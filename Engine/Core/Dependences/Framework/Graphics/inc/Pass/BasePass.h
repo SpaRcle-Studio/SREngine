@@ -74,9 +74,9 @@ namespace SR_GRAPH_NS {
         Context m_context;
         PipelinePtr m_pipeline;
         Memory::UBOManager& m_uboManager;
+        std::string m_name;
 
     private:
-        std::string m_name;
         RenderTechnique* m_technique;
         bool m_isInit;
 

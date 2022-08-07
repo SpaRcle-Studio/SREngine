@@ -16,8 +16,8 @@ namespace SR_UTILS_NS {
         friend class ResourceManager;
 
     public:
-        enum class LoadState {
-            Unknown, Loaded, Reloading, Loading, Unloading, Unloaded
+        enum class LoadState : uint8_t {
+            Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
         };
 
     protected:

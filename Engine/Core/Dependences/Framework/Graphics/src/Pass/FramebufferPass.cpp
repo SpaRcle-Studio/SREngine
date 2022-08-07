@@ -23,49 +23,13 @@ namespace SR_GRAPH_NS {
     }
 
     bool FramebufferPass::Load(const SR_XML_NS::Node &passNode) {
-        auto&& settingsNode = passNode.TryGetNode("Settings");
+        LoadSettings(passNode.TryGetNode("Settings"));
 
-        m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
+        bool result = GroupPass::Load(passNode.TryGetNode("Passes"));
 
-        if ((m_shader = settingsNode.TryGetAttribute("Shader").ToString()).empty()) {
-            SR_ERROR("FramebufferPass::Load() : invalid shader!");
-        }
+        m_name = passNode.TryGetAttribute("Name").ToString(passNode.Name());
 
-        for (auto&& subNode : settingsNode.GetNodes()) {
-            /// color layers
-            if (subNode.NameView() == "Layer") {
-                m_colorFormats.emplace_back(StringToEnumColorFormat(subNode.TryGetAttribute("Format").ToString(
-                        "RGBA8_UNORM"
-                )));
-
-                SR_MATH_NS::FColor clearColor;
-
-                clearColor.r = subNode.TryGetAttribute("R").ToFloat(0.f);
-                clearColor.g = subNode.TryGetAttribute("G").ToFloat(0.f);
-                clearColor.b = subNode.TryGetAttribute("B").ToFloat(0.f);
-                clearColor.a = subNode.TryGetAttribute("A").ToFloat(1.f);
-
-                m_clearColors.emplace_back(clearColor);
-            }
-            /// depth layer
-            else if (subNode.NameView() == "Depth") {
-                m_depth = subNode.TryGetAttribute("ClearValue").ToFloat(1.f);
-
-                m_depthFormat = StringToEnumDepthFormat(subNode.TryGetAttribute("DepthFormat").ToString(
-                    "Auto"
-                ));
-            }
-            else if (subNode.NameView() == "Size") {
-                m_size.x = subNode.TryGetAttribute("X").ToInt(0);
-                m_size.y = subNode.TryGetAttribute("Y").ToInt(0);
-            }
-            else if (subNode.NameView() == "PreScale") {
-                m_preScale.x = subNode.TryGetAttribute("X").ToFloat(1.f);
-                m_preScale.y = subNode.TryGetAttribute("Y").ToFloat(1.f);
-            }
-        }
-
-        return GroupPass::Load(passNode.TryGetNode("Passes"));
+        return result;
     }
 
     bool FramebufferPass::PreRender() {
@@ -124,7 +88,7 @@ namespace SR_GRAPH_NS {
         };
 
         /// initialize framebuffer
-        if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create(m_colorFormats, m_depthFormat, size, m_shader))) {
+        if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create(m_colorFormats, m_depthFormat, size))) {
             SR_ERROR("FramebufferPass::Init() : failed to create framebuffer!");
         }
         else {
@@ -148,5 +112,43 @@ namespace SR_GRAPH_NS {
 
     FramebufferPass::FramebufferPtr FramebufferPass::GetFramebuffer() const {
         return m_framebuffer;
+    }
+
+    void FramebufferPass::LoadSettings(const Helper::Xml::Node &settingsNode) {
+        m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
+
+        for (auto&& subNode : settingsNode.GetNodes()) {
+            /// color layers
+            if (subNode.NameView() == "Layer") {
+                m_colorFormats.emplace_back(StringToEnumColorFormat(subNode.TryGetAttribute("Format").ToString(
+                        "RGBA8_UNORM"
+                )));
+
+                SR_MATH_NS::FColor clearColor;
+
+                clearColor.r = subNode.TryGetAttribute("R").ToFloat(0.f);
+                clearColor.g = subNode.TryGetAttribute("G").ToFloat(0.f);
+                clearColor.b = subNode.TryGetAttribute("B").ToFloat(0.f);
+                clearColor.a = subNode.TryGetAttribute("A").ToFloat(1.f);
+
+                m_clearColors.emplace_back(clearColor);
+            }
+                /// depth layer
+            else if (subNode.NameView() == "Depth") {
+                m_depth = subNode.TryGetAttribute("ClearValue").ToFloat(1.f);
+
+                m_depthFormat = StringToEnumDepthFormat(subNode.TryGetAttribute("DepthFormat").ToString(
+                        "Auto"
+                ));
+            }
+            else if (subNode.NameView() == "Size") {
+                m_size.x = subNode.TryGetAttribute("X").ToInt(0);
+                m_size.y = subNode.TryGetAttribute("Y").ToInt(0);
+            }
+            else if (subNode.NameView() == "PreScale") {
+                m_preScale.x = subNode.TryGetAttribute("X").ToFloat(1.f);
+                m_preScale.y = subNode.TryGetAttribute("Y").ToFloat(1.f);
+            }
+        }
     }
 }

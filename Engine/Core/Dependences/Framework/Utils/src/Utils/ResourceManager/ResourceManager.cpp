@@ -105,8 +105,9 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::GC() {
-        if ((m_destroyIsEmpty = m_destroyed.empty()))
+        if (m_destroyed.empty()) {
             return;
+        }
 
         auto resourceIt = m_destroyed.begin();
         for (; resourceIt != m_destroyed.end(); ) {
@@ -146,11 +147,10 @@ namespace SR_UTILS_NS {
                 m_destroyed.erase(resourceIt);
                 delete resource;
                 resourceIt = m_destroyed.begin();
-                m_destroyIsEmpty = m_destroyed.empty();
             }
         }
 
-        if (Debug::Instance().GetLevel() >= Debug::Level::High && m_destroyIsEmpty) {
+        if (Debug::Instance().GetLevel() >= Debug::Level::High && m_destroyed.empty()) {
             SR_LOG("ResourceManager::GC() : complete garbage collection.");
         }
     }
@@ -235,14 +235,28 @@ namespace SR_UTILS_NS {
 
         /// TODO: добавить таймер, по истечению которого поток будет умирать, чтобы не стоять в deadlock'е
 
-        while (!m_destroyIsEmpty) {
-            if (!m_thread->Joinable()) {
-                SR_ERROR("ResourceManager::Synchronize() : thread is dead!");
-                break;
+        for (uint8_t i = 0; i < 255; ++i) 
+        {
+            for (;;)
+            {
+                {
+                    SR_SCOPED_LOCK
+                    if (m_destroyed.empty()) {
+                        break;
+                    }
+                }
+
+                if (!m_thread->Joinable()) {
+                    SR_ERROR("ResourceManager::Synchronize() : thread is dead!");
+                    break;
+                }
             }
         }
 
-        m_force = false;
+        {
+            SR_SCOPED_LOCK
+            m_force = false;
+        }
     }
 
     void ResourceManager::InspectResources(const std::function<void(const ResourcesTypes &)> &callback) {

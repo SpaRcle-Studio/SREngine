@@ -21,31 +21,24 @@ namespace SR_GTYPES_NS {
         }
 
         SRAssert(m_depth.texture == SR_ID_INVALID);
-
-        SRAssert(!m_shader);
     }
 
-    Framebuffer *Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size) {
-        return Create(images, size, "Engine/framebuffer.srsl");
-    }
-
-    Framebuffer::Ptr Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size, const SR_UTILS_NS::Path& shaderPath) {
+    Framebuffer::Ptr Framebuffer::Create(uint32_t images, const SR_MATH_NS::IVector2 &size) {
         std::list<ColorFormat> colors;
 
         for (uint32_t i = 0; i < images; ++i) {
             colors.emplace_back(ColorFormat::RGBA8_UNORM);
         }
 
-        return Create(colors, DepthFormat::Auto, size, shaderPath);
+        return Create(colors, DepthFormat::Auto, size);
     }
 
-    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size, const SR_UTILS_NS::Path &shaderPath) {
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size) {
         Framebuffer* fbo = new Framebuffer();
 
         SRAssert(!size.HasZero() && !size.HasNegative());
 
         fbo->SetSize(size);
-        fbo->m_shaderPath = shaderPath;
         fbo->m_depth.format = depth;
 
         for (auto&& color : colors) {
@@ -57,8 +50,8 @@ namespace SR_GTYPES_NS {
         return fbo;
     }
 
-    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_UTILS_NS::Path &shaderPath) {
-        return Create(colors, depth, SR_MATH_NS::IVector2(0, 0), shaderPath);
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth) {
+        return Create(colors, depth, SR_MATH_NS::IVector2(0, 0));
     }
 
     bool Framebuffer::Bind() {
@@ -86,7 +79,7 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    bool Framebuffer::InitShader() {
+    /*bool Framebuffer::InitShader() {
         if (!m_shader) {
             if (!(m_shader = Shader::Load(m_shaderPath))) {
                 m_hasErrors = false;
@@ -129,7 +122,7 @@ namespace SR_GTYPES_NS {
         uboManager.SetIgnoreCameras(false);
 
         return true;
-    }
+    }*/
 
     void Framebuffer::FreeVideoMemory() {
         if (!m_isInit) {
@@ -153,11 +146,6 @@ namespace SR_GTYPES_NS {
             }
 
             SRVerifyFalse(!environment->FreeTexture(&texture));
-        }
-
-        if (m_shader) {
-            m_shader->RemoveUsePoint();
-            m_shader = nullptr;
         }
     }
 
@@ -225,7 +213,7 @@ namespace SR_GTYPES_NS {
         Environment::Get()->EndRender();
     }
 
-    void Framebuffer::Draw() {
+    /*void Framebuffer::Draw() {
         if (m_hasErrors) {
             return;
         }
@@ -270,7 +258,7 @@ namespace SR_GTYPES_NS {
         }
 
         Super::UpdateResources(deep);
-    }
+    }*/
 
     int32_t Framebuffer::GetId() {
         if (m_hasErrors) {

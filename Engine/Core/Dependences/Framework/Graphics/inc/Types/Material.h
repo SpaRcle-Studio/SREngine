@@ -9,6 +9,7 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector4.h>
 #include <Environment/Basic/IShaderProgram.h>
+#include <Loaders/ShaderProperties.h>
 
 namespace SR_GRAPH_NS {
     class RenderContext;
@@ -24,14 +25,6 @@ namespace SR_GTYPES_NS {
         friend class Mesh;
         friend class Mesh3D;
 
-        struct Property {
-            std::string id;
-            std::string displayName;
-            ShaderPropertyVariant data;
-            ShaderVarType type;
-        };
-
-        using Properties = std::list<Property>;
         using Super = SR_UTILS_NS::IResource;
         using PipelinePtr = Environment*;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
@@ -48,11 +41,12 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsTransparent() const;
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
-        SR_NODISCARD Properties& GetProperties() { return m_properties; }
-        SR_NODISCARD Property* GetProperty(const std::string& id);
+        SR_NODISCARD MaterialProperties& GetProperties() { return m_properties; }
+        SR_NODISCARD MaterialProperty* GetProperty(const std::string& id);
+        SR_NODISCARD MaterialProperty* GetProperty(uint64_t hashId);
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
-        void SetTexture(Property* property, Texture* pTexture);
+        void SetTexture(MaterialProperty* property, Texture* pTexture);
 
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
 
@@ -64,14 +58,18 @@ namespace SR_GTYPES_NS {
 
     private:
         bool Reload() override;
-        void InitShader();
+        bool Load() override;
+        bool Unload() override;
+
         void InitContext();
 
+        bool LoadProperties(const SR_XML_NS::Node& propertiesNode);
+
     private:
-        Types::Shader*               m_shader        = nullptr;
-        std::atomic<bool>            m_dirtyShader   = false;
-        Properties                   m_properties    = Properties();
-        RenderContextPtr             m_context       = { };
+        Types::Shader*     m_shader      = nullptr;
+        std::atomic<bool>  m_dirtyShader = false;
+        MaterialProperties m_properties  = { };
+        RenderContextPtr   m_context     = { };
 
     };
 }

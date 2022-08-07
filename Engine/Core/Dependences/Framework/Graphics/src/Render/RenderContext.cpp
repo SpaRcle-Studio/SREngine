@@ -263,9 +263,17 @@ namespace SR_GRAPH_NS {
 
             auto&& pPass = pTechnique->FindPass(name);
 
-            if (!pPass) {
-                continue;
+            if (auto&& pFbPass = dynamic_cast<FramebufferPass*>(pPass)) {
+                return pFbPass->GetFramebuffer();
             }
+        }
+
+        return nullptr;
+    }
+
+    RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name) const {
+        for (auto&& pTechnique : m_techniques) {
+            auto&& pPass = pTechnique->FindPass(name);
 
             if (auto&& pFbPass = dynamic_cast<FramebufferPass*>(pPass)) {
                 return pFbPass->GetFramebuffer();

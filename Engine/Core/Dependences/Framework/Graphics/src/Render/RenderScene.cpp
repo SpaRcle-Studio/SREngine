@@ -311,6 +311,7 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Synchronize() {
+        SortCameras();
         m_opaque.Update();
         m_transparent.Update();
     }

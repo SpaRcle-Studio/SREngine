@@ -32,6 +32,7 @@
 #include "../Graphics/src/Loaders/SRSL.cpp"
 #include "../Graphics/src/Loaders/SRSLParser.cpp"
 #include "../Graphics/src/Loaders/TextureLoader.cpp"
+#include "../Graphics/src/Loaders/ShaderProperties.cpp"
 
 #include "../Graphics/src/Memory/TextureConfigs.cpp"
 #include "../Graphics/src/Memory/MeshManager.cpp"
@@ -49,6 +50,7 @@
 #include "../Graphics/src/Pass/OpaquePass.cpp"
 #include "../Graphics/src/Pass/TransparentPass.cpp"
 #include "../Graphics/src/Pass/SortedTransparentPass.cpp"
+#include "../Graphics/src/Pass/PostProcessPass.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"

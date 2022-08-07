@@ -6,6 +6,7 @@
 #define SRENGINE_SRSL_H
 
 #include <Environment/Basic/IShaderProgram.h>
+#include <Loaders/ShaderProperties.h>
 #include <Loaders/SRSLParser.h>
 
 namespace SR_GRAPH_NS::SRSL {

@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool GroupPass::Load(const SR_XML_NS::Node &passNode) {
-        for (auto&& subPassNode : passNode.GetNodes()) {
+        for (auto&& subPassNode : passNode.TryGetNodes()) {
             if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(GetTechnique(), subPassNode)) {
                 m_passes.emplace_back(pPass);
             }

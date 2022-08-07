@@ -28,13 +28,11 @@ namespace SR_GTYPES_NS {
 
     public:
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
-        static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size, const SR_UTILS_NS::Path& shaderPath);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, const SR_UTILS_NS::Path& shaderPath);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_UTILS_NS::Path& shaderPath);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
 
     public:
         bool Bind();
-        void Draw();
 
         bool BeginRender(const ClearColors& clearColors, float_t depth);
         bool BeginRender();
@@ -49,30 +47,20 @@ namespace SR_GTYPES_NS {
         bool IsValid() const override;
         uint64_t GetFileHash() const override;
 
-    protected:
-        void OnResourceUpdated(IResource* pResource, int32_t deep) override;
-
     private:
         bool Init();
         bool OnResize();
-        bool InitShader();
 
     private:
-        Shader*                 m_shader         = nullptr;
-
         bool                    m_isInit         = false;
-        bool                    m_dynamicScaling = false;
         std::atomic<bool>       m_hasErrors      = false;
         std::atomic<bool>       m_needResize     = false;
-        std::atomic<bool>       m_dirtyShader    = false;
 
         std::vector<ColorLayer> m_colors         = { };
         DepthLayer              m_depth          = { };
         int32_t                 m_frameBuffer    = SR_ID_INVALID;
-        int32_t                 m_virtualUBO     = SR_ID_INVALID;
 
         SR_MATH_NS::IVector2    m_size           = { };
-        SR_UTILS_NS::Path       m_shaderPath     = SR_UTILS_NS::Path();
 
     };
 }
