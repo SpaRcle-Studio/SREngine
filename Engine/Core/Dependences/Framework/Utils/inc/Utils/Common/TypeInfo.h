@@ -25,7 +25,7 @@ namespace SR_UTILS_NS {
         String,
     );
 
-    static StandardType GetStandardType(const std::any& any) {
+    template<typename Any> static StandardType GetStandardType(const Any& any) {
         StandardType type = StandardType::Unknown;
 
         auto&& visitor = SR_UTILS_NS::Overloaded {

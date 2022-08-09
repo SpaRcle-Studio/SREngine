@@ -13,7 +13,12 @@
             <TransparentPass/>
         </Passes>
     </FramebufferPass>
-    <!--<PostProcessPass Shader="Engine/Shaders/postProcess.srsl">
+    <!--<SwapchainPass>
+        <OpaquePass/>
+        <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
+        <TransparentPass/>
+    </SwapchainPass>
+    <PostProcessPass Shader="Engine/Shaders/postProcess.srsl">
          <Property Id="scene" Type="Sampler2D" Attachment="SceneViewFBO" Layer=""
     </PostProcessPass>-->
 </Technique>

@@ -84,7 +84,7 @@ namespace SR_CORE_NS::GUI {
                     }
                 },
                 [&](float value) {
-                    if (ImGui::InputFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
+                    if (ImGui::DragFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value, 0.01f)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
@@ -130,7 +130,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {

@@ -11,7 +11,7 @@ namespace SR_SCRIPTING_NS {
     class EvoBehaviour : public SR_SCRIPTING_NS::Behaviour {
         using Properties = std::vector<std::string>;
     private:
-        ~EvoBehaviour() override = default;
+        ~EvoBehaviour() override;
 
     public:
         Properties GetProperties() const override;
@@ -29,8 +29,17 @@ namespace SR_SCRIPTING_NS {
         bool Unload() override;
         SR_NODISCARD uint64_t GetFileHash() const override;
 
+        void OnDestroy() override;
+
+        void OnAttached() override;
+
     private:
         void InitHooks();
+        void DeInitHooks();
+        void SetGameObject();
+
+        SR_HTYPES_NS::DataStorage Stash() override;
+        void PopStash(const SR_HTYPES_NS::DataStorage &data) override;
 
     private:
         EvoScript::Script* m_script = nullptr;

@@ -5,7 +5,7 @@
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
 
-       <CrashHandler Value="true"/>
+       <CrashHandler Value="false"/>
 
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>

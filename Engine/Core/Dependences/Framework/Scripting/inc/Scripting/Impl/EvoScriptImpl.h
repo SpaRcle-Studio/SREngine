@@ -24,14 +24,6 @@ namespace SR_SCRIPTING_NS {
     public:
         bool Compile() override;
 
-    public:
-        void Awake() override;
-        void Start() override;
-        void Close() override;
-        void Update() override;
-        void FixedUpdate() override;
-        void OnGUI() override;
-
     private:
         EvoScript::Script* m_script = nullptr;
 

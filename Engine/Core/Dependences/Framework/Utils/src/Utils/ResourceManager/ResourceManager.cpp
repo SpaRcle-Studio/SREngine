@@ -270,6 +270,8 @@ namespace SR_UTILS_NS {
 
         for (auto&& [_, type] : m_resources) {
             for (auto&& [path, info] : type.GetInfo()) {
+                bool needReload = false;
+
                 for (auto&& pResource : info.m_loaded) {
                     if (pResource->IsDestroyed()) {
                         continue;
@@ -277,9 +279,21 @@ namespace SR_UTILS_NS {
 
                     auto&& fileHash = pResource->GetFileHash();
                     if (fileHash != info.m_fileHash) {
-                        pResource->Reload();
+                        needReload = true;
                         info.m_fileHash = fileHash;
                     }
+                }
+
+                if (!needReload) {
+                    continue;
+                }
+
+                for (auto&& pResource : info.m_loaded) {
+                    if (pResource->IsDestroyed()) {
+                        continue;
+                    }
+
+                    pResource->Reload();
                 }
             }
         }

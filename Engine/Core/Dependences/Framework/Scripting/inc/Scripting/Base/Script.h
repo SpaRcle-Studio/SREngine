@@ -30,16 +30,7 @@ namespace SR_SCRIPTING_NS {
     public:
         SR_NODISCARD bool IsAutoFree() const;
 
-        virtual bool AwaitDestroy()          = 0;
-        virtual bool Compile()               = 0;
-        virtual bool DelayedDestroyAndFree() = 0;
-
-        virtual void Awake()       = 0;
-        virtual void Start()       = 0;
-        virtual void Close()       = 0;
-        virtual void Update()      = 0;
-        virtual void FixedUpdate() = 0;
-        virtual void OnGUI()       = 0;
+        virtual bool Compile() = 0;
 
     protected:
         Compiler*   m_compiler  = nullptr;

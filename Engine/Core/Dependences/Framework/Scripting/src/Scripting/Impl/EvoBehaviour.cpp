@@ -5,6 +5,10 @@
 #include <Scripting/Impl/EvoBehaviour.h>
 
 namespace SR_SCRIPTING_NS {
+    EvoBehaviour::~EvoBehaviour() {
+        SRAssert(!m_script);
+    }
+
     bool EvoBehaviour::Load() {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
@@ -23,6 +27,7 @@ namespace SR_SCRIPTING_NS {
             auto&& fullPath = GetAssociatedPath().Concat(path);
             if (!m_script || !m_script->Load(fullPath, compiler, true)) {
                 SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path);
+                SR_SAFE_DELETE_PTR(m_script);
                 return false;
             }
         }
@@ -32,6 +37,10 @@ namespace SR_SCRIPTING_NS {
         if (m_initBehaviour) {
             m_initBehaviour();
         }
+
+        SetGameObject();
+
+        SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
 
         return Behaviour::Load();
     }
@@ -45,22 +54,9 @@ namespace SR_SCRIPTING_NS {
             m_releaseBehaviour();
         }
 
-        m_initBehaviour = nullptr;
-        m_releaseBehaviour = nullptr;
-        m_getProperties = nullptr;
-        m_getProperty = nullptr;
-        m_setProperty = nullptr;
-        m_awake = nullptr;
-        m_onEnable = nullptr;
-        m_onDisable = nullptr;
-        m_start = nullptr;
-        m_update = nullptr;
+        DeInitHooks();
 
-        if (m_script) {
-            m_script->Destroy();
-            delete m_script;
-            m_script = nullptr;
-        }
+        SR_SAFE_DELETE_PTR(m_script)
 
         return !hasErrors;
     }
@@ -84,6 +80,19 @@ namespace SR_SCRIPTING_NS {
         return 0;
     }
 
+    void EvoBehaviour::DeInitHooks() {
+        m_initBehaviour = nullptr;
+        m_releaseBehaviour = nullptr;
+        m_getProperties = nullptr;
+        m_getProperty = nullptr;
+        m_setProperty = nullptr;
+        m_awake = nullptr;
+        m_onEnable = nullptr;
+        m_onDisable = nullptr;
+        m_start = nullptr;
+        m_update = nullptr;
+    }
+
     void EvoBehaviour::InitHooks() {
         m_initBehaviour = m_script->GetFunction<EvoScript::Typedefs::InitBehaviourFnPtr>("InitBehaviour");
         m_releaseBehaviour = m_script->GetFunction<EvoScript::Typedefs::ReleaseBehaviourFnPtr>("ReleaseBehaviour");
@@ -102,6 +111,7 @@ namespace SR_SCRIPTING_NS {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (!m_getProperties) {
+            SR_ERROR("EvoBehaviour::GetProperties() : properties getter invalid!");
             return EvoBehaviour::Properties();
         }
 
@@ -112,10 +122,13 @@ namespace SR_SCRIPTING_NS {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (!m_getProperty) {
+            SR_ERROR("EvoBehaviour::GetProperty() : property getter invalid!");
             return std::any();
         }
 
-        return m_getProperty(id);
+        std::any copy1 = m_getProperty(id);
+        std::any copy = copy1;
+        return copy;
     }
 
     void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
@@ -129,6 +142,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::Awake() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         if (m_awake) {
             m_awake();
         }
@@ -136,6 +151,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::OnEnable() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         if (m_onEnable) {
             m_onEnable();
         }
@@ -143,6 +160,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::OnDisable() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         if (m_onDisable) {
             m_onDisable();
         }
@@ -150,6 +169,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::Start() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         if (m_start) {
             m_start();
         }
@@ -157,9 +178,59 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::Update(float_t dt) {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         if (m_update) {
             m_update(dt);
         }
         Behaviour::Update(dt);
+    }
+
+    SR_HTYPES_NS::DataStorage EvoBehaviour::Stash() {
+        auto&& data = Behaviour::Stash();
+
+        data.SetPointer(m_script);
+        m_script = nullptr;
+
+        return std::move(data);
+    }
+
+    void EvoBehaviour::PopStash(const SR_HTYPES_NS::DataStorage &data) {
+        if (auto&& pScript = data.GetPointer<EvoScript::Script>()) {
+            delete pScript;
+        }
+
+        Behaviour::PopStash(data);
+    }
+
+    void EvoBehaviour::OnDestroy() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
+        if (m_releaseBehaviour) {
+            m_releaseBehaviour();
+        }
+
+        DeInitHooks();
+
+        SR_SAFE_DELETE_PTR(m_script)
+
+        Behaviour::OnDestroy();
+    }
+
+    void EvoBehaviour::OnAttached() {
+        SetGameObject();
+        Behaviour::OnAttached();
+    }
+
+    void EvoBehaviour::SetGameObject() {
+        if (!m_script) {
+            return;
+        }
+
+        typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
+
+        if (auto&& setter = m_script->GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
+            setter(GetGameObject());
+        }
     }
 }

@@ -6,11 +6,14 @@
 #define EVOSCRIPTLIB_BEHAVIOUR_H
 
 #include "../Utils/BehaviourRegistration.h"
+#include "GameObject.h"
 
 class Behaviour : public NonCopyable {
+    using GameObjectPtr = SafePtr<GameObject>;
+    using Any = std::any;
     using Property = std::pair<
-        std::function<std::any(void)>, /// getter
-        std::function<void(const std::any&)> /// setter
+        std::function<Any(void)>, /// getter
+        std::function<void(const Any&)> /// setter
     >;
 public:
     virtual void Awake() { }
@@ -24,8 +27,7 @@ public:
         return m_properties.count(id) == 1;
     }
 
-    std::any GetProperty(const std::string& id) {
-        /// TODO: unsafe
+    Any GetProperty(const std::string& id) {
         return m_properties.at(id).first();
     }
 
@@ -33,13 +35,18 @@ public:
         return m_propertyIds;
     }
 
-    void SetProperty(const std::string& id, const std::any& val) {
-        /// TODO: unsafe
+    void SetProperty(const std::string& id, const Any& val) {
         m_properties.at(id).second(val);
     }
 
+    void SetGameObject(GameObjectPtr ptr) {
+        if ((gameObject = ptr)) {
+            transform = gameObject->GetTransform();
+        }
+    }
+
 protected:
-    template<typename T> bool AddProperty(const std::string& id, T* property) {
+    template<typename T> bool AddProperty(const std::string& id, T* ref) {
         if (m_properties.count(id) == 1) {
             std::cerr << "Behaviour::AddProperty() : property already registered!\n\tId: " << id << '\n';
             return false;
@@ -48,11 +55,11 @@ protected:
         m_properties.insert(std::make_pair(
             id,
             std::make_pair(
-                [pProperty = property]() -> std::any
+                [pProperty = ref]() -> Any
                 {
-                    return *pProperty;
+                    return Any(*pProperty);
                 }, /// getter
-                [pProperty = property](const std::any& val)
+                [id, pProperty = ref](const Any& val)
                 {
                     try
                     {
@@ -60,7 +67,11 @@ protected:
                     }
                     catch(const std::bad_any_cast& e)
                     {
-                        std::cerr << "Behaviour::AddProperty() : failed to cast std::any!\n\tException: " << e.what() << '\n';
+                        std::cerr << "Behaviour::AddProperty() : failed to cast std::any!"
+                                     "\n\tException: " << e.what() <<
+                                     "\n\tType: " << typeid(T).name() <<
+                                     "\n\tAny: " << val.type().name() <<
+                                     "\n\tId: " << id << "\n";
                     }
                 } /// setter
             )
@@ -70,6 +81,10 @@ protected:
 
         return true;
     }
+
+protected:
+    GameObjectPtr gameObject;
+    Transform* transform = nullptr;
 
 private:
     std::unordered_map<std::string, Property> m_properties;

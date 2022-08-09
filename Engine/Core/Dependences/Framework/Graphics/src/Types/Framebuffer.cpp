@@ -281,7 +281,7 @@ namespace SR_GTYPES_NS {
     }
 
     int32_t Framebuffer::GetColorTexture(uint32_t layer) const {
-        if (layer >= m_colors.size()) {
+        if (layer >= m_colors.size() || m_hasErrors || m_needResize) {
             return SR_ID_INVALID;
         }
 

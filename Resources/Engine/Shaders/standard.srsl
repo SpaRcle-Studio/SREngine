@@ -7,7 +7,7 @@ PrimitiveTopology TriangleList;
 BlendEnabled false; 
 DepthWrite true;
 DepthTest true;
- 
+
 uniform vec4 color;
 uniform sampler2D diffuse;
 

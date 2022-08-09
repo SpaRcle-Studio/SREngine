@@ -20,6 +20,7 @@ namespace SR_SCRIPTING_NS {
         using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
         using TransformPtr = SR_UTILS_NS::Transform*;
         using Properties = std::vector<std::string>;
+        using ValueProperties = std::list<std::pair<std::string, std::any>>;
         SR_INLINE_STATIC SR_CONSTEXPR const char* EMPTY_ID = "EmptyBehaviour";
         SR_ENTITY_SET_VERSION(1002);
     protected:
@@ -41,12 +42,15 @@ namespace SR_SCRIPTING_NS {
         virtual void SetProperty(const std::string& id, const std::any& val) { }
 
     protected:
-        std::map<std::string, std::any> StashProperties() const;
-        void UnStashProperties(const std::map<std::string, std::any>& props);
+        virtual SR_HTYPES_NS::DataStorage Stash();
+        virtual void ApplyStash(const SR_HTYPES_NS::DataStorage& data);
+        virtual void PopStash(const SR_HTYPES_NS::DataStorage& data);
 
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
         SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
+
+        void OnAttached() override;
 
         bool Load() override { return SR_UTILS_NS::IResource::Load(); }
         bool Unload() override { return SR_UTILS_NS::IResource::Unload(); }

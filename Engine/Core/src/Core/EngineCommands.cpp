@@ -61,7 +61,7 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
     if (!m_backup.Valid())
         return false;
 
-    if (m_scene.LockIfValid()) {
+    if (m_scene.RecursiveLockIfValid()) {
         auto ptr = m_scene->Instance(m_backup);
         m_scene.Unlock();
         return true;

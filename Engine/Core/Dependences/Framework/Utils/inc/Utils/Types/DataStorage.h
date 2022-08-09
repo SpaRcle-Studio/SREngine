@@ -13,7 +13,19 @@ namespace SR_HTYPES_NS {
     public:
         using Ptr = DataStorage*;
 
+        DataStorage() = default;
         ~DataStorage() override = default;
+
+        DataStorage(DataStorage &&data) noexcept {
+            m_pointers = std::exchange(data.m_pointers, {});
+            m_values = std::exchange(data.m_values, {});
+        }
+
+        DataStorage &operator=(DataStorage &&data) noexcept {
+            m_pointers = std::exchange(data.m_pointers, {});
+            m_values = std::exchange(data.m_values, {});
+            return *this;
+        }
 
     public:
         template<typename T> void SetPointer(const std::string& name, T* pointer);

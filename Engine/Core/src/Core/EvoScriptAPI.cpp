@@ -42,7 +42,7 @@ namespace Framework {
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
 
-            generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Libraries/"));
+            generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
         else {
             SR_ERROR("API::RegisterEvoScriptClasses() : generator is nullptr!");
@@ -51,7 +51,7 @@ namespace Framework {
         if (casts) {
             RegisterCasts(casts);
 
-            casts->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Libraries/"));
+            casts->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
         else {
             SR_ERROR("API::RegisterEvoScriptClasses() : casts is nullptr!");
@@ -208,14 +208,14 @@ namespace Framework {
         using namespace SR_MATH_NS;
 
         generator->RegisterNewClass("GameObject", "GameObject",
-                { "Math/Vector3.h", "string", "Transform3D.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "ISavable.h" },
+                { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "ISavable.h" },
         { { "SafePtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
-        //ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform3D*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
 
         using namespace Xml;
 
@@ -268,13 +268,14 @@ namespace Framework {
     }
 
     void API::RegisterTransform(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("Transform3D", "Transform3D", { "vector", "mutex", "stdint.h", "Math/Vector3.h", "Math/Vector2.h" });
+        generator->RegisterNewClass("Transform", "Transform", { "vector", "mutex", "stdint.h", "Math/Vector3.h", "Math/Vector2.h" });
 
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
 
-        ESRegisterMethod(EvoScript::Public, generator, Transform3D, Rotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
-        ESRegisterMethod(EvoScript::Public, generator, Transform3D, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, Rotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
     }
 
     void API::RegisterInput(EvoScript::AddressTableGen *generator) {

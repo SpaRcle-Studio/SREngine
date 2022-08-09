@@ -127,15 +127,17 @@ namespace SR_SCRIPTING_NS {
 
         m_loadState = LoadState::Reloading;
 
-        auto&& stash = StashProperties();
+        auto&& stash = Stash();
 
         Unload();
 
         if (!Load()) {
+            PopStash(stash);
             return false;
         }
 
-        UnStashProperties(stash);
+        ApplyStash(stash);
+        PopStash(stash);
 
         m_loadState = LoadState::Loaded;
 
@@ -148,23 +150,34 @@ namespace SR_SCRIPTING_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    std::map<std::string, std::any> Behaviour::StashProperties() const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+    SR_HTYPES_NS::DataStorage Behaviour::Stash() {
+        SR_HTYPES_NS::DataStorage storage;
 
-        auto&& stash = std::map<std::string, std::any>();
+        auto&& props = ValueProperties();
 
         for (auto&& propertyId : GetProperties()) {
-            stash[propertyId] = GetProperty(propertyId);
+            props.emplace_back(std::make_pair(
+                propertyId,
+                GetProperty(propertyId)
+            ));
         }
 
-        return stash;
+        storage.SetValue(props);
+
+        return storage;
     }
 
-    void Behaviour::UnStashProperties(const std::map<std::string, std::any> &props) {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        for (auto&& [propertyId, value] : props) {
+    void Behaviour::ApplyStash(const SR_HTYPES_NS::DataStorage& data) {
+        for (auto&& [propertyId, value] : data.GetValue<ValueProperties>()) {
             SetProperty(propertyId, value);
         }
+    }
+
+    void Behaviour::PopStash(const SR_HTYPES_NS::DataStorage& data) {
+        /** nothing */
+    }
+
+    void Behaviour::OnAttached() {
+        Component::OnAttached();
     }
 }

@@ -67,7 +67,7 @@ namespace SR_HTYPES_NS {
 
         template<typename T> void Write(const T& value) {
             if constexpr (std::is_same_v<T, std::any>) {
-                MarshalUtils::SaveAny(m_stream, value, m_size);
+                MarshalUtils::SaveAny<std::stringstream, std::any>(m_stream, value, m_size);
             }
             else if constexpr (Math::IsString<T>()) {
                 MarshalUtils::SaveString(m_stream, value, m_size);
@@ -105,7 +105,7 @@ namespace SR_HTYPES_NS {
 
         template<typename T> T Read() {
             if constexpr (std::is_same_v<T, std::any>) {
-                return MarshalUtils::LoadAny<std::stringstream>(m_stream, m_position);
+                return MarshalUtils::LoadAny<std::stringstream, std::any>(m_stream, m_position);
             }
             else if constexpr (Math::IsString<T>()) {
                 return MarshalUtils::LoadStr<std::stringstream>(m_stream, m_position);

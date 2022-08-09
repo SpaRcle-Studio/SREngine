@@ -15,8 +15,6 @@
 
 
 namespace SR_HTYPES_NS {
-    static std::atomic<int64_t> SAFE_POINTER_COUNTS = 0;
-
     #define SR_NEW_SAFE_PTR() {                              \
         }                                                    \
 
@@ -72,26 +70,10 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD void* GetRawPtr() const { return (void*)m_ptr; }
         SR_NODISCARD SafePtr<T> GetThis() {
             return SafePtr<T>(*this);
-            /*SafePtr<T> ptr;
-
-            if (ptr.m_data) {
-                SR_DEL_SAFE_PTR();
-                delete ptr.m_data;
-            }
-
-            ptr.m_data = m_data;
-
-            ++(ptr.m_data->m_useCount);
-            ptr.m_ptr = m_ptr;
-
-            return ptr;*/
         }
         SR_NODISCARD bool Valid() const { return m_data && m_data->m_valid; }
         SR_NODISCARD bool IsLocked() const { return Valid() && m_data->m_lock; }
         SR_NODISCARD uint32_t GetUseCount() const;
-
-        [[deprecated("Ref-unsafe. Replaced by AutoFree")]]
-        bool Free(const std::function<void(T *ptr)> &freeFun);
 
         bool AutoFree(const std::function<void(T *ptr)> &freeFun);
     private:
@@ -230,12 +212,6 @@ namespace SR_HTYPES_NS {
             return true;
         } else
             return false;
-    }
-
-    template<typename T> bool SafePtr<T>::Free(const std::function<void(T *)> &freeFun) {
-        SafePtr<T> ptrCopy = SafePtr<T>(*this);
-        /// после вызова FreeImpl this может потенциально инвалидироваться!
-        return ptrCopy.FreeImpl(freeFun);
     }
 
     template<typename T> void SafePtr<T>::Lock() const {
