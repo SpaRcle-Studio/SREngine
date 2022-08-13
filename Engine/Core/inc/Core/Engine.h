@@ -51,11 +51,17 @@ namespace Framework {
 
     public:
         void Reload();
+
         bool SetScene(const ScenePtr& scene);
+        void SetActive(bool isActive);
+        void SetPaused(bool isPaused);
+        void SetSpeed(float_t speed);
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD SR_INLINE Graphics::Window* GetWindow() const { return m_window; }
+        SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
+        SR_NODISCARD SR_INLINE bool IsPaused() const { return m_isPaused; }
         SR_NODISCARD SR_INLINE Core::GUI::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
 
@@ -82,6 +88,7 @@ namespace Framework {
 
         std::atomic<bool> m_exitEvent   = false;
         std::atomic<bool> m_isActive    = false;
+        std::atomic<bool> m_isPaused    = false;
 
         float_t m_speed = 1.f;
         float_t m_updateFrequency = 1.f;

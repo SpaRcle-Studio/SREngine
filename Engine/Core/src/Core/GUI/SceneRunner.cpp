@@ -16,6 +16,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneRunner::Draw() {
+        auto&& engine = Engine::Instance();
+
         auto&& font = SR_GRAPH_NS::Environment::Get()->GetIconFont();
         float_t scale = font->Scale;
         font->Scale /= 3;
@@ -25,8 +27,8 @@ namespace SR_CORE_NS::GUI {
         bool locked = false;
 
         if (m_scene.TryRecursiveLockIfValid()) {
-            m_isActive = m_scene->IsActive();
-            m_isPaused = m_scene->IsPaused();
+            m_isActive = engine.IsActive();
+            m_isPaused = engine.IsPaused();
             m_lastPath = std::move(m_scene->GetPath());
             locked = true;
         }
@@ -77,8 +79,8 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (locked) {
-            m_scene->SetActive((m_isActive = active));
-            m_scene->SetPaused((m_isPaused = paused));
+            engine.SetActive((m_isActive = active));
+            engine.SetPaused((m_isPaused = paused));
             m_scene.Unlock();
         }
     }

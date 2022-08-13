@@ -72,6 +72,7 @@ namespace SR_GTYPES_NS {
 
     public:
         SR_NODISCARD virtual bool IsCanCalculate() const;
+        SR_NODISCARD bool ExecuteInEditMode() const override;
 
         SR_NODISCARD Shader* GetShader() const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }

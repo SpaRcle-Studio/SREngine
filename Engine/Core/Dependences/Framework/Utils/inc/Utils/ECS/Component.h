@@ -14,16 +14,7 @@
 #include <Utils/World/Scene.h>
 
 /**
- *  Component adding if enabled:
- *      Reset() -> OnEnabled()
- *
- *  Component adding if disabled: nothing
- *
- *  Component removing if enabled:
- *      OnDisabled() -> OnDestroy()
- *
- *  Component removing if disabled and started:
- *      OnDestroy()
+ * Awake -> OnEnabled -> Start -> Update -> FixedUpdate
  */
 
 namespace SR_HTYPES_NS {
@@ -69,12 +60,12 @@ namespace SR_UTILS_NS {
         void SetEnabled(bool value);
 
         /// Активен и компонент и его родительский объект
-        SR_NODISCARD bool IsActive() const noexcept;
+        SR_NODISCARD virtual bool IsActive() const noexcept;
         /// Активен сам компонент, независимо от объекта
-        SR_NODISCARD bool IsEnabled() const noexcept;
+        SR_NODISCARD virtual bool IsEnabled() const noexcept;
 
-        SR_NODISCARD bool IsAwake() const noexcept { return m_isAwake; }
-        SR_NODISCARD bool IsStarted() const noexcept { return m_isStarted; }
+        SR_NODISCARD virtual bool IsAwake() const noexcept { return m_isAwake; }
+        SR_NODISCARD virtual bool IsStarted() const noexcept { return m_isStarted; }
 
         SR_NODISCARD virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }

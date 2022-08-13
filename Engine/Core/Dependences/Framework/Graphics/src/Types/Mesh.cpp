@@ -61,16 +61,20 @@ namespace SR_GRAPH_NS::Types {
             return pMesh;
         }
 
-        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
-            if (id >= pRawMesh->GetMeshesCount()) {
-                if (pRawMesh->GetCountUses() == 0) {
-                    SRHalt("Mesh::TryLoad() : count uses is zero! Unresolved situation...");
-                    pRawMesh->Destroy();
-                }
-                return nullptr;
-            }
+        bool exists = false;
+
+        /// Проверяем существование меша
+        SR_HTYPES_NS::RawMesh* pRawMesh = nullptr;
+        if (pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
+            pRawMesh->AddUsePoint();
+            exists = id < pRawMesh->GetMeshesCount();
         }
         else {
+            return nullptr;
+        }
+
+        if (!exists) {
+            pRawMesh->RemoveUsePoint();
             return nullptr;
         }
 
@@ -94,6 +98,7 @@ namespace SR_GRAPH_NS::Types {
             case MeshType::Skinned:
             default:
                 SRAssert(false);
+                pRawMesh->RemoveUsePoint();
                 return pMesh;
         }
 
@@ -101,6 +106,7 @@ namespace SR_GRAPH_NS::Types {
             pMesh->SetId(resourceId, false /** auto register */);
 
             if (!pMesh->Reload()) {
+                pRawMesh->RemoveUsePoint();
                 delete pMesh;
                 return nullptr;
             }
@@ -108,6 +114,8 @@ namespace SR_GRAPH_NS::Types {
             /// отложенная ручная регистрация
             SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMesh);
         }
+
+        pRawMesh->RemoveUsePoint();
 
         return pMesh;
     }
@@ -292,6 +300,10 @@ namespace SR_GRAPH_NS::Types {
 
         static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
         return matrix4X4;
+    }
+
+    bool Mesh::ExecuteInEditMode() const {
+        return true;
     }
 }
 

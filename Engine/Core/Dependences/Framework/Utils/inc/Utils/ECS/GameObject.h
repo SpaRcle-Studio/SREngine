@@ -80,7 +80,6 @@ namespace SR_UTILS_NS {
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
         std::list<Component*> GetComponents() { return m_components; }
-        //std::list<Component*>& GetComponentsRef() { return m_components; }
 
         /** Отличие от AddComponent в том, что используется только при загрузке объекта,
          * не вызывая при этом Awake -> OnEnable -> Start */
@@ -104,10 +103,10 @@ namespace SR_UTILS_NS {
         bool AddChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
 
-        void Awake();
+        void Awake(bool isPaused);
         void Start();
-        void FixedUpdate();
-        void Update(float_t dt);
+        void FixedUpdate(bool isPaused);
+        void Update(float_t dt, bool isPaused);
 
         void CheckActivity();
 

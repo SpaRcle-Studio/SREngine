@@ -221,10 +221,15 @@ namespace SR_UTILS_NS {
 
         IResource* pResource = m_resources.at(Name).Find(ID);
 
-        if (pResource && !pResource->IsDestroyed())
-            return pResource;
+        if (!pResource) {
+            return nullptr;
+        }
 
-        return nullptr;
+        if (pResource->IsDestroyed()) {
+            return nullptr;
+        }
+
+        return pResource;
     }
 
     void ResourceManager::Synchronize(bool force) {

@@ -394,9 +394,10 @@ namespace Framework {
             return;
         }
 
-        for (auto&& gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->FixedUpdate();
+        for (auto &&gameObject : m_scene->GetRootGameObjects()) {
+            gameObject->FixedUpdate(!m_isActive || m_isPaused);
         }
+
 
         if (m_editor) {
             m_editor->Update();
@@ -405,7 +406,7 @@ namespace Framework {
 
     void Engine::Update(float_t dt) {
         for (auto&& gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->Update(dt);
+            gameObject->Update(dt, !m_isActive || m_isPaused);
         }
     }
 
@@ -413,7 +414,7 @@ namespace Framework {
         auto&& root = m_scene->GetRootGameObjects();
 
         for (auto&& gameObject : root) {
-            gameObject->Awake();
+            gameObject->Awake(!m_isActive || m_isPaused);
         }
 
         for (auto&& gameObject : root) {
@@ -423,5 +424,17 @@ namespace Framework {
         for (auto&& gameObject : root) {
             gameObject->Start();
         }
+    }
+
+    void Engine::SetActive(bool isActive) {
+        m_isActive = isActive;
+    }
+
+    void Engine::SetSpeed(float_t speed) {
+        m_speed = speed;
+    }
+
+    void Engine::SetPaused(bool isPaused) {
+        m_isPaused = isPaused;
     }
 }

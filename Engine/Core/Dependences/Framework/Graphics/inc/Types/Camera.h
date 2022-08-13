@@ -35,7 +35,6 @@ namespace SR_GTYPES_NS {
         void UpdateProjection(uint32_t w, uint32_t h);
 
     public:
-        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetOrthogonalRef() const noexcept { return m_orthogonal; }

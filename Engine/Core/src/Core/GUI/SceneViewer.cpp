@@ -11,6 +11,7 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Window/Window.h>
 #include <Types/Camera.h>
+#include <Core/GUI/EditorCamera.h>
 #include <Types/Framebuffer.h>
 
 namespace SR_CORE_NS::GUI {
@@ -185,7 +186,7 @@ namespace SR_CORE_NS::GUI {
 
         const auto size = m_window->GetWindowSize();
 
-        auto&& pCamera = new SR_GTYPES_NS::Camera(size.x, size.y);
+        auto&& pCamera = new EditorCamera(size.x, size.y);
         pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
 
         camera->AddComponent(pCamera);

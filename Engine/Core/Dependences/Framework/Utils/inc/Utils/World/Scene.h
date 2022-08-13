@@ -97,16 +97,12 @@ namespace SR_WORLD_NS {
         bool Destroy();
         bool Free();
         void Update(float_t dt);
-        void RunScene();
-        void StopScene();
 
     public:
         void SetWorldOffset(const World::Offset& offset);
         void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetName(const std::string& name) { m_name = name; }
         void SetPath(const Path& path) { m_path = path; }
-        void SetActive(bool value) { m_isActive = value; }
-        void SetPaused(bool value) { m_isPaused = value; }
         void SetObserver(const GameObjectPtr& target);
 
         SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat("regions"); }
@@ -115,8 +111,6 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
-        SR_NODISCARD bool IsPaused() const { return m_isPaused; }
-        SR_NODISCARD bool IsActive() const { return m_isActive; }
 
         GameObjects& GetRootGameObjects();
         GameObjects GetGameObjectsAtChunk(const Math::IVector3& region, const Math::IVector3& chunk);
@@ -139,8 +133,6 @@ namespace SR_WORLD_NS {
         bool ReloadConfig();
         bool ReloadChunks();
 
-        void UpdateTree();
-
     private:
         void CheckShift(const Math::IVector3& chunk);
         void UpdateContainers();
@@ -157,8 +149,6 @@ namespace SR_WORLD_NS {
         bool                         m_isDestroy           = false;
 
         std::atomic<bool>            m_isHierarchyChanged  = false;
-        std::atomic<bool>            m_isActive            = false;
-        std::atomic<bool>            m_isPaused            = false;
 
         StringAtom                   m_name                = "Unnamed";
         Path                         m_path                = Path();

@@ -247,6 +247,10 @@ namespace SR_UTILS_NS {
         m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
 
         for (auto&& pComponent : m_components.Get()) {
+            if (!pComponent->IsAwake()) {
+                continue;
+            }
+
             pComponent->CheckActivity();
         }
 
@@ -256,7 +260,7 @@ namespace SR_UTILS_NS {
     }
 
 
-    void GameObject::Awake() {
+    void GameObject::Awake(bool isPaused) {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
         if (!IsEnabled()) {
@@ -264,6 +268,10 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& pComponent : m_components.Get()) {
+            if (isPaused && !pComponent->ExecuteInEditMode()) {
+                continue;
+            }
+
             if (pComponent->IsAwake()) {
                 continue;
             }
@@ -272,7 +280,7 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& child : m_children) {
-            child->Awake();
+            child->Awake(isPaused);
         }
     }
 
@@ -284,6 +292,10 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& pComponent : m_components.Get()) {
+            if (!pComponent->IsAwake()) {
+                continue;
+            }
+
             if (pComponent->IsStarted()) {
                 continue;
             }
@@ -554,7 +566,7 @@ namespace SR_UTILS_NS {
 
     }
 
-    void GameObject::FixedUpdate() {
+    void GameObject::FixedUpdate(bool isPaused) {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
         if (!IsEnabled()) {
@@ -562,6 +574,10 @@ namespace SR_UTILS_NS {
         }
 
         for (auto &&pComponent : m_components.Get()) {
+            if (isPaused && !pComponent->ExecuteInEditMode()) {
+                continue;
+            }
+
             if (!pComponent->IsEnabled() || !pComponent->IsStarted()) {
                 continue;
             }
@@ -570,11 +586,11 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& child : m_children) {
-            child->FixedUpdate();
+            child->FixedUpdate(isPaused);
         }
     }
 
-    void GameObject::Update(float_t dt) {
+    void GameObject::Update(float_t dt, bool isPaused) {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
         if (!IsEnabled()) {
@@ -582,6 +598,10 @@ namespace SR_UTILS_NS {
         }
 
         for (auto &&pComponent : m_components.Get()) {
+            if (isPaused && !pComponent->ExecuteInEditMode()) {
+                continue;
+            }
+
             if (!pComponent->IsEnabled() || !pComponent->IsStarted()) {
                 continue;
             }
@@ -590,7 +610,7 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& child : m_children) {
-            child->Update(dt);
+            child->Update(dt, isPaused);
         }
     }
 }

@@ -312,10 +312,6 @@ namespace SR_WORLD_NS {
             }
         }
 
-        if (m_isActive) {
-            UpdateTree();
-        }
-
         if (m_shiftEnabled) {
             CheckShift(m_observer->m_targetPosition.Cast<int>() / chunkSize);
         }
@@ -523,26 +519,6 @@ namespace SR_WORLD_NS {
         }
 
         return SafePtr<GameObject>(nullptr);
-    }
-
-    void Scene::UpdateTree() {
-        auto&& root = GetRootGameObjects();
-
-        for (auto&& gameObject : root) {
-            gameObject->Awake();
-        }
-
-        for (auto&& gameObject : root) {
-            gameObject->Start();
-        }
-    }
-
-    void Scene::RunScene() {
-        m_isActive = true;
-    }
-
-    void Scene::StopScene() {
-        m_isActive = false;
     }
 
     void Scene::SetObserver(const Scene::GameObjectPtr &target) {
