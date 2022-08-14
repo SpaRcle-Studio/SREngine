@@ -338,7 +338,7 @@ namespace SR_UTILS_NS::Platform {
 #endif
     }
 
-    bool Delete(const Path &path) {
+    bool Delete(const Path &path) { ///TODO: Обезопасить от безвозвратного удаления файлов
         if (path.IsFile()) {
             const bool result = std::remove(path.CStr()) == 0;
 

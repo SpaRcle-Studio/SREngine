@@ -395,12 +395,12 @@ namespace SR_UTILS_NS {
         }
 
         // Cut string (file name) to output it
-        static std::string CutName(std::wstring str, unsigned int frompos){
+        static std::string CutName(std::string str, unsigned int frompos){
             if (str.size() > frompos){
                 str = str.substr(0,frompos);
-                str.append(L"..."); //должно быть "…", но юникод символы не поддерживаются
+                str.append("..."); //должно быть "…", но utf-16 символы не поддерживаются в ImGui, вероятно можно выбрать набор с нужными глифами
             }
-            return wstring_to_utf8(str);
+            return str;
         }
 
 #ifdef WIN32
