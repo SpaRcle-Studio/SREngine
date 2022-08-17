@@ -115,13 +115,16 @@ namespace SR_GRAPH_NS::GUI {
             SR_MATH_NS::FVector3 translation, rotation, scale;
             SR_MATH_NS::DecomposeTransform(transform, translation, rotation, scale);
 
+            translation = translation.InverseAxis(0);
+            rotation = rotation.Degrees().InverseAxis(1).InverseAxis(2);
+
             switch (m_operation) {
                 case ImGuizmo::TRANSLATE: {
-                    m_transform->SetTranslation(translation.InverseAxis(0));
+                    m_transform->SetGlobalTranslation(translation);
                     break;
                 }
                 case ImGuizmo::ROTATE: {
-                    m_transform->SetRotation(rotation.Degrees().InverseAxis(1).InverseAxis(2));
+                    m_transform->SetGlobalRotation(rotation);
                     break;
                 }
                 case ImGuizmo::SCALE: {
@@ -162,8 +165,14 @@ namespace SR_GRAPH_NS::GUI {
     glm::mat4 Guizmo::GetMatrix() {
         glm::mat4 matrix = glm::mat4(1.0f);
 
-        const SR_MATH_NS::FVector3 translation = m_transform->GetTranslation().InverseAxis(0);
-        const SR_MATH_NS::FVector3 rotation = m_transform->GetRotation().InverseAxis(1).InverseAxis(2);
+        //const SR_MATH_NS::FVector3 translation = m_transform->GetTranslation().InverseAxis(0);
+        //const SR_MATH_NS::FVector3 rotation = m_transform->GetRotation().InverseAxis(1).InverseAxis(2);
+        //const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
+
+        auto&& transformation = m_transform->GetMatrix();
+
+        const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(0);
+        const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(1).InverseAxis(2);
         const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
 
         matrix = glm::translate(matrix, translation.ToGLM());

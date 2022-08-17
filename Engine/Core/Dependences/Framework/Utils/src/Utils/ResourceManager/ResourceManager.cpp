@@ -225,10 +225,6 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        if (pResource->IsDestroyed()) {
-            return nullptr;
-        }
-
         return pResource;
     }
 

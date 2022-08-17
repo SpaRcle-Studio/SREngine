@@ -75,7 +75,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE GameObject* GetParent() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
-        SR_NODISCARD Transform* GetTransform() const;
+        SR_NODISCARD Transform* GetTransform() const noexcept;
 
     protected:
         template<typename T> void InitComponent() {

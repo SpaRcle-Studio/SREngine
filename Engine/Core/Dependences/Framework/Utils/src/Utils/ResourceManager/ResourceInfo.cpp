@@ -13,8 +13,17 @@ namespace SR_UTILS_NS {
             if (pIt->second.empty()) {
                 return nullptr;
             }
-            else
-                return *pIt->second.begin();
+            else {
+                for (auto&& pResource : pIt->second) {
+                    if (pResource->IsDestroyed()) {
+                        continue;
+                    }
+
+                    return pResource;
+                }
+
+                return nullptr;
+            }
         }
     }
 

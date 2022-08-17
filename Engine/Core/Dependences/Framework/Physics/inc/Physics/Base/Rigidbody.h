@@ -7,23 +7,46 @@
 
 #include <Physics/PhysicsLib.h>
 #include <Utils/ECS/Component.h>
+#include <Utils/Types/SafePointer.h>
+
+namespace SR_PHYSICS_NS {
+    class PhysicsScene;
+}
 
 namespace SR_PHYSICS_NS::Types {
     class Rigidbody : public SR_UTILS_NS::Component {
+        friend class SR_PHYSICS_NS::PhysicsScene;
+    public:
+        using ComponentPtr = SR_UTILS_NS::Component*;
+        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+
     public:
         Rigidbody();
-        ~Rigidbody() override = default;
+        ~Rigidbody() override;
+
+    public:
+        virtual void UpdateMatrix();
 
     protected:
         void OnAttached() override;
 
-        //void OnDestroy() override;
+        void OnMatrixDirty() override;
 
-        //void OnDisabled() override;
-        //void OnEnabled() override;
+        virtual bool InitShape();
+        virtual bool InitBody();
+
+        PhysicsScenePtr GetPhysicsScene();
 
     private:
+        PhysicsScenePtr m_physicsScene;
+
         btRigidBody* m_rigidbody = nullptr;
+        btCollisionShape* m_shape = nullptr;
+        btMotionState* m_motionState = nullptr;
+
+        bool m_dirty = false;
+
+        float_t m_mass = 0.1f;
 
     };
 }

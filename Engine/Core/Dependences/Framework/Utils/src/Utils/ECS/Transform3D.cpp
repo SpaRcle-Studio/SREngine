@@ -58,9 +58,6 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::SetRotation(const SR_MATH_NS::FVector3& euler) {
-        SR_MATH_NS::FVector3 delta = (SR_MATH_NS::Quaternion::FromEuler(euler.FixEulerAngles()) *
-                SR_MATH_NS::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
-
         m_rotation = euler.Limits(360);
 
         UpdateTree();
@@ -88,8 +85,6 @@ namespace SR_UTILS_NS {
             scale = SR_MATH_NS::FVector3::One();
         }
 
-        SR_MATH_NS::FVector3 delta = scale / m_scale;
-
         m_scale = scale;
 
         UpdateTree();
@@ -102,8 +97,6 @@ namespace SR_UTILS_NS {
             SR_WARN("Transform3D::GlobalSkew() : skew contains NaN! Reset...");
             skew = SR_MATH_NS::FVector3::One();
         }
-
-        SR_MATH_NS::FVector3 delta = skew / m_skew;
 
         m_skew = skew;
 
@@ -131,6 +124,45 @@ namespace SR_UTILS_NS {
 
     void Transform3D::Scale(const SR_MATH_NS::FVector3& scale) {
         SetScale(m_scale * scale);
+    }
+
+    void Transform3D::SetGlobalTranslation(const SR_MATH_NS::FVector3 &translation) {
+        if (auto&& pParent = GetParentTransform()) {
+            auto matrix = SR_MATH_NS::Matrix4x4::FromTranslate(translation);
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
+            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation.Inverse());
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+            matrix = pParent->GetMatrix().Inverse() * matrix;
+
+            m_translation = matrix.GetTranslate();
+
+            UpdateTree();
+        }
+        else {
+            SetTranslation(translation);
+        }
+    }
+
+    void Transform3D::SetGlobalRotation(const SR_MATH_NS::FVector3 &eulers) {
+        if (auto&& pParent = GetParentTransform()) {
+            auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);
+            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(eulers);
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+            matrix = pParent->GetMatrix().Inverse() * matrix;
+
+            m_rotation = matrix.GetEulers();
+
+            UpdateTree();
+        }
+        else {
+            auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);
+            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(eulers);
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+            SetRotation(matrix.GetEulers());
+        }
     }
 }
 

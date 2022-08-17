@@ -83,10 +83,11 @@ namespace SR_WORLD_NS {
         using Super = Types::SafePtr<Scene>;
         using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
 
+        virtual ~Scene();
+
     protected:
         Scene();
         explicit Scene(const std::string& name);
-        virtual ~Scene() = default;
 
     public:
         static Types::SafePtr<Scene> New(const Path& path);
@@ -95,7 +96,6 @@ namespace SR_WORLD_NS {
         bool Save();
         bool SaveAt(const Path& path);
         bool Destroy();
-        bool Free();
         void Update(float_t dt);
 
     public:

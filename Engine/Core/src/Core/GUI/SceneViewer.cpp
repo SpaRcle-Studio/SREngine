@@ -45,8 +45,8 @@ namespace SR_CORE_NS::GUI {
 
                     DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
 
-                    //if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
-                    //    m_guizmo->Draw(*selected.begin(), m_camera);
+                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                        m_guizmo->Draw(*selected.begin(), m_camera);
 
                     CheckFocused();
                     CheckHovered();
@@ -190,6 +190,9 @@ namespace SR_CORE_NS::GUI {
         pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
 
         camera->AddComponent(pCamera);
+
+        /// Камера редактора имеет наивысшый закадровый приоритет
+        pCamera->SetPriority(SR_INT32_MIN);
 
         camera->GetTransform()->GlobalTranslate(m_translation);
         camera->GetTransform()->GlobalRotate(m_rotation);

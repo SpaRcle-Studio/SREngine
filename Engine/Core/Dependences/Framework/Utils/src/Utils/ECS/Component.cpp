@@ -89,7 +89,7 @@ namespace SR_UTILS_NS {
         });
     }
 
-    Transform *Component::GetTransform() const {
+    Transform *Component::GetTransform() const noexcept {
         return m_parent.Do<Transform *>([](auto &&data) {
             return data ? data->GetTransform() : nullptr;
         });

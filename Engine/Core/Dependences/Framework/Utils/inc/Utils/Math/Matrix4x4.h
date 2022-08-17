@@ -161,7 +161,7 @@ namespace SR_MATH_NS {
             return false;
         }
 
-        [[nodiscard]] Quaternion GetQuat() const {
+        SR_NODISCARD Quaternion GetQuat() const {
             glm::vec3 scale;
             glm::quat rotation;
             glm::vec3 translation;
@@ -172,6 +172,10 @@ namespace SR_MATH_NS {
             glm::decompose(self, scale, rotation, translation, skew, perspective);
 
             return Quaternion(rotation);
+        }
+
+        SR_NODISCARD FVector3 GetEulers() const {
+            return GetQuat().EulerAngle();
         }
 
         Matrix4x4 operator*(const Matrix4x4& mat) const {

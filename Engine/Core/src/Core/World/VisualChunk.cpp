@@ -54,8 +54,8 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_stayMesh) {
-            if (auto &&meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe); !meshes.empty()) {
-                m_stayMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(meshes.at(0));
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+                m_stayMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
             }
             else
                 return;
@@ -82,8 +82,8 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_loadMesh && m_position.y == 1 && m_regionPosition.y == 1) {
-            if (auto &&meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe); !meshes.empty()) {
-                m_loadMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(meshes.at(0));
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+                m_loadMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
             }
             else
                 return;

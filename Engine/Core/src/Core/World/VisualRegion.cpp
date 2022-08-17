@@ -25,8 +25,8 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_mesh && m_position.y == 1) {
-            if (auto&& meshes = Mesh::Load("Engine/Models/planeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
-                m_mesh = dynamic_cast<DebugWireframeMesh *>(meshes.at(0));
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+                m_mesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
             }
             else
                 return;

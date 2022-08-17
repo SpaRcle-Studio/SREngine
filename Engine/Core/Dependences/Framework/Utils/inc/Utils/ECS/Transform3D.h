@@ -26,6 +26,9 @@ namespace SR_UTILS_NS {
         /// Transforms direction from local space to world space
         SR_NODISCARD SR_MATH_NS::FVector3 TransformDirection(const SR_MATH_NS::FVector3& direction) const;
 
+        void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) override;
+        void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
+
         void SetTranslation(const SR_MATH_NS::FVector3& translation) override;
         void SetTranslationAndRotation(const SR_MATH_NS::FVector3& translation, const SR_MATH_NS::FVector3& euler) override;
         void SetRotation(const SR_MATH_NS::FVector3& euler) override;

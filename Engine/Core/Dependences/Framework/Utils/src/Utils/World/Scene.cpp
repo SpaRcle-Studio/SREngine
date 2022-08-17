@@ -134,23 +134,14 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    bool Scene::Free() {
-        if (!m_isDestroy) {
-            SR_ERROR("Scene::Free() : scene \"" + std::string(m_name) + "\" is not destroyed!");
-            return false;
+    Scene::~Scene() {
+        SRAssert(m_isDestroy);
+
+        if (Debug::Instance().GetLevel() >= Debug::Level::Low) {
+            SR_LOG("Scene::~Scene() : free \"" + std::string(m_name) + "\" scene pointer...");
         }
 
-        if (Debug::Instance().GetLevel() > Debug::Level::None) {
-            SR_LOG("Scene::Free() : free \"" + std::string(m_name) + "\" scene pointer...");
-        }
-
-        if (m_observer) {
-            delete m_observer;
-            m_observer = nullptr;
-        }
-
-        delete this;
-        return true;
+        SR_SAFE_DELETE_PTR(m_observer);
     }
 
     GameObjects& Scene::GetRootGameObjects() {
