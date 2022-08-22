@@ -5,23 +5,7 @@
 #ifndef SMARTPOINTER_SAFEPOINTER_H
 #define SMARTPOINTER_SAFEPOINTER_H
 
-#include <iostream>
-#include <functional>
-#include <string>
-#include <thread>
-#include <atomic>
-#include <unordered_set>
-
-#define SR_SAFE_PTR_ASSERT(expr, msg)                                                                                      \
-        if (!(expr)) {                                                                                                     \
-            fprintf(stderr, "[SafePtr<%s>] %s\n\tLine: %i\n\tPtr: %p\n", typeid(T).name(), msg, __LINE__, (void *) m_ptr); \
-        }                                                                                                                  \
-
-#define SR_NODISCARD [[nodiscard]]
-#define SR_INLINE inline
-
-#define SR_NEW_SAFE_PTR() { }
-#define SR_DEL_SAFE_PTR() { }
+#include <Utils/Allocator.h>
 
 template<class T> class SafePtr {
         public:

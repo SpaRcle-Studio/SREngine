@@ -34,6 +34,20 @@ namespace SR_MATH_NS {
             self = glm::scale(self, scale.ToGLM());
         }
 
+        Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) {
+            self = glm::translate(glm::mat4(1), {
+                    translate.x,
+                    translate.y,
+                    translate.z
+            });
+
+            self = glm::scale(self, skew.ToGLM());
+
+            self *= mat4_cast(rotation.ToGLM());
+
+            self = glm::scale(self, scale.ToGLM());
+        }
+
         explicit constexpr Matrix4x4(const Unit& scalar) {
             self = glm::mat4(static_cast<float_t>(scalar));
         }

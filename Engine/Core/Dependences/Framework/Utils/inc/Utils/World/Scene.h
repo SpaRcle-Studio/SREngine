@@ -6,6 +6,7 @@
 #define GAMEENGINE_SCENE_H
 
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/World/Observer.h>
 #include <Utils/Types/StringAtom.h>
 #include <Utils/Types/Marshal.h>
@@ -57,7 +58,7 @@ namespace SR_WORLD_NS {
     class Region;
     class Chunk;
 
-    typedef std::list<Types::SafePtr<GameObject>> GameObjects;
+    typedef std::list<SR_HTYPES_NS::SharedPtr<GameObject>> GameObjects;
     typedef std::unordered_map<TensorKey, GameObjects> Tensor;
     typedef std::unordered_map<Math::IVector3, Region*> Regions;
 
@@ -65,6 +66,7 @@ namespace SR_WORLD_NS {
         friend class SR_UTILS_NS::Singleton<SceneAllocator>;
         typedef std::function<Scene*(void)> Allocator;
         using ScenePtr = Types::SafePtr<Scene>;
+        using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
     protected:
         ~SceneAllocator() override = default;
 
@@ -80,8 +82,8 @@ namespace SR_WORLD_NS {
     class SR_DLL_EXPORT Scene : public Types::SafePtr<Scene> {
     public:
         typedef Types::SafePtr<Scene> Ptr;
-        using Super = Types::SafePtr<Scene>;
-        using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
+        using Super = Ptr;
+        using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
 
         virtual ~Scene();
 
@@ -90,8 +92,8 @@ namespace SR_WORLD_NS {
         explicit Scene(const std::string& name);
 
     public:
-        static Types::SafePtr<Scene> New(const Path& path);
-        static Types::SafePtr<Scene> Load(const Path& path);
+        static Scene::Ptr New(const Path& path);
+        static Scene::Ptr Load(const Path& path);
 
         bool Save();
         bool SaveAt(const Path& path);
@@ -100,7 +102,6 @@ namespace SR_WORLD_NS {
 
     public:
         void SetWorldOffset(const World::Offset& offset);
-        void ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)>& fun);
         void SetName(const std::string& name) { m_name = name; }
         void SetPath(const Path& path) { m_path = path; }
         void SetObserver(const GameObjectPtr& target);
@@ -116,16 +117,16 @@ namespace SR_WORLD_NS {
         GameObjects GetGameObjectsAtChunk(const Math::IVector3& region, const Math::IVector3& chunk);
         Chunk* GetCurrentChunk() const;
 
-        Types::SafePtr<GameObject> FindByComponent(const std::string& name);
-        Types::SafePtr<GameObject> Find(const std::string& name);
+        GameObjectPtr FindByComponent(const std::string& name);
+        GameObjectPtr Find(const std::string& name);
 
-        virtual SR_HTYPES_NS::SafePtr<GameObject> InstanceFromFile(const std::string& path);
-        virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(const std::string& name);
-        virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(const Types::RawMesh* rawMesh);
-        virtual SR_HTYPES_NS::SafePtr<GameObject> Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
+        virtual GameObjectPtr InstanceFromFile(const std::string& path);
+        virtual GameObjectPtr Instance(const std::string& name);
+        virtual GameObjectPtr Instance(const Types::RawMesh* rawMesh);
+        virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
 
     public:
-        bool Remove(const Types::SafePtr<GameObject>& gameObject);
+        bool Remove(const GameObjectPtr& gameObject);
 
         void OnChanged();
 
@@ -134,35 +135,35 @@ namespace SR_WORLD_NS {
         bool ReloadChunks();
 
     private:
-        void CheckShift(const Math::IVector3& chunk);
+        void CheckShift(const SR_MATH_NS::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
         void SaveRegion(Region* pRegion) const;
 
     protected:
-        Observer*                    m_observer            = nullptr;
+        Observer*                 m_observer           = nullptr;
 
     private:
-        bool                         m_updateContainer     = false;
-        bool                         m_shiftEnabled        = false;
-        bool                         m_scopeEnabled        = false;
-        bool                         m_isDestroy           = false;
+        bool                      m_updateContainer    = false;
+        bool                      m_shiftEnabled       = false;
+        bool                      m_scopeEnabled       = false;
+        bool                      m_isDestroy          = false;
 
-        std::atomic<bool>            m_isHierarchyChanged  = false;
+        std::atomic<bool>         m_isHierarchyChanged = false;
 
-        StringAtom                   m_name                = "Unnamed";
-        Path                         m_path                = Path();
+        StringAtom                m_name               = "Unnamed";
+        Path                      m_path               = Path();
 
-        World::Tensor                m_tensor              = World::Tensor();
+        World::Tensor             m_tensor             = World::Tensor();
 
-        SR_HTYPES_NS::DataStorage    m_dataStorage         = SR_HTYPES_NS::DataStorage();
+        SR_HTYPES_NS::DataStorage m_dataStorage        = SR_HTYPES_NS::DataStorage();
 
-        GameObjects                  m_gameObjects         = GameObjects();
-        GameObjects                  m_rootObjects         = GameObjects();
+        GameObjects               m_gameObjects        = GameObjects();
+        GameObjects               m_rootObjects        = GameObjects();
 
-        Regions                      m_regions             = Regions();
-        Math::IVector2               m_chunkSize           = Math::IVector2();
-        uint32_t                     m_regionWidth         = 0;
+        Regions                   m_regions            = Regions();
+        Math::IVector2            m_chunkSize          = Math::IVector2();
+        uint32_t                  m_regionWidth        = 0;
 
     };
 }

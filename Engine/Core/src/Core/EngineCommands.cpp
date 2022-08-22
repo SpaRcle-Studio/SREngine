@@ -31,7 +31,8 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 
     auto&& ptr = ptrRaw->GetThis();
 
-    m_scene = ptr.Do<Scene::Ptr>([](SR_UTILS_NS::GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
+    //m_scene = ptr.Do<Scene::Ptr>([](SR_UTILS_NS::GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
+    m_scene = ptr->GetScene();
 
     /**
         Специфичная синхронизация, чтобы небыло дедлока, происходящего когда CommandManager пытается удалить объект,
@@ -70,7 +71,7 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
         return false;
 }
 
-Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const Helper::Types::SafePtr<Helper::GameObject> &ptr) {
+Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const SR_UTILS_NS::GameObject::Ptr& ptr) {
     m_path = ptr->GetEntityPath();
     m_reserved = ptr->GetEntityTree();
 }

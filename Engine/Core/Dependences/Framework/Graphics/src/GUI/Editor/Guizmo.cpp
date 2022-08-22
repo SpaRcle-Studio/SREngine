@@ -59,7 +59,7 @@ namespace SR_GRAPH_NS::GUI {
         ImGui::PopStyleVar(5);
     }
 
-    void Guizmo::Draw(Guizmo::GameObject gameObject, Guizmo::GameObject camera) {
+    void Guizmo::Draw(Guizmo::GameObjectPtr gameObject, Guizmo::GameObjectPtr camera) {
         if (!camera.RecursiveLockIfValid()) {
             gameObject.Unlock();
             return;

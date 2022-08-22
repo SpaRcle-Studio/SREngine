@@ -17,9 +17,9 @@ namespace SR_MATH_NS {
     private:
         glm::quat self{};
     public:
-        SR_NODISCARD inline glm::quat ToGLM() const { return self; }
+        SR_NODISCARD SR_FORCE_INLINE glm::quat ToGLM() const noexcept { return self; }
         SR_NODISCARD Matrix4x4 ToMat4x4() const;
-        SR_NODISCARD inline glm::mat4 ToMat4x4GLM() const { return mat4_cast(self); }
+        SR_NODISCARD SR_FORCE_INLINE glm::mat4 ToMat4x4GLM() const noexcept { return mat4_cast(self); }
         SR_NODISCARD Vector3<Unit> EulerAngle() const;
         SR_NODISCARD Quaternion Rotate(const Vector3<Unit>& v) const;
 

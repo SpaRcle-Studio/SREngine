@@ -26,7 +26,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::Draw() {
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
             if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
@@ -84,7 +84,7 @@ namespace SR_CORE_NS::GUI {
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
 
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             if (auto* camera = m_camera->GetComponent<SR_GTYPES_NS::Camera>()) {
                 //camera->SetDirectOutput(!m_enabled);
             }
@@ -100,7 +100,7 @@ namespace SR_CORE_NS::GUI {
         auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
         auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
 
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             if (wheel != 0) {
                 m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
             }

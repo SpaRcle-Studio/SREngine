@@ -7,10 +7,12 @@
 
 namespace SR_UTILS_NS {
     void Transform3D::UpdateMatrix() {
-        m_localMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(m_translation);
-        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
-        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
-        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+        m_localMatrix = SR_MATH_NS::Matrix4x4(
+                m_translation,
+                m_rotation.Radians().ToQuat(),
+                m_scale,
+                m_skew
+        );
 
         Transform::UpdateMatrix();
     }

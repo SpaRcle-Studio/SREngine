@@ -85,12 +85,12 @@ namespace SR_SCRIPTING_NS {
         return pBehaviour;
     }
 
-    Behaviour::GameObjectPtr Behaviour::GetGameObject() const {
+    SR_UTILS_NS::GameObject::Ptr Behaviour::GetGameObject() const {
         if (auto&& pParent = GetParent()) {
             return pParent->GetThis();
         }
 
-        return GameObjectPtr();
+        return SR_UTILS_NS::GameObject::Ptr();
     }
 
     Behaviour *Behaviour::CreateEmpty() {

@@ -47,6 +47,7 @@ namespace SR_UTILS_NS {
         void Reset();
 
     private:
+        SR_MATH_NS::FVector2 m_mouseDrag;
         SR_MATH_NS::FVector2 m_mousePrev;
         SR_MATH_NS::FVector2 m_mouse;
         SR_MATH_NS::FVector2 m_mouseScroll;

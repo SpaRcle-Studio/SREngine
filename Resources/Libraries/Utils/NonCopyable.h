@@ -5,11 +5,7 @@
 #ifndef EVOSCRIPTLIB_NONCOPYABLE_H
 #define EVOSCRIPTLIB_NONCOPYABLE_H
 
-#include <math.h>
-#include <iostream>
-#include <unordered_map>
-#include <any>
-#include <functional>
+#include <Utils/Allocator.h>
 
 class NonCopyable {
 protected:

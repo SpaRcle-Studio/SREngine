@@ -8,6 +8,7 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/ECS/EntityManager.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -31,7 +32,7 @@ namespace SR_CORE_NS::Commands {
     class GameObjectDelete : public SR_UTILS_NS::ReversibleCommand {
     public:
         GameObjectDelete() = default;
-        explicit GameObjectDelete(const SR_HTYPES_NS::SafePtr<Helper::GameObject>& ptr);
+        explicit GameObjectDelete(const SR_UTILS_NS::GameObject::Ptr& ptr);
 
         ~GameObjectDelete() override;
 

@@ -64,8 +64,9 @@ namespace Framework::Core::GUI {
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             m_gameObject.Replace(*selected.begin());
         }
-        else
+        else {
             m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
+        }
     }
 
     void Inspector::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {

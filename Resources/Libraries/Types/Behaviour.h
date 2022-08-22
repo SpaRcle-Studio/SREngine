@@ -9,7 +9,8 @@
 #include "GameObject.h"
 
 class Behaviour : public NonCopyable {
-    using GameObjectPtr = SafePtr<GameObject>;
+public:
+    using GameObjectPtr = SharedPtr<GameObject>;
     using Any = std::any;
     using Property = std::pair<
         std::function<Any(void)>, /// getter

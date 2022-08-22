@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
 
 namespace SR_SCRIPTING_NS {
     class Behaviour : public SR_UTILS_NS::IResource, public SR_UTILS_NS::Component {
-        using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
+        using GameObjectPtr = SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject>;
         using TransformPtr = SR_UTILS_NS::Transform*;
         using Properties = std::vector<std::string>;
         using ValueProperties = std::list<std::pair<std::string, std::any>>;

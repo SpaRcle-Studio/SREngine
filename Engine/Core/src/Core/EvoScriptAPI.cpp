@@ -116,9 +116,9 @@ namespace Framework {
         );
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
-        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
     }
@@ -206,11 +206,11 @@ namespace Framework {
         using namespace SR_MATH_NS;
 
         generator->RegisterNewClass("GameObject", "GameObject",
-                { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "ISavable.h" },
-        { { "SafePtr<GameObject>", EvoScript::Public } });
+                { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "Types/SharedPtr.h", "ISavable.h" },
+        { { "SharedPtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)

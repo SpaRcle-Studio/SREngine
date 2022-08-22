@@ -15,8 +15,8 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 
 namespace SR_UTILS_NS {
-    GameObject::GameObject(const Types::SafePtr<World::Scene> &scene, std::string name, std::string tag)
-        : Types::SafePtr<GameObject>(this)
+    GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
+        : Super(this)
     {
         m_name = std::move(name);
         m_tag = std::move(tag);
@@ -31,23 +31,14 @@ namespace SR_UTILS_NS {
         delete m_transform;
     }
 
-    void GameObject::Free() {
-        delete this;
-    }
-
     Component *Framework::Helper::GameObject::GetComponent(const std::string &name) {
-        Component *find = nullptr;
-
-        m_components.Do([&](std::list<Component*>& data) {
-            for (auto &&component : data) {
-                if (component->GetComponentName() == name) {
-                    find = component;
-                    break;
-                }
+        for (auto&& pComponent : m_components) {
+            if (pComponent->GetComponentName() == name) {
+                return pComponent;
             }
-        });
+        }
 
-        return find;
+        return nullptr;
     }
 
     void GameObject::Destroy(GODestroyByBits by /** = DestroyByFlags::DestroyBy_Other */) {
@@ -56,20 +47,10 @@ namespace SR_UTILS_NS {
             return;
         }
 
-#ifdef SR_DEBUG
-        if (!IsLocked())
-            SR_WARN("GameObject::Destroy() : game object \"" + GetName()
-                                + "\" is not locked, crash or memory corruption possible!");
-
-        //if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::High) {
-        //    SR_LOG("GameObject::Destroy() : destroying \"" + m_name + "\" game object contains " + std::to_string(m_components.size()) + " components...");
-        //}
-#endif
-
         if (m_scene.RecursiveLockIfValid()) {
             const bool byParent = by & GAMEOBJECT_DESTROY_BY_GAMEOBJECT;
 
-            if (!byParent && m_parent.LockIfValid()) {
+            if (!byParent && m_parent.RecursiveLockIfValid()) {
                 GameObject::Ptr copy = m_parent;
                 copy->RemoveChild(*this);
                 copy.Unlock();
@@ -80,14 +61,12 @@ namespace SR_UTILS_NS {
             m_scene.Unlock();
         }
 
-        m_components.Do([&](std::list<Component*>& data) {
-            for (auto &&component : data) {
-                component->OnDestroy();
-            }
-            data.clear();
-        });
+        for (auto&& pComponent : m_components) {
+            pComponent->OnDestroy();
+        }
+        m_components.clear();
 
-        for (GameObject::Ptr gameObject : m_children) {
+        for (auto&& gameObject : m_children) {
             gameObject.AutoFree([by](GameObject *gm) {
                 gm->Destroy(by | GAMEOBJECT_DESTROY_BY_GAMEOBJECT);
             });
@@ -96,17 +75,16 @@ namespace SR_UTILS_NS {
 
         m_isDestroy = true;
 
-        Free();
+        delete this;
     }
 
     void GameObject::OnMatrixDirty() {
-        m_components.Do([&](auto&& data) {
-            for (Component *component : data)
-                component->OnMatrixDirty();
-        });
+        for (auto&& pComponent : m_components) {
+            pComponent->OnMatrixDirty();
+        }
     }
 
-    bool GameObject::AddChild(const Types::SafePtr<GameObject> &child) {
+    bool GameObject::AddChild(const GameObject::Ptr& child) {
         if (child.Get() == this) {
             SRAssert2(false, "It is impossible to make a parent a child!");
             return false;
@@ -148,7 +126,7 @@ namespace SR_UTILS_NS {
         m_scene->OnChanged();
     }
 
-    bool GameObject::Contains(const Types::SafePtr<GameObject> &gameObject) {
+    bool GameObject::Contains(const GameObject::Ptr& gameObject) {
         for (auto&& children : m_children) {
             if (children.Get() == gameObject.Get()) {
                 return true;
@@ -156,10 +134,6 @@ namespace SR_UTILS_NS {
         }
 
         return false;
-    }
-
-    std::string GameObject::GetName() const {
-        return m_name;
     }
 
     bool GameObject::SetParent(const GameObject::Ptr &parent) {
@@ -196,29 +170,26 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::ContainsComponent(const std::string &name) {
-        return m_components.Do<bool>([&](auto&& data) -> bool {
-            for (auto &&pComponent : data) {
-                if (pComponent->GetComponentName() == name) {
-                    return true;
-                }
+        for (auto&& pComponent : m_components) {
+            if (pComponent->GetComponentName() == name) {
+                return true;
             }
+        }
 
-            return false;
-        });
+        return false;
     }
 
-    void GameObject::ForEachChild(const std::function<void(Types::SafePtr<GameObject> &)> &fun) {
-        for (Types::SafePtr<GameObject> child : m_children) {
-            if (child.LockIfValid()) {
+    void GameObject::ForEachChild(const std::function<void(GameObject::Ptr &)> &fun) {
+        for (auto&& child : m_children) {
+            if (child.Valid()) {
                 fun(child);
-                child.Unlock();
             }
         }
     }
 
-    void GameObject::ForEachChild(const std::function<void(const Types::SafePtr<GameObject> &)> &fun) const {
-        for (const auto &child : m_children) {
-            if (child.LockIfValid()) {
+    void GameObject::ForEachChild(const std::function<void(const GameObject::Ptr &)> &fun) const {
+        for (auto&& child : m_children) {
+            if (child.RecursiveLockIfValid()) {
                 fun(child);
                 child.Unlock();
             }
@@ -246,7 +217,7 @@ namespace SR_UTILS_NS {
     void GameObject::CheckActivity() {
         m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
 
-        for (auto&& pComponent : m_components.Get()) {
+        for (auto&& pComponent : m_components) {
             if (!pComponent->IsAwake()) {
                 continue;
             }
@@ -267,7 +238,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        for (auto&& pComponent : m_components.Get()) {
+        for (auto&& pComponent : m_components) {
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
@@ -291,7 +262,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        for (auto&& pComponent : m_components.Get()) {
+        for (auto&& pComponent : m_components) {
             if (!pComponent->IsAwake()) {
                 continue;
             }
@@ -338,7 +309,7 @@ namespace SR_UTILS_NS {
             count++;
         }
 
-        ForEachChild([=](const Types::SafePtr<GameObject> &child) mutable {
+        ForEachChild([=](const GameObject::Ptr &child) mutable {
             if (auto self = this->GetBarycenter(); !self.IsInfinity()) {
                 barycenter += self;
                 count++;
@@ -349,13 +320,11 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::ForEachComponent(const std::function<bool(Component *)> &fun) {
-        m_components.Do([&](auto&& data) {
-            for (auto &&component : data) {
-                if (!fun(component)) {
-                    break;
-                }
+        for (auto&& component : m_components) {
+            if (!fun(component)) {
+                break;
             }
-        });
+        }
     }
 
     bool GameObject::LoadComponent(Component *pComponent) {
@@ -364,11 +333,9 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        m_components.Do([&](std::list<Component*>& data) {
-            data.emplace_back(pComponent);
-            pComponent->SetParent(this);
-            pComponent->OnAttached();
-        });
+        m_components.emplace_back(pComponent);
+        pComponent->SetParent(this);
+        pComponent->OnAttached();
 
         return true;
     }
@@ -379,36 +346,32 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        m_components.Do([&](std::list<Component*>& data) {
-            data.emplace_back(pComponent);
-            pComponent->SetParent(this);
-            pComponent->OnAttached();
-        });
+        m_components.emplace_back(pComponent);
+        pComponent->SetParent(this);
+        pComponent->OnAttached();
 
         return true;
     }
 
     bool GameObject::RemoveComponent(Component *component) {
-        return m_components.Do<bool>([&](auto&& data) -> bool {
-            for (auto it = data.begin(); it != data.end(); ++it) {
-                if (*it != component) {
-                    continue;
-                }
-
-                if (component->GetParent() != this) {
-                    SRHalt0();
-                }
-
-                component->OnDestroy();
-                data.erase(it);
-
-                return true;
+        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
+            if (*it != component) {
+                continue;
             }
 
-            SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+            if (component->GetParent() != this) {
+                SRHalt("Game object not are children!");
+            }
 
-            return false;
-        });
+            component->OnDestroy();
+            m_components.erase(it);
+
+            return true;
+        }
+
+        SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+
+        return false;
     }
 
     bool GameObject::ReplaceComponent(Component *source, Component *destination) {
@@ -417,23 +380,21 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        return m_components.Do<bool>([&](auto&& data) -> bool {
-            for (auto it = data.begin(); it != data.end(); ++it) {
-                if (*it == source) {
-                    source->OnDestroy();
-                    *it = destination;
+        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
+            if (*it == source) {
+                source->OnDestroy();
+                *it = destination;
 
-                    destination->SetParent(this);
-                    destination->OnAttached();
+                destination->SetParent(this);
+                destination->OnAttached();
 
-                    return true;
-                }
+                return true;
             }
+        }
 
-            SR_ERROR("GameObject::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
+        SR_ERROR("GameObject::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
 
-            return false;
-        });
+        return false;
     }
 
     SR_HTYPES_NS::Marshal GameObject::Save(SavableFlags flags) const {
@@ -460,14 +421,12 @@ namespace SR_UTILS_NS {
 
         /// save components
 
-        m_components.Do([&](auto&& data) {
-            marshal.Write(static_cast<uint32_t>(data.size()));
-            for (auto &&component : data) {
-                auto &&marshalComponent = component->Save(flags);
-                marshal.Write<uint64_t>(marshalComponent.BytesCount());
-                marshal.Append(std::move(marshalComponent));
-            }
-        });
+        marshal.Write(static_cast<uint32_t>(m_components.size()));
+        for (auto&& pComponent : m_components) {
+            auto&& marshalComponent = pComponent->Save(flags);
+            marshal.Write<uint64_t>(marshalComponent.BytesCount());
+            marshal.Append(std::move(marshalComponent));
+        }
 
         /// save children
 
@@ -510,17 +469,15 @@ namespace SR_UTILS_NS {
     }
 
     Component *GameObject::GetComponent(size_t id) {
-        return m_components.Do<Component*>([&](auto&& data) -> Component* {
-            for (auto &&component : data) {
-                if (component->GetComponentId() != id) {
-                    continue;
-                }
-
-                return component;
+        for (auto&& pComponent : m_components) {
+            if (pComponent->GetComponentId() != id) {
+                continue;
             }
 
-            return nullptr;
-        });
+            return pComponent;
+        }
+
+        return nullptr;
     }
 
     void GameObject::SetTransform(Transform *transform) {
@@ -573,7 +530,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        for (auto &&pComponent : m_components.Get()) {
+        for (auto&& pComponent : m_components) {
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
@@ -597,7 +554,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        for (auto &&pComponent : m_components.Get()) {
+        for (auto&& pComponent : m_components) {
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }

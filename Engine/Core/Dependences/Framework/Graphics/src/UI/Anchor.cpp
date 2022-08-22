@@ -13,7 +13,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     void Anchor::TransformUI() {
-        GetParent()->Do([this](SR_UTILS_NS::GameObject* pThis) {
+        /*GetParent()->Do([this](SR_UTILS_NS::GameObject* pThis) {
             if (auto&& pParent = pThis->GetParent(); pParent.RecursiveLockIfValid())
             {
                 auto&& pTransform = pThis->GetTransform();
@@ -28,7 +28,7 @@ namespace SR_GRAPH_NS::UI {
             else {
                 SRHalt("Parent is invalid!");
             }
-        });
+        });*/
     }
 
     SR_UTILS_NS::Component* Anchor::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
@@ -43,9 +43,9 @@ namespace SR_GRAPH_NS::UI {
     SR_MATH_NS::FVector2 Anchor::GetSizes() const {
         SR_MATH_NS::FVector2 size;
 
-        if (!m_parent->RecursiveLockIfValid()) {
-            return size;
-        }
+       //if (!m_parent->RecursiveLockIfValid()) {
+       //    return size;
+       //}
 
         //for (auto&& pComponent : m_parent->GetComponentsRef()) {
         //    if (auto&& pSprite = dynamic_cast<Sprite2D*>(pComponent)) {
@@ -53,7 +53,7 @@ namespace SR_GRAPH_NS::UI {
         //    }
         //}
 
-        m_parent->Unlock();
+       // m_parent->Unlock();
 
         return size;
     }

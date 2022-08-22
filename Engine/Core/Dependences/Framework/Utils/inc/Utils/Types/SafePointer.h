@@ -453,14 +453,14 @@ namespace SR_HTYPES_NS {
 }
 
 namespace std {
-    template<typename T> struct hash<Framework::Helper::Types::SafePtr<T>> {
-        size_t operator()(Framework::Helper::Types::SafePtr<T> const& ptr) const {
+    template<typename T> struct hash<SR_HTYPES_NS::SafePtr<T>> {
+        size_t operator()(SR_HTYPES_NS::SafePtr<T> const& ptr) const {
             return std::hash<void*>()(ptr.GetRawPtr());
         }
     };
 
-    template <typename T> struct less<Framework::Helper::Types::SafePtr<T>> {
-        bool operator()(const Framework::Helper::Types::SafePtr<T> &lhs, const Framework::Helper::Types::SafePtr<T> &rhs) const {
+    template <typename T> struct less<SR_HTYPES_NS::SafePtr<T>> {
+        bool operator()(const SR_HTYPES_NS::SafePtr<T> &lhs, const SR_HTYPES_NS::SafePtr<T> &rhs) const {
             void* a = lhs.GetRawPtr();
             void* b = rhs.GetRawPtr();
             return a < b;

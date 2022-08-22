@@ -217,13 +217,14 @@ namespace Framework {
         SR_HTYPES_NS::Time::Instance().Update();
 
         if (m_scene.LockIfValid()) {
-            Prepare();
-
-            Update(m_accumulator);
-
             const auto now = SR_HTYPES_NS::Time::Instance().Now();
             const auto deltaTime = now - m_timeStart;
+            const auto dt = static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
             m_timeStart = now;
+
+            Prepare();
+
+            Update(dt);
 
             /// fixed update
             if (m_accumulator >= m_updateFrequency) {
@@ -233,7 +234,7 @@ namespace Framework {
                 }
             }
 
-            m_accumulator += static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
+            m_accumulator += dt;
 
             m_scene.Unlock();
         }
@@ -331,7 +332,7 @@ namespace Framework {
         auto timer = Helper::Types::Timer(0.1);
 
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(1);
+            SR_HTYPES_NS::Thread::Sleep(10);
 
             auto&& pCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
                 if (auto&& pCamera = ptr->GetMainCamera()) {
@@ -347,7 +348,7 @@ namespace Framework {
 
             if (timer.Update() && m_scene.LockIfValid()) {
                 if (auto &&gameObject = pCamera->GetParent()) {
-                    if (gameObject->TryLockIfValid()) {
+                    if (gameObject->TryRecursiveLockIfValid()) {
                         m_scene->SetObserver(gameObject->GetThis());
                         gameObject->Unlock();
                     }

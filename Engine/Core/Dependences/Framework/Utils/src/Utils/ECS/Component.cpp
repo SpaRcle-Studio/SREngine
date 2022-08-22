@@ -67,21 +67,17 @@ namespace SR_UTILS_NS {
         return m_parent;
     }
 
-    Component::GameObjectPtr Component::GetRoot() const {
-        return m_parent.Do<GameObjectPtr>([](auto&& data) -> GameObjectPtr {
+    GameObject::Ptr Component::GetRoot() const {
+        return m_parent.Do<GameObject::Ptr>([](auto&& data) -> GameObjectPtr {
             if (!data) {
                 return GameObjectPtr();
             }
 
             GameObjectPtr root = data->GetThis();
 
-            while (root.RecursiveLockIfValid()) {
+            while (root.Valid()) {
                 if (auto&& parent = root->GetParent()) {
-                    root.Unlock();
                     root = parent;
-                }
-                else {
-                    root.Unlock();
                 }
             }
 
