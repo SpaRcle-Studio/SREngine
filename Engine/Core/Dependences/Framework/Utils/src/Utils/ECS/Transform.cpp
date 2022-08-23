@@ -4,7 +4,7 @@
 
 #include <Utils/ECS/Transform.h>
 #include <Utils/ECS/Transform3D.h>
-
+#include <Utils/ECS/TransformZero.h>
 
 namespace SR_UTILS_NS {
     void Transform::SetGameObject(GameObject *gameObject) {
@@ -77,6 +77,8 @@ namespace SR_UTILS_NS {
         marshal.Write(static_cast<int8_t>(GetMeasurement()));
 
         switch (GetMeasurement()) {
+            case Measurement::SpaceZero:
+                break;
             case Measurement::Space2D:
                 marshal.Write(GetTranslation(), Math::FVector3(0.f));
                 marshal.Write(GetRotation(), Math::FVector3(0.f));
@@ -107,7 +109,12 @@ namespace SR_UTILS_NS {
     Transform *Transform::Load(SR_HTYPES_NS::Marshal &marshal, GameObject* pGameObject) {
         Transform* transform = nullptr;
 
-        switch (static_cast<Measurement>(marshal.Read<int8_t>())) {
+        auto&& measurement = static_cast<Measurement>(marshal.Read<int8_t>());
+
+        switch (measurement) {
+            case Measurement::SpaceZero:
+                transform = new TransformZero();
+                break;
             case Measurement::Space2D:
                 transform = new Transform2D();
                 break;
@@ -122,10 +129,21 @@ namespace SR_UTILS_NS {
 
         transform->SetGameObject(pGameObject);
 
-        transform->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
-        transform->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
-        transform->SetScale(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
-        transform->SetSkew(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+        switch (measurement) {
+            case Measurement::SpaceZero:
+                break;
+            case Measurement::Space2D:
+            case Measurement::Space3D:
+                transform->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
+                transform->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
+                transform->SetScale(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+                transform->SetSkew(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+                break;
+            case Measurement::Space4D:
+            default:
+                SRHalt0();
+                return nullptr;
+        }
 
         return transform;
     }

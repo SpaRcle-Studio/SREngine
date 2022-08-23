@@ -63,6 +63,8 @@ namespace Framework::Core::World {
 
             auto&& componentCount = marshal.Read<uint32_t>();
 
+            SRAssert2(componentCount <= 2048, "While loading the component errors occured!");
+
             for (uint32_t i = 0; i < componentCount; ++i) {
                 auto&& bytesCount = marshal.Read<uint64_t>();
                 auto&& position = marshal.GetPosition();

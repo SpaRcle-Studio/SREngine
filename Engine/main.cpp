@@ -22,6 +22,7 @@
 #include <Environment/OpenGL.h>
 #include <Environment/Vulkan.h>
 
+#include <Utils/World/SceneAllocator.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/CmdOptions.h>

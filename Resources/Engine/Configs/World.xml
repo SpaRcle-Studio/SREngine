@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <Configs>
-    <DefaultChunkWidth Value="20"/>
-    <DefaultChunkHeight Value="30"/>
-    <DefaultRegionWidth Value="10"/>
+    <DefaultChunkWidth Value="50"/>
+    <DefaultChunkHeight Value="100"/>
+    <DefaultRegionWidth Value="32"/>
     <DefaultShiftDistance Value="20"/>
-    <DefaultScope Value="5"/>
+    <DefaultScope Value="10"/>
 
     <ScopeEnabled Value="true"/>
     <ShiftEnabled Value="true"/>

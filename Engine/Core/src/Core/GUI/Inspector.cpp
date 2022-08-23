@@ -13,6 +13,7 @@
 #include <UI/Sprite2D.h>
 #include <UI/Anchor.h>
 #include <UI/Canvas.h>
+#include <Utils/ECS/TransformZero.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -45,6 +46,7 @@ namespace Framework::Core::GUI {
                 case SR_UTILS_NS::Measurement::Space3D:
                     DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D *>(pTransform));
                     break;
+                case SR_UTILS_NS::Measurement::SpaceZero:
                 case SR_UTILS_NS::Measurement::Space4D:
                 default:
                     break;
@@ -173,10 +175,13 @@ namespace Framework::Core::GUI {
     void Inspector::DrawSwitchTransform() {
         auto&& pTransform = m_gameObject->GetTransform();
 
-        const char* space_types[] = { "2D", "3D", "4D" };
+        const char* space_types[] = { "Zero", "1D", "2D", "3D", "4D" };
         auto item_current = static_cast<int32_t>(pTransform->GetMeasurement());
         if (ImGui::Combo("Measurement", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
             switch (static_cast<SR_UTILS_NS::Measurement>(item_current)) {
+                case SR_UTILS_NS::Measurement::SpaceZero:
+                    m_gameObject->SetTransform(new SR_UTILS_NS::TransformZero());
+                    break;
                 case SR_UTILS_NS::Measurement::Space2D:
                     m_gameObject->SetTransform(new SR_UTILS_NS::Transform2D());
                     break;

@@ -46,8 +46,8 @@ namespace SR_UTILS_NS {
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using Super = Ptr;
-        using GameObjects = std::list<GameObject::Ptr>;
-        using Components = std::list<Component*>;
+        using GameObjects = std::vector<GameObject::Ptr>;
+        using Components = std::vector<Component*>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<World::Scene>;
 
     private:
@@ -62,7 +62,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const;
-        SR_NODISCARD bool IsEnabled() const noexcept { return m_isEnabled; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
@@ -82,7 +82,6 @@ namespace SR_UTILS_NS {
 
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
-        std::list<Component*> GetComponents() { return m_components; }
 
         /** Отличие от AddComponent в том, что используется только при загрузке объекта,
          * не вызывая при этом Awake -> OnEnable -> Start */
@@ -106,12 +105,12 @@ namespace SR_UTILS_NS {
         bool AddChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
 
-        void Awake(bool isPaused);
-        void Start();
-        void FixedUpdate(bool isPaused);
-        void Update(float_t dt, bool isPaused);
+        void Awake(bool isPaused) noexcept;
+        void Start() noexcept;
+        void FixedUpdate(bool isPaused) noexcept;
+        void Update(float_t dt, bool isPaused) noexcept;
 
-        void CheckActivity();
+        void CheckActivity() noexcept;
 
     public:
         template<typename T> T* GetComponent() {
@@ -121,6 +120,8 @@ namespace SR_UTILS_NS {
     private:
         void OnAttached();
         void OnMatrixDirty();
+
+        void SetDirty();
 
         bool UpdateEntityPath();
 
@@ -138,6 +139,7 @@ namespace SR_UTILS_NS {
 
         GameObjectFlagBits m_flags      = GAMEOBJECT_FLAG_NONE;
 
+        bool               m_dirty      = true;
         bool               m_isEnabled  = true;
         bool               m_isActive   = false;
         bool               m_isDestroy  = false;

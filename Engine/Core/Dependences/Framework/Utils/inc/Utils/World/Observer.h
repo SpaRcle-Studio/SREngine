@@ -67,25 +67,31 @@ namespace SR_WORLD_NS {
         Offset MathNeighbour(const Math::IVector3& offset);
         Math::IVector3 WorldPosToChunkPos(const Math::FVector3& position);
 
-        SR_NODISCARD int32_t GetScope() const { return m_scope; }
+        SR_NODISCARD int32_t GetScope() const noexcept { return m_scope; }
+
+        SR_NODISCARD SR_MATH_NS::IVector3 GetChunk() const noexcept { return m_chunk; }
+        SR_NODISCARD SR_MATH_NS::IVector3 GetRegion() const noexcept { return m_region; }
+
+        SR_NODISCARD SR_MATH_NS::IVector2 GetChunkSize() const noexcept { return m_chunkSize; }
+        SR_NODISCARD int32_t GetRegionSize() const noexcept { return m_regionWidth; }
 
     public:
-        Math::IVector2 m_chunkSize;
+        SR_MATH_NS::IVector2 m_chunkSize;
         int32_t m_regionWidth;
         int32_t m_shiftDistance;
         int32_t m_scope;
 
-        Math::IVector3 m_region;
-        Math::IVector3 m_lastRegion;
+        SR_MATH_NS::IVector3 m_region;
+        SR_MATH_NS::IVector3 m_lastRegion;
 
-        Math::IVector3 m_chunk;
-        Math::IVector3 m_lastChunk;
+        SR_MATH_NS::IVector3 m_chunk;
+        SR_MATH_NS::IVector3 m_lastChunk;
 
         Offset m_offset;
 
         ScenePtr m_scene;
 
-        Math::FVector3 m_targetPosition;
+        SR_MATH_NS::FVector3 m_targetPosition;
         GameObjectPtr m_target;
     };
 

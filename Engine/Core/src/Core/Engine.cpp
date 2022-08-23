@@ -43,10 +43,6 @@ namespace Framework {
             DrawCallback();
         });
 
-        m_window->SetResizeCallback([this](const SR_MATH_NS::IVector2& size) {
-            ResizeCallback(size);
-        });
-
         if (!m_window->Create()) {
             SR_ERROR("Engine::Create() : failed to create window!");
             return false;
@@ -332,7 +328,7 @@ namespace Framework {
         auto timer = Helper::Types::Timer(0.1);
 
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(10);
+            SR_HTYPES_NS::Thread::Sleep(50);
 
             auto&& pCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
                 if (auto&& pCamera = ptr->GetMainCamera()) {
@@ -360,10 +356,6 @@ namespace Framework {
         }
 
         SR_SYSTEM_LOG("Engine::WorldThread() : world thread completed!");
-    }
-
-    void Engine::ResizeCallback(const SR_MATH_NS::IVector2& size) {
-
     }
 
     void Engine::FixedUpdate() {
@@ -398,10 +390,10 @@ namespace Framework {
             return;
         }
 
+        const bool isPaused = !m_isActive || m_isPaused;
         for (auto &&gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->FixedUpdate(!m_isActive || m_isPaused);
+            gameObject->FixedUpdate(isPaused);
         }
-
 
         if (m_editor) {
             m_editor->Update();
@@ -414,16 +406,19 @@ namespace Framework {
             m_physicsScene.Unlock();
         }
 
+        const bool isPaused = !m_isActive || m_isPaused;
+
         for (auto&& gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->Update(dt, !m_isActive || m_isPaused);
+            gameObject->Update(dt, isPaused);
         }
     }
 
     void Engine::Prepare() {
+        const bool isPaused = !m_isActive || m_isPaused;
         auto&& root = m_scene->GetRootGameObjects();
 
         for (auto&& gameObject : root) {
-            gameObject->Awake(!m_isActive || m_isPaused);
+            gameObject->Awake(isPaused);
         }
 
         for (auto&& gameObject : root) {

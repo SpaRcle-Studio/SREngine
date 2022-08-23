@@ -12,39 +12,7 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/World/CameraData.h>
 #include <Utils/Types/DataStorage.h>
-
-namespace SR_WORLD_NS {
-    struct SR_DLL_EXPORT TensorKey {
-        TensorKey() = default;
-        TensorKey(const Framework::Helper::Math::IVector3& _region, const Framework::Helper::Math::IVector3& _chunk)
-            : region(_region)
-            , chunk(_chunk)
-        { }
-
-        Framework::Helper::Math::IVector3 region;
-        Framework::Helper::Math::IVector3 chunk;
-
-        bool operator==(const TensorKey &other) const {
-            return region == other.region && chunk == other.chunk;
-        }
-    };
-}
-
-namespace std {
-    template<> struct hash<Framework::Helper::World::TensorKey> {
-        size_t operator()(Framework::Helper::World::TensorKey const& vecPair) const {
-            std::size_t res = 0;
-
-            std::hash<Framework::Helper::Math::IVector3> hFirst;
-            std::hash<Framework::Helper::Math::IVector3> hSecond;
-
-            res ^= hFirst(vecPair.region) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
-            res ^= hSecond(vecPair.chunk) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
-
-            return res;
-        }
-    };
-}
+#include <Utils/World/TensorKey.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -55,35 +23,12 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_WORLD_NS {
-    class Region;
-    class Chunk;
-
-    typedef std::list<SR_HTYPES_NS::SharedPtr<GameObject>> GameObjects;
-    typedef std::unordered_map<TensorKey, GameObjects> Tensor;
-    typedef std::unordered_map<Math::IVector3, Region*> Regions;
-
-    class SR_DLL_EXPORT SceneAllocator : public SR_UTILS_NS::Singleton<SceneAllocator> {
-        friend class SR_UTILS_NS::Singleton<SceneAllocator>;
-        typedef std::function<Scene*(void)> Allocator;
-        using ScenePtr = Types::SafePtr<Scene>;
-        using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
-    protected:
-        ~SceneAllocator() override = default;
-
-    public:
-        bool Init(const Allocator& allocator);
-        ScenePtr Allocate();
-
-    private:
-        Allocator m_allocator;
-
-    };
-
     class SR_DLL_EXPORT Scene : public Types::SafePtr<Scene> {
     public:
         typedef Types::SafePtr<Scene> Ptr;
         using Super = Ptr;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
+        using GameObjects = std::vector<GameObjectPtr>;
 
         virtual ~Scene();
 
@@ -112,9 +57,10 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
 
         GameObjects& GetRootGameObjects();
-        GameObjects GetGameObjectsAtChunk(const Math::IVector3& region, const Math::IVector3& chunk);
+        GameObjects GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
         Chunk* GetCurrentChunk() const;
 
         GameObjectPtr FindByComponent(const std::string& name);

@@ -37,7 +37,7 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
 
     protected:
-        std::list<BasePass*> m_passes;
+        std::vector<BasePass*> m_passes;
 
     };
 }

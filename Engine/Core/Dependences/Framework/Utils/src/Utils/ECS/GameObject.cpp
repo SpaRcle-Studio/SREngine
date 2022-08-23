@@ -112,6 +112,7 @@ namespace SR_UTILS_NS {
         child->OnAttached();
 
         m_scene->OnChanged();
+        SetDirty();
 
         return true;
     }
@@ -202,6 +203,8 @@ namespace SR_UTILS_NS {
         }
 
         m_isEnabled = value;
+
+        SetDirty();
     }
 
     bool GameObject::IsActive() const {
@@ -214,7 +217,11 @@ namespace SR_UTILS_NS {
         return IsEnabled();
     }
 
-    void GameObject::CheckActivity() {
+    void GameObject::CheckActivity() noexcept {
+        if (!m_dirty) {
+            return;
+        }
+
         m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
 
         for (auto&& pComponent : m_components) {
@@ -226,15 +233,16 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& child : m_children) {
+            child->m_dirty = true;
             child->CheckActivity();
         }
     }
 
 
-    void GameObject::Awake(bool isPaused) {
+    void GameObject::Awake(bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsEnabled()) {
+        if (!m_dirty || !IsEnabled()) {
             return;
         }
 
@@ -251,14 +259,15 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& child : m_children) {
+            child->m_dirty = true;
             child->Awake(isPaused);
         }
     }
 
-    void GameObject::Start() {
+    void GameObject::Start() noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsEnabled()) {
+        if (!m_dirty || !IsEnabled()) {
             return;
         }
 
@@ -275,6 +284,7 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& child : m_children) {
+            child->m_dirty = true;
             child->Start();
         }
     }
@@ -349,6 +359,7 @@ namespace SR_UTILS_NS {
         m_components.emplace_back(pComponent);
         pComponent->SetParent(this);
         pComponent->OnAttached();
+        SetDirty();
 
         return true;
     }
@@ -365,6 +376,7 @@ namespace SR_UTILS_NS {
 
             component->OnDestroy();
             m_components.erase(it);
+            SetDirty();
 
             return true;
         }
@@ -387,6 +399,7 @@ namespace SR_UTILS_NS {
 
                 destination->SetParent(this);
                 destination->OnAttached();
+                SetDirty();
 
                 return true;
             }
@@ -490,6 +503,7 @@ namespace SR_UTILS_NS {
             }
             m_transform = transform;
             m_transform->SetGameObject(this);
+            SetDirty();
         }
     }
 
@@ -523,14 +537,18 @@ namespace SR_UTILS_NS {
 
     }
 
-    void GameObject::FixedUpdate(bool isPaused) {
-        /// Проверяем на IsEnabled а не на IsActive,
-        /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsEnabled()) {
+    void GameObject::FixedUpdate(bool isPaused) noexcept {
+        if (!m_isEnabled) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
+        m_dirty = false;
+
+        uint32_t i, size = static_cast<uint32_t>(m_components.size());
+
+        for (i = 0; i < size; ++i) {
+            auto&& pComponent = m_components.at(i);
+
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
@@ -542,19 +560,23 @@ namespace SR_UTILS_NS {
             pComponent->FixedUpdate();
         }
 
-        for (auto&& child : m_children) {
-            child->FixedUpdate(isPaused);
+        size = static_cast<uint32_t>(m_children.size());
+
+        for (i = 0; i < size; ++i) {
+            m_children.at(i)->FixedUpdate(isPaused);
         }
     }
 
-    void GameObject::Update(float_t dt, bool isPaused) {
-        /// Проверяем на IsEnabled а не на IsActive,
-        /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsEnabled()) {
+    void GameObject::Update(float_t dt, bool isPaused) noexcept {
+        if (!m_isEnabled) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
+        uint32_t i, size = static_cast<uint32_t>(m_components.size());
+
+        for (i = 0; i < size; ++i) {
+            auto&& pComponent = m_components.at(i);
+
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
@@ -566,8 +588,17 @@ namespace SR_UTILS_NS {
             pComponent->Update(dt);
         }
 
-        for (auto&& child : m_children) {
-            child->Update(dt, isPaused);
+        size = static_cast<uint32_t>(m_children.size());
+
+        for (i = 0; i < size; ++i) {
+            m_children.at(i)->Update(dt, isPaused);
+        }
+    }
+
+    void GameObject::SetDirty() {
+        m_dirty = true;
+        if (m_parent) {
+            m_parent->SetDirty();
         }
     }
 }

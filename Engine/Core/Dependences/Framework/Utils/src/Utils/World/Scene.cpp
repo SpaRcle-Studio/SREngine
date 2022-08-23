@@ -3,33 +3,15 @@
 //
 
 #include <Utils/World/Scene.h>
-#include <Utils/ECS/Component.h>
-#include <Utils/ECS/GameObject.h>
 
 #include <Utils/World/Region.h>
 #include <Utils/World/Chunk.h>
+#include <Utils/World/SceneAllocator.h>
+
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_WORLD_NS {
-    bool SceneAllocator::Init(const SceneAllocator::Allocator &allocator) {
-        if (m_allocator) {
-            SR_WARN("SceneAllocator::Init() : allocator already initialized!");
-            return false;
-        }
-
-        m_allocator = allocator;
-
-        return true;
-    }
-
-    SceneAllocator::ScenePtr SceneAllocator::Allocate() {
-        if (!m_allocator) {
-            SRHalt("SceneAllocator::Allocate() : allocator isn't initialized!");
-            Platform::Terminate();
-        }
-
-        return *m_allocator();
-    }
-
     Scene::Scene()
         : Scene("Unnamed")
     { }
@@ -144,15 +126,18 @@ namespace SR_WORLD_NS {
         SR_SAFE_DELETE_PTR(m_observer);
     }
 
-    GameObjects& Scene::GetRootGameObjects() {
-        if (!m_isHierarchyChanged)
+    Scene::GameObjects & Scene::GetRootGameObjects() {
+        if (!m_isHierarchyChanged) {
             return m_rootObjects;
+        }
 
         m_rootObjects.clear();
+        m_rootObjects.reserve(m_gameObjects.size() / 2);
 
-        for (const auto& gm : m_gameObjects) {
-            if (!gm->GetParent().Valid())
-                m_rootObjects.emplace_back(gm);
+        for (auto&& gameObject : m_gameObjects) {
+            if (!gameObject->GetParent().Valid()) {
+                m_rootObjects.emplace_back(gameObject);
+            }
         }
 
         m_isHierarchyChanged = false;
@@ -220,7 +205,6 @@ namespace SR_WORLD_NS {
         for (auto&& [position, pRegion] : m_regions) {
             SaveRegion(pRegion);
         }
-
 
         m_path.Normalize();
 
@@ -317,7 +301,6 @@ namespace SR_WORLD_NS {
         const auto fOffset = ((deltaOffset.m_region * m_regionWidth + deltaOffset.m_chunk)
                 * Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x)).Cast<Math::Unit>();
 
-        /// TODO: блокировать объект!
         for (const GameObject::Ptr& gameObject : GetRootGameObjects())
             gameObject->GetTransform()->GlobalTranslate(fOffset);
 
@@ -353,8 +336,11 @@ namespace SR_WORLD_NS {
         for (int32_t x = -scope; x <= scope; ++x) {
             for (int32_t y = -scope; y <= scope; ++y) {
                 for (int32_t z = -scope; z <= scope; ++z) {
-                    if (SR_POW(x) + SR_POW(y) + SR_POW(z) <= SR_POW(scope))
+                    constexpr float_t alpha = 3.f;
+
+                    if ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(scope)) {
                         update(Math::IVector3(x, y, z));
+                    }
                 }
             }
         }
@@ -461,10 +447,11 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    GameObjects Scene::GetGameObjectsAtChunk(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) {
+    Scene::GameObjects Scene::GetGameObjectsAtChunk(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) {
         const auto key = TensorKey(region, chunk);
-        if (m_tensor.count(key) == 0)
+        if (m_tensor.count(key) == 0) {
             return GameObjects();
+        }
 
         return m_tensor.at(key);
     }
@@ -509,5 +496,16 @@ namespace SR_WORLD_NS {
         if (target != m_observer->m_target) {
             m_observer->SetTarget(target);
         }
+    }
+
+    SR_MATH_NS::FVector3 Scene::GetWorldPosition(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) {
+        if (auto&& pRegionIt = m_regions.find(region); pRegionIt != m_regions.end()) {
+            auto&& [_, pRegion] = *pRegionIt;
+            if (auto&& pChunk = pRegion->Find(chunk)) {
+                return pChunk->GetWorldPosition();
+            }
+        }
+
+        return SR_MATH_NS::FVector3();
     }
 }

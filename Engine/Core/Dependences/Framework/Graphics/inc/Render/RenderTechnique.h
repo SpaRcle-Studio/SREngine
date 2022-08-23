@@ -45,8 +45,8 @@ namespace SR_GRAPH_NS {
 
         void FreeVideoMemory() override;
 
-        SR_NODISCARD CameraPtr GetCamera() const { return m_camera; }
-        SR_NODISCARD Context GetContext() const { return m_context; }
+        SR_NODISCARD CameraPtr GetCamera() const noexcept { return m_camera; }
+        SR_NODISCARD Context GetContext() const noexcept { return m_context; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD std::string_view GetName() const;
@@ -69,7 +69,7 @@ namespace SR_GRAPH_NS {
         void SetDirty();
 
     private:
-        std::list<BasePass*> m_passes;
+        std::vector<BasePass*> m_passes;
         RenderScenePtr m_renderScene;
         CameraPtr m_camera = nullptr;
         Context m_context = nullptr;

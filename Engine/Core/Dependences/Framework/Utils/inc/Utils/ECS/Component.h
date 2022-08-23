@@ -63,12 +63,12 @@ namespace SR_UTILS_NS {
         /// Активен и компонент и его родительский объект
         SR_NODISCARD virtual bool IsActive() const noexcept;
         /// Активен сам компонент, независимо от объекта
-        SR_NODISCARD virtual bool IsEnabled() const noexcept;
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsEnabled() const noexcept { return m_isEnabled; }
 
-        SR_NODISCARD virtual bool IsAwake() const noexcept { return m_isAwake; }
-        SR_NODISCARD virtual bool IsStarted() const noexcept { return m_isStarted; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsAwake() const noexcept { return m_isAwake; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsStarted() const noexcept { return m_isStarted; }
 
-        SR_NODISCARD virtual bool ExecuteInEditMode() const { return false; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
@@ -90,8 +90,7 @@ namespace SR_UTILS_NS {
         void SetParent(GameObject* parent);
 
     protected:
-        std::atomic<bool> m_isEnabled = true;
-
+        bool m_isEnabled = true;
         bool m_isActive = false;
         bool m_isAwake = false;
         bool m_isStarted = false;
@@ -100,7 +99,7 @@ namespace SR_UTILS_NS {
         std::string m_name = "Unknown";
 
         uint64_t m_componentId = SIZE_MAX;
-        SR_HTYPES_NS::SafeVar<GameObject*> m_parent = nullptr;
+        GameObject* m_parent = nullptr;
 
     };
 }

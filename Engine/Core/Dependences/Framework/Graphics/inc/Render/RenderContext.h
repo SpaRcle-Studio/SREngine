@@ -76,17 +76,17 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
 
     private:
-        template<typename T> bool Update(std::list<T>& resourceList) noexcept;
+        template<typename T> bool Update(T& resourceList) noexcept;
 
     private:
         SR_MATH_NS::IVector2 m_windowSize;
 
-        std::list<Types::Framebuffer*> m_framebuffers;
-        std::list<Types::Shader*> m_shaders;
-        std::list<TexturePtr> m_textures;
-        std::list<RenderTechnique*> m_techniques;
-        std::list<MaterialPtr> m_materials;
-        std::list<SkyboxPtr> m_skyboxes;
+        std::vector<Types::Framebuffer*> m_framebuffers;
+        std::vector<Types::Shader*> m_shaders;
+        std::vector<TexturePtr> m_textures;
+        std::vector<RenderTechnique*> m_techniques;
+        std::vector<MaterialPtr> m_materials;
+        std::vector<SkyboxPtr> m_skyboxes;
 
         std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>> m_scenes;
 
@@ -101,7 +101,7 @@ namespace SR_GRAPH_NS {
 
     /// ------------------------------------------------------------------------------
 
-    template<typename T> bool RenderContext::Update(std::list<T> &resourceList) noexcept {
+    template<typename T> bool RenderContext::Update(T& resourceList) noexcept {
         bool dirty = false;
 
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {

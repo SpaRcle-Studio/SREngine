@@ -41,6 +41,7 @@ namespace Framework {
             RegisterGUISystem(generator);
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
+            RegisterObserver(generator);
 
             generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
@@ -104,6 +105,7 @@ namespace Framework {
 
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {
         using namespace SR_UTILS_NS;
+        using namespace SR_MATH_NS;
         using namespace SR_HTYPES_NS;
         using namespace SR_WORLD_NS;
 
@@ -111,7 +113,7 @@ namespace Framework {
 
         generator->RegisterNewClass(
                 "Scene", "Scene",
-                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "GameObject.h", "Types/SafePointer.h" },
+                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "GameObject.h", "Types/SafePointer.h", "Observer.h" },
                 { {"SafePtr<Scene>", EvoScript::Public } }
         );
 
@@ -119,6 +121,9 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetObserver, Observer*)
+        ESRegisterMethod(EvoScript::Public, generator, Scene, GetWorldPosition, FVector3, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
     }
@@ -204,6 +209,7 @@ namespace Framework {
         using namespace SR_UTILS_NS;
         using namespace SR_HTYPES_NS;
         using namespace SR_MATH_NS;
+        using namespace SR_WORLD_NS;
 
         generator->RegisterNewClass("GameObject", "GameObject",
                 { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "Types/SharedPtr.h", "ISavable.h" },
@@ -214,6 +220,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetScene, SafePtr<Scene>)
 
         using namespace Xml;
 
@@ -482,6 +489,20 @@ namespace Framework {
 
     void API::RegisterBehaviour(EvoScript::AddressTableGen *generator) {
 
+    }
+
+    void API::RegisterObserver(EvoScript::AddressTableGen *generator) {
+        using namespace SR_UTILS_NS;
+        using namespace SR_HTYPES_NS;
+        using namespace SR_WORLD_NS;
+        using namespace SR_MATH_NS;
+
+        generator->RegisterNewClass("Observer", "Observer", { "Math/Vector2.h", "Math/Vector3.h" });
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetChunk, IVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetRegion, IVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetChunkSize, IVector2)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetRegionSize, int32_t)
     }
 }
 

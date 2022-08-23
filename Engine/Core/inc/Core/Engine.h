@@ -81,7 +81,6 @@ namespace Framework {
         void Prepare();
         void FixedUpdate();
         void Update(float_t dt);
-        void ResizeCallback(const SR_MATH_NS::IVector2& size);
         void DrawCallback();
         bool RegisterLibraries();
         void WorldThread();

@@ -20,17 +20,23 @@ namespace SR_UTILS_NS {
     }
 
     bool Component::IsActive() const noexcept {
-        return IsEnabled() && m_parent.Do<bool>([](auto&& data) -> bool {
-            return !data || data->m_isActive;
-        });
+        return m_isEnabled && (!m_parent || m_parent->m_isActive);
     }
 
     void Component::SetParent(GameObject *parent) {
-        m_parent.Replace(parent);
+        m_parent = parent;
     }
 
     void Component::SetEnabled(bool value) {
+        if (m_isEnabled == value) {
+            return;
+        }
+
         m_isEnabled = value;
+
+        if (m_parent) {
+            m_parent->SetDirty();
+        }
     }
 
     void Component::CheckActivity() {
@@ -48,19 +54,13 @@ namespace SR_UTILS_NS {
     }
 
     SR_WORLD_NS::Scene::Ptr Component::GetScene() const {
-        return m_parent.Do<SR_WORLD_NS::Scene::Ptr>([](auto&& data) {
-            if (!data) {
-                SRHalt("The component have not parent game object!");
-                return SR_WORLD_NS::Scene::Ptr();
-            }
+        if (!m_parent) {
+            SRHalt("The component have not parent game object!");
+            return SR_WORLD_NS::Scene::Ptr();
+        }
 
-            /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
-            return data->GetScene();
-        });
-    }
-
-    bool Component::IsEnabled() const noexcept {
-        return m_isEnabled;
+        /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
+        return m_parent->GetScene();
     }
 
     GameObject *Component::GetParent() const {
@@ -68,27 +68,23 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr Component::GetRoot() const {
-        return m_parent.Do<GameObject::Ptr>([](auto&& data) -> GameObjectPtr {
-            if (!data) {
-                return GameObjectPtr();
+        if (!m_parent) {
+            return GameObjectPtr();
+        }
+
+        GameObjectPtr root = m_parent->GetThis();
+
+        while (root.Valid()) {
+            if (auto&& parent = root->GetParent()) {
+                root = parent;
             }
+        }
 
-            GameObjectPtr root = data->GetThis();
-
-            while (root.Valid()) {
-                if (auto&& parent = root->GetParent()) {
-                    root = parent;
-                }
-            }
-
-            return root;
-        });
+        return root;
     }
 
     Transform *Component::GetTransform() const noexcept {
-        return m_parent.Do<Transform *>([](auto &&data) {
-            return data ? data->GetTransform() : nullptr;
-        });
+        return m_parent ? m_parent->GetTransform() : nullptr;
     }
 }
 

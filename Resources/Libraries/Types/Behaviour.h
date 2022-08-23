@@ -6,11 +6,13 @@
 #define EVOSCRIPTLIB_BEHAVIOUR_H
 
 #include "../Utils/BehaviourRegistration.h"
-#include "GameObject.h"
+#include <GameObject.h>
+#include <Scene.h>
 
 class Behaviour : public NonCopyable {
 public:
     using GameObjectPtr = SharedPtr<GameObject>;
+    using ScenePtr = SafePtr<Scene>;
     using Any = std::any;
     using Property = std::pair<
         std::function<Any(void)>, /// getter
@@ -43,6 +45,7 @@ public:
     void SetGameObject(GameObjectPtr ptr) {
         if ((gameObject = ptr)) {
             transform = gameObject->GetTransform();
+            scene = gameObject->GetScene();
         }
     }
 
@@ -85,6 +88,7 @@ protected:
 
 protected:
     GameObjectPtr gameObject;
+    ScenePtr scene;
     Transform* transform = nullptr;
 
 private:

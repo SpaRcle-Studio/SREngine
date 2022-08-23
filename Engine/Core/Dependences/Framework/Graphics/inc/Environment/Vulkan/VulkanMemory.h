@@ -156,12 +156,12 @@ namespace Framework::Graphics::VulkanTools {
         EvoVulkan::Memory::Allocator*             m_allocator               = nullptr;
         EvoVulkan::Types::CmdPool*                m_pool                    = nullptr;
 
-        std::pair<uint32_t, int32_t>              m_countUBO                = { 10000, 0 };
+        std::pair<uint32_t, int32_t>              m_countUBO                = { 32768 / 2, 0 };
         std::pair<uint32_t, int32_t>              m_countVBO                = { 1000, 0 };
         std::pair<uint32_t, int32_t>              m_countIBO                = { 1000, 0 };
         std::pair<uint32_t, int32_t>              m_countFBO                = { 15, 0 };
         std::pair<uint32_t, int32_t>              m_countShaderPrograms     = { 50, 0 };
-        std::pair<uint32_t, int32_t>              m_countDescriptorSets     = { 10000, 0 };
+        std::pair<uint32_t, int32_t>              m_countDescriptorSets     = { 32768 / 2, 0 };
         std::pair<uint32_t, int32_t>              m_countTextures           = { 1000, 0 };
 
         EvoVulkan::Types::VmaBuffer**             m_UBOs                    = nullptr;
