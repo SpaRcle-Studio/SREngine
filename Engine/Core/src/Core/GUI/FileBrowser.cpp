@@ -29,6 +29,9 @@ namespace SR_CORE_NS::GUI {
                 SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
                 m_dirtySelectedDir = true;
             }
+            if (ImGui::Selectable("Open in native Explorer")) {
+                SR_UTILS_NS::Platform::OpenInNativeFileExplorer(m_selectedDir);
+            }
             if (ImGui::Selectable("Refresh")) {
                 m_dirtySelectedDir = true;
             }
@@ -100,7 +103,7 @@ namespace SR_CORE_NS::GUI {
                                               "%s",
                                               folder.filename.c_str());
 
-                if (ImGui::IsItemClicked()) {
+                if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
                     m_selectedDir = folder.path;
                     m_dirtySelectedDir = true;
                     m_dirtyFoldersTree = true;
@@ -166,17 +169,26 @@ namespace SR_CORE_NS::GUI {
         ImGui::EndPopup();
     }
 
-    void FileBrowser::CurrentDirectoryPanel() {
-        if (ImGui::BeginChild("current directory panel", ImVec2(0, 22))) {
+    void FileBrowser::CurrentDirectoryPanel(const float_t height) { //height используется и как ширина кнопки обновить
+        if (ImGui::BeginChild("current directory panel", ImVec2(0.f, height))) {
 
             ImGui::Separator();
-
+            //Back Button
             if (ImGui::Button("Back")) {
                 m_selectedDir = m_selectedDir.GetPrevious();
                 m_dirtySelectedDir = true;
             }
+            //Current Directory Text
             ImGui::SameLine();
             ImGui::Text("%s", m_selectedDir.CStr());
+            //Refresh Button
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x - height);
+            if (GUISystem::Instance().ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset),
+                                                    height-10.f)){
+                m_dirtySelectedDir = true;
+                m_dirtyFoldersTree = true;
+            }
 
             ImGui::EndChild();
         }
@@ -198,10 +210,12 @@ namespace SR_CORE_NS::GUI {
 
                 ImGui::BeginGroup();
 
+                const std::string headerid = "##FileBrowserElement%s" + element.filename;
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.icontype);
 
-                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##FileBrowserElement%s", element.filename.c_str()),
+
+                    if (GUISystem::Instance().ImageButtonDouble(headerid,
                             descriptor, SR_MATH_NS::IVector2(50), 0)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
@@ -211,8 +225,8 @@ namespace SR_CORE_NS::GUI {
 
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.icontype);
 
-
-                    if (GUISystem::Instance().ImageButtonDouble(SR_FORMAT("##FileBrowserElement%s", element.filename.c_str()), descriptor,
+                    //SR_FORMAT("##FileBrowserElement%s", element.filename.c_str())
+                    if (GUISystem::Instance().ImageButtonDouble(headerid, descriptor,
                                                                 SR_MATH_NS::IVector2(50), 0)) {
                         SR_UTILS_NS::Platform::OpenWithAssociatedApp(element.filename);
                     }
@@ -220,9 +234,9 @@ namespace SR_CORE_NS::GUI {
                     FileContextMenu(element.filename);
                 }
 
-                auto id = SR_UTILS_NS::StringUtils::CutName(element.filename, 8);
+                const std::string filenametodraw = SR_UTILS_NS::StringUtils::CutName(element.filename, 8);
 
-                ImGui::Text("%s", id.c_str());
+                ImGui::Text("%s", filenametodraw.c_str());
 
                 ImGui::EndGroup();
 
@@ -246,7 +260,7 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
 
-            Draw(m_defaultRoot);
+            DrawFoldersTree(m_foldersTree);
 
             m_assetWidth = ImGui::GetItemRectSize().x;
 
@@ -256,19 +270,6 @@ namespace SR_CORE_NS::GUI {
             CheckFocused();
 
             ImGui::EndChild();
-        }
-    }
-
-    void FileBrowser::Draw(const SR_UTILS_NS::Path &root) {
-
-        if (m_dirtyFoldersTree) {
-            m_dirtyFoldersTree = false;
-            m_foldersTree.innerfolders.clear();
-            m_foldersTree.path = root;
-            LoadFoldersTree(m_foldersTree);
-            DrawFoldersTree(m_foldersTree);
-        } else {
-            DrawFoldersTree(m_foldersTree);
         }
     }
 
@@ -333,17 +334,19 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::Draw() {
-        if (m_dirtySelectedDir) {
-            LoadElements(m_selectedDir);
-            m_dirtySelectedDir = false;
-        }
+
         // left
 
         m_assetWidth = 0.f;
 
         const float_t leftWidth = 250;
 
-        //
+        if (m_dirtyFoldersTree) {
+            m_foldersTree.innerfolders.clear();
+            m_foldersTree.path = m_defaultRoot;
+            LoadFoldersTree(m_foldersTree);
+            m_dirtyFoldersTree = false;
+        }
         FileCatalogPanel(leftWidth);
 
         float_t windowWidth = ImGui::GetWindowWidth();          //код для исключения ошибок ImGui
@@ -356,7 +359,7 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::BeginGroup();
 
-        CurrentDirectoryPanel();
+        CurrentDirectoryPanel(22);
 
         auto&& DirectoryPanelHeight = ImGui::GetWindowHeight(); //код для исключения ошибок ImGui
         if (DirectoryPanelHeight < 50) {                        //проверяет высоту панели нынешней директории
@@ -364,7 +367,10 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-
+        if (m_dirtySelectedDir) {
+            LoadElements(m_selectedDir);
+            m_dirtySelectedDir = false;
+        }
         ItemViewPanel();
 
         /*ImGui::BeginChild("buttons");

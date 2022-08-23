@@ -211,7 +211,7 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
         [[nodiscard]] glm::vec2 GetWindowSize()                 const override;
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return m_basicWindow->IsCollapsed(); }
+        [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return (m_basicWindow->IsCollapsed() || m_kernel->IsSurfaceCollapsed()); }
 
         bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }

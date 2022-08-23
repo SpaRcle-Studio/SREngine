@@ -64,6 +64,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsFullScreen() const;
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
+        SR_NODISCARD bool IsWindowCollapsed() const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
         SR_NODISCARD SR_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD bool IsAlive() const;

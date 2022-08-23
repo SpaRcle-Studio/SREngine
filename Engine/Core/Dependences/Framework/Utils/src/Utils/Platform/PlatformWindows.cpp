@@ -422,4 +422,8 @@ namespace SR_UTILS_NS::Platform {
         auto&& view = path.View();
         return view.size() >= 2 && view[1] == ':';
     }
+
+    void OpenInNativeFileExplorer(const Path &path){
+        ShellExecuteA(NULL, "open", path.ToString().c_str(), NULL, NULL, SW_SHOWDEFAULT);
+    }
 }

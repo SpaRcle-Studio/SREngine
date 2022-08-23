@@ -749,4 +749,8 @@ namespace SR_GRAPH_NS {
     void Window::SetResizeCallback(const Window::ResizeCallback &resizeCallback) {
         m_resizeCallback = resizeCallback;
     }
+
+    bool Window::IsWindowCollapsed() const {
+        return m_env->IsWindowCollapsed();
+    }
 }

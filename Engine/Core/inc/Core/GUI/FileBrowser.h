@@ -21,14 +21,11 @@ namespace SR_CORE_NS::GUI {
     private:
         void FileContextMenu(const std::string &element);
         void CurrentDirectoryContextMenu();
-        void CurrentDirectoryPanel();
+        void CurrentDirectoryPanel(const float_t height);
         void ItemViewPanel();
         void FileCatalogPanel(const float_t& leftWidth);
         void Draw() override;
-        void Draw(const SR_UTILS_NS::Path& root);
         void LoadElements(const SR_UTILS_NS::Path& root); //Загружает элементы CurrentDirectoryPanel в кэш
-         //Загружает дерево файлов в кэш
-
 
     private:
         SR_UTILS_NS::Path m_defaultRoot;

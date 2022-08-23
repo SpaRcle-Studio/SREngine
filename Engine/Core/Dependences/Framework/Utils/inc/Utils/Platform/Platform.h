@@ -32,6 +32,7 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern bool FolderExists(const Path& path);
     SR_DLL_EXPORT extern bool FileIsHidden(const Path& path);
     SR_DLL_EXPORT extern std::list<Path> GetInDirectory(const Path& dir, Path::Type type);
+    SR_DLL_EXPORT extern void OpenInNativeFileExplorer(const Path& dir);
 }
 
 

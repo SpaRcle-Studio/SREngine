@@ -207,7 +207,7 @@ namespace Framework {
     }
 
     void Engine::DrawCallback() {
-        if (!m_isRun || m_window == nullptr || !m_window->IsWindowFocus()) {
+        if (!m_isRun || m_window == nullptr || m_window->IsWindowCollapsed()) {
             m_accumulator = 0.f;
             return;
         }
