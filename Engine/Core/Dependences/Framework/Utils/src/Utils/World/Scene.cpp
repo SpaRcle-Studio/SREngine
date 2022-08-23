@@ -42,12 +42,12 @@ namespace SR_WORLD_NS {
         ReloadConfig();
     }
 
-    SR_HTYPES_NS::SafePtr<GameObject> Scene::Instance(const std::string& name) {
+    GameObject::Ptr Scene::Instance(const std::string& name) {
         if (Debug::Instance().GetLevel() >= Debug::Level::High) {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
         }
 
-        Types::SafePtr<GameObject> gm = *(new GameObject(GetThis(), name));
+        GameObject::Ptr gm = *(new GameObject(GetThis(), name));
 
         m_gameObjects.emplace_back(gm);
 
@@ -56,7 +56,7 @@ namespace SR_WORLD_NS {
         return gm;
     }
 
-    SR_HTYPES_NS::SafePtr<Scene> Scene::New(const Path& path) {
+    Scene::Ptr Scene::New(const Path& path) {
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::New() : creating new scene...");
         }
@@ -65,7 +65,7 @@ namespace SR_WORLD_NS {
 
         if (!scene) {
             SR_ERROR("Scene::New() : failed to allocate scene!");
-            return Types::SafePtr<Scene>();
+            return Scene::Ptr();
         }
 
         scene->SetPath(path);
@@ -74,7 +74,7 @@ namespace SR_WORLD_NS {
         return scene;
     }
 
-    SR_HTYPES_NS::SafePtr<Scene> World::Scene::Load(const Path& path) {
+    Scene::Ptr World::Scene::Load(const Path& path) {
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::Load() : loading scene...\n\tPath: " + path.ToString());
         }
@@ -83,7 +83,7 @@ namespace SR_WORLD_NS {
 
         if (!scene) {
             SR_ERROR("Scene::Load() : failed to allocate scene!");
-            return Types::SafePtr<Scene>();
+            return Scene::Ptr();
         }
 
         scene->SetPath(path);
@@ -134,23 +134,14 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    bool Scene::Free() {
-        if (!m_isDestroy) {
-            SR_ERROR("Scene::Free() : scene \"" + std::string(m_name) + "\" is not destroyed!");
-            return false;
+    Scene::~Scene() {
+        SRAssert(m_isDestroy);
+
+        if (Debug::Instance().GetLevel() >= Debug::Level::Low) {
+            SR_LOG("Scene::~Scene() : free \"" + std::string(m_name) + "\" scene pointer...");
         }
 
-        if (Debug::Instance().GetLevel() > Debug::Level::None) {
-            SR_LOG("Scene::Free() : free \"" + std::string(m_name) + "\" scene pointer...");
-        }
-
-        if (m_observer) {
-            delete m_observer;
-            m_observer = nullptr;
-        }
-
-        delete this;
-        return true;
+        SR_SAFE_DELETE_PTR(m_observer);
     }
 
     GameObjects& Scene::GetRootGameObjects() {
@@ -169,25 +160,18 @@ namespace SR_WORLD_NS {
         return m_rootObjects;
     }
 
-    SR_HTYPES_NS::SafePtr<GameObject> Scene::FindByComponent(const std::string &name) {
-        for (const auto& gm : m_gameObjects)
-            if (gm->ContainsComponent(name))
-                return gm;
+    GameObject::Ptr Scene::FindByComponent(const std::string &name) {
+        for (auto&& gameObject : m_gameObjects) {
+            if (gameObject->ContainsComponent(name)) {
+                return gameObject;
+            }
+        }
 
-        return Types::SafePtr<GameObject>();
+        return GameObject::Ptr();
     }
 
     void Scene::OnChanged() {
         m_isHierarchyChanged = true;
-    }
-
-    void Scene::ForEachRootObjects(const std::function<void(Types::SafePtr<GameObject>)> &fun) {
-        for (auto gm : GetRootGameObjects()) {
-            if (gm.LockIfValid()) {
-                fun(gm);
-                gm.Unlock();
-            }
-        }
     }
 
     bool Scene::Save() {
@@ -250,7 +234,7 @@ namespace SR_WORLD_NS {
 
         const World::Offset offset = m_observer->m_offset;
 
-        if (m_observer->m_target.LockIfValid()) {
+        if (m_observer->m_target.RecursiveLockIfValid()) {
             m_observer->m_targetPosition = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
             m_observer->m_target.Unlock();
         }
@@ -452,7 +436,7 @@ namespace SR_WORLD_NS {
         }
     }
 
-    bool Scene::Remove(const Types::SafePtr<GameObject> &gameObject) {
+    bool Scene::Remove(const GameObject::Ptr &gameObject) {
         for (auto pIt = m_gameObjects.begin(); pIt != m_gameObjects.end(); ++pIt) {
             if (pIt->Get() != gameObject.Get()) {
                 continue;
@@ -485,12 +469,12 @@ namespace SR_WORLD_NS {
         return m_tensor.at(key);
     }
 
-    Types::SafePtr<GameObject> Scene::Instance(const Types::RawMesh *rawMesh) {
+    GameObject::Ptr Scene::Instance(const SR_HTYPES_NS::RawMesh *rawMesh) {
         SRAssert2(false, "Method isn't implemented!");
-        return Types::SafePtr<GameObject>();
+        return GameObject::Ptr();
     }
 
-    SR_HTYPES_NS::SafePtr<GameObject> Scene::InstanceFromFile(const std::string &path) {
+    GameObject::Ptr Scene::InstanceFromFile(const std::string &path) {
         if (auto&& raw = SR_HTYPES_NS::RawMesh::Load(path)) {
             GameObject::Ptr root = Instance(raw);
 
@@ -501,7 +485,7 @@ namespace SR_WORLD_NS {
             return root;
         }
 
-        return SR_HTYPES_NS::SafePtr<GameObject>();
+        return GameObject::Ptr();
     }
 
     bool Scene::Reload() {
@@ -509,7 +493,7 @@ namespace SR_WORLD_NS {
         return ReloadConfig() && ReloadChunks();
     }
 
-    Types::SafePtr<GameObject> Scene::Find(const std::string &name) {
+    GameObject::Ptr Scene::Find(const std::string &name) {
         for (auto&& object : m_gameObjects) {
             /// блокировать объекты не нужно, так как уничтожиться они могут только из сцены
             /// Но стоит предусмотреть защиту от одновременного изменения имени
@@ -518,10 +502,10 @@ namespace SR_WORLD_NS {
             }
         }
 
-        return SafePtr<GameObject>(nullptr);
+        return GameObject::Ptr();
     }
 
-    void Scene::SetObserver(const Scene::GameObjectPtr &target) {
+    void Scene::SetObserver(const GameObject::Ptr& target) {
         if (target != m_observer->m_target) {
             m_observer->SetTarget(target);
         }

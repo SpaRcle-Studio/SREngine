@@ -61,7 +61,7 @@ namespace SR_CORE_NS::GUI {
         }
 
     private:
-        Helper::Types::SafePtr<Helper::GameObject> m_gameObject;
+        SR_UTILS_NS::GameObject::Ptr m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
 

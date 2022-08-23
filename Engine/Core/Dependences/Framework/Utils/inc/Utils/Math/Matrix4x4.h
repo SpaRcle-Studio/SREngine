@@ -34,6 +34,20 @@ namespace SR_MATH_NS {
             self = glm::scale(self, scale.ToGLM());
         }
 
+        Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) {
+            self = glm::translate(glm::mat4(1), {
+                    translate.x,
+                    translate.y,
+                    translate.z
+            });
+
+            self = glm::scale(self, skew.ToGLM());
+
+            self *= mat4_cast(rotation.ToGLM());
+
+            self = glm::scale(self, scale.ToGLM());
+        }
+
         explicit constexpr Matrix4x4(const Unit& scalar) {
             self = glm::mat4(static_cast<float_t>(scalar));
         }
@@ -161,7 +175,7 @@ namespace SR_MATH_NS {
             return false;
         }
 
-        [[nodiscard]] Quaternion GetQuat() const {
+        SR_NODISCARD Quaternion GetQuat() const {
             glm::vec3 scale;
             glm::quat rotation;
             glm::vec3 translation;
@@ -172,6 +186,10 @@ namespace SR_MATH_NS {
             glm::decompose(self, scale, rotation, translation, skew, perspective);
 
             return Quaternion(rotation);
+        }
+
+        SR_NODISCARD FVector3 GetEulers() const {
+            return GetQuat().EulerAngle();
         }
 
         Matrix4x4 operator*(const Matrix4x4& mat) const {

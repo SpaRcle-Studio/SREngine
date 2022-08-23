@@ -55,6 +55,9 @@ namespace SR_UTILS_NS {
 
         virtual void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix) { }
 
+        virtual void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) { }
+        virtual void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) { }
+
         virtual void SetTranslation(const Math::FVector3& translation) { }
         virtual void SetTranslation(Math::Unit x, Math::Unit y, Math::Unit z);
         virtual void SetTranslationAndRotation(const Math::FVector3& translation, const Math::FVector3& euler) { }

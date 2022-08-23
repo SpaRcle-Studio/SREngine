@@ -6,6 +6,7 @@
 #define GAMEENGINE_OBSERVER_H
 
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Common/NonCopyable.h>
@@ -50,10 +51,10 @@ namespace SR_WORLD_NS {
     };
 
     class SR_DLL_EXPORT Observer : public NonCopyable {
-        using GameObjectPtr = SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>;
+        using GameObjectPtr = SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<Scene>;
     public:
-        Observer(const ScenePtr& scene);
+        explicit Observer(const ScenePtr& scene);
         ~Observer() override = default;
 
     public:

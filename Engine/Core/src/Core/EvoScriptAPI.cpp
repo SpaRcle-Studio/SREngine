@@ -115,12 +115,10 @@ namespace Framework {
                 { {"SafePtr<Scene>", EvoScript::Public } }
         );
 
-        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, Destroy, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, Free, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
-        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
     }
@@ -208,11 +206,11 @@ namespace Framework {
         using namespace SR_MATH_NS;
 
         generator->RegisterNewClass("GameObject", "GameObject",
-                { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "ISavable.h" },
-        { { "SafePtr<GameObject>", EvoScript::Public } });
+                { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "Types/SharedPtr.h", "ISavable.h" },
+        { { "SharedPtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
@@ -274,6 +272,7 @@ namespace Framework {
         using namespace SR_UTILS_NS;
 
         ESRegisterMethod(EvoScript::Public, generator, Transform, Rotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, GlobalRotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
         ESRegisterMethod(EvoScript::Public, generator, Transform, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
     }
@@ -289,10 +288,41 @@ namespace Framework {
         // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), ESArg1(key))
         // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyUp, bool, ESArg1(KeyCode key), ESArg1(key))
 
-        generator->RegisterEnum("KeyCode", "Input", true, {
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKey, bool, ESArg1(KeyCode key), {
+            return SR_UTILS_NS::Input::Instance().GetKey(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), {
+            return SR_UTILS_NS::Input::Instance().GetKeyDown(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyUp, bool, ESArg1(KeyCode key), {
+            return SR_UTILS_NS::Input::Instance().GetKeyUp(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetMouseDown, bool, ESArg1(MouseCode key), {
+            return SR_UTILS_NS::Input::Instance().GetMouseDown(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetMouse, bool, ESArg1(MouseCode key), {
+            return SR_UTILS_NS::Input::Instance().GetMouse(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetMouseUp, bool, ESArg1(MouseCode key), {
+            return SR_UTILS_NS::Input::Instance().GetMouseUp(key);
+        });
+
+        ESRegisterCustomStaticMethodArg0(EvoScript::Public, generator, Input, GetMouseDrag, FVector2, {
+            return SR_UTILS_NS::Input::Instance().GetMouseDrag();
+        });
+
+        generator->RegisterEnum("MouseCode", "Input", true, {
                 { "MouseLeft",  1 },
                 { "MouseRight", 2 },
                 { "MouseMiddle", 4 },
+        });
+
+        generator->RegisterEnum("KeyCode", "Input", true, {
                 { "BackSpace", 8 },
                 { "Tab", 9 },
                 { "Enter", 13 },
@@ -422,10 +452,6 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawTexture, void, ESArg4(IVector2 win, IVector2 img, uint32_t id, bool center), ESArg4(win, img, id, center))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawWorldEdit, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawInspector, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, SetGuizmoTool, void, ESArg1(uint8_t id), ESArg1(id))
-        //ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawGuizmo, void, ESArg2(Camera* camera, SafePtr<GameObject> gm), ESArg2(camera, gm))
     }
 
     void API::RegisterPostProcessing(EvoScript::AddressTableGen *generator) {

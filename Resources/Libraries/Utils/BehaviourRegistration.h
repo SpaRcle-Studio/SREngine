@@ -39,7 +39,7 @@
         g_codegen_behaviour_ptr->Close();                                  \
     }                                                                      \
                                                                            \
-    EXTERN void SetGameObject(SafePtr<GameObject> ptr) {                   \
+    EXTERN void SetGameObject(Behaviour::GameObjectPtr ptr) {              \
         g_codegen_behaviour_ptr->SetGameObject(ptr);                       \
     }                                                                      \
 

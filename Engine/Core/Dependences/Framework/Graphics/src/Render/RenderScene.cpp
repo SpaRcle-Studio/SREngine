@@ -248,12 +248,13 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            /// Выбирается камера, чей приоритет ближе к нулю
-            if (!m_mainCamera || m_mainCamera->GetPriority() > cameraInfo.pCamera->GetPriority()) {
+            /// Выбирается камера, чей приоритет выше
+            if (!m_mainCamera || cameraInfo.pCamera->GetPriority() > m_mainCamera->GetPriority()) {
                 m_mainCamera = cameraInfo.pCamera;
             }
         }
 
+        /// TODO: убедиться, что сортируется так, как нужно
         std::stable_sort(m_offScreenCameras.begin(), m_offScreenCameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
             return lhs->GetPriority() < rhs->GetPriority();
         });

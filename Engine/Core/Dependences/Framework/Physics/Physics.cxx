@@ -5,6 +5,7 @@
 #include <Utils/macros.h>
 
 #include "src/Physics/Base/Rigidbody.cpp"
+#include "src/Physics/Base/Collider.cpp"
 
 #include "src/Physics/3D/Rigidbody3D.cpp"
 

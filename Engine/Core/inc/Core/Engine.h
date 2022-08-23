@@ -19,6 +19,10 @@
 #include <Utils/Input/InputHandler.h>
 #include <Utils/Types/Function.h>
 
+namespace SR_PHYSICS_NS {
+    class PhysicsScene;
+}
+
 namespace SR_WORLD_NS {
     class Scene;
 }
@@ -41,6 +45,7 @@ namespace Framework {
         friend class API;
         using PipelinePtr = SR_GRAPH_NS::Environment*;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
+        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = Helper::Types::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Clock = std::chrono::high_resolution_clock;
@@ -82,13 +87,13 @@ namespace Framework {
         void WorldThread();
 
     private:
-        std::atomic<bool> m_isCreate    = false;
-        std::atomic<bool> m_isInit      = false;
-        std::atomic<bool> m_isRun       = false;
+        std::atomic<bool> m_isCreate  = false;
+        std::atomic<bool> m_isInit = false;
+        std::atomic<bool> m_isRun = false;
 
-        std::atomic<bool> m_exitEvent   = false;
-        std::atomic<bool> m_isActive    = false;
-        std::atomic<bool> m_isPaused    = false;
+        std::atomic<bool> m_exitEvent = false;
+        std::atomic<bool> m_isActive = false;
+        std::atomic<bool> m_isPaused = false;
 
         float_t m_speed = 1.f;
         float_t m_updateFrequency = 1.f;
@@ -96,16 +101,16 @@ namespace Framework {
         TimePoint m_timeStart;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
-        SR_GRAPH_NS::Window*     m_window      = nullptr;
-        SR_GRAPH_NS::Render*     m_render      = nullptr;
+        SR_GRAPH_NS::Window* m_window = nullptr;
+        Core::GUI::EditorGUI* m_editor = nullptr;
+        SR_UTILS_NS::InputDispatcher* m_input = nullptr;
 
-        SR_HTYPES_NS::Thread::Ptr     m_worldThread = nullptr;
+        SR_HTYPES_NS::Thread::Ptr m_worldThread = nullptr;
 
-        Core::GUI::EditorGUI*         m_editor      = nullptr;
-        ScenePtr                      m_scene       = ScenePtr();
-        RenderScenePtr                m_renderScene = RenderScenePtr();
-        SR_UTILS_NS::InputDispatcher* m_input       = nullptr;
-        PipelinePtr                   m_pipeline    = nullptr;
+        ScenePtr m_scene = { };
+        PhysicsScenePtr m_physicsScene = { };
+        RenderScenePtr m_renderScene = { };
+        PipelinePtr m_pipeline = nullptr;
 
     };
 }

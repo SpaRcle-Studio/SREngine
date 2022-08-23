@@ -26,7 +26,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::Draw() {
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
             if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
@@ -45,8 +45,8 @@ namespace SR_CORE_NS::GUI {
 
                     DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
 
-                    //if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
-                    //    m_guizmo->Draw(*selected.begin(), m_camera);
+                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                        m_guizmo->Draw(*selected.begin(), m_camera);
 
                     CheckFocused();
                     CheckHovered();
@@ -84,7 +84,7 @@ namespace SR_CORE_NS::GUI {
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
 
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             if (auto* camera = m_camera->GetComponent<SR_GTYPES_NS::Camera>()) {
                 //camera->SetDirectOutput(!m_enabled);
             }
@@ -100,7 +100,7 @@ namespace SR_CORE_NS::GUI {
         auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
         auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
 
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             if (wheel != 0) {
                 m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
             }
@@ -190,6 +190,9 @@ namespace SR_CORE_NS::GUI {
         pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
 
         camera->AddComponent(pCamera);
+
+        /// Камера редактора имеет наивысшый закадровый приоритет
+        pCamera->SetPriority(SR_INT32_MIN);
 
         camera->GetTransform()->GlobalTranslate(m_translation);
         camera->GetTransform()->GlobalRotate(m_rotation);

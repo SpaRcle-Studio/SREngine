@@ -129,8 +129,8 @@ namespace SR_WORLD_NS {
 
         auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
-        for (const auto &gameObject : gameObjects) {
-            if (gameObject.LockIfValid()) {
+        for (auto&& gameObject : gameObjects) {
+            if (gameObject.RecursiveLockIfValid()) {
                 /// сохраняем объекты относительно начала координат чанка
                 SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 

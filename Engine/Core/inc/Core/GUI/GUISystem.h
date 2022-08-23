@@ -105,10 +105,7 @@ namespace Framework::Core::GUI {
             ImGui::Text("%s", text.c_str());
         }
 
-        void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
-
-        void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) const;
 
         [[nodiscard]] Helper::Math::IVector2 GetWindowSize() const {
             ImVec2 size = ImGui::GetWindowSize();

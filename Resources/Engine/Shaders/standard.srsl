@@ -11,14 +11,16 @@ DepthTest true;
 uniform vec4 color;
 uniform sampler2D diffuse;
 
-vec4 GetTextureColor() {
-    return texture(diffuse, UV);
-} 
-
 void fragment() {
-	COLOR = GetTextureColor() * color;
+    vec3 diffuse_albedo = texture(diffuse, UV).rgb * color.rgb;
+
+    vec3 norm = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 12.0;
+
+	COLOR = vec4(diffuse_albedo + norm, 1.0);
 }
 
 void vertex() {
     VERTEX.x = -VERTEX.x;
+    //VERTEX.z = -VERTEX.z;
+    //VERTEX.y = -VERTEX.y;
 }

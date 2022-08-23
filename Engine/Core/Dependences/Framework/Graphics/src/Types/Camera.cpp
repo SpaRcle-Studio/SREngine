@@ -15,8 +15,10 @@ namespace SR_GTYPES_NS {
     {
         SR_UTILS_NS::Component::InitComponent<Camera>();
 
-        UpdateProjection();
-        UpdateView();
+        if (width != 0 && height != 0) {
+            UpdateProjection();
+            UpdateView();
+        }
     }
 
     Camera::~Camera() {
@@ -57,6 +59,7 @@ namespace SR_GTYPES_NS {
         marshal.Write(m_far);
         marshal.Write(m_near);
         marshal.Write(m_FOV);
+        marshal.Write(m_priority);
 
         return marshal;
     }
@@ -65,6 +68,7 @@ namespace SR_GTYPES_NS {
         const auto&& _far = marshal.Read<float_t>();
         const auto&& _near = marshal.Read<float_t>();
         const auto&& FOV = marshal.Read<float_t>();
+        const auto&& priority = marshal.Read<int32_t>();
 
         auto&& pWindow = dataStorage->GetPointer<Window>();
 
@@ -79,6 +83,7 @@ namespace SR_GTYPES_NS {
         pCamera->SetFar(_far);
         pCamera->SetNear(_near);
         pCamera->SetFOV(FOV);
+        pCamera->SetPriority(priority);
 
         pCamera->UpdateView();
         pCamera->UpdateProjection();
@@ -200,17 +205,26 @@ namespace SR_GTYPES_NS {
 
     void Camera::SetFar(float_t value) {
         m_far = value;
-        UpdateProjection();
+
+        if (!m_viewportSize.HasZero()) {
+            UpdateProjection();
+        }
     }
 
     void Camera::SetNear(float_t value) {
         m_near = value;
-        UpdateProjection();
+
+        if (!m_viewportSize.HasZero()) {
+            UpdateProjection();
+        }
     }
 
     void Camera::SetFOV(float_t value) {
         m_FOV = value;
-        UpdateProjection();
+
+        if (!m_viewportSize.HasZero()) {
+            UpdateProjection();
+        }
     }
 
     void Camera::OnEnable() {
@@ -255,5 +269,17 @@ namespace SR_GTYPES_NS {
         }, m_renderTechnique);
 
         m_renderTechnique = path;
+    }
+
+    void Camera::SetPriority(int32_t priority) {
+        m_priority = priority;
+
+        if (!m_parent) {
+            return;
+        }
+
+        GetRenderScene().Do([](auto&& pRenderScene) {
+            pRenderScene->SetDirtyCameras();
+        });
     }
 }

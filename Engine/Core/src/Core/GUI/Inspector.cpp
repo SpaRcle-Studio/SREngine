@@ -9,6 +9,7 @@
 #include <Utils/ECS/Transform2D.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Scripting/Base/Behaviour.h>
+#include <Physics/3D/Rigidbody3D.h>
 #include <UI/Sprite2D.h>
 #include <UI/Anchor.h>
 #include <UI/Canvas.h>
@@ -63,8 +64,9 @@ namespace Framework::Core::GUI {
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             m_gameObject.Replace(*selected.begin());
         }
-        else
+        else {
             m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
+        }
     }
 
     void Inspector::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -108,6 +110,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
+            copyPtrComponent = DrawComponent<SR_PHYSICS_NS::Types::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");

@@ -23,7 +23,16 @@ else()
     add_library(Physics::lib ALIAS Physics)
 endif()
 
-target_link_libraries(Physics ${BULLET_LIBRARIES})
+target_link_libraries(Physics
+    Bullet3Common
+    BulletSoftBody
+    BulletInverseDynamicsUtils
+    BulletInverseDynamics
+    BulletDynamics
+    BulletCollision
+    LinearMath
+    BussIK
+)
 
 target_include_directories(Physics PUBLIC inc)
 target_include_directories(Physics PUBLIC libs)

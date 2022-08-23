@@ -8,6 +8,7 @@
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Marshal.h>
 #include <Utils/Types/SafeVariable.h>
@@ -33,7 +34,7 @@ namespace SR_UTILS_NS {
         friend class GameObject;
         friend class ComponentManager;
     public:
-        using GameObjectPtr = SR_HTYPES_NS::SafePtr<GameObject>;
+        using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
     public:
         ~Component() override = default;
 
@@ -75,7 +76,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE GameObject* GetParent() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
-        SR_NODISCARD Transform* GetTransform() const;
+        SR_NODISCARD Transform* GetTransform() const noexcept;
 
     protected:
         template<typename T> void InitComponent() {

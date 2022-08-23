@@ -65,7 +65,7 @@ namespace SR_GRAPH_NS::Types {
 
         /// Проверяем существование меша
         SR_HTYPES_NS::RawMesh* pRawMesh = nullptr;
-        if (pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
+        if ((pRawMesh = SR_HTYPES_NS::RawMesh::Load(path))) {
             pRawMesh->AddUsePoint();
             exists = id < pRawMesh->GetMeshesCount();
         }

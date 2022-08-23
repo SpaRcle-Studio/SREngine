@@ -75,8 +75,8 @@ using namespace Framework::Graphics::UI;
 using namespace Framework::Graphics::Types;
 using namespace Framework::Graphics::Animations;
 
-//using namespace Framework::Physics;
-//using namespace Framework::Physics::Types;
+using namespace Framework::Physics;
+using namespace Framework::Physics::Types;
 
 using namespace Framework::Scripting;
 
@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
 
     auto&& exe = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
     Debug::Instance().Init(exe, true, Debug::Theme::Dark);
-    Debug::Instance().SetLevel(Debug::Level::Medium);
+    Debug::Instance().SetLevel(Debug::Level::Low);
 
     Thread::Factory::Instance().SetMainThread();
 
@@ -144,7 +144,7 @@ int main(int argc, char **argv) {
 
     // Register all components
     {
-        //ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
+        ComponentManager::Instance().RegisterComponent<Rigidbody3D>([]() -> Rigidbody3D* { return new Rigidbody3D(); });
         ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return new Mesh3D(); });
         ComponentManager::Instance().RegisterComponent<Sprite2D>([]() -> Sprite2D* { return new Sprite2D(); });
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });

@@ -9,6 +9,7 @@
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Types/SafeVariable.h>
 
 namespace SR_UTILS_NS::World {
@@ -34,7 +35,7 @@ namespace SR_UTILS_NS {
     );
     typedef uint64_t GameObjectFlagBits;
 
-    class SR_DLL_EXPORT GameObject : public Types::SafePtr<GameObject>, public Entity {
+    class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public Entity {
         SR_ENTITY_SET_VERSION(1001);
     private:
         friend class World::Scene;
@@ -43,23 +44,25 @@ namespace SR_UTILS_NS {
         friend class Transform;
         friend class Component;
     public:
-        typedef Types::SafePtr<GameObject> Ptr;
+        using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
+        using Super = Ptr;
         using GameObjects = std::list<GameObject::Ptr>;
-        using Components = SR_HTYPES_NS::SafeVar<std::list<Component*>>;
+        using Components = std::list<Component*>;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<World::Scene>;
 
     private:
-        GameObject(const Types::SafePtr<World::Scene>& scene, std::string name, std::string tag = "Untagged");
+        GameObject(const ScenePtr& scene, std::string name, std::string tag = "Untagged");
         ~GameObject() override;
 
     public:
-        SR_NODISCARD Types::SafePtr<World::Scene> GetScene() const { return m_scene; }
+        SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD Transform* GetParentTransform() const { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
-        SR_NODISCARD std::string GetName() const;
+        SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const;
-        SR_NODISCARD bool IsEnabled() const { return m_isEnabled; }
+        SR_NODISCARD bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
@@ -71,8 +74,8 @@ namespace SR_UTILS_NS {
         Math::FVector3 GetBarycenter();
         Math::FVector3 GetHierarchyBarycenter();
 
-        void ForEachChild(const std::function<void(Types::SafePtr<GameObject>&)>& fun);
-        void ForEachChild(const std::function<void(const Types::SafePtr<GameObject>&)>& fun) const;
+        void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
+        void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;
         bool SetParent(const GameObject::Ptr& parent);
         void SetName(const std::string& name);
         void SetTag(const std::string& tag);
@@ -119,28 +122,25 @@ namespace SR_UTILS_NS {
         void OnAttached();
         void OnMatrixDirty();
 
-        /// TODO: remove this method
-        void Free();
-
         bool UpdateEntityPath();
 
     private:
-        std::atomic<bool>                   m_isEnabled      = true;
-        std::atomic<bool>                   m_isActive       = false;
-        std::atomic<bool>                   m_isDestroy      = false;
+        GameObject::Ptr    m_parent     = { };
+        GameObjects        m_children   = { };
 
-        GameObject::Ptr                     m_parent         = GameObject::Ptr();
-        std::list<GameObject::Ptr>          m_children       = { };
+        ScenePtr           m_scene      = { };
+        Transform*         m_transform  = nullptr;
 
-        Types::SafePtr<World::Scene>        m_scene          = Types::SafePtr<World::Scene>();
-        Transform*                          m_transform      = nullptr;
+        Components         m_components = { };
 
-        Components                          m_components     = std::list<Component*>();
+        std::string        m_name       = "Unnamed";
+        std::string        m_tag        = "Untagged";
 
-        std::string                         m_name           = "Unnamed";
-        std::string                         m_tag            = "Untagged";
+        GameObjectFlagBits m_flags      = GAMEOBJECT_FLAG_NONE;
 
-        GameObjectFlagBits                  m_flags          = GAMEOBJECT_FLAG_NONE;
+        bool               m_isEnabled  = true;
+        bool               m_isActive   = false;
+        bool               m_isDestroy  = false;
 
     };
 }

@@ -21,8 +21,13 @@
 #include <Utils/Common/AnyVisitor.h>
 #include <UI/Anchor.h>
 #include <UI/Canvas.h>
+#include <Physics/3D/Rigidbody3D.h>
 
 namespace SR_CORE_NS::GUI {
+    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody3D*& rigidbody3D, EditorGUI* context, int32_t index) {
+
+    }
+
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
         if (!pBehaviour) {
             return;
@@ -116,6 +121,11 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::InputFloat("FOV", &cameraFOV, 0.5) && cameraFOV >= 0) {
             camera->SetFOV(cameraFOV);
         }
+
+        int32_t priority = camera->GetPriority();
+        if (ImGui::InputInt("Priority", &priority, 1)) {
+            camera->SetPriority(priority);
+        }
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, EditorGUI* context, int32_t index) {
@@ -130,7 +140,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {

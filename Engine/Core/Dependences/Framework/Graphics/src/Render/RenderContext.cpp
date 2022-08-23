@@ -23,8 +23,6 @@ namespace SR_GRAPH_NS {
 
         bool dirty = false;
 
-        /// захватываем менеджер ресурсов, для выполнения синхронных операций
-        SR_UTILS_NS::ResourceManager::LockSingleton();
         {
             dirty |= Update(m_techniques);
             dirty |= Update(m_skyboxes);
@@ -33,7 +31,6 @@ namespace SR_GRAPH_NS {
             dirty |= Update(m_textures);
             dirty |= Update(m_shaders);
         }
-        SR_UTILS_NS::ResourceManager::UnlockSingleton();
 
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ) {
             auto&& [pScene, pRenderScene] = *pIt;
@@ -141,7 +138,7 @@ namespace SR_GRAPH_NS {
             auto&& dataStorage = scene->GetDataStorage();
 
             /// У каждой сцены может быть только одна сцена рендера
-            if (dataStorage.GetPointerDef<RenderScene>(nullptr)) {
+            if (dataStorage.GetValueDef<RenderScenePtr>(RenderScenePtr())) {
                 SR_ERROR("RenderContext::CreateScene() : render scene is already exists!");
                 scene.Unlock();
                 return pRenderScene;

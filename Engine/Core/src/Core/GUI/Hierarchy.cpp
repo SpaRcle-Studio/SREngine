@@ -35,8 +35,9 @@ namespace SR_CORE_NS::GUI {
         m_sceneRunnerWidget->DrawSubWindow();
 
         for (auto&& gameObject : m_tree) {
-            if (!gameObject.LockIfValid())
+            if (!gameObject.RecursiveLockIfValid()) {
                 continue;
+            }
 
             DrawChild(gameObject);
             gameObject.Unlock();
@@ -94,7 +95,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopID();
     }
 
-    void Hierarchy::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject> &gm) {
+    void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
         if (ImGui::IsItemClicked() && m_selected.count(gm) == 0) {
             if (!m_shiftPressed && gm->GetScene().Valid())
                 m_selected.clear();
@@ -171,8 +172,8 @@ namespace SR_CORE_NS::GUI {
 
                 if (m_scene.RecursiveLockIfValid()) {
                     for (auto&& selected : m_selected) {
-                        if (selected.LockIfValid()) {
-                            auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                        if (selected.RecursiveLockIfValid()) {
+                            auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
                             Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
                             selected.Unlock();
                         }

@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS {
 
 namespace SR_GTYPES_NS {
     class Camera : public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1000);
+        SR_ENTITY_SET_VERSION(1001);
         using RenderTechniquePtr = std::variant<SR_UTILS_NS::Path, RenderTechnique*>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:
@@ -60,6 +60,7 @@ namespace SR_GTYPES_NS {
         void SetFar(float_t value);
         void SetNear(float_t value);
         void SetFOV(float_t value);
+        void SetPriority(int32_t priority);
 
         void SetRenderTechnique(const SR_UTILS_NS::Path& path);
 

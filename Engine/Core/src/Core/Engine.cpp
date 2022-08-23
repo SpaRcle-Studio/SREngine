@@ -19,6 +19,8 @@
 #include <Memory/CameraManager.h>
 #include <Window/Window.h>
 
+#include <Physics/PhysicsScene.h>
+
 #include <Types/Skybox.h>
 
 namespace Framework {
@@ -215,13 +217,14 @@ namespace Framework {
         SR_HTYPES_NS::Time::Instance().Update();
 
         if (m_scene.LockIfValid()) {
-            Prepare();
-
-            Update(m_accumulator);
-
             const auto now = SR_HTYPES_NS::Time::Instance().Now();
             const auto deltaTime = now - m_timeStart;
+            const auto dt = static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
             m_timeStart = now;
+
+            Prepare();
+
+            Update(dt);
 
             /// fixed update
             if (m_accumulator >= m_updateFrequency) {
@@ -231,7 +234,7 @@ namespace Framework {
                 }
             }
 
-            m_accumulator += static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
+            m_accumulator += dt;
 
             m_scene.Unlock();
         }
@@ -267,10 +270,15 @@ namespace Framework {
                 ptr->Remove(&Graphics::GUI::GlobalWidgetManager::Instance());
             });
 
-            oldScene.AutoFree([](SR_WORLD_NS::Scene* scene) {
-                scene->Destroy();
-                scene->Free();
+            oldScene.AutoFree([](SR_WORLD_NS::Scene* pScene) {
+                pScene->Destroy();
+                delete pScene;
             });
+
+            m_physicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pPhysicsScene) {
+                delete pPhysicsScene;
+            });
+
             locked = true;
         }
 
@@ -297,6 +305,8 @@ namespace Framework {
                 m_renderScene.Unlock();
                 oldRenderScene.RemoveAllLocks();
             }
+
+            m_physicsScene = new SR_PHYSICS_NS::PhysicsScene(m_scene);
         }
 
         if (m_editor) {
@@ -322,7 +332,7 @@ namespace Framework {
         auto timer = Helper::Types::Timer(0.1);
 
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(1);
+            SR_HTYPES_NS::Thread::Sleep(10);
 
             auto&& pCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
                 if (auto&& pCamera = ptr->GetMainCamera()) {
@@ -338,7 +348,7 @@ namespace Framework {
 
             if (timer.Update() && m_scene.LockIfValid()) {
                 if (auto &&gameObject = pCamera->GetParent()) {
-                    if (gameObject->TryLockIfValid()) {
+                    if (gameObject->TryRecursiveLockIfValid()) {
                         m_scene->SetObserver(gameObject->GetThis());
                         gameObject->Unlock();
                     }
@@ -388,12 +398,6 @@ namespace Framework {
             return;
         }
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::BackSpace) && lShiftPressed) {
-            SR_SYSTEM_LOG("Engine::Await() : The closing key combination have been detected!");
-            m_exitEvent = true;
-            return;
-        }
-
         for (auto &&gameObject : m_scene->GetRootGameObjects()) {
             gameObject->FixedUpdate(!m_isActive || m_isPaused);
         }
@@ -405,6 +409,11 @@ namespace Framework {
     }
 
     void Engine::Update(float_t dt) {
+        if (m_physicsScene.RecursiveLockIfValid()) {
+            m_physicsScene->Update(dt);
+            m_physicsScene.Unlock();
+        }
+
         for (auto&& gameObject : m_scene->GetRootGameObjects()) {
             gameObject->Update(dt, !m_isActive || m_isPaused);
         }

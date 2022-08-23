@@ -18,6 +18,8 @@ namespace SR_UTILS_NS {
         m_mousePrev = m_mouse;
         m_mouse = Helper::Platform::GetMousePos();
 
+        m_mouseDrag = m_mouse - m_mousePrev;
+
         if (!m_arr) {
             m_arr = new BYTE[256];
             memset(m_arr, 0, sizeof(256));
@@ -76,8 +78,8 @@ namespace SR_UTILS_NS {
         return (m_keys[(int)key] == State::Pressed || m_keys[(int)key] == State::Down);
     }
 
-    SR_MATH_NS::FVector2 Framework::Helper::Input::GetMouseDrag() {
-        return m_mouse - m_mousePrev;
+    SR_MATH_NS::FVector2 Input::GetMouseDrag() {
+        return m_mouseDrag;
     }
 
     int32_t Input::GetMouseWheel() {
