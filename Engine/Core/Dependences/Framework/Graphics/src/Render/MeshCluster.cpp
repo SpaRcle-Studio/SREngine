@@ -51,18 +51,18 @@ namespace SR_GRAPH_NS {
 
         const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
         if (groupID == SR_ID_INVALID) {
-            SR_ERROR("ShadedMeshSubCluster::Add() : failed get mesh group id to remove mesh!");
             return false;
         }
-
-        mesh->AddUsePoint();
 
         if (auto&& pIt = m_groups.find(groupID); pIt == m_groups.end()) {
             m_groups[groupID] = { indexed };
         }
         else if (!pIt->second.insert(indexed).second) {
             SRHalt("ShadedMeshSubCluster::Add() : failed to add mesh to cluster!");
+            return false;
         }
+
+        mesh->AddUsePoint();
 
         return true;
     }
@@ -76,16 +76,18 @@ namespace SR_GRAPH_NS {
 
         SRAssert(pShader);
 
-        if (m_addCallback) {
-            m_addCallback(mesh);
-        }
-
         if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
             auto&& [subCluster, _] = m_subClusters.insert(std::make_pair(
                     pShader,
                     std::move(ShadedMeshSubCluster())
             ));
-            return subCluster->second.Add(mesh);
+
+            if (!subCluster->second.Add(mesh)) {
+                mesh->AddUsePoint();
+                SRVerifyFalse(!m_invalid.insert(mesh).second);
+            }
+
+            return true;
         }
         else {
             return subClusterIt->second.Add(mesh);
@@ -93,6 +95,12 @@ namespace SR_GRAPH_NS {
     }
 
     bool MeshCluster::Remove(Types::Mesh *mesh) noexcept {
+        if (auto&& pInvalidIt = m_invalid.find(mesh); pInvalidIt != m_invalid.end()) {
+            mesh->RemoveUsePoint();
+            m_invalid.erase(pInvalidIt);
+            return true;
+        }
+
         const auto&& pShader = mesh->GetShader();
 
         SRAssert(pShader);
@@ -102,10 +110,6 @@ namespace SR_GRAPH_NS {
         }
         else {
             auto const result = subCluster->second.Remove(mesh);
-
-            if (result && m_removeCallback) {
-                m_removeCallback(mesh);
-            }
 
             if (subCluster->second.Empty()) {
                 m_subClusters.erase(subCluster);
@@ -140,10 +144,6 @@ namespace SR_GRAPH_NS {
                             pMesh->FreeVideoMemory();
                         }
 
-                        if (m_removeCallback) {
-                            m_removeCallback(pMesh);
-                        }
-
                         pMeshIt = group.erase(pMeshIt);
                         continue;
                     }
@@ -155,9 +155,6 @@ namespace SR_GRAPH_NS {
 
                     /// Если изменил свой кластер (прозрачность), то убираем его из текущего
                     if (ChangeCluster(pMesh)) {
-                        if (m_removeCallback) {
-                            m_removeCallback(pMesh);
-                        }
                         /// use-point от старого саб кластера
                         pMesh->RemoveUsePoint();
                         pMeshIt = group.erase(pMeshIt);

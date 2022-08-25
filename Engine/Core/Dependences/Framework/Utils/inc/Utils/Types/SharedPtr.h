@@ -17,11 +17,11 @@ namespace SR_HTYPES_NS {
         ~SharedPtr(); /// не должен быть виртуальным
 
     public:
-        SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->m_valid; }
+        SR_NODISCARD SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->m_valid; }
         SharedPtr<T> &operator=(const SharedPtr<T> &ptr);
         SharedPtr<T> &operator=(T *ptr);
-        T &operator*() const { return *m_ptr; }
-        T *operator->() const noexcept { return m_ptr; }
+        SR_NODISCARD SR_FORCE_INLINE T &operator*() const { return *m_ptr; }
+        SR_NODISCARD SR_FORCE_INLINE T *operator->() const noexcept { return m_ptr; }
         SR_NODISCARD SR_INLINE bool operator==(const SharedPtr<T>& right) const noexcept {
             return m_ptr == right.m_ptr;
         }

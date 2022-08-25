@@ -9,6 +9,7 @@
 #include <Utils/Input/InputSystem.h>
 #include <Loaders/ObjLoader.h>
 #include <Types/Skybox.h>
+#include <Types/Geometry/ProceduralMesh.h>
 
 #include <Render/PostProcessing.h>
 
@@ -27,6 +28,7 @@ namespace Framework {
             RegisterComponent(generator);
             RegisterUtils(generator);
             RegisterMesh(generator);
+            RegisterProceduralMesh(generator);
             RegisterResourceManager(generator);
             RegisterGameObject(generator);
             RegisterCamera(generator);
@@ -145,12 +147,11 @@ namespace Framework {
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)
 
-        //ESRegisterMethod(EvoScript::Public, generator, Component, SetParent, void, ESArg1(GameObject* gm), ESArg1(gm))
-        //ESRegisterMethod(EvoScript::Public, generator, Component, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v))
-        //ESRegisterMethod(EvoScript::Public, generator, Component, OnMove, void, ESArg1(const FVector3& v), ESArg1(v))
-        //ESRegisterMethod(EvoScript::Public, generator, Component, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v))
-
         ESRegisterMethod(EvoScript::Public, generator, Component, SetEnabled, void, ESArg1(bool v), ESArg1(v))
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Component, Create, Component*, ESArg1(const std::string& name), {
+            return SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+        });
 
         generator->AddIncompleteType("GameObject", "Component");
     }
@@ -180,29 +181,35 @@ namespace Framework {
                 { "Static",     1 },
                 { "Wireframe",  2 },
                 { "Skinned",    3 },
+                { "Sprite2D",   4 },
+                { "Procedural", 5 },
         });
 
         generator->RegisterNewClass("Mesh", "Mesh", {
-            "ResourceManager.h", "Component.h", "mutex", "Math/Vector3.h", "Material.h"
+            "ResourceManager.h", "Component.h", "Math/Vector3.h", "Material.h"
         }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
-        ESRegisterMethod(EvoScript::Public, generator, Mesh, Copy, IResource*, ESArg1(IResource* dest), ESArg1(dest))
-
-        //ESRegisterMethod(EvoScript::Public, generator, Mesh, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
-        //ESRegisterMethod(EvoScript::Public, generator, Mesh, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
-        //ESRegisterMethod(EvoScript::Public, generator, Mesh, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
-
-        //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, WaitCalculate, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, IsCanCalculate, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetMaterial, Material*)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, Destroy, bool) // IResource
+    }
 
+    void API::RegisterProceduralMesh(EvoScript::AddressTableGen *generator) {
+        using namespace SR_MATH_NS;
+        using namespace SR_UTILS_NS;
+        using namespace SR_GTYPES_NS;
+        using namespace SR_GRAPH_NS::Vertices;
 
-        generator->AddIncompleteType("Render", "Mesh");
+        generator->RegisterNewClass("ProceduralMesh", "ProceduralMesh", {
+            "ResourceManager.h", "Component.h", "Math/Vector3.h", "Material.h", "Math/Vertices.h"
+        }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
+
+        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
+        ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetGeometryName, std::string)
+        ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetMaterial, Material*)
+        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetVertices, void, ESArg1(const std::vector<StaticMeshVertex>& vertices), ESArg1(vertices))
     }
 
     void API::RegisterGameObject(EvoScript::AddressTableGen *generator) {
@@ -479,8 +486,14 @@ namespace Framework {
     }
 
     void API::RegisterCasts(EvoScript::CastingGen *generator) {
-        ESRegisterDynamicCast(generator, Graphics::Types::, Mesh, Helper::, Component)
-        //ESRegisterDynamicCast(generator, Graphics::, Camera, Helper::, Component)
+        using namespace SR_UTILS_NS;
+        using namespace SR_HTYPES_NS;
+        using namespace SR_WORLD_NS;
+        using namespace SR_MATH_NS;
+        using namespace SR_GTYPES_NS;
+
+        ESRegisterDynamicCast(generator, ProceduralMesh, Component)
+        ESRegisterDynamicCast(generator, Mesh, Component)
     }
 
     void API::RegisterShader(EvoScript::AddressTableGen *generator) {

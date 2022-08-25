@@ -4,7 +4,7 @@
     <DefaultChunkHeight Value="100"/>
     <DefaultRegionWidth Value="32"/>
     <DefaultShiftDistance Value="20"/>
-    <DefaultScope Value="10"/>
+    <DefaultScope Value="6"/>
 
     <ScopeEnabled Value="true"/>
     <ShiftEnabled Value="true"/>

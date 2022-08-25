@@ -32,6 +32,7 @@ namespace SR_GRAPH_NS::Types {
 
         template<Vertices::Type type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
         template<Vertices::Type type> bool FreeVBO();
+        bool FreeIBO();
 
     protected:
         int32_t m_IBO = SR_ID_INVALID;
@@ -62,10 +63,9 @@ namespace SR_GRAPH_NS::Types {
     }
 
     template<Vertices::Type type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
-        if (!vertices.empty()) {
-            m_barycenter = Vertices::Barycenter(vertices);
-        }
-        SRAssert(m_barycenter != SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX));
+        //if (!vertices.empty()) {
+        //    m_barycenter = Vertices::Barycenter(vertices);
+        //}
 
         if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
             if (m_countVertices == 0 || !vertices.data()) {
@@ -87,6 +87,10 @@ namespace SR_GRAPH_NS::Types {
     }
 
     template<Vertices::Type type> bool IndexedMesh::FreeVBO() {
+        if (m_VBO == SR_ID_INVALID) {
+            return true;
+        }
+
         using namespace Memory;
 
         if (MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {

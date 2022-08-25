@@ -65,6 +65,7 @@ namespace SR_UTILS_NS {
             pComponent->OnDestroy();
         }
         m_components.clear();
+        m_componentsCount = 0;
 
         for (auto&& gameObject : m_children) {
             gameObject.AutoFree([by](GameObject *gm) {
@@ -72,6 +73,7 @@ namespace SR_UTILS_NS {
             });
         }
         m_children.clear();
+        m_childrenCount = 0;
 
         m_isDestroy = true;
 
@@ -106,6 +108,7 @@ namespace SR_UTILS_NS {
         }
 
         m_children.push_back(child);
+        ++m_childrenCount;
 
         /* TODO: Update child transforms with parent */
 
@@ -161,6 +164,7 @@ namespace SR_UTILS_NS {
         for (auto pIt = m_children.begin(); pIt != m_children.end(); ) {
             if (pIt->Get() == ptr.Get()) {
                 pIt = m_children.erase(pIt);
+                --m_childrenCount;
                 return;
             }
 
@@ -207,7 +211,7 @@ namespace SR_UTILS_NS {
         SetDirty();
     }
 
-    bool GameObject::IsActive() const {
+    bool GameObject::IsActive() const noexcept {
         if (m_parent.RecursiveLockIfValid()) {
             const bool parentActive = m_parent->m_isActive;
             m_parent.Unlock();
@@ -344,6 +348,8 @@ namespace SR_UTILS_NS {
         }
 
         m_components.emplace_back(pComponent);
+        ++m_componentsCount;
+
         pComponent->SetParent(this);
         pComponent->OnAttached();
 
@@ -357,6 +363,8 @@ namespace SR_UTILS_NS {
         }
 
         m_components.emplace_back(pComponent);
+        ++m_componentsCount;
+
         pComponent->SetParent(this);
         pComponent->OnAttached();
         SetDirty();
@@ -375,7 +383,10 @@ namespace SR_UTILS_NS {
             }
 
             component->OnDestroy();
+
             m_components.erase(it);
+            --m_componentsCount;
+
             SetDirty();
 
             return true;
@@ -538,59 +549,47 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::FixedUpdate(bool isPaused) noexcept {
-        if (!m_isEnabled) {
+        if (!m_isActive) {
             return;
         }
 
         m_dirty = false;
 
-        uint32_t i, size = static_cast<uint32_t>(m_components.size());
-
-        for (i = 0; i < size; ++i) {
+        for (uint32_t i = 0; i < m_componentsCount; ++i) {
             auto&& pComponent = m_components.at(i);
 
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
 
-            if (!pComponent->IsEnabled() || !pComponent->IsStarted()) {
-                continue;
+            if (pComponent->IsCanUpdate()) {
+                pComponent->FixedUpdate();
             }
-
-            pComponent->FixedUpdate();
         }
 
-        size = static_cast<uint32_t>(m_children.size());
-
-        for (i = 0; i < size; ++i) {
+        for (uint32_t i = 0; i < m_childrenCount; ++i) {
             m_children.at(i)->FixedUpdate(isPaused);
         }
     }
 
     void GameObject::Update(float_t dt, bool isPaused) noexcept {
-        if (!m_isEnabled) {
+        if (!m_isActive) {
             return;
         }
 
-        uint32_t i, size = static_cast<uint32_t>(m_components.size());
-
-        for (i = 0; i < size; ++i) {
+        for (uint32_t i = 0; i < m_componentsCount; ++i) {
             auto&& pComponent = m_components.at(i);
 
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
 
-            if (!pComponent->IsEnabled() || !pComponent->IsStarted()) {
-                continue;
+            if (pComponent->IsCanUpdate()) {
+                pComponent->Update(dt);
             }
-
-            pComponent->Update(dt);
         }
 
-        size = static_cast<uint32_t>(m_children.size());
-
-        for (i = 0; i < size; ++i) {
+        for (uint32_t i = 0; i < m_childrenCount; ++i) {
             m_children.at(i)->Update(dt, isPaused);
         }
     }

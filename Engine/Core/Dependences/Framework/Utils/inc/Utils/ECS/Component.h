@@ -61,7 +61,9 @@ namespace SR_UTILS_NS {
         void SetEnabled(bool value);
 
         /// Активен и компонент и его родительский объект
-        SR_NODISCARD virtual bool IsActive() const noexcept;
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
+        /// Активен и компонент и его родительский объект
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsActive() const noexcept { return m_isActive; }
         /// Активен сам компонент, независимо от объекта
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsEnabled() const noexcept { return m_isEnabled; }
 
@@ -75,12 +77,14 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
         SR_NODISCARD SR_INLINE GameObject* GetParent() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
+        SR_NODISCARD SR_WORLD_NS::Scene::Ptr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
 
     protected:
         template<typename T> void InitComponent() {
             m_componentId = typeid(T).hash_code();
+            ///TODO: Это может быть медленным, стоит завести в каждом компоненте констунту COMPONENT_NAME
             m_name = StringUtils::BackRead(typeid(T).name(), ':');
         }
 

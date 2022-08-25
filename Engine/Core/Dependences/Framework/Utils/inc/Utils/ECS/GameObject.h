@@ -56,12 +56,12 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
-        SR_NODISCARD Transform* GetParentTransform() const { return m_parent ? m_parent->m_transform : nullptr; }
-        SR_NODISCARD Transform* GetTransform() const { return m_transform; }
-        SR_NODISCARD GameObject::Ptr GetParent() const { return m_parent; }
+        SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
+        SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
+        SR_NODISCARD GameObject::Ptr GetParent() const noexcept { return m_parent; }
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD bool HasTag() const;
-        SR_NODISCARD bool IsActive() const;
+        SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
@@ -126,6 +126,14 @@ namespace SR_UTILS_NS {
         bool UpdateEntityPath();
 
     private:
+        bool     m_dirty      : 1 = true;
+        bool     m_isEnabled  : 1 = true;
+        bool     m_isActive   : 1 = false;
+        bool     m_isDestroy  : 1 = false;
+
+        uint16_t m_componentsCount = 0;
+        uint16_t m_childrenCount   = 0;
+
         GameObject::Ptr    m_parent     = { };
         GameObjects        m_children   = { };
 
@@ -138,11 +146,6 @@ namespace SR_UTILS_NS {
         std::string        m_tag        = "Untagged";
 
         GameObjectFlagBits m_flags      = GAMEOBJECT_FLAG_NONE;
-
-        bool               m_dirty      = true;
-        bool               m_isEnabled  = true;
-        bool               m_isActive   = false;
-        bool               m_isDestroy  = false;
 
     };
 }

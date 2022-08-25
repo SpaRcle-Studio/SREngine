@@ -139,11 +139,9 @@ namespace SR_GRAPH_NS::Types {
     void Mesh::OnAttached() {
         AddUsePoint();
 
-        if (IsCanCalculate()) {
-            GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
-                ptr->Register(this);
-            });
-        }
+        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
+            ptr->Register(this);
+        });
 
         Component::OnAttached();
     }
@@ -272,7 +270,7 @@ namespace SR_GRAPH_NS::Types {
 
     Mesh::RenderScenePtr Mesh::GetRenderScene() {
         if (!m_renderScene.Valid()) {
-            m_renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+            m_renderScene = TryGetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
                 return ptr->GetDataStorage().GetValue<RenderScenePtr>();
             }, RenderScenePtr());
         }

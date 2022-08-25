@@ -72,6 +72,9 @@ namespace SR_HTYPES_NS {
             else if constexpr (Math::IsString<T>()) {
                 MarshalUtils::SaveString(m_stream, value, m_size);
             }
+            else if constexpr (IsSTLVector<T>()) {
+                MarshalUtils::SaveVector(m_stream, value, m_size);
+            }
             else {
                 m_size += sizeof(T);
                 MarshalUtils::SaveValue(m_stream, value);

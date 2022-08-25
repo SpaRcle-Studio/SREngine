@@ -19,10 +19,6 @@ namespace SR_UTILS_NS {
         return marshal;
     }
 
-    bool Component::IsActive() const noexcept {
-        return m_isEnabled && (!m_parent || m_parent->m_isActive);
-    }
-
     void Component::SetParent(GameObject *parent) {
         m_parent = parent;
     }
@@ -40,12 +36,12 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
-        const bool isActive = IsActive();
+        const bool isActive = m_isEnabled && (!m_parent || m_parent->m_isActive);
         if (isActive == m_isActive) {
             return;
         }
 
-        if (isActive) {
+        if ((m_isActive = isActive)) {
             OnEnable();
         }
         else {
@@ -61,6 +57,10 @@ namespace SR_UTILS_NS {
 
         /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
         return m_parent->GetScene();
+    }
+
+    SR_WORLD_NS::Scene::Ptr Component::TryGetScene() const {
+        return m_parent ? m_parent->GetScene() : SR_WORLD_NS::Scene::Ptr();
     }
 
     GameObject *Component::GetParent() const {

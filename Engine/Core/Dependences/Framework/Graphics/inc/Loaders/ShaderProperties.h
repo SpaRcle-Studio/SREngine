@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS {
         ShaderVarType type;
     };
 
-    typedef std::list<MaterialProperty> MaterialProperties;
+    typedef std::vector<MaterialProperty> MaterialProperties;
     typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
     typedef std::map<uint64_t, std::pair<ShaderVarType, uint32_t>> ShaderSamplers;
 

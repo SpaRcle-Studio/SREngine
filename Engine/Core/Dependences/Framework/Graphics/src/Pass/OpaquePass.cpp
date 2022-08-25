@@ -73,7 +73,6 @@ namespace SR_GRAPH_NS {
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto &mesh : meshGroup) {
-                    /// TODO: проверка очень тяжелая из-за мьютексов, нужно оптимизировать
                     if (!mesh->IsActive()) {
                         continue;
                     }

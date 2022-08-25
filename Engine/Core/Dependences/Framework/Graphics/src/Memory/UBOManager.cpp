@@ -8,8 +8,8 @@
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager() {
-        m_virtualTable.max_load_factor(0.9f);
-        m_virtualTable.reserve(5000);
+        m_virtualTableSize = 1024 * 32;
+        m_virtualTable = new VirtualUBOInfo[m_virtualTableSize];
         m_singleCameraMode = SR_UTILS_NS::Features::Instance().Enabled("SingleCameraMode", false);
     }
 
@@ -33,6 +33,11 @@ namespace SR_GRAPH_NS::Memory {
 
         const VirtualUBO virtualUbo = GenerateUnique();
 
+        if (virtualUbo == SR_ID_INVALID) {
+            SR_ERROR("UBOManager::AllocateUBO() : failed to get unique id!");
+            return SR_ID_INVALID;
+        }
+
         Descriptor descriptor = SR_ID_INVALID;
         UBO ubo = SR_ID_INVALID;
 
@@ -47,16 +52,13 @@ namespace SR_GRAPH_NS::Memory {
         virtualUboInfo.m_uboSize = uboSize;
         virtualUboInfo.m_shaderProgram = shaderProgram;
 
-        virtualUboInfo.m_data.emplace_front(VirtualUBOInfo::Data {
+        virtualUboInfo.m_data.emplace_back(VirtualUBOInfo::Data {
                 m_ignoreCameras ? nullptr : m_camera,
                 descriptor,
                 ubo
         });
 
-        m_virtualTable.insert(std::make_pair(
-                virtualUbo,
-                std::move(virtualUboInfo))
-        );
+        m_virtualTable[virtualUbo] = std::move(virtualUboInfo);
 
         return virtualUbo;
     }
@@ -66,50 +68,37 @@ namespace SR_GRAPH_NS::Memory {
             return false;
         }
 
-        auto&& pIt = m_virtualTable.find(*virtualUbo);
-        if (pIt == std::end(m_virtualTable)) {
+        if (*virtualUbo >= m_virtualTableSize) {
             SRHalt("UBOManager::FreeUBO() : ubo not found!");
             return false;
         }
 
         auto&& env = Environment::Get();
 
-        auto&& info = pIt->second;
+        auto&& info = m_virtualTable[*virtualUbo];
         for (auto&& [pCamera, descriptor, ubo] : info.m_data) {
             FreeMemory(&ubo, &descriptor);
         }
 
-        m_virtualTable.erase(pIt);
-
+        m_virtualTable[*virtualUbo].Reset();
         *virtualUbo = SR_ID_INVALID;
 
         return true;
     }
 
     UBOManager::VirtualUBO UBOManager::GenerateUnique() const {
-        volatile VirtualUBO virtualUbo = SR_ID_INVALID;
-
-        auto&& random = SR_UTILS_NS::Random::Instance();
-
-        while (true) {
-            VirtualUBO unique = random.Int32();
-
-            /// можно использовать только положительные индексы
-            if (unique < 0) {
-                unique = -unique;
+        /// TODO: следует делать одновременно поиск с конца
+        for (uint32_t i = 0; i < m_virtualTableSize; ++i) {
+            if (m_virtualTable[i].Valid()) {
+                continue;
             }
 
-            SRAssertOnce(unique >= 0);
-
-            if (m_virtualTable.count(unique) == 0 && unique != SR_ID_INVALID) {
-                virtualUbo = unique;
-                break;
-            }
-
-            SR_WARN("UBOManager::GenerateUnique() : collision detected!");
+            return static_cast<VirtualUBO>(i);
         }
 
-        return virtualUbo;
+        SR_ERROR("UBOManager::GenerateUnique() : the virtual table overflow!");
+
+        return SR_ID_INVALID;
     }
 
     bool UBOManager::AllocMemory(UBO *ubo, Descriptor *descriptor, uint32_t uboSize, uint32_t samples, int32_t shader) {
@@ -152,15 +141,8 @@ namespace SR_GRAPH_NS::Memory {
             return BindResult::Failed;
         }
 
-        auto&& pIt = m_virtualTable.find(virtualUbo);
-        if (pIt == std::end(m_virtualTable)) {
-            SRHalt("UBOManager::BindUBO() : ubo not found!");
-            return BindResult::Failed;
-        }
-
+        auto&& info = m_virtualTable[virtualUbo];
         BindResult result = BindResult::Success;
-
-        auto&& info = pIt->second;
 
         Descriptor descriptor = SR_ID_INVALID;
         UBO ubo = SR_ID_INVALID;
@@ -181,7 +163,7 @@ namespace SR_GRAPH_NS::Memory {
                 return BindResult::Failed;
             }
 
-            info.m_data.emplace_front(VirtualUBOInfo::Data {
+            info.m_data.emplace_back(VirtualUBOInfo::Data {
                     m_ignoreCameras ? nullptr : m_camera,
                     descriptor,
                     ubo
@@ -216,13 +198,7 @@ namespace SR_GRAPH_NS::Memory {
             return virtualUbo;
         }
 
-        auto&& pIt = m_virtualTable.find(virtualUbo);
-        if (pIt == std::end(m_virtualTable)) {
-            SRHalt("UBOManager::ReAllocateUBO() : ubo not found!");
-            return virtualUbo;
-        }
-
-        auto&& info = pIt->second;
+        auto&& info = m_virtualTable[virtualUbo];
 
         /// задаем новые значения для дублирования памяти
         info.m_uboSize = uboSize;
@@ -243,7 +219,7 @@ namespace SR_GRAPH_NS::Memory {
             SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
         }
 
-        info.m_data.emplace_front(VirtualUBOInfo::Data {
+        info.m_data.emplace_back(VirtualUBOInfo::Data {
                 m_ignoreCameras ? nullptr : m_camera,
                 descriptor,
                 ubo

@@ -51,7 +51,11 @@ namespace SR_GTYPES_NS {
         return Mesh::Calculate();
     }
 
-    void IndexedMesh::FreeVideoMemory() {
+    bool IndexedMesh::FreeIBO() {
+        if (m_IBO == SR_ID_INVALID) {
+            return true;
+        }
+
         using namespace Memory;
 
         auto &&manager = Memory::MeshManager::Instance();
@@ -59,9 +63,15 @@ namespace SR_GTYPES_NS {
         if (manager.Free<Vertices::Type::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!Environment::Get()->FreeIBO(&m_IBO)) {
                 SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
+                return false;
             }
         }
 
+        return true;
+    }
+
+    void IndexedMesh::FreeVideoMemory() {
+        FreeIBO();
         Mesh::FreeVideoMemory();
     }
 }

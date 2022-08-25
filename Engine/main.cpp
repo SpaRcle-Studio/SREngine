@@ -46,6 +46,7 @@
 #include <Types/Mesh.h>
 #include <Types/Shader.h>
 #include <Types/Geometry/Mesh3D.h>
+#include <Types/Geometry/ProceduralMesh.h>
 #include <Types/Geometry/DebugWireframeMesh.h>
 #include <Animations/Bone.h>
 #include <Memory/MeshAllocator.h>
@@ -145,6 +146,7 @@ int main(int argc, char **argv) {
 
     // Register all components
     {
+        ComponentManager::Instance().RegisterComponent<ProceduralMesh>([]() -> ProceduralMesh* { return new ProceduralMesh(); });
         ComponentManager::Instance().RegisterComponent<Rigidbody3D>([]() -> Rigidbody3D* { return new Rigidbody3D(); });
         ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return new Mesh3D(); });
         ComponentManager::Instance().RegisterComponent<Sprite2D>([]() -> Sprite2D* { return new Sprite2D(); });

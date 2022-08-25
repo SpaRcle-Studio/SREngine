@@ -28,7 +28,7 @@ namespace SR_HTYPES_NS {
         SafePtr();
         ~SafePtr(); /// не должен быть виртуальным
     public:
-        operator bool() const { return Valid(); }
+        operator bool() const noexcept { return m_data && m_data->m_valid; }
         SafePtr<T> &operator=(const SafePtr<T> &ptr);
         SafePtr<T> &operator=(T *ptr);
         T &operator*() const { return *m_ptr; }

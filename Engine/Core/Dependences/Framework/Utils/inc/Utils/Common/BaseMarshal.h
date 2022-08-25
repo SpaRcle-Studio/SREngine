@@ -109,6 +109,14 @@ namespace SR_UTILS_NS {
             bytesCount += sizeof(size_t) + size * sizeof(char);
         }
 
+        template<typename T> static void SR_FASTCALL SaveVector(std::stringstream& stream, const std::vector<T>& vector, uint64_t& bytesCount) {
+            const size_t size = vector.size();
+            stream.write((const char*)&size, sizeof(size_t));
+            stream.write((const char*)vector.data(), size * sizeof(T));
+
+            bytesCount += sizeof(size_t) + size * sizeof(T);
+        }
+
         template<typename Stream> static std::string SR_FASTCALL LoadShortStr(Stream& stream, uint64_t& readCount) {
             std::string str;
             uint16_t size;

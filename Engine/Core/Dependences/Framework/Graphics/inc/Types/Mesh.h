@@ -35,6 +35,7 @@ namespace SR_GTYPES_NS {
         Wireframe = 2,
         Skinned = 3,
         Sprite2D = 4,
+        Procedural = 5,
     )
 
     class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {

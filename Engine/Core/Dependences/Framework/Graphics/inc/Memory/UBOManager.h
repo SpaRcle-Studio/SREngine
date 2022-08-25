@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS::Memory {
         VirtualUBOInfo() = default;
         ~VirtualUBOInfo() override = default;
 
-        VirtualUBOInfo(VirtualUBOInfo&& ref)  noexcept {
+        VirtualUBOInfo(VirtualUBOInfo&& ref) noexcept {
             m_data = std::exchange(ref.m_data, {});
             m_samples = std::exchange(ref.m_samples, {});
             m_uboSize = std::exchange(ref.m_uboSize, {});
@@ -41,7 +41,18 @@ namespace SR_GRAPH_NS::Memory {
             return *this;
         }
 
-        std::forward_list<Data> m_data;
+        void Reset() noexcept {
+            m_data.clear();
+            m_samples = 0;
+            m_uboSize = 0;
+            m_shaderProgram = SR_ID_INVALID;
+        }
+
+        SR_NODISCARD bool Valid() const noexcept {
+            return !m_data.empty();
+        }
+
+        std::vector<Data> m_data;
         uint32_t m_samples = 0;
         uint32_t m_uboSize = 0;
         int32_t m_shaderProgram = SR_ID_INVALID;
@@ -83,7 +94,9 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualUBO GenerateUnique() const;
 
     private:
-        ska::flat_hash_map<VirtualUBO, VirtualUBOInfo> m_virtualTable;
+        VirtualUBOInfo* m_virtualTable = nullptr;
+        uint32_t m_virtualTableSize = 0;
+
         Types::Camera* m_camera = nullptr;
         bool m_singleCameraMode = false;
         bool m_ignoreCameras = false;

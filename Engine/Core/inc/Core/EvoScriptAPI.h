@@ -24,6 +24,7 @@ namespace Framework {
         static void RegisterScene(EvoScript::AddressTableGen* generator);
         static void RegisterComponent(EvoScript::AddressTableGen* generator);
         static void RegisterMesh(EvoScript::AddressTableGen* generator);
+        static void RegisterProceduralMesh(EvoScript::AddressTableGen* generator);
         static void RegisterResourceManager(EvoScript::AddressTableGen* generator);
         static void RegisterGameObject(EvoScript::AddressTableGen* generator);
         static void RegisterCamera(EvoScript::AddressTableGen* generator);

@@ -57,7 +57,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
     private:
-        MeshGroups m_groups = MeshGroups();
+        MeshGroups m_groups;
 
     };
 
@@ -87,9 +87,6 @@ namespace SR_GRAPH_NS {
         bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
-        void SetAddCallback(const ClusterCallback& callback) { m_addCallback = callback; }
-        void SetRemoveCallback(const ClusterCallback& callback) { m_removeCallback = callback; }
-
         void Update();
 
     protected:
@@ -97,8 +94,7 @@ namespace SR_GRAPH_NS {
 
     protected:
         ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
-        ClusterCallback m_addCallback;
-        ClusterCallback m_removeCallback;
+        std::unordered_set<Types::Mesh*> m_invalid;
 
     };
 
