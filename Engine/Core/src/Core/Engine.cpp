@@ -328,7 +328,7 @@ namespace Framework {
         auto timer = Helper::Types::Timer(0.1);
 
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(50);
+            SR_HTYPES_NS::Thread::Sleep(250);
 
             auto&& pCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
                 if (auto&& pCamera = ptr->GetMainCamera()) {

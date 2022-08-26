@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
-    <!--<FramebufferPass Name="SceneViewFBO">
+    <FramebufferPass Name="SceneViewFBO">
         <Settings DynamicResizing="true">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
@@ -12,7 +12,7 @@
             <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
             <TransparentPass/>
         </Passes>
-    </FramebufferPass>-->
+    </FramebufferPass>
     <!--<SwapchainPass>
         <OpaquePass/>
         <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>

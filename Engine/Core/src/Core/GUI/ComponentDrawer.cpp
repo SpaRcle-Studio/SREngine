@@ -341,4 +341,8 @@ namespace SR_CORE_NS::GUI {
             sprite->SetMaterial(copy);
         }
     }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&proceduralMesh, EditorGUI *context, int32_t index) {
+
+    }
 }

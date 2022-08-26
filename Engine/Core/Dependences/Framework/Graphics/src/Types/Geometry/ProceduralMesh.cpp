@@ -31,6 +31,7 @@ namespace SR_GTYPES_NS {
         m_countIndices = 0;
 
         m_isCalculated = false;
+        m_dirtyMaterial = true;
 
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();

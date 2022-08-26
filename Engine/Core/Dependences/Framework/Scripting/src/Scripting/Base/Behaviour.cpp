@@ -74,9 +74,7 @@ namespace SR_SCRIPTING_NS {
         pBehaviour->SetId(path, false /** auto register */);
 
         if (!pBehaviour->Load()) {
-            SR_ERROR("Behaviour::Load() : failed to load behaviour! \n\tPath: " + path.ToString());
-            delete pBehaviour;
-            return nullptr;
+            SR_WARN("Behaviour::Load() : failed to load behaviour! \n\tPath: " + path.ToString());
         }
 
         /// отложенная ручная регистрация

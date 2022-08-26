@@ -124,6 +124,29 @@ namespace SR_GRAPH_NS {
     }
 
     void MeshCluster::Update() {
+        for (auto pInvalidIt = m_invalid.begin(); pInvalidIt != m_invalid.end(); ) {
+            auto&& pMesh = dynamic_cast<SR_GTYPES_NS::IndexedMesh*>(*pInvalidIt);
+
+            if (pMesh->GetCountUses() == 1) {
+                pMesh->RemoveUsePoint();
+
+                if (pMesh->IsCalculated()) {
+                    pMesh->FreeVideoMemory();
+                }
+
+                pMesh->RemoveUsePoint();
+                pInvalidIt = m_invalid.erase(pInvalidIt);
+            }
+            else if (pMesh->GetVBO<false>() != SR_ID_INVALID) {
+                Add(pMesh);
+                pMesh->RemoveUsePoint();
+                pInvalidIt = m_invalid.erase(pInvalidIt);
+            }
+            else {
+                ++pInvalidIt;
+            }
+        }
+
     repeat:
         for (auto pSubClusterIt = m_subClusters.begin(); pSubClusterIt != m_subClusters.end(); ) {
             auto&& [pShader, subCluster] = *pSubClusterIt;
@@ -132,7 +155,7 @@ namespace SR_GRAPH_NS {
                 auto&& [vbo, group] = *pGroupsIt;
 
                 for (auto pMeshIt = group.begin(); pMeshIt != group.end(); ) {
-                    SR_GTYPES_NS::Mesh* pMesh = *pMeshIt; /** copy */
+                    SR_GTYPES_NS::IndexedMesh* pMesh = dynamic_cast<SR_GTYPES_NS::IndexedMesh*>(*pMeshIt); /** copy */
                     auto&& pMaterial = pMesh->GetMaterial();
 
                     SRAssert2(pMaterial, "Mesh have not material!");
@@ -160,7 +183,7 @@ namespace SR_GRAPH_NS {
                         pMeshIt = group.erase(pMeshIt);
                     }
                     /// Мигрируем меш в другой саб кластер
-                    else if (pMaterial->GetShader() != pShader) {
+                    else if (pMesh->GetVBO<false>() != vbo || pMaterial->GetShader() != pShader) {
                         pMeshIt = group.erase(pMeshIt);
                         Add(pMesh);
                         /// use-point от старого саб кластера

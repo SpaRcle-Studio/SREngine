@@ -17,6 +17,8 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        m_hasErrors = false;
+
         auto&& path = GetResourceId();
 
         if (!path.empty()) {
@@ -28,6 +30,7 @@ namespace SR_SCRIPTING_NS {
             if (!m_script || !m_script->Load(fullPath, compiler, true)) {
                 SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path);
                 SR_SAFE_DELETE_PTR(m_script);
+                m_hasErrors = true;
                 return false;
             }
         }
@@ -111,6 +114,10 @@ namespace SR_SCRIPTING_NS {
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
+        if (m_hasErrors) {
+            return EvoBehaviour::Properties();
+        }
+
         if (!m_getProperties) {
             SR_ERROR("EvoBehaviour::GetProperties() : properties getter invalid!");
             return EvoBehaviour::Properties();
@@ -190,14 +197,16 @@ namespace SR_SCRIPTING_NS {
     SR_HTYPES_NS::DataStorage EvoBehaviour::Stash() {
         auto&& data = Behaviour::Stash();
 
-        data.SetPointer(m_script);
-        m_script = nullptr;
+        if (m_script) {
+            data.SetPointer(m_script);
+            m_script = nullptr;
+        }
 
         return std::move(data);
     }
 
     void EvoBehaviour::PopStash(const SR_HTYPES_NS::DataStorage &data) {
-        if (auto&& pScript = data.GetPointer<EvoScript::Script>()) {
+        if (auto&& pScript = data.GetPointerDef<EvoScript::Script>(nullptr)) {
             delete pScript;
         }
 

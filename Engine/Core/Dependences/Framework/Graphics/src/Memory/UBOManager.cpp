@@ -136,6 +136,11 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) noexcept {
+        if (virtualUbo == SR_ID_INVALID) {
+            SRHalt("UBOManager::BindUBO() : invalid virtual ubo!");
+            return BindResult::Failed;
+        }
+
         if (!m_camera && !m_singleCameraMode && !m_ignoreCameras) {
             SRHalt("UBOManager::BindUBO() : camera is nullptr!");
             return BindResult::Failed;
