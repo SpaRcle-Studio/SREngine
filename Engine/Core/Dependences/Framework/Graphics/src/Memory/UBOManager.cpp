@@ -8,7 +8,7 @@
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager() {
-        m_virtualTableSize = 1024 * 32;
+        m_virtualTableSize = 1024 * 64;
         m_virtualTable = new VirtualUBOInfo[m_virtualTableSize];
         m_singleCameraMode = SR_UTILS_NS::Features::Instance().Enabled("SingleCameraMode", false);
     }

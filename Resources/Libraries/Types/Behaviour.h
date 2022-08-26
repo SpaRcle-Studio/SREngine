@@ -23,6 +23,7 @@ public:
     virtual void OnEnable() { }
     virtual void OnDisable() { }
     virtual void Start() { }
+    virtual void FixedUpdate() { }
     virtual void Update(float_t dt) { }
     virtual void Close() { }
 

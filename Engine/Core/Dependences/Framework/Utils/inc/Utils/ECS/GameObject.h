@@ -63,10 +63,12 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsDirty() const noexcept { return m_dirty; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
+        SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
@@ -107,10 +109,10 @@ namespace SR_UTILS_NS {
 
         void Awake(bool isPaused) noexcept;
         void Start() noexcept;
-        void FixedUpdate(bool isPaused) noexcept;
-        void Update(float_t dt, bool isPaused) noexcept;
 
         void CheckActivity() noexcept;
+
+        void SetDirty(bool value);
 
     public:
         template<typename T> T* GetComponent() {
@@ -120,8 +122,6 @@ namespace SR_UTILS_NS {
     private:
         void OnAttached();
         void OnMatrixDirty();
-
-        void SetDirty();
 
         bool UpdateEntityPath();
 

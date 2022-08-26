@@ -17,7 +17,7 @@ namespace SR_MATH_NS {
     }
 
     Vector3<Unit>Quaternion::operator*(const Vector3<Unit> &v) const {
-        return Vector3<Framework::Helper::Math::Unit>(self * v.ToGLM());
+        return Vector3<Unit>(self * v.ToGLM());
     }
 
     Quaternion Quaternion::Rotate(const Vector3<Unit> &v) const {

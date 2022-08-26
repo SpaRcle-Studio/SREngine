@@ -35,6 +35,10 @@
         g_codegen_behaviour_ptr->Update(dt);                               \
     }                                                                      \
                                                                            \
+    EXTERN void FixedUpdate() {                                            \
+        g_codegen_behaviour_ptr->FixedUpdate();                            \
+    }                                                                      \
+                                                                           \
     EXTERN void Close() {                                                  \
         g_codegen_behaviour_ptr->Close();                                  \
     }                                                                      \

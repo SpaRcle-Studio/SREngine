@@ -99,6 +99,9 @@ namespace Framework {
         float_t m_accumulator = 1.f;
         TimePoint m_timeStart;
 
+        std::vector<SR_UTILS_NS::Component*> m_updateableComponents;
+        bool m_needRebuildComponents = false;
+
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_GRAPH_NS::Window* m_window = nullptr;
         Core::GUI::EditorGUI* m_editor = nullptr;

@@ -115,7 +115,7 @@ namespace SR_UTILS_NS {
         child->OnAttached();
 
         m_scene->OnChanged();
-        SetDirty();
+        SetDirty(true);
 
         return true;
     }
@@ -208,7 +208,7 @@ namespace SR_UTILS_NS {
 
         m_isEnabled = value;
 
-        SetDirty();
+        SetDirty(true);
     }
 
     bool GameObject::IsActive() const noexcept {
@@ -274,6 +274,8 @@ namespace SR_UTILS_NS {
         if (!m_dirty || !IsEnabled()) {
             return;
         }
+
+        m_dirty = false;
 
         for (auto&& pComponent : m_components) {
             if (!pComponent->IsAwake()) {
@@ -367,7 +369,7 @@ namespace SR_UTILS_NS {
 
         pComponent->SetParent(this);
         pComponent->OnAttached();
-        SetDirty();
+        SetDirty(true);
 
         return true;
     }
@@ -387,7 +389,7 @@ namespace SR_UTILS_NS {
             m_components.erase(it);
             --m_componentsCount;
 
-            SetDirty();
+            SetDirty(true);
 
             return true;
         }
@@ -410,7 +412,7 @@ namespace SR_UTILS_NS {
 
                 destination->SetParent(this);
                 destination->OnAttached();
-                SetDirty();
+                SetDirty(true);
 
                 return true;
             }
@@ -514,7 +516,7 @@ namespace SR_UTILS_NS {
             }
             m_transform = transform;
             m_transform->SetGameObject(this);
-            SetDirty();
+            SetDirty(true);
         }
     }
 
@@ -548,56 +550,22 @@ namespace SR_UTILS_NS {
 
     }
 
-    void GameObject::FixedUpdate(bool isPaused) noexcept {
-        if (!m_isActive) {
+    void GameObject::SetDirty(bool dirty) {
+        if (m_dirty == dirty) {
             return;
         }
 
-        m_dirty = false;
-
-        for (uint32_t i = 0; i < m_componentsCount; ++i) {
-            auto&& pComponent = m_components.at(i);
-
-            if (isPaused && !pComponent->ExecuteInEditMode()) {
-                continue;
-            }
-
-            if (pComponent->IsCanUpdate()) {
-                pComponent->FixedUpdate();
+        /// Грязный флаг передаем вверх, а чистый вниз.
+        /// Это нужно для оптимизации
+        if ((m_dirty = dirty)) {
+            if (m_parent) {
+                m_parent->SetDirty(dirty);
             }
         }
-
-        for (uint32_t i = 0; i < m_childrenCount; ++i) {
-            m_children.at(i)->FixedUpdate(isPaused);
-        }
-    }
-
-    void GameObject::Update(float_t dt, bool isPaused) noexcept {
-        if (!m_isActive) {
-            return;
-        }
-
-        for (uint32_t i = 0; i < m_componentsCount; ++i) {
-            auto&& pComponent = m_components.at(i);
-
-            if (isPaused && !pComponent->ExecuteInEditMode()) {
-                continue;
+        else {
+            for (auto&& children : m_children) {
+                children->SetDirty(dirty);
             }
-
-            if (pComponent->IsCanUpdate()) {
-                pComponent->Update(dt);
-            }
-        }
-
-        for (uint32_t i = 0; i < m_childrenCount; ++i) {
-            m_children.at(i)->Update(dt, isPaused);
-        }
-    }
-
-    void GameObject::SetDirty() {
-        m_dirty = true;
-        if (m_parent) {
-            m_parent->SetDirty();
         }
     }
 }

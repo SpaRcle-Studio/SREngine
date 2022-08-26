@@ -31,7 +31,7 @@ namespace SR_UTILS_NS {
         m_isEnabled = value;
 
         if (m_parent) {
-            m_parent->SetDirty();
+            m_parent->SetDirty(true);
         }
     }
 

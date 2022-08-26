@@ -105,6 +105,7 @@ namespace SR_SCRIPTING_NS {
         m_onDisable = m_script->GetFunction<EvoScript::Typedefs::OnDisableFnPtr>("OnDisable");
         m_start = m_script->GetFunction<EvoScript::Typedefs::StartFnPtr>("Start");
         m_update = m_script->GetFunction<EvoScript::Typedefs::UpdateFnPtr>("Update");
+        m_fixedUpdate = m_script->GetFunction<EvoScript::Typedefs::FixedUpdateFnPtr>("FixedUpdate");
     }
 
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
@@ -232,5 +233,14 @@ namespace SR_SCRIPTING_NS {
         if (auto&& setter = m_script->GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
             setter(GetGameObject());
         }
+    }
+
+    void EvoBehaviour::FixedUpdate() {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
+        if (m_fixedUpdate) {
+            m_fixedUpdate();
+        }
+        Behaviour::FixedUpdate();
     }
 }

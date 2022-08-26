@@ -228,6 +228,7 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetScene, SafePtr<Scene>)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetChildrenRef, std::vector<SharedPtr<GameObject>>&)
 
         using namespace Xml;
 

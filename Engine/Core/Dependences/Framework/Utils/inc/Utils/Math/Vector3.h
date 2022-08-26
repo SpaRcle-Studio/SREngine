@@ -120,11 +120,11 @@ namespace SR_MATH_NS {
             return (x == UnitMAX && y == UnitMAX && z == UnitMAX); // TODO
         }
 
-        SR_NODISCARD Vector3 Radians() const {
-            return { static_cast<T>(RAD(x)), static_cast<T>(RAD(y)), static_cast<T>(RAD(z)) };
+        SR_NODISCARD Vector3 Radians() const noexcept {
+            return { static_cast<T>(SR_RAD(x)), static_cast<T>(SR_RAD(y)), static_cast<T>(SR_RAD(z)) };
         }
-        SR_NODISCARD Vector3 Degrees() const {
-            return { static_cast<T>(DEG(x)), static_cast<T>(DEG(y)), static_cast<T>(DEG(z)) };
+        SR_NODISCARD Vector3 Degrees() const noexcept {
+            return { static_cast<T>(SR_DEG(x)), static_cast<T>(SR_DEG(y)), static_cast<T>(SR_DEG(z)) };
         }
 
         SR_NODISCARD std::string ToString() const {

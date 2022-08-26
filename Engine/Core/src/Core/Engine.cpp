@@ -390,9 +390,8 @@ namespace Framework {
             return;
         }
 
-        const bool isPaused = !m_isActive || m_isPaused;
-        for (auto &&gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->FixedUpdate(isPaused);
+        for (auto&& pComponent : m_updateableComponents) {
+            pComponent->FixedUpdate();
         }
 
         if (m_editor) {
@@ -406,10 +405,8 @@ namespace Framework {
             m_physicsScene.Unlock();
         }
 
-        const bool isPaused = !m_isActive || m_isPaused;
-
-        for (auto&& gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->Update(dt, isPaused);
+        for (auto&& pComponent : m_updateableComponents) {
+            pComponent->Update(dt);
         }
     }
 
@@ -428,10 +425,48 @@ namespace Framework {
         for (auto&& gameObject : root) {
             gameObject->Start();
         }
+
+        for (auto&& gameObject : root) {
+            if ((m_needRebuildComponents |= gameObject->IsDirty())) {
+                break;
+            }
+        }
+
+        if (m_needRebuildComponents) {
+            size_t capacity = m_updateableComponents.capacity();
+            m_updateableComponents.clear();
+            m_updateableComponents.reserve(capacity);
+
+            SR_HTYPES_NS::Function<void(const SR_UTILS_NS::GameObject::Ptr& ptr)> function;
+
+            function = [&](const SR_UTILS_NS::GameObject::Ptr& ptr) {
+                for (auto&& pComponent : ptr->GetComponents()) {
+                    if (isPaused && !pComponent->ExecuteInEditMode()) {
+                        continue;
+                    }
+
+                    if (pComponent->IsCanUpdate()) {
+                        m_updateableComponents.emplace_back(pComponent);
+                    }
+
+                    for (auto&& children : ptr->GetChildrenRef()) {
+                        function(children);
+                    }
+                }
+            };
+
+            for (auto&& gameObject : root) {
+                function(gameObject);
+                gameObject->SetDirty(false);
+            }
+
+            m_needRebuildComponents = false;
+        }
     }
 
     void Engine::SetActive(bool isActive) {
         m_isActive = isActive;
+        m_needRebuildComponents = true;
     }
 
     void Engine::SetSpeed(float_t speed) {
@@ -440,5 +475,6 @@ namespace Framework {
 
     void Engine::SetPaused(bool isPaused) {
         m_isPaused = isPaused;
+        m_needRebuildComponents = true;
     }
 }

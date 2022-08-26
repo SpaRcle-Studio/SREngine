@@ -24,6 +24,7 @@ namespace SR_SCRIPTING_NS {
         void OnDisable() override;
         void Start() override;
         void Update(float_t dt) override;
+        void FixedUpdate() override;
 
         bool Load() override;
         bool Unload() override;
@@ -49,6 +50,7 @@ namespace SR_SCRIPTING_NS {
         EvoScript::Typedefs::OnDisableFnPtr m_onDisable = nullptr;
         EvoScript::Typedefs::StartFnPtr m_start = nullptr;
         EvoScript::Typedefs::UpdateFnPtr m_update = nullptr;
+        EvoScript::Typedefs::FixedUpdateFnPtr m_fixedUpdate = nullptr;
 
         EvoScript::Typedefs::InitBehaviourFnPtr m_initBehaviour = nullptr;
         EvoScript::Typedefs::ReleaseBehaviourFnPtr m_releaseBehaviour = nullptr;
