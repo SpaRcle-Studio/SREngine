@@ -8,6 +8,7 @@
 #include <Utils/Types/DataStorage.h>
 #include <Scripting/Base/Behaviour.h>
 #include <Types/Geometry/Mesh3D.h>
+#include <Types/Geometry/ProceduralMesh.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <GUI/Utils.h>
 #include <Types/Texture.h>
@@ -343,6 +344,13 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&proceduralMesh, EditorGUI *context, int32_t index) {
+        if (!proceduralMesh->IsCanCalculate())
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
+        if (!proceduralMesh->IsCalculated())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        Graphics::GUI::DrawValue("Vertices count", proceduralMesh->GetVerticesCount(), index);
+        Graphics::GUI::DrawValue("Indices count", proceduralMesh->GetIndicesCount(), index);
     }
 }

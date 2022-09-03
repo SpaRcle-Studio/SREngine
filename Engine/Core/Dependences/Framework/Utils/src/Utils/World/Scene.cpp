@@ -336,11 +336,11 @@ namespace SR_WORLD_NS {
         for (int32_t x = -scope; x <= scope; ++x) {
             for (int32_t y = -scope; y <= scope; ++y) {
                 for (int32_t z = -scope; z <= scope; ++z) {
-                    constexpr float_t alpha = 3.f;
-
-                    if ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(scope)) {
-                        update(Math::IVector3(x, y, z));
+                    if (!ScopeCheckFunction(x, y, z)) {
+                        continue;
                     }
+
+                    update(Math::IVector3(x, y, z));
                 }
             }
         }
@@ -481,10 +481,12 @@ namespace SR_WORLD_NS {
     }
 
     GameObject::Ptr Scene::Find(const std::string &name) {
+        auto&& hashName = SR_UTILS_NS::HashCombine(name);
+
         for (auto&& object : m_gameObjects) {
             /// блокировать объекты не нужно, так как уничтожиться они могут только из сцены
             /// Но стоит предусмотреть защиту от одновременного изменения имени
-            if (object->GetName() == name) {
+            if (object->GetHashName() == hashName) {
                 return object;
             }
         }
@@ -507,5 +509,27 @@ namespace SR_WORLD_NS {
         }
 
         return SR_MATH_NS::FVector3();
+    }
+
+    Scene::GameObjectPtr Scene::FindOrInstance(const std::string &name) {
+        if (auto&& pFound = Find(name)) {
+            return pFound;
+        }
+
+        return Instance(name);
+    }
+
+    bool Scene::ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const {
+        if (!m_observer) {
+            return false;
+        }
+
+        if (y > 1 || y < -1) {
+            return false;
+        }
+
+        constexpr float_t alpha = 3.f;
+
+        return ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(m_observer->m_scope));
     }
 }

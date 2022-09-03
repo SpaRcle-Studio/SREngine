@@ -5,20 +5,27 @@
 #include <Memory/ShaderUBOBlock.h>
 
 namespace SR_GRAPH_NS::Memory {
-    ShaderUBOBlock::ShaderUBOBlock() {
-        m_data.reserve(10);
-        m_data.max_load_factor(0.9f);
-    }
-
     void ShaderUBOBlock::Append(uint64_t hashId, ShaderVarType type, bool hidden) {
-        auto &&size = GetShaderVarSize(type);
+        auto&& size = GetShaderVarSize(type);
 
-        m_data.insert(std::make_pair(hashId, SubBlock{
-                .type = type,
-                .size = size,
-                .offset = m_size,
-                .hidden = hidden,
-        }));
+        ++m_dataCount;
+
+        auto&& data = new SubBlock[m_dataCount];
+
+        data[m_dataCount - 1] = SubBlock {
+            .hashId = hashId,
+            .type = type,
+            .size = size,
+            .offset = m_size,
+            .hidden = hidden,
+        };
+
+        if (m_data) {
+            memcpy(data, m_data, (m_dataCount - 1) * sizeof(SubBlock));
+            delete[] m_data;
+        }
+
+        m_data = data;
 
         m_size += size;
     }
@@ -33,7 +40,13 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     void ShaderUBOBlock::DeInit() {
-        m_data.clear();
+        m_dataCount = 0;
+
+        if (m_data) {
+            delete[] m_data;
+            m_data = nullptr;
+        }
+
         m_size = 0;
         m_binding = SR_ID_INVALID;
 
@@ -48,8 +61,10 @@ namespace SR_GRAPH_NS::Memory {
             return;
         }
 
-        if (auto &&pIt = m_data.find(hashId); pIt != m_data.end()) {
-            memcpy(m_memory + pIt->second.offset, data, pIt->second.size);
+        for (uint32_t i = 0; i < m_dataCount; ++i) {
+            if (m_data[i].hashId == hashId) {
+                memcpy(m_memory + m_data[i].offset, data, m_data[i].size);
+            }
         }
     }
 }

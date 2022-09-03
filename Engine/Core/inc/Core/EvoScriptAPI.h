@@ -42,6 +42,7 @@ namespace Framework {
         static void RegisterISavable(EvoScript::AddressTableGen* generator);
         static void RegisterBehaviour(EvoScript::AddressTableGen* generator);
         static void RegisterObserver(EvoScript::AddressTableGen* generator);
+        static void RegisterMath(EvoScript::AddressTableGen* generator);
 
         static void RegisterCasts(EvoScript::CastingGen* generator);
     };

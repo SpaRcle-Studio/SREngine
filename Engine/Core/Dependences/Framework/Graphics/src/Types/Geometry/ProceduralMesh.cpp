@@ -30,12 +30,7 @@ namespace SR_GTYPES_NS {
         m_countVertices = 0;
         m_countIndices = 0;
 
-        m_isCalculated = false;
-        m_dirtyMaterial = true;
-
-        if (auto&& renderScene = GetRenderScene()) {
-            renderScene->SetDirty();
-        }
+        SetDirtyMesh();
 
         std::unordered_map<Vertices::StaticMeshVertex, uint32_t> uniqueVertices;
 
@@ -146,5 +141,26 @@ namespace SR_GTYPES_NS {
 
     bool ProceduralMesh::IsCanCalculate() const {
         return m_countVertices > 0;
+    }
+
+    void ProceduralMesh::SetIndexedVertices(void *pData, uint64_t count) {
+        m_vertices.resize((m_countVertices = count));
+        memcpy(m_vertices.data(), pData, count * sizeof(Vertices::StaticMeshVertex));
+        SetDirtyMesh();
+    }
+
+    void ProceduralMesh::SetIndices(void *pData, uint64_t count) {
+        m_indices.resize((m_countIndices = count));
+        memcpy(m_indices.data(), pData, count * sizeof(uint32_t));
+        SetDirtyMesh();
+    }
+
+    void ProceduralMesh::SetDirtyMesh() {
+        m_isCalculated = false;
+        m_dirtyMaterial = true;
+
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
     }
 }

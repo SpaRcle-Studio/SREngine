@@ -414,7 +414,10 @@ namespace Framework {
         const bool isPaused = !m_isActive || m_isPaused;
         auto&& root = m_scene->GetRootGameObjects();
 
+        uint64_t rootHash = 0;
+
         for (auto&& gameObject : root) {
+            rootHash = SR_UTILS_NS::HashCombine(gameObject.GetRawPtr(), rootHash);
             gameObject->Awake(isPaused);
         }
 
@@ -426,10 +429,17 @@ namespace Framework {
             gameObject->Start();
         }
 
-        for (auto&& gameObject : root) {
-            if ((m_needRebuildComponents |= gameObject->IsDirty())) {
-                break;
+        /// WARNING: если произойдет коллизия хешей при уничтожении коренного объекта, то будет краш!
+        if (rootHash == m_rootHash) {
+            for (auto&& gameObject : root) {
+                if ((m_needRebuildComponents |= gameObject->IsDirty())) {
+                    break;
+                }
             }
+        }
+        else {
+            m_needRebuildComponents = true;
+            m_rootHash = rootHash;
         }
 
         if (m_needRebuildComponents) {

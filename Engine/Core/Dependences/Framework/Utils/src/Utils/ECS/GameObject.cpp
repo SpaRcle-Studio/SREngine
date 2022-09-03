@@ -13,14 +13,16 @@
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/Common/Hashes.h>
 
-namespace SR_UTILS_NS {
+ namespace SR_UTILS_NS {
     GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
         : Super(this)
     {
-        m_name = std::move(name);
-        m_tag = std::move(tag);
         m_scene = scene;
+
+        SetName(std::move(name));
+        m_tag = std::move(tag);
 
         SetTransform(new Transform3D());
 
@@ -31,7 +33,7 @@ namespace SR_UTILS_NS {
         delete m_transform;
     }
 
-    Component *Framework::Helper::GameObject::GetComponent(const std::string &name) {
+    Component* GameObject::GetComponent(const std::string &name) {
         for (auto&& pComponent : m_components) {
             if (pComponent->GetComponentName() == name) {
                 return pComponent;
@@ -120,8 +122,9 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void GameObject::SetName(const std::string &name) {
-        m_name = name;
+    void GameObject::SetName(std::string name) {
+        m_name = std::move(name);
+        m_hashName = SR_UTILS_NS::HashCombine(m_name);
         m_scene->OnChanged();
     }
 
@@ -354,6 +357,7 @@ namespace SR_UTILS_NS {
 
         pComponent->SetParent(this);
         pComponent->OnAttached();
+        SetDirty(true);
 
         return true;
     }
@@ -567,5 +571,22 @@ namespace SR_UTILS_NS {
                 children->SetDirty(dirty);
             }
         }
+    }
+
+    Component *GameObject::GetOrCreateComponent(const std::string &name) {
+        if (auto&& pComponent = GetComponent(name)) {
+            return pComponent;
+        }
+
+        if (auto&& pComponent = ComponentManager::Instance().CreateComponentOfName(name)) {
+            if (AddComponent(pComponent)) {
+                return pComponent;
+            }
+            else {
+                SRHalt("GameObject::GetOrCreateComponent() : failed to add component!");
+            }
+        }
+
+        return nullptr;
     }
 }

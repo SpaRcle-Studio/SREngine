@@ -101,6 +101,7 @@ namespace Framework {
 
         std::vector<SR_UTILS_NS::Component*> m_updateableComponents;
         bool m_needRebuildComponents = false;
+        uint64_t m_rootHash = 0;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_GRAPH_NS::Window* m_window = nullptr;

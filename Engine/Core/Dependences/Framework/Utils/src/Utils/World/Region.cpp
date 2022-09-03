@@ -185,6 +185,8 @@ namespace SR_WORLD_NS {
     bool Region::Load() {
         SR_LOG("Region::Load() : loading region at " + m_position.ToString());
 
+        SRAssert(!m_position.HasZero());
+
         const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
         if (path.Exists()) {
             auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);

@@ -33,7 +33,7 @@ namespace SR_CORE_NS::GUI {
                 m_id = pFramebuffer->GetColorTexture(0);
             }
 
-            if (m_id != SR_ID_INVALID && pCamera->IsActive()) {
+            if (pCamera && m_id != SR_ID_INVALID && pCamera->IsActive()) {
                 m_guizmo->DrawTools();
 
                 ImGui::BeginGroup();
@@ -57,6 +57,9 @@ namespace SR_CORE_NS::GUI {
             }
 
             m_camera.Unlock();
+        }
+        else {
+            m_camera = m_scene->Find("Editor camera");
         }
     }
 

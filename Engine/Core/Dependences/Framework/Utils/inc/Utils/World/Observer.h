@@ -28,6 +28,9 @@ namespace SR_WORLD_NS {
             : Offset(Math::IVector3::Zero(), Math::IVector3::Zero())
         { }
 
+        SR_NODISCARD SR_MATH_NS::IVector3 GetRegion() const noexcept { return m_region; }
+        SR_NODISCARD SR_MATH_NS::IVector3 GetChunk() const noexcept { return m_chunk; }
+
         SR_NODISCARD std::string ToString() const {
             return SR_UTILS_NS::Format("{ Region: %s, Chunk: %s }", m_region.ToString().c_str(), m_chunk.ToString().c_str());
         }

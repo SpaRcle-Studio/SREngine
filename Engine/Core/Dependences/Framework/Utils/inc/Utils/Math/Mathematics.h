@@ -91,6 +91,10 @@ namespace SR_MATH_NS {
 
     const Unit UnitMAX = DoubleMAX;
 
+    SR_FORCE_INLINE double_t Lerp(double_t t, double_t a, double_t b) {
+        return a + (b + -a) * t;
+    }
+
     static SR_FORCE_INLINE double_t SR_FASTCALL FastSqrt(double_t value) {
         return std::sqrt(value);
     }

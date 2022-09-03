@@ -5,7 +5,7 @@
 #ifndef EVOSCRIPTLIB_VECTOR3_H
 #define EVOSCRIPTLIB_VECTOR3_H
 
-#include "Math.h"
+#include "CoreMath.h"
 
 template<typename T> struct Vector3 {
 public:
@@ -19,27 +19,27 @@ public:
         T coord[3] = { 0 };
     };
 public:
-    _FORCE_INLINE_ Vector3() {
+    SR_FORCE_INLINE Vector3() {
         x = 0;
         y = 0;
         z = 0;
     }
-    _FORCE_INLINE_ explicit Vector3(const float* vec) {
+    SR_FORCE_INLINE explicit Vector3(const float* vec) {
         x = (Unit)vec[0];
         y = (Unit)vec[1];
         z = (Unit)vec[2];
     }
-    _FORCE_INLINE_ explicit Vector3(const unsigned char* axis) {
+    SR_FORCE_INLINE explicit Vector3(const unsigned char* axis) {
         x = (Unit)axis[0];
         y = (Unit)axis[1];
         z = (Unit)axis[2];
     }
-    _FORCE_INLINE_ Vector3(T p_x, T p_y, T p_z) {
+    SR_FORCE_INLINE Vector3(T p_x, T p_y, T p_z) {
         x = p_x;
         y = p_y;
         z = p_z;
     }
-    _FORCE_INLINE_ Vector3(T p) {
+    SR_FORCE_INLINE Vector3(T p) {
         x = p;
         y = p;
         z = p;
@@ -69,7 +69,7 @@ public:
     }
 
     [[nodiscard]] T Distance(Vector3 point) const {
-        return sqrt(
+        return std::sqrt(
                 pow(point.x - x, 2) +
                 pow(point.y - y, 2) +
                 pow(point.z - z, 2)
@@ -120,11 +120,11 @@ public:
         return vec3;
     }
 
-    _FORCE_INLINE_ const Unit &operator[](int p_axis) const {
+    SR_FORCE_INLINE const Unit &operator[](int p_axis) const {
         return coord[p_axis];
     }
 
-    _FORCE_INLINE_ Unit &operator[](int p_axis) {
+    SR_FORCE_INLINE Unit &operator[](int p_axis) {
         return coord[p_axis];
     }
 
@@ -150,68 +150,68 @@ public:
         return ret;
     }
 
-    template<typename U> _FORCE_INLINE_ Vector3 &operator+=(const Vector3<U> &p_v){
+    template<typename U> SR_FORCE_INLINE Vector3 &operator+=(const Vector3<U> &p_v){
         x += p_v.x;
         y += p_v.y;
         z += p_v.z;
         return *this;
     }
-    template<typename U> _FORCE_INLINE_ Vector3 operator+(const Vector3<U> &p_v) const {
+    template<typename U> SR_FORCE_INLINE Vector3 operator+(const Vector3<U> &p_v) const {
         return Vector3(x + p_v.x, y + p_v.y, z + p_v.z);
     }
-    template<typename U> _FORCE_INLINE_ Vector3 &operator-=(const Vector3<U> &p_v) {
+    template<typename U> SR_FORCE_INLINE Vector3 &operator-=(const Vector3<U> &p_v) {
         x -= p_v.x;
         y -= p_v.y;
         z -= p_v.z;
         return *this;
     }
-    template<typename U> _FORCE_INLINE_ Vector3 operator-(const Vector3<U> &p_v) const {
+    template<typename U> SR_FORCE_INLINE Vector3 operator-(const Vector3<U> &p_v) const {
         return Vector3(x - p_v.x, y - p_v.y, z - p_v.z);
     }
-    template<typename U> _FORCE_INLINE_ Vector3 &operator*=(const Vector3<U> &p_v) {
+    template<typename U> SR_FORCE_INLINE Vector3 &operator*=(const Vector3<U> &p_v) {
         x *= p_v.x;
         y *= p_v.y;
         z *= p_v.z;
         return *this;
     }
-    template<typename U> _FORCE_INLINE_ Vector3 operator*(const Vector3<U> &p_v) const {
+    template<typename U> SR_FORCE_INLINE Vector3 operator*(const Vector3<U> &p_v) const {
         return Vector3(x * p_v.x, y * p_v.y, z * p_v.z);
     }
 
-    template<typename U> _FORCE_INLINE_ Vector3 &operator/=(const Vector3<U> &p_v) {
+    template<typename U> SR_FORCE_INLINE Vector3 &operator/=(const Vector3<U> &p_v) {
         x /= p_v.x;
         y /= p_v.y;
         z /= p_v.z;
         return *this;
     }
-    template<typename U> _FORCE_INLINE_ Vector3 operator/(const Vector3<U> &p_v) const {
+    template<typename U> SR_FORCE_INLINE Vector3 operator/(const Vector3<U> &p_v) const {
         return Vector3(x / p_v.x, y / p_v.y, z / p_v.z);
     }
 
-    template<typename U> _FORCE_INLINE_ Vector3 &operator*=(U p_scalar) {
+    template<typename U> SR_FORCE_INLINE Vector3 &operator*=(U p_scalar) {
         x *= p_scalar;
         y *= p_scalar;
         z *= p_scalar;
         return *this;
     }
-    template<typename U> _FORCE_INLINE_ Vector3 operator*(U p_scalar) const {
+    template<typename U> SR_FORCE_INLINE Vector3 operator*(U p_scalar) const {
         return Vector3(x * p_scalar, y * p_scalar, z * p_scalar);
     }
-    template<typename U> _FORCE_INLINE_ Vector3 &operator/=(U p_scalar) {
+    template<typename U> SR_FORCE_INLINE Vector3 &operator/=(U p_scalar) {
         x /= p_scalar;
         y /= p_scalar;
         z /= p_scalar;
         return *this;
     }
-    template<typename U> _FORCE_INLINE_ Vector3 operator/(U p_scalar) const {
+    template<typename U> SR_FORCE_INLINE Vector3 operator/(U p_scalar) const {
         return Vector3(x / p_scalar, y / p_scalar, z / p_scalar);
     }
 
-    _FORCE_INLINE_ Vector3 operator-() const { return Vector3(-x, -y, -z); }
+    SR_FORCE_INLINE Vector3 operator-() const { return Vector3(-x, -y, -z); }
 
-    _FORCE_INLINE_ bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
-    _FORCE_INLINE_ bool operator!=(const Vector3 &p_v) const {return x != p_v.x || y != p_v.y || z != p_v.z; }
-    _FORCE_INLINE_ bool operator<(const Vector3 &p_v) const {
+    SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
+    SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const {return x != p_v.x || y != p_v.y || z != p_v.z; }
+    SR_FORCE_INLINE bool operator<(const Vector3 &p_v) const {
         if (x == p_v.x) {
             if (y == p_v.y) {
                 return z < p_v.z;
@@ -220,7 +220,7 @@ public:
         }
         return x < p_v.x;
     }
-    _FORCE_INLINE_ bool operator<=(const Vector3 &p_v) const {
+    SR_FORCE_INLINE bool operator<=(const Vector3 &p_v) const {
         if (x == p_v.x) {
             if (y == p_v.y) {
                 return z > p_v.z;
@@ -229,7 +229,7 @@ public:
         }
         return x > p_v.x;
     }
-    _FORCE_INLINE_ bool operator>(const Vector3 &p_v) const {
+    SR_FORCE_INLINE bool operator>(const Vector3 &p_v) const {
         if (x == p_v.x) {
             if (y == p_v.y) {
                 return z <= p_v.z;
@@ -238,7 +238,7 @@ public:
         }
         return x < p_v.x;
     }
-    _FORCE_INLINE_ bool operator>=(const Vector3 &p_v) const {
+    SR_FORCE_INLINE bool operator>=(const Vector3 &p_v) const {
         if (x == p_v.x) {
             if (y == p_v.y) {
                 return z >= p_v.z;
@@ -250,7 +250,7 @@ public:
 
 public:
     static Unit Magnitude(Vector3 vec) {
-        return sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+        return std::sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
     }
     static T Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
     static Vector3 Cross(const Vector3 &p_a, const Vector3 &p_b) {

@@ -70,7 +70,13 @@ namespace SR_GRAPH_NS::Vertices {
         }
 
         SR_NODISCARD std::string ToString() const {
-            return "{ " + Vertices::ToString(pos) + ", " + Vertices::ToString(uv) + " }";
+            return SR_FORMAT("{ %s, %s, %s, %s, %s },",
+                    Vertices::ToString(pos).c_str(),
+                    Vertices::ToString(uv).c_str(),
+                    Vertices::ToString(norm).c_str(),
+                    Vertices::ToString(bitang).c_str(),
+                    Vertices::ToString(tang).c_str()
+            );
         }
     };
     typedef std::vector<StaticMeshVertex> StaticMeshVertices;

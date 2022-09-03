@@ -18,7 +18,6 @@ public:
     SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->m_valid; }
     SharedPtr<T> &operator=(const SharedPtr<T> &ptr);
     SharedPtr<T> &operator=(T *ptr);
-    T &operator*() const { return *m_ptr; }
     T *operator->() const noexcept { return m_ptr; }
     SR_NODISCARD SR_INLINE bool operator==(const SharedPtr<T>& right) const noexcept {
         return m_ptr == right.m_ptr;
@@ -26,8 +25,18 @@ public:
     SR_NODISCARD SR_INLINE bool operator!=(const SharedPtr<T>& right) const noexcept {
         return m_ptr != right.m_ptr;
     }
+
     template<typename U> U DynamicCast() {
-        return dynamic_cast<U>(m_ptr);
+        if constexpr (std::is_same_v<T, void>) {
+            return nullptr;
+        }
+        else {
+            return dynamic_cast<U>(m_ptr);
+        }
+    }
+
+    template<typename U> U ReinterpretCast() {
+        return reinterpret_cast<U>(m_ptr);
     }
 
     SR_NODISCARD SR_FORCE_INLINE T* Get() const noexcept { return m_ptr; }
@@ -107,16 +116,22 @@ template<class T> SharedPtr<T> &SharedPtr<T>::operator=(T *ptr) {
             --(m_data->m_useCount);
         }
 
-        if (auto&& inherit = dynamic_cast<SharedPtr<T>*>(ptr)) {
-            SR_SAFE_PTR_ASSERT(m_data, "Inherit ptr data invalid!");
-            if ((m_data = inherit->m_data)) {
-                ++(m_data->m_useCount);
+        bool isInherit = false;
+
+        if constexpr (!std::is_same_v<T, void>) {
+            if (auto &&inherit = dynamic_cast<SharedPtr<T> *>(ptr)) {
+                SR_SAFE_PTR_ASSERT(m_data, "Inherit ptr data invalid!");
+                if ((m_data = inherit->m_data)) {
+                    ++(m_data->m_useCount);
+                }
+                isInherit = true;
             }
         }
-        else {
+
+        if (!isInherit) {
             m_data = new dynamic_data{
-                1,     /// m_useCount
-                false, /// m_valid
+                    1,     /// m_useCount
+                    false, /// m_valid
             };
         }
     }

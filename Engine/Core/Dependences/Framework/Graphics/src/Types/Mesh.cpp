@@ -15,6 +15,7 @@
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type)
         : IResource(typeid(Mesh).name(), true /** auto remove */)
+        , m_uboManager(Memory::UBOManager::Instance())
         , m_pipeline(Environment::Get())
         , m_type(type)
         , m_material(nullptr)
@@ -204,8 +205,7 @@ namespace SR_GRAPH_NS::Types {
 
     void Mesh::FreeVideoMemory() {
         if (m_pipeline->GetPipeLine() == PipeLine::Vulkan) {
-            auto&& uboManager = Memory::UBOManager::Instance();
-            if (m_virtualUBO != SR_ID_INVALID && !uboManager.FreeUBO(&m_virtualUBO)) {
+            if (m_virtualUBO != SR_ID_INVALID && !m_uboManager.FreeUBO(&m_virtualUBO)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
             }
         }
@@ -286,10 +286,6 @@ namespace SR_GRAPH_NS::Types {
             SRHalt("Context is invalid!");
         }
     }
-
-    //SR_MATH_NS::Unit Mesh::Distance(const Helper::Math::FVector3 &pos) const {
-    //    return m_position.Distance(pos);
-    //}
 
     const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
         if (auto&& pTransform = GetTransform()) {

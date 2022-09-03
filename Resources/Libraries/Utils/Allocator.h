@@ -32,6 +32,10 @@ void operator delete[](void* ptr) {
 #include <unordered_map>
 #include <any>
 #include <functional>
+#include <utility>
+#include <cmath>
+#include <memory>
+#include <ctype.h>
 
 #define SR_SAFE_PTR_ASSERT(expr, msg)                                                                                  \
     if (!(expr)) {                                                                                                     \

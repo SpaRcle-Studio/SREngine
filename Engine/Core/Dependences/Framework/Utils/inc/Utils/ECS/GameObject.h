@@ -64,6 +64,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_FORCE_INLINE bool IsDirty() const noexcept { return m_dirty; }
+        SR_NODISCARD SR_FORCE_INLINE uint64_t GetHashName() const noexcept { return m_hashName; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
@@ -79,9 +80,10 @@ namespace SR_UTILS_NS {
         void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
         void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;
         bool SetParent(const GameObject::Ptr& parent);
-        void SetName(const std::string& name);
+        void SetName(std::string name);
         void SetTag(const std::string& tag);
 
+        Component* GetOrCreateComponent(const std::string& name);
         Component* GetComponent(const std::string& name);
         Component* GetComponent(size_t id);
 
@@ -134,6 +136,8 @@ namespace SR_UTILS_NS {
         uint16_t m_componentsCount = 0;
         uint16_t m_childrenCount   = 0;
 
+        uint64_t m_hashName = 0;
+
         GameObject::Ptr    m_parent     = { };
         GameObjects        m_children   = { };
 
@@ -142,10 +146,10 @@ namespace SR_UTILS_NS {
 
         Components         m_components = { };
 
-        std::string        m_name       = "Unnamed";
-        std::string        m_tag        = "Untagged";
+        std::string        m_name;
+        std::string        m_tag;
 
-        GameObjectFlagBits m_flags      = GAMEOBJECT_FLAG_NONE;
+        GameObjectFlagBits m_flags = GAMEOBJECT_FLAG_NONE;
 
     };
 }

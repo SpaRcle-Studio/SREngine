@@ -11,6 +11,7 @@
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ECS/Component.h>
 #include <Memory/IGraphicsResource.h>
+#include <Memory/UBOManager.h>
 
 namespace SR_HTYPES_NS {
     class RawMesh;
@@ -98,19 +99,21 @@ namespace SR_GTYPES_NS {
         void OnDisable() override;
 
     protected:
-        SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
+        Memory::UBOManager&          m_uboManager;
 
+        SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
         RenderScenePtr               m_renderScene       = { };
         /// Контекст будет задан только после регистрации в RenderScene
         RenderContextPtr             m_context           = { };
         PipelinePtr                  m_pipeline          = nullptr;
+
         const MeshType               m_type              = MeshType::Unknown;
-
         std::string                  m_geometryName      = "Unnamed";
-        Material*                    m_material          = nullptr;
 
+        Material*                    m_material          = nullptr;
         std::atomic<bool>            m_hasErrors         = false;
         std::atomic<bool>            m_isCalculated      = false;
+
         std::atomic<bool>            m_dirtyMaterial     = false;
 
         int32_t                      m_virtualUBO        = SR_ID_INVALID;

@@ -22,6 +22,8 @@ namespace SR_GTYPES_NS {
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
+        void SetIndexedVertices(void* pData, uint64_t count);
+        void SetIndices(void* pData, uint64_t count);
         void SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices);
 
         SR_NODISCARD bool IsCanCalculate() const override;
@@ -30,6 +32,7 @@ namespace SR_GTYPES_NS {
         bool Calculate() override;
         void FreeVideoMemory() override;
         void Draw() override;
+        void SetDirtyMesh();
 
         SR_NODISCARD SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;

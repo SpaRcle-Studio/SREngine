@@ -44,6 +44,10 @@ namespace SR_GTYPES_NS {
 
         auto&& vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
 
+        //for (auto&& index : GetIndices()) {
+        //    SR_LOG(vertices[index].ToString());
+        //}
+
         if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices))
             return false;
 
@@ -89,16 +93,15 @@ namespace SR_GTYPES_NS {
             return;
 
         auto&& shader = m_material->GetShader();
-        auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
+            m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
-                uboManager.BindUBO(m_virtualUBO);
+                m_uboManager.BindUBO(m_virtualUBO);
             }
             else {
                 m_pipeline->ResetDescriptorSet();
@@ -112,7 +115,7 @@ namespace SR_GTYPES_NS {
             m_material->UseSamplers();
         }
 
-        switch (uboManager.BindUBO(m_virtualUBO)) {
+        switch (m_uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
                 shader->InitUBOBlock();
                 shader->Flush();

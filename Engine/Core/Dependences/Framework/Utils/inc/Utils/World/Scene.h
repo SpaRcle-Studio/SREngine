@@ -67,9 +67,12 @@ namespace SR_WORLD_NS {
         GameObjectPtr Find(const std::string& name);
 
         virtual GameObjectPtr InstanceFromFile(const std::string& path);
+        virtual GameObjectPtr FindOrInstance(const std::string& name);
         virtual GameObjectPtr Instance(const std::string& name);
         virtual GameObjectPtr Instance(const Types::RawMesh* rawMesh);
         virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
+
+        virtual bool ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const;
 
     public:
         bool Remove(const GameObjectPtr& gameObject);

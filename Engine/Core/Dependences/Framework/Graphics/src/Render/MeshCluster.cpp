@@ -71,8 +71,8 @@ namespace SR_GRAPH_NS {
         return m_groups.empty();
     }
 
-    bool MeshCluster::Add(Types::Mesh *mesh) noexcept {
-        const auto&& pShader = mesh->GetShader();
+    bool MeshCluster::Add(Types::Mesh* pMesh) noexcept {
+        const auto&& pShader = pMesh->GetShader();
 
         SRAssert(pShader);
 
@@ -82,15 +82,20 @@ namespace SR_GRAPH_NS {
                     std::move(ShadedMeshSubCluster())
             ));
 
-            if (!subCluster->second.Add(mesh)) {
-                mesh->AddUsePoint();
-                SRVerifyFalse(!m_invalid.insert(mesh).second);
+            if (!subCluster->second.Add(pMesh)) {
+                pMesh->AddUsePoint();
+                SRVerifyFalse(!m_invalid.insert(pMesh).second);
             }
 
             return true;
         }
         else {
-            return subClusterIt->second.Add(mesh);
+            if (!subClusterIt->second.Add(pMesh)) {
+                pMesh->AddUsePoint();
+                SRVerifyFalse(!m_invalid.insert(pMesh).second);
+            }
+
+            return true;
         }
     }
 

@@ -10,7 +10,7 @@
             result += static_cast<SR_MATH_NS::Unit>(result) / abs(result);        \
         else if (result == 0)                                                     \
             result += static_cast<SR_MATH_NS::Unit>(offset) / abs(offset);        \
-    }
+    }                                                                             \
 
 #define SR_WORLD_REGION_NEIGHBOUR(chunk, region, width, offset, value) \
     if (offset.value >= 0)                                             \

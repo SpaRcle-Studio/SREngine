@@ -17,14 +17,12 @@ namespace SR_GRAPH_NS::Memory {
         friend class SR_GRAPH_NS::Types::Shader;
 
         struct SubBlock {
+            uint64_t hashId;
             ShaderVarType type;
             uint32_t size;
             uint32_t offset;
             bool hidden;
         };
-
-    public:
-        ShaderUBOBlock();
 
     public:
         void Append(uint64_t hashId, ShaderVarType type, bool hidden);
@@ -37,7 +35,10 @@ namespace SR_GRAPH_NS::Memory {
 
     private:
         uint32_t m_binding = SR_ID_INVALID;
-        ska::flat_hash_map<uint64_t, SubBlock> m_data;
+
+        SubBlock* m_data = nullptr;
+        uint32_t m_dataCount = 0;
+
         uint32_t m_size = 0;
         char* m_memory = nullptr;
 
