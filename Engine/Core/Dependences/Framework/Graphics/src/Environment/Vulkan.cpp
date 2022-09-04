@@ -14,6 +14,8 @@
 namespace Framework::Graphics {
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+            VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
+            VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME,
             //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
     };
 
@@ -51,7 +53,7 @@ namespace Framework::Graphics {
 
         m_kernel->SetMultisampling(smooth_samples);
 
-        /// TOOD: вынести в конфиг
+        /// TODO: вынести в конфиг
         m_kernel->SetSwapchainImagesCount(2);
 
         std::vector<const char*>&& validationLayers = { };
@@ -68,7 +70,6 @@ namespace Framework::Graphics {
             instanceExtensions.emplace_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
             validationLayers.emplace_back("VK_LAYER_KHRONOS_validation");
         }
-
 
         if (!m_kernel->PreInit(
                 appName,

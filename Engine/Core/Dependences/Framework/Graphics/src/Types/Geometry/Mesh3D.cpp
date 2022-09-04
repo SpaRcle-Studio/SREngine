@@ -152,6 +152,10 @@ namespace SR_GTYPES_NS {
 
         const auto &&material = marshal.Read<std::string>();
 
+        if (id < 0) {
+            return nullptr;
+        }
+
         auto &&pMesh = Mesh::Load(path, type, id);
 
         if (pMesh && material != "None") {

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Material ReadOnly="false">
+    <Shader Path="Engine/Shaders/bubble.srsl"/>
+    <Properties>
+        <Property Id="NoiseTex" Type="Sampler2D" String="Engine/Textures/noise.png"/>
+        <Property Id="BubbleColor" Type="Vec3" X="0.6" Y="0.7" Z="0.9"/>
+        <Property Id="NoiseSampleSize" Type="Float" Float="0.1"/>
+        <Property Id="AnimationSpeed" Type="Float" Float="0.00005"/>
+        <Property Id="HeightMultiplier" Type="Float" Float="0.3"/>
+    </Properties>
+</Material>

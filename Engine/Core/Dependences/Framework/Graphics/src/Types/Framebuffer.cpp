@@ -272,10 +272,6 @@ namespace SR_GTYPES_NS {
         return m_frameBuffer;
     }
 
-    bool Framebuffer::IsValid() const {
-        return true;
-    }
-
     uint64_t Framebuffer::GetFileHash() const {
         return 0;
     }

@@ -70,6 +70,8 @@ namespace SR_UTILS_NS {
         m_copies[pResource->GetResourceId()].insert(pResource);
         m_resources.insert(pResource);
 
+        pResource->OnResourceRegistered();
+
         auto&& path = pResource->GetResourcePath();
         if (auto&& pIt = m_info.find(path); pIt != m_info.end()) {
             auto&& [_, info] = *pIt;

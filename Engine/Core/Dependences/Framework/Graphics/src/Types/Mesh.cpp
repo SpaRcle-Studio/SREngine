@@ -150,17 +150,12 @@ namespace SR_GRAPH_NS::Types {
     void Mesh::OnDestroy() {
         Component::OnDestroy();
 
-        if (IsValid()) {
-            RemoveUsePoint();
+        auto&& renderScene = GetRenderScene();
 
-            if (auto &&renderScene = GetRenderScene()) {
-                renderScene->SetDirty();
-            }
-        }
-        else {
-            /// Ресурс так и не был зарегистрирован, удаляем вручную
-            delete this;
-        }
+        /// после вызова данная сущность может быть уничтожена
+        RemoveUsePoint();
+
+        renderScene->SetDirty();
     }
 
     bool Mesh::IsCanCalculate() const {

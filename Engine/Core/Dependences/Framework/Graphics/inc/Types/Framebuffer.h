@@ -44,7 +44,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetColorTexture(uint32_t layer) const;
 
         void FreeVideoMemory() override;
-        bool IsValid() const override;
         uint64_t GetFileHash() const override;
 
     private:

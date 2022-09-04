@@ -17,7 +17,7 @@
 
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
-        : IResource(typeid(Shader).name())
+        : IResource(typeid(Shader).name(), true /** auto remove */)
     { }
 
     Shader::~Shader() {
@@ -370,7 +370,8 @@ namespace SR_GRAPH_NS::Types {
             }
         }
 
-        for (auto&&[name, var] : unit->GetUniformBlock()) {
+        auto&& uniformBlock = unit->GetUniformBlock();
+        for (auto&&[name, var] : uniformBlock) {
             m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(name.c_str()), var.type, !var.show);
             m_uniformBlock.m_binding = var.binding;
 

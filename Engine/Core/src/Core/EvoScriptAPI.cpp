@@ -167,8 +167,6 @@ namespace Framework {
         generator->RegisterNewClass("IResource", "ResourceManager", {"string"});
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, IsEnabledAutoRemove, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, Destroy, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, AddUsePoint, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, RemoveUsePoint, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetCountUses, unsigned int)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetResourceName, const char*)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetResourceId, std::string)

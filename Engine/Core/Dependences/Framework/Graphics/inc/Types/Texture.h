@@ -38,7 +38,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetId() noexcept;
         SR_NODISCARD void* GetDescriptor();
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
-        SR_NODISCARD bool IsValid() const override;
         SR_NODISCARD uint64_t GetFileHash() const override;
 
         void FreeVideoMemory() override;

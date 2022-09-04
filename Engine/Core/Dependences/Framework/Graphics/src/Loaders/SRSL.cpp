@@ -6,6 +6,8 @@
 
 const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VARIABLES = {
         { "TIME", ShaderVarType::Float },
+        { "VIEW_DIRECTION", ShaderVarType::Vec3 },
+        { "HALF_SIZE_NEAR_PLANE", ShaderVarType::Vec2 },
         { "MODEL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_MATRIX", ShaderVarType::Mat4 },
         { "PROJECTION_MATRIX", ShaderVarType::Mat4 },
@@ -641,8 +643,20 @@ std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> Framework::Gr
         variables.emplace_back(std::make_pair(name, var));
     }
 
-    variables.sort([](const std::pair<std::string, SRSLVariable> &a, const std::pair<std::string, SRSLVariable> &b) {
-        return GetShaderVarSize(a.second.type) > GetShaderVarSize(b.second.type);
+    std::map<ShaderVarType, uint32_t> order = {
+            { ShaderVarType::Mat4, 1 },
+            { ShaderVarType::Mat3, 2 },
+            { ShaderVarType::Mat2, 3 },
+            { ShaderVarType::Float, 4 },
+            { ShaderVarType::Int, 5 },
+            { ShaderVarType::Vec4, 6 },
+            { ShaderVarType::Vec3, 7 },
+            { ShaderVarType::Vec2, 8 },
+    };
+
+    variables.sort([&order](const std::pair<std::string, SRSLVariable> &a, const std::pair<std::string, SRSLVariable> &b) {
+        return order[a.second.type] < order[b.second.type];
+        //return GetShaderVarSize(a.second.type) > GetShaderVarSize(b.second.type);
     });
 
     return variables;

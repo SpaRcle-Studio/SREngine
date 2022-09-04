@@ -63,14 +63,14 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::Remove(IResource *pResource) {
-        if (pResource->IsValid()) {
+        if (pResource->IsRegistered()) {
             auto &&resourcesGroup = m_resources.at(pResource->m_resourceName);
             resourcesGroup.Remove(pResource);
         }
         else {
-            SRAssert2(false, "Invalid resource! "
-                             "\n\tType: " + std::string(pResource->GetResourceName()) +
-                             "\n\tId: " + pResource->GetResourceId());
+           SRHalt("Resource ins't registered! "
+                "\n\tType: " + std::string(pResource->GetResourceName()) +
+                "\n\tId: " + pResource->GetResourceId());
         }
     }
 
@@ -105,7 +105,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::GC() {
-        if (m_destroyed.empty()) {
+        if (m_destroyed.empty() && !m_force) {
             return;
         }
 
@@ -156,7 +156,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::RegisterResource(IResource *resource) {
-        SRAssert(resource->IsValid());
+        SRAssert(!resource->IsRegistered());
 
         if (Debug::Instance().GetLevel() >= Debug::Level::Full) {
             SR_LOG("ResourceManager::RegisterResource() : add new \"" + std::string(resource->GetResourceName()) + "\" resource.");

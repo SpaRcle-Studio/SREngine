@@ -20,6 +20,10 @@ namespace SR_UTILS_NS {
             Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
         };
 
+        enum class RemoveUPResult : uint8_t {
+            Delete, Destroy, Success, Error
+        };
+
     protected:
         explicit IResource(const char* name);
         IResource(const char* name, bool autoRemove);
@@ -27,7 +31,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD virtual uint64_t GetFileHash() const;
-        SR_NODISCARD virtual bool IsValid() const;
+        SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const { return m_isDestroyed; }
@@ -48,12 +52,32 @@ namespace SR_UTILS_NS {
         void AddUsePoint() { ++m_countUses; }
 
         /** Remove one point from count uses current resource */
-        virtual void RemoveUsePoint() {
-            SRAssert2(m_countUses > 0, "count use points is zero!");
+        virtual RemoveUPResult RemoveUsePoint() {
+            if (m_countUses == 0) {
+                SRHalt("Count use points is zero!");
+                return RemoveUPResult::Error;
+            }
+
             --m_countUses;
 
-            if (m_countUses == 0 && m_autoRemove && !IsDestroyed())
-                Destroy();
+            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+                if (IsRegistered()) {
+                    Destroy();
+                    return RemoveUPResult::Destroy;
+                }
+                else {
+                    /// так и не зарегистрировали ресурс
+                    delete this;
+                    return RemoveUPResult::Delete;
+                }
+            }
+
+            return RemoveUPResult::Success;
+        }
+
+        virtual void OnResourceRegistered() {
+            SRAssert2(!IsRegistered(), "Resource already are registered!");
+            m_isRegistered = true;
         }
 
         virtual bool Reload() { return false; }
@@ -71,7 +95,6 @@ namespace SR_UTILS_NS {
         }
 
         virtual bool Load() {
-            SRAssert2(IsValid(), "Invalid resource!");
             if (m_loadState == LoadState::Unknown || m_loadState == LoadState::Unloaded) {
                 m_loadState = LoadState::Loaded;
                 return true;
@@ -113,6 +136,7 @@ namespace SR_UTILS_NS {
         std::atomic<bool> m_force = false;
         std::atomic<bool> m_readOnly = false;
         std::atomic<bool> m_isDestroyed = false;
+        std::atomic<bool> m_isRegistered = false;
         /// Автоматическое уничтожение ресурса по истечению use-point'ов
         std::atomic<bool> m_autoRemove = false;
 

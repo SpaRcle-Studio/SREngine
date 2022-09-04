@@ -69,6 +69,7 @@ namespace SR_GRAPH_NS {
             shader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             shader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+            shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
             shader->SetFloat(SHADER_TIME, time);
 
             for (auto const& [key, meshGroup] : subCluster) {

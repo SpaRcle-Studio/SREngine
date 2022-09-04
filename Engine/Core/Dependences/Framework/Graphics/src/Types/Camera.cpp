@@ -282,4 +282,8 @@ namespace SR_GTYPES_NS {
             pRenderScene->SetDirtyCameras();
         });
     }
+
+    glm::vec3 Camera::GetViewDirection() const {
+        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(1, 0, 0)).ToGLM();
+    }
 }

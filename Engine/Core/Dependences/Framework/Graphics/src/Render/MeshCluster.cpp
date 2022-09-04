@@ -133,8 +133,6 @@ namespace SR_GRAPH_NS {
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::IndexedMesh*>(*pInvalidIt);
 
             if (pMesh->GetCountUses() == 1) {
-                pMesh->RemoveUsePoint();
-
                 if (pMesh->IsCalculated()) {
                     pMesh->FreeVideoMemory();
                 }

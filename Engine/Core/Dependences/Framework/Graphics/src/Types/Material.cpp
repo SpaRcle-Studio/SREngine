@@ -271,12 +271,32 @@ namespace SR_GTYPES_NS {
 
         m_loadState = LoadState::Reloading;
 
+        /// ========= Stash Properties =========
+        auto&& stashTextures = GetTexturesFromMatProperties(m_properties);
+        for (auto&& pTexture : stashTextures) {
+            pTexture->AddUsePoint();
+        }
+        Shader* stashShader = m_shader;
+        if (stashShader) {
+            stashShader->AddUsePoint();
+        }
+        /// ========= Stash Properties =========
+
         Unload();
 
         if (!Load()) {
             m_loadState = LoadState::Error;
             return false;
         }
+
+        /// ========= UnStash Properties =========
+        for (auto&& pTexture : stashTextures) {
+            pTexture->RemoveUsePoint();
+        }
+        if (stashShader) {
+            stashShader->RemoveUsePoint();
+        }
+        /// ========= UnStash Properties =========
 
         UpdateResources();
 

@@ -66,11 +66,6 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool IResource::IsValid() const {
-        /// Медленная операция, нужно переделать
-        return m_resourceId != "NoID" && !m_resourceId.empty() && std::string(m_resourceName) != "Unnamed";
-    }
-
     bool IResource::Kill() {
         if (GetCountUses() == 0) {
             if (!IsDestroyed()) {

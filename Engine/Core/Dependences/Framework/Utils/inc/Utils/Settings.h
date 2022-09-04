@@ -61,12 +61,13 @@ namespace SR_UTILS_NS {
                 return;
             }
 
-            if (!Singleton<T>::Instance().IsValid()) {
+            if (!Singleton<T>::Instance().IsRegistered()) {
                 return;
             }
 
-            Singleton<T>::Instance().RemoveUsePoint();
-            Singleton<T>::Instance().ForceDestroy();
+            if (Singleton<T>::Instance().RemoveUsePoint() == IResource::RemoveUPResult::Success) {
+                Singleton<T>::Instance().ForceDestroy();
+            }
 
             /// Форсированно уничтожаем этот ресурс, чтобы не ждать пока закончится время жизни
             ResourceManager::Instance().Synchronize(true);
@@ -79,7 +80,7 @@ namespace SR_UTILS_NS {
         void OnSingletonDestroy() final;
         void InitSingleton() final;
         bool IsSingletonCanBeDestroyed() const final { return false; }
-        void RemoveUsePoint() final;
+        IResource::RemoveUPResult RemoveUsePoint() final;
 
     };
 
@@ -101,9 +102,10 @@ namespace SR_UTILS_NS {
         Singleton<T>::InitSingleton();
     }
 
-    template<typename T> void GlobalSettings<T>::RemoveUsePoint() {
+    template<typename T> IResource::RemoveUPResult GlobalSettings<T>::RemoveUsePoint() {
         SRAssert2(m_countUses > 0, "count use points is zero!");
         --m_countUses;
+        return IResource::RemoveUPResult::Success;
     }
 }
 

@@ -239,10 +239,6 @@ namespace SR_GTYPES_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    bool Texture::IsValid() const {
-        return GetResourceId() != "NoID" && std::string(m_resourceName) != "Unnamed";
-    }
-
     uint64_t Texture::GetFileHash() const {
         if (m_fromMemory) {
             return 0;

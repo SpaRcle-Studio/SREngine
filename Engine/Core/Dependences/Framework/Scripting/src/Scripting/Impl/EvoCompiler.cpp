@@ -13,7 +13,12 @@
 namespace SR_SCRIPTING_NS {
     EvoCompiler::EvoCompiler(std::string cachePath)
         : EvoScript::Compiler(std::move(cachePath))
-    { }
+    {
+        EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { SR_ERROR(msg); };
+        EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { SR_LOG(msg);   };
+        EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { SR_WARN(msg);  };
+        EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { SR_INFO(msg);  };
+    }
 
     EvoCompiler::~EvoCompiler() {
         if (m_generator) {
@@ -29,11 +34,6 @@ namespace SR_SCRIPTING_NS {
 
     bool EvoCompiler::Init() {
         SR_INFO("EvoCompiler::Init() : initialization of the compiler...");
-
-        EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { SR_ERROR(msg); };
-        EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { SR_LOG(msg);   };
-        EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { SR_WARN(msg);  };
-        EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { SR_INFO(msg);  };
 
         auto&& configPath = Helper::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
 
