@@ -33,6 +33,7 @@ namespace SR_CORE_NS::GUI {
         void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root);
         void Copy() const;
         void Paste();
+        void Delete();
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;

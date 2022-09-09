@@ -35,7 +35,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
     m_scene = ptr->GetScene();
 
     /**
-        Специфичная синхронизация, чтобы небыло дедлока, происходящего когда CommandManager пытается удалить объект,
+        Специфичная синхронизация, чтобы не было дедлока, происходящего когда CommandManager пытается удалить объект,
         при этом блокируя его, но для удаления объекта нужно заблокировать сцену, а сцена в этот момент блокируется
         иерархией, которая натыкается на блокировку еще не уничтоженного объекта, в итоге получается цикл блокировки из трех потоков.
 
@@ -82,12 +82,81 @@ Framework::Core::Commands::GameObjectDelete::~GameObjectDelete() {
 
 //!-------------------------------------------------------
 
+//!-------------------------------------------------------
+
+bool Framework::Core::Commands::GameObjectPaste::Redo() {
+    if (!m_backup.Valid())
+        return false;
+
+    if (m_scene.RecursiveLockIfValid()) {
+        auto ptr = m_scene->Instance(m_backup);
+        m_scene.Unlock();
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Framework::Core::Commands::GameObjectPaste::Undo() {
+    using namespace SR_WORLD_NS;
+
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    auto&& ptr = ptrRaw->GetThis();
+
+    m_scene = ptr->GetScene();
+
+    /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
+    if (m_scene.LockIfValid()) {
+        SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
+
+        const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
+            /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
+            m_reserved.Reserve();
+            m_backup = ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_NONE);
+            ptr->Destroy();
+        });
+
+        m_scene.Unlock();
+        return result;
+    }
+    else
+        return false;
+
+    if (!m_backup.Valid())
+        return false;
+
+    if (m_scene.RecursiveLockIfValid()) {
+        auto ptr = m_scene->Instance(m_backup);
+        m_scene.Unlock();
+        return true;
+    }
+    else
+        return false;
+}
+
+Framework::Core::Commands::GameObjectPaste::GameObjectPaste(const SR_UTILS_NS::GameObject::Ptr& ptr) {
+    m_path = ptr->GetEntityPath();
+    m_reserved = ptr->GetEntityTree();
+}
+
+Framework::Core::Commands::GameObjectPaste::~GameObjectPaste() {
+    m_reserved.UnReserve();
+}
+
+//!-------------------------------------------------------
+
 bool Framework::Core::Commands::RegisterEngineCommands() {
     bool hasErrors = false;
     auto&& cmdManager = Engine::Instance().GetCmdManager();
 
     hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, GameObjectRename);
     hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, GameObjectDelete);
+    hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, GameObjectPaste);
 
     return hasErrors;
 }

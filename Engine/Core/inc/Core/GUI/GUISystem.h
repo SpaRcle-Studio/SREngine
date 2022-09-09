@@ -116,6 +116,7 @@ namespace Framework::Core::GUI {
         bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
+        bool BeginDragDropTargetWindow(const char* payload_type); //должен использоваться как условие, код которого заканчивается на ImGui::EndDragDropTarget()
         void DrawTexture(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmo(Graphics::Types::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);

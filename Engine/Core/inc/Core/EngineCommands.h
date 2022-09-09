@@ -50,6 +50,28 @@ namespace SR_CORE_NS::Commands {
     };
 
     bool RegisterEngineCommands();
+
+    class GameObjectPaste : public SR_UTILS_NS::ReversibleCommand {
+    public:
+        GameObjectPaste() = default;
+        explicit GameObjectPaste(const SR_UTILS_NS::GameObject::Ptr& ptr);
+
+        ~GameObjectPaste() override;
+
+        bool Redo() override;
+        bool Undo() override;
+
+        std::string GetName() override { return "GameObjectDelete"; }
+
+    private:
+        SR_UTILS_NS::EntityPath m_path;
+        SR_UTILS_NS::EntityBranch m_reserved;
+        SR_HTYPES_NS::Marshal m_backup;
+        SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
+
+    };
+
+    bool RegisterEngineCommands();
 }
 
 #endif //SRENGINE_ENGINECOMMANDS_H

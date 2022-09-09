@@ -511,7 +511,15 @@ namespace SR_WORLD_NS {
             m_observer->SetTarget(target);
         }
     }
+    bool Scene::MoveToRoot(const Scene::GameObjectPtr &gameObject) { //обнуляет указатель на родителя и поднимает флаг обновления m_rootObjects, из-за чего gameObject обрабатывается как корневой
+        if (gameObject->m_parent){
+            return SRAssert2(false, "GameObject::MoveToRoot : GameObject has parent!");
+        }
 
+        gameObject->m_parent = nullptr;
+        OnChanged();
+        return true;
+    }
     SR_MATH_NS::FVector3 Scene::GetWorldPosition(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) {
         if (auto&& pRegionIt = m_regions.find(region); pRegionIt != m_regions.end()) {
             auto&& [_, pRegion] = *pRegionIt;

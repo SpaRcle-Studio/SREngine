@@ -78,6 +78,7 @@ namespace SR_WORLD_NS {
 
     public:
         bool Remove(const GameObjectPtr& gameObject);
+        bool MoveToRoot(const GameObjectPtr& gameObject);
 
         void OnChanged();
 

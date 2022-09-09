@@ -359,42 +359,46 @@ namespace Framework {
     }
 
     void Engine::FixedUpdate() {
-        SR_UTILS_NS::Input::Instance().Check();
+        if (m_window->IsWindowFocus()) {
+            ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
+            SR_UTILS_NS::Input::Instance().Check();
 
-        m_input->Check();
+            m_input->Check();
 
-        bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
+            bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
-                m_cmdManager->Cancel();
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
+                    m_cmdManager->Cancel();
 
-            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
-                if (!m_cmdManager->Redo())
-                    SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
-        }
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
+                    if (!m_cmdManager->Redo())
+                        SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+            }
 
-        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
-            m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
-        }
+            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+                m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+            }
 
-        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
-            m_editor->Enable(!m_editor->Enabled());
-            m_renderScene.Do([](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
-            });
-        }
+            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+                m_editor->Enable(!m_editor->Enabled());
+                m_renderScene.Do([](SR_GRAPH_NS::RenderScene *ptr) {
+                    ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
+                });
+            }
 
-        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
-            Reload();
-            return;
+            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
+                Reload();
+                return;
+            }
         }
 
         for (auto&& pComponent : m_updateableComponents) {
             pComponent->FixedUpdate();
         }
 
-        if (m_editor) {
+
+        if (m_editor && m_window->IsWindowFocus()) {
             m_editor->Update();
         }
     }

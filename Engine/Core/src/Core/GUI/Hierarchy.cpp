@@ -30,7 +30,7 @@ namespace SR_CORE_NS::GUI {
         if (m_scene.TryRecursiveLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
-        }
+        } else m_tree.clear();
 
         m_sceneRunnerWidget->DrawSubWindow();
 
@@ -41,6 +41,18 @@ namespace SR_CORE_NS::GUI {
 
             DrawChild(gameObject);
             gameObject.Unlock();
+        }
+        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload"))
+        {
+            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
+                for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                    if (ptr.RecursiveLockIfValid()) {
+                        ptr->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
+                        ptr->Unlock();
+                    }
+                }
+            }
+            ImGui::EndDragDropTarget();
         }
     }
 
@@ -75,18 +87,29 @@ namespace SR_CORE_NS::GUI {
             ImGui::Separator();
 
             if (ImGui::Selectable("Cut")) {
-
+                Copy();
+                Delete();
             }
 
             ImGui::Separator();
 
             if (ImGui::Selectable("Delete")) {
-
+                if (m_scene.RecursiveLockIfValid()) {
+                    for (auto&& selected : m_selected) {
+                        if (selected.RecursiveLockIfValid()) {
+                            auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                            selected.Unlock();
+                        }
+                    }
+                    m_selected.clear();
+                    m_scene.Unlock();
+                }
             }
 
             ImGui::Separator();
 
-            if (ImGui::Selectable("Add children")) {
+            if (ImGui::Selectable("Add children")) { ///TODO: ВСМЫСЛЕ children???? Можно добавлять несколько детей одной командой????
 
             }
 
@@ -168,19 +191,7 @@ namespace SR_CORE_NS::GUI {
                 break;
             }
             case SR_UTILS_NS::KeyCode::Del: {
-                SR_LOCK_GUARD
-
-                if (m_scene.RecursiveLockIfValid()) {
-                    for (auto&& selected : m_selected) {
-                        if (selected.RecursiveLockIfValid()) {
-                            auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-                            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-                            selected.Unlock();
-                        }
-                    }
-                    m_selected.clear();
-                    m_scene.Unlock();
-                }
+                Delete();
                 break;
             }
             default:
@@ -190,7 +201,7 @@ namespace SR_CORE_NS::GUI {
         InputHandler::OnKeyDown(data);
     }
 
-    void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
+    void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) { /// TODO: Проверить и решить, должен ли этот метод зависеть от Update()
         SR_LOCK_GUARD
 
         switch (data->GetKeyCode()) {
@@ -253,6 +264,22 @@ namespace SR_CORE_NS::GUI {
                 SR_LOCK_GUARD
                 m_selected = selected;
             }
+        }
+    }
+
+    void Hierarchy::Delete() {
+        SR_LOCK_GUARD
+
+        if (m_scene.RecursiveLockIfValid()) {
+            for (auto&& selected : m_selected) {
+                if (selected.RecursiveLockIfValid()) {
+                    auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    selected.Unlock();
+                }
+            }
+            m_selected.clear();
+            m_scene.Unlock();
         }
     }
 

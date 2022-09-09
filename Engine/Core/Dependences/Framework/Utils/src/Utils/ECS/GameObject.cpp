@@ -112,8 +112,6 @@
         m_children.push_back(child);
         ++m_childrenCount;
 
-        /* TODO: Update child transforms with parent */
-
         child->OnAttached();
 
         m_scene->OnChanged();
@@ -146,6 +144,7 @@
     bool GameObject::SetParent(const GameObject::Ptr &parent) {
         if (parent == m_parent) {
             return false;
+            SR_WARN("GameObject::SetParent() : parent is already set!");
         }
 
         GameObject::Ptr oldParent = m_parent;
@@ -543,7 +542,11 @@
             }
         }
 
-        return destination->AddChild(*this);
+        if (destination.Valid()){
+            return destination->AddChild(*this);
+        } else {
+            return m_scene->MoveToRoot(*this);
+        }
     }
 
     bool GameObject::HasTag() const {
@@ -551,7 +554,11 @@
     }
 
     void GameObject::OnAttached() {
-
+        if (auto&& parent = GetParentTransform()){
+            m_transform->UpdateTree();
+        } else {
+            SR_WARN("GameObject::OnAttached() : GameObject doesn't have parent to get transform!");
+        }
     }
 
     void GameObject::SetDirty(bool dirty) {

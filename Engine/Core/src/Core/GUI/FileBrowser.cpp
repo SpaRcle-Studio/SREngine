@@ -55,7 +55,9 @@ namespace SR_CORE_NS::GUI {
                     current.isDir = false;
                 }
 
-                if (path.GetExtension().empty()) {
+                current.cutname = SR_UTILS_NS::StringUtils::CutName(current.filename, 8);
+
+                if (path.GetExtension().empty()) { //TODO Сделать красивым
                     path.IsEmpty() ? current.icontype = Core::EditorIcon::EmptyFolder
                                     : current.icontype = Core::EditorIcon::Folder;
                 } else if (path.GetExtension() == "zip") {
@@ -169,7 +171,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::EndPopup();
     }
 
-    void FileBrowser::CurrentDirectoryPanel(const float_t height) { //height используется и как ширина кнопки обновить
+    void FileBrowser::CurrentDirectoryPanel(const float_t height) { //height используется и как ширина Refresh Button
         if (ImGui::BeginChild("current directory panel", ImVec2(0.f, height))) {
 
             ImGui::Separator();
@@ -228,15 +230,15 @@ namespace SR_CORE_NS::GUI {
                     //SR_FORMAT("##FileBrowserElement%s", element.filename.c_str())
                     if (GUISystem::Instance().ImageButtonDouble(headerid, descriptor,
                                                                 SR_MATH_NS::IVector2(50), 0)) {
-                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(element.filename);
+                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
                     }
 
                     FileContextMenu(element.filename);
                 }
 
-                const std::string filenametodraw = SR_UTILS_NS::StringUtils::CutName(element.filename, 8);
 
-                ImGui::Text("%s", filenametodraw.c_str());
+
+                ImGui::Text("%s", element.cutname.c_str());
 
                 ImGui::EndGroup();
 

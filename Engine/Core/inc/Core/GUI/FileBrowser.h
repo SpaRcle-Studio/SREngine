@@ -33,7 +33,8 @@ namespace SR_CORE_NS::GUI {
         float_t m_assetWidth;
         struct Element {
             std::string filename;
-            EditorIcon icontype; //TODO Editor Icon
+            std::string cutname;
+            EditorIcon icontype;
             bool isDir;
         };
         std::list<Element> m_elements;

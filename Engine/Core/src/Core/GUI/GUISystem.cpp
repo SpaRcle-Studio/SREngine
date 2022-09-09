@@ -14,6 +14,7 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
 #include <GUI/Editor/MessageBox.h>
+#include "imgui_internal.h" //взято с #5539 https://github.com/ocornut/imgui/issues/5539
 
 namespace Framework::Core {
     inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
@@ -223,6 +224,26 @@ bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size, 
 
 bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size) {
     return ImageButton(descriptor, size, -1);
+}
+
+bool GUISystem::BeginDragDropTargetWindow(const char* payload_type)  //взято с #5539 https://github.com/ocornut/imgui/issues/5539
+{
+    using namespace ImGui;
+    ImRect inner_rect = GetCurrentWindow()->InnerRect;
+    if (BeginDragDropTargetCustom(inner_rect, GetID("##WindowBgArea")))
+        if (const ImGuiPayload* payload = AcceptDragDropPayload(payload_type, ImGuiDragDropFlags_AcceptBeforeDelivery | ImGuiDragDropFlags_AcceptNoDrawDefaultRect))
+        {
+            if (payload->IsPreview())
+            {
+                ImDrawList* draw_list = GetForegroundDrawList();
+                draw_list->AddRectFilled(inner_rect.Min, inner_rect.Max, GetColorU32(ImGuiCol_DragDropTarget, 0.05f));
+                draw_list->AddRect(inner_rect.Min, inner_rect.Max, GetColorU32(ImGuiCol_DragDropTarget), 0.0f, 0, 2.0f);
+            }
+            if (payload->IsDelivery())
+                return true;
+            EndDragDropTarget();
+        }
+    return false;
 }
 
 void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
