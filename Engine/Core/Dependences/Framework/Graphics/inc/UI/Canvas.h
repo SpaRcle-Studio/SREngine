@@ -26,6 +26,7 @@ namespace SR_GRAPH_NS::UI {
         static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     public:
+        bool ExecuteInEditMode() const override;
         void OnAttached() override;
         void OnDestroy() override;
 

@@ -30,7 +30,7 @@ namespace SR_GRAPH_NS {
         ShaderAttachment
     > ShaderPropertyVariant;
 
-    SR_ENUM_CLASS(ShaderVarType,
+    SR_ENUM_NS_CLASS(ShaderVarType,
           Unknown,
           Int,
           Float,
@@ -45,7 +45,7 @@ namespace SR_GRAPH_NS {
           Sampler3D,
           SamplerCube,
           Sampler1DShadow,
-          Sampler2DShadow,
+          Sampler2DShadow
     )
 
     struct MaterialProperty {
@@ -89,7 +89,7 @@ namespace SR_GRAPH_NS {
     }
 
     static std::string ShaderVarTypeToString(ShaderVarType type) {
-        std::string str = EnumShaderVarTypeToString(type);
+        std::string str = SR_UTILS_NS::EnumReflector::ToString(type);
 
         if (!str.empty()) {
             str[0] = tolower(str[0]);
@@ -152,7 +152,7 @@ namespace SR_GRAPH_NS {
             str[0] = toupper(str[0]);
         }
 
-        return StringToEnumShaderVarType(str);
+        return SR_UTILS_NS::EnumReflector::FromString<ShaderVarType>(str);
     }
 }
 

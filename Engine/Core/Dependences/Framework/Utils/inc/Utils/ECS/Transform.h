@@ -19,12 +19,12 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
-    SR_ENUM_CLASS(Measurement,
+    SR_ENUM_NS_CLASS(Measurement,
         SpaceZero = 0,
         Space1D = 1,
         Space2D = 2,
         Space3D = 3,
-        Space4D = 4,
+        Space4D = 4
     );
 
     class SR_DLL_EXPORT Transform : public ISavable {

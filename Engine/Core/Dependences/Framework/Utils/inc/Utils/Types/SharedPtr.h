@@ -14,12 +14,21 @@ namespace SR_HTYPES_NS {
         SharedPtr() = default;
         explicit SharedPtr(T *ptr);
         SharedPtr(SharedPtr const &ptr);
+        SharedPtr(SharedPtr&& ptr)
+            : m_ptr(std::exchange(ptr.m_ptr, { }))
+            , m_data(std::exchange(ptr.m_data, { }))
+        { }
         ~SharedPtr(); /// не должен быть виртуальным
 
     public:
         SR_NODISCARD SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->m_valid; }
         SharedPtr<T> &operator=(const SharedPtr<T> &ptr);
         SharedPtr<T> &operator=(T *ptr);
+        SharedPtr<T> & operator=(SharedPtr<T>&& ptr) noexcept {
+            m_data = std::exchange(ptr.m_data, {});
+            m_ptr = std::exchange(ptr.m_ptr, {});
+            return *this;
+        }
         SR_NODISCARD SR_FORCE_INLINE T *operator->() const noexcept { return m_ptr; }
         SR_NODISCARD SR_INLINE bool operator==(const SharedPtr<T>& right) const noexcept {
             return m_ptr == right.m_ptr;

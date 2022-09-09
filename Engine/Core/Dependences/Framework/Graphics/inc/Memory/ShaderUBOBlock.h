@@ -34,6 +34,15 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD bool Valid() const { return m_memory && m_binding != SR_ID_INVALID; }
 
     private:
+        void FreeMemory(char*& pMemory);
+        char* AllocMemory(uint64_t size);
+        uint32_t OffsetBlock(uint32_t block);
+        uint32_t TopAlign(uint32_t block);
+
+    private:
+        uint32_t m_alignedBlock = 0;
+        uint32_t m_align = 16;
+
         uint32_t m_binding = SR_ID_INVALID;
 
         SubBlock* m_data = nullptr;

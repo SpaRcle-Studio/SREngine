@@ -8,7 +8,7 @@
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_UTILS_NS {
-    SR_ENUM_CLASS_T(InputDeviceType, uint8_t,
+    SR_ENUM_NS_CLASS_T(InputDeviceType, uint8_t,
         Unknown,
         Mouse,
         Keyboard,

@@ -558,7 +558,7 @@ namespace SR_GRAPH_NS {
                 bool alpha,
                 bool cpuUsage) const override;
 
-        int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
+        int32_t CalculateVBO(void* vertices, Vertices::VertexType type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t , int32_t VBO) override;
         [[nodiscard]] int32_t CalculateCubeMap(uint32_t w, uint32_t h, const std::array<uint8_t*, 6>& data, bool cpuUsage) override {
             if (auto id = m_memory->AllocateTexture(data, w, h, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1, cpuUsage); id < 0) {

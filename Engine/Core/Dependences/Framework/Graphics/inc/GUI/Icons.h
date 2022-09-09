@@ -94,7 +94,7 @@ inline static const char* SR_ICONS[] = {
 };
 
 namespace Framework::Graphics::GUI {
-    SR_ENUM_CLASS(IconType,
+    SR_ENUM_NS_CLASS(IconType,
           Flow,
           Circle,
           Square,

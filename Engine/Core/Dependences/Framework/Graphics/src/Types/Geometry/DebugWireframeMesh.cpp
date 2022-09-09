@@ -28,7 +28,7 @@ namespace SR_GTYPES_NS {
 
         if (wireFramed->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            wireFramed->m_VBO = manager.CopyIfExists<Vertices::Type::SimpleVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
+            wireFramed->m_VBO = manager.CopyIfExists<Vertices::VertexType::SimpleVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
         }
 
         return wireFramed;
@@ -101,7 +101,7 @@ namespace SR_GTYPES_NS {
 
         auto vertices = Vertices::CastVertices<Vertices::SimpleVertex>(m_rawMesh->GetVertices(m_meshId));
 
-        if (!CalculateVBO<Vertices::Type::SimpleVertex>(vertices))
+        if (!CalculateVBO<Vertices::VertexType::SimpleVertex>(vertices))
             return false;
 
         return IndexedMesh::Calculate();
@@ -153,7 +153,7 @@ namespace SR_GTYPES_NS {
             SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }
 
-        if (!FreeVBO<Vertices::Type::SimpleVertex>()) {
+        if (!FreeVBO<Vertices::VertexType::SimpleVertex>()) {
             SR_ERROR("DebugWireframeMesh::FreeVideoMemory() : failed to free VBO!");
         }
 

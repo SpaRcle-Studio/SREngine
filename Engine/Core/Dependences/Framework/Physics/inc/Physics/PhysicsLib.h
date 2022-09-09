@@ -14,7 +14,7 @@
 #include "LinearMath/btAlignedObjectArray.h"
 
 namespace SR_PHYSICS_NS {
-    SR_ENUM_CLASS(ShapeType,
+    SR_ENUM_NS_CLASS(ShapeType,
         Box2D,
         Cylinder2D,
         Capsule2D,
@@ -23,7 +23,7 @@ namespace SR_PHYSICS_NS {
         Box3D,
         Cylinder3D,
         Capsule3D,
-        Sphere3D,
+        Sphere3D
     )
 }
 

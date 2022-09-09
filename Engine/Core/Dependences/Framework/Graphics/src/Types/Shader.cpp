@@ -318,7 +318,7 @@ namespace SR_GRAPH_NS::Types {
                 SR_FALLTHROUGH;
             }
             case SRSL::ShaderType::SpatialCustom: {
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::StaticMeshVertex);
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::StaticMeshVertex);
                 m_shaderCreateInfo.vertexDescriptions = std::move(description);
                 m_shaderCreateInfo.vertexAttributes = std::move(attrib);
                 break;
@@ -331,7 +331,7 @@ namespace SR_GRAPH_NS::Types {
                 }
                 m_shaderCreateInfo.uniforms = std::move(uniforms);
 
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::SimpleVertex);
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SimpleVertex);
                 m_shaderCreateInfo.vertexDescriptions = std::move(description);
                 m_shaderCreateInfo.vertexAttributes = std::move(attrib);
 
@@ -346,7 +346,7 @@ namespace SR_GRAPH_NS::Types {
                 }
                 m_shaderCreateInfo.uniforms = std::move(uniforms);
 
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::Type::UIVertex);
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::UIVertex);
                 m_shaderCreateInfo.vertexDescriptions = std::move(description);
                 m_shaderCreateInfo.vertexAttributes = std::move(attrib);
 

@@ -272,7 +272,7 @@ namespace SR_GRAPH_NS {
         virtual SR_FORCE_INLINE void SetWireFrameEnabled(const bool& enabled) const { }
         virtual SR_FORCE_INLINE bool CalculateEmptyVAO(uint32_t& VAO) const { return false; }
         virtual int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) { return SR_ID_INVALID; }
-        virtual int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) { return SR_ID_INVALID; }
+        virtual int32_t CalculateVBO(void* vertices, Vertices::VertexType type, size_t count) { return SR_ID_INVALID; }
         virtual int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO) { return SR_ID_INVALID; }
 
         /** Vertex pos and texture cords */

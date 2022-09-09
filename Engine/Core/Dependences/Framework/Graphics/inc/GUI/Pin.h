@@ -12,7 +12,7 @@ namespace SR_GRAPH_NS::GUI {
     class Node;
     class Link;
 
-    SR_ENUM_CLASS(PinType,
+    SR_ENUM_NS_CLASS(PinType,
           None,
           Flow,
           Bool,
@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS::GUI {
           Delegate
     );
 
-    SR_ENUM_CLASS(PinKind,
+    SR_ENUM_NS_CLASS(PinKind,
           None,
           Output,
           Input

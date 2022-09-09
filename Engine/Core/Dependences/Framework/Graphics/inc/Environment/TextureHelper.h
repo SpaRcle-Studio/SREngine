@@ -8,14 +8,14 @@
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS {
-    SR_ENUM_CLASS_T(Dimension, uint8_t,
+    SR_ENUM_NS_CLASS_T(Dimension, uint8_t,
         Unknown,
         DIMENSION_2D,
         DIMENSION_3D,
         DIMENSION_CUBE
     );
 
-    SR_ENUM_CLASS_T(Antialiasing, uint8_t,
+    SR_ENUM_NS_CLASS_T(Antialiasing, uint8_t,
         None,
         Samples2,
         Samples4,
@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
         Samples32
     );
 
-    SR_ENUM_CLASS(ColorFormat,
+    SR_ENUM_NS_CLASS(ColorFormat,
         Unknown      = 0,
 
         RGBA8_UNORM  = 10000,
@@ -33,10 +33,10 @@ namespace SR_GRAPH_NS {
         RGB8_UNORM  = 10002,
         RGB16_UNORM = 10003,
 
-        RGBA8_SRGB   = 20000,
+        RGBA8_SRGB   = 20000
     );
 
-    SR_ENUM_CLASS(DepthFormat,
+    SR_ENUM_NS_CLASS(DepthFormat,
         Unknown,
         None,
         Auto
@@ -50,12 +50,12 @@ namespace SR_GRAPH_NS {
         return f >= ColorFormat::RGBA8_UNORM || f <= ColorFormat::RGBA16_UNORM;
     }
 
-    SR_ENUM_CLASS(TextureFilter,
+    SR_ENUM_NS_CLASS(TextureFilter,
         Unknown = 0, NEAREST = 1, LINEAR = 2, NEAREST_MIPMAP_NEAREST = 3,
         LINEAR_MIPMAP_NEAREST = 4, NEAREST_MIPMAP_LINEAR = 5, LINEAR_MIPMAP_LINEAR = 6
     );
 
-    SR_ENUM_CLASS(TextureCompression,
+    SR_ENUM_NS_CLASS(TextureCompression,
         None = 0, BC1 = 1, BC2 = 2, BC3 = 3, BC4 = 4, BC5 = 5, BC6 = 6, BC7 = 7
     );
 

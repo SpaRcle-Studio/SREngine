@@ -8,7 +8,7 @@
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS {
-    SR_ENUM_CLASS(UBOType,
+    SR_ENUM_NS_CLASS(UBOType,
         Common, Shared
     )
 

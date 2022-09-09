@@ -5,8 +5,6 @@
 #include <Loaders/SRSL.h>
 
 const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VARIABLES = {
-        { "TIME", ShaderVarType::Float },
-        { "VIEW_DIRECTION", ShaderVarType::Vec3 },
         { "HALF_SIZE_NEAR_PLANE", ShaderVarType::Vec2 },
         { "MODEL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_MATRIX", ShaderVarType::Mat4 },
@@ -14,6 +12,8 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "ORTHOGONAL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_NO_TRANSLATE_MATRIX", ShaderVarType::Mat4 },
         { "SKYBOX_DIFFUSE", ShaderVarType::SamplerCube },
+        { "TIME", ShaderVarType::Float },
+        { "VIEW_DIRECTION", ShaderVarType::Vec3 },
 };
 
 const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::COLOR_INDICES = {
@@ -164,19 +164,19 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::PrepareUnit(SRSLUnit& unit, const SRSLVars& 
         }
 
         if (args[0] == "ShaderType") {
-            unit.type = StringToEnumShaderType(args[1]);
+            unit.type = SR_UTILS_NS::EnumReflector::FromString<ShaderType>(args[1]);
         }
         else if (args[0] == "PolygonMode") {
-            unit.createInfo.polygonMode = StringToEnumPolygonMode(args[1]);
+            unit.createInfo.polygonMode = SR_UTILS_NS::EnumReflector::FromString<PolygonMode>(args[1]);
         }
         else if (args[0] == "CullMode") {
-            unit.createInfo.cullMode = StringToEnumCullMode(args[1]);
+            unit.createInfo.cullMode = SR_UTILS_NS::EnumReflector::FromString<CullMode>(args[1]);
         }
         else if (args[0] == "DepthCompare") {
-            unit.createInfo.depthCompare = StringToEnumDepthCompare(args[1]);
+            unit.createInfo.depthCompare = SR_UTILS_NS::EnumReflector::FromString<DepthCompare>(args[1]);
         }
         else if (args[0] == "PrimitiveTopology") {
-            unit.createInfo.primitiveTopology = StringToEnumPrimitiveTopology(args[1]);
+            unit.createInfo.primitiveTopology = SR_UTILS_NS::EnumReflector::FromString<PrimitiveTopology>(args[1]);
         }
         else if (args[0] == "BlendEnabled") {
             unit.createInfo.blendEnabled = SR_UTILS_NS::LexicalCast<bool>(args[1]);
@@ -277,7 +277,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
     auto&& uniforms = unit.GetUniformBlock();
 
     if (!uniforms.empty()) {
-        source += SR_UTILS_NS::Format("layout (binding = %i) uniform BLOCK {\n", uniforms.begin()->second.binding);
+        source += SR_UTILS_NS::Format("layout (std140, binding = %i) uniform BLOCK {\n", uniforms.begin()->second.binding);
 
         for (auto&& [name, var] : uniforms) {
             source += SR_UTILS_NS::Format("\t%s %s;", ShaderVarTypeToString(var.type).c_str(), name.c_str());
@@ -644,19 +644,20 @@ std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> Framework::Gr
     }
 
     std::map<ShaderVarType, uint32_t> order = {
-            { ShaderVarType::Mat4, 1 },
-            { ShaderVarType::Mat3, 2 },
-            { ShaderVarType::Mat2, 3 },
-            { ShaderVarType::Float, 4 },
-            { ShaderVarType::Int, 5 },
-            { ShaderVarType::Vec4, 6 },
-            { ShaderVarType::Vec3, 7 },
-            { ShaderVarType::Vec2, 8 },
+            { ShaderVarType::Mat4,  1 },
+            { ShaderVarType::Mat3,  2 },
+            { ShaderVarType::Mat2,  3 },
+            { ShaderVarType::Vec4,  4 },
+            { ShaderVarType::Vec3,  5 },
+            { ShaderVarType::Vec2,  6 },
+            { ShaderVarType::Float, 7 },
+            { ShaderVarType::Int,   8 },
     };
 
     variables.sort([&order](const std::pair<std::string, SRSLVariable> &a, const std::pair<std::string, SRSLVariable> &b) {
         return order[a.second.type] < order[b.second.type];
         //return GetShaderVarSize(a.second.type) > GetShaderVarSize(b.second.type);
+        //return GetShaderVarSize(a.second.type) < GetShaderVarSize(b.second.type);
     });
 
     return variables;

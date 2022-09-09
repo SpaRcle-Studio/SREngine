@@ -41,13 +41,27 @@ namespace SR_GRAPH_NS::UI {
 
             if (windowSize != m_size && pTransform) {
                 m_size = windowSize;
+
+                auto&& aspect = m_size.Aspect();
+
                 pTransform->SetTranslation(SR_MATH_NS::FVector3(0.f));
-                pTransform->SetScale(SR_MATH_NS::FVector3(m_size.Aspect(), 1.f, 1.f));
+                pTransform->SetScale(SR_MATH_NS::FVector3(aspect, 1.f, 1.f));
+
+                //if (aspect > 1.f) {
+                //    pTransform->SetScale(SR_MATH_NS::FVector3(1.f, 1.f, 1.f));
+                //}
+                //else {
+                //    pTransform->SetScale(SR_MATH_NS::FVector3(aspect, aspect, 1.f));
+                //}
             }
 
             m_renderScene.Unlock();
         }
 
         Component::Update(dt);
+    }
+
+    bool Canvas::ExecuteInEditMode() const {
+        return true;
     }
 }

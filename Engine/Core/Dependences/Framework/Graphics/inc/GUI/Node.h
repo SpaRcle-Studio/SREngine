@@ -9,7 +9,7 @@
 #include <GUI/Icons.h>
 
 namespace SR_GRAPH_NS::GUI {
-    SR_ENUM_CLASS(NodeType,
+    SR_ENUM_NS_CLASS(NodeType,
         None,
         Blueprint,
         Simple,

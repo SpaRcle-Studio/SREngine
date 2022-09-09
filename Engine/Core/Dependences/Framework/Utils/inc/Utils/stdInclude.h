@@ -7,6 +7,8 @@
 
 #include <Utils/macros.h>
 
+#include <iosfwd>
+#include <stdexcept>
 #include <string_view>
 #include <cstdarg>
 #include <initializer_list>

@@ -929,7 +929,7 @@ int32_t Framework::Graphics::OpenGL::CalculateVAO(
 
 int32_t Framework::Graphics::OpenGL::CalculateVBO(
         void *vertices,
-        Framework::Graphics::Vertices::Type type,
+        Framework::Graphics::Vertices::VertexType type,
         size_t count)
 {
     if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {

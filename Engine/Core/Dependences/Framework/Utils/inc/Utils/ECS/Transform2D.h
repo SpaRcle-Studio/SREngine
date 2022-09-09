@@ -10,11 +10,12 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
-    SR_ENUM_CLASS(Stretch,
+    /// растяжение по ширине и высоте экрана
+    SR_ENUM_NS_CLASS(Stretch,
           None = 1 << 0,
           StretchX = 1 << 1,
           StretchY = 1 << 2,
-          StretchXY = StretchX | StretchY,
+          StretchXY = StretchX | StretchY
     );
 
     class SR_DLL_EXPORT Transform2D : public Transform {
@@ -30,11 +31,15 @@ namespace SR_UTILS_NS {
         void SetScale(const SR_MATH_NS::FVector3& scale) override;
         void SetSkew(const SR_MATH_NS::FVector3& skew) override;
 
+        void SetStretch(Stretch stretch);
+
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetRotation() const override { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const override { return m_scale; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetSkew() const override { return m_skew; }
+
         SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::Space2D; }
+        SR_NODISCARD Stretch GetStretch() const noexcept { return m_stretch; }
 
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
@@ -48,16 +53,8 @@ namespace SR_UTILS_NS {
     protected:
         Stretch m_stretch = Stretch::None;
 
-        SR_MATH_NS::Unit m_height = 1.f;
-        SR_MATH_NS::Unit m_width = 1.f;
-
         SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();
-
-        SR_MATH_NS::FVector2 m_pivot = SR_MATH_NS::FVector2::Zero();
-
-        SR_MATH_NS::FVector2 m_anchorMin = SR_MATH_NS::FVector2::Zero();
-        SR_MATH_NS::FVector2 m_anchorMax = SR_MATH_NS::FVector2::Zero();
 
         SR_MATH_NS::FVector3 m_translation = SR_MATH_NS::FVector3::Zero();
         SR_MATH_NS::FVector3 m_rotation = SR_MATH_NS::FVector3::Zero();

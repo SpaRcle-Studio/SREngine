@@ -381,16 +381,28 @@ namespace SR_WORLD_NS {
     void Scene::UpdateContainers() {
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
 
+        const uint64_t reserved = m_tensor.size();
         m_tensor.clear();
+        m_tensor.reserve(reserved);
 
-        for (const GameObject::Ptr& gameObject : GetRootGameObjects()) {
+        for (GameObject::Ptr gameObject : GetRootGameObjects()) {
             const Math::FVector3 gmPosition = gameObject->GetTransform()->GetTranslation();
 
             auto chunk = AddOffset(SR_MATH_NS::IVector3(gmPosition.Singular(chunkSize.Cast<Math::Unit>()) / chunkSize), -m_observer->m_offset.m_chunk);
             auto region = AddOffset(chunk.Singular(Math::IVector3(m_regionWidth - 1)) / Math::IVector3(m_regionWidth), -m_observer->m_offset.m_region);
 
             const TensorKey key = TensorKey(region, MakeChunk(chunk, m_regionWidth));
-            m_tensor[key].emplace_back(gameObject);
+
+            if (auto&& pIt = m_tensor.find(key); pIt != m_tensor.end()) {
+                pIt->second.emplace_back(std::move(gameObject));
+            }
+            else {
+                m_tensor[key].emplace_back(std::move(gameObject));
+
+                if (GetRegion(key.region)->GetChunk(key.chunk)) {
+                    /// подгружаем чанк, чтобы объект не остался висеть в пустоте
+                }
+            }
         }
     }
 
@@ -531,5 +543,17 @@ namespace SR_WORLD_NS {
         constexpr float_t alpha = 3.f;
 
         return ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(m_observer->m_scope));
+    }
+
+    SR_NODISCARD Region* Scene::GetRegion(const SR_MATH_NS::IVector3& region) {
+        if (m_regions.find(region) == m_regions.end()) {
+            auto&& pRegion = Region::Allocate(m_observer, m_regionWidth, m_chunkSize, region);
+            m_regions.insert(std::pair(region, pRegion));
+            pRegion->Load();
+
+            return pRegion;
+        }
+
+        return m_regions.at(region);
     }
 }

@@ -10,6 +10,7 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/Common/StringUtils.h>
 #include <Utils/Types/Marshal.h>
 #include <Utils/Types/SafeVariable.h>
 #include <Utils/World/Scene.h>

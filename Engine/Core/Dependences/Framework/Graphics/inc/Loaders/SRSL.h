@@ -10,7 +10,7 @@
 #include <Loaders/SRSLParser.h>
 
 namespace SR_GRAPH_NS::SRSL {
-    SR_ENUM_CLASS(ShaderType,
+    SR_ENUM_NS_CLASS(ShaderType,
         Unknown,
         Spatial,            /// пространственный шейдер, все статические меши
         SpatialCustom,      /// пространственный шейдер (только вершины), все статические меши

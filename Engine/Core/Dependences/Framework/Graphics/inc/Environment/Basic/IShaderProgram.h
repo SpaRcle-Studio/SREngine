@@ -51,11 +51,11 @@ namespace SR_GRAPH_NS {
     SR_DEPRECATED
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
-    SR_ENUM_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)
-    SR_ENUM_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
-    SR_ENUM_CLASS(PolygonMode, Unknown, Fill, Line, Point)
-    SR_ENUM_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
-    SR_ENUM_CLASS(PrimitiveTopology,
+    SR_ENUM_NS_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)
+    SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
+    SR_ENUM_NS_CLASS(PolygonMode, Unknown, Fill, Line, Point)
+    SR_ENUM_NS_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
+    SR_ENUM_NS_CLASS(PrimitiveTopology,
             Unknown,
             PointList,
             LineList,
@@ -75,7 +75,7 @@ namespace SR_GRAPH_NS {
         uint32_t binding;
     };
 
-    SR_ENUM_CLASS(DepthCompare,
+    SR_ENUM_NS_CLASS(DepthCompare,
         Unknown,
         Never,
         Less,

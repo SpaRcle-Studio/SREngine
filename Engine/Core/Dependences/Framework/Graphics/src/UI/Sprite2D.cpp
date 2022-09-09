@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS::UI {
 
         if (sprite2D->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            sprite2D->m_VBO = manager.CopyIfExists<Vertices::Type::UIVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
+            sprite2D->m_VBO = manager.CopyIfExists<Vertices::VertexType::UIVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
         }
 
         return sprite2D;
@@ -75,7 +75,7 @@ namespace SR_GRAPH_NS::UI {
             SR_LOG("Sprite2D::Calculate() : calculating \"" + m_geometryName + "\"...");
         }
 
-        if (!CalculateVBO<Vertices::Type::UIVertex>(SPRITE_VERTICES))
+        if (!CalculateVBO<Vertices::VertexType::UIVertex>(SPRITE_VERTICES))
             return false;
 
         return IndexedMesh::Calculate();
@@ -88,7 +88,7 @@ namespace SR_GRAPH_NS::UI {
             SR_LOG("Sprite2D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }
 
-        if (!FreeVBO<Vertices::Type::UIVertex>()) {
+        if (!FreeVBO<Vertices::VertexType::UIVertex>()) {
             SR_ERROR("Sprite2D::FreeVideoMemory() : failed to free VBO!");
         }
 

@@ -52,6 +52,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD glm::mat4 GetImGuizmoView() const noexcept;
         SR_NODISCARD glm::vec3 GetViewDirection() const;
+        SR_NODISCARD glm::vec3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const;
 
         SR_NODISCARD RenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
@@ -83,7 +84,7 @@ namespace SR_GTYPES_NS {
         float_t               m_pitch             = 0;
         float_t               m_roll              = 0;
 
-        float_t               m_far               = 500.f;
+        float_t               m_far               = 2000.f;
         float_t               m_near              = 0.01f;
         float_t               m_aspect            = 1.f;
         float_t               m_FOV               = 60.f;

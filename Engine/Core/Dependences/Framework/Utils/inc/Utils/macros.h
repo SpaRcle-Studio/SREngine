@@ -18,6 +18,11 @@
     #define SR_MSVC
 #endif
 
+#ifdef __clang__
+    #define SR_CLANG
+#endif
+
+
 #ifdef __GNUC__
     #define SR_GCC
 #endif
@@ -32,6 +37,7 @@
 /// #if defined(NDEBUG) || defined(_DEBUG)
 
 #if defined(SR_MSVC)
+    #define SR_MSC_VERSION _MSC_VER
     #if defined(NDEBUG)
         #define SR_RELEASE
     #else
@@ -136,7 +142,7 @@
 
 //#define SR_STATIC_ASSERT2(expr, msg)
 
-#if defined(SR_MINGW) || (_MSC_VER > 1929)
+#if defined(SR_MINGW) || (SR_MSC_VERSION > 1929)
     #define SR_STATIC_ASSERT(msg) static_assert(msg);
 #else
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);

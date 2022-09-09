@@ -11,7 +11,7 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    SR_ENUM_CLASS(SettingsVarType,
+    SR_ENUM_NS_CLASS(SettingsVarType,
           Unknown,
           Bool,
           Int32,
@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
           FVec4,
           IVec2,
           IVec3,
-          IVec4,
+          IVec4
     )
 
     class SR_DLL_EXPORT Settings : public IResource {

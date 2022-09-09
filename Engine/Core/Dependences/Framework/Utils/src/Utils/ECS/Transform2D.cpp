@@ -10,9 +10,7 @@ namespace SR_UTILS_NS {
     { }
 
     void Transform2D::SetTranslation(const SR_MATH_NS::FVector3 &translation) {
-        SR_MATH_NS::FVector3 delta = translation - m_translation;
-
-        if (delta.Empty()) {
+        if (translation == m_translation) {
             return;
         }
 
@@ -22,11 +20,6 @@ namespace SR_UTILS_NS {
     }
 
     void Transform2D::SetTranslationAndRotation(const SR_MATH_NS::FVector3 &translation, const SR_MATH_NS::FVector3 &euler) {
-        SR_MATH_NS::FVector3 deltaTranslation = translation - m_translation;
-
-        SR_MATH_NS::FVector3 deltaRotation = (SR_MATH_NS::Quaternion::FromEuler(euler) *
-                SR_MATH_NS::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
-
         m_translation = translation;
         m_rotation = euler.Limits(360);
 
@@ -34,9 +27,6 @@ namespace SR_UTILS_NS {
     }
 
     void Transform2D::SetRotation(const SR_MATH_NS::FVector3& euler) {
-        SR_MATH_NS::FVector3 delta = (SR_MATH_NS::Quaternion::FromEuler(euler.FixEulerAngles()) *
-                SR_MATH_NS::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
-
         m_rotation = euler.Limits(360);
 
         UpdateTree();
@@ -50,8 +40,6 @@ namespace SR_UTILS_NS {
             scale = SR_MATH_NS::FVector3::One();
         }
 
-        SR_MATH_NS::FVector3 delta = scale / m_scale;
-
         m_scale = scale;
 
         UpdateTree();
@@ -64,8 +52,6 @@ namespace SR_UTILS_NS {
             SR_WARN("Transform2D::SetSkew() : skew contains NaN! Reset...");
             skew = Math::FVector3::One();
         }
-
-        Math::FVector3 delta = skew / m_skew;
 
         m_skew = skew;
 
@@ -88,12 +74,38 @@ namespace SR_UTILS_NS {
     }
 
     void Transform2D::UpdateMatrix() {
-        m_localMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(m_translation);
-        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
-        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation);
+        SR_MATH_NS::FVector3 scale = m_scale;
 
-        m_localMatrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+        if (auto&& pParent = GetParentTransform(); pParent && m_stretch != Stretch::None) {
+            auto&& aspect = pParent->GetScale().XY().Aspect();
+            switch (m_stretch) {
+                case Stretch::StretchX:
+                    scale.x *= aspect;
+                    break;
+                case Stretch::StretchY:
+                    scale.y *= aspect;
+                    break;
+                case Stretch::StretchXY:
+                    scale *= aspect;
+                    break;
+                default:
+                    SRHalt0();
+                    break;
+            }
+        }
+
+        m_localMatrix = SR_MATH_NS::Matrix4x4(
+                m_translation,
+                m_rotation.Radians().ToQuat(),
+                scale,
+                m_skew
+        );
 
         Transform::UpdateMatrix();
+    }
+
+    void Transform2D::SetStretch(Stretch stretch) {
+        m_stretch = stretch;
+        UpdateTree();
     }
 }

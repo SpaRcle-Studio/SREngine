@@ -9,7 +9,7 @@
 #include <Utils/Common/AnyVisitor.h>
 
 namespace SR_UTILS_NS {
-    SR_ENUM_CLASS_T(StandardType, uint16_t,
+    SR_ENUM_NS_CLASS_T(StandardType, uint16_t,
         Unknown,
         Bool,
         Int8,
@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
         UInt64,
         Float,
         Double,
-        String,
+        String
     );
 
     template<typename Any> static StandardType GetStandardType(const Any& any) {

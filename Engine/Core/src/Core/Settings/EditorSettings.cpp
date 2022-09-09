@@ -17,7 +17,7 @@ namespace SR_CORE_NS {
     bool EditorSettings::LoadSettings(const SR_XML_NS::Node &node) {
         if (auto&& iconsXml = node.GetNode("Icons")) {
             for (auto&& iconNode : iconsXml.GetNodes()) {
-                EditorIcon icon = StringToEnumEditorIcon(iconNode.GetAttribute("First").ToString());
+                auto icon = SR_UTILS_NS::EnumReflector::FromString<EditorIcon>(iconNode.GetAttribute("First").ToString());
                 m_icons[icon] = iconNode.GetAttribute("Second").ToString();
             }
         }

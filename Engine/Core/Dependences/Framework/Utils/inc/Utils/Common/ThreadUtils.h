@@ -8,14 +8,14 @@
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_UTILS_NS {
-    SR_ENUM_CLASS(ThreadPriority,
+    SR_ENUM_NS_T(ThreadPriority, int8_t,
           SR_THREAD_PRIORITY_ABOVE_NORMAL,
           SR_THREAD_PRIORITY_BELOW_NORMAL,
           SR_THREAD_PRIORITY_HIGHEST,
           SR_THREAD_PRIORITY_IDLE,
           SR_THREAD_PRIORITY_LOWEST,
           SR_THREAD_PRIORITY_NORMAL,
-          SR_THREAD_PRIORITY_TIME_CRITICAL,
+          SR_THREAD_PRIORITY_TIME_CRITICAL
     );
 
     SR_INLINE std::string GetThreadId(const std::thread& thread) {

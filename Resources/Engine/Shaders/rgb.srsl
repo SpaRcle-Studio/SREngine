@@ -1,0 +1,21 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false; 
+DepthWrite true;
+DepthTest true;
+
+uniform vec3 color;
+
+void fragment() {
+     TIME;
+	//COLOR = vec4(color, 1.0);
+	COLOR = vec4(color, 1.0);
+}
+
+void vertex() {
+    VERTEX.x = -VERTEX.x;
+}

@@ -27,7 +27,9 @@ namespace SR_WORLD_NS {
     }
 
     void Chunk::Update(float_t dt) {
-        m_lifetime -= dt;
+        if (m_lifetime > 0) {
+            m_lifetime -= dt;
+        }
     }
 
     bool Chunk::Belongs(const Math::FVector3 &point) {

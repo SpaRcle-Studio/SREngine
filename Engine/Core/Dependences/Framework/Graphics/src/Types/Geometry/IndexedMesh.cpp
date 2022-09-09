@@ -20,7 +20,7 @@ namespace SR_GTYPES_NS {
 
         if (IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            indexed->m_IBO = manager.CopyIfExists<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId());
+            indexed->m_IBO = manager.CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId());
         }
 
         indexed->m_countIndices = m_countIndices;
@@ -29,7 +29,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::Calculate() {
-        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
+        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
             auto&& indices = GetIndices();
 
             SRAssert(indices.size() == m_countIndices);
@@ -45,7 +45,7 @@ namespace SR_GTYPES_NS {
                 return false;
             }
             else
-                Memory::MeshManager::Instance().Register<Vertices::Type::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
+                Memory::MeshManager::Instance().Register<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
         }
 
         return Mesh::Calculate();
@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
 
         auto &&manager = Memory::MeshManager::Instance();
 
-        if (manager.Free<Vertices::Type::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
+        if (manager.Free<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
             if (!Environment::Get()->FreeIBO(&m_IBO)) {
                 SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
                 return false;

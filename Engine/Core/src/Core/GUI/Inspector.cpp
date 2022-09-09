@@ -134,24 +134,39 @@ namespace Framework::Core::GUI {
         });
     }
 
-    void Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *transform) const {
+    void Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
         TextCenter("Transform 2D");
 
-        auto&& translation = transform->GetTranslation();
+        auto&& translation = pTransform->GetTranslation();
         if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f))
-            transform->SetTranslation(translation);
+            pTransform->SetTranslation(translation);
 
-        auto&& rotation = transform->GetRotation();
+        auto&& rotation = pTransform->GetRotation();
         if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
-            transform->SetRotation(rotation);
+            pTransform->SetRotation(rotation);
 
-        auto&& scale = transform->GetScale();
+        auto&& scale = pTransform->GetScale();
         if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
-            transform->SetScale(scale);
+            pTransform->SetScale(scale);
 
-        auto&& skew = transform->GetSkew();
+        auto&& skew = pTransform->GetSkew();
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
-            transform->SetSkew(skew);
+            pTransform->SetSkew(skew);
+
+        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
+        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pTransform->GetStretch()));
+
+        if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
+            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
+            if (idx < 0 || idx >= vector ->size())
+                  return false;
+
+            *out_text = vector->at(idx).c_str();
+
+            return true;
+        }, reinterpret_cast<void*>(&stretchTypes), stretchTypes.size())) {
+            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
+        }
     }
 
     void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) const {

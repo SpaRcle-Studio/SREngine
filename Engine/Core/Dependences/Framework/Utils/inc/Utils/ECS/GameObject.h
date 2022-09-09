@@ -20,18 +20,18 @@ namespace SR_UTILS_NS {
     class Transform3D;
     class Component;
 
-    SR_ENUM(GameObjectDestroyBy,
+    SR_ENUM_NS(GameObjectDestroyBy,
         GAMEOBJECT_DESTROY_BY_UNKNOWN    = 1 << 0,
         GAMEOBJECT_DESTROY_BY_SCENE      = 1 << 1,
         GAMEOBJECT_DESTROY_BY_GAMEOBJECT = 1 << 2,
         GAMEOBJECT_DESTROY_BY_OTHER      = 1 << 3,
-        GAMEOBJECT_DESTROY_BY_COMMAND    = 1 << 4,
+        GAMEOBJECT_DESTROY_BY_COMMAND    = 1 << 4
     );
     typedef uint64_t GODestroyByBits;
 
-    SR_ENUM(GameObjectFlags,
+    SR_ENUM_NS(GameObjectFlags,
         GAMEOBJECT_FLAG_NONE    = 1 << 0,
-        GAMEOBJECT_FLAG_NO_SAVE = 1 << 1,
+        GAMEOBJECT_FLAG_NO_SAVE = 1 << 1
     );
     typedef uint64_t GameObjectFlagBits;
 

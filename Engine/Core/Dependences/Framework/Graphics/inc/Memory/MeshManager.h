@@ -63,16 +63,16 @@ namespace SR_GRAPH_NS {
 
             void OnSingletonDestroy() override;
 
-            template<Vertices::Type vertexType, MeshMemoryType memType> VideoResourcesIter Find(const std::string& resourceID) {
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> VideoResourcesIter Find(const std::string& resourceID) {
                 if constexpr (memType == MeshMemoryType::VBO) {
-                    return this->FindImpl(resourceID + Vertices::EnumTypeToString(vertexType), memType);
+                    return this->FindImpl(resourceID + SR_UTILS_NS::EnumReflector::ToString<Vertices::VertexType>(vertexType), memType);
                 }
                 else
                     return this->FindImpl(resourceID, memType);
             }
 
         public:
-            template<Vertices::Type vertexType, MeshMemoryType memType> bool Register(const std::string& resourceID, uint32_t id) {
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> bool Register(const std::string& resourceID, uint32_t id) {
                 SR_LOCK_GUARD
 
                 if (Find<vertexType, memType>(resourceID).has_value()) {
@@ -81,13 +81,13 @@ namespace SR_GRAPH_NS {
                 }
 
                 if constexpr (memType == MeshMemoryType::VBO) {
-                    return RegisterImpl(resourceID + Vertices::EnumTypeToString(vertexType), memType, id);
+                    return RegisterImpl(resourceID + SR_UTILS_NS::EnumReflector::ToString(vertexType), memType, id);
                 }
                 else
                     return RegisterImpl(resourceID, memType, id);
             }
 
-            template<Vertices::Type vertexType, MeshMemoryType memType> FreeResult Free(const std::string& resourceID) {
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> FreeResult Free(const std::string& resourceID) {
                 SR_LOCK_GUARD
 
                 if (auto iter = Find<vertexType, memType>(resourceID); !iter.has_value()) {
@@ -100,7 +100,7 @@ namespace SR_GRAPH_NS {
                     return this->FreeImpl(iter, memType);
             }
 
-            template<Vertices::Type vertexType, MeshMemoryType memType> int32_t CopyIfExists(const std::string& resourceID) {
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> int32_t CopyIfExists(const std::string& resourceID) {
                 SR_LOCK_GUARD
 
                 if (auto memory = Find<vertexType, memType>(resourceID); memory.has_value()) {

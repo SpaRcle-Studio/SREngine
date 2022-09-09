@@ -29,15 +29,6 @@ namespace SR_UTILS_NS {
         MouseCode::MouseMiddle,
     };
 
-    SR_ENUM_CLASS_T(TestEnum, uint32_t,
-            sdfsdf,
-            sdfsdfeq,
-            sdfstdf,
-            sdfsdfqw,
-            sdfs7df,
-            sdfsd2f
-    );
-
     enum class KeyCode : uint8_t {
         None = 0,
         MouseLeft = 1,

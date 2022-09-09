@@ -30,13 +30,13 @@ namespace SR_GTYPES_NS {
 namespace SR_GTYPES_NS {
     class Material;
 
-    SR_ENUM_CLASS(MeshType,
+    SR_ENUM_NS_CLASS(MeshType,
         Unknown = 0,
         Static = 1,
         Wireframe = 2,
         Skinned = 3,
         Sprite2D = 4,
-        Procedural = 5,
+        Procedural = 5
     )
 
     class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {
@@ -83,6 +83,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const;
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
 
         void SetGeometryName(const std::string& name) { m_geometryName = name; }

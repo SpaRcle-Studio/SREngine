@@ -148,21 +148,21 @@ namespace SR_GRAPH_NS::Vertices {
     };
     typedef std::vector<SimpleVertex> SimpleVertices;
 
-    SR_ENUM_CLASS(Type,
+    SR_ENUM_NS_CLASS(VertexType,
         Unknown,
         StaticMeshVertex,
         SkinnedMeshVertex,
         SimpleVertex,
-        UIVertex,
+        UIVertex
     )
 
-    static uint32_t GetVertexSize(Type type) {
+    static uint32_t GetVertexSize(VertexType type) {
         switch (type) {
-            case Type::StaticMeshVertex:
+            case VertexType::StaticMeshVertex:
                 return sizeof(StaticMeshVertex);
-            case Type::SimpleVertex:
+            case VertexType::SimpleVertex:
                 return sizeof(SimpleVertex);
-            case Type::UIVertex:
+            case VertexType::UIVertex:
                 return sizeof(UIVertex);
             default:
                 SRAssert(false);
@@ -183,18 +183,18 @@ namespace SR_GRAPH_NS::Vertices {
         std::vector<std::pair<Vertices::Attribute, size_t>> m_attributes;
     };
 
-    static VertexInfo GetVertexInfo(Type type) {
+    static VertexInfo GetVertexInfo(VertexType type) {
         VertexInfo info = {};
         switch (type) {
-            case Type::StaticMeshVertex:
+            case VertexType::StaticMeshVertex:
                 info.m_attributes = StaticMeshVertex::GetAttributes();
                 info.m_descriptions = { StaticMeshVertex::GetDescription() };
                 break;
-            case Type::SimpleVertex:
+            case VertexType::SimpleVertex:
                 info.m_attributes = SimpleVertex::GetAttributes();
                 info.m_descriptions = { SimpleVertex::GetDescription() };
                 break;
-            case Type::UIVertex:
+            case VertexType::UIVertex:
                 info.m_attributes = UIVertex::GetAttributes();
                 info.m_descriptions = { UIVertex::GetDescription() };
                 break;

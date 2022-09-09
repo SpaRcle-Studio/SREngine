@@ -59,6 +59,8 @@ namespace SR_WORLD_NS {
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
 
+        SR_NODISCARD Region* GetRegion(const SR_MATH_NS::IVector3& region);
+
         GameObjects& GetRootGameObjects();
         GameObjects GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
         Chunk* GetCurrentChunk() const;

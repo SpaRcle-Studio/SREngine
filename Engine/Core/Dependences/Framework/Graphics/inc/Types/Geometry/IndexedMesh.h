@@ -30,8 +30,8 @@ namespace SR_GRAPH_NS::Types {
 
         void FreeVideoMemory() override;
 
-        template<Vertices::Type type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
-        template<Vertices::Type type> bool FreeVBO();
+        template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
+        template<Vertices::VertexType type> bool FreeVBO();
         bool FreeIBO();
 
     protected:
@@ -62,7 +62,7 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    template<Vertices::Type type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
+    template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
         //if (!vertices.empty()) {
         //    m_barycenter = Vertices::Barycenter(vertices);
         //}
@@ -86,7 +86,7 @@ namespace SR_GRAPH_NS::Types {
         return true;
     }
 
-    template<Vertices::Type type> bool IndexedMesh::FreeVBO() {
+    template<Vertices::VertexType type> bool IndexedMesh::FreeVBO() {
         if (m_VBO == SR_ID_INVALID) {
             return true;
         }

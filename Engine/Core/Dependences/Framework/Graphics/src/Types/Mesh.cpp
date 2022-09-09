@@ -53,7 +53,7 @@ namespace SR_GRAPH_NS::Types {
 
         auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-        const auto &resourceId = SR_UTILS_NS::Format("%s-%u|%s", EnumMeshTypeToString(type).c_str(), id, path.c_str());
+        const auto &resourceId = SR_UTILS_NS::Format("%s-%u|%s", SR_UTILS_NS::EnumReflector::ToString(type).c_str(), id, path.c_str());
 
         Mesh *pMesh = nullptr;
 
@@ -293,6 +293,14 @@ namespace SR_GRAPH_NS::Types {
 
     bool Mesh::ExecuteInEditMode() const {
         return true;
+    }
+
+    SR_MATH_NS::FVector3 Mesh::GetTranslation() const {
+        if (auto&& pParent = GetParent()) {
+            return pParent->GetTransform()->GetTranslation();
+        }
+
+        return SR_MATH_NS::FVector3::Zero();
     }
 }
 

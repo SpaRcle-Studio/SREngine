@@ -299,7 +299,7 @@ namespace Framework::Graphics {
             В OpenGL не используется в чистом виде VBO, OpenGL работает с VAO, но для универсальности
             здесь под VBO будет скрываться VAO
          */
-        int32_t CalculateVBO(void* vertices, Vertices::Type type, size_t count) override;
+        int32_t CalculateVBO(void* vertices, Vertices::VertexType type, size_t count) override;
         int32_t CalculateIBO(void* indices, uint32_t indxSize, size_t count, int32_t VBO = SR_ID_INVALID) override;
         int32_t CalculateVAO(std::vector<Vertices::StaticMeshVertex>& vertices, size_t count_verts) override;
         [[nodiscard]] bool FreeVAO(int32_t* VAO) const override;

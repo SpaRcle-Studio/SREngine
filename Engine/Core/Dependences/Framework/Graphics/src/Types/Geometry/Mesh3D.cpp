@@ -48,7 +48,7 @@ namespace SR_GTYPES_NS {
         //    SR_LOG(vertices[index].ToString());
         //}
 
-        if (!CalculateVBO<Vertices::Type::StaticMeshVertex>(vertices))
+        if (!CalculateVBO<Vertices::VertexType::StaticMeshVertex>(vertices))
             return false;
 
         return IndexedMesh::Calculate();
@@ -65,7 +65,7 @@ namespace SR_GTYPES_NS {
 
         if (mesh3D->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();
-            mesh3D->m_VBO = manager.CopyIfExists<Vertices::Type::StaticMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
+            mesh3D->m_VBO = manager.CopyIfExists<Vertices::VertexType::StaticMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
         }
 
         return mesh3D;
@@ -78,7 +78,7 @@ namespace SR_GTYPES_NS {
             SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }
 
-        if (!FreeVBO<Vertices::Type::StaticMeshVertex>()) {
+        if (!FreeVBO<Vertices::VertexType::StaticMeshVertex>()) {
             SR_ERROR("Mesh3D::FreeVideoMemory() : failed to free VBO!");
         }
 

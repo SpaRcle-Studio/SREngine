@@ -9,7 +9,7 @@
 
 namespace SR_CORE_NS {
     ///Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml
-    SR_ENUM_CLASS_T(EditorIcon, uint32_t,
+    SR_ENUM_NS_CLASS_T(EditorIcon, uint32_t,
           Unknown,
           Material,
           File,

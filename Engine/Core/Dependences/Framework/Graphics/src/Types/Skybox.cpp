@@ -114,7 +114,7 @@ namespace SR_GTYPES_NS {
         if (m_env->GetPipeLine() == PipeLine::Vulkan) {
             auto &&indices = SR_UTILS_NS::SKYBOX_INDICES;
 
-            if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::Type::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::VertexType::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
                 m_hasErrors = true;
                 return false;
@@ -130,7 +130,7 @@ namespace SR_GTYPES_NS {
         else {
             auto &&vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
 
-            if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::Type::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::VertexType::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
                 m_hasErrors = true;
                 return false;

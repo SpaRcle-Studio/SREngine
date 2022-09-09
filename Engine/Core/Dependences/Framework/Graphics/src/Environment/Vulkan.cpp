@@ -383,10 +383,10 @@ namespace Framework::Graphics {
 
         if (!shaderCreateInfo.Validate()) {
             SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info! Create info:"
-                     "\n\tPolygon mode: " + EnumPolygonModeToString(shaderCreateInfo.polygonMode) +
-                     "\n\tCull mode: " + EnumCullModeToString(cullMode) +
-                     "\n\tDepth compare: " + EnumDepthCompareToString(shaderCreateInfo.depthCompare) +
-                     "\n\tPrimitive topology: " + EnumPrimitiveTopologyToString(shaderCreateInfo.primitiveTopology)
+                     "\n\tPolygon mode: " + SR_UTILS_NS::EnumReflector::ToString(shaderCreateInfo.polygonMode) +
+                     "\n\tCull mode: " + SR_UTILS_NS::EnumReflector::ToString(cullMode) +
+                     "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(shaderCreateInfo.depthCompare) +
+                     "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(shaderCreateInfo.primitiveTopology)
             );
 
             return false;
@@ -619,7 +619,7 @@ namespace Framework::Graphics {
         return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
     }*/
 
-    int32_t Vulkan::CalculateVBO(void *vertices, Vertices::Type type, size_t count) {
+    int32_t Vulkan::CalculateVBO(void *vertices, Vertices::VertexType type, size_t count) {
         const auto size = Vertices::GetVertexSize(type);
         if (auto id = m_memory->AllocateVBO(size * count, vertices); id >= 0) {
             return id;
