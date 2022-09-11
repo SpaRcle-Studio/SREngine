@@ -76,17 +76,28 @@ namespace SR_UTILS_NS {
     void Transform2D::UpdateMatrix() {
         SR_MATH_NS::FVector3 scale = m_scale;
 
-        if (auto&& pParent = GetParentTransform(); pParent && m_stretch != Stretch::None) {
-            auto&& aspect = pParent->GetScale().XY().Aspect();
+        if (auto&& pParent = GetParentTransform()) {
+            auto&& aspect = pParent->GetMatrix().GetScale().XY().Aspect();
             switch (m_stretch) {
                 case Stretch::StretchX:
-                    scale.x *= aspect;
+                    if (aspect <= 1) {
+                        scale.y *= aspect;
+                    }
                     break;
                 case Stretch::StretchY:
-                    scale.y *= aspect;
+                    if (aspect > 1) {
+                        scale.x *= 1.f / aspect;
+                    }
                     break;
                 case Stretch::StretchXY:
-                    scale *= aspect;
+                    break;
+                case Stretch::None:
+                    if (aspect > 1) {
+                        scale.x *= 1.f / aspect;
+                    }
+                    else {
+                        scale.y *= aspect;
+                    }
                     break;
                 default:
                     SRHalt0();

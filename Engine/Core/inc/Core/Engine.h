@@ -98,6 +98,7 @@ namespace Framework {
         float_t m_updateFrequency = 1.f;
         float_t m_accumulator = 1.f;
         TimePoint m_timeStart;
+        SR_HTYPES_NS::Timer m_worldTimer;
 
         std::vector<SR_UTILS_NS::Component*> m_updateableComponents;
         bool m_needRebuildComponents = false;
@@ -114,6 +115,7 @@ namespace Framework {
         PhysicsScenePtr m_physicsScene = { };
         RenderScenePtr m_renderScene = { };
         PipelinePtr m_pipeline = nullptr;
+        CameraPtr m_mainCamera = nullptr;
 
     };
 }

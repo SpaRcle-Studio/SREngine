@@ -26,6 +26,10 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::Draw() {
+        if (!m_scene) {
+            return;
+        }
+
         if (m_camera.RecursiveLockIfValid()) {
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 

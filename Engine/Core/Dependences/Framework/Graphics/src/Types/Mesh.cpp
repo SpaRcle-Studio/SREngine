@@ -187,7 +187,7 @@ namespace SR_GRAPH_NS::Types {
             SR_LOG("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
         }
 
-        mesh->SetMaterial(m_material);
+        /// mesh->SetMaterial(m_material);
 
         mesh->m_geometryName = m_geometryName;
         mesh->m_barycenter = m_barycenter;

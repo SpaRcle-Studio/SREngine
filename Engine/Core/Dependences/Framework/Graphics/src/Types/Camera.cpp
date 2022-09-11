@@ -203,6 +203,14 @@ namespace SR_GTYPES_NS {
         });
     }
 
+    glm::mat4 Camera::GetImGuizmo2DView() const noexcept {
+        auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
+        matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
+        matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
+
+        return matrix;
+    }
+
     void Camera::SetFar(float_t value) {
         m_far = value;
 

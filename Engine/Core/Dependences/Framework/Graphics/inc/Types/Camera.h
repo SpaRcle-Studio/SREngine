@@ -51,6 +51,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
 
         SR_NODISCARD glm::mat4 GetImGuizmoView() const noexcept;
+        SR_NODISCARD glm::mat4 GetImGuizmo2DView() const noexcept;
         SR_NODISCARD glm::vec3 GetViewDirection() const;
         SR_NODISCARD glm::vec3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const;
 

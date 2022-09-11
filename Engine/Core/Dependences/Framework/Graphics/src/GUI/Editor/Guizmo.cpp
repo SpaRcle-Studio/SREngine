@@ -97,10 +97,15 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void Guizmo::DrawManipulation(SR_GRAPH_NS::Types::Camera* camera) {
+        if (!m_transform) {
+            return;
+        }
+
         glm::mat4 transform = GetMatrix();
+        glm::mat4 view = camera->GetImGuizmoView();
 
         ImGuizmo::Manipulate(
-                glm::value_ptr(camera->GetImGuizmoView()),
+                glm::value_ptr(view),
                 glm::value_ptr(camera->GetProjection()),
                 m_operation,
                 m_mode,
@@ -163,7 +168,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     glm::mat4 Guizmo::GetMatrix() {
-        glm::mat4 matrix = glm::mat4(1.0f);
+        glm::mat4 matrix;
 
         //const SR_MATH_NS::FVector3 translation = m_transform->GetTranslation().InverseAxis(0);
         //const SR_MATH_NS::FVector3 rotation = m_transform->GetRotation().InverseAxis(1).InverseAxis(2);
@@ -171,13 +176,26 @@ namespace SR_GRAPH_NS::GUI {
 
         auto&& transformation = m_transform->GetMatrix();
 
-        const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(0);
-        const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(1).InverseAxis(2);
-        const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
+        switch (m_transform->GetMeasurement()) {
+            case Helper::Measurement::SpaceZero:
+            case Helper::Measurement::Space1D:
+            case Helper::Measurement::Space4D:
+            default:
+                matrix = glm::mat4(0);
+                break;
+            case Helper::Measurement::Space2D:
+            case Helper::Measurement::Space3D: {
+                const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(0);
+                const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(1).InverseAxis(2);
+                const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
 
-        matrix = glm::translate(matrix, translation.ToGLM());
-        matrix *= mat4_cast(SR_MATH_NS::Quaternion::FromEuler(rotation).ToGLM());
-        matrix = glm::scale(matrix, scale.ToGLM());
+                matrix = glm::translate(glm::mat4(1), translation.ToGLM());
+                matrix *= mat4_cast(SR_MATH_NS::Quaternion::FromEuler(rotation).ToGLM());
+                matrix = glm::scale(matrix, scale.ToGLM());
+                break;
+            }
+        }
+
 
         return matrix;
     }

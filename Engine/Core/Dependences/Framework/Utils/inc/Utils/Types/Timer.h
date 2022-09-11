@@ -19,6 +19,16 @@ namespace SR_HTYPES_NS {
             : m_updateFrequency(updateFrequency)
         { }
 
+        explicit Timer(uint32_t countInSecond)
+            : m_updateFrequency(
+                static_cast<float_t>(60) / static_cast<float_t>(countInSecond * 60)
+            )
+        { }
+
+        Timer()
+            : Timer(0.f)
+        { }
+
     public:
         bool Update() {
             if (m_deltaTime > m_updateFrequency) {
