@@ -138,6 +138,22 @@ namespace SR_UTILS_NS {
                 return source.substr(pos + offset, source.size() - 1);
         }
 
+        static std::string Substring(const std::string_view& source, char symbol, uint32_t offset = 0) {
+            if (auto&& pos = source.find(symbol); pos == std::string::npos)
+                return std::string(source);
+            else {
+                return std::string(source.substr(pos + offset, source.size() - 1));
+            }
+        }
+
+        static std::string_view SubstringView(const std::string_view& source, char symbol, uint32_t offset = 0) {
+            if (auto&& pos = source.find(symbol); pos == std::string::npos)
+                return source;
+            else {
+                return source.substr(pos + offset, source.size() - 1);
+            }
+        }
+
         static SR_FORCE_INLINE std::string BackRead(const std::string& str, const char c, const int offset = 0) {
             std::string result = std::string();
 

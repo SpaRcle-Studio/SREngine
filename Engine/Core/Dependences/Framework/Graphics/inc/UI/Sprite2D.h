@@ -41,7 +41,7 @@ namespace SR_GRAPH_NS::UI {
         void FreeVideoMemory() override;
         void Draw() override;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SR_UTILS_NS::SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
     };
 }

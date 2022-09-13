@@ -22,8 +22,16 @@ namespace SR_UTILS_NS {
         virtual ~ISavable() = default;
 
     public:
-        SR_NODISCARD virtual SR_HTYPES_NS::Marshal Save(SavableFlags flags) const {
-            return SR_HTYPES_NS::Marshal();
+        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SavableFlags flags) const {
+            return new SR_HTYPES_NS::Marshal();
+        }
+
+        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
+            if (pMarshal) {
+                return pMarshal;
+            }
+            
+            return new SR_HTYPES_NS::Marshal();
         }
 
     };

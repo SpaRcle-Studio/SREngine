@@ -47,7 +47,8 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
-            m_backup = ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_NONE);
+            SR_SAFE_DELETE_PTR(m_backup);
+            m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
             ptr->Destroy();
         });
 
@@ -59,11 +60,12 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 }
 
 bool Framework::Core::Commands::GameObjectDelete::Undo() {
-    if (!m_backup.Valid())
+    if (!m_backup || !m_backup->Valid())
         return false;
 
     if (m_scene.RecursiveLockIfValid()) {
-        auto ptr = m_scene->Instance(m_backup);
+        auto ptr = m_scene->Instance(*m_backup);
+        SR_SAFE_DELETE_PTR(m_backup);
         m_scene.Unlock();
         return true;
     }
@@ -78,6 +80,7 @@ Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const SR_UTILS_NS:
 
 Framework::Core::Commands::GameObjectDelete::~GameObjectDelete() {
     m_reserved.UnReserve();
+    SR_SAFE_DELETE_PTR(m_backup);
 }
 
 //!-------------------------------------------------------
@@ -85,11 +88,12 @@ Framework::Core::Commands::GameObjectDelete::~GameObjectDelete() {
 //!-------------------------------------------------------
 
 bool Framework::Core::Commands::GameObjectPaste::Redo() {
-    if (!m_backup.Valid())
+    if (!m_backup || !m_backup->Valid())
         return false;
 
     if (m_scene.RecursiveLockIfValid()) {
-        auto ptr = m_scene->Instance(m_backup);
+        SR_MAYBE_UNUSED auto gameObject = m_scene->Instance(*m_backup);
+        SR_SAFE_DELETE_PTR(m_backup);
         m_scene.Unlock();
         return true;
     }
@@ -117,7 +121,8 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
-            m_backup = ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_NONE);
+            SR_SAFE_DELETE_PTR(m_backup);
+            m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
             ptr->Destroy();
         });
 
@@ -127,11 +132,12 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
     else
         return false;
 
-    if (!m_backup.Valid())
+    if (!m_backup || !m_backup->Valid())
         return false;
 
     if (m_scene.RecursiveLockIfValid()) {
-        auto ptr = m_scene->Instance(m_backup);
+        SR_MAYBE_UNUSED auto gameObject = m_scene->Instance(*m_backup);
+        SR_SAFE_DELETE_PTR(m_backup);
         m_scene.Unlock();
         return true;
     }

@@ -16,6 +16,9 @@
 namespace SR_HTYPES_NS {
     class SR_DLL_EXPORT Marshal {
     public:
+        using Ptr = Marshal*;
+
+    public:
         Marshal() = default;
 
         Marshal(Marshal&& marshal) noexcept;
@@ -26,8 +29,10 @@ namespace SR_HTYPES_NS {
     public:
         bool Save(const Path& path) const;
         SR_NODISCARD Marshal Copy() const;
+        SR_NODISCARD Marshal::Ptr CopyPtr() const;
 
         static Marshal Load(const Path& path);
+        static Marshal::Ptr LoadPtr(const Path& path);
         static Marshal LoadFromMemory(const std::string& data);
         static Marshal LoadFromBase64(const std::string& base64);
 
@@ -42,6 +47,15 @@ namespace SR_HTYPES_NS {
                 m_size += marshal.m_size;
                 m_stream << marshal.m_stream.rdbuf();
             }
+        }
+
+        void Append(Marshal::Ptr& pMarshal) {
+            if (pMarshal && pMarshal->m_size > 0) {
+                m_size += pMarshal->m_size;
+                m_stream << pMarshal->m_stream.rdbuf();
+            }
+
+            SR_SAFE_DELETE_PTR(pMarshal);
         }
 
         void SkipBytes(uint32_t size) {
@@ -63,6 +77,20 @@ namespace SR_HTYPES_NS {
             marshal.m_size = size;
 
             return marshal;
+        }
+
+        SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint32_t size) {
+            auto&& pMarshal = new Marshal();
+
+            std::string buffer;
+            buffer.resize(size);
+            m_stream.read((char*)&buffer[0], size * sizeof(char));
+            m_position += size * sizeof(char);
+
+            pMarshal->m_stream << buffer;
+            pMarshal->m_size = size;
+
+            return pMarshal;
         }
 
         template<typename T> void Write(const T& value) {

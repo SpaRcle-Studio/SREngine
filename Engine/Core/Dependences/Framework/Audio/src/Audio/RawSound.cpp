@@ -9,7 +9,7 @@
 
 namespace SR_AUDIO_NS {
     RawSound::RawSound()
-        : IResource(typeid(RawSound).name(), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound), true /** auto remove */)
     { }
 
     RawSound::~RawSound() { }
@@ -84,7 +84,7 @@ namespace SR_AUDIO_NS {
     bool RawSound::Reload() {
         SR_LOCK_GUARD
 
-        SR_LOG("RawSound::Reload() : reloading \"" + GetResourceId() + "\" audio...");
+        SR_LOG("RawSound::Reload() : reloading \"" + std::string(GetResourceId()) + "\" audio...");
 
         m_loadState = LoadState::Reloading;
 

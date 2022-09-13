@@ -89,7 +89,7 @@ namespace SR_UTILS_NS {
             m_name = StringUtils::BackRead(typeid(T).name(), ':');
         }
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
     private:
         void SetParent(GameObject* parent);

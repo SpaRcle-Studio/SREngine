@@ -44,7 +44,7 @@ namespace SR_CORE_NS::Commands {
     private:
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
-        SR_HTYPES_NS::Marshal m_backup;
+        SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
         SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
 
     };
@@ -66,7 +66,7 @@ namespace SR_CORE_NS::Commands {
     private:
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
-        SR_HTYPES_NS::Marshal m_backup;
+        SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
         SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
 
     };

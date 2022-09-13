@@ -42,6 +42,21 @@ namespace SR_HTYPES_NS {
         return true;
     }
 
+    Marshal::Ptr Marshal::LoadPtr(const Path& path) {
+        Marshal::Ptr marshal = new Marshal();
+
+        std::ifstream file(path.ToString(), std::ios::binary);
+        if (!file.is_open())
+            return marshal;
+
+        marshal->m_stream << file.rdbuf();
+        marshal->m_size = file.tellg();
+
+        file.close();
+
+        return marshal;
+    }
+
     Marshal Marshal::Load(const Path &path) {
         Marshal marshal;
 
@@ -66,6 +81,17 @@ namespace SR_HTYPES_NS {
         marshal.m_position = 0;
 
         return marshal;
+    }
+
+    Marshal::Ptr Marshal::CopyPtr() const {
+        auto&& pMarshal = new Marshal();
+
+        /// copy buffer
+        pMarshal->m_stream << m_stream.str();
+        pMarshal->m_size = m_size;
+        pMarshal->m_position = 0;
+
+        return pMarshal;
     }
 
     std::string Marshal::ToString() const {

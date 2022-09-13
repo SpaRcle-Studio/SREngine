@@ -57,16 +57,14 @@ namespace SR_GTYPES_NS {
         IndexedMesh::FreeVideoMemory();
     }
 
-    SR_HTYPES_NS::Marshal SR_GTYPES_NS::ProceduralMesh::Save(SR_UTILS_NS::SavableFlags flags) const {
-        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::ProceduralMesh::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
 
-        marshal.Write(static_cast<int32_t>(m_type));
+        pMarshal->Write(static_cast<int32_t>(m_type));
 
-        marshal.Write(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 
-        marshal.Write(m_vertices);
-
-        return marshal;
+        return pMarshal;
     }
 
     bool ProceduralMesh::Calculate()  {

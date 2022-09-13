@@ -18,9 +18,10 @@ namespace SR_UTILS_NS {
     public:
         Path();
         Path(const Path& path);
-        Path(const char* path);
-        Path(std::string path);
-        Path(std::wstring path);
+        Path(const char* path, bool fast = false);
+        Path(std::string path, bool fast = false);
+        Path(std::string_view path, bool fast = false);
+        Path(std::wstring path, bool fast = false);
 
         Path(Path&& path) noexcept
             : m_path(std::exchange(path.m_path, {}))
@@ -50,6 +51,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool Copy(const Path& destination) const;
 
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD std::string_view ToStringView() const;
         SR_NODISCARD std::wstring ToWinApiPath() const;
         SR_NODISCARD std::wstring ToUnicodeString() const;
         SR_NODISCARD size_t GetHash() const;
@@ -63,6 +65,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
+        SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath);
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;

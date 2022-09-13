@@ -298,7 +298,7 @@ namespace SR_CORE_NS::GUI {
                         ImGui::Text("Size: None\nChannels: None");
                     }
 
-                    std::string id = value ? value->GetResourceId() : std::string();
+                    std::string id = value ? std::string(value->GetResourceId()) : std::string();
 
                     auto&& inputLabel = SR_UTILS_NS::Format("##%s-%i-mat-tex", property.displayName.c_str(), index);
                     if (ImGui::InputText(inputLabel.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {

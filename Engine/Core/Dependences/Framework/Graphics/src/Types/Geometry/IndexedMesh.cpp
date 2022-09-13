@@ -35,7 +35,7 @@ namespace SR_GTYPES_NS {
             SRAssert(indices.size() == m_countIndices);
 
             if (m_countIndices == 0 || indices.empty()) {
-                SR_ERROR("IndexedMesh::Calculate() : invalid indices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
+                SR_ERROR("IndexedMesh::Calculate() : invalid indices! \n\tResource id: " + std::string(GetResourceId()) + "\n\tGeometry name: " + GetGeometryName());
                 return false;
             }
 

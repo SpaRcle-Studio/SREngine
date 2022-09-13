@@ -141,7 +141,7 @@ namespace Framework::Core::World {
             return true;
         });
 
-        root->SetName(SR_UTILS_NS::StringUtils::GetBetween(rawMesh->GetResourceId(), "/", "."));
+        root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(rawMesh->GetResourceId()), "/", "."));
 
         return root;
     }

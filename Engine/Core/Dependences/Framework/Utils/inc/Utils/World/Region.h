@@ -19,7 +19,7 @@ namespace SR_UTILS_NS {
         class Observer;
 
         typedef std::unordered_map<Math::IVector3, Chunk*> Chunks;
-        typedef std::unordered_map<Math::IVector3, SR_HTYPES_NS::Marshal> CachedChunks;
+        typedef std::unordered_map<Math::IVector3, SR_HTYPES_NS::Marshal::Ptr> CachedChunks;
 
         #define SRRegionAllocArgs Framework::Helper::World::Observer* observer, uint32_t width, const Framework::Helper::Math::IVector2& chunkSize, const Framework::Helper::Math::IVector3& position
         #define SRRegionAllocVArgs observer, width, chunkSize, position
@@ -61,7 +61,7 @@ namespace SR_UTILS_NS {
             SR_NODISCARD bool ContainsObserver() const { return m_containsObserver; }
             SR_NODISCARD ScenePtr GetScene() const;
 
-            SR_NODISCARD SR_HTYPES_NS::Marshal Save() const;
+            SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save() const;
 
         public:
             typedef std::function<Region*(SRRegionAllocArgs)> Allocator;

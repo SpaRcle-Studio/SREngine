@@ -43,7 +43,7 @@ namespace SR_UTILS_NS {
     bool Settings::Reload() {
         SR_SCOPED_LOCK
 
-        SR_LOG("Settings::Reload() : reloading \"" + GetResourceId() + "\" settings...");
+        SR_LOG("Settings::Reload() : reloading \"" + std::string(GetResourceId()) + "\" settings...");
 
         m_loadState = LoadState::Reloading;
 

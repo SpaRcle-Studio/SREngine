@@ -13,7 +13,7 @@
 
 namespace SR_GTYPES_NS {
     Texture::Texture()
-        : IResource(typeid(Texture).name(), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Texture), true /** auto remove */)
     { }
 
     Texture::~Texture() {
@@ -125,7 +125,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::None) {
-            SR_LOG("Texture::Calculate() : calculating \"" + GetResourceId() + "\" texture...");
+            SR_LOG("Texture::Calculate() : calculating \"" + std::string(GetResourceId()) + "\" texture...");
         }
 
         if (m_id != SR_ID_INVALID) {
@@ -144,7 +144,7 @@ namespace SR_GTYPES_NS {
         }
         else {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-                SR_LOG("Texture::Calculate() : texture \"" + GetResourceId() + "\" has " + std::to_string(m_id) + " id.");
+                SR_LOG("Texture::Calculate() : texture \"" + std::string(GetResourceId()) + "\" has " + std::to_string(m_id) + " id.");
             }
 
             TextureLoader::Free(m_data);
@@ -166,7 +166,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
-            SR_LOG("Texture::FreeVideoMemory() : free \"" + GetResourceId() + "\" texture's video memory...");
+            SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceId()) + "\" texture's video memory...");
         }
 
         m_isCalculated = false;
@@ -193,7 +193,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (IsDestroyed()) {
-            SRHalt("Texture::GetId() : the texture \"" + GetResourceId() + "\" is destroyed!");
+            SRHalt("Texture::GetId() : the texture \"" + std::string(GetResourceId()) + "\" is destroyed!");
             return SR_ID_INVALID;
         }
 
@@ -218,7 +218,7 @@ namespace SR_GTYPES_NS {
         texture->m_fromMemory = true;
 
         texture->SetConfig(config);
-        texture->SetId("");
+        texture->SetId("TextureFromMemory");
 
         return texture;
     }
@@ -250,7 +250,7 @@ namespace SR_GTYPES_NS {
     bool Texture::Reload() {
         SR_SCOPED_LOCK
 
-        SR_LOG("Texture::Reload() : reloading \"" + GetResourceId() + "\" the texture...");
+        SR_LOG("Texture::Reload() : reloading \"" + std::string(GetResourceId()) + "\" the texture...");
 
         m_loadState = LoadState::Reloading;
 

@@ -20,8 +20,13 @@ namespace SR_WORLD_NS {
                 ++pIt;
             }
             else {
-                if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
-                    m_cached[pIt->first] = std::move(marshal);
+                if (auto&& pMarshal = pChunk->Save(); pMarshal) {
+                    if (pMarshal->Valid()) {
+                        m_cached[pIt->first] = pMarshal;
+                    }
+                    else {
+                        SR_SAFE_DELETE_PTR(pMarshal);
+                    }
                 }
 
                 pChunk->Unload();
@@ -54,7 +59,9 @@ namespace SR_WORLD_NS {
 
         if (pChunk && pChunk->GetState() == Chunk::LoadState::Unload) {
             if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
-                pChunk->Load(std::move(pCacheIt->second));
+                /// TODO: OPTIMIZE!!!!!!!!!!!!!!!!!!!
+                pChunk->Load(pCacheIt->second->Copy());
+                delete pCacheIt->second;
                 m_cached.erase(pCacheIt);
             }
             else {
@@ -71,6 +78,10 @@ namespace SR_WORLD_NS {
         }
 
         m_loadedChunks.clear();
+
+        for (auto&& [position, pCachedMarshal] : m_cached) {
+            delete pCachedMarshal;
+        }
         m_cached.clear();
     }
 
@@ -79,8 +90,13 @@ namespace SR_WORLD_NS {
 
         for (auto&& [position, pChunk] : m_loadedChunks) {
             if (!force) {
-                if (auto&& marshal = pChunk->Save(); marshal.Valid()) {
-                    m_cached[position] = std::move(marshal);
+                if (auto&& pMarshal = pChunk->Save(); pMarshal) {
+                    if (pMarshal->Valid()) {
+                        m_cached[position] = pMarshal;
+                    }
+                    else {
+                        SR_SAFE_DELETE_PTR(pMarshal);
+                    }
                 }
             }
 
@@ -148,38 +164,43 @@ namespace SR_WORLD_NS {
         Load();
     }
 
-    SR_HTYPES_NS::Marshal Region::Save() const {
-        SR_HTYPES_NS::Marshal marshal;
+    SR_HTYPES_NS::Marshal::Ptr Region::Save() const {
+        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        std::list<SR_HTYPES_NS::Marshal> available;
+        std::list<SR_HTYPES_NS::Marshal::Ptr> available;
 
         for (const auto& [position, pChunk] : m_loadedChunks) {
-            if (auto&& chunkMarshal = pChunk->Save(); chunkMarshal.Valid()) {
-                SRAssert(chunkMarshal.BytesCount() > 0);
-                available.emplace_back(std::move(chunkMarshal));
+            if (auto&& pChunkMarshal = pChunk->Save(); pChunkMarshal) {
+                if (pChunkMarshal->Valid()) {
+                    SRAssert(pChunkMarshal->BytesCount() > 0);
+                    available.emplace_back(pChunkMarshal);
+                }
+                else {
+                    SR_SAFE_DELETE_PTR(pChunkMarshal);
+                }
             }
         }
 
-        for (const auto& [position, cache] : m_cached) {
-            SRAssert(cache.Valid());
-            SRAssert(cache.BytesCount() > 0);
-            available.emplace_back(std::move(cache.Copy()));
+        for (const auto& [position, pCache] : m_cached) {
+            SRAssert(pCache->Valid());
+            SRAssert(pCache->BytesCount() > 0);
+            available.emplace_back(pCache->CopyPtr());
         }
 
         const uint64_t chunkCount = available.size();
         if (chunkCount == 0)
-            return marshal;
+            return pMarshal;
 
-        marshal.Write(VERSION);
-        marshal.Write(chunkCount);
+        pMarshal->Write(VERSION);
+        pMarshal->Write(chunkCount);
 
-        for (auto&& chunk : available) {
-            SRAssert(chunk.BytesCount() > 0);
-            marshal.Write(chunk.BytesCount());
-            marshal.Append(std::move(chunk));
+        for (auto&& pChunkMarshal : available) {
+            SRAssert(pChunkMarshal->BytesCount() > 0);
+            pMarshal->Write(pChunkMarshal->BytesCount());
+            pMarshal->Append(pChunkMarshal);
         }
 
-        return marshal;
+        return pMarshal;
     }
 
     bool Region::Load() {
@@ -203,14 +224,15 @@ namespace SR_WORLD_NS {
 
                 SRAssert(size != 0);
 
-                SR_HTYPES_NS::Marshal chunk = marshal.ReadBytes(size);
+                auto&& pMarshalChunk = marshal.ReadBytesPtr(size);
 
-                auto&& position = chunk.View<Math::IVector3>(0);
-                if (chunk.Valid()) {
-                    m_cached[position] = std::move(chunk);
+                auto&& position = pMarshalChunk->View<Math::IVector3>(0);
+                if (pMarshalChunk->Valid()) {
+                    m_cached[position] = pMarshalChunk;
                 }
                 else {
                     SRHalt("invalid cache!");
+                    SR_SAFE_DELETE_PTR(pMarshalChunk);
                 }
             }
         }

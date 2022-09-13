@@ -14,7 +14,7 @@
 
 namespace SR_GTYPES_NS {
     Skybox::Skybox()
-        : SR_UTILS_NS::IResource(typeid(Skybox).name(), true /** autoRemove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Skybox), true /** auto remove */)
         , m_env(Environment::Get())
     { }
 

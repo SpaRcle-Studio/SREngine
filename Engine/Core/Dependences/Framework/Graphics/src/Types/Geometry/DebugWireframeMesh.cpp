@@ -165,7 +165,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool DebugWireframeMesh::Reload() {
-        SR_SHADER_LOG("DebugWireframeMesh::Reload() : reloading \"" + GetResourceId() + "\" mesh...");
+        SR_SHADER_LOG("DebugWireframeMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
 
         m_loadState = LoadState::Reloading;
 

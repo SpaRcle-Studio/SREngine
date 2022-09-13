@@ -9,7 +9,7 @@
 
 namespace SR_SCRIPTING_NS {
     Behaviour::Behaviour()
-        : IResource(typeid(Behaviour).name(), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Behaviour), true /** auto remove */)
         , SR_UTILS_NS::Component()
     {
         Component::InitComponent<Behaviour>();
@@ -32,21 +32,21 @@ namespace SR_SCRIPTING_NS {
         return pBehaviour;
     }
 
-    SR_HTYPES_NS::Marshal Behaviour::Save(SR_UTILS_NS::SavableFlags flags) const {
-        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+    SR_HTYPES_NS::Marshal::Ptr Behaviour::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
 
         auto&& properties = GetProperties();
 
         /// TODO: use unicode
-        marshal.Write(GetResourcePath().ToString());
-        marshal.Write<uint16_t>(properties.size());
+        pMarshal->Write(GetResourcePath().ToString());
+        pMarshal->Write<uint16_t>(properties.size());
 
         for (auto&& propertyId : properties) {
-            marshal.Write<std::string>(propertyId);
-            marshal.Write<std::any>(GetProperty(propertyId));
+            pMarshal->Write<std::string>(propertyId);
+            pMarshal->Write<std::any>(GetProperty(propertyId));
         }
 
-        return marshal;
+        return pMarshal;
     }
 
     Behaviour *Behaviour::Load(SR_UTILS_NS::Path path) {
@@ -121,7 +121,7 @@ namespace SR_SCRIPTING_NS {
     bool Behaviour::Reload() {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
-        SR_LOG("Behaviour::Reload() : reloading \"" + GetResourceId() + "\" behaviour...");
+        SR_LOG("Behaviour::Reload() : reloading \"" + std::string(GetResourceId()) + "\" behaviour...");
 
         m_loadState = LoadState::Reloading;
 

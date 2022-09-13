@@ -141,14 +141,14 @@ namespace SR_GRAPH_NS::UI {
         }
     }
 
-    SR_HTYPES_NS::Marshal Sprite2D::Save(Framework::Helper::SavableFlags flags) const {
-        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+    SR_HTYPES_NS::Marshal::Ptr Sprite2D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
 
-        marshal.Write(static_cast<int32_t>(m_type));
+        pMarshal->Write(static_cast<int32_t>(m_type));
 
-        marshal.Write(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 
-        return marshal;
+        return pMarshal;
     }
 
     SR_MATH_NS::FVector2 Sprite2D::GetSizes() const {

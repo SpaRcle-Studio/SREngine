@@ -49,9 +49,9 @@ namespace SR_GTYPES_NS {
         ~Mesh() override;
 
     public:
-        static std::vector<Mesh*> Load(const SR_UTILS_NS::Path& path, MeshType type);
-        static Mesh* TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
-        static Mesh* Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
+        static std::vector<Mesh*> Load(SR_UTILS_NS::Path path, MeshType type);
+        static Mesh* TryLoad(SR_UTILS_NS::Path path, MeshType type, uint32_t id);
+        static Mesh* Load(SR_UTILS_NS::Path path, MeshType type, uint32_t id);
 
     public:
         bool Destroy() override;
@@ -101,15 +101,18 @@ namespace SR_GTYPES_NS {
 
     protected:
         Memory::UBOManager&          m_uboManager;
+        /// cached variable
+        mutable SR_UTILS_NS::Path    m_resourcePath;
+        std::string                  m_geometryName;
+
+        RenderScenePtr               m_renderScene;
+        RenderContextPtr             m_context;
 
         SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
-        RenderScenePtr               m_renderScene       = { };
         /// Контекст будет задан только после регистрации в RenderScene
-        RenderContextPtr             m_context           = { };
         PipelinePtr                  m_pipeline          = nullptr;
 
         const MeshType               m_type              = MeshType::Unknown;
-        std::string                  m_geometryName      = "Unnamed";
 
         Material*                    m_material          = nullptr;
         std::atomic<bool>            m_hasErrors         = false;

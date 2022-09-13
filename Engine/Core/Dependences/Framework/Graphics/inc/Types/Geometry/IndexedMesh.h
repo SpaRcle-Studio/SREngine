@@ -69,7 +69,7 @@ namespace SR_GRAPH_NS::Types {
 
         if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
             if (m_countVertices == 0 || !vertices.data()) {
-                SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + GetResourceId() + "\n\tGeometry name: " + GetGeometryName());
+                SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + std::string(GetResourceId()) + "\n\tGeometry name: " + GetGeometryName());
                 return false;
             }
 

@@ -6,12 +6,13 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 
 namespace SR_UTILS_NS {
-    IResource::IResource(const char *name)
-        : IResource(name, false)
+    IResource::IResource(uint64_t hashName)
+        : m_resourceHashName(hashName)
+        , m_lifetime(ResourceManager::ResourceLifeTime)
     { }
 
-    IResource::IResource(const char *name, bool autoRemove)
-        : m_resourceName(name)
+    IResource::IResource(uint64_t hashName, bool autoRemove)
+        : m_resourceHashName(hashName)
         , m_lifetime(ResourceManager::ResourceLifeTime)
         , m_autoRemove(autoRemove)
     { }
@@ -35,7 +36,13 @@ namespace SR_UTILS_NS {
         return Destroy();
     }
 
+    std::string_view IResource::GetResourceName() const {
+        return ResourceManager::Instance().GetTypeName(m_resourceHashName);
+    }
+
     void IResource::SetId(const std::string &id, bool autoRegister) {
+        SRAssert2(!id.empty(), "Invalid id!");
+
         if (m_resourceId == "NoID") {
             m_resourceId = id;
 
@@ -44,12 +51,12 @@ namespace SR_UTILS_NS {
             }
         }
         else {
-            SRAssert2(false, "Double set resource id!");
+            SRHalt("Double set resource id!");
         }
     }
 
     IResource *IResource::Copy(IResource *destination) const {
-        destination->m_autoRemove.store(m_autoRemove);
+        destination->m_autoRemove = m_autoRemove;
         destination->m_lifetime = m_lifetime;
         destination->m_loadState.store(m_loadState);
         destination->SetId(m_resourceId);
@@ -93,7 +100,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        SRAssert2Once(false, "Failed to get resource hash! \n\tResource id: " + GetResourceId() +
+        SRAssert2Once(false, "Failed to get resource hash! \n\tResource id: " + std::string(GetResourceId()) +
             "\n\tResource path: " + path.ToString());
 
         return 0;

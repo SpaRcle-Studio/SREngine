@@ -124,20 +124,25 @@ namespace SR_WORLD_NS {
 
     }
 
-    SR_HTYPES_NS::Marshal Chunk::Save() const {
+    SR_HTYPES_NS::Marshal::Ptr Chunk::Save() const {
         /// scene is locked
 
-        std::list<SR_HTYPES_NS::Marshal> marshaled;
+        std::list<SR_HTYPES_NS::Marshal::Ptr> marshaled;
 
         auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
+        /// сохраняем объекты относительно начала координат чанка
+        SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
+
         for (auto&& gameObject : gameObjects) {
             if (gameObject.RecursiveLockIfValid()) {
-                /// сохраняем объекты относительно начала координат чанка
-                SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
-
-                if (auto &&gameObjectMarshal = gameObject->Save(SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal.Valid()) {
-                    marshaled.emplace_back(std::move(gameObjectMarshal));
+                if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
+                    if (gameObjectMarshal->Valid()) {
+                        marshaled.emplace_back(gameObjectMarshal);
+                    }
+                    else {
+                        SR_SAFE_DELETE_PTR(gameObjectMarshal);
+                    }
                 }
 
                 gameObject.Unlock();
@@ -146,18 +151,18 @@ namespace SR_WORLD_NS {
 
         SR_THIS_THREAD->GetContext()->RemoveValue<SR_MATH_NS::FVector3>();
 
-        SR_HTYPES_NS::Marshal marshal;
+        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         if (marshaled.empty())
-            return marshal;
+            return pMarshal;
 
-        marshal.Write(m_position);
-        marshal.Write(static_cast<uint64_t>(marshaled.size()));
+        pMarshal->Write(m_position);
+        pMarshal->Write(static_cast<uint64_t>(marshaled.size()));
 
         for (auto&& gameObject : marshaled)
-            marshal.Append(std::move(gameObject));
+            pMarshal->Append(gameObject);
 
-        return marshal;
+        return pMarshal;
     }
 
     Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {

@@ -8,6 +8,7 @@
 #include <Utils/Debug.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
@@ -25,8 +26,8 @@ namespace SR_UTILS_NS {
         };
 
     protected:
-        explicit IResource(const char* name);
-        IResource(const char* name, bool autoRemove);
+        explicit IResource(uint64_t hashName);
+        IResource(uint64_t hashName, bool autoRemove);
         ~IResource() override;
 
     public:
@@ -40,8 +41,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
         SR_NODISCARD uint32_t GetCountUses() const { return m_countUses; }
         SR_NODISCARD float_t GetLifetime() const { return m_lifetime; }
-        SR_NODISCARD const char *GetResourceName() const { return m_resourceName; }
-        SR_NODISCARD std::string GetResourceId() const { return m_resourceId; }
+        SR_NODISCARD std::string_view GetResourceName() const;
+        SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
+        SR_NODISCARD std::string_view GetResourceId() const { return m_resourceId; }
         SR_NODISCARD virtual Path GetResourcePath() const { return m_resourceId; }
         SR_NODISCARD virtual uint64_t GetResourceHash() const { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
@@ -119,8 +121,7 @@ namespace SR_UTILS_NS {
         virtual void OnResourceUpdated(IResource* pResource, int32_t depth);
 
     protected:
-        /** \brief This is resource name. \example Mesh, Texture, Audio... */
-        const char *m_resourceName = "Unnamed";
+        const uint64_t m_resourceHashName = 0;
 
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
 
@@ -137,8 +138,10 @@ namespace SR_UTILS_NS {
         std::atomic<bool> m_readOnly = false;
         std::atomic<bool> m_isDestroyed = false;
         std::atomic<bool> m_isRegistered = false;
+
         /// Автоматическое уничтожение ресурса по истечению use-point'ов
-        std::atomic<bool> m_autoRemove = false;
+        /// \warning ReadOnly
+        bool m_autoRemove = false;
 
         std::string m_resourceId = "NoID";
 

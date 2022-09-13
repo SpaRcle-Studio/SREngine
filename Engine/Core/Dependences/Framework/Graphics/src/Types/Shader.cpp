@@ -17,7 +17,7 @@
 
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
-        : IResource(typeid(Shader).name(), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader), true /** auto remove */)
     { }
 
     Shader::~Shader() {
@@ -261,7 +261,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Reload() {
-        SR_SHADER_LOG("Shader::Reload() : reloading \"" + GetResourceId() + "\" shader...");
+        SR_SHADER_LOG("Shader::Reload() : reloading \"" + std::string(GetResourceId()) + "\" shader...");
 
         m_loadState = LoadState::Reloading;
 

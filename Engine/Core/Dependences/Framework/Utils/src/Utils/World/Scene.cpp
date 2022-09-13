@@ -31,7 +31,13 @@ namespace SR_WORLD_NS {
 
         GameObject::Ptr gm = *(new GameObject(GetThis(), name));
 
-        m_gameObjects.emplace_back(gm);
+        if (m_freeObjIndices.empty()) {
+            m_gameObjects.emplace_back(gm);
+        }
+        else {
+            m_gameObjects[m_freeObjIndices.front()] = gm;
+            m_freeObjIndices.erase(m_freeObjIndices.begin());
+        }
 
         m_isHierarchyChanged = true;
 
@@ -100,11 +106,12 @@ namespace SR_WORLD_NS {
             });
         }
 
-        if (!m_gameObjects.empty()) {
+        if (m_gameObjects.size() != m_freeObjIndices.size()) {
             SR_WARN(Format("Scene::Destroy() : after destroying the root objects, "
-                                       "there are %i objects left!", m_gameObjects.size()));
+                                       "there are %i objects left!", m_gameObjects.size() - m_freeObjIndices.size()));
             m_gameObjects.clear();
         }
+        m_freeObjIndices.clear();
 
         m_isDestroy = true;
         m_isHierarchyChanged = true;
@@ -135,7 +142,7 @@ namespace SR_WORLD_NS {
         m_rootObjects.reserve(m_gameObjects.size() / 2);
 
         for (auto&& gameObject : m_gameObjects) {
-            if (!gameObject->GetParent().Valid()) {
+            if (gameObject && !gameObject->GetParent().Valid()) {
                 m_rootObjects.emplace_back(gameObject);
             }
         }
@@ -169,8 +176,11 @@ namespace SR_WORLD_NS {
         regionsPath.Make(Path::Type::Folder);
 
         auto&& regPath = regionsPath.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
-        if (auto&& regionMarshal = pRegion->Save(); regionMarshal.Valid()) {
-            regionMarshal.Save(regPath);
+        if (auto&& pRegionMarshal = pRegion->Save(); pRegionMarshal) {
+            if (pRegionMarshal->Valid()) {
+                pRegionMarshal->Save(regPath);
+            }
+            SR_SAFE_DELETE_PTR(pRegionMarshal);
         }
         else if (regPath.Exists(Path::Type::File)) {
             Platform::Delete(regPath);
@@ -435,16 +445,15 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::Remove(const GameObject::Ptr &gameObject) {
-        for (auto pIt = m_gameObjects.begin(); pIt != m_gameObjects.end(); ++pIt) {
-            if (pIt->Get() != gameObject.Get()) {
-                continue;
+        const uint32_t count = static_cast<uint32_t>(m_gameObjects.size());
+
+        for (uint32_t i = 0; i < count; ++i) {
+            if (m_gameObjects.at(i).Get() == gameObject.Get()) {
+                m_gameObjects.at(i) = GameObject::Ptr();
+                m_freeObjIndices.emplace_back(i);
+                OnChanged();
+                return true;
             }
-
-            m_gameObjects.erase(pIt);
-
-            OnChanged();
-
-            return true;
         }
 
         SRHalt("Scene::Remove() : game object not found!");
@@ -498,7 +507,7 @@ namespace SR_WORLD_NS {
         for (auto&& object : m_gameObjects) {
             /// блокировать объекты не нужно, так как уничтожиться они могут только из сцены
             /// Но стоит предусмотреть защиту от одновременного изменения имени
-            if (object->GetHashName() == hashName) {
+            if (object && object->GetHashName() == hashName) {
                 return object;
             }
         }
@@ -513,13 +522,16 @@ namespace SR_WORLD_NS {
     }
     bool Scene::MoveToRoot(const Scene::GameObjectPtr &gameObject) { //обнуляет указатель на родителя и поднимает флаг обновления m_rootObjects, из-за чего gameObject обрабатывается как корневой
         if (gameObject->m_parent){
-            return SRAssert2(false, "GameObject::MoveToRoot : GameObject has parent!");
+            SRHalt("GameObject::MoveToRoot : GameObject has parent!");
+            return false;
         }
 
         gameObject->m_parent = nullptr;
         OnChanged();
+
         return true;
     }
+
     SR_MATH_NS::FVector3 Scene::GetWorldPosition(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) {
         if (auto&& pRegionIt = m_regions.find(region); pRegionIt != m_regions.end()) {
             auto&& [_, pRegion] = *pRegionIt;

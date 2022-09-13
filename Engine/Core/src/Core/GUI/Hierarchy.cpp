@@ -219,20 +219,22 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::Copy() const {
-        SR_HTYPES_NS::Marshal marshal;
+        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        marshal.Write(static_cast<uint64_t>(m_selected.size()));
+        pMarshal->Write(static_cast<uint64_t>(m_selected.size()));
 
         for (auto&& ptr : m_selected) {
             if (ptr.RecursiveLockIfValid()) {
-                marshal.Append(ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
+                pMarshal = ptr->Save(pMarshal, SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID);
                 ptr.Unlock();
             }
         }
 
-        if (marshal.Valid()) {
-            Helper::Platform::TextToClipboard(marshal.ToBase64());
+        if (pMarshal && pMarshal->Valid()) {
+            SR_UTILS_NS::Platform::TextToClipboard(pMarshal->ToBase64());
         }
+
+        SR_SAFE_DELETE_PTR(pMarshal);
     }
 
     void Hierarchy::Paste() {

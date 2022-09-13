@@ -166,4 +166,10 @@
     #define SR_STRCMPI strcasecmp
 #endif
 
+#ifdef SR_MSVC
+    #define SR_FUNCTION_SIGNATURE __FUNCSIG__
+#else
+#define SR_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
+#endif
+
 #endif //GAMEENGINE_MACROS_H

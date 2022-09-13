@@ -96,6 +96,8 @@ namespace SR_GRAPH_NS {
             return true;
         }
 
+        void SetGUIEnabled(bool enabled) override;
+
         bool Destroy() override {
             return EvoVulkan::Core::VulkanKernel::Destroy();
         }

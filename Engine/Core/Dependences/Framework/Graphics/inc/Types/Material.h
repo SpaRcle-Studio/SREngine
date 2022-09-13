@@ -34,7 +34,7 @@ namespace SR_GTYPES_NS {
         ~Material() override = default;
 
     public:
-        static Material* Load(const std::string& rawPath);
+        static Material* Load(SR_UTILS_NS::Path rawPath);
 
     public:
         Super* Copy(Super* destination) const override;

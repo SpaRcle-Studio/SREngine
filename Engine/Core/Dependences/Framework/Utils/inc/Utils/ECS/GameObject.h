@@ -71,7 +71,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
         SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
         Math::FVector3 GetBarycenter();

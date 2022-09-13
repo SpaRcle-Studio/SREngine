@@ -7,37 +7,51 @@
 
 namespace SR_UTILS_NS {
     Path::Path()
-        : Path(std::string())
+        : m_path()
+        , m_name()
+        , m_ext()
+        , m_hash(SR_UINT64_MAX)
+        , m_type(Type::Undefined)
     { }
 
-    Path::Path(std::wstring path)
+    Path::Path(std::string_view path, bool fast)
+        : Path(path.data(), fast)
+    { }
+
+    Path::Path(std::wstring path, bool fast)
         : m_path(SR_WS2S(path))
-        , m_name("")
-        , m_ext("")
-        , m_hash(SIZE_MAX)
+        , m_name()
+        , m_ext()
+        , m_hash(SR_UINT64_MAX)
         , m_type(Type::Undefined)
     {
-        Update();
+        if (!fast) {
+            Update();
+        }
     }
 
-    Path::Path(std::string path)
+    Path::Path(std::string path, bool fast)
         : m_path(std::move(path))
-        , m_name("")
-        , m_ext("")
-        , m_hash(SIZE_MAX)
+        , m_name()
+        , m_ext()
+        , m_hash(SR_UINT64_MAX)
         , m_type(Type::Undefined)
     {
-        Update();
+        if (!fast) {
+            Update();
+        }
     }
 
-    Path::Path(const char *path)
+    Path::Path(const char *path, bool fast)
         : m_path(path)
         , m_name("")
         , m_ext("")
-        , m_hash(SIZE_MAX)
+        , m_hash(SR_UINT64_MAX)
         , m_type(Type::Undefined)
     {
-        Update();
+        if (!fast) {
+            Update();
+        }
     }
 
     Path Path::Normalize() {
@@ -46,6 +60,10 @@ namespace SR_UTILS_NS {
     }
 
     std::string Path::ToString() const {
+        return m_path;
+    }
+
+    std::string_view Path::ToStringView() const {
         return m_path;
     }
 
@@ -268,6 +286,20 @@ namespace SR_UTILS_NS {
 
         if (index == std::string::npos) {
             return *this;
+        }
+
+        if (m_path.size() == subPath.m_path.size()) {
+            return Path();
+        }
+
+        return StringUtils::Remove(m_path, index, subPath.m_path.size() + 1);
+    }
+
+    Path Path::SelfRemoveSubPath(const Path &subPath) {
+        auto&& index = m_path.find(subPath.m_path);
+
+        if (index == std::string::npos) {
+            return std::move(*this);
         }
 
         if (m_path.size() == subPath.m_path.size()) {

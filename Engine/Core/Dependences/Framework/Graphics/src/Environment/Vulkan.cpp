@@ -21,6 +21,13 @@ namespace Framework::Graphics {
 
 #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
+    void SRVulkan::SetGUIEnabled(bool enabled) {
+        if (auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()) {
+            vkImgui->SetEnabled(enabled);
+        }
+        VulkanKernel::SetGUIEnabled(enabled);
+    }
+
     bool Vulkan::PreInit(
             unsigned int smooth_samples,
             const std::string &appName,
@@ -754,13 +761,16 @@ namespace Framework::Graphics {
                 return EvoVulkan::Core::RenderResult::Error;
             }
 
+        auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI();
+
         m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
-        if (m_GUIEnabled) {
-            m_submitCmdBuffs[1] =
-                    dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->Render(m_currentBuffer);
+        if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
+            m_submitCmdBuffs[1] = vkImgui->Render(m_currentBuffer);
             m_submitInfo.commandBufferCount = 2;
-        } else
+        } 
+        else {
             m_submitInfo.commandBufferCount = 1;
+        }
 
         m_submitInfo.waitSemaphoreCount = 1;
         if (m_waitSemaphore)

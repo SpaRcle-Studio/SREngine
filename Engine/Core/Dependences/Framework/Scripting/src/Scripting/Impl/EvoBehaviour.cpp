@@ -19,7 +19,7 @@ namespace SR_SCRIPTING_NS {
 
         m_hasErrors = false;
 
-        auto&& path = GetResourceId();
+        auto&& path = GetResourcePath();
 
         if (!path.empty()) {
             auto&& compiler = GlobalEvoCompiler::Instance();
@@ -28,7 +28,7 @@ namespace SR_SCRIPTING_NS {
 
             auto&& fullPath = GetAssociatedPath().Concat(path);
             if (!m_script || !m_script->Load(fullPath, compiler, true)) {
-                SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path);
+                SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path.ToString());
                 SR_SAFE_DELETE_PTR(m_script);
                 m_hasErrors = true;
                 return false;
@@ -77,7 +77,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        SRHalt("Failed to get behaviour hash! \n\tResource id: " + GetResourceId() +
+        SRHalt("Failed to get behaviour hash! \n\tResource id: " + std::string(GetResourceId()) +
                "\n\tResource path: " + path.ToString());
 
         return 0;

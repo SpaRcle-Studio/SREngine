@@ -2,7 +2,7 @@
 <Configs>
     <DefaultChunkWidth Value="32"/>
     <DefaultChunkHeight Value="128"/>
-    <DefaultRegionWidth Value="8"/>
+    <DefaultRegionWidth Value="32"/>
     <DefaultShiftDistance Value="10"/>
     <DefaultScope Value="8"/>
 

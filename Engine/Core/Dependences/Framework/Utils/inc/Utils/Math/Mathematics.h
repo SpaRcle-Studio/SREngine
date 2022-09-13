@@ -137,7 +137,7 @@ namespace SR_MATH_NS {
             return IsString<volatile T>();
         }
 
-        return std::is_same_v<T, volatile std::string>;
+        return std::is_same_v<T, volatile std::string> || std::is_same_v<T, volatile std::string_view>;
     }
 
     template<typename T> constexpr bool IsNumber() {

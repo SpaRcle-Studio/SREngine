@@ -20,26 +20,26 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD bool IsLastResource(IResource* resource);
         SR_NODISCARD Path GetResPath() const { return m_folder; }
+        SR_NODISCARD const Path& GetResPathRef() const { return m_folder; }
         SR_NODISCARD Path GetCachePath() const { return m_folder.Concat("Cache"); }
+        SR_NODISCARD std::string_view GetTypeName(uint64_t hashName) const;
 
-        IResource* Find(const std::string& Name, const std::string& ID);
+        IResource* Find(uint64_t hashTypeName, const std::string& ID);
 
         void Synchronize(bool force);
 
         void InspectResources(const std::function<void(const ResourcesTypes &)>& callback);
 
         template<typename T> T* Find(const std::string& id) {
-            return dynamic_cast<T*>(Find(typeid(T).name(), id));
+            return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), id));
         }
 
         template<typename T> T* Find(const Path& path) {
-            return dynamic_cast<T*>(Find(typeid(T).name(), path.ToString()));
+            return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), path.ToString()));
         }
 
-        bool RegisterType(const std::string& type_name);
-
         template<typename T> bool RegisterType() {
-            return RegisterType(typeid(T).name());
+            return RegisterType(typeid(T).name(), SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
         }
 
         /** \warning Call only from IResource parents \brief Register resource in resource manager */
@@ -57,6 +57,8 @@ namespace SR_UTILS_NS {
         void PrintMemoryDump();
 
     private:
+        bool RegisterType(const std::string& name, uint64_t hashTypeName);
+
         void Remove(IResource *resource);
         void GC();
         void CheckResourceHashes();

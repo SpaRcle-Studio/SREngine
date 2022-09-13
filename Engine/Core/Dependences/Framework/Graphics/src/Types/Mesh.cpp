@@ -14,7 +14,7 @@
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type)
-        : IResource(typeid(Mesh).name(), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Mesh), true /** auto remove */)
         , m_uboManager(Memory::UBOManager::Instance())
         , m_pipeline(Environment::Get())
         , m_type(type)
@@ -40,25 +40,26 @@ namespace SR_GRAPH_NS::Types {
         return IResource::Destroy();
     }
 
-    Mesh *Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
-        auto &&pMesh = TryLoad(path, type, id);
+    Mesh *Mesh::Load(SR_UTILS_NS::Path path, MeshType type, uint32_t id) {
+        auto &&pMesh = TryLoad(std::move(path), type, id);
 
-        SRVerifyFalse2(!pMesh, "Mesh is not found! Path: " + path.ToString() + "; Id: " + SR_UTILS_NS::ToString(id));
+        SRVerifyFalse2(!pMesh, "Mesh is not found! Id: " + SR_UTILS_NS::ToString(id));
 
         return pMesh;
     }
 
-    Mesh *Mesh::TryLoad(const SR_UTILS_NS::Path& rawPath, MeshType type, uint32_t id) {
+    Mesh *Mesh::TryLoad(SR_UTILS_NS::Path rawPath, MeshType type, uint32_t id) {
         SR_GLOBAL_LOCK
 
-        auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        const auto &resourceId = SR_UTILS_NS::Format("%s-%u|%s", SR_UTILS_NS::EnumReflector::ToString(type).c_str(), id, path.c_str());
+        auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
+        auto&& resourceId = SR_UTILS_NS::EnumReflector::ToString(type) + "-" + std::to_string(id) + "|" + path.ToString();
 
         Mesh *pMesh = nullptr;
 
-        if ((pMesh = SR_UTILS_NS::ResourceManager::Instance().Find<Mesh>(resourceId))) {
-            SRVerifyFalse(!(pMesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr))));
+        if ((pMesh = resourceManager.Find<Mesh>(resourceId))) {
+            SRVerifyFalse(!(pMesh = reinterpret_cast<Mesh *>(pMesh->Copy(nullptr))));
             return pMesh;
         }
 
@@ -121,7 +122,7 @@ namespace SR_GRAPH_NS::Types {
         return pMesh;
     }
 
-    std::vector<Mesh*> Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type) {
+    std::vector<Mesh*> Mesh::Load(SR_UTILS_NS::Path path, MeshType type) {
         std::vector<Mesh*> meshes;
 
         uint32_t id = 0;
@@ -177,17 +178,19 @@ namespace SR_GRAPH_NS::Types {
             return nullptr;
         }
 
-        Mesh *mesh = dynamic_cast<Mesh *>(destination);
+        Mesh *mesh = reinterpret_cast<Mesh *>(destination);
         if (!mesh) {
             SR_ERROR("Mesh::Copy() : impossible to copy basic mesh!");
             return nullptr;
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
-            SR_LOG("Mesh::Copy() : copy \"" + GetResourceId() + "\" mesh...");
+            SR_LOG("Mesh::Copy() : copy \"" + std::string(GetResourceId()) + "\" mesh...");
         }
 
         /// mesh->SetMaterial(m_material);
+
+        mesh->m_resourcePath = m_resourcePath;
 
         mesh->m_geometryName = m_geometryName;
         mesh->m_barycenter = m_barycenter;
@@ -234,7 +237,14 @@ namespace SR_GRAPH_NS::Types {
     }
 
     SR_UTILS_NS::Path Mesh::GetResourcePath() const {
-        return SR_UTILS_NS::StringUtils::Substring(GetResourceId(), '|', 1);
+        if (m_resourcePath.empty()) {
+            m_resourcePath = SR_UTILS_NS::Path(
+                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                    true /** fast */
+            );
+        }
+
+        return m_resourcePath;
     }
 
     Shader *Mesh::GetShader() const {

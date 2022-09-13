@@ -49,7 +49,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(SR_MATH_NS::Axis center = SR_MATH_NS::AXIS_NONE) const;
         SR_NODISCARD ScenePtr GetScene() const;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save() const;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save() const;
 
     public:
         virtual void OnEnter();

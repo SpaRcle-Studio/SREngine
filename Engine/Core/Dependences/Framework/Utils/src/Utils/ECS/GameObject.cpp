@@ -426,35 +426,35 @@
         return false;
     }
 
-    SR_HTYPES_NS::Marshal GameObject::Save(SavableFlags flags) const {
+    SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
         if (GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
-            return SR_HTYPES_NS::Marshal();
+            return pMarshal;
         }
 
-        SR_HTYPES_NS::Marshal marshal = Entity::Save(flags);
+        pMarshal = Entity::Save(pMarshal, flags);
 
-        marshal.Write(VERSION);
+        pMarshal->Write(VERSION);
 
-        marshal.Write(IsEnabled());
-        marshal.Write(m_name);
+        pMarshal->Write(IsEnabled());
+        pMarshal->Write(m_name);
 
         if (HasTag()) {
-            marshal.Write(true);
-            marshal.Write(m_tag);
+            pMarshal->Write(true);
+            pMarshal->Write(m_tag);
         }
         else {
-            marshal.Write(false);
+            pMarshal->Write(false);
         }
 
-        marshal.Append(m_transform->Save(flags));
+        pMarshal = m_transform->Save(pMarshal, flags);
 
         /// save components
 
-        marshal.Write(static_cast<uint32_t>(m_components.size()));
+        pMarshal->Write(static_cast<uint32_t>(m_components.size()));
         for (auto&& pComponent : m_components) {
-            auto&& marshalComponent = pComponent->Save(flags);
-            marshal.Write<uint64_t>(marshalComponent.BytesCount());
-            marshal.Append(std::move(marshalComponent));
+            auto&& marshalComponent = pComponent->Save(nullptr, flags);
+            pMarshal->Write<uint64_t>(marshalComponent->BytesCount());
+            pMarshal->Append(marshalComponent);
         }
 
         /// save children
@@ -467,15 +467,15 @@
             ++childrenNum;
         }
 
-        marshal.Write(static_cast<uint32_t>(childrenNum));
+        pMarshal->Write(static_cast<uint32_t>(childrenNum));
         for (auto&& child : m_children) {
             if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
                 continue;
             }
-            marshal.Append(child->Save(flags));
+            pMarshal = child->Save(pMarshal, flags);
         }
 
-        return marshal;
+        return pMarshal;
     }
 
     bool GameObject::UpdateEntityPath() {

@@ -72,6 +72,10 @@ namespace SR_GRAPH_NS {
             }
 
         public:
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> bool Register(const std::string_view& resourceId, uint32_t id) {
+                return Register<vertexType, memType>(std::string(resourceId), id);
+            }
+
             template<Vertices::VertexType vertexType, MeshMemoryType memType> bool Register(const std::string& resourceID, uint32_t id) {
                 SR_LOCK_GUARD
 
@@ -85,6 +89,10 @@ namespace SR_GRAPH_NS {
                 }
                 else
                     return RegisterImpl(resourceID, memType, id);
+            }
+
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> FreeResult Free(const std::string_view& resourceId) {
+                return Free<vertexType, memType>(std::string(resourceId));
             }
 
             template<Vertices::VertexType vertexType, MeshMemoryType memType> FreeResult Free(const std::string& resourceID) {
@@ -104,6 +112,16 @@ namespace SR_GRAPH_NS {
                 SR_LOCK_GUARD
 
                 if (auto memory = Find<vertexType, memType>(resourceID); memory.has_value()) {
+                    return memory.value()->second.Copy();
+                }
+
+                return SR_ID_INVALID;
+            }
+
+            template<Vertices::VertexType vertexType, MeshMemoryType memType> int32_t CopyIfExists(const std::string_view& resourceID) {
+                SR_LOCK_GUARD
+
+                if (auto memory = Find<vertexType, memType>(std::string(resourceID)); memory.has_value()) {
                     return memory.value()->second.Copy();
                 }
 

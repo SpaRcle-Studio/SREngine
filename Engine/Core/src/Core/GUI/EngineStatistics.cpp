@@ -27,7 +27,7 @@ namespace Framework::Core::GUI {
             auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
                 const bool isDestroyed = pRes->IsDestroyed();
 
-                std::string node = Helper::Format("[%u] %s = %u", index, pRes->GetResourceId().c_str(), pRes->GetCountUses());
+                std::string node = Helper::Format("[%u] %s = %u", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
                 if (isDestroyed) {
                     ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
@@ -52,7 +52,7 @@ namespace Framework::Core::GUI {
             auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
-                const auto node = Helper::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().c_str(), resources.size());
+                const auto node = Helper::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
                 if (ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithChild)) {
                     for (auto &&pRes : resources)
@@ -62,8 +62,8 @@ namespace Framework::Core::GUI {
             };
 
             SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](const auto &groups) {
-                for (const auto& [groupName, info] : groups) {
-                    if (ImGui::TreeNodeEx(groupName.c_str(), m_nodeFlagsWithChild)) {
+                for (const auto& [groupHashName, info] : groups) {
+                    if (ImGui::TreeNodeEx(info.GetName().data(), m_nodeFlagsWithChild)) {
                         uint32_t index = 0;
 
                         for (const auto&[resourceName, pResources] : info.GetCopiesRef()) {

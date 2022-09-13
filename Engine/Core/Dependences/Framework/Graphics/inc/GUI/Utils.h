@@ -74,6 +74,9 @@ namespace SR_GRAPH_NS::GUI {
         if constexpr (std::is_same_v<T, std::string>) {
             string = value;
         }
+        else if constexpr (std::is_same_v<T, std::string_view>) {
+            string = std::string(value);
+        }
         else if constexpr (std::is_same_v<T, SR_UTILS_NS::Path>) {
             string = value.ToString();
         }

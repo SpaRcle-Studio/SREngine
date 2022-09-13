@@ -41,16 +41,16 @@ namespace SR_UTILS_NS {
 
         /// -------------------------------------------------------------
 
-        if (auto &&group = m_copies.find(id); group != m_copies.end()) {
+        if (auto &&group = m_copies.find(id.data()); group != m_copies.end()) {
             group->second.erase(pResource);
         }
         else {
-            SRAssert2(false, "Resource not found! Id: " + id);
+            SRAssert2(false, "Resource not found! Id: " + std::string(id));
             return;
         }
 
-        if (m_copies.at(id).empty()) {
-            m_copies.erase(id);
+        if (m_copies.at(id.data()).empty()) {
+            m_copies.erase(id.data());
         }
 
         /// -------------------------------------------------------------
@@ -67,7 +67,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceType::Add(IResource* pResource) {
-        m_copies[pResource->GetResourceId()].insert(pResource);
+        m_copies[pResource->GetResourceId().data()].insert(pResource);
         m_resources.insert(pResource);
 
         pResource->OnResourceRegistered();

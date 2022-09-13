@@ -11,7 +11,7 @@
 
 namespace SR_GTYPES_NS {
     Material::Material()
-        : SR_UTILS_NS::IResource(typeid(Material).name(), true /** autoRemove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Material), true /** auto remove */)
     { }
 
     void Material::Use() {
@@ -49,12 +49,13 @@ namespace SR_GTYPES_NS {
         return nullptr;
     }
 
-    Material* Material::Load(const std::string &rawPath) {
+    Material* Material::Load(SR_UTILS_NS::Path rawPath) {
         SR_GLOBAL_LOCK
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
 
-        if (auto&& pMaterial = SR_UTILS_NS::ResourceManager::Instance().Find<Material>(path))
+        if (auto&& pMaterial = resourceManager.Find<Material>(path))
             return pMaterial;
 
         auto&& pMaterial = new Material();
@@ -267,7 +268,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool Material::Reload() {
-        SR_LOG("Material::Reload() : reloading \"" + GetResourceId() + "\" material...");
+        SR_LOG("Material::Reload() : reloading \"" + std::string(GetResourceId()) + "\" material...");
 
         m_loadState = LoadState::Reloading;
 

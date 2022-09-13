@@ -110,12 +110,14 @@ namespace SR_WORLD_NS {
 
         SR_HTYPES_NS::DataStorage m_dataStorage        = SR_HTYPES_NS::DataStorage();
 
-        GameObjects               m_gameObjects        = GameObjects();
-        GameObjects               m_rootObjects        = GameObjects();
+        std::list<uint64_t>       m_freeObjIndices;
 
-        Regions                   m_regions            = Regions();
-        Math::IVector2            m_chunkSize          = Math::IVector2();
-        uint32_t                  m_regionWidth        = 0;
+        GameObjects               m_gameObjects;
+        GameObjects               m_rootObjects;
+
+        Regions                   m_regions;
+        Math::IVector2            m_chunkSize = Math::IVector2();
+        uint32_t                  m_regionWidth = 0;
 
     };
 }

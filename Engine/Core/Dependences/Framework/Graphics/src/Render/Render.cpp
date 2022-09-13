@@ -102,13 +102,13 @@ namespace SR_GRAPH_NS {
     }
 
     void Render::RemoveMesh(SR_GTYPES_NS::Mesh *mesh) {
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+        //const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
-        }
+        //if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+        //    SR_LOG("Render::RemoveMesh() : register \"" + mesh->GetResourceId() + "\" mesh to remove...");
+        //}
 
-        m_removeMeshes.push(mesh);
+        //m_removeMeshes.push(mesh);
     }
 
     void Render::RegisterMesh(SR_GTYPES_NS::Mesh *mesh) {
@@ -127,20 +127,20 @@ namespace SR_GRAPH_NS {
         //    }
         //}
 
-        if (!mesh->GetShader()) {
-            SRAssert2(false, "Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
-            return;
-        }
+       //if (!mesh->GetShader()) {
+       //    SRAssert2(false, "Render::RegisterMesh() : mesh have not shader! \n\tResource Id: " + mesh->GetResourceId());
+       //    return;
+       //}
 
-        const std::lock_guard<std::recursive_mutex> lock(m_mutex);
+       //const std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
-            SR_LOG("Render::RegisterMesh() : register new \"" + mesh->GetResourceId() + "\" mesh...");
-        }
+       //if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
+       //    SR_LOG("Render::RegisterMesh() : register new \"" + mesh->GetResourceId() + "\" mesh...");
+       //}
 
-        mesh->AddUsePoint();
-        //mesh->SetRender(this);
-        m_newMeshes.emplace_back(mesh);
+       //mesh->AddUsePoint();
+       ////mesh->SetRender(this);
+       //m_newMeshes.emplace_back(mesh);
     }
 
     void Render::PollEvents() {
@@ -220,60 +220,60 @@ namespace SR_GRAPH_NS {
     }
 
     void Render::SetSkybox(SR_GTYPES_NS::Skybox *skybox) {
-        SR_SCOPED_LOCK
+       //SR_SCOPED_LOCK
 
-        if (skybox == m_skybox) {
-            return;
-        }
+       //if (skybox == m_skybox) {
+       //    return;
+       //}
 
-        if (skybox) {
-            SR_LOG("Render::SetSkybox() : set new \"" + skybox->GetResourceId() + "\" skybox...");
-        }
-        else {
-            SR_LOG("Render::SetSkybox() : set a nullptr skybox...");
-        }
+       //if (skybox) {
+       //    SR_LOG("Render::SetSkybox() : set new \"" + skybox->GetResourceId() + "\" skybox...");
+       //}
+       //else {
+       //    SR_LOG("Render::SetSkybox() : set a nullptr skybox...");
+       //}
 
-        if (m_skybox) {
-            m_skybox->FreeVideoMemory();
-            m_skybox->RemoveUsePoint();
-        }
+       //if (m_skybox) {
+       //    m_skybox->FreeVideoMemory();
+       //    m_skybox->RemoveUsePoint();
+       //}
 
-        if ((m_skybox = skybox)) {
-            m_skybox->AddUsePoint();
-        }
+       //if ((m_skybox = skybox)) {
+       //    m_skybox->AddUsePoint();
+       //}
 
-        m_env->SetBuildState(false);
+       //m_env->SetBuildState(false);
     }
 
     void Render::FreeTexture(SR_GTYPES_NS::Texture *texture) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_GRAPH("Render::FreeTexture() : register texture to remove...");
-        }
-
-        m_texturesToFree.push_back(texture);
+      //  std::lock_guard<std::recursive_mutex> lock(m_mutex);
+//
+      //  if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+      //      SR_GRAPH("Render::FreeTexture() : register texture to remove...");
+      //  }
+//
+      //  m_texturesToFree.push_back(texture);
     }
 
     void Render::RegisterTexture(Types::Texture * texture) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_GRAPH("Render::RegisterTexture() : register new texture...");
-        }
-
-        texture->AddUsePoint();
-        //texture->SetRender(this);
-        m_textures.insert(texture);
+       // std::lock_guard<std::recursive_mutex> lock(m_mutex);
+//
+       // if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+       //     SR_GRAPH("Render::RegisterTexture() : register new texture...");
+       // }
+//
+       // texture->AddUsePoint();
+       // //texture->SetRender(this);
+       // m_textures.insert(texture);
     }
 
     bool Render::FreeSkyboxMemory(SR_GTYPES_NS::Skybox* skybox) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        m_skyboxesToFreeVidMem.emplace_back(skybox);
-
+       // std::lock_guard<std::recursive_mutex> lock(m_mutex);
+//
+       // m_skyboxesToFreeVidMem.emplace_back(skybox);
+//
         return true;
-    }
+    }//
 
     void Render::SetCurrentCamera(Framework::Graphics::Types::Camera *camera)  {
         m_currentCamera = camera;

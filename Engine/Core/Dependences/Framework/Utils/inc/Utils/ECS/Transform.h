@@ -83,7 +83,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual Measurement GetMeasurement() const = 0;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
     protected:
         virtual bool IsDirty() const noexcept;

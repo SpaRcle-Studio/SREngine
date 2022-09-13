@@ -130,18 +130,18 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableFlags flags) const {
-        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::Mesh3D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
 
-        marshal.Write(static_cast<int32_t>(m_type));
+        pMarshal->Write(static_cast<int32_t>(m_type));
 
         /// TODO: use unicode
-        marshal.Write(GetResourcePath().ToString());
-        marshal.Write(m_meshId);
+        pMarshal->Write(GetResourcePath().ToString());
+        pMarshal->Write(m_meshId);
 
-        marshal.Write(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 
-        return marshal;
+        return pMarshal;
     }
 
     SR_UTILS_NS::Component *SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
@@ -156,10 +156,10 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        auto &&pMesh = Mesh::Load(path, type, id);
+        auto &&pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
 
         if (pMesh && material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(material)) {
+            if (auto&& pMaterial = Types::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
             else
@@ -217,7 +217,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool Mesh3D::Reload() {
-        SR_SHADER_LOG("Mesh3D::Reload() : reloading \"" + GetResourceId() + "\" mesh...");
+        SR_SHADER_LOG("Mesh3D::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
 
         m_loadState = LoadState::Reloading;
 

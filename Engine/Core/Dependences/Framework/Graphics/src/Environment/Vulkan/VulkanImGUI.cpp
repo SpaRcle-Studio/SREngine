@@ -176,7 +176,7 @@ void Framework::Graphics::VulkanTypes::VkImGUI::Free() {
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t height) {
-    SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...");
+    SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...\n\tWidth: " + std::to_string(width) + "\n\tHeight: " + std::to_string(height));
 
     if (!m_device || !m_swapchain) {
         SR_ERROR("VkImGUI::ReSize() : device or swapchain is nullptr!");
@@ -225,6 +225,8 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t 
             .clearValueCount = static_cast<uint32_t>(m_clearValues.size()),
             .pClearValues = m_clearValues.data(),
     };
+
+    m_surfaceDirty = false;
 
     return true;
 }

@@ -9,14 +9,14 @@
 #include <Utils/Types/Thread.h>
 
 namespace SR_UTILS_NS {
-    SR_HTYPES_NS::Marshal Component::Save(SavableFlags flags) const {
-        auto marshal = Entity::Save(flags);
+    SR_HTYPES_NS::Marshal::Ptr Component::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
+        pMarshal = Entity::Save(pMarshal, flags);
 
-        marshal.Write(m_name);
-        marshal.Write(IsEnabled());
-        marshal.Write<uint16_t>(ComponentManager::Instance().GetVersion(this));
+        pMarshal->Write(m_name);
+        pMarshal->Write(IsEnabled());
+        pMarshal->Write<uint16_t>(ComponentManager::Instance().GetVersion(this));
 
-        return marshal;
+        return pMarshal;
     }
 
     void Component::SetParent(GameObject *parent) {

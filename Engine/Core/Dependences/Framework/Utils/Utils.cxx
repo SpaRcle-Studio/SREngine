@@ -60,6 +60,7 @@
 #include "../Utils/src/Utils/Common/SingletonHolder.cpp"
 #include "../Utils/src/Utils/Common/Enumerations.cpp"
 #include "../Utils/src/Utils/Common/EnumReflector.cpp"
+#include "../Utils/src/Utils/Common/Hashes.cpp"
 
 #include "../Utils/src/Utils/World/Chunk.cpp"
 #include "../Utils/src/Utils/World/Observer.cpp"

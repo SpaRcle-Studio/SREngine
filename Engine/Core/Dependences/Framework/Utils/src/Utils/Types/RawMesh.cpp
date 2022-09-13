@@ -10,7 +10,7 @@
 
 namespace SR_HTYPES_NS {
     RawMesh::RawMesh()
-        : IResource(typeid(RawMesh).name(), true /** auto destroy */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh), true /** auto remove */)
     {
         m_importer = new Assimp::Importer();
     }
@@ -236,7 +236,7 @@ namespace SR_HTYPES_NS {
     bool RawMesh::Reload() {
         SR_LOCK_GUARD
 
-        SR_LOG("RawMesh::Reload() : reloading \"" + GetResourceId() + "\" raw mesh...");
+        SR_LOG("RawMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" raw mesh...");
 
         m_loadState = LoadState::Reloading;
 

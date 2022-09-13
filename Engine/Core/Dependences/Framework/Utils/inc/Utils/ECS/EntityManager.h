@@ -98,16 +98,16 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual std::list<EntityBranch> GetEntityBranches() const { return {}; }
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal Save(SavableFlags flags) const override {
-            SR_HTYPES_NS::Marshal marshal;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override {
+            pMarshal = ISavable::Save(pMarshal, flags);
 
             if (!(flags & SAVABLE_FLAG_ECS_NO_ID)) {
-                marshal.Write(static_cast<uint64_t>(GetEntityId()));
+                pMarshal->Write(static_cast<uint64_t>(GetEntityId()));
             }
             else
-                marshal.Write(static_cast<uint64_t>(ENTITY_ID_MAX));
+                pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));
 
-            return marshal;
+            return pMarshal;
         }
 
     private:

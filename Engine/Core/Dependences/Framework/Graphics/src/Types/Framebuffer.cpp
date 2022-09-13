@@ -8,7 +8,7 @@
 
 namespace SR_GTYPES_NS {
     Framebuffer::Framebuffer()
-        : Super(typeid(Framebuffer).name(), true /** auto destroy */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Framebuffer), true /** auto remove */)
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
     }

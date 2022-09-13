@@ -139,11 +139,11 @@ namespace Framework {
 
         m_isRun = true;
 
-        //if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
-        //    SR_INFO("Engine::Run() : running world thread...");
-        //
-        //    m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
-        //}
+        if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
+            SR_INFO("Engine::Run() : running world thread...");
+
+            m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
+        }
 
         return true;
     }
@@ -190,12 +190,12 @@ namespace Framework {
         }
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
-        //if (m_worldThread) {
-        //    SR_INFO("Engine::Close() : destroying world thread...");
-        //    m_worldThread->TryJoin();
-        //    m_worldThread->Free();
-        //    m_worldThread = nullptr;
-        //}
+        if (m_worldThread) {
+            SR_INFO("Engine::Close() : destroying world thread...");
+            m_worldThread->TryJoin();
+            m_worldThread->Free();
+            m_worldThread = nullptr;
+        }
 
         if (m_window && m_window->IsRun()) {
             m_window->Close();
@@ -214,30 +214,11 @@ namespace Framework {
 
         SR_HTYPES_NS::Time::Instance().Update();
 
-        m_mainCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
-            if (auto&& pCamera = ptr->GetMainCamera()) {
-                return pCamera;
-            }
-
-            return ptr->GetFirstOffScreenCamera();
-        }, nullptr);
-
         if (m_scene.LockIfValid()) {
             const auto now = SR_HTYPES_NS::Time::Instance().Now();
             const auto deltaTime = now - m_timeStart;
             const auto dt = static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
             m_timeStart = now;
-
-            if (m_worldTimer.Update() && m_mainCamera) {
-                if (auto &&gameObject = m_mainCamera->GetParent()) {
-                    if (gameObject->TryRecursiveLockIfValid()) {
-                        m_scene->SetObserver(gameObject->GetThis());
-                        gameObject->Unlock();
-                    }
-                }
-
-                m_scene->Update(m_worldTimer.GetDeltaTime());
-            }
 
             Prepare();
 
@@ -349,7 +330,29 @@ namespace Framework {
         while (m_isRun) {
             SR_HTYPES_NS::Thread::Sleep(250);
 
+            m_mainCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
+                if (auto&& pCamera = ptr->GetMainCamera()) {
+                    return pCamera;
+                }
 
+                return ptr->GetFirstOffScreenCamera();
+            }, nullptr);
+
+            if (!m_mainCamera) {
+                continue;
+            }
+
+            if (m_worldTimer.Update() && m_scene.LockIfValid()) {
+                if (auto &&gameObject = m_mainCamera->GetParent()) {
+                    if (gameObject->TryRecursiveLockIfValid()) {
+                        m_scene->SetObserver(gameObject->GetThis());
+                        gameObject->Unlock();
+                    }
+                }
+
+                m_scene->Update(m_worldTimer.GetDeltaTime());
+                m_scene.Unlock();
+            }
         }
 
         SR_SYSTEM_LOG("Engine::WorldThread() : world thread completed!");

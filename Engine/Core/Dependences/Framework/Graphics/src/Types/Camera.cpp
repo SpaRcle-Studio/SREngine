@@ -53,15 +53,15 @@ namespace SR_GTYPES_NS {
         Component::OnDestroy();
     }
 
-    SR_HTYPES_NS::Marshal Camera::Save(Framework::Helper::SavableFlags flags) const {
-        SR_HTYPES_NS::Marshal marshal = Component::Save(flags);
+    SR_HTYPES_NS::Marshal::Ptr Camera::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
 
-        marshal.Write(m_far);
-        marshal.Write(m_near);
-        marshal.Write(m_FOV);
-        marshal.Write(m_priority);
+        pMarshal->Write(m_far);
+        pMarshal->Write(m_near);
+        pMarshal->Write(m_FOV);
+        pMarshal->Write(m_priority);
 
-        return marshal;
+        return pMarshal;
     }
 
     SR_UTILS_NS::Component * Camera::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {

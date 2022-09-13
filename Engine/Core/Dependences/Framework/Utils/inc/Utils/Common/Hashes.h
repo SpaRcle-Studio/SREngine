@@ -78,6 +78,10 @@ namespace SR_UTILS_NS {
 
             return ~crc;
         }
+
+        template<class T> constexpr std::string_view GetTypeName() {
+            return SR_FUNCTION_SIGNATURE;
+        }
     }
 
     template<typename T> uint64_t HashCombine(const T& value, uint64_t hash = 0) {
@@ -90,7 +94,15 @@ namespace SR_UTILS_NS {
     }
 }
 
-#define SR_COMPILE_TIME_CRC32_STR(x) (SR_UTILS_NS::Hash::Detail::MM<sizeof(x)-1>::crc32(x))
-#define SR_RUNTIME_TIME_CRC32_STR(x) (SR_UTILS_NS::Hash::Detail::crc32(x))
+#define SR_COMPILE_TIME_CRC32_STR(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::MM<sizeof(x)-1>::crc32(x)))
+#define SR_RUNTIME_TIME_CRC32_STR(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::crc32(x)))
+
+#define SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::MM<x.size()>::crc32(x.data())))
+
+#define SR_COMPILE_TIME_CRC32_TYPE_NAME(x) (SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(SR_UTILS_NS::Hash::Detail::GetTypeName<x>()))
+#define SR_RUNTIME_TIME_CRC32_TYPE_NAME(x) (SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(SR_UTILS_NS::Hash::Detail::GetTypeName<x>()))
+
+#define SR_COMPILE_TIME_CRC32_STD_STR(x) (SR_COMPILE_TIME_CRC32_STR(x.c_str()))
+#define SR_RUNTIME_TIME_CRC32_STD_STR(x) (SR_RUNTIME_TIME_CRC32_STR(x.c_str()))
 
 #endif //SRENGINE_HASHES_H
