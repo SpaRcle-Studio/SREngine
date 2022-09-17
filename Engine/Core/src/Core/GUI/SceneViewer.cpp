@@ -37,8 +37,9 @@ namespace SR_CORE_NS::GUI {
                 m_id = pFramebuffer->GetColorTexture(0);
             }
 
-            if (pCamera && m_id != SR_ID_INVALID && pCamera->IsActive()) {
-                m_guizmo->DrawTools();
+            if (pCamera && m_id != SR_ID_INVALID && pCamera->IsActive()) 
+            {
+                m_guizmo->DrawTools(); //Отрисовка панели с переключателями
 
                 ImGui::BeginGroup();
 
@@ -129,7 +130,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize)        {
+    void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
         const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
         const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
 
@@ -149,10 +150,11 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& env = SR_GRAPH_NS::Environment::Get();
-        if (env->GetPipeLine() == Graphics::PipeLine::OpenGL)
+        if (env->GetPipeLine() == Graphics::PipeLine::OpenGL) {
             DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
-        else {
-            DrawImage(env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+        }
+        else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
+            DrawImage(pDescriptor, ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
         }
     }
 

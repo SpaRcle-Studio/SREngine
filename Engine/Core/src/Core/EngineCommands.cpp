@@ -10,12 +10,79 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Render/RenderScene.h>
 
+#include <utility>
+
+
 bool Framework::Core::Commands::GameObjectRename::Redo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        ptr->SetName(m_newName);
+        return true;
+    }
+
     return false;
 }
 
 bool Framework::Core::Commands::GameObjectRename::Undo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        ptr->SetName(m_previousName);
+        return true;
+    }
     return false;
+}
+
+Framework::Core::Commands::GameObjectRename::GameObjectRename(const SR_UTILS_NS::GameObject::Ptr& ptr, SR_UTILS_NS::GameObject::Name newName) {
+    m_path = ptr->GetEntityPath();
+    m_previousName = ptr->GetName();
+    m_newName = std::move(newName);
+}
+
+//!-------------------------------------------------------
+
+bool Framework::Core::Commands::GameObjectEnable::Redo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        ptr->SetEnabled(m_newEnabled);
+        return true;
+    }
+
+    return false;
+}
+
+bool Framework::Core::Commands::GameObjectEnable::Undo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        ptr->SetEnabled(m_previousEnabled);
+        return true;
+    }
+    return false;
+}
+
+Framework::Core::Commands::GameObjectEnable::GameObjectEnable(const SR_UTILS_NS::GameObject::Ptr& ptr, bool newEnabled) {
+    m_path = ptr->GetEntityPath();
+    m_previousEnabled = ptr->IsEnabled();
+    m_newEnabled = newEnabled;
 }
 
 //!-------------------------------------------------------

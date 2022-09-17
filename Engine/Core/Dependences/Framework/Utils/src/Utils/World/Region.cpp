@@ -243,4 +243,14 @@ namespace SR_WORLD_NS {
     Region::ScenePtr Region::GetScene() const {
         return m_observer->m_scene;
     }
+
+    bool Region::IsChunkLoaded(const SR_MATH_NS::IVector3 &chunk) const {
+        if (auto&& pChunkIt = m_loadedChunks.find(chunk); pChunkIt != m_loadedChunks.end()) {
+            if (auto&& pChunk = pChunkIt->second) {
+                return pChunk->GetState() != Chunk::LoadState::Unload;
+            }
+        }
+
+        return false;
+    }
 }

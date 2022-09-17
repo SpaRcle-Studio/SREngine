@@ -53,6 +53,7 @@ namespace SR_WORLD_NS {
 
         SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat("regions"); }
         SR_NODISCARD Path GetPath() const { return m_path; }
+        SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }

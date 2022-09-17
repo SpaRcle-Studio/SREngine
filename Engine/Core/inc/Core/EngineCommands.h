@@ -19,14 +19,57 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_CORE_NS::Commands {
+    class GameObjectTransform : public SR_UTILS_NS::ReversibleCommand {
+    public:
+        GameObjectTransform() = default;
+        explicit GameObjectTransform(const SR_UTILS_NS::GameObject::Ptr& ptr);
+
+        ~GameObjectTransform() override = default;
+
+        bool Redo() override;
+        bool Undo() override;
+
+        std::string GetName() override { return "GameObjectTransform"; }
+
+    private:
+        SR_UTILS_NS::EntityPath m_path;
+
+    };
+    
+    class GameObjectEnable : public SR_UTILS_NS::ReversibleCommand {
+    public:
+        GameObjectEnable() = default;
+        explicit GameObjectEnable(const SR_UTILS_NS::GameObject::Ptr& ptr, bool newEnabled);
+
+        ~GameObjectEnable() override = default;
+
+        bool Redo() override;
+        bool Undo() override;
+
+        std::string GetName() override { return "GameObjectEnable"; }
+
+    private:
+        SR_UTILS_NS::EntityPath m_path;
+        bool m_newEnabled = false;
+        bool m_previousEnabled = false;
+    };
+    
     class GameObjectRename : public SR_UTILS_NS::ReversibleCommand {
     public:
+        GameObjectRename() = default;
+        explicit GameObjectRename(const SR_UTILS_NS::GameObject::Ptr& ptr, SR_UTILS_NS::GameObject::Name newName);
+
         ~GameObjectRename() override = default;
 
         bool Redo() override;
         bool Undo() override;
 
         std::string GetName() override { return "GameObjectRename"; }
+
+    private:
+        SR_UTILS_NS::EntityPath m_path;
+        SR_UTILS_NS::GameObject::Name m_previousName;
+        SR_UTILS_NS::GameObject::Name m_newName;
     };
 
     class GameObjectDelete : public SR_UTILS_NS::ReversibleCommand {

@@ -42,8 +42,9 @@ namespace SR_CORE_NS::GUI {
     void FileBrowser::LoadElements(const SR_UTILS_NS::Path& root) {
         m_elements.clear();
         for (const auto &path : root.GetAll()) {
-            if (path.GetBaseName().empty())
+            if (path.GetBaseName().empty()) {
                 continue;
+            }
             else {
                 Element current;
 
@@ -57,24 +58,27 @@ namespace SR_CORE_NS::GUI {
 
                 current.cutname = SR_UTILS_NS::StringUtils::CutName(current.filename, 8);
 
-                if (path.GetExtension().empty()) { //TODO Сделать красивым
+                auto&& extension = path.GetExtensionView();
+
+                if (extension.empty()) { //TODO Сделать красивым
                     path.IsEmpty() ? current.icontype = Core::EditorIcon::EmptyFolder
                                     : current.icontype = Core::EditorIcon::Folder;
-                } else if (path.GetExtension() == "zip") {
+                } else if (extension == "zip") {
                     current.icontype = Core::EditorIcon::ZIP;
-                } else if ((path.GetExtension() == "jpg") || (path.GetExtension() == "jpeg")) {
+                } else if ((extension == "jpg") || (extension == "jpeg")) {
                     current.icontype = Core::EditorIcon::JPG;
-                } else if (path.GetExtension() == "txt") {
+                } else if (extension == "txt") {
                     current.icontype = Core::EditorIcon::TXT;
-                } else if (path.GetExtension() == "xml") {
+                } else if (extension == "xml") {
                     current.icontype = Core::EditorIcon::XML;
-                } else if (path.GetExtension() == "png") {
+                } else if (extension == "png") {
                     current.icontype = Core::EditorIcon::PNG;
-                } else if (path.GetExtension() == "dll") {
+                } else if (extension == "dll") {
                     current.icontype = Core::EditorIcon::DLL;
                 } else {
                     current.icontype = Core::EditorIcon::File;
                 }
+                
                 m_elements.emplace_back(current);
             }
         }
@@ -122,8 +126,8 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::LoadFoldersTree(Folder& parentFolder) {
         const auto &folders = parentFolder.path.GetFolders();
-        for (const auto &path : folders) {
-
+        for (const auto &path : folders) 
+        {
             Folder currentfolder;
             currentfolder.path = path;
             currentfolder.filename = path.GetBaseName();
@@ -135,8 +139,9 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::FileContextMenu(const std::string &filename){
-        if (!ImGui::BeginPopupContextItem())
+        if (!ImGui::BeginPopupContextItem()) {
             return;
+        }
 
         if (ImGui::Selectable("Open")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
@@ -172,8 +177,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::CurrentDirectoryPanel(const float_t height) { //height используется и как ширина Refresh Button
-        if (ImGui::BeginChild("current directory panel", ImVec2(0.f, height))) {
-
+        if (ImGui::BeginChild("current directory panel", ImVec2(0.f, height))) 
+        {
             ImGui::Separator();
             //Back Button
             if (ImGui::Button("Back")) {
@@ -186,8 +191,7 @@ namespace SR_CORE_NS::GUI {
             //Refresh Button
             ImGui::SameLine();
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x - height);
-            if (GUISystem::Instance().ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset),
-                                                    height-10.f)){
+            if (GUISystem::Instance().ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), height-10.f)){
                 m_dirtySelectedDir = true;
                 m_dirtyFoldersTree = true;
             }
@@ -197,8 +201,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::ItemViewPanel() {
-        if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) {
-
+        if (ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()))) 
+        {
             ImGui::Separator();
 
             CurrentDirectoryContextMenu();
@@ -216,34 +220,32 @@ namespace SR_CORE_NS::GUI {
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.icontype);
 
-
                     if (GUISystem::Instance().ImageButtonDouble(headerid,
                             descriptor, SR_MATH_NS::IVector2(50), 0)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
                     }
-                    FileContextMenu(element.filename);
-                } else {
 
+                    FileContextMenu(element.filename);
+                }
+                else
+                {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.icontype);
 
-                    //SR_FORMAT("##FileBrowserElement%s", element.filename.c_str())
-                    if (GUISystem::Instance().ImageButtonDouble(headerid, descriptor,
-                                                                SR_MATH_NS::IVector2(50), 0)) {
+                    if (GUISystem::Instance().ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
                         SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
                     }
 
                     FileContextMenu(element.filename);
                 }
 
-
-
                 ImGui::Text("%s", element.cutname.c_str());
 
                 ImGui::EndGroup();
 
-                if ((ImGui::GetItemRectSize().x * index) + m_assetWidth < wndSize.x)
+                if ((ImGui::GetItemRectSize().x * index) + m_assetWidth < wndSize.x) {
                     ImGui::SameLine();
+                }
                 else
                     index = 1;
 
@@ -258,8 +260,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {
-        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) {
-
+        if (ImGui::BeginChild("left panel", ImVec2(leftWidth, 0), true)) 
+        {
             ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize());
 
             DrawFoldersTree(m_foldersTree);
@@ -349,7 +351,8 @@ namespace SR_CORE_NS::GUI {
             LoadFoldersTree(m_foldersTree);
             m_dirtyFoldersTree = false;
         }
-        FileCatalogPanel(leftWidth);
+
+        FileCatalogPanel(leftWidth); //Отрисовка панели файлового древа
 
         float_t windowWidth = ImGui::GetWindowWidth();          //код для исключения ошибок ImGui
         if (leftWidth > windowWidth - 40)                       //проверяет ширину панели каталога файлов
@@ -361,7 +364,7 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::BeginGroup();
 
-        CurrentDirectoryPanel(22);
+        CurrentDirectoryPanel(22); //Отрисовка панели нынешней директории
 
         auto&& DirectoryPanelHeight = ImGui::GetWindowHeight(); //код для исключения ошибок ImGui
         if (DirectoryPanelHeight < 50) {                        //проверяет высоту панели нынешней директории
@@ -373,13 +376,7 @@ namespace SR_CORE_NS::GUI {
             LoadElements(m_selectedDir);
             m_dirtySelectedDir = false;
         }
-        ItemViewPanel();
-
-        /*ImGui::BeginChild("buttons");
-        if (ImGui::Button("Revert")) {}
-        ImGui::SameLine();
-        if (ImGui::Button("Save")) {}
-        ImGui::EndChild();*/
+        ItemViewPanel(); //Отрисовка панели файлового древа
 
         ImGui::EndGroup();
     }

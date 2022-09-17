@@ -132,6 +132,9 @@ namespace SR_GRAPH_NS {
             SortCameras();
         }
 
+        m_opaque.Update();
+        m_transparent.Update();
+
         SR_RENDER_TECHNIQUES_CALL(Prepare)
     }
 

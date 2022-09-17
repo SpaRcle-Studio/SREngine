@@ -15,19 +15,22 @@ namespace SR_GRAPH_NS::GUI {
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
 
         const ImVec4 activeColor = ImVec4(0.20, 0.35, 0.20, 1);
+        const ImVec4 notActiveColor = ImVec4(0.25, 0.25, 0.25, 1);
+        const ImVec4 toggleActiveColor = ImVec4(0.60, 0.50, 0.25, 1);
+        const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
 
         if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
-            if (GUI::Button("T", IsTranslate() ? activeColor : ImVec4(0.25, 0.25, 0.25, 1)))
+            if (GUI::Button("T", IsTranslate() ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::TRANSLATE);
 
             ImGui::SameLine();
 
-            if (GUI::Button("R", IsRotate() ? activeColor : ImVec4(0.25, 0.25, 0.25, 1)))
+            if (GUI::Button("R", IsRotate() ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::ROTATE);
 
             ImGui::SameLine();
 
-            if (GUI::Button(IsBounds() ? "S+" : "S", (IsScale() || IsBounds()) ? activeColor : ImVec4(0.25, 0.25, 0.25, 1))) {
+            if (GUI::Button(IsBounds() ? "S+" : "S", (IsScale() || IsBounds()) ? activeColor : notActiveColor)) {
                 if (IsScale())
                     SetOperation(ImGuizmo::OPERATION::BOUNDS);
                 else
@@ -36,12 +39,12 @@ namespace SR_GRAPH_NS::GUI {
 
             ImGui::SameLine();
 
-            if (GUI::Button("U", IsUniversal() ? activeColor : ImVec4(0.25, 0.25, 0.25, 1)))
+            if (GUI::Button("U", IsUniversal() ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::UNIVERSAL);
 
             ImGui::SameLine();
 
-            if (GUI::Button("L", IsLocal() ? activeColor : ImVec4(0.25, 0.25, 0.25, 1))) {
+            if (GUI::Button("L", IsLocal() ? toggleActiveColor : toggleNotActiveColor)) {
                 if (IsLocal())
                     SetMode(ImGuizmo::MODE::WORLD);
                 else
@@ -50,7 +53,7 @@ namespace SR_GRAPH_NS::GUI {
 
             ImGui::SameLine();
 
-            if (GUI::Button("C", IsCenter() ? activeColor : ImVec4(0.25, 0.25, 0.25, 1)))
+            if (GUI::Button("C", IsCenter() ? toggleActiveColor : toggleNotActiveColor))
                 m_center = !m_center;
 
             ImGui::EndChild();

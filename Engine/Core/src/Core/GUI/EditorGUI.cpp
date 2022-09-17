@@ -160,7 +160,6 @@ namespace SR_CORE_NS::GUI {
 
     void EditorGUI::Enable(bool value) {
         if (m_enabled != value) {
-            m_window->Synchronize();
             GetWindow<SceneViewer>()->Enable(value);
             m_enabled = value;
         }

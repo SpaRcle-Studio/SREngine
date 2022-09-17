@@ -7,6 +7,7 @@
 
 #include <Environment/PipeLine.h>
 
+#include <Utils/Math/Matrix4x4.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ECS/Component.h>
@@ -71,6 +72,7 @@ namespace SR_GTYPES_NS {
 
         void OnAttached() override;
         void OnDestroy() override;
+        void OnMatrixDirty() override;
 
     public:
         SR_NODISCARD virtual bool IsCanCalculate() const;
@@ -83,8 +85,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const;
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const;
 
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
@@ -107,6 +109,9 @@ namespace SR_GTYPES_NS {
 
         RenderScenePtr               m_renderScene;
         RenderContextPtr             m_context;
+
+        SR_MATH_NS::Matrix4x4        m_modelMatrix       = SR_MATH_NS::Matrix4x4::Identity();
+        SR_MATH_NS::FVector3         m_translation       = SR_MATH_NS::FVector3::Zero();
 
         SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
         /// Контекст будет задан только после регистрации в RenderScene

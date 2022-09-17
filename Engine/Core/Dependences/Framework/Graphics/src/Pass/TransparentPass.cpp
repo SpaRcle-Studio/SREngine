@@ -17,7 +17,6 @@ namespace SR_GRAPH_NS {
     { }
 
     bool TransparentPass::PreRender() {
-        GetRenderScene()->GetTransparent().Update();
         return false;
     }
 

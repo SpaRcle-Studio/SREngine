@@ -44,6 +44,7 @@ namespace SR_UTILS_NS {
         friend class Transform;
         friend class Component;
     public:
+        using Name = std::string;
         using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using Super = Ptr;
         using GameObjects = std::vector<GameObject::Ptr>;
@@ -146,7 +147,7 @@ namespace SR_UTILS_NS {
 
         Components         m_components = { };
 
-        std::string        m_name;
+        Name               m_name;
         std::string        m_tag;
 
         GameObjectFlagBits m_flags = GAMEOBJECT_FLAG_NONE;

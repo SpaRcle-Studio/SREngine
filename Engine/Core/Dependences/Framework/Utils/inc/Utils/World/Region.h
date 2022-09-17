@@ -59,6 +59,7 @@ namespace SR_UTILS_NS {
             SR_NODISCARD Math::IVector3 GetPosition() const { return m_position; }
             SR_NODISCARD Math::IVector3 GetWorldPosition() const;
             SR_NODISCARD bool ContainsObserver() const { return m_containsObserver; }
+            SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& chunk) const;
             SR_NODISCARD ScenePtr GetScene() const;
 
             SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save() const;

@@ -176,9 +176,29 @@ namespace SR_GRAPH_NS {
 
         Helper::Math::IVector2 GetScreenSize() const override;
 
-        //[[nodiscard]] int32_t GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const override;
-        [[nodiscard]] InternalTexture GetTexture(uint32_t id) const override;
-        [[nodiscard]] void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const override {
+        SR_NODISCARD InternalTexture GetTexture(uint32_t id) const override;
+
+        SR_NODISCARD void* TryGetDescriptorSetFromTexture(uint32_t id, bool imgui) const override {
+            if (id == SR_ID_INVALID) {
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : invalid id!");
+                return nullptr;
+            }
+
+            if (!imgui) {
+                SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : todo!");
+                return nullptr;
+            }
+
+            if (auto texture = m_memory->m_textures[id]) {
+                auto&& layout = ((ImGui_ImplVulkan_Data*)ImGui::GetIO().BackendRendererUserData)->DescriptorSetLayout;
+                return reinterpret_cast<void *>(texture->GetDescriptorSet(layout).m_self);
+            }
+            else {
+                return nullptr;
+            }
+        }
+
+        SR_NODISCARD void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const override {
             if (id == SR_ID_INVALID) {
                 SR_ERROR("Vulkan::GetDescriptorSetFromTexture() : invalid id!");
                 return nullptr;

@@ -20,8 +20,6 @@ namespace SR_GRAPH_NS {
 
         auto&& transparent = GetRenderScene()->GetTransparent();
 
-        transparent.Update();
-
         m_sorted.Clear();
 
         for (auto const& [shader, subCluster] : transparent) {

@@ -27,12 +27,15 @@ namespace Framework::Core::GUI {
 
         if (m_gameObject.TryRecursiveLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
-                m_gameObject->SetEnabled(v);
+                auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
+                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);;
             }
 
             std::string gm_name = m_gameObject->GetName();
-            if (ImGui::InputText("Name", &gm_name))
-                m_gameObject->SetName(gm_name);
+            if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
+                auto&& cmd = new Framework::Core::Commands::GameObjectRename(m_gameObject, gm_name);
+                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+            }
 
             ImGui::Text("Entity id: %llu", m_gameObject->GetEntityId());
 

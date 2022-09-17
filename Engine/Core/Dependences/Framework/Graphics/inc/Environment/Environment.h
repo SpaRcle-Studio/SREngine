@@ -135,6 +135,7 @@ namespace SR_GRAPH_NS {
 
         //[[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
         [[nodiscard]] virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
+        [[nodiscard]] virtual void* TryGetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
         [[nodiscard]] virtual void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
 
         /// Get descriptor set from dynamic texture descriptor set

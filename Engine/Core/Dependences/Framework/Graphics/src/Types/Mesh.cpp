@@ -59,8 +59,12 @@ namespace SR_GRAPH_NS::Types {
         Mesh *pMesh = nullptr;
 
         if ((pMesh = resourceManager.Find<Mesh>(resourceId))) {
-            SRVerifyFalse(!(pMesh = reinterpret_cast<Mesh *>(pMesh->Copy(nullptr))));
-            return pMesh;
+            if ((pMesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr)))) {
+                return pMesh;
+            }
+            else {
+                SRHalt("Mesh::TryLoad() : failed to copy mesh!");
+            }
         }
 
         bool exists = false;
@@ -174,13 +178,13 @@ namespace SR_GRAPH_NS::Types {
 
     SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
         if (IsDestroyed()) {
-            SR_ERROR("Mesh::Copy() : mesh is already destroyed!");
+            SRHalt("Mesh::Copy() : mesh is already destroyed!");
             return nullptr;
         }
 
         Mesh *mesh = reinterpret_cast<Mesh *>(destination);
         if (!mesh) {
-            SR_ERROR("Mesh::Copy() : impossible to copy basic mesh!");
+            SRHalt("Mesh::Copy() : impossible to copy basic mesh!");
             return nullptr;
         }
 
@@ -293,24 +297,27 @@ namespace SR_GRAPH_NS::Types {
     }
 
     const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
-        if (auto&& pTransform = GetTransform()) {
-            return pTransform->GetMatrix();
-        }
-
-        static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
-        return matrix4X4;
+        return m_modelMatrix;
     }
 
     bool Mesh::ExecuteInEditMode() const {
         return true;
     }
 
-    SR_MATH_NS::FVector3 Mesh::GetTranslation() const {
-        if (auto&& pParent = GetParent()) {
-            return pParent->GetTransform()->GetTranslation();
+    void Mesh::OnMatrixDirty() {
+        if (auto&& pTransform = GetTransform()) {
+            m_modelMatrix = pTransform->GetMatrix();
+            m_translation = pTransform->GetTranslation();
+        }
+        else {
+            SRHalt("Component have not transform, but OnMatrixDirty was called!");
         }
 
-        return SR_MATH_NS::FVector3::Zero();
+        Component::OnMatrixDirty();
+    }
+
+    SR_MATH_NS::FVector3 Mesh::GetTranslation() const {
+        return m_translation;
     }
 }
 

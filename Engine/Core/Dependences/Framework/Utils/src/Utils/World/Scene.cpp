@@ -576,4 +576,16 @@ namespace SR_WORLD_NS {
 
         return m_regions.at(region);
     }
+
+    bool Scene::IsChunkLoaded(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) const {
+        if (m_regions.find(region) == m_regions.end()) {
+            return false;
+        }
+
+        if (auto&& pRegion = m_regions.at(region)) {
+            return pRegion->IsChunkLoaded(chunk);
+        }
+
+        return false;
+    }
 }
