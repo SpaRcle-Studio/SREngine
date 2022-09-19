@@ -37,7 +37,9 @@
 #include <UI/Sprite2D.h>
 
 #include <Physics/3D/Rigidbody3D.h>
+#include <Physics/3D/BoxCollider3D.h>
 #include <Physics/PhysicsScene.h>
+
 #include <Utils/Types/RawMesh.h>
 #include <Types/Texture.h>
 #include <Loaders/SRSL.h>
@@ -148,6 +150,7 @@ int main(int argc, char **argv) {
     {
         ComponentManager::Instance().RegisterComponent<ProceduralMesh>([]() -> ProceduralMesh* { return new ProceduralMesh(); });
         ComponentManager::Instance().RegisterComponent<Rigidbody3D>([]() -> Rigidbody3D* { return new Rigidbody3D(); });
+        ComponentManager::Instance().RegisterComponent<BoxCollider3D>([]() -> BoxCollider3D* { return new BoxCollider3D(); });
         ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return new Mesh3D(); });
         ComponentManager::Instance().RegisterComponent<Sprite2D>([]() -> Sprite2D* { return new Sprite2D(); });
         ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });

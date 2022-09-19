@@ -87,7 +87,7 @@ namespace SR_GRAPH_NS {
         bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
-        void Update();
+        bool Update();
 
     protected:
         virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) = 0;

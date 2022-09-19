@@ -356,6 +356,8 @@
 
         pComponent->SetParent(this);
         pComponent->OnAttached();
+        pComponent->OnMatrixDirty();
+
         SetDirty(true);
 
         return true;
@@ -417,6 +419,8 @@
 
                 destination->SetParent(this);
                 destination->OnAttached();
+                destination->OnMatrixDirty();
+
                 SetDirty(true);
 
                 return true;

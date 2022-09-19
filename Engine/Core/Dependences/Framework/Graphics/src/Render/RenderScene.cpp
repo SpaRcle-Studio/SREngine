@@ -132,8 +132,13 @@ namespace SR_GRAPH_NS {
             SortCameras();
         }
 
-        m_opaque.Update();
-        m_transparent.Update();
+        if (m_opaque.Update()) {
+            SetDirty();
+        }
+
+        if (m_transparent.Update()) {
+            SetDirty();
+        }
 
         SR_RENDER_TECHNIQUES_CALL(Prepare)
     }

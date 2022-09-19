@@ -8,5 +8,6 @@
 #include "src/Physics/Base/Collider.cpp"
 
 #include "src/Physics/3D/Rigidbody3D.cpp"
+#include "src/Physics/3D/BoxCollider3D.cpp"
 
 #include "src/Physics/PhysicsScene.cpp"

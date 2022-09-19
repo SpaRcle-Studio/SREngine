@@ -128,7 +128,9 @@ namespace SR_GRAPH_NS {
         return m_subClusters.empty();
     }
 
-    void MeshCluster::Update() {
+    bool MeshCluster::Update() {
+        bool dirty = false;
+
         for (auto pInvalidIt = m_invalid.begin(); pInvalidIt != m_invalid.end(); ) {
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::IndexedMesh*>(*pInvalidIt);
 
@@ -139,11 +141,15 @@ namespace SR_GRAPH_NS {
 
                 pMesh->RemoveUsePoint();
                 pInvalidIt = m_invalid.erase(pInvalidIt);
+
+                dirty = true;
             }
             else if (pMesh->GetVBO<false>() != SR_ID_INVALID) {
                 Add(pMesh);
                 pMesh->RemoveUsePoint();
                 pInvalidIt = m_invalid.erase(pInvalidIt);
+
+                dirty = true;
             }
             else {
                 ++pInvalidIt;
@@ -171,6 +177,8 @@ namespace SR_GRAPH_NS {
                         }
 
                         pMeshIt = group.erase(pMeshIt);
+
+                        dirty = true;
                         continue;
                     }
 
@@ -184,6 +192,7 @@ namespace SR_GRAPH_NS {
                         /// use-point от старого саб кластера
                         pMesh->RemoveUsePoint();
                         pMeshIt = group.erase(pMeshIt);
+                        dirty = true;
                     }
                     /// Мигрируем меш в другой саб кластер
                     else if (pMesh->GetVBO<false>() != vbo || pMaterial->GetShader() != pShader) {
@@ -191,6 +200,7 @@ namespace SR_GRAPH_NS {
                         Add(pMesh);
                         /// use-point от старого саб кластера
                         pMesh->RemoveUsePoint();
+                        dirty = true;
                         goto repeat;
                     }
                     else {
@@ -213,6 +223,8 @@ namespace SR_GRAPH_NS {
                 ++pSubClusterIt;
             }
         }
+
+        return dirty;
     }
 
     bool OpaqueMeshCluster::ChangeCluster(MeshCluster::MeshPtr pMesh) {

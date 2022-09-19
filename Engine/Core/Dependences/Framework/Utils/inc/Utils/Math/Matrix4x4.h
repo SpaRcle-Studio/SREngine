@@ -20,7 +20,9 @@ namespace SR_MATH_NS {
             return Matrix4x4(glm::translate(matrix, { 0, 0, 0 }));
         }
 
-        glm::mat4 self = glm::mat4(1);
+        glm::mat4 self{};
+
+        Matrix4x4() = default;
 
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale){
             self = glm::translate(glm::mat4(1), {

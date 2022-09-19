@@ -180,6 +180,10 @@ namespace SR_WORLD_NS {
             if (pRegionMarshal->Valid()) {
                 pRegionMarshal->Save(regPath);
             }
+            else if (regPath.IsFile()) {
+                SR_PLATFORM_NS::Delete(regPath);
+            }
+
             SR_SAFE_DELETE_PTR(pRegionMarshal);
         }
         else if (regPath.Exists(Path::Type::File)) {
@@ -522,7 +526,7 @@ namespace SR_WORLD_NS {
     }
     bool Scene::MoveToRoot(const Scene::GameObjectPtr &gameObject) { //обнуляет указатель на родителя и поднимает флаг обновления m_rootObjects, из-за чего gameObject обрабатывается как корневой
         if (gameObject->m_parent){
-            SRHalt("GameObject::MoveToRoot : GameObject has parent!");
+            SRHalt("GameObject::MoveToRoot() : GameObject has parent!");
             return false;
         }
 

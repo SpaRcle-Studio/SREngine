@@ -14,8 +14,17 @@ namespace SR_MATH_NS {
 
     class SR_DLL_EXPORT Quaternion {
         friend Vector3<Unit>;
-    private:
-        glm::quat self{};
+    public:
+        union {
+            struct {
+                float_t x;
+                float_t y;
+                float_t z;
+                float_t w;
+            };
+
+            glm::quat self;
+        };
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::quat ToGLM() const noexcept { return self; }
         SR_NODISCARD Matrix4x4 ToMat4x4() const;

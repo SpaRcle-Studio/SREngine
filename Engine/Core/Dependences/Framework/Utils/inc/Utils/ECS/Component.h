@@ -36,6 +36,7 @@ namespace SR_UTILS_NS {
         friend class ComponentManager;
     public:
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
+        using ComponentPtr = Component*;
     public:
         ~Component() override = default;
 

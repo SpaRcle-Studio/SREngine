@@ -225,9 +225,17 @@ namespace Framework {
             Update(dt);
 
             /// fixed update
-            if (m_accumulator >= m_updateFrequency) {
-                while (m_accumulator >= m_updateFrequency) {
+            if (m_accumulator >= m_updateFrequency)
+            {
+                while (m_accumulator >= m_updateFrequency)
+                {
+                    if (!IsPaused() && IsActive() && m_physicsScene.RecursiveLockIfValid()) {
+                        m_physicsScene->FixedUpdate();
+                        m_physicsScene.Unlock();
+                    }
+
                     FixedUpdate();
+
                     m_accumulator -= m_updateFrequency;
                 }
             }
@@ -404,11 +412,6 @@ namespace Framework {
     }
 
     void Engine::Update(float_t dt) {
-        if (m_physicsScene.RecursiveLockIfValid()) {
-            m_physicsScene->Update(dt);
-            m_physicsScene.Unlock();
-        }
-
         for (auto&& pComponent : m_updateableComponents) {
             pComponent->Update(dt);
         }

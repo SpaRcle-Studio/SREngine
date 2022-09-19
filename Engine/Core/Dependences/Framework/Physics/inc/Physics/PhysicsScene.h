@@ -14,6 +14,7 @@ namespace SR_WORLD_NS {
 
 namespace SR_PHYSICS_NS::Types {
     class Rigidbody;
+    class Collider;
 }
 
 namespace SR_PHYSICS_NS {
@@ -22,15 +23,22 @@ namespace SR_PHYSICS_NS {
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
         using RigidbodyPtr = Types::Rigidbody*;
+        using ColliderPtr = Types::Collider*;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
     public:
         explicit PhysicsScene(const ScenePtr& scene);
         ~PhysicsScene();
 
     public:
-        void Update(float_t dt);
+        void FixedUpdate();
+
+        void Remove(RigidbodyPtr pRigidbody);
+        void Remove(ColliderPtr pRigidbody);
 
         void Register(RigidbodyPtr pRigidbody);
+        void Register(ColliderPtr pCollider);
+
+        void ClearForces();
 
     private:
         bool CreateDynamicWorld();
@@ -38,6 +46,8 @@ namespace SR_PHYSICS_NS {
 
     private:
         ScenePtr m_scene;
+
+        bool m_needClearForces = false;
 
         btAlignedObjectArray<btCollisionShape*> m_collisionShapes;
         btBroadphaseInterface* m_broadphase = nullptr;

@@ -17,6 +17,6 @@ namespace SR_PHYSICS_NS::Types {
     }
 
     Rigidbody3D::ComponentPtr Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        return nullptr;
+        return new Rigidbody3D();
     }
 }

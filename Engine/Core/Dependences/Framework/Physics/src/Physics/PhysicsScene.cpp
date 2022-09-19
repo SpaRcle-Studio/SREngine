@@ -69,21 +69,34 @@ namespace SR_PHYSICS_NS {
 
         m_dynamicsWorld->setGravity(btVector3(0, -SR_EARTH_GRAVITY, 0));
 
+        m_dynamicsWorld->setInternalTickCallback([](btDynamicsWorld *pWorld, btScalar timeStep) {
+            //std::cout << pWorld->getDispatcher()->getNumManifolds() << std::endl;
+        });
+
         return true;
     }
 
-    void PhysicsScene::Update(float_t dt) {
-        //m_dynamicsWorld->stepSimulation(dt);
+    void PhysicsScene::FixedUpdate() {
+        if (m_needClearForces) {
+            m_dynamicsWorld->clearForces();
+            m_needClearForces = false;
+        }
+
+        m_dynamicsWorld->stepSimulation(1.f / 60.f);
 
         uint32_t numCollisionObjects = m_dynamicsWorld->getNumCollisionObjects();
         for (uint32_t i = 0; i < numCollisionObjects; ++i) {
             btCollisionObject* colObj = m_dynamicsWorld->getCollisionObjectArray()[i];
-            btCollisionShape* collisionShape = colObj->getCollisionShape();
+            /// btCollisionShape* collisionShape = colObj->getCollisionShape();
 
-            btVector3 pos = colObj->getWorldTransform().getOrigin();
-            btQuaternion orn = colObj->getWorldTransform().getRotation();
-            btVector3 euler;
-            orn.getEulerZYX(euler[0], euler[1], euler[2]);
+            btRigidBody* body = btRigidBody::upcast(colObj);
+            btTransform trans;
+            if (body && body->getMotionState()) {
+                body->getMotionState()->getWorldTransform(trans);
+            }
+            else {
+                trans = colObj->getWorldTransform();
+            }
 
             auto&& pRigidbody = (RigidbodyPtr)colObj->getUserPointer();
 
@@ -91,28 +104,42 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            auto&& pTransform = pRigidbody->GetTransform();
-
-            if (!pTransform) {
-                continue;
+            if (pRigidbody->m_dirty) {
+                pRigidbody->UpdateMatrix();
             }
+            else if (auto&& pTransform = pRigidbody->GetTransform()) {
+                btVector3 pos = trans.getOrigin();
+                btQuaternion orn = trans.getRotation();
+                btVector3 euler;
+                orn.getEulerZYX(euler[0], euler[1], euler[2]);
 
-            pRigidbody->UpdateMatrix();
+                pTransform->SetTranslation(pos.x(), pos.y(), pos.z());
+                pTransform->SetRotation(SR_MATH_NS::FVector3(euler.x(), euler.y(), euler.z()).Degrees());
 
-            pTransform->SetTranslation(pos.x(), pos.y(), pos.z());
-            pTransform->SetRotation(SR_MATH_NS::FVector3(euler.x(), euler.y(), euler.z()).Degrees());
-
-            pRigidbody->m_dirty = false;
+                pRigidbody->m_dirty = false;
+            }
         }
     }
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {
         m_dynamicsWorld->addRigidBody(pRigidbody->m_rigidbody);
+    }
 
-        auto&& shape = new btBoxShape(btVector3(5, 1, 5));
-        auto&& collider = new btCollisionObject();
-        collider->setCollisionShape(shape);
+    void PhysicsScene::Register(PhysicsScene::ColliderPtr pCollider) {
+        m_dynamicsWorld->addRigidBody(pCollider->m_rigidbody);
+    }
 
-        m_dynamicsWorld->addCollisionObject(collider);
+    void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
+        m_dynamicsWorld->removeRigidBody(pRigidbody->m_rigidbody);
+        delete pRigidbody;
+    }
+
+    void PhysicsScene::Remove(PhysicsScene::ColliderPtr pCollider) {
+        m_dynamicsWorld->removeRigidBody(pCollider->m_rigidbody);
+        delete pCollider;
+    }
+
+    void PhysicsScene::ClearForces() {
+        m_needClearForces = true;
     }
 }

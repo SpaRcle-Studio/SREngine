@@ -18,28 +18,15 @@ namespace SR_PHYSICS_NS::Types {
         SR_SAFE_DELETE_PTR(m_shape);
     }
 
-    void Rigidbody::OnAttached() {
-        //btTransform startTransform;
-        //startTransform.setIdentity();
-        //startTransform.setOrigin(btVector3(0, h, -(s + 3.5)));
-//
-        //bool isDynamic = (mass != 0.f);
-//
-        //btVector3 localInertia(0, 0, 0);
-        //if (isDynamic)
-        //    shape->calculateLocalInertia(mass, localInertia);
-//
-        //btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-//
-        //btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState, shape, localInertia);
-//
-        //btRigidBody* body = new btRigidBody(cInfo);
-//
-        //body->setUserIndex(-1);
-        //m_dynamicsWorld->addRigidBody(body);
-        //
-        //btRigidBody* body = createRigidBody(1, startTransform, new btBoxShape(btVector3(s, 1, 3)));
+    void Rigidbody::OnDestroy() {
+        if (auto&& physicsScene = GetPhysicsScene()) {
+            physicsScene->Remove(this);
+        }
 
+        Component::OnDestroy();
+    }
+
+    void Rigidbody::OnAttached() {
         if (auto&& physicsScene = GetPhysicsScene()) {
             InitShape();
             InitBody();
@@ -51,42 +38,48 @@ namespace SR_PHYSICS_NS::Types {
     }
 
     bool Rigidbody::InitShape() {
-        //m_shape = new btBoxShape(btVector3(1, 1, 1));
-        m_shape = new btSphereShape(1.f);
+        m_shape = new btBoxShape(btVector3(1.0f, 1.0f, 1.0f));
         return true;
     }
 
     bool Rigidbody::InitBody() {
         auto&& pTransform = GetTransform();
 
-        if (!pTransform || !m_shape) {
+        if (!pTransform) {
             return false;
         }
 
-
         auto &&matrix = GetTransform()->GetMatrix();
 
-        auto &&rotation = matrix.GetQuat().EulerAngle();
+        auto &&rotation = matrix.GetQuat();
         auto &&translation = matrix.GetTranslate();
 
-        btQuaternion quaternion;
-        quaternion.setEulerZYX(rotation.x, rotation.y, rotation.z);
+        btScalar mass(1.f);
 
-        btVector3 position = btVector3(translation.x, translation.y, translation.z);
+        bool isDynamic = (mass != 0.f);
 
-        m_motionState = new btDefaultMotionState(btTransform(quaternion, position));
+        btVector3 localInertia(0, 0, 0);
+        if (isDynamic)
+            m_shape->calculateLocalInertia(mass, localInertia);
 
-        btVector3 bodyInertia;
-        m_shape->calculateLocalInertia((btScalar)m_mass, bodyInertia);
+        btTransform startTransform;
+        startTransform.setIdentity();
 
-        auto&& bodyCI = btRigidBody::btRigidBodyConstructionInfo((btScalar)m_mass, m_motionState, m_shape, bodyInertia);
+        m_motionState = new btDefaultMotionState(startTransform);
 
-        bodyCI.m_restitution = 1.0f;
-        bodyCI.m_friction = 0.5f;
+        m_dirty = true;
 
-        m_rigidbody = new btRigidBody(bodyCI);
-        m_rigidbody->setUserPointer((void*)this);
-        m_rigidbody->setLinearFactor(btVector3(1,1,0));
+        btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(
+                mass,               // mass, in kg. 0 -> Static object, will never move.
+                m_motionState,
+                m_shape,            // collision shape of body
+                localInertia        // local inertia
+        );
+        m_rigidbody = new btRigidBody(rigidBodyCI);
+
+        m_rigidbody->setActivationState(DISABLE_DEACTIVATION);
+
+        m_rigidbody->setUserPointer(this);
 
         return true;
     }
@@ -102,6 +95,7 @@ namespace SR_PHYSICS_NS::Types {
     }
 
     void Rigidbody::OnMatrixDirty() {
+        m_matrix = GetTransform()->GetMatrix();
         m_dirty = true;
         Component::OnMatrixDirty();
     }
@@ -113,26 +107,22 @@ namespace SR_PHYSICS_NS::Types {
 
         m_dirty = false;
 
-        //auto &&matrix = GetTransform()->GetMatrix();
+        auto &&translation = m_matrix.GetTranslate();
+        auto &&rotation = m_matrix.GetQuat();
 
-        //auto &&rotation = matrix.GetQuat().EulerAngle();
-        //rotation = rotation.Radians();
+        btTransform startTransform;
+        startTransform.setIdentity();
+        startTransform.setOrigin(btVector3(translation.x, translation.y, translation.z));
+        startTransform.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
 
-        //auto &&translation = matrix.GetTranslate();
+        m_rigidbody->setWorldTransform(startTransform);
 
-        //btQuaternion quaternion;
-        //quaternion.setEulerZYX(rotation.x, rotation.y, rotation.z);
+        if (m_rigidbody->getMotionState()) {
+            m_rigidbody->getMotionState()->setWorldTransform(startTransform);
+        }
 
-        //btTransform initialTransform;
-
-        //initialTransform.setOrigin(btVector3(translation.x, translation.y, translation.z));
-        //initialTransform.setRotation(quaternion);
-
-        //m_rigidbody->setWorldTransform(initialTransform);
-        //m_motionState->setWorldTransform(initialTransform);
-
-        //m_rigidbody->setLinearVelocity(btVector3(0.0f, 0.0f, 0.0f));
-        //m_rigidbody->setAngularVelocity(btVector3(0.0f, 0.0f, 0.0f));
-        //m_rigidbody->clearForces();
+        m_rigidbody->clearForces();
+        m_rigidbody->setAngularVelocity(btVector3(0, 0, 0));
+        m_rigidbody->setLinearVelocity(btVector3(0, 0, 0));
     }
 }

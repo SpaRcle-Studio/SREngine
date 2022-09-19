@@ -8,6 +8,7 @@
 #include <Physics/PhysicsLib.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Math/Matrix4x4.h>
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
@@ -17,7 +18,6 @@ namespace SR_PHYSICS_NS::Types {
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
     public:
-        using ComponentPtr = SR_UTILS_NS::Component*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
 
     public:
@@ -29,6 +29,7 @@ namespace SR_PHYSICS_NS::Types {
 
     protected:
         void OnAttached() override;
+        void OnDestroy() override;
 
         void OnMatrixDirty() override;
 
@@ -39,6 +40,8 @@ namespace SR_PHYSICS_NS::Types {
 
     private:
         PhysicsScenePtr m_physicsScene;
+
+        SR_MATH_NS::Matrix4x4 m_matrix;
 
         btRigidBody* m_rigidbody = nullptr;
         btCollisionShape* m_shape = nullptr;

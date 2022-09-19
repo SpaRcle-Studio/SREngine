@@ -25,7 +25,11 @@
 #include <Physics/3D/Rigidbody3D.h>
 
 namespace SR_CORE_NS::GUI {
-    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody3D*& rigidbody3D, EditorGUI* context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
+
+    }
+
+    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::BoxCollider3D*& pComponent, EditorGUI* context, int32_t index) {
 
     }
 
