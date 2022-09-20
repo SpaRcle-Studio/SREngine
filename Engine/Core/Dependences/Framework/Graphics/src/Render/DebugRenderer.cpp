@@ -17,6 +17,10 @@ namespace SR_GRAPH_NS {
         SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
     }
 
+    DebugRenderer::~DebugRenderer() {
+        SRAssert(m_timedObjects.size() == m_emptyIds.size());
+    }
+
     void DebugRenderer::DeInit() {
         SR_LOCK_GUARD
         SR_UTILS_NS::DebugDraw::Instance().RemoveCallbacks(this);
@@ -81,6 +85,22 @@ namespace SR_GRAPH_NS {
             m_emptyIds.pop_front();
             m_timedObjects[id] = timedObject;
             return id;
+        }
+    }
+
+    void DebugRenderer::Clear() {
+        SR_LOCK_GUARD
+
+        for (uint64_t i = 0; i < m_timedObjects.size(); ++i) {
+            auto&& timed = m_timedObjects[i];
+
+            if (!timed.pMesh) {
+                continue;
+            }
+
+            timed.pMesh->RemoveUsePoint();
+            timed.pMesh = nullptr;
+            m_emptyIds.emplace_back(i);
         }
     }
 }

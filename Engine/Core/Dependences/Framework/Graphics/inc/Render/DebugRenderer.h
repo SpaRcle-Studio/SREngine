@@ -15,9 +15,11 @@ namespace SR_GRAPH_NS {
         using Super = SR_UTILS_NS::NonCopyable;
     public:
         explicit DebugRenderer(RenderScene* pRenderScene);
+        ~DebugRenderer() override;
 
         void DeInit();
         void Prepare();
+        void Clear();
 
     private:
         uint64_t DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color, float_t time);

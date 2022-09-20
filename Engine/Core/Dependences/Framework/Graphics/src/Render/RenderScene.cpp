@@ -353,7 +353,14 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Synchronize() {
+        /// отладочной геометрией ничто не управляет, она уничтожается по истечению времени.
+        /// ее нужно принудительно освобождать при закрытии сцены.
+        if (m_debugRender && !m_scene.Valid()) {
+            m_debugRender->Clear();
+        }
+
         SortCameras();
+
         m_opaque.Update();
         m_transparent.Update();
         m_debug.Update();
