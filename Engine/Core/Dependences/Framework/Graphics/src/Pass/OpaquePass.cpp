@@ -34,8 +34,7 @@ namespace SR_GRAPH_NS {
             }
 
             for (auto&& [key, meshGroup] : subCluster) {
-                pipeline->BindVBO((*meshGroup.begin())->GetVBO<true>());
-                pipeline->BindIBO((*meshGroup.begin())->GetIBO<true>());
+                (*meshGroup.begin())->BindMesh();
 
                 for (auto&& pMesh : meshGroup) {
                     pMesh->Draw();
@@ -72,7 +71,7 @@ namespace SR_GRAPH_NS {
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto &mesh : meshGroup) {
-                    if (!mesh->IsActive()) {
+                    if (!mesh->IsMeshActive()) {
                         continue;
                     }
 
@@ -81,9 +80,9 @@ namespace SR_GRAPH_NS {
                         continue;
                     }
 
-                    mesh->GetMaterial()->Use();
+                    mesh->UseMaterial();
 
-                    shader->SetMat4(SHADER_MODEL_MATRIX, mesh->GetModelMatrix());
+                    shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(mesh->GetTranslation()));
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("OpaquePass::Update() : memory has been duplicated!");

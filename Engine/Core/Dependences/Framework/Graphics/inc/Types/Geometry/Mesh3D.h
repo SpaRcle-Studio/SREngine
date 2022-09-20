@@ -5,16 +5,17 @@
 #ifndef GAMEENGINE_MESH3D_H
 #define GAMEENGINE_MESH3D_H
 
-#include <Types/Geometry/IndexedMesh.h>
+#include <Types/Geometry/MeshComponent.h>
 
 namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
 }
 
 namespace SR_GTYPES_NS {
-    class Mesh3D final : public IndexedMesh {
+    class Mesh3D final : public MeshComponent {
         friend class Mesh;
         SR_ENTITY_SET_VERSION(1001);
+        using Super = MeshComponent;
     public:
         Mesh3D();
 
@@ -28,6 +29,8 @@ namespace SR_GTYPES_NS {
         IResource* Copy(IResource* destination) const override;
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+
+        void UseMaterial() override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }

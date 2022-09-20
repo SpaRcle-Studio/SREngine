@@ -1,8 +1,9 @@
 //
-// Created by Monika on 27.07.2022.
+// Created by Monika on 19.09.2022.
 //
 
-#include <Pass/TransparentPass.h>
+
+#include <Pass/DebugPass.h>
 #include <Types/Material.h>
 #include <Types/Shader.h>
 #include <Types/Geometry/IndexedMesh.h>
@@ -10,25 +11,25 @@
 #include <Environment/Basic/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
-    SR_REGISTER_RENDER_PASS(TransparentPass)
+    SR_REGISTER_RENDER_PASS(DebugPass)
 
-    TransparentPass::TransparentPass(RenderTechnique *pTechnique)
+    DebugPass::DebugPass(RenderTechnique *pTechnique)
         : BasePass(pTechnique)
     { }
 
-    bool TransparentPass::PreRender() {
+    bool DebugPass::PreRender() {
         return false;
     }
 
-    bool TransparentPass::Render() {
+    bool DebugPass::Render() {
         auto&& pipeline = GetPipeline();
-        auto&& transparent = GetRenderScene()->GetTransparent();
+        auto&& debug = GetRenderScene()->GetDebugCluster();
 
-        if (transparent.Empty()) {
+        if (debug.Empty()) {
             return false;
         }
 
-        for (auto&& [shader, subCluster] : transparent) {
+        for (auto&& [shader, subCluster] : debug) {
             if (!shader || shader && !shader->Use()) {
                 continue;
             }
@@ -47,16 +48,16 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void TransparentPass::Update() {
+    void DebugPass::Update() {
         if (!m_camera) {
             return;
         }
 
         auto&& pipeline = GetPipeline();
-        auto&& transparent = GetRenderScene()->GetTransparent();
+        auto&& debug = GetRenderScene()->GetDebugCluster();
         auto&& time = clock();
 
-        for (auto const& [shader, subCluster] : transparent) {
+        for (auto const& [shader, subCluster] : debug) {
             if (!shader || !shader->Ready()) {
                 continue;
             }
@@ -85,7 +86,7 @@ namespace SR_GRAPH_NS {
                     shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(mesh->GetTranslation()));
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                        SR_ERROR("TransparentPass::Update() : memory has been duplicated!");
+                        SR_ERROR("DebugPass::Update() : memory has been duplicated!");
                     }
 
                     shader->Flush();

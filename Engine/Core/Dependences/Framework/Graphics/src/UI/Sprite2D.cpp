@@ -12,7 +12,7 @@
 
 namespace SR_GRAPH_NS::UI {
     Sprite2D::Sprite2D()
-        : IndexedMesh(Types::MeshType::Sprite2D)
+        : Super(Types::MeshType::Sprite2D)
     {
         /// override component
         Component::InitComponent<Sprite2D>();

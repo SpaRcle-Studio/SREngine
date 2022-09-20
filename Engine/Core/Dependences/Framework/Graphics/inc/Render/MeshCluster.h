@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS {
 
     typedef uint32_t ClusterVBOId;
 
-    typedef std::unordered_set<Types::IndexedMesh *> MeshGroup;
+    typedef std::unordered_set<Types::Mesh*> MeshGroup;
     typedef std::unordered_map<ClusterVBOId, MeshGroup> MeshGroups;
     typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
@@ -94,7 +94,6 @@ namespace SR_GRAPH_NS {
 
     protected:
         ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
-        std::unordered_set<Types::Mesh*> m_invalid;
 
     };
 
@@ -114,6 +113,15 @@ namespace SR_GRAPH_NS {
 
     private:
         TransparentMeshCluster* m_transparent;
+
+    };
+
+    class DebugMeshCluster : public MeshCluster {
+    public:
+        ~DebugMeshCluster() override = default;
+
+    private:
+        bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) final { return false; }
 
     };
 

@@ -109,7 +109,7 @@ namespace Framework::Core::World {
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
-                    ptr->LoadComponent(mesh);
+                    ptr->LoadComponent(dynamic_cast<SR_UTILS_NS::Component *>(mesh));
                 }
                 else {
                     SRHalt("failed to load mesh!");

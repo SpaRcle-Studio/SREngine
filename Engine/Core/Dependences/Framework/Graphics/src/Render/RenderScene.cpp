@@ -6,7 +6,10 @@
 #include <Render/RenderContext.h>
 #include <Memory/CameraManager.h>
 #include <Types/Camera.h>
+#include <Utils/DebugDraw.h>
+#include <Types/Geometry/DebugLine.h>
 #include <Render/RenderTechnique.h>
+#include <Render/DebugRenderer.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 
 namespace SR_GRAPH_NS {
@@ -16,9 +19,18 @@ namespace SR_GRAPH_NS {
         , m_context(pContext)
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
-    { }
+        , m_debugRender(new DebugRenderer(this))
+    {
+        SR_UTILS_NS::DebugDraw::Instance().DrawLine(SR_MATH_NS::FVector3(-1.f), SR_MATH_NS::FVector3(1.f));
+    }
 
     RenderScene::~RenderScene() {
+        if (m_debugRender) {
+            m_debugRender->DeInit();
+            delete m_debugRender;
+            m_debugRender = nullptr;
+        }
+
         if (m_technique) {
             m_technique->RemoveUsePoint();
             m_technique = nullptr;
@@ -63,7 +75,11 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderScene::IsEmpty() const {
-        return m_transparent.Empty() && m_opaque.Empty() && m_cameras.empty();
+        return
+            m_transparent.Empty() &&
+            m_opaque.Empty() &&
+            m_debug.Empty() &&
+            m_cameras.empty();
     }
 
     RenderContext *RenderScene::GetContext() const {
@@ -128,6 +144,10 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Prepare() {
+        if (m_debugRender) {
+            m_debugRender->Prepare();
+        }
+
         if (m_dirtyCameras) {
             SortCameras();
         }
@@ -137,6 +157,10 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_transparent.Update()) {
+            SetDirty();
+        }
+
+        if (m_debug.Update()) {
             SetDirty();
         }
 
@@ -169,11 +193,16 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        if (pMesh->GetMaterial()->IsTransparent()) {
-            m_transparent.Add(pMesh);
+        if (pMesh->IsDebugMesh()) {
+            m_debug.Add(pMesh);
         }
         else {
-            m_opaque.Add(pMesh);
+            if (pMesh->GetMaterial()->IsTransparent()) {
+                m_transparent.Add(pMesh);
+            }
+            else {
+                m_opaque.Add(pMesh);
+            }
         }
 
         m_dirty = true;
@@ -307,6 +336,10 @@ namespace SR_GRAPH_NS {
         return m_transparent;
     }
 
+    MeshCluster &RenderScene::GetDebugCluster() {
+        return m_debug;
+    }
+
     RenderScene::CameraPtr RenderScene::GetMainCamera() const {
         return m_mainCamera;
     }
@@ -323,6 +356,7 @@ namespace SR_GRAPH_NS {
         SortCameras();
         m_opaque.Update();
         m_transparent.Update();
+        m_debug.Update();
     }
 
     void RenderScene::OnResize(const SR_MATH_NS::IVector2 &size) {

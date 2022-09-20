@@ -5,11 +5,12 @@
 #ifndef SRENGINE_PROCEDURALMESH_H
 #define SRENGINE_PROCEDURALMESH_H
 
-#include <Types/Geometry/IndexedMesh.h>
+#include <Types/Geometry/MeshComponent.h>
 
 namespace SR_GTYPES_NS {
-    class ProceduralMesh : public IndexedMesh {
+    class ProceduralMesh : public MeshComponent {
         friend class Mesh;
+        using Super = MeshComponent;
         SR_ENTITY_SET_VERSION(1000);
     public:
         ProceduralMesh();
@@ -25,6 +26,8 @@ namespace SR_GTYPES_NS {
         void SetIndexedVertices(void* pData, uint64_t count);
         void SetIndices(void* pData, uint64_t count);
         void SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices);
+
+        void UseMaterial() override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
 

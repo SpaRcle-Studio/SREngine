@@ -21,6 +21,7 @@ namespace SR_HTYPES_NS {
         }
 
         SR_NODISCARD Point Now() const noexcept { return m_point; }
+        SR_NODISCARD uint64_t Count() const noexcept { return m_point.time_since_epoch().count(); }
 
     private:
         Point m_point;

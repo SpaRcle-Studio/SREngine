@@ -73,7 +73,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsStarted() const noexcept { return m_isStarted; }
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return false; }
-        SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return Math::InfinityFV3; }
+        SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return SR_MATH_NS::InfinityFV3; }
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }

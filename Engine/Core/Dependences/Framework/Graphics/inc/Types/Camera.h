@@ -53,7 +53,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD glm::mat4 GetImGuizmoView() const noexcept;
         SR_NODISCARD glm::mat4 GetImGuizmo2DView() const noexcept;
         SR_NODISCARD glm::vec3 GetViewDirection() const;
-        SR_NODISCARD glm::vec3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const;
+        SR_NODISCARD glm::vec3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;
 
         SR_NODISCARD RenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;

@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SPRITE2D_H
 #define SRENGINE_SPRITE2D_H
 
-#include <Types/Geometry/IndexedMesh.h>
+#include <Types/Geometry/MeshComponent.h>
 
 namespace SR_GRAPH_NS::UI {
     const std::vector<uint32_t> SPRITE_INDICES = { 0, 1, 2, 0, 2, 3 };
@@ -17,8 +17,9 @@ namespace SR_GRAPH_NS::UI {
             { { 1.000000, -1.000000, 0.000000 }, { 0.000000, 0.000000 } }
     };
 
-    class Sprite2D final : public Types::IndexedMesh {
+    class Sprite2D final : public SR_GTYPES_NS::MeshComponent {
         SR_ENTITY_SET_VERSION(1000);
+        using Super = SR_GTYPES_NS::MeshComponent;
     public:
         Sprite2D();
 

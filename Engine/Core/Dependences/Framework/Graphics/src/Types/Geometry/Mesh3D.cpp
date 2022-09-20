@@ -12,7 +12,7 @@
 
 namespace SR_GTYPES_NS {
     Mesh3D::Mesh3D()
-        : IndexedMesh(MeshType::Static)
+        : Super(MeshType::Static)
     {
         /// override component
         Component::InitComponent<Mesh3D>();
@@ -43,10 +43,6 @@ namespace SR_GTYPES_NS {
         }
 
         auto&& vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
-
-        //for (auto&& index : GetIndices()) {
-        //    SR_LOG(vertices[index].ToString());
-        //}
 
         if (!CalculateVBO<Vertices::VertexType::StaticMeshVertex>(vertices))
             return false;
@@ -166,7 +162,7 @@ namespace SR_GTYPES_NS {
                 SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
         }
 
-        return pMesh;
+        return dynamic_cast<Component*>(pMesh);
     }
 
     bool Mesh3D::Unload() {
@@ -232,5 +228,10 @@ namespace SR_GTYPES_NS {
         UpdateResources();
 
         return true;
+    }
+
+    void Mesh3D::UseMaterial() {
+        Mesh::UseMaterial();
+        GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

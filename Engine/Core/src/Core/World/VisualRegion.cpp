@@ -35,7 +35,6 @@ namespace Framework::Core::World {
 
             m_mesh->AddUsePoint();
             m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
-            m_mesh->CheckActivity();
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
                 ptr->Register(m_mesh);

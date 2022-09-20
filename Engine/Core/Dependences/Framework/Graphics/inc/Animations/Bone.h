@@ -25,10 +25,10 @@ namespace SR_GRAPH_NS::Animations {
         }
 
         void OnDestroy() override {
-            if (m_mesh) {
-                m_mesh->OnDestroy();
-                m_mesh = nullptr;
-            }
+           //if (m_mesh) {
+           //    m_mesh->OnDestroy();
+           //    m_mesh = nullptr;
+           //}
 
             delete this;
         }

@@ -16,6 +16,7 @@ namespace Framework::Graphics::Memory {
 namespace SR_GTYPES_NS {
     class DebugWireframeMesh final : public IndexedMesh {
         friend class Mesh;
+        using Super = IndexedMesh;
     public:
         typedef Vertices::SimpleVertex VertexType;
 
@@ -33,12 +34,14 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
-        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override { return m_modelMatrix; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsDebugMesh() const noexcept override { return true; }
 
         IResource* Copy(IResource* destination) const override;
 
         bool Calculate() override;
         void FreeVideoMemory() override;
+
+        void UseMaterial() override;
 
     protected:
         bool Reload() override;
@@ -49,8 +52,6 @@ namespace SR_GTYPES_NS {
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
-        /// Данный тип меша не является полноценным компонентом, потому должен сам отвечать за трансформацию
-        SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
 
     };
 }

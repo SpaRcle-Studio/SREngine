@@ -51,6 +51,7 @@
 #include "../Graphics/src/Pass/TransparentPass.cpp"
 #include "../Graphics/src/Pass/SortedTransparentPass.cpp"
 #include "../Graphics/src/Pass/PostProcessPass.cpp"
+#include "../Graphics/src/Pass/DebugPass.cpp"
 
 #include "../Graphics/src/Font/Font.cpp"
 #include "../Graphics/src/Font/FontLoader.cpp"
@@ -70,12 +71,15 @@
 #include "../Graphics/src/Render/RenderManager.cpp"
 #include "../Graphics/src/Render/RenderContext.cpp"
 #include "../Graphics/src/Render/SortedMeshQueue.cpp"
+#include "../Graphics/src/Render/DebugRenderer.cpp"
 #include "../Graphics/src/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Types/Geometry/DebugWireframeMesh.cpp"
+#include "../Graphics/src/Types/Geometry/DebugLine.cpp"
 #include "../Graphics/src/Types/Geometry/IndexedMesh.cpp"
 #include "../Graphics/src/Types/Geometry/ProceduralMesh.cpp"
 #include "../Graphics/src/Types/Geometry/Mesh3D.cpp"
+#include "../Graphics/src/Types/Geometry/MeshComponent.cpp"
 
 #include "../Graphics/src/Types/EditorGrid.cpp"
 #include "../Graphics/src/Types/Framebuffer.cpp"

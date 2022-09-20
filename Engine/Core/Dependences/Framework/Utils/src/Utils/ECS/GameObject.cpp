@@ -351,6 +351,11 @@
             return false;
         }
 
+        if (!pComponent) {
+            SRHalt("pComponent is nullptr!");
+            return false;
+        }
+
         m_components.emplace_back(pComponent);
         ++m_componentsCount;
 

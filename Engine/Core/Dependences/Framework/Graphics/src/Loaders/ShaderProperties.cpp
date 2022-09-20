@@ -8,7 +8,7 @@ namespace SR_GRAPH_NS {
     MaterialProperties LoadMaterialProperties(const SR_XML_NS::Node &propertiesNode) {
         MaterialProperties properties;
 
-        for (auto&& propertyXml : propertiesNode.GetNodes()) {
+        for (auto&& propertyXml : propertiesNode.TryGetNodes()) {
             MaterialProperty materialProperty;
 
             materialProperty.id = propertyXml.GetAttribute("Id").ToString();

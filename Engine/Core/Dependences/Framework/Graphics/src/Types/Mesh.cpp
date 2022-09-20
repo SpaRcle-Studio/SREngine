@@ -19,9 +19,7 @@ namespace SR_GRAPH_NS::Types {
         , m_pipeline(Environment::Get())
         , m_type(type)
         , m_material(nullptr)
-    {
-        Component::InitComponent<Mesh>();
-    }
+    { }
 
     Mesh::~Mesh() {
         SetMaterial(nullptr);
@@ -142,38 +140,8 @@ namespace SR_GRAPH_NS::Types {
         return meshes;
     }
 
-    void Mesh::OnAttached() {
-        AddUsePoint();
-
-        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
-            ptr->Register(this);
-        });
-
-        Component::OnAttached();
-    }
-
-    void Mesh::OnDestroy() {
-        Component::OnDestroy();
-
-        auto&& renderScene = GetRenderScene();
-
-        /// после вызова данная сущность может быть уничтожена
-        RemoveUsePoint();
-
-        renderScene->SetDirty();
-    }
-
     bool Mesh::IsCanCalculate() const {
         return true;
-    }
-
-    SR_MATH_NS::FVector3 Mesh::GetBarycenter() const {
-        //auto baryMat = SR_MATH_NS::Matrix4x4(m_barycenter, SR_MATH_NS::FVector3(), 1.0);
-        //auto rotateMat = SR_MATH_NS::Matrix4x4(0.0, m_rotation.InverseAxis(2).ToQuat(), 1.0);
-
-        //return (rotateMat * baryMat).GetTranslate();
-
-        return SR_MATH_NS::FVector3();
     }
 
     SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
@@ -263,30 +231,6 @@ namespace SR_GRAPH_NS::Types {
         IResource::OnResourceUpdated(pResource, depth);
     }
 
-    void Mesh::OnEnable() {
-        if (auto&& renderScene = GetRenderScene()) {
-            renderScene->SetDirty();
-        }
-        Component::OnEnable();
-    }
-
-    void Mesh::OnDisable() {
-        if (auto&& renderScene = GetRenderScene()) {
-            renderScene->SetDirty();
-        }
-        Component::OnDisable();
-    }
-
-    Mesh::RenderScenePtr Mesh::GetRenderScene() {
-        if (!m_renderScene.Valid()) {
-            m_renderScene = TryGetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
-                return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-            }, RenderScenePtr());
-        }
-
-        return m_renderScene;
-    }
-
     void Mesh::SetContext(const Mesh::RenderContextPtr &context) {
         if ((m_context = context)) {
             m_pipeline = m_context->GetPipeline();
@@ -300,24 +244,22 @@ namespace SR_GRAPH_NS::Types {
         return m_modelMatrix;
     }
 
-    bool Mesh::ExecuteInEditMode() const {
-        return true;
-    }
-
-    void Mesh::OnMatrixDirty() {
-        if (auto&& pTransform = GetTransform()) {
-            m_modelMatrix = pTransform->GetMatrix();
-            m_translation = pTransform->GetTranslation();
-        }
-        else {
-            SRHalt("Component have not transform, but OnMatrixDirty was called!");
-        }
-
-        Component::OnMatrixDirty();
-    }
-
     SR_MATH_NS::FVector3 Mesh::GetTranslation() const {
         return m_translation;
+    }
+
+    void Mesh::UseMaterial() {
+        m_material->Use();
+    }
+
+    void Mesh::BindMesh() const {
+        if (auto&& vbo = GetVBO(); vbo != SR_ID_INVALID) {
+            m_pipeline->BindVBO(vbo);
+        }
+
+        if (auto&& ibo = GetIBO(); ibo != SR_ID_INVALID) {
+            m_pipeline->BindIBO(ibo);
+        }
     }
 }
 

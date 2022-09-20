@@ -23,6 +23,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class RenderContext;
     class RenderTechnique;
+    class DebugRenderer;
 
     class RenderScene : public SR_HTYPES_NS::SafePtr<RenderScene> {
     public:
@@ -73,6 +74,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
         SR_NODISCARD MeshCluster& GetOpaque();
         SR_NODISCARD MeshCluster& GetTransparent();
+        SR_NODISCARD MeshCluster& GetDebugCluster();
         SR_NODISCARD CameraPtr GetMainCamera() const;
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetSurfaceSize() const;
@@ -96,11 +98,13 @@ namespace SR_GRAPH_NS {
 
         ScenePtr m_scene;
 
-        RenderTechnique* m_technique   = nullptr;
-        RenderContext*   m_context     = nullptr;
+        DebugRenderer* m_debugRender = nullptr;
+        RenderTechnique* m_technique = nullptr;
+        RenderContext* m_context = nullptr;
 
         OpaqueMeshCluster m_opaque;
         TransparentMeshCluster m_transparent;
+        DebugMeshCluster m_debug;
 
         SR_MATH_NS::IVector2 m_surfaceSize;
 

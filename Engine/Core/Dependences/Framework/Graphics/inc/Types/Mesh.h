@@ -10,7 +10,6 @@
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/ResourceManager/IResource.h>
-#include <Utils/ECS/Component.h>
 #include <Memory/IGraphicsResource.h>
 #include <Memory/UBOManager.h>
 
@@ -37,11 +36,13 @@ namespace SR_GTYPES_NS {
         Wireframe = 2,
         Skinned = 3,
         Sprite2D = 4,
-        Procedural = 5
+        Procedural = 5,
+        Line
     )
 
-    class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource, public SR_UTILS_NS::Component {
+    class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class Material;
+    public:
         using PipelinePtr = Environment*;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
@@ -65,19 +66,21 @@ namespace SR_GTYPES_NS {
 
         virtual void Draw() = 0;
 
+        virtual void UseMaterial();
+
         void FreeVideoMemory() override;
 
     public:
-        SR_MATH_NS::FVector3 GetBarycenter() const override;
+        SR_NODISCARD virtual int32_t GetIBO() { return SR_ID_INVALID; }
+        SR_NODISCARD virtual int32_t GetVBO() { return SR_ID_INVALID; }
 
-        void OnAttached() override;
-        void OnDestroy() override;
-        void OnMatrixDirty() override;
+        SR_NODISCARD virtual int32_t GetIBO() const { return SR_ID_INVALID; }
+        SR_NODISCARD virtual int32_t GetVBO() const { return SR_ID_INVALID; }
 
-    public:
         SR_NODISCARD virtual bool IsCanCalculate() const;
-        SR_NODISCARD bool ExecuteInEditMode() const override;
 
+        SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return true; }
+        SR_NODISCARD virtual SR_FORCE_INLINE bool IsDebugMesh() const noexcept { return false; }
         SR_NODISCARD Shader* GetShader() const;
         SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
         SR_NODISCARD Material* GetMaterial() const { return m_material; }
@@ -85,21 +88,19 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-        SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const;
 
         void SetGeometryName(const std::string& name) { m_geometryName = name; }
         void SetMaterial(Material* material);
         void SetContext(const RenderContextPtr& context);
-        SR_NODISCARD RenderScenePtr GetRenderScene();
 
         SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
+
+        virtual void BindMesh() const;
 
     protected:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
-        void OnEnable() override;
-        void OnDisable() override;
 
     protected:
         Memory::UBOManager&          m_uboManager;
@@ -107,7 +108,6 @@ namespace SR_GTYPES_NS {
         mutable SR_UTILS_NS::Path    m_resourcePath;
         std::string                  m_geometryName;
 
-        RenderScenePtr               m_renderScene;
         RenderContextPtr             m_context;
 
         SR_MATH_NS::Matrix4x4        m_modelMatrix       = SR_MATH_NS::Matrix4x4::Identity();

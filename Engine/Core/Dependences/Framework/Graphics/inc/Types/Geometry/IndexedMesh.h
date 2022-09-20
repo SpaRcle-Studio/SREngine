@@ -18,8 +18,11 @@ namespace SR_GRAPH_NS::Types {
         { }
 
     public:
-        template<bool fast> SR_NODISCARD int32_t GetIBO();
-        template<bool fast> SR_NODISCARD int32_t GetVBO();
+        SR_NODISCARD int32_t GetIBO() override;
+        SR_NODISCARD int32_t GetVBO() override;
+
+        SR_NODISCARD int32_t GetIBO() const override { return m_IBO; }
+        SR_NODISCARD int32_t GetVBO() const override { return m_VBO; }
 
         SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
@@ -42,31 +45,7 @@ namespace SR_GRAPH_NS::Types {
 
     };
 
-    template<bool fast> int32_t IndexedMesh::GetIBO() {
-        static_assert(fast, "unsupported!");
-
-        if constexpr (fast) {
-            return m_VBO;
-        }
-    }
-
-    template<bool fast> int32_t IndexedMesh::GetVBO() {
-        if constexpr (fast) {
-            return m_VBO;
-        }
-        else {
-            if (!m_isCalculated && !Calculate())
-                return SR_ID_INVALID;
-
-            return m_VBO;
-        }
-    }
-
     template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
-        //if (!vertices.empty()) {
-        //    m_barycenter = Vertices::Barycenter(vertices);
-        //}
-
         if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
             if (m_countVertices == 0 || !vertices.data()) {
                 SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + std::string(GetResourceId()) + "\n\tGeometry name: " + GetGeometryName());

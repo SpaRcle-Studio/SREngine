@@ -64,7 +64,6 @@ namespace Framework::Core::World {
 
             m_stayMesh->AddUsePoint();
             m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/green_wireframe.mat"));
-            m_stayMesh->CheckActivity();
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
                 ptr->Register(m_stayMesh);
@@ -93,7 +92,6 @@ namespace Framework::Core::World {
 
             m_loadMesh->AddUsePoint();
             m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/yellow_wireframe.mat"));
-            m_loadMesh->CheckActivity();
 
             renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
                 ptr->Register(m_loadMesh);

@@ -1,0 +1,17 @@
+ShaderType Line;
+
+PolygonMode Line;
+CullMode None;
+DepthCompare LessOrEqual;
+PrimitiveTopology LineList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+void fragment() {
+
+}
+
+void vertex() {
+
+}

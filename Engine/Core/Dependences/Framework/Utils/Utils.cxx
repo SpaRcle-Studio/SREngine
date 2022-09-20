@@ -35,6 +35,9 @@
 #include "../Utils/src/Utils/TaskManager/TaskManager.cpp"
 
 #include "../Utils/src/Utils/Settings.cpp"
+#include "../Utils/src/Utils/DebugDraw.cpp"
+#include "../Utils/src/Utils/Debug.cpp"
+#include "../Utils/src/Utils/Xml.cpp"
 
 #include "../Utils/src/Utils/ResourceManager/IResource.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceInfo.cpp"
@@ -67,6 +70,3 @@
 #include "../Utils/src/Utils/World/Region.cpp"
 #include "../Utils/src/Utils/World/Scene.cpp"
 #include "../Utils/src/Utils/World/SceneAllocator.cpp"
-
-#include "../Utils/src/Utils/Debug.cpp"
-#include "../Utils/src/Utils/Xml.cpp"

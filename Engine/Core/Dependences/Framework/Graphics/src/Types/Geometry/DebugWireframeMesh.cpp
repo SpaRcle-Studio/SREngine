@@ -7,11 +7,8 @@
 
 namespace SR_GTYPES_NS {
     DebugWireframeMesh::DebugWireframeMesh()
-        : IndexedMesh(MeshType::Wireframe)
-    {
-        /// override component
-        Component::InitComponent<DebugWireframeMesh>();
-    }
+        : Super(MeshType::Wireframe)
+    { }
 
     DebugWireframeMesh::~DebugWireframeMesh() {
         SetRawMesh(nullptr);
@@ -35,8 +32,9 @@ namespace SR_GTYPES_NS {
     }
 
     void DebugWireframeMesh::Draw() {
-        if (!IsActive() || IsDestroyed())
+        if (IsDestroyed()) {
             return;
+        }
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)
             return;
@@ -184,5 +182,10 @@ namespace SR_GTYPES_NS {
 
     void DebugWireframeMesh::SetMatrix(const SR_MATH_NS::Matrix4x4& matrix4X4) {
         m_modelMatrix = matrix4X4;
+    }
+
+    void DebugWireframeMesh::UseMaterial() {
+        Mesh::UseMaterial();
+        GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

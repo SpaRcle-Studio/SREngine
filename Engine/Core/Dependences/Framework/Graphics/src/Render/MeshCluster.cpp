@@ -11,23 +11,17 @@ namespace SR_GRAPH_NS {
         m_subClusters.reserve(25);
     }
 
-   bool ShadedMeshSubCluster::Remove(Types::Mesh *mesh) noexcept {
-       auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
-
-       const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
-       if (groupID == SR_ID_INVALID) {
-           SR_ERROR("ShadedMeshSubCluster::Remove() : failed get mesh group id to remove mesh!");
-           return false;
-       }
+   bool ShadedMeshSubCluster::Remove(Types::Mesh *pMesh) noexcept {
+       const int32_t groupID = pMesh->GetVBO();
 
        if (auto&& groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
            MeshGroup& group = groupIt->second;
 
-           if (auto pIt = group.find(indexed); pIt != group.end()) {
+           if (auto pIt = group.find(pMesh); pIt != group.end()) {
                group.erase(pIt);
 
                /// После вызова меш может быть уже не валиден
-               mesh->RemoveUsePoint();
+               pMesh->RemoveUsePoint();
 
                if (group.empty()) {
                    m_groups.erase(groupIt);
@@ -46,23 +40,18 @@ namespace SR_GRAPH_NS {
        return false;
    }
 
-    bool ShadedMeshSubCluster::Add(Types::Mesh *mesh) noexcept {
-        auto* indexed = dynamic_cast<Types::IndexedMesh *>(mesh);
-
-        const int32_t groupID = indexed ? indexed->GetVBO<false>() : SR_ID_INVALID;
-        if (groupID == SR_ID_INVALID) {
-            return false;
-        }
+    bool ShadedMeshSubCluster::Add(Types::Mesh *pMesh) noexcept {
+        const int32_t groupID = pMesh->GetVBO();
 
         if (auto&& pIt = m_groups.find(groupID); pIt == m_groups.end()) {
-            m_groups[groupID] = { indexed };
+            m_groups[groupID] = { pMesh };
         }
-        else if (!pIt->second.insert(indexed).second) {
+        else if (!pIt->second.insert(pMesh).second) {
             SRHalt("ShadedMeshSubCluster::Add() : failed to add mesh to cluster!");
             return false;
         }
 
-        mesh->AddUsePoint();
+        pMesh->AddUsePoint();
 
         return true;
     }
@@ -83,16 +72,14 @@ namespace SR_GRAPH_NS {
             ));
 
             if (!subCluster->second.Add(pMesh)) {
-                pMesh->AddUsePoint();
-                SRVerifyFalse(!m_invalid.insert(pMesh).second);
+                SRHalt0();
             }
 
             return true;
         }
         else {
             if (!subClusterIt->second.Add(pMesh)) {
-                pMesh->AddUsePoint();
-                SRVerifyFalse(!m_invalid.insert(pMesh).second);
+                SRHalt0();
             }
 
             return true;
@@ -100,17 +87,12 @@ namespace SR_GRAPH_NS {
     }
 
     bool MeshCluster::Remove(Types::Mesh *mesh) noexcept {
-        if (auto&& pInvalidIt = m_invalid.find(mesh); pInvalidIt != m_invalid.end()) {
-            mesh->RemoveUsePoint();
-            m_invalid.erase(pInvalidIt);
-            return true;
-        }
-
         const auto&& pShader = mesh->GetShader();
 
         SRAssert(pShader);
 
         if (auto&& subCluster = m_subClusters.find(pShader); subCluster == m_subClusters.end()) {
+            SRHalt("MeshCluster::Remove() : sub cluster not found!");
             return false;
         }
         else {
@@ -131,31 +113,6 @@ namespace SR_GRAPH_NS {
     bool MeshCluster::Update() {
         bool dirty = false;
 
-        for (auto pInvalidIt = m_invalid.begin(); pInvalidIt != m_invalid.end(); ) {
-            auto&& pMesh = dynamic_cast<SR_GTYPES_NS::IndexedMesh*>(*pInvalidIt);
-
-            if (pMesh->GetCountUses() == 1) {
-                if (pMesh->IsCalculated()) {
-                    pMesh->FreeVideoMemory();
-                }
-
-                pMesh->RemoveUsePoint();
-                pInvalidIt = m_invalid.erase(pInvalidIt);
-
-                dirty = true;
-            }
-            else if (pMesh->GetVBO<false>() != SR_ID_INVALID) {
-                Add(pMesh);
-                pMesh->RemoveUsePoint();
-                pInvalidIt = m_invalid.erase(pInvalidIt);
-
-                dirty = true;
-            }
-            else {
-                ++pInvalidIt;
-            }
-        }
-
     repeat:
         for (auto pSubClusterIt = m_subClusters.begin(); pSubClusterIt != m_subClusters.end(); ) {
             auto&& [pShader, subCluster] = *pSubClusterIt;
@@ -164,17 +121,17 @@ namespace SR_GRAPH_NS {
                 auto&& [vbo, group] = *pGroupsIt;
 
                 for (auto pMeshIt = group.begin(); pMeshIt != group.end(); ) {
-                    SR_GTYPES_NS::IndexedMesh* pMesh = dynamic_cast<SR_GTYPES_NS::IndexedMesh*>(*pMeshIt); /** copy */
+                    SR_GTYPES_NS::Mesh* pMesh = *pMeshIt; /** copy */
                     auto&& pMaterial = pMesh->GetMaterial();
 
                     SRAssert2(pMaterial, "Mesh have not material!");
 
                     if (pMesh->GetCountUses() == 1) {
-                        pMesh->RemoveUsePoint();
-
                         if (pMesh->IsCalculated()) {
                             pMesh->FreeVideoMemory();
                         }
+
+                        pMesh->RemoveUsePoint();
 
                         pMeshIt = group.erase(pMeshIt);
 
@@ -195,7 +152,7 @@ namespace SR_GRAPH_NS {
                         dirty = true;
                     }
                     /// Мигрируем меш в другой саб кластер
-                    else if (pMesh->GetVBO<false>() != vbo || pMaterial->GetShader() != pShader) {
+                    else if (pMesh->GetVBO() != vbo || pMaterial->GetShader() != pShader) {
                         pMeshIt = group.erase(pMeshIt);
                         Add(pMesh);
                         /// use-point от старого саб кластера

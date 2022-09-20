@@ -92,8 +92,6 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    Thread::Sleep(5000);
-
     setlocale(LC_ALL, "rus");
     setlocale(LC_NUMERIC, "C");
     srand(time(NULL));
@@ -103,6 +101,7 @@ int main(int argc, char **argv) {
     Debug::Instance().SetLevel(Debug::Level::Low);
 
     Thread::Factory::Instance().SetMainThread();
+    SR_HTYPES_NS::Time::Instance().Update();
 
     auto&& resourcesManager = ResourceManager::Instance();
 

@@ -68,11 +68,11 @@ namespace SR_GRAPH_NS {
                 }
             }
 
-            if (auto&& VBO = pIndexed->GetVBO<true>(); VBO != currentVBO) {
+            if (auto&& VBO = pIndexed->GetVBO(); VBO != currentVBO) {
                 pipeline->BindVBO((currentVBO = VBO));
             }
 
-            if (auto&& IBO = pIndexed->GetIBO<true>(); IBO != currentIBO) {
+            if (auto&& IBO = pIndexed->GetIBO(); IBO != currentIBO) {
                 pipeline->BindIBO((currentIBO = IBO));
             }
 
@@ -112,8 +112,7 @@ namespace SR_GRAPH_NS {
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto &mesh : meshGroup) {
-                    /// TODO: проверка очень тяжелая из-за мьютексов, нужно оптимизировать
-                    if (!mesh->IsActive()) {
+                    if (!mesh->IsMeshActive()) {
                         continue;
                     }
 

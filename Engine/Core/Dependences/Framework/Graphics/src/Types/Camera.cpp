@@ -295,7 +295,7 @@ namespace SR_GTYPES_NS {
         return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(1, 0, 0)).ToGLM();
     }
 
-    glm::vec3 Camera::GetViewDirection(const SR_MATH_NS::FVector3 &pos) const {
+    glm::vec3 Camera::GetViewDirection(const SR_MATH_NS::FVector3 &pos) const noexcept {
         return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * m_position.Direction(pos)).ToGLM();
     }
 }

@@ -7,7 +7,7 @@
 
 namespace SR_GTYPES_NS {
     ProceduralMesh::ProceduralMesh()
-        : IndexedMesh(MeshType::Procedural)
+        : Super(MeshType::Procedural)
     {
         /// override component
         Component::InitComponent<ProceduralMesh>();
@@ -160,5 +160,10 @@ namespace SR_GTYPES_NS {
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
+    }
+
+    void ProceduralMesh::UseMaterial() {
+        Mesh::UseMaterial();
+        GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

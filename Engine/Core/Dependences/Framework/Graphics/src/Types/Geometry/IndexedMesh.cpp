@@ -74,4 +74,18 @@ namespace SR_GTYPES_NS {
         FreeIBO();
         Mesh::FreeVideoMemory();
     }
+
+    int32_t IndexedMesh::GetVBO() {
+        if (!m_isCalculated && !Calculate())
+            return SR_ID_INVALID;
+
+        return m_VBO;
+    }
+
+    int32_t IndexedMesh::GetIBO() {
+        if (!m_isCalculated && !Calculate())
+            return SR_ID_INVALID;
+
+        return m_IBO;
+    }
 }
