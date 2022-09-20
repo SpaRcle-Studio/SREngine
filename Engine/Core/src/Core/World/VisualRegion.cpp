@@ -4,8 +4,9 @@
 
 #include <Core/Engine.h>
 #include <Core/World/VisualRegion.h>
-#include <Types/Geometry/DebugWireframeMesh.h>
-#include <Render/RenderScene.h>
+
+#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
+#include <Graphics/Render/RenderScene.h>
 
 namespace Framework::Core::World {
     void VisualRegion::OnEnter() {

@@ -7,9 +7,10 @@
 
 #include <Core/GUI/ComponentDrawer.h>
 
-#include <GUI/Widget.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
+
+#include <Graphics/GUI/Widget.h>
 
 namespace SR_UTILS_NS {
     class Transform3D;

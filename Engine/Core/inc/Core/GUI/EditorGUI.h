@@ -7,9 +7,11 @@
 
 #include <Scripting/Base/Script.h>
 #include <Scripting/Base/Compiler.h>
-#include <GUI/WidgetManager.h>
+
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/SafePointer.h>
+
+#include <Graphics/GUI/WidgetManager.h>
 
 namespace SR_GTYPES_NS {
     class Texture;

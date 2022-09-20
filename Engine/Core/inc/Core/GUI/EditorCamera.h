@@ -5,7 +5,7 @@
 #ifndef SRENGINE_EDITORCAMERA_H
 #define SRENGINE_EDITORCAMERA_H
 
-#include <Types/Camera.h>
+#include <Graphics/Types/Camera.h>
 
 namespace SR_CORE_NS::GUI {
     class EditorCamera : public SR_GTYPES_NS::Camera {

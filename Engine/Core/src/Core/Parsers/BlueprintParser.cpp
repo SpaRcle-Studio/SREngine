@@ -3,8 +3,8 @@
 //
 
 #include <Core/Parsers/BlueprintParser.h>
-#include <GUI/Pin.h>
-#include <GUI/Node.h>
+#include <Graphics/GUI/Pin.h>
+#include <Graphics/GUI/Node.h>
 
 std::vector<SR_GRAPH_NS::GUI::Node*> SR_CORE_NS::BlueprintParser::Parse(const std::string &path) {
     std::vector<SR_GRAPH_NS::GUI::Node*> blueprints;

@@ -13,8 +13,10 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
-#include <GUI/Editor/MessageBox.h>
-#include "imgui_internal.h" //взято с #5539 https://github.com/ocornut/imgui/issues/5539
+
+#include <Graphics/GUI/Editor/MessageBox.h>
+
+#include <imgui_internal.h> /// взято с #5539 https://github.com/ocornut/imgui/issues/5539
 
 namespace Framework::Core {
     inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }

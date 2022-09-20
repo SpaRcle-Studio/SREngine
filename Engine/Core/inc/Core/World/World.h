@@ -6,12 +6,13 @@
 #define SRENGINE_WORLD_H
 
 #include <Core/Engine.h>
-#include <Window/Window.h>
 
 #include <Utils/World/Scene.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/GameObject.h>
+
+#include <Graphics/Window/Window.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;

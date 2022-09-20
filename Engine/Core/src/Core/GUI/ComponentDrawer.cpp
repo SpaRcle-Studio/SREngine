@@ -3,26 +3,29 @@
 //
 
 #include <Core/GUI/ComponentDrawer.h>
-
 #include <Core/GUI/GUISystem.h>
-#include <Utils/Types/DataStorage.h>
-#include <Scripting/Base/Behaviour.h>
-#include <Types/Geometry/Mesh3D.h>
-#include <Types/Geometry/ProceduralMesh.h>
-#include <Utils/ResourceManager/ResourceManager.h>
-#include <GUI/Utils.h>
-#include <Types/Texture.h>
-#include <UI/Sprite2D.h>
-#include <Render/Render.h>
-#include <Types/Material.h>
-#include <Types/Camera.h>
 #include <Core/GUI/EditorGUI.h>
-#include <Utils/FileSystem/FileDialog.h>
 #include <Core/Settings/EditorSettings.h>
+
+#include <Utils/Types/DataStorage.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
-#include <UI/Anchor.h>
-#include <UI/Canvas.h>
+#include <Utils/FileSystem/FileDialog.h>
+
+#include <Scripting/Base/Behaviour.h>
+
 #include <Physics/3D/Rigidbody3D.h>
+
+#include <Graphics/Types/Geometry/Mesh3D.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/GUI/Utils.h>
+#include <Graphics/Types/Texture.h>
+#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Render/Render.h>
+#include <Graphics/Types/Material.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/UI/Anchor.h>
+#include <Graphics/UI/Canvas.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {

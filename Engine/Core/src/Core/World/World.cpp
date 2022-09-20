@@ -5,9 +5,11 @@
 #include <Core/World/World.h>
 
 #include <Utils/Types/RawMesh.h>
+
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Render/RenderScene.h>
+
 #include <assimp/scene.h>
-#include <Memory/CameraManager.h>
-#include <Render/RenderScene.h>
 
 namespace Framework::Core::World {
     SR_UTILS_NS::GameObject::Ptr World::Instance(Framework::Helper::Types::Marshal &marshal)  {

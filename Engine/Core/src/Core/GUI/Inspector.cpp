@@ -4,18 +4,20 @@
 
 #include <Core/GUI/Inspector.h>
 
-#include <GUI/Utils.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
+#include <Utils/ECS/TransformZero.h>
 #include <Utils/Types/SafePtrLockGuard.h>
+
 #include <Scripting/Base/Behaviour.h>
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/BoxCollider3D.h>
-#include <UI/Sprite2D.h>
-#include <UI/Anchor.h>
-#include <UI/Canvas.h>
-#include <Utils/ECS/TransformZero.h>
-#include <Types/Geometry/ProceduralMesh.h>
+
+#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/UI/Anchor.h>
+#include <Graphics/UI/Canvas.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/GUI/Utils.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)

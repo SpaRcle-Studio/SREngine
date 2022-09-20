@@ -4,15 +4,16 @@
 
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/Hierarchy.h>
+#include <Core/GUI/EditorCamera.h>
 
 #include <Utils/Input/InputSystem.h>
-#include <GUI/Editor/Guizmo.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Transform3D.h>
-#include <Window/Window.h>
-#include <Types/Camera.h>
-#include <Core/GUI/EditorCamera.h>
-#include <Types/Framebuffer.h>
+
+#include <Graphics/GUI/Editor/Guizmo.h>
+#include <Graphics/Window/Window.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/Types/Framebuffer.h>
 
 namespace SR_CORE_NS::GUI {
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {

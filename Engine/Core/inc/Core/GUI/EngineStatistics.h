@@ -5,7 +5,7 @@
 #ifndef SRENGINE_ENGINESTATISTICS_H
 #define SRENGINE_ENGINESTATISTICS_H
 
-#include <GUI/Widget.h>
+#include <Graphics/GUI/Widget.h>
 
 namespace Framework::Core::GUI {
     class EngineStatistics : public Graphics::GUI::Widget {

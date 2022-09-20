@@ -5,12 +5,13 @@
 #ifndef GAMEENGINE_GUISYSTEM_H
 #define GAMEENGINE_GUISYSTEM_H
 
-#include <Environment/Environment.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/World/Scene.h>
-#include <Types/Camera.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/ECS/GameObject.h>
+
+#include <Graphics/Environment/Environment.h>
+#include <Graphics/Types/Camera.h>
 
 namespace Framework::Core::GUI {
     class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {

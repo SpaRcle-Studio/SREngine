@@ -6,7 +6,8 @@
 #define SRENGINE_FILEBROWSER_H
 
 #include <Utils/FileSystem/Path.h>
-#include <GUI/Widget.h>
+
+#include <Graphics/GUI/Widget.h>
 
 namespace SR_CORE_NS::GUI {
     class FileBrowser : public SR_GRAPH_NS::GUI::Widget {

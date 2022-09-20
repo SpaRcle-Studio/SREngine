@@ -5,10 +5,11 @@
 #include <Core/World/VisualChunk.h>
 #include <Core/Engine.h>
 
-#include <Render/Render.h>
-#include <Types/Geometry/DebugWireframeMesh.h>
 #include <Utils/World/Region.h>
-#include <Render/RenderScene.h>
+
+#include <Graphics/Render/Render.h>
+#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
+#include <Graphics/Render/RenderScene.h>
 
 namespace Framework::Core::World {
     VisualChunk::VisualChunk(SRChunkAllocArgs)

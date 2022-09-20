@@ -11,58 +11,57 @@
 #endif
 
 #include <Utils/Debug.h>
-#include <Audio/Sound.h>
-
-#include <Core/Engine.h>
-#include <Core/World/World.h>
-#include <Core/World/VisualChunk.h>
-#include <Core/World/VisualRegion.h>
-
-#include <Utils/ResourceManager/ResourceManager.h>
-#include <Environment/OpenGL.h>
-#include <Environment/Vulkan.h>
-
 #include <Utils/World/SceneAllocator.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/Marshal.h>
 #include <Utils/TaskManager/TaskManager.h>
+#include <Utils/Types/RawMesh.h>
+#include <Utils/Settings.h>
+#include <Utils/Platform/Platform.h>
+
 #include <Audio/RawSound.h>
 #include <Audio/SoundManager.h>
+#include <Audio/Sound.h>
 
-#include <UI/Canvas.h>
-#include <UI/Anchor.h>
-#include <UI/Sprite2D.h>
+#include <Core/Engine.h>
+#include <Core/World/World.h>
+#include <Core/World/VisualChunk.h>
+#include <Core/World/VisualRegion.h>
+#include <Core/Settings/EditorSettings.h>
+
+#include <Graphics/Environment/OpenGL.h>
+#include <Graphics/Environment/Vulkan.h>
+#include <Graphics/UI/Canvas.h>
+#include <Graphics/UI/Anchor.h>
+#include <Graphics/UI/Sprite2D.h>
+
+#include <Graphics/Types/Texture.h>
+#include <Graphics/Loaders/SRSL.h>
+#include <Graphics/Types/Material.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Mesh.h>
+#include <Graphics/Types/Shader.h>
+#include <Graphics/Types/Geometry/Mesh3D.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
+#include <Graphics/Animations/Bone.h>
+#include <Graphics/Memory/MeshAllocator.h>
+#include <Graphics/GUI/NodeManager.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/Render/RenderManager.h>
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Types/RenderTexture.h>
 
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/BoxCollider3D.h>
 #include <Physics/PhysicsScene.h>
 
-#include <Utils/Types/RawMesh.h>
-#include <Types/Texture.h>
-#include <Loaders/SRSL.h>
-#include <Types/Material.h>
-#include <Types/Skybox.h>
-#include <Types/Mesh.h>
-#include <Types/Shader.h>
-#include <Types/Geometry/Mesh3D.h>
-#include <Types/Geometry/ProceduralMesh.h>
-#include <Types/Geometry/DebugWireframeMesh.h>
-#include <Animations/Bone.h>
-#include <Memory/MeshAllocator.h>
-#include <GUI/NodeManager.h>
-#include <FbxLoader/Debug.h>
-#include <Types/Camera.h>
-#include <Render/RenderManager.h>
-#include <Memory/CameraManager.h>
 #include <Scripting/Base/Behaviour.h>
-#include <Utils/Settings.h>
-#include <Utils/Platform/Platform.h>
-#include <Types/Framebuffer.h>
-#include <Types/RenderTexture.h>
-#include <Core/Settings/EditorSettings.h>
 
 using namespace Framework;
 
@@ -113,12 +112,12 @@ int main(int argc, char **argv) {
 
     Features::Instance().Reload(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
 
-    if (!FbxLoader::Debug::IsInit()) {
-        FbxLoader::Debug::Init(
-                [](const std::string &msg) { SR_ERROR(msg); },
-                [](const std::string &msg) { SR_WARN(msg); }
-        );
-    }
+    /// if (!FbxLoader::Debug::IsInit()) {
+    ///     FbxLoader::Debug::Init(
+    ///             [](const std::string &msg) { SR_ERROR(msg); },
+    ///             [](const std::string &msg) { SR_WARN(msg); }
+    ///     );
+    /// }
 
     if (Features::Instance().Enabled("CrashHandler")) {
 #ifdef SR_WIN32

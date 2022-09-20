@@ -5,8 +5,9 @@
 #ifndef SRENGINE_WORLDEDIT_H
 #define SRENGINE_WORLDEDIT_H
 
-#include <GUI/Widget.h>
 #include <Utils/World/Scene.h>
+
+#include <Graphics/GUI/Widget.h>
 
 namespace Framework::Core::GUI {
     class WorldEdit : public Graphics::GUI::Widget {

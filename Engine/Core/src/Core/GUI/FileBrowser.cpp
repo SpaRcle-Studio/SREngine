@@ -2,14 +2,14 @@
 // Created by Monika on 27.12.2021.
 //
 
-#include "Core/GUI/FileBrowser.h"
+#include <Core/GUI/FileBrowser.h>
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
 #include <Utils/Debug.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
-#include <GUI/Icons.h>
+#include <Graphics/GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()

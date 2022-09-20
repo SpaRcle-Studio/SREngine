@@ -3,13 +3,14 @@
 //
 
 #include <Core/GUI/Hierarchy.h>
+#include <Core/GUI/SceneRunner.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/TaskManager/TaskManager.h>
-#include <GUI/Icons.h>
-#include <Core/GUI/SceneRunner.h>
+
+#include <Graphics/GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()

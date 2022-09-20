@@ -5,23 +5,21 @@
 #include <Core/Engine.h>
 #include <Core/GUI/EditorGUI.h>
 
-#include <GUI/WidgetManager.h>
-#include <Environment/Environment.h>
-
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 
-#include <Render/Render.h>
-#include <Render/RenderScene.h>
-#include <Render/RenderContext.h>
-#include <Memory/CameraManager.h>
-#include <Window/Window.h>
+#include <Graphics/Environment/Environment.h>
+#include <Graphics/GUI/WidgetManager.h>
+#include <Graphics/Render/Render.h>
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Window/Window.h>
 
 #include <Physics/PhysicsScene.h>
-
-#include <Types/Skybox.h>
 
 namespace Framework {
     bool Engine::Create(SR_GRAPH_NS::Window* window) {

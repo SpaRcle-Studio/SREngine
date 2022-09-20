@@ -8,13 +8,12 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Math/Noise.h>
-#include <Loaders/ObjLoader.h>
-#include <Types/Skybox.h>
-#include <Types/Geometry/ProceduralMesh.h>
-
-#include <Render/PostProcessing.h>
-
 #include <Utils/ResourceManager/ResourceManager.h>
+
+#include <Graphics/Loaders/ObjLoader.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Render/PostProcessing.h>
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {

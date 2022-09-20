@@ -8,10 +8,8 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Types/SafePtrLockGuard.h>
-#include <Render/RenderScene.h>
 
-#include <utility>
-
+#include <Graphics/Render/RenderScene.h>
 
 bool Framework::Core::Commands::GameObjectRename::Redo() {
     auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
