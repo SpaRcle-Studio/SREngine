@@ -33,6 +33,11 @@ SRCopyFileToApp("Engine/Core/libs/Graphics/EvoVulkan/Core" "libEvoVulkand.dll")
 SRCopyFileToApp("Engine/Core/libs/Graphics/EvoVulkan/Core" "EvoVulkan.dll")
 SRCopyFileToApp("Engine/Core/libs/Graphics/EvoVulkan/Core" "EvoVulkand.dll")
 
+SRCopyFileToApp("Engine/Core/libs/Utils/libs/assimp/bin" "libassimp-vc142-mtd.dll")
+SRCopyFileToApp("Engine/Core/libs/Utils/libs/assimp/bin" "libassimp-vc142-mtdd.dll")
+SRCopyFileToApp("Engine/Core/libs/Utils/libs/assimp/bin" "assimp-vc142-mtd.dll")
+SRCopyFileToApp("Engine/Core/libs/Utils/libs/assimp/bin" "assimp-vc142-mtdd.dll")
+
 SRCopyFileToApp("Engine/Core/libs/Utils" "Utils.dll")
 SRCopyFileToApp("Engine/Core/libs/Utils" "Utilsd.dll")
 SRCopyFileToApp("Engine/Core/libs/Utils" "libUtils.dll")
