@@ -49,8 +49,8 @@ Framework::Core::Commands::GameObjectTransform::GameObjectTransform(const SR_UTI
 }
 
 Framework::Core::Commands::GameObjectTransform::~GameObjectTransform() {
-    SR_SAFE_DELETE_PTR(m_newMarshal);
-    SR_SAFE_DELETE_PTR(m_oldMarshal);
+    SR_SAFE_DELETE_PTR(m_newMarshal)
+    SR_SAFE_DELETE_PTR(m_oldMarshal)
 }
 
 //!-------------------------------------------------------

@@ -16,7 +16,7 @@ namespace Framework::Graphics {
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
-            VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME,
+            //VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME,
             //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
     };
 

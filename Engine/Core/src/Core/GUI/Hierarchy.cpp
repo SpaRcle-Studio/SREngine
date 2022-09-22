@@ -202,7 +202,7 @@ namespace SR_CORE_NS::GUI {
         InputHandler::OnKeyDown(data);
     }
 
-    void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) { /// TODO: Проверить и решить, должен ли этот метод зависеть от Update()
+    void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
         SR_LOCK_GUARD
 
         switch (data->GetKeyCode()) {
@@ -239,7 +239,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::Paste() {
-        /// TODO: перевести на команды
 
         auto&& base64 = Helper::Platform::GetClipboardText();
 
