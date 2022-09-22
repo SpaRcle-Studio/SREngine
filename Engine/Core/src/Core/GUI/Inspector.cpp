@@ -180,8 +180,9 @@ namespace Framework::Core::GUI {
         TextCenter("Transform 3D");
 
         auto&& translation = transform->GetTranslation();
-        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f))
-            transform->SetTranslation(translation);
+        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f)) {
+            BackupTransform(transform, [&]() { transform->SetTranslation(translation); });
+        }
 
         auto&& rotation = transform->GetRotation();
         if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
@@ -194,6 +195,16 @@ namespace Framework::Core::GUI {
         auto&& skew = transform->GetSkew();
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             transform->SetSkew(skew);
+    }
+
+    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::Transform* ptr, const std::function<void()>& operation) const
+    {
+        SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+
+        operation();
+
+        auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr->GetGameObject(), pMarshal);
+        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
     void Inspector::DrawSwitchTransform() {

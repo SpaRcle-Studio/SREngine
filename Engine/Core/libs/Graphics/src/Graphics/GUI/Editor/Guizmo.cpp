@@ -107,7 +107,7 @@ namespace SR_GRAPH_NS::GUI {
         glm::mat4 transform = GetMatrix();
         glm::mat4 view = camera->GetImGuizmoView();
 
-        ImGuizmo::Manipulate(
+        if (ImGuizmo::Manipulate(
                 glm::value_ptr(view),
                 glm::value_ptr(camera->GetProjection()),
                 m_operation,
@@ -117,7 +117,15 @@ namespace SR_GRAPH_NS::GUI {
                 m_snapActive ? m_snap : NULL,
                 m_boundsActive ? m_bounds : NULL,
                 m_snapActive && m_boundsActive ? m_boundsSnap : NULL
-        );
+        )) {
+            m_isUse = true;
+        }
+        else {
+            if (m_isUse && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+                SR_LOG("END GUIZMO MOVE");
+                m_isUse = false;
+            }
+        }
 
         if (ImGuizmo::IsUsing()) {
             SR_MATH_NS::FVector3 translation, rotation, scale;

@@ -402,6 +402,10 @@ namespace SR_WORLD_NS {
         for (GameObject::Ptr gameObject : GetRootGameObjects()) {
             const Math::FVector3 gmPosition = gameObject->GetTransform()->GetTranslation();
 
+            if (!gmPosition.IsFinite()) {
+                continue;
+            }
+
             auto chunk = AddOffset(SR_MATH_NS::IVector3(gmPosition.Singular(chunkSize.Cast<Math::Unit>()) / chunkSize), -m_observer->m_offset.m_chunk);
             auto region = AddOffset(chunk.Singular(Math::IVector3(m_regionWidth - 1)) / Math::IVector3(m_regionWidth), -m_observer->m_offset.m_region);
 

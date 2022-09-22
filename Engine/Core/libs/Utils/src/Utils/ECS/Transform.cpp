@@ -1,3 +1,4 @@
+#include "..\..\..\inc\Utils\ECS\Transform.h"
 //
 // Created by Nikita on 27.11.2020.
 //
@@ -21,6 +22,10 @@ namespace SR_UTILS_NS {
         }
 
         return nullptr;
+    }
+
+    SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> Transform::GetGameObject() const {
+        return m_gameObject->GetThis();
     }
 
     void Transform::GlobalTranslate(const Math::FVector3& translation) {

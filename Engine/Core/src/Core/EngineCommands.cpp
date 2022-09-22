@@ -11,6 +11,50 @@
 
 #include <Graphics/Render/RenderScene.h>
 
+bool Framework::Core::Commands::GameObjectTransform::Redo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        SR_HTYPES_NS::Marshal copy = m_newMarshal->Copy();
+        ptr->SetTransform(SR_UTILS_NS::Transform::Load(copy, ptr.Get()));
+        return true;
+    }
+
+    return false;
+}
+
+bool Framework::Core::Commands::GameObjectTransform::Undo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        SR_HTYPES_NS::Marshal copy = m_oldMarshal->Copy();
+        ptr->SetTransform(SR_UTILS_NS::Transform::Load(copy, ptr.Get()));
+        return true;
+    }
+    return false;
+}
+
+Framework::Core::Commands::GameObjectTransform::GameObjectTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, SR_HTYPES_NS::Marshal::Ptr pOldMarshal) {
+    m_path = ptr->GetEntityPath();
+    m_newMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+    m_oldMarshal = pOldMarshal;
+}
+
+Framework::Core::Commands::GameObjectTransform::~GameObjectTransform() {
+    SR_SAFE_DELETE_PTR(m_newMarshal);
+    SR_SAFE_DELETE_PTR(m_oldMarshal);
+}
+
+//!-------------------------------------------------------
+
 bool Framework::Core::Commands::GameObjectRename::Redo() {
     auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
     auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);

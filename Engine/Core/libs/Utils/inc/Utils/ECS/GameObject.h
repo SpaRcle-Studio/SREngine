@@ -18,6 +18,7 @@ namespace SR_UTILS_NS::World {
 
 namespace SR_UTILS_NS {
     class Transform3D;
+    class Transform;
     class Component;
 
     SR_ENUM_NS(GameObjectDestroyBy,

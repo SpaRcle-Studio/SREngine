@@ -22,9 +22,9 @@ namespace SR_CORE_NS::Commands {
     class GameObjectTransform : public SR_UTILS_NS::ReversibleCommand {
     public:
         GameObjectTransform() = default;
-        explicit GameObjectTransform(const SR_UTILS_NS::GameObject::Ptr& ptr);
+        explicit GameObjectTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, SR_HTYPES_NS::Marshal::Ptr pOldMarshal);
 
-        ~GameObjectTransform() override = default;
+        ~GameObjectTransform() override ;
 
         bool Redo() override;
         bool Undo() override;
@@ -33,7 +33,8 @@ namespace SR_CORE_NS::Commands {
 
     private:
         SR_UTILS_NS::EntityPath m_path;
-
+        SR_HTYPES_NS::Marshal::Ptr m_newMarshal = nullptr;
+        SR_HTYPES_NS::Marshal::Ptr m_oldMarshal = nullptr;
     };
     
     class GameObjectEnable : public SR_UTILS_NS::ReversibleCommand {

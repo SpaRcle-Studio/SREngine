@@ -38,6 +38,8 @@ namespace SR_CORE_NS::GUI {
         void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
         void DrawTransform3D(SR_UTILS_NS::Transform3D* transform) const;
 
+        void BackupTransform(const SR_UTILS_NS::Transform* ptr, const std::function<void()>& operation) const;
+
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
             auto&& context = dynamic_cast<EditorGUI*>(GetManager());

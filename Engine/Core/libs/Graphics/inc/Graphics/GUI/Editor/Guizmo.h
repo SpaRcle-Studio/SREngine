@@ -54,6 +54,9 @@ namespace SR_GRAPH_NS::GUI {
 
     private:
         SR_UTILS_NS::Transform*   m_transform     = nullptr;
+
+        bool                      m_isUse         = false;
+
         int32_t                   m_snapValue     = 100;
         float_t                   m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };
         float_t                   m_snap[3]       = { 1.f, 1.f, 1.f };

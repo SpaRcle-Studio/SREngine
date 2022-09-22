@@ -159,6 +159,11 @@ namespace SR_MATH_NS {
             return Vector3(xd, yd, zd);
         }
 
+        SR_NODISCARD bool IsFinite() const noexcept {
+            /// если будет inf или nan, то вернет false
+            return std::isfinite(x) && std::isfinite(y) && std::isfinite(z);
+        }
+
         SR_NODISCARD bool ContainsNaN() const {
             return static_cast<float>(x) == SR_NAN || static_cast<float>(y) == SR_NAN || static_cast<float>(z) == SR_NAN;
         }
