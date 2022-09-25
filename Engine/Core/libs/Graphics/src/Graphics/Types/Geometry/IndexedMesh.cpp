@@ -24,6 +24,7 @@ namespace SR_GTYPES_NS {
         }
 
         indexed->m_countIndices = m_countIndices;
+        indexed->m_countVertices = m_countVertices;
 
         return Mesh::Copy(indexed);
     }
@@ -40,7 +41,7 @@ namespace SR_GTYPES_NS {
             }
 
             if (m_IBO = m_pipeline->CalculateIBO((void *) indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
-                SR_ERROR("IndexedMesh::Calculate() : failed calculate IBO \"" + m_geometryName + "\" mesh!");
+                SR_ERROR("IndexedMesh::Calculate() : failed calculate IBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;
             }

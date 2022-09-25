@@ -15,15 +15,15 @@ namespace SR_GRAPH_NS::Types {
     class Camera;
 }
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_CORE_NS::GUI {
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
     public:
         Guizmo() = default;
-        ~Guizmo() override = default;
+        ~Guizmo() override;
 
     public:
-        void Draw(GameObjectPtr gameObject, GameObjectPtr camera);
+        void Draw(const GameObjectPtr& gameObject, const GameObjectPtr& camera);
         void DrawTools();
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
@@ -53,6 +53,8 @@ namespace SR_GRAPH_NS::GUI {
         void DrawManipulation(SR_GRAPH_NS::Types::Camera* camera);
 
     private:
+        SR_HTYPES_NS::Marshal*    m_marshal       = nullptr;
+
         SR_UTILS_NS::Transform*   m_transform     = nullptr;
 
         bool                      m_isUse         = false;

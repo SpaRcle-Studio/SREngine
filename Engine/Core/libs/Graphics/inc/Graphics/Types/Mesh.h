@@ -82,16 +82,17 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return true; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsDebugMesh() const noexcept { return false; }
         SR_NODISCARD Shader* GetShader() const;
-        SR_NODISCARD std::string GetGeometryName() const { return m_geometryName; }
+        SR_NODISCARD virtual std::string GetGeometryName() const { return std::string(); }
         SR_NODISCARD Material* GetMaterial() const { return m_material; }
         SR_NODISCARD bool IsCalculated() const { return m_isCalculated; }
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const;
+        SR_NODISCARD virtual SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3::Zero(); }
 
-        void SetGeometryName(const std::string& name) { m_geometryName = name; }
+        virtual void SetGeometryName(const std::string& name) { }
         void SetMaterial(Material* material);
+        void SetMaterial(const SR_UTILS_NS::Path& path);
         void SetContext(const RenderContextPtr& context);
 
         SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
@@ -104,16 +105,8 @@ namespace SR_GTYPES_NS {
 
     protected:
         Memory::UBOManager&          m_uboManager;
-        /// cached variable
-        mutable SR_UTILS_NS::Path    m_resourcePath;
-        std::string                  m_geometryName;
-
         RenderContextPtr             m_context;
 
-        SR_MATH_NS::Matrix4x4        m_modelMatrix       = SR_MATH_NS::Matrix4x4::Identity();
-        SR_MATH_NS::FVector3         m_translation       = SR_MATH_NS::FVector3::Zero();
-
-        SR_MATH_NS::FVector3         m_barycenter        = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
         /// Контекст будет задан только после регистрации в RenderScene
         PipelinePtr                  m_pipeline          = nullptr;
 

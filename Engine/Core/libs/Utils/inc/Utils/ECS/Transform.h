@@ -31,7 +31,7 @@ namespace SR_UTILS_NS {
         friend class GameObject;
     public:
         Transform() = default;
-        ~Transform() override = default;
+        ~Transform() override;
 
     public:
         static Transform* Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject);

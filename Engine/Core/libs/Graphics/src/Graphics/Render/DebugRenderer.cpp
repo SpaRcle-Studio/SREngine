@@ -6,6 +6,7 @@
 #include <Utils/Types/Time.h>
 
 #include <Graphics/Render/DebugRenderer.h>
+#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 
 namespace SR_GRAPH_NS {
     DebugRenderer::DebugRenderer(RenderScene* pRenderScene)
@@ -14,7 +15,11 @@ namespace SR_GRAPH_NS {
     {
         using namespace std::placeholders;
 
-        SR_UTILS_NS::DebugDraw::Instance().SetCallbacks(this, std::bind(&DebugRenderer::DrawLine, this, _1, _2, _3, _4, _5));
+        SR_UTILS_NS::DebugDraw::Instance().SetCallbacks(this,
+                std::bind(&DebugRenderer::DrawLine, this, _1, _2, _3, _4, _5),
+                std::bind(&DebugRenderer::DrawCube, this, _1, _2, _3, _4, _5, _6)
+        );
+
         SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
     }
 
@@ -35,6 +40,11 @@ namespace SR_GRAPH_NS {
         for (uint64_t i = 0; i < m_timedObjects.size(); ++i) {
             auto&& timed = m_timedObjects[i];
 
+            if (!timed.registered) {
+                m_renderScene->Register(timed.pMesh);
+                timed.registered = true;
+            }
+
             if (!timed.pMesh) {
                 continue;
             }
@@ -51,10 +61,9 @@ namespace SR_GRAPH_NS {
         SR_LOCK_GUARD
 
         if (id == SR_ID_INVALID) {
-            auto&& pDebugLine = new SR_GTYPES_NS::DebugLine();
+            auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
             pDebugLine->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat"));
             pDebugLine->AddUsePoint();
-            m_renderScene->Register(pDebugLine);
             return AddTimedObject(time, pDebugLine);
         }
         else if (id >= m_timedObjects.size()) {
@@ -63,6 +72,50 @@ namespace SR_GRAPH_NS {
         }
         else {
             return SR_ID_INVALID;
+        }
+    }
+
+    uint64_t DebugRenderer::DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+        SR_LOCK_GUARD
+
+        if (id == SR_ID_INVALID) {
+            SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(
+                    SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)
+            );
+
+            if (pMesh) {
+                pMesh->SetColor(color);
+                pMesh->SetMaterial("Engine/Materials/Debug/wireframe.mat");
+                pMesh->SetMatrix(SR_MATH_NS::Matrix4x4(pos, rot, scale));
+                pMesh->AddUsePoint();
+
+                return AddTimedObject(time, pMesh);
+            }
+
+            return SR_ID_INVALID;
+        }
+        else if (id >= m_timedObjects.size()) {
+            SRHalt0();
+            return SR_ID_INVALID;
+        }
+        else {
+            if (!m_timedObjects[id].pMesh) {
+                return DrawCube(SR_ID_INVALID, pos, rot, scale, color, time);
+            }
+
+            auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh*>(m_timedObjects[id].pMesh);
+
+            if (!pMesh) {
+                SRHalt0();
+                return SR_ID_INVALID;
+            }
+
+            pMesh->SetColor(color);
+            pMesh->SetMatrix(SR_MATH_NS::Matrix4x4(pos, rot, scale));
+
+            UpdateTimedObject(id, time);
+
+            return id;
         }
     }
 
@@ -76,6 +129,7 @@ namespace SR_GRAPH_NS {
         timedObject.startPoint = timePoint;
         timedObject.duration = duration.count();
         timedObject.endPoint = timedObject.startPoint + timedObject.duration;
+        timedObject.registered = false;
 
         if (m_emptyIds.empty()) {
             m_timedObjects.emplace_back(timedObject);
@@ -87,6 +141,17 @@ namespace SR_GRAPH_NS {
             m_timedObjects[id] = timedObject;
             return id;
         }
+    }
+
+    void DebugRenderer::UpdateTimedObject(uint64_t id, float_t seconds) {
+        auto&& duration = std::chrono::duration_cast<std::chrono::steady_clock::duration>(std::chrono::duration<float_t>(seconds));
+        auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
+
+        auto&& timedObject = m_timedObjects[id];
+
+        timedObject.startPoint = timePoint;
+        timedObject.duration = duration.count();
+        timedObject.endPoint = timedObject.startPoint + timedObject.duration;
     }
 
     void DebugRenderer::Clear() {

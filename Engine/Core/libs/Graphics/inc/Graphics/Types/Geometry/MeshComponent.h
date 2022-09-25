@@ -18,6 +18,8 @@ namespace SR_GTYPES_NS {
         { }
 
     public:
+        IResource* Copy(IResource* destination) const override;
+
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 
         void OnAttached() override;
@@ -33,11 +35,36 @@ namespace SR_GTYPES_NS {
             return SR_UTILS_NS::Component::IsActive();
         }
 
+        const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override {
+            return m_modelMatrix;
+        }
+
+        SR_NODISCARD std::string GetGeometryName() const override {
+            return m_geometryName;
+        }
+
+        void SetGeometryName(const std::string& name) override {
+            m_geometryName = name;
+        }
+
+        SR_MATH_NS::FVector3 GetTranslation() const override {
+            return m_translation;
+        }
+
+        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+
     protected:
         SR_NODISCARD RenderScenePtr GetRenderScene();
 
     protected:
         RenderScenePtr m_renderScene;
+
+        std::string m_geometryName;
+
+        SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
+        SR_MATH_NS::FVector3 m_translation = SR_MATH_NS::FVector3::Zero();
+
+        SR_MATH_NS::FVector3 m_barycenter = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
 
     };
 }

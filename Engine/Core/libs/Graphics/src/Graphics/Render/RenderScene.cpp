@@ -21,9 +21,7 @@ namespace SR_GRAPH_NS {
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
         , m_debugRender(new DebugRenderer(this))
-    {
-        SR_UTILS_NS::DebugDraw::Instance().DrawLine(SR_MATH_NS::FVector3(-1.f), SR_MATH_NS::FVector3(1.f));
-    }
+    { }
 
     RenderScene::~RenderScene() {
         if (m_debugRender) {

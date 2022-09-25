@@ -24,7 +24,7 @@ namespace SR_CORE_NS::Commands {
         GameObjectTransform() = default;
         explicit GameObjectTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, SR_HTYPES_NS::Marshal::Ptr pOldMarshal);
 
-        ~GameObjectTransform() override ;
+        ~GameObjectTransform() override;
 
         bool Redo() override;
         bool Undo() override;

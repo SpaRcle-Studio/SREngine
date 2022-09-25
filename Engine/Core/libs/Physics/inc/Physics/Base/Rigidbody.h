@@ -50,6 +50,7 @@ namespace SR_PHYSICS_NS::Types {
         bool m_dirty = false;
 
         float_t m_mass = 0.1f;
+        uint64_t m_debugId = SR_ID_INVALID;
 
     };
 }

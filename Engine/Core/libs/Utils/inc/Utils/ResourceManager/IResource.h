@@ -129,6 +129,9 @@ namespace SR_UTILS_NS {
 
         mutable std::recursive_mutex m_mutex;
 
+        /// cached variable
+        mutable SR_UTILS_NS::Path m_resourcePath;
+
     private:
         float_t m_lifetime = 0;
         uint64_t m_resourceHash = 0;

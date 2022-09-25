@@ -28,6 +28,10 @@ namespace Framework::Core::GUI {
     void Inspector::Draw() {
         SR_LOCK_GUARD
 
+        if (!m_scene.RecursiveLockIfValid()) {
+            return;
+        }
+
         if (m_gameObject.TryRecursiveLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
                 auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
@@ -44,7 +48,7 @@ namespace Framework::Core::GUI {
 
             ImGui::Separator();
 
-            auto&& pTransform = m_gameObject->GetTransform();
+            auto pTransform = m_gameObject->GetTransform();
 
             switch (pTransform->GetMeasurement()) {
                 case SR_UTILS_NS::Measurement::Space2D:
@@ -65,6 +69,8 @@ namespace Framework::Core::GUI {
 
             m_gameObject.Unlock();
         }
+
+        m_scene.Unlock();
     }
 
     void Inspector::Update() {
@@ -181,7 +187,7 @@ namespace Framework::Core::GUI {
 
         auto&& translation = transform->GetTranslation();
         if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f)) {
-            BackupTransform(transform, [&]() { transform->SetTranslation(translation); });
+            transform->SetTranslation(translation);
         }
 
         auto&& rotation = transform->GetRotation();
@@ -197,13 +203,13 @@ namespace Framework::Core::GUI {
             transform->SetSkew(skew);
     }
 
-    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::Transform* ptr, const std::function<void()>& operation) const
+    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr ptr, const std::function<void()>& operation) const
     {
-        SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+        SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
 
         operation();
 
-        auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr->GetGameObject(), pMarshal);
+        auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
         Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 

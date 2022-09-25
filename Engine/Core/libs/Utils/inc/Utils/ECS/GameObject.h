@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
         Component* GetComponent(size_t id);
 
         /** Отличие от AddComponent в том, что используется только при загрузке объекта,
-         * не вызывая при этом Awake -> OnEnable -> Start */
+         * не вызывая при этом OnAttached -> Awake -> OnEnable -> Start, а делая это отложенно */
         bool LoadComponent(Component* component);
         /** Добавляет новый компонент на объект, вызывает у компонента
          * последовательность Awake -> OnEnable -> Start */
@@ -110,6 +110,9 @@ namespace SR_UTILS_NS {
         bool MoveToTree(const GameObject::Ptr& destination);
         bool AddChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
+
+        /// Вызыват OnAttached у компонентов загруженных через LoadComponent
+        void PostLoad();
 
         void Awake(bool isPaused) noexcept;
         void Start() noexcept;
@@ -146,12 +149,13 @@ namespace SR_UTILS_NS {
         ScenePtr           m_scene      = { };
         Transform*         m_transform  = nullptr;
 
-        Components         m_components = { };
-
         Name               m_name;
         std::string        m_tag;
 
         GameObjectFlagBits m_flags = GAMEOBJECT_FLAG_NONE;
+
+        Components            m_components = { };
+        std::list<Component*> m_loadedComponents = { };
 
     };
 }

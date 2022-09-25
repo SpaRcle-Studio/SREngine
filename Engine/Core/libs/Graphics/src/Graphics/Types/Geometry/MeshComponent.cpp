@@ -55,7 +55,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_MATH_NS::FVector3 MeshComponent::GetBarycenter() const {
-        return Component::GetBarycenter();
+        return m_barycenter;
     }
 
     void MeshComponent::OnMatrixDirty() {
@@ -68,5 +68,29 @@ namespace SR_GTYPES_NS {
         }
 
         Component::OnMatrixDirty();
+    }
+
+    SR_UTILS_NS::IResource *MeshComponent::Copy(SR_UTILS_NS::IResource *destination) const {
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
+        auto* pCopy = dynamic_cast<MeshComponent*>(destination ? destination : nullptr);
+        pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::Copy(pCopy));
+
+        pCopy->m_resourcePath = m_resourcePath;
+        pCopy->m_geometryName = m_geometryName;
+        pCopy->m_barycenter = m_barycenter;
+
+        return IndexedMesh::Copy(destination);
+    }
+
+    SR_UTILS_NS::Path MeshComponent::GetResourcePath() const {
+        if (m_resourcePath.empty()) {
+            m_resourcePath = SR_UTILS_NS::Path(
+                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                    true /** fast */
+            );
+        }
+
+        return m_resourcePath;
     }
 }

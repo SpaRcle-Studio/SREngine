@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Cancel() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (m_history.empty() || m_historyPC == UINT32_MAX)
             return false;
@@ -73,7 +73,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Execute(ReversibleCommand *cmd, SyncType sync) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (m_historyPC != UINT32_MAX) {
             for (uint32_t PC = m_history.size() - 1; PC > m_historyPC; --PC)
@@ -92,7 +92,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::RegisterCommand(const std::string &id, const CmdAllocator &allocator) {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if (m_allocators.count(id) == 1) {
             SR_ERROR("CmdManager::RegisterCommand() : command \"" + id + "\" already is registered!");
@@ -104,54 +104,18 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool CmdManager::Run() {
-        if (m_isRun.load()) {
-            SR_ERROR("CmdManager::Run() : command manager is already ran!");
-            return false;
+    void CmdManager::Update() {
+        SR_LOCK_GUARD
+
+        while (!m_commands.empty()) {
+            SRVerifyFalse2(!DoCmd(m_commands.front()), "Failed to execute command!");
+            m_commands.pop();
         }
-
-        m_isRun.store(true);
-
-        SR_INFO("CmdManager::Run() : run command manager thread...");
-
-        m_maxHistorySize = 128;
-
-        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
-            while(m_isRun.load()) {
-                m_thread->Sleep(100);
-
-                std::lock_guard<std::mutex> lock(m_mutex);
-
-                while (!m_commands.empty()) {
-                    SRVerifyFalse2(!DoCmd(m_commands.front()), "Failed to execute command!");
-                    m_commands.pop();
-                }
-            }
-        });
-
-        return m_thread->Joinable();
     }
 
     bool CmdManager::Close() {
-        if (!m_isRun.load()) {
-            SR_ERROR("CmdManager::Close() : command manager isn't ran!");
-            return false;
-        }
-
-        SR_INFO("CmdManager::Close() : stopping command manager thread...");
-
-        m_isRun.store(false);
-
-        const bool result = m_thread && m_thread->TryJoin();
-
-        if (m_thread) {
-            m_thread->Free();
-            m_thread = nullptr;
-        }
-
         ClearHistory();
-
-        return result;
+        return true;
     }
 
     bool CmdManager::ExecuteImpl(ReversibleCommand *cmd, SyncType sync) {
@@ -197,7 +161,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Redo() {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
 
         if ((m_historyPC >= (m_history.size() - 1) && m_historyPC != UINT32_MAX) || m_history.empty())
             return false;
@@ -209,7 +173,7 @@ namespace SR_UTILS_NS {
     }
 
     std::string CmdManager::GetLastCmdName() const {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        SR_LOCK_GUARD
         return m_lastCmdName;
     }
 }

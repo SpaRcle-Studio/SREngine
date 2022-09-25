@@ -77,10 +77,6 @@ namespace SR_GTYPES_NS {
     }
 
     void DebugLine::UseMaterial() {
-        m_startPoint = SR_MATH_NS::FVector3(-1, -1, -1);
-        m_endPoint = SR_MATH_NS::FVector3(1, 1, 1);
-        m_color = SR_MATH_NS::FVector4(1, 1, 1, 1);
-
         if (auto&& pShader = GetShader()) {
             pShader->SetValue(SHADER_LINE_START_POINT, m_startPoint.Cast<float_t>());
             pShader->SetValue(SHADER_LINE_END_POINT, m_endPoint.Cast<float_t>());

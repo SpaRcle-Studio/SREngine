@@ -23,9 +23,11 @@ namespace SR_GRAPH_NS {
 
     private:
         uint64_t DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
 
     private:
         uint64_t AddTimedObject(float_t seconds, SR_GTYPES_NS::Mesh* pMesh);
+        void UpdateTimedObject(uint64_t id, float_t seconds);
 
     private:
         mutable std::recursive_mutex m_mutex;
@@ -37,6 +39,7 @@ namespace SR_GRAPH_NS {
             uint64_t endPoint;
             uint64_t duration;
             SR_GTYPES_NS::Mesh* pMesh;
+            bool registered;
         };
 
         std::vector<DebugTimedObject> m_timedObjects;

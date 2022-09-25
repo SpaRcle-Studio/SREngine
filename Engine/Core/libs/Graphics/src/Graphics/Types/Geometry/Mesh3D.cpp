@@ -214,7 +214,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool Mesh3D::Reload() {
-        SR_SHADER_LOG("Mesh3D::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
+        SR_LOG("Mesh3D::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
 
         m_loadState = LoadState::Reloading;
 

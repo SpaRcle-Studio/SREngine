@@ -130,11 +130,6 @@ namespace Framework {
             return false;
         }
 
-        if (!m_cmdManager->Run()) {
-            SR_ERROR("Engine::Run() : failed to run command manager!");
-            return false;
-        }
-
         m_isRun = true;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
@@ -182,7 +177,7 @@ namespace Framework {
         SR_INFO("Engine::Close() : destroying the editor...");
         SR_SAFE_DELETE_PTR(m_editor);
 
-        if (m_cmdManager && m_cmdManager->IsRun()) {
+        if (m_cmdManager) {
             SR_INFO("Engine::Close() : close the command manager...");
             m_cmdManager->Close();
         }
@@ -382,6 +377,8 @@ namespace Framework {
                         SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
             }
 
+            m_cmdManager->Update();
+
             if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
                 m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
             }
@@ -423,6 +420,10 @@ namespace Framework {
 
         for (auto&& gameObject : root) {
             rootHash = SR_UTILS_NS::HashCombine(gameObject.GetRawPtr(), rootHash);
+            gameObject->PostLoad();
+        }
+
+        for (auto&& gameObject : root) {
             gameObject->Awake(isPaused);
         }
 

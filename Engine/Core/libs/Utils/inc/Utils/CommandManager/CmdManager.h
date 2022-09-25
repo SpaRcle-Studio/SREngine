@@ -34,7 +34,6 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD std::string GetLastCmdName() const;
         SR_NODISCARD ReversibleCommand* MakeCommand(const std::string& id) const;
-        SR_NODISCARD bool IsRun() const { return m_isRun; }
 
         bool MakeAndExecute(const std::string& id, SyncType sync);
         bool Execute(ReversibleCommand* cmd, SyncType sync);
@@ -42,7 +41,7 @@ namespace SR_UTILS_NS {
         bool Cancel();
         bool RegisterCommand(const std::string& id, const CmdAllocator& allocator);
 
-        bool Run();
+        void Update();
         bool Close();
 
     private:
@@ -56,12 +55,10 @@ namespace SR_UTILS_NS {
         std::queue<Cmd> m_commands;
         std::vector<ReversibleCommand*> m_history;
         uint32_t m_historyPC = UINT32_MAX;
-        uint32_t m_maxHistorySize = 0;
+        uint32_t m_maxHistorySize = 128;
 
         CmdAllocators m_allocators;
-        mutable std::mutex m_mutex;
-        Types::Thread::Ptr m_thread{};
-        std::atomic<bool> m_isRun;
+        mutable std::recursive_mutex m_mutex;
         std::string m_lastCmdName;
 
     };

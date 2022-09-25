@@ -3,6 +3,7 @@
 //
 
 #include <Utils/ECS/Transform3D.h>
+#include <Utils/ECS/Transform2D.h>
 
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Render/RenderContext.h>

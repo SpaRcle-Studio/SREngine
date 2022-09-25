@@ -94,7 +94,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("DebugWireframeMesh::Calculate() : calculating \"" + m_geometryName + "\"...");
+            SR_LOG("DebugWireframeMesh::Calculate() : calculating \"" + GetGeometryName() + "\"...");
         }
 
         auto vertices = Vertices::CastVertices<Vertices::SimpleVertex>(m_rawMesh->GetVertices(m_meshId));
@@ -135,6 +135,8 @@ namespace SR_GTYPES_NS {
             m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
             m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
 
+            SRAssert2(m_countVertices != 0 && m_countIndices != 0, "Invalid mesh!");
+
             SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
             SetRawMesh(pRawMesh);
 
@@ -148,7 +150,7 @@ namespace SR_GTYPES_NS {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
+            SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + GetGeometryName() + "\" mesh video memory...");
         }
 
         if (!FreeVBO<Vertices::VertexType::SimpleVertex>()) {
@@ -163,7 +165,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool DebugWireframeMesh::Reload() {
-        SR_SHADER_LOG("DebugWireframeMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
+        SR_LOG("DebugWireframeMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
 
         m_loadState = LoadState::Reloading;
 
@@ -187,5 +189,25 @@ namespace SR_GTYPES_NS {
     void DebugWireframeMesh::UseMaterial() {
         Mesh::UseMaterial();
         GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        GetShader()->SetVec4(SR_COMPILE_TIME_CRC32_STR("color"), m_color.Cast<float_t>().ToGLM());
+    }
+
+    const SR_MATH_NS::Matrix4x4 &DebugWireframeMesh::GetModelMatrix() const {
+        return m_modelMatrix;
+    }
+
+    SR_UTILS_NS::Path DebugWireframeMesh::GetResourcePath() const {
+        if (m_resourcePath.empty()) {
+            m_resourcePath = SR_UTILS_NS::Path(
+                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                    true /** fast */
+            );
+        }
+
+        return m_resourcePath;
+    }
+
+    void DebugWireframeMesh::SetColor(const SR_MATH_NS::FVector4& color) {
+        m_color = color;
     }
 }

@@ -8,12 +8,13 @@
 namespace SR_UTILS_NS {
     /// ---------------------------------------------- CALLBACKS INITIALIZATIONS ---------------------------------------
 
-    void DebugDraw::SetCallbacks(void* pUserIdentifier, const DrawLineCallback& lineCallback) {
+    void DebugDraw::SetCallbacks(void* pUserIdentifier, const DrawLineCallback& lineCallback, const DrawCubeCallback& cubeCallback) {
         SR_LOCK_GUARD
 
         auto&& callbacks = m_callbacks[pUserIdentifier];
 
         callbacks.drawLineCallback = lineCallback;
+        callbacks.drawCubeCallback = cubeCallback;
     }
 
     void DebugDraw::RemoveCallbacks(void* pUserIdentifier) {
@@ -76,20 +77,104 @@ namespace SR_UTILS_NS {
     }
 
     uint64_t DebugDraw::DrawLine(const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end) {
-        return DrawLine(SR_ID_INVALID, start, end, SR_MATH_NS::FColor(1.f), DEFAULT_DURATION);
+        return DrawLine(SR_ID_INVALID, start, end, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
     uint64_t DebugDraw::DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end) {
-        return DrawLine(id, start, end, SR_MATH_NS::FColor(1.f), DEFAULT_DURATION);
+        return DrawLine(id, start, end, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
     uint64_t DebugDraw::DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, float_t time) {
-        return DrawLine(id, start, end, SR_MATH_NS::FColor(1.f), time);
+        return DrawLine(id, start, end, DEFAULT_COLOR, time);
     }
 
-    void DebugDraw::DrawLine(uint64_t id) {
-        DrawLine(id, SR_MATH_NS::FVector3(0.f), SR_MATH_NS::FVector3(0.f), SR_MATH_NS::FColor(1.f), 0.f);
+    uint64_t DebugDraw::DrawLine(uint64_t id) {
+        return DrawLine(id, DEFAULT_POSITION, DEFAULT_POSITION, DEFAULT_COLOR, 0.f);
     }
 
-    /// ---------------------------------------------------- LINE DRAWING ----------------------------------------------
+    uint64_t DebugDraw::DrawLine() {
+        return DrawLine(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_POSITION, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    /// ---------------------------------------------------- CUBE DRAWING ----------------------------------------------
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+        SR_LOCK_GUARD
+
+        if (m_currentCallbacks && m_currentCallbacks->drawCubeCallback) {
+            return m_currentCallbacks->drawCubeCallback(id, pos, rot, scale, color, time);
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawCube(id, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawCube(id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawCube(id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos) {
+        return DrawCube(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawCube(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawCube(SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawCube(SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawCube(SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3 &pos) {
+        return DrawCube(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
+        return DrawCube(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
+        return DrawCube(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawCube(SR_ID_INVALID, pos, rot, scale, color, time);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
+        return DrawCube(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
+        return DrawCube(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCube(const SR_MATH_NS::FVector3& pos, float_t time) {
+        return DrawCube(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawCube(uint64_t id) {
+        return DrawCube(id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    }
+
+    uint64_t DebugDraw::DrawCube() {
+        return DrawCube(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    /// ---------------------------------------------------- CUBE DRAWING ----------------------------------------------
 }

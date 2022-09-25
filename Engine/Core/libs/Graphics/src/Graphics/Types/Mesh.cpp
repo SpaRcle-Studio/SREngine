@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS::Types {
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh::Destroy() : destroy \"" + m_geometryName + "\"...");
+            SR_LOG("Mesh::Destroy() : destroy \"" + GetGeometryName() + "\" mesh...");
         }
 
         return IResource::Destroy();
@@ -160,13 +160,6 @@ namespace SR_GRAPH_NS::Types {
             SR_LOG("Mesh::Copy() : copy \"" + std::string(GetResourceId()) + "\" mesh...");
         }
 
-        /// mesh->SetMaterial(m_material);
-
-        mesh->m_resourcePath = m_resourcePath;
-
-        mesh->m_geometryName = m_geometryName;
-        mesh->m_barycenter = m_barycenter;
-
         mesh->m_isCalculated.store(m_isCalculated);
         mesh->m_hasErrors.store(false);
 
@@ -186,6 +179,10 @@ namespace SR_GRAPH_NS::Types {
     bool Mesh::Calculate() {
         m_isCalculated = true;
         return true;
+    }
+
+    void Mesh::SetMaterial(const SR_UTILS_NS::Path& path) {
+        SetMaterial(Material::Load(path));
     }
 
     void Mesh::SetMaterial(Material *material) {
@@ -209,14 +206,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     SR_UTILS_NS::Path Mesh::GetResourcePath() const {
-        if (m_resourcePath.empty()) {
-            m_resourcePath = SR_UTILS_NS::Path(
-                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
-                    true /** fast */
-            );
-        }
-
-        return m_resourcePath;
+        return SR_UTILS_NS::IResource::GetResourcePath();
     }
 
     Shader *Mesh::GetShader() const {
@@ -240,14 +230,6 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
-        return m_modelMatrix;
-    }
-
-    SR_MATH_NS::FVector3 Mesh::GetTranslation() const {
-        return m_translation;
-    }
-
     void Mesh::UseMaterial() {
         m_material->Use();
     }
@@ -260,6 +242,11 @@ namespace SR_GRAPH_NS::Types {
         if (auto&& ibo = GetIBO(); ibo != SR_ID_INVALID) {
             m_pipeline->BindIBO(ibo);
         }
+    }
+
+    const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
+        static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
+        return matrix4X4;
     }
 }
 

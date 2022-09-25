@@ -356,19 +356,38 @@
             return false;
         }
 
-        m_components.emplace_back(pComponent);
-        ++m_componentsCount;
+        m_loadedComponents.emplace_back(pComponent);
 
         pComponent->SetParent(this);
-        pComponent->OnAttached();
-        pComponent->OnMatrixDirty();
+        /// pComponent->OnAttached();
+        /// Здесь нельзя аттачить, иначе будет очень трудно отлавливаемый deadlock
 
         SetDirty(true);
 
         return true;
     }
 
-    bool GameObject::AddComponent(Component* pComponent) {
+     void GameObject::PostLoad() {
+         if (!m_dirty) {
+             return;
+         }
+
+         if (!m_loadedComponents.empty()) {
+             for (auto&& pLoadedCmp : m_loadedComponents) {
+                 AddComponent(pLoadedCmp);
+                 pLoadedCmp->OnMatrixDirty();
+             }
+
+             m_loadedComponents.clear();
+         }
+
+         for (auto&& child : m_children) {
+             child->m_dirty = true;
+             child->PostLoad();
+         }
+     }
+
+     bool GameObject::AddComponent(Component* pComponent) {
         if (m_isDestroy) {
             SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
             return false;

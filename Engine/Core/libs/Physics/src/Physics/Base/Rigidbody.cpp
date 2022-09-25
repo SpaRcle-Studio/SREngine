@@ -6,6 +6,7 @@
 #include <Physics/PhysicsScene.h>
 #include <Utils/ECS/Transform.h>
 #include <Utils/World/Scene.h>
+#include <Utils/DebugDraw.h>
 
 namespace SR_PHYSICS_NS::Types {
     Rigidbody::Rigidbody()
@@ -19,6 +20,11 @@ namespace SR_PHYSICS_NS::Types {
     }
 
     void Rigidbody::OnDestroy() {
+        if (m_debugId == SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().DrawCube(m_debugId);
+            m_debugId = SR_ID_INVALID;
+        }
+
         if (auto&& physicsScene = GetPhysicsScene()) {
             physicsScene->Remove(this);
         }
@@ -95,7 +101,19 @@ namespace SR_PHYSICS_NS::Types {
     }
 
     void Rigidbody::OnMatrixDirty() {
-        m_matrix = GetTransform()->GetMatrix();
+        if (auto&& pTransform = GetTransform()) {
+            m_matrix = pTransform->GetMatrix();
+
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
+                    m_debugId,
+                    pTransform->GetTranslation(),
+                    pTransform->GetRotation().Radians().ToQuat(),
+                    pTransform->GetScale(),
+                    SR_MATH_NS::FColor(0, 255, 0, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+
         m_dirty = true;
         Component::OnMatrixDirty();
     }
@@ -107,8 +125,9 @@ namespace SR_PHYSICS_NS::Types {
 
         m_dirty = false;
 
-        auto &&translation = m_matrix.GetTranslate();
-        auto &&rotation = m_matrix.GetQuat();
+        auto&& translation = m_matrix.GetTranslate();
+        auto&& rotation = m_matrix.GetQuat();
+        auto&& scale = m_matrix.GetScale();
 
         btTransform startTransform;
         startTransform.setIdentity();

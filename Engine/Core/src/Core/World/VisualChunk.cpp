@@ -66,9 +66,9 @@ namespace Framework::Core::World {
             m_stayMesh->AddUsePoint();
             m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/green_wireframe.mat"));
 
-            renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->Register(m_stayMesh);
-            });
+           //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
+           //    ptr->Register(m_stayMesh);
+           //});
         }
 
         if (!value && m_stayMesh) {
@@ -94,9 +94,9 @@ namespace Framework::Core::World {
             m_loadMesh->AddUsePoint();
             m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/yellow_wireframe.mat"));
 
-            renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->Register(m_loadMesh);
-            });
+            //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
+            //    ptr->Register(m_loadMesh);
+            //});
         }
 
         if (!value && m_loadMesh) {

@@ -5,12 +5,12 @@
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/EditorCamera.h>
+#include <Core/GUI/Guizmo.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Transform3D.h>
 
-#include <Graphics/GUI/Editor/Guizmo.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Framebuffer.h>
@@ -27,7 +27,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::Draw() {
-        if (!m_scene) {
+        if (!m_scene.RecursiveLockIfValid()) {
             return;
         }
 
@@ -67,6 +67,8 @@ namespace SR_CORE_NS::GUI {
         else {
             m_camera = m_scene->Find("Editor camera");
         }
+
+        m_scene.Unlock();
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -79,7 +81,7 @@ namespace SR_CORE_NS::GUI {
         : Widget("Scene")
         , m_window(window)
         , m_hierarchy(hierarchy)
-        , m_guizmo(new SR_GRAPH_NS::GUI::Guizmo())
+        , m_guizmo(new Guizmo())
         , m_id(-1)
     {
         m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);

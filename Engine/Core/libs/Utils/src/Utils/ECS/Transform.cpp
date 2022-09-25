@@ -8,8 +8,13 @@
 #include <Utils/ECS/TransformZero.h>
 
 namespace SR_UTILS_NS {
+    Transform::~Transform() {
+        m_gameObject = nullptr;
+    }
+
     void Transform::SetGameObject(GameObject *gameObject) {
         m_gameObject = gameObject;
+        UpdateTree();
     }
 
     Transform* Transform::GetParentTransform() const {
@@ -104,6 +109,8 @@ namespace SR_UTILS_NS {
                 break;
             }
             case Measurement::Space4D:
+                break;
+            case Measurement::Space1D:
                 break;
         }
 

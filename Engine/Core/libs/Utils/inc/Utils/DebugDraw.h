@@ -1,3 +1,4 @@
+
 //
 // Created by Monika on 20.09.2022.
 //
@@ -22,15 +23,21 @@ namespace SR_UTILS_NS {
         friend class Singleton<DebugDraw>;
     public:
         using DrawLineCallback = SR_HTYPES_NS::Function<uint64_t(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color, float_t time)>;
+        using DrawCubeCallback = SR_HTYPES_NS::Function<uint64_t(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time)>;
 
         struct Callbacks {
             DrawLineCallback drawLineCallback;
+            DrawCubeCallback drawCubeCallback;
         };
 
         static constexpr float_t DEFAULT_DURATION = 10.f;
+        static constexpr SR_MATH_NS::FColor DEFAULT_COLOR = SR_MATH_NS::FColor(1, 1, 1, 1);
+        static constexpr SR_MATH_NS::FVector3 DEFAULT_POSITION = SR_MATH_NS::FVector3::Zero();
+        static constexpr SR_MATH_NS::FVector3 DEFAULT_SCALE = SR_MATH_NS::FVector3::One();
+        static constexpr SR_MATH_NS::Quaternion DEFAULT_QUATERNION = SR_MATH_NS::Quaternion::Identity();
 
     public:
-        void SetCallbacks(void* pUserIdentifier, const DrawLineCallback& lineCallback);
+        void SetCallbacks(void* pUserIdentifier, const DrawLineCallback& lineCallback, const DrawCubeCallback& cubeCallback);
         void RemoveCallbacks(void* pUserIdentifier);
         void SwitchCallbacks(void* pUserIdentifier);
 
@@ -43,7 +50,27 @@ namespace SR_UTILS_NS {
         uint64_t DrawLine(const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color);
         uint64_t DrawLine(const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, float_t time);
         uint64_t DrawLine(const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end);
-        void DrawLine(uint64_t id);
+        uint64_t DrawLine(uint64_t id);
+        uint64_t DrawLine();
+
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, float_t time);
+        uint64_t DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos, float_t time);
+        uint64_t DrawCube(const SR_MATH_NS::FVector3& pos);
+        uint64_t DrawCube(uint64_t id);
+        uint64_t DrawCube();
 
     private:
         void* m_currentSwitcher = nullptr;
