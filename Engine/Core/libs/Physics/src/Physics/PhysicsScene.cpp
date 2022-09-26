@@ -110,11 +110,9 @@ namespace SR_PHYSICS_NS {
             else if (auto&& pTransform = pRigidbody->GetTransform()) {
                 btVector3 pos = trans.getOrigin();
                 btQuaternion orn = trans.getRotation();
-                btVector3 euler;
-                orn.getEulerZYX(euler[0], euler[1], euler[2]);
 
-                pTransform->SetTranslation(pos.x(), pos.y(), pos.z());
-                pTransform->SetRotation(SR_MATH_NS::FVector3(euler.x(), euler.y(), euler.z()).Degrees());
+                pTransform->SetTranslation(SR_MATH_NS::FVector3(pos.x(), pos.y(), pos.z()) - pRigidbody->GetCenterDirection());
+                pTransform->SetRotation(SR_MATH_NS::Quaternion(orn.x(), orn.y(), orn.z(), orn.w()));
 
                 pRigidbody->m_dirty = false;
             }

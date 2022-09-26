@@ -11,6 +11,7 @@
 namespace SR_PHYSICS_NS::Types {
     Rigidbody::Rigidbody()
         : SR_UTILS_NS::Component()
+        , m_size(SR_MATH_NS::FVector3::One())
     { }
 
     Rigidbody::~Rigidbody() {
@@ -55,11 +56,6 @@ namespace SR_PHYSICS_NS::Types {
             return false;
         }
 
-        auto &&matrix = GetTransform()->GetMatrix();
-
-        auto &&rotation = matrix.GetQuat();
-        auto &&translation = matrix.GetTranslate();
-
         btScalar mass(1.f);
 
         bool isDynamic = (mass != 0.f);
@@ -76,10 +72,10 @@ namespace SR_PHYSICS_NS::Types {
         m_dirty = true;
 
         btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(
-                mass,               // mass, in kg. 0 -> Static object, will never move.
+                mass,          /// mass, in kg. 0 -> Static object, will never move.
                 m_motionState,
-                m_shape,            // collision shape of body
-                localInertia        // local inertia
+                m_shape,       /// collision shape of body
+                localInertia   /// local inertia
         );
         m_rigidbody = new btRigidBody(rigidBodyCI);
 
@@ -102,16 +98,10 @@ namespace SR_PHYSICS_NS::Types {
 
     void Rigidbody::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
-            m_matrix = pTransform->GetMatrix();
-
-            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
-                    m_debugId,
-                    pTransform->GetTranslation(),
-                    pTransform->GetRotation().Radians().ToQuat(),
-                    pTransform->GetScale(),
-                    SR_MATH_NS::FColor(0, 255, 0, 255),
-                    SR_FLOAT_MAX
-            );
+            m_translation = pTransform->GetTranslation();
+            m_rotation = pTransform->GetQuaternion();
+            m_scale = pTransform->GetScale();
+            UpdateDebugShape();
         }
 
         m_dirty = true;
@@ -125,14 +115,15 @@ namespace SR_PHYSICS_NS::Types {
 
         m_dirty = false;
 
-        auto&& translation = m_matrix.GetTranslate();
-        auto&& rotation = m_matrix.GetQuat();
-        auto&& scale = m_matrix.GetScale();
+        auto&& translation = m_translation + GetCenterDirection();
+        auto&& scale = m_scale * GetSizeDirection();
+
+        m_shape->setLocalScaling(btVector3(scale.x, scale.y, scale.z));
 
         btTransform startTransform;
         startTransform.setIdentity();
         startTransform.setOrigin(btVector3(translation.x, translation.y, translation.z));
-        startTransform.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
+        startTransform.setRotation(btQuaternion(m_rotation.X(), m_rotation.Y(), m_rotation.Z(), m_rotation.W()));
 
         m_rigidbody->setWorldTransform(startTransform);
 
@@ -143,5 +134,53 @@ namespace SR_PHYSICS_NS::Types {
         m_rigidbody->clearForces();
         m_rigidbody->setAngularVelocity(btVector3(0, 0, 0));
         m_rigidbody->setLinearVelocity(btVector3(0, 0, 0));
+    }
+
+    SR_MATH_NS::FVector3 Rigidbody::GetSize() const noexcept {
+        return m_size;
+    }
+
+    SR_MATH_NS::FVector3 Rigidbody::GetCenter() const noexcept {
+        return m_center;
+    }
+
+    float_t Rigidbody::GetMass() const noexcept {
+        return m_mass;
+    }
+
+    void Rigidbody::SetSize(const SR_MATH_NS::FVector3 &size) {
+        m_size = size;
+        m_dirty = true;
+        UpdateDebugShape();
+    }
+
+    void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
+        m_center = center;
+        m_dirty = true;
+        UpdateDebugShape();
+    }
+
+    void Rigidbody::SetMass(float_t mass) {
+        m_mass = mass;
+        m_dirty = true;
+    }
+
+    void Rigidbody::UpdateDebugShape() {
+        m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
+                m_debugId,
+                m_translation + GetCenterDirection(),
+                m_rotation,
+                m_scale * GetSizeDirection(),
+                SR_MATH_NS::FColor(0, 255, 0, 255),
+                SR_FLOAT_MAX
+        );
+    }
+
+    SR_MATH_NS::FVector3 Rigidbody::GetCenterDirection() const noexcept {
+        return m_rotation * m_center;
+    }
+
+    SR_MATH_NS::FVector3 Rigidbody::GetSizeDirection() const noexcept {
+        return m_size;
     }
 }

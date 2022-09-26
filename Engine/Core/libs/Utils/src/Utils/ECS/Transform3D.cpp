@@ -9,7 +9,7 @@ namespace SR_UTILS_NS {
     void Transform3D::UpdateMatrix() {
         m_localMatrix = SR_MATH_NS::Matrix4x4(
                 m_translation,
-                m_rotation.Radians().ToQuat(),
+                m_quaternion,
                 m_scale,
                 m_skew
         );
@@ -18,14 +18,7 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::Rotate(const SR_MATH_NS::FVector3& eulers) {
-        //Math::Matrix4x4 &&worldRotateMatrix = Math::Matrix4x4::FromEulers(m_rotation);
-        //Math::Matrix4x4 &&rotatedMatrix = worldRotateMatrix * Math::Matrix4x4::FromEulers(eulers);
-        //SetRotation(rotatedMatrix.GetQuat().EulerAngle());
-
-        SR_MATH_NS::Quaternion q = m_rotation.Radians().ToQuat();
-
-        q = q * eulers.Radians().ToQuat();
-
+        SR_MATH_NS::Quaternion q = m_quaternion * eulers.Radians().ToQuat();
         SetRotation(q.EulerAngle());
     }
 
@@ -50,7 +43,7 @@ namespace SR_UTILS_NS {
     }
 
     SR_MATH_NS::FVector3 Transform3D::TransformDirection(const SR_MATH_NS::FVector3& direction) const {
-        return SR_MATH_NS::Quaternion::FromEuler(m_rotation) * direction;
+        return m_quaternion * direction;
     }
 
     void Transform3D::SetTranslation(const SR_MATH_NS::FVector3& translation) {
@@ -67,6 +60,15 @@ namespace SR_UTILS_NS {
 
     void Transform3D::SetRotation(const SR_MATH_NS::FVector3& euler) {
         m_rotation = euler.Limits(360);
+        m_quaternion = euler.Radians().ToQuat();
+
+        UpdateTree();
+    }
+
+
+    void Transform3D::SetRotation(const SR_MATH_NS::Quaternion &quaternion) {
+        m_rotation = quaternion.EulerAngle();
+        m_quaternion = quaternion;
 
         UpdateTree();
     }
@@ -77,7 +79,7 @@ namespace SR_UTILS_NS {
                 SR_MATH_NS::Quaternion::FromEuler(m_rotation).Inverse()).EulerAngle();
 
         m_translation = translation;
-        m_rotation = euler.Limits(360);
+        SetRotation(euler);
 
         for (auto &&child : m_gameObject->m_children) {
             child->m_transform->GlobalTranslate(deltaTranslation);
@@ -160,9 +162,7 @@ namespace SR_UTILS_NS {
 
             matrix = pParent->GetMatrix().Inverse() * matrix;
 
-            m_rotation = matrix.GetEulers();
-
-            UpdateTree();
+            SetRotation(matrix.GetEulers());
         }
         else {
             auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);

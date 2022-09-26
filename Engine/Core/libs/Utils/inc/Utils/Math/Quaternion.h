@@ -32,6 +32,11 @@ namespace SR_MATH_NS {
         SR_NODISCARD Vector3<Unit> EulerAngle() const;
         SR_NODISCARD Quaternion Rotate(const Vector3<Unit>& v) const;
 
+        SR_NODISCARD Unit X() const noexcept { return static_cast<Unit>(self.x); }
+        SR_NODISCARD Unit Y() const noexcept { return static_cast<Unit>(self.y); }
+        SR_NODISCARD Unit Z() const noexcept { return static_cast<Unit>(self.z); }
+        SR_NODISCARD Unit W() const noexcept { return static_cast<Unit>(self.w); }
+
         constexpr Quaternion(const Quaternion &p_q) {
             self = p_q.self;
         }
@@ -60,11 +65,15 @@ namespace SR_MATH_NS {
             return Quaternion(0.0, 0.0, 0.0, 1.0);
         }
 
-        [[nodiscard]] Quaternion Inverse() const {
+        SR_NODISCARD Quaternion Inverse() const {
             return Quaternion(glm::inverse(self));
         }
 
-        [[nodiscard]] std::string ToString() const {
+        SR_NODISCARD Quaternion Normalize() const {
+            return Quaternion(glm::normalize(self));
+        }
+
+        SR_NODISCARD std::string ToString() const {
             return "(" + std::to_string(self.x) + ", " + std::to_string(self.y) + ", " + std::to_string(self.z) + ", " + std::to_string(self.w) + ")";
         }
 

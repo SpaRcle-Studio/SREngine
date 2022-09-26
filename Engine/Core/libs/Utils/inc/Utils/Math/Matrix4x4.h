@@ -70,6 +70,10 @@ namespace SR_MATH_NS {
             return RotationYawPitchRoll(eulers.Radians());
         }
 
+        static Matrix4x4 FromEulers(const Quaternion& quaternion) {
+            return Matrix4x4(0.f, quaternion, 1.f);
+        }
+
         static Matrix4x4 FromScale(const FVector3& scale) {
             return Matrix4x4(glm::scale(glm::mat4x4(1), scale.ToGLM()));
         }

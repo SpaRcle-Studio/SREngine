@@ -160,7 +160,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD bool IsFinite() const noexcept {
-            /// если будет inf или nan, то вернет false
+            /// РµСЃР»Рё Р±СѓРґРµС‚ inf РёР»Рё nan, С‚Рѕ РІРµСЂРЅРµС‚ false
             return std::isfinite(x) && std::isfinite(y) && std::isfinite(z);
         }
 
@@ -194,17 +194,23 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Vector3 Normalize() const {
-            T len = static_cast<T>(std::sqrt(x * x + y * y + z * z));
+            auto&& value = x * x + y * y + z * z;
 
-            Vector3 vec3 = *this;
+            if (value > 0) {
+                T len = static_cast<T>(std::sqrt(value));
 
-            if (len != static_cast<T>(0.)) {
-                vec3.x /= len;
-                vec3.y /= len;
-                vec3.z /= len;
+                Vector3 vec3 = *this;
+
+                if (len != static_cast<T>(0.)) {
+                    vec3.x /= len;
+                    vec3.y /= len;
+                    vec3.z /= len;
+                }
+
+                return vec3;
             }
 
-            return vec3;
+            return *this;
         }
 
         SR_NODISCARD Quaternion ToQuat() const;
