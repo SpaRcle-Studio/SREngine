@@ -14,7 +14,6 @@ namespace SR_WORLD_NS {
 
 namespace SR_PHYSICS_NS::Types {
     class Rigidbody;
-    class Collider;
 }
 
 namespace SR_PHYSICS_NS {
@@ -23,7 +22,6 @@ namespace SR_PHYSICS_NS {
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
         using RigidbodyPtr = Types::Rigidbody*;
-        using ColliderPtr = Types::Collider*;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
     public:
         explicit PhysicsScene(const ScenePtr& scene);
@@ -33,10 +31,7 @@ namespace SR_PHYSICS_NS {
         void FixedUpdate();
 
         void Remove(RigidbodyPtr pRigidbody);
-        void Remove(ColliderPtr pRigidbody);
-
         void Register(RigidbodyPtr pRigidbody);
-        void Register(ColliderPtr pCollider);
 
         void ClearForces();
 

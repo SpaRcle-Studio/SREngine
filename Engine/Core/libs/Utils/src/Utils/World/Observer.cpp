@@ -64,18 +64,21 @@ namespace SR_WORLD_NS {
     SR_MATH_NS::IVector3 MakeChunk(const SR_MATH_NS::IVector3 &rawChunkPos, int32_t width) {
         Math::IVector3 chunk = rawChunkPos;
 
-        #define SR_MAKE_CHUNK(value, width, chunk) {                                          \
-            Framework::Helper::Math::IVector3 temp = chunk;                                   \
-            if (abs(chunk.value) > width) chunk.value %= width;                               \
-            if (chunk.value == 0)                                                             \
-                chunk.value = temp.value > 0 ? width : 1;                                     \
-            else                                                                              \
-                chunk.value = chunk.value > 0 ? chunk.value : width - (abs(chunk.value) - 1); \
-        }                                                                                     \
+        #define SR_MAKE_CHUNK(value, width, chunk) {                                              \
+            SR_MATH_NS::IVector3 temp = chunk;                                                    \
+            if (abs(chunk.value) > width || chunk.value < -width)                                 \
+                chunk.value %= width;                                                             \
+            if (chunk.value == 0)                                                                 \
+                chunk.value = temp.value > 0 ? width : 1;                                         \
+            else                                                                                  \
+                chunk.value = temp.value > 0 ? chunk.value : width - (abs(chunk.value) - 1);      \
+        }                                                                                         \
 
         SR_MAKE_CHUNK(x, width, chunk);
         SR_MAKE_CHUNK(y, width, chunk);
         SR_MAKE_CHUNK(z, width, chunk);
+
+        SRAssert(abs(chunk.x) <= width && abs(chunk.y) <= width && abs(chunk.z) <= width);
 
         return chunk;
     }
@@ -129,11 +132,13 @@ namespace SR_WORLD_NS {
     void Observer::SetTarget(const Observer::GameObjectPtr &target) {
         m_target = target;
 
-        m_chunk = SR_MATH_NS::IVector3();
-        m_region = SR_MATH_NS::IVector3();
+        /// сохраняем последние значения
 
-        m_lastChunk = SR_MATH_NS::IVector3();
-        m_lastRegion = SR_MATH_NS::IVector3();
+        ///m_chunk = SR_MATH_NS::IVector3();
+        ///m_region = SR_MATH_NS::IVector3();
+
+        /// m_lastChunk = SR_MATH_NS::IVector3();
+        /// m_lastRegion = SR_MATH_NS::IVector3();
 
         m_targetPosition = SR_MATH_NS::FVector3();
 

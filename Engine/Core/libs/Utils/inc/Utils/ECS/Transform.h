@@ -13,6 +13,7 @@
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Math/Quaternion.h>
 
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/Function.h>
 

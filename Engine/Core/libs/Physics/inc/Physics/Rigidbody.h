@@ -6,6 +6,8 @@
 #define SRENGINE_RIGIDBODY_H
 
 #include <Physics/PhysicsLib.h>
+#include <Physics/CollisionShape.h>
+
 #include <Utils/ECS/Component.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Math/Matrix4x4.h>
@@ -17,25 +19,32 @@ namespace SR_PHYSICS_NS {
 namespace SR_PHYSICS_NS::Types {
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
+        SR_ENTITY_SET_VERSION(1001);
+        using Super = SR_UTILS_NS::Component;
     public:
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
 
     public:
+        explicit Rigidbody(ShapeType type);
         Rigidbody();
         ~Rigidbody() override;
 
     public:
-        virtual void UpdateMatrix();
+        static ComponentPtr LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_NODISCARD SR_MATH_NS::FVector3 GetSize() const noexcept;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+
+        virtual void UpdateMatrix();
+        void UpdateShape();
+
+        SR_NODISCARD ShapeType GetType() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetSizeDirection() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
         SR_NODISCARD float_t GetMass() const noexcept;
 
-        void SetSize(const SR_MATH_NS::FVector3& size);
         void SetCenter(const SR_MATH_NS::FVector3& center);
         void SetMass(float_t mass);
+        void SetType(ShapeType type);
 
     protected:
         void OnAttached() override;
@@ -45,12 +54,14 @@ namespace SR_PHYSICS_NS::Types {
 
         void OnMatrixDirty() override;
 
-        virtual bool InitShape();
         virtual bool InitBody();
 
         PhysicsScenePtr GetPhysicsScene();
 
-    private:
+    protected:
+        ShapeType m_type = ShapeType::Unknown;
+        CollisionShape::Ptr m_shape = nullptr;
+
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::Quaternion m_rotation;
         SR_MATH_NS::FVector3 m_scale;
@@ -58,15 +69,13 @@ namespace SR_PHYSICS_NS::Types {
         PhysicsScenePtr m_physicsScene;
 
         btRigidBody* m_rigidbody = nullptr;
-        btCollisionShape* m_shape = nullptr;
         btMotionState* m_motionState = nullptr;
 
-        SR_MATH_NS::FVector3 m_size;
         SR_MATH_NS::FVector3 m_center;
 
         bool m_dirty = false;
 
-        float_t m_mass = 0.1f;
+        float_t m_mass = 1.f;
         uint64_t m_debugId = SR_ID_INVALID;
 
     };

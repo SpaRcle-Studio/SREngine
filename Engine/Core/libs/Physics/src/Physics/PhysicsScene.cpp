@@ -2,9 +2,10 @@
 // Created by Monika on 28.07.2022.
 //
 
-#include <Physics/PhysicsScene.h>
 #include <Utils/Math/Mathematics.h>
 #include <Utils/World/Scene.h>
+
+#include <Physics/PhysicsScene.h>
 
 namespace SR_PHYSICS_NS {
     PhysicsScene::PhysicsScene(const ScenePtr& scene)
@@ -55,6 +56,7 @@ namespace SR_PHYSICS_NS {
     bool PhysicsScene::CreateDynamicWorld() {
         ///collision configuration contains default setup for memory, collision setup
         m_collisionConfiguration = new btDefaultCollisionConfiguration();
+
         //m_collisionConfiguration->setConvexConvexMultipointIterations();
 
         ///use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
@@ -68,6 +70,14 @@ namespace SR_PHYSICS_NS {
         m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_collisionConfiguration);
 
         m_dynamicsWorld->setGravity(btVector3(0, -SR_EARTH_GRAVITY, 0));
+
+        m_dynamicsWorld->getSolverInfo().m_deformable_erp = 0.1;
+        m_dynamicsWorld->getSolverInfo().m_deformable_maxErrorReduction = btScalar(20);
+        m_dynamicsWorld->getSolverInfo().m_leastSquaresResidualThreshold = 1e-3;
+        m_dynamicsWorld->getSolverInfo().m_splitImpulse = true;
+        m_dynamicsWorld->getSolverInfo().m_numIterations = 100;
+
+        // m_dynamicsWorld->getDispatchInfo().m_enableSPU = true;
 
         m_dynamicsWorld->setInternalTickCallback([](btDynamicsWorld *pWorld, btScalar timeStep) {
             //std::cout << pWorld->getDispatcher()->getNumManifolds() << std::endl;
@@ -105,6 +115,7 @@ namespace SR_PHYSICS_NS {
             }
 
             if (pRigidbody->m_dirty) {
+                pRigidbody->UpdateShape();
                 pRigidbody->UpdateMatrix();
             }
             else if (auto&& pTransform = pRigidbody->GetTransform()) {
@@ -123,18 +134,9 @@ namespace SR_PHYSICS_NS {
         m_dynamicsWorld->addRigidBody(pRigidbody->m_rigidbody);
     }
 
-    void PhysicsScene::Register(PhysicsScene::ColliderPtr pCollider) {
-        m_dynamicsWorld->addRigidBody(pCollider->m_rigidbody);
-    }
-
     void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
         m_dynamicsWorld->removeRigidBody(pRigidbody->m_rigidbody);
         delete pRigidbody;
-    }
-
-    void PhysicsScene::Remove(PhysicsScene::ColliderPtr pCollider) {
-        m_dynamicsWorld->removeRigidBody(pCollider->m_rigidbody);
-        delete pCollider;
     }
 
     void PhysicsScene::ClearForces() {

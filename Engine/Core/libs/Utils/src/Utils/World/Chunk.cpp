@@ -26,6 +26,11 @@ namespace SR_WORLD_NS {
         }
     }
 
+    Chunk::~Chunk() {
+        SetDebugActive(BoolExt::False);
+        SetDebugLoaded(BoolExt::False);
+    }
+
     void Chunk::Update(float_t dt) {
         if (m_lifetime > 0) {
             m_lifetime -= dt;
@@ -49,7 +54,11 @@ namespace SR_WORLD_NS {
     bool Chunk::Unload() {
         m_loadState = LoadState::Unload;
 
-        for (auto gameObject : m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position)) {
+        SetDebugLoaded(BoolExt::True);
+
+        auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+
+        for (auto gameObject : gameObjects) {
             gameObject.AutoFree([](auto gm) {
                 gm->Destroy();
             });
@@ -59,10 +68,12 @@ namespace SR_WORLD_NS {
     }
 
     void Chunk::OnExit() {
+        SetDebugActive(BoolExt::False);
         m_region->OnExit();
     }
 
     void Chunk::OnEnter() {
+        SetDebugActive(BoolExt::True);
         m_region->OnEnter();
     }
 
@@ -90,6 +101,9 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::ApplyOffset() {
+        SetDebugLoaded(BoolExt::None);
+        SetDebugActive(BoolExt::None);
+
         return true;
     }
 
@@ -116,6 +130,7 @@ namespace SR_WORLD_NS {
 
         m_loadState = LoadState::Loaded;
         Access(0.f);
+        SetDebugLoaded(BoolExt::True);
 
         return true;
     }
@@ -165,24 +180,58 @@ namespace SR_WORLD_NS {
         return pMarshal;
     }
 
-    Math::FVector3 Chunk::GetWorldPosition(Math::Axis center) const {
-        auto fPos = Helper::World::AddOffset(
-                ((m_region->GetWorldPosition()) + (m_position - Math::FVector3(1, 1, 1))).Cast<Math::Unit>(),
-                m_observer->m_offset.m_chunk.Cast<Math::Unit>()
+    SR_MATH_NS::FVector3 Chunk::GetWorldPosition(SR_MATH_NS::Axis center) const {
+        auto fPos = SR_UTILS_NS::World::AddOffset(
+                ((m_region->GetWorldPosition()) + (m_position - SR_MATH_NS::FVector3(1, 1, 1))).Cast<SR_MATH_NS::Unit>(),
+                m_observer->m_offset.m_chunk.Cast<SR_MATH_NS::Unit>()
         );
 
-        fPos = Math::FVector3(
-                fPos.x * m_size.x + (center & Math::AXIS_X ? (Math::Unit) m_size.x / 2 : 0),
-                fPos.y * m_size.y + (center & Math::AXIS_Y ? (Math::Unit) m_size.y / 2 : 0),
-                fPos.z * m_size.x + (center & Math::AXIS_Z ? (Math::Unit) m_size.x / 2 : 0)
+        fPos = SR_MATH_NS::FVector3(
+                fPos.x * m_size.x + (center & SR_MATH_NS::AXIS_X ? (SR_MATH_NS::Unit) m_size.x / 2 : 0),
+                fPos.y * m_size.y + (center & SR_MATH_NS::AXIS_Y ? (SR_MATH_NS::Unit) m_size.y / 2 : 0),
+                fPos.z * m_size.x + (center & SR_MATH_NS::AXIS_Z ? (SR_MATH_NS::Unit) m_size.x / 2 : 0)
         );
 
-        fPos = fPos.DeSingular(Math::FVector3(m_size.x, m_size.y, m_size.x));
+        fPos = fPos.DeSingular(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x));
 
         return fPos;
     }
 
     Chunk::ScenePtr Chunk::GetScene() const {
         return m_observer->m_scene;
+    }
+
+    void Chunk::SetDebugActive(BoolExt enabled) {
+        if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugActiveId != SR_ID_INVALID)) {
+            m_debugActiveId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
+                    GetWorldPosition(SR_MATH_NS::AXIS_XYZ),
+                    SR_MATH_NS::Quaternion::Identity(),
+                    SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2,
+                    SR_MATH_NS::FColor(0, 255, 0, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+        else if (m_debugActiveId != SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugActiveId);
+        }
+    }
+
+    void Chunk::SetDebugLoaded(BoolExt enabled) {
+        if (m_position.y != 1 || m_regionPosition.y != 1) {
+            return;
+        }
+
+        if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {
+            m_debugLoadedId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
+                    GetWorldPosition(SR_MATH_NS::AXIS_XZ),
+                    SR_MATH_NS::Quaternion::Identity(),
+                    SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2,
+                    SR_MATH_NS::FColor(255, 255, 0, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+        else if (m_debugLoadedId != SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
+        }
     }
 }

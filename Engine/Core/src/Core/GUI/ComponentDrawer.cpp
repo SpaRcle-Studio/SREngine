@@ -14,7 +14,7 @@
 
 #include <Scripting/Base/Behaviour.h>
 
-#include <Physics/3D/Rigidbody3D.h>
+#include <Physics/Rigidbody.h>
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
@@ -28,15 +28,30 @@
 #include <Graphics/UI/Canvas.h>
 
 namespace SR_CORE_NS::GUI {
-    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
         if (!pComponent) {
             return;
         }
 
-        auto&& size = pComponent->GetSize();
-        if (Graphics::GUI::DrawVec3Control("Size", size, 1.f, 70.f, 0.01f, index)) {
-            pComponent->SetSize(size);
+        auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
+        auto shape = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetType()));
+
+        if (ImGui::Combo("Shape", &shape, [](void* vec, int idx, const char** out_text){
+            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
+            if (idx < 0 || idx >= vector->size())
+                return false;
+
+            *out_text = vector->at(idx).c_str();
+
+            return true;
+        }, reinterpret_cast<void*>(&shapes), shapes.size())) {
+            pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
         }
+
+        /// auto&& size = pComponent->GetSize();
+        /// if (Graphics::GUI::DrawVec3Control("Size", size, 1.f, 70.f, 0.01f, index)) {
+        ///     pComponent->SetSize(size);
+        /// }
 
         auto&& center = pComponent->GetCenter();
         if (Graphics::GUI::DrawVec3Control("Center", center, 0.f, 70.f, 0.01f, index)) {
@@ -47,10 +62,6 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
             pComponent->SetMass(mass);
         }
-    }
-
-    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::BoxCollider3D*& pComponent, EditorGUI* context, int32_t index) {
-
     }
 
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {

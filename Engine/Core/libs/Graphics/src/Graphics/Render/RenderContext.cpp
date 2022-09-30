@@ -80,7 +80,7 @@ namespace SR_GRAPH_NS {
 
         /// ----------------------------------------------------------------------------
 
-        if ((m_defaultTexture = SR_GTYPES_NS::Texture::Load("Engine/Textures/default.png", config))) {
+        if ((m_defaultTexture = SR_GTYPES_NS::Texture::Load("Engine/Textures/default_improved.png", config))) {
             m_defaultTexture->AddUsePoint();
         }
         else {

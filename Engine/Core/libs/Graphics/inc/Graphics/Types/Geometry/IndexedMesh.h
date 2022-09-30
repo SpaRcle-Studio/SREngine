@@ -11,7 +11,7 @@
 namespace SR_GRAPH_NS::Types {
     class IndexedMesh : public Mesh {
     protected:
-        ~IndexedMesh() override = default;
+        ~IndexedMesh() override;
 
         explicit IndexedMesh(MeshType type)
             : Mesh(type)

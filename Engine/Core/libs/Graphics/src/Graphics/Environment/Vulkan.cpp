@@ -7,6 +7,7 @@
 
 #include <Graphics/Environment/Vulkan/AbstractCasts.h>
 #include <Graphics/Environment/Vulkan.h>
+#include <Graphics/Memory/MeshManager.h>
 
 #ifdef SR_WIN32
     #include <vulkan/vulkan_win32.h>
@@ -129,6 +130,8 @@ namespace Framework::Graphics {
 
     bool Vulkan::CloseWindow() {
         SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
+
+        SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
 
         if (m_memory) {
             m_memory->Free();

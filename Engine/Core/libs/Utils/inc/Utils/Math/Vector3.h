@@ -104,9 +104,13 @@ namespace SR_MATH_NS {
         SR_NODISCARD T Max() const {
             return x > y && x > z ? x : y > x && y > z ? y : z;
         }
+
         SR_NODISCARD T Min() const {
             return x < y && x < z ? x : y < x && y < z ? y : z;
         }
+
+        SR_NODISCARD Vector3 Max3() const { return Vector3(Max()); }
+        SR_NODISCARD Vector3 Min3() const { return Vector3(Min()); }
 
         SR_NODISCARD bool Empty() const {
             return (x == 0 && y == 0 && z == 0);

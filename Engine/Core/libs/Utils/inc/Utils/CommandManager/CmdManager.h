@@ -19,7 +19,7 @@ namespace SR_UTILS_NS {
     class SR_DLL_EXPORT CmdManager : SR_UTILS_NS::NonCopyable {
     private:
         enum class CmdType {
-            Redo, Undo
+            Redo, Undo, Execute
         };
 
         struct SR_DLL_EXPORT Cmd {
@@ -47,7 +47,6 @@ namespace SR_UTILS_NS {
     private:
         bool ExecuteImpl(ReversibleCommand* cmd, SyncType sync);
         bool Execute(ReversibleCommand* cmd);
-        bool Cancel(ReversibleCommand* cmd);
         bool DoCmd(const Cmd& cmd);
         void ClearHistory();
 

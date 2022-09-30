@@ -28,7 +28,7 @@ namespace SR_WORLD_NS {
         Chunk(SRChunkAllocArgs);
 
     public:
-        ~Chunk() override = default;
+        ~Chunk() override;
 
         enum class LoadState {
             Loaded, Unload, Preload
@@ -64,6 +64,10 @@ namespace SR_WORLD_NS {
         virtual bool ApplyOffset();
 
     private:
+        void SetDebugActive(BoolExt enabled);
+        void SetDebugLoaded(BoolExt enabled);
+
+    private:
         static Allocator g_allocator;
 
     protected:
@@ -77,6 +81,9 @@ namespace SR_WORLD_NS {
         SR_MATH_NS::IVector2 m_size;
         SR_MATH_NS::IVector3 m_regionPosition;
         SR_MATH_NS::IVector3 m_position;
+
+        uint64_t m_debugLoadedId = SR_ID_INVALID;
+        uint64_t m_debugActiveId = SR_ID_INVALID;
 
     };
 }

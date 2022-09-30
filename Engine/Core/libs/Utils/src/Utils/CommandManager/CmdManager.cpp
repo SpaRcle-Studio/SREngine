@@ -42,32 +42,39 @@ namespace SR_UTILS_NS {
         return cmd->Redo();
     }
 
-    bool CmdManager::Cancel(ReversibleCommand *cmd) {
-        --m_historyPC;
-        m_lastCmdName = cmd->GetName();
-        return cmd->Undo();
-    }
-
-    bool CmdManager::Cancel() {
-        SR_LOCK_GUARD
-
-        if (m_history.empty() || m_historyPC == UINT32_MAX)
-            return false;
-
-        SRAssert(m_historyPC < m_history.size());
-
-        return Cancel(m_history[m_historyPC]);
-    }
-
     bool CmdManager::DoCmd(const Cmd& cmd) {
         switch (cmd.m_type) {
             case CmdType::Redo: {
+                if ((m_historyPC >= (m_history.size() - 1) && m_historyPC != UINT32_MAX) || m_history.empty()) {
+                    SR_INFO("CmdManager::DoCmd() : have not commands for redo!");
+                    return true;
+                }
+
+                auto&& pNextCmp = m_history[++m_historyPC];
+                m_lastCmdName = pNextCmp->GetName();
+
+                return pNextCmp->Redo();
+            }
+            case CmdType::Undo: {
+                if (m_history.empty() || m_historyPC == UINT32_MAX) {
+                    SR_INFO("CmdManager::DoCmd() : have not commands for undo!");
+                    return true;
+                }
+
+                SRAssert(m_historyPC < m_history.size());
+
+                auto&& pPrevCmd = m_history[m_historyPC];
+
+                --m_historyPC;
+                m_lastCmdName = pPrevCmd->GetName();
+
+                return pPrevCmd->Undo();
+            }
+            case CmdType::Execute: {
                 return Execute(cmd.m_cmd);
             }
-            case CmdType::Undo:
-                return Cancel(cmd.m_cmd);
             default:
-                SRAssert(false);
+                SRHalt("Unknown command type!");
                 return false;
         }
     }
@@ -76,14 +83,16 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD
 
         if (m_historyPC != UINT32_MAX) {
-            for (uint32_t PC = m_history.size() - 1; PC > m_historyPC; --PC)
-                delete m_history[PC];
+            for (uint32_t PC = m_history.size() - 1; PC > m_historyPC; --PC) {
+                SR_SAFE_DELETE_PTR(m_history[PC])
+            }
 
             m_history.resize(m_historyPC + 1);
         }
         else {
-            for (auto&& command : m_history)
-                delete command;
+            for (auto&& pCommand : m_history) {
+                SR_SAFE_DELETE_PTR(pCommand)
+            }
 
             m_history.clear();
         }
@@ -123,7 +132,7 @@ namespace SR_UTILS_NS {
 
         switch (sync) {
             case SyncType::Async: {
-                m_commands.push({cmd, CmdType::Redo});
+                m_commands.push({cmd, CmdType::Execute});
                 result = true;
                 break;
             }
@@ -134,7 +143,7 @@ namespace SR_UTILS_NS {
                     m_commands.pop();
                 }
 
-                result = DoCmd({cmd, CmdType::Redo});
+                result = DoCmd({cmd, CmdType::Execute});
                 break;
             }
             case SyncType::Force:
@@ -153,8 +162,9 @@ namespace SR_UTILS_NS {
     }
 
     void CmdManager::ClearHistory() {
-        for (auto&& command : m_history)
-            delete command;
+        for (auto&& pCommand : m_history) {
+            SR_SAFE_DELETE_PTR(pCommand)
+        }
 
         m_history.clear();
         m_historyPC = UINT32_MAX;
@@ -163,13 +173,17 @@ namespace SR_UTILS_NS {
     bool CmdManager::Redo() {
         SR_LOCK_GUARD
 
-        if ((m_historyPC >= (m_history.size() - 1) && m_historyPC != UINT32_MAX) || m_history.empty())
-            return false;
+        m_commands.push({ nullptr, CmdType::Redo });
 
-        auto&& cmd = m_history[++m_historyPC];
+        return true;
+    }
 
-        m_lastCmdName = cmd->GetName();
-        return cmd->Redo();
+    bool CmdManager::Cancel() {
+        SR_LOCK_GUARD
+
+        m_commands.push({ nullptr, CmdType::Undo });
+
+        return true;
     }
 
     std::string CmdManager::GetLastCmdName() const {

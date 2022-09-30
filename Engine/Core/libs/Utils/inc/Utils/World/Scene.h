@@ -63,7 +63,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Region* GetRegion(const SR_MATH_NS::IVector3& region);
 
         GameObjects& GetRootGameObjects();
-        GameObjects GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
+        const GameObjects& GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         Chunk* GetCurrentChunk() const;
 
         GameObjectPtr FindByComponent(const std::string& name);
@@ -95,6 +95,7 @@ namespace SR_WORLD_NS {
 
     protected:
         Observer*                 m_observer           = nullptr;
+        Chunk*                    m_currentChunk       = nullptr;
 
     private:
         bool                      m_updateContainer    = false;

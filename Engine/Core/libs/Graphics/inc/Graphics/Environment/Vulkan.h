@@ -235,6 +235,10 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
         [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return (m_basicWindow->IsCollapsed() || m_kernel->IsSurfaceCollapsed()); }
 
+        SR_FORCE_INLINE void SetLineWidth(float_t width) const override {
+            vkCmdSetLineWidth(m_currentCmd, width);
+        }
+
         bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
         void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
         bool CloseWindow() override;

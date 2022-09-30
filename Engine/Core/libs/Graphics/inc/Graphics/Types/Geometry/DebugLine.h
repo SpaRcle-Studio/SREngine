@@ -23,6 +23,10 @@ namespace SR_GTYPES_NS {
     public:
         SR_NODISCARD SR_FORCE_INLINE bool IsDebugMesh() const noexcept override { return true; }
 
+        void SetStartPoint(const SR_MATH_NS::FVector3& startPoint);
+        void SetEndPoint(const SR_MATH_NS::FVector3& endPoint);
+        void SetColor(const SR_MATH_NS::FVector4& color);
+
         void Draw() override;
 
         IResource* Copy(IResource* destination) const override;

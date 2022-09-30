@@ -35,6 +35,8 @@ namespace SR_GRAPH_NS {
         public:
             SR_NODISCARD uint32_t Copy();
 
+            SR_NODISCARD uint32_t GetUsages() const noexcept { return m_usages; }
+
         private:
             uint32_t m_vidId = SR_UINT32_MAX;
             uint32_t m_usages = 0;
@@ -72,6 +74,8 @@ namespace SR_GRAPH_NS {
             }
 
         public:
+            void PrintDump();
+
             template<Vertices::VertexType vertexType, MeshMemoryType memType> bool Register(const std::string_view& resourceId, uint32_t id) {
                 return Register<vertexType, memType>(std::string(resourceId), id);
             }

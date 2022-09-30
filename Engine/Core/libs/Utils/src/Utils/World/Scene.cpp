@@ -243,8 +243,17 @@ namespace SR_WORLD_NS {
         auto&& chunk = AddOffset(SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize), -offset.m_chunk);
 
         if (lastChunk != chunk) {
-            if (m_regions.find(lastRegion) != m_regions.end())
-                m_regions.at(lastRegion)->GetChunk(m_observer->m_chunk)->OnExit();
+            if (m_regions.find(lastRegion) != m_regions.end()) {
+                auto&& pChunk = m_regions.at(lastRegion)->GetChunk(m_observer->m_chunk);
+
+                SRAssert(pChunk == m_currentChunk);
+
+                if (pChunk) {
+                    pChunk->OnExit();
+                }
+
+                m_currentChunk = nullptr;
+            }
 
             m_observer->SetChunk(chunk);
 
@@ -263,6 +272,10 @@ namespace SR_WORLD_NS {
 
             if (auto &&regionIt = m_regions.at(m_observer->m_region)) {
                 if (auto&& pChunk = regionIt->GetChunk(m_observer->m_chunk)) {
+                    SRAssert(!m_currentChunk);
+
+                    m_currentChunk = pChunk;
+
                     pChunk->OnEnter();
                 }
             }
@@ -402,7 +415,7 @@ namespace SR_WORLD_NS {
         for (GameObject::Ptr gameObject : GetRootGameObjects()) {
             const Math::FVector3 gmPosition = gameObject->GetTransform()->GetTranslation();
 
-            if (!gmPosition.IsFinite()) {
+            if (!gmPosition.IsFinite() || gmPosition.ContainsNaN()) {
                 continue;
             }
 
@@ -476,10 +489,11 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    Scene::GameObjects Scene::GetGameObjectsAtChunk(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) {
+    const Scene::GameObjects& Scene::GetGameObjectsAtChunk(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) const {
         const auto key = TensorKey(region, chunk);
         if (m_tensor.count(key) == 0) {
-            return GameObjects();
+            static GameObjects _default = GameObjects();
+            return _default;
         }
 
         return m_tensor.at(key);
@@ -528,6 +542,7 @@ namespace SR_WORLD_NS {
             m_observer->SetTarget(target);
         }
     }
+
     bool Scene::MoveToRoot(const Scene::GameObjectPtr &gameObject) { //обнуляет указатель на родителя и поднимает флаг обновления m_rootObjects, из-за чего gameObject обрабатывается как корневой
         if (gameObject->m_parent){
             SRHalt("GameObject::MoveToRoot() : GameObject has parent!");

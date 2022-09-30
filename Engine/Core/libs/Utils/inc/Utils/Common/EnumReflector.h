@@ -21,6 +21,7 @@ namespace SR_UTILS_NS {
         template<typename EnumType> SR_NODISCARD static EnumType FromString(const std::string& value);
 
         template<typename EnumType> SR_NODISCARD static std::vector<std::string> GetNames();
+        template<typename EnumType> SR_NODISCARD static std::vector<std::string> GetNamesFilter(const std::function<bool(EnumType)>& filter);
 
         template<typename EnumType> SR_NODISCARD static int64_t GetIndex(EnumType value);
         template<typename EnumType> SR_NODISCARD static EnumType At(int64_t index);
@@ -31,7 +32,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::optional<int64_t> GetIndexInternal(int64_t value) const;
         SR_NODISCARD std::optional<int64_t> AtInternal(int64_t index) const;
 
-        SR_NODISCARD uint64_t Count() const;
+        SR_NODISCARD uint64_t Count() const noexcept;
 
     private:
         static bool IsIdentChar(char c);
@@ -149,6 +150,20 @@ namespace SR_UTILS_NS {
 
     template<typename EnumType> std::vector<std::string> EnumReflector::GetNames() {
         return _detail_reflector_(EnumType()).m_data->names;
+    }
+
+    template<typename EnumType> std::vector<std::string> EnumReflector::GetNamesFilter(const std::function<bool(EnumType)> &filter) {
+        std::vector<std::string> names;
+
+        auto&& data = _detail_reflector_(EnumType()).m_data;
+
+        for (uint64_t i = 0; i < Count(); ++i) {
+            if (filter(data->values[i])) {
+                names.emplace_back(data->names[i]);
+            }
+        }
+
+        return names;
     }
 
     template<typename EnumType> int64_t EnumReflector::GetIndex(EnumType value) {

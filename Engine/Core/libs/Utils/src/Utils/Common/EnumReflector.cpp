@@ -59,7 +59,7 @@ namespace SR_UTILS_NS {
         return std::optional<int64_t>();
     }
 
-    uint64_t EnumReflector::Count() const {
+    uint64_t EnumReflector::Count() const noexcept {
         return m_data->values.size();
     }
 }

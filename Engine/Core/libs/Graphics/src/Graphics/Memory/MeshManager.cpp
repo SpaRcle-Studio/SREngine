@@ -88,6 +88,24 @@ namespace SR_GRAPH_NS::Memory {
         m_IBOs.clear();
     }
 
+    void MeshManager::PrintDump() {
+        if (m_VBOs.empty() && m_IBOs.empty()) {
+            return;
+        }
+
+        std::string dump = "MeshManager::PrintDump() : ";
+
+        for (auto&& [resource, vbo] : m_VBOs) {
+            dump += "\n\tVBO [" + resource + "] Usages = " + std::to_string(vbo.GetUsages());
+        }
+
+        for (auto&& [resource, ibo] : m_IBOs) {
+            dump += "\n\tIBO [" + resource + "] Usages = " + std::to_string(ibo.GetUsages());
+        }
+
+        SR_INFO(dump);
+    }
+
     uint32_t MeshVidMemInfo::Copy() {
     #ifndef SR_RELEASE
         if (m_type == MeshMemoryType::Unknown) {

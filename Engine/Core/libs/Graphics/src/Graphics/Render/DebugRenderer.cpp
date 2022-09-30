@@ -16,8 +16,11 @@ namespace SR_GRAPH_NS {
         using namespace std::placeholders;
 
         SR_UTILS_NS::DebugDraw::Instance().SetCallbacks(this,
+                std::bind(&DebugRenderer::Remove, this, _1),
                 std::bind(&DebugRenderer::DrawLine, this, _1, _2, _3, _4, _5),
-                std::bind(&DebugRenderer::DrawCube, this, _1, _2, _3, _4, _5, _6)
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/cubeWireframe.obj", _1, _2, _3, _4, _5, _6),
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/planeWireframe.obj", _1, _2, _3, _4, _5, _6),
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6)
         );
 
         SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
@@ -57,6 +60,17 @@ namespace SR_GRAPH_NS {
         }
     }
 
+    void DebugRenderer::Remove(uint64_t id) {
+        SR_LOCK_GUARD
+
+        if (id == SR_ID_INVALID || id >= m_timedObjects.size()) {
+            SRHalt0();
+        }
+        else if (m_timedObjects[id].pMesh) {
+            UpdateTimedObject(id, 0.f);
+        }
+    }
+
     uint64_t DebugRenderer::DrawLine(uint64_t id, const SR_MATH_NS::FVector3 &start, const SR_MATH_NS::FVector3 &end, const SR_MATH_NS::FColor &color, float_t time) {
         SR_LOCK_GUARD
 
@@ -71,16 +85,33 @@ namespace SR_GRAPH_NS {
             return SR_ID_INVALID;
         }
         else {
-            return SR_ID_INVALID;
+            if (!m_timedObjects[id].pMesh) {
+                return DrawLine(SR_ID_INVALID, start, end, color, time);
+            }
+
+            auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugLine*>(m_timedObjects[id].pMesh);
+
+            if (!pMesh) {
+                SRHalt0();
+                return SR_ID_INVALID;
+            }
+
+            pMesh->SetColor(color);
+            pMesh->SetStartPoint(start);
+            pMesh->SetEndPoint(end);
+
+            UpdateTimedObject(id, time);
+
+            return id;
         }
     }
 
-    uint64_t DebugRenderer::DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+    uint64_t DebugRenderer::DrawGeometry(const std::string_view& path, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
         SR_LOCK_GUARD
 
         if (id == SR_ID_INVALID) {
             SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(
-                    SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)
+                    SR_GTYPES_NS::Mesh::Load(path, SR_GTYPES_NS::MeshType::Wireframe, 0)
             );
 
             if (pMesh) {
@@ -100,7 +131,7 @@ namespace SR_GRAPH_NS {
         }
         else {
             if (!m_timedObjects[id].pMesh) {
-                return DrawCube(SR_ID_INVALID, pos, rot, scale, color, time);
+                return DrawGeometry(path, SR_ID_INVALID, pos, rot, scale, color, time);
             }
 
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh*>(m_timedObjects[id].pMesh);
@@ -162,6 +193,10 @@ namespace SR_GRAPH_NS {
 
             if (!timed.pMesh) {
                 continue;
+            }
+
+            if (!timed.registered) {
+                timed.pMesh->FreeVideoMemory();
             }
 
             timed.pMesh->RemoveUsePoint();

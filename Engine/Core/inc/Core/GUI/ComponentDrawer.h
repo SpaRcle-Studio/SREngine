@@ -31,14 +31,12 @@ namespace SR_CORE_NS::GUI {
 }
 
 namespace SR_PHYSICS_NS::Types {
-    class Rigidbody3D;
-    class BoxCollider3D;
+    class Rigidbody;
 }
 
 namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_PHYSICS_NS::Types::Rigidbody3D*& rigidbody3D, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_PHYSICS_NS::Types::BoxCollider3D*& rigidbody3D, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_PHYSICS_NS::Types::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::ProceduralMesh*& proceduralMesh, EditorGUI* context, int32_t index);

@@ -85,4 +85,16 @@ namespace SR_GTYPES_NS {
 
         Mesh::UseMaterial();
     }
+
+    void DebugLine::SetEndPoint(const SR_MATH_NS::FVector3 &endPoint) {
+        m_endPoint = endPoint;
+    }
+
+    void DebugLine::SetColor(const SR_MATH_NS::FVector4 &color) {
+        m_color = color;
+    }
+
+    void DebugLine::SetStartPoint(const SR_MATH_NS::FVector3& startPoint) {
+        m_startPoint = startPoint;
+    }
 }

@@ -8,13 +8,22 @@
 namespace SR_UTILS_NS {
     /// ---------------------------------------------- CALLBACKS INITIALIZATIONS ---------------------------------------
 
-    void DebugDraw::SetCallbacks(void* pUserIdentifier, const DrawLineCallback& lineCallback, const DrawCubeCallback& cubeCallback) {
+    void DebugDraw::SetCallbacks(void* pUserIdentifier,
+            const RemoveCallback& removeCallback,
+            const DrawLineCallback& lineCallback,
+            const DrawCubeCallback& cubeCallback,
+            const DrawPlaneCallback& drawPlaneCallback,
+            const DrawSphereCallback& drawSphereCallback)
+    {
         SR_LOCK_GUARD
 
         auto&& callbacks = m_callbacks[pUserIdentifier];
 
+        callbacks.removeCallback = removeCallback;
         callbacks.drawLineCallback = lineCallback;
         callbacks.drawCubeCallback = cubeCallback;
+        callbacks.drawPlaneCallback = drawPlaneCallback;
+        callbacks.drawSphereCallback = drawSphereCallback;
     }
 
     void DebugDraw::RemoveCallbacks(void* pUserIdentifier) {
@@ -45,6 +54,14 @@ namespace SR_UTILS_NS {
         }
         else {
             SRHalt("Callbacks not found!");
+        }
+    }
+
+    void DebugDraw::Remove(uint64_t id) {
+        SR_LOCK_GUARD
+
+        if (m_currentCallbacks && m_currentCallbacks->removeCallback) {
+            m_currentCallbacks->removeCallback(id);
         }
     }
 
@@ -176,5 +193,165 @@ namespace SR_UTILS_NS {
         return DrawCube(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    /// ---------------------------------------------------- CUBE DRAWING ----------------------------------------------
+    /// ---------------------------------------------------- PLANE DRAWING ----------------------------------------------
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+        SR_LOCK_GUARD
+
+        if (m_currentCallbacks && m_currentCallbacks->drawPlaneCallback) {
+            return m_currentCallbacks->drawPlaneCallback(id, pos, rot, scale, color, time);
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawPlane(id, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawPlane(id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawPlane(id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos) {
+        return DrawPlane(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawPlane(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawPlane(SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawPlane(SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawPlane(SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3 &pos) {
+        return DrawPlane(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
+        return DrawPlane(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
+        return DrawPlane(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawPlane(SR_ID_INVALID, pos, rot, scale, color, time);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
+        return DrawPlane(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
+        return DrawPlane(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawPlane(const SR_MATH_NS::FVector3& pos, float_t time) {
+        return DrawPlane(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawPlane(uint64_t id) {
+        return DrawPlane(id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    }
+
+    uint64_t DebugDraw::DrawPlane() {
+        return DrawPlane(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    /// ---------------------------------------------------- SPHERE DRAWING ----------------------------------------------
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+        SR_LOCK_GUARD
+
+        if (m_currentCallbacks && m_currentCallbacks->drawSphereCallback) {
+            return m_currentCallbacks->drawSphereCallback(id, pos, rot, scale, color, time);
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawSphere(id, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawSphere(id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawSphere(id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos) {
+        return DrawSphere(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawSphere(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawSphere(SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawSphere(SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawSphere(SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3 &pos) {
+        return DrawSphere(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
+        return DrawSphere(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
+        return DrawSphere(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawSphere(SR_ID_INVALID, pos, rot, scale, color, time);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
+        return DrawSphere(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
+        return DrawSphere(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawSphere(const SR_MATH_NS::FVector3& pos, float_t time) {
+        return DrawSphere(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawSphere(uint64_t id) {
+        return DrawSphere(id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    }
+
+    uint64_t DebugDraw::DrawSphere() {
+        return DrawSphere(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    /// ---------------------------------------------------- SPHERE DRAWING ----------------------------------------------
 }

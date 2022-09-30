@@ -10,8 +10,7 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 
 #include <Scripting/Base/Behaviour.h>
-#include <Physics/3D/Rigidbody3D.h>
-#include <Physics/3D/BoxCollider3D.h>
+#include <Physics/Rigidbody.h>
 
 #include <Graphics/UI/Sprite2D.h>
 #include <Graphics/UI/Anchor.h>
@@ -126,8 +125,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
-            copyPtrComponent = DrawComponent<SR_PHYSICS_NS::Types::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
-            copyPtrComponent = DrawComponent<SR_PHYSICS_NS::Types::BoxCollider3D>(copyPtrComponent, "BoxCollider3D", index);
+            copyPtrComponent = DrawComponent<SR_PHYSICS_NS::Types::Rigidbody>(copyPtrComponent, "Rigidbody", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");

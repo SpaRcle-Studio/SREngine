@@ -213,6 +213,8 @@ namespace Framework {
             const auto dt = static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
             m_timeStart = now;
 
+            m_cmdManager->Update();
+
             Prepare();
 
             Update(dt);
@@ -377,8 +379,6 @@ namespace Framework {
                         SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
             }
 
-            m_cmdManager->Update();
-
             if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
                 m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
             }
@@ -399,7 +399,6 @@ namespace Framework {
         for (auto&& pComponent : m_updateableComponents) {
             pComponent->FixedUpdate();
         }
-
 
         if (m_editor && m_window->IsWindowFocus()) {
             m_editor->Update();

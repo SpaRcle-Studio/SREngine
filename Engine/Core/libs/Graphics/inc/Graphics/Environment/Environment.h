@@ -294,6 +294,7 @@ namespace SR_GRAPH_NS {
         virtual SR_FORCE_INLINE void DrawInstancedVertices(uint32_t VAO, uint32_t IBO, uint32_t count) const { }
         virtual SR_FORCE_INLINE void DrawIndices(const uint32_t& countIndices) const { }
         virtual SR_FORCE_INLINE void Draw(const uint32_t& countVerts) const { }
+        virtual SR_FORCE_INLINE void SetLineWidth(float_t width) const { }
 
         // ============================== [ TEXTURE METHODS ] ==============================
 

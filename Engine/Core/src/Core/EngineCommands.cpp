@@ -150,7 +150,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 
         Чтобы этого избежать, сперва блокируем сцену.
      */
-    if (m_scene.LockIfValid()) {
+    if (m_scene.RecursiveLockIfValid()) {
         SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
@@ -224,7 +224,7 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
     m_scene = ptr->GetScene();
 
     /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
-    if (m_scene.LockIfValid()) {
+    if (m_scene.RecursiveLockIfValid()) {
         SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {

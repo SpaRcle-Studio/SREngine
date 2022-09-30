@@ -6,6 +6,10 @@
 #include <Graphics/Types/Geometry/IndexedMesh.h>
 
 namespace SR_GTYPES_NS {
+    IndexedMesh::~IndexedMesh() {
+        SRAssert(m_IBO == SR_ID_INVALID && m_VBO == SR_ID_INVALID);
+    }
+
     SR_UTILS_NS::IResource *IndexedMesh::Copy(SR_UTILS_NS::IResource *destination) const {
         if (!destination) {
             SR_ERROR("IndexedMesh::Copy() : destination in nullptr!");
@@ -67,6 +71,9 @@ namespace SR_GTYPES_NS {
                 return false;
             }
         }
+
+        m_IBO = SR_ID_INVALID;
+        m_VBO = SR_ID_INVALID;
 
         return true;
     }
