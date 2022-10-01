@@ -54,7 +54,7 @@ namespace SR_WORLD_NS {
     bool Chunk::Unload() {
         m_loadState = LoadState::Unload;
 
-        SetDebugLoaded(BoolExt::True);
+        SetDebugLoaded(BoolExt::False);
 
         auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
 

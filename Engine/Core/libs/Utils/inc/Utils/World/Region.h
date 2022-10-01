@@ -64,6 +64,9 @@ namespace SR_UTILS_NS {
 
             SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save() const;
 
+        private:
+            void SetDebugLoaded(BoolExt enabled);
+
         public:
             typedef std::function<Region*(SRRegionAllocArgs)> Allocator;
 
@@ -75,7 +78,10 @@ namespace SR_UTILS_NS {
             static const uint16_t VERSION;
 
         protected:
-            Observer* m_observer;
+            uint64_t m_debugLoadedId = SR_ID_INVALID;
+
+            Observer* m_observer = nullptr;
+
             Chunks m_loadedChunks;
             CachedChunks m_cached;
             uint32_t m_width;

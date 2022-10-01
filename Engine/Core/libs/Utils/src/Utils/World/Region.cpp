@@ -73,6 +73,8 @@ namespace SR_WORLD_NS {
     }
 
     Region::~Region() {
+        SetDebugLoaded(BoolExt::False);
+
         for (auto&& [position, chunk] : m_loadedChunks) {
             delete chunk;
         }
@@ -87,6 +89,8 @@ namespace SR_WORLD_NS {
 
     bool Region::Unload(bool force) {
         SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
+
+        SetDebugLoaded(BoolExt::False);
 
         for (auto&& [position, pChunk] : m_loadedChunks) {
             if (!force) {
@@ -143,8 +147,9 @@ namespace SR_WORLD_NS {
     }
 
     Chunk *Region::Find(const Framework::Helper::Math::IVector3 &position) const {
-        if (const auto& pIt = m_loadedChunks.find(position); pIt == m_loadedChunks.end())
+        if (const auto& pIt = m_loadedChunks.find(position); pIt == m_loadedChunks.end()) {
             return nullptr;
+        }
         else
             return pIt->second;
     }
@@ -152,6 +157,8 @@ namespace SR_WORLD_NS {
     void Region::ApplyOffset() {
         for (auto&& [key, pChunk] : m_loadedChunks)
             pChunk->ApplyOffset();
+
+        SetDebugLoaded(BoolExt::None);
     }
 
     Chunk *Region::GetChunk(const SR_MATH_NS::FVector3 &position) {
@@ -208,6 +215,8 @@ namespace SR_WORLD_NS {
 
         SRAssert(!m_position.HasZero());
 
+        SetDebugLoaded(BoolExt::True);
+
         const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
         if (path.Exists()) {
             auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);
@@ -252,5 +261,33 @@ namespace SR_WORLD_NS {
         }
 
         return false;
+    }
+
+    void Region::SetDebugLoaded(BoolExt enabled) {
+        if (m_position.y != 1) {
+            return;
+        }
+
+        if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {
+            const auto size = SR_MATH_NS::FVector3(m_width) * m_chunkSize.x;
+            const SR_WORLD_NS::Offset offset = m_observer->m_offset;
+
+            auto fPos = SR_WORLD_NS::AddOffset(m_position.Cast<SR_MATH_NS::Unit>(), offset.m_region);
+            fPos = fPos * size + (size / 2);
+            fPos = fPos.DeSingular(size);
+
+            fPos += offset.m_chunk * m_chunkSize.x;
+
+            m_debugLoadedId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
+                    SR_MATH_NS::FVector3(fPos.x, static_cast<SR_MATH_NS::Unit>(0.01), fPos.z),
+                    SR_MATH_NS::Quaternion::Identity(),
+                    SR_MATH_NS::FVector3(size.x / 2.f, 1.f, size.y / 2.f),
+                    SR_MATH_NS::FColor(255, 0, 0, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+        else if (m_debugLoadedId != SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
+        }
     }
 }
