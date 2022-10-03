@@ -38,9 +38,20 @@ namespace SR_UTILS_NS {
         using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource*>>;
         using Info = std::unordered_map<ResourcePath, ResourceInfo>;
     public:
+        ResourceType()
+            : m_name(std::string())
+        { }
+
         explicit ResourceType(std::string name)
             : m_name(std::move(name))
         { }
+
+        ResourceType(const ResourceType& other) noexcept {
+            m_resources = other.m_resources;
+            m_copies = other.m_copies;
+            m_info = other.m_info;
+            m_name = other.m_name;
+        }
 
         ResourceType(ResourceType&& other) noexcept
             : m_resources(std::exchange(other.m_resources, { }))

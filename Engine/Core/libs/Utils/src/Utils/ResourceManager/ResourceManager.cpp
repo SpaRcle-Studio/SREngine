@@ -14,11 +14,10 @@ namespace SR_UTILS_NS {
     bool ResourceManager::Init(const std::string& resourcesFolder) {
         SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
 
-        m_resources.max_load_factor(0.9f);
-        m_resources.reserve(25);
-
         m_folder = resourcesFolder;
         m_folder.Normalize();
+
+        m_resources.max_load_factor(0.9f);
 
         m_isInit = true;
 
@@ -77,7 +76,7 @@ namespace SR_UTILS_NS {
 
     void ResourceManager::Remove(IResource *pResource) {
         if (pResource->IsRegistered()) {
-            auto&& resourcesGroup = m_resources.at(pResource->GetResourceHashName());
+            auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
             resourcesGroup.Remove(pResource);
         }
         else {
@@ -87,8 +86,9 @@ namespace SR_UTILS_NS {
         }
     }
 
-    bool ResourceManager::IsLastResource(IResource* resource) {
-        return m_resources.at(resource->GetResourceHashName()).IsLast(resource->m_resourceId);
+    bool ResourceManager::IsLastResource(IResource* pResource) {
+        auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
+        return resourcesGroup.IsLast(pResource->m_resourceId);
     }
 
     void ResourceManager::Thread() {
@@ -168,23 +168,24 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void ResourceManager::RegisterResource(IResource *resource) {
-        SRAssert(!resource->IsRegistered());
+    void ResourceManager::RegisterResource(IResource *pResource) {
+        SRAssert(!pResource->IsRegistered());
 
         if (Debug::Instance().GetLevel() >= Debug::Level::Full) {
-            SR_LOG("ResourceManager::RegisterResource() : add new \"" + std::string(resource->GetResourceName()) + "\" resource.");
+            SR_LOG("ResourceManager::RegisterResource() : add new \"" + std::string(pResource->GetResourceName()) + "\" resource.");
         }
 
         SR_SCOPED_LOCK
 
     #ifdef SR_DEBUG
-        if (m_resources.count(resource->GetResourceHashName()) == 0) {
+        if (m_resources.count(pResource->GetResourceHashName()) == 0) {
             SRAssert2(false, "Unknown resource type!");
             return;
         }
     #endif
 
-        m_resources.at(resource->GetResourceHashName()).Add(resource);
+        auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
+        resourcesGroup.Add(pResource);
     }
 
     void ResourceManager::PrintMemoryDump() {
@@ -232,7 +233,9 @@ namespace SR_UTILS_NS {
         }
     #endif
 
-        if (auto&& pResource = m_resources.at(hashTypeName).Find(id)) {
+        auto&& [name, resourcesGroup] = *m_resources.find(hashTypeName);
+
+        if (auto&& pResource = resourcesGroup.Find(id)) {
             return pResource;
         }
 
