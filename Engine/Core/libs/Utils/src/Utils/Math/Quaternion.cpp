@@ -12,12 +12,24 @@ namespace SR_MATH_NS {
         return Vector3<Unit>(glm::eulerAngles(glm::normalize(self))).Degrees();
     }
 
-    Quaternion::Quaternion(const Vector3<Unit> &p_euler) {
-        self = p_euler.ToGLM();
+    Quaternion::Quaternion(const Vector3<Unit>& eulerAngle) {
+        Vector3<T> c = (eulerAngle * T(0.5)).Cos();
+        Vector3<T> s = (eulerAngle * T(0.5)).Sin();
+
+        this->w = c.x * c.y * c.z + s.x * s.y * s.z;
+        this->x = s.x * c.y * c.z - c.x * s.y * s.z;
+        this->y = c.x * s.y * c.z + s.x * c.y * s.z;
+        this->z = c.x * c.y * s.z - s.x * s.y * c.z;
+
+        ///self = p_euler.ToGLM();
     }
 
-    Vector3<Unit>Quaternion::operator*(const Vector3<Unit> &v) const {
-        return Vector3<Unit>(self * v.ToGLM());
+    Vector3<Unit> Quaternion::operator*(const Vector3<Unit> &v) const noexcept {
+        Vector3<Unit> const QuatVector(x, y, z);
+        Vector3<Unit> const uv = QuatVector.Cross(v);
+        Vector3<Unit> const uuv = QuatVector.Cross(uv);
+
+        return v + ((uv * w) + uuv) * static_cast<Unit>(2);
     }
 
     Quaternion Quaternion::Rotate(const Vector3<Unit> &v) const {

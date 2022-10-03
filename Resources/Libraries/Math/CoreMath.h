@@ -15,6 +15,10 @@
     #define ESMakePair(type1, type2) std::pair<type1, type2>
 #endif
 
+#ifndef SR_NODISCARD
+    #define SR_NODISCARD [[nodiscard]]
+#endif
+
 #define SR_RAD(x) x * SR_PI / 180.0
 #define SR_DEG(x) x / SR_PI * 180.0
 

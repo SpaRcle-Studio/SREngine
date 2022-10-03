@@ -15,6 +15,8 @@
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/Render/PostProcessing.h>
 
+#include <Physics/Rigidbody.h>
+
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
         auto&& compiler = SR_SCRIPTING_NS::GlobalEvoCompiler::Instance();
@@ -41,6 +43,7 @@ namespace Framework {
             RegisterTexture(generator);
             RegisterMaterial(generator);
             RegisterGUISystem(generator);
+            RegisterRigidbody(generator);
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
             RegisterObserver(generator);
@@ -251,6 +254,20 @@ namespace Framework {
 
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
+    }
+
+    void API::RegisterRigidbody(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("Rigidbody", "Rigidbody",
+                { "Math/Vector3.h", "Math/Vector2.h", "Component.h", "PostProcessing.h" }, {
+                { "Component", EvoScript::Public }
+        });
+
+        using namespace SR_MATH_NS;
+        using namespace SR_PHYSICS_NS::Types;
+
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, AddLocalVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, AddGlobalVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, SetVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
@@ -496,8 +513,10 @@ namespace Framework {
         using namespace SR_WORLD_NS;
         using namespace SR_MATH_NS;
         using namespace SR_GTYPES_NS;
+        using namespace SR_PHYSICS_NS::Types;
 
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
+        ESRegisterDynamicCast(generator, Rigidbody, Component)
         ESRegisterDynamicCast(generator, Mesh, Component)
     }
 

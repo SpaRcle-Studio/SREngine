@@ -136,7 +136,6 @@ namespace SR_PHYSICS_NS {
 
     void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
         m_dynamicsWorld->removeRigidBody(pRigidbody->m_rigidbody);
-        delete pRigidbody;
     }
 
     void PhysicsScene::ClearForces() {

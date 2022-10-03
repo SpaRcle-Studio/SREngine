@@ -127,6 +127,41 @@ namespace SR_MATH_NS {
             return FVector3(scale);
         }
 
+        bool Decompose(FVector3& translation, Quaternion& quaternion, FVector3& scale) const {
+            translation = glm::vec3(self[3]);
+
+            scale[0] = glm::length(glm::vec3(self[0]));
+            scale[1] = glm::length(glm::vec3(self[1]));
+            scale[2] = glm::length(glm::vec3(self[2]));
+
+            const glm::mat3 rotMtx(
+                    glm::vec3(self[0]) / static_cast<float>(scale[0]),
+                    glm::vec3(self[1]) / static_cast<float>(scale[1]),
+                    glm::vec3(self[2]) / static_cast<float>(scale[2]));
+
+            quaternion = glm::quat_cast(rotMtx);
+
+            return true;
+        }
+
+        bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale) const {
+            translation = glm::vec3(self[3]);
+
+            scale[0] = glm::length(glm::vec3(self[0]));
+            scale[1] = glm::length(glm::vec3(self[1]));
+            scale[2] = glm::length(glm::vec3(self[2]));
+
+            const glm::mat3 rotMtx(
+                    glm::vec3(self[0]) / static_cast<float>(scale[0]),
+                    glm::vec3(self[1]) / static_cast<float>(scale[1]),
+                    glm::vec3(self[2]) / static_cast<float>(scale[2]));
+
+            eulers = glm::eulerAngles(glm::normalize(glm::quat_cast(rotMtx)));
+            eulers = eulers.Degrees();
+
+            return true;
+        }
+
         bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale, FVector3& skew) const {
             //glm::vec3 _scale;
             //glm::quat _rotation;

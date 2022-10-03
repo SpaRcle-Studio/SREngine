@@ -242,6 +242,14 @@ namespace SR_MATH_NS {
             return Vector3(static_cast<T>(abs(x)), static_cast<T>(abs(y)), static_cast<T>(abs(z)));
         }
 
+        SR_NODISCARD Vector3 Sin() const {
+            return Vector3(static_cast<T>(sin(x)), static_cast<T>(sin(y)), static_cast<T>(sin(z)));
+        }
+
+        SR_NODISCARD Vector3 Cos() const {
+            return Vector3(static_cast<T>(cos(x)), static_cast<T>(cos(y)), static_cast<T>(cos(z)));
+        }
+
         SR_NODISCARD Vector3 FixEulerAngles() const {
             return Vector3(FixAxis(x), FixAxis(y), FixAxis(z));
         }

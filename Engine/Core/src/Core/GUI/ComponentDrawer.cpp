@@ -62,6 +62,10 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
             pComponent->SetMass(mass);
         }
+
+        if (ImGui::Button("Jump")) {
+            pComponent->AddGlobalVelocity(SR_MATH_NS::FVector3(0, 5, 0));
+        }
     }
 
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {

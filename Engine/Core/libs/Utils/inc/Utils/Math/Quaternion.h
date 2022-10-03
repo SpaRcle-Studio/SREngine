@@ -14,6 +14,7 @@ namespace SR_MATH_NS {
 
     class SR_DLL_EXPORT Quaternion {
         friend Vector3<Unit>;
+        using T = Unit;
     public:
         union {
             struct {
@@ -23,26 +24,30 @@ namespace SR_MATH_NS {
                 float_t w;
             };
 
-            glm::quat self;
+            glm::quat self{};
         };
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::quat ToGLM() const noexcept { return self; }
         SR_NODISCARD Matrix4x4 ToMat4x4() const;
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 ToMat4x4GLM() const noexcept { return mat4_cast(self); }
-        SR_NODISCARD Vector3<Unit> EulerAngle() const;
-        SR_NODISCARD Quaternion Rotate(const Vector3<Unit>& v) const;
+        SR_NODISCARD Vector3<T> EulerAngle() const;
+        SR_NODISCARD Quaternion Rotate(const Vector3<T>& v) const;
 
-        SR_NODISCARD Unit X() const noexcept { return static_cast<Unit>(self.x); }
-        SR_NODISCARD Unit Y() const noexcept { return static_cast<Unit>(self.y); }
-        SR_NODISCARD Unit Z() const noexcept { return static_cast<Unit>(self.z); }
-        SR_NODISCARD Unit W() const noexcept { return static_cast<Unit>(self.w); }
+        SR_NODISCARD T X() const noexcept { return static_cast<T>(self.x); }
+        SR_NODISCARD T Y() const noexcept { return static_cast<T>(self.y); }
+        SR_NODISCARD T Z() const noexcept { return static_cast<T>(self.z); }
+        SR_NODISCARD T W() const noexcept { return static_cast<T>(self.w); }
 
-        constexpr Quaternion(const Quaternion &p_q) {
-            self = p_q.self;
-        }
+        constexpr Quaternion(const Quaternion &p_q)
+            : x(p_q.x)
+            , y(p_q.y)
+            , z(p_q.z)
+            , w(p_q.w)
+        { }
 
         constexpr Quaternion() {
-            self = glm::quat();
+            x = y = z = static_cast<T>(0);
+            w = static_cast<T>(1);
         }
 
         //, bool inRads = false
@@ -52,12 +57,12 @@ namespace SR_MATH_NS {
             self = q;
         }
 
-        constexpr explicit Quaternion(Unit x, Unit y, Unit z, Unit w) {
-            self.x = x;
-            self.y = y;
-            self.z = z;
-            self.w = w;
-        }
+        constexpr explicit Quaternion(T x, T y, T z, T w)
+            : x(x)
+            , y(y)
+            , z(z)
+            , w(w)
+        { }
 
         static Quaternion FromEuler(const Vector3<Unit>& euler);
 
@@ -112,7 +117,7 @@ namespace SR_MATH_NS {
             return Quaternion(q);
         }
 
-        Vector3<Unit> operator*(const Vector3<Unit> &v) const;
+        Vector3<Unit> operator*(const Vector3<Unit> &v) const noexcept;
         Vector3<Unit> operator/(const Vector3<Unit> &v) const;
         Quaternion operator*(const Quaternion& rhs) const {
             return Quaternion(self * rhs.self);

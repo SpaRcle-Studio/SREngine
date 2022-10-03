@@ -42,11 +42,18 @@ namespace SR_PHYSICS_NS::Types {
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
         SR_NODISCARD float_t GetMass() const noexcept;
 
+        void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity);
+        void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity);
+
+        void SetVelocity(const SR_MATH_NS::FVector3& velocity);
+
         void SetCenter(const SR_MATH_NS::FVector3& center);
         void SetMass(float_t mass);
         void SetType(ShapeType type);
 
     protected:
+        void OnEnable() override;
+        void OnDisable() override;
         void OnAttached() override;
         void OnDestroy() override;
 
@@ -55,6 +62,7 @@ namespace SR_PHYSICS_NS::Types {
         void OnMatrixDirty() override;
 
         virtual bool InitBody();
+        virtual void DeInitBody();
 
         PhysicsScenePtr GetPhysicsScene();
 

@@ -53,15 +53,23 @@ public:
         return x < y && x < z ? x : y < x && y < z ? y : z;
     }
 
+    SR_NODISCARD Vector3 Sin() const {
+        return Vector3(static_cast<T>(sin(x)), static_cast<T>(sin(y)), static_cast<T>(sin(z)));
+    }
+
+    SR_NODISCARD Vector3 Cos() const {
+        return Vector3(static_cast<T>(cos(x)), static_cast<T>(cos(y)), static_cast<T>(cos(z)));
+    }
+
     [[nodiscard]] bool Empty() const {
         return (x == 0 && y == 0 && z == 0);
     }
 
-    [[nodiscard]] Vector3 Radians() const {
-        return { static_cast<T>(RAD(x)), static_cast<T>(RAD(y)), static_cast<T>(RAD(z)) };
+    SR_NODISCARD Vector3 Radians() const noexcept {
+        return { static_cast<T>(SR_RAD(x)), static_cast<T>(SR_RAD(y)), static_cast<T>(SR_RAD(z)) };
     }
-    [[nodiscard]] Vector3 Degrees() const {
-        return { static_cast<T>(DEG(x)), static_cast<T>(DEG(y)), static_cast<T>(DEG(z)) };
+    SR_NODISCARD Vector3 Degrees() const noexcept {
+        return { static_cast<T>(SR_DEG(x)), static_cast<T>(SR_DEG(y)), static_cast<T>(SR_DEG(z)) };
     }
 
     std::string ToString(){
