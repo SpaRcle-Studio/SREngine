@@ -1,0 +1,37 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+
+uniform sampler2D NoiseTex;
+uniform vec3 BubbleColor;
+uniform float NoiseSampleSize;
+uniform float AnimationSpeed;
+uniform float HeightMultiplier;
+
+float fresnel() {
+	vec3 view_direction_world = VIEW_DIRECTION;
+	vec3 normal_world = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
+
+	float d = dot(view_direction_world, normal_world);
+	d = abs(d);
+	d = clamp(d, 0.0, 1.0);
+
+	return 1.0 - d;
+}
+
+void fragment() {
+	COLOR = vec4(BubbleColor, fresnel());
+}
+
+void vertex() {
+    VERTEX.x = -VERTEX.x;
+
+	float height = texture(NoiseTex, VERTEX.xz * NoiseSampleSize + vec2(TIME) * AnimationSpeed).r;
+	VERTEX += height * HeightMultiplier;
+}

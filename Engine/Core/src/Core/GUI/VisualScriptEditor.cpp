@@ -8,11 +8,11 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Xml.h>
-#include <GUI/NodeManager.h>
 
-#include <GUI/Link.h>
-#include <GUI/Node.h>
-#include <GUI/Pin.h>
+#include <Graphics/GUI/NodeManager.h>
+#include <Graphics/GUI/Link.h>
+#include <Graphics/GUI/Node.h>
+#include <Graphics/GUI/Pin.h>
 
 Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
     : Framework::Graphics::GUI::Widget("Evo Script Editor")

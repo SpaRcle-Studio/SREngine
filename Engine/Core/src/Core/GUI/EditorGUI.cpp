@@ -13,11 +13,12 @@
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/FileBrowser.h>
-#include <Window/Window.h>
 #include <Utils/Common/Features.h>
 #include <Core/Settings/EditorSettings.h>
-#include <Types/Texture.h>
-#include <Render/RenderContext.h>
+
+#include <Graphics/Types/Texture.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Window/Window.h>
 
 namespace SR_CORE_NS::GUI {
     EditorGUI::EditorGUI()
@@ -160,7 +161,6 @@ namespace SR_CORE_NS::GUI {
 
     void EditorGUI::Enable(bool value) {
         if (m_enabled != value) {
-            m_window->Synchronize();
             GetWindow<SceneViewer>()->Enable(value);
             m_enabled = value;
         }

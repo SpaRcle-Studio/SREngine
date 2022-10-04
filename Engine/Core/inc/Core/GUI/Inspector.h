@@ -7,9 +7,10 @@
 
 #include <Core/GUI/ComponentDrawer.h>
 
-#include <GUI/Widget.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
+
+#include <Graphics/GUI/Widget.h>
 
 namespace SR_UTILS_NS {
     class Transform3D;
@@ -37,6 +38,8 @@ namespace SR_CORE_NS::GUI {
         void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
         void DrawTransform3D(SR_UTILS_NS::Transform3D* transform) const;
 
+        void BackupTransform(const SR_UTILS_NS::GameObject::Ptr ptr, const std::function<void()>& operation) const;
+
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
             auto&& context = dynamic_cast<EditorGUI*>(GetManager());
@@ -61,7 +64,7 @@ namespace SR_CORE_NS::GUI {
         }
 
     private:
-        Helper::Types::SafePtr<Helper::GameObject> m_gameObject;
+        SR_UTILS_NS::GameObject::Ptr m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
 

@@ -4,14 +4,16 @@
 
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/Hierarchy.h>
+#include <Core/GUI/EditorCamera.h>
+#include <Core/GUI/Guizmo.h>
 
 #include <Utils/Input/InputSystem.h>
-#include <GUI/Editor/Guizmo.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Transform3D.h>
-#include <Window/Window.h>
-#include <Types/Camera.h>
-#include <Types/Framebuffer.h>
+
+#include <Graphics/Window/Window.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/Types/Framebuffer.h>
 
 namespace SR_CORE_NS::GUI {
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
@@ -25,15 +27,20 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::Draw() {
-        if (m_camera.LockIfValid()) {
+        if (!m_scene.RecursiveLockIfValid()) {
+            return;
+        }
+
+        if (m_camera.RecursiveLockIfValid()) {
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
             if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
                 m_id = pFramebuffer->GetColorTexture(0);
             }
 
-            if (m_id != SR_ID_INVALID && pCamera->IsActive()) {
-                m_guizmo->DrawTools();
+            if (pCamera && m_id != SR_ID_INVALID && pCamera->IsActive()) 
+            {
+                m_guizmo->DrawTools(); //Отрисовка панели с переключателями
 
                 ImGui::BeginGroup();
 
@@ -44,8 +51,8 @@ namespace SR_CORE_NS::GUI {
 
                     DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
 
-                    //if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
-                    //    m_guizmo->Draw(*selected.begin(), m_camera);
+                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                        m_guizmo->Draw(*selected.begin(), m_camera);
 
                     CheckFocused();
                     CheckHovered();
@@ -57,6 +64,11 @@ namespace SR_CORE_NS::GUI {
 
             m_camera.Unlock();
         }
+        else {
+            m_camera = m_scene->Find("Editor camera");
+        }
+
+        m_scene.Unlock();
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -69,7 +81,7 @@ namespace SR_CORE_NS::GUI {
         : Widget("Scene")
         , m_window(window)
         , m_hierarchy(hierarchy)
-        , m_guizmo(new SR_GRAPH_NS::GUI::Guizmo())
+        , m_guizmo(new Guizmo())
         , m_id(-1)
     {
         m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
@@ -83,7 +95,7 @@ namespace SR_CORE_NS::GUI {
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
 
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             if (auto* camera = m_camera->GetComponent<SR_GTYPES_NS::Camera>()) {
                 //camera->SetDirectOutput(!m_enabled);
             }
@@ -99,7 +111,7 @@ namespace SR_CORE_NS::GUI {
         auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
         auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
 
-        if (m_camera.LockIfValid()) {
+        if (m_camera.RecursiveLockIfValid()) {
             if (wheel != 0) {
                 m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
             }
@@ -121,7 +133,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize)        {
+    void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
         const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
         const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
 
@@ -141,10 +153,11 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& env = SR_GRAPH_NS::Environment::Get();
-        if (env->GetPipeLine() == Graphics::PipeLine::OpenGL)
+        if (env->GetPipeLine() == Graphics::PipeLine::OpenGL) {
             DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
-        else {
-            DrawImage(env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+        }
+        else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
+            DrawImage(pDescriptor, ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
         }
     }
 
@@ -185,10 +198,13 @@ namespace SR_CORE_NS::GUI {
 
         const auto size = m_window->GetWindowSize();
 
-        auto&& pCamera = new SR_GTYPES_NS::Camera(size.x, size.y);
+        auto&& pCamera = new EditorCamera(size.x, size.y);
         pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
 
         camera->AddComponent(pCamera);
+
+        /// Камера редактора имеет наивысшый закадровый приоритет
+        pCamera->SetPriority(SR_INT32_MIN);
 
         camera->GetTransform()->GlobalTranslate(m_translation);
         camera->GetTransform()->GlobalRotate(m_rotation);

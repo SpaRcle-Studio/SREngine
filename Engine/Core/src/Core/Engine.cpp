@@ -5,21 +5,21 @@
 #include <Core/Engine.h>
 #include <Core/GUI/EditorGUI.h>
 
-#include <GUI/WidgetManager.h>
-#include <Environment/Environment.h>
-
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 
-#include <Render/Render.h>
-#include <Render/RenderScene.h>
-#include <Render/RenderContext.h>
-#include <Memory/CameraManager.h>
-#include <Window/Window.h>
+#include <Graphics/Environment/Environment.h>
+#include <Graphics/GUI/WidgetManager.h>
+#include <Graphics/Render/Render.h>
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Window/Window.h>
 
-#include <Types/Skybox.h>
+#include <Physics/PhysicsScene.h>
 
 namespace Framework {
     bool Engine::Create(SR_GRAPH_NS::Window* window) {
@@ -30,6 +30,8 @@ namespace Framework {
         m_pipeline   = SR_GRAPH_NS::Environment::Get();
         m_editor     = new Core::GUI::EditorGUI();
 
+        m_worldTimer = SR_HTYPES_NS::Timer(1u);
+
         if (m_isCreate) {
             SR_ERROR("Engine::Create() : game engine is already created!");
             return false;
@@ -39,10 +41,6 @@ namespace Framework {
 
         m_window->SetDrawCallback([this]() {
             DrawCallback();
-        });
-
-        m_window->SetResizeCallback([this](const SR_MATH_NS::IVector2& size) {
-            ResizeCallback(size);
         });
 
         if (!m_window->Create()) {
@@ -132,11 +130,6 @@ namespace Framework {
             return false;
         }
 
-        if (!m_cmdManager->Run()) {
-            SR_ERROR("Engine::Run() : failed to run command manager!");
-            return false;
-        }
-
         m_isRun = true;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
@@ -181,10 +174,13 @@ namespace Framework {
             SetScene(ScenePtr());
         }
 
+        SR_INFO("Engine::Close() : destroying the editor...");
         SR_SAFE_DELETE_PTR(m_editor);
 
-        if (m_cmdManager && m_cmdManager->IsRun())
+        if (m_cmdManager) {
+            SR_INFO("Engine::Close() : close the command manager...");
             m_cmdManager->Close();
+        }
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
         if (m_worldThread) {
@@ -204,7 +200,7 @@ namespace Framework {
     }
 
     void Engine::DrawCallback() {
-        if (m_window == nullptr || !m_window->IsWindowFocus()) {
+        if (!m_isRun || m_window == nullptr || m_window->IsWindowCollapsed()) {
             m_accumulator = 0.f;
             return;
         }
@@ -212,23 +208,34 @@ namespace Framework {
         SR_HTYPES_NS::Time::Instance().Update();
 
         if (m_scene.LockIfValid()) {
-            Prepare();
-
-            Update(m_accumulator);
-
             const auto now = SR_HTYPES_NS::Time::Instance().Now();
             const auto deltaTime = now - m_timeStart;
+            const auto dt = static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
             m_timeStart = now;
 
+            m_cmdManager->Update();
+
+            Prepare();
+
+            Update(dt);
+
             /// fixed update
-            if (m_accumulator >= m_updateFrequency) {
-                while (m_accumulator >= m_updateFrequency) {
+            if (m_accumulator >= m_updateFrequency)
+            {
+                while (m_accumulator >= m_updateFrequency)
+                {
+                    if (!IsPaused() && IsActive() && m_physicsScene.RecursiveLockIfValid()) {
+                        m_physicsScene->FixedUpdate();
+                        m_physicsScene.Unlock();
+                    }
+
                     FixedUpdate();
+
                     m_accumulator -= m_updateFrequency;
                 }
             }
 
-            m_accumulator += static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
+            m_accumulator += dt;
 
             m_scene.Unlock();
         }
@@ -264,10 +271,15 @@ namespace Framework {
                 ptr->Remove(&Graphics::GUI::GlobalWidgetManager::Instance());
             });
 
-            oldScene.AutoFree([](SR_WORLD_NS::Scene* scene) {
-                scene->Destroy();
-                scene->Free();
+            oldScene.AutoFree([](SR_WORLD_NS::Scene* pScene) {
+                pScene->Destroy();
+                delete pScene;
             });
+
+            m_physicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pPhysicsScene) {
+                delete pPhysicsScene;
+            });
+
             locked = true;
         }
 
@@ -294,6 +306,8 @@ namespace Framework {
                 m_renderScene.Unlock();
                 oldRenderScene.RemoveAllLocks();
             }
+
+            m_physicsScene = new SR_PHYSICS_NS::PhysicsScene(m_scene);
         }
 
         if (m_editor) {
@@ -316,12 +330,10 @@ namespace Framework {
     }
 
     void Engine::WorldThread() {
-        auto timer = Helper::Types::Timer(0.1);
-
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(1);
+            SR_HTYPES_NS::Thread::Sleep(250);
 
-            auto&& pCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
+            m_mainCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
                 if (auto&& pCamera = ptr->GetMainCamera()) {
                     return pCamera;
                 }
@@ -329,19 +341,19 @@ namespace Framework {
                 return ptr->GetFirstOffScreenCamera();
             }, nullptr);
 
-            if (!pCamera) {
+            if (!m_mainCamera) {
                 continue;
             }
 
-            if (timer.Update() && m_scene.LockIfValid()) {
-                if (auto &&gameObject = pCamera->GetParent()) {
-                    if (gameObject->TryLockIfValid()) {
+            if (m_worldTimer.Update() && m_scene.LockIfValid()) {
+                if (auto &&gameObject = m_mainCamera->GetParent()) {
+                    if (gameObject->TryRecursiveLockIfValid()) {
                         m_scene->SetObserver(gameObject->GetThis());
                         gameObject->Unlock();
                     }
                 }
 
-                m_scene->Update(timer.GetDeltaTime());
+                m_scene->Update(m_worldTimer.GetDeltaTime());
                 m_scene.Unlock();
             }
         }
@@ -349,68 +361,69 @@ namespace Framework {
         SR_SYSTEM_LOG("Engine::WorldThread() : world thread completed!");
     }
 
-    void Engine::ResizeCallback(const SR_MATH_NS::IVector2& size) {
-
-    }
-
     void Engine::FixedUpdate() {
-        SR_UTILS_NS::Input::Instance().Check();
+        if (m_window->IsWindowFocus()) {
+            ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
+            SR_UTILS_NS::Input::Instance().Check();
 
-        m_input->Check();
+            m_input->Check();
 
-        bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
+            bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
-                m_cmdManager->Cancel();
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
+                    m_cmdManager->Cancel();
 
-            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
-                if (!m_cmdManager->Redo())
-                    SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
+                    if (!m_cmdManager->Redo())
+                        SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+            }
+
+            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+                m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+            }
+
+            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+                m_editor->Enable(!m_editor->Enabled());
+                m_renderScene.Do([](SR_GRAPH_NS::RenderScene *ptr) {
+                    ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
+                });
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
+                Reload();
+                return;
+            }
         }
 
-        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
-            m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+        for (auto&& pComponent : m_updateableComponents) {
+            pComponent->FixedUpdate();
         }
 
-        if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
-            m_editor->Enable(!m_editor->Enabled());
-            m_renderScene.Do([](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
-            });
-        }
-
-        if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
-            Reload();
-            return;
-        }
-
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::BackSpace) && lShiftPressed) {
-            SR_SYSTEM_LOG("Engine::Await() : The closing key combination have been detected!");
-            m_exitEvent = true;
-            return;
-        }
-
-        for (auto&& gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->FixedUpdate();
-        }
-
-        if (m_editor) {
+        if (m_editor && m_window->IsWindowFocus()) {
             m_editor->Update();
         }
     }
 
     void Engine::Update(float_t dt) {
-        for (auto&& gameObject : m_scene->GetRootGameObjects()) {
-            gameObject->Update(dt);
+        for (auto&& pComponent : m_updateableComponents) {
+            pComponent->Update(dt);
         }
     }
 
     void Engine::Prepare() {
+        const bool isPaused = !m_isActive || m_isPaused;
         auto&& root = m_scene->GetRootGameObjects();
 
+        uint64_t rootHash = 0;
+
         for (auto&& gameObject : root) {
-            gameObject->Awake();
+            rootHash = SR_UTILS_NS::HashCombine(gameObject.GetRawPtr(), rootHash);
+            gameObject->PostLoad();
+        }
+
+        for (auto&& gameObject : root) {
+            gameObject->Awake(isPaused);
         }
 
         for (auto&& gameObject : root) {
@@ -420,5 +433,63 @@ namespace Framework {
         for (auto&& gameObject : root) {
             gameObject->Start();
         }
+
+        /// WARNING: если произойдет коллизия хешей при уничтожении коренного объекта, то будет краш!
+        if (rootHash == m_rootHash) {
+            for (auto&& gameObject : root) {
+                if ((m_needRebuildComponents |= gameObject->IsDirty())) {
+                    break;
+                }
+            }
+        }
+        else {
+            m_needRebuildComponents = true;
+            m_rootHash = rootHash;
+        }
+
+        if (m_needRebuildComponents) {
+            size_t capacity = m_updateableComponents.capacity();
+            m_updateableComponents.clear();
+            m_updateableComponents.reserve(capacity);
+
+            SR_HTYPES_NS::Function<void(const SR_UTILS_NS::GameObject::Ptr& ptr)> function;
+
+            function = [&](const SR_UTILS_NS::GameObject::Ptr& ptr) {
+                for (auto&& pComponent : ptr->GetComponents()) {
+                    if (isPaused && !pComponent->ExecuteInEditMode()) {
+                        continue;
+                    }
+
+                    if (pComponent->IsCanUpdate()) {
+                        m_updateableComponents.emplace_back(pComponent);
+                    }
+
+                    for (auto&& children : ptr->GetChildrenRef()) {
+                        function(children);
+                    }
+                }
+            };
+
+            for (auto&& gameObject : root) {
+                function(gameObject);
+                gameObject->SetDirty(false);
+            }
+
+            m_needRebuildComponents = false;
+        }
+    }
+
+    void Engine::SetActive(bool isActive) {
+        m_isActive = isActive;
+        m_needRebuildComponents = true;
+    }
+
+    void Engine::SetSpeed(float_t speed) {
+        m_speed = speed;
+    }
+
+    void Engine::SetPaused(bool isPaused) {
+        m_isPaused = isPaused;
+        m_needRebuildComponents = true;
     }
 }

@@ -13,7 +13,10 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
-#include <GUI/Editor/MessageBox.h>
+
+#include <Graphics/GUI/Editor/MessageBox.h>
+
+#include <imgui_internal.h> /// взято с #5539 https://github.com/ocornut/imgui/issues/5539
 
 namespace Framework::Core {
     inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
@@ -225,6 +228,26 @@ bool GUISystem::ImageButton(void *descriptor, const SR_MATH_NS::IVector2 &size) 
     return ImageButton(descriptor, size, -1);
 }
 
+bool GUISystem::BeginDragDropTargetWindow(const char* payload_type)  //взято с #5539 https://github.com/ocornut/imgui/issues/5539
+{
+    using namespace ImGui;
+    ImRect inner_rect = GetCurrentWindow()->InnerRect;
+    if (BeginDragDropTargetCustom(inner_rect, GetID("##WindowBgArea")))
+        if (const ImGuiPayload* payload = AcceptDragDropPayload(payload_type, ImGuiDragDropFlags_AcceptBeforeDelivery | ImGuiDragDropFlags_AcceptNoDrawDefaultRect))
+        {
+            if (payload->IsPreview())
+            {
+                ImDrawList* draw_list = GetForegroundDrawList();
+                draw_list->AddRectFilled(inner_rect.Min, inner_rect.Max, GetColorU32(ImGuiCol_DragDropTarget, 0.05f));
+                draw_list->AddRect(inner_rect.Min, inner_rect.Max, GetColorU32(ImGuiCol_DragDropTarget), 0.0f, 0, 2.0f);
+            }
+            if (payload->IsDelivery())
+                return true;
+            EndDragDropTarget();
+        }
+    return false;
+}
+
 void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
     if (m_pipeLine == Graphics::PipeLine::OpenGL) {
         DrawImage(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
@@ -344,68 +367,6 @@ void GUISystem::DrawComponents(const Helper::Types::SafePtr<SR_UTILS_NS::GameObj
             ImGui::EndPopup();
             return false;
     });
-}
-
-void GUISystem::DrawInspector(Framework::Helper::Types::SafePtr<Framework::Helper::World::Scene> scene) {
-//    Helper::Types::SafePtr<Helper::GameObject> gameObject;
-//
-//    if (scene.LockIfValid()) {
-//        gameObject = scene->GetSelected();
-//        scene.Unlock();
-//    }
-//
-//    if (gameObject.LockIfValid()) {
-//        if (bool v = gameObject->IsActive(); ImGui::Checkbox("Enabled", &v))
-//            gameObject->SetActive(v);
-//
-//        std::string gm_name = gameObject->GetName();
-//        if (ImGui::InputText("Name", &gm_name))
-//            gameObject->SetName(gm_name);
-//
-//        ImGui::Text("Entity id: %llu", gameObject->GetEntityId());
-//        //ImGui::Text("Entity path: %s", gameObject->GetEntityPath().CStr());
-//
-//        ImGui::Separator();
-//        DrawTextOnCenter("Transform");
-//
-//        this->DrawComponents(gameObject);
-//
-//        /*ImGui::Text("[Parent direction]");
-//
-//        std::vector<Framework::Helper::Component *> comps = gameObject->GetComponents();
-//        for (Framework::Helper::Component *comp : comps) {
-//            std::string name = comp->GetComponentName();
-//
-//            if (ImGui::CollapsingHeader(name.c_str()))
-//                comp->DrawOnInspector();
-//        }
-//
-//        ImGui::Separator();
-//
-//        ImGui::InvisibleButton("void", ImVec2(ImGui::GetCurrentWindow()->Size.x, ImGui::GetCurrentWindow()->Size.y - ImGui::GetItemRectMin().y));
-//
-//        if (ImGui::BeginPopupContextItem("InspectorMenu", 1)) {
-//            if (ImGui::BeginMenu("Add component")) {
-//                for (const auto& a : Component::GetComponentsNames()) {
-//                    if (ImGui::MenuItem(a.c_str()))
-//                        gameObject->AddComponent(Component::CreateComponentOfName(a));
-//                }
-//                ImGui::EndMenu();
-//            }
-//            ImGui::EndPopup();
-//        }*/
-//
-//        gameObject.Unlock();
-//    }
-}
-
-void GUISystem::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) const {
-    if (ImGui::IsItemClicked()) {
-        //if (!m_shiftPressed && gm->GetScene().Valid())
-        //    gm->GetScene()->DeSelectAll();
-
-        //gm->SetSelect(true);
-    }
 }
 
 void GUISystem::DrawGuizmoTools() {
@@ -670,17 +631,30 @@ bool GUISystem::BeginMenuBar() {
     //if (ImGui::BeginMainMenuBar()) {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("New scene")) {
-            if (Engine::Instance().GetScene())
-                Graphics::GUI::MessageBoxWidget::Instance().Show("Warning", "Do you want close the current scene?");
+            auto&& scenePath = Helper::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
 
         if (ImGui::MenuItem("Load scene")) {
-
+            auto&& scenesPath = Helper::ResourceManager::Instance().GetResPath();
+            if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
+                auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
+                if (auto&& scene = SR_WORLD_NS::Scene::Load(folder)) {
+                    Engine::Instance().SetScene(scene);
+                }
+            }
         }
 
         if (ImGui::MenuItem("Save scene")) {
-            if (auto scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
-                const auto scenesPath = Helper::ResourceManager::Instance().GetResPath().Concat("/Scenes/");
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
+                scene->Save();
+                scene.Unlock();
+            }
+        }
+
+        if (ImGui::MenuItem("Save scene at")) {
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
+                const auto scenesPath = Helper::ResourceManager::Instance().GetResPath();
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
                     const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
                     const auto folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);

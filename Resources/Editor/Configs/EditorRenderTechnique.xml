@@ -1,16 +1,25 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
-    <FramebufferPass>
-        <Settings DynamicResizing="true" Shader="Engine/Shader/framebuffer.srsl">
+    <FramebufferPass Name="SceneViewFBO">
+        <Settings DynamicResizing="true">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </Settings>
-        <Passes Name="SceneViewFBO">
+        <Passes>
             <OpaquePass/>
             <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
             <TransparentPass/>
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
+    <!--<SwapchainPass>
+        <OpaquePass/>
+        <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
+        <TransparentPass/>
+    </SwapchainPass>
+    <PostProcessPass Shader="Engine/Shaders/postProcess.srsl">
+         <Property Id="scene" Type="Sampler2D" Attachment="SceneViewFBO" Layer=""
+    </PostProcessPass>-->
 </Technique>

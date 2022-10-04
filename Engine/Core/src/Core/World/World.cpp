@@ -5,9 +5,11 @@
 #include <Core/World/World.h>
 
 #include <Utils/Types/RawMesh.h>
+
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Render/RenderScene.h>
+
 #include <assimp/scene.h>
-#include <Memory/CameraManager.h>
-#include <Render/RenderScene.h>
 
 namespace Framework::Core::World {
     SR_UTILS_NS::GameObject::Ptr World::Instance(Framework::Helper::Types::Marshal &marshal)  {
@@ -63,6 +65,8 @@ namespace Framework::Core::World {
 
             auto&& componentCount = marshal.Read<uint32_t>();
 
+            SRAssert2(componentCount <= 2048, "While loading the component errors occured!");
+
             for (uint32_t i = 0; i < componentCount; ++i) {
                 auto&& bytesCount = marshal.Read<uint64_t>();
                 auto&& position = marshal.GetPosition();
@@ -107,7 +111,7 @@ namespace Framework::Core::World {
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
-                    ptr->LoadComponent(mesh);
+                    ptr->LoadComponent(dynamic_cast<SR_UTILS_NS::Component *>(mesh));
                 }
                 else {
                     SRHalt("failed to load mesh!");
@@ -139,7 +143,7 @@ namespace Framework::Core::World {
             return true;
         });
 
-        root->SetName(SR_UTILS_NS::StringUtils::GetBetween(rawMesh->GetResourceId(), "/", "."));
+        root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(rawMesh->GetResourceId()), "/", "."));
 
         return root;
     }

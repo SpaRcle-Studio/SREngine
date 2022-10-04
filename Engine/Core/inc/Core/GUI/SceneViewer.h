@@ -16,12 +16,9 @@ namespace SR_GRAPH_NS {
     class Window;
 }
 
-namespace SR_GRAPH_NS::GUI {
-    class Guizmo;
-}
-
 namespace SR_CORE_NS::GUI {
     class Hierarchy;
+    class Guizmo;
 
     class SR_DLL_EXPORT SceneViewer : public Graphics::GUI::Widget {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
@@ -51,7 +48,7 @@ namespace SR_CORE_NS::GUI {
     private:
         Graphics::Window* m_window = nullptr;
         Hierarchy* m_hierarchy = nullptr;
-        Graphics::GUI::Guizmo* m_guizmo = nullptr;
+        Guizmo* m_guizmo = nullptr;
         int32_t m_id;
         GameObjectPtr m_camera;
         SR_WORLD_NS::Scene::Ptr m_scene;

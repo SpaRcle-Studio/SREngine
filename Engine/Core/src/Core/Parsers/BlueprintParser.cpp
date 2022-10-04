@@ -3,8 +3,8 @@
 //
 
 #include <Core/Parsers/BlueprintParser.h>
-#include <GUI/Pin.h>
-#include <GUI/Node.h>
+#include <Graphics/GUI/Pin.h>
+#include <Graphics/GUI/Node.h>
 
 std::vector<SR_GRAPH_NS::GUI::Node*> SR_CORE_NS::BlueprintParser::Parse(const std::string &path) {
     std::vector<SR_GRAPH_NS::GUI::Node*> blueprints;
@@ -31,28 +31,32 @@ ImVec4 SR_CORE_NS::BlueprintParser::ParseColor(const SR_XML_NS::Node& xml) {
 }
 
 SR_GRAPH_NS::GUI::Pin* SR_CORE_NS::BlueprintParser::ParsePin(const Framework::Helper::Xml::Node &pinXml) {
-    auto pin = new Framework::Graphics::GUI::Pin(
-            pinXml.TryGetAttribute("Name").ToString("Unnamed"),
-            SR_GRAPH_NS::GUI::StringToEnumPinType(pinXml.TryGetAttribute("Type").ToString("None"))
-    );
+   // auto pin = new Framework::Graphics::GUI::Pin(
+   //         pinXml.TryGetAttribute("Name").ToString("Unnamed"),
+   //         SR_GRAPH_NS::GUI::StringToEnumPinType(pinXml.TryGetAttribute("Type").ToString("None"))
+   // );
 
-    return pin;
+    //return pin;
+
+    return nullptr;
 }
 
 SR_GRAPH_NS::GUI::Node* SR_CORE_NS::BlueprintParser::ParseBlueprint(const Framework::Helper::Xml::Node &blueprintXml) {
-    const auto name = blueprintXml.TryGetAttribute("Name").ToString(blueprintXml.Name());
+    //const auto name = blueprintXml.TryGetAttribute("Name").ToString(blueprintXml.Name());
+//
+    //auto node = new Framework::Graphics::GUI::Node(
+    //    name,
+    //    SR_GRAPH_NS::GUI::StringToEnumNodeType(blueprintXml.TryGetAttribute("Type").ToString("None")),
+    //    ParseColor(blueprintXml.TryGetNode("Color"))
+    //);
+//
+    //for (const auto& input : blueprintXml.TryGetNode("Inputs").TryGetNodes())
+    //    node->AddInput(ParsePin(input));
+//
+    //for (const auto& input : blueprintXml.TryGetNode("Outputs").TryGetNodes())
+    //    node->AddOutput(ParsePin(input));
+//
+    //return node;
 
-    auto node = new Framework::Graphics::GUI::Node(
-        name,
-        SR_GRAPH_NS::GUI::StringToEnumNodeType(blueprintXml.TryGetAttribute("Type").ToString("None")),
-        ParseColor(blueprintXml.TryGetNode("Color"))
-    );
-
-    for (const auto& input : blueprintXml.TryGetNode("Inputs").TryGetNodes())
-        node->AddInput(ParsePin(input));
-
-    for (const auto& input : blueprintXml.TryGetNode("Outputs").TryGetNodes())
-        node->AddOutput(ParsePin(input));
-
-    return node;
+    return nullptr;
 }

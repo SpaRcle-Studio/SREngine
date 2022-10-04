@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SCENERUNNER_H
 #define SRENGINE_SCENERUNNER_H
 
-#include <GUI/Widget.h>
+#include <Graphics/GUI/Widget.h>
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/World/Scene.h>

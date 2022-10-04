@@ -16,6 +16,7 @@
 #include "src/Core/GUI/SceneViewer.cpp"
 #include "src/Core/GUI/FileBrowser.cpp"
 #include "src/Core/GUI/SceneRunner.cpp"
+#include "src/Core/GUI/Guizmo.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 
@@ -27,4 +28,4 @@
 
 #include "src/Core/Engine.cpp"
 #include "src/Core/EngineCommands.cpp"
-#include "src/Core/EvoScriptAPI.cpp"
+#include "src/Core/EvoScriptAPI.cpp" 

@@ -3,26 +3,71 @@
 //
 
 #include <Core/GUI/ComponentDrawer.h>
-
 #include <Core/GUI/GUISystem.h>
-#include <Utils/Types/DataStorage.h>
-#include <Scripting/Base/Behaviour.h>
-#include <Types/Geometry/Mesh3D.h>
-#include <Utils/ResourceManager/ResourceManager.h>
-#include <GUI/Utils.h>
-#include <Types/Texture.h>
-#include <UI/Sprite2D.h>
-#include <Render/Render.h>
-#include <Types/Material.h>
-#include <Types/Camera.h>
 #include <Core/GUI/EditorGUI.h>
-#include <Utils/FileSystem/FileDialog.h>
 #include <Core/Settings/EditorSettings.h>
+
+#include <Utils/Types/DataStorage.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
-#include <UI/Anchor.h>
-#include <UI/Canvas.h>
+#include <Utils/FileSystem/FileDialog.h>
+
+#include <Scripting/Base/Behaviour.h>
+
+#include <Physics/Rigidbody.h>
+
+#include <Graphics/Types/Geometry/Mesh3D.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/GUI/Utils.h>
+#include <Graphics/Types/Texture.h>
+#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Render/Render.h>
+#include <Graphics/Types/Material.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/UI/Anchor.h>
+#include <Graphics/UI/Canvas.h>
 
 namespace SR_CORE_NS::GUI {
+    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
+        if (!pComponent) {
+            return;
+        }
+
+        auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
+        auto shape = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetType()));
+
+        if (ImGui::Combo("Shape", &shape, [](void* vec, int idx, const char** out_text){
+            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
+            if (idx < 0 || idx >= vector->size())
+                return false;
+
+            *out_text = vector->at(idx).c_str();
+
+            return true;
+        }, reinterpret_cast<void*>(&shapes), shapes.size())) {
+            pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
+        }
+
+        /// auto&& size = pComponent->GetSize();
+        /// if (Graphics::GUI::DrawVec3Control("Size", size, 1.f, 70.f, 0.01f, index)) {
+        ///     pComponent->SetSize(size);
+        /// }
+
+        auto&& center = pComponent->GetCenter();
+        if (Graphics::GUI::DrawVec3Control("Center", center, 0.f, 70.f, 0.01f, index)) {
+            pComponent->SetCenter(center);
+        }
+
+        auto&& mass = pComponent->GetMass();
+        if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
+            pComponent->SetMass(mass);
+        }
+
+        if (ImGui::Button("Jump")) {
+            pComponent->AddGlobalVelocity(SR_MATH_NS::FVector3(0, 5, 0));
+        }
+    }
+
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
         if (!pBehaviour) {
             return;
@@ -84,7 +129,7 @@ namespace SR_CORE_NS::GUI {
                     }
                 },
                 [&](float value) {
-                    if (ImGui::InputFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
+                    if (ImGui::DragFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value, 0.01f)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
@@ -116,6 +161,11 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::InputFloat("FOV", &cameraFOV, 0.5) && cameraFOV >= 0) {
             camera->SetFOV(cameraFOV);
         }
+
+        int32_t priority = camera->GetPriority();
+        if (ImGui::InputInt("Priority", &priority, 1)) {
+            camera->SetPriority(priority);
+        }
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, EditorGUI* context, int32_t index) {
@@ -130,7 +180,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {
@@ -287,7 +337,7 @@ namespace SR_CORE_NS::GUI {
                         ImGui::Text("Size: None\nChannels: None");
                     }
 
-                    std::string id = value ? value->GetResourceId() : std::string();
+                    std::string id = value ? std::string(value->GetResourceId()) : std::string();
 
                     auto&& inputLabel = SR_UTILS_NS::Format("##%s-%i-mat-tex", property.displayName.c_str(), index);
                     if (ImGui::InputText(inputLabel.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
@@ -330,5 +380,16 @@ namespace SR_CORE_NS::GUI {
         if (copy != pMaterial) {
             sprite->SetMaterial(copy);
         }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&proceduralMesh, EditorGUI *context, int32_t index) {
+        if (!proceduralMesh->IsCanCalculate())
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
+
+        if (!proceduralMesh->IsCalculated())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        Graphics::GUI::DrawValue("Vertices count", proceduralMesh->GetVerticesCount(), index);
+        Graphics::GUI::DrawValue("Indices count", proceduralMesh->GetIndicesCount(), index);
     }
 }

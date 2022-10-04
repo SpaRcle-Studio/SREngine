@@ -5,7 +5,7 @@
 #ifndef SRENGINE_VISUALSCRIPTEDITOR_H
 #define SRENGINE_VISUALSCRIPTEDITOR_H
 
-#include <GUI/Widget.h>
+#include <Graphics/GUI/Widget.h>
 
 #include <imgui_node_editor.h>
 

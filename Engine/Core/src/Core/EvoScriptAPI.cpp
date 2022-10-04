@@ -7,12 +7,15 @@
 #include <Core/Engine.h>
 
 #include <Utils/Input/InputSystem.h>
-#include <Loaders/ObjLoader.h>
-#include <Types/Skybox.h>
-
-#include <Render/PostProcessing.h>
-
+#include <Utils/Math/Noise.h>
 #include <Utils/ResourceManager/ResourceManager.h>
+
+#include <Graphics/Loaders/ObjLoader.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Render/PostProcessing.h>
+
+#include <Physics/Rigidbody.h>
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
@@ -27,6 +30,7 @@ namespace Framework {
             RegisterComponent(generator);
             RegisterUtils(generator);
             RegisterMesh(generator);
+            RegisterProceduralMesh(generator);
             RegisterResourceManager(generator);
             RegisterGameObject(generator);
             RegisterCamera(generator);
@@ -39,10 +43,13 @@ namespace Framework {
             RegisterTexture(generator);
             RegisterMaterial(generator);
             RegisterGUISystem(generator);
+            RegisterRigidbody(generator);
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
+            RegisterObserver(generator);
+            RegisterMath(generator);
 
-            generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Libraries/"));
+            generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
         else {
             SR_ERROR("API::RegisterEvoScriptClasses() : generator is nullptr!");
@@ -51,7 +58,7 @@ namespace Framework {
         if (casts) {
             RegisterCasts(casts);
 
-            casts->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Libraries/"));
+            casts->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
         else {
             SR_ERROR("API::RegisterEvoScriptClasses() : casts is nullptr!");
@@ -104,6 +111,7 @@ namespace Framework {
 
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {
         using namespace SR_UTILS_NS;
+        using namespace SR_MATH_NS;
         using namespace SR_HTYPES_NS;
         using namespace SR_WORLD_NS;
 
@@ -111,16 +119,21 @@ namespace Framework {
 
         generator->RegisterNewClass(
                 "Scene", "Scene",
-                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "GameObject.h", "Types/SafePointer.h" },
+                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "GameObject.h", "Types/SafePointer.h", "Observer.h" },
                 { {"SafePtr<Scene>", EvoScript::Public } }
         );
 
-        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, Destroy, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, Free, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
-        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SafePtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, ScopeCheckFunction, bool, ESArg3(int32_t x, int32_t y, int32_t z), ESArg3(x, y, z))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetObserver, Observer*)
+        ESRegisterMethod(EvoScript::Public, generator, Scene, GetWorldPosition, FVector3, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, IsChunkLoaded, bool, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
     }
@@ -142,12 +155,11 @@ namespace Framework {
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)
 
-        //ESRegisterMethod(EvoScript::Public, generator, Component, SetParent, void, ESArg1(GameObject* gm), ESArg1(gm))
-        //ESRegisterMethod(EvoScript::Public, generator, Component, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v))
-        //ESRegisterMethod(EvoScript::Public, generator, Component, OnMove, void, ESArg1(const FVector3& v), ESArg1(v))
-        //ESRegisterMethod(EvoScript::Public, generator, Component, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v))
-
         ESRegisterMethod(EvoScript::Public, generator, Component, SetEnabled, void, ESArg1(bool v), ESArg1(v))
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Component, Create, Component*, ESArg1(const std::string& name), {
+            return SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+        });
 
         generator->AddIncompleteType("GameObject", "Component");
     }
@@ -158,11 +170,7 @@ namespace Framework {
         generator->RegisterNewClass("IResource", "ResourceManager", {"string"});
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, IsEnabledAutoRemove, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, Destroy, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, AddUsePoint, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, RemoveUsePoint, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetCountUses, unsigned int)
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetResourceName, const char*)
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetResourceId, std::string)
     }
 
     void API::RegisterMesh(EvoScript::AddressTableGen *generator) {
@@ -177,45 +185,57 @@ namespace Framework {
                 { "Static",     1 },
                 { "Wireframe",  2 },
                 { "Skinned",    3 },
+                { "Sprite2D",   4 },
+                { "Procedural", 5 },
         });
 
         generator->RegisterNewClass("Mesh", "Mesh", {
-            "ResourceManager.h", "Component.h", "mutex", "Math/Vector3.h", "Material.h"
+            "ResourceManager.h", "Component.h", "Math/Vector3.h", "Material.h"
         }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
-        ESRegisterMethod(EvoScript::Public, generator, Mesh, Copy, IResource*, ESArg1(IResource* dest), ESArg1(dest))
-
-        //ESRegisterMethod(EvoScript::Public, generator, Mesh, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
-        //ESRegisterMethod(EvoScript::Public, generator, Mesh, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
-        //ESRegisterMethod(EvoScript::Public, generator, Mesh, OnScaled, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
-
-        //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, WaitCalculate, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, IsCanCalculate, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetMaterial, Material*)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, Destroy, bool) // IResource
+    }
 
+    void API::RegisterProceduralMesh(EvoScript::AddressTableGen *generator) {
+        using namespace SR_MATH_NS;
+        using namespace SR_UTILS_NS;
+        using namespace SR_GTYPES_NS;
+        using namespace SR_GRAPH_NS::Vertices;
 
-        generator->AddIncompleteType("Render", "Mesh");
+        generator->RegisterNewClass("ProceduralMesh", "ProceduralMesh", {
+            "ResourceManager.h", "Component.h", "Math/Vector3.h", "Material.h", "Math/Vertices.h"
+        }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
+
+        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
+        ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetGeometryName, std::string)
+        ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetMaterial, Material*)
+        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetVertices, void, ESArg1(const std::vector<StaticMeshVertex>& vertices), ESArg1(vertices))
+        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetIndexedVertices, void, ESArg2(void* pData, uint64_t count), ESArg2(pData, count))
+        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetIndices, void, ESArg2(void* pData, uint64_t count), ESArg2(pData, count))
     }
 
     void API::RegisterGameObject(EvoScript::AddressTableGen *generator) {
         using namespace SR_UTILS_NS;
         using namespace SR_HTYPES_NS;
         using namespace SR_MATH_NS;
+        using namespace SR_WORLD_NS;
 
         generator->RegisterNewClass("GameObject", "GameObject",
-                { "Math/Vector3.h", "string", "Transform3D.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "ISavable.h" },
-        { { "SafePtr<GameObject>", EvoScript::Public } });
+                { "Math/Vector3.h", "string", "Transform.h", "vector", "mutex", "Component.h", "Types/SafePointer.h", "Types/SharedPtr.h", "ISavable.h" },
+        { { "SharedPtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SafePtr<GameObject>& child), ESArg1(child))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
-        //ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform3D*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetScene, SafePtr<Scene>)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetChildrenRef, std::vector<SharedPtr<GameObject>>&)
 
         using namespace Xml;
 
@@ -234,6 +254,20 @@ namespace Framework {
 
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
+    }
+
+    void API::RegisterRigidbody(EvoScript::AddressTableGen *generator) {
+        generator->RegisterNewClass("Rigidbody", "Rigidbody",
+                { "Math/Vector3.h", "Math/Vector2.h", "Component.h", "PostProcessing.h" }, {
+                { "Component", EvoScript::Public }
+        });
+
+        using namespace SR_MATH_NS;
+        using namespace SR_PHYSICS_NS::Types;
+
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, AddLocalVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, AddGlobalVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, SetVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
@@ -268,13 +302,15 @@ namespace Framework {
     }
 
     void API::RegisterTransform(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("Transform3D", "Transform3D", { "vector", "mutex", "stdint.h", "Math/Vector3.h", "Math/Vector2.h" });
+        generator->RegisterNewClass("Transform", "Transform", { "vector", "mutex", "stdint.h", "Math/Vector3.h", "Math/Vector2.h" });
 
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
 
-        ESRegisterMethod(EvoScript::Public, generator, Transform3D, Rotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
-        ESRegisterMethod(EvoScript::Public, generator, Transform3D, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, Rotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, GlobalRotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
     }
 
     void API::RegisterInput(EvoScript::AddressTableGen *generator) {
@@ -288,10 +324,41 @@ namespace Framework {
         // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), ESArg1(key))
         // ESRegisterStaticMethod(EvoScript::Public, generator, Input, GetKeyUp, bool, ESArg1(KeyCode key), ESArg1(key))
 
-        generator->RegisterEnum("KeyCode", "Input", true, {
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKey, bool, ESArg1(KeyCode key), {
+            return SR_UTILS_NS::Input::Instance().GetKey(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), {
+            return SR_UTILS_NS::Input::Instance().GetKeyDown(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyUp, bool, ESArg1(KeyCode key), {
+            return SR_UTILS_NS::Input::Instance().GetKeyUp(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetMouseDown, bool, ESArg1(MouseCode key), {
+            return SR_UTILS_NS::Input::Instance().GetMouseDown(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetMouse, bool, ESArg1(MouseCode key), {
+            return SR_UTILS_NS::Input::Instance().GetMouse(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetMouseUp, bool, ESArg1(MouseCode key), {
+            return SR_UTILS_NS::Input::Instance().GetMouseUp(key);
+        });
+
+        ESRegisterCustomStaticMethodArg0(EvoScript::Public, generator, Input, GetMouseDrag, FVector2, {
+            return SR_UTILS_NS::Input::Instance().GetMouseDrag();
+        });
+
+        generator->RegisterEnum("MouseCode", "Input", true, {
                 { "MouseLeft",  1 },
                 { "MouseRight", 2 },
                 { "MouseMiddle", 4 },
+        });
+
+        generator->RegisterEnum("KeyCode", "Input", true, {
                 { "BackSpace", 8 },
                 { "Tab", 9 },
                 { "Enter", 13 },
@@ -421,10 +488,6 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, ESArg1(const char* name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawTexture, void, ESArg4(IVector2 win, IVector2 img, uint32_t id, bool center), ESArg4(win, img, id, center))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawWorldEdit, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawInspector, void, ESArg1(SafePtr<Scene> scene), ESArg1(scene))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, SetGuizmoTool, void, ESArg1(uint8_t id), ESArg1(id))
-        //ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawGuizmo, void, ESArg2(Camera* camera, SafePtr<GameObject> gm), ESArg2(camera, gm))
     }
 
     void API::RegisterPostProcessing(EvoScript::AddressTableGen *generator) {
@@ -445,8 +508,16 @@ namespace Framework {
     }
 
     void API::RegisterCasts(EvoScript::CastingGen *generator) {
-        ESRegisterDynamicCast(generator, Graphics::Types::, Mesh, Helper::, Component)
-        //ESRegisterDynamicCast(generator, Graphics::, Camera, Helper::, Component)
+        using namespace SR_UTILS_NS;
+        using namespace SR_HTYPES_NS;
+        using namespace SR_WORLD_NS;
+        using namespace SR_MATH_NS;
+        using namespace SR_GTYPES_NS;
+        using namespace SR_PHYSICS_NS::Types;
+
+        ESRegisterDynamicCast(generator, ProceduralMesh, Component)
+        ESRegisterDynamicCast(generator, Rigidbody, Component)
+        ESRegisterDynamicCast(generator, Mesh, Component)
     }
 
     void API::RegisterShader(EvoScript::AddressTableGen *generator) {
@@ -455,6 +526,47 @@ namespace Framework {
 
     void API::RegisterBehaviour(EvoScript::AddressTableGen *generator) {
 
+    }
+
+    void API::RegisterObserver(EvoScript::AddressTableGen *generator) {
+        using namespace SR_UTILS_NS;
+        using namespace SR_HTYPES_NS;
+        using namespace SR_WORLD_NS;
+        using namespace SR_MATH_NS;
+
+        generator->RegisterNewClass("Observer", "Observer", { "Math/Vector2.h", "Math/Vector3.h" });
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetRegion, IVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetChunk, IVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetChunkSize, IVector2)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetRegionSize, int32_t)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetScope, int32_t)
+        ESRegisterCustomMethod(EvoScript::Public, generator, Observer, MathNeighbour, ESMakePair(IVector3, IVector3), ESArg1(const IVector3& offset), {
+            auto&& neighbourOffset = ptr->MathNeighbour(offset);
+            return std::make_pair(neighbourOffset.GetRegion(), neighbourOffset.GetChunk());
+        });
+    }
+
+    void API::RegisterMath(EvoScript::AddressTableGen *generator) {
+        using namespace SR_UTILS_NS;
+
+        generator->RegisterNewClass("Mathf", "Mathf", { "Math/Vector2.h", "Math/Vector3.h", "Math/CoreMath.h" });
+
+        class Mathf {
+
+        };
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Mathf, SNoise2D, double_t, ESArg2(double_t x, double_t y), {
+            return SR_MATH_NS::SNoise(x, y);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Mathf, SNoise3D, double_t, ESArg3(double_t x, double_t y, double_t z), {
+            return SR_MATH_NS::SNoise(x, y, z);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Mathf, SNoise4D, double_t, ESArg4(double_t x, double_t y, double_t z, double_t t), {
+            return SR_MATH_NS::SNoise(x, y, z, t);
+        });
     }
 }
 

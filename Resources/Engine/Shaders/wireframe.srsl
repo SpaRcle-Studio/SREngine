@@ -1,0 +1,19 @@
+ShaderType Simple;
+
+PolygonMode Line;
+CullMode None;
+DepthCompare LessOrEqual;
+PrimitiveTopology LineList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+uniform vec4 color;
+
+void fragment() {
+	COLOR = color;
+}
+
+void vertex() {
+    VERTEX.x = -VERTEX.x;
+}

@@ -3,13 +3,14 @@
 //
 
 #include <Core/GUI/Hierarchy.h>
+#include <Core/GUI/SceneRunner.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/TaskManager/TaskManager.h>
-#include <GUI/Icons.h>
-#include <Core/GUI/SceneRunner.h>
+
+#include <Graphics/GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {
     Hierarchy::Hierarchy()
@@ -30,16 +31,29 @@ namespace SR_CORE_NS::GUI {
         if (m_scene.TryRecursiveLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
-        }
+        } else m_tree.clear();
 
         m_sceneRunnerWidget->DrawSubWindow();
 
         for (auto&& gameObject : m_tree) {
-            if (!gameObject.LockIfValid())
+            if (!gameObject.RecursiveLockIfValid()) {
                 continue;
+            }
 
             DrawChild(gameObject);
             gameObject.Unlock();
+        }
+        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload"))
+        {
+            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
+                for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                    if (ptr.RecursiveLockIfValid()) {
+                        ptr->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
+                        ptr->Unlock();
+                    }
+                }
+            }
+            ImGui::EndDragDropTarget();
         }
     }
 
@@ -74,18 +88,29 @@ namespace SR_CORE_NS::GUI {
             ImGui::Separator();
 
             if (ImGui::Selectable("Cut")) {
-
+                Copy();
+                Delete();
             }
 
             ImGui::Separator();
 
             if (ImGui::Selectable("Delete")) {
-
+                if (m_scene.RecursiveLockIfValid()) {
+                    for (auto&& selected : m_selected) {
+                        if (selected.RecursiveLockIfValid()) {
+                            auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                            selected.Unlock();
+                        }
+                    }
+                    m_selected.clear();
+                    m_scene.Unlock();
+                }
             }
 
             ImGui::Separator();
 
-            if (ImGui::Selectable("Add children")) {
+            if (ImGui::Selectable("Add children")) { ///TODO: ВСМЫСЛЕ children???? Можно добавлять несколько детей одной командой????
 
             }
 
@@ -94,7 +119,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopID();
     }
 
-    void Hierarchy::CheckSelected(const Helper::Types::SafePtr<Helper::GameObject> &gm) {
+    void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
         if (ImGui::IsItemClicked() && m_selected.count(gm) == 0) {
             if (!m_shiftPressed && gm->GetScene().Valid())
                 m_selected.clear();
@@ -167,19 +192,7 @@ namespace SR_CORE_NS::GUI {
                 break;
             }
             case SR_UTILS_NS::KeyCode::Del: {
-                SR_LOCK_GUARD
-
-                if (m_scene.RecursiveLockIfValid()) {
-                    for (auto&& selected : m_selected) {
-                        if (selected.LockIfValid()) {
-                            auto cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-                            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-                            selected.Unlock();
-                        }
-                    }
-                    m_selected.clear();
-                    m_scene.Unlock();
-                }
+                Delete();
                 break;
             }
             default:
@@ -207,24 +220,25 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::Copy() const {
-        SR_HTYPES_NS::Marshal marshal;
+        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        marshal.Write(static_cast<uint64_t>(m_selected.size()));
+        pMarshal->Write(static_cast<uint64_t>(m_selected.size()));
 
         for (auto&& ptr : m_selected) {
             if (ptr.RecursiveLockIfValid()) {
-                marshal.Append(ptr->Save(SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
+                pMarshal = ptr->Save(pMarshal, SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID);
                 ptr.Unlock();
             }
         }
 
-        if (marshal.Valid()) {
-            Helper::Platform::TextToClipboard(marshal.ToBase64());
+        if (pMarshal && pMarshal->Valid()) {
+            SR_UTILS_NS::Platform::TextToClipboard(pMarshal->ToBase64());
         }
+
+        SR_SAFE_DELETE_PTR(pMarshal);
     }
 
     void Hierarchy::Paste() {
-        /// TODO: перевести на команды
 
         auto&& base64 = Helper::Platform::GetClipboardText();
 
@@ -252,6 +266,22 @@ namespace SR_CORE_NS::GUI {
                 SR_LOCK_GUARD
                 m_selected = selected;
             }
+        }
+    }
+
+    void Hierarchy::Delete() {
+        SR_LOCK_GUARD
+
+        if (m_scene.RecursiveLockIfValid()) {
+            for (auto&& selected : m_selected) {
+                if (selected.RecursiveLockIfValid()) {
+                    auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
+                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    selected.Unlock();
+                }
+            }
+            m_selected.clear();
+            m_scene.Unlock();
         }
     }
 

@@ -4,8 +4,9 @@
 
 #include <Core/Engine.h>
 #include <Core/World/VisualRegion.h>
-#include <Types/Geometry/DebugWireframeMesh.h>
-#include <Render/RenderScene.h>
+
+#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
+#include <Graphics/Render/RenderScene.h>
 
 namespace Framework::Core::World {
     void VisualRegion::OnEnter() {
@@ -25,8 +26,8 @@ namespace Framework::Core::World {
         }, RenderScenePtr());
 
         if (value && !m_mesh && m_position.y == 1) {
-            if (auto&& meshes = Mesh::Load("Engine/Models/planeWireframe.obj", MeshType::Wireframe); !meshes.empty()) {
-                m_mesh = dynamic_cast<DebugWireframeMesh *>(meshes.at(0));
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+                m_mesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
             }
             else
                 return;
@@ -36,9 +37,9 @@ namespace Framework::Core::World {
             m_mesh->AddUsePoint();
             m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
 
-            renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->Register(m_mesh);
-            });
+            //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
+            //    ptr->Register(m_mesh);
+            //});
         }
 
         if (!value && m_mesh) {

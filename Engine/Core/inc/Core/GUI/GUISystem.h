@@ -5,12 +5,13 @@
 #ifndef GAMEENGINE_GUISYSTEM_H
 #define GAMEENGINE_GUISYSTEM_H
 
-#include <Environment/Environment.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/World/Scene.h>
-#include <Types/Camera.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/ECS/GameObject.h>
+
+#include <Graphics/Environment/Environment.h>
+#include <Graphics/Types/Camera.h>
 
 namespace Framework::Core::GUI {
     class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {
@@ -105,10 +106,7 @@ namespace Framework::Core::GUI {
             ImGui::Text("%s", text.c_str());
         }
 
-        void DrawInspector(Helper::Types::SafePtr<Helper::World::Scene> scene);
         void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
-
-        void CheckSelected(const Helper::Types::SafePtr<Helper::GameObject>& gm) const;
 
         [[nodiscard]] Helper::Math::IVector2 GetWindowSize() const {
             ImVec2 size = ImGui::GetWindowSize();
@@ -119,6 +117,7 @@ namespace Framework::Core::GUI {
         bool ImageButton(std::string_view&& id, void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size, int32_t framePadding);
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
+        bool BeginDragDropTargetWindow(const char* payload_type); //должен использоваться как условие, код которого заканчивается на ImGui::EndDragDropTarget()
         void DrawTexture(void* descriptor, const SR_MATH_NS::IVector2& size);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmo(Graphics::Types::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
