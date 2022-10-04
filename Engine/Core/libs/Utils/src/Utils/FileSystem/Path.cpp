@@ -113,7 +113,7 @@ namespace SR_UTILS_NS {
         else {
             ++index;
 
-            if (auto dot = m_path.find_last_of('.'); dot != std::string::npos) {
+            if (auto dot = m_path.find_last_of('.'); dot != std::string::npos && dot > index) {
                 m_name = m_path.substr(index, dot - index);
                 m_ext  = m_path.substr(dot + 1, m_path.size() - dot);
             }

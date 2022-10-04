@@ -106,6 +106,8 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
+        SR_LOG("SceneRunner::PlayScene() : copy scene: \n\tFrom: " + m_scene->GetPath().ToString() + "\n\tTo: " + runtimePath.ToString());
+
         if (!m_scene->GetPath().Copy(runtimePath)) {
             SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
                 + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
