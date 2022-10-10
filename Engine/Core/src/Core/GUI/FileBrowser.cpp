@@ -17,10 +17,13 @@ namespace SR_CORE_NS::GUI {
     { }
 
     void FileBrowser::SetFolder(const SR_UTILS_NS::Path &path) {
-        SRAssert((m_defaultRoot = path).IsDir());
-        m_selectedDir = m_defaultRoot;
+        m_selectedDir = m_defaultRoot = path;
         m_dirtySelectedDir = true;
         m_dirtyFoldersTree = true;
+
+        if (!m_selectedDir.IsDir()) {
+            SR_ERROR("FileBrowser::SetFolder() : path is not folder! \n\tPath: " + m_selectedDir.ToString());
+        }
     }
 
     void FileBrowser::CurrentDirectoryContextMenu(){
@@ -338,7 +341,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::Draw() {
-
         // left
 
         m_assetWidth = 0.f;
