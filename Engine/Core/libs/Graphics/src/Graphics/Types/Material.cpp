@@ -17,22 +17,24 @@ namespace SR_GTYPES_NS {
     void Material::Use() {
         InitContext();
 
+        auto&& pShader = m_context->GetCurrentShader() ? m_context->GetCurrentShader() : m_shader;
+
         for (auto&& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Int:
-                    m_shader->SetValue(property.hashId, std::get<int32_t>(property.data));
+                    pShader->SetValue(property.hashId, std::get<int32_t>(property.data));
                     break;
                 case ShaderVarType::Float:
-                    m_shader->SetValue(property.hashId, std::get<float_t>(property.data));
+                    pShader->SetValue(property.hashId, std::get<float_t>(property.data));
                     break;
                 case ShaderVarType::Vec2:
-                    m_shader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
+                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    m_shader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
+                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    m_shader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
+                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
@@ -140,6 +142,10 @@ namespace SR_GTYPES_NS {
 
     void Material::UseSamplers() {
         InitContext();
+
+        if (m_shader && m_context->GetCurrentShader() != m_shader) {
+            return;
+        }
 
         if (m_context->GetPipeline()->GetCurrentDescriptorSet() == SR_ID_INVALID) {
             return;

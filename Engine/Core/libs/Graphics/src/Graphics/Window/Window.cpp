@@ -688,10 +688,8 @@ namespace SR_GRAPH_NS {
         auto&& cameras = cameraManager.GetCameras();
 
         if (m_env->IsNeedReBuild()) {
-            //SR_LOG("Window::DrawVulkan() : re-build scene...");
-
             if (!multipleRender || cameras.size() == 1) {
-                uboManager.SetCurrentCamera(firstCamera);
+                uboManager.SetIdentifier(firstCamera);
                 DrawSingleCamera(firstCamera);
             }
             else {
@@ -700,7 +698,7 @@ namespace SR_GRAPH_NS {
                 m_env->ClearBuffers(0.5f, 0.5f, 0.5f, 1.0f, 1.f, 1);
 
                 for (auto &&pCamera : cameras) {
-                    uboManager.SetCurrentCamera(pCamera);
+                    uboManager.SetIdentifier(pCamera);
                     DrawToCamera(pCamera, 0);
                 }
             }
@@ -709,15 +707,11 @@ namespace SR_GRAPH_NS {
         }
         else {
             if (!multipleRender || cameras.size() == 1) {
-                uboManager.SetCurrentCamera(firstCamera);
-               //m_render->SetCurrentCamera(firstCamera);
-               //m_render->UpdateUBOs();
+                uboManager.SetIdentifier(firstCamera);
             }
             else {
                 for (auto &&pCamera : cameras) {
-                    uboManager.SetCurrentCamera(pCamera);
-                   //m_render->SetCurrentCamera(pCamera);
-                   //m_render->UpdateUBOs();
+                    uboManager.SetIdentifier(pCamera);
                 }
             }
         }

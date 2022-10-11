@@ -31,6 +31,7 @@ namespace SR_GTYPES_NS {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         void UseMaterial() override;
+        void UseModelMatrix() override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }

@@ -36,6 +36,7 @@ namespace SR_GTYPES_NS {
         bool Bind();
 
         bool BeginRender(const ClearColors& clearColors, float_t depth);
+        bool BeginRender(const SR_MATH_NS::FColor& clearColor, float_t depth);
         bool BeginRender();
         void EndRender();
 

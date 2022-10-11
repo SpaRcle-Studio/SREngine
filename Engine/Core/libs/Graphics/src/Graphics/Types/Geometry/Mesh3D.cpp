@@ -83,19 +83,19 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::Draw() {
-        if (!IsActive() || IsDestroyed())
+        auto&& pShader = m_context->GetCurrentShader();
+
+        if (!pShader || !IsActive() || IsDestroyed())
             return;
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)
             return;
 
-        auto&& shader = m_material->GetShader();
-
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
+            m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
                 m_uboManager.BindUBO(m_virtualUBO);
@@ -106,16 +106,16 @@ namespace SR_GTYPES_NS {
                 return;
             }
 
-            shader->InitUBOBlock();
-            shader->Flush();
+            pShader->InitUBOBlock();
+            pShader->Flush();
 
             m_material->UseSamplers();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
-                shader->InitUBOBlock();
-                shader->Flush();
+                pShader->InitUBOBlock();
+                pShader->Flush();
                 m_material->UseSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
@@ -233,6 +233,10 @@ namespace SR_GTYPES_NS {
 
     void Mesh3D::UseMaterial() {
         Mesh::UseMaterial();
-        GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        UseModelMatrix();
+    }
+
+    void Mesh3D::UseModelMatrix() {
+        m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

@@ -276,6 +276,24 @@ namespace Framework {
                 delete pScene;
             });
 
+            /** TODO: тут где-то иногда происходит ассерт
+            File: Z:\SREngine\Engine\Core\libs\Utils\inc\Utils/Types/SafePointer.h
+            Line: 127
+            Stack trace:
+            GetStacktraceImpl  (171)
+            Framework::Helper::GetStacktrace  (178)
+            Framework::Helper::Debug::Print  (62)
+            Framework::Helper::Debug::Assert  (78)
+            Framework::Helper::Types::SafePtr<Framework::Physics::PhysicsScene>::~SafePtr<Framework::Physics::PhysicsScene>  (127)
+            Framework::Physics::PhysicsScene::~PhysicsScene  (24)
+            Framework::Physics::PhysicsScene::`scalar deleting destructor'
+            `Framework::Engine::SetScene'::`5'::<lambda_3>::operator()  (280)
+            std::invoke<`Framework::Engine::SetScene'::`5'::<lambda_3> &,Framework::Physics::PhysicsScene *>  (1610)
+            std::_Invoker_ret<void,1>::_Call<`Framework::Engine::SetScene'::`5'::<lambda_3> &,Framework::Physics::PhysicsScene *>  (
+            745)
+            std::_Func_impl_no_alloc<`Framework::Engine::SetScene'::`5'::<lambda_3>,void,Framework::Physics::PhysicsScene *>::_Do_ca
+            ll  (921)
+             */
             m_physicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pPhysicsScene) {
                 delete pPhysicsScene;
             });

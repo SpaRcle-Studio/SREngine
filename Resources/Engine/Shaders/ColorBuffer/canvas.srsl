@@ -1,22 +1,17 @@
 ShaderType Canvas;
 
 PolygonMode Fill;
-CullMode None;
+CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled true;
+BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-uniform vec4 color;
-uniform sampler2D diffuse;
+uniform vec3 color;
 
 void fragment() {
-	COLOR = texture(diffuse, UV) * color;
-
-    if (COLOR.a == 0) {
-        discard;
-    }
+	COLOR = vec4(color, 1.0);
 }
 
 void vertex() {

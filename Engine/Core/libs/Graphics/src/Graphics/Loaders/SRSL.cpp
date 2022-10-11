@@ -493,6 +493,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
         case ShaderType::SpatialCustom:
         case ShaderType::Spatial:
             source += "\tVERTEX = VERTEX_INPUT;\n";
+            source += "\tVERTEX.x = -VERTEX.x;\n";
             source += "\tUV = UV_INPUT;\n";
             source += "\tNORMAL = NORMAL_INPUT;\n";
             source += "\tTANGENT = TANGENT_INPUT;\n";
@@ -501,13 +502,16 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             break;
         case ShaderType::Canvas:
             source += "\tVERTEX = VERTEX_INPUT;\n";
+            source += "\tVERTEX.x = -VERTEX.x;\n";
             source += "\tUV = UV_INPUT;\n";
             break;
         case ShaderType::Simple:
             source += "\tVERTEX = VERTEX_INPUT;\n";
+            source += "\tVERTEX.x = -VERTEX.x;\n";
             break;
         case ShaderType::Skybox:
             source += "\tVERTEX = VERTEX_INPUT;\n";
+            source += "\tVERTEX.x = -VERTEX.x;\n";
             source += "\tUV = VERTEX;\n";
             source += "\tVERTEX_INDEX = gl_VertexIndex;\n";
             break;

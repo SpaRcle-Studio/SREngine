@@ -80,6 +80,7 @@ namespace SR_GRAPH_NS::Types {
         switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
             case Memory::ShaderProgramManager::BindResult::Success:
             case Memory::ShaderProgramManager::BindResult::Duplicated:
+                m_context->SetCurrentShader(this);
                 return true;
             case Memory::ShaderProgramManager::BindResult::Failed:
             default:
@@ -90,6 +91,10 @@ namespace SR_GRAPH_NS::Types {
     void Shader::UnUse() noexcept {
         auto&& env = SR_GRAPH_NS::Environment::Get();
         env->UnUseShader();
+
+        if (m_context->GetCurrentShader() == this) {
+            m_context->SetCurrentShader(nullptr);
+        }
     }
 
     void Shader::FreeVideoMemory() {
@@ -139,6 +144,10 @@ namespace SR_GRAPH_NS::Types {
     }
 
     int32_t Shader::GetID() {
+        return GetId();
+    }
+
+    int32_t Shader::GetId() noexcept {
         if (m_hasErrors) {
             return false;
         }
@@ -302,7 +311,7 @@ namespace SR_GRAPH_NS::Types {
         m_shaderCreateInfo = std::move(unit->createInfo);
         m_shaderCreateInfo.path = unit->path + "/shader";
 
-        switch (unit->type) {
+        switch ((m_type = unit->type)) {
             case SRSL::ShaderType::Custom:
             case SRSL::ShaderType::PostProcessing:
                 break;

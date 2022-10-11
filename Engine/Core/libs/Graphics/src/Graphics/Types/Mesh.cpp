@@ -16,7 +16,6 @@ namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type)
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Mesh), true /** auto remove */)
         , m_uboManager(Memory::UBOManager::Instance())
-        , m_pipeline(Environment::Get())
         , m_type(type)
         , m_material(nullptr)
     { }

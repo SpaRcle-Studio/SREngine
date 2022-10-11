@@ -44,11 +44,11 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Render() {
-        if (m_dirty && !Build()) {
+        if (m_dirty && !Build() || !m_camera || !m_camera->IsActive()) {
             return false;
         }
 
-        m_uboManager.SetCurrentCamera(GetCamera());
+        m_uboManager.SetIdentifier(GetCamera());
 
         bool hasDrawData = false;
 
@@ -78,11 +78,11 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::Update() {
-        if (m_dirty) {
+        if (m_dirty || !m_camera || !m_camera->IsActive()) {
             return;
         }
 
-        m_uboManager.SetCurrentCamera(GetCamera());
+        m_uboManager.SetIdentifier(GetCamera());
 
         for (auto&& pass : m_passes) {
             pass->Update();
@@ -94,7 +94,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        m_uboManager.SetCurrentCamera(GetCamera());
+        m_uboManager.SetIdentifier(GetCamera());
 
         bool hasDrawData = false;
 

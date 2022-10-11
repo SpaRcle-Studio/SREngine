@@ -22,6 +22,6 @@
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <SingleCameraMode Value="false"/>
+       <SingleUBOIdentifierMode Value="false"/>
    </Common>
 </Features>

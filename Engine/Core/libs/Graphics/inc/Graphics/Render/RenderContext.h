@@ -37,8 +37,9 @@ namespace SR_GRAPH_NS {
         using MaterialPtr = SR_GTYPES_NS::Material*;
         using TexturePtr = SR_GTYPES_NS::Texture*;
         using SkyboxPtr = SR_GTYPES_NS::Skybox*;
-        using FramebufferPtr = Types::Framebuffer*;
-        using CameraPtr = Types::Camera*;
+        using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
+        using CameraPtr = SR_GTYPES_NS::Camera*;
+        using ShaderPtr = SR_GTYPES_NS::Shader*;
     public:
         RenderContext();
         virtual ~RenderContext() = default;
@@ -72,9 +73,12 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
+        SR_NODISCARD ShaderPtr GetCurrentShader() const noexcept;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name) const;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
+
+        void SetCurrentShader(ShaderPtr pShader);
 
     private:
         template<typename T> bool Update(T& resourceList) noexcept;

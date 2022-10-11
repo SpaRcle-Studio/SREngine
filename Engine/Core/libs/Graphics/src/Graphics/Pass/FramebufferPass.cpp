@@ -114,7 +114,7 @@ namespace SR_GRAPH_NS {
         return m_framebuffer;
     }
 
-    void FramebufferPass::LoadSettings(const Helper::Xml::Node &settingsNode) {
+    void FramebufferPass::LoadSettings(const SR_XML_NS::Node &settingsNode) {
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
 
         for (auto&& subNode : settingsNode.GetNodes()) {

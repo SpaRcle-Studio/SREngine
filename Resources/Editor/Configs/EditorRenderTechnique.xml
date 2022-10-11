@@ -8,6 +8,11 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </Settings>
         <Passes>
+            <!--<ColorBufferPass>
+                <Settings Directional="true">
+                    <PreScale X="0.85" Y="0.85"/>
+                </Settings>
+            </ColorBufferPass>-->
             <OpaquePass/>
             <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
             <TransparentPass/>

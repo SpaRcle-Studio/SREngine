@@ -84,6 +84,14 @@ namespace SR_MATH_NS {
     typedef Vector4<Unit>     FVector4;
     typedef Vector4<int32_t>  IVector4;
     typedef Vector4<uint32_t> UVector4;
+
+    static constexpr FVector3 RGBFromUInt32(uint32_t integral) {
+        const uint32_t red = (integral & 0xff000000) >> 16;
+        const uint32_t green = (integral & 0x00ff0000) >> 8;
+        const uint32_t blue = (integral & 0x0000ff00);
+
+        return FVector3(red / 255.f, green / 255.f, blue / 255.f);
+    }
 }
 
 #endif //SRENGINE_VECTOR4_H

@@ -20,5 +20,5 @@ void fragment() {
 }
 
 void vertex() {
-    VERTEX.x = -VERTEX.x;
+
 }

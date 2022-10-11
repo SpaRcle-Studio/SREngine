@@ -15,6 +15,10 @@
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Descriptors.h>
 
+namespace SR_GTYPES_NS {
+    class Shader;
+}
+
 namespace SR_GRAPH_NS {
     struct ColorLayer {
         int32_t texture = SR_ID_INVALID;
@@ -63,6 +67,8 @@ namespace SR_GRAPH_NS {
         unsigned __int8   m_currentBuildIteration  = 0;
 
         std::atomic<bool> m_needReBuild            = false;
+
+        Types::Shader* m_currentShader = nullptr;
     protected:
         Environment()  = default;
         ~Environment() = default;
@@ -83,7 +89,9 @@ namespace SR_GRAPH_NS {
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
         //void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
         void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
-        SR_NODISCARD int32_t GetCurrentShaderId() const { return m_currentShaderID; }
+        void SetCurrentShader(Types::Shader* pShader)  { m_currentShader = pShader;           }
+        SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
+        SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }

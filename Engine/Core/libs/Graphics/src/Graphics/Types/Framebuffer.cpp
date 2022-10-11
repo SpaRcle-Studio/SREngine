@@ -283,4 +283,8 @@ namespace SR_GTYPES_NS {
 
         return m_colors.at(layer).texture;
     }
+
+    bool Framebuffer::BeginRender(const SR_MATH_NS::FColor &clearColor, float_t depth) {
+        return BeginRender(Framebuffer::ClearColors{ clearColor }, depth);
+    }
 }

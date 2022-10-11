@@ -279,4 +279,12 @@ namespace SR_GRAPH_NS {
 
         return nullptr;
     }
+
+    RenderContext::ShaderPtr RenderContext::GetCurrentShader() const noexcept {
+        return m_pipeline->GetCurrentShader();
+    }
+
+    void RenderContext::SetCurrentShader(RenderContext::ShaderPtr pShader) {
+        m_pipeline->SetCurrentShader(pShader);
+    }
 }

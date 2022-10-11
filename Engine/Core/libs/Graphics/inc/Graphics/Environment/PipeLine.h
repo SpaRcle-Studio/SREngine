@@ -5,7 +5,19 @@
 #ifndef GAMEENGINE_PIPELINE_H
 #define GAMEENGINE_PIPELINE_H
 
-#include <Utils/macros.h>
+#include <Utils/Common/Enumerations.h>
+
+namespace SR_GTYPES_NS {
+    SR_ENUM_NS_CLASS(MeshType,
+         Unknown = 0,
+         Static = 1,
+         Wireframe = 2,
+         Skinned = 3,
+         Sprite2D = 4,
+         Procedural = 5,
+         Line
+    )
+}
 
 namespace SR_GRAPH_NS {
     enum class PipeLine {

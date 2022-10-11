@@ -51,6 +51,7 @@
 #include "../Graphics/src/Graphics/Pass/SortedTransparentPass.cpp"
 #include "../Graphics/src/Graphics/Pass/PostProcessPass.cpp"
 #include "../Graphics/src/Graphics/Pass/DebugPass.cpp"
+#include "../Graphics/src/Graphics/Pass/ColorBufferPass.cpp"
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"

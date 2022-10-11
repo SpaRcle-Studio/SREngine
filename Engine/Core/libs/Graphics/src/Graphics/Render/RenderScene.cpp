@@ -192,6 +192,8 @@ namespace SR_GRAPH_NS {
             }
         }
 
+        pMesh->SetContext(m_context);
+
         if (pMesh->IsDebugMesh()) {
             m_debug.Add(pMesh);
         }
