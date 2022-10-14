@@ -97,6 +97,33 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
+    void WidgetManager::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
+        SR_SCOPED_LOCK
+
+        for (auto&&[name, pWidget] : m_widgets) {
+            if (pWidget->IsFocused() || !m_ignoreNonFocused)
+                pWidget->OnMouseUp(data);
+        }
+    }
+
+    void WidgetManager::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
+        SR_SCOPED_LOCK
+
+        for (auto&&[name, pWidget] : m_widgets) {
+            if (pWidget->IsFocused() || !m_ignoreNonFocused)
+                pWidget->OnMouseDown(data);
+        }
+    }
+
+    void WidgetManager::OnMousePress(const SR_UTILS_NS::MouseInputData *data) {
+        SR_SCOPED_LOCK
+
+        for (auto&&[name, pWidget] : m_widgets) {
+            if (pWidget->IsFocused() || !m_ignoreNonFocused)
+                pWidget->OnMousePress(data);
+        }
+    }
+
     void WidgetManager::SetRenderScene(const WidgetManager::RenderScenePtr& renderScene) {
         m_renderScene = renderScene;
     }

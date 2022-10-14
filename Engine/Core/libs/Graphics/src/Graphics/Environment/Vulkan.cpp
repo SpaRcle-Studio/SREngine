@@ -403,6 +403,8 @@ namespace Framework::Graphics {
             return false;
         }
 
+        const VkSampleCountFlagBits sampleCount = m_currentFramebuffer ? m_currentFramebuffer->GetSampleCount() : m_kernel->GetDevice()->GetMSAASamples();
+
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
                 VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
                 VulkanTools::AbstractCullModeToVk(cullMode),
@@ -410,7 +412,9 @@ namespace Framework::Graphics {
                 shaderCreateInfo.blendEnabled,
                 shaderCreateInfo.depthWrite,
                 shaderCreateInfo.depthTest,
-                VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology))) {
+                VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology),
+                sampleCount)
+        ) {
             SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;
             return false;

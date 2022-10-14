@@ -27,7 +27,10 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                     m_kernel->GetSwapchain(),
                     m_kernel->GetCmdPool(),
                     inputColorAttachments,
-                    w, h
+                    w, h,
+                    1.f /** scale */,
+                    true,
+                    true /** depth enabled */
             );
 
             if (m_FBOs[i] == nullptr) {

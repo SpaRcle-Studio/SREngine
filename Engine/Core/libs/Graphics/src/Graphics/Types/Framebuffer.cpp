@@ -79,51 +79,6 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    /*bool Framebuffer::InitShader() {
-        if (!m_shader) {
-            if (!(m_shader = Shader::Load(m_shaderPath))) {
-                m_hasErrors = false;
-                return false;
-            }
-
-            m_shader->AddUsePoint();
-        }
-
-        auto&& uboManager = Memory::UBOManager::Instance();
-        auto&& env = Environment::Get();
-
-        auto&& uboBlockSize = m_shader->GetUBOBlockSize();
-        auto&& samplersCount = m_shader->GetSamplersCount();
-
-        env->SetCurrentShaderId(m_shader->GetID());
-
-        /// кадровый буфер работает незваисимо от камеры
-        uboManager.SetIgnoreCameras(true);
-
-        if ((m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, uboBlockSize, samplersCount)) != SR_ID_INVALID) {
-            uboManager.BindUBO(m_virtualUBO);
-        }
-        else {
-            env->ResetDescriptorSet();
-            m_hasErrors = true;
-            return false;
-        }
-
-        m_shader->InitUBOBlock();
-        m_shader->Flush();
-
-        for (uint32_t i = 0; i < static_cast<uint32_t>(m_colors.size()); ++i) {
-            m_shader->SetSampler2D(SHADER_COLOR_ATTACHMENTS[i], m_colors[i].texture);
-        }
-
-        m_shader->SetSampler2D(SHADER_DEPTH_ATTACHMENT, m_depth.texture);
-
-        /// сбрасываем значение
-        uboManager.SetIgnoreCameras(false);
-
-        return true;
-    }*/
-
     void Framebuffer::FreeVideoMemory() {
         if (!m_isInit) {
             return;

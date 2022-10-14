@@ -40,6 +40,9 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD ContextPtr GetContext() const;
 
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMousePress(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMouseUp(const SR_UTILS_NS::MouseInputData* data) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;

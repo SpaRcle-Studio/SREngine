@@ -139,27 +139,28 @@ namespace SR_CORE_NS::GUI {
         const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
         const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
 
-        if (dy > dx)
+        if (dy > dx) {
             texSize *= dx;
+        }
         else
             texSize *= dy;
 
-        // Because I use the texture from OpenGL, I need to invert the V from the UV.
+        m_textureSize = texSize;
 
         if (centralize) {
-            ImVec2 initialCursorPos = ImGui::GetCursorPos();
-            auto res = (winSize - texSize) * 0.5f;
+            auto windowPosition = ImGui::GetCursorPos();
+            auto res = (winSize - m_textureSize) * 0.5f;
             ImVec2 centralizedCursorPos = { (float)res.x, (float)res.y };
-            centralizedCursorPos = ImClamp(centralizedCursorPos, initialCursorPos, centralizedCursorPos);
+            centralizedCursorPos = ImClamp(centralizedCursorPos, windowPosition, centralizedCursorPos);
             ImGui::SetCursorPos(centralizedCursorPos);
         }
 
         auto&& env = SR_GRAPH_NS::Environment::Get();
         if (env->GetPipeLine() == Graphics::PipeLine::OpenGL) {
-            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
+            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
         }
         else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
-            DrawImage(pDescriptor, ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+            DrawImage(pDescriptor, ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
         }
     }
 
@@ -177,6 +178,8 @@ namespace SR_CORE_NS::GUI {
             if (!ImGui::ItemAdd(bb, 0))
                 return;
         }
+
+        m_imagePosition = bb.GetTL();
 
         if (border_col.w > 0.0f) {
             window->DrawList->AddRect(bb.Min, bb.Max, ImGui::GetColorU32(border_col), 0.0f);
@@ -238,13 +241,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
-        if (data->GetKeyCode() == SR_UTILS_NS::KeyCode::N) {
-            auto&& pPass = m_camera->GetComponent<SR_GTYPES_NS::Camera>()->GetRenderTechnique()->FindPass("ColorBufferPass");
-            auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass*>(pPass);
-            auto&& color = pColorPass->GetColor(0.5, 0.5);
-            SR_LOG(SR_FORMAT("%f, %f, %f, %f", color.r, color.g, color.b, color.a));
-        }
-
         m_guizmo->OnKeyDown(data);
         Widget::OnKeyDown(data);
     }
@@ -252,5 +248,20 @@ namespace SR_CORE_NS::GUI {
     void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
         m_guizmo->OnKeyPress(data);
         Widget::OnKeyPress(data);
+    }
+
+    void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
+        auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
+
+        const float_t x = mousePos.x / m_textureSize.x;
+        const float_t y = mousePos.y / m_textureSize.y;
+
+        if (auto&& pPass = m_camera->GetComponent<SR_GTYPES_NS::Camera>()->GetRenderTechnique()->FindPass("ColorBufferPass")) {
+            auto &&pColorPass = dynamic_cast<Graphics::ColorBufferPass *>(pPass);
+            auto &&color = pColorPass->GetColor(x, y);
+            SR_LOG(SR_FORMAT("%f, %f, %f, %f", color.r, color.g, color.b, color.a));
+        }
+
+        Widget::OnMouseDown(data);
     }
 }

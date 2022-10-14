@@ -31,6 +31,7 @@ namespace SR_CORE_NS::GUI {
         void Enable(bool value);
         void Update();
 
+        void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
@@ -46,6 +47,9 @@ namespace SR_CORE_NS::GUI {
         void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
 
     private:
+        SR_MATH_NS::IVector2 m_textureSize;
+        ImVec2 m_imagePosition;
+
         Graphics::Window* m_window = nullptr;
         Hierarchy* m_hierarchy = nullptr;
         Guizmo* m_guizmo = nullptr;

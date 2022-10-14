@@ -154,7 +154,6 @@ namespace SR_GRAPH_NS {
                 static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(window_size.y) * m_preScale.y),
         };
 
-        /// TODO: переделать на RGB8_UNORM
         if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create({ ColorFormat::RGBA8_UNORM }, DepthFormat::Auto, size))) {
             SR_ERROR("ColorBufferPass::Init() : failed to create framebuffer!");
         }
@@ -260,6 +259,10 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MATH_NS::FColor ColorBufferPass::GetColor(float_t x, float_t y) const {
+        if (x < 0 || x > 1 || y < 0 || y > 1) {
+            return SR_MATH_NS::FColor(0.f);
+        }
+
         if (!m_framebuffer || m_directional) {
             return SR_MATH_NS::FColor(0.f);
         }
