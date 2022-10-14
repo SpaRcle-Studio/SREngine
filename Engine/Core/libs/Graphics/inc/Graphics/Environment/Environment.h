@@ -214,6 +214,8 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetRenderer() const { return "None"; }
         [[nodiscard]] virtual SR_FORCE_INLINE std::string GetVersion()  const { return "None"; }
 
+        SR_NODISCARD virtual SR_MATH_NS::FColor GetPixelColor(uint64_t textureId, uint32_t x, uint32_t y) { return SR_MATH_NS::FColor(0.f); }
+
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const { }
 
         virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) { return false; }

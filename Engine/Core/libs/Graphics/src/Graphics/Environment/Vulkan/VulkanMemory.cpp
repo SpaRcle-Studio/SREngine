@@ -103,11 +103,11 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
             return false;
         }
 
-        ret:
-        if (m_textures[oldColorAttachments[i]]->GetSeed() == textures[i]->GetSeed()) {
-            textures[i]->RandomizeSeed();
-            goto ret;
-        }
+        /// ret:
+        /// if (m_textures[oldColorAttachments[i]]->GetSeed() == textures[i]->GetSeed()) {
+        ///     textures[i]->RandomizeSeed();
+        ///     goto ret;
+        /// }
 
         m_textures[oldColorAttachments[i]]->Destroy();
         m_textures[oldColorAttachments[i]]->Free();

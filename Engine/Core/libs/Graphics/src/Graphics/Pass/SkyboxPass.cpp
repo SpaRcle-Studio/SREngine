@@ -10,8 +10,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SkyboxPass)
 
-    SkyboxPass::SkyboxPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    SkyboxPass::SkyboxPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     SkyboxPass::~SkyboxPass() {

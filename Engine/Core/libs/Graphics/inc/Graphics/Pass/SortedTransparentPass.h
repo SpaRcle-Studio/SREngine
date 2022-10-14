@@ -12,7 +12,7 @@ namespace SR_GRAPH_NS {
     class SortedTransparentPass : public BasePass {
         using ShaderPtr = SR_GTYPES_NS::Shader*;
     public:
-        explicit SortedTransparentPass(RenderTechnique* pTechnique);
+        explicit SortedTransparentPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~SortedTransparentPass() override = default;
 
     public:

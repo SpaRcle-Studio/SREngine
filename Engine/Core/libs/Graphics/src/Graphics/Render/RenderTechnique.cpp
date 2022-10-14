@@ -190,7 +190,7 @@ namespace SR_GRAPH_NS {
         m_name = node.GetAttribute("Name").ToString();
 
         for (auto&& passNode : node.GetNodes()) {
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(this, passNode)) {
+            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(this, passNode, nullptr)) {
                 m_passes.emplace_back(pPass);
             }
             else {

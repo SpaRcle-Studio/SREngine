@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS {
         using ClearColors = std::vector<SR_MATH_NS::FColor>;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
     public:
-        explicit FramebufferPass(RenderTechnique* pTechnique);
+        explicit FramebufferPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~FramebufferPass() override;
 
     public:

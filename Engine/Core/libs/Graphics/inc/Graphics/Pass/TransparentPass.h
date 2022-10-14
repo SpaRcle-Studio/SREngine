@@ -10,7 +10,7 @@
 namespace SR_GRAPH_NS {
     class TransparentPass : public BasePass {
     public:
-        explicit TransparentPass(RenderTechnique* pTechnique);
+        explicit TransparentPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~TransparentPass() override = default;
 
     public:

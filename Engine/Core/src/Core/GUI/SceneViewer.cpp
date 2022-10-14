@@ -14,6 +14,8 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Pass/ColorBufferPass.h>
 
 namespace SR_CORE_NS::GUI {
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
@@ -236,10 +238,19 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+        if (data->GetKeyCode() == SR_UTILS_NS::KeyCode::N) {
+            auto&& pPass = m_camera->GetComponent<SR_GTYPES_NS::Camera>()->GetRenderTechnique()->FindPass("ColorBufferPass");
+            auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass*>(pPass);
+            auto&& color = pColorPass->GetColor(0.5, 0.5);
+            SR_LOG(SR_FORMAT("%f, %f, %f, %f", color.r, color.g, color.b, color.a));
+        }
+
         m_guizmo->OnKeyDown(data);
+        Widget::OnKeyDown(data);
     }
 
     void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
         m_guizmo->OnKeyPress(data);
+        Widget::OnKeyPress(data);
     }
 }

@@ -10,7 +10,7 @@
 namespace SR_GRAPH_NS {
     class GroupPass : public BasePass {
     public:
-        explicit GroupPass(RenderTechnique* pTechnique);
+        explicit GroupPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~GroupPass() override;
 
     public:

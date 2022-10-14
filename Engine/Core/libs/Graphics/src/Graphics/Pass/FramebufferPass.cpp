@@ -8,8 +8,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
 
-    FramebufferPass::FramebufferPass(RenderTechnique *pTechnique)
-        : GroupPass(pTechnique)
+    FramebufferPass::FramebufferPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : GroupPass(pTechnique, pParent)
         , m_preScale(SR_MATH_NS::FVector2(1.f))
         , m_depth(1.f)
         , m_depthFormat(DepthFormat::Unknown)

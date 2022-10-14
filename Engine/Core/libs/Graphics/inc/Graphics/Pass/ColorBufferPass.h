@@ -20,7 +20,7 @@ namespace SR_GRAPH_NS {
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
     public:
-        explicit ColorBufferPass(RenderTechnique* pTechnique);
+        explicit ColorBufferPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~ColorBufferPass() override;
 
     public:
@@ -31,6 +31,8 @@ namespace SR_GRAPH_NS {
         bool PreRender() override;
         bool Render() override;
         void Update() override;
+
+        SR_NODISCARD SR_MATH_NS::FColor GetColor(float_t x, float_t y) const;
 
     private:
         void LoadSettings(const SR_XML_NS::Node& settingsNode);

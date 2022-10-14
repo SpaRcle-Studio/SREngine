@@ -287,4 +287,12 @@ namespace SR_GTYPES_NS {
     bool Framebuffer::BeginRender(const SR_MATH_NS::FColor &clearColor, float_t depth) {
         return BeginRender(Framebuffer::ClearColors{ clearColor }, depth);
     }
+
+    uint32_t Framebuffer::GetWidth() const {
+        return m_size.x;
+    }
+
+    uint32_t Framebuffer::GetHeight() const {
+        return m_size.y;
+    }
 }

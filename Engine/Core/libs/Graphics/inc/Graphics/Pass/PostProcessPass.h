@@ -22,7 +22,7 @@ namespace SR_GRAPH_NS {
         using Properties = std::list<Property>;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
     public:
-        explicit PostProcessPass(RenderTechnique* pTechnique);
+        explicit PostProcessPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~PostProcessPass() override = default;
 
     public:

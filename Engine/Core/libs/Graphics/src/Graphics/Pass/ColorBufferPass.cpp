@@ -7,8 +7,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ColorBufferPass)
 
-    ColorBufferPass::ColorBufferPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    ColorBufferPass::ColorBufferPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     ColorBufferPass::~ColorBufferPass() {
@@ -66,6 +66,8 @@ namespace SR_GRAPH_NS {
             DrawCluster(&pRenderScene->GetTransparent());
             m_framebuffer->EndRender();
         }
+
+        auto&& colorId = m_framebuffer->GetColorTexture(0);
 
         m_uboManager.SetIdentifier(pIdentifier);
 
@@ -126,6 +128,11 @@ namespace SR_GRAPH_NS {
     }
 
     bool ColorBufferPass::Init() {
+        if (!m_directional && GetParentPass()) {
+            SR_ERROR("ColorBufferPass::Init() : if the rendering pass of the color buffer is not directional, then it cannot be nested!");
+            return BasePass::Init() && false;
+        }
+
         bool result = BasePass::Init();
 
         m_shaders[0] = SR_GTYPES_NS::Shader::Load("Engine/Shaders/ColorBuffer/canvas.srsl");
@@ -250,5 +257,18 @@ namespace SR_GRAPH_NS {
             m_color.y = 0;
             m_color.z += modifier;
         }
+    }
+
+    SR_MATH_NS::FColor ColorBufferPass::GetColor(float_t x, float_t y) const {
+        if (!m_framebuffer || m_directional) {
+            return SR_MATH_NS::FColor(0.f);
+        }
+
+        auto&& textureId = m_framebuffer->GetColorTexture(0);
+
+        const uint32_t xPos = m_framebuffer->GetWidth() * x;
+        const uint32_t yPos = m_framebuffer->GetHeight() * y;
+
+        return m_context->GetPipeline()->GetPixelColor(textureId, xPos, yPos);
     }
 }

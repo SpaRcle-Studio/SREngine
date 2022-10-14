@@ -7,8 +7,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SwapchainPass)
 
-    SwapchainPass::SwapchainPass(RenderTechnique *pTechnique)
-        : GroupPass(pTechnique)
+    SwapchainPass::SwapchainPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : GroupPass(pTechnique, pParent)
     { }
 
     bool SwapchainPass::Load(const SR_XML_NS::Node &passNode) {

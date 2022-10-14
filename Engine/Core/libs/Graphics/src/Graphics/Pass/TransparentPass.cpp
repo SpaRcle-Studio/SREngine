@@ -12,8 +12,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(TransparentPass)
 
-    TransparentPass::TransparentPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    TransparentPass::TransparentPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     bool TransparentPass::PreRender() {

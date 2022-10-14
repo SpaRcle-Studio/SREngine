@@ -630,6 +630,25 @@ namespace Framework::Graphics {
         return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
     }*/
 
+    SR_MATH_NS::FColor Vulkan::GetPixelColor(uint64_t textureId, uint32_t x, uint32_t y) {
+        if (textureId == SR_ID_INVALID || textureId >= m_memory->m_countTextures.first) {
+            return SR_MATH_NS::FColor(0.f);
+        }
+
+        auto&& pTexture = m_memory->m_textures[textureId];
+        if (!pTexture) {
+            return SR_MATH_NS::FColor(0.f);
+        }
+
+        auto&& pixel = pTexture->GetPixel(x, y, 0);
+        return SR_MATH_NS::FColor(
+                static_cast<SR_MATH_NS::Unit>(pixel.r),
+                static_cast<SR_MATH_NS::Unit>(pixel.g),
+                static_cast<SR_MATH_NS::Unit>(pixel.b),
+                static_cast<SR_MATH_NS::Unit>(pixel.a)
+        );
+    }
+
     int32_t Vulkan::CalculateVBO(void *vertices, Vertices::VertexType type, size_t count) {
         const auto size = Vertices::GetVertexSize(type);
         if (auto id = m_memory->AllocateVBO(size * count, vertices); id >= 0) {

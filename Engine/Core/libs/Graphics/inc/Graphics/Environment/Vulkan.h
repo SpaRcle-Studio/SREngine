@@ -594,6 +594,9 @@ namespace SR_GRAPH_NS {
             else
                 return id;
         }
+
+        SR_NODISCARD SR_MATH_NS::FColor GetPixelColor(uint64_t textureId, uint32_t x, uint32_t y) override;
+
         SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
             if (FBO == 0) {
                 m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];

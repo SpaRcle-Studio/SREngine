@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
+    <ColorBufferPass>
+        <Settings Directional="false">
+            <PreScale X="0.85" Y="0.85"/>
+        </Settings>
+    </ColorBufferPass>
     <FramebufferPass Name="SceneViewFBO">
         <Settings DynamicResizing="true">
             <Size X="0" Y="0"/>
@@ -8,11 +13,6 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </Settings>
         <Passes>
-            <!--<ColorBufferPass>
-                <Settings Directional="true">
-                    <PreScale X="0.85" Y="0.85"/>
-                </Settings>
-            </ColorBufferPass>-->
             <OpaquePass/>
             <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
             <TransparentPass/>

@@ -12,8 +12,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(DebugPass)
 
-    DebugPass::DebugPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    DebugPass::DebugPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     bool DebugPass::PreRender() {

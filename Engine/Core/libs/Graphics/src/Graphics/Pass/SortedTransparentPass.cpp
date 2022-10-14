@@ -9,8 +9,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SortedTransparentPass)
 
-    SortedTransparentPass::SortedTransparentPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    SortedTransparentPass::SortedTransparentPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     void SortedTransparentPass::Prepare() {
