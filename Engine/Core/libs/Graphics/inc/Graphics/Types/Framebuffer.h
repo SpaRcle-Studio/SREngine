@@ -11,6 +11,10 @@
 
 #include <Graphics/Memory/IGraphicsResource.h>
 
+namespace SR_GRAPH_NS {
+    class Environment;
+}
+
 namespace SR_GRAPH_NS::Types {
     class Shader;
 }
@@ -23,6 +27,7 @@ namespace SR_GTYPES_NS {
         using Ptr = Framebuffer*;
         using Super = SR_UTILS_NS::IResource;
         using ClearColors = std::vector<SR_MATH_NS::FColor>;
+        using PipelinePtr = Environment*;
     private:
         Framebuffer();
         ~Framebuffer() override;
@@ -30,6 +35,7 @@ namespace SR_GTYPES_NS {
     public:
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
 
     public:
@@ -56,6 +62,8 @@ namespace SR_GTYPES_NS {
         bool OnResize();
 
     private:
+        PipelinePtr             m_pipeline       = nullptr;
+
         bool                    m_isInit         = false;
         std::atomic<bool>       m_hasErrors      = false;
         std::atomic<bool>       m_needResize     = false;

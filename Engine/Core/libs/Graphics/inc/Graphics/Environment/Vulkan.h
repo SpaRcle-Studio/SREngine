@@ -283,7 +283,8 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override {
-            colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
+            const bool multisamplingEnabled = m_currentFramebuffer ? m_currentFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
+            colorCount *= multisamplingEnabled ? 2 : 1;
 
             this->m_clearValues.resize(colorCount + 1);
 
@@ -297,13 +298,14 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override {
+            const bool multisamplingEnabled = m_currentFramebuffer ? m_currentFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
             uint8_t colorCount = static_cast<uint8_t>(colors.size());
-            colorCount *= m_kernel->MultisamplingEnabled() ? 2 : 1;
+            colorCount *= multisamplingEnabled ? 2 : 1;
 
             m_clearValues.resize(colorCount + 1);
 
             for (uint8_t i = 0; i < colorCount; ++i) {
-                auto&& color = colors[i / (m_kernel->MultisamplingEnabled() ? 2 : 1)];
+                auto&& color = colors[i / (multisamplingEnabled ? 2 : 1)];
 
                 m_clearValues[i] = {
                     .color = { {

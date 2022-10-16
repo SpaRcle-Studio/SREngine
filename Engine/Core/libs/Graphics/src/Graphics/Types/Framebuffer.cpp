@@ -9,6 +9,7 @@
 namespace SR_GTYPES_NS {
     Framebuffer::Framebuffer()
         : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Framebuffer), true /** auto remove */)
+        , m_pipeline(Environment::Get())
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
     }
@@ -34,6 +35,10 @@ namespace SR_GTYPES_NS {
     }
 
     Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size) {
+        return Create(colors, depth, size, 0);
+    }
+
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size, uint8_t samples) {
         Framebuffer* fbo = new Framebuffer();
 
         SRAssert(!size.HasZero() && !size.HasNegative());
@@ -63,7 +68,7 @@ namespace SR_GTYPES_NS {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
         }
 
-        Environment::Get()->BindFrameBuffer(m_frameBuffer);
+        m_pipeline->BindFrameBuffer(m_frameBuffer);
 
         return true;
     }
@@ -84,15 +89,13 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        auto&& environment = Environment::Get();
-
         if (m_frameBuffer != SR_ID_INVALID) {
-            SRVerifyFalse(!environment->FreeFBO(m_frameBuffer));
+            SRVerifyFalse(!m_pipeline->FreeFBO(m_frameBuffer));
             m_frameBuffer = SR_ID_INVALID;
         }
 
         if (m_depth.texture != SR_ID_INVALID) {
-            SRVerifyFalse(!environment->FreeTexture(&m_depth.texture));
+            SRVerifyFalse(!m_pipeline->FreeTexture(&m_depth.texture));
         }
 
         for (auto&& [texture, format] : m_colors) {
@@ -100,7 +103,7 @@ namespace SR_GTYPES_NS {
                 continue;
             }
 
-            SRVerifyFalse(!environment->FreeTexture(&texture));
+            SRVerifyFalse(!m_pipeline->FreeTexture(&texture));
         }
     }
 
@@ -117,7 +120,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (!Environment::Get()->CreateFrameBuffer(m_size.ToGLM(), m_frameBuffer, &m_depth, m_colors)) {
+        if (!m_pipeline->CreateFrameBuffer(m_size.ToGLM(), m_frameBuffer, &m_depth, m_colors)) {
             SR_ERROR("Framebuffer::OnResize() : failed to create frame buffer!");
             m_hasErrors = true;
             return false;
@@ -135,85 +138,34 @@ namespace SR_GTYPES_NS {
     }
 
     bool Framebuffer::BeginRender(const Framebuffer::ClearColors &clearColors, float_t depth) {
-        auto&& env = Environment::Get();
+        m_pipeline->ClearBuffers(clearColors, depth);
 
-        env->ClearBuffers(clearColors, depth);
-
-        if (!env->BeginRender()) {
+        if (!m_pipeline->BeginRender()) {
             return false;
         }
 
-        env->SetViewport(m_size.x, m_size.y);
-        env->SetScissor(m_size.x, m_size.y);
+        m_pipeline->SetViewport(m_size.x, m_size.y);
+        m_pipeline->SetScissor(m_size.x, m_size.y);
 
         return true;
     }
 
     bool Framebuffer::BeginRender() {
-        auto&& env = Environment::Get();
+        m_pipeline->ClearBuffers();
 
-        env->ClearBuffers();
-
-        if (!env->BeginRender()) {
+        if (!m_pipeline->BeginRender()) {
             return false;
         }
 
-        env->SetViewport(m_size.x, m_size.y);
-        env->SetScissor(m_size.x, m_size.y);
+        m_pipeline->SetViewport(m_size.x, m_size.y);
+        m_pipeline->SetScissor(m_size.x, m_size.y);
 
         return true;
     }
 
     void Framebuffer::EndRender() {
-        Environment::Get()->EndRender();
+        m_pipeline->EndRender();
     }
-
-    /*void Framebuffer::Draw() {
-        if (m_hasErrors) {
-            return;
-        }
-
-        if ((!m_shader || m_dirtyShader) && !InitShader()) {
-            return;
-        }
-
-        auto&& env = Environment::Get();
-        auto&& uboManager = Memory::UBOManager::Instance();
-
-        if (!m_shader->Use()) {
-            m_hasErrors = false;
-            return;
-        }
-
-        /// кадровый буфер работает незваисимо от камеры
-        uboManager.SetIgnoreCameras(true);
-
-        switch (uboManager.BindUBO(m_virtualUBO)) {
-            case Memory::UBOManager::BindResult::Success:
-                env->Draw(3);
-                break;
-            case Memory::UBOManager::BindResult::Duplicated:
-                SRHalt("Framebuffer memory has been duplicated!");
-                SR_FALLTHROUGH;
-            case Memory::UBOManager::BindResult::Failed:
-            default:
-                break;
-        }
-
-        /// сбрасываем значение
-        uboManager.SetIgnoreCameras(false);
-
-        m_shader->UnUse();
-    }
-
-    void Framebuffer::OnResourceUpdated(IResource* pResource, int32_t deep) {
-        if (dynamic_cast<Shader*>(pResource) == m_shader && m_shader) {
-            m_dirtyShader = true;
-            m_hasErrors = false;
-        }
-
-        Super::UpdateResources(deep);
-    }*/
 
     int32_t Framebuffer::GetId() {
         if (m_hasErrors) {

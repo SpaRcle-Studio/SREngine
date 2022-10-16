@@ -29,7 +29,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                     inputColorAttachments,
                     w, h,
                     1.f /** scale */,
-                    true,
+                    1,
                     true /** depth enabled */
             );
 
@@ -75,7 +75,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
 bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
         uint32_t FBO, uint32_t w, uint32_t h,
         const std::vector<int32_t> &oldColorAttachments,
-        uint32_t /*depth*/)
+        uint32_t /** depth */)
 {
     if (FBO >= m_countFBO.first || m_FBOs[FBO] == nullptr) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
@@ -87,7 +87,7 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
         return false;
     }
 
-    /// Texture-attachments
+    /// Texture attachments
 
     auto textures = m_FBOs[FBO]->AllocateColorTextureReferences();
     if (textures.size() != oldColorAttachments.size()) {
@@ -105,12 +105,6 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
             SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", texture not exists!");
             return false;
         }
-
-        /// ret:
-        /// if (m_textures[oldColorAttachments[i]]->GetSeed() == textures[i]->GetSeed()) {
-        ///     textures[i]->RandomizeSeed();
-        ///     goto ret;
-        /// }
 
         m_textures[oldColorAttachments[i]]->Destroy();
         m_textures[oldColorAttachments[i]]->Free();

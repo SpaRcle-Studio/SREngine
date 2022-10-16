@@ -111,13 +111,6 @@ int main(int argc, char **argv) {
 
     Features::Instance().Reload(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
 
-    /// if (!FbxLoader::Debug::IsInit()) {
-    ///     FbxLoader::Debug::Init(
-    ///             [](const std::string &msg) { SR_ERROR(msg); },
-    ///             [](const std::string &msg) { SR_WARN(msg); }
-    ///     );
-    /// }
-
     if (Features::Instance().Enabled("CrashHandler")) {
 #ifdef SR_WIN32
         ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
@@ -204,7 +197,7 @@ int main(int argc, char **argv) {
             false, // fullscreen
             true,  // resizable
             true,  // header enabled
-            2
+            64
     );
 
     auto&& engine = Engine::Instance();

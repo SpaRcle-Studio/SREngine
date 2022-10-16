@@ -58,7 +58,8 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
                         VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
                     )
             },
-            m_device->MultisampleEnabled(), false
+            m_device->GetMSAASamplesCount(),
+            false /** depth buffer */
     );
 
     if (!m_renderPass.Ready()) {

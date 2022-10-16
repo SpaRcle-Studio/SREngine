@@ -305,12 +305,11 @@ namespace SR_GRAPH_NS {
     void RenderScene::RenderBlackScreen() {
         auto&& pipeline = GetPipeline();
 
-        pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
-
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);
 
             pipeline->BindFrameBuffer(0);
+            pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
             pipeline->BeginRender();
             {

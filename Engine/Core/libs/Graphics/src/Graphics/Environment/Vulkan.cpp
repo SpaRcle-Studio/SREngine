@@ -184,7 +184,7 @@ namespace Framework::Graphics {
         }
 
         SR_INFO("Vulkan::Init() : create vulkan memory manager...");
-        this->m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
+        m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
         if (!m_memory) {
             SR_ERROR("Vulkan::Init() : failed to create vulkan memory manager!");
             return false;
