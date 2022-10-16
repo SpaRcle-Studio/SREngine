@@ -45,6 +45,7 @@ namespace SR_GRAPH_NS {
 
     private:
         bool m_directional = false;
+        bool m_depthEnabled = true;
 
         SR_MATH_NS::IVector3 m_color;
         ShaderPtr m_shaders[3] = { };
@@ -52,6 +53,7 @@ namespace SR_GRAPH_NS {
         SR_MATH_NS::FVector2 m_preScale;
 
         FramebufferPtr m_framebuffer = nullptr;
+        uint8_t m_samples = 0;
 
     };
 }

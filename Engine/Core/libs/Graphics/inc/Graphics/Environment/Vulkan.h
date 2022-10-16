@@ -121,7 +121,7 @@ namespace SR_GRAPH_NS {
         VkRenderPassBeginInfo                           m_renderPassBI       = { };
 
         std::vector<EvoVulkan::Complexes::FrameBuffer*> m_framebuffersQueue  = {};
-        EvoVulkan::Complexes::FrameBuffer*              m_currentFramebuffer = nullptr;
+        EvoVulkan::Complexes::FrameBuffer*              m_currentVkFramebuffer = nullptr;
         VkCommandBuffer                                 m_currentCmd         = VK_NULL_HANDLE;
         EvoVulkan::Complexes::Shader*                   m_currentShader      = nullptr;
         VkPipelineLayout                                m_currentLayout      = VK_NULL_HANDLE;
@@ -283,7 +283,7 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override {
-            const bool multisamplingEnabled = m_currentFramebuffer ? m_currentFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
+            const bool multisamplingEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
             colorCount *= multisamplingEnabled ? 2 : 1;
 
             this->m_clearValues.resize(colorCount + 1);
@@ -298,7 +298,7 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override {
-            const bool multisamplingEnabled = m_currentFramebuffer ? m_currentFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
+            const bool multisamplingEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
             uint8_t colorCount = static_cast<uint8_t>(colors.size());
             colorCount *= multisamplingEnabled ? 2 : 1;
 
@@ -359,6 +359,8 @@ namespace SR_GRAPH_NS {
             return true;
         }
 
+        SR_NODISCARD uint8_t GetSmoothSamplesCount() const override;
+
         bool CompileShader(
                 const std::string& path,
                 int32_t FBO,
@@ -391,7 +393,7 @@ namespace SR_GRAPH_NS {
             m_currentShader->Bind(m_currentCmd);
         }
 
-        bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) override;
+        bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount) override;
         //bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
         //    std::vector<int32_t> color = { colorBuffer };
         //    bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
@@ -606,7 +608,7 @@ namespace SR_GRAPH_NS {
                 m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
                 m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
 
-                m_currentFramebuffer = nullptr;
+                m_currentVkFramebuffer = nullptr;
             }
             else {
                 if (FBO == UINT32_MAX) {
@@ -630,12 +632,12 @@ namespace SR_GRAPH_NS {
 
                 m_framebuffersQueue.push_back(framebuffer);
 
-                this->m_renderPassBI.framebuffer = *framebuffer;
-                this->m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
-                this->m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
-                this->m_currentCmd               = framebuffer->GetCmd();
+                m_renderPassBI.framebuffer = *framebuffer;
+                m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
+                m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
+                m_currentCmd               = framebuffer->GetCmd();
 
-                this->m_currentFramebuffer       = framebuffer;
+                m_currentVkFramebuffer = framebuffer;
             }
 
             this->m_currentFBOid = FBO;

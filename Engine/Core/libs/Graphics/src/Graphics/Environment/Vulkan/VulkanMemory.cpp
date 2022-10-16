@@ -11,14 +11,16 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
         uint32_t w, uint32_t h,
         const std::vector<VkFormat> &inputColorAttachments,
         std::vector<int32_t> &outputColorAttachments,
-        int32_t &depth)
+        std::optional<int32_t> &depth,
+        uint8_t sampleCount)
 {
-    if (inputColorAttachments.size() != outputColorAttachments.size())
+    if (inputColorAttachments.size() != outputColorAttachments.size()) {
         SR_WARN("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
+    }
 
     outputColorAttachments.clear();
 
-    for (uint32_t i = 0; i < m_countFBO.first; i++)
+    for (uint32_t i = 0; i < m_countFBO.first; ++i) {
         if (m_FBOs[i] == nullptr) {
             m_FBOs[i] = EvoVulkan::Complexes::FrameBuffer::Create(
                     m_kernel->GetDevice(),
@@ -29,13 +31,13 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                     inputColorAttachments,
                     w, h,
                     1.f /** scale */,
-                    1,
-                    true /** depth enabled */
+                    sampleCount,
+                    depth.has_value() /** depth enabled */
             );
 
             if (m_FBOs[i] == nullptr) {
                 SR_ERROR("MemoryManager::AllocateFBO() : failed to create Evo Vulkan frame buffer object!");
-                return -1;
+                return SR_ID_INVALID;
             }
 
             for (auto&& texture : m_FBOs[i]->AllocateColorTextureReferences()) {
@@ -68,19 +70,23 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
 
             return (int32_t)i;
         }
+    }
 
-    return -1;
+    return SR_ID_INVALID;
 }
 
 bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
         uint32_t FBO, uint32_t w, uint32_t h,
         const std::vector<int32_t> &oldColorAttachments,
-        uint32_t /** depth */)
+        std::optional<int32_t> depthBuffer,
+        uint8_t sampleCount)
 {
     if (FBO >= m_countFBO.first || m_FBOs[FBO] == nullptr) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
         return false;
     }
+
+    m_FBOs[FBO]->SetSampleCount(sampleCount);
 
     if (!m_FBOs[FBO]->ReCreate(w, h)) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : failed to re-create frame buffer object!");
@@ -109,6 +115,12 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
         m_textures[oldColorAttachments[i]]->Destroy();
         m_textures[oldColorAttachments[i]]->Free();
         m_textures[oldColorAttachments[i]] = textures[i];
+    }
+
+    if (depthBuffer.has_value()) {
+        m_textures[depthBuffer.value()]->Destroy();
+        m_textures[depthBuffer.value()]->Free();
+        m_textures[depthBuffer.value()] = m_FBOs[FBO]->AllocateDepthTextureReference();
     }
 
     return true;

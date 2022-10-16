@@ -38,6 +38,7 @@ namespace SR_GRAPH_NS {
 
     private:
         bool m_dynamicResizing = false;
+        bool m_depthEnabled = true;
 
         SR_MATH_NS::FVector2 m_preScale;
         SR_MATH_NS::IVector2 m_size;
@@ -48,7 +49,9 @@ namespace SR_GRAPH_NS {
         FramebufferPtr m_framebuffer = nullptr;
 
         float_t m_depth = 1.f;
+        uint8_t m_samples = 0;
         DepthFormat m_depthFormat = DepthFormat::Unknown;
+
 
     };
 }

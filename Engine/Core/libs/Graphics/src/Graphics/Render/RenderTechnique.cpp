@@ -116,11 +116,15 @@ namespace SR_GRAPH_NS {
 
         SetDirty();
 
-        return SR_UTILS_NS::IResource::Load();
+        m_loadState = LoadState::Loading;
+
+        return true;
     }
 
     bool RenderTechnique::Unload() {
         SR_LOCK_GUARD
+
+        m_loadState = LoadState::Unloading;
 
         return IResource::Unload();
     }
@@ -162,17 +166,20 @@ namespace SR_GRAPH_NS {
         auto&& document = LoadDocument();
         if (!document.Valid()) {
             SR_ERROR("RenderTechnique::Build() : failed to load xml document!");
+            m_loadState = LoadState::Error;
             return false;
         }
 
         if (auto&& settings = document.Root().GetNode("Technique")) {
             if (!LoadSettings(settings)) {
                 SR_ERROR("RenderTechnique::Build() : failed to load render technique!");
+                m_loadState = LoadState::Error;
                 return false;
             }
         }
         else {
             SR_ERROR("RenderTechnique::Build() : \"Technique\" node not found!");
+            m_loadState = LoadState::Error;
             return false;
         }
 
@@ -181,6 +188,7 @@ namespace SR_GRAPH_NS {
             pPass->Init();
         }
 
+        m_loadState = LoadState::Loaded;
         m_dirty = false;
 
         return true;

@@ -47,6 +47,11 @@ namespace SR_GTYPES_NS {
         void EndRender();
 
         void SetSize(const SR_MATH_NS::IVector2& size);
+        void SetDepthEnabled(bool depthEnabled);
+        void SetSampleCount(uint8_t samples);
+
+        SR_NODISCARD uint8_t GetSamplesCount() const { return m_sampleCount; }
+        SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
 
         SR_NODISCARD int32_t GetId();
         SR_NODISCARD int32_t GetColorTexture(uint32_t layer) const;
@@ -65,14 +70,17 @@ namespace SR_GTYPES_NS {
         PipelinePtr             m_pipeline       = nullptr;
 
         bool                    m_isInit         = false;
+        std::atomic<bool>       m_dirty          = false;
         std::atomic<bool>       m_hasErrors      = false;
-        std::atomic<bool>       m_needResize     = false;
 
         std::vector<ColorLayer> m_colors         = { };
         DepthLayer              m_depth          = { };
         int32_t                 m_frameBuffer    = SR_ID_INVALID;
 
         SR_MATH_NS::IVector2    m_size           = { };
+
+        uint8_t                 m_sampleCount    = 0;
+        bool                    m_depthEnabled   = true;
 
     };
 }

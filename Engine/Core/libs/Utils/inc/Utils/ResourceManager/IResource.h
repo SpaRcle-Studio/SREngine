@@ -44,6 +44,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
         SR_NODISCARD std::string_view GetResourceId() const { return m_resourceId; }
+        SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
         SR_NODISCARD virtual Path GetResourcePath() const { return m_resourceId; }
         SR_NODISCARD virtual uint64_t GetResourceHash() const { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
@@ -87,6 +88,7 @@ namespace SR_UTILS_NS {
         virtual bool Unload() {
             if (m_loadState == LoadState::Unknown ||
                 m_loadState == LoadState::Loaded ||
+                m_loadState == LoadState::Unloading ||
                 m_loadState == LoadState::Reloading
             ) {
                 m_loadState = LoadState::Unloaded;
@@ -97,7 +99,11 @@ namespace SR_UTILS_NS {
         }
 
         virtual bool Load() {
-            if (m_loadState == LoadState::Unknown || m_loadState == LoadState::Unloaded) {
+            if (m_loadState == LoadState::Unknown ||
+                m_loadState == LoadState::Unloaded ||
+                m_loadState == LoadState::Reloading ||
+                m_loadState == LoadState::Loading
+            ) {
                 m_loadState = LoadState::Loaded;
                 return true;
             }

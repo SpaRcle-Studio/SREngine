@@ -305,6 +305,8 @@ namespace SR_GRAPH_NS {
     void RenderScene::RenderBlackScreen() {
         auto&& pipeline = GetPipeline();
 
+        pipeline->SetCurrentFramebuffer(nullptr);
+
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);
 

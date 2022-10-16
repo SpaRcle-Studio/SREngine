@@ -3,10 +3,12 @@
 //
 
 #include <Graphics/Memory/ShaderProgramManager.h>
+#include <Graphics/Types/Framebuffer.h>
 
 namespace SR_GRAPH_NS::Memory {
     ShaderProgramManager::ShaderProgramManager()
         : SR_UTILS_NS::Singleton<ShaderProgramManager>()
+        , m_pipeline(Environment::Get())
     {
         m_virtualTable.max_load_factor(0.9f);
         m_virtualTable.reserve(1000);
@@ -28,23 +30,16 @@ namespace SR_GRAPH_NS::Memory {
             return SR_ID_INVALID;
         }
 
-        auto&& env = Environment::Get();
-        auto&& framebufferId = static_cast<int32_t>(env->GetCurrentFBO());
+        VirtualProgramInfo virtualProgramInfo;
+        virtualProgramInfo.m_createInfo = createInfo;
 
-        ShaderProgram shaderProgram = env->AllocateShaderProgram(createInfo, framebufferId);
-        if (shaderProgram == SR_ID_INVALID) {
+        if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
+            virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+        }
+        else {
             SR_ERROR("ShaderProgramManager::Allocate() : failed to allocate shader program!");
             return SR_ID_INVALID;
         }
-
-        VirtualProgramInfo virtualProgramInfo;
-
-        virtualProgramInfo.m_createInfo = createInfo;
-
-        virtualProgramInfo.m_data.insert(std::make_pair(
-                framebufferId,
-                shaderProgram
-        ));
 
         m_virtualTable.insert(std::make_pair(
                 virtualProgram,
@@ -70,29 +65,23 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         auto&& [_, virtualProgramInfo] = *pIt;
-        auto&& env = Environment::Get();
 
         /// очишаем старые шейдерные программы
-        for (auto&& [fbo /** unused */, shaderProgram] : virtualProgramInfo.m_data) {
-            env->DeleteShader(shaderProgram);
+        for (auto&& [fbo /** unused */, shaderProgramInfo] : virtualProgramInfo.m_data) {
+            m_pipeline->DeleteShader(shaderProgramInfo.id);
         }
         virtualProgramInfo.m_data.clear();
 
         /// обновляем данные
         virtualProgramInfo.m_createInfo = createInfo;
 
-        /// выделяем новую шейдерную программу
-        auto&& framebufferId = static_cast<int32_t>(env->GetCurrentFBO());
-        auto&& shaderProgram = env->AllocateShaderProgram(virtualProgramInfo.m_createInfo, framebufferId);
-        if (shaderProgram == SR_ID_INVALID) {
+        if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
+            virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+        }
+        else {
             SR_ERROR("ShaderProgramManager::ReAllocate() : failed to allocate shader program!");
             return SR_ID_INVALID;
         }
-
-        virtualProgramInfo.m_data.insert(std::make_pair(
-                framebufferId,
-                shaderProgram
-        ));
 
         return program;
     }
@@ -134,30 +123,27 @@ namespace SR_GRAPH_NS::Memory {
 
         BindResult result = BindResult::Success;
 
-        auto&& env = Environment::Get();
-        auto&& [_, info] = *pIt;
-        auto&& framebufferId = static_cast<int32_t>(env->GetCurrentFBO());
+        auto&& [_, virtualProgramInfo] = *pIt;
+        auto&& framebufferId = m_pipeline->GetCurrentFramebufferId();
     retry:
-        auto&& fboIt = info.m_data.find(framebufferId);
-        if (fboIt == std::end(info.m_data))
+        auto&& fboIt = virtualProgramInfo.m_data.find(framebufferId);
+        if (fboIt == std::end(virtualProgramInfo.m_data))
         {
-            auto&& shaderProgram = env->AllocateShaderProgram(info.m_createInfo, framebufferId);
-            if (shaderProgram == SR_ID_INVALID) {
+            if (auto&& shaderProgramInfo = AllocateShaderProgram(virtualProgramInfo.m_createInfo); shaderProgramInfo.Valid()) {
+                virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+                result = BindResult::Duplicated;
+                goto retry;
+            }
+            else {
                 SR_ERROR("ShaderProgramManager::BindProgram() : failed to allocate shader program!");
                 return BindResult::Failed;
             }
-
-            info.m_data.insert(std::make_pair(
-                    framebufferId,
-                    shaderProgram
-            ));
-
-            result = BindResult::Duplicated;
-
-            goto retry;
         }
 
-        env->UseShader(static_cast<ShaderProgram>(fboIt->second));
+        if (!BindShaderProgram(fboIt->second, virtualProgramInfo.m_createInfo)) {
+            SR_ERROR("ShaderProgramManager::BindProgram() : failed to bind shader program!");
+            return BindResult::Failed;
+        }
 
         return result;
     }
@@ -173,11 +159,10 @@ namespace SR_GRAPH_NS::Memory {
             return false;
         }
 
-        auto&& env = Environment::Get();
         auto&& [_, info] = *pIt;
 
-        for (auto&& [fbo /** unused */, shaderProgram] : info.m_data) {
-            env->DeleteShader(shaderProgram);
+        for (auto&& [fbo /** unused */, shaderProgramInfo] : info.m_data) {
+            m_pipeline->DeleteShader(shaderProgramInfo.id);
         }
 
         m_virtualTable.erase(pIt);
@@ -196,18 +181,65 @@ namespace SR_GRAPH_NS::Memory {
             return SR_ID_INVALID;
         }
 
-        auto&& env = Environment::Get();
         auto&& [_, info] = *pIt;
-        auto&& framebufferId = static_cast<int32_t>(env->GetCurrentFBO());
+        auto&& framebufferId = m_pipeline->GetCurrentFramebufferId();
         auto&& fboIt = info.m_data.find(framebufferId);
 
         if (fboIt == std::end(info.m_data))
         {
-            SRHalt("ShaderProgramManager::GetProgram() : framebuffer not found!!");
+            SRHalt("ShaderProgramManager::GetProgram() : framebuffer not found!");
             return SR_ID_INVALID;
         }
 
-        return fboIt->second;
+        return fboIt->second.id;
+    }
+
+    VirtualProgramInfo::ShaderProgramInfo ShaderProgramManager::AllocateShaderProgram(const SRShaderCreateInfo &createInfo) const {
+        /// выделяем новую шейдерную программу
+        auto&& framebufferId = m_pipeline->GetCurrentFramebufferId();
+
+        auto&& shaderProgram = m_pipeline->AllocateShaderProgram(createInfo, framebufferId);
+        if (shaderProgram == SR_ID_INVALID) {
+            SR_ERROR("ShaderProgramManager::AllocateShaderProgram() : failed to allocate shader program!");
+            return VirtualProgramInfo::ShaderProgramInfo();
+        }
+
+        VirtualProgramInfo::ShaderProgramInfo shaderProgramInfo;
+        shaderProgramInfo.id = shaderProgram;
+
+        if (auto&& pFramebuffer = m_pipeline->GetCurrentFramebuffer()) {
+            shaderProgramInfo.samples = pFramebuffer->GetSamplesCount();
+            shaderProgramInfo.depth = pFramebuffer->IsDepthEnabled();
+        }
+        else {
+            shaderProgramInfo.samples = m_pipeline->GetSmoothSamplesCount();
+            shaderProgramInfo.depth = createInfo.blendEnabled;
+        }
+
+        return shaderProgramInfo;
+    }
+
+    bool ShaderProgramManager::BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo &shaderProgramInfo, const SRShaderCreateInfo& createInfo) {
+        if (auto&& pFramebuffer = m_pipeline->GetCurrentFramebuffer()) {
+            if (pFramebuffer->IsDepthEnabled() != shaderProgramInfo.depth || pFramebuffer->GetSamplesCount() != shaderProgramInfo.samples) {
+                SR_LOG("ShaderProgramManager::BindShaderProgram() : the frame buffer parameters have been changed, the shader has been recreated...");
+                m_pipeline->DeleteShader(shaderProgramInfo.id);
+                if ((shaderProgramInfo = AllocateShaderProgram(createInfo)).Valid()) {
+                    return BindShaderProgram(shaderProgramInfo, createInfo);
+                }
+                else {
+                    SR_ERROR("ShaderProgramManager::BindShaderProgram() : failed to allocate shader program!");
+                    return false;
+                }
+            }
+
+            m_pipeline->UseShader(static_cast<ShaderProgram>(shaderProgramInfo.id));
+        }
+        else {
+            m_pipeline->UseShader(static_cast<ShaderProgram>(shaderProgramInfo.id));
+        }
+
+        return true;
     }
 }
 

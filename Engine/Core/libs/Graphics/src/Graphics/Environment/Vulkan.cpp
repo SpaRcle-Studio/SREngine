@@ -403,13 +403,14 @@ namespace Framework::Graphics {
             return false;
         }
 
-        const VkSampleCountFlagBits sampleCount = m_currentFramebuffer ? m_currentFramebuffer->GetSampleCount() : m_kernel->GetDevice()->GetMSAASamples();
+        const VkSampleCountFlagBits sampleCount = m_currentVkFramebuffer ? m_currentVkFramebuffer->GetSampleCount() : m_kernel->GetDevice()->GetMSAASamples();
+        const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
 
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
                 VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
                 VulkanTools::AbstractCullModeToVk(cullMode),
                 VulkanTools::AbstractDepthOpToVk(shaderCreateInfo.depthCompare),
-                shaderCreateInfo.blendEnabled,
+                shaderCreateInfo.blendEnabled && depthEnabled,
                 shaderCreateInfo.depthWrite,
                 shaderCreateInfo.depthTest,
                 VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology),
@@ -426,7 +427,7 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool Vulkan::CreateFrameBuffer(const Helper::Math::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors) {
+    bool Vulkan::CreateFrameBuffer(const Helper::Math::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount) {
         std::vector<int32_t> colorBuffers;
         colorBuffers.reserve(colors.size());
 
@@ -448,20 +449,29 @@ namespace Framework::Graphics {
             return false;
         }
 
+        std::optional<int32_t> depthBuffer = pDepth ? pDepth->texture : std::optional<int32_t>();
+
         if (FBO > 0) {
-            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, pDepth->texture)) {
+            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, depthBuffer, sampleCount)) {
                 SR_ERROR("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             goto success;
         }
 
-        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, pDepth->texture) + 1;
+        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, depthBuffer, sampleCount) + 1;
         if (FBO <= 0) {
             SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
             return false;
         }
 
     success:
+        if (pDepth && depthBuffer.has_value()) {
+            pDepth->texture = depthBuffer.value();
+        }
+        else if (pDepth) {
+            pDepth->texture = SR_ID_INVALID;
+        }
+
         for (uint32_t i = 0; i < static_cast<uint32_t>(colors.size()); ++i) {
             colors[i].texture = colorBuffers[i];
         }
@@ -669,7 +679,7 @@ namespace Framework::Graphics {
             return SR_ID_INVALID;
     }
 
-    Helper::Math::IVector2 Vulkan::GetScreenSize() const {
+    SR_MATH_NS::IVector2 Vulkan::GetScreenSize() const {
         return m_basicWindow->GetScreenResolution();
     }
 
@@ -690,7 +700,7 @@ namespace Framework::Graphics {
                 m_viewport = m_kernel->GetViewport();
             }
             else if (m_currentFramebuffer) {
-                m_viewport = m_currentFramebuffer->GetViewport();
+                m_viewport = m_currentVkFramebuffer->GetViewport();
             }
         }
 
@@ -706,7 +716,7 @@ namespace Framework::Graphics {
                 m_scissor = m_kernel->GetScissor();
             }
             else if (m_currentFramebuffer) {
-                m_scissor = m_currentFramebuffer->GetScissor();
+                m_scissor = m_currentVkFramebuffer->GetScissor();
             }
         }
 
@@ -746,6 +756,10 @@ namespace Framework::Graphics {
         }
 
         return program;
+    }
+
+    uint8_t Vulkan::GetSmoothSamplesCount() const {
+        return m_kernel->GetDevice()->GetMSAASamplesCount();
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

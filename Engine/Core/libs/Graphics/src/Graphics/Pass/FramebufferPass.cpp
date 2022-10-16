@@ -92,6 +92,8 @@ namespace SR_GRAPH_NS {
             SR_ERROR("FramebufferPass::Init() : failed to create framebuffer!");
         }
         else {
+            m_framebuffer->SetSampleCount(m_samples);
+            m_framebuffer->SetDepthEnabled(m_depthEnabled);
             m_framebuffer->AddUsePoint();
         }
 
@@ -116,6 +118,8 @@ namespace SR_GRAPH_NS {
 
     void FramebufferPass::LoadSettings(const SR_XML_NS::Node &settingsNode) {
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
+        m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
+        m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
 
         for (auto&& subNode : settingsNode.GetNodes()) {
             /// color layers

@@ -10,6 +10,10 @@
 
 #include <Graphics/Environment/Basic/IShaderProgram.h>
 
+namespace SR_GRAPH_NS {
+    class Environment;
+}
+
 namespace SR_GRAPH_NS::Memory {
     struct SR_DLL_EXPORT VirtualProgramInfo : public SR_UTILS_NS::NonCopyable {
         using Framebuffer = int32_t;
@@ -32,7 +36,15 @@ namespace SR_GRAPH_NS::Memory {
             return *this;
         }
 
-        ska::flat_hash_map<Framebuffer, ShaderProgram> m_data;
+        struct ShaderProgramInfo {
+            ShaderProgram id;
+            bool depth;
+            uint8_t samples;
+
+            SR_NODISCARD bool Valid() const { return id != SR_ID_INVALID; }
+        };
+
+        ska::flat_hash_map<Framebuffer, ShaderProgramInfo> m_data;
         SRShaderCreateInfo m_createInfo;
 
     };
@@ -43,6 +55,7 @@ namespace SR_GRAPH_NS::Memory {
     class SR_DLL_EXPORT ShaderProgramManager : public SR_UTILS_NS::Singleton<ShaderProgramManager> {
         friend class SR_UTILS_NS::Singleton<ShaderProgramManager>;
     public:
+        using PipelinePtr = Environment*;
         using VirtualProgram = int32_t;
         using ShaderProgram = int32_t;
         enum class BindResult : uint8_t {
@@ -65,6 +78,8 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD ShaderProgram GetProgram(VirtualProgram virtualProgram) const noexcept;
 
     private:
+        SR_NODISCARD VirtualProgramInfo::ShaderProgramInfo AllocateShaderProgram(const SRShaderCreateInfo& createInfo) const;
+        SR_NODISCARD bool BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo& shaderProgramInfo, const SRShaderCreateInfo& createInfo);
         SR_NODISCARD VirtualProgram GenerateUnique() const;
 
     protected:
@@ -72,6 +87,7 @@ namespace SR_GRAPH_NS::Memory {
 
     private:
         ska::flat_hash_map<VirtualProgram, VirtualProgramInfo> m_virtualTable;
+        PipelinePtr m_pipeline = nullptr;
 
     };
 }

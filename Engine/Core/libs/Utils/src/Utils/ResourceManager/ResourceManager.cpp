@@ -308,6 +308,13 @@ namespace SR_UTILS_NS {
                         continue;
                     }
 
+                    auto&& loadState = pResource->GetResourceLoadState();
+
+                    using LS = IResource::LoadState;
+                    if (loadState == LS::Reloading || loadState == LS::Loading || loadState == LS::Unloading) {
+                        continue;
+                    }
+
                     pResource->Reload();
                 }
             }

@@ -17,6 +17,7 @@
 
 namespace SR_GTYPES_NS {
     class Shader;
+    class Framebuffer;
 }
 
 namespace SR_GRAPH_NS {
@@ -69,6 +70,7 @@ namespace SR_GRAPH_NS {
         std::atomic<bool> m_needReBuild            = false;
 
         Types::Shader* m_currentShader = nullptr;
+        Types::Framebuffer* m_currentFramebuffer = nullptr;
     protected:
         Environment()  = default;
         ~Environment() = default;
@@ -87,17 +89,20 @@ namespace SR_GRAPH_NS {
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
-        //void SetDescriptorID(const int32_t& id)     { m_currentDescID = id;             }
         void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
         void SetCurrentShader(Types::Shader* pShader)  { m_currentShader = pShader;           }
+        void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer)  { m_currentFramebuffer = pFramebuffer; }
         SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
         SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }
+        SR_NODISCARD Types::Framebuffer* GetCurrentFramebuffer() const noexcept { return m_currentFramebuffer; }
+        SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }
 
+        SR_NODISCARD virtual uint8_t GetSmoothSamplesCount() const { return 0; }
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentUBO()             const { return m_currentUBOid;           }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;           }
+        SR_DEPRECATED [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;           }
         [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentDescriptorSet()   const { return m_currentDescriptorSetId; }
         [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                        }
         [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;            }
@@ -218,7 +223,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const { }
 
-        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors) { return false; }
+        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount) { return false; }
 
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
         virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }

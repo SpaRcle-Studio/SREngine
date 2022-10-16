@@ -69,18 +69,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD bool IsAlive() const;
 
-        void DrawVulkan();
-        void DrawOpenGL();
-
     private:
         void PollEvents();
         void Thread();
         bool InitEnvironment();
         bool SyncFreeResources();
-        void DrawNoCamera();
-
-        void DrawToCamera(Types::Camera* camera, uint32_t fbo);
-        void DrawSingleCamera(Types::Camera* camera);
 
     private:
         std::atomic<bool>     m_isCreate              = false;

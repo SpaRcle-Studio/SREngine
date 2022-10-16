@@ -45,6 +45,7 @@ namespace SR_GTYPES_NS {
 
         fbo->SetSize(size);
         fbo->m_depth.format = depth;
+        fbo->m_sampleCount = samples;
 
         for (auto&& color : colors) {
             ColorLayer layer;
@@ -64,11 +65,12 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if ((!m_isInit || m_needResize) && !Init()) {
+        if ((!m_isInit || m_dirty) && !Init()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
         }
 
         m_pipeline->BindFrameBuffer(m_frameBuffer);
+        m_pipeline->SetCurrentFramebuffer(this);
 
         return true;
     }
@@ -120,21 +122,27 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (!m_pipeline->CreateFrameBuffer(m_size.ToGLM(), m_frameBuffer, &m_depth, m_colors)) {
+        if (!m_pipeline->CreateFrameBuffer(
+            m_size.ToGLM(),
+            m_frameBuffer,
+            m_depthEnabled ? &m_depth : nullptr,
+            m_colors,
+            m_sampleCount)
+        ) {
             SR_ERROR("Framebuffer::OnResize() : failed to create frame buffer!");
             m_hasErrors = true;
             return false;
         }
 
         m_hasErrors = false;
-        m_needResize = false;
+        m_dirty = false;
 
         return true;
     }
 
     void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
         m_size = size;
-        m_needResize = true;
+        m_dirty = true;
     }
 
     bool Framebuffer::BeginRender(const Framebuffer::ClearColors &clearColors, float_t depth) {
@@ -172,7 +180,7 @@ namespace SR_GTYPES_NS {
             return SR_ID_INVALID;
         }
 
-        if ((!m_isInit || m_needResize) && !Init()) {
+        if ((!m_isInit || m_dirty) && !Init()) {
             SR_ERROR("Framebuffer::GetId() : failed to initialize framebuffer!");
         }
 
@@ -184,7 +192,7 @@ namespace SR_GTYPES_NS {
     }
 
     int32_t Framebuffer::GetColorTexture(uint32_t layer) const {
-        if (layer >= m_colors.size() || m_hasErrors || m_needResize) {
+        if (layer >= m_colors.size() || m_hasErrors || m_dirty) {
             return SR_ID_INVALID;
         }
 
@@ -201,5 +209,15 @@ namespace SR_GTYPES_NS {
 
     uint32_t Framebuffer::GetHeight() const {
         return m_size.y;
+    }
+
+    void Framebuffer::SetDepthEnabled(bool depthEnabled) {
+        m_depthEnabled = depthEnabled;
+        m_dirty = true;
+    }
+
+    void Framebuffer::SetSampleCount(uint8_t samples) {
+        m_sampleCount = samples;
+        m_dirty = true;
     }
 }
