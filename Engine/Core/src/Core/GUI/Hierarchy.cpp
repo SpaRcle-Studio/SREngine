@@ -289,4 +289,14 @@ namespace SR_CORE_NS::GUI {
         SR_LOCK_GUARD
         return m_selected;
     }
+
+    void Hierarchy::ClearSelected() {
+        SR_LOCK_GUARD
+        m_selected.clear();
+    }
+
+    void Hierarchy::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr) {
+        SR_LOCK_GUARD
+        m_selected.insert(ptr);
+    }
 }

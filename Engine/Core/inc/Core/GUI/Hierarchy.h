@@ -26,6 +26,9 @@ namespace SR_CORE_NS::GUI {
 
         SR_NODISCARD std::set<SR_UTILS_NS::GameObject::Ptr> GetSelected() const;
 
+        void ClearSelected();
+        void SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr);
+
     private:
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);

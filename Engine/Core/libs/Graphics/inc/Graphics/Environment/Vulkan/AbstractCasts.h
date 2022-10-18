@@ -192,7 +192,10 @@ namespace Framework::Graphics::VulkanTools {
 
             case ColorFormat::RGBA8_SRGB: return VK_FORMAT_R8G8B8A8_SRGB;
 
+            case ColorFormat::R32_UINT: return VK_FORMAT_R32_UINT;
             case ColorFormat::R64_UINT: return VK_FORMAT_R64_UINT;
+
+            case ColorFormat::RG8_UNORM: return VK_FORMAT_R8G8_UNORM;
 
             case ColorFormat::Unknown:
             default:

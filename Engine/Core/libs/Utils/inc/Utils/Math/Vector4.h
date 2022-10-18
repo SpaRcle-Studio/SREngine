@@ -85,12 +85,32 @@ namespace SR_MATH_NS {
     typedef Vector4<int32_t>  IVector4;
     typedef Vector4<uint32_t> UVector4;
 
-    static constexpr FVector3 RGBFromUInt32(uint32_t integral) {
-        const uint32_t red = (integral & 0xff000000) >> 16;
-        const uint32_t green = (integral & 0x00ff0000) >> 8;
-        const uint32_t blue = (integral & 0x0000ff00);
+    static constexpr uint32_t RGBToHEX(const IVector3& color) {
+        return ((color.x & 0xff) << 16) + ((color.y & 0xff) << 8) + (color.z & 0xff);
+    }
 
-        return FVector3(red / 255.f, green / 255.f, blue / 255.f);
+    static constexpr uint32_t BGRToHEX(const IVector3& color) {
+        return ((color.z & 0xff) << 16) + ((color.y & 0xff) << 8) + (color.x & 0xff);
+    }
+
+    static constexpr IVector3 HEXToRGB(uint32_t hex) {
+        IVector3 color;
+
+        color.x = static_cast<Unit>(((hex >> 16) & 0xFF));
+        color.y = static_cast<Unit>(((hex >> 8) & 0xFF));
+        color.z = static_cast<Unit>(((hex) & 0xFF));
+
+        return color;
+    }
+
+    static constexpr IVector3 HEXToBGR(uint32_t hex) {
+        IVector3 color;
+
+        color.x = static_cast<Unit>(((hex) & 0xFF));
+        color.y = static_cast<Unit>(((hex >> 8) & 0xFF));
+        color.z = static_cast<Unit>(((hex >> 16) & 0xFF));
+
+        return color;
     }
 }
 

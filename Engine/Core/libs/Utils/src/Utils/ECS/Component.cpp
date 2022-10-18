@@ -78,6 +78,9 @@ namespace SR_UTILS_NS {
             if (auto&& parent = root->GetParent()) {
                 root = parent;
             }
+            else {
+                break;
+            }
         }
 
         return root;

@@ -81,7 +81,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_color = SR_MATH_NS::IVector3(0);
+        m_colorId = 0;
 
         auto&& pRenderScene = GetRenderScene();
 
@@ -156,7 +156,7 @@ namespace SR_GRAPH_NS {
                 static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(window_size.y) * m_preScale.y),
         };
 
-        if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create({ ColorFormat::RGBA8_UNORM }, DepthFormat::Auto, size))) {
+        if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create({ ColorFormat::RG8_UNORM }, DepthFormat::Auto, size))) {
             SR_ERROR("ColorBufferPass::Init() : failed to create framebuffer!");
         }
         else {
@@ -218,21 +218,24 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
 
             for (auto const& [key, meshGroup] : subCluster) {
-                for (const auto &mesh : meshGroup) {
-                    if (!mesh->IsMeshActive()) {
+                for (const auto &pMesh : meshGroup) {
+                    if (!pMesh->IsMeshActive()) {
                         continue;
                     }
 
-                    auto&& virtualUbo = mesh->GetVirtualUBO();
+                    auto&& virtualUbo = pMesh->GetVirtualUBO();
                     if (virtualUbo == SR_ID_INVALID) {
                         continue;
                     }
 
-                    mesh->UseModelMatrix();
+                    pMesh->UseModelMatrix();
 
-                    NextColor();
+                    ++m_colorId;
+                    SetMeshIndex(pMesh, m_colorId);
 
-                    pShader->SetVec3(SR_COMPILE_TIME_CRC32_STR("color"), m_color.ToGLM() / 255.f);
+                    auto&& color = SR_MATH_NS::HEXToBGR(m_colorId).Cast<SR_MATH_NS::Unit>();
+
+                    pShader->SetVec3(SR_COMPILE_TIME_CRC32_STR("color"), color.ToGLM() / 255.f);
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("ColorBufferPass::Update() : memory has been duplicated!");
@@ -244,22 +247,6 @@ namespace SR_GRAPH_NS {
         }
 
         m_context->SetCurrentShader(nullptr);
-    }
-
-    void ColorBufferPass::NextColor() {
-        const int modifier = 50;
-
-        m_color.x += modifier;
-
-        if (m_color.x >= 255) {
-            m_color.x = 0;
-            m_color.y += modifier;
-        }
-
-        if (m_color.y >= 255) {
-            m_color.y = 0;
-            m_color.z += modifier;
-        }
     }
 
     SR_MATH_NS::FColor ColorBufferPass::GetColor(float_t x, float_t y) const {
@@ -277,5 +264,52 @@ namespace SR_GRAPH_NS {
         const uint32_t yPos = m_framebuffer->GetHeight() * y;
 
         return m_context->GetPipeline()->GetPixelColor(textureId, xPos, yPos);
+    }
+
+    SR_GTYPES_NS::Mesh *ColorBufferPass::GetMesh(float_t x, float_t y) const {
+        auto&& color = GetColor(x, y);
+
+        auto&& colorIndex = SR_MATH_NS::BGRToHEX(SR_MATH_NS::IVector3(
+                static_cast<int32_t>(color.x),
+                static_cast<int32_t>(color.y),
+                static_cast<int32_t>(color.z)
+        ));
+
+        if (colorIndex > m_table.size() || colorIndex == 0) {
+            return nullptr;
+        }
+
+        return m_table[colorIndex - 1];
+    }
+
+    void ColorBufferPass::SetMeshIndex(ColorBufferPass::MeshPtr pMesh, uint32_t colorId) {
+        /// 0 - черный цвет, отсутствие мешей
+        if (colorId == 0) {
+            SRHalt("ColorBufferPass::SetMeshIndex() : invalid index!");
+            return;
+        }
+
+        if (m_colorId - 1 >= m_table.size()) {
+            if (m_table.empty()) {
+                m_table.resize(32);
+            }
+            else {
+                m_table.resize(m_table.size() * 2);
+            }
+        }
+
+        m_table[m_colorId - 1] = pMesh;
+    }
+
+    uint32_t ColorBufferPass::GetIndex(float_t x, float_t y) const {
+        auto&& color = GetColor(x, y);
+
+        auto&& colorIndex = SR_MATH_NS::BGRToHEX(SR_MATH_NS::IVector3(
+                static_cast<int32_t>(color.x),
+                static_cast<int32_t>(color.y),
+                static_cast<int32_t>(color.z)
+        ));
+
+        return colorIndex;
     }
 }

@@ -251,15 +251,28 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
+        if (data->m_code != Helper::MouseCode::MouseLeft) {
+            Widget::OnMouseDown(data);
+            return;
+        }
+
         auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
 
         const float_t x = mousePos.x / m_textureSize.x;
         const float_t y = mousePos.y / m_textureSize.y;
 
         if (auto&& pPass = m_camera->GetComponent<SR_GTYPES_NS::Camera>()->GetRenderTechnique()->FindPass("ColorBufferPass")) {
-            auto &&pColorPass = dynamic_cast<Graphics::ColorBufferPass *>(pPass);
-            auto &&color = pColorPass->GetColor(x, y);
-            SR_LOG(SR_FORMAT("%f, %f, %f, %f", color.r, color.g, color.b, color.a));
+            m_hierarchy->ClearSelected();
+
+            auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass *>(pPass);
+
+            /// auto&& color = pColorPass->GetColor(x, y);
+            /// auto&& index = pColorPass->GetIndex(x, y);
+            /// SR_LOG(SR_FORMAT("%f, %f, %f, %f - %i", color.r, color.g, color.b, color.a, index));
+
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
+                m_hierarchy->SelectGameObject(pMesh->GetRoot());
+            }
         }
 
         Widget::OnMouseDown(data);
