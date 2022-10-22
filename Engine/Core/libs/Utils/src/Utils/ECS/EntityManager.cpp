@@ -63,6 +63,27 @@ namespace SR_UTILS_NS {
         return m_path.back();
     }
 
+    void EntityPath::Reserve() const {
+        for (EntityId id : m_path) {
+            if (id != ENTITY_ID_MAX)
+                EntityManager::Instance().Reserve(id);
+        }
+    }
+
+    void EntityPath::UnReserve() const {
+        for (EntityId id : m_path) {
+            if (id != ENTITY_ID_MAX)
+                EntityManager::Instance().TryUnReserve(id);
+        }
+    }
+
+    void EntityPath::Clear() {
+        for (EntityId& id : m_path) {
+            id = ENTITY_ID_MAX;
+        }
+        m_path.clear();
+    }
+
     ///---------------------------------------------------------------------------------------------------------------------
 
     Entity::Entity()

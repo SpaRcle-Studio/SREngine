@@ -90,7 +90,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityBranch m_reserved;
         SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
         SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
-
+        SR_UTILS_NS::EntityId m_parent = { };
     };
 
     bool RegisterEngineCommands();

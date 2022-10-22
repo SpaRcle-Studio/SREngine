@@ -49,6 +49,7 @@ Framework::Core::Commands::GameObjectTransform::GameObjectTransform(const SR_UTI
 }
 
 Framework::Core::Commands::GameObjectTransform::~GameObjectTransform() {
+    m_path.UnReserve();
     SR_SAFE_DELETE_PTR(m_newMarshal)
     SR_SAFE_DELETE_PTR(m_oldMarshal)
 }
@@ -155,6 +156,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
+
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup);
             m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
@@ -174,6 +176,18 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
 
     if (m_scene.RecursiveLockIfValid()) {
         auto ptr = m_scene->Instance(*m_backup);
+
+        if (m_parent) {     ///попытка восстановить дочерность объекта
+            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_parent);
+            auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+            if (!ptrRaw)
+                return false;
+
+            auto&& parentPtr = ptrRaw->GetThis();
+            parentPtr->AddChild(ptr->GetThis());
+            ptr->SetParent(parentPtr);
+        }
+
         SR_SAFE_DELETE_PTR(m_backup);
         m_scene.Unlock();
         return true;
@@ -185,14 +199,17 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
 Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const SR_UTILS_NS::GameObject::Ptr& ptr) {
     m_path = ptr->GetEntityPath();
     m_reserved = ptr->GetEntityTree();
+    SR_UTILS_NS::GameObject::Ptr parentPtr = ptr->GetParent();
+    if (parentPtr.Valid()) {
+        m_parent = parentPtr->GetEntityId();
+    }
 }
 
 Framework::Core::Commands::GameObjectDelete::~GameObjectDelete() {
+    m_path.UnReserve();
     m_reserved.UnReserve();
     SR_SAFE_DELETE_PTR(m_backup);
 }
-
-//!-------------------------------------------------------
 
 //!-------------------------------------------------------
 
@@ -260,6 +277,7 @@ Framework::Core::Commands::GameObjectPaste::GameObjectPaste(const SR_UTILS_NS::G
 }
 
 Framework::Core::Commands::GameObjectPaste::~GameObjectPaste() {
+    m_path.UnReserve();
     m_reserved.UnReserve();
 }
 

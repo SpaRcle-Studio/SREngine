@@ -68,6 +68,10 @@ namespace SR_UTILS_NS {
         { }
 
     public:
+        void Reserve() const;
+        void UnReserve() const;
+        void Clear();
+
         SR_NODISCARD std::list<EntityId> ToEntityIds() const { return m_path; }
 
         SR_NODISCARD EntityId Last() const;

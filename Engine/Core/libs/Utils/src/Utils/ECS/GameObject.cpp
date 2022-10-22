@@ -90,7 +90,7 @@
 
     bool GameObject::AddChild(const GameObject::Ptr& child) {
         if (child.Get() == this) {
-            SRAssert2(false, "It is impossible to make a parent a child!");
+            SRAssert2(false, "It is impossible to make the parent a child!");
             return false;
         }
 
