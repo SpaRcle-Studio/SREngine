@@ -72,5 +72,10 @@ SRCopyFileToApp("Engine/Core/libs/Audio/libs/OpenAL" "OpenAL64.dll")
 SRCopyFileToApp("Engine/Core/libs/Audio/libs/OpenAL" "OpenAL32d.dll")
 SRCopyFileToApp("Engine/Core/libs/Audio/libs/OpenAL" "OpenAL64d.dll")
 
+SRCopyFileToApp("lib" "freetype.dll")
+SRCopyFileToApp("lib" "freetyped.dll")
+SRCopyFileToApp("lib" "libfreetype.dll")
+SRCopyFileToApp("lib" "libfreetyped.dll")
+
 SRCopyFileToApp("bin" "glew32.dll")
 SRCopyFileToApp("bin" "glew32d.dll")

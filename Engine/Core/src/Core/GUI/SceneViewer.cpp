@@ -251,6 +251,11 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
+        if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
+            Widget::OnMouseDown(data);
+            return;
+        }
+
         if (data->m_code != Helper::MouseCode::MouseLeft) {
             Widget::OnMouseDown(data);
             return;

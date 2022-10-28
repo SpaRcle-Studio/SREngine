@@ -332,6 +332,7 @@ namespace SR_GRAPH_NS::Types {
                 break;
             }
             case SRSL::ShaderType::Simple:
+            case SRSL::ShaderType::Text:
             case SRSL::ShaderType::Line:
             case SRSL::ShaderType::Skybox: {
                 UBOInfo uniforms = { };

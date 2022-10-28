@@ -31,3 +31,12 @@
 [submodule "Engine/Core/libs/Physics/libs/bullet3"]
 	path = Engine/Core/libs/Physics/libs/bullet3
 	url = https://github.com/bulletphysics/bullet3
+[submodule "Engine/Core/libs/Graphics/libs/freetype"]
+	path = Engine/Core/libs/Graphics/libs/freetype
+	url = https://github.com/freetype/freetype
+[submodule "Engine/Core/libs/Graphics/libs/harfbuzz"]
+	path = Engine/Core/libs/Graphics/libs/harfbuzz
+	url = https://github.com/harfbuzz/harfbuzz
+[submodule "Engine/Core/libs/Utils/libs/icu"]
+	path = Engine/Core/libs/Utils/libs/icu
+	url = https://github.com/Monika0000/icu-cmake

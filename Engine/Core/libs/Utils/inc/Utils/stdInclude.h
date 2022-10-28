@@ -7,6 +7,7 @@
 
 #include <Utils/macros.h>
 
+#include <stdio.h>
 #include <iosfwd>
 #include <stdexcept>
 #include <string_view>

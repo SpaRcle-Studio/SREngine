@@ -392,4 +392,8 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Vertices count", proceduralMesh->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", proceduralMesh->GetIndicesCount(), index);
     }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text *&pComponent, EditorGUI *context, int32_t index) {
+
+    }
 }

@@ -58,8 +58,9 @@ namespace SR_GTYPES_NS {
 
         virtual void UseMaterial();
         virtual void UseModelMatrix() { }
+        virtual void UseSamplers();
 
-        void FreeVideoMemory() override;
+        virtual void FreeVideoMemory() override;
 
     public:
         SR_NODISCARD virtual int32_t GetIBO() { return SR_ID_INVALID; }

@@ -17,10 +17,29 @@ namespace SR_GTYPES_NS {
     { }
 
     Texture::~Texture() {
-        if (m_data) {
-            TextureLoader::Free(m_data);
-            m_data = nullptr;
-        }
+        FreeTextureData();
+    }
+
+    Texture *Texture::LoadFont(Font *pFont) {
+        Texture* texture = new Texture();
+
+        texture->m_fromMemory = true;
+        texture->m_isFont = true;
+
+        texture->m_width = pFont->GetWidth();
+        texture->m_height = pFont->GetHeight();
+        texture->m_data = pFont->CopyData();
+
+        texture->m_config.m_alpha = SR_UTILS_NS::BoolExt::True;
+        texture->m_config.m_format = ColorFormat::RGBA8_UNORM;
+        texture->m_config.m_filter = TextureFilter::NEAREST;
+        texture->m_config.m_compression = TextureCompression::None;
+        texture->m_config.m_mipLevels = 1;
+        texture->m_config.m_cpuUsage = false;
+
+        texture->SetId("FontTexture");
+
+        return texture;
     }
 
     Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
@@ -64,10 +83,7 @@ namespace SR_GTYPES_NS {
 
         bool hasErrors = !IResource::Unload();
 
-        if (m_data) {
-            TextureLoader::Free(m_data);
-            m_data = nullptr;
-        }
+        FreeTextureData();
 
         m_isCalculated = false;
 
@@ -147,9 +163,7 @@ namespace SR_GTYPES_NS {
                 SR_LOG("Texture::Calculate() : texture \"" + std::string(GetResourceId()) + "\" has " + std::to_string(m_id) + " id.");
             }
 
-            TextureLoader::Free(m_data);
-
-            m_data = nullptr;
+            FreeTextureData();
         }
 
         m_isCalculated = true;
@@ -264,5 +278,18 @@ namespace SR_GTYPES_NS {
         m_hasErrors = false;
 
         return !hasErrors;
+    }
+
+    void Texture::FreeTextureData() {
+        if (!m_data) {
+            return;
+        }
+
+        /// шрифт сам освободит свои данные
+        if (!m_isFont) {
+            TextureLoader::Free(m_data);
+        }
+
+        m_data = nullptr;
     }
 }

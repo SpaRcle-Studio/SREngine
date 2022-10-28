@@ -130,6 +130,9 @@ namespace SR_UTILS_NS {
             uint16_t size;
             stream.read((char*)&size, sizeof(uint16_t));
             SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return std::string();
+            }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
             readCount += sizeof(uint16_t) + (size * sizeof(char));
@@ -146,6 +149,9 @@ namespace SR_UTILS_NS {
             size_t size;
             stream.read((char*)&size, sizeof(size_t));
             SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return std::string();
+            }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
             readCount += sizeof(size_t) + (size * sizeof(char));

@@ -12,6 +12,7 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "ORTHOGONAL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_NO_TRANSLATE_MATRIX", ShaderVarType::Mat4 },
         { "SKYBOX_DIFFUSE", ShaderVarType::SamplerCube },
+        { "TEXT_ATLAS_TEXTURE", ShaderVarType::Sampler2D },
         { "TIME", ShaderVarType::Float },
         { "VIEW_DIRECTION", ShaderVarType::Vec3 },
         { "LINE_START_POINT", ShaderVarType::Vec3 },
@@ -329,6 +330,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
         case ShaderType::Skybox:
         case ShaderType::Canvas:
         case ShaderType::Line:
+        case ShaderType::Text:
         case ShaderType::PostProcessing: {
             for (auto&& [name, var] : GetColorIndices(code)) {
                 if (!var.used) {
@@ -383,6 +385,10 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 UV;\n", location++);
             source += "vec4 COLOR;";
             break;
+        case ShaderType::Text:
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV;\n", location++);
+            source += "vec4 COLOR;";
+            break;
         case ShaderType::Line:
         case ShaderType::Custom:
             break;
@@ -399,6 +405,17 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
     source += SRSL::GenerateFunctions(parseData.functions, "fragment");
 
     source += "void main() {\n";
+
+    /// вставляем код отвечающий за данный тип шейдера
+    source += "\t// -- codegen -- | begin shader pre code\n";
+    switch (unit.type) {
+        case ShaderType::Text:
+            source += "\tCOLOR = texture(TEXT_ATLAS_TEXTURE, UV);";
+            break;
+        default:
+            break;
+    }
+    source += "\t// -- codegen -- | end shader pre code\n";
 
     /// опционально вставляем пользовательский код
     auto&& functionIt = std::find_if(parseData.functions.begin(), parseData.functions.end(), [](const SRSLFunc& func) -> bool {
@@ -418,6 +435,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
         case ShaderType::Spatial:
         case ShaderType::SpatialCustom:
         case ShaderType::Simple:
+        case ShaderType::Text:
         case ShaderType::Skybox:
         case ShaderType::Canvas:
             source += "\tCOLOR_INDEX_0 = COLOR;\n";
@@ -444,6 +462,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     source += "// -- codegen -- | begin declaration default vars\n";
     uint32_t location = 0;
     switch (unit.type) {
+        case ShaderType::Text:
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location++);
+            break;
         case ShaderType::Custom:
         case ShaderType::Line:
             break;
@@ -454,12 +475,12 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 NORMAL;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 TANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 BITANBENT;\n", location++);
-            source += "int VERTEX_INDEX;";
+            source += SR_UTILS_NS::Format("layout (location = %i) out float VERTEX_INDEX;\n", location++);
             break;
         case ShaderType::PostProcessing:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location++);
-            source += "int VERTEX_INDEX;";
+            source += SR_UTILS_NS::Format("layout (location = %i) out float VERTEX_INDEX;\n", location++);
             break;
         case ShaderType::Simple:
         case ShaderType::Canvas:
@@ -469,7 +490,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
         case ShaderType::Skybox:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 UV;\n", location++);
-            source += "int VERTEX_INDEX;";
+            source += SR_UTILS_NS::Format("layout (location = %i) out float VERTEX_INDEX;\n", location++);
             break;
         default:
             SRHalt("SRSLLoader::MakeVertexCode() : unknown shader type!");
@@ -485,10 +506,11 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
     source += "\t// -- codegen -- | begin default vars\n";
     switch (unit.type) {
         case ShaderType::Custom:
-        case ShaderType::Line:
+        case ShaderType::Text:
             break;
+        case ShaderType::Line:
         case ShaderType::PostProcessing:
-            source += "\tVERTEX_INDEX = gl_VertexIndex;\n";
+            source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
             break;
         case ShaderType::SpatialCustom:
         case ShaderType::Spatial:
@@ -498,7 +520,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tNORMAL = NORMAL_INPUT;\n";
             source += "\tTANGENT = TANGENT_INPUT;\n";
             source += "\tBITANBENT = BITANBENT_INPUT;\n";
-            source += "\tVERTEX_INDEX = gl_VertexIndex;\n";
+            source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
             break;
         case ShaderType::Canvas:
             source += "\tVERTEX = VERTEX_INPUT;\n";
@@ -513,7 +535,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tVERTEX = VERTEX_INPUT;\n";
             source += "\tVERTEX.x = -VERTEX.x;\n";
             source += "\tUV = VERTEX;\n";
-            source += "\tVERTEX_INDEX = gl_VertexIndex;\n";
+            source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
             break;
         case ShaderType::Compute:
             source += "\tGLOBAL_INVOCATION_ID = gl_GlobalInvocationID;\n";
@@ -552,6 +574,29 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             break;
         case ShaderType::PostProcessing:
             source += "\tgl_Position = vec4(VERTEX, 1.0);\n";
+            break;
+        case ShaderType::Text:
+            source += "\tvec3 text_points[6] = {\n"
+                      "\t\tvec3(-0.5, -0.5, 0.0),\n"
+                      "\t\tvec3(0.5, -0.5, 0.0),\n"
+                      "\t\tvec3(0.5, 0.5, 0.0),\n"
+                      "\t\tvec3(-0.5, 0.5, 0.0),\n"
+                      "\t\tvec3(0.5, 0.5, 0.0),\n"
+                      "\t\tvec3(-0.5, -0.5, 0.0),\n"
+                      "\t};\n\n";
+
+            source += "\tvec2 text_uv[6] = {\n"
+                      "\t\tvec2(0.0, 0.0),\n"
+                      "\t\tvec2(1.0, 0.0),\n"
+                      "\t\tvec2(1.0, 1.0),\n"
+                      "\t\tvec2(0.0, 1.0),\n"
+                      "\t\tvec2(1.0, 1.0),\n"
+                      "\t\tvec2(0.0, 0.0),\n"
+                      "\t};\n\n";
+
+            source += "\tUV = text_uv[gl_VertexIndex];\n";
+            source += "\tUV = vec2(UV.x, 1.0 - UV.y);\n";
+            source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(text_points[gl_VertexIndex], 1.0);\n";
             break;
         case ShaderType::Line:
             source += "\tif (gl_VertexIndex == 0) { gl_Position = PROJECTION_MATRIX * VIEW_MATRIX * vec4(LINE_START_POINT, 1.0); } \n";
@@ -613,6 +658,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
         case ShaderType::Custom:
         case ShaderType::PostProcessing:
         case ShaderType::Line:
+        case ShaderType::Text:
             break;
         case ShaderType::Skybox:
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);

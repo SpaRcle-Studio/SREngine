@@ -3,11 +3,18 @@ project(Graphics)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
+set(BUILD_SHARED_LIBS ON)
+set(FT_CONFIG_OPTION_USE_ZLIB OFF)
+set(FT_DISABLE_HARFBUZZ ON)
+
 message("Vulkan sdk path: $ENV{VULKAN_SDK}")
 
 add_subdirectory(libs/EvoVulkan)
-# add_subdirectory(libs/glfw)
-# add_subdirectory(libs/glew/cmake)
+
+add_subdirectory(libs/harfbuzz)
+add_subdirectory(libs/freetype)
 
 if (CYGWIN)
     #include_directories("$ENV{VULKAN_SDK}/Include")
@@ -36,7 +43,7 @@ else()
     add_library(Graphics::lib ALIAS Graphics)
 endif()
 
-target_link_libraries(Graphics CMP_Core)
+target_link_libraries(Graphics CMP_Core freetype harfbuzz)
 
 if (EVO_VULKAN_STATIC_LIBRARY)
     target_link_libraries(Graphics EvoVulkan)
@@ -56,5 +63,5 @@ target_include_directories(Graphics PUBLIC libs)
 target_include_directories(Graphics PUBLIC  ${Vulkan_INCLUDE_DIRS})
 target_include_directories(Graphics PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include)
 target_include_directories(Graphics PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Utils/libs)
-
+target_include_directories(Graphics PUBLIC  ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include/icu)
 

@@ -4,6 +4,7 @@
        <EvoCompiler Value="true"/>
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
+       <ColorBufferPick Value="false"/>
 
        <CrashHandler Value="false"/>
 

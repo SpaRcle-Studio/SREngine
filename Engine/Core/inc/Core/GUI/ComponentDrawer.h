@@ -23,6 +23,7 @@ namespace SR_GRAPH_NS {
         class Mesh3D;
         class Material;
         class ProceduralMesh;
+        class Text;
     }
 }
 
@@ -37,6 +38,7 @@ namespace SR_PHYSICS_NS::Types {
 namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
     void DrawComponent(SR_PHYSICS_NS::Types::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GTYPES_NS::Text*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::ProceduralMesh*& proceduralMesh, EditorGUI* context, int32_t index);
