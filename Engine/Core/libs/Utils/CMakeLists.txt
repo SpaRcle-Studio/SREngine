@@ -18,7 +18,7 @@ add_subdirectory(libs/assimp)
 #find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
 if (SR_UTILS_STATIC_LIBRARY)
-    add_library(Utils STATIC Utils.cxx)
+    add_library(Utils STATIC ICU.cxx Utils.cxx)
 
     if (CYGWIN)
 
@@ -26,7 +26,7 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED Utils.cxx)
+    add_library(Utils SHARED ICU.cxx Utils.cxx)
     add_library(Utils::lib ALIAS Utils)
 endif()
 

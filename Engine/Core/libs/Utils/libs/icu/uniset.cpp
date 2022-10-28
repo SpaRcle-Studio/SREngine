@@ -1707,9 +1707,11 @@ void UnicodeSet::setToBogus() {
 // Implementation: Fundamental operators
 //----------------------------------------------------------------
 
+#ifndef max
 static inline UChar32 max(UChar32 a, UChar32 b) {
     return (a > b) ? a : b;
 }
+#endif
 
 // polarity = 0, 3 is normal: x xor y
 // polarity = 1, 2: x xor ~y == x === y
