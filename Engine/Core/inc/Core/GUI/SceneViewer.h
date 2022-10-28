@@ -22,6 +22,7 @@ namespace SR_CORE_NS::GUI {
 
     class SR_DLL_EXPORT SceneViewer : public Graphics::GUI::Widget {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
+        using Super = Graphics::GUI::Widget;
     public:
         explicit SceneViewer(Graphics::Window* window, Hierarchy* hierarchy);
         ~SceneViewer() override;
@@ -32,6 +33,8 @@ namespace SR_CORE_NS::GUI {
         void Update();
 
         void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMouseUp(const SR_UTILS_NS::MouseInputData* data) override;
+
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 

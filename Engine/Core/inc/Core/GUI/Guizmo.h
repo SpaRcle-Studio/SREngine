@@ -36,6 +36,7 @@ namespace SR_CORE_NS::GUI {
         SR_NODISCARD bool IsUniversal() const { return m_operation == ImGuizmo::OPERATION::UNIVERSAL; }
         SR_NODISCARD bool IsLocal() const { return m_mode == ImGuizmo::MODE::LOCAL; }
         SR_NODISCARD bool IsCenter() const { return m_center; }
+        SR_NODISCARD bool IsUse() const { return m_isUse; }
 
         void SetMode(ImGuizmo::MODE mode) {
             m_mode = mode;
