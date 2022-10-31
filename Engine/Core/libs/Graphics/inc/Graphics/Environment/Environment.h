@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
     };
 
     typedef ImGuiContext* GUIContext;
-    typedef ImFont* Font;
+    typedef ImFont* ImguiFont;
 
     namespace Vertices {
         struct StaticMeshVertex;
@@ -54,7 +54,7 @@ namespace SR_GRAPH_NS {
         static inline std::mutex g_mutex = std::mutex();
 
         GUIContext        m_guiContext             = nullptr;
-        Font              m_iconFont               = nullptr;
+        ImguiFont         m_iconFont               = nullptr;
 
         BasicWindow*      m_basicWindow            = nullptr;
         bool              m_hasErrors              = false;
@@ -82,7 +82,7 @@ namespace SR_GRAPH_NS {
         void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
         virtual void SetBuildState(const bool& isBuild) { }
 
-        [[nodiscard]] Font GetIconFont() const { return m_iconFont; }
+        [[nodiscard]] ImguiFont GetIconFont() const { return m_iconFont; }
         [[nodiscard]] GUIContext GetGUIContext() const { return m_guiContext; }
         [[nodiscard]] bool IsGUIEnabled() const { return m_guiEnabled; }
         [[nodiscard]] bool HasWindow() const { return m_basicWindow; }

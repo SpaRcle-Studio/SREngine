@@ -2,7 +2,7 @@
 <Material ReadOnly="false">
     <Shader Path="Engine/Shaders/transparent.srsl"/>
     <Properties>
-        <Property Id="diffuse" Type="Sampler2D" String="Engine/Textures/default.png"/>
+        <Property Id="diffuse" Type="Sampler2D" String="Engine/Textures/default_improved.png"/>
         <Property Id="color" Type="Vec4" X="1.0" Y="1.0" Z="1.0" W="0.5"/>
     </Properties>
 </Material>

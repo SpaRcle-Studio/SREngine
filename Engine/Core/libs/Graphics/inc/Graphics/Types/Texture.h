@@ -16,6 +16,7 @@ namespace SR_GRAPH_NS {
     class TextureLoader;
     class RenderContext;
     class Render;
+    class Font;
 }
 
 namespace SR_GTYPES_NS {
@@ -30,6 +31,7 @@ namespace SR_GTYPES_NS {
     public:
         static Texture* Load(const std::string& path, const std::optional<Memory::TextureConfig>& config = std::nullopt);
         static Texture* LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
+        static Texture* LoadFont(Font* pFont);
 
     public:
         SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculated; }
@@ -51,8 +53,10 @@ namespace SR_GTYPES_NS {
     private:
         bool Calculate();
         void SetConfig(const Memory::TextureConfig& config);
+        void FreeTextureData();
 
     private:
+        bool                       m_isFont       = false;
         uint8_t*                   m_data         = nullptr;
         PipelnePtr                 m_pipeline     = nullptr;
 

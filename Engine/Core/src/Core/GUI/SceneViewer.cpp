@@ -251,8 +251,17 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
-        if (data->m_code != Helper::MouseCode::MouseLeft) {
-            Widget::OnMouseDown(data);
+        Super::OnMouseDown(data);
+    }
+
+    void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
+        if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
+            Super::OnMouseUp(data);
+            return;
+        }
+
+        if (data->m_code != SR_UTILS_NS::MouseCode::MouseLeft || m_guizmo->IsUse()) {
+            Super::OnMouseUp(data);
             return;
         }
 
@@ -275,6 +284,6 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        Widget::OnMouseDown(data);
+        Super::OnMouseUp(data);
     }
 }

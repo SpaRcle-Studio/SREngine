@@ -12,6 +12,11 @@
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
 #define _HAS_AUTO_PTR_ETC 1
 
+#define TRUE 1
+#define FALSE 0
+
+#define SR_ICU
+
 #define SR_USE_IMGUI
 
 #ifdef _MSVC_LANG
@@ -29,6 +34,14 @@
 
 #if defined(__MINGW64__) || defined(__MINGW32__)
     #define SR_MINGW
+#endif
+
+#ifdef __GNUC__
+    #define SR_LIKELY(x) __builtin_expect((x), 1)
+    #define SR_UNLIKELY(x) __builtin_expect((x), 0)
+#else
+    #define SR_LIKELY(x) (x)
+    #define SR_UNLIKELY(x) (x)
 #endif
 
 /// если использовать только один из, то Debug будет определяться,

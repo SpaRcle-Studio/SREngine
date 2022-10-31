@@ -1,4 +1,4 @@
-#include <Utils/macros.h>
+#include <Utils/stdInclude.h>
 
 #ifdef SR_WIN32
     #include "../Utils/src/Utils/Platform/PlatformWindows.cpp"
@@ -55,6 +55,7 @@
 #include "../Utils/src/Utils/Types/Thread.cpp"
 #include "../Utils/src/Utils/Types/SafeQueue.cpp"
 #include "../Utils/src/Utils/Types/RawMesh.cpp"
+#include "../Utils/src/Utils/Types/UnicodeString.cpp"
 
 #include "../Utils/src/Utils/Common/Stacktrace.cpp"
 #include "../Utils/src/Utils/Common/StringUtils.cpp"

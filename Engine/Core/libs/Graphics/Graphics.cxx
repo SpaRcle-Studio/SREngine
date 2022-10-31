@@ -55,6 +55,7 @@
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"
+#include "../Graphics/src/Graphics/Font/SDF.cpp"
 #include "../Graphics/src/Graphics/Font/Text.cpp"
 
 #include "../Graphics/src/Graphics/UI/Sprite2D.cpp"

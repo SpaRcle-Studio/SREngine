@@ -37,7 +37,7 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         struct ShaderProgramInfo {
-            ShaderProgram id;
+            ShaderProgram id = SR_ID_INVALID;
             bool depth;
             uint8_t samples;
 

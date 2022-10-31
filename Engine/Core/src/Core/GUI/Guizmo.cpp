@@ -124,14 +124,14 @@ namespace SR_CORE_NS::GUI {
                 m_boundsActive ? m_bounds : NULL,
                 m_snapActive && m_boundsActive ? m_boundsSnap : NULL
         )) {
-            if (!m_isUse) {
+            if (!IsUse()) {
                 SR_SAFE_DELETE_PTR(m_marshal)
                 m_marshal = m_transform->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
                 m_isUse = true;
             }
         }
         else {
-            if (m_isUse && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+            if (IsUse() && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
                 auto&& cmd = new Framework::Core::Commands::GameObjectTransform(m_transform->GetGameObject(), m_marshal->CopyPtr());
                 Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 

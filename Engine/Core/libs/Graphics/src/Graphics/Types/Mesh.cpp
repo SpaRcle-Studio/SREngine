@@ -247,5 +247,13 @@ namespace SR_GRAPH_NS::Types {
         static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
         return matrix4X4;
     }
+
+    void Mesh::UseSamplers() {
+        if (!m_material) {
+            return;
+        }
+
+        m_material->UseSamplers();
+    }
 }
 

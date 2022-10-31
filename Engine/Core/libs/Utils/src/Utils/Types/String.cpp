@@ -496,9 +496,12 @@ namespace SR_HTYPES_NS {
     }
 
     char& String::operator [](size_t position){
-        static char NULL_CHAR = '\0';
-        if(this->str == nullptr) return NULL_CHAR;
-        return this->str[SR_MIN(position, strlen(this->str) - 1)];
+        static char nullChar = '\0';
+
+        if (str == nullptr)
+            return nullChar;
+
+        return str[SR_MIN(position, strlen(this->str) - 1)];
     }
 
     void String::Set(const String& string) {

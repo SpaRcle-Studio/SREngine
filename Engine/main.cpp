@@ -22,6 +22,7 @@
 #include <Utils/Types/RawMesh.h>
 #include <Utils/Settings.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Locale/Encoding.h>
 
 #include <Audio/RawSound.h>
 #include <Audio/SoundManager.h>
@@ -39,6 +40,7 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Sprite2D.h>
 
+#include <Graphics/Font/Text.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/SRSL.h>
 #include <Graphics/Types/Material.h>
@@ -56,6 +58,7 @@
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/RenderTexture.h>
+#include <Graphics/Font/Font.h>
 
 #include <Physics/Rigidbody.h>
 #include <Physics/PhysicsScene.h>
@@ -147,6 +150,7 @@ int main(int argc, char **argv) {
         ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
         ComponentManager::Instance().RegisterComponent<Canvas>([]() -> Canvas* { return new Canvas(); });
         ComponentManager::Instance().RegisterComponent<Anchor>([]() -> Anchor* { return new Anchor(); });
+        ComponentManager::Instance().RegisterComponent<Text>([]() -> Text* { return new Text(); });
 
         /// if (SR_UTILS_NS::Features::Instance().Enabled("DebugChunks", false))
         ///     Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
