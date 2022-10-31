@@ -262,8 +262,6 @@ namespace SR_CORE_NS::GUI {
         const float_t y = mousePos.y / m_textureSize.y;
 
         if (auto&& pPass = m_camera->GetComponent<SR_GTYPES_NS::Camera>()->GetRenderTechnique()->FindPass("ColorBufferPass")) {
-            m_hierarchy->ClearSelected();
-
             auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass *>(pPass);
 
             /// auto&& color = pColorPass->GetColor(x, y);
@@ -272,6 +270,8 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
                 m_hierarchy->SelectGameObject(pMesh->GetRoot());
+            } else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
+                m_hierarchy->ClearSelected();
             }
         }
 

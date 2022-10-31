@@ -55,6 +55,9 @@ namespace SR_CORE_NS::GUI {
             }
             ImGui::EndDragDropTarget();
         }
+        if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) {
+            ClearSelected();
+        }
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -71,8 +74,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::PushID((void*)(intptr_t)id);
         if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
             if (m_selected.count(gm) == 0) {
-                m_selected.clear();
-                m_selected.insert(gm);
+                SelectGameObject(gm);
             }
 
             if (ImGui::Selectable("Copy")) {
@@ -120,11 +122,11 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
-        if (ImGui::IsItemClicked() && m_selected.count(gm) == 0) {
-            if (!m_shiftPressed && gm->GetScene().Valid())
-                m_selected.clear();
-
-            m_selected.insert(gm);
+        if (ImGui::IsItemClicked()) {
+            if (m_selected.count(gm) != 0) {
+                ClearSelected();
+            }
+            SelectGameObject(gm);
         }
     }
 
@@ -292,11 +294,18 @@ namespace SR_CORE_NS::GUI {
 
     void Hierarchy::ClearSelected() {
         SR_LOCK_GUARD
-        m_selected.clear();
+        if (!m_selected.empty()) { ///команда не должна срабатывать, если ни один объект не выделен, иначе такая команда бесполезна
+        auto&& cmd = new Framework::Core::Commands::HierarchyClearSelected(&m_selected);
+        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        }
     }
 
     void Hierarchy::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr) {
         SR_LOCK_GUARD
-        m_selected.insert(ptr);
+        if (m_selected.count(ptr) == 0) { ///команда не должна срабатывать, если объект уже выделен, иначе такая команда бесполезна
+            auto&& cmd = new Framework::Core::Commands::SelectGameObject(ptr, &m_selected, m_shiftPressed);
+            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        }
     }
+
 }

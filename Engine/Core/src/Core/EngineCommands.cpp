@@ -11,6 +11,63 @@
 
 #include <Graphics/Render/RenderScene.h>
 
+bool Framework::Core::Commands::HierarchyClearSelected::Redo() {
+    m_selected->clear();
+    return true;
+}
+
+bool Framework::Core::Commands::HierarchyClearSelected::Undo() {
+    *m_selected = m_oldSelected;
+    return true;
+}
+
+Framework::Core::Commands::HierarchyClearSelected::HierarchyClearSelected(std::set<SR_UTILS_NS::GameObject::Ptr>* pSelected) {
+    m_selected = pSelected;
+    m_oldSelected = *m_selected;
+}
+
+Framework::Core::Commands::HierarchyClearSelected::~HierarchyClearSelected() = default;
+
+//!-------------------------------------------------------
+
+bool Framework::Core::Commands::SelectGameObject::Redo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        if (!m_shiftPressed && ptr->GetScene().Valid()) {
+            m_selected->clear();
+        }
+        m_selected->insert(ptr);
+        return true;
+    }
+
+    return false;
+}
+
+bool Framework::Core::Commands::SelectGameObject::Undo() {
+    *m_selected = m_oldSelected;
+    return true;
+}
+
+Framework::Core::Commands::SelectGameObject::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& pMesh,
+                                                                std::set<SR_UTILS_NS::GameObject::Ptr>* pSelected,
+                                                                bool shiftPressed) {
+    m_path = pMesh->GetEntityPath();
+    m_selected = pSelected;
+    m_oldSelected = *m_selected;
+    m_shiftPressed = shiftPressed;
+}
+
+Framework::Core::Commands::SelectGameObject::~SelectGameObject() {
+    m_path.UnReserve();
+}
+
+//!-------------------------------------------------------
+
 bool Framework::Core::Commands::GameObjectTransform::Redo() {
     auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
     auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
