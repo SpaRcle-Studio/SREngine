@@ -18,7 +18,19 @@ bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
 
         SR_GRAPH("Environment::InitGUI() : load editor font...\n\tPath: " + fontPath.ToString());
         if (fontPath.Exists()) {
-            ImFont *pFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 12.0f);
+            ImFontConfig font_config;
+            font_config.OversampleH = 1; //or 2 is the same
+            font_config.OversampleV = 1;
+            font_config.PixelSnapH = 1;
+
+            static const ImWchar ranges[] =
+            {
+                    0x0020, 0x00FF, // Basic Latin + Latin Supplement
+                    0x0400, 0x044F, // Cyrillic
+                    0,
+            };
+
+            ImFont *pFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 12.0f, nullptr, ranges);
         }
         else {
             SR_ERROR("Environment::PreInitGUI() : file not found! \n\tPath: " + fontPath.ToString());

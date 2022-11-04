@@ -10,6 +10,8 @@
 #include <Utils/Types/UnicodeString.h>
 
 namespace SR_GTYPES_NS {
+    class Font;
+
     class Text : public Mesh, public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1001);
         friend class Mesh;
@@ -19,7 +21,7 @@ namespace SR_GTYPES_NS {
 
     public:
         Text();
-        ~Text() override = default;
+        ~Text() override;
 
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
@@ -39,6 +41,7 @@ namespace SR_GTYPES_NS {
         void OnDisable() override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
+        SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
@@ -51,6 +54,12 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
 
+        const SR_HTYPES_NS::UnicodeString& GetText() const { return m_text; }
+
+        void SetText(const std::string& text);
+        void SetText(const std::u16string& text);
+        void SetText(const std::u32string& text);
+
         void Draw() override;
 
         bool Calculate() override;
@@ -60,8 +69,11 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD RenderScenePtr GetRenderScene();
         SR_NODISCARD bool BuildAtlas();
 
+        void SetFont(Font* pFont);
+
     private:
         RenderScenePtr m_renderScene;
+        Font* m_font = nullptr;
 
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
 

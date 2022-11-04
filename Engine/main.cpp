@@ -88,11 +88,6 @@ using namespace Framework::Scripting;
 using namespace Framework::Audio;
 
 int main(int argc, char **argv) {
-    if constexpr (sizeof(size_t) != 8) {
-        std::cerr << "The engine supports only 64-bit systems!\n";
-        return -1;
-    }
-
     setlocale(LC_ALL, "rus");
     setlocale(LC_NUMERIC, "C");
     srand(time(NULL));
@@ -124,7 +119,7 @@ int main(int argc, char **argv) {
 #endif
     }
 
-    // Register all resource types
+    /// Register all resource types
     {
         resourcesManager.RegisterType<RawMesh>();
         resourcesManager.RegisterType<Mesh>();
@@ -137,6 +132,7 @@ int main(int argc, char **argv) {
         resourcesManager.RegisterType<Sound>();
         resourcesManager.RegisterType<RawSound>();
         resourcesManager.RegisterType<Framebuffer>();
+        resourcesManager.RegisterType<Font>();
     }
 
     // Register all components

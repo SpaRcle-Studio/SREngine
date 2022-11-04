@@ -185,6 +185,7 @@ namespace Framework::Graphics::VulkanTools {
     static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ColorFormat& format) {
         switch (format) {
             case ColorFormat::RGBA8_UNORM: return VK_FORMAT_R8G8B8A8_UNORM;
+            case ColorFormat::BGRA8_UNORM: return VK_FORMAT_B8G8R8A8_UNORM;
             case ColorFormat::RGBA16_UNORM: return VK_FORMAT_R16G16B16A16_UNORM;
 
             case ColorFormat::RGB8_UNORM: return VK_FORMAT_R8G8B8_UNORM;

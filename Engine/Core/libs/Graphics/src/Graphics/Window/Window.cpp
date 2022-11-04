@@ -353,7 +353,7 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_env->IsGUISupport()) {
-            if (m_env->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/CalibriL.ttf"))) {
+            if (m_env->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/tahoma.ttf"))) {
                 ImGuiStyle & style = ImGui::GetStyle();
 
                 if (auto&& theme = GUI::Theme::Load("Engine/Configs/Themes/Dark.xml")) {

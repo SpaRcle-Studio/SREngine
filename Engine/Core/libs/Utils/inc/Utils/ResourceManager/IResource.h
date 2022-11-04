@@ -83,7 +83,9 @@ namespace SR_UTILS_NS {
             m_isRegistered = true;
         }
 
-        virtual bool Reload() { return false; }
+        virtual void OnReloadDone() { }
+
+        virtual bool Reload();
 
         virtual bool Unload() {
             if (m_loadState == LoadState::Unknown ||

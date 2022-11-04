@@ -42,7 +42,6 @@ namespace SR_GRAPH_NS::Types {
         bool InitUBOBlock();
         bool Flush() const;
         void FreeVideoMemory() override;
-        bool Reload() override;
 
     public:
         SR_NODISCARD SR_FORCE_INLINE RenderContextPtr GetContext() const { return m_context; }
@@ -82,6 +81,8 @@ namespace SR_GRAPH_NS::Types {
     protected:
         bool Load() override;
         bool Unload() override;
+
+        void OnReloadDone() override;
 
     private:
         void SetSampler(uint64_t hashId, int32_t sampler) noexcept;

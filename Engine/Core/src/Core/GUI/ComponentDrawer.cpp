@@ -10,6 +10,7 @@
 #include <Utils/Types/DataStorage.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
+#include <Utils/Locale/Encoding.h>
 #include <Utils/FileSystem/FileDialog.h>
 
 #include <Scripting/Base/Behaviour.h>
@@ -26,6 +27,7 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
+#include <Graphics/Font/Text.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
@@ -382,18 +384,28 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&proceduralMesh, EditorGUI *context, int32_t index) {
-        if (!proceduralMesh->IsCanCalculate())
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&pComponent, EditorGUI *context, int32_t index) {
+        if (!pComponent->IsCanCalculate())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
-        if (!proceduralMesh->IsCalculated())
+        if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
-        Graphics::GUI::DrawValue("Vertices count", proceduralMesh->GetVerticesCount(), index);
-        Graphics::GUI::DrawValue("Indices count", proceduralMesh->GetIndicesCount(), index);
+        Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
+        Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text *&pComponent, EditorGUI *context, int32_t index) {
+        if (!pComponent->IsCanCalculate())
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
+        if (!pComponent->IsCalculated())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        auto&& text = SR_UTILS_NS::Locale::UtfToUtf<char, char32_t>(pComponent->GetText());
+
+        if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox%i", index), &text, ImVec2(200, 100))) {
+            pComponent->SetText(text);
+        }
     }
 }

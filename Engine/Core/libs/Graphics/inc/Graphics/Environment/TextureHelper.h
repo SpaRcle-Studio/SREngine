@@ -25,20 +25,21 @@ namespace SR_GRAPH_NS {
     );
 
     SR_ENUM_NS_CLASS(ColorFormat,
-        Unknown       = 1 << 0,
+        Unknown,
 
-        RGBA8_UNORM   = 1 << 1,
-        RGBA16_UNORM  = 1 << 2,
+        RGBA8_UNORM,
+        BGRA8_UNORM,
+        RGBA16_UNORM,
 
-        RGB8_UNORM    = 1 << 3,
-        RGB16_UNORM   = 1 << 4,
+        RGB8_UNORM,
+        RGB16_UNORM,
 
-        RGBA8_SRGB    = 1 << 5,
+        RGBA8_SRGB,
 
-        R32_UINT      = 1 << 6,
-        R64_UINT      = 1 << 7,
+        R32_UINT,
+        R64_UINT,
 
-        RG8_UNORM     = 1 << 8
+        RG8_UNORM
     );
 
     SR_ENUM_NS_CLASS(DepthFormat,

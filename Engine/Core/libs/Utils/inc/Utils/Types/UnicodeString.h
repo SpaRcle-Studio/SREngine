@@ -21,12 +21,15 @@ namespace SR_HTYPES_NS {
 
         UnicodeString(const std::string& str); /// NOLINT(google-explicit-constructor)
         UnicodeString(const std::u16string& str); /// NOLINT(google-explicit-constructor)
-        UnicodeString(const CharType* str); /// NOLINT(google-explicit-constructor)
+        UnicodeString(const std::u32string& str); /// NOLINT(google-explicit-constructor)
 
         virtual ~UnicodeString() = default;
 
         UnicodeString& operator=(const UnicodeString& other);
-        UnicodeString& operator=(UnicodeString&& ptr) noexcept;
+        UnicodeString& operator=(UnicodeString&& other) noexcept;
+
+        UnicodeString& operator=(const std::u32string& other);
+        UnicodeString& operator=(std::u32string&& other) noexcept;
 
         SR_NODISCARD operator std::u32string() const noexcept { return m_internal; } /// NOLINT(google-explicit-constructor)
 

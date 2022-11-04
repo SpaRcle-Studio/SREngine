@@ -7,30 +7,35 @@
 
 #include <freetype/include/freetype/ftglyph.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GTYPES_NS {
     Font::Font()
-        : Super()
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Font), true /** auto remove */)
         , m_fontSize(16)
-    {
-        FT_Init_FreeType(&m_library);
-    }
+    { }
 
-    Font::~Font() {
-        FT_Done_FreeType(m_library);
+    Font* Font::Load(const SR_UTILS_NS::Path& rawPath) {
+        SR_GLOBAL_LOCK
 
-        if (m_textureData) {
-            delete[] m_textureData;
-            m_textureData = nullptr;
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
+        if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Font>(path)) {
+            return pResource;
         }
-    }
 
-    void Font::Load() {
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/TsunagiGothic.ttf");
+        auto&& pResource = new Font();
 
-        if (FT_New_Face(m_library, path.c_str(), 0, &m_face)) {
-            std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-            return;
+        pResource->SetId(path, false /** auto register */);
+
+        if (!pResource->Reload()) {
+            SR_ERROR("Font::Load() : failed to load font! \n\tPath: " + path.ToString());
+            delete pResource;
+            return nullptr;
         }
+
+        /// отложенная ручная регистрация
+        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pResource);
+
+        return pResource;
     }
 
     bool Font::Init(const StringType &text,
@@ -220,5 +225,128 @@ namespace SR_GRAPH_NS {
         memcpy(pCopy, m_textureData, size * 4 * sizeof(uint8_t));
 
         return pCopy;
+    }
+
+    bool Font::Unload() {
+        if (m_library) {
+            FT_Done_FreeType(m_library);
+            m_library = nullptr;
+        }
+
+        if (m_textureData) {
+            delete[] m_textureData;
+            m_textureData = nullptr;
+        }
+
+        return IResource::Unload();
+    }
+
+    bool Font::Load() {
+        FT_Init_FreeType(&m_library);
+
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
+        if (!path.IsAbs()) {
+            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
+        }
+
+        if (FT_New_Face(m_library, path.c_str(), 0, &m_face)) {
+            SR_ERROR("Font::Load() : failed to load free-type font! \n\tPath: " + path.ToString());
+            return false;
+        }
+
+        if (FT_Select_Charmap(m_face, FT_ENCODING_UNICODE)) {
+            SR_ERROR("Font::Load() : failed to set char map!");
+            return false;
+        }
+
+        m_hasColor = FT_HAS_COLOR(m_face);
+
+        static const uint32_t tag = FT_MAKE_TAG('C', 'B', 'D', 'T');
+        FT_ULong length = 0;
+        FT_Load_Sfnt_Table(m_face, tag, 0, nullptr, &length);
+        m_isColorEmoji = length > 0;
+
+        return IResource::Load();
+    }
+
+    SR_UTILS_NS::Path Font::GetAssociatedPath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+    }
+
+    bool Font::SetPixelSizes(uint32_t w, uint32_t h) {
+        if (IsColorEmoji()) {
+            if (m_face->num_fixed_sizes == 0) {
+                SR_ERROR("Font::SetPixelSizes() : num fixes sizes is zero!");
+                return false;
+            }
+
+            int32_t best_match = 0;
+            int32_t diff = std::abs(static_cast<int32_t>(h - m_face->available_sizes[0].width));
+            for (int32_t i = 1; i < m_face->num_fixed_sizes; ++i) {
+                int32_t ndiff = std::abs(static_cast<int32_t>(h - m_face->available_sizes[i].width));
+                if (ndiff < diff) {
+                    best_match = i;
+                    diff = ndiff;
+                }
+            }
+
+            if (FT_Select_Size(m_face, best_match)) {
+                SR_ERROR("Font::SetPixelSizes() : failed to select size!");
+                return false;
+            }
+        }
+        else {
+            if (FT_Set_Pixel_Sizes(m_face, w, h)) {
+                SR_ERROR("Font::SetPixelSizes() : failed to set pixel sizes!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool Font::SetCharSize(uint32_t w, uint32_t h, uint32_t wRes, uint32_t hRes) {
+        if (auto&& err = FT_Set_Char_Size(m_face, w, h, wRes, hRes)) {
+            SR_ERROR("Font::SetCharSize() : failed to set char size!\n\tError: " + SRFreeTypeErrToString(err));
+            return false;
+        }
+
+        return true;
+    }
+
+    FT_Glyph Font::GetGlyph(char32_t code, FT_Render_Mode renderMode) const {
+        if (HasColor()) {
+            return GetGlyph(code, renderMode, FT_LOAD_RENDER, FT_LOAD_COLOR);
+        }
+
+        return GetGlyph(code, renderMode, FT_LOAD_RENDER, FT_LOAD_DEFAULT);
+    }
+
+    FT_Glyph Font::GetGlyph(char32_t code, FT_Render_Mode renderMode, FT_Int32 charLoad, FT_Int32 glyphLoad) const {
+         FT_Glyph glyph = nullptr;
+
+        if (FT_Load_Char(m_face, code, charLoad)) {
+            SR_WARN("Font::GetGlyph() : failed to load char!");
+            return nullptr;
+        }
+
+        FT_UInt glyph_index = FT_Get_Char_Index(m_face, code);
+
+        if (FT_Load_Glyph(m_face, glyph_index, glyphLoad)) {
+            SR_WARN("Font::GetGlyph() : failed to load glyph!");
+            return nullptr;
+        }
+
+        if (FT_Render_Glyph(m_face->glyph, renderMode)) {
+            SR_WARN("Font::GetGlyph() : failed to render glyph!");
+            return nullptr;
+        }
+
+        if (FT_Get_Glyph(m_face->glyph, &glyph)) {
+            SR_WARN("Font::GetGlyph() : failed to get glyph!");
+            return nullptr;
+        }
+
+        return glyph;
     }
 }

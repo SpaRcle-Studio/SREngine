@@ -5,8 +5,12 @@
 #ifndef GAMEENGINE_MACROS_H
 #define GAMEENGINE_MACROS_H
 
+static_assert(sizeof(size_t) == 8, "The engine supports only 64-bit systems!");
+
+/// TODO: убрать подавление и перенести туда где оно нужно
 #pragma warning(disable: 4553)
 #pragma warning(disable: 4552)
+#pragma warning(disable: 5033)
 
 #define CRT_SECURE_NO_WARNINGS
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING

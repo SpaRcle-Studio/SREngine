@@ -268,25 +268,10 @@ namespace SR_GRAPH_NS::Types {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    bool Shader::Reload() {
-        SR_SHADER_LOG("Shader::Reload() : reloading \"" + std::string(GetResourceId()) + "\" shader...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-
-        if (!Load()) {
-            m_loadState = LoadState::Error;
-            return false;
-        }
-
-        UpdateResources();
-
+    void Shader::OnReloadDone() {
         m_context.Do([](RenderContext* ptr) {
             ptr->SetDirty();
         });
-
-        return true;
     }
 
     bool Shader::Load() {

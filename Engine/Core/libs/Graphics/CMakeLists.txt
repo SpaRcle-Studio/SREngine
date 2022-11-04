@@ -11,18 +11,17 @@ set(FT_DISABLE_HARFBUZZ ON)
 
 message("Vulkan sdk path: $ENV{VULKAN_SDK}")
 
-add_subdirectory(libs/EvoVulkan)
-
-add_subdirectory(libs/harfbuzz)
-add_subdirectory(libs/freetype)
-
 if (CYGWIN)
     #include_directories("$ENV{VULKAN_SDK}/Include")
 else()
     include_directories(${Vulkan_INCLUDE_DIRS})
-    #find_package(Vulkan REQUIRED FATAL_ERROR)
     find_package(Vulkan REQUIRED)
 endif()
+
+add_subdirectory(libs/EvoVulkan)
+
+add_subdirectory(libs/harfbuzz)
+add_subdirectory(libs/freetype)
 
 if (SR_GRAPHICS_STATIC_LIBRARY)
     add_library(Graphics STATIC Graphics.cxx ImGUI.cxx)
@@ -39,7 +38,7 @@ else()
         target_link_libraries(Graphics ${Vulkan_LIBRARY})
     endif()
 
-    add_library(Graphics SHARED Graphics.cxx)
+    add_library(Graphics SHARED Graphics.cxx inc/Graphics/Font/FreeType.h)
     add_library(Graphics::lib ALIAS Graphics)
 endif()
 

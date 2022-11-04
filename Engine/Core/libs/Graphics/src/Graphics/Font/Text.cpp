@@ -2,8 +2,10 @@
 // Created by Monika on 14.02.2022.
 //
 
-#include <Graphics/Font/Text.h>
 #include <Utils/ECS/Transform.h>
+
+#include <Graphics/Font/Text.h>
+#include <Graphics/Font/TextBuilder.h>
 
 namespace SR_GTYPES_NS {
     Text::Text()
@@ -11,6 +13,12 @@ namespace SR_GTYPES_NS {
     {
         Component::InitComponent<Text>();
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
+        SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
+        m_text = U"Heприветlloあにま😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ \n😋 😌 👦🏻 👧🏻 👨🏻 👩🏻 👴🏻 👵🏻 👶🏻 👱🏻 👮🏻 👲🏻 👳🏻 👷🏻 👸🏻 💂🏻 🎅🏻 👼🏻 💆🏻 💇🏻\n🤣 🤠 🤡 🤥 🤤 🤢";
+    }
+
+    Text::~Text() {
+        SetFont(nullptr);
     }
 
     void Text::Draw() {
@@ -28,6 +36,8 @@ namespace SR_GTYPES_NS {
         {
             m_dirtyMaterial = false;
 
+            EvoVulkan::Tools::VkDebug::Instance().PushLogLevel(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
             m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
@@ -43,6 +53,8 @@ namespace SR_GTYPES_NS {
             pShader->Flush();
 
             UseSamplers();
+
+            EvoVulkan::Tools::VkDebug::Instance().PopLogLevel();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
@@ -94,23 +106,30 @@ namespace SR_GTYPES_NS {
     }
 
     bool Text::BuildAtlas() {
+        if (!m_font) {
+            SR_ERROR("Text::BuildAtlas() : missing font!");
+            return false;
+        }
+
+        EvoVulkan::Tools::VkDebug::Instance().PushLogLevel(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
 
-        SR_GRAPH_NS::Font font;
-        font.Load();
-        std::u32string str = U"Heприветlloあにま👼は申し訳ありません➦приветxccvxc�� ��⊆�� \x02\x01\b \xff\xff\xff ";
-        font.Init(str, 32, 1, 4, 4, 0, 255, 0);
+        TextBuilder textBuilder(m_font);
+        textBuilder.Build(m_text);
 
-        m_width = font.GetWidth();
-        m_height = font.GetHeight();
+        m_width = textBuilder.GetWidth();
+        m_height = textBuilder.GetHeight();
 
-        m_id = m_pipeline->CalculateTexture(font.GetData(),
-                ColorFormat::RGBA8_UNORM, m_width, m_height, TextureFilter::NEAREST,
+        m_id = m_pipeline->CalculateTexture(textBuilder.GetData(),
+                ColorFormat::RGBA8_SRGB, m_width, m_height, TextureFilter::NEAREST,
                 TextureCompression::None, 1,
                 true, false
         );
+
+        EvoVulkan::Tools::VkDebug::Instance().PopLogLevel();
 
         if (m_id == SR_ID_INVALID) {
             SR_ERROR("Text::BuildAtlas() : failed to build the font atlas!");
@@ -221,5 +240,50 @@ namespace SR_GTYPES_NS {
     void Text::UseSamplers() {
         m_context->GetCurrentShader()->SetSampler2D(SHADER_TEXT_ATLAS_TEXTURE, m_id);
         Mesh::UseSamplers();
+    }
+
+    void Text::SetFont(Font *pFont) {
+        if (pFont == m_font) {
+            return;
+        }
+
+        if (m_font) {
+            RemoveDependency(m_font);
+        }
+
+        if ((m_font = pFont)) {
+            AddDependency(m_font);
+        }
+    }
+
+    void Text::SetText(const std::string &text) {
+        m_text = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char>(text);
+        m_isCalculated = false;
+        m_dirtyMaterial = true;
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+    }
+
+    void Text::SetText(const std::u16string &text) {
+        m_text = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char16_t>(text);
+        m_isCalculated = false;
+        m_dirtyMaterial = true;
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+    }
+
+    void Text::SetText(const std::u32string &text) {
+        m_text = text;
+        m_isCalculated = false;
+        m_dirtyMaterial = true;
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+    }
+
+    bool Text::IsCanCalculate() const {
+        return Mesh::IsCanCalculate() && !m_text.empty();
     }
 }

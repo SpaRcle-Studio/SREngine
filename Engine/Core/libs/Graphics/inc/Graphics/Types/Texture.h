@@ -16,10 +16,11 @@ namespace SR_GRAPH_NS {
     class TextureLoader;
     class RenderContext;
     class Render;
-    class Font;
 }
 
 namespace SR_GTYPES_NS {
+    class Font;
+
     class Texture : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class ::SR_GRAPH_NS::TextureLoader;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;

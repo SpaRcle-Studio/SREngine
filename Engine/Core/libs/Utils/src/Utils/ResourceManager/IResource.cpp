@@ -25,6 +25,28 @@ namespace SR_UTILS_NS {
         }
     }
 
+    bool IResource::Reload() {
+        SR_LOCK_GUARD
+
+        SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
+
+        m_loadState = LoadState::Reloading;
+
+        Unload();
+
+        if (!Load()) {
+            m_loadState = LoadState::Error;
+            return false;
+        }
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+        OnReloadDone();
+
+        return true;
+    }
+
     bool IResource::ForceDestroy() {
         if (m_force || IsDestroyed()) {
             SR_ERROR("IResource::ForceDestroy() : resource is already destroyed!");

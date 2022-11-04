@@ -23,6 +23,16 @@ namespace SR_HTYPES_NS {
         return *this;
     }
 
+    UnicodeString &UnicodeString::operator=(const std::u32string& other) {
+        m_internal = other;
+        return *this;
+    }
+
+    UnicodeString &UnicodeString::operator=(std::u32string&& other) noexcept {
+        m_internal = std::exchange(other, { });
+        return *this;
+    }
+
     UnicodeString::UnicodeString(const std::string& str)
         : m_internal(std::begin(str), std::end(str))
     { }
@@ -31,7 +41,7 @@ namespace SR_HTYPES_NS {
         : m_internal(std::begin(str), std::end(str))
     { }
 
-    UnicodeString::UnicodeString(const char32_t* str)
+    UnicodeString::UnicodeString(const std::u32string &str)
         : m_internal(str)
     { }
 
