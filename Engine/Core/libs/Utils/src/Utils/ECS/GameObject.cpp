@@ -16,8 +16,9 @@
 #include <Utils/Common/Hashes.h>
 
  namespace SR_UTILS_NS {
-    GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
+    GameObject::GameObject(const ScenePtr& scene, uint64_t id, std::string name, std::string tag)
         : Super(this)
+        , m_idInScene(id)
     {
         m_scene = scene;
 

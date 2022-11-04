@@ -53,7 +53,7 @@ namespace SR_UTILS_NS {
         using ScenePtr = SR_HTYPES_NS::SafePtr<World::Scene>;
 
     private:
-        GameObject(const ScenePtr& scene, std::string name, std::string tag = "Untagged");
+        GameObject(const ScenePtr& scene, uint64_t id, std::string name, std::string tag = "Untagged");
         ~GameObject() override;
 
     public:
@@ -67,6 +67,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_FORCE_INLINE bool IsDirty() const noexcept { return m_dirty; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetHashName() const noexcept { return m_hashName; }
+        SR_NODISCARD SR_FORCE_INLINE uint64_t GetIdInScene() const noexcept { return m_idInScene; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
@@ -142,6 +143,7 @@ namespace SR_UTILS_NS {
         uint16_t m_childrenCount   = 0;
 
         uint64_t m_hashName = 0;
+        uint64_t m_idInScene = SR_ID_INVALID;
 
         GameObject::Ptr    m_parent     = { };
         GameObjects        m_children   = { };

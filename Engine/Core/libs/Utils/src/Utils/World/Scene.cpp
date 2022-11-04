@@ -29,7 +29,9 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
         }
 
-        GameObject::Ptr gm = *(new GameObject(GetThis(), name));
+        const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
+
+        GameObject::Ptr gm = *(new GameObject(GetThis(), id, name));
 
         if (m_freeObjIndices.empty()) {
             m_gameObjects.emplace_back(gm);
@@ -466,20 +468,23 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::Remove(const GameObject::Ptr &gameObject) {
-        const uint32_t count = static_cast<uint32_t>(m_gameObjects.size());
+        const uint64_t idInScene = gameObject->GetIdInScene();
 
-        for (uint32_t i = 0; i < count; ++i) {
-            if (m_gameObjects.at(i).Get() == gameObject.Get()) {
-                m_gameObjects.at(i) = GameObject::Ptr();
-                m_freeObjIndices.emplace_back(i);
-                OnChanged();
-                return true;
-            }
+        if (idInScene >= m_gameObjects.size()) {
+            SRHalt("Scene::Remove() : invalid game object id!");
+            return false;
         }
 
-        SRHalt("Scene::Remove() : game object not found!");
+        if (m_gameObjects.at(idInScene) != gameObject) {
+            SRHalt("Scene::Remove() : game objects do not match!");
+            return false;
+        }
 
-        return false;
+        m_gameObjects.at(idInScene) = GameObject::Ptr();
+        m_freeObjIndices.emplace_back(idInScene);
+        OnChanged();
+
+        return true;
     }
 
     bool Scene::ReloadChunks() {
