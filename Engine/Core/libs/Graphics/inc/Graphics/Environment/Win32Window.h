@@ -50,6 +50,26 @@ namespace Framework::Graphics {
 
     // border is 39px, maximize 31
 
+    static LRESULT ImGui_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+    {
+        if (ImGui::GetCurrentContext() == NULL)
+            return 0;
+
+        ImGuiIO& io = ImGui::GetIO();
+
+        switch (msg) {
+            case WM_CHAR:
+                wchar_t wch;
+                MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, (char *) &wParam, 1, &wch, 1);
+                io.AddInputCharacter(wch);
+                return 1;
+            default:
+                break;
+        }
+
+        return 0;
+    }
+
     class Win32Window : public BasicWindow {
     private:
         ~Win32Window() = default;
@@ -61,41 +81,6 @@ namespace Framework::Graphics {
     public:
         LRESULT CALLBACK realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             switch (msg) {
-                /*case (WM_WINDOWPOSCHANGED): {
-                    auto winPos = reinterpret_cast<PWINDOWPOS>(lParam);
-                    //Helper::Debug::System(std::to_string(winPos->cx));
-                    //Helper::Debug::System(std::to_string(winPos->cy));
-                    this->m_width  = winPos->cx;
-                    this->m_height = winPos->cy;
-
-                    DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
-                    this->m_maximize = styles & WS_MAXIMIZE;
-
-                    return DefWindowProc(hwnd, msg, wParam, lParam);
-                }*/
-                /*case (WM_SIZE):{
-                    ImGui_ImplDX9_InvalidateDeviceObjects();
-                    g_d3dpp.BackBufferWidth = LOWORD(lParam);
-                    g_d3dpp.BackBufferHeight = HIWORD(lParam);
-                    HRESULT hr = g_pd3dDevice->Reset(&g_d3dpp);
-                    if (hr == D3DERR_INVALIDCALL)
-                        IM_ASSERT(0);
-                    ImGui_ImplDX9_CreateDeviceObjects();
-                }*/
-                /*case (WM_SIZING): {
-                    OnResized();
-                    return 0;
-                }*/
-                /*case WM_SIZE: {
-                if ((wParam != SIZE_MINIMIZED)) {
-                    if (((wParam == SIZE_MAXIMIZED) || (wParam == SIZE_RESTORED))) {
-                        this->m_realWidth = LOWORD(lParam);
-                        this->m_realHeight = HIWORD(lParam);
-                        //OnResized();
-                    }
-                }
-                break;
-            }*/
                 case WM_NCHITTEST: {
                     auto point = POINT { LOWORD(lParam), HIWORD(lParam) };
 
@@ -338,8 +323,11 @@ namespace Framework::Graphics {
         }
 
         static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-            if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
-                return true;
+            if (!ImGui_WndProcHandler(hWnd, message, wParam, lParam)) {
+                if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam)) {
+                    return true;
+                }
+            }
 
             if (auto* me = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA)))
                 return me->realWndProc(hWnd, message, wParam, lParam);

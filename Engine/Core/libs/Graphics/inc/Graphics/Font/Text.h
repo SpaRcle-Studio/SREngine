@@ -54,6 +54,9 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
 
+        SR_NODISCARD uint32_t GetAtlasWidth() const noexcept { return m_width; }
+        SR_NODISCARD uint32_t GetAtlasHeight() const noexcept { return m_height; }
+
         const SR_HTYPES_NS::UnicodeString& GetText() const { return m_text; }
 
         void SetText(const std::string& text);
