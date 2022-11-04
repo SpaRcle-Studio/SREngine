@@ -170,6 +170,7 @@ namespace SR_CORE_NS::GUI {
         SR_LOCK_GUARD
 
         if (Enabled()) {
+            GetWindow<Hierarchy>()->Update();
             GetWindow<Inspector>()->Update();
         }
 

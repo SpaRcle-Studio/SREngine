@@ -12,7 +12,6 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
-#include <Core/GUI/Hierarchy.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -22,44 +21,30 @@ namespace SR_UTILS_NS {
     }
 }
 
+namespace SR_CORE_NS::GUI {
+    class Hierarchy;
+}
+
 namespace SR_CORE_NS::Commands {
 
-    class HierarchyClearSelected : public SR_UTILS_NS::ReversibleCommand {
+    class ChangeHierarchySelected : public SR_UTILS_NS::ReversibleCommand {
     public:
-        HierarchyClearSelected() = default;
-        explicit HierarchyClearSelected(std::set<SR_UTILS_NS::GameObject::Ptr>* pSelected);
+        ChangeHierarchySelected() = default;
+        explicit ChangeHierarchySelected(SR_CORE_NS::GUI::Hierarchy* hierarchy,
+                            const std::set<SR_UTILS_NS::GameObject::Ptr>& oldSelected,
+                            const std::set<SR_UTILS_NS::GameObject::Ptr>& newSelected);
 
-        ~HierarchyClearSelected() override;
+        ~ChangeHierarchySelected() override;
 
         bool Redo() override;
         bool Undo() override;
 
-        std::string GetName() override { return "HierarchyClearSelected"; }
+        std::string GetName() override { return "ChangeHierarchySelected"; }
 
     private:
-        std::set<SR_UTILS_NS::GameObject::Ptr>* m_selected;
-        std::set<SR_UTILS_NS::GameObject::Ptr> m_oldSelected;
-    };
-
-    class SelectGameObject : public SR_UTILS_NS::ReversibleCommand {
-    public:
-        SelectGameObject() = default;
-        explicit SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& pMesh,
-                                    std::set<SR_UTILS_NS::GameObject::Ptr>* pSelected,
-                                    bool shiftPressed);
-
-        ~SelectGameObject() override;
-
-        bool Redo() override;
-        bool Undo() override;
-
-        std::string GetName() override { return "SelectGameObject"; }
-
-    private:
-        SR_UTILS_NS::EntityPath m_path;
-        std::set<SR_UTILS_NS::GameObject::Ptr>* m_selected;
-        std::set<SR_UTILS_NS::GameObject::Ptr> m_oldSelected;
-        bool m_shiftPressed = false;
+        SR_CORE_NS::GUI::Hierarchy* m_hierarchy = nullptr;
+        std::set<SR_UTILS_NS::EntityId> m_newSelected;
+        std::set<SR_UTILS_NS::EntityId> m_oldSelected;
     };
 
     class GameObjectTransform : public SR_UTILS_NS::ReversibleCommand {
@@ -116,7 +101,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::GameObject::Name m_newName;
     };
 
-    class GameObjectDelete : public SR_UTILS_NS::ReversibleCommand {
+    class GameObjectDelete : public SR_UTILS_NS::ReversibleCommand { ///TODO: подумать над удалением нескольких объектов за раз
     public:
         GameObjectDelete() = default;
         explicit GameObjectDelete(const SR_UTILS_NS::GameObject::Ptr& ptr);

@@ -67,7 +67,6 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::GameObject::Ptr m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
-
     };
 }
 

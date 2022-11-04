@@ -55,9 +55,21 @@ namespace SR_CORE_NS::GUI {
             }
             ImGui::EndDragDropTarget();
         }
-        if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) {
+        if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) { ///TODO:Это по-хорошему нужно перевести в какой-нибудь MouseUp
             ClearSelected();
         }
+    }
+
+    void Hierarchy::Update() {
+        SR_LOCK_GUARD
+        for (auto pIt = m_selected.begin(); pIt != m_selected.end(); ) {
+            if (*pIt) {
+                ++pIt;
+            } else {
+                pIt = m_selected.erase(pIt);
+            }
+        }
+
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -97,17 +109,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::Separator();
 
             if (ImGui::Selectable("Delete")) {
-                if (m_scene.RecursiveLockIfValid()) {
-                    for (auto&& selected : m_selected) {
-                        if (selected.RecursiveLockIfValid()) {
-                            auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-                            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-                            selected.Unlock();
-                        }
-                    }
-                    m_selected.clear();
-                    m_scene.Unlock();
-                }
+                Delete();
             }
 
             ImGui::Separator();
@@ -123,9 +125,6 @@ namespace SR_CORE_NS::GUI {
 
     void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
         if (ImGui::IsItemClicked()) {
-            if (m_selected.count(gm) != 0) {
-                ClearSelected();
-            }
             SelectGameObject(gm);
         }
     }
@@ -267,6 +266,11 @@ namespace SR_CORE_NS::GUI {
             {
                 SR_LOCK_GUARD
                 m_selected = selected;
+#ifdef SR_DEBUG
+                for (auto&& ptr : m_selected) {
+                    SRAssert(ptr);
+                }
+#endif
             }
         }
     }
@@ -274,14 +278,17 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Delete() {
         SR_LOCK_GUARD
 
-        if (m_scene.RecursiveLockIfValid()) {
+        if (!m_selected.empty() && m_scene.RecursiveLockIfValid()) {
+            std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+            commands.emplace_back(new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {}));
             for (auto&& selected : m_selected) {
                 if (selected.RecursiveLockIfValid()) {
-                    auto&& cmd = new Framework::Core::Commands::GameObjectDelete(selected);
-                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    commands.emplace_back(new Framework::Core::Commands::GameObjectDelete(selected));
                     selected.Unlock();
                 }
             }
+            auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
+            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             m_selected.clear();
             m_scene.Unlock();
         }
@@ -295,17 +302,41 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::ClearSelected() {
         SR_LOCK_GUARD
         if (!m_selected.empty()) { ///команда не должна срабатывать, если ни один объект не выделен, иначе такая команда бесполезна
-        auto&& cmd = new Framework::Core::Commands::HierarchyClearSelected(&m_selected);
-        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+            auto&& cmd = new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {});
+            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
         }
     }
 
     void Hierarchy::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr) {
         SR_LOCK_GUARD
-        if (m_selected.count(ptr) == 0) { ///команда не должна срабатывать, если объект уже выделен, иначе такая команда бесполезна
-            auto&& cmd = new Framework::Core::Commands::SelectGameObject(ptr, &m_selected, m_shiftPressed);
-            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        ///команда не должна срабатывать, если объект уже выделен и ни одного помимо него (либо если на нём прожат шифт), иначе такая команда бесполезна
+        if ((m_selected.count(ptr) != 0)) {
+            if ((m_shiftPressed)) {
+                return;
+            }
+            if ((m_selected.size() == 1)) {
+                return;
+            }
         }
+
+        std::set<SR_UTILS_NS::GameObject::Ptr> newSelected;
+        if (m_shiftPressed) {
+            newSelected = m_selected;
+        }
+        newSelected.insert(ptr);
+
+        auto&& cmd = new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, newSelected);
+        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
+    }
+
+    void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected){
+        SR_LOCK_GUARD
+        m_selected = changeSelected;
+#ifdef SR_DEBUG
+        for (auto&& ptr : m_selected) {
+            SRAssert(ptr);
+        }
+#endif
     }
 
 }

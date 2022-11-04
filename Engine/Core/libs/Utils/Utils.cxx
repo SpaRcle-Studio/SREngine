@@ -46,6 +46,7 @@
 
 #include "../Utils/src/Utils/CommandManager/ICommand.cpp"
 #include "../Utils/src/Utils/CommandManager/CmdManager.cpp"
+#include "../Utils/src/Utils/CommandManager/ReversibleCommand.cpp"
 
 #include "../Utils/src/Utils/Types/String.cpp"
 #include "../Utils/src/Utils/Types/Time.cpp"

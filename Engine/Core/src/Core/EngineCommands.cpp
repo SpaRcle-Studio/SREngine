@@ -11,60 +11,61 @@
 
 #include <Graphics/Render/RenderScene.h>
 
-bool Framework::Core::Commands::HierarchyClearSelected::Redo() {
-    m_selected->clear();
-    return true;
-}
-
-bool Framework::Core::Commands::HierarchyClearSelected::Undo() {
-    *m_selected = m_oldSelected;
-    return true;
-}
-
-Framework::Core::Commands::HierarchyClearSelected::HierarchyClearSelected(std::set<SR_UTILS_NS::GameObject::Ptr>* pSelected) {
-    m_selected = pSelected;
-    m_oldSelected = *m_selected;
-}
-
-Framework::Core::Commands::HierarchyClearSelected::~HierarchyClearSelected() = default;
+#include <Core/GUI/Hierarchy.h>
 
 //!-------------------------------------------------------
 
-bool Framework::Core::Commands::SelectGameObject::Redo() {
-    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+bool Framework::Core::Commands::ChangeHierarchySelected::Redo() {
+    std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+    for (SR_UTILS_NS::EntityId gmId:m_newSelected) {
+        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
+        auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject *>(entity);
 
-    if (!ptrRaw)
-        return false;
+        if (!ptrRaw)
+            return false;
 
-    if (auto&& ptr = ptrRaw->GetThis()) {
-        if (!m_shiftPressed && ptr->GetScene().Valid()) {
-            m_selected->clear();
+        if (auto &&ptr = ptrRaw->GetThis()) {
+            changeSelected.insert(ptr);
         }
-        m_selected->insert(ptr);
-        return true;
     }
 
-    return false;
-}
-
-bool Framework::Core::Commands::SelectGameObject::Undo() {
-    *m_selected = m_oldSelected;
+    m_hierarchy->SetSelectedImpl(changeSelected);
     return true;
 }
 
-Framework::Core::Commands::SelectGameObject::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& pMesh,
-                                                                std::set<SR_UTILS_NS::GameObject::Ptr>* pSelected,
-                                                                bool shiftPressed) {
-    m_path = pMesh->GetEntityPath();
-    m_selected = pSelected;
-    m_oldSelected = *m_selected;
-    m_shiftPressed = shiftPressed;
+bool Framework::Core::Commands::ChangeHierarchySelected::Undo() {
+    std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+    for (SR_UTILS_NS::EntityId gmId:m_oldSelected) {
+        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
+        auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject *>(entity);
+
+        if (!ptrRaw)
+            return false;
+
+        if (auto &&ptr = ptrRaw->GetThis()) {
+            changeSelected.insert(ptr);
+        }
+    }
+
+    m_hierarchy->SetSelectedImpl(changeSelected);
+    return true;
 }
 
-Framework::Core::Commands::SelectGameObject::~SelectGameObject() {
-    m_path.UnReserve();
+Framework::Core::Commands::ChangeHierarchySelected::ChangeHierarchySelected(SR_CORE_NS::GUI::Hierarchy* hierarchy,
+                                                              const std::set<SR_UTILS_NS::GameObject::Ptr>& oldSelected,
+                                                              const std::set<SR_UTILS_NS::GameObject::Ptr>& newSelected) {
+    m_hierarchy = hierarchy;
+    for (const SR_UTILS_NS::GameObject::Ptr& sPtr : oldSelected) {
+        SRAssert(sPtr);
+        m_oldSelected.insert(sPtr->GetEntityId());
+    }
+    for (const SR_UTILS_NS::GameObject::Ptr& sPtr : newSelected) {
+        SRAssert(sPtr);
+        m_newSelected.insert(sPtr->GetEntityId());
+    }
 }
+
+Framework::Core::Commands::ChangeHierarchySelected::~ChangeHierarchySelected() = default;
 
 //!-------------------------------------------------------
 

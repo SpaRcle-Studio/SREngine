@@ -78,6 +78,7 @@ namespace Framework::Core::GUI {
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             m_gameObject.Replace(*selected.begin());
+            SRAssert(m_gameObject);
         }
         else {
             m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
