@@ -164,6 +164,10 @@ namespace SR_GTYPES_NS {
 
     void Text::UseModelMatrix() {
         m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_X, 0.f);
+        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_Y, 0.f);
+        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_WIDTH, m_width / 100.f);
+        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_HEIGHT, m_height / 100.f);
         Mesh::UseModelMatrix();
     }
 

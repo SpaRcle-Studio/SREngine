@@ -14,6 +14,10 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "SKYBOX_DIFFUSE", ShaderVarType::SamplerCube },
         { "TEXT_ATLAS_TEXTURE", ShaderVarType::Sampler2D },
         { "TIME", ShaderVarType::Float },
+        { "TEXT_RECT_X", ShaderVarType::Float },
+        { "TEXT_RECT_Y", ShaderVarType::Float },
+        { "TEXT_RECT_WIDTH", ShaderVarType::Float },
+        { "TEXT_RECT_HEIGHT", ShaderVarType::Float },
         { "VIEW_DIRECTION", ShaderVarType::Vec3 },
         { "LINE_START_POINT", ShaderVarType::Vec3 },
         { "LINE_END_POINT", ShaderVarType::Vec3 },
@@ -577,12 +581,12 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             break;
         case ShaderType::Text:
             source += "\tvec3 text_points[6] = {\n"
-                      "\t\tvec3(-0.5, -0.5, 0.0),\n"
-                      "\t\tvec3(0.5, -0.5, 0.0),\n"
-                      "\t\tvec3(0.5, 0.5, 0.0),\n"
-                      "\t\tvec3(-0.5, 0.5, 0.0),\n"
-                      "\t\tvec3(0.5, 0.5, 0.0),\n"
-                      "\t\tvec3(-0.5, -0.5, 0.0),\n"
+                      "\t\tvec3(TEXT_RECT_X, TEXT_RECT_Y, 0.0),\n"
+                      "\t\tvec3(TEXT_RECT_X + TEXT_RECT_WIDTH, TEXT_RECT_Y, 0.0),\n"
+                      "\t\tvec3(TEXT_RECT_X + TEXT_RECT_WIDTH, TEXT_RECT_Y + TEXT_RECT_HEIGHT, 0.0),\n"
+                      "\t\tvec3(TEXT_RECT_X, TEXT_RECT_Y + TEXT_RECT_HEIGHT, 0.0),\n"
+                      "\t\tvec3(TEXT_RECT_X + TEXT_RECT_WIDTH, TEXT_RECT_Y + TEXT_RECT_HEIGHT, 0.0),\n"
+                      "\t\tvec3(TEXT_RECT_X, TEXT_RECT_Y, 0.0),\n"
                       "\t};\n\n";
 
             source += "\tvec2 text_uv[6] = {\n"

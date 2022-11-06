@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS {
 
     private:
         void Clear();
-        void Prepare(char32_t code);
+        bool Prepare(char32_t code);
 
         SR_NODISCARD Pixel** CreateImage(const StringType& text);
 

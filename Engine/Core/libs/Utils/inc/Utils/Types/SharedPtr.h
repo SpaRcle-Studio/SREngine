@@ -14,7 +14,7 @@ namespace SR_HTYPES_NS {
         SharedPtr() = default;
         explicit SharedPtr(T *ptr);
         SharedPtr(SharedPtr const &ptr);
-        SharedPtr(SharedPtr&& ptr)
+        SharedPtr(SharedPtr&& ptr) noexcept
             : m_ptr(std::exchange(ptr.m_ptr, { }))
             , m_data(std::exchange(ptr.m_data, { }))
         { }

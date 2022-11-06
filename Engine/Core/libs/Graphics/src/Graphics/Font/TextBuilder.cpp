@@ -40,7 +40,10 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            Prepare(text[i]);
+            if (!Prepare(text[i])) {
+                SR_ERROR("TextBuilder::Build() : failed to prepare symbol!")
+                return false;
+            }
         }
 
         auto&& pImage = CreateImage(text);
@@ -94,23 +97,33 @@ namespace SR_GRAPH_NS {
 
     }
 
-    void TextBuilder::Prepare(char32_t code) {
+    bool TextBuilder::Prepare(char32_t code) {
         auto&& glyph = m_font->GetGlyph(code, m_renderMode);
         if (!glyph) {
-            return;
+            SR_ERROR("TextBuilder::Prepare() : failed to get glyph!\n\tCode: " + std::to_string(code));
+            return false;
         }
 
         FT_Glyph_To_Bitmap(&glyph, m_renderMode, 0, 1);
         FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph) glyph;
         FT_Bitmap bitmap = bitmap_glyph->bitmap;
 
-        m_glyphWidth += bitmap.width;
-
-        int32_t resize = bitmap.rows > bitmap_glyph->top ? bitmap.rows - bitmap_glyph->top : bitmap_glyph->top - bitmap.rows;
-
-        if (m_glyphHeight < bitmap.rows + resize) {
-            m_glyphHeight = bitmap.rows + resize;
+        if (bitmap_glyph->top < 0) {
+            m_glyphHeight = m_glyphHeight + bitmap.rows + SR_ABS(bitmap_glyph->top);
         }
+        else {
+            int32_t resize = bitmap.rows > bitmap_glyph->top ? bitmap.rows - bitmap_glyph->top : bitmap_glyph->top - bitmap.rows;
+            if (m_glyphHeight < bitmap.rows + resize) {
+                m_glyphHeight = SR_MAX(0, static_cast<int32_t>(bitmap.rows) + resize);
+            }
+        }
+
+        if (m_glyphHeight > 32768) {
+            SRHalt("TextBuilder::Prepare() : very big height!\n\tHeight: " + std::to_string(m_glyphHeight));
+            return false;
+        }
+
+        m_glyphWidth += bitmap.width;
 
         if (m_topRow < bitmap.rows) {
             m_topRow = bitmap.rows;
@@ -126,12 +139,14 @@ namespace SR_GRAPH_NS {
         else if (code == '\n') {
             m_glyphHeight += m_valign + m_maxGlyphHeight;
             FT_Done_Glyph(glyph);
-            return;
+            return true;
         }
 
         m_glyphWidth += m_align;
 
         FT_Done_Glyph(glyph);
+
+        return true;
     }
 
     void TextBuilder::Clear() {
