@@ -108,14 +108,17 @@ namespace SR_GRAPH_NS {
         FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph) glyph;
         FT_Bitmap bitmap = bitmap_glyph->bitmap;
 
+        int32_t resize = 0;
+
         if (bitmap_glyph->top < 0) {
-            m_glyphHeight = m_glyphHeight + bitmap.rows + SR_ABS(bitmap_glyph->top);
+            resize =  bitmap.rows + SR_ABS(bitmap_glyph->top);
         }
         else {
-            int32_t resize = bitmap.rows > bitmap_glyph->top ? bitmap.rows - bitmap_glyph->top : bitmap_glyph->top - bitmap.rows;
-            if (m_glyphHeight < bitmap.rows + resize) {
-                m_glyphHeight = SR_MAX(0, static_cast<int32_t>(bitmap.rows) + resize);
-            }
+            resize = bitmap.rows > bitmap_glyph->top ? bitmap.rows - bitmap_glyph->top : bitmap_glyph->top - bitmap.rows;
+        }
+
+        if (m_glyphHeight < bitmap.rows + resize) {
+            m_glyphHeight = SR_MAX(0, static_cast<int32_t>(bitmap.rows) + resize);
         }
 
         if (m_glyphHeight > 32768) {
