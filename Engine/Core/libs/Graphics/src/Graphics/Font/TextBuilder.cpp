@@ -67,7 +67,7 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        for (uint32_t i = 0; i < m_glyphHeight; ++i) {
+        for (uint32_t i = 0; i < m_imageHeight; ++i) {
             delete pImage[i];
         }
         delete[] pImage;
@@ -111,22 +111,22 @@ namespace SR_GRAPH_NS {
         int32_t resize = 0;
 
         if (bitmap_glyph->top < 0) {
-            resize =  bitmap.rows + SR_ABS(bitmap_glyph->top);
+            resize = bitmap.rows + SR_ABS(bitmap_glyph->top);
         }
         else {
             resize = bitmap.rows > bitmap_glyph->top ? bitmap.rows - bitmap_glyph->top : bitmap_glyph->top - bitmap.rows;
         }
 
-        if (m_glyphHeight < bitmap.rows + resize) {
-            m_glyphHeight = SR_MAX(0, static_cast<int32_t>(bitmap.rows) + resize);
+        if (m_imageHeight < bitmap.rows + resize) {
+            m_imageHeight = SR_MAX(0, static_cast<int32_t>(bitmap.rows) + resize);
         }
 
-        if (m_glyphHeight > 32768) {
-            SRHalt("TextBuilder::Prepare() : very big height!\n\tHeight: " + std::to_string(m_glyphHeight));
+        if (m_imageHeight > 32768) {
+            SRHalt("TextBuilder::Prepare() : very big height!\n\tHeight: " + std::to_string(m_imageHeight));
             return false;
         }
 
-        m_glyphWidth += bitmap.width;
+        m_imageWidth += bitmap.width;
 
         if (m_topRow < bitmap.rows) {
             m_topRow = bitmap.rows;
@@ -137,15 +137,15 @@ namespace SR_GRAPH_NS {
         }
 
         if (code == ' ') {
-            m_glyphWidth += m_space;
+            m_imageWidth += m_space;
         }
         else if (code == '\n') {
-            m_glyphHeight += m_valign + m_maxGlyphHeight;
+            m_imageHeight += m_valign + m_maxGlyphHeight;
             FT_Done_Glyph(glyph);
             return true;
         }
 
-        m_glyphWidth += m_align;
+        m_imageWidth += m_align;
 
         FT_Done_Glyph(glyph);
 
@@ -163,20 +163,17 @@ namespace SR_GRAPH_NS {
 
         m_topRow = 0;
 
-        m_glyphWidth = 0;
-        m_glyphHeight = 0;
-
         m_maxGlyphHeight = 0;
     }
 
     TextBuilder::Pixel** TextBuilder::CreateImage(const TextBuilder::StringType &text) {
-        Pixel** pImage = new Pixel*[m_glyphHeight];
-        for (uint32_t i = 0; i < m_glyphHeight; ++i) {
-            pImage[i] = new Pixel[m_glyphWidth];
-            memset(pImage[i], 0, m_glyphWidth * sizeof(Pixel));
+        Pixel** pImage = new Pixel*[m_imageHeight];
+        for (uint32_t i = 0; i < m_imageHeight; ++i) {
+            pImage[i] = new Pixel[m_imageWidth];
+            memset(pImage[i], 0, m_imageWidth * sizeof(Pixel));
         }
 
-        int32_t posY = 0, topY = 0, maxWidth = 0;
+        int32_t posY = 0, topY = 0, maxWidth = 0, height = 0, width = 0;
 
         for (uint32_t charIndex = 0; charIndex < static_cast<uint32_t>(text.size()); ++charIndex) {
             auto&& glyph = m_font->GetGlyph(text[charIndex], m_renderMode);
@@ -193,90 +190,58 @@ namespace SR_GRAPH_NS {
             topY = m_topRow - bitmap.rows;
 
             if (text[charIndex] == '\n') {
-                m_imageHeight += m_maxGlyphHeight;
-                m_imageWidth = 0;
+                height += static_cast<int32_t>(m_maxGlyphHeight);
+                width = 0;
                 FT_Done_Glyph(glyph);
                 continue;
             }
 
+            uint8_t* src = bitmap.buffer;
+
             for (uint32_t y = 0, j = 0; y < bitmap.rows; ++y) {
                 for (uint32_t x = 0; x < bitmap.width; ++x, ++j) {
-                    if ((m_imageHeight + posY + y + topY) > m_glyphHeight) {
+                    if ((height + posY + y + topY) > m_imageHeight) {
                         if (posY < 0) posY = abs(posY);
                     }
 
-                    if (m_imageHeight + posY + y + topY >= m_glyphHeight) {
+                    if (height + posY + y + topY >= m_imageHeight) {
                         /// TODO: японский язык вызывает краш
                         continue;
                     }
 
-                    auto&& pRow = pImage[m_imageHeight + posY + y + topY];
+                    auto&& pRow = pImage[height + posY + y + topY];
 
                     if (bitmap.pixel_mode == FT_PIXEL_MODE_BGRA) {
-                        uint8_t* src = bitmap.buffer;
-
-                        //pRow[m_imageWidth + x].a = 255;
-
-                        pRow[m_imageWidth + x].a = *(src + (((j + 1) * 4) - 0));
-                        pRow[m_imageWidth + x].r = *(src + (((j + 1) * 4) - 1));
-                        pRow[m_imageWidth + x].g = *(src + (((j + 1) * 4) - 2));
-                        pRow[m_imageWidth + x].b = *(src + (((j + 1) * 4) - 3));
-
-                        //if (pRow[m_imageWidth + x].r + pRow[m_imageWidth + x].g + pRow[m_imageWidth + x].b == 0) {
-                        //    pRow[m_imageWidth + x].a = 0;
-                        //}
+                        pRow[width + x].b = *src++;
+                        pRow[width + x].g = *src++;
+                        pRow[width + x].r = *src++;
+                        pRow[width + x].a = *src++;
                     }
                     else {
-                        const uint8_t character = bitmap.buffer[j];
-                        pRow[m_imageWidth + x].r = 0;
-                        pRow[m_imageWidth + x].g = 0;
-                        pRow[m_imageWidth + x].b = 0;
-                        pRow[m_imageWidth + x].a = character;
+                        pRow[width + x].r = 255 - *src;
+                        pRow[width + x].g = 255 - *src;
+                        pRow[width + x].b = 255 - *src;
+                        pRow[width + x].a = *src;
+                        src++;
                     }
                 }
             }
 
-            /*for (int i = 0; i < bitmap.rows; i++) {
-                for (int j = 0; j < bitmap.width; j++) {
-                    auto&& pRow = pImage[m_imageHeight + posY + i + topY];
+            width += bitmap.width;
+            width += m_align;
 
-                    switch (bitmap.pixel_mode) {
-                        case FT_PIXEL_MODE_MONO: {
-                            break;
-                        }
-                        case FT_PIXEL_MODE_GRAY: {
-                            break;
-                        }
-                        case FT_PIXEL_MODE_BGRA: {
-                            int ofs_color = i * bitmap.pitch + (j << 2);
-                            pRow[m_imageWidth + j].a = 255;//bitmap.buffer[ofs_color + 0];
-                            pRow[m_imageWidth + j].r = bitmap.buffer[ofs_color + 3];
-                            pRow[m_imageWidth + j].g = bitmap.buffer[ofs_color + 2];
-                            pRow[m_imageWidth + j].b = bitmap.buffer[ofs_color + 1];
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-                }
-            }*/
-
-            m_imageWidth += bitmap.width;
-            m_imageWidth += m_align;
-
-            if (maxWidth < m_imageWidth) {
-                maxWidth = m_imageWidth;
+            if (maxWidth < width) {
+                maxWidth = width;
             }
 
             if (text[charIndex] == ' ') {
-                m_imageWidth += m_space;
+                width += m_space;
             }
 
             FT_Done_Glyph(glyph);
         }
 
-        m_imageWidth = maxWidth;
-        m_imageHeight = m_glyphHeight;
+        width = maxWidth;
 
         return pImage;
     }

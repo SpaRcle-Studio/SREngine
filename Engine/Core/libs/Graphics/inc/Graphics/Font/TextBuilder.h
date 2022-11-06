@@ -49,11 +49,8 @@ namespace SR_GRAPH_NS {
 
         uint32_t m_fontSize = 32;
         uint32_t m_align = 1;
-        uint32_t m_valign = 4;
-        uint32_t m_space = 4;
-
-        uint32_t m_glyphWidth = 0;
-        uint32_t m_glyphHeight = 0;
+        uint32_t m_valign = -2;
+        uint32_t m_space = 24;
 
         uint32_t m_maxGlyphHeight = 0;
 

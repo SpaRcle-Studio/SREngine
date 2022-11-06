@@ -14,7 +14,9 @@ namespace SR_GTYPES_NS {
         Component::InitComponent<Text>();
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
         SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
+        //SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));
         m_text = U"Heприветlloあにま😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ \n😋 😌 👦🏻 👧🏻 👨🏻 👩🏻 👴🏻 👵🏻 👶🏻 👱🏻 👮🏻 👲🏻 👳🏻 👷🏻 👸🏻 💂🏻 🎅🏻 👼🏻 💆🏻 💇🏻\n🤣 🤠 🤡 🤥 🤤 🤢";
+        //m_text = U"Hello!";
     }
 
     Text::~Text() {
