@@ -48,13 +48,13 @@ namespace SR_GRAPH_NS {
         Auto
     );
 
-    inline static bool IsSRGB(ColorFormat f) {
-        return f >= ColorFormat::RGBA8_SRGB || f <= ColorFormat::RGBA8_SRGB;
-    }
+    //inline static bool IsSRGB(ColorFormat f) {
+    //    return f == ColorFormat::RGBA8_SRGB;
+    //}
 
-    inline static bool IsUNORM(ColorFormat f) {
-        return f >= ColorFormat::RGBA8_UNORM || f <= ColorFormat::RGBA16_UNORM;
-    }
+    //inline static bool IsUNORM(ColorFormat f) {
+    //    return f >= ColorFormat::RGBA8_UNORM || f <= ColorFormat::RGBA16_UNORM;
+    //}
 
     SR_ENUM_NS_CLASS(TextureFilter,
         Unknown = 0, NEAREST = 1, LINEAR = 2, NEAREST_MIPMAP_NEAREST = 3,

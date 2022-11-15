@@ -50,7 +50,7 @@ static CGU_INT QSortFCmp(const void *Elem1, const void *Elem2) {
     return ret;
 }
 
-static int QSortIntCmp(const void *Elem1, const void *Elem2) {
+[[maybe_unused]] static int QSortIntCmp(const void *Elem1, const void *Elem2) {
     return (*(CGU_INT32 *)Elem1 - *(CGU_INT32 *)Elem2);
 }
 
@@ -60,13 +60,13 @@ static CGU_FLOAT  dot(CMP_IN CGU_Vec3f Color,CMP_IN CGU_Vec3f Color2) {
     return ColorDot;
 }
 
-static CGU_FLOAT  dot(CMP_IN CGU_Vec2f Color,CMP_IN CGU_Vec2f Color2) {
+[[maybe_unused]] static CGU_FLOAT  dot(CMP_IN CGU_Vec2f Color,CMP_IN CGU_Vec2f Color2) {
     CGU_FLOAT  ColorDot;
     ColorDot = Color.x * Color2.x + Color.y * Color2.y;
     return ColorDot;
 }
 
-static CGU_Vec2f abs(CMP_IN CGU_Vec2f Color) {
+[[maybe_unused]] static CGU_Vec2f abs(CMP_IN CGU_Vec2f Color) {
     CGU_Vec2f  ColorAbs;
     ColorAbs.x = std::abs(Color.x);
     ColorAbs.y = std::abs(Color.y);
@@ -89,7 +89,7 @@ static CGU_Vec3f round(CMP_IN CGU_Vec3f Color) {
     return ColorRound;
 }
 
-static CGU_Vec2f round(CMP_IN CGU_Vec2f Color) {
+[[maybe_unused]] static CGU_Vec2f round(CMP_IN CGU_Vec2f Color) {
     CGU_Vec2f ColorRound;
     ColorRound.x = std::round(Color.x);
     ColorRound.y = std::round(Color.y);
@@ -112,7 +112,7 @@ static CGU_Vec3f floor(CMP_IN CGU_Vec3f Color) {
     return Colorfloor;
 }
 
-static CGU_Vec3f saturate(CGU_Vec3f value) {
+[[maybe_unused]] static CGU_Vec3f saturate(CGU_Vec3f value) {
     if (value.x > 1.0f) value.x = 1.0f;
     else if (value.x < 0.0f) value.x = 0.0f;
 

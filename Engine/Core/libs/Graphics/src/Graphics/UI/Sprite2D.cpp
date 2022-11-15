@@ -39,7 +39,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&type = static_cast<Types::MeshType>(marshal.Read<int32_t>());
+        SR_MAYBE_UNUSED const auto &&type = static_cast<Types::MeshType>(marshal.Read<int32_t>());
 
         const auto &&material = marshal.Read<std::string>();
 

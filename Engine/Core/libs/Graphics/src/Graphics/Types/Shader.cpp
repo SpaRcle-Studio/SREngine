@@ -277,8 +277,6 @@ namespace SR_GRAPH_NS::Types {
     bool Shader::Load() {
         SR_LOCK_GUARD
 
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
 
         if (path.IsAbs()) {
@@ -398,5 +396,9 @@ namespace SR_GRAPH_NS::Types {
 
     bool Shader::IsBlendEnabled() const {
         return m_shaderCreateInfo.blendEnabled;
+    }
+
+    SRSL::ShaderType Shader::GetType() const noexcept {
+        return m_type;
     }
 }

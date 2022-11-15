@@ -1250,10 +1250,14 @@ CGU_FLOAT quant_single_point_d(CGU_FLOAT data[MAX_ENTRIES][MAX_DIMENSION_BIG],
             CGU_INT p3 = epo_1[0][j];      // < SP_ERRIDX_MAX
             CGU_INT p4 = epo_1[1][j];      // < SP_ERRIDX_MAX
             CGU_INT p5 = idx_1;            // < 16
-#pragma warning( push )
-#pragma warning(disable:4244)
+#ifdef _MSVC_LANG
+    #pragma warning( push )
+    #pragma warning(disable:4244)
+#endif
             out[i][j] = (int)rampf(p1, p3, p4, p5);
-#pragma warning( pop )
+#ifdef _MSVC_LANG
+    #pragma warning( pop )
+#endif
         }
     }
     return err_1 * numEntries;
@@ -1687,7 +1691,7 @@ CGU_FLOAT CalcShapeError(BC6H_Encode_local *BC6H_data, CGU_FLOAT fEndPoints[MAX_
             subset = 0;
         } else {
             // get the shape subset 0 or  1
-            subset = BC6_PARTITIONS[BC6H_data->d_shape_index][i];
+            subset = BC6_PARTITIONS[static_cast<int>(BC6H_data->d_shape_index)][i];
         }
 
         // initialize bestError to the difference for first data
@@ -2150,7 +2154,7 @@ void SaveDataBlock(BC6H_Encode_local *bc6h_format, CMP_GLOBAL CGU_UINT8 cmpout[C
         header.setvalue(startbit, nbits, bc6h_format->indices16[0]);
         for (CGU_INT i = 1; i < 16; i++) {
             startbit += nbits; // offset start bit for next index using prior nbits used
-            nbits = g_indexfixups[bc6h_format->d_shape_index] == i ? 2 : 3; // get new number of bit to save index with
+            nbits = g_indexfixups[static_cast<int>(bc6h_format->d_shape_index)] == i ? 2 : 3; // get new number of bit to save index with
             header.setvalue(startbit, nbits, bc6h_format->indices16[i]);
         }
     }
@@ -2177,7 +2181,7 @@ void SwapIndices(CGU_INT32 iEndPoints[MAX_SUBSETS][MAX_END_POINTS][MAX_DIMENSION
 
         if (iIndices[subset][i] & uHighIndexBit) {
 
-#ifdef ASPM_GPU
+#if defined(ASPM_GPU) && !defined(ANDROID)
             // high bit is set, swap the aEndPts and indices for this region
             swap(iEndPoints[subset][0][0], iEndPoints[subset][1][0]);
             swap(iEndPoints[subset][0][1], iEndPoints[subset][1][1]);
@@ -2296,7 +2300,7 @@ void SaveCompressedBlockData(BC6H_Encode_local *BC6H_data,
     CGU_INT asubset;
     for (CGU_INT i = 0; i < MAX_SUBSET_SIZE; i++) {
         if (max_subsets > 1)
-            asubset = BC6_PARTITIONS[BC6H_data->d_shape_index][i]; // Two region shapes
+            asubset = BC6_PARTITIONS[static_cast<int>(BC6H_data->d_shape_index)][i]; // Two region shapes
         else
             asubset = 0; // One region shapes
         BC6H_data->indices16[i] = (CGU_UINT8)iIndices[asubset][pos[asubset]];
@@ -2338,7 +2342,7 @@ void ReIndexShapef(BC6H_Encode_local *BC6H_data, CGU_INT shape_indices[MAX_SUBSE
     for (CGU_INT i = 0; i < MAX_SUBSET_SIZE; i++) {
         // subset 0 or subset 1
         if (region)
-            isSet = BC6_PARTITIONS[BC6H_data->d_shape_index][i];
+            isSet = BC6_PARTITIONS[static_cast<int>(BC6H_data->d_shape_index)][i];
 
         if (isSet) {
             bestError = CMP_HALF_MAX;
@@ -2726,7 +2730,7 @@ CGU_FLOAT  EncodePattern(BC6H_Encode_local *BC6H_data, CGU_FLOAT  error) {
         memcpy((CGU_UINT8 *)best_Indices[modes], (CGU_UINT8 *)BC6H_data->shape_indices, sizeof(BC6H_data->shape_indices));
 
         {
-            QuantizeEndPointToF16Prec(best_EndPoints[modes], F16EndPoints[modes], max_subsets, ModePartition[ModeFitOrder[modes]].nbits, BC6H_data->issigned);
+            QuantizeEndPointToF16Prec(best_EndPoints[modes], F16EndPoints[modes], max_subsets, ModePartition[static_cast<int>(ModeFitOrder[modes])].nbits, BC6H_data->issigned);
         }
 
         // Indices data to save for given mode
@@ -2769,7 +2773,7 @@ CGU_FLOAT  EncodePattern(BC6H_Encode_local *BC6H_data, CGU_FLOAT  error) {
             // Save hold this mode fit data if its better than the last one checked.
             if (opt_toterr[modes] < bestError) {
                 if (!BC6H_data->issigned) {
-                    QuantizeEndPointToF16Prec(uncompressed, F16EndPoints[modes], max_subsets, ModePartition[ModeFitOrder[modes]].nbits, BC6H_data->issigned);
+                    QuantizeEndPointToF16Prec(uncompressed, F16EndPoints[modes], max_subsets, ModePartition[static_cast<int>(ModeFitOrder[modes])].nbits, BC6H_data->issigned);
                     SwapIndices(F16EndPoints[modes], best_Indices[modes], BC6H_data->entryCount, max_subsets, ModeFitOrder[modes], BC6H_data->d_shape_index);
                     transformFit = TransformEndPoints(BC6H_data, F16EndPoints[modes], quantEndPoints[modes], max_subsets, ModeFitOrder[modes]);
                 }
@@ -2844,7 +2848,7 @@ void CompressBlockBC6_Internal(CMP_GLOBAL  unsigned char*outdata,
             memcpy((CGU_UINT8 *)BC6HEncode_local->cur_best_entryCount, (CGU_UINT8 *)BC6HEncode_local->entryCount, sizeof(BC6HEncode_local->entryCount));
             BC6HEncode_local->d_shape_index = bestShape;
         } else {
-            if (bestShape != -1) {
+            if (bestShape != static_cast<CGU_INT8>(-1)) {
                 BC6HEncode_local->d_shape_index = bestShape;
                 memcpy((CGU_UINT8 *)BC6HEncode_local->shape_indices, (CGU_UINT8 *)BC6HEncode_local->cur_best_shape_indices, sizeof(BC6HEncode_local->shape_indices));
                 memcpy((CGU_UINT8 *)BC6HEncode_local->partition, (CGU_UINT8 *)BC6HEncode_local->cur_best_partition, sizeof(BC6HEncode_local->partition));
@@ -3020,7 +3024,7 @@ static AMD_BC6H_Format extract_format(const CGU_UINT8 in[COMPRESSED_BLOCK_SIZE])
                          (header.getvalue(60,1) << 10);        //      bw[10]
         bc6h_format.bx = header.getvalue(55,5);               //5:    bx[4:0]
         bc6h_format.by = header.getvalue(61,4);               //5:    by[3:0]
-        (header.getvalue(40,1) << 4);         //      by[4]
+        //(header.getvalue(40,1) << 4);         //      by[4]
         bc6h_format.bz = header.getvalue(50,1) |              //5:    bz[0]
                          (header.getvalue(69,1) << 1) |        //      bz[1]
                          (header.getvalue(70,1) << 2) |        //      bz[2]
@@ -3412,7 +3416,7 @@ static int lerp(int a, int b, int i, int denom) {
         assert(0);
     }
 
-#pragma warning(disable:4244)
+//#pragma warning(disable:4244)
     // no need to round these as this is an exact division
     return (int)(a*weights[denom-i] +b*weights[i]) / float(1 << shift);
 }

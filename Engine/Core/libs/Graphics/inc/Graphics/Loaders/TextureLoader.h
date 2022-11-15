@@ -14,16 +14,19 @@ namespace SR_HTYPES_NS {
 namespace SR_GRAPH_NS {
     class TextureLoader {
     public:
-        TextureLoader()  = delete;
+        TextureLoader() = delete;
+        TextureLoader(const TextureLoader&) = delete;
+        TextureLoader(TextureLoader&&) = delete;
         ~TextureLoader() = delete;
-    private:
-        Types::Texture* g_default = nullptr;
+
     public:
         static Types::Texture* GetDefaultTexture() noexcept;
+
     public:
         static bool Load(Types::Texture* texture, std::string path);
         static bool LoadFromMemory(Types::Texture* texture, const std::string& data);
         static bool Free(unsigned char* data);
+
     };
 }
 

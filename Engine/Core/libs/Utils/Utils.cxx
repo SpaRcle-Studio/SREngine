@@ -4,6 +4,10 @@
     #include "../Utils/src/Utils/Platform/PlatformWindows.cpp"
 #endif
 
+#ifdef SR_ANDROID
+    #include "../Utils/src/Utils/Platform/PlatformAndroid.cpp"
+#endif
+
 #include "../Utils/src/Utils/ECS/Component.cpp"
 #include "../Utils/src/Utils/ECS/ComponentManager.cpp"
 #include "../Utils/src/Utils/ECS/GameObject.cpp"

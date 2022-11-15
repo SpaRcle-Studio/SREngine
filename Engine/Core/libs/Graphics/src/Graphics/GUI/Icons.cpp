@@ -16,7 +16,7 @@ void Framework::Graphics::GUI::Icon(const ImVec2& size, IconType type, bool fill
 
 void Framework::Graphics::GUI::DrawIcon(ImDrawList* drawList, const ImVec2& a, const ImVec2& b, IconType type, bool filled, ImU32 color, ImU32 innerColor) {
     auto rect           = ImRect(a, b);
-    auto rect_x         = rect.Min.x;
+    //auto rect_x         = rect.Min.x;
     auto rect_y         = rect.Min.y;
     auto rect_w         = rect.Max.x - rect.Min.x;
     auto rect_h         = rect.Max.y - rect.Min.y;
@@ -93,7 +93,7 @@ void Framework::Graphics::GUI::DrawIcon(ImDrawList* drawList, const ImVec2& a, c
 
         rect.Min.x    += rect_offset;
         rect.Max.x    += rect_offset;
-        rect_x        += rect_offset;
+        //rect_x        += rect_offset;
         rect_center_x += rect_offset * 0.5f;
         rect_center.x += rect_offset * 0.5f;
 

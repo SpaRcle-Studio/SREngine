@@ -5,10 +5,6 @@
 #ifndef GAMEENGINE_ENGINE_H
 #define GAMEENGINE_ENGINE_H
 
-#include <Core/GUI/EditorGUI.h>
-#include <Core/EvoScriptAPI.h>
-#include <Core/EngineCommands.h>
-
 #include <Utils/Events/EventManager.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Types/Timer.h>
@@ -18,6 +14,10 @@
 #include <Utils/Input/InputDispatcher.h>
 #include <Utils/Input/InputHandler.h>
 #include <Utils/Types/Function.h>
+
+#include <Core/GUI/EditorGUI.h>
+#include <Core/EvoScriptAPI.h>
+#include <Core/EngineCommands.h>
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
@@ -78,6 +78,8 @@ namespace Framework {
         bool Close();
 
     private:
+        void RegisterResources();
+        void RegisterComponents();
         void Prepare();
         void FixedUpdate();
         void Update(float_t dt);

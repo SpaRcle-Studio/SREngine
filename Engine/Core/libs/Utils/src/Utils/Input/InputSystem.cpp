@@ -21,14 +21,16 @@ namespace SR_UTILS_NS {
         m_mouseDrag = m_mouse - m_mousePrev;
 
         if (!m_arr) {
-            m_arr = new BYTE[256];
+            m_arr = new uint8_t[256];
             memset(m_arr, 0, sizeof(256));
         }
 
+    #ifdef SR_WIN32
         GetKeyState(0);
         if (!GetKeyboardState(m_arr)) {
             return;
         }
+    #endif
 
         for (uint16_t i = 0; i < 256; ++i) {
             if (m_arr[i] >> 7 != 0) {
@@ -88,14 +90,16 @@ namespace SR_UTILS_NS {
 
     int32_t Input::DebugKey() {
         if (!m_arr) {
-            m_arr = new BYTE[256];
+            m_arr = new uint8_t[256];
             memset(m_arr, 0, sizeof(256));
         }
 
+    #ifdef SR_WIN32
         GetKeyState(0);
         if (!GetKeyboardState(m_arr)) {
             return -1;
         }
+    #endif
 
         for (uint16_t i = 0; i < 256; ++i) {
             if (m_arr[i] >> 7 != 0) {

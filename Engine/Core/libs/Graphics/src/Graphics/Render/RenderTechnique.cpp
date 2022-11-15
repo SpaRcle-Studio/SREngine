@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Render() {
-        if (m_dirty && !Build() || !m_camera || !m_camera->IsActive()) {
+        if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
             return false;
         }
 

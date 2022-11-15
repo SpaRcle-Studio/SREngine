@@ -109,7 +109,7 @@ namespace SR_GRAPH_NS::Vertices {
     };
     typedef std::vector<UIVertex> UIVertices;
 
-    static std::string ToString(const std::vector<uint32_t>& indices) {
+    SR_MAYBE_UNUSED static std::string ToString(const std::vector<uint32_t>& indices) {
         std::string str = std::to_string(indices.size()) + " indices: \n";
         for (uint32_t i = 0; i < indices.size() - 1; i++)
             str += std::to_string(indices[i]) + ", ";
@@ -118,7 +118,7 @@ namespace SR_GRAPH_NS::Vertices {
         return str;
     }
 
-    static std::string ToString(const std::vector<StaticMeshVertex>& vertices) {
+    SR_MAYBE_UNUSED static std::string ToString(const std::vector<StaticMeshVertex>& vertices) {
         std::string str = std::to_string(vertices.size()) + " vertices: \n";
         for (uint32_t i = 0; i < vertices.size() - 1; i++)
             str += vertices[i].ToString() + ",\n";
@@ -156,7 +156,7 @@ namespace SR_GRAPH_NS::Vertices {
         UIVertex
     )
 
-    static uint32_t GetVertexSize(VertexType type) {
+    SR_MAYBE_UNUSED static uint32_t GetVertexSize(VertexType type) {
         switch (type) {
             case VertexType::StaticMeshVertex:
                 return sizeof(StaticMeshVertex);
@@ -183,7 +183,7 @@ namespace SR_GRAPH_NS::Vertices {
         std::vector<std::pair<Vertices::Attribute, size_t>> m_attributes;
     };
 
-    static VertexInfo GetVertexInfo(VertexType type) {
+    SR_MAYBE_UNUSED static VertexInfo GetVertexInfo(VertexType type) {
         VertexInfo info = {};
         switch (type) {
             case VertexType::StaticMeshVertex:
@@ -254,10 +254,17 @@ namespace std {
     template<> struct hash<SR_GRAPH_NS::Vertices::StaticMeshVertex> {
         size_t operator()(SR_GRAPH_NS::Vertices::StaticMeshVertex const& vertex) const {
             std::size_t res = 0;
-            hash_combine<glm::vec3>(res, vertex.pos);
-            hash_combine<glm::vec2>(res, vertex.uv);
-            hash_combine<glm::vec3>(res, vertex.norm);
-            hash_combine<glm::vec3>(res, vertex.tang);
+            hash_combine<float>(res, vertex.pos.x);
+            hash_combine<float>(res, vertex.pos.y);
+            hash_combine<float>(res, vertex.pos.z);
+            hash_combine<float>(res, vertex.uv.x);
+            hash_combine<float>(res, vertex.uv.y);
+            hash_combine<float>(res, vertex.norm.x);
+            hash_combine<float>(res, vertex.norm.y);
+            hash_combine<float>(res, vertex.norm.z);
+            hash_combine<float>(res, vertex.tang.x);
+            hash_combine<float>(res, vertex.tang.y);
+            hash_combine<float>(res, vertex.tang.z);
             return res;
         }
     };
@@ -265,8 +272,11 @@ namespace std {
     template<> struct hash<SR_GRAPH_NS::Vertices::UIVertex> {
         size_t operator()(SR_GRAPH_NS::Vertices::UIVertex const& vertex) const {
             std::size_t res = 0;
-            hash_combine<glm::vec3>(res, vertex.pos);
-            hash_combine<glm::vec2>(res, vertex.uv);
+            hash_combine<float>(res, vertex.pos.x);
+            hash_combine<float>(res, vertex.pos.y);
+            hash_combine<float>(res, vertex.pos.z);
+            hash_combine<float>(res, vertex.uv.x);
+            hash_combine<float>(res, vertex.uv.y);
             return res;
         }
     };
@@ -274,7 +284,9 @@ namespace std {
     template<> struct hash<SR_GRAPH_NS::Vertices::SimpleVertex> {
         size_t operator()(SR_GRAPH_NS::Vertices::SimpleVertex const& vertex) const {
             std::size_t res = 0;
-            hash_combine<glm::vec3>(res, vertex.pos);
+            hash_combine<float>(res, vertex.pos.x);
+            hash_combine<float>(res, vertex.pos.y);
+            hash_combine<float>(res, vertex.pos.z);
             return res;
         }
     };

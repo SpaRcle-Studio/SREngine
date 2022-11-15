@@ -122,7 +122,7 @@ namespace SR_HTYPES_NS {
         template<typename T> T View(uint64_t offset) const {
             T value = T();
 
-#ifdef SR_MINGW
+#if defined(SR_MINGW) || defined(SR_ANDROID)
             SRHalt0();
 #else
             memcpy(

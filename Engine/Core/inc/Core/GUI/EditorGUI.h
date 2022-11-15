@@ -5,11 +5,11 @@
 #ifndef GAMEENGINE_EDITORGUI_H
 #define GAMEENGINE_EDITORGUI_H
 
-#include <Scripting/Base/Script.h>
-#include <Scripting/Base/Compiler.h>
-
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/SafePointer.h>
+
+#include <Scripting/Base/Script.h>
+#include <Scripting/Base/Compiler.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 

@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
             return StandardType::Unknown;
     }
 
-    static uint64_t GetTypeSize(const StandardType& type) {
+    SR_MAYBE_UNUSED static uint64_t GetTypeSize(const StandardType& type) {
         switch (type) {
             case StandardType::Bool: return sizeof(bool);
             case StandardType::Int8: return sizeof(int8_t);
@@ -108,7 +108,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    static bool IsNumber(const StandardType& type) {
+    SR_MAYBE_UNUSED static bool IsNumber(const StandardType& type) {
         switch (type) {
             case StandardType::Int8:
             case StandardType::UInt8:
@@ -136,7 +136,9 @@ namespace SR_UTILS_NS {
         template <typename... Args> struct is_stl_container<std::vector            <Args...>>:std::true_type{};
         template <typename... Args> struct is_stl_container<std::deque             <Args...>>:std::true_type{};
         template <typename... Args> struct is_stl_container<std::list              <Args...>>:std::true_type{};
+#ifndef SR_ANDROID
         template <typename... Args> struct is_stl_container<std::forward_list      <Args...>>:std::true_type{};
+#endif
         template <typename... Args> struct is_stl_container<std::set               <Args...>>:std::true_type{};
         template <typename... Args> struct is_stl_container<std::multiset          <Args...>>:std::true_type{};
         template <typename... Args> struct is_stl_container<std::map               <Args...>>:std::true_type{};

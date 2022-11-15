@@ -7,7 +7,7 @@
 
 #include <Graphics/GUI/Widget.h>
 
-#include <imgui_node_editor.h>
+//#include <imgui_node_editor.h>
 
 namespace SR_GRAPH_NS::GUI {
     class Pin;
@@ -34,7 +34,7 @@ namespace SR_CORE_NS::GUI {
         void RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint);
 
     private:
-        ax::NodeEditor::EditorContext* m_editor = nullptr;
+        //ax::NodeEditor::EditorContext* m_editor = nullptr;
         std::unordered_map<uintptr_t, SR_GRAPH_NS::GUI::Node*> m_nodes;
         std::unordered_map<uintptr_t, SR_GRAPH_NS::GUI::Link*> m_links;
         std::unordered_map<std::string, SR_GRAPH_NS::GUI::Node*> m_blueprints;

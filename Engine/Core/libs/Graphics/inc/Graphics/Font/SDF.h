@@ -100,7 +100,7 @@ namespace SR_GRAPH_NS::SDF {
         uint32_t height;
     };
 
-    static SDFImage DFCalculate(const SDFImage& image, int32_t distanceFieldScale, bool transparent);
+    SR_MAYBE_UNUSED static SDFImage DFCalculate(const SDFImage& image, int32_t distanceFieldScale, bool transparent);
 }
 
 #endif //SRENGINE_SDFL_H

@@ -19,7 +19,6 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Types/Marshal.h>
 #include <Utils/TaskManager/TaskManager.h>
-#include <Utils/Types/RawMesh.h>
 #include <Utils/Settings.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Locale/Encoding.h>
@@ -68,7 +67,6 @@
 using namespace Framework;
 
 using namespace Framework::Core;
-using namespace Framework::Core::World;
 
 using namespace Framework::Helper;
 using namespace Framework::Helper::Math;
@@ -119,42 +117,8 @@ int main(int argc, char **argv) {
 #endif
     }
 
-    /// Register all resource types
     {
-        resourcesManager.RegisterType<RawMesh>();
-        resourcesManager.RegisterType<Mesh>();
-        resourcesManager.RegisterType<Texture>();
-        resourcesManager.RegisterType<Material>();
-        resourcesManager.RegisterType<Shader>();
-        resourcesManager.RegisterType<Skybox>();
-        resourcesManager.RegisterType<Behaviour>();
-        resourcesManager.RegisterType<Settings>();
-        resourcesManager.RegisterType<Sound>();
-        resourcesManager.RegisterType<RawSound>();
-        resourcesManager.RegisterType<Framebuffer>();
-        resourcesManager.RegisterType<Font>();
-    }
-
-    // Register all components
-    {
-        ComponentManager::Instance().RegisterComponent<ProceduralMesh>([]() -> ProceduralMesh* { return new ProceduralMesh(); });
-        ComponentManager::Instance().RegisterComponent<Rigidbody>([]() -> Rigidbody* { return new Rigidbody(); });
-        ComponentManager::Instance().RegisterComponent<Mesh3D>([]() -> Mesh3D* { return new Mesh3D(); });
-        ComponentManager::Instance().RegisterComponent<Sprite2D>([]() -> Sprite2D* { return new Sprite2D(); });
-        ComponentManager::Instance().RegisterComponent<Camera>([]() -> Camera* { return new Camera(); });
-        ComponentManager::Instance().RegisterComponent<Bone>([]() -> Bone* { return new Bone(); });
-        ComponentManager::Instance().RegisterComponent<Behaviour>([]() -> Behaviour* { return Behaviour::CreateEmpty(); });
-        ComponentManager::Instance().RegisterComponent<Canvas>([]() -> Canvas* { return new Canvas(); });
-        ComponentManager::Instance().RegisterComponent<Anchor>([]() -> Anchor* { return new Anchor(); });
-        ComponentManager::Instance().RegisterComponent<Text>([]() -> Text* { return new Text(); });
-
-        /// if (SR_UTILS_NS::Features::Instance().Enabled("DebugChunks", false))
-        ///     Chunk::SetAllocator([](SRChunkAllocArgs) -> Chunk * { return new VisualChunk(SRChunkAllocVArgs); });
-
-        /// if (SR_UTILS_NS::Features::Instance().Enabled("DebugRegions", false))
-        ///     Region::SetAllocator([](SRRegionAllocArgs) -> Region* { return new VisualRegion(SRRegionAllocVArgs); });
-
-        SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World::World(); });
+        SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World(); });
     }
 
     //TEST AUDIO LOAD

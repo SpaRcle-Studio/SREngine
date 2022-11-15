@@ -39,8 +39,8 @@ namespace SR_GRAPH_NS::GUI {
             , m_internalFlags(WIDGET_FLAG_NONE)
             , m_windowFlags(ImGuiWindowFlags_::ImGuiWindowFlags_None)
             , m_size(size)
-            , m_widgetFlags(WIDGET_FLAG_NONE)
             , m_manager(nullptr)
+            , m_widgetFlags(WIDGET_FLAG_NONE)
         { }
 
         ~Widget() override = default;

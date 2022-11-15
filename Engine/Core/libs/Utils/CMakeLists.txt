@@ -10,12 +10,16 @@ set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "" FORCE)
 
 set(ICU_PREBUILT_VERSION "69.1")
 
-add_subdirectory(libs/nativefiledialog)
+if (NOT ANDROID_NDK)
+    add_subdirectory(libs/nativefiledialog)
+else()
+    #set(ASSIMP_ANDROID_JNIIOSYSTEM ON CACHE INTERNAL "" FORCE)
+    #set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE INTERNAL "" FORCE)
+    #set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE INTERNAL "" FORCE)
+endif()
+
 add_subdirectory(libs/glm)
 add_subdirectory(libs/assimp)
-#
-#set(ICU_ROOT Z:/Repositories/icu/icu4c/source)
-#find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
 if (SR_UTILS_STATIC_LIBRARY)
     add_library(Utils STATIC ICU.cxx Utils.cxx)
@@ -30,12 +34,11 @@ else()
     add_library(Utils::lib ALIAS Utils)
 endif()
 
-target_link_libraries(Utils assimp nfd)
-#target_link_libraries(Utils icu)
-
-#include_directories(Utils ${ICU_INCLUDE_DIRS})
-#link_directories(Utils ${ICU_LIBRARY_DIRS})
-#target_link_libraries(Utils ${ICU_LIBRARIES})
+if (ANDROID_NDK)
+    target_link_libraries(Utils assimp)
+else()
+	target_link_libraries(Utils nfd assimp)
+endif()
 
 target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/icu)
 target_include_directories(Utils PUBLIC inc)

@@ -11,7 +11,7 @@
 
 #include <assimp/scene.h>
 
-namespace Framework::Core::World {
+namespace SR_CORE_NS {
     SR_UTILS_NS::GameObject::Ptr World::Instance(Framework::Helper::Types::Marshal &marshal)  {
         SR_UTILS_NS::GameObject::Ptr gameObject;
 

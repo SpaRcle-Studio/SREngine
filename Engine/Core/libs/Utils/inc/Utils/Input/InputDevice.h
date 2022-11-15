@@ -6,6 +6,8 @@
 #define SRENGINE_INPUTDEVICE_H
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Input/KeyCodes.h>
+#include <Utils/Math/Vector2.h>
 
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(InputDeviceType, uint8_t,

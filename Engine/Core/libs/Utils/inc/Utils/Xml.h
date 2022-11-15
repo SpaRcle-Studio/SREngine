@@ -420,7 +420,7 @@ namespace SR_UTILS_NS::Xml {
             xml.m_valid = true;
             xml.m_path = "None";
             xml.m_document = new pugi::xml_document();
-            return std::move(xml);
+            return xml;
         }
 
         static Document Load(const std::string &path);
@@ -490,7 +490,7 @@ namespace SR_UTILS_NS::Xml {
         }
     }
 
-    static void AppendColorNode(Xml::Node& node, const Math::FColor& color) {
+    SR_MAYBE_UNUSED static void AppendColorNode(Xml::Node& node, const Math::FColor& color) {
         node.AppendChild("Color")
             .NAppendAttribute("r", color.r * 255.f)
             .NAppendAttribute("g", color.g * 255.f)

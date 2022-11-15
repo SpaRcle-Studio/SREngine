@@ -92,10 +92,11 @@ namespace SR_GRAPH_NS::Memory {
         return pMainCamera;
     }
 
-    std::list<CameraManager::CameraPtr> CameraManager::GetOffScreenCameras(RenderScene *pRScene) {
+    std::vector<CameraManager::CameraPtr> CameraManager::GetOffScreenCameras(RenderScene *pRScene) {
         SR_LOCK_GUARD
 
-        std::list<CameraManager::CameraPtr> list;
+        std::vector<CameraManager::CameraPtr> cameras;
+        cameras.reserve(m_cameras.size());
 
         for (auto&& [pCamera, info] : m_cameras) {
             if (info.destroyed) {
@@ -111,15 +112,15 @@ namespace SR_GRAPH_NS::Memory {
             }
 
             if (pCamera->GetPriority() < 0) {
-                list.emplace_back(pCamera);
+                cameras.emplace_back(pCamera);
             }
         }
 
-        std::stable_sort(list.begin(), list.end(), [](CameraPtr lhs, CameraPtr rhs) {
+        std::stable_sort(cameras.begin(), cameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
             return lhs->GetPriority() < rhs->GetPriority();
         });
 
-        return list;
+        return cameras;
     }
 
     std::list<CameraManager::CameraPtr> CameraManager::GetCameras() const {

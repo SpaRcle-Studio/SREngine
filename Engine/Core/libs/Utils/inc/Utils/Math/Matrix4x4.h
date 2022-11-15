@@ -208,7 +208,7 @@ namespace SR_MATH_NS {
             if (glm::decompose(self, _scale, _rotation, _translation, _skew, _perspective)) {
                 translation = _translation;
                 rotation = _rotation;
-                scale = scale;
+                scale = _scale;
                 skew = _skew;
                 return true;
             }
@@ -254,7 +254,7 @@ namespace SR_MATH_NS {
 
     static bool DecomposeTransform(const glm::mat4& matrix, FVector3& translation, FVector3& rotation, FVector3& scale);
 
-    bool DecomposeTransform(const glm::mat4 &matrix, FVector3 &translation, FVector3 &rotation, FVector3 &scale) {
+    SR_MAYBE_UNUSED bool DecomposeTransform(const glm::mat4 &matrix, FVector3 &translation, FVector3 &rotation, FVector3 &scale) {
         // From glm::decompose in matrix_decompose.inl
 
         using namespace glm;
@@ -281,7 +281,7 @@ namespace SR_MATH_NS {
         translation = vec3(LocalMatrix[3]);
         LocalMatrix[3] = vec4(0, 0, 0, LocalMatrix[3].w);
 
-        vec3 Row[3], Pdum3;
+        vec3 Row[3];
 
         // Now get scale and shear.
         for (length_t i = 0; i < 3; ++i)

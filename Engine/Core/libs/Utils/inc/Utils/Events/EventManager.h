@@ -7,6 +7,7 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Types/Thread.h>
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {

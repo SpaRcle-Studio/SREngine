@@ -30,7 +30,7 @@ bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
                     0,
             };
 
-            ImFont *pFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 12.0f, nullptr, ranges);
+            SR_MAYBE_UNUSED ImFont *pFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 12.0f, nullptr, ranges);
         }
         else {
             SR_ERROR("Environment::PreInitGUI() : file not found! \n\tPath: " + fontPath.ToString());

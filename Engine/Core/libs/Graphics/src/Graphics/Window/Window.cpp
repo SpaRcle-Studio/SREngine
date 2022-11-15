@@ -26,15 +26,16 @@ namespace SR_GRAPH_NS {
             const SR_MATH_NS::IVector2 &size,
             bool vsync, bool fullScreen, bool resizable,
             bool headerEnabled, uint8_t smoothSamples
-        ) : m_env(Environment::Get())
-        , m_size(size)
-        , m_winName(std::move(name))
-        , m_icoPath(std::move(icoPath))
+    )
+        : m_vsync(vsync)
         , m_fullScreen(fullScreen)
-        , m_vsync(vsync)
-        , m_smoothSamples(smoothSamples)
         , m_resizable(resizable)
         , m_headerEnabled(headerEnabled)
+        , m_env(Environment::Get())
+        , m_winName(std::move(name))
+        , m_icoPath(std::move(icoPath))
+        , m_smoothSamples(smoothSamples)
+        , m_size(size)
     { }
 
     Window::~Window() {

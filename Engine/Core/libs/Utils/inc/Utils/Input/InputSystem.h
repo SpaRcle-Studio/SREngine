@@ -53,10 +53,10 @@ namespace SR_UTILS_NS {
         SR_MATH_NS::FVector2 m_mouseScroll;
         SR_MATH_NS::FVector2 m_mouseScrollCurrent;
 
-        uint8_t* m_arr = nullptr;
         std::atomic<bool> m_init = false;
 
         State m_keys[256] = { };
+        uint8_t* m_arr = nullptr;
 
     };
 }

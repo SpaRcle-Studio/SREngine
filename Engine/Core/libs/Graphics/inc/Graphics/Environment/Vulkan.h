@@ -8,6 +8,7 @@
 #include <Utils/Debug.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Events/EventManager.h>
 
 #ifdef SR_WIN32
     #include <vulkan/vulkan.h>
@@ -21,6 +22,7 @@
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
+#include <EvoVulkan/Tools/FileSystem.h>
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
 #include <EvoVulkan/Types/VmaBuffer.h>

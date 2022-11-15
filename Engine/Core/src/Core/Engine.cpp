@@ -9,6 +9,7 @@
 #include <Utils/World/Scene.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/Types/RawMesh.h>
 
 #include <Graphics/Environment/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
@@ -16,13 +17,30 @@
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Types/Shader.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/Font/Font.h>
 #include <Graphics/Types/Skybox.h>
+#include <Graphics/Animations/Bone.h>
+#include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Window/Window.h>
 
+#include <Audio/RawSound.h>
+#include <Audio/Sound.h>
+
+#include <Physics/Rigidbody.h>
 #include <Physics/PhysicsScene.h>
 
 namespace Framework {
     bool Engine::Create(SR_GRAPH_NS::Window* window) {
+        SR_INFO("Engine::Create() : register all resources...");
+
+        RegisterResources();
+
+        SR_INFO("Engine::Create() : register all components...");
+
+        RegisterComponents();
+
         m_window = window;
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
@@ -509,5 +527,58 @@ namespace Framework {
     void Engine::SetPaused(bool isPaused) {
         m_isPaused = isPaused;
         m_needRebuildComponents = true;
+    }
+
+    void Engine::RegisterResources() {
+        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
+        resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
+
+        resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Material>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
+
+        resourcesManager.RegisterType<SR_SCRIPTING_NS::Behaviour>();
+
+        resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
+        resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
+    }
+
+    void Engine::RegisterComponents() {
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::ProceduralMesh>([]() {
+            return new SR_GTYPES_NS::ProceduralMesh();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_PTYPES_NS::Rigidbody>([]() {
+            return new SR_PTYPES_NS::Rigidbody();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Mesh3D>([]() {
+            return new SR_GTYPES_NS::Mesh3D();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Sprite2D>([]() {
+            return new SR_GRAPH_UI_NS::Sprite2D();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Camera>([]() {
+            return new SR_GTYPES_NS::Camera();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_ANIMATIONS_NS::Bone>([]() {
+            return new SR_ANIMATIONS_NS::Bone();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_SCRIPTING_NS::Behaviour>([]() {
+            return SR_SCRIPTING_NS::Behaviour::CreateEmpty();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Canvas>([]() {
+            return new SR_GRAPH_UI_NS::Canvas();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Anchor>([]() {
+            return new SR_GRAPH_UI_NS::Anchor();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Text>([]() {
+            return new SR_GTYPES_NS::Text();
+        });
     }
 }

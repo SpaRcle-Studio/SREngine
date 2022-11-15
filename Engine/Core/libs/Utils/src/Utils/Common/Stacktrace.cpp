@@ -13,6 +13,12 @@
 #include <algorithm>
 #include <iterator>
 
+#ifdef SR_ANDROID
+    std::string SR_UTILS_NS::GetStacktrace() {
+        return "Android not support stack trace!";
+    }
+#endif
+
 #ifdef SR_WIN32
 
 #pragma comment(lib, "psapi.lib")
@@ -173,7 +179,7 @@ void GetStacktraceImpl() {
 #endif
 }
 
-std::string Framework::Helper::GetStacktrace() {
+std::string SR_UTILS_NS::GetStacktrace() {
     GetStacktraceImpl();
     return builder.str();
 }

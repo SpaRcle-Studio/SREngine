@@ -11,6 +11,7 @@
 #include FT_FREETYPE_H
 #include <freetype/ftglyph.h>
 #include <freetype/tttables.h>
+#include <freetype/src/truetype/ttobjs.h>
 
 namespace SR_GRAPH_NS {
     static std::string FreeTypeErrToString(FT_Error err) {
@@ -21,6 +22,20 @@ namespace SR_GRAPH_NS {
 
 #include FT_ERRORS_H
         return "(Unknown error)";
+    }
+
+    SR_MAYBE_UNUSED static void FTUnusedFunctions() {
+        tt_glyphzone_done(nullptr);
+        tt_glyphzone_new(nullptr, 0, 0, nullptr);
+        tt_size_init(nullptr);
+        tt_size_done(nullptr);
+        tt_size_run_fpgm(nullptr, false);
+        tt_size_run_prep(nullptr, false);
+        tt_size_ready_bytecode(nullptr, false);
+        tt_size_reset(nullptr, false);
+        tt_driver_init(nullptr);
+        tt_driver_done(nullptr);
+        tt_slot_init(nullptr);
     }
 }
 

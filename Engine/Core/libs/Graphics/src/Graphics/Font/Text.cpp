@@ -38,7 +38,7 @@ namespace SR_GTYPES_NS {
         {
             m_dirtyMaterial = false;
 
-            EvoVulkan::Tools::VkDebug::Instance().PushLogLevel(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+            EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
             m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
@@ -56,7 +56,7 @@ namespace SR_GTYPES_NS {
 
             UseSamplers();
 
-            EvoVulkan::Tools::VkDebug::Instance().PopLogLevel();
+            EVK_POP_LOG_LEVEL();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
@@ -113,7 +113,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        EvoVulkan::Tools::VkDebug::Instance().PushLogLevel(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
@@ -131,7 +131,7 @@ namespace SR_GTYPES_NS {
                 true, false
         );
 
-        EvoVulkan::Tools::VkDebug::Instance().PopLogLevel();
+        EVK_POP_LOG_LEVEL();
 
         if (m_id == SR_ID_INVALID) {
             SR_ERROR("Text::BuildAtlas() : failed to build the font atlas!");
@@ -142,7 +142,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Component* Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
+        SR_MAYBE_UNUSED const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
 
         const auto &&material = marshal.Read<std::string>();
         auto &&pMesh = new Text();

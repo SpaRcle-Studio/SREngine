@@ -192,6 +192,8 @@ namespace SR_MATH_NS {
                 case Axis::AXIS_XZ: v[0] = v[1] = 0; break;
                 case Axis::AXIS_YZ: v[1] = v[2] = 0; break;
                 case Axis::AXIS_XYZ: v[0] = v[1] = v[2] = 0; break;
+                default:
+                    break;
             }
 
             return v;

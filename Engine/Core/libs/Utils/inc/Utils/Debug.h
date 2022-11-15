@@ -64,22 +64,22 @@ namespace SR_UTILS_NS {
         void OnSingletonDestroy() override;
 
     public:
-        void Log(const std::string& msg)         { Print(msg, Type::Log);                            }
-        void VulkanLog(const std::string& msg)   { Print(msg, Type::VulkanLog);                      }
-        void Info(const std::string& msg)        { Print(msg, Type::Info);                           }
-        void Graph(const std::string& msg)       { Print(msg, Type::Graph);                          }
-        void Vulkan(const std::string& msg)      { Print(msg, Type::Vulkan);                         }
-        void Shader(const std::string& msg)      { Print(msg, Type::Shader);                         }
-        void Script(const std::string& msg)      { Print(msg, Type::Script);                         }
-        void System(const std::string& msg)      { Print(msg, Type::System);                         }
-        void Warn(const std::string& msg)        { Print(msg, Type::Warn);        m_countWarnings++; }
-        void Error(const std::string& msg)       { Print(msg, Type::Error);       m_countErrors++;   }
-        void VulkanError(const std::string& msg) { Print(msg, Type::VulkanError); m_countErrors++;   }
-        bool Assert(const std::string& msg)      { Print(msg, Type::Assert);      m_countErrors++;  return false; }
+        void Log(const std::string& msg) { Print(msg, Type::Log); }
+        void VulkanLog(const std::string& msg) { Print(msg, Type::VulkanLog); }
+        void Info(const std::string& msg) { Print(msg, Type::Info); }
+        void Graph(const std::string& msg) { Print(msg, Type::Graph); }
+        void Vulkan(const std::string& msg) { Print(msg, Type::Vulkan); }
+        void Shader(const std::string& msg) { Print(msg, Type::Shader); }
+        void Script(const std::string& msg) { Print(msg, Type::Script); }
+        void System(const std::string& msg) { Print(msg, Type::System); }
+        void Warn(const std::string& msg) { Print(msg, Type::Warn); m_countWarnings++; }
+        void Error(const std::string& msg) { Print(msg, Type::Error); m_countErrors++; }
+        void VulkanError(const std::string& msg) { Print(msg, Type::VulkanError); m_countErrors++; }
+        bool Assert(const std::string& msg) { Print(msg, Type::Assert); m_countErrors++; return false; }
         bool AssertOnceCheck(const std::string& msg);
 
-        void ScriptLog(const std::string& msg)   { Print(msg, Type::ScriptLog);  }
-        void ScriptError(const std::string& msg) { Print(msg, Type::ScriptError);  }
+        void ScriptLog(const std::string& msg) { Print(msg, Type::ScriptLog); }
+        void ScriptError(const std::string& msg) { Print(msg, Type::ScriptError); }
 
     private:
         bool               m_showUseMemory             = false;

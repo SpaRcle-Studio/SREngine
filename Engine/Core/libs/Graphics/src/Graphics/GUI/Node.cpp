@@ -28,7 +28,7 @@ namespace SR_GRAPH_NS {
         , m_color(color)
         , m_type(type)
     {
-        m_id = NodeManager::Instance().AllocUniqueId(this);
+        //m_id = NodeManager::Instance().AllocUniqueId(this);
     }
 
     Node *Node::AddInput(Pin *pin) {
@@ -53,16 +53,16 @@ namespace SR_GRAPH_NS {
     }
 
     void Node::Draw() const {
-        ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodePadding, ImVec4(8, 4, 8, 8));
+        //ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodePadding, ImVec4(8, 4, 8, 8));
 
-        ax::NodeEditor::BeginNode(m_id);
-        ImGui::PushID(m_id.AsPointer());
+        //ax::NodeEditor::BeginNode(m_id);
+       // ImGui::PushID(m_id.AsPointer());
 
         if (m_type == NodeType::Blueprint) {
             ImGui::Text("%s", m_name.c_str());
         }
 
-        auto HeaderMaxY = ImGui::GetItemRectMax().y;
+       // auto HeaderMaxY = ImGui::GetItemRectMax().y;
 
         ImGui::BeginGroup();
         {
@@ -99,11 +99,11 @@ namespace SR_GRAPH_NS {
         }
         ImGui::EndGroup();
 
-        ax::NodeEditor::EndNode();
+       // ax::NodeEditor::EndNode();
 
         if (ImGui::IsItemVisible() && m_type == NodeType::Blueprint)
         {
-            const auto halfBorderWidth = ax::NodeEditor::GetStyle().NodeBorderWidth * 0.5f;
+         /*   const auto halfBorderWidth = ax::NodeEditor::GetStyle().NodeBorderWidth * 0.5f;
 
             auto HeaderMin = ImGui::GetItemRectMin();
             auto HeaderMax = ImVec2(ImGui::GetItemRectMax().x, HeaderMaxY + halfBorderWidth);
@@ -131,20 +131,21 @@ namespace SR_GRAPH_NS {
                         headerSeparatorMin,
                         headerSeparatorMax,
                         ImColor(255, 255, 255, 96 * alpha / (3 * 255)), 2.0f);
-            }
+            }*/
         }
 
-        ax::NodeEditor::PopStyleVar();
+      //  ax::NodeEditor::PopStyleVar();
         ImGui::PopID();
     }
 
     uintptr_t Node::GetId() const {
-        return m_id.Get();
+       // return m_id.Get();
+        return 0;
     }
 
     Node::~Node() {
-        if (Valid())
-            NodeManager::Instance().FreeUniqueId(m_id.Get());
+        //if (Valid())
+         //   NodeManager::Instance().FreeUniqueId(m_id.Get());
 
         for (auto& pin : m_inputs)
             delete pin;
@@ -173,7 +174,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool Node::Valid() const {
-        return m_id != ax::NodeEditor::NodeId::Invalid;
+       // return m_id != ax::NodeEditor::NodeId::Invalid;
+        return false;
     }
 
     Node* Node::Copy() const {

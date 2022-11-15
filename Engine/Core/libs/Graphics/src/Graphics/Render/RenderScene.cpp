@@ -17,10 +17,10 @@ namespace SR_GRAPH_NS {
     RenderScene::RenderScene(const ScenePtr& scene, RenderContext* pContext)
         : SR_HTYPES_NS::SafePtr<RenderScene>(this)
         , m_scene(scene)
+        , m_debugRender(new DebugRenderer(this))
         , m_context(pContext)
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
-        , m_debugRender(new DebugRenderer(this))
     { }
 
     RenderScene::~RenderScene() {
@@ -258,8 +258,11 @@ namespace SR_GRAPH_NS {
     void RenderScene::SortCameras() {
         m_dirty = true;
         m_dirtyCameras = false;
-        m_offScreenCameras.clear();
         m_mainCamera = nullptr;
+
+        const uint64_t offScreenCamerasCount = m_offScreenCameras.size();
+        m_offScreenCameras.clear();
+        m_offScreenCameras.reserve(offScreenCamerasCount);
 
         /// Удаляем уничтоженные камеры
         for (auto&& pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {

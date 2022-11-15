@@ -2,16 +2,16 @@
 // Created by Monika on 17.11.2021.
 //
 
-#include <Core/World/VisualChunk.h>
-#include <Core/Engine.h>
-
 #include <Utils/World/Region.h>
 
 #include <Graphics/Render/Render.h>
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Render/RenderScene.h>
 
-namespace Framework::Core::World {
+#include <Core/World/VisualChunk.h>
+#include <Core/Engine.h>
+
+namespace SR_CORE_NS {
     VisualChunk::VisualChunk(SRChunkAllocArgs)
         : Helper::World::Chunk(SRChunkAllocVArgs)
     { }
@@ -115,24 +115,24 @@ namespace Framework::Core::World {
         Chunk::OnEnter();
     }
 
-    bool Framework::Core::World::VisualChunk::Unload() {
+    bool VisualChunk::Unload() {
         SetFacesVisible(false);
         SetLoadVisible(false);
         return Chunk::Unload();
     }
 
-    bool Framework::Core::World::VisualChunk::Load(SR_HTYPES_NS::Marshal &&marshal) {
+    bool VisualChunk::Load(SR_HTYPES_NS::Marshal &&marshal) {
         SetLoadVisible(true);
         return Chunk::Load(std::move(marshal));
     }
 
-    bool Framework::Core::World::VisualChunk::ApplyOffset() {
+    bool VisualChunk::ApplyOffset() {
         UpdateLoadPos();
         UpdateFacesPos();
         return Chunk::ApplyOffset();
     }
 
-    void Framework::Core::World::VisualChunk::Reload() {
+    void VisualChunk::Reload() {
         Chunk::Reload();
     }
 }

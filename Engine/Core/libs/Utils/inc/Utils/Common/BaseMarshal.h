@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
             return LoadValue<Stream, T>(stream, readCount);
         }
 
-        static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(char));
@@ -101,7 +101,7 @@ namespace SR_UTILS_NS {
             bytesCount += sizeof(int16_t) + size * sizeof(char);
         }
 
-        static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));

@@ -67,7 +67,7 @@ namespace SR_GRAPH_NS::GUI {
     private:
         std::unordered_set<Link*> m_links;
         Node* m_node = nullptr;
-        ax::NodeEditor::PinId m_id;
+        //ax::NodeEditor::PinId m_id;
         std::string m_name;
         PinType m_type;
         PinKind m_kind;

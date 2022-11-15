@@ -21,7 +21,6 @@ namespace SR_GRAPH_NS {
     }
 
     bool DebugPass::Render() {
-        auto&& pipeline = GetPipeline();
         auto&& debug = GetRenderScene()->GetDebugCluster();
 
         if (debug.Empty()) {
@@ -29,7 +28,7 @@ namespace SR_GRAPH_NS {
         }
 
         for (auto&& [shader, subCluster] : debug) {
-            if (!shader || shader && !shader->Use()) {
+            if (!shader || (shader && !shader->Use())) {
                 continue;
             }
 
@@ -52,7 +51,6 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& pipeline = GetPipeline();
         auto&& debug = GetRenderScene()->GetDebugCluster();
         auto&& time = clock();
 

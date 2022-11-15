@@ -18,7 +18,7 @@ namespace SR_GRAPH_NS {
     class RenderScene;
 }
 
-namespace SR_CORE_NS::World {
+namespace SR_CORE_NS {
     class SR_DLL_EXPORT World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using CameraPtr = SR_GTYPES_NS::Camera*;

@@ -17,6 +17,8 @@
 #include <unicode/utypes.h>
 #include <unicode/ucnv.h>
 #include <unicode/unistr.h>
+#include <unicode/utf.h>
+#include <unicode/utf16.h>
 
 namespace SR_UTILS_NS::Locale {
     enum class EncMethodType {
@@ -223,13 +225,13 @@ namespace SR_UTILS_NS::Locale::ICU {
                 else if (U16_IS_LEAD(cl)) {
                     if (begin == end) {
                         SRAssert2(m_mode != EncMethodType::Stop, "Something went wrong!");
-                        return;
+                        return icu::UnicodeString();
                     }
                     else {
                         UChar ct = *begin++;
                         if (!U16_IS_TRAIL(ct)) {
                             SRAssert2(m_mode != EncMethodType::Stop, "Something went wrong!");
-                            return;
+                            return icu::UnicodeString();
                         }
                         else {
                             UChar32 c = U16_GET_SUPPLEMENTARY(cl, ct);
@@ -239,7 +241,7 @@ namespace SR_UTILS_NS::Locale::ICU {
                 }
                 else {
                     SRAssert2(m_mode != EncMethodType::Stop, "Something went wrong!");
-                    return;
+                    return icu::UnicodeString();
                 }
             }
             return tmp;
@@ -291,7 +293,7 @@ namespace SR_UTILS_NS::Locale::ICU {
                 }
                 else {
                     SRAssert2(m_mode != EncMethodType::Stop, "Something went wrong!");
-                    return;
+                    return icu::UnicodeString();
                 }
             }
             return tmp;

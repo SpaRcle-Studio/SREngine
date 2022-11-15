@@ -18,7 +18,7 @@ namespace SR_GRAPH_NS::Animations {
     private:
         ~Bone() override = default;
     private:
-        Types::Mesh* m_mesh = nullptr;
+        //Types::Mesh* m_mesh = nullptr;
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;

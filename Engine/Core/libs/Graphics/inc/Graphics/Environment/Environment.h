@@ -63,9 +63,9 @@ namespace SR_GRAPH_NS {
         int32_t           m_currentUBOid           = -1;
         int32_t           m_currentFBOid           = -1;
         int32_t           m_currentDescriptorSetId = -1;
-        int               m_currentShaderID        = -1;
-        __int16           m_preferredDevice        = -1;
-        unsigned __int8   m_currentBuildIteration  = 0;
+        int32_t           m_currentShaderID        = -1;
+        int32_t           m_preferredDevice        = -1;
+        int32_t           m_currentBuildIteration  = 0;
 
         std::atomic<bool> m_needReBuild            = false;
 
@@ -79,13 +79,13 @@ namespace SR_GRAPH_NS {
     public:
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
-        void SetPreferredDevice(unsigned __int16 id) { m_preferredDevice = (__int16)id; }
+        void SetPreferredDevice(int32_t id) { m_preferredDevice = id; }
         virtual void SetBuildState(const bool& isBuild) { }
 
-        [[nodiscard]] ImguiFont GetIconFont() const { return m_iconFont; }
-        [[nodiscard]] GUIContext GetGUIContext() const { return m_guiContext; }
-        [[nodiscard]] bool IsGUIEnabled() const { return m_guiEnabled; }
-        [[nodiscard]] bool HasWindow() const { return m_basicWindow; }
+        SR_NODISCARD ImguiFont GetIconFont() const { return m_iconFont; }
+        SR_NODISCARD GUIContext GetGUIContext() const { return m_guiContext; }
+        SR_NODISCARD bool IsGUIEnabled() const { return m_guiEnabled; }
+        SR_NODISCARD bool HasWindow() const { return m_basicWindow; }
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
@@ -101,16 +101,16 @@ namespace SR_GRAPH_NS {
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }
 
         SR_NODISCARD virtual uint8_t GetSmoothSamplesCount() const { return 0; }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentUBO()             const { return m_currentUBOid;           }
-        SR_DEPRECATED [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;           }
-        [[nodiscard]] SR_FORCE_INLINE uint32_t GetCurrentDescriptorSet()   const { return m_currentDescriptorSetId; }
-        [[nodiscard]] virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                        }
-        [[nodiscard]] SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;            }
-        [[nodiscard]] SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;              }
-        [[nodiscard]] SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;            }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;                    }
-        [[nodiscard]] SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;                    }
-        [[nodiscard]] virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown;        }
+        SR_NODISCARD SR_FORCE_INLINE uint32_t GetCurrentUBO()             const { return m_currentUBOid;           }
+        SR_DEPRECATED SR_NODISCARD SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;           }
+        SR_NODISCARD SR_FORCE_INLINE uint32_t GetCurrentDescriptorSet()   const { return m_currentDescriptorSetId; }
+        SR_NODISCARD virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                        }
+        SR_NODISCARD SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;            }
+        SR_NODISCARD SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;              }
+        SR_NODISCARD SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;            }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;                    }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;                    }
+        SR_NODISCARD virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown;        }
 
         SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -147,14 +147,14 @@ namespace SR_GRAPH_NS {
         virtual void EndDrawGUI()   { }
 
         //[[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
-        [[nodiscard]] virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
-        [[nodiscard]] virtual void* TryGetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
-        [[nodiscard]] virtual void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
+        SR_NODISCARD virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
+        SR_NODISCARD virtual void* TryGetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
+        SR_NODISCARD virtual void* GetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }
 
         /// Get descriptor set from dynamic texture descriptor set
        // [[nodiscard]] virtual void* GetDescriptorSetFromDTDSet(uint32_t id) const { return nullptr; }
 
-        [[nodiscard]] virtual std::string GetPipeLineName() const = 0;
+        SR_NODISCARD virtual std::string GetPipeLineName() const = 0;
 
         virtual uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) { return -1; }
 

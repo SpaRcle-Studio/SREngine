@@ -77,7 +77,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
-        SR_NODISCARD SR_INLINE GameObject* GetParent() const;
+        SR_NODISCARD GameObject* GetParent() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;

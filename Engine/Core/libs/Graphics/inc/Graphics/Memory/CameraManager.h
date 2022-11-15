@@ -41,7 +41,7 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD CameraPtr GetFirstCamera() const;
         SR_NODISCARD std::list<CameraPtr> GetCameras() const;
         SR_NODISCARD CameraPtr GetMainCamera(RenderScene* pRScene);
-        SR_NODISCARD std::list<CameraPtr> GetOffScreenCameras(RenderScene* pRScene);
+        SR_NODISCARD std::vector<CameraPtr> GetOffScreenCameras(RenderScene* pRScene);
 
         SR_NODISCARD bool IsRegistered(const CameraPtr& camera) const;
         SR_NODISCARD bool IsDestroyed(const CameraPtr& camera) const;

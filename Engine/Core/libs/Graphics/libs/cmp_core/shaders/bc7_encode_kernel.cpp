@@ -65,7 +65,7 @@ INLINE CGU_INT a_compare( const void *arg1, const void *arg2 ) {
 #ifndef ASPM_GPU
 CMP_GLOBAL BC7_EncodeRamps BC7EncodeRamps
 #ifndef ASPM
-    = {0}
+    = { }
 #endif
       ;
 
@@ -4566,7 +4566,7 @@ void  CompressBlockBC7_Internal(
     CGU_UINT8                      image_src[SOURCE_BLOCK_SIZE][4],
     CMP_GLOBAL    CGV_CMPOUT       cmp_out[COMPRESSED_BLOCK_SIZE],
     uniform CMP_GLOBAL BC7_Encode  u_BC7Encode[]) {
-    BC7_EncodeState _state = { 0 };
+    BC7_EncodeState _state = { };
     varying BC7_EncodeState* uniform state = &_state;
 
     copy_BC7_Encode_settings(state, u_BC7Encode);
@@ -4692,7 +4692,7 @@ int CMP_CDECL CompressBlockBC7( const unsigned char *srcBlock,
 
     BC7_EncodeState EncodeState
 #ifndef ASPM
-        = { 0 }
+        = { }
 #endif
           ;
     EncodeState.best_err        = CMP_FLOAT_MAX;

@@ -5,7 +5,7 @@
 #ifndef SRENGINE_EVENT_H
 #define SRENGINE_EVENT_H
 
-#include <Utils/macros.h>
+#include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT IEvent {

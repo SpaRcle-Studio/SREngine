@@ -10,7 +10,7 @@ namespace SR_HTYPES_NS {
 #ifdef SR_MINGW
         m_stream.swap(marshal.m_stream);
 #else
-        m_stream = std::exchange(marshal.m_stream, {});
+        m_stream = SR_UTILS_NS::Exchange(marshal.m_stream, std::stringstream());
 #endif
         m_size = std::exchange(marshal.m_size, {});
         m_position = std::exchange(marshal.m_position, {});
@@ -20,7 +20,7 @@ namespace SR_HTYPES_NS {
 #ifdef SR_MINGW
         m_stream.swap(marshal.m_stream);
 #else
-        m_stream = std::exchange(marshal.m_stream, {});
+        m_stream = SR_UTILS_NS::Exchange(marshal.m_stream, std::stringstream());
 #endif
         m_size = std::exchange(marshal.m_size, {});
         m_position = std::exchange(marshal.m_position, {});

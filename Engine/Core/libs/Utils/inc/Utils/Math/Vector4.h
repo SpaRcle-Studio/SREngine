@@ -6,6 +6,7 @@
 #define SRENGINE_VECTOR4_H
 
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Math/Vector3.h>
 
 namespace SR_MATH_NS {
     template<typename T> struct SR_DLL_EXPORT Vector4 {

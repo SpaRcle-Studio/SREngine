@@ -17,9 +17,12 @@ namespace SR_GTYPES_NS {
     Framebuffer::~Framebuffer() {
         SRAssert(m_frameBuffer == SR_ID_INVALID);
 
+    #ifdef SR_DEBUG
         for (auto&& [texture, format] : m_colors) {
             SRAssert(texture == SR_ID_INVALID);
+            SR_UNUSED_VARIABLE(format);
         }
+    #endif
 
         SRAssert(m_depth.texture == SR_ID_INVALID);
     }

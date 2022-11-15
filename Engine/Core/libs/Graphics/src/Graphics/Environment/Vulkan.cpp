@@ -4,6 +4,7 @@
 
 #include <Utils/GUI.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Graphics/Environment/Vulkan/AbstractCasts.h>
 #include <Graphics/Environment/Vulkan.h>
@@ -34,14 +35,32 @@ namespace Framework::Graphics {
             unsigned int smooth_samples,
             const std::string &appName,
             const std::string &engineName,
-            const std::string &glslc) {
-        EvoVulkan::Tools::VkDebug::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkDebug::Instance().AssertCallback = [](const std::string &msg) {
+            const std::string &glslc)
+    {
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [](const std::string &msg) {
             SRAssert2(false, SR_VRAM + msg);
             return false;
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().CreateFolder = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::CreateFolder(path);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().Delete = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::Delete(path);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().IsExists = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::IsExists(path);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().Copy = [](const std::string& from, const std::string& to) -> bool {
+            return SR_PLATFORM_NS::Copy(from, to);
         };
 
         m_imgui = new VulkanTypes::VkImGUI();
@@ -98,20 +117,22 @@ namespace Framework::Graphics {
                             bool headerEnabled) {
         SR_GRAPH_LOG("Vulkan::MakeWindow() : creating window...");
 
+    #ifdef SR_WIN32
         m_basicWindow = new Win32Window(this->GetPipeLine());
+    #endif
 
         m_basicWindow->SetCallbackResize([this](BasicWindow *win, int w, int h) {
             m_kernel->SetSize(w, h);
         });
 
-        m_basicWindow->SetCallbackScroll([this](BasicWindow *win, double xoffset, double yoffset) {
+        m_basicWindow->SetCallbackScroll([](BasicWindow *win, double xoffset, double yoffset) {
             for (const auto &a : g_scrollEvents)
                 a(xoffset, yoffset);
 
             g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
         });
 
-        m_basicWindow->SetCallbackFocus([this](BasicWindow *win, bool focus) {
+        m_basicWindow->SetCallbackFocus([](BasicWindow *win, bool focus) {
             g_callback(WinEvents::Focus, win, &focus, nullptr);
         });
 
@@ -175,6 +196,10 @@ namespace Framework::Graphics {
                 SR_ERROR("Vulkan::Init() : window is not support this architecture!");
                 return VK_NULL_HANDLE;
             }
+#else
+            SR_UNUSED_VARIABLE(window);
+            SRHalt("Unsupported platform!");
+            return VK_NULL_HANDLE;
 #endif
         };
 
@@ -595,7 +620,11 @@ namespace Framework::Graphics {
 
     bool Vulkan::BeginDrawGUI() {
         ImGui_ImplVulkan_NewFrame();
+
+    #ifdef SR_WIN32
         ImGui_ImplWin32_NewFrame();
+    #endif
+
         ImGui::NewFrame();
 
         ImGuizmo::BeginFrame();

@@ -100,7 +100,7 @@ namespace SR_UTILS_NS {
         std::string m_path;
         std::string m_name;
         std::string m_ext;
-        size_t      m_hash;
+        uint64_t    m_hash;
         Type        m_type;
 
     };

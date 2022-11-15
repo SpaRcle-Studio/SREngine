@@ -4,6 +4,7 @@
 
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Debug.h>
+#include <Utils/Platform/Platform.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/StringUtils.h>
@@ -120,7 +121,7 @@ namespace SR_UTILS_NS {
         if (pos != std::string::npos) {
             auto dir = path.substr(0, pos);
 
-            Platform::CreateFolder(dir);
+            SR_PLATFORM_NS::CreateFolder(dir);
             CreatePath(path, pos + 1);
         }
 

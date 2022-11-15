@@ -63,7 +63,7 @@ namespace SR_GRAPH_NS {
 
             if (auto&& shader = pMesh->GetShader(); shader != pShader) {
                 pShader = shader;
-                if (!pShader || pShader && !pShader->Use()) {
+                if (!pShader || (pShader && !pShader->Use())) {
                     continue;
                 }
             }
@@ -93,7 +93,6 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& pipeline = GetPipeline();
         auto&& transparent = GetRenderScene()->GetTransparent();
         auto&& time = clock();
 

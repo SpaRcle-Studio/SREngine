@@ -92,8 +92,9 @@ namespace SR_GRAPH_NS {
 
     private:
         CameraPtr m_mainCamera = nullptr;
-        std::list<CameraPtr> m_offScreenCameras;
-        std::list<CameraInfo> m_cameras;
+
+        std::vector<CameraPtr> m_offScreenCameras;
+        std::vector<CameraInfo> m_cameras;
 
         WidgetManagers m_widgetManagers;
 

@@ -33,11 +33,11 @@ void CompressBlockBC4_Internal(const CMP_Vec4uc srcBlockTemp[16], CMP_GLOBAL CGU
 
     CGU_Vec2ui cmpBlock;
     CGU_FLOAT  alphaBlock[16];
-    CGU_FLOAT  scaleByteChannel = 255.0f;
-    CGU_UINT8  shiftByteChannel = 0;
+    [[maybe_unused]] CGU_FLOAT  scaleByteChannel = 255.0f;
+    [[maybe_unused]] CGU_UINT8  shiftByteChannel = 0;
 
-    CGU_UINT8 blkindex = 0;
-    CGU_UINT8 srcindex = 0;
+    [[maybe_unused]] CGU_UINT8 blkindex = 0;
+    [[maybe_unused]] CGU_UINT8 srcindex = 0;
     if (BC15options->m_bIsSNORM)
     {
         if (BC15options->m_sintsrc)

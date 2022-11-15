@@ -24,7 +24,11 @@ else()
     add_library(Audio::lib ALIAS Audio)
 endif()
 
-target_link_libraries(Audio modplug)
+if (ANDROID_NDK)
+    target_link_libraries(Audio modplug OpenAL)
+else()
+    target_link_libraries(Audio modplug)
+endif()
 
 if(MSVC)
     target_compile_options(Audio PRIVATE "/wd5033;")

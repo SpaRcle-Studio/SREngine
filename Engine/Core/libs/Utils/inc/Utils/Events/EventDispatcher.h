@@ -5,7 +5,7 @@
 #ifndef SRENGINE_EVENTDISPATCHER_H
 #define SRENGINE_EVENTDISPATCHER_H
 
-#include <Utils/Debug.h>
+#include <Utils/Events/Event.h>
 
 namespace SR_UTILS_NS {
     class IEvent;

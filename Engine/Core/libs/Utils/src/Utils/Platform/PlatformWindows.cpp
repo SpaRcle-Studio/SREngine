@@ -29,6 +29,18 @@
 #endif
 
 namespace SR_UTILS_NS::Platform {
+    void WriteConsoleLog(const std::string& msg) {
+        std::cout << msg;
+    }
+
+    void WriteConsoleError(const std::string& msg) {
+        std::cerr << msg;
+    }
+
+    void WriteConsoleWarn(const std::string& msg) {
+        std::cout << msg;
+    }
+
     std::string GetLastErrorAsString()
     {
         //Get the error message ID, if any.
@@ -384,27 +396,6 @@ namespace SR_UTILS_NS::Platform {
         return Path(s).GetBaseNameAndExt();
     }
 
-    bool FileExists(const Path &path) {
-        FILE* f = nullptr;
-        if (fopen_s(&f, path.CStr(), "r") == 0) {
-            fclose(f);
-            return true;
-        }
-
-        return false;
-    }
-
-    bool FolderExists(const Path &path) {
-        DWORD ftyp = GetFileAttributesA(path.CStr());
-        if (ftyp == INVALID_FILE_ATTRIBUTES)
-            return false;  //something is wrong with your path!
-
-        if (ftyp & FILE_ATTRIBUTE_DIRECTORY)
-            return true;   // this is a directory!
-
-        return false;
-    }
-
     bool FileIsHidden(const Path &path) {
         const DWORD attributes = GetFileAttributes(path.CStr());
         if (attributes & FILE_ATTRIBUTE_HIDDEN)
@@ -425,5 +416,17 @@ namespace SR_UTILS_NS::Platform {
 
     void OpenInNativeFileExplorer(const Path &path){
         ShellExecuteA(NULL, "open", path.ToString().c_str(), NULL, NULL, SW_SHOWDEFAULT);
+    }
+
+    bool IsExists(const Path &path) {
+        const DWORD ftyp = GetFileAttributesA(path.CStr());
+
+        if (ftyp == INVALID_FILE_ATTRIBUTES) {
+            return false;  /// something is wrong with your path!
+        }
+
+        /// it is file or directory
+
+        return true;
     }
 }

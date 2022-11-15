@@ -9,6 +9,7 @@
 #include <Graphics/Environment/Vulkan/VulkanImGUI.h>
 
 int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
+#ifdef SR_WIN32
     VkWin32SurfaceCreateInfoKHR sci;
     PFN_vkCreateWin32SurfaceKHR vkCreateWin32SurfaceKHR;
 
@@ -24,6 +25,10 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
 
     VkResult err = vkCreateWin32SurfaceKHR(reinterpret_cast<VkInstance>(vk_inst), &sci, static_cast<const VkAllocationCallbacks *>(vk_allocators), (VkSurfaceKHR*)out_vk_surface);
     return (int)err;
+#else
+    SRHalt("Unsupported platform!");
+    return -1;
+#endif
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKernel* kernel) {
@@ -215,9 +220,9 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t 
     //!------------------
 
     if (m_device->MultisampleEnabled())
-        this->m_clearValues = { { .color = { 0.0, 0.0, 0.0, 1.0 } }, { .color = { 0.0, 0.0, 0.0, 1.0 } } };
+        this->m_clearValues = { { .color = { {0.0, 0.0, 0.0, 1.0} } }, { .color = { {0.0, 0.0, 0.0, 1.0} } } };
     else
-        this->m_clearValues = { { .color = { 0.0, 0.0, 0.0, 1.0 } } };
+        this->m_clearValues = { { .color = { {0.0, 0.0, 0.0, 1.0} } } };
 
     m_renderPassBI = {
             .sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,

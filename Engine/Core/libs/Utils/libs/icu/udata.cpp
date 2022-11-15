@@ -647,9 +647,9 @@ U_NAMESPACE_END
 
 
 U_EXPORT const DataHeader U_ICUDATA_ENTRY_POINT = {
-        32,          /* headerSize */
+        {32,          /* headerSize */
         0xda,        /* magic1,  (see struct MappedData in udata.c)  */
-        0x27,        /* magic2     */
+        0x27},        /* magic2     */
         {            /*UDataInfo   */
                 sizeof(UDataInfo),      /* size        */
                 0,                      /* reserved    */

@@ -12,6 +12,7 @@
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Memory/ShaderUBOBlock.h>
+#include <Graphics/Loaders/SRSL.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -53,7 +54,7 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
         SR_NODISCARD bool IsBlendEnabled() const;
-        SR_NODISCARD SRSL::ShaderType GetType() const noexcept { return m_type; }
+        SR_NODISCARD SRSL::ShaderType GetType() const noexcept;
 
     public:
         template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {

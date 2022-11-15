@@ -60,7 +60,7 @@ namespace SR_GRAPH_NS {
         m_uboManager.SetIdentifier(this);
 
         if (m_directional) {
-            bool hasDrawData = DrawCluster(&pRenderScene->GetOpaque());
+            SR_MAYBE_UNUSED bool hasDrawData = DrawCluster(&pRenderScene->GetOpaque());
             hasDrawData |= DrawCluster(&pRenderScene->GetTransparent());
         }
         else if (m_framebuffer->Bind() && m_framebuffer->BeginRender(SR_MATH_NS::FColor(0.0), 1.f)) {
@@ -69,7 +69,7 @@ namespace SR_GRAPH_NS {
             m_framebuffer->EndRender();
         }
 
-        auto&& colorId = m_framebuffer->GetColorTexture(0);
+        //auto&& colorId = m_framebuffer->GetColorTexture(0);
 
         m_uboManager.SetIdentifier(pIdentifier);
 
@@ -173,15 +173,13 @@ namespace SR_GRAPH_NS {
     }
 
     bool ColorBufferPass::DrawCluster(MeshCluster* pCluster) {
-        auto &&pipeline = GetPipeline();
-
         if (!pCluster || pCluster->Empty()) {
             return false;
         }
 
         for (auto&&[_, subCluster] : *pCluster) {
             auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || pShader && !pShader->Use()) {
+            if (!pShader || (pShader && !pShader->Use())) {
                 continue;
             }
 
@@ -200,8 +198,6 @@ namespace SR_GRAPH_NS {
     }
 
     void ColorBufferPass::UpdateCluster(MeshCluster *pCluster) {
-        auto&& pipeline = GetPipeline();
-
         for (auto const& [_, subCluster] : *pCluster) {
             auto&& pShader = GetShader(subCluster.GetShaderType());
             if (!pShader || !pShader->Ready()) {

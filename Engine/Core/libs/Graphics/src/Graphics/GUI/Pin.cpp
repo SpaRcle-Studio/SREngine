@@ -26,18 +26,18 @@ namespace SR_GRAPH_NS {
         , m_type(type)
         , m_kind(kind)
     {
-        m_id = NodeManager::Instance().AllocUniqueId(this);
+        //m_id = NodeManager::Instance().AllocUniqueId(this);
     }
 
     Pin::~Pin() {
         if (Valid()) {
-            NodeManager::Instance().FreeUniqueId(m_id.Get());
+          //  NodeManager::Instance().FreeUniqueId(m_id.Get());
             SetNode(nullptr);
         }
     }
 
     void Pin::Draw(float_t maxPinWidth) const {
-        ax::NodeEditor::BeginPin(m_id, m_kind == PinKind::Input ? ax::NodeEditor::PinKind::Input : ax::NodeEditor::PinKind::Output);
+        //ax::NodeEditor::BeginPin(m_id, m_kind == PinKind::Input ? ax::NodeEditor::PinKind::Input : ax::NodeEditor::PinKind::Output);
 
         ImGui::SetWindowFontScale(1.5);
 
@@ -46,11 +46,11 @@ namespace SR_GRAPH_NS {
         const ImColor color = GetIconColor(m_type);
         const auto alpha = 255;
 
-        ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
+        //ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
 
         switch (m_kind) {
             case PinKind::Output:
-                ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
+                //ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
 
                 ImGui::SetCursorPosX(
                         ImGui::GetCursorPosX()
@@ -69,14 +69,14 @@ namespace SR_GRAPH_NS {
 
                 ImGui::TextUnformatted(m_name.c_str());
 
-                ax::NodeEditor::PinPivotAlignment(ImVec2(1.f / ImGui::GetItemRectSize().x, 0.5f));
+                //ax::NodeEditor::PinPivotAlignment(ImVec2(1.f / ImGui::GetItemRectSize().x, 0.5f));
                 break;
             case PinKind::None:
             default:
             SRAssert(false);
         }
 
-        ax::NodeEditor::EndPin();
+        //ax::NodeEditor::EndPin();
     }
 
     ImColor Pin::GetIconColor(const PinType &type) {
@@ -116,7 +116,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool Pin::Valid() const {
-        return m_id != ax::NodeEditor::PinId::Invalid;
+        //return m_id != ax::NodeEditor::PinId::Invalid;
+        return false;
     }
 
     Pin* Pin::Copy() const {

@@ -77,7 +77,7 @@ namespace SR_GRAPH_NS {
         if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
             auto&& [subCluster, _] = m_subClusters.insert(std::make_pair(
                     pShader,
-                    std::move(ShadedMeshSubCluster(pShader))
+                    ShadedMeshSubCluster(pShader)
             ));
 
             if (!subCluster->second.Add(pMesh)) {

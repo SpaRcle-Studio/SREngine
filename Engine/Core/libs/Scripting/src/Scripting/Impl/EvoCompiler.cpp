@@ -2,23 +2,19 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#include <Scripting/Impl/EvoCompiler.h>
-
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Platform/Platform.h>
 #include <Utils/Xml.h>
 #include <Utils/Common/Features.h>
+
+#include <Scripting/Impl/EvoCompiler.h>
 
 namespace SR_SCRIPTING_NS {
     EvoCompiler::EvoCompiler(std::string cachePath)
         : EvoScript::Compiler(std::move(cachePath))
-    {
-        EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { SR_ERROR(msg); };
-        EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { SR_LOG(msg);   };
-        EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { SR_WARN(msg);  };
-        EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { SR_INFO(msg);  };
-    }
+    { }
 
     EvoCompiler::~EvoCompiler() {
         if (m_generator) {

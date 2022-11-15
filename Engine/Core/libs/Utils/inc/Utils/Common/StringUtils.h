@@ -10,7 +10,7 @@
 #include <codecvt>
 
 namespace SR_UTILS_NS {
-    static std::wstring s2ws(const std::string& str)
+    SR_MAYBE_UNUSED static std::wstring s2ws(const std::string& str)
     {
         if (str.empty())
             return L"";
@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
         return converterX.from_bytes(str);
     }
 
-    static std::string ws2s(const std::wstring& wstr)
+    SR_MAYBE_UNUSED static std::string ws2s(const std::wstring& wstr)
     {
         using convert_typeX = std::codecvt_utf8<wchar_t>;
         std::wstring_convert<convert_typeX, wchar_t> converterX;

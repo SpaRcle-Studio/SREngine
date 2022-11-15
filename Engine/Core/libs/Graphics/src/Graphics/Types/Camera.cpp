@@ -23,7 +23,7 @@ namespace SR_GTYPES_NS {
     }
 
     Camera::~Camera() {
-        std::visit([this](RenderTechniquePtr&& arg) {
+        std::visit([](RenderTechniquePtr&& arg) {
             if (std::holds_alternative<RenderTechnique *>(arg)) {
                 std::get<RenderTechnique*>(arg)->RemoveUsePoint();
             }
@@ -271,7 +271,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::SetRenderTechnique(const SR_UTILS_NS::Path& path) {
-        std::visit([this](RenderTechniquePtr&& arg) {
+        std::visit([](RenderTechniquePtr&& arg) {
             if (std::holds_alternative<RenderTechnique *>(arg)) {
                 std::get<RenderTechnique*>(arg)->RemoveUsePoint();
             }

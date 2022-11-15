@@ -19,6 +19,8 @@
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
+        Initialize();
+
         auto&& compiler = SR_SCRIPTING_NS::GlobalEvoCompiler::Instance();
         auto&& generator = compiler.GetGenerator();
         auto&& casts = compiler.GetCasting();
@@ -567,6 +569,56 @@ namespace Framework {
         ESRegisterCustomStaticMethod(EvoScript::Public, generator, Mathf, SNoise4D, double_t, ESArg4(double_t x, double_t y, double_t z, double_t t), {
             return SR_MATH_NS::SNoise(x, y, z, t);
         });
+    }
+
+    void API::Initialize() {
+        EvoScript::Tools::ESDebug::Error = [](const std::string& msg) { SR_ERROR(msg); };
+        EvoScript::Tools::ESDebug::Log   = [](const std::string& msg) { SR_LOG(msg);   };
+        EvoScript::Tools::ESDebug::Warn  = [](const std::string& msg) { SR_WARN(msg);  };
+        EvoScript::Tools::ESDebug::Info  = [](const std::string& msg) { SR_INFO(msg);  };
+
+        EvoScript::Tools::ESFileSystem::Delete = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::Delete(path);
+        };
+
+        EvoScript::Tools::ESFileSystem::IsExists = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::IsExists(path);
+        };
+
+        EvoScript::Tools::ESFileSystem::CreateFolder = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::CreateFolder(path);
+        };
+
+        EvoScript::Tools::ESFileSystem::GetAllInDir = [](const std::string& path) -> std::vector<std::string> {
+            std::vector<std::string> elements;
+            auto&& cached = SR_PLATFORM_NS::GetInDirectory(path, SR_UTILS_NS::Path::Type::Undefined);
+            for (auto&& element : cached) {
+                elements.emplace_back(element);
+            }
+            return elements;
+        };
+
+        EvoScript::Tools::ESFileSystem::GetAllFoldersInDir = [](const std::string& path) -> std::vector<std::string> {
+            std::vector<std::string> elements;
+            auto&& cached = SR_PLATFORM_NS::GetInDirectory(path, SR_UTILS_NS::Path::Type::Folder);
+            for (auto&& element : cached) {
+                elements.emplace_back(element);
+            }
+            return elements;
+        };
+
+        EvoScript::Tools::ESFileSystem::GetAllFilesInDir = [](const std::string& path) -> std::vector<std::string> {
+            std::vector<std::string> elements;
+            auto&& cached = SR_PLATFORM_NS::GetInDirectory(path, SR_UTILS_NS::Path::Type::File);
+            for (auto&& element : cached) {
+                elements.emplace_back(element);
+            }
+            return elements;
+        };
+
+        EvoScript::Tools::ESFileSystem::Copy = [](const std::string& from, const std::string& to) -> bool {
+            return SR_PLATFORM_NS::Copy(from, to);
+        };
     }
 }
 
