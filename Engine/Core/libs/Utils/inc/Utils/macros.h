@@ -188,7 +188,7 @@
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 
-//#define SR_STATIC_ASSERT2(expr, msg)
+#define SR_STATIC_ASSERT2(expr, msg) static_assert(expr, msg);
 
 #if defined(SR_MINGW) || (SR_MSC_VERSION > 1929) || defined(SR_ANDROID)
     #define SR_STATIC_ASSERT(msg) static_assert(msg);

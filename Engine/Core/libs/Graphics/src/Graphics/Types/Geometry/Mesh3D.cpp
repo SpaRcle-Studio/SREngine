@@ -232,7 +232,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::UseMaterial() {
-        Mesh::UseMaterial();
+        Super::UseMaterial();
         UseModelMatrix();
     }
 

@@ -214,6 +214,10 @@
         SetDirty(true);
     }
 
+    bool GameObject::IsDirty() const noexcept {
+        return m_dirty;
+    }
+
     bool GameObject::IsActive() const noexcept {
         if (m_parent.RecursiveLockIfValid()) {
             const bool parentActive = m_parent->m_isActive;
@@ -277,8 +281,6 @@
         if (!m_dirty || !IsEnabled()) {
             return;
         }
-
-        m_dirty = false;
 
         for (auto&& pComponent : m_components) {
             if (!pComponent->IsAwake()) {
@@ -575,7 +577,8 @@
 
         if (destination.Valid()){
             return destination->AddChild(*this);
-        } else {
+        }
+        else {
             return m_scene->MoveToRoot(*this);
         }
     }

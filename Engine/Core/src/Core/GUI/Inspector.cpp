@@ -77,6 +77,9 @@ namespace Framework::Core::GUI {
         SR_LOCK_GUARD
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
+            if (*selected.begin() != m_gameObject) {
+                ResetWeakStorage();
+            }
             m_gameObject.Replace(*selected.begin());
             SRAssert(m_gameObject);
         }
@@ -167,8 +170,22 @@ namespace Framework::Core::GUI {
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             pTransform->SetSkew(skew);
 
-        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
-        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pTransform->GetStretch()));
+        //if (ImGui::CollapsingHeader("Anchor")) {
+        //    auto&& offsets = pTransform->GetAnchor();
+        //    if (Graphics::GUI::DrawFRect(
+        //            { "Left", "Bottom", "Right", "Top" },
+        //            offsets, 0.0, 1.0, 0.05, 0,
+        //            &GetWeakStorage())
+        //    ) {
+        //        pTransform->SetAnchor(offsets);
+        //    }
+        //}
+
+        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::StretchFlags_>();
+
+        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::StretchFlags_>(
+                static_cast<SR_UTILS_NS::StretchFlags_>(pTransform->GetStretch()))
+        );
 
         if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
@@ -179,7 +196,7 @@ namespace Framework::Core::GUI {
 
             return true;
         }, reinterpret_cast<void*>(&stretchTypes), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
+            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::StretchFlags_>(stretch));
         }
     }
 
@@ -204,7 +221,7 @@ namespace Framework::Core::GUI {
             transform->SetSkew(skew);
     }
 
-    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr ptr, const std::function<void()>& operation) const
+    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
     {
         SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
 

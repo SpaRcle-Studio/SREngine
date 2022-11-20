@@ -473,9 +473,12 @@ namespace Framework {
         /// WARNING: если произойдет коллизия хешей при уничтожении коренного объекта, то будет краш!
         if (rootHash == m_rootHash) {
             for (auto&& gameObject : root) {
-                if ((m_needRebuildComponents |= gameObject->IsDirty())) {
-                    break;
+                if (!gameObject->IsDirty()) {
+                    continue;
                 }
+
+                m_needRebuildComponents = true;
+                break;
             }
         }
         else {
@@ -516,6 +519,9 @@ namespace Framework {
     }
 
     void Engine::SetActive(bool isActive) {
+        if (m_isActive == isActive) {
+            return;
+        }
         m_isActive = isActive;
         m_needRebuildComponents = true;
     }
@@ -525,6 +531,9 @@ namespace Framework {
     }
 
     void Engine::SetPaused(bool isPaused) {
+        if (m_isPaused == isPaused) {
+            return;
+        }
         m_isPaused = isPaused;
         m_needRebuildComponents = true;
     }

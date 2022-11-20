@@ -152,11 +152,16 @@ namespace SR_GRAPH_NS::UI {
         return pMarshal;
     }
 
-    SR_MATH_NS::FVector2 Sprite2D::GetSizes() const {
-        return SR_MATH_NS::FVector2(2.f, 2.f);
-    }
-
     std::vector<uint32_t> Sprite2D::GetIndices() const {
         return SPRITE_INDICES;
+    }
+
+    void Sprite2D::UseMaterial() {
+        Super::UseMaterial();
+        UseModelMatrix();
+    }
+
+    void Sprite2D::UseModelMatrix() {
+        m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

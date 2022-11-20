@@ -32,9 +32,11 @@ namespace SR_GRAPH_NS::UI {
     public:
         IResource* Copy(IResource* destination) const override;
 
+        void UseMaterial() override;
+        void UseModelMatrix() override;
+
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_NODISCARD SR_MATH_NS::FVector2 GetSizes() const;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
 
     private:

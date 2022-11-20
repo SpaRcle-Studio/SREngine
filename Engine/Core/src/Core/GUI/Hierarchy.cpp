@@ -33,7 +33,7 @@ namespace SR_CORE_NS::GUI {
             m_scene.Unlock();
         } else m_tree.clear();
 
-        m_sceneRunnerWidget->DrawSubWindow();
+        m_sceneRunnerWidget->DrawAsSubWindow();
 
         for (auto&& gameObject : m_tree) {
             if (!gameObject.RecursiveLockIfValid()) {
@@ -173,9 +173,11 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (open && hasChild) {
-            root->ForEachChild([&](const Helper::GameObject::Ptr &child) {
-                DrawChild(child);
-            });
+            if (root) {
+                root->ForEachChild([&](const Helper::GameObject::Ptr &child) {
+                    DrawChild(child);
+                });
+            }
             ImGui::TreePop();
         }
     }

@@ -5,7 +5,7 @@
 #include <Graphics/GUI/Widget.h>
 
 namespace Framework::Graphics::GUI {
-    void Widget::DrawSubWindow() {
+    void Widget::DrawAsSubWindow() {
         m_widgetFlags = WIDGET_FLAG_NONE;
 
         if (m_center) {
@@ -135,5 +135,13 @@ namespace Framework::Graphics::GUI {
 
     Widget::ContextPtr Widget::GetContext() const {
         return m_manager->GetContext();
+    }
+
+    void Widget::ResetWeakStorage() {
+        m_weakStorage.Clear();
+    }
+
+    void Widget::ResetStrongStorage() {
+        m_strongStorage.Clear();
     }
 }

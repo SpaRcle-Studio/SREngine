@@ -176,9 +176,38 @@ namespace SR_MATH_NS {
             return Vector3(-x, -y, -z);
         }
 
-        SR_NODISCARD Vector3 SR_FASTCALL InverseAxis(uint8_t axis) const {
+        SR_NODISCARD Vector3 SR_FASTCALL InverseAxis(Axis axis) const {
             Vector3 v = *this;
-            v[axis] = -v[axis];
+
+            switch (axis) {
+                case Axis::AXIS_X: v[0] = -v[0]; break;
+                case Axis::AXIS_Y: v[1] = -v[1]; break;
+                case Axis::AXIS_Z: v[2] = -v[2]; break;
+                case Axis::AXIS_XY: {
+                    v[0] = -v[0];
+                    v[1] = -v[1];
+                    break;
+                }
+                case Axis::AXIS_YZ: {
+                    v[1] = -v[1];
+                    v[2] = -v[2];
+                    break;
+                }
+                case Axis::AXIS_XZ: {
+                    v[0] = -v[0];
+                    v[2] = -v[2];
+                    break;
+                }
+                case Axis::AXIS_XYZ: {
+                    v[0] = -v[0];
+                    v[1] = -v[1];
+                    v[2] = -v[2];
+                    break;
+                }
+                default:
+                    break;
+            }
+
             return v;
         }
         SR_NODISCARD Vector3 ZeroAxis(Axis axis) const {

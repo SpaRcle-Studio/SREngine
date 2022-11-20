@@ -84,6 +84,18 @@
 #include <glm/vec4.hpp>
 
 namespace SR_MATH_NS {
+    enum Axis {
+        AXIS_NONE = 1 << 0,
+        AXIS_X    = 1 << 1,
+        AXIS_Y    = 1 << 2,
+        AXIS_Z    = 1 << 3,
+
+        AXIS_XY   = AXIS_X | AXIS_Y,
+        AXIS_XZ   = AXIS_X | AXIS_Z,
+        AXIS_YZ   = AXIS_Y | AXIS_Z,
+        AXIS_XYZ  = AXIS_X | AXIS_Y | AXIS_Z,
+    };
+
     typedef double Unit; //! can broke render
 
     const double_t DoubleMAX = DBL_MAX;

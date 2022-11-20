@@ -81,6 +81,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetScale() const { return SR_MATH_NS::FVector3(); }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetSkew() const { return SR_MATH_NS::FVector3(); }
 
+        SR_NODISCARD virtual SR_MATH_NS::FVector2 GetTranslation2D() const;
         SR_NODISCARD virtual SR_MATH_NS::FVector2 GetScale2D() const;
 
         SR_NODISCARD Transform* GetParentTransform() const;
@@ -91,7 +92,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
     protected:
-        virtual bool IsDirty() const noexcept;
+        SR_NODISCARD virtual bool IsDirty() const noexcept;
         virtual void UpdateMatrix() { m_dirtyMatrix = false; }
         virtual void UpdateTree();
 

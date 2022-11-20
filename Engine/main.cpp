@@ -157,6 +157,7 @@ int main(int argc, char **argv) {
             "SpaRcle Engine",
             "Engine/icon.ico",
             IVector2(1366, 768), //IVector2(1600, 900),
+            //IVector2(800, 800), //IVector2(1600, 900),
             false, // vsync
             false, // fullscreen
             true,  // resizable

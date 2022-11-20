@@ -35,6 +35,7 @@
 #include "../Utils/src/Utils/Math/Vector3.cpp"
 #include "../Utils/src/Utils/Math/Vector6.cpp"
 #include "../Utils/src/Utils/Math/Noise.cpp"
+#include "../Utils/src/Utils/Math/Rect.cpp"
 
 #include "../Utils/src/Utils/TaskManager/TaskManager.cpp"
 

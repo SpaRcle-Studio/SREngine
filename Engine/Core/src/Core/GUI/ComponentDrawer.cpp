@@ -409,5 +409,15 @@ namespace SR_CORE_NS::GUI {
         }
 
         ImGui::Text("Atlas size: %ix%i", pComponent->GetAtlasWidth(), pComponent->GetAtlasHeight());
+
+        auto&& pMaterial = pComponent->GetMaterial();
+
+        SR_GTYPES_NS::Material* copy = pMaterial;
+        DrawComponent(copy, context, index);
+
+        /// компилятор считает, что это недостижимый код (он ошибается)
+        if (copy != pMaterial) {
+            pComponent->SetMaterial(copy);
+        }
     }
 }

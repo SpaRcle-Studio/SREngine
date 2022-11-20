@@ -268,6 +268,10 @@ namespace SR_WORLD_NS {
             return;
         }
 
+        if (!Features::Instance().Enabled("DebugRegions", false)) {
+            enabled = BoolExt::False;
+        }
+
         if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {
             const auto size = SR_MATH_NS::FVector3(m_width) * m_chunkSize.x;
             const SR_WORLD_NS::Offset offset = m_observer->m_offset;

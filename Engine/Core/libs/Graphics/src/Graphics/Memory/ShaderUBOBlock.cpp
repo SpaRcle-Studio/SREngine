@@ -70,6 +70,7 @@ namespace SR_GRAPH_NS::Memory {
         for (uint32_t i = 0; i < m_dataCount; ++i) {
             if (m_data[i].hashId == hashId) {
                 memcpy(m_memory + m_data[i].offset, data, m_data[i].size);
+                return;
             }
         }
     }

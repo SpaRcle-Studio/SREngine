@@ -202,6 +202,10 @@ namespace SR_WORLD_NS {
     }
 
     void Chunk::SetDebugActive(BoolExt enabled) {
+        if (!Features::Instance().Enabled("DebugChunks", false)) {
+            enabled = BoolExt::False;
+        }
+
         if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugActiveId != SR_ID_INVALID)) {
             m_debugActiveId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
                     GetWorldPosition(SR_MATH_NS::AXIS_XYZ),
@@ -219,6 +223,10 @@ namespace SR_WORLD_NS {
     void Chunk::SetDebugLoaded(BoolExt enabled) {
         if (m_position.y != 1 || m_regionPosition.y != 1) {
             return;
+        }
+
+        if (!Features::Instance().Enabled("DebugChunks", false)) {
+            enabled = BoolExt::False;
         }
 
         if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {

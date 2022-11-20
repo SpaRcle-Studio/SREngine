@@ -159,6 +159,10 @@ namespace SR_UTILS_NS {
         return transform;
     }
 
+    SR_MATH_NS::FVector2 Transform::GetTranslation2D() const {
+        return GetTranslation().XY();
+    }
+
     SR_MATH_NS::FVector2 Transform::GetScale2D() const {
         return GetScale().XY();
     }

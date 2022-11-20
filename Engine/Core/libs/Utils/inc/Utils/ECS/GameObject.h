@@ -65,7 +65,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
-        SR_NODISCARD SR_FORCE_INLINE bool IsDirty() const noexcept { return m_dirty; }
+        SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetHashName() const noexcept { return m_hashName; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetIdInScene() const noexcept { return m_idInScene; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
@@ -134,13 +134,13 @@ namespace SR_UTILS_NS {
         bool UpdateEntityPath();
 
     private:
-        bool     m_dirty      : 1 = true;
-        bool     m_isEnabled  : 1 = true;
-        bool     m_isActive   : 1 = false;
-        bool     m_isDestroy  : 1 = false;
+        bool m_dirty = true;
+        bool m_isEnabled = true;
+        bool m_isActive = false;
+        bool m_isDestroy = false;
 
         uint16_t m_componentsCount = 0;
-        uint16_t m_childrenCount   = 0;
+        uint16_t m_childrenCount = 0;
 
         uint64_t m_hashName = 0;
         uint64_t m_idInScene = SR_ID_INVALID;
