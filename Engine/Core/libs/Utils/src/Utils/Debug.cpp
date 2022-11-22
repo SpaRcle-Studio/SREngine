@@ -68,18 +68,22 @@ namespace SR_UTILS_NS {
 
         msg.append("\n");
 
+    #ifdef SR_ANDROID
         switch (type) {
             case Type::Warn:
                 SR_PLATFORM_NS::WriteConsoleWarn(msg);
             case Type::Error:
             case Type::VulkanError:
             case Type::Assert:
-                SR_PLATFORM_NS::WriteConsoleError(msg);
+                SR_PLATFORM_NS::WriteConsoleLog(msg);
                 break;
             default:
                 SR_PLATFORM_NS::WriteConsoleLog(msg);
                 break;
         }
+    #else
+        SR_PLATFORM_NS::WriteConsoleLog(msg);
+    #endif
 
         if (m_file.is_open()) {
             m_file << msg << std::endl;

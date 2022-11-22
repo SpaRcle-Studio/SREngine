@@ -1,5 +1,5 @@
 //
-// Created by mantsurov-n on 09.09.2021.
+// Created by Monika on 09.09.2021.
 //
 
 #include <Graphics/Render/ColorBuffer.h>

@@ -173,6 +173,7 @@
 #define SR_XML_NS Framework::Helper::Xml
 #define SR_PHYSICS_NS Framework::Physics
 #define SR_PTYPES_NS SR_PHYSICS_NS::Types
+#define SR_PHYSICS_UTILS_NS SR_PHYSICS_NS::Utils
 #define SR_UTILS_NS Framework::Helper
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
@@ -183,6 +184,7 @@
 #define SR_GTYPES_NS SR_GRAPH_NS::Types
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
+#define SR_CORE_UI_NS Framework::Core::UI
 #define SR_SCRIPTING_NS Framework::Scripting
 #define SR_AUDIO_NS Framework::Audio
 

@@ -17,11 +17,15 @@ namespace SR_PHYSICS_NS::Types {
 }
 
 namespace SR_PHYSICS_NS {
+    class PhysicsWorld;
+
     class PhysicsScene : public SR_HTYPES_NS::SafePtr<PhysicsScene> {
         friend class SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
-        using RigidbodyPtr = Types::Rigidbody*;
+        using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;
+        using PhysicsWorldPtr = SR_PHYSICS_NS::PhysicsWorld*;
+        using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
     public:
         explicit PhysicsScene(const ScenePtr& scene);
@@ -29,6 +33,7 @@ namespace SR_PHYSICS_NS {
 
     public:
         void FixedUpdate();
+        bool Init();
 
         void Remove(RigidbodyPtr pRigidbody);
         void Register(RigidbodyPtr pRigidbody);
@@ -37,19 +42,16 @@ namespace SR_PHYSICS_NS {
 
     private:
         bool CreateDynamicWorld();
-        bool Init();
 
     private:
         ScenePtr m_scene;
 
-        bool m_needClearForces = false;
+        LibraryPtr m_library = nullptr;
 
-        btAlignedObjectArray<btCollisionShape*> m_collisionShapes;
-        btBroadphaseInterface* m_broadphase = nullptr;
-        btCollisionDispatcher* m_dispatcher = nullptr;
-        btConstraintSolver* m_solver = nullptr;
-        btDefaultCollisionConfiguration* m_collisionConfiguration = nullptr;
-        btDiscreteDynamicsWorld* m_dynamicsWorld = nullptr;
+        PhysicsWorldPtr m_2DWorld = nullptr;
+        PhysicsWorldPtr m_3DWorld = nullptr;
+
+        bool m_needClearForces = false;
 
     };
 }

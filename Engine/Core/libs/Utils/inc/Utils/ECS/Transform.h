@@ -6,6 +6,7 @@
 #define GAMEENGINE_TRANSFORM_H
 
 #include <Utils/ECS/ISavable.h>
+#include <Utils/Common/Measurement.h>
 
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Vector2.h>
@@ -19,14 +20,6 @@
 
 namespace SR_UTILS_NS {
     class GameObject;
-
-    SR_ENUM_NS_CLASS(Measurement,
-        SpaceZero = 0,
-        Space1D = 1,
-        Space2D = 2,
-        Space3D = 3,
-        Space4D = 4
-    );
 
     class SR_DLL_EXPORT Transform : public ISavable {
         friend class GameObject;

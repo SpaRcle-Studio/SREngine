@@ -1,0 +1,8 @@
+//
+// Created by Monika on 22.11.2022.
+//
+
+#ifndef SRENGINE_RIGIDBODY2D_H
+#define SRENGINE_RIGIDBODY2D_H
+
+#endif //SRENGINE_RIGIDBODY2D_H

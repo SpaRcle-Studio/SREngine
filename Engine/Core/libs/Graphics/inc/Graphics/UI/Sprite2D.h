@@ -7,7 +7,7 @@
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
-namespace SR_GRAPH_NS::UI {
+namespace SR_GRAPH_UI_NS {
     const std::vector<uint32_t> SPRITE_INDICES = { 0, 1, 2, 0, 2, 3 };
 
     const std::vector<Vertices::UIVertex> SPRITE_VERTICES = {
@@ -17,13 +17,13 @@ namespace SR_GRAPH_NS::UI {
             { { 1.000000, -1.000000, 0.000000 }, { 0.000000, 0.000000 } }
     };
 
-    class Sprite2D final : public SR_GTYPES_NS::MeshComponent {
+    class Sprite2D : public SR_GTYPES_NS::MeshComponent {
         SR_ENTITY_SET_VERSION(1000);
         using Super = SR_GTYPES_NS::MeshComponent;
     public:
         Sprite2D();
 
-    private:
+    protected:
         ~Sprite2D() override = default;
 
     public:
@@ -39,7 +39,7 @@ namespace SR_GRAPH_NS::UI {
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
 
-    private:
+    protected:
         bool Calculate() override;
         void FreeVideoMemory() override;
         void Draw() override;

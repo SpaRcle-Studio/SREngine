@@ -4,6 +4,7 @@
 
 #include <Core/Engine.h>
 #include <Core/GUI/EditorGUI.h>
+#include <Core/UI/Button.h>
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
@@ -22,14 +23,17 @@
 #include <Graphics/Font/Font.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Animations/Bone.h>
-#include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Window/Window.h>
+#include <Graphics/UI/Sprite2D.h>
 
 #include <Audio/RawSound.h>
 #include <Audio/Sound.h>
 
 #include <Physics/Rigidbody.h>
+#include <Physics/LibraryImpl.h>
+#include <Physics/PhysicsLib.h>
 #include <Physics/PhysicsScene.h>
+#include <Physics/3D/Rigidbody3D.h>
 
 namespace Framework {
     bool Engine::Create(SR_GRAPH_NS::Window* window) {
@@ -344,6 +348,11 @@ namespace Framework {
             }
 
             m_physicsScene = new SR_PHYSICS_NS::PhysicsScene(m_scene);
+
+            if (!m_physicsScene->Init()) {
+                SR_ERROR("Engine::SetScene() : failed to initialize physics scene!");
+                return false;
+            }
         }
 
         if (m_editor) {
@@ -562,8 +571,9 @@ namespace Framework {
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::ProceduralMesh>([]() {
             return new SR_GTYPES_NS::ProceduralMesh();
         });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_PTYPES_NS::Rigidbody>([]() {
-            return new SR_PTYPES_NS::Rigidbody();
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_PTYPES_NS::Rigidbody3D>([]() {
+            auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary();
+            return pLibrary->CreateRigidbody3D(pLibrary->GetDefaultShape());
         });
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Mesh3D>([]() {
             return new SR_GTYPES_NS::Mesh3D();
@@ -588,6 +598,9 @@ namespace Framework {
         });
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Text>([]() {
             return new SR_GTYPES_NS::Text();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_CORE_UI_NS::Button>([]() {
+            return new SR_CORE_UI_NS::Button();
         });
     }
 }

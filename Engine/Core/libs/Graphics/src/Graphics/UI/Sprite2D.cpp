@@ -11,7 +11,7 @@
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 
-namespace SR_GRAPH_NS::UI {
+namespace SR_GRAPH_UI_NS {
     Sprite2D::Sprite2D()
         : Super(Types::MeshType::Sprite2D)
     {
@@ -39,14 +39,14 @@ namespace SR_GRAPH_NS::UI {
     }
 
     SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        SR_MAYBE_UNUSED const auto &&type = static_cast<Types::MeshType>(marshal.Read<int32_t>());
+        SR_MAYBE_UNUSED const auto &&type = static_cast<SR_GTYPES_NS::MeshType>(marshal.Read<int32_t>());
 
         const auto &&material = marshal.Read<std::string>();
 
         auto&& pSprite = new Sprite2D();
 
         if (material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(material)) {
+            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(material)) {
                 pSprite->SetMaterial(pMaterial);
             }
             else
@@ -143,7 +143,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Sprite2D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
+        pMarshal = Super::Save(pMarshal, flags);
 
         pMarshal->Write(static_cast<int32_t>(m_type));
 
@@ -163,5 +163,6 @@ namespace SR_GRAPH_NS::UI {
 
     void Sprite2D::UseModelMatrix() {
         m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        Super::UseModelMatrix();
     }
 }

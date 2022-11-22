@@ -9,6 +9,9 @@
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Render/RenderScene.h>
 
+#include <Physics/PhysicsLib.h>
+#include <Physics/LibraryImpl.h>
+
 #include <assimp/scene.h>
 
 namespace SR_CORE_NS {
@@ -60,8 +63,10 @@ namespace SR_CORE_NS {
         /// ----------------------
 
         auto&& componentManager = Helper::ComponentManager::Instance();
-        componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool {
+        componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool
+        {
             context.SetPointer<SR_GRAPH_NS::Window>(Engine::Instance().GetWindow());
+            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>(SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary());
 
             auto&& componentCount = marshal.Read<uint32_t>();
 
