@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(Physics)
 
-set(CMAKE_CXX_STANDARD 20)
-
 add_definitions(
     -DMODPLUG_STATIC
     -DFLAC__NO_DLL
@@ -20,6 +18,81 @@ set(BUILD_BULLET2_DEMOS OFF CACHE INTERNAL "" FORCE)
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "" FORCE)
 
 add_subdirectory(libs/bullet3)
+
+# ----------------------------------------------------------------------------------------------------------------------
+set(PHYSX_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/PhysX/physx)
+set(PHYSX_INCLUDE_DIRS ${PHYSX_ROOT_DIR}/include/ ${PHYSX_ROOT_DIR}/../pxshared/include/)
+set(CMAKEMODULES_PATH ${PHYSX_ROOT_DIR}/../externals/cmakemodules)
+
+if (ANDROID_NDK)
+    set(CMAKE_CONFIGURATION_TYPES "release")
+else()
+    set(CMAKE_CONFIGURATION_TYPES "debug")
+endif()
+
+if (WIN32)
+    set(TARGET_BUILD_PLATFORM "windows")
+    set(NV_USE_DEBUG_WINCRT ON CACHE BOOL "Use the debug version of the CRT")
+else()
+    if (ANDROID_NDK)
+        set(TARGET_BUILD_PLATFORM "android")
+    else()
+        message("Unsupported platform!")
+    endif()
+endif()
+
+set(PX_BUILDSNIPPETS OFF CACHE BOOL "Generate the snippets")
+set(PX_USE_PLATFORM_MAP_FLAG OFF CACHE BOOL "Use platform MAP flag")
+set(PX_BUILDPUBLICSAMPLES OFF CACHE BOOL "Generate the samples projects")
+set(PX_GENERATE_STATIC_LIBRARIES OFF CACHE BOOL "Generate static libraries")
+set(PX_FLOAT_POINT_PRECISE_MATH OFF CACHE BOOL "Float point precise math")
+set(NV_USE_STATIC_WINCRT OFF CACHE BOOL "Use the statically linked windows CRT")
+set(PXSHARED_PATH ${PHYSX_ROOT_DIR}/../pxshared)
+set(PXSHARED_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+set(CMAKEMODULES_VERSION "1.27")
+set(CMAKEMODULES_PATH ${PHYSX_ROOT_DIR}/../externals/cmakemodules)
+set(PX_OUTPUT_LIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/extern/physx)
+set(PX_OUTPUT_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/extern/physx)
+
+set(PHYSX_LIBRARIES
+    PhysXExtensions
+    PhysX
+    PhysXPvdSDK
+    PhysXVehicle
+    PhysXCharacterKinematic
+    PhysXCooking
+    PhysXCommon
+    PhysXFoundation
+    SimulationController
+    SceneQuery
+    LowLevel
+    LowLevelAABB
+    LowLevelDynamics
+)
+
+add_subdirectory(${PHYSX_ROOT_DIR}/compiler/public)
+
+if(MSVC)
+    target_compile_options(BulletCollision PUBLIC "/wd4828;")
+    foreach(LIBRARY_ITERATE ${PHYSX_LIBRARIES})
+        target_compile_options(${LIBRARY_ITERATE} PUBLIC "/wd5054;")
+        target_compile_options(${LIBRARY_ITERATE} PUBLIC "/wd5055;")
+    endforeach()
+else()
+    foreach(LIBRARY_ITERATE ${PHYSX_LIBRARIES})
+        target_compile_options(${LIBRARY_ITERATE} PRIVATE -Wall -Wextra -Wpedantic -Werror
+                -Wno-unused-private-field
+                -Wno-unused-local-typedefs
+                -Wno-gnu-statement-expression
+                -Wno-bitwise-instead-of-logical
+                -Wno-unused-but-set-variable
+                -Wno-deprecated-copy-with-user-provided-copy
+                -Wno-dtor-name
+        )
+    endforeach()
+endif()
+
+# ----------------------------------------------------------------------------------------------------------------------
 
 if (SR_PHYSICS_STATIC_LIBRARY)
     add_library(Physics STATIC Physics.cxx)
@@ -42,6 +115,7 @@ target_link_libraries(Physics
     BulletDynamics
     BulletCollision
     LinearMath
+    ${PHYSX_LIBRARIES}
 )
 
 target_include_directories(Physics PUBLIC inc)

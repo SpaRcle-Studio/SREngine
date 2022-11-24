@@ -19,6 +19,10 @@ set(EVO_VULKAN_STATIC_LIBRARY ON)
 set(EVO_SCRIPT_STATIC_LIBRARY ON)
 
 if (ANDROID_NDK)
+    if (${ANDROID_ABI} STREQUAL "x86_64")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mlzcnt -mpopcnt")
+    endif()
+
     add_definitions(
         -DGLM_LANG_STL11_FORCED
         -D_LIBCPP_ENABLE_CXX17_REMOVED_FEATURES

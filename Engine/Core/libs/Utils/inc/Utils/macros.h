@@ -12,7 +12,11 @@
     #pragma warning(disable: 4553)
     #pragma warning(disable: 4552)
     #pragma warning(disable: 5033)
+    #pragma warning(disable: 4067)
+    #pragma warning(disable: 4828)
 #endif
+
+#define SR_CXX_20
 
 #ifdef ANDROID
     #define SR_ANDROID

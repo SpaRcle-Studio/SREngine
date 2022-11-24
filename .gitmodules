@@ -40,3 +40,6 @@
 [submodule "Engine/Core/libs/Utils/libs/icu"]
 	path = Engine/Core/libs/Utils/libs/icu
 	url = https://github.com/Monika0000/icu-cmake
+[submodule "Engine/Core/libs/Physics/libs/PhysX"]
+	path = Engine/Core/libs/Physics/libs/PhysX
+	url = https://github.com/Monika0000/PhysX

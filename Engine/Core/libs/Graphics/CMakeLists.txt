@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(Graphics)
 
-set(CMAKE_CXX_STANDARD 20)
-
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
 if (NOT ANDROID_NDK)
@@ -12,7 +10,7 @@ endif()
 set(FT_CONFIG_OPTION_USE_ZLIdB OFF)
 set(FT_DISABLE_HARFBUZZ ON)
 
-find_package(Vulkan REQUIRED FATAL_ERROR)
+find_package(Vulkan REQUIRED)
 
 add_subdirectory(libs/EvoVulkan/Core)
 

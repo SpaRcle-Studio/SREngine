@@ -136,7 +136,7 @@ namespace SR_UTILS_NS {
         template <typename... Args> struct is_stl_container<std::vector            <Args...>>:std::true_type{};
         template <typename... Args> struct is_stl_container<std::deque             <Args...>>:std::true_type{};
         template <typename... Args> struct is_stl_container<std::list              <Args...>>:std::true_type{};
-#ifndef SR_ANDROID
+#if !defined(SR_ANDROID) && defined(SR_CXX_20)
         template <typename... Args> struct is_stl_container<std::forward_list      <Args...>>:std::true_type{};
 #endif
         template <typename... Args> struct is_stl_container<std::set               <Args...>>:std::true_type{};
