@@ -169,6 +169,7 @@ namespace SR_UTILS_NS {
 
         return Type::File;
 #else
+        SRHalt("Unsupported OS!");
         return Type::Undefined;
 #endif
     }

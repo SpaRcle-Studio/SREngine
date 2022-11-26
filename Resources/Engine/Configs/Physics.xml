@@ -2,6 +2,6 @@
 <Physics>
     <DefaultLibraries>
         <Space2D Library="PhysX"/>
-        <Space3D Library="Bullet3"/>
+        <Space3D Library="PhysX"/>
     </DefaultLibraries>
 </Physics>

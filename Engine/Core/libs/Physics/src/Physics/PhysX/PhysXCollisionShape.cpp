@@ -10,7 +10,10 @@ namespace SR_PTYPES_NS {
     { }
 
     PhysXCollisionShape::~PhysXCollisionShape() {
-        SRAssert(!m_shape);
+        if (m_shape) {
+            m_shape->release();
+            m_shape = nullptr;
+        }
     }
 
     bool PhysXCollisionShape::UpdateShape() {

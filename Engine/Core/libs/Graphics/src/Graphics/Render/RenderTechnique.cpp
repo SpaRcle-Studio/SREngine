@@ -157,8 +157,6 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        SR_GRAPH_LOG("RenderTechnique::Build() : building render technique...");
-
         /// Очишаем старые данные, если они были
         ClearSettings();
 
@@ -182,6 +180,8 @@ namespace SR_GRAPH_NS {
             m_loadState = LoadState::Error;
             return false;
         }
+
+        SR_GRAPH_LOG("RenderTechnique::Build() : building \"" + std::string(GetName()) + "\" render technique...");
 
         /// Инициализируем все успешно загруженнеы проходы
         for (auto&& pPass : m_passes) {

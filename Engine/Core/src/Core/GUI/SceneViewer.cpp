@@ -193,7 +193,7 @@ namespace SR_CORE_NS::GUI {
         Helper::GameObject::Ptr camera;
 
         /// сцена может быть уже заблокирована до Engine::SetScene
-        if (m_scene.RecursiveLockIfValid()) {
+        if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
             camera = m_scene->Instance("Editor camera");
             camera->SetFlags(SR_UTILS_NS::GAMEOBJECT_FLAG_NO_SAVE);
             m_scene.Unlock();

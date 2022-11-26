@@ -88,7 +88,9 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Unload(bool force) {
-        SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
+            SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
+        }
 
         SetDebugLoaded(BoolExt::False);
 
@@ -105,6 +107,7 @@ namespace SR_WORLD_NS {
             }
 
             pChunk->Unload();
+            delete pChunk;
         }
 
         m_loadedChunks.clear();
@@ -211,7 +214,9 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Load() {
-        SR_LOG("Region::Load() : loading region at " + m_position.ToString());
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
+            SR_LOG("Region::Load() : loading region at " + m_position.ToString());
+        }
 
         SRAssert(!m_position.HasZero());
 

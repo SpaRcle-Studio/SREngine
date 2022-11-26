@@ -10,7 +10,10 @@ namespace SR_PTYPES_NS {
     { }
 
     PhysXRigidbody3D::~PhysXRigidbody3D() {
-        SRAssert(!m_rigidActor);
+        if (m_rigidActor) {
+            m_rigidActor->release();
+            m_rigidActor = nullptr;
+        }
     }
 
     void* PhysXRigidbody3D::GetHandle() const noexcept {
@@ -74,10 +77,14 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
-        physx::PxShape* shapes[1];
-        m_rigidActor->getShapes(shapes, 1);
-        if (shapes[0]) {
-            m_rigidActor->detachShape(*shapes[0]);
+        const uint32_t shapesCount = m_rigidActor->getNbShapes();
+        if (shapesCount > 0) {
+            SRAssert(shapesCount <= 16);
+            physx::PxShape *shapes[16];
+            m_rigidActor->getShapes(shapes, shapesCount);
+            for (uint32_t i = 0; i < shapesCount; ++i) {
+                m_rigidActor->detachShape(*shapes[i]);
+            }
         }
 
         if (!m_rigidActor->attachShape(*(physx::PxShape*)m_shape->GetHandle())) {

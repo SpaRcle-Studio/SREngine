@@ -334,26 +334,34 @@ namespace Framework {
         }
 
         if ((m_scene = scene).Valid()) {
-            if (auto&& pContext = m_window->GetContext(); pContext.LockIfValid()) {
-                m_renderScene.ReplaceAndCopyLock(pContext->CreateScene(m_scene));
+            if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
+                if (auto &&pContext = m_window->GetContext(); pContext.LockIfValid()) {
+                    m_renderScene.ReplaceAndCopyLock(pContext->CreateScene(m_scene));
 
-                m_renderScene->SetTechnique("Editor/Configs/OverlayRenderTechnique.xml");
+                    m_renderScene->SetTechnique("Editor/Configs/OverlayRenderTechnique.xml");
 
-                m_renderScene->Register(m_editor);
-                m_renderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
+                    m_renderScene->Register(m_editor);
+                    m_renderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
 
-                m_renderScene->SetOverlayEnabled(m_editor->Enabled());
+                    m_renderScene->SetOverlayEnabled(m_editor->Enabled());
 
-                pContext.Unlock();
-                m_renderScene.Unlock();
-                oldRenderScene.RemoveAllLocks();
+                    pContext.Unlock();
+                    m_renderScene.Unlock();
+                    oldRenderScene.RemoveAllLocks();
+                }
+                else {
+                    SR_ERROR("Engine::SetScene() : failed to get window context!");
+                    return false;
+                }
             }
 
-            m_physicsScene = new SR_PHYSICS_NS::PhysicsScene(m_scene);
+            if (SR_UTILS_NS::Features::Instance().Enabled("Physics", true)) {
+                m_physicsScene = new SR_PHYSICS_NS::PhysicsScene(m_scene);
 
-            if (!m_physicsScene->Init()) {
-                SR_ERROR("Engine::SetScene() : failed to initialize physics scene!");
-                return false;
+                if (!m_physicsScene->Init()) {
+                    SR_ERROR("Engine::SetScene() : failed to initialize physics scene!");
+                    return false;
+                }
             }
         }
 

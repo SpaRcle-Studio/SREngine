@@ -63,6 +63,7 @@
 
 #include <Physics/Rigidbody.h>
 #include <Physics/PhysicsScene.h>
+#include <Physics/PhysicsLib.h>
 
 #include <Scripting/Base/Behaviour.h>
 
@@ -186,12 +187,14 @@ int main(int argc, char **argv) {
     if (engine.IsRun()) {
         Debug::Instance().System("All systems are successfully running!");
 
-        engine.Await(); // await close engine
+        engine.Await(); /// await close engine
     }
 
     engine.Close();
 
     SR_CORE_NS::EditorSettings::DestroySettings();
+
+    SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();

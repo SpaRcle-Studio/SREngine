@@ -19,6 +19,9 @@ namespace SR_PHYSICS_NS {
     PhysicsScene::~PhysicsScene() {
         SR_SAFE_DELETE_PTR(m_2DWorld);
         SR_SAFE_DELETE_PTR(m_3DWorld);
+
+        m_library2D = nullptr;
+        m_library3D = nullptr;
     }
 
     bool PhysicsScene::Init() {

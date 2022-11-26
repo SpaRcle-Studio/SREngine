@@ -27,6 +27,7 @@ namespace SR_PHYSICS_NS {
 
     private:
         physx::PxScene* m_scene = nullptr;
+        physx::PxDefaultCpuDispatcher* m_cpuDispatcher = nullptr;
 
     };
 }

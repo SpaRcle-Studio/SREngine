@@ -15,6 +15,11 @@ namespace SR_PHYSICS_NS {
             m_scene->release();
             m_scene = nullptr;
         }
+
+        if (m_cpuDispatcher) {
+            m_cpuDispatcher->release();
+            m_cpuDispatcher = nullptr;
+        }
     }
 
     bool PhysXPhysicsWorld::Initialize() {
@@ -23,8 +28,8 @@ namespace SR_PHYSICS_NS {
         physx::PxSceneDesc sceneDesc(pPhysics->getTolerancesScale());
 
         if (!sceneDesc.cpuDispatcher) {
-            physx::PxDefaultCpuDispatcher* mCpuDispatcher = physx::PxDefaultCpuDispatcherCreate(1);
-            sceneDesc.cpuDispatcher = mCpuDispatcher;
+            m_cpuDispatcher = physx::PxDefaultCpuDispatcherCreate(1);
+            sceneDesc.cpuDispatcher = m_cpuDispatcher;
         }
 
         if(!sceneDesc.filterShader) {

@@ -56,6 +56,9 @@ namespace SR_PHYSICS_NS {
             return pLibrary;
         }
 
+        SR_INFO("PhysicsLibrary::GetLibrary() : initializing \"" + SR_UTILS_NS::EnumReflector::ToString(type) +
+                "\" physics library...");
+
         switch (type) {
         #ifdef SR_PHYSICS_USE_PHYSX
             case LibraryType::PhysX:
