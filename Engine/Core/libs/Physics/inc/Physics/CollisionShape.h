@@ -25,11 +25,14 @@ namespace SR_PTYPES_NS {
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
     public:
-        explicit CollisionShape(LibraryPtr pLibrary, ShapeType type);
+        explicit CollisionShape(LibraryPtr pLibrary);
         ~CollisionShape() override;
 
     public:
-        virtual bool Update() { return false; }
+        virtual bool UpdateShape() { return false; }
+        virtual bool UpdateMatrix() { return false; }
+
+        void SetType(ShapeType type);
 
         void SetHeight(float_t height);
         void SetRadius(float_t radius);
@@ -47,13 +50,23 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD ShapeType GetType() const noexcept;
         SR_NODISCARD virtual void* GetHandle() const noexcept { return nullptr; }
 
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
+            if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
+                return pLibrary;
+            }
+
+            SRHalt("Failed to cast library!");
+
+            return nullptr;
+        }
+
     protected:
         LibraryPtr m_library = nullptr;
 
         SR_MATH_NS::FVector3 m_scale;
         SR_MATH_NS::FVector3 m_bounds;
 
-        const ShapeType m_type;
+        ShapeType m_type = ShapeType::Unknown;
 
     };
 }

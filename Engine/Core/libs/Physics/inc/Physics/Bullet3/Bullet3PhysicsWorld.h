@@ -12,13 +12,13 @@ namespace SR_PHYSICS_NS {
     class Bullet3PhysicsWorld : public PhysicsWorld {
         using Super = PhysicsWorld;
     public:
-        explicit Bullet3PhysicsWorld(LibraryPtr pLibrary);
+        explicit Bullet3PhysicsWorld(LibraryPtr pLibrary, Space space);
         ~Bullet3PhysicsWorld() override;
 
     public:
-        bool CreateDynamicWorld() override;
+        bool Initialize() override;
         bool ClearForces() override;
-        bool Update() override;
+        bool Synchronize() override;
 
         bool StepSimulation(float_t step) override;
 

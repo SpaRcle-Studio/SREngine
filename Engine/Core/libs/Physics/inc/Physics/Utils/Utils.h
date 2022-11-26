@@ -5,7 +5,7 @@
 #ifndef SRENGINE_PHYSICS_UTILS_H
 #define SRENGINE_PHYSICS_UTILS_H
 
-#include <Utils/Common/Enumerations.h>
+#include <Utils/Common/Measurement.h>
 
 namespace SR_PHYSICS_NS {
     SR_ENUM_NS_CLASS(LibraryType,

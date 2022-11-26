@@ -15,12 +15,14 @@ namespace SR_PHYSICS_NS {
         ~Bullet3LibraryImpl() override = default;
 
     public:
+        SR_NODISCARD bool Initialize() override { return true; }
+
         SR_NODISCARD bool IsShapeSupported(ShapeType type) const override;
         SR_NODISCARD ShapeType GetDefaultShape() const override { return ShapeType::Box3D; }
 
-        SR_NODISCARD SR_PTYPES_NS::CollisionShape* CreateCollisionShape(ShapeType type) override;
-        SR_NODISCARD SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D(ShapeType type) override;
-        SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld() override;
+        SR_NODISCARD SR_PTYPES_NS::CollisionShape* CreateCollisionShape() override;
+        SR_NODISCARD SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D() override;
+        SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) override;
 
     };
 }

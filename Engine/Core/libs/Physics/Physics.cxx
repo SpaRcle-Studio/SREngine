@@ -13,7 +13,16 @@
 #include "src/Physics/PhysicsLib.cpp"
 #include "src/Physics/LibraryImpl.cpp"
 
-#include "src/Physics/Bullet3/Bullet3Rigidbody3D.cpp"
-#include "src/Physics/Bullet3/Bullet3LibraryImpl.cpp"
-#include "src/Physics/Bullet3/Bullet3PhysicsWorld.cpp"
-#include "src/Physics/Bullet3/Bullet3CollisionShape.cpp"
+#ifdef SR_PHYSICS_USE_BULLET3
+    #include "src/Physics/Bullet3/Bullet3Rigidbody3D.cpp"
+    #include "src/Physics/Bullet3/Bullet3LibraryImpl.cpp"
+    #include "src/Physics/Bullet3/Bullet3PhysicsWorld.cpp"
+    #include "src/Physics/Bullet3/Bullet3CollisionShape.cpp"
+#endif
+
+#ifdef SR_PHYSICS_USE_PHYSX
+    #include "src/Physics/PhysX/PhysXLibraryImpl.cpp"
+    #include "src/Physics/PhysX/PhysXPhysicsWorld.cpp"
+    #include "src/Physics/PhysX/PhysXRigidbody3D.cpp"
+    #include "src/Physics/PhysX/PhysXCollisionShape.cpp"
+#endif

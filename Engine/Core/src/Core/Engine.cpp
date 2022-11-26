@@ -80,7 +80,9 @@ namespace Framework {
 
         if (!m_scene.Valid()) {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
-            SetScene(SR_WORLD_NS::Scene::New(scenePath));
+            if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
+                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString())
+            }
         }
 
         m_updateFrequency = (1.f / (60.f * m_speed)) * CLOCKS_PER_SEC;
@@ -572,8 +574,14 @@ namespace Framework {
             return new SR_GTYPES_NS::ProceduralMesh();
         });
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_PTYPES_NS::Rigidbody3D>([]() {
-            auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary();
-            return pLibrary->CreateRigidbody3D(pLibrary->GetDefaultShape());
+            auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
+
+            if (auto&& pRigidbody = pLibrary->CreateRigidbody3D()) {
+                pRigidbody->SetType(pLibrary->GetDefaultShape());
+                return pRigidbody;
+            }
+
+            return (SR_PTYPES_NS::Rigidbody3D*)nullptr;
         });
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Mesh3D>([]() {
             return new SR_GTYPES_NS::Mesh3D();

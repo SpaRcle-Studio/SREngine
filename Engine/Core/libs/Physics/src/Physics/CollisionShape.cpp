@@ -6,11 +6,10 @@
 #include <Physics/LibraryImpl.h>
 
 namespace SR_PTYPES_NS {
-    CollisionShape::CollisionShape(LibraryPtr pLibrary, ShapeType type)
+    CollisionShape::CollisionShape(LibraryPtr pLibrary)
         : Super()
         , m_library(pLibrary)
         , m_scale(SR_MATH_NS::FVector3::One())
-        , m_type(type)
         , m_bounds(SR_MATH_NS::FVector3::One())
     { }
 
@@ -18,7 +17,7 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetHeight(float_t height) {
         m_bounds.y = height;
-        Update();
+        UpdateMatrix();
     }
 
     void CollisionShape::SetRadius(float_t radius) {
@@ -30,12 +29,12 @@ namespace SR_PTYPES_NS {
             m_bounds = SR_MATH_NS::FVector3(radius);
         }
 
-        Update();
+        UpdateMatrix();
     }
 
     void CollisionShape::SetSize(const SR_MATH_NS::FVector3& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, size.y, size.z);
-        Update();
+        UpdateMatrix();
     }
 
     float_t CollisionShape::GetHeight() const {
@@ -80,5 +79,9 @@ namespace SR_PTYPES_NS {
 
     bool CollisionShape::Valid() const noexcept {
         return m_library->IsShapeSupported(m_type);
+    }
+
+    void CollisionShape::SetType(ShapeType type) {
+        m_type = type;
     }
 }

@@ -96,7 +96,7 @@ namespace SR_UTILS_NS {
         return m_path.c_str();
     }
 
-    void Path::Update() {
+    bool Path::Update() {
         NormalizeSelf();
 
         m_type = GetType();
@@ -125,6 +125,8 @@ namespace SR_UTILS_NS {
         }
 
         m_hash = std::hash<std::string>{}(m_path);
+
+        return true;
     }
 
     std::string Path::GetExtension() const {

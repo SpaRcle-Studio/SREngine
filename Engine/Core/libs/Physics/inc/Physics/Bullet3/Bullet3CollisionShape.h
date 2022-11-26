@@ -13,13 +13,14 @@ namespace SR_PTYPES_NS {
     class Bullet3CollisionShape : public CollisionShape {
         using Super = CollisionShape;
     public:
-        Bullet3CollisionShape(LibraryPtr pLibrary, ShapeType type);
+        Bullet3CollisionShape(LibraryPtr pLibrary);
         ~Bullet3CollisionShape() override;
 
     public:
         SR_NODISCARD void* GetHandle() const noexcept override { return m_shape; }
 
-        bool Update() override;
+        bool UpdateShape() override;
+        bool UpdateMatrix() override;
 
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const override;
 

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(Core)
 
+set(CMAKE_CXX_STANDARD 20)
+
 message("SpaRcle Engine compiler: ${CMAKE_C_COMPILER}")
 
 set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})

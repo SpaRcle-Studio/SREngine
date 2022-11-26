@@ -93,8 +93,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string GetBaseName() const;
         SR_NODISCARD std::string GetBaseNameAndExt() const;
 
-    private:
-        void Update();
+        bool Update();
 
     private:
         std::string m_path;

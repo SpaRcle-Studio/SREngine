@@ -18,19 +18,23 @@ namespace SR_PHYSICS_NS {
 
 namespace SR_PHYSICS_NS {
     class LibraryImpl : public SR_UTILS_NS::NonCopyable {
+    public:
         using Super = SR_UTILS_NS::NonCopyable;
+        using Space = SR_UTILS_NS::Measurement;
     public:
         LibraryImpl();
         ~LibraryImpl() override = default;
 
     public:
+        SR_NODISCARD virtual bool Initialize();
+
         SR_NODISCARD virtual bool IsShapeSupported(ShapeType type) const { return false; }
         SR_NODISCARD virtual ShapeType GetDefaultShape() const { return ShapeType::Unknown; }
 
-        SR_NODISCARD virtual SR_PTYPES_NS::CollisionShape* CreateCollisionShape(ShapeType type) { return nullptr; }
-        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D(ShapeType type) { return nullptr; }
+        SR_NODISCARD virtual SR_PTYPES_NS::CollisionShape* CreateCollisionShape() { return nullptr; }
+        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D() { return nullptr; }
 
-        SR_NODISCARD virtual SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld() { return nullptr; }
+        SR_NODISCARD virtual SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) { return nullptr; }
 
     };
 }

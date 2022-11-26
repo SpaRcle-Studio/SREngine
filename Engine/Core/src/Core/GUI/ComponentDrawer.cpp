@@ -16,6 +16,8 @@
 #include <Scripting/Base/Behaviour.h>
 
 #include <Physics/Rigidbody.h>
+#include <Physics/2D/Rigidbody2D.h>
+#include <Physics/3D/Rigidbody3D.h>
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
@@ -30,15 +32,23 @@
 #include <Graphics/Font/Text.h>
 
 namespace SR_CORE_NS::GUI {
-    void ComponentDrawer::DrawComponent(SR_PHYSICS_NS::Types::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
+        auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
+        DrawComponent(pCopy, context, index);
+        if ((void*)pComponent != (void*)pCopy) {
+            pComponent = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>(pCopy);
+        }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
         if (!pComponent) {
             return;
         }
 
-        auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
+        static auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
         auto shape = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetType()));
 
-        if (ImGui::Combo("Shape", &shape, [](void* vec, int idx, const char** out_text){
+        if (ImGui::Combo(SR_FORMAT_C("Shape##rgbd%i", index), &shape, [](void* vec, int idx, const char** out_text){
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
             if (idx < 0 || idx >= vector->size())
                 return false;
@@ -63,6 +73,16 @@ namespace SR_CORE_NS::GUI {
         auto&& mass = pComponent->GetMass();
         if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
             pComponent->SetMass(mass);
+        }
+
+        auto&& isTrigger = pComponent->IsTrigger();
+        if (ImGui::Checkbox(SR_FORMAT_C("Is trigger##rgbd%i", index), &isTrigger)) {
+            pComponent->SetIsTrigger(isTrigger);
+        }
+
+        auto&& isStatic = pComponent->IsStatic();
+        if (ImGui::Checkbox(SR_FORMAT_C("Is static##rgbd%i", index), &isStatic)) {
+            pComponent->SetIsStatic(isStatic);
         }
 
         if (ImGui::Button("Jump")) {

@@ -24,13 +24,25 @@ namespace SR_PHYSICS_NS {
     bool PhysicsScene::Init() {
         SR_INFO("PhysicsScene::Init() : initializing the physics scene...");
 
-        if (!(m_library = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary())) {
-            SR_ERROR("PhysicsScene::Init() : failed to get physics library!");
+        if (!(m_library2D = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(Space::Space2D))) {
+            SR_ERROR("PhysicsScene::Init() : failed to get physics 2D library!");
             return false;
         }
 
-        m_2DWorld = m_library->CreatePhysicsWorld();
-        m_3DWorld = m_library->CreatePhysicsWorld();
+        if (!(m_library3D = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(Space::Space3D))) {
+            SR_ERROR("PhysicsScene::Init() : failed to get physics 3D library!");
+            return false;
+        }
+
+        if (!(m_2DWorld = m_library2D->CreatePhysicsWorld(Space::Space2D))) {
+            SR_ERROR("PhysicsScene::Init() : failed to create 2d world!");
+            return false;
+        }
+
+        if (!(m_3DWorld = m_library3D->CreatePhysicsWorld(Space::Space3D))) {
+            SR_ERROR("PhysicsScene::Init() : failed to create 3d world!");
+            return false;
+        }
 
         if (m_scene.RecursiveLockIfValid()) {
             auto&& dataStorage = m_scene->GetDataStorage();
@@ -61,13 +73,13 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysicsScene::CreateDynamicWorld() {
-        if (!m_2DWorld->CreateDynamicWorld()) {
-            SR_ERROR("PhysicsScene::CreateDynamicWorld() : failed to create dynamic world for 2d world!");
+        if (!m_2DWorld->Initialize()) {
+            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 2d world!");
             return false;
         }
 
-        if (!m_3DWorld->CreateDynamicWorld()) {
-            SR_ERROR("PhysicsScene::CreateDynamicWorld() : failed to create dynamic world for 3d world!");
+        if (!m_3DWorld->Initialize()) {
+            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 3d world!");
             return false;
         }
 
@@ -84,8 +96,8 @@ namespace SR_PHYSICS_NS {
         m_2DWorld->StepSimulation(1.f / 60.f);
         m_3DWorld->StepSimulation(1.f / 60.f);
 
-        m_2DWorld->Update();
-        m_3DWorld->Update();
+        m_2DWorld->Synchronize();
+        m_3DWorld->Synchronize();
     }
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {
@@ -95,7 +107,7 @@ namespace SR_PHYSICS_NS {
             m_2DWorld->AddRigidbody(pRigidbody);
         }
         else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
-            m_2DWorld->AddRigidbody(pRigidbody);
+            m_3DWorld->AddRigidbody(pRigidbody);
         }
         else {
             SRHalt("Unknown measurement of rigidbody!");
@@ -109,7 +121,7 @@ namespace SR_PHYSICS_NS {
             m_2DWorld->RemoveRigidbody(pRigidbody);
         }
         else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
-            m_2DWorld->RemoveRigidbody(pRigidbody);
+            m_3DWorld->RemoveRigidbody(pRigidbody);
         }
         else {
             SRHalt("Unknown measurement of rigidbody!");

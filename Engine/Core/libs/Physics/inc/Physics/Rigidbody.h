@@ -16,6 +16,12 @@
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
     class LibraryImpl;
+
+    enum class RBUpdShapeRes : uint8_t {
+        Updated = 0,
+        Error = 1,
+        Nothing = 2
+    };
 }
 
 namespace SR_PTYPES_NS {
@@ -30,27 +36,38 @@ namespace SR_PTYPES_NS {
         ~Rigidbody() override;
 
     public:
-        static ComponentPtr LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        static ComponentPtr LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         virtual bool UpdateMatrix();
-        virtual bool UpdateShape() { return false; }
+
+        virtual bool UpdateShapeInternal() { return false; }
+        virtual void UpdateInertia() { }
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
         SR_NODISCARD ShapeType GetType() const noexcept;
+        SR_NODISCARD CollisionShape* GetCollisionShape() const noexcept { return m_shape; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
         SR_NODISCARD float_t GetMass() const noexcept;
-        SR_NODISCARD bool IsDirty() const noexcept { return m_dirty; }
+        SR_NODISCARD bool IsTrigger() const noexcept { return m_isTrigger; }
+        SR_NODISCARD bool IsStatic() const noexcept { return m_isStatic; }
+        SR_NODISCARD bool IsMatrixDirty() const noexcept { return m_isMatrixDirty; }
+        SR_NODISCARD bool IsShapeDirty() const noexcept { return m_isShapeDirty; }
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
-        void SetDirty(bool value) { m_dirty = value; }
+        SR_NODISCARD RBUpdShapeRes UpdateShape();
+
+        void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
+        void SetShapeDirty(bool value) { m_isShapeDirty = value; }
 
         virtual void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) { }
         virtual void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) { }
         virtual void SetVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void SetIsTrigger(bool value);
+        virtual void SetIsStatic(bool value);
 
         virtual void SetCenter(const SR_MATH_NS::FVector3& center);
         virtual void SetMass(float_t mass);
@@ -66,10 +83,20 @@ namespace SR_PTYPES_NS {
 
         void OnMatrixDirty() override;
 
-        virtual bool InitBody();
+        virtual bool InitBody() { return true; }
         virtual void DeInitBody();
 
         PhysicsScenePtr GetPhysicsScene();
+
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
+            if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
+                return pLibrary;
+            }
+
+            SRHalt("Failed to cast library!");
+
+            return nullptr;
+        }
 
     protected:
         CollisionShape::Ptr m_shape = nullptr;
@@ -77,15 +104,17 @@ namespace SR_PTYPES_NS {
 
         PhysicsScenePtr m_physicsScene;
 
-        ShapeType m_type = ShapeType::Unknown;
-
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::Quaternion m_rotation;
         SR_MATH_NS::FVector3 m_scale;
 
         SR_MATH_NS::FVector3 m_center;
 
-        bool m_dirty = false;
+        bool m_isStatic = false;
+        bool m_isTrigger = false;
+
+        bool m_isMatrixDirty = false;
+        bool m_isShapeDirty = false;
 
         float_t m_mass = 1.f;
         uint64_t m_debugId = SR_ID_INVALID;

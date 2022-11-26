@@ -8,4 +8,9 @@ namespace SR_PHYSICS_NS {
     LibraryImpl::LibraryImpl()
         : Super()
     { }
+
+    bool LibraryImpl::Initialize() {
+        SRHalt("LibraryImpl::Initialize() : called initialization method in basic class!");
+        return false;
+    }
 }

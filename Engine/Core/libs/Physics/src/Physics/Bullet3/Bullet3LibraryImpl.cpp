@@ -33,19 +33,17 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    SR_PTYPES_NS::CollisionShape *Bullet3LibraryImpl::CreateCollisionShape(ShapeType type) {
-        return new SR_PTYPES_NS::Bullet3CollisionShape(this, type);
+    SR_PTYPES_NS::CollisionShape *Bullet3LibraryImpl::CreateCollisionShape() {
+        return new SR_PTYPES_NS::Bullet3CollisionShape(this);
     }
 
-    SR_PTYPES_NS::Rigidbody3D *Bullet3LibraryImpl::CreateRigidbody3D(ShapeType type) {
+    SR_PTYPES_NS::Rigidbody3D *Bullet3LibraryImpl::CreateRigidbody3D() {
         auto&& pRigidbody = new SR_PTYPES_NS::Bullet3Rigidbody3D(this);
-
-        pRigidbody->SetType(type);
 
         return pRigidbody;
     }
 
-    SR_PHYSICS_NS::PhysicsWorld *Bullet3LibraryImpl::CreatePhysicsWorld() {
-        return new SR_PHYSICS_NS::Bullet3PhysicsWorld(this);
+    SR_PHYSICS_NS::PhysicsWorld *Bullet3LibraryImpl::CreatePhysicsWorld(Space space) {
+        return new SR_PHYSICS_NS::Bullet3PhysicsWorld(this, space);
     }
 }

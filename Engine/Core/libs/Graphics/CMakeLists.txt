@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(Graphics)
 
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
 if (NOT ANDROID_NDK)

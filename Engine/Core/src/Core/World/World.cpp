@@ -62,11 +62,13 @@ namespace SR_CORE_NS {
 
         /// ----------------------
 
-        auto&& componentManager = Helper::ComponentManager::Instance();
+        auto&& componentManager = SR_UTILS_NS::ComponentManager::Instance();
         componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool
         {
             context.SetPointer<SR_GRAPH_NS::Window>(Engine::Instance().GetWindow());
-            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>(SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary());
+
+            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
+            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
 
             auto&& componentCount = marshal.Read<uint32_t>();
 

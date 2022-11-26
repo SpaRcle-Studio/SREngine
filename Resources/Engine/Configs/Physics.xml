@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Physics>
+    <DefaultLibraries>
+        <Space2D Library="PhysX"/>
+        <Space3D Library="Bullet3"/>
+    </DefaultLibraries>
+</Physics>

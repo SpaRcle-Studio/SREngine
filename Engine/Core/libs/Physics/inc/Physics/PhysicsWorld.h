@@ -15,21 +15,33 @@ namespace SR_PHYSICS_NS {
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;
+        using Space = SR_UTILS_NS::Measurement;
     public:
-        explicit PhysicsWorld(LibraryPtr pLibrary);
+        explicit PhysicsWorld(LibraryPtr pLibrary, Space space);
         ~PhysicsWorld() override = default;
 
     public:
         virtual bool StepSimulation(float_t step) { return false; }
-        virtual bool CreateDynamicWorld() { return false; }
+        virtual bool Initialize() { return false; }
         virtual bool ClearForces() { return false; }
-        virtual bool Update() { return false; }
+        virtual bool Synchronize() { return false; }
 
         virtual bool AddRigidbody(RigidbodyPtr pRigidbody) { return false; }
         virtual bool RemoveRigidbody(RigidbodyPtr pRigidbody) { return false; }
 
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
+            if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
+                return pLibrary;
+            }
+
+            SRHalt("Failed to cast library!");
+
+            return nullptr;
+        }
+
     protected:
         LibraryPtr m_library = nullptr;
+        Space m_space = Space::Unknown;
 
     };
 }

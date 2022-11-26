@@ -5,8 +5,8 @@
 #include <Physics/Bullet3/Bullet3PhysicsWorld.h>
 
 namespace SR_PHYSICS_NS {
-    Bullet3PhysicsWorld::Bullet3PhysicsWorld(PhysicsWorld::LibraryPtr pLibrary)
-        : Super(pLibrary)
+    Bullet3PhysicsWorld::Bullet3PhysicsWorld(PhysicsWorld::LibraryPtr pLibrary, Space space)
+        : Super(pLibrary, space)
     { }
 
     Bullet3PhysicsWorld::~Bullet3PhysicsWorld() {
@@ -17,7 +17,7 @@ namespace SR_PHYSICS_NS {
         SR_SAFE_DELETE_PTR(m_collisionConfiguration);
     }
 
-    bool Bullet3PhysicsWorld::CreateDynamicWorld() {
+    bool Bullet3PhysicsWorld::Initialize() {
         ///collision configuration contains default setup for memory, collision setup
         m_collisionConfiguration = new btDefaultCollisionConfiguration();
 
@@ -55,7 +55,7 @@ namespace SR_PHYSICS_NS {
         return true;
     }
 
-    bool Bullet3PhysicsWorld::Update() {
+    bool Bullet3PhysicsWorld::Synchronize() {
         const int32_t numManifolds = m_dispatcher->getNumManifolds();
         for (int32_t i = 0; i < numManifolds; ++i) {
             const btPersistentManifold* contactManifold = m_dispatcher->getManifoldByIndexInternal(i);
@@ -90,8 +90,12 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            if (pRigidbody->IsDirty()) {
-                pRigidbody->UpdateShape();
+            if (pRigidbody->IsShapeDirty() && pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                SR_ERROR("Bullet3PhysicsWorld::Synchronize() : failed to update shape!");
+                continue;
+            }
+
+            if (pRigidbody->IsMatrixDirty()) {
                 pRigidbody->UpdateMatrix();
             }
             else if (auto&& pTransform = pRigidbody->GetTransform()) {
@@ -101,7 +105,7 @@ namespace SR_PHYSICS_NS {
                 pTransform->SetTranslation(SR_MATH_NS::FVector3(pos.x(), pos.y(), pos.z()) - pRigidbody->GetCenterDirection());
                 pTransform->SetRotation(SR_MATH_NS::Quaternion(orn.x(), orn.y(), orn.z(), orn.w()));
 
-                pRigidbody->SetDirty(false);
+                pRigidbody->SetMatrixDirty(false);
             }
         }
 
@@ -109,13 +113,23 @@ namespace SR_PHYSICS_NS {
     }
 
     bool Bullet3PhysicsWorld::AddRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
-        m_dynamicsWorld->addRigidBody((btRigidBody*)pRigidbody->GetHandle());
-        return true;
+        if (auto&& pHandle = pRigidbody->GetHandle()) {
+            m_dynamicsWorld->addRigidBody((btRigidBody*)pHandle);
+            return true;
+        }
+
+        SRHalt("pHandle is nullptr!");
+        return false;
     }
 
     bool Bullet3PhysicsWorld::RemoveRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
-        m_dynamicsWorld->removeRigidBody((btRigidBody*)pRigidbody->GetHandle());
-        return true;
+        if (auto&& pHandle = pRigidbody->GetHandle()) {
+            m_dynamicsWorld->removeRigidBody((btRigidBody *)pHandle);
+            return true;
+        }
+
+        SRHalt("pHandle is nullptr!");
+        return false;
     }
 
     bool Bullet3PhysicsWorld::StepSimulation(float_t step) {

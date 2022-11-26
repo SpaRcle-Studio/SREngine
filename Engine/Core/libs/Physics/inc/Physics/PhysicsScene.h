@@ -27,6 +27,7 @@ namespace SR_PHYSICS_NS {
         using PhysicsWorldPtr = SR_PHYSICS_NS::PhysicsWorld*;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using Space = SR_UTILS_NS::Measurement;
     public:
         explicit PhysicsScene(const ScenePtr& scene);
         ~PhysicsScene();
@@ -46,7 +47,8 @@ namespace SR_PHYSICS_NS {
     private:
         ScenePtr m_scene;
 
-        LibraryPtr m_library = nullptr;
+        LibraryPtr m_library2D = nullptr;
+        LibraryPtr m_library3D = nullptr;
 
         PhysicsWorldPtr m_2DWorld = nullptr;
         PhysicsWorldPtr m_3DWorld = nullptr;

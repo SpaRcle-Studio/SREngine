@@ -10,7 +10,9 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 
 #include <Scripting/Base/Behaviour.h>
-#include <Physics/Rigidbody.h>
+
+#include <Physics/3D/Rigidbody3D.h>
+#include <Physics/2D/Rigidbody2D.h>
 
 #include <Graphics/UI/Sprite2D.h>
 #include <Graphics/UI/Anchor.h>
@@ -130,7 +132,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
-            copyPtrComponent = DrawComponent<SR_PHYSICS_NS::Types::Rigidbody>(copyPtrComponent, "Rigidbody", index);
+            copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {

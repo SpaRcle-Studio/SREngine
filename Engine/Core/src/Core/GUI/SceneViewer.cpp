@@ -270,9 +270,17 @@ namespace SR_CORE_NS::GUI {
         const float_t x = mousePos.x / m_textureSize.x;
         const float_t y = mousePos.y / m_textureSize.y;
 
-        if (auto&& pPass = m_camera->GetComponent<SR_GTYPES_NS::Camera>()->GetRenderTechnique()->FindPass("ColorBufferPass")) {
-            auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass *>(pPass);
+        auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
+        if (!pCamera) {
+            return Super::OnMouseUp(data);
+        }
 
+        auto&& pRenderTechnique = pCamera->GetRenderTechnique();
+        if (!pRenderTechnique) {
+            return Super::OnMouseUp(data);
+        }
+
+        if (auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass*>(pRenderTechnique->FindPass("ColorBufferPass"))) {
             /// auto&& color = pColorPass->GetColor(x, y);
             /// auto&& index = pColorPass->GetIndex(x, y);
             /// SR_LOG(SR_FORMAT("%f, %f, %f, %f - %i", color.r, color.g, color.b, color.a, index));

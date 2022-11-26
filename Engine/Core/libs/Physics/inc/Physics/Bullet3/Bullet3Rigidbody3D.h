@@ -21,11 +21,11 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD void* GetHandle() const noexcept override;
 
     public:
-        void SetMass(float_t mass) override;
+        void UpdateInertia() override;
         bool InitBody() override;
 
         bool UpdateMatrix() override;
-        bool UpdateShape() override;
+        bool UpdateShapeInternal() override;
 
         void DeInitBody() override;
 
