@@ -26,8 +26,15 @@ namespace SR_PHYSICS_NS {
         bool RemoveRigidbody(RigidbodyPtr pRigidbody) override;
 
     private:
+        bool SynchronizeStatic();
+        bool SynchronizeDynamic();
+
+    private:
         physx::PxScene* m_scene = nullptr;
         physx::PxDefaultCpuDispatcher* m_cpuDispatcher = nullptr;
+
+        std::vector<physx::PxActor*> m_dynamicActors;
+        std::vector<physx::PxActor*> m_staticActors;
 
     };
 }

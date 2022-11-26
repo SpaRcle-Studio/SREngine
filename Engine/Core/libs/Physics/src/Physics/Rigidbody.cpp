@@ -16,6 +16,7 @@ namespace SR_PHYSICS_NS::Types {
         : SR_UTILS_NS::Component()
         , m_library(pLibrary)
         , m_shape(pLibrary->CreateCollisionShape())
+        , m_isBodyDirty(true)
     { }
 
     Rigidbody::~Rigidbody() {
@@ -26,6 +27,8 @@ namespace SR_PHYSICS_NS::Types {
         const auto&& type = static_cast<ShapeType>(marshal.Read<int32_t>());
         const auto&& center = marshal.Read<SR_MATH_NS::FVector3>();
         const auto&& mass = marshal.Read<float_t>();
+        const auto&& isTrigger = marshal.Read<bool>();
+        const auto&& isStatic = marshal.Read<bool>();
 
         static auto&& verifyType = [](LibraryImpl* pLibrary, ShapeType shapeType) -> ShapeType {
             if (!pLibrary->IsShapeSupported(shapeType)) {
@@ -64,6 +67,8 @@ namespace SR_PHYSICS_NS::Types {
         pComponent->SetType(verifyType(pLibrary, type));
         pComponent->SetCenter(center);
         pComponent->SetMass(mass);
+        pComponent->SetIsTrigger(isTrigger);
+        pComponent->SetIsStatic(isStatic);
 
         return pComponent;
     }
@@ -74,25 +79,31 @@ namespace SR_PHYSICS_NS::Types {
         pMarshal->Write<int32_t>(static_cast<int32_t>(m_shape->GetType()));
         pMarshal->Write(m_center);
         pMarshal->Write(m_mass);
+        pMarshal->Write(IsTrigger());
+        pMarshal->Write(IsStatic());
 
         return pMarshal;
     }
 
     void Rigidbody::OnDestroy() {
-        DeInitBody();
+        if (m_debugId != SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
+            m_debugId = SR_ID_INVALID;
+        }
+
+        if (auto&& physicsScene = GetPhysicsScene()) {
+            physicsScene->Remove(this);
+        }
+        else {
+            SRHalt("Failed to get physics scene!");
+        }
+
         Super::OnDestroy();
         delete this;
     }
 
     void Rigidbody::OnAttached() {
         Component::OnAttached();
-    }
-
-    void Rigidbody::DeInitBody() {
-        if (m_debugId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
-            m_debugId = SR_ID_INVALID;
-        }
     }
 
     Rigidbody::PhysicsScenePtr Rigidbody::GetPhysicsScene() {
@@ -120,8 +131,8 @@ namespace SR_PHYSICS_NS::Types {
         Component::OnMatrixDirty();
     }
 
-    bool Rigidbody::UpdateMatrix() {
-        if (!IsMatrixDirty() || !m_shape) {
+    bool Rigidbody::UpdateMatrix(bool force) {
+        if ((!force && !IsMatrixDirty()) || !m_shape) {
             return false;
         }
 
@@ -219,13 +230,11 @@ namespace SR_PHYSICS_NS::Types {
 
     void Rigidbody::OnEnable() {
         if (auto&& physicsScene = GetPhysicsScene()) {
-            if (!InitBody() || UpdateShape() == RBUpdShapeRes::Error) {
-                SR_ERROR("Rigidbody::OnEnable() : failed to init/update!");
-            }
-            else {
+            if (!IsBodyDirty()) {
                 UpdateInertia();
-                physicsScene->Register(this);
             }
+
+            physicsScene->Register(this);
         }
         else {
             SRHalt("Failed to get physics scene!");
@@ -242,7 +251,11 @@ namespace SR_PHYSICS_NS::Types {
             SRHalt("Failed to get physics scene!");
         }
 
-        DeInitBody();
+        if (m_debugId != SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
+            m_debugId = SR_ID_INVALID;
+        }
+
         Super::OnDisable();
     }
 
@@ -252,11 +265,12 @@ namespace SR_PHYSICS_NS::Types {
 
     void Rigidbody::SetIsTrigger(bool value) {
         m_isTrigger = value;
+        m_isBodyDirty = true;
     }
 
     void Rigidbody::SetIsStatic(bool value) {
         m_isStatic = value;
-        SetShapeDirty(true);
+        m_isBodyDirty = true;
     }
 
     RBUpdShapeRes Rigidbody::UpdateShape() {
@@ -276,9 +290,21 @@ namespace SR_PHYSICS_NS::Types {
         }
 
         UpdateDebugShape();
+        UpdateMatrix(true);
 
         SetShapeDirty(false);
 
         return RBUpdShapeRes::Updated;
+    }
+
+    bool Rigidbody::InitBody() {
+        if (!m_isBodyDirty) {
+            SRHalt("Rigidbody::InitBody() : body is not dirty!");
+            return false;
+        }
+
+        m_isBodyDirty = false;
+
+        return true;
     }
 }

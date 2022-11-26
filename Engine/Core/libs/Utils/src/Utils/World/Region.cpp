@@ -108,6 +108,7 @@ namespace SR_WORLD_NS {
 
             pChunk->Unload();
             delete pChunk;
+            pChunk = nullptr;
         }
 
         m_loadedChunks.clear();

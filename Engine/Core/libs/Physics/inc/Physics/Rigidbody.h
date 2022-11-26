@@ -27,7 +27,7 @@ namespace SR_PHYSICS_NS {
 namespace SR_PTYPES_NS {
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1002);
         using Super = SR_UTILS_NS::Component;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
@@ -40,7 +40,7 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
-        virtual bool UpdateMatrix();
+        virtual bool UpdateMatrix(bool force = false);
 
         virtual bool UpdateShapeInternal() { return false; }
         virtual void UpdateInertia() { }
@@ -56,9 +56,10 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD bool IsStatic() const noexcept { return m_isStatic; }
         SR_NODISCARD bool IsMatrixDirty() const noexcept { return m_isMatrixDirty; }
         SR_NODISCARD bool IsShapeDirty() const noexcept { return m_isShapeDirty; }
+        SR_NODISCARD bool IsBodyDirty() const noexcept { return m_isBodyDirty; }
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
-        SR_NODISCARD RBUpdShapeRes UpdateShape();
+        RBUpdShapeRes UpdateShape();
 
         void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
         void SetShapeDirty(bool value) { m_isShapeDirty = value; }
@@ -70,8 +71,10 @@ namespace SR_PTYPES_NS {
         virtual void SetIsStatic(bool value);
 
         virtual void SetCenter(const SR_MATH_NS::FVector3& center);
-        virtual void SetMass(float_t mass);
         virtual void SetType(ShapeType type);
+        void SetMass(float_t mass);
+
+        virtual bool InitBody();
 
     protected:
         void OnEnable() override;
@@ -82,9 +85,6 @@ namespace SR_PTYPES_NS {
         void UpdateDebugShape();
 
         void OnMatrixDirty() override;
-
-        virtual bool InitBody() { return true; }
-        virtual void DeInitBody();
 
         PhysicsScenePtr GetPhysicsScene();
 
@@ -110,9 +110,10 @@ namespace SR_PTYPES_NS {
 
         SR_MATH_NS::FVector3 m_center;
 
-        bool m_isStatic = false;
         bool m_isTrigger = false;
+        bool m_isStatic = false;
 
+        bool m_isBodyDirty = false;
         bool m_isMatrixDirty = false;
         bool m_isShapeDirty = false;
 

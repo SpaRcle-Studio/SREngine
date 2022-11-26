@@ -18,6 +18,7 @@ namespace SR_PTYPES_NS {
 
     public:
         bool UpdateShape() override;
+        bool UpdateMatrix() override;
 
         void* GetHandle() const noexcept override { return m_shape; }
 

@@ -20,11 +20,12 @@ namespace SR_PTYPES_NS {
         return m_rigidActor;
     }
 
-    void PhysXRigidbody3D::SetMass(float_t mass) {
-        if (auto&& pRigidBody = dynamic_cast<physx::PxRigidBody*>(m_rigidActor)) {
-            pRigidBody->setMass(mass);
+    void PhysXRigidbody3D::UpdateInertia() {
+        if (m_rigidActor) {
+            if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
+                physx::PxRigidBodyExt::updateMassAndInertia(*pRigidBody, m_mass);
+            }
         }
-        Super::SetMass(mass);
     }
 
     bool PhysXRigidbody3D::InitBody() {
@@ -39,6 +40,11 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        if (m_rigidActor) {
+            m_rigidActor->release();
+            m_rigidActor = nullptr;
+        }
+
         if (m_isStatic) {
             m_rigidActor = pPhysics->createRigidStatic(physx::PxTransform(physx::PxVec3(0.f, 0.f, 0.f)));
         }
@@ -51,24 +57,36 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        m_rigidActor->userData = (void*)dynamic_cast<Rigidbody*>(this);
+
+        UpdateMatrix(true);
+        UpdateShape();
+        UpdateInertia();
+
         return true;
     }
 
-    bool PhysXRigidbody3D::UpdateMatrix() {
-        return Super::UpdateMatrix();
-    }
-
-    void PhysXRigidbody3D::DeInitBody() {
-        if (auto&& physicsScene = GetPhysicsScene()) {
-            if (m_rigidActor) {
-                physicsScene->Remove(this);
-            }
-        }
-        else {
-            SRHalt("Failed to get physics scene!");
+    bool PhysXRigidbody3D::UpdateMatrix(bool force) {
+        if (!Super::UpdateMatrix(force)) {
+            return false;
         }
 
-        Super::DeInitBody();
+        auto&& translation = m_translation + GetCenterDirection();
+
+        physx::PxTransform transform;
+
+        transform.p = physx::PxVec3(translation.x, translation.y, translation.z);
+        transform.q = physx::PxQuat(m_rotation.X(), m_rotation.Y(), m_rotation.Z(), m_rotation.W());
+
+        m_rigidActor->setGlobalPose(transform);
+
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>(); pRigidBody && pRigidBody->getScene()) {
+            pRigidBody->clearForce();
+            pRigidBody->setLinearVelocity(physx::PxVec3(0, 0, 0));
+            pRigidBody->setAngularVelocity(physx::PxVec3(0, 0, 0));
+        }
+
+        return true;
     }
 
     bool PhysXRigidbody3D::UpdateShapeInternal() {
@@ -79,11 +97,11 @@ namespace SR_PTYPES_NS {
 
         const uint32_t shapesCount = m_rigidActor->getNbShapes();
         if (shapesCount > 0) {
-            SRAssert(shapesCount <= 16);
-            physx::PxShape *shapes[16];
-            m_rigidActor->getShapes(shapes, shapesCount);
-            for (uint32_t i = 0; i < shapesCount; ++i) {
-                m_rigidActor->detachShape(*shapes[i]);
+            std::vector<physx::PxShape*> shapes;
+            shapes.resize(shapesCount);
+            m_rigidActor->getShapes(shapes.data(), shapesCount);
+            for (auto&& pShape : shapes) {
+                m_rigidActor->detachShape(*pShape);
             }
         }
 

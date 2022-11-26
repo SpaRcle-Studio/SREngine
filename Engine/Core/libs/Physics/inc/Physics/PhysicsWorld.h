@@ -29,6 +29,10 @@ namespace SR_PHYSICS_NS {
         virtual bool AddRigidbody(RigidbodyPtr pRigidbody) { return false; }
         virtual bool RemoveRigidbody(RigidbodyPtr pRigidbody) { return false; }
 
+        bool ReAddRigidbody(RigidbodyPtr pRigidbody) {
+            return RemoveRigidbody(pRigidbody) && AddRigidbody(pRigidbody);
+        }
+
         template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
                 return pLibrary;

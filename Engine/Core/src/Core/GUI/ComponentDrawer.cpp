@@ -70,19 +70,23 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetCenter(center);
         }
 
-        auto&& mass = pComponent->GetMass();
-        if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
-            pComponent->SetMass(mass);
-        }
-
         auto&& isTrigger = pComponent->IsTrigger();
         if (ImGui::Checkbox(SR_FORMAT_C("Is trigger##rgbd%i", index), &isTrigger)) {
             pComponent->SetIsTrigger(isTrigger);
         }
 
+        ImGui::SameLine();
+
         auto&& isStatic = pComponent->IsStatic();
         if (ImGui::Checkbox(SR_FORMAT_C("Is static##rgbd%i", index), &isStatic)) {
             pComponent->SetIsStatic(isStatic);
+        }
+
+        if (!pComponent->IsStatic()) {
+            auto &&mass = pComponent->GetMass();
+            if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
+                pComponent->SetMass(mass);
+            }
         }
 
         if (ImGui::Button("Jump")) {

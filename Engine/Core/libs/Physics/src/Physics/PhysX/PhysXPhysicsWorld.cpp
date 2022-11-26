@@ -53,7 +53,7 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysXPhysicsWorld::Synchronize() {
-        return true;
+        return SynchronizeDynamic() && SynchronizeStatic();
     }
 
     bool PhysXPhysicsWorld::StepSimulation(float_t step) {
@@ -77,8 +77,13 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        auto&& pActor = (physx::PxActor*)(pRigidbody->GetHandle());
-        m_scene->addActor(*pActor);
+        if (pRigidbody->IsBodyDirty()) {
+            pRigidbody->InitBody();
+        }
+
+        if (auto&& pActor = (physx::PxActor*)(pRigidbody->GetHandle())) {
+            m_scene->addActor(*pActor);
+        }
 
         return true;
     }
@@ -89,8 +94,107 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        auto&& pActor = (physx::PxActor*)(pRigidbody->GetHandle());
-        m_scene->removeActor(*pActor);
+        if (auto&& pActor = (physx::PxActor*)(pRigidbody->GetHandle())) {
+            m_scene->removeActor(*pActor);
+        }
+
+        return true;
+    }
+
+    bool PhysXPhysicsWorld::SynchronizeStatic() {
+        const uint32_t count = m_scene->getNbActors(physx::PxActorTypeFlag::Enum::eRIGID_STATIC);
+        if (count == 0) {
+            return true;
+        }
+
+        if (m_staticActors.size() < count) {
+            m_staticActors.resize(count);
+        }
+
+        auto&& pActors = m_staticActors.data();
+        m_scene->getActors(physx::PxActorTypeFlag::Enum::eRIGID_STATIC, pActors, count);
+
+        for (uint32_t i = 0; i < count; ++i) {
+            auto&& pRigidActor = pActors[i]->is<physx::PxRigidActor>();
+            if (!SRVerifyFalse(!pRigidActor)) {
+                continue;
+            }
+
+            auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pRigidActor->userData;
+            if (!SRVerifyFalse(!pRigidbody)) {
+                continue;
+            }
+
+            if (pRigidbody->IsBodyDirty()) {
+                SRVerifyFalse(!ReAddRigidbody(pRigidbody));
+                continue;
+            }
+
+            if (pRigidbody->IsShapeDirty() && pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
+                continue;
+            }
+
+            if (pRigidbody->IsMatrixDirty()) {
+                pRigidbody->UpdateMatrix();
+            }
+        }
+
+        return true;
+    }
+
+    bool PhysXPhysicsWorld::SynchronizeDynamic() {
+        const uint32_t count = m_scene->getNbActors(physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC);
+        if (count == 0) {
+            return true;
+        }
+
+        if (m_dynamicActors.size() < count) {
+            m_dynamicActors.resize(count);
+        }
+
+        auto&& pActors = m_dynamicActors.data();
+        m_scene->getActors(physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC, pActors, count);
+
+        for (uint32_t i = 0; i < count; ++i) {
+            auto&& pRigidActor = pActors[i]->is<physx::PxRigidActor>();
+            if (!SRVerifyFalse(!pRigidActor)) {
+                continue;
+            }
+
+            auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pRigidActor->userData;
+            if (!SRVerifyFalse(!pRigidbody)) {
+                continue;
+            }
+
+            if (pRigidbody->IsBodyDirty()) {
+                SRVerifyFalse(!ReAddRigidbody(pRigidbody));
+                continue;
+            }
+
+            if (pRigidbody->IsShapeDirty() && pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
+                continue;
+            }
+
+            if (pRigidbody->IsMatrixDirty()) {
+                pRigidbody->UpdateMatrix();
+            }
+            else if (auto&& pTransform = pRigidbody->GetTransform()) {
+                auto&& globalPose = pRigidActor->getGlobalPose();
+
+                pTransform->SetTranslation(globalPose.p.x, globalPose.p.y, globalPose.p.z);
+
+                pTransform->SetRotation(SR_MATH_NS::Quaternion(
+                        globalPose.q.x,
+                        globalPose.q.y,
+                        globalPose.q.z,
+                        globalPose.q.w)
+                );
+
+                pRigidbody->SetMatrixDirty(false);
+            }
+        }
 
         return true;
     }

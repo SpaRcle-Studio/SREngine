@@ -11,7 +11,8 @@ namespace SR_PTYPES_NS {
     { }
 
     Bullet3Rigidbody3D::~Bullet3Rigidbody3D() {
-        SRAssert2(!m_motionState && !m_rigidbody, "Not all data deleted!");
+        SR_SAFE_DELETE_PTR(m_motionState);
+        SR_SAFE_DELETE_PTR(m_rigidbody);
     }
 
     void Bullet3Rigidbody3D::UpdateInertia() {
@@ -27,10 +28,11 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        SR_SAFE_DELETE_PTR(m_motionState);
+        SR_SAFE_DELETE_PTR(m_rigidbody);
+
         btTransform startTransform;
         startTransform.setIdentity();
-
-        SRAssert2(!m_motionState && !m_rigidbody, "Rigidbody is already initialized!");
 
         m_motionState = new btDefaultMotionState(startTransform);
 
@@ -76,24 +78,8 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void Bullet3Rigidbody3D::DeInitBody() {
-        if (auto&& physicsScene = GetPhysicsScene()) {
-            if (m_rigidbody) {
-                physicsScene->Remove(this);
-            }
-        }
-        else {
-            SRHalt("Failed to get physics scene!");
-        }
-
-        SR_SAFE_DELETE_PTR(m_motionState);
-        SR_SAFE_DELETE_PTR(m_rigidbody);
-
-        Super::DeInitBody();
-    }
-
-    bool Bullet3Rigidbody3D::UpdateMatrix() {
-        if (!Super::UpdateMatrix()) {
+    bool Bullet3Rigidbody3D::UpdateMatrix(bool force) {
+        if (!Super::UpdateMatrix(force)) {
             return false;
         }
 
