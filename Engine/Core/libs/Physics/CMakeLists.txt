@@ -10,7 +10,19 @@ add_definitions(
 
 set(SR_PHYSICS_USE_BULLET3 OFF)
 set(SR_PHYSICS_USE_PHYSX ON)
+set(SR_PHYSICS_USE_BOX2D ON)
 
+# ----------------------------------------------------------------------------------------------------------------------
+if (SR_PHYSICS_USE_BOX2D)
+    add_compile_definitions(SR_PHYSICS_USE_BOX2D)
+
+    set(BOX2D_BUILD_UNIT_TESTS OFF CACHE INTERNAL "" FORCE)
+    set(BOX2D_BUILD_TESTBED OFF CACHE INTERNAL "" FORCE)
+
+    add_subdirectory(libs/box2d)
+
+    list(APPEND SR_PHYSICS_LINK_LIBRARIES box2d)
+endif()
 # ----------------------------------------------------------------------------------------------------------------------
 if (SR_PHYSICS_USE_BULLET3)
     add_compile_definitions(SR_PHYSICS_USE_BULLET3)

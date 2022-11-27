@@ -13,6 +13,10 @@
     #include <Physics/PhysX/PhysXLibraryImpl.h>
 #endif
 
+#ifdef SR_PHYSICS_USE_BOX2D
+    #include <Physics/Box2D/Box2DLibraryImpl.h>
+#endif
+
 namespace SR_PHYSICS_NS {
     PhysicsLibrary::PhysicsLibrary()
         : Super()
@@ -68,6 +72,11 @@ namespace SR_PHYSICS_NS {
         #ifdef SR_PHYSICS_USE_BULLET3
             case LibraryType::Bullet3:
                 m_libraries[index] = new Bullet3LibraryImpl();
+                break;
+        #endif
+        #ifdef SR_PHYSICS_USE_BOX2D
+            case LibraryType::Box2D:
+                m_libraries[index] = new Box2DLibraryImpl();
                 break;
         #endif
             default:

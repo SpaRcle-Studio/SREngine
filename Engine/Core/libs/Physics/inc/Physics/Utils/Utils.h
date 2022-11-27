@@ -15,7 +15,8 @@ namespace SR_PHYSICS_NS {
          PhysX = 3,
          Havok = 4,
          Volt = 5,
-         Shark = 6
+         Shark = 6,
+         Box2D = 7
     );
 
     SR_ENUM_NS_CLASS(ShapeType,
@@ -24,10 +25,10 @@ namespace SR_PHYSICS_NS {
          Box2D,
          Cylinder2D,
          Capsule2D,
-         Sphere2D,
+         Circle2D,
          TriangleMesh2D,
-         Convex2D,
          Cone2D,
+         Edge2D,
 
          Plane3D,
          Box3D,
@@ -46,9 +47,9 @@ namespace SR_PHYSICS_UTILS_NS {
             case ShapeType::Box2D:
             case ShapeType::Cylinder2D:
             case ShapeType::Capsule2D:
-            case ShapeType::Sphere2D:
+            case ShapeType::Circle2D:
             case ShapeType::TriangleMesh2D:
-            case ShapeType::Convex2D:
+            case ShapeType::Edge2D:
             case ShapeType::Cone2D:
                 return true;
             default:
@@ -74,7 +75,7 @@ namespace SR_PHYSICS_UTILS_NS {
 
     SR_MAYBE_UNUSED static constexpr bool IsSphere(ShapeType type) {
         switch (type) {
-            case ShapeType::Sphere2D:
+            case ShapeType::Circle2D:
             case ShapeType::Sphere3D:
                 return true;
             default:

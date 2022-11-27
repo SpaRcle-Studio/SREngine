@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Physics>
     <DefaultLibraries>
-        <Space2D Library="PhysX"/>
+        <Space2D Library="Box2D"/>
         <Space3D Library="PhysX"/>
     </DefaultLibraries>
 </Physics>

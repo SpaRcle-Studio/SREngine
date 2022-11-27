@@ -39,5 +39,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-
 #endif //SRENGINE_PHYSXLIBRARYIMPL_H

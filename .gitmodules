@@ -43,3 +43,6 @@
 [submodule "Engine/Core/libs/Physics/libs/PhysX"]
 	path = Engine/Core/libs/Physics/libs/PhysX
 	url = https://github.com/Monika0000/PhysX
+[submodule "Engine/Core/libs/Physics/libs/box2d"]
+	path = Engine/Core/libs/Physics/libs/box2d
+	url = https://github.com/Monika0000/box2d
