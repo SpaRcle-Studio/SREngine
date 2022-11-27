@@ -298,6 +298,21 @@ namespace SR_GRAPH_NS::Types {
             case SRSL::ShaderType::Custom:
             case SRSL::ShaderType::PostProcessing:
                 break;
+            case SRSL::ShaderType::Skinned:
+            {
+                UBOInfo uniforms = {};
+                for (const auto& [binding, size] : unit->GetUniformSizes()) {
+                    uniforms.emplace_back(std::pair(binding, size));
+                }
+
+                m_shaderCreateInfo.uniforms = std::move(uniforms);
+
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SkinnedMeshVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(description);
+                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+
+                break;
+            }
             case SRSL::ShaderType::Spatial: {
                 UBOInfo uniforms = {};
                 for (const auto& [binding, size] : unit->GetUniformSizes()) {
@@ -331,8 +346,6 @@ namespace SR_GRAPH_NS::Types {
 
                 break;
             }
-            case SRSL::ShaderType::Animation:
-                break;
             case SRSL::ShaderType::Canvas: {
                 UBOInfo uniforms = { };
                 for (const auto&[binding, size] : unit->GetUniformSizes()) {

@@ -20,6 +20,7 @@
 #include <Physics/3D/Rigidbody3D.h>
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Types/Texture.h>
@@ -258,6 +259,73 @@ namespace SR_CORE_NS::GUI {
         /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             mesh3d->SetMaterial(copy);
+        }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index) {
+        if (!pComponent->IsCanCalculate())
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
+
+        if (!pComponent->IsCalculated())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        auto&& pMaterial = pComponent->GetMaterial();
+
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
+            if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
+
+                if (path.Exists()) {
+                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Skinned, 0)) {
+                        if (pMaterial) {
+                            pMesh->SetMaterial(pMaterial);
+                        }
+
+                        pComponent = dynamic_cast<SR_GTYPES_NS::SkinnedMesh *>(pMesh);
+
+                        return;
+                    }
+                }
+            }
+        }
+
+        ImGui::SameLine();
+        ImGui::BeginGroup();
+
+        Graphics::GUI::DrawValue("Path", pComponent->GetResourcePath(), index);
+        Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
+
+        int32_t meshId = pComponent->GetMeshId();
+        if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+            auto&& path = pComponent->GetResourcePath();
+
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Skinned, meshId)) {
+                if (pMaterial) {
+                    pMesh->SetMaterial(pMaterial);
+                }
+
+                pComponent = dynamic_cast<SR_GTYPES_NS::SkinnedMesh *>(pComponent);
+
+                ImGui::EndGroup();
+
+                return;
+            }
+        }
+
+        ImGui::EndGroup();
+
+        Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
+        Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
+
+        ImGui::Separator();
+
+        SR_GTYPES_NS::Material* copy = pMaterial;
+        DrawComponent(copy, context, index);
+
+        /// компилятор считает, что это недостижимый код (он ошибается)
+        if (copy != pMaterial) {
+            pComponent->SetMaterial(copy);
         }
     }
 

@@ -97,8 +97,13 @@ namespace SR_GRAPH_NS::Types {
             case MeshType::Sprite2D:
                 pMesh = new UI::Sprite2D();
                 break;
+            case MeshType::Skinned: {
+                auto&& pSkinnedMesh = new Types::SkinnedMesh();
+                pSkinnedMesh->m_meshId = id;
+                pMesh = pSkinnedMesh;
+                break;
+            }
             case MeshType::Unknown:
-            case MeshType::Skinned:
             default:
                 SRAssert(false);
                 pRawMesh->RemoveUsePoint();

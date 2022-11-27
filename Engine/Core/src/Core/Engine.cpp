@@ -25,6 +25,7 @@
 #include <Graphics/Animations/Bone.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
 
 #include <Audio/RawSound.h>
 #include <Audio/Sound.h>
@@ -593,6 +594,9 @@ namespace Framework {
         });
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Mesh3D>([]() {
             return new SR_GTYPES_NS::Mesh3D();
+        });
+        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::SkinnedMesh>([]() {
+            return new SR_GTYPES_NS::SkinnedMesh();
         });
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Sprite2D>([]() {
             return new SR_GRAPH_UI_NS::Sprite2D();

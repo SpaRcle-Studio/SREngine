@@ -330,6 +330,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
             break;
         case ShaderType::Spatial:
         case ShaderType::SpatialCustom:
+        case ShaderType::Skinned:
         case ShaderType::Simple:
         case ShaderType::Skybox:
         case ShaderType::Canvas:
@@ -376,7 +377,21 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
             source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT;\n", location++);
-            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANGENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in float VERTEX_INDEX;\n", location++);
+            source += "vec4 COLOR;";
+            break;
+        case ShaderType::Skinned:
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANGENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in float VERTEX_INDEX;\n", location++);
+
+            for (uint8_t i = 0; i < 8; i++) {
+                source += SR_UTILS_NS::Format("layout (location = %i) in vec2 WEIGHT%i;\n", location++, i);
+            }
             source += "vec4 COLOR;";
             break;
         case ShaderType::Simple:
@@ -441,6 +456,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
             break;
         case ShaderType::Spatial:
         case ShaderType::SpatialCustom:
+        case ShaderType::Skinned:
         case ShaderType::Simple:
         case ShaderType::TextUI:
         case ShaderType::Text:
@@ -483,8 +499,19 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 NORMAL;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 TANGENT;\n", location++);
-            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 BITANBENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 BITANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out float VERTEX_INDEX;\n", location++);
+            break;
+        case ShaderType::Skinned:
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 NORMAL;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 TANGENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out vec3 BITANGENT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) out float VERTEX_INDEX;\n", location++);
+            for (uint8_t i = 0; i < 8; i++) {
+                source += SR_UTILS_NS::Format("layout (location = %i) out vec2 WEIGHT%i;\n", location++, i);
+            }
             break;
         case ShaderType::PostProcessing:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
@@ -529,8 +556,20 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tUV = UV_INPUT;\n";
             source += "\tNORMAL = NORMAL_INPUT;\n";
             source += "\tTANGENT = TANGENT_INPUT;\n";
-            source += "\tBITANBENT = BITANBENT_INPUT;\n";
+            source += "\tBITANGENT = BITANGENT_INPUT;\n";
             source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
+            break;
+        case ShaderType::Skinned:
+            source += "\tVERTEX = VERTEX_INPUT;\n";
+            source += "\tVERTEX.x = -VERTEX.x;\n";
+            source += "\tUV = UV_INPUT;\n";
+            source += "\tNORMAL = NORMAL_INPUT;\n";
+            source += "\tTANGENT = TANGENT_INPUT;\n";
+            source += "\tBITANGENT = BITANGENT_INPUT;\n";
+            source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
+            for (uint8_t i = 0; i < 8; i++) {
+                source += SR_FORMAT("\tWEIGHT%i = WEIGHT%i_INPUT;\n", i, i);
+            }
             break;
         case ShaderType::Canvas:
             source += "\tVERTEX = VERTEX_INPUT;\n";
@@ -573,6 +612,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
         case ShaderType::SpatialCustom:
             break;
         case ShaderType::Simple:
+        case ShaderType::Skinned:
         case ShaderType::Spatial:
             source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
             break;
@@ -673,13 +713,24 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
     uint32_t location = 0;
 
     switch (unit.type) {
+
         case ShaderType::Spatial:
         case ShaderType::SpatialCustom:
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV_INPUT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL_INPUT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT_INPUT;\n", location++);
-            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANBENT_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANGENT_INPUT;\n", location++);
+            break;
+        case ShaderType::Skinned:
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec2 UV_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT_INPUT;\n", location++);
+            source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANGENT_INPUT;\n", location++);
+            for (uint8_t i = 0; i < 8; i++) {
+                source += SR_UTILS_NS::Format("layout (location = %i) in vec2 WEIGHT%i_INPUT;\n", location++, i);
+            }
             break;
         case ShaderType::Simple:
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);
@@ -697,8 +748,6 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
         case ShaderType::Skybox:
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);
             break;
-        case ShaderType::Animation:
-        case ShaderType::Particles:
         case ShaderType::Unknown:
         default:
             SRAssert(false);

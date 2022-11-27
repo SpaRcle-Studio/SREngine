@@ -20,6 +20,7 @@
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Font/Text.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -128,6 +129,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::SkinnedMesh>(copyPtrComponent, "SkinnedMesh", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::ProceduralMesh>(copyPtrComponent, "ProceduralMesh", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);

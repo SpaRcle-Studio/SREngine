@@ -82,6 +82,7 @@
 #include "../Graphics/src/Graphics/Types/Geometry/ProceduralMesh.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/Mesh3D.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/MeshComponent.cpp"
+#include "../Graphics/src/Graphics/Types/Geometry/SkinnedMesh.cpp"
 
 #include "../Graphics/src/Graphics/Types/EditorGrid.cpp"
 #include "../Graphics/src/Graphics/Types/Framebuffer.cpp"

@@ -81,6 +81,60 @@ namespace SR_GRAPH_NS::Vertices {
     };
     typedef std::vector<StaticMeshVertex> StaticMeshVertices;
 
+    struct VertexWeight {
+        uint32_t boneIndex;
+        float weight;
+    };
+
+    struct SkinnedMeshVertex {
+        glm::vec3 pos;
+        glm::vec2 uv;
+        glm::vec3 norm;
+        glm::vec3 tang;
+        glm::vec3 bitang;
+
+        VertexWeight weights[8];
+
+        static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
+            return sizeof(SkinnedMeshVertex);
+        }
+
+        static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
+            auto descriptions = std::vector<std::pair<Attribute, size_t>>();
+
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(SkinnedMeshVertex, uv)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, norm)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, tang)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, bitang)));
+            for (uint8_t i = 0; i < 8; i++) {
+                descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(SkinnedMeshVertex, weights[i])));
+            }
+
+            return descriptions;
+        }
+
+        bool operator==(const SkinnedMeshVertex& other) const {
+            return pos       == other.pos
+                   && uv     == other.uv
+                   && norm   == other.norm
+                   && bitang == other.bitang
+                   && tang   == other.tang;
+            //TODO:А что если 2 вершины в одном месте, а весы различны?
+        }
+
+        SR_NODISCARD std::string ToString() const {
+            return SR_FORMAT("{ %s, %s, %s, %s, %s },",
+                             Vertices::ToString(pos).c_str(),
+                             Vertices::ToString(uv).c_str(),
+                             Vertices::ToString(norm).c_str(),
+                             Vertices::ToString(bitang).c_str(),
+                             Vertices::ToString(tang).c_str()
+            );
+        }
+    };
+    typedef std::vector<SkinnedMeshVertex> SkinnedMeshVertices;
+
     struct UIVertex {
         glm::vec3 pos;
         glm::vec2 uv;
@@ -160,6 +214,8 @@ namespace SR_GRAPH_NS::Vertices {
         switch (type) {
             case VertexType::StaticMeshVertex:
                 return sizeof(StaticMeshVertex);
+            case VertexType::SkinnedMeshVertex:
+                return sizeof(SkinnedMeshVertex);
             case VertexType::SimpleVertex:
                 return sizeof(SimpleVertex);
             case VertexType::UIVertex:
@@ -186,6 +242,10 @@ namespace SR_GRAPH_NS::Vertices {
     SR_MAYBE_UNUSED static VertexInfo GetVertexInfo(VertexType type) {
         VertexInfo info = {};
         switch (type) {
+            case VertexType::SkinnedMeshVertex:
+                info.m_attributes = SkinnedMeshVertex::GetAttributes();
+                info.m_descriptions = { SkinnedMeshVertex::GetDescription() };
+                break;
             case VertexType::StaticMeshVertex:
                 info.m_attributes = StaticMeshVertex::GetAttributes();
                 info.m_descriptions = { StaticMeshVertex::GetDescription() };

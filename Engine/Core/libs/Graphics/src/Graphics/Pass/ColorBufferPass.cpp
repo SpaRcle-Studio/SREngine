@@ -106,13 +106,6 @@ namespace SR_GRAPH_NS {
             case SRSL::ShaderType::Skybox:
             case SRSL::ShaderType::Simple:
                 return m_shaders[2];
-            case SRSL::ShaderType::Particles:
-            case SRSL::ShaderType::Custom:
-            case SRSL::ShaderType::Animation:
-            case SRSL::ShaderType::PostProcessing:
-            case SRSL::ShaderType::Line:
-            case SRSL::ShaderType::Compute:
-            case SRSL::ShaderType::Unknown:
             default:
                 return nullptr;
         }
