@@ -389,9 +389,10 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeFragmentCode(const SRSLUnit &unit
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in float VERTEX_INDEX;\n", location++);
 
-            for (uint8_t i = 0; i < 8; i++) {
+            for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
                 source += SR_UTILS_NS::Format("layout (location = %i) in vec2 WEIGHT%i;\n", location++, i);
             }
+
             source += "vec4 COLOR;";
             break;
         case ShaderType::Simple:
@@ -509,9 +510,11 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 TANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 BITANGENT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) out float VERTEX_INDEX;\n", location++);
-            for (uint8_t i = 0; i < 8; i++) {
+
+            for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
                 source += SR_UTILS_NS::Format("layout (location = %i) out vec2 WEIGHT%i;\n", location++, i);
             }
+
             break;
         case ShaderType::PostProcessing:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
@@ -567,9 +570,11 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tTANGENT = TANGENT_INPUT;\n";
             source += "\tBITANGENT = BITANGENT_INPUT;\n";
             source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
-            for (uint8_t i = 0; i < 8; i++) {
+
+            for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
                 source += SR_FORMAT("\tWEIGHT%i = WEIGHT%i_INPUT;\n", i, i);
             }
+
             break;
         case ShaderType::Canvas:
             source += "\tVERTEX = VERTEX_INPUT;\n";
@@ -728,9 +733,11 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 NORMAL_INPUT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 TANGENT_INPUT;\n", location++);
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 BITANGENT_INPUT;\n", location++);
-            for (uint8_t i = 0; i < 8; i++) {
+
+            for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
                 source += SR_UTILS_NS::Format("layout (location = %i) in vec2 WEIGHT%i_INPUT;\n", location++, i);
             }
+
             break;
         case ShaderType::Simple:
             source += SR_UTILS_NS::Format("layout (location = %i) in vec3 VERTEX_INPUT;\n", location++);

@@ -93,7 +93,7 @@ namespace SR_GRAPH_NS::Vertices {
         glm::vec3 tang;
         glm::vec3 bitang;
 
-        VertexWeight weights[8];
+        VertexWeight weights[SR_MAX_BONES_ON_VERTEX];
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(SkinnedMeshVertex);
@@ -107,8 +107,9 @@ namespace SR_GRAPH_NS::Vertices {
             descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, norm)));
             descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, tang)));
             descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, bitang)));
-            for (uint8_t i = 0; i < 8; i++) {
-                descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(SkinnedMeshVertex, weights[i])));
+
+            for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; ++i) {
+                descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32, offsetof(SkinnedMeshVertex, weights[i])));
             }
 
             return descriptions;
@@ -221,17 +222,17 @@ namespace SR_GRAPH_NS::Vertices {
             case VertexType::UIVertex:
                 return sizeof(UIVertex);
             default:
-                SRAssert(false);
+                SRHalt0();
                 return 0;
         }
     }
 
-    template<typename V> Helper::Math::FVector3 Barycenter(const std::vector<V>& vertices) {
+    template<typename V> SR_MATH_NS::FVector3 Barycenter(const std::vector<V>& vertices) {
         auto x = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.x; return sum; }();
         auto y = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.y; return sum; }();
         auto z = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.z; return sum; }();
 
-        return Helper::Math::FVector3(x, y, z) / vertices.size();
+        return SR_MATH_NS::FVector3(x, y, z) / vertices.size();
     }
 
     struct VertexInfo {
@@ -274,7 +275,7 @@ namespace SR_GRAPH_NS::Vertices {
 
         if constexpr (std::is_same<Vertices::SimpleVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::SimpleVertex{
+                vertices.emplace_back(T {
                         .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                 });
             }
@@ -282,7 +283,7 @@ namespace SR_GRAPH_NS::Vertices {
 
         if constexpr (std::is_same<Vertices::UIVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::UIVertex{
+                vertices.emplace_back(T {
                         .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                         .uv  = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
                 });
@@ -291,7 +292,7 @@ namespace SR_GRAPH_NS::Vertices {
 
         if constexpr (std::is_same<Vertices::StaticMeshVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::StaticMeshVertex{
+                vertices.emplace_back(T {
                         .pos    = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                         .uv     = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
                         .norm   = *reinterpret_cast<glm::vec3*>((void*)&vertex.normal),
@@ -299,6 +300,22 @@ namespace SR_GRAPH_NS::Vertices {
                         .bitang = *reinterpret_cast<glm::vec3*>((void*)&vertex.bitangent),
                 });
             }
+        }
+
+        if constexpr (std::is_same<Vertices::SkinnedMeshVertex, T>::value) {
+            for (const auto& vertex : raw) {
+                vertices.emplace_back(T {
+                        .pos    = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
+                        .uv     = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
+                        .norm   = *reinterpret_cast<glm::vec3*>((void*)&vertex.normal),
+                        .tang   = *reinterpret_cast<glm::vec3*>((void*)&vertex.tangent),
+                        .bitang = *reinterpret_cast<glm::vec3*>((void*)&vertex.bitangent),
+                });
+            }
+        }
+
+        if (raw.size() != vertices.size()) {
+            SRHalt("Vertices::CastVertices() : sizes is different!");
         }
 
         return vertices;
