@@ -144,15 +144,31 @@ namespace SR_HTYPES_NS {
         const bool hasUV = mesh->mTextureCoords[0];
         const bool hasNormals = mesh->mNormals;
         const bool hasTangents = mesh->mTangents;
+        const bool hasBones = mesh->mBones;
 
         for (uint32_t i = 0; i < mesh->mNumVertices; ++i) {
-            vertices.emplace_back(SR_UTILS_NS::Vertex(
-                *reinterpret_cast<Vec3*>(&mesh->mVertices[i]),
-                hasUV ? (*reinterpret_cast<Vec2*>(&mesh->mTextureCoords[0][i])) : Vec2 { 0.f, 0.f },
-                hasNormals ? (*reinterpret_cast<Vec3*>(&mesh->mNormals[i])) : Vec3 { 0.f, 0.f, 0.f },
-                hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mTangents[i])) : Vec3 { 0.f, 0.f, 0.f },
-                hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mBitangents[i])) : Vec3 { 0.f, 0.f, 0.f }
-            ));
+            SR_UTILS_NS::Vertex vertex;
+            vertex.weightsNum = 0;
+            vertex.position = *reinterpret_cast<Vec3*>(&mesh->mVertices[i]);
+            vertex.uv = hasUV ? (*reinterpret_cast<Vec2*>(&mesh->mTextureCoords[0][i])) : Vec2 { 0.f, 0.f };
+            vertex.normal = hasNormals ? (*reinterpret_cast<Vec3*>(&mesh->mNormals[i])) : Vec3 { 0.f, 0.f, 0.f };
+            vertex.tangent = hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mTangents[i])) : Vec3 { 0.f, 0.f, 0.f };
+            vertex.bitangent = hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mBitangents[i])) : Vec3 { 0.f, 0.f, 0.f };
+            vertices.emplace_back(vertex);
+        }
+
+        if (!hasBones) {
+            return vertices;
+        }
+
+        for (uint32_t i = 0; i < mesh->mNumBones; i++) {
+            for (uint8_t j = 0; j < SR_MIN(SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mNumWeights); j++) {
+                auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
+                SRAssert(vertex.weightsNum < SR_MAX_BONES_ON_VERTEX);
+                vertex.weights[vertex.weightsNum].boneId = i;
+                vertex.weights[vertex.weightsNum].weight = mesh->mBones[i]->mWeights[j].mWeight;
+                vertex.weightsNum++;
+            }
         }
 
         return vertices;

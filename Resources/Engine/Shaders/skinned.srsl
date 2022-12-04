@@ -17,8 +17,10 @@ void fragment() {
     vec3 norm = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 12.0;
 
 	COLOR = vec4(diffuse_albedo + norm, 1.0);
+
+    mat4 Skeleton = SKELETON_MATRIXES_128[0];
 }
 
 void vertex() {
-
+    mat4 Skeleton = SKELETON_MATRIXES_128[0];
 }

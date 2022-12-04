@@ -45,7 +45,8 @@ namespace SR_GRAPH_NS {
           Sampler3D,
           SamplerCube,
           Sampler1DShadow,
-          Sampler2DShadow
+          Sampler2DShadow,
+          Skeleton128
     )
 
     struct MaterialProperty {
@@ -82,6 +83,7 @@ namespace SR_GRAPH_NS {
             case ShaderVarType::Mat2:
             case ShaderVarType::Mat3:
             case ShaderVarType::Mat4:
+            case ShaderVarType::Skeleton128:
                 return true;
             default:
                 return false;
@@ -89,6 +91,10 @@ namespace SR_GRAPH_NS {
     }
 
     static std::string ShaderVarTypeToString(ShaderVarType type) {
+        if (type == ShaderVarType::Skeleton128) {
+            type = ShaderVarType::Mat4;
+        }
+
         std::string str = SR_UTILS_NS::EnumReflector::ToString(type);
 
         if (!str.empty()) {
@@ -96,6 +102,14 @@ namespace SR_GRAPH_NS {
         }
 
         return str;
+    }
+
+    static std::string MakeShaderVariable(ShaderVarType type, const std::string& name) {
+        if (type == ShaderVarType::Skeleton128) {
+            return ShaderVarTypeToString(type) + " " + name + "[128]";
+        }
+
+        return ShaderVarTypeToString(type) + " " + name;
     }
 
     static uint32_t GetShaderVarSize(ShaderVarType type) {
@@ -115,6 +129,8 @@ namespace SR_GRAPH_NS {
                 return 4 * 3 * 3;
             case ShaderVarType::Mat4:
                 return 4 * 4 * 4;
+            case ShaderVarType::Skeleton128:
+                return 4 * 4 * 4 * 128;
             case ShaderVarType::Unknown:
             default:
                 SRAssert2(false, "unknown type!");

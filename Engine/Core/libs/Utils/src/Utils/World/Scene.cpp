@@ -511,7 +511,7 @@ namespace SR_WORLD_NS {
 
     GameObject::Ptr Scene::InstanceFromFile(const std::string &path) {
         if (auto&& raw = SR_HTYPES_NS::RawMesh::Load(path)) {
-            GameObject::Ptr root = Instance(raw);
+            GameObject::Ptr root = Instance(raw); //TODO:Сделать обратимость
 
             if (raw->GetCountUses() == 0) {
                 raw->Destroy();

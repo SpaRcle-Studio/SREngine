@@ -81,19 +81,17 @@ namespace SR_GRAPH_NS::Vertices {
     };
     typedef std::vector<StaticMeshVertex> StaticMeshVertices;
 
-    struct VertexWeight {
-        uint32_t boneIndex;
-        float weight;
-    };
-
     struct SkinnedMeshVertex {
         glm::vec3 pos;
         glm::vec2 uv;
         glm::vec3 norm;
         glm::vec3 tang;
         glm::vec3 bitang;
-
-        VertexWeight weights[SR_MAX_BONES_ON_VERTEX];
+        //uint8_t weightsNum;
+        struct {
+            uint32_t boneId;
+            float weight;
+        } weights[SR_MAX_BONES_ON_VERTEX];
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(SkinnedMeshVertex);
@@ -303,14 +301,19 @@ namespace SR_GRAPH_NS::Vertices {
         }
 
         if constexpr (std::is_same<Vertices::SkinnedMeshVertex, T>::value) {
-            for (const auto& vertex : raw) {
-                vertices.emplace_back(T {
-                        .pos    = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
-                        .uv     = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
-                        .norm   = *reinterpret_cast<glm::vec3*>((void*)&vertex.normal),
-                        .tang   = *reinterpret_cast<glm::vec3*>((void*)&vertex.tangent),
-                        .bitang = *reinterpret_cast<glm::vec3*>((void*)&vertex.bitangent),
-                });
+            for (const auto& rawVertex : raw) {
+                T vertex;
+                //vertex.weightsNum = rawVertex.weightsNum;
+                vertex.pos    = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.position);
+                vertex.uv     = *reinterpret_cast<glm::vec2*>((void*)&rawVertex.uv);
+                vertex.norm   = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.normal);
+                vertex.tang   = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.tangent);
+                vertex.bitang = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.bitangent);
+                for (uint32_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
+                    vertex.weights[i].boneId = rawVertex.weights[i].boneId;
+                    vertex.weights[i].weight = rawVertex.weights[i].weight;
+                }
+                vertices.emplace_back(vertex);
             }
         }
 

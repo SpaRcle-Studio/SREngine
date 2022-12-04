@@ -305,7 +305,7 @@ namespace SR_CORE_NS::GUI {
                     pMesh->SetMaterial(pMaterial);
                 }
 
-                pComponent = dynamic_cast<SR_GTYPES_NS::SkinnedMesh *>(pComponent);
+                pComponent = dynamic_cast<SR_GTYPES_NS::SkinnedMesh *>(pMesh);
 
                 ImGui::EndGroup();
 

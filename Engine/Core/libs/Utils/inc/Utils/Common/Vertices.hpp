@@ -38,6 +38,11 @@ namespace SR_UTILS_NS {
         Vec3 normal;
         Vec3 tangent;
         Vec3 bitangent;
+        uint8_t weightsNum;
+        struct {
+            uint32_t boneId;
+            float weight;
+        } weights[SR_MAX_BONES_ON_VERTEX];
     };
 
     const std::vector<uint32_t> SKYBOX_INDICES = { 0,1,2,0,2,3,2,1,4,5,2,4,6,0,3,6,3,7,5,4,6,7,5,6,3,2,5,3,5,7,4,1,0,6,4,0 };

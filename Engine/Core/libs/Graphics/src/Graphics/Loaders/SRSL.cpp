@@ -11,6 +11,7 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "PROJECTION_MATRIX", ShaderVarType::Mat4 },
         { "ORTHOGONAL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_NO_TRANSLATE_MATRIX", ShaderVarType::Mat4 },
+        { "SKELETON_MATRIXES_128", ShaderVarType::Skeleton128 },
         { "SKYBOX_DIFFUSE", ShaderVarType::SamplerCube },
         { "TEXT_ATLAS_TEXTURE", ShaderVarType::Sampler2D },
         { "TIME", ShaderVarType::Float },
@@ -112,7 +113,7 @@ SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::RefAnalyzer(cons
         size_t offset = 0;
     retry:
         if (auto&& pos = code.find(var, offset); pos != std::string::npos) {
-            const std::string operators = "!~`@#$%^&*()-=+:'\"|\\/.,?^;<> \t\n";
+            const std::string operators = "!~`@#$%^&*()-=+:'\"|\\/.,?^;<>[] \t\n";
 
             /// check left side
             if (pos > 0 && operators.find(code[pos - 1]) == std::string::npos) {
@@ -267,10 +268,9 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
             unit.bindings[name] = samplers[name];
         }
 
-        source += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s;",
+        source += SR_UTILS_NS::Format("layout (binding = %i) uniform %s;",
                 unit.bindings[name].binding,
-                ShaderVarTypeToString(var.type).c_str(),
-                name.c_str()
+                MakeShaderVariable(var.type, name).c_str()
         );
 
         if (var.show) {
@@ -288,7 +288,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeUniformsCode(SRSLUnit& unit, cons
         source += SR_UTILS_NS::Format("layout (std140, binding = %i) uniform BLOCK {\n", uniforms.begin()->second.binding);
 
         for (auto&& [name, var] : uniforms) {
-            source += SR_UTILS_NS::Format("\t%s %s;", ShaderVarTypeToString(var.type).c_str(), name.c_str());
+            source += SR_UTILS_NS::Format("\t%s;", MakeShaderVariable(var.type, name).c_str());
 
             if (var.show) {
                 source += " // public\n";
@@ -343,8 +343,8 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
                     continue;
                 }
 
-                source += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n",
-                        var.binding, ShaderVarTypeToString(var.type).c_str(), name.c_str()
+                source += SR_UTILS_NS::Format("layout (location = %i) out %s;\n",
+                        var.binding, MakeShaderVariable(var.type, name).c_str()
                 );
             }
 
@@ -798,14 +798,15 @@ std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> Framework::Gr
     }
 
     std::map<ShaderVarType, uint32_t> order = {
-            { ShaderVarType::Mat4,  1 },
-            { ShaderVarType::Mat3,  2 },
-            { ShaderVarType::Mat2,  3 },
-            { ShaderVarType::Vec4,  4 },
-            { ShaderVarType::Vec3,  5 },
-            { ShaderVarType::Vec2,  6 },
-            { ShaderVarType::Float, 7 },
-            { ShaderVarType::Int,   8 },
+            { ShaderVarType::Skeleton128,1 },
+            { ShaderVarType::Mat4,       2 },
+            { ShaderVarType::Mat3,       3 },
+            { ShaderVarType::Mat2,       4 },
+            { ShaderVarType::Vec4,       5 },
+            { ShaderVarType::Vec3,       6 },
+            { ShaderVarType::Vec2,       7 },
+            { ShaderVarType::Float,      8 },
+            { ShaderVarType::Int,        9 },
     };
 
     variables.sort([&order](const std::pair<std::string, SRSLVariable> &a, const std::pair<std::string, SRSLVariable> &b) {
