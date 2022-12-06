@@ -1,10 +1,10 @@
 echo off
 
 echo Build application...
-./build.bat
+"cmd /c build.bat assembleRelease"
 
 echo Run application...
-./run_application.bat
+"cmd /c run_application.bat assembleRelease"
 
 goto LABEL_SUCCESS
 
