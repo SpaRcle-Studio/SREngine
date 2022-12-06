@@ -18,16 +18,6 @@ namespace SR_PHYSICS_NS {
             case ShapeType::Sphere3D:
             case ShapeType::Plane3D:
                 return true;
-            case ShapeType::TriangleMesh3D:
-            case ShapeType::Convex3D:
-            case ShapeType::Cone3D:
-            case ShapeType::Cylinder2D:
-            case ShapeType::TriangleMesh2D:
-            case ShapeType::Convex2D:
-            case ShapeType::Cone2D:
-            case ShapeType::Unknown:
-            case ShapeType::Sphere2D:
-            case ShapeType::Capsule2D:
             default:
                 return false;
         }
