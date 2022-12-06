@@ -1,8 +1,11 @@
 echo off
 
+cls
+
 echo Delete old signed apk
 
 set APK_UNSIGNED_FILE="app/build/outputs/apk/release/app-release-unsigned.apk"
+set APK_SIGNED_FILE="app/build/outputs/apk/release/app-release-signed.apk"
 
 del %APK_UNSIGNED_FILE%
 
@@ -25,15 +28,15 @@ IF NOT EXIST "key.keystore" (
 	"platform-tools/keytool.exe" -noprompt -genkey -v -keystore key.keystore -alias android -keyalg RSA -keysize 2048 -validity 20000
 ) 
 
-"platform-tools/jarsigner.exe" -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore app/build/outputs/apk/release/app-release-unsigned.apk android
-"platform-tools/jarsigner.exe" -verify app/build/outputs/apk/release/app-release-unsigned.apk
+"platform-tools/jarsigner.exe" -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore %APK_UNSIGNED_FILE% android
+"platform-tools/jarsigner.exe" -verify %APK_UNSIGNED_FILE%
 
 echo Delete old signed apk...
-del "app/build/outputs/apk/release/app-release-signed.apk"
+del %APK_SIGNED_FILE%
 
 echo Zip align apk...
 
-"platform-tools/zipalign.exe" -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release-signed.apk
+"platform-tools/zipalign.exe" -v 4 %APK_UNSIGNED_FILE% %APK_SIGNED_FILE%
 
 echo Apk signing...
 "java.exe" -jar platform-tools/apksigner.jar sign --ks key.keystore --ks-key-alias android app/build/outputs/apk/release/app-release-signed.apk
@@ -42,7 +45,7 @@ echo Uninstall application...
 "platform-tools/adb.exe" uninstall "com.monika.sparcle"
 
 echo Install application...
-"platform-tools/adb.exe" install -r app/build/outputs/apk/release/app-release-signed.apk
+"platform-tools/adb.exe" install -r %APK_SIGNED_FILE%
 
 goto LABEL_SUCCESS
 
