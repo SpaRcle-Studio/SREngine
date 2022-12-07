@@ -95,7 +95,13 @@ namespace SR_UTILS_NS::Platform {
     }
 
     std::optional<std::string> ReadFile(const Path& path) {
-        return std::string();
+        std::ifstream ifs(path.c_str());
+
+        if (!ifs.is_open()) {
+            return std::optional<std::string>();
+        }
+
+        return std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
     }
 
     void TextToClipboard(const std::string &text) {
