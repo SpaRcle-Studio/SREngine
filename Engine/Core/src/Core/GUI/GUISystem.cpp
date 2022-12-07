@@ -39,6 +39,7 @@ namespace Framework::Core {
         generated_##name##ButtonWidth = ImGui::GetItemRectSize().x;           \
     }                                                                         \
 
+/// TODO: убрать это позорище
 using namespace Framework::Core::GUI;
 
 /// drag
@@ -177,7 +178,7 @@ bool GUISystem::ImageButtonInternal(std::string_view&& imageId, void *descriptor
     ImVec4 tint_col = ImVec4(1,1,1,1);
     ImVec2 uv0, uv1;
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+    if (m_pipeLine == Graphics::PipelineType::OpenGL) {
         uv0 = ImVec2(0, 1);
         uv1 = ImVec2(1, 0);
     }
@@ -249,7 +250,7 @@ bool GUISystem::BeginDragDropTargetWindow(const char* payload_type)  //взят�
 }
 
 void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+    if (m_pipeLine == Graphics::PipelineType::OpenGL) {
         DrawImage(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
     else {
@@ -280,7 +281,7 @@ void GUISystem::DrawTexture(
         ImGui::SetCursorPos(centralizedCursorPos);
     }
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL)
+    if (m_pipeLine == Graphics::PipelineType::OpenGL)
         DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
         DrawImage(m_env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);

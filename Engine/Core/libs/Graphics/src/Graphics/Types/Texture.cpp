@@ -8,7 +8,7 @@
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/TextureLoader.h>
 #include <Graphics/Render/Render.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Render/RenderContext.h>
 
 namespace SR_GTYPES_NS {

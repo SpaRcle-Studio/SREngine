@@ -4,7 +4,7 @@
 
 #include <Graphics/Memory/UBOManager.h>
 #include <Graphics/Types/Shader.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager()

@@ -17,7 +17,7 @@
 namespace SR_GTYPES_NS {
     Skybox::Skybox()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Skybox), true /** auto remove */)
-        , m_env(Environment::Get())
+        , m_pipeline(Environment::Get())
     { }
 
     Skybox::~Skybox() {
@@ -96,7 +96,7 @@ namespace SR_GTYPES_NS {
         }
 
         const bool cpuUsage = SR_UTILS_NS::Features::Instance().Enabled("SkyboxCPUUsage", false);
-        if (m_cubeMap = m_env->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
+        if (m_cubeMap = m_pipeline->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
             SR_ERROR("Skybox::Calculate() : failed to calculate cube map!");
             m_hasErrors = true;
             return false;
@@ -113,16 +113,16 @@ namespace SR_GTYPES_NS {
 
         auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
 
-        if (m_env->GetPipeLine() == PipeLine::Vulkan) {
+        if (m_pipeline->GetType() == PipelineType::Vulkan) {
             auto &&indices = SR_UTILS_NS::SKYBOX_INDICES;
 
-            if (m_VBO = m_env->CalculateVBO(indexedVertices.data(), Vertices::VertexType::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_pipeline->CalculateVBO(indexedVertices.data(), Vertices::VertexType::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
                 m_hasErrors = true;
                 return false;
             }
 
-            if (m_IBO = m_env->CalculateIBO((void *) indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID);
+            if (m_IBO = m_pipeline->CalculateIBO((void *) indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID);
                     m_IBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate IBO!");
                 m_hasErrors = true;
@@ -132,7 +132,7 @@ namespace SR_GTYPES_NS {
         else {
             auto &&vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
 
-            if (m_VBO = m_env->CalculateVBO(vertices.data(), Vertices::VertexType::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_pipeline->CalculateVBO(vertices.data(), Vertices::VertexType::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
                 m_hasErrors = true;
                 return false;
@@ -161,7 +161,7 @@ namespace SR_GTYPES_NS {
                 uboManager.BindUBO(m_virtualUBO);
             }
             else {
-                m_env->ResetDescriptorSet();
+                m_pipeline->ResetDescriptorSet();
                 m_hasErrors = true;
                 return;
             }
@@ -172,8 +172,8 @@ namespace SR_GTYPES_NS {
             m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
         }
 
-        m_env->BindVBO(m_VBO);
-        m_env->BindIBO(m_IBO);
+        m_pipeline->BindVBO(m_VBO);
+        m_pipeline->BindIBO(m_IBO);
 
         switch (uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
@@ -182,7 +182,7 @@ namespace SR_GTYPES_NS {
                 m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
-                m_env->DrawIndices(36);
+                m_pipeline->DrawIndices(36);
                 break;
             case Memory::UBOManager::BindResult::Failed:
             default:
@@ -197,19 +197,19 @@ namespace SR_GTYPES_NS {
 
         SR_LOG("Skybox::FreeVideoMemory() : free skybox video memory...");
 
-        if (m_VAO != SR_ID_INVALID && !m_env->FreeVAO(&m_VAO)) {
+        if (m_VAO != SR_ID_INVALID && !m_pipeline->FreeVAO(&m_VAO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free VAO!");
         }
 
-        if (m_VBO != SR_ID_INVALID && !m_env->FreeVBO(&m_VBO)) {
+        if (m_VBO != SR_ID_INVALID && !m_pipeline->FreeVBO(&m_VBO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free VBO!");
         }
 
-        if (m_IBO != SR_ID_INVALID && !m_env->FreeIBO(&m_IBO)) {
+        if (m_IBO != SR_ID_INVALID && !m_pipeline->FreeIBO(&m_IBO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free IBO!");
         }
 
-        if (m_cubeMap != SR_ID_INVALID && !m_env->FreeCubeMap(&m_cubeMap)) {
+        if (m_cubeMap != SR_ID_INVALID && !m_pipeline->FreeCubeMap(&m_cubeMap)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free cube map!");
         }
 
@@ -228,8 +228,8 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        switch (m_env->GetPipeLine()) {
-            case PipeLine::Vulkan:
+        switch (m_pipeline->GetType()) {
+            case PipelineType::Vulkan:
                 DrawVulkan();
                 break;
             default:

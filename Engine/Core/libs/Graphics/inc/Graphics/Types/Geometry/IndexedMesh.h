@@ -7,6 +7,7 @@
 
 #include <Graphics/Memory/MeshManager.h>
 #include <Graphics/Types/Mesh.h>
+#include <Graphics/Pipeline/Environment.h>
 
 namespace SR_GRAPH_NS::Types {
     class IndexedMesh : public Mesh {

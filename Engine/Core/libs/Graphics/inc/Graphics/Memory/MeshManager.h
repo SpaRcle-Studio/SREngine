@@ -9,7 +9,7 @@
 #include <Utils/Types/Thread.h>
 
 #include <Graphics/Types/Vertices.h>
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 namespace SR_GTYPES_NS {
     class Mesh3D;

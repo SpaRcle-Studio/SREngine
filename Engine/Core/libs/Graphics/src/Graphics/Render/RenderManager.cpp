@@ -9,38 +9,29 @@
 #include <Graphics/Render/Render.h>
 
 SR_GRAPH_NS::Render* SR_GRAPH_NS::RenderManager::Allocate(const std::string& name) {
-    Render* render = nullptr;
+    //Render* render = nullptr;
 
-    const auto&& pipeLine = Environment::Get()->GetPipeLine();
+    //const auto&& pipeLine = Environment::Get()->GetType();
 
-    switch (pipeLine) {
-        case PipeLine::OpenGL:
-            //render = static_cast<Render *>(new Impl::OpenGLRender(name));
-            break;
-        case PipeLine::Vulkan:
-            //render = static_cast<Render *>(new Impl::VulkanRender(name));
-            break;
-        case PipeLine::DirectX9:
-            break;
-        case PipeLine::DirectX10:
-            break;
-        case PipeLine::DirectX11:
-            break;
-        case PipeLine::DirectX12:
-            break;
-        case PipeLine::Unknown:
-        default:
-            break;
-    }
+    //switch (pipeLine) {
+    //    case PipelineType::OpenGL:
+    //        //render = static_cast<Render *>(new Impl::OpenGLRender(name));
+    //        break;
+    //    case PipelineType::Vulkan:
+    //        //render = static_cast<Render *>(new Impl::VulkanRender(name));
+    //        break;
+    //    default:
+    //        break;
+    //}
 
-    if (!render) {
-        SRAssert(false);
-        return nullptr;
-    }
+    //if (!render) {
+    //    SRAssert(false);
+    //    return nullptr;
+    //}
 
-    m_renders.insert(std::make_pair(name, render));
+    //m_renders.insert(std::make_pair(name, render));
 
-    return render;
+    return nullptr;
 }
 
 SR_GRAPH_NS::Render* SR_GRAPH_NS::RenderManager::Get(const std::string &name) {

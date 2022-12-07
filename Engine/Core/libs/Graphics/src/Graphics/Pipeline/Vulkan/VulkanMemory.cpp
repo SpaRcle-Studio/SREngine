@@ -2,8 +2,8 @@
 // Created by Nikita on 15.06.2021.
 //
 
-#include <Graphics/Environment/Vulkan/VulkanMemory.h>
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 #include <EvoVulkan/Types/VmaBuffer.h>
 

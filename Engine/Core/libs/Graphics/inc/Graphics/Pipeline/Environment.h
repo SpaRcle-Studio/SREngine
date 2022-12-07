@@ -7,13 +7,13 @@
 
 #include <Utils/GUI.h>
 
-#include <Graphics/Environment/TextureHelper.h>
-#include <Graphics/Environment/Basic/BasicWindow.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/TextureHelper.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Descriptors.h>
+#include <Graphics/Window/BasicWindowImpl.h>
 
 namespace SR_GTYPES_NS {
     class Shader;
@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS {
         GUIContext        m_guiContext             = nullptr;
         ImguiFont         m_iconFont               = nullptr;
 
-        BasicWindow*      m_basicWindow            = nullptr;
+        BasicWindowImpl*      m_basicWindow            = nullptr;
         bool              m_hasErrors              = false;
         bool              m_guiEnabled             = false;
 
@@ -107,10 +107,10 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                        }
         SR_NODISCARD SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;            }
         SR_NODISCARD SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;              }
-        SR_NODISCARD SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;            }
+        SR_NODISCARD SR_FORCE_INLINE BasicWindowImpl* GetBasicWindow()        const { return m_basicWindow;            }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;                    }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;                    }
-        SR_NODISCARD virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown;        }
+        SR_NODISCARD virtual SR_FORCE_INLINE PipelineType GetType()       const { return PipelineType::Unknown;        }
 
         SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -161,7 +161,7 @@ namespace SR_GRAPH_NS {
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        virtual bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
+        virtual bool MakeWindow(const std::string& name, const SR_MATH_NS::UVector2& size, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
         virtual void SetWindowIcon(const char* path) {  }
 
         virtual bool PreInit(

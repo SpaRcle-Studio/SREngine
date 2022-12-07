@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS {
         /// Вызывается постоянно после построения
         virtual void Update() { }
 
-        virtual void OnResize(const SR_MATH_NS::IVector2& size) { }
+        virtual void OnResize(const SR_MATH_NS::UVector2& size) { }
 
         virtual void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
         virtual void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }

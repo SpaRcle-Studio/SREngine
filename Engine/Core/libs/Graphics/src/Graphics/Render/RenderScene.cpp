@@ -371,7 +371,7 @@ namespace SR_GRAPH_NS {
         m_debug.Update();
     }
 
-    void RenderScene::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void RenderScene::OnResize(const SR_MATH_NS::UVector2 &size) {
         m_surfaceSize = size;
 
         for (auto&& cameraInfo : m_cameras) {
@@ -387,7 +387,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    SR_MATH_NS::IVector2 RenderScene::GetSurfaceSize() const {
+    SR_MATH_NS::UVector2 RenderScene::GetSurfaceSize() const {
         return m_surfaceSize;
     }
 }

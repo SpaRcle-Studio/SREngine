@@ -7,7 +7,7 @@
 
 #include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Types/Material.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 

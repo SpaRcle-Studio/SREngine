@@ -2,17 +2,18 @@
 // Created by Nikita on 18.11.2020.
 //
 
-#ifndef GAMEENGINE_WINDOW_H
-#define GAMEENGINE_WINDOW_H
+#ifndef SRENGINE_WINDOW_H
+#define SRENGINE_WINDOW_H
 
-#include <Utils/GUI.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafeGateArray.h>
 #include <Utils/Types/SafeGateArray.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Math/Vector2.h>
 
-namespace SR_GRAPH_NS::Types {
+#include <Graphics/Window/BasicWindowImpl.h>
+
+namespace SR_GTYPES_NS {
     class Camera;
 }
 
@@ -30,7 +31,7 @@ namespace SR_GRAPH_NS {
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
         using ResizeCallback = SR_HTYPES_NS::Function<void(const SR_MATH_NS::IVector2&)>;
     public:
-        Window(std::string name, std::string icoPath, const SR_MATH_NS::IVector2& size,
+        Window(std::string name, std::string icoPath, const SR_MATH_NS::UVector2& size,
                 bool vsync, bool fullScreen, bool resizable, bool headerEnabled, uint8_t smoothSamples);
         ~Window() override;
 
@@ -65,7 +66,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowOpen() const { return !m_isWindowClose; }
         SR_NODISCARD SR_FORCE_INLINE bool IsWindowFocus() const { return m_isWindowFocus; }
         SR_NODISCARD bool IsWindowCollapsed() const;
-        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
+        SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
         SR_NODISCARD SR_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD bool IsAlive() const;
 
@@ -112,7 +113,7 @@ namespace SR_GRAPH_NS {
 
         SR_MATH_NS::IVector2  m_windowPos             = { 0, 0 };
         SR_MATH_NS::IVector2  m_newWindowPos          = { 0, 0 };
-        SR_MATH_NS::IVector2  m_size                  = { 0, 0 };
+        SR_MATH_NS::UVector2  m_size                  = { 0, 0 };
 
         Helper::Types::SafeGateArray<GUI::WidgetManager*> m_widgetManagers;
 
@@ -122,4 +123,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //GAMEENGINE_WINDOW_H
+#endif //SRENGINE_WINDOW_H

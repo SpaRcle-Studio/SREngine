@@ -12,7 +12,7 @@
 
 namespace SR_GTYPES_NS {
     Camera::Camera(uint32_t width, uint32_t height)
-        : m_viewportSize(SR_MATH_NS::IVector2(width, height))
+        : m_viewportSize(SR_MATH_NS::UVector2(width, height))
     {
         SR_UTILS_NS::Component::InitComponent<Camera>();
 
@@ -184,11 +184,12 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::UpdateProjection(uint32_t w, uint32_t h) {
-        if (m_viewportSize.x == static_cast<int32_t>(w) && m_viewportSize.y == static_cast<int32_t>(h)) {
+        if (m_viewportSize.x == w && m_viewportSize.y == h) {
             return;
         }
 
-        m_viewportSize = { (int32_t)w, (int32_t)h };
+        m_viewportSize = SR_MATH_NS::UVector2(w, h);
+
         UpdateProjection();
     }
 

@@ -51,7 +51,7 @@ namespace SR_CORE_NS::GUI {
                 if (ImGui::BeginChild("ViewerTexture")) {
                     const auto winSize = ImGui::GetWindowSize();
 
-                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
+                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize().Cast<int32_t>(), m_id, true);
 
                     if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
                         m_guizmo->Draw(*selected.begin(), m_camera);
@@ -156,7 +156,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& env = SR_GRAPH_NS::Environment::Get();
-        if (env->GetPipeLine() == Graphics::PipeLine::OpenGL) {
+        if (env->GetType() == Graphics::PipelineType::OpenGL) {
             DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
         }
         else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {

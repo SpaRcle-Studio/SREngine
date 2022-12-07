@@ -52,10 +52,10 @@ namespace SR_GRAPH_NS {
 
         void SetDirty();
 
-        void OnResize(const SR_MATH_NS::IVector2& size);
+        void OnResize(const SR_MATH_NS::UVector2& size);
 
         /// Установка начального размера окна
-        void SetWindowSize(const SR_MATH_NS::IVector2& size);
+        void SetWindowSize(const SR_MATH_NS::UVector2& size);
 
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
@@ -69,14 +69,14 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
-        SR_NODISCARD PipeLineType GetPipelineType() const;
+        SR_NODISCARD PipelineType GetPipelineType() const;
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
         SR_NODISCARD ShaderPtr GetCurrentShader() const noexcept;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name) const;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
-        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
+        SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
 
         void SetCurrentShader(ShaderPtr pShader);
 
@@ -84,7 +84,7 @@ namespace SR_GRAPH_NS {
         template<typename T> bool Update(T& resourceList) noexcept;
 
     private:
-        SR_MATH_NS::IVector2 m_windowSize;
+        SR_MATH_NS::UVector2 m_windowSize;
 
         std::vector<Types::Framebuffer*> m_framebuffers;
         std::vector<Types::Shader*> m_shaders;
@@ -100,7 +100,7 @@ namespace SR_GRAPH_NS {
         TexturePtr m_noneTexture = nullptr;
 
         PipelinePtr m_pipeline = nullptr;
-        PipeLineType m_pipelineType = PipeLineType::Unknown;
+        PipelineType m_pipelineType = PipelineType::Unknown;
 
     };
 

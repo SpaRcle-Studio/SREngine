@@ -12,7 +12,7 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Types/RawMesh.h>
 
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderScene.h>

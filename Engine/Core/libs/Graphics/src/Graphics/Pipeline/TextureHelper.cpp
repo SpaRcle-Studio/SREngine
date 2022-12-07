@@ -2,7 +2,7 @@
 // Created by Nikita on 28.06.2021.
 //
 
-#include <Graphics/Environment/TextureHelper.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 
 #include <cmp_core.h>
 

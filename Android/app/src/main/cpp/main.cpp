@@ -25,8 +25,8 @@
 #include <Core/World/World.h>
 
 #include <android/log.h>
-#include <Graphics/Environment/OpenGL.h>
-#include <Graphics/Environment/Vulkan.h>
+#include <Graphics/Pipeline/OpenGL.h>
+#include <Graphics/Pipeline/Vulkan.h>
 #include "android_native_app_glue.h"
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "SREngine", __VA_ARGS__))

@@ -6,7 +6,7 @@
 #define SRENGINE_TEXTURECONFIGS_H
 
 #include <Utils/Common/Singleton.h>
-#include <Graphics/Environment/TextureHelper.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 
 namespace SR_GRAPH_NS::Memory {
     struct TextureConfig {

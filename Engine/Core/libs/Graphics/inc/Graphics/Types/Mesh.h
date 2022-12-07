@@ -9,7 +9,7 @@
 #include <Utils/Common/Enumerations.h>
 #include <Utils/ResourceManager/IResource.h>
 
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/PipelineType.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 #include <Graphics/Memory/UBOManager.h>
 

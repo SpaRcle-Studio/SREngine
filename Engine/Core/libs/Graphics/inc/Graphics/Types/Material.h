@@ -10,7 +10,7 @@
 #include <Utils/Math/Vector4.h>
 
 #include <Graphics/Loaders/ShaderProperties.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
     class RenderContext;

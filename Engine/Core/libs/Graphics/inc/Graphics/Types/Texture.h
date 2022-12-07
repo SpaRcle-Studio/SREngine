@@ -7,7 +7,7 @@
 
 #include <Utils/ResourceManager/IResource.h>
 
-#include <Graphics/Environment/TextureHelper.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 #include <Graphics/Memory/TextureConfigs.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 

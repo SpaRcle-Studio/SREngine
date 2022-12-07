@@ -5,7 +5,7 @@
 #include <Utils/GUI.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/Icons.h>
 
 bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {

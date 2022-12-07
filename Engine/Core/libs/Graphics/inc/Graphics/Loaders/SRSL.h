@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SRSL_H
 #define SRENGINE_SRSL_H
 
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Loaders/ShaderProperties.h>
 #include <Graphics/Loaders/SRSLParser.h>
 

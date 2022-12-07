@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_OPENGL_H
 #define GAMEENGINE_OPENGL_H
 
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 
 //#include <GLFW/glfw3.h>
 //#include <GLFW/glfw3native.h>
@@ -40,7 +40,7 @@ namespace Framework::Graphics {
         [[nodiscard]] SR_FORCE_INLINE bool IsDrawSupport() const override { return true; }
 
         [[nodiscard]] std::string GetPipeLineName() const override { return "OpenGL"; }
-        [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine() const override { return PipeLine::OpenGL; }
+        [[nodiscard]] SR_FORCE_INLINE PipelineType GetType() const override { return PipelineType::OpenGL; }
 
         //uint32_t CreateTexture(unsigned char* pixels, int w, int h, int components) override;
 

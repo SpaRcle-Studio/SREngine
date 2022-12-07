@@ -35,8 +35,8 @@
 #include <Core/World/VisualRegion.h>
 #include <Core/Settings/EditorSettings.h>
 
-#include <Graphics/Environment/OpenGL.h>
-#include <Graphics/Environment/Vulkan.h>
+#include <Graphics/Pipeline/OpenGL.h>
+#include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Sprite2D.h>
@@ -159,7 +159,7 @@ int main(int argc, char **argv) {
     auto window = new Window(
             "SpaRcle Engine",
             "Engine/icon.ico",
-            IVector2(1366, 768), //IVector2(1600, 900),
+            UVector2(1366, 768), //IVector2(1600, 900),
             //IVector2(800, 800), //IVector2(1600, 900),
             false, // vsync
             false, // fullscreen

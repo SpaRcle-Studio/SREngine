@@ -10,14 +10,15 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/ECS/GameObject.h>
 
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Camera.h>
 
 namespace Framework::Core::GUI {
+    /// TODO: избавиться от этого класса
     class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {
         friend class Singleton<GUISystem>;
     private:
-        GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetPipeLine()) {
+        GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetType()) {
             m_env = Graphics::Environment::Get();
         }
         ~GUISystem() = default;
@@ -28,7 +29,7 @@ namespace Framework::Core::GUI {
 
         int32_t                  m_snapValue    = 100;
         Graphics::Environment*   m_env          = nullptr;
-        const Graphics::PipeLine m_pipeLine     = Graphics::PipeLine::Unknown;
+        const Graphics::PipelineType m_pipeLine     = Graphics::PipelineType::Unknown;
         bool                     m_shiftPressed = false;
         bool                     m_boundsActive = false;
         bool                     m_centerActive = false;

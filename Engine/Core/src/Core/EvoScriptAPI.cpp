@@ -296,7 +296,7 @@ namespace Framework {
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, CentralizeWindow, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
         ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)
 
         generator->AddIncompleteType("Camera", "Window");

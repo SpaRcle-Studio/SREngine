@@ -22,7 +22,7 @@ namespace SR_GRAPH_NS {
 
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
-        void OnResize(const SR_MATH_NS::IVector2 &size) override;
+        void OnResize(const SR_MATH_NS::UVector2 &size) override;
         bool Init() override;
 
         bool PreRender() override;

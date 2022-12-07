@@ -6,12 +6,17 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Platform/Platform.h>
 
-#include <Graphics/Environment/Vulkan/AbstractCasts.h>
-#include <Graphics/Environment/Vulkan.h>
+#include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
+#include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/Memory/MeshManager.h>
 
-#ifdef SR_WIN32
+#if defined(SR_WIN32)
     #include <vulkan/vulkan_win32.h>
+    #include <Graphics/Window/Win32Window.h>
+#elif defined(SR_ANDROID)
+    #include <vulkan/vulkan_android.h>
+#else
+    #error Unsupported os!
 #endif
 
 namespace Framework::Graphics {
@@ -117,40 +122,39 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool Vulkan::MakeWindow(const std::string &name, const SR_MATH_NS::IVector2 &size, bool fullScreen, bool resizable,
+    bool Vulkan::MakeWindow(const std::string &name, const SR_MATH_NS::UVector2 &size, bool fullScreen, bool resizable,
                             bool headerEnabled) {
         SR_GRAPH_LOG("Vulkan::MakeWindow() : creating window...");
 
-    #if defined(SR_WIN32)
-        m_basicWindow = new Win32Window(this->GetPipeLine());
-    #elif defined(SR_ANDROID)
-        SR_ERROR("Vulkan::MakeWindow() : unsupported os!");
-    #endif
+        m_basicWindow = BasicWindowImpl::CreatePlatformWindow(GetType(), BasicWindowImpl::WindowType::Auto);
 
         if (!m_basicWindow) {
             SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
 
-        m_basicWindow->SetCallbackResize([this](BasicWindow *win, int w, int h) {
-            m_kernel->SetSize(w, h);
+        m_basicWindow->SetResizeCallback([this](auto&& pWindow, int32_t width, int32_t height) {
+            m_kernel->SetSize(width, height);
         });
 
-        m_basicWindow->SetCallbackScroll([](BasicWindow *win, double xoffset, double yoffset) {
-            for (const auto &a : g_scrollEvents)
-                a(xoffset, yoffset);
+        m_basicWindow->SetScrollCallback([](auto&& pWindow, double_t xOffset, double_t yOffset) {
+            /// TODO: TO_REFACTORING
+            for (const auto &a : g_scrollEvents) {
+                a(xOffset, yOffset);
+            }
 
-            g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
+            g_callback(WinEvents::Scroll, pWindow, &xOffset, &yOffset);
         });
 
-        m_basicWindow->SetCallbackFocus([](BasicWindow *win, bool focus) {
-            g_callback(WinEvents::Focus, win, &focus, nullptr);
+        m_basicWindow->SetFocusCallback([](auto&& pWindow, bool focus) {
+            g_callback(WinEvents::Focus, pWindow, &focus, nullptr);
         });
 
-        if (!m_basicWindow->Create(name.c_str(), 0, 0, size.x, size.y, fullScreen, resizable)) {
+        if (!m_basicWindow->Initialize(name, SR_MATH_NS::IVector2(), size, fullScreen, resizable)) {
             SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
             return false;
         }
+
         m_basicWindow->Centralize();
 
         m_basicWindow->SetHeaderEnabled(headerEnabled);
@@ -187,7 +191,7 @@ namespace Framework::Graphics {
 
         auto createSurf = [window](const VkInstance &instance) -> VkSurfaceKHR {
 #ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
-            if (window->GetType() == BasicWindow::Type::Win32) {
+            if (window->GetType() == BasicWindowImpl::WindowType::Win32) {
                 VkWin32SurfaceCreateInfoKHR surfaceInfo = {};
                 surfaceInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
                 surfaceInfo.pNext = nullptr;

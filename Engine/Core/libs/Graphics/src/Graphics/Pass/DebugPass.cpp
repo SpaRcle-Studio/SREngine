@@ -7,7 +7,7 @@
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Geometry/IndexedMesh.h>
 #include <Graphics/Render/MeshCluster.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(DebugPass)

@@ -2,12 +2,12 @@
 
 #include "../Graphics/src/Graphics/Animations/Bone.cpp"
 
-#include "../Graphics/src/Graphics/Environment/Vulkan/VulkanImGUI.cpp"
-#include "../Graphics/src/Graphics/Environment/Vulkan/VulkanMemory.cpp"
-#include "../Graphics/src/Graphics/Environment/Environment.cpp"
-#include "../Graphics/src/Graphics/Environment/OpenGL.cpp"
-#include "../Graphics/src/Graphics/Environment/TextureHelper.cpp"
-#include "../Graphics/src/Graphics/Environment/Vulkan.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Environment.cpp"
+#include "../Graphics/src/Graphics/Pipeline/OpenGL.cpp"
+#include "../Graphics/src/Graphics/Pipeline/TextureHelper.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Vulkan.cpp"
 
 #include "../Graphics/src/Graphics/GUI/Link.cpp"
 #include "../Graphics/src/Graphics/GUI/ICanvas.cpp"
@@ -96,3 +96,8 @@
 #include "../Graphics/src/Graphics/Types/RenderTexture.cpp"
 
 #include "../Graphics/src/Graphics/Window/Window.cpp"
+#include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
+
+#if defined(SR_WIN32)
+    #include "../Graphics/src/Graphics/Window/Win32Window.cpp"
+#endif

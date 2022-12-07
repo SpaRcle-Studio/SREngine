@@ -6,7 +6,7 @@
 
 #include <EvoVulkan/Types/DescriptorPool.h>
 
-#include <Graphics/Environment/Vulkan/VulkanImGUI.h>
+#include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
 
 int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
 #ifdef SR_WIN32

@@ -11,7 +11,6 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/Render/Render.h>
 #include <Graphics/Types/Camera.h>
-#include <Graphics/Environment/Environment.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Framebuffer.h>
@@ -23,7 +22,7 @@ namespace SR_GRAPH_NS {
     Window::Window(
             std::string name,
             std::string icoPath,
-            const SR_MATH_NS::IVector2 &size,
+            const SR_MATH_NS::UVector2 &size,
             bool vsync, bool fullScreen, bool resizable,
             bool headerEnabled, uint8_t smoothSamples
     )
@@ -69,7 +68,7 @@ namespace SR_GRAPH_NS {
                     m_context.Do([&](RenderContext* ptr) {
                         auto&& [width, height] = std::pair<int, int>{*(int *) arg1, *(int *) arg2};
                         if (width > 0 && height > 0) {
-                            ptr->OnResize(SR_MATH_NS::IVector2(width, height));
+                            ptr->OnResize(SR_MATH_NS::UVector2(width, height));
                             if (m_resizeCallback) {
                                 m_resizeCallback(SR_MATH_NS::IVector2(width, height));
                             }
@@ -428,7 +427,7 @@ namespace SR_GRAPH_NS {
 
         SR_LOG("Window::Resize() : set new window sizes: W = " + std::to_string(w) + "; H = " + std::to_string(h));
 
-        m_size = { (int32_t)w, (int32_t)h };
+        m_size = SR_MATH_NS::UVector2(w, h);
         m_isNeedResize = true;
     }
 
@@ -570,7 +569,7 @@ namespace SR_GRAPH_NS {
         return m_env->IsFullScreen();
     }
 
-    SR_MATH_NS::IVector2 Window::GetWindowSize() const {
+    SR_MATH_NS::UVector2 Window::GetWindowSize() const {
         if (!m_env || !m_env->HasWindow()) {
             return m_size;
         }

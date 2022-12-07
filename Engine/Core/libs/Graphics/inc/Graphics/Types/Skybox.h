@@ -48,7 +48,7 @@ namespace SR_GTYPES_NS {
         void SetShader(Shader *shader);
 
     private:
-        Environment*            m_env            = nullptr;
+        Environment*            m_pipeline       = nullptr;
         Shader*                 m_shader         = nullptr;
 
         int32_t                 m_VAO            = SR_ID_INVALID;

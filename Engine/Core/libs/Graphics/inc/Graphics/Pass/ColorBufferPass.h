@@ -6,7 +6,7 @@
 #define SRENGINE_COLORBUFFERPASS_H
 
 #include <Graphics/Pass/BasePass.h>
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 namespace SR_GTYPES_NS {
     class Shader;
@@ -28,7 +28,7 @@ namespace SR_GRAPH_NS {
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
         bool Init() override;
-        void OnResize(const SR_MATH_NS::IVector2 &size) override;
+        void OnResize(const SR_MATH_NS::UVector2 &size) override;
 
         bool PreRender() override;
         bool Render() override;

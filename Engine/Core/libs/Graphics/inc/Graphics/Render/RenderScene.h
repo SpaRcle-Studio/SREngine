@@ -49,7 +49,7 @@ namespace SR_GRAPH_NS {
         void Render() noexcept;
         void Synchronize();
 
-        void OnResize(const SR_MATH_NS::IVector2& size);
+        void OnResize(const SR_MATH_NS::UVector2& size);
 
         /// Можно вызывать не синхронно
         void SetDirty();
@@ -78,7 +78,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MeshCluster& GetDebugCluster();
         SR_NODISCARD CameraPtr GetMainCamera() const;
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
-        SR_NODISCARD SR_MATH_NS::IVector2 GetSurfaceSize() const;
+        SR_NODISCARD SR_MATH_NS::UVector2 GetSurfaceSize() const;
 
     private:
         void SortCameras();
@@ -108,7 +108,7 @@ namespace SR_GRAPH_NS {
         TransparentMeshCluster m_transparent;
         DebugMeshCluster m_debug;
 
-        SR_MATH_NS::IVector2 m_surfaceSize;
+        SR_MATH_NS::UVector2 m_surfaceSize;
 
         SR_HTYPES_NS::SafeVar<uint32_t> m_dirty = 0;
 
