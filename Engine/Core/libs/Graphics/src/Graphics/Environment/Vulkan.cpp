@@ -68,7 +68,11 @@ namespace Framework::Graphics {
         m_kernel = new SRVulkan();
         SR_INFO("Vulkan::PreInit() : pre-initializing vulkan...");
 
+    #ifdef SR_ANDROID
+        m_enableValidationLayers = false;
+    #else
         m_enableValidationLayers = SR_UTILS_NS::Features::Instance().Enabled("VulkanValidation", false);
+    #endif
 
         if (m_enableValidationLayers) {
             m_kernel->SetValidationLayersEnabled(true);
@@ -117,9 +121,16 @@ namespace Framework::Graphics {
                             bool headerEnabled) {
         SR_GRAPH_LOG("Vulkan::MakeWindow() : creating window...");
 
-    #ifdef SR_WIN32
+    #if defined(SR_WIN32)
         m_basicWindow = new Win32Window(this->GetPipeLine());
+    #elif defined(SR_ANDROID)
+        SR_ERROR("Vulkan::MakeWindow() : unsupported os!");
     #endif
+
+        if (!m_basicWindow) {
+            SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
+            return false;
+        }
 
         m_basicWindow->SetCallbackResize([this](BasicWindow *win, int w, int h) {
             m_kernel->SetSize(w, h);

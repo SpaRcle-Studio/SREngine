@@ -37,7 +37,7 @@ IF NOT EXIST "key.keystore" (
 
 echo Build application
 
-"%PLATFORM_TOOLS%/jarsigner.exe" -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore %APK_UNSIGNED_FILE% android
+"%PLATFORM_TOOLS%/jarsigner.exe" -storepass 123456 -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore %APK_UNSIGNED_FILE% android
 "%PLATFORM_TOOLS%/jarsigner.exe" -verify %APK_UNSIGNED_FILE%
 
 echo Delete old signed apk...
@@ -48,7 +48,8 @@ echo Zip align apk...
 "%PLATFORM_TOOLS%/zipalign.exe" -v 4 %APK_UNSIGNED_FILE% %APK_SIGNED_FILE%
 
 echo Apk signing...
-"java.exe" -jar "%PLATFORM_TOOLS%/apksigner.jar" sign --ks key.keystore --ks-key-alias android %APK_SIGNED_FILE%
+
+echo 123456|"java.exe" -jar "%PLATFORM_TOOLS%/apksigner.jar" sign --ks key.keystore --ks-key-alias android %APK_SIGNED_FILE%
 
 echo Uninstall application...
 "%PLATFORM_TOOLS%/adb.exe" uninstall "%APP_NAME%"
@@ -67,4 +68,3 @@ goto LABEL_SUCCESS
 	goto LABEL_EXIT
 
 :LABEL_EXIT
-	pause

@@ -90,6 +90,14 @@ namespace SR_UTILS_NS::Platform {
 }
 
 namespace SR_UTILS_NS::Platform {
+    void Initialize(void* pData) {
+
+    }
+
+    std::optional<std::string> ReadFile(const Path& path) {
+        return std::string();
+    }
+
     void TextToClipboard(const std::string &text) {
         if (text.empty()) {
             SR_WARN("Platform::TextToClipboard() : text is empty!");

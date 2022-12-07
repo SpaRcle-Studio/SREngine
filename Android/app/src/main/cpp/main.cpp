@@ -25,6 +25,8 @@
 #include <Core/World/World.h>
 
 #include <android/log.h>
+#include <Graphics/Environment/OpenGL.h>
+#include <Graphics/Environment/Vulkan.h>
 #include "android_native_app_glue.h"
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "SREngine", __VA_ARGS__))
@@ -268,22 +270,83 @@ ASensorManager* AcquireASensorManagerInstance(android_app* app) {
 }
 
 void android_main(struct android_app* state) {
+    SR_PLATFORM_NS::Initialize(state);
+
     auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
     SR_UTILS_NS::Debug::Instance().Init(applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
     SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
     SR_SYSTEM_LOG("Run SpaRcle Engine on android...");
 
+    auto&& result = SR_PLATFORM_NS::ReadFile("Engine/Configs/Features.xml");
+    if (result) {
+        SR_LOG(*result);
+    }
+
     SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
     SR_HTYPES_NS::Time::Instance().Update();
 
-    SR_UTILS_NS::ResourceManager::Instance().Init(SR_UTILS_NS::Path(applicationPath.ToString() + "/res"));
+    SR_UTILS_NS::ResourceManager::Instance().Init("");
 
     SR_UTILS_NS::Features::Instance().Reload(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
 
     SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
         return new SR_CORE_NS::World();
     });
+
+    const auto&& envDoc = SR_XML_NS::Document::Load(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Pipeline.xml"));
+    const auto&& envName = envDoc.TryRoot().TryGetNode("Pipeline").TryGetAttribute("Name").ToString("");
+
+    if (envName == "OpenGL") {
+        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::OpenGL());
+    }
+    else if (envName == "Vulkan") {
+        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::Vulkan());
+    }
+    else if (envName.empty()) {
+        SR_ERROR("System error: file \"Engine/Configs/Pipeline.xml\" does not exist! Default use Vulkan...");
+        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::Vulkan());
+    }
+    else {
+        SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported! Default use Vulkan...");
+        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::Vulkan());
+    }
+
+    auto window = new SR_GRAPH_NS::Window(
+            "SpaRcle Engine",
+            "Engine/icon.ico",
+            SR_MATH_NS::IVector2(1366, 768), //IVector2(1600, 900),
+            //IVector2(800, 800), //IVector2(1600, 900),
+            false, // vsync
+            false, // fullscreen
+            true,  // resizable
+            true,  // header enabled
+            64
+    );
+
+    auto&& engineInst = Framework::Engine::Instance();
+
+    if(engineInst.Create(window)) {
+        if (engineInst.Init()) {
+            if (engineInst.Run()) {
+
+            }
+            else
+                SR_ERROR("Failed to run game engine!");
+        }
+        else
+            SR_ERROR("Failed to initialize game engine!");
+    }
+    else
+        SR_ERROR("Failed to create game engine!");
+
+    if (engineInst.IsRun()) {
+        SR_SYSTEM_LOG("All systems are successfully running!");
+
+        engineInst.Await(); /// await close engine
+    }
+
+    engineInst.Close();
 
     struct engine engine{};
 

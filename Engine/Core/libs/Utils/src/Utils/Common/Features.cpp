@@ -63,6 +63,8 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+        SR_LOG("Features::Reload() : features successfully reloaded!");
+
         return true;
     }
 

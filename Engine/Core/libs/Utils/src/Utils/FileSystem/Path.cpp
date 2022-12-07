@@ -186,16 +186,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Path::Exists(Type type) const {
-        switch (type) {
-            case Type::File:
-            case Type::Folder:
-                return Platform::IsExists(m_path);
-            default:
-                SRAssert(false);
-                SR_FALLTHROUGH;
-            case Type::Undefined:
-                return false;
-        }
+        return SR_PLATFORM_NS::IsExists(m_path);
     }
 
     void Path::NormalizeSelf() {

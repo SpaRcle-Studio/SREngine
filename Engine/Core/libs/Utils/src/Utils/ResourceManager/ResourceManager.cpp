@@ -12,7 +12,11 @@ namespace SR_UTILS_NS {
     const float_t ResourceManager::ResourceLifeTime = 30.f;
 
     bool ResourceManager::Init(const std::string& resourcesFolder) {
-        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
+    #ifdef SR_ANDROID
+        SR_INFO("ResourceManager::Init() : initializing resource manager...");
+    #else
+        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: " + resourcesFolder);
+    #endif
 
         m_folder = resourcesFolder;
         m_folder.Normalize();

@@ -423,7 +423,6 @@ namespace SR_UTILS_NS::Xml {
             return xml;
         }
 
-        static Document Load(const std::string &path);
         static Document Load(const SR_UTILS_NS::Path &path);
 
         static int32_t GetLastError() {

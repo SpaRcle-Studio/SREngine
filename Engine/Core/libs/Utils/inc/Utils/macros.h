@@ -29,6 +29,8 @@
 #ifdef SR_ANDROID
     #pragma clang diagnostic ignored "-Wunused-private-field"
     #pragma clang diagnostic ignored "-Wdeprecated-volatile"
+    #pragma clang diagnostic ignored "-Wdefaulted-function-deleted"
+    #pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #endif
 
 #define CRT_SECURE_NO_WARNINGS
