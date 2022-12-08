@@ -22,6 +22,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class Window;
     class RenderContext;
     class RenderTechnique;
     class DebugRenderer;
@@ -31,6 +32,7 @@ namespace SR_GRAPH_NS {
         using WidgetManagerPtr = GUI::WidgetManager*;
         using WidgetManagers = std::vector<WidgetManagerPtr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using PipelinePtr = Environment*;
@@ -72,6 +74,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsOverlayEnabled() const;
         SR_NODISCARD RenderContext* GetContext() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
+        SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
         SR_NODISCARD MeshCluster& GetOpaque();
         SR_NODISCARD MeshCluster& GetTransparent();

@@ -39,6 +39,7 @@ namespace SR_CORE_NS::GUI {
         using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
     public:
         explicit EditorGUI();
         ~EditorGUI() override;
@@ -83,9 +84,8 @@ namespace SR_CORE_NS::GUI {
         void Load();
 
     private:
-        RenderContextPtr     m_context    = { };
-
-        Graphics::Window*    m_window     = nullptr;
+        RenderContextPtr m_context = { };
+        WindowPtr m_window = { };
 
         std::atomic<bool>    m_isInit     = false;
         std::atomic<bool>    m_hasErrors  = false;

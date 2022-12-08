@@ -9,6 +9,10 @@
 #endif
 
 namespace SR_GRAPH_NS {
+    BasicWindowImpl::~BasicWindowImpl() {
+        SRAssert(!IsValid());
+    }
+
     void BasicWindowImpl::SetResizeCallback(const ResizeCallback& callback) {
         m_resizeCallback = callback;
     }
@@ -29,12 +33,16 @@ namespace SR_GRAPH_NS {
         m_closeCallback = callback;
     }
 
-    BasicWindowImpl* BasicWindowImpl::CreatePlatformWindow(PipelineType pipelineType, BasicWindowImpl::WindowType type) {
+    void BasicWindowImpl::SetDrawCallback(const BasicWindowImpl::DrawCallback &callback) {
+        m_drawCallback = callback;
+    }
+
+    BasicWindowImpl* BasicWindowImpl::CreatePlatformWindow(BasicWindowImpl::WindowType type) {
     #if defined(SR_WIN32)
         switch (type) {
             case WindowType::Auto:
             case WindowType::Win32:
-                return new Win32Window(pipelineType);
+                return new Win32Window();
             default:
                 break;
         }

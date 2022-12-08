@@ -96,12 +96,12 @@ namespace Framework {
         using namespace SR_HTYPES_NS;
 
         generator->RegisterNewClass("Engine", "Engine", { "Window.h", "Types/SafePointer.h" });
-        ESRegisterStaticMethodArg0(EvoScript::Public, generator, Engine, Instance, Engine&)
-        ESRegisterMethodArg0(EvoScript::Private, generator, Engine, RegisterLibraries, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, Reload, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetScene, SafePtr<Scene>)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, IsRun, bool)
-        ESRegisterMethod(EvoScript::Public, generator, Engine, SetScene, bool, ESArg1(const SafePtr<Scene>& scene), ESArg1(scene))
+      //ESRegisterStaticMethodArg0(EvoScript::Public, generator, Engine, Instance, Engine&)
+      //ESRegisterMethodArg0(EvoScript::Private, generator, Engine, RegisterLibraries, bool)
+      //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, Reload, void)
+      //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetScene, SafePtr<Scene>)
+      //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, IsRun, bool)
+      //ESRegisterMethod(EvoScript::Public, generator, Engine, SetScene, bool, ESArg1(const SafePtr<Scene>& scene), ESArg1(scene))
 
         generator->RegisterTypedef("Time", "Engine", "void");
         generator->RegisterTypedef("PhysEngine", "Engine", "void");
@@ -291,13 +291,13 @@ namespace Framework {
         using namespace SR_MATH_NS;
         using namespace SR_GRAPH_NS;
 
-        ESRegisterMethod(EvoScript::Public, generator, Window, SetGUIEnabled, void, ESArg1(bool v), ESArg1(v))
-        ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
+      //ESRegisterMethod(EvoScript::Public, generator, Window, SetGUIEnabled, void, ESArg1(bool v), ESArg1(v))
+      //ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
 
-        ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Window, CentralizeWindow, void)
-        //ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)
+      //ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
+      //ESRegisterMethodArg0(EvoScript::Public, generator, Window, CentralizeWindow, void)
+      ////ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
+      //ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)
 
         generator->AddIncompleteType("Camera", "Window");
         generator->AddIncompleteType("Mesh", "Window");

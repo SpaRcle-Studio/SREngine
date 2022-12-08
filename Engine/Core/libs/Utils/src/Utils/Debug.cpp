@@ -83,6 +83,7 @@ namespace SR_UTILS_NS {
         }
     #else
         SR_PLATFORM_NS::WriteConsoleLog(msg);
+        std::cout << std::flush;
     #endif
 
         if (m_file.is_open()) {

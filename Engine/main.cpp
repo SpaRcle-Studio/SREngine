@@ -25,10 +25,6 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Locale/Encoding.h>
 
-#include <Audio/RawSound.h>
-#include <Audio/SoundManager.h>
-#include <Audio/Sound.h>
-
 #include <Core/Engine.h>
 #include <Core/World/World.h>
 #include <Core/World/VisualChunk.h>
@@ -86,8 +82,6 @@ using namespace Framework::Physics::Types;
 
 using namespace Framework::Scripting;
 
-using namespace Framework::Audio;
-
 int main(int argc, char **argv) {
     setlocale(LC_ALL, "rus");
     setlocale(LC_NUMERIC, "C");
@@ -124,65 +118,21 @@ int main(int argc, char **argv) {
         SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World(); });
     }
 
-    //TEST AUDIO LOAD
+    auto&& engine = SR_CORE_NS::Engine::Instance();
 
-    /*
-    if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Space_Angels_Musicfonts.wav")) {
-        pSound->PlayAsync();
-        //pSound->Destroy();
-    }
-
-    //SR_AUDIO_NS::Sound::Load("ahh.wav");
-    //SR_AUDIO_NS::Sound::Load("drop.wav");
-    //SR_AUDIO_NS::Sound::Load("Space_Engineers_Main_Theme_KhydroDjent.wav");
-    //SR_AUDIO_NS::Sound::Load("TRAUMATIC.mp3");
-     */
-
-    const auto&& envDoc = Xml::Document::Load(ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Pipeline.xml"));
-    const auto&& envName = envDoc.TryRoot().TryGetNode("Pipeline").TryGetAttribute("Name").ToString("");
-
-    if (envName == "OpenGL") {
-        Environment::Set(new OpenGL());
-    }
-    else if (envName == "Vulkan") {
-        Environment::Set(new Vulkan());
-    }
-    else if (envName.empty()) {
-        SR_ERROR("System error: file \"Engine/Configs/Pipeline.xml\" does not exist! Default use Vulkan...");
-        Environment::Set(new Vulkan());
+    if(engine.Create()) {
+        if (engine.Init()) {
+            if (!engine.Run()) {
+                SR_ERROR("Failed to run game engine!");
+            }
+        }
+        else {
+            SR_ERROR("Failed to initialize game engine!");
+        }
     }
     else {
-        SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported! Default use Vulkan...");
-        Environment::Set(new Vulkan());
-    }
-
-    auto window = new Window(
-            "SpaRcle Engine",
-            "Engine/icon.ico",
-            UVector2(1366, 768), //IVector2(1600, 900),
-            //IVector2(800, 800), //IVector2(1600, 900),
-            false, // vsync
-            false, // fullscreen
-            true,  // resizable
-            true,  // header enabled
-            64
-    );
-
-    auto&& engine = Engine::Instance();
-
-    if(engine.Create(window)) {
-        if (engine.Init()) {
-            if (engine.Run()) {
-
-            }
-            else
-                SR_ERROR("Failed to run game engine!");
-        }
-        else
-            SR_ERROR("Failed to initialize game engine!");
-    }
-    else
         SR_ERROR("Failed to create game engine!");
+    }
 
     if (engine.IsRun()) {
         Debug::Instance().System("All systems are successfully running!");
@@ -198,10 +148,10 @@ int main(int argc, char **argv) {
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
-    SR_AUDIO_NS::SoundManager::DestroySingleton();
-    Framework::Engine::DestroySingleton();
+    SR_CORE_NS::Engine::DestroySingleton();
     Framework::Graphics::GUI::NodeManager::DestroySingleton();
     SR_UTILS_NS::TaskManager::DestroySingleton();
+    Memory::MeshManager::DestroySingleton();
 
     Debug::Instance().System("All systems were successfully closed!");
 

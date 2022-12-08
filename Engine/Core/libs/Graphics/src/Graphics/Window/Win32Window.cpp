@@ -4,16 +4,11 @@
 
 #include <Graphics/Window/Win32Window.h>
 
-#define BORDERWIDTH  5
-#define BORDERSIZE BORDERWIDTH * 2
-#define TITLEBARWIDTH  30
+#define SR_BORDERSIZE 5 * 2
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace SR_GRAPH_NS::WinAPI {
-    const int32_t HIDDEN_HEADER_HEIGHT = 39;
-    const int32_t HEADER_HEIGHT = TITLEBARWIDTH;
-
     static int GetBorderHeight(HWND hWnd) {
         RECT rcClient, rcWind;
         GetClientRect(hWnd, &rcClient);
@@ -45,18 +40,19 @@ namespace SR_GRAPH_NS::WinAPI {
 namespace SR_GRAPH_NS {
     LRESULT Win32Window::ReadWmdProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)  {
         switch (msg) {
+            case WM_CREATE: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
             case WM_NCHITTEST: {
                 auto point = POINT { LOWORD(lParam), HIWORD(lParam) };
 
                 /// Convert screen coordinates into client
                 if (!ScreenToClient(m_hWnd, &point)) {
-                    SRAssertOnce(false);
                     return 0;
                 }
 
                 RECT rect;
                 if(!GetClientRect(hwnd, &rect)) {
-                    SRAssertOnce(false);
                     return 0;
                 }
 
@@ -66,21 +62,21 @@ namespace SR_GRAPH_NS {
                 int32_t height = rect.bottom - rect.top;
 
                 /// Decide what result message should have
-                if ((std::abs(rect.left + width - point.x) < BORDERSIZE) && (std::abs(rect.top + height - point.y) < BORDERSIZE))
+                if ((std::abs(rect.left + width - point.x) < SR_BORDERSIZE) && (std::abs(rect.top + height - point.y) < SR_BORDERSIZE))
                     return HTBOTTOMRIGHT;
-                else if ((std::abs(rect.left - point.x) < BORDERSIZE) && (std::abs(rect.top + height - point.y) < BORDERSIZE))
+                else if ((std::abs(rect.left - point.x) < SR_BORDERSIZE) && (std::abs(rect.top + height - point.y) < SR_BORDERSIZE))
                     return HTBOTTOMLEFT;
-                else if ((std::abs(rect.left + width - point.x) < BORDERSIZE) && (std::abs(rect.top - point.y) < BORDERSIZE))
+                else if ((std::abs(rect.left + width - point.x) < SR_BORDERSIZE) && (std::abs(rect.top - point.y) < SR_BORDERSIZE))
                     return HTTOPRIGHT;
-                else if ((std::abs(rect.left - point.x) < BORDERSIZE) && (std::abs(rect.top - point.y) < BORDERSIZE))
+                else if ((std::abs(rect.left - point.x) < SR_BORDERSIZE) && (std::abs(rect.top - point.y) < SR_BORDERSIZE))
                     return HTTOPLEFT;
-                else if (std::abs(rect.left - point.x) < BORDERSIZE)
+                else if (std::abs(rect.left - point.x) < SR_BORDERSIZE)
                     return HTLEFT;
-                else if (std::abs(rect.top - point.y) < BORDERSIZE)
+                else if (std::abs(rect.top - point.y) < SR_BORDERSIZE)
                     return HTTOP;
-                else if (std::abs(rect.left + width - point.x) < BORDERSIZE)
+                else if (std::abs(rect.left + width - point.x) < SR_BORDERSIZE)
                     return HTRIGHT;
-                else if (std::abs(rect.top + height - point.y) < BORDERSIZE)
+                else if (std::abs(rect.top + height - point.y) < SR_BORDERSIZE)
                     return HTBOTTOM;
                 else {
                     return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -88,10 +84,15 @@ namespace SR_GRAPH_NS {
             }
             case WM_CLOSE: {
                 SR_SYSTEM_LOG("Win32Window::CallBack() : WM_CLOSE event has been received!");
-                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
-                return 0;
+
+                if (m_closeCallback) {
+                    m_closeCallback(this);
+                    return 0;
+                }
+
+                return DefWindowProc(hwnd, msg, wParam, lParam);
             }
-            case (WM_WINDOWPOSCHANGED): {
+            case WM_WINDOWPOSCHANGED: {
                 DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
                 m_maximize = styles & WS_MAXIMIZE;
 
@@ -101,12 +102,14 @@ namespace SR_GRAPH_NS {
                 if (m_focusCallback) {
                     m_focusCallback(this, true);
                 }
+                m_isFocused = true;
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
             case WM_KILLFOCUS: {
                 if (m_focusCallback) {
                     m_focusCallback(this, false);
                 }
+                m_isFocused = false;
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
             case WM_SIZE: {
@@ -130,6 +133,8 @@ namespace SR_GRAPH_NS {
                             m_size.y = m_headerEnabled ? m_surfaceSize.y + 30 : m_surfaceSize.y;
                         }
 
+                        m_collapsed = m_surfaceSize.HasZero();
+
                         if (m_resizeCallback) {
                             m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
                         }
@@ -139,12 +144,12 @@ namespace SR_GRAPH_NS {
                     m_surfaceSize = SR_MATH_NS::UVector2();
                     m_size = SR_MATH_NS::UVector2();
 
+                    m_collapsed = m_surfaceSize.HasZero();
+
                     if (m_resizeCallback) {
                         m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
                     }
                 }
-
-                m_collapsed = m_surfaceSize.HasZero();
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
@@ -158,12 +163,17 @@ namespace SR_GRAPH_NS {
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
             case WM_STYLECHANGING:
-            case WM_STYLECHANGED:
+            case WM_STYLECHANGED: {
                 return DefWindowProc(hwnd, msg, wParam, lParam);
-            case WM_DESTROY:
+            }
+            case WM_DESTROY: {
                 PostQuitMessage(0);
                 m_isValid = false;
-                return 0;
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_PAINT: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
             default:
                 return DefWindowProc(hwnd, msg, wParam, lParam);
         }
@@ -259,16 +269,17 @@ namespace SR_GRAPH_NS {
         Move(posX, posY);
     }
 
+    /// ЭТО ВСЕ НЕ РАБОТАЕТ, ОКНУ ПОХУЙ ОНО РАСТЯГИВАЕТСЯ ТАК КАК ХОЧЕТ, ВИНАПИ ДЕРЬМО
     void Win32Window::Resize(uint32_t w, uint32_t h) {
-        SR_LOG(Helper::Format("Win32Window::Resize() : set new sizes %ux%u", w, h));
+        SR_LOG(SR_FORMAT("Win32Window::Resize() : set new sizes %ux%u", w, h));
 
-        RECT newRect = RECT {
+        RECT newRect = RECT{
                 .left = 0L,
                 .top = 0,
-                .right = static_cast<LONG>(m_headerEnabled ? w + 8 : w /* + 7 */),
+                .right = static_cast<LONG>(m_headerEnabled ? w + 8 : w),
                 .bottom = static_cast<LONG>(m_headerEnabled ? h + 1 : h)
         };
-
+        
         AdjustWindowRectEx(&newRect, m_dwStyle, FALSE, m_dwExStyle);
 
         if (!SetWindowPos(m_hWnd, NULL, newRect.left, newRect.top, newRect.right, newRect.bottom, SWP_NOMOVE)) {
@@ -322,7 +333,7 @@ namespace SR_GRAPH_NS {
     bool Win32Window::Initialize(const std::string &name,
             const SR_MATH_NS::IVector2& position,
             const SR_MATH_NS::UVector2& size,
-            bool Sullscreen, bool resizable
+            bool fullscreen, bool resizable
     ) {
         m_hInst = GetModuleHandleA(nullptr);
 
@@ -352,24 +363,13 @@ namespace SR_GRAPH_NS {
         m_dwStyle = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
 
         {
-            RECT windowRect;
-            windowRect.left = 0;
-            windowRect.top = 0L;
-            windowRect.right = size.x;
-            windowRect.bottom = size.y - TITLEBARWIDTH;
-
-            AdjustWindowRectEx(&windowRect, m_dwStyle, FALSE, m_dwExStyle);
-
-            auto&& width = windowRect.right - windowRect.left;
-            auto&& height = windowRect.bottom - windowRect.top;
-
             m_hWnd = CreateWindowEx(
                 0, "SREngineWinClass",
                 name.c_str(),
                 m_dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
                 position.x - 8, position.y,
-                width,
-                height,
+                m_size.x,
+                m_size.y,
                 nullptr,
                 nullptr,
                 m_hInst,
@@ -388,6 +388,8 @@ namespace SR_GRAPH_NS {
         SetForegroundWindow(m_hWnd);
         SetFocus(m_hWnd);
 
+        Resize(m_size.x, m_size.y);
+
         m_isValid = true;
         m_hDC = GetDC(m_hWnd);
 
@@ -400,45 +402,12 @@ namespace SR_GRAPH_NS {
 
     void Win32Window::PollEvents() const {
         MSG msg = {};
-        while (::PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE)) {
-            if (!::GetMessage(&msg, nullptr, 0, 0))
+        while (::PeekMessage(&msg, m_hWnd, 0, 0, PM_NOREMOVE)) {
+            if (!::GetMessage(&msg, m_hWnd, 0, 0))
                 break;
             ::TranslateMessage(&msg);
             ::DispatchMessage(&msg);
         }
-    }
-
-    bool Win32Window::MakeContextCurrent() {
-        if (m_pipeline == PipelineType::OpenGL) {
-            static PIXELFORMATDESCRIPTOR pfd = /// pfd Tells Windows How We Want Things To Be
-            {
-                sizeof(PIXELFORMATDESCRIPTOR),  /// Size Of This Pixel Format Descriptor
-                1,                              /// Version Number
-                PFD_DRAW_TO_WINDOW |            /// Format Must Support Window
-                PFD_SUPPORT_OPENGL |            /// Format Must Support OpenGL
-                PFD_DOUBLEBUFFER,               /// Must Support Double Buffering
-                PFD_TYPE_RGBA,                  /// Request An RGBA Format
-                24,                             /// Select Our Color Depth
-                0, 0, 0, 0, 0, 0,               /// Color Bits Ignored
-                0,                              /// No Alpha Buffer
-                0,                              /// Shift Bit Ignored
-                0,                              /// No Accumulation Buffer
-                0, 0, 0, 0,                     /// Accumulation Bits Ignored
-                16,                             /// 16Bit Z-Buffer (Depth Buffer)
-                0,                              /// No Stencil Buffer
-                0,                              /// No Auxiliary Buffer
-                PFD_MAIN_PLANE,                 /// Main Drawing Layer
-                0,                              /// Reserved
-                0, 0, 0                         /// Layer Masks Ignored
-            };
-
-            auto&& pixelFormat = ChoosePixelFormat(m_hDC, &pfd);
-            SetPixelFormat(m_hDC, pixelFormat, &pfd);
-
-            return true;
-        }
-
-        return false;
     }
 
     void* Win32Window::GetHandle() const {
@@ -457,5 +426,13 @@ namespace SR_GRAPH_NS {
 
     void Win32Window::NextFrameGUI() {
         ImGui_ImplWin32_NewFrame();
+    }
+
+    void Win32Window::Close() {
+        if (m_hWnd && IsValid()) {
+            DestroyWindow(m_hWnd);
+            m_isValid = false;
+            m_hWnd = nullptr;
+        }
     }
 }

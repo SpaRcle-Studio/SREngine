@@ -123,7 +123,7 @@ namespace Framework::Core::GUI {
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmo(Graphics::Types::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
         void DrawGuizmoTools();
-        bool BeginDockSpace();
+        bool BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow);
         bool BeginWindow(const char* name);
         void EndWindow();
         bool BeginChildWindow(const char* name);

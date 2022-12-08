@@ -29,6 +29,7 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void WriteConsoleWarn(const std::string& msg);
     SR_DLL_EXPORT extern void Terminate();
     SR_DLL_EXPORT extern void SelfOpen();
+    SR_DLL_EXPORT extern std::vector<SR_MATH_NS::UVector2> GetScreenResolutions();
     SR_DLL_EXPORT extern void OpenWithAssociatedApp(const Path& filepath);
     SR_DLL_EXPORT extern bool Copy(const Path& from, const Path& to);
     SR_DLL_EXPORT extern bool CreateFolder(const Path& path);

@@ -8,6 +8,8 @@ add_definitions(
     -DFLAC__NO_DLL
 )
 
+set(ALSOFT_INSTALL_EXAMPLES OFF CACHE INTERNAL "" FORCE)
+
 add_subdirectory(libs/OpenAL)
 add_subdirectory(libs/libmodplug)
 

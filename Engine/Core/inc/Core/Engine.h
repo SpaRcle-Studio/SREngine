@@ -14,6 +14,7 @@
 #include <Utils/Input/InputDispatcher.h>
 #include <Utils/Input/InputHandler.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Types/SafeGateArray.h>
 
 #include <Core/GUI/EditorGUI.h>
 #include <Core/EvoScriptAPI.h>
@@ -39,14 +40,16 @@ namespace SR_GTYPES_NS {
     class Camera;
 }
 
-namespace Framework {
-    class Engine : public Helper::Singleton<Engine> {
+namespace SR_CORE_NS {
+    class Engine : public SR_UTILS_NS::Singleton<Engine> {
         friend class Singleton<Engine>;
-        friend class API;
+        friend class Framework::API;
         using PipelinePtr = SR_GRAPH_NS::Environment*;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
-        using ScenePtr = Helper::Types::SafePtr<SR_WORLD_NS::Scene>;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Clock = std::chrono::high_resolution_clock;
         using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
@@ -63,7 +66,7 @@ namespace Framework {
         void SetSpeed(float_t speed);
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
-        SR_NODISCARD SR_INLINE Graphics::Window* GetWindow() const { return m_window; }
+        SR_NODISCARD SR_INLINE WindowPtr GetWindow() const { return m_window; }
         SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
         SR_NODISCARD SR_INLINE bool IsPaused() const { return m_isPaused; }
@@ -71,7 +74,7 @@ namespace Framework {
         SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
 
     public:
-        bool Create(Graphics::Window* window);
+        bool Create();
         bool Init();
         bool Run();
         void Await();
@@ -80,6 +83,11 @@ namespace Framework {
     private:
         void RegisterResources();
         void RegisterComponents();
+
+        bool CreateMainWindow();
+        bool InitializeRender();
+        void SynchronizeFreeResources();
+
         void Prepare();
         void FixedUpdate();
         void Update(float_t dt);
@@ -92,7 +100,6 @@ namespace Framework {
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
 
-        std::atomic<bool> m_exitEvent = false;
         std::atomic<bool> m_isActive = false;
         std::atomic<bool> m_isPaused = false;
 
@@ -102,21 +109,27 @@ namespace Framework {
         TimePoint m_timeStart;
         SR_HTYPES_NS::Timer m_worldTimer;
 
+        SR_HTYPES_NS::SafeGateArray<SR_GRAPH_NS::GUI::WidgetManager*> m_widgetManagers;
+
         std::vector<SR_UTILS_NS::Component*> m_updateableComponents;
         bool m_needRebuildComponents = false;
         uint64_t m_rootHash = 0;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
-        SR_GRAPH_NS::Window* m_window = nullptr;
-        Core::GUI::EditorGUI* m_editor = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
 
         SR_HTYPES_NS::Thread::Ptr m_worldThread = nullptr;
 
         ScenePtr m_scene = { };
-        PhysicsScenePtr m_physicsScene = { };
+
+        Core::GUI::EditorGUI* m_editor = nullptr;
+
+        RenderContextPtr m_renderContext = { };
         RenderScenePtr m_renderScene = { };
+        WindowPtr m_window = { };
         PipelinePtr m_pipeline = nullptr;
+
+        PhysicsScenePtr m_physicsScene = { };
         CameraPtr m_mainCamera = nullptr;
 
     };

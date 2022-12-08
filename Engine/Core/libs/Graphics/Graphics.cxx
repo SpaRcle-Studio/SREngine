@@ -8,6 +8,8 @@
 #include "../Graphics/src/Graphics/Pipeline/OpenGL.cpp"
 #include "../Graphics/src/Graphics/Pipeline/TextureHelper.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Pipeline.cpp"
+#include "../Graphics/src/Graphics/Pipeline/EmptyPipeline.cpp"
 
 #include "../Graphics/src/Graphics/GUI/Link.cpp"
 #include "../Graphics/src/Graphics/GUI/ICanvas.cpp"

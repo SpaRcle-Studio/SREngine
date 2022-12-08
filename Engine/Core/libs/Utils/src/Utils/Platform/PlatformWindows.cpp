@@ -443,4 +443,29 @@ namespace SR_UTILS_NS::Platform {
 
         return true;
     }
+
+    std::vector<SR_MATH_NS::UVector2> GetScreenResolutions() {
+        auto&& resolutions = std::vector<SR_MATH_NS::UVector2>();
+
+        resolutions.reserve(64);
+
+        DEVMODE dm = { 0 };
+        dm.dmSize = sizeof(dm);
+
+        for (uint32_t iModeNum = 0; EnumDisplaySettings(NULL, iModeNum, &dm) != 0; ++iModeNum) {
+            auto&& resolution = SR_MATH_NS::UVector2(dm.dmPelsWidth, dm.dmPelsHeight);
+
+            if (std::find(resolutions.begin(), resolutions.end(), resolution) != resolutions.end()) {
+                continue;
+            }
+
+            resolutions.emplace_back(resolution);
+        }
+
+        if (resolutions.empty()) {
+            resolutions.emplace_back(SR_MATH_NS::UVector2(400, 400));
+        }
+
+        return resolutions;
+    }
 }

@@ -7,6 +7,7 @@
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/Icons.h>
+#include <Graphics/Pipeline/Vulkan.h>
 
 bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
     SR_GRAPH("Environment::InitGUI() : pre-initializing ImGUI library...");
@@ -69,5 +70,12 @@ bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
 
 void Framework::Graphics::Environment::SetWinCallBack(const std::function<void(WinEvents, void * , void * , void * )>& callback) {
     g_callback = std::move(callback);
+}
+
+Framework::Graphics::Environment *Framework::Graphics::Environment::Get() {
+    if (g_environment == nullptr) {
+        g_environment = new Vulkan();
+    }
+    return g_environment;
 }
 

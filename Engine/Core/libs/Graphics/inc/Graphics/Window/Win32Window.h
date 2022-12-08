@@ -20,8 +20,8 @@ namespace SR_GRAPH_NS {
     class Win32Window : public BasicWindowImpl {
         using Super = BasicWindowImpl;
     public:
-        explicit Win32Window(PipelineType pipeline)
-            : Super(pipeline, WindowType::Win32)
+        explicit Win32Window()
+            : Super()
             , m_styleState(WinAPI::StyleState::Changed)
         { }
 
@@ -37,14 +37,16 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::IVector2 GetScreenResolution() const override;
         SR_NODISCARD void* GetHandle() const override;
 
+        SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::Win32; }
+
         void SwapBuffers() const override;
         void PollEvents() const override;
-        bool MakeContextCurrent() override;
 
         bool InitGUI() override;
         bool StopGUI() override;
         void NextFrameGUI() override;
 
+        void Close() override;
         void Maximize() override;
         void Restore() override;
         void Collapse() override;

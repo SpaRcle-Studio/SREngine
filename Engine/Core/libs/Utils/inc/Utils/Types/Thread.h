@@ -8,6 +8,7 @@
 #include <Utils/Debug.h>
 #include <Utils/Common/ThreadUtils.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_HTYPES_NS {
     class DataStorage;
@@ -32,6 +33,8 @@ namespace SR_HTYPES_NS {
             SR_NODISCARD Ptr Create(std::thread thread);
             SR_NODISCARD Ptr Create(const std::function<void()>& fn);
             SR_NODISCARD uint32_t GetThreadsCount();
+
+            SR_NODISCARD Ptr CreateEmpty();
 
             template<class Functor, typename... Args> SR_NODISCARD Ptr Create(Functor&& fn, Args&&... args) {
                 std::thread thread(fn, std::forward<Args>(args)...);
@@ -60,6 +63,25 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD ThreadId GetId();
         SR_NODISCARD DataStorage* GetContext() { return m_context; }
 
+        void Synchronize();
+
+        template<class Functor, typename... Args> SR_NODISCARD bool Run(Functor&& fn) {
+            if (Joinable()) {
+                SRHalt("Thread::Run() : thread already ran!");
+                return false;
+            }
+
+            m_thread = std::thread([&]() {
+                m_id = SR_UTILS_NS::GetThreadId(m_thread);
+                Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
+                fn();
+            });
+
+            return true;
+        }
+
+        bool Execute(const SR_HTYPES_NS::Function<bool()>& function) const;
+
         void Join() { m_thread.join(); }
         bool TryJoin();
 
@@ -75,6 +97,10 @@ namespace SR_HTYPES_NS {
         std::thread m_thread;
         ThreadId m_id;
         DataStorage* m_context;
+
+        mutable std::recursive_mutex m_mutex;
+        mutable std::atomic<const SR_HTYPES_NS::Function<bool()>*> m_function;
+        mutable std::atomic<bool> m_executeResult = false;
 
     };
 }

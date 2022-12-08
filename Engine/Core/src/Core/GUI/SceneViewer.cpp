@@ -18,6 +18,21 @@
 #include <Graphics/Pass/ColorBufferPass.h>
 
 namespace SR_CORE_NS::GUI {
+    SceneViewer::SceneViewer(const WindowPtr& window, Hierarchy* hierarchy)
+        : Widget("Scene")
+        , m_window(window)
+        , m_hierarchy(hierarchy)
+        , m_guizmo(new Guizmo())
+        , m_id(-1)
+    {
+        m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
+    }
+
+    SceneViewer::~SceneViewer() {
+        SetCameraActive(false);
+        SR_SAFE_DELETE_PTR(m_guizmo);
+    }
+
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
         m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
             m_translation = camera->GetTransform()->GetTranslation();
@@ -51,7 +66,7 @@ namespace SR_CORE_NS::GUI {
                 if (ImGui::BeginChild("ViewerTexture")) {
                     const auto winSize = ImGui::GetWindowSize();
 
-                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize().Cast<int32_t>(), m_id, true);
+                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetSize().Cast<int32_t>(), m_id, true);
 
                     if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
                         m_guizmo->Draw(*selected.begin(), m_camera);
@@ -79,30 +94,8 @@ namespace SR_CORE_NS::GUI {
         SetCameraActive(m_cameraActive);
     }
 
-    SceneViewer::SceneViewer(Graphics::Window* window, Hierarchy* hierarchy)
-        : Widget("Scene")
-        , m_window(window)
-        , m_hierarchy(hierarchy)
-        , m_guizmo(new Guizmo())
-        , m_id(-1)
-    {
-        m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
-    }
-
-    SceneViewer::~SceneViewer() {
-        SetCameraActive(false);
-        SR_SAFE_DELETE_PTR(m_guizmo);
-    }
-
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
-
-        if (m_camera.RecursiveLockIfValid()) {
-            if (auto* camera = m_camera->GetComponent<SR_GTYPES_NS::Camera>()) {
-                //camera->SetDirectOutput(!m_enabled);
-            }
-            m_camera.Unlock();
-        }
     }
 
     void SceneViewer::Update() {
@@ -201,7 +194,7 @@ namespace SR_CORE_NS::GUI {
         else
             return;
 
-        const auto size = m_window->GetWindowSize();
+        const auto size = m_window->GetSize();
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
         pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
@@ -226,7 +219,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::SetCameraActive(bool value) {
-        m_window->BeginSync();
+        // m_window->BeginSync();
 
         if ((m_cameraActive = value)) {
             if (!m_camera.Valid()) {
@@ -237,7 +230,7 @@ namespace SR_CORE_NS::GUI {
         else
             SetCamera(GameObjectPtr());
 
-        m_window->EndSync();
+        // m_window->EndSync();
     }
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {

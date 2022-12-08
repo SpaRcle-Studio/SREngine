@@ -21,6 +21,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class Window;
     class RenderScene;
     class RenderTechnique;
     class Environment;
@@ -40,8 +41,9 @@ namespace SR_GRAPH_NS {
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
     public:
-        RenderContext();
+        explicit RenderContext(const WindowPtr& pWindow);
         virtual ~RenderContext() = default;
 
     public:
@@ -53,9 +55,6 @@ namespace SR_GRAPH_NS {
         void SetDirty();
 
         void OnResize(const SR_MATH_NS::UVector2& size);
-
-        /// Установка начального размера окна
-        void SetWindowSize(const SR_MATH_NS::UVector2& size);
 
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
@@ -69,6 +68,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
+        SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD PipelineType GetPipelineType() const;
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
@@ -84,8 +84,6 @@ namespace SR_GRAPH_NS {
         template<typename T> bool Update(T& resourceList) noexcept;
 
     private:
-        SR_MATH_NS::UVector2 m_windowSize;
-
         std::vector<Types::Framebuffer*> m_framebuffers;
         std::vector<Types::Shader*> m_shaders;
         std::vector<TexturePtr> m_textures;
@@ -94,6 +92,8 @@ namespace SR_GRAPH_NS {
         std::vector<SkyboxPtr> m_skyboxes;
 
         std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>> m_scenes;
+
+        WindowPtr m_window;
 
         MaterialPtr m_defaultMaterial = nullptr;
         TexturePtr m_defaultTexture = nullptr;
