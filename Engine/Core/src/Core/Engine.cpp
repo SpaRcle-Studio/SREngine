@@ -122,7 +122,7 @@ namespace SR_CORE_NS {
             pWin->Maximize();
         }
 
-        SR_ERROR("Engine::CreateMainWindow() : initializing window callbacks...");
+        SR_LOG("Engine::CreateMainWindow() : initializing window callbacks...");
 
         m_window->SetDrawCallback([this]() {
             DrawCallback();
