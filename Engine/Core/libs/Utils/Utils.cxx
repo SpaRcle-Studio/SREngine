@@ -10,6 +10,7 @@
 #endif
 
 #include "../Utils/src/Utils/ECS/Component.cpp"
+#include "../Utils/src/Utils/ECS/IComponentable.cpp"
 #include "../Utils/src/Utils/ECS/ComponentManager.cpp"
 #include "../Utils/src/Utils/ECS/GameObject.cpp"
 #include "../Utils/src/Utils/ECS/ISavable.cpp"

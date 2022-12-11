@@ -6,6 +6,7 @@
 #define GAMEENGINE_GAMEOBJECT_H
 
 #include <Utils/ECS/EntityManager.h>
+#include <Utils/ECS/IComponentable.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
@@ -36,7 +37,7 @@ namespace SR_UTILS_NS {
     );
     typedef uint64_t GameObjectFlagBits;
 
-    class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public Entity {
+    class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
         SR_ENTITY_SET_VERSION(1001);
     private:
         friend class World::Scene;
@@ -49,7 +50,6 @@ namespace SR_UTILS_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using Super = Ptr;
         using GameObjects = std::vector<GameObject::Ptr>;
-        using Components = std::vector<Component*>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<World::Scene>;
 
     private:
@@ -57,6 +57,11 @@ namespace SR_UTILS_NS {
         ~GameObject() override;
 
     public:
+        bool LoadComponent(Component* component) override;
+        bool AddComponent(Component* component);
+        bool RemoveComponent(Component* component) override;
+        bool ReplaceComponent(Component* source, Component* destination) override;
+
         SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
@@ -72,35 +77,18 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
-        SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
-        Math::FVector3 GetBarycenter();
-        Math::FVector3 GetHierarchyBarycenter();
+        SR_MATH_NS::FVector3 GetBarycenter();
+        SR_MATH_NS::FVector3 GetHierarchyBarycenter();
 
         void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
         void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;
         bool SetParent(const GameObject::Ptr& parent);
         void SetName(std::string name);
         void SetTag(const std::string& tag);
-
-        Component* GetOrCreateComponent(const std::string& name);
-        Component* GetComponent(const std::string& name);
-        Component* GetComponent(size_t id);
-
-        /** Отличие от AddComponent в том, что используется только при загрузке объекта,
-         * не вызывая при этом OnAttached -> Awake -> OnEnable -> Start, а делая это отложенно */
-        bool LoadComponent(Component* component);
-        /** Добавляет новый компонент на объект, вызывает у компонента
-         * последовательность Awake -> OnEnable -> Start */
-        bool AddComponent(Component* component);
-
-        bool RemoveComponent(Component* component);
-        bool ReplaceComponent(Component* source, Component* destination);
-        bool ContainsComponent(const std::string& name);
-        void ForEachComponent(const std::function<bool(Component*)>& fun);
 
         bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
@@ -122,11 +110,6 @@ namespace SR_UTILS_NS {
 
         void SetDirty(bool value);
 
-    public:
-        template<typename T> T* GetComponent() {
-            return dynamic_cast<T*>(GetComponent(typeid(T).hash_code()));
-        }
-
     private:
         void OnAttached();
         void OnMatrixDirty();
@@ -138,9 +121,6 @@ namespace SR_UTILS_NS {
         bool m_isEnabled = true;
         bool m_isActive = false;
         bool m_isDestroy = false;
-
-        uint16_t m_componentsCount = 0;
-        uint16_t m_childrenCount = 0;
 
         uint64_t m_hashName = 0;
         uint64_t m_idInScene = SR_ID_INVALID;
@@ -155,9 +135,6 @@ namespace SR_UTILS_NS {
         std::string        m_tag;
 
         GameObjectFlagBits m_flags = GAMEOBJECT_FLAG_NONE;
-
-        Components            m_components = { };
-        std::list<Component*> m_loadedComponents = { };
 
     };
 }

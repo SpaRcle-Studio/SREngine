@@ -34,16 +34,6 @@
         delete m_transform;
     }
 
-    Component* GameObject::GetComponent(const std::string &name) {
-        for (auto&& pComponent : m_components) {
-            if (pComponent->GetComponentName() == name) {
-                return pComponent;
-            }
-        }
-
-        return nullptr;
-    }
-
     void GameObject::Destroy(GODestroyByBits by /** = DestroyByFlags::DestroyBy_Other */) {
         if (m_isDestroy) {
             SR_ERROR("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
@@ -175,16 +165,6 @@
         }
 
         SRHalt(Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
-    }
-
-    bool GameObject::ContainsComponent(const std::string &name) {
-        for (auto&& pComponent : m_components) {
-            if (pComponent->GetComponentName() == name) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     void GameObject::ForEachChild(const std::function<void(GameObject::Ptr &)> &fun) {
@@ -340,35 +320,19 @@
         return count == 0 ? Math::InfinityFV3 : barycenter / count;
     }
 
-    void GameObject::ForEachComponent(const std::function<bool(Component *)> &fun) {
-        for (auto&& component : m_components) {
-            if (!fun(component)) {
-                break;
-            }
-        }
-    }
+     bool GameObject::LoadComponent(Component *pComponent) {
+         if (m_isDestroy) {
+             SR_ERROR("GameObject::LoadComponent() : this \"" + m_name + "\" game object is destroyed!");
+             return false;
+         }
 
-    bool GameObject::LoadComponent(Component *pComponent) {
-        if (m_isDestroy) {
-            SR_ERROR("GameObject::LoadComponent() : this \"" + m_name + "\" game object is destroyed!");
-            return false;
-        }
+         if (IComponentable::LoadComponent(pComponent)) {
+             SetDirty(true);
+             return true;
+         }
 
-        if (!pComponent) {
-            SRHalt("pComponent is nullptr!");
-            return false;
-        }
-
-        m_loadedComponents.emplace_back(pComponent);
-
-        pComponent->SetParent(this);
-        /// pComponent->OnAttached();
-        /// Здесь нельзя аттачить, иначе будет очень трудно отлавливаемый deadlock
-
-        SetDirty(true);
-
-        return true;
-    }
+         return false;
+     }
 
      void GameObject::PostLoad() {
          if (!m_dirty) {
@@ -376,6 +340,8 @@
          }
 
          if (!m_loadedComponents.empty()) {
+             m_components.reserve(m_loadedComponents.size());
+
              for (auto&& pLoadedCmp : m_loadedComponents) {
                  AddComponent(pLoadedCmp);
                  pLoadedCmp->OnMatrixDirty();
@@ -396,65 +362,33 @@
             return false;
         }
 
-        m_components.emplace_back(pComponent);
-        ++m_componentsCount;
-
-        pComponent->SetParent(this);
-        pComponent->OnAttached();
-        pComponent->OnMatrixDirty();
-
-        SetDirty(true);
-
-        return true;
-    }
-
-    bool GameObject::RemoveComponent(Component *component) {
-        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it != component) {
-                continue;
-            }
-
-            if (component->GetParent() != this) {
-                SRHalt("Game object not are children!");
-            }
-
-            component->OnDestroy();
-
-            m_components.erase(it);
-            --m_componentsCount;
-
+        if (IComponentable::AddComponent(pComponent)) {
             SetDirty(true);
-
             return true;
         }
-
-        SR_ERROR("GameObject::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
 
         return false;
     }
 
-    bool GameObject::ReplaceComponent(Component *source, Component *destination) {
+    bool GameObject::RemoveComponent(Component* pComponent) {
+        if (IComponentable::RemoveComponent(pComponent)) {
+            SetDirty(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool GameObject::ReplaceComponent(Component* source, Component* destination) {
         if (m_isDestroy) {
             SR_ERROR("GameObject::ReplaceComponent() : this \"" + m_name + "\" game object is destroyed!");
             return false;
         }
 
-        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it == source) {
-                source->OnDestroy();
-                *it = destination;
-
-                destination->SetParent(this);
-                destination->OnAttached();
-                destination->OnMatrixDirty();
-
-                SetDirty(true);
-
-                return true;
-            }
+        if (IComponentable::ReplaceComponent(source, destination)) {
+            SetDirty(true);
+            return true;
         }
-
-        SR_ERROR("GameObject::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
 
         return false;
     }
@@ -530,18 +464,6 @@
         return true;
     }
 
-    Component *GameObject::GetComponent(size_t id) {
-        for (auto&& pComponent : m_components) {
-            if (pComponent->GetComponentId() != id) {
-                continue;
-            }
-
-            return pComponent;
-        }
-
-        return nullptr;
-    }
-
     void GameObject::SetTransform(Transform *transform) {
         if (m_transform == transform || !transform) {
             SR_WARN("GameObject::SetTransform() : invalid transform!");
@@ -612,22 +534,5 @@
                 children->SetDirty(dirty);
             }
         }
-    }
-
-    Component *GameObject::GetOrCreateComponent(const std::string &name) {
-        if (auto&& pComponent = GetComponent(name)) {
-            return pComponent;
-        }
-
-        if (auto&& pComponent = ComponentManager::Instance().CreateComponentOfName(name)) {
-            if (AddComponent(pComponent)) {
-                return pComponent;
-            }
-            else {
-                SRHalt("GameObject::GetOrCreateComponent() : failed to add component!");
-            }
-        }
-
-        return nullptr;
     }
 }
