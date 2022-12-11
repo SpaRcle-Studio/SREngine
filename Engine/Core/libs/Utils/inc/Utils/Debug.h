@@ -118,19 +118,13 @@ namespace SR_UTILS_NS {
 #define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
             .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
 
-#ifdef SR_RELEASE
-    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
-    #define SRAssert2(expr, msg) (SR_NOOP)
-    #define SRAssert(expr) (SR_NOOP)
-    #define SRAssert1(expr) SRAssert(expr)
-    #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
-    #define SRAssert2Once(expr, msg) (SR_NOOP)
-    #define SRVerifyFalse2(expr, msg) ((!(expr)))
+#if defined(SR_DEBUG) || defined(SR_ANDROID)
+    #define SR_ENABLE_ASSERTS
 #endif
 
-#ifdef SR_DEBUG
+#ifdef SR_ENABLE_ASSERTS
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
-            if (fun != notEquals) SR_UTILS_NS::Debug::Instance().Error(errorMsg)
+        if (fun != notEquals) SR_UTILS_NS::Debug::Instance().Error(errorMsg)
 
     #define SRAssert2(expr, msg) (!!(expr) || SR_UTILS_NS::Debug::Instance().Assert (SR_MAKE_ASSERT(msg)))
 
@@ -142,6 +136,14 @@ namespace SR_UTILS_NS {
     #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_UTILS_NS::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
 
     #define SRAssert2Once(expr, msg) ((!(expr) && SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg))) || SRAssert2(expr, msg))
+#else
+    #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
+    #define SRAssert2(expr, msg) (SR_NOOP)
+    #define SRAssert(expr) (SR_NOOP)
+    #define SRAssert1(expr) SRAssert(expr)
+    #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
+    #define SRAssert2Once(expr, msg) (SR_NOOP)
+    #define SRVerifyFalse2(expr, msg) ((!(expr)))
 #endif
 
 #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
@@ -149,6 +151,8 @@ namespace SR_UTILS_NS {
 #define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
 #define SRHalt(msg) SRAssert2(false, msg)
+#define SRHaltOnce(msg) SRAssert2Once(false, msg)
 #define SRHalt0() SRAssert(false)
+#define SRHaltOnce0() SRAssert2Once(false, "An exception has been occured.")
 
 #endif //HELPER_DEBUG_H

@@ -90,9 +90,14 @@ namespace SR_UTILS_NS::Platform {
 }
 
 namespace SR_UTILS_NS::Platform {
-    void Initialize(void* pData) {
+    void SetInstance(void*) {
 
     }
+
+    void* GetInstance() {
+        return nullptr;
+    }
+
 
     std::optional<std::string> ReadFile(const Path& path) {
         std::ifstream ifs(path.c_str());
@@ -286,6 +291,9 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void Terminate() {
+#ifdef SR_ANDROID
+
+#endif
 #ifdef SR_MINGW
 
 #else

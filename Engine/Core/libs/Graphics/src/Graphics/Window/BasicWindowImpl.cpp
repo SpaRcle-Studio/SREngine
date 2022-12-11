@@ -3,9 +3,12 @@
 //
 
 #include <Graphics/Window/BasicWindowImpl.h>
+#include <Utils/Debug.h>
 
 #if defined(SR_WIN32)
     #include <Graphics/Window/Win32Window.h>
+#elif defined(SR_ANDROID)
+    #include <Graphics/Window/AndroidWindow.h>
 #endif
 
 namespace SR_GRAPH_NS {
@@ -50,10 +53,27 @@ namespace SR_GRAPH_NS {
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : OS Windows not support \"" +
             SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
         );
+    #elif defined(SR_ANDROID)
+        switch (type) {
+            case WindowType::Auto:
+            case WindowType::Android:
+                return new AndroidWindow();
+            default:
+                break;
+        }
+
+        SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : OS Android not support \"" +
+                 SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
+        );
     #else
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : unsupported OS!");
     #endif
 
+        return nullptr;
+    }
+
+    void *BasicWindowImpl::GetHandle() const {
+        SRHaltOnce("Not implemented!");
         return nullptr;
     }
 }

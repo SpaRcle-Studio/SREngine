@@ -76,7 +76,7 @@ namespace SR_GRAPH_NS {
         virtual void NextFrameGUI() {  }
         virtual bool IsFullScreen() { return false; }
 
-        SR_NODISCARD virtual void* GetHandle() const = 0;
+        SR_NODISCARD virtual void* GetHandle() const;
 
         /// Вызывать только в том потоке, в котором будет использоваться окно
         virtual bool Initialize(const std::string& name,

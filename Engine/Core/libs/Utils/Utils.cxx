@@ -6,6 +6,7 @@
 
 #ifdef SR_ANDROID
     #include "../Utils/src/Utils/Platform/PlatformAndroid.cpp"
+    #include "../Utils/src/Utils/Platform/AndroidNativeAppGlue.c"
 #endif
 
 #include "../Utils/src/Utils/ECS/Component.cpp"

@@ -13,6 +13,7 @@
 #include <android/sensor.h>
 
 #include <Utils/Platform/Platform.h>
+#include <Utils/Platform/AndroidNativeAppGlue.h>
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/Time.h>
@@ -27,7 +28,7 @@
 #include <android/log.h>
 #include <Graphics/Pipeline/OpenGL.h>
 #include <Graphics/Pipeline/Vulkan.h>
-#include "android_native_app_glue.h"
+
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "SREngine", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "SREngine", __VA_ARGS__))
@@ -270,18 +271,13 @@ ASensorManager* AcquireASensorManagerInstance(android_app* app) {
 }
 
 void android_main(struct android_app* state) {
-    SR_PLATFORM_NS::Initialize(state);
+    SR_PLATFORM_NS::SetInstance(state);
 
     auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
     SR_UTILS_NS::Debug::Instance().Init(applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
     SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
     SR_SYSTEM_LOG("Run SpaRcle Engine on android...");
-
-    auto&& result = SR_PLATFORM_NS::ReadFile("Engine/Configs/Features.xml");
-    if (result) {
-        SR_LOG(*result);
-    }
 
     SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
     SR_HTYPES_NS::Time::Instance().Update();
@@ -294,81 +290,51 @@ void android_main(struct android_app* state) {
         return new SR_CORE_NS::World();
     });
 
-    const auto&& envDoc = SR_XML_NS::Document::Load(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Pipeline.xml"));
-    const auto&& envName = envDoc.TryRoot().TryGetNode("Pipeline").TryGetAttribute("Name").ToString("");
+    /*auto&& engine = SR_CORE_NS::Engine::Instance();
 
-    if (envName == "OpenGL") {
-        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::OpenGL());
-    }
-    else if (envName == "Vulkan") {
-        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::Vulkan());
-    }
-    else if (envName.empty()) {
-        SR_ERROR("System error: file \"Engine/Configs/Pipeline.xml\" does not exist! Default use Vulkan...");
-        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::Vulkan());
+    if (engine.Create()) {
+        if (engine.Init()) {
+            if (!engine.Run()) {
+                SR_ERROR("Failed to run game engine!");
+            }
+        }
+        else {
+            SR_ERROR("Failed to initialize game engine!");
+        }
     }
     else {
-        SR_ERROR("System error: unknown environment! \"" + envName + "\" is not supported! Default use Vulkan...");
-        SR_GRAPH_NS::Environment::Set(new SR_GRAPH_NS::Vulkan());
-    }
-
-    auto window = new SR_GRAPH_NS::Window(
-            "SpaRcle Engine",
-            "Engine/icon.ico",
-            SR_MATH_NS::IVector2(1366, 768), //IVector2(1600, 900),
-            //IVector2(800, 800), //IVector2(1600, 900),
-            false, // vsync
-            false, // fullscreen
-            true,  // resizable
-            true,  // header enabled
-            64
-    );
-
-    auto&& engineInst = Framework::Engine::Instance();
-
-    if(engineInst.Create(window)) {
-        if (engineInst.Init()) {
-            if (engineInst.Run()) {
-
-            }
-            else
-                SR_ERROR("Failed to run game engine!");
-        }
-        else
-            SR_ERROR("Failed to initialize game engine!");
-    }
-    else
         SR_ERROR("Failed to create game engine!");
+    }
 
-    if (engineInst.IsRun()) {
+    if (engine.IsRun()) {
         SR_SYSTEM_LOG("All systems are successfully running!");
 
-        engineInst.Await(); /// await close engine
+        engine.Await(); /// await close engine
     }
 
-    engineInst.Close();
+    engine.Close();*/
 
-    struct engine engine{};
+    struct engine engineAndroid{};
 
-    memset(&engine, 0, sizeof(engine));
-    state->userData = &engine;
+    memset(&engineAndroid, 0, sizeof(engine));
+    state->userData = &engineAndroid;
     state->onAppCmd = engine_handle_cmd;
     state->onInputEvent = engine_handle_input;
-    engine.app = state;
+    engineAndroid.app = state;
 
     // Prepare to monitor accelerometer
-    engine.sensorManager = AcquireASensorManagerInstance(state);
-    engine.accelerometerSensor = ASensorManager_getDefaultSensor(
-            engine.sensorManager,
+    engineAndroid.sensorManager = AcquireASensorManagerInstance(state);
+    engineAndroid.accelerometerSensor = ASensorManager_getDefaultSensor(
+            engineAndroid.sensorManager,
             ASENSOR_TYPE_ACCELEROMETER);
-    engine.sensorEventQueue = ASensorManager_createEventQueue(
-            engine.sensorManager,
+    engineAndroid.sensorEventQueue = ASensorManager_createEventQueue(
+            engineAndroid.sensorManager,
             state->looper, LOOPER_ID_USER,
             nullptr, nullptr);
 
     if (state->savedState != nullptr) {
         // We are starting with a previous saved state; restore from it.
-        engine.state = *(struct saved_state*)state->savedState;
+        engineAndroid.state = *(struct saved_state*)state->savedState;
     }
 
     // loop waiting for stuff to do.
@@ -382,7 +348,7 @@ void android_main(struct android_app* state) {
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
-        while ((ident=ALooper_pollAll(engine.animating ? 0 : -1, nullptr, &events,
+        while ((ident=ALooper_pollAll(engineAndroid.animating ? 0 : -1, nullptr, &events,
                                       (void**)&source)) >= 0) {
 
             // Process this event.
@@ -392,9 +358,9 @@ void android_main(struct android_app* state) {
 
             // If a sensor has data, process it now.
             if (ident == LOOPER_ID_USER) {
-                if (engine.accelerometerSensor != nullptr) {
+                if (engineAndroid.accelerometerSensor != nullptr) {
                     ASensorEvent event;
-                    while (ASensorEventQueue_getEvents(engine.sensorEventQueue,
+                    while (ASensorEventQueue_getEvents(engineAndroid.sensorEventQueue,
                                                        &event, 1) > 0) {
                         //LOGI("accelerometer: x=%f y=%f z=%f",
                         //     event.acceleration.x, event.acceleration.y,
@@ -405,21 +371,21 @@ void android_main(struct android_app* state) {
 
             // Check if we are exiting.
             if (state->destroyRequested != 0) {
-                engine_term_display(&engine);
+                engine_term_display(&engineAndroid);
                 return;
             }
         }
 
-        if (engine.animating) {
+        if (engineAndroid.animating) {
             // Done with events; draw next animation frame.
-            engine.state.angle += .01f;
-            if (engine.state.angle > 1) {
-                engine.state.angle = 0;
+            engineAndroid.state.angle += .01f;
+            if (engineAndroid.state.angle > 1) {
+                engineAndroid.state.angle = 0;
             }
 
             // Drawing is throttled to the screen update rate, so there
             // is no need to do timing here.
-            engine_draw_frame(&engine);
+            engine_draw_frame(&engineAndroid);
         }
     }
 }

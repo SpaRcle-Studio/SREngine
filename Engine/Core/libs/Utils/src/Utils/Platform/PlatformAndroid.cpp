@@ -6,53 +6,21 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Debug.h>
 
+#include <Utils/Platform/AndroidNativeAppGlue.h>
+
 #include <android/log.h>
 #include <android/native_activity.h>
 #include <android/configuration.h>
 
-struct android_app;
-
-struct android_poll_source {
-    int32_t id;
-    struct android_app* app;
-    void (*process)(struct android_app* app, struct android_poll_source* source);
-};
-
-struct android_app {
-    void* userData;
-    void (*onAppCmd)(struct android_app* app, int32_t cmd);
-    int32_t (*onInputEvent)(struct android_app* app, AInputEvent* event);
-    ANativeActivity* activity;
-    AConfiguration* config;
-    void* savedState;
-    size_t savedStateSize;
-    ALooper* looper;
-    AInputQueue* inputQueue;
-    ANativeWindow* window;
-    ARect contentRect;
-    int activityState;
-    int destroyRequested;
-    pthread_mutex_t mutex;
-    pthread_cond_t cond;
-    int msgread;
-    int msgwrite;
-    pthread_t thread;
-    struct android_poll_source cmdPollSource;
-    struct android_poll_source inputPollSource;
-    int running;
-    int stateSaved;
-    int destroyed;
-    int redrawNeeded;
-    AInputQueue* pendingInputQueue;
-    ANativeWindow* pendingWindow;
-    ARect pendingContentRect;
-};
-
 namespace SR_UTILS_NS::Platform {
-    android_app* pAndroidInstance = nullptr;
+    static android_app* pAndroidInstance = nullptr;
 
-    void Initialize(void* pData) {
-        pAndroidInstance = reinterpret_cast<android_app*>(pData);
+    void SetInstance(void* pInstance) {
+        pAndroidInstance = reinterpret_cast<android_app*>(pInstance);
+    }
+
+    void* GetInstance() {
+        return (void*)pAndroidInstance;
     }
 
     std::optional<std::string> ReadFile(const Path& path) {
@@ -85,53 +53,53 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void TextToClipboard(const std::string &text) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     void CopyFilesToClipboard(std::list<SR_UTILS_NS::Path> paths) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     void PasteFilesFromClipboard(const SR_UTILS_NS::Path &topath) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     std::string GetClipboardText() {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return std::string();
     }
 
     void ClearClipboard() {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     SR_MATH_NS::FVector2 GetMousePos() {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return SR_MATH_NS::FVector2();
     }
 
     void Sleep(uint64_t milliseconds) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     uint64_t GetProcessUsedMemory() {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     void SetThreadPriority(void *nativeHandle, ThreadPriority priority) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     void Terminate() {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     void OpenWithAssociatedApp(const Path &filepath) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     bool Copy(const Path &from, const Path &to) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return false;
     }
 
@@ -140,12 +108,12 @@ namespace SR_UTILS_NS::Platform {
     }
 
     bool CreateFolder(const Path &path) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return false;
     }
 
     bool Delete(const Path &path) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return false;
     }
 
@@ -160,21 +128,21 @@ namespace SR_UTILS_NS::Platform {
     }
 
     bool FileIsHidden(const Path &path) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return false;
     }
 
     void SelfOpen() {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     bool IsAbsolutePath(const Path &path) {
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
         return false;
     }
 
     void OpenInNativeFileExplorer(const Path &path){
-        SRHalt("Not implemented!");
+        SRHaltOnce("Not implemented!");
     }
 
     bool IsExists(const Path &path) {
@@ -187,6 +155,27 @@ namespace SR_UTILS_NS::Platform {
 
         AAssetDir_close(assetDir);
         return false;
+    }
+
+    std::vector<SR_MATH_NS::UVector2> GetScreenResolutions() {
+        if (!pAndroidInstance) {
+            SR_ERROR("PlatformAndroid::GetScreenResolutions() : pAndroidInstance is nullptr!");
+            return { SR_MATH_NS::UVector2(400, 400) };
+        }
+
+        if (!pAndroidInstance->window) {
+            SR_ERROR("PlatformAndroid::GetScreenResolutions() : ANativeWindow is nullptr!");
+            return { SR_MATH_NS::UVector2(400, 400) };
+        }
+
+        auto&& resolutions = std::vector<SR_MATH_NS::UVector2>();
+
+        resolutions.emplace_back(SR_MATH_NS::UVector2(
+                static_cast<uint32_t>(ANativeWindow_getWidth(pAndroidInstance->window)),
+                static_cast<uint32_t>(ANativeWindow_getHeight(pAndroidInstance->window))
+        ));
+
+        return resolutions;
     }
 }
 

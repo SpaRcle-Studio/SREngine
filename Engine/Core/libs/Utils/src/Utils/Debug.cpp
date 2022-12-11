@@ -13,7 +13,7 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD
 
         if (!m_isInit) {
-            SR_PLATFORM_NS::WriteConsoleError("Debug::Print() : Debugger isn't initialized!\n");
+            SR_PLATFORM_NS::WriteConsoleError("Debug::Print() : Debugger isn't initialized!\n\tMessage: " + msg + "\n");
             SR_PLATFORM_NS::Terminate();
         }
 

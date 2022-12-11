@@ -1,6 +1,8 @@
 #ifndef _ANDROID_NATIVE_APP_GLUE_H
 #define _ANDROID_NATIVE_APP_GLUE_H
 
+#include <Utils/stdInclude.h>
+
 #include <poll.h>
 #include <pthread.h>
 #include <sched.h>

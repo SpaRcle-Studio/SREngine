@@ -14,9 +14,8 @@
     #include <vulkan/vulkan_win32.h>
     #include <Graphics/Window/Win32Window.h>
 #elif defined(SR_ANDROID)
+    #include <Graphics/Window/AndroidWindow.h>
     #include <vulkan/vulkan_android.h>
-#else
-    #error Unsupported os!
 #endif
 
 namespace Framework::Graphics {
@@ -98,9 +97,12 @@ namespace Framework::Graphics {
                 VK_KHR_SURFACE_EXTENSION_NAME,
                 VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
                 VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
-#ifdef SR_WIN32
+        #ifdef SR_WIN32
                 VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
-#endif
+        #endif
+        #ifdef SR_ANDROID
+                VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
+        #endif
         };
 
         if (m_enableValidationLayers) {
@@ -128,20 +130,6 @@ namespace Framework::Graphics {
         return Environment::OnResize(size);
     }
 
-//   bool Vulkan::MakeWindow(const std::string &name, const SR_MATH_NS::UVector2 &size, bool fullScreen, bool resizable,
-//                           bool headerEnabled) {
-//       SR_GRAPH_LOG("Vulkan::MakeWindow() : creating window...");
-
-//       m_basicWindow = BasicWindowImpl::CreatePlatformWindow(GetType(), BasicWindowImpl::WindowType::Auto);
-
-//       if (!m_basicWindow) {
-//           SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
-//           return false;
-//       }
-
-//       m_basicWindow->SetResizeCallback([this](auto&& pWindow, int32_t width, int32_t height) {
-//           m_kernel->SetSize(width, height);
-//       });
 
 //       m_basicWindow->SetScrollCallback([](auto&& pWindow, double_t xOffset, double_t yOffset) {
 //           /// TODO: TO_REFACTORING
@@ -151,24 +139,6 @@ namespace Framework::Graphics {
 
 //           g_callback(WinEvents::Scroll, pWindow, &xOffset, &yOffset);
 //       });
-
-//       m_basicWindow->SetFocusCallback([](auto&& pWindow, bool focus) {
-//           g_callback(WinEvents::Focus, pWindow, &focus, nullptr);
-//       });
-
-//       if (!m_basicWindow->Initialize(name, SR_MATH_NS::IVector2(), size, fullScreen, resizable)) {
-//           SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
-//           return false;
-//       }
-
-//       m_basicWindow->Centralize();
-
-//       m_basicWindow->SetHeaderEnabled(headerEnabled);
-
-//       m_kernel->SetSize(m_basicWindow->GetSurfaceWidth(), m_basicWindow->GetSurfaceHeight());
-
-//       return true;
-//   }
 
  //  bool Vulkan::CloseWindow() {
  //      SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
@@ -194,9 +164,9 @@ namespace Framework::Graphics {
         SR_GRAPH_LOG("Vulkan::Init() : initializing vulkan...");
 
         auto createSurf = [window](const VkInstance &instance) -> VkSurfaceKHR {
-#ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
+    #ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
             if (auto&& pImpl = window->GetImplementation<Win32Window>()) {
-                VkWin32SurfaceCreateInfoKHR surfaceInfo = {};
+                VkWin32SurfaceCreateInfoKHR surfaceInfo = { };
                 surfaceInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
                 surfaceInfo.pNext = nullptr;
                 surfaceInfo.flags = 0;
@@ -215,11 +185,31 @@ namespace Framework::Graphics {
                 SR_ERROR("Vulkan::Init() : window is not support this architecture!");
                 return VK_NULL_HANDLE;
             }
-#else
+    #elif defined(SR_ANDROID)
+            if (auto&& pImpl = window->GetImplementation<AndroidWindow>()) {
+                VkAndroidSurfaceCreateInfoKHR surfaceInfo = { };
+                surfaceInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
+                surfaceInfo.pNext = nullptr;
+                surfaceInfo.flags = 0;
+                surfaceInfo.window = pImpl->GetNativeWindow();
+
+                VkSurfaceKHR surface = VK_NULL_HANDLE;
+                VkResult result = vkCreateAndroidSurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
+                if (result != VK_SUCCESS) {
+                    return VK_NULL_HANDLE;
+                }
+                else
+                    return surface;
+            }
+            else {
+                SR_ERROR("Vulkan::Init() : window is not support this architecture!");
+                return VK_NULL_HANDLE;
+            }
+    #else
             SR_UNUSED_VARIABLE(window);
             SRHalt("Unsupported platform!");
             return VK_NULL_HANDLE;
-#endif
+    #endif
         };
 
         if (auto&& pImpl = window->GetImplementation<BasicWindowImpl>()) {

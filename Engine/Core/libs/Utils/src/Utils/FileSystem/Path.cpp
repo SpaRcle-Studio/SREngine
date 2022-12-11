@@ -168,6 +168,9 @@ namespace SR_UTILS_NS {
             return Type::Folder;
 
         return Type::File;
+#elif defined(SR_ANDROID)
+        /// TODO: будем считать что мы обращаемся только к файлам. Это заглушка - нужно переделать
+        return Type::File;
 #else
         SRHalt("Unsupported OS!");
         return Type::Undefined;

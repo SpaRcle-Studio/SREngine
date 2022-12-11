@@ -97,11 +97,21 @@ namespace SR_CORE_NS {
     }
 
     bool Engine::CreateMainWindow() {
-        m_window = new SR_GRAPH_NS::Window();
+        SR_LOG("Engine::CreateMainWindow() : try found screen resolution...");
 
         auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
-        auto&& resolution = resolutions[static_cast<uint32_t>(resolutions.size() / 2)];
 
+        if (resolutions.empty()) {
+            SR_ERROR("Engine::CreateMainWindow() : not found supported resolutions!");
+            return false;
+        }
+        else {
+            SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
+        }
+
+        auto&& resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
+
+        m_window = new SR_GRAPH_NS::Window();
         if (!m_window->Initialize("SpaRcle Engine", resolution)) {
             SR_ERROR("Engine::CreateMainWindow() : failed to initialize window!");
             return false;
@@ -111,6 +121,8 @@ namespace SR_CORE_NS {
             pWin->Centralize();
             pWin->Maximize();
         }
+
+        SR_ERROR("Engine::CreateMainWindow() : initializing window callbacks...");
 
         m_window->SetDrawCallback([this]() {
             DrawCallback();

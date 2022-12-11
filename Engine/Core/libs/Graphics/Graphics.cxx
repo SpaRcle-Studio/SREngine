@@ -103,3 +103,7 @@
 #if defined(SR_WIN32)
     #include "../Graphics/src/Graphics/Window/Win32Window.cpp"
 #endif
+
+#if defined(SR_ANDROID)
+    #include "../Graphics/src/Graphics/Window/AndroidWindow.cpp"
+#endif

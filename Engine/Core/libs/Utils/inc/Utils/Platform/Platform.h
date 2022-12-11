@@ -10,7 +10,8 @@
 #include <Utils/FileSystem/Path.h>
 
 namespace SR_UTILS_NS::Platform {
-    SR_DLL_EXPORT extern void Initialize(void* pData);
+    SR_DLL_EXPORT extern void SetInstance(void* pInstance);
+    SR_DLL_EXPORT extern void* GetInstance();
 
     SR_DLL_EXPORT extern std::optional<std::string> ReadFile(const Path& path);
     SR_DLL_EXPORT extern void TextToClipboard(const std::string& text);

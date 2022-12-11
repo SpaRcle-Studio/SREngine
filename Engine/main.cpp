@@ -135,7 +135,7 @@ int main(int argc, char **argv) {
     }
 
     if (engine.IsRun()) {
-        Debug::Instance().System("All systems are successfully running!");
+        SR_SYSTEM_LOG("All systems are successfully running!");
 
         engine.Await(); /// await close engine
     }
@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
     SR_CORE_NS::Engine::DestroySingleton();
-    Framework::Graphics::GUI::NodeManager::DestroySingleton();
+    SR_GRAPH_NS::GUI::NodeManager::DestroySingleton();
     SR_UTILS_NS::TaskManager::DestroySingleton();
     Memory::MeshManager::DestroySingleton();
 
