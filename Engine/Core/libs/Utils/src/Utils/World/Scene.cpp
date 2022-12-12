@@ -200,6 +200,7 @@ namespace SR_WORLD_NS {
         SetName(path.GetBaseName());
 
         UpdateContainers();
+        UpdateScope(0.f);
 
         auto xml = Xml::Document::New();
         if (auto&& root = xml.AppendChild("Scene"); root.Valid()) {
@@ -291,22 +292,6 @@ namespace SR_WORLD_NS {
 
         if (m_scopeEnabled) {
             UpdateScope(dt);
-
-            for (auto&& pIt = m_regions.begin(); pIt != m_regions.end(); ) {
-                const auto& pRegion = pIt->second;
-
-                pRegion->Update(dt);
-
-                if (pRegion->IsAlive()) {
-                    ++pIt;
-                }
-                else {
-                    pRegion->Unload();
-                    SaveRegion(pRegion);
-                    delete pRegion;
-                    pIt = m_regions.erase(pIt);
-                }
-            }
         }
 
         if (m_shiftEnabled) {
@@ -369,8 +354,24 @@ namespace SR_WORLD_NS {
                         continue;
                     }
 
-                    update(Math::IVector3(x, y, z));
+                    update(SR_MATH_NS::IVector3(x, y, z));
                 }
+            }
+        }
+
+        for (auto&& pIt = m_regions.begin(); pIt != m_regions.end(); ) {
+            const auto& pRegion = pIt->second;
+
+            pRegion->Update(dt);
+
+            if (pRegion->IsAlive()) {
+                ++pIt;
+            }
+            else {
+                pRegion->Unload();
+                SaveRegion(pRegion);
+                delete pRegion;
+                pIt = m_regions.erase(pIt);
             }
         }
     }
