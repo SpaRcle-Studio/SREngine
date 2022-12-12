@@ -54,11 +54,7 @@
             m_scene.Unlock();
         }
 
-        for (auto&& pComponent : m_components) {
-            pComponent->OnDestroy();
-        }
-        m_components.clear();
-        m_componentsCount = 0;
+        IComponentable::DestroyComponents();
 
         for (auto&& gameObject : m_children) {
             gameObject.AutoFree([by](GameObject *gm) {
@@ -194,10 +190,6 @@
         SetDirty(true);
     }
 
-    bool GameObject::IsDirty() const noexcept {
-        return m_dirty;
-    }
-
     bool GameObject::IsActive() const noexcept {
         if (m_parent.RecursiveLockIfValid()) {
             const bool parentActive = m_parent->m_isActive;
@@ -215,13 +207,7 @@
 
         m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
 
-        for (auto&& pComponent : m_components) {
-            if (!pComponent->IsAwake()) {
-                continue;
-            }
-
-            pComponent->CheckActivity();
-        }
+        IComponentable::CheckActivity();
 
         for (auto&& child : m_children) {
             child->m_dirty = true;
@@ -233,21 +219,11 @@
     void GameObject::Awake(bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!m_dirty || !IsEnabled()) {
+        if (!IsEnabled()) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
-            if (isPaused && !pComponent->ExecuteInEditMode()) {
-                continue;
-            }
-
-            if (pComponent->IsAwake()) {
-                continue;
-            }
-
-            pComponent->Awake();
-        }
+        IComponentable::Awake(isPaused);
 
         for (auto&& child : m_children) {
             child->m_dirty = true;
@@ -258,21 +234,11 @@
     void GameObject::Start() noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!m_dirty || !IsEnabled()) {
+        if (!IsEnabled()) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
-            if (!pComponent->IsAwake()) {
-                continue;
-            }
-
-            if (pComponent->IsStarted()) {
-                continue;
-            }
-
-            pComponent->Start();
-        }
+        IComponentable::Start();
 
         for (auto&& child : m_children) {
             child->m_dirty = true;
@@ -281,8 +247,8 @@
     }
 
     SR_MATH_NS::FVector3 GameObject::GetBarycenter() {
-        auto barycenter = Math::FVector3();
-        uint32_t count = 0;
+        //auto barycenter = Math::FVector3();
+        //uint32_t count = 0;
 
         //for (auto comp : m_components)
         //    if (auto br = comp->GetBarycenter(); !br.IsInfinity()) {
@@ -305,13 +271,13 @@
         auto barycenter = Math::FVector3((Math::Unit) 0);
         uint32_t count = 0;
 
-        if (auto self = this->GetBarycenter(); !self.IsInfinity()) {
+        if (auto self = GetBarycenter(); !self.IsInfinity()) {
             barycenter += self;
             count++;
         }
 
         ForEachChild([=](const GameObject::Ptr &child) mutable {
-            if (auto self = this->GetBarycenter(); !self.IsInfinity()) {
+            if (auto self = GetBarycenter(); !self.IsInfinity()) {
                 barycenter += self;
                 count++;
             }
@@ -320,78 +286,18 @@
         return count == 0 ? Math::InfinityFV3 : barycenter / count;
     }
 
-     bool GameObject::LoadComponent(Component *pComponent) {
-         if (m_isDestroy) {
-             SR_ERROR("GameObject::LoadComponent() : this \"" + m_name + "\" game object is destroyed!");
-             return false;
-         }
-
-         if (IComponentable::LoadComponent(pComponent)) {
-             SetDirty(true);
-             return true;
-         }
-
-         return false;
-     }
-
-     void GameObject::PostLoad() {
-         if (!m_dirty) {
-             return;
-         }
-
-         if (!m_loadedComponents.empty()) {
-             m_components.reserve(m_loadedComponents.size());
-
-             for (auto&& pLoadedCmp : m_loadedComponents) {
-                 AddComponent(pLoadedCmp);
-                 pLoadedCmp->OnMatrixDirty();
-             }
-
-             m_loadedComponents.clear();
-         }
+     bool GameObject::PostLoad() {
+        if (!IComponentable::PostLoad()) {
+            return false;
+        }
 
          for (auto&& child : m_children) {
              child->m_dirty = true;
              child->PostLoad();
          }
+
+         return true;
      }
-
-     bool GameObject::AddComponent(Component* pComponent) {
-        if (m_isDestroy) {
-            SR_ERROR("GameObject::AddComponent() : this \"" + m_name + "\" game object is destroyed!");
-            return false;
-        }
-
-        if (IComponentable::AddComponent(pComponent)) {
-            SetDirty(true);
-            return true;
-        }
-
-        return false;
-    }
-
-    bool GameObject::RemoveComponent(Component* pComponent) {
-        if (IComponentable::RemoveComponent(pComponent)) {
-            SetDirty(true);
-            return true;
-        }
-
-        return false;
-    }
-
-    bool GameObject::ReplaceComponent(Component* source, Component* destination) {
-        if (m_isDestroy) {
-            SR_ERROR("GameObject::ReplaceComponent() : this \"" + m_name + "\" game object is destroyed!");
-            return false;
-        }
-
-        if (IComponentable::ReplaceComponent(source, destination)) {
-            SetDirty(true);
-            return true;
-        }
-
-        return false;
-    }
 
     SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
         if (GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
@@ -417,12 +323,7 @@
 
         /// save components
 
-        pMarshal->Write(static_cast<uint32_t>(m_components.size()));
-        for (auto&& pComponent : m_components) {
-            auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint64_t>(marshalComponent->BytesCount());
-            pMarshal->Append(marshalComponent);
-        }
+        pMarshal = SaveComponents(pMarshal, flags);
 
         /// save children
 

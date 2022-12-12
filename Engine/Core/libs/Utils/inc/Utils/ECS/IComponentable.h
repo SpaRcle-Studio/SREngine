@@ -5,6 +5,8 @@
 #ifndef SRENGINE_ICOMPONENTABLE_H
 #define SRENGINE_ICOMPONENTABLE_H
 
+#include <Utils/Types/Marshal.h>
+
 namespace SR_UTILS_NS {
     class Component;
 
@@ -18,8 +20,21 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
+        SR_NODISCARD bool IsDirty() const noexcept;
 
     public:
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const;
+
+        /// Вызывает OnAttached у компонентов загруженных через LoadComponent
+        virtual bool PostLoad();
+
+        virtual void CheckActivity() noexcept;
+
+        virtual void Awake(bool isPaused) noexcept;
+        virtual void Start() noexcept;
+
+        virtual void SetDirty(bool value) { m_dirty = value; };
+
         virtual Component* GetOrCreateComponent(const std::string& name);
         virtual Component* GetComponent(const std::string& name);
         virtual Component* GetComponent(size_t id);
@@ -37,11 +52,15 @@ namespace SR_UTILS_NS {
         virtual bool ContainsComponent(const std::string& name);
         virtual void ForEachComponent(const std::function<bool(Component*)>& fun);
 
+        virtual void DestroyComponents();
+
         template<typename T> T* GetComponent() {
             return dynamic_cast<T*>(GetComponent(typeid(T).hash_code()));
         }
 
     protected:
+        bool m_dirty = true;
+
         uint16_t m_componentsCount = 0;
         uint16_t m_childrenCount = 0;
 

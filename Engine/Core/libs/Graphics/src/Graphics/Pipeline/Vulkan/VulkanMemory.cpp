@@ -72,6 +72,8 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
         }
     }
 
+    SR_ERROR("MemoryManager::AllocateFBO() : buffer is overflow!");
+
     return SR_ID_INVALID;
 }
 

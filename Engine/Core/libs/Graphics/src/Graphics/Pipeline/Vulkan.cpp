@@ -498,6 +498,7 @@ namespace Framework::Graphics {
 
         FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, depthBuffer, sampleCount) + 1;
         if (FBO <= 0) {
+            FBO = SR_ID_INVALID;
             SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
             return false;
         }

@@ -70,6 +70,7 @@ namespace SR_GTYPES_NS {
 
         if ((!m_isInit || m_dirty) && !Init()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
+            return false;
         }
 
         m_pipeline->BindFrameBuffer(m_frameBuffer);
@@ -90,10 +91,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Framebuffer::FreeVideoMemory() {
-        if (!m_isInit) {
-            return;
-        }
-
         if (m_frameBuffer != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeFBO(m_frameBuffer));
             m_frameBuffer = SR_ID_INVALID;

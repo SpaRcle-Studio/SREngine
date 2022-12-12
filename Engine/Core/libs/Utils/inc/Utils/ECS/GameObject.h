@@ -57,11 +57,6 @@ namespace SR_UTILS_NS {
         ~GameObject() override;
 
     public:
-        bool LoadComponent(Component* component) override;
-        bool AddComponent(Component* component);
-        bool RemoveComponent(Component* component) override;
-        bool ReplaceComponent(Component* source, Component* destination) override;
-
         SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
@@ -70,7 +65,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
-        SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetHashName() const noexcept { return m_hashName; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetIdInScene() const noexcept { return m_idInScene; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
@@ -100,15 +94,15 @@ namespace SR_UTILS_NS {
         bool AddChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
 
-        /// Вызыват OnAttached у компонентов загруженных через LoadComponent
-        void PostLoad();
+        /// Вызывает OnAttached у компонентов загруженных через LoadComponent
+        bool PostLoad() override;
 
-        void Awake(bool isPaused) noexcept;
-        void Start() noexcept;
+        void Awake(bool isPaused) noexcept override;
+        void Start() noexcept override;
 
-        void CheckActivity() noexcept;
+        void CheckActivity() noexcept override;
 
-        void SetDirty(bool value);
+        void SetDirty(bool value) override;
 
     private:
         void OnAttached();
@@ -117,7 +111,6 @@ namespace SR_UTILS_NS {
         bool UpdateEntityPath();
 
     private:
-        bool m_dirty = true;
         bool m_isEnabled = true;
         bool m_isActive = false;
         bool m_isDestroy = false;

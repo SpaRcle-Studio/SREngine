@@ -7,6 +7,21 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_UTILS_NS {
+    bool IComponentable::IsDirty() const noexcept {
+        return m_dirty;
+    }
+
+    SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
+        pMarshal->Write(static_cast<uint32_t>(m_components.size()));
+        for (auto&& pComponent : m_components) {
+            auto&& marshalComponent = pComponent->Save(nullptr, flags);
+            pMarshal->Write<uint64_t>(marshalComponent->BytesCount());
+            pMarshal->Append(marshalComponent);
+        }
+
+        return pMarshal;
+    }
+
     Component* IComponentable::GetComponent(const std::string &name) {
         for (auto&& pComponent : m_components) {
             /// TODO: переделать на хеши
@@ -70,6 +85,8 @@ namespace SR_UTILS_NS {
         /// pComponent->OnAttached();
         /// Здесь нельзя аттачить, иначе будет очень трудно отлавливаемый deadlock
 
+        SetDirty(true);
+
         return true;
     }
 
@@ -88,6 +105,8 @@ namespace SR_UTILS_NS {
         pComponent->OnAttached();
         pComponent->OnMatrixDirty();
 
+        SetDirty(true);
+
         return true;
     }
 
@@ -105,6 +124,8 @@ namespace SR_UTILS_NS {
 
             m_components.erase(it);
             --m_componentsCount;
+
+            SetDirty(true);
 
             return true;
         }
@@ -131,6 +152,8 @@ namespace SR_UTILS_NS {
                 destination->OnAttached();
                 destination->OnMatrixDirty();
 
+                SetDirty(true);
+
                 return true;
             }
         }
@@ -138,5 +161,79 @@ namespace SR_UTILS_NS {
         SR_ERROR("IComponentable::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
 
         return false;
+    }
+
+    bool IComponentable::PostLoad() {
+        if (!m_dirty) {
+            return false;
+        }
+
+        if (!m_loadedComponents.empty()) {
+            m_components.reserve(m_loadedComponents.size());
+
+            for (auto&& pLoadedCmp : m_loadedComponents) {
+                AddComponent(pLoadedCmp);
+                pLoadedCmp->OnMatrixDirty();
+            }
+
+            m_loadedComponents.clear();
+        }
+
+        return true;
+    }
+
+    void IComponentable::Awake(bool isPaused) noexcept {
+        if (!m_dirty) {
+            return;
+        }
+
+        for (auto&& pComponent : m_components) {
+            if (isPaused && !pComponent->ExecuteInEditMode()) {
+                continue;
+            }
+
+            if (pComponent->IsAwake()) {
+                continue;
+            }
+
+            pComponent->Awake();
+        }
+    }
+
+    void IComponentable::Start() noexcept {
+        if (!m_dirty) {
+            return;
+        }
+
+        for (auto&& pComponent : m_components) {
+            if (!pComponent->IsAwake()) {
+                continue;
+            }
+
+            if (pComponent->IsStarted()) {
+                continue;
+            }
+
+            pComponent->Start();
+        }
+    }
+
+    void IComponentable::CheckActivity() noexcept {
+        for (auto&& pComponent : m_components) {
+            if (!pComponent->IsAwake()) {
+                continue;
+            }
+
+            pComponent->CheckActivity();
+        }
+    }
+
+    void IComponentable::DestroyComponents() {
+        for (auto&& pComponent : m_components) {
+            pComponent->OnDestroy();
+        }
+
+        m_components.clear();
+        m_componentsCount = 0;
     }
 }
