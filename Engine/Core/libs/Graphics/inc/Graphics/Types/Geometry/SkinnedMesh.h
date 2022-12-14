@@ -6,6 +6,8 @@
 #define GAMEENGINE_SKINNEDMESH_H
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
+#include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/AnimationClip.h>
 
 namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
@@ -52,9 +54,12 @@ namespace SR_GTYPES_NS {
         bool Unload() override;
 
     private:
+
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
+        SR_ANIMATIONS_NS::Skeleton m_skeleton;
+        SR_ANIMATIONS_NS::AnimationClip* m_currentClip = nullptr;
 
     };
 }

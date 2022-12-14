@@ -1,6 +1,8 @@
 #include <Utils/macros.h>
 
 #include "../Graphics/src/Graphics/Animations/Bone.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationClip.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
 
 #include "../Graphics/src/Graphics/Environment/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Environment/Vulkan/VulkanMemory.cpp"

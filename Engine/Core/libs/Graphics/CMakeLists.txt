@@ -68,4 +68,5 @@ target_include_directories(Graphics PUBLIC  ${Vulkan_INCLUDE_DIRS})
 target_include_directories(Graphics PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include)
 target_include_directories(Graphics PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Utils/libs)
 target_include_directories(Graphics PUBLIC  ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include/icu)
-
+target_include_directories(Graphics PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Utils/libs/assimp/include)
+target_include_directories(Graphics PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../Utils/libs/assimp/include)

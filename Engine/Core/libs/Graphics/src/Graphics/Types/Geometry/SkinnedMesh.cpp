@@ -13,6 +13,7 @@ namespace SR_GTYPES_NS {
 
     SkinnedMesh::~SkinnedMesh() {
         SetRawMesh(nullptr);
+        delete m_currentClip;
     }
 
     bool SkinnedMesh::Calculate()  {
@@ -231,4 +232,5 @@ namespace SR_GTYPES_NS {
     void SkinnedMesh::UseModelMatrix() {
         m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
+
 }

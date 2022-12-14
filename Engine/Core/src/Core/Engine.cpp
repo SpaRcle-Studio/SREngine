@@ -604,9 +604,9 @@ namespace Framework {
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Camera>([]() {
             return new SR_GTYPES_NS::Camera();
         });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_ANIMATIONS_NS::Bone>([]() {
+        /*SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_ANIMATIONS_NS::Bone>([]() {
             return new SR_ANIMATIONS_NS::Bone();
-        });
+        });*/ ///TODO: Разобраться с регистрацией компонента Bone()
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_SCRIPTING_NS::Behaviour>([]() {
             return SR_SCRIPTING_NS::Behaviour::CreateEmpty();
         });
