@@ -26,6 +26,7 @@ namespace SR_HTYPES_NS {
 namespace SR_UTILS_NS {
     class ComponentManager;
     class Component;
+    class IComponentable;
     class Transform2D;
     class Transform3D;
     class Transform;
@@ -33,6 +34,7 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT Component : public Entity {
         friend class GameObject;
+        friend class IComponentable;
         friend class ComponentManager;
     public:
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;

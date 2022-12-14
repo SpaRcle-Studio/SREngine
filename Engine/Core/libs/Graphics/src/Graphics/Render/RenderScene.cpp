@@ -305,6 +305,10 @@ namespace SR_GRAPH_NS {
         return GetContext()->GetPipeline();
     }
 
+    RenderScene::WindowPtr RenderScene::GetWindow() const {
+        return GetContext()->GetWindow();
+    }
+
     void RenderScene::RenderBlackScreen() {
         auto&& pipeline = GetPipeline();
 
@@ -371,15 +375,17 @@ namespace SR_GRAPH_NS {
         m_debug.Update();
     }
 
-    void RenderScene::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void RenderScene::OnResize(const SR_MATH_NS::UVector2 &size) {
         m_surfaceSize = size;
 
-        for (auto&& cameraInfo : m_cameras) {
-            if (cameraInfo.isDestroyed) {
-                continue;
-            }
+        if (!m_context->GetWindow()->IsWindowCollapsed()) {
+            for (auto&& cameraInfo : m_cameras) {
+                if (cameraInfo.isDestroyed) {
+                    continue;
+                }
 
-            cameraInfo.pCamera->UpdateProjection(m_surfaceSize.x, m_surfaceSize.y);
+                cameraInfo.pCamera->UpdateProjection(m_surfaceSize.x, m_surfaceSize.y);
+            }
         }
 
         if (m_technique) {
@@ -387,7 +393,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    SR_MATH_NS::IVector2 RenderScene::GetSurfaceSize() const {
+    SR_MATH_NS::UVector2 RenderScene::GetSurfaceSize() const {
         return m_surfaceSize;
     }
 }

@@ -6,12 +6,16 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Platform/Platform.h>
 
-#include <Graphics/Environment/Vulkan/AbstractCasts.h>
-#include <Graphics/Environment/Vulkan.h>
+#include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
+#include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/Memory/MeshManager.h>
 
-#ifdef SR_WIN32
+#if defined(SR_WIN32)
     #include <vulkan/vulkan_win32.h>
+    #include <Graphics/Window/Win32Window.h>
+#elif defined(SR_ANDROID)
+    #include <Graphics/Window/AndroidWindow.h>
+    #include <vulkan/vulkan_android.h>
 #endif
 
 namespace Framework::Graphics {
@@ -68,7 +72,11 @@ namespace Framework::Graphics {
         m_kernel = new SRVulkan();
         SR_INFO("Vulkan::PreInit() : pre-initializing vulkan...");
 
+    #ifdef SR_ANDROID
+        m_enableValidationLayers = false;
+    #else
         m_enableValidationLayers = SR_UTILS_NS::Features::Instance().Enabled("VulkanValidation", false);
+    #endif
 
         if (m_enableValidationLayers) {
             m_kernel->SetValidationLayersEnabled(true);
@@ -89,9 +97,12 @@ namespace Framework::Graphics {
                 VK_KHR_SURFACE_EXTENSION_NAME,
                 VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
                 VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME,
-#ifdef SR_WIN32
+        #ifdef SR_WIN32
                 VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
-#endif
+        #endif
+        #ifdef SR_ANDROID
+                VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
+        #endif
         };
 
         if (m_enableValidationLayers) {
@@ -113,76 +124,54 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool Vulkan::MakeWindow(const std::string &name, const SR_MATH_NS::IVector2 &size, bool fullScreen, bool resizable,
-                            bool headerEnabled) {
-        SR_GRAPH_LOG("Vulkan::MakeWindow() : creating window...");
+    bool Vulkan::OnResize(const Helper::Math::UVector2 &size) {
+        m_kernel->SetSize(size.x, size.y);
 
-    #ifdef SR_WIN32
-        m_basicWindow = new Win32Window(this->GetPipeLine());
-    #endif
-
-        m_basicWindow->SetCallbackResize([this](BasicWindow *win, int w, int h) {
-            m_kernel->SetSize(w, h);
-        });
-
-        m_basicWindow->SetCallbackScroll([](BasicWindow *win, double xoffset, double yoffset) {
-            for (const auto &a : g_scrollEvents)
-                a(xoffset, yoffset);
-
-            g_callback(WinEvents::Scroll, win, &xoffset, &yoffset);
-        });
-
-        m_basicWindow->SetCallbackFocus([](BasicWindow *win, bool focus) {
-            g_callback(WinEvents::Focus, win, &focus, nullptr);
-        });
-
-        if (!m_basicWindow->Create(name.c_str(), 0, 0, size.x, size.y, fullScreen, resizable)) {
-            SR_ERROR("Vulkan::MakeWindow() : failed to create window!");
-            return false;
-        }
-        m_basicWindow->Centralize();
-
-        m_basicWindow->SetHeaderEnabled(headerEnabled);
-
-        m_kernel->SetSize(m_basicWindow->GetSurfaceWidth(), m_basicWindow->GetSurfaceHeight());
-
-        return true;
+        return Environment::OnResize(size);
     }
 
-    bool Vulkan::CloseWindow() {
-        SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
 
-        SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
+//       m_basicWindow->SetScrollCallback([](auto&& pWindow, double_t xOffset, double_t yOffset) {
+//           /// TODO: TO_REFACTORING
+//           for (const auto &a : g_scrollEvents) {
+//               a(xOffset, yOffset);
+//           }
 
-        if (m_memory) {
-            m_memory->Free();
-            m_memory = nullptr;
-        }
+//           g_callback(WinEvents::Scroll, pWindow, &xOffset, &yOffset);
+//       });
 
-        if (m_kernel) {
-            if (!m_kernel->Destroy()) {
-                SR_ERROR("Vulkan::CloseWindow() : failed to destroy Evo Vulkan kernel!");
-                return false;
-            }
-        }
+ //  bool Vulkan::CloseWindow() {
+ //      SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
 
-        return true;
-    }
+ //      SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
 
-    bool Vulkan::Init(int swapInterval) {
+ //      if (m_memory) {
+ //          m_memory->Free();
+ //          m_memory = nullptr;
+ //      }
+
+ //      if (m_kernel) {
+ //          if (!m_kernel->Destroy()) {
+ //              SR_ERROR("Vulkan::CloseWindow() : failed to destroy Evo Vulkan kernel!");
+ //              return false;
+ //          }
+ //      }
+
+ //      return true;
+ //  }
+
+    bool Vulkan::Init(const WindowPtr& window, int swapInterval) {
         SR_GRAPH_LOG("Vulkan::Init() : initializing vulkan...");
 
-        auto window = m_basicWindow;
-
         auto createSurf = [window](const VkInstance &instance) -> VkSurfaceKHR {
-#ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
-            if (window->GetType() == BasicWindow::Type::Win32) {
-                VkWin32SurfaceCreateInfoKHR surfaceInfo = {};
+    #ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
+            if (auto&& pImpl = window->GetImplementation<Win32Window>()) {
+                VkWin32SurfaceCreateInfoKHR surfaceInfo = { };
                 surfaceInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
                 surfaceInfo.pNext = nullptr;
                 surfaceInfo.flags = 0;
-                surfaceInfo.hinstance = dynamic_cast<Win32Window *>(window)->GetHINSTANCE();
-                surfaceInfo.hwnd = dynamic_cast<Win32Window *>(window)->GetHWND();
+                surfaceInfo.hinstance = pImpl->GetHINSTANCE();
+                surfaceInfo.hwnd = pImpl->GetHWND();
 
                 VkSurfaceKHR surface = VK_NULL_HANDLE;
                 VkResult result = vkCreateWin32SurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
@@ -196,12 +185,36 @@ namespace Framework::Graphics {
                 SR_ERROR("Vulkan::Init() : window is not support this architecture!");
                 return VK_NULL_HANDLE;
             }
-#else
+    #elif defined(SR_ANDROID)
+            if (auto&& pImpl = window->GetImplementation<AndroidWindow>()) {
+                VkAndroidSurfaceCreateInfoKHR surfaceInfo = { };
+                surfaceInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
+                surfaceInfo.pNext = nullptr;
+                surfaceInfo.flags = 0;
+                surfaceInfo.window = pImpl->GetNativeWindow();
+
+                VkSurfaceKHR surface = VK_NULL_HANDLE;
+                VkResult result = vkCreateAndroidSurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
+                if (result != VK_SUCCESS) {
+                    return VK_NULL_HANDLE;
+                }
+                else
+                    return surface;
+            }
+            else {
+                SR_ERROR("Vulkan::Init() : window is not support this architecture!");
+                return VK_NULL_HANDLE;
+            }
+    #else
             SR_UNUSED_VARIABLE(window);
             SRHalt("Unsupported platform!");
             return VK_NULL_HANDLE;
-#endif
+    #endif
         };
+
+        if (auto&& pImpl = window->GetImplementation<BasicWindowImpl>()) {
+            m_kernel->SetSize(pImpl->GetSurfaceWidth(), pImpl->GetSurfaceHeight());
+        }
 
         if (!m_kernel->Init(createSurf, window->GetHandle(), m_deviceExtensions, true, swapInterval > 0)) {
             SR_ERROR("Vulkan::Init() : failed to initialize Evo Vulkan kernel!");
@@ -209,7 +222,7 @@ namespace Framework::Graphics {
         }
 
         SR_INFO("Vulkan::Init() : create vulkan memory manager...");
-        m_memory = VulkanTools::MemoryManager::Create(this->m_kernel);
+        m_memory = VulkanTools::MemoryManager::Create(m_kernel);
         if (!m_memory) {
             SR_ERROR("Vulkan::Init() : failed to create vulkan memory manager!");
             return false;
@@ -218,17 +231,17 @@ namespace Framework::Graphics {
         return true;
     }
 
-    void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
-            SR_LOG("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
-        }
+//   void Vulkan::SetWindowSize(unsigned int w, unsigned int h) {
+//       if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Low) {
+//           SR_LOG("Vulkan::SetWindowSize() : width = " + std::to_string(w) + "; height = " + std::to_string(h));
+//       }
 
-        m_basicWindow->Resize(w, h);
-    }
+//       m_basicWindow->Resize(w, h);
+//   }
 
-    void Vulkan::SetWindowPosition(int x, int y) {
-        m_basicWindow->Move(x, y);
-    }
+//   void Vulkan::SetWindowPosition(int x, int y) {
+//       m_basicWindow->Move(x, y);
+//   }
 
     bool Vulkan::PostInit() {
         SR_GRAPH_LOG("Vulkan::PostInit() : post-initializing vulkan...");
@@ -485,6 +498,7 @@ namespace Framework::Graphics {
 
         FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, depthBuffer, sampleCount) + 1;
         if (FBO <= 0) {
+            FBO = SR_ID_INVALID;
             SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
             return false;
         }
@@ -597,8 +611,6 @@ namespace Framework::Graphics {
             return false;
         }
 
-        m_basicWindow->InitGUI();
-
         if (!m_imgui->Init(m_kernel)) {
             SR_ERROR("Vulkan::Init() : failed to init imgui!");
             return false;
@@ -709,7 +721,8 @@ namespace Framework::Graphics {
     }
 
     SR_MATH_NS::IVector2 Vulkan::GetScreenSize() const {
-        return m_basicWindow->GetScreenResolution();
+   //     return m_basicWindow->GetScreenResolution();
+   return SR_MATH_NS::IVector2();
     }
 
     uint64_t Vulkan::GetVRAMUsage() {
@@ -752,17 +765,17 @@ namespace Framework::Graphics {
         vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
     }
 
-    glm::vec2 Vulkan::GetWindowSize() const {
-        if (!m_basicWindow) {
-            SRHalt("Vulkan::GetWindowSize() : Basic window is nullptr!");
-            return glm::vec2(0, 0);
-        }
+  // glm::vec2 Vulkan::GetWindowSize() const {
+  //     if (!m_basicWindow) {
+  //         SRHalt("Vulkan::GetWindowSize() : Basic window is nullptr!");
+  //         return glm::vec2(0, 0);
+  //     }
 
-        return {
-            m_basicWindow->GetWidth(),
-            m_basicWindow->GetHeight()
-        };
-    }
+  //     return {
+  //         m_basicWindow->GetWidth(),
+  //         m_basicWindow->GetHeight()
+  //     };
+  //  }
 
     int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo &createInfo, int32_t fbo) {
         void* temp = nullptr;
@@ -802,7 +815,7 @@ namespace Framework::Graphics {
         uint32_t w = m_width;
         uint32_t h = m_height;
 
-        Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
+     //   Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
 
         if (m_GUIEnabled) {
             dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(w, h);

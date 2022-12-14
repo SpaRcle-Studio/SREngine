@@ -168,6 +168,9 @@ namespace SR_UTILS_NS {
             return Type::Folder;
 
         return Type::File;
+#elif defined(SR_ANDROID)
+        /// TODO: будем считать что мы обращаемся только к файлам. Это заглушка - нужно переделать
+        return Type::File;
 #else
         SRHalt("Unsupported OS!");
         return Type::Undefined;
@@ -186,16 +189,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Path::Exists(Type type) const {
-        switch (type) {
-            case Type::File:
-            case Type::Folder:
-                return Platform::IsExists(m_path);
-            default:
-                SRAssert(false);
-                SR_FALLTHROUGH;
-            case Type::Undefined:
-                return false;
-        }
+        return SR_PLATFORM_NS::IsExists(m_path);
     }
 
     void Path::NormalizeSelf() {

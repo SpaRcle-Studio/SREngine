@@ -6,8 +6,7 @@
 #include <Utils/GUI.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
-//#include <Graphics/Environment/Win32Window.h>
-#include <Graphics/Environment/OpenGL.h>
+#include <Graphics/Pipeline/OpenGL.h>
 
 //#define OpenGLSetVertexAttribPointer(id, count, vertex, offset) \
 //    glEnableVertexAttribArray(id); \

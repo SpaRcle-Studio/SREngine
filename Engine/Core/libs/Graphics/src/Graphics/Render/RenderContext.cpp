@@ -5,6 +5,8 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
 
+#include <Graphics/Window/Window.h>
+
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Texture.h>
@@ -13,8 +15,9 @@
 #include <Utils/Locale/Encoding.h>
 
 namespace SR_GRAPH_NS {
-    RenderContext::RenderContext()
+    RenderContext::RenderContext(const RenderContext::WindowPtr& pWindow)
         : Super(this)
+        , m_window(pWindow)
     { }
 
     void RenderContext::Update() noexcept {
@@ -67,7 +70,7 @@ namespace SR_GRAPH_NS {
 
     bool RenderContext::Init() {
         m_pipeline = Environment::Get();
-        m_pipelineType = m_pipeline->GetPipeLine();
+        m_pipelineType = m_pipeline->GetType();
 
         /// ----------------------------------------------------------------------------
 
@@ -208,7 +211,7 @@ namespace SR_GRAPH_NS {
         return m_pipeline;
     }
 
-    PipeLineType RenderContext::GetPipelineType() const {
+    PipelineType RenderContext::GetPipelineType() const {
         return m_pipelineType;
     }
 
@@ -230,9 +233,7 @@ namespace SR_GRAPH_NS {
         return m_noneTexture;
     }
 
-    void RenderContext::OnResize(const SR_MATH_NS::IVector2 &size) {
-        m_windowSize = size;
-
+    void RenderContext::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ++pIt) {
             auto&&[pScene, pRenderScene] = *pIt;
 
@@ -246,12 +247,8 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    SR_MATH_NS::IVector2 RenderContext::GetWindowSize() const {
-        return m_windowSize;
-    }
-
-    void RenderContext::SetWindowSize(const SR_MATH_NS::IVector2 &size) {
-        m_windowSize = size;
+    SR_MATH_NS::UVector2 RenderContext::GetWindowSize() const {
+        return m_window->GetSize();
     }
 
     RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name, CameraPtr pCamera) const {
@@ -288,5 +285,9 @@ namespace SR_GRAPH_NS {
 
     void RenderContext::SetCurrentShader(RenderContext::ShaderPtr pShader) {
         m_pipeline->SetCurrentShader(pShader);
+    }
+
+    RenderContext::WindowPtr RenderContext::GetWindow() const {
+        return m_window;
     }
 }

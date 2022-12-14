@@ -6,7 +6,7 @@
 #define SRENGINE_RENDERTEXTURE_H
 
 #include <Utils/Settings.h>
-#include <Graphics/Environment/TextureHelper.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 
 namespace SR_GTYPES_NS {
     class Framebuffer;

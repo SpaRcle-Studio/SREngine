@@ -5,7 +5,7 @@
 #include <Graphics/Pass/SkyboxPass.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Shader.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SkyboxPass)

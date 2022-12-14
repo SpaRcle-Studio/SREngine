@@ -13,14 +13,14 @@ namespace SR_PTYPES_NS {
     class PhysXCollisionShape : public CollisionShape {
         using Super = CollisionShape;
     public:
-        PhysXCollisionShape(LibraryPtr pLibrary);
+        explicit PhysXCollisionShape(LibraryPtr pLibrary);
         ~PhysXCollisionShape() override;
 
     public:
         bool UpdateShape() override;
         bool UpdateMatrix() override;
 
-        void* GetHandle() const noexcept override { return m_shape; }
+        SR_NODISCARD void* GetHandle() const noexcept override { return m_shape; }
 
     private:
         physx::PxShape* m_shape = nullptr;

@@ -13,7 +13,7 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD
 
         if (!m_isInit) {
-            SR_PLATFORM_NS::WriteConsoleError("Debug::Print() : Debugger isn't initialized!\n");
+            SR_PLATFORM_NS::WriteConsoleError("Debug::Print() : Debugger isn't initialized!\n\tMessage: " + msg + "\n");
             SR_PLATFORM_NS::Terminate();
         }
 
@@ -83,6 +83,7 @@ namespace SR_UTILS_NS {
         }
     #else
         SR_PLATFORM_NS::WriteConsoleLog(msg);
+        std::cout << std::flush;
     #endif
 
         if (m_file.is_open()) {

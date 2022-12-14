@@ -97,7 +97,7 @@ namespace SR_GRAPH_NS {
         return hasDrawData;
     }
 
-    void GroupPass::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void GroupPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto&& pPass : m_passes) {
             pPass->OnResize(size);
         }

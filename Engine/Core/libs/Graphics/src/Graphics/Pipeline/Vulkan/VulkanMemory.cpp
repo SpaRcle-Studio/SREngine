@@ -2,8 +2,8 @@
 // Created by Nikita on 15.06.2021.
 //
 
-#include <Graphics/Environment/Vulkan/VulkanMemory.h>
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 #include <EvoVulkan/Types/VmaBuffer.h>
 
@@ -71,6 +71,8 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
             return (int32_t)i;
         }
     }
+
+    SR_ERROR("MemoryManager::AllocateFBO() : buffer is overflow!");
 
     return SR_ID_INVALID;
 }

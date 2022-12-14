@@ -8,7 +8,7 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
 
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
     class Environment;

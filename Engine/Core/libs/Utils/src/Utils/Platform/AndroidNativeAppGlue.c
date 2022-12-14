@@ -15,6 +15,8 @@
  *
  */
 
+#include <Utils/Platform/AndroidNativeAppGlue.h>
+
 #include <jni.h>
 
 #include <errno.h>
@@ -23,7 +25,6 @@
 #include <unistd.h>
 #include <sys/resource.h>
 
-#include "android_native_app_glue.h"
 #include <android/log.h>
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "threaded_app", __VA_ARGS__))

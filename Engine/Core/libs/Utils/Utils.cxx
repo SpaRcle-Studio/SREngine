@@ -6,9 +6,11 @@
 
 #ifdef SR_ANDROID
     #include "../Utils/src/Utils/Platform/PlatformAndroid.cpp"
+    #include "../Utils/src/Utils/Platform/AndroidNativeAppGlue.c"
 #endif
 
 #include "../Utils/src/Utils/ECS/Component.cpp"
+#include "../Utils/src/Utils/ECS/IComponentable.cpp"
 #include "../Utils/src/Utils/ECS/ComponentManager.cpp"
 #include "../Utils/src/Utils/ECS/GameObject.cpp"
 #include "../Utils/src/Utils/ECS/ISavable.cpp"
@@ -16,6 +18,7 @@
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
 #include "../Utils/src/Utils/ECS/Transform2D.cpp"
+#include "../Utils/src/Utils/ECS/EntityRef.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"

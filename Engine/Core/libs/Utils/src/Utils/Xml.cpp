@@ -86,14 +86,21 @@ namespace SR_UTILS_NS {
         return m_valid ? m_attribute.as_ullong() : def;
     }
 
-    Xml::Document Xml::Document::Load(const std::string &path)  {
+    Xml::Document Xml::Document::Load(const Path &path)  {
+        auto&& fileData = SR_PLATFORM_NS::ReadFile(path);
         auto xml = Document::New();
-        if (pugi::xml_parse_result result = xml.m_document->load_file(path.c_str())) {
+
+        if (!fileData) {
+            SR_ERROR("Document::Load() : file not exists! \n\tPath: " + path.ToString());
+            return xml;
+        }
+
+        if (pugi::xml_parse_result result = xml.m_document->load_string(fileData->c_str())) {
             xml.m_valid = true;
-            xml.m_path = path;
+            xml.m_path = std::move(path.ToString());
         }
         else {
-            SR_ERROR("Document::Load() : failed to load xml! \n\tPath: " + path + "\n\tDescription: " + std::string(result.description()));
+            SR_ERROR("Document::Load() : failed to load xml! \n\tPath: " + path.ToString() + "\n\tDescription: " + std::string(result.description()));
             Xml::g_xml_last_error = -3;
         }
 
@@ -108,10 +115,6 @@ namespace SR_UTILS_NS {
         m_document->save(stream, PUGIXML_TEXT("    "));
 
         return stream.str();
-    }
-
-    Xml::Document Xml::Document::Load(const Path &path) {
-        return Load(path.ToString());
     }
 
     Xml::Node::Node()

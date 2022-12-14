@@ -105,7 +105,7 @@ namespace SR_GRAPH_NS {
         return hasDrawData;
     }
 
-    void RenderTechnique::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void RenderTechnique::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto&& pass : m_passes) {
             pass->OnResize(size);
         }

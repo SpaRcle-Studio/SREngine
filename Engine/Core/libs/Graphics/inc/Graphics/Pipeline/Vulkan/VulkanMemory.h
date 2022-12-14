@@ -15,8 +15,8 @@
 #include <EvoVulkan/DescriptorManager.h>
 #include <EvoVulkan/Types/DescriptorSet.h>
 
-#include <Graphics/Environment/TextureHelper.h>
-#include <Graphics/Environment/Vulkan/DynamicTextureDescriptorSet.h>
+#include <Graphics/Pipeline/TextureHelper.h>
+#include <Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h>
 
 #define ZERO_VULKAN_MEMORY_MANAGER(type, count, array) { \
     array = new type[count];                             \

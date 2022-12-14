@@ -2,8 +2,8 @@
 // Created by Nikita on 01.04.2021.
 //
 
-#ifndef GAMEENGINE_PIPELINE_H
-#define GAMEENGINE_PIPELINE_H
+#ifndef GAMEENGINE_PIPELINE_TYPE_H
+#define GAMEENGINE_PIPELINE_TYPE_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -20,12 +20,9 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
-    enum class PipeLine {
+    SR_ENUM_NS_CLASS_T(PipelineType, uint8_t,
         Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12
-    };
-
-    typedef PipeLine PipeLineType;
-    typedef PipeLine PipelineType;
+    );
 }
 
-#endif //GAMEENGINE_PIPELINE_H
+#endif //GAMEENGINE_PIPELINE_TYPE_H

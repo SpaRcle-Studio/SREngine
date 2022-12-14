@@ -12,7 +12,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_o
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../../../../Engine/Core ${CMAKE_CURRENT_BINARY_DIR}/Engine/Core)
 
 add_library(sparcle SHARED
-    main.cpp android_native_app_glue.c
+    main.cpp
 )
 
 find_library(log-lib log)

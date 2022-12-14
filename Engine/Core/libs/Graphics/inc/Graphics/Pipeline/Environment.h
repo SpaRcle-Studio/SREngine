@@ -7,13 +7,14 @@
 
 #include <Utils/GUI.h>
 
-#include <Graphics/Environment/TextureHelper.h>
-#include <Graphics/Environment/Basic/BasicWindow.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
-#include <Graphics/Environment/PipeLine.h>
+#include <Graphics/Pipeline/TextureHelper.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Descriptors.h>
+#include <Graphics/Window/BasicWindowImpl.h>
+#include <Graphics/Window/Window.h>
 
 namespace SR_GTYPES_NS {
     class Shader;
@@ -56,7 +57,6 @@ namespace SR_GRAPH_NS {
         GUIContext        m_guiContext             = nullptr;
         ImguiFont         m_iconFont               = nullptr;
 
-        BasicWindow*      m_basicWindow            = nullptr;
         bool              m_hasErrors              = false;
         bool              m_guiEnabled             = false;
 
@@ -67,7 +67,7 @@ namespace SR_GRAPH_NS {
         int32_t           m_preferredDevice        = -1;
         int32_t           m_currentBuildIteration  = 0;
 
-        std::atomic<bool> m_needReBuild            = false;
+        std::atomic<bool> m_needReBuild            = true;
 
         Types::Shader* m_currentShader = nullptr;
         Types::Framebuffer* m_currentFramebuffer = nullptr;
@@ -85,7 +85,6 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ImguiFont GetIconFont() const { return m_iconFont; }
         SR_NODISCARD GUIContext GetGUIContext() const { return m_guiContext; }
         SR_NODISCARD bool IsGUIEnabled() const { return m_guiEnabled; }
-        SR_NODISCARD bool HasWindow() const { return m_basicWindow; }
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
@@ -107,10 +106,9 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual SR_FORCE_INLINE uint8_t GetCountBuildIter()  const { return 1;                        }
         SR_NODISCARD SR_FORCE_INLINE bool IsNeedReBuild()                 const { return m_needReBuild;            }
         SR_NODISCARD SR_FORCE_INLINE bool HasErrors()                     const { return m_hasErrors;              }
-        SR_NODISCARD SR_FORCE_INLINE BasicWindow* GetBasicWindow()        const { return m_basicWindow;            }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsGUISupport()          const { return false;                    }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;                    }
-        SR_NODISCARD virtual SR_FORCE_INLINE PipeLine GetPipeLine()       const { return PipeLine::Unknown;        }
+        SR_NODISCARD virtual SR_FORCE_INLINE PipelineType GetType()       const { return PipelineType::Unknown;        }
 
         SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
             g_mutex.lock();
@@ -128,14 +126,7 @@ namespace SR_GRAPH_NS {
                 return true;
             }
         }
-        static Environment* Get() {
-            if (g_environment == nullptr){
-                SR_ERROR("Environment::Get() : environment is not set!");
-                return nullptr;
-            }
-            else
-                return g_environment;
-        }
+        static Environment* Get();
 
         static void SetWinCallBack(const std::function<void(WinEvents, void* win, void* arg1, void* arg2)>& callback);
     public:
@@ -161,8 +152,9 @@ namespace SR_GRAPH_NS {
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        virtual bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) { return false; }
-        virtual void SetWindowIcon(const char* path) {  }
+        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+
+        virtual bool OnResize(const SR_MATH_NS::UVector2& size) { return false; }
 
         virtual bool PreInit(
                 uint32_t smooth_samples,
@@ -170,17 +162,12 @@ namespace SR_GRAPH_NS {
                 const std::string& engineName,
                 const std::string& glslc) { return false; }
 
-        [[nodiscard]] virtual glm::vec2 GetWindowSize() const { return {0,0}; }
-
         /* set current opengl/vulkan/directx context */
         virtual bool SetContextCurrent() { return false; }
 
-        virtual bool Init(int swapInterval) { return false; }
+        virtual bool Init(const WindowPtr& windowPtr, int swapInterval) { return false; }
         virtual bool PostInit() { return false; }
 
-        [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowOpen() const { return false; }
-        [[nodiscard]] virtual SR_FORCE_INLINE bool IsWindowCollapsed() const { return false; }
-        virtual bool CloseWindow() { return false; }
         [[nodiscard]] virtual void* GetHWND() const { return nullptr; }
 
         virtual SR_FORCE_INLINE void ClearFramebuffersQueue() { }
@@ -200,9 +187,6 @@ namespace SR_GRAPH_NS {
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, uint32_t ID, glm::vec2 size) { return glm::vec4(0); }
         virtual glm::vec3 GetPixelColor(glm::vec2 uPos) { return glm::vec3(0); }
-
-        virtual void SetWindowSize(uint32_t w, uint32_t h) {  }
-        virtual void SetWindowPosition(int x, int y) { }
 
         /**
          * \if w and h = -1 then use auto

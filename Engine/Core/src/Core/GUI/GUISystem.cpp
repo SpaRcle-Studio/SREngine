@@ -39,15 +39,16 @@ namespace Framework::Core {
         generated_##name##ButtonWidth = ImGui::GetItemRectSize().x;           \
     }                                                                         \
 
+/// TODO: убрать это позорище
 using namespace Framework::Core::GUI;
 
 /// drag
-bool GUISystem::BeginDockSpace() {
+bool GUISystem::BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow) {
     bool drag = false;
 
     const float toolbarSize = 0;
 
-    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuiViewport *viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(viewport->Pos + ImVec2(0, toolbarSize));
     ImGui::SetNextWindowSize(viewport->Size - ImVec2(0, toolbarSize));
     ImGui::SetNextWindowViewport(viewport->ID);
@@ -62,15 +63,15 @@ bool GUISystem::BeginDockSpace() {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 
-    const char* winName = "SpaRcle Engine";
+    const char *winName = "SpaRcle Engine";
     ImGui::Begin(winName, nullptr, window_flags);
-    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    ImGuiWindow *window = ImGui::GetCurrentWindow();
     ImGuiID dockMain = ImGui::GetID("Dockspace");
 
     auto context = Graphics::Environment::Get()->GetGUIContext();
 
     if (ImGui::BeginMainMenuBar()) {
-        ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainMenuBar");
+        ImGuiWindow *menu_bar_window = ImGui::FindWindowByName("##MainMenuBar");
 
         enum class Click {
             None, Drag, Miss
@@ -93,17 +94,16 @@ bool GUISystem::BeginDockSpace() {
 
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
-        auto pWindow = m_env->GetBasicWindow();
-
         SR_BEGIN_RIGHT_ALIGNMENT()
             SR_RIGHT_BUTTON(close, "×", {
-                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
+                pWindow->Close();
             }, {})
 
-            if (pWindow->GetState() == Graphics::WindowState::Default)
-                SR_RIGHT_BUTTON(maximize, "[ ]", { pWindow->Maximize(); }, {})
-            else  if (pWindow->GetState() == Graphics::WindowState::Maximized)
-                SR_RIGHT_BUTTON(restore, "[=]", { pWindow->Restore(); }, {})
+            if (pWindow->GetState() == Graphics::WindowState::Default) SR_RIGHT_BUTTON(maximize, "[ ]",
+                                                                                       { pWindow->Maximize(); }, {})
+            else if (pWindow->GetState() == Graphics::WindowState::Maximized) SR_RIGHT_BUTTON(restore, "[=]",
+                                                                                              { pWindow->Restore(); },
+                                                                                              {})
 
             SR_RIGHT_BUTTON(minimize, "_", {
                 pWindow->Collapse();
@@ -117,7 +117,7 @@ bool GUISystem::BeginDockSpace() {
 
             // When the user has left the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
             // FIXME: With this strategy we won't be able to restore a NULL focus.
-            ImGuiContext& g = *GImGui;
+            ImGuiContext &g = *GImGui;
             if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
                 ImGui::FocusTopMostWindowUnderOne(g.NavWindow, NULL);
 
@@ -177,7 +177,7 @@ bool GUISystem::ImageButtonInternal(std::string_view&& imageId, void *descriptor
     ImVec4 tint_col = ImVec4(1,1,1,1);
     ImVec2 uv0, uv1;
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+    if (m_pipeLine == Graphics::PipelineType::OpenGL) {
         uv0 = ImVec2(0, 1);
         uv1 = ImVec2(1, 0);
     }
@@ -249,7 +249,7 @@ bool GUISystem::BeginDragDropTargetWindow(const char* payload_type)  //взят�
 }
 
 void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+    if (m_pipeLine == Graphics::PipelineType::OpenGL) {
         DrawImage(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
     else {
@@ -280,7 +280,7 @@ void GUISystem::DrawTexture(
         ImGui::SetCursorPos(centralizedCursorPos);
     }
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL)
+    if (m_pipeLine == Graphics::PipelineType::OpenGL)
         DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
         DrawImage(m_env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);

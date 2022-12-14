@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS {
         return false;
     }
 
-    void FramebufferPass::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void FramebufferPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         if (m_dynamicResizing && m_framebuffer) {
             m_framebuffer->SetSize(SR_MATH_NS::IVector2(
                     static_cast<SR_MATH_NS::Unit>(size.x) * m_preScale.x,

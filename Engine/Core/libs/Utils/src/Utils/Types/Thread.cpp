@@ -41,6 +41,11 @@ namespace SR_HTYPES_NS {
         Platform::SetThreadPriority(reinterpret_cast<void*>(m_thread.native_handle()), priority);
     }
 
+    SR_NODISCARD Thread::Ptr Thread::Factory::CreateEmpty() {
+        SR_SCOPED_LOCK
+        return new Thread();
+    }
+
     Thread::Ptr Thread::Factory::Create(std::thread thread) {
         SR_SCOPED_LOCK
 
@@ -110,6 +115,35 @@ namespace SR_HTYPES_NS {
     void Thread::Free() {
         Factory::Instance().Remove(this);
         delete this;
+    }
+
+    void Thread::Synchronize() {
+    #ifdef SR_DEBUG
+        auto&& thread = Thread::Factory::Instance().GetThisThread();
+
+        if (GetId() != thread->GetId()) {
+            SRHalt("Synchronization can only be performed by the owner thread!");
+            return;
+        }
+    #endif
+
+        if (m_function) {
+            m_executeResult = (*m_function)();
+            m_function = nullptr;
+        }
+    }
+
+    bool Thread::Execute(const SR_HTYPES_NS::Function<bool()>& function) const {
+        SR_LOCK_GUARD
+
+        m_function = &function;
+
+        while (m_function) {
+            SR_NOOP;
+            continue;
+        }
+
+        return m_executeResult;
     }
 
     uint32_t Thread::Factory::GetThreadsCount() {

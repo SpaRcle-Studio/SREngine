@@ -6,7 +6,7 @@
 #define SRENGINE_POSTPROCESSPASS_H
 
 #include <Graphics/Pass/BasePass.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GTYPES_NS {
     class Shader;

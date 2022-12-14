@@ -11,7 +11,7 @@
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderContext.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GRAPH_NS::Types {

@@ -10,15 +10,10 @@
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Events/EventManager.h>
 
-#ifdef SR_WIN32
-    #include <vulkan/vulkan.h>
-    #include <Graphics/Environment/Win32Window.h>
-#endif
-
-#include <Graphics/Environment/Environment.h>
-#include <Graphics/Environment/Vulkan/VulkanMemory.h>
-#include <Graphics/Environment/Vulkan/AbstractCasts.h>
-#include <Graphics/Environment/Vulkan/VulkanImGUI.h>
+#include <Graphics/Pipeline/Environment.h>
+#include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
+#include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
+#include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
@@ -26,6 +21,7 @@
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
 #include <EvoVulkan/Types/VmaBuffer.h>
+#include <Graphics/Window/Window.h>
 
 namespace SR_GRAPH_NS {
     // Reusable buffers used for rendering 1 current in-flight frame, for ImGui_ImplVulkan_RenderDrawData()
@@ -115,7 +111,6 @@ namespace SR_GRAPH_NS {
         ~Vulkan() = default;
     private:
         VkDeviceSize                                    m_offsets[1]         = {0};
-
         VkViewport                                      m_viewport           = { };
         VkRect2D                                        m_scissor            = { };
 
@@ -144,7 +139,7 @@ namespace SR_GRAPH_NS {
         bool m_enableValidationLayers = false;
 
     public:
-        [[nodiscard]] SR_FORCE_INLINE PipeLine GetPipeLine()       const override { return PipeLine::Vulkan; }
+        [[nodiscard]] SR_FORCE_INLINE PipelineType GetType()       const override { return PipelineType::Vulkan; }
         [[nodiscard]] SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
         [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
         [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
@@ -152,13 +147,15 @@ namespace SR_GRAPH_NS {
     public:
         uint64_t GetVRAMUsage() override;
 
+        bool OnResize(const SR_MATH_NS::UVector2& size) override;
+
         bool PreInit(
                 unsigned int smooth_samples,
                 const std::string& appName,
                 const std::string& engineName,
                 const std::string& glslc) override;
 
-        bool Init(int swapInterval) override;
+        bool Init(const WindowPtr& windowPtr, int swapInterval) override;
         bool PostInit() override;
 
         bool InitGUI() override;
@@ -171,7 +168,6 @@ namespace SR_GRAPH_NS {
             m_guiEnabled = enabled;
 
             m_kernel->SetGUIEnabled(enabled);
-            m_basicWindow->SetHeaderEnabled(!enabled);
         }
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
@@ -233,17 +229,11 @@ namespace SR_GRAPH_NS {
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return m_kernel->GetDevice()->GetName(); }
         [[nodiscard]] SR_FORCE_INLINE std::string GetRenderer() const override { return "Vulkan"; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVersion()  const override { return "VK_API_VERSION_1_2"; }
-        [[nodiscard]] glm::vec2 GetWindowSize()                 const override;
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowOpen()       const override { return m_basicWindow->IsWindowOpen(); }
-        [[nodiscard]] SR_FORCE_INLINE bool IsWindowCollapsed()  const override { return (m_basicWindow->IsCollapsed() || m_kernel->IsSurfaceCollapsed()); }
 
         SR_FORCE_INLINE void SetLineWidth(float_t width) const override {
             vkCmdSetLineWidth(m_currentCmd, width);
         }
 
-        bool MakeWindow(const std::string& name, const SR_MATH_NS::IVector2& size, bool fullScreen, bool resizable, bool headerEnabled) override;
-        void SetWindowIcon(const char* path) override { this->m_basicWindow->SetIcon(path); }
-        bool CloseWindow() override;
         bool SetContextCurrent() override { return true; }
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;
@@ -331,10 +321,6 @@ namespace SR_GRAPH_NS {
                 m_hasErrors = true;
             }
         }
-        SR_FORCE_INLINE void PollEvents() const override { this->m_basicWindow->PollEvents(); }
-
-        void SetWindowPosition(int x, int y) override;
-        void SetWindowSize(unsigned int w, unsigned int h) override;
 
         SR_FORCE_INLINE bool ReCreateShader(uint32_t shaderProgram) override {
             if (auto shader = m_memory->m_ShaderPrograms[shaderProgram]) {

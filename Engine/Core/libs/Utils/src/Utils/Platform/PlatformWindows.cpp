@@ -90,6 +90,25 @@ namespace SR_UTILS_NS::Platform {
 }
 
 namespace SR_UTILS_NS::Platform {
+    void SetInstance(void*) {
+
+    }
+
+    void* GetInstance() {
+        return nullptr;
+    }
+
+
+    std::optional<std::string> ReadFile(const Path& path) {
+        std::ifstream ifs(path.c_str());
+
+        if (!ifs.is_open()) {
+            return std::optional<std::string>();
+        }
+
+        return std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+    }
+
     void TextToClipboard(const std::string &text) {
         if (text.empty()) {
             SR_WARN("Platform::TextToClipboard() : text is empty!");
@@ -272,6 +291,9 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void Terminate() {
+#ifdef SR_ANDROID
+
+#endif
 #ifdef SR_MINGW
 
 #else
@@ -428,5 +450,30 @@ namespace SR_UTILS_NS::Platform {
         /// it is file or directory
 
         return true;
+    }
+
+    std::vector<SR_MATH_NS::UVector2> GetScreenResolutions() {
+        auto&& resolutions = std::vector<SR_MATH_NS::UVector2>();
+
+        resolutions.reserve(64);
+
+        DEVMODE dm = { 0 };
+        dm.dmSize = sizeof(dm);
+
+        for (uint32_t iModeNum = 0; EnumDisplaySettings(NULL, iModeNum, &dm) != 0; ++iModeNum) {
+            auto&& resolution = SR_MATH_NS::UVector2(dm.dmPelsWidth, dm.dmPelsHeight);
+
+            if (std::find(resolutions.begin(), resolutions.end(), resolution) != resolutions.end()) {
+                continue;
+            }
+
+            resolutions.emplace_back(resolution);
+        }
+
+        if (resolutions.empty()) {
+            resolutions.emplace_back(SR_MATH_NS::UVector2(400, 400));
+        }
+
+        return resolutions;
     }
 }
