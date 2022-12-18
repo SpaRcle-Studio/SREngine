@@ -28,11 +28,15 @@ namespace SR_HTYPES_NS {
     }
 
     bool Marshal::Save(const Path &path) const {
-        std::ofstream file;
-
-        file.open(path.ToString(), std::ios::binary);
-        if (!file.is_open())
+        if (!path.Make()) {
             return false;
+        }
+
+        std::ofstream file;
+        file.open(path.ToString(), std::ios::binary);
+        if (!file.is_open()) {
+            return false;
+        }
 
         /// copy buffer
         file << m_stream.str();
@@ -43,11 +47,12 @@ namespace SR_HTYPES_NS {
     }
 
     Marshal::Ptr Marshal::LoadPtr(const Path& path) {
-        Marshal::Ptr marshal = new Marshal();
-
         std::ifstream file(path.ToString(), std::ios::binary);
-        if (!file.is_open())
-            return marshal;
+        if (!file.is_open()) {
+            return nullptr;
+        }
+
+        Marshal::Ptr marshal = new Marshal();
 
         marshal->m_stream << file.rdbuf();
         marshal->m_size = file.tellg();

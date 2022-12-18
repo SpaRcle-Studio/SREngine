@@ -79,7 +79,13 @@ namespace SR_CORE_NS {
 
         if (!m_scene.Valid()) {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
-            if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
+
+            if (SR_PLATFORM_NS::IsExists(scenePath)) {
+                if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
+                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString())
+                }
+            }
+            else if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
                 SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString())
             }
         }
@@ -651,7 +657,7 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Update(float_t dt) {
-        m_sceneBuilder->FixedUpdate();
+        m_sceneBuilder->Update(dt);
     }
 
     void Engine::Prepare() {

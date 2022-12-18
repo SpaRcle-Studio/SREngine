@@ -219,7 +219,7 @@
     void GameObject::Awake(bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsEnabled()) {
+        if (!m_dirty || !IsEnabled()) {
             return;
         }
 
@@ -234,7 +234,7 @@
     void GameObject::Start() noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsEnabled()) {
+        if (!m_dirty || !IsEnabled()) {
             return;
         }
 

@@ -51,6 +51,11 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::New() : creating new scene...");
         }
 
+        if (SR_PLATFORM_NS::IsExists(path)) {
+            SR_ERROR("Scene::New() : scene already exists!");
+            return Scene::Ptr();
+        }
+
         auto&& scene = SceneAllocator::Instance().Allocate();
 
         if (!scene) {
@@ -79,6 +84,18 @@ namespace SR_WORLD_NS {
         scene->SetPath(path);
         scene->SetName(path.GetBaseName());
 
+        auto&& componentsPath = scene->GetPath().Concat("data/components.bin");
+        if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
+            auto&& components = scene->LoadComponents(*rootComponentsMarshal);
+            delete rootComponentsMarshal;
+            for (auto&& pComponent : components) {
+                scene->LoadComponent(pComponent);
+            }
+        }
+        else {
+            SR_WARN("Scene::Load() : file not found!\n\tPath: " + componentsPath.ToString());
+        }
+
         return scene;
     }
 
@@ -91,6 +108,8 @@ namespace SR_WORLD_NS {
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::Destroy() : unload " + std::to_string(m_regions.size()) + " regions...");
         }
+
+        IComponentable::DestroyComponents();
 
         for (auto&& [position, region] : m_regions) {
             region->Unload(true);
@@ -201,6 +220,12 @@ namespace SR_WORLD_NS {
 
         UpdateContainers();
         UpdateScope(0.f);
+
+        auto&& pSceneRootMarshal = SaveComponents(nullptr, SAVABLE_FLAG_NONE);
+        if (!pSceneRootMarshal->Save(m_path.Concat("data/components.bin"))) {
+
+        }
+        SR_SAFE_DELETE_PTR(pSceneRootMarshal);
 
         auto xml = Xml::Document::New();
         if (auto&& root = xml.AppendChild("Scene"); root.Valid()) {

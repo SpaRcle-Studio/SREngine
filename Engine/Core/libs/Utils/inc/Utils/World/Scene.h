@@ -75,6 +75,7 @@ namespace SR_WORLD_NS {
         virtual GameObjectPtr Instance(const std::string& name);
         virtual GameObjectPtr Instance(const Types::RawMesh* rawMesh);
         virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
+        virtual std::vector<Component*> LoadComponents(SR_HTYPES_NS::Marshal& marshal) = 0;
 
         virtual bool ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const;
 

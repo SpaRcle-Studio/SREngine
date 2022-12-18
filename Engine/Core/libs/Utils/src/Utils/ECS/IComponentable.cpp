@@ -12,6 +12,10 @@ namespace SR_UTILS_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
+        if (!pMarshal) {
+            pMarshal = new SR_HTYPES_NS::Marshal();
+        }
+
         pMarshal->Write(static_cast<uint32_t>(m_components.size()));
         for (auto&& pComponent : m_components) {
             auto&& marshalComponent = pComponent->Save(nullptr, flags);

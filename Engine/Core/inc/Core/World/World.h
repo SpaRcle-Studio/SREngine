@@ -39,6 +39,8 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::GameObject::Ptr Instance(SR_HTYPES_NS::Marshal& marshal) override;
         SR_UTILS_NS::GameObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
 
+        std::vector<SR_UTILS_NS::Component*> LoadComponents(SR_HTYPES_NS::Marshal& marshal) override;
+
     private:
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
 

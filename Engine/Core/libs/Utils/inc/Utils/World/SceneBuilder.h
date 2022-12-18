@@ -28,6 +28,9 @@ namespace SR_WORLD_NS {
         void SetDirty();
 
     private:
+        uint64_t Initialize(bool isPaused);
+
+    private:
         std::vector<SR_UTILS_NS::Component*> m_updatableComponents;
         bool m_dirty = false;
         uint64_t m_rootHash = 0;
