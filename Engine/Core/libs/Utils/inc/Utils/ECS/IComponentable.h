@@ -6,6 +6,7 @@
 #define SRENGINE_ICOMPONENTABLE_H
 
 #include <Utils/Types/Marshal.h>
+#include <Utils/ECS/ISavable.h>
 
 namespace SR_UTILS_NS {
     class Component;

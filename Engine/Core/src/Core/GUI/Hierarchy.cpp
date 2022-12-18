@@ -31,7 +31,10 @@ namespace SR_CORE_NS::GUI {
         if (m_scene.TryRecursiveLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
             m_scene.Unlock();
-        } else m_tree.clear();
+        }
+        else {
+            m_tree.clear();
+        }
 
         m_sceneRunnerWidget->DrawAsSubWindow();
 
@@ -43,8 +46,8 @@ namespace SR_CORE_NS::GUI {
             DrawChild(gameObject);
             gameObject.Unlock();
         }
-        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload"))
-        {
+
+        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
             if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
                 for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                     if (ptr.RecursiveLockIfValid()) {
@@ -55,17 +58,21 @@ namespace SR_CORE_NS::GUI {
             }
             ImGui::EndDragDropTarget();
         }
-        if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) { ///TODO:Это по-хорошему нужно перевести в какой-нибудь MouseUp
+
+        /// TODO: Это по-хорошему нужно перевести в какой-нибудь MouseUp
+        if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseDoubleClicked(0)) {
             ClearSelected();
         }
     }
 
     void Hierarchy::Update() {
         SR_LOCK_GUARD
+
         for (auto pIt = m_selected.begin(); pIt != m_selected.end(); ) {
             if (*pIt) {
                 ++pIt;
-            } else {
+            }
+            else {
                 pIt = m_selected.erase(pIt);
             }
         }
@@ -311,6 +318,12 @@ namespace SR_CORE_NS::GUI {
 
     void Hierarchy::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr) {
         SR_LOCK_GUARD
+
+        if (!ptr) {
+            ClearSelected();
+            return;
+        }
+
         ///команда не должна срабатывать, если объект уже выделен и ни одного помимо него (либо если на нём прожат шифт), иначе такая команда бесполезна
         if ((m_selected.count(ptr) != 0)) {
             if ((m_shiftPressed)) {

@@ -2,9 +2,10 @@
 // Created by Nikita on 30.11.2020.
 //
 
-#ifndef GAMEENGINE_SCENE_H
-#define GAMEENGINE_SCENE_H
+#ifndef SRENGINE_SCENE_H
+#define SRENGINE_SCENE_H
 
+#include <Utils/ECS/IComponentable.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/World/Observer.h>
@@ -16,21 +17,21 @@
 
 namespace SR_UTILS_NS {
     class GameObject;
+}
 
-    namespace Types {
-        class RawMesh;
-    }
+namespace SR_HTYPES_NS {
+    class RawMesh;
 }
 
 namespace SR_WORLD_NS {
-    class SR_DLL_EXPORT Scene : public Types::SafePtr<Scene> {
+    class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
-        typedef Types::SafePtr<Scene> Ptr;
+        using Ptr = SR_HTYPES_NS::SafePtr<Scene>;
         using Super = Ptr;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using GameObjects = std::vector<GameObjectPtr>;
 
-        virtual ~Scene();
+        ~Scene() override;
 
     protected:
         Scene();
@@ -118,10 +119,10 @@ namespace SR_WORLD_NS {
         GameObjects               m_rootObjects;
 
         Regions                   m_regions;
-        Math::IVector2            m_chunkSize = Math::IVector2();
+        SR_MATH_NS::IVector2      m_chunkSize;
         uint32_t                  m_regionWidth = 0;
 
     };
 }
 
-#endif //GAMEENGINE_SCENE_H
+#endif //SRENGINE_SCENE_H

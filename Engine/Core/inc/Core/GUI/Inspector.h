@@ -33,7 +33,12 @@ namespace SR_CORE_NS::GUI {
 
     protected:
         void Draw() override;
-        void DrawComponents();
+
+        void InspectGameObject();
+        void InspectScene();
+
+        void DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable);
+
         void DrawSwitchTransform();
         void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
         void DrawTransform3D(SR_UTILS_NS::Transform3D* transform) const;

@@ -35,6 +35,24 @@ namespace Framework::Core::GUI {
             return;
         }
 
+        if (ImGui::BeginTabBar("#inspectorTabBar")) {
+            if (ImGui::BeginTabItem("GameObject")) {
+                InspectGameObject();
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Scene")) {
+                InspectScene();
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
+        }
+
+        m_scene.Unlock();
+    }
+
+    void Inspector::InspectGameObject() {
         if (m_gameObject.TryRecursiveLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
                 auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
@@ -68,12 +86,19 @@ namespace Framework::Core::GUI {
 
             DrawSwitchTransform();
 
-            DrawComponents();
+            DrawComponents(m_gameObject.DynamicCast<SR_UTILS_NS::IComponentable*>());
 
             m_gameObject.Unlock();
         }
+    }
 
-        m_scene.Unlock();
+    void Inspector::InspectScene() {
+        std::string gm_name = m_scene->GetName();
+        ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_ReadOnly);
+
+        ImGui::Separator();
+
+        DrawComponents(m_scene.DynamicCast<SR_UTILS_NS::IComponentable*>());
     }
 
     void Inspector::Update() {
@@ -97,12 +122,12 @@ namespace Framework::Core::GUI {
         m_scene = scene;
     }
 
-    void Inspector::DrawComponents() {
+    void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
         if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
             if (ImGui::BeginMenu("Add component")) {
                 for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                     if (ImGui::MenuItem(name.c_str())) {
-                        m_gameObject->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
+                        pIComponentable->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
                         break;
                     }
                 }
@@ -112,13 +137,13 @@ namespace Framework::Core::GUI {
         }
 
         uint32_t index = 0;
-        m_gameObject->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
+        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
             SR_UTILS_NS::Component* copyPtrComponent = component;
 
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(component->GetComponentName().c_str())) {
-                        m_gameObject->RemoveComponent(component);
+                        pIComponentable->RemoveComponent(component);
                         goto exit;
                     }
                     ImGui::EndMenu();
@@ -140,7 +165,7 @@ namespace Framework::Core::GUI {
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
 
-                m_gameObject->ReplaceComponent(component, copyPtrComponent);
+                pIComponentable->ReplaceComponent(component, copyPtrComponent);
 
                 return false;
             }

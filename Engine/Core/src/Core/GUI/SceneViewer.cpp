@@ -280,7 +280,8 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
                 m_hierarchy->SelectGameObject(pMesh->GetRoot());
-            } else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
+            }
+            else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
                 m_hierarchy->ClearSelected();
             }
         }

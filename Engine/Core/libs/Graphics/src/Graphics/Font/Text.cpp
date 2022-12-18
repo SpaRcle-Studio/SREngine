@@ -184,7 +184,7 @@ namespace SR_GTYPES_NS {
             m_modelMatrix = pTransform->GetMatrix();
         }
         else {
-            SRHalt("Component have not transform, but OnMatrixDirty was called!");
+            m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
         }
 
         Component::OnMatrixDirty();

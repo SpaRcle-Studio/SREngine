@@ -152,7 +152,7 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetParent, GameObject*)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetParent, GameObject*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetBarycenter, FVector3)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)

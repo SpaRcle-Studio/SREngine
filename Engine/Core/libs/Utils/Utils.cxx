@@ -79,4 +79,5 @@
 #include "../Utils/src/Utils/World/Observer.cpp"
 #include "../Utils/src/Utils/World/Region.cpp"
 #include "../Utils/src/Utils/World/Scene.cpp"
+#include "../Utils/src/Utils/World/SceneBuilder.cpp"
 #include "../Utils/src/Utils/World/SceneAllocator.cpp"

@@ -79,8 +79,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
-        SR_NODISCARD GameObject* GetParent() const;
+        SR_NODISCARD IComponentable* GetParent() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
+        SR_NODISCARD GameObjectPtr GetGameObject() const;
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
@@ -95,7 +96,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
     private:
-        void SetParent(GameObject* parent);
+        void SetParent(IComponentable* pParent);
 
     protected:
         bool m_isEnabled = true;
@@ -107,7 +108,7 @@ namespace SR_UTILS_NS {
         std::string m_name = "Unknown";
 
         uint64_t m_componentId = SIZE_MAX;
-        GameObject* m_parent = nullptr;
+        IComponentable* m_parent = nullptr;
 
     };
 }

@@ -26,6 +26,7 @@ namespace SR_PHYSICS_NS {
 
 namespace SR_WORLD_NS {
     class Scene;
+    class SceneBuilder;
 }
 
 namespace SR_GRAPH_NS {
@@ -111,16 +112,13 @@ namespace SR_CORE_NS {
 
         SR_HTYPES_NS::SafeGateArray<SR_GRAPH_NS::GUI::WidgetManager*> m_widgetManagers;
 
-        std::vector<SR_UTILS_NS::Component*> m_updateableComponents;
-        bool m_needRebuildComponents = false;
-        uint64_t m_rootHash = 0;
-
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
 
         SR_HTYPES_NS::Thread::Ptr m_worldThread = nullptr;
 
         ScenePtr m_scene = { };
+        SR_WORLD_NS::SceneBuilder* m_sceneBuilder = nullptr;
 
         Core::GUI::EditorGUI* m_editor = nullptr;
 

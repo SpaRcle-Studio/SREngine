@@ -130,16 +130,6 @@ namespace Framework::Graphics {
         return Environment::OnResize(size);
     }
 
-
-//       m_basicWindow->SetScrollCallback([](auto&& pWindow, double_t xOffset, double_t yOffset) {
-//           /// TODO: TO_REFACTORING
-//           for (const auto &a : g_scrollEvents) {
-//               a(xOffset, yOffset);
-//           }
-
-//           g_callback(WinEvents::Scroll, pWindow, &xOffset, &yOffset);
-//       });
-
  //  bool Vulkan::CloseWindow() {
  //      SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
 

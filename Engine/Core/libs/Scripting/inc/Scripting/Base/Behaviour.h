@@ -33,7 +33,6 @@ namespace SR_SCRIPTING_NS {
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_NODISCARD GameObjectPtr GetGameObject() const;
         SR_NODISCARD bool IsEmpty() const;
 
     public:

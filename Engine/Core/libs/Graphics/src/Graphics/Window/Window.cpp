@@ -166,4 +166,10 @@ namespace SR_GRAPH_NS {
             callback(focus);
         });
     }
+
+    void Window::SetScrollCallback(const Window::ScrollCallback &callback) {
+        m_windowImpl->SetScrollCallback([callback](auto&& pWin, auto&& xOffset, auto&& yOffset) {
+            callback(xOffset, yOffset);
+        });
+    }
 }

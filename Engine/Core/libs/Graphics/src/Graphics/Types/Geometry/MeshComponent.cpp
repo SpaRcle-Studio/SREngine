@@ -64,7 +64,8 @@ namespace SR_GTYPES_NS {
             m_translation = pTransform->GetTranslation();
         }
         else {
-            SRHalt("Component have not transform, but OnMatrixDirty was called!");
+            m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
+            m_translation = SR_MATH_NS::FVector3::Zero();
         }
 
         Component::OnMatrixDirty();

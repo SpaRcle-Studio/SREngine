@@ -30,6 +30,7 @@ namespace SR_GRAPH_NS {
         using Super = SR_HTYPES_NS::SafePtr<Window>;
         using Ptr = SR_HTYPES_NS::SafePtr<Window>;
         using WindowHandle = void*;
+        using ScrollCallback = SR_HTYPES_NS::Function<void(double_t xOffset, double_t yOffset)>;
         using FocusCallback = SR_HTYPES_NS::Function<void(bool)>;
         using DrawCallback = SR_HTYPES_NS::Function<void(void)>;
         using CloseCallback = SR_HTYPES_NS::Function<void(void)>;
@@ -55,6 +56,7 @@ namespace SR_GRAPH_NS {
         void SetDrawCallback(const DrawCallback& callback);
         void SetCloseCallback(const CloseCallback& callback);
         void SetResizeCallback(const ResizeCallback& callback);
+        void SetScrollCallback(const ScrollCallback& callback);
 
         void SetFullScreen(bool value);
 
@@ -68,6 +70,7 @@ namespace SR_GRAPH_NS {
     private:
         CloseCallback m_closeCallback;
         DrawCallback m_drawCallback;
+        ScrollCallback m_scrollCallback;
 
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
 

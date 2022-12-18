@@ -94,13 +94,7 @@ namespace SR_UTILS_NS {
         m_components.emplace_back(pComponent);
         ++m_componentsCount;
 
-        if (auto&& pGameObject = dynamic_cast<GameObject*>(this)) {
-            pComponent->SetParent(pGameObject);
-        }
-        else {
-            SRHalt("Unknown parent!");
-            return false;
-        }
+        pComponent->SetParent(this);
 
         pComponent->OnAttached();
         pComponent->OnMatrixDirty();
@@ -141,13 +135,7 @@ namespace SR_UTILS_NS {
                 source->OnDestroy();
                 *it = destination;
 
-                if (auto&& pGameObject = dynamic_cast<GameObject*>(this)) {
-                    destination->SetParent(pGameObject);
-                }
-                else {
-                    SRHalt("Unknown parent!");
-                    return false;
-                }
+                destination->SetParent(this);
 
                 destination->OnAttached();
                 destination->OnMatrixDirty();
@@ -219,6 +207,10 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::CheckActivity() noexcept {
+        if (!m_dirty) {
+            return;
+        }
+
         for (auto&& pComponent : m_components) {
             if (!pComponent->IsAwake()) {
                 continue;

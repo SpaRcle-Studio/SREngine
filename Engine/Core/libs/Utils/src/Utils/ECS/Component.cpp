@@ -19,8 +19,8 @@ namespace SR_UTILS_NS {
         return pMarshal;
     }
 
-    void Component::SetParent(GameObject *parent) {
-        m_parent = parent;
+    void Component::SetParent(IComponentable* pParent) {
+        m_parent = pParent;
     }
 
     void Component::SetEnabled(bool value) {
@@ -36,7 +36,10 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
-        const bool isActive = m_isEnabled && (!m_parent || m_parent->m_isActive);
+        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
+
+        /// если родителя нет, или он отличается от ожидаемого, то будем считать что родитель активен
+        const bool isActive = m_isEnabled && (!pParent || pParent->m_isActive);
         if (isActive == m_isActive) {
             return;
         }
@@ -50,29 +53,50 @@ namespace SR_UTILS_NS {
     }
 
     SR_WORLD_NS::Scene::Ptr Component::GetScene() const {
-        if (!m_parent) {
-            SRHalt("The component have not parent game object!");
-            return SR_WORLD_NS::Scene::Ptr();
+        if (auto&& pScene = TryGetScene()) {
+            return pScene;
         }
 
-        /// Игровой объект никогда не уничтожится до того, как не установит "m_parent" в "nullptr"
-        return m_parent->GetScene();
+        SRHalt("The component have not a valid parent!");
+
+        return SR_WORLD_NS::Scene::Ptr();
     }
 
     SR_WORLD_NS::Scene::Ptr Component::TryGetScene() const {
-        return m_parent ? m_parent->GetScene() : SR_WORLD_NS::Scene::Ptr();
+        /// Игровой объект или сцена никогда не уничтожится до того,
+        /// как не установит "m_parent" в "nullptr"
+
+        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
+            return pGameObject->GetScene();
+        }
+
+        if (auto&& pScene = dynamic_cast<SR_WORLD_NS::Scene*>(m_parent)) {
+            return pScene->GetThis();
+        }
+
+        return SR_WORLD_NS::Scene::Ptr();
     }
 
-    GameObject *Component::GetParent() const {
+    Component::GameObjectPtr Component::GetGameObject() const {
+        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
+            return pGameObject->GetThis();
+        }
+
+        return GameObjectPtr();
+    }
+
+    IComponentable* Component::GetParent() const {
         return m_parent;
     }
 
     GameObject::Ptr Component::GetRoot() const {
-        if (!m_parent) {
+        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
+
+        if (!pParent) {
             return GameObjectPtr();
         }
 
-        GameObjectPtr root = m_parent->GetThis();
+        GameObjectPtr root = pParent->GetThis();
 
         while (root.Valid()) {
             if (auto&& parent = root->GetParent()) {
@@ -87,7 +111,11 @@ namespace SR_UTILS_NS {
     }
 
     Transform *Component::GetTransform() const noexcept {
-        return m_parent ? m_parent->GetTransform() : nullptr;
+        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
+            return pGameObject->GetTransform();
+        }
+
+        return nullptr;
     }
 }
 
