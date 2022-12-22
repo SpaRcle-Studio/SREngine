@@ -5,6 +5,7 @@
 #include <Utils/World/Chunk.h>
 #include <Utils/World/Region.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_WORLD_NS {
     Chunk::Allocator Chunk::g_allocator = Chunk::Allocator();
@@ -56,7 +57,8 @@ namespace SR_WORLD_NS {
 
         SetDebugLoaded(BoolExt::False);
 
-        auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         for (auto gameObject : gameObjects) {
             gameObject.AutoFree([](auto gm) {
@@ -144,7 +146,8 @@ namespace SR_WORLD_NS {
 
         std::list<SR_HTYPES_NS::Marshal::Ptr> marshaled;
 
-        auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         /// сохраняем объекты относительно начала координат чанка
         SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());

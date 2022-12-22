@@ -223,7 +223,9 @@ namespace SR_WORLD_NS {
 
         SetDebugLoaded(BoolExt::True);
 
-        const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
+        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        const auto&& path = pLogic->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
+
         if (path.Exists()) {
             auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);
 

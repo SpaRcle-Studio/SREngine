@@ -428,39 +428,39 @@ void GUISystem::DrawGuizmoTools() {
 }
 
 void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene) {
-    if (scene.LockIfValid()) {
-        const auto&& observer = scene->GetObserver();
-        const auto offset = observer->m_offset;
-
-        ImGui::Separator();
-        DrawTextOnCenter("Current");
-
-        ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
-        ImGui::InputFloat2("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
-
-        ImGui::Separator();
-        DrawTextOnCenter("Offset");
-
-        auto chunkOffset = offset.m_chunk.ToGLM();
-        if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
-
-        auto regionOffset = offset.m_region.ToGLM();
-        if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
-            scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
-
-        if (ImGui::Button("Reload chunks")) {
-            scene->ReloadChunks();
-        }
-
-        if (auto&& chunk = scene->GetCurrentChunk()) {
-            ImGui::Separator();
-            int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
-            ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
-        }
-
-        scene.Unlock();
-    }
+    //if (scene.LockIfValid()) {
+    //    const auto&& observer = scene->GetObserver();
+    //    const auto offset = observer->m_offset;
+//
+    //    ImGui::Separator();
+    //    DrawTextOnCenter("Current");
+//
+    //    ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
+    //    ImGui::InputFloat2("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
+//
+    //    ImGui::Separator();
+    //    DrawTextOnCenter("Offset");
+//
+    //    auto chunkOffset = offset.m_chunk.ToGLM();
+    //    if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+    //        scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
+//
+    //    auto regionOffset = offset.m_region.ToGLM();
+    //    if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
+    //        scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
+//
+    //    if (ImGui::Button("Reload chunks")) {
+    //        scene->ReloadChunks();
+    //    }
+//
+    //    if (auto&& chunk = scene->GetCurrentChunk()) {
+    //        ImGui::Separator();
+    //        int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
+    //        ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
+    //    }
+//
+    //    scene.Unlock();
+    //}
 }
 
 void GUISystem::DrawGuizmo(Framework::Graphics::Types::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {

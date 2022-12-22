@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/WorldEdit.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace Framework::Core::GUI {
     WorldEdit::WorldEdit()
@@ -15,7 +16,8 @@ namespace Framework::Core::GUI {
 
     void WorldEdit::Draw() {
         if (m_scene.TryRecursiveLockIfValid()) {
-            const auto&& observer = m_scene->GetObserver();
+            auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneCubeChunkLogic>();
+            const auto&& observer = pLogic->GetObserver();
             const auto offset = observer->m_offset;
 
             ImGui::Separator();
@@ -29,21 +31,21 @@ namespace Framework::Core::GUI {
 
             auto chunkOffset = offset.m_chunk.ToGLM();
             if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
+                pLogic->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
 
             auto regionOffset = offset.m_region.ToGLM();
             if (ImGui::InputFloat3("Region offset", &regionOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-                m_scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
+                pLogic->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
 
             auto scope = observer->GetScope();
             if (ImGui::InputInt("Scope", &scope))
                 observer->SetScope(SR_CLAMP(scope, 32, 0));
 
             if (ImGui::Button("Reload chunks")) {
-                m_scene->ReloadChunks();
+                pLogic->ReloadChunks();
             }
 
-            if (auto&& chunk = m_scene->GetCurrentChunk()) {
+            if (auto&& chunk = pLogic->GetCurrentChunk()) {
                 ImGui::Separator();
                 int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
                 ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);

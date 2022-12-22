@@ -81,3 +81,5 @@
 #include "../Utils/src/Utils/World/Scene.cpp"
 #include "../Utils/src/Utils/World/SceneBuilder.cpp"
 #include "../Utils/src/Utils/World/SceneAllocator.cpp"
+#include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
+#include "../Utils/src/Utils/World/SceneLogic.cpp"

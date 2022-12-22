@@ -25,7 +25,7 @@ namespace SR_CORE_NS {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
         World()
-            : Scene()
+            : Scene("Unnamed")
         { }
 
         explicit World(const std::string& name)

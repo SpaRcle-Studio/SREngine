@@ -600,8 +600,10 @@ namespace SR_CORE_NS {
 
             if (m_worldTimer.Update() && m_scene.LockIfValid()) {
                 if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
-                    if (gameObject->TryRecursiveLockIfValid()) {
-                        m_scene->SetObserver(gameObject->GetThis());
+                    auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneCubeChunkLogic>();
+
+                    if (pLogic && gameObject->TryRecursiveLockIfValid()) {
+                        pLogic->SetObserver(gameObject->GetThis());
                         gameObject->Unlock();
                     }
                 }

@@ -24,6 +24,8 @@ namespace SR_HTYPES_NS {
 }
 
 namespace SR_WORLD_NS {
+    class SceneLogic;
+
     class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
         using Ptr = SR_HTYPES_NS::SafePtr<Scene>;
@@ -34,7 +36,6 @@ namespace SR_WORLD_NS {
         ~Scene() override;
 
     protected:
-        Scene();
         explicit Scene(const std::string& name);
 
     public:
@@ -47,25 +48,19 @@ namespace SR_WORLD_NS {
         void Update(float_t dt);
 
     public:
-        void SetWorldOffset(const World::Offset& offset);
+        template<typename T> SR_NODISCARD T* GetLogic() const {
+            return dynamic_cast<T*>(m_logic);
+        }
+
         void SetName(const std::string& name) { m_name = name; }
         void SetPath(const Path& path) { m_path = path; }
-        void SetObserver(const GameObjectPtr& target);
 
-        SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat("regions"); }
         SR_NODISCARD Path GetPath() const { return m_path; }
-        SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD std::string GetName() const { return m_name; }
-        SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
-        SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
-
-        SR_NODISCARD Region* GetRegion(const SR_MATH_NS::IVector3& region);
 
         GameObjects& GetRootGameObjects();
-        const GameObjects& GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
-        Chunk* GetCurrentChunk() const;
 
         GameObjectPtr FindByComponent(const std::string& name);
         GameObjectPtr Find(const std::string& name);
@@ -77,8 +72,6 @@ namespace SR_WORLD_NS {
         virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
         virtual std::vector<Component*> LoadComponents(SR_HTYPES_NS::Marshal& marshal) = 0;
 
-        virtual bool ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const;
-
     public:
         bool Remove(const GameObjectPtr& gameObject);
         bool MoveToRoot(const GameObjectPtr& gameObject);
@@ -86,42 +79,23 @@ namespace SR_WORLD_NS {
         void OnChanged();
 
         bool Reload();
-        bool ReloadConfig();
-        bool ReloadChunks();
 
     private:
-        void CheckShift(const SR_MATH_NS::IVector3& chunk);
-        void UpdateContainers();
-        void UpdateScope(float_t dt);
-        void SaveRegion(Region* pRegion) const;
+        SceneLogic* m_logic = nullptr;
 
-    protected:
-        Observer*                 m_observer           = nullptr;
-        Chunk*                    m_currentChunk       = nullptr;
+        bool m_isDestroy = false;
 
-    private:
-        bool                      m_updateContainer    = false;
-        bool                      m_shiftEnabled       = false;
-        bool                      m_scopeEnabled       = false;
-        bool                      m_isDestroy          = false;
+        std::atomic<bool>  m_isHierarchyChanged = false;
 
-        std::atomic<bool>         m_isHierarchyChanged = false;
+        StringAtom m_name;
+        Path m_path;
 
-        StringAtom                m_name               = "Unnamed";
-        Path                      m_path               = Path();
+        SR_HTYPES_NS::DataStorage m_dataStorage;
 
-        World::Tensor             m_tensor             = World::Tensor();
+        std::list<uint64_t> m_freeObjIndices;
 
-        SR_HTYPES_NS::DataStorage m_dataStorage        = SR_HTYPES_NS::DataStorage();
-
-        std::list<uint64_t>       m_freeObjIndices;
-
-        GameObjects               m_gameObjects;
-        GameObjects               m_rootObjects;
-
-        Regions                   m_regions;
-        SR_MATH_NS::IVector2      m_chunkSize;
-        uint32_t                  m_regionWidth = 0;
+        GameObjects m_gameObjects;
+        GameObjects m_rootObjects;
 
     };
 }
