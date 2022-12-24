@@ -21,6 +21,7 @@ namespace SR_WORLD_NS {
         void Update(float_t dt) override;
 
         bool Save(const Path& path) override;
+        bool Load(const Path& path) override;
 
         void SetWorldOffset(const SR_WORLD_NS::Offset& offset);
         void SetObserver(const GameObjectPtr& target);

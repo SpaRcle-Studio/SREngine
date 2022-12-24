@@ -309,6 +309,29 @@ namespace SR_WORLD_NS {
             SaveRegion(pRegion);
         }
 
+        auto&& pSceneRootMarshal = m_scene->SaveComponents(nullptr, SAVABLE_FLAG_NONE);
+        if (!pSceneRootMarshal->Save(path.Concat("data/components.bin"))) {
+            SR_ERROR("SceneCubeChunkLogic::Save() : failed to save scene components!");
+        }
+        SR_SAFE_DELETE_PTR(pSceneRootMarshal);
+
+        return true;
+    }
+
+    bool SceneCubeChunkLogic::Load(const Path &path) {
+        auto&& componentsPath = m_scene->GetPath().Concat("data/components.bin");
+        if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
+            auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);
+            delete rootComponentsMarshal;
+            for (auto&& pComponent : components) {
+                m_scene->LoadComponent(pComponent);
+            }
+        }
+        else {
+            SR_WARN("SceneCubeChunkLogic::Load() : file not found!\n\tPath: " + componentsPath.ToString());
+            return false;
+        }
+
         return true;
     }
 

@@ -14,23 +14,21 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_WORLD_NS {
-    Scene::Scene(const std::string &name)
+    Scene::Scene()
         : Super(this)
-        , m_name(name)
-        , m_logic(new SceneCubeChunkLogic(GetThis()))
     { }
 
     Scene::~Scene() {
         SRAssert(m_isDestroy);
 
         if (Debug::Instance().GetLevel() >= Debug::Level::Low) {
-            SR_LOG("Scene::~Scene() : free \"" + std::string(m_name) + "\" scene pointer...");
+            SR_LOG("Scene::~Scene() : free \"" + GetName() + "\" scene pointer...");
         }
     }
 
     GameObject::Ptr Scene::Instance(const std::string& name) {
         if (Debug::Instance().GetLevel() >= Debug::Level::High) {
-            SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + std::string(m_name) + "\" scene.");
+            SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + GetName() + "\" scene.");
         }
 
         const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
@@ -96,7 +94,7 @@ namespace SR_WORLD_NS {
         }
 
         scene->SetPath(path);
-        scene->SetName(path.GetBaseName());
+        scene->m_logic = SceneLogic::CreateByExt(scene, path.GetExtension());
 
         return scene;
     }
@@ -114,18 +112,17 @@ namespace SR_WORLD_NS {
         }
 
         scene->SetPath(path);
-        scene->SetName(path.GetBaseName());
+        scene->m_logic = SceneLogic::CreateByExt(scene, path.GetExtension());
 
-        auto&& componentsPath = scene->GetPath().Concat("data/components.bin");
-        if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
-            auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);
-            delete rootComponentsMarshal;
-            for (auto&& pComponent : components) {
-                scene->LoadComponent(pComponent);
-            }
-        }
-        else {
-            SR_WARN("Scene::Load() : file not found!\n\tPath: " + componentsPath.ToString());
+        if (!scene->m_logic->Load(path)) {
+            SR_ERROR("Scene::Load() : failed to load scene logic!");
+
+            scene.AutoFree([](SR_WORLD_NS::Scene* pScene) {
+                pScene->Destroy();
+                delete pScene;
+            });
+
+            return Scene::Ptr();
         }
 
         return scene;
@@ -133,7 +130,7 @@ namespace SR_WORLD_NS {
 
     bool Scene::Destroy() {
         if (m_isDestroy) {
-            SR_ERROR("Scene::Destroy() : scene \"" + std::string(m_name) + "\" already destroyed!");
+            SR_ERROR("Scene::Destroy() : scene \"" + GetName() + "\" already destroyed!");
             return false;
         }
 
@@ -145,7 +142,7 @@ namespace SR_WORLD_NS {
 
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::Destroy() : complete unloading!");
-            SR_LOG("Scene::Destroy() : destroying \"" + std::string(m_name) + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
+            SR_LOG("Scene::Destroy() : destroying \"" + GetName() + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
         }
 
         for (auto gameObject : GetRootGameObjects()) {
@@ -211,14 +208,13 @@ namespace SR_WORLD_NS {
     bool Scene::SaveAt(const Path& path) {
         SR_INFO(SR_FORMAT("Scene::SaveAt() : save scene...\n\tPath: %s", path.CStr()));
 
-        SetPath(path);
-        SetName(path.GetBaseName());
-
-        auto&& pSceneRootMarshal = SaveComponents(nullptr, SAVABLE_FLAG_NONE);
-        if (!pSceneRootMarshal->Save(m_path.Concat("data/components.bin"))) {
-            SR_ERROR("Scene::SaveAt() : failed to save scene components!");
+        if (m_path.GetExtensionView() != path.GetExtensionView()) {
+            SR_ERROR("Scene::SaveAt() : different extensions!\n\tSave path: " + path.ToString() + "\n\tScene path: " + m_path.ToString());
+            return false;
         }
-        SR_SAFE_DELETE_PTR(pSceneRootMarshal);
+
+        /// TODO: правильное ли это поведение? Не интуитивно.
+        SetPath(path);
 
         if (!m_logic->Save(path)) {
             SR_ERROR("Scene::SaveAt() : failed to save scene logic!");
@@ -247,19 +243,20 @@ namespace SR_WORLD_NS {
 
         m_gameObjects.at(idInScene) = GameObject::Ptr();
         m_freeObjIndices.emplace_back(idInScene);
+
         OnChanged();
 
         return true;
     }
 
     GameObject::Ptr Scene::Instance(const SR_HTYPES_NS::RawMesh *rawMesh) {
-        SRAssert2(false, "Method isn't implemented!");
+        SRHalt("Method isn't implemented!");
         return GameObject::Ptr();
     }
 
     GameObject::Ptr Scene::InstanceFromFile(const std::string &path) {
         if (auto&& raw = SR_HTYPES_NS::RawMesh::Load(path)) {
-            GameObject::Ptr root = Instance(raw); //TODO:Сделать обратимость
+            GameObject::Ptr root = Instance(raw);
 
             if (raw->GetCountUses() == 0) {
                 raw->Destroy();
@@ -288,5 +285,9 @@ namespace SR_WORLD_NS {
         }
 
         return GameObject::Ptr();
+    }
+
+    std::string Scene::GetName() const {
+        return m_path.GetBaseName();
     }
 }

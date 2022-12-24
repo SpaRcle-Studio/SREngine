@@ -24,13 +24,7 @@ namespace SR_CORE_NS {
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
-        World()
-            : Scene("Unnamed")
-        { }
-
-        explicit World(const std::string& name)
-            : Scene(name)
-        { }
+        World() = default;
 
     private:
         ~World() override = default;

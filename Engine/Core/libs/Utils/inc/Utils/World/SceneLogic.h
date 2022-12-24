@@ -27,11 +27,16 @@ namespace SR_WORLD_NS {
         ~SceneLogic() override = default;
 
     public:
+        /// Метод всегда вернет валидную логику сцены
+        static SceneLogic* CreateByExt(const ScenePtr& scene, const std::string& ext);
+
+    public:
         virtual void Update(float_t dt) { }
         virtual void Destroy() { }
 
         virtual bool Reload() { return true; }
 
+        virtual bool Load(const Path& path) { return false; }
         virtual bool Save(const Path& path) { return false; }
 
     protected:

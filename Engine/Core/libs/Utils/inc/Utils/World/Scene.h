@@ -36,7 +36,7 @@ namespace SR_WORLD_NS {
         ~Scene() override;
 
     protected:
-        explicit Scene(const std::string& name);
+        Scene();
 
     public:
         static Scene::Ptr New(const Path& path);
@@ -52,11 +52,10 @@ namespace SR_WORLD_NS {
             return dynamic_cast<T*>(m_logic);
         }
 
-        void SetName(const std::string& name) { m_name = name; }
         void SetPath(const Path& path) { m_path = path; }
 
+        SR_NODISCARD std::string GetName() const;
         SR_NODISCARD Path GetPath() const { return m_path; }
-        SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
 
@@ -86,7 +85,6 @@ namespace SR_WORLD_NS {
 
         std::atomic<bool>  m_isHierarchyChanged = false;
 
-        StringAtom m_name;
         Path m_path;
 
         SR_HTYPES_NS::DataStorage m_dataStorage;

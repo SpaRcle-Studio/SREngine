@@ -13,6 +13,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Graphics/GUI/Editor/MessageBox.h>
 
@@ -631,13 +632,23 @@ bool GUISystem::BeginMenuBar() {
     //if (ImGui::BeginMainMenuBar()) {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("New scene")) {
-            auto&& scenePath = Helper::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
+            auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
 
-        if (ImGui::MenuItem("Load scene")) {
+        if (ImGui::MenuItem("New prefab")) {
+            auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("new prefab.prefab");
+
+            if (SR_PLATFORM_NS::IsExists(scenePath)) {
+                SR_PLATFORM_NS::Delete(scenePath);
+            }
+
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
+        }
+
+        if (ImGui::MenuItem("Load")) {
             auto&& scenesPath = Helper::ResourceManager::Instance().GetResPath();
-            if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
+            if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
                 auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
                 if (auto&& scene = SR_WORLD_NS::Scene::Load(folder)) {
                     Engine::Instance().SetScene(scene);
@@ -645,21 +656,18 @@ bool GUISystem::BeginMenuBar() {
             }
         }
 
-        if (ImGui::MenuItem("Save scene")) {
+        if (ImGui::MenuItem("Save")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 scene->Save();
                 scene.Unlock();
             }
         }
 
-        if (ImGui::MenuItem("Save scene at")) {
+        if (ImGui::MenuItem("Save at")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath();
-                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
-                    const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
                     const auto folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
-
-                    scene->SetName(sceneName);
 
                     if (scene->SaveAt(folder)) {
                         SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
@@ -688,6 +696,7 @@ bool GUISystem::BeginMenuBar() {
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
                     { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
                 {
+                    /// TODO:Сделать обратимость
                     scene->InstanceFromFile(path);
                 }
                 scene.Unlock();

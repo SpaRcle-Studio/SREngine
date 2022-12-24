@@ -4,9 +4,25 @@
 
 #include <Utils/World/SceneLogic.h>
 
+#include <Utils/World/SceneDefaultLogic.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
+#include <Utils/World/ScenePrefabLogic.h>
+
 namespace SR_WORLD_NS {
     SceneLogic::SceneLogic(const SceneLogic::ScenePtr &scene)
         : Super()
         , m_scene(scene)
     { }
+
+    SceneLogic* SceneLogic::CreateByExt(const SceneLogic::ScenePtr &scene, const std::string &ext) {
+        if (ext.empty()) {
+            return new SceneCubeChunkLogic(scene);
+        }
+
+        if (ext == SR_UTILS_NS::Prefab::EXTENSION) {
+            return new ScenePrefabLogic(scene);
+        }
+
+        return new SceneDefaultLogic(scene);
+    }
 }
