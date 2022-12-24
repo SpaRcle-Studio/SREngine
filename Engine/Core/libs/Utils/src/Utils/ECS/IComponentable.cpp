@@ -229,7 +229,13 @@ namespace SR_UTILS_NS {
             pComponent->OnDestroy();
         }
 
+        for (auto&& pComponent : m_loadedComponents) {
+            pComponent->OnDestroy();
+        }
+
+        m_loadedComponents.clear();
         m_components.clear();
+
         m_componentsCount = 0;
     }
 }

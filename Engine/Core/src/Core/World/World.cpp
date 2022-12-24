@@ -15,69 +15,6 @@
 #include <assimp/scene.h>
 
 namespace SR_CORE_NS {
-    SR_UTILS_NS::GameObject::Ptr World::Instance(SR_HTYPES_NS::Marshal &marshal)  {
-        SR_UTILS_NS::GameObject::Ptr gameObject;
-
-        auto&& entityId = marshal.Read<uint64_t>();
-
-        auto&& version = marshal.Read<uint16_t>();
-        if (version != SR_UTILS_NS::GameObject::VERSION) {
-            SRAssert2Once(false, "Version is different! Version: " + Helper::ToString(version));
-            return gameObject;
-        }
-
-        auto&& enabled = marshal.Read<bool>();
-        auto&& name = marshal.Read<std::string>();
-        auto&& hasTag = marshal.Read<bool>();
-        std::string tag;
-
-        if (hasTag) {
-            tag = marshal.Read<std::string>();
-        }
-
-        if (entityId == UINT64_MAX) {
-            gameObject = Scene::Instance(name);
-        }
-        else {
-            SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name, this]() -> SR_UTILS_NS::Entity * {
-                return (gameObject = Scene::Instance(name)).DynamicCast<SR_UTILS_NS::Entity *>();
-            });
-        }
-
-        if (!gameObject.Valid())
-            return gameObject;
-
-        /// ----------------------
-
-        gameObject->SetEnabled(enabled);
-
-        gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
-                marshal,
-                gameObject.Get()
-        ));
-
-        if (hasTag) {
-            gameObject->SetTag(tag);
-        }
-
-        /// ----------------------
-
-        auto&& components = LoadComponents(marshal);
-        for (auto&& pComponent : components) {
-            gameObject->LoadComponent(pComponent);
-        }
-
-        /// ----------------------
-
-        auto&& childrenCount = marshal.Read<uint32_t>();
-        for (uint32_t i = 0; i < childrenCount; ++i) {
-            if (auto&& child = Instance(marshal))
-                gameObject->AddChild(child);
-        }
-
-        return gameObject;
-    }
-
     SR_UTILS_NS::GameObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh *rawMesh) {
         GameObjectPtr root;
 
@@ -87,10 +24,10 @@ namespace SR_CORE_NS {
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
                     ptr->LoadComponent(dynamic_cast<SR_UTILS_NS::Component *>(mesh));
+                    continue;
                 }
-                else {
-                    SRHalt("failed to load mesh!");
-                }
+
+                SRHalt("failed to load mesh!");
             }
 
             for (uint32_t i = 0; i < node->mNumChildren; ++i) {
@@ -125,48 +62,5 @@ namespace SR_CORE_NS {
 
     World::RenderScenePtr World::GetRenderScene() const {
         return GetDataStorage().GetValue<RenderScenePtr>();
-    }
-
-    std::vector<SR_UTILS_NS::Component*> World::LoadComponents(SR_HTYPES_NS::Marshal &marshal) {
-        std::vector<SR_UTILS_NS::Component*> components;
-
-        auto&& componentManager = SR_UTILS_NS::ComponentManager::Instance();
-        componentManager.LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool {
-            context.SetValue(Engine::Instance().GetWindow());
-
-            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
-            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
-
-            auto&& componentCount = marshal.Read<uint32_t>();
-            components.reserve(componentCount);
-            SRAssert2(componentCount <= 2048, "While loading the component errors occured!");
-
-            for (uint32_t i = 0; i < componentCount; ++i) {
-                auto&& bytesCount = marshal.Read<uint64_t>();
-                auto&& position = marshal.GetPosition();
-
-                /// TODO: use entity id
-                auto&& compEntityId = marshal.Read<uint64_t>();
-
-                if (auto&& pComponent = componentManager.Load(marshal)) {
-                    components.emplace_back(pComponent);
-                }
-                else {
-                    SR_WARN("World::Instance() : failed to load \"" + SR_UTILS_NS::ComponentManager::Instance().GetLastComponentName() + "\" component!");
-                }
-
-                const uint64_t readBytes = marshal.GetPosition() - position;
-                const uint64_t lostBytes = bytesCount - readBytes;
-
-                if (lostBytes > 0) {
-                    SR_WARN("World::Instance() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
-                    marshal.SkipBytes(lostBytes);
-                }
-            }
-
-            return true;
-        });
-
-        return std::move(components);
     }
 }

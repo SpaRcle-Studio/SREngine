@@ -35,7 +35,9 @@ namespace SR_WORLD_NS {
 
         const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
 
-        GameObject::Ptr gm = *(new GameObject(GetThis(), id, name));
+        GameObject::Ptr gm = *(new GameObject(GetThis(), name));
+
+        gm->SetIdInScene(id);
 
         if (m_freeObjIndices.empty()) {
             m_gameObjects.emplace_back(gm);
@@ -48,6 +50,32 @@ namespace SR_WORLD_NS {
         m_isHierarchyChanged = true;
 
         return gm;
+    }
+
+    Scene::GameObjectPtr Scene::FindOrInstance(const std::string &name) {
+        if (auto&& pFound = Find(name)) {
+            return pFound;
+        }
+
+        return Instance(name);
+    }
+
+    Scene::GameObjectPtr Scene::Instance(SR_HTYPES_NS::Marshal &marshal) {
+        return GameObject::Load(marshal, *this, [this](const GameObject::Ptr& ptr) -> uint64_t {
+            const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
+
+            if (m_freeObjIndices.empty()) {
+                m_gameObjects.emplace_back(ptr);
+            }
+            else {
+                m_gameObjects[m_freeObjIndices.front()] = ptr;
+                m_freeObjIndices.erase(m_freeObjIndices.begin());
+            }
+
+            m_isHierarchyChanged = true;
+
+            return id;
+        });
     }
 
     Scene::Ptr Scene::New(const Path& path) {
@@ -90,7 +118,7 @@ namespace SR_WORLD_NS {
 
         auto&& componentsPath = scene->GetPath().Concat("data/components.bin");
         if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
-            auto&& components = scene->LoadComponents(*rootComponentsMarshal);
+            auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);
             delete rootComponentsMarshal;
             for (auto&& pComponent : components) {
                 scene->LoadComponent(pComponent);
@@ -188,7 +216,7 @@ namespace SR_WORLD_NS {
 
         auto&& pSceneRootMarshal = SaveComponents(nullptr, SAVABLE_FLAG_NONE);
         if (!pSceneRootMarshal->Save(m_path.Concat("data/components.bin"))) {
-
+            SR_ERROR("Scene::SaveAt() : failed to save scene components!");
         }
         SR_SAFE_DELETE_PTR(pSceneRootMarshal);
 
@@ -197,7 +225,7 @@ namespace SR_WORLD_NS {
             return false;
         }
 
-        return true;
+        return SR_XML_NS::Document::New().Save(path.Concat("main.scene"));
     }
 
     void Scene::Update(float_t dt) {
@@ -260,28 +288,5 @@ namespace SR_WORLD_NS {
         }
 
         return GameObject::Ptr();
-    }
-
-    bool Scene::MoveToRoot(const Scene::GameObjectPtr &gameObject) {
-        /// обнуляет указатель на родителя и поднимает флаг обновления m_rootObjects,
-        /// из-за чего gameObject обрабатывается как корневой
-
-        if (gameObject->m_parent){
-            SRHalt("GameObject::MoveToRoot() : GameObject has parent!");
-            return false;
-        }
-
-        gameObject->m_parent = nullptr;
-        OnChanged();
-
-        return true;
-    }
-
-    Scene::GameObjectPtr Scene::FindOrInstance(const std::string &name) {
-        if (auto&& pFound = Find(name)) {
-            return pFound;
-        }
-
-        return Instance(name);
     }
 }

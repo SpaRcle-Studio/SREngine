@@ -81,9 +81,9 @@ namespace SR_UTILS_NS {
         m_translation = translation;
         SetRotation(euler);
 
-        for (auto &&child : m_gameObject->m_children) {
-            child->m_transform->GlobalTranslate(deltaTranslation);
-            child->m_transform->RotateAroundParent(deltaRotation);
+        for (auto&& child : m_gameObject->GetChildrenRef()) {
+            child->GetTransform()->GlobalTranslate(deltaTranslation);
+            child->GetTransform()->RotateAroundParent(deltaRotation);
         }
     }
 

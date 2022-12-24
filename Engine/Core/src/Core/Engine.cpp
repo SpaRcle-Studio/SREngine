@@ -12,6 +12,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Types/RawMesh.h>
+#include <Utils/ECS/Prefab.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
@@ -692,6 +693,7 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
         resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
+        resourcesManager.RegisterType<SR_UTILS_NS::Prefab>();
 
         resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
@@ -708,6 +710,13 @@ namespace SR_CORE_NS {
     }
 
     void Engine::RegisterComponents() {
+        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
+            context.SetValue(Engine::Instance().GetWindow());
+
+            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
+            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
+        });
+
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::ProceduralMesh>([]() {
             return new SR_GTYPES_NS::ProceduralMesh();
         });

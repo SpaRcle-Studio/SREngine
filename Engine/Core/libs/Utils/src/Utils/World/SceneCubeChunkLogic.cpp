@@ -305,28 +305,11 @@ namespace SR_WORLD_NS {
         UpdateContainers();
         UpdateScope(0.f);
 
-        auto xml = SR_XML_NS::Document::New();
-        if (auto&& root = xml.AppendChild("Scene"); root.Valid()) {
-            root.AppendAttribute("Name", m_scene->GetName());
-            if (auto&& settings = root.AppendChild("Settings")) {
-                if (auto&& chunk = settings.AppendChild("Chunks")) {
-                    chunk.AppendChild("x_size").AppendAttribute("value", m_chunkSize.x);
-                    chunk.AppendChild("y_size").AppendAttribute("value", m_chunkSize.y);
-                    chunk.AppendChild("z_size").AppendAttribute("value", m_chunkSize.x);
-                }
-
-                if (auto&& region = settings.AppendChild("Region")) {
-                    region.AppendChild("width").AppendAttribute("value", m_regionWidth);
-                }
-            }
-        }
-
-
         for (auto&& [position, pRegion] : m_regions) {
             SaveRegion(pRegion);
         }
 
-        return xml.Save(path.Concat("main.scene"));
+        return true;
     }
 
     void SceneCubeChunkLogic::Destroy() {

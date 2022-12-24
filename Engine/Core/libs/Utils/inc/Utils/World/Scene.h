@@ -69,12 +69,10 @@ namespace SR_WORLD_NS {
         virtual GameObjectPtr FindOrInstance(const std::string& name);
         virtual GameObjectPtr Instance(const std::string& name);
         virtual GameObjectPtr Instance(const Types::RawMesh* rawMesh);
-        virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
-        virtual std::vector<Component*> LoadComponents(SR_HTYPES_NS::Marshal& marshal) = 0;
+        virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal);
 
     public:
         bool Remove(const GameObjectPtr& gameObject);
-        bool MoveToRoot(const GameObjectPtr& gameObject);
 
         void OnChanged();
 
@@ -83,6 +81,7 @@ namespace SR_WORLD_NS {
     private:
         SceneLogic* m_logic = nullptr;
 
+        bool m_isPrefab = false;
         bool m_isDestroy = false;
 
         std::atomic<bool>  m_isHierarchyChanged = false;

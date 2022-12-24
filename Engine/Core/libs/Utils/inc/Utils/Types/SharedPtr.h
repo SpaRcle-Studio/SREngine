@@ -108,8 +108,10 @@ namespace SR_HTYPES_NS {
             --(m_data->m_useCount);
         }
 
+        m_ptr = ptr.m_ptr;
+
         if ((m_data = ptr.m_data)) {
-            m_data->m_valid = bool(m_ptr = ptr.m_ptr);
+            m_data->m_valid = bool(m_ptr);
             ++(m_data->m_useCount);
         }
 
@@ -146,8 +148,10 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        m_ptr = ptr;
+
         if (m_data) {
-            m_data->m_valid = (bool)(m_ptr = ptr);
+            m_data->m_valid = bool(m_ptr);
         }
 
         return *this;

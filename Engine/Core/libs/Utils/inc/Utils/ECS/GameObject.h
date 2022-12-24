@@ -39,11 +39,6 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
         SR_ENTITY_SET_VERSION(1001);
-    private:
-        friend class World::Scene;
-        friend class Transform3D;
-        friend class Transform2D;
-        friend class Transform;
         friend class Component;
     public:
         using Name = std::string;
@@ -51,10 +46,13 @@ namespace SR_UTILS_NS {
         using Super = Ptr;
         using GameObjects = std::vector<GameObject::Ptr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<World::Scene>;
+        using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;
 
-    private:
-        GameObject(const ScenePtr& scene, uint64_t id, std::string name, std::string tag = "Untagged");
+    public:
+        GameObject(const ScenePtr& scene, std::string name, std::string tag = "Untagged");
         ~GameObject() override;
+
+        static GameObject::Ptr Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter);
 
     public:
         SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
@@ -77,6 +75,8 @@ namespace SR_UTILS_NS {
 
         SR_MATH_NS::FVector3 GetBarycenter();
         SR_MATH_NS::FVector3 GetHierarchyBarycenter();
+
+        void SetIdInScene(uint64_t id);
 
         void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
         void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;
@@ -103,10 +103,10 @@ namespace SR_UTILS_NS {
         void CheckActivity() noexcept override;
 
         void SetDirty(bool value) override;
+        void OnMatrixDirty();
 
     private:
         void OnAttached();
-        void OnMatrixDirty();
 
         bool UpdateEntityPath();
 

@@ -16,9 +16,8 @@
 #include <Utils/Common/Hashes.h>
 
  namespace SR_UTILS_NS {
-    GameObject::GameObject(const ScenePtr& scene, uint64_t id, std::string name, std::string tag)
+    GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
         : Super(this)
-        , m_idInScene(id)
     {
         m_scene = scene;
 
@@ -40,6 +39,7 @@
             return;
         }
 
+        /// сцены может и не быть, к примеру, если это префаб
         if (m_scene.RecursiveLockIfValid()) {
             const bool byParent = by & GAMEOBJECT_DESTROY_BY_GAMEOBJECT;
 
@@ -77,17 +77,17 @@
 
     bool GameObject::AddChild(const GameObject::Ptr& child) {
         if (child.Get() == this) {
-            SRAssert2(false, "It is impossible to make the parent a child!");
+            SRHalt("It is impossible to make the parent a child!");
             return false;
         }
 
         if (child->GetParent()) {
-            SRAssert2(false, "Child has parent!");
+            SRHalt("Child has parent!");
             return false;
         }
 
         if (Contains(child)) {
-            SRAssert2(false, "This child already exists in this game object!");
+            SRHalt("This child already exists in this game object!");
             return false;
         }
 
@@ -118,6 +118,10 @@
         m_scene->OnChanged();
     }
 
+     void GameObject::SetIdInScene(uint64_t id) {
+         m_idInScene = id;
+     }
+
     bool GameObject::Contains(const GameObject::Ptr& gameObject) {
         for (auto&& children : m_children) {
             if (children.Get() == gameObject.Get()) {
@@ -130,14 +134,15 @@
 
     bool GameObject::SetParent(const GameObject::Ptr &parent) {
         if (parent == m_parent) {
+            SRHalt("GameObject::SetParent() : parent is already set!");
             return false;
-            SR_WARN("GameObject::SetParent() : parent is already set!");
         }
 
         GameObject::Ptr oldParent = m_parent;
         m_parent = parent;
 
         if (!UpdateEntityPath()) {
+            SRHalt("GameObject::SetParent() : failed to update entity path!");
             m_parent = oldParent;
             return false;
         }
@@ -355,7 +360,7 @@
             current = current->m_parent;
 
             if (current && current->GetEntityId() == GetEntityId()) {
-                SRAssert2(false, "Recursive entity path!");
+                SRHalt("Recursive entity path!");
                 return false;
             }
         } while (current.Valid());
@@ -402,7 +407,12 @@
             return destination->AddChild(*this);
         }
         else {
-            return m_scene->MoveToRoot(*this);
+            if (GetParent()){
+                SRHalt("GameObject::MoveToTree() : GameObject has parent!");
+                return false;
+            }
+
+            return true;
         }
     }
 
@@ -436,4 +446,73 @@
             }
         }
     }
-}
+
+     GameObject::Ptr GameObject::Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter) {
+         SR_UTILS_NS::GameObject::Ptr gameObject;
+
+         /// для экономии памяти стека при рекурсивном создании объектов, кладем все переменные в эту область видимости.
+         {
+             auto&& entityId = marshal.Read<uint64_t>();
+
+             auto&& version = marshal.Read<uint16_t>();
+             if (version != SR_UTILS_NS::GameObject::VERSION) {
+                 SRAssert2Once(false, "Version is different! Version: " + Helper::ToString(version));
+                 return gameObject;
+             }
+
+             auto&& enabled = marshal.Read<bool>();
+             auto&& name = marshal.Read<std::string>();
+             auto&& hasTag = marshal.Read<bool>();
+
+             auto&& tag = hasTag ? marshal.Read<std::string>() : std::string();
+
+             if (entityId == UINT64_MAX) {
+                 gameObject = *(new GameObject(scene, name));
+             }
+             else {
+                 SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, &idGetter, &scene, name]() -> SR_UTILS_NS::Entity* {
+                     gameObject = *(new GameObject(scene, name));
+                     return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
+                 });
+             }
+
+             if (!gameObject.Valid()) {
+                 SRHalt("GameObject::Load() : failed to create new gameobject!");
+                 return SR_UTILS_NS::GameObject::Ptr();
+             }
+
+             if (idGetter) {
+                 gameObject->SetIdInScene(idGetter(gameObject));
+             }
+
+             /// ----------------------
+
+             gameObject->SetEnabled(enabled);
+
+             gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
+                     marshal,
+                     gameObject.Get()
+             ));
+
+             if (hasTag) {
+                 gameObject->SetTag(tag);
+             }
+
+             /// ----------------------
+
+             auto&& components = ComponentManager::Instance().LoadComponents(marshal);
+             for (auto&& pComponent : components) {
+                 gameObject->LoadComponent(pComponent);
+             }
+         }
+
+         auto&& childrenCount = marshal.Read<uint32_t>();
+         for (uint32_t i = 0; i < childrenCount; ++i) {
+             if (auto&& child = Load(marshal, scene, idGetter)) {
+                 gameObject->AddChild(child);
+             }
+         }
+
+         return gameObject;
+     }
+ }

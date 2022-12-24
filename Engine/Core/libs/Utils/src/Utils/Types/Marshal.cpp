@@ -66,8 +66,9 @@ namespace SR_HTYPES_NS {
         Marshal marshal;
 
         std::ifstream file(path.ToString(), std::ios::binary);
-        if (!file.is_open())
+        if (!file.is_open()) {
             return marshal;
+        }
 
         marshal.m_stream << file.rdbuf();
         marshal.m_size = file.tellg();
