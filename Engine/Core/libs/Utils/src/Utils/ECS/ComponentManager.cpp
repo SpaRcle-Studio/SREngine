@@ -94,7 +94,7 @@ namespace SR_UTILS_NS {
 
             auto&& componentCount = marshal.Read<uint32_t>();
             components.reserve(componentCount);
-            SRAssert2(componentCount <= 2048, "While loading the component errors occured!");
+            SRAssert2(componentCount <= 2048, "While loading the component errors occurred!");
 
             for (uint32_t i = 0; i < componentCount; ++i) {
                 auto&& bytesCount = marshal.Read<uint64_t>();

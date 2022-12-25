@@ -47,11 +47,15 @@ namespace SR_CORE_NS::GUI {
     public:
         void Enable(bool value);
 
-        template<typename T> void AddWindow(T* widget) {
+        template<typename T> SR_DEPRECATED void AddWindow(T* widget) {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
-        template<typename T> T* GetWindow() {
+        template<typename T> void AddWidget(T* widget) {
+            m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
+        }
+
+        template<typename T> SR_DEPRECATED T* GetWindow() {
             if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
                     return pWidget;
@@ -59,7 +63,15 @@ namespace SR_CORE_NS::GUI {
             return nullptr;
         }
 
-        void CloseAllWindows();
+        template<typename T> T* GetWidget() {
+            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
+                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
+                    return pWidget;
+            }
+            return nullptr;
+        }
+
+        void CloseAllWidgets();
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }

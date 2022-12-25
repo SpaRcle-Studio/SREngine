@@ -66,7 +66,6 @@ namespace SR_GTYPES_NS {
 
         std::atomic<bool>       m_hasErrors      = false;
         std::atomic<bool>       m_dirtyShader    = false;
-        std::atomic<bool>       m_isCalculated   = false;
 
     };
 }

@@ -183,13 +183,13 @@ namespace SR_GTYPES_NS {
             SR_LOG("Texture::FreeVideoMemory() : free \"" + std::string(GetResourceId()) + "\" texture's video memory...");
         }
 
-        m_isCalculated = false;
-
         SRAssert(m_pipeline);
 
         if (m_pipeline && !m_pipeline->FreeTexture(&m_id)) {
             SR_ERROR("Texture::FreeVideoMemory() : failed to free texture!");
         }
+
+        IGraphicsResource::FreeVideoMemory();
     }
 
     void Texture::SetConfig(const Memory::TextureConfig &config) {

@@ -15,11 +15,12 @@ namespace SR_WORLD_NS {
         ~ScenePrefabLogic() override = default;
 
     public:
+        bool Save(const Path& path) override;
+        bool Load(const Path& path) override;
+
         bool Reload() override;
         void Destroy() override;
         void Update(float_t dt) override;
-
-        bool Save(const Path& path) override;
 
     };
 }

@@ -41,6 +41,7 @@ namespace SR_WORLD_NS {
 
     protected:
         ScenePtr m_scene;
+        mutable std::recursive_mutex m_mutex;
 
     };
 }

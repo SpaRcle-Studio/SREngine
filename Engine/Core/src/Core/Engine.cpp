@@ -5,6 +5,7 @@
 #include <Core/Engine.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/UI/Button.h>
+#include <Core/World/SceneInitializer.h>
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
@@ -79,7 +80,7 @@ namespace SR_CORE_NS {
         m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
 
         if (!m_scene.Valid()) {
-            auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
+            auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
 
             if (SR_PLATFORM_NS::IsExists(scenePath)) {
                 if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
@@ -90,6 +91,8 @@ namespace SR_CORE_NS {
                 SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString())
             }
         }
+
+        FlushScene();
 
         m_updateFrequency = (1.f / (60.f * m_speed)) * CLOCKS_PER_SEC;
         m_accumulator = m_updateFrequency;
@@ -166,6 +169,8 @@ namespace SR_CORE_NS {
     void Engine::SynchronizeFreeResources() {
         SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources...");
 
+        SR_LOCK_GUARD
+
         std::atomic<bool> syncComplete(false);
 
         /** Ждем, пока все графические ресурсы не освободятся */
@@ -189,6 +194,8 @@ namespace SR_CORE_NS {
 
                 Helper::Types::Thread::Sleep(50);
             }
+
+            SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : close synchronization thread...");
 
             syncComplete = true;
         });
@@ -372,9 +379,11 @@ namespace SR_CORE_NS {
         }
         SR_SAFE_DELETE_PTR(m_input);
 
+        FlushScene();
+
         if (m_scene.Valid()) {
-            m_scene->Save();
             SetScene(ScenePtr());
+            FlushScene();
         }
 
         SR_INFO("Engine::Close() : destroying the editor...");
@@ -408,6 +417,8 @@ namespace SR_CORE_NS {
         }
 
         SR_HTYPES_NS::Time::Instance().Update();
+
+        FlushScene();
 
         if (m_scene.LockIfValid()) {
             const auto now = SR_HTYPES_NS::Time::Instance().Now();
@@ -473,109 +484,8 @@ namespace SR_CORE_NS {
     }
 
     bool Engine::SetScene(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> &scene)  {
-        SR_LOCK_GUARD
-
-        /// создаем бекап указателя на сцену,
-        /// чтобы проконтролировать, что она корректно уничтожится и не произойдет блокировки
-        bool locked = false;
-        ScenePtr oldScene = m_scene;
-        RenderScenePtr oldRenderScene = m_renderScene;
-
-        if (oldScene.RecursiveLockIfValid())
-        {
-            m_renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
-                ptr->Remove(m_editor);
-                ptr->Remove(&Graphics::GUI::GlobalWidgetManager::Instance());
-            });
-
-            SR_SAFE_DELETE_PTR(m_sceneBuilder);
-
-            oldScene.AutoFree([](SR_WORLD_NS::Scene* pScene) {
-                pScene->Destroy();
-                delete pScene;
-            });
-
-            /** TODO: тут где-то иногда происходит ассерт
-            File: Z:\SREngine\Engine\Core\libs\Utils\inc\Utils/Types/SafePointer.h
-            Line: 127
-            Stack trace:
-            GetStacktraceImpl  (171)
-            Framework::Helper::GetStacktrace  (178)
-            Framework::Helper::Debug::Print  (62)
-            Framework::Helper::Debug::Assert  (78)
-            Framework::Helper::Types::SafePtr<Framework::Physics::PhysicsScene>::~SafePtr<Framework::Physics::PhysicsScene>  (127)
-            Framework::Physics::PhysicsScene::~PhysicsScene  (24)
-            Framework::Physics::PhysicsScene::`scalar deleting destructor'
-            `Framework::Engine::SetScene'::`5'::<lambda_3>::operator()  (280)
-            std::invoke<`Framework::Engine::SetScene'::`5'::<lambda_3> &,Framework::Physics::PhysicsScene *>  (1610)
-            std::_Invoker_ret<void,1>::_Call<`Framework::Engine::SetScene'::`5'::<lambda_3> &,Framework::Physics::PhysicsScene *>  (
-            745)
-            std::_Func_impl_no_alloc<`Framework::Engine::SetScene'::`5'::<lambda_3>,void,Framework::Physics::PhysicsScene *>::_Do_ca
-            ll  (921)
-             */
-            m_physicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pPhysicsScene) {
-                delete pPhysicsScene;
-            });
-
-            locked = true;
-        }
-
-        if (scene == oldScene && scene.Valid()) {
-            SR_WARN("Engine::SetScene() : scene ptr equals current scene ptr!");
-            if (locked) {
-                oldScene.Unlock();
-            }
-            return false;
-        }
-
-        if ((m_scene = scene).Valid()) {
-            m_sceneBuilder = new SR_WORLD_NS::SceneBuilder(m_scene.Get());
-
-            if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
-               if (auto &&pContext = m_renderContext; pContext.LockIfValid()) {
-                   m_renderScene.ReplaceAndCopyLock(pContext->CreateScene(m_scene));
-
-                   m_renderScene->SetTechnique("Editor/Configs/OverlayRenderTechnique.xml");
-
-                   m_renderScene->Register(m_editor);
-                   m_renderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
-
-                   m_renderScene->SetOverlayEnabled(m_editor->Enabled());
-
-                   pContext.Unlock();
-                   m_renderScene.Unlock();
-                   oldRenderScene.RemoveAllLocks();
-               }
-               else {
-                   SR_ERROR("Engine::SetScene() : failed to get window context!");
-                   return false;
-               }
-            }
-
-            if (SR_UTILS_NS::Features::Instance().Enabled("Physics", true)) {
-                m_physicsScene = new SR_PHYSICS_NS::PhysicsScene(m_scene);
-
-                if (!m_physicsScene->Init()) {
-                    SR_ERROR("Engine::SetScene() : failed to initialize physics scene!");
-                    return false;
-                }
-            }
-        }
-
-        if (m_editor) {
-            m_editor->GetWindow<Hierarchy>()->SetScene(m_scene);
-            m_editor->GetWindow<Inspector>()->SetScene(m_scene);
-            m_editor->GetWindow<WorldEdit>()->SetScene(m_scene);
-
-            if (auto&& pViewer = m_editor->GetWindow<SceneViewer>()) {
-                pViewer->SetScene(m_scene);
-            }
-        }
-
-        if (locked) {
-            oldScene.Unlock();
-        }
-
+        SRAssert(!scene.IsLocked());
+        m_sceneQueue.Push(scene);
         return true;
     }
 
@@ -713,8 +623,8 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
             context.SetValue(Engine::Instance().GetWindow());
 
-            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
-            context.SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
+            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
+            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
         });
 
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::ProceduralMesh>([]() {
@@ -760,5 +670,57 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_CORE_UI_NS::Button>([]() {
             return new SR_CORE_UI_NS::Button();
         });
+    }
+
+    void Engine::FlushScene() {
+        /// не блочим, иначе deadlock
+        /// SR_LOCK_GUARD
+
+        if (m_sceneQueue.Empty()) {
+            return;
+        }
+
+        m_sceneQueue.Lock();
+
+    repeat:
+        if (m_sceneQueue.Empty()) {
+            m_sceneQueue.Unlock();
+            return;
+        }
+
+        if (m_scene) {
+            m_scene->Save();
+            if (!DeInitializeScene(m_scene, this)) {
+                SR_ERROR("Engine::FlushScene() : failed to de initialize scene!");
+            }
+        }
+
+        auto&& newScene = m_sceneQueue.Pop(ScenePtr());
+
+        if (newScene && !SR_CORE_NS::InitializeScene(newScene, this)) {
+            SR_ERROR("Engine::FlushScene() : failed to initialize scene!");
+        }
+
+        m_scene = newScene;
+
+        if (m_editor) {
+            m_editor->GetWidget<Hierarchy>()->SetScene(m_scene);
+            m_editor->GetWidget<Inspector>()->SetScene(m_scene);
+            m_editor->GetWidget<WorldEdit>()->SetScene(m_scene);
+
+            if (auto&& pViewer = m_editor->GetWidget<SceneViewer>()) {
+                pViewer->SetScene(m_scene);
+            }
+        }
+
+        m_renderScene = m_scene ? m_scene->GetDataStorage().GetValue<RenderScenePtr>() : RenderScenePtr();
+        m_physicsScene = m_scene ? m_scene->GetDataStorage().GetValue<PhysicsScenePtr>() : PhysicsScenePtr();
+        m_sceneBuilder = m_scene ? m_scene->GetDataStorage().GetPointer<SR_WORLD_NS::SceneBuilder>() : nullptr;
+
+        if (!m_sceneQueue.Empty()) {
+            goto repeat;
+        }
+
+        m_sceneQueue.Unlock();
     }
 }

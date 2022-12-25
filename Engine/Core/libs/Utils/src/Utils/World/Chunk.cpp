@@ -48,7 +48,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::Access(float_t dt) {
-        m_lifetime = dt + 2.f;
+        m_lifetime = dt + 10.f;
+        SRAssert(m_loadState != LoadState::Unload);
         return true;
     }
 

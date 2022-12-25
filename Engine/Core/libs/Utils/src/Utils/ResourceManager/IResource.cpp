@@ -77,6 +77,14 @@ namespace SR_UTILS_NS {
         }
     }
 
+    void IResource::AddUsePoint() {
+        if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
+            SRHalt("IResource::AddUsePoint() : potential multi threading error!");
+        }
+
+        ++m_countUses;
+    }
+
     IResource *IResource::Copy(IResource *destination) const {
         destination->m_autoRemove = m_autoRemove;
         destination->m_lifetime = m_lifetime;

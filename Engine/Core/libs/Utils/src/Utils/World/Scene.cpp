@@ -82,7 +82,7 @@ namespace SR_WORLD_NS {
         }
 
         if (SR_PLATFORM_NS::IsExists(path)) {
-            SR_ERROR("Scene::New() : scene already exists!");
+            SRHalt("Scene::New() : scene already exists!\n\tPath: " + path.ToString());
             return Scene::Ptr();
         }
 
@@ -221,7 +221,7 @@ namespace SR_WORLD_NS {
             return false;
         }
 
-        return SR_XML_NS::Document::New().Save(path.Concat("main.scene"));
+        return true;
     }
 
     void Scene::Update(float_t dt) {

@@ -7,6 +7,7 @@
 
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
+#include <Graphics/Types/Geometry/DebugLine.h>
 
 namespace SR_GRAPH_NS {
     DebugRenderer::DebugRenderer(RenderScene* pRenderScene)
@@ -151,6 +152,8 @@ namespace SR_GRAPH_NS {
     }
 
     uint64_t DebugRenderer::AddTimedObject(float_t seconds, SR_GTYPES_NS::Mesh *pMesh) {
+        SR_LOCK_GUARD
+
         auto&& duration = std::chrono::duration_cast<std::chrono::steady_clock::duration>(std::chrono::duration<float_t>(seconds));
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
@@ -175,6 +178,8 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugRenderer::UpdateTimedObject(uint64_t id, float_t seconds) {
+        SR_LOCK_GUARD
+
         auto&& duration = std::chrono::duration_cast<std::chrono::steady_clock::duration>(std::chrono::duration<float_t>(seconds));
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
@@ -194,6 +199,11 @@ namespace SR_GRAPH_NS {
             if (!timed.pMesh) {
                 continue;
             }
+
+#ifdef SR_DEBUG
+            SR_MAYBE_UNUSED const auto&& countUses = timed.pMesh->GetCountUses();
+            SRAssert(countUses > 0 && !timed.pMesh->IsDestroyed());
+#endif
 
             if (!timed.registered) {
                 timed.pMesh->FreeVideoMemory();

@@ -76,7 +76,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Shader* GetShader() const;
         SR_NODISCARD virtual std::string GetGeometryName() const { return std::string(); }
         SR_NODISCARD Material* GetMaterial() const { return m_material; }
-        SR_NODISCARD bool IsCalculated() const { return m_isCalculated; }
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
@@ -106,7 +105,6 @@ namespace SR_GTYPES_NS {
 
         Material*                    m_material          = nullptr;
         std::atomic<bool>            m_hasErrors         = false;
-        std::atomic<bool>            m_isCalculated      = false;
 
         std::atomic<bool>            m_dirtyMaterial     = false;
 

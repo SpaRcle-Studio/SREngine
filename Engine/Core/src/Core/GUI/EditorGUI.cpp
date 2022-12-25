@@ -206,7 +206,7 @@ namespace SR_CORE_NS::GUI {
         WidgetManager::OnKeyUp(data);
     }
 
-    void EditorGUI::CloseAllWindows() {
+    void EditorGUI::CloseAllWidgets() {
         for (auto& [id, widget] : m_widgets) {
             widget->Close();
         }

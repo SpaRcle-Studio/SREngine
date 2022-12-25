@@ -52,7 +52,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual IResource* Copy(IResource* destination) const;
 
         /** Add one point to count uses current resource */
-        void AddUsePoint() { ++m_countUses; }
+        void AddUsePoint();
 
         /** Remove one point from count uses current resource */
         virtual RemoveUPResult RemoveUsePoint() {

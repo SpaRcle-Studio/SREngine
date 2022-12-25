@@ -22,6 +22,7 @@ namespace SR_GTYPES_NS {
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 
+        void OnLoaded() override;
         void OnAttached() override;
         void OnDestroy() override;
         void OnMatrixDirty() override;

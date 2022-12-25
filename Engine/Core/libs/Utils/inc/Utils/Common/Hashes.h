@@ -84,15 +84,21 @@ namespace SR_UTILS_NS {
         }
     }
 
+    template<typename T> uint64_t CalculateHash(const T& value) {
+        static std::hash<T> h;
+        return h(value);
+    }
+
     template<typename T> uint64_t HashCombine(const T& value, uint64_t hash = 0) {
-        std::hash<T> h;
-        return hash ^ h(value) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+        return hash ^ CalculateHash<T>(value) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     }
 
     SR_MAYBE_UNUSED static uint64_t CombineTwoHashes(uint64_t hash1, uint64_t hash2) {
         return hash2 ^ hash1 + 0x9e3779b9 + (hash2 << 6) + (hash2 >> 2);
     }
 }
+
+#define SR_HASH(x) (SR_UTILS_NS::CalculateHash(x))
 
 #define SR_COMPILE_TIME_CRC32_STR(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::MM<sizeof(x)-1>::crc32(x)))
 #define SR_RUNTIME_TIME_CRC32_STR(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::crc32(x)))

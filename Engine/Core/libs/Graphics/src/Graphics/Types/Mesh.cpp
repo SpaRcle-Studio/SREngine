@@ -22,6 +22,7 @@ namespace SR_GRAPH_NS::Types {
 
     Mesh::~Mesh() {
         SetMaterial(nullptr);
+        SRAssert(m_virtualUBO == SR_ID_INVALID);
     }
 
     bool Mesh::Destroy() {
@@ -171,13 +172,13 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::FreeVideoMemory() {
-        if (m_pipeline->GetType() == PipelineType::Vulkan) {
+        if (m_pipeline && m_pipeline->GetType() == PipelineType::Vulkan) {
             if (m_virtualUBO != SR_ID_INVALID && !m_uboManager.FreeUBO(&m_virtualUBO)) {
                 SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
             }
         }
 
-        m_isCalculated = false;
+        IGraphicsResource::FreeVideoMemory();
     }
 
     bool Mesh::Calculate() {

@@ -148,6 +148,7 @@
         }
 
         m_scene->OnChanged();
+        m_transform->UpdateTree();
 
         return true;
     }
@@ -514,5 +515,9 @@
          }
 
          return gameObject;
+     }
+
+     std::string GameObject::GetEntityInfo() const {
+         return "GameObject: " + GetName();
      }
  }

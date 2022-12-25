@@ -58,6 +58,7 @@ namespace SR_GRAPH_NS {
 
         void SetDirtyCameras();
 
+        void SetTechnique(RenderTechnique* pTechnique);
         void SetTechnique(const SR_UTILS_NS::Path& path);
 
         void Register(CameraPtr pCamera);

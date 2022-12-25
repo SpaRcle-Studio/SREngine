@@ -123,6 +123,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::SetObserver(const GameObject::Ptr& target) {
+        SR_LOCK_GUARD
+
         if (target != m_observer->m_target) {
             m_observer->SetTarget(target);
         }
@@ -140,6 +142,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::SetWorldOffset(const Offset &offset) {
+        SR_LOCK_GUARD
+
         const auto prevOffset = m_observer->m_offset;
         const auto region = (offset.m_chunk / static_cast<int32_t>(m_regionWidth));
 
@@ -164,6 +168,14 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::UpdateScope(float_t dt) {
+        SR_LOCK_GUARD
+
+        if (m_observer->m_region.HasZero()) {
+            m_observer->MoveRegion(SR_MATH_NS::IVector3(-1, -1, -1));
+        }
+
+        SRAssert(!m_observer->m_region.HasZero());
+
         const auto scope = m_observer->m_scope;
 
         const auto& update = [&](const Math::IVector3& point) -> void {
@@ -211,6 +223,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::CheckShift(const SR_MATH_NS::IVector3 &chunk) {
+        SR_LOCK_GUARD
+
         const auto shift = m_observer->m_shiftDistance;
         Math::IVector3 offset = m_observer->m_offset.m_chunk + (m_observer->m_offset.m_region * m_regionWidth);
 
@@ -243,6 +257,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::UpdateContainers() {
+        SR_LOCK_GUARD
+
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
 
         const uint64_t reserved = m_tensor.size();
@@ -277,6 +293,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::SaveRegion(Region* pRegion) const {
+        SR_LOCK_GUARD
+
         auto&& regionsPath = GetRegionsPath();
 
         regionsPath.Make(Path::Type::Folder);
@@ -302,6 +320,8 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneCubeChunkLogic::Save(const Path &path) {
+        SR_LOCK_GUARD
+
         UpdateContainers();
         UpdateScope(0.f);
 
@@ -315,11 +335,20 @@ namespace SR_WORLD_NS {
         }
         SR_SAFE_DELETE_PTR(pSceneRootMarshal);
 
+        auto&& sceneMainXmlPath = path.Concat("main.scene");
+        if (!SR_XML_NS::Document::New().Save(sceneMainXmlPath)) {
+            SR_ERROR("SceneCubeChunkLogic::Save() : failed to save xml!\n\tPath: " + sceneMainXmlPath.ToString());
+            return false;
+        }
+
         return true;
     }
 
     bool SceneCubeChunkLogic::Load(const Path &path) {
+        SR_LOCK_GUARD
+
         auto&& componentsPath = m_scene->GetPath().Concat("data/components.bin");
+
         if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
             auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);
             delete rootComponentsMarshal;
@@ -328,7 +357,7 @@ namespace SR_WORLD_NS {
             }
         }
         else {
-            SR_WARN("SceneCubeChunkLogic::Load() : file not found!\n\tPath: " + componentsPath.ToString());
+            SR_ERROR("SceneCubeChunkLogic::Load() : file not found!\n\tPath: " + componentsPath.ToString());
             return false;
         }
 
@@ -336,6 +365,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::Destroy() {
+        SR_LOCK_GUARD
+
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("SceneCubeChunkLogic::Destroy() : unload " + std::to_string(m_regions.size()) + " regions...");
         }
@@ -347,6 +378,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::Update(float_t dt) {
+        SR_LOCK_GUARD
+
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
         const auto regSize = Math::IVector3(m_regionWidth);
         const auto regSize2 = Math::IVector3(m_regionWidth - 1);
@@ -368,6 +401,7 @@ namespace SR_WORLD_NS {
                 auto&& pChunk = m_regions.at(lastRegion)->GetChunk(m_observer->m_chunk);
 
                 SRAssert(pChunk == m_currentChunk);
+                SRAssert(pChunk);
 
                 if (pChunk) {
                     pChunk->OnExit();

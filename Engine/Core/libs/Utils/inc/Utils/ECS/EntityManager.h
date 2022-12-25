@@ -97,6 +97,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD EntityBranch GetEntityTree() const { return EntityBranch(m_entityId, GetEntityBranches()); }
 
+        SR_NODISCARD virtual std::string GetEntityInfo() const { return "None"; }
+
     protected:
         void SetEntityPath(const EntityPath& path);
 

@@ -34,6 +34,7 @@ namespace SR_GTYPES_NS {
 
         void UseSamplers() override;
 
+        void OnLoaded() override;
         void OnAttached() override;
         void OnDestroy() override;
         void OnMatrixDirty() override;

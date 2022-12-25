@@ -19,6 +19,7 @@
 #include <Core/GUI/EditorGUI.h>
 #include <Core/EvoScriptAPI.h>
 #include <Core/EngineCommands.h>
+#include <Utils/Types/SafeQueue.h>
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
@@ -67,6 +68,7 @@ namespace SR_CORE_NS {
         void SetSpeed(float_t speed);
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
+        SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD SR_INLINE WindowPtr GetWindow() const { return m_window; }
         SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
@@ -96,6 +98,8 @@ namespace SR_CORE_NS {
         bool RegisterLibraries();
         void WorldThread();
 
+        void FlushScene();
+
     private:
         std::atomic<bool> m_isCreate  = false;
         std::atomic<bool> m_isInit = false;
@@ -110,24 +114,25 @@ namespace SR_CORE_NS {
         TimePoint m_timeStart;
         SR_HTYPES_NS::Timer m_worldTimer;
 
-        SR_HTYPES_NS::SafeGateArray<SR_GRAPH_NS::GUI::WidgetManager*> m_widgetManagers;
-
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
 
         SR_HTYPES_NS::Thread::Ptr m_worldThread = nullptr;
 
         ScenePtr m_scene = { };
+        SR_HTYPES_NS::SafeQueue<ScenePtr> m_sceneQueue;
+
+        RenderScenePtr m_renderScene;
+        PhysicsScenePtr m_physicsScene;
         SR_WORLD_NS::SceneBuilder* m_sceneBuilder = nullptr;
 
         Core::GUI::EditorGUI* m_editor = nullptr;
 
         RenderContextPtr m_renderContext = { };
-        RenderScenePtr m_renderScene = { };
+
         WindowPtr m_window = { };
         PipelinePtr m_pipeline = nullptr;
 
-        PhysicsScenePtr m_physicsScene = { };
         CameraPtr m_mainCamera = nullptr;
 
     };

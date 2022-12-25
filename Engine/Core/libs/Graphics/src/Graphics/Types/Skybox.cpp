@@ -220,7 +220,7 @@ namespace SR_GTYPES_NS {
 
         SetShader(nullptr);
 
-        m_isCalculated = false;
+        IGraphicsResource::FreeVideoMemory();
     }
 
     void Skybox::Draw() {

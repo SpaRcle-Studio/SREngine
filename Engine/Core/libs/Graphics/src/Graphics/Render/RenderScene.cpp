@@ -111,13 +111,13 @@ namespace SR_GRAPH_NS {
         GetPipeline()->DrawFrame();
     }
 
-    void RenderScene::SetTechnique(const SR_UTILS_NS::Path &path) {
+    void RenderScene::SetTechnique(RenderTechnique *pTechnique) {
         if (m_technique) {
             m_technique->RemoveUsePoint();
             m_technique = nullptr;
         }
 
-        if ((m_technique = RenderTechnique::Load(path))) {
+        if ((m_technique = pTechnique)) {
             m_technique->AddUsePoint();
             m_technique->SetRenderScene(GetThis());
         }
@@ -126,6 +126,10 @@ namespace SR_GRAPH_NS {
         }
 
         SetDirty();
+    }
+
+    void RenderScene::SetTechnique(const SR_UTILS_NS::Path &path) {
+        SetTechnique(RenderTechnique::Load(path));
     }
 
     const RenderScene::WidgetManagers &RenderScene::GetWidgetManagers() const {

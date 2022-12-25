@@ -5,9 +5,11 @@
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
 namespace SR_GTYPES_NS {
-    void MeshComponent::OnAttached() {
+    void MeshComponent::OnLoaded() {
         AddUsePoint();
+    }
 
+    void MeshComponent::OnAttached() {
         GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->Register(this);
         });
@@ -23,7 +25,9 @@ namespace SR_GTYPES_NS {
         /// после вызова данная сущность может быть уничтожена
         RemoveUsePoint();
 
-        renderScene->SetDirty();
+        if (renderScene) {
+            renderScene->SetDirty();
+        }
     }
 
     void MeshComponent::OnEnable() {

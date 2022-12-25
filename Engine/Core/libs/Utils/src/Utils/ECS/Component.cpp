@@ -117,5 +117,9 @@ namespace SR_UTILS_NS {
 
         return nullptr;
     }
+
+    std::string Component::GetEntityInfo() const {
+        return "Component: " + GetComponentName();
+    }
 }
 

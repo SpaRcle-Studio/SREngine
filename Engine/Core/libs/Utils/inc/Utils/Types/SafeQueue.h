@@ -18,6 +18,9 @@ namespace SR_HTYPES_NS {
         void Push(const T& value) noexcept;
         SR_NODISCARD T Pop(const T& def) noexcept;
 
+        void Lock() const;
+        void Unlock() const;
+
     private:
         std::queue<T> m_data;
         mutable Mutex m_mutex;
@@ -50,6 +53,14 @@ namespace SR_HTYPES_NS {
         T data = m_data.front();
         m_data.pop();
         return data;
+    }
+
+    template<typename T> void SafeQueue<T>::Lock() const {
+        m_mutex.lock();
+    }
+
+    template<typename T> void SafeQueue<T>::Unlock() const {
+        m_mutex.unlock();
     }
 }
 

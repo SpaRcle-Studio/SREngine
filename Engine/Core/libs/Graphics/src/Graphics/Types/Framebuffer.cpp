@@ -68,7 +68,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if ((!m_isInit || m_dirty) && !Init()) {
+        if ((!IsCalculated() || m_dirty) && !Init()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
             return false;
         }
@@ -85,7 +85,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        m_isInit = true;
+        m_isCalculated = true;
 
         return true;
     }
@@ -107,6 +107,8 @@ namespace SR_GTYPES_NS {
 
             SRVerifyFalse(!m_pipeline->FreeTexture(&texture));
         }
+
+        IGraphicsResource::FreeVideoMemory();
     }
 
     bool Framebuffer::OnResize() {
@@ -180,7 +182,7 @@ namespace SR_GTYPES_NS {
             return SR_ID_INVALID;
         }
 
-        if ((!m_isInit || m_dirty) && !Init()) {
+        if ((!IsCalculated() || m_dirty) && !Init()) {
             SR_ERROR("Framebuffer::GetId() : failed to initialize framebuffer!");
         }
 

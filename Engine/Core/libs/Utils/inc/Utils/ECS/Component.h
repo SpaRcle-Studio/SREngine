@@ -45,6 +45,8 @@ namespace SR_UTILS_NS {
     public:
         virtual void OnMatrixDirty() { }
 
+        /// Вызывается при загрузке компонента на игровой объект
+        virtual void OnLoaded() { }
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
@@ -85,6 +87,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_WORLD_NS::Scene::Ptr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
+
+        SR_NODISCARD std::string GetEntityInfo() const override;
 
     protected:
         template<typename T> void InitComponent() {

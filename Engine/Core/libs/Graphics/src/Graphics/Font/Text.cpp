@@ -215,8 +215,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::OnAttached() {
-        AddUsePoint();
-
         GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->Register(this);
         });
@@ -292,5 +290,10 @@ namespace SR_GTYPES_NS {
 
     bool Text::IsCanCalculate() const {
         return Mesh::IsCanCalculate() && !m_text.empty();
+    }
+
+    void Text::OnLoaded() {
+        AddUsePoint();
+        Component::OnLoaded();
     }
 }

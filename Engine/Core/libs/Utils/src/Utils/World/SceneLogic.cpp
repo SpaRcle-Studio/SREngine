@@ -15,13 +15,15 @@ namespace SR_WORLD_NS {
     { }
 
     SceneLogic* SceneLogic::CreateByExt(const SceneLogic::ScenePtr &scene, const std::string &ext) {
-        if (ext.empty()) {
+        if (ext == "scene") {
             return new SceneCubeChunkLogic(scene);
         }
 
         if (ext == SR_UTILS_NS::Prefab::EXTENSION) {
             return new ScenePrefabLogic(scene);
         }
+
+        SRHalt("SceneLogic::CreateByExt() : unknown extension! Create default...\n\tExtension: " + ext);
 
         return new SceneDefaultLogic(scene);
     }

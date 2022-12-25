@@ -35,7 +35,6 @@ namespace SR_GTYPES_NS {
         static Texture* LoadFont(Font* pFont);
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculated; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetWidth() const noexcept { return m_width; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetHeight() const noexcept { return m_height; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetChannels() const noexcept { return m_channels; }
@@ -66,7 +65,6 @@ namespace SR_GTYPES_NS {
         uint32_t                   m_height       = 0;
         uint8_t                    m_channels     = 0;
 
-        std::atomic<bool>          m_isCalculated = false;
         std::atomic<bool>          m_hasErrors    = false;
         std::atomic<bool>          m_fromMemory   = false;
 

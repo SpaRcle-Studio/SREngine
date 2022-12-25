@@ -157,18 +157,17 @@ namespace SR_HTYPES_NS {
             vertices.emplace_back(vertex);
         }
 
-        if (!hasBones) {
-            return vertices;
-        }
-
-        for (uint32_t i = 0; i < mesh->mNumBones; i++) {
-            for (uint8_t j = 0; j < SR_MIN(SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mNumWeights); j++) {
-                auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
-                SRAssert(vertex.weightsNum < SR_MAX_BONES_ON_VERTEX);
-                vertex.weights[vertex.weightsNum].boneId = i;
-                vertex.weights[vertex.weightsNum].weight = mesh->mBones[i]->mWeights[j].mWeight;
-                vertex.weightsNum++;
-            }
+        if (hasBones) {
+            /// TODO: этот код не работает, здесь происходит порча памяти, так как vertex.weightsNum может быть больше 7
+            /// for (uint32_t i = 0; i < mesh->mNumBones; i++) {
+            ///     for (uint8_t j = 0; j < SR_MIN(SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mNumWeights); j++) {
+            ///         auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
+            ///         SRAssert(vertex.weightsNum < SR_MAX_BONES_ON_VERTEX);
+            ///         vertex.weights[vertex.weightsNum].boneId = i;
+            ///         vertex.weights[vertex.weightsNum].weight = mesh->mBones[i]->mWeights[j].mWeight;
+            ///         vertex.weightsNum++;
+            ///     }
+            /// }
         }
 
         return vertices;

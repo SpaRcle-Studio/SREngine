@@ -69,7 +69,6 @@ namespace SR_GTYPES_NS {
     private:
         PipelinePtr             m_pipeline       = nullptr;
 
-        bool                    m_isInit         = false;
         std::atomic<bool>       m_dirty          = false;
         std::atomic<bool>       m_hasErrors      = false;
 

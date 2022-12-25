@@ -84,10 +84,11 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
+        virtual void UpdateTree();
+
     protected:
         SR_NODISCARD virtual bool IsDirty() const noexcept;
         virtual void UpdateMatrix() { m_dirtyMatrix = false; }
-        virtual void UpdateTree();
 
     protected:
         GameObject* m_gameObject = nullptr;
