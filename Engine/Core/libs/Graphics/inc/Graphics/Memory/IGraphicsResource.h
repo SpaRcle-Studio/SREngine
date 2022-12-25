@@ -5,9 +5,19 @@
 #ifndef SRENGINE_IGRAHPICSRESOURCE_H
 #define SRENGINE_IGRAHPICSRESOURCE_H
 
+#include <Utils/Debug.h>
+
+namespace SR_GRAPH_NS {
+    class RenderContext;
+    class Environment;
+}
+
 namespace SR_GRAPH_NS::Memory {
     /// Не наследуемся от NonCopyable, чтобы не возникло конфликтов с IResource
     class IGraphicsResource {
+    public:
+        using RenderContextPtr = RenderContext*;
+        using PipelinePtr = Environment*;
     protected:
         constexpr IGraphicsResource() = default;
         virtual ~IGraphicsResource() {
@@ -25,10 +35,19 @@ namespace SR_GRAPH_NS::Memory {
             m_isCalculated = false;
         }
 
+        void SetRenderContext(const RenderContextPtr& renderContext);
+
+        SR_NODISCARD RenderContextPtr GetRenderContext() const noexcept {
+            return m_renderContext;
+        }
+
         SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculated; }
 
     protected:
         std::atomic<bool> m_isCalculated = false;
+
+        PipelinePtr m_pipeline = nullptr;
+        RenderContextPtr m_renderContext = nullptr;
 
     };
 }

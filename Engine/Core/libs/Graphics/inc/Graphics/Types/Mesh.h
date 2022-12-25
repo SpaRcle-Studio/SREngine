@@ -33,8 +33,6 @@ namespace SR_GTYPES_NS {
     class Mesh : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class Material;
     public:
-        using PipelinePtr = Environment*;
-        using RenderContextPtr = RenderContext*;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     protected:
         explicit Mesh(MeshType type);
@@ -84,7 +82,6 @@ namespace SR_GTYPES_NS {
         virtual void SetGeometryName(const std::string& name) { }
         void SetMaterial(Material* material);
         void SetMaterial(const SR_UTILS_NS::Path& path);
-        void SetContext(const RenderContextPtr& context);
 
         SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
 
@@ -96,10 +93,6 @@ namespace SR_GTYPES_NS {
 
     protected:
         Memory::UBOManager&          m_uboManager;
-        RenderContextPtr             m_context           = nullptr;
-
-        /// Контекст будет задан только после регистрации в RenderScene
-        PipelinePtr                  m_pipeline          = nullptr;
 
         const MeshType               m_type              = MeshType::Unknown;
 

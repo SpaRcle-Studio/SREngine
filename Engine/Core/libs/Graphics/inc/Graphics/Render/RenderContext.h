@@ -81,6 +81,20 @@ namespace SR_GRAPH_NS {
         void SetCurrentShader(ShaderPtr pShader);
 
     private:
+        template<typename T> bool RegisterResource(T* pResource) {
+            if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
+                if (pGraphicsResource->GetRenderContext()) {
+                    return false;
+                }
+
+                pGraphicsResource->SetRenderContext(this);
+            }
+
+            pResource->AddUsePoint();
+
+            return true;
+        }
+
         template<typename T> bool Update(T& resourceList) noexcept;
 
     private:

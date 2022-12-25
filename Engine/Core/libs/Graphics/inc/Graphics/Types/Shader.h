@@ -29,7 +29,6 @@ namespace SR_GRAPH_NS::Types {
 
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         using ShaderProgram = int32_t;
-        using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
     private:
         Shader();
         ~Shader() override;
@@ -45,7 +44,6 @@ namespace SR_GRAPH_NS::Types {
         void FreeVideoMemory() override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_DEPRECATED SR_NODISCARD int32_t GetID();
         SR_NODISCARD int32_t GetId() noexcept;
@@ -101,8 +99,6 @@ namespace SR_GRAPH_NS::Types {
         Memory::ShaderUBOBlock m_uniformBlock         = Memory::ShaderUBOBlock();
         ShaderSamplers         m_samplers             = ShaderSamplers();
         ShaderProperties       m_properties           = ShaderProperties();
-
-        RenderContextPtr       m_context              = { };
 
         SRSL::ShaderType       m_type                 = SRSL::ShaderType::Unknown;
 

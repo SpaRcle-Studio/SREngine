@@ -43,6 +43,7 @@
 #include "../Graphics/src/Graphics/Memory/ShaderProgramManager.cpp"
 #include "../Graphics/src/Graphics/Memory/ShaderUBOBlock.cpp"
 #include "../Graphics/src/Graphics/Memory/CameraManager.cpp"
+#include "../Graphics/src/Graphics/Memory/IGraphicsResource.cpp"
 
 #include "../Graphics/src/Graphics/Pass/BasePass.cpp"
 #include "../Graphics/src/Graphics/Pass/SkyboxPass.cpp"

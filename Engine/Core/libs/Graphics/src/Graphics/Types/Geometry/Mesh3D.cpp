@@ -83,7 +83,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::Draw() {
-        auto&& pShader = m_context->GetCurrentShader();
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
 
         if (!pShader || !IsActive() || IsDestroyed())
             return;
@@ -237,6 +237,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::UseModelMatrix() {
-        m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

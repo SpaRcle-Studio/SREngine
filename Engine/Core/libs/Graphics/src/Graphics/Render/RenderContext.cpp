@@ -166,34 +166,46 @@ namespace SR_GRAPH_NS {
         return pRenderScene;
     }
 
-    void RenderContext::Register(Types::Framebuffer *pFramebuffer) {
-        pFramebuffer->AddUsePoint();
-        m_framebuffers.emplace_back(pFramebuffer);
+    void RenderContext::Register(Types::Framebuffer *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_framebuffers.emplace_back(pResource);
     }
 
-    void RenderContext::Register(Types::Shader *pShader) {
-        pShader->AddUsePoint();
-        m_shaders.emplace_back(pShader);
+    void RenderContext::Register(Types::Shader *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_shaders.emplace_back(pResource);
     }
 
-    void RenderContext::Register(Types::Texture *pTexture) {
-        pTexture->AddUsePoint();
-        m_textures.emplace_back(pTexture);
+    void RenderContext::Register(Types::Texture *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_textures.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderTechnique *pTechnique) {
-        pTechnique->AddUsePoint();
-        m_techniques.emplace_back(pTechnique);
+    void RenderContext::Register(RenderTechnique *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_techniques.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderContext::MaterialPtr pMaterial) {
-        pMaterial->AddUsePoint();
-        m_materials.emplace_back(pMaterial);
+    void RenderContext::Register(RenderContext::MaterialPtr pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_materials.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderContext::SkyboxPtr pSkybox) {
-        pSkybox->AddUsePoint();
-        m_skyboxes.emplace_back(pSkybox);
+    void RenderContext::Register(RenderContext::SkyboxPtr pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_skyboxes.emplace_back(pResource);
     }
 
     bool RenderContext::IsEmpty() const {

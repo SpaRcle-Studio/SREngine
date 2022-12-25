@@ -32,13 +32,16 @@ namespace SR_GRAPH_NS::Types {
             return true;
         }
 
-        if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
+        auto&& context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<RenderContext>>();
+        if (!context) {
+            SRHalt("Is not render context!");
             m_hasErrors = true;
             return false;
         }
-        else if (!m_isRegistered && m_context.LockIfValid()) {
-            m_context->Register(this);
-            m_context.Unlock();
+
+        if (!m_isRegistered && context.LockIfValid()) {
+            context->Register(this);
+            context.Unlock();
             m_isRegistered = true;
         }
 
@@ -80,7 +83,7 @@ namespace SR_GRAPH_NS::Types {
         switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
             case Memory::ShaderProgramManager::BindResult::Success:
             case Memory::ShaderProgramManager::BindResult::Duplicated:
-                m_context->SetCurrentShader(this);
+                GetRenderContext()->SetCurrentShader(this);
                 return true;
             case Memory::ShaderProgramManager::BindResult::Failed:
             default:
@@ -92,8 +95,8 @@ namespace SR_GRAPH_NS::Types {
         auto&& env = SR_GRAPH_NS::Environment::Get();
         env->UnUseShader();
 
-        if (m_context->GetCurrentShader() == this) {
-            m_context->SetCurrentShader(nullptr);
+        if (GetRenderContext()->GetCurrentShader() == this) {
+            GetRenderContext()->SetCurrentShader(nullptr);
         }
     }
 
@@ -197,7 +200,7 @@ namespace SR_GRAPH_NS::Types {
         }
 
         if (!sampler) {
-            sampler = m_context->GetNoneTexture();
+            sampler = GetRenderContext()->GetNoneTexture();
         }
 
         if (!sampler) {
@@ -269,7 +272,13 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::OnReloadDone() {
-        m_context.Do([](RenderContext* ptr) {
+        auto&& pContext = GetRenderContext();
+        if (!pContext) {
+            return;
+        }
+
+        /// пока контекст ресурс жив, контекст будет существовать (если он зарегистрирован)
+        pContext->Do([](RenderContext* ptr) {
             ptr->SetDirty();
         });
     }

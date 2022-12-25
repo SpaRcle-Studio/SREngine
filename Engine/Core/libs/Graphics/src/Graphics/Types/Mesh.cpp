@@ -226,15 +226,6 @@ namespace SR_GRAPH_NS::Types {
         IResource::OnResourceUpdated(pResource, depth);
     }
 
-    void Mesh::SetContext(const Mesh::RenderContextPtr &context) {
-        if ((m_context = context)) {
-            m_pipeline = m_context->GetPipeline();
-        }
-        else {
-            SRHalt("Context is invalid!");
-        }
-    }
-
     void Mesh::UseMaterial() {
         m_material->Use();
     }

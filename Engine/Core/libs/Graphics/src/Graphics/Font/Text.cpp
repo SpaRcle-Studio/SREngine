@@ -25,7 +25,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::Draw() {
-        auto&& pShader = m_context->GetCurrentShader();
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
 
         if (!pShader || !IsActive() || IsDestroyed()) {
             return;
@@ -166,11 +166,12 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::UseModelMatrix() {
-        m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
-        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_X, 0.f);
-        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_Y, 0.f);
-        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_WIDTH, m_width / 100.f);
-        m_context->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_HEIGHT, m_height / 100.f);
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        GetRenderContext()->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_X, 0.f);
+        GetRenderContext()->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_Y, 0.f);
+        GetRenderContext()->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_WIDTH, m_width / 100.f);
+        GetRenderContext()->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_HEIGHT, m_height / 100.f);
+
         Mesh::UseModelMatrix();
     }
 
@@ -243,7 +244,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::UseSamplers() {
-        m_context->GetCurrentShader()->SetSampler2D(SHADER_TEXT_ATLAS_TEXTURE, m_id);
+        GetRenderContext()->GetCurrentShader()->SetSampler2D(SHADER_TEXT_ATLAS_TEXTURE, m_id);
         Mesh::UseSamplers();
     }
 

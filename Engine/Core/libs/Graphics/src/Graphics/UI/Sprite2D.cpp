@@ -162,7 +162,7 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Sprite2D::UseModelMatrix() {
-        m_context->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
         Super::UseModelMatrix();
     }
 }

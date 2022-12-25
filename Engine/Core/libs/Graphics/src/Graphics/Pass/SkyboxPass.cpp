@@ -23,6 +23,11 @@ namespace SR_GRAPH_NS {
     bool SkyboxPass::Load(const SR_XML_NS::Node &passNode) {
         auto&& path = passNode.GetAttribute<SR_UTILS_NS::Path>();
 
+        if (m_skybox) {
+            m_skybox->RemoveUsePoint();
+            m_skybox = nullptr;
+        }
+
         if (!(m_skybox = SR_GTYPES_NS::Skybox::Load(path))) {
             SR_ERROR("SkyboxPass::Load() : failed to load skybox!\n\tPath: " + path.ToString());
             return false;
