@@ -41,7 +41,15 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    Skybox *Skybox::Load(const SR_UTILS_NS::Path& path) {
+    Skybox *Skybox::Load(const SR_UTILS_NS::Path& rawPath) {
+        SR_GLOBAL_LOCK
+
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
+        if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Skybox>(path)) {
+            return pResource;
+        }
+
         auto&& folder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path.GetWithoutExtension());
 
         SR_LOG("Skybox::Load() : loading \"" + path.ToString() + "\" skybox...");
