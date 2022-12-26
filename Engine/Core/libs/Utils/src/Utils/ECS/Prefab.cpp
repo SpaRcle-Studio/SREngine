@@ -61,7 +61,13 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+        m_data = SR_UTILS_NS::GameObject::Load(marshal, nullptr, GameObject::IdGetterFn());
 
+        if (!m_data.Valid()) {
+            m_loadState = LoadState::Error;
+            SR_ERROR("Prefab::Load() : failed to load game object from marshal data!");
+            return false;
+        }
 
         return IResource::Load();
     }

@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual uint64_t GetResourceHash() const { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
 
-        SR_NODISCARD virtual IResource* Copy(IResource* destination) const;
+        SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 
         /** Add one point to count uses current resource */
         void AddUsePoint();

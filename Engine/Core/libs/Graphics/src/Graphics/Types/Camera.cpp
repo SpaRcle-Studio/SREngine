@@ -123,10 +123,14 @@ namespace SR_GTYPES_NS {
 
     Camera::RenderScenePtr Camera::GetRenderScene() const {
         auto&& scene = GetScene();
+        if (!scene) {
+            SRHalt("Scene is invalid!");
+            return RenderScenePtr();
+        }
 
         SR_HTYPES_NS::SafePtrRecursiveLockGuard m_lock(scene);
 
-        if (scene.Valid()) {
+        if (scene->Valid()) {
             return scene->GetDataStorage().GetValue<RenderScenePtr>();
         }
         else {

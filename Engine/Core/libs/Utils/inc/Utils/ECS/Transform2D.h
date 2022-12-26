@@ -46,6 +46,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::Space2D; }
 
+        SR_NODISCARD Transform* Copy() const override;
+
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
         SR_NODISCARD SR_MATH_NS::FRect GetAnchor() const { return m_anchor; }

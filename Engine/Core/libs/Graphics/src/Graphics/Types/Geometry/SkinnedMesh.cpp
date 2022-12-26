@@ -44,11 +44,11 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    SR_UTILS_NS::IResource* SkinnedMesh::Copy(IResource* destination) const {
+    SR_UTILS_NS::IResource* SkinnedMesh::CopyResource(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* pSkinnedMesh = dynamic_cast<SkinnedMesh *>(destination ? destination : new SkinnedMesh());
-        pSkinnedMesh = dynamic_cast<SkinnedMesh *>(IndexedMesh::Copy(pSkinnedMesh));
+        pSkinnedMesh = dynamic_cast<SkinnedMesh *>(IndexedMesh::CopyResource(pSkinnedMesh));
 
         pSkinnedMesh->SetRawMesh(m_rawMesh);
         pSkinnedMesh->m_meshId = m_meshId;

@@ -105,7 +105,6 @@ namespace SR_UTILS_NS {
 
     bool IComponentable::AddComponent(Component* pComponent) {
         m_components.emplace_back(pComponent);
-        ++m_componentsCount;
 
         pComponent->SetParent(this);
 
@@ -130,7 +129,6 @@ namespace SR_UTILS_NS {
             component->OnDestroy();
 
             m_components.erase(it);
-            --m_componentsCount;
 
             SetDirty(true);
 
@@ -244,7 +242,5 @@ namespace SR_UTILS_NS {
 
         m_loadedComponents.clear();
         m_components.clear();
-
-        m_componentsCount = 0;
     }
 }

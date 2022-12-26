@@ -18,6 +18,7 @@
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
 #include "../Utils/src/Utils/ECS/Transform2D.cpp"
+#include "../Utils/src/Utils/ECS/TransformZero.cpp"
 #include "../Utils/src/Utils/ECS/EntityRef.cpp"
 #include "../Utils/src/Utils/ECS/Prefab.cpp"
 

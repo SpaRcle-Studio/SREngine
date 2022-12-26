@@ -185,4 +185,9 @@ namespace SR_UTILS_NS {
     bool Transform::IsDirty() const noexcept {
         return m_dirtyMatrix;
     }
+
+    Transform *Transform::Copy() const {
+        SRHalt("Not implemented!");
+        return nullptr;
+    }
 }

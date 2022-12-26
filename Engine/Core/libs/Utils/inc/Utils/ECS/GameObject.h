@@ -45,21 +45,25 @@ namespace SR_UTILS_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using Super = Ptr;
         using GameObjects = std::vector<GameObject::Ptr>;
-        using ScenePtr = SR_HTYPES_NS::SafePtr<World::Scene>;
+        using ScenePtr = World::Scene*;
         using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;
 
     public:
+        GameObject(const ScenePtr& scene, std::string name, Transform* pTransform, std::string tag = "Untagged");
         GameObject(const ScenePtr& scene, std::string name, std::string tag = "Untagged");
         ~GameObject() override;
 
         static GameObject::Ptr Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter);
 
     public:
+        SR_NODISCARD GameObject::Ptr Copy(const ScenePtr& scene, const IdGetterFn& idGetter) const;
+
         SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const noexcept { return m_parent; }
         SR_NODISCARD std::string GetName() const { return m_name; }
+        SR_NODISCARD std::string GetTag() const { return m_tag; }
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
@@ -123,7 +127,7 @@ namespace SR_UTILS_NS {
         GameObject::Ptr    m_parent     = { };
         GameObjects        m_children   = { };
 
-        ScenePtr           m_scene      = { };
+        ScenePtr           m_scene      = nullptr;
         Transform*         m_transform  = nullptr;
 
         Name               m_name;

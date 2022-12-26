@@ -62,9 +62,6 @@ namespace SR_UTILS_NS {
     protected:
         bool m_dirty = true;
 
-        uint16_t m_componentsCount = 0;
-        uint16_t m_childrenCount = 0;
-
         Components m_components = { };
         std::list<Component*> m_loadedComponents = { };
 

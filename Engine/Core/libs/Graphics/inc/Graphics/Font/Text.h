@@ -26,7 +26,7 @@ namespace SR_GTYPES_NS {
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_UTILS_NS::IResource* Copy(SR_UTILS_NS::IResource* destination) const override;
+        SR_UTILS_NS::IResource* CopyResource(SR_UTILS_NS::IResource* destination) const override;
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         void UseMaterial() override;

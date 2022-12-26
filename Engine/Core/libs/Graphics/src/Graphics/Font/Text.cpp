@@ -75,8 +75,8 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_UTILS_NS::IResource* Text::Copy(SR_UTILS_NS::IResource* destination) const{
-        return Mesh::Copy(destination);
+    SR_UTILS_NS::IResource* Text::CopyResource(SR_UTILS_NS::IResource* destination) const{
+        return Mesh::CopyResource(destination);
     }
 
     bool Text::Calculate() {

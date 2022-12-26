@@ -37,6 +37,7 @@ namespace SR_UTILS_NS {
         friend class IComponentable;
         friend class ComponentManager;
     public:
+        using ScenePtr = SR_WORLD_NS::Scene*;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using ComponentPtr = Component*;
     public:
@@ -66,6 +67,8 @@ namespace SR_UTILS_NS {
 
         void SetEnabled(bool value);
 
+        SR_NODISCARD virtual Component* CopyComponent() const;
+
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
         /// Активен и компонент и его родительский объект
@@ -82,9 +85,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
         SR_NODISCARD IComponentable* GetParent() const;
-        SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
+        SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD GameObjectPtr GetGameObject() const;
-        SR_NODISCARD SR_WORLD_NS::Scene::Ptr TryGetScene() const;
+        SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
 

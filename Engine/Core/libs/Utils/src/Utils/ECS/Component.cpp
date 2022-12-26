@@ -7,6 +7,7 @@
 #include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/World/Scene.h>
 
 namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal::Ptr Component::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
@@ -52,17 +53,17 @@ namespace SR_UTILS_NS {
         }
     }
 
-    SR_WORLD_NS::Scene::Ptr Component::GetScene() const {
+    Component::ScenePtr Component::GetScene() const {
         if (auto&& pScene = TryGetScene()) {
             return pScene;
         }
 
         SRHalt("The component have not a valid parent!");
 
-        return SR_WORLD_NS::Scene::Ptr();
+        return nullptr;
     }
 
-    SR_WORLD_NS::Scene::Ptr Component::TryGetScene() const {
+    Component::ScenePtr Component::TryGetScene() const {
         /// Игровой объект или сцена никогда не уничтожится до того,
         /// как не установит "m_parent" в "nullptr"
 
@@ -71,10 +72,10 @@ namespace SR_UTILS_NS {
         }
 
         if (auto&& pScene = dynamic_cast<SR_WORLD_NS::Scene*>(m_parent)) {
-            return pScene->GetThis();
+            return pScene;
         }
 
-        return SR_WORLD_NS::Scene::Ptr();
+        return nullptr;
     }
 
     Component::GameObjectPtr Component::GetGameObject() const {
@@ -120,6 +121,11 @@ namespace SR_UTILS_NS {
 
     std::string Component::GetEntityInfo() const {
         return "Component: " + GetComponentName();
+    }
+
+    Component *Component::CopyComponent() const {
+        SRHalt("Not implemented!");
+        return nullptr;
     }
 }
 

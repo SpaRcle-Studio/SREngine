@@ -30,7 +30,7 @@ namespace SR_GRAPH_UI_NS {
         typedef Vertices::UIVertex VertexType;
 
     public:
-        IResource* Copy(IResource* destination) const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         void UseMaterial() override;
         void UseModelMatrix() override;

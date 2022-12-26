@@ -49,11 +49,18 @@ namespace SR_GTYPES_NS {
     }
 
     Mesh::RenderScenePtr MeshComponent::GetRenderScene() {
-        if (!m_renderScene.Valid()) {
-            m_renderScene = TryGetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
-                return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-            }, RenderScenePtr());
+        if (m_renderScene.Valid()) {
+            return m_renderScene;
         }
+
+        auto&& pScene = TryGetScene();
+        if (!pScene) {
+            return m_renderScene;
+        }
+
+        m_renderScene = pScene->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+            return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+        }, RenderScenePtr());
 
         return m_renderScene;
     }
@@ -75,17 +82,17 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    SR_UTILS_NS::IResource *MeshComponent::Copy(SR_UTILS_NS::IResource *destination) const {
+    SR_UTILS_NS::IResource *MeshComponent::CopyResource(SR_UTILS_NS::IResource *destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* pCopy = dynamic_cast<MeshComponent*>(destination ? destination : nullptr);
-        pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::Copy(pCopy));
+        pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::CopyResource(pCopy));
 
         pCopy->m_resourcePath = m_resourcePath;
         pCopy->m_geometryName = m_geometryName;
         pCopy->m_barycenter = m_barycenter;
 
-        return IndexedMesh::Copy(destination);
+        return IndexedMesh::CopyResource(destination);
     }
 
     SR_UTILS_NS::Path MeshComponent::GetResourcePath() const {
@@ -97,5 +104,9 @@ namespace SR_GTYPES_NS {
         }
 
         return m_resourcePath;
+    }
+
+    SR_UTILS_NS::Component *MeshComponent::CopyComponent() const {
+        return dynamic_cast<Component*>(CopyResource(nullptr));
     }
 }

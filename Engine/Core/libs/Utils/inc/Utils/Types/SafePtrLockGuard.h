@@ -35,11 +35,23 @@ namespace SR_HTYPES_NS {
         explicit SafePtrRecursiveLockGuard(const T& ptr)
             : m_ptr(ptr)
         {
-            m_locked = m_ptr.RecursiveLockIfValid();
+            if constexpr (std::is_pointer_v<T>) {
+                m_locked = m_ptr->RecursiveLockIfValid();
+            }
+            else {
+                m_locked = m_ptr.RecursiveLockIfValid();
+            }
         }
 
         ~SafePtrRecursiveLockGuard() override {
-            if (m_locked) {
+            if (!m_locked) {
+                return;
+            }
+
+            if constexpr (std::is_pointer_v<T>) {
+                m_ptr->Unlock();
+            }
+            else {
                 m_ptr.Unlock();
             }
         }

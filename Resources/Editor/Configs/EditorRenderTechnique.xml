@@ -17,7 +17,7 @@
             <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
             <TransparentPass/>
             <DebugPass/>
-        </Passes> 
+        </Passes>
     </FramebufferPass>
     <!--<SwapchainPass>
         <OpaquePass/>

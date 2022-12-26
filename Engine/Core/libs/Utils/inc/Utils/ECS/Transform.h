@@ -77,6 +77,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual SR_MATH_NS::FVector2 GetTranslation2D() const;
         SR_NODISCARD virtual SR_MATH_NS::FVector2 GetScale2D() const;
 
+        SR_NODISCARD virtual Transform* Copy() const;
         SR_NODISCARD Transform* GetParentTransform() const;
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
 

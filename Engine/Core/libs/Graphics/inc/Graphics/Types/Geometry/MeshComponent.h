@@ -18,7 +18,8 @@ namespace SR_GTYPES_NS {
         { }
 
     public:
-        IResource* Copy(IResource* destination) const override;
+        Component* CopyComponent() const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 

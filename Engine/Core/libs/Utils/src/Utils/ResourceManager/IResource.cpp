@@ -85,7 +85,7 @@ namespace SR_UTILS_NS {
         ++m_countUses;
     }
 
-    IResource *IResource::Copy(IResource *destination) const {
+    IResource *IResource::CopyResource(IResource *destination) const {
         destination->m_autoRemove = m_autoRemove;
         destination->m_lifetime = m_lifetime;
         destination->m_loadState.store(m_loadState);

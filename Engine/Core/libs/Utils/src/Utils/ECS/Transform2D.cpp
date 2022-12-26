@@ -166,4 +166,19 @@ namespace SR_UTILS_NS {
         m_stretch = stretch;
         UpdateTree();
     }
+
+    Transform *Transform2D::Copy() const {
+        auto&& pTransform = new Transform2D();
+
+        pTransform->m_anchor = m_anchor;
+
+        pTransform->m_stretch = m_stretch;
+
+        pTransform->m_translation = m_translation;
+        pTransform->m_rotation = m_rotation;
+        pTransform->m_scale = m_scale;
+        pTransform->m_skew = m_skew;
+
+        return pTransform;
+    }
 }

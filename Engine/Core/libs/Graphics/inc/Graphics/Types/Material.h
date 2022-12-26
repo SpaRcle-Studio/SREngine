@@ -38,7 +38,7 @@ namespace SR_GTYPES_NS {
         static Material* Load(SR_UTILS_NS::Path rawPath);
 
     public:
-        Super* Copy(Super* destination) const override;
+        Super* CopyResource(Super* destination) const override;
 
         SR_NODISCARD bool IsTransparent() const;
         SR_NODISCARD Shader* GetShader() const { return m_shader; }

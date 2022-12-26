@@ -50,7 +50,7 @@ namespace SR_GTYPES_NS {
         virtual bool Calculate();
 
     public:
-        IResource* Copy(IResource* destination) const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         virtual void Draw() = 0;
 

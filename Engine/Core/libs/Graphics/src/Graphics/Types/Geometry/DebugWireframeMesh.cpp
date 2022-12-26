@@ -14,11 +14,11 @@ namespace SR_GTYPES_NS {
         SetRawMesh(nullptr);
     }
 
-    SR_UTILS_NS::IResource* DebugWireframeMesh::Copy(IResource* destination) const {
+    SR_UTILS_NS::IResource* DebugWireframeMesh::CopyResource(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh());
-        wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::Copy(wireFramed));
+        wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::CopyResource(wireFramed));
 
         wireFramed->SetRawMesh(m_rawMesh);
         wireFramed->m_meshId = m_meshId;

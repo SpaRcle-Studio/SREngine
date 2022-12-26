@@ -51,11 +51,11 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    SR_UTILS_NS::IResource* Mesh3D::Copy(IResource* destination) const {
+    SR_UTILS_NS::IResource* Mesh3D::CopyResource(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D());
-        mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
+        mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::CopyResource(mesh3D));
 
         mesh3D->SetRawMesh(m_rawMesh);
         mesh3D->m_meshId = m_meshId;

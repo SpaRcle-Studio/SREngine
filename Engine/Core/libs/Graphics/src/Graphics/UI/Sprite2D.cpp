@@ -24,11 +24,11 @@ namespace SR_GRAPH_UI_NS {
         SetId("Sprite2DFromMemory");
     }
 
-    SR_UTILS_NS::IResource* Sprite2D::Copy(SR_UTILS_NS::IResource *destination) const {
+    SR_UTILS_NS::IResource* Sprite2D::CopyResource(SR_UTILS_NS::IResource *destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* sprite2D = dynamic_cast<Sprite2D *>(destination ? destination : new Sprite2D());
-        sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::Copy(sprite2D));
+        sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::CopyResource(sprite2D));
 
         if (sprite2D->IsCalculated()) {
             auto &&manager = Memory::MeshManager::Instance();

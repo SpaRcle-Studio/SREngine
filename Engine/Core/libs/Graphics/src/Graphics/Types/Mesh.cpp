@@ -57,7 +57,7 @@ namespace SR_GRAPH_NS::Types {
         Mesh *pMesh = nullptr;
 
         if ((pMesh = resourceManager.Find<Mesh>(resourceId))) {
-            if ((pMesh = dynamic_cast<Mesh *>(pMesh->Copy(nullptr)))) {
+            if ((pMesh = dynamic_cast<Mesh *>(pMesh->CopyResource(nullptr)))) {
                 return pMesh;
             }
             else {
@@ -149,26 +149,26 @@ namespace SR_GRAPH_NS::Types {
         return true;
     }
 
-    SR_UTILS_NS::IResource *Mesh::Copy(IResource *destination) const {
+    SR_UTILS_NS::IResource *Mesh::CopyResource(IResource *destination) const {
         if (IsDestroyed()) {
-            SRHalt("Mesh::Copy() : mesh is already destroyed!");
+            SRHalt("Mesh::CopyResource() : mesh is already destroyed!");
             return nullptr;
         }
 
         Mesh *mesh = reinterpret_cast<Mesh *>(destination);
         if (!mesh) {
-            SRHalt("Mesh::Copy() : impossible to copy basic mesh!");
+            SRHalt("Mesh::CopyResource() : impossible to copy basic mesh!");
             return nullptr;
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
-            SR_LOG("Mesh::Copy() : copy \"" + std::string(GetResourceId()) + "\" mesh...");
+            SR_LOG("Mesh::CopyResource() : copy \"" + std::string(GetResourceId()) + "\" mesh...");
         }
 
         mesh->m_isCalculated.store(m_isCalculated);
         mesh->m_hasErrors.store(false);
 
-        return SR_UTILS_NS::IResource::Copy(mesh);
+        return SR_UTILS_NS::IResource::CopyResource(mesh);
     }
 
     void Mesh::FreeVideoMemory() {

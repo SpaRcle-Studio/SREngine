@@ -15,8 +15,8 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Common/Hashes.h>
 
- namespace SR_UTILS_NS {
-    GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
+namespace SR_UTILS_NS {
+    GameObject::GameObject(const ScenePtr& scene, std::string name, Transform* pTransform, std::string tag)
         : Super(this)
     {
         m_scene = scene;
@@ -24,10 +24,14 @@
         SetName(std::move(name));
         m_tag = std::move(tag);
 
-        SetTransform(new Transform3D());
+        SetTransform(pTransform);
 
         UpdateEntityPath();
     }
+
+    GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
+        : GameObject(scene, std::move(name), new Transform3D(), std::move(tag))
+    { }
 
     GameObject::~GameObject() {
         delete m_transform;
@@ -40,7 +44,7 @@
         }
 
         /// сцены может и не быть, к примеру, если это префаб
-        if (m_scene.RecursiveLockIfValid()) {
+        if (m_scene && m_scene->RecursiveLockIfValid()) {
             const bool byParent = by & GAMEOBJECT_DESTROY_BY_GAMEOBJECT;
 
             if (!byParent && m_parent.RecursiveLockIfValid()) {
@@ -51,7 +55,7 @@
 
             m_scene->Remove(*this);
 
-            m_scene.Unlock();
+            m_scene->Unlock();
         }
 
         IComponentable::DestroyComponents();
@@ -62,7 +66,6 @@
             });
         }
         m_children.clear();
-        m_childrenCount = 0;
 
         m_isDestroy = true;
 
@@ -97,7 +100,6 @@
         }
 
         m_children.push_back(child);
-        ++m_childrenCount;
 
         child->OnAttached();
 
@@ -159,7 +161,6 @@
         for (auto pIt = m_children.begin(); pIt != m_children.end(); ) {
             if (pIt->Get() == ptr.Get()) {
                 pIt = m_children.erase(pIt);
-                --m_childrenCount;
                 return;
             }
 
@@ -448,76 +449,96 @@
         }
     }
 
-     GameObject::Ptr GameObject::Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter) {
-         SR_UTILS_NS::GameObject::Ptr gameObject;
+    GameObject::Ptr GameObject::Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter) {
+        SR_UTILS_NS::GameObject::Ptr gameObject;
 
-         /// для экономии памяти стека при рекурсивном создании объектов, кладем все переменные в эту область видимости.
-         {
-             auto&& entityId = marshal.Read<uint64_t>();
+        /// для экономии памяти стека при рекурсивном создании объектов, кладем все переменные в эту область видимости.
+        {
+            auto&& entityId = marshal.Read<uint64_t>();
 
-             auto&& version = marshal.Read<uint16_t>();
-             if (version != SR_UTILS_NS::GameObject::VERSION) {
-                 SRAssert2Once(false, "Version is different! Version: " + Helper::ToString(version));
-                 return gameObject;
-             }
+            auto&& version = marshal.Read<uint16_t>();
+            if (version != SR_UTILS_NS::GameObject::VERSION) {
+                SRAssert2Once(false, "Version is different! Version: " + Helper::ToString(version));
+                return gameObject;
+            }
 
-             auto&& enabled = marshal.Read<bool>();
-             auto&& name = marshal.Read<std::string>();
-             auto&& hasTag = marshal.Read<bool>();
+            auto&& enabled = marshal.Read<bool>();
+            auto&& name = marshal.Read<std::string>();
+            auto&& hasTag = marshal.Read<bool>();
 
-             auto&& tag = hasTag ? marshal.Read<std::string>() : std::string();
+           auto&& tag = hasTag ? marshal.Read<std::string>() : std::string();
 
-             if (entityId == UINT64_MAX) {
-                 gameObject = *(new GameObject(scene, name));
-             }
-             else {
-                 SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, &idGetter, &scene, name]() -> SR_UTILS_NS::Entity* {
-                     gameObject = *(new GameObject(scene, name));
-                     return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
-                 });
-             }
+           if (entityId == UINT64_MAX) {
+               gameObject = *(new GameObject(scene, name));
+           }
+           else {
+               SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, &idGetter, &scene, name]() -> SR_UTILS_NS::Entity* {
+                   gameObject = *(new GameObject(scene, name));
+                   return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
+               });
+           }
 
-             if (!gameObject.Valid()) {
-                 SRHalt("GameObject::Load() : failed to create new gameobject!");
-                 return SR_UTILS_NS::GameObject::Ptr();
-             }
+           if (!gameObject.Valid()) {
+               SRHalt("GameObject::Load() : failed to create new gameobject!");
+               return SR_UTILS_NS::GameObject::Ptr();
+           }
 
-             if (idGetter) {
-                 gameObject->SetIdInScene(idGetter(gameObject));
-             }
+           if (idGetter) {
+               gameObject->SetIdInScene(idGetter(gameObject));
+           }
 
-             /// ----------------------
+            /// ----------------------
 
-             gameObject->SetEnabled(enabled);
+            gameObject->SetEnabled(enabled);
 
-             gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
-                     marshal,
-                     gameObject.Get()
-             ));
+            gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
+                    marshal,
+                    gameObject.Get()
+            ));
 
-             if (hasTag) {
-                 gameObject->SetTag(tag);
-             }
+            if (hasTag) {
+                gameObject->SetTag(tag);
+            }
 
-             /// ----------------------
+            /// ----------------------
 
-             auto&& components = ComponentManager::Instance().LoadComponents(marshal);
-             for (auto&& pComponent : components) {
-                 gameObject->LoadComponent(pComponent);
-             }
-         }
+            auto&& components = ComponentManager::Instance().LoadComponents(marshal);
+            for (auto&& pComponent : components) {
+                gameObject->LoadComponent(pComponent);
+            }
+        }
 
-         auto&& childrenCount = marshal.Read<uint32_t>();
-         for (uint32_t i = 0; i < childrenCount; ++i) {
-             if (auto&& child = Load(marshal, scene, idGetter)) {
-                 gameObject->AddChild(child);
-             }
-         }
+        auto&& childrenCount = marshal.Read<uint32_t>();
+        for (uint32_t i = 0; i < childrenCount; ++i) {
+            if (auto&& child = Load(marshal, scene, idGetter)) {
+                gameObject->AddChild(child);
+            }
+        }
 
-         return gameObject;
-     }
+        return gameObject;
+    }
 
-     std::string GameObject::GetEntityInfo() const {
-         return "GameObject: " + GetName();
-     }
- }
+    std::string GameObject::GetEntityInfo() const {
+        return "GameObject: " + GetName();
+    }
+
+    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene, const GameObject::IdGetterFn &idGetter) const {
+        GameObject::Ptr gameObject = *(new GameObject(scene, GetName(), GetTransform()->Copy(), GetTag()));
+
+        gameObject->SetEnabled(IsEnabled());
+
+        if (idGetter) {
+            gameObject->SetIdInScene(idGetter(gameObject));
+        }
+
+        for (auto&& pComponent : m_components) {
+            gameObject->LoadComponent(pComponent->CopyComponent());
+        }
+
+        for (auto&& pComponent : m_loadedComponents) {
+            gameObject->LoadComponent(pComponent->CopyComponent());
+        }
+
+        return gameObject;
+    }
+}

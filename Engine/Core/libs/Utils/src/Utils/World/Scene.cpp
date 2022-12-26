@@ -33,7 +33,7 @@ namespace SR_WORLD_NS {
 
         const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
 
-        GameObject::Ptr gm = *(new GameObject(GetThis(), name));
+        GameObject::Ptr gm = *(new GameObject(this, name));
 
         gm->SetIdInScene(id);
 
@@ -59,7 +59,7 @@ namespace SR_WORLD_NS {
     }
 
     Scene::GameObjectPtr Scene::Instance(SR_HTYPES_NS::Marshal &marshal) {
-        return GameObject::Load(marshal, *this, [this](const GameObject::Ptr& ptr) -> uint64_t {
+        return GameObject::Load(marshal, this, [this](const GameObject::Ptr& ptr) -> uint64_t {
             const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
 
             if (m_freeObjIndices.empty()) {
