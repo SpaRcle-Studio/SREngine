@@ -193,7 +193,7 @@ namespace SR_GTYPES_NS {
 
     Mesh::RenderScenePtr Text::GetRenderScene() {
         if (!m_renderScene.Valid()) {
-            m_renderScene = TryGetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+            m_renderScene = TryGetScene()->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
                 return ptr->GetDataStorage().GetValue<RenderScenePtr>();
             }, RenderScenePtr());
         }

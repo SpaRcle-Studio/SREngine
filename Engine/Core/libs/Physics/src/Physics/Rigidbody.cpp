@@ -108,7 +108,7 @@ namespace SR_PHYSICS_NS::Types {
 
     Rigidbody::PhysicsScenePtr Rigidbody::GetPhysicsScene() {
         if (!m_physicsScene.Valid()) {
-            m_physicsScene = GetScene().Do<PhysicsScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+            m_physicsScene = GetScene()->Do<PhysicsScenePtr>([](SR_WORLD_NS::Scene* ptr) {
                 return ptr->GetDataStorage().GetValue<PhysicsScenePtr>();
             }, PhysicsScenePtr());
         }

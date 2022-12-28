@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     void Canvas::OnAttached() {
-        m_renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* pScene) {
+        m_renderScene = GetScene()->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* pScene) {
             return pScene->GetDataStorage().GetValue<RenderScenePtr>();
         }, RenderScenePtr());
 

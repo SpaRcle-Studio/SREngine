@@ -108,6 +108,7 @@ namespace SR_UTILS_NS {
 
         pComponent->SetParent(this);
 
+        pComponent->OnLoaded();
         pComponent->OnAttached();
         pComponent->OnMatrixDirty();
 
@@ -148,6 +149,7 @@ namespace SR_UTILS_NS {
 
                 destination->SetParent(this);
 
+                destination->OnLoaded();
                 destination->OnAttached();
                 destination->OnMatrixDirty();
 
