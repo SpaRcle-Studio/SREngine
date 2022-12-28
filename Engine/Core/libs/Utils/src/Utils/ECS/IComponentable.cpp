@@ -173,7 +173,11 @@ namespace SR_UTILS_NS {
             m_components.reserve(m_loadedComponents.size());
 
             for (auto&& pLoadedCmp : m_loadedComponents) {
-                AddComponent(pLoadedCmp);
+                m_components.emplace_back(pLoadedCmp);
+
+                pLoadedCmp->SetParent(this);
+
+                pLoadedCmp->OnAttached();
                 pLoadedCmp->OnMatrixDirty();
             }
 

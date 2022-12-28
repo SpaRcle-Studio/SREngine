@@ -78,8 +78,8 @@ namespace SR_UTILS_NS {
     }
 
     void IResource::AddUsePoint() {
-        SR_LOG(std::to_string(m_resourceHashName) + ": m_countUses: " + std::to_string(m_countUses));
         SRAssert(m_countUses <= 65535);
+
         if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
             SRHalt("IResource::AddUsePoint() : potential multi threading error!");
         }

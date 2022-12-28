@@ -6,7 +6,6 @@
 
 namespace SR_GTYPES_NS {
     void MeshComponent::OnLoaded() {
-        SRAssert(m_countUses <= 65535);
         AddUsePoint();
     }
 
@@ -26,7 +25,7 @@ namespace SR_GTYPES_NS {
         /// после вызова данная сущность может быть уничтожена
         RemoveUsePoint();
 
-            if (renderScene) {
+        if (renderScene) {
             renderScene->SetDirty();
         }
     }
