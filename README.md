@@ -21,7 +21,11 @@
  2. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0
  3. Install CMake 3.16.0
  4. Run command "git submodule update --init --recursive"
- 5. Generate system build files with CMake
+ 5. Working with CMake (if you're using Visual Studio): 
+    1. Choose the path to SREndine (Where the source code is).
+    2. Choose the path where to build the binaries (SREngine/Build).
+    3. Press Configure and choose your VS version.
+    4. Press Generate
  6. Build and run Engine.exe with command line argument "-resources path-to-your-repository/Resources"
 
 ## Used libraries
