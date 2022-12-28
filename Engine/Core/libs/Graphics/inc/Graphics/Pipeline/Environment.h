@@ -45,6 +45,8 @@ namespace SR_GRAPH_NS {
     /// TODO: TO_REFACTORING
     class Environment {
     public:
+        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+
         enum class WinEvents{
             Close, Move, Resize, LeftClick, RightClick, Focus, Scroll
         };
@@ -71,6 +73,9 @@ namespace SR_GRAPH_NS {
 
         Types::Shader* m_currentShader = nullptr;
         Types::Framebuffer* m_currentFramebuffer = nullptr;
+
+        WindowPtr m_window;
+
     protected:
         Environment()  = default;
         ~Environment() = default;
@@ -152,7 +157,8 @@ namespace SR_GRAPH_NS {
         // ============================= [ WINDOW METHODS ] =============================
 
         /* create window instance */
-        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+
+        SR_NODISCARD WindowPtr GetWindow() const { return m_window; }
 
         virtual bool OnResize(const SR_MATH_NS::UVector2& size) { return false; }
 

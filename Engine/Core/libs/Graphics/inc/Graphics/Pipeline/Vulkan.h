@@ -86,6 +86,8 @@ namespace SR_GRAPH_NS {
     public:
         bool OnResize() override;
 
+        SR_NODISCARD bool IsWindowValid() const override;
+
         bool BuildCmdBuffers() override {
             return true;
         }

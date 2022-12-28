@@ -124,6 +124,17 @@ namespace Framework::Graphics {
         return true;
     }
 
+    bool SRVulkan::IsWindowValid() const {
+        auto&& pPipeline = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get());
+        if (!pPipeline) {
+            return false;
+        }
+
+        return pPipeline->GetWindow().Do<bool>([](Window* pWindow) -> bool {
+            return pWindow->IsValid();
+        }, false);
+    }
+
     bool Vulkan::OnResize(const Helper::Math::UVector2 &size) {
         m_kernel->SetSize(size.x, size.y);
 
@@ -152,6 +163,8 @@ namespace Framework::Graphics {
 
     bool Vulkan::Init(const WindowPtr& window, int swapInterval) {
         SR_GRAPH_LOG("Vulkan::Init() : initializing vulkan...");
+
+        m_window = window;
 
         auto createSurf = [window](const VkInstance &instance) -> VkSurfaceKHR {
     #ifdef SR_WIN32 // TODO: use VK_USE_PLATFORM_WIN32_KHR
