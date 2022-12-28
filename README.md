@@ -1,5 +1,7 @@
 # SpaRcle Engine
 
+![image](https://user-images.githubusercontent.com/47291246/183247603-04a0e820-8b32-49f1-a728-cec67b53a5e7.png)
+
 ## Supported compilers
 - [x] MSVC (Stable)
 - [x] MinGW
