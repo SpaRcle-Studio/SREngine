@@ -175,11 +175,6 @@ namespace SR_GTYPES_NS {
         Mesh::UseModelMatrix();
     }
 
-    SR_UTILS_NS::Path Text::GetResourcePath() const {
-        static SR_UTILS_NS::Path path;
-        return path;
-    }
-
     void Types::Text::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
             m_modelMatrix = pTransform->GetMatrix();

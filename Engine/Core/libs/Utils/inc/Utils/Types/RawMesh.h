@@ -29,7 +29,7 @@ namespace SR_UTILS_NS::Types {
         ~RawMesh() override;
 
     public:
-        static RawMesh *Load(const std::string &path);
+        static RawMesh *Load(const SR_UTILS_NS::Path &path);
 
     public:
         bool Access(const CallbackFn& fn) const;

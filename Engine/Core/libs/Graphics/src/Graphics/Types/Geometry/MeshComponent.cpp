@@ -88,22 +88,17 @@ namespace SR_GTYPES_NS {
         auto* pCopy = dynamic_cast<MeshComponent*>(destination ? destination : nullptr);
         pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::CopyResource(pCopy));
 
-        pCopy->m_resourcePath = m_resourcePath;
         pCopy->m_geometryName = m_geometryName;
         pCopy->m_barycenter = m_barycenter;
 
         return IndexedMesh::CopyResource(destination);
     }
 
-    SR_UTILS_NS::Path MeshComponent::GetResourcePath() const {
-        if (m_resourcePath.empty()) {
-            m_resourcePath = SR_UTILS_NS::Path(
-                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
-                    true /** fast */
-            );
-        }
-
-        return m_resourcePath;
+    SR_UTILS_NS::Path MeshComponent::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
     }
 
     SR_UTILS_NS::Component *MeshComponent::CopyComponent() const {

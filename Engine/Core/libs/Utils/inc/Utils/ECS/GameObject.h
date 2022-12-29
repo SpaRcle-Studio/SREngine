@@ -49,14 +49,14 @@ namespace SR_UTILS_NS {
         using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;
 
     public:
-        GameObject(const ScenePtr& scene, std::string name, Transform* pTransform, std::string tag = "Untagged");
-        GameObject(const ScenePtr& scene, std::string name, std::string tag = "Untagged");
+        GameObject(std::string name, Transform* pTransform, std::string tag = "Untagged");
+        GameObject(std::string name, std::string tag = "Untagged");
         ~GameObject() override;
 
-        static GameObject::Ptr Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter);
+        static GameObject::Ptr Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene);
 
     public:
-        SR_NODISCARD GameObject::Ptr Copy(const ScenePtr& scene, const IdGetterFn& idGetter) const;
+        SR_NODISCARD GameObject::Ptr Copy(const ScenePtr& scene) const;
 
         SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
@@ -71,6 +71,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetIdInScene() const noexcept { return m_idInScene; }
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
+        SR_NODISCARD SR_INLINE const GameObjects& GetChildrenRef() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
 
@@ -83,6 +84,7 @@ namespace SR_UTILS_NS {
         SR_MATH_NS::FVector3 GetHierarchyBarycenter();
 
         void SetIdInScene(uint64_t id);
+        void SetScene(ScenePtr pScene);
 
         void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
         void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;

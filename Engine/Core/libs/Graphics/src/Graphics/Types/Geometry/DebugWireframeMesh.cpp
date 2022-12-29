@@ -196,15 +196,11 @@ namespace SR_GTYPES_NS {
         return m_modelMatrix;
     }
 
-    SR_UTILS_NS::Path DebugWireframeMesh::GetResourcePath() const {
-        if (m_resourcePath.empty()) {
-            m_resourcePath = SR_UTILS_NS::Path(
-                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
-                    true /** fast */
-            );
-        }
-
-        return m_resourcePath;
+    SR_UTILS_NS::Path DebugWireframeMesh::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
     }
 
     void DebugWireframeMesh::SetColor(const SR_MATH_NS::FVector4& color) {

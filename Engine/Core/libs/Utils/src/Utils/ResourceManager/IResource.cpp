@@ -62,11 +62,11 @@ namespace SR_UTILS_NS {
         return ResourceManager::Instance().GetTypeName(m_resourceHashName);
     }
 
-    void IResource::SetId(const std::string &id, bool autoRegister) {
-        SRAssert2(!id.empty(), "Invalid id!");
+    void IResource::SetId(uint64_t hashId, bool autoRegister) {
+        if (m_resourceHashId == 0) {
+            m_resourceHashId = hashId;
 
-        if (m_resourceId == "NoID") {
-            m_resourceId = id;
+            SRAssert(m_resourceHashPath != 0);
 
             if (autoRegister) {
                 ResourceManager::Instance().RegisterResource(this);
@@ -77,8 +77,54 @@ namespace SR_UTILS_NS {
         }
     }
 
+    void IResource::SetId(const std::string &id, bool autoRegister) {
+        SRAssert2(!id.empty(), "Invalid id!");
+
+        if (m_resourceHashId == 0) {
+            auto&& resourcesManager = ResourceManager::Instance();
+
+            /// обязательно присваиваем до инициализации пути
+            m_resourceHashId = resourcesManager.RegisterResourceId(id);
+
+            SRAssert(m_resourceHashPath == 0);
+
+            auto&& path = InitializeResourcePath();
+            m_resourceHashPath = resourcesManager.RegisterResourcePath(path);
+
+            if (autoRegister) {
+                resourcesManager.RegisterResource(this);
+            }
+        }
+        else {
+            SRHalt("Double set resource id!");
+        }
+    }
+
+    IResource::RemoveUPResult IResource::RemoveUsePoint() {
+        if (m_countUses == 0) {
+            SRHalt("Count use points is zero!");
+            return RemoveUPResult::Error;
+        }
+
+        --m_countUses;
+
+        if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+            if (IsRegistered()) {
+                Destroy();
+                return RemoveUPResult::Destroy;
+            }
+            else {
+                /// так и не зарегистрировали ресурс
+                delete this;
+                return RemoveUPResult::Delete;
+            }
+        }
+
+        return RemoveUPResult::Success;
+    }
+
     void IResource::AddUsePoint() {
-        SRAssert(m_countUses <= 65535);
+        SRAssert(m_countUses != SR_UINT16_MAX);
 
         if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
             SRHalt("IResource::AddUsePoint() : potential multi threading error!");
@@ -90,8 +136,11 @@ namespace SR_UTILS_NS {
     IResource *IResource::CopyResource(IResource *destination) const {
         destination->m_autoRemove = m_autoRemove;
         destination->m_lifetime = m_lifetime;
+        destination->m_resourceHashPath = m_resourceHashPath;
         destination->m_loadState.store(m_loadState);
-        destination->SetId(m_resourceId);
+
+        destination->SetId(m_resourceHashId, true /** auto register */);
+
         destination->SetReadOnly(m_readOnly);
 
         return destination;
@@ -195,5 +244,17 @@ namespace SR_UTILS_NS {
         else {
             UpdateResources(depth - 1);
         }
+    }
+
+    const std::string& IResource::GetResourceId() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResourceId(m_resourceHashId);
+    }
+
+    const Path& IResource::GetResourcePath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResourcePath(m_resourceHashPath);
+    }
+
+    Path IResource::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(GetResourceId(), true /** fast */);
     }
 }

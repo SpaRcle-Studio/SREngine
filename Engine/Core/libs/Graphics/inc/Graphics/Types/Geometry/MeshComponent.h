@@ -53,7 +53,7 @@ namespace SR_GTYPES_NS {
             return m_translation;
         }
 
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
     protected:
         SR_NODISCARD RenderScenePtr GetRenderScene();

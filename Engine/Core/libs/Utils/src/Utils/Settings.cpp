@@ -10,7 +10,7 @@ namespace SR_UTILS_NS {
 
         bool hasErrors = false;
 
-        Path&& path = GetResourcePath();
+        Path path = GetResourcePath();
         if (!path.IsAbs()) {
             path = GetAssociatedPath().Concat(path);
         }
@@ -61,16 +61,12 @@ namespace SR_UTILS_NS {
         return ResourceManager::Instance().GetResPath();
     }
 
-    Path Settings::GetResourcePath() const {
-        return IResource::GetResourcePath();
-    }
-
     bool Settings::Destroy() {
         return IResource::Destroy();
     }
 
     SR_XML_NS::Document Settings::LoadDocument() const {
-        Path&& path = GetResourcePath();
+        Path path = GetResourcePath();
         if (!path.IsAbs()) {
             path = GetAssociatedPath().Concat(path);
         }

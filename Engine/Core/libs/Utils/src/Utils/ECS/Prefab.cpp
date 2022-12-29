@@ -42,7 +42,9 @@ namespace SR_UTILS_NS {
     bool Prefab::Unload() {
         SR_LOCK_GUARD
 
-        m_data->Destroy();
+        if (m_data) {
+            m_data->Destroy();
+        }
 
         return IResource::Unload();
     }
@@ -61,7 +63,7 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        m_data = SR_UTILS_NS::GameObject::Load(marshal, nullptr, GameObject::IdGetterFn());
+        m_data = SR_UTILS_NS::GameObject::Load(marshal, nullptr);
 
         if (!m_data.Valid()) {
             m_loadState = LoadState::Error;

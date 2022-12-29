@@ -43,7 +43,6 @@ namespace SR_UTILS_NS {
         bool Reload() final;
 
     protected:
-        SR_NODISCARD Path GetResourcePath() const override;
         SR_NODISCARD Path GetAssociatedPath() const override;
         SR_NODISCARD SR_XML_NS::Document LoadDocument() const;
 
@@ -89,9 +88,7 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> void GlobalSettings<T>::InitSingleton() {
-        auto&& path = GetResourcePath();
-
-        SetId(path);
+        SetId(InitializeResourcePath().ToString());
 
         AddUsePoint();
 
@@ -103,7 +100,7 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> IResource::RemoveUPResult GlobalSettings<T>::RemoveUsePoint() {
-        SRAssert2(m_countUses > 0, "count use points is zero!");
+        SRAssert2(GetCountUses() > 0, "count use points is zero!");
         --m_countUses;
         return IResource::RemoveUPResult::Success;
     }

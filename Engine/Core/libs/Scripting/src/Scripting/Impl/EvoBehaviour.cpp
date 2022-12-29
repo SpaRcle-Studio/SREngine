@@ -24,7 +24,7 @@ namespace SR_SCRIPTING_NS {
         if (!path.empty()) {
             auto&& compiler = GlobalEvoCompiler::Instance();
 
-            m_script = EvoScript::Script::Allocate(path, compiler.GetGenerator()->GetAddresses());
+            m_script = EvoScript::Script::Allocate(path.ToString(), compiler.GetGenerator()->GetAddresses());
 
             auto&& fullPath = GetAssociatedPath().Concat(path);
             if (!m_script || !m_script->Load(fullPath, compiler, true)) {

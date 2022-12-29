@@ -14,6 +14,7 @@
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT ResourceManager : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
+        using Hash = uint64_t;
     public:
         static const float_t ResourceLifeTime;
 
@@ -22,7 +23,13 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetResPath() const { return m_folder; }
         SR_NODISCARD const Path& GetResPathRef() const { return m_folder; }
         SR_NODISCARD Path GetCachePath() const { return m_folder.Concat("Cache"); }
-        SR_NODISCARD std::string_view GetTypeName(uint64_t hashName) const;
+        SR_NODISCARD std::string_view GetTypeName(Hash hashName) const;
+
+        SR_NODISCARD const std::string& GetResourceId(Hash hashId) const;
+        SR_NODISCARD Hash RegisterResourceId(const std::string& resourceId);
+
+        SR_NODISCARD const Path& GetResourcePath(Hash hashPath) const;
+        SR_NODISCARD Hash RegisterResourcePath(const Path& path);
 
         IResource* Find(uint64_t hashTypeName, const std::string& ID);
 
@@ -65,14 +72,18 @@ namespace SR_UTILS_NS {
         void Thread();
 
     private:
-        ResourcesList m_destroyed = ResourcesList();
-        ResourcesTypes m_resources = ResourcesTypes();
+        ResourcesList m_destroyed;
+        ResourcesTypes m_resources;
+
+        /// никогда не очищаем и ничего не удаляем
+        ska::flat_hash_map<Hash, std::string> m_hashIds;
+        ska::flat_hash_map<Hash, Path> m_hashPaths;
 
     private:
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_force = false;
 
-        Path m_folder = Path();
+        Path m_folder;
         Types::Thread::Ptr m_thread = nullptr;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;

@@ -53,8 +53,6 @@ namespace SR_GTYPES_NS {
             return m_modelMatrix;
         }
 
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
-
         SR_NODISCARD uint32_t GetAtlasWidth() const noexcept { return m_width; }
         SR_NODISCARD uint32_t GetAtlasHeight() const noexcept { return m_height; }
 

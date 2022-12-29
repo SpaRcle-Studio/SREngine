@@ -64,6 +64,8 @@ namespace SR_WORLD_NS {
         GameObjectPtr FindByComponent(const std::string& name);
         GameObjectPtr Find(const std::string& name);
 
+        void RegisterGameObject(const GameObjectPtr& ptr);
+
         virtual GameObjectPtr InstanceFromFile(const std::string& path);
         virtual GameObjectPtr FindOrInstance(const std::string& name);
         virtual GameObjectPtr Instance(const std::string& name);
