@@ -121,18 +121,16 @@ namespace SR_HTYPES_NS {
 
         template<typename T> T View(uint64_t offset) const {
             T value = T();
+            const auto buff = m_stream.rdbuf();
 
-#if defined(SR_MINGW) || defined(SR_ANDROID)
-            SRHalt0();
-#else
             memcpy(
-                &value,
-                m_stream.rdbuf()->view().substr(offset, sizeof(T)).data(),
-                sizeof(T)
+                    &value,
+                    buff->str().substr(offset, sizeof(T)).data(),
+                    sizeof(T)
             );
-#endif
             return value;
         }
+
 
         template<typename T> T Read() {
             if constexpr (std::is_same_v<T, std::any>) {

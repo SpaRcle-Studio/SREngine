@@ -332,7 +332,7 @@ bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {
     return is_open;
 }
 
-void GUISystem::DrawComponents(const Helper::Types::SafePtr<SR_UTILS_NS::GameObject>& gameObject) {
+void GUISystem::DrawComponents(const SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>& gameObject) {
     if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
         if (ImGui::BeginMenu("Add component")) {
             for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
@@ -428,136 +428,6 @@ void GUISystem::DrawGuizmoTools() {
     }
 }
 
-void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene) {
-    //if (scene.LockIfValid()) {
-    //    const auto&& observer = scene->GetObserver();
-    //    const auto offset = observer->m_offset;
-//
-    //    ImGui::Separator();
-    //    DrawTextOnCenter("Current");
-//
-    //    ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
-    //    ImGui::InputFloat2("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
-//
-    //    ImGui::Separator();
-    //    DrawTextOnCenter("Offset");
-//
-    //    auto chunkOffset = offset.m_chunk.ToGLM();
-    //    if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-    //        scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
-//
-    //    auto regionOffset = offset.m_region.ToGLM();
-    //    if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
-    //        scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
-//
-    //    if (ImGui::Button("Reload chunks")) {
-    //        scene->ReloadChunks();
-    //    }
-//
-    //    if (auto&& chunk = scene->GetCurrentChunk()) {
-    //        ImGui::Separator();
-    //        int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
-    //        ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
-    //    }
-//
-    //    scene.Unlock();
-    //}
-}
-
-void GUISystem::DrawGuizmo(Framework::Graphics::Types::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
-    if (!camera)
-        return;
-
-    /*
-    if (gameObject.LockIfValid()) {
-        ImGuiWindow *window = ImGui::GetCurrentWindow();
-        if (!window || window->SkipItems)
-            return;
-
-        auto img_size = camera->GetSize();
-
-        auto win_size = Math::FVector2(window->Size.x, window->Size.y);
-
-        const Helper::Math::Unit dx = win_size.x / img_size.x;
-        const Helper::Math::Unit dy = win_size.y / img_size.y;
-
-        if (dy > dx)
-            img_size *= dx;
-        else
-            img_size *= dy;
-
-        static float bounds[] = {-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f};
-        static float boundsSnap[] = {0.1f, 0.1f, 0.1f};
-
-        glm::vec3 snap = glm::vec3(1, 1, 1) * ((float) m_snapValue / 100.f);
-
-        glm::mat4 delta;
-
-        auto barycenter = gameObject->GetBarycenter();
-
-        glm::mat4 mat = [=]() -> auto {
-            if (m_centerActive && !barycenter.IsInfinity())
-                return gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL, barycenter);
-            return gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL);
-        }();
-
-        static float axis[3] = {0, 0, 0};
-        static float value = 0.0;
-        static float old_rotate = 0.0;
-        static float old_scale = 0.0;
-
-        ImGuizmo::SetRect(
-                (float)(ImGui::GetWindowPos().x + (win_size.x - img_size.x) / 2.f),
-                (float)(ImGui::GetWindowPos().y + (win_size.y - img_size.y) / 2.f),
-                img_size.x,
-                img_size.y);
-
-        if (ImGuizmo::Manipulate(
-                &camera->GetImGuizmoView()[0][0],
-                &camera->GetProjection()[0][0],
-                m_boundsActive ? ImGuizmo::BOUNDS : m_currentGuizmoOperation, m_currentGuizmoMode,
-                &mat[0][0],"F
-                &delta[0][0], nullptr, nullptr, boundsSnap,
-                &value, &axis[0])) {
-            if (m_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
-                if (abs((value - old_rotate)) < 1) {
-                    if (m_centerActive && !barycenter.IsInfinity()) {
-                        gameObject->GetTransform()->RotateAround(
-                                barycenter,
-                                FVector3(axis).InverseAxis(1),
-                                (value - old_rotate) * 20.0,
-                                m_currentGuizmoMode == ImGuizmo::LOCAL);
-                    } else {
-                        if (m_currentGuizmoMode == ImGuizmo::LOCAL)
-                            gameObject->GetTransform()->RotateAxis(FVector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
-                        else
-                            gameObject->GetTransform()->GlobalRotateAxis(FVector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
-                    }
-                }
-            } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
-                if (value < 1) {
-                    if (m_currentGuizmoMode == ImGuizmo::LOCAL)
-                        gameObject->GetTransform()->Translate(
-                                gameObject->GetTransform()->Direction(FVector3(axis).InverseAxis(0), true) * value);
-                    else
-                        gameObject->GetTransform()->GlobalTranslate(FVector3(axis).InverseAxis(0) * value);
-                }
-            } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::SCALE) {
-                if (value == 0)
-                    old_scale = 0;
-
-                if (m_currentGuizmoMode == ImGuizmo::MODE::LOCAL)
-                    gameObject->GetTransform()->Scaling(FVector3(axis) * (value - old_scale));
-
-                old_scale = value;
-            }
-        }
-
-        old_rotate = value;
-
-        gameObject.Unlock();
-    }*/
-}
 
 bool GUISystem::ButtonWithId(
     const char *_id,

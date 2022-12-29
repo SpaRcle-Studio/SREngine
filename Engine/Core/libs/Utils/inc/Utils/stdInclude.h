@@ -51,6 +51,9 @@
 #include <chrono>
 #include <random>
 #include <cstdint>
+#if !defined(SR_ANDROID) && defined(SR_CXX_20)
+    #include <forward_list>
+#endif
 
 #ifdef SR_MINGW
     #include <iomanip>

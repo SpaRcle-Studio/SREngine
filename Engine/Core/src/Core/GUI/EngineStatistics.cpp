@@ -33,7 +33,7 @@ namespace Framework::Core::GUI {
                     ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
 
                     std::stringstream stream;
-                    stream << std::fixed << std::setprecision(3) << pRes->GetLifetime();
+//                    stream << std::fixed << std::setprecision(3) << pRes->GetLifetime();
 
                     node.append(" (").append(stream.str()).append(")");
                 }

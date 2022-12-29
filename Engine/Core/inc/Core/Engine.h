@@ -44,7 +44,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_CORE_NS {
     class Engine : public SR_UTILS_NS::Singleton<Engine> {
-        friend class Singleton<Engine>;
+        friend class SR_UTILS_NS::Singleton<Engine>;
         friend class Framework::API;
         using PipelinePtr = SR_GRAPH_NS::Environment*;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
