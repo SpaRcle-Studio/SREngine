@@ -5,7 +5,7 @@
 #include <Utils/ResourceManager/ResourceInfo.h>
 
 namespace SR_UTILS_NS {
-    IResource *ResourceType::Find(const std::string &id)  {
+    IResource *ResourceType::Find(const ResourceType::ResourceId &id)  {
         if (auto&& pIt = m_copies.find(id); pIt == m_copies.end()) {
             return nullptr;
         }
@@ -27,7 +27,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    bool ResourceType::IsLast(const std::string &id) {
+    bool ResourceType::IsLast(const ResourceType::ResourceId &id) {
         if (auto&& pIt = m_copies.find(id); pIt == m_copies.end()) {
             return true;
         }
@@ -36,27 +36,29 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceType::Remove(IResource *pResource) {
-        const auto id = pResource->GetResourceId();
-        auto&& path = pResource->GetResourcePath();
+        const auto id = pResource->GetResourceHashId();
+        auto&& path = pResource->GetResourceHashPath();
 
         /// -------------------------------------------------------------
 
-        if (auto &&group = m_copies.find(id.data()); group != m_copies.end()) {
+        if (auto &&group = m_copies.find(id); group != m_copies.end()) {
             group->second.erase(pResource);
         }
         else {
-            SRAssert2(false, "Resource not found! Id: " + std::string(id));
+            SRHalt("Resource not found!");
             return;
         }
 
-        if (m_copies.at(id.data()).empty()) {
-            m_copies.erase(id.data());
+        if (m_copies.at(id).empty()) {
+            m_copies.erase(id);
         }
 
         /// -------------------------------------------------------------
 
         auto&& info = m_info.at(path);
+
         info.m_loaded.erase(pResource);
+
         if (info.m_loaded.empty()) {
             m_info.erase(path);
         }
@@ -67,12 +69,13 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceType::Add(IResource* pResource) {
-        m_copies[pResource->GetResourceId().data()].insert(pResource);
+        m_copies[pResource->GetResourceHashId()].insert(pResource);
         m_resources.insert(pResource);
 
         pResource->OnResourceRegistered();
 
-        auto&& path = pResource->GetResourcePath();
+        auto&& path = pResource->GetResourceHashPath();
+
         if (auto&& pIt = m_info.find(path); pIt != m_info.end()) {
             auto&& [_, info] = *pIt;
             info.m_loaded.insert(pResource);

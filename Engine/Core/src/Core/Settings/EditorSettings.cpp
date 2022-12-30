@@ -5,7 +5,7 @@
 #include <Core/Settings/EditorSettings.h>
 
 namespace SR_CORE_NS {
-    SR_UTILS_NS::Path EditorSettings::GetResourcePath() const {
+    SR_UTILS_NS::Path EditorSettings::InitializeResourcePath() const {
         return "Editor/Configs/EditorSettings.xml";
     }
 

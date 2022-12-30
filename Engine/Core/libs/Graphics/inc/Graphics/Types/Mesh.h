@@ -76,7 +76,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Material* GetMaterial() const { return m_material; }
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3::Zero(); }
 
         virtual void SetGeometryName(const std::string& name) { }

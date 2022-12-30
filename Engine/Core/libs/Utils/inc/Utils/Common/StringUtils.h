@@ -214,7 +214,7 @@ namespace SR_UTILS_NS {
         }
 
         static std::string GetExtensionFromFilePath(std::string path);
-        static std::string Reverse(std::string str);
+        static std::string Reverse(const std::string& str);
 
         static glm::vec2 MakeVec2FromString(const char* source, char chr, unsigned short start);
         static glm::vec3 MakeVec3FromString(const char* source, char chr, unsigned short start);

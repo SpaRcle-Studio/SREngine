@@ -19,7 +19,7 @@ namespace SR_HTYPES_NS {
         delete m_importer;
     }
 
-    RawMesh *RawMesh::Load(const std::string &rawPath) {
+    RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
         SR_GLOBAL_LOCK
 
         Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
@@ -103,7 +103,7 @@ namespace SR_HTYPES_NS {
             return fn(m_scene);
         }
 
-        SRAssert2(false, "Resource isn't loaded!");
+        SRHalt("RawMesh::Access() : resource isn't loaded!");
 
         return false;
     }
@@ -112,7 +112,7 @@ namespace SR_HTYPES_NS {
         SR_LOCK_GUARD
 
         if (!m_scene) {
-            SRAssert(false);
+            SRHalt("RawMesh::GetMeshesCount() : assimp scene is invalid!");
             return 0;
         }
 

@@ -577,7 +577,7 @@ bool GUISystem::BeginMenuBar() {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
-                    { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
+                    { { "Any model", "prefab,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
                 {
                     /// TODO:Сделать обратимость
                     scene->InstanceFromFile(path);

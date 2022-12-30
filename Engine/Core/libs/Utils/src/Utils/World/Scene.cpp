@@ -31,21 +31,9 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + GetName() + "\" scene.");
         }
 
-        const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
+        GameObject::Ptr gm = *(new GameObject(name));
 
-        GameObject::Ptr gm = *(new GameObject(this, name));
-
-        gm->SetIdInScene(id);
-
-        if (m_freeObjIndices.empty()) {
-            m_gameObjects.emplace_back(gm);
-        }
-        else {
-            m_gameObjects[m_freeObjIndices.front()] = gm;
-            m_freeObjIndices.erase(m_freeObjIndices.begin());
-        }
-
-        m_isHierarchyChanged = true;
+        RegisterGameObject(gm);
 
         return gm;
     }
@@ -59,21 +47,7 @@ namespace SR_WORLD_NS {
     }
 
     Scene::GameObjectPtr Scene::Instance(SR_HTYPES_NS::Marshal &marshal) {
-        return GameObject::Load(marshal, this, [this](const GameObject::Ptr& ptr) -> uint64_t {
-            const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
-
-            if (m_freeObjIndices.empty()) {
-                m_gameObjects.emplace_back(ptr);
-            }
-            else {
-                m_gameObjects[m_freeObjIndices.front()] = ptr;
-                m_freeObjIndices.erase(m_freeObjIndices.begin());
-            }
-
-            m_isHierarchyChanged = true;
-
-            return id;
-        });
+        return GameObject::Load(marshal, this);
     }
 
     Scene::Ptr Scene::New(const Path& path) {
@@ -255,6 +229,18 @@ namespace SR_WORLD_NS {
     }
 
     GameObject::Ptr Scene::InstanceFromFile(const std::string &path) {
+        auto&& extension = SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(path);
+
+        if (extension == Prefab::EXTENSION) {
+            auto&& pPrefab = Prefab::Load(path);
+
+            if (pPrefab) {
+                return pPrefab->GetData()->Copy(this);
+            }
+
+            return GameObject::Ptr();
+        }
+
         if (auto&& raw = SR_HTYPES_NS::RawMesh::Load(path)) {
             GameObject::Ptr root = Instance(raw);
 
@@ -289,5 +275,22 @@ namespace SR_WORLD_NS {
 
     std::string Scene::GetName() const {
         return m_path.GetBaseName();
+    }
+
+    void Scene::RegisterGameObject(const Scene::GameObjectPtr &ptr) {
+        const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
+
+        ptr->SetIdInScene(id);
+        ptr->SetScene(this);
+
+        if (m_freeObjIndices.empty()) {
+            m_gameObjects.emplace_back(ptr);
+        }
+        else {
+            m_gameObjects[m_freeObjIndices.front()] = ptr;
+            m_freeObjIndices.erase(m_freeObjIndices.begin());
+        }
+
+        m_isHierarchyChanged = true;
     }
 }

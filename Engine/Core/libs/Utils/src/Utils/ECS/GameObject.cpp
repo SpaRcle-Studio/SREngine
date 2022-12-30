@@ -16,11 +16,9 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    GameObject::GameObject(const ScenePtr& scene, std::string name, Transform* pTransform, std::string tag)
+    GameObject::GameObject(std::string name, Transform* pTransform, std::string tag)
         : Super(this)
     {
-        m_scene = scene;
-
         SetName(std::move(name));
         m_tag = std::move(tag);
 
@@ -29,8 +27,8 @@ namespace SR_UTILS_NS {
         UpdateEntityPath();
     }
 
-    GameObject::GameObject(const ScenePtr& scene, std::string name, std::string tag)
-        : GameObject(scene, std::move(name), new Transform3D(), std::move(tag))
+    GameObject::GameObject(std::string name, std::string tag)
+        : GameObject(std::move(name), new Transform3D(), std::move(tag))
     { }
 
     GameObject::~GameObject() {
@@ -103,7 +101,10 @@ namespace SR_UTILS_NS {
 
         child->OnAttached();
 
-        m_scene->OnChanged();
+        if (m_scene) {
+            m_scene->OnChanged();
+        }
+
         SetDirty(true);
 
         return true;
@@ -112,16 +113,26 @@ namespace SR_UTILS_NS {
     void GameObject::SetName(std::string name) {
         m_name = std::move(name);
         m_hashName = SR_UTILS_NS::HashCombine(m_name);
-        m_scene->OnChanged();
+
+        if (m_scene) {
+            m_scene->OnChanged();
+        }
     }
 
     void GameObject::SetTag(const std::string &tag) {
         m_tag = tag;
-        m_scene->OnChanged();
+
+        if (m_scene) {
+            m_scene->OnChanged();
+        }
     }
 
      void GameObject::SetIdInScene(uint64_t id) {
          m_idInScene = id;
+     }
+
+     void GameObject::SetScene(ScenePtr pScene) {
+         m_scene = pScene;
      }
 
     bool GameObject::Contains(const GameObject::Ptr& gameObject) {
@@ -149,7 +160,10 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        m_scene->OnChanged();
+        if (m_scene) {
+            m_scene->OnChanged();
+        }
+
         m_transform->UpdateTree();
 
         return true;
@@ -449,7 +463,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    GameObject::Ptr GameObject::Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene, const IdGetterFn& idGetter) {
+    GameObject::Ptr GameObject::Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene) {
         SR_UTILS_NS::GameObject::Ptr gameObject;
 
         /// для экономии памяти стека при рекурсивном создании объектов, кладем все переменные в эту область видимости.
@@ -469,11 +483,11 @@ namespace SR_UTILS_NS {
            auto&& tag = hasTag ? marshal.Read<std::string>() : std::string();
 
            if (entityId == UINT64_MAX) {
-               gameObject = *(new GameObject(scene, name));
+               gameObject = *(new GameObject(name));
            }
            else {
-               SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, &idGetter, &scene, name]() -> SR_UTILS_NS::Entity* {
-                   gameObject = *(new GameObject(scene, name));
+               SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity* {
+                   gameObject = *(new GameObject(name));
                    return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
                });
            }
@@ -483,8 +497,8 @@ namespace SR_UTILS_NS {
                return SR_UTILS_NS::GameObject::Ptr();
            }
 
-           if (idGetter) {
-               gameObject->SetIdInScene(idGetter(gameObject));
+           if (scene) {
+               scene->RegisterGameObject(gameObject);
            }
 
             /// ----------------------
@@ -510,7 +524,7 @@ namespace SR_UTILS_NS {
 
         auto&& childrenCount = marshal.Read<uint32_t>();
         for (uint32_t i = 0; i < childrenCount; ++i) {
-            if (auto&& child = Load(marshal, scene, idGetter)) {
+            if (auto&& child = Load(marshal, scene)) {
                 gameObject->AddChild(child);
             }
         }
@@ -522,13 +536,13 @@ namespace SR_UTILS_NS {
         return "GameObject: " + GetName();
     }
 
-    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene, const GameObject::IdGetterFn &idGetter) const {
-        GameObject::Ptr gameObject = *(new GameObject(scene, GetName(), GetTransform()->Copy(), GetTag()));
+    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene) const {
+        GameObject::Ptr gameObject = *(new GameObject(GetName(), GetTransform()->Copy(), GetTag()));
 
         gameObject->SetEnabled(IsEnabled());
 
-        if (idGetter) {
-            gameObject->SetIdInScene(idGetter(gameObject));
+        if (scene) {
+            scene->RegisterGameObject(gameObject);
         }
 
         for (auto&& pComponent : m_components) {
@@ -537,6 +551,10 @@ namespace SR_UTILS_NS {
 
         for (auto&& pComponent : m_loadedComponents) {
             gameObject->LoadComponent(pComponent->CopyComponent());
+        }
+
+        for (auto&& children : GetChildrenRef()) {
+            gameObject->AddChild(children->Copy(scene));
         }
 
         return gameObject;

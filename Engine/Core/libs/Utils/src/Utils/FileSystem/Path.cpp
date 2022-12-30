@@ -29,6 +29,7 @@ namespace SR_UTILS_NS {
         if (!fast) {
             Update();
         }
+        m_hash = SR_HASH_STR(m_path);
     }
 
     Path::Path(std::string path, bool fast)
@@ -41,6 +42,7 @@ namespace SR_UTILS_NS {
         if (!fast) {
             Update();
         }
+        m_hash = SR_HASH_STR(m_path);
     }
 
     Path::Path(const char *path, bool fast)
@@ -53,6 +55,7 @@ namespace SR_UTILS_NS {
         if (!fast) {
             Update();
         }
+        m_hash = SR_HASH_STR(m_path);
     }
 
     Path Path::Normalize() {
@@ -96,7 +99,7 @@ namespace SR_UTILS_NS {
         return m_path.c_str();
     }
 
-    bool Path::Update() {
+    void Path::Update() {
         NormalizeSelf();
 
         m_type = GetType();
@@ -123,10 +126,6 @@ namespace SR_UTILS_NS {
                 m_ext  = std::string();
             }
         }
-
-        m_hash = std::hash<std::string>{}(m_path);
-
-        return true;
     }
 
     std::string Path::GetExtension() const {

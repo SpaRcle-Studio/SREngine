@@ -210,10 +210,6 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    SR_UTILS_NS::Path Mesh::GetResourcePath() const {
-        return SR_UTILS_NS::IResource::GetResourcePath();
-    }
-
     Shader *Mesh::GetShader() const {
         return m_material ? m_material->GetShader() : nullptr;
     }
