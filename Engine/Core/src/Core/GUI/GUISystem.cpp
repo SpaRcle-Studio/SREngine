@@ -534,9 +534,17 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Load")) {
             auto&& scenesPath = Helper::ResourceManager::Instance().GetResPath();
             if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
-                auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
-                if (auto&& scene = SR_WORLD_NS::Scene::Load(folder)) {
-                    Engine::Instance().SetScene(scene);
+                if (path.GetExtensionView() == "scene") {
+                    auto &&folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
+
+                    if (auto &&scene = SR_WORLD_NS::Scene::Load(folder)) {
+                        Engine::Instance().SetScene(scene);
+                    }
+                }
+                else {
+                    if (auto &&scene = SR_WORLD_NS::Scene::Load(path)) {
+                        Engine::Instance().SetScene(scene);
+                    }
                 }
             }
         }

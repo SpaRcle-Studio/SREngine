@@ -16,17 +16,17 @@ namespace SR_UTILS_NS {
             pMarshal = new SR_HTYPES_NS::Marshal();
         }
 
-        pMarshal->Write(static_cast<uint32_t>(m_components.size() + m_loadedComponents.size()));
+        pMarshal->Write(static_cast<uint16_t>(m_components.size() + m_loadedComponents.size()));
 
         for (auto&& pComponent : m_components) {
             auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint64_t>(marshalComponent->BytesCount());
+            pMarshal->Write<uint32_t>(marshalComponent->BytesCount());
             pMarshal->Append(marshalComponent);
         }
 
         for (auto&& pComponent : m_loadedComponents) {
             auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint64_t>(marshalComponent->BytesCount());
+            pMarshal->Write<uint32_t>(marshalComponent->BytesCount());
             pMarshal->Append(marshalComponent);
         }
 

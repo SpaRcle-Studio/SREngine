@@ -165,8 +165,13 @@ namespace SR_GRAPH_NS::Types {
             SR_LOG("Mesh::CopyResource() : copy \"" + std::string(GetResourceId()) + "\" mesh...");
         }
 
-        mesh->m_isCalculated.store(m_isCalculated);
+        /** при копировании меш должен быть невычислен, иначе может получиться так,
+         * что мешь никогда не попадет в рендер и не очистит видео-память. */
+        mesh->m_isCalculated.store(false);
+
         mesh->m_hasErrors.store(false);
+
+        mesh->SetMaterial(GetMaterial());
 
         return SR_UTILS_NS::IResource::CopyResource(mesh);
     }

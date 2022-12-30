@@ -95,4 +95,22 @@ namespace SR_UTILS_NS {
     ResourceType::Info& ResourceType::GetInfo() {
         return m_info;
     }
+
+    void ResourceType::CollectUnused() {
+        for (auto&& pResource : m_resources) {
+            pResource->Execute([pResource]() -> bool {
+                if (pResource->GetCountUses() > 0) {
+                    return false;
+                }
+
+                if (pResource->IsDestroyed()) {
+                    return false;
+                }
+
+                pResource->Destroy();
+
+                return true;
+            });
+        }
+    }
 }

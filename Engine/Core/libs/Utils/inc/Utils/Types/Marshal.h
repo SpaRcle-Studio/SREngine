@@ -98,7 +98,7 @@ namespace SR_HTYPES_NS {
                 MarshalUtils::SaveAny<std::stringstream, std::any>(m_stream, value, m_size);
             }
             else if constexpr (Math::IsString<T>()) {
-                MarshalUtils::SaveString(m_stream, value, m_size);
+                MarshalUtils::SaveShortString(m_stream, value, m_size);
             }
             else if constexpr (IsSTLVector<T>()) {
                 MarshalUtils::SaveVector(m_stream, value, m_size);
@@ -137,7 +137,7 @@ namespace SR_HTYPES_NS {
                 return MarshalUtils::LoadAny<std::stringstream, std::any>(m_stream, m_position);
             }
             else if constexpr (Math::IsString<T>()) {
-                return MarshalUtils::LoadStr<std::stringstream>(m_stream, m_position);
+                return MarshalUtils::LoadShortStr<std::stringstream>(m_stream, m_position);
             }
             else {
                 return MarshalUtils::LoadValue<std::stringstream, T>(m_stream, m_position);

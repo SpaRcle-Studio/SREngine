@@ -78,6 +78,9 @@ namespace SR_UTILS_NS {
         void Remove(IResource* pResource);
         void Add(IResource* pResource);
 
+        /// ставит все неиспользуемые ресурсы на очередь уничтожения
+        void CollectUnused();
+
     private:
         ResourcesSet m_resources;
         CopiesMap m_copies;

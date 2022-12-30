@@ -27,8 +27,16 @@ namespace SR_UTILS_NS {
         UpdateEntityPath();
     }
 
+    GameObject::GameObject(std::string name, Transform *pTransform)
+        : GameObject(std::move(name), pTransform, std::move(std::string()))
+    { }
+
     GameObject::GameObject(std::string name, std::string tag)
         : GameObject(std::move(name), new Transform3D(), std::move(tag))
+    { }
+
+    GameObject::GameObject(std::string name)
+        : GameObject(std::move(name), std::move(std::string()))
     { }
 
     GameObject::~GameObject() {
@@ -332,13 +340,7 @@ namespace SR_UTILS_NS {
         pMarshal->Write(IsEnabled());
         pMarshal->Write(m_name);
 
-        if (HasTag()) {
-            pMarshal->Write(true);
-            pMarshal->Write(m_tag);
-        }
-        else {
-            pMarshal->Write(false);
-        }
+        pMarshal->Write(m_tag);
 
         pMarshal = m_transform->Save(pMarshal, flags);
 
@@ -348,7 +350,7 @@ namespace SR_UTILS_NS {
 
         /// save children
 
-        uint32_t childrenNum = 0;
+        uint16_t childrenNum = 0;
         for (auto&& child : m_children) {
             if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
                 continue;
@@ -356,7 +358,7 @@ namespace SR_UTILS_NS {
             ++childrenNum;
         }
 
-        pMarshal->Write(static_cast<uint32_t>(childrenNum));
+        pMarshal->Write(static_cast<uint16_t>(childrenNum));
         for (auto&& child : m_children) {
             if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
                 continue;
@@ -478,28 +480,27 @@ namespace SR_UTILS_NS {
 
             auto&& enabled = marshal.Read<bool>();
             auto&& name = marshal.Read<std::string>();
-            auto&& hasTag = marshal.Read<bool>();
 
-           auto&& tag = hasTag ? marshal.Read<std::string>() : std::string();
+            auto&& tag = marshal.Read<std::string>();
 
-           if (entityId == UINT64_MAX) {
-               gameObject = *(new GameObject(name));
-           }
-           else {
-               SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity* {
-                   gameObject = *(new GameObject(name));
-                   return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
-               });
-           }
+            if (entityId == UINT64_MAX) {
+                gameObject = *(new GameObject(name));
+            }
+            else {
+                SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity* {
+                    gameObject = *(new GameObject(name));
+                    return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
+                });
+            }
 
-           if (!gameObject.Valid()) {
-               SRHalt("GameObject::Load() : failed to create new gameobject!");
-               return SR_UTILS_NS::GameObject::Ptr();
-           }
+            if (!gameObject.Valid()) {
+                SRHalt("GameObject::Load() : failed to create new game object!");
+                return SR_UTILS_NS::GameObject::Ptr();
+            }
 
-           if (scene) {
-               scene->RegisterGameObject(gameObject);
-           }
+            if (scene) {
+                scene->RegisterGameObject(gameObject);
+            }
 
             /// ----------------------
 
@@ -510,9 +511,7 @@ namespace SR_UTILS_NS {
                     gameObject.Get()
             ));
 
-            if (hasTag) {
-                gameObject->SetTag(tag);
-            }
+            gameObject->SetTag(tag);
 
             /// ----------------------
 
@@ -522,8 +521,8 @@ namespace SR_UTILS_NS {
             }
         }
 
-        auto&& childrenCount = marshal.Read<uint32_t>();
-        for (uint32_t i = 0; i < childrenCount; ++i) {
+        auto&& childrenCount = marshal.Read<uint16_t>();
+        for (uint16_t i = 0; i < childrenCount; ++i) {
             if (auto&& child = Load(marshal, scene)) {
                 gameObject->AddChild(child);
             }

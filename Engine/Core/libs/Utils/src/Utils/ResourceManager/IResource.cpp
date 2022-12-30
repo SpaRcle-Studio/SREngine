@@ -101,6 +101,8 @@ namespace SR_UTILS_NS {
     }
 
     IResource::RemoveUPResult IResource::RemoveUsePoint() {
+        SR_LOCK_GUARD
+
         if (m_countUses == 0) {
             SRHalt("Count use points is zero!");
             return RemoveUPResult::Error;
@@ -124,6 +126,8 @@ namespace SR_UTILS_NS {
     }
 
     void IResource::AddUsePoint() {
+        SR_LOCK_GUARD
+
         SRAssert(m_countUses != SR_UINT16_MAX);
 
         if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
@@ -133,9 +137,19 @@ namespace SR_UTILS_NS {
         ++m_countUses;
     }
 
+    uint16_t IResource::GetCountUses() const noexcept {
+        return m_countUses;
+    }
+
+    bool IResource::IsDestroyed() const noexcept {
+        return m_isDestroyed;
+    }
+
     IResource *IResource::CopyResource(IResource *destination) const {
+        SR_LOCK_GUARD
+
         destination->m_autoRemove = m_autoRemove;
-        destination->m_lifetime = m_lifetime;
+        /// destination->m_lifetime = m_lifetime;
         destination->m_resourceHashPath = m_resourceHashPath;
         destination->m_loadState.store(m_loadState);
 
@@ -147,6 +161,8 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::Destroy() {
+        SR_LOCK_GUARD
+
         ResourceManager::Instance().Destroy(this);
 
         SRAssert(!IsDestroyed());
@@ -181,7 +197,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        SRAssert2Once(false, "Failed to get resource hash! \n\tResource id: " + std::string(GetResourceId()) +
+        SRHaltOnce("IResource::GetFileHash() : failed to get resource hash! \n\tResource id: " + std::string(GetResourceId()) +
             "\n\tResource path: " + path.ToString());
 
         return 0;
@@ -256,5 +272,14 @@ namespace SR_UTILS_NS {
 
     Path IResource::InitializeResourcePath() const {
         return SR_UTILS_NS::Path(GetResourceId(), true /** fast */);
+    }
+
+    Path IResource::GetAssociatedPath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+    }
+
+    bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) {
+        SR_LOCK_GUARD
+        return fun();
     }
 }

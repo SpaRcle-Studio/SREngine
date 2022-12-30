@@ -10,22 +10,37 @@ namespace SR_WORLD_NS {
     { }
 
     bool ScenePrefabLogic::Save(const Path& path) {
-        auto&& pMarshal = m_scene->SaveComponents(nullptr, SAVABLE_FLAG_NONE);
+        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3());
+        pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));
+        pMarshal->Write(GameObject::VERSION);
+        pMarshal->Write(true /** is enabled */);
+        pMarshal->Write(m_scene->GetName());
+        pMarshal->Write(std::string() /** tag */);
+
+        pMarshal = Transform3D().Save(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
+
+        pMarshal = m_scene->SaveComponents(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
 
         auto&& root = m_scene->GetRootGameObjects();
 
-        pMarshal->Write(static_cast<uint64_t>(root.size()));
-
+        uint16_t childrenNum = 0;
         for (auto&& gameObject : root) {
-            if (gameObject.RecursiveLockIfValid()) {
-                pMarshal = gameObject->Save(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
-                gameObject.Unlock();
+            if (gameObject->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+                continue;
             }
+            ++childrenNum;
         }
 
-        SR_THIS_THREAD->GetContext()->RemoveValue<SR_MATH_NS::FVector3>();
+        pMarshal->Write(static_cast<uint16_t>(childrenNum));
+
+        for (auto&& gameObject : root) {
+            if (gameObject->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+                continue;
+            }
+
+            pMarshal = gameObject->Save(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
+        }
 
         const bool result = pMarshal->Save(path);
         SR_SAFE_DELETE_PTR(pMarshal);
@@ -33,33 +48,26 @@ namespace SR_WORLD_NS {
     }
 
     bool ScenePrefabLogic::Load(const Path &path) {
-        SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3());
-
-        auto&& pMarshal = SR_HTYPES_NS::Marshal::LoadPtr(path);
-        if (!pMarshal) {
-            SR_ERROR("ScenePrefabLogic::Load() : failed to load marshal data!\n\tPath: " + path.ToString());
+        auto&& pPrefab = Prefab::Load(path);
+        if (!pPrefab) {
+            SR_ERROR("ScenePrefabLogic::Load() : failed to load prefab!\n\tPath: " + path.ToString());
             return false;
         }
 
-        /// ----------------------------------
+        pPrefab->AddUsePoint();
 
-        auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*pMarshal);
-        for (auto&& pComponent : components) {
-            m_scene->LoadComponent(pComponent);
+        for (auto&& pComponent : pPrefab->GetData()->GetComponents()) {
+            if (auto&& pCopy = pComponent->CopyComponent()) {
+                m_scene->LoadComponent(pCopy);
+            }
         }
 
-        /// ----------------------------------
-
-        const uint64_t count = pMarshal->Read<uint64_t>();
-        for (uint64_t i = 0; i < count; ++i) {
-            m_scene->Instance(*pMarshal);
+        for (auto&& gameObject : pPrefab->GetData()->GetChildrenRef()) {
+            /// при копировании объекта на сцену, он автоматически инстанциируется на ней
+            SR_MAYBE_UNUSED auto&& copy = gameObject->Copy(m_scene->Get());
         }
 
-        /// ----------------------------------
-
-        SR_THIS_THREAD->GetContext()->RemoveValue<SR_MATH_NS::FVector3>();
-
-        SR_SAFE_DELETE_PTR(pMarshal);
+        pPrefab->RemoveUsePoint();
 
         return true;
     }

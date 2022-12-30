@@ -30,11 +30,6 @@ namespace SR_GRAPH_UI_NS {
         auto* sprite2D = dynamic_cast<Sprite2D *>(destination ? destination : new Sprite2D());
         sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::CopyResource(sprite2D));
 
-        if (sprite2D->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            sprite2D->m_VBO = manager.CopyIfExists<Vertices::VertexType::UIVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
-
         return sprite2D;
     }
 

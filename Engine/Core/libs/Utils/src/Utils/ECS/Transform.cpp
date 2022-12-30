@@ -95,7 +95,7 @@ namespace SR_UTILS_NS {
                 pMarshal->Write(GetSkew(), Math::FVector3(1.f));
                 break;
             case Measurement::Space3D: {
-                if (m_gameObject->GetParent()) {
+                if (!m_gameObject || m_gameObject->GetParent()) {
                     pMarshal->Write(GetTranslation(), Math::FVector3(0.f));
                 }
                 else {

@@ -11,7 +11,11 @@ namespace SR_UTILS_NS {
     { }
 
     Prefab::~Prefab() {
-        SRAssert(!m_data);
+        if (m_data) {
+            m_data.AutoFree([](auto&& pData) {
+                pData->Destroy();
+            });
+        }
     }
 
     Prefab* Prefab::Load(const Path& rawPath) {

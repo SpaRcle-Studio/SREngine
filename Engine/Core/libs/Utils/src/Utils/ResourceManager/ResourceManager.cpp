@@ -121,8 +121,14 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::GC() {
-        if (m_destroyed.empty() && !m_force) {
+        if (m_destroyed.empty()) {
             return;
+        }
+
+        if (m_force) {
+            for (auto&& [hashName, group] : m_resources) {
+                group.CollectUnused();
+            }
         }
 
         auto resourceIt = m_destroyed.begin();

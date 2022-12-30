@@ -23,11 +23,6 @@ namespace SR_GTYPES_NS {
         wireFramed->SetRawMesh(m_rawMesh);
         wireFramed->m_meshId = m_meshId;
 
-        if (wireFramed->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            wireFramed->m_VBO = manager.CopyIfExists<Vertices::VertexType::SimpleVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
-
         return wireFramed;
     }
 

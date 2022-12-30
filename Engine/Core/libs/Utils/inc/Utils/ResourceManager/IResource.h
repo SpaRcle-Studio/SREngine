@@ -9,6 +9,7 @@
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
@@ -33,15 +34,17 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD virtual Path InitializeResourcePath() const;
 
+        bool Execute(const SR_HTYPES_NS::Function<bool()>& fun);
+
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
-        SR_NODISCARD bool IsDestroyed() const { return m_isDestroyed; }
+        SR_NODISCARD bool IsDestroyed() const noexcept;
         SR_NODISCARD bool IsForce() const { return m_force; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
-        SR_NODISCARD uint16_t GetCountUses() const noexcept { return m_countUses; }
+        SR_NODISCARD uint16_t GetCountUses() const noexcept;
         SR_NODISCARD float_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
@@ -51,7 +54,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const Path& GetResourcePath() const;
         SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
-        SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
+        SR_NODISCARD virtual Path GetAssociatedPath() const;
 
         SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 

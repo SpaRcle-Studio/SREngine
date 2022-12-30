@@ -14,6 +14,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::IResource* ProceduralMesh::CopyResource(IResource* destination) const {
+        /// TODO: fixme
         SRHalt("The procedural meshes isn't are copyable!");
         return nullptr;
     }

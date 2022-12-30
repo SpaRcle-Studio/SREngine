@@ -60,11 +60,6 @@ namespace SR_GTYPES_NS {
         mesh3D->SetRawMesh(m_rawMesh);
         mesh3D->m_meshId = m_meshId;
 
-        if (mesh3D->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            mesh3D->m_VBO = manager.CopyIfExists<Vertices::VertexType::StaticMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
-
         return mesh3D;
     }
 

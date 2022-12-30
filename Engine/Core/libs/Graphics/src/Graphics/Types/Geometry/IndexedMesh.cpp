@@ -22,11 +22,6 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        if (IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            indexed->m_IBO = manager.CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId());
-        }
-
         indexed->m_countIndices = m_countIndices;
         indexed->m_countVertices = m_countVertices;
 
@@ -49,8 +44,9 @@ namespace SR_GTYPES_NS {
                 m_hasErrors = true;
                 return false;
             }
-            else
+            else {
                 Memory::MeshManager::Instance().Register<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
+            }
         }
 
         return Mesh::Calculate();

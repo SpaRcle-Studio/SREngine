@@ -53,11 +53,6 @@ namespace SR_GTYPES_NS {
         pSkinnedMesh->SetRawMesh(m_rawMesh);
         pSkinnedMesh->m_meshId = m_meshId;
 
-        if (pSkinnedMesh->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            pSkinnedMesh->m_VBO = manager.CopyIfExists<Vertices::VertexType::SkinnedMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
-
         return pSkinnedMesh;
     }
 

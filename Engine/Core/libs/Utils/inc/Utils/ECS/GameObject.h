@@ -38,7 +38,7 @@ namespace SR_UTILS_NS {
     typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1003);
         friend class Component;
     public:
         using Name = std::string;
@@ -49,8 +49,11 @@ namespace SR_UTILS_NS {
         using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;
 
     public:
-        GameObject(std::string name, Transform* pTransform, std::string tag = "Untagged");
-        GameObject(std::string name, std::string tag = "Untagged");
+        GameObject(std::string name, Transform* pTransform, std::string tag);
+        GameObject(std::string name, std::string tag);
+        GameObject(std::string name, Transform* pTransform);
+        explicit GameObject(std::string name);
+
         ~GameObject() override;
 
         static GameObject::Ptr Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene);

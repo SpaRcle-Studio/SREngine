@@ -92,12 +92,12 @@ namespace SR_UTILS_NS {
                 m_contextInitializer(context);
             }
 
-            auto&& componentCount = marshal.Read<uint32_t>();
+            auto&& componentCount = marshal.Read<uint16_t>();
             components.reserve(componentCount);
             SRAssert2(componentCount <= 2048, "While loading the component errors occurred!");
 
             for (uint32_t i = 0; i < componentCount; ++i) {
-                auto&& bytesCount = marshal.Read<uint64_t>();
+                auto&& bytesCount = marshal.Read<uint32_t>();
                 auto&& position = marshal.GetPosition();
 
                 /// TODO: use entity id
@@ -111,10 +111,14 @@ namespace SR_UTILS_NS {
                 }
 
                 const uint64_t readBytes = marshal.GetPosition() - position;
-                const uint64_t lostBytes = bytesCount - readBytes;
+                const uint64_t lostBytes = static_cast<uint64_t>(bytesCount) - readBytes;
 
                 if (lostBytes > 0) {
                     SR_WARN("ComponentManager::LoadComponents() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
+                    if (lostBytes >= UINT16_MAX) {
+                        SRHalt("Something went wrong!");
+                        return false;
+                    }
                     marshal.SkipBytes(lostBytes);
                 }
             }
