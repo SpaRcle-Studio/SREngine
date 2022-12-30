@@ -283,7 +283,14 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void ResourceManager::InspectResources(const std::function<void(const ResourcesTypes &)> &callback) {
+    void ResourceManager::Execute(const SR_HTYPES_NS::Function<void()>& fun)
+    {
+        SR_SCOPED_LOCK
+
+        fun();
+    }
+
+    void ResourceManager::InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)> &callback) {
         SR_SCOPED_LOCK
 
         callback(m_resources);

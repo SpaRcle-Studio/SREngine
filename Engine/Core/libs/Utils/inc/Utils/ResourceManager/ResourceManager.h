@@ -35,7 +35,8 @@ namespace SR_UTILS_NS {
 
         void Synchronize(bool force);
 
-        void InspectResources(const std::function<void(const ResourcesTypes &)>& callback);
+        void Execute(const SR_HTYPES_NS::Function<void()>& fun);
+        void InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)>& callback);
 
         template<typename T> T* Find(const std::string& id) {
             return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), id));

@@ -101,28 +101,38 @@ namespace SR_UTILS_NS {
     }
 
     IResource::RemoveUPResult IResource::RemoveUsePoint() {
-        SR_LOCK_GUARD
+        RemoveUPResult result;
 
-        if (m_countUses == 0) {
-            SRHalt("Count use points is zero!");
-            return RemoveUPResult::Error;
-        }
+        /// тут нужно делать синхронно, иначе может произойти deadlock
+        ResourceManager::Instance().Execute([this, &result]() {
+            SR_LOCK_GUARD
 
-        --m_countUses;
-
-        if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
-            if (IsRegistered()) {
-                Destroy();
-                return RemoveUPResult::Destroy;
+            if (m_countUses == 0) {
+                SRHalt("Count use points is zero!");
+                result = RemoveUPResult::Error;
+                return;
             }
-            else {
-                /// так и не зарегистрировали ресурс
-                delete this;
-                return RemoveUPResult::Delete;
-            }
-        }
 
-        return RemoveUPResult::Success;
+            --m_countUses;
+
+            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+                if (IsRegistered()) {
+                    Destroy();
+                    result = RemoveUPResult::Destroy;
+                    return;
+                }
+                else {
+                    /// так и не зарегистрировали ресурс
+                    delete this;
+                    result = RemoveUPResult::Delete;
+                    return;
+                }
+            }
+
+            result = RemoveUPResult::Success;
+        });
+
+        return result;
     }
 
     void IResource::AddUsePoint() {
