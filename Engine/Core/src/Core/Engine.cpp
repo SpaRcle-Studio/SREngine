@@ -276,11 +276,14 @@ namespace SR_CORE_NS {
                         SR_ERROR(" Engine::InitializeRender() : failed to load theme!");
                     }
 
-                    const static auto iniPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
-                    if (!iniPath.Exists()) {
-                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),iniPath);
+                    const static auto iniPathEditor = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
+                    const static auto iniPathWidgets = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+                    if (!iniPathEditor.Exists()) {
+                        iniPathEditor.Make(SR_UTILS_NS::Path::Type::File);
+                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),iniPathEditor);
+                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), iniPathWidgets);
                     }
-                    ImGui::GetIO().IniFilename = iniPath.CStr();
+                    ImGui::GetIO().IniFilename = iniPathEditor.CStr();
 
                     m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()->InitGUI();
 
