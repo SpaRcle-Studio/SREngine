@@ -158,16 +158,20 @@ namespace SR_HTYPES_NS {
         }
 
         if (hasBones) {
-            /// TODO: этот код не работает, здесь происходит порча памяти, так как vertex.weightsNum может быть больше 7
-            //for (uint32_t i = 0; i < mesh->mNumBones; i++) {
-            //    for (uint8_t j = 0; j < SR_MIN(SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mNumWeights); j++) {
-            //        auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
-            //        SRAssert(vertex.weightsNum < SR_MAX_BONES_ON_VERTEX);
-            //        vertex.weights[vertex.weightsNum].boneId = i;
-            //        vertex.weights[vertex.weightsNum].weight = mesh->mBones[i]->mWeights[j].mWeight;
-            //        vertex.weightsNum++;
-            //    }
-            //}
+            for (uint32_t i = 0; i < mesh->mNumBones; i++) {
+                for (uint32_t j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
+                    auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
+                    vertex.weightsNum++;
+                    if (vertex.weightsNum >= SR_MAX_BONES_ON_VERTEX)
+                    {
+                        SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i",
+                                          SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId));
+                        continue;
+                    }
+                    vertex.weights[vertex.weightsNum-1].boneId = i;
+                    vertex.weights[vertex.weightsNum-1].weight = mesh->mBones[i]->mWeights[j].mWeight;
+                }
+            }
         }
 
         return vertices;
