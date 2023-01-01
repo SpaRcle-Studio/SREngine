@@ -14,6 +14,7 @@ namespace SR_UTILS_NS {
     class IComponentable {
     public:
         using Components = std::vector<Component*>;
+        using ComponentList = std::list<Component*>;
 
     protected:
         virtual ~IComponentable() = default;
@@ -64,7 +65,7 @@ namespace SR_UTILS_NS {
         bool m_dirty = true;
 
         Components m_components = { };
-        std::list<Component*> m_loadedComponents = { };
+        ComponentList m_loadedComponents = { };
 
     };
 }
