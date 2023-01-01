@@ -34,6 +34,8 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);
 
+        Component* CopyComponent() const override;
+
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
@@ -57,6 +59,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD RenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD RenderScenePtr TryGetRenderScene() const;
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 

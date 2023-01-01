@@ -35,6 +35,8 @@ namespace SR_SCRIPTING_NS {
 
         SR_NODISCARD bool IsEmpty() const;
 
+        Component* CopyComponent() const override;
+
     public:
         virtual Properties GetProperties() const { return {}; };
         virtual std::any GetProperty(const std::string& id) const { return std::any(); }
@@ -50,6 +52,7 @@ namespace SR_SCRIPTING_NS {
         SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         void OnAttached() override;
+        void OnLoaded() override;
 
         bool Load() override { return SR_UTILS_NS::IResource::Load(); }
         bool Unload() override { return SR_UTILS_NS::IResource::Unload(); }

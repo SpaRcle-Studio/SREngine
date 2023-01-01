@@ -43,7 +43,8 @@ namespace SR_SCRIPTING_NS {
                 return false;
             }
 
-            SetGenerator(generator);
+            AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+            AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"));
 
             m_generator = new EvoScript::AddressTableGen();
             m_casting = new EvoScript::CastingGen(m_generator);

@@ -103,7 +103,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Script)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto &&path = SR_UTILS_NS::FileDialog::Instance().PickFolder(scriptsPath);
+                auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scriptsPath, { { "Source file", "cpp" } });
 
                 if (path.Exists()) {
                     if (auto &&newBehaviour = Scripting::Behaviour::Load(path)) {

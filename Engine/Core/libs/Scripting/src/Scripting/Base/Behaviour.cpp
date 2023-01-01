@@ -63,11 +63,11 @@ namespace SR_SCRIPTING_NS {
 
         Behaviour* pBehaviour = nullptr;
 
-        if (path.GetExtensionView().empty()) {
+        if (path.GetExtensionView() == "cpp") {
             pBehaviour = new EvoBehaviour();
         }
         else {
-            SRHalt("Unknown behaviour extension!");
+            SRHalt("Unknown behaviour extension! Extension: " + path.GetExtension());
             return nullptr;
         }
 
@@ -100,9 +100,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnDestroy() {
-        if (!IsDestroyed() && GetCountUses() == 0 && IsEnabledAutoRemove()) {
-            Destroy();
-        }
+        RemoveUsePoint();
         Component::OnDestroy();
     }
 
@@ -167,7 +165,16 @@ namespace SR_SCRIPTING_NS {
         /** nothing */
     }
 
+    void Behaviour::OnLoaded() {
+        AddUsePoint();
+        Component::OnLoaded();
+    }
+
     void Behaviour::OnAttached() {
         Component::OnAttached();
+    }
+
+    SR_UTILS_NS::Component *Behaviour::CopyComponent() const {
+        return Behaviour::Load(GetResourcePath());
     }
 }

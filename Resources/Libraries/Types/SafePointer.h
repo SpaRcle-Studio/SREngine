@@ -5,7 +5,7 @@
 #ifndef SMARTPOINTER_SAFEPOINTER_H
 #define SMARTPOINTER_SAFEPOINTER_H
 
-#include <Utils/Allocator.h>
+#include <Libraries/Utils/Allocator.h>
 
 template<class T> class SafePtr {
         public:

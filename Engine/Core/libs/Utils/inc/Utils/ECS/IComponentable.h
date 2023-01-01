@@ -21,6 +21,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
+        SR_NODISCARD SR_INLINE const std::list<Component*> GetLoadedComponents() const noexcept { return m_loadedComponents; }
         SR_NODISCARD bool IsDirty() const noexcept;
 
     public:

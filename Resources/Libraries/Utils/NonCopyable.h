@@ -5,7 +5,7 @@
 #ifndef EVOSCRIPTLIB_NONCOPYABLE_H
 #define EVOSCRIPTLIB_NONCOPYABLE_H
 
-#include <Utils/Allocator.h>
+#include <Libraries/Utils/Allocator.h>
 
 class NonCopyable {
 protected:

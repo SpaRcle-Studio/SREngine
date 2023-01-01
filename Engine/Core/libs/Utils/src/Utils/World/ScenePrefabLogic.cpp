@@ -56,7 +56,7 @@ namespace SR_WORLD_NS {
 
         pPrefab->AddUsePoint();
 
-        for (auto&& pComponent : pPrefab->GetData()->GetComponents()) {
+        for (auto&& pComponent : pPrefab->GetData()->GetLoadedComponents()) {
             if (auto&& pCopy = pComponent->CopyComponent()) {
                 m_scene->LoadComponent(pCopy);
             }

@@ -5,7 +5,7 @@
 #ifndef EVOSCRIPTLIB_VECTOR2_H
 #define EVOSCRIPTLIB_VECTOR2_H
 
-#include "CoreMath.h"
+#include <Libraries/Math/CoreMath.h>
 
 enum Axis {
     NONE = 0,

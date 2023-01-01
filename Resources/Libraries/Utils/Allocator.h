@@ -5,7 +5,7 @@
 #ifndef SRENGINE_ALLOCATOR_H
 #define SRENGINE_ALLOCATOR_H
 
-#include <MemoryAllocator.h>
+#include <Libraries/MemoryAllocator.h>
 
 void* operator new(size_t sz) {
     return ESMemoryAlloc(sz);

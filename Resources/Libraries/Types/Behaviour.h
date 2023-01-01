@@ -5,9 +5,9 @@
 #ifndef EVOSCRIPTLIB_BEHAVIOUR_H
 #define EVOSCRIPTLIB_BEHAVIOUR_H
 
-#include "../Utils/BehaviourRegistration.h"
-#include <GameObject.h>
-#include <Scene.h>
+#include <Libraries/Utils/BehaviourRegistration.h>
+#include <Libraries/GameObject.h>
+#include <Libraries/Scene.h>
 
 class Behaviour : public NonCopyable {
 public:

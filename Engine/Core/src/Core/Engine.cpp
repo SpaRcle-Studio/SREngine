@@ -62,6 +62,8 @@ namespace SR_CORE_NS {
             return false;
         }
 
+        RegisterLibraries();
+
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();
         m_editor     = new Core::GUI::EditorGUI();
@@ -317,8 +319,6 @@ namespace SR_CORE_NS {
         }
 
         SR_INFO("Engine::Init() : initializing game engine...");
-
-        RegisterLibraries();
 
         m_isInit = true;
 

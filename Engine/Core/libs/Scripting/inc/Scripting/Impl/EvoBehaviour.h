@@ -38,6 +38,7 @@ namespace SR_SCRIPTING_NS {
         void InitHooks();
         void DeInitHooks();
         void SetGameObject();
+        void DestroyScript();
 
         SR_HTYPES_NS::DataStorage Stash() override;
         void PopStash(const SR_HTYPES_NS::DataStorage &data) override;

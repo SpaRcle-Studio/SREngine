@@ -21,9 +21,9 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT ComponentManager : public Singleton<ComponentManager> {
         friend class Singleton<ComponentManager>;
-        typedef std::function<void(Component*)> Event;
-        typedef std::function<Component*(void)> Construction;
-        typedef std::function<Component*(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage)> Loader;
+        typedef SR_HTYPES_NS::Function<void(Component*)> Event;
+        typedef SR_HTYPES_NS::Function<Component*(void)> Construction;
+        typedef SR_HTYPES_NS::Function<Component*(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage)> Loader;
         using ContextInitializerFn = SR_HTYPES_NS::Function<void(SR_HTYPES_NS::DataStorage&)>;
 
         struct MetaComponent {
@@ -72,7 +72,7 @@ namespace SR_UTILS_NS {
         }
 
         std::vector<SR_UTILS_NS::Component*> LoadComponents(SR_HTYPES_NS::Marshal& marshal);
-        bool LoadComponents(const std::function<bool(SR_HTYPES_NS::DataStorage& context)>& loader);
+        bool LoadComponents(const SR_HTYPES_NS::Function<bool(SR_HTYPES_NS::DataStorage& context)>& loader);
 
         void SetContextInitializer(const ContextInitializerFn& fn);
 

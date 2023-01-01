@@ -69,7 +69,7 @@ namespace SR_UTILS_NS {
         return pIt->second.version;
     }
 
-    bool ComponentManager::LoadComponents(const std::function<bool(Types::DataStorage & )> &loader) {
+    bool ComponentManager::LoadComponents(const SR_HTYPES_NS::Function<bool(Types::DataStorage & )> &loader) {
         SR_SCOPED_LOCK
 
         const bool result = loader(m_context);

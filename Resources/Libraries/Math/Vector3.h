@@ -5,7 +5,7 @@
 #ifndef EVOSCRIPTLIB_VECTOR3_H
 #define EVOSCRIPTLIB_VECTOR3_H
 
-#include "CoreMath.h"
+#include <Libraries/Math/CoreMath.h>
 
 template<typename T> struct Vector3 {
 public:
