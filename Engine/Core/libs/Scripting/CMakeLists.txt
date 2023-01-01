@@ -3,7 +3,7 @@ project(Scripting)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(libs/EvoScript)
+add_subdirectory(libs/EvoScript/Core)
 
 if (SR_SCRIPTING_STATIC_LIBRARY)
     add_library(Scripting STATIC Scripting.cxx)

@@ -14,7 +14,9 @@ namespace SR_HTYPES_NS {
         using Ptr = DataStorage*;
 
         DataStorage() = default;
-        ~DataStorage() override = default;
+        ~DataStorage() override {
+            Clear();
+        }
 
         DataStorage(DataStorage &&data) noexcept {
             m_pointers = std::exchange(data.m_pointers, {});
@@ -46,8 +48,11 @@ namespace SR_HTYPES_NS {
         template<typename T> T GetValueDef(const std::string& name, const T& def) const;
         template<typename T> T GetValueDef(const T& def) const;
 
-        template<typename T> bool RemoveValue(const std::string& name);
+        template<typename T> bool RemovePointer();
+        template<typename T> bool RemovePointer(const std::string& name);
+
         template<typename T> bool RemoveValue();
+        template<typename T> bool RemoveValue(const std::string& name);
 
         void Clear() {
             m_pointers.clear();
@@ -55,115 +60,178 @@ namespace SR_HTYPES_NS {
         }
 
     private:
-        std::unordered_map<std::string, void*> m_pointers;
-        std::unordered_map<std::string, std::any> m_values;
+        template<typename T> void SetPointer(uint64_t hashCode, T* pointer);
+        template<typename T> void SetValue(uint64_t hashCode, const T& value);
+
+        template<typename T> T* GetPointer(uint64_t hashCode) const;
+        template<typename T> T* GetPointerDef(uint64_t hashCode, T* def) const;
+
+        template<typename T> T GetValue(uint64_t hashCode) const;
+        template<typename T> T GetValueDef(uint64_t hashCode, const T& def) const;
+
+        template<typename T> bool RemovePointer(uint64_t hashCode);
+        template<typename T> bool RemoveValue(uint64_t hashCode);
+
+    private:
+        std::map<uint64_t, void*> m_pointers;
+        std::map<uint64_t, std::any> m_values;
 
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     template<typename T> void DataStorage::SetPointer(const std::string &name, T *pointer) {
-        if (!(m_pointers[name] = reinterpret_cast<void*>(pointer))) {
-            SR_ERROR("DataStorage::SetPointer() : invalid pointer! Name: " + name);
-        }
+        SetPointer(SR_RUNTIME_TIME_CRC32_STD_STR(name), pointer);
     }
 
     template<typename T> void DataStorage::SetPointer(T *pointer) {
-        SetPointer(typeid(T).name(), pointer);
+        SetPointer(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), pointer);
     }
 
     template<typename T> T *DataStorage::GetPointer(const std::string &name) const  {
-        if (m_pointers.count(name) == 0) {
-            SRHalt("DataStorage::GetPointer() : pointer not found! Name: " + name);
+        return GetPointer<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    }
+
+    template<typename T> T *DataStorage::GetPointer() const {
+        return GetPointer<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+    }
+
+    template<typename T> void DataStorage::SetValue(const std::string &name, const T &value) {
+        SetValue(SR_RUNTIME_TIME_CRC32_STD_STR(name), value);
+    }
+
+    template<typename T> void DataStorage::SetValue(const T &value) {
+        SetValue(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), value);
+    }
+
+    template<typename T> T DataStorage::GetValue(const std::string &name) const {
+        return GetValue<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    }
+
+    template<typename T> T DataStorage::GetValue() const {
+        return GetValue<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+    }
+
+    template<typename T> T DataStorage::GetValueDef(const std::string &name, const T& def) const {
+        return GetValueDef<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name), def);
+    }
+
+    template<typename T> T DataStorage::GetValueDef(const T& def) const {
+        return GetValueDef<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), def);
+    }
+
+    template<typename T> T *DataStorage::GetPointerDef(const std::string &name, T *def) const {
+        return GetPointerDef<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name), def);
+    }
+
+    template<typename T> T *DataStorage::GetPointerDef(T *def) const {
+        return GetPointerDef<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), def);
+    }
+
+    template<typename T> bool DataStorage::RemovePointer() {
+        return RemovePointer<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+    }
+
+    template<typename T> bool DataStorage::RemovePointer(const std::string &name) {
+        return RemovePointer<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    }
+
+    template<typename T> bool DataStorage::RemoveValue(const std::string &name) {
+        return RemoveValue<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    }
+
+    template<typename T> bool DataStorage::RemoveValue() {
+        return RemoveValue<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    template<typename T> void DataStorage::SetPointer(uint64_t hashCore, T *pointer) {
+        if (!(m_pointers[hashCore] = reinterpret_cast<void*>(pointer))) {
+            SR_ERROR("DataStorage::SetPointer() : invalid pointer!");
+        }
+    }
+
+    template<typename T> void DataStorage::SetValue(uint64_t hashCode, const T &value) {
+        m_values[hashCode] = value;
+    }
+
+    template<typename T> T *DataStorage::GetPointer(uint64_t hashCode) const {
+        if (m_pointers.count(hashCode) == 0) {
+            SRHalt("DataStorage::GetPointer() : pointer not found!");
             return nullptr;
         }
 
-        if (T* ptr = reinterpret_cast<T*>(m_pointers.at(name)))
+        if (T* ptr = reinterpret_cast<T*>(m_pointers.at(hashCode))) {
             return ptr;
+        }
 
-        SRHalt("DataStorage::GetPointer() : invalid pointer! Name: " + name);
+        SRHalt("DataStorage::GetPointer() : invalid pointer!");
 
         return nullptr;
     }
 
-    template<typename T> T *DataStorage::GetPointer() const {
-        return GetPointer<T>(typeid(T).name());
-    }
-
-    template<typename T> void DataStorage::SetValue(const std::string &name, const T &value) {
-        m_values[name] = value;
-    }
-
-    template<typename T> void DataStorage::SetValue(const T &value) {
-        SetValue(typeid(T).name(), value);
-    }
-
-    template<typename T> T DataStorage::GetValue(const std::string &name) const {
-        if (m_values.count(name) == 0) {
-            SRHalt("DataStorage::GetValue() : value not found! Name: " + name);
-            return T();
-        }
-
-        try {
-            return std::any_cast<T>(m_values.at(name));
-        }
-        catch (const std::bad_any_cast& e) {
-            SRHalt("DataStorage::GetValue() : bad cast! Name: " + name);
-            return T();
-        }
-    }
-
-    template<typename T> T DataStorage::GetValue() const {
-        return GetValue<T>(typeid(T).name());
-    }
-
-    template<typename T> T DataStorage::GetValueDef(const std::string &name, const T& def) const {
-        if (m_values.count(name) == 0) {
+    template<typename T> T *DataStorage::GetPointerDef(uint64_t hashCode, T *def) const {
+        if (m_pointers.count(hashCode) == 0) {
             return def;
         }
 
-        try {
-            return std::any_cast<T>(m_values.at(name));
-        }
-        catch (const std::bad_any_cast& e) {
-            SRHalt("DataStorage::GetValue() : bad cast! Name: " + name);
-            return def;
-        }
-    }
-
-    template<typename T> T DataStorage::GetValueDef(const T& def) const {
-        return GetValueDef<T>(typeid(T).name(), def);
-    }
-
-    template<typename T> bool DataStorage::RemoveValue(const std::string &name) {
-        if (m_values.count(name) == 0) {
-            return false;
-        }
-
-        m_values.erase(name);
-
-        return true;
-    }
-
-    template<typename T> bool DataStorage::RemoveValue() {
-        return RemoveValue<T>(typeid(T).name());
-    }
-
-    template<typename T> T *DataStorage::GetPointerDef(const std::string &name, T *def) const {
-        if (m_pointers.count(name) == 0) {
-            return def;
-        }
-
-        if (T* ptr = reinterpret_cast<T*>(m_pointers.at(name)))
+        if (T* ptr = reinterpret_cast<T*>(m_pointers.at(hashCode)))
             return ptr;
 
-        SR_ERROR("DataStorage::GetPointerDef() : invalid pointer! Name: " + name);
+        SR_ERROR("DataStorage::GetPointerDef() : invalid pointer!");
 
         return def;
     }
 
-    template<typename T> T *DataStorage::GetPointerDef(T *def) const {
-        return GetPointerDef<T>(typeid(T).name(), def);
+    template<typename T> T DataStorage::GetValue(uint64_t hashCode) const {
+        if (m_values.count(hashCode) == 0) {
+            SRHalt("DataStorage::GetValue() : value not found!");
+            return T();
+        }
+
+        try {
+            return std::any_cast<T>(m_values.at(hashCode));
+        }
+        catch (const std::bad_any_cast& e) {
+            SRHalt("DataStorage::GetValue() : bad cast!");
+            return T();
+        }
+    }
+
+    template<typename T> T DataStorage::GetValueDef(uint64_t hashCode, const T &def) const {
+        if (m_values.count(hashCode) == 0) {
+            return def;
+        }
+
+        try {
+            return std::any_cast<T>(m_values.at(hashCode));
+        }
+        catch (const std::bad_any_cast& e) {
+            SRHalt("DataStorage::GetValueDef() : bad cast!");
+            return def;
+        }
+
+    }
+
+    template<typename T> bool DataStorage::RemovePointer(uint64_t hashCode) {
+        if (m_pointers.count(hashCode) == 0) {
+            return false;
+        }
+
+        m_pointers.erase(hashCode);
+
+        return true;
+    }
+
+    template<typename T> bool DataStorage::RemoveValue(uint64_t hashCode) {
+        if (m_values.count(hashCode) == 0) {
+            return false;
+        }
+
+        m_values.erase(hashCode);
+
+        return true;
     }
 }
 

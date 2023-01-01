@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
+    <ColorBufferPass>
+        <Settings Directional="false" DepthEnabled="true" SmoothSamples="1">
+            <PreScale X="0.85" Y="0.85"/>
+        </Settings>
+    </ColorBufferPass>
     <FramebufferPass Name="SceneViewFBO">
-        <Settings DynamicResizing="true">
+        <Settings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -9,7 +14,7 @@
         </Settings>
         <Passes>
             <OpaquePass/>
-            <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png"/>
             <TransparentPass/>
             <DebugPass/>
         </Passes>

@@ -19,7 +19,7 @@ namespace SR_GTYPES_NS {
         typedef Vertices::StaticMeshVertex VertexType;
 
     public:
-        IResource* Copy(IResource* destination) const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 

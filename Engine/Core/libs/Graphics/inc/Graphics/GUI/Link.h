@@ -25,7 +25,7 @@ namespace SR_GRAPH_NS::GUI {
         void Draw() const;
 
     private:
-        ax::NodeEditor::LinkId m_id;
+        //ax::NodeEditor::LinkId m_id;
 
         Pin* m_startPin;
         Pin* m_endPin;

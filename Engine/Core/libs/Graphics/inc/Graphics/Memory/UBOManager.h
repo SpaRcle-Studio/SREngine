@@ -8,8 +8,12 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
 
-namespace SR_GRAPH_NS::Types {
-    class Camera;
+namespace SR_GTYPES_NS {
+    class Shader;
+}
+
+namespace SR_GRAPH_NS {
+    class Environment;
 }
 
 namespace SR_GRAPH_NS::Memory {
@@ -17,10 +21,18 @@ namespace SR_GRAPH_NS::Memory {
         using Descriptor = int32_t;
         using UBO = int32_t;
 
+        struct ShaderInfo {
+            SR_GTYPES_NS::Shader* pShader;
+            uint16_t samples;
+            uint16_t uboSize;
+            int32_t shaderProgram;
+        };
+
         struct Data {
-            Types::Camera* pCamera;
+            void* pIdentifier;
             Descriptor descriptor;
             UBO ubo;
+            ShaderInfo shaderInfo;
         };
 
         VirtualUBOInfo() = default;
@@ -28,24 +40,15 @@ namespace SR_GRAPH_NS::Memory {
 
         VirtualUBOInfo(VirtualUBOInfo&& ref) noexcept {
             m_data = std::exchange(ref.m_data, {});
-            m_samples = std::exchange(ref.m_samples, {});
-            m_uboSize = std::exchange(ref.m_uboSize, {});
-            m_shaderProgram = std::exchange(ref.m_shaderProgram, {});
         }
 
         VirtualUBOInfo& operator=(VirtualUBOInfo&& ref) noexcept {
             m_data = std::exchange(ref.m_data, {});
-            m_samples = std::exchange(ref.m_samples, {});
-            m_uboSize = std::exchange(ref.m_uboSize, {});
-            m_shaderProgram = std::exchange(ref.m_shaderProgram, {});
             return *this;
         }
 
         void Reset() noexcept {
             m_data.clear();
-            m_samples = 0;
-            m_uboSize = 0;
-            m_shaderProgram = SR_ID_INVALID;
         }
 
         SR_NODISCARD bool Valid() const noexcept {
@@ -53,9 +56,6 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         std::vector<Data> m_data;
-        uint32_t m_samples = 0;
-        uint32_t m_uboSize = 0;
-        int32_t m_shaderProgram = SR_ID_INVALID;
 
     };
 
@@ -67,6 +67,7 @@ namespace SR_GRAPH_NS::Memory {
         using VirtualUBO = int32_t;
         using Descriptor = int32_t;
         using UBO = int32_t;
+        using PipelinePtr = SR_GRAPH_NS::Environment*;
     public:
         enum class BindResult : uint8_t {
             Success,
@@ -78,14 +79,16 @@ namespace SR_GRAPH_NS::Memory {
         ~UBOManager() override = default;
 
     public:
-        void SetCurrentCamera(Types::Camera* pCamera);
+        void SetIdentifier(void* pIdentifier);
+        void* GetIdentifier() const noexcept;
+
+        void SetIgnoreIdentifiers(bool value);
 
     public:
         SR_NODISCARD VirtualUBO ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples);
         SR_NODISCARD VirtualUBO AllocateUBO(uint32_t uboSize, uint32_t samples);
         bool FreeUBO(VirtualUBO* ubo);
         BindResult BindUBO(VirtualUBO ubo) noexcept;
-        void SetIgnoreCameras(bool value);
 
     private:
         SR_NODISCARD bool AllocMemory(UBO* ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples, int32_t shader);
@@ -94,12 +97,15 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualUBO GenerateUnique() const;
 
     private:
+        PipelinePtr m_pipeline = nullptr;
+
         VirtualUBOInfo* m_virtualTable = nullptr;
         uint32_t m_virtualTableSize = 0;
 
-        Types::Camera* m_camera = nullptr;
-        bool m_singleCameraMode = false;
-        bool m_ignoreCameras = false;
+        void* m_identifier = nullptr;
+
+        bool m_singleIdentifierMode = false;
+        bool m_ignoreIdentifier = false;
 
     };
 }

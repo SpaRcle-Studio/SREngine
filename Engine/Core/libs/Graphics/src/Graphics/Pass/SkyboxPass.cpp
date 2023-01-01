@@ -5,13 +5,13 @@
 #include <Graphics/Pass/SkyboxPass.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Shader.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SkyboxPass)
 
-    SkyboxPass::SkyboxPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    SkyboxPass::SkyboxPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     SkyboxPass::~SkyboxPass() {
@@ -22,6 +22,11 @@ namespace SR_GRAPH_NS {
 
     bool SkyboxPass::Load(const SR_XML_NS::Node &passNode) {
         auto&& path = passNode.GetAttribute<SR_UTILS_NS::Path>();
+
+        if (m_skybox) {
+            m_skybox->RemoveUsePoint();
+            m_skybox = nullptr;
+        }
 
         if (!(m_skybox = SR_GTYPES_NS::Skybox::Load(path))) {
             SR_ERROR("SkyboxPass::Load() : failed to load skybox!\n\tPath: " + path.ToString());
@@ -57,28 +62,30 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& shader = m_skybox->GetShader();
+        auto&& pShader = m_skybox->GetShader();
 
-        if (!shader || !shader->Ready() || !m_camera) {
+        if (!pShader || !pShader->Ready() || !m_camera) {
             return;
         }
 
-        shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
-        shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+        pShader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
+        pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
 
         /// TODO: вынести в глобальный счетчик, так как операция ресурсозатратная
-        shader->SetFloat(SHADER_TIME, clock());
+        pShader->SetFloat(SHADER_TIME, clock());
 
         auto&& virtualUbo = m_skybox->GetVirtualUBO();
         if (virtualUbo == SR_ID_INVALID) {
             return;
         }
 
+        m_context->SetCurrentShader(pShader);
+
         if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
             SR_ERROR("SkyboxPass::Update() : memory has been duplicated!");
         }
 
-        shader->Flush();
+        pShader->Flush();
 
         BasePass::Update();
     }

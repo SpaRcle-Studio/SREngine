@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS::UI {
         void Update(float_t dt) override;
 
     private:
-        SR_MATH_NS::IVector2 m_size;
+        SR_MATH_NS::UVector2 m_size;
 
         RenderContextPtr m_context;
         RenderScenePtr m_renderScene;

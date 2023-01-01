@@ -1,0 +1,8 @@
+//
+// Created by Monika on 10.10.2022.
+//
+
+#ifndef SRENGINE_EDITORMASKPASS_H
+#define SRENGINE_EDITORMASKPASS_H
+
+#endif //SRENGINE_EDITORMASKPASS_H

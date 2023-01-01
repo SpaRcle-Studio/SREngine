@@ -33,8 +33,8 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT ResourceType {
         friend class ResourceManager;
-        using ResourceId = std::string;
-        using ResourcePath = std::string;
+        using ResourceId = uint64_t;
+        using ResourcePath = uint64_t;
         using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource*>>;
         using Info = std::unordered_map<ResourcePath, ResourceInfo>;
     public:
@@ -77,6 +77,9 @@ namespace SR_UTILS_NS {
 
         void Remove(IResource* pResource);
         void Add(IResource* pResource);
+
+        /// ставит все неиспользуемые ресурсы на очередь уничтожения
+        void CollectUnused();
 
     private:
         ResourcesSet m_resources;

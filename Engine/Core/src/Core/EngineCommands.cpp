@@ -11,6 +11,64 @@
 
 #include <Graphics/Render/RenderScene.h>
 
+#include <Core/GUI/Hierarchy.h>
+
+//!-------------------------------------------------------
+
+bool Framework::Core::Commands::ChangeHierarchySelected::Redo() {
+    std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+    for (SR_UTILS_NS::EntityId gmId:m_newSelected) {
+        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
+        auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject *>(entity);
+
+        if (!ptrRaw)
+            return false;
+
+        if (auto &&ptr = ptrRaw->GetThis()) {
+            changeSelected.insert(ptr);
+        }
+    }
+
+    m_hierarchy->SetSelectedImpl(changeSelected);
+    return true;
+}
+
+bool Framework::Core::Commands::ChangeHierarchySelected::Undo() {
+    std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+    for (SR_UTILS_NS::EntityId gmId:m_oldSelected) {
+        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
+        auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject *>(entity);
+
+        if (!ptrRaw)
+            return false;
+
+        if (auto &&ptr = ptrRaw->GetThis()) {
+            changeSelected.insert(ptr);
+        }
+    }
+
+    m_hierarchy->SetSelectedImpl(changeSelected);
+    return true;
+}
+
+Framework::Core::Commands::ChangeHierarchySelected::ChangeHierarchySelected(SR_CORE_NS::GUI::Hierarchy* hierarchy,
+                                                              const std::set<SR_UTILS_NS::GameObject::Ptr>& oldSelected,
+                                                              const std::set<SR_UTILS_NS::GameObject::Ptr>& newSelected) {
+    m_hierarchy = hierarchy;
+    for (const SR_UTILS_NS::GameObject::Ptr& sPtr : oldSelected) {
+        SRAssert(sPtr);
+        m_oldSelected.insert(sPtr->GetEntityId());
+    }
+    for (const SR_UTILS_NS::GameObject::Ptr& sPtr : newSelected) {
+        SRAssert(sPtr);
+        m_newSelected.insert(sPtr->GetEntityId());
+    }
+}
+
+Framework::Core::Commands::ChangeHierarchySelected::~ChangeHierarchySelected() = default;
+
+//!-------------------------------------------------------
+
 bool Framework::Core::Commands::GameObjectTransform::Redo() {
     auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
     auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
@@ -49,6 +107,7 @@ Framework::Core::Commands::GameObjectTransform::GameObjectTransform(const SR_UTI
 }
 
 Framework::Core::Commands::GameObjectTransform::~GameObjectTransform() {
+    m_path.UnReserve();
     SR_SAFE_DELETE_PTR(m_newMarshal)
     SR_SAFE_DELETE_PTR(m_oldMarshal)
 }
@@ -155,6 +214,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 
         const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
+
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup);
             m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
@@ -174,6 +234,18 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
 
     if (m_scene.RecursiveLockIfValid()) {
         auto ptr = m_scene->Instance(*m_backup);
+
+        if (m_parent) {     ///попытка восстановить дочерность объекта
+            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_parent);
+            auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+            if (!ptrRaw)
+                return false;
+
+            auto&& parentPtr = ptrRaw->GetThis();
+            parentPtr->AddChild(ptr->GetThis());
+            ptr->SetParent(parentPtr);
+        }
+
         SR_SAFE_DELETE_PTR(m_backup);
         m_scene.Unlock();
         return true;
@@ -185,14 +257,17 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
 Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const SR_UTILS_NS::GameObject::Ptr& ptr) {
     m_path = ptr->GetEntityPath();
     m_reserved = ptr->GetEntityTree();
+    SR_UTILS_NS::GameObject::Ptr parentPtr = ptr->GetParent();
+    if (parentPtr.Valid()) {
+        m_parent = parentPtr->GetEntityId();
+    }
 }
 
 Framework::Core::Commands::GameObjectDelete::~GameObjectDelete() {
+    m_path.UnReserve();
     m_reserved.UnReserve();
     SR_SAFE_DELETE_PTR(m_backup);
 }
-
-//!-------------------------------------------------------
 
 //!-------------------------------------------------------
 
@@ -260,6 +335,7 @@ Framework::Core::Commands::GameObjectPaste::GameObjectPaste(const SR_UTILS_NS::G
 }
 
 Framework::Core::Commands::GameObjectPaste::~GameObjectPaste() {
+    m_path.UnReserve();
     m_reserved.UnReserve();
 }
 

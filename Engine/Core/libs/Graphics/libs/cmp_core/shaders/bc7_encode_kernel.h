@@ -23,7 +23,9 @@
 #ifndef BC7_ENCODE_KERNEL_H
 #define BC7_ENCODE_KERNEL_H
 
-#pragma warning(disable:4505)  // disable warnings on unreferenced local function has been removed
+#ifdef _MSVC_LANG
+    #pragma warning(disable:4505)  // disable warnings on unreferenced local function has been removed
+#endif
 
 #include "common_def.h"
 

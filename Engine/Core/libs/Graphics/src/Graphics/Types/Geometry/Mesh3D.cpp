@@ -7,7 +7,7 @@
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Material.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 
@@ -51,19 +51,14 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    SR_UTILS_NS::IResource* Mesh3D::Copy(IResource* destination) const {
+    SR_UTILS_NS::IResource* Mesh3D::CopyResource(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D());
-        mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::Copy(mesh3D));
+        mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::CopyResource(mesh3D));
 
         mesh3D->SetRawMesh(m_rawMesh);
         mesh3D->m_meshId = m_meshId;
-
-        if (mesh3D->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            mesh3D->m_VBO = manager.CopyIfExists<Vertices::VertexType::StaticMeshVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
 
         return mesh3D;
     }
@@ -83,19 +78,19 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::Draw() {
-        if (!IsActive() || IsDestroyed())
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
+
+        if (!pShader || !IsActive() || IsDestroyed())
             return;
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)
             return;
 
-        auto&& shader = m_material->GetShader();
-
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
+            m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
                 m_uboManager.BindUBO(m_virtualUBO);
@@ -106,16 +101,16 @@ namespace SR_GTYPES_NS {
                 return;
             }
 
-            shader->InitUBOBlock();
-            shader->Flush();
+            pShader->InitUBOBlock();
+            pShader->Flush();
 
             m_material->UseSamplers();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
-                shader->InitUBOBlock();
-                shader->Flush();
+                pShader->InitUBOBlock();
+                pShader->Flush();
                 m_material->UseSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
@@ -232,7 +227,11 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::UseMaterial() {
-        Mesh::UseMaterial();
-        GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        Super::UseMaterial();
+        UseModelMatrix();
+    }
+
+    void Mesh3D::UseModelMatrix() {
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

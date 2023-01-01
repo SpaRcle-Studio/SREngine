@@ -17,6 +17,7 @@ namespace SR_UTILS_NS {
         ~EnumReflector() override;
 
     public:
+        template<typename EnumType> SR_NODISCARD static uint64_t Count();
         template<typename EnumType> SR_NODISCARD static std::string ToString(EnumType value);
         template<typename EnumType> SR_NODISCARD static EnumType FromString(const std::string& value);
 
@@ -31,8 +32,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::optional<int64_t> FromStringInternal(const std::string& name) const;
         SR_NODISCARD std::optional<int64_t> GetIndexInternal(int64_t value) const;
         SR_NODISCARD std::optional<int64_t> AtInternal(int64_t index) const;
-
-        SR_NODISCARD uint64_t Count() const noexcept;
 
     private:
         static bool IsIdentChar(char c);
@@ -157,7 +156,7 @@ namespace SR_UTILS_NS {
 
         auto&& data = _detail_reflector_(EnumType()).m_data;
 
-        for (uint64_t i = 0; i < Count(); ++i) {
+        for (uint64_t i = 0; i < Count<EnumType>(); ++i) {
             if (filter(data->values[i])) {
                 names.emplace_back(data->names[i]);
             }
@@ -184,6 +183,10 @@ namespace SR_UTILS_NS {
         SRHalt("EnumReflector::At() : invalid index! Index: " + std::to_string(static_cast<int64_t>(index)));
 
         return EnumType();
+    }
+
+    template<typename EnumType> uint64_t EnumReflector::Count() {
+        return _detail_reflector_(EnumType()).m_data->values.size();
     }
 
 #define SR_ENUM_DETAIL_SPEC_namespace \

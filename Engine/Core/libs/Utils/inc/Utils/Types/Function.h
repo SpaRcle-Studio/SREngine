@@ -14,6 +14,12 @@ namespace SR_HTYPES_NS {
     template <typename ReturnType, typename... ArgumentTypes>
     class Function <ReturnType (ArgumentTypes...)>
     {
+        class function_holder_base;
+    #ifdef SR_ANDROID
+        using invoker_t = std::unique_ptr<function_holder_base>;
+    #else
+        using invoker_t = std::auto_ptr<function_holder_base>;
+    #endif
     public:
         typedef ReturnType signature_type(ArgumentTypes...);
 
@@ -64,15 +70,13 @@ namespace SR_HTYPES_NS {
             virtual ~function_holder_base() = default;
 
             virtual ReturnType invoke(ArgumentTypes... args) = 0;
-            virtual std::auto_ptr<function_holder_base> clone() = 0;
+            virtual invoker_t clone() = 0;
 
         private:
             function_holder_base(const function_holder_base &);
             void operator=(const function_holder_base &);
 
         };
-
-        typedef std::auto_ptr<function_holder_base> invoker_t;
 
         template <typename FunctionT>
         class free_function_holder : public function_holder_base

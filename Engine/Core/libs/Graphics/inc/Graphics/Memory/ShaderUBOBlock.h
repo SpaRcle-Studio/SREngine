@@ -6,7 +6,7 @@
 #define SRENGINE_SHADERUBOBLOCK_H
 
 #include <Utils/Types/Map.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS::Types {
     class Shader;

@@ -8,8 +8,19 @@
 #include <Utils/Types/Vector.h>
 #include <Utils/Types/Pair.h>
 
+#ifdef SR_ANDROID
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wconstant-conversion"
+    #pragma clang diagnostic ignored "-Wshift-count-overflow"
+    #pragma clang diagnostic ignored "-Wc++11-narrowing"
+#endif
+
 #include <sparsehash/dense_hash_map>
 #include <flat_hash_map/flat_hash_map.hpp>
+
+#ifdef SR_ANDROID
+    #pragma clang diagnostic pop
+#endif
 
 // TODO: Check, refactoring and add exception processing
 

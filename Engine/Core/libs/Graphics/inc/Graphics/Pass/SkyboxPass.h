@@ -14,7 +14,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class SkyboxPass : public BasePass {
     public:
-        explicit SkyboxPass(RenderTechnique* pTechnique);
+        explicit SkyboxPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~SkyboxPass() override;
 
     public:

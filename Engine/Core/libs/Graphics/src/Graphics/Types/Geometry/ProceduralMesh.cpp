@@ -13,7 +13,8 @@ namespace SR_GTYPES_NS {
         SetId(SR_FORMAT("Procedural:%p", (void*)this));
     }
 
-    SR_UTILS_NS::IResource* ProceduralMesh::Copy(IResource* destination) const {
+    SR_UTILS_NS::IResource* ProceduralMesh::CopyResource(IResource* destination) const {
+        /// TODO: fixme
         SRHalt("The procedural meshes isn't are copyable!");
         return nullptr;
     }

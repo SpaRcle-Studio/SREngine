@@ -26,6 +26,7 @@ namespace SR_HTYPES_NS {
 namespace SR_UTILS_NS {
     class ComponentManager;
     class Component;
+    class IComponentable;
     class Transform2D;
     class Transform3D;
     class Transform;
@@ -33,8 +34,10 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT Component : public Entity {
         friend class GameObject;
+        friend class IComponentable;
         friend class ComponentManager;
     public:
+        using ScenePtr = SR_WORLD_NS::Scene*;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using ComponentPtr = Component*;
     public:
@@ -43,6 +46,8 @@ namespace SR_UTILS_NS {
     public:
         virtual void OnMatrixDirty() { }
 
+        /// Вызывается при загрузке компонента на игровой объект
+        virtual void OnLoaded() { }
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
@@ -62,6 +67,8 @@ namespace SR_UTILS_NS {
 
         void SetEnabled(bool value);
 
+        SR_NODISCARD virtual Component* CopyComponent() const;
+
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
         /// Активен и компонент и его родительский объект
@@ -77,11 +84,14 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
         SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
         SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
-        SR_NODISCARD SR_INLINE GameObject* GetParent() const;
-        SR_NODISCARD SR_WORLD_NS::Scene::Ptr GetScene() const;
-        SR_NODISCARD SR_WORLD_NS::Scene::Ptr TryGetScene() const;
+        SR_NODISCARD IComponentable* GetParent() const;
+        SR_NODISCARD ScenePtr GetScene() const;
+        SR_NODISCARD GameObjectPtr GetGameObject() const;
+        SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
+
+        SR_NODISCARD std::string GetEntityInfo() const override;
 
     protected:
         template<typename T> void InitComponent() {
@@ -93,7 +103,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
     private:
-        void SetParent(GameObject* parent);
+        void SetParent(IComponentable* pParent);
 
     protected:
         bool m_isEnabled = true;
@@ -105,7 +115,7 @@ namespace SR_UTILS_NS {
         std::string m_name = "Unknown";
 
         uint64_t m_componentId = SIZE_MAX;
-        GameObject* m_parent = nullptr;
+        IComponentable* m_parent = nullptr;
 
     };
 }

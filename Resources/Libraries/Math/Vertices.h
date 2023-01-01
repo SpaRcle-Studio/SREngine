@@ -5,7 +5,7 @@
 #ifndef EVOSCRIPTLIB_VERTICES_H
 #define EVOSCRIPTLIB_VERTICES_H
 
-#include "CoreMath.h"
+#include <Libraries/Math/CoreMath.h>
 
 struct StaticMeshVertex {
     float pos[3];

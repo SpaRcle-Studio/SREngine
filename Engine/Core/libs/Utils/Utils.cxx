@@ -1,10 +1,16 @@
-#include <Utils/macros.h>
+#include <Utils/stdInclude.h>
 
 #ifdef SR_WIN32
     #include "../Utils/src/Utils/Platform/PlatformWindows.cpp"
 #endif
 
+#ifdef SR_ANDROID
+    #include "../Utils/src/Utils/Platform/PlatformAndroid.cpp"
+    #include "../Utils/src/Utils/Platform/AndroidNativeAppGlue.c"
+#endif
+
 #include "../Utils/src/Utils/ECS/Component.cpp"
+#include "../Utils/src/Utils/ECS/IComponentable.cpp"
 #include "../Utils/src/Utils/ECS/ComponentManager.cpp"
 #include "../Utils/src/Utils/ECS/GameObject.cpp"
 #include "../Utils/src/Utils/ECS/ISavable.cpp"
@@ -12,6 +18,9 @@
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
 #include "../Utils/src/Utils/ECS/Transform2D.cpp"
+#include "../Utils/src/Utils/ECS/TransformZero.cpp"
+#include "../Utils/src/Utils/ECS/EntityRef.cpp"
+#include "../Utils/src/Utils/ECS/Prefab.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
@@ -31,6 +40,7 @@
 #include "../Utils/src/Utils/Math/Vector3.cpp"
 #include "../Utils/src/Utils/Math/Vector6.cpp"
 #include "../Utils/src/Utils/Math/Noise.cpp"
+#include "../Utils/src/Utils/Math/Rect.cpp"
 
 #include "../Utils/src/Utils/TaskManager/TaskManager.cpp"
 
@@ -46,6 +56,7 @@
 
 #include "../Utils/src/Utils/CommandManager/ICommand.cpp"
 #include "../Utils/src/Utils/CommandManager/CmdManager.cpp"
+#include "../Utils/src/Utils/CommandManager/ReversibleCommand.cpp"
 
 #include "../Utils/src/Utils/Types/String.cpp"
 #include "../Utils/src/Utils/Types/Time.cpp"
@@ -55,6 +66,7 @@
 #include "../Utils/src/Utils/Types/Thread.cpp"
 #include "../Utils/src/Utils/Types/SafeQueue.cpp"
 #include "../Utils/src/Utils/Types/RawMesh.cpp"
+#include "../Utils/src/Utils/Types/UnicodeString.cpp"
 
 #include "../Utils/src/Utils/Common/Stacktrace.cpp"
 #include "../Utils/src/Utils/Common/StringUtils.cpp"
@@ -69,4 +81,9 @@
 #include "../Utils/src/Utils/World/Observer.cpp"
 #include "../Utils/src/Utils/World/Region.cpp"
 #include "../Utils/src/Utils/World/Scene.cpp"
+#include "../Utils/src/Utils/World/SceneBuilder.cpp"
 #include "../Utils/src/Utils/World/SceneAllocator.cpp"
+#include "../Utils/src/Utils/World/SceneLogic.cpp"
+#include "../Utils/src/Utils/World/SceneDefaultLogic.cpp"
+#include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
+#include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"

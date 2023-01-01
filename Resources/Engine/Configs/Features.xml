@@ -4,24 +4,29 @@
        <EvoCompiler Value="true"/>
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
+       <ColorBufferPick Value="true"/>
 
        <CrashHandler Value="false"/>
 
-       <DebugChunks Value="false"/>
-       <DebugRegions Value="false"/>
+       <DebugChunks Value="true"/>
+       <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
 
        <EditorOnStartup Value="true"/>
+       <EditorCamera Value="true"/>
        <EditorWidgetsDocking Value="true"/>
        <InputIgnoreNonFocusedWidgets Value="true"/>
        <UpdateNonHoveredSceneViewer Value="false"/>
 
        <AutoReloadResources Value="true"/>
 
+       <Renderer Value="true"/>
+       <Physics Value="true"/>
+
        <LoadSkybox Value="false"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <SingleCameraMode Value="false"/>
+       <SingleUBOIdentifierMode Value="false"/>
    </Common>
 </Features>

@@ -10,13 +10,17 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 
 #include <Scripting/Base/Behaviour.h>
-#include <Physics/Rigidbody.h>
+
+#include <Physics/3D/Rigidbody3D.h>
+#include <Physics/2D/Rigidbody2D.h>
 
 #include <Graphics/UI/Sprite2D.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
+#include <Graphics/Font/Text.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -31,6 +35,24 @@ namespace Framework::Core::GUI {
             return;
         }
 
+        if (ImGui::BeginTabBar("#inspectorTabBar")) {
+            if (ImGui::BeginTabItem("GameObject")) {
+                InspectGameObject();
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Scene")) {
+                InspectScene();
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
+        }
+
+        m_scene.Unlock();
+    }
+
+    void Inspector::InspectGameObject() {
         if (m_gameObject.TryRecursiveLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
                 auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
@@ -64,19 +86,30 @@ namespace Framework::Core::GUI {
 
             DrawSwitchTransform();
 
-            DrawComponents();
+            DrawComponents(m_gameObject.DynamicCast<SR_UTILS_NS::IComponentable*>());
 
             m_gameObject.Unlock();
         }
+    }
 
-        m_scene.Unlock();
+    void Inspector::InspectScene() {
+        std::string gm_name = m_scene->GetName();
+        ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_ReadOnly);
+
+        ImGui::Separator();
+
+        DrawComponents(m_scene.DynamicCast<SR_UTILS_NS::IComponentable*>());
     }
 
     void Inspector::Update() {
         SR_LOCK_GUARD
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
+            if (*selected.begin() != m_gameObject) {
+                ResetWeakStorage();
+            }
             m_gameObject.Replace(*selected.begin());
+            SRAssert(m_gameObject);
         }
         else {
             m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
@@ -89,12 +122,12 @@ namespace Framework::Core::GUI {
         m_scene = scene;
     }
 
-    void Inspector::DrawComponents() {
+    void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
         if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
             if (ImGui::BeginMenu("Add component")) {
                 for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                     if (ImGui::MenuItem(name.c_str())) {
-                        m_gameObject->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
+                        pIComponentable->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
                         break;
                     }
                 }
@@ -104,13 +137,13 @@ namespace Framework::Core::GUI {
         }
 
         uint32_t index = 0;
-        m_gameObject->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
+        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
             SR_UTILS_NS::Component* copyPtrComponent = component;
 
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(component->GetComponentName().c_str())) {
-                        m_gameObject->RemoveComponent(component);
+                        pIComponentable->RemoveComponent(component);
                         goto exit;
                     }
                     ImGui::EndMenu();
@@ -121,16 +154,18 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::SkinnedMesh>(copyPtrComponent, "SkinnedMesh", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::ProceduralMesh>(copyPtrComponent, "ProceduralMesh", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
-            copyPtrComponent = DrawComponent<SR_PHYSICS_NS::Types::Rigidbody>(copyPtrComponent, "Rigidbody", index);
+            copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
 
-                m_gameObject->ReplaceComponent(component, copyPtrComponent);
+                pIComponentable->ReplaceComponent(component, copyPtrComponent);
 
                 return false;
             }
@@ -164,8 +199,22 @@ namespace Framework::Core::GUI {
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             pTransform->SetSkew(skew);
 
-        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
-        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pTransform->GetStretch()));
+        //if (ImGui::CollapsingHeader("Anchor")) {
+        //    auto&& offsets = pTransform->GetAnchor();
+        //    if (Graphics::GUI::DrawFRect(
+        //            { "Left", "Bottom", "Right", "Top" },
+        //            offsets, 0.0, 1.0, 0.05, 0,
+        //            &GetWeakStorage())
+        //    ) {
+        //        pTransform->SetAnchor(offsets);
+        //    }
+        //}
+
+        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::StretchFlags_>();
+
+        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::StretchFlags_>(
+                static_cast<SR_UTILS_NS::StretchFlags_>(pTransform->GetStretch()))
+        );
 
         if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
@@ -176,7 +225,7 @@ namespace Framework::Core::GUI {
 
             return true;
         }, reinterpret_cast<void*>(&stretchTypes), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
+            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::StretchFlags_>(stretch));
         }
     }
 
@@ -201,7 +250,7 @@ namespace Framework::Core::GUI {
             transform->SetSkew(skew);
     }
 
-    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr ptr, const std::function<void()>& operation) const
+    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
     {
         SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
 

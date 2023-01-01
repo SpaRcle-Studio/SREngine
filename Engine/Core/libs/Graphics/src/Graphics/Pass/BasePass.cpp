@@ -3,7 +3,7 @@
 //
 
 #include <Graphics/Pass/BasePass.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
@@ -14,12 +14,13 @@ namespace SR_GRAPH_NS {
         return renderPassMap;
     }
 
-    BasePass::BasePass(RenderTechnique* pTechnique)
-        : m_technique(pTechnique)
+    BasePass::BasePass(RenderTechnique* pTechnique, BasePass* pParent)
+        : m_camera(nullptr)
         , m_context(nullptr)
         , m_pipeline(Environment::Get())
-        , m_camera(nullptr)
         , m_uboManager(Memory::UBOManager::Instance())
+        , m_parentPass(pParent)
+        , m_technique(pTechnique)
         , m_isInit(false)
     { }
 

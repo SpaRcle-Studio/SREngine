@@ -11,6 +11,10 @@
 #include <Utils/Types/Function.h>
 
 namespace SR_GRAPH_NS {
+    namespace SRSL {
+        enum class ShaderType;
+    }
+
     namespace Types {
         class IndexedMesh;
         class Mesh;
@@ -27,17 +31,21 @@ namespace SR_GRAPH_NS {
     public:
         using Iterator = MeshGroups::iterator;
         using ConstIterator = MeshGroups::const_iterator;
+        using Super = SR_UTILS_NS::NonCopyable;
 
     public:
         ShadedMeshSubCluster() = default;
+        explicit ShadedMeshSubCluster(Types::Shader* pShader);
         ~ShadedMeshSubCluster() override = default;
 
         ShadedMeshSubCluster(ShadedMeshSubCluster&& ref) noexcept {
             m_groups = std::exchange(ref.m_groups, {});
+            m_shader = std::exchange(ref.m_shader, {});
         }
 
         ShadedMeshSubCluster& operator=(ShadedMeshSubCluster&& ref) noexcept {
             m_groups = std::exchange(ref.m_groups, {});
+            m_shader = std::exchange(ref.m_shader, {});
             return *this;
         }
 
@@ -56,8 +64,11 @@ namespace SR_GRAPH_NS {
         bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
+        SR_NODISCARD SRSL::ShaderType GetShaderType() const noexcept;
+
     private:
         MeshGroups m_groups;
+        Types::Shader* m_shader = nullptr;
 
     };
 

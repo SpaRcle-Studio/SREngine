@@ -6,6 +6,7 @@
 #define SRENGINE_VECTOR4_H
 
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Math/Vector3.h>
 
 namespace SR_MATH_NS {
     template<typename T> struct SR_DLL_EXPORT Vector4 {
@@ -84,6 +85,34 @@ namespace SR_MATH_NS {
     typedef Vector4<Unit>     FVector4;
     typedef Vector4<int32_t>  IVector4;
     typedef Vector4<uint32_t> UVector4;
+
+    static constexpr uint32_t RGBToHEX(const IVector3& color) {
+        return ((color.x & 0xff) << 16) + ((color.y & 0xff) << 8) + (color.z & 0xff);
+    }
+
+    static constexpr uint32_t BGRToHEX(const IVector3& color) {
+        return ((color.z & 0xff) << 16) + ((color.y & 0xff) << 8) + (color.x & 0xff);
+    }
+
+    static constexpr IVector3 HEXToRGB(uint32_t hex) {
+        IVector3 color;
+
+        color.x = static_cast<Unit>(((hex >> 16) & 0xFF));
+        color.y = static_cast<Unit>(((hex >> 8) & 0xFF));
+        color.z = static_cast<Unit>(((hex) & 0xFF));
+
+        return color;
+    }
+
+    static constexpr IVector3 HEXToBGR(uint32_t hex) {
+        IVector3 color;
+
+        color.x = static_cast<Unit>(((hex) & 0xFF));
+        color.y = static_cast<Unit>(((hex >> 8) & 0xFF));
+        color.z = static_cast<Unit>(((hex >> 16) & 0xFF));
+
+        return color;
+    }
 }
 
 #endif //SRENGINE_VECTOR4_H

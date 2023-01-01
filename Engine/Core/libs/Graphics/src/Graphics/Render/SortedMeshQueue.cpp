@@ -62,7 +62,7 @@ namespace SR_GRAPH_NS {
 
     void SortedMeshQueue::SortInternal(uint32_t lowestIndex, uint32_t higherIndex) {
         int32_t i = lowestIndex, j = higherIndex;
-        SR_GTYPES_NS::Mesh* x = m_data[(lowestIndex + higherIndex) / 2];
+       // SR_GTYPES_NS::Mesh* x = m_data[(lowestIndex + higherIndex) / 2];
 
         ///  partition
         do

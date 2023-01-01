@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SHAREDPTR_H
 #define SRENGINE_SHAREDPTR_H
 
-#include <Utils/Allocator.h>
+#include <Libraries/Utils/Allocator.h>
 
 template<class T> class SR_DLL_EXPORT SharedPtr {
 public:

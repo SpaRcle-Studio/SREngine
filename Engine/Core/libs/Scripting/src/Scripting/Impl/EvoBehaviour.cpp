@@ -6,7 +6,7 @@
 
 namespace SR_SCRIPTING_NS {
     EvoBehaviour::~EvoBehaviour() {
-        SRAssert(!m_script);
+        DestroyScript();
     }
 
     bool EvoBehaviour::Load() {
@@ -24,9 +24,9 @@ namespace SR_SCRIPTING_NS {
         if (!path.empty()) {
             auto&& compiler = GlobalEvoCompiler::Instance();
 
-            m_script = EvoScript::Script::Allocate(path, compiler.GetGenerator()->GetAddresses());
+            m_script = EvoScript::Script::Allocate(path.GetWithoutExtension(), compiler.GetGenerator()->GetAddresses());
 
-            auto&& fullPath = GetAssociatedPath().Concat(path);
+            auto&& fullPath = GetAssociatedPath().Concat(path).GetWithoutExtension();
             if (!m_script || !m_script->Load(fullPath, compiler, true)) {
                 SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path.ToString());
                 SR_SAFE_DELETE_PTR(m_script);
@@ -71,16 +71,26 @@ namespace SR_SCRIPTING_NS {
             path = GetAssociatedPath().Concat(path);
         }
 
-        if (path.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            if (auto&& hash = path.GetFolderHash(); hash != SR_UINT64_MAX) {
-                return hash;
+        path = path.GetWithoutExtension();
+
+        auto&& cpp = path.ConcatExt("cpp");
+        auto&& header = path.ConcatExt("h");
+
+        uint64_t hash = 0;
+
+        if (cpp.Exists(SR_UTILS_NS::Path::Type::File)) {
+            if (auto&& fileHash = cpp.GetFileHash(); hash != SR_UINT64_MAX) {
+                hash = SR_UTILS_NS::CombineTwoHashes(hash, fileHash);
             }
         }
 
-        SRHalt("Failed to get behaviour hash! \n\tResource id: " + std::string(GetResourceId()) +
-               "\n\tResource path: " + path.ToString());
+        if (header.Exists(SR_UTILS_NS::Path::Type::File)) {
+            if (auto&& fileHash = header.GetFileHash(); hash != SR_UINT64_MAX) {
+                hash = SR_UTILS_NS::CombineTwoHashes(hash, fileHash);
+            }
+        }
 
-        return 0;
+        return hash;
     }
 
     void EvoBehaviour::DeInitHooks() {
@@ -216,13 +226,7 @@ namespace SR_SCRIPTING_NS {
     void EvoBehaviour::OnDestroy() {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
-        if (m_releaseBehaviour) {
-            m_releaseBehaviour();
-        }
-
-        DeInitHooks();
-
-        SR_SAFE_DELETE_PTR(m_script)
+        DestroyScript();
 
         Behaviour::OnDestroy();
     }
@@ -251,5 +255,15 @@ namespace SR_SCRIPTING_NS {
             m_fixedUpdate();
         }
         Behaviour::FixedUpdate();
+    }
+
+    void EvoBehaviour::DestroyScript() {
+        if (m_releaseBehaviour) {
+            m_releaseBehaviour();
+        }
+
+        DeInitHooks();
+
+        SR_SAFE_DELETE_PTR(m_script)
     }
 }

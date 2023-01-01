@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SRSL_H
 #define SRENGINE_SRSL_H
 
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Loaders/ShaderProperties.h>
 #include <Graphics/Loaders/SRSLParser.h>
 
@@ -14,7 +14,7 @@ namespace SR_GRAPH_NS::SRSL {
         Unknown,
         Spatial,            /// пространственный шейдер, все статические меши
         SpatialCustom,      /// пространственный шейдер (только вершины), все статические меши
-        Animation,          /// пространтсвенный шейдер, геометрия со скелетом
+        Skinned,            /// пространтсвенный шейдер, геометрия со скелетом
         PostProcessing,     /// шейдер пост-обработки
         Skybox,             /// шейдер скайбокса
         Simple,             ///
@@ -22,6 +22,8 @@ namespace SR_GRAPH_NS::SRSL {
         Particles,          /// шейдер для частиц
         Compute,            ///
         Line,               /// просто линия, имеет начало и конец
+        Text,               /// специальный шейдер для рендера 3d текста
+        TextUI,             /// специальный шейдер для рендера 2d текста
         Custom              /// полностью чистый шейдер, все настраивается вручную
     );
 

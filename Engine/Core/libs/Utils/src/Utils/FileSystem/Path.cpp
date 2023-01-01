@@ -4,6 +4,7 @@
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Platform/Platform.h>
 
 namespace SR_UTILS_NS {
     Path::Path()
@@ -28,6 +29,7 @@ namespace SR_UTILS_NS {
         if (!fast) {
             Update();
         }
+        m_hash = SR_HASH_STR(m_path);
     }
 
     Path::Path(std::string path, bool fast)
@@ -40,6 +42,7 @@ namespace SR_UTILS_NS {
         if (!fast) {
             Update();
         }
+        m_hash = SR_HASH_STR(m_path);
     }
 
     Path::Path(const char *path, bool fast)
@@ -52,6 +55,7 @@ namespace SR_UTILS_NS {
         if (!fast) {
             Update();
         }
+        m_hash = SR_HASH_STR(m_path);
     }
 
     Path Path::Normalize() {
@@ -76,15 +80,15 @@ namespace SR_UTILS_NS {
     }
 
     std::list<Path> Path::GetFiles() const {
-        return Platform::GetInDirectory(*this, Path::Type::File);
+        return SR_PLATFORM_NS::GetInDirectory(*this, Path::Type::File);
     }
 
     std::list<Path> Path::GetAll() const {
-        return Platform::GetInDirectory(*this, Path::Type::Undefined);
+        return SR_PLATFORM_NS::GetInDirectory(*this, Path::Type::Undefined);
     }
 
     std::list<Path> Path::GetFolders() const {
-        return Platform::GetInDirectory(*this, Path::Type::Folder);
+        return SR_PLATFORM_NS::GetInDirectory(*this, Path::Type::Folder);
     }
 
     bool Path::Valid() const {
@@ -122,8 +126,6 @@ namespace SR_UTILS_NS {
                 m_ext  = std::string();
             }
         }
-
-        m_hash = std::hash<std::string>{}(m_path);
     }
 
     std::string Path::GetExtension() const {
@@ -165,7 +167,11 @@ namespace SR_UTILS_NS {
             return Type::Folder;
 
         return Type::File;
+#elif defined(SR_ANDROID)
+        /// TODO: будем считать что мы обращаемся только к файлам. Это заглушка - нужно переделать
+        return Type::File;
 #else
+        SRHalt("Unsupported OS!");
         return Type::Undefined;
 #endif
     }
@@ -182,17 +188,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Path::Exists(Type type) const {
-        switch (type) {
-            case Type::File:
-                return Platform::FileExists(m_path);
-            case Type::Folder:
-                return Platform::FolderExists(m_path);
-            default:
-                SRAssert(false);
-                SR_FALLTHROUGH;
-            case Type::Undefined:
-                return false;
-        }
+        return SR_PLATFORM_NS::IsExists(m_path);
     }
 
     void Path::NormalizeSelf() {

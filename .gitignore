@@ -16,3 +16,6 @@ _deps
 /Resources/Scripts/Libraries/Standard/
 /Resources/Scripts/Libraries/
 /Resources/Cache
+/Android/.gradle
+/Android/app/build
+/Android/app/.cxx

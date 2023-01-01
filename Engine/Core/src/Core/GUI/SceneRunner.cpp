@@ -97,7 +97,7 @@ namespace SR_CORE_NS::GUI {
 
         m_scenePath = m_lastPath;
 
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-scene");
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-scene.scene");
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
             if (!SR_PLATFORM_NS::Delete(runtimePath)) {
@@ -108,21 +108,13 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : copy scene: \n\tFrom: " + m_scene->GetPath().ToString() + "\n\tTo: " + runtimePath.ToString());
 
-        if (!m_scene->GetPath().Copy(runtimePath)) {
+        if (!m_scene->GetPath().GetFolder().Copy(runtimePath)) {
             SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
                 + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
             return false;
         }
 
         auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
-
-        /// оставляем заблокированной, разблокируется после отрисовки кнопки
-        if (!runtimeScene.RecursiveLockIfValid()) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to load runtime-scene!\n\tPath: " + runtimePath.ToString());
-            return false;
-        }
-
-        m_scene.Unlock();
 
         return Engine::Instance().SetScene(runtimeScene);
     }
@@ -131,15 +123,6 @@ namespace SR_CORE_NS::GUI {
         SR_LOG("SceneRunner::ReturnScene() : stop scene \"" + m_lastPath.ToString() + "\"");
 
         auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
-
-        if (!originalScene.RecursiveLockIfValid()) {
-            SR_ERROR("SceneRunner::ReturnScene() : failed to load original scene!\n\tPath: " + m_scenePath.ToString());
-            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Ptr());
-            return;
-        }
-
-        m_scene.Unlock();
-
         Engine::Instance().SetScene(originalScene);
     }
 }

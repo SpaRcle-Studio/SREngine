@@ -7,6 +7,7 @@
 
 #include <Graphics/Memory/MeshManager.h>
 #include <Graphics/Types/Mesh.h>
+#include <Graphics/Pipeline/Environment.h>
 
 namespace SR_GRAPH_NS::Types {
     class IndexedMesh : public Mesh {
@@ -27,7 +28,7 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
 
-        IResource* Copy(IResource* destination) const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         bool Calculate() override;
 

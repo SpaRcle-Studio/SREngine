@@ -5,10 +5,11 @@
 #ifndef EVOSCRIPTLIB_BEHAVIOURREGISTRATION_H
 #define EVOSCRIPTLIB_BEHAVIOURREGISTRATION_H
 
-#include "Allocator.h"
-#include <Types/SharedPtr.h>
-#include "NonCopyable.h"
-#include "GameObject.h"
+#include <Libraries/Utils/Allocator.h>
+#include <Libraries/Utils/NonCopyable.h>
+#include <Libraries/Types/SharedPtr.h>
+
+#include <Libraries/GameObject.h>
 
 #pragma warning (disable: 4190)
 

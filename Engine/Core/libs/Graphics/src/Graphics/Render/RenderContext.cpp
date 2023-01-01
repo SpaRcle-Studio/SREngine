@@ -5,14 +5,19 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
 
+#include <Graphics/Window/Window.h>
+
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/RenderTexture.h>
 
+#include <Utils/Locale/Encoding.h>
+
 namespace SR_GRAPH_NS {
-    RenderContext::RenderContext()
+    RenderContext::RenderContext(const RenderContext::WindowPtr& pWindow)
         : Super(this)
+        , m_window(pWindow)
     { }
 
     void RenderContext::Update() noexcept {
@@ -65,7 +70,7 @@ namespace SR_GRAPH_NS {
 
     bool RenderContext::Init() {
         m_pipeline = Environment::Get();
-        m_pipelineType = m_pipeline->GetPipeLine();
+        m_pipelineType = m_pipeline->GetType();
 
         /// ----------------------------------------------------------------------------
 
@@ -161,34 +166,46 @@ namespace SR_GRAPH_NS {
         return pRenderScene;
     }
 
-    void RenderContext::Register(Types::Framebuffer *pFramebuffer) {
-        pFramebuffer->AddUsePoint();
-        m_framebuffers.emplace_back(pFramebuffer);
+    void RenderContext::Register(Types::Framebuffer *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_framebuffers.emplace_back(pResource);
     }
 
-    void RenderContext::Register(Types::Shader *pShader) {
-        pShader->AddUsePoint();
-        m_shaders.emplace_back(pShader);
+    void RenderContext::Register(Types::Shader *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_shaders.emplace_back(pResource);
     }
 
-    void RenderContext::Register(Types::Texture *pTexture) {
-        pTexture->AddUsePoint();
-        m_textures.emplace_back(pTexture);
+    void RenderContext::Register(Types::Texture *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_textures.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderTechnique *pTechnique) {
-        pTechnique->AddUsePoint();
-        m_techniques.emplace_back(pTechnique);
+    void RenderContext::Register(RenderTechnique *pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_techniques.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderContext::MaterialPtr pMaterial) {
-        pMaterial->AddUsePoint();
-        m_materials.emplace_back(pMaterial);
+    void RenderContext::Register(RenderContext::MaterialPtr pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_materials.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderContext::SkyboxPtr pSkybox) {
-        pSkybox->AddUsePoint();
-        m_skyboxes.emplace_back(pSkybox);
+    void RenderContext::Register(RenderContext::SkyboxPtr pResource) {
+        if (!RegisterResource(pResource)) {
+            return;
+        }
+        m_skyboxes.emplace_back(pResource);
     }
 
     bool RenderContext::IsEmpty() const {
@@ -206,7 +223,7 @@ namespace SR_GRAPH_NS {
         return m_pipeline;
     }
 
-    PipeLineType RenderContext::GetPipelineType() const {
+    PipelineType RenderContext::GetPipelineType() const {
         return m_pipelineType;
     }
 
@@ -228,9 +245,7 @@ namespace SR_GRAPH_NS {
         return m_noneTexture;
     }
 
-    void RenderContext::OnResize(const SR_MATH_NS::IVector2 &size) {
-        m_windowSize = size;
-
+    void RenderContext::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ++pIt) {
             auto&&[pScene, pRenderScene] = *pIt;
 
@@ -244,12 +259,8 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    SR_MATH_NS::IVector2 RenderContext::GetWindowSize() const {
-        return m_windowSize;
-    }
-
-    void RenderContext::SetWindowSize(const SR_MATH_NS::IVector2 &size) {
-        m_windowSize = size;
+    SR_MATH_NS::UVector2 RenderContext::GetWindowSize() const {
+        return m_window->GetSize();
     }
 
     RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name, CameraPtr pCamera) const {
@@ -278,5 +289,17 @@ namespace SR_GRAPH_NS {
         }
 
         return nullptr;
+    }
+
+    RenderContext::ShaderPtr RenderContext::GetCurrentShader() const noexcept {
+        return m_pipeline->GetCurrentShader();
+    }
+
+    void RenderContext::SetCurrentShader(RenderContext::ShaderPtr pShader) {
+        m_pipeline->SetCurrentShader(pShader);
+    }
+
+    RenderContext::WindowPtr RenderContext::GetWindow() const {
+        return m_window;
     }
 }

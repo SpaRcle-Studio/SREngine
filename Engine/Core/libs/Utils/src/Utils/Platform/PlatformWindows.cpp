@@ -29,6 +29,18 @@
 #endif
 
 namespace SR_UTILS_NS::Platform {
+    void WriteConsoleLog(const std::string& msg) {
+        std::cout << msg;
+    }
+
+    void WriteConsoleError(const std::string& msg) {
+        std::cerr << msg;
+    }
+
+    void WriteConsoleWarn(const std::string& msg) {
+        std::cout << msg;
+    }
+
     std::string GetLastErrorAsString()
     {
         //Get the error message ID, if any.
@@ -78,6 +90,25 @@ namespace SR_UTILS_NS::Platform {
 }
 
 namespace SR_UTILS_NS::Platform {
+    void SetInstance(void*) {
+
+    }
+
+    void* GetInstance() {
+        return nullptr;
+    }
+
+
+    std::optional<std::string> ReadFile(const Path& path) {
+        std::ifstream ifs(path.c_str());
+
+        if (!ifs.is_open()) {
+            return std::optional<std::string>();
+        }
+
+        return std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+    }
+
     void TextToClipboard(const std::string &text) {
         if (text.empty()) {
             SR_WARN("Platform::TextToClipboard() : text is empty!");
@@ -260,6 +291,9 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void Terminate() {
+#ifdef SR_ANDROID
+
+#endif
 #ifdef SR_MINGW
 
 #else
@@ -384,27 +418,6 @@ namespace SR_UTILS_NS::Platform {
         return Path(s).GetBaseNameAndExt();
     }
 
-    bool FileExists(const Path &path) {
-        FILE* f = nullptr;
-        if (fopen_s(&f, path.CStr(), "r") == 0) {
-            fclose(f);
-            return true;
-        }
-
-        return false;
-    }
-
-    bool FolderExists(const Path &path) {
-        DWORD ftyp = GetFileAttributesA(path.CStr());
-        if (ftyp == INVALID_FILE_ATTRIBUTES)
-            return false;  //something is wrong with your path!
-
-        if (ftyp & FILE_ATTRIBUTE_DIRECTORY)
-            return true;   // this is a directory!
-
-        return false;
-    }
-
     bool FileIsHidden(const Path &path) {
         const DWORD attributes = GetFileAttributes(path.CStr());
         if (attributes & FILE_ATTRIBUTE_HIDDEN)
@@ -425,5 +438,42 @@ namespace SR_UTILS_NS::Platform {
 
     void OpenInNativeFileExplorer(const Path &path){
         ShellExecuteA(NULL, "open", path.ToString().c_str(), NULL, NULL, SW_SHOWDEFAULT);
+    }
+
+    bool IsExists(const Path &path) {
+        const DWORD ftyp = GetFileAttributesA(path.CStr());
+
+        if (ftyp == INVALID_FILE_ATTRIBUTES) {
+            return false;  /// something is wrong with your path!
+        }
+
+        /// it is file or directory
+
+        return true;
+    }
+
+    std::vector<SR_MATH_NS::UVector2> GetScreenResolutions() {
+        auto&& resolutions = std::vector<SR_MATH_NS::UVector2>();
+
+        resolutions.reserve(64);
+
+        DEVMODE dm = { 0 };
+        dm.dmSize = sizeof(dm);
+
+        for (uint32_t iModeNum = 0; EnumDisplaySettings(NULL, iModeNum, &dm) != 0; ++iModeNum) {
+            auto&& resolution = SR_MATH_NS::UVector2(dm.dmPelsWidth, dm.dmPelsHeight);
+
+            if (std::find(resolutions.begin(), resolutions.end(), resolution) != resolutions.end()) {
+                continue;
+            }
+
+            resolutions.emplace_back(resolution);
+        }
+
+        if (resolutions.empty()) {
+            resolutions.emplace_back(SR_MATH_NS::UVector2(400, 400));
+        }
+
+        return resolutions;
     }
 }

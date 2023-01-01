@@ -8,8 +8,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
 
-    FramebufferPass::FramebufferPass(RenderTechnique *pTechnique)
-        : GroupPass(pTechnique)
+    FramebufferPass::FramebufferPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : GroupPass(pTechnique, pParent)
         , m_preScale(SR_MATH_NS::FVector2(1.f))
         , m_depth(1.f)
         , m_depthFormat(DepthFormat::Unknown)
@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS {
         return false;
     }
 
-    void FramebufferPass::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void FramebufferPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         if (m_dynamicResizing && m_framebuffer) {
             m_framebuffer->SetSize(SR_MATH_NS::IVector2(
                     static_cast<SR_MATH_NS::Unit>(size.x) * m_preScale.x,
@@ -92,6 +92,8 @@ namespace SR_GRAPH_NS {
             SR_ERROR("FramebufferPass::Init() : failed to create framebuffer!");
         }
         else {
+            m_framebuffer->SetSampleCount(m_samples);
+            m_framebuffer->SetDepthEnabled(m_depthEnabled);
             m_framebuffer->AddUsePoint();
         }
 
@@ -114,8 +116,10 @@ namespace SR_GRAPH_NS {
         return m_framebuffer;
     }
 
-    void FramebufferPass::LoadSettings(const Helper::Xml::Node &settingsNode) {
+    void FramebufferPass::LoadSettings(const SR_XML_NS::Node &settingsNode) {
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
+        m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
+        m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
 
         for (auto&& subNode : settingsNode.GetNodes()) {
             /// color layers

@@ -69,7 +69,7 @@ namespace SR_UTILS_NS {
         return pIt->second.version;
     }
 
-    bool ComponentManager::LoadComponents(const std::function<bool(Types::DataStorage & )> &loader) {
+    bool ComponentManager::LoadComponents(const SR_HTYPES_NS::Function<bool(Types::DataStorage & )> &loader) {
         SR_SCOPED_LOCK
 
         const bool result = loader(m_context);
@@ -82,5 +82,54 @@ namespace SR_UTILS_NS {
     std::string ComponentManager::GetLastComponentName() const {
         SR_SCOPED_LOCK
         return m_lastComponent;
+    }
+
+    std::vector<SR_UTILS_NS::Component*> ComponentManager::LoadComponents(SR_HTYPES_NS::Marshal &marshal) {
+        std::vector<SR_UTILS_NS::Component*> components;
+
+        LoadComponents([&](SR_HTYPES_NS::DataStorage& context) -> bool {
+            if (m_contextInitializer) {
+                m_contextInitializer(context);
+            }
+
+            auto&& componentCount = marshal.Read<uint16_t>();
+            components.reserve(componentCount);
+            SRAssert2(componentCount <= 2048, "While loading the component errors occurred!");
+
+            for (uint32_t i = 0; i < componentCount; ++i) {
+                auto&& bytesCount = marshal.Read<uint32_t>();
+                auto&& position = marshal.GetPosition();
+
+                /// TODO: use entity id
+                SR_MAYBE_UNUSED auto&& compEntityId = marshal.Read<uint64_t>();
+
+                if (auto&& pComponent = Load(marshal)) {
+                    components.emplace_back(pComponent);
+                }
+                else {
+                    SR_WARN("ComponentManager::LoadComponents() : failed to load \"" + GetLastComponentName() + "\" component!");
+                }
+
+                const uint64_t readBytes = marshal.GetPosition() - position;
+                const uint64_t lostBytes = static_cast<uint64_t>(bytesCount) - readBytes;
+
+                if (lostBytes > 0) {
+                    SR_WARN("ComponentManager::LoadComponents() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
+                    if (lostBytes >= UINT16_MAX) {
+                        SRHalt("Something went wrong!");
+                        return false;
+                    }
+                    marshal.SkipBytes(lostBytes);
+                }
+            }
+
+            return true;
+        });
+
+        return std::move(components);
+    }
+
+    void ComponentManager::SetContextInitializer(const ComponentManager::ContextInitializerFn &fn) {
+        m_contextInitializer = fn;
     }
 }

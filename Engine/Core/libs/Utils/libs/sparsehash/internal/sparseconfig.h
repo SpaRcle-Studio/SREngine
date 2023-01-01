@@ -15,6 +15,8 @@
 
 #define HASH_FUN_H  <unordered_set>
 
+#elif defined(ANDROID)
+    #define HASH_FUN_H  <unordered_set>
 #else /* Earlier than VSC++ 2013 */ 
 
 /* the location of the header defining hash functions */
@@ -22,7 +24,7 @@
 
 #endif
 
-#if (defined(__MINGW32__) || defined(__MINGW64__))
+#if (defined(__MINGW32__) || defined(__MINGW64__) || defined(ANDROID))
     #define HASH_NAMESPACE std
 #else
     /* the namespace of the hash<> function */
@@ -53,7 +55,7 @@
 /* Define to 1 if the system has the type `__uint16'. */
 #define HAVE___UINT16  1
 
-#if (defined(__MINGW32__) || defined(__MINGW64__))
+#if (defined(__MINGW32__) || defined(__MINGW64__) || defined(ANDROID))
     #define SPARSEHASH_HASH HASH_NAMESPACE::hash
 #else
     /* The system-provided hash function including the namespace. */

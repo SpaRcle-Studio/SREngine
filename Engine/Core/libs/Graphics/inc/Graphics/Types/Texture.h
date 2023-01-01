@@ -7,7 +7,7 @@
 
 #include <Utils/ResourceManager/IResource.h>
 
-#include <Graphics/Environment/TextureHelper.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 #include <Graphics/Memory/TextureConfigs.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 
@@ -19,6 +19,8 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GTYPES_NS {
+    class Font;
+
     class Texture : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class ::SR_GRAPH_NS::TextureLoader;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
@@ -30,9 +32,9 @@ namespace SR_GTYPES_NS {
     public:
         static Texture* Load(const std::string& path, const std::optional<Memory::TextureConfig>& config = std::nullopt);
         static Texture* LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
+        static Texture* LoadFont(Font* pFont);
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculated; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetWidth() const noexcept { return m_width; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetHeight() const noexcept { return m_height; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetChannels() const noexcept { return m_channels; }
@@ -51,8 +53,10 @@ namespace SR_GTYPES_NS {
     private:
         bool Calculate();
         void SetConfig(const Memory::TextureConfig& config);
+        void FreeTextureData();
 
     private:
+        bool                       m_isFont       = false;
         uint8_t*                   m_data         = nullptr;
         PipelnePtr                 m_pipeline     = nullptr;
 
@@ -61,7 +65,6 @@ namespace SR_GTYPES_NS {
         uint32_t                   m_height       = 0;
         uint8_t                    m_channels     = 0;
 
-        std::atomic<bool>          m_isCalculated = false;
         std::atomic<bool>          m_hasErrors    = false;
         std::atomic<bool>          m_fromMemory   = false;
 

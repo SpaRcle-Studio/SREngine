@@ -36,7 +36,7 @@ namespace SR_CORE_NS {
 
     public:
         SR_NODISCARD Icons GetIcons() const;
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
     protected:
         void ClearSettings() override;

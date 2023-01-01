@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS::GUI {
         void Draw() const;
 
     private:
-        ax::NodeEditor::NodeId m_id;
+        //ax::NodeEditor::NodeId m_id;
         std::string m_name;
         std::vector<Pin*> m_inputs;
         std::vector<Pin*> m_outputs;

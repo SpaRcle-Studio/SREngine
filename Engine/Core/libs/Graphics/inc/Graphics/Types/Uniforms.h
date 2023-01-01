@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS {
         float saturation;
     };
 
-    static uint64_t GetUniformSize(const std::string& name) {
+    SR_MAYBE_UNUSED static uint64_t GetUniformSize(const std::string& name) {
         static const std::map<std::string, uint64_t> uniformSizes = {
                 {"SkyboxUBO",         sizeof(SkyboxUBO)},
                 {"ProjViewUBO",       sizeof(ProjViewUBO)},

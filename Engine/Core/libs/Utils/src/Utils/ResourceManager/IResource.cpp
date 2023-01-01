@@ -25,6 +25,28 @@ namespace SR_UTILS_NS {
         }
     }
 
+    bool IResource::Reload() {
+        SR_LOCK_GUARD
+
+        SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
+
+        m_loadState = LoadState::Reloading;
+
+        Unload();
+
+        if (!Load()) {
+            m_loadState = LoadState::Error;
+            return false;
+        }
+
+        m_loadState = LoadState::Loaded;
+
+        UpdateResources();
+        OnReloadDone();
+
+        return true;
+    }
+
     bool IResource::ForceDestroy() {
         if (m_force || IsDestroyed()) {
             SR_ERROR("IResource::ForceDestroy() : resource is already destroyed!");
@@ -40,11 +62,11 @@ namespace SR_UTILS_NS {
         return ResourceManager::Instance().GetTypeName(m_resourceHashName);
     }
 
-    void IResource::SetId(const std::string &id, bool autoRegister) {
-        SRAssert2(!id.empty(), "Invalid id!");
+    void IResource::SetId(uint64_t hashId, bool autoRegister) {
+        if (m_resourceHashId == 0) {
+            m_resourceHashId = hashId;
 
-        if (m_resourceId == "NoID") {
-            m_resourceId = id;
+            SRAssert(m_resourceHashPath != 0);
 
             if (autoRegister) {
                 ResourceManager::Instance().RegisterResource(this);
@@ -55,17 +77,102 @@ namespace SR_UTILS_NS {
         }
     }
 
-    IResource *IResource::Copy(IResource *destination) const {
+    void IResource::SetId(const std::string &id, bool autoRegister) {
+        SRAssert2(!id.empty(), "Invalid id!");
+
+        if (m_resourceHashId == 0) {
+            auto&& resourcesManager = ResourceManager::Instance();
+
+            /// обязательно присваиваем до инициализации пути
+            m_resourceHashId = resourcesManager.RegisterResourceId(id);
+
+            SRAssert(m_resourceHashPath == 0);
+
+            auto&& path = InitializeResourcePath();
+            m_resourceHashPath = resourcesManager.RegisterResourcePath(path);
+
+            if (autoRegister) {
+                resourcesManager.RegisterResource(this);
+            }
+        }
+        else {
+            SRHalt("Double set resource id!");
+        }
+    }
+
+    IResource::RemoveUPResult IResource::RemoveUsePoint() {
+        RemoveUPResult result;
+
+        /// тут нужно делать синхронно, иначе может произойти deadlock
+        ResourceManager::Instance().Execute([this, &result]() {
+            SR_LOCK_GUARD
+
+            if (m_countUses == 0) {
+                SRHalt("Count use points is zero!");
+                result = RemoveUPResult::Error;
+                return;
+            }
+
+            --m_countUses;
+
+            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+                if (IsRegistered()) {
+                    Destroy();
+                    result = RemoveUPResult::Destroy;
+                    return;
+                }
+                else {
+                    /// так и не зарегистрировали ресурс
+                    delete this;
+                    result = RemoveUPResult::Delete;
+                    return;
+                }
+            }
+
+            result = RemoveUPResult::Success;
+        });
+
+        return result;
+    }
+
+    void IResource::AddUsePoint() {
+        SR_LOCK_GUARD
+
+        SRAssert(m_countUses != SR_UINT16_MAX);
+
+        if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
+            SRHalt("IResource::AddUsePoint() : potential multi threading error!");
+        }
+
+        ++m_countUses;
+    }
+
+    uint16_t IResource::GetCountUses() const noexcept {
+        return m_countUses;
+    }
+
+    bool IResource::IsDestroyed() const noexcept {
+        return m_isDestroyed;
+    }
+
+    IResource *IResource::CopyResource(IResource *destination) const {
+        SR_LOCK_GUARD
+
         destination->m_autoRemove = m_autoRemove;
-        destination->m_lifetime = m_lifetime;
+        /// destination->m_lifetime = m_lifetime;
+        destination->m_resourceHashPath = m_resourceHashPath;
         destination->m_loadState.store(m_loadState);
-        destination->SetId(m_resourceId);
+
+        destination->SetId(m_resourceHashId, true /** auto register */);
+
         destination->SetReadOnly(m_readOnly);
 
         return destination;
     }
 
     bool IResource::Destroy() {
+        SR_LOCK_GUARD
+
         ResourceManager::Instance().Destroy(this);
 
         SRAssert(!IsDestroyed());
@@ -100,7 +207,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        SRAssert2Once(false, "Failed to get resource hash! \n\tResource id: " + std::string(GetResourceId()) +
+        SRHaltOnce("IResource::GetFileHash() : failed to get resource hash! \n\tResource id: " + std::string(GetResourceId()) +
             "\n\tResource path: " + path.ToString());
 
         return 0;
@@ -163,5 +270,26 @@ namespace SR_UTILS_NS {
         else {
             UpdateResources(depth - 1);
         }
+    }
+
+    const std::string& IResource::GetResourceId() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResourceId(m_resourceHashId);
+    }
+
+    const Path& IResource::GetResourcePath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResourcePath(m_resourceHashPath);
+    }
+
+    Path IResource::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(GetResourceId(), false /** fast */);
+    }
+
+    Path IResource::GetAssociatedPath() const {
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+    }
+
+    bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) {
+        SR_LOCK_GUARD
+        return fun();
     }
 }

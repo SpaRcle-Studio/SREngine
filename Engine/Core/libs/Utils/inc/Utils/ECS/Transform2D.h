@@ -6,17 +6,19 @@
 #define SRENGINE_TRANSFORM2D_H
 
 #include <Utils/ECS/Transform.h>
+#include <Utils/Math/Rect.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
 
-    /// растяжение по ширине и высоте экрана
-    SR_ENUM_NS_CLASS(Stretch,
-          None = 1 << 0,
-          StretchX = 1 << 1,
-          StretchY = 1 << 2,
-          StretchXY = StretchX | StretchY
+    /// растяжение по ширине родительского элемента
+    SR_ENUM_NS_T(StretchFlags_, uint32_t,
+          STRETCH_FLAGS_NONE = 1 << 0,
+          STRETCH_FLAGS_X = 1 << 1,
+          STRETCH_FLAGS_Y = 1 << 2,
+          STRETCH_FLAGS_XY = STRETCH_FLAGS_X | STRETCH_FLAGS_Y
     );
+    typedef uint32_t StretchFlags;
 
     class SR_DLL_EXPORT Transform2D : public Transform {
         friend class GameObject;
@@ -31,7 +33,11 @@ namespace SR_UTILS_NS {
         void SetScale(const SR_MATH_NS::FVector3& scale) override;
         void SetSkew(const SR_MATH_NS::FVector3& skew) override;
 
-        void SetStretch(Stretch stretch);
+        void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) override;
+        void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
+
+        void SetAnchor(const SR_MATH_NS::FRect& rect);
+        void SetStretch(StretchFlags stretch);
 
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetRotation() const override { return m_rotation; }
@@ -39,9 +45,13 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetSkew() const override { return m_skew; }
 
         SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::Space2D; }
-        SR_NODISCARD Stretch GetStretch() const noexcept { return m_stretch; }
+
+        SR_NODISCARD Transform* Copy() const override;
 
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
+
+        SR_NODISCARD SR_MATH_NS::FRect GetAnchor() const { return m_anchor; }
+        SR_NODISCARD StretchFlags GetStretch() const { return m_stretch; }
 
     protected:
         void UpdateMatrix() override;
@@ -51,7 +61,9 @@ namespace SR_UTILS_NS {
         SR_INLINE static constexpr SR_MATH_NS::FVector2 UP    = Math::FVector2(0, 1);
 
     protected:
-        Stretch m_stretch = Stretch::None;
+        SR_MATH_NS::FRect m_anchor;
+
+        StretchFlags m_stretch = STRETCH_FLAGS_NONE;
 
         SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();

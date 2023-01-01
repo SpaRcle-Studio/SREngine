@@ -21,6 +21,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class Window;
     class RenderScene;
     class RenderTechnique;
     class Environment;
@@ -37,10 +38,12 @@ namespace SR_GRAPH_NS {
         using MaterialPtr = SR_GTYPES_NS::Material*;
         using TexturePtr = SR_GTYPES_NS::Texture*;
         using SkyboxPtr = SR_GTYPES_NS::Skybox*;
-        using FramebufferPtr = Types::Framebuffer*;
-        using CameraPtr = Types::Camera*;
+        using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
+        using CameraPtr = SR_GTYPES_NS::Camera*;
+        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
     public:
-        RenderContext();
+        explicit RenderContext(const WindowPtr& pWindow);
         virtual ~RenderContext() = default;
 
     public:
@@ -51,10 +54,7 @@ namespace SR_GRAPH_NS {
 
         void SetDirty();
 
-        void OnResize(const SR_MATH_NS::IVector2& size);
-
-        /// Установка начального размера окна
-        void SetWindowSize(const SR_MATH_NS::IVector2& size);
+        void OnResize(const SR_MATH_NS::UVector2& size);
 
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
@@ -68,20 +68,36 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
-        SR_NODISCARD PipeLineType GetPipelineType() const;
+        SR_NODISCARD WindowPtr GetWindow() const;
+        SR_NODISCARD PipelineType GetPipelineType() const;
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
+        SR_NODISCARD ShaderPtr GetCurrentShader() const noexcept;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name) const;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
-        SR_NODISCARD SR_MATH_NS::IVector2 GetWindowSize() const;
+        SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
+
+        void SetCurrentShader(ShaderPtr pShader);
 
     private:
+        template<typename T> bool RegisterResource(T* pResource) {
+            if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
+                if (pGraphicsResource->GetRenderContext()) {
+                    return false;
+                }
+
+                pGraphicsResource->SetRenderContext(this);
+            }
+
+            pResource->AddUsePoint();
+
+            return true;
+        }
+
         template<typename T> bool Update(T& resourceList) noexcept;
 
     private:
-        SR_MATH_NS::IVector2 m_windowSize;
-
         std::vector<Types::Framebuffer*> m_framebuffers;
         std::vector<Types::Shader*> m_shaders;
         std::vector<TexturePtr> m_textures;
@@ -91,12 +107,14 @@ namespace SR_GRAPH_NS {
 
         std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>> m_scenes;
 
+        WindowPtr m_window;
+
         MaterialPtr m_defaultMaterial = nullptr;
         TexturePtr m_defaultTexture = nullptr;
         TexturePtr m_noneTexture = nullptr;
 
         PipelinePtr m_pipeline = nullptr;
-        PipeLineType m_pipelineType = PipeLineType::Unknown;
+        PipelineType m_pipelineType = PipelineType::Unknown;
 
     };
 

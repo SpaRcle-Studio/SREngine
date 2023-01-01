@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
         ReversibleCommand() = default;
         ~ReversibleCommand() override = default;
 
-    private:
+    public:
         virtual bool Redo() = 0;
         virtual bool Undo() = 0;
         virtual std::string GetName() = 0;
@@ -25,6 +25,26 @@ namespace SR_UTILS_NS {
     public:
         virtual bool Load(const Xml::Node& node) { return false; }
         SR_NODISCARD virtual Xml::Node Save() const { return Xml::Node(); }
+
+    };
+
+    class SR_DLL_EXPORT GroupCommand : public ReversibleCommand {
+        friend class CmdManager;
+    public:
+        GroupCommand(std::vector<ReversibleCommand*>&& commands);
+        ~GroupCommand() override;
+
+    private:
+        virtual bool Redo() override;
+        virtual bool Undo() override;
+        std::string GetName() override { return "GroupCommand"; } ;
+
+    public:
+        bool Load(const Xml::Node& node) override { return false; }
+        SR_NODISCARD Xml::Node Save() const override { return Xml::Node(); }
+
+    private:
+        std::vector<ReversibleCommand*> m_commands;
 
     };
 }

@@ -19,12 +19,19 @@ namespace SR_CORE_NS::GUI {
         ~Hierarchy() override;
 
     public:
+        void Update();
+
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
         SR_NODISCARD std::set<SR_UTILS_NS::GameObject::Ptr> GetSelected() const;
+
+        void ClearSelected();
+        void SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr);
+
+        void SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected);
 
     private:
         void Draw() override;

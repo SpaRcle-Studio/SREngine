@@ -14,7 +14,7 @@ namespace SR_HTYPES_NS {
         SharedPtr() = default;
         explicit SharedPtr(T *ptr);
         SharedPtr(SharedPtr const &ptr);
-        SharedPtr(SharedPtr&& ptr)
+        SharedPtr(SharedPtr&& ptr) noexcept
             : m_ptr(std::exchange(ptr.m_ptr, { }))
             , m_data(std::exchange(ptr.m_data, { }))
         { }
@@ -56,7 +56,7 @@ namespace SR_HTYPES_NS {
         }
         SR_NODISCARD SR_FORCE_INLINE bool Valid() const noexcept { return m_data && m_data->m_valid; }
 
-        bool AutoFree(const std::function<void(T *ptr)> &freeFun);
+        bool AutoFree(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun);
 
         /// Оставляем методы для совместимости с SafePtr
         void Replace(const SharedPtr &ptr);
@@ -65,7 +65,7 @@ namespace SR_HTYPES_NS {
         SR_FORCE_INLINE void Unlock() const noexcept { /** nothing */  }
 
     private:
-        bool FreeImpl(const std::function<void(T *ptr)> &freeFun);
+        bool FreeImpl(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun);
 
     private:
         struct dynamic_data {
@@ -108,8 +108,10 @@ namespace SR_HTYPES_NS {
             --(m_data->m_useCount);
         }
 
+        m_ptr = ptr.m_ptr;
+
         if ((m_data = ptr.m_data)) {
-            m_data->m_valid = bool(m_ptr = ptr.m_ptr);
+            m_data->m_valid = bool(m_ptr);
             ++(m_data->m_useCount);
         }
 
@@ -146,33 +148,36 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        m_ptr = ptr;
+
         if (m_data) {
-            m_data->m_valid = (bool)(m_ptr = ptr);
+            m_data->m_valid = bool(m_ptr);
         }
 
         return *this;
     }
 
-    template<typename T> bool SharedPtr<T>::AutoFree(const std::function<void(T *)> &freeFun) {
+    template<typename T> bool SharedPtr<T>::AutoFree(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun) {
         SharedPtr<T> ptrCopy = SharedPtr<T>(*this);
         /// после вызова FreeImpl this может потенциально инвалидироваться!
 
         return ptrCopy.Valid() ? ptrCopy.FreeImpl(freeFun) : false;
     }
 
-    template<typename T> bool SharedPtr<T>::FreeImpl(const std::function<void(T *ptr)> &freeFun) {
+    template<typename T> bool SharedPtr<T>::FreeImpl(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun) {
         if (m_data && m_data->m_valid) {
             freeFun(m_ptr);
             m_data->m_valid = false;
             m_ptr = nullptr;
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     template<class T> void SharedPtr<T>::Replace(const SharedPtr &ptr) {
-        if (ptr.m_ptr == m_ptr) {
+        if (ptr.m_ptr == m_ptr && ptr.m_data == m_data) {
             return;
         }
 

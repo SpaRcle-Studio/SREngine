@@ -52,15 +52,11 @@ namespace SR_UTILS_NS {
     }
 
     std::optional<int64_t> EnumReflector::AtInternal(int64_t index) const {
-        if (static_cast<uint64_t>(index) < Count()) {
+        if (static_cast<uint64_t>(index) < m_data->values.size()) {
             return m_data->values[index].value;
         }
 
         return std::optional<int64_t>();
-    }
-
-    uint64_t EnumReflector::Count() const noexcept {
-        return m_data->values.size();
     }
 }
 

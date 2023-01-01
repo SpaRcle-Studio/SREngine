@@ -10,14 +10,15 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/ECS/GameObject.h>
 
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Camera.h>
 
 namespace Framework::Core::GUI {
+    /// TODO: избавиться от этого класса
     class GUISystem : public SR_UTILS_NS::Singleton<GUISystem> {
-        friend class Singleton<GUISystem>;
+        friend class SR_UTILS_NS::Singleton<GUISystem>;
     private:
-        GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetPipeLine()) {
+        GUISystem() : m_pipeLine(Graphics::Environment::Get()->GetType()) {
             m_env = Graphics::Environment::Get();
         }
         ~GUISystem() = default;
@@ -28,7 +29,7 @@ namespace Framework::Core::GUI {
 
         int32_t                  m_snapValue    = 100;
         Graphics::Environment*   m_env          = nullptr;
-        const Graphics::PipeLine m_pipeLine     = Graphics::PipeLine::Unknown;
+        const Graphics::PipelineType m_pipeLine     = Graphics::PipelineType::Unknown;
         bool                     m_shiftPressed = false;
         bool                     m_boundsActive = false;
         bool                     m_centerActive = false;
@@ -106,9 +107,8 @@ namespace Framework::Core::GUI {
             ImGui::Text("%s", text.c_str());
         }
 
-        void DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene);
 
-        [[nodiscard]] Helper::Math::IVector2 GetWindowSize() const {
+        [[nodiscard]] SR_MATH_NS::IVector2 GetWindowSize() const {
             ImVec2 size = ImGui::GetWindowSize();
             return { (int32_t)size.x, (int32_t)size.y };
         }
@@ -119,10 +119,9 @@ namespace Framework::Core::GUI {
         bool ImageButton(void* descriptor, const SR_MATH_NS::IVector2& size);
         bool BeginDragDropTargetWindow(const char* payload_type); //должен использоваться как условие, код которого заканчивается на ImGui::EndDragDropTarget()
         void DrawTexture(void* descriptor, const SR_MATH_NS::IVector2& size);
-        void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
-        void DrawGuizmo(Graphics::Types::Camera* camera, Helper::Types::SafePtr<Helper::GameObject> gameObject);
+        void DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize);
         void DrawGuizmoTools();
-        bool BeginDockSpace();
+        bool BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow);
         bool BeginWindow(const char* name);
         void EndWindow();
         bool BeginChildWindow(const char* name);

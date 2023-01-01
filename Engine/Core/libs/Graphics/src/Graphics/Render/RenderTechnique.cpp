@@ -44,11 +44,11 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Render() {
-        if (m_dirty && !Build()) {
+        if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
             return false;
         }
 
-        m_uboManager.SetCurrentCamera(GetCamera());
+        m_uboManager.SetIdentifier(GetCamera());
 
         bool hasDrawData = false;
 
@@ -78,11 +78,11 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::Update() {
-        if (m_dirty) {
+        if (m_dirty || !m_camera || !m_camera->IsActive()) {
             return;
         }
 
-        m_uboManager.SetCurrentCamera(GetCamera());
+        m_uboManager.SetIdentifier(GetCamera());
 
         for (auto&& pass : m_passes) {
             pass->Update();
@@ -94,7 +94,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        m_uboManager.SetCurrentCamera(GetCamera());
+        m_uboManager.SetIdentifier(GetCamera());
 
         bool hasDrawData = false;
 
@@ -105,7 +105,7 @@ namespace SR_GRAPH_NS {
         return hasDrawData;
     }
 
-    void RenderTechnique::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void RenderTechnique::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto&& pass : m_passes) {
             pass->OnResize(size);
         }
@@ -116,11 +116,15 @@ namespace SR_GRAPH_NS {
 
         SetDirty();
 
-        return SR_UTILS_NS::IResource::Load();
+        m_loadState = LoadState::Loading;
+
+        return true;
     }
 
     bool RenderTechnique::Unload() {
         SR_LOCK_GUARD
+
+        m_loadState = LoadState::Unloading;
 
         return IResource::Unload();
     }
@@ -153,8 +157,6 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        SR_GRAPH_LOG("RenderTechnique::Build() : building render technique...");
-
         /// Очишаем старые данные, если они были
         ClearSettings();
 
@@ -162,25 +164,31 @@ namespace SR_GRAPH_NS {
         auto&& document = LoadDocument();
         if (!document.Valid()) {
             SR_ERROR("RenderTechnique::Build() : failed to load xml document!");
+            m_loadState = LoadState::Error;
             return false;
         }
 
         if (auto&& settings = document.Root().GetNode("Technique")) {
             if (!LoadSettings(settings)) {
                 SR_ERROR("RenderTechnique::Build() : failed to load render technique!");
+                m_loadState = LoadState::Error;
                 return false;
             }
         }
         else {
             SR_ERROR("RenderTechnique::Build() : \"Technique\" node not found!");
+            m_loadState = LoadState::Error;
             return false;
         }
+
+        SR_GRAPH_LOG("RenderTechnique::Build() : building \"" + std::string(GetName()) + "\" render technique...");
 
         /// Инициализируем все успешно загруженнеы проходы
         for (auto&& pPass : m_passes) {
             pPass->Init();
         }
 
+        m_loadState = LoadState::Loaded;
         m_dirty = false;
 
         return true;
@@ -190,7 +198,7 @@ namespace SR_GRAPH_NS {
         m_name = node.GetAttribute("Name").ToString();
 
         for (auto&& passNode : node.GetNodes()) {
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(this, passNode)) {
+            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(this, passNode, nullptr)) {
                 m_passes.emplace_back(pPass);
             }
             else {

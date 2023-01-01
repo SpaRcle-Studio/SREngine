@@ -5,6 +5,7 @@
 #include <Utils/World/Chunk.h>
 #include <Utils/World/Region.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_WORLD_NS {
     Chunk::Allocator Chunk::g_allocator = Chunk::Allocator();
@@ -47,7 +48,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::Access(float_t dt) {
-        m_lifetime = dt + 2.f;
+        m_lifetime = dt + 10.f;
+        SRAssert(m_loadState != LoadState::Unload);
         return true;
     }
 
@@ -56,7 +58,8 @@ namespace SR_WORLD_NS {
 
         SetDebugLoaded(BoolExt::False);
 
-        auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         for (auto gameObject : gameObjects) {
             gameObject.AutoFree([](auto gm) {
@@ -144,7 +147,8 @@ namespace SR_WORLD_NS {
 
         std::list<SR_HTYPES_NS::Marshal::Ptr> marshaled;
 
-        auto&& gameObjects = m_observer->m_scene->GetGameObjectsAtChunk(m_regionPosition, m_position);
+        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         /// сохраняем объекты относительно начала координат чанка
         SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
@@ -202,6 +206,10 @@ namespace SR_WORLD_NS {
     }
 
     void Chunk::SetDebugActive(BoolExt enabled) {
+        if (!Features::Instance().Enabled("DebugChunks", false)) {
+            enabled = BoolExt::False;
+        }
+
         if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugActiveId != SR_ID_INVALID)) {
             m_debugActiveId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
                     GetWorldPosition(SR_MATH_NS::AXIS_XYZ),
@@ -219,6 +227,10 @@ namespace SR_WORLD_NS {
     void Chunk::SetDebugLoaded(BoolExt enabled) {
         if (m_position.y != 1 || m_regionPosition.y != 1) {
             return;
+        }
+
+        if (!Features::Instance().Enabled("DebugChunks", false)) {
+            enabled = BoolExt::False;
         }
 
         if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {

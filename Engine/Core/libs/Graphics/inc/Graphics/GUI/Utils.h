@@ -7,6 +7,8 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Math/Rect.h>
+#include <Utils/Types/DataStorage.h>
 
 namespace SR_GRAPH_NS::GUI {
     static ImVec4 MakeDisableColor(ImVec4 color) {
@@ -149,7 +151,69 @@ namespace SR_GRAPH_NS::GUI {
             result |= DragInt32(label, value, drag, active, index);
         }
 
-        ImGui::PopItemWidth();
+        return result;
+    }
+
+    static bool DrawSlider(const std::string& label,
+                           SR_MATH_NS::Unit& value,
+                           float_t min = 0.0f,
+                           float_t max = 0.0f,
+                           uint32_t index = 0
+    ) {
+        auto tmp = static_cast<float_t>(value);
+
+        if (ImGui::SliderScalar(SR_FORMAT_C("%s##%i", label.c_str(), index), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
+            value = static_cast<SR_MATH_NS::Unit>(tmp);
+            return true;
+        }
+
+        return false;
+    }
+
+    template<typename T> static bool DrawValueSlider (
+            const std::string& label,
+            T& value,
+            T reset,
+            T min,
+            T max,
+            ImVec2 btnSize,
+            ImVec4 btn,
+            ImVec4 hovered,
+            ImVec4 activeCol,
+            ImFont* font = nullptr,
+            bool active = true,
+            uint32_t index = 0)
+    {
+        bool result = false;
+
+        ImGui::PushStyleColor(ImGuiCol_Button, active ? btn : MakeDisableColor(btn));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, active ? hovered : MakeDisableColor(hovered));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, active ? activeCol : MakeDisableColor(activeCol));
+
+        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
+
+        if (font) {
+            ImGui::PushFont(font);
+        }
+
+        if (ImGui::Button(SR_FORMAT_C("%s##%i", label.c_str(), index), btnSize) && active) {
+            value = reset;
+            result = true;
+        }
+
+        if (font) {
+            ImGui::PopFont();
+        }
+
+        ImGui::PopStyleColor(3);
+
+        ImGui::SameLine();
+
+        if (DrawSlider("##" + label, value, static_cast<float_t>(min), static_cast<float_t>(max), index)) {
+            result |= true;
+        }
+
+        ImGui::PopItemFlag();
 
         return result;
     }
@@ -187,6 +251,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                                   nullptr, active, 0.01f, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<SR_MATH_NS::Unit>("G", values.g, resetValue, buttonSize,
@@ -195,6 +260,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                                   nullptr, active, 0.01f, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<SR_MATH_NS::Unit>("B", values.b, resetValue, buttonSize,
@@ -203,6 +269,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                                   nullptr, active, 0.01f, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<SR_MATH_NS::Unit>("A", values.a, resetValue, buttonSize,
@@ -211,6 +278,7 @@ namespace SR_GRAPH_NS::GUI {
                                   ImVec4{ 0.7f, 0.7f, 0.7f, 1.0f },
                                   nullptr, active, 0.01f, index);
 
+        ImGui::PopItemWidth();
         ImGui::PopStyleVar();
 
         ImGui::Columns(1);
@@ -220,6 +288,87 @@ namespace SR_GRAPH_NS::GUI {
         values = values.Clamp(10, 0);
 
         return result;
+    }
+
+    static bool DrawEditableSlider(const std::string& label,
+           SR_MATH_NS::Unit& value,
+           float_t min = 0.0f,
+           float_t max = 0.0f,
+           float_t power = 0.1,
+           uint32_t index = 0,
+           SR_HTYPES_NS::DataStorage* storage = nullptr)
+    {
+        bool slider = true;
+
+        if (storage) {
+            auto&& id = SR_FORMAT("##edt_slider_%s%i", label.c_str(), index);
+            slider = storage->GetValueDef<bool>(id, true);
+            if (ImGui::Checkbox(id.c_str(), &slider)) {
+                storage->SetValue<bool>(id, slider);
+            }
+
+            ImGui::SameLine();
+        }
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        ImVec2 buttonSize = { 45.f, lineHeight };
+
+        if (slider) {
+            return DrawValueSlider<SR_MATH_NS::Unit>(
+                    label, value, 0.f,
+                    static_cast<SR_MATH_NS::Unit>(min),
+                    static_cast<SR_MATH_NS::Unit>(max),
+                    buttonSize,
+                    ImVec4{0.2f, 0.7f, 0.2f, 1.0f},
+                    ImVec4{0.3f, 0.8f, 0.3f, 1.0f},
+                    ImVec4{0.2f, 0.7f, 0.2f, 1.0f}, nullptr, true, index
+            );
+        }
+
+        return DrawValueControl<SR_MATH_NS::Unit>(
+                 label.c_str(), value, 0.f, buttonSize,
+                 ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+                 ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+                 ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, power, index
+         );
+    }
+
+    static bool DrawFRect(
+           const std::array<std::string, 4>& names,
+           SR_MATH_NS::FRect& value,
+           float_t min = 0.0f,
+           float_t max = 0.0f,
+           float_t power = 0.1,
+           uint32_t index = 0,
+           SR_HTYPES_NS::DataStorage* storage = nullptr
+    ) {
+        bool dirty = false;
+
+        auto left = static_cast<SR_MATH_NS::Unit>(value.Left());
+        if (Graphics::GUI::DrawEditableSlider(names[0], left, min, max, power, index, storage)) {
+            value.SetLeft(left);
+            dirty = true;
+        }
+
+        auto bottom = static_cast<SR_MATH_NS::Unit>(value.Bottom());
+        if (Graphics::GUI::DrawEditableSlider(names[1], bottom, min, max, power, index, storage)) {
+            value.SetBottom(bottom);
+            dirty = true;
+        }
+
+        auto right = static_cast<SR_MATH_NS::Unit>(value.Right());
+        if (Graphics::GUI::DrawEditableSlider(names[2], right, min, max, power, index, storage)) {
+            value.SetRight(right);
+            dirty = true;
+        }
+
+        auto top = static_cast<SR_MATH_NS::Unit>(value.Top());
+        if (Graphics::GUI::DrawEditableSlider(names[3], top, min, max, power, index, storage)) {
+            value.SetTop(top);
+            dirty = true;
+        }
+
+        return dirty;
     }
 
     static bool DrawVec3Control(
@@ -254,6 +403,7 @@ namespace SR_GRAPH_NS::GUI {
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<SR_MATH_NS::Unit>("Y", values.y, resetValue, buttonSize,
@@ -261,6 +411,7 @@ namespace SR_GRAPH_NS::GUI {
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<SR_MATH_NS::Unit>("Z", values.z, resetValue, buttonSize,
@@ -268,6 +419,7 @@ namespace SR_GRAPH_NS::GUI {
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag, index);
 
+        ImGui::PopItemWidth();
         ImGui::PopStyleVar();
 
         ImGui::Columns(1);
@@ -309,6 +461,7 @@ namespace SR_GRAPH_NS::GUI {
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<int32_t>("Y", values.y, resetValue, buttonSize,
@@ -316,6 +469,7 @@ namespace SR_GRAPH_NS::GUI {
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag, index);
 
+        ImGui::PopItemWidth();
         ImGui::SameLine();
 
         result |= DrawValueControl<int32_t>("Z", values.z, resetValue, buttonSize,
@@ -323,6 +477,7 @@ namespace SR_GRAPH_NS::GUI {
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag, index);
 
+        ImGui::PopItemWidth();
         ImGui::PopStyleVar();
 
         ImGui::Columns(1);

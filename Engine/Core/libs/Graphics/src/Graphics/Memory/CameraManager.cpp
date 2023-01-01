@@ -92,10 +92,11 @@ namespace SR_GRAPH_NS::Memory {
         return pMainCamera;
     }
 
-    std::list<CameraManager::CameraPtr> CameraManager::GetOffScreenCameras(RenderScene *pRScene) {
+    std::vector<CameraManager::CameraPtr> CameraManager::GetOffScreenCameras(RenderScene *pRScene) {
         SR_LOCK_GUARD
 
-        std::list<CameraManager::CameraPtr> list;
+        std::vector<CameraManager::CameraPtr> cameras;
+        cameras.reserve(m_cameras.size());
 
         for (auto&& [pCamera, info] : m_cameras) {
             if (info.destroyed) {
@@ -111,15 +112,15 @@ namespace SR_GRAPH_NS::Memory {
             }
 
             if (pCamera->GetPriority() < 0) {
-                list.emplace_back(pCamera);
+                cameras.emplace_back(pCamera);
             }
         }
 
-        std::stable_sort(list.begin(), list.end(), [](CameraPtr lhs, CameraPtr rhs) {
+        std::stable_sort(cameras.begin(), cameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
             return lhs->GetPriority() < rhs->GetPriority();
         });
 
-        return list;
+        return cameras;
     }
 
     std::list<CameraManager::CameraPtr> CameraManager::GetCameras() const {
@@ -159,8 +160,8 @@ namespace SR_GRAPH_NS::Memory {
 
         info.destroyed = false;
 
-        /// У каждой камеры должна быть свя сцена рендера, иначе будет непонятно куда рендерить
-        if (auto&& scene = pCamera->GetScene(); scene.RecursiveLockIfValid()) {
+        /// Каждая камера должга иметь сцену рендера, иначе будет непонятно куда рендерить
+        if (auto&& scene = pCamera->GetScene(); scene->RecursiveLockIfValid()) {
             info.pRenderScene = scene->GetDataStorage().GetValueDef<RenderScenePtr>(RenderScenePtr());
             if (info.pRenderScene.Valid()) {
                 info.pRenderScene->SetDirty();
@@ -168,7 +169,7 @@ namespace SR_GRAPH_NS::Memory {
             else {
                 SR_WARN("CameraManager::RegisterCamera() : render scene is invalid!");
             }
-            scene.Unlock();
+            scene->Unlock();
         }
         else {
             SRHalt("CameraManager::RegisterCamera() : scene is invalid!");

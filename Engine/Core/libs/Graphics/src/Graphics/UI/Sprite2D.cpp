@@ -7,11 +7,11 @@
 
 #include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Types/Material.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 
-namespace SR_GRAPH_NS::UI {
+namespace SR_GRAPH_UI_NS {
     Sprite2D::Sprite2D()
         : Super(Types::MeshType::Sprite2D)
     {
@@ -24,29 +24,24 @@ namespace SR_GRAPH_NS::UI {
         SetId("Sprite2DFromMemory");
     }
 
-    SR_UTILS_NS::IResource* Sprite2D::Copy(SR_UTILS_NS::IResource *destination) const {
+    SR_UTILS_NS::IResource* Sprite2D::CopyResource(SR_UTILS_NS::IResource *destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* sprite2D = dynamic_cast<Sprite2D *>(destination ? destination : new Sprite2D());
-        sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::Copy(sprite2D));
-
-        if (sprite2D->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            sprite2D->m_VBO = manager.CopyIfExists<Vertices::VertexType::UIVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
+        sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::CopyResource(sprite2D));
 
         return sprite2D;
     }
 
     SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&type = static_cast<Types::MeshType>(marshal.Read<int32_t>());
+        SR_MAYBE_UNUSED const auto &&type = static_cast<SR_GTYPES_NS::MeshType>(marshal.Read<int32_t>());
 
         const auto &&material = marshal.Read<std::string>();
 
         auto&& pSprite = new Sprite2D();
 
         if (material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(material)) {
+            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(material)) {
                 pSprite->SetMaterial(pMaterial);
             }
             else
@@ -143,7 +138,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Sprite2D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
+        pMarshal = Super::Save(pMarshal, flags);
 
         pMarshal->Write(static_cast<int32_t>(m_type));
 
@@ -152,11 +147,17 @@ namespace SR_GRAPH_NS::UI {
         return pMarshal;
     }
 
-    SR_MATH_NS::FVector2 Sprite2D::GetSizes() const {
-        return SR_MATH_NS::FVector2(2.f, 2.f);
-    }
-
     std::vector<uint32_t> Sprite2D::GetIndices() const {
         return SPRITE_INDICES;
+    }
+
+    void Sprite2D::UseMaterial() {
+        Super::UseMaterial();
+        UseModelMatrix();
+    }
+
+    void Sprite2D::UseModelMatrix() {
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        Super::UseModelMatrix();
     }
 }

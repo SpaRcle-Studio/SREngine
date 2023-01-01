@@ -10,6 +10,9 @@
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/ECS/GameObject.h>
 
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
+
 namespace SR_UTILS_NS {
     class GameObject;
 
@@ -18,7 +21,32 @@ namespace SR_UTILS_NS {
     }
 }
 
+namespace SR_CORE_NS::GUI {
+    class Hierarchy;
+}
+
 namespace SR_CORE_NS::Commands {
+
+    class ChangeHierarchySelected : public SR_UTILS_NS::ReversibleCommand {
+    public:
+        ChangeHierarchySelected() = default;
+        explicit ChangeHierarchySelected(SR_CORE_NS::GUI::Hierarchy* hierarchy,
+                            const std::set<SR_UTILS_NS::GameObject::Ptr>& oldSelected,
+                            const std::set<SR_UTILS_NS::GameObject::Ptr>& newSelected);
+
+        ~ChangeHierarchySelected() override;
+
+        bool Redo() override;
+        bool Undo() override;
+
+        std::string GetName() override { return "ChangeHierarchySelected"; }
+
+    private:
+        SR_CORE_NS::GUI::Hierarchy* m_hierarchy = nullptr;
+        std::set<SR_UTILS_NS::EntityId> m_newSelected;
+        std::set<SR_UTILS_NS::EntityId> m_oldSelected;
+    };
+
     class GameObjectTransform : public SR_UTILS_NS::ReversibleCommand {
     public:
         GameObjectTransform() = default;
@@ -73,7 +101,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::GameObject::Name m_newName;
     };
 
-    class GameObjectDelete : public SR_UTILS_NS::ReversibleCommand {
+    class GameObjectDelete : public SR_UTILS_NS::ReversibleCommand { ///TODO: подумать над удалением нескольких объектов за раз
     public:
         GameObjectDelete() = default;
         explicit GameObjectDelete(const SR_UTILS_NS::GameObject::Ptr& ptr);
@@ -90,7 +118,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityBranch m_reserved;
         SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
         SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
-
+        SR_UTILS_NS::EntityId m_parent = { };
     };
 
     bool RegisterEngineCommands();

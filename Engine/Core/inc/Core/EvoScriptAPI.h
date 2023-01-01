@@ -19,6 +19,7 @@ namespace Framework {
         ~API() = delete;
     public:
         static void RegisterEvoScriptClasses();
+        static void Initialize();
         static void RegisterDebug(EvoScript::AddressTableGen* generator);
         static void RegisterEngine(EvoScript::AddressTableGen* generator);
         static void RegisterScene(EvoScript::AddressTableGen* generator);

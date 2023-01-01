@@ -81,9 +81,9 @@ namespace SR_UTILS_NS {
         m_translation = translation;
         SetRotation(euler);
 
-        for (auto &&child : m_gameObject->m_children) {
-            child->m_transform->GlobalTranslate(deltaTranslation);
-            child->m_transform->RotateAroundParent(deltaRotation);
+        for (auto&& child : m_gameObject->GetChildrenRef()) {
+            child->GetTransform()->GlobalTranslate(deltaTranslation);
+            child->GetTransform()->RotateAroundParent(deltaRotation);
         }
     }
 
@@ -171,6 +171,19 @@ namespace SR_UTILS_NS {
 
             SetRotation(matrix.GetEulers());
         }
+    }
+
+    Transform *Transform3D::Copy() const {
+        auto&& pTransform = new Transform3D();
+
+        pTransform->m_quaternion = m_quaternion;
+
+        pTransform->m_translation = m_translation;
+        pTransform->m_rotation = m_rotation;
+        pTransform->m_scale = m_scale;
+        pTransform->m_skew = m_skew;
+
+        return pTransform;
     }
 }
 

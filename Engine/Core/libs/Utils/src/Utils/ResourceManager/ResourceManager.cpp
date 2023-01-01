@@ -12,10 +12,13 @@ namespace SR_UTILS_NS {
     const float_t ResourceManager::ResourceLifeTime = 30.f;
 
     bool ResourceManager::Init(const std::string& resourcesFolder) {
-        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: "+resourcesFolder);
+    #ifdef SR_ANDROID
+        SR_INFO("ResourceManager::Init() : initializing resource manager...");
+    #else
+        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: " + resourcesFolder);
+    #endif
 
         m_folder = resourcesFolder;
-        m_folder.Normalize();
 
         m_resources.max_load_factor(0.9f);
 
@@ -88,7 +91,7 @@ namespace SR_UTILS_NS {
 
     bool ResourceManager::IsLastResource(IResource* pResource) {
         auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
-        return resourcesGroup.IsLast(pResource->m_resourceId);
+        return resourcesGroup.IsLast(pResource->GetResourceHashId());
     }
 
     void ResourceManager::Thread() {
@@ -100,10 +103,10 @@ namespace SR_UTILS_NS {
             /// даем возможность другим потокам отдать ресурсы на уничтожение,
             /// чтобы сразу же не блокировать им эту возможность
             if (m_force) {
-                Types::Thread::Sleep(100);
+                SR_HTYPES_NS::Thread::Sleep(100);
             }
             else {
-                Types::Thread::Sleep(500);
+                SR_HTYPES_NS::Thread::Sleep(500);
             }
 
             SR_SCOPED_LOCK
@@ -118,8 +121,14 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::GC() {
-        if (m_destroyed.empty() && !m_force) {
+        if (m_destroyed.empty()) {
             return;
+        }
+
+        if (m_force) {
+            for (auto&& [hashName, group] : m_resources) {
+                group.CollectUnused();
+            }
         }
 
         auto resourceIt = m_destroyed.begin();
@@ -207,7 +216,7 @@ namespace SR_UTILS_NS {
 
         std::string wait;
         for (auto&& pResource : m_destroyed) {
-            wait += "\n\t\t" + pResource->m_resourceId + "; uses = " +std::to_string(pResource->GetCountUses());
+            wait += "\n\t\t" + GetResourceId(pResource->GetResourceHashId()) + "; uses = " +std::to_string(pResource->GetCountUses());
             ++count;
         }
 
@@ -235,7 +244,7 @@ namespace SR_UTILS_NS {
 
         auto&& [name, resourcesGroup] = *m_resources.find(hashTypeName);
 
-        if (auto&& pResource = resourcesGroup.Find(id)) {
+        if (auto&& pResource = resourcesGroup.Find(SR_HASH_STR(id))) {
             return pResource;
         }
 
@@ -274,7 +283,14 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void ResourceManager::InspectResources(const std::function<void(const ResourcesTypes &)> &callback) {
+    void ResourceManager::Execute(const SR_HTYPES_NS::Function<void()>& fun)
+    {
+        SR_SCOPED_LOCK
+
+        fun();
+    }
+
+    void ResourceManager::InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)> &callback) {
         SR_SCOPED_LOCK
 
         callback(m_resources);
@@ -308,6 +324,13 @@ namespace SR_UTILS_NS {
                         continue;
                     }
 
+                    auto&& loadState = pResource->GetResourceLoadState();
+
+                    using LS = IResource::LoadState;
+                    if (loadState == LS::Reloading || loadState == LS::Loading || loadState == LS::Unloading) {
+                        continue;
+                    }
+
                     pResource->Reload();
                 }
             }
@@ -315,6 +338,8 @@ namespace SR_UTILS_NS {
     }
 
     std::string_view ResourceManager::GetTypeName(uint64_t hashName) const {
+        SR_SCOPED_LOCK
+
         if (auto&& pIt = m_resources.find(hashName); pIt != m_resources.end()) {
             return pIt->second.GetName();
         }
@@ -322,5 +347,61 @@ namespace SR_UTILS_NS {
         SRHalt("ResourceManager::GetTypeName() : unknown hash name!");
 
         return "Unknown";
+    }
+
+    const std::string& ResourceManager::GetResourceId(ResourceManager::Hash hashId) const {
+        SR_SCOPED_LOCK
+
+        auto&& pIt = m_hashIds.find(hashId);
+
+        if (pIt == m_hashIds.end()) {
+            SRHalt("ResourceManager::GetResourceId() : id is not registered!");
+            static std::string defaultId;
+            return defaultId;
+        }
+
+        return pIt->second;
+    }
+
+    ResourceManager::Hash ResourceManager::RegisterResourceId(const std::string& resourceId) {
+        SR_SCOPED_LOCK
+
+        const ResourceManager::Hash hash = SR_HASH_STR(resourceId);
+
+        auto&& pIt = m_hashIds.find(hash);
+
+        if (pIt == m_hashIds.end()) {
+            m_hashIds.insert(std::make_pair(hash, resourceId));
+        }
+
+        return hash;
+    }
+
+    const Path &ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
+        SR_SCOPED_LOCK
+
+        auto&& pIt = m_hashPaths.find(hashPath);
+
+        if (pIt == m_hashPaths.end()) {
+            SRHalt("ResourceManager::GetResourcePath() : path is not registered!");
+            static Path defaultPath;
+            return defaultPath;
+        }
+
+        return pIt->second;
+    }
+
+    ResourceManager::Hash ResourceManager::RegisterResourcePath(const Path &path) {
+        SR_SCOPED_LOCK
+
+        const ResourceManager::Hash hash = path.GetHash();
+
+        auto&& pIt = m_hashPaths.find(hash);
+
+        if (pIt == m_hashPaths.end()) {
+            m_hashPaths.insert(std::make_pair(hash, path));
+        }
+
+        return hash;
     }
 }

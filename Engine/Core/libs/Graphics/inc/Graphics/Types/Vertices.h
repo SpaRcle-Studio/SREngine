@@ -81,6 +81,59 @@ namespace SR_GRAPH_NS::Vertices {
     };
     typedef std::vector<StaticMeshVertex> StaticMeshVertices;
 
+    struct SkinnedMeshVertex {
+        glm::vec3 pos;
+        glm::vec2 uv;
+        glm::vec3 norm;
+        glm::vec3 tang;
+        glm::vec3 bitang;
+        //uint8_t weightsNum;
+        struct {
+            uint32_t boneId;
+            float weight;
+        } weights[SR_MAX_BONES_ON_VERTEX];
+
+        static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
+            return sizeof(SkinnedMeshVertex);
+        }
+
+        static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
+            auto descriptions = std::vector<std::pair<Attribute, size_t>>();
+
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(SkinnedMeshVertex, uv)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, norm)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, tang)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, bitang)));
+
+            for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; ++i) {
+                descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32, offsetof(SkinnedMeshVertex, weights[i])));
+            }
+
+            return descriptions;
+        }
+
+        bool operator==(const SkinnedMeshVertex& other) const {
+            return pos       == other.pos
+                   && uv     == other.uv
+                   && norm   == other.norm
+                   && bitang == other.bitang
+                   && tang   == other.tang;
+            //TODO:А что если 2 вершины в одном месте, а весы различны?
+        }
+
+        SR_NODISCARD std::string ToString() const {
+            return SR_FORMAT("{ %s, %s, %s, %s, %s },",
+                             Vertices::ToString(pos).c_str(),
+                             Vertices::ToString(uv).c_str(),
+                             Vertices::ToString(norm).c_str(),
+                             Vertices::ToString(bitang).c_str(),
+                             Vertices::ToString(tang).c_str()
+            );
+        }
+    };
+    typedef std::vector<SkinnedMeshVertex> SkinnedMeshVertices;
+
     struct UIVertex {
         glm::vec3 pos;
         glm::vec2 uv;
@@ -109,7 +162,7 @@ namespace SR_GRAPH_NS::Vertices {
     };
     typedef std::vector<UIVertex> UIVertices;
 
-    static std::string ToString(const std::vector<uint32_t>& indices) {
+    SR_MAYBE_UNUSED static std::string ToString(const std::vector<uint32_t>& indices) {
         std::string str = std::to_string(indices.size()) + " indices: \n";
         for (uint32_t i = 0; i < indices.size() - 1; i++)
             str += std::to_string(indices[i]) + ", ";
@@ -118,7 +171,7 @@ namespace SR_GRAPH_NS::Vertices {
         return str;
     }
 
-    static std::string ToString(const std::vector<StaticMeshVertex>& vertices) {
+    SR_MAYBE_UNUSED static std::string ToString(const std::vector<StaticMeshVertex>& vertices) {
         std::string str = std::to_string(vertices.size()) + " vertices: \n";
         for (uint32_t i = 0; i < vertices.size() - 1; i++)
             str += vertices[i].ToString() + ",\n";
@@ -156,26 +209,28 @@ namespace SR_GRAPH_NS::Vertices {
         UIVertex
     )
 
-    static uint32_t GetVertexSize(VertexType type) {
+    SR_MAYBE_UNUSED static uint32_t GetVertexSize(VertexType type) {
         switch (type) {
             case VertexType::StaticMeshVertex:
                 return sizeof(StaticMeshVertex);
+            case VertexType::SkinnedMeshVertex:
+                return sizeof(SkinnedMeshVertex);
             case VertexType::SimpleVertex:
                 return sizeof(SimpleVertex);
             case VertexType::UIVertex:
                 return sizeof(UIVertex);
             default:
-                SRAssert(false);
+                SRHalt0();
                 return 0;
         }
     }
 
-    template<typename V> Helper::Math::FVector3 Barycenter(const std::vector<V>& vertices) {
+    template<typename V> SR_MATH_NS::FVector3 Barycenter(const std::vector<V>& vertices) {
         auto x = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.x; return sum; }();
         auto y = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.y; return sum; }();
         auto z = [vertices]() { float sum = 0.f; for (const auto& v : vertices) sum += v.pos.z; return sum; }();
 
-        return Helper::Math::FVector3(x, y, z) / vertices.size();
+        return SR_MATH_NS::FVector3(x, y, z) / vertices.size();
     }
 
     struct VertexInfo {
@@ -183,9 +238,13 @@ namespace SR_GRAPH_NS::Vertices {
         std::vector<std::pair<Vertices::Attribute, size_t>> m_attributes;
     };
 
-    static VertexInfo GetVertexInfo(VertexType type) {
+    SR_MAYBE_UNUSED static VertexInfo GetVertexInfo(VertexType type) {
         VertexInfo info = {};
         switch (type) {
+            case VertexType::SkinnedMeshVertex:
+                info.m_attributes = SkinnedMeshVertex::GetAttributes();
+                info.m_descriptions = { SkinnedMeshVertex::GetDescription() };
+                break;
             case VertexType::StaticMeshVertex:
                 info.m_attributes = StaticMeshVertex::GetAttributes();
                 info.m_descriptions = { StaticMeshVertex::GetDescription() };
@@ -214,7 +273,7 @@ namespace SR_GRAPH_NS::Vertices {
 
         if constexpr (std::is_same<Vertices::SimpleVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::SimpleVertex{
+                vertices.emplace_back(T {
                         .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                 });
             }
@@ -222,7 +281,7 @@ namespace SR_GRAPH_NS::Vertices {
 
         if constexpr (std::is_same<Vertices::UIVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::UIVertex{
+                vertices.emplace_back(T {
                         .pos = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                         .uv  = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
                 });
@@ -231,7 +290,7 @@ namespace SR_GRAPH_NS::Vertices {
 
         if constexpr (std::is_same<Vertices::StaticMeshVertex, T>::value) {
             for (const auto& vertex : raw) {
-                vertices.emplace_back(Vertices::StaticMeshVertex{
+                vertices.emplace_back(T {
                         .pos    = *reinterpret_cast<glm::vec3*>((void*)&vertex.position),
                         .uv     = *reinterpret_cast<glm::vec2*>((void*)&vertex.uv),
                         .norm   = *reinterpret_cast<glm::vec3*>((void*)&vertex.normal),
@@ -239,6 +298,27 @@ namespace SR_GRAPH_NS::Vertices {
                         .bitang = *reinterpret_cast<glm::vec3*>((void*)&vertex.bitangent),
                 });
             }
+        }
+
+        if constexpr (std::is_same<Vertices::SkinnedMeshVertex, T>::value) {
+            for (const auto& rawVertex : raw) {
+                T vertex;
+                //vertex.weightsNum = rawVertex.weightsNum;
+                vertex.pos    = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.position);
+                vertex.uv     = *reinterpret_cast<glm::vec2*>((void*)&rawVertex.uv);
+                vertex.norm   = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.normal);
+                vertex.tang   = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.tangent);
+                vertex.bitang = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.bitangent);
+                for (uint32_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
+                    vertex.weights[i].boneId = rawVertex.weights[i].boneId;
+                    vertex.weights[i].weight = rawVertex.weights[i].weight;
+                }
+                vertices.emplace_back(vertex);
+            }
+        }
+
+        if (raw.size() != vertices.size()) {
+            SRHalt("Vertices::CastVertices() : sizes is different!");
         }
 
         return vertices;
@@ -254,10 +334,17 @@ namespace std {
     template<> struct hash<SR_GRAPH_NS::Vertices::StaticMeshVertex> {
         size_t operator()(SR_GRAPH_NS::Vertices::StaticMeshVertex const& vertex) const {
             std::size_t res = 0;
-            hash_combine<glm::vec3>(res, vertex.pos);
-            hash_combine<glm::vec2>(res, vertex.uv);
-            hash_combine<glm::vec3>(res, vertex.norm);
-            hash_combine<glm::vec3>(res, vertex.tang);
+            hash_combine<float>(res, vertex.pos.x);
+            hash_combine<float>(res, vertex.pos.y);
+            hash_combine<float>(res, vertex.pos.z);
+            hash_combine<float>(res, vertex.uv.x);
+            hash_combine<float>(res, vertex.uv.y);
+            hash_combine<float>(res, vertex.norm.x);
+            hash_combine<float>(res, vertex.norm.y);
+            hash_combine<float>(res, vertex.norm.z);
+            hash_combine<float>(res, vertex.tang.x);
+            hash_combine<float>(res, vertex.tang.y);
+            hash_combine<float>(res, vertex.tang.z);
             return res;
         }
     };
@@ -265,8 +352,11 @@ namespace std {
     template<> struct hash<SR_GRAPH_NS::Vertices::UIVertex> {
         size_t operator()(SR_GRAPH_NS::Vertices::UIVertex const& vertex) const {
             std::size_t res = 0;
-            hash_combine<glm::vec3>(res, vertex.pos);
-            hash_combine<glm::vec2>(res, vertex.uv);
+            hash_combine<float>(res, vertex.pos.x);
+            hash_combine<float>(res, vertex.pos.y);
+            hash_combine<float>(res, vertex.pos.z);
+            hash_combine<float>(res, vertex.uv.x);
+            hash_combine<float>(res, vertex.uv.y);
             return res;
         }
     };
@@ -274,7 +364,9 @@ namespace std {
     template<> struct hash<SR_GRAPH_NS::Vertices::SimpleVertex> {
         size_t operator()(SR_GRAPH_NS::Vertices::SimpleVertex const& vertex) const {
             std::size_t res = 0;
-            hash_combine<glm::vec3>(res, vertex.pos);
+            hash_combine<float>(res, vertex.pos.x);
+            hash_combine<float>(res, vertex.pos.y);
+            hash_combine<float>(res, vertex.pos.z);
             return res;
         }
     };

@@ -5,8 +5,8 @@
 #ifndef EVOSCRIPTLIB_QUATERNION_H
 #define EVOSCRIPTLIB_QUATERNION_H
 
-#include "CoreMath.h"
-#include "Vector3.h"
+#include <Libraries/Math/CoreMath.h>
+#include <Libraries/Math/Vector3.h>
 
 class Quaternion {
     friend Vector3<Unit>;

@@ -222,7 +222,7 @@ std::string Framework::Graphics::SRSL::GenerateFunctions(const SRSLFunctions& fu
     };
 
     std::function<void(const SRSLFunc&)> getFunctions;
-    getFunctions = [&getFunctions, &used, &functions, &haveInCallstack, &callstack](const SRSLFunc& func) {
+    getFunctions = [&getFunctions, &used, &haveInCallstack, &callstack](const SRSLFunc& func) {
         for (const auto& call : func.calls) {
             if (haveInCallstack(call)) {
                 continue;

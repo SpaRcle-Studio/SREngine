@@ -7,8 +7,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SwapchainPass)
 
-    SwapchainPass::SwapchainPass(RenderTechnique *pTechnique)
-        : GroupPass(pTechnique)
+    SwapchainPass::SwapchainPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : GroupPass(pTechnique, pParent)
     { }
 
     bool SwapchainPass::Load(const SR_XML_NS::Node &passNode) {
@@ -25,12 +25,13 @@ namespace SR_GRAPH_NS {
     bool SwapchainPass::Render() {
         auto&& pipeline = GetContext()->GetPipeline();
 
-        pipeline->ClearBuffers(m_color.r, m_color.g, m_color.b, m_color.a, m_depth, 1);
+        pipeline->SetCurrentFramebuffer(nullptr);
 
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);
 
             pipeline->BindFrameBuffer(0);
+            pipeline->ClearBuffers(m_color.r, m_color.g, m_color.b, m_color.a, m_depth, 1);
 
             pipeline->BeginRender();
             {

@@ -19,5 +19,5 @@ void vertex() {
     //     vec3(0, 0, 0)
     // }
 
-    VERTEX.x = -VERTEX.x;
+
 }

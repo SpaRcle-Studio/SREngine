@@ -11,7 +11,7 @@
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderContext.h>
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GRAPH_NS::Types {
@@ -32,13 +32,16 @@ namespace SR_GRAPH_NS::Types {
             return true;
         }
 
-        if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
+        auto&& context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<RenderContext>>();
+        if (!context) {
+            SRHalt("Is not render context!");
             m_hasErrors = true;
             return false;
         }
-        else if (!m_isRegistered && m_context.LockIfValid()) {
-            m_context->Register(this);
-            m_context.Unlock();
+
+        if (!m_isRegistered && context.LockIfValid()) {
+            context->Register(this);
+            context.Unlock();
             m_isRegistered = true;
         }
 
@@ -80,6 +83,7 @@ namespace SR_GRAPH_NS::Types {
         switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
             case Memory::ShaderProgramManager::BindResult::Success:
             case Memory::ShaderProgramManager::BindResult::Duplicated:
+                GetRenderContext()->SetCurrentShader(this);
                 return true;
             case Memory::ShaderProgramManager::BindResult::Failed:
             default:
@@ -90,6 +94,10 @@ namespace SR_GRAPH_NS::Types {
     void Shader::UnUse() noexcept {
         auto&& env = SR_GRAPH_NS::Environment::Get();
         env->UnUseShader();
+
+        if (GetRenderContext()->GetCurrentShader() == this) {
+            GetRenderContext()->SetCurrentShader(nullptr);
+        }
     }
 
     void Shader::FreeVideoMemory() {
@@ -139,6 +147,10 @@ namespace SR_GRAPH_NS::Types {
     }
 
     int32_t Shader::GetID() {
+        return GetId();
+    }
+
+    int32_t Shader::GetId() noexcept {
         if (m_hasErrors) {
             return false;
         }
@@ -188,7 +200,7 @@ namespace SR_GRAPH_NS::Types {
         }
 
         if (!sampler) {
-            sampler = m_context->GetNoneTexture();
+            sampler = GetRenderContext()->GetNoneTexture();
         }
 
         if (!sampler) {
@@ -259,31 +271,20 @@ namespace SR_GRAPH_NS::Types {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    bool Shader::Reload() {
-        SR_SHADER_LOG("Shader::Reload() : reloading \"" + std::string(GetResourceId()) + "\" shader...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-
-        if (!Load()) {
-            m_loadState = LoadState::Error;
-            return false;
+    void Shader::OnReloadDone() {
+        auto&& pContext = GetRenderContext();
+        if (!pContext) {
+            return;
         }
 
-        UpdateResources();
-
-        m_context.Do([](RenderContext* ptr) {
+        /// пока контекст ресурс жив, контекст будет существовать (если он зарегистрирован)
+        pContext->Do([](RenderContext* ptr) {
             ptr->SetDirty();
         });
-
-        return true;
     }
 
     bool Shader::Load() {
         SR_LOCK_GUARD
-
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
 
@@ -302,10 +303,25 @@ namespace SR_GRAPH_NS::Types {
         m_shaderCreateInfo = std::move(unit->createInfo);
         m_shaderCreateInfo.path = unit->path + "/shader";
 
-        switch (unit->type) {
+        switch ((m_type = unit->type)) {
             case SRSL::ShaderType::Custom:
             case SRSL::ShaderType::PostProcessing:
                 break;
+            case SRSL::ShaderType::Skinned:
+            {
+                UBOInfo uniforms = {};
+                for (const auto& [binding, size] : unit->GetUniformSizes()) {
+                    uniforms.emplace_back(std::pair(binding, size));
+                }
+
+                m_shaderCreateInfo.uniforms = std::move(uniforms);
+
+                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SkinnedMeshVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(description);
+                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+
+                break;
+            }
             case SRSL::ShaderType::Spatial: {
                 UBOInfo uniforms = {};
                 for (const auto& [binding, size] : unit->GetUniformSizes()) {
@@ -323,6 +339,8 @@ namespace SR_GRAPH_NS::Types {
                 break;
             }
             case SRSL::ShaderType::Simple:
+            case SRSL::ShaderType::TextUI:
+            case SRSL::ShaderType::Text:
             case SRSL::ShaderType::Line:
             case SRSL::ShaderType::Skybox: {
                 UBOInfo uniforms = { };
@@ -337,8 +355,6 @@ namespace SR_GRAPH_NS::Types {
 
                 break;
             }
-            case SRSL::ShaderType::Animation:
-                break;
             case SRSL::ShaderType::Canvas: {
                 UBOInfo uniforms = { };
                 for (const auto&[binding, size] : unit->GetUniformSizes()) {
@@ -403,5 +419,9 @@ namespace SR_GRAPH_NS::Types {
 
     bool Shader::IsBlendEnabled() const {
         return m_shaderCreateInfo.blendEnabled;
+    }
+
+    SRSL::ShaderType Shader::GetType() const noexcept {
+        return m_type;
     }
 }

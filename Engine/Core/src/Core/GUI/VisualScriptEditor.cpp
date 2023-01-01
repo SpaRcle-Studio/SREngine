@@ -17,11 +17,12 @@
 Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
     : Framework::Graphics::GUI::Widget("Evo Script Editor")
 {
-    auto config = new ax::NodeEditor::Config();
+    /*auto config = new ax::NodeEditor::Config();
     static std::string settingsFile = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/NodeEditor.json");
     config->SettingsFile = settingsFile.c_str();
 
     m_editor = ax::NodeEditor::CreateEditor(config);
+    */
 
     //LoadConfig();
 
@@ -46,10 +47,10 @@ Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
 }
 
 Framework::Core::GUI::VisualScriptEditor::~VisualScriptEditor() {
-    if (m_editor) {
-        ax::NodeEditor::DestroyEditor(m_editor);
-        m_editor = nullptr;
-    }
+    //if (m_editor) {
+    //    ax::NodeEditor::DestroyEditor(m_editor);
+    //    m_editor = nullptr;
+    //}
 
     for (auto& [id, ptr] : m_links)
         delete ptr;
@@ -76,9 +77,9 @@ void Framework::Core::GUI::VisualScriptEditor::AddNode(Framework::Graphics::GUI:
 }
 
 void Framework::Core::GUI::VisualScriptEditor::Draw() {
-    ax::NodeEditor::SetCurrentEditor(m_editor);
+  //  ax::NodeEditor::SetCurrentEditor(m_editor);
 
-    ax::NodeEditor::Begin("Evo Visual Script");
+    //ax::NodeEditor::Begin("Evo Visual Script");
 
     for (const auto& [id, node] : m_nodes)
         node->Draw();
@@ -88,7 +89,7 @@ void Framework::Core::GUI::VisualScriptEditor::Draw() {
 
     using namespace Framework::Graphics::GUI;
 
-    if (ax::NodeEditor::BeginCreate()) {
+    /*if (ax::NodeEditor::BeginCreate()) {
         ax::NodeEditor::PinId inputPinId, outputPinId;
         if (ax::NodeEditor::QueryNewLink(&inputPinId, &outputPinId) && (inputPinId && outputPinId)) {
             auto&& startPin = NodeManager::Instance().GetUnique<Pin>(inputPinId.Get());
@@ -101,7 +102,7 @@ void Framework::Core::GUI::VisualScriptEditor::Draw() {
     }
     ax::NodeEditor::EndCreate(); // Wraps up object creation action handling.
 
-    ax::NodeEditor::End();
+    ax::NodeEditor::End();*/
 }
 
 void Framework::Core::GUI::VisualScriptEditor::AddLink(Framework::Graphics::GUI::Link* link) {

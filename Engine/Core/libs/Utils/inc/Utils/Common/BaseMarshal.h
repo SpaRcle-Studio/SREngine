@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
             return LoadValue<Stream, T>(stream, readCount);
         }
 
-        static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveShortString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(char));
@@ -101,7 +101,7 @@ namespace SR_UTILS_NS {
             bytesCount += sizeof(int16_t) + size * sizeof(char);
         }
 
-        static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveString(std::stringstream& stream, const std::string& str, uint64_t& bytesCount) {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));
@@ -130,6 +130,9 @@ namespace SR_UTILS_NS {
             uint16_t size;
             stream.read((char*)&size, sizeof(uint16_t));
             SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return std::string();
+            }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
             readCount += sizeof(uint16_t) + (size * sizeof(char));
@@ -146,6 +149,9 @@ namespace SR_UTILS_NS {
             size_t size;
             stream.read((char*)&size, sizeof(size_t));
             SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return std::string();
+            }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
             readCount += sizeof(size_t) + (size * sizeof(char));

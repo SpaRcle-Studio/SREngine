@@ -95,7 +95,7 @@ namespace SR_UTILS_NS {
                 pMarshal->Write(GetSkew(), Math::FVector3(1.f));
                 break;
             case Measurement::Space3D: {
-                if (m_gameObject->GetParent()) {
+                if (!m_gameObject || m_gameObject->GetParent()) {
                     pMarshal->Write(GetTranslation(), Math::FVector3(0.f));
                 }
                 else {
@@ -159,6 +159,10 @@ namespace SR_UTILS_NS {
         return transform;
     }
 
+    SR_MATH_NS::FVector2 Transform::GetTranslation2D() const {
+        return GetTranslation().XY();
+    }
+
     SR_MATH_NS::FVector2 Transform::GetScale2D() const {
         return GetScale().XY();
     }
@@ -173,12 +177,17 @@ namespace SR_UTILS_NS {
 
         m_gameObject->OnMatrixDirty();
 
-        for (auto &&child : m_gameObject->m_children) {
-            child->m_transform->UpdateTree();
+        for (auto&& child : m_gameObject->GetChildrenRef()) {
+            child->GetTransform()->UpdateTree();
         }
     }
 
     bool Transform::IsDirty() const noexcept {
         return m_dirtyMatrix;
+    }
+
+    Transform *Transform::Copy() const {
+        SRHalt("Not implemented!");
+        return nullptr;
     }
 }

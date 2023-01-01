@@ -6,29 +6,49 @@
 
 namespace SR_UTILS_NS {
     std::string StringUtils::GetExtensionFromFilePath(std::string path) {
+        if (path.empty()) {
+            return std::string();
+        }
+
         size_t size = path.size() - 1;
+
+        if (size == 0) {
+            return std::string();
+        }
+
         std::string result;
+        result.reserve(size / 2);
+
         bool found = false;
+
         for (long long l = size; l >= 0; l--) {
             if (path[l] == '/' || path[l] == '\\')
                 break;
             else if (path[l] == '.') {
                 found = true;
                 break;
-            } else
+            }
+            else {
                 result += path[l];
+            }
         }
 
-        if (!found) return "";
+        if (!found) {
+            return std::string();
+        }
 
-        result = Reverse(result);
-        return result;
+        return Reverse(result);
     }
 
-    std::string StringUtils::Reverse(std::string str) {
+    std::string StringUtils::Reverse(const std::string& str) {
         std::string result;
-        for (size_t t = str.size(); t > 0; t--)
-            result += str[t - 1];
+        result.resize(str.size());
+
+        size_t i = 0;
+
+        for (size_t t = str.size(); t > 0; --t, ++i) {
+            result[i] += str[t - 1];
+        }
 
         return result;
     }

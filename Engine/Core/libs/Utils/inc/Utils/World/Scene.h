@@ -2,9 +2,10 @@
 // Created by Nikita on 30.11.2020.
 //
 
-#ifndef GAMEENGINE_SCENE_H
-#define GAMEENGINE_SCENE_H
+#ifndef SRENGINE_SCENE_H
+#define SRENGINE_SCENE_H
 
+#include <Utils/ECS/IComponentable.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/World/Observer.h>
@@ -16,25 +17,26 @@
 
 namespace SR_UTILS_NS {
     class GameObject;
+}
 
-    namespace Types {
-        class RawMesh;
-    }
+namespace SR_HTYPES_NS {
+    class RawMesh;
 }
 
 namespace SR_WORLD_NS {
-    class SR_DLL_EXPORT Scene : public Types::SafePtr<Scene> {
+    class SceneLogic;
+
+    class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
-        typedef Types::SafePtr<Scene> Ptr;
+        using Ptr = SR_HTYPES_NS::SafePtr<Scene>;
         using Super = Ptr;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using GameObjects = std::vector<GameObjectPtr>;
 
-        virtual ~Scene();
+        ~Scene() override;
 
     protected:
         Scene();
-        explicit Scene(const std::string& name);
 
     public:
         static Scene::Ptr New(const Path& path);
@@ -46,82 +48,55 @@ namespace SR_WORLD_NS {
         void Update(float_t dt);
 
     public:
-        void SetWorldOffset(const World::Offset& offset);
-        void SetName(const std::string& name) { m_name = name; }
-        void SetPath(const Path& path) { m_path = path; }
-        void SetObserver(const GameObjectPtr& target);
+        template<typename T> SR_NODISCARD T* GetLogic() const {
+            return dynamic_cast<T*>(m_logic);
+        }
 
-        SR_NODISCARD Path GetRegionsPath() const { return m_path.Concat("regions"); }
+        void SetPath(const Path& path) { m_path = path; }
+
+        SR_NODISCARD std::string GetName() const;
         SR_NODISCARD Path GetPath() const { return m_path; }
-        SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
-        SR_NODISCARD std::string GetName() const { return m_name; }
-        SR_NODISCARD Observer* GetObserver() const { return m_observer; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
-        SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk);
-
-        SR_NODISCARD Region* GetRegion(const SR_MATH_NS::IVector3& region);
 
         GameObjects& GetRootGameObjects();
-        const GameObjects& GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
-        Chunk* GetCurrentChunk() const;
 
         GameObjectPtr FindByComponent(const std::string& name);
         GameObjectPtr Find(const std::string& name);
+
+        void RegisterGameObject(const GameObjectPtr& ptr);
 
         virtual GameObjectPtr InstanceFromFile(const std::string& path);
         virtual GameObjectPtr FindOrInstance(const std::string& name);
         virtual GameObjectPtr Instance(const std::string& name);
         virtual GameObjectPtr Instance(const Types::RawMesh* rawMesh);
-        virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal) = 0;
-
-        virtual bool ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const;
+        virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal);
 
     public:
         bool Remove(const GameObjectPtr& gameObject);
-        bool MoveToRoot(const GameObjectPtr& gameObject);
 
         void OnChanged();
 
         bool Reload();
-        bool ReloadConfig();
-        bool ReloadChunks();
 
     private:
-        void CheckShift(const SR_MATH_NS::IVector3& chunk);
-        void UpdateContainers();
-        void UpdateScope(float_t dt);
-        void SaveRegion(Region* pRegion) const;
+        SceneLogic* m_logic = nullptr;
 
-    protected:
-        Observer*                 m_observer           = nullptr;
-        Chunk*                    m_currentChunk       = nullptr;
+        bool m_isPrefab = false;
+        bool m_isDestroy = false;
 
-    private:
-        bool                      m_updateContainer    = false;
-        bool                      m_shiftEnabled       = false;
-        bool                      m_scopeEnabled       = false;
-        bool                      m_isDestroy          = false;
+        std::atomic<bool>  m_isHierarchyChanged = false;
 
-        std::atomic<bool>         m_isHierarchyChanged = false;
+        Path m_path;
 
-        StringAtom                m_name               = "Unnamed";
-        Path                      m_path               = Path();
+        SR_HTYPES_NS::DataStorage m_dataStorage;
 
-        World::Tensor             m_tensor             = World::Tensor();
+        std::list<uint64_t> m_freeObjIndices;
 
-        SR_HTYPES_NS::DataStorage m_dataStorage        = SR_HTYPES_NS::DataStorage();
-
-        std::list<uint64_t>       m_freeObjIndices;
-
-        GameObjects               m_gameObjects;
-        GameObjects               m_rootObjects;
-
-        Regions                   m_regions;
-        Math::IVector2            m_chunkSize = Math::IVector2();
-        uint32_t                  m_regionWidth = 0;
+        GameObjects m_gameObjects;
+        GameObjects m_rootObjects;
 
     };
 }
 
-#endif //GAMEENGINE_SCENE_H
+#endif //SRENGINE_SCENE_H

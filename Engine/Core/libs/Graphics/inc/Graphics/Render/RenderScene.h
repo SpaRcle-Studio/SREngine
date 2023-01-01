@@ -22,6 +22,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class Window;
     class RenderContext;
     class RenderTechnique;
     class DebugRenderer;
@@ -31,6 +32,7 @@ namespace SR_GRAPH_NS {
         using WidgetManagerPtr = GUI::WidgetManager*;
         using WidgetManagers = std::vector<WidgetManagerPtr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using PipelinePtr = Environment*;
@@ -49,13 +51,14 @@ namespace SR_GRAPH_NS {
         void Render() noexcept;
         void Synchronize();
 
-        void OnResize(const SR_MATH_NS::IVector2& size);
+        void OnResize(const SR_MATH_NS::UVector2& size);
 
         /// Можно вызывать не синхронно
         void SetDirty();
 
         void SetDirtyCameras();
 
+        void SetTechnique(RenderTechnique* pTechnique);
         void SetTechnique(const SR_UTILS_NS::Path& path);
 
         void Register(CameraPtr pCamera);
@@ -72,13 +75,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsOverlayEnabled() const;
         SR_NODISCARD RenderContext* GetContext() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
+        SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
         SR_NODISCARD MeshCluster& GetOpaque();
         SR_NODISCARD MeshCluster& GetTransparent();
         SR_NODISCARD MeshCluster& GetDebugCluster();
         SR_NODISCARD CameraPtr GetMainCamera() const;
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
-        SR_NODISCARD SR_MATH_NS::IVector2 GetSurfaceSize() const;
+        SR_NODISCARD SR_MATH_NS::UVector2 GetSurfaceSize() const;
 
     private:
         void SortCameras();
@@ -92,8 +96,9 @@ namespace SR_GRAPH_NS {
 
     private:
         CameraPtr m_mainCamera = nullptr;
-        std::list<CameraPtr> m_offScreenCameras;
-        std::list<CameraInfo> m_cameras;
+
+        std::vector<CameraPtr> m_offScreenCameras;
+        std::vector<CameraInfo> m_cameras;
 
         WidgetManagers m_widgetManagers;
 
@@ -107,7 +112,7 @@ namespace SR_GRAPH_NS {
         TransparentMeshCluster m_transparent;
         DebugMeshCluster m_debug;
 
-        SR_MATH_NS::IVector2 m_surfaceSize;
+        SR_MATH_NS::UVector2 m_surfaceSize;
 
         SR_HTYPES_NS::SafeVar<uint32_t> m_dirty = 0;
 

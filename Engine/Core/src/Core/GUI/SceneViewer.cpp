@@ -14,8 +14,25 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Pass/ColorBufferPass.h>
 
 namespace SR_CORE_NS::GUI {
+    SceneViewer::SceneViewer(const WindowPtr& window, Hierarchy* hierarchy)
+        : Widget("Scene")
+        , m_window(window)
+        , m_hierarchy(hierarchy)
+        , m_guizmo(new Guizmo())
+        , m_id(-1)
+    {
+        m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
+    }
+
+    SceneViewer::~SceneViewer() {
+        SetCameraActive(false);
+        SR_SAFE_DELETE_PTR(m_guizmo);
+    }
+
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
         m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
             m_translation = camera->GetTransform()->GetTranslation();
@@ -49,7 +66,7 @@ namespace SR_CORE_NS::GUI {
                 if (ImGui::BeginChild("ViewerTexture")) {
                     const auto winSize = ImGui::GetWindowSize();
 
-                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetWindowSize(), m_id, true);
+                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetSize().Cast<int32_t>(), m_id, true);
 
                     if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
                         m_guizmo->Draw(*selected.begin(), m_camera);
@@ -77,30 +94,8 @@ namespace SR_CORE_NS::GUI {
         SetCameraActive(m_cameraActive);
     }
 
-    SceneViewer::SceneViewer(Graphics::Window* window, Hierarchy* hierarchy)
-        : Widget("Scene")
-        , m_window(window)
-        , m_hierarchy(hierarchy)
-        , m_guizmo(new Guizmo())
-        , m_id(-1)
-    {
-        m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
-    }
-
-    SceneViewer::~SceneViewer() {
-        SetCameraActive(false);
-        SR_SAFE_DELETE_PTR(m_guizmo);
-    }
-
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
-
-        if (m_camera.RecursiveLockIfValid()) {
-            if (auto* camera = m_camera->GetComponent<SR_GTYPES_NS::Camera>()) {
-                //camera->SetDirectOutput(!m_enabled);
-            }
-            m_camera.Unlock();
-        }
     }
 
     void SceneViewer::Update() {
@@ -137,27 +132,28 @@ namespace SR_CORE_NS::GUI {
         const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
         const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
 
-        if (dy > dx)
+        if (dy > dx) {
             texSize *= dx;
+        }
         else
             texSize *= dy;
 
-        // Because I use the texture from OpenGL, I need to invert the V from the UV.
+        m_textureSize = texSize;
 
         if (centralize) {
-            ImVec2 initialCursorPos = ImGui::GetCursorPos();
-            auto res = (winSize - texSize) * 0.5f;
+            auto windowPosition = ImGui::GetCursorPos();
+            auto res = (winSize - m_textureSize) * 0.5f;
             ImVec2 centralizedCursorPos = { (float)res.x, (float)res.y };
-            centralizedCursorPos = ImClamp(centralizedCursorPos, initialCursorPos, centralizedCursorPos);
+            centralizedCursorPos = ImClamp(centralizedCursorPos, windowPosition, centralizedCursorPos);
             ImGui::SetCursorPos(centralizedCursorPos);
         }
 
         auto&& env = SR_GRAPH_NS::Environment::Get();
-        if (env->GetPipeLine() == Graphics::PipeLine::OpenGL) {
-            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
+        if (env->GetType() == Graphics::PipelineType::OpenGL) {
+            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
         }
         else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
-            DrawImage(pDescriptor, ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+            DrawImage(pDescriptor, ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
         }
     }
 
@@ -176,6 +172,8 @@ namespace SR_CORE_NS::GUI {
                 return;
         }
 
+        m_imagePosition = bb.GetTL();
+
         if (border_col.w > 0.0f) {
             window->DrawList->AddRect(bb.Min, bb.Max, ImGui::GetColorU32(border_col), 0.0f);
             window->DrawList->AddImage(user_texture_id, bb.Min + ImVec2(1, 1), bb.Max - ImVec2(1, 1), uv0, uv1, ImGui::GetColorU32(tint_col));
@@ -188,7 +186,7 @@ namespace SR_CORE_NS::GUI {
         Helper::GameObject::Ptr camera;
 
         /// сцена может быть уже заблокирована до Engine::SetScene
-        if (m_scene.RecursiveLockIfValid()) {
+        if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
             camera = m_scene->Instance("Editor camera");
             camera->SetFlags(SR_UTILS_NS::GAMEOBJECT_FLAG_NO_SAVE);
             m_scene.Unlock();
@@ -196,7 +194,7 @@ namespace SR_CORE_NS::GUI {
         else
             return;
 
-        const auto size = m_window->GetWindowSize();
+        const auto size = m_window->GetSize();
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
         pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
@@ -221,7 +219,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::SetCameraActive(bool value) {
-        m_window->BeginSync();
+        // m_window->BeginSync();
 
         if ((m_cameraActive = value)) {
             if (!m_camera.Valid()) {
@@ -232,14 +230,62 @@ namespace SR_CORE_NS::GUI {
         else
             SetCamera(GameObjectPtr());
 
-        m_window->EndSync();
+        // m_window->EndSync();
     }
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         m_guizmo->OnKeyDown(data);
+        Widget::OnKeyDown(data);
     }
 
     void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
         m_guizmo->OnKeyPress(data);
+        Widget::OnKeyPress(data);
+    }
+
+    void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
+        Super::OnMouseDown(data);
+    }
+
+    void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
+        if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
+            Super::OnMouseUp(data);
+            return;
+        }
+
+        if (data->m_code != SR_UTILS_NS::MouseCode::MouseLeft || m_guizmo->IsUse()) {
+            Super::OnMouseUp(data);
+            return;
+        }
+
+        auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
+
+        const float_t x = mousePos.x / m_textureSize.x;
+        const float_t y = mousePos.y / m_textureSize.y;
+
+        auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
+        if (!pCamera) {
+            return Super::OnMouseUp(data);
+        }
+
+        auto&& pRenderTechnique = pCamera->GetRenderTechnique();
+        if (!pRenderTechnique) {
+            return Super::OnMouseUp(data);
+        }
+
+        if (auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass*>(pRenderTechnique->FindPass("ColorBufferPass"))) {
+            /// auto&& color = pColorPass->GetColor(x, y);
+            /// auto&& index = pColorPass->GetIndex(x, y);
+            /// SR_LOG(SR_FORMAT("%f, %f, %f, %f - %i", color.r, color.g, color.b, color.a, index));
+
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
+                m_hierarchy->SelectGameObject(pMesh->GetRoot());
+            }
+            else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
+                m_hierarchy->ClearSelected();
+            }
+        }
+
+        Super::OnMouseUp(data);
     }
 }

@@ -1,13 +1,17 @@
 #include <Utils/macros.h>
 
 #include "../Graphics/src/Graphics/Animations/Bone.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationClip.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
 
-#include "../Graphics/src/Graphics/Environment/Vulkan/VulkanImGUI.cpp"
-#include "../Graphics/src/Graphics/Environment/Vulkan/VulkanMemory.cpp"
-#include "../Graphics/src/Graphics/Environment/Environment.cpp"
-#include "../Graphics/src/Graphics/Environment/OpenGL.cpp"
-#include "../Graphics/src/Graphics/Environment/TextureHelper.cpp"
-#include "../Graphics/src/Graphics/Environment/Vulkan.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Environment.cpp"
+#include "../Graphics/src/Graphics/Pipeline/OpenGL.cpp"
+#include "../Graphics/src/Graphics/Pipeline/TextureHelper.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Vulkan.cpp"
+#include "../Graphics/src/Graphics/Pipeline/Pipeline.cpp"
+#include "../Graphics/src/Graphics/Pipeline/EmptyPipeline.cpp"
 
 #include "../Graphics/src/Graphics/GUI/Link.cpp"
 #include "../Graphics/src/Graphics/GUI/ICanvas.cpp"
@@ -39,6 +43,7 @@
 #include "../Graphics/src/Graphics/Memory/ShaderProgramManager.cpp"
 #include "../Graphics/src/Graphics/Memory/ShaderUBOBlock.cpp"
 #include "../Graphics/src/Graphics/Memory/CameraManager.cpp"
+#include "../Graphics/src/Graphics/Memory/IGraphicsResource.cpp"
 
 #include "../Graphics/src/Graphics/Pass/BasePass.cpp"
 #include "../Graphics/src/Graphics/Pass/SkyboxPass.cpp"
@@ -51,10 +56,13 @@
 #include "../Graphics/src/Graphics/Pass/SortedTransparentPass.cpp"
 #include "../Graphics/src/Graphics/Pass/PostProcessPass.cpp"
 #include "../Graphics/src/Graphics/Pass/DebugPass.cpp"
+#include "../Graphics/src/Graphics/Pass/ColorBufferPass.cpp"
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"
+#include "../Graphics/src/Graphics/Font/SDF.cpp"
 #include "../Graphics/src/Graphics/Font/Text.cpp"
+#include "../Graphics/src/Graphics/Font/TextBuilder.cpp"
 
 #include "../Graphics/src/Graphics/UI/Sprite2D.cpp"
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"
@@ -79,6 +87,7 @@
 #include "../Graphics/src/Graphics/Types/Geometry/ProceduralMesh.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/Mesh3D.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/MeshComponent.cpp"
+#include "../Graphics/src/Graphics/Types/Geometry/SkinnedMesh.cpp"
 
 #include "../Graphics/src/Graphics/Types/EditorGrid.cpp"
 #include "../Graphics/src/Graphics/Types/Framebuffer.cpp"
@@ -92,3 +101,12 @@
 #include "../Graphics/src/Graphics/Types/RenderTexture.cpp"
 
 #include "../Graphics/src/Graphics/Window/Window.cpp"
+#include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
+
+#if defined(SR_WIN32)
+    #include "../Graphics/src/Graphics/Window/Win32Window.cpp"
+#endif
+
+#if defined(SR_ANDROID)
+    #include "../Graphics/src/Graphics/Window/AndroidWindow.cpp"
+#endif

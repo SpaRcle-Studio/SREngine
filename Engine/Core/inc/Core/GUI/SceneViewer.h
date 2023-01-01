@@ -21,15 +21,20 @@ namespace SR_CORE_NS::GUI {
     class Guizmo;
 
     class SR_DLL_EXPORT SceneViewer : public Graphics::GUI::Widget {
+        using Super = Graphics::GUI::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
     public:
-        explicit SceneViewer(Graphics::Window* window, Hierarchy* hierarchy);
+        explicit SceneViewer(const WindowPtr& window, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
         void Enable(bool value);
         void Update();
+
+        void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
+        void OnMouseUp(const SR_UTILS_NS::MouseInputData* data) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
@@ -46,7 +51,11 @@ namespace SR_CORE_NS::GUI {
         void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
 
     private:
-        Graphics::Window* m_window = nullptr;
+        SR_MATH_NS::IVector2 m_textureSize;
+        ImVec2 m_imagePosition;
+
+        WindowPtr m_window;
+
         Hierarchy* m_hierarchy = nullptr;
         Guizmo* m_guizmo = nullptr;
         int32_t m_id;

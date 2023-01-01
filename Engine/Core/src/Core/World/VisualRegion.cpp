@@ -8,7 +8,7 @@
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Render/RenderScene.h>
 
-namespace Framework::Core::World {
+namespace SR_CORE_NS {
     void VisualRegion::OnEnter() {
         Region::OnEnter();
     }

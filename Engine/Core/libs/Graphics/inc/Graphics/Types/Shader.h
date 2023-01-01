@@ -12,6 +12,7 @@
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Memory/ShaderUBOBlock.h>
+#include <Graphics/Loaders/SRSL.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -28,7 +29,6 @@ namespace SR_GRAPH_NS::Types {
 
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         using ShaderProgram = int32_t;
-        using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
     private:
         Shader();
         ~Shader() override;
@@ -42,17 +42,17 @@ namespace SR_GRAPH_NS::Types {
         bool InitUBOBlock();
         bool Flush() const;
         void FreeVideoMemory() override;
-        bool Reload() override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
-        SR_NODISCARD int32_t GetID();
+        SR_DEPRECATED SR_NODISCARD int32_t GetID();
+        SR_NODISCARD int32_t GetId() noexcept;
         SR_NODISCARD bool Ready() const;
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
         SR_NODISCARD bool IsBlendEnabled() const;
+        SR_NODISCARD SRSL::ShaderType GetType() const noexcept;
 
     public:
         template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
@@ -81,6 +81,8 @@ namespace SR_GRAPH_NS::Types {
         bool Load() override;
         bool Unload() override;
 
+        void OnReloadDone() override;
+
     private:
         void SetSampler(uint64_t hashId, int32_t sampler) noexcept;
 
@@ -98,7 +100,7 @@ namespace SR_GRAPH_NS::Types {
         ShaderSamplers         m_samplers             = ShaderSamplers();
         ShaderProperties       m_properties           = ShaderProperties();
 
-        RenderContextPtr       m_context              = { };
+        SRSL::ShaderType       m_type                 = SRSL::ShaderType::Unknown;
 
     };
 }

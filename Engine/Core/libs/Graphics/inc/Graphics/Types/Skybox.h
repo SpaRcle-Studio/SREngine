@@ -48,7 +48,6 @@ namespace SR_GTYPES_NS {
         void SetShader(Shader *shader);
 
     private:
-        Environment*            m_env            = nullptr;
         Shader*                 m_shader         = nullptr;
 
         int32_t                 m_VAO            = SR_ID_INVALID;
@@ -66,7 +65,6 @@ namespace SR_GTYPES_NS {
 
         std::atomic<bool>       m_hasErrors      = false;
         std::atomic<bool>       m_dirtyShader    = false;
-        std::atomic<bool>       m_isCalculated   = false;
 
     };
 }

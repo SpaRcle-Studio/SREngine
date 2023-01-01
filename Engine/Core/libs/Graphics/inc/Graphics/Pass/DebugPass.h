@@ -10,7 +10,7 @@
 namespace SR_GRAPH_NS {
     class DebugPass : public BasePass {
     public:
-        explicit DebugPass(RenderTechnique* pTechnique);
+        explicit DebugPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~DebugPass() override = default;
 
     public:

@@ -11,7 +11,7 @@
 namespace SR_GRAPH_NS {
     class SwapchainPass : public GroupPass {
     public:
-        explicit SwapchainPass(RenderTechnique* pTechnique);
+        explicit SwapchainPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~SwapchainPass() override = default;
 
     public:

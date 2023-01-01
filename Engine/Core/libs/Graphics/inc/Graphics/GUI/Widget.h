@@ -8,6 +8,7 @@
 #include <Utils/GUI.h>
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Types/DataStorage.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Input/InputHandler.h>
 
@@ -39,8 +40,8 @@ namespace SR_GRAPH_NS::GUI {
             , m_internalFlags(WIDGET_FLAG_NONE)
             , m_windowFlags(ImGuiWindowFlags_::ImGuiWindowFlags_None)
             , m_size(size)
-            , m_widgetFlags(WIDGET_FLAG_NONE)
             , m_manager(nullptr)
+            , m_widgetFlags(WIDGET_FLAG_NONE)
         { }
 
         ~Widget() override = default;
@@ -53,11 +54,13 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD ContextPtr GetContext() const;
+        SR_NODISCARD SR_HTYPES_NS::DataStorage& GetWeakStorage() const { return m_weakStorage; }
+        SR_NODISCARD SR_HTYPES_NS::DataStorage& GetStrongStorage() const { return m_strongStorage; }
 
         virtual void Open();
         virtual void Close();
 
-        void DrawSubWindow();
+        void DrawAsSubWindow();
 
     protected:
         virtual void Draw() = 0;
@@ -69,6 +72,9 @@ namespace SR_GRAPH_NS::GUI {
         void SetFlags(WindowFlags flags) { m_windowFlags = flags; }
 
         void TextCenter(const std::string& text) const;
+
+        void ResetWeakStorage();
+        void ResetStrongStorage();
 
         void CheckFocused();
         void CheckHovered();
@@ -88,6 +94,9 @@ namespace SR_GRAPH_NS::GUI {
         WindowFlags m_windowFlags;
         SR_MATH_NS::IVector2 m_size;
         WidgetManager* m_manager;
+
+        mutable SR_HTYPES_NS::DataStorage m_weakStorage;
+        mutable SR_HTYPES_NS::DataStorage m_strongStorage;
 
     protected:
         mutable std::recursive_mutex m_mutex;

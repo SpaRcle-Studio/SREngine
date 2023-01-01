@@ -18,25 +18,18 @@ namespace SR_GRAPH_NS {
     class RenderScene;
 }
 
-namespace SR_CORE_NS::World {
+namespace SR_CORE_NS {
     class SR_DLL_EXPORT World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
-        World()
-            : Scene()
-        { }
-
-        explicit World(const std::string& name)
-            : Scene(name)
-        { }
+        World() = default;
 
     private:
         ~World() override = default;
 
     public:
-        SR_UTILS_NS::GameObject::Ptr Instance(SR_HTYPES_NS::Marshal& marshal) override;
         SR_UTILS_NS::GameObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
 
     private:

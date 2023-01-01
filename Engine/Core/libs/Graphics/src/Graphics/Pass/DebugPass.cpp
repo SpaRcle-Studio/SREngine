@@ -7,13 +7,13 @@
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Geometry/IndexedMesh.h>
 #include <Graphics/Render/MeshCluster.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(DebugPass)
 
-    DebugPass::DebugPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    DebugPass::DebugPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     bool DebugPass::PreRender() {
@@ -21,7 +21,6 @@ namespace SR_GRAPH_NS {
     }
 
     bool DebugPass::Render() {
-        auto&& pipeline = GetPipeline();
         auto&& debug = GetRenderScene()->GetDebugCluster();
 
         if (debug.Empty()) {
@@ -29,7 +28,7 @@ namespace SR_GRAPH_NS {
         }
 
         for (auto&& [shader, subCluster] : debug) {
-            if (!shader || shader && !shader->Use()) {
+            if (!shader || (shader && !shader->Use())) {
                 continue;
             }
 
@@ -52,22 +51,23 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& pipeline = GetPipeline();
         auto&& debug = GetRenderScene()->GetDebugCluster();
         auto&& time = clock();
 
-        for (auto const& [shader, subCluster] : debug) {
-            if (!shader || !shader->Ready()) {
+        for (auto const& [pShader, subCluster] : debug) {
+            if (!pShader || !pShader->Ready()) {
                 continue;
             }
+
+            m_context->SetCurrentShader(pShader);
 
             /**
              * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
              */
-            shader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
-            shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-            shader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
-            shader->SetFloat(SHADER_TIME, time);
+            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
+            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+            pShader->SetFloat(SHADER_TIME, time);
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto &mesh : meshGroup) {
@@ -82,13 +82,13 @@ namespace SR_GRAPH_NS {
 
                     mesh->UseMaterial();
 
-                    shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(mesh->GetTranslation()));
+                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(mesh->GetTranslation()));
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("DebugPass::Update() : memory has been duplicated!");
                     }
 
-                    shader->Flush();
+                    pShader->Flush();
                 }
             }
         }

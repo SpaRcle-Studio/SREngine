@@ -36,15 +36,6 @@ namespace SR_GRAPH_NS {
                     materialProperty.data = pTexture;
                     break;
                 }
-                case ShaderVarType::Mat2:
-                case ShaderVarType::Mat3:
-                case ShaderVarType::Mat4:
-                case ShaderVarType::Sampler1D:
-                case ShaderVarType::Sampler3D:
-                case ShaderVarType::SamplerCube:
-                case ShaderVarType::Sampler1DShadow:
-                case ShaderVarType::Sampler2DShadow:
-                case ShaderVarType::Unknown:
                 default:
                     SRHalt("Unknown property!");
                     break;

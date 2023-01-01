@@ -33,8 +33,9 @@ namespace SR_SCRIPTING_NS {
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_NODISCARD GameObjectPtr GetGameObject() const;
         SR_NODISCARD bool IsEmpty() const;
+
+        Component* CopyComponent() const override;
 
     public:
         virtual Properties GetProperties() const { return {}; };
@@ -51,6 +52,7 @@ namespace SR_SCRIPTING_NS {
         SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         void OnAttached() override;
+        void OnLoaded() override;
 
         bool Load() override { return SR_UTILS_NS::IResource::Load(); }
         bool Unload() override { return SR_UTILS_NS::IResource::Unload(); }

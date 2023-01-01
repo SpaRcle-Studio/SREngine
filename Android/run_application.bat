@@ -1,0 +1,1 @@
+"platform-tools/adb.exe" shell am start -n "com.monika.sparcle/android.app.NativeActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER

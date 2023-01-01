@@ -9,6 +9,7 @@
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
@@ -31,62 +32,51 @@ namespace SR_UTILS_NS {
         ~IResource() override;
 
     public:
+        SR_NODISCARD virtual Path InitializeResourcePath() const;
+
+        bool Execute(const SR_HTYPES_NS::Function<bool()>& fun);
+
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
-        SR_NODISCARD bool IsDestroyed() const { return m_isDestroyed; }
+        SR_NODISCARD bool IsDestroyed() const noexcept;
         SR_NODISCARD bool IsForce() const { return m_force; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
-        SR_NODISCARD uint32_t GetCountUses() const { return m_countUses; }
-        SR_NODISCARD float_t GetLifetime() const { return m_lifetime; }
+        SR_NODISCARD uint16_t GetCountUses() const noexcept;
+        SR_NODISCARD float_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
-        SR_NODISCARD std::string_view GetResourceId() const { return m_resourceId; }
-        SR_NODISCARD virtual Path GetResourcePath() const { return m_resourceId; }
-        SR_NODISCARD virtual uint64_t GetResourceHash() const { return m_resourceHash; }
-        SR_NODISCARD virtual Path GetAssociatedPath() const { return Path(); }
+        SR_NODISCARD const std::string& GetResourceId() const;
+        SR_NODISCARD uint64_t GetResourceHashId() const noexcept { return m_resourceHashId; }
+        SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
+        SR_NODISCARD const Path& GetResourcePath() const;
+        SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
+        SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
+        SR_NODISCARD virtual Path GetAssociatedPath() const;
 
-        SR_NODISCARD virtual IResource* Copy(IResource* destination) const;
+        SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 
         /** Add one point to count uses current resource */
-        void AddUsePoint() { ++m_countUses; }
+        void AddUsePoint();
 
         /** Remove one point from count uses current resource */
-        virtual RemoveUPResult RemoveUsePoint() {
-            if (m_countUses == 0) {
-                SRHalt("Count use points is zero!");
-                return RemoveUPResult::Error;
-            }
-
-            --m_countUses;
-
-            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
-                if (IsRegistered()) {
-                    Destroy();
-                    return RemoveUPResult::Destroy;
-                }
-                else {
-                    /// так и не зарегистрировали ресурс
-                    delete this;
-                    return RemoveUPResult::Delete;
-                }
-            }
-
-            return RemoveUPResult::Success;
-        }
+        virtual RemoveUPResult RemoveUsePoint();
 
         virtual void OnResourceRegistered() {
             SRAssert2(!IsRegistered(), "Resource already are registered!");
             m_isRegistered = true;
         }
 
-        virtual bool Reload() { return false; }
+        virtual void OnReloadDone() { }
+
+        virtual bool Reload();
 
         virtual bool Unload() {
             if (m_loadState == LoadState::Unknown ||
                 m_loadState == LoadState::Loaded ||
+                m_loadState == LoadState::Unloading ||
                 m_loadState == LoadState::Reloading
             ) {
                 m_loadState = LoadState::Unloaded;
@@ -97,7 +87,11 @@ namespace SR_UTILS_NS {
         }
 
         virtual bool Load() {
-            if (m_loadState == LoadState::Unknown || m_loadState == LoadState::Unloaded) {
+            if (m_loadState == LoadState::Unknown ||
+                m_loadState == LoadState::Unloaded ||
+                m_loadState == LoadState::Reloading ||
+                m_loadState == LoadState::Loading
+            ) {
                 m_loadState = LoadState::Loaded;
                 return true;
             }
@@ -112,9 +106,11 @@ namespace SR_UTILS_NS {
         bool ForceDestroy();
         bool Kill();
         void SetReadOnly(bool value) { m_readOnly = value; }
-        void SetId(const std::string& id, bool autoRegister = true);
         void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }
         void SetResourceHash(uint64_t hash);
+
+        void SetId(const std::string& id, bool autoRegister = true);
+        void SetId(uint64_t hashId, bool autoRegister = true);
 
     protected:
         void UpdateResources(int32_t depth = 0);
@@ -125,16 +121,17 @@ namespace SR_UTILS_NS {
 
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
 
-        std::atomic<uint64_t> m_countUses = 0;
-
         mutable std::recursive_mutex m_mutex;
 
-        /// cached variable
-        mutable SR_UTILS_NS::Path m_resourcePath;
+        /// не рекомендуется вручную обращаться к счетчику при наследовании
+        std::atomic<uint16_t> m_countUses = 0;
 
     private:
-        float_t m_lifetime = 0;
+        uint64_t m_resourceHashId = 0;
         uint64_t m_resourceHash = 0;
+        uint64_t m_resourceHashPath = 0;
+
+        float_t m_lifetime = 0;
 
         /// Принудительно уничтожить ресурс
         std::atomic<bool> m_force = false;
@@ -145,8 +142,6 @@ namespace SR_UTILS_NS {
         /// Автоматическое уничтожение ресурса по истечению use-point'ов
         /// \warning ReadOnly
         bool m_autoRemove = false;
-
-        std::string m_resourceId = "NoID";
 
         std::unordered_set<IResource*> m_parents;
         std::unordered_set<IResource*> m_dependencies;

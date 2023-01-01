@@ -17,10 +17,10 @@ namespace SR_GRAPH_NS {
     RenderScene::RenderScene(const ScenePtr& scene, RenderContext* pContext)
         : SR_HTYPES_NS::SafePtr<RenderScene>(this)
         , m_scene(scene)
+        , m_debugRender(new DebugRenderer(this))
         , m_context(pContext)
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
-        , m_debugRender(new DebugRenderer(this))
     { }
 
     RenderScene::~RenderScene() {
@@ -111,13 +111,13 @@ namespace SR_GRAPH_NS {
         GetPipeline()->DrawFrame();
     }
 
-    void RenderScene::SetTechnique(const SR_UTILS_NS::Path &path) {
+    void RenderScene::SetTechnique(RenderTechnique *pTechnique) {
         if (m_technique) {
             m_technique->RemoveUsePoint();
             m_technique = nullptr;
         }
 
-        if ((m_technique = RenderTechnique::Load(path))) {
+        if ((m_technique = pTechnique)) {
             m_technique->AddUsePoint();
             m_technique->SetRenderScene(GetThis());
         }
@@ -126,6 +126,10 @@ namespace SR_GRAPH_NS {
         }
 
         SetDirty();
+    }
+
+    void RenderScene::SetTechnique(const SR_UTILS_NS::Path &path) {
+        SetTechnique(RenderTechnique::Load(path));
     }
 
     const RenderScene::WidgetManagers &RenderScene::GetWidgetManagers() const {
@@ -192,6 +196,8 @@ namespace SR_GRAPH_NS {
             }
         }
 
+        pMesh->SetRenderContext(m_context);
+
         if (pMesh->IsDebugMesh()) {
             m_debug.Add(pMesh);
         }
@@ -256,8 +262,11 @@ namespace SR_GRAPH_NS {
     void RenderScene::SortCameras() {
         m_dirty = true;
         m_dirtyCameras = false;
-        m_offScreenCameras.clear();
         m_mainCamera = nullptr;
+
+        const uint64_t offScreenCamerasCount = m_offScreenCameras.size();
+        m_offScreenCameras.clear();
+        m_offScreenCameras.reserve(offScreenCamerasCount);
 
         /// Удаляем уничтоженные камеры
         for (auto&& pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {
@@ -300,15 +309,20 @@ namespace SR_GRAPH_NS {
         return GetContext()->GetPipeline();
     }
 
+    RenderScene::WindowPtr RenderScene::GetWindow() const {
+        return GetContext()->GetWindow();
+    }
+
     void RenderScene::RenderBlackScreen() {
         auto&& pipeline = GetPipeline();
 
-        pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
+        pipeline->SetCurrentFramebuffer(nullptr);
 
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);
 
             pipeline->BindFrameBuffer(0);
+            pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
             pipeline->BeginRender();
             {
@@ -365,15 +379,17 @@ namespace SR_GRAPH_NS {
         m_debug.Update();
     }
 
-    void RenderScene::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void RenderScene::OnResize(const SR_MATH_NS::UVector2 &size) {
         m_surfaceSize = size;
 
-        for (auto&& cameraInfo : m_cameras) {
-            if (cameraInfo.isDestroyed) {
-                continue;
-            }
+        if (!m_context->GetWindow()->IsWindowCollapsed()) {
+            for (auto&& cameraInfo : m_cameras) {
+                if (cameraInfo.isDestroyed) {
+                    continue;
+                }
 
-            cameraInfo.pCamera->UpdateProjection(m_surfaceSize.x, m_surfaceSize.y);
+                cameraInfo.pCamera->UpdateProjection(m_surfaceSize.x, m_surfaceSize.y);
+            }
         }
 
         if (m_technique) {
@@ -381,7 +397,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    SR_MATH_NS::IVector2 RenderScene::GetSurfaceSize() const {
+    SR_MATH_NS::UVector2 RenderScene::GetSurfaceSize() const {
         return m_surfaceSize;
     }
 }

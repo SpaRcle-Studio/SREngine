@@ -26,12 +26,14 @@ namespace SR_CORE_NS::GUI {
         void ItemViewPanel();
         void FileCatalogPanel(const float_t& leftWidth);
         void Draw() override;
-        void LoadElements(const SR_UTILS_NS::Path& root); //Загружает элементы CurrentDirectoryPanel в кэш
+        void CacheElements(const SR_UTILS_NS::Path& root); //Загружает элементы CurrentDirectoryPanel в кэш
 
     private:
         SR_UTILS_NS::Path m_defaultRoot;
         SR_UTILS_NS::Path m_selectedDir;
         float_t m_assetWidth;
+        std::atomic<bool> m_dirtySelectedDir;
+        std::atomic<bool> m_dirtyFoldersTree;
         struct Element {
             std::string filename;
             std::string cutname;
@@ -39,16 +41,15 @@ namespace SR_CORE_NS::GUI {
             bool isDir;
         };
         std::list<Element> m_elements;
-        std::atomic<bool> m_dirtySelectedDir;
-        std::atomic<bool> m_dirtyFoldersTree;
         struct Folder {
             SR_UTILS_NS::Path path;
             std::string filename;
             std::list<Folder> innerfolders;
         };
+        Folder m_foldersTree;
+
         void DrawFoldersTree(const Folder& parentFolder); //отрисовка созданного дерева
         void LoadFoldersTree(Folder& parentFolder); //создание дерева файлов и его кеширования
-        Folder m_foldersTree;
     };
 }
 

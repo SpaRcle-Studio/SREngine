@@ -14,7 +14,7 @@
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
-        static void Encode(std::stringstream& stream, const std::string& str, StandardType type) {
+        SR_MAYBE_UNUSED static void Encode(std::stringstream& stream, const std::string& str, StandardType type) {
             uint64_t bytesCount = 0;
             switch (type) {
                 case StandardType::Bool: SaveValue(stream, LexicalCast<bool>(str)); break;
@@ -29,6 +29,9 @@ namespace SR_UTILS_NS {
                 case StandardType::Float: SaveValue(stream, LexicalCast<float_t>(str)); break;
                 case StandardType::Double: SaveValue(stream, LexicalCast<double_t>(str)); break;
                 case StandardType::String: SaveString(stream, str, bytesCount); break;
+                default:
+                    SRHalt0();
+                    break;
             }
         }
     }

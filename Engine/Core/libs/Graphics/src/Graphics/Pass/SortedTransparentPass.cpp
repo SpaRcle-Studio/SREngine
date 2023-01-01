@@ -9,8 +9,8 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SortedTransparentPass)
 
-    SortedTransparentPass::SortedTransparentPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    SortedTransparentPass::SortedTransparentPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     void SortedTransparentPass::Prepare() {
@@ -63,7 +63,7 @@ namespace SR_GRAPH_NS {
 
             if (auto&& shader = pMesh->GetShader(); shader != pShader) {
                 pShader = shader;
-                if (!pShader || pShader && !pShader->Use()) {
+                if (!pShader || (pShader && !pShader->Use())) {
                     continue;
                 }
             }
@@ -93,7 +93,6 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& pipeline = GetPipeline();
         auto&& transparent = GetRenderScene()->GetTransparent();
         auto&& time = clock();
 

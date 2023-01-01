@@ -63,6 +63,27 @@ namespace SR_UTILS_NS {
         return m_path.back();
     }
 
+    void EntityPath::Reserve() const {
+        for (EntityId id : m_path) {
+            if (id != ENTITY_ID_MAX)
+                EntityManager::Instance().Reserve(id);
+        }
+    }
+
+    void EntityPath::UnReserve() const {
+        for (EntityId id : m_path) {
+            if (id != ENTITY_ID_MAX)
+                EntityManager::Instance().TryUnReserve(id);
+        }
+    }
+
+    void EntityPath::Clear() {
+        for (EntityId& id : m_path) {
+            id = ENTITY_ID_MAX;
+        }
+        m_path.clear();
+    }
+
     ///---------------------------------------------------------------------------------------------------------------------
 
     Entity::Entity()
@@ -168,13 +189,16 @@ namespace SR_UTILS_NS {
         SR_SCOPED_LOCK
 
         if (!m_entities.empty()) {
+            SR_WARN("EntityManager::OnSingletonDestroy() : entities was not be destroyed! Collect data...");
+
             std::string ids;
             uint32_t index = 0;
-            for (const auto& [id, entity] : m_entities) {
-                ids.append("\n\tId[").append(std::to_string(index++)).append("] = ").append(std::to_string(id));
+
+            for (const auto& [id, pEntity] : m_entities) {
+                ids.append("\n\tId[").append(std::to_string(index++)).append("] = ").append(std::to_string(id)).append("; Info = ").append(pEntity->GetEntityInfo());
             }
 
-            SR_WARN("EntityManager::OnSingletonDestroy() : " + std::to_string(m_entities.size()) + " entities was not be destroyed! Ids: " + ids);
+            SR_WARN("EntityManager::OnSingletonDestroy() : Ids and info: " + ids);
         }
 
         Singleton::OnSingletonDestroy();

@@ -98,7 +98,7 @@ namespace SR_HTYPES_NS {
                 MarshalUtils::SaveAny<std::stringstream, std::any>(m_stream, value, m_size);
             }
             else if constexpr (Math::IsString<T>()) {
-                MarshalUtils::SaveString(m_stream, value, m_size);
+                MarshalUtils::SaveShortString(m_stream, value, m_size);
             }
             else if constexpr (IsSTLVector<T>()) {
                 MarshalUtils::SaveVector(m_stream, value, m_size);
@@ -121,25 +121,23 @@ namespace SR_HTYPES_NS {
 
         template<typename T> T View(uint64_t offset) const {
             T value = T();
+            const auto buff = m_stream.rdbuf();
 
-#ifdef SR_MINGW
-            SRHalt0();
-#else
             memcpy(
-                &value,
-                m_stream.rdbuf()->view().substr(offset, sizeof(T)).data(),
-                sizeof(T)
+                    &value,
+                    buff->str().substr(offset, sizeof(T)).data(),
+                    sizeof(T)
             );
-#endif
             return value;
         }
+
 
         template<typename T> T Read() {
             if constexpr (std::is_same_v<T, std::any>) {
                 return MarshalUtils::LoadAny<std::stringstream, std::any>(m_stream, m_position);
             }
             else if constexpr (Math::IsString<T>()) {
-                return MarshalUtils::LoadStr<std::stringstream>(m_stream, m_position);
+                return MarshalUtils::LoadShortStr<std::stringstream>(m_stream, m_position);
             }
             else {
                 return MarshalUtils::LoadValue<std::stringstream, T>(m_stream, m_position);

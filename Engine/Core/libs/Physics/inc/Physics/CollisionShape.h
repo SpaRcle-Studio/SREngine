@@ -13,29 +13,33 @@
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
+    class LibraryImpl;
 }
 
-namespace SR_PHYSICS_NS::Types {
+namespace SR_PTYPES_NS {
     class CollisionShape : public SR_UTILS_NS::NonCopyable {
         friend class SR_PHYSICS_NS::PhysicsScene;
     public:
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = CollisionShape*;
         using Super = SR_UTILS_NS::NonCopyable;
-
+        using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
     public:
-        explicit CollisionShape(ShapeType type);
+        explicit CollisionShape(LibraryPtr pLibrary);
         ~CollisionShape() override;
 
     public:
-        void Update();
+        virtual bool UpdateShape() { return false; }
+        virtual bool UpdateMatrix() { return false; }
+
+        void SetType(ShapeType type);
 
         void SetHeight(float_t height);
         void SetRadius(float_t radius);
         void SetSize(const SR_MATH_NS::FVector3& size);
         void SetScale(const SR_MATH_NS::FVector3& scale);
 
-        SR_NODISCARD SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
 
         SR_NODISCARD float_t GetHeight() const;
         SR_NODISCARD float_t GetRadius() const;
@@ -44,15 +48,26 @@ namespace SR_PHYSICS_NS::Types {
 
         SR_NODISCARD bool Valid() const noexcept;
         SR_NODISCARD ShapeType GetType() const noexcept;
-        SR_NODISCARD void* GetHandle() const noexcept;
+        SR_NODISCARD virtual void* GetHandle() const noexcept { return nullptr; }
 
-    private:
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
+            if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
+                return pLibrary;
+            }
+
+            SRHalt("Failed to cast library!");
+
+            return nullptr;
+        }
+
+    protected:
+        LibraryPtr m_library = nullptr;
+
         SR_MATH_NS::FVector3 m_scale;
+        SR_MATH_NS::FVector3 m_bounds;
 
-        btCollisionShape* m_shape = nullptr;
-        const ShapeType m_type;
+        ShapeType m_type = ShapeType::Unknown;
 
-        btVector3 m_bounds;
     };
 }
 

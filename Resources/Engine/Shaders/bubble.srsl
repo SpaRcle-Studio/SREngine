@@ -30,8 +30,6 @@ void fragment() {
 }
 
 void vertex() {
-    VERTEX.x = -VERTEX.x;
-
 	float height = texture(NoiseTex, VERTEX.xz * NoiseSampleSize + vec2(TIME) * AnimationSpeed).r;
 	VERTEX += height * HeightMultiplier;
 }

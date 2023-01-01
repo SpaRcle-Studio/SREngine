@@ -6,6 +6,7 @@
 #define GAMEENGINE_TRANSFORM_H
 
 #include <Utils/ECS/ISavable.h>
+#include <Utils/Common/Measurement.h>
 
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Vector2.h>
@@ -19,14 +20,6 @@
 
 namespace SR_UTILS_NS {
     class GameObject;
-
-    SR_ENUM_NS_CLASS(Measurement,
-        SpaceZero = 0,
-        Space1D = 1,
-        Space2D = 2,
-        Space3D = 3,
-        Space4D = 4
-    );
 
     class SR_DLL_EXPORT Transform : public ISavable {
         friend class GameObject;
@@ -81,8 +74,10 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetScale() const { return SR_MATH_NS::FVector3(); }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetSkew() const { return SR_MATH_NS::FVector3(); }
 
+        SR_NODISCARD virtual SR_MATH_NS::FVector2 GetTranslation2D() const;
         SR_NODISCARD virtual SR_MATH_NS::FVector2 GetScale2D() const;
 
+        SR_NODISCARD virtual Transform* Copy() const;
         SR_NODISCARD Transform* GetParentTransform() const;
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
 
@@ -90,10 +85,11 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
-    protected:
-        virtual bool IsDirty() const noexcept;
-        virtual void UpdateMatrix() { m_dirtyMatrix = false; }
         virtual void UpdateTree();
+
+    protected:
+        SR_NODISCARD virtual bool IsDirty() const noexcept;
+        virtual void UpdateMatrix() { m_dirtyMatrix = false; }
 
     protected:
         GameObject* m_gameObject = nullptr;

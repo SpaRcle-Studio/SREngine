@@ -10,7 +10,7 @@
 namespace SR_GRAPH_NS {
     class WidgetPass : public BasePass {
     public:
-        explicit WidgetPass(RenderTechnique* pTechnique);
+        explicit WidgetPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~WidgetPass() override = default;
 
     public:

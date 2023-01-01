@@ -17,10 +17,13 @@ namespace SR_CORE_NS::GUI {
     { }
 
     void FileBrowser::SetFolder(const SR_UTILS_NS::Path &path) {
-        SRAssert((m_defaultRoot = path).IsDir());
-        m_selectedDir = m_defaultRoot;
+        m_selectedDir = m_defaultRoot = path;
         m_dirtySelectedDir = true;
         m_dirtyFoldersTree = true;
+
+        if (!m_selectedDir.IsDir()) {
+            SR_ERROR("FileBrowser::SetFolder() : path is not folder! \n\tPath: " + m_selectedDir.ToString());
+        }
     }
 
     void FileBrowser::CurrentDirectoryContextMenu(){
@@ -39,7 +42,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void FileBrowser::LoadElements(const SR_UTILS_NS::Path& root) {
+    void FileBrowser::CacheElements(const SR_UTILS_NS::Path& root) {
         m_elements.clear();
         for (const auto &path : root.GetAll()) {
             if (path.GetBaseName().empty()) {
@@ -56,13 +59,13 @@ namespace SR_CORE_NS::GUI {
                     current.isDir = false;
                 }
 
-                current.cutname = SR_UTILS_NS::StringUtils::CutName(current.filename, 8);
+                current.cutname = SR_UTILS_NS::StringUtils::CutName(current.filename, 7);
 
                 auto&& extension = path.GetExtensionView();
 
                 if (extension.empty()) { //TODO Сделать красивым
                     path.IsEmpty() ? current.icontype = Core::EditorIcon::EmptyFolder
-                                    : current.icontype = Core::EditorIcon::Folder;
+                                   : current.icontype = Core::EditorIcon::Folder;
                 } else if (extension == "zip") {
                     current.icontype = Core::EditorIcon::ZIP;
                 } else if ((extension == "jpg") || (extension == "jpeg")) {
@@ -338,7 +341,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::Draw() {
-
         // left
 
         m_assetWidth = 0.f;
@@ -373,7 +375,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (m_dirtySelectedDir) {
-            LoadElements(m_selectedDir);
+            CacheElements(m_selectedDir);
             m_dirtySelectedDir = false;
         }
         ItemViewPanel(); //Отрисовка панели файлового древа

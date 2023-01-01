@@ -44,9 +44,7 @@ namespace SR_UTILS_NS {
         Path& operator=(const Path& path) = default;
 
     public:
-        Path Normalize();
         bool Make(Type type = Type::Undefined) const;
-        void NormalizeSelf();
 
         SR_NODISCARD bool Copy(const Path& destination) const;
 
@@ -96,11 +94,14 @@ namespace SR_UTILS_NS {
     private:
         void Update();
 
+        Path Normalize();
+        void NormalizeSelf();
+
     private:
         std::string m_path;
         std::string m_name;
         std::string m_ext;
-        size_t      m_hash;
+        uint64_t    m_hash;
         Type        m_type;
 
     };

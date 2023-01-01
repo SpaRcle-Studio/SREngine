@@ -18,10 +18,12 @@ namespace SR_GTYPES_NS {
         { }
 
     public:
-        IResource* Copy(IResource* destination) const override;
+        Component* CopyComponent() const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 
+        void OnLoaded() override;
         void OnAttached() override;
         void OnDestroy() override;
         void OnMatrixDirty() override;
@@ -51,7 +53,7 @@ namespace SR_GTYPES_NS {
             return m_translation;
         }
 
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
     protected:
         SR_NODISCARD RenderScenePtr GetRenderScene();

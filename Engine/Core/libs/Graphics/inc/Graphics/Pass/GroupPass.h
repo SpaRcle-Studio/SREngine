@@ -10,7 +10,7 @@
 namespace SR_GRAPH_NS {
     class GroupPass : public BasePass {
     public:
-        explicit GroupPass(RenderTechnique* pTechnique);
+        explicit GroupPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~GroupPass() override;
 
     public:
@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS {
 
         void Update() override;
 
-        void OnResize(const SR_MATH_NS::IVector2& size) override;
+        void OnResize(const SR_MATH_NS::UVector2& size) override;
 
         SR_NODISCARD BasePass* FindPass(const std::string& name) const;
 

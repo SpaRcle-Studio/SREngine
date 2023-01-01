@@ -39,9 +39,9 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override;
 
-        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const override;
+        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
-        IResource* Copy(IResource* destination) const override;
+        IResource* CopyResource(IResource* destination) const override;
 
         bool Calculate() override;
         void FreeVideoMemory() override;

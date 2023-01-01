@@ -8,7 +8,7 @@
 #include <Utils/Common/Singleton.h>
 
 #include <Graphics/Types/Vertices.h>
-#include <Graphics/Environment/Basic/IShaderProgram.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS::SRSL {
     struct SRSLFunc {

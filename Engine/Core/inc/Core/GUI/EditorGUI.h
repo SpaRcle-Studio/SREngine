@@ -5,11 +5,11 @@
 #ifndef GAMEENGINE_EDITORGUI_H
 #define GAMEENGINE_EDITORGUI_H
 
-#include <Scripting/Base/Script.h>
-#include <Scripting/Base/Compiler.h>
-
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/SafePointer.h>
+
+#include <Scripting/Base/Script.h>
+#include <Scripting/Base/Compiler.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 
@@ -39,6 +39,7 @@ namespace SR_CORE_NS::GUI {
         using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
+        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
     public:
         explicit EditorGUI();
         ~EditorGUI() override;
@@ -46,11 +47,15 @@ namespace SR_CORE_NS::GUI {
     public:
         void Enable(bool value);
 
-        template<typename T> void AddWindow(T* widget) {
+        template<typename T> SR_DEPRECATED void AddWindow(T* widget) {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
-        template<typename T> T* GetWindow() {
+        template<typename T> void AddWidget(T* widget) {
+            m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
+        }
+
+        template<typename T> SR_DEPRECATED T* GetWindow() {
             if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
                     return pWidget;
@@ -58,7 +63,15 @@ namespace SR_CORE_NS::GUI {
             return nullptr;
         }
 
-        void CloseAllWindows();
+        template<typename T> T* GetWidget() {
+            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
+                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
+                    return pWidget;
+            }
+            return nullptr;
+        }
+
+        void CloseAllWidgets();
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
@@ -83,9 +96,8 @@ namespace SR_CORE_NS::GUI {
         void Load();
 
     private:
-        RenderContextPtr     m_context    = { };
-
-        Graphics::Window*    m_window     = nullptr;
+        RenderContextPtr m_context = { };
+        WindowPtr m_window = { };
 
         std::atomic<bool>    m_isInit     = false;
         std::atomic<bool>    m_hasErrors  = false;

@@ -5,8 +5,8 @@
 #include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
-    GroupPass::GroupPass(RenderTechnique *pTechnique)
-        : BasePass(pTechnique)
+    GroupPass::GroupPass(RenderTechnique *pTechnique, BasePass* pParent)
+        : BasePass(pTechnique, pParent)
     { }
 
     GroupPass::~GroupPass() {
@@ -18,7 +18,7 @@ namespace SR_GRAPH_NS {
 
     bool GroupPass::Load(const SR_XML_NS::Node &passNode) {
         for (auto&& subPassNode : passNode.TryGetNodes()) {
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(GetTechnique(), subPassNode)) {
+            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(GetTechnique(), subPassNode, this)) {
                 m_passes.emplace_back(pPass);
             }
             else {
@@ -97,7 +97,7 @@ namespace SR_GRAPH_NS {
         return hasDrawData;
     }
 
-    void GroupPass::OnResize(const SR_MATH_NS::IVector2 &size) {
+    void GroupPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto&& pPass : m_passes) {
             pPass->OnResize(size);
         }

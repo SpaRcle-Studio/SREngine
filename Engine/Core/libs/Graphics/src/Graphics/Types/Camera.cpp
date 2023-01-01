@@ -7,12 +7,13 @@
 
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Memory/CameraManager.h>
-#include <Graphics/Window/Window.h>
 #include <Graphics/Render/RenderTechnique.h>
+
+#include <Graphics/Window/Window.h>
 
 namespace SR_GTYPES_NS {
     Camera::Camera(uint32_t width, uint32_t height)
-        : m_viewportSize(SR_MATH_NS::IVector2(width, height))
+        : m_viewportSize(SR_MATH_NS::UVector2(width, height))
     {
         SR_UTILS_NS::Component::InitComponent<Camera>();
 
@@ -23,7 +24,7 @@ namespace SR_GTYPES_NS {
     }
 
     Camera::~Camera() {
-        std::visit([this](RenderTechniquePtr&& arg) {
+        std::visit([](RenderTechniquePtr&& arg) {
             if (std::holds_alternative<RenderTechnique *>(arg)) {
                 std::get<RenderTechnique*>(arg)->RemoveUsePoint();
             }
@@ -43,15 +44,15 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::OnDestroy() {
-        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
+        Component::OnDestroy();
+
+        if (auto&& renderScene = TryGetRenderScene(); renderScene.RecursiveLockIfValid()) {
             renderScene->Remove(this);
             renderScene.Unlock();
         }
         else {
-            SRHalt("Render scene is invalid!");
+            delete this;
         }
-
-        Component::OnDestroy();
     }
 
     SR_HTYPES_NS::Marshal::Ptr Camera::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
@@ -71,13 +72,13 @@ namespace SR_GTYPES_NS {
         const auto&& FOV = marshal.Read<float_t>();
         const auto&& priority = marshal.Read<int32_t>();
 
-        auto&& pWindow = dataStorage->GetPointer<Window>();
+        auto&& pWindow = dataStorage->GetValue<Window::Ptr>();
 
         if (!SRVerifyFalse(!pWindow)) {
             return nullptr;
         }
 
-        auto&& viewportSize = pWindow->GetWindowSize();
+        auto&& viewportSize = pWindow->GetSize();
 
         auto&& pCamera = new Camera(viewportSize.x, viewportSize.y);
 
@@ -120,19 +121,29 @@ namespace SR_GTYPES_NS {
         }, m_renderTechnique);
     }
 
-    Camera::RenderScenePtr Camera::GetRenderScene() const {
-        auto&& scene = GetScene();
+    Camera::RenderScenePtr Camera::TryGetRenderScene() const {
+        auto&& scene = TryGetScene();
+        if (!scene) {
+            return RenderScenePtr();
+        }
 
         SR_HTYPES_NS::SafePtrRecursiveLockGuard m_lock(scene);
 
-        if (scene.Valid()) {
+        if (scene->Valid()) {
             return scene->GetDataStorage().GetValue<RenderScenePtr>();
-        }
-        else {
-            SRHalt("Scene is invalid!");
         }
 
         return RenderScenePtr();
+    }
+
+    Camera::RenderScenePtr Camera::GetRenderScene() const {
+        auto&& renderScene = TryGetRenderScene();
+
+        if (!renderScene) {
+            SRHalt("Render scene is nullptr!");
+        }
+
+        return renderScene;
     }
 
     void Camera::UpdateView() noexcept {
@@ -184,11 +195,12 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::UpdateProjection(uint32_t w, uint32_t h) {
-        if (m_viewportSize.x == static_cast<int32_t>(w) && m_viewportSize.y == static_cast<int32_t>(h)) {
+        if (m_viewportSize.x == w && m_viewportSize.y == h) {
             return;
         }
 
-        m_viewportSize = { (int32_t)w, (int32_t)h };
+        m_viewportSize = SR_MATH_NS::UVector2(w, h);
+
         UpdateProjection();
     }
 
@@ -237,7 +249,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::OnEnable() {
-        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
+        if (auto&& renderScene = TryGetRenderScene(); renderScene.RecursiveLockIfValid()) {
             renderScene->SetDirtyCameras();
             renderScene.Unlock();
         }
@@ -255,7 +267,12 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::OnMatrixDirty() {
-        auto&& matrix = GetTransform()->GetMatrix();
+        auto&& pTransform = GetTransform();
+        if (!pTransform) {
+            return;
+        }
+
+        auto&& matrix = pTransform->GetMatrix();
         auto&& rotate = matrix.GetQuat().EulerAngle();
         auto&& translation = matrix.GetTranslate();
 
@@ -271,7 +288,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::SetRenderTechnique(const SR_UTILS_NS::Path& path) {
-        std::visit([this](RenderTechniquePtr&& arg) {
+        std::visit([](RenderTechniquePtr&& arg) {
             if (std::holds_alternative<RenderTechnique *>(arg)) {
                 std::get<RenderTechnique*>(arg)->RemoveUsePoint();
             }
@@ -298,5 +315,30 @@ namespace SR_GTYPES_NS {
 
     glm::vec3 Camera::GetViewDirection(const SR_MATH_NS::FVector3 &pos) const noexcept {
         return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * m_position.Direction(pos)).ToGLM();
+    }
+
+    SR_UTILS_NS::Component *Camera::CopyComponent() const {
+        auto&& pCamera = new Camera(m_viewportSize.x, m_viewportSize.y);
+
+        pCamera->m_priority = m_priority;
+
+        pCamera->m_far = m_far;
+        pCamera->m_near = m_near;
+        pCamera->m_aspect = m_aspect;
+        pCamera->m_FOV = m_FOV;
+
+        std::visit([pCamera](RenderTechniquePtr&& arg) {
+            if (std::holds_alternative<RenderTechnique *>(arg)) {
+                pCamera->SetRenderTechnique(std::get<RenderTechnique*>(arg)->GetResourcePath());
+            }
+            else if (std::holds_alternative<SR_UTILS_NS::Path>(arg)) {
+                pCamera->SetRenderTechnique(std::get<SR_UTILS_NS::Path>(arg));
+            }
+            else {
+                SRHalt0();
+            }
+        }, m_renderTechnique);
+
+        return dynamic_cast<Component*>(pCamera);
     }
 }

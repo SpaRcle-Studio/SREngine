@@ -8,8 +8,14 @@ add_definitions(
     -DFLAC__NO_DLL
 )
 
+set(ALSOFT_INSTALL_EXAMPLES OFF CACHE INTERNAL "" FORCE)
+
 add_subdirectory(libs/OpenAL)
 add_subdirectory(libs/libmodplug)
+
+if(MSVC)
+    target_compile_options(modplug PRIVATE "/wd5033;")
+endif()
 
 if (SR_AUDIO_STATIC_LIBRARY)
     add_library(Audio STATIC Audio.cxx)
@@ -24,10 +30,10 @@ else()
     add_library(Audio::lib ALIAS Audio)
 endif()
 
-target_link_libraries(Audio modplug)
-
-if(MSVC)
-    target_compile_options(Audio PRIVATE "/wd5033;")
+if (ANDROID_NDK)
+    target_link_libraries(Audio modplug OpenAL)
+else()
+    target_link_libraries(Audio modplug)
 endif()
 
 target_include_directories(Audio PUBLIC inc)

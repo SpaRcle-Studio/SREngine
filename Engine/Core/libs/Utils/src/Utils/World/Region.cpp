@@ -41,8 +41,8 @@ namespace SR_WORLD_NS {
     Chunk* Region::GetChunk(const SR_MATH_NS::IVector3 &position) {
         if (position < 0 || position > static_cast<int32_t>(m_width)) {
             SR_ERROR(SR_FORMAT("Region::GetChunk() : incorrect position! "
-                               "\n\tWidth: %i\n\tRegion position: %i, %i\n\tChunk position: %i, %i",
-                               m_width, m_position.x, m_position.y, position.x, position.y
+                               "\n\tWidth: %i\n\tRegion position: %i, %i, %i\n\tChunk position: %i, %i, %i",
+                               m_width, m_position.x, m_position.y, m_position.z, position.x, position.y, position.z
             ));
             SRHalt0();
             return nullptr;
@@ -88,7 +88,9 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Unload(bool force) {
-        SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
+            SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
+        }
 
         SetDebugLoaded(BoolExt::False);
 
@@ -105,6 +107,8 @@ namespace SR_WORLD_NS {
             }
 
             pChunk->Unload();
+            delete pChunk;
+            pChunk = nullptr;
         }
 
         m_loadedChunks.clear();
@@ -211,13 +215,17 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Load() {
-        SR_LOG("Region::Load() : loading region at " + m_position.ToString());
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
+            SR_LOG("Region::Load() : loading region at " + m_position.ToString());
+        }
 
         SRAssert(!m_position.HasZero());
 
         SetDebugLoaded(BoolExt::True);
 
-        const auto&& path = m_observer->m_scene->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
+        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        const auto&& path = pLogic->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
+
         if (path.Exists()) {
             auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);
 
@@ -266,6 +274,10 @@ namespace SR_WORLD_NS {
     void Region::SetDebugLoaded(BoolExt enabled) {
         if (m_position.y != 1) {
             return;
+        }
+
+        if (!Features::Instance().Enabled("DebugRegions", false)) {
+            enabled = BoolExt::False;
         }
 
         if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {

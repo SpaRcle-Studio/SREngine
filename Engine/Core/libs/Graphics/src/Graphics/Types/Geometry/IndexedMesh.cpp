@@ -10,27 +10,22 @@ namespace SR_GTYPES_NS {
         SRAssert(m_IBO == SR_ID_INVALID && m_VBO == SR_ID_INVALID);
     }
 
-    SR_UTILS_NS::IResource *IndexedMesh::Copy(SR_UTILS_NS::IResource *destination) const {
+    SR_UTILS_NS::IResource *IndexedMesh::CopyResource(SR_UTILS_NS::IResource *destination) const {
         if (!destination) {
-            SR_ERROR("IndexedMesh::Copy() : destination in nullptr!");
+            SR_ERROR("IndexedMesh::CopyResource() : destination in nullptr!");
             return nullptr;
         }
 
         auto indexed = dynamic_cast<IndexedMesh *>(destination);
         if (!indexed) {
-            SR_ERROR("IndexedMesh::Copy() : bad cast!");
+            SR_ERROR("IndexedMesh::CopyResource() : bad cast!");
             return nullptr;
-        }
-
-        if (IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            indexed->m_IBO = manager.CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId());
         }
 
         indexed->m_countIndices = m_countIndices;
         indexed->m_countVertices = m_countVertices;
 
-        return Mesh::Copy(indexed);
+        return Mesh::CopyResource(indexed);
     }
 
     bool IndexedMesh::Calculate() {
@@ -49,8 +44,9 @@ namespace SR_GTYPES_NS {
                 m_hasErrors = true;
                 return false;
             }
-            else
+            else {
                 Memory::MeshManager::Instance().Register<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
+            }
         }
 
         return Mesh::Calculate();

@@ -89,7 +89,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (m_useDocking) {
-            m_dragWindow = GUISystem::Instance().BeginDockSpace();
+            m_dragWindow = GUISystem::Instance().BeginDockSpace(m_window->GetImplementation<Graphics::BasicWindowImpl>());
         }
         else {
             m_dragWindow = false;
@@ -161,7 +161,9 @@ namespace SR_CORE_NS::GUI {
 
     void EditorGUI::Enable(bool value) {
         if (m_enabled != value) {
-            GetWindow<SceneViewer>()->Enable(value);
+            if (auto&& pViewer = GetWindow<SceneViewer>()) {
+                pViewer->Enable(value);
+            }
             m_enabled = value;
         }
     }
@@ -170,20 +172,23 @@ namespace SR_CORE_NS::GUI {
         SR_LOCK_GUARD
 
         if (Enabled()) {
+            GetWindow<Hierarchy>()->Update();
             GetWindow<Inspector>()->Update();
         }
 
-        GetWindow<SceneViewer>()->Update();
+        if (auto&& pViewer = GetWindow<SceneViewer>()) {
+            pViewer->Update();
+        }
     }
 
     void EditorGUI::OnMouseMove(const SR_UTILS_NS::MouseInputData* data) {
         if (m_dragWindow) {
-            auto&& drag = data->GetDrag();
-            auto&& pos = Graphics::Environment::Get()->GetBasicWindow()->GetPosition();
-
-            pos += drag;
-
-            Graphics::Environment::Get()->GetBasicWindow()->Move(pos.x, pos.y);
+            if (auto&& pWin = m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
+                auto&& drag = data->GetDrag();
+                auto &&pos = pWin->GetPosition();
+                pos += drag;
+                pWin->Move(pos.x, pos.y);
+            }
         }
 
         WidgetManager::OnMouseMove(data);
@@ -201,7 +206,7 @@ namespace SR_CORE_NS::GUI {
         WidgetManager::OnKeyUp(data);
     }
 
-    void EditorGUI::CloseAllWindows() {
+    void EditorGUI::CloseAllWidgets() {
         for (auto& [id, widget] : m_widgets) {
             widget->Close();
         }

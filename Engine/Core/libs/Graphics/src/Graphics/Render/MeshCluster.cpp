@@ -11,6 +11,11 @@ namespace SR_GRAPH_NS {
         m_subClusters.reserve(25);
     }
 
+    ShadedMeshSubCluster::ShadedMeshSubCluster(Types::Shader *pShader)
+        : Super()
+        , m_shader(pShader)
+    { }
+
    bool ShadedMeshSubCluster::Remove(Types::Mesh *pMesh) noexcept {
        const int32_t groupID = pMesh->GetVBO();
 
@@ -60,6 +65,10 @@ namespace SR_GRAPH_NS {
         return m_groups.empty();
     }
 
+    SRSL::ShaderType ShadedMeshSubCluster::GetShaderType() const noexcept {
+        return m_shader ? m_shader->GetType() : SRSL::ShaderType::Unknown;
+    }
+
     bool MeshCluster::Add(Types::Mesh* pMesh) noexcept {
         const auto&& pShader = pMesh->GetShader();
 
@@ -68,7 +77,7 @@ namespace SR_GRAPH_NS {
         if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
             auto&& [subCluster, _] = m_subClusters.insert(std::make_pair(
                     pShader,
-                    std::move(ShadedMeshSubCluster())
+                    ShadedMeshSubCluster(pShader)
             ));
 
             if (!subCluster->second.Add(pMesh)) {

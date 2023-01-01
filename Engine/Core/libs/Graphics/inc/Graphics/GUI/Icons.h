@@ -5,7 +5,6 @@
 #ifndef SRENGINE_ICONS_H
 #define SRENGINE_ICONS_H
 
-#include <imgui_node_editor.h>
 #include <imgui.h>
 
 #define SR_ICON_MIN 0xe005

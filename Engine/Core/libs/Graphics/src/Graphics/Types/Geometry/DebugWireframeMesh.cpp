@@ -14,19 +14,14 @@ namespace SR_GTYPES_NS {
         SetRawMesh(nullptr);
     }
 
-    SR_UTILS_NS::IResource* DebugWireframeMesh::Copy(IResource* destination) const {
+    SR_UTILS_NS::IResource* DebugWireframeMesh::CopyResource(IResource* destination) const {
         SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
 
         auto* wireFramed = dynamic_cast<DebugWireframeMesh *>(destination ? destination : new DebugWireframeMesh());
-        wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::Copy(wireFramed));
+        wireFramed = dynamic_cast<DebugWireframeMesh *>(Framework::Graphics::Types::IndexedMesh::CopyResource(wireFramed));
 
         wireFramed->SetRawMesh(m_rawMesh);
         wireFramed->m_meshId = m_meshId;
-
-        if (wireFramed->IsCalculated()) {
-            auto &&manager = Memory::MeshManager::Instance();
-            wireFramed->m_VBO = manager.CopyIfExists<Vertices::VertexType::SimpleVertex, Memory::MeshMemoryType::VBO>(GetResourceId());
-        }
 
         return wireFramed;
     }
@@ -196,15 +191,11 @@ namespace SR_GTYPES_NS {
         return m_modelMatrix;
     }
 
-    SR_UTILS_NS::Path DebugWireframeMesh::GetResourcePath() const {
-        if (m_resourcePath.empty()) {
-            m_resourcePath = SR_UTILS_NS::Path(
-                    std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
-                    true /** fast */
-            );
-        }
-
-        return m_resourcePath;
+    SR_UTILS_NS::Path DebugWireframeMesh::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
     }
 
     void DebugWireframeMesh::SetColor(const SR_MATH_NS::FVector4& color) {

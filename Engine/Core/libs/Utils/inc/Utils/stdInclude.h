@@ -7,6 +7,7 @@
 
 #include <Utils/macros.h>
 
+#include <stdio.h>
 #include <iosfwd>
 #include <stdexcept>
 #include <string_view>
@@ -16,7 +17,6 @@
 #include <cstddef>
 #include <unordered_set>
 #include <stack>
-#include <direct.h>
 #include <cctype>
 #include <locale>
 #include <cstring>
@@ -51,9 +51,40 @@
 #include <chrono>
 #include <random>
 #include <cstdint>
+#if !defined(SR_ANDROID) && defined(SR_CXX_20)
+    #include <forward_list>
+#endif
 
 #ifdef SR_MINGW
     #include <iomanip>
+#endif
+
+#if defined(SR_WIN32) || defined(SR_LINUX)
+    #include <direct.h>
+#endif
+
+/// C++17 - 201703L
+/// C++14 - 201402L
+/// C++11 - 201103L
+/// C++98 - 199711L
+
+namespace SR_UTILS_NS {
+    template<class T, class U = T> T Exchange(T &obj, U &&new_value) {
+        T old_value = std::move(obj);
+        obj = std::forward<U>(new_value);
+        return old_value;
+    }
+}
+
+#if 0
+    namespace std {
+        template<class T, class U = T>
+        T exchange(T &obj, U &&new_value) {
+            T old_value = std::move(obj);
+            obj = std::forward<U>(new_value);
+            return old_value;
+        }
+    }
 #endif
 
 #endif //SRENGINE_STDINCLUDE_H

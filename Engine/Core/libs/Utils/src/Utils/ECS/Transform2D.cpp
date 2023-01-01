@@ -74,49 +74,111 @@ namespace SR_UTILS_NS {
     }
 
     void Transform2D::UpdateMatrix() {
-        SR_MATH_NS::FVector3 scale = m_scale;
+        if (auto&& pParent = dynamic_cast<Transform2D*>(GetParentTransform())) {
+            auto scale = m_scale;
+            auto translation = m_translation;
 
-        if (auto&& pParent = GetParentTransform()) {
-            auto&& aspect = pParent->GetMatrix().GetScale().XY().Aspect();
-            switch (m_stretch) {
-                case Stretch::StretchX:
-                    if (aspect <= 1) {
-                        scale.y *= aspect;
-                    }
-                    break;
-                case Stretch::StretchY:
-                    if (aspect > 1) {
-                        scale.x *= 1.f / aspect;
-                    }
-                    break;
-                case Stretch::StretchXY:
-                    break;
-                case Stretch::None:
-                    if (aspect > 1) {
-                        scale.x *= 1.f / aspect;
-                    }
-                    else {
-                        scale.y *= aspect;
-                    }
-                    break;
-                default:
-                    SRHalt0();
-                    break;
+            auto&& aspect = pParent->GetScale().XY().Aspect();
+
+            if (aspect < 1 && !(m_stretch & STRETCH_FLAGS_X)) {
+                if (translation.y > 0) {
+                    translation.y += (1.f - aspect) * scale.y;
+                }
+                else if (translation.y < 0) {
+                    translation.y -= (1.f - aspect) * scale.y;
+                }
+
+                scale.y *= aspect;
             }
-        }
+            else if (aspect > 1 && !(m_stretch & STRETCH_FLAGS_Y)) {
+                scale.x *= 1.f / aspect;
 
-        m_localMatrix = SR_MATH_NS::Matrix4x4(
-                m_translation,
-                m_rotation.Radians().ToQuat(),
-                scale,
-                m_skew
-        );
+                if (translation.x > 0) {
+                    translation.x += (aspect - 1.f) * scale.x;
+                }
+                else if (translation.x < 0) {
+                    translation.x -= (aspect - 1.f) * scale.x;
+                }
+            }
+
+            m_localMatrix = SR_MATH_NS::Matrix4x4(
+                    translation,
+                    m_rotation.Radians().ToQuat(),
+                    scale,
+                    m_skew
+            );
+        }
+        else {
+            m_localMatrix = SR_MATH_NS::Matrix4x4(
+                    m_translation,
+                    m_rotation.Radians().ToQuat(),
+                    m_scale,
+                    m_skew
+            );
+        }
 
         Transform::UpdateMatrix();
     }
 
-    void Transform2D::SetStretch(Stretch stretch) {
+    void Transform2D::SetGlobalTranslation(const SR_MATH_NS::FVector3 &translation) {
+        if (auto&& pParent = GetParentTransform()) {
+            auto matrix = SR_MATH_NS::Matrix4x4::FromTranslate(translation);
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_skew);
+            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(m_rotation.Inverse());
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+            matrix = pParent->GetMatrix().Inverse() * matrix;
+
+            m_translation = matrix.GetTranslate();
+
+            UpdateTree();
+        }
+        else {
+            SetTranslation(translation);
+        }
+    }
+
+    void Transform2D::SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) {
+        if (auto&& pParent = GetParentTransform()) {
+            auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);
+            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(eulers);
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+            matrix = pParent->GetMatrix().Inverse() * matrix;
+
+            SetRotation(matrix.GetEulers());
+        }
+        else {
+            auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);
+            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(eulers);
+            matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
+
+            SetRotation(matrix.GetEulers());
+        }
+    }
+
+    void Transform2D::SetAnchor(const SR_MATH_NS::FRect &rect) {
+        m_anchor = rect;
+        UpdateTree();
+    }
+
+    void Transform2D::SetStretch(StretchFlags stretch) {
         m_stretch = stretch;
         UpdateTree();
+    }
+
+    Transform *Transform2D::Copy() const {
+        auto&& pTransform = new Transform2D();
+
+        pTransform->m_anchor = m_anchor;
+
+        pTransform->m_stretch = m_stretch;
+
+        pTransform->m_translation = m_translation;
+        pTransform->m_rotation = m_rotation;
+        pTransform->m_scale = m_scale;
+        pTransform->m_skew = m_skew;
+
+        return pTransform;
     }
 }

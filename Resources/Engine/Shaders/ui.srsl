@@ -14,11 +14,11 @@ uniform sampler2D diffuse;
 void fragment() {
 	COLOR = texture(diffuse, UV) * color;
 
-    if (COLOR.a == 0) {
+    if (COLOR.a < 0.8) {
         discard;
     }
 }
 
 void vertex() {
-    VERTEX.x = -VERTEX.x;
+
 }

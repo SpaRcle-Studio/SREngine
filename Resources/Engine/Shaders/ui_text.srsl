@@ -1,0 +1,18 @@
+ShaderType TextUI;
+
+PolygonMode Fill;
+CullMode None;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite true;
+DepthTest true;
+
+void fragment() {
+    if (COLOR.a < 0.5) {
+        discard;
+    }
+}
+
+void vertex() {
+}

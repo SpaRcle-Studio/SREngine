@@ -20,7 +20,5 @@ void fragment() {
 }
 
 void vertex() {
-    VERTEX.x = -VERTEX.x;
-    //VERTEX.z = -VERTEX.z;
-    //VERTEX.y = -VERTEX.y;
+
 }

@@ -9,7 +9,7 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Matrix4x4.h>
 
-#include <Graphics/Environment/Environment.h>
+#include <Graphics/Pipeline/Environment.h>
 
 namespace SR_GRAPH_NS {
     class Window;
@@ -34,6 +34,8 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);
 
+        Component* CopyComponent() const override;
+
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
@@ -42,7 +44,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat; }
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const noexcept { return m_projection;          }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::IVector2 GetSize() const { return m_viewportSize;             }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetSize() const { return m_viewportSize;             }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetPosition() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                    }
@@ -57,6 +59,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD RenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD RenderScenePtr TryGetRenderScene() const;
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
@@ -96,7 +99,7 @@ namespace SR_GTYPES_NS {
         glm::mat4	          m_orthogonal        = glm::mat4(0);
 
         SR_MATH_NS::FVector3  m_position          = { 0, 0, 0 };
-        SR_MATH_NS::IVector2  m_viewportSize      = { 0, 0 };
+        SR_MATH_NS::UVector2  m_viewportSize      = { 0, 0 };
 
         RenderTechniquePtr    m_renderTechnique   = { };
 

@@ -13,6 +13,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Graphics/GUI/Editor/MessageBox.h>
 
@@ -39,15 +40,16 @@ namespace Framework::Core {
         generated_##name##ButtonWidth = ImGui::GetItemRectSize().x;           \
     }                                                                         \
 
+/// TODO: убрать это позорище
 using namespace Framework::Core::GUI;
 
 /// drag
-bool GUISystem::BeginDockSpace() {
+bool GUISystem::BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow) {
     bool drag = false;
 
     const float toolbarSize = 0;
 
-    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuiViewport *viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(viewport->Pos + ImVec2(0, toolbarSize));
     ImGui::SetNextWindowSize(viewport->Size - ImVec2(0, toolbarSize));
     ImGui::SetNextWindowViewport(viewport->ID);
@@ -62,15 +64,15 @@ bool GUISystem::BeginDockSpace() {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 
-    const char* winName = "SpaRcle Engine";
+    const char *winName = "SpaRcle Engine";
     ImGui::Begin(winName, nullptr, window_flags);
-    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    ImGuiWindow *window = ImGui::GetCurrentWindow();
     ImGuiID dockMain = ImGui::GetID("Dockspace");
 
     auto context = Graphics::Environment::Get()->GetGUIContext();
 
     if (ImGui::BeginMainMenuBar()) {
-        ImGuiWindow* menu_bar_window = ImGui::FindWindowByName("##MainMenuBar");
+        ImGuiWindow *menu_bar_window = ImGui::FindWindowByName("##MainMenuBar");
 
         enum class Click {
             None, Drag, Miss
@@ -93,17 +95,16 @@ bool GUISystem::BeginDockSpace() {
 
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
-        auto pWindow = m_env->GetBasicWindow();
-
         SR_BEGIN_RIGHT_ALIGNMENT()
             SR_RIGHT_BUTTON(close, "×", {
-                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
+                pWindow->Close();
             }, {})
 
-            if (pWindow->GetState() == Graphics::WindowState::Default)
-                SR_RIGHT_BUTTON(maximize, "[ ]", { pWindow->Maximize(); }, {})
-            else  if (pWindow->GetState() == Graphics::WindowState::Maximized)
-                SR_RIGHT_BUTTON(restore, "[=]", { pWindow->Restore(); }, {})
+            if (pWindow->GetState() == Graphics::WindowState::Default) SR_RIGHT_BUTTON(maximize, "[ ]",
+                                                                                       { pWindow->Maximize(); }, {})
+            else if (pWindow->GetState() == Graphics::WindowState::Maximized) SR_RIGHT_BUTTON(restore, "[=]",
+                                                                                              { pWindow->Restore(); },
+                                                                                              {})
 
             SR_RIGHT_BUTTON(minimize, "_", {
                 pWindow->Collapse();
@@ -117,7 +118,7 @@ bool GUISystem::BeginDockSpace() {
 
             // When the user has left the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
             // FIXME: With this strategy we won't be able to restore a NULL focus.
-            ImGuiContext& g = *GImGui;
+            ImGuiContext &g = *GImGui;
             if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
                 ImGui::FocusTopMostWindowUnderOne(g.NavWindow, NULL);
 
@@ -177,7 +178,7 @@ bool GUISystem::ImageButtonInternal(std::string_view&& imageId, void *descriptor
     ImVec4 tint_col = ImVec4(1,1,1,1);
     ImVec2 uv0, uv1;
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+    if (m_pipeLine == Graphics::PipelineType::OpenGL) {
         uv0 = ImVec2(0, 1);
         uv1 = ImVec2(1, 0);
     }
@@ -249,7 +250,7 @@ bool GUISystem::BeginDragDropTargetWindow(const char* payload_type)  //взят�
 }
 
 void GUISystem::DrawTexture(void *descriptor, const SR_MATH_NS::IVector2 &size) {
-    if (m_pipeLine == Graphics::PipeLine::OpenGL) {
+    if (m_pipeLine == Graphics::PipelineType::OpenGL) {
         DrawImage(descriptor, ImVec2(size.x, size.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
     }
     else {
@@ -280,7 +281,7 @@ void GUISystem::DrawTexture(
         ImGui::SetCursorPos(centralizedCursorPos);
     }
 
-    if (m_pipeLine == Graphics::PipeLine::OpenGL)
+    if (m_pipeLine == Graphics::PipelineType::OpenGL)
         DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(texSize.x, texSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
     else {
         DrawImage(m_env->GetDescriptorSetFromTexture(id, true), ImVec2(texSize.x, texSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
@@ -331,7 +332,7 @@ bool GUISystem::CollapsingHeader(const char *label, ImGuiTreeNodeFlags flags) {
     return is_open;
 }
 
-void GUISystem::DrawComponents(const Helper::Types::SafePtr<SR_UTILS_NS::GameObject>& gameObject) {
+void GUISystem::DrawComponents(const SR_HTYPES_NS::SafePtr<SR_UTILS_NS::GameObject>& gameObject) {
     if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
         if (ImGui::BeginMenu("Add component")) {
             for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
@@ -427,136 +428,6 @@ void GUISystem::DrawGuizmoTools() {
     }
 }
 
-void GUISystem::DrawWorldEdit(Helper::Types::SafePtr<Helper::World::Scene> scene) {
-    if (scene.LockIfValid()) {
-        const auto&& observer = scene->GetObserver();
-        const auto offset = observer->m_offset;
-
-        ImGui::Separator();
-        DrawTextOnCenter("Current");
-
-        ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
-        ImGui::InputFloat2("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
-
-        ImGui::Separator();
-        DrawTextOnCenter("Offset");
-
-        auto chunkOffset = offset.m_chunk.ToGLM();
-        if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
-            scene->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
-
-        auto regionOffset = offset.m_region.ToGLM();
-        if (ImGui::InputFloat2("Region offset", &regionOffset[0], "%.2f", ImGuiInputTextFlags_EnterReturnsTrue))
-            scene->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
-
-        if (ImGui::Button("Reload chunks")) {
-            scene->ReloadChunks();
-        }
-
-        if (auto&& chunk = scene->GetCurrentChunk()) {
-            ImGui::Separator();
-            int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
-            ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
-        }
-
-        scene.Unlock();
-    }
-}
-
-void GUISystem::DrawGuizmo(Framework::Graphics::Types::Camera *camera, Helper::Types::SafePtr<Helper::GameObject> gameObject) {
-    if (!camera)
-        return;
-
-    /*
-    if (gameObject.LockIfValid()) {
-        ImGuiWindow *window = ImGui::GetCurrentWindow();
-        if (!window || window->SkipItems)
-            return;
-
-        auto img_size = camera->GetSize();
-
-        auto win_size = Math::FVector2(window->Size.x, window->Size.y);
-
-        const Helper::Math::Unit dx = win_size.x / img_size.x;
-        const Helper::Math::Unit dy = win_size.y / img_size.y;
-
-        if (dy > dx)
-            img_size *= dx;
-        else
-            img_size *= dy;
-
-        static float bounds[] = {-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f};
-        static float boundsSnap[] = {0.1f, 0.1f, 0.1f};
-
-        glm::vec3 snap = glm::vec3(1, 1, 1) * ((float) m_snapValue / 100.f);
-
-        glm::mat4 delta;
-
-        auto barycenter = gameObject->GetBarycenter();
-
-        glm::mat4 mat = [=]() -> auto {
-            if (m_centerActive && !barycenter.IsInfinity())
-                return gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL, barycenter);
-            return gameObject->GetTransform()->GetMatrix(Helper::Graph::PipeLine::OpenGL);
-        }();
-
-        static float axis[3] = {0, 0, 0};
-        static float value = 0.0;
-        static float old_rotate = 0.0;
-        static float old_scale = 0.0;
-
-        ImGuizmo::SetRect(
-                (float)(ImGui::GetWindowPos().x + (win_size.x - img_size.x) / 2.f),
-                (float)(ImGui::GetWindowPos().y + (win_size.y - img_size.y) / 2.f),
-                img_size.x,
-                img_size.y);
-
-        if (ImGuizmo::Manipulate(
-                &camera->GetImGuizmoView()[0][0],
-                &camera->GetProjection()[0][0],
-                m_boundsActive ? ImGuizmo::BOUNDS : m_currentGuizmoOperation, m_currentGuizmoMode,
-                &mat[0][0],"F
-                &delta[0][0], nullptr, nullptr, boundsSnap,
-                &value, &axis[0])) {
-            if (m_currentGuizmoOperation == ImGuizmo::OPERATION::ROTATE) {
-                if (abs((value - old_rotate)) < 1) {
-                    if (m_centerActive && !barycenter.IsInfinity()) {
-                        gameObject->GetTransform()->RotateAround(
-                                barycenter,
-                                FVector3(axis).InverseAxis(1),
-                                (value - old_rotate) * 20.0,
-                                m_currentGuizmoMode == ImGuizmo::LOCAL);
-                    } else {
-                        if (m_currentGuizmoMode == ImGuizmo::LOCAL)
-                            gameObject->GetTransform()->RotateAxis(FVector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
-                        else
-                            gameObject->GetTransform()->GlobalRotateAxis(FVector3(axis).InverseAxis(1), (value - old_rotate) * 20.0);
-                    }
-                }
-            } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::TRANSLATE) {
-                if (value < 1) {
-                    if (m_currentGuizmoMode == ImGuizmo::LOCAL)
-                        gameObject->GetTransform()->Translate(
-                                gameObject->GetTransform()->Direction(FVector3(axis).InverseAxis(0), true) * value);
-                    else
-                        gameObject->GetTransform()->GlobalTranslate(FVector3(axis).InverseAxis(0) * value);
-                }
-            } else if (m_currentGuizmoOperation == ImGuizmo::OPERATION::SCALE) {
-                if (value == 0)
-                    old_scale = 0;
-
-                if (m_currentGuizmoMode == ImGuizmo::MODE::LOCAL)
-                    gameObject->GetTransform()->Scaling(FVector3(axis) * (value - old_scale));
-
-                old_scale = value;
-            }
-        }
-
-        old_rotate = value;
-
-        gameObject.Unlock();
-    }*/
-}
 
 bool GUISystem::ButtonWithId(
     const char *_id,
@@ -627,41 +498,69 @@ void GUISystem::SetGuizmoTool(uint8_t toolId) {
     }
 }
 
+static SR_UTILS_NS::Path GetNewScenePath() {
+    auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
+
+    uint64_t index = 0;
+    while (scenePath.Exists()) {
+        scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_FORMAT("Scenes/New-scene-%u.scene", index));
+    }
+
+    return scenePath;
+}
+
+static SR_UTILS_NS::Path GetNewPrefabPath() {
+    auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/new-prefab.prefab");
+
+    uint64_t index = 0;
+    while (scenePath.Exists()) {
+        scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_FORMAT("Scenes/new-prefab-%u.prefab", index));
+    }
+
+    return scenePath;
+}
+
 bool GUISystem::BeginMenuBar() {
     //if (ImGui::BeginMainMenuBar()) {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("New scene")) {
-            auto&& scenePath = Helper::ResourceManager::Instance().GetCachePath().Concat("Scenes/New scene");
-            Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(GetNewScenePath()));
         }
 
-        if (ImGui::MenuItem("Load scene")) {
+        if (ImGui::MenuItem("New prefab")) {
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(GetNewPrefabPath()));
+        }
+
+        if (ImGui::MenuItem("Load")) {
             auto&& scenesPath = Helper::ResourceManager::Instance().GetResPath();
-            if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
-                auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
-                if (auto&& scene = SR_WORLD_NS::Scene::Load(folder)) {
-                    Engine::Instance().SetScene(scene);
+            if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
+                if (path.GetExtensionView() == "scene") {
+                    auto &&folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
+
+                    if (auto &&scene = SR_WORLD_NS::Scene::Load(folder)) {
+                        Engine::Instance().SetScene(scene);
+                    }
+                }
+                else {
+                    if (auto &&scene = SR_WORLD_NS::Scene::Load(path)) {
+                        Engine::Instance().SetScene(scene);
+                    }
                 }
             }
         }
 
-        if (ImGui::MenuItem("Save scene")) {
+        if (ImGui::MenuItem("Save")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 scene->Save();
                 scene.Unlock();
             }
         }
 
-        if (ImGui::MenuItem("Save scene at")) {
+        if (ImGui::MenuItem("Save at")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 const auto scenesPath = Helper::ResourceManager::Instance().GetResPath();
-                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene" } }); !path.Empty()) {
-                    const auto sceneName = SR_UTILS_NS::StringUtils::GetFileNameFromFullPath(path);
-                    const auto folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
-
-                    scene->SetName(sceneName);
-
-                    if (scene->SaveAt(folder)) {
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
+                    if (scene->SaveAt(path)) {
                         SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
                     }
                     else {
@@ -686,8 +585,9 @@ bool GUISystem::BeginMenuBar() {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(),
-                    { { "Any model", "fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
+                    { { "Any model", "prefab,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty())
                 {
+                    /// TODO:Сделать обратимость
                     scene->InstanceFromFile(path);
                 }
                 scene.Unlock();
@@ -752,7 +652,7 @@ bool GUISystem::BeginMenuBar() {
         }
 
         if (ImGui::MenuItem("Close all")) {
-            Engine::Instance().GetEditor()->CloseAllWindows();
+            Engine::Instance().GetEditor()->CloseAllWidgets();
         }
 
         ImGui::EndMenu();

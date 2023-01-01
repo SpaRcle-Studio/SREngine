@@ -29,12 +29,35 @@
 #endif
 
 #ifdef SR_USE_IMGUIZMO
+    #ifdef SR_ANDROID
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wunused-variable"
+        #pragma clang diagnostic ignored "-Wunused-function"
+        #pragma clang diagnostic ignored "-Wno-unused-function"
+        #pragma clang diagnostic ignored "-Wcomment"
+        #pragma clang diagnostic ignored "-Wno-comment"
+    #endif
+
     #include <ImGuizmo/ImGuizmo.cpp>
+
+    #ifdef SR_ANDROID
+        #pragma clang diagnostic pop
+    #endif
 #endif
 
 #ifdef SR_USE_IMGUI_NODE_EDITOR
+    #ifdef SR_ANDROID
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wunused-but-set-variable"
+        #pragma clang diagnostic ignored "-Wunused-function"
+    #endif
+
     #include <imgui-node-editor/imgui_node_editor_api.cpp>
     #include <imgui-node-editor/imgui_node_editor.cpp>
     #include <imgui-node-editor/imgui_canvas.cpp>
     #include <imgui-node-editor/crude_json.cpp>
+
+    #ifdef SR_ANDROID
+        #pragma clang diagnostic pop
+    #endif
 #endif

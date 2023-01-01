@@ -8,48 +8,73 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/CollisionShape.h>
 
+#include <Utils/Common/Measurement.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Math/Matrix4x4.h>
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
+    class LibraryImpl;
+
+    enum class RBUpdShapeRes : uint8_t {
+        Updated = 0,
+        Error = 1,
+        Nothing = 2
+    };
 }
 
-namespace SR_PHYSICS_NS::Types {
+namespace SR_PTYPES_NS {
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1002);
         using Super = SR_UTILS_NS::Component;
-    public:
+        using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
-
     public:
-        explicit Rigidbody(ShapeType type);
-        Rigidbody();
+        explicit Rigidbody(LibraryPtr pLibrary);
         ~Rigidbody() override;
 
     public:
-        static ComponentPtr LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        static ComponentPtr LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
-        virtual void UpdateMatrix();
-        void UpdateShape();
+        virtual bool UpdateMatrix(bool force = false);
+
+        virtual bool UpdateShapeInternal() { return false; }
+        virtual void UpdateInertia() { }
+
+        SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
         SR_NODISCARD ShapeType GetType() const noexcept;
+        SR_NODISCARD CollisionShape* GetCollisionShape() const noexcept { return m_shape; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
         SR_NODISCARD float_t GetMass() const noexcept;
+        SR_NODISCARD bool IsTrigger() const noexcept { return m_isTrigger; }
+        SR_NODISCARD bool IsStatic() const noexcept { return m_isStatic; }
+        SR_NODISCARD bool IsMatrixDirty() const noexcept { return m_isMatrixDirty; }
+        SR_NODISCARD bool IsShapeDirty() const noexcept { return m_isShapeDirty; }
+        SR_NODISCARD bool IsBodyDirty() const noexcept { return m_isBodyDirty; }
+        SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
-        void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity);
-        void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity);
+        RBUpdShapeRes UpdateShape();
 
-        void SetVelocity(const SR_MATH_NS::FVector3& velocity);
+        void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
+        void SetShapeDirty(bool value) { m_isShapeDirty = value; }
 
-        void SetCenter(const SR_MATH_NS::FVector3& center);
+        virtual void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void SetVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void SetIsTrigger(bool value);
+        virtual void SetIsStatic(bool value);
+
+        virtual void SetCenter(const SR_MATH_NS::FVector3& center);
+        virtual void SetType(ShapeType type);
         void SetMass(float_t mass);
-        void SetType(ShapeType type);
+
+        virtual bool InitBody();
 
     protected:
         void OnEnable() override;
@@ -61,27 +86,36 @@ namespace SR_PHYSICS_NS::Types {
 
         void OnMatrixDirty() override;
 
-        virtual bool InitBody();
-        virtual void DeInitBody();
-
         PhysicsScenePtr GetPhysicsScene();
 
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
+            if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
+                return pLibrary;
+            }
+
+            SRHalt("Failed to cast library!");
+
+            return nullptr;
+        }
+
     protected:
-        ShapeType m_type = ShapeType::Unknown;
         CollisionShape::Ptr m_shape = nullptr;
+        LibraryPtr m_library = nullptr;
+
+        PhysicsScenePtr m_physicsScene;
 
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::Quaternion m_rotation;
         SR_MATH_NS::FVector3 m_scale;
 
-        PhysicsScenePtr m_physicsScene;
-
-        btRigidBody* m_rigidbody = nullptr;
-        btMotionState* m_motionState = nullptr;
-
         SR_MATH_NS::FVector3 m_center;
 
-        bool m_dirty = false;
+        bool m_isTrigger = false;
+        bool m_isStatic = false;
+
+        bool m_isBodyDirty = false;
+        bool m_isMatrixDirty = false;
+        bool m_isShapeDirty = false;
 
         float_t m_mass = 1.f;
         uint64_t m_debugId = SR_ID_INVALID;
