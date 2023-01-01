@@ -10,6 +10,7 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/Common/Hashes.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Types/Marshal.h>
 #include <Utils/Types/SafeVariable.h>
@@ -22,6 +23,13 @@
 namespace SR_HTYPES_NS {
     class DataStorage;
 }
+
+#define SR_INITIALIZE_COMPONENT(name)                                                                                   \
+public:                                                                                                                 \
+    SR_INLINE static const std::string COMPONENT_NAME = #name;                                                          \
+    SR_INLINE static const uint64_t COMPONENT_HASH_NAME = SR_HASH_STR(name::COMPONENT_NAME);                            \
+    SR_NODISCARD uint64_t GetComponentHashName() const override { return name::COMPONENT_HASH_NAME; }                   \
+    SR_NODISCARD const std::string& GetComponentName() const override { return name::COMPONENT_NAME; }                  \
 
 namespace SR_UTILS_NS {
     class ComponentManager;
@@ -69,6 +77,9 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual Component* CopyComponent() const;
 
+        SR_NODISCARD virtual uint64_t GetComponentHashName() const = 0;
+        SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
+
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
         /// Активен и компонент и его родительский объект
@@ -81,9 +92,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return SR_MATH_NS::InfinityFV3; }
-        SR_NODISCARD SR_INLINE std::string GetComponentName() const { return m_name; }
-        SR_NODISCARD SR_INLINE size_t GetComponentId() const { return m_componentId; }
-        SR_NODISCARD SR_INLINE Component* BaseComponent() { return this; }
+        SR_NODISCARD Component* BaseComponent() { return this; }
         SR_NODISCARD IComponentable* GetParent() const;
         SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD GameObjectPtr GetGameObject() const;
@@ -94,12 +103,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string GetEntityInfo() const override;
 
     protected:
-        template<typename T> void InitComponent() {
-            m_componentId = typeid(T).hash_code();
-            ///TODO: Это может быть медленным, стоит завести в каждом компоненте констунту COMPONENT_NAME
-            m_name = StringUtils::BackRead(typeid(T).name(), ':');
-        }
-
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
     private:
@@ -111,10 +114,6 @@ namespace SR_UTILS_NS {
         bool m_isAwake = false;
         bool m_isStarted = false;
 
-        /// TODO: need remove for optimization, use numeric id
-        std::string m_name = "Unknown";
-
-        uint64_t m_componentId = SIZE_MAX;
         IComponentable* m_parent = nullptr;
 
     };

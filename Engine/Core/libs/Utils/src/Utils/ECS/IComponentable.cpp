@@ -65,9 +65,9 @@ namespace SR_UTILS_NS {
         return nullptr;
     }
 
-    Component* IComponentable::GetComponent(size_t id) {
+    Component* IComponentable::GetComponent(size_t hashName) {
         for (auto&& pComponent : m_components) {
-            if (pComponent->GetComponentId() != id) {
+            if (pComponent->GetComponentHashName() != hashName) {
                 continue;
             }
 

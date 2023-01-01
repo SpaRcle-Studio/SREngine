@@ -28,6 +28,7 @@ namespace SR_PTYPES_NS {
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
         SR_ENTITY_SET_VERSION(1002);
+        SR_INITIALIZE_COMPONENT(Rigidbody);
         using Super = SR_UTILS_NS::Component;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;

@@ -11,9 +11,7 @@ namespace SR_SCRIPTING_NS {
     Behaviour::Behaviour()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Behaviour), true /** auto remove */)
         , SR_UTILS_NS::Component()
-    {
-        Component::InitComponent<Behaviour>();
-    }
+    { }
 
     SR_UTILS_NS::Component* Behaviour::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         auto&& path = marshal.Read<std::string>();

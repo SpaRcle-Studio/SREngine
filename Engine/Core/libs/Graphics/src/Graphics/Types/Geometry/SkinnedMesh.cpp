@@ -6,10 +6,8 @@
 
 namespace SR_GTYPES_NS {
     SkinnedMesh::SkinnedMesh()
-            : Super(MeshType::Skinned)
-    {
-        Component::InitComponent<SkinnedMesh>();
-    }
+        : Super(MeshType::Skinned)
+    { }
 
     SkinnedMesh::~SkinnedMesh() {
         SetRawMesh(nullptr);

@@ -13,7 +13,7 @@ namespace SR_UTILS_NS {
     SR_HTYPES_NS::Marshal::Ptr Component::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
         pMarshal = Entity::Save(pMarshal, flags);
 
-        pMarshal->Write(m_name);
+        pMarshal->Write<uint64_t>(GetComponentHashName());
         pMarshal->Write(IsEnabled());
         pMarshal->Write<uint16_t>(ComponentManager::Instance().GetVersion(this));
 

@@ -10,6 +10,7 @@
 namespace SR_CORE_UI_NS {
     class Button : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1000);
+        SR_INITIALIZE_COMPONENT(Button);
         using Super = SR_UTILS_NS::Component;
     public:
         Button();

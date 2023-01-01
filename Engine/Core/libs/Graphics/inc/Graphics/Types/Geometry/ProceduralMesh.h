@@ -12,6 +12,7 @@ namespace SR_GTYPES_NS {
         friend class Mesh;
         using Super = MeshComponent;
         SR_ENTITY_SET_VERSION(1000);
+        SR_INITIALIZE_COMPONENT(ProceduralMesh);
     public:
         ProceduralMesh();
 

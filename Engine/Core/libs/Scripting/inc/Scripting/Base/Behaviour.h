@@ -23,6 +23,7 @@ namespace SR_SCRIPTING_NS {
         using ValueProperties = std::list<std::pair<std::string, std::any>>;
         SR_INLINE_STATIC SR_CONSTEXPR const char* EMPTY_ID = "EmptyBehaviour";
         SR_ENTITY_SET_VERSION(1002);
+        SR_INITIALIZE_COMPONENT(Behaviour);
     protected:
         Behaviour();
         ~Behaviour() override = default;

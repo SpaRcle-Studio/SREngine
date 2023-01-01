@@ -21,6 +21,7 @@
 #include "../Utils/src/Utils/ECS/TransformZero.cpp"
 #include "../Utils/src/Utils/ECS/EntityRef.cpp"
 #include "../Utils/src/Utils/ECS/Prefab.cpp"
+#include "../Utils/src/Utils/ECS/Migration.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"

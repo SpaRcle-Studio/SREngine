@@ -20,6 +20,7 @@ namespace SR_GRAPH_NS {
 namespace SR_GTYPES_NS {
     class Camera : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1001);
+        SR_INITIALIZE_COMPONENT(Camera);
         using RenderTechniquePtr = std::variant<SR_UTILS_NS::Path, RenderTechnique*>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:

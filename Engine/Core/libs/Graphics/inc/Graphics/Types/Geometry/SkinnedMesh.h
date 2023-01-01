@@ -16,8 +16,9 @@ namespace SR_GRAPH_NS::Memory {
 namespace SR_GTYPES_NS {
     class SkinnedMesh final : public MeshComponent {
         friend class Mesh;
-        SR_ENTITY_SET_VERSION(1001);
         using Super = MeshComponent;
+        SR_ENTITY_SET_VERSION(1001);
+        SR_INITIALIZE_COMPONENT(SkinnedMesh);
     public:
         SkinnedMesh();
 

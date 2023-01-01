@@ -6,5 +6,4 @@
 
 Framework::Graphics::Animations::Bone::Bone(uint8_t parentId, const glm::mat4& inverseBindPoseMatrix)
         : parentId(parentId), inverseBindPoseMatrix(inverseBindPoseMatrix) {
-    SR_UTILS_NS::Component::InitComponent<Bone>();
 }

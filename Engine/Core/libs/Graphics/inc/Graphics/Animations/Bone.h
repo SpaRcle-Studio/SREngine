@@ -50,6 +50,7 @@ namespace SR_ANIMATIONS_NS {
 
     class Bone : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1000);
+        SR_INITIALIZE_COMPONENT(Bone);
 
         ~Bone() override = default;
 

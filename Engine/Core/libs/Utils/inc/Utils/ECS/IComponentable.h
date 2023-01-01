@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
-        SR_NODISCARD SR_INLINE const std::list<Component*> GetLoadedComponents() const noexcept { return m_loadedComponents; }
+        SR_NODISCARD SR_INLINE const std::list<Component*>& GetLoadedComponents() const noexcept { return m_loadedComponents; }
         SR_NODISCARD bool IsDirty() const noexcept;
 
     public:
@@ -58,7 +58,7 @@ namespace SR_UTILS_NS {
         virtual void DestroyComponents();
 
         template<typename T> T* GetComponent() {
-            return dynamic_cast<T*>(GetComponent(typeid(T).hash_code()));
+            return dynamic_cast<T*>(GetComponent(T::COMPONENT_HASH_NAME));
         }
 
     protected:

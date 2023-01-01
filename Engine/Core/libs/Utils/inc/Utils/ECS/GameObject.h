@@ -7,6 +7,7 @@
 
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/ECS/IComponentable.h>
+#include <Utils/ECS/TagManager.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
@@ -38,7 +39,7 @@ namespace SR_UTILS_NS {
     typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1003);
+        SR_ENTITY_SET_VERSION(1004);
         friend class Component;
     public:
         using Name = std::string;
@@ -49,8 +50,6 @@ namespace SR_UTILS_NS {
         using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;
 
     public:
-        GameObject(std::string name, Transform* pTransform, std::string tag);
-        GameObject(std::string name, std::string tag);
         GameObject(std::string name, Transform* pTransform);
         explicit GameObject(std::string name);
 
@@ -66,7 +65,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const noexcept { return m_parent; }
         SR_NODISCARD std::string GetName() const { return m_name; }
-        SR_NODISCARD std::string GetTag() const { return m_tag; }
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
@@ -129,14 +127,14 @@ namespace SR_UTILS_NS {
         uint64_t m_hashName = 0;
         uint64_t m_idInScene = SR_ID_INVALID;
 
-        GameObject::Ptr    m_parent     = { };
-        GameObjects        m_children   = { };
+        GameObject::Ptr m_parent;
+        GameObjects m_children;
 
-        ScenePtr           m_scene      = nullptr;
-        Transform*         m_transform  = nullptr;
+        ScenePtr m_scene = nullptr;
+        Transform* m_transform  = nullptr;
 
-        Name               m_name;
-        std::string        m_tag;
+        Name m_name;
+        Tag m_tag = 0;
 
         GameObjectFlagBits m_flags = GAMEOBJECT_FLAG_NONE;
 

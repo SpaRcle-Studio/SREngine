@@ -8,9 +8,7 @@
 namespace SR_GRAPH_NS::UI {
     Anchor::Anchor()
         : SR_UTILS_NS::Component()
-    {
-        Component::InitComponent<Anchor>();
-    }
+    { }
 
     void Anchor::TransformUI() {
         /*GetParent()->Do([this](SR_UTILS_NS::GameObject* pThis) {

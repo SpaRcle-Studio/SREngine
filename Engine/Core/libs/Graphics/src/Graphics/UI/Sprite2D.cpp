@@ -15,9 +15,6 @@ namespace SR_GRAPH_UI_NS {
     Sprite2D::Sprite2D()
         : Super(Types::MeshType::Sprite2D)
     {
-        /// override component
-        Component::InitComponent<Sprite2D>();
-
         m_countIndices = SPRITE_INDICES.size();
         m_countVertices = SPRITE_VERTICES.size();
 

@@ -8,8 +8,6 @@ namespace SR_GTYPES_NS {
     ProceduralMesh::ProceduralMesh()
         : Super(MeshType::Procedural)
     {
-        /// override component
-        Component::InitComponent<ProceduralMesh>();
         SetId(SR_FORMAT("Procedural:%p", (void*)this));
     }
 

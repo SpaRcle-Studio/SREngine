@@ -7,9 +7,7 @@
 namespace SR_PTYPES_NS {
     Rigidbody3D::Rigidbody3D(Super::LibraryPtr pLibrary)
         : Super(pLibrary)
-    {
-        SR_UTILS_NS::Component::InitComponent<Rigidbody3D>();
-    }
+    { }
 
     Rigidbody3D::ComponentPtr Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         return Super::LoadComponent(SR_UTILS_NS::Measurement::Space3D, marshal, dataStorage);

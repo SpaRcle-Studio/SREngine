@@ -14,10 +14,7 @@
 namespace SR_GTYPES_NS {
     Mesh3D::Mesh3D()
         : Super(MeshType::Static)
-    {
-        /// override component
-        Component::InitComponent<Mesh3D>();
-    }
+    { }
 
     Mesh3D::~Mesh3D() {
         SetRawMesh(nullptr);

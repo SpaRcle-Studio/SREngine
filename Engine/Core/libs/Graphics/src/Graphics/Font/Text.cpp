@@ -11,7 +11,6 @@ namespace SR_GTYPES_NS {
     Text::Text()
         : Super(MeshType::Static)
     {
-        Component::InitComponent<Text>();
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
         SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
         //SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));

@@ -19,6 +19,7 @@ namespace SR_GRAPH_UI_NS {
 
     class Sprite2D : public SR_GTYPES_NS::MeshComponent {
         SR_ENTITY_SET_VERSION(1000);
+        SR_INITIALIZE_COMPONENT(Sprite2D);
         using Super = SR_GTYPES_NS::MeshComponent;
     public:
         Sprite2D();

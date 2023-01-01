@@ -15,8 +15,6 @@ namespace SR_GTYPES_NS {
     Camera::Camera(uint32_t width, uint32_t height)
         : m_viewportSize(SR_MATH_NS::UVector2(width, height))
     {
-        SR_UTILS_NS::Component::InitComponent<Camera>();
-
         if (width != 0 && height != 0) {
             UpdateProjection();
             UpdateView();

@@ -16,7 +16,7 @@ namespace SR_WORLD_NS {
         pMarshal->Write(GameObject::VERSION);
         pMarshal->Write(true /** is enabled */);
         pMarshal->Write(m_scene->GetName());
-        pMarshal->Write(std::string() /** tag */);
+        pMarshal->Write<uint64_t>(0 /** tag */);
 
         pMarshal = Transform3D().Save(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
 
