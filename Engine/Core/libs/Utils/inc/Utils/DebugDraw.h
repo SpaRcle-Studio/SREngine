@@ -50,6 +50,8 @@ namespace SR_UTILS_NS {
                 const DrawPlaneCallback& drawPlaneCallback,
                 const DrawSphereCallback& drawSphereCallback);
 
+        void* GetUserIdentifier() const { return m_currentSwitcher; }
+
         void RemoveCallbacks(void* pUserIdentifier);
         void SwitchCallbacks(void* pUserIdentifier);
         void Remove(uint64_t id);

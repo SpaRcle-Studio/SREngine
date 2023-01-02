@@ -36,9 +36,9 @@ namespace SR_HTYPES_NS {
         static Marshal LoadFromMemory(const std::string& data);
         static Marshal LoadFromBase64(const std::string& base64);
 
-        SR_NODISCARD bool Valid() const { return BytesCount() > 0; }
-        SR_NODISCARD uint64_t GetPosition() const { return m_position; }
-        SR_NODISCARD uint64_t BytesCount() const { return m_size; }
+        SR_NODISCARD bool Valid() const noexcept { return BytesCount() > 0; }
+        SR_NODISCARD uint64_t GetPosition() const noexcept { return m_position; }
+        SR_NODISCARD uint64_t BytesCount() const noexcept { return m_size; }
         SR_NODISCARD std::string ToString() const;
         SR_NODISCARD std::string ToBase64() const;
 

@@ -121,11 +121,6 @@ namespace SR_CORE_NS {
         return Chunk::Unload();
     }
 
-    bool VisualChunk::Load(SR_HTYPES_NS::Marshal &&marshal) {
-        SetLoadVisible(true);
-        return Chunk::Load(std::move(marshal));
-    }
-
     bool VisualChunk::ApplyOffset() {
         UpdateLoadPos();
         UpdateFacesPos();

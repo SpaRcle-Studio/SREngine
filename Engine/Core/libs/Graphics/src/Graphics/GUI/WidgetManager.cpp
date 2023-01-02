@@ -4,6 +4,7 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Types/SafePtrLockGuard.h>
 
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
@@ -138,5 +139,15 @@ namespace SR_GRAPH_NS::GUI {
         }
 
         return m_renderScene->GetContext();
+    }
+
+    void WidgetManager::SetScene(const WidgetManager::ScenePtr &scene) {
+        SR_LOCK_GUARD
+
+        SR_HTYPES_NS::SafePtrLockGuard<SR_WORLD_NS::Scene::Ptr> lockGuard(scene);
+
+        for (auto&& [id, pWidget] : m_widgets) {
+            pWidget->SetScene(scene);
+        }
     }
 }

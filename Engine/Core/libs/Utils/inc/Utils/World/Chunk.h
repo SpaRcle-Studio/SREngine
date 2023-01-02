@@ -49,7 +49,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(SR_MATH_NS::Axis center = SR_MATH_NS::AXIS_NONE) const;
         SR_NODISCARD ScenePtr GetScene() const;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save() const;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::DataStorage* pContext) const;
 
     public:
         virtual void OnEnter();
@@ -59,7 +59,7 @@ namespace SR_WORLD_NS {
         virtual bool Access(float_t dt);
         virtual bool Belongs(const Math::FVector3& point);
         virtual bool Unload();
-        virtual bool Load(SR_HTYPES_NS::Marshal&& marshal);
+        virtual bool Load(SR_HTYPES_NS::Marshal* pMarshal);
 
         virtual bool ApplyOffset();
 

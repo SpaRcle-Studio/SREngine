@@ -16,7 +16,7 @@ namespace Framework::Core::GUI {
         ~WorldEdit() override = default;
 
     public:
-        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
     protected:
         void Draw() override;

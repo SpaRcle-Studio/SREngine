@@ -42,7 +42,6 @@ namespace SR_CORE_NS {
         void OnExit() override;
         void OnEnter() override;
         bool Unload() override;
-        bool Load(SR_HTYPES_NS::Marshal&& marshal) override;
 
         void Update(float_t dt) override;
 

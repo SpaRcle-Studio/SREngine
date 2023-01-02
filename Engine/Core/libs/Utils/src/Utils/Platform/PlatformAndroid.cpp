@@ -107,7 +107,7 @@ namespace SR_UTILS_NS::Platform {
         return {};
     }
 
-    bool CreateFolder(const Path &path) {
+    bool CreateFolder(const std::string& path) {
         SRHaltOnce("Not implemented!");
         return false;
     }

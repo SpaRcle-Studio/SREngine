@@ -21,7 +21,7 @@ namespace SR_CORE_NS::GUI {
     public:
         void Update();
 
-        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;

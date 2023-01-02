@@ -691,30 +691,28 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (m_scene) {
-            m_scene->Save();
-            if (!DeInitializeScene(m_scene, this)) {
-                SR_ERROR("Engine::FlushScene() : failed to de initialize scene!");
-            }
-        }
-
         auto&& newScene = m_sceneQueue.Pop(ScenePtr());
-
         if (newScene && !SR_CORE_NS::InitializeScene(newScene, this)) {
             SR_ERROR("Engine::FlushScene() : failed to initialize scene!");
         }
 
-        m_scene = newScene;
+        if (m_scene.RecursiveLockIfValid()) {
+            if (m_editor) {
+                m_editor->SetScene(SR_WORLD_NS::Scene::Ptr());
+            }
+
+            m_scene->Save();
+            if (!DeInitializeScene(m_scene, this)) {
+                SR_ERROR("Engine::FlushScene() : failed to de initialize scene!");
+            }
+            m_scene.Unlock();
+        }
 
         if (m_editor) {
-            m_editor->GetWidget<Hierarchy>()->SetScene(m_scene);
-            m_editor->GetWidget<Inspector>()->SetScene(m_scene);
-            m_editor->GetWidget<WorldEdit>()->SetScene(m_scene);
-
-            if (auto&& pViewer = m_editor->GetWidget<SceneViewer>()) {
-                pViewer->SetScene(m_scene);
-            }
+            m_editor->SetScene(newScene);
         }
+
+        m_scene = newScene;
 
         m_renderScene = m_scene ? m_scene->GetDataStorage().GetValue<RenderScenePtr>() : RenderScenePtr();
         m_physicsScene = m_scene ? m_scene->GetDataStorage().GetValue<PhysicsScenePtr>() : PhysicsScenePtr();

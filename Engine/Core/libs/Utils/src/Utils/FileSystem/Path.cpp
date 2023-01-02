@@ -67,6 +67,10 @@ namespace SR_UTILS_NS {
         return m_path;
     }
 
+    const std::string& Path::ToStringRef() const {
+        return m_path;
+    }
+
     std::string_view Path::ToStringView() const {
         return m_path;
     }

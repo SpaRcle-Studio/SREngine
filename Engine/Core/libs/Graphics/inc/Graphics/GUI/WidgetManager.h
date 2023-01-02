@@ -6,9 +6,14 @@
 #define SRENGINE_WIDGETMANAGER_H
 
 #include <Utils/Types/Thread.h>
+#include <Utils/Types/SafePointer.h>
 #include <Utils/Input/InputHandler.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Types/SafePointer.h>
+
+namespace SR_WORLD_NS {
+    class Scene;
+}
 
 namespace SR_GRAPH_NS {
     class RenderScene;
@@ -23,6 +28,7 @@ namespace SR_GRAPH_NS::GUI {
     class WidgetManager : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using ContextPtr = RenderContext*;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
     public:
         WidgetManager();
         ~WidgetManager() override;
@@ -47,6 +53,8 @@ namespace SR_GRAPH_NS::GUI {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
+
+        void SetScene(const ScenePtr& scene);
 
     protected:
         mutable std::recursive_mutex m_mutex;

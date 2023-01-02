@@ -105,6 +105,7 @@ namespace SR_HTYPES_NS {
     };
 }
 
+/** Warning: этот метод очень медленный! */
 #define SR_THIS_THREAD (SR_HTYPES_NS::Thread::Factory::Instance().GetThisThread())
 
 #define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);

@@ -23,8 +23,6 @@ namespace SR_GRAPH_NS {
                 std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/planeWireframe.obj", _1, _2, _3, _4, _5, _6),
                 std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6)
         );
-
-        SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
     }
 
     DebugRenderer::~DebugRenderer() {
@@ -38,6 +36,8 @@ namespace SR_GRAPH_NS {
 
     void DebugRenderer::Prepare() {
         SR_LOCK_GUARD
+
+        SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
 
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 

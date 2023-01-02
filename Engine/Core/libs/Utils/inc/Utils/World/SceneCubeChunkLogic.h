@@ -43,7 +43,7 @@ namespace SR_WORLD_NS {
         void CheckShift(const SR_MATH_NS::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
-        void SaveRegion(Region* pRegion) const;
+        void SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const;
 
     private:
         World::Tensor m_tensor;

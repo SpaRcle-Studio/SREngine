@@ -111,8 +111,9 @@ namespace SR_UTILS_NS {
     }
 
     bool FileSystem::CreatePath(std::string path, uint32_t offset) {
-        if (path.empty())
+        if (path.empty()) {
             return false;
+        }
 
         if (path.back() != '/')
             path.append("/");
@@ -121,8 +122,8 @@ namespace SR_UTILS_NS {
         if (pos != std::string::npos) {
             auto dir = path.substr(0, pos);
 
-            SR_PLATFORM_NS::CreateFolder(dir);
-            CreatePath(path, pos + 1);
+            SR_PLATFORM_NS::CreateFolder(path);
+            CreatePath(std::move(path), pos + 1);
         }
 
         return true;

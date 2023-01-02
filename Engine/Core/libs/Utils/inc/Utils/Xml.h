@@ -357,9 +357,10 @@ namespace SR_UTILS_NS::Xml {
         }
 
         Node AppendChild(const std::string &name);
-
         Node AppendChild(const Node &node);
 
+        Node AppendNode(const std::string &name) { return AppendChild(name); }
+        Node AppendNode(const Node &node) { return AppendChild(node); }
 
         [[nodiscard]] Node TryGetNode(const std::string &name) const {
             return m_valid ? Node(m_node.child(name.c_str())) : Node();
@@ -443,7 +444,7 @@ namespace SR_UTILS_NS::Xml {
             return Node(node);
         }
 
-        bool Save(const Helper::Path& path) const {
+        bool Save(const SR_UTILS_NS::Path& path) const {
             if (!path.Exists()) {
                 path.Make();
             }

@@ -13,6 +13,10 @@
 
 #include <Graphics/GUI/WidgetManager.h>
 
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
 namespace SR_GTYPES_NS {
     class Texture;
 }
@@ -40,6 +44,7 @@ namespace SR_CORE_NS::GUI {
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
     public:
         explicit EditorGUI();
         ~EditorGUI() override;
