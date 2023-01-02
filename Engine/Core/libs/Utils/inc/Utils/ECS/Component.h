@@ -26,8 +26,8 @@ namespace SR_HTYPES_NS {
 
 #define SR_INITIALIZE_COMPONENT(name)                                                                                   \
 public:                                                                                                                 \
-    SR_INLINE static const std::string COMPONENT_NAME = #name;                                                          \
-    SR_INLINE static const uint64_t COMPONENT_HASH_NAME = SR_HASH_STR(name::COMPONENT_NAME);                            \
+    SR_INLINE static const std::string COMPONENT_NAME = #name; /** NOLINT */                                            \
+    SR_INLINE static const uint64_t COMPONENT_HASH_NAME = SR_HASH_STR(name::COMPONENT_NAME); /** NOLINT */              \
     SR_NODISCARD uint64_t GetComponentHashName() const override { return name::COMPONENT_HASH_NAME; }                   \
     SR_NODISCARD const std::string& GetComponentName() const override { return name::COMPONENT_NAME; }                  \
 

@@ -457,8 +457,8 @@ namespace std {
         s^= h(v) + 0x9e3779b9 + (s<< 6) + (s>> 2);
     }
 
-    template<typename U> struct hash<Framework::Helper::Math::Vector3<U>> {
-        size_t operator()(Framework::Helper::Math::Vector3<U> const& vec) const {
+    template<typename U> struct hash<SR_MATH_NS::Vector3<U>> {
+        size_t operator()(SR_MATH_NS::Vector3<U> const& vec) const {
             std::size_t res = 0;
             hash_vector3_combine<U>(res, vec.x);
             hash_vector3_combine<U>(res, vec.y);

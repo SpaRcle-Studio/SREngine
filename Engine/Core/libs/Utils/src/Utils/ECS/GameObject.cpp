@@ -227,7 +227,6 @@ namespace SR_UTILS_NS {
         }
     }
 
-
     void GameObject::Awake(bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
@@ -422,9 +421,10 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::OnAttached() {
-        if (auto&& parent = GetParentTransform()){
+        if (auto&& parent = GetParentTransform()) {
             m_transform->UpdateTree();
-        } else {
+        }
+        else {
             SR_WARN("GameObject::OnAttached() : GameObject doesn't have parent to get transform!");
         }
     }
@@ -552,5 +552,13 @@ namespace SR_UTILS_NS {
         }
 
         return gameObject;
+    }
+
+    void GameObject::SetTag(const std::string& tag) {
+        m_tag = TagManager::Instance().HashTag(tag);
+    }
+
+    Tag GameObject::GetTag() const {
+        return m_tag;
     }
 }

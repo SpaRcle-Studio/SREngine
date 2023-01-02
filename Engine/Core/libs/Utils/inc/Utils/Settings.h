@@ -36,6 +36,8 @@ namespace SR_UTILS_NS {
     public:
         bool Destroy() final;
 
+        void Do(const SR_HTYPES_NS::Function<void(Settings*)>& fun);
+
     protected:
         virtual void ClearSettings() { }
         virtual bool LoadSettings(const Xml::Node& node) { return true; }

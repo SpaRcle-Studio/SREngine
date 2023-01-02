@@ -143,6 +143,7 @@ int main(int argc, char **argv) {
     engine.Close();
 
     SR_CORE_NS::EditorSettings::DestroySettings();
+    SR_UTILS_NS::TagManager::DestroySettings();
 
     SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
