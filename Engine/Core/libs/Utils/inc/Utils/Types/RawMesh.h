@@ -45,6 +45,8 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD float_t GetScaleFactor() const;
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
+        SR_NODISCARD bool IsAllowRevive() const override { return true; }
+
     protected:
         bool Reload() override;
         bool Unload() override;

@@ -148,7 +148,7 @@ namespace SR_GTYPES_NS {
         auto &&pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
 
         if (pMesh && material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(SR_UTILS_NS::Path(material, true))) {
+            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
             else

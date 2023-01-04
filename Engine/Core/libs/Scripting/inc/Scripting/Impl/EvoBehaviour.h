@@ -40,6 +40,8 @@ namespace SR_SCRIPTING_NS {
         void SetGameObject();
         void DestroyScript();
 
+        void OnTransformSet() override;
+
         SR_HTYPES_NS::DataStorage Stash() override;
         void PopStash(const SR_HTYPES_NS::DataStorage &data) override;
 

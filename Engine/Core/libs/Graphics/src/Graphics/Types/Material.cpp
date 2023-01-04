@@ -14,6 +14,15 @@ namespace SR_GTYPES_NS {
         : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Material), true /** auto remove */)
     { }
 
+    Material::~Material() {
+        SetReadOnly(false);
+        SetShader(nullptr);
+
+        for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {
+            RemoveDependency(pTexture);
+        }
+    }
+
     void Material::Use() {
         InitContext();
 
@@ -55,36 +64,33 @@ namespace SR_GTYPES_NS {
         SR_GLOBAL_LOCK
 
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-        auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
 
-        if (auto&& pMaterial = resourceManager.Find<Material>(path))
-            return pMaterial;
+        Material* pMaterial = nullptr;
 
-        auto&& pMaterial = new Material();
+        resourceManager.Execute([&](){
+            auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
 
-        pMaterial->SetId(path, false);
+            if ((pMaterial = resourceManager.Find<Material>(path))) {
+                return;
+            }
 
-        if (!pMaterial->Reload()) {
-            delete pMaterial;
-            return nullptr;
-        }
+            pMaterial = new Material();
 
-        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMaterial);
+            pMaterial->SetId(path, false);
+
+            if (!pMaterial->Reload()) {
+                delete pMaterial;
+                pMaterial = nullptr;
+                return;
+            }
+
+            resourceManager.RegisterResource(pMaterial);
+        });
 
         return pMaterial;
     }
 
     bool Material::Destroy() {
-        if (IsDestroyed())
-            return false;
-
-        SetReadOnly(false);
-        SetShader(nullptr);
-
-        for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {
-            RemoveDependency(pTexture);
-        }
-
         return IResource::Destroy();
     }
 
@@ -125,6 +131,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (pTexture) {
+            SRAssert(!(pTexture->GetCountUses() == 0 && pTexture->IsCalculated()));
             AddDependency(pTexture);
         }
 
@@ -192,6 +199,7 @@ namespace SR_GTYPES_NS {
 
         /// Добавляем все текстуры в зависимости
         for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {
+            SRAssert(!(pTexture->GetCountUses() == 0 && pTexture->IsCalculated()));
             AddDependency(pTexture);
         }
 

@@ -2,6 +2,8 @@
 <Features>
    <Common>
        <EvoCompiler Value="true"/>
+       <CompilePDB Value="false"/>
+
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
        <ColorBufferPick Value="true"/>

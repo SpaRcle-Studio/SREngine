@@ -53,6 +53,7 @@ namespace SR_UTILS_NS {
 
     public:
         virtual void OnMatrixDirty() { }
+        virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект
         virtual void OnLoaded() { }

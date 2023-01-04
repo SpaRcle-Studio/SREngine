@@ -99,16 +99,19 @@ namespace SR_GTYPES_NS {
 
         bool hasErrors = !IResource::Load();
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
-        if (!path.IsAbs()) {
-            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
-        }
+        if (!IsCalculated()) {
+            SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
+            if (!path.IsAbs()) {
+                path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
+            }
 
-        if (!TextureLoader::Load(this, path.ToString())) {
-            hasErrors |= true;
+            if (!TextureLoader::Load(this, path.ToString())) {
+                hasErrors |= true;
+            }
         }
-
-        m_isCalculated = false;
+        else {
+            SRHalt("Texture already calculated!");
+        }
 
         m_context.Do([](RenderContext* ptr) {
             ptr->SetDirty();
@@ -120,8 +123,13 @@ namespace SR_GTYPES_NS {
     bool Texture::Calculate() {
         SR_SCOPED_LOCK
 
-        if (m_isCalculated || !m_data) {
-            SR_ERROR("Texture::Calculate() : data is invalid or the texture is already calculated!");
+        if (m_isCalculated) {
+            SR_ERROR("Texture::Calculate() : texture is already calculated!");
+            return false;
+        }
+
+        if (!m_data) {
+            SR_ERROR("Texture::Calculate() : data is invalid!");
             return false;
         }
 
@@ -162,8 +170,8 @@ namespace SR_GTYPES_NS {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("Texture::Calculate() : texture \"" + std::string(GetResourceId()) + "\" has " + std::to_string(m_id) + " id.");
             }
-
-            FreeTextureData();
+            /// не освобождаем, может пригодиться
+            /// FreeTextureData();
         }
 
         m_isCalculated = true;
@@ -261,25 +269,6 @@ namespace SR_GTYPES_NS {
         return IResource::GetFileHash();
     }
 
-    bool Texture::Reload() {
-        SR_SCOPED_LOCK
-
-        SR_LOG("Texture::Reload() : reloading \"" + std::string(GetResourceId()) + "\" the texture...");
-
-        m_loadState = LoadState::Reloading;
-
-        bool hasErrors = false;
-
-        hasErrors |= !Unload();
-        hasErrors |= !Load();
-
-        UpdateResources();
-
-        m_hasErrors = false;
-
-        return !hasErrors;
-    }
-
     void Texture::FreeTextureData() {
         if (!m_data) {
             return;
@@ -291,5 +280,10 @@ namespace SR_GTYPES_NS {
         }
 
         m_data = nullptr;
+    }
+
+    SR_UTILS_NS::IResource::RemoveUPResult Texture::RemoveUsePoint() {
+        SRAssert2(!(IsCalculated() && GetCountUses() == 1), "Possible multi threading error!");
+        return IResource::RemoveUsePoint();
     }
 }

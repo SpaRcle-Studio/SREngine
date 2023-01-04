@@ -18,6 +18,7 @@ public:
             return;
         }
 
+
         float_t _speed = Input::GetKey(KeyCode::LShift) ? speed * 5.0f : speed;
 
         if (Input::GetKey(KeyCode::W)) {

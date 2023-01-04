@@ -126,23 +126,31 @@ namespace SR_GRAPH_NS {
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {
             auto&& pResource = *pIt;
 
-            if (pResource->GetCountUses() == 1) {
-                /// Ресурс необязательно имеет видеопамять, а лишь содержит другие ресурсы, например материал.
-                if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
-                    pGraphicsResource->FreeVideoMemory();
+            pResource->Execute([&]() -> bool {
+                if (pResource->GetCountUses() == 1) {
+                    SRAssert(pResource->GetResourceParents().empty());
+
+                    /// Ресурс необязательно имеет видеопамять, а лишь содержит другие ресурсы, например материал.
+                    if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
+                        pGraphicsResource->FreeVideoMemory();
+                    }
+
+                    // Сперва ставим ресурс на уничтожение
+                    // pResource->Destroy();
+                    // Затем убираем use-point, чтобы его можно было синхронно освободить.
+                    // Иначе ресурс может дважды уничтожиться.
+
+                    pResource->RemoveUsePoint();
+                    pIt = resourceList.erase(pIt);
+                    /// После освобождения ресурса необходимо перестроить все контекстные сцены рендера.
+                    dirty |= true;
                 }
-                /// Сперва ставим ресурс на уничтожение
-                pResource->Destroy();
-                /// Затем убираем use-point, чтобы его можно было синхронно освободить.
-                /// Иначе ресурс может дважды уничтожиться.
-                pResource->RemoveUsePoint();
-                pIt = resourceList.erase(pIt);
-                /// После освобождения ресурса необходимо перестроить все контекстные сцены рендера.
-                dirty |= true;
-            }
-            else {
-                ++pIt;
-            }
+                else {
+                    ++pIt;
+                }
+
+                return true;
+            });
         }
 
         return dirty;

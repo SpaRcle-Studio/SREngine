@@ -382,6 +382,10 @@ namespace SR_UTILS_NS {
             m_transform->SetGameObject(this);
             SetDirty(true);
         }
+
+        for (auto&& pComponent : m_components) {
+            pComponent->OnTransformSet();
+        }
     }
 
     std::list<EntityBranch> GameObject::GetEntityBranches() const {

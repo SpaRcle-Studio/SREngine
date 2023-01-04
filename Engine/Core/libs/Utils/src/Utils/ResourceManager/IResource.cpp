@@ -173,10 +173,11 @@ namespace SR_UTILS_NS {
     bool IResource::Destroy() {
         SR_LOCK_GUARD
 
-        ResourceManager::Instance().Destroy(this);
-
         SRAssert(!IsDestroyed());
         m_isDestroyed = true;
+
+        ResourceManager::Instance().Destroy(this);
+
         return true;
     }
 
@@ -219,6 +220,11 @@ namespace SR_UTILS_NS {
 
     void IResource::AddDependency(IResource *pResource) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+        //if (IsAllowRevive() && !pResource->IsAllowRevive()) {
+        //    SRHalt("if the parent resource can be revived, then the child resource must also be revived!");
+        //    return;
+        //}
 
         pResource->AddUsePoint();
 
@@ -291,5 +297,14 @@ namespace SR_UTILS_NS {
     bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) {
         SR_LOCK_GUARD
         return fun();
+    }
+
+    void IResource::ReviveResource() {
+        SR_LOCK_GUARD
+
+        SRAssert(m_isDestroyed && m_isRegistered);
+
+        m_isDestroyed = false;
+        m_lifetime = ResourceManager::ResourceLifeTime;
     }
 }

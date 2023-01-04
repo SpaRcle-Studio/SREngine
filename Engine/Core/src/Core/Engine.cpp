@@ -712,6 +712,10 @@ namespace SR_CORE_NS {
             m_editor->SetScene(newScene);
         }
 
+        if (m_cmdManager) {
+            m_cmdManager->Clear();
+        }
+
         m_scene = newScene;
 
         m_renderScene = m_scene ? m_scene->GetDataStorage().GetValue<RenderScenePtr>() : RenderScenePtr();

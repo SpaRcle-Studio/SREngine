@@ -106,8 +106,8 @@ namespace SR_GTYPES_NS {
 
                 if (auto&& pRenderTechnique = RenderTechnique::Load(path)) {
                     pRenderTechnique->SetCamera(this);
-                    pRenderTechnique->SetRenderScene(GetRenderScene());
                     pRenderTechnique->AddUsePoint();
+                    pRenderTechnique->SetRenderScene(GetRenderScene());
 
                     m_renderTechnique = pRenderTechnique;
 

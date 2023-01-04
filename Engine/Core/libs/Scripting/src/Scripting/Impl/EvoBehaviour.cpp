@@ -103,6 +103,7 @@ namespace SR_SCRIPTING_NS {
         m_onEnable = nullptr;
         m_onDisable = nullptr;
         m_start = nullptr;
+        m_fixedUpdate = nullptr;
         m_update = nullptr;
     }
 
@@ -265,5 +266,10 @@ namespace SR_SCRIPTING_NS {
         DeInitHooks();
 
         SR_SAFE_DELETE_PTR(m_script)
+    }
+
+    void EvoBehaviour::OnTransformSet() {
+        SetGameObject();
+        Component::OnTransformSet();
     }
 }

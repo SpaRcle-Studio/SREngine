@@ -32,7 +32,7 @@ namespace SR_GTYPES_NS {
 
     private:
         Material();
-        ~Material() override = default;
+        ~Material() override;
 
     public:
         static Material* Load(SR_UTILS_NS::Path rawPath);

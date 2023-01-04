@@ -44,11 +44,12 @@ namespace SR_UTILS_NS {
         void Update();
         bool Close();
 
+        void Clear();
+
     private:
         bool ExecuteImpl(ReversibleCommand* cmd, SyncType sync);
         bool Execute(ReversibleCommand* cmd);
         bool DoCmd(const Cmd& cmd);
-        void ClearHistory();
 
     private:
         std::queue<Cmd> m_commands;

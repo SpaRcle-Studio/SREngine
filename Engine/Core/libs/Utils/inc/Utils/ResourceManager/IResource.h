@@ -41,6 +41,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const noexcept;
+        SR_NODISCARD virtual bool IsAllowRevive() const { return false; }
         SR_NODISCARD bool IsForce() const { return m_force; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
@@ -55,6 +56,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const;
+
+        SR_NODISCARD const std::unordered_set<IResource*>& GetResourceParents() const { return m_parents; }
 
         SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 
@@ -111,6 +114,8 @@ namespace SR_UTILS_NS {
 
         void SetId(const std::string& id, bool autoRegister = true);
         void SetId(uint64_t hashId, bool autoRegister = true);
+
+        virtual void ReviveResource();
 
     protected:
         void UpdateResources(int32_t depth = 0);
