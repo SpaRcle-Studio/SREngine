@@ -21,6 +21,7 @@
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Animations/Animator.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -188,6 +189,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
             copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
+            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");

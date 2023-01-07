@@ -5,5 +5,11 @@
 #include <Utils/ECS/EntityRef.h>
 
 namespace SR_UTILS_NS {
+    EntityRef::EntityRef() {
 
+    }
+
+    EntityRef::EntityRef(EntityRef&& other) noexcept {
+
+    }
 }

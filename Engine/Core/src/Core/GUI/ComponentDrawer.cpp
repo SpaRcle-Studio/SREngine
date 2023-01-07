@@ -512,4 +512,8 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetMaterial(copy);
         }
     }
+
+    void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Animator *&pComponent, EditorGUI *context, int32_t index) {
+
+    }
 }

@@ -11,21 +11,25 @@ namespace SR_SCRIPTING_NS {
     class Behaviour;
 }
 
+namespace SR_ANIMATIONS_NS {
+    class Animator;
+}
+
 namespace SR_GRAPH_NS {
     namespace UI {
         class Sprite2D;
         class Anchor;
         class Canvas;
     }
+}
 
-    namespace Types {
-        class Camera;
-        class Mesh3D;
-        class SkinnedMesh;
-        class Material;
-        class ProceduralMesh;
-        class Text;
-    }
+namespace SR_GTYPES_NS {
+    class Camera;
+    class Mesh3D;
+    class SkinnedMesh;
+    class Material;
+    class ProceduralMesh;
+    class Text;
 }
 
 namespace SR_CORE_NS::GUI {
@@ -50,6 +54,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_GRAPH_NS::UI::Anchor*& anchor, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::UI::Canvas*& canvas, EditorGUI* context, int32_t index);
     void DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_ANIMATIONS_NS::Animator*& pComponent, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
