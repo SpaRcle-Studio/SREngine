@@ -6,6 +6,8 @@
 #include <Graphics/UI/Canvas.h>
 
 namespace SR_GRAPH_NS::UI {
+    SR_REGISTER_COMPONENT(Anchor);
+
     Anchor::Anchor()
         : SR_UTILS_NS::Component()
     { }

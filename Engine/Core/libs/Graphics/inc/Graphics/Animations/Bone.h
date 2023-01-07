@@ -11,20 +11,19 @@
 #include <Graphics/Render/Render.h>
 
 namespace SR_ANIMATIONS_NS {
-
-    // Ключевой кадр с позицией кости
+    /// Ключевой кадр с позицией кости
     struct BoneAnimationPositionFrame {
         float time; // номер кадра
         glm::vec3 position; // позиция относительно родительской кости
     };
 
-// Ключевой кадр с ориентацией кости
+    /// Ключевой кадр с ориентацией кости
     struct BoneAnimationOrientationFrame {
         float time; // номер кадра
         glm::quat orientation; // ориентация относительно родительской кости
     };
 
-// Набор ключевых кадров отдельной кости
+    /// Набор ключевых кадров отдельной кости
     struct BoneAnimationChannel {
         std::vector<BoneAnimationPositionFrame> positionFrames;
         std::vector<BoneAnimationOrientationFrame> orientationFrames;
@@ -34,16 +33,17 @@ namespace SR_ANIMATIONS_NS {
         BonePose() = default;
 
         BonePose(const glm::vec3& position, const glm::quat& orientation, const float_t scale)
-                : m_position(position), m_orientation(orientation), m_scale(scale)
-        {
-        }
+            : m_position(position)
+            , m_orientation(orientation)
+            , m_scale(scale)
+        { }
 
-        [[nodiscard]] glm::mat4 getBoneMatrix() const
+        SR_NODISCARD glm::mat4 getBoneMatrix() const
         {
             return glm::translate(glm::identity<glm::mat4>(), m_position) * glm::mat4_cast(m_orientation);
         }
 
-        float_t m_scale{};
+        float_t m_scale = 0.f;
         glm::quat m_orientation = glm::identity<glm::quat>();
         glm::vec3 m_position = glm::vec3(0.0f);
     };

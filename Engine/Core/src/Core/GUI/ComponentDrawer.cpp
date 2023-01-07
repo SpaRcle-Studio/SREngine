@@ -122,7 +122,7 @@ namespace SR_CORE_NS::GUI {
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
                 if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
-                    pBehaviour = Scripting::Behaviour::CreateEmpty();
+                    pBehaviour = new SR_SCRIPTING_NS::Behaviour();
                 }
             }
 

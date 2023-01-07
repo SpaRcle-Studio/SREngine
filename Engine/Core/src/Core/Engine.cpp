@@ -46,10 +46,6 @@ namespace SR_CORE_NS {
 
         RegisterResources();
 
-        SR_INFO("Engine::Create() : register all components...");
-
-        RegisterComponents();
-
         SR_INFO("Engine::Create() : create main window...");
 
         if (!CreateMainWindow()) {
@@ -61,6 +57,13 @@ namespace SR_CORE_NS {
             SR_ERROR("Engine::Create() : failed to initialize render!");
             return false;
         }
+
+        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
+            context.SetValue(Engine::Instance().GetWindow());
+
+            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
+            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
+        });
 
         RegisterLibraries();
 
@@ -620,59 +623,6 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
-    }
-
-    void Engine::RegisterComponents() {
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
-            context.SetValue(Engine::Instance().GetWindow());
-
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
-        });
-
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::ProceduralMesh>([]() {
-            return new SR_GTYPES_NS::ProceduralMesh();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_PTYPES_NS::Rigidbody3D>([]() {
-            auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
-
-            if (auto&& pRigidbody = pLibrary->CreateRigidbody3D()) {
-                pRigidbody->SetType(pLibrary->GetDefaultShape());
-                return pRigidbody;
-            }
-
-            return (SR_PTYPES_NS::Rigidbody3D*)nullptr;
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Mesh3D>([]() {
-            return new SR_GTYPES_NS::Mesh3D();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::SkinnedMesh>([]() {
-            return new SR_GTYPES_NS::SkinnedMesh();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Sprite2D>([]() {
-            return new SR_GRAPH_UI_NS::Sprite2D();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Camera>([]() {
-            return new SR_GTYPES_NS::Camera();
-        });
-        /*SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_ANIMATIONS_NS::Bone>([]() {
-            return new SR_ANIMATIONS_NS::Bone();
-        });*/ ///TODO: Разобраться с регистрацией компонента Bone()
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_SCRIPTING_NS::Behaviour>([]() {
-            return SR_SCRIPTING_NS::Behaviour::CreateEmpty();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Canvas>([]() {
-            return new SR_GRAPH_UI_NS::Canvas();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Anchor>([]() {
-            return new SR_GRAPH_UI_NS::Anchor();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Text>([]() {
-            return new SR_GTYPES_NS::Text();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_CORE_UI_NS::Button>([]() {
-            return new SR_CORE_UI_NS::Button();
-        });
     }
 
     void Engine::FlushScene() {

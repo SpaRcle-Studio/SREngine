@@ -3,8 +3,11 @@
 //
 
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Utils/ECS/ComponentManager.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(ProceduralMesh);
+
     ProceduralMesh::ProceduralMesh()
         : Super(MeshType::Procedural)
     {

@@ -63,7 +63,8 @@ namespace SR_UTILS_NS {
 
             m_ids.insert(std::make_pair(T::COMPONENT_NAME, hashName));
 
-            SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + T::COMPONENT_NAME + "\"...");
+            /// не логируем, так как вызывается до инициализации отладчика
+            /// SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + T::COMPONENT_NAME + "\"...");
 
             return true;
         }
@@ -92,5 +93,15 @@ namespace SR_UTILS_NS {
 
     };
 }
+
+#define SR_REGISTER_COMPONENT_CUSTOM(name, constructor)                                                                                           \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { \
+         constructor                                                                                                                              \
+    });                                                                                                                                           \
+
+#define SR_REGISTER_COMPONENT(name)                                                                                                               \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { \
+         return new name ();                                                                                                                      \
+    });                                                                                                                                           \
 
 #endif //SRENGINE_COMPONENTMANAGER_H

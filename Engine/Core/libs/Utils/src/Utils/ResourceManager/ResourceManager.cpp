@@ -359,6 +359,12 @@ namespace SR_UTILS_NS {
     const std::string& ResourceManager::GetResourceId(ResourceManager::Hash hashId) const {
         SR_SCOPED_LOCK
 
+        /// пустая строка
+        if (hashId == 0) {
+            static SR_UTILS_NS::Path emptyPath;
+            return emptyPath;
+        }
+
         auto&& pIt = m_hashIds.find(hashId);
 
         if (pIt == m_hashIds.end()) {

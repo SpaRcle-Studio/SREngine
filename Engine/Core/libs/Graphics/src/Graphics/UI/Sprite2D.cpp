@@ -12,6 +12,8 @@
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GRAPH_UI_NS {
+    SR_REGISTER_COMPONENT(Sprite2D);
+
     Sprite2D::Sprite2D()
         : Super(Types::MeshType::Sprite2D)
     {

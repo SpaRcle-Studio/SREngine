@@ -5,6 +5,8 @@
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(SkinnedMesh);
+
     SkinnedMesh::SkinnedMesh()
         : Super(MeshType::Skinned)
     { }

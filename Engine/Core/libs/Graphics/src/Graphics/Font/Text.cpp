@@ -3,11 +3,14 @@
 //
 
 #include <Utils/ECS/Transform.h>
+#include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/Font/Text.h>
 #include <Graphics/Font/TextBuilder.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Text);
+
     Text::Text()
         : Super(MeshType::Static)
     {

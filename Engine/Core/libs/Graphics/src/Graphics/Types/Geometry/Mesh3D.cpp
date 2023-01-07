@@ -4,6 +4,7 @@
 
 #include <Utils/Types/RawMesh.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Material.h>
@@ -12,6 +13,8 @@
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Mesh3D);
+
     Mesh3D::Mesh3D()
         : Super(MeshType::Static)
     { }

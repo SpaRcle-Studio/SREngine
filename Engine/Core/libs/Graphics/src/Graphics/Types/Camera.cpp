@@ -12,6 +12,8 @@
 #include <Graphics/Window/Window.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Camera);
+
     Camera::Camera(uint32_t width, uint32_t height)
         : m_viewportSize(SR_MATH_NS::UVector2(width, height))
     {

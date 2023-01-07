@@ -2,12 +2,16 @@
 // Created by Monika on 24.05.2022.
 //
 
-#include <Scripting/Base/Behaviour.h>
-#include <Scripting/Impl/EvoBehaviour.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/ComponentManager.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
+#include <Scripting/Base/Behaviour.h>
+#include <Scripting/Impl/EvoBehaviour.h>
+
 namespace SR_SCRIPTING_NS {
+    SR_REGISTER_COMPONENT(Behaviour);
+
     Behaviour::Behaviour()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Behaviour), true /** auto remove */)
         , SR_UTILS_NS::Component()
@@ -47,7 +51,7 @@ namespace SR_SCRIPTING_NS {
         return pMarshal;
     }
 
-    Behaviour *Behaviour::Load(SR_UTILS_NS::Path path) {
+    Behaviour* Behaviour::Load(SR_UTILS_NS::Path path) {
         SR_GLOBAL_LOCK
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
@@ -65,8 +69,8 @@ namespace SR_SCRIPTING_NS {
             pBehaviour = new EvoBehaviour();
         }
         else {
-            SRHalt("Unknown behaviour extension! Extension: " + path.GetExtension());
-            return nullptr;
+            SR_WARN("Behaviour::Load() : unknown behaviour extension! Load default... \n\tExtension: \"" + path.GetExtension() + "\"");
+            return new Behaviour();
         }
 
         pBehaviour->SetId(path, false /** auto register */);
@@ -77,22 +81,6 @@ namespace SR_SCRIPTING_NS {
 
         /// отложенная ручная регистрация
         resourceManager.RegisterResource(pBehaviour);
-
-        return pBehaviour;
-    }
-
-    Behaviour *Behaviour::CreateEmpty() {
-        auto&& pBehaviour = new Behaviour();
-
-        pBehaviour->SetId(EMPTY_ID, false);
-
-        if (!pBehaviour->Load()) {
-            SR_ERROR("Behaviour::CreateEmpty() : failed to load behaviour!");
-            delete pBehaviour;
-            return nullptr;
-        }
-
-        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pBehaviour);
 
         return pBehaviour;
     }
