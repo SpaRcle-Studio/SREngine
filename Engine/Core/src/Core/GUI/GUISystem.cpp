@@ -504,6 +504,7 @@ static SR_UTILS_NS::Path GetNewScenePath() {
     uint64_t index = 0;
     while (scenePath.Exists()) {
         scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_FORMAT("Scenes/New-scene-%u.scene", index));
+        ++index;
     }
 
     return scenePath;
@@ -515,6 +516,7 @@ static SR_UTILS_NS::Path GetNewPrefabPath() {
     uint64_t index = 0;
     while (scenePath.Exists()) {
         scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_FORMAT("Scenes/new-prefab-%u.prefab", index));
+        ++index;
     }
 
     return scenePath;
