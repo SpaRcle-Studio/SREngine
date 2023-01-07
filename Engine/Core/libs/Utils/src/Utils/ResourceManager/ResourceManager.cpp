@@ -384,8 +384,14 @@ namespace SR_UTILS_NS {
         return hash;
     }
 
-    const Path &ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
+    const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
         SR_SCOPED_LOCK
+
+        /// пустая строка
+        if (hashPath == 0) {
+            static SR_UTILS_NS::Path emptyPath;
+            return emptyPath;
+        }
 
         auto&& pIt = m_hashPaths.find(hashPath);
 

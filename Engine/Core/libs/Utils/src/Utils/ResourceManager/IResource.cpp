@@ -105,7 +105,7 @@ namespace SR_UTILS_NS {
 
         /// тут нужно делать синхронно, иначе может произойти deadlock
         ResourceManager::Instance().Execute([this, &result]() {
-            SR_LOCK_GUARD
+            m_mutex.lock();
 
             if (m_countUses == 0) {
                 SRHalt("Count use points is zero!");
@@ -119,10 +119,12 @@ namespace SR_UTILS_NS {
                 if (IsRegistered()) {
                     Destroy();
                     result = RemoveUPResult::Destroy;
+                    m_mutex.unlock();
                     return;
                 }
                 else {
                     /// так и не зарегистрировали ресурс
+                    m_mutex.unlock();
                     delete this;
                     result = RemoveUPResult::Delete;
                     return;
@@ -130,6 +132,8 @@ namespace SR_UTILS_NS {
             }
 
             result = RemoveUPResult::Success;
+
+            m_mutex.unlock();
         });
 
         return result;
