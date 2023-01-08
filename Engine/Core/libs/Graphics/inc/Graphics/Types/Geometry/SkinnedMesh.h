@@ -7,7 +7,7 @@
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 #include <Graphics/Animations/Skeleton.h>
-#include <Graphics/Animations/AnimationClip.h>
+#include <Graphics/Animations/SkeletonAnimationClip.h>
 
 namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
         SR_ANIMATIONS_NS::Skeleton m_skeleton;
-        SR_ANIMATIONS_NS::AnimationClip* m_currentClip = nullptr;
+        SR_ANIMATIONS_NS::SkeletonAnimationClip* m_currentClip = nullptr;
 
     };
 }

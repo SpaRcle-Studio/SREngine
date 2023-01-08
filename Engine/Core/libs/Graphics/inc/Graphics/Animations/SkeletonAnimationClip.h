@@ -2,16 +2,16 @@
 // Created by Igor on 07/12/2022.
 //
 
-#ifndef SRENGINE_ANIMATIONCLIP_H
-#define SRENGINE_ANIMATIONCLIP_H
+#ifndef SRENGINE_SKELETONANIMATIONCLIP_H
+#define SRENGINE_SKELETONANIMATIONCLIP_H
 
 #include <Graphics/Animations/Skeleton.h>
 #include <Graphics/Animations/AnimationPose.h>
 
 namespace SR_ANIMATIONS_NS {
-    class AnimationClip {
+    class SkeletonAnimationClip {
     public:
-        AnimationClip(
+        SkeletonAnimationClip(
                 const Skeleton* skeleton,
                 float duration,
                 float rate,
@@ -57,4 +57,4 @@ namespace SR_ANIMATIONS_NS {
 
 }
 
-#endif //SRENGINE_ANIMATIONCLIP_H
+#endif //SRENGINE_SKELETONANIMATIONCLIP_H
