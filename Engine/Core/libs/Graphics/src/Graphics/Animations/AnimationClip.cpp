@@ -101,9 +101,9 @@ namespace SR_ANIMATIONS_NS {
                 auto&& pScalingKey = pChannel->mScalingKeys[scalingKeyIndex];
 
                 pScalingChannel->AddKey(pScalingKey.mTime / pAnimation->mTicksPerSecond, new ScalingKey(pScalingChannel, SR_MATH_NS::FVector3(
-                        pScalingKey.mValue.z / 100.f,
+                        pScalingKey.mValue.x / 100.f,
                         pScalingKey.mValue.y / 100.f,
-                        pScalingKey.mValue.x / 100.f
+                        pScalingKey.mValue.z / 100.f
                 )));
             }
 
