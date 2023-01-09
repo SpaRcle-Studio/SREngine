@@ -14,7 +14,7 @@
         </Settings>
         <Passes>
             <OpaquePass/>
-            <SkyboxPass Path="Engine/Skyboxes/Sun.png"/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
             <DebugPass/>
         </Passes>

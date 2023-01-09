@@ -3,19 +3,16 @@
 //
 
 #include <Graphics/Animations/Animator.h>
+#include <Graphics/Animations/AnimationClip.h>
+#include <Graphics/Animations/AnimationChannel.h>
+
 #include <Utils/ECS/ComponentManager.h>
 
 namespace SR_ANIMATIONS_NS {
     SR_REGISTER_COMPONENT(Animator);
 
     Animator::~Animator() {
-        for (auto&& [timePoint, keys] : m_timeline) {
-            for (auto&& key : keys) {
-                delete key;
-            }
-        }
-
-        m_timeline.clear();
+        delete m_animationClip;
     }
 
     SR_UTILS_NS::Component* Animator::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
@@ -37,68 +34,90 @@ namespace SR_ANIMATIONS_NS {
         delete this;
     }
 
+    void Animator::FixedUpdate() {
+        if (m_sync) {
+            UpdateInternal(1.f / 60.f);
+        }
+
+        Super::FixedUpdate();
+    }
+
     void Animator::Update(float_t dt) {
-        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(GetParent());
-        if (!pParent) {
-            return;
-        }
-
-        TimePoint* pPrevTimePoint = nullptr;
-
-        for (auto&& timePoint : m_timeline) {
-            auto&& [time, keys] = timePoint;
-
-            if (m_time > time) {
-                pPrevTimePoint = &timePoint;
-                continue;
-            }
-
-            const float_t interval = pPrevTimePoint ? (m_time - pPrevTimePoint->first) / time : 1.f;
-
-            for (auto&& key : keys) {
-                key->Update(interval, pParent);
-            }
-
-            break;
-        }
-
-        m_time += dt / 1000.f;
-        m_time = SR_CLAMP(m_time, m_duration, 0.f);
-
-        if (SR_EQUALS(m_time, m_duration)) {
-            m_time = 0.f;
+        if (!m_sync) {
+            UpdateInternal(dt / 1000.f);
         }
 
         Super::Update(dt);
     }
 
+    void Animator::UpdateInternal(float_t dt) {
+        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(GetParent());
+        if (!pParent) {
+            return;
+        }
+
+        uint32_t maxKeyFrame = 0;
+
+        for (auto&& pChannel : m_animationClip->GetChannels()) {
+            const uint32_t keyFrame = UpdateChannel(pChannel, pParent);
+            maxKeyFrame = SR_MAX(maxKeyFrame, keyFrame);
+        }
+
+        m_time += dt;
+
+        if (maxKeyFrame == m_maxKeyFrame) {
+            m_time = 0.f;
+            m_playState.clear();
+        }
+    }
+
     void Animator::OnAttached() {
-        m_timeline.emplace_back(0.f, Animator::Keys {
-            new TranslationKey(SR_MATH_NS::FVector3(0, 1, 0))
-        });
+        m_animationClip = AnimationClip::Load("Test/cube_anim3.fbx", 0);
 
-        m_timeline.emplace_back(0.5f, Animator::Keys {
-            new TranslationKey(SR_MATH_NS::FVector3(0, 2, 0))
-        });
-
-        m_timeline.emplace_back(1.5f, Animator::Keys {
-            new TranslationKey(SR_MATH_NS::FVector3(2, 2, 0))
-        });
-
-        m_timeline.emplace_back(2.5f, Animator::Keys {
-            new TranslationKey(SR_MATH_NS::FVector3(2, 2, 2))
-        });
-
-        m_timeline.emplace_back(3.5f, Animator::Keys {
-            new TranslationKey(SR_MATH_NS::FVector3(0, 1, 0))
-        });
-
-        m_duration = 0.f;
-
-        for (auto&& [time, keys] : m_timeline) {
-            m_duration = SR_MAX(m_duration, time);
+        for (auto&& pChannel : m_animationClip->GetChannels()) {
+            m_maxKeyFrame = SR_MAX(m_maxKeyFrame, pChannel->GetKeys().size());
         }
 
         Super::OnAttached();
+    }
+
+    uint32_t Animator::UpdateChannel(AnimationChannel* pChannel, SR_UTILS_NS::GameObject* pRoot) {
+        auto&& keys = pChannel->GetKeys();
+        auto&& keyIndex = m_playState[pChannel];
+
+    skipKey:
+        if (keyIndex == keys.size()) {
+            return keyIndex;
+        }
+
+        auto&& [time, pKey] = keys.at(keyIndex);
+
+        if (m_time > time) {
+            if (keyIndex == 0) {
+                pKey->Update(0.f, nullptr, pRoot);
+            }
+            else {
+                pKey->Update(1.f, keys.at(keyIndex - 1).second, pRoot);
+            }
+
+            ++keyIndex;
+
+            goto skipKey;
+        }
+
+        if (keyIndex == 0) {
+            pKey->Update(0.f, nullptr, pRoot);
+        }
+        else {
+            auto&& [prevTime, prevKey] = keys.at(keyIndex - 1);
+
+            const double_t currentTime = m_time - prevTime;
+            const double_t keyTime = time - prevTime;
+            const double_t progress = currentTime / keyTime;
+
+            pKey->Update(progress, prevKey, pRoot);
+        }
+
+        return keyIndex;
     }
 }

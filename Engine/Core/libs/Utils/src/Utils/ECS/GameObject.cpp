@@ -565,4 +565,14 @@ namespace SR_UTILS_NS {
     Tag GameObject::GetTag() const {
         return m_tag;
     }
+
+    GameObject::Ptr GameObject::Find(uint64_t hashName) const noexcept {
+        for (auto&& child : m_children) {
+            if (child->GetHashName() == hashName) {
+                return child;
+            }
+        }
+
+        return GameObject::Ptr();
+    }
 }

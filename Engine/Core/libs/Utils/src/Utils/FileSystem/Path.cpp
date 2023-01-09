@@ -295,7 +295,7 @@ namespace SR_UTILS_NS {
         return StringUtils::Remove(m_path, index, subPath.m_path.size() + 1);
     }
 
-    Path Path::SelfRemoveSubPath(const Path &subPath) {
+    Path Path::SelfRemoveSubPath(const Path &subPath) const {
         auto&& index = m_path.find(subPath.m_path);
 
         if (index == std::string::npos) {

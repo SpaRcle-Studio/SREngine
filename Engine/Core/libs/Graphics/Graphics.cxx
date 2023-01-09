@@ -2,6 +2,7 @@
 
 #include "../Graphics/src/Graphics/Animations/Bone.cpp"
 #include "../Graphics/src/Graphics/Animations/SkeletonAnimationClip.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationClip.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationKey.cpp"
 #include "../Graphics/src/Graphics/Animations/Animator.cpp"

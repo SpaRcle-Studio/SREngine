@@ -36,6 +36,10 @@ namespace SR_GRAPH_NS {
             m_skybox->AddUsePoint();
         }
 
+        if (m_skybox) {
+            m_skybox->SetShader(SR_GTYPES_NS::Shader::Load(passNode.GetAttribute("Shader").ToString()));
+        }
+
         return BasePass::Load(passNode);
     }
 

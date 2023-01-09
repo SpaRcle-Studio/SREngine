@@ -135,11 +135,6 @@ namespace SR_GRAPH_NS {
                         pGraphicsResource->FreeVideoMemory();
                     }
 
-                    // Сперва ставим ресурс на уничтожение
-                    // pResource->Destroy();
-                    // Затем убираем use-point, чтобы его можно было синхронно освободить.
-                    // Иначе ресурс может дважды уничтожиться.
-
                     pResource->RemoveUsePoint();
                     pIt = resourceList.erase(pIt);
                     /// После освобождения ресурса необходимо перестроить все контекстные сцены рендера.

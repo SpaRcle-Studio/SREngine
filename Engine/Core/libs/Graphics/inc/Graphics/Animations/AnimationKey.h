@@ -5,7 +5,6 @@
 #ifndef SRENGINE_ANIMATIONKEY_H
 #define SRENGINE_ANIMATIONKEY_H
 
-#include <Utils/ECS/EntityRef.h>
 #include <Graphics/Animations/Interpolation.h>
 
 namespace SR_UTILS_NS {
@@ -13,6 +12,8 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_ANIMATIONS_NS {
+    class AnimationChannel;
+
     /// Это тип свойства которое изменяет AnimationKey
     SR_ENUM_NS_CLASS_T(AnimationPropertyType, uint8_t,
         Translation,
@@ -40,27 +41,84 @@ namespace SR_ANIMATIONS_NS {
     /// Переход должен работать и в обратную сторону (от 1.f до 0.f)
     class AnimationKey {
     public:
+        explicit AnimationKey(AnimationChannel* pChannel)
+            : m_channel(pChannel)
+        { }
+
         virtual ~AnimationKey() = default;
 
     public:
-        virtual void Update(float_t interval, SR_UTILS_NS::GameObject* pRoot) = 0;
+        virtual void Update(double_t interval, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) = 0;
+        virtual AnimationKey* Copy(AnimationChannel* pChannel) const noexcept = 0;
+
+    protected:
+        AnimationChannel* m_channel = nullptr;
 
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     class TranslationKey : public AnimationKey {
+        using Super = AnimationKey;
     public:
-        explicit TranslationKey(const SR_MATH_NS::FVector3& translation)
-            : m_translation(translation)
+        TranslationKey(AnimationChannel* pChannel, const SR_MATH_NS::FVector3& translation)
+            : Super(pChannel)
+            , m_translation(translation)
         { }
 
     public:
-        void Update(float_t interval, SR_UTILS_NS::GameObject* pRoot) override;
+        void Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) override;
+
+        SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
+            return new TranslationKey(pChannel, m_translation);
+        }
 
     private:
         SR_MATH_NS::FVector3 m_translation;
-        SR_UTILS_NS::EntityRef m_entity;
+
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    class RotationKey : public AnimationKey {
+        using Super = AnimationKey;
+    public:
+        RotationKey(AnimationChannel* pChannel, const SR_MATH_NS::Quaternion& rotation)
+            : Super(pChannel)
+            , m_rotation(rotation)
+        { }
+
+    public:
+        void Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) override;
+
+        SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
+            return new RotationKey(pChannel, m_rotation);
+        }
+
+    private:
+        SR_MATH_NS::Quaternion m_rotation;
+
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    class ScalingKey : public AnimationKey {
+        using Super = AnimationKey;
+    public:
+        ScalingKey(AnimationChannel* pChannel, const SR_MATH_NS::FVector3& scaling)
+            : Super(pChannel)
+            , m_scaling(scaling)
+        { }
+
+    public:
+        void Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) override;
+
+        SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
+            return new ScalingKey(pChannel, m_scaling);
+        }
+
+    private:
+        SR_MATH_NS::FVector3 m_scaling;
 
     };
 }

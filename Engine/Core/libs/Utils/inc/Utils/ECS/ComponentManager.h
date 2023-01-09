@@ -94,14 +94,14 @@ namespace SR_UTILS_NS {
     };
 }
 
-#define SR_REGISTER_COMPONENT_CUSTOM(name, constructor)                                                                                           \
-    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { \
-         constructor                                                                                                                              \
-    });                                                                                                                                           \
+#define SR_REGISTER_COMPONENT_CUSTOM(name, constructor)                                                                                                         \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { /** NOLINT */ \
+         constructor                                                                                                                                            \
+    });                                                                                                                                                         \
 
-#define SR_REGISTER_COMPONENT(name)                                                                                                               \
-    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { \
-         return new name ();                                                                                                                      \
-    });                                                                                                                                           \
+#define SR_REGISTER_COMPONENT(name)                                                                                                                             \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { /** NOLINT */ \
+         return new name ();                                                                                                                                    \
+    });                                                                                                                                                         \
 
 #endif //SRENGINE_COMPONENTMANAGER_H

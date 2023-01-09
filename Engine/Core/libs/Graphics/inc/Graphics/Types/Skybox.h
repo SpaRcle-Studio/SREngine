@@ -39,6 +39,8 @@ namespace SR_GTYPES_NS {
         void FreeVideoMemory() override;
         void Draw();
 
+        void SetShader(Shader *shader);
+
     protected:
         void OnResourceUpdated(IResource* pResource, int32_t depth) override;
         uint64_t GetFileHash() const override { return 0; }
@@ -47,7 +49,6 @@ namespace SR_GTYPES_NS {
         bool Calculate();
         void DrawOpenGL();
         void DrawVulkan();
-        void SetShader(Shader *shader);
 
     private:
         Shader*                 m_shader         = nullptr;

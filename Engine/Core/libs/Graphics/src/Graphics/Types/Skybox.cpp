@@ -88,9 +88,6 @@ namespace SR_GTYPES_NS {
         pSkybox->m_height = H;
         pSkybox->m_data = sides;
 
-        /// TODO: добавить возможность кастомизации
-        pSkybox->SetShader(Shader::Load("Engine/Shaders/skybox.srsl"));
-
         pSkybox->SetId(path.ToString());
 
         return pSkybox;
@@ -109,14 +106,14 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        for (auto&& img : m_data) {
-            if (!img) {
-                continue;
-            }
-
-            stbi_image_free(img);
-            img = nullptr;
-        }
+        //for (auto&& img : m_data) {
+        //    if (!img) {
+        //        continue;
+        //    }
+        //
+        //    stbi_image_free(img);
+        //    img = nullptr;
+        //}
 
         auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
 

@@ -6,6 +6,7 @@
 #define SRENGINE_INTERPOLATION_H
 
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Math/Vector3.h>
 
 namespace SR_ANIMATIONS_NS {
     SR_ENUM_NS_CLASS_T(AnimationInterpolationFunctionType, uint8_t,

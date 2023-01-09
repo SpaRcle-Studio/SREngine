@@ -14,9 +14,11 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
     struct PathItem {
         uint64_t hashName;
-        uint32_t index;
+        uint16_t index;
         Action action;
     };
+
+    typedef std::vector<PathItem> RefPath;
 }
 
 #endif //SRENGINE_ENTITYREFUTILS_H

@@ -228,6 +228,10 @@ namespace SR_MATH_NS {
             return v;
         }
 
+        SR_NODISCARD Vector3 Lerp(const Vector3& vector3, Unit t) const noexcept {
+            return (Vector3)(*this + (vector3 - *this) * t);
+        }
+
         SR_NODISCARD Vector3 Normalize() const {
             auto&& value = x * x + y * y + z * z;
 

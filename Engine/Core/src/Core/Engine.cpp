@@ -459,9 +459,12 @@ namespace SR_CORE_NS {
             m_scene.Unlock();
         }
 
-        if (m_renderScene.RecursiveLockIfValid()) {
+        if (m_renderContext.LockIfValid()) {
             m_renderContext->Update();
+            m_renderContext.Unlock();
+        }
 
+        if (m_renderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = m_renderScene->IsOverlayEnabled();
                 const bool isMaximized = pWin->IsMaximized();

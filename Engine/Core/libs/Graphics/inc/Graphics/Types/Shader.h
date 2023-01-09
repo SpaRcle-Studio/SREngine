@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
     class Environment;
 }
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Shader;
 
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {

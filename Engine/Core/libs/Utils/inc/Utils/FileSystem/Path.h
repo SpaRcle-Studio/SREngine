@@ -64,7 +64,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
-        SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath);
+        SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;

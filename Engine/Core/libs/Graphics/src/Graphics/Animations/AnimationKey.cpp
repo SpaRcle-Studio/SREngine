@@ -8,13 +8,34 @@
 #include <Utils/ECS/Transform.h>
 
 namespace SR_ANIMATIONS_NS {
-    void TranslationKey::Update(float_t interval, SR_UTILS_NS::GameObject *pRoot) {
-        SR_MATH_NS::FVector3 interpolation = pRoot->GetTransform()->GetTranslation();
+    void TranslationKey::Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject *pRoot) {
+        if (auto&& pKey = dynamic_cast<TranslationKey*>(pPreviousKey)) {
+            pRoot->GetTransform()->SetTranslation(pKey->m_translation.Lerp(m_translation, progress));
+        }
+        else {
+            pRoot->GetTransform()->SetTranslation(m_translation);
+        }
+    }
 
-        interpolation.x += (m_translation.x - interpolation.x) * interval;
-        interpolation.y += (m_translation.y - interpolation.y) * interval;
-        interpolation.z += (m_translation.z - interpolation.z) * interval;
+    /// ----------------------------------------------------------------------------------------------------------------
 
-        pRoot->GetTransform()->SetTranslation(interpolation);
+    void RotationKey::Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) {
+        if (auto&& pKey = dynamic_cast<RotationKey*>(pPreviousKey)) {
+            pRoot->GetTransform()->SetRotation(pKey->m_rotation.Slerp(m_rotation, progress));
+        }
+        else {
+            pRoot->GetTransform()->SetRotation(m_rotation);
+        }
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    void ScalingKey::Update(double_t progress, AnimationKey *pPreviousKey, SR_UTILS_NS::GameObject *pRoot) {
+        if (auto&& pKey = dynamic_cast<ScalingKey*>(pPreviousKey)) {
+            pRoot->GetTransform()->SetScale(pKey->m_scaling.Lerp(m_scaling, progress));
+        }
+        else {
+            pRoot->GetTransform()->SetScale(m_scaling);
+        }
     }
 }
