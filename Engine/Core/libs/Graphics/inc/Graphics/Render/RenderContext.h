@@ -126,7 +126,7 @@ namespace SR_GRAPH_NS {
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {
             auto&& pResource = *pIt;
 
-            pResource->Execute([&]() -> bool {
+            const bool removed = pResource->TryExecute([&]() -> bool {
                 if (pResource->GetCountUses() == 1) {
                     SRAssert(pResource->GetResourceParents().empty());
 
@@ -139,13 +139,15 @@ namespace SR_GRAPH_NS {
                     pIt = resourceList.erase(pIt);
                     /// После освобождения ресурса необходимо перестроить все контекстные сцены рендера.
                     dirty |= true;
-                }
-                else {
-                    ++pIt;
+                    return true;
                 }
 
-                return true;
+                return false;
             });
+
+            if (!removed) {
+                ++pIt;
+            }
         }
 
         return dirty;

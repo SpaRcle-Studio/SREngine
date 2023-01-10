@@ -69,7 +69,7 @@ namespace SR_HTYPES_NS {
         /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
 
         m_scene = m_importer->ReadFile(path.ToString(),
-                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale | aiProcess_GenUVCoords | aiProcess_TransformUVCoords
+                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType
         );
 
         /*for (unsigned int index = 0; index < m_scene->mMetaData->mNumProperties; ++index) {
@@ -162,10 +162,10 @@ namespace SR_HTYPES_NS {
                 for (uint32_t j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
                     auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
                     vertex.weightsNum++;
-                    if (vertex.weightsNum >= SR_MAX_BONES_ON_VERTEX)
+                    if (vertex.weightsNum > SR_MAX_BONES_ON_VERTEX)
                     {
-                        SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i",
-                                          SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId));
+                        SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
+                                          SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
                         continue;
                     }
                     vertex.weights[vertex.weightsNum-1].boneId = i;

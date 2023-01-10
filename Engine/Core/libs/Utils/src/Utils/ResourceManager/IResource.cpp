@@ -298,6 +298,14 @@ namespace SR_UTILS_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
+    bool IResource::TryExecute(const SR_HTYPES_NS::Function<bool()>& fun) {
+        if (m_mutex.try_lock()) {
+            const bool result = fun();
+            m_mutex.unlock();
+            return result;
+        }
+    }
+
     bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) {
         SR_LOCK_GUARD
         return fun();
