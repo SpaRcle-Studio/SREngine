@@ -11,6 +11,15 @@
 #include <Graphics/Render/Render.h>
 
 namespace SR_ANIMATIONS_NS {
+    struct Bone : public SR_UTILS_NS::NonCopyable {
+        uint64_t hashName;
+        std::string name;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject> gameObject;
+        std::vector<Bone*> bones;
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
     /// Ключевой кадр с позицией кости
     struct BoneAnimationPositionFrame {
         float time; // номер кадра
@@ -48,14 +57,14 @@ namespace SR_ANIMATIONS_NS {
         glm::vec3 m_position = glm::vec3(0.0f);
     };
 
-    class SR_DEPRECATED Bone : public SR_UTILS_NS::Component {
+    class SR_DEPRECATED BoneComponent : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(Bone);
+        SR_INITIALIZE_COMPONENT(BoneComponent);
 
-        ~Bone() override = default;
+        ~BoneComponent() override = default;
 
     public:
-        Bone(uint8_t parentId, const glm::mat4& inverseBindPoseMatrix);
+        BoneComponent(uint8_t parentId, const glm::mat4& inverseBindPoseMatrix);
 
     private:
         //Types::Mesh* m_mesh = nullptr;

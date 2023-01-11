@@ -4,6 +4,6 @@
 
 #include <Graphics/Animations/Bone.h>
 
-Framework::Graphics::Animations::Bone::Bone(uint8_t parentId, const glm::mat4& inverseBindPoseMatrix)
+Framework::Graphics::Animations::BoneComponent::BoneComponent(uint8_t parentId, const glm::mat4& inverseBindPoseMatrix)
         : parentId(parentId), inverseBindPoseMatrix(inverseBindPoseMatrix) {
 }
