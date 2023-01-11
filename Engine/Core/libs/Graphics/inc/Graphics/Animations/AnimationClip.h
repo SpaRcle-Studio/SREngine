@@ -25,6 +25,9 @@ namespace SR_ANIMATIONS_NS {
         SR_NODISCARD const std::vector<AnimationChannel*>& GetChannels() const { return m_channels; }
 
     private:
+        void LoadChannels(aiAnimation* pAnimation);
+
+    private:
         std::vector<AnimationChannel*> m_channels;
 
     };

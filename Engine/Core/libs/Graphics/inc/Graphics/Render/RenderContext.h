@@ -143,7 +143,7 @@ namespace SR_GRAPH_NS {
                 }
 
                 return false;
-            });
+            }, false);
 
             if (!removed) {
                 ++pIt;

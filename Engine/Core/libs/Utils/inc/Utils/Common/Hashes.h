@@ -100,6 +100,7 @@ namespace SR_UTILS_NS {
 
 #define SR_HASH(x) (SR_UTILS_NS::CalculateHash(x))
 #define SR_HASH_STR(x) (SR_UTILS_NS::CalculateHash<std::string>(x))
+#define SR_HASH_STR_VIEW(x) (SR_UTILS_NS::CalculateHash<std::string_view>(x))
 
 #define SR_COMPILE_TIME_CRC32_STR(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::MM<sizeof(x)-1>::crc32(x)))
 #define SR_RUNTIME_TIME_CRC32_STR(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::crc32(x)))

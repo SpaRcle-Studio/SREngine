@@ -48,7 +48,7 @@ namespace SR_ANIMATIONS_NS {
         glm::vec3 m_position = glm::vec3(0.0f);
     };
 
-    class Bone : public SR_UTILS_NS::Component {
+    class SR_DEPRECATED Bone : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1000);
         SR_INITIALIZE_COMPONENT(Bone);
 

@@ -59,7 +59,7 @@ namespace SR_GTYPES_NS {
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
-        SR_ANIMATIONS_NS::Skeleton m_skeleton;
+        SR_ANIMATIONS_NS::AssimpSkeleton m_skeleton;
         SR_ANIMATIONS_NS::SkeletonAnimationClip* m_currentClip = nullptr;
 
     };

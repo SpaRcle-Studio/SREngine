@@ -65,6 +65,12 @@ namespace SR_ANIMATIONS_NS {
     AnimationClip* AnimationClip::Load(aiAnimation* pAnimation) {
         auto&& pAnimationClip = new AnimationClip();
 
+        pAnimationClip->LoadChannels(pAnimation);
+
+        return pAnimationClip;
+    }
+
+    void AnimationClip::LoadChannels(aiAnimation *pAnimation) {
         for (uint16_t channelIndex = 0; channelIndex < pAnimation->mNumChannels; ++channelIndex) {
             auto&& pChannel = pAnimation->mChannels[channelIndex];
 
@@ -72,15 +78,15 @@ namespace SR_ANIMATIONS_NS {
             auto&& pRotationChannel = new AnimationChannel();
             auto&& pScalingChannel = new AnimationChannel();
 
-            pTranslationChannel->GetEntityRef().AddPathItem(SR_UTILS_NS::EntityRefUtils::Action::Action_Child, pChannel->mNodeName.C_Str());
+            pTranslationChannel->SetName(pChannel->mNodeName.C_Str());
 
             for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
                 auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
 
                 pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond, new TranslationKey(pTranslationChannel, SR_MATH_NS::FVector3(
-                    pPositionKey.mValue.z / 100.f,
-                    pPositionKey.mValue.y / 100.f,
-                    pPositionKey.mValue.x / 100.f
+                        pPositionKey.mValue.z / 100.f,
+                        pPositionKey.mValue.y / 100.f,
+                        pPositionKey.mValue.x / 100.f
                 )));
             }
 
@@ -107,11 +113,9 @@ namespace SR_ANIMATIONS_NS {
                 )));
             }
 
-            pAnimationClip->m_channels.emplace_back(pTranslationChannel);
-            pAnimationClip->m_channels.emplace_back(pRotationChannel);
-            pAnimationClip->m_channels.emplace_back(pScalingChannel);
+            m_channels.emplace_back(pTranslationChannel);
+            m_channels.emplace_back(pRotationChannel);
+            m_channels.emplace_back(pScalingChannel);
         }
-
-        return pAnimationClip;
     }
 }

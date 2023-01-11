@@ -9,7 +9,7 @@
 
 namespace SR_ANIMATIONS_NS {
 
-    struct Skeleton {
+    struct SR_DEPRECATED AssimpSkeleton {
         std::vector<Bone> bones;
     };
 

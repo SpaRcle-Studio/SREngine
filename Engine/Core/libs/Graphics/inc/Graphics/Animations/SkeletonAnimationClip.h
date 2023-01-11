@@ -12,7 +12,7 @@ namespace SR_ANIMATIONS_NS {
     class SkeletonAnimationClip {
     public:
         SkeletonAnimationClip(
-                const Skeleton* skeleton,
+                const AssimpSkeleton* skeleton,
                 float duration,
                 float rate,
                 std::vector<BoneAnimationChannel> bonesAnimationChannels)
@@ -45,7 +45,7 @@ namespace SR_ANIMATIONS_NS {
         T getInterpolatedValue(const T& first, const T& second, float delta) const { assert(false); }
 
     private:
-        const Skeleton m_skeleton;
+        const AssimpSkeleton m_skeleton;
         std::vector<BoneAnimationChannel> m_bonesAnimationChannels;
 
         mutable AnimationPose m_currentPose;

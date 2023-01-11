@@ -1,0 +1,26 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+ 
+uniform vec4 color;
+uniform sampler2D diffuse;
+
+void fragment() {
+	COLOR = texture(diffuse, UV) * color;
+
+    if (COLOR.a == 0) {
+        discard;
+    }
+
+    COLOR.a = 0.75;
+}
+
+void vertex() {
+
+}

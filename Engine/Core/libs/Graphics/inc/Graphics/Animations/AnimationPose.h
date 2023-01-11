@@ -20,7 +20,7 @@ namespace SR_ANIMATIONS_NS {
 
     class AnimationPose {
     public:
-        AnimationPose(const Skeleton* skeleton,
+        AnimationPose(const AssimpSkeleton* skeleton,
                       const std::vector <BonePose> &bonesPoses)
                 : m_skeleton(skeleton),
                   bonesLocalPoses(bonesPoses),
@@ -50,7 +50,7 @@ namespace SR_ANIMATIONS_NS {
         std::vector <BonePose> bonesLocalPoses;
 
     private:
-        const Skeleton* m_skeleton;
+        const AssimpSkeleton* m_skeleton;
         mutable AnimationMatrixPalette m_matrixPalette;
     };
 }

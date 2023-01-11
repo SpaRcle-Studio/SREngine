@@ -34,7 +34,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD virtual Path InitializeResourcePath() const;
 
-        bool TryExecute(const SR_HTYPES_NS::Function<bool()>& fun);
+        bool TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def);
         bool Execute(const SR_HTYPES_NS::Function<bool()>& fun);
 
         SR_NODISCARD virtual uint64_t GetFileHash() const;

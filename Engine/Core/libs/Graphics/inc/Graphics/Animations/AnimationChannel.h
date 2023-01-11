@@ -29,9 +29,13 @@ namespace SR_ANIMATIONS_NS {
                 pChannel->AddKey(time, pKey->Copy(pChannel));
             }
 
-            pChannel->m_entity = m_entity;
+            pChannel->m_hashName = m_hashName;
 
             return pChannel;
+        }
+
+        void SetName(const std::string_view& name) {
+            m_hashName = SR_HASH_STR_VIEW(name);
         }
 
         void AddKey(double_t timePoint, AnimationKey* pKey) {
@@ -39,18 +43,13 @@ namespace SR_ANIMATIONS_NS {
         }
 
     public:
-        SR_NODISCARD SR_UTILS_NS::EntityRef& GetEntityRef();
         SR_NODISCARD const Keys& GetKeys() const { return m_keys; }
 
     private:
-        SR_UTILS_NS::EntityRef m_entity;
+        uint64_t m_hashName = 0;
         Keys m_keys;
 
     };
-
-    SR_UTILS_NS::EntityRef &AnimationChannel::GetEntityRef() {
-        return m_entity;
-    }
 }
 
 #endif //SRENGINE_ANIMATIONCHANNEL_H
