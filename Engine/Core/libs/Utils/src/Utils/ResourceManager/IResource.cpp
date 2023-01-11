@@ -298,7 +298,7 @@ namespace SR_UTILS_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    bool IResource::TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) {
+    bool IResource::TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const {
         if (m_mutex.try_lock()) {
             const bool result = fun();
             m_mutex.unlock();
@@ -308,7 +308,7 @@ namespace SR_UTILS_NS {
         return def;
     }
 
-    bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) {
+    bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) const {
         SR_LOCK_GUARD
         return fun();
     }
@@ -319,6 +319,11 @@ namespace SR_UTILS_NS {
         SRAssert(m_isDestroyed && m_isRegistered);
 
         m_isDestroyed = false;
+
+        UpdateResourceLifeTime();
+    }
+
+    void IResource::UpdateResourceLifeTime() {
         m_lifetime = ResourceManager::ResourceLifeTime;
     }
 }

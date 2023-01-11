@@ -9,7 +9,7 @@
 
 namespace SR_ANIMATIONS_NS {
     class Skeleton : public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1000);
+        SR_ENTITY_SET_VERSION(1001);
         SR_INITIALIZE_COMPONENT(Skeleton);
         using Super = SR_UTILS_NS::Component;
     public:
@@ -23,6 +23,11 @@ namespace SR_ANIMATIONS_NS {
 
         void OnLoaded() override;
         void OnDestroy() override;
+
+        bool ReCalculateSkeleton();
+
+        Bone* AddBone(Bone* pParent, const std::string& name, bool recalculate);
+        SR_NODISCARD Bone* GetRootBone() const noexcept { return m_rootBone; }
 
     private:
         std::vector<Bone*> m_bonesById;

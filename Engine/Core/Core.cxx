@@ -4,6 +4,8 @@
 
 #include <Utils/macros.h>
 
+#include "src/Core/Common/Importers.cpp"
+
 #include "src/Core/GUI/ComponentDrawer.cpp"
 #include "src/Core/GUI/EditorGUI.cpp"
 #include "src/Core/GUI/GUISystem.cpp"

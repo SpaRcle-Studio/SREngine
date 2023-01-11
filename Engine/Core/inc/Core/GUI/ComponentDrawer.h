@@ -13,6 +13,7 @@ namespace SR_SCRIPTING_NS {
 
 namespace SR_ANIMATIONS_NS {
     class Animator;
+    class Skeleton;
 }
 
 namespace SR_GRAPH_NS {
@@ -55,6 +56,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_GRAPH_NS::UI::Canvas*& canvas, EditorGUI* context, int32_t index);
     void DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_ANIMATIONS_NS::Animator*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_ANIMATIONS_NS::Skeleton*& pComponent, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);

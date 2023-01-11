@@ -22,26 +22,31 @@ namespace SR_HTYPES_NS {
     RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
         SR_GLOBAL_LOCK
 
-        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+        RawMesh* pRawMesh = nullptr;
 
-        if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
-            return pResource;
-        }
+        ResourceManager::Instance().Execute([&]() {
+            Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-        auto pMesh = new RawMesh();
+            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
+                pRawMesh = pResource;
+                return;
+            }
 
-        pMesh->SetId(path, false /** auto register */);
+            pRawMesh = new RawMesh();
+            pRawMesh->SetId(path, false /** auto register */);
 
-        if (!pMesh->Reload()) {
-            SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
-            delete pMesh;
-            return nullptr;
-        }
+            if (!pRawMesh->Reload()) {
+                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
+                delete pRawMesh;
+                pRawMesh = nullptr;
+                return;
+            }
 
-        /// отложенная ручная регистрация
-        ResourceManager::Instance().RegisterResource(pMesh);
+            /// отложенная ручная регистрация
+            ResourceManager::Instance().RegisterResource(pRawMesh);
+        });
 
-        return pMesh;
+        return pRawMesh;
     }
 
     bool RawMesh::Unload() {
@@ -94,18 +99,6 @@ namespace SR_HTYPES_NS {
         }
 
         return !hasErrors;
-    }
-
-    bool RawMesh::Access(const RawMesh::CallbackFn &fn) const {
-        SR_LOCK_GUARD
-
-        if (m_scene && IsLoaded()) {
-            return fn(m_scene);
-        }
-
-        SRHalt("RawMesh::Access() : resource isn't loaded!");
-
-        return false;
     }
 
     uint32_t RawMesh::GetMeshesCount() const {

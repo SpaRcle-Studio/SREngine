@@ -12,10 +12,58 @@
 
 namespace SR_ANIMATIONS_NS {
     struct Bone : public SR_UTILS_NS::NonCopyable {
-        uint64_t hashName;
+    public:
+        ~Bone() override {
+            for (auto&& pBone : bones) {
+                delete pBone;
+            }
+        }
+
+        SR_NODISCARD Bone* CloneRoot() const noexcept {
+            Bone* pRootBone = new Bone();
+
+            pRootBone->hashName = hashName;
+            pRootBone->name = name;
+            pRootBone->gameObject = gameObject;
+            pRootBone->pRoot = pRootBone;
+            pRootBone->pParent = nullptr;
+
+            pRootBone->bones.reserve(bones.size());
+
+            for (auto&& pSubBone : bones) {
+                pRootBone->bones.emplace_back(pSubBone->Clone(pRootBone));
+            }
+
+            return pRootBone;
+        }
+
+    private:
+        SR_NODISCARD Bone* Clone(Bone* pParentBone) const noexcept {
+            Bone* pBone = new Bone();
+
+            pBone->hashName = hashName;
+            pBone->name = name;
+            pBone->gameObject = gameObject;
+            pBone->pParent = pParentBone;
+            pBone->pRoot = pParentBone->pRoot;
+
+            pBone->bones.reserve(bones.size());
+
+            for (auto&& pSubBone : bones) {
+                pBone->bones.emplace_back(pSubBone->Clone(pBone));
+            }
+
+            return pBone;
+        }
+
+    public:
+        uint64_t hashName = 0;
         std::string name;
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject> gameObject;
         std::vector<Bone*> bones;
+        Bone* pParent = nullptr;
+        Bone* pRoot = nullptr;
+
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

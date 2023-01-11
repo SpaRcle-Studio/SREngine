@@ -8,6 +8,7 @@
 #include <Core/Settings/EditorSettings.h>
 
 #include <Utils/Types/DataStorage.h>
+#include <Utils/Types/RawMesh.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
 #include <Utils/Locale/Encoding.h>
@@ -19,6 +20,8 @@
 #include <Physics/2D/Rigidbody2D.h>
 #include <Physics/3D/Rigidbody3D.h>
 
+#include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/Animator.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
@@ -31,6 +34,7 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/Text.h>
+#include <assimp/include/assimp/scene.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
@@ -515,5 +519,48 @@ namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Animator *&pComponent, EditorGUI *context, int32_t index) {
 
+    }
+
+    void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
+        if (Graphics::GUI::Button("Import", index)) {
+            auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,blend" } });
+
+            if (!path.Exists()) {
+                return;
+            }
+
+            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path);
+            if (!pRawMesh) {
+                return;
+            }
+
+            pRawMesh->Execute([&]() -> bool {
+                return Importers::ImportSkeletonFromRawMesh(pRawMesh, pComponent);
+            });
+        }
+
+        const ImGuiTreeNodeFlags nodeFlagsWithChild = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
+        const ImGuiTreeNodeFlags nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+
+        const SR_HTYPES_NS::Function<void(SR_ANIMATIONS_NS::Bone*)> processBone = [&](SR_ANIMATIONS_NS::Bone* pBone) {
+            const ImGuiTreeNodeFlags flags = !pBone->bones.empty() ? nodeFlagsWithChild : nodeFlagsWithoutChild;
+
+            const bool isOpen = ImGui::TreeNodeEx((void*)(intptr_t)pBone, flags, "%s", pBone->name.c_str());
+
+            if (!isOpen || pBone->bones.empty()) {
+                return;
+            }
+
+            for (auto &&pSubBone : pBone->bones) {
+                processBone(pSubBone);
+            }
+
+            ImGui::TreePop();
+        };
+
+        if (pComponent->GetRootBone()) {
+            processBone(pComponent->GetRootBone());
+        }
     }
 }

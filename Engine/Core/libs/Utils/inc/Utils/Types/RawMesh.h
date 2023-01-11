@@ -21,7 +21,6 @@ namespace SR_WORLD_NS {
 
 namespace SR_UTILS_NS::Types {
     class SR_DLL_EXPORT RawMesh : public IResource {
-        using CallbackFn = std::function<bool(const aiScene*)>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
 
     private:
@@ -32,7 +31,6 @@ namespace SR_UTILS_NS::Types {
         static RawMesh *Load(const SR_UTILS_NS::Path &path);
 
     public:
-        bool Access(const CallbackFn& fn) const;
         uint32_t GetMeshesCount() const;
         std::string GetGeometryName(uint32_t id) const;
 
@@ -46,6 +44,8 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
         SR_NODISCARD bool IsAllowRevive() const override { return true; }
+
+        SR_NODISCARD const aiScene* GetAssimpScene() const noexcept { return m_scene; }
 
     protected:
         bool Reload() override;

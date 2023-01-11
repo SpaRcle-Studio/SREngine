@@ -34,8 +34,8 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD virtual Path InitializeResourcePath() const;
 
-        bool TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def);
-        bool Execute(const SR_HTYPES_NS::Function<bool()>& fun);
+        bool TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const;
+        bool Execute(const SR_HTYPES_NS::Function<bool()>& fun) const;
 
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
@@ -101,6 +101,8 @@ namespace SR_UTILS_NS {
             }
             return false;
         }
+
+        void UpdateResourceLifeTime();
 
         void AddDependency(IResource* pResource);
         void RemoveDependency(IResource* pResource);

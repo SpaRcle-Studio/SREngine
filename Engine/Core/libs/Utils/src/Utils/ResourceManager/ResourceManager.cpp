@@ -252,6 +252,8 @@ namespace SR_UTILS_NS {
         auto&& [name, resourcesGroup] = *m_resources.find(hashTypeName);
 
         if (auto&& pResource = resourcesGroup.Find(SR_HASH_STR(id))) {
+            /// раз ресурс ищем, значит он все еще может быть нужен.
+            pResource->UpdateResourceLifeTime();
             return pResource;
         }
 
