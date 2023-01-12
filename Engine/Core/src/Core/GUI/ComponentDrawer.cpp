@@ -522,6 +522,11 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
+        bool debug = pComponent->IsDebugEnabled();
+        if (Graphics::GUI::CheckBox("Debug", debug, index)) {
+            pComponent->SetDebugEnabled(debug);
+        }
+
         if (Graphics::GUI::Button("Import", index)) {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,blend" } });

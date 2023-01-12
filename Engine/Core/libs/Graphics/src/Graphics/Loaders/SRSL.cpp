@@ -547,8 +547,8 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
         case ShaderType::Custom:
         case ShaderType::TextUI:
         case ShaderType::Text:
-            break;
         case ShaderType::Line:
+            break;
         case ShaderType::PostProcessing:
             source += "\tVERTEX_INDEX = float(gl_VertexIndex);\n";
             break;

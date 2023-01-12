@@ -6,6 +6,7 @@
 #define GAMEENGINE_BONE_H
 
 #include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
 
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Render/Render.h>
@@ -35,6 +36,32 @@ namespace SR_ANIMATIONS_NS {
             }
 
             return pRootBone;
+        }
+
+        bool Initialize() {
+            if (!pRoot->gameObject) {
+                SRHalt0();
+                return false;
+            }
+
+            std::vector<uint64_t> names = { hashName };
+
+            Bone* pParenBone = pParent;
+            /// рутовую ноду в расчет не берем
+            while (pParenBone && pParenBone->pParent) {
+                names.emplace_back(pParenBone->hashName);
+                pParenBone = pParenBone->pParent;
+            }
+
+            gameObject = pRoot->gameObject;
+
+            for (int32_t i = names.size() - 1; i > 0; i--) {
+                if (!(gameObject = gameObject->Find(names[i]))) {
+                    break;
+                }
+            }
+
+            return gameObject.Valid();
         }
 
     private:

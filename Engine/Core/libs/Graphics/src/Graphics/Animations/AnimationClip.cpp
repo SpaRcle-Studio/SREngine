@@ -74,48 +74,68 @@ namespace SR_ANIMATIONS_NS {
         for (uint16_t channelIndex = 0; channelIndex < pAnimation->mNumChannels; ++channelIndex) {
             auto&& pChannel = pAnimation->mChannels[channelIndex];
 
-            auto&& pTranslationChannel = new AnimationChannel();
-            auto&& pRotationChannel = new AnimationChannel();
-            auto&& pScalingChannel = new AnimationChannel();
+            /// --------------------------------------------------------------------------------------------------------
 
-            pTranslationChannel->SetName(pChannel->mNodeName.C_Str());
+            if (pChannel->mNumPositionKeys > 0) {
+                auto&& pTranslationChannel = new AnimationChannel();
 
-            for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
-                auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
+                pTranslationChannel->SetName(pChannel->mNodeName.C_Str());
 
-                pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond, new TranslationKey(pTranslationChannel, SR_MATH_NS::FVector3(
-                        pPositionKey.mValue.z / 100.f,
-                        pPositionKey.mValue.y / 100.f,
-                        pPositionKey.mValue.x / 100.f
-                )));
+                for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
+                    auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
+
+                    pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond, new TranslationKey(pTranslationChannel, SR_MATH_NS::FVector3(
+                            pPositionKey.mValue.z / 100.f,
+                            pPositionKey.mValue.y / 100.f,
+                            pPositionKey.mValue.x / 100.f
+                    )));
+                }
+
+                m_channels.emplace_back(pTranslationChannel);
             }
 
-            for (uint16_t rotationKeyIndex = 0; rotationKeyIndex < pChannel->mNumRotationKeys; ++rotationKeyIndex) {
-                auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
+            /// --------------------------------------------------------------------------------------------------------
 
-                auto&& q = SR_MATH_NS::Quaternion(
-                        pRotationKey.mValue.y,
-                        pRotationKey.mValue.x,
-                        pRotationKey.mValue.z,
-                        pRotationKey.mValue.w
-                );
+            if (pChannel->mNumScalingKeys > 0) {
+                auto&& pRotationChannel = new AnimationChannel();
 
-                pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond, new RotationKey(pRotationChannel, q));
+                pRotationChannel->SetName(pChannel->mNodeName.C_Str());
+
+                for (uint16_t rotationKeyIndex = 0; rotationKeyIndex < pChannel->mNumRotationKeys; ++rotationKeyIndex) {
+                    auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
+
+                    auto&& q = SR_MATH_NS::Quaternion(
+                            pRotationKey.mValue.y,
+                            pRotationKey.mValue.x,
+                            pRotationKey.mValue.z,
+                            pRotationKey.mValue.w
+                    );
+
+                    pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond, new RotationKey(pRotationChannel, q));
+                }
+
+                m_channels.emplace_back(pRotationChannel);
             }
 
-            for (uint16_t scalingKeyIndex = 0; scalingKeyIndex < pChannel->mNumScalingKeys; ++scalingKeyIndex) {
-                auto&& pScalingKey = pChannel->mScalingKeys[scalingKeyIndex];
+            /// --------------------------------------------------------------------------------------------------------
 
-                pScalingChannel->AddKey(pScalingKey.mTime / pAnimation->mTicksPerSecond, new ScalingKey(pScalingChannel, SR_MATH_NS::FVector3(
-                        pScalingKey.mValue.x / 100.f,
-                        pScalingKey.mValue.y / 100.f,
-                        pScalingKey.mValue.z / 100.f
-                )));
+            if (pChannel->mNumScalingKeys > 0) {
+                auto&& pScalingChannel = new AnimationChannel();
+
+                pScalingChannel->SetName(pChannel->mNodeName.C_Str());
+
+                for (uint16_t scalingKeyIndex = 0; scalingKeyIndex < pChannel->mNumScalingKeys; ++scalingKeyIndex) {
+                    auto&& pScalingKey = pChannel->mScalingKeys[scalingKeyIndex];
+
+                    pScalingChannel->AddKey(pScalingKey.mTime / pAnimation->mTicksPerSecond, new ScalingKey(pScalingChannel, SR_MATH_NS::FVector3(
+                            pScalingKey.mValue.x / 1.f,
+                            pScalingKey.mValue.y / 1.f,
+                            pScalingKey.mValue.z / 1.f
+                    )));
+                }
+
+                m_channels.emplace_back(pScalingChannel);
             }
-
-            m_channels.emplace_back(pTranslationChannel);
-            m_channels.emplace_back(pRotationChannel);
-            m_channels.emplace_back(pScalingChannel);
         }
     }
 }

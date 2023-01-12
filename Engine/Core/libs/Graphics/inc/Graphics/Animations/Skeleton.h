@@ -21,6 +21,9 @@ namespace SR_ANIMATIONS_NS {
         SR_NODISCARD Component* CopyComponent() const override;
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
+        void Update(float_t dt) override;
+
+        void OnAttached() override;
         void OnLoaded() override;
         void OnDestroy() override;
 
@@ -29,7 +32,20 @@ namespace SR_ANIMATIONS_NS {
         Bone* AddBone(Bone* pParent, const std::string& name, bool recalculate);
         SR_NODISCARD Bone* GetRootBone() const noexcept { return m_rootBone; }
 
+        SR_NODISCARD Bone* GetBone(uint64_t hashName);
+        SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; }
+        SR_NODISCARD void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
+
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
+
     private:
+        void UpdateDebug();
+        void DisableDebug();
+
+    private:
+        bool m_debugEnabled = true;
+        ska::flat_hash_map<Bone*, uint64_t> m_debugLines;
+
         std::vector<Bone*> m_bonesById;
         ska::flat_hash_map<uint64_t, Bone*> m_bonesByName;
 

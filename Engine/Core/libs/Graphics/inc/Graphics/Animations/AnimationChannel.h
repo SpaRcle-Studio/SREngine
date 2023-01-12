@@ -36,6 +36,9 @@ namespace SR_ANIMATIONS_NS {
 
         void SetName(const std::string_view& name) {
             m_hashName = SR_HASH_STR_VIEW(name);
+            if (m_hashName == 0) {
+                SRHalt0();
+            }
         }
 
         void AddKey(double_t timePoint, AnimationKey* pKey) {
@@ -44,6 +47,7 @@ namespace SR_ANIMATIONS_NS {
 
     public:
         SR_NODISCARD const Keys& GetKeys() const { return m_keys; }
+        SR_NODISCARD uint64_t GetGameObjectHashName() const noexcept { return m_hashName; }
 
     private:
         uint64_t m_hashName = 0;

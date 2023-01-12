@@ -32,14 +32,19 @@ namespace SR_ANIMATIONS_NS {
         void OnAttached() override;
         void OnDestroy() override;
 
+        void Start() override;
+
     private:
         void UpdateInternal(float_t dt);
-        uint32_t UpdateChannel(AnimationChannel* pChannel, SR_UTILS_NS::GameObject* pRoot);
+        uint32_t UpdateChannel(AnimationChannel* pChannel);
 
     private:
         bool m_sync = false;
 
         std::map<AnimationChannel*, uint32_t> m_playState;
+
+        SR_UTILS_NS::GameObject* m_gameObject = nullptr;
+        Skeleton* m_skeleton = nullptr;
 
         uint32_t m_maxKeyFrame = 0;
         float_t m_time = 0.f;

@@ -111,7 +111,7 @@ namespace SR_UTILS_NS {
 
     void GameObject::SetName(std::string name) {
         m_name = std::move(name);
-        m_hashName = SR_UTILS_NS::HashCombine(m_name);
+        m_hashName = SR_HASH_STR(m_name);
 
         if (m_scene) {
             m_scene->OnChanged();

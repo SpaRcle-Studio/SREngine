@@ -5,11 +5,13 @@
 #include <Graphics/Animations/Skeleton.h>
 
 #include <Utils/Types/RawMesh.h>
+#include <Utils/DebugDraw.h>
 
 namespace SR_ANIMATIONS_NS {
     SR_REGISTER_COMPONENT(Skeleton);
 
     Skeleton::~Skeleton() {
+        DisableDebug();
         m_bonesById.clear();
         m_bonesByName.clear();
         SR_SAFE_DELETE_PTR(m_rootBone);
@@ -145,5 +147,82 @@ namespace SR_ANIMATIONS_NS {
         }
 
         return true;
+    }
+
+    Bone* Skeleton::GetBone(uint64_t hashName) {
+        auto&& pBoneIt = m_bonesByName.find(hashName);
+        if (pBoneIt == m_bonesByName.end()) {
+            return nullptr;
+        }
+
+        if (!pBoneIt->second->gameObject && !pBoneIt->second->Initialize()) {
+            SR_WARN("Skeleton::GetBone() : failed to find bone game object!\n\tName: " + pBoneIt->second->name);
+        }
+
+        return pBoneIt->second;
+    }
+
+    void Skeleton::OnAttached() {
+        if (m_rootBone) {
+            m_rootBone->gameObject = GetGameObject();
+        }
+
+        Super::OnAttached();
+    }
+
+    void Skeleton::Update(float_t dt) {
+        if (m_debugEnabled) {
+            UpdateDebug();
+        }
+        else {
+            DisableDebug();
+        }
+
+        Super::Update(dt);
+    }
+
+    void Skeleton::DisableDebug() {
+        if (m_debugLines.empty()) {
+            return;
+        }
+
+        for (auto&& [pBone, debugId] : m_debugLines) {
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(debugId);
+        }
+
+        m_debugLines.clear();
+    }
+
+    void Skeleton::UpdateDebug() {
+        if (!m_rootBone) {
+            DisableDebug();
+            return;
+        }
+
+        for (auto&& pBone : m_bonesById) {
+            if (!pBone->pParent) {
+                continue;
+            }
+
+            if (m_debugLines.count(pBone) == 0) {
+                m_debugLines.insert(std::make_pair(pBone, SR_ID_INVALID));
+            }
+
+            auto&& debugId = m_debugLines[pBone];
+
+            auto&& fromGameObject = GetBone(pBone->hashName);
+            auto&& toGameObject = GetBone(pBone->pParent->hashName);
+
+            if (!fromGameObject->gameObject || !toGameObject->gameObject) {
+                continue;
+            }
+
+            debugId = SR_UTILS_NS::DebugDraw::Instance().DrawLine(
+                    debugId,
+                    fromGameObject->gameObject->GetTransform()->GetMatrix().GetTranslate(),
+                    toGameObject->gameObject->GetTransform()->GetMatrix().GetTranslate(),
+                    SR_MATH_NS::FColor(38, 37, 45, 255)
+            );
+        }
     }
 }

@@ -43,6 +43,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::Update(float_t dt) {
+        m_skeleton = GetParent()->GetComponent<Skeleton>();
+
         if (!m_sync) {
             UpdateInternal(dt / 1000.f);
         }
@@ -51,15 +53,14 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::UpdateInternal(float_t dt) {
-        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(GetParent());
-        if (!pParent) {
+        if (!m_gameObject) {
             return;
         }
 
         uint32_t maxKeyFrame = 0;
 
         for (auto&& pChannel : m_animationClip->GetChannels()) {
-            const uint32_t keyFrame = UpdateChannel(pChannel, pParent);
+            const uint32_t keyFrame = UpdateChannel(pChannel);
             maxKeyFrame = SR_MAX(maxKeyFrame, keyFrame);
         }
 
@@ -72,7 +73,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::OnAttached() {
-        m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
+        m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
+        //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
 
         for (auto&& pChannel : m_animationClip->GetChannels()) {
             m_maxKeyFrame = SR_MAX(m_maxKeyFrame, pChannel->GetKeys().size());
@@ -81,9 +83,27 @@ namespace SR_ANIMATIONS_NS {
         Super::OnAttached();
     }
 
-    uint32_t Animator::UpdateChannel(AnimationChannel* pChannel, SR_UTILS_NS::GameObject* pRoot) {
+    void Animator::Start() {
+        m_gameObject = GetGameObject().Get();
+        Super::Start();
+    }
+
+    uint32_t Animator::UpdateChannel(AnimationChannel* pChannel) {
         auto&& keys = pChannel->GetKeys();
         auto&& keyIndex = m_playState[pChannel];
+
+        SR_UTILS_NS::GameObject* pTarget = m_gameObject;
+
+        if (m_skeleton) {
+            auto&& pBone = m_skeleton->GetBone(pChannel->GetGameObjectHashName());
+            if (pBone && pBone->gameObject) {
+                pTarget = pBone->gameObject.Get();
+            }
+        }
+
+        if (!pTarget) {
+            return keyIndex;
+        }
 
     skipKey:
         if (keyIndex == keys.size()) {
@@ -94,10 +114,10 @@ namespace SR_ANIMATIONS_NS {
 
         if (m_time > time) {
             if (keyIndex == 0) {
-                pKey->Update(0.f, nullptr, pRoot);
+                pKey->Update(0.f, nullptr, pTarget);
             }
             else {
-                pKey->Update(1.f, keys.at(keyIndex - 1).second, pRoot);
+                pKey->Update(1.f, keys.at(keyIndex - 1).second, pTarget);
             }
 
             ++keyIndex;
@@ -106,7 +126,7 @@ namespace SR_ANIMATIONS_NS {
         }
 
         if (keyIndex == 0) {
-            pKey->Update(0.f, nullptr, pRoot);
+            pKey->Update(0.f, nullptr, pTarget);
         }
         else {
             auto&& [prevTime, prevKey] = keys.at(keyIndex - 1);
@@ -115,7 +135,7 @@ namespace SR_ANIMATIONS_NS {
             const double_t keyTime = time - prevTime;
             const double_t progress = currentTime / keyTime;
 
-            pKey->Update(progress, prevKey, pRoot);
+            pKey->Update(progress, prevKey, pTarget);
         }
 
         return keyIndex;
