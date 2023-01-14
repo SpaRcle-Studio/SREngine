@@ -4,7 +4,7 @@
 
 #include <Graphics/GUI/Pin.h>
 
-namespace SR_GRAPH_NS {
+namespace SR_GRAPH_NS::GUI {
     Pin::Pin()
         : Pin(std::string(), PinType::None, PinKind::None)
     { }
@@ -25,59 +25,7 @@ namespace SR_GRAPH_NS {
         : m_name(name)
         , m_type(type)
         , m_kind(kind)
-    {
-        //m_id = NodeManager::Instance().AllocUniqueId(this);
-    }
-
-    Pin::~Pin() {
-        if (Valid()) {
-          //  NodeManager::Instance().FreeUniqueId(m_id.Get());
-            SetNode(nullptr);
-        }
-    }
-
-    void Pin::Draw(float_t maxPinWidth) const {
-        //ax::NodeEditor::BeginPin(m_id, m_kind == PinKind::Input ? ax::NodeEditor::PinKind::Input : ax::NodeEditor::PinKind::Output);
-
-        ImGui::SetWindowFontScale(1.5);
-
-        const auto size = ImVec2(20, 20);
-        const bool connected = false;
-        const ImColor color = GetIconColor(m_type);
-        const auto alpha = 255;
-
-        //ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
-
-        switch (m_kind) {
-            case PinKind::Output:
-                //ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
-
-                ImGui::SetCursorPosX(
-                        ImGui::GetCursorPosX()
-                        + (maxPinWidth - ImGui::CalcTextSize(m_name.c_str()).x)
-                        + 2 * ImGui::GetStyle().ItemSpacing.x);
-
-                ImGui::TextUnformatted(m_name.c_str());
-
-                ImGui::SameLine();
-                Icon(size, GetIconType(m_type), connected, color, ImColor(32, 32, 32, alpha));
-                break;
-            case PinKind::Input:
-                Icon(size, GetIconType(m_type), connected, color, ImColor(32, 32, 32, alpha));
-
-                ImGui::SameLine();
-
-                ImGui::TextUnformatted(m_name.c_str());
-
-                //ax::NodeEditor::PinPivotAlignment(ImVec2(1.f / ImGui::GetItemRectSize().x, 0.5f));
-                break;
-            case PinKind::None:
-            default:
-            SRAssert(false);
-        }
-
-        //ax::NodeEditor::EndPin();
-    }
+    { }
 
     ImColor Pin::GetIconColor(const PinType &type) {
         switch (type) {
@@ -113,11 +61,6 @@ namespace SR_GRAPH_NS {
             SRAssertOnce(false);
                 return IconType::Square;
         }
-    }
-
-    bool Pin::Valid() const {
-        //return m_id != ax::NodeEditor::PinId::Invalid;
-        return false;
     }
 
     Pin* Pin::Copy() const {
@@ -163,7 +106,44 @@ namespace SR_GRAPH_NS {
         m_links.erase(link);
     }
 
-    bool Pin::IsLinked(Pin *pin) const {
+    bool Pin::IsLinked(Pin* pPin) const {
+        for (auto&& pLink : m_links) {
+            if (pLink->IsLinked(pPin)) {
+                return true;
+            }
+        }
+
         return false;
+    }
+
+    bool Pin::IsLinked() const {
+        return !m_links.empty();
+    }
+
+    void Pin::Begin(PinKind kind) const {
+        switch (kind) {
+            case PinKind::None:
+                break;
+            case PinKind::Output:
+                ax::NodeEditor::BeginPin(GetId(), ax::NodeEditor::PinKind::Output);
+                break;
+            case PinKind::Input:
+                ax::NodeEditor::BeginPin(GetId(), ax::NodeEditor::PinKind::Input);
+                break;
+        }
+    }
+
+    void Pin::End() const {
+        ax::NodeEditor::EndPin();
+    }
+
+    void Pin::DrawPinIcon(bool connected, uint32_t alpha) {
+        IconType iconType = GetIconType(GetType());
+        ImColor color = GetIconColor(GetType());
+        color.Value.w = alpha / 255.0f;
+
+        const float_t pinIconSize = 24.f;
+
+        SR_GRAPH_NS::GUI::Icon(ImVec2(pinIconSize, pinIconSize), iconType, connected, color, ImColor(32, 32, 32, alpha));
     }
 }

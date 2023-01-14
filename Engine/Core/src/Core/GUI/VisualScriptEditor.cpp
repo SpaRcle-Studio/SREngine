@@ -81,13 +81,13 @@ void Framework::Core::GUI::VisualScriptEditor::Draw() {
 
     //ax::NodeEditor::Begin("Evo Visual Script");
 
-    for (const auto& [id, node] : m_nodes)
-        node->Draw();
+   //for (const auto& [id, node] : m_nodes)
+   //    node->Draw();
 
-    for (const auto& [id, link] : m_links)
-        link->Draw();
+   //for (const auto& [id, link] : m_links)
+   //    link->Draw();
 
-    using namespace Framework::Graphics::GUI;
+   //using namespace Framework::Graphics::GUI;
 
     /*if (ax::NodeEditor::BeginCreate()) {
         ax::NodeEditor::PinId inputPinId, outputPinId;

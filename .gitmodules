@@ -12,7 +12,7 @@
 	url = https://github.com/Monika0000/EvoVulkan
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui"]
 	path = Engine/Core/libs/Graphics/libs/imgui
-	url = https://github.com/ocornut/imgui
+	url = https://github.com/Monika0000/imgui
 [submodule "Engine/Core/libs/Utils/libs/assimp"]
 	path = Engine/Core/libs/Utils/libs/assimp
 	url = https://github.com/Monika0000/assimp
@@ -46,3 +46,5 @@
 [submodule "Engine/Core/libs/Physics/libs/box2d"]
 	path = Engine/Core/libs/Physics/libs/box2d
 	url = https://github.com/Monika0000/box2d
+[submodule "EngineCorelibsGraphicslibs"]
+	url = https://github.com/Monika0000/imgui

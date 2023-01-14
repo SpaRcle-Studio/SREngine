@@ -27,6 +27,9 @@
 #include "../Graphics/src/Graphics/GUI/Editor/Theme.cpp"
 #include "../Graphics/src/Graphics/GUI/WidgetManager.cpp"
 #include "../Graphics/src/Graphics/GUI/Widget.cpp"
+#include "../Graphics/src/Graphics/GUI/NodeWidget.cpp"
+#include "../Graphics/src/Graphics/GUI/ImNodeEditorUtils.cpp"
+#include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
 
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/Light.cpp"

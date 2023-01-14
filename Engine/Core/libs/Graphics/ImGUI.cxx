@@ -9,6 +9,10 @@
 #include <imgui/imgui_draw.cpp>
 #include <imgui/imgui_widgets.cpp>
 
+#ifdef IMGUI_HAS_STACK_LAYOUT
+    #include <imgui/imgui_stacklayout.cpp>
+#endif
+
 #include <imgui/misc/cpp/imgui_stdlib.cpp>
 
 #ifdef SR_WIN32

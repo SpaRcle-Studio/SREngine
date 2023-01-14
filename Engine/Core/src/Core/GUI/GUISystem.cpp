@@ -18,6 +18,7 @@
 #include <Graphics/GUI/Editor/MessageBox.h>
 
 #include <imgui_internal.h> /// взято с #5539 https://github.com/ocornut/imgui/issues/5539
+#include <Core/GUI/AnimatorEditor.h>
 
 namespace Framework::Core {
     inline static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
@@ -35,7 +36,7 @@ namespace Framework::Core {
 #define SR_RIGHT_BUTTON(name, label, _true, _false) {                         \
         static float generated_##name##ButtonWidth = 100.0f;                  \
         generatedPos += generated_##name##ButtonWidth + generatedItemSpacing; \
-        ImGui::SameLine(ImGui::GetWindowWidth() - generatedPos);              \
+        /*ImGui::SameLine(ImGui::GetWindowWidth() - generatedPos);*/              \
         if (ImGui::SmallButton(label)) { _true } else { _false }              \
         generated_##name##ButtonWidth = ImGui::GetItemRectSize().x;           \
     }                                                                         \
@@ -87,31 +88,51 @@ bool GUISystem::BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow) {
             drag = true;
         }
 
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+
+        if (ImGui::SmallButton("×")) {
+            pWindow->Close();
+        }
+
+        if (pWindow->GetState() == Graphics::WindowState::Default && ImGui::SmallButton("[ ]")) {
+            pWindow->Maximize();
+        }
+
+        if (pWindow->GetState() == Graphics::WindowState::Maximized && ImGui::SmallButton("[=]")) {
+            pWindow->Restore();
+        }
+
+        if (ImGui::SmallButton("_")) {
+            pWindow->Collapse();
+        }
+
+        ImGui::PopStyleVar();
+
+        ImGui::Text(" | ");
+
         ImGui::Text("%s", winName);
+
         ImGui::Text(" | ");
 
         BeginMenuBar();
         EndMenuBar();
 
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
-        SR_BEGIN_RIGHT_ALIGNMENT()
-            SR_RIGHT_BUTTON(close, "×", {
-                pWindow->Close();
-            }, {})
+        //SR_BEGIN_RIGHT_ALIGNMENT()
+        //    SR_RIGHT_BUTTON(close, "×", {
+        //        pWindow->Close();
+        //    }, {})
 
-            if (pWindow->GetState() == Graphics::WindowState::Default) SR_RIGHT_BUTTON(maximize, "[ ]",
-                                                                                       { pWindow->Maximize(); }, {})
-            else if (pWindow->GetState() == Graphics::WindowState::Maximized) SR_RIGHT_BUTTON(restore, "[=]",
-                                                                                              { pWindow->Restore(); },
-                                                                                              {})
+        //    if (pWindow->GetState() == Graphics::WindowState::Default) SR_RIGHT_BUTTON(maximize, "[ ]",
+        //                                                                               { pWindow->Maximize(); }, {})
+        //    else if (pWindow->GetState() == Graphics::WindowState::Maximized) SR_RIGHT_BUTTON(restore, "[=]",
+        //                                                                                      { pWindow->Restore(); },
+        //                                                                                      { })
 
-            SR_RIGHT_BUTTON(minimize, "_", {
-                pWindow->Collapse();
-            }, {})
-        SR_END_RIGHT_ALIGNMENT()
-
-        ImGui::PopStyleVar();
+        //    SR_RIGHT_BUTTON(minimize, "_", {
+        //        pWindow->Collapse();
+        //    }, {})
+        //SR_END_RIGHT_ALIGNMENT()
 
         {
             ImGui::EndMenuBar();
@@ -622,35 +643,39 @@ bool GUISystem::BeginMenuBar() {
 
     if (ImGui::BeginMenu("Window")) {
         if (ImGui::MenuItem("Assets")) {
-            Engine::Instance().GetEditor()->GetWindow<FileBrowser>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<FileBrowser>()->Open();
         }
 
         if (ImGui::MenuItem("Hierarchy")) {
-            Engine::Instance().GetEditor()->GetWindow<Hierarchy>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<Hierarchy>()->Open();
         }
 
         if (ImGui::MenuItem("Inspector")) {
-            Engine::Instance().GetEditor()->GetWindow<Inspector>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<Inspector>()->Open();
         }
 
         if (ImGui::MenuItem("Scene")) {
-            Engine::Instance().GetEditor()->GetWindow<SceneViewer>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<SceneViewer>()->Open();
         }
 
-        if (ImGui::MenuItem("Visual Script")) {
-            Engine::Instance().GetEditor()->GetWindow<VisualScriptEditor>()->Open();
+        //if (ImGui::MenuItem("Visual Script")) {
+        //    Engine::Instance().GetEditor()->GetWidget<VisualScriptEditor>()->Open();
+        //}
+
+        if (ImGui::MenuItem("Animator")) {
+            Engine::Instance().GetEditor()->GetWidget<AnimatorEditor>()->Open();
         }
 
         if (ImGui::MenuItem("World edit")) {
-            Engine::Instance().GetEditor()->GetWindow<WorldEdit>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<WorldEdit>()->Open();
         }
 
         if (ImGui::MenuItem("Settings")) {
-            Engine::Instance().GetEditor()->GetWindow<EngineSettings>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<EngineSettings>()->Open();
         }
 
         if (ImGui::MenuItem("Statistics")) {
-            Engine::Instance().GetEditor()->GetWindow<EngineStatistics>()->Open();
+            Engine::Instance().GetEditor()->GetWidget<EngineStatistics>()->Open();
         }
 
         if (ImGui::MenuItem("Close all")) {
@@ -663,6 +688,10 @@ bool GUISystem::BeginMenuBar() {
     if (ImGui::BeginMenu("About")) {
         ImGui::EndMenu();
     }
+
+    auto &&io = ImGui::GetIO();
+
+    ImGui::Text("|   FPS: %.2f (%.2gms)", io.Framerate, io.Framerate > 0.f ? 1000.0f / io.Framerate : 0.0f);
 
     return true;
 }

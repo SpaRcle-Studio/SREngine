@@ -8,11 +8,15 @@
 #include <Utils/Common/Enumerations.h>
 #include <Graphics/GUI/Icons.h>
 
+namespace ax::NodeEditor {
+    enum class PinKind;
+}
+
 namespace SR_GRAPH_NS::GUI {
     class Node;
     class Link;
 
-    SR_ENUM_NS_CLASS(PinType,
+    SR_ENUM_NS_CLASS_T(PinType, int32_t,
           None,
           Flow,
           Bool,
@@ -42,32 +46,36 @@ namespace SR_GRAPH_NS::GUI {
         Pin(const std::string& name, PinKind kind);
         Pin(const std::string& name, PinType type, PinKind kind);
 
-        ~Pin() override;
-
     public:
         static ImColor GetIconColor(const PinType& type);
         static IconType GetIconType(const PinType& type);
+
+        void DrawPinIcon(bool connected, uint32_t alpha);
 
         void SetNode(Node* node);
 
         void AddLink(Link* link);
         void RemoveLink(Link* link);
 
-        [[nodiscard]] bool IsLinked(Pin* pin) const;
-        [[nodiscard]] bool Valid() const;
-        [[nodiscard]] float_t GetWidth() const;
-        [[nodiscard]] PinType GetType() const { return m_type; }
-        [[nodiscard]] PinKind GetKind() const { return m_kind; }
-        [[nodiscard]] Node* GetNode() const { return m_node; }
+        SR_NODISCARD uintptr_t GetId() const {
+            return reinterpret_cast<const uintptr_t>(this);
+        }
 
-        [[nodiscard]] Pin* Copy() const;
+        SR_NODISCARD bool IsLinked(Pin* pin) const;
+        SR_NODISCARD bool IsLinked() const;
+        SR_NODISCARD float_t GetWidth() const;
+        SR_NODISCARD PinType GetType() const { return m_type; }
+        SR_NODISCARD PinKind GetKind() const { return m_kind; }
+        SR_NODISCARD Node* GetNode() const { return m_node; }
 
-        void Draw(float_t maxPinWidth = 0.f) const;
+        SR_NODISCARD Pin* Copy() const;
+
+        void Begin(PinKind kind) const;
+        void End() const;
 
     private:
         std::unordered_set<Link*> m_links;
         Node* m_node = nullptr;
-        //ax::NodeEditor::PinId m_id;
         std::string m_name;
         PinType m_type;
         PinKind m_kind;

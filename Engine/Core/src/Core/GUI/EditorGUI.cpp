@@ -19,25 +19,27 @@
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
+#include <Core/GUI/AnimatorEditor.h>
 
 namespace SR_CORE_NS::GUI {
     EditorGUI::EditorGUI()
     {
         m_window = Engine::Instance().GetWindow();
 
-        AddWindow(new FileBrowser());
-        AddWindow(new Hierarchy());
-        AddWindow(new VisualScriptEditor());
-        AddWindow(new SceneViewer(m_window, GetWindow<Hierarchy>()));
-        AddWindow(new Inspector(GetWindow<Hierarchy>()));
-        AddWindow(new WorldEdit());
-        AddWindow(new EngineSettings());
-        AddWindow(new EngineStatistics());
+        AddWidget(new FileBrowser());
+        AddWidget(new Hierarchy());
+        AddWidget(new VisualScriptEditor());
+        AddWidget(new SceneViewer(m_window, GetWidget<Hierarchy>()));
+        AddWidget(new Inspector(GetWidget<Hierarchy>()));
+        AddWidget(new WorldEdit());
+        AddWidget(new EngineSettings());
+        AddWidget(new AnimatorEditor());
+        AddWidget(new EngineStatistics());
 
         for (auto& [id, widget] : m_widgets)
             Register(widget);
 
-        GetWindow<FileBrowser>()->SetFolder(Helper::ResourceManager::Instance().GetResPath());
+        GetWidget<FileBrowser>()->SetFolder(Helper::ResourceManager::Instance().GetResPath());
     }
 
     EditorGUI::~EditorGUI() {
@@ -161,7 +163,7 @@ namespace SR_CORE_NS::GUI {
 
     void EditorGUI::Enable(bool value) {
         if (m_enabled != value) {
-            if (auto&& pViewer = GetWindow<SceneViewer>()) {
+            if (auto&& pViewer = GetWidget<SceneViewer>()) {
                 pViewer->Enable(value);
             }
             m_enabled = value;
@@ -172,11 +174,11 @@ namespace SR_CORE_NS::GUI {
         SR_LOCK_GUARD
 
         if (Enabled()) {
-            GetWindow<Hierarchy>()->Update();
-            GetWindow<Inspector>()->Update();
+            GetWidget<Hierarchy>()->Update();
+            GetWidget<Inspector>()->Update();
         }
 
-        if (auto&& pViewer = GetWindow<SceneViewer>()) {
+        if (auto&& pViewer = GetWidget<SceneViewer>()) {
             pViewer->Update();
         }
     }

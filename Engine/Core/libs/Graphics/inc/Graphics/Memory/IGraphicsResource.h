@@ -39,6 +39,10 @@ namespace SR_GRAPH_NS::Memory {
 
         void SetRenderContext(const RenderContextPtr& renderContext);
 
+        SR_NODISCARD PipelinePtr GetPipeline() const noexcept {
+            return m_pipeline;
+        }
+
         SR_NODISCARD RenderContextPtr GetRenderContext() const noexcept {
             return m_renderContext;
         }

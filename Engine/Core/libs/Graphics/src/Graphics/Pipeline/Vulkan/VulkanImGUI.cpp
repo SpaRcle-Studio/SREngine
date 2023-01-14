@@ -21,7 +21,7 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
     memset(&sci, 0, sizeof(sci));
     sci.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
     sci.hinstance = GetModuleHandle(NULL);
-    sci.hwnd = static_cast<HWND>(pv->PlatformHandle);
+    sci.hwnd = static_cast<HWND>(pv->PlatformHandleRaw);
 
     VkResult err = vkCreateWin32SurfaceKHR(reinterpret_cast<VkInstance>(vk_inst), &sci, static_cast<const VkAllocationCallbacks *>(vk_allocators), (VkSurfaceKHR*)out_vk_surface);
     return (int)err;

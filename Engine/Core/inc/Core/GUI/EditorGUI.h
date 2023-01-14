@@ -57,15 +57,16 @@ namespace SR_CORE_NS::GUI {
         }
 
         template<typename T> void AddWidget(T* widget) {
+            if (m_widgets.count(typeid(T).hash_code()) == 1) {
+                SRHalt("Widget already was added!");
+                return;
+            }
+
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
         template<typename T> SR_DEPRECATED T* GetWindow() {
-            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
-                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
-                    return pWidget;
-            }
-            return nullptr;
+            return GetWidget<T>();
         }
 
         template<typename T> T* GetWidget() {
@@ -73,6 +74,9 @@ namespace SR_CORE_NS::GUI {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
                     return pWidget;
             }
+
+            SRHalt("EditorGUI::GetWidget() : widget not found!\n\tName: " + std::string(typeid(T).name()));
+
             return nullptr;
         }
 
