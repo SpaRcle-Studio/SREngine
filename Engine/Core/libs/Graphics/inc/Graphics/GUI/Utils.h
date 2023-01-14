@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS::GUI {
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
 
-        if (ImGui::DragFloat(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0.0f, 0.0f, "%.2f")) {
+        if (ImGui::DragFloat(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0.0f, 0.0f, "%.5f")) {
             value = temp;
             ImGui::PopItemFlag();
             return true;

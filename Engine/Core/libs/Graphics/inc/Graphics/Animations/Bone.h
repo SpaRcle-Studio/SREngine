@@ -55,7 +55,7 @@ namespace SR_ANIMATIONS_NS {
 
             gameObject = pRoot->gameObject;
 
-            for (int32_t i = names.size() - 1; i > 0; i--) {
+            for (int32_t i = names.size() - 1; i >= 0; i--) {
                 if (!(gameObject = gameObject->Find(names[i]))) {
                     break;
                 }

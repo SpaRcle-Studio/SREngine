@@ -200,7 +200,7 @@ namespace SR_ANIMATIONS_NS {
         }
 
         for (auto&& pBone : m_bonesById) {
-            if (!pBone->pParent) {
+            if (!pBone->pParent || pBone->pParent == pBone->pRoot) {
                 continue;
             }
 

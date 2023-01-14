@@ -75,6 +75,7 @@ namespace SR_ANIMATIONS_NS {
     void Animator::OnAttached() {
         m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
         //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
+        //m_animationClip = AnimationClip::Load("Samples/Liza/Jump.fbx", 0);
 
         for (auto&& pChannel : m_animationClip->GetChannels()) {
             m_maxKeyFrame = SR_MAX(m_maxKeyFrame, pChannel->GetKeys().size());

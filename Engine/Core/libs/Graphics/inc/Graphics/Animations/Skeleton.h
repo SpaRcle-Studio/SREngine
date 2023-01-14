@@ -34,7 +34,7 @@ namespace SR_ANIMATIONS_NS {
 
         SR_NODISCARD Bone* GetBone(uint64_t hashName);
         SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; }
-        SR_NODISCARD void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
+        void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
 

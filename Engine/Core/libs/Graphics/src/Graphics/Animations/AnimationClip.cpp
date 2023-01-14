@@ -85,9 +85,9 @@ namespace SR_ANIMATIONS_NS {
                     auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
 
                     pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond, new TranslationKey(pTranslationChannel, SR_MATH_NS::FVector3(
-                            pPositionKey.mValue.z / 100.f,
+                            pPositionKey.mValue.x / 100.f,
                             pPositionKey.mValue.y / 100.f,
-                            pPositionKey.mValue.x / 100.f
+                            pPositionKey.mValue.z / 100.f
                     )));
                 }
 
@@ -96,7 +96,7 @@ namespace SR_ANIMATIONS_NS {
 
             /// --------------------------------------------------------------------------------------------------------
 
-            if (pChannel->mNumScalingKeys > 0) {
+            if (pChannel->mNumRotationKeys > 0) {
                 auto&& pRotationChannel = new AnimationChannel();
 
                 pRotationChannel->SetName(pChannel->mNodeName.C_Str());
@@ -105,13 +105,13 @@ namespace SR_ANIMATIONS_NS {
                     auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
 
                     auto&& q = SR_MATH_NS::Quaternion(
-                            pRotationKey.mValue.y,
                             pRotationKey.mValue.x,
+                            pRotationKey.mValue.y,
                             pRotationKey.mValue.z,
                             pRotationKey.mValue.w
                     );
 
-                    pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond, new RotationKey(pRotationChannel, q));
+                   pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond, new RotationKey(pRotationChannel, q));
                 }
 
                 m_channels.emplace_back(pRotationChannel);
