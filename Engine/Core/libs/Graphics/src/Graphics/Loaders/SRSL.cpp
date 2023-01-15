@@ -622,7 +622,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
             break;
         case ShaderType::Skinned:
-            source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * BONE_TRANSFORM * vec4(VERTEX, 1.0);\n";
+            source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * BONE_TRANSFORM * vec4(VERTEX, 1.0);\n";
             break;
         case ShaderType::Canvas:
             source += "\tgl_Position = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";

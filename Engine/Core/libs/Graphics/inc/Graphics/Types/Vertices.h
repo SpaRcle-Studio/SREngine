@@ -87,13 +87,9 @@ namespace SR_GRAPH_NS::Vertices {
         glm::vec3 norm;
         glm::vec3 tang;
         glm::vec3 bitang;
-        //uint8_t weightsNum;
-        //uint32_t boneIds[SR_MAX_BONES_ON_VERTEX];
-        //float weights[SR_MAX_BONES_ON_VERTEX];
-        struct {
-            uint32_t boneId = 0;
-            float weight = 0.0;
-        } weights[SR_MAX_BONES_ON_VERTEX];
+
+        /// x - bone id, y - weight
+        glm::vec2 weights[SR_MAX_BONES_ON_VERTEX];
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(SkinnedMeshVertex);
@@ -305,15 +301,14 @@ namespace SR_GRAPH_NS::Vertices {
         if constexpr (std::is_same<Vertices::SkinnedMeshVertex, T>::value) {
             for (const auto& rawVertex : raw) {
                 T vertex;
-                //vertex.weightsNum = rawVertex.weightsNum;
                 vertex.pos    = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.position);
                 vertex.uv     = *reinterpret_cast<glm::vec2*>((void*)&rawVertex.uv);
                 vertex.norm   = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.normal);
                 vertex.tang   = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.tangent);
                 vertex.bitang = *reinterpret_cast<glm::vec3*>((void*)&rawVertex.bitangent);
                 for (uint32_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
-                    vertex.weights[i].boneId = rawVertex.weights[i].boneId;
-                    vertex.weights[i].weight = rawVertex.weights[i].weight;
+                    vertex.weights[i].x = static_cast<float>(rawVertex.weights[i].boneId);
+                    vertex.weights[i].y = rawVertex.weights[i].weight;
                 }
                 vertices.emplace_back(vertex);
             }

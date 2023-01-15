@@ -125,8 +125,7 @@ namespace SR_HTYPES_NS {
         const bool hasBones = mesh->mBones;
 
         for (uint32_t i = 0; i < mesh->mNumVertices; ++i) {
-            SR_UTILS_NS::Vertex vertex;
-            vertex.weightsNum = 0;
+            SR_UTILS_NS::Vertex vertex = SR_UTILS_NS::Vertex();
             vertex.position = *reinterpret_cast<Vec3*>(&mesh->mVertices[i]);
             vertex.uv = hasUV ? (*reinterpret_cast<Vec2*>(&mesh->mTextureCoords[0][i])) : Vec2 { 0.f, 0.f };
             vertex.normal = hasNormals ? (*reinterpret_cast<Vec3*>(&mesh->mNormals[i])) : Vec3 { 0.f, 0.f, 0.f };
