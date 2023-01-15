@@ -514,8 +514,6 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
                 source += SR_UTILS_NS::Format("layout (location = %i) out vec2 WEIGHT%i;\n", location++, i);
             }
-
-            source += "mat4 BONE_TRANSFORM;";
             break;
         case ShaderType::PostProcessing:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
@@ -622,7 +620,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
             break;
         case ShaderType::Skinned:
-            source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * BONE_TRANSFORM * vec4(VERTEX, 1.0);\n";
+            source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
             break;
         case ShaderType::Canvas:
             source += "\tgl_Position = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";

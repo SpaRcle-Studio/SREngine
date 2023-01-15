@@ -12,7 +12,6 @@ namespace SR_ANIMATIONS_NS {
 
     Skeleton::~Skeleton() {
         DisableDebug();
-        m_bonesById.clear();
         m_bonesByName.clear();
         SR_SAFE_DELETE_PTR(m_rootBone);
     }
@@ -108,21 +107,22 @@ namespace SR_ANIMATIONS_NS {
     }
 
     bool Skeleton::ReCalculateSkeleton() {
-        m_bonesById.clear();
         m_bonesByName.clear();
 
         if (!m_rootBone) {
             return false;
         }
 
-        m_bonesById.reserve(SR_HUMANOID_MAX_BONES);
+        if (m_rootBone) {
+            m_rootBone->gameObject = GetGameObject();
+            m_rootBone->pScene = TryGetScene();
+        }
+
         m_bonesByName.reserve(SR_HUMANOID_MAX_BONES);
 
         bool hasErrors = false;
 
         const SR_HTYPES_NS::Function<void(SR_ANIMATIONS_NS::Bone*)> processBone = [&](SR_ANIMATIONS_NS::Bone* pBone) {
-            m_bonesById.emplace_back(pBone);
-
 #ifdef SR_DEBUG
             if (m_bonesByName.count(pBone->hashName) == 1) {
                 SR_ERROR("Skeleton::ReCalculateSkeleton() : bone with name \"" + pBone->name + "\" already exists in hash table!");
@@ -141,7 +141,6 @@ namespace SR_ANIMATIONS_NS {
         processBone(m_rootBone);
 
         if (hasErrors) {
-            m_bonesById.clear();
             m_bonesByName.clear();
             SR_SAFE_DELETE_PTR(m_rootBone);
         }
@@ -155,39 +154,23 @@ namespace SR_ANIMATIONS_NS {
             return nullptr;
         }
 
-        if (!pBoneIt->second->gameObject && !pBoneIt->second->Initialize()) {
+        if (!pBoneIt->second->gameObject && !pBoneIt->second->hasError && !pBoneIt->second->Initialize()) {
             SR_WARN("Skeleton::GetBone() : failed to find bone game object!\n\tName: " + pBoneIt->second->name);
         }
 
         return pBoneIt->second;
     }
 
-    Bone* Skeleton::GetBoneById(uint64_t id) {
-        if (m_bonesById.size() <= id) {
-            return nullptr;
-        }
-
-        auto&& pBone = m_bonesById.at(id);
-
-        if (!pBone->gameObject && !pBone->Initialize()) {
-            SR_WARN("Skeleton::GetBoneById() : failed to find bone game object!\n\tName: " + pBone->name + " ID: " + std::to_string(id));
-        }
-
-        return pBone;
-    }
-
     void Skeleton::OnAttached() {
-        if (m_rootBone) {
-            m_rootBone->gameObject = GetGameObject();
-        }
-
+        ReCalculateSkeleton();
         Super::OnAttached();
     }
 
     void Skeleton::Update(float_t dt) {
-        if (m_bonesById.empty()) { ///Update не должен вызываться, если кости ещё не загружены
+        if (m_bonesByName.empty()) { /// Update не должен вызываться, если кости ещё не загружены
             return;
         }
+
         if (m_debugEnabled) {
             UpdateDebug();
         }
@@ -216,7 +199,7 @@ namespace SR_ANIMATIONS_NS {
             return;
         }
 
-        for (auto&& pBone : m_bonesById) {
+        for (auto&& [hashName, pBone] : m_bonesByName) {
             if (!pBone->pParent || pBone->pParent == pBone->pRoot) {
                 continue;
             }

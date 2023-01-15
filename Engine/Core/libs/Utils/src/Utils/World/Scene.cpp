@@ -218,6 +218,7 @@ namespace SR_WORLD_NS {
         m_gameObjects.at(idInScene) = GameObject::Ptr();
         m_freeObjIndices.emplace_back(idInScene);
 
+        SetDirty(true);
         OnChanged();
 
         return true;
@@ -259,9 +260,7 @@ namespace SR_WORLD_NS {
         return m_logic->Reload();
     }
 
-    GameObject::Ptr Scene::Find(const std::string &name) {
-        auto&& hashName = SR_UTILS_NS::HashCombine(name);
-
+    GameObject::Ptr Scene::Find(uint64_t hashName) {
         for (auto&& object : m_gameObjects) {
             /// блокировать объекты не нужно, так как уничтожиться они могут только из сцены
             /// Но стоит предусмотреть защиту от одновременного изменения имени
@@ -271,6 +270,10 @@ namespace SR_WORLD_NS {
         }
 
         return GameObject::Ptr();
+    }
+
+    GameObject::Ptr Scene::Find(const std::string &name) {
+        return Find(SR_HASH_STR(name));
     }
 
     std::string Scene::GetName() const {
@@ -292,5 +295,7 @@ namespace SR_WORLD_NS {
         }
 
         m_isHierarchyChanged = true;
+
+        SetDirty(true);
     }
 }

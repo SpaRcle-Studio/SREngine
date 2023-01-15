@@ -74,8 +74,7 @@ namespace SR_HTYPES_NS {
         /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
 
         m_scene = m_importer->ReadFile(path.ToString(),
-                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType
-                // | aiProcess_GlobalScale
+                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale
         );
 
         if (!m_scene) {
@@ -135,20 +134,34 @@ namespace SR_HTYPES_NS {
         }
 
         if (hasBones) {
+            auto&& bones = GetBones(id);
+
             for (uint32_t i = 0; i < mesh->mNumBones; i++) {
                 for (uint32_t j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
                     auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
+
                     vertex.weightsNum++;
-                    if (vertex.weightsNum > SR_MAX_BONES_ON_VERTEX)
-                    {
+
+                    if (vertex.weightsNum > SR_MAX_BONES_ON_VERTEX) {
                         SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
                                           SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
                         continue;
                     }
-                    vertex.weights[vertex.weightsNum-1].boneId = i;
-                    vertex.weights[vertex.weightsNum-1].weight = mesh->mBones[i]->mWeights[j].mWeight;
+
+                    vertex.weights[vertex.weightsNum - 1].boneId = bones[SR_HASH_STR(mesh->mBones[i]->mName.C_Str())];
+                    vertex.weights[vertex.weightsNum - 1].weight = mesh->mBones[i]->mWeights[j].mWeight;
                 }
             }
+
+        #ifdef SR_DEBUG
+            for (auto&& vertex : vertices) {
+                float sum = 0.f;
+                for (auto&& [boneId, weight] : vertex.weights) {
+                    sum += weight;
+                }
+                SRAssert(SR_EQUALS(sum, 1.f));
+            }
+        #endif
         }
 
         return vertices;
@@ -236,5 +249,27 @@ namespace SR_HTYPES_NS {
         }
 
         return m_scene->mNumAnimations;
+    }
+
+    std::map<uint64_t, uint32_t> RawMesh::GetBones(uint32_t id) const {
+        std::map<uint64_t, uint32_t> boneIds;
+
+        auto&& pMesh = m_scene->mMeshes[id];
+
+        for (uint32_t i = 0; i < pMesh->mNumBones; i++) {
+            const uint64_t boneHashName = SR_HASH_STR(pMesh->mBones[i]->mName.C_Str());
+
+            uint32_t boneIndex = 0;
+
+            if (boneIds.find(boneHashName) == boneIds.end()) {
+                boneIndex = boneIds.size();
+            } else {
+                boneIndex = boneIds[boneHashName];
+            }
+
+            boneIds[boneHashName] = boneIndex;
+        }
+
+        return boneIds;
     }
 }

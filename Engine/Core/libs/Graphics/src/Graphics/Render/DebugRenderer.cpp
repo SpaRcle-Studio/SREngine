@@ -75,6 +75,7 @@ namespace SR_GRAPH_NS {
     uint64_t DebugRenderer::DrawLine(uint64_t id, const SR_MATH_NS::FVector3 &start, const SR_MATH_NS::FVector3 &end, const SR_MATH_NS::FColor &color, float_t time) {
         SR_LOCK_GUARD
 
+    retry:
         if (id == SR_ID_INVALID) {
             auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
             pDebugLine->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat"));
@@ -82,8 +83,8 @@ namespace SR_GRAPH_NS {
             return AddTimedObject(time, pDebugLine);
         }
         else if (id >= m_timedObjects.size()) {
-            SRHalt0();
-            return SR_ID_INVALID;
+            id = SR_ID_INVALID;
+            goto retry;
         }
         else {
             if (!m_timedObjects[id].pMesh) {

@@ -76,9 +76,9 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::OnAttached() {
-        m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
+        //m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
 
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
+        m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
         //m_animationClip = AnimationClip::Load("Samples/Liza/Jump.fbx", 0);
 
         if (!m_animationClip) {

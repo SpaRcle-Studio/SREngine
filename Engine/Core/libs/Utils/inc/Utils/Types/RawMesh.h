@@ -36,6 +36,7 @@ namespace SR_UTILS_NS::Types {
 
         std::vector<SR_UTILS_NS::Vertex> GetVertices(uint32_t id) const;
         std::vector<uint32_t> GetIndices(uint32_t id) const;
+        std::map<uint64_t, uint32_t> GetBones(uint32_t id) const;
 
         SR_NODISCARD uint32_t GetVerticesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;

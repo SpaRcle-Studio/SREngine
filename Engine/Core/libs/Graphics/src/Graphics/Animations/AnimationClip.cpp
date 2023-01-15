@@ -6,7 +6,6 @@
 #include <Graphics/Animations/AnimationChannel.h>
 
 #include <Utils/ResourceManager/ResourceManager.h>
-#include <Utils/Types/RawMesh.h>
 
 namespace SR_ANIMATIONS_NS {
     AnimationClip::AnimationClip()
@@ -54,15 +53,15 @@ namespace SR_ANIMATIONS_NS {
     std::vector<AnimationClip*> AnimationClip::Load(const SR_UTILS_NS::Path& rawPath) {
         std::vector<AnimationClip*> animations;
 
-        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath);
-        if (!pRawMesh) {
-            SR_ERROR("AnimationClip::Load() : failed to load raw mesh! Path: " + rawPath.ToString());
-            return animations;
+        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        if (!path.IsAbs()) {
+            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
         }
 
-        pRawMesh->AddUsePoint();
+        Assimp::Importer importer;
+        auto&& pScene = importer.ReadFile(path.ToString(), 0);
 
-        for (uint32_t i = 0; i < pRawMesh->GetAnimationsCount(); ++i) {
+        for (uint32_t i = 0; i < pScene->mNumAnimations; ++i) {
             auto&& pAnimationClip = Load(rawPath, i);
             animations.emplace_back(pAnimationClip);
         }
@@ -70,8 +69,6 @@ namespace SR_ANIMATIONS_NS {
         if (animations.empty()) {
             SR_ERROR("AnimationClip::Load() : failed to load animation clips! Path: " + rawPath.ToString());
         }
-
-        pRawMesh->RemoveUsePoint();
 
         return animations;
     }
@@ -155,8 +152,6 @@ namespace SR_ANIMATIONS_NS {
     }
 
     bool AnimationClip::Load() {
-        Assimp::Importer importer;
-
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         auto&& resourceId = GetResourceId();
@@ -168,15 +163,10 @@ namespace SR_ANIMATIONS_NS {
             auto&& [strIndex, rawPath] = SR_UTILS_NS::StringUtils::SplitTwo(resourceId, "|");
             uint32_t index = SR_UTILS_NS::LexicalCast<uint32_t>(strIndex);
 
-            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath);
-            if (!pRawMesh) {
-                return false;
-            }
+            Assimp::Importer importer;
+            auto&& pScene = importer.ReadFile(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(rawPath), 0);
 
-            pRawMesh->Execute([&]() -> bool {
-                LoadChannels(pRawMesh->GetAssimpScene()->mAnimations[index]);
-                return true;
-            });
+            LoadChannels(pScene->mAnimations[index]);
         }
 
         return Super::Load();

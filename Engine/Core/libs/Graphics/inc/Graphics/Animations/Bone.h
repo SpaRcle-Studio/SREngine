@@ -28,6 +28,7 @@ namespace SR_ANIMATIONS_NS {
             pRootBone->gameObject = gameObject;
             pRootBone->pRoot = pRootBone;
             pRootBone->pParent = nullptr;
+            pRootBone->pScene = pScene;
 
             pRootBone->bones.reserve(bones.size());
 
@@ -39,8 +40,9 @@ namespace SR_ANIMATIONS_NS {
         }
 
         bool Initialize() {
-            if (!pRoot->gameObject) {
+            if (!pRoot->gameObject && !pRoot->pScene) {
                 SRHalt0();
+                hasError = true;
                 return false;
             }
 
@@ -53,15 +55,26 @@ namespace SR_ANIMATIONS_NS {
                 pParentBone = pParentBone->pParent;
             }
 
-            gameObject = pRoot->gameObject;
+            if (pRoot->gameObject) {
+                gameObject = pRoot->gameObject;
+            }
 
             for (int32_t i = names.size() - 1; i >= 0; i--) {
-                if (!(gameObject = gameObject->Find(names[i]))) {
-                    break;
+                if (gameObject) {
+                    if (!(gameObject = gameObject->Find(names[i]))) {
+                        break;
+                    }
+                }
+                else {
+                    if (!(gameObject = pRoot->pScene->Find(names[i]))) {
+                        break;
+                    }
                 }
             }
 
-            return gameObject.Valid();
+            hasError = !gameObject.Valid();
+
+            return !hasError;
         }
 
     private:
@@ -73,6 +86,7 @@ namespace SR_ANIMATIONS_NS {
             pBone->gameObject = gameObject;
             pBone->pParent = pParentBone;
             pBone->pRoot = pParentBone->pRoot;
+            pBone->pScene = pParentBone->pScene;
 
             pBone->bones.reserve(bones.size());
 
@@ -86,10 +100,12 @@ namespace SR_ANIMATIONS_NS {
     public:
         uint64_t hashName = 0;
         std::string name;
+        SR_WORLD_NS::Scene* pScene = nullptr;
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject> gameObject;
         std::vector<Bone*> bones;
         Bone* pParent = nullptr;
         Bone* pRoot = nullptr;
+        bool hasError = false;
 
     };
 

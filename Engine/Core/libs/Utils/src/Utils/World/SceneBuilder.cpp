@@ -11,27 +11,7 @@ namespace SR_WORLD_NS {
     { }
 
     void SceneBuilder::Build(bool isPaused) {
-        auto&& root = m_scene->GetRootGameObjects();
-        const uint64_t rootHash = Initialize(isPaused);
-
-        /** WARNING: если произойдет коллизия хешей при уничтожении коренного объекта, то будет краш!
-        TODO: возможно на будущее стоит вычислять более точный хеш, с учетом порядка компонентов во всем дереве.
-         С другой стороны, дерево так и так перестроится правильным образом при изменении порядка компонентов.
-        */
-        if (rootHash == m_rootHash) {
-            for (auto&& gameObject : root) {
-                if (!gameObject->IsDirty()) {
-                    continue;
-                }
-
-                SetDirty();
-                break;
-            }
-        }
-        else {
-            SetDirty();
-            m_rootHash = rootHash;
-        }
+        Initialize(isPaused);
 
         if (m_dirty) {
             const size_t capacity = m_updatableComponents.capacity();
@@ -66,6 +46,8 @@ namespace SR_WORLD_NS {
                 }
             };
 
+            auto&& root = m_scene->GetRootGameObjects();
+
             for (auto&& gameObject : root) {
                 function(gameObject);
                 gameObject->SetDirty(false);
@@ -94,6 +76,8 @@ namespace SR_WORLD_NS {
     uint64_t SceneBuilder::Initialize(bool isPaused) {
         auto&& root = m_scene->GetRootGameObjects();
 
+        m_dirty |= m_scene->IsDirty();
+
         m_scene->PostLoad();
         m_scene->Awake(isPaused);
         m_scene->CheckActivity();
@@ -102,6 +86,7 @@ namespace SR_WORLD_NS {
         uint64_t rootHash = 0;
 
         for (auto&& gameObject : root) {
+            m_dirty |= gameObject->IsDirty();
             rootHash = SR_UTILS_NS::HashCombine(gameObject.GetRawPtr(), rootHash);
             gameObject->PostLoad();
         }

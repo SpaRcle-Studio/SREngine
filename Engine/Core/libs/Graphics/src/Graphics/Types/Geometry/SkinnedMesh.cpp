@@ -168,11 +168,12 @@ namespace SR_GTYPES_NS {
                 return false;
             }
 
+            SetRawMesh(pRawMesh);
+
             m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
             m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
 
             SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
-            SetRawMesh(pRawMesh);
 
             return true;
         }
@@ -211,15 +212,21 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::UseModelMatrix() {
+        static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
+
         if (m_skeleton) {
-            for (uint64_t i = 0; i < SR_HUMANOID_MAX_BONES; i++) {
-                if (auto&& bone = m_skeleton->GetBoneById(i)) {
-                    m_skeletonMatrices[i] = bone->gameObject->GetTransform()->GetMatrix();
+            auto&& bones = m_rawMesh->GetBones(m_meshId);
+
+            for (auto&& [hashName, boneId] : bones) {
+                if (auto&& bone = m_skeleton->GetBone(hashName)) {
+                    m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
+                }
+                else {
+                    m_skeletonMatrices[boneId] = identityMatrix;
                 }
             }
         }
         else {
-            static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
             for (uint64_t i = 0; i < SR_HUMANOID_MAX_BONES; i++) {
                 m_skeletonMatrices[i] = identityMatrix;
             }
