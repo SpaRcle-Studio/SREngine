@@ -55,7 +55,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
 
     protected:
-        bool Reload() override;
         bool Load() override;
         bool Unload() override;
 

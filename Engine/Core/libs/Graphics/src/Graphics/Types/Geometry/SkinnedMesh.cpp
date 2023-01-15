@@ -200,24 +200,6 @@ namespace SR_GTYPES_NS {
         return m_rawMesh && m_meshId < m_rawMesh->GetMeshesCount() && Mesh::IsCanCalculate();
     }
 
-    bool SkinnedMesh::Reload() {
-        SR_LOG("SkinnedMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-
-        if (!Load()) {
-            return false;
-        }
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
-    }
-
     void SkinnedMesh::Update(float dt) {
         FindSkeleton(GetGameObject());
         Super::Update(dt);
