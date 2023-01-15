@@ -257,7 +257,7 @@ namespace SR_HTYPES_NS {
         auto&& pMesh = m_scene->mMeshes[id];
 
         for (uint32_t i = 0; i < pMesh->mNumBones; i++) {
-            const uint64_t boneHashName = SR_HASH_STR(pMesh->mBones[i]->mName.C_Str());
+            const uint64_t boneHashName = SR_HASH_STR(pMesh->mBones[i]->mName.data);
 
             uint32_t boneIndex = 0;
 
@@ -271,5 +271,25 @@ namespace SR_HTYPES_NS {
         }
 
         return boneIds;
+    }
+
+    SR_MATH_NS::Matrix4x4 RawMesh::GetBoneOffset(uint32_t id, uint64_t hashName) const {
+        for (uint32_t i = 0; i < m_scene->mMeshes[id]->mNumBones; ++i) {
+            auto&& strHash = SR_HASH_STR(m_scene->mMeshes[id]->mBones[i]->mName.data);
+            if (strHash == hashName) {
+                auto &&offset = m_scene->mMeshes[id]->mBones[i]->mOffsetMatrix;
+                SR_MATH_NS::Matrix4x4 matrix4X4 = *reinterpret_cast<SR_MATH_NS::Matrix4x4 *>(&offset);
+                return matrix4X4;
+            }
+        }
+
+        return SR_MATH_NS::Matrix4x4::Identity();
+    }
+
+    SR_MATH_NS::Matrix4x4 RawMesh::GetGlobalInverseTransform() const {
+        auto&& globalInverseTransform = m_scene->mRootNode->mTransformation;
+        globalInverseTransform = globalInverseTransform.Inverse();
+        SR_MATH_NS::Matrix4x4 matrix4X4 = *reinterpret_cast<SR_MATH_NS::Matrix4x4*>(&globalInverseTransform);
+        return matrix4X4;
     }
 }
