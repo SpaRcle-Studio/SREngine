@@ -14,13 +14,21 @@ uniform sampler2D diffuse;
 void fragment() {
     vec3 diffuse_albedo = texture(diffuse, UV).rgb * color.rgb;
 
-    vec3 norm = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 12.0;
+    vec3 norm = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 12.0; //TODO::Переписать под костевую анимацию, нужно пересчитать NORMAL
 
 	COLOR = vec4(diffuse_albedo + norm, 1.0);
 
-    mat4 Skeleton = SKELETON_MATRIXES_128[0];
 }
 
 void vertex() {
-    mat4 Skeleton = SKELETON_MATRIXES_128[0];
+    BONE_TRANSFORM =  SKELETON_MATRICES_128[int(WEIGHT0[0]+0.1)] * WEIGHT0[1]; //TODO::А мы точно должны весы передавать как float векторы, из-за чего приходится к
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT1[0]+0.1)] * WEIGHT1[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT2[0]+0.1)] * WEIGHT2[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT3[0]+0.1)] * WEIGHT3[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT4[0]+0.1)] * WEIGHT4[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT5[0]+0.1)] * WEIGHT5[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT6[0]+0.1)] * WEIGHT6[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT7[0]+0.1)] * WEIGHT7[1];
+    //BONE_TRANSFORM = SKELETON_MATRICES_128[int(WEIGHT0[0]+0.1)];
+    //BONE_TRANSFORM = mat4(1);
 }

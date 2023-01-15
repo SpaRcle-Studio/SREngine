@@ -11,7 +11,7 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "PROJECTION_MATRIX", ShaderVarType::Mat4 },
         { "ORTHOGONAL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_NO_TRANSLATE_MATRIX", ShaderVarType::Mat4 },
-        { "SKELETON_MATRIXES_128", ShaderVarType::Skeleton128 },
+        { "SKELETON_MATRICES_128", ShaderVarType::Skeleton128 },
         { "SKYBOX_DIFFUSE", ShaderVarType::SamplerCube },
         { "TEXT_ATLAS_TEXTURE", ShaderVarType::Sampler2D },
         { "TIME", ShaderVarType::Float },
@@ -515,6 +515,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
                 source += SR_UTILS_NS::Format("layout (location = %i) out vec2 WEIGHT%i;\n", location++, i);
             }
 
+            source += "mat4 BONE_TRANSFORM;";
             break;
         case ShaderType::PostProcessing:
             source += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location++);
@@ -541,7 +542,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
 
     source += "void main() {\n";
 
-    /// объявляем все дефолтные переменные
+    /// объявляем все переменные по умолчанию
     source += "\t// -- codegen -- | begin default vars\n";
     switch (unit.type) {
         case ShaderType::Custom:
@@ -617,9 +618,11 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
         case ShaderType::SpatialCustom:
             break;
         case ShaderType::Simple:
-        case ShaderType::Skinned:
         case ShaderType::Spatial:
             source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";
+            break;
+        case ShaderType::Skinned:
+            source += "\tgl_Position = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * BONE_TRANSFORM * vec4(VERTEX, 1.0);\n";
             break;
         case ShaderType::Canvas:
             source += "\tgl_Position = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);\n";

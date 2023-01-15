@@ -162,6 +162,19 @@ namespace SR_ANIMATIONS_NS {
         return pBoneIt->second;
     }
 
+    Bone* Skeleton::GetBoneById(uint64_t id) {
+        auto&& pBoneIt = m_bonesById[id];
+        if (id < m_bonesById.size()) {
+            return nullptr;
+        }
+
+        if (!pBoneIt->gameObject && !pBoneIt->Initialize()) {
+            SR_WARN("Skeleton::GetBoneById() : failed to find bone game object!\n\tName: " + pBoneIt->name + " ID: " + std::to_string(id));
+        }
+
+        return pBoneIt;
+    }
+
     void Skeleton::OnAttached() {
         if (m_rootBone) {
             m_rootBone->gameObject = GetGameObject();
@@ -171,6 +184,9 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Skeleton::Update(float_t dt) {
+        if (m_bonesById.empty()) { ///Update не должен вызываться, если кости ещё не загружены
+            return;
+        }
         if (m_debugEnabled) {
             UpdateDebug();
         }

@@ -8,13 +8,13 @@
 #include <assimp/postprocess.h>
 
 namespace SR_ANIMATIONS_NS {
-    const AnimationPose& SkeletonAnimationClip::getCurrentPose() const {
-        m_currentPose.bonesLocalPoses[0] = getBoneLocalPose(0, m_currentTime);
+    const AnimationPose& SkeletonAnimationClip::GetCurrentPose() const {
+        m_currentPose.bonesLocalPoses[0] = GetBoneLocalPose(0, m_currentTime);
 
-        auto bonesCount = static_cast<uint8_t>(m_skeleton.bones.size());
+        auto bonesCount = 0;//static_cast<uint8_t>(m_skeleton->bones.size());
 
         for (uint8_t boneIndex = 1; boneIndex < bonesCount; boneIndex++) {
-            m_currentPose.bonesLocalPoses[boneIndex] = getBoneLocalPose(boneIndex, m_currentTime);
+            m_currentPose.bonesLocalPoses[boneIndex] = GetBoneLocalPose(boneIndex, m_currentTime);
         }
 
         return m_currentPose;
@@ -33,7 +33,7 @@ namespace SR_ANIMATIONS_NS {
         delete importer;
     }
 
-    void SkeletonAnimationClip::increaseCurrentTime(float delta) {
+    void SkeletonAnimationClip::IncreaseCurrentTime(float delta) {
         m_currentTime += delta * m_rate;
 
         if (m_currentTime > m_duration) {
@@ -42,24 +42,24 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    BonePose SkeletonAnimationClip::getBoneLocalPose(uint8_t boneIndex, float time) const {
+    BonePose SkeletonAnimationClip::GetBoneLocalPose(uint8_t boneIndex, float time) const {
         {
             const std::vector<BoneAnimationPositionFrame>& positionFrames =
                     m_bonesAnimationChannels[boneIndex].positionFrames;
 
-            auto position = getMixedAdjacentFrames<glm::vec3, BoneAnimationPositionFrame>(positionFrames, time);
+            auto position = GetMixedAdjacentFrames<glm::vec3, BoneAnimationPositionFrame>(positionFrames, time);
 
             const std::vector<BoneAnimationOrientationFrame>& orientationFrames =
                     m_bonesAnimationChannels[boneIndex].orientationFrames;
 
-            auto orientation = getMixedAdjacentFrames<glm::quat, BoneAnimationOrientationFrame>(orientationFrames, time);
+            auto orientation = GetMixedAdjacentFrames<glm::quat, BoneAnimationOrientationFrame>(orientationFrames, time);
 
             return BonePose(position, orientation, 0.0f); ///TODO: scale пока-что не используется, но должен передаваться, потому в будущем реализовать его передачу
         }
     }
 
     template<class T, class S>
-    T SkeletonAnimationClip::getMixedAdjacentFrames(const std::vector<S>& frames, float time) const
+    T SkeletonAnimationClip::GetMixedAdjacentFrames(const std::vector<S>& frames, float time) const
     {
         S tempFrame;
         tempFrame.time = time;
@@ -70,52 +70,52 @@ namespace SR_ANIMATIONS_NS {
                 });
 
         if (frameIt == frames.end()) {
-            return (frames.size() > 0) ? getKeyframeValue<T, S>(*std::prev(frames.end())) : getIdentity<T>();
+            return (frames.size() > 0) ? GetKeyframeValue<T, S>(*std::prev(frames.end())) : GetIdentity<T>();
         }
         else {
-            T next = getKeyframeValue<T, S>(*frameIt);
-            T prev = (frameIt == frames.begin()) ? getIdentity<T>() : getKeyframeValue<T, S>(*std::prev(frameIt));
+            T next = GetKeyframeValue<T, S>(*frameIt);
+            T prev = (frameIt == frames.begin()) ? GetIdentity<T>() : GetKeyframeValue<T, S>(*std::prev(frameIt));
 
             float currentFrameTime = frameIt->time;
             float prevFrameTime = (frameIt == frames.begin()) ? 0 : std::prev(frameIt)->time;
 
             float framesTimeDelta = currentFrameTime - prevFrameTime;
 
-            return getInterpolatedValue<T>(prev, next, (time - prevFrameTime) / framesTimeDelta);
+            return GetInterpolatedValue<T>(prev, next, (time - prevFrameTime) / framesTimeDelta);
         }
     }
     template<>
-    glm::vec3 SkeletonAnimationClip::getIdentity() const
+    glm::vec3 SkeletonAnimationClip::GetIdentity() const
     {
         return glm::vec3(0.0f);
     }
 
     template<>
-    glm::quat SkeletonAnimationClip::getIdentity() const
+    glm::quat SkeletonAnimationClip::GetIdentity() const
     {
         return glm::identity<glm::quat>();
     }
 
     template<>
-    glm::vec3 SkeletonAnimationClip::getKeyframeValue(const BoneAnimationPositionFrame& frame) const
+    glm::vec3 SkeletonAnimationClip::GetKeyframeValue(const BoneAnimationPositionFrame& frame) const
     {
         return frame.position;
     }
 
     template<>
-    glm::quat SkeletonAnimationClip::getKeyframeValue(const BoneAnimationOrientationFrame& frame) const
+    glm::quat SkeletonAnimationClip::GetKeyframeValue(const BoneAnimationOrientationFrame& frame) const
     {
         return frame.orientation;
     }
 
     template<>
-    glm::vec3 SkeletonAnimationClip::getInterpolatedValue(const glm::vec3& first, const glm::vec3& second, float delta) const
+    glm::vec3 SkeletonAnimationClip::GetInterpolatedValue(const glm::vec3& first, const glm::vec3& second, float delta) const
     {
         return glm::mix(first, second, delta);
     }
 
     template<>
-    glm::quat SkeletonAnimationClip::getInterpolatedValue(const glm::quat& first, const glm::quat& second, float delta) const
+    glm::quat SkeletonAnimationClip::GetInterpolatedValue(const glm::quat& first, const glm::quat& second, float delta) const
     {
         return glm::slerp(first, second, delta);
     }

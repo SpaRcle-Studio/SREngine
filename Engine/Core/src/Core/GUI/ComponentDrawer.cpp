@@ -543,6 +543,7 @@ namespace SR_CORE_NS::GUI {
             pRawMesh->Execute([&]() -> bool {
                 return Importers::ImportSkeletonFromRawMesh(pRawMesh, pComponent);
             });
+            pComponent->OnAttached();
         }
 
         const ImGuiTreeNodeFlags nodeFlagsWithChild = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;

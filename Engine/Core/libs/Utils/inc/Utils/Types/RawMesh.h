@@ -43,7 +43,7 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD float_t GetScaleFactor() const;
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
-        SR_NODISCARD bool IsAllowRevive() const override { return true; }
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
         SR_NODISCARD const aiScene* GetAssimpScene() const noexcept { return m_scene; }
 

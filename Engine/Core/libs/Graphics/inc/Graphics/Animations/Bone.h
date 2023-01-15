@@ -46,11 +46,11 @@ namespace SR_ANIMATIONS_NS {
 
             std::vector<uint64_t> names = { hashName };
 
-            Bone* pParenBone = pParent;
+            Bone* pParentBone = pParent;
             /// рутовую ноду в расчет не берем
-            while (pParenBone && pParenBone->pParent) {
-                names.emplace_back(pParenBone->hashName);
-                pParenBone = pParenBone->pParent;
+            while (pParentBone && pParentBone->pParent) {
+                names.emplace_back(pParentBone->hashName);
+                pParentBone = pParentBone->pParent;
             }
 
             gameObject = pRoot->gameObject;
@@ -116,11 +116,13 @@ namespace SR_ANIMATIONS_NS {
     struct BonePose {
         BonePose() = default;
 
-        BonePose(const glm::vec3& position, const glm::quat& orientation, const float_t scale)
+        BonePose(glm::vec3& position, glm::quat& orientation, float_t scale)
             : m_position(position)
             , m_orientation(orientation)
             , m_scale(scale)
-        { }
+
+        {
+        }
 
         SR_NODISCARD glm::mat4 getBoneMatrix() const
         {
@@ -132,34 +134,34 @@ namespace SR_ANIMATIONS_NS {
         glm::vec3 m_position = glm::vec3(0.0f);
     };
 
+
     class SR_DEPRECATED BoneComponent : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1000);
+
         SR_INITIALIZE_COMPONENT(BoneComponent);
+
 
         ~BoneComponent() override = default;
 
     public:
-        BoneComponent(uint8_t parentId, const glm::mat4& inverseBindPoseMatrix);
+        BoneComponent(uint32_t parentId, const glm::mat4& inverseBindPoseMatrix);
 
-    private:
-        //Types::Mesh* m_mesh = nullptr;
+
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
             return nullptr;
         }
 
         void OnDestroy() override {
-           //if (m_mesh) {
-           //    m_mesh->OnDestroy();
-           //    m_mesh = nullptr;
-           //}
 
             delete this;
         }
     public:
         std::string m_name; // Название кости
-        uint32_t parentId; // ID родительской кости (для корневой кости будем зарезервируем идентификатор ROOT_BONE_PARENT_ID, таким образом, скелет сможет содержать не более, чем 254 кости)
-        glm::mat4 inverseBindPoseMatrix; // обратная bind-pose матрица для перехода в систему координат кости из пространства модели
+        uint32_t parentId; // ID родительской кости (для корневой кости будем зарезервируем идентификатор ROOT_BONE_PARENT_ID)
+        uint32_t m_parentId; // ID родительской кости
+        glm::mat4 m_inverseBindPoseMatrix; // обратная bind-pose матрица для перехода в систему координат кости из пространства модели
+        BonePose m_pose; // текущая поза кости
 
         static constexpr uint32_t ROOT_BONE_PARENT_ID = UINT32_MAX; // ID корневой кости
     };

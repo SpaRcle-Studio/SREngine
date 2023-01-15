@@ -34,7 +34,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetIBO();
         SR_NODISCARD int32_t GetVirtualUBO();
 
-        SR_NODISCARD bool IsAllowRevive() const override { return true; }
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
         void FreeVideoMemory() override;
         void Draw();

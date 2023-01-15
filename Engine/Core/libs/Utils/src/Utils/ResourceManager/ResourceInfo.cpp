@@ -21,7 +21,7 @@ namespace SR_UTILS_NS {
                     return false;
                 }
 
-                if (pResource->IsAllowRevive()) {
+                if (pResource->IsAllowedToRevive()) {
                     SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
                     pResource->ReviveResource();
                     return false;

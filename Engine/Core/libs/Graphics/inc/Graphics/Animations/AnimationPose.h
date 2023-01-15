@@ -35,12 +35,12 @@ namespace SR_ANIMATIONS_NS {
 
             for (uint8_t boneIndex = 1; boneIndex < bonesCount; boneIndex++) {
                 m_matrixPalette.bonesTransforms[boneIndex] =
-                        m_matrixPalette.bonesTransforms[m_skeleton->bones[boneIndex].parentId] *
+                        m_matrixPalette.bonesTransforms[m_skeleton->bones[boneIndex].m_parentId] *
                         bonesLocalPoses[boneIndex].getBoneMatrix();
             }
 
             for (uint8_t boneIndex = 0; boneIndex < bonesCount; boneIndex++) {
-                m_matrixPalette.bonesTransforms[boneIndex] *= m_skeleton->bones[boneIndex].inverseBindPoseMatrix;
+                m_matrixPalette.bonesTransforms[boneIndex] *= m_skeleton->bones[boneIndex].m_inverseBindPoseMatrix;
             }
 
             return m_matrixPalette;

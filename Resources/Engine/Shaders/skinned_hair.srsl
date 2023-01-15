@@ -1,0 +1,33 @@
+ShaderType Skinned;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+ 
+uniform vec4 color;
+uniform sampler2D diffuse;
+
+void fragment() {
+	COLOR = texture(diffuse, UV) * color;
+
+    if (COLOR.a == 0) {
+        discard;
+    }
+
+    COLOR.a = 0.75;
+}
+
+void vertex() {
+    BONE_TRANSFORM =  SKELETON_MATRICES_128[int(WEIGHT0[0]+0.1)] * WEIGHT0[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT1[0]+0.1)] * WEIGHT1[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT2[0]+0.1)] * WEIGHT2[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT3[0]+0.1)] * WEIGHT3[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT4[0]+0.1)] * WEIGHT4[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT5[0]+0.1)] * WEIGHT5[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT6[0]+0.1)] * WEIGHT6[1];
+    BONE_TRANSFORM += SKELETON_MATRICES_128[int(WEIGHT7[0]+0.1)] * WEIGHT7[1];
+}

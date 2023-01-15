@@ -42,7 +42,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const noexcept;
-        SR_NODISCARD virtual bool IsAllowRevive() const { return false; }
+        SR_NODISCARD virtual bool IsAllowedToRevive() const { return false; }
         SR_NODISCARD bool IsForce() const { return m_force; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }

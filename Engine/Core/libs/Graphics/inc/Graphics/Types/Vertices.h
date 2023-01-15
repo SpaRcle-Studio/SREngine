@@ -88,9 +88,11 @@ namespace SR_GRAPH_NS::Vertices {
         glm::vec3 tang;
         glm::vec3 bitang;
         //uint8_t weightsNum;
+        //uint32_t boneIds[SR_MAX_BONES_ON_VERTEX];
+        //float weights[SR_MAX_BONES_ON_VERTEX];
         struct {
-            uint32_t boneId;
-            float weight;
+            uint32_t boneId = 0;
+            float weight = 0.0;
         } weights[SR_MAX_BONES_ON_VERTEX];
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {

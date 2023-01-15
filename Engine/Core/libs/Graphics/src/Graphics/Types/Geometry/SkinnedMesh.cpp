@@ -13,7 +13,6 @@ namespace SR_GTYPES_NS {
 
     SkinnedMesh::~SkinnedMesh() {
         SetRawMesh(nullptr);
-        delete m_currentClip;
     }
 
     bool SkinnedMesh::Calculate()  {
@@ -219,12 +218,36 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
+    void SkinnedMesh::Update(float dt) {
+        FindSkeleton(GetGameObject());
+        Super::Update(dt);
+    };
+
     void SkinnedMesh::UseMaterial() {
         Super::UseMaterial();
+        if (m_skeleton) {
+            for (uint64_t i = 0; i < SR_HUMANOID_MAX_BONES; i++) {
+                auto&& bone = m_skeleton->GetBoneById(i);
+                m_skeletonMatrices[i] = bone->gameObject->GetTransform()->GetMatrix();
+            }
+        } else {
+            static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
+            for (uint64_t i = 0; i < SR_HUMANOID_MAX_BONES; i++) {
+                m_skeletonMatrices[i] = identityMatrix;
+            }
+        }
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, &m_skeletonMatrices);
         UseModelMatrix();
     }
 
     void SkinnedMesh::UseModelMatrix() {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+    }
+
+    void SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) {
+        m_skeleton = dynamic_cast<Animations::Skeleton *>(gameObject->GetComponent("Skeleton"));
+        if (!m_skeleton) {
+            FindSkeleton(gameObject->GetParent());
+        }
     }
 }

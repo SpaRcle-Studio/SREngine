@@ -15,7 +15,7 @@ namespace SR_ANIMATIONS_NS {
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        ~Skeleton() override;
+~Skeleton() override;
 
     public:
         SR_NODISCARD Component* CopyComponent() const override;
@@ -33,6 +33,7 @@ namespace SR_ANIMATIONS_NS {
         SR_NODISCARD Bone* GetRootBone() const noexcept { return m_rootBone; }
 
         SR_NODISCARD Bone* GetBone(uint64_t hashName);
+        SR_NODISCARD Bone* GetBoneById(uint64_t id);
         SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; }
         void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
 
@@ -50,7 +51,6 @@ namespace SR_ANIMATIONS_NS {
         ska::flat_hash_map<uint64_t, Bone*> m_bonesByName;
 
         Bone* m_rootBone = nullptr;
-
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

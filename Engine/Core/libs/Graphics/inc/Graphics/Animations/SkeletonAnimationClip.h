@@ -24,28 +24,28 @@ namespace SR_ANIMATIONS_NS {
         {
         }
 
-        [[nodiscard]] const AnimationPose& getCurrentPose() const;
+        SR_NODISCARD const AnimationPose& GetCurrentPose() const;
 
         void Load(SR_UTILS_NS::Path path);
-        void increaseCurrentTime(float delta);
+        void IncreaseCurrentTime(float delta);
 
     private:
-        [[nodiscard]] BonePose getBoneLocalPose(uint8_t boneIndex, float time) const;
+        SR_NODISCARD BonePose GetBoneLocalPose(uint8_t boneIndex, float time) const;
 
         template<class T, class S>
-        [[nodiscard]] T getMixedAdjacentFrames(const std::vector<S>& frames, float time) const;
+        SR_NODISCARD T GetMixedAdjacentFrames(const std::vector<S>& frames, float time) const;
 
         template<class T>
-        T getIdentity() const { assert(false); }
+        T GetIdentity() const { assert(false); }
 
         template<class T, class S>
-        T getKeyframeValue(const S& frame) const { assert(false); }
+        T GetKeyframeValue(const S& frame) const { assert(false); }
 
         template<class T>
-        T getInterpolatedValue(const T& first, const T& second, float delta) const { assert(false); }
+        T GetInterpolatedValue(const T& first, const T& second, float delta) const { assert(false); }
 
     private:
-        const AssimpSkeleton m_skeleton;
+        const Skeleton* m_skeleton;
         std::vector<BoneAnimationChannel> m_bonesAnimationChannels;
 
         mutable AnimationPose m_currentPose;

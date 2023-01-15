@@ -33,13 +33,17 @@ namespace SR_GTYPES_NS {
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
+        void Update(float dt) override;
         void UseMaterial() override;
         void UseModelMatrix() override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
 
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
+
     private:
+        void FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject);
         void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
 
         bool Calculate() override;
@@ -55,13 +59,11 @@ namespace SR_GTYPES_NS {
         bool Unload() override;
 
     private:
-
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
-        SR_ANIMATIONS_NS::AssimpSkeleton m_skeleton;
-        SR_ANIMATIONS_NS::SkeletonAnimationClip* m_currentClip = nullptr;
-
+        SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
+        SR_MATH_NS::Matrix4x4 m_skeletonMatrices[SR_HUMANOID_MAX_BONES];
     };
 }
 

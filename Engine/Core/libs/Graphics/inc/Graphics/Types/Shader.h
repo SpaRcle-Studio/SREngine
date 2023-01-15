@@ -62,6 +62,13 @@ namespace SR_GTYPES_NS {
 
             m_uniformBlock.SetField(hashId, &v);
         }
+        template<typename T, bool shared = false> void SetCustom(uint64_t hashId, const T *v) noexcept {
+            if (!IsLoaded()) {
+                return;
+            }
+
+            m_uniformBlock.SetField(hashId, v);
+        }
 
         void SR_FASTCALL SetBool(uint64_t hashId, const bool& v) noexcept;
         void SR_FASTCALL SetFloat(uint64_t hashId, const float& v) noexcept;
