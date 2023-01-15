@@ -163,16 +163,17 @@ namespace SR_ANIMATIONS_NS {
     }
 
     Bone* Skeleton::GetBoneById(uint64_t id) {
-        auto&& pBoneIt = m_bonesById[id];
-        if (id < m_bonesById.size()) {
+        if (m_bonesById.size() <= id) {
             return nullptr;
         }
 
-        if (!pBoneIt->gameObject && !pBoneIt->Initialize()) {
-            SR_WARN("Skeleton::GetBoneById() : failed to find bone game object!\n\tName: " + pBoneIt->name + " ID: " + std::to_string(id));
+        auto&& pBone = m_bonesById.at(id);
+
+        if (!pBone->gameObject && !pBone->Initialize()) {
+            SR_WARN("Skeleton::GetBoneById() : failed to find bone game object!\n\tName: " + pBone->name + " ID: " + std::to_string(id));
         }
 
-        return pBoneIt;
+        return pBone;
     }
 
     void Skeleton::OnAttached() {
