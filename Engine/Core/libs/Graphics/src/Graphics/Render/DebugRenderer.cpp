@@ -92,8 +92,12 @@ namespace SR_GRAPH_NS {
 
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugLine*>(m_timedObjects[id].pMesh);
 
-            if (!pMesh) {
+            if (!pMesh && time > 0) {
                 SRHalt0();
+                return SR_ID_INVALID;
+            }
+
+            if (!pMesh) {
                 return SR_ID_INVALID;
             }
 
@@ -137,8 +141,12 @@ namespace SR_GRAPH_NS {
 
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh*>(m_timedObjects[id].pMesh);
 
-            if (!pMesh) {
+            if (!pMesh && time > 0) {
                 SRHalt0();
+                return SR_ID_INVALID;
+            }
+
+            if (!pMesh) {
                 return SR_ID_INVALID;
             }
 

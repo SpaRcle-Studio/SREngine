@@ -626,6 +626,8 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
+
+        resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
     }
 
     void Engine::FlushScene() {

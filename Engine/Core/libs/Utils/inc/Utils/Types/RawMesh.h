@@ -39,6 +39,7 @@ namespace SR_UTILS_NS::Types {
 
         SR_NODISCARD uint32_t GetVerticesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;
+        SR_NODISCARD uint32_t GetAnimationsCount() const;
 
         SR_NODISCARD float_t GetScaleFactor() const;
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
@@ -48,7 +49,6 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD const aiScene* GetAssimpScene() const noexcept { return m_scene; }
 
     protected:
-        bool Reload() override;
         bool Unload() override;
         bool Load() override;
 

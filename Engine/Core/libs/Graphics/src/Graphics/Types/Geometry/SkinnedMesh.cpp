@@ -227,8 +227,9 @@ namespace SR_GTYPES_NS {
         Super::UseMaterial();
         if (m_skeleton) {
             for (uint64_t i = 0; i < SR_HUMANOID_MAX_BONES; i++) {
-                auto&& bone = m_skeleton->GetBoneById(i);
-                m_skeletonMatrices[i] = bone->gameObject->GetTransform()->GetMatrix();
+                if (auto&& bone = m_skeleton->GetBoneById(i)) {
+                    m_skeletonMatrices[i] = bone->gameObject->GetTransform()->GetMatrix();
+                }
             }
         } else {
             static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
@@ -246,7 +247,7 @@ namespace SR_GTYPES_NS {
 
     void SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) {
         m_skeleton = dynamic_cast<Animations::Skeleton *>(gameObject->GetComponent("Skeleton"));
-        if (!m_skeleton) {
+        if (!m_skeleton && gameObject->GetParent()) {
             FindSkeleton(gameObject->GetParent());
         }
     }

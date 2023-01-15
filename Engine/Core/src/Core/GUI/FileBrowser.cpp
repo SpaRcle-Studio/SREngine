@@ -10,6 +10,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 
 #include <Graphics/GUI/Icons.h>
+#include <Graphics/Animations/AnimationClip.h>
 
 namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
@@ -149,6 +150,13 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::Selectable("Open")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+        }
+        if (ImGui::Selectable("Extract animations")) {
+            SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
+            auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
+            for (auto&& pAnimation : animations) {
+               // pAnimation->Save()
+            }
         }
         if (ImGui::Selectable("Copy")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);

@@ -74,24 +74,9 @@ namespace SR_HTYPES_NS {
         /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
 
         m_scene = m_importer->ReadFile(path.ToString(),
-                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GlobalScale | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType
+                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType
+                // | aiProcess_GlobalScale
         );
-
-        /*for (unsigned int index = 0; index < m_scene->mMetaData->mNumProperties; ++index) {
-            float_t f;
-            aiVector3D vec;
-            int32_t i;
-
-            m_scene->mMetaData->Get(m_scene->mMetaData->mKeys[index], f);
-            m_scene->mMetaData->Get(m_scene->mMetaData->mKeys[index], vec);
-            m_scene->mMetaData->Get(m_scene->mMetaData->mKeys[index], i);
-
-            std::cout << m_scene->mMetaData->mKeys[index].C_Str()
-                << "\nfloat = " << f
-                << "\nvec3 = " << vec.x << ", " << vec.y << ", " << vec.z
-                << "\nint = " << i
-                << std::endl;
-        }*/
 
         if (!m_scene) {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
@@ -245,20 +230,12 @@ namespace SR_HTYPES_NS {
         return ResourceManager::Instance().GetResPath();
     }
 
-    bool RawMesh::Reload() {
-        SR_LOCK_GUARD
+    uint32_t RawMesh::GetAnimationsCount() const {
+        if (!m_scene) {
+            SRHalt("Invalid scene!");
+            return 0;
+        }
 
-        SR_LOG("RawMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" raw mesh...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-        Load();
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
+        return m_scene->mNumAnimations;
     }
 }

@@ -12,7 +12,10 @@ namespace SR_ANIMATIONS_NS {
     SR_REGISTER_COMPONENT(Animator);
 
     Animator::~Animator() {
-        delete m_animationClip;
+        if (m_animationClip) {
+            m_animationClip->RemoveUsePoint();
+            m_animationClip = nullptr;
+        }
     }
 
     SR_UTILS_NS::Component* Animator::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
@@ -74,8 +77,15 @@ namespace SR_ANIMATIONS_NS {
 
     void Animator::OnAttached() {
         m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
+
         //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
         //m_animationClip = AnimationClip::Load("Samples/Liza/Jump.fbx", 0);
+
+        if (!m_animationClip) {
+            return;
+        }
+
+        m_animationClip->AddUsePoint();
 
         for (auto&& pChannel : m_animationClip->GetChannels()) {
             m_maxKeyFrame = SR_MAX(m_maxKeyFrame, pChannel->GetKeys().size());

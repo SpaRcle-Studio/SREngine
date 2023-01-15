@@ -620,10 +620,6 @@ bool GUISystem::BeginMenuBar() {
             }
         }
 
-        if (ImGui::MenuItem("Reload")) {
-            Engine::Instance().Reload();
-        }
-
         if (ImGui::MenuItem("Exit")) {
             SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
         }

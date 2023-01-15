@@ -12,17 +12,25 @@ class aiAnimation;
 namespace SR_ANIMATIONS_NS {
     class AnimationChannel;
 
-    class AnimationClip : public SR_UTILS_NS::NonCopyable {
+    class AnimationClip : public SR_UTILS_NS::IResource {
+        using Super = SR_UTILS_NS::IResource;
     public:
+        AnimationClip();
         ~AnimationClip() override;
 
     public:
-        static AnimationClip* Load(const SR_UTILS_NS::Path& rawPath, uint32_t index);
-        static std::vector<AnimationClip*> Load(const SR_UTILS_NS::Path& rawPath);
-        static AnimationClip* Load(aiAnimation* pAnimation);
+        static std::vector<AnimationClip*> Load(const SR_UTILS_NS::Path& path);
+        static AnimationClip* Load(const SR_UTILS_NS::Path& path, uint32_t id);
 
     public:
         SR_NODISCARD const std::vector<AnimationChannel*>& GetChannels() const { return m_channels; }
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
+
+        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
+
+    protected:
+        bool Unload() override;
+        bool Load() override;
 
     private:
         void LoadChannels(aiAnimation* pAnimation);

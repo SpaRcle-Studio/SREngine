@@ -6,8 +6,13 @@
 #include <Graphics/Animations/AnimationChannel.h>
 
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Types/RawMesh.h>
 
 namespace SR_ANIMATIONS_NS {
+    AnimationClip::AnimationClip()
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(AnimationClip), true /** auto remove */)
+    { }
+
     AnimationClip::~AnimationClip() {
         for (auto&& pChannel : m_channels) {
             delete pChannel;
@@ -15,59 +20,60 @@ namespace SR_ANIMATIONS_NS {
         m_channels.clear();
     }
 
-    AnimationClip* AnimationClip::Load(const Helper::Path &rawPath, uint32_t index) {
-        Assimp::Importer importer;
+    AnimationClip* AnimationClip::Load(const SR_UTILS_NS::Path &rawPath, uint32_t index) {
+        SR_GLOBAL_LOCK
 
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        AnimationClip* pAnimationClip = nullptr;
 
-        auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
-        path = resourceManager.GetResPath().Concat(rawPath);
+        SR_UTILS_NS::ResourceManager::Instance().Execute([&]() {
+            auto&& path = rawPath.SelfRemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
+            auto&& resourceId = path.GetExtensionView() == "animation" ? path.ToString() : std::to_string(index) + "|" + path.ToString();
 
-        const aiScene* pScene = importer.ReadFile(path.ToString(), static_cast<aiPostProcessSteps>(0));
-        if (!pScene) {
-            SR_ERROR("AnimationClip::Load() : failed to load animation clips!\n\tPath: " + rawPath.ToString());
-            return nullptr;
-        }
+            if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<AnimationClip>(path)) {
+                pAnimationClip = pResource;
+                return;
+            }
 
-        if (index >= pScene->mNumAnimations) {
-            SR_ERROR("AnimationClip::Load() : out of range!\n\tPath: " + rawPath.ToString());
-            return nullptr;
-        }
+            pAnimationClip = new AnimationClip();
+            pAnimationClip->SetId(resourceId, false /** auto register */);
 
-        return Load(pScene->mAnimations[index]);
-    }
+            if (!pAnimationClip->Reload()) {
+                SR_ERROR("AnimationClip::Load() : failed to load animation clip! \n\tPath: " + path.ToString());
+                delete pAnimationClip;
+                pAnimationClip = nullptr;
+                return;
+            }
 
-    std::vector<AnimationClip*> AnimationClip::Load(const SR_UTILS_NS::Path &rawPath) {
-        Assimp::Importer importer;
-
-        std::vector<AnimationClip*> animations;
-
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
-        path = resourceManager.GetResPath().Concat(rawPath);
-
-        const aiScene* pScene = importer.ReadFile(path.ToString(), static_cast<aiPostProcessSteps>(0));
-        if (!pScene) {
-            SR_ERROR("AnimationClip::Load() : failed to load animation clips!\n\tPath: " + rawPath.ToString());
-            return std::move(animations);
-        }
-
-        animations.reserve(pScene->mNumAnimations);
-
-        for (uint16_t animationIndex = 0; animationIndex < pScene->mNumAnimations; ++animationIndex) {
-            animations.emplace_back(Load(pScene->mAnimations[animationIndex]));
-        }
-
-        return std::move(animations);
-    }
-
-    AnimationClip* AnimationClip::Load(aiAnimation* pAnimation) {
-        auto&& pAnimationClip = new AnimationClip();
-
-        pAnimationClip->LoadChannels(pAnimation);
+            /// отложенная ручная регистрация
+            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pAnimationClip);
+        });
 
         return pAnimationClip;
+    }
+
+    std::vector<AnimationClip*> AnimationClip::Load(const SR_UTILS_NS::Path& rawPath) {
+        std::vector<AnimationClip*> animations;
+
+        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath);
+        if (!pRawMesh) {
+            SR_ERROR("AnimationClip::Load() : failed to load raw mesh! Path: " + rawPath.ToString());
+            return animations;
+        }
+
+        pRawMesh->AddUsePoint();
+
+        for (uint32_t i = 0; i < pRawMesh->GetAnimationsCount(); ++i) {
+            auto&& pAnimationClip = Load(rawPath, i);
+            animations.emplace_back(pAnimationClip);
+        }
+
+        if (animations.empty()) {
+            SR_ERROR("AnimationClip::Load() : failed to load animation clips! Path: " + rawPath.ToString());
+        }
+
+        pRawMesh->RemoveUsePoint();
+
+        return animations;
     }
 
     void AnimationClip::LoadChannels(aiAnimation *pAnimation) {
@@ -137,5 +143,49 @@ namespace SR_ANIMATIONS_NS {
                 m_channels.emplace_back(pScalingChannel);
             }
         }
+    }
+
+    bool AnimationClip::Unload() {
+        for (auto&& pChannel : m_channels) {
+            delete pChannel;
+        }
+        m_channels.clear();
+
+        return Super::Unload();
+    }
+
+    bool AnimationClip::Load() {
+        Assimp::Importer importer;
+
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        auto&& resourceId = GetResourceId();
+
+        if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(resourceId) == "animation") {
+
+        }
+        else {
+            auto&& [strIndex, rawPath] = SR_UTILS_NS::StringUtils::SplitTwo(resourceId, "|");
+            uint32_t index = SR_UTILS_NS::LexicalCast<uint32_t>(strIndex);
+
+            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath);
+            if (!pRawMesh) {
+                return false;
+            }
+
+            pRawMesh->Execute([&]() -> bool {
+                LoadChannels(pRawMesh->GetAssimpScene()->mAnimations[index]);
+                return true;
+            });
+        }
+
+        return Super::Load();
+    }
+
+    SR_UTILS_NS::Path AnimationClip::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
     }
 }

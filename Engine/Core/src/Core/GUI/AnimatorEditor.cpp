@@ -37,6 +37,8 @@ namespace SR_CORE_NS::GUI {
         }
         ax::NodeEditor::EndCreate();
 
+        DrawPopupMenu();
+
         ax::NodeEditor::End();
     }
 
@@ -92,4 +94,34 @@ namespace SR_CORE_NS::GUI {
 
        Super::OnClose();
    }
+
+    void AnimatorEditor::DrawPopupMenu() {
+        auto&& openPopupPosition = ImGui::GetMousePos();
+
+        ax::NodeEditor::Suspend();
+
+        if (ax::NodeEditor::ShowBackgroundContextMenu()) {
+            ImGui::OpenPopup("Create New Node");
+        }
+
+        ax::NodeEditor::Resume();
+        ax::NodeEditor::Suspend();
+
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+
+        if (ImGui::BeginPopup("Create New Node")) {
+            if (ImGui::MenuItem("Add animation")) {
+                auto&& node = AddNode(new SR_GRAPH_NS::GUI::Node("Walking", SR_GRAPH_NS::GUI::NodeType::Simple))
+                    .AddOutput("", SR_GRAPH_NS::GUI::PinType::Flow);
+
+                ax::NodeEditor::SetNodePosition(node.GetId(), openPopupPosition);
+            }
+
+            ImGui::EndPopup();
+        }
+
+        ImGui::PopStyleVar();
+
+        ax::NodeEditor::Resume();
+    }
 }

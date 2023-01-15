@@ -15,6 +15,8 @@ namespace SR_CORE_NS::GUI {
         ~AnimatorEditor() override = default;
 
     protected:
+        void DrawPopupMenu();
+
         void OnOpen() override;
         void OnClose() override;
 
