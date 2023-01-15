@@ -41,6 +41,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
 
     private:
         void FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject);
