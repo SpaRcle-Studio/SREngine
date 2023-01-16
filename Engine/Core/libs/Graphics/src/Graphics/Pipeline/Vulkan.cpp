@@ -429,9 +429,11 @@ namespace Framework::Graphics {
 
         /** Так как геометрия грузится отзеркаленная по оси X, то она выворачивается наизнанку,
          * соответственно, нужно изменить отсечения полигонов на обратный */
-        const CullMode cullMode =
-                shaderCreateInfo.cullMode == CullMode::Back ? CullMode::Front :
-                    (shaderCreateInfo.cullMode == CullMode::Front ? CullMode::Back : shaderCreateInfo.cullMode);
+        ///const CullMode cullMode =
+        ///        shaderCreateInfo.cullMode == CullMode::Back ? CullMode::Front :
+        ///            (shaderCreateInfo.cullMode == CullMode::Front ? CullMode::Back : shaderCreateInfo.cullMode);
+
+        const CullMode cullMode = shaderCreateInfo.cullMode;
 
         if (!shaderCreateInfo.Validate()) {
             SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info! Create info:"

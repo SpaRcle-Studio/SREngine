@@ -182,6 +182,17 @@ namespace SR_GRAPH_NS {
 
     };
 
+    static CullMode InverseCullMode(CullMode cullMode) {
+        switch (cullMode) {
+            case CullMode::Back:
+                return CullMode::Front;
+            case CullMode::Front:
+                return CullMode::Back;
+            default:
+                return cullMode;
+        }
+    }
+
     static LayoutBinding GetBindingType(const std::string& line) {
         //! first check sampler, after that check uniform
 

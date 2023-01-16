@@ -219,7 +219,9 @@ namespace SR_GTYPES_NS {
 
             for (auto&& [hashName, boneId] : bones) {
                 if (auto&& bone = m_skeleton->GetBone(hashName)) {
-                    m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
+                    m_skeletonMatrices[boneId] =
+                            bone->gameObject->GetTransform()->GetMatrix()
+                    ;
                 }
                 else {
                     m_skeletonMatrices[boneId] = identityMatrix;
