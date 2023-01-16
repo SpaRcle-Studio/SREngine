@@ -58,6 +58,9 @@ namespace SR_HTYPES_NS {
             m_importer->FreeScene();
         }
 
+        m_bones.clear();
+        m_boneOffsets.clear();
+
         return !hasErrors;
     }
 
@@ -77,7 +80,10 @@ namespace SR_HTYPES_NS {
                 aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale
         );
 
-        if (!m_scene) {
+        if (m_scene) {
+            CalculateBones();
+        }
+        else {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
             hasErrors |= true;
         }
@@ -148,7 +154,7 @@ namespace SR_HTYPES_NS {
                         continue;
                     }
 
-                    vertex.weights[vertex.weightsNum - 1].boneId = bones[SR_HASH_STR(mesh->mBones[i]->mName.C_Str())];
+                    vertex.weights[vertex.weightsNum - 1].boneId = bones.at(SR_HASH_STR(mesh->mBones[i]->mName.C_Str()));
                     vertex.weights[vertex.weightsNum - 1].weight = mesh->mBones[i]->mWeights[j].mWeight;
                 }
             }
@@ -251,38 +257,47 @@ namespace SR_HTYPES_NS {
         return m_scene->mNumAnimations;
     }
 
-    std::map<uint64_t, uint32_t> RawMesh::GetBones(uint32_t id) const {
-        std::map<uint64_t, uint32_t> boneIds;
+    const ska::flat_hash_map<uint64_t, uint32_t>& RawMesh::GetBones(uint32_t id) const {
+        static const auto&& def = ska::flat_hash_map<uint64_t, uint32_t>();
 
-        auto&& pMesh = m_scene->mMeshes[id];
-
-        for (uint32_t i = 0; i < pMesh->mNumBones; i++) {
-            const uint64_t boneHashName = SR_HASH_STR(pMesh->mBones[i]->mName.data);
-
-            uint32_t boneIndex = 0;
-
-            if (boneIds.find(boneHashName) == boneIds.end()) {
-                boneIndex = boneIds.size();
-            } else {
-                boneIndex = boneIds[boneHashName];
-            }
-
-            boneIds[boneHashName] = boneIndex;
+        if (id >= m_bones.size()) {
+            return def;
         }
 
-        return boneIds;
+        return m_bones.at(id);
     }
 
-    SR_MATH_NS::Matrix4x4 RawMesh::GetBoneOffset(uint32_t id, uint64_t hashName) const {
-        for (uint32_t i = 0; i < m_scene->mMeshes[id]->mNumBones; ++i) {
-            auto&& strHash = SR_HASH_STR(m_scene->mMeshes[id]->mBones[i]->mName.data);
-            if (strHash == hashName) {
-                auto&& offset = m_scene->mMeshes[id]->mBones[i]->mOffsetMatrix;
-                //SR_MATH_NS::Matrix4x4 matrix4X4 = *reinterpret_cast<SR_MATH_NS::Matrix4x4 *>(&offset);
+    const SR_MATH_NS::Matrix4x4& RawMesh::GetBoneOffset(uint64_t hashName) const {
+        static const auto&& def = SR_MATH_NS::Matrix4x4::Identity();
+
+        auto&& pIt = m_boneOffsets.find(hashName);
+        if (pIt == m_boneOffsets.end()) {
+            return def;
+        }
+
+        return pIt->second;
+    }
+
+    void RawMesh::CalculateBones() {
+        m_bones.resize(m_scene->mNumMeshes);
+
+        for (uint32_t meshId = 0; meshId < m_scene->mNumMeshes; ++meshId) {
+            auto&& pMesh = m_scene->mMeshes[meshId];
+
+            for (uint32_t boneId = 0; boneId < pMesh->mNumBones; ++boneId) {
+                auto&& hashName = SR_HASH_STR(pMesh->mBones[boneId]->mName.data);
+
+                m_bones[meshId].insert(std::make_pair(hashName, static_cast<uint32_t>(m_bones[meshId].size())));
+
+                if (m_boneOffsets.count(hashName) == 1) {
+                    continue;
+                }
+
+                auto&& offsetMatrix = pMesh->mBones[boneId]->mOffsetMatrix;
 
                 aiQuaternion rotation;
                 aiVector3D scaling, translation;
-                offset.Decompose(scaling, rotation, translation);
+                offsetMatrix.Decompose(scaling, rotation, translation);
 
                 SR_MATH_NS::Matrix4x4 matrix4X4(
                         SR_MATH_NS::FVector3(translation.x, translation.y, translation.z),
@@ -290,17 +305,8 @@ namespace SR_HTYPES_NS {
                         SR_MATH_NS::FVector3(scaling.x, scaling.y, scaling.z)
                 );
 
-                return matrix4X4;
+                m_boneOffsets.insert(std::make_pair(hashName, std::move(matrix4X4)));
             }
         }
-
-        return SR_MATH_NS::Matrix4x4::Identity();
-    }
-
-    SR_MATH_NS::Matrix4x4 RawMesh::GetGlobalInverseTransform() const {
-        auto&& globalInverseTransform = m_scene->mRootNode->mTransformation;
-        globalInverseTransform = globalInverseTransform.Inverse();
-        SR_MATH_NS::Matrix4x4 matrix4X4 = *reinterpret_cast<SR_MATH_NS::Matrix4x4*>(&globalInverseTransform);
-        return matrix4X4;
     }
 }

@@ -7,6 +7,7 @@
 
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/Map.h>
 #include <Utils/Common/Vertices.hpp>
 #include <Utils/Math/Matrix4x4.h>
 
@@ -37,9 +38,8 @@ namespace SR_UTILS_NS::Types {
 
         std::vector<SR_UTILS_NS::Vertex> GetVertices(uint32_t id) const;
         std::vector<uint32_t> GetIndices(uint32_t id) const;
-        std::map<uint64_t, uint32_t> GetBones(uint32_t id) const;
-        SR_MATH_NS::Matrix4x4 GetBoneOffset(uint32_t id, uint64_t hashName) const;
-        SR_MATH_NS::Matrix4x4 GetGlobalInverseTransform() const;
+        const ska::flat_hash_map<uint64_t, uint32_t>& GetBones(uint32_t id) const;
+        const SR_MATH_NS::Matrix4x4& GetBoneOffset(uint64_t hashName) const;
 
         SR_NODISCARD uint32_t GetVerticesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;
@@ -57,6 +57,12 @@ namespace SR_UTILS_NS::Types {
         bool Load() override;
 
     private:
+        void CalculateBones();
+
+    private:
+        ska::flat_hash_map<uint64_t, SR_MATH_NS::Matrix4x4> m_boneOffsets;
+        std::vector<ska::flat_hash_map<uint64_t, uint32_t>> m_bones;
+
         const aiScene* m_scene;
         Assimp::Importer* m_importer;
 

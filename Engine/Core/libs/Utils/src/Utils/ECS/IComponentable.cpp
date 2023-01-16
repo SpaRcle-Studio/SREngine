@@ -221,8 +221,6 @@ namespace SR_UTILS_NS {
 
             pComponent->Start();
         }
-
-        m_dirty = false;
     }
 
     void IComponentable::CheckActivity() noexcept {
