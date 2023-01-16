@@ -277,8 +277,19 @@ namespace SR_HTYPES_NS {
         for (uint32_t i = 0; i < m_scene->mMeshes[id]->mNumBones; ++i) {
             auto&& strHash = SR_HASH_STR(m_scene->mMeshes[id]->mBones[i]->mName.data);
             if (strHash == hashName) {
-                auto &&offset = m_scene->mMeshes[id]->mBones[i]->mOffsetMatrix;
-                SR_MATH_NS::Matrix4x4 matrix4X4 = *reinterpret_cast<SR_MATH_NS::Matrix4x4 *>(&offset);
+                auto&& offset = m_scene->mMeshes[id]->mBones[i]->mOffsetMatrix;
+                //SR_MATH_NS::Matrix4x4 matrix4X4 = *reinterpret_cast<SR_MATH_NS::Matrix4x4 *>(&offset);
+
+                aiQuaternion rotation;
+                aiVector3D scaling, translation;
+                offset.Decompose(scaling, rotation, translation);
+
+                SR_MATH_NS::Matrix4x4 matrix4X4(
+                        SR_MATH_NS::FVector3(translation.x, translation.y, translation.z),
+                        SR_MATH_NS::Quaternion(rotation.x, rotation.y, rotation.z, rotation.w),
+                        SR_MATH_NS::FVector3(scaling.x, scaling.y, scaling.z)
+                );
+
                 return matrix4X4;
             }
         }
