@@ -10,6 +10,8 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Function.h>
 
+#define SR_THREAD_SAFE_CHECKS 0
+
 namespace SR_HTYPES_NS {
     class DataStorage;
 

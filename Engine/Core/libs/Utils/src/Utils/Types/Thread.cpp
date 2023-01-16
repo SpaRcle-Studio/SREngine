@@ -118,7 +118,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Synchronize() {
-    #ifdef SR_DEBUG
+    #if defined(SR_DEBUG) && SR_THREAD_SAFE_CHECKS
         auto&& thread = Thread::Factory::Instance().GetThisThread();
 
         if (GetId() != thread->GetId()) {

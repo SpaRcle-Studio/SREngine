@@ -81,7 +81,7 @@ namespace SR_WORLD_NS {
         m_dirty = true;
     }
 
-    uint64_t SceneBuilder::Initialize(bool isPaused) {
+    void SceneBuilder::Initialize(bool isPaused) {
         auto&& root = m_scene->GetRootGameObjects();
 
         m_dirty |= m_scene->IsDirty();
@@ -91,11 +91,8 @@ namespace SR_WORLD_NS {
         m_scene->CheckActivity();
         m_scene->Start();
 
-        uint64_t rootHash = 0;
-
         for (auto&& gameObject : root) {
             m_dirty |= gameObject->IsDirty();
-            rootHash = SR_UTILS_NS::HashCombine(gameObject.GetRawPtr(), rootHash);
             gameObject->PostLoad();
         }
 
@@ -110,7 +107,5 @@ namespace SR_WORLD_NS {
         for (auto&& gameObject : root) {
             gameObject->Start();
         }
-
-        return rootHash;
     }
 }

@@ -21,7 +21,10 @@ namespace SR_GTYPES_NS {
     class Camera : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1001);
         SR_INITIALIZE_COMPONENT(Camera);
-        using RenderTechniquePtr = std::variant<SR_UTILS_NS::Path, RenderTechnique*>;
+        struct RenderTechniqueInfo {
+            SR_UTILS_NS::Path path;
+            RenderTechnique* pTechnique = nullptr;
+        };
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:
         explicit Camera(uint32_t width = 0, uint32_t height = 0);
@@ -35,7 +38,7 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);
 
-        Component* CopyComponent() const override;
+        SR_NODISCARD Component* CopyComponent() const override;
 
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
@@ -102,7 +105,7 @@ namespace SR_GTYPES_NS {
         SR_MATH_NS::FVector3  m_position          = { 0, 0, 0 };
         SR_MATH_NS::UVector2  m_viewportSize      = { 0, 0 };
 
-        RenderTechniquePtr    m_renderTechnique   = { };
+        RenderTechniqueInfo   m_renderTechnique   = { };
 
     };
 }

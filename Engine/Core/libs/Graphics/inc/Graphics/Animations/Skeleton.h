@@ -43,7 +43,7 @@ namespace SR_ANIMATIONS_NS {
         void DisableDebug();
 
     private:
-        bool m_debugEnabled = true;
+        bool m_debugEnabled = false;
         ska::flat_hash_map<Bone*, uint64_t> m_debugLines;
 
         ska::flat_hash_map<uint64_t, Bone*> m_bonesByName;

@@ -26,6 +26,17 @@ namespace SR_GRAPH_NS {
     class RenderTechnique;
     class Environment;
 
+    SR_ENUM_NS_CLASS_T(RCUpdateQueueState, uint8_t,
+       Begin = 0,
+       Framebuffers,
+       Shaders,
+       Textures,
+       Techniques,
+       Materials,
+       Skyboxes,
+       End
+    );
+
     /**
      * Здесь хранятся все контекстные ресурсы.
      * Исключение - меши, потому что они могут быть в нескольких экземплярах.
@@ -98,6 +109,8 @@ namespace SR_GRAPH_NS {
         template<typename T> bool Update(T& resourceList) noexcept;
 
     private:
+        RCUpdateQueueState m_updateState = RCUpdateQueueState::Begin;
+
         std::vector<Types::Framebuffer*> m_framebuffers;
         std::vector<Types::Shader*> m_shaders;
         std::vector<TexturePtr> m_textures;
