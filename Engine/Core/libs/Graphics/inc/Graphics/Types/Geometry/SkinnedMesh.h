@@ -60,10 +60,15 @@ namespace SR_GTYPES_NS {
 
     private:
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
+
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
         SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
+
         bool m_isOffsetsInitialized = false;
+
+        std::vector<uint64_t> m_bonesIds;
+
         SR_MATH_NS::Matrix4x4 m_skeletonMatrices[SR_HUMANOID_MAX_BONES];
         SR_MATH_NS::Matrix4x4 m_skeletonOffsets[SR_HUMANOID_MAX_BONES];
     };

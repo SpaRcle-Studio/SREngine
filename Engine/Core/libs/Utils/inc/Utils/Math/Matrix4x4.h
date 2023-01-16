@@ -13,6 +13,7 @@
 
 namespace SR_MATH_NS {
     class SR_DLL_EXPORT Matrix4x4 {
+        SR_INLINE_STATIC const glm::mat4 GLM_IDENTITY_MAT4X4 = glm::mat4(1); /** NOLINT */
     public:
         static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0) {
             auto matrix = glm::rotate(glm::mat4(1), (float)pitch, { 1, 0, 0 });
@@ -21,45 +22,18 @@ namespace SR_MATH_NS {
             return Matrix4x4(glm::translate(matrix, { 0, 0, 0 }));
         }
 
-        glm::mat4 self{};
+        union {
+            SR_MATH_NS::Vector4<float> value[4];
+            glm::mat4 self;
+        };
 
-        Matrix4x4() = default;
+        constexpr Matrix4x4() noexcept;
+        explicit constexpr Matrix4x4(const Unit& scalar) noexcept;
+        explicit constexpr Matrix4x4(const glm::mat4& mat) noexcept;
+        explicit Matrix4x4(glm::mat4&& mat) noexcept;
 
-        Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale){
-            self = glm::translate(glm::mat4(1), {
-                    translate.x,
-                    translate.y,
-                    translate.z
-            });
-
-            self *= mat4_cast(rotation.ToGLM());
-
-            self = glm::scale(self, scale.ToGLM());
-        }
-
-        Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) {
-            static const auto&& identity = glm::mat4(1);
-
-            self = glm::translate(identity, {
-                    translate.x,
-                    translate.y,
-                    translate.z
-            });
-
-            self = glm::scale(self, skew.ToGLM());
-
-            self *= mat4_cast(rotation.ToGLM());
-
-            self = glm::scale(self, scale.ToGLM());
-        }
-
-        explicit constexpr Matrix4x4(const Unit& scalar) {
-            self = glm::mat4(static_cast<float_t>(scalar));
-        }
-
-        explicit constexpr Matrix4x4(const glm::mat4& mat) {
-            self = mat;
-        }
+        Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept;
+        Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) noexcept;
 
         static constexpr Matrix4x4 Identity() {
             return Matrix4x4(1);
@@ -85,26 +59,27 @@ namespace SR_MATH_NS {
             return Matrix4x4(translation, FVector3::Zero(), FVector3::One());
         }
 
-        [[nodiscard]] Matrix4x4 Inverse() const {
+        SR_NODISCARD Matrix4x4 Inverse() const {
             return Matrix4x4(glm::inverse(self));
         }
 
-        [[nodiscard]] Matrix4x4 RotateAxis(const FVector3& axis, const double& angle) const {
+        SR_NODISCARD Matrix4x4 RotateAxis(const FVector3& axis, const double& angle) const {
             return Matrix4x4(glm::rotate(self, glm::radians((float)angle), axis.ToGLM()));
         }
-        [[nodiscard]] Matrix4x4 Rotate(const FVector3& angle) const {
+
+        SR_NODISCARD Matrix4x4 Rotate(const FVector3& angle) const {
             return Matrix4x4(self * mat4_cast(angle.ToQuat().ToGLM()));
         }
 
-        [[nodiscard]] glm::mat4 ToGLM() const {
+        SR_NODISCARD const glm::mat4& ToGLM() const {
             return self;
         }
 
-        [[nodiscard]] Matrix4x4 Translate(const FVector3& vec3) const {
+        SR_NODISCARD Matrix4x4 Translate(const FVector3& vec3) const {
             return Matrix4x4(glm::translate(self, vec3.ToGLM()));
         }
 
-        [[nodiscard]] FVector3 GetTranslate() const {
+        SR_NODISCARD FVector3 GetTranslate() const {
             glm::vec3 scale;
             glm::quat rotation;
             glm::vec3 translation;
@@ -117,7 +92,7 @@ namespace SR_MATH_NS {
             return FVector3(translation);
         }
 
-        [[nodiscard]] FVector3 GetScale() const {
+        SR_NODISCARD FVector3 GetScale() const {
             glm::vec3 scale;
             glm::quat rotation;
             glm::vec3 translation;
@@ -236,9 +211,7 @@ namespace SR_MATH_NS {
             return GetQuat().EulerAngle();
         }
 
-        Matrix4x4 operator*(const Matrix4x4& mat) const {
-            return Matrix4x4(self * mat.self);
-        }
+        Matrix4x4 operator*(const Matrix4x4& mat) const;
         void operator*=(const Matrix4x4& right) {
             *this = *this * right;
         }

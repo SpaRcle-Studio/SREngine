@@ -216,16 +216,18 @@ namespace SR_GTYPES_NS {
 
         auto&& bones = m_rawMesh->GetBones(m_meshId);
 
-        if (!m_isOffsetsInitialized) {
+        if (!m_isOffsetsInitialized && m_skeleton) {
+            m_bonesIds.resize(bones.size());
             for (auto&& [hashName, boneId] : bones) {
                 m_skeletonOffsets[boneId] = m_rawMesh->GetBoneOffset(hashName);
+                m_bonesIds[boneId] = m_skeleton->GetBoneIndex(hashName);
             }
             m_isOffsetsInitialized = true;
         }
 
         if (m_skeleton) {
-            for (auto&& [hashName, boneId] : bones) {
-                if (auto&& bone = m_skeleton->GetBone(hashName)) {
+            for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
+                if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
                     m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
                 }
                 else {
@@ -238,6 +240,7 @@ namespace SR_GTYPES_NS {
                 m_skeletonMatrices[i] = identityMatrix;
             }
         }
+
         GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, &m_skeletonMatrices);
         GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, &m_skeletonOffsets);
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);

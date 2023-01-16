@@ -33,6 +33,8 @@ namespace SR_ANIMATIONS_NS {
         SR_NODISCARD Bone* GetRootBone() const noexcept { return m_rootBone; }
 
         SR_NODISCARD Bone* GetBone(uint64_t hashName);
+        SR_NODISCARD Bone* GetBoneByIndex(uint64_t index);
+        SR_NODISCARD uint64_t GetBoneIndex(uint64_t hashName);
         SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; }
         void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
 
@@ -47,6 +49,7 @@ namespace SR_ANIMATIONS_NS {
         ska::flat_hash_map<Bone*, uint64_t> m_debugLines;
 
         ska::flat_hash_map<uint64_t, Bone*> m_bonesByName;
+        std::vector<Bone*> m_bonesByIndex;
 
         Bone* m_rootBone = nullptr;
     };

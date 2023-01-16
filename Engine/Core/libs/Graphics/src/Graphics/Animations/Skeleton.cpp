@@ -108,6 +108,7 @@ namespace SR_ANIMATIONS_NS {
 
     bool Skeleton::ReCalculateSkeleton() {
         m_bonesByName.clear();
+        m_bonesByIndex.clear();
 
         if (!m_rootBone) {
             return false;
@@ -119,6 +120,7 @@ namespace SR_ANIMATIONS_NS {
         }
 
         m_bonesByName.reserve(SR_HUMANOID_MAX_BONES);
+        m_bonesByIndex.reserve(SR_HUMANOID_MAX_BONES);
 
         bool hasErrors = false;
 
@@ -131,6 +133,7 @@ namespace SR_ANIMATIONS_NS {
             }
 #endif
 
+            m_bonesByIndex.emplace_back(pBone);
             m_bonesByName.insert(std::make_pair(pBone->hashName, pBone));
 
             for (auto&& pSubBone : pBone->bones) {
@@ -224,5 +227,27 @@ namespace SR_ANIMATIONS_NS {
                     SR_MATH_NS::FColor(38, 37, 45, 255)
             );
         }
+    }
+
+    Bone *Skeleton::GetBoneByIndex(uint64_t index) {
+        if (index >= m_bonesByIndex.size()) {
+            return nullptr;
+        }
+
+        if (!m_bonesByIndex[index]->gameObject && !m_bonesByIndex[index]->hasError && !m_bonesByIndex[index]->Initialize()) {
+            SR_WARN("Skeleton::GetBoneByIndex() : failed to find bone game object!\n\tName: " + m_bonesByIndex[index]->name);
+        }
+
+        return m_bonesByIndex.at(index);
+    }
+
+    uint64_t Skeleton::GetBoneIndex(uint64_t hashName) {
+        for (uint64_t i = 0; i < m_bonesByIndex.size(); ++i) {
+            if (m_bonesByIndex[i]->hashName == hashName) {
+                return i;
+            }
+        }
+
+        return SR_ID_INVALID;
     }
 }

@@ -207,6 +207,8 @@
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
 #endif
 
+#define SR_SUPPORT_PARALLEL
+
 #define SR_DLL_EXPORTS 1
 
 #ifndef SR_LINUX
