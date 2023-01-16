@@ -52,6 +52,8 @@ namespace SR_MATH_NS {
         { }
 
     public:
+        SR_NODISCARD Vector3<T> XYZ() const noexcept { return Vector3<T>(x, y, z); }
+
         SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
 
         template<typename U> SR_NODISCARD Vector4<U> SR_FASTCALL Cast() const noexcept { return Vector4<U>(

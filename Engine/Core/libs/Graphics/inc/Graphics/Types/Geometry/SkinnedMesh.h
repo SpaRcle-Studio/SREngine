@@ -63,7 +63,9 @@ namespace SR_GTYPES_NS {
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
         SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
+        bool m_isOffsetsInitialized = false;
         SR_MATH_NS::Matrix4x4 m_skeletonMatrices[SR_HUMANOID_MAX_BONES];
+        SR_MATH_NS::Matrix4x4 m_skeletonOffsets[SR_HUMANOID_MAX_BONES];
     };
 }
 

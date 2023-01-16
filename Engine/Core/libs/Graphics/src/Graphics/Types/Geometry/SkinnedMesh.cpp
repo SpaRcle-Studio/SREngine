@@ -214,12 +214,19 @@ namespace SR_GTYPES_NS {
     void SkinnedMesh::UseModelMatrix() {
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
-        if (m_skeleton) {
-            auto&& bones = m_rawMesh->GetBones(m_meshId);
+        auto&& bones = m_rawMesh->GetBones(m_meshId);
 
+        if (!m_isOffsetsInitialized) {
+            for (auto&& [hashName, boneId] : bones) {
+                m_skeletonOffsets[boneId] = m_rawMesh->GetBoneOffset(hashName);
+            }
+            m_isOffsetsInitialized = true;
+        }
+
+        if (m_skeleton) {
             for (auto&& [hashName, boneId] : bones) {
                 if (auto&& bone = m_skeleton->GetBone(hashName)) {
-                    m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix() * m_rawMesh->GetBoneOffset(hashName);
+                    m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
                 }
                 else {
                     m_skeletonMatrices[boneId] = identityMatrix;
@@ -232,6 +239,7 @@ namespace SR_GTYPES_NS {
             }
         }
         GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, &m_skeletonMatrices);
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, &m_skeletonOffsets);
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 

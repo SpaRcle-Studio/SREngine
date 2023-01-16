@@ -7,6 +7,7 @@
 
 #include <Utils/Math/Quaternion.h>
 #include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector4.h>
 
 #include <glm/gtx/matrix_decompose.hpp>
 
@@ -37,7 +38,9 @@ namespace SR_MATH_NS {
         }
 
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) {
-            self = glm::translate(glm::mat4(1), {
+            static const auto&& identity = glm::mat4(1);
+
+            self = glm::translate(identity, {
                     translate.x,
                     translate.y,
                     translate.z
@@ -234,10 +237,42 @@ namespace SR_MATH_NS {
         }
 
         Matrix4x4 operator*(const Matrix4x4& mat) const {
-            return Matrix4x4(this->self * mat.self);
+            return Matrix4x4(self * mat.self);
         }
         void operator*=(const Matrix4x4& right) {
             *this = *this * right;
+        }
+
+        Matrix4x4 operator+(const Matrix4x4& mat) const {
+            return Matrix4x4(self + mat.self);
+        }
+        void operator+=(const Matrix4x4& right) {
+            *this = *this + right;
+        }
+
+        Matrix4x4 operator*(const Unit& scalar) const {
+            return Matrix4x4(self * static_cast<float>(scalar));
+        }
+        void operator*=(const Unit& scalar) {
+            *this = *this * static_cast<float>(scalar);
+        }
+
+        template<typename U> Vector4<U> operator*(const Vector4<U>& vector4) const {
+            const glm::vec4 v = self * glm::vec4(
+                    static_cast<float>(vector4.x),
+                    static_cast<float>(vector4.y),
+                    static_cast<float>(vector4.z),
+                    static_cast<float>(vector4.w)
+            );
+            return Vector4<U>(
+                    static_cast<U>(v.x),
+                    static_cast<U>(v.y),
+                    static_cast<U>(v.z),
+                    static_cast<U>(v.w)
+            );
+        }
+        template<typename U> void operator*=(const Vector4<U>& vector4) {
+            *this = *this * vector4;
         }
 
         Matrix4x4 operator/(Matrix4x4 mat) {

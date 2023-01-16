@@ -12,6 +12,7 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "ORTHOGONAL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_NO_TRANSLATE_MATRIX", ShaderVarType::Mat4 },
         { "SKELETON_MATRICES_128", ShaderVarType::Skeleton128 },
+        { "SKELETON_MATRIX_OFFSETS_128", ShaderVarType::Skeleton128 },
         { "SKYBOX_DIFFUSE", ShaderVarType::SamplerCube },
         { "TEXT_ATLAS_TEXTURE", ShaderVarType::Sampler2D },
         { "TIME", ShaderVarType::Float },
