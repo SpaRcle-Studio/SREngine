@@ -96,7 +96,7 @@ namespace SR_MATH_NS {
         AXIS_XYZ  = AXIS_X | AXIS_Y | AXIS_Z,
     };
 
-    typedef double Unit; //! can broke render
+    typedef float Unit; //! can broke render
 
     const double_t DoubleMAX = DBL_MAX;
     const float_t  FloatMAX  = FLT_MAX;

@@ -83,29 +83,29 @@ namespace SR_UTILS_NS {
 
     SR_HTYPES_NS::Marshal::Ptr Transform::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
         pMarshal = ISavable::Save(pMarshal, flags);
-        pMarshal->Write(static_cast<int8_t>(GetMeasurement()));
+        pMarshal->Write(static_cast<uint8_t>(GetMeasurement()));
 
         switch (GetMeasurement()) {
             case Measurement::SpaceZero:
                 break;
             case Measurement::Space2D:
-                pMarshal->Write(GetTranslation(), Math::FVector3(0.f));
-                pMarshal->Write(GetRotation(), Math::FVector3(0.f));
-                pMarshal->Write(GetScale(), Math::FVector3(1.f));
-                pMarshal->Write(GetSkew(), Math::FVector3(1.f));
+                pMarshal->Write(GetTranslation(), SR_MATH_NS::FVector3(0.f));
+                pMarshal->Write(GetRotation(), SR_MATH_NS::FVector3(0.f));
+                pMarshal->Write(GetScale(), SR_MATH_NS::FVector3(1.f));
+                pMarshal->Write(GetSkew(), SR_MATH_NS::FVector3(1.f));
                 break;
             case Measurement::Space3D: {
                 if (!m_gameObject || m_gameObject->GetParent()) {
-                    pMarshal->Write(GetTranslation(), Math::FVector3(0.f));
+                    pMarshal->Write(GetTranslation(), SR_MATH_NS::FVector3(0.f));
                 }
                 else {
                     auto &&offset = SR_THIS_THREAD->GetContext()->GetValueDef<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3());
-                    pMarshal->Write(offset + GetTranslation(), Math::FVector3(0.f));
+                    pMarshal->Write(offset + GetTranslation(), SR_MATH_NS::FVector3(0.f));
                 }
 
-                pMarshal->Write(GetRotation(), Math::FVector3(0.f));
-                pMarshal->Write(GetScale(), Math::FVector3(1.f));
-                pMarshal->Write(GetSkew(), Math::FVector3(1.f));
+                pMarshal->Write(GetRotation(), SR_MATH_NS::FVector3(0.f));
+                pMarshal->Write(GetScale(), SR_MATH_NS::FVector3(1.f));
+                pMarshal->Write(GetSkew(), SR_MATH_NS::FVector3(1.f));
                 break;
             }
             case Measurement::Space4D:
@@ -120,7 +120,7 @@ namespace SR_UTILS_NS {
     Transform *Transform::Load(SR_HTYPES_NS::Marshal &marshal, GameObject* pGameObject) {
         Transform* transform = nullptr;
 
-        auto&& measurement = static_cast<Measurement>(marshal.Read<int8_t>());
+        auto&& measurement = static_cast<Measurement>(marshal.Read<uint8_t>());
 
         switch (measurement) {
             case Measurement::SpaceZero:

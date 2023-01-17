@@ -13,31 +13,41 @@
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
         template<typename T> static void SR_FASTCALL SaveValue(std::stringstream& stream, const T& value) {
-            if constexpr (std::is_same<T, Math::FColor>()) {
-                stream.write((const char *) &value.r, sizeof(Math::Unit));
-                stream.write((const char *) &value.g, sizeof(Math::Unit));
-                stream.write((const char *) &value.b, sizeof(Math::Unit));
-                stream.write((const char *) &value.a, sizeof(Math::Unit));
+            if constexpr (std::is_same<T, SR_MATH_NS::FColor>()) {
+                stream.write((const char *) &value.r, sizeof(SR_MATH_NS::Unit));
+                stream.write((const char *) &value.g, sizeof(SR_MATH_NS::Unit));
+                stream.write((const char *) &value.b, sizeof(SR_MATH_NS::Unit));
+                stream.write((const char *) &value.a, sizeof(SR_MATH_NS::Unit));
             }
-            else if constexpr (std::is_same<T, Math::FVector3>()) {
-                stream.write((const char *) &value.x, sizeof(Math::Unit));
-                stream.write((const char *) &value.y, sizeof(Math::Unit));
-                stream.write((const char *) &value.z, sizeof(Math::Unit));
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector3>()) {
+                stream.write((const char *) &value.x, sizeof(SR_MATH_NS::Unit));
+                stream.write((const char *) &value.y, sizeof(SR_MATH_NS::Unit));
+                stream.write((const char *) &value.z, sizeof(SR_MATH_NS::Unit));
             }
-            else if constexpr (std::is_same<T, Math::FVector2>()) {
-                stream.write((const char *) &value.x, sizeof(Math::Unit));
-                stream.write((const char *) &value.y, sizeof(Math::Unit));
+            else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<float>>()) {
+                stream.write((const char *) &value.x, sizeof(float));
+                stream.write((const char *) &value.y, sizeof(float));
+                stream.write((const char *) &value.z, sizeof(float));
             }
-            else if constexpr (std::is_same<T, Math::IVector3>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<double>>()) {
+                stream.write((const char *) &value.x, sizeof(double));
+                stream.write((const char *) &value.y, sizeof(double));
+                stream.write((const char *) &value.z, sizeof(double));
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
+                stream.write((const char *) &value.x, sizeof(SR_MATH_NS::Unit));
+                stream.write((const char *) &value.y, sizeof(SR_MATH_NS::Unit));
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector3>()) {
                 stream.write((const char *) &value.x, sizeof(int32_t));
                 stream.write((const char *) &value.y, sizeof(int32_t));
                 stream.write((const char *) &value.z, sizeof(int32_t));
             }
-            else if constexpr (std::is_same<T, Math::IVector2>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
                 stream.write((const char *) &value.x, sizeof(int32_t));
                 stream.write((const char *) &value.y, sizeof(int32_t));
             }
-            else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+            else if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
                 stream.write((const char *) &value, sizeof(T));
             }
             else {
@@ -48,36 +58,48 @@ namespace SR_UTILS_NS {
         template<typename Stream, typename T> static T SR_FASTCALL LoadValue(Stream& stream, uint64_t& readCount) {
             T value = T();
 
-            if constexpr (std::is_same<T, Math::FColor>()) {
-                stream.read((char*)&value.r, sizeof(Math::Unit));
-                stream.read((char*)&value.g, sizeof(Math::Unit));
-                stream.read((char*)&value.b, sizeof(Math::Unit));
-                stream.read((char*)&value.a, sizeof(Math::Unit));
-                readCount += sizeof(Math::Unit) * 4;
+            if constexpr (std::is_same<T, SR_MATH_NS::FColor>()) {
+                stream.read((char*)&value.r, sizeof(SR_MATH_NS::Unit));
+                stream.read((char*)&value.g, sizeof(SR_MATH_NS::Unit));
+                stream.read((char*)&value.b, sizeof(SR_MATH_NS::Unit));
+                stream.read((char*)&value.a, sizeof(SR_MATH_NS::Unit));
+                readCount += sizeof(SR_MATH_NS::Unit) * 4;
             }
-            else if constexpr (std::is_same<T, Math::FVector3>()) {
-                stream.read((char*)&value.x, sizeof(Math::Unit));
-                stream.read((char*)&value.y, sizeof(Math::Unit));
-                stream.read((char*)&value.z, sizeof(Math::Unit));
-                readCount += sizeof(Math::Unit) * 3;
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector3>()) {
+                stream.read((char*)&value.x, sizeof(SR_MATH_NS::Unit));
+                stream.read((char*)&value.y, sizeof(SR_MATH_NS::Unit));
+                stream.read((char*)&value.z, sizeof(SR_MATH_NS::Unit));
+                readCount += sizeof(SR_MATH_NS::Unit) * 3;
             }
-            else if constexpr (std::is_same<T, Math::FVector2>()) {
-                stream.read((char*)&value.x, sizeof(Math::Unit));
-                stream.read((char*)&value.y, sizeof(Math::Unit));
-                readCount += sizeof(Math::Unit) * 2;
+            else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<float>>()) {
+                stream.read((char*)&value.x, sizeof(float));
+                stream.read((char*)&value.y, sizeof(float));
+                stream.read((char*)&value.z, sizeof(float));
+                readCount += sizeof(float) * 3;
             }
-            else if constexpr (std::is_same<T, Math::IVector3>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<double>>()) {
+                stream.read((char*)&value.x, sizeof(double));
+                stream.read((char*)&value.y, sizeof(double));
+                stream.read((char*)&value.z, sizeof(double));
+                readCount += sizeof(double) * 3;
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
+                stream.read((char*)&value.x, sizeof(SR_MATH_NS::Unit));
+                stream.read((char*)&value.y, sizeof(SR_MATH_NS::Unit));
+                readCount += sizeof(SR_MATH_NS::Unit) * 2;
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector3>()) {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
                 stream.read((char*)&value.z, sizeof(int32_t));
                 readCount += sizeof(int32_t) * 3;
             }
-            else if constexpr (std::is_same<T, Math::IVector2>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
                 readCount += sizeof(int32_t) * 2;
             }
-            else if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+            else if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
                 stream.read((char*)&value, sizeof(T));
                 readCount += sizeof(T);
             }

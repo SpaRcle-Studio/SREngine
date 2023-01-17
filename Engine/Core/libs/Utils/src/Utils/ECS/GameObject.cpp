@@ -466,13 +466,10 @@ namespace SR_UTILS_NS {
 
                 static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
 
-                SR_HTYPES_NS::Marshal migrated = Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version);
-                if (!migrated.Valid()) {
+                if (!Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version)) {
                     SR_ERROR("GameObject::Load() : failed to migrate game object!");
                     return GameObject::Ptr();
                 }
-
-                std::swap(marshal, migrated);
             }
 
             auto&& enabled = marshal.Read<bool>();

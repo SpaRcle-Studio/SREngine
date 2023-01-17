@@ -93,6 +93,11 @@ namespace SR_HTYPES_NS {
             return pMarshal;
         }
 
+        void WriteRawBytes(const char* pData, uint64_t size) {
+            m_stream.write(pData, size);
+            m_size += size;
+        }
+
         template<typename T> void Write(const T& value) {
             if constexpr (std::is_same_v<T, std::any>) {
                 MarshalUtils::SaveAny<std::stringstream, std::any>(m_stream, value, m_size);
@@ -131,17 +136,39 @@ namespace SR_HTYPES_NS {
             return value;
         }
 
+        void SetData(const char* pData, uint64_t size) {
+            m_stream = std::stringstream();
+            m_stream.write(pData, size);
+            m_size = size;
+        }
+
+        void SetPosition(uint64_t position) {
+            m_stream.seekg(0, std::ios_base::beg);
+            m_position = position;
+            m_stream.seekg(position, std::ios_base::cur);
+        }
+
+        SR_NODISCARD const char* ViewRaw() const {
+            const auto buff = m_stream.rdbuf();
+            return (const char*)buff->view().data();
+        }
 
         template<typename T> T Read() {
+            T value;
+
             if constexpr (std::is_same_v<T, std::any>) {
-                return MarshalUtils::LoadAny<std::stringstream, std::any>(m_stream, m_position);
+                value = MarshalUtils::LoadAny<std::stringstream, std::any>(m_stream, m_position);
             }
             else if constexpr (Math::IsString<T>()) {
-                return MarshalUtils::LoadShortStr<std::stringstream>(m_stream, m_position);
+                value = MarshalUtils::LoadShortStr<std::stringstream>(m_stream, m_position);
             }
             else {
-                return MarshalUtils::LoadValue<std::stringstream, T>(m_stream, m_position);
+                value = MarshalUtils::LoadValue<std::stringstream, T>(m_stream, m_position);
             }
+
+            SRAssert(m_position <= m_size);
+
+            return value;
         }
 
         template<typename T> T Read(const T& def) {

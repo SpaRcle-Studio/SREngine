@@ -42,13 +42,10 @@ namespace SR_UTILS_NS {
 
             SR_WARN("ComponentManager::Load() : \"" + pMetadataIt->second.name + "\" has different version! Try migrate...");
 
-            SR_HTYPES_NS::Marshal migrated = Migration::Instance().Migrate(m_lastComponent, marshal, version);
-            if (!migrated.Valid()) {
+            if (!Migration::Instance().Migrate(m_lastComponent, marshal, version)) {
                 SR_ERROR("ComponentManager::Load() : failed to migrate component!");
                 return nullptr;
             }
-
-            std::swap(marshal, migrated);
         }
 
         if (auto&& pComponent = m_meta.at(m_lastComponent).loader(marshal, &m_context)) {

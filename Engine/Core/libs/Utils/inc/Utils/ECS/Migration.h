@@ -13,14 +13,14 @@ namespace SR_UTILS_NS {
     class Migration : public Singleton<Migration> {
         friend class Singleton<Migration>;
         using Version = uint16_t;
-        using Migrator = SR_HTYPES_NS::Function<SR_HTYPES_NS::Marshal*(SR_HTYPES_NS::Marshal*)>;
+        using Migrator = SR_HTYPES_NS::Function<bool(SR_HTYPES_NS::Marshal&)>;
         struct MigrationInfo {
             Version from;
             Version to;
             Migrator migrator;
         };
     public:
-        SR_HTYPES_NS::Marshal Migrate(uint64_t hashName, SR_HTYPES_NS::Marshal& pMarshal, Version version) const;
+        bool Migrate(uint64_t hashName, SR_HTYPES_NS::Marshal& pMarshal, Version version) const;
 
         bool RegisterMigrator(uint64_t hashName, Version from, Version to, Migrator&& migrator);
 

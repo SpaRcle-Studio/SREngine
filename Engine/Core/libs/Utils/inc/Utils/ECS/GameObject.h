@@ -39,7 +39,7 @@ namespace SR_UTILS_NS {
     typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1004);
+        SR_ENTITY_SET_VERSION(1005);
         friend class Component;
     public:
         using Name = std::string;

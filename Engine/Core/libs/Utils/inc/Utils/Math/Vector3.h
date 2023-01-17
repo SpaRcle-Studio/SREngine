@@ -384,8 +384,8 @@ namespace SR_MATH_NS {
         SR_FORCE_INLINE Vector3 operator-() const { return Vector3(-x, -y, -z); }
         SR_FORCE_INLINE Vector3 operator+() const { return *this; }
 
-        SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
-        SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const { return x != p_v.x || y != p_v.y || z != p_v.z; }
+        SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return SR_EQUALS(x, p_v.x) && SR_EQUALS(y, p_v.y) && SR_EQUALS(z, p_v.z); }
+        SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const { return !SR_EQUALS(x, p_v.x) || !SR_EQUALS(y, p_v.y) || !SR_EQUALS(z, p_v.z); }
 
         SR_FORCE_INLINE bool operator<=(const Vector3 &p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
         SR_FORCE_INLINE bool operator>=(const Vector3 &p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
@@ -394,7 +394,7 @@ namespace SR_MATH_NS {
 
     public:
         SR_NODISCARD glm::vec3 ToGLM() const noexcept {
-            return glm::vec3(x, y, z);
+            return *reinterpret_cast<glm::vec3*>((void*)this);
         }
         static Unit Magnitude(Vector3 vec) {
             return sqrt(SR_POW(vec.x) + SR_POW(vec.y) + SR_POW(vec.z));
