@@ -6,40 +6,36 @@
 #define SRENGINE_ANYMARSHAL_H
 
 #include <Utils/Common/BaseMarshal.h>
+#include <Utils/Types/Stream.h>
 
 namespace SR_UTILS_NS::MarshalUtils {
-    template<typename Stream, typename Any> static Any SR_FASTCALL LoadAny(Stream& stream, uint64_t& readCount) {
-        auto&& type = static_cast<StandardType>(LoadValue<Stream, uint16_t>(stream, readCount));
+    template<typename Any> static Any SR_FASTCALL LoadAny(SR_HTYPES_NS::Stream& stream) {
+        auto&& type = static_cast<StandardType>(LoadValue<uint16_t>(stream));
 
         switch (type) {
-            case StandardType::Bool: return LoadValue<Stream, bool>(stream, readCount);
-            case StandardType::Int8: return LoadValue<Stream, int8_t>(stream, readCount);
-            case StandardType::UInt8: return LoadValue<Stream, uint8_t>(stream, readCount);
-            case StandardType::Int16: return LoadValue<Stream, int16_t>(stream, readCount);
-            case StandardType::UInt16: return LoadValue<Stream, uint16_t>(stream, readCount);
-            case StandardType::Int32: return LoadValue<Stream, int32_t>(stream, readCount);
-            case StandardType::UInt32: return LoadValue<Stream, uint32_t>(stream, readCount);
-            case StandardType::Int64: return LoadValue<Stream, int64_t>(stream, readCount);
-            case StandardType::UInt64: return LoadValue<Stream, uint64_t>(stream, readCount);
-            case StandardType::Float: return LoadValue<Stream, float_t>(stream, readCount);
-            case StandardType::Double: return LoadValue<Stream, double_t>(stream, readCount);
-            case StandardType::String: return LoadStr<Stream>(stream, readCount);
+            case StandardType::Bool: return LoadValue<bool>(stream);
+            case StandardType::Int8: return LoadValue<int8_t>(stream);
+            case StandardType::UInt8: return LoadValue<uint8_t>(stream);
+            case StandardType::Int16: return LoadValue<int16_t>(stream);
+            case StandardType::UInt16: return LoadValue<uint16_t>(stream);
+            case StandardType::Int32: return LoadValue<int32_t>(stream);
+            case StandardType::UInt32: return LoadValue<uint32_t>(stream);
+            case StandardType::Int64: return LoadValue<int64_t>(stream);
+            case StandardType::UInt64: return LoadValue<uint64_t>(stream);
+            case StandardType::Float: return LoadValue<float_t>(stream);
+            case StandardType::Double: return LoadValue<double_t>(stream);
+            case StandardType::String: return LoadStr(stream);
             default:
                 SRHalt0();
                 return Any();
         }
     }
 
-    template<typename Stream, typename Any> static void SR_FASTCALL SaveAny(Stream& stream, const Any& any, uint64_t& bytesCount) {
+    template<typename Any> static void SR_FASTCALL SaveAny(SR_HTYPES_NS::Stream& stream, const Any& any) {
         try {
             auto&& type = GetStandardType<Any>(any);
 
             SaveValue(stream, static_cast<uint16_t>(type));
-
-            bytesCount += sizeof(StandardType);
-
-            /// string ignored
-            bytesCount += GetTypeSize(type);
 
             switch (type) {
                 case StandardType::Bool: SaveValue(stream, std::any_cast<bool>(any)); break;
@@ -53,7 +49,7 @@ namespace SR_UTILS_NS::MarshalUtils {
                 case StandardType::UInt64: SaveValue(stream, std::any_cast<uint64_t>(any)); break;
                 case StandardType::Float: SaveValue(stream, std::any_cast<float_t>(any)); break;
                 case StandardType::Double: SaveValue(stream, std::any_cast<double_t>(any)); break;
-                case StandardType::String: SaveString(stream, std::any_cast<std::string>(any), bytesCount); break;
+                case StandardType::String: SaveString(stream, std::any_cast<std::string>(any)); break;
                 default:
                     SRHalt0();
                     break;

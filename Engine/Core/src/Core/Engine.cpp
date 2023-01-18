@@ -693,10 +693,10 @@ namespace SR_CORE_NS {
 
             uint64_t position = marshal.GetPosition();
 
-            migrated.WriteRawBytes(marshal.ViewRaw(), marshal.GetPosition());
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
 
             migrated.Write(marshal.Read<bool>());
-            std::string name = marshal.Read<std::string>();
+            auto name = marshal.Read<std::string>();
             migrated.Write(name);
             migrated.Write(marshal.Read<uint64_t>());
 
@@ -716,9 +716,9 @@ namespace SR_CORE_NS {
                     break;
             }
 
-            migrated.WriteRawBytes(marshal.ViewRaw() + marshal.GetPosition(), marshal.BytesCount() - marshal.GetPosition());
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
 
-            marshal.SetData(migrated.ViewRaw(), migrated.BytesCount());
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
             marshal.SetPosition(position);
 
             return true;

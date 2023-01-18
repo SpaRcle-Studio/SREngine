@@ -20,13 +20,13 @@ namespace SR_UTILS_NS {
 
         for (auto&& pComponent : m_components) {
             auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint32_t>(marshalComponent->BytesCount());
+            pMarshal->Write<uint32_t>(marshalComponent->Size());
             pMarshal->Append(marshalComponent);
         }
 
         for (auto&& pComponent : m_loadedComponents) {
             auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint32_t>(marshalComponent->BytesCount());
+            pMarshal->Write<uint32_t>(marshalComponent->Size());
             pMarshal->Append(marshalComponent);
         }
 

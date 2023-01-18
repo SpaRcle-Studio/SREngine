@@ -201,7 +201,7 @@ namespace SR_WORLD_NS {
         for (const auto& [position, pChunk] : m_loadedChunks) {
             if (auto&& pChunkMarshal = pChunk->Save(pContext); pChunkMarshal) {
                 if (pChunkMarshal->Valid()) {
-                    SRAssert(pChunkMarshal->BytesCount() > 0);
+                    SRAssert(pChunkMarshal->Size() > 0);
                     available.emplace_back(pChunkMarshal);
                 }
                 else {
@@ -212,7 +212,7 @@ namespace SR_WORLD_NS {
 
         for (const auto& [position, pCache] : m_cached) {
             SRAssert(pCache->Valid());
-            SRAssert(pCache->BytesCount() > 0);
+            SRAssert(pCache->Size() > 0);
             available.emplace_back(pCache->CopyPtr());
         }
 
@@ -224,8 +224,8 @@ namespace SR_WORLD_NS {
         pMarshal->Write(chunkCount);
 
         for (auto&& pChunkMarshal : available) {
-            SRAssert(pChunkMarshal->BytesCount() > 0);
-            pMarshal->Write(pChunkMarshal->BytesCount());
+            SRAssert(pChunkMarshal->Size() > 0);
+            pMarshal->Write(pChunkMarshal->Size());
             pMarshal->Append(pChunkMarshal);
         }
 

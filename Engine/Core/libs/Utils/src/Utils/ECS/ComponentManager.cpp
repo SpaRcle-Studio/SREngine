@@ -130,7 +130,7 @@ namespace SR_UTILS_NS {
                         SRHalt("Something went wrong!");
                         return false;
                     }
-                    marshal.SkipBytes(lostBytes);
+                    marshal.Skip(lostBytes);
                 }
             }
 

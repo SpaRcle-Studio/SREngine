@@ -11,23 +11,23 @@
 #include <Utils/Math/Vector2.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Types/Stream.h>
 #include <Utils/Common/StringFormat.h>
 
 namespace SR_HTYPES_NS {
-    class SR_DLL_EXPORT Marshal {
+    class SR_DLL_EXPORT Marshal : public Stream {
     public:
+        using Super = Stream;
         using Ptr = Marshal*;
 
     public:
         Marshal() = default;
-
-        Marshal(Marshal&& marshal) noexcept;
-        Marshal& operator=(Marshal&& marshal) noexcept;
-        Marshal& operator=(const Marshal& marshal) = delete;
-        Marshal(const Marshal& marshal) = delete;
+        Marshal(std::ifstream& ifs); /** NOLINT */
+        Marshal(const std::string& str); /** NOLINT */
+        Marshal(const char* pData, uint64_t size);
 
     public:
-        bool Save(const Path& path) const;
+        bool Save(const Path& path) const; /** NOLINT */
         SR_NODISCARD Marshal Copy() const;
         SR_NODISCARD Marshal::Ptr CopyPtr() const;
 
@@ -36,81 +36,24 @@ namespace SR_HTYPES_NS {
         static Marshal LoadFromMemory(const std::string& data);
         static Marshal LoadFromBase64(const std::string& base64);
 
-        SR_NODISCARD bool Valid() const noexcept { return BytesCount() > 0; }
-        SR_NODISCARD uint64_t GetPosition() const noexcept { return m_position; }
-        SR_NODISCARD uint64_t BytesCount() const noexcept { return m_size; }
-        SR_NODISCARD std::string ToString() const;
-        SR_NODISCARD std::string ToBase64() const;
+        void Append(Marshal&& marshal);
+        void Append(Marshal::Ptr& pMarshal);
 
-        void Append(Marshal&& marshal) {
-            if (marshal.m_size > 0) {
-                m_size += marshal.m_size;
-                m_stream << marshal.m_stream.rdbuf();
-            }
-        }
-
-        void Append(Marshal::Ptr& pMarshal) {
-            if (pMarshal && pMarshal->m_size > 0) {
-                m_size += pMarshal->m_size;
-                m_stream << pMarshal->m_stream.rdbuf();
-            }
-
-            SR_SAFE_DELETE_PTR(pMarshal);
-        }
-
-        void SkipBytes(uint32_t size) {
-            std::string buffer;
-            buffer.resize(size);
-            m_stream.read((char*)&buffer[0], size * sizeof(char));
-            m_position += size * sizeof(char);
-        }
-
-        Marshal ReadBytes(uint32_t size) {
-            Marshal marshal;
-
-            std::string buffer;
-            buffer.resize(size);
-            m_stream.read((char*)&buffer[0], size * sizeof(char));
-            m_position += size * sizeof(char);
-
-            marshal.m_stream << buffer;
-            marshal.m_size = size;
-
-            return marshal;
-        }
-
-        SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint32_t size) {
-            auto&& pMarshal = new Marshal();
-
-            std::string buffer;
-            buffer.resize(size);
-            m_stream.read((char*)&buffer[0], size * sizeof(char));
-            m_position += size * sizeof(char);
-
-            pMarshal->m_stream << buffer;
-            pMarshal->m_size = size;
-
-            return pMarshal;
-        }
-
-        void WriteRawBytes(const char* pData, uint64_t size) {
-            m_stream.write(pData, size);
-            m_size += size;
-        }
+        SR_NODISCARD Marshal ReadBytes(uint64_t count) const noexcept;
+        SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint64_t count) const noexcept;
 
         template<typename T> void Write(const T& value) {
             if constexpr (std::is_same_v<T, std::any>) {
-                MarshalUtils::SaveAny<std::stringstream, std::any>(m_stream, value, m_size);
+                MarshalUtils::SaveAny<std::any>(*this, value);
             }
             else if constexpr (Math::IsString<T>()) {
-                MarshalUtils::SaveShortString(m_stream, value, m_size);
+                MarshalUtils::SaveShortString(*this, value);
             }
             else if constexpr (IsSTLVector<T>()) {
-                MarshalUtils::SaveVector(m_stream, value, m_size);
+                MarshalUtils::SaveVector(*this, value);
             }
             else {
-                m_size += sizeof(T);
-                MarshalUtils::SaveValue(m_stream, value);
+                MarshalUtils::SaveValue(*this, value);
             }
         }
 
@@ -126,47 +69,24 @@ namespace SR_HTYPES_NS {
 
         template<typename T> T View(uint64_t offset) const {
             T value = T();
-            const auto buff = m_stream.rdbuf();
 
-            memcpy(
-                    &value,
-                    buff->str().substr(offset, sizeof(T)).data(),
-                    sizeof(T)
-            );
+            memcpy(&value, Super::View() + offset, sizeof(T));
+
             return value;
-        }
-
-        void SetData(const char* pData, uint64_t size) {
-            m_stream = std::stringstream();
-            m_stream.write(pData, size);
-            m_size = size;
-        }
-
-        void SetPosition(uint64_t position) {
-            m_stream.seekg(0, std::ios_base::beg);
-            m_position = position;
-            m_stream.seekg(position, std::ios_base::cur);
-        }
-
-        SR_NODISCARD const char* ViewRaw() const {
-            const auto buff = m_stream.rdbuf();
-            return (const char*)buff->view().data();
         }
 
         template<typename T> T Read() {
             T value;
 
             if constexpr (std::is_same_v<T, std::any>) {
-                value = MarshalUtils::LoadAny<std::stringstream, std::any>(m_stream, m_position);
+                value = MarshalUtils::LoadAny<std::any>(*this);
             }
             else if constexpr (Math::IsString<T>()) {
-                value = MarshalUtils::LoadShortStr<std::stringstream>(m_stream, m_position);
+                value = MarshalUtils::LoadShortStr(*this);
             }
             else {
-                value = MarshalUtils::LoadValue<std::stringstream, T>(m_stream, m_position);
+                value = MarshalUtils::LoadValue<T>(*this);
             }
-
-            SRAssert(m_position <= m_size);
 
             return value;
         }
@@ -178,12 +98,6 @@ namespace SR_HTYPES_NS {
 
             return Read<T>();
         }
-
-    private:
-        std::stringstream m_stream;
-        uint64_t m_size = 0;
-        uint64_t m_position = 0;
-
     };
 }
 
