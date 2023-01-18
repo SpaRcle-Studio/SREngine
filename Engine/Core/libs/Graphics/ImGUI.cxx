@@ -56,6 +56,7 @@
         #pragma clang diagnostic ignored "-Wunused-function"
     #endif
 
+    #include <imgui-node-editor/imgui_node_editor.h>
     #include <imgui-node-editor/imgui_node_editor_api.cpp>
     #include <imgui-node-editor/imgui_node_editor.cpp>
     #include <imgui-node-editor/imgui_canvas.cpp>
