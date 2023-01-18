@@ -30,7 +30,8 @@ namespace SR_UTILS_NS::Types {
         ~RawMesh() override;
 
     public:
-        static RawMesh *Load(const SR_UTILS_NS::Path &path);
+        static RawMesh* Load(const SR_UTILS_NS::Path &path, bool animation);
+        static RawMesh* Load(const SR_UTILS_NS::Path &path);
 
     public:
         uint32_t GetMeshesCount() const;
@@ -63,7 +64,8 @@ namespace SR_UTILS_NS::Types {
         ska::flat_hash_map<uint64_t, SR_MATH_NS::Matrix4x4> m_boneOffsets;
         std::vector<ska::flat_hash_map<uint64_t, uint32_t>> m_bones;
 
-        const aiScene* m_scene;
+        bool m_asAnimation = false;
+        const aiScene* m_scene = nullptr;
         Assimp::Importer* m_importer;
 
     };

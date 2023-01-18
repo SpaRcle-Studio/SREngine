@@ -7,8 +7,14 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
+#include <assimp/include/assimp/Exporter.hpp>
+#include <assimp/include/assimp/cexport.h>
 
 namespace SR_HTYPES_NS {
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_FLAGS = aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale;
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_CACHED_FLAGS = aiProcess_FlipUVs;
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = 0;
+
     RawMesh::RawMesh()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh), true /** auto remove */)
     {
@@ -20,6 +26,10 @@ namespace SR_HTYPES_NS {
     }
 
     RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
+        return Load(rawPath, false);
+    }
+
+    RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath, bool animation) {
         SR_GLOBAL_LOCK
 
         RawMesh* pRawMesh = nullptr;
@@ -29,10 +39,12 @@ namespace SR_HTYPES_NS {
 
             if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
                 pRawMesh = pResource;
+                SRAssert(pRawMesh->m_asAnimation == animation);
                 return;
             }
 
             pRawMesh = new RawMesh();
+            pRawMesh->m_asAnimation = animation;
             pRawMesh->SetId(path, false /** auto register */);
 
             if (!pRawMesh->Reload()) {
@@ -74,11 +86,23 @@ namespace SR_HTYPES_NS {
             path = ResourceManager::Instance().GetResPath().Concat(path);
         }
 
-        /// m_importer.SetPropertyBool(AI_CONFIG_FBX_CONVERT_TO_M, true);
+        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(GetResourceId());
+        Path&& binary = cache.ConcatExt("assbin");
+        Path&& hashFile = cache.ConcatExt("hash");
 
-        m_scene = m_importer->ReadFile(path.ToString(),
-                aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale
-        );
+        const uint64_t resourceHash = path.GetFileHash();
+        if (resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
+            m_scene = m_importer->ReadFile(binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_CACHED_FLAGS);
+        }
+        else {
+            m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+            SR_UTILS_NS::FileSystem::WriteHashToFile(hashFile, resourceHash);
+
+            Assimp::Exporter exporter;
+            const aiExportFormatDesc* format = exporter.GetExportFormatDescription(14);
+
+            exporter.Export(m_scene, format->id, binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+        }
 
         if (m_scene) {
             CalculateBones();

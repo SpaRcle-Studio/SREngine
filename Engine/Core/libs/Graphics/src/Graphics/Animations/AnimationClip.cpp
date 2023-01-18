@@ -6,6 +6,7 @@
 #include <Graphics/Animations/AnimationChannel.h>
 
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Types/RawMesh.h>
 
 namespace SR_ANIMATIONS_NS {
     AnimationClip::AnimationClip()
@@ -53,15 +54,12 @@ namespace SR_ANIMATIONS_NS {
     std::vector<AnimationClip*> AnimationClip::Load(const SR_UTILS_NS::Path& rawPath) {
         std::vector<AnimationClip*> animations;
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
-        if (!path.IsAbs()) {
-            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
+        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, true);
+        if (!pRawMesh) {
+            return animations;
         }
 
-        Assimp::Importer importer;
-        auto&& pScene = importer.ReadFile(path.ToString(), 0);
-
-        for (uint32_t i = 0; i < pScene->mNumAnimations; ++i) {
+        for (uint32_t i = 0; i < pRawMesh->GetAnimationsCount(); ++i) {
             auto&& pAnimationClip = Load(rawPath, i);
             animations.emplace_back(pAnimationClip);
         }
@@ -163,10 +161,12 @@ namespace SR_ANIMATIONS_NS {
             auto&& [strIndex, rawPath] = SR_UTILS_NS::StringUtils::SplitTwo(resourceId, "|");
             uint32_t index = SR_UTILS_NS::LexicalCast<uint32_t>(strIndex);
 
-            Assimp::Importer importer;
-            auto&& pScene = importer.ReadFile(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(rawPath), 0);
+            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, true);
+            if (!pRawMesh) {
+                return false;
+            }
 
-            LoadChannels(pScene->mAnimations[index]);
+            LoadChannels(pRawMesh->GetAssimpScene()->mAnimations[index]);
         }
 
         return Super::Load();
