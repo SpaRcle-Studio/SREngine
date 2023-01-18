@@ -216,8 +216,19 @@ namespace SR_GTYPES_NS {
 
         auto&& bones = m_rawMesh->GetBones(m_meshId);
 
+        if (m_bonesIds.empty()) {
+            const uint64_t bonesCount = SR_MAX(SR_HUMANOID_MAX_BONES, bones.size());
+
+            m_bonesIds.resize(bonesCount);
+            m_skeletonOffsets.resize(bonesCount);
+            m_skeletonMatrices.resize(bonesCount);
+
+            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
+                m_skeletonMatrices[i] = identityMatrix;
+            }
+        }
+
         if (!m_isOffsetsInitialized && m_skeleton) {
-            m_bonesIds.resize(bones.size());
             for (auto&& [hashName, boneId] : bones) {
                 m_skeletonOffsets[boneId] = m_rawMesh->GetBoneOffset(hashName);
                 m_bonesIds[boneId] = m_skeleton->GetBoneIndex(hashName);
@@ -235,14 +246,9 @@ namespace SR_GTYPES_NS {
                 }
             }
         }
-        else {
-            for (uint64_t i = 0; i < SR_HUMANOID_MAX_BONES; i++) {
-                m_skeletonMatrices[i] = identityMatrix;
-            }
-        }
 
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, &m_skeletonMatrices);
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, &m_skeletonOffsets);
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 

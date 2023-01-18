@@ -211,7 +211,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {
@@ -278,7 +278,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Skinned, 0)) {
@@ -529,7 +529,7 @@ namespace SR_CORE_NS::GUI {
 
         if (Graphics::GUI::Button("Import", index)) {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,blend" } });
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,pmx,blend" } });
 
             if (!path.Exists()) {
                 return;

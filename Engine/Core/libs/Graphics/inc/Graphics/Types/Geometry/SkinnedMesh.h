@@ -69,8 +69,8 @@ namespace SR_GTYPES_NS {
 
         std::vector<uint64_t> m_bonesIds;
 
-        SR_MATH_NS::Matrix4x4 m_skeletonMatrices[SR_HUMANOID_MAX_BONES];
-        SR_MATH_NS::Matrix4x4 m_skeletonOffsets[SR_HUMANOID_MAX_BONES];
+        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonMatrices;
+        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonOffsets;
     };
 }
 
