@@ -114,14 +114,12 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
             return false;
         }
 
-        m_textures[oldColorAttachments[i]]->Destroy();
-        m_textures[oldColorAttachments[i]]->Free();
+        delete m_textures[oldColorAttachments[i]];
         m_textures[oldColorAttachments[i]] = textures[i];
     }
 
     if (depthBuffer.has_value()) {
-        m_textures[depthBuffer.value()]->Destroy();
-        m_textures[depthBuffer.value()]->Free();
+        delete m_textures[depthBuffer.value()];
         m_textures[depthBuffer.value()] = m_FBOs[FBO]->AllocateDepthTextureReference();
     }
 

@@ -12,12 +12,11 @@
 #include <EvoVulkan/Types/RenderPass.h>
 
 namespace SR_GRAPH_NS::VulkanTypes {
-    class VkImGUI {
+    class VkImGUI : public EvoVulkan::Types::IVkObject {
     public:
         VkImGUI() = default;
-        VkImGUI(const VkImGUI&) = delete;
-    private:
-        ~VkImGUI() = default;
+        ~VkImGUI() override;
+
     private:
         const std::vector<VkDescriptorPoolSize> m_poolSizes = {
                 { VK_DESCRIPTOR_TYPE_SAMPLER,                1000 },
@@ -44,8 +43,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
     public:
         bool Init(EvoVulkan::Core::VulkanKernel* kernel);
-        bool Destroy();
-        void Free();
 
     private:
         VkCommandBufferBeginInfo             m_cmdBuffBI = {};

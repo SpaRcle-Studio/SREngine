@@ -73,8 +73,7 @@ namespace Framework::Graphics::VulkanTools {
             }
 
             if (auto* memory = pool[id]) {
-                memory->Destroy();
-                memory->Free();
+                delete memory;
 
                 pool[id] = nullptr;
 

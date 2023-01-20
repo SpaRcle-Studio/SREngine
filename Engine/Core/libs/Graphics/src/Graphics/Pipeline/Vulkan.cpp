@@ -273,7 +273,7 @@ namespace Framework::Graphics {
             }
         }
 
-        if (!renderPass.Ready()) {
+        if (!renderPass.IsReady()) {
             SR_ERROR("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
             return false;
         }
@@ -812,7 +812,7 @@ namespace Framework::Graphics {
     //!-----------------------------------------------------------------------------------------------------------------
 
     bool SRVulkan::OnResize()  {
-        vkQueueWaitIdle(m_device->GetGraphicsQueue());
+        vkQueueWaitIdle(m_device->GetQueues()->GetGraphicsQueue());
         vkDeviceWaitIdle(*m_device);
 
         Environment::Get()->SetBuildState(false);
@@ -843,11 +843,12 @@ namespace Framework::Graphics {
             return EvoVulkan::Core::RenderResult::Success;
         }
 
-        for (const auto& submitInfo : m_framebuffersQueue)
-            if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+        for (const auto& submitInfo : m_framebuffersQueue) {
+            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
                 return EvoVulkan::Core::RenderResult::Error;
             }
+        }
 
         auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI();
 
@@ -870,7 +871,7 @@ namespace Framework::Graphics {
         m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;
 
         /// Submit to queue
-        if (auto result = vkQueueSubmit(m_device->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+        if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
             if (result == VK_ERROR_DEVICE_LOST) {
