@@ -10,13 +10,14 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Types/Function.h>
+#include <Utils/ResourceManager/ResourceContainer.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
 
-    class SR_DLL_EXPORT IResource : public NonCopyable {
+    class SR_DLL_EXPORT IResource : public ResourceContainer {
         friend class ResourceManager;
-
+        using Super = ResourceContainer;
     public:
         enum class LoadState : uint8_t {
             Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
@@ -29,7 +30,7 @@ namespace SR_UTILS_NS {
     protected:
         explicit IResource(uint64_t hashName);
         IResource(uint64_t hashName, bool autoRemove);
-        ~IResource() override;
+        ~IResource() override = default;
 
     public:
         SR_NODISCARD virtual Path InitializeResourcePath() const;
@@ -57,8 +58,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
         SR_NODISCARD virtual Path GetAssociatedPath() const;
-
-        SR_NODISCARD const std::unordered_set<IResource*>& GetResourceParents() const { return m_parents; }
 
         SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 
@@ -104,9 +103,6 @@ namespace SR_UTILS_NS {
 
         void UpdateResourceLifeTime();
 
-        void AddDependency(IResource* pResource);
-        void RemoveDependency(IResource* pResource);
-
         /** Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy();
         bool ForceDestroy();
@@ -121,15 +117,9 @@ namespace SR_UTILS_NS {
         virtual void ReviveResource();
 
     protected:
-        void UpdateResources(int32_t depth = 0);
-        virtual void OnResourceUpdated(IResource* pResource, int32_t depth);
-
-    protected:
         const uint64_t m_resourceHashName = 0;
 
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
-
-        mutable std::recursive_mutex m_mutex;
 
         /// не рекомендуется вручную обращаться к счетчику при наследовании
         std::atomic<uint16_t> m_countUses = 0;
@@ -151,8 +141,6 @@ namespace SR_UTILS_NS {
         /// \warning ReadOnly
         bool m_autoRemove = false;
 
-        std::unordered_set<IResource*> m_parents;
-        std::unordered_set<IResource*> m_dependencies;
 
     };
 }

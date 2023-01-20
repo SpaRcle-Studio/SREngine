@@ -216,12 +216,12 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Material::OnResourceUpdated(IResource *pResource, int32_t depth) {
-        if (dynamic_cast<Shader*>(pResource) == m_shader && m_shader) {
+    void Material::OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) {
+        if (dynamic_cast<Shader*>(pContainer) == m_shader && m_shader) {
             m_dirtyShader = true;
         }
 
-        IResource::OnResourceUpdated(pResource, depth);
+        IResource::OnResourceUpdated(pContainer, depth);
     }
 
     MaterialProperty *Material::GetProperty(uint64_t hashId) {

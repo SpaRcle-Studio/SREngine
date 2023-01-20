@@ -88,7 +88,7 @@ namespace SR_GTYPES_NS {
 
     protected:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; }
-        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
 
     protected:
         Memory::UBOManager&          m_uboManager;

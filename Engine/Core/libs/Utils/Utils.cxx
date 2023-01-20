@@ -56,6 +56,7 @@
 #include "../Utils/src/Utils/ResourceManager/ResourceInfo.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourcesHolder.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceManager.cpp"
+#include "../Utils/src/Utils/ResourceManager/ResourceContainer.cpp"
 
 #include "../Utils/src/Utils/CommandManager/ICommand.cpp"
 #include "../Utils/src/Utils/CommandManager/CmdManager.cpp"

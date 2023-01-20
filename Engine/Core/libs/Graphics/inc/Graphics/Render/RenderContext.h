@@ -141,7 +141,7 @@ namespace SR_GRAPH_NS {
 
             const bool removed = pResource->TryExecute([&]() -> bool {
                 if (pResource->GetCountUses() == 1) {
-                    SRAssert(pResource->GetResourceParents().empty());
+                    SRAssert(pResource->GetContainerParents().empty());
 
                     /// Ресурс необязательно имеет видеопамять, а лишь содержит другие ресурсы, например материал.
                     if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {

@@ -136,7 +136,7 @@ namespace SR_GRAPH_NS::Memory {
             }
         }
 
-        SRAssert(*ubo != SR_ID_INVALID || *descriptor != SR_ID_INVALID);
+        SRAssert(*ubo != SR_ID_INVALID || *descriptor != SR_ID_INVALID || (uboSize == 0 && samples == 0));
 
         m_pipeline->SetCurrentShaderId(shaderIdStash);
         return true;

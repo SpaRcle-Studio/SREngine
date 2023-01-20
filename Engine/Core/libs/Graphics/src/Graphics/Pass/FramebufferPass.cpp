@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS {
 
         bool result = GroupPass::Load(passNode.TryGetNode("Passes"));
 
-        m_name = passNode.TryGetAttribute("Name").ToString(passNode.Name());
+        SetName(passNode.TryGetAttribute("Name").ToString(passNode.Name()));
 
         return result;
     }

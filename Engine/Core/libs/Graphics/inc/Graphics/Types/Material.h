@@ -49,7 +49,7 @@ namespace SR_GTYPES_NS {
 
         void SetTexture(MaterialProperty* property, Texture* pTexture);
 
-        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
 
         void SetShader(Shader* shader);
 

@@ -55,7 +55,8 @@ namespace SR_GRAPH_NS {
         void SetCamera(CameraPtr pCamera);
         void SetRenderScene(const RenderScenePtr& pRScene);
 
-        BasePass* FindPass(const std::string& name) const;
+        SR_NODISCARD BasePass* FindPass(uint64_t hashName) const;
+        SR_NODISCARD BasePass* FindPass(const std::string& name) const;
 
     protected:
         bool Build();

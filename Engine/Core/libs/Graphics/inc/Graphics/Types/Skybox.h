@@ -42,7 +42,7 @@ namespace SR_GTYPES_NS {
         void SetShader(Shader *shader);
 
     protected:
-        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
         uint64_t GetFileHash() const override { return 0; }
 
     private:
