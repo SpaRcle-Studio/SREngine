@@ -96,6 +96,8 @@ namespace SR_GRAPH_NS {
             return true;
         }
 
+        bool IsRayTracingRequired() const noexcept override;
+
         void SetGUIEnabled(bool enabled) override;
 
         bool Destroy() override {

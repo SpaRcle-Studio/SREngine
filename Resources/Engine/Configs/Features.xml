@@ -22,6 +22,8 @@
 
        <AutoReloadResources Value="true"/>
 
+       <RayTracing Value="true"/>
+
        <Renderer Value="true"/>
        <Physics Value="true"/>
 

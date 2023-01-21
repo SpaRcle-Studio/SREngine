@@ -70,6 +70,7 @@ namespace Framework::Graphics {
         m_imgui = new VulkanTypes::VkImGUI();
 
         m_kernel = new SRVulkan();
+
         SR_INFO("Vulkan::PreInit() : pre-initializing vulkan...");
 
     #ifdef SR_ANDROID
@@ -718,16 +719,18 @@ namespace Framework::Graphics {
     }
 
     int32_t Vulkan::CalculateIBO(void *indices, uint32_t indxSize, size_t count, int32_t VBO) {
-        // ignore VBO
+        /// ignore VBO
         if (auto id = m_memory->AllocateIBO(indxSize * count, indices); id >= 0) {
             return id;
-        } else
+        }
+        else
             return SR_ID_INVALID;
     }
 
     SR_MATH_NS::IVector2 Vulkan::GetScreenSize() const {
-   //     return m_basicWindow->GetScreenResolution();
-   return SR_MATH_NS::IVector2();
+        /// TODO: это нужно?
+        //     return m_basicWindow->GetScreenResolution();
+        return SR_MATH_NS::IVector2();
     }
 
     uint64_t Vulkan::GetVRAMUsage() {
@@ -770,18 +773,6 @@ namespace Framework::Graphics {
         vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
     }
 
-  // glm::vec2 Vulkan::GetWindowSize() const {
-  //     if (!m_basicWindow) {
-  //         SRHalt("Vulkan::GetWindowSize() : Basic window is nullptr!");
-  //         return glm::vec2(0, 0);
-  //     }
-
-  //     return {
-  //         m_basicWindow->GetWidth(),
-  //         m_basicWindow->GetHeight()
-  //     };
-  //  }
-
     int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo &createInfo, int32_t fbo) {
         void* temp = nullptr;
 
@@ -820,7 +811,8 @@ namespace Framework::Graphics {
         uint32_t w = m_width;
         uint32_t h = m_height;
 
-     //   Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
+        /// TODO: это нужно?
+        // Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
 
         if (m_GUIEnabled) {
             dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(w, h);
@@ -862,8 +854,9 @@ namespace Framework::Graphics {
         }
 
         m_submitInfo.waitSemaphoreCount = 1;
-        if (m_waitSemaphore)
+        if (m_waitSemaphore) {
             m_submitInfo.pWaitSemaphores = &m_waitSemaphore;
+        }
         else
             m_submitInfo.pWaitSemaphores = &m_syncs.m_presentComplete;
 
@@ -881,24 +874,39 @@ namespace Framework::Graphics {
             return EvoVulkan::Core::RenderResult::Error;
         }
 
-        switch (this->SubmitFrame()) {
+        switch (SubmitFrame()) {
             case EvoVulkan::Core::FrameResult::Success:
                 return EvoVulkan::Core::RenderResult::Success;
+
             case EvoVulkan::Core::FrameResult::Error:
                 return EvoVulkan::Core::RenderResult::Error;
+
             case EvoVulkan::Core::FrameResult::OutOfDate: {
-                this->m_hasErrors |= !this->ResizeWindow();
-                if (m_hasErrors)
+                m_hasErrors |= !ResizeWindow();
+
+                if (m_hasErrors) {
                     return EvoVulkan::Core::RenderResult::Fatal;
-                else
+                }
+                else {
                     return EvoVulkan::Core::RenderResult::Success;
+                }
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
                 SR_UTILS_NS::Debug::Instance().Terminate();
+
             default: {
                 SRAssertOnce(false);
                 return EvoVulkan::Core::RenderResult::Fatal;
             }
         }
+    }
+
+    bool SRVulkan::IsRayTracingRequired() const noexcept {
+    #ifdef SR_ANDROID
+        return false;
+    #else
+        return SR_UTILS_NS::Features::Instance().Enabled("RayTracing", false);
+    #endif
+
     }
 }

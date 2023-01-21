@@ -96,12 +96,15 @@ namespace SR_HTYPES_NS {
         }
         else {
             m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
-            SR_UTILS_NS::FileSystem::WriteHashToFile(hashFile, resourceHash);
+
+            SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
 
             Assimp::Exporter exporter;
             const aiExportFormatDesc* format = exporter.GetExportFormatDescription(14);
 
             exporter.Export(m_scene, format->id, binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+
+            SR_UTILS_NS::FileSystem::WriteHashToFile(hashFile, resourceHash);
         }
 
         if (m_scene) {
