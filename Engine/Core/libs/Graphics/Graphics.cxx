@@ -54,6 +54,7 @@
 
 #include "../Graphics/src/Graphics/Pass/BasePass.cpp"
 #include "../Graphics/src/Graphics/Pass/SkyboxPass.cpp"
+#include "../Graphics/src/Graphics/Pass/IFramebufferPass.cpp"
 #include "../Graphics/src/Graphics/Pass/FramebufferPass.cpp"
 #include "../Graphics/src/Graphics/Pass/SwapchainPass.cpp"
 #include "../Graphics/src/Graphics/Pass/GroupPass.cpp"
@@ -64,6 +65,8 @@
 #include "../Graphics/src/Graphics/Pass/PostProcessPass.cpp"
 #include "../Graphics/src/Graphics/Pass/DebugPass.cpp"
 #include "../Graphics/src/Graphics/Pass/ColorBufferPass.cpp"
+#include "../Graphics/src/Graphics/Pass/DepthBufferPass.cpp"
+#include "../Graphics/src/Graphics/Pass/ShaderOverridePass.cpp"
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"

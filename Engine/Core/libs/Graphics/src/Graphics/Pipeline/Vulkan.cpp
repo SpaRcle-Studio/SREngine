@@ -22,6 +22,7 @@ namespace Framework::Graphics {
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
+            //VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION_NAME
             //VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME,
             //VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
     };
@@ -471,7 +472,7 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool Vulkan::CreateFrameBuffer(const Helper::Math::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount) {
+    bool Vulkan::CreateFrameBuffer(const SR_MATH_NS::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount) {
         std::vector<int32_t> colorBuffers;
         colorBuffers.reserve(colors.size());
 

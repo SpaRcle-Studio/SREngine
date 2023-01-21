@@ -1,12 +1,28 @@
 <?xml version="1.0"?>
 <Technique Name="Main">
+    <DepthBufferPass Name="DepthFBO" Directional="false">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="R16_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Shaders>
+            <Override Type="Canvas" Path="Engine/Shaders/Depth/canvas.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/Depth/spatial.srsl"/>
+            <Override Type="SpatialCustom" Path="Engine/Shaders/Depth/spatial.srsl"/>
+            <Override Type="Skybox" Path="Engine/Shaders/Depth/simple.srsl"/>
+            <Override Type="Simple" Path="Engine/Shaders/Depth/simple.srsl"/>
+            <Override Type="Skinned" Path="Engine/Shaders/Depth/skinned.srsl"/>
+        </Shaders>
+    </DepthBufferPass>
     <FramebufferPass Name="MainSceneFBO">
-        <Settings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
-        </Settings>
+        </FramebufferSettings>
         <Passes>
             <OpaquePass/>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
@@ -19,5 +35,11 @@
                 <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
             </Attachments>
         </PostProcessPass>
+        <!--<PostProcessPass Shader="Samples/Shaders/depth-post-process.srsl">
+            <Attachments>
+                <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+                <Attachment FBO="DepthFBO" Id="depth" Index="0"/>
+            </Attachments>
+        </PostProcessPass>-->
     </SwapchainPass>
 </Technique>

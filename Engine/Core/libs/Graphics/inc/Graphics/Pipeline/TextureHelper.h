@@ -36,6 +36,14 @@ namespace SR_GRAPH_NS {
 
         RGBA8_SRGB,
 
+        R8_UNORM,
+        R16_UNORM,
+
+        R32_SFLOAT,
+        R64_SFLOAT,
+
+        R8_UINT,
+        R16_UINT,
         R32_UINT,
         R64_UINT,
 

@@ -8,186 +8,12 @@ namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ColorBufferPass)
 
     ColorBufferPass::ColorBufferPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : BasePass(pTechnique, pParent)
+        : Super(pTechnique, pParent)
     { }
 
-    ColorBufferPass::~ColorBufferPass() {
-        for (auto&& pShader : m_shaders) {
-            if (!pShader) {
-                continue;
-            }
-
-            pShader->RemoveUsePoint();
-            pShader = nullptr;
-        }
-
-        if (m_framebuffer) {
-            m_framebuffer->RemoveUsePoint();
-            m_framebuffer = nullptr;
-        }
-    }
-
-    bool ColorBufferPass::Load(const SR_XML_NS::Node &passNode) {
-        LoadSettings(passNode.TryGetNode("Settings"));
-        return BasePass::Load(passNode);
-    }
-
-    void ColorBufferPass::LoadSettings(const SR_XML_NS::Node &settingsNode) {
-        m_directional = settingsNode.GetAttribute("Directional").ToBool(false);
-        m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
-        m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
-
-        for (auto&& subNode : settingsNode.GetNodes()) {
-            if (subNode.NameView() == "PreScale") {
-                m_preScale.x = subNode.TryGetAttribute("X").ToFloat(1.f);
-                m_preScale.y = subNode.TryGetAttribute("Y").ToFloat(1.f);
-            }
-        }
-    }
-
-    bool ColorBufferPass::PreRender() {
-        return BasePass::PreRender();
-    }
-
-    bool ColorBufferPass::Render() {
-        if (!m_framebuffer) {
-            return false;
-        }
-
-        auto&& pRenderScene = GetRenderScene();
-
-        auto&& pIdentifier = m_uboManager.GetIdentifier();
-        m_uboManager.SetIdentifier(this);
-
-        if (m_directional) {
-            SR_MAYBE_UNUSED bool hasDrawData = DrawCluster(&pRenderScene->GetOpaque());
-            hasDrawData |= DrawCluster(&pRenderScene->GetTransparent());
-        }
-        else if (m_framebuffer->Bind() && m_framebuffer->BeginRender(SR_MATH_NS::FColor(0.0), 1.f)) {
-            DrawCluster(&pRenderScene->GetOpaque());
-            DrawCluster(&pRenderScene->GetTransparent());
-            m_framebuffer->EndRender();
-        }
-
-        //auto&& colorId = m_framebuffer->GetColorTexture(0);
-
-        m_uboManager.SetIdentifier(pIdentifier);
-
-        return m_directional;
-    }
-
     void ColorBufferPass::Update() {
-        if (!m_camera) {
-            return;
-        }
-
         m_colorId = 0;
-
-        auto&& pRenderScene = GetRenderScene();
-
-        auto&& pIdentifier = m_uboManager.GetIdentifier();
-        m_uboManager.SetIdentifier(this);
-
-        UpdateCluster(&pRenderScene->GetOpaque());
-        UpdateCluster(&pRenderScene->GetTransparent());
-
-        m_uboManager.SetIdentifier(pIdentifier);
-
-        BasePass::Update();
-    }
-
-    ColorBufferPass::ShaderPtr ColorBufferPass::GetShader(SRSL::ShaderType type) const {
-        switch (type) {
-            case SRSL::ShaderType::Canvas:
-                return m_shaders[0];
-            case SRSL::ShaderType::Spatial:
-            case SRSL::ShaderType::SpatialCustom:
-                return m_shaders[1];
-            case SRSL::ShaderType::Skybox:
-            case SRSL::ShaderType::Simple:
-                return m_shaders[2];
-            default:
-                return nullptr;
-        }
-    }
-
-    void ColorBufferPass::OnResize(const SR_MATH_NS::UVector2 &size) {
-        if (m_framebuffer) {
-            m_framebuffer->SetSize(SR_MATH_NS::IVector2(
-                    static_cast<SR_MATH_NS::Unit>(size.x) * m_preScale.x,
-                    static_cast<SR_MATH_NS::Unit>(size.y) * m_preScale.y
-            ));
-        }
-
-        BasePass::OnResize(size);
-    }
-
-    bool ColorBufferPass::Init() {
-        if (!m_directional && GetParentPass()) {
-            SR_ERROR("ColorBufferPass::Init() : if the rendering pass of the color buffer is not directional, then it cannot be nested!");
-            return BasePass::Init() && false;
-        }
-
-        bool result = BasePass::Init();
-
-        m_shaders[0] = SR_GTYPES_NS::Shader::Load("Engine/Shaders/ColorBuffer/canvas.srsl");
-        m_shaders[1] = SR_GTYPES_NS::Shader::Load("Engine/Shaders/ColorBuffer/spatial.srsl");
-        m_shaders[2] = SR_GTYPES_NS::Shader::Load("Engine/Shaders/ColorBuffer/simple.srsl");
-
-        for (auto&& pShader : m_shaders) {
-            if (!pShader) {
-                continue;
-            }
-
-            pShader->AddUsePoint();
-        }
-
-        auto&& window_size = m_context->GetWindowSize();
-
-        SR_MATH_NS::IVector2 size = {
-                static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(window_size.x) * m_preScale.x),
-                static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(window_size.y) * m_preScale.y),
-        };
-
-        if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create({ ColorFormat::RG8_UNORM }, DepthFormat::Auto, size))) {
-            SR_ERROR("ColorBufferPass::Init() : failed to create framebuffer!");
-        }
-        else {
-            m_framebuffer->SetSampleCount(m_samples);
-            m_framebuffer->SetDepthEnabled(m_depthEnabled);
-            m_framebuffer->AddUsePoint();
-        }
-
-        if (m_framebuffer) {
-            m_context->Register(m_framebuffer);
-        }
-
-        return result;
-    }
-
-    bool ColorBufferPass::DrawCluster(MeshCluster* pCluster) {
-        if (!pCluster || pCluster->Empty()) {
-            return false;
-        }
-
-        for (auto&&[_, subCluster] : *pCluster) {
-            auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || (pShader && !pShader->Use())) {
-                continue;
-            }
-
-            for (auto&& [key, meshGroup] : subCluster) {
-                (*meshGroup.begin())->BindMesh();
-
-                for (auto&& pMesh : meshGroup) {
-                    pMesh->Draw();
-                }
-            }
-
-            pShader->UnUse();
-        }
-
-        return true;
+        Super::Update();
     }
 
     void ColorBufferPass::UpdateCluster(MeshCluster *pCluster) {
@@ -243,14 +69,14 @@ namespace SR_GRAPH_NS {
             return SR_MATH_NS::FColor(0.f);
         }
 
-        if (!m_framebuffer || m_directional) {
+        if (!GetFramebuffer() || IsDirectional()) {
             return SR_MATH_NS::FColor(0.f);
         }
 
-        auto&& textureId = m_framebuffer->GetColorTexture(0);
+        auto&& textureId = GetFramebuffer()->GetColorTexture(0);
 
-        const uint32_t xPos = m_framebuffer->GetWidth() * x;
-        const uint32_t yPos = m_framebuffer->GetHeight() * y;
+        const uint32_t xPos = GetFramebuffer()->GetWidth() * x;
+        const uint32_t yPos = GetFramebuffer()->GetHeight() * y;
 
         return m_context->GetPipeline()->GetPixelColor(textureId, xPos, yPos);
     }

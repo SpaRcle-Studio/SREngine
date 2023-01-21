@@ -1,0 +1,17 @@
+ShaderType Canvas;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+void fragment() {
+	COLOR = vec4(gl_FragCoord.z, 0.0, 0.0, 1.0);
+}
+
+void vertex() {
+
+}

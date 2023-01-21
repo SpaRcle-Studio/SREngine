@@ -25,6 +25,7 @@ namespace SR_GRAPH_NS {
             uint64_t hashId = 0;
             uint64_t fboHashName = 0;
             uint64_t index = 0;
+            bool depth = false;
             SR_GTYPES_NS::Framebuffer* pFBO = nullptr;
         };
         using Super = BasePass;

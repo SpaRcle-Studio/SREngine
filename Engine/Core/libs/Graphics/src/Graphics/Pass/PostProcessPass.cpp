@@ -87,10 +87,18 @@ namespace SR_GRAPH_NS {
 
         if (auto&& attachmentsNode = passNode.TryGetNode("Attachments")) {
             for (auto&& attachmentNode : attachmentsNode.TryGetNodes("Attachment")) {
-                Attachment attachment;
+                Attachment attachment = Attachment();
                 attachment.fboHashName = SR_HASH_STR(attachmentNode.GetAttribute("FBO").ToString());
                 attachment.hashId = SR_RUNTIME_TIME_CRC32_STD_STR(attachmentNode.GetAttribute("Id").ToString());
-                attachment.index = attachmentNode.GetAttribute("Index").ToUInt64();
+
+                if (auto&& depthAttribute = attachmentNode.TryGetAttribute("Depth")) {
+                    attachment.depth = depthAttribute.ToBool();
+                }
+
+                if (!attachment.depth) {
+                    attachment.index = attachmentNode.GetAttribute("Index").ToUInt64();
+                }
+
                 m_attachments.emplace_back(attachment);
             }
         }
@@ -128,7 +136,7 @@ namespace SR_GRAPH_NS {
     void PostProcessPass::UseTextures() {
         for (auto&& attachment : m_attachments) {
             if (!attachment.pFBO) {
-                if (auto&& pFBOPass = dynamic_cast<FramebufferPass*>(GetTechnique()->FindPass(attachment.fboHashName))) {
+                if (auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(attachment.fboHashName))) {
                     attachment.pFBO = pFBOPass->GetFramebuffer();
                 }
             }
@@ -136,7 +144,12 @@ namespace SR_GRAPH_NS {
             uint32_t textureId = SR_ID_INVALID;
 
             if (attachment.pFBO) {
-                textureId = attachment.pFBO->GetColorTexture(attachment.index);
+                if (attachment.depth) {
+                    textureId = attachment.pFBO->GetDepthTexture();
+                }
+                else {
+                    textureId = attachment.pFBO->GetColorTexture(attachment.index);
+                }
             }
 
             if (textureId == SR_ID_INVALID) {

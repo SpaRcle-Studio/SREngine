@@ -1,15 +1,17 @@
 ShaderType PostProcessing;
 
 PolygonMode Fill;
-CullMode Front;
+CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
+uniform sampler2D image;
+
 void fragment() {
-    COLOR_INDEX_0 = texture(COLOR_ATTACHMENT_0, UV);
+    COLOR_INDEX_0 = texture(image, UV);
 }
 
 void vertex() {

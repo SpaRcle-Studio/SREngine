@@ -386,14 +386,6 @@ namespace SR_GRAPH_NS {
         }
 
         bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount) override;
-        //bool CreateSingleFrameBuffer(glm::vec2 size, int32_t& rboDepth, int32_t& FBO, int32_t& colorBuffer) override {
-        //    std::vector<int32_t> color = { colorBuffer };
-        //    bool result = CreateFrameBuffer(size, rboDepth, FBO, color);
-        //    if (!result)
-        //        SR_ERROR("Vulkan::CreateSingleFrameBuffer() : failed to create frame buffer!");
-        //    colorBuffer = color[0];
-        //    return result;
-        //}
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {

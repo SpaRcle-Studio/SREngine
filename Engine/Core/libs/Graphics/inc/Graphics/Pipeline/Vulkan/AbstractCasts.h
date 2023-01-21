@@ -193,6 +193,13 @@ namespace Framework::Graphics::VulkanTools {
 
             case ColorFormat::RGBA8_SRGB: return VK_FORMAT_R8G8B8A8_SRGB;
 
+            case ColorFormat::R8_UNORM: return VK_FORMAT_R8_UNORM;
+            case ColorFormat::R16_UNORM: return VK_FORMAT_R16_UNORM;
+            case ColorFormat::R32_SFLOAT: return VK_FORMAT_R32_SFLOAT;
+            case ColorFormat::R64_SFLOAT: return VK_FORMAT_R64_SFLOAT;
+
+            case ColorFormat::R8_UINT: return VK_FORMAT_R8_UINT;
+            case ColorFormat::R16_UINT: return VK_FORMAT_R16_UINT;
             case ColorFormat::R32_UINT: return VK_FORMAT_R32_UINT;
             case ColorFormat::R64_UINT: return VK_FORMAT_R64_UINT;
 
