@@ -83,6 +83,7 @@ namespace SR_GRAPH_NS {
                     pMesh->UseMaterial();
 
                     pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(pMesh->GetTranslation()));
+                    pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("OpaquePass::Update() : memory has been duplicated!");

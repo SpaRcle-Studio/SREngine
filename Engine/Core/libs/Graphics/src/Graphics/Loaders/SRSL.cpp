@@ -20,6 +20,7 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "TEXT_RECT_Y", ShaderVarType::Float },
         { "TEXT_RECT_WIDTH", ShaderVarType::Float },
         { "TEXT_RECT_HEIGHT", ShaderVarType::Float },
+        { "VIEW_POSITION", ShaderVarType::Vec3 },
         { "VIEW_DIRECTION", ShaderVarType::Vec3 },
         { "LINE_START_POINT", ShaderVarType::Vec3 },
         { "LINE_END_POINT", ShaderVarType::Vec3 },

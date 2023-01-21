@@ -167,9 +167,9 @@ namespace SR_GRAPH_NS::Types {
     void Shader::SetFloat(uint64_t hashId, const float &v) noexcept { SetValue(hashId, v); }
     void Shader::SetInt(uint64_t hashId, const int &v) noexcept { SetValue(hashId, v); }
     void Shader::SetMat4(uint64_t hashId, const glm::mat4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec3(uint64_t hashId, const glm::vec3 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec4(uint64_t hashId, const glm::vec4 &v) noexcept { SetValue(hashId, v); }
+    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue(hashId, v); }
+    void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue(hashId, v); }
+    void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue(hashId, v); }
     void Shader::SetVec2(uint64_t hashId, const glm::vec2 &v) noexcept { SetValue(hashId, v); }
     void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
 
