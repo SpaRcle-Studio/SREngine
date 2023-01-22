@@ -5,10 +5,12 @@
 #ifndef SRENGINE_PHYSXUTILS_H
 #define SRENGINE_PHYSXUTILS_H
 
+#include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
 
 #include <PxPhysicsAPI.h>
 #include <PxFoundation.h>
+#include <PxSimulationEventCallback.h>
 
 SR_CONSTEXPR auto SR_PHYSX_FOUNDATION_VERSION = PX_PHYSICS_VERSION;
 SR_CONSTEXPR auto SR_PHYSX_PHYSICS_VERSION = PX_PHYSICS_VERSION;

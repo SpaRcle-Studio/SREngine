@@ -65,6 +65,10 @@ namespace SR_PTYPES_NS {
         return m_scale;
     }
 
+    Rigidbody * CollisionShape::GetRigidbody() const {
+        return m_rigidbody;
+    }
+
     ShapeType CollisionShape::GetType() const noexcept {
         return m_type;
     }

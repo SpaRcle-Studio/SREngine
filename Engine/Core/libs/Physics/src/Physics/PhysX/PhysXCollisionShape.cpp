@@ -46,6 +46,10 @@ namespace SR_PTYPES_NS {
                 return false;
         }
 
+        if (m_shape) {
+            m_shape->userData = (void*)dynamic_cast<CollisionShape*>(this);
+        }
+
         return true;
     }
 

@@ -9,6 +9,7 @@
 #include <Physics/PhysicsWorld.h>
 
 namespace SR_PHYSICS_NS {
+    class ContactReportCallback;
     class PhysXPhysicsWorld : public PhysicsWorld {
         using Super = PhysicsWorld;
     public:
@@ -32,6 +33,7 @@ namespace SR_PHYSICS_NS {
     private:
         physx::PxScene* m_scene = nullptr;
         physx::PxDefaultCpuDispatcher* m_cpuDispatcher = nullptr;
+        ContactReportCallback* m_contactCallback = nullptr;
 
         std::vector<physx::PxActor*> m_dynamicActors;
         std::vector<physx::PxActor*> m_staticActors;

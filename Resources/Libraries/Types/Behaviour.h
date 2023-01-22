@@ -9,6 +9,11 @@
 #include <Libraries/GameObject.h>
 #include <Libraries/Scene.h>
 
+struct CollisionData {
+    void* pHandler = nullptr;
+    FVector3 impulse;
+};
+
 class Behaviour : public NonCopyable {
 public:
     using GameObjectPtr = SharedPtr<GameObject>;
@@ -26,6 +31,14 @@ public:
     virtual void FixedUpdate() { }
     virtual void Update(float_t dt) { }
     virtual void Close() { }
+
+    virtual void OnCollisionEnter(const CollisionData& data) { }
+    virtual void OnCollisionStay(const CollisionData& data) { }
+    virtual void OnCollisionExit(const CollisionData& data) { }
+
+    virtual void OnTriggerEnter(const CollisionData& data) { }
+    virtual void OnTriggerStay(const CollisionData& data) { }
+    virtual void OnTriggerExit(const CollisionData& data) { }
 
     bool HasProperty(const std::string& id) {
         return m_properties.count(id) == 1;

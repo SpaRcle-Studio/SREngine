@@ -4,11 +4,33 @@
 
 #include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXLibraryImpl.h>
+#include <Physics/PhysX/PhysXSimulationCallback.h>
 
 namespace SR_PHYSICS_NS {
+    physx::PxFilterFlags contactReportFilterShader(physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0,
+                                                   physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1,
+                                                   physx::PxPairFlags& pairFlags, const void* constantBlock, physx::PxU32 constantBlockSize)
+    {
+        PX_UNUSED(attributes0);
+        PX_UNUSED(attributes1);
+        PX_UNUSED(filterData0);
+        PX_UNUSED(filterData1);
+        PX_UNUSED(constantBlockSize);
+        PX_UNUSED(constantBlock);
+
+        // all initial and persisting reports for everything, with per-point data
+        pairFlags = physx::PxPairFlag::eSOLVE_CONTACT | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
+                    |	physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
+                    | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
+                    | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS;
+        return physx::PxFilterFlag::eDEFAULT;
+    }
+
     PhysXPhysicsWorld::PhysXPhysicsWorld(Super::LibraryPtr pLibrary, Space space)
         : Super(pLibrary, space)
-    { }
+    {
+        m_contactCallback = new ContactReportCallback();
+    }
 
     PhysXPhysicsWorld::~PhysXPhysicsWorld() {
         if (m_scene) {
@@ -20,12 +42,18 @@ namespace SR_PHYSICS_NS {
             m_cpuDispatcher->release();
             m_cpuDispatcher = nullptr;
         }
+        if (m_contactCallback) {
+            delete m_contactCallback;
+            m_contactCallback = nullptr;
+        }
     }
 
     bool PhysXPhysicsWorld::Initialize() {
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         physx::PxSceneDesc sceneDesc(pPhysics->getTolerancesScale());
+
+        sceneDesc.kineKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
 
         if (!sceneDesc.cpuDispatcher) {
             m_cpuDispatcher = physx::PxDefaultCpuDispatcherCreate(1);
@@ -35,6 +63,9 @@ namespace SR_PHYSICS_NS {
         if(!sceneDesc.filterShader) {
             sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
         }
+
+        sceneDesc.simulationEventCallback = m_contactCallback;
+        sceneDesc.filterShader	= contactReportFilterShader;
 
         m_scene = pPhysics->createScene(sceneDesc);
 

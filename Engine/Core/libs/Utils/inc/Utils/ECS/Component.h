@@ -15,6 +15,7 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/Types/SafeVariable.h>
 #include <Utils/World/Scene.h>
+#include <Utils/Common/CollisionData.h>
 
 /**
  * Awake -> OnEnabled -> Start -> Update -> FixedUpdate
@@ -70,6 +71,14 @@ namespace SR_UTILS_NS {
         virtual void Update(float_t dt) { }
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
+
+        virtual void OnCollisionEnter(const CollisionData& data) { }
+        virtual void OnCollisionStay(const CollisionData& data) { }
+        virtual void OnCollisionExit(const CollisionData& data) { }
+
+        virtual void OnTriggerEnter(const CollisionData& data) { }
+        virtual void OnTriggerStay(const CollisionData& data) { }
+        virtual void OnTriggerExit(const CollisionData& data) { }
 
     public:
         void CheckActivity();

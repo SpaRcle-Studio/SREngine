@@ -11,13 +11,15 @@
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsScene.h>
 
-namespace SR_PHYSICS_NS::Types {
+namespace SR_PTYPES_NS {
     Rigidbody::Rigidbody(LibraryPtr pLibrary)
         : SR_UTILS_NS::Component()
         , m_library(pLibrary)
         , m_shape(pLibrary->CreateCollisionShape())
         , m_isBodyDirty(true)
-    { }
+    {
+        m_shape->SetRigidbody(this);
+    }
 
     Rigidbody::~Rigidbody() {
         SR_SAFE_DELETE_PTR(m_shape);
