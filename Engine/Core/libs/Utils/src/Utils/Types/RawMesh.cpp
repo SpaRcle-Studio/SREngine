@@ -94,20 +94,22 @@ namespace SR_HTYPES_NS {
 
         const bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
 
-        if (!supportFastLoad || resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
+        if (supportFastLoad && resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
             m_scene = m_importer->ReadFile(binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_CACHED_FLAGS);
         }
         else {
             m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
-            SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
+            if (supportFastLoad) {
+                SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
 
-            Assimp::Exporter exporter;
-            const aiExportFormatDesc* format = exporter.GetExportFormatDescription(14);
+                Assimp::Exporter exporter;
+                const aiExportFormatDesc* format = exporter.GetExportFormatDescription(14);
 
-            exporter.Export(m_scene, format->id, binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+                exporter.Export(m_scene, format->id, binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
-            SR_UTILS_NS::FileSystem::WriteHashToFile(hashFile, resourceHash);
+                SR_UTILS_NS::FileSystem::WriteHashToFile(hashFile, resourceHash);
+            }
         }
 
         if (m_scene) {
