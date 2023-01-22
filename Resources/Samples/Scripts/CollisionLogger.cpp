@@ -9,6 +9,7 @@
 #include <Libraries/Input.h>
 
 class CollisionLogger : public Behaviour {
+public:
     void OnCollisionEnter(const CollisionData& data) override {
         Debug::Log("Collision detected!");
     }

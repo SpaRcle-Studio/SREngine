@@ -105,6 +105,12 @@ namespace SR_SCRIPTING_NS {
         m_start = nullptr;
         m_fixedUpdate = nullptr;
         m_update = nullptr;
+        m_collisionEnter = nullptr;
+        m_collisionStay = nullptr;
+        m_collisionExit = nullptr;
+        m_triggerEnter = nullptr;
+        m_triggerStay = nullptr;
+        m_triggerExit = nullptr;
     }
 
     void EvoBehaviour::InitHooks() {
@@ -120,6 +126,13 @@ namespace SR_SCRIPTING_NS {
         m_start = m_script->GetFunction<EvoScript::Typedefs::StartFnPtr>("Start");
         m_update = m_script->GetFunction<EvoScript::Typedefs::UpdateFnPtr>("Update");
         m_fixedUpdate = m_script->GetFunction<EvoScript::Typedefs::FixedUpdateFnPtr>("FixedUpdate");
+
+        m_collisionEnter = m_script->GetFunction<CollisionFnPtr>("OnCollisionEnter");
+        m_collisionStay = m_script->GetFunction<CollisionFnPtr>("OnCollisionStay");
+        m_collisionExit = m_script->GetFunction<CollisionFnPtr>("OnCollisionExit");
+        m_triggerEnter = m_script->GetFunction<CollisionFnPtr>("OnTriggerEnter");
+        m_triggerStay = m_script->GetFunction<CollisionFnPtr>("OnTriggerStay");
+        m_triggerExit = m_script->GetFunction<CollisionFnPtr>("OnTriggerExit");
     }
 
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
@@ -256,6 +269,48 @@ namespace SR_SCRIPTING_NS {
             m_fixedUpdate();
         }
         Behaviour::FixedUpdate();
+    }
+
+    void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData &data) {
+        if (m_collisionEnter) {
+            m_collisionEnter(data);
+        }
+        Behaviour::OnCollisionEnter(data);
+    }
+
+    void EvoBehaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData &data) {
+        if (m_collisionStay) {
+            m_collisionStay(data);
+        }
+        Behaviour::OnCollisionStay(data);
+    }
+
+    void EvoBehaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData &data) {
+        if (m_collisionExit) {
+            m_collisionExit(data);
+        }
+        Behaviour::OnCollisionExit(data);
+    }
+
+    void EvoBehaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData &data) {
+        if (m_triggerEnter) {
+            m_triggerEnter(data);
+        }
+        Behaviour::OnTriggerEnter(data);
+    }
+
+    void EvoBehaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData &data) {
+        if (m_triggerStay) {
+            m_triggerStay(data);
+        }
+        Behaviour::OnTriggerStay(data);
+    }
+
+    void EvoBehaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData &data) {
+        if (m_triggerExit) {
+            m_triggerExit(data);
+        }
+        Behaviour::OnTriggerExit(data);
     }
 
     void EvoBehaviour::DestroyScript() {

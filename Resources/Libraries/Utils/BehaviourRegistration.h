@@ -17,6 +17,11 @@
     #define EXTERN extern "C" __declspec(dllexport)
 #endif
 
+struct CollisionData {
+    void* pHandler = nullptr;
+    FVector3 impulse;
+};
+
 #define REGISTER_BEHAVIOUR_BASE(className)                                          \
     EXTERN void Awake() {                                                           \
         if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
@@ -63,6 +68,42 @@
     EXTERN void SetGameObject(Behaviour::GameObjectPtr gameObject) {                \
         if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
             ptr->SetGameObject(gameObject);                                         \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnCollisionEnter(const CollisionData& data) {                       \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnCollisionEnter(data);                                            \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnCollisionStay(const CollisionData& data) {                        \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnCollisionStay(data);                                             \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnCollisionExit(const CollisionData& data) {                        \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnCollisionExit(data);                                             \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnTriggerEnter(const CollisionData& data) {                         \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnTriggerEnter(data);                                              \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnTriggerStay(const CollisionData& data) {                          \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnTriggerStay(data);                                               \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnTriggerExit(const CollisionData& data) {                          \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnTriggerExit(data);                                               \
         }                                                                           \
     }                                                                               \
 

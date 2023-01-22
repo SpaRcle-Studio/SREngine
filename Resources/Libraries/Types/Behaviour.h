@@ -9,11 +9,6 @@
 #include <Libraries/GameObject.h>
 #include <Libraries/Scene.h>
 
-struct CollisionData {
-    void* pHandler = nullptr;
-    FVector3 impulse;
-};
-
 class Behaviour : public NonCopyable {
 public:
     using GameObjectPtr = SharedPtr<GameObject>;

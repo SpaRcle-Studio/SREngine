@@ -8,6 +8,8 @@
 #include <Scripting/Base/Behaviour.h>
 
 namespace SR_SCRIPTING_NS {
+    typedef void(*CollisionFnPtr)(const SR_UTILS_NS::CollisionData& data);
+
     class EvoBehaviour : public SR_SCRIPTING_NS::Behaviour {
         using Properties = std::vector<std::string>;
     private:
@@ -25,6 +27,13 @@ namespace SR_SCRIPTING_NS {
         void Start() override;
         void Update(float_t dt) override;
         void FixedUpdate() override;
+
+        void OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) override;
+        void OnCollisionStay(const SR_UTILS_NS::CollisionData& data) override;
+        void OnCollisionExit(const SR_UTILS_NS::CollisionData& data) override;
+        void OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) override;
+        void OnTriggerExit(const SR_UTILS_NS::CollisionData& data) override;
+        void OnTriggerStay(const SR_UTILS_NS::CollisionData& data) override;
 
         bool Load() override;
         bool Unload() override;
@@ -54,6 +63,13 @@ namespace SR_SCRIPTING_NS {
         EvoScript::Typedefs::StartFnPtr m_start = nullptr;
         EvoScript::Typedefs::UpdateFnPtr m_update = nullptr;
         EvoScript::Typedefs::FixedUpdateFnPtr m_fixedUpdate = nullptr;
+
+        CollisionFnPtr m_collisionEnter = nullptr;
+        CollisionFnPtr m_collisionStay = nullptr;
+        CollisionFnPtr m_collisionExit = nullptr;
+        CollisionFnPtr m_triggerEnter = nullptr;
+        CollisionFnPtr m_triggerStay = nullptr;
+        CollisionFnPtr m_triggerExit = nullptr;
 
         EvoScript::Typedefs::InitBehaviourFnPtr m_initBehaviour = nullptr;
         EvoScript::Typedefs::ReleaseBehaviourFnPtr m_releaseBehaviour = nullptr;
