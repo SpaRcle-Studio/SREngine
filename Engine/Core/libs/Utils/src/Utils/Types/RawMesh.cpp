@@ -91,7 +91,10 @@ namespace SR_HTYPES_NS {
         Path&& hashFile = cache.ConcatExt("hash");
 
         const uint64_t resourceHash = path.GetFileHash();
-        if (resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
+
+        const bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
+
+        if (!supportFastLoad || resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
             m_scene = m_importer->ReadFile(binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_CACHED_FLAGS);
         }
         else {
