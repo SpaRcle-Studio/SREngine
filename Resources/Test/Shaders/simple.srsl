@@ -1,0 +1,5 @@
+[[first]]
+[[first], [second], [third]]
+[[first()], [second()], [third()]]
+[[first(1, 22, 333)]]
+[[first(1.1, 22.22, 333.333)]]

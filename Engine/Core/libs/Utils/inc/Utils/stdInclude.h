@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <iosfwd>
+#include <regex>
 #include <stdexcept>
 #include <string_view>
 #include <cstdarg>

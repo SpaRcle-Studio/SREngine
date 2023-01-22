@@ -1,0 +1,126 @@
+//
+// Created by Monika on 22.01.2023.
+//
+
+#ifndef SRENGINE_SRSL_LEXERUTILS_H
+#define SRENGINE_SRSL_LEXERUTILS_H
+
+#include <Utils/Common/Singleton.h>
+#include <Utils/Types/Regex.h>
+#include <Utils/Debug.h>
+
+namespace SR_SRSL_NS {
+    static SR_INLINE constexpr char SRSL_SPACE_CHARS[] = { ' ', '\n', '\r', '\t' };
+
+    static SR_INLINE constexpr char SRSL_IDENTIFIER_CHARS[] = {
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'a', 'A',
+        'b', 'B',
+        'c', 'C',
+        'd', 'D',
+        'e', 'E',
+        'f', 'F',
+        'g', 'G',
+        'h', 'H',
+        'i', 'I',
+        'j', 'J',
+        'k', 'K',
+        'l', 'L',
+        'm', 'M',
+        'n', 'N',
+        'o', 'O',
+        'p', 'P',
+        'q', 'Q',
+        'r', 'R',
+        's', 'S',
+        't', 'T',
+        'u', 'U',
+        'v', 'V',
+        'w', 'W',
+        'x', 'X',
+        'y', 'Y',
+        'z', 'Z',
+        '_',
+    };
+
+    enum class LexemKind {
+        Unknown,
+
+        OpeningSquareBracket, /// [
+        ClosingSquareBracket, /// ]
+
+        OpeningAngleBracket,  /// <
+        ClosingAngleBracket,  /// >
+
+        OpeningCurlyBracket,  /// {
+        ClosingCurlyBracket,  /// }
+
+        OpeningBracket,       /// (
+        ClosingBracket,       /// )
+
+        Plus,                 /// +
+        Minus,                /// -
+        Multiply,             /// *
+        Divide,               /// /
+        Assign,               /// =
+        Semicolon,            /// ;
+        Dot,                  /// .
+        Comma,                /// ,
+        Negation,             /// !
+        And,                  /// &
+        Or,                   /// |
+
+        Integer,              /// 0-9
+
+        Macro,                /// #
+
+        Identifier,           /// _az_AZ_19_
+    };
+
+    struct LocationEntity {
+        LocationEntity() = default;
+
+        LocationEntity(uint64_t offset, uint64_t length)
+            : offset(offset)
+            , length(length)
+        { }
+
+        uint64_t offset = 0;
+        uint64_t length = 0;
+    };
+
+    struct Lexem : public LocationEntity {
+        Lexem() = default;
+
+        Lexem(uint64_t offset, uint64_t length, LexemKind kind, std::string&& value)
+            : LocationEntity(offset, length)
+            , kind(kind)
+            , value(SR_UTILS_NS::Exchange(value, { }))
+        { }
+
+        Lexem(uint64_t offset, uint64_t length, LexemKind kind)
+            : LocationEntity(offset, length)
+            , kind(kind)
+        { }
+
+        LexemKind kind = LexemKind::Unknown;
+        std::string value;
+    };
+
+    SR_INLINE_STATIC std::string LexemsToString(const std::vector<Lexem>& lexems) {
+        std::string code;
+
+        LexemKind previously = LexemKind::Unknown;
+        for (auto&& lexem : lexems) {
+            if (lexem.kind == previously && previously == LexemKind::Identifier) {
+                code += " ";
+            }
+            code += lexem.value;
+            previously = lexem.kind;
+        }
+
+        return code;
+    }
+}
+
+#endif //SRENGINE_SRSL_LEXERUTILS_H

@@ -40,6 +40,11 @@
                 <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
                 <Attachment FBO="DepthFBO" Id="depth" Index="0"/>
             </Attachments>
+        </PostProcessPass>
+        <PostProcessPass Shader="Engine/Shaders/Depth/visualize.srsl">
+            <Attachments>
+                <Attachment FBO="DepthFBO" Id="image" Index="0"/>
+            </Attachments>
         </PostProcessPass>-->
     </SwapchainPass>
 </Technique>

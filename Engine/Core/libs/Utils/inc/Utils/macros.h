@@ -187,6 +187,7 @@
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
 #define SR_GRAPH_NS Framework::Graphics
+#define SR_SRSL_NS Framework::Graphics::SRSL2
 #define SR_GRAPH_UI_NS Framework::Graphics::UI
 #define SR_ANIMATIONS_NS Framework::Graphics::Animations
 #define SR_HTYPES_NS SR_UTILS_NS::Types
