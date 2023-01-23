@@ -25,6 +25,8 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::string ParseToken();
 
+        SR_NODISCARD bool IsIdentifier(const std::string& token) const noexcept;
+
         SR_NODISCARD bool InBounds() const noexcept;
         SR_NODISCARD bool IsHasErrors() const noexcept;
         SR_NODISCARD const Lexem* GetLexem(int64_t offset) const;

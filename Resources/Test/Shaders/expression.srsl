@@ -14,4 +14,6 @@
 //(234 + 2) * 3;
 //-143245.5345 - (-12.434);
 
-true | false && true;
+//3 | 2 & 5 || 4;
+true | false;
+true | false && 234 + 234  ^ 34 - aboba * _234sdf / df;

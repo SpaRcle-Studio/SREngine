@@ -95,7 +95,7 @@ namespace SR_SRSL_NS {
             return nullptr;
         }
 
-        if (SR_MATH_NS::IsNumber(token)) {
+        if (SR_MATH_NS::IsNumber(token) || IsIdentifier(token)) {
             return new SRSLExpr(std::move(token));
         }
 
@@ -411,5 +411,20 @@ namespace SR_SRSL_NS {
 
     bool SRSLMathExpression::IsIncrementOrDecrement(const std::string &operation) const {
         return operation == "++" || operation == "--";
+    }
+
+    bool SRSLMathExpression::IsIdentifier(const std::string& token) const noexcept {
+        for (auto&& tokenChar : token) {
+            for (auto&& identifierChar : SRSL_IDENTIFIER_CHARS) {
+                if (tokenChar == identifierChar) {
+                    goto skip;
+                }
+            }
+            return false;
+        skip:
+            SR_NOOP;
+        }
+
+        return true;
     }
 }
