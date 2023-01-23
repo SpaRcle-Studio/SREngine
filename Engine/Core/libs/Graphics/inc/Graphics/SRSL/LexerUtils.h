@@ -62,6 +62,7 @@ namespace SR_SRSL_NS {
         Minus,                /// -
         Multiply,             /// *
         Divide,               /// /
+        Percent,              /// %
         Assign,               /// =
         Semicolon,            /// ;
         Dot,                  /// .
@@ -69,12 +70,51 @@ namespace SR_SRSL_NS {
         Negation,             /// !
         And,                  /// &
         Or,                   /// |
+        Question,             /// ?
+        Colon,                /// :
+        Tilda,                /// ~
+        Exponentiation,       /// ^
 
         Integer,              /// 0-9
 
         Macro,                /// #
 
         Identifier,           /// _az_AZ_19_
+    };
+
+    SR_ENUM_NS_CLASS_T(SRSLReturnCode, uint16_t,
+        Success,
+        UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression,
+        IncompleteExpression, EmptyExpression,
+        InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement
+    );
+
+    struct SRSLResult {
+        SRSLResult() = default;
+
+        SRSLResult(SRSLReturnCode code) /** NOLINT */
+            : code(code)
+            , position(0)
+        { }
+
+        SRSLResult(SRSLReturnCode code, uint64_t position)
+            : code(code)
+            , position(position)
+        { }
+
+        SRSLResult(SRSLResult&& other) noexcept
+            : code(SR_UTILS_NS::Exchange(other.code, { }))
+            , position(SR_UTILS_NS::Exchange(other.position, { }))
+        { }
+
+        SRSLResult& operator=(SRSLResult&& other) noexcept {
+            code = SR_UTILS_NS::Exchange(other.code, { });
+            position = SR_UTILS_NS::Exchange(other.position, { });
+            return *this;
+        }
+
+        SRSLReturnCode code;
+        uint64_t position;
     };
 
     struct LocationEntity {

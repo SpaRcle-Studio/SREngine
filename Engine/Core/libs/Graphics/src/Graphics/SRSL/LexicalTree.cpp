@@ -6,25 +6,20 @@
 
 namespace SR_SRSL_NS {
     std::string SRSLExpr::ToString() const {
-        switch (type) {
-            case SRSLExprType::Value:
-                return token;
-            case SRSLExprType::Operation: {
-                if (args.size() == 1) {
-                    return token + args[0]->ToString();
-                }
-                else if (args.size() == 2) {
-                    return args[0]->ToString() + token + args[1]->ToString();
-                }
-                return std::string();
-            }
-            case SRSLExprType::Call:
-                break;
-            case SRSLExprType::Array:
-                break;
-            default:
-                break;
+        if ((token == "++" || token == "--") && !args.empty()) {
+            SRHalt0();
         }
+
+        if (args.empty()) {
+            return token;
+        }
+        else if (args.size() == 1) {
+            return "(" + token + args[0]->ToString() + ")";
+        }
+        else if (args.size() == 2) {
+            return "(" + args[0]->ToString() + token + args[1]->ToString() + ")";
+        }
+
         return std::string();
     }
 

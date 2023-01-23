@@ -5,7 +5,7 @@
 #include <Graphics/SRSL/LexicalAnalyzer.h>
 
 namespace SR_SRSL_NS {
-    std::pair<SRSLLexicalTree, SRSLLexicalAnalyzer::LXAResult> SRSLLexicalAnalyzer::Analyze(std::vector<Lexem>&& lexems) {
+    std::pair<SRSLLexicalTree, SRSLResult> SRSLLexicalAnalyzer::Analyze(std::vector<Lexem>&& lexems) {
         SR_GLOBAL_LOCK
 
         Clear();
@@ -14,11 +14,12 @@ namespace SR_SRSL_NS {
 
         ProcessMain();
 
-        return std::make_pair(SR_UTILS_NS::Exchange(m_lexicalTree, { }), m_result);
+        return std::make_pair(SR_UTILS_NS::Exchange(m_lexicalTree, { }), SR_UTILS_NS::Exchange(m_result, { }));
     }
 
     void SRSLLexicalAnalyzer::Clear() {
         m_lexicalTree = SRSLLexicalTree();
+        m_lexicalTree.lexicalTree.clear();
 
         SR_SAFE_DELETE_PTR(m_decorators);
         SR_SAFE_DELETE_PTR(m_expr);
@@ -27,7 +28,7 @@ namespace SR_SRSL_NS {
         m_currentLexem = 0;
 
         m_states.clear();
-        m_result = LXAResult(LXAReturnCode::Success);
+        m_result = SRSLResult(SRSLReturnCode::Success);
     }
 
     const Lexem *SRSLLexicalAnalyzer::GetLexem(int64_t offset) const {
@@ -43,7 +44,7 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLLexicalAnalyzer::ProcessMain() {
-        while (InBounds() && m_result.code == LXAReturnCode::Success) {
+        while (InBounds() && m_result.code == SRSLReturnCode::Success) {
             switch (m_lexems[m_currentLexem].kind) {
                 case LexemKind::OpeningSquareBracket:
                 case LexemKind::ClosingSquareBracket:
@@ -52,28 +53,39 @@ namespace SR_SRSL_NS {
                 case LexemKind::OpeningCurlyBracket:
                 case LexemKind::ClosingCurlyBracket:
                 case LexemKind::OpeningBracket:
-                case LexemKind::ClosingBracket:
+                case LexemKind::ClosingBracket: {
                     ProcessBracket();
+                    if (IsHasErrors()) {
+                        return;
+                    }
                     break;
+                }
 
                 case LexemKind::Plus:
                 case LexemKind::Minus:
-                case LexemKind::Multiply:
-                case LexemKind::Divide:
+                case LexemKind::Tilda:
+                case LexemKind::Integer:
+                case LexemKind::Identifier:
+                case LexemKind::Negation: {
+                    ProcessExpression();
+                    if (IsHasErrors()) {
+                        return;
+                    }
+                    m_lexicalTree.lexicalTree.emplace_back(m_expr);
+                    break;
+                }
+
                 case LexemKind::Assign:
                 case LexemKind::Semicolon:
                 case LexemKind::Dot:
                 case LexemKind::Comma:
-                case LexemKind::Negation:
                 case LexemKind::And:
                 case LexemKind::Or:
-                case LexemKind::Integer:
                 case LexemKind::Macro:
-                case LexemKind::Identifier:
                     ++m_currentLexem;
                     break;
                 default:
-                    m_result = LXAResult(LXAReturnCode::UnknownLexem, GetLexem(0)->offset);
+                    m_result = SRSLResult(SRSLReturnCode::UnknownLexem, GetLexem(0)->offset);
                     break;
             }
         }
@@ -82,6 +94,14 @@ namespace SR_SRSL_NS {
     void SRSLLexicalAnalyzer::ProcessBracket() {
         switch (m_lexems[m_currentLexem].kind)
         {
+            case LexemKind::OpeningBracket: {
+                ProcessExpression();
+                if (IsHasErrors()) {
+                    return;
+                }
+                m_lexicalTree.lexicalTree.emplace_back(m_expr);
+                return;
+            }
             case LexemKind::OpeningSquareBracket: {
                 if (m_states.empty()) {
                     ProcessDecorators();
@@ -95,7 +115,7 @@ namespace SR_SRSL_NS {
                 break;
         }
 
-        m_result = LXAResult(LXAReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
+        m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
     }
 
     const Lexem* SRSLLexicalAnalyzer::GetCurrentLexem() const {
@@ -103,49 +123,51 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLLexicalAnalyzer::ProcessExpression() {
-        SR_SAFE_DELETE_PTR(m_expr);
-        m_expr = new SRSLExpr();
-
-        std::string value;
+        std::vector<Lexem> exprLexems;
+        uint32_t deep = 0;
 
     retry:
-        switch (m_lexems[m_currentLexem].kind)
+        const LexemKind lexemKind = InBounds() ? m_lexems[m_currentLexem].kind : LexemKind::Unknown;
+        switch (lexemKind)
         {
-            case LexemKind::Integer: {
-                if (!m_states.empty() && m_states.back() == LXAState::NumericDot) {
-                    m_states.back() = LXAState::Float;
+            case LexemKind::OpeningBracket:
+                ++deep;
+                SR_FALLTHROUGH;
+            default: {
+                switch (lexemKind) {
+                    case LexemKind::Unknown:
+                    case LexemKind::Semicolon:
+                    case LexemKind::Macro:
+                        break;
+
+                    default: {
+                        exprLexems.emplace_back(m_lexems[m_currentLexem]);
+                        ++m_currentLexem;
+
+                        goto retry;
+                    }
                 }
 
-                const bool isNumberState = !m_states.empty() && (m_states.back() == LXAState::Integer || m_states.back() == LXAState::Float);
-                if (!isNumberState) {
-                    m_states.emplace_back(LXAState::Integer);
+                break;
+            }
+            case LexemKind::ClosingBracket:
+                if (deep == 0) {
+                    break;
                 }
-
-                value += m_lexems[m_currentLexem].value;
+                exprLexems.emplace_back(m_lexems[m_currentLexem]);
                 ++m_currentLexem;
+                --deep;
                 goto retry;
-            }
-            case LexemKind::Dot: {
-                if (!m_states.empty() && m_states.back() == LXAState::Integer) {
-                    value += m_lexems[m_currentLexem].value;
-                    ++m_currentLexem;
-                    goto retry;
-                }
-                break;
-            }
-            default:
-                break;
         }
 
-        const bool isNumberState = !m_states.empty() && (m_states.back() == LXAState::Integer || m_states.back() == LXAState::Float);
-        if (isNumberState) {
-            m_states.pop_back();
-            m_expr->type = SRSLExprType::Value;
-            m_expr->token = value;
+        if (deep != 0) {
+            m_result = SRSLResult(SRSLReturnCode::IncompleteExpression, InBounds() ? m_lexems[m_currentLexem].offset : SR_UINT64_MAX);
             return;
         }
 
-        m_result = LXAResult(LXAReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
+        auto&& [pExpr, result] = SR_SRSL_NS::SRSLMathExpression::Instance().Analyze(std::move(exprLexems));
+        m_expr = pExpr;
+        m_result = std::move(result);
     }
 
     void SRSLLexicalAnalyzer::ProcessDecorators() {
@@ -170,7 +192,18 @@ namespace SR_SRSL_NS {
                 break;
             }
             case LexemKind::Identifier: {
-                if (!m_states.empty() && m_states.back() == LXAState::Decorator) {
+                if (!m_states.empty() && m_states.back() == LXAState::DecoratorArgs) {
+                    ProcessExpression();
+
+                    if (IsHasErrors()) {
+                        return;
+                    }
+
+                    m_decorators->decorators.back().args.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
+
+                    goto retry;
+                }
+                else if (!m_states.empty() && m_states.back() == LXAState::Decorator) {
                     m_decorators->decorators.back().name = GetCurrentLexem()->value;
                     ++m_currentLexem;
                     goto retry;
@@ -198,7 +231,18 @@ namespace SR_SRSL_NS {
                 break;
             }
             case LexemKind::OpeningBracket: {
-                if (!m_states.empty() && m_states.back() == LXAState::Decorator) {
+                if (!m_states.empty() && m_states.back() == LXAState::DecoratorArgs) {
+                    ProcessExpression();
+
+                    if (IsHasErrors()) {
+                        return;
+                    }
+
+                    m_decorators->decorators.back().args.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
+
+                    goto retry;
+                }
+                else if (!m_states.empty() && m_states.back() == LXAState::Decorator) {
                     m_states.back() = LXAState::DecoratorArgs;
                     ++m_currentLexem;
                     goto retry;
@@ -213,16 +257,18 @@ namespace SR_SRSL_NS {
                 }
                 break;
             }
+            case LexemKind::Plus:
             case LexemKind::Minus:
             case LexemKind::Negation:
             case LexemKind::Integer:
                 if (!m_states.empty() && m_states.back() == LXAState::DecoratorArgs) {
                     ProcessExpression();
-                    m_decorators->decorators.back().args.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
 
                     if (IsHasErrors()) {
                         return;
                     }
+
+                    m_decorators->decorators.back().args.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
 
                     goto retry;
                 }
@@ -231,10 +277,10 @@ namespace SR_SRSL_NS {
                 break;
         }
 
-        m_result = LXAResult(LXAReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
+        m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
     }
 
     bool SRSLLexicalAnalyzer::IsHasErrors() const noexcept {
-        return m_result.code != LXAReturnCode::Success;
+        return m_result.code != SRSLReturnCode::Success;
     }
 }

@@ -55,6 +55,8 @@ namespace SR_SRSL_NS {
             case '+': return Lexem(m_offset++, 1, LexemKind::Plus, "+");
             case '-': return Lexem(m_offset++, 1, LexemKind::Minus, "-");
             case '*': return Lexem(m_offset++, 1, LexemKind::Multiply, "*");
+            case '%': return Lexem(m_offset++, 1, LexemKind::Percent, "%");
+
             case '/': {
                 if (m_offset + 1 < m_source.size()) {
                     switch (m_source[m_offset + 1]) {

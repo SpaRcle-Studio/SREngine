@@ -15,17 +15,37 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    enum class SRSLExprType {
-        Unknown, Value, Operation, Call, Array
-    };
-
-    /// выражение может быть:
-    ///     значнием, тогда args будет пуст а в token будет лежать значние
-    ///     операцией, тогда в args будет 2 значения или выражения а в token операция
-    ///     вызовом функции, тогда в args будут ее аргументы, а в token имя функции
-    ///     массивом, token будет пуст, а в args будут лежать значения-выражения
     struct SRSLExpr : public SRSLLexicalUnit {
         SRSLExpr() = default;
+
+        explicit SRSLExpr(std::string&& token)
+            : token(SR_UTILS_NS::Exchange(token, { }))
+        {
+            SRAssert(this->token != ")" && this->token != "(");
+        }
+
+        explicit SRSLExpr(std::string&& token, SRSLExpr* pAExpr)
+            : token(SR_UTILS_NS::Exchange(token, { }))
+        {
+            SRAssert(pAExpr);
+            SRAssert(this->token != ")" && this->token != "(");
+            args.emplace_back(pAExpr);
+        }
+
+        explicit SRSLExpr(std::string&& token, SRSLExpr* pAExpr, SRSLExpr* pBExpr)
+            : token(SR_UTILS_NS::Exchange(token, { }))
+        {
+            SRAssert(pAExpr && pBExpr);
+            SRAssert(this->token != ")" && this->token != "(");
+            args.emplace_back(pAExpr);
+            args.emplace_back(pBExpr);
+        }
+
+        explicit SRSLExpr(SRSLExpr* pAExpr, SRSLExpr* pBExpr) {
+            SRAssert(pAExpr && pBExpr);
+            args.emplace_back(pAExpr);
+            args.emplace_back(pBExpr);
+        }
 
         ~SRSLExpr() override {
             for (auto&& pExpr : args) {
@@ -36,14 +56,12 @@ namespace SR_SRSL_NS {
         SRSLExpr(SRSLExpr&& other) noexcept
             : token(SR_UTILS_NS::Exchange(other.token, { }))
             , args(SR_UTILS_NS::Exchange(other.args, { }))
-            , type(SR_UTILS_NS::Exchange(other.type, { }))
         { }
 
         SR_NODISCARD std::string ToString() const override;
 
         std::string token;
         std::vector<SRSLExpr*> args;
-        SRSLExprType type = SRSLExprType::Unknown;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

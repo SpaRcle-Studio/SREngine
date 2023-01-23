@@ -5,8 +5,7 @@
 #ifndef SRENGINE_SRSL_LEXICAL_ANALYZER_H
 #define SRENGINE_SRSL_LEXICAL_ANALYZER_H
 
-#include <Utils/Common/Singleton.h>
-#include <Graphics/SRSL/LexicalTree.h>
+#include <Graphics/SRSL/MathExpression.h>
 
 namespace SR_SRSL_NS {
     class SRSLLexicalAnalyzer : public SR_UTILS_NS::Singleton<SRSLLexicalAnalyzer> {
@@ -14,32 +13,10 @@ namespace SR_SRSL_NS {
     private:
         enum class LXAState {
             Decorators, Decorator, DecoratorArgs,
-            Integer, Float, NumericDot
+            Expression,
         };
     public:
-        SR_ENUM_CLASS_T(LXAReturnCode, uint16_t,
-            Success, UnknownLexem, UnexceptedLexem
-        );
-
-        struct LXAResult {
-            LXAResult() = default;
-
-            LXAResult(LXAReturnCode code) /** NOLINT */
-                : code(code)
-                , position(0)
-            { }
-
-            LXAResult(LXAReturnCode code, uint64_t position)
-                : code(code)
-                , position(position)
-            { }
-
-            LXAReturnCode code;
-            uint64_t position;
-        };
-
-    public:
-        SR_NODISCARD std::pair<SRSLLexicalTree, LXAResult> Analyze(std::vector<Lexem>&& lexems);
+        SR_NODISCARD std::pair<SRSLLexicalTree, SRSLResult> Analyze(std::vector<Lexem>&& lexems);
 
     private:
         void Clear();
@@ -60,7 +37,7 @@ namespace SR_SRSL_NS {
         SRSLDecorators* m_decorators = nullptr;
         SRSLExpr* m_expr = nullptr;
 
-        LXAResult m_result;
+        SRSLResult m_result;
         std::list<LXAState> m_states;
 
         std::vector<Lexem> m_lexems;

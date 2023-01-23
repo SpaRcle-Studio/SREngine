@@ -84,6 +84,40 @@
 #include <glm/vec4.hpp>
 
 namespace SR_MATH_NS {
+    static SR_FORCE_INLINE bool IsNumber(const std::string& str) {
+        bool hasDot = false;
+
+        for (auto&& c : str) {
+            switch (c) {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    break;
+
+                case '.':
+                case ',': {
+                    if (hasDot) {
+                        return false;
+                    }
+                    hasDot = true;
+                    break;
+                }
+
+                default:
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
     enum Axis {
         AXIS_NONE = 1 << 0,
         AXIS_X    = 1 << 1,
