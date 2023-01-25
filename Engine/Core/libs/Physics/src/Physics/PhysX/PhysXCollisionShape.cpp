@@ -50,6 +50,11 @@ namespace SR_PTYPES_NS {
             m_shape->userData = (void*)dynamic_cast<CollisionShape*>(this);
         }
 
+        if (m_rigidbody->IsTrigger()){
+            m_shape->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
+            m_shape->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
+        }
+
         return true;
     }
 

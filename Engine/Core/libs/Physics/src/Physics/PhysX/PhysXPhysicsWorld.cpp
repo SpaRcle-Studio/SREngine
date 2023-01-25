@@ -18,11 +18,12 @@ namespace SR_PHYSICS_NS {
         PX_UNUSED(constantBlockSize);
         PX_UNUSED(constantBlock);
 
-        // all initial and persisting reports for everything, with per-point data
+
         pairFlags = physx::PxPairFlag::eSOLVE_CONTACT | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
-                    |	physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
+                    | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
                     | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
-                    | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS;
+                    | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS
+                    | physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
         return physx::PxFilterFlag::eDEFAULT;
     }
 
@@ -54,6 +55,10 @@ namespace SR_PHYSICS_NS {
         physx::PxSceneDesc sceneDesc(pPhysics->getTolerancesScale());
 
         sceneDesc.kineKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
+        sceneDesc.staticKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
+
+        sceneDesc.filterShader	= contactReportFilterShader;
+        sceneDesc.simulationEventCallback = m_contactCallback;
 
         if (!sceneDesc.cpuDispatcher) {
             m_cpuDispatcher = physx::PxDefaultCpuDispatcherCreate(1);
@@ -64,10 +69,9 @@ namespace SR_PHYSICS_NS {
             sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
         }
 
-        sceneDesc.simulationEventCallback = m_contactCallback;
-        sceneDesc.filterShader	= contactReportFilterShader;
-
         m_scene = pPhysics->createScene(sceneDesc);
+
+        m_scene->setSimulationEventCallback(m_contactCallback);
 
         if (!m_scene) {
             SR_ERROR("PhysXPhysicsWorld::Initialize() : failed to create scene!");
