@@ -35,7 +35,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody1;
+                        data.pHandler = rigidbody2;
 #ifdef SR_DEBUG
                         std::cout << "Detected collision ENTER for : " << rigidbody1->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody2->GetGameObject()->GetName() << std::endl;
 #endif
@@ -47,7 +47,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody2;
+                        data.pHandler = rigidbody1;
 #ifdef SR_DEBUG
                         std::cout << "Detected collision ENTER for : " << rigidbody2->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody1->GetGameObject()->GetName() << std::endl;
 #endif
@@ -62,7 +62,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody1;
+                        data.pHandler = rigidbody2;
 #ifdef SR_DEBUG
                         std::cout << "Detected collision STAY for : " << rigidbody1->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody2->GetGameObject()->GetName() << std::endl;
 #endif
@@ -74,7 +74,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody2;
+                        data.pHandler = rigidbody1;
 #ifdef SR_DEBUG
                         std::cout << "Detected collision STAY for : " << rigidbody2->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody1->GetGameObject()->GetName() << std::endl;
 #endif
@@ -89,7 +89,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody1;
+                        data.pHandler = rigidbody2;
 #ifdef SR_DEBUG
                         std::cout << "Detected collision EXIT for : " << rigidbody1->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody2->GetGameObject()->GetName() << std::endl;
 #endif
@@ -101,7 +101,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody2;
+                        data.pHandler = rigidbody1;
 #ifdef SR_DEBUG
                         std::cout << "Detected collision EXIT for : " << rigidbody2->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody1->GetGameObject()->GetName() << std::endl;
 #endif
@@ -143,7 +143,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody;
+                        data.pHandler = triggerRigidBody;
 #ifdef SR_DEBUG
                         std::cout << "Detected trigger ENTER for : " << rigidbody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << triggerGameObject->GetName() << std::endl;
 #endif
@@ -156,7 +156,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = triggerRigidBody;
+                        data.pHandler = rigidbody;
 #ifdef SR_DEBUG
                         std::cout << "Detected trigger ENTER for : " << triggerRigidBody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << gameObject->GetName() << std::endl;
 #endif
@@ -171,7 +171,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = rigidbody;
+                        data.pHandler = triggerRigidBody;
 #ifdef SR_DEBUG
                         std::cout << "Detected trigger EXIT for : " << rigidbody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << triggerGameObject->GetName() << std::endl;
 #endif
@@ -183,7 +183,7 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
                     else {
-                        data.pHandler = triggerRigidBody;
+                        data.pHandler = rigidbody;
 #ifdef SR_DEBUG
                         std::cout << "Detected trigger EXIT for : " << triggerRigidBody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << gameObject->GetName() << std::endl;
 #endif
