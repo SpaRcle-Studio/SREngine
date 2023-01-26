@@ -65,4 +65,26 @@ namespace SR_SRSL_NS {
 
         return code;
     }
+
+    std::string SRSLVariable::ToString() const {
+        std::string code;
+
+        if (pDecorators) {
+            code += pDecorators->ToString() + " ";
+        }
+
+        code += pType->ToString() + " " + name;
+
+        if (pDimension) {
+            code += pDimension->ToString();
+        }
+
+        if (pExpr) {
+            code += " = " + pExpr->ToString();
+        }
+
+        code += ";";
+
+        return code;
+    }
 }

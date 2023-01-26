@@ -1,0 +1,7 @@
+vec3 vector;
+//vec3 vector2 = 1;
+[[uniform], [shared]];
+[[numThreads(2, 4, 8)]];
+vec3 vector;
+[[uniform], [shared]] vec3 vector;
+[[numThreads(2, 4, 8)]] void compute;

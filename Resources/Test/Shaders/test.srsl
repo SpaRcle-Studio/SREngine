@@ -18,6 +18,13 @@ DepthTest true;
     r = x + y + z;
 }
 
+#if (DEBUG) {
+    COLOR += vec3(1, 0, 0);
+}
+#else {
+    COLOR += vec3(0, 1, 0);
+}
+
 #procedure SUM(a, b) { a + b }
 
 /// подстановка любого значния

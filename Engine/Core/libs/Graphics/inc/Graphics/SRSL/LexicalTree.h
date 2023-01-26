@@ -7,6 +7,8 @@
 
 #include <Graphics/SRSL/LexerUtils.h>
 
+#include <utility>
+
 namespace SR_SRSL_NS {
     /// минимальная лексическая единица
     struct SRSLLexicalUnit : public SR_UTILS_NS::NonCopyable {
@@ -56,12 +58,21 @@ namespace SR_SRSL_NS {
         SRSLExpr(SRSLExpr&& other) noexcept
             : token(SR_UTILS_NS::Exchange(other.token, { }))
             , args(SR_UTILS_NS::Exchange(other.args, { }))
+            , isCall(SR_UTILS_NS::Exchange(other.isCall, { }))
+            , isAccess(SR_UTILS_NS::Exchange(other.isAccess, { }))
+            , isArray(SR_UTILS_NS::Exchange(other.isArray, { }))
         { }
 
         SR_NODISCARD std::string ToString() const override;
 
         std::string token;
         std::vector<SRSLExpr*> args;
+
+        bool isCall = false;       /// function(arg1, arg2, arg3)
+        bool isAccess = false;     /// variable.field
+        bool isArray = false;      /// variable[expression]
+        bool isAssignment = false; /// variable = expression
+
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -114,10 +125,62 @@ namespace SR_SRSL_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     struct SRSLVariable : public SRSLLexicalUnit {
-        SRSLDecorators decorators;
-        std::string type;
+        SRSLVariable() = default;
+
+        SRSLVariable(SRSLVariable&& other) noexcept
+            : pDecorators(SR_UTILS_NS::Exchange(other.pDecorators, { }))
+            , pType(SR_UTILS_NS::Exchange(other.pType, { }))
+            , name(SR_UTILS_NS::Exchange(other.name, { }))
+            , pDimension(SR_UTILS_NS::Exchange(other.pDimension, { }))
+            , pExpr(SR_UTILS_NS::Exchange(other.pExpr, { }))
+        { }
+
+        SRSLVariable& operator=(SRSLVariable&& other) noexcept {
+            pDecorators = SR_UTILS_NS::Exchange(other.pDecorators, { });
+            pType = SR_UTILS_NS::Exchange(other.pType, { });
+            name = SR_UTILS_NS::Exchange(other.name, { });
+            pDimension = SR_UTILS_NS::Exchange(other.pDimension, { });
+            pExpr = SR_UTILS_NS::Exchange(other.pExpr, { });
+            return *this;
+        }
+
+        ~SRSLVariable() override {
+            SR_SAFE_DELETE_PTR(pDecorators);
+            SR_SAFE_DELETE_PTR(pExpr);
+            SR_SAFE_DELETE_PTR(pType);
+            SR_SAFE_DELETE_PTR(pDimension);
+        }
+
+        SR_NODISCARD std::string ToString() const override;
+
+        SRSLDecorators* pDecorators = nullptr;
+        SRSLExpr* pType = nullptr;
         std::string name;
-        std::optional<SRSLExpr> value;
+        SRSLExpr* pDimension = nullptr;
+        SRSLExpr* pExpr= nullptr;
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    struct SRSLReturn : public SRSLLexicalUnit {
+        explicit SRSLReturn(SRSLExpr* pExpr)
+            : pExpr(pExpr)
+        { }
+
+        ~SRSLReturn() override {
+            delete pExpr;
+        }
+
+        SRSLReturn(SRSLReturn&& other) noexcept
+            : pExpr(SR_UTILS_NS::Exchange(other.pExpr, { }))
+        { }
+
+        SRSLReturn& operator=(SRSLReturn&& other) noexcept {
+            pExpr = SR_UTILS_NS::Exchange(other.pExpr, { });
+            return *this;
+        }
+
+        SRSLExpr* pExpr;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
