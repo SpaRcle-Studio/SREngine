@@ -2,10 +2,12 @@
 // Created by Monika on 08.01.2023.
 //
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+
 #include <Graphics/Animations/AnimationClip.h>
 #include <Graphics/Animations/AnimationChannel.h>
 
-#include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Types/RawMesh.h>
 
 namespace SR_ANIMATIONS_NS {

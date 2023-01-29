@@ -3,8 +3,6 @@
 //
 
 #include <Graphics/Animations/Animator.h>
-#include <Graphics/Animations/AnimationClip.h>
-#include <Graphics/Animations/AnimationChannel.h>
 
 #include <Utils/ECS/ComponentManager.h>
 

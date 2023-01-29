@@ -212,6 +212,13 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::UseModelMatrix() {
+        PopulateSkeletonMatrices(); ///TODO:А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+    }
+
+    void SkinnedMesh::PopulateSkeletonMatrices() {
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
         auto&& bones = m_rawMesh->GetBones(m_meshId);
@@ -228,7 +235,17 @@ namespace SR_GTYPES_NS {
             }
         }
 
-        if (!m_isOffsetsInitialized && m_skeleton) {
+        if (!m_skeleton || !m_skeleton->GetRootBone()) {
+            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
+                m_skeletonMatrices[i] = identityMatrix;
+                m_skeletonOffsets[i] = identityMatrix;
+            }
+            m_isOffsetsInitialized = false;
+
+            return;
+        }
+
+        if (!m_isOffsetsInitialized) {
             for (auto&& [hashName, boneId] : bones) {
                 m_skeletonOffsets[boneId] = m_rawMesh->GetBoneOffset(hashName);
                 m_bonesIds[boneId] = m_skeleton->GetBoneIndex(hashName);
@@ -236,20 +253,15 @@ namespace SR_GTYPES_NS {
             m_isOffsetsInitialized = true;
         }
 
-        if (m_skeleton) {
-            for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
-                if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
-                    m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
-                }
-                else {
-                    m_skeletonMatrices[boneId] = identityMatrix;
-                }
+        for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
+            if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
+                m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
+            }
+            else {
+                m_skeletonMatrices[boneId] = identityMatrix;
             }
         }
 
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
-        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
     void SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) {

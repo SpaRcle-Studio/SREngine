@@ -49,11 +49,24 @@ namespace SR_CORE_NS::GUI {
 
         if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
             if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
-                for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                     if (ptr.RecursiveLockIfValid()) {
                         ptr->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
                         ptr->Unlock();
                     }
+                }*/
+                if (m_scene.RecursiveLockIfValid()) {
+                    std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+                    commands.emplace_back(new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {}));
+                    for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                        if (ptr.RecursiveLockIfValid()) {
+                            commands.emplace_back(new Framework::Core::Commands::GameObjectMove(ptr, SR_UTILS_NS::GameObject::Ptr()));
+                            ptr.Unlock();
+                        }
+                    }
+                    auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
+                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    m_scene.Unlock();
                 }
             }
             ImGui::EndDragDropTarget();
@@ -131,7 +144,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
-        if (ImGui::IsItemClicked()) {
+        if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
             SelectGameObject(gm);
         }
     }
@@ -147,6 +160,7 @@ namespace SR_CORE_NS::GUI {
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
         ContextMenu(root, id);
+
         CheckSelected(root);
 
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource()) {
@@ -168,11 +182,24 @@ namespace SR_CORE_NS::GUI {
             ImGui::Separator();
 
             if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
-                for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                     if (ptr.RecursiveLockIfValid()) {
                         ptr->MoveToTree(root);
                         ptr->Unlock();
                     }
+                }*/
+                if (m_scene.RecursiveLockIfValid()) {
+                    std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+                    commands.emplace_back(new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {}));
+                    for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                        if (ptr.RecursiveLockIfValid()) {
+                            commands.emplace_back(new Framework::Core::Commands::GameObjectMove(ptr, root));
+                            ptr.Unlock();
+                        }
+                    }
+                    auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
+                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    m_scene.Unlock();
                 }
             }
 

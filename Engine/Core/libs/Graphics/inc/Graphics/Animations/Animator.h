@@ -7,6 +7,7 @@
 
 #include <Utils/ECS/Component.h>
 #include <Graphics/Animations/AnimationKey.h>
+#include <Graphics/Animations/Skeleton.h>
 
 namespace SR_ANIMATIONS_NS {
     class AnimationClip;

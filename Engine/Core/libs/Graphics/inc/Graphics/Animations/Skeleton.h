@@ -54,12 +54,6 @@ namespace SR_ANIMATIONS_NS {
         Bone* m_rootBone = nullptr;
     };
 
-    /// ----------------------------------------------------------------------------------------------------------------
-
-    struct SR_DEPRECATED AssimpSkeleton {
-        std::vector<BoneComponent> bones;
-    };
-
 }
 
 #endif //SRENGINE_SKELETON_H

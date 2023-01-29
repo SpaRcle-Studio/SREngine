@@ -121,8 +121,6 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_parent = { };
     };
 
-    bool RegisterEngineCommands();
-
     class GameObjectPaste : public SR_UTILS_NS::ReversibleCommand {
     public:
         GameObjectPaste() = default;
@@ -141,6 +139,24 @@ namespace SR_CORE_NS::Commands {
         SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
         SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
 
+    };
+
+    class GameObjectMove : public SR_UTILS_NS::ReversibleCommand {
+    public:
+        GameObjectMove() = default;
+        explicit GameObjectMove(const SR_UTILS_NS::GameObject::Ptr& ptr, const SR_UTILS_NS::GameObject::Ptr& newDestination);
+
+        ~GameObjectMove() override;
+
+        bool Redo() override;
+        bool Undo() override;
+
+        std::string GetName() override { return "GameObjectMove"; }
+
+    private:
+        SR_UTILS_NS::EntityPath m_newDestinationPath;
+        SR_UTILS_NS::EntityPath m_oldDestinationPath;
+        SR_UTILS_NS::EntityPath m_path;
     };
 
     bool RegisterEngineCommands();

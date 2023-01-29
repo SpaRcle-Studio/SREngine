@@ -7,7 +7,6 @@
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 #include <Graphics/Animations/Skeleton.h>
-#include <Graphics/Animations/SkeletonAnimationClip.h>
 
 namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
@@ -45,6 +44,8 @@ namespace SR_GTYPES_NS {
 
     private:
         void FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject);
+        void PopulateSkeletonMatrices();
+
         void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
 
         bool Calculate() override;
