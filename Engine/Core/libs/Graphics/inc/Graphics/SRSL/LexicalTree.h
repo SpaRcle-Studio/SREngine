@@ -138,16 +138,14 @@ namespace SR_SRSL_NS {
         SRSLVariable(SRSLVariable&& other) noexcept
             : pDecorators(SR_UTILS_NS::Exchange(other.pDecorators, { }))
             , pType(SR_UTILS_NS::Exchange(other.pType, { }))
-            , name(SR_UTILS_NS::Exchange(other.name, { }))
-            , pDimension(SR_UTILS_NS::Exchange(other.pDimension, { }))
+            , pName(SR_UTILS_NS::Exchange(other.pName, { }))
             , pExpr(SR_UTILS_NS::Exchange(other.pExpr, { }))
         { }
 
         SRSLVariable& operator=(SRSLVariable&& other) noexcept {
             pDecorators = SR_UTILS_NS::Exchange(other.pDecorators, { });
             pType = SR_UTILS_NS::Exchange(other.pType, { });
-            name = SR_UTILS_NS::Exchange(other.name, { });
-            pDimension = SR_UTILS_NS::Exchange(other.pDimension, { });
+            pName = SR_UTILS_NS::Exchange(other.pName, { });
             pExpr = SR_UTILS_NS::Exchange(other.pExpr, { });
             return *this;
         }
@@ -156,16 +154,15 @@ namespace SR_SRSL_NS {
             SR_SAFE_DELETE_PTR(pDecorators);
             SR_SAFE_DELETE_PTR(pExpr);
             SR_SAFE_DELETE_PTR(pType);
-            SR_SAFE_DELETE_PTR(pDimension);
+            SR_SAFE_DELETE_PTR(pName);
         }
 
         SR_NODISCARD std::string ToString() const override;
 
         SRSLDecorators* pDecorators = nullptr;
         SRSLExpr* pType = nullptr;
-        std::string name;
-        SRSLExpr* pDimension = nullptr;
-        SRSLExpr* pExpr= nullptr;
+        SRSLExpr* pName = nullptr;
+        SRSLExpr* pExpr = nullptr;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

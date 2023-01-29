@@ -1,8 +1,12 @@
+type name = value;
+
+vec3 a[1];
+
+vec3[6][2] vector[435];
+vec3[6][2][3] vector[777][879][3 - fg - fg] = 234 - fd + -ds[54][545] ^ 243343.54656;
+
 -a[0][1];
 -a[0][1][2];
-
-vec3[6][2] vector;
-vec3[6][2][3] vector;
 
 -a[1];
 (-a)[1];

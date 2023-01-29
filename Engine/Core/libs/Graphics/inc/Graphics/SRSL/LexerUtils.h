@@ -83,7 +83,7 @@ namespace SR_SRSL_NS {
     };
 
     SR_ENUM_NS_CLASS_T(SRSLReturnCode, uint16_t,
-        Success,
+        Success, OutOfBounds,
         UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression,
         IncompleteExpression, EmptyExpression,
         InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement

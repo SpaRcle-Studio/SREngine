@@ -76,11 +76,7 @@ namespace SR_SRSL_NS {
             code += pDecorators->ToString() + " ";
         }
 
-        code += pType->ToString() + " " + name;
-
-        if (pDimension) {
-            code += pDimension->ToString();
-        }
+        code += pType->ToString() + " " + pName->ToString();
 
         if (pExpr) {
             code += " = " + pExpr->ToString();

@@ -79,7 +79,7 @@ namespace SR_SRSL_NS {
                     if (IsHasErrors()) {
                         return;
                     }
-                    m_lexicalTree.lexicalTree.emplace_back(m_expr);
+                    m_lexicalTree.lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
                     break;
                 }
 
@@ -107,7 +107,7 @@ namespace SR_SRSL_NS {
                 if (IsHasErrors()) {
                     return;
                 }
-                m_lexicalTree.lexicalTree.emplace_back(m_expr);
+                m_lexicalTree.lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
                 return;
             }
             case LexemKind::OpeningSquareBracket: {
@@ -131,6 +131,9 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLLexicalAnalyzer::ProcessExpression() {
+        SRAssert(!m_expr);
+        SR_SAFE_DELETE_PTR(m_expr);
+
         std::vector<Lexem> exprLexems;
         uint32_t deep = 0;
         bool allowIdentifier = true;
@@ -151,6 +154,11 @@ namespace SR_SRSL_NS {
                     case LexemKind::Comma:
                         break;
 
+                    case LexemKind::Assign:
+                        if (deep == 0) {
+                            break;
+                        }
+                        SR_FALLTHROUGH;
                     default: {
                         if (lexemKind == LexemKind::Identifier) {
                             if (!allowIdentifier) {
@@ -323,13 +331,15 @@ namespace SR_SRSL_NS {
     bool SRSLLexicalAnalyzer::TryProcessIdentifier() {
         auto&& pCurrent = GetCurrentLexem();
 
+        const uint64_t currentLexem = m_currentLexem;
+
         if (pCurrent->value == "return") {
             ++m_currentLexem;
             ProcessExpression();
             if (IsHasErrors()) {
                 return false;
             }
-            m_lexicalTree.lexicalTree.emplace_back(new SRSLReturn(std::move(m_expr)));
+            m_lexicalTree.lexicalTree.emplace_back(new SRSLReturn(SR_UTILS_NS::Exchange(m_expr, nullptr)));
             return true;
         }
 
@@ -342,29 +352,58 @@ namespace SR_SRSL_NS {
         }
 
         if (pCurrent = GetCurrentLexem(); pCurrent && pCurrent->kind == LexemKind::Identifier) {
-            if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::OpeningBracket) {
+            auto&& pTypeExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
+            ProcessExpression();
+            auto&& pNameExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
 
+            if (IsHasErrors()) {
+                SR_SAFE_DELETE_PTR(pTypeExpr);
+                SR_SAFE_DELETE_PTR(pNameExpr);
+                return false;
             }
-            /// здесь мы предпологаем что все "+=", "-=" и тд уже развернуты в выражения типа "a = a + b"
-            else if (pNext && pNext->kind == LexemKind::Assign) {
-                //auto&& pVariable = SRSLVariable();
-            }
-            else {
+
+            /// обычная переменная типа "type[...] name[...];"
+            if (pCurrent = GetCurrentLexem(); (pCurrent && pCurrent->kind == LexemKind::Semicolon) || !pCurrent) {
                 auto&& pVariable = new SRSLVariable();
 
-                pVariable->pType = SR_UTILS_NS::Exchange(m_expr, nullptr);
-                pVariable->name = pCurrent->value;
+                pVariable->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
+                pVariable->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
                 pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
 
                 m_lexicalTree.lexicalTree.emplace_back(std::move(pVariable));
-                m_currentLexem += 1;
 
                 return true;
             }
+            /// переменная имеющая значение: "type[...] name[...] = value;"
+            else if (pCurrent && pCurrent->kind == LexemKind::Assign) {
+                auto&& pVariable = new SRSLVariable();
+
+                pVariable->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
+                pVariable->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
+                pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
+
+                ++m_currentLexem;
+
+                ProcessExpression();
+
+                pVariable->pExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
+
+                m_lexicalTree.lexicalTree.emplace_back(std::move(pVariable));
+
+                return true;
+            }
+
+            SR_SAFE_DELETE_PTR(m_expr);
+            SR_SAFE_DELETE_PTR(pTypeExpr);
+            SR_SAFE_DELETE_PTR(pNameExpr);
+
+            m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, InBounds() ? m_lexems[m_currentLexem].offset : SR_UINT64_MAX);
+
+            return false;
         }
-        else {
-            --m_currentLexem;
-        }
+
+        SR_SAFE_DELETE_PTR(m_expr);
+        m_currentLexem = currentLexem;
 
         return false;
     }
