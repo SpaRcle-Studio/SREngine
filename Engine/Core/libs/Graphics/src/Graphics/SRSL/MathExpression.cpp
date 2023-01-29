@@ -37,7 +37,7 @@ namespace SR_SRSL_NS {
                 return pLeftExpr;
             }
 
-            int32_t priority = GetPriority(operation);
+            const int32_t priority = GetPriority(operation, IsPrefix());
 
             if (priority <= minPriority) {
                 m_currentLexem = currentLexem;
@@ -100,10 +100,19 @@ namespace SR_SRSL_NS {
         }
 
         if (SR_MATH_NS::IsNumber(token) || IsIdentifier(token)) {
-            return new SRSLExpr(std::move(token));
+            auto&& pBasicExpr = new SRSLExpr(std::move(token));
+
+        retry:
+            if (auto&& pLexem = GetCurrentLexem(); pLexem && pLexem->kind == LexemKind::OpeningSquareBracket) {
+                ++m_currentLexem;
+                auto&& pExpr = ParseBinaryExpression(0);
+                pBasicExpr = new SRSLExpr("[", pBasicExpr, pExpr);
+                goto retry;
+            }
+            return pBasicExpr;
         }
 
-        if (token.size() == 1 && (token == "(" || token == "[")) {
+        if (token.size() == 1 && (token == "(")) {
             auto&& pExpr = ParseBinaryExpression(0);
 
             if (!InBounds()) {
@@ -113,7 +122,7 @@ namespace SR_SRSL_NS {
             }
 
             std::string parsedToken = ParseToken();
-            if (parsedToken != ")" && parsedToken != "]") {
+            if (parsedToken != ")") {
                 SR_SAFE_DELETE_PTR(pExpr);
                 m_result = SRSLResult(SRSLReturnCode::InvalidComplexExpression);
                 return nullptr;
@@ -140,10 +149,15 @@ namespace SR_SRSL_NS {
         return new SRSLExpr(std::move(token), pArgExpr);
     }
 
-    int32_t SRSLMathExpression::GetPriority(const std::string& operation) const {
+    int32_t SRSLMathExpression::GetPriority(const std::string& operation, bool prefix) const {
         if (operation == "") {
 
         }
+
+        else if (operation == "~" && prefix) return 35;
+        else if (operation == "!" && prefix) return 40;
+        else if (operation == "+" && prefix) return 45;
+        else if (operation == "-" && prefix) return 45;
 
         else if (operation == "[") return 50;
         else if (operation == "]") return 50;
@@ -437,5 +451,26 @@ namespace SR_SRSL_NS {
         }
 
         return true;
+    }
+
+    bool SRSLMathExpression::IsOperator(const std::string& operation) const noexcept {
+        static const std::vector<std::string> operators = {
+                "+", "-", "!", ".", "~", ">", "^", "<", ":", "?", "|", "&", "%",
+        };
+        return std::find(operators.begin(), operators.end(), operation) != operators.end();
+    }
+
+    bool SRSLMathExpression::IsPrefix() const noexcept {
+        auto&& pLexem = GetLexem(-1);
+
+        if (!pLexem) {
+            return true;
+        }
+
+        if (IsOperator(pLexem->value)) {
+            return false;
+        }
+
+        return pLexem->kind != LexemKind::Identifier;
     }
 }

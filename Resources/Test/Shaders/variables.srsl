@@ -1,7 +1,17 @@
+-a[0][1];
+-a[0][1][2];
+
+vec3[6][2] vector;
+vec3[6][2][3] vector;
+
+-a[1];
+(-a)[1];
+-(a[1]);
+-1 * 2;
 true | false;
 
 //vec3 vector;
-vec3[(-dsf) - 2 * 243 - 46 + (r - 43)] vector;
+vec3[(-dsf[3434][65]) - 2 * 243 - 46 + (r - 43)][87-56] vector;
 vec3[46 + 43] vector;
 //vec3 vector2 = 1;
 [[uniform], [shared]];

@@ -17,7 +17,7 @@ namespace SR_SRSL_NS {
     private:
         void Clear();
 
-        SR_NODISCARD int32_t GetPriority(const std::string& operation) const;
+        SR_NODISCARD int32_t GetPriority(const std::string& operation, bool prefix) const;
         SR_NODISCARD bool IsIncrementOrDecrement(const std::string& operation) const;
 
         SR_NODISCARD SRSLExpr* ParseBinaryExpression(int32_t minPriority);
@@ -25,6 +25,8 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::string ParseToken();
 
+        SR_NODISCARD bool IsPrefix() const noexcept;
+        SR_NODISCARD bool IsOperator(const std::string& operation) const noexcept;
         SR_NODISCARD bool IsIdentifier(const std::string& token) const noexcept;
 
         SR_NODISCARD bool InBounds() const noexcept;
