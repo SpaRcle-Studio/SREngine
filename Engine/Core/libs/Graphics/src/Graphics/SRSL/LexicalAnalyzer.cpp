@@ -133,12 +133,14 @@ namespace SR_SRSL_NS {
     void SRSLLexicalAnalyzer::ProcessExpression() {
         std::vector<Lexem> exprLexems;
         uint32_t deep = 0;
+        bool allowIdentifier = true;
 
     retry:
         const LexemKind lexemKind = InBounds() ? m_lexems[m_currentLexem].kind : LexemKind::Unknown;
         switch (lexemKind)
         {
             case LexemKind::OpeningBracket:
+            case LexemKind::OpeningSquareBracket:
                 ++deep;
                 SR_FALLTHROUGH;
             default: {
@@ -150,6 +152,15 @@ namespace SR_SRSL_NS {
                         break;
 
                     default: {
+                        if (lexemKind == LexemKind::Identifier) {
+                            if (!allowIdentifier) {
+                                break;
+                            }
+                        }
+                        else {
+                            allowIdentifier = true;
+                        }
+
                         exprLexems.emplace_back(m_lexems[m_currentLexem]);
                         ++m_currentLexem;
 
@@ -160,6 +171,8 @@ namespace SR_SRSL_NS {
                 break;
             }
             case LexemKind::ClosingBracket:
+            case LexemKind::ClosingSquareBracket:
+                allowIdentifier = false;
                 if (deep == 0) {
                     break;
                 }
@@ -348,6 +361,9 @@ namespace SR_SRSL_NS {
 
                 return true;
             }
+        }
+        else {
+            --m_currentLexem;
         }
 
         return false;

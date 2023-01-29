@@ -24,6 +24,7 @@ namespace SR_SRSL_NS {
             : token(SR_UTILS_NS::Exchange(token, { }))
         {
             SRAssert(this->token != ")" && this->token != "(");
+            SRAssert(this->token != "[" && this->token != "]");
         }
 
         explicit SRSLExpr(std::string&& token, SRSLExpr* pAExpr)
@@ -31,6 +32,7 @@ namespace SR_SRSL_NS {
         {
             SRAssert(pAExpr);
             SRAssert(this->token != ")" && this->token != "(");
+            SRAssert(this->token != "[" && this->token != "]");
             args.emplace_back(pAExpr);
         }
 
@@ -39,6 +41,12 @@ namespace SR_SRSL_NS {
         {
             SRAssert(pAExpr && pBExpr);
             SRAssert(this->token != ")" && this->token != "(");
+            SRAssert(this->token != "]");
+
+            if (this->token == "[") {
+                isArray = true;
+            }
+
             args.emplace_back(pAExpr);
             args.emplace_back(pBExpr);
         }

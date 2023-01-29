@@ -33,6 +33,10 @@ namespace SR_SRSL_NS {
                 return nullptr;
             }
 
+            if (operation == "]") {
+                return pLeftExpr;
+            }
+
             int32_t priority = GetPriority(operation);
 
             if (priority <= minPriority) {
@@ -99,7 +103,7 @@ namespace SR_SRSL_NS {
             return new SRSLExpr(std::move(token));
         }
 
-        if (token.size() == 1 && token[0] == '(') {
+        if (token.size() == 1 && (token == "(" || token == "[")) {
             auto&& pExpr = ParseBinaryExpression(0);
 
             if (!InBounds()) {
@@ -108,7 +112,8 @@ namespace SR_SRSL_NS {
                 return nullptr;
             }
 
-            if (ParseToken() != ")") {
+            std::string parsedToken = ParseToken();
+            if (parsedToken != ")" && parsedToken != "]") {
                 SR_SAFE_DELETE_PTR(pExpr);
                 m_result = SRSLResult(SRSLReturnCode::InvalidComplexExpression);
                 return nullptr;
@@ -139,6 +144,10 @@ namespace SR_SRSL_NS {
         if (operation == "") {
 
         }
+
+        else if (operation == "[") return 50;
+        else if (operation == "]") return 50;
+
         else if (operation == "?") return 60;
         else if (operation == ":") return 60;
 
@@ -241,6 +250,8 @@ namespace SR_SRSL_NS {
         switch (GetCurrentLexem()->kind) {
             case LexemKind::OpeningBracket:
             case LexemKind::ClosingBracket:
+            case LexemKind::OpeningSquareBracket:
+            case LexemKind::ClosingSquareBracket:
             case LexemKind::Identifier:
             case LexemKind::Tilda:
             case LexemKind::Dot:

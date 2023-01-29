@@ -10,7 +10,10 @@ namespace SR_SRSL_NS {
             SRHalt0();
         }
 
-        if (args.empty()) {
+        if (isArray) {
+            return args[0]->ToString() + "[" + args[1]->ToString() + "]";
+        }
+        else if (args.empty()) {
             return token;
         }
         else if (args.size() == 1) {
