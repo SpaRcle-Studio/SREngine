@@ -13,7 +13,7 @@ namespace SR_SRSL_NS {
     private:
         enum class LXAState {
             Decorators, Decorator, DecoratorArgs,
-            Expression, Variable, Function
+            Expression, Variable, Function, FunctionArgs, FunctionBody
         };
     public:
         SR_NODISCARD std::pair<SRSLLexicalTree, SRSLResult> Analyze(std::vector<Lexem>&& lexems);
@@ -24,9 +24,9 @@ namespace SR_SRSL_NS {
         void ProcessMain();
         void ProcessBracket();
         void ProcessDecorators();
-        void ProcessExpression();
+        void ProcessExpression(bool isFunctionName = false);
 
-        SR_NODISCARD bool TryProcessIdentifier();
+        SR_NODISCARD SRSLLexicalUnit* TryProcessIdentifier();
 
         SR_NODISCARD bool InBounds() const noexcept;
         SR_NODISCARD bool IsHasErrors() const noexcept;

@@ -62,12 +62,26 @@ namespace SR_SRSL_NS {
                 }
 
                 case LexemKind::Identifier: {
-                    if (TryProcessIdentifier()) {
+                    if (auto&& pUnit = TryProcessIdentifier()) {
+                        if (dynamic_cast<SRSLFunction*>(pUnit)) {
+                            m_states.emplace_back(LXAState::Function);
+                            m_lexicalTree.lexicalTree.emplace_back(pUnit);
+                        }
+                        else if (!m_states.empty() && m_states.back() == LXAState::FunctionArgs) {
+                            auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.lexicalTree.back());
+                            auto&& pVar = dynamic_cast<SRSLVariable*>(pUnit);
+                            SRAssert(pFunction && pVar);
+                            pFunction->args.emplace_back(pVar);
+                        }
+                        else {
+                            m_lexicalTree.lexicalTree.emplace_back(pUnit);
+                        }
                         break;
                     }
                     if (IsHasErrors()) {
                         return;
                     }
+
                     SR_FALLTHROUGH;
                 }
                 case LexemKind::Plus:
@@ -103,22 +117,50 @@ namespace SR_SRSL_NS {
         switch (m_lexems[m_currentLexem].kind)
         {
             case LexemKind::OpeningBracket: {
+                if (!m_states.empty() && m_states.back() == LXAState::Function) {
+                    ++m_currentLexem;
+                    m_states.back() = LXAState::FunctionArgs;
+                    return;
+                }
+
                 ProcessExpression();
+
                 if (IsHasErrors()) {
                     return;
                 }
+
                 m_lexicalTree.lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
                 return;
             }
-            case LexemKind::OpeningSquareBracket: {
-                if (m_states.empty()) {
-                    SR_SAFE_DELETE_PTR(m_decorators);
-                    ProcessDecorators();
+            case LexemKind::ClosingBracket: {
+                if (!m_states.empty() && m_states.back() == LXAState::FunctionArgs) {
+                    m_states.back() = LXAState::Function;
+                    ++m_currentLexem;
                     return;
                 }
                 break;
             }
-
+            case LexemKind::OpeningSquareBracket: {
+                ProcessDecorators();
+                return;
+            }
+            case LexemKind::OpeningCurlyBracket: {
+                if (!m_states.empty() && m_states.back() == LXAState::Function) {
+                    m_states.back() = LXAState::FunctionBody;
+                    ++m_currentLexem;
+                    return;
+                }
+                /// TODO: нужен какой-то стек областей видимости
+                return;
+            }
+            case LexemKind::ClosingCurlyBracket: {
+                if (!m_states.empty() && m_states.back() == LXAState::FunctionBody) {
+                    m_states.pop_back();
+                    ++m_currentLexem;
+                    return;
+                }
+                return;
+            }
             default:
                 break;
         }
@@ -130,7 +172,7 @@ namespace SR_SRSL_NS {
         return GetLexem(0);
     }
 
-    void SRSLLexicalAnalyzer::ProcessExpression() {
+    void SRSLLexicalAnalyzer::ProcessExpression(bool isFunctionName) {
         SRAssert(!m_expr);
         SR_SAFE_DELETE_PTR(m_expr);
 
@@ -142,7 +184,13 @@ namespace SR_SRSL_NS {
         const LexemKind lexemKind = InBounds() ? m_lexems[m_currentLexem].kind : LexemKind::Unknown;
         switch (lexemKind)
         {
+            case LexemKind::OpeningCurlyBracket:
+                break;
             case LexemKind::OpeningBracket:
+                if (isFunctionName && deep == 0) {
+                    break;
+                }
+                SR_FALLTHROUGH;
             case LexemKind::OpeningSquareBracket:
                 ++deep;
                 SR_FALLTHROUGH;
@@ -208,18 +256,17 @@ namespace SR_SRSL_NS {
         switch (m_lexems[m_currentLexem].kind)
         {
             case LexemKind::OpeningSquareBracket: {
-                if (m_states.empty()) {
-                    m_states.emplace_back(LXAState::Decorators);
-                    ++m_currentLexem;
-                    goto retry;
-                }
-                else if (m_states.back() == LXAState::Decorators) {
+                if (!m_states.empty() && m_states.back() == LXAState::Decorators) {
                     m_states.emplace_back(LXAState::Decorator);
                     m_decorators->decorators.emplace_back(std::move(SRSLDecorator()));
                     ++m_currentLexem;
                     goto retry;
                 }
-                break;
+                else {
+                    m_states.emplace_back(LXAState::Decorators);
+                    ++m_currentLexem;
+                    goto retry;
+                }
             }
             case LexemKind::Identifier: {
                 if (!m_states.empty() && m_states.back() == LXAState::DecoratorArgs) {
@@ -328,7 +375,7 @@ namespace SR_SRSL_NS {
         return m_result.code != SRSLReturnCode::Success;
     }
 
-    bool SRSLLexicalAnalyzer::TryProcessIdentifier() {
+    SRSLLexicalUnit* SRSLLexicalAnalyzer::TryProcessIdentifier() {
         auto&& pCurrent = GetCurrentLexem();
 
         const uint64_t currentLexem = m_currentLexem;
@@ -337,14 +384,13 @@ namespace SR_SRSL_NS {
             ++m_currentLexem;
             ProcessExpression();
             if (IsHasErrors()) {
-                return false;
+                return nullptr;
             }
-            m_lexicalTree.lexicalTree.emplace_back(new SRSLReturn(SR_UTILS_NS::Exchange(m_expr, nullptr)));
-            return true;
+            return new SRSLReturn(SR_UTILS_NS::Exchange(m_expr, nullptr));
         }
 
         if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::OpeningSquareBracket) {
-            ProcessExpression();
+            ProcessExpression(true);
         }
         else {
             m_expr = new SRSLExpr(std::string(pCurrent->value));
@@ -353,34 +399,22 @@ namespace SR_SRSL_NS {
 
         if (pCurrent = GetCurrentLexem(); pCurrent && pCurrent->kind == LexemKind::Identifier) {
             auto&& pTypeExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
-            ProcessExpression();
+            ProcessExpression(true);
             auto&& pNameExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
 
             if (IsHasErrors()) {
                 SR_SAFE_DELETE_PTR(pTypeExpr);
                 SR_SAFE_DELETE_PTR(pNameExpr);
-                return false;
+                return nullptr;
             }
 
-            /// обычная переменная типа "type[...] name[...];"
-            if (pCurrent = GetCurrentLexem(); (pCurrent && pCurrent->kind == LexemKind::Semicolon) || !pCurrent) {
-                auto&& pVariable = new SRSLVariable();
-
-                pVariable->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
-                pVariable->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
-                pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
-
-                m_lexicalTree.lexicalTree.emplace_back(std::move(pVariable));
-
-                return true;
-            }
             /// переменная имеющая значение: "type[...] name[...] = value;"
-            else if (pCurrent && pCurrent->kind == LexemKind::Assign) {
+            if (pCurrent = GetCurrentLexem(); pCurrent && pCurrent->kind == LexemKind::Assign) {
                 auto&& pVariable = new SRSLVariable();
 
+                pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
                 pVariable->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
                 pVariable->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
-                pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
 
                 ++m_currentLexem;
 
@@ -388,9 +422,27 @@ namespace SR_SRSL_NS {
 
                 pVariable->pExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
 
-                m_lexicalTree.lexicalTree.emplace_back(std::move(pVariable));
+                return std::move(pVariable);
+            }
+            /// переменная имеющая значение: "type[...] name[...] = value;"
+            else if (pCurrent && pCurrent->kind == LexemKind::OpeningBracket) {
+                auto&& pFunction = new SRSLFunction();
 
-                return true;
+                pFunction->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
+                pFunction->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
+                pFunction->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
+
+                return std::move(pFunction);
+            }
+            /// обычная переменная типа "type[...] name[...];"
+            else if (pTypeExpr && pNameExpr) {
+                auto&& pVariable = new SRSLVariable();
+
+                pVariable->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
+                pVariable->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
+                pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
+
+                return std::move(pVariable);
             }
 
             SR_SAFE_DELETE_PTR(m_expr);
@@ -399,12 +451,12 @@ namespace SR_SRSL_NS {
 
             m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, InBounds() ? m_lexems[m_currentLexem].offset : SR_UINT64_MAX);
 
-            return false;
+            return nullptr;
         }
 
         SR_SAFE_DELETE_PTR(m_expr);
         m_currentLexem = currentLexem;
 
-        return false;
+        return nullptr;
     }
 }

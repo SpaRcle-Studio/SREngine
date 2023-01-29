@@ -21,7 +21,7 @@ vec3[46 + 43] vector;
 [[uniform], [shared]];
 [[numThreads(2, 4, 8)]];
 vec3 vector;
-[[uniform], [shared]] vec3 vector;
+[[uniform], [shared]] vec3 vector = 34;
 [[numThreads(2, 4, 8)]] void compute;
 
 2 / 3 - 2;

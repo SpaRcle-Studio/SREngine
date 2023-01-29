@@ -63,7 +63,7 @@ namespace SR_SRSL_NS {
         std::string code;
 
         for (auto&& pUnit : lexicalTree) {
-            code += pUnit->ToString() + "\n";
+            code += pUnit->ToString() + ";\n";
         }
 
         return code;
@@ -82,7 +82,33 @@ namespace SR_SRSL_NS {
             code += " = " + pExpr->ToString();
         }
 
-        code += ";";
+        return code;
+    }
+
+    std::string SRSLFunction::ToString() const {
+        std::string code;
+
+        if (pDecorators) {
+            code += pDecorators->ToString() + " ";
+        }
+
+        code += pType->ToString() + " " + pName->ToString() + "(";
+
+        for (uint32_t i = 0; i < args.size(); ++i) {
+            code += args[i]->ToString();
+
+            if (i + 1 < args.size()) {
+                code += ", ";
+            }
+        }
+
+        code += ") {\n";
+
+        for (auto&& pUnit : lexicalTree) {
+            code += "\t" + pUnit->ToString() + "\n";
+        }
+
+        code += "}";
 
         return code;
     }

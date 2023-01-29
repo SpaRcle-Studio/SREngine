@@ -192,16 +192,26 @@ namespace SR_SRSL_NS {
 
     struct SRSLFunction : public SRSLLexicalUnit {
         ~SRSLFunction() override {
+            SR_SAFE_DELETE_PTR(pDecorators);
+            SR_SAFE_DELETE_PTR(pType);
+            SR_SAFE_DELETE_PTR(pName);
+
+            for (auto&& pArg : args) {
+                delete pArg;
+            }
+
             for (auto&& pUnit : lexicalTree) {
                 delete pUnit;
             }
         }
 
-        SRSLDecorators decorators;
+        SR_NODISCARD std::string ToString() const override;
 
-        std::string type;
-        std::string name;
-        std::vector<SRSLVariable> args;
+        SRSLDecorators* pDecorators = nullptr;
+        SRSLExpr* pType = nullptr;
+        SRSLExpr* pName = nullptr;
+
+        std::vector<SRSLVariable*> args;
 
         std::vector<SRSLLexicalUnit*> lexicalTree;
     };

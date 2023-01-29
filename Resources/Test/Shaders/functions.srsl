@@ -1,2 +1,11 @@
-void function() {
+void function([[decorator(23)]] int a, vec3 gfeg = 45, bool d) {
+
+}
+
+[[decorator(23)]] int a = 4456 * 346;
+
+[[numThreads(2, 4, 8)]] void compute() {
+}
+
+void function(int[2] a = 234 * 2345, int b, int c) {
 }
