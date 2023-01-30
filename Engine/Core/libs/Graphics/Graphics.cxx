@@ -76,12 +76,6 @@
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"
 #include "../Graphics/src/Graphics/UI/Anchor.cpp"
 
-#include "../Graphics/src/Graphics/SRSL/Lexer.cpp"
-#include "../Graphics/src/Graphics/SRSL/LexicalTree.cpp"
-#include "../Graphics/src/Graphics/SRSL/MathExpression.cpp"
-#include "../Graphics/src/Graphics/SRSL/LexicalAnalyzer.cpp"
-#include "../Graphics/src/Graphics/SRSL/Shader.cpp"
-
 #include "../Graphics/src/Graphics/Render/RenderScene.cpp"
 #include "../Graphics/src/Graphics/Render/ColorBuffer.cpp"
 #include "../Graphics/src/Graphics/Render/RenderTechnique.cpp"

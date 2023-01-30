@@ -8,4 +8,15 @@ void function([[decorator(23)]] int a, vec3 gfeg = 45, bool d) {
 }
 
 void function(int[2] a = 234 * 2345, int b, int c) {
+    int a = 0;
+    int a = 0;
+    int a = 0;
+    void function2() {
+        int b = 0;
+        int b = 0;
+        int b = 0;
+    }
+    float d = 1;
+    float d = 1;
+    float d = 1;
 }

@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/SRSL/Lexer.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 namespace SR_SRSL_NS {
     SRSLLexer::~SRSLLexer() {

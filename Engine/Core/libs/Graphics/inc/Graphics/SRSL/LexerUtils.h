@@ -6,6 +6,7 @@
 #define SRENGINE_SRSL_LEXERUTILS_H
 
 #include <Utils/Common/Singleton.h>
+#include <Utils/Common/Enumerations.h>
 #include <Utils/Types/Regex.h>
 #include <Utils/Debug.h>
 
@@ -83,9 +84,9 @@ namespace SR_SRSL_NS {
     };
 
     SR_ENUM_NS_CLASS_T(SRSLReturnCode, uint16_t,
-        Success, OutOfBounds,
+        Success, OutOfBounds, InvalidLexicalTree,
         UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression,
-        IncompleteExpression, EmptyExpression,
+        IncompleteExpression, EmptyExpression, InvalidScope,
         InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement
     );
 

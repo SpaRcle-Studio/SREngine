@@ -16,7 +16,7 @@ namespace SR_SRSL_NS {
             Expression, Variable, Function, FunctionArgs, FunctionBody
         };
     public:
-        SR_NODISCARD std::pair<SRSLLexicalTree, SRSLResult> Analyze(std::vector<Lexem>&& lexems);
+        SR_NODISCARD std::pair<SRSLAnalyzedTree::Ptr, SRSLResult> Analyze(std::vector<Lexem>&& lexems);
 
     private:
         void Clear();
@@ -34,7 +34,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const Lexem* GetCurrentLexem() const;
 
     private:
-        SRSLLexicalTree m_lexicalTree;
+        std::list<SRSLLexicalTree*> m_lexicalTree;
 
         SRSLDecorators* m_decorators = nullptr;
         SRSLExpr* m_expr = nullptr;

@@ -5,7 +5,7 @@
 #include <Graphics/SRSL/LexicalAnalyzer.h>
 
 namespace SR_SRSL_NS {
-    std::pair<SRSLLexicalTree, SRSLResult> SRSLLexicalAnalyzer::Analyze(std::vector<Lexem>&& lexems) {
+    std::pair<SRSLAnalyzedTree::Ptr, SRSLResult> SRSLLexicalAnalyzer::Analyze(std::vector<Lexem>&& lexems) {
         SR_GLOBAL_LOCK
 
         Clear();
@@ -14,12 +14,22 @@ namespace SR_SRSL_NS {
 
         ProcessMain();
 
-        return std::make_pair(SR_UTILS_NS::Exchange(m_lexicalTree, { }), SR_UTILS_NS::Exchange(m_result, { }));
+        if (m_lexicalTree.size() != 1) {
+            return std::make_pair(nullptr, SR_SRSL_NS::SRSLResult(SRSLReturnCode::InvalidLexicalTree));
+        }
+
+        auto&& pAnalyzedTree = std::make_shared<SRSLAnalyzedTree>();
+
+        pAnalyzedTree->pLexicalTree = SR_UTILS_NS::Exchange(*m_lexicalTree.begin(), { });
+
+        return std::make_pair(std::move(pAnalyzedTree), SR_UTILS_NS::Exchange(m_result, { }));
     }
 
     void SRSLLexicalAnalyzer::Clear() {
-        m_lexicalTree = SRSLLexicalTree();
-        m_lexicalTree.lexicalTree.clear();
+        for (auto&& pLexicalTree : m_lexicalTree) {
+            delete pLexicalTree;
+        }
+        m_lexicalTree.clear();
 
         SR_SAFE_DELETE_PTR(m_decorators);
         SR_SAFE_DELETE_PTR(m_expr);
@@ -44,6 +54,8 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLLexicalAnalyzer::ProcessMain() {
+        m_lexicalTree.emplace_back(new SRSLLexicalTree());
+
         while (InBounds() && m_result.code == SRSLReturnCode::Success) {
             switch (m_lexems[m_currentLexem].kind) {
                 case LexemKind::OpeningSquareBracket:
@@ -65,16 +77,16 @@ namespace SR_SRSL_NS {
                     if (auto&& pUnit = TryProcessIdentifier()) {
                         if (dynamic_cast<SRSLFunction*>(pUnit)) {
                             m_states.emplace_back(LXAState::Function);
-                            m_lexicalTree.lexicalTree.emplace_back(pUnit);
+                            m_lexicalTree.back()->lexicalTree.emplace_back(pUnit);
                         }
                         else if (!m_states.empty() && m_states.back() == LXAState::FunctionArgs) {
-                            auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.lexicalTree.back());
+                            auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.back()->lexicalTree.back());
                             auto&& pVar = dynamic_cast<SRSLVariable*>(pUnit);
                             SRAssert(pFunction && pVar);
                             pFunction->args.emplace_back(pVar);
                         }
                         else {
-                            m_lexicalTree.lexicalTree.emplace_back(pUnit);
+                            m_lexicalTree.back()->lexicalTree.emplace_back(pUnit);
                         }
                         break;
                     }
@@ -93,7 +105,7 @@ namespace SR_SRSL_NS {
                     if (IsHasErrors()) {
                         return;
                     }
-                    m_lexicalTree.lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
+                    m_lexicalTree.back()->lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
                     break;
                 }
 
@@ -129,7 +141,7 @@ namespace SR_SRSL_NS {
                     return;
                 }
 
-                m_lexicalTree.lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
+                m_lexicalTree.back()->lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
                 return;
             }
             case LexemKind::ClosingBracket: {
@@ -145,20 +157,35 @@ namespace SR_SRSL_NS {
                 return;
             }
             case LexemKind::OpeningCurlyBracket: {
+                m_lexicalTree.emplace_back(new SRSLLexicalTree());
                 if (!m_states.empty() && m_states.back() == LXAState::Function) {
                     m_states.back() = LXAState::FunctionBody;
                     ++m_currentLexem;
                     return;
                 }
-                /// TODO: нужен какой-то стек областей видимости
                 return;
             }
             case LexemKind::ClosingCurlyBracket: {
-                if (!m_states.empty() && m_states.back() == LXAState::FunctionBody) {
-                    m_states.pop_back();
-                    ++m_currentLexem;
+                if (m_lexicalTree.size() <= 1) {
+                    m_result = SRSLResult(SRSLReturnCode::InvalidScope, m_lexems[m_currentLexem].offset);
                     return;
                 }
+
+                SRSLLexicalTree* pLexicalTree = m_lexicalTree.back();
+                m_lexicalTree.pop_back();
+
+                if (!m_states.empty() && m_states.back() == LXAState::FunctionBody) {
+                    m_states.pop_back();
+
+                    auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.back()->lexicalTree.back());
+                    pFunction->pLexicalTree = std::move(pLexicalTree);
+                }
+                else {
+                    m_lexicalTree.back()->lexicalTree.emplace_back(pLexicalTree);
+                }
+
+                ++m_currentLexem;
+
                 return;
             }
             default:

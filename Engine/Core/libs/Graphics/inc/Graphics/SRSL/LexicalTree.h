@@ -7,13 +7,13 @@
 
 #include <Graphics/SRSL/LexerUtils.h>
 
-#include <utility>
-
 namespace SR_SRSL_NS {
     /// минимальная лексическая единица
     struct SRSLLexicalUnit : public SR_UTILS_NS::NonCopyable {
-        SR_NODISCARD virtual std::string ToString() const { return std::string(); }
+        SR_NODISCARD virtual std::string ToString(uint32_t deep) const { return std::string(); }
     };
+
+    class SRSLLexicalTree;
 
     /// ----------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ namespace SR_SRSL_NS {
             , isArray(SR_UTILS_NS::Exchange(other.isArray, { }))
         { }
 
-        SR_NODISCARD std::string ToString() const override;
+        SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
         std::string token;
         std::vector<SRSLExpr*> args;
@@ -79,7 +79,7 @@ namespace SR_SRSL_NS {
         bool isCall = false;       /// function(arg1, arg2, arg3)
         bool isAccess = false;     /// variable.field
         bool isArray = false;      /// variable[expression]
-        bool isAssignment = false; /// variable = expression
+        //bool isAssignment = false; /// variable = expression
 
     };
 
@@ -105,7 +105,7 @@ namespace SR_SRSL_NS {
             , args(SR_UTILS_NS::Exchange(other.args, { }))
         { }
 
-        SR_NODISCARD std::string ToString() const override;
+        SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
         std::string name;
         std::vector<SRSLExpr*> args;
@@ -125,7 +125,7 @@ namespace SR_SRSL_NS {
             return *this;
         }
 
-        SR_NODISCARD std::string ToString() const override;
+        SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
         std::vector<SRSLDecorator> decorators;
     };
@@ -157,7 +157,7 @@ namespace SR_SRSL_NS {
             SR_SAFE_DELETE_PTR(pName);
         }
 
-        SR_NODISCARD std::string ToString() const override;
+        SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
         SRSLDecorators* pDecorators = nullptr;
         SRSLExpr* pType = nullptr;
@@ -185,27 +185,15 @@ namespace SR_SRSL_NS {
             return *this;
         }
 
-        SRSLExpr* pExpr;
+        SRSLExpr* pExpr = nullptr;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     struct SRSLFunction : public SRSLLexicalUnit {
-        ~SRSLFunction() override {
-            SR_SAFE_DELETE_PTR(pDecorators);
-            SR_SAFE_DELETE_PTR(pType);
-            SR_SAFE_DELETE_PTR(pName);
+        ~SRSLFunction() override;
 
-            for (auto&& pArg : args) {
-                delete pArg;
-            }
-
-            for (auto&& pUnit : lexicalTree) {
-                delete pUnit;
-            }
-        }
-
-        SR_NODISCARD std::string ToString() const override;
+        SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
         SRSLDecorators* pDecorators = nullptr;
         SRSLExpr* pType = nullptr;
@@ -213,29 +201,22 @@ namespace SR_SRSL_NS {
 
         std::vector<SRSLVariable*> args;
 
-        std::vector<SRSLLexicalUnit*> lexicalTree;
+        SRSLLexicalTree* pLexicalTree = nullptr;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     struct SRSLIfStatement : public SRSLLexicalUnit {
-        ~SRSLIfStatement() override {
-            for (auto&& pUnit : lexicalTree) {
-                delete pUnit;
-            }
-            if (elseStatement.has_value()) {
-                delete elseStatement.value();
-            }
-        }
+        ~SRSLIfStatement() override;
 
         std::optional<SRSLExpr> expr;
-        std::vector<SRSLLexicalUnit*> lexicalTree;
+        SRSLLexicalTree* pLexicalTree = nullptr;
         std::optional<SRSLIfStatement*> elseStatement;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLLexicalTree : public SR_UTILS_NS::NonCopyable {
+    struct SRSLLexicalTree : public SRSLLexicalUnit {
         SRSLLexicalTree() = default;
 
         ~SRSLLexicalTree() override {
@@ -253,11 +234,24 @@ namespace SR_SRSL_NS {
             return *this;
         }
 
-        SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
         std::vector<SRSLLexicalUnit*> lexicalTree;
     };
 
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    struct SRSLAnalyzedTree : public SR_UTILS_NS::NonCopyable {
+        using Ptr = std::shared_ptr<SRSLAnalyzedTree>;
+
+        SRSLAnalyzedTree() = default;
+
+        ~SRSLAnalyzedTree() override {
+            SR_SAFE_DELETE_PTR(pLexicalTree);
+        }
+
+        SRSLLexicalTree* pLexicalTree = nullptr;
+    };
 }
 
 #endif //SRENGINE_SRSL_LEXICALTREE_H
