@@ -13,8 +13,25 @@ namespace SR_PHYSICS_NS {
      */
     void ContactReportCallback::onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs)
     {
+        const physx::PxU32 bufferSize = 64;
+        physx::PxContactPairPoint contacts[bufferSize];
+
+        physx::PxVec3 point = physx::PxVec3(0);
+        physx::PxVec3 impulse  = physx::PxVec3(0);
+
         for (physx::PxU32 i = 0; i < nbPairs; i++)
         {
+            physx::PxU32 nbContacts = pairs[i].extractContacts(contacts, bufferSize);
+
+            for(physx::PxU32 j=0; j < nbContacts; j++)
+            {
+                point += contacts[j].position;
+                impulse += contacts[j].impulse;
+            }
+
+            point /= nbContacts > 0 ? nbContacts : 1.f;
+            impulse /= nbContacts > 0 ? nbContacts : 1.f;
+
             const physx::PxContactPair& cp = pairs[i];
 
             SR_PTYPES_NS::CollisionShape* shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
@@ -28,83 +45,47 @@ namespace SR_PHYSICS_NS {
             auto&& gameObject1 = rigidbody1->GetGameObject();
             auto&& gameObject2 = rigidbody2->GetGameObject();
 
-            if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
-            {
-                for (auto&& pComponent : gameObject1->GetComponents()){
-                    if (pComponent == rigidbody1){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = rigidbody2;
-#ifdef SR_DEBUG
-                        std::cout << "Detected collision ENTER for : " << rigidbody1->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody2->GetGameObject()->GetName() << std::endl;
-#endif
+            data.point = SR_PHYSICS_UTILS_NS::PxV3ToFV3(point);
+            data.impulse = SR_PHYSICS_UTILS_NS::PxV3ToFV3(impulse);
+            data.pHandler = rigidbody2;
+
+            for (auto&& pComponent : gameObject1->GetComponents()){
+                if (pComponent == rigidbody1){
+                    continue;
+                }
+                else {
+                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
+                    {
                         pComponent->OnCollisionEnter(data);
                     }
-                }
-                for (auto&& pComponent : gameObject2->GetComponents()){
-                    if (pComponent == rigidbody2){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = rigidbody1;
-#ifdef SR_DEBUG
-                        std::cout << "Detected collision ENTER for : " << rigidbody2->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody1->GetGameObject()->GetName() << std::endl;
-#endif
-                        pComponent->OnCollisionEnter(data);
-                    }
-                }
-            }
-            if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS)
-            {
-                for (auto&& pComponent : gameObject1->GetComponents()){
-                    if (pComponent == rigidbody1){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = rigidbody2;
-#ifdef SR_DEBUG
-                        std::cout << "Detected collision STAY for : " << rigidbody1->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody2->GetGameObject()->GetName() << std::endl;
-#endif
+                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS)
+                    {
                         pComponent->OnCollisionStay(data);
                     }
-                }
-                for (auto&& pComponent : gameObject2->GetComponents()){
-                    if (pComponent == rigidbody2){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = rigidbody1;
-#ifdef SR_DEBUG
-                        std::cout << "Detected collision STAY for : " << rigidbody2->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody1->GetGameObject()->GetName() << std::endl;
-#endif
-                        pComponent->OnCollisionStay(data);
-                    }
-                }
-            }
-            if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
-            {
-                for (auto&& pComponent : gameObject1->GetComponents()){
-                    if (pComponent == rigidbody1){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = rigidbody2;
-#ifdef SR_DEBUG
-                        std::cout << "Detected collision EXIT for : " << rigidbody1->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody2->GetGameObject()->GetName() << std::endl;
-#endif
+                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
+                    {
                         pComponent->OnCollisionExit(data);
                     }
                 }
-                for (auto&& pComponent : gameObject2->GetComponents()){
-                    if (pComponent == rigidbody2){
-                        continue;
+            }
+
+            data.pHandler = rigidbody1;
+
+            for (auto&& pComponent : gameObject2->GetComponents()){
+                if (pComponent == rigidbody2){
+                    continue;
+                }
+                else {
+                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
+                    {
+                        pComponent->OnCollisionEnter(data);
                     }
-                    else {
-                        data.pHandler = rigidbody1;
-#ifdef SR_DEBUG
-                        std::cout << "Detected collision EXIT for : " << rigidbody2->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << rigidbody1->GetGameObject()->GetName() << std::endl;
-#endif
+                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS)
+                    {
+                        pComponent->OnCollisionStay(data);
+                    }
+                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
+                    {
                         pComponent->OnCollisionExit(data);
                     }
                 }
@@ -112,7 +93,7 @@ namespace SR_PHYSICS_NS {
         }
     }
     /**
-    This method handles only RigidBody-Trigger collisions and calls the OnTriggerEnter/OnTriggerStay/OnTriggerExit method as appropriate.
+    This method handles only RigidBody-Trigger collisions and calls the OnTriggerEnter/OnTriggerExit method as appropriate.
      */
     void ContactReportCallback::onTrigger(physx::PxTriggerPair *pairs, physx::PxU32 count)
     {
@@ -136,57 +117,37 @@ namespace SR_PHYSICS_NS {
             auto&& triggerGameObject = triggerRigidBody->GetGameObject();
             auto&& gameObject = rigidbody->GetGameObject();
 
-            if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
-            {
-                for (auto&& pComponent : gameObject->GetComponents()){
-                    if (pComponent == rigidbody){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = triggerRigidBody;
-#ifdef SR_DEBUG
-                        std::cout << "Detected trigger ENTER for : " << rigidbody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << triggerGameObject->GetName() << std::endl;
-#endif
-                        pComponent->OnTriggerEnter(data);
-                    }
-                }
+            data.pHandler = rigidbody;
 
-                for (auto&& pComponent : triggerGameObject->GetComponents()){
-                    if (pComponent == triggerRigidBody){
-                        continue;
+            for (auto&& pComponent : triggerGameObject->GetComponents()){
+                if (pComponent == triggerRigidBody){
+                    continue;
+                }
+                else {
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
+                    {
+                        pComponent->OnCollisionEnter(data);
                     }
-                    else {
-                        data.pHandler = rigidbody;
-#ifdef SR_DEBUG
-                        std::cout << "Detected trigger ENTER for : " << triggerRigidBody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << gameObject->GetName() << std::endl;
-#endif
-                        pComponent->OnTriggerEnter(data);
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
+                    {
+                        pComponent->OnCollisionExit(data);
                     }
                 }
             }
-            if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
-            {
-                for (auto&& pComponent : gameObject->GetComponents()){
-                    if (pComponent == rigidbody){
-                        continue;
-                    }
-                    else {
-                        data.pHandler = triggerRigidBody;
-#ifdef SR_DEBUG
-                        std::cout << "Detected trigger EXIT for : " << rigidbody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << triggerGameObject->GetName() << std::endl;
-#endif
-                        pComponent->OnTriggerExit(data);
-                    }
+
+            data.pHandler = triggerRigidBody;
+
+            for (auto&& pComponent : gameObject->GetComponents()){
+                if (pComponent == rigidbody){
+                    continue;
                 }
-                for (auto&& pComponent : triggerGameObject->GetComponents()){
-                    if (pComponent == triggerRigidBody){
-                        continue;
+                else {
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
+                    {
+                        pComponent->OnTriggerEnter(data);
                     }
-                    else {
-                        data.pHandler = rigidbody;
-#ifdef SR_DEBUG
-                        std::cout << "Detected trigger EXIT for : " << triggerRigidBody->GetGameObject()->GetName() << "(" << pComponent->GetComponentName()<<  ")"<< "\twith\t" << gameObject->GetName() << std::endl;
-#endif
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
+                    {
                         pComponent->OnTriggerExit(data);
                     }
                 }

@@ -10,6 +10,7 @@
 namespace SR_UTILS_NS {
     struct CollisionData {
         void* pHandler = nullptr;
+        SR_MATH_NS::FVector3 point;
         SR_MATH_NS::FVector3 impulse;
     };
 }

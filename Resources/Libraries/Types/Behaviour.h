@@ -99,6 +99,7 @@ protected:
     GameObjectPtr gameObject;
     ScenePtr scene;
     Transform* transform = nullptr;
+    const float fixedDeltaTime = 1.f/60.f;
 
 private:
     std::unordered_map<std::string, Property> m_properties;

@@ -19,6 +19,7 @@
 
 struct CollisionData {
     void* pHandler = nullptr;
+    FVector3 point;
     FVector3 impulse;
 };
 
