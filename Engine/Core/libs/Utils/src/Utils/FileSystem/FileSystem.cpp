@@ -122,7 +122,7 @@ namespace SR_UTILS_NS {
         if (pos != std::string::npos) {
             auto dir = path.substr(0, pos);
             SR_PLATFORM_NS::CreateFolder(dir);
-            CreatePath(std::move(path), pos + 1);
+            return CreatePath(std::move(path), pos + 1);
         }
 
         return true;
@@ -156,7 +156,7 @@ namespace SR_UTILS_NS {
         return newPath;
     }
 
-    bool FileSystem::WriteToFile(const std::string &path, const std::string &text) {
+    bool FileSystem::WriteToFile(const std::string& path, const std::string& text) {
         std::ofstream stream(path);
         if (!stream.is_open()) {
             return false;

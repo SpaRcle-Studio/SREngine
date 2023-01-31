@@ -9,6 +9,10 @@
 #include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_SRSL_NS {
+    SR_ENUM_NS_CLASS_T(ShaderLanguage, uint8_t,
+            GLSL, HLSL, Metal
+    );
+
     struct SRSLShaderStage {
         bool operator<(const SRSLShaderStage& other) const {
             return static_cast<int32_t>(stage) < static_cast<int32_t>(other.stage);

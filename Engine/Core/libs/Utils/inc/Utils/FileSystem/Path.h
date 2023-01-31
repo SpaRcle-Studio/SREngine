@@ -44,7 +44,8 @@ namespace SR_UTILS_NS {
         Path& operator=(const Path& path) = default;
 
     public:
-        bool Make(Type type = Type::Undefined) const;
+        SR_DEPRECATED bool Make(Type type = Type::Undefined) const;
+        bool Create() const;
 
         SR_NODISCARD bool Copy(const Path& destination) const;
 

@@ -354,16 +354,15 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD uint8_t GetSmoothSamplesCount() const override;
 
         bool CompileShader(
-                const std::string& path,
+                const std::map<ShaderStage, SR_UTILS_NS::Path>& stages,
                 int32_t FBO,
                 void** shaderData,
                 const std::vector<uint64_t>& uniformSizes
                 ) override;
+
         bool LinkShader(
                 SR_SHADER_PROGRAM* shaderProgram,
                 void** shaderData,
-                const std::vector<SR_VERTEX_DESCRIPTION>& vertexDescriptions,
-                const std::vector<std::pair<Vertices::Attribute, size_t>>& vertexAttributes,
                 const SRShaderCreateInfo& shaderCreateInfo) const override;
 
         int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;

@@ -259,7 +259,7 @@ namespace Framework::Graphics {
         return true;
     }
 
-    bool Vulkan::CompileShader(const std::string &path, int32_t FBO, void **shaderData, const std::vector<uint64_t> &uniformSizes) {
+    bool Vulkan::CompileShader(const std::map<ShaderStage, SR_UTILS_NS::Path>& stages, int32_t FBO, void **shaderData, const std::vector<uint64_t> &uniformSizes) {
         if (FBO < 0) {
             SRHalt("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
             return false;
@@ -292,37 +292,20 @@ namespace Framework::Graphics {
             *shaderData = reinterpret_cast<void *>(dynamicID);
         }
 
-        const std::vector<SR_UTILS_NS::Path> checkPatches = {
-                SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders/SRSL"),
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders").Concat("Common"),
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Shaders").Concat(GetPipeLineName())
-        };
+        std::vector<SourceShader> modules = { };
 
-        std::vector<SourceShader> modules = {};
-        {
-            for (auto &&checkPath : checkPatches) {
-                if (auto &&modulePath = checkPath.Concat(path).ConcatExt(".vert"); modulePath.Exists()) {
-                    modules.emplace_back(SourceShader(path, modulePath.ToString(), ShaderStage::Vertex));
-                    break;
-                }
-            }
-
-            for (auto &&checkPath : checkPatches) {
-                if (auto &&modulePath = checkPath.Concat(path).ConcatExt(".frag"); modulePath.Exists()) {
-                    modules.emplace_back(SourceShader(path, modulePath.ToString(), ShaderStage::Fragment));
-                    break;
-                }
-            }
-
-            if (modules.empty()) {
-                SRAssert2(false, "No shader modules were found!");
-                return false;
-            }
+        for (auto&& [shaderStage, stagePath] : stages) {
+            SourceShader module(stagePath.ToString(), shaderStage);
+            modules.emplace_back(module);
         }
 
-        bool errors = false;
-        auto &&uniforms = Graphics::AnalyseShader(modules, &errors);
-        if (errors) {
+        if (modules.empty()) {
+            SRHalt("No shader modules were found!");
+            return false;
+        }
+
+        auto&& uniforms = SR_GRAPH_NS::AnalyseShader(modules);
+        if (!uniforms) {
             SR_ERROR("Vulkan::CompileShader() : failed to analyse shader!");
             return false;
         }
@@ -332,36 +315,32 @@ namespace Framework::Graphics {
             VkDescriptorType type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
             VkShaderStageFlagBits stage = VK_SHADER_STAGE_ALL;
 
-            for (auto &&uniform : uniforms) {
+            for (auto &&uniform : uniforms.value()) {
                 switch (uniform.type) {
-                    case LayoutBinding::Sampler2D:
-                        type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-                        break;
-                    case LayoutBinding::Uniform:
-                        type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-                        break;
+                    case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
+                    case LayoutBinding::Uniform: type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER; break;
                     default:
                         SR_ERROR("Vulkan::CompileShader() : unknown binding type!");
                         return false;
                 }
 
                 switch (uniform.stage) {
-                    case ShaderStage::Vertex:
-                        stage = VK_SHADER_STAGE_VERTEX_BIT;
-                        break;
-                    case ShaderStage::Fragment:
-                        stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-                        break;
+                    case ShaderStage::Vertex: stage = VK_SHADER_STAGE_VERTEX_BIT; break;
+                    case ShaderStage::Fragment: stage = VK_SHADER_STAGE_FRAGMENT_BIT; break;
+                    case ShaderStage::Geometry: stage = VK_SHADER_STAGE_GEOMETRY_BIT; break;
+                    case ShaderStage::Compute: stage = VK_SHADER_STAGE_COMPUTE_BIT; break;
                     default:
-                        SR_ERROR("Vulkan::CompileShader() : unknown binding stage!");
+                        SR_ERROR("Vulkan::CompileShader() : unknown binding stage!\n\tStage: " + SR_UTILS_NS::EnumReflector::ToString(uniform.stage));
                         return false;
                 }
 
-                for (auto &&descriptor : descriptorLayoutBindings) {
-                    if (descriptor.binding == uniform.binding) {
-                        if (descriptor.descriptorType != type) {
-                            SRHalt("Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " +
-                                           SR_UTILS_NS::ToString(uniform.binding) + "\n\tPath: " + path);
+                for (auto &&descriptor : descriptorLayoutBindings)
+                {
+                    if (descriptor.binding == uniform.binding)
+                    {
+                        if (descriptor.descriptorType != type)
+                        {
+                            SRHalt("Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " + SR_UTILS_NS::ToString(uniform.binding));
                             return false;
                         }
 
@@ -374,19 +353,19 @@ namespace Framework::Graphics {
                         type, stage, uniform.binding
                 ));
 
-                skip:
+            skip:
                 SR_NOOP;
             }
         }
 
         std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
-        for (const auto &module : modules) {
+        for (auto&& module : modules) {
             VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_stage);
-            vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_name, module.m_path, stage));
+            vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_path, stage));
         }
 
         if (!m_memory->m_ShaderPrograms[ID]->Load(
-                Helper::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
                 vkModules,
                 descriptorLayoutBindings,
                 uniformSizes
@@ -402,8 +381,6 @@ namespace Framework::Graphics {
     bool Vulkan::LinkShader(
             SR_SHADER_PROGRAM *shaderProgram,
             void **shaderData,
-            const std::vector<SR_VERTEX_DESCRIPTION> &vertexDescriptions,
-            const std::vector<std::pair<Vertices::Attribute, size_t>> &vertexAttributes,
             const SRShaderCreateInfo& shaderCreateInfo) const {
         if (!shaderData) {
             SR_ERROR("Vulkan::LinkShader() : shader data is nullptr!");
@@ -415,9 +392,9 @@ namespace Framework::Graphics {
             return false;
         }
 
-        auto &&vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(vertexDescriptions);
-        auto &&vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(vertexAttributes);
-        if (vkVertexAttributes.size() != vertexAttributes.size()) {
+        auto &&vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(shaderCreateInfo.vertexDescriptions);
+        auto &&vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(shaderCreateInfo.vertexAttributes);
+        if (vkVertexAttributes.size() != shaderCreateInfo.vertexAttributes.size()) {
             SR_ERROR("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
             delete dynamicID;
             return false;
@@ -774,7 +751,7 @@ namespace Framework::Graphics {
         vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
     }
 
-    int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo &createInfo, int32_t fbo) {
+    int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) {
         void* temp = nullptr;
 
         auto&& sizes = std::vector<uint64_t>();
@@ -782,15 +759,15 @@ namespace Framework::Graphics {
         for (auto&& [binding, size] : createInfo.uniforms)
             sizes.push_back(size);
 
-        if (!CompileShader(createInfo.path.ToString(), fbo, &temp, sizes)) {
-            SR_ERROR("Vulkan::AllocateShaderProgram() : failed to compile \"" + createInfo.path.ToString() + "\" shader!");
+        if (!CompileShader(createInfo.stages, fbo, &temp, sizes)) {
+            SR_ERROR("Vulkan::AllocateShaderProgram() : failed to compile shader stages!");
             return SR_ID_INVALID;
         }
 
         int32_t program = SR_ID_INVALID;
 
-        if (!LinkShader(&program, &temp, createInfo.vertexDescriptions, createInfo.vertexAttributes, createInfo)) {
-            SR_ERROR("Vulkan::AllocateShaderProgram() : failed linking \"" + createInfo.path.ToString() + "\" shader!");
+        if (!LinkShader(&program, &temp, createInfo)) {
+            SR_ERROR("Vulkan::AllocateShaderProgram() : failed linking shader!");
             return false;
         }
 

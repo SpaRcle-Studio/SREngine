@@ -102,10 +102,10 @@ namespace SR_GRAPH_NS::Types {
 
     void Shader::FreeVideoMemory() {
         if (m_isInit) {
-            SR_SHADER("Shader::FreeVideoMemory() : free \"" + m_shaderCreateInfo.path.ToString() + "\" video memory...");
+            SR_SHADER("Shader::FreeVideoMemory() : free \"" + GetResourceId() + "\" video memory...");
 
             if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
-                SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + m_shaderCreateInfo.path.ToString());
+                SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + GetResourcePath().ToString());
             }
         }
     }
@@ -301,7 +301,9 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_shaderCreateInfo = std::move(unit->createInfo);
-        m_shaderCreateInfo.path = unit->path + "/shader";
+
+        m_shaderCreateInfo.stages[ShaderStage::Vertex] = unit->path + "/shader.vert";
+        m_shaderCreateInfo.stages[ShaderStage::Fragment] = unit->path + "/shader.frag";
 
         switch ((m_type = unit->type)) {
             case SRSL::ShaderType::Custom:
