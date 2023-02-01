@@ -273,6 +273,9 @@ namespace SR_CORE_NS::GUI {
         if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
+        if (!pComponent->IsSkeletonUsable())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "No bones from skeleton to draw!");
+
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {

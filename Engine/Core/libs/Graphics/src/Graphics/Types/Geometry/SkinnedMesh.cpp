@@ -72,7 +72,7 @@ namespace SR_GTYPES_NS {
     void SkinnedMesh::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
-        if (!pShader || !IsActive() || IsDestroyed())
+        if (!pShader || !IsActive() || IsDestroyed() || !IsSkeletonUsable())
             return;
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)
@@ -201,6 +201,13 @@ namespace SR_GTYPES_NS {
         return m_rawMesh && m_meshId < m_rawMesh->GetMeshesCount() && Mesh::IsCanCalculate();
     }
 
+    bool SkinnedMesh::IsSkeletonUsable() const {
+        if (m_skeleton)
+            return m_skeleton->GetRootBone();
+        else
+            return false;
+    }
+
     void SkinnedMesh::Update(float dt) {
         FindSkeleton(GetGameObject());
         Super::Update(dt);
@@ -235,7 +242,22 @@ namespace SR_GTYPES_NS {
             }
         }
 
-        if (!m_skeleton || !m_skeleton->GetRootBone()) {
+        if (!m_skeleton) {
+            if (!m_isSkeletonDeleted) {
+                m_isSkeletonDeleted = true;
+                m_renderScene->SetDirty();
+            }
+            return;
+        } else {
+            if (!m_skeleton->GetRootBone())
+                return;
+            if (m_isSkeletonDeleted) {
+                m_isSkeletonDeleted = false;
+                m_renderScene->SetDirty();
+            }
+        }
+
+        /*if (!IsSkeletonUsable()) {
             for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
                 m_skeletonMatrices[i] = identityMatrix;
                 m_skeletonOffsets[i] = identityMatrix;
@@ -243,7 +265,7 @@ namespace SR_GTYPES_NS {
             m_isOffsetsInitialized = false;
 
             return;
-        }
+        }*/
 
         if (!m_isOffsetsInitialized) {
             for (auto&& [hashName, boneId] : bones) {
@@ -253,6 +275,7 @@ namespace SR_GTYPES_NS {
             m_isOffsetsInitialized = true;
         }
 
+        if (m_skeleton)
         for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
             if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
                 m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();

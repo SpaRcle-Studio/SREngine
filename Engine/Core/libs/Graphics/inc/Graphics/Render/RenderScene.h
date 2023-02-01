@@ -11,6 +11,7 @@
 
 #include <Graphics/Render/MeshCluster.h>
 #include <Graphics/Render/SortedMeshQueue.h>
+#include <Graphics/GUI/WidgetManager.h>
 
 namespace SR_WORLD_NS {
     class Scene;

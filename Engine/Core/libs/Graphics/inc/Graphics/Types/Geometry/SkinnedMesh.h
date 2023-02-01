@@ -36,6 +36,7 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
 
+        SR_NODISCARD bool IsSkeletonUsable() const;
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
 
@@ -67,6 +68,7 @@ namespace SR_GTYPES_NS {
         SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
 
         bool m_isOffsetsInitialized = false;
+        bool m_isSkeletonDeleted = false;
 
         std::vector<uint64_t> m_bonesIds;
 
