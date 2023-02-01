@@ -67,7 +67,6 @@ namespace SR_SRSL_NS {
             : token(SR_UTILS_NS::Exchange(other.token, { }))
             , args(SR_UTILS_NS::Exchange(other.args, { }))
             , isCall(SR_UTILS_NS::Exchange(other.isCall, { }))
-            , isAccess(SR_UTILS_NS::Exchange(other.isAccess, { }))
             , isArray(SR_UTILS_NS::Exchange(other.isArray, { }))
         { }
 
@@ -77,9 +76,7 @@ namespace SR_SRSL_NS {
         std::vector<SRSLExpr*> args;
 
         bool isCall = false;       /// function(arg1, arg2, arg3)
-        bool isAccess = false;     /// variable.field
         bool isArray = false;      /// variable[expression]
-        //bool isAssignment = false; /// variable = expression
 
     };
 

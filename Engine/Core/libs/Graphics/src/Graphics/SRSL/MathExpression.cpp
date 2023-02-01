@@ -33,7 +33,7 @@ namespace SR_SRSL_NS {
                 return nullptr;
             }
 
-            if (operation == "]") {
+            if (operation == "]" || operation == ",") {
                 return pLeftExpr;
             }
 
@@ -102,13 +102,46 @@ namespace SR_SRSL_NS {
         if (SR_MATH_NS::IsNumber(token) || IsIdentifier(token)) {
             auto&& pBasicExpr = new SRSLExpr(std::move(token));
 
-        retry:
+            /// parse function call
+            if (auto&& pLexem = GetCurrentLexem(); pLexem && pLexem->kind == LexemKind::OpeningBracket) {
+                ++m_currentLexem;
+
+                pBasicExpr->isCall = true;
+
+            retryFnArg:
+                pLexem = GetCurrentLexem();
+                if (!pLexem || IsHasErrors()) {
+                    SR_SAFE_DELETE_PTR(pBasicExpr);
+                    m_result = SRSLResult(SRSLReturnCode::InvalidCall);
+                    return nullptr;
+                }
+
+                if (pLexem->kind == LexemKind::Comma) {
+                    ++m_currentLexem;
+                    goto retryFnArg;
+                }
+
+                if (pLexem->kind == LexemKind::ClosingBracket) {
+                    ++m_currentLexem;
+                    return pBasicExpr;
+                }
+
+                auto&& pArgExpr = ParseBinaryExpression(0);
+                if (pArgExpr) {
+                    pBasicExpr->args.emplace_back(pArgExpr);
+                }
+
+                goto retryFnArg;
+            }
+
+        retryArray:
             if (auto&& pLexem = GetCurrentLexem(); pLexem && pLexem->kind == LexemKind::OpeningSquareBracket) {
                 ++m_currentLexem;
                 auto&& pExpr = ParseBinaryExpression(0);
                 pBasicExpr = new SRSLExpr("[", pBasicExpr, pExpr);
-                goto retry;
+                goto retryArray;
             }
+
             return pBasicExpr;
         }
 
@@ -153,6 +186,9 @@ namespace SR_SRSL_NS {
         if (operation == "") {
 
         }
+
+        else if (operation == ".") return 25;
+        else if (operation == "=") return 30;
 
         else if (operation == "~" && prefix) return 35;
         else if (operation == "!" && prefix) return 40;
@@ -249,8 +285,7 @@ namespace SR_SRSL_NS {
                     goto retry;
                 default: {
                     if (hasDot && !hasInt) {
-                        m_result = SRSLResult(SRSLReturnCode::InvalidNumericToken, m_lexems[m_currentLexem].offset);
-                        return std::string();
+                        return token;
                     }
                     else if (hasInt) {
                         return std::move(token);
@@ -268,6 +303,7 @@ namespace SR_SRSL_NS {
             case LexemKind::ClosingSquareBracket:
             case LexemKind::Identifier:
             case LexemKind::Tilda:
+            case LexemKind::Comma:
             case LexemKind::Dot:
             case LexemKind::Question:
             case LexemKind::Colon:

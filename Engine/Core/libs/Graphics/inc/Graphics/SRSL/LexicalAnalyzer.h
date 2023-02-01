@@ -24,7 +24,7 @@ namespace SR_SRSL_NS {
         void ProcessMain();
         void ProcessBracket();
         void ProcessDecorators();
-        void ProcessExpression(bool isFunctionName = false);
+        void ProcessExpression(bool isFunctionName = false, bool isSimpleExpr = false);
 
         SR_NODISCARD SRSLLexicalUnit* TryProcessIdentifier();
 

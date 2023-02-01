@@ -1,3 +1,13 @@
+a.b;
+a[434][6] = !b * 134 + 45;
+a[434][6] = ++(b * 134 + 45);
+a[434][6] == b * 134 + 45;
+a[434][6].aboba(2, 4, 5);
+
+call(1, 4, 7 * 324, a + b);
+call2();
+int a = call3(call4(23, 56 == 4), 4, 5);
+
 void function([[decorator(23)]] int a, vec3 gfeg = 45, bool d) {
 
 }

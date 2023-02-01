@@ -3,22 +3,27 @@
 //
 
 #include <Graphics/SRSL/PseudoCodeGenerator.h>
+#include <Graphics/SRSL/Shader.h>
 
 namespace SR_SRSL_NS {
-    std::set<SRSLShaderStage> SRSLPseudoCodeGenerator::GenerateStages() {
-        std::set<SRSLShaderStage> stages;
+    ISRSLCodeGenerator::SRSLCodeGenRes SRSLPseudoCodeGenerator::GenerateStages(const SRSLShader* pShader) {
+        SR_GLOBAL_LOCK
 
-        if (!m_analyzedTree->pLexicalTree) {
-            return stages;
+        Clear();
+
+        ISRSLCodeGenerator::SRSLCodeGenRes codeGenRes;
+
+        auto&& [result, stages] = codeGenRes;
+
+        if (!pShader->GetAnalyzedTree()) {
+            result = SRSLResult(SRSLReturnCode::InvalidLexicalTree);
+            return codeGenRes;
         }
 
-        SRSLShaderStage stage;
-        stage.stage = ShaderStage::Unknown;
-        stage.code = GenerateLexicalTree(m_analyzedTree->pLexicalTree, 0);
+        stages[ShaderStage::Unknown] = GenerateLexicalTree(pShader->GetAnalyzedTree()->pLexicalTree, 0);
+        result = SR_UTILS_NS::Exchange(m_result, { });
 
-        stages.insert(std::move(stage));
-
-        return stages;
+        return codeGenRes;
     }
 
     std::string SRSLPseudoCodeGenerator::GenerateVariable(SRSLVariable* pVariable, int32_t deep) const {
@@ -60,7 +65,7 @@ namespace SR_SRSL_NS {
 
         code += "(";
 
-        for (uint32_t i = 0; i <pFunction-> args.size(); ++i) {
+        for (uint32_t i = 0; i < pFunction-> args.size(); ++i) {
             code += GenerateVariable(pFunction->args[i], 0);
 
             if (i + 1 < pFunction->args.size()) {
@@ -122,7 +127,20 @@ namespace SR_SRSL_NS {
 
         std::string code = GenerateTab(deep);
 
-        if (pExpr->isArray) {
+        if (pExpr->isCall) {
+            code += pExpr->token + "(";
+
+            for (uint32_t i = 0; i < pExpr->args.size(); ++i) {
+                code += GenerateExpression(pExpr->args[i], 0);
+
+                if (i + 1 < pExpr->args.size()) {
+                    code += ", ";
+                }
+            }
+
+            code += ")";
+        }
+        else if (pExpr->isArray) {
             code += GenerateExpression(pExpr->args[0], 0) + "[" + GenerateExpression(pExpr->args[1], 0) + "]";
         }
         else if (pExpr->args.empty()) {
@@ -130,6 +148,9 @@ namespace SR_SRSL_NS {
         }
         else if (pExpr->args.size() == 1) {
             code += "(" + pExpr->token + GenerateExpression(pExpr->args[0], 0) + ")";
+        }
+        else if (pExpr->args.size() == 2 && (pExpr->token == "=" || pExpr->token == ".")) {
+            code += GenerateExpression(pExpr->args[0], 0) + pExpr->token + GenerateExpression(pExpr->args[1], 0);
         }
         else if (pExpr->args.size() == 2) {
             code += "(" + GenerateExpression(pExpr->args[0], 0) + pExpr->token + GenerateExpression(pExpr->args[1], 0) + ")";

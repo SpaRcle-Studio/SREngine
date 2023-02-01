@@ -9,35 +9,24 @@
 #include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_SRSL_NS {
-    SR_ENUM_NS_CLASS_T(ShaderLanguage, uint8_t,
-            GLSL, HLSL, Metal
-    );
-
-    struct SRSLShaderStage {
-        bool operator<(const SRSLShaderStage& other) const {
-            return static_cast<int32_t>(stage) < static_cast<int32_t>(other.stage);
-        }
-
-        ShaderStage stage = ShaderStage::Unknown;
-        std::string code;
-    };
+    class SRSLShader;
 
     class ISRSLCodeGenerator {
+    public:
+        using SRSLCodeGenRes = std::pair<SRSLResult, std::map<ShaderStage, std::string>>;
+
     protected:
         ISRSLCodeGenerator() = default;
         virtual ~ISRSLCodeGenerator() = default;
 
-    public:
-        SR_NODISCARD std::pair<std::string, SRSLResult> ToString(SRSLAnalyzedTree::Ptr&& analyzedTree);
+    protected:
+        SR_NODISCARD virtual SRSLCodeGenRes GenerateStages(const SRSLShader* pShader) = 0;
 
     protected:
         void Clear();
 
-        SR_NODISCARD virtual std::set<SRSLShaderStage> GenerateStages() = 0;
-
     protected:
         SRSLResult m_result = SRSLResult();
-        SRSLAnalyzedTree::Ptr m_analyzedTree;
 
     };
 }

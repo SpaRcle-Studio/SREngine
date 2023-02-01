@@ -14,8 +14,8 @@ namespace SR_SRSL_NS {
         SRSLPseudoCodeGenerator() = default;
         ~SRSLPseudoCodeGenerator() override = default;
 
-    protected:
-        SR_NODISCARD std::set<SRSLShaderStage> GenerateStages() override;
+    public:
+        SR_NODISCARD SRSLCodeGenRes GenerateStages(const SRSLShader* pShader) override;
 
     private:
         SR_NODISCARD std::string GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep) const;

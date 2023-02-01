@@ -101,7 +101,7 @@ namespace SR_SRSL_NS {
                 case LexemKind::Tilda:
                 case LexemKind::Integer:
                 case LexemKind::Negation: {
-                    ProcessExpression();
+                    ProcessExpression(false, true);
                     if (IsHasErrors()) {
                         return;
                     }
@@ -199,7 +199,7 @@ namespace SR_SRSL_NS {
         return GetLexem(0);
     }
 
-    void SRSLLexicalAnalyzer::ProcessExpression(bool isFunctionName) {
+    void SRSLLexicalAnalyzer::ProcessExpression(bool isFunctionName, bool isSimpleExpr) {
         SRAssert(!m_expr);
         SR_SAFE_DELETE_PTR(m_expr);
 
@@ -226,15 +226,20 @@ namespace SR_SRSL_NS {
                     case LexemKind::Unknown:
                     case LexemKind::Semicolon:
                     case LexemKind::Macro:
-                    case LexemKind::Comma:
                         break;
 
                     case LexemKind::Assign:
+                        if (isSimpleExpr) {
+                            goto gotoDefault;
+                        }
+                        SR_FALLTHROUGH;
+                    case LexemKind::Comma:
                         if (deep == 0) {
                             break;
                         }
                         SR_FALLTHROUGH;
                     default: {
+                    gotoDefault:
                         if (lexemKind == LexemKind::Identifier) {
                             if (!allowIdentifier) {
                                 break;

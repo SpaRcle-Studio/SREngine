@@ -8,6 +8,12 @@
 #include <Graphics/SRSL/LexicalTree.h>
 
 namespace SR_SRSL_NS {
+    SR_ENUM_NS_CLASS_T(ShaderLanguage, uint8_t,
+        PseudoCode, GLSL, HLSL, Metal
+    );
+
+    /** Это не шейдер в привычном понимании, это набор всех данных для генерирования любого
+     * шейдерного кода и для последующей его экспортации. */
     class SRSLShader : public SR_UTILS_NS::NonCopyable {
         using Ptr = std::shared_ptr<SRSLShader>;
         using Super = SR_UTILS_NS::NonCopyable;
@@ -19,7 +25,8 @@ namespace SR_SRSL_NS {
 
     public:
         SR_NODISCARD bool IsCacheActual() const;
-        SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD std::string ToString(ShaderLanguage shaderLanguage) const;
+        SR_NODISCARD const SRSLAnalyzedTree::Ptr GetAnalyzedTree() const;
 
     private:
         SR_UTILS_NS::Path m_path;

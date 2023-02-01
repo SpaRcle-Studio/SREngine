@@ -4,6 +4,7 @@
 
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/Lexer.h>
+#include <Graphics/SRSL/PseudoCodeGenerator.h>
 
 namespace SR_SRSL_NS {
     SRSLShader::SRSLShader(SR_UTILS_NS::Path path, SRSLAnalyzedTree::Ptr&& pAnalyzedTree)
@@ -13,7 +14,7 @@ namespace SR_SRSL_NS {
     { }
 
     SRSLShader::Ptr SRSLShader::Load(SR_UTILS_NS::Path path) {
-        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(path);
+        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path));
 
         if (lexems.empty()) {
             SR_ERROR("SRSLShader::Load() : failed to parse lexems!\n\tPath: " + path.ToString());
@@ -37,7 +38,36 @@ namespace SR_SRSL_NS {
         return false;
     }
 
-    std::string SRSLShader::ToString() const {
-        return std::string();
+    std::string SRSLShader::ToString(ShaderLanguage shaderLanguage) const {
+        ISRSLCodeGenerator::SRSLCodeGenRes codeGenRes;
+
+        switch (shaderLanguage) {
+            case ShaderLanguage::PseudoCode:
+                codeGenRes = SRSLPseudoCodeGenerator::Instance().GenerateStages(this);
+                break;
+            case ShaderLanguage::GLSL:
+            case ShaderLanguage::HLSL:
+            case ShaderLanguage::Metal:
+            default:
+                return std::string("SRSLShader::ToString() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToString(shaderLanguage));
+        }
+
+        auto&& [result, stages] = codeGenRes;
+
+        if (result.code != SRSLReturnCode::Success) {
+            return "SRSLShader::ToString() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position);
+        }
+
+        std::string code;
+
+        for (auto&& [stage, stageCode] : stages) {
+            code += "Stage[" + SR_UTILS_NS::EnumReflector::ToString(stage) + "] {\n" + stageCode + "\n}";
+        }
+
+        return code;
+    }
+
+    const SRSLAnalyzedTree::Ptr SRSLShader::GetAnalyzedTree() const {
+        return m_analyzedTree;
     }
 }
