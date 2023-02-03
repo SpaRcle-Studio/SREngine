@@ -131,10 +131,8 @@ namespace SR_SRSL_NS {
     }
 
     SRSLIfStatement::~SRSLIfStatement() {
+        SR_SAFE_DELETE_PTR(pExpr);
         SR_SAFE_DELETE_PTR(pLexicalTree);
-
-        if (elseStatement.has_value()) {
-            delete elseStatement.value();
-        }
+        SR_SAFE_DELETE_PTR(pElseStatement);
     }
 }

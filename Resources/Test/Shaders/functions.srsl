@@ -4,6 +4,22 @@ a[434][6] = ++(b * 134 + 45);
 a[434][6] == b * 134 + 45;
 a[434][6].aboba(2, 4, 5);
 
+void call1() {
+    void();
+}
+
+void call2() {
+    call2(call1());
+    call2(call1());
+    call2(call1(), min(), max());
+    vec4();
+}
+
+void call4() {
+    call2();
+    call2();
+}
+
 call(1, 4, 7 * 324, a + b);
 call2();
 int a = call3(call4(23, 56 == 4), 4, 5);

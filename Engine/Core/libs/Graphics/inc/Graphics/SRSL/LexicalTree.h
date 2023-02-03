@@ -206,9 +206,9 @@ namespace SR_SRSL_NS {
     struct SRSLIfStatement : public SRSLLexicalUnit {
         ~SRSLIfStatement() override;
 
-        std::optional<SRSLExpr> expr;
+        SRSLExpr* pExpr = nullptr;
         SRSLLexicalTree* pLexicalTree = nullptr;
-        std::optional<SRSLIfStatement*> elseStatement;
+        SRSLIfStatement* pElseStatement = nullptr;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

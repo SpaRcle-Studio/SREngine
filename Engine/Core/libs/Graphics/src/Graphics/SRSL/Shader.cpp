@@ -31,7 +31,14 @@ namespace SR_SRSL_NS {
             return nullptr;
         }
 
-        return SRSLShader::Ptr(new SRSLShader(std::move(path), std::move(pAnalyzedTree)));
+        auto&& pShader = SRSLShader::Ptr(new SRSLShader(std::move(path), std::move(pAnalyzedTree)));
+
+        if (!pShader->Prepare()) {
+            SR_ERROR("SRSLShader::Load() : failed to prepare shader!\n\tPath: " + path.ToString());
+            return nullptr;
+        }
+
+        return pShader;
     }
 
     bool SRSLShader::IsCacheActual() const {
@@ -69,5 +76,17 @@ namespace SR_SRSL_NS {
 
     const SRSLAnalyzedTree::Ptr SRSLShader::GetAnalyzedTree() const {
         return m_analyzedTree;
+    }
+
+    bool SRSLShader::Prepare() {
+        m_useStack = SRSLRefAnalyzer::Instance().Analyze(m_analyzedTree);
+        if (!m_useStack) {
+            SR_ERROR("SRSLShader::Prepare() : failed to analyze shader refs!");
+            return false;
+        }
+
+        std::cout << m_useStack->ToString(0) << std::endl;
+
+        return true;
     }
 }

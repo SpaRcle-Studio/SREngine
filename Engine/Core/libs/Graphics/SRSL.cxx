@@ -8,3 +8,4 @@
 #include "../Graphics/src/Graphics/SRSL/ICodeGenerator.cpp"
 #include "../Graphics/src/Graphics/SRSL/PseudoCodeGenerator.cpp"
 #include "../Graphics/src/Graphics/SRSL/GLSLCodeGenerator.cpp"
+#include "../Graphics/src/Graphics/SRSL/RefAnalyzer.cpp"
