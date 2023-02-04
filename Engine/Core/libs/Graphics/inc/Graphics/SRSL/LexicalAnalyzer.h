@@ -24,6 +24,7 @@ namespace SR_SRSL_NS {
         void ProcessMain();
         void ProcessBracket();
         void ProcessDecorators();
+        void ProcessIfStatement();
         void ProcessExpression(bool isFunctionName = false, bool isSimpleExpr = false);
 
         SR_NODISCARD SRSLLexicalUnit* TryProcessIdentifier();
@@ -38,6 +39,7 @@ namespace SR_SRSL_NS {
 
         SRSLDecorators* m_decorators = nullptr;
         SRSLExpr* m_expr = nullptr;
+        SRSLIfStatement* m_ifStatement = nullptr;
 
         SRSLResult m_result;
         std::list<LXAState> m_states;

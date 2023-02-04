@@ -85,43 +85,30 @@ namespace SR_SRSL_NS {
         return m_analyzedTree;
     }
 
+    const SRSLUseStack::Ptr SRSLShader::GetUseStack() const {
+        return m_useStack;
+    }
+
     bool SRSLShader::Prepare() {
-        m_useStack = SRSLRefAnalyzer::Instance().Analyze(m_analyzedTree);
+        m_useStack = SRSLRefAnalyzer::Instance().Analyze(m_analyzedTree, SR_SRSL_ENTRY_POINTS);
         if (!m_useStack) {
             SR_ERROR("SRSLShader::Prepare() : failed to analyze shader refs!");
             return false;
         }
 
-        for (auto&& pUnit : m_analyzedTree->pLexicalTree->lexicalTree) {
-            if (auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit)) {
-                std::string& varName = pVariable->pType->token;
-                std::string& varValue = pVariable->pName->token;
+        if (!PrepareSettings()) {
+            SR_ERROR("SRSLShader::Prepare() : failed to prepare shader settings!");
+            return false;
+        }
 
-                if (varName == "ShaderType") {
-                    m_type = SR_UTILS_NS::EnumReflector::FromString<SR_SRSL_NS::ShaderType>(varValue);
-                }
-                else if (varName == "PolygonMode") {
-                    m_createInfo.polygonMode = SR_UTILS_NS::EnumReflector::FromString<PolygonMode>(varValue);
-                }
-                else if (varName == "CullMode") {
-                    m_createInfo.cullMode = SR_UTILS_NS::EnumReflector::FromString<CullMode>(varValue);
-                }
-                else if (varName == "DepthCompare") {
-                    m_createInfo.depthCompare = SR_UTILS_NS::EnumReflector::FromString<DepthCompare>(varValue);
-                }
-                else if (varName == "PrimitiveTopology") {
-                    m_createInfo.primitiveTopology = SR_UTILS_NS::EnumReflector::FromString<PrimitiveTopology>(varValue);
-                }
-                else if (varName == "BlendEnabled") {
-                    m_createInfo.blendEnabled = SR_UTILS_NS::LexicalCast<bool>(varValue);
-                }
-                else if (varName == "DepthWrite") {
-                    m_createInfo.depthWrite = SR_UTILS_NS::LexicalCast<bool>(varValue);
-                }
-                else if (varName == "DepthTest") {
-                    m_createInfo.depthTest = SR_UTILS_NS::LexicalCast<bool>(varValue);
-                }
-            }
+        if (!PrepareUniformBlocks()) {
+            SR_ERROR("SRSLShader::Prepare() : failed to prepare shader uniform blocks!");
+            return false;
+        }
+
+        if (!PrepareSamplers()) {
+            SR_ERROR("SRSLShader::Prepare() : failed to prepare shader samplers!");
+            return false;
         }
 
         return true;
@@ -161,5 +148,105 @@ namespace SR_SRSL_NS {
                 SRHalt0();
                 return Vertices::VertexType::Unknown;
         }
+    }
+
+    bool SRSLShader::PrepareSettings() {
+        for (auto&& pUnit : m_analyzedTree->pLexicalTree->lexicalTree) {
+            if (auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit)) {
+                std::string& varName = pVariable->pType->token;
+                std::string& varValue = pVariable->pName->token;
+
+                if (varName == "ShaderType") {
+                    m_type = SR_UTILS_NS::EnumReflector::FromString<SR_SRSL_NS::ShaderType>(varValue);
+                }
+                else if (varName == "PolygonMode") {
+                    m_createInfo.polygonMode = SR_UTILS_NS::EnumReflector::FromString<PolygonMode>(varValue);
+                }
+                else if (varName == "CullMode") {
+                    m_createInfo.cullMode = SR_UTILS_NS::EnumReflector::FromString<CullMode>(varValue);
+                }
+                else if (varName == "DepthCompare") {
+                    m_createInfo.depthCompare = SR_UTILS_NS::EnumReflector::FromString<DepthCompare>(varValue);
+                }
+                else if (varName == "PrimitiveTopology") {
+                    m_createInfo.primitiveTopology = SR_UTILS_NS::EnumReflector::FromString<PrimitiveTopology>(varValue);
+                }
+                else if (varName == "BlendEnabled") {
+                    m_createInfo.blendEnabled = SR_UTILS_NS::LexicalCast<bool>(varValue);
+                }
+                else if (varName == "DepthWrite") {
+                    m_createInfo.depthWrite = SR_UTILS_NS::LexicalCast<bool>(varValue);
+                }
+                else if (varName == "DepthTest") {
+                    m_createInfo.depthTest = SR_UTILS_NS::LexicalCast<bool>(varValue);
+                }
+            }
+        }
+
+        if (GetType() == ShaderType::Unknown) {
+            SR_ERROR("SRSLShader::PrepareSettings() : shader type is not set!");
+            return false;
+        }
+
+        return true;
+    }
+
+    bool SRSLShader::PrepareUniformBlocks() {
+        for (auto&& pUnit : m_analyzedTree->pLexicalTree->lexicalTree) {
+            auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit);
+            if (!pVariable || !pVariable->pDecorators) {
+                continue;
+            }
+
+            if (pVariable->GetType().find("sampler") != std::string::npos) {
+                continue;
+            }
+
+            if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
+                std::string blockName;
+
+                if (pDecorator->args.empty()) {
+                    blockName = "BLOCK";
+                }
+                else {
+                    blockName = pDecorator->args[0]->token;
+                }
+
+                SRSLUniformBlock::Field field;
+
+                field.name = pVariable->GetName();
+                field.type = pVariable->GetType();
+                field.isPublic = bool(pVariable->pDecorators->Find("public"));
+
+                auto&& uniformBlock = m_uniformBlocks[blockName];
+                uniformBlock.fields.emplace_back(field);
+            }
+        }
+
+        return true;
+    }
+
+    bool SRSLShader::PrepareSamplers() {
+        for (auto&& pUnit : m_analyzedTree->pLexicalTree->lexicalTree) {
+            auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit);
+            if (!pVariable || !pVariable->pDecorators) {
+                continue;
+            }
+
+            if (pVariable->GetType().find("sampler") == std::string::npos) {
+                continue;
+            }
+
+            if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
+                SRSLSampler sampler;
+
+                sampler.type = pVariable->GetType();
+                sampler.isPublic = bool(pVariable->pDecorators->Find("public"));
+
+                m_samplers[pVariable->GetName()] = sampler;
+            }
+        }
+
+        return true;
     }
 }

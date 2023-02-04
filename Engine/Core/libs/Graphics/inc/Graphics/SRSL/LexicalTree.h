@@ -123,6 +123,7 @@ namespace SR_SRSL_NS {
         }
 
         SR_NODISCARD std::string ToString(uint32_t deep) const override;
+        SR_NODISCARD SRSLDecorator* Find(const std::string& name);
 
         std::vector<SRSLDecorator> decorators;
     };
@@ -155,6 +156,9 @@ namespace SR_SRSL_NS {
         }
 
         SR_NODISCARD std::string ToString(uint32_t deep) const override;
+
+        SR_NODISCARD std::string GetType() const;
+        SR_NODISCARD std::string GetName() const;
 
         SRSLDecorators* pDecorators = nullptr;
         SRSLExpr* pType = nullptr;
@@ -191,6 +195,7 @@ namespace SR_SRSL_NS {
         ~SRSLFunction() override;
 
         SR_NODISCARD std::string ToString(uint32_t deep) const override;
+        SR_NODISCARD std::string GetName() const { return pName->token; }
 
         SRSLDecorators* pDecorators = nullptr;
         SRSLExpr* pType = nullptr;

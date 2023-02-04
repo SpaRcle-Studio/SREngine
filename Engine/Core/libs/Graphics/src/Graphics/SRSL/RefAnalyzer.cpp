@@ -38,11 +38,50 @@ namespace SR_SRSL_NS {
         return str;
     }
 
+    bool SRSLUseStack::IsVariableUsed(const std::string &name) const {
+        for (auto&& variable : variables) {
+            if (variable == name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool SRSLUseStack::IsFunctionUsed(const std::string &name) const {
+        for (auto&& function : functions) {
+            if (function.first == name) {
+                return true;
+            }
+
+            if (!function.second) {
+                continue;
+            }
+
+            if (function.second->IsFunctionUsed(name)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    SRSLUseStack::Ptr SRSLUseStack::FindFunction(const std::string &name) const {
+        for (auto&& function : functions) {
+            if (function.first == name) {
+                return function.second;
+            }
+        }
+
+        return nullptr;
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
-    SRSLUseStack::Ptr SRSLRefAnalyzer::Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
+    SRSLUseStack::Ptr SRSLRefAnalyzer::Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree, const EntryPoints& entryPoints) {
         SR_GLOBAL_LOCK
         m_analyzedTree = pAnalyzedTree;
+        m_entryPoints = entryPoints;
         std::list<std::string> stack;
         return AnalyzeTree(stack, pAnalyzedTree->pLexicalTree);
     }
@@ -55,6 +94,11 @@ namespace SR_SRSL_NS {
             /// Однако стоит на будущее подумать использование в них макросов
             if (auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit); pVariable && pVariable->pExpr) {
                 AnalyzeExpression(pUseStack, stack, pVariable->pExpr);
+            }
+            else if (auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit)) {
+                if (m_entryPoints.count(pFunction->GetName()) == 1) {
+                    AnalyzeEntryPoint(pUseStack, stack, pFunction);
+                }
             }
             else if (auto&& pSubTree = dynamic_cast<SRSLLexicalTree*>(pUnit)) {
                 pUseStack->Concat(AnalyzeTree(stack, pSubTree));
@@ -160,5 +204,11 @@ namespace SR_SRSL_NS {
     void SRSLRefAnalyzer::AnalyzeArrayExpression(SRSLUseStack::Ptr& pUseStack, std::list<std::string> &stack, SRSLExpr* pExpr) {
         AnalyzeExpression(pUseStack, stack, pExpr->args[0]);
         AnalyzeExpression(pUseStack, stack, pExpr->args[1]);
+    }
+
+    void SRSLRefAnalyzer::AnalyzeEntryPoint(SRSLUseStack::Ptr &pUseStack, std::list<std::string> &stack, SRSLFunction *pFunction) {
+        stack.emplace_back(pFunction->GetName());
+        pUseStack->functions[pFunction->GetName()] = AnalyzeTree(stack, pFunction->pLexicalTree);
+        stack.pop_back();
     }
 }

@@ -1,0 +1,31 @@
+ShaderType Text;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite true;
+DepthTest true;
+
+void call5() {
+}
+
+void call4() {
+}
+
+void call3() {
+}
+
+void call2() {
+    call3();
+}
+
+void call1() {
+    call2();
+}
+
+void vertex() {
+    call1();
+    call2(min(), max(), call5());
+}

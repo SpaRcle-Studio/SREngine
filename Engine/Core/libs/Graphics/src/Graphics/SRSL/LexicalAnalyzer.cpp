@@ -33,6 +33,7 @@ namespace SR_SRSL_NS {
 
         SR_SAFE_DELETE_PTR(m_decorators);
         SR_SAFE_DELETE_PTR(m_expr);
+        SR_SAFE_DELETE_PTR(m_ifStatement);
 
         m_lexems.clear();
         m_currentLexem = 0;
@@ -412,6 +413,15 @@ namespace SR_SRSL_NS {
 
         const uint64_t currentLexem = m_currentLexem;
 
+        if (pCurrent->value == "if") {
+            ++m_currentLexem;
+            ProcessIfStatement();
+            if (IsHasErrors()) {
+                return nullptr;
+            }
+            m_lexicalTree.back()->lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_ifStatement, nullptr));
+        }
+
         if (pCurrent->value == "return") {
             ++m_currentLexem;
             ProcessExpression();
@@ -490,5 +500,9 @@ namespace SR_SRSL_NS {
         m_currentLexem = currentLexem;
 
         return nullptr;
+    }
+
+    void SRSLLexicalAnalyzer::ProcessIfStatement() {
+
     }
 }

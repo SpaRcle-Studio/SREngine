@@ -59,6 +59,16 @@ namespace SR_SRSL_NS {
         return code + "]";
     }
 
+    SRSLDecorator* SRSLDecorators::Find(const std::string &name) {
+        for (auto&& decorator : decorators) {
+            if (decorator.name == name) {
+                return &decorator;
+            }
+        }
+
+        return nullptr;
+    }
+
     std::string SRSLLexicalTree::ToString(uint32_t deep) const {
         std::string code;
 
@@ -103,6 +113,22 @@ namespace SR_SRSL_NS {
         }
 
         return code;
+    }
+
+    std::string SRSLVariable::GetType() const {
+        if (pType) {
+            return pType->token;
+        }
+
+        return std::string();
+    }
+
+    std::string SRSLVariable::GetName() const {
+        if (pName) {
+            return pName->token;
+        }
+
+        return std::string();
     }
 
     std::string SRSLFunction::ToString(uint32_t deep) const {

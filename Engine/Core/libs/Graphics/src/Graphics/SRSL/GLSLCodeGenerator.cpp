@@ -36,8 +36,8 @@ namespace SR_SRSL_NS {
     }
 
     std::optional<std::string> GLSLCodeGenerator::GenerateVertexStage() {
-        auto&& pFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction("vertex");
-        if (!pFunction) {
+        auto&& pStageFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction("vertex");
+        if (!pStageFunction) {
             return std::optional<std::string>();
         }
 
@@ -50,7 +50,25 @@ namespace SR_SRSL_NS {
             code += vertexLocations + "\n";
         }
 
-        code += GenerateFunction(pFunction, 0);
+        code += GenerateUniforms(ShaderStage::Vertex) + "\n";
+
+        if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(pStageFunction->pName->token)) {
+            for (auto &&pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
+                auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit);
+
+                if (!pFunction) {
+                    continue;
+                }
+
+                if (!pFunctionCallStack->IsFunctionUsed(pFunction->pName->token)) {
+                    continue;
+                }
+
+                code += GenerateFunction(pFunction, 0) + "\n";
+            }
+        }
+
+        code += GenerateFunction(pStageFunction, 0);
 
         return code;
     }
@@ -117,7 +135,9 @@ namespace SR_SRSL_NS {
     }
 
     std::string GLSLCodeGenerator::GenerateFunction(SRSLFunction* pFunction, int32_t deep) const {
-        std::string code = GenerateTab(deep);
+        std::string code;
+
+        code += GenerateTab(deep);
 
         if (pFunction->pType) {
             code += GenerateType(pFunction->pType, 0) + " ";
@@ -234,14 +254,36 @@ namespace SR_SRSL_NS {
         if (deep <= 0) {
             return std::string();
         }
+
         return std::string(deep * 3, ' ');
     }
 
-    std::string GLSLCodeGenerator::GenerateUniformBlocks(ShaderStage stage) const {
-        return std::string();
-    }
+    std::string GLSLCodeGenerator::GenerateUniforms(ShaderStage stage) const {
+        std::string code;
 
-    std::string GLSLCodeGenerator::GenerateSamplers(ShaderStage stage) const {
-        return std::string();
+        uint32_t binding = 0;
+
+        for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
+            code += SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", binding, name.c_str());
+
+            for (auto&& field : uniformBlock.fields) {
+                code += SR_UTILS_NS::Format("\t%s %s; // %s \n", field.type.c_str(), field.name.c_str(), field.isPublic ? "public" : "private");
+            }
+
+            code += "};\n";
+
+            ++binding;
+        }
+
+        if (!m_shader->GetSamplers().empty() && !m_shader->GetUniformBlocks().empty()) {
+            code += "\n";
+        }
+
+        for (auto&& [name, sampler] : m_shader->GetSamplers()) {
+            code += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // %s\n", binding, sampler.type.c_str(), name.c_str(), sampler.isPublic ? "public" : "private");
+            ++binding;
+        }
+
+        return code;
     }
 }
