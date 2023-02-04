@@ -23,12 +23,17 @@ namespace SR_SRSL_NS {
         SR_NODISCARD std::optional<std::string> GenerateFragmentStage();
 
         SR_NODISCARD std::string GetVersion(ShaderStage stage) const;
-        SR_NODISCARD std::string GenerateVertexLocations() const;
+        SR_NODISCARD std::string GenerateInputVertexLocations() const;
+        SR_NODISCARD std::string GenerateOutputVertexLocations() const;
         SR_NODISCARD std::string GenerateUniforms(ShaderStage stage) const;
 
-        SR_NODISCARD std::string GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep) const;
         SR_NODISCARD std::string GenerateVariable(SRSLVariable* pVariable, int32_t deep) const;
+
+        SR_NODISCARD std::string GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep) const;
+        SR_NODISCARD std::string GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep, const std::string& preCode, const std::string& postCode) const;
+
         SR_NODISCARD std::string GenerateFunction(SRSLFunction* pFunction, int32_t deep) const;
+        SR_NODISCARD std::string GenerateFunction(SRSLFunction* pFunction, int32_t deep, const std::string& preCode, const std::string& postCode) const;
 
         SR_NODISCARD std::string GenerateType(SRSLExpr* pExpr, int32_t deep) const;
         SR_NODISCARD std::string GenerateName(SRSLExpr* pExpr, int32_t deep) const;
@@ -36,6 +41,8 @@ namespace SR_SRSL_NS {
         SR_NODISCARD std::string GenerateExpression(SRSLExpr* pExpr, int32_t deep) const;
 
         SR_NODISCARD std::string GenerateTab(int32_t deep) const;
+
+        SR_NODISCARD std::string VertexAttributeToString(Vertices::Attribute attribute) const;
 
     private:
         const SRSLShader* m_shader = nullptr;
