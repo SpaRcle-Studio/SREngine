@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS {
             for (auto&& overrideNode : shadersNode.TryGetNodes("Override")) {
                 if (auto&& pShader = SR_GTYPES_NS::Shader::Load(overrideNode.GetAttribute("Path").ToString())) {
                     m_shaders.emplace_back(std::make_pair(
-                            SR_UTILS_NS::EnumReflector::FromString<SRSL::ShaderType>(overrideNode.GetAttribute("Type").ToString()),
+                            SR_UTILS_NS::EnumReflector::FromString<SR_SRSL_NS::ShaderType>(overrideNode.GetAttribute("Type").ToString()),
                             pShader
                     ));
                 }
@@ -194,7 +194,7 @@ namespace SR_GRAPH_NS {
         m_context->SetCurrentShader(nullptr);
     }
 
-    ShaderOverridePass::ShaderPtr ShaderOverridePass::GetShader(SRSL::ShaderType type) const {
+    ShaderOverridePass::ShaderPtr ShaderOverridePass::GetShader(SR_SRSL_NS::ShaderType type) const {
         for (auto&& [shaderType, pShader] : m_shaders) {
             if (shaderType == type) {
                 return pShader;

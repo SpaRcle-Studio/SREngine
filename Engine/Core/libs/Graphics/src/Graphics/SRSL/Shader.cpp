@@ -5,6 +5,7 @@
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/Lexer.h>
 #include <Graphics/SRSL/PseudoCodeGenerator.h>
+#include <Graphics/SRSL/GLSLCodeGenerator.h>
 
 namespace SR_SRSL_NS {
     SRSLShader::SRSLShader(SR_UTILS_NS::Path path, SRSLAnalyzedTree::Ptr&& pAnalyzedTree)
@@ -53,6 +54,8 @@ namespace SR_SRSL_NS {
                 codeGenRes = SRSLPseudoCodeGenerator::Instance().GenerateStages(this);
                 break;
             case ShaderLanguage::GLSL:
+                codeGenRes = GLSLCodeGenerator::Instance().GenerateStages(this);
+                break;
             case ShaderLanguage::HLSL:
             case ShaderLanguage::Metal:
             default:
@@ -85,8 +88,74 @@ namespace SR_SRSL_NS {
             return false;
         }
 
-        std::cout << m_useStack->ToString(0) << std::endl;
+        for (auto&& pUnit : m_analyzedTree->pLexicalTree->lexicalTree) {
+            if (auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit)) {
+                std::string& varName = pVariable->pType->token;
+                std::string& varValue = pVariable->pName->token;
+
+                if (varName == "ShaderType") {
+                    m_type = SR_UTILS_NS::EnumReflector::FromString<SR_SRSL_NS::ShaderType>(varValue);
+                }
+                else if (varName == "PolygonMode") {
+                    m_createInfo.polygonMode = SR_UTILS_NS::EnumReflector::FromString<PolygonMode>(varValue);
+                }
+                else if (varName == "CullMode") {
+                    m_createInfo.cullMode = SR_UTILS_NS::EnumReflector::FromString<CullMode>(varValue);
+                }
+                else if (varName == "DepthCompare") {
+                    m_createInfo.depthCompare = SR_UTILS_NS::EnumReflector::FromString<DepthCompare>(varValue);
+                }
+                else if (varName == "PrimitiveTopology") {
+                    m_createInfo.primitiveTopology = SR_UTILS_NS::EnumReflector::FromString<PrimitiveTopology>(varValue);
+                }
+                else if (varName == "BlendEnabled") {
+                    m_createInfo.blendEnabled = SR_UTILS_NS::LexicalCast<bool>(varValue);
+                }
+                else if (varName == "DepthWrite") {
+                    m_createInfo.depthWrite = SR_UTILS_NS::LexicalCast<bool>(varValue);
+                }
+                else if (varName == "DepthTest") {
+                    m_createInfo.depthTest = SR_UTILS_NS::LexicalCast<bool>(varValue);
+                }
+            }
+        }
 
         return true;
+    }
+
+    SR_SRSL_NS::ShaderType SRSLShader::GetType() const {
+        return m_type;
+    }
+
+    Vertices::VertexType SRSLShader::GetVertexType() const {
+        switch (GetType()) {
+            case ShaderType::Spatial:
+            case ShaderType::SpatialCustom:
+                return Vertices::VertexType::StaticMeshVertex;
+            case ShaderType::Skinned:
+                return Vertices::VertexType::SkinnedMeshVertex;
+            case ShaderType::PostProcessing:
+                return Vertices::VertexType::None;
+            case ShaderType::Canvas:
+                return Vertices::VertexType::UIVertex;
+            case ShaderType::Skybox:
+            case ShaderType::Simple:
+            case ShaderType::Line:
+            case ShaderType::Text:
+            case ShaderType::TextUI:
+                return Vertices::VertexType::SimpleVertex;
+            case ShaderType::Custom:
+            case ShaderType::Raygen:
+            case ShaderType::AnyHit:
+            case ShaderType::ClosestHit:
+            case ShaderType::Miss:
+            case ShaderType::Particles:
+            case ShaderType::Compute:
+            case ShaderType::Intersection:
+            case ShaderType::Unknown:
+            default:
+                SRHalt0();
+                return Vertices::VertexType::Unknown;
+        }
     }
 }

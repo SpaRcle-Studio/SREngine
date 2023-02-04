@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS {
         void Update() override;
 
     protected:
-        SR_NODISCARD virtual ShaderPtr GetShader(SRSL::ShaderType type) const;
+        SR_NODISCARD virtual ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const;
 
         SR_NODISCARD bool IsDirectional() const noexcept { return m_isDirectional; }
 
@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS {
         /// режим рендера без кадрового буффера, напрямую
         bool m_isDirectional = false;
 
-        std::vector<std::pair<SRSL::ShaderType, ShaderPtr>> m_shaders;
+        std::vector<std::pair<SR_SRSL_NS::ShaderType, ShaderPtr>> m_shaders;
 
     };
 }

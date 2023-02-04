@@ -233,6 +233,8 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
+        SR_NODISCARD SRSLFunction* FindFunction(const std::string& name) const;
+
         std::vector<SRSLLexicalUnit*> lexicalTree;
     };
 

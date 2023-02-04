@@ -8,7 +8,7 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[uniform], [private]] vec4 color;
+[[uniform], [private], [shared]] vec4 color;
 [[uniform], [public]] sampler2D diffuse;
 
 void fragment() {

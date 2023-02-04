@@ -65,8 +65,8 @@ namespace SR_GRAPH_NS {
         return m_groups.empty();
     }
 
-    SRSL::ShaderType ShadedMeshSubCluster::GetShaderType() const noexcept {
-        return m_shader ? m_shader->GetType() : SRSL::ShaderType::Unknown;
+    SR_SRSL_NS::ShaderType ShadedMeshSubCluster::GetShaderType() const noexcept {
+        return m_shader ? m_shader->GetType() : SR_SRSL_NS::ShaderType::Unknown;
     }
 
     bool MeshCluster::Add(Types::Mesh* pMesh) noexcept {

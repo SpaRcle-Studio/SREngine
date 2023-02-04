@@ -474,28 +474,6 @@ namespace SR_SRSL_NS {
         return operation == "++" || operation == "--";
     }
 
-    bool SRSLMathExpression::IsIdentifier(const std::string& token) const noexcept {
-        for (auto&& tokenChar : token) {
-            for (auto&& identifierChar : SRSL_IDENTIFIER_CHARS) {
-                if (tokenChar == identifierChar) {
-                    goto skip;
-                }
-            }
-            return false;
-        skip:
-            SR_NOOP;
-        }
-
-        return true;
-    }
-
-    bool SRSLMathExpression::IsOperator(const std::string& operation) const noexcept {
-        static const std::vector<std::string> operators = {
-                "+", "-", "!", ".", "~", ">", "^", "<", ":", "?", "|", "&", "%",
-        };
-        return std::find(operators.begin(), operators.end(), operation) != operators.end();
-    }
-
     bool SRSLMathExpression::IsPrefix() const noexcept {
         auto&& pLexem = GetLexem(-1);
 

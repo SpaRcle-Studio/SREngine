@@ -24,10 +24,6 @@ namespace SR_GRAPH_NS::Vertices {
         INT_R32G32B32A32   = 1 << 3,
         INT_R32G32B32      = 1 << 4,
         INT_R32G32         = 1 << 5,
-
-        VECTOR4            = FLOAT_R32G32B32A32 | INT_R32G32B32A32,
-        VECTOR3            = FLOAT_R32G32B32 | INT_R32G32B32,
-        VECTOR2            = FLOAT_R32G32 | INT_R32G32,
     };
 
     static std::string ToString(const glm::vec3& vec3) {
@@ -47,6 +43,10 @@ namespace SR_GRAPH_NS::Vertices {
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(StaticMeshVertex);
+        }
+
+        static SR_FORCE_INLINE std::vector<std::string> GetNames() {
+            return { "VERTEX", "UV", "NORMAL", "TANGENT", "BITANGENT" };
         }
 
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
@@ -90,6 +90,14 @@ namespace SR_GRAPH_NS::Vertices {
 
         /// x - bone id, y - weight
         glm::vec2 weights[SR_MAX_BONES_ON_VERTEX];
+
+        static SR_FORCE_INLINE std::vector<std::string> GetNames() {
+            return {
+                    "VERTEX", "UV", "NORMAL", "TANGENT", "BITANGENT",
+                    "WEIGHT1", "WEIGHT2", "WEIGHT3", "WEIGHT4",
+                    "WEIGHT5", "WEIGHT6", "WEIGHT7", "WEIGHT8",
+            };
+        }
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(SkinnedMeshVertex);
@@ -140,6 +148,10 @@ namespace SR_GRAPH_NS::Vertices {
             return sizeof(UIVertex);
         }
 
+        static SR_FORCE_INLINE std::vector<std::string> GetNames() {
+            return { "VERTEX", "UV" };
+        }
+
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
@@ -181,6 +193,10 @@ namespace SR_GRAPH_NS::Vertices {
     struct SimpleVertex {
         glm::vec3 pos;
 
+        static SR_FORCE_INLINE std::vector<std::string> GetNames() {
+            return { "VERTEX" };
+        }
+
         static SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(SimpleVertex);
         }
@@ -201,6 +217,7 @@ namespace SR_GRAPH_NS::Vertices {
 
     SR_ENUM_NS_CLASS(VertexType,
         Unknown,
+        None,
         StaticMeshVertex,
         SkinnedMeshVertex,
         SimpleVertex,
@@ -234,6 +251,7 @@ namespace SR_GRAPH_NS::Vertices {
     struct VertexInfo {
         std::vector<SR_VERTEX_DESCRIPTION> m_descriptions;
         std::vector<std::pair<Vertices::Attribute, size_t>> m_attributes;
+        std::vector<std::string> m_names;
     };
 
     SR_MAYBE_UNUSED static VertexInfo GetVertexInfo(VertexType type) {
@@ -242,18 +260,22 @@ namespace SR_GRAPH_NS::Vertices {
             case VertexType::SkinnedMeshVertex:
                 info.m_attributes = SkinnedMeshVertex::GetAttributes();
                 info.m_descriptions = { SkinnedMeshVertex::GetDescription() };
+                info.m_names = SkinnedMeshVertex::GetNames();
                 break;
             case VertexType::StaticMeshVertex:
                 info.m_attributes = StaticMeshVertex::GetAttributes();
                 info.m_descriptions = { StaticMeshVertex::GetDescription() };
+                info.m_names = StaticMeshVertex::GetNames();
                 break;
             case VertexType::SimpleVertex:
                 info.m_attributes = SimpleVertex::GetAttributes();
                 info.m_descriptions = { SimpleVertex::GetDescription() };
+                info.m_names = SimpleVertex::GetNames();
                 break;
             case VertexType::UIVertex:
                 info.m_attributes = UIVertex::GetAttributes();
                 info.m_descriptions = { UIVertex::GetDescription() };
+                info.m_names = UIVertex::GetNames();
                 break;
             default: {
                 SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int) type));

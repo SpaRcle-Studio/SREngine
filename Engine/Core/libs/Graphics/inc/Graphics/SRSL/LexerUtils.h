@@ -44,6 +44,37 @@ namespace SR_SRSL_NS {
         '_',
     };
 
+    static bool IsIdentifier(const std::string& token) noexcept {
+        bool isFirst = true;
+
+        for (auto&& tokenChar : token) {
+            if (isFirst && SR_MATH_NS::IsNumber(std::string(1, tokenChar))) {
+                return false;
+            }
+            isFirst = false;
+
+            for (auto&& identifierChar : SRSL_IDENTIFIER_CHARS) {
+                if (tokenChar == identifierChar) {
+                    goto skip;
+                }
+            }
+
+            return false;
+
+        skip:
+            SR_NOOP;
+        }
+
+        return true;
+    }
+
+    static bool IsOperator(const std::string& operation) noexcept {
+        static const std::vector<std::string> operators = {
+                "+", "-", "!", ".", "~", ">", "^", "<", ":", "?", "|", "&", "%",
+        };
+        return std::find(operators.begin(), operators.end(), operation) != operators.end();
+    }
+
     enum class LexemKind {
         Unknown,
 

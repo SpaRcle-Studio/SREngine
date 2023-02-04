@@ -10,26 +10,26 @@
 namespace SR_SRSL_NS {
     class SRSLPseudoCodeGenerator : public ISRSLCodeGenerator, public SR_UTILS_NS::Singleton<SRSLPseudoCodeGenerator> {
         friend class SR_UTILS_NS::Singleton<SRSLPseudoCodeGenerator>;
-    private:
+    protected:
         SRSLPseudoCodeGenerator() = default;
         ~SRSLPseudoCodeGenerator() override = default;
 
     public:
         SR_NODISCARD SRSLCodeGenRes GenerateStages(const SRSLShader* pShader) override;
 
-    private:
-        SR_NODISCARD std::string GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep) const;
-        SR_NODISCARD std::string GenerateVariable(SRSLVariable* pVariable, int32_t deep) const;
-        SR_NODISCARD std::string GenerateFunction(SRSLFunction* pFunction, int32_t deep) const;
+    protected:
+        SR_NODISCARD virtual std::string GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateVariable(SRSLVariable* pVariable, int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateFunction(SRSLFunction* pFunction, int32_t deep) const;
 
-        SR_NODISCARD std::string GenerateDecorators(SRSLDecorators* pDecorators, int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateDecorators(SRSLDecorators* pDecorators, int32_t deep) const;
 
-        SR_NODISCARD std::string GenerateType(SRSLExpr* pExpr, int32_t deep) const;
-        SR_NODISCARD std::string GenerateName(SRSLExpr* pExpr, int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateType(SRSLExpr* pExpr, int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateName(SRSLExpr* pExpr, int32_t deep) const;
 
-        SR_NODISCARD std::string GenerateExpression(SRSLExpr* pExpr, int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateExpression(SRSLExpr* pExpr, int32_t deep) const;
 
-        SR_NODISCARD std::string GenerateTab(int32_t deep) const;
+        SR_NODISCARD virtual std::string GenerateTab(int32_t deep) const;
 
     };
 }

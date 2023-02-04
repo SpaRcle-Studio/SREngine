@@ -277,7 +277,7 @@ namespace SR_GRAPH_NS::Types {
             return;
         }
 
-        /// пока контекст ресурс жив, контекст будет существовать (если он зарегистрирован)
+        /// пока ресурс жив, контекст будет существовать (если ресурс зарегистрирован)
         pContext->Do([](RenderContext* ptr) {
             ptr->SetDirty();
         });
@@ -306,10 +306,10 @@ namespace SR_GRAPH_NS::Types {
         m_shaderCreateInfo.stages[ShaderStage::Fragment] = unit->path + "/shader.frag";
 
         switch ((m_type = unit->type)) {
-            case SRSL::ShaderType::Custom:
-            case SRSL::ShaderType::PostProcessing:
+            case SR_SRSL_NS::ShaderType::Custom:
+            case SR_SRSL_NS::ShaderType::PostProcessing:
                 break;
-            case SRSL::ShaderType::Skinned:
+            case SR_SRSL_NS::ShaderType::Skinned:
             {
                 UBOInfo uniforms = {};
                 for (const auto& [binding, size] : unit->GetUniformSizes()) {
@@ -318,13 +318,13 @@ namespace SR_GRAPH_NS::Types {
 
                 m_shaderCreateInfo.uniforms = std::move(uniforms);
 
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SkinnedMeshVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+                auto&& vertexInfo = Vertices::GetVertexInfo(Vertices::VertexType::SkinnedMeshVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(vertexInfo.m_descriptions);
+                m_shaderCreateInfo.vertexAttributes = std::move(vertexInfo.m_attributes);
 
                 break;
             }
-            case SRSL::ShaderType::Spatial: {
+            case SR_SRSL_NS::ShaderType::Spatial: {
                 UBOInfo uniforms = {};
                 for (const auto& [binding, size] : unit->GetUniformSizes()) {
                     uniforms.emplace_back(std::pair(binding, size));
@@ -334,44 +334,44 @@ namespace SR_GRAPH_NS::Types {
 
                 SR_FALLTHROUGH;
             }
-            case SRSL::ShaderType::SpatialCustom: {
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::StaticMeshVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+            case SR_SRSL_NS::ShaderType::SpatialCustom: {
+                auto&& vertexInfo = Vertices::GetVertexInfo(Vertices::VertexType::StaticMeshVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(vertexInfo.m_descriptions);
+                m_shaderCreateInfo.vertexAttributes = std::move(vertexInfo.m_attributes);
                 break;
             }
-            case SRSL::ShaderType::Simple:
-            case SRSL::ShaderType::TextUI:
-            case SRSL::ShaderType::Text:
-            case SRSL::ShaderType::Line:
-            case SRSL::ShaderType::Skybox: {
+            case SR_SRSL_NS::ShaderType::Simple:
+            case SR_SRSL_NS::ShaderType::TextUI:
+            case SR_SRSL_NS::ShaderType::Text:
+            case SR_SRSL_NS::ShaderType::Line:
+            case SR_SRSL_NS::ShaderType::Skybox: {
                 UBOInfo uniforms = { };
                 for (const auto& [binding, size] : unit->GetUniformSizes()) {
                     uniforms.emplace_back(std::pair(binding, size));
                 }
                 m_shaderCreateInfo.uniforms = std::move(uniforms);
 
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SimpleVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+                auto&& vertexInfo = Vertices::GetVertexInfo(Vertices::VertexType::SimpleVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(vertexInfo.m_descriptions);
+                m_shaderCreateInfo.vertexAttributes = std::move(vertexInfo.m_attributes);
 
                 break;
             }
-            case SRSL::ShaderType::Canvas: {
+            case SR_SRSL_NS::ShaderType::Canvas: {
                 UBOInfo uniforms = { };
                 for (const auto&[binding, size] : unit->GetUniformSizes()) {
                     uniforms.emplace_back(std::pair(binding, size));
                 }
                 m_shaderCreateInfo.uniforms = std::move(uniforms);
 
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::UIVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
+                auto&& vertexInfo = Vertices::GetVertexInfo(Vertices::VertexType::UIVertex);
+                m_shaderCreateInfo.vertexDescriptions = std::move(vertexInfo.m_descriptions);
+                m_shaderCreateInfo.vertexAttributes = std::move(vertexInfo.m_attributes);
 
                 break;
             }
-            case SRSL::ShaderType::Particles:
-            case SRSL::ShaderType::Unknown:
+            case SR_SRSL_NS::ShaderType::Particles:
+            case SR_SRSL_NS::ShaderType::Unknown:
             default:
                 SRHalt("Shader::Load() : unknown shader type!");
                 break;
@@ -423,7 +423,7 @@ namespace SR_GRAPH_NS::Types {
         return m_shaderCreateInfo.blendEnabled;
     }
 
-    SRSL::ShaderType Shader::GetType() const noexcept {
+    SR_SRSL_NS::ShaderType Shader::GetType() const noexcept {
         return m_type;
     }
 }

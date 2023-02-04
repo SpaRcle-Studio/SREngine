@@ -20,12 +20,8 @@ namespace SR_SRSL_NS {
 
         void Concat(const SRSLUseStack::Ptr& pOther);
 
-        struct VariableUsage {
-            uint32_t usages = 0;
-        };
-
         std::map<std::string, SRSLUseStack::Ptr> functions;
-        std::map<std::string, VariableUsage> variables;
+        std::set<std::string> variables;
     };
 
     class SRSLRefAnalyzer : public SR_UTILS_NS::Singleton<SRSLRefAnalyzer> {

@@ -77,6 +77,18 @@ namespace SR_SRSL_NS {
         return code;
     }
 
+    SRSLFunction *SRSLLexicalTree::FindFunction(const std::string &name) const {
+        for (auto&& pUnit : lexicalTree) {
+            if (auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit)) {
+                if (pFunction->pName->token == name) {
+                    return pFunction;
+                }
+            }
+        }
+
+        return nullptr;
+    }
+
     std::string SRSLVariable::ToString(uint32_t deep) const {
         std::string code;
 

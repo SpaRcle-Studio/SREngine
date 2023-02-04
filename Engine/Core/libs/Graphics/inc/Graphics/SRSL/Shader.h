@@ -6,6 +6,9 @@
 #define SRENGINE_SRSL_SHADER_H
 
 #include <Graphics/SRSL/RefAnalyzer.h>
+#include <Graphics/SRSL/ShaderType.h>
+#include <Graphics/Types/Vertices.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_SRSL_NS {
     SR_ENUM_NS_CLASS_T(ShaderLanguage, uint8_t,
@@ -43,6 +46,8 @@ namespace SR_SRSL_NS {
 
     public:
         SR_NODISCARD bool IsCacheActual() const;
+        SR_NODISCARD Vertices::VertexType GetVertexType() const;
+        SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const;
         SR_NODISCARD std::string ToString(ShaderLanguage shaderLanguage) const;
         SR_NODISCARD const SRSLAnalyzedTree::Ptr GetAnalyzedTree() const;
 
@@ -52,6 +57,8 @@ namespace SR_SRSL_NS {
     private:
         SR_UTILS_NS::Path m_path;
 
+        ShaderType m_type = ShaderType::Unknown;
+        SRShaderCreateInfo m_createInfo;
         SRSLAnalyzedTree::Ptr m_analyzedTree;
         SRSLUseStack::Ptr m_useStack;
         UniformBlocks m_uniformBlocks;

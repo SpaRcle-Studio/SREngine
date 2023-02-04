@@ -1,10 +1,13 @@
-a.b;
-a[434][6] = !b * 134 + 45;
-a[434][6] = ++(b * 134 + 45);
+uuu.yyy;
+a[434][6] = !p * 134 + 45;
+a[434][6] = ++(kernel * 134 + 45);
 a[434][6] == b * 134 + 45;
-a[434][6].aboba(2, 4, 5);
+bb[434][6].aboba(2, 4, 5);
 
 void call1() {
+    a = +j;
+    a = 1;
+    b[2][4][g] = u[y];
     void();
 }
 
@@ -33,7 +36,7 @@ void function([[decorator(23)]] int a, vec3 gfeg = 45, bool d) {
 [[numThreads(2, 4, 8)]] void compute() {
 }
 
-void function(int[2] a = 234 * 2345, int b, int c) {
+void function(int[2][345][676767] a = 234 * 2345, int b, int c) {
     int a = 0;
     int a = 0;
     int a = 0;

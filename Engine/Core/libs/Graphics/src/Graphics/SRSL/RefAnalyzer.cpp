@@ -6,9 +6,8 @@
 
 namespace SR_SRSL_NS {
     void SRSLUseStack::Concat(const SRSLUseStack::Ptr& pOther) {
-        for (auto&& [name, variable] : pOther->variables) {
-            VariableUsage& usage = variables[name];
-            usage.usages += variable.usages;
+        for (auto&& name : pOther->variables) {
+            variables.insert(name);
         }
 
         for (auto&& [name, function] : pOther->functions) {
@@ -23,8 +22,8 @@ namespace SR_SRSL_NS {
     std::string SRSLUseStack::ToString(int32_t deep) const {
         std::string str;
 
-        for (auto&& [name, variable] : variables) {
-            str += std::string(SR_MAX(0, deep * 4), ' ') + "var [Usages: " + std::to_string(variable.usages) + "] is \"" + name + "\n";
+        for (auto&& name : variables) {
+            str += std::string(SR_MAX(0, deep * 4), ' ') + "var is \"" + name + "\"\n";
         }
 
         for (auto&& [name, function] : functions) {
@@ -77,7 +76,8 @@ namespace SR_SRSL_NS {
                 AnalyzeArrayExpression(pUseStack, stack, pExpr->args[0]);
             }
             else {
-                ++pUseStack->variables[pExpr->args[0]->token].usages;
+                SRAssert(!pExpr->args[0]->token.empty());
+                pUseStack->variables.insert(pExpr->args[0]->token);
             }
             return AnalyzeExpression(pUseStack, stack, pExpr->args[1]);
         }
@@ -111,6 +111,10 @@ namespace SR_SRSL_NS {
             }
 
             return;
+        }
+
+        if (IsIdentifier(pExpr->token) && !pExpr->token.empty()) {
+            pUseStack->variables.insert(pExpr->token);
         }
 
         for (auto&& pSubExpr : pExpr->args) {
@@ -153,7 +157,8 @@ namespace SR_SRSL_NS {
         return nullptr;
     }
 
-    void SRSLRefAnalyzer::AnalyzeArrayExpression(SRSLUseStack::Ptr &pUseStack, std::list<std::string> &stack, SRSLExpr *pExpr) {
-
+    void SRSLRefAnalyzer::AnalyzeArrayExpression(SRSLUseStack::Ptr& pUseStack, std::list<std::string> &stack, SRSLExpr* pExpr) {
+        AnalyzeExpression(pUseStack, stack, pExpr->args[0]);
+        AnalyzeExpression(pUseStack, stack, pExpr->args[1]);
     }
 }

@@ -52,7 +52,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
         SR_NODISCARD bool IsBlendEnabled() const;
-        SR_NODISCARD SRSL::ShaderType GetType() const noexcept;
+        SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
 
     public:
         template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
@@ -107,7 +107,7 @@ namespace SR_GTYPES_NS {
         ShaderSamplers         m_samplers             = ShaderSamplers();
         ShaderProperties       m_properties           = ShaderProperties();
 
-        SRSL::ShaderType       m_type                 = SRSL::ShaderType::Unknown;
+        SR_SRSL_NS::ShaderType m_type                 = SR_SRSL_NS::ShaderType::Unknown;
 
     };
 }
