@@ -77,8 +77,13 @@ namespace SR_SRSL_NS {
                 }
             }
             else {
-                auto&& pRightExpr = ParseBinaryExpression(priority);
-                pLeftExpr = new SRSLExpr(std::move(operation), pLeftExpr, pRightExpr);
+                if (InBounds()) {
+                    auto &&pRightExpr = ParseBinaryExpression(priority);
+                    pLeftExpr = new SRSLExpr(std::move(operation), pLeftExpr, pRightExpr);
+                }
+                else {
+                    return pLeftExpr;
+                }
             }
 
             if (!InBounds()) {
@@ -137,7 +142,7 @@ namespace SR_SRSL_NS {
         retryArray:
             if (auto&& pLexem = GetCurrentLexem(); pLexem && pLexem->kind == LexemKind::OpeningSquareBracket) {
                 ++m_currentLexem;
-                auto&& pExpr = ParseBinaryExpression(0);
+                auto&& pExpr = ParseBinaryExpression(30 /** = */);
                 pBasicExpr = new SRSLExpr("[", pBasicExpr, pExpr);
                 goto retryArray;
             }

@@ -236,4 +236,12 @@ namespace SR_SRSL_NS {
         }
         return std::string(deep * 3, ' ');
     }
+
+    std::string GLSLCodeGenerator::GenerateUniformBlocks(ShaderStage stage) const {
+        return std::string();
+    }
+
+    std::string GLSLCodeGenerator::GenerateSamplers(ShaderStage stage) const {
+        return std::string();
+    }
 }
