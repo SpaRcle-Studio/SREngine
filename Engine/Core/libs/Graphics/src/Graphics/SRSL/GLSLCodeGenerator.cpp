@@ -133,6 +133,11 @@ namespace SR_SRSL_NS {
             ++location;
         }
 
+        if (std::find(vertexInfo.m_names.begin(), vertexInfo.m_names.end(), "UV") == vertexInfo.m_names.end()) {
+            code += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location);
+            ++location;
+        }
+
         SR_UNUSED_VARIABLE(location);
 
         return code;
@@ -170,7 +175,7 @@ namespace SR_SRSL_NS {
         }
 
         if (pFunction->pName) {
-            if (SR_SRSL_ENTRY_POINTS.count(pFunction->GetName()) == 1) {
+            if (IsShaderEntryPoint(pFunction->GetName())) {
                 code += "main";
             }
             else {

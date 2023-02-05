@@ -78,10 +78,9 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    SRSLUseStack::Ptr SRSLRefAnalyzer::Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree, const EntryPoints& entryPoints) {
+    SRSLUseStack::Ptr SRSLRefAnalyzer::Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
         SR_GLOBAL_LOCK
         m_analyzedTree = pAnalyzedTree;
-        m_entryPoints = entryPoints;
         std::list<std::string> stack;
         return AnalyzeTree(stack, pAnalyzedTree->pLexicalTree);
     }
@@ -96,7 +95,7 @@ namespace SR_SRSL_NS {
                 AnalyzeExpression(pUseStack, stack, pVariable->pExpr);
             }
             else if (auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit)) {
-                if (m_entryPoints.count(pFunction->GetName()) == 1) {
+                if (IsShaderEntryPoint(pFunction->GetName())) {
                     AnalyzeEntryPoint(pUseStack, stack, pFunction);
                 }
             }

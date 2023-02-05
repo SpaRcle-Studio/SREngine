@@ -51,22 +51,7 @@ namespace SR_SRSL_NS {
     }
 
     std::string SRSLShader::ToString(ShaderLanguage shaderLanguage) const {
-        ISRSLCodeGenerator::SRSLCodeGenRes codeGenRes;
-
-        switch (shaderLanguage) {
-            case ShaderLanguage::PseudoCode:
-                codeGenRes = SRSLPseudoCodeGenerator::Instance().GenerateStages(this);
-                break;
-            case ShaderLanguage::GLSL:
-                codeGenRes = GLSLCodeGenerator::Instance().GenerateStages(this);
-                break;
-            case ShaderLanguage::HLSL:
-            case ShaderLanguage::Metal:
-            default:
-                return std::string("SRSLShader::ToString() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToString(shaderLanguage));
-        }
-
-        auto&& [result, stages] = codeGenRes;
+        auto&& [result, stages] = GenerateStages(shaderLanguage);
 
         if (result.code != SRSLReturnCode::Success) {
             return "SRSLShader::ToString() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position);
@@ -90,7 +75,7 @@ namespace SR_SRSL_NS {
     }
 
     bool SRSLShader::Prepare() {
-        m_useStack = SRSLRefAnalyzer::Instance().Analyze(m_analyzedTree, SR_SRSL_ENTRY_POINTS);
+        m_useStack = SRSLRefAnalyzer::Instance().Analyze(m_analyzedTree);
         if (!m_useStack) {
             SR_ERROR("SRSLShader::Prepare() : failed to analyze shader refs!");
             return false;
@@ -108,6 +93,11 @@ namespace SR_SRSL_NS {
 
         if (!PrepareSamplers()) {
             SR_ERROR("SRSLShader::Prepare() : failed to prepare shader samplers!");
+            return false;
+        }
+
+        if (!PrepareStages()) {
+            SR_ERROR("SRSLShader::Prepare() : failed to prepare shader stages!");
             return false;
         }
 
@@ -198,7 +188,7 @@ namespace SR_SRSL_NS {
                 continue;
             }
 
-            if (pVariable->GetType().find("sampler") != std::string::npos) {
+            if (SR_SRSL_NS::IsSampler(pVariable->GetType())) {
                 continue;
             }
 
@@ -233,7 +223,7 @@ namespace SR_SRSL_NS {
                 continue;
             }
 
-            if (pVariable->GetType().find("sampler") == std::string::npos) {
+            if (!SR_SRSL_NS::IsSampler(pVariable->GetType())) {
                 continue;
             }
 
@@ -248,5 +238,63 @@ namespace SR_SRSL_NS {
         }
 
         return true;
+    }
+
+    bool SRSLShader::Export(ShaderLanguage shaderLanguage) const {
+        auto&& [result, stages] = GenerateStages(shaderLanguage);
+
+        if (result.code != SRSLReturnCode::Success) {
+            SR_ERROR("SRSLShader::Export() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position));
+            return false;
+        }
+
+        for (auto&& [stage, code] : stages) {
+            if (m_createInfo.stages.count(stage) == 0) {
+                SRHalt("Unknown stage!");
+                return false;
+            }
+
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_createInfo.stages.at(stage));
+
+            if (!path.Create() || !SR_UTILS_NS::FileSystem::WriteToFile(path, code)) {
+                SR_ERROR("SRSLShader::Export() : failed to write file!\n\tPath: " + path.ToString());
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool SRSLShader::PrepareStages() {
+        for (auto&& [stage, entryPoint] : SR_SRSL_ENTRY_POINTS) {
+            if (!m_analyzedTree->pLexicalTree->FindFunction(entryPoint)) {
+                continue;
+            }
+
+            m_createInfo.stages[stage] = m_path.ToString() + "/shader." + SR_SRSL_STAGE_EXTENSIONS.at(stage);
+        }
+
+        return true;
+    }
+
+    ISRSLCodeGenerator::SRSLCodeGenRes SRSLShader::GenerateStages(ShaderLanguage shaderLanguage) const {
+        ISRSLCodeGenerator::SRSLCodeGenRes codeGenRes;
+
+        switch (shaderLanguage) {
+            case ShaderLanguage::PseudoCode:
+                codeGenRes = SRSLPseudoCodeGenerator::Instance().GenerateStages(this);
+                break;
+            case ShaderLanguage::GLSL:
+                codeGenRes = GLSLCodeGenerator::Instance().GenerateStages(this);
+                break;
+            case ShaderLanguage::HLSL:
+            case ShaderLanguage::Metal:
+            default:
+                SR_ERROR("SRSLShader::ToString() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToString(shaderLanguage));
+                codeGenRes.first = SRSLReturnCode::UnknownShaderLanguage;
+                return codeGenRes;
+        }
+
+        return codeGenRes;
     }
 }

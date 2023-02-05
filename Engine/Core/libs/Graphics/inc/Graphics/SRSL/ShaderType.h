@@ -38,6 +38,53 @@ namespace SR_SRSL_NS {
         SRSL_VERTEX_ATTRIBUTE_TANGENT = 1 << 3,
         SRSL_VERTEX_ATTRIBUTE_BITANGENT = 1 << 4,
     };
+
+    SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_ENTRY_POINTS = {
+            { ShaderStage::Vertex, "vertex"     },
+            { ShaderStage::Fragment, "fragment" },
+            { ShaderStage::Compute, "compute"   },
+    };
+
+    SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_STAGE_EXTENSIONS = {
+            { ShaderStage::Vertex, "vert"       },
+            { ShaderStage::Fragment, "frag"     },
+            { ShaderStage::Compute, "comp"      },
+    };
+
+    SR_INLINE_STATIC bool IsShaderEntryPoint(const std::string& name) {
+        for (auto&& [stage, entryPoint] : SR_SRSL_ENTRY_POINTS) {
+            if (entryPoint == name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    SR_INLINE_STATIC bool IsSampler(const std::string& type) {
+        return type.find("ampler") != std::string::npos;
+    }
+
+    SR_INLINE_STATIC uint64_t GetTypeSize(const std::string& type) {
+        if (IsSampler(type)) {
+            SRHalt("Samplers have not size!");
+            return 0;
+        }
+
+        static std::map<std::string, uint64_t> typeSizes = {
+            { "float", 4 }, { "int", 4 },
+            { "vec2", 8 }, { "ivec2", 8 },
+            { "vec3", 12 }, { "ivec3", 12 },
+            { "vec4", 16 }, { "ivec4", 16 },
+            { "mat2", 4 * 2 * 2 }, { "mat3", 4 * 3 * 3 }, { "mat4", 4 * 4 * 4 },
+        };
+
+        if (auto&& pIt = typeSizes.find(type); pIt != typeSizes.end()) {
+            return pIt->second;
+        }
+
+        return 0;
+    }
 }
 
 #endif //SRENGINE_SRSL_SHADERTYPE_H

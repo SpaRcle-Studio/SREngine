@@ -1,5 +1,10 @@
 ShaderType Skinned;
 
+(VERTEX).xyz;
+VERTEX[1.0 + 15.23].x;
+(VERTEX[1.0 + 15.23]).x;
+VERTEX = (VERTEX).xyz;
+VERTEX = VERTEX.xyz;
 VERTEX[1 + 1][2 + a[2][a[4]]];
 VERTEX[1 + 1][2 + 2];
 VERTEX[((1 + 1))][(2 + 2) * 2 - 2];
@@ -9,3 +14,4 @@ VERTEX += VERTEX.xyz;
 VERTEX += VERTEX.xyz.aaa;
 VERTEX += VERTEX.xyz[2][3 + 4].aaa;
 VERTEX.x + VERTEX.y * 2;
+VERTEX[2 + 5].x += VERTEX.y * 2;

@@ -6,6 +6,7 @@
 #define SRENGINE_SRSL_SHADER_H
 
 #include <Graphics/SRSL/RefAnalyzer.h>
+#include <Graphics/SRSL/ICodeGenerator.h>
 #include <Graphics/SRSL/ShaderType.h>
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
@@ -32,10 +33,6 @@ namespace SR_SRSL_NS {
         std::vector<Field> fields;
     };
 
-    SR_INLINE_STATIC const std::set<std::string> SR_SRSL_ENTRY_POINTS = {
-        "vertex", "fragment", "compute"
-    };
-
     /** Это не шейдер в привычном понимании, это набор всех данных для генерирования любого
      * шейдерного кода и для последующей его экспортации. */
     class SRSLShader : public SR_UTILS_NS::NonCopyable {
@@ -49,20 +46,26 @@ namespace SR_SRSL_NS {
         SR_NODISCARD static SRSLShader::Ptr Load(SR_UTILS_NS::Path path);
 
     public:
+        SR_NODISCARD std::string ToString(ShaderLanguage shaderLanguage) const;
+        SR_NODISCARD bool Export(ShaderLanguage shaderLanguage) const;
+
         SR_NODISCARD bool IsCacheActual() const;
+
         SR_NODISCARD Vertices::VertexType GetVertexType() const;
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const;
-        SR_NODISCARD std::string ToString(ShaderLanguage shaderLanguage) const;
         SR_NODISCARD const SRSLAnalyzedTree::Ptr GetAnalyzedTree() const;
         SR_NODISCARD const SRSLUseStack::Ptr GetUseStack() const;
         SR_NODISCARD const UniformBlocks& GetUniformBlocks() const { return m_uniformBlocks; }
         SR_NODISCARD const SRSLSamplers& GetSamplers() const { return m_samplers; }
 
     private:
+        SR_NODISCARD ISRSLCodeGenerator::SRSLCodeGenRes GenerateStages(ShaderLanguage shaderLanguage) const;
+
         bool Prepare();
         bool PrepareSettings();
         bool PrepareUniformBlocks();
         bool PrepareSamplers();
+        bool PrepareStages();
 
     private:
         SR_UTILS_NS::Path m_path;

@@ -200,6 +200,7 @@ namespace SR_SRSL_NS {
 
         }
 
+        else if (operation == ".") return 25;
         else if (operation == "=") return 30;
 
         else if (operation == "~" && prefix) return 35;

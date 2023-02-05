@@ -26,9 +26,8 @@ namespace SR_SRSL_NS {
 
     class SRSLRefAnalyzer : public SR_UTILS_NS::Singleton<SRSLRefAnalyzer> {
         friend class SR_UTILS_NS::Singleton<SRSLRefAnalyzer>;
-        using EntryPoints = std::set<std::string>;
     public:
-        SR_NODISCARD SRSLUseStack::Ptr Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree, const EntryPoints& entryPoints);
+        SR_NODISCARD SRSLUseStack::Ptr Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
 
     private:
         SR_NODISCARD SRSLFunction* FindFunction(const std::string& name) const;
@@ -42,7 +41,6 @@ namespace SR_SRSL_NS {
 
     private:
         SRSLAnalyzedTree::Ptr m_analyzedTree;
-        EntryPoints m_entryPoints;
 
     };
 }
