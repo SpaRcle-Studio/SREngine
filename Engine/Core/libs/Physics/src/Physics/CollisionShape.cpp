@@ -55,7 +55,6 @@ namespace SR_PTYPES_NS {
     void CollisionShape::SetHeight(float_t height) {
         m_bounds.y = height;
         UpdateDebugShape();
-        UpdateShape();
         UpdateMatrix();
     }
 
@@ -69,14 +68,12 @@ namespace SR_PTYPES_NS {
         }
 
         UpdateDebugShape();
-        UpdateShape();
         UpdateMatrix();
     }
 
     void CollisionShape::SetSize(const SR_MATH_NS::FVector3& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, size.y, size.z);
         UpdateDebugShape();
-        UpdateShape();
         UpdateMatrix();
     }
 
@@ -118,7 +115,6 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetScale(const SR_MATH_NS::FVector3 &scale) {
         m_scale = scale;
-        UpdateShape();
     }
 
     SR_MATH_NS::FVector3 CollisionShape::CalculateLocalInertia(float_t mass) const {
