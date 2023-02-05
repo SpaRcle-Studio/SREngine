@@ -41,3 +41,17 @@
   * [EvoScript](https://github.com/Monika0000/EvoScript)
   * [EvoVulkan](https://github.com/Monika0000/EvoVulkan)
   * Assimp
+  
+  ## Features
+  * SpaRcle Shader Language (SRSL)
+  * Chunk system 
+  * Render passes
+  * Custom framebuffers
+  * C++ scripting system
+  * Animations 
+  * Physics
+  * Font renderer
+  * Vulkan pipeline
+  * Multi-cameras renderer 
+  * Geometry loader
+  * Texture loader
