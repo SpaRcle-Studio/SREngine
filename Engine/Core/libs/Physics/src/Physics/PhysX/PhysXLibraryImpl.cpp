@@ -20,7 +20,7 @@ namespace SR_PHYSICS_NS {
         }
 
         m_pvd = PxCreatePvd(*m_foundation);
-        m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 10);
+        m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
         m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
 
         m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
