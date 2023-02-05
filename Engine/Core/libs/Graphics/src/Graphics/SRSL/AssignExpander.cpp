@@ -22,7 +22,7 @@ namespace SR_SRSL_NS {
     }
 
     const Lexem* SRSLAssignExpander::GetLexem(int64_t offset) const {
-        if (m_currentLexem + offset < static_cast<int64_t>(m_lexems.size()) && m_currentLexem + offset > 0) {
+        if (m_currentLexem + offset < static_cast<int64_t>(m_lexems.size()) && m_currentLexem + offset >= 0) {
             return &m_lexems.at(m_currentLexem + offset);
         }
 
@@ -91,12 +91,17 @@ namespace SR_SRSL_NS {
     void SRSLAssignExpander::ExpandDouble() {
         auto&& lexems = GetLeftSide();
 
+        if (lexems.empty()) {
+            SRHalt0();
+            return;
+        }
+
         m_lexems.insert(m_lexems.begin() + m_currentLexem + 2, Lexem(GetCurrentLexem()->offset, 1, LexemKind::OpeningBracket, "("));
 
         std::swap(m_lexems[m_currentLexem], m_lexems[m_currentLexem + 1]);
         m_lexems.insert(m_lexems.begin() + m_currentLexem + 1, lexems.begin(), lexems.end());
 
-        const uint64_t semicolon = FindSemicolon() - 1;
+        const uint64_t semicolon = FindSemicolon();
         if (semicolon < m_lexems.size()) {
             m_lexems.insert(m_lexems.begin() + semicolon, Lexem(GetCurrentLexem()->offset, 1, LexemKind::ClosingBracket, ")"));
         }

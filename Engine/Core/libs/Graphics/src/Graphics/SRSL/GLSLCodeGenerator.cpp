@@ -161,7 +161,12 @@ namespace SR_SRSL_NS {
         }
 
         if (pFunction->pName) {
-            code += GenerateType(pFunction->pName, 0);
+            if (SR_SRSL_ENTRY_POINTS.count(pFunction->GetName()) == 1) {
+                code += "main";
+            }
+            else {
+                code += GenerateType(pFunction->pName, 0);
+            }
         }
 
         code += "(";

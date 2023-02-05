@@ -86,7 +86,7 @@ namespace SR_SRSL_NS {
                 }
             }
 
-            if (!InBounds()) {
+            if (!InBounds() || GetCurrentLexem()->kind == LexemKind::OpeningSquareBracket) {
                 return pLeftExpr;
             }
         }
@@ -139,12 +139,20 @@ namespace SR_SRSL_NS {
                 goto retryFnArg;
             }
 
-        retryArray:
+        retrySubExpr:
             if (auto&& pLexem = GetCurrentLexem(); pLexem && pLexem->kind == LexemKind::OpeningSquareBracket) {
                 ++m_currentLexem;
                 auto&& pExpr = ParseBinaryExpression(30 /** = */);
                 pBasicExpr = new SRSLExpr("[", pBasicExpr, pExpr);
-                goto retryArray;
+                goto retrySubExpr;
+            }
+            else if (pLexem && pLexem->kind == LexemKind::Dot) {
+                ++m_currentLexem;
+                std::string field = GetCurrentLexem()->value;
+                auto&& pExpr = new SRSLExpr(std::move(field));
+                pBasicExpr = new SRSLExpr(".", pBasicExpr, pExpr);
+                ++m_currentLexem;
+                goto retrySubExpr;
             }
 
             return pBasicExpr;
@@ -192,7 +200,6 @@ namespace SR_SRSL_NS {
 
         }
 
-        else if (operation == ".") return 25;
         else if (operation == "=") return 30;
 
         else if (operation == "~" && prefix) return 35;
@@ -234,6 +241,8 @@ namespace SR_SRSL_NS {
 
         else if (operation == "++") return 500;
         else if (operation == "--") return 500;
+
+        //else if (operation == ".") return 600;
 
         return 0;
     }

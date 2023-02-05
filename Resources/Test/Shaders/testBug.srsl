@@ -1,0 +1,11 @@
+ShaderType Skinned;
+
+VERTEX[1 + 1][2 + a[2][a[4]]];
+VERTEX[1 + 1][2 + 2];
+VERTEX[((1 + 1))][(2 + 2) * 2 - 2];
+VERTEX[1 + 1][2 + 2].x + 1;
+VERTEX += VERTEX.xyz;
+VERTEX += VERTEX.xyz;
+VERTEX += VERTEX.xyz.aaa;
+VERTEX += VERTEX.xyz[2][3 + 4].aaa;
+VERTEX.x + VERTEX.y * 2;

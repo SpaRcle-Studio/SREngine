@@ -503,6 +503,7 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLLexicalAnalyzer::ProcessIfStatement() {
-
+        SR_SAFE_DELETE_PTR(m_ifStatement);
+        m_ifStatement = new SRSLIfStatement();
     }
 }

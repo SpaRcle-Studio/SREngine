@@ -1,0 +1,14 @@
+ShaderType Skinned;
+
+void vertex() {
+    a[1 + 2][3 + 4].xyz += w[3 + 3][33 + 33].xxx;
+    //if (VERTEX.x >= VERTEX.y * 2) {
+    //    int a = 0;
+    //}
+    //else if (a + b > c) {
+    //    int b = 0;
+    //}
+    //else {
+    //    int c = 0;
+    //}
+}
