@@ -71,7 +71,7 @@ namespace SR_PTYPES_NS {
                 break;
             case ShapeType::Capsule3D: {
                 auto&& maxXZ = SR_MAX(GetScale().x, GetScale().z);
-                m_shape->setGeometry(physx::PxCapsuleGeometry(GetRadius() * maxXZ, GetHeight() *  GetScale().y));
+                m_shape->setGeometry(physx::PxCapsuleGeometry(GetRadius() * maxXZ, GetHeight() * GetScale().y));
                 break;
             }
             case ShapeType::Sphere3D:

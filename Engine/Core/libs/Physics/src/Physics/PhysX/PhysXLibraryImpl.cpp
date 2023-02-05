@@ -19,7 +19,11 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale());
+        m_pvd = PxCreatePvd(*m_foundation);
+        m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 10);
+        m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
+
+        m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
         if (!m_physics) {
             SR_ERROR("PhysXLibraryImpl::Initialize() : failed to create physics!");
             return false;
@@ -32,6 +36,16 @@ namespace SR_PHYSICS_NS {
         if (m_physics) {
             m_physics->release();
             m_physics = nullptr;
+        }
+
+        if(m_pvd) {
+            m_pvd->release();
+            m_pvd = nullptr;
+        }
+
+        if (m_pvdTransport) {
+            m_pvdTransport->release();
+            m_pvdTransport = nullptr;
         }
 
         if (m_foundation) {

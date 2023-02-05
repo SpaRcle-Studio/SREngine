@@ -80,6 +80,14 @@ namespace SR_PHYSICS_NS {
 
         m_scene->setGravity(physx::PxVec3(0.f, -SR_EARTH_GRAVITY, 0.f));
 
+        physx::PxPvdSceneClient* pPvdClient = m_scene->getScenePvdClient();
+        
+        if (pPvdClient) {
+            pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_CONSTRAINTS, true);
+            pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_CONTACTS, true);
+            pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_SCENEQUERIES, true);
+        }
+
         return true;
     }
 
