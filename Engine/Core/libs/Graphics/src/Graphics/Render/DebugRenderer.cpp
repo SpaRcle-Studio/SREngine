@@ -21,7 +21,8 @@ namespace SR_GRAPH_NS {
                 std::bind(&DebugRenderer::DrawLine, this, _1, _2, _3, _4, _5),
                 std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/cubeWireframe.obj", _1, _2, _3, _4, _5, _6),
                 std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/planeWireframe.obj", _1, _2, _3, _4, _5, _6),
-                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6)
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6),
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/capsule_circle.obj", _1, _2, _3, _4, _5, _6)
         );
     }
 

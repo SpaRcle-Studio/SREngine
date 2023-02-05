@@ -66,6 +66,18 @@ namespace SR_PTYPES_NS {
         return true;
     }
 
+    void PhysXRigidbody3D::AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+            pRigidBody->setLinearVelocity(pRigidBody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
+        }
+    }
+
+    void PhysXRigidbody3D::AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+            pRigidBody->setAngularVelocity(pRigidBody->getAngularVelocity() + SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
+        }
+    }
+
     bool PhysXRigidbody3D::UpdateMatrix(bool force) {
         if (!Super::UpdateMatrix(force)) {
             return false;

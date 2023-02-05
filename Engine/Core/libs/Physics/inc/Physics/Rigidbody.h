@@ -59,6 +59,9 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD bool IsShapeDirty() const noexcept { return m_isShapeDirty; }
         SR_NODISCARD bool IsBodyDirty() const noexcept { return m_isBodyDirty; }
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const noexcept { return m_translation; }
+        SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
 
         RBUpdShapeRes UpdateShape();
 
@@ -82,8 +85,6 @@ namespace SR_PTYPES_NS {
         void OnDisable() override;
         void OnAttached() override;
         void OnDestroy() override;
-
-        void UpdateDebugShape();
 
         void OnMatrixDirty() override;
 
@@ -119,7 +120,6 @@ namespace SR_PTYPES_NS {
         bool m_isShapeDirty = false;
 
         float_t m_mass = 1.f;
-        uint64_t m_debugId = SR_ID_INVALID;
 
     };
 }

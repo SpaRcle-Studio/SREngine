@@ -41,6 +41,7 @@ namespace SR_PTYPES_NS {
     class Rigidbody;
     class Rigidbody2D;
     class Rigidbody3D;
+    class CollisionShape;
 }
 
 namespace SR_CORE_NS::GUI::ComponentDrawer {
@@ -59,6 +60,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_ANIMATIONS_NS::Skeleton*& pComponent, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
+    void DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index);
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
 }
 

@@ -65,10 +65,7 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
         }
 
-        /// auto&& size = pComponent->GetSize();
-        /// if (Graphics::GUI::DrawVec3Control("Size", size, 1.f, 70.f, 0.01f, index)) {
-        ///     pComponent->SetSize(size);
-        /// }
+        ComponentDrawer::DrawCollisionShape(pComponent->GetCollisionShape(), context, index);
 
         auto&& center = pComponent->GetCenter();
         if (Graphics::GUI::DrawVec3Control("Center", center, 0.f, 70.f, 0.01f, index)) {
@@ -96,6 +93,26 @@ namespace SR_CORE_NS::GUI {
 
         if (ImGui::Button("Jump")) {
             pComponent->AddGlobalVelocity(SR_MATH_NS::FVector3(0, 5, 0));
+        }
+    }
+
+    void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
+        if (!pCollisionShape){
+            return;
+        }
+
+        if (SR_PHYSICS_UTILS_NS::IsShapeHasHeight(pCollisionShape->GetType())){
+            auto&& height = pCollisionShape->GetHeight();
+            float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+            ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+            if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
+                        "Height", height, 0.f, buttonSize,
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, 0.1f, index
+            )){
+                pCollisionShape->SetHeight(height);
+            }
         }
     }
 

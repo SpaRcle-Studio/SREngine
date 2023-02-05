@@ -46,6 +46,8 @@ namespace SR_PTYPES_NS {
                 return false;
         }
 
+        SRAssert(m_shape);
+
         if (m_shape) {
             m_shape->userData = (void*)dynamic_cast<CollisionShape*>(this);
         }

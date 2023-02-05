@@ -13,7 +13,8 @@ namespace SR_UTILS_NS {
             const DrawLineCallback& lineCallback,
             const DrawCubeCallback& cubeCallback,
             const DrawPlaneCallback& drawPlaneCallback,
-            const DrawSphereCallback& drawSphereCallback)
+            const DrawSphereCallback& drawSphereCallback,
+            const DrawCapsuleCallback& drawCapsuleCallback)
     {
         SR_LOCK_GUARD
 
@@ -24,6 +25,7 @@ namespace SR_UTILS_NS {
         callbacks.drawCubeCallback = cubeCallback;
         callbacks.drawPlaneCallback = drawPlaneCallback;
         callbacks.drawSphereCallback = drawSphereCallback;
+        callbacks.drawCapsuleCallback = drawCapsuleCallback;
     }
 
     void DebugDraw::RemoveCallbacks(void* pUserIdentifier) {
@@ -353,5 +355,85 @@ namespace SR_UTILS_NS {
         return DrawSphere(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    /// ---------------------------------------------------- SPHERE DRAWING ----------------------------------------------
+    /// ---------------------------------------------------- CAPSULE DRAWING ----------------------------------------------
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+        SR_LOCK_GUARD
+
+        if (m_currentCallbacks && m_currentCallbacks->drawCapsuleCallback) {
+            return m_currentCallbacks->drawCapsuleCallback(id, pos, rot, scale, color, time);
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawCapsule(id, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawCapsule(id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawCapsule(id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos) {
+        return DrawCapsule(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawCapsule(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawCapsule(SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawCapsule(SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawCapsule(SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3 &pos) {
+        return DrawCapsule(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
+        return DrawCapsule(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
+        return DrawCapsule(id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawCapsule(SR_ID_INVALID, pos, rot, scale, color, time);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
+        return DrawCapsule(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
+        return DrawCapsule(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(const SR_MATH_NS::FVector3& pos, float_t time) {
+        return DrawCapsule(SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawCapsule(uint64_t id) {
+        return DrawCapsule(id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    }
+
+    uint64_t DebugDraw::DrawCapsule() {
+        return DrawCapsule(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    /// ---------------------------------------------------- CAPSULE DRAWING ----------------------------------------------
 }

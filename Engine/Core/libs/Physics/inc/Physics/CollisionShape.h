@@ -33,6 +33,9 @@ namespace SR_PTYPES_NS {
         virtual bool UpdateShape() { return false; }
         virtual bool UpdateMatrix() { return false; }
 
+        void UpdateDebugShape();
+        void RemoveDebugShape();
+
         void SetType(ShapeType type);
 
         void SetHeight(float_t height);
@@ -72,6 +75,7 @@ namespace SR_PTYPES_NS {
 
         ShapeType m_type = ShapeType::Unknown;
 
+        uint64_t m_debugId = SR_ID_INVALID;
     };
 }
 

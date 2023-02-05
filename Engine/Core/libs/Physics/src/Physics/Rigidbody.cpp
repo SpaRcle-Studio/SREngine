@@ -88,9 +88,8 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::OnDestroy() {
-        if (m_debugId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
-            m_debugId = SR_ID_INVALID;
+        if (m_shape) {
+            m_shape->RemoveDebugShape();
         }
 
         if (auto&& physicsScene = GetPhysicsScene()) {
@@ -125,7 +124,10 @@ namespace SR_PTYPES_NS {
                     m_rotation,
                     m_scale
             );
-            UpdateDebugShape();
+
+            if (m_shape){
+                m_shape->UpdateDebugShape();
+            }
         }
 
         SetMatrixDirty(true);
@@ -157,36 +159,14 @@ namespace SR_PTYPES_NS {
     void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
         m_center = center;
         SetMatrixDirty(true);
-        UpdateDebugShape();
+        if (m_shape){
+            m_shape->UpdateDebugShape();
+        }
     }
 
     void Rigidbody::SetMass(float_t mass) {
         m_mass = mass;
         UpdateInertia();
-    }
-
-    void Rigidbody::UpdateDebugShape() {
-        if (SR_PHYSICS_UTILS_NS::IsBox(GetType())) {
-            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    m_scale * m_shape->GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
-            );
-        }
-
-        if (SR_PHYSICS_UTILS_NS::IsSphere(GetType())) {
-            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    (m_scale * m_shape->GetSize()).Max3(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
-            );
-        }
     }
 
     SR_MATH_NS::FVector3 Rigidbody::GetCenterDirection() const noexcept {
@@ -204,12 +184,13 @@ namespace SR_PTYPES_NS {
 
         m_shape->SetType(type);
 
-        if (m_debugId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
-            m_debugId = SR_ID_INVALID;
+        if (m_shape) {
+            m_shape->RemoveDebugShape();
         }
 
-        UpdateDebugShape();
+        if (m_shape){
+            m_shape->UpdateDebugShape();
+        }
 
         SetShapeDirty(true);
 
@@ -253,9 +234,8 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        if (m_debugId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
-            m_debugId = SR_ID_INVALID;
+        if (m_shape) {
+            m_shape->RemoveDebugShape();
         }
 
         Super::OnDisable();
@@ -276,9 +256,8 @@ namespace SR_PTYPES_NS {
     }
 
     RBUpdShapeRes Rigidbody::UpdateShape() {
-        if (m_debugId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
-            m_debugId = SR_ID_INVALID;
+        if (m_shape) {
+            m_shape->RemoveDebugShape();
         }
 
         if (!m_shape->UpdateShape()) {
@@ -291,7 +270,10 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Error;
         }
 
-        UpdateDebugShape();
+        if (m_shape){
+            m_shape->UpdateDebugShape();
+        }
+
         UpdateMatrix(true);
 
         SetShapeDirty(false);
