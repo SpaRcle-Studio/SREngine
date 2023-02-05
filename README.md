@@ -41,6 +41,8 @@
   * [EvoScript](https://github.com/Monika0000/EvoScript)
   * [EvoVulkan](https://github.com/Monika0000/EvoVulkan)
   * Assimp
+  * PhysX
+  * Box2D
   
   ## Features
   * SpaRcle Shader Language (SRSL)
