@@ -171,6 +171,10 @@ namespace SR_SRSL_NS {
     SRSLIfStatement::~SRSLIfStatement() {
         SR_SAFE_DELETE_PTR(pExpr);
         SR_SAFE_DELETE_PTR(pLexicalTree);
-        SR_SAFE_DELETE_PTR(pElseStatement);
     }
+
+    SRSLIfStatement::SRSLIfStatement(bool isElse)
+        : SRSLLexicalUnit()
+        , isElse(isElse)
+    { }
 }

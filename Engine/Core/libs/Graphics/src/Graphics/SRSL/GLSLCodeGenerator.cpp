@@ -54,7 +54,9 @@ namespace SR_SRSL_NS {
             code += vertexLocations + "\n";
         }
 
-        code += GenerateUniforms(ShaderStage::Vertex) + "\n";
+        if (auto&& uniformsCode = GenerateUniforms(ShaderStage::Vertex); !uniformsCode.empty()) {
+            code += uniformsCode + "\n";
+        }
 
         if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(pStageFunction->pName->token)) {
             for (auto &&pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
@@ -68,7 +70,7 @@ namespace SR_SRSL_NS {
                     continue;
                 }
 
-                code += GenerateFunction(pFunction, 0) + "\n";
+                code += GenerateFunction(pFunction, 0) + "\n\n";
             }
         }
 
@@ -125,6 +127,13 @@ namespace SR_SRSL_NS {
             code += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n", location, type.c_str(), vertexAttribute.c_str());
             ++location;
         }
+
+        if (std::find(vertexInfo.m_names.begin(), vertexInfo.m_names.end(), "VERTEX") == vertexInfo.m_names.end()) {
+            code += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location);
+            ++location;
+        }
+
+        SR_UNUSED_VARIABLE(location);
 
         return code;
     }
@@ -237,7 +246,7 @@ namespace SR_SRSL_NS {
     }
 
     std::string GLSLCodeGenerator::GenerateLexicalTree(SRSLLexicalTree *pLexicalTree, int32_t deep) const {
-        return std::string();
+        return GenerateLexicalTree(pLexicalTree, deep, std::string(), std::string());
     }
 
     std::string GLSLCodeGenerator::GenerateLexicalTree(SRSLLexicalTree* pLexicalTree, int32_t deep, const std::string &preCode, const std::string &postCode) const {
@@ -258,13 +267,16 @@ namespace SR_SRSL_NS {
                 code += GenerateVariable(pVariable, deep + 1) + ";";
             }
             else if (auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit)) {
-                code += GenerateFunction(pFunction, deep + 1);
+                code += GenerateFunction(pFunction, deep + 1) + "\n";
             }
             else if (auto&& pTree = dynamic_cast<SRSLLexicalTree*>(pUnit)) {
                 code += GenerateLexicalTree(pTree, deep + 1);
             }
             else if (auto&& pExpression = dynamic_cast<SRSLExpr*>(pUnit)) {
                 code += GenerateExpression(pExpression, deep + 1) + ";";
+            }
+            else if (auto&& pIfStatement = dynamic_cast<SRSLIfStatement*>(pUnit)) {
+                code += GenerateIfStatement(pIfStatement, deep + 1);
             }
 
             if (i + 1 < pLexicalTree->lexicalTree.size()) {
@@ -277,11 +289,11 @@ namespace SR_SRSL_NS {
         }
 
         if (!postCode.empty()) {
-            code += "\n" + postCode ;
+            code += "\n" + postCode;
         }
 
         if (deep >= 0) {
-            code += GenerateTab(deep - 1) + "}\n";
+            code += GenerateTab(deep) + "}";
         }
 
         return code;
@@ -337,5 +349,34 @@ namespace SR_SRSL_NS {
                 SRHalt0();
                 return std::string();
         }
+    }
+
+    std::string GLSLCodeGenerator::GenerateIfStatement(SRSLIfStatement* pIfStatement, int32_t deep) const {
+        std::string code;
+
+        code += GenerateTab(deep);
+
+        if (!pIfStatement->isElse && pIfStatement->pExpr) {
+            code += "if";
+        }
+        else if (pIfStatement->isElse && pIfStatement->pExpr) {
+            code += "else if";
+        }
+        else if (pIfStatement->isElse && !pIfStatement->pExpr) {
+            code += "else";
+        }
+        else {
+            SRHalt0();
+        }
+
+        if (pIfStatement->pExpr) {
+            code += " (" + GenerateExpression(pIfStatement->pExpr, 0) + ")";
+        }
+
+        if (pIfStatement->pLexicalTree) {
+            code += " " + GenerateLexicalTree(pIfStatement->pLexicalTree, deep);
+        }
+
+        return code;
     }
 }

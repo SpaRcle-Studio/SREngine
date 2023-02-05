@@ -174,10 +174,6 @@ namespace SR_SRSL_NS {
         if (pIfStatement->pLexicalTree) {
             pUseStack->Concat(AnalyzeTree(stack, pIfStatement->pLexicalTree));
         }
-
-        if (pIfStatement->pElseStatement) {
-            AnalyzeIfStatement(pUseStack, stack, pIfStatement->pElseStatement);
-        }
     }
 
     SRSLFunction *SRSLRefAnalyzer::FindFunction(const std::string &name) const {

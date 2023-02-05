@@ -1,14 +1,59 @@
 ShaderType Skinned;
 
+void call1() {
+    a = +j;
+    a = 1;
+    b[2][4][g] = u[y];
+    void();
+}
+
+void call2() {
+    call2(call1());
+    call2(call1());
+    call2(call1(), min(), max());
+    vec4();
+}
+
+void call4() {
+    call2();
+    call2();
+}
+
+
 void vertex() {
+    call4();
     a[1 + 2][3 + 4].xyz += w[3 + 3][33 + 33].xxx;
-    //if (VERTEX.x >= VERTEX.y * 2) {
-    //    int a = 0;
-    //}
-    //else if (a + b > c) {
-    //    int b = 0;
-    //}
-    //else {
-    //    int c = 0;
-    //}
+
+    if (VERTEX.x >= VERTEX.y * 2) {
+        int a = 0;
+        if (VERTEX.x >= VERTEX.y * 2) {
+        }
+    }
+
+    if (VERTEX.x >= VERTEX.y * 2) {
+        if (VERTEX.x >= VERTEX.y * 2) {
+            if (VERTEX.x >= VERTEX.y * 2) {
+                int a = 0;
+            }
+        }
+        if (VERTEX.x >= VERTEX.y * 2) {
+            int a = 0;
+        }
+    }
+
+    if (VERTEX.x >= VERTEX.y * 2) {
+        int a = 0;
+    }
+    else if (a + b < c) {
+        int b = 0;
+    }
+    else if (a + b == -c) {
+        int b = 0;
+    }
+    else if (w[3 + 3][33 + 33].xxx) {
+        int y = 0;
+    }
+    else {
+        int c = 0;
+    }
 }

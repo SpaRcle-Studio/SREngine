@@ -209,11 +209,14 @@ namespace SR_SRSL_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     struct SRSLIfStatement : public SRSLLexicalUnit {
+        SRSLIfStatement() = default;
+        explicit SRSLIfStatement(bool isElse);
+
         ~SRSLIfStatement() override;
 
         SRSLExpr* pExpr = nullptr;
         SRSLLexicalTree* pLexicalTree = nullptr;
-        SRSLIfStatement* pElseStatement = nullptr;
+        bool isElse = false;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

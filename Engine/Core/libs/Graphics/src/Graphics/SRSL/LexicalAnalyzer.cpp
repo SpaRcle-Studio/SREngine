@@ -33,7 +33,6 @@ namespace SR_SRSL_NS {
 
         SR_SAFE_DELETE_PTR(m_decorators);
         SR_SAFE_DELETE_PTR(m_expr);
-        SR_SAFE_DELETE_PTR(m_ifStatement);
 
         m_lexems.clear();
         m_currentLexem = 0;
@@ -75,6 +74,23 @@ namespace SR_SRSL_NS {
                 }
 
                 case LexemKind::Identifier: {
+                    if (GetCurrentLexem()->value == "else") {
+                        if (auto&& pNext = GetLexem(1); pNext->value == "if") {
+                            ++m_currentLexem;
+                        }
+                        ++m_currentLexem;
+                        m_lexicalTree.back()->lexicalTree.emplace_back(new SRSLIfStatement(true));
+                        m_states.emplace_back(LXAState::IfStatement);
+                        break;
+                    }
+
+                    if (GetCurrentLexem()->value == "if") {
+                        ++m_currentLexem;
+                        m_lexicalTree.back()->lexicalTree.emplace_back(new SRSLIfStatement());
+                        m_states.emplace_back(LXAState::IfStatement);
+                        break;
+                    }
+
                     if (auto&& pUnit = TryProcessIdentifier()) {
                         if (dynamic_cast<SRSLFunction*>(pUnit)) {
                             m_states.emplace_back(LXAState::Function);
@@ -142,7 +158,18 @@ namespace SR_SRSL_NS {
                     return;
                 }
 
-                m_lexicalTree.back()->lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
+                if (!m_states.empty() && m_states.back() == LXAState::IfStatement) {
+                    auto&& pIfStatement = dynamic_cast<SRSLIfStatement*>(m_lexicalTree.back()->lexicalTree.back());
+                    if (!pIfStatement) {
+                        m_result = SRSLResult(SRSLReturnCode::InvalidIfStatement);
+                        return;
+                    }
+                    pIfStatement->pExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
+                }
+                else {
+                    m_lexicalTree.back()->lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_expr, nullptr));
+                }
+
                 return;
             }
             case LexemKind::ClosingBracket: {
@@ -151,6 +178,7 @@ namespace SR_SRSL_NS {
                     ++m_currentLexem;
                     return;
                 }
+
                 break;
             }
             case LexemKind::OpeningSquareBracket: {
@@ -159,11 +187,18 @@ namespace SR_SRSL_NS {
             }
             case LexemKind::OpeningCurlyBracket: {
                 m_lexicalTree.emplace_back(new SRSLLexicalTree());
+
                 if (!m_states.empty() && m_states.back() == LXAState::Function) {
                     m_states.back() = LXAState::FunctionBody;
                     ++m_currentLexem;
                     return;
                 }
+                else if (!m_states.empty() && m_states.back() == LXAState::IfStatement) {
+                    m_states.back() = LXAState::IfStatementBody;
+                    ++m_currentLexem;
+                    return;
+                }
+
                 return;
             }
             case LexemKind::ClosingCurlyBracket: {
@@ -180,6 +215,11 @@ namespace SR_SRSL_NS {
 
                     auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.back()->lexicalTree.back());
                     pFunction->pLexicalTree = std::move(pLexicalTree);
+                }
+                else if (!m_states.empty() && m_states.back() == LXAState::IfStatementBody) {
+                    m_states.pop_back();
+                    auto&& pIfStatement = dynamic_cast<SRSLIfStatement*>(m_lexicalTree.back()->lexicalTree.back());
+                    pIfStatement->pLexicalTree = std::move(pLexicalTree);
                 }
                 else {
                     m_lexicalTree.back()->lexicalTree.emplace_back(pLexicalTree);
@@ -413,15 +453,6 @@ namespace SR_SRSL_NS {
 
         const uint64_t currentLexem = m_currentLexem;
 
-        if (pCurrent->value == "if") {
-            ++m_currentLexem;
-            ProcessIfStatement();
-            if (IsHasErrors()) {
-                return nullptr;
-            }
-            m_lexicalTree.back()->lexicalTree.emplace_back(SR_UTILS_NS::Exchange(m_ifStatement, nullptr));
-        }
-
         if (pCurrent->value == "return") {
             ++m_currentLexem;
             ProcessExpression();
@@ -500,10 +531,5 @@ namespace SR_SRSL_NS {
         m_currentLexem = currentLexem;
 
         return nullptr;
-    }
-
-    void SRSLLexicalAnalyzer::ProcessIfStatement() {
-        SR_SAFE_DELETE_PTR(m_ifStatement);
-        m_ifStatement = new SRSLIfStatement();
     }
 }
