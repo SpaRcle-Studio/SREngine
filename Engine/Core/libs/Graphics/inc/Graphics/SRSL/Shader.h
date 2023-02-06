@@ -30,6 +30,8 @@ namespace SR_SRSL_NS {
             bool isPublic = false;
         };
 
+        uint64_t size = 0;
+
         std::vector<Field> fields;
     };
 

@@ -7,6 +7,7 @@
 #include <Graphics/SRSL/PseudoCodeGenerator.h>
 #include <Graphics/SRSL/GLSLCodeGenerator.h>
 #include <Graphics/SRSL/AssignExpander.h>
+#include <Graphics/SRSL/TypeInfo.h>
 
 namespace SR_SRSL_NS {
     SRSLShader::SRSLShader(SR_UTILS_NS::Path path, SRSLAnalyzedTree::Ptr&& pAnalyzedTree)
@@ -213,6 +214,34 @@ namespace SR_SRSL_NS {
             }
         }
 
+        /// ------------------------------------------------------------------
+
+        for (auto&& [defaultUniform, type] : SR_SRSL_DEFAULT_UNIFORMS) {
+            if (m_useStack->IsVariableUsedInEntryPoints(defaultUniform)) {
+                SRSLUniformBlock::Field field;
+
+                field.name = defaultUniform;
+                field.type = type;
+                field.isPublic = false;
+
+                auto&& uniformBlock = m_uniformBlocks["BLOCK"];
+                uniformBlock.fields.emplace_back(field);
+            }
+        }
+
+        /// ------------------------------------------------------------------
+
+        for (auto&& [name, block] : m_uniformBlocks) {
+            for (auto&& field : block.fields) {
+                field.size = SRSLTypeInfo::Instance().GetTypeSize(field.type, m_analyzedTree);
+                block.size += field.size;
+            }
+
+            std::sort(block.fields.begin(), block.fields.end(), [](const SRSLUniformBlock::Field& a, const SRSLUniformBlock::Field& b) -> bool {
+                return a.size > b.size;
+            });
+        }
+
         return true;
     }
 
@@ -234,6 +263,17 @@ namespace SR_SRSL_NS {
                 sampler.isPublic = bool(pVariable->pDecorators->Find("public"));
 
                 m_samplers[pVariable->GetName()] = sampler;
+            }
+        }
+
+        for (auto&& [defaultSampler, type] : SR_SRSL_DEFAULT_SAMPLERS) {
+            if (m_useStack->IsVariableUsedInEntryPoints(defaultSampler)) {
+                SRSLSampler sampler;
+
+                sampler.type = type;
+                sampler.isPublic = false;
+
+                m_samplers[defaultSampler] = sampler;
             }
         }
 

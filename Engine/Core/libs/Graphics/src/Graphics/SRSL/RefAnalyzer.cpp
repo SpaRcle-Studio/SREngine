@@ -45,6 +45,12 @@ namespace SR_SRSL_NS {
             }
         }
 
+        for (auto&& function : functions) {
+            if (function.second && function.second->IsVariableUsed(name)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -74,6 +80,16 @@ namespace SR_SRSL_NS {
         }
 
         return nullptr;
+    }
+
+    bool SRSLUseStack::IsVariableUsedInEntryPoints(const std::string &name) const {
+        for (auto&& [stage, entryPoint] : SR_SRSL_ENTRY_POINTS) {
+            if (auto&& pFunction = FindFunction(entryPoint); pFunction && pFunction->IsVariableUsed(name)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// ----------------------------------------------------------------------------------------------------------------

@@ -99,6 +99,13 @@ namespace SR_SRSL_NS {
         return nullptr;
     }
 
+    SRSLExpr *SRSLLexicalTree::AsExpression() const {
+        if (lexicalTree.size() != 1) {
+            return nullptr;
+        }
+        return dynamic_cast<SRSLExpr*>(lexicalTree.back());
+    }
+
     std::string SRSLVariable::ToString(uint32_t deep) const {
         std::string code;
 

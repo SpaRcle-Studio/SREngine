@@ -39,16 +39,70 @@ namespace SR_SRSL_NS {
         SRSL_VERTEX_ATTRIBUTE_BITANGENT = 1 << 4,
     };
 
-    SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_ENTRY_POINTS = {
+    SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_UNIFORMS = { /** NOLINT */
+            { "MODEL_MATRIX",                   "mat4"          },
+            { "VIEW_MATRIX",                    "mat4"          },
+            { "PROJECTION_MATRIX",              "mat4"          },
+            { "ORTHOGONAL_MATRIX",              "mat4"          },
+            { "VIEW_NO_TRANSLATE_MATRIX",       "mat4"          },
+
+            { "SKELETON_MATRICES_128",          "mat4[128]"     },
+            { "SKELETON_MATRIX_OFFSETS_128",    "mat4[128]"     },
+
+            { "HALF_SIZE_NEAR_PLANE",           "vec2"          },
+
+            { "VIEW_POSITION",                  "vec3"          },
+            { "VIEW_DIRECTION",                 "vec3"          },
+            { "LINE_START_POINT",               "vec3"          },
+            { "LINE_END_POINT",                 "vec3"          },
+
+            { "LINE_COLOR",                     "vec4"          },
+
+            { "TIME",                           "float"         },
+            { "TEXT_RECT_X",                    "float"         },
+            { "TEXT_RECT_Y",                    "float"         },
+            { "TEXT_RECT_WIDTH",                "float"         },
+            { "TEXT_RECT_HEIGHT",               "float"         },
+    };
+
+    SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_SAMPLERS = { /** NOLINT */
+            { "SKYBOX_DIFFUSE",                 "samplerCube"   },
+            { "TEXT_ATLAS_TEXTURE",             "sampler2D"     },
+    };
+
+    SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_ENTRY_POINTS = { /** NOLINT */
             { ShaderStage::Vertex, "vertex"     },
             { ShaderStage::Fragment, "fragment" },
             { ShaderStage::Compute, "compute"   },
     };
 
-    SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_STAGE_EXTENSIONS = {
+    SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_STAGE_EXTENSIONS = { /** NOLINT */
             { ShaderStage::Vertex, "vert"       },
             { ShaderStage::Fragment, "frag"     },
             { ShaderStage::Compute, "comp"      },
+    };
+
+    static std::map<std::string, uint64_t> SR_SRSL_TYPE_SIZE_TABLE = { /** NOLINT */
+            { "bool",         1         },
+
+            { "int",          4         },
+            { "float",        4         },
+
+            { "bvec2",        1 * 2     },
+            { "bvec3",        1 * 3     },
+            { "bvec4",        1 * 4     },
+
+            { "ivec2",        4 * 2     },
+            { "ivec3",        4 * 3     },
+            { "ivec4",        4 * 4     },
+
+            { "vec2",         4 * 2     },
+            { "vec3",         4 * 3     },
+            { "vec4",         4 * 4     },
+
+            { "mat2",         4 * 2 * 2 },
+            { "mat3",         4 * 3 * 3 },
+            { "mat4",         4 * 4 * 4 },
     };
 
     SR_INLINE_STATIC bool IsShaderEntryPoint(const std::string& name) {

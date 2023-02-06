@@ -19,6 +19,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD SRSLCodeGenRes GenerateStages(const SRSLShader* pShader) override;
 
     private:
+        SR_NODISCARD std::string GenerateStage(ShaderStage stage);
         SR_NODISCARD std::optional<std::string> GenerateVertexStage();
         SR_NODISCARD std::optional<std::string> GenerateFragmentStage();
 

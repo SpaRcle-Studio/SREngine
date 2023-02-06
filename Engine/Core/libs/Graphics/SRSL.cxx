@@ -10,3 +10,5 @@
 #include "../Graphics/src/Graphics/SRSL/GLSLCodeGenerator.cpp"
 #include "../Graphics/src/Graphics/SRSL/RefAnalyzer.cpp"
 #include "../Graphics/src/Graphics/SRSL/AssignExpander.cpp"
+#include "../Graphics/src/Graphics/SRSL/TypeInfo.cpp"
+#include "../Graphics/src/Graphics/SRSL/Evaluator.cpp"

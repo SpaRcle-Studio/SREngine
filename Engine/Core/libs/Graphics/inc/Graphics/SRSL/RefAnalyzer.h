@@ -11,6 +11,7 @@ namespace SR_SRSL_NS {
     struct SRSLUseStack {
         using Ptr = std::shared_ptr<SRSLUseStack>;
 
+        SR_NODISCARD bool IsVariableUsedInEntryPoints(const std::string& name) const;
         SR_NODISCARD bool IsVariableUsed(const std::string& name) const;
         SR_NODISCARD bool IsFunctionUsed(const std::string& name) const;
 

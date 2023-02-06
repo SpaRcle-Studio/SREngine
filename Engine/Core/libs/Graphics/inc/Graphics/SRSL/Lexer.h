@@ -18,6 +18,7 @@ namespace SR_SRSL_NS {
 
     public:
         SR_NODISCARD Lexems Parse(const SR_UTILS_NS::Path& path);
+        SR_NODISCARD Lexems ParseString(std::string code);
 
     private:
         SR_NODISCARD bool InBounds() const noexcept;

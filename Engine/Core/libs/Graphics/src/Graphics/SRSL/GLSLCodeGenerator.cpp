@@ -35,16 +35,14 @@ namespace SR_SRSL_NS {
         return codeGenRes;
     }
 
-    std::optional<std::string> GLSLCodeGenerator::GenerateVertexStage() {
-        auto&& pStageFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction("vertex");
-        if (!pStageFunction) {
-            return std::optional<std::string>();
-        }
-
+    std::string GLSLCodeGenerator::GenerateStage(ShaderStage stage) {
         std::string code;
 
-        code += "// [WARNING: THIS FILE WAS CREATED BY SRSL CODE GENERATION]\n\n";
-        code += "#version " + GetVersion(ShaderStage::Vertex) + "\n\n";
+        code += "/// [WARNING: THIS FILE WAS CREATED BY SRSL CODE GENERATION]\n\n";
+        code += "/// Shader stage: " + SR_UTILS_NS::EnumReflector::ToString(stage) + "\n";
+        code += "/// Shader type: " + SR_UTILS_NS::EnumReflector::ToString(m_shader->GetType()) + "\n\n";
+
+        code += "#version " + GetVersion(stage) + "\n\n";
 
         if (auto&& vertexLocations = GenerateInputVertexLocations(); !vertexLocations.empty()) {
             code += vertexLocations + "\n";
@@ -54,11 +52,12 @@ namespace SR_SRSL_NS {
             code += vertexLocations + "\n";
         }
 
-        if (auto&& uniformsCode = GenerateUniforms(ShaderStage::Vertex); !uniformsCode.empty()) {
+        if (auto&& uniformsCode = GenerateUniforms(stage); !uniformsCode.empty()) {
             code += uniformsCode + "\n";
         }
 
-        if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(pStageFunction->pName->token)) {
+        auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(stage);
+        if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(entryPoint)) {
             for (auto &&pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
                 auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit);
 
@@ -73,6 +72,18 @@ namespace SR_SRSL_NS {
                 code += GenerateFunction(pFunction, 0) + "\n\n";
             }
         }
+
+        return code;
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateVertexStage() {
+        auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(ShaderStage::Vertex);
+        auto&& pStageFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction(entryPoint);
+        if (!pStageFunction) {
+            return std::optional<std::string>();
+        }
+
+        std::string code = GenerateStage(ShaderStage::Vertex);
 
         std::string preCode;
 
@@ -89,12 +100,20 @@ namespace SR_SRSL_NS {
     }
 
     std::optional<std::string> GLSLCodeGenerator::GenerateFragmentStage() {
-        auto&& pFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction("fragment");
-        if (!pFunction) {
+        auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(ShaderStage::Fragment);
+        auto&& pStageFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction(entryPoint);
+        if (!pStageFunction) {
             return std::optional<std::string>();
         }
 
-        return std::optional<std::string>();
+        std::string code = GenerateStage(ShaderStage::Fragment);
+
+        std::string preCode;
+        std::string postCode;
+
+        code += GenerateFunction(pStageFunction, 0, preCode, postCode);
+
+        return code;
     }
 
     std::string GLSLCodeGenerator::GetVersion(ShaderStage stage) const {
@@ -314,14 +333,25 @@ namespace SR_SRSL_NS {
 
     std::string GLSLCodeGenerator::GenerateUniforms(ShaderStage stage) const {
         std::string code;
-
         uint32_t binding = 0;
+
+        /// ------------------------------------------------------------------------------------------------------------
 
         for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
             code += SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", binding, name.c_str());
 
             for (auto&& field : uniformBlock.fields) {
-                code += SR_UTILS_NS::Format("\t%s %s; // %s \n", field.type.c_str(), field.name.c_str(), field.isPublic ? "public" : "private");
+                auto&& typeName = SRSLTypeInfo::Instance().GetTypeName(field.type);
+                auto&& dimension = SRSLTypeInfo::Instance().GetDimension(field.type, nullptr);
+
+                std::string strDimension;
+
+                for (auto&& dim : dimension) {
+                    strDimension += "[" +  std::to_string(dim) + "]";
+                }
+
+                code += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
+                code += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
             }
 
             code += "};\n";
@@ -329,14 +359,31 @@ namespace SR_SRSL_NS {
             ++binding;
         }
 
-        if (!m_shader->GetSamplers().empty() && !m_shader->GetUniformBlocks().empty()) {
+        /// ------------------------------------------------------------------------------------------------------------
+
+        std::string samplersCode;
+
+        for (auto&& [name, sampler] : m_shader->GetSamplers()) {
+            auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
+            if (pFunction && pFunction->IsVariableUsed(name)) {
+                samplersCode += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // (sampler) %s\n",
+                        binding,
+                        sampler.type.c_str(),
+                        name.c_str(),
+                        sampler.isPublic ? "public" : "private"
+                );
+            }
+
+            ++binding;
+        }
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        if (!samplersCode.empty() && !m_shader->GetUniformBlocks().empty()) {
             code += "\n";
         }
 
-        for (auto&& [name, sampler] : m_shader->GetSamplers()) {
-            code += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // %s\n", binding, sampler.type.c_str(), name.c_str(), sampler.isPublic ? "public" : "private");
-            ++binding;
-        }
+        code += samplersCode;
 
         return code;
     }

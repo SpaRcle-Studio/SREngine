@@ -46,7 +46,7 @@ namespace SR_UTILS_NS {
             else if constexpr (std::is_same<T, int64_t>()) {
                 return std::stoll(str);
             }
-            else  if constexpr (std::is_same<T, uint32_t>()) {
+            else if constexpr (std::is_same<T, uint32_t>()) {
                 return static_cast<uint32_t>(std::stoi(str));
             }
             else if constexpr (std::is_same<T, uint64_t>()) {
@@ -58,11 +58,12 @@ namespace SR_UTILS_NS {
             else if constexpr (std::is_same<T, double_t>() || std::is_same<T, Math::Unit>()) {
                 return std::stod(str);
             }
-            else
+            else {
                 SR_STATIC_ASSERT("Unsupported type!");
+            }
         }
         catch (...) {
-            SRAssert(false);
+            SRHalt("Failed to cast!");
             return T();
         }
     }

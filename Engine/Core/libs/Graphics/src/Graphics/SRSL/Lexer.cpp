@@ -14,6 +14,10 @@ namespace SR_SRSL_NS {
         return ParseInternal(std::move(SR_UTILS_NS::FileSystem::ReadAllText(path.ToString())));
     }
 
+    SRSLLexer::Lexems SRSLLexer::ParseString(std::string code) {
+        return ParseInternal(std::move(code));
+    }
+
     bool SRSLLexer::InBounds() const noexcept {
         return m_offset < m_source.size();
     }
