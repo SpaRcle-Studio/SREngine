@@ -33,6 +33,11 @@ namespace SR_SRSL_NS {
                 return nullptr;
             }
 
+            if (minPriority != 0 && operation == ".") {
+                m_currentLexem = currentLexem;
+                return pLeftExpr;
+            }
+
             if (operation == "]" || operation == ",") {
                 return pLeftExpr;
             }
@@ -200,7 +205,8 @@ namespace SR_SRSL_NS {
 
         }
 
-        else if (operation == ".") return 25;
+        //else if (operation == ".") return 25;
+
         else if (operation == "=") return 30;
 
         else if (operation == "~" && prefix) return 35;
@@ -243,7 +249,7 @@ namespace SR_SRSL_NS {
         else if (operation == "++") return 500;
         else if (operation == "--") return 500;
 
-        //else if (operation == ".") return 600;
+        else if (operation == ".") return 600;
 
         return 0;
     }

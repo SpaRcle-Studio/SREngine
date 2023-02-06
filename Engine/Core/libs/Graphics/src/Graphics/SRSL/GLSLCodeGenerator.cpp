@@ -260,10 +260,15 @@ namespace SR_SRSL_NS {
             code += "(" + pExpr->token + GenerateExpression(pExpr->args[0], 0) + ")";
         }
         else if (pExpr->args.size() == 2 && (pExpr->token == "=" || pExpr->token == ".")) {
-            code += GenerateExpression(pExpr->args[0], 0) + pExpr->token + GenerateExpression(pExpr->args[1], 0);
+            if (pExpr->token == ".") {
+                code += GenerateExpression(pExpr->args[0], 0) + pExpr->token + GenerateExpression(pExpr->args[1], 0);
+            }
+            else {
+                code += GenerateExpression(pExpr->args[0], 0) + " " + pExpr->token + " " + GenerateExpression(pExpr->args[1], 0);
+            }
         }
         else if (pExpr->args.size() == 2) {
-            code += "(" + GenerateExpression(pExpr->args[0], 0) + pExpr->token + GenerateExpression(pExpr->args[1], 0) + ")";
+            code += "(" + GenerateExpression(pExpr->args[0], 0) + " " + pExpr->token + " " +  GenerateExpression(pExpr->args[1], 0) + ")";
         }
 
         return code;
@@ -335,12 +340,22 @@ namespace SR_SRSL_NS {
         std::string code;
         uint32_t binding = 0;
 
+        auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
+        if (!pFunction) {
+            return code;
+        }
+
         /// ------------------------------------------------------------------------------------------------------------
 
+        std::string blocksCode;
+
         for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
-            code += SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", binding, name.c_str());
+            std::string blockCode = SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", binding, name.c_str());
+            bool hasUsage = false;
 
             for (auto&& field : uniformBlock.fields) {
+                hasUsage |= pFunction->IsVariableUsed(field.name);
+
                 auto&& typeName = SRSLTypeInfo::Instance().GetTypeName(field.type);
                 auto&& dimension = SRSLTypeInfo::Instance().GetDimension(field.type, nullptr);
 
@@ -350,11 +365,15 @@ namespace SR_SRSL_NS {
                     strDimension += "[" +  std::to_string(dim) + "]";
                 }
 
-                code += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
-                code += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
+                blockCode += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
+                blockCode += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
             }
 
-            code += "};\n";
+            blockCode += "};\n";
+
+            if (hasUsage) {
+                blocksCode += blockCode;
+            }
 
             ++binding;
         }
@@ -364,8 +383,7 @@ namespace SR_SRSL_NS {
         std::string samplersCode;
 
         for (auto&& [name, sampler] : m_shader->GetSamplers()) {
-            auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
-            if (pFunction && pFunction->IsVariableUsed(name)) {
+            if (pFunction->IsVariableUsed(name)) {
                 samplersCode += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // (sampler) %s\n",
                         binding,
                         sampler.type.c_str(),
@@ -379,7 +397,9 @@ namespace SR_SRSL_NS {
 
         /// ------------------------------------------------------------------------------------------------------------
 
-        if (!samplersCode.empty() && !m_shader->GetUniformBlocks().empty()) {
+        code += blocksCode;
+
+        if (!samplersCode.empty() && !blocksCode.empty()) {
             code += "\n";
         }
 
