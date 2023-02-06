@@ -220,12 +220,12 @@ namespace SR_WORLD_NS {
         if (chunkCount == 0)
             return pMarshal;
 
-        pMarshal->Write(VERSION);
-        pMarshal->Write(chunkCount);
+        pMarshal->Write<uint16_t>(VERSION);
+        pMarshal->Write<uint64_t>(chunkCount);
 
         for (auto&& pChunkMarshal : available) {
             SRAssert(pChunkMarshal->Size() > 0);
-            pMarshal->Write(pChunkMarshal->Size());
+            pMarshal->Write<uint64_t>(pChunkMarshal->Size());
             pMarshal->Append(pChunkMarshal);
         }
 
@@ -247,7 +247,8 @@ namespace SR_WORLD_NS {
         if (path.Exists()) {
             auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);
 
-            if (marshal.Read<uint16_t>() != VERSION) {
+            const uint16_t version = marshal.Read<uint16_t>();
+            if (version != VERSION) {
                 SR_ERROR("Region::Load() : version is different!");
                 return false;
             }

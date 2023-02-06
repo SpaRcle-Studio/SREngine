@@ -35,6 +35,7 @@ namespace SR_HTYPES_NS {
 
         SR_NODISCARD uint64_t GetPosition() const noexcept { return m_pos; }
         SR_NODISCARD uint64_t Size() const noexcept { return m_size; }
+        SR_NODISCARD uint64_t GetCapacity() const noexcept { return m_capacity; }
 
         SR_NODISCARD const char* View() const noexcept { return m_data; }
 

@@ -95,11 +95,22 @@ namespace SR_HTYPES_NS {
         return LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(base64));
     }
 
-    Marshal Marshal::ReadBytes(uint64_t count) const noexcept {
-        return Marshal(Super::View(), count);
+    Marshal Marshal::ReadBytes(uint64_t count) noexcept {
+        auto&& marshal = Marshal(Super::View(), count);
+        Skip(count);
+        return marshal;
     }
 
-    Marshal::Ptr Marshal::ReadBytesPtr(uint64_t count) const noexcept {
-        return new Marshal(Super::View() + GetPosition(), count);
+    Marshal::Ptr Marshal::ReadBytesPtr(uint64_t count) noexcept {
+        if (GetPosition() + count > GetCapacity()) {
+            SRHalt("Invalid range!");
+            return nullptr;
+        }
+
+        auto&& pMarshal = new Marshal(Super::View() + GetPosition(), count);
+
+        Skip(count);
+
+        return pMarshal;
     }
 }

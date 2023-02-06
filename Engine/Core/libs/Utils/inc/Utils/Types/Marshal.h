@@ -39,8 +39,8 @@ namespace SR_HTYPES_NS {
         void Append(Marshal&& marshal);
         void Append(Marshal::Ptr& pMarshal);
 
-        SR_NODISCARD Marshal ReadBytes(uint64_t count) const noexcept;
-        SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint64_t count) const noexcept;
+        SR_NODISCARD Marshal ReadBytes(uint64_t count) noexcept;
+        SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint64_t count) noexcept;
 
         template<typename T> void Write(const T& value) {
             if constexpr (std::is_same_v<T, std::any>) {
