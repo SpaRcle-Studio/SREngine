@@ -8,8 +8,8 @@ BlendEnabled true;
 DepthWrite false;
 DepthTest true;
  
-uniform vec4 color;
-uniform sampler2D diffuse;
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
 
 void fragment() {
 	COLOR = texture(diffuse, UV) * color;
@@ -22,5 +22,5 @@ void fragment() {
 }
 
 void vertex() {
-
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

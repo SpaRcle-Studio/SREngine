@@ -5,23 +5,16 @@
 #include <Graphics/Memory/ShaderUBOBlock.h>
 
 namespace SR_GRAPH_NS::Memory {
-    void ShaderUBOBlock::Append(uint64_t hashId, ShaderVarType type, bool hidden) {
-        auto&& size = GetShaderVarSize(type);
-
-        if (size == 4) {
-            size = 4;
-        }
-
+    void ShaderUBOBlock::Append(uint64_t hashId, uint64_t size, bool hidden) {
         ++m_dataCount;
 
         auto&& offset = OffsetBlock(size);
 
         auto&& subBlock = SubBlock {
-                .hashId = hashId,
-                .type = type,
-                .size = size,
-                .offset = m_size + offset,
-                .hidden = hidden,
+            .hashId = hashId,
+            .size = size,
+            .offset = static_cast<uint64_t>(m_size + offset),
+            .hidden = hidden,
         };
 
         /// Reallocation

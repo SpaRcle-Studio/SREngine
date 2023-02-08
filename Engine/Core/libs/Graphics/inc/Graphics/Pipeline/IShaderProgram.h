@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS {
        0 - binding
        1 - ubo size
     */
-    typedef std::vector<std::pair<uint32_t, uint64_t>> UBOInfo;
+    typedef std::vector<std::pair<uint64_t, uint64_t>> UBOInfo;
 
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;

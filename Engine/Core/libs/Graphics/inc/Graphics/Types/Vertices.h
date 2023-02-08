@@ -94,8 +94,8 @@ namespace SR_GRAPH_NS::Vertices {
         static SR_FORCE_INLINE std::vector<std::string> GetNames() {
             return {
                     "VERTEX", "UV", "NORMAL", "TANGENT", "BITANGENT",
-                    "WEIGHT1", "WEIGHT2", "WEIGHT3", "WEIGHT4",
-                    "WEIGHT5", "WEIGHT6", "WEIGHT7", "WEIGHT8",
+                    "WEIGHT0", "WEIGHT1" , "WEIGHT2", "WEIGHT3",
+                    "WEIGHT4", "WEIGHT5", "WEIGHT6", "WEIGHT7",
             };
         }
 

@@ -9,9 +9,10 @@ DepthWrite true;
 DepthTest true;
 
 void fragment() {
-
+    COLOR = LINE_COLOR;
 }
 
 void vertex() {
-
+    vec3 position = float(VERTEX_INDEX == 0) * LINE_START_POINT + float(VERTEX_INDEX == 1) * LINE_END_POINT;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(position, 1.0);
 }

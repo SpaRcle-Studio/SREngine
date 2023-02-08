@@ -24,8 +24,8 @@ namespace SR_SRSL_NS {
         SR_NODISCARD std::optional<std::string> GenerateFragmentStage();
 
         SR_NODISCARD std::string GetVersion(ShaderStage stage) const;
-        SR_NODISCARD std::string GenerateInputVertexLocations() const;
-        SR_NODISCARD std::string GenerateOutputVertexLocations() const;
+        SR_NODISCARD std::string GenerateInputLocations(ShaderStage stage) const;
+        SR_NODISCARD std::string GenerateOutputLocations(ShaderStage stage) const;
         SR_NODISCARD std::string GenerateUniforms(ShaderStage stage) const;
 
         SR_NODISCARD std::string GenerateVariable(SRSLVariable* pVariable, int32_t deep) const;

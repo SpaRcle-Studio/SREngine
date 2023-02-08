@@ -8,7 +8,7 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
-uniform sampler2D image;
+[[uniform], [public]] sampler2D image;
 
 void fragment() {
     COLOR_INDEX_0 = texture(image, UV);

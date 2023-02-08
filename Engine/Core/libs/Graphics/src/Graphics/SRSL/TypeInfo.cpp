@@ -118,4 +118,12 @@ namespace SR_SRSL_NS {
 
         return pExpr->token;
     }
+
+    ShaderVarType SRSLTypeInfo::StringToType(const std::string& str) {
+        if (SR_SRSL_TYPE_STRINGS.count(str) == 1) {
+            return SR_SRSL_TYPE_STRINGS.at(str);
+        }
+
+        return ShaderVarType::Unknown;
+    }
 }

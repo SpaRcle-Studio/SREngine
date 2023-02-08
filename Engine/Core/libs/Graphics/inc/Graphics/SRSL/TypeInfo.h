@@ -7,6 +7,7 @@
 
 #include <Graphics/SRSL/LexicalTree.h>
 #include <Graphics/SRSL/ShaderType.h>
+#include <Graphics/Loaders/ShaderProperties.h>
 
 namespace SR_SRSL_NS {
     class SRSLTypeInfo : public SR_UTILS_NS::Singleton<SRSLTypeInfo> {
@@ -15,6 +16,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD std::vector<uint64_t> GetDimension(const std::string& code, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
         SR_NODISCARD std::vector<uint64_t> GetDimension(const SRSLExpr* pExpr, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
 
+        SR_NODISCARD ShaderVarType StringToType(const std::string& str);
         SR_NODISCARD std::string GetTypeName(const std::string& code);
         SR_NODISCARD std::string GetTypeName(const SRSLExpr* pExpr);
 

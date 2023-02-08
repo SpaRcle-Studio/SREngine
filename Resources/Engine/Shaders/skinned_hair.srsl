@@ -8,8 +8,8 @@ BlendEnabled true;
 DepthWrite false;
 DepthTest true;
  
-uniform vec4 color;
-uniform sampler2D diffuse;
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
 
 void fragment() {
 	COLOR = texture(diffuse, UV) * color;
@@ -32,4 +32,5 @@ void vertex() {
     boneTransform     += (SKELETON_MATRICES_128[int(WEIGHT7[0])] * SKELETON_MATRIX_OFFSETS_128[int(WEIGHT7[0])]) * WEIGHT7[1];
 
     VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

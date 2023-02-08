@@ -44,11 +44,14 @@ namespace SR_SRSL_NS {
 
         code += "#version " + GetVersion(stage) + "\n\n";
 
-        if (auto&& vertexLocations = GenerateInputVertexLocations(); !vertexLocations.empty()) {
+        /// code += "#extension GL_ARB_separate_shader_objects : enable\n";
+        /// code += "#extension GL_EXT_shader_atomic_float : enable\n\n";
+
+        if (auto&& vertexLocations = GenerateInputLocations(stage); !vertexLocations.empty()) {
             code += vertexLocations + "\n";
         }
 
-        if (auto&& vertexLocations = GenerateOutputVertexLocations(); !vertexLocations.empty()) {
+        if (auto &&vertexLocations = GenerateOutputLocations(stage); !vertexLocations.empty()) {
             code += vertexLocations + "\n";
         }
 
@@ -79,20 +82,38 @@ namespace SR_SRSL_NS {
     std::optional<std::string> GLSLCodeGenerator::GenerateVertexStage() {
         auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(ShaderStage::Vertex);
         auto&& pStageFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction(entryPoint);
+        auto&& pUseStackFunction = m_shader->GetUseStack()->FindFunction(entryPoint);
         if (!pStageFunction) {
             return std::optional<std::string>();
         }
 
         std::string code = GenerateStage(ShaderStage::Vertex);
 
+        const bool isOutPositionUsed = pUseStackFunction->IsVariableUsed("OUT_POSITION");
+
         std::string preCode;
+
+        if (isOutPositionUsed) {
+            preCode += GenerateTab(1) + "vec4 OUT_POSITION;\n";
+        }
 
         auto&& vertexInfo = Vertices::GetVertexInfo(m_shader->GetVertexType());
         for (auto&& vertexAttribute : vertexInfo.m_names) {
             preCode += SR_UTILS_NS::Format("%s%s = %s_INPUT;\n", GenerateTab(1).c_str(), vertexAttribute.c_str(), vertexAttribute.c_str());
         }
 
-        std::string postCode = GenerateTab(1) + "gl_Position = vec4(VERTEX, 1.0);\n";
+        if (m_shader->GetUseStack()->IsVariableUsedInEntryPoints("VERTEX_INDEX")) {
+            preCode += GenerateTab(1) + "VERTEX_INDEX = gl_VertexIndex;\n";
+        }
+
+        std::string postCode;
+
+        if (isOutPositionUsed) {
+            postCode += GenerateTab(1) + "gl_Position = OUT_POSITION;\n";
+        }
+        else {
+            postCode += GenerateTab(1) + "gl_Position = vec4(VERTEX, 1.0);\n";
+        }
 
         code += GenerateFunction(pStageFunction, 0, preCode, postCode);
 
@@ -102,14 +123,39 @@ namespace SR_SRSL_NS {
     std::optional<std::string> GLSLCodeGenerator::GenerateFragmentStage() {
         auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(ShaderStage::Fragment);
         auto&& pStageFunction = m_shader->GetAnalyzedTree()->pLexicalTree->FindFunction(entryPoint);
-        if (!pStageFunction) {
+        auto&& pUseStackFunction = m_shader->GetUseStack()->FindFunction(entryPoint);
+        if (!pStageFunction || !pUseStackFunction) {
             return std::optional<std::string>();
         }
 
         std::string code = GenerateStage(ShaderStage::Fragment);
 
+        uint64_t outLocation = 0;
+        for (auto&& layer : SR_SRSL_DEFAULT_OUT_LAYERS) {
+            if (layer == SR_SRSL_MAIN_OUT_LAYER || pUseStackFunction->IsVariableUsed(layer)) {
+                code += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
+            }
+        }
+
+        code += "\n";
+
+        const bool isColorUsed = pUseStackFunction->IsVariableUsed("COLOR");
+
+        if (isColorUsed) {
+            code += "vec4 COLOR;\n\n";
+        }
+
         std::string preCode;
+
+        if (pUseStackFunction->IsVariableUsed("FRAG_COORD")) {
+            preCode += GenerateTab(1) + "vec4 FRAG_COORD = gl_FragCoord;\n";
+        }
+
         std::string postCode;
+
+        if (isColorUsed) {
+            postCode += GenerateTab(1) + SR_SRSL_MAIN_OUT_LAYER + " = COLOR;\n";
+        }
 
         code += GenerateFunction(pStageFunction, 0, preCode, postCode);
 
@@ -120,40 +166,84 @@ namespace SR_SRSL_NS {
         return "450";
     }
 
-    std::string GLSLCodeGenerator::GenerateInputVertexLocations() const {
+    std::string GLSLCodeGenerator::GenerateInputLocations(ShaderStage stage) const {
         std::string code;
 
         auto&& vertexInfo = Vertices::GetVertexInfo(m_shader->GetVertexType());
+        auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
 
         uint32_t location = 0;
         for (auto&& vertexAttribute : vertexInfo.m_names) {
+            const bool isUsed = pFunction->IsVariableUsed(vertexAttribute.c_str());
             std::string type = VertexAttributeToString(vertexInfo.m_attributes[location].first);
-            code += SR_UTILS_NS::Format("layout (location = %i) in %s %s_INPUT;\n", location, type.c_str(), vertexAttribute.c_str());
+
+            if (isUsed && stage != ShaderStage::Vertex) {
+                code += SR_UTILS_NS::Format("layout (location = %i) in %s %s;\n", location, type.c_str(), vertexAttribute.c_str());
+            }
+
+            if (stage == ShaderStage::Vertex) {
+                code += SR_UTILS_NS::Format("layout (location = %i) in %s %s_INPUT;\n", location, type.c_str(), vertexAttribute.c_str());
+            }
+
             ++location;
         }
+
+        if (stage != ShaderStage::Vertex) {
+            for (auto&& [name, pVariable] : m_shader->GetShared()) {
+                if (pFunction->IsVariableUsed(name)) {
+                    auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
+                    code += SR_UTILS_NS::Format("layout (location = %i) in %s %s;\n", location, type.c_str(), name.c_str());
+                    ++location;
+                }
+            }
+
+            if (pFunction->IsVariableUsed("VERTEX_INDEX")) {
+                code += SR_UTILS_NS::Format("layout (location = %i) in int VERTEX_INDEX;\n", location);
+            }
+            ++location;
+        }
+
+        SR_UNUSED_VARIABLE(location);
 
         return code;
     }
 
-    std::string GLSLCodeGenerator::GenerateOutputVertexLocations() const {
+    std::string GLSLCodeGenerator::GenerateOutputLocations(ShaderStage stage) const {
         std::string code;
 
         auto&& vertexInfo = Vertices::GetVertexInfo(m_shader->GetVertexType());
+        auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
 
         uint32_t location = 0;
-        for (auto&& vertexAttribute : vertexInfo.m_names) {
-            std::string type = VertexAttributeToString(vertexInfo.m_attributes[location].first);
-            code += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n", location, type.c_str(), vertexAttribute.c_str());
-            ++location;
-        }
 
-        if (std::find(vertexInfo.m_names.begin(), vertexInfo.m_names.end(), "VERTEX") == vertexInfo.m_names.end()) {
-            code += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location);
-            ++location;
-        }
+        if (stage == ShaderStage::Vertex) {
+            for (auto &&vertexAttribute : vertexInfo.m_names) {
+                std::string type = VertexAttributeToString(vertexInfo.m_attributes[location].first);
+                code += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n", location, type.c_str(), vertexAttribute.c_str());
+                ++location;
+            }
 
-        if (std::find(vertexInfo.m_names.begin(), vertexInfo.m_names.end(), "UV") == vertexInfo.m_names.end()) {
-            code += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location);
+            //if (std::find(vertexInfo.m_names.begin(), vertexInfo.m_names.end(), "VERTEX") == vertexInfo.m_names.end()) {
+            //    code += SR_UTILS_NS::Format("layout (location = %i) out vec3 VERTEX;\n", location);
+            //    ++location;
+            //}
+
+            //if (std::find(vertexInfo.m_names.begin(), vertexInfo.m_names.end(), "UV") == vertexInfo.m_names.end()) {
+            //    code += SR_UTILS_NS::Format("layout (location = %i) out vec2 UV;\n", location);
+            //    ++location;
+            //}
+
+            for (auto&& [name, pVariable] : m_shader->GetShared()) {
+                if (pFunction->IsVariableUsed(name)) {
+                    auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
+                    code += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n", location, type.c_str(), name.c_str());
+                    ++location;
+                }
+            }
+
+            if (m_shader->GetUseStack()->IsVariableUsedInEntryPoints("VERTEX_INDEX")) {
+                code += SR_UTILS_NS::Format("layout (location = %i) out int VERTEX_INDEX;\n", location);
+            }
             ++location;
         }
 
@@ -307,6 +397,9 @@ namespace SR_SRSL_NS {
             else if (auto&& pIfStatement = dynamic_cast<SRSLIfStatement*>(pUnit)) {
                 code += GenerateIfStatement(pIfStatement, deep + 1);
             }
+            else if (auto&& pReturn = dynamic_cast<SRSLReturn*>(pUnit)) {
+                code += GenerateTab(deep + 1) + "return " + GenerateExpression(pReturn->pExpr, 0) + ";\n";
+            }
 
             if (i + 1 < pLexicalTree->lexicalTree.size()) {
                 code += "\n";
@@ -338,7 +431,6 @@ namespace SR_SRSL_NS {
 
     std::string GLSLCodeGenerator::GenerateUniforms(ShaderStage stage) const {
         std::string code;
-        uint32_t binding = 0;
 
         auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
         if (!pFunction) {
@@ -350,7 +442,7 @@ namespace SR_SRSL_NS {
         std::string blocksCode;
 
         for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
-            std::string blockCode = SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", binding, name.c_str());
+            std::string blockCode = SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", uniformBlock.binding, name.c_str());
             bool hasUsage = false;
 
             for (auto&& field : uniformBlock.fields) {
@@ -374,8 +466,6 @@ namespace SR_SRSL_NS {
             if (hasUsage) {
                 blocksCode += blockCode;
             }
-
-            ++binding;
         }
 
         /// ------------------------------------------------------------------------------------------------------------
@@ -385,14 +475,12 @@ namespace SR_SRSL_NS {
         for (auto&& [name, sampler] : m_shader->GetSamplers()) {
             if (pFunction->IsVariableUsed(name)) {
                 samplersCode += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // (sampler) %s\n",
-                        binding,
+                        sampler.binding,
                         sampler.type.c_str(),
                         name.c_str(),
                         sampler.isPublic ? "public" : "private"
                 );
             }
-
-            ++binding;
         }
 
         /// ------------------------------------------------------------------------------------------------------------

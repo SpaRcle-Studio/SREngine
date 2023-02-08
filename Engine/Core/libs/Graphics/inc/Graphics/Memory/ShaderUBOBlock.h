@@ -18,14 +18,13 @@ namespace SR_GRAPH_NS::Memory {
 
         struct SubBlock {
             uint64_t hashId;
-            ShaderVarType type;
-            uint32_t size;
-            uint32_t offset;
+            uint64_t size;
+            uint64_t offset;
             bool hidden;
         };
 
     public:
-        void Append(uint64_t hashId, ShaderVarType type, bool hidden);
+        void Append(uint64_t hashId, uint64_t size, bool hidden);
         void Init();
         void DeInit();
         void SR_FASTCALL SetField(uint64_t hashId, const void* data) noexcept;

@@ -9,15 +9,9 @@ DepthWrite true;
 DepthTest true;
 
 void fragment() {
-	COLOR = texture(SKYBOX_DIFFUSE, UV);
+	COLOR = texture(SKYBOX_DIFFUSE, VERTEX);
 }
 
 void vertex() {
-    // const vec3 vertices[3] = {
-    //     vec3(0, 0, 0),
-    //     vec3(0, 0, 0),
-    //     vec3(0, 0, 0)
-    // }
-
-
+    OUT_POSITION = (PROJECTION_MATRIX * VIEW_NO_TRANSLATE_MATRIX * vec4(VERTEX, 1.0)).xyww;
 }

@@ -193,7 +193,16 @@ namespace SR_SRSL_NS {
                 continue;
             }
 
+            if (auto&& pDecorator = pVariable->pDecorators->Find("shared")) {
+                m_shared[pVariable->GetName()] = pVariable;
+            }
+
             if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
+                /// не добавляем в блок переменные, которые объявили и не используем
+                if (!m_useStack->IsVariableUsedInEntryPoints(pVariable->GetName())) {
+                    continue;
+                }
+
                 std::string blockName;
 
                 if (pDecorator->args.empty()) {
@@ -241,6 +250,8 @@ namespace SR_SRSL_NS {
                 return a.size > b.size;
             });
         }
+
+        /// ------------------------------------------------------------------
 
         return true;
     }
@@ -314,6 +325,30 @@ namespace SR_SRSL_NS {
             m_createInfo.stages[stage] = m_path.ToString() + "/shader." + SR_SRSL_STAGE_EXTENSIONS.at(stage);
         }
 
+        auto&& vertexInfo = Vertices::GetVertexInfo(GetVertexType());
+        m_createInfo.vertexAttributes = vertexInfo.m_attributes;
+        m_createInfo.vertexDescriptions = vertexInfo.m_descriptions;
+
+        uint64_t binding = 0;
+
+        for (auto&& [name, block] : m_uniformBlocks) {
+            block.binding = binding;
+
+            for (auto&& field : block.fields) {
+                m_createInfo.uniforms.emplace_back(std::make_pair(
+                    binding,
+                    field.size
+                ));
+            }
+
+            ++binding;
+        }
+
+        for (auto&& [samplerName, sampler] : m_samplers) {
+            sampler.binding = binding;
+            ++binding;
+        }
+
         return true;
     }
 
@@ -336,5 +371,29 @@ namespace SR_SRSL_NS {
         }
 
         return codeGenRes;
+    }
+
+    const SRSLUniformBlock::Field* SRSLShader::FindField(const std::string& name) const {
+        for (auto&& [blockName, block] : m_uniformBlocks) {
+            for (auto&& field : block.fields) {
+                if (field.name == name) {
+                    return &field;
+                }
+            }
+        }
+
+        SR_WARN("SRSLShader::FindField() : field \"" + name + "\" not found!");
+
+        return nullptr;
+    }
+
+    const SRSLUniformBlock *SRSLShader::FindUniformBlock(const std::string &name) const {
+        for (auto&& [blockName, block] : m_uniformBlocks) {
+            if (name == blockName) {
+                return &block;
+            }
+        }
+
+        return nullptr;
     }
 }

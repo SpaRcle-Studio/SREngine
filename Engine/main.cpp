@@ -36,6 +36,10 @@
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Sprite2D.h>
+#include <Graphics/SRSL/Lexer.h>
+#include <Graphics/SRSL/LexicalAnalyzer.h>
+#include <Graphics/SRSL/PseudoCodeGenerator.h>
+#include <Graphics/SRSL/Shader.h>
 
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Texture.h>
@@ -101,6 +105,15 @@ int main(int argc, char **argv) {
     }
     else
         resourcesManager.Init(folder);
+
+    //std::cout << SR_SRSL_NS::SRSLShader::Load("Test/Shaders/callTest.srsl")->ToString(SR_SRSL_NS::ShaderLanguage::GLSL) << std::endl;
+    //std::cout << SR_SRSL_NS::SRSLShader::Load("Test/Shaders/variables.srsl")->ToString(SR_SRSL_NS::ShaderLanguage::PseudoCode) << std::endl;
+    //std::cout << SR_SRSL_NS::SRSLShader::Load("Test/Shaders/test3.srsl")->ToString(SR_SRSL_NS::ShaderLanguage::PseudoCode) << std::endl;
+    //std::cout << SR_SRSL_NS::SRSLShader::Load("Test/Shaders/functions.srsl")->ToString(SR_SRSL_NS::ShaderLanguage::PseudoCode) << std::endl;
+    //std::cout << SR_SRSL_NS::SRSLShader::Load("Test/Shaders/testBug.srsl")->ToString(SR_SRSL_NS::ShaderLanguage::PseudoCode) << std::endl;
+    //std::cout << SR_SRSL_NS::SRSLShader::Load("Test/Shaders/ifelse.srsl")->ToString(SR_SRSL_NS::ShaderLanguage::GLSL) << std::endl;
+
+    //return SR_SRSL_NS::SRSLShader::Load("Test/Shaders/test2.srsl")->Export(SR_SRSL_NS::ShaderLanguage::GLSL);
 
     Features::Instance().Reload(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
 

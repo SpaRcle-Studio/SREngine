@@ -8,10 +8,9 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
-uniform sampler2D image;
+[[uniform], [public]] sampler2D image;
 
-float LinearizeDepth()
-{
+float LinearizeDepth() {
     float n = 1.0; // camera z near
     float f = 100.0; // camera z far
     float z = texture(image, UV).x;
@@ -20,7 +19,7 @@ float LinearizeDepth()
 
 void fragment() {
     float d = LinearizeDepth();
-    COLOR_INDEX_0 = vec4(d, d, d, 1.0);
+    COLOR = vec4(d, d, d, 1.0);
 }
 
 void vertex() {
