@@ -91,15 +91,34 @@ namespace SR_SRSL_NS {
                         break;
                     }
 
+                    if (GetCurrentLexem()->value == "for") {
+                        ++m_currentLexem;
+                        m_lexicalTree.back()->lexicalTree.emplace_back(new SRSLForStatement());
+                        m_states.emplace_back(LXAState::ForStatement);
+                        break;
+                    }
+
                     if (auto&& pUnit = TryProcessIdentifier()) {
                         if (dynamic_cast<SRSLFunction*>(pUnit)) {
                             m_states.emplace_back(LXAState::Function);
                             m_lexicalTree.back()->lexicalTree.emplace_back(pUnit);
                         }
+                        else if (!m_states.empty() && m_states.back() == LXAState::ForStatementVariable) {
+                            auto&& pForStatement = dynamic_cast<SRSLForStatement*>(m_lexicalTree.back()->lexicalTree.back());
+                            auto&& pVar = dynamic_cast<SRSLVariable*>(pUnit);
+                            SRAssert(pForStatement && pVar);
+                            if (!pForStatement || !pVar) {
+                                return;
+                            }
+                            pForStatement->pVar = pVar;
+                        }
                         else if (!m_states.empty() && m_states.back() == LXAState::FunctionArgs) {
                             auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.back()->lexicalTree.back());
                             auto&& pVar = dynamic_cast<SRSLVariable*>(pUnit);
                             SRAssert(pFunction && pVar);
+                            if (!pFunction || !pVar) {
+                                return;
+                            }
                             pFunction->args.emplace_back(pVar);
                         }
                         else {
@@ -127,7 +146,42 @@ namespace SR_SRSL_NS {
                 }
 
                 case LexemKind::Assign:
-                case LexemKind::Semicolon:
+                case LexemKind::Semicolon: {
+                    if (!m_states.empty() && m_states.back() == LXAState::ForStatementVariable) {
+                        m_states.back() = LXAState::ForStatementCondition;
+                        ++m_currentLexem;
+
+                        ProcessExpression(false, true);
+
+                        auto&& pForStatement = dynamic_cast<SRSLForStatement*>(m_lexicalTree.back()->lexicalTree.back());
+                        SRAssert(pForStatement && m_expr);
+                        if (!pForStatement || !m_expr) {
+                            return;
+                        }
+
+                        pForStatement->pCondition = SR_UTILS_NS::Exchange(m_expr, nullptr);
+                        break;
+                    }
+                    else if (!m_states.empty() && m_states.back() == LXAState::ForStatementCondition) {
+                        m_states.back() = LXAState::ForStatementExpression;
+                        ++m_currentLexem;
+
+                        ProcessExpression(false, true);
+
+                        auto&& pForStatement = dynamic_cast<SRSLForStatement*>(m_lexicalTree.back()->lexicalTree.back());
+                        SRAssert(pForStatement && m_expr);
+                        if (!pForStatement || !m_expr) {
+                            return;
+                        }
+
+                        pForStatement->pExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
+
+                        ++m_currentLexem; /// )
+
+                        break;
+                    }
+                    SR_FALLTHROUGH;
+                }
                 case LexemKind::Dot:
                 case LexemKind::Comma:
                 case LexemKind::And:
@@ -146,7 +200,12 @@ namespace SR_SRSL_NS {
         switch (m_lexems[m_currentLexem].kind)
         {
             case LexemKind::OpeningBracket: {
-                if (!m_states.empty() && m_states.back() == LXAState::Function) {
+                if (!m_states.empty() && m_states.back() == LXAState::ForStatement) {
+                    m_states.back() = LXAState::ForStatementVariable;
+                    ++m_currentLexem;
+                    return;
+                }
+                else if (!m_states.empty() && m_states.back() == LXAState::Function) {
                     ++m_currentLexem;
                     m_states.back() = LXAState::FunctionArgs;
                     return;
@@ -188,7 +247,12 @@ namespace SR_SRSL_NS {
             case LexemKind::OpeningCurlyBracket: {
                 m_lexicalTree.emplace_back(new SRSLLexicalTree());
 
-                if (!m_states.empty() && m_states.back() == LXAState::Function) {
+                if (!m_states.empty() && m_states.back() == LXAState::ForStatementExpression) {
+                    m_states.back() = LXAState::ForStatementBody;
+                    ++m_currentLexem;
+                    return;
+                }
+                else if (!m_states.empty() && m_states.back() == LXAState::Function) {
                     m_states.back() = LXAState::FunctionBody;
                     ++m_currentLexem;
                     return;
@@ -220,6 +284,11 @@ namespace SR_SRSL_NS {
                     m_states.pop_back();
                     auto&& pIfStatement = dynamic_cast<SRSLIfStatement*>(m_lexicalTree.back()->lexicalTree.back());
                     pIfStatement->pLexicalTree = std::move(pLexicalTree);
+                }
+                else if (!m_states.empty() && m_states.back() == LXAState::ForStatementBody) {
+                    m_states.pop_back();
+                    auto&& pForStatement = dynamic_cast<SRSLForStatement*>(m_lexicalTree.back()->lexicalTree.back());
+                    pForStatement->pLexicalTree = std::move(pLexicalTree);
                 }
                 else {
                     m_lexicalTree.back()->lexicalTree.emplace_back(pLexicalTree);

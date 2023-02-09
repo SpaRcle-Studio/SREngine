@@ -127,13 +127,8 @@ namespace SR_SRSL_NS {
             case ShaderType::TextUI:
                 return Vertices::VertexType::SimpleVertex;
             case ShaderType::Custom:
-            case ShaderType::Raygen:
-            case ShaderType::AnyHit:
-            case ShaderType::ClosestHit:
-            case ShaderType::Miss:
             case ShaderType::Particles:
             case ShaderType::Compute:
-            case ShaderType::Intersection:
             case ShaderType::Unknown:
             default:
                 SRHalt0();
@@ -195,6 +190,10 @@ namespace SR_SRSL_NS {
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("shared")) {
                 m_shared[pVariable->GetName()] = pVariable;
+            }
+
+            if (auto&& pDecorator = pVariable->pDecorators->Find("const"); pDecorator && pVariable->pExpr) {
+                m_constants[pVariable->GetName()] = pVariable;
             }
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {

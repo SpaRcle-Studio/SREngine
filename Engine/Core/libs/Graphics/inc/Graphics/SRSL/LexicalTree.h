@@ -221,6 +221,18 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
+    struct SRSLForStatement : public SRSLLexicalUnit {
+        SRSLForStatement() = default;
+        ~SRSLForStatement() override;
+
+        SRSLVariable* pVar = nullptr;
+        SRSLExpr* pCondition = nullptr;
+        SRSLExpr* pExpr = nullptr;
+        SRSLLexicalTree* pLexicalTree = nullptr;
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
     struct SRSLLexicalTree : public SRSLLexicalUnit {
         SRSLLexicalTree() = default;
 

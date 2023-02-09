@@ -13,7 +13,8 @@ namespace SR_SRSL_NS {
     private:
         enum class LXAState {
             Decorators, Decorator, DecoratorArgs,
-            Expression, Variable, Function, FunctionArgs, FunctionBody, IfStatement, IfStatementBody
+            Expression, Variable, Function, FunctionArgs, FunctionBody, IfStatement, IfStatementBody,
+            ForStatement, ForStatementVariable, ForStatementCondition, ForStatementExpression, ForStatementBody,
         };
     public:
         SR_NODISCARD std::pair<SRSLAnalyzedTree::Ptr, SRSLResult> Analyze(std::vector<Lexem>&& lexems);

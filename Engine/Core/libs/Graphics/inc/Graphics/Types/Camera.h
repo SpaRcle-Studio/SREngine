@@ -49,6 +49,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const noexcept { return m_projection;          }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetSize() const { return m_viewportSize;             }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetViewPosition() const;
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetPosition() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3& GetPositionRef() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }

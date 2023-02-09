@@ -107,8 +107,8 @@ namespace SR_SRSL_NS {
         for (auto&& pUnit : pTree->lexicalTree) {
             /// Выражения в декораторах не учитываем, так как они не могут использовать переменные
             /// Однако стоит на будущее подумать использование в них макросов
-            if (auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit); pVariable && pVariable->pExpr) {
-                AnalyzeExpression(pUseStack, stack, pVariable->pExpr);
+            if (auto&& pVariable = dynamic_cast<SRSLVariable*>(pUnit); pVariable) {
+                AnalyzeVariable(pUseStack, stack, pVariable);
             }
             else if (auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit)) {
                 if (IsShaderEntryPoint(pFunction->GetName())) {
@@ -123,6 +123,12 @@ namespace SR_SRSL_NS {
             }
             else if (auto&& pExpr = dynamic_cast<SRSLExpr*>(pUnit)) {
                 AnalyzeExpression(pUseStack, stack, pExpr);
+            }
+            else if (auto&& pForStatement = dynamic_cast<SRSLForStatement*>(pUnit)) {
+                AnalyzeForStatement(pUseStack, stack, pForStatement);
+            }
+            else if (auto&& pReturn = dynamic_cast<SRSLReturn*>(pUnit)) {
+                AnalyzeExpression(pUseStack, stack, pReturn->pExpr);
             }
         }
 
@@ -203,6 +209,11 @@ namespace SR_SRSL_NS {
                 }
             }
             else if (auto&& pSubTree = dynamic_cast<SRSLLexicalTree*>(pUnit)) {
+                if (pSubTree == pTree) {
+                    SRHalt0();
+                    return nullptr;
+                }
+
                 if (auto&& pFoundedFunction = FindFunction(pSubTree, name)) {
                     return pFoundedFunction;
                 }
@@ -221,5 +232,37 @@ namespace SR_SRSL_NS {
         stack.emplace_back(pFunction->GetName());
         pUseStack->functions[pFunction->GetName()] = AnalyzeTree(stack, pFunction->pLexicalTree);
         stack.pop_back();
+    }
+
+    void SRSLRefAnalyzer::AnalyzeForStatement(SRSLUseStack::Ptr &pUseStack, std::list<std::string> &stack, SRSLForStatement *pForStatement) {
+        if (pForStatement->pVar) {
+            AnalyzeVariable(pUseStack, stack, pForStatement->pVar);
+        }
+
+        if (pForStatement->pCondition) {
+            AnalyzeExpression(pUseStack, stack, pForStatement->pCondition);
+        }
+
+        if (pForStatement->pExpr) {
+            AnalyzeExpression(pUseStack, stack, pForStatement->pExpr);
+        }
+
+        if (pForStatement->pLexicalTree) {
+            pUseStack->Concat(AnalyzeTree(stack, pForStatement->pLexicalTree));
+        }
+    }
+
+    void SRSLRefAnalyzer::AnalyzeVariable(SRSLUseStack::Ptr &pUseStack, std::list<std::string> &stack, SRSLVariable *pVariable) {
+        if (pVariable->pType) {
+            AnalyzeExpression(pUseStack, stack, pVariable->pType);
+        }
+
+        if (pVariable->pName) {
+            AnalyzeExpression(pUseStack, stack, pVariable->pName);
+        }
+
+        if (pVariable->pExpr) {
+            AnalyzeExpression(pUseStack, stack, pVariable->pExpr);
+        }
     }
 }

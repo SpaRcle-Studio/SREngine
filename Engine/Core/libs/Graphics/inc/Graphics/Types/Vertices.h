@@ -277,9 +277,11 @@ namespace SR_GRAPH_NS::Vertices {
                 info.m_descriptions = { UIVertex::GetDescription() };
                 info.m_names = UIVertex::GetNames();
                 break;
+            case VertexType::None:
+                break;
             default: {
-                SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + std::to_string((int) type));
-                SRAssert(false);
+                SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + SR_UTILS_NS::EnumReflector::ToString(type));
+                SRHalt0();
                 break;
             }
         }

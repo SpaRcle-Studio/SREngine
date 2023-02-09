@@ -77,7 +77,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
         void SR_FASTCALL SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept;
         void SR_FASTCALL SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
-        void SR_FASTCALL SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;
+        void SR_FASTCALL SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
         void SR_FASTCALL SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
         void SR_FASTCALL SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;

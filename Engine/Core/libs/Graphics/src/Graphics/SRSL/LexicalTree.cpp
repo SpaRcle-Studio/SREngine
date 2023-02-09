@@ -184,4 +184,11 @@ namespace SR_SRSL_NS {
         : SRSLLexicalUnit()
         , isElse(isElse)
     { }
+
+    SRSLForStatement::~SRSLForStatement() {
+        SR_SAFE_DELETE_PTR(pExpr);
+        SR_SAFE_DELETE_PTR(pCondition);
+        SR_SAFE_DELETE_PTR(pVar);
+        SR_SAFE_DELETE_PTR(pLexicalTree);
+    }
 }

@@ -22,12 +22,36 @@ namespace SR_SRSL_NS {
             return codeGenRes;
         }
 
-        if (auto&& vertexCode = GenerateVertexStage()) {
-            stages[ShaderStage::Vertex] = vertexCode.value();
+        if (auto&& code = GenerateVertexStage()) {
+            stages[ShaderStage::Vertex] = code.value();
         }
 
-        if (auto&& fragmentCode = GenerateFragmentStage()) {
-            stages[ShaderStage::Fragment] = fragmentCode.value();
+        if (auto&& code = GenerateFragmentStage()) {
+            stages[ShaderStage::Fragment] = code.value();
+        }
+
+        if (auto&& code = GenerateRayGenStage()) {
+            stages[ShaderStage::Raygen] = code.value();
+        }
+
+        if (auto&& code = GenerateRayIntersectionStage()) {
+            stages[ShaderStage::Intersection] = code.value();
+        }
+
+        if (auto&& code = GenerateRayHitClosestStage()) {
+            stages[ShaderStage::HitClosest] = code.value();
+        }
+
+        if (auto&& code = GenerateRayHitAnyStage()) {
+            stages[ShaderStage::HitAny] = code.value();
+        }
+
+        if (auto&& code = GenerateRayMissPrimaryStage()) {
+            stages[ShaderStage::MissPrimary] = code.value();
+        }
+
+        if (auto&& code = GenerateRayMissSecondaryStage()) {
+            stages[ShaderStage::MissSecondary] = code.value();
         }
 
         result = SR_UTILS_NS::Exchange(m_result, { });
@@ -35,7 +59,7 @@ namespace SR_SRSL_NS {
         return codeGenRes;
     }
 
-    std::string GLSLCodeGenerator::GenerateStage(ShaderStage stage) {
+    std::string GLSLCodeGenerator::GenerateStage(ShaderStage stage, const std::string& preCode) {
         std::string code;
 
         code += "/// [WARNING: THIS FILE WAS CREATED BY SRSL CODE GENERATION]\n\n";
@@ -58,6 +82,8 @@ namespace SR_SRSL_NS {
         if (auto&& uniformsCode = GenerateUniforms(stage); !uniformsCode.empty()) {
             code += uniformsCode + "\n";
         }
+
+        code += preCode;
 
         auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(stage);
         if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(entryPoint)) {
@@ -128,7 +154,20 @@ namespace SR_SRSL_NS {
             return std::optional<std::string>();
         }
 
-        std::string code = GenerateStage(ShaderStage::Fragment);
+        const bool isColorUsed = pUseStackFunction->IsVariableUsed("COLOR");
+        const bool isFragCoordUsed = pUseStackFunction->IsVariableUsed("FRAG_COORD");
+
+        std::string variablesCode;
+
+        if (isColorUsed) {
+            variablesCode += "vec4 COLOR;\n\n";
+        }
+
+        if (isFragCoordUsed) {
+            variablesCode += "vec4 FRAG_COORD;\n\n";
+        }
+
+        std::string code = GenerateStage(ShaderStage::Fragment, variablesCode);
 
         uint64_t outLocation = 0;
         for (auto&& layer : SR_SRSL_DEFAULT_OUT_LAYERS) {
@@ -139,16 +178,10 @@ namespace SR_SRSL_NS {
 
         code += "\n";
 
-        const bool isColorUsed = pUseStackFunction->IsVariableUsed("COLOR");
-
-        if (isColorUsed) {
-            code += "vec4 COLOR;\n\n";
-        }
-
         std::string preCode;
 
-        if (pUseStackFunction->IsVariableUsed("FRAG_COORD")) {
-            preCode += GenerateTab(1) + "vec4 FRAG_COORD = gl_FragCoord;\n";
+        if (isFragCoordUsed) {
+            preCode += GenerateTab(1) + "FRAG_COORD = gl_FragCoord;\n";
         }
 
         std::string postCode;
@@ -171,6 +204,13 @@ namespace SR_SRSL_NS {
 
         auto&& vertexInfo = Vertices::GetVertexInfo(m_shader->GetVertexType());
         auto&& pFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(stage));
+
+        for (auto&& [name, pVariable] : m_shader->GetConstants()) {
+            if (pFunction->IsVariableUsed(name)) {
+                auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
+                code += SR_UTILS_NS::Format("const %s %s = %s;\n", type.c_str(), name.c_str(), GenerateExpression(pVariable->pExpr, 0).c_str());
+            }
+        }
 
         uint32_t location = 0;
         for (auto&& vertexAttribute : vertexInfo.m_names) {
@@ -327,7 +367,10 @@ namespace SR_SRSL_NS {
 
         std::string code = GenerateTab(deep);
 
-        if (pExpr->isCall) {
+        if (pExpr->token == "++" || pExpr->token == "--") {
+            code += pExpr->token;
+        }
+        else if (pExpr->isCall) {
             code += pExpr->token + "(";
 
             for (uint32_t i = 0; i < pExpr->args.size(); ++i) {
@@ -356,6 +399,9 @@ namespace SR_SRSL_NS {
             else {
                 code += GenerateExpression(pExpr->args[0], 0) + " " + pExpr->token + " " + GenerateExpression(pExpr->args[1], 0);
             }
+        }
+        else if (pExpr->args.size() == 2 && pExpr->token.empty()) { /// increment or decrement
+            code += GenerateExpression(pExpr->args[0], 0) + GenerateExpression(pExpr->args[1], 0);
         }
         else if (pExpr->args.size() == 2) {
             code += "(" + GenerateExpression(pExpr->args[0], 0) + " " + pExpr->token + " " +  GenerateExpression(pExpr->args[1], 0) + ")";
@@ -399,6 +445,9 @@ namespace SR_SRSL_NS {
             }
             else if (auto&& pReturn = dynamic_cast<SRSLReturn*>(pUnit)) {
                 code += GenerateTab(deep + 1) + "return " + GenerateExpression(pReturn->pExpr, 0) + ";\n";
+            }
+            else if (auto&& pForStatement = dynamic_cast<SRSLForStatement*>(pUnit)) {
+                code += GenerateForStatement(pForStatement, deep + 1);
             }
 
             if (i + 1 < pLexicalTree->lexicalTree.size()) {
@@ -535,6 +584,54 @@ namespace SR_SRSL_NS {
 
         if (pIfStatement->pLexicalTree) {
             code += " " + GenerateLexicalTree(pIfStatement->pLexicalTree, deep);
+        }
+
+        return code;
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateRayGenStage() {
+        return std::optional<std::string>();
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateRayIntersectionStage() {
+        return std::optional<std::string>();
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateRayHitClosestStage() {
+        return std::optional<std::string>();
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateRayHitAnyStage() {
+        return std::optional<std::string>();
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateRayMissPrimaryStage() {
+        return std::optional<std::string>();
+    }
+
+    std::optional<std::string> GLSLCodeGenerator::GenerateRayMissSecondaryStage() {
+        return std::optional<std::string>();
+    }
+
+    std::string GLSLCodeGenerator::GenerateForStatement(SRSLForStatement *pForStatement, int32_t deep) const {
+        std::string code;
+
+        code += GenerateTab(deep) + "for (";
+
+        if (pForStatement->pVar) {
+            code += GenerateVariable(pForStatement->pVar, 0) + "; ";
+        }
+
+        if (pForStatement->pCondition) {
+            code += GenerateExpression(pForStatement->pCondition, 0) + "; ";
+        }
+
+        if (pForStatement->pExpr) {
+            code += GenerateExpression(pForStatement->pExpr, 0) + ") ";
+        }
+
+        if (pForStatement->pLexicalTree) {
+            code += GenerateLexicalTree(pForStatement->pLexicalTree, deep);
         }
 
         return code;

@@ -65,6 +65,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const SRSLSamplers& GetSamplers() const { return m_samplers; }
         SR_NODISCARD const SRShaderCreateInfo& GetCreateInfo() const { return m_createInfo; }
         SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetShared() const { return m_shared; }
+        SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetConstants() const { return m_constants; }
 
     private:
         SR_NODISCARD ISRSLCodeGenerator::SRSLCodeGenRes GenerateStages(ShaderLanguage shaderLanguage) const;
@@ -79,6 +80,7 @@ namespace SR_SRSL_NS {
         SR_UTILS_NS::Path m_path;
 
         std::map<std::string, SRSLVariable*> m_shared;
+        std::map<std::string, SRSLVariable*> m_constants;
         ShaderType m_type = ShaderType::Unknown;
         SRShaderCreateInfo m_createInfo;
         SRSLAnalyzedTree::Ptr m_analyzedTree;

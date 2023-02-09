@@ -23,11 +23,12 @@ namespace SR_SRSL_NS {
         Text,               /// специальный шейдер для рендера 3d текста
         TextUI,             /// специальный шейдер для рендера 2d текста
         Custom,             /// полностью чистый шейдер, все настраивается вручную
-        Raygen,             /// трасировка лучей. генерация лучей и вызов трассировки
-        AnyHit,             /// трасировка лучей. проверка на пересечение с примитивом (необязательный)
-        ClosestHit,         /// трасировка лучей. проверка на пересечение с примитивом (обязательный)
-        Miss,               /// трасировка лучей. пересечение не было найдено (в пределах [tmin; tmax])
-        Intersection        /// трасировка лучей. проверка пересечения луча и геометрии
+        //Raygen,             /// трасировка лучей. генерация лучей и вызов трассировки
+        //AnyHit,             /// трасировка лучей. проверка на пересечение с примитивом (необязательный)
+        //ClosestHit,         /// трасировка лучей. проверка на пересечение с примитивом (обязательный)
+        //Miss,               /// трасировка лучей. пересечение не было найдено (в пределах [tmin; tmax])
+        //Intersection        /// трасировка лучей. проверка пересечения луча и геометрии
+        RayTrace           /// шейдер трассировки лучей
     );
 
     enum VertexAttribute {
@@ -50,6 +51,7 @@ namespace SR_SRSL_NS {
             { "SKELETON_MATRIX_OFFSETS_128",    "mat4[128]"     },
 
             { "HALF_SIZE_NEAR_PLANE",           "vec2"          },
+            { "RESOLUTION",                     "vec2"          },
 
             { "VIEW_POSITION",                  "vec3"          },
             { "VIEW_DIRECTION",                 "vec3"          },
@@ -85,15 +87,21 @@ namespace SR_SRSL_NS {
     };
 
     SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_ENTRY_POINTS = { /** NOLINT */
-            { ShaderStage::Vertex, "vertex"     },
+            { ShaderStage::Vertex,   "vertex"     },
             { ShaderStage::Fragment, "fragment" },
-            { ShaderStage::Compute, "compute"   },
+            { ShaderStage::Compute,  "compute"   },
     };
 
     SR_INLINE_STATIC const std::map<ShaderStage, std::string> SR_SRSL_STAGE_EXTENSIONS = { /** NOLINT */
-            { ShaderStage::Vertex, "vert"       },
-            { ShaderStage::Fragment, "frag"     },
-            { ShaderStage::Compute, "comp"      },
+            { ShaderStage::Vertex,        "vert"        },
+            { ShaderStage::Fragment,      "frag"        },
+            { ShaderStage::Compute,       "comp"        },
+            { ShaderStage::Raygen,        "rgen"        },
+            { ShaderStage::Intersection,  "rint"        },
+            { ShaderStage::HitClosest,    "rchit"       },
+            { ShaderStage::HitAny,        "rahit"       },
+            { ShaderStage::MissPrimary  , "rmiss"       },
+            { ShaderStage::MissSecondary, "rmiss"       },
     };
 
     static std::map<std::string, ShaderVarType> SR_SRSL_TYPE_STRINGS = { /** NOLINT */
