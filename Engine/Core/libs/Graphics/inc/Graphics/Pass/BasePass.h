@@ -8,6 +8,7 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Types/Time.h>
 #include <Utils/Xml.h>
 
 #include <Graphics/Memory/UBOManager.h>

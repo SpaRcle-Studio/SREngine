@@ -199,7 +199,8 @@ namespace SR_CORE_NS::GUI {
         const auto size = m_window->GetSize();
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
-        pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
+
+        pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
 
         camera->AddComponent(pCamera);
 

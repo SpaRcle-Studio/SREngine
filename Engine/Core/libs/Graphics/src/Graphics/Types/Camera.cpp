@@ -293,7 +293,7 @@ namespace SR_GTYPES_NS {
     }
 
     glm::vec3 Camera::GetViewDirection() const {
-        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(1, 0, 0)).ToGLM();
+        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(0, 0, 1)).ToGLM();
     }
 
     glm::vec3 Camera::GetViewDirection(const SR_MATH_NS::FVector3 &pos) const noexcept {
@@ -312,5 +312,9 @@ namespace SR_GTYPES_NS {
         pCamera->m_renderTechnique.path = m_renderTechnique.path;
 
         return dynamic_cast<Component*>(pCamera);
+    }
+
+    SR_MATH_NS::FVector3 Camera::GetViewPosition() const {
+        return m_position;
     }
 }

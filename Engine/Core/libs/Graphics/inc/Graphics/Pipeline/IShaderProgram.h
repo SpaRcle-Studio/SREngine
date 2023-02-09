@@ -32,6 +32,7 @@ namespace SR_GRAPH_NS {
     static constexpr uint64_t SHADER_VIEW_DIRECTION = SR_COMPILE_TIME_CRC32_STR("VIEW_DIRECTION");
     static constexpr uint64_t SHADER_VIEW_POSITION = SR_COMPILE_TIME_CRC32_STR("VIEW_POSITION");
     static constexpr uint64_t SHADER_TIME = SR_COMPILE_TIME_CRC32_STR("TIME");
+    static constexpr uint64_t SHADER_RESOLUTION = SR_COMPILE_TIME_CRC32_STR("RESOLUTION");
     static constexpr uint64_t SHADER_SKYBOX_DIFFUSE = SR_COMPILE_TIME_CRC32_STR("SKYBOX_DIFFUSE");
     static constexpr uint64_t SHADER_DEPTH_ATTACHMENT = SR_COMPILE_TIME_CRC32_STR("DEPTH_ATTACHMENT");
     static constexpr uint64_t SHADER_TEXT_ATLAS_TEXTURE = SR_COMPILE_TIME_CRC32_STR("TEXT_ATLAS_TEXTURE");
@@ -52,7 +53,21 @@ namespace SR_GRAPH_NS {
     SR_DEPRECATED
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
-    SR_ENUM_NS_CLASS(ShaderStage, Unknown, Vertex, Fragment, Geometry, Tesselation, Raygen, ClosestHit, AnyHit, Miss, Intersection, Compute)
+    SR_ENUM_NS_CLASS(ShaderStage,
+        Unknown,
+        Vertex,
+        Fragment,
+        Geometry,
+        Tesselation,
+        Compute,
+        Raygen,
+        Intersection,
+        HitClosest,
+        HitAny,
+        MissPrimary,
+        MissSecondary
+    );
+
     SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
     SR_ENUM_NS_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_NS_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)

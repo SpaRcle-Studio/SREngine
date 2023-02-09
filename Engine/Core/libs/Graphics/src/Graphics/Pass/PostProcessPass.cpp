@@ -70,6 +70,17 @@ namespace SR_GRAPH_NS {
     }
 
     void PostProcessPass::Update() {
+        if (m_shader) {
+            m_shader->SetFloat(SHADER_TIME, SR_HTYPES_NS::Time::Instance().FClock());
+            m_shader->SetVec2(SHADER_RESOLUTION, GetContext()->GetWindowSize().Cast<float_t>());
+            m_shader->Flush();
+        }
+
+        if (m_shader && m_camera) {
+            m_shader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
+            m_shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+        }
+
         Super::Update();
     }
 
