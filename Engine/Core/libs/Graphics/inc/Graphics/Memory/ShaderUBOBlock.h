@@ -25,6 +25,8 @@ namespace SR_GRAPH_NS::Memory {
 
     public:
         void Append(uint64_t hashId, uint64_t size, bool hidden);
+        void Append(uint64_t hashId, uint64_t size, uint64_t alignedSize, bool hidden);
+
         void Init();
         void DeInit();
         void SR_FASTCALL SetField(uint64_t hashId, const void* data) noexcept;
@@ -33,6 +35,7 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD bool Valid() const { return m_memory && m_binding != SR_ID_INVALID; }
 
     private:
+        SR_NODISCARD uint64_t Align(uint64_t size) const;
         void FreeMemory(char*& pMemory);
         char* AllocMemory(uint64_t size);
         uint32_t OffsetBlock(uint32_t block);
@@ -49,6 +52,8 @@ namespace SR_GRAPH_NS::Memory {
 
         uint32_t m_size = 0;
         char* m_memory = nullptr;
+
+        bool m_initialized = false;
 
     };
 }

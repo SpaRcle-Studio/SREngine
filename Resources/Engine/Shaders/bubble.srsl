@@ -15,7 +15,7 @@ DepthTest true;
 [[uniform], [public]] float HeightMultiplier;
 
 float fresnel() {
-	vec3 view_direction_world = VIEW_DIRECTION;
+	vec3 view_direction_world = (VIEW_MATRIX * vec4(VIEW_DIRECTION, 0)).xyz;
 	vec3 normal_world = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
 
 	float d = dot(view_direction_world, normal_world);

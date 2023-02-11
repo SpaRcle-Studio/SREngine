@@ -31,6 +31,7 @@ namespace SR_GTYPES_NS {
 
     public:
         static Texture* Load(const std::string& path, const std::optional<Memory::TextureConfig>& config = std::nullopt);
+        static Texture* LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig& config);
         static Texture* LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
         static Texture* LoadFont(Font* pFont);
 
@@ -70,6 +71,7 @@ namespace SR_GTYPES_NS {
 
         std::atomic<bool>          m_hasErrors    = false;
         std::atomic<bool>          m_fromMemory   = false;
+        std::atomic<bool>          m_rawMemory    = false;
 
         Memory::TextureConfig      m_config       = Memory::TextureConfig();
 

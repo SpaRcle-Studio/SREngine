@@ -64,13 +64,7 @@ namespace SR_GRAPH_NS {
 
 
     void ShaderOverridePass::OnResize(const SR_MATH_NS::UVector2 &size) {
-        if (m_dynamicResizing && m_framebuffer) {
-            m_framebuffer->SetSize(SR_MATH_NS::IVector2(
-                    static_cast<SR_MATH_NS::Unit>(size.x) * m_preScale.x,
-                    static_cast<SR_MATH_NS::Unit>(size.y) * m_preScale.y
-            ));
-        }
-
+        IFramebufferPass::ResizeFrameBuffer(size);
         BasePass::OnResize(size);
     }
 
@@ -180,7 +174,7 @@ namespace SR_GRAPH_NS {
 
                     pMesh->UseMaterial();
 
-                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(pMesh->GetTranslation()));
+                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("ShaderOverridePass::Update() : memory has been duplicated!");

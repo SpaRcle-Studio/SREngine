@@ -395,6 +395,11 @@ namespace SR_SRSL_NS {
         m_decorators = new SRSLDecorators();
 
     retry:
+        if (!InBounds()) {
+            m_result = SRSLResult(SRSLReturnCode::InvalidDecorator, 0);
+            return;
+        }
+
         switch (m_lexems[m_currentLexem].kind)
         {
             case LexemKind::OpeningSquareBracket: {
@@ -524,9 +529,11 @@ namespace SR_SRSL_NS {
 
         if (pCurrent->value == "return") {
             ++m_currentLexem;
-            ProcessExpression();
-            if (IsHasErrors()) {
-                return nullptr;
+            if (InBounds() && GetCurrentLexem()->kind != LexemKind::Semicolon) {
+                ProcessExpression();
+                if (IsHasErrors()) {
+                    return nullptr;
+                }
             }
             return new SRSLReturn(SR_UTILS_NS::Exchange(m_expr, nullptr));
         }

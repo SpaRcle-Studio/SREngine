@@ -135,9 +135,8 @@ namespace SR_GRAPH_NS {
         /// Авось что-то изменилось, нужно попробовать еще раз сбилдить
         m_hasErrors = false;
 
-        if (m_renderScene.LockIfValid()) {
+        if (m_renderScene) {
             m_renderScene->SetDirty();
-            m_renderScene.Unlock();
         }
     }
 

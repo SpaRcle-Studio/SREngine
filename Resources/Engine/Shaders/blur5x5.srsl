@@ -12,10 +12,18 @@ DepthTest false;
 [[shared]] vec2 uv;
 
 void fragment() {
-    vec3 color = texture(image, uv).rgb;
-    float r = length(uv - 0.5);
-    color *= smoothstep(r - 0.65, r + 0.1, 0.5);
-    COLOR_INDEX_0 = vec4(color, 1.0);
+    vec2 texelSize = 1.0 / vec2(textureSize(image, 0));
+
+    vec4 result = vec4(0.0);
+
+    for (int x = -2; x <= 2; ++x) {
+        for (int y = -2; y <= 2; ++y) {
+            vec2 offset = vec2(float(x), float(y)) * texelSize;
+            result += texture(image, uv + offset);
+        }
+    }
+
+    COLOR_INDEX_0 = vec4(vec3(result / 25.0), 1.0);
 }
 
 void vertex() {

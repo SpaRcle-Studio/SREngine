@@ -174,6 +174,7 @@ namespace SR_SRSL_NS {
             if (layer == SR_SRSL_MAIN_OUT_LAYER || pUseStackFunction->IsVariableUsed(layer)) {
                 code += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
             }
+            ++outLocation;
         }
 
         code += "\n";
@@ -360,6 +361,10 @@ namespace SR_SRSL_NS {
     }
 
     std::string GLSLCodeGenerator::GenerateExpression(SRSLExpr* pExpr, int32_t deep) const {
+        if (!pExpr) {
+            return std::string();
+        }
+
         if ((pExpr->token == "++" || pExpr->token == "--") && !pExpr->args.empty()) {
             SRHalt0();
             return std::string();

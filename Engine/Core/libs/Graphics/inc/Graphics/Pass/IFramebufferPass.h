@@ -30,6 +30,8 @@ namespace SR_GRAPH_NS {
 
         bool InitializeFramebuffer(RenderContext* pContext);
 
+        void ResizeFrameBuffer(const SR_MATH_NS::UVector2 &size);
+
     protected:
         bool m_dynamicResizing = false;
         bool m_depthEnabled = true;

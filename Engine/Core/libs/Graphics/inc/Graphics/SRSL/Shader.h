@@ -28,6 +28,7 @@ namespace SR_SRSL_NS {
             std::string type;
             std::string name;
             uint64_t size = 0;
+            uint64_t alignedSize = 0;
             bool isPublic = false;
         };
 

@@ -16,18 +16,47 @@
             <Override Type="Skinned" Path="Engine/Shaders/ColorBuffer/skinned.srsl"/>
         </Shaders>
     </ColorBufferPass>
-    <FramebufferPass Name="MainSceneFBO">
+    <FramebufferPass Name="GBuffer">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="1.0"/>
+            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <OpaquePass/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <TransparentPass/>
+            <!--<DebugPass/>-->
+        </Passes>
+    </FramebufferPass>
+    <SSAOPass Name="SSAO" Shader="Engine/Shaders/SSAO/ssao.srsl">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="false" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="R32_SFLOAT" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Attachments>
+            <Attachment FBO="GBuffer" Id="gPosition" Index="1"/>
+            <Attachment FBO="GBuffer" Id="gNormal" Index="2"/>
+        </Attachments>
+    </SSAOPass>
+    <FramebufferPass Name="SSAOBlur">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <OpaquePass/>
-            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
-            <TransparentPass/>
-            <DebugPass/>
+            <PostProcessPass Shader="Engine/Shaders/blur5x5.srsl">
+                <Attachments>
+                    <Attachment FBO="SSAO" Id="image" Index="0"/>
+                </Attachments>
+            </PostProcessPass>
         </Passes>
     </FramebufferPass>
     <FramebufferPass Name="SceneViewFBO">
@@ -38,9 +67,17 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <PostProcessPass Shader="Engine/Shaders/vignette.srsl">
+            <!--<PostProcessPass Shader="Engine/Shaders/vignette.srsl">
                 <Attachments>
-                    <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+                    <Attachment FBO="SSAOBlur" Id="image" Index="0"/>
+                </Attachments>
+            </PostProcessPass>-->
+            <PostProcessPass Shader="Engine/Shaders/SSAO/post_process.srsl">
+                <Attachments>
+                    <Attachment FBO="SSAOBlur" Id="ssao" Index="0"/>
+                    <Attachment FBO="GBuffer" Id="gAlbedo" Index="0"/>
+                    <Attachment FBO="GBuffer" Id="gPosition" Index="1"/>
+                    <Attachment FBO="GBuffer" Id="gNormal" Index="2"/>
                 </Attachments>
             </PostProcessPass>
         </Passes>

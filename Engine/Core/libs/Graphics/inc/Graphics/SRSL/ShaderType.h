@@ -58,6 +58,8 @@ namespace SR_SRSL_NS {
             { "LINE_START_POINT",               "vec3"          },
             { "LINE_END_POINT",                 "vec3"          },
 
+            { "SSAO_SAMPLES",                   "vec4[64]"      },
+
             { "LINE_COLOR",                     "vec4"          },
 
             { "TIME",                           "float"         },
@@ -70,6 +72,7 @@ namespace SR_SRSL_NS {
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_SAMPLERS = { /** NOLINT */
             { "SKYBOX_DIFFUSE",                 "samplerCube"   },
             { "TEXT_ATLAS_TEXTURE",             "sampler2D"     },
+            { "SSAO_NOISE",                     "sampler2D"     },
     };
 
     SR_INLINE_STATIC const std::string SR_SRSL_MAIN_OUT_LAYER = "COLOR_INDEX_0"; /** NOLINT */

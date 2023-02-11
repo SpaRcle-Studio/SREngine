@@ -70,16 +70,28 @@ namespace SR_GRAPH_NS {
     }
 
     void PostProcessPass::Update() {
+        m_pipeline->SetCurrentShader(m_shader);
+
         if (m_shader) {
             m_shader->SetFloat(SHADER_TIME, SR_HTYPES_NS::Time::Instance().FClock());
             m_shader->SetVec2(SHADER_RESOLUTION, GetContext()->GetWindowSize().Cast<float_t>());
-            m_shader->Flush();
         }
 
         if (m_shader && m_camera) {
             m_shader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
             m_shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+            m_shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            m_shader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
+            m_shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
         }
+
+        if (m_virtualUBO != SR_ID_INVALID) {
+            if (m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Duplicated) {
+                SR_ERROR("PostProcessPass::Update() : memory has been duplicated!");
+            }
+        }
+
+        m_shader->Flush();
 
         Super::Update();
     }

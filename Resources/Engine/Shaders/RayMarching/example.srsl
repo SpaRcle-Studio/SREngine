@@ -168,7 +168,7 @@ vec2 map(vec3 p) {
     /// result
     vec2 res = vec2(0);
     res = fOpUnionID(box, plane);
-    res = fOpUnionChamferID(res, sphere, 2);
+    res = fOpUnionID(res, sphere);
     return res;
 }
 

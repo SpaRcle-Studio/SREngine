@@ -23,6 +23,9 @@ namespace SR_SRSL_NS {
         SR_NODISCARD uint64_t GetTypeSize(const std::string& code, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
         SR_NODISCARD uint64_t GetTypeSize(const SRSLExpr* pExpr, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
 
+        SR_NODISCARD uint64_t GetAlignedTypeSize(const std::string& code, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
+        SR_NODISCARD uint64_t GetAlignedTypeSize(const SRSLExpr* pExpr, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
+
         SR_NODISCARD uint64_t GetStructSize(const std::string& name, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
 
     private:

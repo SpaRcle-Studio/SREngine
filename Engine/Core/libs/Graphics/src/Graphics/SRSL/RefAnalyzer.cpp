@@ -136,6 +136,10 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLRefAnalyzer::AnalyzeExpression(SRSLUseStack::Ptr& pUseStack, std::list<std::string>& stack, SRSLExpr* pExpr) {
+        if (!pExpr) {
+            return;
+        }
+
         if (pExpr->token == "=") {
             if (pExpr->args[0]->isArray) {
                 AnalyzeArrayExpression(pUseStack, stack, pExpr->args[0]);

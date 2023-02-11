@@ -47,11 +47,12 @@ namespace SR_GRAPH_NS {
         void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
 
     protected:
-        void SetShader(SR_GTYPES_NS::Shader* pShader);
-        void DeInit() override;
-        void UseTextures();
+        virtual void SetShader(SR_GTYPES_NS::Shader* pShader);
+        virtual void UseTextures();
 
-    private:
+        void DeInit() override;
+
+    protected:
         int32_t m_virtualUBO = SR_ID_INVALID;
         bool m_dirtyShader = true;
         ShaderPtr m_shader = nullptr;

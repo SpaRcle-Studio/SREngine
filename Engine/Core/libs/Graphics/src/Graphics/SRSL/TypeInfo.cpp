@@ -42,6 +42,15 @@ namespace SR_SRSL_NS {
         return GetTypeSize(pTree->pLexicalTree->AsExpression(), pAnalyzedTree);
     }
 
+    uint64_t SRSLTypeInfo::GetAlignedTypeSize(const std::string& code, const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
+        auto&& pTree = Analyze(code);
+        if (!pTree) {
+            return 0;
+        }
+
+        return GetAlignedTypeSize(pTree->pLexicalTree->AsExpression(), pAnalyzedTree);
+    }
+
     uint64_t SRSLTypeInfo::GetTypeSize(const SRSLExpr *pExpr, const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
         if (pExpr->isCall) {
             SRHalt0();
@@ -67,6 +76,43 @@ namespace SR_SRSL_NS {
         if (multiplier > 1024 * 1024 * 16) {
             SRHalt("Something went wrong...");
             return 0;
+        }
+
+        return typeSize * multiplier;
+    }
+
+    uint64_t SRSLTypeInfo::GetAlignedTypeSize(const SRSLExpr *pExpr, const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
+        if (pExpr->isCall) {
+            SRHalt0();
+            return 0;
+        }
+
+        uint64_t multiplier = 1;
+        uint64_t typeSize = 1;
+
+        std::string type = GetTypeName(pExpr);
+
+        if (pExpr->isArray) {
+            multiplier = static_cast<uint64_t>(SRSLEvaluator::Instance().Evaluate(pExpr->args[1]));
+        }
+
+        if (SR_SRSL_TYPE_SIZE_TABLE.count(type) == 1) {
+            typeSize = SR_SRSL_TYPE_SIZE_TABLE.at(type);
+        }
+        else {
+            typeSize = GetStructSize(type, pAnalyzedTree);
+        }
+
+        if (multiplier > 1024 * 1024 * 16 || typeSize == 0) {
+            SRHalt("Something went wrong...");
+            return 0;
+        }
+
+        const bool powerOfTwo = (typeSize & (typeSize - 1)) == 0;
+        auto&& n = static_cast<uint64_t>(std::log2(typeSize));
+
+        if (!powerOfTwo && multiplier > 1) {
+            typeSize = std::pow(2, n + 1);
         }
 
         return typeSize * multiplier;

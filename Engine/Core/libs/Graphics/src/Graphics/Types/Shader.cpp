@@ -311,7 +311,7 @@ namespace SR_GRAPH_NS::Types {
 
         if (auto&& pBlock = pShader->FindUniformBlock("BLOCK")) {
             for (auto&& field : pBlock->fields) {
-                m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, !field.isPublic);
+                m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
 
                 const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(field.type);
 

@@ -30,6 +30,7 @@ namespace SR_GRAPH_NS {
         RGBA8_UNORM,
         BGRA8_UNORM,
         RGBA16_UNORM,
+        RGBA16_SFLOAT,
 
         RGB8_UNORM,
         RGB16_UNORM,

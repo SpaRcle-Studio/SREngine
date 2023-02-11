@@ -1,0 +1,36 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
+
+void fragment() {
+    vec3 diffuse_albedo = texture(diffuse, UV).rgb * color.rgb;
+
+    vec3 normalShade = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 8.0;
+
+	COLOR_INDEX_0 = vec4(diffuse_albedo + normalShade, 1.0);
+	COLOR_INDEX_1 = vec4(VERTEX, 1.0);
+	COLOR_INDEX_2 = vec4(normalize(NORMAL), 1.0);
+}
+
+void vertex() {
+    vec3 position = VERTEX;
+
+    VERTEX = vec3(MODEL_MATRIX * vec4(VERTEX, 1.0));
+
+
+    NORMAL = (transpose(inverse(MODEL_MATRIX)) * vec4(NORMAL, 0.0)).xyz;
+
+    //mat3 normalMatrix = transpose(inverse(mat3(VIEW_MATRIX * MODEL_MATRIX)));
+    //NORMAL = normalMatrix * NORMAL;
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(position, 1.0);
+}

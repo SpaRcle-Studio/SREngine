@@ -189,11 +189,11 @@ namespace SR_SRSL_NS {
             }
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("shared")) {
-                m_shared[pVariable->GetName()] = pVariable;
+                m_shared[pVariable->pName->ToString(0)] = pVariable;
             }
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("const"); pDecorator && pVariable->pExpr) {
-                m_constants[pVariable->GetName()] = pVariable;
+                m_constants[pVariable->pName->ToString(0)] = pVariable;
             }
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
@@ -213,8 +213,8 @@ namespace SR_SRSL_NS {
 
                 SRSLUniformBlock::Field field;
 
-                field.name = pVariable->GetName();
-                field.type = pVariable->GetType();
+                field.name = pVariable->pName->ToString(0);
+                field.type = pVariable->pType->ToString(0);
                 field.isPublic = bool(pVariable->pDecorators->Find("public"));
 
                 auto&& uniformBlock = m_uniformBlocks[blockName];
@@ -242,7 +242,8 @@ namespace SR_SRSL_NS {
         for (auto&& [name, block] : m_uniformBlocks) {
             for (auto&& field : block.fields) {
                 field.size = SRSLTypeInfo::Instance().GetTypeSize(field.type, m_analyzedTree);
-                block.size += field.size;
+                field.alignedSize = SRSLTypeInfo::Instance().GetAlignedTypeSize(field.type, m_analyzedTree);
+                block.size += field.alignedSize;
             }
 
             std::sort(block.fields.begin(), block.fields.end(), [](const SRSLUniformBlock::Field& a, const SRSLUniformBlock::Field& b) -> bool {
@@ -263,6 +264,10 @@ namespace SR_SRSL_NS {
             }
 
             if (!SR_SRSL_NS::IsSampler(pVariable->GetType())) {
+                continue;
+            }
+
+            if (!m_useStack->IsVariableUsedInEntryPoints(pVariable->GetName())) {
                 continue;
             }
 

@@ -116,7 +116,7 @@ namespace SR_SRSL_NS {
 
     SR_ENUM_NS_CLASS_T(SRSLReturnCode, uint16_t,
         Success, OutOfBounds, InvalidLexicalTree,
-        UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression,
+        UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression, InvalidDecorator,
         IncompleteExpression, EmptyExpression, InvalidScope, InvalidCall, InvalidIfStatement, UnknownShaderLanguage,
         InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement
     );

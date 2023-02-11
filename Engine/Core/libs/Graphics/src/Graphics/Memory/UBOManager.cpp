@@ -159,6 +159,11 @@ namespace SR_GRAPH_NS::Memory {
 
         auto&& pShader = m_pipeline->GetCurrentShader();
 
+        if (!pShader) {
+            SRHaltOnce("Current shader is nullptr!");
+            return BindResult::Failed;
+        }
+
         auto&& info = m_virtualTable[virtualUbo];
         BindResult result = BindResult::Success;
 

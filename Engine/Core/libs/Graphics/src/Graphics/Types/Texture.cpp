@@ -42,6 +42,25 @@ namespace SR_GTYPES_NS {
         return texture;
     }
 
+    Texture *Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
+        Texture* texture = new Texture();
+
+        texture->m_fromMemory = true;
+        texture->m_rawMemory = true;
+
+        texture->m_width = w;
+        texture->m_height = h;
+
+        texture->m_data = new uint8_t[bytes];
+        memcpy(texture->m_data, pData, bytes);
+
+        texture->m_config = config;
+
+        texture->SetId("RawTexture");
+
+        return texture;
+    }
+
     Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
         SR_GLOBAL_LOCK
 
@@ -231,7 +250,7 @@ namespace SR_GTYPES_NS {
     Texture* Texture::LoadFromMemory(const std::string& data, const Memory::TextureConfig &config) {
         Texture* texture = new Texture();
 
-        if (!TextureLoader::LoadFromMemory(texture, data)) {
+        if (!TextureLoader::LoadFromMemory(texture, data, config)) {
             SRHalt("Texture::LoadFromMemory() : failed to load the texture!");
             delete texture;
             return nullptr;
@@ -275,8 +294,11 @@ namespace SR_GTYPES_NS {
         }
 
         /// шрифт сам освободит свои данные
-        if (!m_isFont) {
+        if (!m_isFont && !m_rawMemory) {
             TextureLoader::Free(m_data);
+        }
+        else if (m_rawMemory) {
+            delete[] m_data;
         }
 
         m_data = nullptr;
