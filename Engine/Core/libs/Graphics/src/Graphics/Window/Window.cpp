@@ -49,6 +49,8 @@ namespace SR_GRAPH_NS {
                 return false;
             }
 
+            m_windowImpl->SetIcon(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Textures/icon.ico"));
+
             return true;
         });
     }
