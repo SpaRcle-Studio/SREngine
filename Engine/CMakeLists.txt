@@ -3,7 +3,12 @@ project(SpaRcleEngine)
 
 add_subdirectory(Core)
 
-add_executable(SREngine main.cpp)
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+
+add_executable(SREngine
+        main.cpp
+        ${APP_ICON_RESOURCE_WINDOWS}
+)
 
 add_custom_command(TARGET SREngine
         POST_BUILD
