@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Settings>
-    <RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>
+    <RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>
+    <!--<RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRayMarchingRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>-->
     <Icons Type="Custom">

@@ -22,14 +22,14 @@
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
-            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="1.0"/>
-            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="1.0"/>
+            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="0.0"/>
+            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="0.0"/>
         </FramebufferSettings>
         <Passes>
             <OpaquePass/>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
-            <!--<DebugPass/>-->
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
     <SSAOPass Name="SSAO" Shader="Engine/Shaders/SSAO/ssao.srsl">
@@ -67,9 +67,9 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <!--<PostProcessPass Shader="Engine/Shaders/vignette.srsl">
+            <!--<PostProcessPass Shader="Engine/Shaders/SSAO/display.srsl">
                 <Attachments>
-                    <Attachment FBO="SSAOBlur" Id="image" Index="0"/>
+                    <Attachment FBO="SSAO" Id="image" Index="0"/>
                 </Attachments>
             </PostProcessPass>-->
             <PostProcessPass Shader="Engine/Shaders/SSAO/post_process.srsl">

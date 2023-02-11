@@ -13,7 +13,7 @@ DepthTest false;
 
 [[shared]] vec2 uv;
 
-[[const]] int kernelSize = 64;
+[[const]] int kernelSize = 32;
 [[const]] float radius = 0.4;
 [[const]] float bias = 0.025;
 
@@ -21,11 +21,7 @@ void fragment() {
     vec4 worldPos = texture(gPosition, uv);
     vec3 normal = texture(gNormal, uv).xyz;
 
-    if (worldPos.w <= 0.0) {
-        discard;
-    }
-
-    if (normal == vec3(0)) {
+    if (worldPos.w <= 0.0 || normal == vec3(0)) {
         COLOR_INDEX_0 = vec4(1.0);
         return;
     }
@@ -33,7 +29,6 @@ void fragment() {
     vec3 fragPos = (VIEW_MATRIX * worldPos).xyz;
 
     normal = normalize((VIEW_MATRIX * vec4(normal, 0.0)).xyz);
-    //vec3 normal = normalize(texture(gNormal, uv).xyz);
 
     ivec2 texDim = textureSize(SSAO_NOISE, 0);
     vec2 noiseScale = vec2(RESOLUTION.x / texDim.x, RESOLUTION.y / texDim.y);
@@ -52,7 +47,9 @@ void fragment() {
         screenSample.xyz /= screenSample.w;
         screenSample.xyz = screenSample.xyz * 0.5 + 0.5;
 
-        float sampleDepth = (VIEW_MATRIX * texture(gPosition, screenSample.xy)).z;
+        vec4 positionColor = texture(gPosition, screenSample.xy);
+
+        float sampleDepth = (VIEW_MATRIX * positionColor).z;
 
         float rangeCheck = smoothstep(0.0, 1.0, radius / abs(fragPos.z - sampleDepth));
 

@@ -26,11 +26,7 @@ void vertex() {
 
     VERTEX = vec3(MODEL_MATRIX * vec4(VERTEX, 1.0));
 
-
     NORMAL = (transpose(inverse(MODEL_MATRIX)) * vec4(NORMAL, 0.0)).xyz;
-
-    //mat3 normalMatrix = transpose(inverse(mat3(VIEW_MATRIX * MODEL_MATRIX)));
-    //NORMAL = normalMatrix * NORMAL;
 
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(position, 1.0);
 }

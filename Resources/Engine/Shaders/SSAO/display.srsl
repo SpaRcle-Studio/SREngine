@@ -12,7 +12,7 @@ DepthTest false;
 [[shared]] vec2 uv;
 
 void fragment() {
-    COLOR_INDEX_0 = texture(image, uv);
+    COLOR_INDEX_0 = vec4(vec3(texture(image, uv).r / 2), 1);
 }
 
 void vertex() {
