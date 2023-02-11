@@ -73,6 +73,16 @@ SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/d
 SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/debug" "PhysXCommond.dll")
 SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/debug" "PhysXFoundationd.dll")
 
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc143.md/release" "PhysX.dll")
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc143.md/release" "PhysXCooking.dll")
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc143.md/release" "PhysXCommon.dll")
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc143.md/release" "PhysXFoundation.dll")
+
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/release" "PhysX.dll")
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/release" "PhysXCooking.dll")
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/release" "PhysXCommon.dll")
+SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/release" "PhysXFoundation.dll")
+
 SRCopyFileToApp("Engine/Core/libs/Utils" "Utils.dll")
 SRCopyFileToApp("Engine/Core/libs/Utils" "Utilsd.dll")
 

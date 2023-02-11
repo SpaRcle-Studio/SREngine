@@ -31,4 +31,8 @@ namespace SR_PTYPES_NS {
     SR_UTILS_NS::Measurement Rigidbody3D::GetMeasurement() const {
         return SR_UTILS_NS::Measurement::Space3D;
     }
+
+    SR_HTYPES_NS::Marshal::Ptr Rigidbody3D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        return Super::Save(pMarshal, flags);
+    }
 }

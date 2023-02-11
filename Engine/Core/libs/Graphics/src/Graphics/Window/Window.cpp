@@ -37,7 +37,7 @@ namespace SR_GRAPH_NS {
         }
 
         m_thread = SR_HTYPES_NS::Thread::Factory::Instance().CreateEmpty();
-        
+
         if (!m_thread->Run([this]() { ThreadFunction(); })) {
             SR_ERROR("Window::Initialize() : failed to run thread!");
             return false;
@@ -56,9 +56,16 @@ namespace SR_GRAPH_NS {
     void Window::ThreadFunction() {
         SR_INFO("Window::Thread() : running window's thread...");
 
+        if (!m_windowImpl) {
+            SR_ERROR("Window::Thread() : window implementation is nullptr!");
+            return;
+        }
+
         while (m_windowImpl && !m_windowImpl->IsValid()) {
             m_thread->Synchronize();
         }
+
+        SR_INFO("Window::Thread() : thread synchronized.");
 
         double deltaTime = 0;
         uint32_t frames = 0;

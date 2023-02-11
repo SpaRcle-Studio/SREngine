@@ -23,6 +23,8 @@ struct CollisionData {
     FVector3 impulse;
 };
 
+class Behaviour;
+
 #define REGISTER_BEHAVIOUR_BASE(className)                                          \
     EXTERN void Awake() {                                                           \
         if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
@@ -144,6 +146,7 @@ struct CollisionData {
 
 #define REGISTER_BEHAVIOUR(className)                                               \
     SharedPtr<void> g_codegen_behaviour_ptr;                                        \
+    std::vector<std::function<void()>> g_codegen_properties_registations;           \
     EXTERN void InitBehaviour() {                                                   \
         g_codegen_behaviour_ptr = (void*)(new className());                         \
     }                                                                               \

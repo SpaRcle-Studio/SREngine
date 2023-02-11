@@ -120,7 +120,7 @@ namespace SR_GRAPH_NS::Memory {
 
         if (uboSize > 0) {
             if (*descriptor = m_pipeline->AllocDescriptorSet({DescriptorType::Uniform}); *descriptor < 0) {
-                SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set!");
+                SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set! (Uniform)");
                 goto fails;
             }
 
@@ -131,7 +131,7 @@ namespace SR_GRAPH_NS::Memory {
         }
         else if (samples > 0) {
             if (*descriptor = m_pipeline->AllocDescriptorSet({DescriptorType::CombinedImage}); *descriptor < 0) {
-                SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set!");
+                SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set! (CombinedImage)");
                 goto fails;
             }
         }

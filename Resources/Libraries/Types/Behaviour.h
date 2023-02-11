@@ -60,37 +60,43 @@ public:
 
 protected:
     template<typename T> bool AddProperty(const std::string& id, T* ref) {
-        if (m_properties.count(id) == 1) {
-            std::cerr << "Behaviour::AddProperty() : property already registered!\n\tId: " << id << '\n';
-            return false;
-        }
+        g_codegen_properties_registations.emplace_back([this, ref, id]() {
+            if (m_properties.count(id) == 1) {
+            #ifdef EVK_DEBUG
+                std::cerr << "Behaviour::AddProperty() : property already registered!\n\tId: " << id << '\n';
+            #endif
+                return;
+            }
 
-        m_properties.insert(std::make_pair(
-            id,
-            std::make_pair(
-                [pProperty = ref]() -> Any
-                {
-                    return Any(*pProperty);
-                }, /// getter
-                [id, pProperty = ref](const Any& val)
-                {
-                    try
+            m_properties.insert(std::make_pair(
+                id,
+                std::make_pair(
+                    [pProperty = ref]() -> Any
                     {
-                        *pProperty = std::any_cast<T>(val);
-                    }
-                    catch(const std::bad_any_cast& e)
+                        return Any(*pProperty);
+                    }, /// getter
+                    [id, pProperty = ref](const Any& val)
                     {
-                        std::cerr << "Behaviour::AddProperty() : failed to cast std::any!"
-                                     "\n\tException: " << e.what() <<
-                                     "\n\tType: " << typeid(T).name() <<
-                                     "\n\tAny: " << val.type().name() <<
-                                     "\n\tId: " << id << "\n";
-                    }
-                } /// setter
-            )
-        ));
+                        try
+                        {
+                            *pProperty = std::any_cast<T>(val);
+                        }
+                        catch(const std::bad_any_cast& e)
+                        {
+                        #ifdef EVK_DEBUG
+                            std::cerr << "Behaviour::AddProperty() : failed to cast std::any!"
+                                         "\n\tException: " << e.what() <<
+                                         "\n\tType: " << typeid(T).name() <<
+                                         "\n\tAny: " << val.type().name() <<
+                                         "\n\tId: " << id << "\n";
+                        #endif
+                        }
+                    } /// setter
+                )
+            ));
 
-        m_propertyIds.emplace_back(id);
+            m_propertyIds.emplace_back(id);
+        });
 
         return true;
     }

@@ -510,7 +510,8 @@ namespace SR_GRAPH_NS {
             }
             else {
                 if (m_currentShaderID < 0) {
-                    SRHalt("Shader program do not set!");
+                    SR_ERROR("Vulkan::AllocDescriptorSet() : shader program do not set!");
+                    SRHaltOnce0();
                     return SR_ID_INVALID;
                 }
 

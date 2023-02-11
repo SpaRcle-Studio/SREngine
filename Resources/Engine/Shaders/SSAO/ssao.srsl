@@ -14,7 +14,7 @@ DepthTest false;
 [[shared]] vec2 uv;
 
 [[const]] int kernelSize = 64;
-[[const]] float radius = 0.35;
+[[const]] float radius = 0.45;
 [[const]] float bias = 0.025;
 
 void fragment() {

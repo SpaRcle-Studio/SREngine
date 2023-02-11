@@ -27,7 +27,10 @@ namespace SR_PTYPES_NS {
 
     Rigidbody::ComponentPtr Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         const auto&& type = static_cast<ShapeType>(marshal.Read<int32_t>());
-        const auto&& center = marshal.Read<SR_MATH_NS::FVector3>();
+
+        const auto&& center = marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f));
+        const auto&& size = marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(1.f));
+
         const auto&& mass = marshal.Read<float_t>();
         const auto&& isTrigger = marshal.Read<bool>();
         const auto&& isStatic = marshal.Read<bool>();
@@ -68,6 +71,7 @@ namespace SR_PTYPES_NS {
 
         pComponent->SetType(verifyType(pLibrary, type));
         pComponent->SetCenter(center);
+        pComponent->GetCollisionShape()->SetSize(size);
         pComponent->SetMass(mass);
         pComponent->SetIsTrigger(isTrigger);
         pComponent->SetIsStatic(isStatic);
@@ -76,10 +80,13 @@ namespace SR_PTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Rigidbody::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
+        pMarshal = Super::Save(pMarshal, flags);
 
         pMarshal->Write<int32_t>(static_cast<int32_t>(m_shape->GetType()));
-        pMarshal->Write(m_center);
+
+        pMarshal->Write(m_center, SR_MATH_NS::Vector3<float_t>(0.f));
+        pMarshal->Write(m_shape->GetSize(), SR_MATH_NS::Vector3<float_t>(1.f));
+
         pMarshal->Write(m_mass);
         pMarshal->Write(IsTrigger());
         pMarshal->Write(IsStatic());

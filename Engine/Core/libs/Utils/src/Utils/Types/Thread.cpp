@@ -98,6 +98,8 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Factory::Remove(Thread* pThread) {
+        SR_SCOPED_LOCK
+
         SR_LOG("Thread::Free() : free \"" + ToString(pThread->GetId()) + "\" thread...");
 
         if (pThread == m_main) {

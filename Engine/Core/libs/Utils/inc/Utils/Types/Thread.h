@@ -73,10 +73,10 @@ namespace SR_HTYPES_NS {
                 return false;
             }
 
-            m_thread = std::thread([&]() {
+            m_thread = std::thread([&, function = std::move(fn)]() {
                 m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
-                fn();
+                function();
             });
 
             return true;

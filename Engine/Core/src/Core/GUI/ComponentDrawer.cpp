@@ -101,10 +101,19 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        if (SR_PHYSICS_UTILS_NS::IsShapeHasHeight(pCollisionShape->GetType())){
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+
+        if (SR_PHYSICS_UTILS_NS::IsShapeHasSize(pCollisionShape->GetType())) {
+            auto&& size = pCollisionShape->GetSize();
+
+            if (Graphics::GUI::DrawVec3Control("Size", size, 0.f, 70.f, 0.1, index)) {
+                pCollisionShape->SetSize(size);
+            }
+        }
+
+        if (SR_PHYSICS_UTILS_NS::IsShapeHasHeight(pCollisionShape->GetType())) {
             auto&& height = pCollisionShape->GetHeight();
-            float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-            ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
             if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
                         "Height", height, 0.f, buttonSize,
                         ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
